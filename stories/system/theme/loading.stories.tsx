@@ -1,19 +1,19 @@
 import type { FC } from "react"
-import { useEffect, useCallback } from "react"
 import {
-  UIProvider,
-  extendConfig,
-  Center,
-  useLoading,
-  Wrap,
   Button,
-  useTimeout,
+  Center,
+  extendConfig,
+  isValidElement,
   Loading,
   Motion,
   Text,
-  isValidElement,
+  UIProvider,
+  useLoading,
+  useTimeout,
   VStack,
+  Wrap,
 } from "@yamada-ui/react"
+import { useCallback, useEffect } from "react"
 
 export default {
   title: "System / Theme / Loading",
@@ -27,23 +27,23 @@ const wait = (ms: number) =>
 export const basic = () => {
   const config = extendConfig({
     loading: {
-      screen: {
+      background: {
+        duration: 5000,
         icon: {
           variant: "grid",
         },
-        duration: 5000,
       },
       page: {
+        duration: 5000,
         icon: {
           variant: "grid",
         },
-        duration: 5000,
       },
-      background: {
+      screen: {
+        duration: 5000,
         icon: {
           variant: "grid",
         },
-        duration: 5000,
       },
     },
   })
@@ -58,8 +58,7 @@ export const basic = () => {
 export const useInitialState = () => {
   const config = extendConfig({
     loading: {
-      screen: {
-        initialState: true,
+      background: {
         icon: {
           variant: "dots",
         },
@@ -69,10 +68,11 @@ export const useInitialState = () => {
           variant: "dots",
         },
       },
-      background: {
+      screen: {
         icon: {
           variant: "dots",
         },
+        initialState: true,
       },
     },
   })
@@ -88,18 +88,30 @@ export const useCustomLoading = () => {
   const config = extendConfig({
     loading: {
       custom: {
-        component: ({ initialState, message, duration, onFinish }) => {
+        component: ({ duration, initialState, message, onFinish }) => {
           useTimeout(onFinish, duration)
 
           return (
             <Motion
-              initial={!initialState ? "initial" : false}
+              sx={{
+                alignItems: "center",
+                bg: "blackAlpha.600",
+                bottom: 0,
+                display: "flex",
+                h: "100vh",
+                justifyContent: "center",
+                left: 0,
+                p: "md",
+                position: "fixed",
+                right: 0,
+                top: 0,
+                w: "100vw",
+                zIndex: 9999,
+              }}
               animate="animate"
               exit="exit"
+              initial={!initialState ? "initial" : false}
               variants={{
-                initial: {
-                  opacity: 0,
-                },
                 animate: {
                   opacity: 1,
                   transition: {
@@ -114,32 +126,28 @@ export const useCustomLoading = () => {
                     ease: [0.4, 0, 1, 1],
                   },
                 },
-              }}
-              sx={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                zIndex: 9999,
-                bg: "blackAlpha.600",
-                w: "100vw",
-                h: "100vh",
-                p: "md",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                initial: {
+                  opacity: 0,
+                },
               }}
             >
               <Motion
-                initial={!initialState ? "initial" : false}
+                sx={{
+                  alignItems: "center",
+                  bg: ["white", "black"],
+                  boxShadow: ["lg", "dark-lg"],
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "sm",
+                  justifyContent: "center",
+                  maxW: "md",
+                  p: "md",
+                  rounded: "md",
+                }}
                 animate="animate"
                 exit="exit"
+                initial={!initialState ? "initial" : false}
                 variants={{
-                  initial: {
-                    opacity: 0,
-                    scale: 0.95,
-                  },
                   animate: {
                     opacity: 1,
                     scale: 1,
@@ -156,23 +164,15 @@ export const useCustomLoading = () => {
                       ease: [0.4, 0, 1, 1],
                     },
                   },
-                }}
-                sx={{
-                  bg: ["white", "black"],
-                  maxW: "md",
-                  p: "md",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "sm",
-                  rounded: "md",
-                  boxShadow: ["lg", "dark-lg"],
+                  initial: {
+                    opacity: 0,
+                    scale: 0.95,
+                  },
                 }}
               >
-                <Loading variant="dots" fontSize="6xl" />
+                <Loading fontSize="6xl" variant="dots" />
 
-                <VStack align="center" mb="md" gap="sm">
+                <VStack align="center" gap="sm" mb="md">
                   <Text>Downloading files…</Text>
                   {message ? (
                     isValidElement(message) ? (
@@ -202,10 +202,10 @@ export const useCustomLoading = () => {
 }
 
 const App: FC = () => {
-  const { screen, page, background } = useLoading()
+  const { background, page, screen } = useLoading()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -218,7 +218,7 @@ const App: FC = () => {
 }
 
 const AsyncApp: FC = () => {
-  const { screen, page, background } = useLoading()
+  const { background, page, screen } = useLoading()
 
   const fetchData = useCallback(async () => {
     await wait(5000)
@@ -231,7 +231,7 @@ const AsyncApp: FC = () => {
   }, [fetchData])
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -247,7 +247,7 @@ const CustomApp: FC = () => {
   const { custom } = useLoading()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={() => custom.start({ duration: 10000 })}>
           Start custom loading

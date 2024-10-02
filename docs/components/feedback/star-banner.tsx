@@ -1,9 +1,9 @@
-import { Button, Center, HStack, Text, forwardRef } from "@yamada-ui/react"
 import type { CenterProps } from "@yamada-ui/react"
-import { memo } from "react"
+import { Button, Center, forwardRef, HStack, Text } from "@yamada-ui/react"
 import { Star } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
+import { memo } from "react"
 
 export interface StarBannerProps extends CenterProps {}
 
@@ -14,10 +14,10 @@ export const StarBanner = memo(
     return (
       <Center
         ref={ref}
-        py="sm"
-        px="md"
         bgGradient="ultra"
         color="white"
+        px="md"
+        py="sm"
         {...rest}
       >
         <HStack>
@@ -25,18 +25,18 @@ export const StarBanner = memo(
 
           <Button
             as="a"
-            href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-            target="_blank"
-            size="sm"
-            bg="blackAlpha.300"
-            color="whiteAlpha.900"
-            cursor="pointer"
-            _hover={{
-              bg: `whiteAlpha.300`,
-            }}
             _active={{
               bg: `whiteAlpha.400`,
             }}
+            _hover={{
+              bg: `whiteAlpha.300`,
+            }}
+            bg="blackAlpha.300"
+            color="whiteAlpha.900"
+            cursor="pointer"
+            href={CONSTANT.SNS.GITHUB.YAMADA_UI}
+            size="sm"
+            target="_blank"
           >
             <Star />
             {tc("component.feedback.ad-banner.button")}

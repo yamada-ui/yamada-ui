@@ -10,7 +10,7 @@ import { assert } from "./utils"
 describe("<Resizable />", () => {
   test.skip("Resizable renders correctly", async () => {
     const { container } = render(
-      <Resizable h="md" rounded="md" borderWidth="1px">
+      <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem>One</ResizableItem>
 
         <ResizableTrigger />
@@ -24,7 +24,7 @@ describe("<Resizable />", () => {
 
   test("The default size of the left panel should be 30 and 70", () => {
     const { container } = render(
-      <Resizable h="md" rounded="md" borderWidth="1px">
+      <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem id="left-item" defaultSize={30}>
           One
         </ResizableItem>
@@ -67,8 +67,8 @@ describe("<ResizableTriggerIcon />", () => {
         <ResizableItem defaultSize={50}>One</ResizableItem>
 
         <ResizableTrigger
-          data-testid="resizable"
           icon={<ResizableTriggerIcon />}
+          data-testid="resizable"
         />
 
         <ResizableItem defaultSize={50}>Two</ResizableItem>

@@ -21,7 +21,7 @@ describe("<CloseButton />", () => {
 
   test("should not call onClick", async () => {
     const onClickMock = vi.fn()
-    render(<CloseButton onClick={onClickMock} isDisabled />)
+    render(<CloseButton isDisabled onClick={onClickMock} />)
     const button = screen.getByRole("button")
     fireEvent.click(button)
     expect(onClickMock).toHaveBeenCalledTimes(0)

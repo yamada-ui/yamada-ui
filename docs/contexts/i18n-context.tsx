@@ -1,52 +1,52 @@
-import type { Path, StringLiteral, Dict } from "@yamada-ui/react"
+import type { Dict, Path, StringLiteral } from "@yamada-ui/react"
+import type { FC, PropsWithChildren } from "react"
+import type { Locale, UI } from "utils/i18n"
 import {
   getMemoizedObject as get,
-  isString,
-  Text,
-  noop,
   isObject,
+  isString,
   isUndefined,
+  noop,
+  Text,
 } from "@yamada-ui/react"
+import { CONSTANT } from "constant"
 import { useRouter } from "next/router"
-import type { PropsWithChildren, FC } from "react"
 import {
   createContext,
-  useMemo,
-  useContext,
-  useCallback,
   Fragment,
+  useCallback,
+  useContext,
+  useMemo,
 } from "react"
-import { CONSTANT } from "constant"
 import { getContents, getUI } from "utils/i18n"
-import type { Locale, UI } from "utils/i18n"
 
 interface I18nContext {
+  changeLocale: (locale: Locale | StringLiteral) => void
+  contents: Dict[]
   locale: Locale
   t: (
     path: Path<UI> | StringLiteral,
-    replaceValue?: string | number | { [key: string]: string | number },
+    replaceValue?: { [key: string]: number | string } | number | string,
     pattern?: string,
   ) => string
   tc: (
     path: Path<UI> | StringLiteral,
     callback?: (str: string, index: number) => JSX.Element,
-  ) => string | JSX.Element[]
-  changeLocale: (locale: Locale | StringLiteral) => void
-  contents: Dict[]
+  ) => JSX.Element[] | string
 }
 
 const I18nContext = createContext<I18nContext>({
+  changeLocale: noop,
+  contents: [],
   locale: CONSTANT.I18N.DEFAULT_LOCALE as Locale,
   t: () => "",
   tc: () => "",
-  changeLocale: noop,
-  contents: [],
 })
 
 export interface I18nProviderProps extends PropsWithChildren {}
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
-  const { locale = CONSTANT.I18N.DEFAULT_LOCALE, asPath, push } = useRouter()
+  const { asPath, locale = CONSTANT.I18N.DEFAULT_LOCALE, push } = useRouter()
 
   const ui = useMemo(() => getUI(locale as Locale), [locale])
   const contents = useMemo(() => getContents(locale as Locale), [locale])
@@ -61,7 +61,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const t = useCallback(
     (
       path: Path<UI> | StringLiteral,
-      replaceValue?: string | number | { [key: string]: string | number },
+      replaceValue?: { [key: string]: number | string } | number | string,
       pattern: string = "label",
     ) => {
       let value = get<string>(ui, path, "")
@@ -113,7 +113,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   )
 
   const value = useMemo(
-    () => ({ locale: locale as Locale, t, tc, changeLocale, contents }),
+    () => ({ changeLocale, contents, locale: locale as Locale, t, tc }),
     [changeLocale, locale, t, tc, contents],
   )
 

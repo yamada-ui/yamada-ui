@@ -3,7 +3,7 @@ import { Textarea } from "../src"
 
 describe("<Textarea />", () => {
   test("Textarea renders correctly", async () => {
-    await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
+    await a11y(<Textarea defaultValue="hello" aria-label="Enter notes" />)
   })
 
   test("Disabled Textarea renders correctly", () => {

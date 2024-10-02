@@ -1,7 +1,7 @@
-import { act, fireEvent, render, waitFor } from "@yamada-ui/test"
-import { dataAttr } from "@yamada-ui/utils"
 import type { FC } from "react"
 import type { MockInstance } from "vitest"
+import { act, fireEvent, render, waitFor } from "@yamada-ui/test"
+import { dataAttr } from "@yamada-ui/utils"
 import { useFocusVisible } from "../src"
 
 describe("useFocusVisible", () => {
@@ -36,8 +36,8 @@ describe("useFocusVisible", () => {
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -69,8 +69,8 @@ describe("useFocusVisible", () => {
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -96,8 +96,8 @@ describe("useFocusVisible", () => {
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -122,8 +122,8 @@ describe("useFocusVisible", () => {
       return (
         <div
           tabIndex={0}
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button

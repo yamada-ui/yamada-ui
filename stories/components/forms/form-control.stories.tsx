@@ -1,18 +1,18 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  FormControl,
-  Label,
-  HelperMessage,
   ErrorMessage,
+  FormControl,
+  HelperMessage,
   Input,
+  Label,
   Tag,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof FormControl>
 
 const meta: Meta<typeof FormControl> = {
-  title: "Components / Forms / FormControl",
   component: FormControl,
+  title: "Components / Forms / FormControl",
 }
 
 export default meta
@@ -28,8 +28,8 @@ export const basic: Story = () => {
 export const withHelperMessage: Story = () => {
   return (
     <FormControl
-      label="Email address"
       helperMessage="We'll never share your email."
+      label="Email address"
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -39,9 +39,9 @@ export const withHelperMessage: Story = () => {
 export const withErrorMessage: Story = () => {
   return (
     <FormControl
+      errorMessage="Email is required."
       isInvalid
       label="Email address"
-      errorMessage="Email is required."
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -52,21 +52,21 @@ export const isReplace: Story = () => {
   return (
     <>
       <FormControl
-        isInvalid
-        label="Email address"
-        helperMessage="We'll never share your email."
         errorMessage="Email is required."
+        helperMessage="We'll never share your email."
+        isInvalid
         isReplace={true}
+        label="Email address"
       >
         <Input type="email" placeholder="your email address" />
       </FormControl>
 
       <FormControl
-        isInvalid
-        label="Email address"
-        helperMessage="We'll never share your email."
         errorMessage="Email is required."
+        helperMessage="We'll never share your email."
+        isInvalid
         isReplace={false}
+        label="Email address"
       >
         <Input type="email" placeholder="your email address" />
       </FormControl>
@@ -77,10 +77,10 @@ export const isReplace: Story = () => {
 export const isRequired: Story = () => {
   return (
     <FormControl
+      errorMessage="Email is required."
+      helperMessage="We'll never share your email."
       isRequired
       label="Email address"
-      helperMessage="We'll never share your email."
-      errorMessage="Email is required."
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -90,10 +90,10 @@ export const isRequired: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <FormControl
+      errorMessage="Email is required."
+      helperMessage="We'll never share your email."
       isDisabled
       label="Email address"
-      helperMessage="We'll never share your email."
-      errorMessage="Email is required."
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -103,10 +103,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <FormControl
+      errorMessage="Email is required."
+      helperMessage="We'll never share your email."
       isReadOnly
       label="Email address"
-      helperMessage="We'll never share your email."
-      errorMessage="Email is required."
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -149,7 +149,7 @@ export const customRequiredIndicator: Story = () => {
         isRequired
         label="Email address"
         requiredIndicator={
-          <Tag size="sm" colorScheme="red" ms={2}>
+          <Tag colorScheme="red" ms={2} size="sm">
             required
           </Tag>
         }
@@ -160,7 +160,7 @@ export const customRequiredIndicator: Story = () => {
       <FormControl isRequired>
         <Label
           requiredIndicator={
-            <Tag size="sm" colorScheme="red" ms={2}>
+            <Tag colorScheme="red" ms={2} size="sm">
               required
             </Tag>
           }
@@ -179,7 +179,7 @@ export const customOptionalIndicator: Story = () => {
       <FormControl
         label="Email address"
         optionalIndicator={
-          <Tag size="sm" colorScheme="primary" ms={2}>
+          <Tag colorScheme="primary" ms={2} size="sm">
             optional
           </Tag>
         }
@@ -190,7 +190,7 @@ export const customOptionalIndicator: Story = () => {
       <FormControl>
         <Label
           optionalIndicator={
-            <Tag size="sm" colorScheme="primary" ms={2}>
+            <Tag colorScheme="primary" ms={2} size="sm">
               optional
             </Tag>
           }

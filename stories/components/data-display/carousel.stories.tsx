@@ -1,31 +1,31 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import {
   Carousel,
-  CarouselSlide,
   CarouselControlNext,
   CarouselControlPrev,
   CarouselIndicators,
+  CarouselSlide,
 } from "@yamada-ui/carousel"
-import { Ghost, ArrowLeft, ArrowRight } from "@yamada-ui/lucide"
+import { ArrowLeft, ArrowRight, Ghost } from "@yamada-ui/lucide"
 import {
-  Progress,
-  Center,
-  Card,
-  CardHeader,
-  Image,
-  CardBody,
-  Heading,
-  Text,
-  CardFooter,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Center,
+  Heading,
+  Image,
+  Progress,
+  Text,
 } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Carousel>
 
 const meta: Meta<typeof Carousel> = {
-  title: "Components / Data Display / Carousel",
   component: Carousel,
+  title: "Components / Data Display / Carousel",
 }
 
 export default meta
@@ -229,7 +229,7 @@ export const withSlideSize: Story = () => {
 export const withAlign: Story = () => {
   return (
     <>
-      <Carousel slideSize="50%" align="center">
+      <Carousel align="center" slideSize="50%">
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -244,7 +244,7 @@ export const withAlign: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel slideSize="50%" align="start">
+      <Carousel align="start" slideSize="50%">
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -259,7 +259,7 @@ export const withAlign: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel slideSize="50%" align="end">
+      <Carousel align="end" slideSize="50%">
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -279,7 +279,7 @@ export const withAlign: Story = () => {
 
 export const withSlidesToScroll: Story = () => {
   return (
-    <Carousel slideSize="33.3%" slidesToScroll={3} loop={false}>
+    <Carousel loop={false} slideSize="33.3%" slidesToScroll={3}>
       <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
@@ -313,14 +313,14 @@ export const withSlidesToScroll: Story = () => {
 
 export const withCard: Story = () => {
   return (
-    <Carousel slideSize="50%" align="start" slidesToScroll={2} h="auto">
+    <Carousel align="start" h="auto" slideSize="50%" slidesToScroll={2}>
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            alt="いちご100%"
+            rounded="md"
             src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
-            rounded="md"
-            alt="いちご100%"
           />
         </CardHeader>
 
@@ -340,10 +340,10 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            alt="いちご100%"
+            rounded="md"
             src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
-            rounded="md"
-            alt="いちご100%"
           />
         </CardHeader>
 
@@ -363,10 +363,10 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            alt="いちご100%"
+            rounded="md"
             src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
-            rounded="md"
-            alt="いちご100%"
           />
         </CardHeader>
 
@@ -386,10 +386,10 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            alt="いちご100%"
+            rounded="md"
             src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
-            rounded="md"
-            alt="いちご100%"
           />
         </CardHeader>
 
@@ -471,7 +471,7 @@ export const withScrollProgress: Story = () => {
 
   return (
     <>
-      <Carousel loop={false} dragFree onScrollProgress={onScrollProgress}>
+      <Carousel dragFree loop={false} onScrollProgress={onScrollProgress}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -486,14 +486,14 @@ export const withScrollProgress: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Progress value={value} colorScheme="gray" />
+      <Progress colorScheme="gray" value={value} />
     </>
   )
 }
 
 export const disabledIncludeGapInSize: Story = () => {
   return (
-    <Carousel slideSize="50%" includeGapInSize={false}>
+    <Carousel includeGapInSize={false} slideSize="50%">
       <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
@@ -738,9 +738,9 @@ export const customIndicators: Story = () => {
           bottom: "8",
           component: ({ isSelected }) => (
             <Ghost
-              fontSize="2xl"
               color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
               cursor="pointer"
+              fontSize="2xl"
             />
           ),
         }}
@@ -776,10 +776,10 @@ export const customIndicators: Story = () => {
         <CarouselIndicators
           sx={{
             "& > *": {
-              w: "4",
               _selected: { w: "12" },
-              transitionProperty: "width",
               transitionDuration: "slower",
+              transitionProperty: "width",
+              w: "4",
             },
           }}
         />

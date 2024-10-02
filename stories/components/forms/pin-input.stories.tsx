@@ -1,21 +1,21 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 import {
   Button,
   FormControl,
   PinInput,
   PinInputField,
-  VStack,
   useLoading,
+  VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof PinInput>
 
 const meta: Meta<typeof PinInput> = {
-  title: "Components / Forms / PinInput",
   component: PinInput,
+  title: "Components / Forms / PinInput",
 }
 
 export default meta
@@ -93,7 +93,7 @@ export const withBorderColor: Story = () => {
 
       <PinInput focusBorderColor="green.500" />
 
-      <PinInput isInvalid errorBorderColor="orange.500" />
+      <PinInput errorBorderColor="orange.500" isInvalid />
     </>
   )
 }
@@ -153,10 +153,10 @@ export const isDisabled: Story = () => {
       </PinInput>
 
       <FormControl
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
         isDisabled
         label="Please one-time password"
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        errorMessage="one-time password is required."
       >
         <PinInput />
       </FormControl>
@@ -177,10 +177,10 @@ export const isReadonly: Story = () => {
       </PinInput>
 
       <FormControl
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
         isReadOnly
         label="Please one-time password"
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        errorMessage="one-time password is required."
       >
         <PinInput />
       </FormControl>
@@ -201,10 +201,10 @@ export const isInvalid: Story = () => {
       </PinInput>
 
       <FormControl
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
         isInvalid
         label="Please one-time password"
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        errorMessage="one-time password is required."
       >
         <PinInput />
       </FormControl>
@@ -219,9 +219,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -231,18 +231,18 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.pinInput?.message}
         isInvalid={!!errors.pinInput}
         label="Token"
-        errorMessage={errors.pinInput?.message}
       >
         <Controller
           name="pinInput"
           control={control}
-          rules={{
-            required: { value: true, message: "This is required." },
-            minLength: { value: 4, message: "This is required." },
-          }}
           render={({ field }) => <PinInput {...field} />}
+          rules={{
+            minLength: { message: "This is required.", value: 4 },
+            required: { message: "This is required.", value: true },
+          }}
         />
       </FormControl>
 
@@ -264,9 +264,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -276,18 +276,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.pinInput?.message}
         isInvalid={!!errors.pinInput}
         label="Token"
-        errorMessage={errors.pinInput?.message}
       >
         <Controller
           name="pinInput"
           control={control}
-          rules={{
-            required: { value: true, message: "This is required." },
-            minLength: { value: 4, message: "This is required." },
-          }}
           render={({ field }) => <PinInput {...field} />}
+          rules={{
+            minLength: { message: "This is required.", value: 4 },
+            required: { message: "This is required.", value: true },
+          }}
         />
       </FormControl>
 

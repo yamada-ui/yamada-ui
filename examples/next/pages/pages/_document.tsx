@@ -1,5 +1,5 @@
 import { ColorModeScript, ThemeSchemeScript } from '@yamada-ui/react'
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import NextDocument, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import { config } from 'theme'
 
 class Document extends NextDocument {
@@ -12,19 +12,19 @@ class Document extends NextDocument {
       <Html lang='ja'>
         <Head>
           <title>Next.js Pages - Yamada UI</title>
-          <link rel='icon' href='/favicon.svg' />
+          <link href='/favicon.svg' rel='icon' />
         </Head>
 
         <body>
           <ColorModeScript
             type='cookie'
-            nonce='testing'
             initialColorMode={config.initialColorMode}
+            nonce='testing'
           />
           <ThemeSchemeScript
             type='cookie'
-            nonce='testing'
             initialThemeScheme={config.initialThemeScheme}
+            nonce='testing'
           />
           <Main />
           <NextScript />

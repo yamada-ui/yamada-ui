@@ -1,6 +1,4 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { createDescendant } from "@yamada-ui/use-descendant"
-import { createContext } from "@yamada-ui/utils"
 import type {
   Dispatch,
   KeyboardEventHandler,
@@ -9,27 +7,29 @@ import type {
   SetStateAction,
 } from "react"
 import type { MenuOptions } from "./menu"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { createContext } from "@yamada-ui/utils"
 
 export const {
   DescendantsContextProvider,
-  useDescendantsContext: useMenuDescendantsContext,
-  useDescendants,
   useDescendant: useMenuDescendant,
+  useDescendants,
+  useDescendantsContext: useMenuDescendantsContext,
 } = createDescendant()
 
 interface MenuContext extends MenuOptions {
+  focusedIndex: number
+  isNested: boolean
   isOpen: boolean
-  onOpen: () => void
+  menuRef: RefObject<HTMLDivElement>
+  requestAnimationFrameId: MutableRefObject<null | number>
+  setFocusedIndex: Dispatch<SetStateAction<number>>
+  styles: { [key: string]: CSSUIObject }
   onClose: () => void
-  onUpstreamClose?: () => void
   onFocusFirstItem: () => void
   onFocusLastItem: () => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  menuRef: RefObject<HTMLDivElement>
-  requestAnimationFrameId: MutableRefObject<number | null>
-  isNested: boolean
-  styles: { [key: string]: CSSUIObject }
+  onOpen: () => void
+  onUpstreamClose?: () => void
 }
 
 export const [MenuProvider, useMenu] = createContext<MenuContext>({
@@ -43,8 +43,8 @@ interface ContextMenuContext {
 
 export const [ContextMenuProvider, useContextMenu] =
   createContext<ContextMenuContext>({
-    strict: false,
     name: "ContextMenuContext",
+    strict: false,
   })
 
 interface UpstreamMenuContext {
@@ -55,19 +55,19 @@ interface UpstreamMenuContext {
 
 export const [UpstreamMenuProvider, useUpstreamMenu] =
   createContext<UpstreamMenuContext>({
-    strict: false,
     name: "UpstreamMenuContext",
+    strict: false,
   })
 
 interface UpstreamMenuItemContext {
-  onUpstreamRestoreFocus: () => void
-  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLLIElement>>
-  setDownstreamOpen: Dispatch<SetStateAction<boolean>>
   hasDownstreamRef: MutableRefObject<boolean>
+  setDownstreamOpen: Dispatch<SetStateAction<boolean>>
+  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLLIElement>>
+  onUpstreamRestoreFocus: () => void
 }
 
 export const [UpstreamMenuItemProvider, useUpstreamMenuItem] =
   createContext<UpstreamMenuItemContext>({
-    strict: false,
     name: "UpstreamMenuItemContext",
+    strict: false,
   })

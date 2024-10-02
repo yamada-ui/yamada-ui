@@ -1,19 +1,19 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import dayjs from "dayjs"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import { YearPicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
+import dayjs from "dayjs"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof YearPicker>
 
 const meta: Meta<typeof YearPicker> = {
-  title: "Components / Forms / YearPicker",
   component: YearPicker,
+  title: "Components / Forms / YearPicker",
 }
 
 export default meta
@@ -31,7 +31,7 @@ export const withChildren: Story = () => {
         </VStack>
       </YearPicker>
 
-      <YearPicker placeholder="YYYY" closeOnSelect={false}>
+      <YearPicker closeOnSelect={false} placeholder="YYYY">
         {({ value, onClose }) => (
           <VStack mt="sm">
             <Button isDisabled={!value} onClick={onClose}>
@@ -58,9 +58,9 @@ export const withSize: Story = () => {
 export const withCalendarSize: Story = () => {
   return (
     <>
-      <YearPicker placeholder="small size" calendarSize="sm" />
-      <YearPicker placeholder="medium size" calendarSize="md" />
-      <YearPicker placeholder="large size" calendarSize="lg" />
+      <YearPicker calendarSize="sm" placeholder="small size" />
+      <YearPicker calendarSize="md" placeholder="medium size" />
+      <YearPicker calendarSize="lg" placeholder="large size" />
     </>
   )
 }
@@ -68,10 +68,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <YearPicker variant="outline" placeholder="outline" />
-      <YearPicker variant="filled" placeholder="filled" />
-      <YearPicker variant="flushed" placeholder="flushed" />
-      <YearPicker variant="unstyled" placeholder="unstyled" />
+      <YearPicker placeholder="outline" variant="outline" />
+      <YearPicker placeholder="filled" variant="filled" />
+      <YearPicker placeholder="flushed" variant="flushed" />
+      <YearPicker placeholder="unstyled" variant="unstyled" />
     </>
   )
 }
@@ -81,12 +81,12 @@ export const withColorScheme: Story = () => {
     <>
       <Heading size="xl">Solid</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <YearPicker
             key={colorScheme}
-            calendarVariant="solid"
             calendarColorScheme={colorScheme}
+            calendarVariant="solid"
             defaultValue={new Date()}
           />
         ))}
@@ -94,12 +94,12 @@ export const withColorScheme: Story = () => {
 
       <Heading size="xl">Subtle</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <YearPicker
             key={colorScheme}
-            calendarVariant="subtle"
             calendarColorScheme={colorScheme}
+            calendarVariant="subtle"
             defaultValue={new Date()}
           />
         ))}
@@ -123,8 +123,8 @@ export const withBorderColor: Story = () => {
       />
 
       <YearPicker
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -134,24 +134,24 @@ export const withBorderColor: Story = () => {
 export const withPattern: Story = () => {
   return (
     <YearPicker
-      placeholder="YY"
+      defaultValue={new Date()}
       inputFormat="YY"
       pattern={/[^\w, ]/g}
-      defaultValue={new Date()}
+      placeholder="YY"
     />
   )
 }
 
 export const withInputFormat: Story = () => {
-  return <YearPicker placeholder="YY" inputFormat="YY" />
+  return <YearPicker inputFormat="YY" placeholder="YY" />
 }
 
 export const withParseDate: Story = () => {
   return (
     <YearPicker
-      placeholder="YYYY"
       inputFormat="YYYY"
       parseDate={(value) => new Date(value)}
+      placeholder="YYYY"
     />
   )
 }
@@ -161,24 +161,24 @@ export const withPlacement: Story = () => {
 }
 
 export const withOffset: Story = () => {
-  return <YearPicker placeholder="YYYY" offset={[16, 16]} />
+  return <YearPicker offset={[16, 16]} placeholder="YYYY" />
 }
 
 export const withGutter: Story = () => {
-  return <YearPicker placeholder="YYYY" gutter={32} />
+  return <YearPicker gutter={32} placeholder="YYYY" />
 }
 
 export const withDuration: Story = () => {
-  return <YearPicker placeholder="YYYY" duration={0.4} />
+  return <YearPicker duration={0.4} placeholder="YYYY" />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <YearPicker isDisabled variant="outline" placeholder="outline" />
-      <YearPicker isDisabled variant="filled" placeholder="filled" />
-      <YearPicker isDisabled variant="flushed" placeholder="flushed" />
-      <YearPicker isDisabled variant="unstyled" placeholder="unstyled" />
+      <YearPicker isDisabled placeholder="outline" variant="outline" />
+      <YearPicker isDisabled placeholder="filled" variant="filled" />
+      <YearPicker isDisabled placeholder="flushed" variant="flushed" />
+      <YearPicker isDisabled placeholder="unstyled" variant="unstyled" />
 
       <FormControl isDisabled label="What is your birthday?">
         <YearPicker placeholder="YYYY" />
@@ -190,10 +190,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <YearPicker isReadOnly variant="outline" placeholder="outline" />
-      <YearPicker isReadOnly variant="filled" placeholder="filled" />
-      <YearPicker isReadOnly variant="flushed" placeholder="flushed" />
-      <YearPicker isReadOnly variant="unstyled" placeholder="unstyled" />
+      <YearPicker isReadOnly placeholder="outline" variant="outline" />
+      <YearPicker isReadOnly placeholder="filled" variant="filled" />
+      <YearPicker isReadOnly placeholder="flushed" variant="flushed" />
+      <YearPicker isReadOnly placeholder="unstyled" variant="unstyled" />
 
       <FormControl isReadOnly label="What is your birthday?">
         <YearPicker placeholder="YYYY" />
@@ -205,15 +205,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <YearPicker isInvalid variant="outline" placeholder="outline" />
-      <YearPicker isInvalid variant="filled" placeholder="filled" />
-      <YearPicker isInvalid variant="flushed" placeholder="flushed" />
-      <YearPicker isInvalid variant="unstyled" placeholder="unstyled" />
+      <YearPicker isInvalid placeholder="outline" variant="outline" />
+      <YearPicker isInvalid placeholder="filled" variant="filled" />
+      <YearPicker isInvalid placeholder="flushed" variant="flushed" />
+      <YearPicker isInvalid placeholder="unstyled" variant="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="What is your birthday?"
-        errorMessage="This is required."
       >
         <YearPicker placeholder="YYYY" />
       </FormControl>
@@ -224,10 +224,10 @@ export const isInvalid: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <YearPicker
-      placeholder="YYYY"
       defaultValue={new Date(1997, 0)}
-      minDate={new Date(1993, 0)}
       maxDate={new Date(2000, 0)}
+      minDate={new Date(1993, 0)}
+      placeholder="YYYY"
     />
   )
 }
@@ -240,28 +240,28 @@ export const withLocale: Story = () => {
 
 export const withFormat: Story = () => {
   return (
-    <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
-      <YearPicker placeholder="YYYY" locale="ja" yearFormat="YYYY年" />
+    <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
+      <YearPicker locale="ja" placeholder="YYYY" yearFormat="YYYY年" />
 
-      <YearPicker placeholder="YYYY" locale="ja" yearFormat="YY" />
+      <YearPicker locale="ja" placeholder="YYYY" yearFormat="YY" />
     </Grid>
   )
 }
 
 export const disabledCloseOnSelect: Story = () => {
-  return <YearPicker placeholder="YYYY" closeOnSelect={false} />
+  return <YearPicker closeOnSelect={false} placeholder="YYYY" />
 }
 
 export const disabledCloseOnBlur: Story = () => {
-  return <YearPicker placeholder="YYYY" closeOnBlur={false} />
+  return <YearPicker closeOnBlur={false} placeholder="YYYY" />
 }
 
 export const disabledIsClearable: Story = () => {
-  return <YearPicker placeholder="YYYY" isClearable={false} />
+  return <YearPicker isClearable={false} placeholder="YYYY" />
 }
 
 export const disabledAllowInput: Story = () => {
-  return <YearPicker placeholder="YYYY" allowInput={false} />
+  return <YearPicker allowInput={false} placeholder="YYYY" />
 }
 
 export const disabledControls: Story = () => {
@@ -291,9 +291,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -303,15 +303,15 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.yearPicker?.message}
         isInvalid={!!errors.yearPicker}
         label="Birthday"
-        errorMessage={errors.yearPicker?.message}
       >
         <Controller
           name="yearPicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => <YearPicker placeholder="YYYY" {...field} />}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -333,9 +333,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -345,15 +345,15 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.yearPicker?.message}
         isInvalid={!!errors.yearPicker}
         label="Birthday"
-        errorMessage={errors.yearPicker?.message}
       >
         <Controller
           name="yearPicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => <YearPicker placeholder="YYYY" {...field} />}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

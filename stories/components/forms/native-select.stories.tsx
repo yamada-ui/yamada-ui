@@ -1,9 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
-import { ChevronsDown } from "@yamada-ui/lucide"
 import type { NativeSelectItem } from "@yamada-ui/react"
+import type { SubmitHandler } from "react-hook-form"
+import { ChevronsDown } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -12,12 +10,14 @@ import {
   NativeSelect,
   VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof NativeSelect>
 
 const meta: Meta<typeof NativeSelect> = {
-  title: "Components / Forms / NativeSelect",
   component: NativeSelect,
+  title: "Components / Forms / NativeSelect",
 }
 
 export default meta
@@ -26,15 +26,14 @@ export const basic: Story = () => {
   const items: NativeSelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -43,6 +42,7 @@ export const basic: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
@@ -72,8 +72,8 @@ export const basic: Story = () => {
       </NativeSelect>
 
       <NativeSelect
-        placeholder="キャラクターを選択"
         items={items}
+        placeholder="キャラクターを選択"
         aria-label="Native Select"
       />
     </>
@@ -111,23 +111,23 @@ export const withVariant: Story = () => {
   return (
     <>
       <NativeSelect
-        variant="outline"
         placeholder="outline"
+        variant="outline"
         aria-label="Native Select"
       />
       <NativeSelect
-        variant="filled"
         placeholder="filled"
+        variant="filled"
         aria-label="Native Select"
       />
       <NativeSelect
-        variant="flushed"
         placeholder="flushed"
+        variant="flushed"
         aria-label="Native Select"
       />
       <NativeSelect
-        variant="unstyled"
         placeholder="unstyled"
+        variant="unstyled"
         aria-label="Native Select"
       />
     </>
@@ -147,8 +147,8 @@ export const withBorderColor: Story = () => {
         aria-label="Native Select"
       />
       <NativeSelect
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
         aria-label="Native Select"
       />
@@ -175,26 +175,26 @@ export const isDisabled: Story = () => {
     <>
       <NativeSelect
         isDisabled
-        variant="outline"
         placeholder="outline"
+        variant="outline"
         aria-label="Native Select"
       />
       <NativeSelect
         isDisabled
-        variant="filled"
         placeholder="filled"
+        variant="filled"
         aria-label="Native Select"
       />
       <NativeSelect
         isDisabled
-        variant="flushed"
         placeholder="flushed"
+        variant="flushed"
         aria-label="Native Select"
       />
       <NativeSelect
         isDisabled
-        variant="unstyled"
         placeholder="unstyled"
+        variant="unstyled"
         aria-label="Native Select"
       />
 
@@ -213,26 +213,26 @@ export const isReadonly: Story = () => {
     <>
       <NativeSelect
         isReadOnly
-        variant="outline"
         placeholder="outline"
+        variant="outline"
         aria-label="Native Select"
       />
       <NativeSelect
         isReadOnly
-        variant="filled"
         placeholder="filled"
+        variant="filled"
         aria-label="Native Select"
       />
       <NativeSelect
         isReadOnly
-        variant="flushed"
         placeholder="flushed"
+        variant="flushed"
         aria-label="Native Select"
       />
       <NativeSelect
         isReadOnly
-        variant="unstyled"
         placeholder="unstyled"
+        variant="unstyled"
         aria-label="Native Select"
       />
 
@@ -251,33 +251,33 @@ export const isInvalid: Story = () => {
     <>
       <NativeSelect
         isInvalid
-        variant="outline"
         placeholder="outline"
+        variant="outline"
         aria-label="Native Select"
       />
       <NativeSelect
         isInvalid
-        variant="filled"
         placeholder="filled"
+        variant="filled"
         aria-label="Native Select"
       />
       <NativeSelect
         isInvalid
-        variant="flushed"
         placeholder="flushed"
+        variant="flushed"
         aria-label="Native Select"
       />
       <NativeSelect
         isInvalid
-        variant="unstyled"
         placeholder="unstyled"
+        variant="unstyled"
         aria-label="Native Select"
       />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <NativeSelect placeholder="Select notifications" />
       </FormControl>
@@ -317,8 +317,8 @@ export const customControl: Story = () => {
   return (
     <NativeSelect
       placeholder="キャラクターを選択"
-      aria-label="Native Select"
       value={value}
+      aria-label="Native Select"
       onChange={(e) => setValue(e.target.value)}
     >
       <NativeOption value="孫悟空">孫悟空</NativeOption>
@@ -334,10 +334,10 @@ export const reactHookForm: Story = () => {
   }
 
   const {
-    register,
-    handleSubmit,
-    watch,
     formState: { errors },
+    handleSubmit,
+    register,
+    watch,
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -347,14 +347,14 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select?.message}
         isInvalid={!!errors.select}
         label="Who is your favorite character?"
-        errorMessage={errors.select?.message}
       >
         <NativeSelect
           placeholder="キャラクターを選択"
           {...register("select", {
-            required: { value: true, message: "This is required." },
+            required: { message: "This is required.", value: true },
           })}
         >
           <NativeOption value="孫悟空">孫悟空</NativeOption>
@@ -380,10 +380,10 @@ export const reactHookFormWithDefaultValue: Story = () => {
   }
 
   const {
-    register,
-    handleSubmit,
-    watch,
     formState: { errors },
+    handleSubmit,
+    register,
+    watch,
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -393,14 +393,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select?.message}
         isInvalid={!!errors.select}
         label="Who is your favorite character?"
-        errorMessage={errors.select?.message}
       >
         <NativeSelect
           placeholder="キャラクターを選択"
           {...register("select", {
-            required: { value: true, message: "This is required." },
+            required: { message: "This is required.", value: true },
           })}
         >
           <NativeOption value="孫悟空">孫悟空</NativeOption>

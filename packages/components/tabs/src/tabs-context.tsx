@@ -1,24 +1,24 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { createDescendant } from "@yamada-ui/use-descendant"
-import { createContext } from "@yamada-ui/utils"
 import type { Dispatch, SetStateAction } from "react"
 import type { TabsOptions } from "./tabs"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { createContext } from "@yamada-ui/utils"
 
 export const {
   DescendantsContextProvider,
-  useDescendantsContext: useTabsDescendantsContext,
-  useDescendants,
   useDescendant: useTabsDescendant,
+  useDescendants,
+  useDescendantsContext: useTabsDescendantsContext,
 } = createDescendant<HTMLButtonElement>()
 
-type TabsContext = Omit<TabsOptions, "index" | "defaultIndex" | "onChange"> & {
+type TabsContext = {
+  disableRipple: boolean
   focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
   selectedIndex: number
+  setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject }
-  disableRipple: boolean
-}
+} & Omit<TabsOptions, "defaultIndex" | "index" | "onChange">
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({
   name: "TabsContext",

@@ -1,7 +1,7 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx, handlerAll } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx, handlerAll } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import { useTabsContext, useTabsDescendantsContext } from "./tabs-context"
 
@@ -9,7 +9,7 @@ export interface TabListProps extends HTMLUIProps {}
 
 export const TabList = forwardRef<TabListProps, "div">(
   ({ className, ...rest }, ref) => {
-    const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
+    const { focusedIndex, orientation, styles, tabListProps } = useTabsContext()
 
     const descendants = useTabsDescendantsContext()
 
@@ -42,12 +42,12 @@ export const TabList = forwardRef<TabListProps, "div">(
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
         const actions: { [key: string]: KeyboardEventHandler } = {
+          ArrowDown: () => (isVertical ? onNext() : {}),
           ArrowLeft: () => (!isVertical ? onPrev() : {}),
           ArrowRight: () => (!isVertical ? onNext() : {}),
-          ArrowDown: () => (isVertical ? onNext() : {}),
           ArrowUp: () => (isVertical ? onPrev() : {}),
-          Home: onFirst,
           End: onLast,
+          Home: onFirst,
         }
 
         const action = actions[ev.key]

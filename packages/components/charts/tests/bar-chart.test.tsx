@@ -1,5 +1,5 @@
-import { a11y, render, waitFor, screen, fireEvent } from "@yamada-ui/test"
 import type { BarProps } from "../src"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { BarChart } from "../src"
 
 describe("<BarChart />", () => {
@@ -35,106 +35,106 @@ describe("<BarChart />", () => {
   const data = [
     {
       name: "Page A",
-      uv: 4000,
-      pv: 2400,
       amt: 2400,
+      pv: 2400,
+      uv: 4000,
     },
     {
       name: "Page B",
-      uv: 3000,
-      pv: 1398,
       amt: 2210,
+      pv: 1398,
+      uv: 3000,
     },
     {
       name: "Page C",
-      uv: 2000,
-      pv: 9800,
       amt: 2290,
+      pv: 9800,
+      uv: 2000,
     },
     {
       name: "Page D",
-      uv: 2780,
-      pv: 3908,
       amt: 2000,
+      pv: 3908,
+      uv: 2780,
     },
     {
       name: "Page E",
-      uv: 1890,
-      pv: 4800,
       amt: 2181,
+      pv: 4800,
+      uv: 1890,
     },
     {
       name: "Page F",
-      uv: 2390,
-      pv: 3800,
       amt: 2500,
+      pv: 3800,
+      uv: 2390,
     },
     {
       name: "Page G",
-      uv: 3490,
-      pv: 4300,
       amt: 2400,
+      pv: 4300,
+      uv: 3490,
     },
   ]
 
   const rangeData = [
     {
       name: "Page A",
-      uv: [2000, 4000],
-      pv: [1400, 2400],
       amt: [1400, 2400],
+      pv: [1400, 2400],
+      uv: [2000, 4000],
     },
     {
       name: "Page B",
-      uv: [2000, 3000],
-      pv: [398, 1398],
       amt: [1210, 2210],
+      pv: [398, 1398],
+      uv: [2000, 3000],
     },
     {
       name: "Page C",
-      uv: [1000, 2000],
-      pv: [8800, 9800],
       amt: [1290, 2290],
+      pv: [8800, 9800],
+      uv: [1000, 2000],
     },
     {
       name: "Page D",
-      uv: [1780, 2780],
-      pv: [2908, 3908],
       amt: [1000, 2000],
+      pv: [2908, 3908],
+      uv: [1780, 2780],
     },
     {
       name: "Page E",
-      uv: [890, 1890],
-      pv: [3800, 4800],
       amt: [1181, 2181],
+      pv: [3800, 4800],
+      uv: [890, 1890],
     },
     {
       name: "Page F",
-      uv: [1390, 2390],
-      pv: [2800, 3800],
       amt: [1500, 2500],
+      pv: [2800, 3800],
+      uv: [1390, 2390],
     },
     {
       name: "Page G",
-      uv: [2490, 3490],
-      pv: [3300, 4300],
       amt: [1400, 2400],
+      pv: [3300, 4300],
+      uv: [2490, 3490],
     },
   ]
 
   const series: BarProps[] = [
-    { dataKey: "uv", color: "primary.500" },
-    { dataKey: "pv", color: "secondary.500" },
-    { dataKey: "amt", color: "warning.500" },
+    { color: "primary.500", dataKey: "uv" },
+    { color: "secondary.500", dataKey: "pv" },
+    { color: "warning.500", dataKey: "amt" },
   ]
 
   test("should pass a11y test", async () => {
     await a11y(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
+        containerProps={{ height: "80%", width: 400 }}
       />,
     )
   })
@@ -142,10 +142,10 @@ describe("<BarChart />", () => {
   test("3 bar should be rendered", async () => {
     const { container } = render(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
+        containerProps={{ height: "80%", width: 400 }}
       />,
     )
 
@@ -158,13 +158,13 @@ describe("<BarChart />", () => {
 
   describe("axis", () => {
     test("x axis should be rendered according to withXAxis", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withXAxis={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -180,11 +180,11 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withXAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -200,13 +200,13 @@ describe("<BarChart />", () => {
     })
 
     test("y axis should be rendered according to withYAxis", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withYAxis={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -218,11 +218,11 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withYAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -236,12 +236,12 @@ describe("<BarChart />", () => {
     test("should be rendered axis label", async () => {
       render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           xAxisLabel="x-axis-label"
           yAxisLabel="y-axis-label"
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -254,14 +254,14 @@ describe("<BarChart />", () => {
 
   describe("tooltip", () => {
     test("tooltip should be rendered according to withTooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={true}
           withXAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -286,12 +286,12 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={false}
           withXAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -315,13 +315,13 @@ describe("<BarChart />", () => {
     })
 
     test("cursor should be rendered along with tooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -343,11 +343,11 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -373,10 +373,10 @@ describe("<BarChart />", () => {
     test("values are displayed correctly in tooltip even for range data", async () => {
       const { container } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={rangeData}
+          dataKey="name"
           series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -401,13 +401,13 @@ describe("<BarChart />", () => {
   })
 
   test("legend should be rendered according to withLegend", async () => {
-    const { rerender, container } = render(
+    const { container, rerender } = render(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
         withLegend={true}
+        containerProps={{ height: "80%", width: 400 }}
       />,
     )
 
@@ -421,11 +421,11 @@ describe("<BarChart />", () => {
 
     rerender(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
         withLegend={false}
+        containerProps={{ height: "80%", width: 400 }}
       />,
     )
 
@@ -442,14 +442,14 @@ describe("<BarChart />", () => {
 
   describe("tickLine & gridAxis", () => {
     test("tickLine should be rendered according to tickLine prop", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
+          gridAxis="xy"
           series={series}
           tickLine="xy"
-          gridAxis="xy"
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -461,12 +461,12 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
+          gridAxis="xy"
           series={series}
           tickLine="none"
-          gridAxis="xy"
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -480,12 +480,12 @@ describe("<BarChart />", () => {
     test("if gridAxis is none, tickLine should not be rendered", async () => {
       const { container } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
+          gridAxis="none"
           series={series}
           tickLine="xy"
-          gridAxis="none"
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -497,13 +497,13 @@ describe("<BarChart />", () => {
     })
 
     test("grid should be rendered according to gridAxis", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
-          series={series}
+          dataKey="name"
           gridAxis="xy"
+          series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -515,11 +515,11 @@ describe("<BarChart />", () => {
 
       rerender(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
-          series={series}
+          dataKey="name"
           gridAxis="none"
+          series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -534,11 +534,11 @@ describe("<BarChart />", () => {
   test("unit should be rendered according to unit prop", async () => {
     render(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
         unit="views"
+        containerProps={{ height: "80%", width: 400 }}
       />,
     )
 
@@ -550,15 +550,15 @@ describe("<BarChart />", () => {
   test("should be rendered reference line", async () => {
     const { container } = render(
       <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
         data={data}
+        dataKey="name"
         series={series}
+        containerProps={{ height: "80%", width: 400 }}
         referenceLineProps={[
           {
-            y: 1000,
-            label: "x line",
             color: "red.500",
+            label: "x line",
+            y: 1000,
           },
         ]}
       />,
@@ -577,12 +577,12 @@ describe("<BarChart />", () => {
     test("should be rendered xAxisTickFormatter in x axis", async () => {
       render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={false}
           xAxisTickFormatter={(value) => value.replace("Page", "Page:")}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -593,12 +593,12 @@ describe("<BarChart />", () => {
     test("should be rendered yAxisTickFormatter in y axis", async () => {
       render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={false}
           yAxisTickFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -609,14 +609,14 @@ describe("<BarChart />", () => {
     test("should be rendered valueFormatter in tooltip", async () => {
       const { container } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withTooltip
-          withYAxis={false}
-          withXAxis={false}
           valueFormatter={(value) => `${value} views`}
+          withTooltip
+          withXAxis={false}
+          withYAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -644,14 +644,14 @@ describe("<BarChart />", () => {
     test("should be rendered labelFormatter in tooltip", async () => {
       const { container } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
+          labelFormatter={(value) => value.replace("Page", "Page:")}
           series={series}
           withTooltip
-          withYAxis={false}
           withXAxis={false}
-          labelFormatter={(value) => value.replace("Page", "Page:")}
+          withYAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -677,13 +677,13 @@ describe("<BarChart />", () => {
     test("should be rendered valueFormatter in tooltip with rangeData", async () => {
       const { container } = render(
         <BarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={rangeData}
+          dataKey="name"
           series={series}
+          valueFormatter={(value) => `${value} views`}
           withTooltip
           withYAxis={false}
-          valueFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 

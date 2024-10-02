@@ -1,7 +1,7 @@
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "@yamada-ui/core"
-import { handlerAll, dataAttr, ariaAttr, assignRef } from "@yamada-ui/utils"
-import dayjs from "dayjs"
 import type { KeyboardEvent } from "react"
+import { ariaAttr, assignRef, dataAttr, handlerAll } from "@yamada-ui/utils"
+import dayjs from "dayjs"
 import { useCallback } from "react"
 import { isMonthInRange } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
@@ -12,26 +12,26 @@ export interface UseCalendarHeaderProps {
 
 export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
   const {
-    prevMonth,
-    nextMonth,
-    setMonth,
-    setYear,
-    setInternalYear,
     type,
-    setType,
-    paginateBy,
-    minDate,
-    maxDate,
-    year,
-    month,
-    minYear,
-    maxYear,
-    rangeYears,
     amountOfMonths,
-    typeRef,
-    prevRef,
-    nextRef,
     dayRefs,
+    maxDate,
+    maxYear,
+    minDate,
+    minYear,
+    month,
+    nextMonth,
+    nextRef,
+    paginateBy,
+    prevMonth,
+    prevRef,
+    rangeYears,
+    setInternalYear,
+    setMonth,
+    setType,
+    setYear,
+    typeRef,
+    year,
   } = useCalendarContext()
 
   const onChangeType = useCallback(() => {
@@ -109,7 +109,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
                 return year <= minYear
 
               default:
-                return !isMonthInRange({ date: prevMonth, minDate, maxDate })
+                return !isMonthInRange({ date: prevMonth, maxDate, minDate })
             }
           })()
 
@@ -125,7 +125,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
                 return maxYear <= year
 
               default:
-                return !isMonthInRange({ date: nextMonth, minDate, maxDate })
+                return !isMonthInRange({ date: nextMonth, maxDate, minDate })
             }
           })()
 
@@ -167,7 +167,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
   )
 
   const getControlProps: RequiredPropGetter<
-    HTMLProps<"button"> & { operation: "prev" | "next" },
+    { operation: "next" | "prev" } & HTMLProps<"button">,
     HTMLProps<"button">
   > = useCallback(
     ({ operation, ...props }) => {
@@ -199,12 +199,12 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
             if (isPrev) {
               return (
                 index !== 0 ||
-                !isMonthInRange({ date: prevMonth, minDate, maxDate })
+                !isMonthInRange({ date: prevMonth, maxDate, minDate })
               )
             } else {
               return (
                 index + 1 !== amountOfMonths ||
-                !isMonthInRange({ date: nextMonth, minDate, maxDate })
+                !isMonthInRange({ date: nextMonth, maxDate, minDate })
               )
             }
         }
@@ -213,11 +213,11 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       return {
         "aria-label": ariaLabel,
         ...props,
-        onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
         tabIndex: -1,
-        "data-hidden": dataAttr(isHidden),
-        "data-disabled": dataAttr(isHidden),
         "aria-disabled": ariaAttr(isHidden),
+        "data-disabled": dataAttr(isHidden),
+        "data-hidden": dataAttr(isHidden),
+        onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
       }
     },
     [
@@ -242,9 +242,9 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       return {
         pointerEvents: type !== "year" ? "auto" : "none",
         ...props,
-        onClick: handlerAll(props.onClick, onChangeType),
         tabIndex: !!index ? -1 : 0,
         "aria-live": "polite",
+        onClick: handlerAll(props.onClick, onChangeType),
       }
     },
     [index, onChangeType, type],

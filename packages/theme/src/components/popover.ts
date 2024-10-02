@@ -2,40 +2,40 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Popover: ComponentMultiStyle<"Popover"> = {
   baseStyle: {
+    body: {
+      gap: "sm",
+      my: "sm",
+      px: "sm",
+    },
+    closeButton: {
+      right: "2",
+      top: "2",
+    },
     container: {
-      rounded: "md",
+      _focusVisible: {
+        boxShadow: "outline",
+        outline: 0,
+      },
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      color: "inherit",
       boxShadow: ["lg", "dark-lg"],
+      color: "inherit",
+      rounded: "md",
       zIndex: "guldo",
-      _focusVisible: {
-        outline: 0,
-        boxShadow: "outline",
-      },
-    },
-    closeButton: {
-      top: "2",
-      right: "2",
-    },
-    header: {
-      p: "sm",
-      gap: "sm",
-      fontWeight: "semibold",
-      borderBottom: "1px solid",
-      borderColor: "inherit",
-    },
-    body: {
-      my: "sm",
-      px: "sm",
-      gap: "sm",
     },
     footer: {
-      p: "sm",
-      gap: "sm",
-      borderTop: "1px solid",
       borderColor: "inherit",
+      borderTop: "1px solid",
+      gap: "sm",
+      p: "sm",
+    },
+    header: {
+      borderBottom: "1px solid",
+      borderColor: "inherit",
+      fontWeight: "semibold",
+      gap: "sm",
+      p: "sm",
     },
   },
 }

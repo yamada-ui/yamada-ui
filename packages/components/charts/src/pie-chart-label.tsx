@@ -1,44 +1,44 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx, isUndefined } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
+import { ui } from "@yamada-ui/core"
+import { cx, isUndefined } from "@yamada-ui/utils"
 
 const RADIAN = Math.PI / 180
 const DEFAULT_LABEL_OFFSET = 22
 
 export interface PieChartLabelProps {
+  styles: Dict<CSSUIObject>
   className?: string
   cx?: number
   cy?: number
-  midAngle?: number
   innerRadius?: number
-  outerRadius?: number
+  isPercent?: boolean
+  labelFormatter?: (value: number) => string
+  labelOffset?: number
+  midAngle?: number
   middleRadius?: number
+  outerRadius?: number
   percent?: number
   value?: number
-  labelOffset?: number
-  isPercent?: boolean
   labelProps?: HTMLUIProps<"text">
-  labelFormatter?: (value: number) => string
-  styles: Dict<CSSUIObject>
 }
 
 export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
   className: cellClassName,
   cx: cxProp = 0,
   cy: cyProp = 0,
-  midAngle = 0,
   innerRadius = 0,
-  outerRadius = 0,
-  middleRadius = 0,
-  percent = 0,
-  value = 0,
-  labelOffset: labelOffsetProp,
   isPercent,
-  labelProps,
   labelFormatter,
+  labelOffset: labelOffsetProp,
+  midAngle = 0,
+  middleRadius = 0,
+  outerRadius = 0,
+  percent = 0,
   styles,
+  value = 0,
+  labelProps,
 }) => {
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
@@ -63,10 +63,10 @@ export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
   return (
     <ui.text
       className={cx(cellClassName, "ui-chart__label")}
+      dominantBaseline="central"
+      textAnchor={textAnchor}
       x={x}
       y={y}
-      textAnchor={textAnchor}
-      dominantBaseline="central"
       __css={styles}
       {...labelProps}
     >
@@ -81,17 +81,17 @@ interface Point {
 }
 
 export interface PieChartLabelLineProps {
+  styles: Dict<CSSUIObject>
   className?: string
   cx?: number
   cy?: number
   innerRadius?: number
+  labelOffset?: number
   midAngle?: number
   middleRadius?: number
   outerRadius?: number
   points?: Point[]
-  labelOffset?: number
   labelLineProps?: HTMLUIProps<"path">
-  styles: Dict<CSSUIObject>
 }
 
 export const pieChartLabelLine: (
@@ -101,13 +101,13 @@ export const pieChartLabelLine: (
   cx: cxProp = 0,
   cy: cyProp = 0,
   innerRadius = 0,
+  labelOffset: labelOffsetProp,
   midAngle = 0,
   middleRadius = 0,
   outerRadius = 0,
   points = [{ x: 0, y: 0 }],
-  labelOffset: labelOffsetProp,
-  labelLineProps,
   styles,
+  labelLineProps,
 }) => {
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET

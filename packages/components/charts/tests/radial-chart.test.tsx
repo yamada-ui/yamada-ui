@@ -1,4 +1,4 @@
-import { a11y, render, waitFor, screen, fireEvent } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { RadialChart } from "../src"
 
 describe("<RadialChart />", () => {
@@ -32,19 +32,19 @@ describe("<RadialChart />", () => {
   })
 
   const data = [
-    { name: "chrome", value: 275, color: "blue.500" },
-    { name: "safari", value: 200, color: "red.500" },
-    { name: "firefox", value: 187, color: "orange.500" },
-    { name: "edge", value: 173, color: "violet.500" },
-    { name: "other", value: 90, color: "green.500" },
+    { name: "chrome", color: "blue.500", value: 275 },
+    { name: "safari", color: "red.500", value: 200 },
+    { name: "firefox", color: "orange.500", value: 187 },
+    { name: "edge", color: "violet.500", value: 173 },
+    { name: "other", color: "green.500", value: 90 },
   ]
 
   describe("render", () => {
     test("should pass a11y test", async () => {
       await a11y(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
     })
@@ -52,8 +52,8 @@ describe("<RadialChart />", () => {
     test("radial bars should be rendered", async () => {
       const { container } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -65,11 +65,11 @@ describe("<RadialChart />", () => {
     })
 
     test("polar-grid should be rendered according to withPolarGrid", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withPolarGrid={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -81,9 +81,9 @@ describe("<RadialChart />", () => {
 
       rerender(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withPolarGrid={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -99,10 +99,10 @@ describe("<RadialChart />", () => {
     test("labelLists should be rendered", async () => {
       const { rerender } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
-          labelListProps={[{ dataKey: "name" }]}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
+          labelListProps={[{ dataKey: "name" }]}
         />,
       )
 
@@ -112,9 +112,9 @@ describe("<RadialChart />", () => {
 
       rerender(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -128,11 +128,11 @@ describe("<RadialChart />", () => {
 
   describe("tooltip & legend", () => {
     test("should be rendered according to withTooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -159,9 +159,9 @@ describe("<RadialChart />", () => {
 
       rerender(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -185,12 +185,12 @@ describe("<RadialChart />", () => {
     })
 
     test("legend should be rendered according to withLegend", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLegend={true}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -206,10 +206,10 @@ describe("<RadialChart />", () => {
 
       rerender(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLegend={false}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -229,9 +229,9 @@ describe("<RadialChart />", () => {
     test("valueFormatter should function properly in tooltip", async () => {
       const { container } = render(
         <RadialChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           valueFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 

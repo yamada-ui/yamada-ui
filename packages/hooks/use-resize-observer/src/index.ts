@@ -4,14 +4,14 @@ import { useEffect, useMemo, useRef, useState } from "react"
 export interface ObserverRect extends Omit<DOMRectReadOnly, "toJSON"> {}
 
 const defaultRect: ObserverRect = {
+  bottom: 0,
+  height: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+  width: 0,
   x: 0,
   y: 0,
-  width: 0,
-  height: 0,
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
 }
 
 /**
@@ -54,7 +54,7 @@ export const useResizeObserver = <T extends HTMLElement = any>() => {
 }
 
 export const useElementSize = <T extends HTMLElement = any>() => {
-  const [ref, { width, height }] = useResizeObserver<T>()
+  const [ref, { height, width }] = useResizeObserver<T>()
 
-  return { ref, width, height }
+  return { ref, height, width }
 }

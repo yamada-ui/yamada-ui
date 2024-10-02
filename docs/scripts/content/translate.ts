@@ -1,23 +1,23 @@
-import { existsSync } from "fs"
-import { readFile, readdir, writeFile } from "fs/promises"
+import type { ChatCompletionMessageParam } from "openai/resources"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
-import type { ChatCompletionMessageParam } from "openai/resources"
+import { existsSync } from "fs"
+import { readdir, readFile, writeFile } from "fs/promises"
 import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
 import { wait } from "utils/async"
 import { getResolvedPath } from "utils/path"
 
 const LOCALE_MAP = {
-  ja: "Japanese",
   en: "English",
+  ja: "Japanese",
 } as const
 
 interface Option {
-  out?: string
   locale?: keyof typeof LOCALE_MAP
   logs?: boolean
+  out?: string
 }
 
 const getPaths = async (
@@ -75,7 +75,7 @@ const extractCodeBlocks = (content: string) => {
     return `CODEBLOCK_PLACEHOLDER_${index}`
   })
 
-  return { resolvedContent, codeBlocks, placeholders }
+  return { codeBlocks, placeholders, resolvedContent }
 }
 
 const restoreCodeBlocks = (
@@ -99,12 +99,11 @@ const translateContent = async (
     const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
     const to = `to ${LOCALE_MAP[locale]}`
 
-    const { resolvedContent, codeBlocks, placeholders } =
+    const { codeBlocks, placeholders, resolvedContent } =
       extractCodeBlocks(content)
 
     const messages: ChatCompletionMessageParam[] = [
       {
-        role: "system",
         content: [
           `Please translate the text of the mdx file that I will send you ${from} ${to}. Please note the following points:`,
           `- The text you send will be saved as mdx. Therefore, except for the text to be translated, please output the contents of the sent mdx file as is.`,
@@ -112,13 +111,14 @@ const translateContent = async (
           // Exception handling:
           `- For short sentences, use "Usage" instead of "How to Use" as much as possible.  Also, when prompting for a hyperlink, use "please check [<page-title> or 'here'](<url>)".`,
         ].join("\n"),
+        role: "system",
       },
-      { role: "user", content: resolvedContent },
+      { content: resolvedContent, role: "user" },
     ]
 
     const { choices } = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
       messages,
+      model: "gpt-4-1106-preview",
       temperature: 0,
     })
 
@@ -141,7 +141,7 @@ program
   .option("-o, --out <path>")
   .option("-l, --locale <locale>")
   .action(
-    async (targetPath: string, { out: outPath, locale = "en" }: Option) => {
+    async (targetPath: string, { locale = "en", out: outPath }: Option) => {
       p.intro(c.magenta(`Generating translate contents`))
 
       const s = p.spinner()

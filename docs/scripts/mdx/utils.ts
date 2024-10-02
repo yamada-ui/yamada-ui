@@ -1,7 +1,7 @@
-import path from "path"
-import GithubSlugger from "github-slugger"
+import type { Document, DocumentContent, DocumentLevel } from "mdx"
 import { CONSTANT } from "constant"
-import type { DocumentContent, DocumentLevel, Document } from "mdx"
+import GithubSlugger from "github-slugger"
+import path from "path"
 import { otherLocales } from "utils/i18n"
 
 export type EventName = "add" | "addDir" | "change" | "unlink" | "unlinkDir"
@@ -58,7 +58,7 @@ export function getTableOfContents(
           .matchAll(/<PropsCard\s+[^>]*?name="([^"]+)"/g),
       ]
 
-      let results: DocumentContent[] = [{ id, title, lv }]
+      let results: DocumentContent[] = [{ id, lv, title }]
 
       if (propMatches.length) {
         const props = propMatches.map((match) => {
@@ -66,8 +66,8 @@ export function getTableOfContents(
 
           return {
             id: `${id.replace("props", "")}-${title.toLowerCase()}`,
-            title,
             lv: (lv + 1) as DocumentLevel,
+            title,
           }
         })
 

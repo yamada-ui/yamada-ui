@@ -1,26 +1,3 @@
-import type { FC, ReactNode } from "react"
-import { useEffect } from "react"
-import { useDarkMode } from "storybook-dark-mode"
-import {
-  Box,
-  Container,
-  FormControl,
-  HStack,
-  SEMANTIC_COLOR_SCHEMES,
-  COLOR_SCHEMES,
-  SegmentedControl,
-  Select,
-  Slider,
-  SliderThumb,
-  Switch,
-  Text,
-  Tooltip,
-  UIProvider,
-  VStack,
-  isArray,
-  useColorMode,
-  useDisclosure,
-} from "@yamada-ui/react"
 import type {
   ContainerProps,
   Dict,
@@ -31,6 +8,29 @@ import type {
   SwitchProps,
   ThemeProps,
 } from "@yamada-ui/react"
+import type { FC, ReactNode } from "react"
+import {
+  Box,
+  COLOR_SCHEMES,
+  Container,
+  FormControl,
+  HStack,
+  isArray,
+  SegmentedControl,
+  Select,
+  SEMANTIC_COLOR_SCHEMES,
+  Slider,
+  SliderThumb,
+  Switch,
+  Text,
+  Tooltip,
+  UIProvider,
+  useColorMode,
+  useDisclosure,
+  VStack,
+} from "@yamada-ui/react"
+import { useEffect } from "react"
+import { useDarkMode } from "storybook-dark-mode"
 
 export const colorSchemes = [...SEMANTIC_COLOR_SCHEMES, ...COLOR_SCHEMES]
 
@@ -78,16 +78,16 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, tone, value }) => {
     <HStack key={tone}>
       <Box
         bg={tone ? `${name}.${tone}` : name}
-        minW="12"
-        minH="12"
-        rounded="md"
         boxShadow="inner"
+        minH="12"
+        minW="12"
+        rounded="md"
       />
       <VStack gap="1">
-        <Text m="0" fontWeight="semibold" lineClamp={1}>
+        <Text fontWeight="semibold" lineClamp={1} m="0">
           {name.charAt(0).toUpperCase() + name.slice(1)} {tone}
         </Text>
-        <Text m="0" lineClamp={1}>
+        <Text lineClamp={1} m="0">
           {!isArray(value)
             ? value
             : colorMode === "light"
@@ -99,7 +99,7 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, tone, value }) => {
   )
 }
 
-type PropControlComponent = "Select" | "SegmentedControl" | "Slider" | "Switch"
+type PropControlComponent = "SegmentedControl" | "Select" | "Slider" | "Switch"
 
 type PropControlItem<K extends PropControlComponent> = {
   label: string
@@ -118,14 +118,14 @@ export type PropControlProps<K extends PropControlComponent> = {
   ThemeProps<K>
 
 export const PropControl = <K extends PropControlComponent = "Switch">({
-  component,
-  variant,
-  size,
   colorScheme,
+  component,
   items,
+  size,
+  variant,
   ...rest
 }: PropControlProps<K>) => {
-  const props = { variant, size, colorScheme }
+  const props = { colorScheme, size, variant }
 
   return (
     <VStack w="auto" {...rest}>
@@ -150,7 +150,7 @@ const PropControlItem = <K extends PropControlComponent>({
   item,
 }: PropControlItemProps<K>) => {
   const { label, ...rest } = item
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   switch (component) {
     case "Select":
@@ -175,7 +175,7 @@ const PropControlItem = <K extends PropControlComponent>({
             onMouseLeave={onClose}
             {...(rest as SliderProps)}
           >
-            <Tooltip placement="top" label={rest.value} isOpen={isOpen}>
+            <Tooltip isOpen={isOpen} label={rest.value} placement="top">
               <SliderThumb />
             </Tooltip>
           </Slider>

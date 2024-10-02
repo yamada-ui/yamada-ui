@@ -1,18 +1,18 @@
 import type { Linter } from "eslint"
-import pluginReact from "eslint-plugin-react"
+import reactPlugin from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
 
 export const reactConfig: Linter.Config = {
   name: "eslint/react",
   files: sharedFiles,
-  plugins: { react: pluginReact },
+  plugins: { react: reactPlugin },
   rules: {
-    ...pluginReact.configs.recommended.rules,
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/no-unescaped-entities": "off",
+    ...reactPlugin.configs.recommended.rules,
     "react/jsx-curly-brace-presence": "error",
     "react/jsx-no-leaked-render": "error",
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
   },
   settings: { react: { version: "detect" } },
 }

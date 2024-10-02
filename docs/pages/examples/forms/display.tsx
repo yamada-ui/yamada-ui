@@ -1,9 +1,9 @@
-import { FormControl, CheckboxGroup, HelperMessage } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
-import { Controller, useForm } from "react-hook-form"
 import type { SubmitHandler } from "react-hook-form"
+import { CheckboxGroup, FormControl, HelperMessage } from "@yamada-ui/react"
+import { memo } from "react"
+import { Controller, useForm } from "react-hook-form"
 import { Form } from "./form"
 
 const SIDEBAR_ITEMS = [
@@ -32,17 +32,17 @@ export const Display: FC<DisplayProps> = memo(({ ...rest }) => {
 
   return (
     <Form
-      title="Display"
       description="Turn items on or off to control what's displayed in the app."
       submit="Update display"
+      title="Display"
       onSubmit={handleSubmit(onSubmit)}
       {...rest}
     >
       <FormControl
-        label="Sidebar"
-        isReplace={false}
-        isInvalid={!!errors.sidebar?.message}
         errorMessage={errors.sidebar?.message}
+        isInvalid={!!errors.sidebar?.message}
+        isReplace={false}
+        label="Sidebar"
       >
         <HelperMessage mb="sm">
           Select the items you want to display in the sidebar.
@@ -51,10 +51,10 @@ export const Display: FC<DisplayProps> = memo(({ ...rest }) => {
         <Controller
           name="sidebar"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <CheckboxGroup items={SIDEBAR_ITEMS} {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
     </Form>

@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react"
 
 export interface UseStepsProps {
-  index?: number
   count?: number
+  index?: number
 }
 
-export const useSteps = ({ index = 0, count }: UseStepsProps) => {
+export const useSteps = ({ count, index = 0 }: UseStepsProps) => {
   const [activeStep, setActiveStep] = useState(index)
 
   const maxStep = typeof count === "number" ? count - 1 : 0
@@ -27,7 +27,7 @@ export const useSteps = ({ index = 0, count }: UseStepsProps) => {
   )
 
   const getStepStatus = useCallback(
-    (step: number): "complete" | "active" | "incomplete" => {
+    (step: number): "active" | "complete" | "incomplete" => {
       if (step < activeStep) return "complete"
       if (step > activeStep) return "incomplete"
 
@@ -51,12 +51,12 @@ export const useSteps = ({ index = 0, count }: UseStepsProps) => {
 
   return {
     activeStep,
-    setActiveStep,
     activeStepPercent,
+    getStepStatus,
     isActiveStep,
     isCompleteStep,
     isIncompleteStep,
-    getStepStatus,
+    setActiveStep,
     onStepNext,
     onStepPrev,
   }

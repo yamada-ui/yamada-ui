@@ -1,4 +1,4 @@
-type Status = "loaded" | "error"
+type Status = "error" | "loaded"
 
 const originalImage = window.Image
 
@@ -36,12 +36,12 @@ export function image() {
   }
 
   return {
-    simulate(value: Status) {
-      status = value
-    },
-
     restore() {
       window.Image = originalImage
+    },
+
+    simulate(value: Status) {
+      status = value
     },
   }
 }

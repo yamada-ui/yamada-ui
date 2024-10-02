@@ -1,6 +1,6 @@
-import { Divider, HStack, VStack, assignRef, noop } from "@yamada-ui/react"
-import { memo, useCallback, useRef, useState } from "react"
 import type { FC, MutableRefObject } from "react"
+import { assignRef, Divider, HStack, noop, VStack } from "@yamada-ui/react"
+import { memo, useCallback, useRef, useState } from "react"
 import { Account } from "./account"
 import { Appearance } from "./appearance"
 import { Display } from "./display"
@@ -10,11 +10,11 @@ import { Profile } from "./profile"
 import { Sidebar } from "./sidebar"
 
 export type FormType =
-  | "profile"
   | "account"
   | "appearance"
-  | "notifications"
   | "display"
+  | "notifications"
+  | "profile"
 
 export const DEFAULT_FORM_TYPE: FormType = "profile"
 
@@ -29,16 +29,16 @@ export const Forms = memo(() => {
   return (
     <VStack
       as="section"
-      divider={<Divider />}
       borderBottomWidth="1px"
-      p={{ base: "lg", sm: "md" }}
+      divider={<Divider />}
       gap={{ base: "lg", sm: "md" }}
+      p={{ base: "lg", sm: "md" }}
     >
       <Header />
 
       <HStack
-        flexDirection={{ base: "row", md: "column" }}
         alignItems="flex-start"
+        flexDirection={{ base: "row", md: "column" }}
         gap={{ base: "lg", sm: "md" }}
       >
         <Sidebar onChangeType={onChangeType} />

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { getConstant, verifySignature } from "utils/github"
 import { pullRequest } from "./pull-request"
 import { pullRequestReview } from "./pull-request-review"
-import { getConstant, verifySignature } from "utils/github"
 
 const actions = {
   pull_request: pullRequest,
@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await verifySignature(req)
   } catch {
-    return res.status(400).send({ status: 400, message: "Invalid signature" })
+    return res.status(400).send({ message: "Invalid signature", status: 400 })
   }
 
   const constant = await getConstant()
@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const action = req.body.action
   const handler = getEventHandler(event, action)
 
-  await handler?.({ req, res, constant })
+  await handler?.({ constant, req, res })
 
   res.status(200).end()
 }

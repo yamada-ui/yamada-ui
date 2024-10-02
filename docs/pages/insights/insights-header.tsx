@@ -1,3 +1,7 @@
+import type { StackProps } from "@yamada-ui/react"
+import type { ManipulateType } from "dayjs"
+import type { FC } from "react"
+import type { InsightPeriodSuggest, InsightUserSuggest } from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import {
   Box,
@@ -10,24 +14,20 @@ import {
   useDisclosure,
   VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
-import type { ManipulateType } from "dayjs"
+import { useI18n } from "contexts"
 import dayjs from "dayjs"
 import { useRouter } from "next/router"
-import type { FC } from "react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { useInsights } from "./insights-provider"
-import type { InsightPeriodSuggest, InsightUserSuggest } from "./insights-utils"
 import {
-  INSIGHT_PERIOD_SUGGEST,
-  INSIGHT_USER_IDS,
-  INSIGHT_MIN_DATE,
-  INSIGHT_USER_SUGGEST,
-  INSIGHT_MEMBERS_IDS,
   INSIGHT_MAINTAINERS_IDS,
   INSIGHT_MAX_DATE,
+  INSIGHT_MEMBERS_IDS,
+  INSIGHT_MIN_DATE,
+  INSIGHT_PERIOD_SUGGEST,
+  INSIGHT_USER_IDS,
+  INSIGHT_USER_SUGGEST,
 } from "./insights-utils"
-import { useI18n } from "contexts"
 import "dayjs/locale/ja"
 
 export interface InsightsHeaderProps extends StackProps {}
@@ -39,17 +39,17 @@ export const InsightsHeader = memo(
     return (
       <HStack
         ref={ref}
-        w="full"
+        alignItems={{ base: "center", md: "flex-start" }}
         flexDirection={{ base: "row", md: "column" }}
         justifyContent="space-between"
-        alignItems={{ base: "center", md: "flex-start" }}
+        w="full"
         {...rest}
       >
         <Heading>{t("insights.title")}</Heading>
 
         <HStack
-          w={{ base: "auto", md: "full" }}
           flexDirection={{ base: "row", md: "column" }}
+          w={{ base: "auto", md: "full" }}
         >
           <UserSelect />
           <PeriodSelect />
@@ -66,8 +66,8 @@ interface UserSelectProps {}
 const UserSelect: FC<UserSelectProps> = memo(() => {
   const { t } = useI18n()
   const router = useRouter()
-  const { users, setUsers } = useInsights()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { setUsers, users } = useInsights()
+  const { isOpen, onClose, onOpen } = useDisclosure()
   const count = users.length
   const isExceeded = count > 1
 
@@ -114,17 +114,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
 
   return (
     <MultiAutocomplete
-      w={{ base: "64", md: "full" }}
-      items={items}
-      value={users}
-      onChange={onChange}
-      clearIconProps={{
-        onClick: () => onChange([]),
-      }}
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      component={({ label, index }) => {
+      component={({ index, label }) => {
         const isLast = count === index + 1
 
         if (isExceeded && !isLast) return null
@@ -139,10 +129,10 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
       footer={
         <Box px="sm">
           <VStack
-            py="sm"
-            gap="sm"
-            borderTopWidth="1px"
             borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+            borderTopWidth="1px"
+            gap="sm"
+            py="sm"
           >
             {INSIGHT_USER_SUGGEST.map((value) => {
               return (
@@ -150,16 +140,16 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
                   key={value}
                   as="button"
                   type="button"
-                  w="full"
-                  h="8"
-                  fontSize="sm"
-                  bg={["blackAlpha.100", "whiteAlpha.100"]}
                   _hover={{
                     bg: ["blackAlpha.200", "whiteAlpha.200"],
                   }}
+                  bg={["blackAlpha.100", "whiteAlpha.100"]}
+                  fontSize="sm"
+                  h="8"
                   rounded="md"
-                  transitionProperty="background"
                   transitionDuration="slower"
+                  transitionProperty="background"
+                  w="full"
                   onClick={() => onSuggestChange(value)}
                 >
                   {t(`insights.user.${value}`)}
@@ -169,6 +159,16 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
           </VStack>
         </Box>
       }
+      isOpen={isOpen}
+      items={items}
+      value={users}
+      w={{ base: "64", md: "full" }}
+      clearIconProps={{
+        onClick: () => onChange([]),
+      }}
+      onChange={onChange}
+      onClose={onClose}
+      onOpen={onOpen}
     />
   )
 })
@@ -178,7 +178,7 @@ UserSelect.displayName = "UserSelect"
 interface PeriodSelectProps {}
 
 const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
-  const { t, locale } = useI18n()
+  const { locale, t } = useI18n()
   const router = useRouter()
   const { period, onChangePeriod } = useInsights()
   const defaultValue: [(Date | undefined)?, (Date | undefined)?] = [
@@ -189,7 +189,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
     useRef<[(Date | undefined)?, (Date | undefined)?]>(defaultValue)
   const [value, onChange] =
     useState<[(Date | undefined)?, (Date | undefined)?]>(defaultValue)
-  const { isOpen, onOpen, onClose } = useDisclosure({
+  const { isOpen, onClose, onOpen } = useDisclosure({
     onClose: () => onChangeQuery(valueRef.current),
   })
 
@@ -257,29 +257,29 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
 
   return (
     <RangeDatePicker
-      w={{ base: "64", md: "full" }}
-      startInputProps={{ overflowX: "hidden" }}
-      endInputProps={{ overflowX: "hidden" }}
+      dateFormat={locale === "ja" ? "YYYY年 MMMM" : undefined}
+      isClearable={false}
+      isOpen={isOpen}
+      locale={locale}
+      maxDate={INSIGHT_MAX_DATE}
+      minDate={INSIGHT_MIN_DATE}
       value={value}
+      w={{ base: "64", md: "full" }}
+      yearFormat={locale === "ja" ? "YYYY年" : undefined}
+      endInputProps={{ overflowX: "hidden" }}
+      startInputProps={{ overflowX: "hidden" }}
       onChange={(value) => {
         valueRef.current = value
         onChange(value)
       }}
-      locale={locale}
-      dateFormat={locale === "ja" ? "YYYY年 MMMM" : undefined}
-      yearFormat={locale === "ja" ? "YYYY年" : undefined}
-      minDate={INSIGHT_MIN_DATE}
-      maxDate={INSIGHT_MAX_DATE}
-      isClearable={false}
-      isOpen={isOpen}
-      onOpen={onOpen}
       onClose={onClose}
+      onOpen={onOpen}
     >
       <VStack
-        pt="sm"
-        gap="sm"
-        borderTopWidth="1px"
         borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+        borderTopWidth="1px"
+        gap="sm"
+        pt="sm"
       >
         {INSIGHT_PERIOD_SUGGEST.map((value) => {
           return (
@@ -287,16 +287,16 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
               key={value}
               as="button"
               type="button"
-              w="full"
-              h="8"
-              fontSize="sm"
-              bg={["blackAlpha.100", "whiteAlpha.100"]}
               _hover={{
                 bg: ["blackAlpha.200", "whiteAlpha.200"],
               }}
+              bg={["blackAlpha.100", "whiteAlpha.100"]}
+              fontSize="sm"
+              h="8"
               rounded="md"
-              transitionProperty="background"
               transitionDuration="slower"
+              transitionProperty="background"
+              w="full"
               onClick={() => onSuggestChange(value)}
             >
               {t(`insights.period.${value}`)}

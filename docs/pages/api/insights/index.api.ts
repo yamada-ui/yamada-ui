@@ -1,8 +1,8 @@
-import { isInRange } from "@yamada-ui/calendar"
-import dayjs from "dayjs"
-import type { Insights, UserInsights, InsightSummarize } from "insights"
+import type { Insights, InsightSummarize, UserInsights } from "insights"
 import type { NextApiRequest, NextApiResponse } from "next"
+import { isInRange } from "@yamada-ui/calendar"
 import { CONSTANT } from "constant"
+import dayjs from "dayjs"
 
 const getData = async (): Promise<Insights> => {
   const res = await fetch(
@@ -89,7 +89,7 @@ const getSummarizeInsights = (
           } else {
             if (!summarizedInsights[id]) summarizedInsights[id] = {}
 
-            const { comments, reviews, issues, pullRequests, approved } = data
+            const { approved, comments, issues, pullRequests, reviews } = data
 
             if (comments) {
               summarizedInsights[id].comments = [
@@ -159,15 +159,15 @@ const getInsights = (
 }
 
 interface RequestQuery {
-  start?: string
   end?: string
+  start?: string
   summarize?: InsightSummarize
 }
 
 interface ResponseData {
   status: number
-  message?: string
   data?: { currentInsights: Insights; prevInsights: Insights }
+  message?: string
 }
 
 const handler = async (
@@ -175,7 +175,7 @@ const handler = async (
   res: NextApiResponse<ResponseData>,
 ) => {
   try {
-    const { start, end, summarize } = (query ?? {}) as RequestQuery
+    const { end, start, summarize } = (query ?? {}) as RequestQuery
 
     if (!start || !end) throw new Error("Invalid parameters")
 
@@ -196,10 +196,10 @@ const handler = async (
 
     res
       .status(200)
-      .json({ status: 200, data: { currentInsights, prevInsights } })
+      .json({ data: { currentInsights, prevInsights }, status: 200 })
   } catch (e) {
     if (e instanceof Error) {
-      return res.status(400).send({ status: 400, message: e.message })
+      return res.status(400).send({ message: e.message, status: 400 })
     }
   }
 }

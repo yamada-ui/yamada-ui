@@ -2,47 +2,52 @@ import type {
   ThemeProviderProps as EmotionThemeProviderProps,
   Interpolation,
 } from "@emotion/react"
+import type { Dict } from "@yamada-ui/utils"
+import type { FC } from "react"
+import type { StyledProps, UIStyle } from "../css"
+import type {
+  ChangeThemeScheme,
+  InternalTheme,
+  StyledTheme,
+  Theme,
+  ThemeConfig,
+} from "../theme.types"
+import type { ThemeSchemeManager } from "./theme-manager"
 import {
+  ThemeProvider as EmotionThemeProvider,
   Global,
   ThemeContext,
-  ThemeProvider as EmotionThemeProvider,
 } from "@emotion/react"
-import type { Dict } from "@yamada-ui/utils"
 import {
-  runIfFunc,
   getMemoizedObject as get,
   isUndefined,
   merge,
+  runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC } from "react"
-import { useMemo, useContext, useState, useCallback, useEffect } from "react"
-import type { StyledProps, UIStyle } from "../css"
+import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { css } from "../css"
 import { transformTheme } from "../theme"
-import type {
-  ChangeThemeScheme,
-  StyledTheme,
-  ThemeConfig,
-  Theme,
-  InternalTheme,
-} from "../theme.types"
 import { useColorMode } from "./color-mode-provider"
 import { useEnvironment } from "./environment-provider"
 import { preventTransition } from "./provider-utils"
-import type { ThemeSchemeManager } from "./theme-manager"
 import { themeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 
 interface ThemeProviderOptions {
   /**
-   * The theme of the yamada ui.
-   */
-  theme?: Dict
-  /**
    * The config of the yamada ui.
    */
   config?: ThemeConfig
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  storageKey?: string
+  /**
+   * The theme of the yamada ui.
+   */
+  theme?: Dict
   /**
    * Manager to persist a user's theme scheme preference.
    *
@@ -52,11 +57,6 @@ interface ThemeProviderOptions {
    * @default 'themeSchemeManager.localStorage'
    */
   themeSchemeManager?: ThemeSchemeManager
-  /**
-   * Key of value saved in storage.
-   * By default, it is saved to `local storage`.
-   */
-  storageKey?: string
 }
 
 export interface ThemeProviderProps
@@ -64,11 +64,11 @@ export interface ThemeProviderProps
     ThemeProviderOptions {}
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
-  theme: initialTheme = {},
-  config,
-  themeSchemeManager = localStorage,
-  storageKey,
   children,
+  config,
+  storageKey,
+  theme: initialTheme = {},
+  themeSchemeManager = localStorage,
 }) => {
   const environment = useEnvironment()
   const [themeScheme, setThemeScheme] = useState<Theme["themeSchemes"]>(
@@ -107,7 +107,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   }, [changeThemeScheme, themeSchemeManager, storageKey])
 
   return (
-    <EmotionThemeProvider theme={{ themeScheme, changeThemeScheme, ...theme }}>
+    <EmotionThemeProvider theme={{ changeThemeScheme, themeScheme, ...theme }}>
       <CSSVars />
       {children}
     </EmotionThemeProvider>
@@ -137,8 +137,8 @@ export const ResetStyle: FC = () => {
           let style = get<UIStyle>(theme, "styles.resetStyle", {})
 
           const computedStyle = runIfFunc(style, {
-            theme,
             colorMode,
+            theme,
             themeScheme,
           })
 
@@ -162,8 +162,8 @@ export const GlobalStyle: FC = () => {
           let style = get<UIStyle>(theme, "styles.globalStyle", {})
 
           const computedStyle = runIfFunc(style, {
-            theme,
             colorMode,
+            theme,
             themeScheme,
           })
 
@@ -197,9 +197,9 @@ export const useTheme = <T extends InternalTheme>() => {
   }, [internalTheme])
 
   const value = useMemo(() => {
-    const { themeScheme, changeThemeScheme } = internalTheme
+    const { changeThemeScheme, themeScheme } = internalTheme
 
-    return { themeScheme, changeThemeScheme, theme, internalTheme }
+    return { changeThemeScheme, internalTheme, theme, themeScheme }
   }, [theme, internalTheme])
 
   return value

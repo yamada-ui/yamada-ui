@@ -1,9 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import type { MultiDatePickerProps } from "@yamada-ui/calendar"
+import type { SubmitHandler } from "react-hook-form"
 import { MultiDatePicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import {
@@ -14,13 +11,16 @@ import {
   Tag,
   VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MultiDatePicker>
 
 const meta: Meta<typeof MultiDatePicker> = {
-  title: "Components / Forms / MultiDatePicker",
   component: MultiDatePicker,
+  title: "Components / Forms / MultiDatePicker",
 }
 
 export default meta
@@ -65,9 +65,9 @@ export const withSize: Story = () => {
 export const withCalendarSize: Story = () => {
   return (
     <>
-      <MultiDatePicker placeholder="small size" calendarSize="sm" />
-      <MultiDatePicker placeholder="medium size" calendarSize="md" />
-      <MultiDatePicker placeholder="large size" calendarSize="lg" />
+      <MultiDatePicker calendarSize="sm" placeholder="small size" />
+      <MultiDatePicker calendarSize="md" placeholder="medium size" />
+      <MultiDatePicker calendarSize="lg" placeholder="large size" />
     </>
   )
 }
@@ -75,10 +75,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MultiDatePicker variant="outline" placeholder="outline" />
-      <MultiDatePicker variant="filled" placeholder="filled" />
-      <MultiDatePicker variant="flushed" placeholder="flushed" />
-      <MultiDatePicker variant="unstyled" placeholder="unstyled" />
+      <MultiDatePicker placeholder="outline" variant="outline" />
+      <MultiDatePicker placeholder="filled" variant="filled" />
+      <MultiDatePicker placeholder="flushed" variant="flushed" />
+      <MultiDatePicker placeholder="unstyled" variant="unstyled" />
     </>
   )
 }
@@ -88,28 +88,28 @@ export const withColorScheme: Story = () => {
     <>
       <Heading size="xl">Solid</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <MultiDatePicker
             key={colorScheme}
-            calendarVariant="solid"
             calendarColorScheme={colorScheme}
-            today
+            calendarVariant="solid"
             defaultValue={[new Date(new Date().setDate(1))]}
+            today
           />
         ))}
       </Grid>
 
       <Heading size="xl">Subtle</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <MultiDatePicker
             key={colorScheme}
-            calendarVariant="subtle"
             calendarColorScheme={colorScheme}
-            today
+            calendarVariant="subtle"
             defaultValue={[new Date(new Date().setDate(1))]}
+            today
           />
         ))}
       </Grid>
@@ -124,11 +124,11 @@ export const withDefaultValue: Story = () => {
 export const withDefaultType: Story = () => {
   return (
     <>
-      <MultiDatePicker placeholder="date" defaultType="date" />
+      <MultiDatePicker defaultType="date" placeholder="date" />
 
-      <MultiDatePicker placeholder="month" defaultType="month" />
+      <MultiDatePicker defaultType="month" placeholder="month" />
 
-      <MultiDatePicker placeholder="year" defaultType="year" />
+      <MultiDatePicker defaultType="year" placeholder="year" />
     </>
   )
 }
@@ -136,8 +136,8 @@ export const withDefaultType: Story = () => {
 export const withDefaultMonth: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       defaultMonth={new Date("1993-08-18")}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -145,9 +145,9 @@ export const withDefaultMonth: Story = () => {
 export const withFirstDayOfWeek: Story = () => {
   return (
     <>
-      <MultiDatePicker placeholder="monday" firstDayOfWeek="monday" />
+      <MultiDatePicker firstDayOfWeek="monday" placeholder="monday" />
 
-      <MultiDatePicker placeholder="sunday" firstDayOfWeek="sunday" />
+      <MultiDatePicker firstDayOfWeek="sunday" placeholder="sunday" />
     </>
   )
 }
@@ -163,8 +163,8 @@ export const withBorderColor: Story = () => {
       />
 
       <MultiDatePicker
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -176,22 +176,22 @@ export const withSeparator: Story = () => {
 }
 
 export const withKeepPlaceholder: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" keepPlaceholder />
+  return <MultiDatePicker keepPlaceholder placeholder="YYYY/MM/DD" />
 }
 
 export const withComponent: Story = () => {
   return (
     <>
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         component={({ label }) => <Tag>{label}</Tag>}
+        placeholder="YYYY/MM/DD"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         component={({ label, onRemove }) => (
           <Tag onClose={onRemove}>{label}</Tag>
         )}
+        placeholder="YYYY/MM/DD"
       />
     </>
   )
@@ -204,24 +204,24 @@ export const withMaxSelectValues: Story = () => {
 export const withPattern: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="MMMM D, YYYY"
+      defaultValue={[new Date()]}
       inputFormat="MMMM D, YYYY"
       pattern={/[^\w, ]/g}
-      defaultValue={[new Date()]}
+      placeholder="MMMM D, YYYY"
     />
   )
 }
 
 export const withInputFormat: Story = () => {
-  return <MultiDatePicker placeholder="YYYY-MM-DD" inputFormat="YYYY-MM-DD" />
+  return <MultiDatePicker inputFormat="YYYY-MM-DD" placeholder="YYYY-MM-DD" />
 }
 
 export const withParseDate: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       inputFormat="YYYY/MM/DD"
       parseDate={(value) => new Date(value)}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -231,24 +231,24 @@ export const withPlacement: Story = () => {
 }
 
 export const withOffset: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" offset={[16, 16]} />
+  return <MultiDatePicker offset={[16, 16]} placeholder="YYYY/MM/DD" />
 }
 
 export const withGutter: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" gutter={32} />
+  return <MultiDatePicker gutter={32} placeholder="YYYY/MM/DD" />
 }
 
 export const withDuration: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" duration={0.4} />
+  return <MultiDatePicker duration={0.4} placeholder="YYYY/MM/DD" />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <MultiDatePicker isDisabled variant="outline" placeholder="outline" />
-      <MultiDatePicker isDisabled variant="filled" placeholder="filled" />
-      <MultiDatePicker isDisabled variant="flushed" placeholder="flushed" />
-      <MultiDatePicker isDisabled variant="unstyled" placeholder="unstyled" />
+      <MultiDatePicker isDisabled placeholder="outline" variant="outline" />
+      <MultiDatePicker isDisabled placeholder="filled" variant="filled" />
+      <MultiDatePicker isDisabled placeholder="flushed" variant="flushed" />
+      <MultiDatePicker isDisabled placeholder="unstyled" variant="unstyled" />
 
       <FormControl isDisabled label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -260,10 +260,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MultiDatePicker isReadOnly variant="outline" placeholder="outline" />
-      <MultiDatePicker isReadOnly variant="filled" placeholder="filled" />
-      <MultiDatePicker isReadOnly variant="flushed" placeholder="flushed" />
-      <MultiDatePicker isReadOnly variant="unstyled" placeholder="unstyled" />
+      <MultiDatePicker isReadOnly placeholder="outline" variant="outline" />
+      <MultiDatePicker isReadOnly placeholder="filled" variant="filled" />
+      <MultiDatePicker isReadOnly placeholder="flushed" variant="flushed" />
+      <MultiDatePicker isReadOnly placeholder="unstyled" variant="unstyled" />
 
       <FormControl isReadOnly label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -275,15 +275,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MultiDatePicker isInvalid variant="outline" placeholder="outline" />
-      <MultiDatePicker isInvalid variant="filled" placeholder="filled" />
-      <MultiDatePicker isInvalid variant="flushed" placeholder="flushed" />
-      <MultiDatePicker isInvalid variant="unstyled" placeholder="unstyled" />
+      <MultiDatePicker isInvalid placeholder="outline" variant="outline" />
+      <MultiDatePicker isInvalid placeholder="filled" variant="filled" />
+      <MultiDatePicker isInvalid placeholder="flushed" variant="flushed" />
+      <MultiDatePicker isInvalid placeholder="unstyled" variant="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="What date would you like to reserve?"
-        errorMessage="This is required."
       >
         <MultiDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
@@ -294,9 +294,9 @@ export const isInvalid: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
-      minDate={new Date(new Date().setDate(1))}
       maxDate={new Date(new Date().setDate(18))}
+      minDate={new Date(new Date().setDate(1))}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -304,10 +304,10 @@ export const withMinMaxDate: Story = () => {
 export const withAllowInputBeyond: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
-      minDate={new Date(new Date().setDate(1))}
-      maxDate={new Date(new Date().setDate(18))}
       allowInputBeyond
+      maxDate={new Date(new Date().setDate(18))}
+      minDate={new Date(new Date().setDate(1))}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -378,14 +378,14 @@ export const withHolidays: Story = () => {
     new Date("2024-11-23"),
   ]
 
-  return <MultiDatePicker placeholder="YYYY/MM/DD" holidays={holidays} />
+  return <MultiDatePicker holidays={holidays} placeholder="YYYY/MM/DD" />
 }
 
 export const withExcludeDate: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -398,37 +398,37 @@ export const withLocale: Story = () => {
 
 export const withFormat: Story = () => {
   return (
-    <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+    <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         dateFormat="YYYY年 MMMM"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="month"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
         yearFormat="YYYY年"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="month"
+        locale="ja"
         monthFormat="MM"
+        placeholder="YYYY/MM/DD"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="year"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
         yearFormat="YY"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         locale="ja"
+        placeholder="YYYY/MM/DD"
         weekdayFormat="dd曜"
       />
     </Grid>
@@ -439,21 +439,21 @@ export const withAmountOfMonths: Story = () => {
   return (
     <>
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={1}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={2}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
 
       <MultiDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={3}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
     </>
   )
@@ -462,28 +462,28 @@ export const withAmountOfMonths: Story = () => {
 export const withPaginateBy: Story = () => {
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       amountOfMonths={3}
       disableOutsideDays
       paginateBy={1}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
 
 export const disabledCloseOnBlur: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" closeOnBlur={false} />
+  return <MultiDatePicker closeOnBlur={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledIsClearable: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+  return <MultiDatePicker isClearable={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledAllowInput: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" allowInput={false} />
+  return <MultiDatePicker allowInput={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledOutsideDays: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
+  return <MultiDatePicker disableOutsideDays placeholder="YYYY/MM/DD" />
 }
 
 export const disabledControls: Story = () => {
@@ -495,7 +495,7 @@ export const disabledWeekdays: Story = () => {
 }
 
 export const hiddenOutsideDays: Story = () => {
-  return <MultiDatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+  return <MultiDatePicker hiddenOutsideDays placeholder="YYYY/MM/DD" />
 }
 
 export const customIcon: Story = () => {
@@ -519,8 +519,8 @@ export const customControlType: Story = () => {
 
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       type={type}
+      placeholder="YYYY/MM/DD"
       onChangeType={onChangeType}
     />
   )
@@ -531,8 +531,8 @@ export const customControlMonth: Story = () => {
 
   return (
     <MultiDatePicker
-      placeholder="YYYY/MM/DD"
       month={month}
+      placeholder="YYYY/MM/DD"
       onChangeMonth={onChangeMonth}
     />
   )
@@ -557,9 +557,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -569,17 +569,17 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.multiDatePicker?.message}
         isInvalid={!!errors.multiDatePicker}
         label="Date to reserve"
-        errorMessage={errors.multiDatePicker?.message}
       >
         <Controller
           name="multiDatePicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiDatePicker placeholder="YYYY/MM/DD" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -601,9 +601,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -613,17 +613,17 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.multiDatePicker?.message}
         isInvalid={!!errors.multiDatePicker}
         label="Date to reserve"
-        errorMessage={errors.multiDatePicker?.message}
       >
         <Controller
           name="multiDatePicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiDatePicker placeholder="YYYY/MM/DD" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

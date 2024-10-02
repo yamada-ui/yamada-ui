@@ -1,26 +1,26 @@
 import type {
-  ThemeProps,
   CSSUIObject,
   CSSUIProps,
-  Token,
   HTMLUIProps,
+  ThemeProps,
+  Token,
 } from "@yamada-ui/core"
-import { ui, omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
-import { FocusLock } from "@yamada-ui/focus-lock"
 import type { MotionTransitionProps } from "@yamada-ui/motion"
-import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
+import type { KeyboardEvent } from "react"
+import type { ModalContentProps } from "./modal-content"
+import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
+import { FocusLock } from "@yamada-ui/focus-lock"
+import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useValue } from "@yamada-ui/use-value"
-import { getValidChildren, findChildren, findChild } from "@yamada-ui/utils"
-import type { KeyboardEvent } from "react"
+import { findChild, findChildren, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement, useCallback } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { DialogOverlay } from "./dialog-overlay"
 import { DrawerContent } from "./drawer-content"
 import { DrawerOverlay } from "./drawer-overlay"
-import type { ModalContentProps } from "./modal-content"
 import { ModalContent } from "./modal-content"
 import { ModalProvider } from "./modal-context"
 import { ModalOverlay } from "./modal-overlay"
@@ -29,51 +29,78 @@ export interface ModalOptions
   extends Pick<
     FocusLockProps,
     | "autoFocus"
-    | "initialFocusRef"
     | "finalFocusRef"
-    | "restoreFocus"
+    | "initialFocusRef"
     | "lockFocusAcrossFrames"
+    | "restoreFocus"
   > {
   /**
    * If `true`, the open will be opened.
    */
   isOpen: boolean
   /**
-   * Callback invoked to close the modal.
+   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
+   *
+   * @default false.
    */
-  onClose?: () => void
+  allowPinchZoom?: boolean
   /**
-   * Callback fired when the overlay is clicked.
+   * The animation of the tooltip.
+   *
+   * @default 'scale'
    */
-  onOverlayClick?: () => void
+  animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
   /**
-   * Callback fired when the escape key is pressed and focus is within modal.
+   * If `true`, scrolling will be disabled on the `body` when the modal opens.
+   *
+   * @default true
    */
-  onEsc?(): void
+  blockScrollOnMount?: boolean
   /**
-   * Callback function to run side effects after the modal has closed.
+   * If `true`, the modal will close when the `Esc` key is pressed.
+   *
+   * @default true
    */
-  onCloseComplete?: () => void
+  closeOnEsc?: boolean
+  /**
+   * If `true`, the modal will close when the overlay is clicked.
+   *
+   * @default true
+   */
+  closeOnOverlay?: boolean
+  /**
+   * The animation duration.
+   */
+  duration?: MotionTransitionProps["duration"]
+  /**
+   * The CSS `padding` property.
+   */
+  outside?: CSSUIProps["p"]
   /**
    * The placement of the modal.
    *
    * @default 'center'
    */
   placement?: Token<
-    | "center"
-    | "top"
-    | "right"
     | "bottom"
-    | "left"
-    | "top-left"
-    | "top-right"
     | "bottom-left"
     | "bottom-right"
+    | "center"
+    | "left"
+    | "right"
+    | "top"
+    | "top-left"
+    | "top-right"
   >
   /**
-   * The CSS `padding` property.
+   * Where scroll behavior should originate.
+   *
+   * - `inside`: scroll only occurs within the `ModalBody`.
+   * - `outside`: the entire `ModalContent` will scroll within the viewport.
+   *
+   * @default 'inside'
    */
-  outside?: CSSUIProps["p"]
+  scrollBehavior?: "inside" | "outside"
   /**
    * If `true`, display the modal close button.
    *
@@ -87,56 +114,29 @@ export interface ModalOptions
    */
   withOverlay?: boolean
   /**
-   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
-   *
-   * @default false.
+   * Props for modal container element.
    */
-  allowPinchZoom?: boolean
-  /**
-   * Where scroll behavior should originate.
-   *
-   * - `inside`: scroll only occurs within the `ModalBody`.
-   * - `outside`: the entire `ModalContent` will scroll within the viewport.
-   *
-   * @default 'inside'
-   */
-  scrollBehavior?: "inside" | "outside"
-  /**
-   * If `true`, scrolling will be disabled on the `body` when the modal opens.
-   *
-   * @default true
-   */
-  blockScrollOnMount?: boolean
-  /**
-   * If `true`, the modal will close when the overlay is clicked.
-   *
-   * @default true
-   */
-  closeOnOverlay?: boolean
-  /**
-   * If `true`, the modal will close when the `Esc` key is pressed.
-   *
-   * @default true
-   */
-  closeOnEsc?: boolean
-  /**
-   * The animation of the tooltip.
-   *
-   * @default 'scale'
-   */
-  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
-  /**
-   * The animation duration.
-   */
-  duration?: MotionTransitionProps["duration"]
+  containerProps?: HTMLUIProps
   /**
    * Props to be forwarded to the portal component.
    */
   portalProps?: Omit<PortalProps, "children">
   /**
-   * Props for modal container element.
+   * Callback invoked to close the modal.
    */
-  containerProps?: HTMLUIProps
+  onClose?: () => void
+  /**
+   * Callback function to run side effects after the modal has closed.
+   */
+  onCloseComplete?: () => void
+  /**
+   * Callback fired when the escape key is pressed and focus is within modal.
+   */
+  onEsc?(): void
+  /**
+   * Callback fired when the overlay is clicked.
+   */
+  onOverlayClick?: () => void
 }
 
 export interface ModalProps
@@ -157,30 +157,30 @@ export const Modal = motionForwardRef<ModalProps, "section">(
     })
     const {
       className,
+      allowPinchZoom = false,
+      animation = "scale",
+      autoFocus,
+      blockScrollOnMount = true,
       children,
+      closeOnEsc = true,
+      closeOnOverlay = true,
+      duration,
+      finalFocusRef,
+      initialFocusRef,
       isOpen,
-      onClose,
-      onOverlayClick,
-      onEsc,
-      onCloseComplete,
-      placement: _placement = "center",
+      lockFocusAcrossFrames = true,
       outside = "fallback(4, 1rem)",
+      placement: _placement = "center",
+      restoreFocus,
+      scrollBehavior = "inside",
       withCloseButton = true,
       withOverlay = true,
-      allowPinchZoom = false,
-      scrollBehavior = "inside",
-      autoFocus,
-      restoreFocus,
-      initialFocusRef,
-      finalFocusRef,
-      blockScrollOnMount = true,
-      closeOnOverlay = true,
-      closeOnEsc = true,
-      lockFocusAcrossFrames = true,
-      animation = "scale",
-      duration,
-      portalProps,
       containerProps,
+      portalProps,
+      onClose,
+      onCloseComplete,
+      onEsc,
+      onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -214,38 +214,38 @@ export const Modal = motionForwardRef<ModalProps, "section">(
     const placement = useValue(_placement)
 
     const css: CSSUIObject = {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      zIndex: "fallback(jeice, 110)",
-      w: "100vw",
-      h: "100dvh",
-      p: size !== "full" ? outside : undefined,
-      display: "flex",
-      justifyContent: placement.includes("left")
-        ? "flex-start"
-        : placement.includes("right")
-          ? "flex-end"
-          : "center",
       alignItems: placement.includes("top")
         ? "flex-start"
         : placement.includes("bottom")
           ? "flex-end"
           : "center",
+      display: "flex",
+      h: "100dvh",
+      justifyContent: placement.includes("left")
+        ? "flex-start"
+        : placement.includes("right")
+          ? "flex-end"
+          : "center",
+      left: 0,
+      p: size !== "full" ? outside : undefined,
+      position: "fixed",
+      top: 0,
+      w: "100vw",
+      zIndex: "fallback(jeice, 110)",
     }
 
     return (
       <ModalProvider
         value={{
+          animation,
+          closeOnOverlay,
+          duration,
           isOpen,
+          scrollBehavior,
+          styles,
+          withCloseButton,
           onClose,
           onOverlayClick,
-          withCloseButton,
-          scrollBehavior,
-          closeOnOverlay,
-          animation,
-          duration,
-          styles,
         }}
       >
         <AnimatePresence onExitComplete={onCloseComplete}>
@@ -253,10 +253,10 @@ export const Modal = motionForwardRef<ModalProps, "section">(
             <Portal {...portalProps}>
               <FocusLock
                 autoFocus={autoFocus}
-                initialFocusRef={initialFocusRef}
                 finalFocusRef={finalFocusRef}
-                restoreFocus={restoreFocus}
+                initialFocusRef={initialFocusRef}
                 lockFocusAcrossFrames={lockFocusAcrossFrames}
+                restoreFocus={restoreFocus}
               >
                 <RemoveScroll
                   allowPinchZoom={allowPinchZoom}

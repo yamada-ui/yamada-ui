@@ -1,5 +1,5 @@
-import type { CSSProperties, UIProperties } from "."
 import type { ThemeToken } from "@yamada-ui/react"
+import type { CSSProperties, UIProperties } from "."
 
 type Tokens = { [key in ThemeToken]?: (CSSProperties | UIProperties)[] }
 
@@ -49,9 +49,9 @@ export const tokens: Tokens = {
     "borderBlockEndColor",
     "columnRuleColor",
   ],
+  fonts: ["fontFamily"],
   fontSizes: ["fontSize"],
   fontWeights: ["fontWeight"],
-  fonts: ["fontFamily"],
   gradients: [
     "backgroundImage",
     "borderImageSource",
@@ -163,9 +163,9 @@ export const tokens: Tokens = {
     "translateX",
     "translateY",
   ],
-  "transitions.property": ["transitionProperty"],
-  "transitions.easing": ["transitionTimingFunction", "animationTimingFunction"],
   "transitions.duration": ["animationDuration", "transitionDuration"],
+  "transitions.easing": ["transitionTimingFunction", "animationTimingFunction"],
+  "transitions.property": ["transitionProperty"],
   zIndices: ["zIndex"],
 }
 

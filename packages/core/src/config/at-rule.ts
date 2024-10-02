@@ -1,6 +1,6 @@
-import { filterUndefined, isArray, toKebabCase } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { Transform } from "./utils"
+import { filterUndefined, isArray, toKebabCase } from "@yamada-ui/utils"
 import { tokenToVar } from "./utils"
 
 export const generateAtRule =
@@ -14,20 +14,20 @@ export const generateAtRule =
         {
           type,
           name,
-          query,
           css,
-          w,
-          width,
-          minW,
-          minWidth,
-          maxW,
-          maxWidth,
           h,
           height,
-          minH,
-          minHeight,
           maxH,
           maxHeight,
+          maxW,
+          maxWidth,
+          minH,
+          minHeight,
+          minW,
+          minWidth,
+          query,
+          w,
+          width,
           ...rest
         },
       ) => {
@@ -40,12 +40,12 @@ export const generateAtRule =
 
         if (!query) {
           const resolvedRest = filterUndefined({
-            width,
-            minWidth,
-            maxWidth,
             height,
-            minHeight,
             maxHeight,
+            maxWidth,
+            minHeight,
+            minWidth,
+            width,
             ...rest,
           })
 

@@ -85,7 +85,7 @@ export function isContains(
   return parent === child || parent?.contains(child)
 }
 
-export function getPx(value: string | number | undefined): number {
+export function getPx(value: number | string | undefined): number {
   if (isNumber(value)) return value
 
   if (isUndefined(value)) return 0
@@ -111,7 +111,7 @@ export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 
-type Booleanish = boolean | "true" | "false"
+type Booleanish = "false" | "true" | boolean
 
 export function dataAttr(condition: boolean | undefined) {
   return (condition ? "" : undefined) as Booleanish
@@ -193,7 +193,7 @@ export function isTouchDevice(): boolean {
 
 export function getOwnerWindow(
   node?: Element | null,
-): Window & typeof globalThis {
+): typeof globalThis & Window {
   return getOwnerDocument(node)?.defaultView ?? window
 }
 

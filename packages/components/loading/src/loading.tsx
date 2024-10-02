@@ -1,11 +1,11 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
 import {
   forwardRef,
   mergeVars,
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
-import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import { Audio } from "./audio"
@@ -23,11 +23,9 @@ interface ComponentProps extends Omit<IconProps, "color"> {
 
 interface LoadingOptions {
   /**
-   * The variant of the Loading.
-   *
-   * @default 'oval'
+   * The CSS `dur` property.
    */
-  variant?: "oval" | "grid" | "audio" | "dots" | "puff" | "rings" | "circles"
+  duration?: IconProps["dur"]
   /**
    * The CSS `color` property.
    *
@@ -35,9 +33,11 @@ interface LoadingOptions {
    */
   secondaryColor?: CSSUIProps["color"]
   /**
-   * The CSS `dur` property.
+   * The variant of the Loading.
+   *
+   * @default 'oval'
    */
-  duration?: IconProps["dur"]
+  variant?: "audio" | "circles" | "dots" | "grid" | "oval" | "puff" | "rings"
 }
 
 export interface LoadingProps
@@ -53,22 +53,22 @@ export interface LoadingProps
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
     { color, ...styles },
-    { variant = "oval", size = "1em", colorScheme, ...mergedProps },
+    { colorScheme, size = "1em", variant = "oval", ...mergedProps },
   ] = useComponentStyle("Loading", props)
   const {
     className,
     color: colorProp,
-    secondaryColor,
     dur,
     duration,
+    secondaryColor,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
-      size,
       color: "$color",
+      size,
       ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
       __css: {

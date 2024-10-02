@@ -1,5 +1,5 @@
-import { pickObject } from "@yamada-ui/utils"
 import type { RefObject } from "react"
+import { pickObject } from "@yamada-ui/utils"
 import { useRef } from "react"
 
 const useAutosize = (
@@ -13,7 +13,7 @@ const useAutosize = (
     const el = ref.current
     if (!el) return
 
-    let { value, placeholder } = el
+    let { placeholder, value } = el
     if (value === valueRef.current) return
     else valueRef.current = value
 
@@ -65,13 +65,13 @@ type SizingProps = Extract<
 interface SizingStyle extends Pick<CSSStyleDeclaration, SizingProps> {}
 
 interface SizingData {
-  sizingStyle: SizingStyle
-  paddingSize: number
   borderSize: number
+  paddingSize: number
   singleRowHeight: number
+  sizingStyle: SizingStyle
 }
 
-const getSizingData = (el: HTMLElement): SizingData | null => {
+const getSizingData = (el: HTMLElement): null | SizingData => {
   const style = window?.getComputedStyle(el)
 
   if (style == null) return null
@@ -94,10 +94,10 @@ const getSizingData = (el: HTMLElement): SizingData | null => {
   const singleRowHeight = parseFloat(sizingStyle.lineHeight!)
 
   return {
-    sizingStyle,
-    paddingSize,
     borderSize,
+    paddingSize,
     singleRowHeight,
+    sizingStyle,
   }
 }
 
@@ -133,15 +133,15 @@ const calcRows = (
 }
 
 const HIDDEN_TEXTAREA_STYLE = {
-  "min-height": "0",
-  "max-height": "none",
   height: "0",
-  visibility: "hidden",
+  "max-height": "none",
+  "min-height": "0",
   overflow: "hidden",
   position: "absolute",
-  "z-index": "-1000",
-  top: "0",
   right: "0",
+  top: "0",
+  visibility: "hidden",
+  "z-index": "-1000",
 } as const
 
 const forceHiddenStyles = (el: HTMLElement) => {

@@ -1,5 +1,17 @@
+import type {
+  ButtonProps,
+  Component,
+  CSSUIProps,
+  GridProps,
+  IconProps,
+  InputProps,
+  MenuProps,
+} from "@yamada-ui/react"
+import type { FC, MutableRefObject, ReactNode } from "react"
+import type { Priority, Status, View } from "./data"
 import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
 import {
+  assignRef,
   Button,
   Divider,
   Grid,
@@ -10,34 +22,22 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  Text,
-  assignRef,
   noop,
+  Text,
   useBoolean,
 } from "@yamada-ui/react"
-import type {
-  ButtonProps,
-  CSSUIProps,
-  Component,
-  GridProps,
-  IconProps,
-  InputProps,
-  MenuProps,
-} from "@yamada-ui/react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
-import type { FC, MutableRefObject, ReactNode } from "react"
 import { PRIORITY, STATUS, VIEW } from "./data"
-import type { Priority, Status, View } from "./data"
 
 export interface FilterProps extends GridProps {
-  titleRef: MutableRefObject<(value: string) => void>
-  statusRef: MutableRefObject<(value: Status[]) => void>
   priorityRef: MutableRefObject<(value: Priority[]) => void>
+  statusRef: MutableRefObject<(value: Status[]) => void>
+  titleRef: MutableRefObject<(value: string) => void>
   viewRef: MutableRefObject<(value: View[]) => void>
 }
 
 export const Filter: FC<FilterProps> = memo(
-  ({ titleRef, statusRef, priorityRef, viewRef, ...rest }) => {
+  ({ priorityRef, statusRef, titleRef, viewRef, ...rest }) => {
     const hasTitleRef = useRef<(hasValue: boolean) => void>(noop)
     const hasStatusRef = useRef<(hasValue: boolean) => void>(noop)
     const hasPriorityRef = useRef<(hasValue: boolean) => void>(noop)
@@ -47,45 +47,45 @@ export const Filter: FC<FilterProps> = memo(
 
     return (
       <Grid
-        templateColumns={{ base: "auto 1fr auto", lg: "1fr auto" }}
         gap={{ base: "md", sm: "sm" }}
+        templateColumns={{ base: "auto 1fr auto", lg: "1fr auto" }}
         {...rest}
       >
         <TitleInput
-          passValueRef={titleRef}
           passHasRef={hasTitleRef}
+          passValueRef={titleRef}
           resetRef={resetTitleRef}
         />
 
         <HStack
           display={{ base: "flex", sm: "none" }}
           gap="md"
-          gridRowStart={{ base: undefined, lg: 2 }}
           gridColumn={{ base: undefined, lg: "1 / 3" }}
+          gridRowStart={{ base: undefined, lg: 2 }}
         >
           <FilterControlButton
-            label="Status"
             items={STATUS}
-            passValueRef={statusRef}
+            label="Status"
             passHasRef={hasStatusRef}
+            passValueRef={statusRef}
             resetRef={resetStatusRef}
           />
 
           <FilterControlButton
-            label="Priority"
             items={PRIORITY}
-            passValueRef={priorityRef}
+            label="Priority"
             passHasRef={hasPriorityRef}
+            passValueRef={priorityRef}
             resetRef={resetPriorityRef}
           />
 
           <ResetButton
-            hasTitleRef={hasTitleRef}
-            hasStatusRef={hasStatusRef}
             hasPriorityRef={hasPriorityRef}
-            resetTitleRef={resetTitleRef}
-            resetStatusRef={resetStatusRef}
+            hasStatusRef={hasStatusRef}
+            hasTitleRef={hasTitleRef}
             resetPriorityRef={resetPriorityRef}
+            resetStatusRef={resetStatusRef}
+            resetTitleRef={resetTitleRef}
           />
         </HStack>
 
@@ -98,13 +98,13 @@ export const Filter: FC<FilterProps> = memo(
 Filter.displayName = "Filter"
 
 interface TitleInputProps extends InputProps {
-  passValueRef: MutableRefObject<(value: string) => void>
   passHasRef: MutableRefObject<(hasValue: boolean) => void>
+  passValueRef: MutableRefObject<(value: string) => void>
   resetRef: MutableRefObject<() => void>
 }
 
 const TitleInput: FC<TitleInputProps> = memo(
-  ({ passValueRef, passHasRef, resetRef, ...rest }) => {
+  ({ passHasRef, passValueRef, resetRef, ...rest }) => {
     const [value, setValue] = useState<string>("")
 
     assignRef(resetRef, () => {
@@ -136,25 +136,25 @@ const TitleInput: FC<TitleInputProps> = memo(
 
 TitleInput.displayName = "TitleInput"
 
-interface FilterControlButtonProps<T extends Status | Priority>
+interface FilterControlButtonProps<T extends Priority | Status>
   extends MenuProps {
-  label: ReactNode
-  icon?: Component<"svg", IconProps>
   items: T extends Status ? typeof STATUS : typeof PRIORITY
-  buttonProps?: ButtonProps
-  passValueRef: MutableRefObject<(value: T[]) => void>
+  label: ReactNode
   passHasRef: MutableRefObject<(hasValue: boolean) => void>
+  passValueRef: MutableRefObject<(value: T[]) => void>
   resetRef: MutableRefObject<() => void>
+  icon?: Component<"svg", IconProps>
+  buttonProps?: ButtonProps
 }
 
-const FilterControlButton = <T extends Status | Priority>({
-  buttonProps,
-  label,
+const FilterControlButton = <T extends Priority | Status>({
   icon: Icon = CirclePlus,
   items,
-  passValueRef,
+  label,
   passHasRef,
+  passValueRef,
   resetRef,
+  buttonProps,
   ...rest
 }: FilterControlButtonProps<T>) => {
   const [value, setValue] = useState<T[]>([])
@@ -176,14 +176,14 @@ const FilterControlButton = <T extends Status | Priority>({
 
   const labelProps = useMemo<CSSUIProps>(
     () => ({
-      display: "inline-block",
-      fontWeight: "normal",
-      color: ["black", "white"],
-      fontSize: "sm",
-      px: "sm",
       bg: ["blackAlpha.100", "whiteAlpha.100"],
-      rounded: "md",
+      color: ["black", "white"],
+      display: "inline-block",
+      fontSize: "sm",
+      fontWeight: "normal",
       lineHeight: "8",
+      px: "sm",
+      rounded: "md",
     }),
     [],
   )
@@ -194,18 +194,18 @@ const FilterControlButton = <T extends Status | Priority>({
     <Menu {...rest}>
       <MenuButton
         as={Button}
+        borderColor={["border", "border"]}
+        borderStyle="dashed"
+        justifyContent="flex-start"
         leftIcon={<Icon />}
         variant="outline"
-        borderStyle="dashed"
-        borderColor={["border", "border"]}
-        justifyContent="flex-start"
         {...buttonProps}
       >
         {label}
 
         {value.length ? (
           <>
-            <Divider orientation="vertical" h="5" />
+            <Divider h="5" orientation="vertical" />
 
             <HStack gap="xs">
               {value.length >= 3 ? (
@@ -216,7 +216,7 @@ const FilterControlButton = <T extends Status | Priority>({
                 value.map((key) => (
                   <Text key={key} as="span" {...labelProps}>
                     {
-                      (items as unknown as typeof STATUS & typeof PRIORITY)[key]
+                      (items as unknown as typeof PRIORITY & typeof STATUS)[key]
                         .label
                     }
                   </Text>
@@ -229,7 +229,7 @@ const FilterControlButton = <T extends Status | Priority>({
 
       <MenuList>
         <MenuOptionGroup<T[]> type="checkbox" value={value} onChange={onChange}>
-          {Object.entries(items).map(([value, { label, icon: Icon }]) => (
+          {Object.entries(items).map(([value, { icon: Icon, label }]) => (
             <MenuOptionItem key={value} value={value}>
               <HStack gap="sm">
                 <Icon color="muted" />
@@ -247,24 +247,24 @@ const FilterControlButton = <T extends Status | Priority>({
 FilterControlButton.displayName = "FilterControlButton"
 
 interface ResetButtonProps extends ButtonProps {
-  hasTitleRef: MutableRefObject<(hasValue: boolean) => void>
-  hasStatusRef: MutableRefObject<(hasValue: boolean) => void>
   hasPriorityRef: MutableRefObject<(hasValue: boolean) => void>
-  resetTitleRef: MutableRefObject<() => void>
-  resetStatusRef: MutableRefObject<() => void>
+  hasStatusRef: MutableRefObject<(hasValue: boolean) => void>
+  hasTitleRef: MutableRefObject<(hasValue: boolean) => void>
   resetPriorityRef: MutableRefObject<() => void>
+  resetStatusRef: MutableRefObject<() => void>
+  resetTitleRef: MutableRefObject<() => void>
 }
 
 const ResetButton: FC<ResetButtonProps> = ({
-  hasTitleRef,
-  hasStatusRef,
   hasPriorityRef,
-  resetTitleRef,
-  resetStatusRef,
+  hasStatusRef,
+  hasTitleRef,
   resetPriorityRef,
+  resetStatusRef,
+  resetTitleRef,
   ...rest
 }) => {
-  const [isShow, { on, off }] = useBoolean()
+  const [isShow, { off, on }] = useBoolean()
 
   const prevHasTitleRef = useRef<boolean>(false)
   const prevHasStatusRef = useRef<boolean>(false)
@@ -305,7 +305,7 @@ const ResetButton: FC<ResetButtonProps> = ({
   })
 
   return isShow ? (
-    <Button variant="ghost" rightIcon={<X />} onClick={onReset} {...rest}>
+    <Button rightIcon={<X />} variant="ghost" onClick={onReset} {...rest}>
       Reset
     </Button>
   ) : null
@@ -327,9 +327,9 @@ const ViewControlButton: FC<ViewControlButtonProps> = ({
     <Menu {...rest}>
       <MenuButton
         as={Button}
+        borderColor={["border", "border"]}
         leftIcon={<SlidersHorizontal />}
         variant="outline"
-        borderColor={["border", "border"]}
         {...buttonProps}
       >
         View

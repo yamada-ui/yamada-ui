@@ -1,8 +1,8 @@
+import type { Constant, Event } from "utils/github"
+import type { APIHandler } from "utils/next"
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
 import { recursiveOctokit } from "utils/github"
-import type { Constant, Event } from "utils/github"
-import type { APIHandler } from "utils/next"
 
 export const DISCORD_REVIEW_COMMENT =
   (constant: Constant) =>
@@ -17,11 +17,11 @@ export const DISCORD_REVIEW_COMMENT =
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-export const opened: APIHandler = async ({ req, res, constant }) => {
-  const { repository, pull_request } = req.body as Event<"pull_request.opened">
+export const opened: APIHandler = async ({ constant, req, res }) => {
+  const { pull_request, repository } = req.body as Event<"pull_request.opened">
   const owner = "yamada-ui"
   const repo = repository.name
-  const { number, title, html_url, head, user, requested_reviewers } =
+  const { head, html_url, number, requested_reviewers, title, user } =
     pull_request
   const omittedRequestReviewers = requested_reviewers?.filter(
     ({ login }) => !constant.pullRequest.excludeReviewers.includes(login),
@@ -35,10 +35,10 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
 
   await recursiveOctokit(() =>
     octokit.issues.addAssignees({
+      assignees: ["hirotomoyamada"],
+      issue_number: number,
       owner,
       repo,
-      issue_number: number,
-      assignees: ["hirotomoyamada"],
     }),
   )
 
@@ -47,8 +47,8 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
 
   if (
     [
-      "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
+      "yamada-ui:changeset-release/main",
       "yamada-ui:documentation",
     ].includes(head.label)
   ) {
@@ -59,8 +59,8 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
     await recursiveOctokit(() =>
       octokit.pulls.requestReviewers({
         owner,
-        repo,
         pull_number: number,
+        repo,
         reviewers: selectedReviewers,
       }),
     )
@@ -88,8 +88,8 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
     await recursiveOctokit(() =>
       octokit.pulls.requestReviewers({
         owner,
-        repo,
         pull_number: number,
+        repo,
         reviewers: selectedReviewers,
       }),
     )
@@ -114,6 +114,6 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
     )
   } catch (e) {
     if (e instanceof Error)
-      return res.status(500).send({ status: 500, message: e.message })
+      return res.status(500).send({ message: e.message, status: 500 })
   }
 }

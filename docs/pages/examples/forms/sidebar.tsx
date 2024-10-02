@@ -1,9 +1,9 @@
-import { Box, Button, VStack, handlerAll, useBoolean } from "@yamada-ui/react"
 import type { BoxProps, ButtonProps, StackProps } from "@yamada-ui/react"
-import { memo, useRef } from "react"
 import type { FC, MutableRefObject } from "react"
-import { DEFAULT_FORM_TYPE } from "."
 import type { FormType } from "."
+import { Box, Button, handlerAll, useBoolean, VStack } from "@yamada-ui/react"
+import { memo, useRef } from "react"
+import { DEFAULT_FORM_TYPE } from "."
 
 const SIDEBAR_MENU: FormType[] = [
   "profile",
@@ -14,8 +14,8 @@ const SIDEBAR_MENU: FormType[] = [
 ]
 
 export interface MenuProps extends StackProps {
-  containerProps?: BoxProps
   onChangeType: (type: FormType) => void
+  containerProps?: BoxProps
 }
 
 export const Sidebar: FC<MenuProps> = memo(
@@ -28,12 +28,12 @@ export const Sidebar: FC<MenuProps> = memo(
           <VStack
             as="ul"
             flexDirection={{ base: "column", md: "row" }}
-            overflowX="auto"
             gap="sm"
+            overflowX="auto"
             {...rest}
           >
             {SIDEBAR_MENU.map((label) => (
-              <Box as="li" key={label}>
+              <Box key={label} as="li">
                 <SidebarButton
                   label={label}
                   resetMapRef={resetMapRef}
@@ -57,7 +57,7 @@ export interface SidebarButtonProps extends ButtonProps {
 
 export const SidebarButton: FC<SidebarButtonProps> = memo(
   ({ label, resetMapRef, onClick, ...rest }) => {
-    const [isSelected, { on, off }] = useBoolean(label === DEFAULT_FORM_TYPE)
+    const [isSelected, { off, on }] = useBoolean(label === DEFAULT_FORM_TYPE)
 
     resetMapRef.current.set(label, off)
 
@@ -69,12 +69,12 @@ export const SidebarButton: FC<SidebarButtonProps> = memo(
 
     return (
       <Button
-        w="full"
-        variant={isSelected ? "solid" : "ghost"}
+        _hover={isSelected ? {} : undefined}
         colorScheme="gray"
         fontWeight="normal"
         justifyContent="flex-start"
-        _hover={isSelected ? {} : undefined}
+        variant={isSelected ? "solid" : "ghost"}
+        w="full"
         onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >

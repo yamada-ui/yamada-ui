@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@yamada-ui/test"
+import { fireEvent, render, screen } from "@yamada-ui/test"
 import { Toggle, ToggleGroup } from "../src"
 
 describe("<Toggle />", () => {

@@ -1,6 +1,6 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { createContext } from "@yamada-ui/utils"
 import type { ModalOptions } from "./modal"
+import { createContext } from "@yamada-ui/utils"
 
 interface ModalContext extends ModalOptions {
   styles: { [key: string]: CSSUIObject }

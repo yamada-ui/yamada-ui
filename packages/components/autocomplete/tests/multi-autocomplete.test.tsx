@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from "@yamada-ui/test"
 import type { AutocompleteItem } from "../src"
+import { render, screen, waitFor } from "@yamada-ui/test"
 import { AutocompleteOption, MultiAutocomplete } from "../src"
 
 describe("<MultiAutoComplete />", () => {
@@ -23,7 +23,7 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("default", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete placeholder="Select Option">
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -48,8 +48,8 @@ describe("<MultiAutoComplete />", () => {
     test("have default value", () => {
       render(
         <MultiAutocomplete
-          placeholder="Select Option"
           defaultValue={["option1", "option2"]}
+          placeholder="Select Option"
         >
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -63,10 +63,10 @@ describe("<MultiAutoComplete />", () => {
     test("with component", () => {
       render(
         <MultiAutocomplete
-          defaultValue={["option1"]}
           component={({ label }) => (
             <div data-testid="label-component">{label}</div>
           )}
+          defaultValue={["option1"]}
         >
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -78,7 +78,7 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("clear button should work correctly", async () => {
-      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
+      const { container, user } = render(<MultiAutocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -120,12 +120,12 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("focuses first enabled item when the first item is selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
           defaultValue={["option1", "option2"]}
+          items={ITEMS}
           omitSelectedValues
+          placeholder="Select Option"
         />,
       )
 
@@ -144,12 +144,12 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("focuses first item when the first item is not selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
           defaultValue={["option3"]}
+          items={ITEMS}
           omitSelectedValues
+          placeholder="Select Option"
         />,
       )
 
@@ -185,12 +185,12 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("focuses last enabled item when the last item is selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
           defaultValue={["option1", "option3"]}
+          items={ITEMS}
           omitSelectedValues
+          placeholder="Select Option"
         />,
       )
 
@@ -209,12 +209,12 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("focuses last item when the last item is not selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
           defaultValue={["option1"]}
+          items={ITEMS}
           omitSelectedValues
+          placeholder="Select Option"
         />,
       )
 
@@ -250,12 +250,12 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("focuses next item when set omitSelectedValues and item selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
           defaultValue={["option2"]}
+          items={ITEMS}
           omitSelectedValues
+          placeholder="Select Option"
         />,
       )
 
@@ -290,8 +290,8 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("enter keyDown should work correctly even whe allowFree is enable", async () => {
-      const { user, container } = render(
-        <MultiAutocomplete items={ITEMS} allowFree />,
+      const { container, user } = render(
+        <MultiAutocomplete allowFree items={ITEMS} />,
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -311,7 +311,7 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("arrowDown keyDown should work correctly", async () => {
-      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
+      const { container, user } = render(<MultiAutocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -341,8 +341,8 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      const { user, container } = render(
-        <MultiAutocomplete items={ITEMS} defaultValue={["option2"]} />,
+      const { container, user } = render(
+        <MultiAutocomplete defaultValue={["option2"]} items={ITEMS} />,
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -358,7 +358,7 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly", async () => {
-      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
+      const { container, user } = render(<MultiAutocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -388,8 +388,8 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      const { user, container } = render(
-        <MultiAutocomplete items={ITEMS} defaultValue={["option2"]} />,
+      const { container, user } = render(
+        <MultiAutocomplete defaultValue={["option2"]} items={ITEMS} />,
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -405,7 +405,7 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("backspace keyDown should work correctly", async () => {
-      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
+      const { container, user } = render(<MultiAutocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -438,13 +438,13 @@ describe("<MultiAutoComplete />", () => {
         value: "option1",
       },
       {
-        label: GROUP_LABEL,
         items: [
           {
             label: "option2",
             value: "option2",
           },
         ],
+        label: GROUP_LABEL,
       },
       {
         label: "option3",
@@ -453,7 +453,7 @@ describe("<MultiAutoComplete />", () => {
     ]
 
     test("create option when no options are available", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete allowCreate items={items} />,
       )
 
@@ -492,11 +492,11 @@ describe("<MultiAutoComplete />", () => {
 
     describe("with insert position", () => {
       test("first", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <MultiAutocomplete
             allowCreate
-            items={items}
             insertPositionItem="first"
+            items={items}
           />,
         )
 
@@ -516,11 +516,11 @@ describe("<MultiAutoComplete />", () => {
       })
 
       test("last", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <MultiAutocomplete
             allowCreate
-            items={items}
             insertPositionItem="last"
+            items={items}
           />,
         )
 
@@ -542,11 +542,11 @@ describe("<MultiAutoComplete />", () => {
       })
 
       test("group2", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <MultiAutocomplete
             allowCreate
-            items={items}
             insertPositionItem={GROUP_LABEL}
+            items={items}
           />,
         )
 
@@ -566,11 +566,11 @@ describe("<MultiAutoComplete />", () => {
       })
 
       test("group2 last", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <MultiAutocomplete
             allowCreate
-            items={items}
             insertPositionItem={[GROUP_LABEL, "last"]}
+            items={items}
           />,
         )
 
@@ -594,11 +594,11 @@ describe("<MultiAutoComplete />", () => {
           .spyOn(console, "warn")
           .mockImplementation(() => {})
 
-        const { user, container } = render(
+        const { container, user } = render(
           <MultiAutocomplete
             allowCreate
-            items={items}
             insertPositionItem="Group4"
+            items={items}
           />,
         )
 
@@ -624,13 +624,13 @@ describe("<MultiAutoComplete />", () => {
           value: "option1",
         },
         {
-          label: GROUP_LABEL,
           items: [
             {
               label: "option2",
               value: "option2",
             },
           ],
+          label: GROUP_LABEL,
         },
         {
           label: "option3",
@@ -640,11 +640,11 @@ describe("<MultiAutoComplete />", () => {
 
       const items: AutocompleteItem[] = JSON.parse(JSON.stringify(original))
 
-      const { user, container } = render(
+      const { container, user } = render(
         <MultiAutocomplete
           allowCreate
-          items={items}
           insertPositionItem={GROUP_LABEL}
+          items={items}
         />,
       )
 

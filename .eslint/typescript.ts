@@ -13,9 +13,9 @@ export const typescriptConfig: TSESLint.FlatConfig.Config = {
       "error",
       {
         argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
         caughtErrorsIgnorePattern: "^_",
         destructuredArrayIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
       },
     ],
   },

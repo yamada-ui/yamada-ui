@@ -1,19 +1,19 @@
-import crypto from "crypto"
 import type { RequestError } from "@octokit/request-error"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
-import { Octokit } from "@octokit/rest"
 import type {
   EmitterWebhookEvent,
   EmitterWebhookEventName,
 } from "@octokit/webhooks"
 import type { NextApiRequest } from "next"
+import { Octokit } from "@octokit/rest"
+import crypto from "crypto"
 import { wait } from "./async"
 
 const COMMON_PARAMS = {
-  owner: "yamada-ui",
-  repo: "yamada-data",
-  path: "",
   ref: "main",
+  owner: "yamada-ui",
+  path: "",
+  repo: "yamada-data",
 }
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
@@ -36,7 +36,7 @@ export const generateSignature = (body: any) => {
   return digest
 }
 
-export const verifySignature = async ({ headers, body }: NextApiRequest) => {
+export const verifySignature = async ({ body, headers }: NextApiRequest) => {
   const signature = (headers["x-hub-signature-256"] ??
     headers["x-signature"]) as string | undefined
 
@@ -47,7 +47,7 @@ export const verifySignature = async ({ headers, body }: NextApiRequest) => {
   if (signature !== digest) throw new Error("Invalid signature")
 }
 
-const toCamelCase = (value: string & {}) =>
+const toCamelCase = (value: {} & string) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
 export interface Constant {
@@ -113,9 +113,9 @@ export const recursiveOctokit = async <T extends any = void>(
 export type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
 >["data"][number]
-export type ListEvent = Awaited<
+export type ListEvent = { created_at: number } & Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
->["data"][number] & { created_at: number }
+>["data"][number]
 
 const pagingOctokit = async <Y extends any>(
   func: ({

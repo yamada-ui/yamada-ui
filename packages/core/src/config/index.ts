@@ -1,9 +1,10 @@
 import type { CSSObject } from "@emotion/react"
-import { isObject, isNumber } from "@yamada-ui/utils"
 import type { Union } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
+import type { Transform } from "./utils"
+import { isNumber, isObject } from "@yamada-ui/utils"
 import { animation } from "./animation"
 import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
@@ -15,26 +16,25 @@ import { grid } from "./grid"
 import { generateStyles } from "./styles"
 import { generateToken } from "./token"
 import { transform } from "./transform"
-import type { Transform } from "./utils"
-import { mode, keyframes, analyzeCSSValue, isCSSVar } from "./utils"
+import { analyzeCSSValue, isCSSVar, keyframes, mode } from "./utils"
 import { vars } from "./vars"
 
-export { mode, keyframes, gradient, animation }
+export { animation, gradient, keyframes, mode }
 
 type CSSProperties = Union<
+  | keyof CSS.ObsoleteProperties
   | keyof CSS.StandardProperties
   | keyof CSS.SvgProperties
-  | keyof CSS.ObsoleteProperties
 >
 
 export interface StyleConfig {
-  static?: CSSObject
   isProcessResult?: boolean
   isProcessSkip?: boolean
   properties?:
+    | ((theme: StyledTheme) => CSSProperties)
     | CSSProperties
     | CSSProperties[]
-    | ((theme: StyledTheme) => CSSProperties)
+  static?: CSSObject
   token?: ThemeToken
   transform?: Transform
 }
@@ -44,12 +44,23 @@ export interface StyleConfigs {
 }
 
 export const transforms = {
-  px: (value: any) => {
-    if (value == null) return value
-
-    const { isUnitless } = analyzeCSSValue(value)
-
-    return isUnitless || isNumber(value) ? `${value}px` : value
+  animation,
+  bgClip: (value: any) => {
+    if (value === "text") {
+      return { backgroundClip: "text", color: "transparent" }
+    } else {
+      return { backgroundClip: value }
+    }
+  },
+  calc: generateCalc,
+  colorMix,
+  container: generateAtRule("container"),
+  content: (value: any) => {
+    if (isObject(value)) {
+      return { content: "''", ...value }
+    } else {
+      return value
+    }
   },
   deg: (value: any) => {
     if (isCSSVar(value) || value == null) return value
@@ -58,11 +69,15 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
+  filter: generateFilter,
   fraction: (value: any) => {
     if (isNumber(value) && value <= 1) value = `${value * 100}%`
 
     return value
   },
+  function: generateFunction,
+  gradient,
+  grid,
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {
@@ -72,34 +87,19 @@ export const transforms = {
       }
     }
   },
-  bgClip: (value: any) => {
-    if (value === "text") {
-      return { color: "transparent", backgroundClip: "text" }
-    } else {
-      return { backgroundClip: value }
-    }
-  },
-  content: (value: any) => {
-    if (isObject(value)) {
-      return { content: "''", ...value }
-    } else {
-      return value
-    }
-  },
-  vars,
-  grid,
-  colorMix,
-  gradient,
-  animation,
-  transform,
-  token: generateToken,
-  styles: generateStyles,
-  calc: generateCalc,
-  filter: generateFilter,
-  function: generateFunction,
   media: generateAtRule("media"),
-  container: generateAtRule("container"),
+  px: (value: any) => {
+    if (value == null) return value
+
+    const { isUnitless } = analyzeCSSValue(value)
+
+    return isUnitless || isNumber(value) ? `${value}px` : value
+  },
+  styles: generateStyles,
   supports: generateAtRule("supports"),
+  token: generateToken,
+  transform,
+  vars,
 }
 
 export type Transforms = keyof typeof transforms

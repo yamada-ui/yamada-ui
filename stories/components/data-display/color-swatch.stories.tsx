@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Wrap, ColorSwatch, defaultTheme } from "@yamada-ui/react"
+import { ColorSwatch, defaultTheme, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof ColorSwatch>
 
 const meta: Meta<typeof ColorSwatch> = {
-  title: "Components / Data Display / ColorSwatch",
   component: ColorSwatch,
+  title: "Components / Data Display / ColorSwatch",
 }
 
 export default meta

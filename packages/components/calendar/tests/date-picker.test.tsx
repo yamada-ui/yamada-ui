@@ -18,9 +18,9 @@ describe("<DatePicker />", () => {
     test("should change selected date", async () => {
       const { container } = render(
         <DatePicker
+          defaultValue={new Date(new Date().setDate(1))}
           placeholder="basic"
           today
-          defaultValue={new Date(new Date().setDate(1))}
         />,
       )
 
@@ -36,9 +36,9 @@ describe("<DatePicker />", () => {
     test("whether Calendar is displayed when DatePicker is focused", async () => {
       const { container } = render(
         <DatePicker
+          defaultValue={new Date(new Date().setDate(1))}
           placeholder="basic"
           today
-          defaultValue={new Date(new Date().setDate(1))}
         />,
       )
 

@@ -1,13 +1,13 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { ReactNode } from "react"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, isArray } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { useEffect, useState } from "react"
 import {
   AccordionProvider,
@@ -17,13 +17,25 @@ import {
 
 export interface AccordionOptions {
   /**
-   * The index(es) of the accordion item to expand.
-   */
-  index?: number | number[]
-  /**
    * The initial index(es) of the accordion item to expand.
    */
   defaultIndex?: number | number[]
+  /**
+   * The accordion icon for all items to use.
+   */
+  icon?:
+    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
+    | ReactNode
+  /**
+   * If `true`, hide the accordion icon for all items.
+   *
+   * @default false
+   */
+  iconHidden?: boolean
+  /**
+   * The index(es) of the accordion item to expand.
+   */
+  index?: number | number[]
   /**
    * If `true`, multiple accordion items can be expanded at once.
    *
@@ -36,18 +48,6 @@ export interface AccordionOptions {
    * @default false
    */
   isToggle?: boolean
-  /**
-   * If `true`, hide the accordion icon for all items.
-   *
-   * @default false
-   */
-  iconHidden?: boolean
-  /**
-   * The accordion icon for all items to use.
-   */
-  icon?:
-    | ReactNode
-    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
   /**
    * The callback invoked when accordion items are expanded or collapsed.
    */
@@ -68,12 +68,12 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Accordion", props)
   const {
     className,
-    index: value,
     defaultIndex: defaultValue,
+    icon,
+    iconHidden,
+    index: value,
     isMultiple,
     isToggle,
-    iconHidden,
-    icon,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -99,9 +99,9 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
 
   const [index, setIndex] = useControllableState({
-    value,
     defaultValue: () =>
       isMultiple ? (defaultValue ?? []) : (defaultValue ?? -1),
+    value,
     onChange,
   })
 
@@ -115,14 +115,14 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
     <DescendantsContextProvider value={descendants}>
       <AccordionProvider
         value={{
-          index,
-          setIndex,
           focusedIndex,
-          setFocusedIndex,
+          icon,
+          iconHidden,
+          index,
           isMultiple,
           isToggle,
-          iconHidden,
-          icon,
+          setFocusedIndex,
+          setIndex,
           styles,
         }}
       >

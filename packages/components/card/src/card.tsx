@@ -1,8 +1,8 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
@@ -14,6 +14,10 @@ const [CardProvider, useCard] = createContext<{ [key: string]: CSSUIObject }>({
 
 interface CardOptions {
   /**
+   * The CSS `align-items` property.
+   */
+  align?: CSSUIObject["alignItems"]
+  /**
    * The CSS `flex-direction` property.
    */
   direction?: CSSUIObject["flexDirection"]
@@ -21,10 +25,6 @@ interface CardOptions {
    * The CSS `justify-content` property.
    */
   justify?: CSSUIObject["justifyContent"]
-  /**
-   * The CSS `align-items` property.
-   */
-  align?: CSSUIObject["alignItems"]
 }
 
 export interface CardProps
@@ -41,17 +41,17 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Card", props)
   const {
     className,
+    align: alignItems,
     direction: flexDirection = "column",
     justify: justifyContent,
-    align: alignItems,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
+    alignItems,
     display: "flex",
     flexDirection,
     justifyContent,
-    alignItems,
     wordWrap: "break-word",
     ...styles.container,
   }
@@ -78,9 +78,9 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     const styles = useCard()
 
     const css: CSSUIObject = {
+      alignItems: "center",
       display: "flex",
       justifyContent: "flex-start",
-      alignItems: "center",
       ...styles.header,
     }
 
@@ -105,9 +105,9 @@ export const CardBody = forwardRef<CardBodyProps, "div">(
     const styles = useCard()
 
     const css: CSSUIObject = {
+      alignItems: "flex-start",
       display: "flex",
       flexDirection: "column",
-      alignItems: "flex-start",
       ...styles.body,
     }
 
@@ -132,9 +132,9 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     const styles = useCard()
 
     const css: CSSUIObject = {
+      alignItems: "center",
       display: "flex",
       justifyContent: "flex-start",
-      alignItems: "center",
       ...styles.footer,
     }
 

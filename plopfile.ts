@@ -1,7 +1,7 @@
+import { findPackages } from "find-packages"
 import { readdirSync } from "fs"
 import { appendFile, readFile, writeFile } from "fs/promises"
 import path from "path"
-import { findPackages } from "find-packages"
 import { ActionType, NodePlopAPI } from "plop"
 
 const cwd = process.cwd()
@@ -85,7 +85,65 @@ export default function plop(plop: NodePlopAPI) {
   })
 
   plop.setGenerator("component", {
+    actions: (answers) => {
+      const actions: ActionType[] = []
+
+      if (!answers) return actions
+
+      const { categoryName, componentType, newCategoryName, packageName } =
+        answers
+
+      actions.push({
+        type: "addMany",
+        base:
+          componentType === "Yes"
+            ? "plop/component/package-multi"
+            : "plop/component/package",
+        abortOnFail: true,
+        data: { packageName },
+        destination: `./packages/components/{{dashCase packageName}}`,
+        templateFiles:
+          componentType === "Yes"
+            ? "plop/component/package-multi/**"
+            : "plop/component/package/**",
+      })
+
+      actions.push({
+        type: "addMany",
+        base: "plop/component/storybook",
+        abortOnFail: true,
+        data: { categoryName: newCategoryName ?? categoryName, packageName },
+        destination: `./stories/components/{{dashCase ${newCategoryName ? `newCategoryName` : `categoryName`}}}`,
+        templateFiles: "plop/component/storybook/**",
+      })
+
+      actions.push({
+        type: "addMany",
+        base:
+          componentType === "Yes"
+            ? "plop/component/theme-multi"
+            : "plop/component/theme",
+        abortOnFail: true,
+        data: { categoryName: newCategoryName ?? categoryName, packageName },
+        destination: `./packages/theme/src/components`,
+        templateFiles:
+          componentType === "Yes"
+            ? "plop/component/theme-multi/**"
+            : "plop/component/theme/**",
+      })
+
+      actions.push({
+        type: "updateReact",
+      })
+
+      actions.push({
+        type: "updateTheme",
+      })
+
+      return actions
+    },
     description: "Generates a component",
+
     prompts: [
       {
         type: "input",
@@ -105,15 +163,14 @@ export default function plop(plop: NodePlopAPI) {
       {
         type: "list",
         name: "categoryName",
-        message: "Which category does this belong?:",
-        default: "layouts",
         choices: [...categories, "Create new category."],
+        default: "layouts",
+        message: "Which category does this belong?:",
       },
       {
         type: "input",
         name: "newCategoryName",
         message: "Enter category name:",
-        when: ({ categoryName }) => categoryName === "Create new category.",
         validate: (input) => {
           if (!input) return "category name is required."
 
@@ -124,77 +181,43 @@ export default function plop(plop: NodePlopAPI) {
 
           return true
         },
+        when: ({ categoryName }) => categoryName === "Create new category.",
       },
       {
         type: "list",
         name: "componentType",
-        message: "Does this use a provider?:",
-        default: "No",
         choices: ["Yes", "No"],
+        default: "No",
+        message: "Does this use a provider?:",
       },
     ],
+  })
 
+  plop.setGenerator("hook", {
     actions: (answers) => {
       const actions: ActionType[] = []
 
       if (!answers) return actions
 
-      const { packageName, categoryName, newCategoryName, componentType } =
-        answers
+      const { packageName } = answers
 
       actions.push({
         type: "addMany",
-        templateFiles:
-          componentType === "Yes"
-            ? "plop/component/package-multi/**"
-            : "plop/component/package/**",
-        destination: `./packages/components/{{dashCase packageName}}`,
-        base:
-          componentType === "Yes"
-            ? "plop/component/package-multi"
-            : "plop/component/package",
+        base: "plop/hook/package",
+        abortOnFail: true,
         data: { packageName },
-        abortOnFail: true,
-      })
-
-      actions.push({
-        type: "addMany",
-        templateFiles: "plop/component/storybook/**",
-        destination: `./stories/components/{{dashCase ${newCategoryName ? `newCategoryName` : `categoryName`}}}`,
-        base: "plop/component/storybook",
-        data: { packageName, categoryName: newCategoryName ?? categoryName },
-        abortOnFail: true,
-      })
-
-      actions.push({
-        type: "addMany",
-        templateFiles:
-          componentType === "Yes"
-            ? "plop/component/theme-multi/**"
-            : "plop/component/theme/**",
-        destination: `./packages/theme/src/components`,
-        base:
-          componentType === "Yes"
-            ? "plop/component/theme-multi"
-            : "plop/component/theme",
-        data: { packageName, categoryName: newCategoryName ?? categoryName },
-        abortOnFail: true,
+        destination: `./packages/hooks/{{dashCase packageName}}`,
+        templateFiles: "plop/hook/package/**",
       })
 
       actions.push({
         type: "updateReact",
       })
 
-      actions.push({
-        type: "updateTheme",
-      })
-
       return actions
     },
-  })
-
-  plop.setGenerator("hook", {
     description: "Generates a hook",
+
     prompts: [
       {
         type: "input",
@@ -212,28 +235,5 @@ export default function plop(plop: NodePlopAPI) {
         },
       },
     ],
-
-    actions: (answers) => {
-      const actions: ActionType[] = []
-
-      if (!answers) return actions
-
-      const { packageName } = answers
-
-      actions.push({
-        type: "addMany",
-        templateFiles: "plop/hook/package/**",
-        destination: `./packages/hooks/{{dashCase packageName}}`,
-        base: "plop/hook/package",
-        data: { packageName },
-        abortOnFail: true,
-      })
-
-      actions.push({
-        type: "updateReact",
-      })
-
-      return actions
-    },
   })
 }

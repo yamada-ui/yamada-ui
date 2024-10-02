@@ -21,15 +21,15 @@ describe("<Slider />", () => {
   })
 
   test("should have correct default value", () => {
-    render(<Slider data-testid="slider" defaultValue={25} />)
+    render(<Slider defaultValue={25} data-testid="slider" />)
     expect(
       screen.getByTestId("slider").getElementsByTagName("input")[0],
     ).toHaveValue(String(25))
   })
 
   test("Slider thumb should have correct aria-valuemin and aria-valuemax", () => {
-    const { min, max } = { min: 0, max: 100 }
-    render(<Slider min={min} max={max} />)
+    const { max, min } = { max: 100, min: 0 }
+    render(<Slider max={max} min={min} />)
 
     const sliderThumb = screen.getByRole("slider")
 
@@ -70,7 +70,7 @@ describe("<Slider />", () => {
   })
 
   test("can be disabled", () => {
-    render(<Slider data-testid="slider" isDisabled />)
+    render(<Slider isDisabled data-testid="slider" />)
 
     const slider = screen.getByTestId("slider")
     const sliderInput = slider.getElementsByTagName("input")[0]
@@ -82,7 +82,7 @@ describe("<Slider />", () => {
   })
 
   test("Slider readOnly tests", () => {
-    const { rerender } = render(<Slider data-testid="slider1" isReadOnly />)
+    const { rerender } = render(<Slider isReadOnly data-testid="slider1" />)
 
     let slider = screen.getByTestId("slider1")
     let sliderInput = slider.getElementsByTagName("input")[0]
@@ -92,7 +92,7 @@ describe("<Slider />", () => {
     expect(sliderInput).toHaveAttribute("readonly", "")
     expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
 
-    rerender(<Slider data-testid="slider2" focusThumbOnChange={false} />)
+    rerender(<Slider focusThumbOnChange={false} data-testid="slider2" />)
 
     slider = screen.getByTestId("slider2")
     sliderInput = slider.getElementsByTagName("input")[0]
@@ -107,7 +107,7 @@ describe("<Slider />", () => {
     const step = 10
     const defaultValue = 0
     const { container } = render(
-      <Slider min={0} max={100} defaultValue={defaultValue} step={step} />,
+      <Slider defaultValue={defaultValue} max={100} min={0} step={step} />,
     )
 
     const slider = screen.getByRole("slider")
@@ -122,7 +122,7 @@ describe("<Slider />", () => {
     const min = 10
     const max = 5
 
-    const renderWithInvalidProps = () => render(<Slider min={min} max={max} />)
+    const renderWithInvalidProps = () => render(<Slider max={max} min={min} />)
 
     const consoleSpy = vi.spyOn(console, "error")
     consoleSpy.mockImplementation(() => {})
@@ -139,7 +139,7 @@ describe("<Slider />", () => {
     const max = 100
     const tenStep = (max - min) / 10
     const { container } = render(
-      <Slider min={min} max={max} step={10} defaultValue={0} />,
+      <Slider defaultValue={0} max={max} min={min} step={10} />,
     )
 
     const slider = screen.getByRole("slider")
@@ -208,7 +208,7 @@ describe("<Slider />", () => {
     const min = 0
     const max = 100
     const { container } = render(
-      <Slider min={min} max={max} step={10} defaultValue={0} />,
+      <Slider defaultValue={0} max={max} min={min} step={10} />,
     )
 
     const sliderThumb = screen.getByRole("slider")
@@ -228,16 +228,16 @@ describe("<Slider />", () => {
       useSlider({
         id: "test-slider",
         name: "test-slider",
-        min: 0,
-        max: 100,
-        step: 1,
         defaultValue: 50,
-        orientation: "horizontal",
-        isReversed: false,
         focusThumbOnChange: true,
-        onChangeStart,
-        onChangeEnd,
+        isReversed: false,
+        max: 100,
+        min: 0,
+        orientation: "horizontal",
+        step: 1,
         onChange,
+        onChangeEnd,
+        onChangeStart,
       }),
     )
 
@@ -277,15 +277,15 @@ describe("<Slider />", () => {
       <Slider
         id="test-slider"
         name="test"
-        min={0}
-        max={100}
-        step={1}
         defaultValue={50}
-        orientation="horizontal"
         isReversed={false}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
+        max={100}
+        min={0}
+        orientation="horizontal"
+        step={1}
         onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
       />,
     )
 

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@yamada-ui/test"
+import { fireEvent, render, screen } from "@yamada-ui/test"
 import { ColorPicker } from "../src"
 import { mockEyeDropper, resetEyeDropperMock } from "./utils/mock-eye-dropper"
 
@@ -36,8 +36,8 @@ describe("<ColorPicker />", () => {
     render(
       <ColorPicker
         defaultValue="#00ff00"
-        data-testid="colorPicker"
         withEyeDropper
+        data-testid="colorPicker"
       />,
     )
 

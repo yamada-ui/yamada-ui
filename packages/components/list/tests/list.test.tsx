@@ -1,5 +1,5 @@
 import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
-import { List, ListIcon, ListItem, DiscList, DecimalList } from "../src"
+import { DecimalList, DiscList, List, ListIcon, ListItem } from "../src"
 
 describe("<List />", () => {
   test("List renders correctly", async () => {
@@ -45,7 +45,7 @@ describe("<List />", () => {
 
   test("should render list with a gap", async () => {
     render(
-      <List aria-label="List" gap="lg">
+      <List gap="lg" aria-label="List">
         <ListItem>Item one</ListItem>
         <ListItem>Item two</ListItem>
       </List>,
@@ -63,7 +63,7 @@ describe("<List />", () => {
     render(
       <List>
         <ListItem>
-          <ListIcon aria-label="icon" as={TestIcon} />
+          <ListIcon as={TestIcon} aria-label="icon" />
         </ListItem>
       </List>,
     )
@@ -76,11 +76,11 @@ describe("<List />", () => {
   test("should render list with different style types", async () => {
     render(
       <>
-        <List aria-label="list-square" styleType="square">
+        <List styleType="square" aria-label="list-square">
           <ListItem>Item</ListItem>
         </List>
 
-        <List aria-label="list-circle" styleType="circle">
+        <List styleType="circle" aria-label="list-circle">
           <ListItem>Item</ListItem>
         </List>
       </>,

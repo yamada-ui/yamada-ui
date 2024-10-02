@@ -1,16 +1,6 @@
-import type { ComponentArgs, ThemeProps, PropGetter } from "@yamada-ui/core"
+import type { ComponentArgs, PropGetter, ThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
-import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
-import { Flex } from "@yamada-ui/layouts"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
-import {
-  cx,
-  isObject,
-  useCallbackRef,
-  getValidChildren,
-  mergeRefs,
-} from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type {
   ChangeEvent,
@@ -18,20 +8,30 @@ import type {
   ReactElement,
   RefAttributes,
 } from "react"
-import { useCallback, useId, useRef, forwardRef } from "react"
 import type { RadioProps } from "./radio"
-import { Radio } from "./radio"
 import type { RadioGroupContext } from "./radio-context"
+import { useFormControl } from "@yamada-ui/form-control"
+import { Flex } from "@yamada-ui/layouts"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import {
+  cx,
+  getValidChildren,
+  isObject,
+  mergeRefs,
+  useCallbackRef,
+} from "@yamada-ui/utils"
+import { forwardRef, useCallback, useId, useRef } from "react"
+import { Radio } from "./radio"
 import { RadioGroupProvider } from "./radio-context"
 
-export type RadioItem<Y extends string | number = string> = RadioProps<Y> & {
+export type RadioItem<Y extends number | string = string> = {
   label?: string
-}
+} & RadioProps<Y>
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
-export interface UseRadioGroupProps<Y extends string | number = string> {
+export interface UseRadioGroupProps<Y extends number | string = string> {
   /**
    * The top-level id string that will be applied to the radios.
    * The index of the radio will be appended to this top-level id.
@@ -42,17 +42,9 @@ export interface UseRadioGroupProps<Y extends string | number = string> {
    */
   name?: string
   /**
-   * The value of the radio group.
-   */
-  value?: Y
-  /**
    * The initial value of the radio group.
    */
   defaultValue?: Y
-  /**
-   * The callback fired when any children radio is checked or unchecked.
-   */
-  onChange?: (value: Y) => void
   /**
    * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
    *
@@ -61,20 +53,28 @@ export interface UseRadioGroupProps<Y extends string | number = string> {
    * @default false
    */
   isNative?: boolean
+  /**
+   * The value of the radio group.
+   */
+  value?: Y
+  /**
+   * The callback fired when any children radio is checked or unchecked.
+   */
+  onChange?: (value: Y) => void
 }
 
 export const useRadioGroup = <
-  Y extends string | number,
+  Y extends number | string,
   M extends Dict = Dict,
 >({
   id,
   name,
+  defaultValue,
   isNative,
   value: valueProp,
-  defaultValue,
   onChange: onChangeProp,
   ...props
-}: UseRadioGroupProps<Y> & M) => {
+}: M & UseRadioGroupProps<Y>) => {
   const uuid = useId()
 
   id ??= uuid
@@ -83,8 +83,8 @@ export const useRadioGroup = <
   const onChangeRef = useCallbackRef(onChangeProp)
 
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeRef,
   })
 
@@ -131,7 +131,7 @@ export const useRadioGroup = <
 
   const getRadioProps: PropGetter<
     { value?: Y },
-    { value?: Y; checked?: boolean; isChecked?: boolean }
+    { checked?: boolean; isChecked?: boolean; value?: Y }
   > = useCallback(
     (props = {}, ref = null) => {
       const isChecked = props.value === value
@@ -150,22 +150,22 @@ export const useRadioGroup = <
   )
 
   return {
-    props,
     id,
     name,
-    value,
+    props,
     setValue,
-    onChange,
-    onFocus,
+    value,
     getContainerProps,
     getRadioProps,
+    onChange,
+    onFocus,
   }
 }
 
-export type UseRadioGroupReturn<Y extends string | number = string> =
+export type UseRadioGroupReturn<Y extends number | string = string> =
   ReturnType<typeof useRadioGroup<Y>>
 
-export interface RadioGroupProps<Y extends string | number = string>
+export interface RadioGroupProps<Y extends number | string = string>
   extends ThemeProps<"Radio">,
     Omit<FlexProps, "defaultValue" | "onChange">,
     UseRadioGroupProps<Y>,
@@ -179,27 +179,27 @@ export interface RadioGroupProps<Y extends string | number = string>
 }
 
 export const RadioGroup = forwardRef(
-  <Y extends string | number = string>(
+  <Y extends number | string = string>(
     {
       id: idProp,
       className,
-      size,
-      variant,
-      colorScheme,
       children,
-      items = [],
+      colorScheme,
       direction = "column",
       gap,
+      items = [],
+      size,
+      variant,
       ...props
     }: RadioGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const {
-      labelId,
-      isRequired,
-      isReadOnly,
       isDisabled,
       isInvalid,
+      isReadOnly,
+      isRequired,
+      labelId,
       ...computedProps
     } = useFormControl({
       id: idProp,
@@ -208,10 +208,10 @@ export const RadioGroup = forwardRef(
     const {
       id,
       name,
-      value,
-      onChange,
-      getContainerProps,
       props: rest,
+      value,
+      getContainerProps,
+      onChange,
     } = useRadioGroup(computedProps)
 
     const validChildren = getValidChildren(children)
@@ -229,15 +229,15 @@ export const RadioGroup = forwardRef(
       <RadioGroupProvider
         value={
           {
-            size,
-            variant,
+            name,
             colorScheme,
-            isRequired,
-            isReadOnly,
             isDisabled,
             isInvalid,
-            name,
+            isReadOnly,
+            isRequired,
+            size,
             value,
+            variant,
             onChange,
           } as RadioGroupContext
         }
@@ -259,7 +259,7 @@ export const RadioGroup = forwardRef(
     )
   },
 ) as {
-  <Y extends string | number = string>(
+  <Y extends number | string = string>(
     props: RadioGroupProps<Y> & RefAttributes<HTMLDivElement>,
   ): JSX.Element
 } & ComponentArgs

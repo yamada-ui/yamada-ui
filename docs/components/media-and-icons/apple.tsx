@@ -1,5 +1,5 @@
-import { Icon } from "@yamada-ui/react"
 import type { IconProps } from "@yamada-ui/react"
+import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
 export const Apple = forwardRef<SVGSVGElement, IconProps>(
@@ -9,8 +9,8 @@ export const Apple = forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
         boxSize={boxSize}
         fill="currentcolor"
-        viewBox="0 0 64 64"
         focusable="false"
+        viewBox="0 0 64 64"
         xmlns="http://www.w3.org/2000/svg"
         {...rest}
       >

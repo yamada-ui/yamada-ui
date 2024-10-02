@@ -3,62 +3,62 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Menu: ComponentMultiStyle<"Menu"> = {
   baseStyle: {
     button: {
-      transitionProperty: "common",
       transitionDuration: "normal",
-    },
-    content: {
-      rounded: "md",
-      minW: "xs",
-      bg: ["white", "black"],
-      border: "1px solid",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      color: "inherit",
-      boxShadow: ["lg", "dark-lg"],
-      zIndex: "guldo",
-    },
-    list: {
-      outline: "none",
-      py: "2",
-    },
-    item: {
-      cursor: "pointer",
-      py: "1.5",
-      px: "3",
-      transitionProperty: "background",
-      transitionDuration: "ultra-fast",
-      transitionTimingFunction: "ease-in",
-      _focus: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-      },
-      _active: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _disabled: {
-          bg: ["white", "black"],
-        },
-      },
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-      },
-    },
-    icon: {
-      color: ["blackAlpha.600", "whiteAlpha.700"],
+      transitionProperty: "common",
     },
     command: {
       opacity: 0.6,
     },
+    content: {
+      bg: ["white", "black"],
+      border: "1px solid",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      boxShadow: ["lg", "dark-lg"],
+      color: "inherit",
+      minW: "xs",
+      rounded: "md",
+      zIndex: "guldo",
+    },
     divider: {
-      my: "2",
       borderBottomWidth: "1px",
       borderColor: "inherit",
+      my: "2",
     },
     group: {},
     groupLabel: {
-      py: "1.5",
-      px: "3",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "sm",
       fontWeight: "semibold",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      px: "3",
+      py: "1.5",
+    },
+    icon: {
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+    },
+    item: {
+      _active: {
+        _disabled: {
+          bg: ["white", "black"],
+        },
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+      },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
+      _focus: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+      },
+      cursor: "pointer",
+      px: "3",
+      py: "1.5",
+      transitionDuration: "ultra-fast",
+      transitionProperty: "background",
+      transitionTimingFunction: "ease-in",
+    },
+    list: {
+      outline: "none",
+      py: "2",
     },
   },
 }

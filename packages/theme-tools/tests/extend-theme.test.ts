@@ -79,7 +79,7 @@ describe("extendTheme", () => {
 
     const expected = {
       ...defaultTheme,
-      colors: { ...defaultTheme.colors, tertiary: "#FF0", quaternary: "#00F" },
+      colors: { ...defaultTheme.colors, quaternary: "#00F", tertiary: "#FF0" },
     }
 
     expect(extendTheme(customTheme1, customTheme2)()).toStrictEqual(expected)

@@ -1,5 +1,5 @@
-import { GetServerSidePropsContext, NextPage } from 'next'
 import { Layout } from 'components/layouts'
+import { GetServerSidePropsContext, NextPage } from 'next'
 
 interface Props {}
 

@@ -1,3 +1,4 @@
+import type { Provider, RefCallback } from "react"
 import {
   cast,
   createContext,
@@ -5,7 +6,6 @@ import {
   mergeRefs,
   useSafeLayoutEffect,
 } from "@yamada-ui/utils"
-import type { Provider, RefCallback } from "react"
 import { useRef, useState } from "react"
 
 const sortNodes = (nodes: Node[]) =>
@@ -51,22 +51,16 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-export type DescendantOptions<
-  T extends HTMLElement = HTMLElement,
-  K = {},
-> = K & {
-  disabled?: boolean
+export type DescendantOptions<T extends HTMLElement = HTMLElement, K = {}> = {
   id?: string
+  disabled?: boolean
   filter?: FilterDescendant<T, K>
-}
+} & K
 
-export type Descendant<
-  T extends HTMLElement = HTMLElement,
-  K = {},
-> = DescendantOptions<T, K> & {
-  node: T
+export type Descendant<T extends HTMLElement = HTMLElement, K = {}> = {
   index: number
-}
+  node: T
+} & DescendantOptions<T, K>
 
 export type FilterDescendant<T extends HTMLElement = HTMLElement, K = {}> = (
   value: Descendant<T, K>,
@@ -87,7 +81,7 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   }
 
   const setDescendants = (
-    node: T | null,
+    node: null | T,
     options?: DescendantOptions<T, K>,
   ) => {
     if (!node || descendants.has(node)) return
@@ -97,19 +91,19 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
 
     if (options?.disabled) options.disabled = !!options.disabled
 
-    const descendant = { node, index: -1, ...options }
+    const descendant = { index: -1, node, ...options }
 
     descendants.set(node, descendant as Descendant<T, K>)
 
     assignIndex(sorted)
   }
 
-  const register = (nodeOrOptions: T | null | DescendantOptions<T, K>) => {
+  const register = (nodeOrOptions: DescendantOptions<T, K> | null | T) => {
     if (nodeOrOptions == null) return
 
     if (isElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
 
-    return (node: T | null) => setDescendants(node, nodeOrOptions)
+    return (node: null | T) => setDescendants(node, nodeOrOptions)
   }
 
   const unregister = (node: T) => {
@@ -127,10 +121,10 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   const enabledCount = (filter?: FilterDescendant<T, K>) =>
     enabledValues(filter).length
 
-  const indexOf = (node: T | null) =>
+  const indexOf = (node: null | T) =>
     !node ? -1 : (descendants.get(node)?.index ?? -1)
 
-  const enabledIndexOf = (node: T | null, filter?: FilterDescendant<T, K>) =>
+  const enabledIndexOf = (node: null | T, filter?: FilterDescendant<T, K>) =>
     node == null
       ? -1
       : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))
@@ -230,25 +224,25 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   }
 
   return {
+    count,
+    destroy,
+    enabledCount,
+    enabledFirstValue,
+    enabledIndexOf,
+    enabledLastValue,
+    enabledNextValue,
+    enabledPrevValue,
+    enabledValue,
+    enabledValues,
+    firstValue,
+    indexOf,
+    lastValue,
+    nextValue,
+    prevValue,
     register,
     unregister,
-    destroy,
-    count,
-    values,
     value,
-    indexOf,
-    firstValue,
-    lastValue,
-    prevValue,
-    nextValue,
-    enabledCount,
-    enabledValues,
-    enabledValue,
-    enabledIndexOf,
-    enabledFirstValue,
-    enabledLastValue,
-    enabledPrevValue,
-    enabledNextValue,
+    values,
   }
 }
 
@@ -311,11 +305,11 @@ const useDescendant = <
 
   return {
     descendants,
-    index,
     enabledIndex: descendants.enabledIndexOf(
       ref.current,
       options?.filter as any,
     ),
+    index,
     register: mergeRefs(refCallback, ref),
   }
 }
@@ -328,9 +322,9 @@ export const createDescendant = <
     DescendantsContextProvider: cast<Provider<DescendantsManager<T, K>>>(
       DescendantsContextProvider,
     ),
-    useDescendantsContext: () =>
-      cast<DescendantsManager<T, K>>(useDescendantsContext()),
-    useDescendants: () => useDescendants<T, K>(),
     useDescendant: (options?: DescendantOptions<T, K>) =>
       useDescendant<T, K>(options),
+    useDescendants: () => useDescendants<T, K>(),
+    useDescendantsContext: () =>
+      cast<DescendantsManager<T, K>>(useDescendantsContext()),
   }) as const

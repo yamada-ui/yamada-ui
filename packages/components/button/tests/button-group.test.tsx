@@ -24,13 +24,13 @@ describe("<Button />", () => {
     const buttonGroup = getByRole("group")
 
     expect(buttonGroup.firstChild).toHaveStyle({
-      borderTopRightRadius: "0px",
       borderBottomRightRadius: "0px",
+      borderTopRightRadius: "0px",
     })
 
     expect(buttonGroup.lastChild).toHaveStyle({
-      borderTopLeftRadius: "0px",
       borderBottomLeftRadius: "0px",
+      borderTopLeftRadius: "0px",
     })
   })
 

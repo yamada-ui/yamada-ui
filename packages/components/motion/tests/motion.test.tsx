@@ -1,4 +1,4 @@
-import { render, a11y, screen, waitFor } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import { AnimatePresence, Motion } from "../src"
 
@@ -13,7 +13,7 @@ describe("<Motion />", () => {
   })
 
   test("Motion renders correctly with initial", async () => {
-    render(<Motion initial={{ x: 10, opacity: 0 }}>Motion</Motion>)
+    render(<Motion initial={{ opacity: 0, x: 10 }}>Motion</Motion>)
     expect(screen.queryByText("Motion")).toHaveStyle(
       "transform: translateX(10px);",
     )
@@ -21,7 +21,7 @@ describe("<Motion />", () => {
 
   test("Motion renders correctly with animate", async () => {
     render(
-      <Motion initial={{ x: 10, opacity: 0 }} animate={{ x: 100, opacity: 1 }}>
+      <Motion animate={{ opacity: 1, x: 100 }} initial={{ opacity: 0, x: 10 }}>
         Motion
       </Motion>,
     )
@@ -41,9 +41,9 @@ describe("<Motion />", () => {
           <AnimatePresence>
             {isVisible ? (
               <Motion
-                initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                initial={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
               >
                 Motion

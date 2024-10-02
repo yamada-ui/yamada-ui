@@ -1,15 +1,6 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
-import { Portal } from "@yamada-ui/portal"
-import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import type {
   CSSProperties,
   FC,
@@ -17,6 +8,20 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
+import type { AutocompleteCreateProps } from "./autocomplete-create"
+import type { AutocompleteEmptyProps } from "./autocomplete-empty"
+import type { AutocompleteIconProps } from "./autocomplete-icon"
+import type { AutocompleteListProps } from "./autocomplete-list"
+import type { UseAutocompleteProps } from "./use-autocomplete"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { Portal } from "@yamada-ui/portal"
+import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement, useMemo } from "react"
 import {
   AutocompleteDescendantsContextProvider,
@@ -24,38 +29,43 @@ import {
   useAutocompleteContext,
 } from "./autocomplete-context"
 import { AutocompleteCreate } from "./autocomplete-create"
-import type { AutocompleteCreateProps } from "./autocomplete-create"
 import { AutocompleteEmpty } from "./autocomplete-empty"
-import type { AutocompleteEmptyProps } from "./autocomplete-empty"
-import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteClearIcon, AutocompleteIcon } from "./autocomplete-icon"
-import type { AutocompleteListProps } from "./autocomplete-list"
 import { AutocompleteList } from "./autocomplete-list"
-import type { UseAutocompleteProps } from "./use-autocomplete"
 import { useAutocomplete, useAutocompleteInput } from "./use-autocomplete"
 
 interface MultiAutocompleteOptions {
   /**
-   * The visual separator between each value.
+   * If `true`, the list element will be closed when value is selected.
    *
-   * @default ','
+   * @default false
    */
-  separator?: string
+  closeOnSelect?: boolean
   /**
    * The custom display value to use.
    */
   component?: FC<{
-    value: string | number
-    label: string
     index: number
+    label: string
+    value: number | string
     onRemove: MouseEventHandler<HTMLElement>
   }>
   /**
-   * If `true`, keep the placeholder.
-   *
-   * @default false
+   * The border color when the input is invalid.
    */
-  keepPlaceholder?: boolean
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
+  /**
+   * The footer of the autocomplete content element.
+   */
+  footer?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The header of the autocomplete content element.
+   */
+  header?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
   /**
    * If `true`, display the select clear icon.
    *
@@ -63,13 +73,21 @@ interface MultiAutocompleteOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * If `true`, keep the placeholder.
+   *
+   * @default false
    */
-  focusBorderColor?: string
+  keepPlaceholder?: boolean
   /**
-   * The border color when the input is invalid.
+   * The visual separator between each value.
+   *
+   * @default ','
    */
-  errorBorderColor?: string
+  separator?: string
+  /**
+   * Props for multi autocomplete clear icon element.
+   */
+  clearIconProps?: AutocompleteIconProps
   /**
    * Props for multi autocomplete container element.
    */
@@ -79,42 +97,6 @@ interface MultiAutocompleteOptions {
    */
   contentProps?: Omit<MotionProps, "children">
   /**
-   * Props for multi autocomplete list element.
-   */
-  listProps?: Omit<AutocompleteListProps, "children">
-  /**
-   * Props for multi autocomplete field element.
-   */
-  fieldProps?: Omit<
-    MultiAutocompleteFieldProps,
-    "component" | "separator" | "keepPlaceholder" | "inputProps" | "children"
-  >
-  /**
-   * Props for multi autocomplete input element.
-   */
-  inputProps?: HTMLUIProps<"input">
-  /**
-   * Props for multi autocomplete icon element.
-   */
-  iconProps?: AutocompleteIconProps
-  /**
-   * Props for multi autocomplete clear icon element.
-   */
-  clearIconProps?: AutocompleteIconProps
-  /**
-   * Props to be forwarded to the portal component.
-   *
-   * @default '{ isDisabled: true }'
-   *
-   */
-  portalProps?: Omit<PortalProps, "children">
-  /**
-   * If `true`, the list element will be closed when value is selected.
-   *
-   * @default false
-   */
-  closeOnSelect?: boolean
-  /**
    * Props for autocomplete create element.
    */
   createProps?: Omit<AutocompleteCreateProps, "children">
@@ -123,13 +105,31 @@ interface MultiAutocompleteOptions {
    */
   emptyProps?: Omit<AutocompleteEmptyProps, "children">
   /**
-   * The header of the autocomplete content element.
+   * Props for multi autocomplete field element.
    */
-  header?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
+  fieldProps?: Omit<
+    MultiAutocompleteFieldProps,
+    "children" | "component" | "inputProps" | "keepPlaceholder" | "separator"
+  >
   /**
-   * The footer of the autocomplete content element.
+   * Props for multi autocomplete icon element.
    */
-  footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
+  iconProps?: AutocompleteIconProps
+  /**
+   * Props for multi autocomplete input element.
+   */
+  inputProps?: HTMLUIProps<"input">
+  /**
+   * Props for multi autocomplete list element.
+   */
+  listProps?: Omit<AutocompleteListProps, "children">
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export interface MultiAutocompleteProps
@@ -150,61 +150,61 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
     )
     let {
       className,
-      defaultValue = [],
-      component,
-      separator,
-      isClearable = true,
+      children,
+      closeOnSelect = false,
       color,
+      component,
+      defaultValue = [],
+      footer,
       h,
+      header,
       height,
+      isClearable = true,
+      keepPlaceholder = false,
       minH,
       minHeight,
-      closeOnSelect = false,
-      keepPlaceholder = false,
+      separator,
+      clearIconProps,
       containerProps,
       contentProps,
-      listProps,
-      fieldProps,
-      inputProps,
-      iconProps,
-      clearIconProps,
-      portalProps = { isDisabled: true },
       createProps,
       emptyProps,
-      header,
-      footer,
-      children,
+      fieldProps,
+      iconProps,
+      inputProps,
+      listProps,
+      portalProps = { isDisabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const {
-      value,
-      onClose,
+      allowCreate,
+      computedChildren,
       descendants,
+      inputValue,
+      isEmpty,
+      value,
       formControlProps,
-      getPopoverProps,
       getContainerProps,
       getFieldProps,
-      allowCreate,
-      isEmpty,
-      inputValue,
-      computedChildren,
+      getPopoverProps,
       onClear,
+      onClose,
       ...rest
     } = useAutocomplete<string[]>({
       ...computedProps,
-      defaultValue,
-      closeOnSelect,
       children,
+      closeOnSelect,
+      defaultValue,
     })
 
     h ??= height
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
+      h: "fit-content",
+      w: "100%",
       ...styles.container,
     }
 
@@ -213,13 +213,13 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
         <AutocompleteProvider
           value={{
             ...rest,
-            value,
-            onClose,
-            formControlProps,
-            inputValue,
             allowCreate,
+            inputValue,
             isEmpty,
             styles,
+            value,
+            formControlProps,
+            onClose,
           }}
         >
           <Popover {...getPopoverProps()}>
@@ -234,10 +234,10 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
               >
                 <MultiAutocompleteField
                   component={component}
-                  separator={separator}
-                  keepPlaceholder={keepPlaceholder}
                   h={h}
+                  keepPlaceholder={keepPlaceholder}
                   minH={minH}
+                  separator={separator}
                   inputProps={inputProps}
                   {...getFieldProps(fieldProps, ref)}
                 />
@@ -256,8 +256,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
               {!isEmpty ? (
                 <Portal {...portalProps}>
                   <AutocompleteList
-                    header={runIfFunc(header, { value, onClose })}
                     footer={runIfFunc(footer, { value, onClose })}
+                    header={runIfFunc(header, { value, onClose })}
                     contentProps={contentProps}
                     {...listProps}
                   >
@@ -273,8 +273,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
               ) : (
                 <Portal {...portalProps}>
                   <AutocompleteList
-                    header={runIfFunc(header, { value, onClose })}
                     footer={runIfFunc(footer, { value, onClose })}
+                    header={runIfFunc(header, { value, onClose })}
                     contentProps={contentProps}
                     {...listProps}
                   >
@@ -301,7 +301,7 @@ interface MultiAutocompleteFieldProps
   extends HTMLUIProps,
     Pick<
       MultiAutocompleteProps,
-      "component" | "separator" | "keepPlaceholder" | "inputProps"
+      "component" | "inputProps" | "keepPlaceholder" | "separator"
     > {}
 
 const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
@@ -309,17 +309,17 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     {
       className,
       component,
-      separator = ",",
-      keepPlaceholder,
       h,
+      keepPlaceholder,
       minH,
       placeholder,
+      separator = ",",
       inputProps,
       ...rest
     },
     ref,
   ) => {
-    const { value, label, inputValue, onChange, isOpen, inputRef, styles } =
+    const { inputRef, inputValue, isOpen, label, styles, value, onChange } =
       useAutocompleteContext()
 
     const { getInputProps } = useAutocompleteInput()
@@ -338,15 +338,15 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
           }
 
           const el = component({
-            value: value[index],
-            label,
             index,
+            label,
+            value: value[index],
             onRemove,
           })
 
           const style: CSSProperties = {
-            marginBlockStart: "0.125rem",
             marginBlockEnd: "0.125rem",
+            marginBlockStart: "0.125rem",
             marginInlineEnd: "0.25rem",
           }
 
@@ -369,12 +369,12 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      pe: "2rem",
-      h,
-      minH,
+      alignItems: "center",
       display: "flex",
       flexWrap: "wrap",
-      alignItems: "center",
+      h,
+      minH,
+      pe: "2rem",
       ...styles.field,
       cursor: "text",
     }
@@ -383,27 +383,27 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
       <PopoverTrigger>
         <ui.div
           className={cx("ui-multi-autocomplete__field", className)}
-          __css={css}
           py={label?.length && component ? "0.125rem" : undefined}
+          __css={css}
           {...rest}
         >
           {cloneChildren}
 
           <ui.input
-            aria-label="Input value"
             className="ui-multi-autocomplete__field__input"
             display="inline-block"
             flex="1"
+            marginBlockEnd="0.125rem"
+            marginBlockStart="0.125rem"
             minW="0px"
             overflow="hidden"
-            marginBlockStart="0.125rem"
-            marginBlockEnd="0.125rem"
-            aria-multiselectable="true"
             placeholder={
               !label || !label?.length || (keepPlaceholder && isOpen)
                 ? placeholder
                 : undefined
             }
+            aria-label="Input value"
+            aria-multiselectable="true"
             {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
           />
         </ui.div>

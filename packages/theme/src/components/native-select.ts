@@ -7,38 +7,38 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
     baseStyle: {
       container: {},
       field: {
-        cursor: "pointer",
-        pr: "8",
-        pb: "px",
+        "& > option, optgroup": {
+          bg: ["white", "black"],
+        },
         _focus: {
           zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",
         },
-        "& > option, optgroup": {
-          bg: ["white", "black"],
-        },
+        cursor: "pointer",
+        pb: "px",
+        pr: "8",
       },
       icon: {
-        w: "6",
-        py: "2",
-        color: ["blackAlpha.600", "whiteAlpha.700"],
-        fontSize: "xl",
-        outline: 0,
-        rounded: "md",
         _disabled: {
           opacity: 0.4,
         },
+        color: ["blackAlpha.600", "whiteAlpha.700"],
+        fontSize: "xl",
+        outline: 0,
+        py: "2",
+        rounded: "md",
+        w: "6",
       },
     },
 
     sizes: {
       xs: {
         icon: {
-          pt: "3",
           fontSize: "lg",
           insetEnd: "1",
+          pt: "3",
         },
       },
       sm: {

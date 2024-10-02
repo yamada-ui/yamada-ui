@@ -1,9 +1,9 @@
-import { isObject, isArray, flattenObject } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
-import { DEFAULT_VAR_PREFIX } from "../constant"
 import type { CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
+import { flattenObject, isArray, isObject } from "@yamada-ui/utils"
+import { DEFAULT_VAR_PREFIX } from "../constant"
 import { tokenToVar } from "./utils"
 
 function insertObject(obj: Dict, segments: string[], value: any): any {
@@ -82,7 +82,7 @@ export function vars(
 ) {
   if (!isArray(values)) return values
 
-  return values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
+  return values.reduce<Dict>((prev, { name, token, value, __prefix }) => {
     const prefix = __prefix ?? theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
 
     name = `--${prefix}-${name}`

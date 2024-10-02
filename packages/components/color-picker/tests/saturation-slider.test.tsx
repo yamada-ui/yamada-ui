@@ -1,5 +1,5 @@
-import { drag, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import type { Hsv } from "../src"
+import { drag, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { SaturationSlider } from "../src"
 
 describe("<SaturationSlider />", () => {
@@ -18,16 +18,16 @@ describe("<SaturationSlider />", () => {
 
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
+        configurable: true,
         get() {
           return this.clientX
         },
-        configurable: true,
       },
       pageY: {
+        configurable: true,
         get() {
           return this.clientY
         },
-        configurable: true,
       },
     })
   })
@@ -88,16 +88,16 @@ describe("<SaturationSlider />", () => {
       <SaturationSlider
         defaultValue={defaultValue}
         onChange={onChange}
-        onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
       />,
     )
 
     const slider = screen.getByRole("slider")
 
     await drag(user)({
-      target: slider,
       coords: (i) => ({ x: i * 100, y: i * -100 }),
+      target: slider,
     })
 
     await waitFor(() => {

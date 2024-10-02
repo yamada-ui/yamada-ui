@@ -1,14 +1,5 @@
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
-import {
-  createContext,
-  isArray,
-  useUpdateEffect,
-  useCallbackRef,
-} from "@yamada-ui/utils"
 import type { Dayjs } from "dayjs"
-import dayjs from "dayjs"
 import type {
   Dispatch,
   ForwardedRef,
@@ -16,183 +7,100 @@ import type {
   RefObject,
   SetStateAction,
 } from "react"
+import { useTheme } from "@yamada-ui/core"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import {
+  createContext,
+  isArray,
+  useCallbackRef,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
+import dayjs from "dayjs"
 import { useCallback, useRef, useState } from "react"
 import { getRangeYears, isSameDate, onShouldFocus } from "./calendar-utils"
 
-export type MaybeValue = Date | Date[] | [Date?, Date?] | undefined
+export type MaybeValue = [Date?, Date?] | Date | Date[] | undefined
 
 export type MaybeDate = Date | Dayjs
 
 export interface CalendarContext
   extends Pick<
       Required<UseCalendarProps>,
-      | "type"
-      | "month"
-      | "firstDayOfWeek"
-      | "amountOfMonths"
-      | "paginateBy"
-      | "withWeekdays"
-      | "withHeader"
-      | "withControls"
-      | "withLabel"
-      | "disableOutsideDays"
-      | "hiddenOutsideDays"
-      | "locale"
-      | "weekdayFormat"
-      | "yearFormat"
-      | "monthFormat"
-      | "dateFormat"
-      | "weekendDays"
-      | "holidays"
-      | "today"
       | "__selectType"
+      | "amountOfMonths"
+      | "dateFormat"
+      | "disableOutsideDays"
       | "enableRange"
+      | "firstDayOfWeek"
+      | "hiddenOutsideDays"
+      | "holidays"
+      | "locale"
+      | "month"
+      | "monthFormat"
+      | "paginateBy"
+      | "today"
+      | "type"
+      | "weekdayFormat"
+      | "weekendDays"
+      | "withControls"
+      | "withHeader"
+      | "withLabel"
+      | "withWeekdays"
+      | "yearFormat"
     >,
     Pick<
       UseCalendarProps,
-      | "minDate"
-      | "maxDate"
       | "excludeDate"
-      | "typeRef"
-      | "prevRef"
-      | "nextRef"
+      | "maxDate"
       | "maxSelectValues"
+      | "minDate"
       | "minSelectValues"
+      | "nextRef"
+      | "prevRef"
+      | "typeRef"
     > {
-  value: MaybeValue
+  dayRefs: MutableRefObject<Map<string, RefObject<HTMLButtonElement>>>
+  hoveredValue: Date
+  internalYear: number
+  maxYear: number
+  minYear: number
+  monthRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
+  nextMonth: Date
+  prevMonth: Date
+  rangeYears: number[]
+  setHoveredValue: Dispatch<SetStateAction<Date | undefined>>
+  setInternalYear: Dispatch<SetStateAction<number>>
+  setMonth: Dispatch<SetStateAction<Date>>
   setType: (
-    type: "year" | "month" | "date",
+    type: "date" | "month" | "year",
     year?: number,
     month?: number,
   ) => void
   setValue: Dispatch<SetStateAction<MaybeValue>>
-  setMonth: Dispatch<SetStateAction<Date>>
   setYear: Dispatch<SetStateAction<number>>
-  setInternalYear: Dispatch<SetStateAction<number>>
-  hoveredValue: Date
-  setHoveredValue: Dispatch<SetStateAction<Date | undefined>>
-  year: number
-  internalYear: number
-  minYear: number
-  maxYear: number
-  rangeYears: number[]
-  prevMonth: Date
-  nextMonth: Date
   styles: { [key: string]: CSSUIObject }
+  value: MaybeValue
+  year: number
   yearRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
-  monthRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
-  dayRefs: MutableRefObject<Map<string, RefObject<HTMLButtonElement>>>
 }
 
 export const [CalendarProvider, useCalendarContext] =
   createContext<CalendarContext>({
-    strict: false,
     name: "CalendarContext",
+    strict: false,
   })
 
 export interface UseCalendarProps<Y extends MaybeValue = Date> {
   /**
    * The type of the calendar.
    */
-  type?: "year" | "month" | "date"
-  /**
-   * The initial type of the calendar.
-   */
-  defaultType?: "year" | "month" | "date"
-  /**
-   * The callback invoked when type state changes.
-   */
-  onChangeType?: (
-    type: "year" | "month" | "date",
-    year?: number,
-    month?: number,
-  ) => void
-  /**
-   * The value of the calendar.
-   */
-  value?: Y
-  /**
-   * The initial value of the calendar.
-   */
-  defaultValue?: Y
-  /**
-   * The callback invoked when value state changes.
-   */
-  onChange?: (value: Y) => void
-  /**
-   * The month of the calendar.
-   */
-  month?: Date
-  /**
-   * The initial month of the calendar.
-   *
-   * @default 'new Date()'
-   */
-  defaultMonth?: Date
-  /**
-   * The callback invoked when month state changes.
-   */
-  onChangeMonth?: (value: Date) => void
-  /**
-   * Define the first day of the week.
-   *
-   * @default 'monday'
-   */
-  firstDayOfWeek?: "sunday" | "monday"
+  type?: "date" | "month" | "year"
   /**
    * The number of months to display.
    *
    * @default 1
    */
   amountOfMonths?: number
-  /**
-   * The number of months to paginate.
-   *
-   * @default 1
-   */
-  paginateBy?: number
-  /**
-   * If `true`, outside days will be disabled.
-   *
-   * @default false
-   */
-  disableOutsideDays?: boolean
-  /**
-   * If `true`, outside days will be hidden.
-   */
-  hiddenOutsideDays?: boolean
-  /**
-   * The locale of the calendar.
-   * Check the docs to see the locale of possible modifiers you can pass.
-   *
-   * @see Docs https://day.js.org/docs/en/i18n/instance-locale
-   * @default 'en'
-   */
-  locale?: string
-  /**
-   * The format used for conversion.
-   * Check the docs to see the format of possible modifiers you can pass.
-   *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
-   * @default 'dd'
-   */
-  weekdayFormat?: string
-  /**
-   * The format used for conversion.
-   * Check the docs to see the format of possible modifiers you can pass.
-   *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
-   * @default 'YYYY'
-   */
-  yearFormat?: string
-  /**
-   * The format used for conversion.
-   * Check the docs to see the format of possible modifiers you can pass.
-   *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
-   * @default 'MM'
-   */
-  monthFormat?: string
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
@@ -202,77 +110,25 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    */
   dateFormat?: string
   /**
-   * Define weekend days.
+   * The initial month of the calendar.
    *
-   * @default '[0, 6]'
+   * @default 'new Date()'
    */
-  weekendDays?: number[]
+  defaultMonth?: Date
   /**
-   * If `true`, highlight today.
+   * The initial type of the calendar.
+   */
+  defaultType?: "date" | "month" | "year"
+  /**
+   * The initial value of the calendar.
+   */
+  defaultValue?: Y
+  /**
+   * If `true`, outside days will be disabled.
    *
    * @default false
    */
-  today?: boolean
-  /**
-   * The minimum possible date.
-   */
-  minDate?: Date
-  /**
-   * The maximum possible date.
-   */
-  maxDate?: Date
-  /**
-   * Callback function to determine whether the day should be disabled.
-   */
-  excludeDate?: (date: Date) => boolean
-  /**
-   * Define holidays.
-   */
-  holidays?: Date[]
-  /**
-   * Ref to a type function.
-   */
-  typeRef?: ForwardedRef<() => void | undefined>
-  /**
-   * Ref to a previous function.
-   */
-  prevRef?: ForwardedRef<() => void | undefined>
-  /**
-   * Ref to a next function.
-   */
-  nextRef?: ForwardedRef<() => void | undefined>
-  /**
-   * If `true`, display the calendar weekdays.
-   *
-   * @default true
-   */
-  withWeekdays?: boolean
-  /**
-   * If `true`, display the calendar header.
-   *
-   * @default true
-   */
-  withHeader?: boolean
-  /**
-   * If `true`, display the calendar control buttons.
-   *
-   * @default true
-   */
-  withControls?: boolean
-  /**
-   * If `true`, display the calendar label button.
-   *
-   * @default true
-   */
-  withLabel?: boolean
-  /**
-   * The maximum selectable value.
-   */
-  maxSelectValues?: number
-  /**
-   * The minimum selectable value.
-   */
-  minSelectValues?: number
+  disableOutsideDays?: boolean
   /**
    * If `true`, enables date multiple selection.
    *
@@ -286,51 +142,195 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    */
   enableRange?: boolean
   /**
+   * Callback function to determine whether the day should be disabled.
+   */
+  excludeDate?: (date: Date) => boolean
+  /**
+   * Define the first day of the week.
+   *
+   * @default 'monday'
+   */
+  firstDayOfWeek?: "monday" | "sunday"
+  /**
+   * If `true`, outside days will be hidden.
+   */
+  hiddenOutsideDays?: boolean
+  /**
+   * Define holidays.
+   */
+  holidays?: Date[]
+  /**
+   * The locale of the calendar.
+   * Check the docs to see the locale of possible modifiers you can pass.
+   *
+   * @see Docs https://day.js.org/docs/en/i18n/instance-locale
+   * @default 'en'
+   */
+  locale?: string
+  /**
+   * The maximum possible date.
+   */
+  maxDate?: Date
+  /**
+   * The maximum selectable value.
+   */
+  maxSelectValues?: number
+  /**
+   * The minimum possible date.
+   */
+  minDate?: Date
+  /**
+   * The minimum selectable value.
+   */
+  minSelectValues?: number
+  /**
+   * The month of the calendar.
+   */
+  month?: Date
+  /**
+   * The format used for conversion.
+   * Check the docs to see the format of possible modifiers you can pass.
+   *
+   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @default 'MM'
+   */
+  monthFormat?: string
+  /**
+   * Ref to a next function.
+   */
+  nextRef?: ForwardedRef<() => undefined | void>
+  /**
+   * The number of months to paginate.
+   *
+   * @default 1
+   */
+  paginateBy?: number
+  /**
+   * Ref to a previous function.
+   */
+  prevRef?: ForwardedRef<() => undefined | void>
+  /**
+   * If `true`, highlight today.
+   *
+   * @default false
+   */
+  today?: boolean
+  /**
+   * Ref to a type function.
+   */
+  typeRef?: ForwardedRef<() => undefined | void>
+  /**
+   * The value of the calendar.
+   */
+  value?: Y
+  /**
+   * The format used for conversion.
+   * Check the docs to see the format of possible modifiers you can pass.
+   *
+   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @default 'dd'
+   */
+  weekdayFormat?: string
+  /**
+   * Define weekend days.
+   *
+   * @default '[0, 6]'
+   */
+  weekendDays?: number[]
+  /**
+   * If `true`, display the calendar control buttons.
+   *
+   * @default true
+   */
+  withControls?: boolean
+  /**
+   * If `true`, display the calendar header.
+   *
+   * @default true
+   */
+  withHeader?: boolean
+  /**
+   * If `true`, display the calendar label button.
+   *
+   * @default true
+   */
+  withLabel?: boolean
+  /**
+   * If `true`, display the calendar weekdays.
+   *
+   * @default true
+   */
+  withWeekdays?: boolean
+  /**
+   * The format used for conversion.
+   * Check the docs to see the format of possible modifiers you can pass.
+   *
+   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @default 'YYYY'
+   */
+  yearFormat?: string
+  /**
+   * The callback invoked when value state changes.
+   */
+  onChange?: (value: Y) => void
+  /**
+   * The callback invoked when month state changes.
+   */
+  onChangeMonth?: (value: Date) => void
+  /**
+   * The callback invoked when type state changes.
+   */
+  onChangeType?: (
+    type: "date" | "month" | "year",
+    year?: number,
+    month?: number,
+  ) => void
+  /**
    * Changes the judgment of the currently selected year and month.
    * This is an internal utility primarily used by `MonthPicker` and `YearPicker`.
    *
    * @private
    */
-  __selectType?: "year" | "month" | "date"
+  __selectType?: "date" | "month" | "year"
 }
 
 export const useCalendar = <Y extends MaybeValue = Date>({
   type: typeProp,
-  defaultType,
-  onChangeType: onChangeTypeProp,
-  value: valueProp,
-  defaultValue,
-  onChange: onChangeProp,
-  month: monthProp,
-  defaultMonth,
-  onChangeMonth: onChangeMonthProp,
-  firstDayOfWeek = "monday",
   amountOfMonths = 1,
-  paginateBy = amountOfMonths,
-  withWeekdays = true,
-  disableOutsideDays = false,
-  hiddenOutsideDays = false,
-  minDate,
-  maxDate,
-  locale,
-  yearFormat = "YYYY",
-  monthFormat = "MMM",
-  weekdayFormat = "dd",
   dateFormat = "MMMM YYYY",
-  weekendDays = [0, 6],
-  today = false,
-  excludeDate,
-  holidays = [],
-  typeRef,
-  prevRef,
-  nextRef,
-  withHeader = true,
-  withControls = true,
-  withLabel = true,
-  maxSelectValues,
-  minSelectValues,
+  defaultMonth,
+  defaultType,
+  defaultValue,
+  disableOutsideDays = false,
   enableMultiple = false,
   enableRange = false,
+  excludeDate,
+  firstDayOfWeek = "monday",
+  hiddenOutsideDays = false,
+  holidays = [],
+  locale,
+  maxDate,
+  maxSelectValues,
+  minDate,
+  minSelectValues,
+  month: monthProp,
+  monthFormat = "MMM",
+  nextRef,
+  paginateBy = amountOfMonths,
+  prevRef,
+  today = false,
+  typeRef,
+  value: valueProp,
+  weekdayFormat = "dd",
+  weekendDays = [0, 6],
+  withControls = true,
+  withHeader = true,
+  withLabel = true,
+  withWeekdays = true,
+  yearFormat = "YYYY",
+  onChange: onChangeProp,
+  onChangeMonth: onChangeMonthProp,
+  onChangeType: onChangeTypeProp,
   __selectType = "date",
   ...rest
 }: UseCalendarProps<Y>) => {
@@ -339,24 +339,24 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   locale ??= theme.__config?.date?.locale ?? "en"
 
   const [type, onChangeType] = useControllableState({
-    value: typeProp,
     defaultValue: defaultType ?? "date",
+    value: typeProp,
   })
 
   const setType = useCallbackRef(
-    (type: "year" | "month" | "date", year?: number, month?: number) => {
+    (type: "date" | "month" | "year", year?: number, month?: number) => {
       onChangeType(type)
       onChangeTypeProp?.(type, year, month)
     },
     [],
   )
 
-  const prevValueRef = useRef<Y | undefined>(undefined)
+  const prevValueRef = useRef<undefined | Y>(undefined)
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue:
       defaultValue ??
       (enableMultiple || enableRange ? ([] as Date[] as Y) : undefined),
+    value: valueProp,
     onChange: onChangeProp,
   })
 
@@ -370,7 +370,6 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   if (isRange) disableOutsideDays = false
 
   const [month, setMonth] = useControllableState({
-    value: monthProp,
     defaultValue: () => {
       if (!isMulti && value) {
         defaultMonth ??= new Date(new Date(value).setDate(1))
@@ -382,6 +381,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
       return defaultMonth
     },
+    value: monthProp,
     onChange: onChangeMonthProp,
     onUpdate: (prev, next) => !isSameDate(prev, next),
   })
@@ -512,53 +512,53 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   return {
     type,
-    setType,
-    value,
-    setValue,
-    hoveredValue,
-    setHoveredValue,
-    year,
-    setYear,
-    internalYear,
-    setInternalYear,
-    minYear,
-    maxYear,
-    rangeYears,
-    prevMonth,
-    nextMonth,
-    minDate,
-    maxDate,
-    month,
-    setMonth,
-    firstDayOfWeek,
     amountOfMonths,
-    paginateBy,
-    withWeekdays,
-    withHeader,
-    withControls,
-    withLabel,
-    disableOutsideDays,
-    hiddenOutsideDays,
-    locale,
-    weekdayFormat,
-    yearFormat,
-    monthFormat,
     dateFormat,
-    weekendDays,
-    holidays,
-    today,
-    excludeDate,
-    getContainerProps,
-    typeRef,
-    prevRef,
-    nextRef,
-    yearRefs,
-    monthRefs,
     dayRefs,
-    maxSelectValues,
-    minSelectValues,
-    __selectType,
+    disableOutsideDays,
     enableRange,
+    excludeDate,
+    firstDayOfWeek,
+    hiddenOutsideDays,
+    holidays,
+    hoveredValue,
+    internalYear,
+    locale,
+    maxDate,
+    maxSelectValues,
+    maxYear,
+    minDate,
+    minSelectValues,
+    minYear,
+    month,
+    monthFormat,
+    monthRefs,
+    nextMonth,
+    nextRef,
+    paginateBy,
+    prevMonth,
+    prevRef,
+    rangeYears,
+    setHoveredValue,
+    setInternalYear,
+    setMonth,
+    setType,
+    setValue,
+    setYear,
+    today,
+    typeRef,
+    value,
+    weekdayFormat,
+    weekendDays,
+    withControls,
+    withHeader,
+    withLabel,
+    withWeekdays,
+    year,
+    yearFormat,
+    yearRefs,
+    getContainerProps,
+    __selectType,
   }
 }
 

@@ -1,38 +1,38 @@
+import type { CardProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   Card,
   CardBody,
   CardHeader,
   Heading,
+  isUndefined,
   Tag,
   Text,
-  isUndefined,
 } from "@yamada-ui/react"
-import type { CardProps } from "@yamada-ui/react"
-import type { FC } from "react"
-import { Link } from "./link"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts"
+import { Link } from "./link"
 
 export interface PropsCardProps extends CardProps {
   id: string
   name: string
   type?: string
-  required?: boolean
-  description?: string
-  deprecated?: string
   defaultValue?: string
+  deprecated?: string
+  description?: string
   docs?: string
+  required?: boolean
 }
 
 export const PropsCard: FC<PropsCardProps> = ({
   id,
-  name,
   type,
-  required,
-  description,
-  deprecated,
+  name,
   defaultValue,
+  deprecated,
+  description,
   docs,
+  required,
 }) => {
   const { t } = useI18n()
 
@@ -40,21 +40,21 @@ export const PropsCard: FC<PropsCardProps> = ({
     <Card
       id={id}
       css={{ scrollMarginBlock: "6rem" }}
-      variant="outline"
       mt="8"
       position="relative"
+      variant="outline"
     >
       <CardHeader
-        position="absolute"
-        top="0"
-        left="2"
-        transform="translateY(-50%)"
-        py="0"
-        px="2"
-        gap="2"
         bg={["white", "black"]}
+        gap="2"
+        left="2"
+        position="absolute"
+        px="2"
+        py="0"
+        top="0"
+        transform="translateY(-50%)"
       >
-        <Heading as="h4" fontSize="lg" fontWeight="medium" apply="mdx.code">
+        <Heading as="h4" apply="mdx.code" fontSize="lg" fontWeight="medium">
           {name}
         </Heading>
 
@@ -72,19 +72,19 @@ export const PropsCard: FC<PropsCardProps> = ({
       </CardHeader>
 
       <CardBody
+        columnGap="6"
         display="grid"
         gridTemplateColumns="auto 1fr"
         pt="6"
         rowGap="4"
-        columnGap="6"
       >
         {!isUndefined(description) ? (
           <>
             <Text
-              lineHeight="1.5rem"
               color="muted"
-              fontWeight="medium"
               fontSize="sm"
+              fontWeight="medium"
+              lineHeight="1.5rem"
             >
               {t("component.props-card.description")}
             </Text>
@@ -96,10 +96,10 @@ export const PropsCard: FC<PropsCardProps> = ({
         {!isUndefined(deprecated) ? (
           <>
             <Text
-              lineHeight="1.5rem"
               color="muted"
-              fontWeight="medium"
               fontSize="sm"
+              fontWeight="medium"
+              lineHeight="1.5rem"
             >
               {t("component.props-card.deprecated")}
             </Text>
@@ -111,10 +111,10 @@ export const PropsCard: FC<PropsCardProps> = ({
         {!isUndefined(type) ? (
           <>
             <Text
-              lineHeight="1.5rem"
               color="muted"
-              fontWeight="medium"
               fontSize="sm"
+              fontWeight="medium"
+              lineHeight="1.5rem"
             >
               {t("component.props-card.type")}
             </Text>
@@ -128,10 +128,10 @@ export const PropsCard: FC<PropsCardProps> = ({
         {!isUndefined(defaultValue) ? (
           <>
             <Text
-              lineHeight="1.5rem"
               color="muted"
-              fontWeight="medium"
               fontSize="sm"
+              fontWeight="medium"
+              lineHeight="1.5rem"
             >
               {t("component.props-card.default")}
             </Text>
@@ -145,10 +145,10 @@ export const PropsCard: FC<PropsCardProps> = ({
         {!isUndefined(docs) ? (
           <>
             <Text
-              lineHeight="1.5rem"
               color="muted"
-              fontWeight="medium"
               fontSize="sm"
+              fontWeight="medium"
+              lineHeight="1.5rem"
             >
               {t("component.props-card.docs")}
             </Text>

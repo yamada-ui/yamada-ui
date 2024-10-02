@@ -2,7 +2,7 @@ import type { MutableRefObject } from "react"
 import { useRef } from "react"
 
 export const useLatestRef = <T extends any>(value: T) => {
-  const ref = useRef<T | null>(null)
+  const ref = useRef<null | T>(null)
 
   ref.current = value
 

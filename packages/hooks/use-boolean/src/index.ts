@@ -14,10 +14,10 @@ export const useBoolean = (init: boolean = false): UseBooleanReturn => {
 
   const toggle = useCallback(() => setFlg((prev) => !prev), [])
 
-  return [flg, { on, off, toggle }]
+  return [flg, { off, toggle, on }]
 }
 
 export type UseBooleanReturn = [
   flg: boolean,
-  setFlg: { on: () => void; off: () => void; toggle: () => void },
+  setFlg: { off: () => void; toggle: () => void; on: () => void },
 ]

@@ -1,13 +1,13 @@
+import type { Constant, Issue, ListEvent } from "utils/github"
+import type { APIHandler } from "utils/next"
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { sendDiscord } from "utils/discord"
-import type { Constant, ListEvent, Issue } from "utils/github"
 import {
   getIssues,
   getListEventsForTimeline,
   recursiveOctokit,
 } from "utils/github"
-import type { APIHandler } from "utils/next"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
@@ -28,18 +28,18 @@ const DISCORD_HELP_WANTED_COMMENT =
     ].join("\n")
 
 const getPullRequestEvents = async ({
+  issue_number,
   owner,
   repo,
-  issue_number,
 }: {
+  issue_number: number
   owner: string
   repo: string
-  issue_number: number
 }) => {
   const timeline = await getListEventsForTimeline({
+    issue_number,
     owner,
     repo,
-    issue_number,
   })
 
   const pullRequestEvents = timeline.filter(
@@ -52,19 +52,19 @@ const getPullRequestEvents = async ({
 }
 
 const getAssignedEvent = async ({
+  issue_number,
   owner,
   repo,
-  issue_number,
 }: {
+  issue_number: number
   owner: string
   repo: string
-  issue_number: number
 }) => {
   const { data } = await recursiveOctokit(() =>
     octokit.issues.listEvents({
+      issue_number,
       owner,
       repo,
-      issue_number,
     }),
   )
 
@@ -74,23 +74,23 @@ const getAssignedEvent = async ({
 }
 
 const addHelpWanted = async ({
-  owner,
-  repo,
-  issue,
-  pullRequestEvents,
   constant,
+  issue,
+  owner,
   publish,
+  pullRequestEvents,
+  repo,
   runOctokit,
 }: {
-  owner: string
-  repo: string
-  issue: Issue
-  pullRequestEvents: ListEvent[]
   constant: Constant
+  issue: Issue
+  owner: string
   publish: boolean
+  pullRequestEvents: ListEvent[]
+  repo: string
   runOctokit: boolean
 }) => {
-  const { number, title, labels, created_at, assignee, html_url } = issue
+  const { assignee, created_at, html_url, labels, number, title } = issue
   if (assignee) return
 
   if (labels.every((label) => isObject(label) && label.name !== "bug")) return
@@ -100,14 +100,14 @@ const addHelpWanted = async ({
       (label) =>
         isObject(label) &&
         [
-          "fixed",
+          "Challengers wanted",
+          "confirm",
           "discussion",
+          "duplicate",
+          "fixed",
           "help wanted",
           "question",
           "wontfix",
-          "duplicate",
-          "confirm",
-          "Challengers wanted",
         ].includes(label.name ?? ""),
     )
   )
@@ -127,10 +127,10 @@ const addHelpWanted = async ({
   if (runOctokit) {
     await recursiveOctokit(() =>
       octokit.issues.addLabels({
-        owner,
-        repo,
         issue_number: number,
         labels: ["help wanted"],
+        owner,
+        repo,
       }),
     )
   } else {
@@ -149,23 +149,23 @@ const addHelpWanted = async ({
 }
 
 const clearAssignees = async ({
-  owner,
-  repo,
-  issue,
   collaboratorIds,
-  pullRequestEvents,
   constant,
+  issue,
+  owner,
+  pullRequestEvents,
+  repo,
   runOctokit,
 }: {
-  owner: string
-  repo: string
-  issue: Issue
   collaboratorIds: string[]
-  pullRequestEvents: ListEvent[]
   constant: Constant
+  issue: Issue
+  owner: string
+  pullRequestEvents: ListEvent[]
+  repo: string
   runOctokit: boolean
 }) => {
-  const { number, assignees } = issue
+  const { assignees, number } = issue
   const hasCollaborators = assignees?.some(({ login }) =>
     collaboratorIds.includes(login),
   )
@@ -173,7 +173,7 @@ const clearAssignees = async ({
   if (hasCollaborators) return
 
   const { created_at } =
-    (await getAssignedEvent({ owner, repo, issue_number: number })) ?? {}
+    (await getAssignedEvent({ issue_number: number, owner, repo })) ?? {}
 
   if (!created_at) return
 
@@ -195,10 +195,10 @@ const clearAssignees = async ({
   if (runOctokit) {
     await recursiveOctokit(() =>
       octokit.issues.createComment({
+        body: GITHUB_INFORMATION_COMMENT(constant)(assigneeIds),
+        issue_number: number,
         owner,
         repo,
-        issue_number: number,
-        body: GITHUB_INFORMATION_COMMENT(constant)(assigneeIds),
       }),
     )
   } else {
@@ -208,10 +208,10 @@ const clearAssignees = async ({
   if (runOctokit) {
     await recursiveOctokit(() =>
       octokit.issues.removeAssignees({
+        assignees: assigneeIds,
+        issue_number: number,
         owner,
         repo,
-        issue_number: number,
-        assignees: assigneeIds,
       }),
     )
   } else {
@@ -221,14 +221,14 @@ const clearAssignees = async ({
   issue.assignee = null
 }
 
-export const updateIssues: APIHandler = async ({ req, res, constant }) => {
-  const { owner, repo, publish = true, octokit: runOctokit = true } = req.body
+export const updateIssues: APIHandler = async ({ constant, req, res }) => {
+  const { octokit: runOctokit = true, owner, publish = true, repo } = req.body
 
   if (!owner)
-    return res.status(400).send({ status: 400, message: "Invalid owner" })
+    return res.status(400).send({ message: "Invalid owner", status: 400 })
 
   if (!repo)
-    return res.status(400).send({ status: 400, message: "Invalid repo" })
+    return res.status(400).send({ message: "Invalid repo", status: 400 })
 
   const collaborators = [...constant.maintainers, ...constant.members]
   const collaboratorIds = collaborators.map(({ github }) => github.id)
@@ -238,27 +238,27 @@ export const updateIssues: APIHandler = async ({ req, res, constant }) => {
   await Promise.all(
     issues.map(async (issue) => {
       const pullRequestEvents = await getPullRequestEvents({
+        issue_number: issue.number,
         owner,
         repo,
-        issue_number: issue.number,
       })
 
       await clearAssignees({
-        owner,
-        repo,
-        issue,
         collaboratorIds,
-        pullRequestEvents,
         constant,
+        issue,
+        owner,
+        pullRequestEvents,
+        repo,
         runOctokit,
       })
       await addHelpWanted({
-        owner,
-        repo,
-        issue,
-        pullRequestEvents,
         constant,
+        issue,
+        owner,
         publish,
+        pullRequestEvents,
+        repo,
         runOctokit,
       })
     }),

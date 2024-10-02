@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@yamada-ui/test"
+import { fireEvent, render, screen } from "@yamada-ui/test"
 import { useRef } from "react"
 import { Textarea } from "../src"
 import useAutosize from "../src/use-autosize"
@@ -20,9 +20,9 @@ const AutoSizeTextarea = ({
   return (
     <Textarea
       ref={textareaRef}
+      data-testid="autosize-textarea"
       onChange={resizeTextarea}
       onFocus={resizeTextarea}
-      data-testid="autosize-textarea"
     />
   )
 }

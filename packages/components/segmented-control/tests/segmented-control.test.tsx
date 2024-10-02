@@ -1,5 +1,5 @@
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import type { SegmentedControlItem } from "../src"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { SegmentedControl, SegmentedControlButton } from "../src"
 
 describe("<SegmentedControl />", () => {
@@ -33,7 +33,7 @@ describe("<SegmentedControl />", () => {
           <SegmentedControlButton value="three">Three</SegmentedControlButton>
         </SegmentedControl>
 
-        <SegmentedControl data-testid="SegmentedControlItems" items={items} />
+        <SegmentedControl items={items} data-testid="SegmentedControlItems" />
       </>,
     )
     expect(screen.getByTestId("SegmentedControl")).toBeInTheDocument()
@@ -43,10 +43,10 @@ describe("<SegmentedControl />", () => {
   test("should render segmented control with default value", () => {
     render(
       <>
-        <SegmentedControl data-testid="SegmentedControl" defaultValue="one">
+        <SegmentedControl defaultValue="one" data-testid="SegmentedControl">
           <SegmentedControlButton
-            data-testid="SegmentedControlButton"
             value="one"
+            data-testid="SegmentedControlButton"
           >
             One
           </SegmentedControlButton>
@@ -63,7 +63,7 @@ describe("<SegmentedControl />", () => {
   test("should disable segmented control", () => {
     render(
       <>
-        <SegmentedControl data-testid="SegmentedControl" isDisabled>
+        <SegmentedControl isDisabled data-testid="SegmentedControl">
           <SegmentedControlButton value="one">One</SegmentedControlButton>
           <SegmentedControlButton value="two">Two</SegmentedControlButton>
           <SegmentedControlButton value="three">Three</SegmentedControlButton>
@@ -82,7 +82,7 @@ describe("<SegmentedControl />", () => {
     const { user } = render(
       <SegmentedControl>
         <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton value="two" disabled>
+        <SegmentedControlButton disabled value="two">
           Two
         </SegmentedControlButton>
         <SegmentedControlButton value="three">Three</SegmentedControlButton>
@@ -105,7 +105,7 @@ describe("<SegmentedControl />", () => {
 
   test("SegmentedControl with non-SegmentedControlButton children renders correctly", async () => {
     const { container } = render(
-      <SegmentedControl data-testid="SegmentedControl" isDisabled>
+      <SegmentedControl isDisabled data-testid="SegmentedControl">
         <option>one</option>
         <option>two</option>
         <option>three</option>
@@ -119,7 +119,7 @@ describe("<SegmentedControl />", () => {
     render(
       <SegmentedControl>
         <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton value="two" disabled>
+        <SegmentedControlButton disabled value="two">
           Two
         </SegmentedControlButton>
         <SegmentedControlButton value="three">Three</SegmentedControlButton>

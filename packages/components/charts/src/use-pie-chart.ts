@@ -1,17 +1,17 @@
-import { getVar, useTheme } from "@yamada-ui/core"
 import type {
   CSSUIObject,
   CSSUIProps,
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
-import { getClassName, getComponentProps } from "./chart-utils"
 import type { CellProps, PieChartProps, PieProps } from "./chart.types"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback, useMemo, useState } from "react"
+import { getClassName, getComponentProps } from "./chart-utils"
 import { pieChartLabel, pieChartLabelLine } from "./pie-chart-label"
 import { pieChartProperties, pieProperties } from "./rechart-properties"
 
@@ -21,39 +21,17 @@ export interface UsePieChartOptions {
    */
   data: CellProps[]
   /**
-   * Props passed down to recharts `PieChart` component.
-   */
-  chartProps?: PieChartProps
-  /**
-   * Props for the pie.
-   */
-  pieProps?: Partial<PieProps>
-  /**
-   * Props for the cell.
-   */
-  cellProps?: Partial<CellProps>
-  /**
-   * Determines whether each segment should have associated label.
+   * Controls angle at which chart ends.
    *
-   * @default false
+   * @default -270
    */
-  withLabels?: boolean
+  endAngle?: number
   /**
-   * Determines whether segments labels should have lines that connect the segment with the label.
+   * Controls fill opacity of all pies.
    *
-   * @default false
+   * @default 1
    */
-  withLabelLines?: boolean
-  /**
-   * Distance between chart and label.
-   */
-  labelOffset?: number
-  /**
-   * Determines whether labels should be displayed as percentages.
-   *
-   * @default false
-   */
-  isPercent?: boolean
+  fillOpacity?: [number, number] | number
   /**
    * Controls innerRadius of the chart segments.
    * If it is a number, it is the width of the radius.
@@ -62,6 +40,20 @@ export interface UsePieChartOptions {
    * @default '0%'
    */
   innerRadius?: number | string
+  /**
+   * Determines whether labels should be displayed as percentages.
+   *
+   * @default false
+   */
+  isPercent?: boolean
+  /**
+   * A function to format labels.
+   */
+  labelFormatter?: (value: number) => string
+  /**
+   * Distance between chart and label.
+   */
+  labelOffset?: number
   /**
    * Controls thickness of the chart segments. If it is a number, it is calculated as px.
    * If it is a number, it is the width of the radius.
@@ -77,33 +69,41 @@ export interface UsePieChartOptions {
    */
   paddingAngle?: number
   /**
-   * Stroke width for the chart pies.
-   *
-   * @default 1
-   */
-  strokeWidth?: number
-  /**
    * Controls angle at which chart starts.
    *
    * @default 90
    */
   startAngle?: number
   /**
-   * Controls angle at which chart ends.
-   *
-   * @default -270
-   */
-  endAngle?: number
-  /**
-   * Controls fill opacity of all pies.
+   * Stroke width for the chart pies.
    *
    * @default 1
    */
-  fillOpacity?: number | [number, number]
+  strokeWidth?: number
   /**
-   * A function to format labels.
+   * Determines whether segments labels should have lines that connect the segment with the label.
+   *
+   * @default false
    */
-  labelFormatter?: (value: number) => string
+  withLabelLines?: boolean
+  /**
+   * Determines whether each segment should have associated label.
+   *
+   * @default false
+   */
+  withLabels?: boolean
+  /**
+   * Props for the cell.
+   */
+  cellProps?: Partial<CellProps>
+  /**
+   * Props passed down to recharts `PieChart` component.
+   */
+  chartProps?: PieChartProps
+  /**
+   * Props for the pie.
+   */
+  pieProps?: Partial<PieProps>
 }
 
 interface UsePieChartProps extends UsePieChartOptions {
@@ -112,23 +112,23 @@ interface UsePieChartProps extends UsePieChartOptions {
 
 export const usePieChart = ({
   data,
-  withLabels = false,
-  withLabelLines = false,
-  labelOffset,
-  isPercent = false,
-  strokeWidth = 1,
+  endAngle = -270,
   fillOpacity = 1,
   innerRadius = "0%",
+  isPercent = false,
+  labelFormatter,
+  labelOffset,
+  withLabels = false,
   outerRadius = withLabels ? "80%" : "100%",
   paddingAngle = 0,
   startAngle = 90,
-  endAngle = -270,
-  labelFormatter,
+  strokeWidth = 1,
   styles,
+  withLabelLines = false,
   ...rest
 }: UsePieChartProps) => {
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const shouldHighlight = highlightedArea !== null
   const { dimCell, ...computedCellProps } = rest.cellProps ?? {}
   const {
@@ -213,11 +213,11 @@ export const usePieChart = ({
   const label: Recharts.PieLabel = useCallback(
     (props: any) =>
       pieChartLabel({
-        labelOffset,
         isPercent,
-        labelProps,
         labelFormatter,
+        labelOffset,
         styles: styles.label,
+        labelProps,
         ...props,
       }),
     [isPercent, labelOffset, labelProps, styles.label, labelFormatter],
@@ -227,8 +227,8 @@ export const usePieChart = ({
     (props: any) => {
       return pieChartLabelLine({
         labelOffset,
-        labelLineProps,
         styles: styles.labelLine,
+        labelLineProps,
         ...props,
       })
     },
@@ -255,8 +255,8 @@ export const usePieChart = ({
         )(theme)
 
         return {
-          color,
           className,
+          color,
         }
       }),
     [
@@ -289,19 +289,19 @@ export const usePieChart = ({
     ({ className, ...props }, ref = null) => ({
       ref,
       className: cx(className, pieClassName),
-      dataKey: "value",
+      activeShape: activeShapeProps,
       data,
-      rootTabIndex: -1,
-      outerRadius,
-      innerRadius,
-      paddingAngle,
-      startAngle,
+      dataKey: "value",
       endAngle,
+      inactiveShape: inactiveShapeProps,
+      innerRadius,
       isAnimationActive: false,
       label: withLabels ? label : false,
       labelLine: withLabelLines ? labelLine : false,
-      activeShape: activeShapeProps,
-      inactiveShape: inactiveShapeProps,
+      outerRadius,
+      paddingAngle,
+      rootTabIndex: -1,
+      startAngle,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...pieProps,
     }),
@@ -324,10 +324,10 @@ export const usePieChart = ({
   )
 
   const getCellProps: RequiredPropGetter<
-    Omit<Recharts.CellProps, "ref"> & { index: number },
+    { index: number } & Omit<Recharts.CellProps, "ref">,
     Recharts.CellProps
   > = useCallback(
-    ({ index, className: classNameProp, ...props }, ref = null) => {
+    ({ className: classNameProp, index, ...props }, ref = null) => {
       const { className, color } = cellPropList[index]
 
       return {
@@ -344,10 +344,10 @@ export const usePieChart = ({
 
   return {
     pieVars,
-    getPieProps,
-    getPieChartProps,
-    getCellProps,
     setHighlightedArea,
+    getCellProps,
+    getPieChartProps,
+    getPieProps,
   }
 }
 

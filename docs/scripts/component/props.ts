@@ -1,15 +1,15 @@
-import { readdir, readFile } from "fs/promises"
-import path from "path"
+import type { Locale } from "utils/i18n"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { config } from "dotenv"
-import { generateFrontMatter, getDirectoryPaths } from "./utils"
 import { CONSTANT } from "constant"
+import { config } from "dotenv"
+import { readdir, readFile } from "fs/promises"
+import path from "path"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
 import { locales } from "utils/i18n"
-import type { Locale } from "utils/i18n"
 import { omitObject } from "utils/object"
 import { toCamelCase } from "utils/string"
+import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
@@ -18,10 +18,10 @@ interface Doc {
 }
 interface Props {
   type?: string
-  required?: boolean
-  description?: string
-  deprecated?: string
   defaultValue?: string
+  deprecated?: string
+  description?: string
+  required?: boolean
   see?: string
 }
 
@@ -36,20 +36,10 @@ const LOCALE_TITLE_MAP = {
   ja: "Props",
 }
 const OVERRIDE_PATHS: {
-  [key: string]: (string | { parent: string; children: string[] })[]
+  [key: string]: ({ children: string[]; parent: string } | string)[]
 } = {
-  layouts: [
-    "aspect-ratio",
-    "box",
-    "center",
-    "container",
-    "divider",
-    "flex",
-    { parent: "grid", children: ["grid-item"] },
-    "spacer",
-    "stack",
-  ],
-  select: ["select", "multi-select"],
+  autocomplete: ["autocomplete", "multi-autocomplete"],
+  button: [{ children: ["button-group"], parent: "button" }, "icon-button"],
   calendar: [
     "calendar",
     "date-picker",
@@ -58,54 +48,15 @@ const OVERRIDE_PATHS: {
     "month-picker",
     "year-picker",
   ],
-  slider: ["slider", "range-slider"],
-  table: ["table", "paging-table"],
-  autocomplete: ["autocomplete", "multi-autocomplete"],
-  modal: [
-    {
-      parent: "modal",
-      children: [
-        "modal-header",
-        "modal-body",
-        "modal-footer",
-        "modal-overlay",
-        "modal-close-button",
-      ],
-    },
-    {
-      parent: "dialog",
-      children: [
-        "dialog-header",
-        "dialog-body",
-        "dialog-footer",
-        "dialog-overlay",
-        "dialog-close-button",
-      ],
-    },
-    {
-      parent: "drawer",
-      children: [
-        "drawer-header",
-        "drawer-body",
-        "drawer-footer",
-        "drawer-overlay",
-        "drawer-close-button",
-      ],
-    },
+  charts: [
+    { children: ["bar"], parent: "bar-chart" },
+    { children: ["area"], parent: "area-chart" },
+    { children: ["line", "dot"], parent: "line-chart" },
+    { children: ["radar"], parent: "radar-chart" },
+    { children: ["cell"], parent: "pie-chart" },
+    { children: ["chart-label"], parent: "radial-chart" },
+    "donut-chart",
   ],
-  typography: ["heading", "text"],
-  transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
-  "form-control": [
-    {
-      parent: "form-control",
-      children: ["label", "helper-message", "error-message"],
-    },
-    {
-      parent: "fieldset",
-      children: ["legend"],
-    },
-  ],
-  progress: ["progress", "circle-progress"],
   "color-picker": [
     "color-picker",
     "color-selector",
@@ -114,18 +65,67 @@ const OVERRIDE_PATHS: {
     "saturation-slider",
     "color-swatch",
   ],
-  button: [{ parent: "button", children: ["button-group"] }, "icon-button"],
-  image: ["image", "native-image"],
-  link: ["link", { parent: "link-box", children: ["link-overlay"] }],
-  charts: [
-    { parent: "bar-chart", children: ["bar"] },
-    { parent: "area-chart", children: ["area"] },
-    { parent: "line-chart", children: ["line", "dot"] },
-    { parent: "radar-chart", children: ["radar"] },
-    { parent: "pie-chart", children: ["cell"] },
-    { parent: "radial-chart", children: ["chart-label"] },
-    "donut-chart",
+  "form-control": [
+    {
+      children: ["label", "helper-message", "error-message"],
+      parent: "form-control",
+    },
+    {
+      children: ["legend"],
+      parent: "fieldset",
+    },
   ],
+  image: ["image", "native-image"],
+  layouts: [
+    "aspect-ratio",
+    "box",
+    "center",
+    "container",
+    "divider",
+    "flex",
+    { children: ["grid-item"], parent: "grid" },
+    "spacer",
+    "stack",
+  ],
+  link: ["link", { children: ["link-overlay"], parent: "link-box" }],
+  modal: [
+    {
+      children: [
+        "modal-header",
+        "modal-body",
+        "modal-footer",
+        "modal-overlay",
+        "modal-close-button",
+      ],
+      parent: "modal",
+    },
+    {
+      children: [
+        "dialog-header",
+        "dialog-body",
+        "dialog-footer",
+        "dialog-overlay",
+        "dialog-close-button",
+      ],
+      parent: "dialog",
+    },
+    {
+      children: [
+        "drawer-header",
+        "drawer-body",
+        "drawer-footer",
+        "drawer-overlay",
+        "drawer-close-button",
+      ],
+      parent: "drawer",
+    },
+  ],
+  progress: ["progress", "circle-progress"],
+  select: ["select", "multi-select"],
+  slider: ["slider", "range-slider"],
+  table: ["table", "paging-table"],
+  transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
+  typography: ["heading", "text"],
 }
 
 export const getDocs: p.RequiredRunner = () => async (p, s) => {
@@ -160,7 +160,7 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
 
               doc = omitObject(doc, [displayName])
             } else {
-              const { parent, children } = name
+              const { children, parent } = name
 
               const displayName = toCamelCase(parent)
               const nestedDoc = doc[displayName]
@@ -231,7 +231,7 @@ const generateContent = async ({
     Object.entries(props).map(
       async ([
         name,
-        { type, required, description, deprecated, defaultValue, see },
+        { type, defaultValue, deprecated, description, required, see },
       ]) => {
         const props = [
           `id="${title.toLowerCase()}-${name.toLowerCase()}"`,

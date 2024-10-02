@@ -1,25 +1,25 @@
+import type { UsageTheme } from "@yamada-ui/core"
+import type { SourceFile, Symbol, TypeChecker } from "typescript"
+import { defaultTheme } from "@yamada-ui/theme"
+import { TONES } from "@yamada-ui/utils"
 import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import { format, resolveConfig } from "prettier"
-import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
-  readConfigFile,
+  createProgram,
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
   parseJsonConfigFileContent,
-  createProgram,
+  readConfigFile,
   sys,
 } from "typescript"
-import type { UsageTheme } from "@yamada-ui/core"
-import { defaultTheme } from "@yamada-ui/theme"
-import { TONES } from "@yamada-ui/utils"
 
 type ComponentTypeInfo = {
   type: string
-  defaultValue?: string | boolean | null
   required: boolean
-  description?: string
+  defaultValue?: boolean | null | string
   deprecated?: string
+  description?: string
   see?: string
 }
 
@@ -28,17 +28,17 @@ type ComponentTypeProperties = {
 }
 
 type ThemingProps = Partial<{
-  variant: string | number
-  size: string | number
   colorScheme: string
+  size: number | string
+  variant: number | string
 }>
 
 type PropertyInfo = {
   [K in keyof ThemingProps]?: {
     type: string
-    defaultValue?: string
-    required: boolean
     description: string
+    required: boolean
+    defaultValue?: string
   }
 }
 
@@ -126,31 +126,31 @@ const extractThemeProps = (theme: UsageTheme): Record<string, PropertyInfo> => {
 
   const colorSchemeType = extractColorScheme(theme)
 
-  for (const [name, { defaultProps, variants, sizes }] of Object.entries(
+  for (const [name, { sizes, variants, defaultProps }] of Object.entries(
     theme.components ?? {},
   )) {
     if (!defaultProps) continue
 
-    const { variant, size, colorScheme } = defaultProps
+    const { colorScheme, size, variant } = defaultProps
 
     result[name] = {
-      variant: {
-        defaultValue: variant?.toString(),
-        type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
+      colorScheme: {
+        type: colorSchemeType,
+        defaultValue: colorScheme,
+        description: "The visual color appearance of the component.",
         required: false,
-        description: `The variant of the ${name}.`,
       },
       size: {
-        defaultValue: size?.toString(),
         type: sizes ? toLiteralStringType(Object.keys(sizes)) : "string",
-        required: false,
+        defaultValue: size?.toString(),
         description: `The size of the ${name}.`,
-      },
-      colorScheme: {
-        defaultValue: colorScheme,
-        type: colorSchemeType,
         required: false,
-        description: "The visual color appearance of the component.",
+      },
+      variant: {
+        type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
+        defaultValue: variant?.toString(),
+        description: `The variant of the ${name}.`,
+        required: false,
       },
     }
   }
@@ -191,7 +191,7 @@ const sortByRequiredProperties = (properties: ComponentTypeProperties) =>
   )
 
 const extractPropertiesOfTypeName = async (
-  searchTerm: string | RegExp,
+  searchTerm: RegExp | string,
   sourceFile: SourceFile,
   typeChecker: TypeChecker,
   { shouldIgnoreProperty = () => false }: TypeSearchOptions = {},
@@ -246,13 +246,13 @@ const extractPropertiesOfTypeName = async (
       properties[propertyName] = {
         type: prettyType,
         defaultValue: formatValue(defaultValue),
-        required,
         deprecated,
         description:
           property
             .getDocumentationComment(typeChecker)
             .map((comment) => comment.text)
             .join("\n") || undefined,
+        required,
         see,
       }
     }

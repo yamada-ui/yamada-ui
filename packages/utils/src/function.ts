@@ -3,7 +3,7 @@ import { isFunction } from "./assertion"
 export const noop = () => {}
 
 export function runIfFunc<T, U extends any[]>(
-  valOrFunc: T | ((...funcArgs: U) => T),
+  valOrFunc: ((...funcArgs: U) => T) | T,
   ...args: U
 ): T {
   return isFunction(valOrFunc) ? valOrFunc(...args) : valOrFunc

@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"

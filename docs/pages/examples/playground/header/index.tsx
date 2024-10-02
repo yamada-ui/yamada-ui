@@ -1,7 +1,7 @@
-import { Button, HStack, Heading, Spacer, VStack } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { memo, useCallback, useRef } from "react"
 import type { FC } from "react"
+import { Button, Heading, HStack, Spacer, VStack } from "@yamada-ui/react"
+import { memo, useCallback, useRef } from "react"
 import { ControlButton } from "./control-button"
 import { DeleteDialog } from "./delete-dialog"
 import { FilterModal } from "./filter-modal"
@@ -10,7 +10,7 @@ import { SaveModal } from "./save-modal"
 import { ShareButton } from "./share-button"
 import { ViewCodeModal } from "./view-code-modal"
 
-export type ModalType = "save" | "viewCode" | "filter" | "delete"
+export type ModalType = "delete" | "filter" | "save" | "viewCode"
 
 export interface HeaderProps extends StackProps {}
 
@@ -62,16 +62,16 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
             <Preset display={{ base: undefined, md: "none" }} />
 
             <Button
-              minW="fit-content"
               display={{ base: undefined, lg: "none" }}
+              minW="fit-content"
               onClick={() => onOpen("save")}
             >
               Save
             </Button>
 
             <Button
-              minW="fit-content"
               display={{ base: undefined, lg: "none" }}
+              minW="fit-content"
               onClick={() => onOpen("viewCode")}
             >
               View code

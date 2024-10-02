@@ -11,14 +11,14 @@ import {
 const DEFAULT_METHOD = "in srgb"
 
 const methods: { [key: string]: string } = {
-  srgb: "in srgb",
-  "srgb-linear": "in srgb-linear",
-  "display-p3": "in display-p3",
   "a98-rgb": "in a98-rgb",
-  "prophoto-rgb": "in prophoto-rgb",
-  rec2020: "in rec2020",
+  "display-p3": "in display-p3",
   lab: "in lab",
   oklab: "in oklab",
+  "prophoto-rgb": "in prophoto-rgb",
+  rec2020: "in rec2020",
+  srgb: "in srgb",
+  "srgb-linear": "in srgb-linear",
   xyz: "in xyz",
   "xyz-d50": "in xyz-d50",
   "xyz-d65": "in xyz-d65",

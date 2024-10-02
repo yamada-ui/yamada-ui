@@ -1,15 +1,15 @@
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "@yamada-ui/core"
-import {
-  isArray,
-  handlerAll,
-  dataAttr,
-  ariaAttr,
-  mergeRefs,
-  useUpdateEffect,
-  useUnmountEffect,
-  isDisabled,
-} from "@yamada-ui/utils"
 import type { KeyboardEvent, MouseEvent } from "react"
+import {
+  ariaAttr,
+  dataAttr,
+  handlerAll,
+  isArray,
+  isDisabled,
+  mergeRefs,
+  useUnmountEffect,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
 import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
@@ -23,25 +23,25 @@ import { useCalendarContext } from "./use-calendar"
 
 export const useMonthList = () => {
   const {
-    year,
-    setYear,
-    value: selectedValue,
+    locale,
+    maxDate,
+    maxYear,
+    minDate,
+    minYear,
     month,
+    monthFormat,
+    monthRefs,
     setMonth,
     setType,
-    locale,
+    setYear,
+    value: selectedValue,
+    year,
     yearFormat,
-    monthFormat,
-    minDate,
-    maxDate,
-    monthRefs,
-    minYear,
-    maxYear,
     __selectType,
   } = useCalendarContext()
 
   const isMulti = isArray(selectedValue)
-  const beforeYear = useRef<number | null>(null)
+  const beforeYear = useRef<null | number>(null)
   const rangeMonths = getRangeMonths(locale, monthFormat)
   const label = getFormattedLabel(year, locale, yearFormat)
 
@@ -96,12 +96,12 @@ export const useMonthList = () => {
       const actions: { [key: string]: Function | undefined } = {
         ArrowDown: () =>
           focusedMonth + 3 <= 11 ? onFocusNext(focusedMonth + 3) : {},
-        ArrowUp: () =>
-          focusedMonth - 3 >= 0 ? onFocusPrev(focusedMonth - 3) : {},
         ArrowLeft: () => onFocusPrev(focusedMonth - 1),
         ArrowRight: () => onFocusNext(focusedMonth + 1),
-        Home: () => onFocusPrev(0),
+        ArrowUp: () =>
+          focusedMonth - 3 >= 0 ? onFocusPrev(focusedMonth - 3) : {},
         End: () => onFocusNext(11),
+        Home: () => onFocusPrev(0),
       }
 
       const action = actions[ev.key]
@@ -180,7 +180,7 @@ export const useMonthList = () => {
   )
 
   const getButtonProps: RequiredPropGetter<
-    HTMLProps<"button"> & { value: number },
+    { value: number } & HTMLProps<"button">,
     HTMLProps<"button">
   > = useCallback(
     ({ value, ...props }, ref = null) => {
@@ -189,8 +189,8 @@ export const useMonthList = () => {
       const isSelected = isSelectedYear && getIsSelected(value)
       const isDisabled = !isMonthInRange({
         date: new Date(year, value),
-        minDate,
         maxDate,
+        minDate,
       })
 
       monthRefs.current.set(value, createRef<HTMLButtonElement>())
@@ -206,15 +206,15 @@ export const useMonthList = () => {
       }
 
       return {
-        disabled: isDisabled,
         ref: mergeRefs(ref, monthRefs.current.get(value)),
+        disabled: isDisabled,
         ...props,
         tabIndex,
-        "aria-selected": ariaAttr(isSelected),
-        "data-selected": dataAttr(isSelected),
-        "data-disabled": dataAttr(isDisabled),
-        "data-value": value ?? "",
         "aria-disabled": ariaAttr(isDisabled),
+        "aria-selected": ariaAttr(isSelected),
+        "data-disabled": dataAttr(isDisabled),
+        "data-selected": dataAttr(isSelected),
+        "data-value": value ?? "",
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
@@ -229,7 +229,7 @@ export const useMonthList = () => {
     ],
   )
 
-  return { label, rangeMonths, getGridProps, getButtonProps }
+  return { label, rangeMonths, getButtonProps, getGridProps }
 }
 
 export type UseMonthListReturn = ReturnType<typeof useMonthList>

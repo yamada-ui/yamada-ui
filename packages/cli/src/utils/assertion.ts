@@ -8,7 +8,7 @@ export const isNumber = (value: any): value is number =>
 export const isNotNumber = (value: any): boolean =>
   typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
 
-export const isNumeric = (value: string | number): boolean =>
+export const isNumeric = (value: number | string): boolean =>
   value != null &&
   parseFloat(value.toString()) - parseFloat(value.toString()) + 1 >= 0
 

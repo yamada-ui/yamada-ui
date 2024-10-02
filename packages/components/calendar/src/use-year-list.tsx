@@ -1,15 +1,15 @@
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "@yamada-ui/core"
-import {
-  isArray,
-  handlerAll,
-  dataAttr,
-  ariaAttr,
-  mergeRefs,
-  useUpdateEffect,
-  useUnmountEffect,
-  isDisabled,
-} from "@yamada-ui/utils"
 import type { KeyboardEvent, MouseEvent } from "react"
+import {
+  ariaAttr,
+  dataAttr,
+  handlerAll,
+  isArray,
+  isDisabled,
+  mergeRefs,
+  useUnmountEffect,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
 import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
@@ -21,26 +21,26 @@ import { useCalendarContext } from "./use-calendar"
 
 export const useYearList = () => {
   const {
-    locale,
-    yearFormat,
     internalYear,
-    setYear,
-    setInternalYear,
+    locale,
+    maxYear,
+    minYear,
     month,
+    rangeYears,
+    setInternalYear,
     setMonth,
     setType,
-    year,
-    rangeYears,
-    minYear,
-    maxYear,
-    yearRefs,
+    setYear,
     value: selectedValue,
+    year,
+    yearFormat,
+    yearRefs,
     __selectType,
   } = useCalendarContext()
 
   const isMulti = isArray(selectedValue)
   const containerRef = useRef<HTMLDivElement>(null)
-  const beforeInternalYear = useRef<number | null>(null)
+  const beforeInternalYear = useRef<null | number>(null)
   const minYearLabel = getFormattedLabel(rangeYears[0], locale, yearFormat)
   const maxYearLabel = getFormattedLabel(
     rangeYears[rangeYears.length - 1],
@@ -101,12 +101,12 @@ export const useYearList = () => {
       const actions: { [key: string]: Function | undefined } = {
         ArrowDown: () =>
           focusedIndex + 4 <= 11 ? onFocusNext(focusedIndex + 4) : {},
-        ArrowUp: () =>
-          focusedIndex - 4 >= 0 ? onFocusPrev(focusedIndex - 4) : {},
         ArrowLeft: () => onFocusPrev(focusedIndex - 1),
         ArrowRight: () => onFocusNext(focusedIndex + 1),
-        Home: () => onFocusPrev(0),
+        ArrowUp: () =>
+          focusedIndex - 4 >= 0 ? onFocusPrev(focusedIndex - 4) : {},
         End: () => onFocusNext(11),
+        Home: () => onFocusPrev(0),
       }
 
       const action = actions[ev.key]
@@ -179,10 +179,10 @@ export const useYearList = () => {
   )
 
   const getButtonProps: RequiredPropGetter<
-    HTMLProps<"button"> & { value: number; index: number },
+    { index: number; value: number } & HTMLProps<"button">,
     HTMLProps<"button">
   > = useCallback(
-    ({ value, index, ...props }, ref = null) => {
+    ({ index, value, ...props }, ref = null) => {
       const isControlled = typeof beforeInternalYear.current === "number"
       const isSelected = getIsSelected(value)
       const isDisabled = value < minYear || value > maxYear
@@ -200,22 +200,22 @@ export const useYearList = () => {
       }
 
       return {
-        disabled: isDisabled,
         ref: mergeRefs(ref, yearRefs.current.get(index)),
+        disabled: isDisabled,
         ...props,
         tabIndex,
+        "aria-disabled": ariaAttr(isDisabled),
         "aria-selected": ariaAttr(isSelected),
+        "data-disabled": dataAttr(isDisabled),
         "data-selected": dataAttr(isSelected),
         "data-value": value ?? "",
-        "data-disabled": dataAttr(isDisabled),
-        "aria-disabled": ariaAttr(isDisabled),
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
     [getIsSelected, minYear, maxYear, yearRefs, rangeYears, year, onClick],
   )
 
-  return { label, rangeYears, getGridProps, getButtonProps }
+  return { label, rangeYears, getButtonProps, getGridProps }
 }
 
 export type UseYearListReturn = ReturnType<typeof useYearList>

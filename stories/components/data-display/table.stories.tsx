@@ -1,15 +1,15 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { Column, Sort } from "@yamada-ui/table"
+import { Button, TableCaption, Text } from "@yamada-ui/react"
+import { Table } from "@yamada-ui/table"
 import { useMemo, useState } from "react"
 import { colorSchemes } from "../../components"
-import { TableCaption, Button, Text } from "@yamada-ui/react"
-import type { Column, Sort } from "@yamada-ui/table"
-import { Table } from "@yamada-ui/table"
 
 type Story = StoryFn<typeof Table>
 
 const meta: Meta<typeof Table> = {
-  title: "Components / Data Display / Table",
   component: Table,
+  title: "Components / Data Display / Table",
 }
 
 export default meta
@@ -24,16 +24,16 @@ export const basic: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -77,16 +77,16 @@ export const withSize: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -125,10 +125,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <Table size="sm" columns={columns} data={data} />
-      <Table size="md" columns={columns} data={data} />
-      <Table size="lg" columns={columns} data={data} />
-      <Table size="xl" columns={columns} data={data} />
+      <Table columns={columns} data={data} size="sm" />
+      <Table columns={columns} data={data} size="md" />
+      <Table columns={columns} data={data} size="lg" />
+      <Table columns={columns} data={data} size="xl" />
     </>
   )
 }
@@ -137,16 +137,16 @@ export const withVariant: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -185,8 +185,8 @@ export const withVariant: Story = () => {
 
   return (
     <>
-      <Table variant="simple" columns={columns} data={data} />
-      <Table variant="striped" columns={columns} data={data} />
+      <Table columns={columns} data={data} variant="simple" />
+      <Table columns={columns} data={data} variant="striped" />
     </>
   )
 }
@@ -195,16 +195,16 @@ export const withColorScheme: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -246,10 +246,10 @@ export const withColorScheme: Story = () => {
       {colorSchemes.map((colorScheme) => (
         <Table
           key={colorScheme}
-          variant="striped"
           colorScheme={colorScheme}
           columns={columns}
           data={data}
+          variant="striped"
         />
       ))}
     </>
@@ -260,16 +260,16 @@ export const withColumnBorders: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -313,16 +313,16 @@ export const withBorder: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -366,16 +366,16 @@ export const withHighlightOnHover: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -419,16 +419,16 @@ export const withCaption: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -467,12 +467,12 @@ export const withCaption: Story = () => {
 
   return (
     <>
-      <Table variant="simple" columns={columns} data={data}>
+      <Table columns={columns} data={data} variant="simple">
         <TableCaption placement="top">
           ©バードスタジオ/集英社・東映アニメーション
         </TableCaption>
       </Table>
-      <Table variant="striped" columns={columns} data={data}>
+      <Table columns={columns} data={data} variant="striped">
         <TableCaption placement="bottom">
           ©バードスタジオ/集英社・東映アニメーション
         </TableCaption>
@@ -485,19 +485,19 @@ export const withFooter: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
         footer: "作品名",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
         footer: "放送期間",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
         footer: "話数",
+        header: "話数",
       },
     ],
     [],
@@ -546,16 +546,16 @@ export const withRowId: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -599,16 +599,16 @@ export const withDefaultSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -649,8 +649,8 @@ export const withDefaultSort: Story = () => {
     <Table
       columns={columns}
       data={data}
-      rowId="name"
       defaultSort={[{ id: "name", desc: false }]}
+      rowId="name"
       onChangeSort={(sort) => {
         console.log("sort", sort)
       }}
@@ -662,16 +662,16 @@ export const manualSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -712,8 +712,8 @@ export const manualSort: Story = () => {
     <Table
       columns={columns}
       data={data}
-      rowId="name"
       manualSorting
+      rowId="name"
       onChangeSort={(sort) => {
         console.log("sort", sort)
       }}
@@ -727,16 +727,16 @@ export const customControlSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -780,8 +780,8 @@ export const customControlSort: Story = () => {
       <Table
         columns={columns}
         data={data}
-        rowId="name"
         manualSorting
+        rowId="name"
         sort={sort}
         onChangeSort={onChangeSort}
       />
@@ -793,16 +793,16 @@ export const withMaxMultiSortColCount: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -843,8 +843,8 @@ export const withMaxMultiSortColCount: Story = () => {
     <Table
       columns={columns}
       data={data}
-      rowId="name"
       maxMultiSortColCount={2}
+      rowId="name"
       onChangeSort={(sort) => {
         console.log("sort", sort)
       }}
@@ -856,17 +856,17 @@ export const disabledSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
         enableSorting: false,
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -922,17 +922,17 @@ export const withSortDescFirst: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
         sortDescFirst: true,
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -994,16 +994,16 @@ export const disabledMultiSort: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1056,16 +1056,16 @@ export const withDefaultSelectedRowIds: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1106,8 +1106,8 @@ export const withDefaultSelectedRowIds: Story = () => {
     <Table
       columns={columns}
       data={data}
-      rowId="name"
       defaultSelectedRowIds={["ドラゴンボール"]}
+      rowId="name"
       onChangeSelect={(selectedIds) => {
         console.log("selectedIds", selectedIds)
       }}
@@ -1119,16 +1119,16 @@ export const disabledRowIds: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1169,8 +1169,8 @@ export const disabledRowIds: Story = () => {
     <Table
       columns={columns}
       data={data}
-      rowId="name"
       disabledRowIds={["ドラゴンボールZ"]}
+      rowId="name"
       onChangeSelect={(selectedIds) => {
         console.log("selectedIds", selectedIds)
       }}
@@ -1182,16 +1182,16 @@ export const withRowsClickSelect: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1245,16 +1245,16 @@ export const disabledSelect: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1300,16 +1300,16 @@ export const customControlSelect: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1365,16 +1365,16 @@ export const useClickRow: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1426,16 +1426,16 @@ export const useDoubleClickRow: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1487,16 +1487,16 @@ export const withCheckboxProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1546,16 +1546,16 @@ export const withSelectColumnProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1607,16 +1607,16 @@ export const disabledSelectColumn: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1660,9 +1660,9 @@ export const disabledSelectColumn: Story = () => {
       <Table
         columns={columns}
         data={data}
-        selectColumnProps={false}
         rowsClickSelect
         selectedRowIds={selectedRowIds}
+        selectColumnProps={false}
         onChangeSelect={onChangeSelect}
       />
     </>
@@ -1673,19 +1673,19 @@ export const withColumnStyles: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
-        accessorKey: "name",
         css: { color: "primary" },
+        accessorKey: "name",
+        header: "作品名",
       },
       {
-        header: "放送期間",
-        accessorKey: "broadcastPeriod",
         sx: { color: "secondary" },
+        accessorKey: "broadcastPeriod",
+        header: "放送期間",
       },
       {
-        header: "話数",
-        accessorKey: "episode",
         style: { color: "red" },
+        accessorKey: "episode",
+        header: "話数",
       },
     ],
     [],
@@ -1729,21 +1729,21 @@ export const customProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
-        header: "作品名",
         accessorKey: "name",
         footer: "作品名",
+        header: "作品名",
         "aria-label": "作品名",
       },
       {
-        header: "放送期間",
         accessorKey: "broadcastPeriod",
         footer: "放送期間",
+        header: "放送期間",
         "aria-label": "放送期間",
       },
       {
-        header: "話数",
         accessorKey: "episode",
         footer: "話数",
+        header: "話数",
         "aria-label": "話数",
       },
     ],
@@ -1786,34 +1786,34 @@ export const customProps: Story = () => {
         columns={columns}
         data={data}
         withFooter
-        theadProps={{ bg: ["red.200", "red.700"] }}
         tbodyProps={{ bg: ["green.200", "green.700"] }}
         tfootProps={{ bg: ["blue.200", "blue.700"] }}
+        theadProps={{ bg: ["red.200", "red.700"] }}
       />
 
       <Table
         columns={columns}
         data={data}
         withFooter
+        footerGroupProps={{ bg: ["blue.200", "blue.700"] }}
         headerGroupProps={{ bg: ["red.200", "red.700"] }}
         rowProps={{ bg: ["green.200", "green.700"] }}
-        footerGroupProps={{ bg: ["blue.200", "blue.700"] }}
       />
 
       <Table
         columns={columns}
         data={data}
         withFooter
-        headerProps={({ column }) => {
-          if (column.columnDef.header === "作品名")
-            return { color: ["red.400", "red.300"] }
-        }}
         cellProps={({ column }) => {
           if (column.columnDef.header === "作品名")
             return { color: ["red.400", "red.300"] }
         }}
         footerProps={({ column }) => {
           if (column.columnDef.footer === "作品名")
+            return { color: ["red.400", "red.300"] }
+        }}
+        headerProps={({ column }) => {
+          if (column.columnDef.header === "作品名")
             return { color: ["red.400", "red.300"] }
         }}
       />

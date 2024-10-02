@@ -1,18 +1,18 @@
+import type { StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
+import type { SubmitHandler } from "react-hook-form"
 import {
-  Input,
-  Textarea,
+  Autocomplete,
   Button,
   FormControl,
   HelperMessage,
-  Autocomplete,
-  VStack,
+  Input,
   Text,
+  Textarea,
+  VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
 import { Fragment, memo } from "react"
-import type { FC } from "react"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
-import type { SubmitHandler } from "react-hook-form"
 import { Form } from "./form"
 
 const EMAIL_ITEMS = [
@@ -22,10 +22,10 @@ const EMAIL_ITEMS = [
 ]
 
 interface Data {
-  username: string
-  email: string
   bio: string
+  email: string
   urls: { url: string }[]
+  username: string
 }
 
 export interface ProfileProps extends StackProps {}
@@ -33,9 +33,9 @@ export interface ProfileProps extends StackProps {}
 export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
   const {
     control,
-    register,
     formState: { errors },
     handleSubmit,
+    register,
   } = useForm<Data>({
     defaultValues: {
       urls: [
@@ -44,9 +44,9 @@ export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
       ],
     },
   })
-  const { fields, append } = useFieldArray({
-    control,
+  const { append, fields } = useFieldArray({
     name: "urls",
+    control,
     rules: { maxLength: 5 },
   })
 
@@ -54,61 +54,61 @@ export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
 
   return (
     <Form
-      title="Profile"
       description="This is how others will see you on the site."
       submit="Update profile"
+      title="Profile"
       onSubmit={handleSubmit(onSubmit)}
       {...rest}
     >
       <FormControl
-        label="Username"
+        errorMessage={errors.username?.message}
         helperMessage="This is your public display name. It can be your real name or a
         pseudonym. You can only change this once every 30 days."
-        isReplace={false}
         isInvalid={!!errors.username?.message}
-        errorMessage={errors.username?.message}
+        isReplace={false}
+        label="Username"
       >
         <Input
-          placeholder="yamada"
           autoComplete="username"
+          placeholder="yamada"
           {...register("username", {
-            required: { value: true, message: "This is required." },
+            required: { message: "This is required.", value: true },
           })}
         />
       </FormControl>
 
       <FormControl
-        label="Email"
-        helperMessage="You can manage verified email addresses in your email settings."
-        isReplace={false}
-        isInvalid={!!errors.email?.message}
         errorMessage={errors.email?.message}
+        helperMessage="You can manage verified email addresses in your email settings."
+        isInvalid={!!errors.email?.message}
+        isReplace={false}
+        label="Email"
       >
         <Controller
           name="email"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete
-              placeholder="Select a verified email to display"
               items={EMAIL_ITEMS}
+              placeholder="Select a verified email to display"
               {...field}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
-        label="Bio"
-        helperMessage="You can @mention other users and organizations to link to them."
-        isReplace={false}
-        isInvalid={!!errors.bio?.message}
         errorMessage={errors.bio?.message}
+        helperMessage="You can @mention other users and organizations to link to them."
+        isInvalid={!!errors.bio?.message}
+        isReplace={false}
+        label="Bio"
       >
         <Textarea
           defaultValue="I own a computer"
           {...register("bio", {
-            required: { value: true, message: "This is required." },
+            required: { message: "This is required.", value: true },
           })}
         />
       </FormControl>
@@ -124,7 +124,7 @@ export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
               <Fragment key={id}>
                 <Input
                   {...register(`urls.${index}.url`, {
-                    required: { value: true, message: "This is required." },
+                    required: { message: "This is required.", value: true },
                   })}
                   isInvalid={!!errors.urls?.[index]?.url?.message}
                 />

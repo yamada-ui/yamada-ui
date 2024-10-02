@@ -1,6 +1,6 @@
-export type AnyPointerEvent = MouseEvent | TouchEvent | PointerEvent
+export type AnyPointerEvent = MouseEvent | PointerEvent | TouchEvent
 
-export type PointType = "page" | "client"
+export type PointType = "client" | "page"
 
 export interface Point {
   x: number

@@ -1,14 +1,14 @@
 import type { Dict } from "@yamada-ui/utils"
-import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
 import type { StyleConfig } from "../config"
-import { DEFAULT_VAR_PREFIX } from "../constant"
 import type { PseudoProperty } from "../pseudos"
-import { pseudos } from "../pseudos"
 import type { ProcessSkipProperty, StyleProperty } from "../styles"
-import { processSkipProperties, styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
+import { DEFAULT_VAR_PREFIX } from "../constant"
+import { pseudos } from "../pseudos"
+import { processSkipProperties, styles } from "../styles"
 
 function isProcessSkip(key: string): boolean {
   return processSkipProperties.includes(key as ProcessSkipProperty)
@@ -107,7 +107,7 @@ function expandCSS(css: Dict) {
   return function (theme: StyledTheme): Dict {
     if (!theme.__breakpoints) return css
 
-    const { keys, isResponsive, queries } = theme.__breakpoints
+    const { isResponsive, keys, queries } = theme.__breakpoints
 
     let computedCSS: Dict = {}
 

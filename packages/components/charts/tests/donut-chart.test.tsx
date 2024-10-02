@@ -1,5 +1,5 @@
-import { a11y, render, waitFor, screen, fireEvent } from "@yamada-ui/test"
 import type { CellProps } from "../src"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { DonutChart } from "../src"
 
 describe("<DonutChart />", () => {
@@ -35,38 +35,38 @@ describe("<DonutChart />", () => {
   const data: CellProps[] = [
     {
       name: "Page A",
-      value: 4000,
       color: "red.500",
+      value: 4000,
     },
     {
       name: "Page B",
-      value: 3000,
       color: "blue.500",
+      value: 3000,
     },
     {
       name: "Page C",
-      value: 2000,
       color: "green.500",
+      value: 2000,
     },
     {
       name: "Page D",
-      value: 2780,
       color: "gray.500",
+      value: 2780,
     },
     {
       name: "Page E",
-      value: 1890,
       color: "orange.500",
+      value: 1890,
     },
     {
       name: "Page F",
-      value: 2390,
       color: "cyan.500",
+      value: 2390,
     },
     {
       name: "Page G",
-      value: 3490,
       color: "yellow.500",
+      value: 3490,
     },
   ]
 
@@ -74,8 +74,8 @@ describe("<DonutChart />", () => {
     test("should pass a11y test", async () => {
       await a11y(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
     })
@@ -83,8 +83,8 @@ describe("<DonutChart />", () => {
     test("cells should be rendered", async () => {
       const { container } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -100,10 +100,10 @@ describe("<DonutChart />", () => {
     test("labels should be rendered according to withLabels", async () => {
       const { rerender } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLabels={true}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -113,10 +113,10 @@ describe("<DonutChart />", () => {
 
       rerender(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLabels={false}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -128,12 +128,12 @@ describe("<DonutChart />", () => {
     })
 
     test("labelLines should be rendered according to withLabelLines", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
-          withLabels={true}
           withLabelLines={true}
+          withLabels={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -145,10 +145,10 @@ describe("<DonutChart />", () => {
 
       rerender(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
-          withLabels={true}
           withLabelLines={false}
+          withLabels={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -162,10 +162,10 @@ describe("<DonutChart />", () => {
     test("if withLabels is false, labelLines should not be rendered", async () => {
       const { container } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
-          withLabels={false}
           withLabelLines={true}
+          withLabels={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -179,11 +179,11 @@ describe("<DonutChart />", () => {
     test("isPercent should work correctly", async () => {
       render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          isPercent
           withLabels
           withTooltip={false}
-          isPercent
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -194,9 +194,9 @@ describe("<DonutChart />", () => {
     test("label text should be rendered according to labelProps", async () => {
       render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
           labelProps={{ value: "DonutChart" }}
         />,
       )
@@ -208,11 +208,11 @@ describe("<DonutChart />", () => {
 
   describe("tooltip & legend", () => {
     test("tooltip should be rendered according to withTooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -239,9 +239,9 @@ describe("<DonutChart />", () => {
 
       rerender(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -267,10 +267,10 @@ describe("<DonutChart />", () => {
     test("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
       const { container, user } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
-          withTooltip={true}
           tooltipDataSource="segment"
+          withTooltip={true}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -290,12 +290,12 @@ describe("<DonutChart />", () => {
     })
 
     test("legend should be rendered according to withLegend", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLegend={true}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -311,10 +311,10 @@ describe("<DonutChart />", () => {
 
       rerender(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           withLegend={false}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -334,9 +334,9 @@ describe("<DonutChart />", () => {
     test("should be rendered valueFormatter", async () => {
       const { container } = render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
           valueFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -361,11 +361,11 @@ describe("<DonutChart />", () => {
     test("valueFormatter should function properly in label", async () => {
       render(
         <DonutChart
-          containerProps={{ width: 400, height: "80%" }}
           data={data}
+          labelFormatter={(value) => `${value} views`}
           withLabels
           withTooltip={false}
-          labelFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 

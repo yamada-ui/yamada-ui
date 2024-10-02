@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
-import { isArray } from "@yamada-ui/utils"
 import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
+import { isArray } from "@yamada-ui/utils"
 import {
   getCSSFunction,
   globalValues,
@@ -10,14 +10,14 @@ import {
 } from "./utils"
 
 const directions: { [key: string]: string } = {
-  "to-t": "to top",
-  "to-tr": "to top right",
-  "to-r": "to right",
-  "to-br": "to bottom right",
   "to-b": "to bottom",
   "to-bl": "to bottom left",
+  "to-br": "to bottom right",
   "to-l": "to left",
+  "to-r": "to right",
+  "to-t": "to top",
   "to-tl": "to top left",
+  "to-tr": "to top right",
 }
 
 const directionValues = new Set(Object.values(directions))

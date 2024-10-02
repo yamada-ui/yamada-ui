@@ -1,3 +1,3 @@
-export { useNotice, noticeStore } from "./notice"
-export type { NoticeProps, NoticeOptions, UseNoticeOptions } from "./notice"
+export { noticeStore, useNotice } from "./notice"
+export type { NoticeOptions, NoticeProps, UseNoticeOptions } from "./notice"
 export * from "./notice-provider"

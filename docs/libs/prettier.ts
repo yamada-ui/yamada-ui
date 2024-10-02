@@ -1,5 +1,5 @@
-import path from "path"
 import type { Options } from "prettier"
+import path from "path"
 import { format, resolveConfig } from "prettier"
 
 export const prettier = async (content: string, customConfig?: Options) => {

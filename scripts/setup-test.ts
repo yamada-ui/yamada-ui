@@ -12,28 +12,28 @@ window.scrollTo = () => {}
 
 if (typeof window.matchMedia !== "function") {
   Object.defineProperty(window, "matchMedia", {
-    enumerable: true,
     configurable: true,
-    writable: true,
+    enumerable: true,
     value: vi.fn().mockImplementation((query) => ({
+      addEventListener: vi.fn(),
+      addListener: vi.fn(),
+      dispatchEvent: vi.fn(),
       matches: false,
       media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
+      removeListener: vi.fn(),
+      onchange: null,
     })),
+    writable: true,
   })
 }
 
 global.TextEncoder = require("util").TextEncoder
 
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  disconnect: vi.fn(),
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn(),
 }))
 
 vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(

@@ -1,10 +1,10 @@
 import {
-  render,
-  screen,
   a11y,
   act,
   fireEvent,
+  render,
   renderHook,
+  screen,
 } from "@yamada-ui/test"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
@@ -23,7 +23,7 @@ describe("<RangeSlider />", () => {
   test("should have correct default values", () => {
     const defaultValue: [number, number] = [0, 25]
     const { getByTestId } = render(
-      <RangeSlider data-testid="slider" defaultValue={defaultValue} />,
+      <RangeSlider defaultValue={defaultValue} data-testid="slider" />,
     )
 
     const inputs = getByTestId("slider").getElementsByTagName("input")
@@ -34,8 +34,8 @@ describe("<RangeSlider />", () => {
   })
 
   test("RangeSlider thumbs should have correct aria-valuemin and aria-valuemax", () => {
-    const { min, max } = { min: 0, max: 100 }
-    render(<RangeSlider min={min} max={max} />)
+    const { max, min } = { max: 100, min: 0 }
+    render(<RangeSlider max={max} min={min} />)
 
     const sliderThumbs = screen.getAllByRole("slider")
 
@@ -84,9 +84,9 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be reversed", () => {
-    const { min, max } = { min: 0, max: 100 }
+    const { max, min } = { max: 100, min: 0 }
     const { container } = render(
-      <RangeSlider isReversed min={min} max={max} defaultValue={[min, max]} />,
+      <RangeSlider defaultValue={[min, max]} isReversed max={max} min={min} />,
     )
     const sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     const filledTrack = container.querySelector(".ui-slider__track-filled")
@@ -113,7 +113,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be readOnly", () => {
-    render(<RangeSlider data-testid="slider" isReadOnly />)
+    render(<RangeSlider isReadOnly data-testid="slider" />)
 
     const slider = screen.getByTestId("slider")
     const sliderInputs = slider.getElementsByTagName("input")
@@ -134,7 +134,7 @@ describe("<RangeSlider />", () => {
     const max = 5
 
     const renderWithInvalidProps = () =>
-      render(<RangeSlider min={min} max={max} />)
+      render(<RangeSlider max={max} min={min} />)
 
     const consoleSpy = vi.spyOn(console, "error")
     consoleSpy.mockImplementation(() => {})
@@ -147,7 +147,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("should set isReadOnly to true when focusThumbOnChange is false", () => {
-    render(<RangeSlider data-testid="slider" focusThumbOnChange={false} />)
+    render(<RangeSlider focusThumbOnChange={false} data-testid="slider" />)
 
     const slider = screen.getByTestId("slider")
     const sliderInputs = slider.getElementsByTagName("input")
@@ -170,11 +170,11 @@ describe("<RangeSlider />", () => {
     const tenStep = (max - min) / 10
     const { container } = render(
       <RangeSlider
-        data-testid="slider"
-        min={min}
-        max={max}
-        step={10}
         defaultValue={[0, 50]}
+        max={max}
+        min={min}
+        step={10}
+        data-testid="slider"
       />,
     )
 
@@ -232,7 +232,7 @@ describe("<RangeSlider />", () => {
     const min = 0
     const max = 100
     const { container } = render(
-      <RangeSlider min={min} max={max} step={10} defaultValue={[0, 50]} />,
+      <RangeSlider defaultValue={[0, 50]} max={max} min={min} step={10} />,
     )
 
     const sliderThumb = screen.getAllByRole("slider")[0]
@@ -276,16 +276,16 @@ describe("<RangeSlider />", () => {
       useRangeSlider({
         id: "test-slider",
         name: "test-slider",
-        min: 0,
-        max: 100,
-        step: 1,
         defaultValue: [25, 75],
-        orientation: "horizontal",
-        isReversed: false,
         focusThumbOnChange: true,
-        onChangeStart,
-        onChangeEnd,
+        isReversed: false,
+        max: 100,
+        min: 0,
+        orientation: "horizontal",
+        step: 1,
         onChange,
+        onChangeEnd,
+        onChangeStart,
       }),
     )
 
@@ -319,15 +319,15 @@ describe("<RangeSlider />", () => {
       <RangeSlider
         id="test-slider"
         name="test"
-        min={0}
-        max={100}
-        step={1}
         defaultValue={[25, 75]}
-        orientation="horizontal"
         isReversed={false}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
+        max={100}
+        min={0}
+        orientation="horizontal"
+        step={1}
         onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
       />,
     )
 

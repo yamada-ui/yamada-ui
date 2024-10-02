@@ -1,8 +1,8 @@
-import { a11y, render, fireEvent, waitFor } from "@yamada-ui/test"
-import { useState, useRef } from "react"
+import type { InfiniteScrollAreaProps } from "../src"
+import { a11y, fireEvent, render, waitFor } from "@yamada-ui/test"
+import { useRef, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import { InfiniteScrollArea } from "../src"
-import type { InfiniteScrollAreaProps } from "../src"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
@@ -42,13 +42,13 @@ describe("<InfiniteScrollArea />", () => {
 
       return (
         <InfiniteScrollArea
-          onLoad={async ({ index, finish }) => {
+          initialLoad
+          loading={<>Loading…</>}
+          onLoad={async ({ finish, index }) => {
             setCount((prev) => prev + 50)
 
             if (index >= 5) finish()
           }}
-          initialLoad
-          loading={<>Loading…</>}
         >
           {Array(count)
             .fill(0)
@@ -73,8 +73,8 @@ describe("<InfiniteScrollArea />", () => {
         <div ref={rootRef}>
           <InfiniteScrollArea
             isReverse={isReverse}
-            rootRef={rootRef}
             loading={<>Loading…</>}
+            rootRef={rootRef}
           >
             {Array(50)
               .fill(0)

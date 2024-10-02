@@ -40,8 +40,8 @@ describe("withDefaultSize", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultSize({
-      size: "lg",
       components,
+      size: "lg",
     })
 
     const expected = {
@@ -99,8 +99,8 @@ describe("withDefaultVariant", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultVariant({
-      variant: "outline",
       components,
+      variant: "outline",
     })
 
     const expected = {
@@ -189,7 +189,7 @@ describe("withDefaultColorScheme", () => {
 describe("withDefaultProps", () => {
   test("should change default color scheme", () => {
     const customTheme = withDefaultProps({
-      defaultProps: { size: "lg", variant: "outline", colorScheme: "blue" },
+      defaultProps: { colorScheme: "blue", size: "lg", variant: "outline" },
     })
 
     const expected = {
@@ -202,9 +202,9 @@ describe("withDefaultProps", () => {
             styles.defaultProps.colorScheme = "blue"
           } else {
             styles.defaultProps = {
+              colorScheme: "blue",
               size: "lg",
               variant: "outline",
-              colorScheme: "blue",
             }
           }
 
@@ -223,8 +223,8 @@ describe("withDefaultProps", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultProps({
-      defaultProps: { size: "lg", variant: "outline", colorScheme: "blue" },
       components,
+      defaultProps: { colorScheme: "blue", size: "lg", variant: "outline" },
     })
 
     const expected = {
@@ -238,9 +238,9 @@ describe("withDefaultProps", () => {
               styles.defaultProps.colorScheme = "blue"
             } else {
               styles.defaultProps = {
+                colorScheme: "blue",
                 size: "lg",
                 variant: "outline",
-                colorScheme: "blue",
               }
             }
           }

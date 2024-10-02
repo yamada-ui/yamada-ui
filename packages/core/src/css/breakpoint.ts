@@ -1,26 +1,26 @@
 import type { Dict } from "@yamada-ui/utils"
-import { getPx } from "@yamada-ui/utils"
 import type {
   BreakpointDirection,
   BreakpointOptions,
   ThemeBreakpointTokens,
 } from "../theme.types"
+import { getPx } from "@yamada-ui/utils"
 
 interface BreakpointQuery {
   breakpoint: string
-  minW: number | undefined
   maxW: number | undefined
-  query: string | undefined
   maxWQuery: string | undefined
-  minWQuery: string | undefined
   minMaxQuery: string | undefined
+  minW: number | undefined
+  minWQuery: string | undefined
+  query: string | undefined
 }
 
 export type BreakpointQueries = BreakpointQuery[]
 
 export interface Breakpoints {
-  keys: string[]
   isResponsive: (obj: Dict, strict?: boolean) => boolean
+  keys: string[]
   queries: BreakpointQueries
 }
 
@@ -72,12 +72,12 @@ function createQueries(
 
     return {
       breakpoint,
-      minW,
       maxW,
-      query,
       maxWQuery,
-      minWQuery,
       minMaxQuery,
+      minW,
+      minWQuery,
+      query,
     }
   })
 }
@@ -127,8 +127,8 @@ export function analyzeBreakpoints(
   }
 
   return {
-    keys,
     isResponsive,
+    keys,
     queries,
   }
 }
@@ -148,8 +148,8 @@ export function getMinMaxQuery(
   const maxQuery = omitQueries.sort((a, b) => (b.maxW ?? 0) - (a.maxW ?? 0))[0]
 
   if (direction !== "up") {
-    return { minQuery, maxQuery }
+    return { maxQuery, minQuery }
   } else {
-    return { minQuery, maxQuery }
+    return { maxQuery, minQuery }
   }
 }

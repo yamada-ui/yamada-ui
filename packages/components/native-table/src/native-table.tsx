@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
@@ -19,15 +19,15 @@ export const [TableStyleProvider, useTableStyles] =
 
 interface NativeTableOptions {
   /**
-   * The CSS `table-layout` property.
-   */
-  layout?: CSSUIObject["tableLayout"]
-  /**
    * If `true`, highlight the row when the table row is hovered.
    *
    * @default false
    */
   highlightOnHover?: boolean
+  /**
+   * The CSS `table-layout` property.
+   */
+  layout?: CSSUIObject["tableLayout"]
   /**
    * If `true`, display the outer border of the table.
    *

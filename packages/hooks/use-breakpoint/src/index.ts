@@ -1,8 +1,8 @@
-import type { Theme, ResponsiveObject, StyledTheme } from "@yamada-ui/core"
+import type { ResponsiveObject, StyledTheme, Theme } from "@yamada-ui/core"
+import type { DependencyList } from "react"
 import { useTheme } from "@yamada-ui/core"
 import { createdDom, useUpdateEffect } from "@yamada-ui/utils"
-import type { DependencyList } from "react"
-import { useState, useMemo, useEffect, useRef, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 /**
  * `useBreakpoint` is a custom hook that returns the current breakpoint.
@@ -29,7 +29,7 @@ export const useBreakpoint = () => {
 
   const queries = useMemo(
     () =>
-      breakpoints.queries.map(({ breakpoint, minMaxQuery, minW, maxW }) => {
+      breakpoints.queries.map(({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =
           identifier === "@media screen"
             ? "@media screen and "
@@ -38,9 +38,9 @@ export const useBreakpoint = () => {
 
         return {
           breakpoint,
-          query,
-          minW,
           maxW,
+          minW,
+          query,
         }
       }),
     [breakpoints, identifier],
@@ -60,7 +60,7 @@ export const useBreakpoint = () => {
 
   const getBreakpoint = useCallback(
     (width: number) => {
-      for (const { breakpoint, minW, maxW } of queries) {
+      for (const { breakpoint, maxW, minW } of queries) {
         if (direction !== "up") {
           if ((minW ?? 0) <= width) return breakpoint
         } else {

@@ -1,8 +1,7 @@
 import type { StyledTheme } from "@yamada-ui/core"
-import { ThemeProvider, ColorModeProvider } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
-import { renderHook, mocks } from "@yamada-ui/test"
-
+import { ColorModeProvider, ThemeProvider } from "@yamada-ui/core"
+import { mocks, renderHook } from "@yamada-ui/test"
 import { noop } from "@yamada-ui/utils"
 import { getValue, useValue } from "../src"
 
@@ -124,83 +123,83 @@ describe("useValue", () => {
 
 describe("getValue", () => {
   const theme: StyledTheme = {
-    themeScheme: "base",
-    changeThemeScheme: noop,
     breakpoints: {
+      base: "9999px",
       sm: "30em",
       md: "48em",
       lg: "61em",
       xl: "80em",
       "2xl": "90em",
-      base: "9999px",
     },
-    __config: {},
-    __cssVars: {},
-    __cssMap: {},
+    changeThemeScheme: noop,
+    themeScheme: "base",
     __breakpoints: {
-      keys: ["base", "2xl", "xl", "lg", "md", "sm"],
       isResponsive: () => false,
+      keys: ["base", "2xl", "xl", "lg", "md", "sm"],
       queries: [
         {
           breakpoint: "base",
-          minW: 1441,
           maxW: undefined,
-          query: undefined,
           maxWQuery: undefined,
-          minWQuery: "@media screen and (min-width: 1441px)",
           minMaxQuery: "@media screen and (min-width: 1441px)",
+          minW: 1441,
+          minWQuery: "@media screen and (min-width: 1441px)",
+          query: undefined,
         },
         {
           breakpoint: "2xl",
-          minW: 1281,
           maxW: 1440,
-          query: "@media screen and (max-width: 1440px)",
           maxWQuery: "@media screen and (max-width: 1440px)",
-          minWQuery: "@media screen and (min-width: 1281px)",
           minMaxQuery:
             "@media screen and (min-width: 1281px) and (max-width: 1440px)",
+          minW: 1281,
+          minWQuery: "@media screen and (min-width: 1281px)",
+          query: "@media screen and (max-width: 1440px)",
         },
         {
           breakpoint: "xl",
-          minW: 977,
           maxW: 1280,
-          query: "@media screen and (max-width: 1280px)",
           maxWQuery: "@media screen and (max-width: 1280px)",
-          minWQuery: "@media screen and (min-width: 977px)",
           minMaxQuery:
             "@media screen and (min-width: 977px) and (max-width: 1280px)",
+          minW: 977,
+          minWQuery: "@media screen and (min-width: 977px)",
+          query: "@media screen and (max-width: 1280px)",
         },
         {
           breakpoint: "lg",
-          minW: 769,
           maxW: 976,
-          query: "@media screen and (max-width: 976px)",
           maxWQuery: "@media screen and (max-width: 976px)",
-          minWQuery: "@media screen and (min-width: 769px)",
           minMaxQuery:
             "@media screen and (min-width: 769px) and (max-width: 976px)",
+          minW: 769,
+          minWQuery: "@media screen and (min-width: 769px)",
+          query: "@media screen and (max-width: 976px)",
         },
         {
           breakpoint: "md",
-          minW: 481,
           maxW: 768,
-          query: "@media screen and (max-width: 768px)",
           maxWQuery: "@media screen and (max-width: 768px)",
-          minWQuery: "@media screen and (min-width: 481px)",
           minMaxQuery:
             "@media screen and (min-width: 481px) and (max-width: 768px)",
+          minW: 481,
+          minWQuery: "@media screen and (min-width: 481px)",
+          query: "@media screen and (max-width: 768px)",
         },
         {
           breakpoint: "sm",
-          minW: undefined,
           maxW: 480,
-          query: "@media screen and (max-width: 480px)",
           maxWQuery: "@media screen and (max-width: 480px)",
-          minWQuery: undefined,
           minMaxQuery: "@media screen and (max-width: 480px)",
+          minW: undefined,
+          minWQuery: undefined,
+          query: "@media screen and (max-width: 480px)",
         },
       ],
     },
+    __config: {},
+    __cssMap: {},
+    __cssVars: {},
   }
 
   let mock: MatchMediaMock

@@ -1,21 +1,21 @@
-import { readFile, readdir } from "fs/promises"
-import path from "path"
+import type { Data } from "scripts/utils"
+import type { Locale } from "utils/i18n"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { config } from "dotenv"
-import { generateFrontMatter, getDirectoryPaths } from "./utils"
 import { CONSTANT } from "constant"
-import type { Data } from "scripts/utils"
+import { config } from "dotenv"
+import { readdir, readFile } from "fs/promises"
+import path from "path"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
 import { locales } from "utils/i18n"
-import type { Locale } from "utils/i18n"
 import { toCamelCase, toKebabCase } from "utils/string"
+import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
 interface Options {
-  isMulti: boolean
   componentName: string
+  isMulti: boolean
   baseComponents?: {
     name: string
     path: string
@@ -35,7 +35,7 @@ const LOCALE_TAB_MAP = {
   ja: "テーマ",
 }
 const LOCALE_DESC_MAP = {
-  en: ({ isMulti, componentName, baseComponents }: Options) => {
+  en: ({ baseComponents, componentName, isMulti }: Options) => {
     let content = [
       "## Theming",
       `The \`${componentName}\` is a [${
@@ -65,7 +65,7 @@ const LOCALE_DESC_MAP = {
 
     return content.join("\n")
   },
-  ja: ({ isMulti, componentName, baseComponents }: Options) => {
+  ja: ({ baseComponents, componentName, isMulti }: Options) => {
     let content = [
       "## テーマ",
       `\`${componentName}\`は、[${
@@ -163,14 +163,14 @@ const getBaseComponents = (theme: string, paths: { [key: string]: string }) => {
 
 const generateContent = async ({
   data,
-  theme,
   locale,
   paths,
+  theme,
 }: {
   data: Data
-  theme: string
   locale: Locale
   paths: { [key: string]: string }
+  theme: string
 }) => {
   const componentName = data.title
   const isMulti = getIsMulti(theme)
@@ -185,9 +185,9 @@ const generateContent = async ({
 
   content =
     LOCALE_DESC_MAP[locale]({
-      isMulti,
-      componentName,
       baseComponents,
+      componentName,
+      isMulti,
     }) + content
 
   return content
@@ -222,9 +222,9 @@ const generateMDXFiles: p.RequiredRunner =
 
             const content = await generateContent({
               data,
-              theme,
               locale,
               paths,
+              theme,
             })
 
             const outPath = path.join(

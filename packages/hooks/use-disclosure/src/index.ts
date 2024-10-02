@@ -5,11 +5,11 @@ export interface UseDisclosureProps<
   T extends (...args: any[]) => any = () => void,
   K extends (...args: any[]) => any = () => void,
 > {
-  isOpen?: boolean
   defaultIsOpen?: boolean
-  onOpen?: T
+  isOpen?: boolean
+  timing?: "after" | "before"
   onClose?: K
-  timing?: "before" | "after"
+  onOpen?: T
 }
 
 /**
@@ -60,27 +60,27 @@ export const useDisclosure = <
   const onToggle = useCallback(
     (...args: any) => (!isOpen ? onOpen(...args) : onClose(...args)),
     [isOpen, onOpen, onClose],
-  ) as unknown as T | K
+  ) as unknown as K | T
 
-  return { isOpen, onOpen, onClose, onToggle }
+  return { isOpen, onClose, onOpen, onToggle }
 }
 
 export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
 
-export type LazyMode = "unmount" | "keepMounted"
+export type LazyMode = "keepMounted" | "unmount"
 
 export interface UseLazyDisclosureProps {
   enabled?: boolean
   isSelected?: boolean
-  wasSelected?: boolean
   mode?: LazyMode
+  wasSelected?: boolean
 }
 
 export const useLazyDisclosure = ({
-  wasSelected,
   enabled,
   isSelected,
   mode = "unmount",
+  wasSelected,
 }: UseLazyDisclosureProps) => {
   if (!enabled) return true
 

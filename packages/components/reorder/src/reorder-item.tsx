@@ -1,12 +1,5 @@
-import type { HTMLUIProps, CSSUIObject, ComponentArgs } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
+import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
-import {
-  MotionReorder,
-  useMotionValue,
-  useDragControls,
-} from "@yamada-ui/motion"
-import { cx, dataAttr } from "@yamada-ui/utils"
 import type { Merge } from "@yamada-ui/utils"
 import type {
   ForwardedRef,
@@ -14,31 +7,38 @@ import type {
   ReactNode,
   RefAttributes,
 } from "react"
+import { ui } from "@yamada-ui/core"
+import {
+  MotionReorder,
+  useDragControls,
+  useMotionValue,
+} from "@yamada-ui/motion"
+import { cx, dataAttr } from "@yamada-ui/utils"
 import { forwardRef, useCallback, useEffect, useState } from "react"
 import { ReorderItemProvider, useReorderContext } from "./reorder-context"
 
 interface ReorderItemOptions<Y extends any = string> {
   /**
-   * The label of the reorder item.
-   */
-  label?: ReactNode
-  /**
    * The value of the reorder item.
    */
   value: Y
+  /**
+   * The label of the reorder item.
+   */
+  label?: ReactNode
 }
 
 export interface ReorderItemProps<Y extends any = string>
   extends Omit<
       Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
-      "value" | "transition" | "children"
+      "children" | "transition" | "value"
     >,
     PropsWithChildren,
     ReorderItemOptions<Y> {}
 
 export const ReorderItem = forwardRef(
   <Y extends any = string>(
-    { className, label, value, children, ...rest }: ReorderItemProps<Y>,
+    { className, children, label, value, ...rest }: ReorderItemProps<Y>,
     ref: ForwardedRef<HTMLLIElement>,
   ) => {
     const { orientation, styles } = useReorderContext()
@@ -87,7 +87,7 @@ export const ReorderItem = forwardRef(
     }
 
     return (
-      <ReorderItemProvider value={{ register, isDrag, dragControls }}>
+      <ReorderItemProvider value={{ dragControls, isDrag, register }}>
         <ui.li
           ref={ref}
           as={MotionReorder.Item}
@@ -95,10 +95,10 @@ export const ReorderItem = forwardRef(
           value={value}
           __css={css}
           {...rest}
-          dragListener={!hasTrigger}
-          dragControls={dragControls}
-          data-selected={dataAttr(isDrag)}
           style={{ ...rest.style, x, y }}
+          dragControls={dragControls}
+          dragListener={!hasTrigger}
+          data-selected={dataAttr(isDrag)}
         >
           {children ?? label}
         </ui.li>
@@ -107,7 +107,7 @@ export const ReorderItem = forwardRef(
   },
 ) as {
   <Y = string>(
-    props: ReorderItemProps<Y> & RefAttributes<HTMLLIElement>,
+    props: RefAttributes<HTMLLIElement> & ReorderItemProps<Y>,
   ): JSX.Element
 } & ComponentArgs
 

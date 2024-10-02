@@ -1,47 +1,47 @@
 import type { ButtonProps } from "@yamada-ui/button"
-import { Button } from "@yamada-ui/button"
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
+import type { ReactNode } from "react"
+import type { ModalProps } from "./modal"
+import { Button } from "@yamada-ui/button"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { motionForwardRef } from "@yamada-ui/motion"
 import {
-  getValidChildren,
-  omitChildren,
-  isValidElement,
-  isEmpty,
   cx,
   findChild,
+  getValidChildren,
+  isEmpty,
+  isValidElement,
+  omitChildren,
 } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { DialogBody } from "./dialog-body"
 import { DialogCloseButton } from "./dialog-close-button"
 import { DialogFooter } from "./dialog-footer"
 import { DialogHeader } from "./dialog-header"
 import { DialogOverlay } from "./dialog-overlay"
-import type { ModalProps } from "./modal"
 import { Modal } from "./modal"
 import { DialogProvider } from "./modal-context"
 
 interface DialogOptions {
   /**
-   * The dialog header to use.
+   * The dialog cancel to use.
    */
-  header?: ReactNode
+  cancel?: ButtonProps | ReactNode
   /**
    * The dialog footer to use.
    */
   footer?: ReactNode
   /**
-   * The dialog cancel to use.
+   * The dialog header to use.
    */
-  cancel?: ReactNode | ButtonProps
+  header?: ReactNode
   /**
    * The dialog other to use.
    */
-  other?: ReactNode | ButtonProps
+  other?: ButtonProps | ReactNode
   /**
    * The dialog success to use.
    */
-  success?: ReactNode | ButtonProps
+  success?: ButtonProps | ReactNode
   /**
    * The callback invoked when cancel button clicked.
    */
@@ -74,19 +74,19 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
     })
     const {
       className,
-      children,
-      withOverlay = true,
-      withCloseButton = true,
-      header,
-      footer,
       cancel,
+      children,
+      footer,
+      header,
       other,
       success,
-      onClose,
+      withCloseButton = true,
+      withOverlay = true,
+      containerProps,
       onCancel,
+      onClose,
       onOther,
       onSuccess,
-      containerProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -135,10 +135,10 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
           className={cx("ui-dialog", className)}
           __css={css}
           {...{
-            onClose,
-            withOverlay: false,
             withCloseButton: false,
+            withOverlay: false,
             containerProps,
+            onClose,
             ...rest,
             size,
           }}

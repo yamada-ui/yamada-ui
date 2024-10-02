@@ -21,7 +21,7 @@ describe("<Indicator />", () => {
 
   test("should render indicator (with overflowCount)", () => {
     render(
-      <Indicator data-testid="Indicator" label={100} overflowCount={99}>
+      <Indicator label={100} overflowCount={99} data-testid="Indicator">
         <div></div>
       </Indicator>,
     )
@@ -30,7 +30,7 @@ describe("<Indicator />", () => {
 
   test("should not render zero when showZero is false", () => {
     render(
-      <Indicator data-testid="Indicator" showZero={false} label={0}>
+      <Indicator label={0} showZero={false} data-testid="Indicator">
         <div></div>
       </Indicator>,
     )
@@ -39,7 +39,7 @@ describe("<Indicator />", () => {
 
   test("should not render indicator", () => {
     render(
-      <Indicator data-testid="Indicator" isDisabled label="new">
+      <Indicator isDisabled label="new" data-testid="Indicator">
         <div></div>
       </Indicator>,
     )
@@ -48,7 +48,7 @@ describe("<Indicator />", () => {
 
   test("renders indicator at bottom-left", () => {
     render(
-      <Indicator placement="bottom-left" data-testid="Indicator" label="new">
+      <Indicator label="new" placement="bottom-left" data-testid="Indicator">
         <div></div>
       </Indicator>,
     )
@@ -61,7 +61,7 @@ describe("<Indicator />", () => {
 
   test("renders indicator with ping element", () => {
     render(
-      <Indicator data-testid="Indicator" ping label="new">
+      <Indicator label="new" ping data-testid="Indicator">
         <div></div>
       </Indicator>,
     )

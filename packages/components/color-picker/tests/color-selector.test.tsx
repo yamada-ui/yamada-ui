@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@yamada-ui/test"
 import { expect } from "vitest"
 import { ColorSelector } from "../src"
-import { resetEyeDropperMock, mockEyeDropper } from "./utils/mock-eye-dropper"
+import { mockEyeDropper, resetEyeDropperMock } from "./utils/mock-eye-dropper"
 
 describe("<ColorSelector />", () => {
   test("ColorSelector renders correctly", async () => {
@@ -15,7 +15,7 @@ describe("<ColorSelector />", () => {
   test("ColorSelector with eye dropper", () => {
     mockEyeDropper()
 
-    render(<ColorSelector data-testid="ColorSelector" withEyeDropper />)
+    render(<ColorSelector withEyeDropper data-testid="ColorSelector" />)
 
     const buttons = screen.getAllByRole("button")
 

@@ -1,5 +1,4 @@
 import type { Meta } from "@storybook/react"
-import { useRef, useState } from "react"
 import {
   Button,
   Card,
@@ -12,6 +11,7 @@ import {
   Text,
   useInfiniteScroll,
 } from "@yamada-ui/react"
+import { useRef, useState } from "react"
 
 const meta: Meta = {
   title: "Hooks / useInfiniteScroll",
@@ -22,7 +22,7 @@ export default meta
 export const basic = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -64,26 +64,26 @@ export const withRoot = () => {
   const resetRef = useRef<() => void>(() => {})
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    resetRef,
+    rootRef,
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
     },
-    rootRef,
-    resetRef,
   })
 
   return (
     <>
       <Container
         ref={rootRef}
-        maxH="xl"
         borderWidth="1px"
-        rounded="md"
-        p="md"
+        maxH="xl"
         overflowY="auto"
+        p="md"
+        rounded="md"
       >
         {Array(count)
           .fill(0)
@@ -117,14 +117,14 @@ export const withRoot = () => {
 export const withRootMargin = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    rootMargin: "300px 0px 0px 0px",
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
     },
-    rootMargin: "300px 0px 0px 0px",
   })
 
   return (
@@ -158,14 +158,14 @@ export const withRootMargin = () => {
 export const withThreshold = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    threshold: 1,
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
     },
-    threshold: 1,
   })
 
   return (
@@ -199,14 +199,14 @@ export const withThreshold = () => {
 export const withInitialLoad = () => {
   const [count, setCount] = useState<number>(0)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    initialLoad: true,
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
     },
-    initialLoad: true,
   })
 
   return (
@@ -240,14 +240,14 @@ export const withInitialLoad = () => {
 export const isReverse = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ index, finish }) => {
+    isReverse: true,
+    onLoad: async ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
     },
-    isReverse: true,
   })
 
   return (

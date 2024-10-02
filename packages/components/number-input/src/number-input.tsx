@@ -1,24 +1,30 @@
 import type {
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   ColorModeToken,
   CSS,
+  CSSUIObject,
+  HTMLUIProps,
   PropGetter,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
+  ThemeProps,
 } from "@yamada-ui/core"
 import type { UseFormControlProps } from "@yamada-ui/form-control"
+import type { UseCounterProps } from "@yamada-ui/use-counter"
+import type {
+  ChangeEvent,
+  InputHTMLAttributes,
+  KeyboardEvent,
+  KeyboardEventHandler,
+} from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import { ChevronIcon } from "@yamada-ui/icon"
-import type { UseCounterProps } from "@yamada-ui/use-counter"
 import { useCounter } from "@yamada-ui/use-counter"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useInterval } from "@yamada-ui/use-interval"
@@ -33,19 +39,13 @@ import {
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type {
-  ChangeEvent,
-  InputHTMLAttributes,
-  KeyboardEvent,
-  KeyboardEventHandler,
-} from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
 
 const isValidNumericKeyboardEvent = (
-  { key, ctrlKey, altKey, metaKey }: KeyboardEvent,
+  { key, altKey, ctrlKey, metaKey }: KeyboardEvent,
   isValid: (key: string) => boolean,
 ) => {
   if (key == null) return true
@@ -60,8 +60,8 @@ const isValidNumericKeyboardEvent = (
 
 const getStep = <Y extends KeyboardEvent | WheelEvent>({
   ctrlKey,
-  shiftKey,
   metaKey,
+  shiftKey,
 }: Y) => {
   let ratio = 1
 
@@ -72,7 +72,7 @@ const getStep = <Y extends KeyboardEvent | WheelEvent>({
   return ratio
 }
 
-type ValidityState = "rangeUnderflow" | "rangeOverflow"
+type ValidityState = "rangeOverflow" | "rangeUnderflow"
 
 export interface UseNumberInputProps
   extends UseFormControlProps<HTMLInputElement>,
@@ -82,24 +82,11 @@ export interface UseNumberInputProps
    */
   name?: string
   /**
-   * Hints at the type of data that might be entered by the user.
-   * It also determines the type of keyboard shown to the user on mobile devices.
+   * If `true`, the input's value will change based on mouse wheel.
    *
-   * @default 'decimal'
+   * @default false
    */
-  inputMode?: InputHTMLAttributes<any>["inputMode"]
-  /**
-   * The pattern used to check the <input> element's value against on form submission.
-   *
-   * @default '[0-9]*(.[0-9]+)?'
-   */
-  pattern?: InputHTMLAttributes<any>["pattern"]
-  /**
-   * If `true`, the input will be focused as you increment or decrement the value with the stepper.
-   *
-   * @default true
-   */
-  focusInputOnChange?: boolean
+  allowMouseWheel?: boolean
   /**
    * This controls the value update when you blur out of the input.
    * - If `true` and the value is greater than `max`, the value will be reset to `max`.
@@ -109,26 +96,29 @@ export interface UseNumberInputProps
    */
   clampValueOnBlur?: boolean
   /**
-   * If `true`, the input's value will change based on mouse wheel.
+   * If `true`, the input will be focused as you increment or decrement the value with the stepper.
    *
-   * @default false
+   * @default true
    */
-  allowMouseWheel?: boolean
+  focusInputOnChange?: boolean
   /**
-   * The callback invoked when invalid number is entered.
+   * If using a custom display format, this converts the default format to the custom format.
    */
-  onInvalid?: (
-    message: ValidityState,
-    value: string,
-    valueAsNumber: number,
-  ) => void
+  format?: (value: number | string) => number | string
   /**
    * This is used to format the value so that screen readers
    * can speak out a more human-friendly value.
    *
    * It is used to set the `aria-valuetext` property of the input.
    */
-  getAriaValueText?: (value: string | number) => string
+  getAriaValueText?: (value: number | string) => string
+  /**
+   * Hints at the type of data that might be entered by the user.
+   * It also determines the type of keyboard shown to the user on mobile devices.
+   *
+   * @default 'decimal'
+   */
+  inputMode?: InputHTMLAttributes<any>["inputMode"]
   /**
    * Whether the pressed key should be allowed in the input.
    * The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.
@@ -139,42 +129,52 @@ export interface UseNumberInputProps
    */
   parse?: (value: string) => string
   /**
-   * If using a custom display format, this converts the default format to the custom format.
+   * The pattern used to check the <input> element's value against on form submission.
+   *
+   * @default '[0-9]*(.[0-9]+)?'
    */
-  format?: (value: string | number) => string | number
+  pattern?: InputHTMLAttributes<any>["pattern"]
+  /**
+   * The callback invoked when invalid number is entered.
+   */
+  onInvalid?: (
+    message: ValidityState,
+    value: string,
+    valueAsNumber: number,
+  ) => void
 }
 
 export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const {
     id,
     name,
-    value: valueProp,
-    defaultValue,
-    inputMode = "decimal",
-    pattern = "[0-9]*(.[0-9]+)?",
-    focusInputOnChange = true,
-    clampValueOnBlur = true,
-    keepWithinRange = true,
     allowMouseWheel,
-    min = Number.MIN_SAFE_INTEGER,
-    max = Number.MAX_SAFE_INTEGER,
-    step: stepProp,
-    precision,
-    parse: parseProp,
+    clampValueOnBlur = true,
+    defaultValue,
+    focusInputOnChange = true,
     format: formatProp,
-    onInvalid: onInvalidProp,
-    isValidCharacter: isValidCharacterProp,
     getAriaValueText: getAriaValueTextProp,
+    inputMode = "decimal",
+    isValidCharacter: isValidCharacterProp,
+    keepWithinRange = true,
+    max = Number.MAX_SAFE_INTEGER,
+    min = Number.MIN_SAFE_INTEGER,
+    parse: parseProp,
+    pattern = "[0-9]*(.[0-9]+)?",
+    precision,
+    step: stepProp,
+    value: valueProp,
     onChange: onChangeProp,
+    onInvalid: onInvalidProp,
     ...rest
   } = useFormControlProps(props)
   const {
-    required,
     disabled,
     readOnly,
+    required,
     "aria-invalid": isInvalid,
-    onFocus: onFocusProp,
     onBlur: onBlurProp,
+    onFocus: onFocusProp,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
 
@@ -187,8 +187,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const inputRef = useRef<HTMLInputElement>(null)
   const inputSelectionRef = useRef<{
-    start: number | null
-    end: number | null
+    end: null | number
+    start: null | number
   } | null>(null)
   const incrementRef = useRef<HTMLButtonElement>(null)
   const decrementRef = useRef<HTMLButtonElement>(null)
@@ -219,23 +219,23 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const {
-    isMin,
+    cast,
     isMax,
+    isMin,
     isOut,
-    value,
-    valueAsNumber,
     setValue,
     update,
-    cast,
+    value,
+    valueAsNumber,
     ...counter
   } = useCounter({
-    value: valueProp,
     defaultValue,
-    step: stepProp,
-    min,
-    max,
-    precision,
     keepWithinRange,
+    max,
+    min,
+    precision,
+    step: stepProp,
+    value: valueProp,
     onChange: onChangeProp,
   })
 
@@ -260,7 +260,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const format = useCallback(
-    (value: string | number) => (formatProp?.(value) ?? value).toString(),
+    (value: number | string) => (formatProp?.(value) ?? value).toString(),
     [formatProp],
   )
 
@@ -279,7 +279,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const validateAndClamp = useCallback(() => {
-    let next = value as string | number
+    let next = value as number | string
 
     if (value === "") return
 
@@ -305,8 +305,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       update(sanitize(parsedInput))
 
       inputSelectionRef.current = {
-        start: ev.currentTarget.selectionStart,
         end: ev.currentTarget.selectionEnd,
+        start: ev.currentTarget.selectionStart,
       }
     },
     [parse, update, sanitize],
@@ -322,10 +322,10 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const step = getStep(ev) * (stepProp ?? 1)
 
       const keyMap: { [key: string]: KeyboardEventHandler } = {
-        ArrowUp: () => increment(step),
         ArrowDown: () => decrement(step),
-        Home: () => update(min),
+        ArrowUp: () => increment(step),
         End: () => update(max),
+        Home: () => update(min),
       }
 
       const action = keyMap[ev.key]
@@ -338,7 +338,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     [decrement, increment, isValidCharacter, max, min, stepProp, update],
   )
 
-  const { up, down, stop, isSpinning } = useSpinner(increment, decrement)
+  const { down, isSpinning, stop, up } = useSpinner(increment, decrement)
 
   useAttributeObserver(incrementRef, ["disabled"], isSpinning, stop)
   useAttributeObserver(decrementRef, ["disabled"], isSpinning, stop)
@@ -414,32 +414,32 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       id,
-      name,
       type: "text",
-      role: "spinbutton",
+      name,
+      disabled,
       inputMode,
       pattern,
-      required,
-      disabled,
       readOnly,
+      required,
+      role: "spinbutton",
       ...formControlProps,
       ...props,
-      min,
-      max,
-      step: stepProp,
       ref: mergeRefs(inputRef, ref),
-      value: format(value),
-      "aria-valuemin": min,
-      "aria-valuemax": max,
-      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
-      "aria-valuetext": valueText,
-      "aria-invalid": ariaAttr(isInvalid ?? isOut),
       autoComplete: "off",
       autoCorrect: "off",
-      onChange: handlerAll(props.onChange, onChange),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      onFocus: handlerAll(props.onFocus, onFocus),
+      max,
+      min,
+      step: stepProp,
+      value: format(value),
+      "aria-invalid": ariaAttr(isInvalid ?? isOut),
+      "aria-valuemax": max,
+      "aria-valuemin": min,
+      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
+      "aria-valuetext": valueText,
       onBlur: handlerAll(props.onBlur, onBlur),
+      onChange: handlerAll(props.onChange, onChange),
+      onFocus: handlerAll(props.onFocus, onFocus),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
     [
       id,
@@ -471,16 +471,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMax)
 
       return {
-        required,
-        readOnly,
         disabled: trulyDisabled,
+        readOnly,
+        required,
         ...formControlProps,
         ...props,
+        ref: mergeRefs(ref, incrementRef),
         style: {
           ...props.style,
           cursor: readOnly ? "not-allowed" : props.style?.cursor,
         },
-        ref: mergeRefs(ref, incrementRef),
         tabIndex: -1,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button === 0 && !trulyDisabled) eventUp(ev)
@@ -506,16 +506,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMin)
 
       return {
-        required,
-        readOnly,
         disabled: trulyDisabled,
+        readOnly,
+        required,
         ...formControlProps,
         ...props,
+        ref: mergeRefs(ref, decrementRef),
         style: {
           ...props.style,
           cursor: readOnly ? "not-allowed" : props.style?.cursor,
         },
-        ref: mergeRefs(ref, decrementRef),
         tabIndex: -1,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button === 0 && !trulyDisabled) eventDown(ev)
@@ -537,16 +537,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   return {
+    isDisabled,
+    isFocused,
+    isReadOnly,
+    isRequired,
     props: rest,
     value: format(value),
     valueAsNumber,
-    isFocused,
-    isRequired,
-    isReadOnly,
-    isDisabled,
-    getInputProps,
-    getIncrementProps,
     getDecrementProps,
+    getIncrementProps,
+    getInputProps,
   }
 }
 
@@ -556,7 +556,7 @@ const INTERVAL = 50
 
 const DELAY = 300
 
-type Action = "increment" | "decrement"
+type Action = "decrement" | "increment"
 
 const useSpinner = (increment: Function, decrement: Function) => {
   const [isSpinning, setIsSpinning] = useState(false)
@@ -605,7 +605,7 @@ const useSpinner = (increment: Function, decrement: Function) => {
     return () => removeTimeout()
   }, [])
 
-  return { up, down, stop, isSpinning }
+  return { down, isSpinning, stop, up }
 }
 
 const useAttributeObserver = (
@@ -630,7 +630,7 @@ const useAttributeObserver = (
       }
     })
 
-    observer.observe(ref.current, { attributes: true, attributeFilter })
+    observer.observe(ref.current, { attributeFilter, attributes: true })
 
     return () => observer.disconnect()
   })
@@ -638,65 +638,65 @@ const useAttributeObserver = (
 
 interface NumberInputOptions {
   /**
-   * If `true`, display the addon for the number input.
+   * The border color when the input is invalid.
    */
-  isStepper?: boolean
-  /**
-   * Props for container element.
-   */
-  containerProps?: HTMLUIProps
-  /**
-   * Props for addon component.
-   */
-  addonProps?: HTMLUIProps
-  /**
-   * Props for increment component.
-   */
-  incrementProps?: NumberIncrementStepperProps
-  /**
-   * Props for decrement component.
-   */
-  decrementProps?: NumberDecrementStepperProps
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The border color when the input is focused.
    */
   focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * The border color when the input is invalid.
+   * If `true`, display the addon for the number input.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  isStepper?: boolean
+  /**
+   * Props for addon component.
+   */
+  addonProps?: HTMLUIProps
+  /**
+   * Props for container element.
+   */
+  containerProps?: HTMLUIProps
+  /**
+   * Props for decrement component.
+   */
+  decrementProps?: NumberDecrementStepperProps
+  /**
+   * Props for increment component.
+   */
+  incrementProps?: NumberIncrementStepperProps
 }
 
 export interface NumberInputProps
   extends Omit<
       HTMLUIProps<"input">,
-      | "value"
       | "defaultValue"
       | "disabled"
-      | "required"
-      | "readOnly"
-      | "size"
-      | "min"
       | "max"
-      | "step"
+      | "min"
       | "onChange"
       | "onInvalid"
+      | "readOnly"
+      | "required"
+      | "size"
+      | "step"
+      | "value"
     >,
     ThemeProps<"NumberInput">,
-    Omit<UseNumberInputProps, "disabled" | "required" | "readOnly">,
+    Omit<UseNumberInputProps, "disabled" | "readOnly" | "required">,
     NumberInputOptions {}
 
 interface NumberInputContext {
-  getInputProps: PropGetter<"input">
-  getIncrementProps: PropGetter<"button">
-  getDecrementProps: PropGetter<"button">
   styles: { [key: string]: CSSUIObject }
+  getDecrementProps: PropGetter<"button">
+  getIncrementProps: PropGetter<"button">
+  getInputProps: PropGetter<"input">
 }
 
 const [NumberInputContextProvider, useNumberInputContext] =
   createContext<NumberInputContext>({
-    strict: false,
     name: "NumberInputContext",
+    strict: false,
   })
 
 /**
@@ -710,17 +710,17 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
     const {
       className,
       isStepper = true,
-      containerProps,
       addonProps,
-      incrementProps,
+      containerProps,
       decrementProps,
+      incrementProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
     const {
-      getInputProps,
-      getIncrementProps,
-      getDecrementProps,
       props: rest,
+      getDecrementProps,
+      getIncrementProps,
+      getInputProps,
     } = useNumberInput(computedProps)
 
     const css: CSSUIObject = {
@@ -731,7 +731,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
 
     return (
       <NumberInputContextProvider
-        value={{ getInputProps, getIncrementProps, getDecrementProps, styles }}
+        value={{ styles, getDecrementProps, getIncrementProps, getInputProps }}
       >
         <ui.div
           className={cx("ui-number-input", className)}
@@ -754,7 +754,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
 
 type NumberInputFieldProps = Omit<
   HTMLUIProps<"input">,
-  "disabled" | "required" | "readOnly" | "size"
+  "disabled" | "readOnly" | "required" | "size"
 >
 
 const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
@@ -786,11 +786,11 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
     const css: CSSUIObject = {
       display: "flex",
       flexDirection: "column",
-      position: "absolute",
-      top: "0",
+      height: "calc(100% - 2px)",
       insetEnd: "0px",
       margin: "1px",
-      height: "calc(100% - 2px)",
+      position: "absolute",
+      top: "0",
       zIndex: "fallback(yamcha, 1)",
       ...styles.addon,
     }
@@ -809,15 +809,15 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
 
 const Stepper = ui("button", {
   baseStyle: {
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
-    flex: 1,
-    transitionProperty: "common",
-    transitionDuration: "normal",
-    userSelect: "none",
     cursor: "pointer",
+    display: "flex",
+    flex: 1,
+    justifyContent: "center",
     lineHeight: "normal",
+    transitionDuration: "normal",
+    transitionProperty: "common",
+    userSelect: "none",
   },
 })
 
@@ -827,7 +827,7 @@ const NumberIncrementStepper = forwardRef<
   NumberIncrementStepperProps,
   "button"
 >(({ className, children, ...rest }, ref) => {
-  const { getIncrementProps, styles } = useNumberInputContext()
+  const { styles, getIncrementProps } = useNumberInputContext()
 
   const css: CSSUIObject = { ...styles.stepper }
 
@@ -848,7 +848,7 @@ const NumberDecrementStepper = forwardRef<
   NumberDecrementStepperProps,
   "button"
 >(({ className, children, ...rest }, ref) => {
-  const { getDecrementProps, styles } = useNumberInputContext()
+  const { styles, getDecrementProps } = useNumberInputContext()
 
   const css: CSSUIObject = { ...styles.stepper }
 

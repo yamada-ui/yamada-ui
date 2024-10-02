@@ -1,5 +1,5 @@
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
-import { Select, Option, OptionGroup } from "../src"
+import { Option, OptionGroup, Select } from "../src"
 
 describe("<Select />", () => {
   describe("rendered correctly", () => {
@@ -60,8 +60,8 @@ describe("<Select />", () => {
         <Select
           items={[
             {
-              label: "Numbers",
               items: [{ label: "One", value: "one" }],
+              label: "Numbers",
             },
             {
               label: "Two",
@@ -192,7 +192,7 @@ describe("<Select />", () => {
 
     test("should be readonly", async () => {
       render(
-        <Select placeholder="Numbers" isReadOnly>
+        <Select isReadOnly placeholder="Numbers">
           <Option value="one">One</Option>
           <Option value="two">Two</Option>
         </Select>,
@@ -206,7 +206,7 @@ describe("<Select />", () => {
     test("should be disable option", async () => {
       const { user } = render(
         <Select>
-          <Option value="one" isDisabled>
+          <Option isDisabled value="one">
             One
           </Option>
           <Option value="two">Two</Option>
@@ -297,7 +297,7 @@ describe("<Select />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
+      const { user } = render(<Select defaultValue="option2" items={ITEMS} />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -335,7 +335,7 @@ describe("<Select />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
+      const { user } = render(<Select defaultValue="option2" items={ITEMS} />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -433,12 +433,12 @@ describe("<Select />", () => {
 
     render(
       <Select
-        placeholder="Select numbers"
-        placeholderInOptions={true}
         items={[
           { label: "One", value: "" },
           { label: "Two", value: "" },
         ]}
+        placeholder="Select numbers"
+        placeholderInOptions={true}
       />,
     )
 
@@ -459,12 +459,12 @@ describe("<Select />", () => {
       render(
         <Select
           header={renderHeader()}
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions={true}
         />,
       )
 
@@ -478,12 +478,12 @@ describe("<Select />", () => {
     test("should be displayed properly when NOT present", () => {
       const { container } = render(
         <Select
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions={true}
         />,
       )
 
@@ -504,12 +504,12 @@ describe("<Select />", () => {
       render(
         <Select
           footer={renderFooter()}
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions={true}
         />,
       )
 
@@ -523,12 +523,12 @@ describe("<Select />", () => {
     test("should be displayed properly when NOT present", () => {
       const { container } = render(
         <Select
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions={true}
         />,
       )
 

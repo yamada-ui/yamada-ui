@@ -1,15 +1,15 @@
-import { useEventListener } from "@yamada-ui/use-event-listener"
 import type { FocusableElement } from "@yamada-ui/utils"
+import type { RefObject } from "react"
+import { useEventListener } from "@yamada-ui/use-event-listener"
 import {
   getActiveElement,
   getAllFocusable,
   isRefObject,
+  isSafari,
   isTabbable,
   useSafeLayoutEffect,
   useUpdateEffect,
-  isSafari,
 } from "@yamada-ui/utils"
-import type { RefObject } from "react"
 import { useCallback, useRef } from "react"
 
 export interface UseFocusOnHideProps {
@@ -34,7 +34,7 @@ const preventReturnFocus = (containerRef: React.RefObject<HTMLElement>) => {
 
 export const useFocusOnHide = (
   containerRef: RefObject<HTMLElement>,
-  { shouldFocus: shouldFocusProp, visible, focusRef }: UseFocusOnHideProps,
+  { focusRef, shouldFocus: shouldFocusProp, visible }: UseFocusOnHideProps,
 ) => {
   const shouldFocus = shouldFocusProp && !visible
 
@@ -54,10 +54,10 @@ export const useFocusOnHide = (
 }
 
 export interface UseFocusOnShowProps {
-  visible?: boolean
-  shouldFocus?: boolean
-  preventScroll?: boolean
   focusRef?: React.RefObject<FocusableElement>
+  preventScroll?: boolean
+  shouldFocus?: boolean
+  visible?: boolean
 }
 
 export const useFocusOnShow = <T extends HTMLElement>(
@@ -112,8 +112,8 @@ export const useFocusOnShow = <T extends HTMLElement>(
 
 export interface UseFocusOnMouseDownProps {
   ref: React.RefObject<HTMLElement>
+  elements?: (HTMLElement | null | React.RefObject<HTMLElement>)[]
   enabled?: boolean
-  elements?: (React.RefObject<HTMLElement> | HTMLElement | null)[]
 }
 
 export const useFocusOnPointerDown = ({

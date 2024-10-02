@@ -1,34 +1,34 @@
+import type { FC, ReactNode } from "react"
+import type { ColorMode, ColorModeWithSystem } from "../css"
+import type { ThemeConfig } from "../theme.types"
+import type { ColorModeManager } from "./color-mode-manager"
+import type { Environment } from "./environment-provider"
 import {
   funcAll,
   noop,
   useCallbackRef,
   useSafeLayoutEffect,
 } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
 import {
   createContext,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useState,
-  useContext,
 } from "react"
-import type { ColorMode, ColorModeWithSystem } from "../css"
-import type { ThemeConfig } from "../theme.types"
-import type { ColorModeManager } from "./color-mode-manager"
 import { colorModeManager } from "./color-mode-manager"
 import { getColorModeUtils } from "./color-mode-utils"
-import type { Environment } from "./environment-provider"
 import { useEnvironment } from "./environment-provider"
 
 const { localStorage } = colorModeManager
 
 interface ColorModeContext {
-  forced?: boolean
+  changeColorMode: (colorMode: ColorModeWithSystem) => void
   colorMode: ColorMode
   internalColorMode: ColorModeWithSystem
-  changeColorMode: (colorMode: ColorModeWithSystem) => void
   toggleColorMode: () => void
+  forced?: boolean
 }
 
 const getColorMode =
@@ -41,12 +41,8 @@ const getColorMode =
 export const ColorModeContext = createContext({} as ColorModeContext)
 
 export interface ColorModeProviderProps {
-  colorMode?: ColorMode
-  /**
-   * The config of the yamada ui.
-   */
-  config?: ThemeConfig
   children?: ReactNode
+  colorMode?: ColorMode
   /**
    * Manager to persist a user's color mode preference.
    *
@@ -57,6 +53,10 @@ export interface ColorModeProviderProps {
    */
   colorModeManager?: ColorModeManager
   /**
+   * The config of the yamada ui.
+   */
+  config?: ThemeConfig
+  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -64,27 +64,27 @@ export interface ColorModeProviderProps {
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
+  children,
   colorMode: defaultColorMode,
   colorModeManager = localStorage,
-  storageKey,
   config: {
-    initialColorMode = "light" as ColorModeWithSystem,
     disableTransitionOnChange = true,
+    initialColorMode = "light" as ColorModeWithSystem,
   } = {},
-  children,
+  storageKey,
 }) => {
   const environment = useEnvironment()
   const [colorMode, setColorMode] = useState<ColorModeWithSystem>(() =>
     getColorMode(colorModeManager, initialColorMode)(storageKey),
   )
   const systemColorMode = useSystemColorMode({
-    environment,
     callback: (systemColorMode) => {
       if (colorMode !== "system") return
 
       setClassName(systemColorMode === "dark")
       setDataset(systemColorMode)
     },
+    environment,
   })
 
   const computedColorMode = initialColorMode === "dark" ? "dark" : "light"
@@ -98,8 +98,8 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   const { getSystemColorMode, setClassName, setDataset } = useMemo(
     () =>
       getColorModeUtils({
-        isPreventTransition: disableTransitionOnChange,
         environment,
+        isPreventTransition: disableTransitionOnChange,
       }),
     [disableTransitionOnChange, environment],
   )
@@ -135,11 +135,11 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 
   const value = useMemo(
     () => ({
-      colorMode: defaultColorMode ?? resolvedColorMode,
-      internalColorMode: colorMode,
       changeColorMode: defaultColorMode ? noop : changeColorMode,
-      toggleColorMode: defaultColorMode ? noop : toggleColorMode,
+      colorMode: defaultColorMode ?? resolvedColorMode,
       forced: defaultColorMode !== undefined,
+      internalColorMode: colorMode,
+      toggleColorMode: defaultColorMode ? noop : toggleColorMode,
     }),
     [
       defaultColorMode,
@@ -166,23 +166,23 @@ export const useColorMode = () => {
   const context = useContext(ColorModeContext)
 
   return (
-    context ?? { colorMode: "light", internalColorMode: "light", forced: false }
+    context ?? { colorMode: "light", forced: false, internalColorMode: "light" }
   )
 }
 
 export interface UseSystemColorModeProps {
-  initialColorMode?: ColorMode
-  environment?: Environment
   callback?: (colorMode: ColorMode) => void
+  environment?: Environment
+  initialColorMode?: ColorMode
 }
 
 /**
  * `useSystemColorMode` is a custom hook that returns the current system color mode.
  */
 export const useSystemColorMode = ({
-  initialColorMode,
-  environment,
   callback,
+  environment,
+  initialColorMode,
 }: UseSystemColorModeProps = {}) => {
   const callbackRef = useCallbackRef(callback)
   const [colorMode, setColorMode] = useState<ColorMode | undefined>(
@@ -210,7 +210,7 @@ export const useSystemColorMode = ({
  *
  * @see Docs https://yamada-ui.com/hooks/use-color-mode-value
  */
-export const useColorModeValue = <L, D>(light: L, dark: D): L | D => {
+export const useColorModeValue = <L, D>(light: L, dark: D): D | L => {
   const { colorMode } = useColorMode()
 
   return getColorModeValue<L, D>(light, dark)(colorMode)
@@ -218,6 +218,6 @@ export const useColorModeValue = <L, D>(light: L, dark: D): L | D => {
 
 export const getColorModeValue =
   <L, D>(light: L, dark: D) =>
-  (colorMode: ColorMode): L | D => {
+  (colorMode: ColorMode): D | L => {
     return colorMode === "light" ? light : dark
   }

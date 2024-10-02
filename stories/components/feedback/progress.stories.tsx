@@ -4,8 +4,8 @@ import { Progress } from "@yamada-ui/react"
 type Story = StoryFn<typeof Progress>
 
 const meta: Meta<typeof Progress> = {
-  title: "Components / Feedback / Progress",
   component: Progress,
+  title: "Components / Feedback / Progress",
 }
 
 export default meta
@@ -45,10 +45,10 @@ export const withStripe: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Progress colorScheme="pink" value={93} size="xs" />
-      <Progress colorScheme="pink" value={93} size="sm" />
-      <Progress colorScheme="pink" value={93} size="md" />
-      <Progress colorScheme="pink" value={93} size="lg" />
+      <Progress colorScheme="pink" size="xs" value={93} />
+      <Progress colorScheme="pink" size="sm" value={93} />
+      <Progress colorScheme="pink" size="md" value={93} />
+      <Progress colorScheme="pink" size="lg" value={93} />
     </>
   )
 }
@@ -56,8 +56,8 @@ export const withSize: Story = () => {
 export const withBorderRadius: Story = () => {
   return (
     <>
-      <Progress colorScheme="orange" value={10} borderRadius="md" />
-      <Progress colorScheme="yellow" value={31} rounded="md" />
+      <Progress borderRadius="md" colorScheme="orange" value={10} />
+      <Progress colorScheme="yellow" rounded="md" value={31} />
     </>
   )
 }

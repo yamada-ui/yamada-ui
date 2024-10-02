@@ -19,7 +19,7 @@ const printComponent = (components: { [key: string]: Component }) =>
     )
     .join(`\n`)} }`
 
-const print = (unions: Component | { [key: string]: string[] }) =>
+const print = (unions: { [key: string]: string[] } | Component) =>
   Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
@@ -60,7 +60,7 @@ const extractColorSchemes = (theme: Dict) => {
   let colorSchemes: string[] = []
   let colorSchemeColors: string[] = []
 
-  if (!isObject(colors)) return { colorSchemes, colorSchemeColors }
+  if (!isObject(colors)) return { colorSchemeColors, colorSchemes }
 
   Object.entries(colors).forEach(([key, value]) => {
     if (!isTone(value)) return
@@ -69,7 +69,7 @@ const extractColorSchemes = (theme: Dict) => {
   })
 
   if (!isObject(semantics?.colorSchemes))
-    return { colorSchemes, colorSchemeColors }
+    return { colorSchemeColors, colorSchemes }
 
   Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
     if (isTone(value)) {
@@ -87,7 +87,7 @@ const extractColorSchemes = (theme: Dict) => {
     }
   })
 
-  return { colorSchemes, colorSchemeColors }
+  return { colorSchemeColors, colorSchemes }
 }
 
 const extractThemeSchemes = (theme: Dict) => {
@@ -158,10 +158,10 @@ export const createThemeTypings = async (
       prev,
       {
         key,
-        replaceKey,
+        flatMap = (value) => value,
         maxScanDepth,
         omitScanKeys,
-        flatMap = (value) => value,
+        replaceKey,
       },
     ) => {
       const target = getObject(theme, key)
@@ -197,7 +197,7 @@ export const createThemeTypings = async (
 
   const textStyles = extractKeys(theme, "styles.textStyles")
   const layerStyles = extractKeys(theme, "styles.layerStyles")
-  const { colorSchemes, colorSchemeColors } = extractColorSchemes(theme)
+  const { colorSchemeColors, colorSchemes } = extractColorSchemes(theme)
   const themeSchemes = extractThemeSchemes(theme)
   const components = extractComponents(theme)
 
@@ -210,9 +210,9 @@ export const createThemeTypings = async (
       `export interface GeneratedTheme extends UITheme {`,
       print({
         ...tokens,
-        textStyles,
-        layerStyles,
         colorSchemes,
+        layerStyles,
+        textStyles,
         themeSchemes,
       }),
       printComponent(components),

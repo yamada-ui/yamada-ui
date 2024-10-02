@@ -1,11 +1,11 @@
-import { Grid } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { memo, useCallback, useRef } from "react"
 import type { FC } from "react"
+import { Grid } from "@yamada-ui/react"
+import { memo, useCallback, useRef } from "react"
 import { Menu } from "./menu"
 import { Prompt } from "./prompt"
 
-export type EditorMode = "complete" | "insert" | "edit"
+export type EditorMode = "complete" | "edit" | "insert"
 
 export const DEFAULT_EDITOR_MODE: EditorMode = "complete"
 
@@ -21,16 +21,16 @@ export const Editor: FC<EditorProps> = memo(({ ...rest }) => {
 
   return (
     <Grid
-      templateColumns={{ base: "1fr auto", lg: "1fr" }}
       gap="lg"
       p={{ base: "lg", sm: "md" }}
+      templateColumns={{ base: "1fr auto", lg: "1fr" }}
       {...rest}
     >
       <Prompt onChangeModeRef={onChangeModeRef} />
 
       <Menu
-        onChangeMode={onChangeMode}
         gridRow={{ base: "inherit", lg: "1 / 2" }}
+        onChangeMode={onChangeMode}
       />
     </Grid>
   )

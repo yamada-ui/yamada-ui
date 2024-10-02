@@ -2,9 +2,9 @@ import type { CSSUIObject } from "@yamada-ui/core"
 import { createContext } from "@yamada-ui/utils"
 
 interface InputGroupContext {
-  styles: { [key: string]: CSSUIObject }
-  fieldHeight: string | undefined
   fieldFontSize: string | undefined
+  fieldHeight: string | undefined
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const [InputGroupProvider, useInputGroup] =

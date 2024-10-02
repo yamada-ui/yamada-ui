@@ -1,7 +1,7 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
 import type { WithTransitionProps } from "@yamada-ui/motion"
 import type { CollapseProps } from "@yamada-ui/transitions"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { Collapse } from "@yamada-ui/transitions"
 import { cx } from "@yamada-ui/utils"
 import {
@@ -13,22 +13,22 @@ export interface AccordionPanelProps
   extends Omit<WithTransitionProps<HTMLUIProps>, "isOpen">,
     Pick<
       CollapseProps,
-      "animationOpacity" | "startingHeight" | "endingHeight"
+      "animationOpacity" | "endingHeight" | "startingHeight"
     > {}
 
 export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
   (
     {
       className,
-      unmountOnExit,
       animationOpacity,
-      startingHeight,
-      endingHeight,
-      transition,
-      transitionEnd,
+      children,
       delay,
       duration,
-      children,
+      endingHeight,
+      startingHeight,
+      transition,
+      transitionEnd,
+      unmountOnExit,
       ...rest
     },
     ref,
@@ -44,15 +44,15 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
     return (
       <Collapse
         {...{
-          isOpen,
-          unmountOnExit,
           animationOpacity,
-          startingHeight,
-          endingHeight,
-          transition,
-          transitionEnd,
           delay,
           duration,
+          endingHeight,
+          isOpen,
+          startingHeight,
+          transition,
+          transitionEnd,
+          unmountOnExit,
         }}
       >
         <ui.div

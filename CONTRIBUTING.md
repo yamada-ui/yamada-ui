@@ -65,6 +65,8 @@ To ensure the extension works correctly, please add the following settings to `.
   },
   "eslint.workingDirectories": [
     "docs",
+    "examples/create-react-app",
+    "examples/hono",
     "examples/next/app",
     "examples/next/pages",
     "examples/remix",

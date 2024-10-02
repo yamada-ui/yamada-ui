@@ -1,21 +1,21 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 import type {
   CellProps,
   ChartTooltip,
   PieChartProps,
   TooltipDataSourceType,
 } from "@yamada-ui/charts"
-import { PieChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
-import { Card, CardBody, HStack, VStack, Wrap, Text } from "@yamada-ui/react"
+import { PieChart } from "@yamada-ui/charts"
+import { Card, CardBody, HStack, Text, VStack, Wrap } from "@yamada-ui/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof PieChart>
 
 const meta: Meta<typeof PieChart> = {
-  title: "Components / Data Display / PieChart",
   component: PieChart,
+  title: "Components / Data Display / PieChart",
 }
 
 export default meta
@@ -23,10 +23,10 @@ export default meta
 export const basic: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -37,26 +37,26 @@ export const basic: Story = () => {
 export const custom: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
 
   const [props, setProps] = useState<PieChartProps>({
     data: data,
-    withTooltip: true,
-    withLegend: false,
+    endAngle: -270,
     fillOpacity: 1,
+    outerRadius: 80,
     paddingAngle: 0,
     startAngle: 90,
-    endAngle: -270,
     strokeWidth: 1,
     tooltipAnimationDuration: 0,
-    outerRadius: 80,
     tooltipDataSource: "all",
+    withLegend: false,
+    withTooltip: true,
   })
   const { outerRadius, ...rest } = props
 
@@ -64,65 +64,65 @@ export const custom: Story = () => {
     <VStack>
       <PieChart outerRadius={`${outerRadius}%`} {...rest} />
 
-      <Wrap gap="md" alignItems="flex-start">
+      <Wrap alignItems="flex-start" gap="md">
         <PropControl
           component="Slider"
           items={[
             {
               label: "Padding angle",
-              value: props.paddingAngle,
-              min: 0,
               max: 30,
+              min: 0,
               step: 1,
+              value: props.paddingAngle,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, paddingAngle: value }))
               },
             },
             {
               label: "Stroke width",
-              value: props.strokeWidth,
-              min: 0.5,
               max: 5,
+              min: 0.5,
               step: 0.5,
+              value: props.strokeWidth,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, strokeWidth: value }))
               },
             },
             {
               label: "Start angle",
-              value: props.startAngle,
-              min: 0,
               max: 180,
+              min: 0,
               step: 1,
+              value: props.startAngle,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, startAngle: value }))
               },
             },
             {
               label: "End angle",
-              value: props.endAngle,
-              min: 180,
               max: 360,
+              min: 180,
               step: 1,
+              value: props.endAngle,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, endAngle: value }))
               },
             },
             {
               label: "Fill opacity",
-              value: props.fillOpacity as number,
-              min: 0,
               max: 1,
+              min: 0,
               step: 0.1,
+              value: props.fillOpacity as number,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, fillOpacity: value }))
               },
             },
             {
               label: "Tooltip animation duration",
-              value: props.tooltipAnimationDuration,
-              min: 0,
               max: 2000,
+              min: 0,
+              value: props.tooltipAnimationDuration,
               onChange: (value) => {
                 setProps((prev) => ({
                   ...prev,
@@ -139,9 +139,9 @@ export const custom: Story = () => {
             items={[
               {
                 label: "Outer Radius",
-                value: props.outerRadius as number,
-                min: 0,
                 max: 100,
+                min: 0,
+                value: props.outerRadius as number,
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
@@ -151,9 +151,9 @@ export const custom: Story = () => {
               },
               {
                 label: "Label Offset",
-                value: props.labelOffset as number,
-                min: 0,
                 max: 100,
+                min: 0,
+                value: props.labelOffset as number,
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
@@ -168,12 +168,12 @@ export const custom: Story = () => {
             component="Select"
             items={[
               {
-                label: "Tooltip data source",
                 defaultValue: "all",
                 items: [
                   { label: "all", value: "all" },
                   { label: "segment", value: "segment" },
                 ],
+                label: "Tooltip data source",
                 value: props.tooltipDataSource,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -189,8 +189,8 @@ export const custom: Story = () => {
             component="Switch"
             items={[
               {
-                label: "tooltip",
                 isChecked: props.withTooltip,
+                label: "tooltip",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -198,8 +198,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "legend",
                 isChecked: props.withLegend,
+                label: "legend",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -207,8 +207,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "label",
                 isChecked: props.withLabels,
+                label: "label",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -216,8 +216,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "label line",
                 isChecked: props.withLabelLines,
+                label: "label line",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -225,8 +225,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "isPercent",
                 isChecked: props.isPercent,
+                label: "isPercent",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -244,10 +244,10 @@ export const custom: Story = () => {
 export const withSize: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -264,10 +264,10 @@ export const withSize: Story = () => {
 export const withLegend: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -278,10 +278,10 @@ export const withLegend: Story = () => {
 export const withValueFormatter: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -294,20 +294,20 @@ export const withValueFormatter: Story = () => {
 export const withLabelFormatter: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 4000, color: "red.500" },
-      { name: "India", value: 3000, color: "orange.500" },
-      { name: "Japan", value: 1000, color: "blue.500" },
-      { name: "Other", value: 2000, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 4000 },
+      { name: "India", color: "orange.500", value: 3000 },
+      { name: "Japan", color: "blue.500", value: 1000 },
+      { name: "Other", color: "gray.500", value: 2000 },
     ],
     [],
   )
 
   return (
     <PieChart
-      size="lg"
       data={data}
-      withLabels
       labelFormatter={(value) => value.toLocaleString()}
+      size="lg"
+      withLabels
     />
   )
 }
@@ -315,10 +315,10 @@ export const withLabelFormatter: Story = () => {
 export const withFillOpacity: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -329,10 +329,10 @@ export const withFillOpacity: Story = () => {
 export const customActiveShape: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -342,8 +342,8 @@ export const customActiveShape: Story = () => {
       data={data}
       pieProps={{
         activeShape: {
-          strokeWidth: 2,
           stroke: ["black", "white"],
+          strokeWidth: 2,
         },
         inactiveShape: { opacity: 0.5 },
       }}
@@ -354,10 +354,10 @@ export const customActiveShape: Story = () => {
 export const customTooltip: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -367,13 +367,13 @@ export const customTooltip: Story = () => {
     if (!payload) return null
 
     return (
-      <Card variant="subtle" colorScheme="gray">
+      <Card colorScheme="gray" variant="subtle">
         <CardBody gap="sm">
           {payload.map((value, index) => (
             <HStack
               key={`payload-${index}`}
-              w="full"
               justifyContent="space-between"
+              w="full"
             >
               <Text>{value?.name}</Text>
               <Text color={value?.payload?.color}>{value?.value}</Text>
@@ -397,10 +397,10 @@ export const customTooltip: Story = () => {
 export const customLegend: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
-      { name: "USA", value: 400, color: "red.500" },
-      { name: "India", value: 300, color: "orange.500" },
-      { name: "Japan", value: 100, color: "blue.500" },
-      { name: "Other", value: 200, color: "gray.500" },
+      { name: "USA", color: "red.500", value: 400 },
+      { name: "India", color: "orange.500", value: 300 },
+      { name: "Japan", color: "blue.500", value: 100 },
+      { name: "Other", color: "gray.500", value: 200 },
     ],
     [],
   )
@@ -409,7 +409,7 @@ export const customLegend: Story = () => {
     <PieChart
       data={data}
       withLegend
-      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
+      legendProps={{ mb: "0", mt: "4", verticalAlign: "bottom" }}
     />
   )
 }

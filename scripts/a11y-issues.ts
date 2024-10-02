@@ -1,8 +1,8 @@
 import { Octokit } from "@octokit/rest"
+import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import { execa } from "execa"
 import { recursiveOctokit, wait } from "./utils"
-import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 
 type Story = { name: string; messages: string[] }
 type Issue = Awaited<
@@ -60,10 +60,10 @@ const getIssues = async () => {
   const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...COMMON_PARAMS,
-      state: "open",
       labels: "a11y",
-      per_page: perPage,
       page,
+      per_page: perPage,
+      state: "open",
     })
 
     issues.push(...data)
@@ -150,7 +150,7 @@ const sortReport = (report: string) => {
   const fails: Map<string, Story[]> = new Map()
 
   let capture = false
-  let draftFail: { path?: string; data?: string } = {}
+  let draftFail: { data?: string; path?: string } = {}
 
   lines.forEach((line) => {
     const [path] = line.match(/stories\/.+?\.stories.(tsx|ts)/) ?? []
@@ -161,7 +161,7 @@ const sortReport = (report: string) => {
       line.startsWith("Test Suites")
     ) {
       if (draftFail.path && draftFail.data) {
-        const { path, data } = draftFail
+        const { data, path } = draftFail
 
         const stories = getStories(data)
 
@@ -193,7 +193,7 @@ const sortReport = (report: string) => {
     }
   })
 
-  return { passes: Array.from(passes), fails: Array.from(fails) }
+  return { fails: Array.from(fails), passes: Array.from(passes) }
 }
 
 const createIssues = async (
@@ -209,7 +209,7 @@ const createIssues = async (
 
     await recursiveOctokit(async () => {
       if (isExist) {
-        const { number, body: prevBody } = existStories[path]
+        const { body: prevBody, number } = existStories[path]
 
         if (prevBody === body) {
           console.log("Skipped issue", number, path)
@@ -220,8 +220,8 @@ const createIssues = async (
         await recursiveOctokit(() =>
           octokit.issues.update({
             ...COMMON_PARAMS,
-            issue_number: number,
             body,
+            issue_number: number,
           }),
         )
 
@@ -230,9 +230,9 @@ const createIssues = async (
         await recursiveOctokit(() =>
           octokit.issues.create({
             ...COMMON_PARAMS,
-            title: `Enhance a11y for \`${name}\``,
             body,
             labels: ["a11y", "test", "good first issue"],
+            title: `Enhance a11y for \`${name}\``,
           }),
         )
 

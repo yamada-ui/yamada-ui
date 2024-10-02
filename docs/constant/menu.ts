@@ -1,20 +1,20 @@
 export const MENU = [
   {
-    icon: "paintbrush",
     name: "yamada-colors",
     href: "https://yamada-colors.app",
+    icon: "paintbrush",
     isExternal: true,
   },
   {
-    icon: "app-window-mac",
     name: "examples",
     href: "/examples/mail",
+    icon: "app-window-mac",
     isExternal: false,
   },
   {
-    icon: "smile",
     name: "icons",
     href: "/icons",
+    icon: "smile",
     isExternal: false,
   },
 ]

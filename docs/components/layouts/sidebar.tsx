@@ -1,8 +1,8 @@
-import { VStack, forwardRef } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { memo } from "react"
+import { forwardRef, VStack } from "@yamada-ui/react"
 import { ScrollShadow } from "components/data-display"
 import { Tree } from "components/navigation"
+import { memo } from "react"
 
 export interface SidebarProps extends StackProps {}
 
@@ -12,14 +12,14 @@ export const Sidebar = memo(
       <VStack
         ref={ref}
         as="aside"
+        maxH="calc(100dvh - 4rem)"
         position="sticky"
         top="4rem"
         w="sm"
-        maxH="calc(100dvh - 4rem)"
         {...rest}
       >
         <VStack as="nav" overflowY="auto" overscrollBehavior="contain">
-          <Tree pt="lg" pb="16" pr="md" />
+          <Tree pb="16" pr="md" pt="lg" />
         </VStack>
 
         <ScrollShadow />

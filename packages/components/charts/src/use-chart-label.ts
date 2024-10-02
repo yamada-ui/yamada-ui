@@ -1,11 +1,11 @@
-import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
-import { useCallback } from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
 import type { LabelProps } from "./chart.types"
+import { useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback } from "react"
+import { getComponentProps } from "./chart-utils"
 import { labelProperties } from "./rechart-properties"
 
 export interface UseChartLabelOptions {

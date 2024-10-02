@@ -1,7 +1,7 @@
-import { act, fireEvent, render } from "@yamada-ui/test"
-import { type FC } from "react"
-import { vi } from "vitest"
+import type { FC } from "react"
 import type { UseClickableProps } from "../src"
+import { act, fireEvent, render } from "@yamada-ui/test"
+import { vi } from "vitest"
 import { useClickable } from "../src"
 
 const setup = (props: UseClickableProps = {}) => {
@@ -71,7 +71,7 @@ describe("useClickable", () => {
 
   test("does not call onMouseDown when disabled", async () => {
     const onMouseDown = vi.fn()
-    const { button } = setup({ onMouseDown, isDisabled: true })
+    const { button } = setup({ isDisabled: true, onMouseDown })
     await act(async () => {
       fireEvent.mouseDown(button)
     })
@@ -117,7 +117,7 @@ describe("useClickable", () => {
   test("calls onMouseOver and onMouseLeave", async () => {
     const onMouseOver = vi.fn()
     const onMouseLeave = vi.fn()
-    const { button } = setup({ onMouseOver, onMouseLeave })
+    const { button } = setup({ onMouseLeave, onMouseOver })
     await act(async () => {
       fireEvent.mouseOver(button)
       fireEvent.mouseLeave(button)
@@ -128,7 +128,7 @@ describe("useClickable", () => {
 
   test("does not call onMouseOver when disabled", async () => {
     const onMouseOver = vi.fn()
-    const { button } = setup({ onMouseOver, isDisabled: true })
+    const { button } = setup({ isDisabled: true, onMouseOver })
     await act(async () => {
       fireEvent.mouseOver(button)
     })
@@ -137,7 +137,7 @@ describe("useClickable", () => {
 
   test("does not call onClick when disabled", async () => {
     const onClick = vi.fn()
-    const { button } = setup({ onClick, isDisabled: true })
+    const { button } = setup({ isDisabled: true, onClick })
     await act(async () => {
       fireEvent.click(button)
     })
@@ -146,7 +146,7 @@ describe("useClickable", () => {
 
   test("does not call onClick when disabled but isFocusable", async () => {
     const onClick = vi.fn()
-    const { button } = setup({ onClick, isDisabled: true, isFocusable: true })
+    const { button } = setup({ isDisabled: true, isFocusable: true, onClick })
     await act(async () => {
       fireEvent.click(button)
     })
@@ -169,7 +169,7 @@ describe("useClickable", () => {
 
   test("handleMouseLeave triggers preventDefault and setIsPressed", async () => {
     const onMouseLeave = vi.fn()
-    const { button } = setup({ onMouseLeave, clickOnSpace: true })
+    const { button } = setup({ clickOnSpace: true, onMouseLeave })
     await act(async () => {
       fireEvent.mouseDown(button)
     })

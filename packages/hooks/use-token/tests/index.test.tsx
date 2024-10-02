@@ -3,19 +3,6 @@ import { renderHook } from "@yamada-ui/test"
 import { useToken } from "../src"
 
 const theme = {
-  styles: {
-    layerStyles: {
-      muted: { bg: "gray.500" },
-    },
-    textStyles: {
-      gradient: {
-        w: "full",
-        fontSize: "5xl",
-        bgGradient: "linear(to-l, #7928CA, #FF0080)",
-        bgClip: "text",
-      },
-    },
-  },
   colors: {
     gray: {
       50: "#dedfe3",
@@ -44,22 +31,27 @@ const theme = {
       950: ["#650022", "#670022"],
     },
   },
+  semantics: {
+    colors: {
+      primary: "gray.500",
+      secondary: ["pink.500", "pink.400"],
+      tertiary: ["#000000", "#ffffff"],
+    },
+  },
+  styles: {
+    layerStyles: {
+      muted: { bg: "gray.500" },
+    },
+    textStyles: {
+      gradient: {
+        bgClip: "text",
+        bgGradient: "linear(to-l, #7928CA, #FF0080)",
+        fontSize: "5xl",
+        w: "full",
+      },
+    },
+  },
   transitions: {
-    property: {
-      common:
-        "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
-      colors: "background-color, border-color, color, fill, stroke",
-      dimensions: "width, height",
-      position: "left, right, top, bottom",
-      background: "background-color, background-image, background-position",
-    },
-
-    easing: {
-      "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
-      "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
-      "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-
     duration: {
       "ultra-fast": "50ms",
       faster: "100ms",
@@ -69,12 +61,20 @@ const theme = {
       slower: "400ms",
       "ultra-slow": "500ms",
     },
-  },
-  semantics: {
-    colors: {
-      primary: "gray.500",
-      secondary: ["pink.500", "pink.400"],
-      tertiary: ["#000000", "#ffffff"],
+
+    easing: {
+      "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
+      "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
+    },
+
+    property: {
+      background: "background-color, background-image, background-position",
+      colors: "background-color, border-color, color, fill, stroke",
+      common:
+        "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
+      dimensions: "width, height",
+      position: "left, right, top, bottom",
     },
   },
 }
@@ -142,10 +142,10 @@ describe("useToken", () => {
     })
 
     expect(result.current).toStrictEqual({
-      w: "full",
-      fontSize: "5xl",
-      bgGradient: "linear(to-l, #7928CA, #FF0080)",
       bgClip: "text",
+      bgGradient: "linear(to-l, #7928CA, #FF0080)",
+      fontSize: "5xl",
+      w: "full",
     })
   })
 

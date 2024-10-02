@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
@@ -9,7 +9,7 @@ export interface StepSeparatorProps extends HTMLUIProps {}
 export const StepSeparator = forwardRef<StepSeparatorProps, "div">(
   ({ className, ...rest }, ref) => {
     const { orientation, showLastSeparator, styles } = useStepperContext()
-    const { status, isLast } = useStepContext()
+    const { isLast, status } = useStepContext()
 
     const css: CSSUIObject = { ...styles.separator }
 

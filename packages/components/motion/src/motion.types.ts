@@ -8,15 +8,14 @@ import type {
 import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
   DOMMotionComponents,
+  MotionProps as OriginMotionProps,
   Target,
   TargetAndTransition,
   Transition,
-  MotionProps as OriginMotionProps,
 } from "framer-motion"
 import type * as React from "react"
 
 export type {
-  MotionValue,
   AbsoluteKeyframe as MotionAbsoluteKeyframe,
   AnimatePresenceProps as MotionAnimatePresenceProps,
   AnimationControls as MotionAnimationControls,
@@ -36,23 +35,23 @@ export type {
   BezierDefinition as MotionBezierDefinition,
   BoundingBox as MotionBoundingBox,
   Box as MotionBox,
-  CSSStyleDeclarationWithTransform,
   CreateVisualElement as MotionCreateVisualElement,
+  CSSStyleDeclarationWithTransform,
   CustomDomComponent as MotionCustomDomComponent,
   CustomValueType as MotionCustomValueType,
   Cycle as MotionCycle,
   CycleState as MotionCycleState,
-  DOMKeyframesDefinition as MotionDOMKeyframesDefinition,
-  DOMMotionComponents,
-  DOMSegment as MotionDOMSegment,
-  DOMSegmentWithTransition as MotionDOMSegmentWithTransition,
   DecayOptions as MotionDecayOptions,
   DelayedFunction as MotionDelayedFunction,
   Delta as MotionDelta,
   DevMessage as MotionDevMessage,
+  DOMKeyframesDefinition as MotionDOMKeyframesDefinition,
+  DOMMotionComponents,
+  DOMSegment as MotionDOMSegment,
+  DOMSegmentWithTransition as MotionDOMSegmentWithTransition,
   DragElastic as MotionDragElastic,
-  DragHandlers as MotionDragHandlers,
   DraggableProps as MotionDraggableProps,
+  DragHandlers as MotionDragHandlers,
   DurationSpringOptions as MotionDurationSpringOptions,
   DynamicAnimationOptions as MotionDynamicAnimationOptions,
   DynamicOption as MotionDynamicOption,
@@ -69,13 +68,13 @@ export type {
   FeaturePackages as MotionFeaturePackages,
   FocusHandlers as MotionFocusHandlers,
   HoverHandlers as MotionHoverHandlers,
+  HTMLMotionProps,
   HydratedFeatureDefinition as MotionHydratedFeatureDefinition,
   HydratedFeatureDefinitions as MotionHydratedFeatureDefinitions,
-  HTMLMotionProps,
-  IProjectionNode as MotionIProjectionNode,
   Inertia as MotionInertia,
   InertiaOptions as MotionInertiaOptions,
   InterpolateOptions as MotionInterpolateOptions,
+  IProjectionNode as MotionIProjectionNode,
   KeyframeOptions as MotionKeyframeOptions,
   Keyframes as MotionKeyframes,
   KeyframesTarget as MotionKeyframesTarget,
@@ -87,6 +86,7 @@ export type {
   MotionConfigProps,
   MotionStyle,
   MotionTransform,
+  MotionValue,
   MotionValueSegment,
   MotionValueSegmentWithTransition,
   None as MotionNone,
@@ -99,20 +99,14 @@ export type {
   RenderComponent as MotionRenderComponent,
   Repeat as MotionRepeat,
   RepeatType as MotionRepeatType,
-  ResolveKeyframes as MotionResolveKeyframes,
-  ResolveLayoutTransition as MotionResolveLayoutTransition,
   ResolvedAnimationDefinition as MotionResolvedAnimationDefinition,
   ResolvedAnimationDefinitions as MotionResolvedAnimationDefinitions,
   ResolvedKeyframesTarget as MotionResolvedKeyframesTarget,
   ResolvedSingleTarget as MotionResolvedSingleTarget,
-  ResolvedValueTarget as MotionResolvedValueTarget,
   ResolvedValues as MotionResolvedValues,
-  SVGAttributesAsMotionValues,
-  SVGKeyframesDefinition,
-  SVGMotionProps,
-  SVGPathKeyframesDefinition,
-  SVGPathTransitions,
-  SVGTransitions,
+  ResolvedValueTarget as MotionResolvedValueTarget,
+  ResolveKeyframes as MotionResolveKeyframes,
+  ResolveLayoutTransition as MotionResolveLayoutTransition,
   ScrapeMotionValuesFromProps,
   ScrollMotionValues,
   Segment as MotionSegment,
@@ -127,6 +121,12 @@ export type {
   StyleKeyframesDefinition as MotionStyleKeyframesDefinition,
   StyleTransitions as MotionStyleTransitions,
   Subscriber as MotionSubscriber,
+  SVGAttributesAsMotionValues,
+  SVGKeyframesDefinition,
+  SVGMotionProps,
+  SVGPathKeyframesDefinition,
+  SVGPathTransitions,
+  SVGTransitions,
   TapHandlers as MotionTapHandlers,
   TapInfo as MotionTapInfo,
   Target as MotionTarget,
@@ -166,16 +166,16 @@ type ComponentConditionalProps<
 > = Y extends M
   ? OmitProps<React.ComponentProps<Y>, D>
   :
-      | OmitProps<React.ComponentProps<Y>, D>
       | OmitProps<React.ComponentProps<M>, D>
+      | OmitProps<React.ComponentProps<Y>, D>
 
 type ComponentProps<
   Y extends MotionAs,
   M extends MotionAs,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, D> & {
+> = {
   as?: M
-}
+} & ComponentConditionalProps<Y, M, D>
 
 export interface MotionComponent<Y extends MotionAs, D extends object = {}>
   extends ComponentArgs {
@@ -230,7 +230,7 @@ export type MotionPropsWithoutChildren<Y extends MotionAs = "div"> = Omit<
 >
 
 type TargetResolver<Y = Dict> = (
-  props: Y & MotionTransitionProps,
+  props: MotionTransitionProps & Y,
 ) => TargetAndTransition
 
 type Variant<Y = Dict> = TargetAndTransition | TargetResolver<Y>
@@ -245,21 +245,13 @@ type MotionLifecycleProps<Y> = { [key in "enter" | "exit"]?: Y }
 
 export interface MotionTransitionProps {
   /**
-   * Custom `transition` definition for `enter` and `exit`.
-   */
-  transition?: MotionLifecycleProps<Transition>
-  /**
-   * Custom `transitionEnd` definition for `enter` and `exit`.
-   */
-  transitionEnd?: MotionLifecycleProps<Target>
-  /**
    * Custom `delay` definition for `enter` and `exit`.
    */
-  delay?: number | MotionLifecycleProps<number>
+  delay?: MotionLifecycleProps<number> | number
   /**
    * Custom `duration` definition for `enter` and `exit`.
    */
-  duration?: number | MotionLifecycleProps<number>
+  duration?: MotionLifecycleProps<number> | number
   /**
    * Custom `enter`.
    */
@@ -272,19 +264,24 @@ export interface MotionTransitionProps {
    * Custom `initial`.
    */
   initial?: any
+  /**
+   * Custom `transition` definition for `enter` and `exit`.
+   */
+  transition?: MotionLifecycleProps<Transition>
+  /**
+   * Custom `transitionEnd` definition for `enter` and `exit`.
+   */
+  transitionEnd?: MotionLifecycleProps<Target>
 }
 
-export type WithTransitionProps<Y extends object> = Omit<
-  Y,
-  "variants" | "transition"
-> &
-  MotionTransitionProps & {
-    /**
-     * If `true`, the element will unmount when `isOpen={false}` and animation is done.
-     */
-    unmountOnExit?: boolean
-    /**
-     * Show the component. triggers when enter or exit states.
-     */
-    isOpen?: boolean
-  }
+export type WithTransitionProps<Y extends object> = {
+  /**
+   * Show the component. triggers when enter or exit states.
+   */
+  isOpen?: boolean
+  /**
+   * If `true`, the element will unmount when `isOpen={false}` and animation is done.
+   */
+  unmountOnExit?: boolean
+} & MotionTransitionProps &
+  Omit<Y, "transition" | "variants">

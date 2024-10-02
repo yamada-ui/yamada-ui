@@ -1,19 +1,19 @@
 import type { AnimationStyle, Theme } from "@yamada-ui/core"
-import { useTheme, animation, css } from "@yamada-ui/core"
+import { animation, css, useTheme } from "@yamada-ui/core"
 import { useBoolean } from "@yamada-ui/use-boolean"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import {
+  getOwnerWindow,
   isArray,
   isUndefined,
   runIfFunc,
-  getOwnerWindow,
 } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 type Styles =
+  | (AnimationStyle | Theme["animations"])[]
   | AnimationStyle
   | Theme["animations"]
-  | (AnimationStyle | Theme["animations"])[]
 
 /**
  * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
@@ -41,14 +41,14 @@ export const useDynamicAnimation = <
     | { [key: string]: Styles },
 >(
   arrayOrObj: T,
-  init?: keyof T | (keyof T)[],
+  init?: (keyof T)[] | keyof T,
 ): [
   string | undefined,
   (
     key:
-      | keyof T
+      | ((key: (keyof T)[] | keyof T | undefined) => (keyof T)[] | keyof T)
       | (keyof T)[]
-      | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
+      | keyof T,
   ) => void,
 ] => {
   const { theme } = useTheme()
@@ -86,9 +86,9 @@ export const useDynamicAnimation = <
   const setAnimation = useCallback(
     (
       keysOrFunc:
-        | keyof T
+        | ((key: (keyof T)[] | keyof T | undefined) => (keyof T)[] | keyof T)
         | (keyof T)[]
-        | ((key: keyof T | (keyof T)[] | undefined) => keyof T | (keyof T)[]),
+        | keyof T,
     ) => {
       const args = (() => {
         if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
@@ -98,7 +98,7 @@ export const useDynamicAnimation = <
         } else {
           return keys.current
         }
-      })() as keyof T | (keyof T)[] | undefined
+      })() as (keyof T)[] | keyof T | undefined
 
       const keyOrArray = runIfFunc(keysOrFunc, args)
 
@@ -121,13 +121,13 @@ export const useDynamicAnimation = <
 }
 
 export interface UseAnimationObserverProps {
-  isOpen: boolean
   ref: React.RefObject<HTMLElement>
+  isOpen: boolean
 }
 
 export const useAnimationObserver = ({
-  isOpen,
   ref,
+  isOpen,
 }: UseAnimationObserverProps) => {
   const [mounted, setMounted] = useState(isOpen)
   const [flg, { on }] = useBoolean()

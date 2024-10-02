@@ -1,12 +1,12 @@
 import type { PropGetter } from "@yamada-ui/core"
+import type { ChangeEvent, CSSProperties } from "react"
+import type { UseCalendarProps } from "./use-calendar"
+import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { handlerAll, isNumber, useUpdateEffect } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import type { ChangeEvent, CSSProperties } from "react"
 import { useCallback, useRef, useState } from "react"
 import { isSameDate } from "./calendar-utils"
-import type { UseCalendarProps } from "./use-calendar"
-import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useCalendarPicker } from "./use-calendar-picker"
 
 const getResolvedValue = (value: (Date | undefined)[]) => {
@@ -22,22 +22,22 @@ const getResolvedValue = (value: (Date | undefined)[]) => {
 interface CalendarProps
   extends Omit<
     UseCalendarProps<Date[]>,
-    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+    "enableMultiple" | "enableRange" | "nextRef" | "prevRef" | "typeRef"
   > {}
 
 interface UseMultiDatePickerOptions {
-  /**
-   * If `true`, the calendar component will be closed when value is selected.
-   *
-   * @default false
-   */
-  closeOnSelect?: boolean
   /**
    * If `true`, the calendar component will be closed when value is max selected.
    *
    * @default true
    */
   closeOnMaxSelect?: boolean
+  /**
+   * If `true`, the calendar component will be closed when value is selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
 export interface UseMultiDatePickerProps
@@ -45,21 +45,21 @@ export interface UseMultiDatePickerProps
     UseMultiDatePickerOptions {}
 
 export const useMultiDatePicker = ({
-  value: valueProp,
-  defaultValue = [],
-  onChange: onChangeProp,
-  placeholder,
-  closeOnSelect = false,
-  maxSelectValues,
   closeOnMaxSelect = true,
+  closeOnSelect = false,
+  defaultValue = [],
   excludeDate,
+  maxSelectValues,
+  placeholder,
+  value: valueProp,
+  onChange: onChangeProp,
   ...rest
 }: UseMultiDatePickerProps) => {
   const isComposition = useRef<boolean>(false)
   const draftValue = useRef<Date | undefined>(undefined)
   const [value, setValue] = useControllableState<Date[]>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const [inputValue, setInputValue] = useState<string>("")
@@ -69,25 +69,25 @@ export const useMultiDatePicker = ({
   const {
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
-    isOpen,
-    onClose,
     dateToString,
+    isOpen,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
   } = useCalendarPicker({
     excludeDate,
     ...rest,
-    maxSelectValues,
-    enableMultiple: true,
-    value: resolvedValue,
     defaultValue,
+    enableMultiple: true,
+    maxSelectValues,
+    value: resolvedValue,
     onChange: (value: Date[]) => {
       value = value?.filter((value) => !isSameDate(value, draftValue.current))
 
@@ -106,6 +106,14 @@ export const useMultiDatePicker = ({
       setInputValue("")
 
       rest.onClose?.()
+    },
+    onDelete: (ev) => {
+      if (inputValue.length) return
+
+      ev.preventDefault()
+      ev.stopPropagation()
+
+      setValue((prev) => prev.slice(0, -1))
     },
     onEnter: () => {
       if (isComposition.current) return
@@ -126,14 +134,6 @@ export const useMultiDatePicker = ({
 
       setInputValue("")
       draftValue.current = undefined
-    },
-    onDelete: (ev) => {
-      if (inputValue.length) return
-
-      ev.preventDefault()
-      ev.stopPropagation()
-
-      setValue((prev) => prev.slice(0, -1))
     },
   })
 
@@ -185,19 +185,19 @@ export const useMultiDatePicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        id,
         ref,
         style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? "",
         onChange: handlerAll(props.onChange, onChange),
+        onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),
         onCompositionStart: handlerAll(
           props.onCompositionStart,
           onCompositionStart,
         ),
-        onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),
       }
     },
     [
@@ -215,17 +215,17 @@ export const useMultiDatePicker = ({
 
   return {
     id,
-    value,
-    setValue,
-    isOpen,
-    onClose,
     dateToString,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
+    isOpen,
+    setValue,
+    value,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   }
 }
 

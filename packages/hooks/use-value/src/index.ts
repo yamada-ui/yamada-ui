@@ -1,13 +1,13 @@
 import type {
-  ResponsiveObject,
-  ColorModeArray,
-  StyledTheme,
   ColorMode,
+  ColorModeArray,
+  ResponsiveObject,
+  StyledTheme,
   Theme,
 } from "@yamada-ui/core"
 import { getColorModeValue, useColorMode, useTheme } from "@yamada-ui/core"
 import { getBreakpointValue, useBreakpoint } from "@yamada-ui/use-breakpoint"
-import { isObject, isArray } from "@yamada-ui/utils"
+import { isArray, isObject } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
 /**
@@ -16,7 +16,7 @@ import { useMemo } from "react"
  * @see Docs https://yamada-ui.com/hooks/use-value
  */
 export const useValue = <T extends any>(
-  value: T | ResponsiveObject<T> | ColorModeArray<T>,
+  value: ColorModeArray<T> | ResponsiveObject<T> | T,
 ): T => {
   const { theme } = useTheme()
   const breakpoint = useBreakpoint()
@@ -28,7 +28,7 @@ export const useValue = <T extends any>(
 }
 
 export const getValue =
-  <T extends any>(value: T | ResponsiveObject<T> | ColorModeArray<T>) =>
+  <T extends any>(value: ColorModeArray<T> | ResponsiveObject<T> | T) =>
   (
     theme: StyledTheme,
     colorMode: ColorMode,

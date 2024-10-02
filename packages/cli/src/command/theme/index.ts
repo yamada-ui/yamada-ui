@@ -1,20 +1,20 @@
-import dns from "dns"
-import { existsSync } from "fs"
-import { mkdir, writeFile, readFile } from "fs/promises"
-import { Readable } from "node:stream"
-import { pipeline } from "node:stream/promises"
-import path from "path"
 import type { ReadableStream } from "stream/web"
-import * as p from "@clack/prompts"
-import c from "chalk"
 import type { ReadEntry } from "tar"
-import { t } from "tar"
 import type {
   ImportDeclaration,
   Node,
   SourceFile,
   TransformerFactory,
 } from "typescript"
+import * as p from "@clack/prompts"
+import c from "chalk"
+import dns from "dns"
+import { existsSync } from "fs"
+import { mkdir, readFile, writeFile } from "fs/promises"
+import { Readable } from "node:stream"
+import { pipeline } from "node:stream/promises"
+import path from "path"
+import { t } from "tar"
 import {
   createPrinter,
   createSourceFile,
@@ -109,9 +109,9 @@ const getFileMap = async (cwd: string, branch: string) => {
     t({
       cwd,
       filter,
-      onReadEntry,
-      strip: 4,
       newer: true,
+      strip: 4,
+      onReadEntry,
     }),
   )
 

@@ -1,4 +1,4 @@
-import { renderHook, act } from "@yamada-ui/test"
+import { act, renderHook } from "@yamada-ui/test"
 import { useLocalStorage } from "../src"
 
 describe("useLocalStorage", () => {

@@ -1,28 +1,13 @@
 import type { Dict } from "@yamada-ui/utils"
-import {
-  getMemoizedObject as get,
-  runIfFunc,
-  merge,
-  filterUndefined,
-  omitObject,
-  isArray,
-  isObject,
-  keysFormObject,
-} from "@yamada-ui/utils"
-import { useRef } from "react"
-import isEqual from "react-fast-compare"
-import { createQuery } from "../css"
 import type {
   BreakpointQueries,
-  CSSUIObject,
   ColorModeArray,
+  CSSUIObject,
   ResponsiveObject,
   UIStyle,
   UIStyleProps,
   UIValue,
 } from "../css"
-import { useTheme, useColorMode } from "../providers"
-import { pseudos } from "../pseudos"
 import type {
   ComponentDefaultProps,
   ComponentMultiSizes,
@@ -32,16 +17,31 @@ import type {
   ComponentStyle,
   ComponentVariants,
 } from "../theme.types"
+import {
+  filterUndefined,
+  getMemoizedObject as get,
+  isArray,
+  isObject,
+  keysFormObject,
+  merge,
+  omitObject,
+  runIfFunc,
+} from "@yamada-ui/utils"
+import { useRef } from "react"
+import isEqual from "react-fast-compare"
+import { createQuery } from "../css"
+import { useColorMode, useTheme } from "../providers"
+import { pseudos } from "../pseudos"
 
 type Styles<Y extends boolean = false> = Y extends false
   ? CSSUIObject
   : { [key: string]: CSSUIObject }
 
 type ModifierStyles =
-  | ComponentVariants
-  | ComponentSizes
-  | ComponentMultiVariants
   | ComponentMultiSizes
+  | ComponentMultiVariants
+  | ComponentSizes
+  | ComponentVariants
 
 interface GetStylesOptions {
   isMulti?: boolean
@@ -144,7 +144,7 @@ function getResponsiveStyles<Y extends Dict = Dict, M extends boolean = false>(
       let hasBaseStyles = false
 
       return queries.reduce<Styles<M>>(
-        (prev, { breakpoint, minW, maxW, maxWQuery, minWQuery }, index) => {
+        (prev, { breakpoint, maxW, maxWQuery, minW, minWQuery }, index) => {
           const modifier = value[breakpoint]
           const isFinal = breakpoint === finalQuery.breakpoint
 
@@ -241,7 +241,7 @@ function getSelectorStyles<Y extends Dict = Dict>(
 }
 
 function getStyles<Y extends Dict = Dict, M extends boolean = false>(
-  stylesOrFunc: UIStyle<Y> | { [key: string]: UIStyle<Y> },
+  stylesOrFunc: { [key: string]: UIStyle<Y> } | UIStyle<Y>,
   props: UIStyleProps<Y>,
 ) {
   return function ({
@@ -304,20 +304,20 @@ function setStyles<Y extends Dict = Dict, M extends boolean = false>(
     props = filterUndefined(props)
 
     if (componentStyle) {
-      const { defaultProps, overrideProps, baseStyle, variants, sizes } =
+      const { baseStyle, sizes, variants, defaultProps, overrideProps } =
         componentStyle
 
       props = mergeProps<Y>(props, defaultProps, overrideProps)
 
-      const { variant, size } = props
+      const { size, variant } = props
       const resolvedProps = omitObject(props, ["children"]) as Y
 
       let styles: Styles<M> = {}
 
       if (baseStyle) {
         styles = getStyles<Y, M>(baseStyle, {
-          theme,
           colorMode,
+          theme,
           themeScheme,
           ...resolvedProps,
         })({ isMulti })
@@ -325,8 +325,8 @@ function setStyles<Y extends Dict = Dict, M extends boolean = false>(
 
       if (sizes) {
         const sizeStyles = getModifierStyles<Y, M>(size, sizes, {
-          theme,
           colorMode,
+          theme,
           themeScheme,
           ...resolvedProps,
         })({ isMulti })
@@ -336,8 +336,8 @@ function setStyles<Y extends Dict = Dict, M extends boolean = false>(
 
       if (variants) {
         const variantStyles = getModifierStyles<Y, M>(variant, variants, {
-          theme,
           colorMode,
+          theme,
           themeScheme,
           ...resolvedProps,
         })({ isMulti })

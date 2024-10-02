@@ -1,15 +1,15 @@
-import {
-  useCallbackRef,
-  runIfFunc,
-  isUndefined,
-  isNull,
-} from "@yamada-ui/utils"
 import type { Dispatch, SetStateAction } from "react"
+import {
+  isNull,
+  isUndefined,
+  runIfFunc,
+  useCallbackRef,
+} from "@yamada-ui/utils"
 import { useState } from "react"
 
 export interface UseControllableStateProps<T> {
+  defaultValue?: (() => T) | T
   value?: T
-  defaultValue?: T | (() => T)
   onChange?: (value: T) => void
   onUpdate?: (prev: T, next: T) => boolean
 }

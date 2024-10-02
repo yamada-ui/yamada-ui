@@ -1,35 +1,31 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import { useMemo } from "react"
-import { Step } from "./step"
 import type { StepProps } from "./step"
-import { StepDescription } from "./step-description"
 import type { StepDescriptionProps } from "./step-description"
-import { StepSeparator } from "./step-separator"
 import type { StepSeparatorProps } from "./step-separator"
-import { StepStatus } from "./step-status"
 import type { StepStatusProps } from "./step-status"
-import { StepTitle } from "./step-title"
 import type { StepTitleProps } from "./step-title"
 import type { UseStepperProps } from "./use-stepper"
 import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
+import { Step } from "./step"
+import { StepDescription } from "./step-description"
+import { StepSeparator } from "./step-separator"
+import { StepStatus } from "./step-status"
+import { StepTitle } from "./step-title"
+import {
+  StepperDescendantsContextProvider,
   StepperProvider,
   useStepper,
-  StepperDescendantsContextProvider,
 } from "./use-stepper"
 
 interface StepItem extends Omit<StepProps, "title"> {
-  /**
-   * The title for step component.
-   */
-  title?: ReactNode
   /**
    * The description for step component.
    */
@@ -41,13 +37,9 @@ interface StepItem extends Omit<StepProps, "title"> {
    */
   hasSeparator?: boolean
   /**
-   * Props for step status element.
+   * The title for step component.
    */
-  statusProps?: StepStatusProps
-  /**
-   * Props for step title element.
-   */
-  titleProps?: StepTitleProps
+  title?: ReactNode
   /**
    * Props for step description element.
    */
@@ -56,6 +48,14 @@ interface StepItem extends Omit<StepProps, "title"> {
    * Props for step separator element.
    */
   separatorProps?: StepSeparatorProps
+  /**
+   * Props for step status element.
+   */
+  statusProps?: StepStatusProps
+  /**
+   * Props for step title element.
+   */
+  titleProps?: StepTitleProps
 }
 
 export type Steps = StepItem[]
@@ -79,7 +79,7 @@ export interface StepperProps
  */
 export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Stepper", props)
-  const { className, steps, children, ...computedProps } =
+  const { className, children, steps, ...computedProps } =
     omitThemeProps(mergedProps)
 
   const { descendants, getContainerProps, ...rest } = useStepper(computedProps)
@@ -93,13 +93,13 @@ export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
       return steps?.map(
         (
           {
-            title,
             description,
             hasSeparator = true,
-            statusProps,
-            titleProps,
+            title,
             descriptionProps,
             separatorProps,
+            statusProps,
+            titleProps,
             ...rest
           },
           index,

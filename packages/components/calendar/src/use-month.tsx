@@ -1,19 +1,19 @@
 import type { HTMLProps, RequiredPropGetter } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
+import type { KeyboardEvent, MouseEvent } from "react"
 import {
-  isArray,
-  handlerAll,
-  dataAttr,
   ariaAttr,
-  mergeRefs,
-  useUpdateEffect,
-  useUnmountEffect,
-  isDisabled,
+  dataAttr,
   getEventRelatedTarget,
+  handlerAll,
+  isArray,
+  isDisabled,
   isNumber,
+  mergeRefs,
+  useUnmountEffect,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import type { KeyboardEvent, MouseEvent } from "react"
 import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
@@ -34,30 +34,30 @@ import { useCalendarContext } from "./use-calendar"
 
 export const useMonth = () => {
   const {
-    value: selectedValue,
-    setValue,
-    month,
-    setMonth,
-    weekendDays,
-    minDate,
-    maxDate,
-    disableOutsideDays,
-    hiddenOutsideDays,
     amountOfMonths,
-    holidays,
-    today,
-    excludeDate,
+    dateFormat,
     dayRefs,
+    disableOutsideDays,
+    enableRange,
+    excludeDate,
+    hiddenOutsideDays,
+    holidays,
+    hoveredValue,
+    locale,
+    maxDate,
+    maxSelectValues,
+    minDate,
+    minSelectValues,
+    month,
+    nextMonth,
     paginateBy,
     prevMonth,
-    nextMonth,
-    maxSelectValues,
-    minSelectValues,
-    enableRange,
-    hoveredValue,
     setHoveredValue,
-    locale,
-    dateFormat,
+    setMonth,
+    setValue,
+    today,
+    value: selectedValue,
+    weekendDays,
   } = useCalendarContext()
 
   const beforeMonth = useRef<Date | null>(null)
@@ -118,7 +118,7 @@ export const useMonth = () => {
         getRangeFirstDay(dayRefs)?.split("-").map(Number) ?? []
 
       if (firstIndex === targetDay && targetDay < firstDay) {
-        if (!isMonthInRange({ date: prevMonth, minDate, maxDate })) return
+        if (!isMonthInRange({ date: prevMonth, maxDate, minDate })) return
         dayRefs.current.clear()
 
         setMonth((prev) => {
@@ -158,7 +158,7 @@ export const useMonth = () => {
         getRangeLastDay(dayRefs)?.split("-").map(Number) ?? []
 
       if (lastIndex === targetIndex && lastDay < targetDay) {
-        if (!isMonthInRange({ date: nextMonth, minDate, maxDate })) return
+        if (!isMonthInRange({ date: nextMonth, maxDate, minDate })) return
         dayRefs.current.clear()
 
         setMonth((prev) => {
@@ -213,14 +213,6 @@ export const useMonth = () => {
           if (focusedDay + 7 <= lastOfMonthDay)
             onFocusNext(focusedIndex, focusedMonth, focusedDay + 7)
         },
-        ArrowUp: () => {
-          const firstOfMonthDay = dayjs(new Date(year, focusedMonth))
-            .startOf("month")
-            .date()
-
-          if (focusedDay - 7 >= firstOfMonthDay)
-            onFocusNext(focusedIndex, focusedMonth, focusedDay - 7)
-        },
         ArrowLeft: () => {
           if (focusedIndex !== firstIndex) {
             const firstOfMonthDay = dayjs(new Date(year, focusedMonth))
@@ -269,8 +261,16 @@ export const useMonth = () => {
             onFocusNext(focusedIndex, focusedMonth, focusedDay + 1)
           }
         },
-        Home: () => onFocusPrev(firstIndex, firstMonth, firstDay),
+        ArrowUp: () => {
+          const firstOfMonthDay = dayjs(new Date(year, focusedMonth))
+            .startOf("month")
+            .date()
+
+          if (focusedDay - 7 >= firstOfMonthDay)
+            onFocusNext(focusedIndex, focusedMonth, focusedDay - 7)
+        },
         End: () => onFocusNext(lastIndex, lastMonth, lastDay),
+        Home: () => onFocusPrev(firstIndex, firstMonth, firstDay),
       }
 
       const action = actions[ev.key]
@@ -364,21 +364,21 @@ export const useMonth = () => {
   )
 
   const getButtonProps: RequiredPropGetter<
-    Merge<HTMLProps<"button">, { value: Date; month: Date; index: number }>,
+    Merge<HTMLProps<"button">, { index: number; month: Date; value: Date }>,
     Merge<
       HTMLProps<"button">,
       {
-        isSelected: boolean
-        isWeekend: boolean
-        isOutside: boolean
-        isStart: boolean
-        isEnd: boolean
         isBetween: boolean
+        isEnd: boolean
         isHidden: boolean
+        isOutside: boolean
+        isSelected: boolean
+        isStart: boolean
+        isWeekend: boolean
       }
     >
   > = useCallback(
-    ({ value, month, index, ...props }, ref = null) => {
+    ({ index, month, value, ...props }, ref = null) => {
       const isControlled = beforeMonth.current instanceof Date
       const isHoliday = holidays.some((holiday) => isSameDate(holiday, value))
       const isOutside = !isSameMonth(month, value)
@@ -397,18 +397,18 @@ export const useMonth = () => {
           )
       const isToday = today && isSameDate(new Date(), value)
       const isDisabled = isDisabledDate({
-        value,
-        minDate: minTrulySelectEndDate ?? minDate,
-        maxDate: maxTrulySelectEndDate ?? maxDate,
-        minTrulySelectStartDate,
-        maxTrulySelectStartDate,
-        maybeStartDate,
-        maybeEndDate,
-        startDate,
-        endDate,
-        isOutside,
-        excludeDate,
         disableOutsideDays,
+        endDate,
+        excludeDate,
+        isOutside,
+        maxDate: maxTrulySelectEndDate ?? maxDate,
+        maxTrulySelectStartDate,
+        maybeEndDate,
+        maybeStartDate,
+        minDate: minTrulySelectEndDate ?? minDate,
+        minTrulySelectStartDate,
+        startDate,
+        value,
       })
       const isTrulyDisabled = isDisabled || (!isSelected && isMax)
       const isFirstDate = value.getDate() === 1
@@ -435,28 +435,28 @@ export const useMonth = () => {
       if (!isOutside) dayRefs.current.set(key, createRef<HTMLButtonElement>())
 
       return {
-        isSelected,
-        isWeekend,
-        isOutside,
-        isStart,
-        isEnd,
-        isBetween,
-        isHidden,
         ref: mergeRefs(ref, !isOutside ? dayRefs.current.get(key) : undefined),
+        isBetween,
+        isEnd,
+        isHidden,
+        isOutside,
+        isSelected,
+        isStart,
+        isWeekend,
         ...props,
         tabIndex: !!index || isControlled ? -1 : isShouldFocus ? 0 : -1,
-        "data-selected": dataAttr(isTrulySelected),
-        "data-outside": dataAttr(isOutside),
+        "aria-disabled": ariaAttr(isTrulyDisabled),
+        "aria-selected": ariaAttr(isTrulySelected),
         "data-between": dataAttr(isBetween),
-        "data-start": dataAttr(isTrulyStart),
+        "data-disabled": dataAttr(isTrulyDisabled),
         "data-end": dataAttr(isTrulyEnd),
         "data-holiday": dataAttr(isHoliday),
-        "data-weekend": dataAttr(isWeekend),
+        "data-outside": dataAttr(isOutside),
+        "data-selected": dataAttr(isTrulySelected),
+        "data-start": dataAttr(isTrulyStart),
         "data-today": dataAttr(isToday),
         "data-value": value.getDate() ?? "",
-        "data-disabled": dataAttr(isTrulyDisabled),
-        "aria-selected": ariaAttr(isTrulySelected),
-        "aria-disabled": ariaAttr(isTrulyDisabled),
+        "data-weekend": dataAttr(isWeekend),
         onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(
           () => onPointerEnter(value),
@@ -493,7 +493,7 @@ export const useMonth = () => {
     ],
   )
 
-  return { getGridProps, getButtonProps }
+  return { getButtonProps, getGridProps }
 }
 
 export type UseMonthReturn = ReturnType<typeof useMonth>

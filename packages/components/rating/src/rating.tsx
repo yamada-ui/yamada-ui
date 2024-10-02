@@ -1,13 +1,13 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { UseRatingProps } from "./use-rating"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { RatingProvider } from "./rating-context"
-import type { UseRatingProps } from "./use-rating"
 import { useRating } from "./use-rating"
 
 export interface RatingProps extends ThemeProps<"Rating">, UseRatingProps {}
@@ -21,7 +21,7 @@ export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Rating", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)
 
-  const { getContainerProps, children, ...rest } = useRating(computedProps)
+  const { children, getContainerProps, ...rest } = useRating(computedProps)
 
   const css: CSSUIObject = { display: "flex", ...styles.container }
 

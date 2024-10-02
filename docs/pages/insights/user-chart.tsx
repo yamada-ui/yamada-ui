@@ -1,4 +1,6 @@
 import type { BarProps } from "@yamada-ui/charts"
+import type { StackProps } from "@yamada-ui/react"
+import type { UserInsights, UserInsightScore } from "insights"
 import { BarChart } from "@yamada-ui/charts"
 import {
   Avatar,
@@ -15,8 +17,8 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
-import type { UserInsights, UserInsightScore } from "insights"
+import { CountUp } from "components/transitions"
+import { useI18n } from "contexts"
 import { memo, useMemo } from "react"
 import { ChartTooltip } from "./chart-tooltip"
 import { useInsights } from "./insights-provider"
@@ -28,21 +30,19 @@ import {
   xAxisTickFormatter,
 } from "./insights-utils"
 import { ScoreLegend } from "./score-legend"
-import { CountUp } from "components/transitions"
-import { useI18n } from "contexts"
 
 export interface UserChartProps extends Omit<StackProps, "id"> {
   id: string
   currentScore: UserInsightScore
-  prevScore: UserInsightScore
-  timeline: UserInsights | undefined
   isLoading: boolean
+  prevScore: UserInsightScore
+  timeline: undefined | UserInsights
 }
 
 export const UserChart = memo(
   forwardRef<UserChartProps, "div">(
-    ({ id, currentScore, prevScore, timeline, isLoading, ...rest }, ref) => {
-      const { t, locale } = useI18n()
+    ({ id, currentScore, isLoading, prevScore, timeline, ...rest }, ref) => {
+      const { locale, t } = useI18n()
       const { period } = useInsights()
       const isEmpty = !period.start && !period.end
 
@@ -51,15 +51,15 @@ export const UserChart = memo(
       const data = useMemo(
         () =>
           Object.entries(timeline ?? {}).map(([period, data]) => {
-            const { comments, issues, pullRequests, approved, total } =
+            const { approved, comments, issues, pullRequests, total } =
               getInsightScore(data)
 
             return {
-              period,
+              Approved: approved,
               Comments: comments,
               Issues: issues,
+              period,
               "Pull Requests": pullRequests,
-              Approved: approved,
               total,
             }
           }),
@@ -69,25 +69,25 @@ export const UserChart = memo(
       const series: BarProps[] = useMemo(
         () => [
           {
-            dataKey: "Pull Requests",
             color: INSIGHT_SCORE_COLORS.pullRequests,
+            dataKey: "Pull Requests",
             stackId: "total",
           },
           {
-            dataKey: "Issues",
             color: INSIGHT_SCORE_COLORS.issues,
+            dataKey: "Issues",
             stackId: "total",
           },
           {
-            dataKey: "Approved",
             color: INSIGHT_SCORE_COLORS.approved,
+            dataKey: "Approved",
             stackId: "total",
           },
           {
-            dataKey: "Comments",
             color: INSIGHT_SCORE_COLORS.comments,
-            stackId: "total",
+            dataKey: "Comments",
             radius: [4, 4, 0, 0],
+            stackId: "total",
           },
         ],
         [],
@@ -101,31 +101,31 @@ export const UserChart = memo(
       return (
         <VStack ref={ref} borderWidth="1px" rounded="md" {...rest}>
           <HStack
-            justifyContent="space-between"
-            borderBottomWidth="1px"
-            py="md"
-            px="6"
             bg={["whiteAlpha.500", "blackAlpha.300"]}
+            borderBottomWidth="1px"
+            justifyContent="space-between"
+            px="6"
+            py="md"
           >
             <HStack>
               <Box
                 as="a"
+                cursor="pointer"
                 href={user.github.url}
                 target="_blank"
-                cursor="pointer"
               >
                 <Avatar src={user.github.icon} />
               </Box>
 
               <VStack gap="xs">
-                <Heading as="h3" size="md" lineClamp={1}>
+                <Heading as="h3" lineClamp={1} size="md">
                   {user.name[locale]}
                 </Heading>
 
                 <Link
-                  isExternal
-                  href={user.github.url}
                   fontSize="sm"
+                  href={user.github.url}
+                  isExternal
                   lineClamp={1}
                 >
                   {user.github.id}
@@ -133,19 +133,19 @@ export const UserChart = memo(
               </VStack>
             </HStack>
 
-            <VStack w="auto" alignItems="flex-end" gap="sm">
-              <Skeleton isLoaded={!isLoading} textAlign="right" rounded="md">
+            <VStack alignItems="flex-end" gap="sm" w="auto">
+              <Skeleton isLoaded={!isLoading} rounded="md" textAlign="right">
                 <HStack gap="sm">
                   <CountUp
-                    minW="2.5ch"
-                    fontSize="3xl"
-                    lineHeight="1"
-                    fontWeight="semibold"
                     count={!isLoading ? currentScore.total : null}
+                    fontSize="3xl"
+                    fontWeight="semibold"
+                    lineHeight="1"
+                    minW="2.5ch"
                   />
 
                   {!isUndefined(trend) ? (
-                    <Tag size="sm" colorScheme={trend.colorScheme}>
+                    <Tag colorScheme={trend.colorScheme} size="sm">
                       {trend.value}%
                     </Tag>
                   ) : null}
@@ -154,33 +154,33 @@ export const UserChart = memo(
 
               <Grid
                 display={{ base: "grid", sm: "none" }}
-                templateColumns={{ base: "repeat(4, 1fr)" }}
                 gapX="md"
                 gapY="xs"
+                templateColumns={{ base: "repeat(4, 1fr)" }}
               >
                 <ScoreLegend
-                  isLoaded={!isLoading}
-                  label="Pull Requests"
                   color={INSIGHT_SCORE_COLORS.pullRequests}
                   count={!isLoading ? currentScore.pullRequests : null}
+                  isLoaded={!isLoading}
+                  label="Pull Requests"
                 />
                 <ScoreLegend
-                  isLoaded={!isLoading}
-                  label="Issues"
                   color={INSIGHT_SCORE_COLORS.issues}
                   count={!isLoading ? currentScore.issues : null}
+                  isLoaded={!isLoading}
+                  label="Issues"
                 />
                 <ScoreLegend
-                  isLoaded={!isLoading}
-                  label="Approved"
                   color={INSIGHT_SCORE_COLORS.approved}
                   count={!isLoading ? currentScore.approved : null}
+                  isLoaded={!isLoading}
+                  label="Approved"
                 />
                 <ScoreLegend
-                  isLoaded={!isLoading}
-                  label="Comments"
                   color={INSIGHT_SCORE_COLORS.comments}
                   count={!isLoading ? currentScore.comments : null}
+                  isLoaded={!isLoading}
+                  label="Comments"
                 />
               </Grid>
             </VStack>
@@ -194,12 +194,12 @@ export const UserChart = memo(
                 </Text>
               </Center>
             ) : (
-              <Skeleton isLoaded={!isLoading} w="full" h="md" rounded="md">
+              <Skeleton h="md" isLoaded={!isLoading} rounded="md" w="full">
                 <Box ms="-6">
                   <BarChart
                     data={data}
-                    series={series}
                     dataKey="period"
+                    series={series}
                     xAxisTickFormatter={(value) =>
                       xAxisTickFormatter(value, period)(locale)
                     }

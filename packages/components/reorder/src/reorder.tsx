@@ -1,24 +1,24 @@
 import type {
-  CSSUIObject,
   ComponentArgs,
+  CSSUIObject,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
-import { MotionReorder } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
+import type { ForwardedRef, PropsWithChildren, RefAttributes } from "react"
+import type { ReorderItemProps } from "./reorder-item"
+import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
+import { MotionReorder } from "@yamada-ui/motion"
 import {
   cx,
   getValidChildren,
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, PropsWithChildren, RefAttributes } from "react"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 import { ReorderProvider } from "./reorder-context"
 import { ReorderItem } from "./reorder-item"
-import type { ReorderItemProps } from "./reorder-item"
 
 export type ReorderGenerateItem<Y extends any = string> = ReorderItemProps<Y>
 
@@ -33,16 +33,16 @@ const pickDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
 
 interface ReorderOptions<Y extends any = string> {
   /**
-   * The orientation of the reorder.
-   *
-   * @default 'vertical'
-   */
-  orientation?: "vertical" | "horizontal"
-  /**
    * If provided, generate reorder items based on items.
    *
    */
   items?: ReorderGenerateItem[]
+  /**
+   * The orientation of the reorder.
+   *
+   * @default 'vertical'
+   */
+  orientation?: "horizontal" | "vertical"
   /**
    * The callback invoked when reorder items are moved.
    */
@@ -56,7 +56,7 @@ interface ReorderOptions<Y extends any = string> {
 export interface ReorderProps<Y extends any = string>
   extends Omit<
       Merge<HTMLUIProps<"ul">, HTMLMotionProps<"ul">>,
-      "onChange" | "transition" | "children"
+      "children" | "onChange" | "transition"
     >,
     PropsWithChildren,
     ThemeProps<"Reorder">,
@@ -75,12 +75,12 @@ export const Reorder = forwardRef(
     const [styles, mergedProps] = useComponentMultiStyle("Reorder", props)
     const {
       className,
-      orientation = "vertical",
+      children,
       gap = "fallback(4, 1rem)",
       items = [],
+      orientation = "vertical",
       onChange,
       onCompleteChange,
-      children,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -185,7 +185,7 @@ export const Reorder = forwardRef(
   },
 ) as {
   <Y = string>(
-    props: ReorderProps<Y> & RefAttributes<HTMLUListElement>,
+    props: RefAttributes<HTMLUListElement> & ReorderProps<Y>,
   ): JSX.Element
 } & ComponentArgs
 

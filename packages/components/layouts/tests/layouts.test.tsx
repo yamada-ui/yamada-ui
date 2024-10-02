@@ -1,18 +1,18 @@
-import { render, a11y, screen, fireEvent, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
-import { useState, useEffect } from "react"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { useEffect, useState } from "react"
 import {
   AspectRatio,
   Box,
   Container,
-  Flex,
   Divider,
-  SimpleGrid,
-  Stack,
-  HStack,
-  VStack,
+  Flex,
   Grid,
   GridItem,
+  HStack,
+  SimpleGrid,
+  Stack,
+  VStack,
   ZStack,
 } from "../src"
 
@@ -20,7 +20,7 @@ describe("<AspectRatio />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <AspectRatio>
-        <img src="https://image.xyz/source" alt="placeholder" />
+        <img alt="placeholder" src="https://image.xyz/source" />
       </AspectRatio>,
     )
   })
@@ -62,26 +62,26 @@ describe("<Flex />", () => {
   test("renders all the allowed shorthand style props", () => {
     render(
       <Flex
-        direction="row"
-        justify="start"
         align="stretch"
-        wrap="nowrap"
         basis="auto"
+        direction="row"
         grow={1}
+        justify="start"
         shrink={0}
+        wrap="nowrap"
       >
         Flex
       </Flex>,
     )
 
     expect(screen.getByText("Flex")).toHaveStyle({
-      flexDirection: "row",
-      justifyContent: "start",
       alignItems: "stretch",
-      flexWrap: "nowrap",
       flexBasis: "auto",
+      flexDirection: "row",
       flexGrow: 1,
       flexShrink: 0,
+      flexWrap: "nowrap",
+      justifyContent: "start",
     })
   })
 })
@@ -154,21 +154,21 @@ describe("<Stack />", () => {
   test("renders all the allowed shorthand style props", () => {
     render(
       <Stack
-        data-testid="stack"
+        align="stretch"
         direction="row"
         justify="start"
-        align="stretch"
         wrap="nowrap"
+        data-testid="stack"
       >
         Stack
       </Stack>,
     )
 
     expect(screen.getByTestId("stack")).toHaveStyle({
-      flexDirection: "row",
-      justifyContent: "start",
       alignItems: "stretch",
+      flexDirection: "row",
       flexWrap: "nowrap",
+      justifyContent: "start",
     })
   })
 
@@ -280,7 +280,7 @@ describe("<GridItem />", () => {
 
   test("renders all the allowed shorthand style props", async () => {
     render(
-      <GridItem rowSpan={2} colSpan={2}>
+      <GridItem colSpan={2} rowSpan={2}>
         GridItem
       </GridItem>,
     )
@@ -361,13 +361,13 @@ describe("<ZStack />", () => {
     )
 
     expect(screen.getByText("Box1")).toHaveStyle({
-      position: "absolute",
       left: 0,
+      position: "absolute",
       zIndex: 0,
     })
     expect(screen.getByText("Box2")).toHaveStyle({
-      position: "absolute",
       left: 0,
+      position: "absolute",
       zIndex: 1,
     })
   })

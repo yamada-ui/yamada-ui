@@ -1,17 +1,17 @@
-import { getVar, useTheme } from "@yamada-ui/core"
 import type { FC } from "react"
+import { getVar, useTheme } from "@yamada-ui/core"
 
 export interface AreaSplitProps {
+  fillOpacity: number | string | undefined
   offset: number
   id?: string
-  fillOpacity: number | string | undefined
 }
 
-export const AreaSplit: FC<AreaSplitProps> = ({ offset, id, fillOpacity }) => {
+export const AreaSplit: FC<AreaSplitProps> = ({ id, fillOpacity, offset }) => {
   const { theme } = useTheme()
 
   return (
-    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
       <stop
         offset={offset}
         stopColor={getVar(`area-split-0`)(theme)}

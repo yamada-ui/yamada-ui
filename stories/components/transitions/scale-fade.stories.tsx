@@ -4,8 +4,8 @@ import { Box, Button, ScaleFade, useBoolean } from "@yamada-ui/react"
 type Story = StoryFn<typeof ScaleFade>
 
 const meta: Meta<typeof ScaleFade> = {
-  title: "Components / Transitions / ScaleFade",
   component: ScaleFade,
+  title: "Components / Transitions / ScaleFade",
 }
 
 export default meta
@@ -18,12 +18,12 @@ export const basic: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <ScaleFade isOpen={isOpen}>
-        <Box w="full" bg="orange.500" rounded="md" p="md" color="white">
+        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </ScaleFade>
 
-      <Box w="full" bg="purple.500" rounded="md" p="md" color="white">
+      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -38,12 +38,12 @@ export const withScale: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <ScaleFade isOpen={isOpen} scale={0.75}>
-        <Box w="full" bg="orange.500" rounded="md" p="md" color="white">
+        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </ScaleFade>
 
-      <Box w="full" bg="purple.500" rounded="md" p="md" color="white">
+      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -57,13 +57,13 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} duration={0.4}>
-        <Box w="full" bg="orange.500" rounded="md" p="md" color="white">
+      <ScaleFade duration={0.4} isOpen={isOpen}>
+        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </ScaleFade>
 
-      <Box w="full" bg="purple.500" rounded="md" p="md" color="white">
+      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -78,12 +78,12 @@ export const exitUnmount: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <ScaleFade isOpen={isOpen} unmountOnExit>
-        <Box w="full" bg="orange.500" rounded="md" p="md" color="white">
+        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </ScaleFade>
 
-      <Box w="full" bg="purple.500" rounded="md" p="md" color="white">
+      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>

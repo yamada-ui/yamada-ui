@@ -1,15 +1,15 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
-import { cx, getValidChildren, dataAttr, findChild } from "@yamada-ui/utils"
-import { VisuallyHidden } from "@yamada-ui/visually-hidden"
 import type { ReactNode } from "react"
-import { useId, useState } from "react"
 import type { ErrorMessageProps, HelperMessageProps } from "./form-control"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { cx, dataAttr, findChild, getValidChildren } from "@yamada-ui/utils"
+import { VisuallyHidden } from "@yamada-ui/visually-hidden"
+import { useId, useState } from "react"
 import {
   ErrorMessage,
   FormControlContextProvider,
@@ -22,11 +22,13 @@ import {
 
 interface FieldsetOptions {
   /**
-   * If `true`, the fieldset will be required.
-   *
-   * @default false
+   * The fieldset error message to use.
    */
-  isRequired?: boolean
+  errorMessage?: ReactNode
+  /**
+   * The fieldset helper message to use.
+   */
+  helperMessage?: ReactNode
   /**
    * If `true`, the fieldset will be disabled.
    *
@@ -52,29 +54,27 @@ interface FieldsetOptions {
    */
   isReplace?: boolean
   /**
+   * If `true`, the fieldset will be required.
+   *
+   * @default false
+   */
+  isRequired?: boolean
+  /**
    * The fieldset legend to use.
    */
   legend?: ReactNode
   /**
-   * The fieldset helper message to use.
+   * Props the error message component.
    */
-  helperMessage?: ReactNode
-  /**
-   * The fieldset error message to use.
-   */
-  errorMessage?: ReactNode
-  /**
-   * Props the label component.
-   */
-  legendProps?: LegendProps
+  errorMessageProps?: ErrorMessageProps
   /**
    * Props the helper message component.
    */
   helperMessageProps?: HelperMessageProps
   /**
-   * Props the error message component.
+   * Props the label component.
    */
-  errorMessageProps?: ErrorMessageProps
+  legendProps?: LegendProps
 }
 
 export interface FieldsetProps
@@ -93,20 +93,20 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
     const [styles, mergedProps] = useComponentMultiStyle("Fieldset", props)
     const {
       className,
-      isRequired = false,
+      children,
+      errorMessage,
+      helperMessage,
       isDisabled = false,
       isInvalid = false,
       isReadOnly = false,
       isReplace = true,
+      isRequired = false,
       legend,
-      helperMessage,
-      errorMessage,
-      children,
-      requiredIndicator,
       optionalIndicator,
-      legendProps,
-      helperMessageProps,
+      requiredIndicator,
       errorMessageProps,
+      helperMessageProps,
+      legendProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -131,14 +131,14 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
     return (
       <FormControlContextProvider
         value={{
-          isFocused,
-          isRequired,
           isDisabled,
+          isFocused,
           isInvalid,
           isReadOnly,
           isReplace,
-          onFocus: () => setFocused(true),
+          isRequired,
           onBlur: () => setFocused(false),
+          onFocus: () => setFocused(true),
         }}
       >
         <FormControlStylesProvider value={styles}>
@@ -146,8 +146,8 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
             ref={ref}
             className={cx("ui-fieldset", className)}
             disabled={isDisabled}
-            data-focus={dataAttr(isFocused)}
             data-disabled={dataAttr(isDisabled)}
+            data-focus={dataAttr(isFocused)}
             data-invalid={dataAttr(isInvalid)}
             data-readonly={dataAttr(isReadOnly)}
             __css={css}
@@ -155,8 +155,8 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
           >
             {!isCustomLegend && legend ? (
               <Legend
-                requiredIndicator={requiredIndicator}
                 optionalIndicator={optionalIndicator}
+                requiredIndicator={requiredIndicator}
                 {...legendProps}
               >
                 {legend}
@@ -188,9 +188,9 @@ Fieldset.displayName = "Fieldset"
 Fieldset.__ui__ = "Fieldset"
 
 interface LegendOptions {
-  requiredIndicator?: ReactNode
-  optionalIndicator?: ReactNode
   isRequired?: boolean
+  optionalIndicator?: ReactNode
+  requiredIndicator?: ReactNode
 }
 
 export interface LegendProps extends HTMLUIProps<"legend">, LegendOptions {}
@@ -199,15 +199,15 @@ export const Legend = forwardRef<LegendProps, "legend">(
   (
     {
       className,
-      isRequired: isRequiredProp,
-      requiredIndicator = null,
-      optionalIndicator = null,
       children,
+      isRequired: isRequiredProp,
+      optionalIndicator = null,
+      requiredIndicator = null,
       ...rest
     },
     ref,
   ) => {
-    const { isRequired, isFocused, isDisabled, isInvalid, isReadOnly } =
+    const { isDisabled, isFocused, isInvalid, isReadOnly, isRequired } =
       useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
@@ -219,10 +219,10 @@ export const Legend = forwardRef<LegendProps, "legend">(
       <ui.legend
         ref={ref}
         className={cx("ui-fieldset__legend", className)}
-        data-focus={dataAttr(isFocused)}
         data-disabled={dataAttr(isDisabled)}
-        data-readonly={dataAttr(isReadOnly)}
+        data-focus={dataAttr(isFocused)}
         data-invalid={dataAttr(isInvalid)}
+        data-readonly={dataAttr(isReadOnly)}
         __css={css}
         {...rest}
       >

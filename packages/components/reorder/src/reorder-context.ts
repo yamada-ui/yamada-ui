@@ -3,7 +3,7 @@ import type { DragControls } from "@yamada-ui/motion"
 import { createContext } from "@yamada-ui/utils"
 
 interface ReorderContext {
-  orientation: "vertical" | "horizontal"
+  orientation: "horizontal" | "vertical"
   styles: { [key: string]: CSSUIObject }
 }
 
@@ -14,9 +14,9 @@ export const [ReorderProvider, useReorderContext] =
   })
 
 interface ReorderItemContext {
-  register: (node: HTMLElement | null) => void
-  isDrag: boolean
   dragControls: DragControls
+  isDrag: boolean
+  register: (node: HTMLElement | null) => void
 }
 
 export const [ReorderItemProvider, useReorderItemContext] =

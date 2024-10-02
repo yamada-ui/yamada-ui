@@ -1,6 +1,6 @@
-import { Image, Wrap, ui } from "@yamada-ui/react"
 import type { FlexProps, ImageProps } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Image, ui, Wrap } from "@yamada-ui/react"
 import { CONSTANT } from "constant"
 
 interface Item extends ImageProps {
@@ -33,10 +33,10 @@ export const Sponsors: FC<SponsorsProps> = ({ type, ...rest }) => {
   }
 
   return (
-    <Wrap minH="12" gap="6" {...rest}>
-      {items.map(({ href, src, alt, ...rest }, index) => (
+    <Wrap gap="6" minH="12" {...rest}>
+      {items.map(({ alt, href, src, ...rest }, index) => (
         <ui.a key={index} href={href} target="_blank">
-          <Image src={src} alt={alt} maxW="full" h={h} {...rest} />
+          <Image alt={alt} h={h} maxW="full" src={src} {...rest} />
         </ui.a>
       ))}
     </Wrap>

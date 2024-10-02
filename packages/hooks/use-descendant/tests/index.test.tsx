@@ -1,20 +1,20 @@
-import { render, renderHook } from "@yamada-ui/test"
 import type { FC, PropsWithChildren } from "react"
 import type { DescendantOptions, FilterDescendant } from "../src"
+import { render, renderHook } from "@yamada-ui/test"
 import { createDescendant } from "../src"
 
 describe("useDescendant", () => {
   const initializeDescendants = () => {
     const { result } = renderHook(() => createDescendant())
 
-    const { useDescendant, useDescendants, DescendantsContextProvider } =
+    const { DescendantsContextProvider, useDescendant, useDescendants } =
       result.current
 
-    return { useDescendant, useDescendants, DescendantsContextProvider }
+    return { DescendantsContextProvider, useDescendant, useDescendants }
   }
 
   const setup = () => {
-    const { useDescendant, useDescendants, DescendantsContextProvider } =
+    const { DescendantsContextProvider, useDescendant, useDescendants } =
       initializeDescendants()
 
     const { result } = renderHook(() => useDescendants())
@@ -28,7 +28,7 @@ describe("useDescendant", () => {
       )
     }
 
-    return { useDescendant, descendants, Wrapper }
+    return { descendants, useDescendant, Wrapper }
   }
 
   const renderItems = (count: number, Component: FC) =>
@@ -37,7 +37,7 @@ describe("useDescendant", () => {
       .map((_, index) => <Component key={index} />)
 
   test("Register and unregister", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const count = 1
 
@@ -59,7 +59,7 @@ describe("useDescendant", () => {
   })
 
   test("Index and value retrieval", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -75,7 +75,7 @@ describe("useDescendant", () => {
   })
 
   test("Retrieve of valid indexes and values", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -98,7 +98,7 @@ describe("useDescendant", () => {
   })
 
   test("Value retrieval using filters", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -121,7 +121,7 @@ describe("useDescendant", () => {
   })
 
   test("Retrieve of next and previous values", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -136,7 +136,7 @@ describe("useDescendant", () => {
   })
 
   test("Retrieve of valid next and previous values", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -161,7 +161,7 @@ describe("useDescendant", () => {
   })
 
   test("Retrieve of first and last values", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -176,7 +176,7 @@ describe("useDescendant", () => {
   })
 
   test("Retrieve of valid first and last values", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -202,7 +202,7 @@ describe("useDescendant", () => {
   })
 
   test("Return undefined for invalid indexes or elements", () => {
-    const { useDescendant, descendants, Wrapper } = setup()
+    const { descendants, useDescendant, Wrapper } = setup()
 
     const Item: FC<DescendantOptions> = ({ ...props }) => {
       const { register } = useDescendant(props)

@@ -1,8 +1,8 @@
-import { forwardRef, Box, Tabs as UITabs, Tab } from "@yamada-ui/react"
 import type { BoxProps } from "@yamada-ui/react"
+import { Box, forwardRef, Tab, Tabs as UITabs } from "@yamada-ui/react"
+import { usePage } from "contexts"
 import { memo } from "react"
 import { NextLink } from "./next-link"
-import { usePage } from "contexts"
 
 export interface TabsProps extends BoxProps {}
 
@@ -16,16 +16,16 @@ export const Tabs = memo(
           as="ul"
           index={documentTabs.findIndex(({ slug }) => slug === currentSlug)}
         >
-          {documentTabs.map(({ title, slug }) => (
-            <Tab as="li" key={slug} p="0">
+          {documentTabs.map(({ slug, title }) => (
+            <Tab key={slug} as="li" p="0">
               <NextLink
-                color="inherit"
                 _hover={{
                   textDecoration: "inherit",
                 }}
+                color="inherit"
                 href={slug}
-                py="sm"
                 px="md"
+                py="sm"
               >
                 {title}
               </NextLink>

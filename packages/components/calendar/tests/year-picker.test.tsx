@@ -16,7 +16,7 @@ describe("<YearPicker />", () => {
     })
     test("should change selected Year", async () => {
       const { container } = render(
-        <YearPicker placeholder="basic" defaultValue={new Date()} />,
+        <YearPicker defaultValue={new Date()} placeholder="basic" />,
       )
 
       const nextYearStr = (new Date().getFullYear() + 1).toString()

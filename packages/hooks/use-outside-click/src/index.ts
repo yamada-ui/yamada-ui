@@ -1,10 +1,10 @@
-import { getOwnerDocument, useCallbackRef } from "@yamada-ui/utils"
 import type { RefObject } from "react"
+import { getOwnerDocument, useCallbackRef } from "@yamada-ui/utils"
 import { useEffect, useRef } from "react"
 
 export interface UseOutsideClickProps {
-  enabled?: boolean
   ref: React.RefObject<HTMLElement>
+  enabled?: boolean
   handler?: (ev: Event) => void
 }
 
@@ -15,14 +15,14 @@ export interface UseOutsideClickProps {
  */
 export const useOutsideClick = ({
   ref,
-  handler,
   enabled = true,
+  handler,
 }: UseOutsideClickProps) => {
   const handlerRef = useCallbackRef(handler)
 
   const state = useRef({
-    isPointerDown: false,
     ignoreEmulatedMouseEvents: false,
+    isPointerDown: false,
   })
 
   useEffect(() => {

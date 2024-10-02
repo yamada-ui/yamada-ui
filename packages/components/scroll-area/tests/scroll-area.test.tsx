@@ -5,7 +5,7 @@ import { Content } from "./content"
 describe("<ScrollArea />", () => {
   test("renders with no errors", async () => {
     const { container, getByTestId } = render(
-      <ScrollArea data-testid="ScrollArea" h="xs">
+      <ScrollArea h="xs" data-testid="ScrollArea">
         <Content />
       </ScrollArea>,
     )
@@ -102,7 +102,7 @@ describe("<ScrollArea />", () => {
 
   test("onMouseEnter and onMouseLeave work correctly", async () => {
     const { getByTestId } = render(
-      <ScrollArea data-testid="ScrollArea" type="hover">
+      <ScrollArea type="hover" data-testid="ScrollArea">
         <Content />
       </ScrollArea>,
     )
@@ -124,7 +124,7 @@ describe("<ScrollArea />", () => {
 
   test("never style is applied correctly", async () => {
     const { getByTestId } = render(
-      <ScrollArea data-testid="ScrollArea" type="never">
+      <ScrollArea type="never" data-testid="ScrollArea">
         <Content />
       </ScrollArea>,
     )
@@ -148,7 +148,7 @@ describe("<ScrollArea />", () => {
     })
 
     const { getByTestId } = render(
-      <ScrollArea data-testid="ScrollArea" type="never">
+      <ScrollArea type="never" data-testid="ScrollArea">
         <Content />
       </ScrollArea>,
     )

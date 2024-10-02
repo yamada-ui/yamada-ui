@@ -4,25 +4,25 @@ import type {
   PropGetter,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ui, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
+import type { UsePopperProps } from "@yamada-ui/use-popper"
+import type { ReactElement, ReactNode, Ref } from "react"
+import { omitThemeProps, ui, useComponentStyle } from "@yamada-ui/core"
+import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { UsePopperProps } from "@yamada-ui/use-popper"
 import { usePopper } from "@yamada-ui/use-popper"
 import {
   cx,
+  getOwnerDocument,
+  getOwnerWindow,
   handlerAll,
   mergeRefs,
-  getOwnerWindow,
-  getOwnerDocument,
 } from "@yamada-ui/utils"
-import type { ReactElement, ReactNode, Ref } from "react"
 import {
   Children,
   cloneElement,
@@ -34,37 +34,11 @@ import {
 
 interface TooltipOptions {
   /**
-   * The label of the tooltip.
-   */
-  label?: ReactNode
-  /**
-   * If `true`, the tooltip will be shown.
-   */
-  isOpen?: boolean
-  /**
-   * If `true`, the tooltip will be initially shown.
-   */
-  defaultIsOpen?: boolean
-  /**
-   * Callback to run when the tooltip shows.
-   */
-  onOpen?: () => void
-  /**
-   * Callback to run when the tooltip hides.
-   */
-  onClose?: () => void
-  /**
-   * If `true`, the tooltip will be disabled.
+   * The animation of the tooltip.
    *
-   * @default false
+   * @default 'scale'
    */
-  isDisabled?: boolean
-  /**
-   * The delay before showing the tooltip.
-   *
-   * @default 0
-   */
-  openDelay?: number
+  animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
   /**
    * The delay before hiding the tooltip.
    *
@@ -78,11 +52,11 @@ interface TooltipOptions {
    */
   closeOnClick?: boolean
   /**
-   * If `true`, the tooltip will hide on scroll.
+   * If `true`, the tooltip will hide on pressing Esc key.
    *
-   * @default false
+   * @default true
    */
-  closeOnScroll?: boolean
+  closeOnEsc?: boolean
   /**
    * If `true`, the tooltip will hide while the mouse is down.
    *
@@ -96,35 +70,61 @@ interface TooltipOptions {
    */
   closeOnPointerDown?: boolean
   /**
-   * If `true`, the tooltip will hide on pressing Esc key.
+   * If `true`, the tooltip will hide on scroll.
    *
-   * @default true
+   * @default false
    */
-  closeOnEsc?: boolean
+  closeOnScroll?: boolean
   /**
-   * The animation of the tooltip.
-   *
-   * @default 'scale'
+   * If `true`, the tooltip will be initially shown.
    */
-  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
+  defaultIsOpen?: boolean
   /**
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
   /**
-   * Props for portal component.
+   * If `true`, the tooltip will be disabled.
+   *
+   * @default false
    */
-  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
+  isDisabled?: boolean
+  /**
+   * If `true`, the tooltip will be shown.
+   */
+  isOpen?: boolean
+  /**
+   * The label of the tooltip.
+   */
+  label?: ReactNode
+  /**
+   * The delay before showing the tooltip.
+   *
+   * @default 0
+   */
+  openDelay?: number
   /**
    * If `true`, the element will be transported to the end of document.body.
    */
   withPortal?: boolean
+  /**
+   * Props for portal component.
+   */
+  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
+  /**
+   * Callback to run when the tooltip hides.
+   */
+  onClose?: () => void
+  /**
+   * Callback to run when the tooltip shows.
+   */
+  onOpen?: () => void
 }
 
 export interface TooltipProps
   extends Omit<MotionProps, "animation" | "offset">,
     ThemeProps<"Tooltip">,
-    Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement">,
+    Pick<UsePopperProps, "gutter" | "modifiers" | "offset" | "placement">,
     TooltipOptions {}
 
 const getTooltipProps = (
@@ -132,9 +132,9 @@ const getTooltipProps = (
   duration?: TooltipProps["duration"],
 ) => {
   const custom = {
-    reverse: true,
     duration,
     enter: { visibility: "visible" },
+    reverse: true,
     transitionEnd: { exit: { visibility: "hidden" } },
   }
 
@@ -174,7 +174,7 @@ const getTooltipProps = (
  */
 export const Tooltip = motionForwardRef<TooltipProps, "div">(
   (
-    { z: zProp, zIndex: zIndexProp, portalProps, withPortal = true, ...props },
+    { withPortal = true, z: zProp, zIndex: zIndexProp, portalProps, ...props },
     ref,
   ) => {
     let [{ z, zIndex, ...styles }, mergedProps] = useComponentStyle(
@@ -183,47 +183,47 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     )
     const {
       className,
+      animation,
       children,
-      label,
-      placement,
-      modifiers,
-      gutter,
-      offset,
-      openDelay = 0,
       closeDelay = 0,
-      isDisabled,
       closeOnClick,
-      closeOnScroll,
+      closeOnEsc = true,
       closeOnMouseDown = false,
       closeOnPointerDown = false,
-      closeOnEsc = true,
-      animation,
-      duration,
-      isOpen: isOpenProp,
+      closeOnScroll,
       defaultIsOpen: defaultIsOpenProp,
-      onOpen: onOpenProp,
+      duration,
+      gutter,
+      isDisabled,
+      isOpen: isOpenProp,
+      label,
+      modifiers,
+      offset,
+      openDelay = 0,
+      placement,
       onClose: onCloseProp,
+      onOpen: onOpenProp,
       ...rest
     } = omitThemeProps(mergedProps)
 
     const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const id = useId()
-    const { isOpen, onOpen, onClose } = useDisclosure({
-      isOpen: isOpenProp,
+    const { isOpen, onClose, onOpen } = useDisclosure({
       defaultIsOpen: defaultIsOpenProp,
-      onOpen: onOpenProp,
+      isOpen: isOpenProp,
       onClose: onCloseProp,
+      onOpen: onOpenProp,
     })
     const triggerRef = useRef<HTMLElement>(null)
-    const openTimeout = useRef<number>()
-    const closeTimeout = useRef<number>()
-    const { referenceRef, getPopperProps, transformOrigin } = usePopper({
+    const openTimeout = useRef<NodeJS.Timeout>()
+    const closeTimeout = useRef<NodeJS.Timeout>()
+    const { referenceRef, transformOrigin, getPopperProps } = usePopper({
       enabled: isOpen,
-      placement,
-      modifiers,
       gutter,
+      modifiers,
       offset,
+      placement,
     })
 
     const closeNow = useCallback(() => {
@@ -279,11 +279,11 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       (props = {}, ref = null) => ({
         ...props,
         ref: mergeRefs(triggerRef, ref, referenceRef),
-        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
-        onClick: handlerAll(props.onClick, onClick),
-        onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
-        onFocus: handlerAll(props.onFocus, openWithDelay),
         onBlur: handlerAll(props.onBlur, closeWithDelay),
+        onClick: handlerAll(props.onClick, onClick),
+        onFocus: handlerAll(props.onFocus, openWithDelay),
+        onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
+        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
       }),
 
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
@@ -336,9 +336,9 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
 
     if (!label) return <>{children}</>
 
-    const child = Children.only(children) as ReactElement & {
+    const child = Children.only(children) as {
       ref?: Ref<HTMLElement>
-    }
+    } & ReactElement
 
     const trigger = cloneElement(
       child,
@@ -365,12 +365,12 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
             border: "0px",
             clip: "rect(0px, 0px, 0px, 0px)",
             height: "1px",
-            width: "1px",
             margin: "-1px",
-            padding: "0px",
             overflow: "hidden",
-            whiteSpace: "nowrap",
+            padding: "0px",
             position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
           }}
         >
           {label}
@@ -381,20 +381,20 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
             <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
-                zIndex={resolvedZIndex}
                 pointerEvents="none"
+                zIndex={resolvedZIndex}
               >
                 <motion.div
                   ref={ref}
                   className={cx("ui-tooltip", className)}
-                  role="tooltip"
                   style={{ transformOrigin }}
+                  role="tooltip"
                   {...(animation !== "none"
                     ? getTooltipProps(animation, duration)
                     : {})}
-                  initial="exit"
                   animate={isOpen ? "enter" : "exit"}
                   exit="exit"
+                  initial="exit"
                   __css={css}
                   {...rest}
                 >

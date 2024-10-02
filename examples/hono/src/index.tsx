@@ -20,20 +20,20 @@ app.get("*", (c) => {
         <head>
           <title>Hono App - Yamada UI</title>
           <meta charSet="utf-8" />
-          <meta content="width=device-width, initial-scale=1" name="viewport" />
-          <link rel="icon" href="/favicon.svg" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link href="/favicon.svg" rel="icon" />
           <script type="module" src="/src/client.tsx"></script>
         </head>
         <body>
           <ColorModeScript
             type="cookie"
-            nonce="testing"
             initialColorMode={colorMode ?? config.initialColorMode}
+            nonce="testing"
           />
           <ThemeSchemeScript
             type="cookie"
-            nonce="testing"
             initialThemeScheme={themeScheme ?? config.initialThemeScheme}
+            nonce="testing"
           />
           <div id="root"></div>
         </body>

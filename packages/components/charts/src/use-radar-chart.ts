@@ -1,22 +1,22 @@
-import { getVar, useTheme } from "@yamada-ui/core"
 import type {
   CSSUIObject,
   CSSUIProps,
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
-import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   PolarAngleAxisProps,
   PolarRadiusAxisProps,
   RadarChartProps,
   RadarProps,
 } from "./chart.types"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback, useMemo, useState } from "react"
+import { getClassName, getComponentProps } from "./chart-utils"
 import {
   dotProperties,
   polarAngleAxisProperties,
@@ -31,17 +31,45 @@ export interface UseRadarChartOptions {
    */
   data: Dict[]
   /**
-   * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
-   */
-  series: RadarProps[]
-  /**
    * The key of a group of data which should be unique in an chart.
    */
   dataKey: string
   /**
-   * Props for the radar.
+   * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
-  radarProps?: Partial<RadarProps>
+  series: RadarProps[]
+  /**
+   * Controls fill opacity of all radars.
+   *
+   * @default 1
+   */
+  fillOpacity?: [number, number] | number
+  /**
+   * A function to format Y axis tick.
+   */
+  polarAngleAxisTickFormatter?: (value: number) => string
+  /**
+   * A function to format X axis tick.
+   */
+  polarRadiusAxisTickFormatter?: (value: number) => string
+  /**
+   * Stroke width for the chart radars.
+   *
+   * @default 2
+   */
+  strokeWidth?: number
+  /**
+   * Determines whether activeDots should be displayed.
+   *
+   * @default true
+   */
+  withActiveDots?: boolean
+  /**
+   * Determines whether dots should be displayed.
+   *
+   * @default false
+   */
+  withDots?: boolean
   /**
    * Props passed down to recharts `RadarChart` component.
    */
@@ -63,37 +91,9 @@ export interface UseRadarChartOptions {
    */
   polarRadiusAxisTickProps?: CSSUIProps
   /**
-   * Determines whether dots should be displayed.
-   *
-   * @default false
+   * Props for the radar.
    */
-  withDots?: boolean
-  /**
-   * Determines whether activeDots should be displayed.
-   *
-   * @default true
-   */
-  withActiveDots?: boolean
-  /**
-   * Stroke width for the chart radars.
-   *
-   * @default 2
-   */
-  strokeWidth?: number
-  /**
-   * Controls fill opacity of all radars.
-   *
-   * @default 1
-   */
-  fillOpacity?: number | [number, number]
-  /**
-   * A function to format Y axis tick.
-   */
-  polarAngleAxisTickFormatter?: (value: number) => string
-  /**
-   * A function to format X axis tick.
-   */
-  polarRadiusAxisTickFormatter?: (value: number) => string
+  radarProps?: Partial<RadarProps>
 }
 
 interface UseRadarChartProps extends UseRadarChartOptions {
@@ -102,25 +102,25 @@ interface UseRadarChartProps extends UseRadarChartOptions {
 
 export const useRadarChart = ({
   data,
-  series,
   dataKey,
-  withDots = false,
-  withActiveDots = false,
-  strokeWidth = 2,
   fillOpacity = 0.4,
   polarAngleAxisTickFormatter,
   polarRadiusAxisTickFormatter,
+  series,
+  strokeWidth = 2,
   styles,
+  withActiveDots = false,
+  withDots = false,
   ...rest
 }: UseRadarChartProps) => {
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const shouldHighlight = highlightedArea !== null
   const {
-    dot = {},
     activeDot = {},
     dimDot,
     dimRadar,
+    dot = {},
     ...computedRadarProps
   } = rest.radarProps ?? {}
 
@@ -241,11 +241,11 @@ export const useRadarChart = ({
     () =>
       series.map((props, index) => {
         const {
-          dataKey,
-          dot = {},
           activeDot = {},
+          dataKey,
           dimDot = {},
           dimRadar = {},
+          dot = {},
           ...computedProps
         } = props
         const color = getVar(`radar-${index}`)(theme)
@@ -263,7 +263,7 @@ export const useRadarChart = ({
           dimmed ? dimRadarClassName : undefined,
         )(theme, true)
 
-        let resolvedActiveDot: Recharts.DotProps | boolean
+        let resolvedActiveDot: boolean | Recharts.DotProps
 
         if (withActiveDots) {
           const computedActiveDot = {
@@ -279,15 +279,15 @@ export const useRadarChart = ({
           resolvedActiveDot = {
             className: cx("ui-radar-chart__active-dot", className),
             fill: color,
-            stroke: color,
             r: 4,
+            stroke: color,
             ...rest,
           } as Recharts.DotProps
         } else {
           resolvedActiveDot = false
         }
 
-        let resolvedDot: Recharts.DotProps | boolean
+        let resolvedDot: boolean | Recharts.DotProps
 
         if (withDots) {
           const computedDimDot = { ...dimDotProps, ...dimDot }
@@ -315,10 +315,10 @@ export const useRadarChart = ({
 
         return {
           ...rest,
+          activeDot: resolvedActiveDot,
           color,
           dataKey,
           dot: resolvedDot,
-          activeDot: resolvedActiveDot,
         }
       }),
     [
@@ -356,24 +356,24 @@ export const useRadarChart = ({
   )
 
   const getRadarProps: RequiredPropGetter<
-    Partial<Recharts.RadarProps> & { index: number },
+    { index: number } & Partial<Recharts.RadarProps>,
     Omit<Recharts.RadarProps, "ref">
   > = useCallback(
-    ({ index, className: classNameProp, ...props }, ref = null) => {
-      const { color, className, dataKey, activeDot, dot, ...rest } =
+    ({ className: classNameProp, index, ...props }, ref = null) => {
+      const { className, activeDot, color, dataKey, dot, ...rest } =
         radarPropList[index]
 
       return {
         ref,
+        name: dataKey as string,
         className: cx(classNameProp, className),
         activeDot,
-        dot,
-        name: dataKey as string,
         dataKey,
+        dot,
         fill: color,
-        strokeWidth,
-        stroke: color,
         isAnimationActive: false,
+        stroke: color,
+        strokeWidth,
         ...(props as Omit<Recharts.RadarProps, "dataKey">),
         ...rest,
       }
@@ -436,11 +436,11 @@ export const useRadarChart = ({
 
   return {
     radarVars,
-    getRadarChartProps,
-    getRadarProps,
+    setHighlightedArea,
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
-    setHighlightedArea,
+    getRadarChartProps,
+    getRadarProps,
   }
 }
 

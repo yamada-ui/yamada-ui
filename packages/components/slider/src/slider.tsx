@@ -1,19 +1,21 @@
 import type {
   CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   CSSUIProps,
   HTMLProps,
+  HTMLUIProps,
   PropGetter,
   RequiredPropGetter,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
+  ThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { Merge } from "@yamada-ui/utils"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -22,27 +24,25 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
-import type { Merge } from "@yamada-ui/utils"
 import {
+  clampNumber,
   createContext,
   cx,
-  pickObject,
-  useCallbackRef,
-  valueToPercent,
-  clampNumber,
-  roundNumberToStep,
-  useUpdateEffect,
-  mergeRefs,
   dataAttr,
-  handlerAll,
-  percentToValue,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-  includesChildren,
   findChild,
+  getValidChildren,
+  handlerAll,
+  includesChildren,
+  isEmpty,
+  mergeRefs,
+  omitChildren,
+  percentToValue,
+  pickObject,
+  roundNumberToStep,
+  useCallbackRef,
+  useUpdateEffect,
+  valueToPercent,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
 export const getThumbSize = (
@@ -73,41 +73,9 @@ export interface UseSliderOptions {
    */
   name?: string
   /**
-   * The minimum allowed value of the slider. Cannot be greater than max.
-   *
-   * @default 0
-   */
-  min?: number
-  /**
-   * The maximum allowed value of the slider. Cannot be less than min.
-   *
-   * @default 100
-   */
-  max?: number
-  /**
-   * The step in which increments or decrements have to be made.
-   *
-   * @default 1
-   */
-  step?: number
-  /**
-   * The value of the slider.
-   */
-  value?: number
-  /**
    * The initial value of the slider.
    */
   defaultValue?: number
-  /**
-   * The orientation of the slider.
-   *
-   * @default 'horizontal'
-   */
-  orientation?: "horizontal" | "vertical"
-  /**
-   * If `true`, the value will be incremented or decremented in reverse.
-   */
-  isReversed?: boolean
   /**
    * If `false`, the slider handle will not capture focus when value changes.
    *
@@ -115,22 +83,54 @@ export interface UseSliderOptions {
    */
   focusThumbOnChange?: boolean
   /**
+   * If `true`, the value will be incremented or decremented in reverse.
+   */
+  isReversed?: boolean
+  /**
+   * The maximum allowed value of the slider. Cannot be less than min.
+   *
+   * @default 100
+   */
+  max?: number
+  /**
+   * The minimum allowed value of the slider. Cannot be greater than max.
+   *
+   * @default 0
+   */
+  min?: number
+  /**
+   * The orientation of the slider.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: "horizontal" | "vertical"
+  /**
+   * The step in which increments or decrements have to be made.
+   *
+   * @default 1
+   */
+  step?: number
+  /**
    * The CSS `box-size` property.
    * Used for calculating the width, height, and percentage of the container element.
    */
   thumbSize?: CSSUIProps["boxSize"]
   /**
-   * Function called when the user starts selecting a new value.
+   * The value of the slider.
    */
-  onChangeStart?: (value: number) => void
+  value?: number
+  /**
+   * Function called whenever the slider value changes.
+   */
+  onChange?: (value: number) => void
   /**
    * Function called when the user is done selecting a new value.
    */
   onChangeEnd?: (value: number) => void
   /**
-   * Function called whenever the slider value changes.
+   * Function called when the user starts selecting a new value.
    */
-  onChange?: (value: number) => void
+  onChangeStart?: (value: number) => void
 }
 
 export interface UseSliderProps
@@ -145,27 +145,27 @@ export const useSlider = ({
   let {
     id,
     name,
-    min = 0,
-    max = 100,
-    step = 1,
     defaultValue,
-    orientation = "horizontal",
-    thumbSize: thumbSizeProp,
     isReversed,
+    max = 100,
+    min = 0,
+    orientation = "horizontal",
+    step = 1,
+    thumbSize: thumbSizeProp,
     value: valueProp,
-    onChange,
-    onChangeStart: onChangeStartProp,
-    onChangeEnd: onChangeEndProp,
     "aria-valuetext": ariaValueText,
+    onChange,
+    onChangeEnd: onChangeEndProp,
+    onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const {
-    required,
     disabled,
     readOnly,
-    onFocus,
-    onBlur,
+    required,
     "aria-readonly": ariaReadonly,
+    onBlur,
+    onFocus,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
 
@@ -176,8 +176,8 @@ export const useSlider = ({
   const onChangeEnd = useCallbackRef(onChangeEndProp)
 
   const [computedValue, setValue] = useControllableState({
-    value: valueProp,
     defaultValue: defaultValue ?? min + (max - min) / 2,
+    value: valueProp,
     onChange,
   })
 
@@ -196,15 +196,15 @@ export const useSlider = ({
   const isVertical = orientation === "vertical"
 
   const latestRef = useLatestRef({
-    min,
+    focusThumbOnChange,
+    isInteractive,
     max,
+    min,
     step,
     value,
-    isInteractive,
-    focusThumbOnChange,
   })
 
-  const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
+  const eventSourceRef = useRef<"keyboard" | "pointer" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
@@ -212,6 +212,21 @@ export const useSlider = ({
   const thumbSize = useSize(thumbRef)
 
   usePanEvent(containerRef, {
+    onMove: (ev) => {
+      const { isInteractive } = latestRef.current
+
+      if (!isInteractive) return
+
+      setValueFromPointer(ev)
+    },
+    onSessionEnd: () => {
+      const { isInteractive, value } = latestRef.current
+
+      if (!isInteractive) return
+
+      setDragging(false)
+      onChangeEnd(value)
+    },
     onSessionStart: (ev) => {
       const { isInteractive, value } = latestRef.current
 
@@ -222,32 +237,17 @@ export const useSlider = ({
       setValueFromPointer(ev)
       onChangeStart(value)
     },
-    onSessionEnd: () => {
-      const { isInteractive, value } = latestRef.current
-
-      if (!isInteractive) return
-
-      setDragging(false)
-      onChangeEnd(value)
-    },
-    onMove: (ev) => {
-      const { isInteractive } = latestRef.current
-
-      if (!isInteractive) return
-
-      setValueFromPointer(ev)
-    },
   })
 
   const getValueFromPointer = useCallback(
     (ev: any) => {
       if (!trackRef.current) return
 
-      const { min, max, step } = latestRef.current
+      const { max, min, step } = latestRef.current
 
       eventSourceRef.current = "pointer"
 
-      const { bottom, left, height, width } =
+      const { bottom, height, left, width } =
         trackRef.current.getBoundingClientRect()
       const { clientX, clientY } = ev.touches?.[0] ?? ev
 
@@ -270,7 +270,7 @@ export const useSlider = ({
     [isVertical, isReversed, latestRef],
   )
 
-  const setValueFromPointer = (ev: MouseEvent | TouchEvent | PointerEvent) => {
+  const setValueFromPointer = (ev: MouseEvent | PointerEvent | TouchEvent) => {
     const { value } = latestRef.current
     const nextValue = getValueFromPointer(ev)
 
@@ -285,7 +285,7 @@ export const useSlider = ({
 
   const constrain = useCallback(
     (value: number) => {
-      const { isInteractive, min, max } = latestRef.current
+      const { isInteractive, max, min } = latestRef.current
 
       if (!isInteractive) return
 
@@ -316,17 +316,17 @@ export const useSlider = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
-      const { min, max } = latestRef.current
+      const { max, min } = latestRef.current
 
       const actions: { [key: string]: KeyboardEventHandler } = {
+        ArrowDown: () => stepDown(),
+        ArrowLeft: () => stepDown(),
         ArrowRight: () => stepUp(),
         ArrowUp: () => stepUp(),
-        ArrowLeft: () => stepDown(),
-        ArrowDown: () => stepDown(),
-        PageUp: () => stepUp(tenStep),
-        PageDown: () => stepDown(tenStep),
-        Home: () => constrain(min),
         End: () => constrain(max),
+        Home: () => constrain(min),
+        PageDown: () => stepDown(tenStep),
+        PageUp: () => stepUp(tenStep),
       }
 
       const action = actions[ev.key]
@@ -353,22 +353,22 @@ export const useSlider = ({
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const { width: w, height: h } = thumbSize ?? {
-        width: "$thumbSize",
+      const { height: h, width: w } = thumbSize ?? {
         height: "$thumbSize",
+        width: "$thumbSize",
       }
 
       const padding = isVertical
         ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
-        : { paddingTop: `calc(${h} / 2)`, paddingBottom: `calc(${h} / 2)` }
+        : { paddingBottom: `calc(${h} / 2)`, paddingTop: `calc(${h} / 2)` }
 
       const style: CSSProperties = {
         ...props.style,
-        position: "relative",
-        userSelect: "none",
-        touchAction: "none",
-        WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
         outline: 0,
+        position: "relative",
+        touchAction: "none",
+        userSelect: "none",
+        WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
         ...padding,
       }
 
@@ -376,8 +376,8 @@ export const useSlider = ({
         ...rest,
         ...props,
         ref: mergeRefs(ref, containerRef),
-        tabIndex: -1,
         style,
+        tabIndex: -1,
         vars: [
           {
             name: "thumbSize",
@@ -399,10 +399,10 @@ export const useSlider = ({
       ref,
       type: "hidden",
       name,
-      value,
-      required,
       disabled,
       readOnly,
+      required,
+      value,
     }),
     [
       ariaReadonly,
@@ -423,9 +423,9 @@ export const useSlider = ({
         position: "absolute",
         ...(isVertical
           ? {
+              height: "100%",
               left: "50%",
               transform: "translateX(-50%)",
-              height: "100%",
             }
           : {
               top: "50%",
@@ -453,9 +453,9 @@ export const useSlider = ({
         position: "absolute",
         ...(isVertical
           ? {
+              height: `${n}%`,
               left: "50%",
               transform: "translateX(-50%)",
-              height: `${n}%`,
               ...(isReversed ? { top: "0%" } : { bottom: "0%" }),
             }
           : {
@@ -477,7 +477,7 @@ export const useSlider = ({
   )
 
   const getMarkProps: RequiredPropGetter<
-    HTMLProps & { value: number },
+    { value: number } & HTMLProps,
     HTMLProps
   > = useCallback(
     (props, ref = null) => {
@@ -486,8 +486,8 @@ export const useSlider = ({
 
       const style: CSSProperties = {
         ...props.style,
-        position: "absolute",
         pointerEvents: "none",
+        position: "absolute",
         ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
       }
 
@@ -495,10 +495,10 @@ export const useSlider = ({
         ...formControlProps,
         ...props,
         ref,
-        "aria-hidden": true,
-        "data-invalid": dataAttr(props.value < min || max < props.value),
-        "data-highlighted": dataAttr(props.value <= value),
         style,
+        "aria-hidden": true,
+        "data-highlighted": dataAttr(props.value <= value),
+        "data-invalid": dataAttr(props.value < min || max < props.value),
       }
     },
     [isReversed, isVertical, max, min, formControlProps, value],
@@ -507,8 +507,8 @@ export const useSlider = ({
   const getThumbProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
-      let w: string | number = "$thumbSize"
-      let h: string | number = "$thumbSize"
+      let w: number | string = "$thumbSize"
+      let h: number | string = "$thumbSize"
 
       if (thumbSize) {
         w = `${thumbSize.width}px`
@@ -521,8 +521,8 @@ export const useSlider = ({
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
-        userSelect: "none",
         touchAction: "none",
+        userSelect: "none",
         ...(isVertical ? { bottom } : { left }),
       }
 
@@ -532,18 +532,18 @@ export const useSlider = ({
         ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
-        role: "slider",
-        "aria-valuemin": min,
-        "aria-valuemax": max,
-        "aria-valuenow": value,
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
-        "aria-orientation": orientation,
-        "aria-valuetext": ariaValueText ?? value.toString(),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
-        onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
         style,
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        "aria-orientation": orientation,
+        "aria-valuemax": max,
+        "aria-valuemin": min,
+        "aria-valuenow": value,
+        "aria-valuetext": ariaValueText ?? value.toString(),
+        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
+        onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }
     },
     [
@@ -567,20 +567,20 @@ export const useSlider = ({
   )
 
   return {
-    value,
-    isFocused,
     isDragging,
+    isFocused,
     isVertical,
-    stepUp,
-    stepDown,
     reset,
+    stepDown,
     stepTo,
+    stepUp,
+    value,
     getContainerProps,
-    getInputProps,
-    getTrackProps,
     getFilledTrackProps,
+    getInputProps,
     getMarkProps,
     getThumbProps,
+    getTrackProps,
   }
 }
 
@@ -589,11 +589,11 @@ export type ReturnUseSlider = ReturnType<typeof useSlider>
 interface SliderContext
   extends Pick<
       ReturnUseSlider,
-      | "isVertical"
-      | "getTrackProps"
       | "getFilledTrackProps"
       | "getMarkProps"
       | "getThumbProps"
+      | "getTrackProps"
+      | "isVertical"
     >,
     Omit<SliderOptions, "input"> {
   styles: { [key: string]: CSSUIObject }
@@ -606,33 +606,9 @@ const [SliderProvider, useSliderContext] = createContext<SliderContext>({
 
 interface SliderOptions {
   /**
-   * Props for slider input element.
-   */
-  inputProps?: HTMLUIProps<"input">
-  /**
-   * Props for slider track element.
-   */
-  trackProps?: SliderTrackProps
-  /**
-   * Props for slider filled track element.
-   */
-  filledTrackProps?: SliderFilledTrackProps
-  /**
-   * Props for slider thumb element.
-   */
-  thumbProps?: SliderThumbProps
-  /**
-   * The CSS `color` property. Used in `color` of track element.
-   */
-  trackColor?: CSSUIProps["color"]
-  /**
    * The CSS `color` property. Used in `color` of filled track element.
    */
   filledTrackColor?: CSSUIProps["color"]
-  /**
-   * The CSS `height` property. Used in `height` of track element.
-   */
-  trackSize?: CSSUIProps["h"]
   /**
    * The CSS `background` property. Used in `background` of thumb element.
    */
@@ -641,6 +617,30 @@ interface SliderOptions {
    * The CSS `box-size` property. Used in `box-size` of thumb element.
    */
   thumbSize?: CSSUIProps["boxSize"]
+  /**
+   * The CSS `color` property. Used in `color` of track element.
+   */
+  trackColor?: CSSUIProps["color"]
+  /**
+   * The CSS `height` property. Used in `height` of track element.
+   */
+  trackSize?: CSSUIProps["h"]
+  /**
+   * Props for slider filled track element.
+   */
+  filledTrackProps?: SliderFilledTrackProps
+  /**
+   * Props for slider input element.
+   */
+  inputProps?: HTMLUIProps<"input">
+  /**
+   * Props for slider thumb element.
+   */
+  thumbProps?: SliderThumbProps
+  /**
+   * Props for slider track element.
+   */
+  trackProps?: SliderTrackProps
 }
 
 export interface SliderProps
@@ -658,25 +658,25 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   const {
     className,
     children,
-    inputProps,
-    trackProps,
-    filledTrackProps,
-    thumbProps,
-    trackColor,
     filledTrackColor,
-    trackSize,
     thumbColor,
     thumbSize,
+    trackColor,
+    trackSize,
+    filledTrackProps,
+    inputProps,
+    thumbProps,
+    trackProps,
     ...rest
   } = omitThemeProps(mergedProps)
   const {
     isVertical,
     getContainerProps,
-    getInputProps,
-    getTrackProps,
     getFilledTrackProps,
+    getInputProps,
     getMarkProps,
     getThumbProps,
+    getTrackProps,
   } = useSlider({ ...rest, thumbSize: getThumbSize(thumbSize, styles) })
 
   const css: CSSUIObject = { ...styles.container }
@@ -695,20 +695,20 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   return (
     <SliderProvider
       value={{
+        filledTrackColor,
         isVertical,
-        getTrackProps,
-        getFilledTrackProps,
-        getMarkProps,
-        getThumbProps,
-        trackProps,
+        styles,
+        thumbColor,
+        thumbSize,
         trackColor,
         trackSize,
         filledTrackProps,
-        filledTrackColor,
+        getFilledTrackProps,
+        getMarkProps,
+        getThumbProps,
+        getTrackProps,
         thumbProps,
-        thumbColor,
-        thumbSize,
-        styles,
+        trackProps,
       }}
     >
       <ui.div
@@ -738,12 +738,12 @@ export interface SliderTrackProps
 export const SliderTrack = forwardRef<SliderTrackProps, "div">(
   ({ className, children, filledTrackProps, ...rest }, ref) => {
     const {
+      isVertical,
       styles,
-      trackProps,
       trackColor,
       trackSize,
-      isVertical,
       getTrackProps,
+      trackProps,
     } = useSliderContext()
 
     const css: CSSUIObject = { ...styles.track }
@@ -779,7 +779,7 @@ export interface SliderFilledTrackProps extends HTMLUIProps {}
 
 export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
   ({ className, ...rest }, ref) => {
-    const { styles, filledTrackProps, filledTrackColor, getFilledTrackProps } =
+    const { filledTrackColor, styles, filledTrackProps, getFilledTrackProps } =
       useSliderContext()
 
     const css: CSSUIObject = { ...styles.filledTrack }
@@ -813,9 +813,9 @@ export const SliderMark = forwardRef<SliderMarkProps, "div">(
     const { styles, getMarkProps } = useSliderContext()
 
     const css: CSSUIObject = {
+      alignItems: "center",
       display: "inline-flex",
       justifyContent: "center",
-      alignItems: "center",
       ...styles.mark,
     }
 
@@ -836,7 +836,7 @@ export interface SliderThumbProps extends HTMLUIProps {}
 
 export const SliderThumb = forwardRef<SliderThumbProps, "div">(
   ({ className, ...rest }, ref) => {
-    const { styles, thumbProps, thumbColor, thumbSize, getThumbProps } =
+    const { styles, thumbColor, thumbSize, getThumbProps, thumbProps } =
       useSliderContext()
 
     const css: CSSUIObject = { ...styles.thumb }

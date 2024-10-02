@@ -14,11 +14,11 @@ describe("useClipboard", () => {
 
     Object.defineProperty(window, "clipboardData", {
       value: {
-        setData: vi.fn((data: string) => {
-          clipboardData = data
-        }),
         clearData: vi.fn(() => {
           clipboardData = ""
+        }),
+        setData: vi.fn((data: string) => {
+          clipboardData = data
         }),
       },
       writable: true,
@@ -26,10 +26,10 @@ describe("useClipboard", () => {
 
     Object.defineProperty(global.navigator, "clipboard", {
       value: {
+        readText: vi.fn(() => clipboardData),
         writeText: vi.fn((data: string) => {
           clipboardData = data
         }),
-        readText: vi.fn(() => clipboardData),
       },
       writable: true,
     })

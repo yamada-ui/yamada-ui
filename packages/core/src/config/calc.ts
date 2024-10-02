@@ -1,12 +1,12 @@
-import { isNumeric } from "@yamada-ui/utils"
 import type { ThemeToken } from "../theme"
+import type { Transform } from "./utils"
+import { isNumeric } from "@yamada-ui/utils"
 import {
   getCSSFunction,
   globalValues,
   isCSSFunction,
   splitValues,
 } from "./utils"
-import type { Transform } from "./utils"
 
 const OPERATORS = ["+", "-", "*", "/"]
 

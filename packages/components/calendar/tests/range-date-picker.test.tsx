@@ -17,9 +17,9 @@ describe("<RangeDatePicker />", () => {
     test("should render dates of range", async () => {
       const { container } = render(
         <RangeDatePicker
+          defaultValue={[new Date(new Date().setDate(1))]}
           placeholder="basic"
           today
-          defaultValue={[new Date(new Date().setDate(1))]}
         />,
       )
       const selectDateFrom = new Date(new Date().setDate(7))

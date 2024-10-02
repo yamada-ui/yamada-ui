@@ -1,7 +1,7 @@
-export { Alert, AlertIcon, AlertTitle, AlertDescription } from "./alert"
+export { Alert, AlertDescription, AlertIcon, AlertTitle } from "./alert"
 export type {
-  AlertProps,
-  AlertIconProps,
-  AlertTitleProps,
   AlertDescriptionProps,
+  AlertIconProps,
+  AlertProps,
+  AlertTitleProps,
 } from "./alert"

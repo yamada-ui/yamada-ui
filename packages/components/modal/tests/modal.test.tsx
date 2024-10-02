@@ -1,6 +1,6 @@
+import type { ModalProps } from "../src"
 import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
-import type { ModalProps } from "../src"
 import {
   Modal,
   ModalBody,
@@ -27,8 +27,8 @@ describe("<Modal />", () => {
         <Modal
           isOpen={isOpen}
           placement={placement}
-          onClose={() => setIsOpen(false)}
           aria-labelledby={modalHeaderId}
+          onClose={() => setIsOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
 
@@ -52,15 +52,15 @@ describe("<Modal />", () => {
           Open Modal
         </button>
         <Modal
-          data-testid="Modal"
           isOpen={isOpen}
+          data-testid="Modal"
           onClose={() => setIsOpen(false)}
         >
           <ModalCloseButton data-testid="ModalCloseButton" />
           <ModalOverlay
-            data-testid="ModalOverlay"
-            bg="blackAlpha.300"
             backdropFilter="blur(10px)"
+            bg="blackAlpha.300"
+            data-testid="ModalOverlay"
           />
           <ModalHeader data-testid="ModalHeader">Modal Header</ModalHeader>
 
@@ -119,8 +119,8 @@ describe("<Modal />", () => {
 
           <Modal
             isOpen={isPrimaryOpen}
-            onClose={() => setIsPrimaryOpen(false)}
             aria-labelledby={primaryModalHeaderId}
+            onClose={() => setIsPrimaryOpen(false)}
           >
             <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
 
@@ -137,9 +137,9 @@ describe("<Modal />", () => {
 
             <Modal
               isOpen={isSecondaryOpen}
-              onClose={() => setIsSecondaryOpen(false)}
               size="sm"
               aria-labelledby={secondaryModalHeaderId}
+              onClose={() => setIsSecondaryOpen(false)}
             >
               <ModalHeader id={secondaryModalHeaderId}>
                 Secondary Modal
@@ -185,7 +185,7 @@ describe("<Modal />", () => {
   })
 
   test("Modal renders correctly when clicking modal close button", async () => {
-    const { findByRole, queryByTestId, findByTestId, user } = render(
+    const { findByRole, findByTestId, queryByTestId, user } = render(
       <ModalCloseExample />,
     )
 
@@ -200,7 +200,7 @@ describe("<Modal />", () => {
   })
 
   test("Modal renders correctly when clicking overlay", async () => {
-    const { findByRole, queryByTestId, findByTestId, user } = render(
+    const { findByRole, findByTestId, queryByTestId, user } = render(
       <ModalCloseExample />,
     )
     const openButton = await findByRole("button", { name: "Open Modal" })
@@ -214,7 +214,7 @@ describe("<Modal />", () => {
   })
 
   test("Escape keyDown should work correctly", async () => {
-    const { getByTestId, findByRole, queryByTestId, findByTestId, user } =
+    const { findByRole, findByTestId, getByTestId, queryByTestId, user } =
       render(<ModalCloseExample />)
     const openButton = await findByRole("button", { name: "Open Modal" })
     await user.click(openButton)
@@ -241,8 +241,8 @@ describe("<Modal />", () => {
     })
     const modalContainer = modal.parentElement
     expect(modalContainer).toHaveStyle({
-      "justify-content": "flex-start",
       "align-items": "center",
+      "justify-content": "flex-start",
     })
   })
 
@@ -261,8 +261,8 @@ describe("<Modal />", () => {
     })
     const modalContainer = modal.parentElement
     expect(modalContainer).toHaveStyle({
-      "justify-content": "flex-end",
       "align-items": "center",
+      "justify-content": "flex-end",
     })
   })
 

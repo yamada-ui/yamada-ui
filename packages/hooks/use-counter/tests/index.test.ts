@@ -1,4 +1,4 @@
-import { renderHook, act } from "@yamada-ui/test"
+import { act, renderHook } from "@yamada-ui/test"
 import { useCounter } from "../src"
 
 describe("useCounter", () => {
@@ -46,7 +46,7 @@ describe("useCounter", () => {
 
   test("min and max constraints", async () => {
     const { result } = renderHook(() =>
-      useCounter({ defaultValue: 5, min: 0, max: 10 }),
+      useCounter({ defaultValue: 5, max: 10, min: 0 }),
     )
 
     await act(async () => {
@@ -111,7 +111,7 @@ describe("useCounter", () => {
 
   test("when keepWithinRange is false", async () => {
     const { result } = renderHook(() =>
-      useCounter({ defaultValue: 5, max: 10, keepWithinRange: false }),
+      useCounter({ defaultValue: 5, keepWithinRange: false, max: 10 }),
     )
 
     await act(async () => {
@@ -122,7 +122,7 @@ describe("useCounter", () => {
 
   test("cast functionality", async () => {
     const { result } = renderHook(() =>
-      useCounter({ defaultValue: 5, step: 1, precision: 2 }),
+      useCounter({ defaultValue: 5, precision: 2, step: 1 }),
     )
 
     await act(async () => {

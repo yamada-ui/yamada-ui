@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Wrap, Box } from "@yamada-ui/react"
+import { Box, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Wrap>
 
 const meta: Meta<typeof Wrap> = {
-  title: "Components / Layouts / Wrap",
   component: Wrap,
+  title: "Components / Layouts / Wrap",
 }
 
 export default meta
@@ -13,76 +13,76 @@ export default meta
 export const basic: Story = () => {
   return (
     <Wrap gap="md">
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
     </Wrap>

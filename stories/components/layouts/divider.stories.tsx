@@ -4,8 +4,8 @@ import { Divider, Flex } from "@yamada-ui/react"
 type Story = StoryFn<typeof Divider>
 
 const meta: Meta<typeof Divider> = {
-  title: "Components / Layouts / Divider",
   component: Divider,
+  title: "Components / Layouts / Divider",
 }
 
 export default meta
@@ -13,11 +13,11 @@ export default meta
 export const horizontal: Story = () => {
   return (
     <>
-      <Divider w="lg" orientation="horizontal" variant="solid" />
+      <Divider orientation="horizontal" variant="solid" w="lg" />
 
-      <Divider w="lg" orientation="horizontal" variant="dashed" />
+      <Divider orientation="horizontal" variant="dashed" w="lg" />
 
-      <Divider w="lg" orientation="horizontal" variant="dotted" />
+      <Divider orientation="horizontal" variant="dotted" w="lg" />
     </>
   )
 }

@@ -1,18 +1,18 @@
-import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import type { AnyPointerEvent, Point, PointerEventInfo } from "@yamada-ui/utils"
+import type { RefObject } from "react"
+import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import {
   addPointerEvent,
   getEventPoint,
   isMultiTouchEvent,
 } from "@yamada-ui/utils"
 import sync, { cancelSync, getFrameData } from "framesync"
-import type { RefObject } from "react"
 import { useEffect, useRef } from "react"
 
 interface PanEventInfo {
-  point: Point
   delta: Point
   offset: Point
+  point: Point
   velocity: Point
 }
 
@@ -25,19 +25,19 @@ interface TimestampedPoint extends Point {
 type PanEventHistory = TimestampedPoint[]
 
 interface PanEventHandlers {
-  onSessionStart: PanEventHandler
-  onSessionEnd: PanEventHandler
-  onStart: PanEventHandler
-  onMove: PanEventHandler
   onEnd: PanEventHandler
+  onMove: PanEventHandler
+  onSessionEnd: PanEventHandler
+  onSessionStart: PanEventHandler
+  onStart: PanEventHandler
 }
 
 const subtract = (a: Point, b: Point) => ({ x: a.x - b.x, y: a.y - b.y })
 
 const getPanInfo = (info: PointerEventInfo, history: PanEventHistory) => ({
-  point: info.point,
   delta: subtract(info.point, history[history.length - 1]),
   offset: subtract(info.point, history[0]),
+  point: info.point,
   velocity: getVelocity(history, 0.1),
 })
 
@@ -47,7 +47,7 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
   if (history.length < 2) return { x: 0, y: 0 }
 
   let i = history.length - 1
-  let timestampedPoint: TimestampedPoint | null = null
+  let timestampedPoint: null | TimestampedPoint = null
 
   const lastPoint = history[history.length - 1]
 
@@ -92,7 +92,7 @@ const distance1D = (a: number, b: number) => Math.abs(a - b)
 const isPoint = (point: any): point is { x: number; y: number } =>
   "x" in point && "y" in point
 
-const distance = <Y extends Point | number>(a: Y, b: Y) => {
+const distance = <Y extends number | Point>(a: Y, b: Y) => {
   if (typeof a === "number" && typeof b === "number") return distance1D(a, b)
 
   if (isPoint(a) && isPoint(b)) {
@@ -115,13 +115,13 @@ const panEvent = (
   const win = ev.view ?? window
   const info = { point: getEventPoint(ev) }
   const { timestamp } = getFrameData()
-  const { onSessionStart, onStart, onMove, onEnd, onSessionEnd } = handlers
+  const { onEnd, onMove, onSessionEnd, onSessionStart, onStart } = handlers
 
   const history: PanEventHistory = [{ ...info.point, timestamp }]
 
   let startEvent: AnyPointerEvent | null = null
   let lastEvent: AnyPointerEvent | null = null
-  let lastEventInfo: PointerEventInfo | null = null
+  let lastEventInfo: null | PointerEventInfo = null
 
   ev.stopPropagation()
   ev.preventDefault()
@@ -189,48 +189,48 @@ const panEvent = (
   }
 
   return {
-    updateHandlers,
     end,
+    updateHandlers,
   }
 }
 
 type ReturnPanEvent = ReturnType<typeof panEvent>
 
 export interface UsePanEventProps {
-  onMove?: PanEventHandler
-  onStart?: PanEventHandler
-  onEnd?: PanEventHandler
-  onSessionStart?: PanEventHandler
-  onSessionEnd?: PanEventHandler
   threshold?: number
+  onEnd?: PanEventHandler
+  onMove?: PanEventHandler
+  onSessionEnd?: PanEventHandler
+  onSessionStart?: PanEventHandler
+  onStart?: PanEventHandler
 }
 
 export const usePanEvent = (
   ref: RefObject<HTMLElement>,
   {
-    onMove,
-    onStart,
-    onEnd,
-    onSessionStart,
-    onSessionEnd,
     threshold,
+    onEnd,
+    onMove,
+    onSessionEnd,
+    onSessionStart,
+    onStart,
   }: UsePanEventProps,
 ) => {
   const hasPanEvents =
     !!onMove || !!onStart || !!onEnd || !!onSessionStart || !!onSessionEnd
 
-  const panSession = useRef<ReturnPanEvent | null>(null)
+  const panSession = useRef<null | ReturnPanEvent>(null)
 
   const handlersRef = useLatestRef<Partial<PanEventHandlers>>({
-    onSessionStart,
-    onSessionEnd,
-    onStart,
-    onMove,
     onEnd: (ev, info) => {
       panSession.current = null
 
       onEnd?.(ev, info)
     },
+    onMove,
+    onSessionEnd,
+    onSessionStart,
+    onStart,
   })
 
   useEffect(() => {

@@ -1,14 +1,14 @@
 import type { UIProps } from "@yamada-ui/react"
 import type { ManipulateType } from "dayjs"
-import dayjs from "dayjs"
 import type {
   InsightPeriod,
   Insights,
   UserInsight,
   UserInsightScore,
 } from "insights"
-import { CONSTANT } from "constant"
 import type { Locale } from "utils/i18n"
+import { CONSTANT } from "constant"
+import dayjs from "dayjs"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
 export const INSIGHT_MAX_DATE = dayjs().tz().subtract(1, "d").toDate()
@@ -40,10 +40,10 @@ export const INSIGHT_PERIOD_SUGGEST = [
 export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
 export const INSIGHT_SCORE_COLORS: { [key: string]: UIProps["color"] } = {
-  pullRequests: [`blue.500`, `blue.400`],
-  issues: [`red.500`, `red.400`],
   approved: [`green.500`, `green.400`],
   comments: [`orange.500`, `orange.400`],
+  issues: [`red.500`, `red.400`],
+  pullRequests: [`blue.500`, `blue.400`],
 }
 
 export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
@@ -75,7 +75,7 @@ export const getSummarize = (minDate: Date, maxDate: Date) => {
 }
 
 export const labelFormatter =
-  (value: string, { summarize, end }: InsightPeriod) =>
+  (value: string, { end, summarize }: InsightPeriod) =>
   (locale: Locale) => {
     if (!dayjs(value).isValid()) return value
     if (INSIGHT_USER_IDS.includes(value)) return value
@@ -121,10 +121,10 @@ export const xAxisTickFormatter =
   }
 
 export const DEFAULT_SCORE: UserInsightScore = {
+  approved: 0,
   comments: 0,
   issues: 0,
   pullRequests: 0,
-  approved: 0,
   total: 0,
 }
 
@@ -140,7 +140,7 @@ export const getInsightTotalScore = (
     Object.entries(users).map(([user, data]) => {
       if (!pickUsers.includes(user)) return
 
-      const { comments, issues, pullRequests, approved, total } =
+      const { approved, comments, issues, pullRequests, total } =
         getInsightScore(data)
 
       score.total += total
@@ -154,12 +154,12 @@ export const getInsightTotalScore = (
   return score
 }
 
-export const getInsightScore = (data: UserInsight | null) => {
+export const getInsightScore = (data: null | UserInsight) => {
   const score: UserInsightScore = JSON.parse(JSON.stringify(DEFAULT_SCORE))
 
   if (!data) return score
 
-  const { comments, reviews, issues, pullRequests, approved } = data
+  const { approved, comments, issues, pullRequests, reviews } = data
 
   score.comments = (comments?.length ?? 0) + (reviews?.length ?? 0)
   score.issues = issues?.length ?? 0
@@ -187,7 +187,7 @@ export const randomIndex = (value: string, max: number) => {
 }
 
 export const getTrend = (currentTotal: number, prevTotal: number) => {
-  if (currentTotal === prevTotal) return { value: "0", colorScheme: "neutral" }
+  if (currentTotal === prevTotal) return { colorScheme: "neutral", value: "0" }
 
   if (prevTotal === 0) return undefined
 
@@ -197,15 +197,15 @@ export const getTrend = (currentTotal: number, prevTotal: number) => {
     trend /= 1000
 
     if (trend >= 0) {
-      return { value: `+${trend}K`, colorScheme: "success" }
+      return { colorScheme: "success", value: `+${trend}K` }
     } else {
-      return { value: `${trend}K`, colorScheme: "danger" }
+      return { colorScheme: "danger", value: `${trend}K` }
     }
   } else {
     if (trend >= 0) {
-      return { value: `+${trend}`, colorScheme: "success" }
+      return { colorScheme: "success", value: `+${trend}` }
     } else {
-      return { value: `${trend}`, colorScheme: "danger" }
+      return { colorScheme: "danger", value: `${trend}` }
     }
   }
 }

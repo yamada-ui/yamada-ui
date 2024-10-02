@@ -1,16 +1,16 @@
 import {
-  isNumber,
-  isNotNumber,
-  isNumeric,
-  isString,
-  isUndefined,
-  isNull,
-  isObject,
+  is,
   isArray,
   isEmpty,
   isFunction,
+  isNotNumber,
+  isNull,
+  isNumber,
+  isNumeric,
+  isObject,
+  isString,
+  isUndefined,
   isUnit,
-  is,
 } from "../src"
 
 describe("Assertion", () => {

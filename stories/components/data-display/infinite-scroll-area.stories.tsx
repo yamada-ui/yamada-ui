@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef, useState } from "react"
 import {
   Button,
   Card,
@@ -11,12 +10,13 @@ import {
   Loading,
   Text,
 } from "@yamada-ui/react"
+import { useRef, useState } from "react"
 
 type Story = StoryFn<typeof InfiniteScrollArea>
 
 const meta: Meta<typeof InfiniteScrollArea> = {
-  title: "Components / Data Display / InfiniteScrollArea",
   component: InfiniteScrollArea,
+  title: "Components / Data Display / InfiniteScrollArea",
 }
 
 export default meta
@@ -31,14 +31,14 @@ export const basic: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -69,23 +69,23 @@ export const withRoot: Story = () => {
     <>
       <Container
         ref={rootRef}
-        maxH="xl"
         borderWidth="1px"
-        rounded="md"
-        p="md"
+        maxH="xl"
         overflowY="auto"
+        p="md"
+        rounded="md"
       >
         <InfiniteScrollArea
-          rootRef={rootRef}
+          loading={<Loading fontSize="2xl" />}
           resetRef={resetRef}
-          onLoad={async ({ index, finish }) => {
+          rootRef={rootRef}
+          onLoad={async ({ finish, index }) => {
             console.log("load", index)
 
             setCount((prev) => prev + 50)
 
             if (index >= 5) finish()
           }}
-          loading={<Loading fontSize="2xl" />}
         >
           {Array(count)
             .fill(0)
@@ -116,15 +116,15 @@ export const withRootMargin: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      rootMargin="300px 0px 0px 0px"
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      rootMargin="300px 0px 0px 0px"
     >
       {Array(count)
         .fill(0)
@@ -151,15 +151,15 @@ export const withThreshold: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      threshold={1}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      threshold={1}
     >
       {Array(count)
         .fill(0)
@@ -187,7 +187,8 @@ export const withInitialLoad: Story = () => {
   return (
     <InfiniteScrollArea
       initialLoad
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         await wait(1000)
@@ -196,7 +197,6 @@ export const withInitialLoad: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -223,17 +223,17 @@ export const withOverflow: Story = () => {
 
   return (
     <InfiniteScrollArea
-      maxH="xl"
       borderWidth="1px"
-      rounded="md"
-      p="md"
+      loading={<Loading fontSize="2xl" />}
+      maxH="xl"
       overflowY="auto"
-      onLoad={async ({ index, finish }) => {
+      p="md"
+      rounded="md"
+      onLoad={async ({ finish, index }) => {
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -260,17 +260,17 @@ export const withOrientation: Story = () => {
 
   return (
     <InfiniteScrollArea
-      orientation="horizontal"
       borderWidth="1px"
-      rounded="md"
-      p="md"
+      loading={<Loading fontSize="2xl" />}
+      orientation="horizontal"
       overflowX="auto"
-      onLoad={async ({ index, finish }) => {
+      p="md"
+      rounded="md"
+      onLoad={async ({ finish, index }) => {
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -297,15 +297,15 @@ export const withStartIndex: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      startIndex={3}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      startIndex={3}
     >
       {Array(count)
         .fill(0)
@@ -332,15 +332,15 @@ export const withFinish: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      finish={<>Finished</>}
+      loading={<Loading fontSize="2xl" />}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      finish={<>Finished</>}
     >
       {Array(count)
         .fill(0)
@@ -367,15 +367,15 @@ export const isReverse: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      isReverse
+      loading={<Loading fontSize="2xl" />}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      isReverse
     >
       {Array(count)
         .fill(0)
@@ -404,20 +404,20 @@ export const isDisabled: Story = () => {
   return (
     <>
       <InfiniteScrollArea
-        maxH="xl"
         borderWidth="1px"
-        rounded="md"
-        p="md"
+        isDisabled={isDisabled}
+        loading={<Loading fontSize="2xl" />}
+        maxH="xl"
         overflowY="auto"
-        onLoad={async ({ index, finish }) => {
+        p="md"
+        rounded="md"
+        onLoad={async ({ finish, index }) => {
           console.log("load", index)
 
           setCount((prev) => prev + 50)
 
           if (index >= 5) finish()
         }}
-        loading={<Loading fontSize="2xl" />}
-        isDisabled={isDisabled}
       >
         {Array(count)
           .fill(0)
@@ -454,20 +454,20 @@ export const useReset: Story = () => {
   return (
     <>
       <InfiniteScrollArea
-        maxH="xl"
         borderWidth="1px"
-        rounded="md"
-        p="md"
+        loading={<Loading fontSize="2xl" />}
+        maxH="xl"
         overflowY="auto"
-        onLoad={async ({ index, finish }) => {
+        p="md"
+        resetRef={resetRef}
+        rounded="md"
+        onLoad={async ({ finish, index }) => {
           console.log("load", index)
 
           setCount((prev) => prev + 50)
 
           if (index >= 5) finish()
         }}
-        loading={<Loading fontSize="2xl" />}
-        resetRef={resetRef}
       >
         {Array(count)
           .fill(0)
@@ -497,7 +497,9 @@ export const customTrigger: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<Loading fontSize="2xl" />}
+      triggerProps={{ bg: "primary.50", p: "md", rounded: "md" }}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         await wait(5000)
@@ -506,8 +508,6 @@ export const customTrigger: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading fontSize="2xl" />}
-      triggerProps={{ bg: "primary.50", p: "md", rounded: "md" }}
     >
       {Array(count)
         .fill(0)
@@ -534,14 +534,14 @@ export const customLoading: Story = () => {
 
   return (
     <InfiniteScrollArea
-      onLoad={async ({ index, finish }) => {
+      loading={<>Loading…</>}
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
       }}
-      loading={<>Loading…</>}
     >
       {Array(count)
         .fill(0)

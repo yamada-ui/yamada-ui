@@ -1,20 +1,20 @@
-import { realpathSync } from "fs"
-import { Script } from "vm"
 import { build } from "esbuild"
+import { realpathSync } from "fs"
 import nodeEval from "node-eval"
+import { Script } from "vm"
 
 export const getModule = async (file: string, cwd: string) => {
   const result = await build({
-    platform: "node",
+    absWorkingDir: cwd,
+    bundle: true,
+    entryPoints: [file],
     format: "cjs",
     mainFields: ["module", "main"],
-    absWorkingDir: cwd,
-    entryPoints: [file],
-    outfile: "out.js",
-    write: false,
-    bundle: true,
-    sourcemap: false,
     metafile: true,
+    outfile: "out.js",
+    platform: "node",
+    sourcemap: false,
+    write: false,
   })
   const { text: code } = result.outputFiles[0]
   const dependencies = result.metafile
@@ -31,10 +31,10 @@ export const getModule = async (file: string, cwd: string) => {
 
     script.runInThisContext()(mod.exports, require, mod)
 
-    return { mod, code, dependencies }
+    return { code, dependencies, mod }
   } catch {
     const mod = nodeEval(code)
 
-    return { mod, code, dependencies }
+    return { code, dependencies, mod }
   }
 }

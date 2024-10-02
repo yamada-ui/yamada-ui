@@ -1,16 +1,16 @@
-import path from "path"
 import type { RequestError } from "@octokit/request-error"
-import { Octokit } from "@octokit/rest"
-import { config } from "dotenv"
 import type { Options } from "prettier"
-import { format, resolveConfig } from "prettier"
+import { Octokit } from "@octokit/rest"
 import { isArray } from "@yamada-ui/react"
+import { config } from "dotenv"
+import path from "path"
+import { format, resolveConfig } from "prettier"
 
 const COMMON_PARAMS = {
-  owner: "yamada-ui",
-  repo: "yamada-data",
-  path: "",
   ref: "main",
+  owner: "yamada-ui",
+  path: "",
+  repo: "yamada-data",
 }
 
 config()
@@ -33,10 +33,10 @@ export const prettier = async (content: string, options?: Options) => {
   }
 }
 
-export const toCamelCase = (value: string & {}) =>
+export const toCamelCase = (value: {} & string) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
-export const toKebabCase = (value: string & {}) =>
+export const toKebabCase = (value: {} & string) =>
   value
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
     .toLowerCase()
@@ -51,7 +51,7 @@ export const recursiveOctokit = async <T extends any = void>(
   try {
     return await callback()
   } catch (e) {
-    const { status, response, message } = e as RequestError
+    const { message, response, status } = e as RequestError
 
     const isForbidden = status === 403
     const isRateLimitExceeded =

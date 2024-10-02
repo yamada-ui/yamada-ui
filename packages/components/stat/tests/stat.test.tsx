@@ -25,11 +25,11 @@ describe("<Stat />", () => {
   test("should change to decrease symbol", () => {
     render(
       <Stat
-        data-testid="stat-icon"
+        helperMessage="21% more than last month"
+        icon="decrease"
         label="Total Page Views"
         number="1,993,818"
-        icon="decrease"
-        helperMessage="21% more than last month"
+        data-testid="stat-icon"
       />,
     )
     expect(

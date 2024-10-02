@@ -2,7 +2,7 @@ import { isMac } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
 
 type Modality = "keyboard" | "pointer" | "virtual"
-type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent
+type HandlerEvent = FocusEvent | KeyboardEvent | MouseEvent | PointerEvent
 type Handler = (modality: Modality, e: HandlerEvent | null) => void
 type FocusVisibleCallback = (isFocusVisible: boolean) => void
 
@@ -37,7 +37,7 @@ const onKeyboard = (ev: KeyboardEvent) => {
   }
 }
 
-const onPointer = (ev: PointerEvent | MouseEvent) => {
+const onPointer = (ev: MouseEvent | PointerEvent) => {
   modality = "pointer"
 
   if (
@@ -153,7 +153,7 @@ export const useFocusVisible = (options?: TrackFocusVisibleOptions) => {
 
   return {
     focusVisible: focusVisible && focus,
-    onFocus: () => setFocus(true),
     onBlur: () => setFocus(false),
+    onFocus: () => setFocus(true),
   }
 }

@@ -156,9 +156,9 @@ describe("<Calendar />", () => {
     test("should change selected date", async () => {
       const { container } = render(
         <Calendar
-          variant="solid"
-          today
           defaultValue={new Date(new Date().setDate(1))}
+          today
+          variant="solid"
         />,
       )
       const selectDate = new Date(new Date().setDate(7))
@@ -173,9 +173,9 @@ describe("<Calendar />", () => {
     test("should change selected month", async () => {
       const { container } = render(
         <Calendar
-          variant="subtle"
-          today
           defaultValue={new Date(new Date().setDate(1))}
+          today
+          variant="subtle"
         />,
       )
 
@@ -272,8 +272,8 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar
             defaultValue={new Date(new Date(2024, 2))}
-            minDate={new Date(new Date(2024, 2).setDate(1))}
             maxDate={new Date(new Date(2024, 2).setDate(18))}
+            minDate={new Date(new Date(2024, 2).setDate(1))}
           />,
         )
         const minDateUnder = new Date(new Date(2024, 2).setDate(0))
@@ -422,7 +422,7 @@ describe("<Calendar />", () => {
 
       test("should render with dateFormat 'YYYY年 MMMM'", () => {
         const { container } = render(
-          <Calendar locale="ja" dateFormat="YYYY年 MMMM" />,
+          <Calendar dateFormat="YYYY年 MMMM" locale="ja" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -435,7 +435,7 @@ describe("<Calendar />", () => {
 
       test("should render with yearFormat 'YYYY年'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="month" yearFormat="YYYY年" />,
+          <Calendar defaultType="month" locale="ja" yearFormat="YYYY年" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -446,7 +446,7 @@ describe("<Calendar />", () => {
 
       test("should render with monthFormat 'MM'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="month" monthFormat="MM" />,
+          <Calendar defaultType="month" locale="ja" monthFormat="MM" />,
         )
         const headerLabel = container.querySelector(
           ".ui-calendar__month-list__button",
@@ -456,7 +456,7 @@ describe("<Calendar />", () => {
 
       test("should render with yearFormat 'YY'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="year" yearFormat="YY" />,
+          <Calendar defaultType="year" locale="ja" yearFormat="YY" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -504,9 +504,9 @@ describe("<Calendar />", () => {
         (number) => {
           const { getByTestId } = render(
             <Calendar
-              data-testid="Calender"
               amountOfMonths={number}
               disableOutsideDays
+              data-testid="Calender"
             />,
           )
           const children = getByTestId("Calender").children
@@ -520,8 +520,8 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar
             amountOfMonths={2}
-            disableOutsideDays
             defaultMonth={new Date("2024-01-18")}
+            disableOutsideDays
           />,
         )
         const headerLabelBtn = container.querySelector(
@@ -551,19 +551,19 @@ describe("<Calendar />", () => {
 
       test.each([
         {
-          paginateBy: 1,
-          expectedPrev: "December 2023",
           expectedNext: "February 2024",
+          expectedPrev: "December 2023",
+          paginateBy: 1,
         },
       ])(
         "should render with paginateBy $paginateBy",
-        ({ paginateBy, expectedPrev, expectedNext }) => {
+        ({ expectedNext, expectedPrev, paginateBy }) => {
           const { container } = render(
             <Calendar
               amountOfMonths={2}
+              defaultMonth={new Date("2024-01-18")}
               disableOutsideDays
               paginateBy={paginateBy}
-              defaultMonth={new Date("2024-01-18")}
             />,
           )
           const headerLabelBtn = container.querySelector(

@@ -1,16 +1,10 @@
-import type { HTMLUIProps, CSSUIObject, AnimationStyle } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { AnimationStyle, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { cx } from "@yamada-ui/utils"
 import { useAvatarContext } from "./avatar"
 
 type AvatarBadgeOptions = {
-  /**
-   * The placement of the badge.
-   *
-   * @default 'bottom-end'
-   */
-  placement?: "top-start" | "top-end" | "bottom-start" | "bottom-end"
   /**
    * If `true`, make an element scale and fade like a radar ping or ripple of water.
    *
@@ -24,12 +18,6 @@ type AvatarBadgeOptions = {
    */
   pingColor?: HTMLUIProps<"div">["backgroundColor"]
   /**
-   * It is used for the scale of the ping animation.
-   *
-   * @default 1.8
-   */
-  pingScale?: number
-  /**
    * It is used for the count of the ping animation.
    *
    * @default "infinite"
@@ -41,33 +29,45 @@ type AvatarBadgeOptions = {
    * @default "1.4s"
    */
   pingDuration?: AnimationStyle["direction"]
+  /**
+   * It is used for the scale of the ping animation.
+   *
+   * @default 1.8
+   */
+  pingScale?: number
+  /**
+   * The placement of the badge.
+   *
+   * @default 'bottom-end'
+   */
+  placement?: "bottom-end" | "bottom-start" | "top-end" | "top-start"
 }
 
-export type AvatarBadgeProps = HTMLUIProps<"div"> & AvatarBadgeOptions
+export type AvatarBadgeProps = AvatarBadgeOptions & HTMLUIProps<"div">
 
 const placementStyles: Record<
-  "top-start" | "top-end" | "bottom-start" | "bottom-end",
+  "bottom-end" | "bottom-start" | "top-end" | "top-start",
   CSSUIObject
 > = {
-  "top-start": {
-    top: "0",
-    insetStart: "0",
-    transform: "translate(-25%, -25%)",
-  },
-  "top-end": {
-    top: "0",
+  "bottom-end": {
+    bottom: "0",
     insetEnd: "0",
-    transform: "translate(25%, -25%)",
+    transform: "translate(25%, 25%)",
   },
   "bottom-start": {
     bottom: "0",
     insetStart: "0",
     transform: "translate(-25%, 25%)",
   },
-  "bottom-end": {
-    bottom: "0",
+  "top-end": {
     insetEnd: "0",
-    transform: "translate(25%, 25%)",
+    top: "0",
+    transform: "translate(25%, -25%)",
+  },
+  "top-start": {
+    insetStart: "0",
+    top: "0",
+    transform: "translate(-25%, -25%)",
   },
 }
 
@@ -76,36 +76,36 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
     {
       className,
       boxSize = "1em",
-      placement = "bottom-end",
+      children,
       ping,
       pingColor = ["blackAlpha.400", "whiteAlpha.500"],
-      pingDuration = "1.4s",
       pingCount = "infinite",
+      pingDuration = "1.4s",
       pingScale = 1.8,
-      children,
+      placement = "bottom-end",
       ...rest
     },
     ref,
   ) => {
     const styles = useAvatarContext()
     const animation = useAnimation({
+      duration: pingDuration,
+      fillMode: "forwards",
+      iterationCount: pingCount,
       keyframes: {
         "75%, 100%": {
-          transform: `scale(${pingScale})`,
           opacity: 0,
+          transform: `scale(${pingScale})`,
         },
       },
-      fillMode: "forwards",
-      duration: pingDuration,
       timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
-      iterationCount: pingCount,
     })
 
     const css: CSSUIObject = {
-      position: "absolute",
+      alignItems: "center",
       display: "flex",
       justifyContent: "center",
-      alignItems: "center",
+      position: "absolute",
       ...placementStyles[placement],
       ...styles.badge,
     }
@@ -123,15 +123,15 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
         {ping ? (
           <ui.div
             className="ui-avatar__badge__ping"
-            __css={{
-              position: "absolute",
-              boxSize: "100%",
-              rounded: "fallback(full, 9999px)",
-              opacity: 0.75,
-              zIndex: -1,
-              bg: pingColor,
-            }}
             animation={animation}
+            __css={{
+              bg: pingColor,
+              boxSize: "100%",
+              opacity: 0.75,
+              position: "absolute",
+              rounded: "fallback(full, 9999px)",
+              zIndex: -1,
+            }}
           />
         ) : null}
       </ui.div>

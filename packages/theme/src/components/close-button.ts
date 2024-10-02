@@ -4,14 +4,14 @@ import { Button } from "./button"
 
 export const CloseButton: ComponentStyle<"CloseButton"> = mergeStyle(Button, {
   baseStyle: {
-    _hover: {
-      bg: ["blackAlpha.100", "whiteAlpha.100"],
-    },
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
     },
     _focusVisible: {
       boxShadow: "outline",
+    },
+    _hover: {
+      bg: ["blackAlpha.100", "whiteAlpha.100"],
     },
   },
 

@@ -1,15 +1,15 @@
 import { useWindowEvent } from "@yamada-ui/use-window-event"
 import { isFunction } from "@yamada-ui/utils"
-import { useState, useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export type StorageType = "localStorage" | "sessionStorage"
 
 export interface StorageProps<T> {
   key: string
   defaultValue?: T
+  deserialize?: (value: string | undefined) => T
   getInitialValueInEffect?: boolean
   serialize?: (value: T) => string
-  deserialize?: (value: string | undefined) => T
 }
 
 const serializeJSON = <T>(value: T, name: string) => {
@@ -37,8 +37,8 @@ export const createStorage = <T>(type: StorageType, name: string) => {
   return ({
     key,
     defaultValue = undefined,
-    getInitialValueInEffect = true,
     deserialize = deserializeJSON,
+    getInitialValueInEffect = true,
     serialize = (value: T) => serializeJSON(value, name),
   }: StorageProps<T>) => {
     const readStorageValue = useCallback(
@@ -66,7 +66,7 @@ export const createStorage = <T>(type: StorageType, name: string) => {
     )
 
     const setStorageValue = useCallback(
-      (valOrFunc: T | ((prevState: T) => T)) => {
+      (valOrFunc: ((prevState: T) => T) | T) => {
         if (isFunction(valOrFunc)) {
           setValue((current) => {
             const result = valOrFunc(current)

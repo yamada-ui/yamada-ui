@@ -1,27 +1,27 @@
 import type {
-  UsageTheme,
+  ComponentDefaultProps,
+  ComponentMultiSizes,
+  ComponentMultiStyle,
+  ComponentMultiVariants,
+  ComponentSizes,
+  ComponentStyle,
+  ComponentVariants,
   ThemeToken,
   ThemeTokens,
-  ComponentStyle,
-  ComponentSizes,
-  ComponentVariants,
-  ComponentDefaultProps,
   UIStyle,
   UIStyleProps,
-  ComponentMultiSizes,
-  ComponentMultiVariants,
-  ComponentMultiStyle,
+  UsageTheme,
 } from "@yamada-ui/core"
-import { baseTheme, defaultTheme } from "@yamada-ui/theme"
 import type { Dict } from "@yamada-ui/utils"
+import { baseTheme, defaultTheme } from "@yamada-ui/theme"
 import {
-  merge as mergeObject,
   getMemoizedObject as get,
-  runIfFunc,
+  isFunction,
+  merge as mergeObject,
+  noop,
   omitObject,
   pickObject,
-  isFunction,
-  noop,
+  runIfFunc,
 } from "@yamada-ui/utils"
 
 interface Options {
@@ -32,12 +32,12 @@ interface Options {
 
 function createExtendTheme(initialTheme: Dict = defaultTheme) {
   return function (
-    ...extensions: (UsageTheme | ((theme: UsageTheme) => UsageTheme))[]
+    ...extensions: (((theme: UsageTheme) => UsageTheme) | UsageTheme)[]
   ) {
     return function ({
       merge = true,
-      pick = [],
       omit = [],
+      pick = [],
     }: Options = {}): Dict {
       let overrides = [...extensions]
       let theme = extensions[extensions.length - 1]
@@ -90,12 +90,12 @@ export function extendStyle(
 ): UIStyle {
   const props: UIStyleProps = {
     theme: {
-      themeScheme: "base",
       changeThemeScheme: noop,
+      themeScheme: "base",
+      __breakpoints: undefined,
       __config: {},
       __cssMap: {},
       __cssVars: {},
-      __breakpoints: undefined,
     },
   }
 
@@ -107,10 +107,10 @@ export function extendStyle(
 
 export function extendComponent(
   name: keyof (typeof defaultTheme)["components"],
-  componentStyle?: ComponentStyle | ComponentMultiStyle,
-): ComponentStyle | ComponentMultiStyle {
+  componentStyle?: ComponentMultiStyle | ComponentStyle,
+): ComponentMultiStyle | ComponentStyle {
   return mergeObject(
-    get<ComponentStyle | ComponentMultiStyle>(
+    get<ComponentMultiStyle | ComponentStyle>(
       defaultTheme,
       `components.${name}`,
       {},
@@ -121,8 +121,8 @@ export function extendComponent(
 
 export function extendComponentSize(
   name: keyof (typeof defaultTheme)["components"],
-  componentSizes?: ComponentSizes | ComponentMultiSizes,
-): ComponentSizes | ComponentMultiSizes {
+  componentSizes?: ComponentMultiSizes | ComponentSizes,
+): ComponentMultiSizes | ComponentSizes {
   return mergeObject(
     get<ComponentSizes>(defaultTheme, `components.${name}.sizes`, {}),
     componentSizes ?? {},
@@ -131,10 +131,10 @@ export function extendComponentSize(
 
 export function extendComponentVariant(
   name: keyof (typeof defaultTheme)["components"],
-  componentVariants?: ComponentVariants | ComponentMultiVariants,
-): ComponentVariants | ComponentMultiVariants {
+  componentVariants?: ComponentMultiVariants | ComponentVariants,
+): ComponentMultiVariants | ComponentVariants {
   return mergeObject(
-    get<ComponentVariants | ComponentMultiVariants>(
+    get<ComponentMultiVariants | ComponentVariants>(
       defaultTheme,
       `components.${name}.variants`,
       {},

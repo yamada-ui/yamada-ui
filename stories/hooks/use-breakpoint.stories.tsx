@@ -14,16 +14,16 @@ export const basic = () => {
     <Box
       bg={{
         base: "red.500",
-        xl: "blue.500",
-        lg: "green.500",
-        md: "yellow.500",
         sm: "purple.500",
+        md: "yellow.500",
+        lg: "green.500",
+        xl: "blue.500",
       }}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"
     </Box>
@@ -34,21 +34,21 @@ export const withValue = () => {
   const breakpoint = useBreakpoint()
   const bg = useBreakpointValue({
     base: "red.500",
-    "2xl": "pink.500",
-    xl: "blue.500",
-    lg: "green.500",
-    md: "yellow.500",
     sm: "purple.500",
+    md: "yellow.500",
+    lg: "green.500",
+    xl: "blue.500",
+    "2xl": "pink.500",
   })
 
   return (
     <Box
       bg={bg}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"
     </Box>

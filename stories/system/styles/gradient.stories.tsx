@@ -7,10 +7,10 @@ export default {
 export const withToken = () => {
   return (
     <Box
-      w="full"
-      height="xs"
       bgGradient="linear(to-r, green.200, pink.500)"
+      height="xs"
       rounded="lg"
+      w="full"
     />
   )
 }
@@ -18,11 +18,11 @@ export const withToken = () => {
 export const withColorCode = () => {
   return (
     <Heading
-      w="full"
-      size="2xl"
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
       bgClip="text"
+      bgGradient="linear(to-l, #7928CA, #FF0080)"
       isTruncated
+      size="2xl"
+      w="full"
     >
       クリリンのことか……クリリンのことかーーーっ！！！！！
     </Heading>
@@ -32,14 +32,14 @@ export const withColorCode = () => {
 export const withBreakpoint = () => {
   return (
     <Box
-      w="full"
-      height="xs"
       bgGradient={{
         base: "linear(to-tr, teal.300, yellow.400)",
-        lg: "linear(to-t, blue.200, teal.500)",
         md: "linear(to-b, orange.100, purple.300)",
+        lg: "linear(to-t, blue.200, teal.500)",
       }}
+      height="xs"
       rounded="lg"
+      w="full"
     />
   )
 }

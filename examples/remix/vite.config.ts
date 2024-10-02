@@ -5,9 +5,6 @@ import { defineConfig } from "vite"
 installGlobals()
 
 export default defineConfig({
-  server: {
-    port: 4447,
-  },
   plugins: [
     remix({
       ignoredRouteFiles: ["**/*.css"],
@@ -17,5 +14,8 @@ export default defineConfig({
     alias: {
       "~": "/app",
     },
+  },
+  server: {
+    port: 4447,
   },
 })

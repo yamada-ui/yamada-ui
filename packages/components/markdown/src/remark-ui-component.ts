@@ -1,5 +1,4 @@
 import type { AlertStatus } from "@yamada-ui/core"
-import { isNull, isUndefined } from "@yamada-ui/utils"
 import type { Parent as HastParent } from "hast"
 import type {
   Break,
@@ -10,12 +9,13 @@ import type {
   Text,
 } from "mdast"
 import type { ElementContent } from "react-markdown/lib"
-import { match, P } from "ts-pattern"
 import type { Plugin } from "unified"
+import type { ShouldRemoved } from "./utils"
+import { isNull, isUndefined } from "@yamada-ui/utils"
+import { match, P } from "ts-pattern"
 import { remove } from "unist-util-remove"
 import { visit } from "unist-util-visit"
 import { getFragmentPattern } from "./patterns"
-import type { ShouldRemoved } from "./utils"
 import { shouldRemoved } from "./utils"
 
 const getStatus = (str: string | undefined): AlertStatus => {
@@ -49,7 +49,7 @@ interface OneLineNote extends Text {
   readonly status: AlertStatus
 }
 
-const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
+const oneLineNoteFactory = (textNode: Text): null | OneLineNote => {
   const startFragmentCapturedGroups = getFragmentPattern("start", true).exec(
     textNode.value,
   )
@@ -86,7 +86,7 @@ interface StartFragment extends Text {
   readonly status: AlertStatus
 }
 
-const startFragmentFactory = (textNode: Text): StartFragment | null => {
+const startFragmentFactory = (textNode: Text): null | StartFragment => {
   const capturedGroups = getFragmentPattern("start", false).exec(textNode.value)
 
   if (isNull(capturedGroups)) return null
@@ -137,13 +137,13 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
                 ...node,
                 type: "custom" as "paragraph",
                 data: {
-                  hName: "note",
                   hChildren: [
                     {
                       type: "text",
                       value: content,
                     },
                   ],
+                  hName: "note",
                   hProperties: {
                     status: oneLineNote.status,
                   },
@@ -214,8 +214,8 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             ...node,
             type: "custom" as "paragraph",
             data: {
-              hName: "note",
               hChildren: paragraph.children as ElementContent[],
+              hName: "note",
               hProperties: {
                 status: status,
               },
@@ -247,18 +247,18 @@ export const rehypePlugin: Plugin = () => {
     visit(tree, "break", (_, index, parent: HastParent) => {
       parent.children.splice(index!, 1, {
         type: "element",
-        tagName: "br",
-        properties: {},
         children: [],
+        properties: {},
+        tagName: "br",
       })
     })
 
     visit(tree, "strong", (node: Strong, index: number, parent: HastParent) => {
       parent.children.splice(index!, 1, {
         type: "element",
-        tagName: "strong",
-        properties: {},
         children: [...node.children] as ElementContent[],
+        properties: {},
+        tagName: "strong",
       })
     })
   }

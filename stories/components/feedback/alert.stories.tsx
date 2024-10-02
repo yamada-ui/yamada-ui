@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   Alert,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
   Box,
   CloseButton,
 } from "@yamada-ui/react"
@@ -11,8 +11,8 @@ import {
 type Story = StoryFn<typeof Alert>
 
 const meta: Meta<typeof Alert> = {
-  title: "Components / Feedback / Alert",
   component: Alert,
+  title: "Components / Feedback / Alert",
 }
 
 export default meta
@@ -244,7 +244,7 @@ export const leftAccent: Story = () => {
 export const withColorMode: Story = () => {
   return (
     <>
-      <Alert status="info" colorScheme="green">
+      <Alert colorScheme="green" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -252,7 +252,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" colorScheme="purple">
+      <Alert colorScheme="purple" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -260,7 +260,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" colorScheme="gray">
+      <Alert colorScheme="gray" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -268,7 +268,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" colorScheme="pink">
+      <Alert colorScheme="pink" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -283,15 +283,15 @@ export const useCustomLayout: Story = () => {
   return (
     <>
       <Alert
-        status="success"
-        flexDirection="column"
-        justifyContent="center"
         alignItems="center"
-        textAlign="center"
+        flexDirection="column"
         h="2xs"
+        justifyContent="center"
+        status="success"
+        textAlign="center"
       >
         <AlertIcon boxSize="40px" mr={0} />
-        <AlertTitle fontSize="lg" mt={4} mb={1} mr={0}>
+        <AlertTitle fontSize="lg" mb={1} mr={0} mt={4}>
           セル
         </AlertTitle>
         <AlertDescription>
@@ -307,7 +307,7 @@ export const useCustomLayout: Story = () => {
             か…完全体に………完全体になれさえすれば………！！！
           </AlertDescription>
         </Box>
-        <CloseButton position="absolute" top={2} right={2} onClick={() => {}} />
+        <CloseButton position="absolute" right={2} top={2} onClick={() => {}} />
       </Alert>
     </>
   )
@@ -333,7 +333,7 @@ export const withLoading: Story = () => {
       </Alert>
 
       <Alert status="loading" variant="subtle">
-        <AlertIcon variant="puff" color="blue.500" />
+        <AlertIcon color="blue.500" variant="puff" />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
           か…完全体に………完全体になれさえすれば………！！！

@@ -8,16 +8,16 @@ describe("<Card />", () => {
 
   test("renders all the allowed shorthand style props", async () => {
     render(
-      <Card direction="row" justify="start" align="start">
+      <Card align="start" direction="row" justify="start">
         Flex
       </Card>,
     )
 
     const card = await screen.findByRole("article")
     expect(card).toHaveStyle({
+      alignItems: "start",
       flexDirection: "row",
       justifyContent: "start",
-      alignItems: "start",
     })
   })
 
@@ -61,9 +61,9 @@ describe("<Card />", () => {
 
     const header = await screen.findByRole("banner")
     expect(header).toHaveStyle({
+      alignItems: "center",
       display: "flex",
       justifyContent: "flex-start",
-      alignItems: "center",
     })
   })
 
@@ -110,9 +110,9 @@ describe("<Card />", () => {
 
     const body = screen.getByText("Card Body")
     expect(body).toHaveStyle({
+      alignItems: "flex-start",
       display: "flex",
       flexDirection: "column",
-      alignItems: "flex-start",
     })
   })
 
@@ -148,9 +148,9 @@ describe("<Card />", () => {
 
     const footer = await screen.findByRole("contentinfo")
     expect(footer).toHaveStyle({
+      alignItems: "center",
       display: "flex",
       justifyContent: "flex-start",
-      alignItems: "center",
     })
   })
 

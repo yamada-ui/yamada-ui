@@ -1,5 +1,5 @@
-import { render } from "@yamada-ui/test"
 import type { MutableRefObject } from "react"
+import { render } from "@yamada-ui/test"
 import { createRef } from "react"
 import {
   getRangeDates,
@@ -92,9 +92,9 @@ describe("calendar-utils", () => {
       const minDate = new Date(2024, 0, 1)
       const maxDate = new Date(2024, 2, 1)
 
-      expect(isMonthInRange({ date, minDate, maxDate })).toBeTruthy()
-      expect(isMonthInRange({ date, minDate: undefined, maxDate })).toBeTruthy()
-      expect(isMonthInRange({ date, minDate, maxDate: undefined })).toBeTruthy()
+      expect(isMonthInRange({ date, maxDate, minDate })).toBeTruthy()
+      expect(isMonthInRange({ date, maxDate, minDate: undefined })).toBeTruthy()
+      expect(isMonthInRange({ date, maxDate: undefined, minDate })).toBeTruthy()
     })
   })
 

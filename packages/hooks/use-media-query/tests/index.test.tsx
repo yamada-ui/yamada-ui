@@ -1,5 +1,5 @@
-import { EnvironmentProvider } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
+import { EnvironmentProvider } from "@yamada-ui/core"
 import { act, mocks, renderHook } from "@yamada-ui/test"
 import { useMediaQuery } from "../src"
 
@@ -50,8 +50,8 @@ describe("useMediaQuery", () => {
 
   test("should correctly return fallback values", () => {
     const environment = {
-      getWindow: () => undefined,
       getDocument: () => undefined,
+      getWindow: () => undefined,
     }
 
     const { result: result1 } = renderHook(
@@ -95,14 +95,14 @@ describe("useMediaQuery", () => {
     vi.spyOn(window, "matchMedia").mockImplementation(
       (query) =>
         ({
+          addEventListener: vi.fn(),
+          addListener: undefined,
+          dispatchEvent: undefined,
           matches: false,
           media: query,
-          addEventListener: vi.fn(),
           removeEventListener: vi.fn(),
-          onchange: null,
-          addListener: undefined,
           removeListener: undefined,
-          dispatchEvent: undefined,
+          onchange: null,
         }) as unknown as MediaQueryList,
     )
 

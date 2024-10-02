@@ -8,5 +8,6 @@
     "types": ["vite/client"],
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "include": ["src", "vite.config.ts", "eslint.config.ts"]
 }

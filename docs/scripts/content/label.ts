@@ -1,9 +1,9 @@
-import { readFile, stat } from "fs/promises"
-import path from "path"
 import c from "chalk"
 import { program } from "commander"
+import { readFile, stat } from "fs/promises"
 import { glob } from "glob"
 import matter from "gray-matter"
+import path from "path"
 import { writeMDXFile } from "scripts/utils"
 
 const getPaths = async (query: string) => {
@@ -73,7 +73,7 @@ const addLabel =
 
 const removeLabel =
   (exclude: string[]): UpdateFrontMatterTransform =>
-  ({ label, data }) => {
+  ({ data, label }) => {
     if (exclude.includes(label)) return { label, ...data }
 
     return { ...data }

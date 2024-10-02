@@ -1,27 +1,27 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 import type {
   ChartTooltip,
   RadarChartProps,
   RadarProps,
 } from "@yamada-ui/charts"
-import { RadarChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
+import { RadarChart } from "@yamada-ui/charts"
 import {
   Card,
   CardBody,
   CardHeader,
   HStack,
-  Wrap,
   Text,
+  Wrap,
 } from "@yamada-ui/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof RadarChart>
 
 const meta: Meta<typeof RadarChart> = {
-  title: "Components / Data Display / RadarChart",
   component: RadarChart,
+  title: "Components / Data Display / RadarChart",
 }
 
 export default meta
@@ -40,20 +40,20 @@ export const basic: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
 
-  return <RadarChart data={data} series={series} dataKey="fruit" />
+  return <RadarChart data={data} dataKey="fruit" series={series} />
 }
 
 export const withSize: Story = () => {
@@ -68,25 +68,25 @@ export const withSize: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
 
   return (
     <>
-      <RadarChart data={data} series={series} dataKey="fruit" size="sm" />
-      <RadarChart data={data} series={series} dataKey="fruit" size="md" />
-      <RadarChart data={data} series={series} dataKey="fruit" size="lg" />
-      <RadarChart data={data} series={series} dataKey="fruit" size="full" />
+      <RadarChart data={data} dataKey="fruit" series={series} size="sm" />
+      <RadarChart data={data} dataKey="fruit" series={series} size="md" />
+      <RadarChart data={data} dataKey="fruit" series={series} size="lg" />
+      <RadarChart data={data} dataKey="fruit" series={series} size="full" />
     </>
   )
 }
@@ -110,15 +110,15 @@ export const withDash: Story = () => {
   const series: RadarProps[] = useMemo(
     () => [
       {
-        dataKey: "sales",
         color: ["primary.500", "primary.400"],
+        dataKey: "sales",
         strokeDasharray: "5 5",
       },
     ],
     [],
   )
 
-  return <RadarChart data={data} series={series} dataKey="fruit" />
+  return <RadarChart data={data} dataKey="fruit" series={series} />
 }
 
 export const custom: Story = () => {
@@ -133,67 +133,67 @@ export const custom: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
 
   const [props, setProps] = useState<RadarChartProps>({
     data: data,
-    series: series,
     dataKey: "fruit",
-    withDots: false,
-    withActiveDots: false,
-    withTooltip: true,
-    withLegend: false,
-    withPolarGrid: true,
-    withPolarAngleAxis: true,
-    withPolarRadiusAxis: false,
-    tooltipAnimationDuration: 0,
     fillOpacity: 0.4,
+    series: series,
+    tooltipAnimationDuration: 0,
+    withActiveDots: false,
+    withDots: false,
+    withLegend: false,
+    withPolarAngleAxis: true,
+    withPolarGrid: true,
+    withPolarRadiusAxis: false,
+    withTooltip: true,
   })
 
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <Wrap alignItems="flex-start" gap="md">
       <RadarChart {...props} />
 
-      <Wrap gap="md" alignItems="flex-start">
+      <Wrap alignItems="flex-start" gap="md">
         <PropControl
           component="Slider"
           items={[
             {
               label: "Fill opacity",
-              value: props.fillOpacity as number,
-              min: 0,
               max: 1,
+              min: 0,
               step: 0.1,
+              value: props.fillOpacity as number,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, fillOpacity: value }))
               },
             },
             {
               label: "Stroke width",
-              value: props.strokeWidth,
-              min: 0.5,
               max: 5,
+              min: 0.5,
               step: 0.5,
+              value: props.strokeWidth,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, strokeWidth: value }))
               },
             },
             {
               label: "Tooltip animation duration",
-              value: props.tooltipAnimationDuration,
-              min: 0,
               max: 2000,
+              min: 0,
+              value: props.tooltipAnimationDuration,
               onChange: (value) => {
                 setProps((prev) => ({
                   ...prev,
@@ -204,13 +204,13 @@ export const custom: Story = () => {
           ]}
         />
 
-        <Wrap gap="md" alignItems="flex-start">
+        <Wrap alignItems="flex-start" gap="md">
           <PropControl
             component="Switch"
             items={[
               {
-                label: "tooltip",
                 isChecked: props.withTooltip,
+                label: "tooltip",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -218,8 +218,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "legend",
                 isChecked: props.withLegend,
+                label: "legend",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -227,8 +227,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "polar grid",
                 isChecked: props.withPolarGrid,
+                label: "polar grid",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -236,8 +236,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "polar angle axis",
                 isChecked: props.withPolarAngleAxis,
+                label: "polar angle axis",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -245,8 +245,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "polar radius axis",
                 isChecked: props.withPolarRadiusAxis,
+                label: "polar radius axis",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -259,8 +259,8 @@ export const custom: Story = () => {
             component="Switch"
             items={[
               {
-                label: "dots",
                 isChecked: props.withDots,
+                label: "dots",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -268,8 +268,8 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "active dots",
                 isChecked: props.withActiveDots,
+                label: "active dots",
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
@@ -296,20 +296,20 @@ export const withLegend: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
 
-  return <RadarChart data={data} series={series} dataKey="fruit" withLegend />
+  return <RadarChart data={data} dataKey="fruit" series={series} withLegend />
 }
 
 export const withValueFormatter: Story = () => {
@@ -324,15 +324,15 @@ export const withValueFormatter: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -340,10 +340,10 @@ export const withValueFormatter: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
-      withPolarRadiusAxis
+      series={series}
       valueFormatter={(value) => value.toLocaleString()}
+      withPolarRadiusAxis
     />
   )
 }
@@ -360,15 +360,15 @@ export const withPolarAngleAxisTickFormatter: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -376,10 +376,10 @@ export const withPolarAngleAxisTickFormatter: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
-      withPolarRadiusAxis
       polarAngleAxisTickFormatter={(value) => String(value).toUpperCase()}
+      series={series}
+      withPolarRadiusAxis
     />
   )
 }
@@ -396,15 +396,15 @@ export const withPolarRadiusAxisTickFormatter: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -412,10 +412,10 @@ export const withPolarRadiusAxisTickFormatter: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
-      withPolarRadiusAxis
       polarRadiusAxisTickFormatter={(value) => value.toLocaleString()}
+      series={series}
+      withPolarRadiusAxis
     />
   )
 }
@@ -432,15 +432,15 @@ export const withStrokeDasharray: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -448,8 +448,8 @@ export const withStrokeDasharray: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
+      series={series}
       strokeDasharray="15 15"
     />
   )
@@ -467,15 +467,15 @@ export const withFillOpacity: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -483,9 +483,9 @@ export const withFillOpacity: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
       fillOpacity={[0.8, 0.7]}
+      series={series}
     />
   )
 }
@@ -502,15 +502,15 @@ export const useCircleGrid: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -518,8 +518,8 @@ export const useCircleGrid: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
+      series={series}
       polarGridProps={{ gridType: "circle" }}
     />
   )
@@ -537,15 +537,15 @@ export const customDots: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -553,18 +553,18 @@ export const customDots: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
-      withDots
+      series={series}
       withActiveDots
+      withDots
       radarProps={{
-        dot: {
-          r: 8,
-        },
         activeDot: {
+          fill: ["white", "black"],
           r: 7,
           strokeWidth: 1,
-          fill: ["white", "black"],
+        },
+        dot: {
+          r: 8,
         },
       }}
     />
@@ -583,15 +583,15 @@ export const customTooltip: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -604,7 +604,7 @@ export const customTooltip: Story = () => {
     if (!payload) return null
 
     return (
-      <Card variant="subtle" colorScheme="gray">
+      <Card colorScheme="gray" variant="subtle">
         <CardHeader>
           <Text fontSize="lg" fontWeight="semibold">
             {label}
@@ -615,8 +615,8 @@ export const customTooltip: Story = () => {
           {payload.map((value, index) => (
             <HStack
               key={`payload-${index}`}
-              w="full"
               justifyContent="space-between"
+              w="full"
             >
               <Text>{value?.name}</Text>
               <Text color={value?.color}>{value?.value}</Text>
@@ -630,8 +630,8 @@ export const customTooltip: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
+      series={series}
       tooltipProps={{
         content: CustomTooltip,
       }}
@@ -651,15 +651,15 @@ export const customLegend: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -667,10 +667,10 @@ export const customLegend: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
+      series={series}
       withLegend
-      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
+      legendProps={{ mb: "0", mt: "4", verticalAlign: "bottom" }}
     />
   )
 }
@@ -687,15 +687,15 @@ export const customPolarRadiusAxis: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      sales_january: randomValue(),
       sales_february: randomValue(),
+      sales_january: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "sales_january" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "sales_february" },
     ],
     [],
   )
@@ -703,10 +703,10 @@ export const customPolarRadiusAxis: Story = () => {
   return (
     <RadarChart
       data={data}
-      series={series}
       dataKey="fruit"
-      withPolarRadiusAxis
       polarRadiusAxisTickFormatter={(value) => `${value}yen`}
+      series={series}
+      withPolarRadiusAxis
       polarRadiusAxisProps={{ angle: 30 }}
     />
   )

@@ -1,11 +1,11 @@
+import type { Dict } from "./index.types"
 import {
-  isObject,
   isArray,
   isFunction,
+  isObject,
   isString,
   isUndefined,
 } from "./assertion"
-import type { Dict } from "./index.types"
 
 function omitObjectHelper<Y extends Dict, M extends keyof Y>(
   obj: Y,
@@ -210,7 +210,7 @@ export function replaceObject<Y = any>(
 
 export function getObject(
   obj: Dict,
-  path: string | number,
+  path: number | string,
   fallback?: any,
   i?: number,
 ) {
@@ -230,7 +230,7 @@ export function memoizeObject(func: typeof getObject) {
 
   function memoizedFunc<Y>(
     obj: Dict,
-    path: string | number,
+    path: number | string,
     fallback?: any,
     i?: number,
   ): Y {

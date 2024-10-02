@@ -1,20 +1,20 @@
+import type { ReactNode } from "react"
 import {
-  UIProvider,
   colorModeManager,
   themeSchemeManager,
+  UIProvider,
 } from "@yamada-ui/react"
-import type { ReactNode } from "react"
 import { createRoot } from "react-dom/client"
 import { Layout } from "./components/layouts"
-import { theme, config } from "./theme"
+import { config, theme } from "./theme"
 
 const App = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <UIProvider
+        colorModeManager={colorModeManager.cookieStorage}
         config={config}
         theme={theme}
-        colorModeManager={colorModeManager.cookieStorage}
         themeSchemeManager={themeSchemeManager.cookieStorage}
       >
         {children}

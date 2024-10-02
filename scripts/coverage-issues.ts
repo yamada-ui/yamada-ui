@@ -13,9 +13,9 @@ const API_ENDPOINT = `https://codecov.io/api/v2/${SERVICE_NAME}/${ORGANIZATION_N
 const REPORT_ENDPOINT = `https://app.codecov.io/gh/yamada-ui/yamada-ui/blob/main`
 const REQUEST_OPTIONS: RequestInit = {
   headers: {
-    method: "GET",
-    Authorization: `bearer ${process.env.CODECOV_API_TOKEN}`,
     accept: "application/json",
+    Authorization: `bearer ${process.env.CODECOV_API_TOKEN}`,
+    method: "GET",
   },
 }
 
@@ -51,32 +51,32 @@ type Issue = Awaited<
 >["data"][number]
 
 type CoverageReportTotals = {
+  branches: number
+  complexity: number
+  complexity_ratio: number
+  complexity_total: number
+  coverage: number
+  diff: any
   files: number
-  lines: number
   hits: number
+  lines: number
+  messages: number
+  methods: number
   misses: number
   partials: number
-  coverage: number
-  branches: number
-  methods: number
-  messages: number
   sessions: number
-  complexity: number
-  complexity_total: number
-  complexity_ratio: number
-  diff: any
 }
 
 type CoverageReportFile = {
   name: string
-  totals: CoverageReportTotals
   line_coverage: [number, number][]
+  totals: CoverageReportTotals
 }
 
 type CoverageReport = {
-  totals: CoverageReportTotals
-  files: CoverageReportFile[]
   commit_file_url: string
+  files: CoverageReportFile[]
+  totals: CoverageReportTotals
 }
 
 const codecov = async <T extends any>(path: string, options?: RequestInit) => {
@@ -98,10 +98,10 @@ const getIssues = async () => {
   const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...GITHUB_OPTIONS,
-      state: "open",
       labels: "coverage",
-      per_page: perPage,
       page,
+      per_page: perPage,
+      state: "open",
     })
 
     issues.push(...data)
@@ -143,8 +143,8 @@ const getCoverageReport = async () => {
 const getTargetFiles = (files: CoverageReportFile[]) => {
   const targetFiles: Record<string, number[]> = {}
 
-  files.forEach(({ name, totals, line_coverage }) => {
-    const { lines, misses, partials, coverage } = totals
+  files.forEach(({ name, line_coverage, totals }) => {
+    const { coverage, lines, misses, partials } = totals
 
     if (coverage >= TARGET_COVERAGE) return
 
@@ -194,7 +194,7 @@ const createIssues = async (
 
     await recursiveOctokit(async () => {
       if (isExist) {
-        const { number, body: prevBody } = existPackages[packageName]
+        const { body: prevBody, number } = existPackages[packageName]
 
         if (prevBody === body) {
           console.log("Skipped issue", number, packageName)
@@ -204,17 +204,17 @@ const createIssues = async (
 
         await octokit.issues.update({
           ...GITHUB_OPTIONS,
-          issue_number: number,
           body,
+          issue_number: number,
         })
 
         console.log("Updated issue", number, packageName)
       } else {
         await octokit.issues.create({
           ...GITHUB_OPTIONS,
-          title: `Enhance Test Coverage for \`${packageName}\``,
           body,
           labels: ["coverage", "test", "good first issue"],
+          title: `Enhance Test Coverage for \`${packageName}\``,
         })
 
         console.log("Created issue", packageName)

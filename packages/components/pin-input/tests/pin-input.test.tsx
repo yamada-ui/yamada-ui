@@ -24,7 +24,7 @@ describe("<PinInput />", () => {
   })
 
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
-    const { user, findAllByRole } = render(<PinInput type="alphanumeric" />)
+    const { findAllByRole, user } = render(<PinInput type="alphanumeric" />)
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
@@ -40,11 +40,11 @@ describe("<PinInput />", () => {
   test("calls onChange and onComplete appropriately", async () => {
     const handleChange = vi.fn()
     const handleComplete = vi.fn()
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput
+        items={2}
         onChange={handleChange}
         onComplete={handleComplete}
-        items={2}
       />,
     )
 
@@ -118,7 +118,7 @@ describe("<PinInput />", () => {
   })
 
   test("correct behavior on input focus", async () => {
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = (await findAllByRole("textbox")) as HTMLInputElement[]
     const firstInput = inputs[0]
@@ -149,7 +149,7 @@ describe("<PinInput />", () => {
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue="123" manageFocus={true} />,
     )
 
@@ -168,7 +168,7 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue="123" manageFocus={false} />,
     )
 
@@ -186,7 +186,7 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus if current input is not empty", async () => {
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue="1234" items={4} manageFocus={true} />,
     )
 
@@ -233,7 +233,7 @@ describe("<PinInput />", () => {
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
@@ -248,7 +248,7 @@ describe("<PinInput />", () => {
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
     const testValue = "1234"
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = await findAllByRole("textbox")
 
@@ -266,7 +266,7 @@ describe("<PinInput />", () => {
 
   test("the change in value does not impact other values", async () => {
     const defaultValue = "1234"
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue={defaultValue} />,
     )
 

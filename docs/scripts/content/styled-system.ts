@@ -1,8 +1,3 @@
-import { readFile } from "fs/promises"
-import path from "path"
-import * as p from "@clack/prompts"
-import c from "chalk"
-import { config } from "dotenv"
 import type {
   JSDoc,
   Node,
@@ -10,9 +5,16 @@ import type {
   SourceFile,
   TypeAliasDeclaration,
 } from "typescript"
+import type { Locale } from "utils/i18n"
+import * as p from "@clack/prompts"
+import c from "chalk"
+import { CONSTANT } from "constant"
+import { config } from "dotenv"
+import { readFile } from "fs/promises"
+import path from "path"
 import {
-  ScriptTarget,
   createSourceFile,
+  isExpression,
   isIdentifier,
   isObjectLiteralExpression,
   isPropertyAssignment,
@@ -20,34 +22,32 @@ import {
   isTypeAliasDeclaration,
   isTypeLiteralNode,
   isVariableStatement,
-  isExpression,
+  ScriptTarget,
   transpileModule,
 } from "typescript"
-import { getMDXFile, writeMDXFile } from "../utils"
-import { CONSTANT } from "constant"
-import type { Locale } from "utils/i18n"
 import { locales } from "utils/i18n"
 import { toKebabCase } from "utils/string"
+import { getMDXFile, writeMDXFile } from "../utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Type = "style" | "pseudo"
-type TableType = "property" | "description"
+type Type = "pseudo" | "style"
+type TableType = "description" | "property"
 interface Props {
   [key: string]: {
-    shorthands?: string[]
     properties: string[]
-    token?: string
-    description?: string
-    urls?: string[]
     deprecated?: boolean
+    description?: string
+    shorthands?: string[]
+    token?: string
+    urls?: string[]
   }
 }
 interface JSDocs {
   [key: string]: {
+    deprecated?: boolean
     description?: string
     urls?: string[]
-    deprecated?: boolean
   }
 }
 
@@ -143,11 +143,11 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
 
     if (!hasJSDoc(member)) return
 
-    member.jsDoc.forEach(({ tags, comment }) => {
+    member.jsDoc.forEach(({ comment, tags }) => {
       data.description =
         typeof comment === "string" ? comment : comment?.join("\n")
 
-      tags?.forEach(({ tagName, comment }) => {
+      tags?.forEach(({ comment, tagName }) => {
         const tag = tagName.getText(sourceFile)
 
         if (tag === "deprecated") data.deprecated = true
@@ -285,7 +285,7 @@ const parseProps: p.RequiredRunner =
     })
 
     Object.entries(jsDocs).forEach(
-      ([prop, { description, urls, deprecated }]) => {
+      ([prop, { deprecated, description, urls }]) => {
         if (!props[prop]) return
 
         props[prop].description = description

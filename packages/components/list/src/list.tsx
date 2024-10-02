@@ -1,16 +1,16 @@
 import type {
-  HTMLUIProps,
-  ThemeProps,
   CSSUIObject,
   CSSUIProps,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
+  HTMLUIProps,
+  ThemeProps,
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { createContext, cx, getValidChildren } from "@yamada-ui/utils"
 
@@ -21,21 +21,21 @@ const [ListProvider, useList] = createContext<{ [key: string]: CSSUIObject }>({
 
 interface ListOptions {
   /**
-   * The CSS `list-style-type` property.
-   *
-   * @default 'none'
-   */
-  styleType?: CSSUIProps["listStyleType"]
-  /**
-   * The CSS `list-style-position` property.
-   */
-  stylePosition?: CSSUIProps["listStylePosition"]
-  /**
    * The CSS `gap` property.
    *
    * @default '2'
    */
   gap?: CSSUIProps["gap"]
+  /**
+   * The CSS `list-style-position` property.
+   */
+  stylePosition?: CSSUIProps["listStylePosition"]
+  /**
+   * The CSS `list-style-type` property.
+   *
+   * @default 'none'
+   */
+  styleType?: CSSUIProps["listStyleType"]
 }
 
 export interface ListProps
@@ -53,20 +53,20 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
   const {
     className,
     children,
-    styleType: listStyleType = "none",
-    stylePosition: listStylePosition,
     gap = "fallback(2, 0.5rem)",
+    stylePosition: listStylePosition,
+    styleType: listStyleType = "none",
     ...rest
   } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
 
   const css: CSSUIObject = {
+    "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
     display: "flex",
     flexDirection: "column",
     gap,
     ms: listStyleType !== "none" ? "1.4em" : undefined,
-    "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
     ...styles.container,
   }
 
@@ -74,10 +74,10 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
     <ListProvider value={styles}>
       <ui.ul
         ref={ref}
-        listStyleType={listStyleType}
-        listStylePosition={listStylePosition}
-        role="list"
         className={cx("ui-list", className)}
+        listStylePosition={listStylePosition}
+        listStyleType={listStyleType}
+        role="list"
         __css={css}
         {...rest}
       >
@@ -92,7 +92,7 @@ export const DiscList = forwardRef<ListProps, "ul">(({ ...rest }, ref) => {
 })
 
 export const DecimalList = forwardRef<ListProps, "ol">(({ ...rest }, ref) => {
-  return <List ref={ref} as="ol" styleType="decimal" ms="1.2em" {...rest} />
+  return <List ref={ref} as="ol" ms="1.2em" styleType="decimal" {...rest} />
 })
 
 export interface ListItemProps extends HTMLUIProps<"li"> {}

@@ -1,11 +1,11 @@
-import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
+import type * as Recharts from "recharts"
+import type { ResponsiveContainerProps } from "./chart.types"
+import { useTheme } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
-import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ResponsiveContainerProps } from "./chart.types"
 import { containerProperties } from "./rechart-properties"
 
 interface ChartContext {

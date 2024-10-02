@@ -18,9 +18,9 @@ describe("<MultiDatePicker />", () => {
     test("should change selected dates", async () => {
       const { container } = render(
         <MultiDatePicker
+          defaultValue={[new Date(new Date().setDate(1))]}
           placeholder="basic"
           today
-          defaultValue={[new Date(new Date().setDate(1))]}
         />,
       )
       const selectDate = new Date(new Date().setDate(7))

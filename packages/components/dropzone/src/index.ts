@@ -1,3 +1,4 @@
+export * from "./accept-types"
 export {
   Dropzone,
   DropzoneAccept,
@@ -5,10 +6,9 @@ export {
   DropzoneReject,
 } from "./dropzone"
 export type { DropzoneProps } from "./dropzone"
-export * from "./accept-types"
 export type {
-  FileRejection,
-  FileError,
-  ErrorCode,
   DropEvent,
+  ErrorCode,
+  FileError,
+  FileRejection,
 } from "react-dropzone-esm"

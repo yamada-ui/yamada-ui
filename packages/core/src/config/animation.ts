@@ -1,9 +1,9 @@
-import { keyframes as emotionKeyframes } from "@emotion/react"
-import { StyleSheet } from "@emotion/sheet"
 import type { Dict } from "@yamada-ui/utils"
-import { isObject, createdDom } from "@yamada-ui/utils"
 import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
+import { keyframes as emotionKeyframes } from "@emotion/react"
+import { StyleSheet } from "@emotion/sheet"
+import { createdDom, isObject } from "@yamada-ui/utils"
 import { globalValues, tokenToVar } from "./utils"
 
 const styleSheet = createdDom()
@@ -34,13 +34,13 @@ export function animation(
 
   if (isObject(value)) {
     const {
-      keyframes,
       animationDuration = "0s",
       animationTimingFunction = "ease",
       delay = "0s",
-      iterationCount = "1",
       direction = "normal",
       fillMode = "none",
+      iterationCount = "1",
+      keyframes,
       playState = "running",
     } = css(transformAnimationValue(value))(theme)
     const { name, styles } = emotionKeyframes(keyframes)

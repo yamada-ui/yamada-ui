@@ -4,8 +4,8 @@ import { Loading, Wrap } from "@yamada-ui/react"
 type Story = StoryFn<typeof Loading>
 
 const meta: Meta<typeof Loading> = {
-  title: "Components / Feedback / Loading",
   component: Loading,
+  title: "Components / Feedback / Loading",
 }
 
 export default meta
@@ -13,13 +13,13 @@ export default meta
 export const basic: Story = () => {
   return (
     <Wrap gap="md">
-      <Loading variant="oval" fontSize="6xl" color="red.500" />
-      <Loading variant="grid" fontSize="6xl" color="orange.500" />
-      <Loading variant="audio" fontSize="6xl" color="yellow.500" />
-      <Loading variant="dots" fontSize="6xl" color="green.500" />
-      <Loading variant="puff" fontSize="6xl" color="teal.500" />
-      <Loading variant="rings" fontSize="6xl" color="blue.500" />
-      <Loading variant="circles" fontSize="6xl" color="cyan.500" />
+      <Loading color="red.500" fontSize="6xl" variant="oval" />
+      <Loading color="orange.500" fontSize="6xl" variant="grid" />
+      <Loading color="yellow.500" fontSize="6xl" variant="audio" />
+      <Loading color="green.500" fontSize="6xl" variant="dots" />
+      <Loading color="teal.500" fontSize="6xl" variant="puff" />
+      <Loading color="blue.500" fontSize="6xl" variant="rings" />
+      <Loading color="cyan.500" fontSize="6xl" variant="circles" />
     </Wrap>
   )
 }

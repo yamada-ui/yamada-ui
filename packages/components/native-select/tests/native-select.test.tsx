@@ -1,11 +1,11 @@
-import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import type { NativeSelectItem } from "../src"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import { NativeOption, NativeSelect } from "../src"
 
 describe("<NativeSelect />", () => {
   test("NativeSelect renders correctly", async () => {
     await a11y(
-      <NativeSelect aria-label="Select value" placeholder="Options">
+      <NativeSelect placeholder="Options" aria-label="Select value">
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
       </NativeSelect>,
@@ -15,10 +15,10 @@ describe("<NativeSelect />", () => {
   test("should render select with props", async () => {
     const { user } = render(
       <NativeSelect
-        data-testid="select"
         focusBorderColor="green.500"
-        variant="outline"
         placeholder="Options"
+        variant="outline"
+        data-testid="select"
       >
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
@@ -36,16 +36,16 @@ describe("<NativeSelect />", () => {
   test("should render select without placeholder in options", async () => {
     render(
       <NativeSelect
-        data-testid="select"
         focusBorderColor="green.500"
-        variant="outline"
         placeholder="Options"
         placeholderInOptions={false}
+        variant="outline"
+        data-testid="select"
       >
-        <NativeOption data-testid="option" value="one">
+        <NativeOption value="one" data-testid="option">
           Option 1
         </NativeOption>
-        <NativeOption data-testid="option" value="two">
+        <NativeOption value="two" data-testid="option">
           Option 2
         </NativeOption>
       </NativeSelect>,
@@ -90,7 +90,7 @@ describe("<NativeSelect />", () => {
       { label: "孫悟飯", value: "孫悟飯" },
       { label: "クリリン", value: "クリリン" },
     ]
-    render(<NativeSelect data-testid="select" items={items} />)
+    render(<NativeSelect items={items} data-testid="select" />)
     const children = screen.getByTestId("select").children
     expect(children).toHaveLength(3)
   })
@@ -99,15 +99,15 @@ describe("<NativeSelect />", () => {
     const items: NativeSelectItem[] = [
       { label: "ベジータ", value: "ベジータ" },
       {
-        label: "地球人",
         items: [
           { label: "孫悟空", value: "孫悟空" },
           { label: "孫悟飯", value: "孫悟飯" },
           { label: "クリリン", value: "クリリン" },
         ],
+        label: "地球人",
       },
     ]
-    render(<NativeSelect data-testid="select" items={items} />)
+    render(<NativeSelect items={items} data-testid="select" />)
     const children = screen.getByTestId("select").children
     expect(children).toHaveLength(2)
     const optgroup = screen.getByRole("group", { name: "地球人" })

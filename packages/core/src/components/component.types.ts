@@ -5,14 +5,14 @@ import type { StyledTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
 export type BaseStyle =
-  | CSSUIObject
   | ((props: InterpolationProps) => CSSUIObject)
+  | CSSUIObject
 
 export interface StyledOptions {
-  disableStyleProp?: (prop: string) => boolean
-  shouldForwardProp?: (prop: string) => boolean
-  label?: string
   baseStyle?: BaseStyle
+  disableStyleProp?: (prop: string) => boolean
+  label?: string
+  shouldForwardProp?: (prop: string) => boolean
 }
 
 export interface UIFactory {
@@ -31,37 +31,30 @@ export interface UIProps extends CSSProps, CSSUIProps {
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
-export type InterpolationProps = CSSUIObject &
-  CSSProps & {
-    theme: StyledTheme
-  }
+export type InterpolationProps = {
+  theme: StyledTheme
+} & CSSProps &
+  CSSUIObject
 
-export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
-  Y,
-  keyof M | "as"
-> &
-  M
+export type OmitProps<Y extends object = {}, M extends object = {}> = M &
+  Omit<Y, "as" | keyof M>
 
 type ComponentConditionalProps<
   Y extends As,
   M extends As,
   D extends object = {},
 > =
-  | OmitProps<React.ComponentProps<Y>, D>
   | OmitProps<React.ComponentProps<M>, D>
+  | OmitProps<React.ComponentProps<Y>, D>
 
-type ComponentProps<
-  Y extends As,
-  M extends As,
-  D extends object = {},
-> = ComponentConditionalProps<Y, M, D> & {
+type ComponentProps<Y extends As, M extends As, D extends object = {}> = {
   as?: M
-}
+} & ComponentConditionalProps<Y, M, D>
 
 export interface ComponentArgs
   extends Pick<
     React.FunctionComponent,
-    "contextTypes" | "propTypes" | "defaultProps" | "displayName"
+    "contextTypes" | "defaultProps" | "displayName" | "propTypes"
   > {
   __ui__?: string
 }

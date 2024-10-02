@@ -1,9 +1,9 @@
-import { FC } from "@yamada-ui/core"
 import type { TableFootProps as NativeTableFootProps } from "@yamada-ui/native-table"
-import { Tfoot as NativeTfoot, Tr, Th } from "@yamada-ui/native-table"
-import { ariaAttr, runIfFunc } from "@yamada-ui/utils"
 import type { InternalColumn } from "./use-table"
-import { useTableContext, render } from "./use-table"
+import { FC } from "@yamada-ui/core"
+import { Tfoot as NativeTfoot, Th, Tr } from "@yamada-ui/native-table"
+import { ariaAttr, runIfFunc } from "@yamada-ui/utils"
+import { render, useTableContext } from "./use-table"
 
 export interface TableFootProps extends NativeTableFootProps {}
 
@@ -16,7 +16,7 @@ export const Tfoot: FC = ({ ...rest }: TableFootProps) => {
         return (
           <Tr key={id} {...runIfFunc(footerGroupProps, headers)}>
             {headers.map((header) => {
-              const { id, colSpan, isPlaceholder, column, getContext } = header
+              const { id, colSpan, column, getContext, isPlaceholder } = header
               const { columnDef } = column
               let { "aria-hidden": ariaHidden } =
                 columnDef as InternalColumn<unknown>

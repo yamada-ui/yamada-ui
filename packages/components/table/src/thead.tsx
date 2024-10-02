@@ -1,21 +1,21 @@
-import { FC } from "@yamada-ui/core"
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { Icon, ChevronIcon } from "@yamada-ui/icon"
 import type {
   TableHeadProps as NativeTableHeadProps,
   ThProps,
 } from "@yamada-ui/native-table"
+import type { Column, SortDirection } from "./use-table"
+import { FC } from "@yamada-ui/core"
+import { ChevronIcon, Icon } from "@yamada-ui/icon"
 import {
   Thead as NativeThead,
-  Tr,
   Th,
+  Tr,
   useTableStyles,
 } from "@yamada-ui/native-table"
-import { runIfFunc, handlerAll, cx } from "@yamada-ui/utils"
+import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { useMemo } from "react"
-import type { SortDirection, Column } from "./use-table"
-import { useTableContext, render } from "./use-table"
+import { render, useTableContext } from "./use-table"
 
 export interface TableHeadProps extends NativeTableHeadProps {}
 
@@ -66,18 +66,18 @@ export const Thead: FC = ({ ...rest }: TableHeadProps) => {
         return (
           <Tr key={id} {...runIfFunc(headerGroupProps, headers)}>
             {headers.map((header) => {
-              const { id, colSpan, rowSpan, column, getContext } = header
+              const { id, colSpan, column, getContext, rowSpan } = header
               const {
                 columnDef,
-                getToggleSortingHandler,
                 getCanSort,
                 getIsSorted,
+                getToggleSortingHandler,
               } = column
               let {
-                sx,
-                style,
-                css,
                 className,
+                css,
+                style,
+                sx,
                 colSpan: customColSpan,
                 rowSpan: customRowSpan,
                 "aria-label": ariaLabel,
@@ -110,8 +110,8 @@ export const Thead: FC = ({ ...rest }: TableHeadProps) => {
                   key={id}
                   {...props}
                   className={className}
-                  sx={sx}
                   style={{ ...props.style, ...style }}
+                  sx={sx}
                   __css={{
                     position: "relative",
                     userSelect: getCanSort() ? "none" : undefined,
@@ -140,8 +140,8 @@ export interface SortIconProps extends IconProps {
 }
 
 export const SortIcon: FC<SortIconProps> = ({
-  isSorted,
   className,
+  isSorted,
   ...rest
 }) => {
   const styles = useTableStyles()
@@ -160,14 +160,14 @@ export const SortIcon: FC<SortIconProps> = ({
     return (
       <Icon
         className={cx("ui-table__sort-icon", className)}
-        focusable="false"
-        aria-hidden
-        viewBox="0 0 24 24"
         fill="none"
+        focusable="false"
         stroke="currentColor"
-        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="1.5"
+        viewBox="0 0 24 24"
+        aria-hidden
         __css={css}
         {...rest}
       >

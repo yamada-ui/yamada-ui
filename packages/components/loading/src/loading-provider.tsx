@@ -1,42 +1,52 @@
 import type {
-  ThemeConfig,
-  LoadingComponentProps,
   CSSUIObject,
-  LoadingConfigOptions,
   HTMLUIProps,
+  LoadingComponentProps,
+  LoadingConfigOptions,
+  ThemeConfig,
 } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
 import type { MotionVariants } from "@yamada-ui/motion"
+import type {
+  FC,
+  MutableRefObject,
+  PropsWithChildren,
+  ReactNode,
+  RefObject,
+} from "react"
+import { ui } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import {
-  isValidElement,
   assignRef,
-  useUpdateEffect,
   isNumber,
+  isValidElement,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
-import type {
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  MutableRefObject,
-  RefObject,
-} from "react"
 import {
   createContext,
+  createRef,
+  Fragment,
   memo,
   useContext,
   useMemo,
-  useState,
-  Fragment,
   useRef,
-  createRef,
+  useState,
 } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { Loading } from "./loading"
 
 interface LoadingContextProps {
+  /**
+   * Function to finish loading.
+   */
+  finish: () => void
+  /**
+   * Function to forcefully update the loading state.
+   *
+   * Please be careful, as it will forcefully overwrite the state of the loading component.
+   */
+  force: (state: Partial<LoadingState>) => void
   /**
    * Returns a judgement on whether it is currently loading or not.
    */
@@ -48,32 +58,14 @@ interface LoadingContextProps {
    */
   start: (props?: Partial<LoadingProps>) => void
   /**
-   * Function to finish loading.
-   */
-  finish: () => void
-  /**
    * Function to update loading.
    *
    * If you specify a `message` etc. as an argument, the loading will change accordingly.
    */
   update: (props: Partial<LoadingProps>) => void
-  /**
-   * Function to forcefully update the loading state.
-   *
-   * Please be careful, as it will forcefully overwrite the state of the loading component.
-   */
-  force: (state: Partial<LoadingState>) => void
 }
 
 interface LoadingContext {
-  /**
-   * The screen loading animation.
-   */
-  screen: LoadingContextProps
-  /**
-   * The page loading animation.
-   */
-  page: LoadingContextProps
   /**
    * The background loading animation.
    */
@@ -84,17 +76,25 @@ interface LoadingContext {
    * This cannot be used unless a component is defined at `config/loading/custom.`
    */
   custom: LoadingContextProps
+  /**
+   * The page loading animation.
+   */
+  page: LoadingContextProps
+  /**
+   * The screen loading animation.
+   */
+  screen: LoadingContextProps
 }
 
 interface LoadingProps {
+  duration: null | number
   message: ReactNode | undefined
-  duration: number | null
 }
 
 interface LoadingState {
+  duration: null | number
   loadingCount: number
   message: ReactNode | undefined
-  duration: number | null
 }
 
 export interface LoadingProviderProps
@@ -103,40 +103,40 @@ export interface LoadingProviderProps
 const LoadingContext = createContext({} as LoadingContext)
 
 interface Refs {
+  finish: RefObject<LoadingContextProps["finish"]>
+  force: RefObject<LoadingContextProps["force"]>
   isLoading: RefObject<LoadingContextProps["isLoading"]>
   start: RefObject<LoadingContextProps["start"]>
-  finish: RefObject<LoadingContextProps["finish"]>
   update: RefObject<LoadingContextProps["update"]>
-  force: RefObject<LoadingContextProps["force"]>
 }
 
 type ControlRefs = MutableRefObject<Refs>
 
 const createLoadingRefs = (): Refs => ({
+  finish: createRef<LoadingContextProps["finish"]>(),
+  force: createRef<LoadingContextProps["force"]>(),
   isLoading: createRef<LoadingContextProps["isLoading"]>(),
   start: createRef<LoadingContextProps["start"]>(),
-  finish: createRef<LoadingContextProps["finish"]>(),
   update: createRef<LoadingContextProps["update"]>(),
-  force: createRef<LoadingContextProps["force"]>(),
 })
 
 const createLoadingFunc = (refs: ControlRefs): LoadingContextProps => ({
+  finish: () => refs.current.finish.current?.(),
+  force: (state) => refs.current.force.current?.(state),
   isLoading: () => refs.current.isLoading.current?.() ?? false,
   start: (props) => refs.current.start.current?.(props),
-  finish: () => refs.current.finish.current?.(),
   update: (props) => refs.current.update.current?.(props),
-  force: (state) => refs.current.force.current?.(state),
 })
 
 const incrementCount = (prev: number) => prev + 1
 const decrementCount = (prev: number) => (prev === 0 ? prev : prev - 1)
 
 export const LoadingProvider: FC<LoadingProviderProps> = ({
-  screen,
-  page,
   background,
-  custom,
   children,
+  custom,
+  page,
+  screen,
 }) => {
   const screenRefs = useRef(createLoadingRefs())
   const pageRefs = useRef(createLoadingRefs())
@@ -149,10 +149,10 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   const customLoadingFunc = createLoadingFunc(customRefs)
 
   const value = {
-    screen: screenLoadingFunc,
-    page: pageLoadingFunc,
     background: backgroundLoadingFunc,
     custom: customLoadingFunc,
+    page: pageLoadingFunc,
+    screen: screenLoadingFunc,
   }
 
   return (
@@ -184,8 +184,8 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       />
 
       <Controller
-        controlRefs={customRefs}
         blockScrollOnMount={background?.blockScrollOnMount ?? false}
+        controlRefs={customRefs}
         {...custom}
         component={custom?.component}
       />
@@ -199,61 +199,61 @@ interface ControllerProps extends LoadingConfigOptions {
 }
 
 const Controller: FC<ControllerProps> = ({
-  controlRefs,
-  appendToParentPortal,
-  containerRef,
   allowPinchZoom = false,
+  appendToParentPortal,
   blockScrollOnMount = true,
-  initialState,
+  component,
+  containerRef,
+  controlRefs,
   duration: durationProps = null,
   icon,
+  initialState,
   text,
-  component,
 }) => {
   const isLoadingRef = useRef<boolean>(false)
-  const [{ loadingCount, message, duration }, setState] =
+  const [{ duration, loadingCount, message }, setState] =
     useState<LoadingState>({
+      duration: durationProps,
       loadingCount: initialState ? 1 : 0,
       message: undefined,
-      duration: durationProps,
     })
 
-  const { isLoading, start, finish, update, force }: LoadingContextProps =
+  const { finish, force, isLoading, start, update }: LoadingContextProps =
     useMemo(
       () => ({
-        isLoading: () => isLoadingRef.current,
-
-        start: ({ message, duration = durationProps } = {}) => {
-          isLoadingRef.current = true
-
-          setState(({ loadingCount }) => ({
-            loadingCount: incrementCount(loadingCount),
-            message,
-            duration,
-          }))
-        },
-
-        update: (next) => setState((prev) => ({ ...prev, ...next })),
-
         finish: () => {
           isLoadingRef.current = false
 
           setState(({ loadingCount }) => ({
+            duration: durationProps,
             loadingCount: decrementCount(loadingCount),
             message: undefined,
-            duration: durationProps,
           }))
         },
 
-        force: ({ loadingCount = 0, message, duration = durationProps }) => {
+        force: ({ duration = durationProps, loadingCount = 0, message }) => {
           isLoadingRef.current = !!loadingCount
 
           setState({
+            duration,
             loadingCount,
             message,
-            duration,
           })
         },
+
+        isLoading: () => isLoadingRef.current,
+
+        start: ({ duration = durationProps, message } = {}) => {
+          isLoadingRef.current = true
+
+          setState(({ loadingCount }) => ({
+            duration,
+            loadingCount: incrementCount(loadingCount),
+            message,
+          }))
+        },
+
+        update: (next) => setState((prev) => ({ ...prev, ...next })),
       }),
       [durationProps],
     )
@@ -265,20 +265,20 @@ const Controller: FC<ControllerProps> = ({
   assignRef(controlRefs.current.force, force)
 
   const props: LoadingComponentProps = {
-    initialState,
-    icon,
-    text,
-    message,
     duration,
+    icon,
+    initialState,
+    message,
+    text,
     onFinish: finish,
   }
 
   useUpdateEffect(() => {
     if (initialState || isNumber(durationProps))
       setState({
+        duration: durationProps,
         loadingCount: initialState ? 1 : 0,
         message: undefined,
-        duration: durationProps,
       })
   }, [initialState, durationProps])
 
@@ -331,10 +331,6 @@ const Message: FC<MessageProps> = ({ message, ...rest }) => {
 }
 
 const getVariants = (type: "fade" | "scaleFade" = "fade"): MotionVariants => ({
-  initial: {
-    opacity: 0,
-    scale: type === "scaleFade" ? 0.95 : undefined,
-  },
   animate: {
     opacity: 1,
     scale: type === "scaleFade" ? 1 : undefined,
@@ -351,48 +347,52 @@ const getVariants = (type: "fade" | "scaleFade" = "fade"): MotionVariants => ({
       ease: [0.4, 0, 1, 1],
     },
   },
+  initial: {
+    opacity: 0,
+    scale: type === "scaleFade" ? 0.95 : undefined,
+  },
 })
 
 const getOverlayStyle = (
   type: "fill" | "transparent" = "fill",
 ): CSSUIObject => ({
-  position: "fixed",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  zIndex: "fallback(beerus, 9999)",
+  alignItems: "center",
   bg:
     type === "fill"
       ? ["fallback(white, #fbfbfb)", "fallback(black, #141414)"]
       : "fallback(blackAlpha.600, rgba(0, 0, 0, 0.48))",
-  w: "100vw",
-  h: "100dvh",
-  p: "fallback(4, 1rem)",
+  bottom: 0,
   display: "flex",
+  h: "100dvh",
   justifyContent: "center",
-  alignItems: "center",
+  left: 0,
+  p: "fallback(4, 1rem)",
+  position: "fixed",
+  right: 0,
+  top: 0,
+  w: "100vw",
+  zIndex: "fallback(beerus, 9999)",
 })
 
 const getMotionProps = (
   initialState: boolean | undefined,
   type: "fade" | "scaleFade" = "fade",
 ) => ({
-  initial: initialState ? false : "initial",
   animate: "animate",
   exit: "exit",
+  initial: initialState ? false : "initial",
   variants: getVariants(type),
 })
 
 const ScreenComponent: FC<LoadingComponentProps> = memo(
-  ({ initialState, icon, text, message, duration, onFinish }) => {
+  ({ duration, icon, initialState, message, text, onFinish }) => {
     const css: CSSUIObject = {
-      maxW: "24rem",
+      alignItems: "center",
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
       gap: "fallback(2, 0.5rem)",
+      justifyContent: "center",
+      maxW: "24rem",
     }
 
     useTimeout(onFinish, duration)
@@ -405,7 +405,7 @@ const ScreenComponent: FC<LoadingComponentProps> = memo(
       >
         <ui.div __css={css}>
           <Loading fontSize="6xl" {...icon} />
-          <Message message={message} lineClamp={3} {...text} />
+          <Message lineClamp={3} message={message} {...text} />
         </ui.div>
       </motion.div>
     )
@@ -415,21 +415,21 @@ const ScreenComponent: FC<LoadingComponentProps> = memo(
 ScreenComponent.displayName = "ScreenComponent"
 
 const PageComponent: FC<LoadingComponentProps> = memo(
-  ({ initialState, icon, text, message, duration, onFinish }) => {
+  ({ duration, icon, initialState, message, text, onFinish }) => {
     const css: CSSUIObject = {
-      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
-      maxW: "24rem",
-      p: "fallback(4, 1rem)",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
       alignItems: "center",
-      gap: "fallback(2, 0.5rem)",
-      rounded: "fallback(md, 0.375rem)",
+      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
       boxShadow: [
         "fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))",
         "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
       ],
+      display: "flex",
+      flexDirection: "column",
+      gap: "fallback(2, 0.5rem)",
+      justifyContent: "center",
+      maxW: "24rem",
+      p: "fallback(4, 1rem)",
+      rounded: "fallback(md, 0.375rem)",
     }
 
     useTimeout(onFinish, duration)
@@ -446,7 +446,7 @@ const PageComponent: FC<LoadingComponentProps> = memo(
           __css={css}
         >
           <Loading fontSize="6xl" {...icon} />
-          <Message message={message} lineClamp={3} {...text} />
+          <Message lineClamp={3} message={message} {...text} />
         </motion.div>
       </motion.div>
     )
@@ -456,24 +456,24 @@ const PageComponent: FC<LoadingComponentProps> = memo(
 PageComponent.displayName = "PageComponent"
 
 const BackgroundComponent: FC<LoadingComponentProps> = memo(
-  ({ initialState, icon, text, message, duration, onFinish }) => {
+  ({ duration, icon, initialState, message, text, onFinish }) => {
     const css: CSSUIObject = {
-      position: "fixed",
-      right: "fallback(4, 1rem)",
-      bottom: "fallback(4, 1rem)",
-      zIndex: "fallback(beerus, 9999)",
-      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
-      maxW: "20rem",
-      p: "fallback(2, 0.5rem)",
-      display: "flex",
-      justifyContent: "center",
       alignItems: "center",
-      gap: "fallback(2, 0.5rem)",
-      rounded: "fallback(md, 0.375rem)",
+      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
+      bottom: "fallback(4, 1rem)",
       boxShadow: [
         "fallback(3xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25))",
         "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
       ],
+      display: "flex",
+      gap: "fallback(2, 0.5rem)",
+      justifyContent: "center",
+      maxW: "20rem",
+      p: "fallback(2, 0.5rem)",
+      position: "fixed",
+      right: "fallback(4, 1rem)",
+      rounded: "fallback(md, 0.375rem)",
+      zIndex: "fallback(beerus, 9999)",
     }
 
     useTimeout(onFinish, duration)
@@ -485,7 +485,7 @@ const BackgroundComponent: FC<LoadingComponentProps> = memo(
         __css={css}
       >
         <Loading fontSize="xl" {...icon} />
-        <Message message={message} fontSize="sm" lineClamp={1} {...text} />
+        <Message fontSize="sm" lineClamp={1} message={message} {...text} />
       </motion.div>
     )
   },
@@ -499,7 +499,7 @@ BackgroundComponent.displayName = "BackgroundComponent"
  * @see Docs https://yamada-ui.com/hooks/use-loading
  */
 export const useLoading = (): LoadingContext => {
-  const { screen, page, background, custom } = useContext(LoadingContext)
+  const { background, custom, page, screen } = useContext(LoadingContext)
 
-  return { screen, page, background, custom }
+  return { background, custom, page, screen }
 }

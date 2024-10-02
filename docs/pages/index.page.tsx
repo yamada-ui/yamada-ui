@@ -1,20 +1,20 @@
+import type { InferGetStaticPropsType, NextPage } from "next"
 import { ArrowRight } from "@yamada-ui/lucide"
 import {
   Center,
-  HStack,
   Heading,
+  HStack,
   Image,
   Spacer,
   Text,
   VStack,
   Wrap,
 } from "@yamada-ui/react"
-import type { InferGetStaticPropsType, NextPage } from "next"
 import { Section } from "components/layouts"
-import { SEO, OpenCollective, Patreon } from "components/media-and-icons"
+import { OpenCollective, Patreon, SEO } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
-import { useI18n, PageProvider } from "contexts"
+import { PageProvider, useI18n } from "contexts"
 import { TopLayout } from "layouts"
 import { getStaticCommonProps } from "utils/next"
 
@@ -29,17 +29,17 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
         <SEO
-          title={t("home.title")}
           description={t("home.description")}
           disableTitleTemplate
+          title={t("home.title")}
         />
 
         <Section>
           <VStack alignItems="center">
             <Heading
               as="h1"
-              fontSize={{ base: "7xl", lg: "6xl", md: "5xl", sm: "4xl" }}
               fontFamily="heading"
+              fontSize={{ base: "7xl", sm: "4xl", md: "5xl", lg: "6xl" }}
               fontWeight="extrabold"
               textAlign="center"
             >
@@ -51,11 +51,11 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
             </Heading>
 
             <Text
-              w="full"
-              maxW="2xl"
-              fontSize={{ base: "xl", sm: "lg" }}
               color={["blackAlpha.600", "whiteAlpha.600"]}
+              fontSize={{ base: "xl", sm: "lg" }}
+              maxW="2xl"
               textAlign="center"
+              w="full"
             >
               {tc("home.hero.message")}
             </Text>
@@ -66,19 +66,19 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
             justifyContent="center"
           >
             <NextLinkButton
-              size="xl"
               colorScheme="primary"
-              w={{ base: "auto", md: "full" }}
-              rightIcon={<ArrowRight />}
               href="/getting-started"
+              rightIcon={<ArrowRight />}
+              size="xl"
+              w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.started")}
             </NextLinkButton>
 
             <NextLinkButton
+              href="/examples/mail"
               size="xl"
               w={{ base: "auto", md: "full" }}
-              href="/examples/mail"
             >
               {tc("home.hero.examples")}
             </NextLinkButton>
@@ -88,22 +88,22 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
         <Center bg={["primary.500", "primary.600"]} m="0 calc(50% - 50vw)">
           <Section maxW="9xl" px={{ base: "lg", md: "md" }}>
             <VStack alignItems="center" gap="lg">
-              <VStack alignItems="center" maxW="2xl" color="white">
+              <VStack alignItems="center" color="white" maxW="2xl">
                 <Heading size="2xl">{t("home.support.title")}</Heading>
                 <Text textAlign="center">{t("home.support.description")}</Text>
               </VStack>
 
               <VStack
                 alignItems="center"
-                maxW="2xl"
                 gap={{ base: "lg", md: "md" }}
+                maxW="2xl"
               >
                 <HStack
-                  w="full"
-                  p={{ base: "normal", md: "md" }}
                   bg="white"
-                  rounded="md"
                   flexDirection={{ base: "row", sm: "column" }}
+                  p={{ base: "normal", md: "md" }}
+                  rounded="md"
+                  w="full"
                 >
                   <HStack color="black">
                     <OpenCollective boxSize="12" />
@@ -122,22 +122,22 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   <Spacer display={{ base: "block", sm: "none" }} />
 
                   <NextLinkButton
-                    w={{ base: "auto", sm: "full" }}
+                    colorScheme="primary"
                     href="https://opencollective.com/yamada-ui"
                     isExternal
-                    colorScheme="primary"
                     px="lg"
+                    w={{ base: "auto", sm: "full" }}
                   >
                     Sponsor
                   </NextLinkButton>
                 </HStack>
 
                 <HStack
-                  w="full"
-                  p={{ base: "normal", md: "md" }}
                   bg="white"
-                  rounded="md"
                   flexDirection={{ base: "row", sm: "column" }}
+                  p={{ base: "normal", md: "md" }}
+                  rounded="md"
+                  w="full"
                 >
                   <HStack color="black">
                     <Patreon boxSize="12" />
@@ -156,11 +156,11 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   <Spacer display={{ base: "block", sm: "none" }} />
 
                   <NextLinkButton
-                    w={{ base: "auto", sm: "full" }}
+                    colorScheme="primary"
                     href="https://www.patreon.com/hirotomoyamada"
                     isExternal
-                    colorScheme="primary"
                     px="lg"
+                    w={{ base: "auto", sm: "full" }}
                   >
                     Sponsor
                   </NextLinkButton>
@@ -169,15 +169,14 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
 
               {CONSTANT.SPONSORS.PLATINUM.length ? (
                 <>
-                  <Heading as="h3" size="lg" color="white">
+                  <Heading as="h3" color="white" size="lg">
                     {t("home.support.platinum-sponsors")}
                   </Heading>
 
                   <Wrap
-                    w="full"
-                    maxW="6xl"
-                    justifyContent="center"
                     gap={{ base: "lg", md: "md" }}
+                    justifyContent="center"
+                    maxW="6xl"
                     vars={[
                       {
                         name: "space",
@@ -185,32 +184,33 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                         value: { base: "lg", md: "md" },
                       },
                     ]}
+                    w="full"
                   >
                     {CONSTANT.SPONSORS.PLATINUM.map(
-                      ({ href, src, alt, ...rest }, index) => (
+                      ({ alt, href, src, ...rest }, index) => (
                         <Center
                           key={index}
                           as="a"
-                          href={href}
-                          target="_blank"
+                          bg="white"
                           flexBasis={{
                             base: "calc((100% - $space * 2) / 3)",
-                            md: "calc((100% - $space * 1) / 2)",
                             sm: "100%",
+                            md: "calc((100% - $space * 1) / 2)",
                           }}
+                          href={href}
                           maxW={{
                             base: "calc((100% - $space * 2) / 3)",
-                            md: "calc((100% - $space * 1) / 2)",
                             sm: "100%",
+                            md: "calc((100% - $space * 1) / 2)",
                           }}
-                          bg="white"
-                          rounded="md"
                           p="normal"
+                          rounded="md"
+                          target="_blank"
                         >
                           <Image
+                            alt={alt}
                             boxSize="full"
                             src={src}
-                            alt={alt}
                             {...rest}
                             colorMode="light"
                           />
@@ -223,7 +223,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
 
               {CONSTANT.SPONSORS.GOLD.length ? (
                 <>
-                  <Heading as="h3" size="lg" color="white">
+                  <Heading as="h3" color="white" size="lg">
                     {t("home.support.gold-sponsors")}
                   </Heading>
 

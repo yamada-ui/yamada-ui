@@ -1,5 +1,5 @@
 import { CheckIcon } from "@yamada-ui/icon"
-import { render, a11y } from "@yamada-ui/test"
+import { a11y, render } from "@yamada-ui/test"
 import { Tag } from "../src"
 
 describe("<Tag />", () => {

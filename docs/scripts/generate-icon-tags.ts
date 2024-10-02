@@ -1,9 +1,9 @@
-import { readdir, readFile, writeFile } from "fs/promises"
-import path from "path"
 import { config } from "dotenv"
 import { execa } from "execa"
-import { rimraf } from "rimraf"
+import { readdir, readFile, writeFile } from "fs/promises"
 import { prettier } from "libs/prettier"
+import path from "path"
+import { rimraf } from "rimraf"
 import { toCamelCase } from "utils/string"
 
 const DIR_PATH = path.resolve(".lucide")

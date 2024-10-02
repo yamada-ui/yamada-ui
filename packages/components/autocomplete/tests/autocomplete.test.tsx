@@ -1,6 +1,6 @@
+import type { AutocompleteItem } from "../src"
 import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
-import type { AutocompleteItem } from "../src"
 import {
   Autocomplete,
   AutocompleteOption,
@@ -28,7 +28,7 @@ describe("<Autocomplete />", () => {
     ]
 
     test("default", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete placeholder="Select Option">
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -51,7 +51,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("with group label", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete>
           <AutocompleteOptionGroup label="Group1">
             <AutocompleteOption value="option1">option1</AutocompleteOption>
@@ -77,11 +77,11 @@ describe("<Autocomplete />", () => {
     })
 
     test("with group label props", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete>
           <AutocompleteOptionGroup
-            labelProps={{ fontSize: "12px" }}
             label="Group1"
+            labelProps={{ fontSize: "12px" }}
           >
             <AutocompleteOption value="option1">option1</AutocompleteOption>
           </AutocompleteOptionGroup>
@@ -99,7 +99,7 @@ describe("<Autocomplete />", () => {
     })
 
     test.each(["xs", "sm", "md", "lg"])(`with size prop %s`, (size) => {
-      const { container } = render(<Autocomplete size={size} items={ITEMS} />)
+      const { container } = render(<Autocomplete items={ITEMS} size={size} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -135,10 +135,10 @@ describe("<Autocomplete />", () => {
     })
 
     test("with emptyProps icon", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete
-          emptyProps={{ icon: <svg data-testid="icon" /> }}
           items={ITEMS}
+          emptyProps={{ icon: <svg data-testid="icon" /> }}
         />,
       )
 
@@ -155,7 +155,7 @@ describe("<Autocomplete />", () => {
     test("items are updated correctly", async () => {
       const { result } = renderHook(() => useState(ITEMS))
 
-      const { user, container, rerender } = render(
+      const { container, rerender, user } = render(
         <Autocomplete items={result.current[0]} />,
       )
 
@@ -196,7 +196,7 @@ describe("<Autocomplete />", () => {
     ]
 
     test("select the first option when clicked", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -212,7 +212,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("update the value when typing in the combobox", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -227,7 +227,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("should be searchable in uppercase and full-width characters", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -243,7 +243,7 @@ describe("<Autocomplete />", () => {
 
     test("display 'No results found' when selecting a non-existent option", async () => {
       const NO_RESULTS = "No results found"
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete emptyMessage={NO_RESULTS} items={ITEMS} />,
       )
 
@@ -258,7 +258,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("does not close the dropdown list when an option is selected", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete closeOnSelect={false} items={ITEMS} />,
       )
 
@@ -276,7 +276,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("does not close the dropdown list when blurred", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <>
           <input type="text" placeholder="focus-other" />
           <Autocomplete closeOnBlur={false} items={ITEMS} />
@@ -316,7 +316,7 @@ describe("<Autocomplete />", () => {
     ]
 
     test("arrowDown keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -344,8 +344,8 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      const { user, container } = render(
-        <Autocomplete items={ITEMS} defaultValue="option2" />,
+      const { container, user } = render(
+        <Autocomplete defaultValue="option2" items={ITEMS} />,
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -359,7 +359,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -387,8 +387,8 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      const { user, container } = render(
-        <Autocomplete items={ITEMS} defaultValue="option2" />,
+      const { container, user } = render(
+        <Autocomplete defaultValue="option2" items={ITEMS} />,
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -402,7 +402,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("space keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -420,7 +420,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("space keyDown should be able to create options", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete allowCreate items={ITEMS} />,
       )
 
@@ -440,7 +440,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("enter keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -458,7 +458,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("enter keyDown should be able to create options", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete allowCreate items={ITEMS} />,
       )
 
@@ -478,7 +478,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("home keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -498,7 +498,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("end keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -517,7 +517,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("escape keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -532,7 +532,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("backspace keyDown should work correctly", async () => {
-      const { user, container } = render(<Autocomplete items={ITEMS} />)
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -561,13 +561,13 @@ describe("<Autocomplete />", () => {
         value: "option1",
       },
       {
-        label: GROUP_LABEL,
         items: [
           {
             label: "option2",
             value: "option2",
           },
         ],
+        label: GROUP_LABEL,
       },
       {
         label: "option3",
@@ -576,7 +576,7 @@ describe("<Autocomplete />", () => {
     ]
 
     test("create option when no options are available", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete allowCreate items={items} />,
       )
 
@@ -613,8 +613,8 @@ describe("<Autocomplete />", () => {
 
     describe("with insert position", () => {
       test("first", async () => {
-        const { user, container } = render(
-          <Autocomplete allowCreate items={items} insertPositionItem="first" />,
+        const { container, user } = render(
+          <Autocomplete allowCreate insertPositionItem="first" items={items} />,
         )
 
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -633,8 +633,8 @@ describe("<Autocomplete />", () => {
       })
 
       test("last", async () => {
-        const { user, container } = render(
-          <Autocomplete allowCreate items={items} insertPositionItem="last" />,
+        const { container, user } = render(
+          <Autocomplete allowCreate insertPositionItem="last" items={items} />,
         )
 
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -655,11 +655,11 @@ describe("<Autocomplete />", () => {
       })
 
       test("group2", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <Autocomplete
             allowCreate
-            items={items}
             insertPositionItem={GROUP_LABEL}
+            items={items}
           />,
         )
 
@@ -679,11 +679,11 @@ describe("<Autocomplete />", () => {
       })
 
       test("group2 last", async () => {
-        const { user, container } = render(
+        const { container, user } = render(
           <Autocomplete
             allowCreate
-            items={items}
             insertPositionItem={[GROUP_LABEL, "last"]}
+            items={items}
           />,
         )
 
@@ -707,11 +707,11 @@ describe("<Autocomplete />", () => {
           .spyOn(console, "warn")
           .mockImplementation(() => {})
 
-        const { user, container } = render(
+        const { container, user } = render(
           <Autocomplete
             allowCreate
-            items={items}
             insertPositionItem="Group4"
+            items={items}
           />,
         )
 
@@ -737,13 +737,13 @@ describe("<Autocomplete />", () => {
           value: "option1",
         },
         {
-          label: GROUP_LABEL,
           items: [
             {
               label: "option2",
               value: "option2",
             },
           ],
+          label: GROUP_LABEL,
         },
         {
           label: "option3",
@@ -753,11 +753,11 @@ describe("<Autocomplete />", () => {
 
       const items: AutocompleteItem[] = JSON.parse(JSON.stringify(original))
 
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete
           allowCreate
-          items={items}
           insertPositionItem={GROUP_LABEL}
+          items={items}
         />,
       )
 
@@ -779,7 +779,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("with createProps icon", async () => {
-      const { user, container } = render(
+      const { container, user } = render(
         <Autocomplete
           allowCreate
           items={items}

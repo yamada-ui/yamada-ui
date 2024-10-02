@@ -4,8 +4,8 @@ import { Avatar, Box, Grid, Indicator, Wrap } from "@yamada-ui/react"
 type Story = StoryFn<typeof Indicator>
 
 const meta: Meta<typeof Indicator> = {
-  title: "Components / Media And Icons / Indicator",
   component: Indicator,
+  title: "Components / Media And Icons / Indicator",
 }
 
 export default meta
@@ -20,7 +20,7 @@ export const basic: Story = () => {
         />
       </Indicator>
 
-      <Indicator size="lg" offset={1.5}>
+      <Indicator offset={1.5} size="lg">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -33,19 +33,19 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <Wrap gap="md">
-      <Indicator size="sm" label="new">
+      <Indicator label="new" size="sm">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator size="md" label="new">
+      <Indicator label="new" size="md">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator size="lg" label="new">
+      <Indicator label="new" size="lg">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -58,13 +58,13 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <Wrap gap="md">
-      <Indicator variant="solid" label="new">
+      <Indicator label="new" variant="solid">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator variant="subtle" label="new">
+      <Indicator label="new" variant="subtle">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -76,51 +76,51 @@ export const withVariant: Story = () => {
 
 export const withPlacement: Story = () => {
   return (
-    <Grid p="md" templateColumns="repeat(3, 1fr)" gap="md">
-      <Indicator placement="top-left" label={99}>
+    <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+      <Indicator label={99} placement="top-left">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="top" label={99}>
+      <Indicator label={99} placement="top">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="top-right" label={99}>
+      <Indicator label={99} placement="top-right">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="left" label={99}>
+      <Indicator label={99} placement="left">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
       <Box />
-      <Indicator placement="right" label={99}>
+      <Indicator label={99} placement="right">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="bottom-left" label={99}>
+      <Indicator label={99} placement="bottom-left">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="bottom" label={99}>
+      <Indicator label={99} placement="bottom">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator placement="bottom-right" label={99}>
+      <Indicator label={99} placement="bottom-right">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -134,8 +134,8 @@ export const withOffset: Story = () => {
   return (
     <Indicator label="new" offset={4}>
       <Avatar
-        size="2xl"
         name="Hirotomo Yamada"
+        size="2xl"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       />
     </Indicator>
@@ -162,7 +162,7 @@ export const withShowZero: Story = () => {
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator showZero={false} label={0}>
+      <Indicator label={0} showZero={false}>
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -215,21 +215,21 @@ export const withPing: Story = () => {
         />
       </Indicator>
 
-      <Indicator variant="subtle" label="new" ping pingScale={1.4}>
+      <Indicator label="new" ping pingScale={1.4} variant="subtle">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
 
-      <Indicator size="lg" offset={1.5} ping>
+      <Indicator offset={1.5} ping size="lg">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
 
-      <Indicator variant="subtle" size="lg" offset={1.5} ping>
+      <Indicator offset={1.5} ping size="lg" variant="subtle">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"

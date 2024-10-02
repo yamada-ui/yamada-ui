@@ -1,35 +1,35 @@
+import type { RefObject } from "react"
 import {
   assignRef,
   isElement,
   useCallbackRef,
   useUnmountEffect,
 } from "@yamada-ui/utils"
-import type { RefObject } from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const isScrollable = (el: HTMLElement, isVertical: boolean) => {
   const style = getComputedStyle(el)
 
-  if (["auto", "scroll", "overlay"].includes(style.overflow)) return true
+  if (["auto", "overlay", "scroll"].includes(style.overflow)) return true
 
   if (isVertical) {
-    return ["auto", "scroll", "overlay"].includes(style.overflowY)
+    return ["auto", "overlay", "scroll"].includes(style.overflowY)
   } else {
-    return ["auto", "scroll", "overlay"].includes(style.overflowX)
+    return ["auto", "overlay", "scroll"].includes(style.overflowX)
   }
 }
 
 const onScroll = ({
-  root,
-  isVertical,
-  isReverse,
   behavior,
+  isReverse,
+  isVertical,
   position,
+  root,
 }: {
-  root: HTMLElement | null | undefined
   isVertical: boolean
-  isReverse?: boolean
+  root: HTMLElement | null | undefined
   behavior?: ScrollBehavior
+  isReverse?: boolean
   position?: number
 }) => {
   let options: ScrollToOptions
@@ -37,9 +37,9 @@ const onScroll = ({
     isElement(root) && isScrollable(root, isVertical) ? root : document.body
 
   if (isVertical) {
-    options = { top: position ?? (isReverse ? el.scrollHeight : 0), behavior }
+    options = { behavior, top: position ?? (isReverse ? el.scrollHeight : 0) }
   } else {
-    options = { left: position ?? (isReverse ? el.scrollWidth : 0), behavior }
+    options = { behavior, left: position ?? (isReverse ? el.scrollWidth : 0) }
   }
 
   if (el === document.body) {
@@ -66,52 +66,19 @@ const getScrollPosition = (
 export interface UseInfiniteScrollProps
   extends Omit<IntersectionObserverInit, "root"> {
   /**
-   * The orientation of the infinite scroll.
-   *
-   * @default 'vertical'
+   * Determines whether scrolling is instant or animates smoothly.
    */
-  orientation?: "vertical" | "horizontal"
-  /**
-   * The element that is used as the viewport for checking visibility of the target.
-   * Defaults to the browser viewport if not specified or if `null`.
-   */
-  rootRef?: RefObject<HTMLElement>
-  /**
-   * Margin around the root. Can have values similar to the CSS margin property,
-   * e.g. "10px 20px 30px 40px" (top, right, bottom, left).
-   */
-  rootMargin?: string
-  /**
-   * Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed.
-   */
-  threshold?: number | number[]
-  /**
-   * If set the `onLoad` function will start from the given index.
-   * If `initialLoad` is `true`, index starts from `0`.
-   *
-   * @default 1
-   */
-  startIndex?: number
-  /**
-   * The callback invoked when trigger is intersect.
-   */
-  onLoad?: ({
-    index,
-    entry,
-    finish,
-  }: {
-    index: number
-    finish: () => void
-    entry?: IntersectionObserverEntry
-  }) => void | Promise<void>
-  /**
-   * Ref to a reset function.
-   */
-  resetRef?: RefObject<(index?: number, runScroll?: boolean) => void>
+  behavior?: ScrollBehavior
   /**
    * Ref to a reset index function.
    */
   indexRef?: RefObject<(index: number) => void>
+  /**
+   * If `true`, invoke `onLoad` function for the first time.
+   *
+   * @default false
+   */
+  initialLoad?: boolean
   /**
    * If `true`, the infinite scroll is disabled.
    *
@@ -125,15 +92,48 @@ export interface UseInfiniteScrollProps
    */
   isReverse?: boolean
   /**
-   * If `true`, invoke `onLoad` function for the first time.
+   * The orientation of the infinite scroll.
    *
-   * @default false
+   * @default 'vertical'
    */
-  initialLoad?: boolean
+  orientation?: "horizontal" | "vertical"
   /**
-   * Determines whether scrolling is instant or animates smoothly.
+   * Ref to a reset function.
    */
-  behavior?: ScrollBehavior
+  resetRef?: RefObject<(index?: number, runScroll?: boolean) => void>
+  /**
+   * Margin around the root. Can have values similar to the CSS margin property,
+   * e.g. "10px 20px 30px 40px" (top, right, bottom, left).
+   */
+  rootMargin?: string
+  /**
+   * The element that is used as the viewport for checking visibility of the target.
+   * Defaults to the browser viewport if not specified or if `null`.
+   */
+  rootRef?: RefObject<HTMLElement>
+  /**
+   * If set the `onLoad` function will start from the given index.
+   * If `initialLoad` is `true`, index starts from `0`.
+   *
+   * @default 1
+   */
+  startIndex?: number
+  /**
+   * Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed.
+   */
+  threshold?: number | number[]
+  /**
+   * The callback invoked when trigger is intersect.
+   */
+  onLoad?: ({
+    entry,
+    finish,
+    index,
+  }: {
+    finish: () => void
+    index: number
+    entry?: IntersectionObserverEntry
+  }) => Promise<void> | void
 }
 
 /**
@@ -142,18 +142,18 @@ export interface UseInfiniteScrollProps
  * @see Docs https://yamada-ui.com/hooks/use-infinite-scroll
  */
 export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
-  orientation = "vertical",
-  rootRef,
-  rootMargin,
-  threshold,
-  initialLoad = false,
-  startIndex = initialLoad ? 0 : 1,
-  onLoad: onLoadProp,
-  resetRef,
+  behavior,
   indexRef: indexRefProp,
+  initialLoad = false,
   isDisabled = false,
   isReverse = false,
-  behavior,
+  orientation = "vertical",
+  resetRef,
+  rootMargin,
+  rootRef,
+  startIndex = initialLoad ? 0 : 1,
+  threshold,
+  onLoad: onLoadProp,
 }: UseInfiniteScrollProps = {}) => {
   const ref = useRef<T>(null)
   const indexRef = useRef<number>(startIndex)
@@ -179,7 +179,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
       if (runScroll) {
         const root = rootRef?.current
 
-        onScroll({ root, isVertical, isReverse, behavior })
+        onScroll({ behavior, isReverse, isVertical, root })
       }
 
       if (isDisabled) return
@@ -207,7 +207,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
     const observer = new IntersectionObserver(async ([entry]) => {
       if (!entry.isIntersecting || processingRef.current) return
 
-      const props = { index: indexRef.current, entry, finish: onFinish }
+      const props = { entry, finish: onFinish, index: indexRef.current }
 
       processingRef.current = true
 
@@ -224,7 +224,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
       if (isReverse) {
         const position = prevScrollPosition.current
 
-        onScroll({ root, isVertical, position })
+        onScroll({ isVertical, position, root })
       }
 
       indexRef.current += 1
@@ -246,7 +246,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
         processingRef.current = true
         if (root) root.ariaBusy = "true"
 
-        await onLoad({ index, finish: onFinish })
+        await onLoad({ finish: onFinish, index })
 
         indexRef.current += 1
         processingRef.current = false
@@ -262,7 +262,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
       if (isReverse && !isMounted) {
         const root = rootRef?.current
 
-        onScroll({ root, isVertical, isReverse })
+        onScroll({ isReverse, isVertical, root })
 
         isMountedRef.current = true
       }

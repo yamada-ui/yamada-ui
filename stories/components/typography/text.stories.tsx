@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { VStack, Text } from "@yamada-ui/react"
+import { Text, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Text>
 
 const meta: Meta<typeof Text> = {
-  title: "Components / Typography / Text",
   component: Text,
+  title: "Components / Typography / Text",
 }
 
 export default meta
@@ -59,11 +59,11 @@ export const basic: Story = () => {
 export const gradient: Story = () => {
   return (
     <Text
-      w="full"
+      bgClip="text"
+      bgGradient="linear(to-l, #7928CA, #FF0080)"
       fontSize="xl"
       fontWeight="bold"
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
-      bgClip="text"
+      w="full"
     >
       やるじゃねえかサタン！おめえはホントに世界の救世主かもな！
     </Text>

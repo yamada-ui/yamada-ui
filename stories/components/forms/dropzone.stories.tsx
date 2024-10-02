@@ -1,20 +1,20 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef } from "react"
 import {
   Dropzone,
   DropzoneAccept,
-  DropzoneReject,
   DropzoneIdle,
+  DropzoneReject,
   IMAGE_ACCEPT_TYPE,
 } from "@yamada-ui/dropzone"
-import { Image as UploadImage, Upload, X } from "@yamada-ui/lucide"
-import { HStack, VStack, Text, FormControl, Button } from "@yamada-ui/react"
+import { Upload, Image as UploadImage, X } from "@yamada-ui/lucide"
+import { Button, FormControl, HStack, Text, VStack } from "@yamada-ui/react"
+import { useRef } from "react"
 
 type Story = StoryFn<typeof Dropzone>
 
 const meta: Meta<typeof Dropzone> = {
-  title: "Components / Forms / Dropzone",
   component: Dropzone,
+  title: "Components / Forms / Dropzone",
 }
 
 export default meta
@@ -92,7 +92,7 @@ export const withAccept: Story = () => {
 export const withMaxSize: Story = () => {
   return (
     <Dropzone maxSize={3 * 1024 ** 2}>
-      <VStack w="auto" gap="2xs">
+      <VStack gap="2xs" w="auto">
         <Text fontSize="xl">Drag file here or click to select file</Text>
         <Text fontSize="sm">
           Attach as many files as you like, each file should not exceed 5mb
@@ -104,8 +104,8 @@ export const withMaxSize: Story = () => {
 
 export const withMaxFiles: Story = () => {
   return (
-    <Dropzone multiple maxFiles={3}>
-      <VStack w="auto" gap="2xs">
+    <Dropzone maxFiles={3} multiple>
+      <VStack gap="2xs" w="auto">
         <Text fontSize="xl">Drag file here or click to select file</Text>
         <Text fontSize="sm">
           Attach as many files as you like, can upload up to 3 files
@@ -120,11 +120,11 @@ export const withStatus: Story = () => {
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload fontSize="6xl" color="success" />
+          <Upload color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X fontSize="6xl" color="danger" />
+          <X color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -158,11 +158,11 @@ export const useOnDrop: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload fontSize="6xl" color="success" />
+          <Upload color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X fontSize="6xl" color="danger" />
+          <X color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -189,11 +189,11 @@ export const useOnDropAccepted: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload fontSize="6xl" color="success" />
+          <Upload color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X fontSize="6xl" color="danger" />
+          <X color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -220,11 +220,11 @@ export const useOnDropRejected: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload fontSize="6xl" color="success" />
+          <Upload color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X fontSize="6xl" color="danger" />
+          <X color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -249,7 +249,7 @@ export const withBorderColor: Story = () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isInvalid errorBorderColor="orange.500">
+      <Dropzone errorBorderColor="orange.500" isInvalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>
@@ -267,7 +267,7 @@ export const isDisabled: Story = () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl label="Upload file" isDisabled>
+      <FormControl isDisabled label="Upload file">
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -287,7 +287,7 @@ export const isReadonly: Story = () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl label="Upload file" isReadOnly>
+      <FormControl isReadOnly label="Upload file">
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -308,9 +308,9 @@ export const isInvalid: Story = () => {
       </Dropzone>
 
       <FormControl
-        label="Upload file"
-        isInvalid
         errorMessage="File is required."
+        isInvalid
+        label="Upload file"
       >
         <Dropzone>
           <Text>Drag file here or click to select file</Text>

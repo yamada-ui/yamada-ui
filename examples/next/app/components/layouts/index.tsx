@@ -14,11 +14,11 @@ export const Layout: FC<LayoutProps> = ({ ...rest }) => {
       <Center as='main' w='full'>
         <VStack
           alignItems='flex-start'
-          w='full'
-          maxW='9xl'
           gap={{ base: 'lg', md: 'md' }}
-          py='lg'
+          maxW='9xl'
           px={{ base: 'lg', md: 'md' }}
+          py='lg'
+          w='full'
           {...rest}
         />
       </Center>

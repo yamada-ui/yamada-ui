@@ -48,7 +48,7 @@ interface GetStylesOptions {
   selectors?: (string | undefined)[]
 }
 
-export interface SetStylesOptions<Y extends boolean = false> {
+interface UseStylesOptions<Y extends boolean = false> {
   isMulti?: Y
   isProcessSkip?: boolean
   styles?: Styles<Y>
@@ -284,10 +284,10 @@ function mergeProps<Y extends Dict = Dict>(
   return props
 }
 
-function setStyles<Y extends Dict = Dict, M extends boolean = false>(
+function useStyles<Y extends Dict = Dict, M extends boolean = false>(
   name: string,
   props: Y,
-  { isMulti, isProcessSkip, styles = {} }: SetStylesOptions<M> = {},
+  { isMulti, isProcessSkip, styles = {} }: UseStylesOptions<M> = {},
 ): [styles: Styles<M>, props: Y] {
   const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
@@ -359,7 +359,7 @@ function setStyles<Y extends Dict = Dict, M extends boolean = false>(
 }
 
 export type UseComponentStyleOptions<Y extends boolean = false> = Omit<
-  SetStylesOptions<Y>,
+  UseStylesOptions<Y>,
   "isMulti"
 >
 
@@ -368,7 +368,7 @@ export function useComponentStyle<Y extends Dict = Dict>(
   props: Y,
   options?: UseComponentStyleOptions,
 ) {
-  return setStyles<Y>(name, props, options)
+  return useStyles<Y>(name, props, options)
 }
 
 export function useComponentMultiStyle<Y extends Dict = Dict>(
@@ -376,5 +376,5 @@ export function useComponentMultiStyle<Y extends Dict = Dict>(
   props: Y,
   options?: UseComponentStyleOptions<true>,
 ) {
-  return setStyles<Y, true>(name, props, { isMulti: true, ...options })
+  return useStyles<Y, true>(name, props, { isMulti: true, ...options })
 }

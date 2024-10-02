@@ -110,23 +110,23 @@ describe("<FileButton />", () => {
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 1")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
 
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
     fireEvent.change(fileInput, { target: { files: [file1, file2] } })
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 2")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
 
     fireEvent.change(fileInput, { target: { files: [] } })
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([])
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })

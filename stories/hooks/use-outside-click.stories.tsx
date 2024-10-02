@@ -17,15 +17,11 @@ export const basic = () => {
     handler: () => setIsOpen(false),
   })
 
-  return (
-    <>
-      {isOpen ? (
-        <Center ref={ref} bg="danger" color="white" h="10" px="4" rounded="md">
-          Hey, Click anywhere outside of me to close.
-        </Center>
-      ) : (
-        <Button onClick={() => setIsOpen(true)}>Please Click</Button>
-      )}
-    </>
+  return isOpen ? (
+    <Center ref={ref} bg="danger" color="white" h="10" px="4" rounded="md">
+      Hey, Click anywhere outside of me to close.
+    </Center>
+  ) : (
+    <Button onClick={() => setIsOpen(true)}>Please Click</Button>
   )
 }

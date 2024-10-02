@@ -18,11 +18,7 @@ describe("useNotice()", () => {
       })
     }
 
-    return (
-      <>
-        <button onClick={onOpen}>Open Notice</button>
-      </>
-    )
+    return <button onClick={onOpen}>Open Notice</button>
   }
 
   test("Notice renders correctly", async () => {
@@ -55,11 +51,7 @@ describe("useNotice()", () => {
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -87,11 +79,7 @@ describe("useNotice()", () => {
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -119,11 +107,7 @@ describe("useNotice()", () => {
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -292,11 +276,7 @@ describe("useNotice()", () => {
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<CloseNoticeExample />)

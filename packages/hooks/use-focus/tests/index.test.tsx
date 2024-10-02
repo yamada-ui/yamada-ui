@@ -24,7 +24,7 @@ describe("useFocusOnHide", () => {
   }
 
   test("focuses on the element when it becomes hidden", async () => {
-    const { getByTestId, rerender } = render(<Component visible={true} />)
+    const { getByTestId, rerender } = render(<Component visible />)
     const button = getByTestId("button")
 
     expect(button).not.toHaveFocus()
@@ -46,14 +46,12 @@ describe("useFocusOnHide", () => {
   })
 
   test("does not focus on the element when visible is true", async () => {
-    const { getByTestId, rerender } = render(
-      <Component shouldFocus={true} visible={true} />,
-    )
+    const { getByTestId, rerender } = render(<Component shouldFocus visible />)
     const button = getByTestId("button")
 
     expect(button).not.toHaveFocus()
 
-    rerender(<Component shouldFocus={true} visible={true} />)
+    rerender(<Component shouldFocus visible />)
 
     await waitFor(() => {
       expect(button).not.toHaveFocus()
@@ -95,7 +93,7 @@ describe("useFocusOnShow", () => {
 
     expect(button).not.toHaveFocus()
 
-    rerender(<Component visible={true} />)
+    rerender(<Component visible />)
 
     await waitFor(() => {
       expect(button).toHaveFocus()
@@ -110,7 +108,7 @@ describe("useFocusOnShow", () => {
 
     expect(button).not.toHaveFocus()
 
-    rerender(<ComponentWithoutFocusRef visible={true} />)
+    rerender(<ComponentWithoutFocusRef visible />)
 
     await waitFor(() => {
       expect(button).not.toHaveFocus()

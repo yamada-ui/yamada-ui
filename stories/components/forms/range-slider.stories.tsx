@@ -372,43 +372,41 @@ export const customMark: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
 
   return (
-    <>
-      <RangeSlider mt="10" value={value} onChange={onChange}>
-        <RangeSliderMark ml="-5" value={25} w="10">
-          25%
-        </RangeSliderMark>
-        <RangeSliderMark ml="-5" value={50} w="10">
-          50%
-        </RangeSliderMark>
-        <RangeSliderMark ml="-5" value={75} w="10">
-          75%
-        </RangeSliderMark>
-        <RangeSliderMark
-          bg="blue.500"
-          color="white"
-          ml="-5"
-          mt="-10"
-          py="0.5"
-          rounded="md"
-          value={value[0]}
-          w="10"
-        >
-          {value[0]}%
-        </RangeSliderMark>
-        <RangeSliderMark
-          bg="blue.500"
-          color="white"
-          ml="-5"
-          mt="-10"
-          py="0.5"
-          rounded="md"
-          value={value[1]}
-          w="10"
-        >
-          {value[1]}%
-        </RangeSliderMark>
-      </RangeSlider>
-    </>
+    <RangeSlider mt="10" value={value} onChange={onChange}>
+      <RangeSliderMark ml="-5" value={25} w="10">
+        25%
+      </RangeSliderMark>
+      <RangeSliderMark ml="-5" value={50} w="10">
+        50%
+      </RangeSliderMark>
+      <RangeSliderMark ml="-5" value={75} w="10">
+        75%
+      </RangeSliderMark>
+      <RangeSliderMark
+        bg="blue.500"
+        color="white"
+        ml="-5"
+        mt="-10"
+        py="0.5"
+        rounded="md"
+        value={value[0]}
+        w="10"
+      >
+        {value[0]}%
+      </RangeSliderMark>
+      <RangeSliderMark
+        bg="blue.500"
+        color="white"
+        ml="-5"
+        mt="-10"
+        py="0.5"
+        rounded="md"
+        value={value[1]}
+        w="10"
+      >
+        {value[1]}%
+      </RangeSliderMark>
+    </RangeSlider>
   )
 }
 

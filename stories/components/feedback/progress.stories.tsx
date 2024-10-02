@@ -11,35 +11,19 @@ const meta: Meta<typeof Progress> = {
 export default meta
 
 export const basic: Story = () => {
-  return (
-    <>
-      <Progress value={88} />
-    </>
-  )
+  return <Progress value={88} />
 }
 
 export const withColorMode: Story = () => {
-  return (
-    <>
-      <Progress colorScheme="purple" value={18} />
-    </>
-  )
+  return <Progress colorScheme="purple" value={18} />
 }
 
 export const withFilledTrackColor: Story = () => {
-  return (
-    <>
-      <Progress filledTrackColor="green.500" value={18} />
-    </>
-  )
+  return <Progress filledTrackColor="green.500" value={18} />
 }
 
 export const withStripe: Story = () => {
-  return (
-    <>
-      <Progress hasStripe value={19} />
-    </>
-  )
+  return <Progress hasStripe value={19} />
 }
 
 export const withSize: Story = () => {
@@ -63,16 +47,8 @@ export const withBorderRadius: Story = () => {
 }
 
 export const useStripeAnimation: Story = () => {
-  return (
-    <>
-      <Progress hasStripe isStripeAnimation value={20} />
-    </>
-  )
+  return <Progress hasStripe isStripeAnimation value={20} />
 }
 export const useAnimation: Story = () => {
-  return (
-    <>
-      <Progress colorScheme="green" isAnimation />
-    </>
-  )
+  return <Progress colorScheme="green" isAnimation />
 }

@@ -101,7 +101,7 @@ describe("<DonutChart />", () => {
       const { rerender } = render(
         <DonutChart
           data={data}
-          withLabels={true}
+          withLabels
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}
         />,
@@ -131,8 +131,8 @@ describe("<DonutChart />", () => {
       const { container, rerender } = render(
         <DonutChart
           data={data}
-          withLabelLines={true}
-          withLabels={true}
+          withLabelLines
+          withLabels
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -147,7 +147,7 @@ describe("<DonutChart />", () => {
         <DonutChart
           data={data}
           withLabelLines={false}
-          withLabels={true}
+          withLabels
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -163,7 +163,7 @@ describe("<DonutChart />", () => {
       const { container } = render(
         <DonutChart
           data={data}
-          withLabelLines={true}
+          withLabelLines
           withLabels={false}
           containerProps={{ height: "80%", width: 400 }}
         />,
@@ -211,7 +211,7 @@ describe("<DonutChart />", () => {
       const { container, rerender } = render(
         <DonutChart
           data={data}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -269,7 +269,7 @@ describe("<DonutChart />", () => {
         <DonutChart
           data={data}
           tooltipDataSource="segment"
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -293,7 +293,7 @@ describe("<DonutChart />", () => {
       const { container, rerender } = render(
         <DonutChart
           data={data}
-          withLegend={true}
+          withLegend
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}
         />,

@@ -8,19 +8,17 @@ describe("<CircleProgress />", () => {
 
   test("renders correctly without animation", () => {
     render(
-      <>
-        <CircleProgress
-          boxSize="8rem"
-          color="green.500"
-          isRounded
-          max={100}
-          min={0}
-          thickness="0.5rem"
-          trackColor="gray.300"
-          value={75}
-          data-testid="circle-progress-a"
-        />
-      </>,
+      <CircleProgress
+        boxSize="8rem"
+        color="green.500"
+        isRounded
+        max={100}
+        min={0}
+        thickness="0.5rem"
+        trackColor="gray.300"
+        value={75}
+        data-testid="circle-progress-a"
+      />,
     )
     expect(screen.getByTestId("circle-progress-a")).toBeInTheDocument()
   })

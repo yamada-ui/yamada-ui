@@ -55,7 +55,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
         __css={css}
         {...rest}
       >
-        {component ? <>{component}</> : null}
+        {component ? component : null}
       </ui.div>
     )
   },

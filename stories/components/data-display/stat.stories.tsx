@@ -67,15 +67,13 @@ export const withColorScheme: Story = () => {
 
 export const withCenterContent: Story = () => {
   return (
-    <>
-      <Stat
-        centerContent
-        helperMessage="From August 1 to August 18"
-        icon="increase"
-        label="Downloads"
-        number="18K"
-      />
-    </>
+    <Stat
+      centerContent
+      helperMessage="From August 1 to August 18"
+      icon="increase"
+      label="Downloads"
+      number="18K"
+    />
   )
 }
 

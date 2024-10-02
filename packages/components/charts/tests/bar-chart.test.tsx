@@ -163,7 +163,7 @@ describe("<BarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withXAxis={true}
+          withXAxis
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -205,7 +205,7 @@ describe("<BarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withYAxis={true}
+          withYAxis
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -259,7 +259,7 @@ describe("<BarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withTooltip={true}
+          withTooltip
           withXAxis={false}
           containerProps={{ height: "80%", width: 400 }}
         />,
@@ -320,7 +320,7 @@ describe("<BarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -406,7 +406,7 @@ describe("<BarChart />", () => {
         data={data}
         dataKey="name"
         series={series}
-        withLegend={true}
+        withLegend
         containerProps={{ height: "80%", width: 400 }}
       />,
     )

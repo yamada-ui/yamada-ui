@@ -90,17 +90,15 @@ describe("<Fieldset />", () => {
 
   test("should be appeared helperMessage", () => {
     render(
-      <>
-        <Fieldset
-          errorMessage="Agreement is required."
-          helperMessage="Please review the terms carefully before agreeing."
-          isInvalid
-          isReplace={false}
-          legend="Terms and Conditions"
-        >
-          <Checkbox>I agree to the Terms and Conditions.</Checkbox>
-        </Fieldset>
-      </>,
+      <Fieldset
+        errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
+        isInvalid
+        isReplace={false}
+        legend="Terms and Conditions"
+      >
+        <Checkbox>I agree to the Terms and Conditions.</Checkbox>
+      </Fieldset>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Agreement is required.")),

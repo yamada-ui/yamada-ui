@@ -134,7 +134,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withDots={true}
+          withDots
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -152,8 +152,8 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withActiveDots={true}
-          withDots={true}
+          withActiveDots
+          withDots
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -182,7 +182,7 @@ describe("<RadarChart />", () => {
           dataKey="name"
           series={series}
           withActiveDots={false}
-          withDots={true}
+          withDots
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -212,7 +212,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withPolarAngleAxis={true}
+          withPolarAngleAxis
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -254,7 +254,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withPolarRadiusAxis={true}
+          withPolarRadiusAxis
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -288,7 +288,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withPolarGrid={true}
+          withPolarGrid
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -325,7 +325,7 @@ describe("<RadarChart />", () => {
           dataKey="name"
           series={series}
           withPolarAngleAxis={false}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -387,7 +387,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -443,7 +443,7 @@ describe("<RadarChart />", () => {
           data={data}
           dataKey="name"
           series={series}
-          withLegend={true}
+          withLegend
           containerProps={{ height: "80%", width: 400 }}
         />,
       )

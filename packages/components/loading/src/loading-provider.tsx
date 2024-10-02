@@ -26,7 +26,6 @@ import {
 import {
   createContext,
   createRef,
-  Fragment,
   memo,
   useContext,
   useMemo,
@@ -294,9 +293,7 @@ const Controller: FC<ControllerProps> = ({
             enabled={blockScrollOnMount}
             forwardProps
           >
-            <Fragment>
-              <Render component={component} {...props} />
-            </Fragment>
+            <Render component={component} {...props} />
           </RemoveScroll>
         </Portal>
       ) : null}
@@ -312,7 +309,7 @@ const Render: FC<RenderProps> = ({ component, ...props }) => {
   if (typeof component === "function") {
     return component(props) as JSX.Element
   } else {
-    return <></>
+    return null
   }
 }
 

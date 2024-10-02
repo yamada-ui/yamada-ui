@@ -35,7 +35,6 @@ import {
   isArray,
   splitObject,
 } from "@yamada-ui/utils"
-import { Fragment } from "react"
 import { useDropzone } from "react-dropzone-esm"
 
 interface DropzoneContext {
@@ -246,7 +245,7 @@ LoadingOverlay.__ui__ = "LoadingOverlay"
 export const DropzoneAccept: FC<PropsWithChildren> = ({ children }) => {
   const { isDragAccept } = useDropzoneContext()
 
-  return isDragAccept ? <Fragment>{children}</Fragment> : null
+  return isDragAccept ? children : null
 }
 
 DropzoneAccept.displayName = "DropzoneAccept"
@@ -255,7 +254,7 @@ DropzoneAccept.__ui__ = "DropzoneAccept"
 export const DropzoneReject: FC<PropsWithChildren> = ({ children }) => {
   const { isDragReject } = useDropzoneContext()
 
-  return isDragReject ? <Fragment>{children}</Fragment> : null
+  return isDragReject ? children : null
 }
 
 DropzoneReject.displayName = "DropzoneReject"
@@ -264,7 +263,7 @@ DropzoneReject.__ui__ = "DropzoneReject"
 export const DropzoneIdle: FC<PropsWithChildren> = ({ children }) => {
   const { isDragIdle } = useDropzoneContext()
 
-  return isDragIdle ? <Fragment>{children}</Fragment> : null
+  return isDragIdle ? children : null
 }
 
 DropzoneIdle.displayName = "DropzoneIdle"

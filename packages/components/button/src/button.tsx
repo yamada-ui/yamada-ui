@@ -269,7 +269,7 @@ const ButtonIcon: FC<ButtonIconProps> = ({ className, children, ...rest }) => {
       alignSelf="center"
       display="inline-flex"
       flexShrink={0}
-      aria-hidden={true}
+      aria-hidden
       {...rest}
     >
       {children}

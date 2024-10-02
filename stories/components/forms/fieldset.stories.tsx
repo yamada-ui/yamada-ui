@@ -55,7 +55,7 @@ export const isReplace: Story = () => {
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
         isInvalid
-        isReplace={true}
+        isReplace
         legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>

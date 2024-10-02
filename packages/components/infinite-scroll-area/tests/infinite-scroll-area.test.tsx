@@ -86,7 +86,7 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { container } = render(<MyComponent isReverse={true} />)
+    const { container } = render(<MyComponent isReverse />)
     fireEvent.scroll(container, {
       target: {
         scrollTop: 1000,

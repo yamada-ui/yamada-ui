@@ -303,7 +303,7 @@ describe("<Tbody />", () => {
 
   test("if rowsClickSelect is true, you can select a row by clicking on it", async () => {
     const { user } = render(
-      <Table columns={columns} data={data} rowsClickSelect={true} />,
+      <Table columns={columns} data={data} rowsClickSelect />,
     )
     const row = screen.getByRole("row", { name: /Goku/i })
     await waitFor(async () => {

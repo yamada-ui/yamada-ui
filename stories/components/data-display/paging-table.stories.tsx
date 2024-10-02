@@ -467,22 +467,21 @@ export const withManualPagination: Story = () => {
 
   const hasData = data.length
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  if (!hasData) return <></>
+
   return (
-    <>
-      {hasData ? (
-        <PagingTable
-          columns={columns}
-          data={data}
-          manualPagination
-          pageCount={pageCount}
-          pageIndex={pageIndex}
-          pageSize={pageSize}
-          rowId="id"
-          onChangePageIndex={onChangePageIndex}
-          onChangePageSize={onChangePageSize}
-        />
-      ) : null}
-    </>
+    <PagingTable
+      columns={columns}
+      data={data}
+      manualPagination
+      pageCount={pageCount}
+      pageIndex={pageIndex}
+      pageSize={pageSize}
+      rowId="id"
+      onChangePageIndex={onChangePageIndex}
+      onChangePageSize={onChangePageSize}
+    />
   )
 }
 

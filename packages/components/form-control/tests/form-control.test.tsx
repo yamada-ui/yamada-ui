@@ -61,17 +61,15 @@ describe("<FormControl />", () => {
 
   test("should be appeared helperMessage", () => {
     render(
-      <>
-        <FormControl
-          errorMessage="Email is required."
-          helperMessage="Please enter your email"
-          isInvalid
-          isReplace={false}
-          label="Email"
-        >
-          <Input type="email" />
-        </FormControl>
-      </>,
+      <FormControl
+        errorMessage="Email is required."
+        helperMessage="Please enter your email"
+        isInvalid
+        isReplace={false}
+        label="Email"
+      >
+        <Input type="email" />
+      </FormControl>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Email is required.")),

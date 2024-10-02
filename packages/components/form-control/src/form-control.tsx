@@ -434,7 +434,7 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
         ref={ref}
         className={cx("ui-form__required-indicator", className)}
         role="presentation"
-        aria-hidden={true}
+        aria-hidden
         __css={css}
         {...rest}
       >

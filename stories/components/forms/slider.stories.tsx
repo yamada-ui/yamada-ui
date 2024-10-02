@@ -298,31 +298,29 @@ export const customMark: Story = () => {
   const [value, onChange] = useState<number>(50)
 
   return (
-    <>
-      <Slider mt="10" value={value} onChange={onChange}>
-        <SliderMark ml="-5" value={25} w="10">
-          25%
-        </SliderMark>
-        <SliderMark ml="-5" value={50} w="10">
-          50%
-        </SliderMark>
-        <SliderMark ml="-5" value={75} w="10">
-          75%
-        </SliderMark>
-        <SliderMark
-          bg="blue.500"
-          color="white"
-          ml="-5"
-          mt="-10"
-          py="0.5"
-          rounded="md"
-          value={value}
-          w="10"
-        >
-          {value}%
-        </SliderMark>
-      </Slider>
-    </>
+    <Slider mt="10" value={value} onChange={onChange}>
+      <SliderMark ml="-5" value={25} w="10">
+        25%
+      </SliderMark>
+      <SliderMark ml="-5" value={50} w="10">
+        50%
+      </SliderMark>
+      <SliderMark ml="-5" value={75} w="10">
+        75%
+      </SliderMark>
+      <SliderMark
+        bg="blue.500"
+        color="white"
+        ml="-5"
+        mt="-10"
+        py="0.5"
+        rounded="md"
+        value={value}
+        w="10"
+      >
+        {value}%
+      </SliderMark>
+    </Slider>
   )
 }
 

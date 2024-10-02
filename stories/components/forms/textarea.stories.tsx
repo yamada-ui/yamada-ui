@@ -14,7 +14,7 @@ const meta: Meta<typeof Textarea> = {
 export default meta
 
 export const basic: Story = () => {
-  return <Textarea placeholder="basic"></Textarea>
+  return <Textarea placeholder="basic" />
 }
 
 export const withSize: Story = () => {
@@ -159,14 +159,12 @@ export const useResize: Story = () => {
   }
 
   return (
-    <>
-      <VStack>
-        <Textarea placeholder="use resize" resizeRef={resizeRef} />
-        <Button alignSelf="flex-end" onClick={onResize}>
-          Resize
-        </Button>
-      </VStack>
-    </>
+    <VStack>
+      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Button alignSelf="flex-end" onClick={onResize}>
+        Resize
+      </Button>
+    </VStack>
   )
 }
 

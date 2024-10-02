@@ -322,7 +322,7 @@ export const disabledCloseOnSelect: Story = () => {
 
       <MenuList>
         <MenuItem>Set status</MenuItem>
-        <MenuItem closeOnSelect={true}>Edit Profile</MenuItem>
+        <MenuItem closeOnSelect>Edit Profile</MenuItem>
         <MenuItem>Preferences</MenuItem>
       </MenuList>
     </Menu>

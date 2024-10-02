@@ -55,7 +55,7 @@ export const isReplace: Story = () => {
         errorMessage="Email is required."
         helperMessage="We'll never share your email."
         isInvalid
-        isReplace={true}
+        isReplace
         label="Email address"
       >
         <Input type="email" placeholder="your email address" />

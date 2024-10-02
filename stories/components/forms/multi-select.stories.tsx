@@ -208,7 +208,7 @@ export const withComponent: Story = () => {
 
 export const withOmitSelectedValues: Story = () => {
   return (
-    <MultiSelect omitSelectedValues={true} placeholder="キャラクターを選択">
+    <MultiSelect omitSelectedValues placeholder="キャラクターを選択">
       <OptionGroup label="地球人">
         <Option value="孫悟空">孫悟空</Option>
         <Option value="孫悟飯">孫悟飯</Option>
@@ -250,7 +250,7 @@ export const withMaxSelectValues: Story = () => {
 
 export const withCloseOnSelect: Story = () => {
   return (
-    <MultiSelect closeOnSelect={true} placeholder="キャラクターを選択">
+    <MultiSelect closeOnSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>

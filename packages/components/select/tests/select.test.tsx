@@ -438,7 +438,7 @@ describe("<Select />", () => {
           { label: "Two", value: "" },
         ]}
         placeholder="Select numbers"
-        placeholderInOptions={true}
+        placeholderInOptions
       />,
     )
 
@@ -464,7 +464,7 @@ describe("<Select />", () => {
             { label: "Two", value: "" },
           ]}
           placeholder="Select numbers"
-          placeholderInOptions={true}
+          placeholderInOptions
         />,
       )
 
@@ -483,7 +483,7 @@ describe("<Select />", () => {
             { label: "Two", value: "" },
           ]}
           placeholder="Select numbers"
-          placeholderInOptions={true}
+          placeholderInOptions
         />,
       )
 
@@ -509,7 +509,7 @@ describe("<Select />", () => {
             { label: "Two", value: "" },
           ]}
           placeholder="Select numbers"
-          placeholderInOptions={true}
+          placeholderInOptions
         />,
       )
 
@@ -528,7 +528,7 @@ describe("<Select />", () => {
             { label: "Two", value: "" },
           ]}
           placeholder="Select numbers"
-          placeholderInOptions={true}
+          placeholderInOptions
         />,
       )
 

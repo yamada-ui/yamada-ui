@@ -65,7 +65,7 @@ describe("<PinInput />", () => {
   })
 
   test('input type should be "password" when mask is true', () => {
-    render(<PinInput mask={true} />)
+    render(<PinInput mask />)
 
     const inputs = screen.getAllByPlaceholderText("○")
 
@@ -86,7 +86,7 @@ describe("<PinInput />", () => {
   })
 
   test('sets autoComplete to "one-time-code" when otp is true', () => {
-    render(<PinInput otp={true} />)
+    render(<PinInput otp />)
 
     const inputs = screen.getAllByRole("textbox")
     inputs.forEach((input) => {
@@ -150,7 +150,7 @@ describe("<PinInput />", () => {
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="123" manageFocus={true} />,
+      <PinInput defaultValue="123" manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
@@ -187,7 +187,7 @@ describe("<PinInput />", () => {
 
   test("does not move focus if current input is not empty", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="1234" items={4} manageFocus={true} />,
+      <PinInput defaultValue="1234" items={4} manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
@@ -205,7 +205,7 @@ describe("<PinInput />", () => {
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
-    const { findAllByRole } = render(<PinInput autoFocus={true} />)
+    const { findAllByRole } = render(<PinInput autoFocus />)
 
     await act(async () => {
       await new Promise((resolve) => requestAnimationFrame(resolve))

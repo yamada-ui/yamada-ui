@@ -68,7 +68,7 @@ describe("<RadialChart />", () => {
       const { container, rerender } = render(
         <RadialChart
           data={data}
-          withPolarGrid={true}
+          withPolarGrid
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -131,7 +131,7 @@ describe("<RadialChart />", () => {
       const { container, rerender } = render(
         <RadialChart
           data={data}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -188,7 +188,7 @@ describe("<RadialChart />", () => {
       const { container, rerender } = render(
         <RadialChart
           data={data}
-          withLegend={true}
+          withLegend
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}
         />,

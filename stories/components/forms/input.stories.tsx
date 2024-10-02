@@ -51,11 +51,7 @@ export const withVariant: Story = () => {
 }
 
 export const withHTMLSize: Story = () => {
-  return (
-    <>
-      <Input htmlSize={4} width="auto" aria-label="Input" />
-    </>
-  )
+  return <Input htmlSize={4} width="auto" aria-label="Input" />
 }
 
 export const withBorderColor: Story = () => {
@@ -207,13 +203,7 @@ export const stylingPlaceholder: Story = () => {
 
 export const customType: Story = () => {
   return (
-    <>
-      <Input
-        type="datetime-local"
-        placeholder="Select Date and Time"
-        size="md"
-      />
-    </>
+    <Input type="datetime-local" placeholder="Select Date and Time" size="md" />
   )
 }
 

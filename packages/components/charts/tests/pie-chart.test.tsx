@@ -95,7 +95,7 @@ describe("<PieChart />", () => {
       const { rerender } = render(
         <PieChart
           data={data}
-          withLabels={true}
+          withLabels
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}
         />,
@@ -125,8 +125,8 @@ describe("<PieChart />", () => {
       const { container, rerender } = render(
         <PieChart
           data={data}
-          withLabelLines={true}
-          withLabels={true}
+          withLabelLines
+          withLabels
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -141,7 +141,7 @@ describe("<PieChart />", () => {
         <PieChart
           data={data}
           withLabelLines={false}
-          withLabels={true}
+          withLabels
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -157,7 +157,7 @@ describe("<PieChart />", () => {
       const { container } = render(
         <PieChart
           data={data}
-          withLabelLines={true}
+          withLabelLines
           withLabels={false}
           containerProps={{ height: "80%", width: 400 }}
         />,
@@ -191,7 +191,7 @@ describe("<PieChart />", () => {
       const { container, rerender } = render(
         <PieChart
           data={data}
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -252,7 +252,7 @@ describe("<PieChart />", () => {
           outerRadius="100%"
           tooltipDataSource="segment"
           w="full"
-          withTooltip={true}
+          withTooltip
           containerProps={{ height: "80%", width: 400 }}
         />,
       )
@@ -276,7 +276,7 @@ describe("<PieChart />", () => {
       const { container, rerender } = render(
         <PieChart
           data={data}
-          withLegend={true}
+          withLegend
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}
         />,

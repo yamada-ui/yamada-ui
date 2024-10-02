@@ -372,10 +372,7 @@ export const withComponent: Story = () => {
 
 export const withOmitSelectedValues: Story = () => {
   return (
-    <MultiAutocomplete
-      omitSelectedValues={true}
-      placeholder="キャラクターを選択"
-    >
+    <MultiAutocomplete omitSelectedValues placeholder="キャラクターを選択">
       <AutocompleteOptionGroup label="地球人">
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="孫悟飯">孫悟飯</AutocompleteOption>
@@ -417,7 +414,7 @@ export const withMaxSelectValues: Story = () => {
 
 export const withCloseOnSelect: Story = () => {
   return (
-    <MultiAutocomplete closeOnSelect={true} placeholder="キャラクターを選択">
+    <MultiAutocomplete closeOnSelect placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>

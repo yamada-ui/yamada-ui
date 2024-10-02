@@ -334,6 +334,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       [],
     )
 
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     if (!label) return <>{children}</>
 
     const child = Children.only(children) as {

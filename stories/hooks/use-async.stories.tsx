@@ -22,15 +22,11 @@ export const basic = () => {
     [],
   )
 
-  return (
-    <>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : error ? (
-        <Text>Error: {error.message}</Text>
-      ) : (
-        <Text>Value: {value}</Text>
-      )}
-    </>
+  return loading ? (
+    <Text>Loading...</Text>
+  ) : error ? (
+    <Text>Error: {error.message}</Text>
+  ) : (
+    <Text>Value: {value}</Text>
   )
 }

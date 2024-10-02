@@ -62,7 +62,7 @@ describe("<Dialog />", () => {
           onClose={() => setIsOpen(false)}
           onOther={() => setIsOpen(false)}
           onSuccess={() => setIsOpen(false)}
-        ></Dialog>
+        />
       </>
     )
   }

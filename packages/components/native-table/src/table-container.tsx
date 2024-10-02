@@ -25,3 +25,6 @@ export const TableContainer = forwardRef<TableContainerProps, "div">(
     )
   },
 )
+
+TableContainer.displayName = "TableContainer"
+TableContainer.__ui__ = "TableContainer"

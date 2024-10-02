@@ -14,6 +14,20 @@ export const EMERITI = [
     discord: { id: "770535018040655873" },
   },
   {
+    name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },
+    description: {
+      en: "Engineer based in Fukuoka.",
+      ja: "福岡在住のエンジニア。",
+    },
+    github: {
+      id: "setodeve",
+      icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
+      url: "https://github.com/setodeve",
+    },
+    x: { url: "https://x.com/hjuko00" },
+    discord: { id: "441961406980554772" },
+  },
+  {
     name: { en: "Ryota Suzuki", ja: "Ryota Suzuki" },
     description: {
       en: "Engineer living in Mie Prefecture, Japan.",

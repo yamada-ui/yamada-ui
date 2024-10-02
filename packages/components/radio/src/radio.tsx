@@ -72,7 +72,10 @@ export const useRadio = <
   id,
   ...props
 }: UseRadioProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
+
   const {
     id: _id,
     name,

@@ -31,3 +31,6 @@ export const Th = forwardRef<ThProps, "th">(
     )
   },
 )
+
+Th.displayName = "Th"
+Th.__ui__ = "Th"

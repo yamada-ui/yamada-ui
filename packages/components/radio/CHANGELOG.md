@@ -1,5 +1,21 @@
 # @yamada-ui/radio
 
+## 1.2.9
+
+### Patch Changes
+
+- [#2934](https://github.com/yamada-ui/yamada-ui/pull/2934) [`c52462b`](https://github.com/yamada-ui/yamada-ui/commit/c52462b0c28893dd02271f835f3def256cb72830) Thanks [@Inlet-back](https://github.com/Inlet-back)! - Set `__ui__` after each component definition.
+
+- [#2929](https://github.com/yamada-ui/yamada-ui/pull/2929) [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize id generation with uuid.
+
+- Updated dependencies [[`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`56de7f2`](https://github.com/yamada-ui/yamada-ui/commit/56de7f20fc39e497732d256ba8f1f5eec5163f49), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac)]:
+  - @yamada-ui/form-control@2.1.3
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/layouts@1.1.36
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-focus-visible@1.1.8
+
 ## 1.2.8
 
 ### Patch Changes

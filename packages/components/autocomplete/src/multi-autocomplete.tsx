@@ -294,6 +294,9 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   },
 )
 
+MultiAutocomplete.displayName = "MultiAutocomplete"
+MultiAutocomplete.__ui__ = "MultiAutocomplete"
+
 interface MultiAutocompleteFieldProps
   extends HTMLUIProps,
     Pick<
@@ -408,3 +411,6 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     )
   },
 )
+
+MultiAutocompleteField.displayName = "MultiAutocompleteField"
+MultiAutocompleteField.__ui__ = "MultiAutocompleteField"

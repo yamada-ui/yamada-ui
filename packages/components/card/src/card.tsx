@@ -68,6 +68,9 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   )
 })
 
+Card.displayName = "Card"
+Card.__ui__ = "Card"
+
 export interface CardHeaderProps extends HTMLUIProps<"header"> {}
 
 export const CardHeader = forwardRef<CardHeaderProps, "header">(
@@ -91,6 +94,9 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     )
   },
 )
+
+CardHeader.displayName = "CardHeader"
+CardHeader.__ui__ = "CardHeader"
 
 export interface CardBodyProps extends HTMLUIProps {}
 
@@ -116,6 +122,9 @@ export const CardBody = forwardRef<CardBodyProps, "div">(
   },
 )
 
+CardBody.displayName = "CardBody"
+CardBody.__ui__ = "CardBody"
+
 export interface CardFooterProps extends HTMLUIProps<"footer"> {}
 
 export const CardFooter = forwardRef<CardFooterProps, "footer">(
@@ -139,3 +148,6 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     )
   },
 )
+
+CardFooter.displayName = "CardFooter"
+CardFooter.__ui__ = "CardFooter"

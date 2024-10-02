@@ -15,5 +15,6 @@ export const testingLibraryConfig: Linter.Config = {
     "testing-library/no-promise-in-fire-event": "error",
     "testing-library/prefer-find-by": "error",
     "testing-library/no-await-sync-queries": "error",
+    "testing-library/no-wait-for-multiple-assertions": "error",
   },
 }

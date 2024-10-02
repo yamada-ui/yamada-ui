@@ -187,4 +187,9 @@ describe("<AvatarBadge />", () => {
       /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
     )
   })
+
+  test("should have the correct displayName and __ui__", () => {
+    expect(Avatar.displayName).toBe("Avatar")
+    expect(Avatar.__ui__).toBe("Avatar")
+  })
 })

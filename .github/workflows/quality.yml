@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check modified files
         id: check-modified
@@ -32,13 +34,19 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
+      - name: Fetch main branch
+        if: steps.check-modified.outputs.changed == 'true'
+        run: git fetch origin main:main
+
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm build
+        run: |
+          COMMIT=$(git merge-base HEAD main)
+          pnpm build:depend --commit=$COMMIT
 
   test:
     name: Test

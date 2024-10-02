@@ -30,3 +30,6 @@ export const ModalCloseButton = forwardRef<ModalCloseButtonProps, "button">(
     )
   },
 )
+
+ModalCloseButton.displayName = "ModalCloseButton"
+ModalCloseButton.__ui__ = "ModalCloseButton"

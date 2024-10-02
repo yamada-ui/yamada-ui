@@ -21,3 +21,6 @@ export const DrawerDragBar = forwardRef<DrawerDragBarProps, "div">(
     )
   },
 )
+
+DrawerDragBar.displayName = "DrawerDragBar"
+DrawerDragBar.__ui__ = "DrawerDragBar"

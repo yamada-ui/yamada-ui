@@ -105,3 +105,6 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     )
   },
 )
+
+ChartTooltip.displayName = "ChartTooltip"
+ChartTooltip.__ui__ = "ChartTooltip"

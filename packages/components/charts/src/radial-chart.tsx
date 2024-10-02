@@ -225,3 +225,6 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+RadialChart.displayName = "RadialChart"
+RadialChart.__ui__ = "RadialChart"

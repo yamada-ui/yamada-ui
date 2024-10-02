@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import { FC } from "@yamada-ui/core"
 
 export interface AreaGradientProps {
   id?: string
@@ -28,3 +28,6 @@ export const AreaGradient: FC<AreaGradientProps> = ({
     )
   }
 }
+
+AreaGradient.displayName = "AreaGradient"
+AreaGradient.__ui__ = "AreaGradient"

@@ -185,3 +185,6 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+DonutChart.displayName = "DonutChart"
+DonutChart.__ui__ = "DonutChart"

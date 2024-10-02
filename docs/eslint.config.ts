@@ -1,6 +1,7 @@
 import type { Linter } from "eslint"
 import { fixupPluginRules } from "@eslint/compat"
 import nextPlugin from "@next/eslint-plugin-next"
+import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
@@ -72,4 +73,5 @@ export default tseslint.config(
   reactHooksConfig,
   nextConfig,
   jsxA11yConfig,
+  prettierConfig,
 )

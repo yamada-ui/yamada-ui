@@ -1,4 +1,5 @@
 import type { Linter } from "eslint"
+import prettierConfig from "eslint-config-prettier"
 import globals from "globals"
 import tseslint from "typescript-eslint"
 import {
@@ -42,4 +43,5 @@ export default tseslint.config(
   reactHooksConfig,
   jsxA11yConfig,
   jsxA11yConfig,
+  prettierConfig,
 )

@@ -1,3 +1,4 @@
+import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
@@ -58,4 +59,5 @@ export default tseslint.config(
   reactConfig,
   reactHooksConfig,
   jsxA11yConfig,
+  prettierConfig,
 )

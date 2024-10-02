@@ -20,6 +20,6 @@
     "incremental": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "craco.config.js", "eslint.config.ts"],
+  "include": ["../../@types", "src", "craco.config.js", "eslint.config.ts"],
   "exclude": ["node_modules"]
 }

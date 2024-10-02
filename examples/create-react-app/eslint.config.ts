@@ -1,3 +1,4 @@
+import prettierConfig from "eslint-config-prettier"
 import tseslint from "typescript-eslint"
 import {
   baseConfig,
@@ -36,4 +37,5 @@ export default tseslint.config(
   reactConfig,
   reactHooksConfig,
   jsxA11yConfig,
+  prettierConfig,
 )

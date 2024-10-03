@@ -3,17 +3,17 @@ import type {
   HTMLUIProps,
   ThemeProps,
   Token,
-  FC
-} from "@yamada-ui/core"
+ } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+
 import { useValue } from "@yamada-ui/use-value"
 import { cx, dataAttr, handlerAll } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef } from "react"
+import type { ComponentPropsWithoutRef, FC } from "react"
 import { useMemo } from "react"
 import type { PaginationItemProps } from "./pagination-item"
 import { PaginationItem } from "./pagination-item"

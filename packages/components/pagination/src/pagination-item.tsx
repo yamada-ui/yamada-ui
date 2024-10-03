@@ -97,3 +97,5 @@ export const PaginationItem: FC<PaginationItemProps> = ({
     </ui.button>
   )
 }
+PaginationItem.displayName = 'PaginationItem'
+PaginationItem.__ui__ = 'PaginationItem'

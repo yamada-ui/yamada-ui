@@ -60,8 +60,8 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("12")
-      expect(handleComplete).toHaveBeenCalledWith("12")
     })
+    expect(handleComplete).toHaveBeenCalledWith("12")
   })
 
   test('input type should be "password" when mask is true', () => {
@@ -134,8 +134,8 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(document.activeElement).toBe(firstInput)
-      expect(firstInput.placeholder).toBe("")
     })
+    expect(firstInput.placeholder).toBe("")
 
     await act(async () => {
       await user.click(secondInput)
@@ -143,9 +143,9 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(firstInput.placeholder).toBe("○")
-      expect(document.activeElement).toBe(secondInput)
-      expect(secondInput.placeholder).toBe("")
     })
+    expect(document.activeElement).toBe(secondInput)
+    expect(secondInput.placeholder).toBe("")
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
@@ -163,9 +163,8 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(document.activeElement).toStrictEqual(inputs[2])
-
-      expect(inputs[2]).toHaveValue("")
     })
+    expect(inputs[2]).toHaveValue("")
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
@@ -201,9 +200,8 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(document.activeElement).toStrictEqual(thirdInput)
-
-      expect(thirdInput).toHaveValue("3")
     })
+    expect(thirdInput).toHaveValue("3")
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
@@ -281,10 +279,10 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(inputs[0]).toHaveValue("9")
-      expect(inputs[1]).toHaveValue("2")
-      expect(inputs[2]).toHaveValue("3")
-      expect(inputs[3]).toHaveValue("4")
     })
+    expect(inputs[1]).toHaveValue("2")
+    expect(inputs[2]).toHaveValue("3")
+    expect(inputs[3]).toHaveValue("4")
 
     await act(async () => {
       await user.click(inputs[2])
@@ -293,9 +291,9 @@ describe("<PinInput />", () => {
 
     await waitFor(() => {
       expect(inputs[0]).toHaveValue("9")
-      expect(inputs[1]).toHaveValue("2")
-      expect(inputs[2]).toHaveValue("")
-      expect(inputs[3]).toHaveValue("4")
     })
+    expect(inputs[1]).toHaveValue("2")
+    expect(inputs[2]).toHaveValue("")
+    expect(inputs[3]).toHaveValue("4")
   })
 })

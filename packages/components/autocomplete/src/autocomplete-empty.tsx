@@ -50,7 +50,9 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
         {...getEmptyProps(rest, ref)}
       >
         {icon !== null ? (
-          <AutocompleteItemIcon>{icon || <MinusIcon />}</AutocompleteItemIcon>
+          <AutocompleteItemIcon>
+            {icon || <AutocompleteMinusIcon />}
+          </AutocompleteItemIcon>
         ) : null}
         {icon ? (
           <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
@@ -67,7 +69,7 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
 AutocompleteEmpty.displayName = "AutocompleteEmpty"
 AutocompleteEmpty.__ui__ = "AutocompleteEmpty"
 
-const MinusIcon: FC = () => (
+const AutocompleteMinusIcon: FC = () => (
   <svg viewBox="0 0 448 512" width="1em" height="1em">
     <path
       fill="currentColor"
@@ -76,5 +78,5 @@ const MinusIcon: FC = () => (
   </svg>
 )
 
-MinusIcon.displayName = "MinusIcon"
-MinusIcon.__ui__ = "MinusIcon"
+AutocompleteMinusIcon.displayName = "AutocompleteMinusIcon"
+AutocompleteMinusIcon.__ui__ = "AutocompleteMinusIcon"

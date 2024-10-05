@@ -1,5 +1,5 @@
 import { execa, ExecaError } from "execa"
-import { findPackages } from "find-packages"
+import { findPackages, Project } from "find-packages"
 
 const DEFAULT_COMMIT = "HEAD^"
 
@@ -27,7 +27,65 @@ const getDiffPackageNames = (diff: string[]) => {
   return [...new Set(packageNames)]
 }
 
+const symbol = Symbol(`symbol`)
+
+const buildPackages = (packages: Project[]): Promise<void[]> => {
+  const tasks = packages.map(({ dir, manifest }) => async () => {
+    try {
+      const start = process.hrtime.bigint()
+
+      const { stdout } = await execa("pnpm", ["--silent", "build"], {
+        cwd: dir,
+      })
+
+      const end = process.hrtime.bigint()
+      const duration = (Number(end - start) / 1e9).toFixed(2)
+
+      console.log(`\n${stdout}`)
+
+      console.log(`\nBuilt in ${duration}s: ${manifest.name} (${dir})`)
+    } catch (e) {
+      if (e instanceof ExecaError) {
+        throw new Error(`\n${e.stdio}`)
+      } else if (e instanceof Error) {
+        throw e
+      }
+    }
+  })
+
+  return new Promise<void[]>((resolve, reject) => {
+    const result: (void | symbol)[] = Array(tasks.length).fill(symbol)
+
+    const entries = tasks.entries()
+
+    const next = () => {
+      const { done, value } = entries.next()
+
+      if (done) {
+        const isLast = !result.includes(symbol)
+
+        if (isLast) resolve(result as void[])
+
+        return
+      }
+
+      const [index, task] = value
+
+      const onFulfilled = (x: void) => {
+        result[index] = x
+        next()
+      }
+
+      task().then(onFulfilled, reject)
+    }
+
+    Array(10).fill(0).forEach(next)
+  })
+}
+
 const main = async () => {
+  const start = process.hrtime.bigint()
+
   const packages = await findPackages("packages")
 
   const commit = getCommit()
@@ -72,25 +130,14 @@ const main = async () => {
   if (diffPackageNames.length === dependPackages.length)
     console.log("  - No dependent packages found.")
 
-  await Promise.all(
-    dependPackages.map(async ({ dir, manifest }) => {
-      try {
-        console.log(`\nBuilding ${manifest.name}(${dir})`)
+  await buildPackages(dependPackages)
 
-        const { stdout } = await execa("pnpm", ["build"], { cwd: dir })
+  console.log("\nSuccessfully built all dependent packages.")
 
-        console.log(stdout)
-      } catch (e) {
-        if (e instanceof ExecaError) {
-          throw new Error(e.stderr)
-        } else if (e instanceof Error) {
-          throw e
-        }
-      }
-    }),
-  )
+  const end = process.hrtime.bigint()
+  const duration = (Number(end - start) / 1e9).toFixed(2)
 
-  console.log("Successfully built all dependent packages.")
+  console.log(`\nDone in ${duration}s\n`)
 }
 
 main()

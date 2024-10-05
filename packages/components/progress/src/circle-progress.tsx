@@ -3,6 +3,7 @@ import type {
   CSSUIObject,
   CSSUIProps,
   ThemeProps,
+  FC,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -12,7 +13,6 @@ import {
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { cx, valueToPercent } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 interface CircleProgressOptions {
   /**
@@ -180,11 +180,17 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   },
 )
 
+CircleProgress.displayName = "CircleProgress"
+CircleProgress.__ui__ = "CircleProgress"
+
 interface CircleProps extends HTMLUIProps<"circle"> {}
 
 const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />
 )
+
+Circle.displayName = "Circle"
+Circle.__ui__ = "Circle"
 
 interface ShapeProps
   extends Omit<HTMLUIProps<"svg">, "children" | "speed">,
@@ -214,6 +220,9 @@ const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
   return <ui.svg viewBox="0 0 100 100" __css={css} {...rest} />
 }
 
+Shape.displayName = "Shape"
+Shape.__ui__ = "Shape"
+
 export const CircleProgressLabel = ui("span", {
   baseStyle: {
     position: "absolute",
@@ -225,3 +234,6 @@ export const CircleProgressLabel = ui("span", {
     textAlign: "center",
   },
 })
+
+CircleProgressLabel.displayName = "CircleProgressLabel"
+CircleProgressLabel.__ui__ = "CircleProgressLabel"

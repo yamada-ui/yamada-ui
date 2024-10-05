@@ -24,3 +24,6 @@ export const StepTitle = forwardRef<StepTitleProps, "h3">(
     )
   },
 )
+
+StepTitle.displayName = "StepTitle"
+StepTitle.__ui__ = "StepTitle"

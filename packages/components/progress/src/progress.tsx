@@ -5,6 +5,7 @@ import type {
   Interpolation,
   ColorModeToken,
   CSS,
+  FC,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -14,7 +15,6 @@ import {
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { createContext, cx, valueToPercent } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 const [ProgressProvider, useProgress] = createContext<{
   [key: string]: CSSUIObject
@@ -134,6 +134,9 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   )
 })
 
+Progress.displayName = "Progress"
+Progress.__ui__ = "Progress"
+
 interface ProgressFilledTrackProps extends HTMLUIProps, ProgressProps {}
 
 const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
@@ -196,3 +199,6 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
 
   return <ui.div css={css} __css={__css} {...rest} />
 }
+
+ProgressFilledTrack.displayName = "ProgressFilledTrack"
+ProgressFilledTrack.__ui__ = "ProgressFilledTrack"

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

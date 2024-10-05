@@ -1,8 +1,6 @@
 import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { FC } from "react"
 import type { UseRatingItemProps } from "./use-rating-item"
-import { forwardRef, ui } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx, getValidChildren, isString, runIfFunc } from "@yamada-ui/utils"

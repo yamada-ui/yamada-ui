@@ -1,5 +1,29 @@
 # @yamada-ui/color-picker
 
+## 1.4.3
+
+### Patch Changes
+
+- [#2947](https://github.com/yamada-ui/yamada-ui/pull/2947) [`9032dd8`](https://github.com/yamada-ui/yamada-ui/commit/9032dd88a9ef0a7e3f2baecdbddfcb55d8ac7f72) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Set `displayName` the component of `ColorPicker`
+
+- [#2933](https://github.com/yamada-ui/yamada-ui/pull/2933) [`da306f6`](https://github.com/yamada-ui/yamada-ui/commit/da306f611ff0f5ee879281e154cc4800a14d85d9) Thanks [@yuto-trd](https://github.com/yuto-trd)! - Set `displayName` and `__ui__` after each component definition.
+
+- Updated dependencies [[`23198ab`](https://github.com/yamada-ui/yamada-ui/commit/23198abb2e5bda00638414938a8fcf34d50a9dcc), [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`56de7f2`](https://github.com/yamada-ui/yamada-ui/commit/56de7f20fc39e497732d256ba8f1f5eec5163f49), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`79c2b05`](https://github.com/yamada-ui/yamada-ui/commit/79c2b056174036d997cb277de703c905206e4c44), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`66c3b81`](https://github.com/yamada-ui/yamada-ui/commit/66c3b817d898a3e147641a5c90ece90ca13c014b), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/popover@1.3.3
+  - @yamada-ui/form-control@2.1.3
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/button@1.0.43
+  - @yamada-ui/input@1.0.43
+  - @yamada-ui/portal@1.0.22
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-disclosure@1.0.21
+  - @yamada-ui/use-eye-dropper@1.0.19
+  - @yamada-ui/use-outside-click@1.0.21
+  - @yamada-ui/use-pan-event@1.0.23
+  - @yamada-ui/use-size@1.0.21
+
 ## 1.4.2
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/color-picker": patch
+"@yamada-ui/segmented-control": patch
 ---
 
 Set `displayName` and `__ui__` after each component definition.

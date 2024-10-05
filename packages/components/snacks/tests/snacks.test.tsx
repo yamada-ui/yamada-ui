@@ -60,7 +60,9 @@ describe("<Snacks />", () => {
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toHaveClass("ui-snack__title")
     })
-    expect(screen.queryByText("test-description")).toHaveClass("ui-snack__desc")
+    expect(screen.queryByText("test-description")).toHaveClass(
+      "ui-snack__description",
+    )
 
     fireEvent.click(updateBtn)
 
@@ -72,7 +74,7 @@ describe("<Snacks />", () => {
       "ui-snack__title",
     )
     expect(screen.queryByText("test-description-update")).toHaveClass(
-      "ui-snack__desc",
+      "ui-snack__description",
     )
   })
 

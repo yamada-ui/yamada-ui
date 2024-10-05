@@ -94,20 +94,6 @@ export const MEMBERS = [
     discord: { id: "1063410330153259078" },
   },
   {
-    name: { en: "Hirono Kobari", ja: "Hirono Kobari" },
-    description: {
-      en: "Front-end engineer, interested in typography. ",
-      ja: "フロントエンドエンジニア。タイポグラフィに興味があります。",
-    },
-    github: {
-      id: "hironokobari",
-      icon: "https://avatars.githubusercontent.com/u/129595457?v=4",
-      url: "https://github.com/hironokobari",
-    },
-    x: { url: "https://x.com/unikoroshi0" },
-    discord: { id: "1100994785185103913" },
-  },
-  {
     name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
     description: {
       en: "Former pharmacist turned front-end engineer.",
@@ -150,34 +136,6 @@ export const MEMBERS = [
     discord: { id: "1110399456588869682" },
   },
   {
-    name: { en: "Kazunori Ueno", ja: "Kazunori Ueno" },
-    description: {
-      en: "Still a novice front-end engineer.",
-      ja: "まだまだペーペーのフロントエンドエンジニア。",
-    },
-    github: {
-      id: "kaz-uen",
-      icon: "https://avatars.githubusercontent.com/u/83698603?v=4",
-      url: "https://github.com/kaz-uen",
-    },
-    x: { url: "https://x.com/kazu190603" },
-    discord: { id: "1063259535743131648" },
-  },
-  {
-    name: { en: "ShiroHat", ja: "白帽子" },
-    description: {
-      en: "I'm a student interested in front-end development and UI design as a hobby.",
-      ja: "フロントエンド開発とUIデザインを趣味として取り組んでいる学生。",
-    },
-    github: {
-      id: "shiro8t",
-      icon: "https://avatars.githubusercontent.com/u/178459492?v=4",
-      url: "https://github.com/shiro8t",
-    },
-    x: { url: "https://x.com/_shirohat" },
-    discord: { id: "1278688441080479764" },
-  },
-  {
     name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
     description: {
       en: "Web engineer living in Tokyo.",
@@ -206,20 +164,6 @@ export const MEMBERS = [
     discord: { id: "841466932187234354" },
   },
   {
-    name: { en: "Aose Yuu", ja: "Aose Yuu" },
-    description: {
-      en: "Front-end engineer. Vimmer who likes Vue and CLI.",
-      ja: "フロントエンドエンジニア。VueとCLIが好きなVimmer。",
-    },
-    github: {
-      id: "aose-yuu",
-      icon: "https://avatars.githubusercontent.com/aose-yuu",
-      url: "https://github.com/aose-yuu",
-    },
-    x: { url: "https://x.com/aose_developer" },
-    discord: { id: "901658696197738577" },
-  },
-  {
     name: { en: "neginasu", ja: "neginasu" },
     description: {
       en: "Front-end engineer. Dream to be a cool front-end engineer sister.",
@@ -232,16 +176,6 @@ export const MEMBERS = [
     },
     x: { url: "https://x.com/neginasu_grid" },
     discord: { id: "1100973371912638505" },
-  },
-  {
-    name: { en: "Haruki Saito", ja: "Haruki Saito" },
-    description: { en: "Web engineer.", ja: "Webエンジニア。" },
-    github: {
-      id: "Haruki0261",
-      icon: "https://avatars.githubusercontent.com/u/127657966?v=4",
-      url: "https://github.com/Haruki0261",
-    },
-    discord: { id: "1246087065616253012" },
   },
   {
     name: { en: "Kae Okamura", ja: "Okamura Kae" },

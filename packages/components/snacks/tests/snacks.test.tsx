@@ -59,23 +59,21 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toHaveClass("ui-snack__title")
-      expect(screen.queryByText("test-description")).toHaveClass(
-        "ui-snack__description",
-      )
     })
+    expect(screen.queryByText("test-description")).toHaveClass("ui-snack__desc")
 
     fireEvent.click(updateBtn)
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
-      expect(screen.queryByText("test-title-update")).toHaveClass(
-        "ui-snack__title",
-      )
-      expect(screen.queryByText("test-description-update")).toHaveClass(
-        "ui-snack__description",
-      )
     })
+    expect(screen.queryByText("test-description")).toBeNull()
+    expect(screen.queryByText("test-title-update")).toHaveClass(
+      "ui-snack__title",
+    )
+    expect(screen.queryByText("test-description-update")).toHaveClass(
+      "ui-snack__desc",
+    )
   })
 
   test("Snacks renders correctly when close", async () => {
@@ -89,8 +87,8 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
     })
+    expect(screen.queryByText("test-description")).toBeNull()
   })
 
   test("Snacks renders correctly when close all", async () => {
@@ -111,7 +109,7 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
     })
+    expect(screen.queryByText("test-description")).toBeNull()
   })
 })

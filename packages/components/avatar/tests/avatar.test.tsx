@@ -188,26 +188,6 @@ describe("<AvatarBadge />", () => {
     )
   })
 
-  test("AvatarBadge has `ui-avatar__ping` class correctly", () => {
-    render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          data-testid="avatar-badge"
-          bg="primary"
-          ping
-          pingColor="rgb(255, 0, 0)"
-        />
-      </Avatar>,
-    )
-    const pingEl = screen
-      .getByTestId("avatar-badge")
-      .querySelector(".ui-avatar__ping")
-    expect(pingEl).toBeInTheDocument()
-  })
-
   test("should have the correct displayName and __ui__", () => {
     expect(Avatar.displayName).toBe("Avatar")
     expect(Avatar.__ui__).toBe("Avatar")

@@ -15,7 +15,7 @@
     "gen:styled-system": "tsx scripts/content/styled-system",
     "gen:props": "tsx scripts/component/props",
     "gen:search": "tsx scripts/content/search",
-    "gen:icon-tags": "tsx scripts/generate-icon-tags",
+    "gen:icon-tags": "tsx scripts/generate-icon-tags && eslint pages/icons/tags.ts --fix --flag unstable_ts_config",
     "gen:contributors": "tsx scripts/content/contributors",
     "gen:translate": "tsx scripts/content/translate",
     "gen:label": "tsx scripts/content/label",

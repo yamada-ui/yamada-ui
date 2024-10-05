@@ -4,7 +4,7 @@ import { parser } from "typescript-eslint"
 import { sharedFiles } from "./shared"
 
 export const languageOptionFactory = (
-  project: TSESLint.ParserOptions["project"],
+  project: TSESLint.ParserOptions["project"] = true,
   config: TSESLint.FlatConfig.Config = {},
 ): TSESLint.FlatConfig.Config => {
   const { languageOptions = {}, ...rest } = config

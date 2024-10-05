@@ -83,7 +83,7 @@ const createIcons = async (iconNames: string[]) =>
   )
 
 const createTypes = async (iconNames: string[]) => {
-  const fileName = "index.types.tsx"
+  const fileName = "index.types.ts"
   let data = [
     `export type IconNames = ${iconNames.flatMap((iconName) => [`\"${iconName}\"`, `\"${iconName}Icon\"`]).join(" | ")}`,
   ].join("\n")

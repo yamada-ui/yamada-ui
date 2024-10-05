@@ -19,69 +19,41 @@ type TransformProps = {
 }
 
 export const transformProps: TransformProps = {
-  animation: tokens.animations,
-  bgClip: ["backgroundClip"],
-  calc: [
-    ...(tokens.sizes
-      ?.filter(
-        (properties) =>
-          ![
-            "gridAutoColumns",
-            "gridAutoRows",
-            "gridTemplateColumns",
-            "gridTemplateRows",
-          ].includes(properties),
-      )
-      .map((properties) => ({ args: ["sizes"], properties })) ?? []),
-    ...(tokens.spaces?.map((properties) => ({
-      args: ["spaces"],
-      properties,
-    })) ?? []),
-    ...(tokens.radii?.map((properties) => ({ args: ["radii"], properties })) ??
-      []),
-    ...(tokens.fontSizes?.map((properties) => ({
-      args: ["fontSizes"],
-      properties,
-    })) ?? []),
-  ],
   colorMix: tokens.colors,
-  container: ["_container"],
-  content: ["&::before", "&::after"],
-  deg: ["rotate", "skewX", "skewY", "hueRotate", "backdropHueRotate"],
+
+  gradient: tokens.gradients,
+
+  animation: tokens.animations,
+
+  bgClip: ["backgroundClip"],
+
+  transform: ["transform"],
+
   filter: [
     { args: [], properties: "filter" },
     { args: ["backdrop"], properties: "backdropFilter" },
   ],
-  fraction: tokens.sizes,
-  function: [
-    { args: ["blur"], properties: "blur" },
-    { args: ["brightness"], properties: "brightness" },
-    { args: ["contrast"], properties: "contrast" },
-    { args: ["drop-shadow"], properties: "dropShadow" },
-    { args: ["grayscale"], properties: "grayscale" },
-    { args: ["hue-rotate"], properties: "hueRotate" },
-    { args: ["invert"], properties: "invert" },
-    { args: ["saturate"], properties: "saturate" },
-    { args: ["sepia"], properties: "sepia" },
-    { args: ["blur"], properties: "backdropBlur" },
-    { args: ["brightness"], properties: "backdropBrightness" },
-    { args: ["contrast"], properties: "backdropContrast" },
-    { args: ["drop-shadow"], properties: "backdropDropShadow" },
-    { args: ["grayscale"], properties: "backdropGrayscale" },
-    { args: ["hue-rotate"], properties: "backdropHueRotate" },
-    { args: ["invert"], properties: "backdropInvert" },
-    { args: ["saturate"], properties: "backdropSaturate" },
-    { args: ["sepia"], properties: "backdropSepia" },
+
+  content: ["&::before", "&::after"],
+
+  styles: [
+    { args: [], properties: "apply" },
+    { args: ["layerStyles"], properties: "layerStyle" },
+    { args: ["textStyles"], properties: "textStyle" },
   ],
-  gradient: tokens.gradients,
-  grid: [
-    "gridTemplateColumns",
-    "gridTemplateRows",
-    "gridAutoColumns",
-    "gridAutoRows",
-  ],
+
+  vars: ["vars"],
+
   isTruncated: ["isTruncated"],
+
   media: ["_media"],
+
+  container: ["_container"],
+
+  supports: ["_supports"],
+
+  fraction: tokens.sizes,
+
   px: [
     ...(tokens.fontSizes ?? []),
     ...(tokens.spaces ?? []),
@@ -107,14 +79,60 @@ export const transformProps: TransformProps = {
     "scrollbarWidth",
     "strokeWidth",
   ],
-  styles: [
-    { args: [], properties: "apply" },
-    { args: ["layerStyles"], properties: "layerStyle" },
-    { args: ["textStyles"], properties: "textStyle" },
+
+  deg: ["rotate", "skewX", "skewY", "hueRotate", "backdropHueRotate"],
+
+  function: [
+    { args: ["blur"], properties: "blur" },
+    { args: ["brightness"], properties: "brightness" },
+    { args: ["contrast"], properties: "contrast" },
+    { args: ["drop-shadow"], properties: "dropShadow" },
+    { args: ["grayscale"], properties: "grayscale" },
+    { args: ["hue-rotate"], properties: "hueRotate" },
+    { args: ["invert"], properties: "invert" },
+    { args: ["saturate"], properties: "saturate" },
+    { args: ["sepia"], properties: "sepia" },
+    { args: ["blur"], properties: "backdropBlur" },
+    { args: ["brightness"], properties: "backdropBrightness" },
+    { args: ["contrast"], properties: "backdropContrast" },
+    { args: ["drop-shadow"], properties: "backdropDropShadow" },
+    { args: ["grayscale"], properties: "backdropGrayscale" },
+    { args: ["hue-rotate"], properties: "backdropHueRotate" },
+    { args: ["invert"], properties: "backdropInvert" },
+    { args: ["saturate"], properties: "backdropSaturate" },
+    { args: ["sepia"], properties: "backdropSepia" },
   ],
-  supports: ["_supports"],
-  transform: ["transform"],
-  vars: ["vars"],
+
+  grid: [
+    "gridTemplateColumns",
+    "gridTemplateRows",
+    "gridAutoColumns",
+    "gridAutoRows",
+  ],
+
+  calc: [
+    ...(tokens.sizes
+      ?.filter(
+        (properties) =>
+          ![
+            "gridAutoColumns",
+            "gridAutoRows",
+            "gridTemplateColumns",
+            "gridTemplateRows",
+          ].includes(properties),
+      )
+      .map((properties) => ({ args: ["sizes"], properties })) ?? []),
+    ...(tokens.spaces?.map((properties) => ({
+      args: ["spaces"],
+      properties,
+    })) ?? []),
+    ...(tokens.radii?.map((properties) => ({ args: ["radii"], properties })) ??
+      []),
+    ...(tokens.fontSizes?.map((properties) => ({
+      args: ["fontSizes"],
+      properties,
+    })) ?? []),
+  ],
 }
 
 export const transformMap = Object.entries(transformProps).reduce<{

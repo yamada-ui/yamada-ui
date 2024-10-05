@@ -1,0 +1,29 @@
+---
+title: Table
+description: "The `Table` is a component that provides features such as column sorting, row selection, and click events."
+package_name: "@yamada-ui/table"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+The `Table` follows the [WAI-ARIA - Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/) for accessibility.
+
+Setting an `aria-label` on the `Table` allows it to be read by screen readers.
+
+```tsx live=false
+<Table columns={columns} data={data} aria-label="DRAGON BALL characters" />
+```
+
+## ARIA Roles and Attributes
+
+| Component | Role and Attributes | Usage                                                                                                   |
+| --------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Table`   | `role="table"`      | Indicates that the element is a table.                                                                  |
+|           | `aria-sort`         | Set to `ascending` for ascending order, `descending` for descending order, and `none` if not specified. |
+|           | `aria-selected`     | Set to `true` if the row is selected, `false` if not selected.                                          |
+|           | `aria-rowindex`     | Indicates which row the element is in the table.                                                        |
+|           | `aria-colindex`     | Indicates which column the element is in the table.                                                     |
+|           | `aria-disabled`     | Set to `true` if `disabledRowIds` is specified.                                                         |
+|           | `aria-rowcount`     | Indicates the total number of rows in the table.                                                        |
+|           | `aria-colcount`     | Indicates the total number of columns in the table.                                                     |

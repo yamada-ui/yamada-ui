@@ -122,17 +122,14 @@ describe("useBreakpoint", () => {
     expect(result.current).toBe("md")
   })
 
-  test("Throws error if theme is undefined", () => {
-    let error: Error | undefined
+  test("Outputs a warning message if theme is undefined", () => {
+    const consoleWarnSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => {})
 
-    try {
-      renderHook(() => useBreakpoint(), { withProvider: false })
-    } catch (e) {
-      if (e instanceof Error) error = e
-    }
+    renderHook(() => useBreakpoint(), { withProvider: false })
 
-    expect(error).toBeDefined()
-    expect(error?.message).toBe(
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
       "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
     )
   })
@@ -232,36 +229,33 @@ describe("getBreakpointValue", () => {
     expect(result.current(theme, "md")).toBe("md")
   })
 
-  test("throws an error if theme is undefined", () => {
+  test("Outputs a warning message if theme is undefined", async () => {
     const theme = undefined as unknown as StyledTheme
-    let error: Error | undefined
 
-    try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
-        withProvider: false,
-      })
-    } catch (e) {
-      if (e instanceof Error) error = e
-    }
+    const consoleWarnSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => {})
 
-    expect(error).toBeDefined()
-    expect(error?.message).toBe("getBreakpointValue: `theme` is undefined.")
+    renderHook(async () => getBreakpointValue({ base: "md" })(theme, "base"), {
+      withProvider: false,
+    })
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      "getBreakpointValue: `theme` is undefined.",
+    )
   })
 
-  test("throws an error if breakpoints are undefined", () => {
+  test("Outputs a warning message if breakpoints are undefined", () => {
     const theme = {} as StyledTheme
-    let error: Error | undefined
 
-    try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
-        withProvider: false,
-      })
-    } catch (e) {
-      if (e instanceof Error) error = e
-    }
+    const consoleWarnSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => {})
 
-    expect(error).toBeDefined()
-    expect(error?.message).toBe(
+    renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
+      withProvider: false,
+    })
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
       "getBreakpointValue: `breakpoints` is undefined.",
     )
   })

@@ -750,6 +750,9 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
   },
 )
 
+NumberInput.displayName = "NumberInput"
+NumberInput.__ui__ = "NumberInput"
+
 type NumberInputFieldProps = Omit<
   HTMLUIProps<"input">,
   "disabled" | "required" | "readOnly" | "size"
@@ -774,6 +777,9 @@ const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
   },
 )
 
+NumberInputField.displayName = "NumberInputField"
+NumberInputField.__ui__ = "NumberInputField"
+
 type NumberInputAddonProps = HTMLUIProps
 
 const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
@@ -795,6 +801,9 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
     )
   },
 )
+
+NumberInputAddon.displayName = "NumberInputAddon"
+NumberInputAddon.__ui__ = "NumberInputAddon"
 
 const Stepper = ui("button", {
   baseStyle: {
@@ -835,6 +844,9 @@ const NumberIncrementStepper = forwardRef<
   )
 })
 
+NumberIncrementStepper.displayName = "NumberIncrementStepper"
+NumberIncrementStepper.__ui__ = "NumberIncrementStepper"
+
 type NumberDecrementStepperProps = HTMLUIProps<"button">
 
 const NumberDecrementStepper = forwardRef<
@@ -859,3 +871,6 @@ const NumberDecrementStepper = forwardRef<
     </Stepper>
   )
 })
+
+NumberDecrementStepper.displayName = "NumberDecrementStepper"
+NumberDecrementStepper.__ui__ = "NumberDecrementStepper"

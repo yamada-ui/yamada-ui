@@ -139,3 +139,6 @@ export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
     </StepperDescendantsContextProvider>
   )
 })
+
+Stepper.displayName = "Stepper"
+Stepper.__ui__ = "Stepper"

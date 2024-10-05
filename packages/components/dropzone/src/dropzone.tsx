@@ -1,4 +1,5 @@
 import type {
+  FC,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
@@ -29,7 +30,7 @@ import {
   isArray,
   splitObject,
 } from "@yamada-ui/utils"
-import type { FC, ForwardedRef, PropsWithChildren } from "react"
+import type { ForwardedRef, PropsWithChildren } from "react"
 import { Fragment } from "react"
 import type {
   Accept,
@@ -196,6 +197,9 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   )
 })
 
+Dropzone.displayName = "Dropzone"
+Dropzone.__ui__ = "Dropzone"
+
 interface LoadingOverlayProps extends FadeProps {
   loadingProps?: LoadingProps
 }
@@ -224,11 +228,17 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   )
 }
 
+LoadingOverlay.displayName = "LoadingOverlay"
+LoadingOverlay.__ui__ = "LoadingOverlay"
+
 export const DropzoneAccept: FC<PropsWithChildren> = ({ children }) => {
   const { isDragAccept } = useDropzoneContext()
 
   return isDragAccept ? <Fragment>{children}</Fragment> : null
 }
+
+DropzoneAccept.displayName = "DropzoneAccept"
+DropzoneAccept.__ui__ = "DropzoneAccept"
 
 export const DropzoneReject: FC<PropsWithChildren> = ({ children }) => {
   const { isDragReject } = useDropzoneContext()
@@ -236,8 +246,14 @@ export const DropzoneReject: FC<PropsWithChildren> = ({ children }) => {
   return isDragReject ? <Fragment>{children}</Fragment> : null
 }
 
+DropzoneReject.displayName = "DropzoneReject"
+DropzoneReject.__ui__ = "DropzoneReject"
+
 export const DropzoneIdle: FC<PropsWithChildren> = ({ children }) => {
   const { isDragIdle } = useDropzoneContext()
 
   return isDragIdle ? <Fragment>{children}</Fragment> : null
 }
+
+DropzoneIdle.displayName = "DropzoneIdle"
+DropzoneIdle.__ui__ = "DropzoneIdle"

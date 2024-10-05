@@ -37,3 +37,6 @@ export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
     </RatingProvider>
   )
 })
+
+Rating.displayName = "Rating"
+Rating.__ui__ = "Rating"

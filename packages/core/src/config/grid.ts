@@ -26,14 +26,14 @@ export function grid(
 
   if (!values.length) return value
 
-  const computedValues = values.map((value) => {
+  const computedValues = values.map((value): string => {
     const prevent = isCSSFunction(value)
 
     if (!prevent) {
       const token = `sizes.${value}`
 
       return theme.__cssMap && token in theme.__cssMap
-        ? theme.__cssMap[token].ref
+        ? (theme.__cssMap[token]?.ref ?? value)
         : value
     }
 
@@ -44,7 +44,7 @@ export function grid(
     if (type === "repeat") {
       let [repeat, tracks] = splitValues(values)
 
-      repeat = repeat in repeats ? repeats[repeat] : repeat
+      repeat = repeat && repeat in repeats ? repeats[repeat] : repeat
       tracks = grid(tracks, theme, css, prev)
 
       return `repeat(${repeat}, ${tracks})`

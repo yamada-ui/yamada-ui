@@ -1,5 +1,7 @@
 import { a11y, act, fireEvent, render, screen, TestIcon } from "@yamada-ui/test"
 import {
+  ContextMenu,
+  ContextMenuTrigger,
   Menu,
   MenuButton,
   MenuDivider,
@@ -9,8 +11,6 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  ContextMenu,
-  ContextMenuTrigger,
 } from "../src"
 
 describe("<Menu />", () => {
@@ -94,7 +94,7 @@ describe("<Menu />", () => {
       <Menu placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuGroup data-testid="MenuGroup" label="item">
+          <MenuGroup label="item" data-testid="MenuGroup">
             <MenuItem>Add item</MenuItem>
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>
@@ -141,9 +141,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
-            data-testid="MenuOptionGroup-a"
-            label="item"
             type="radio"
+            label="item"
+            data-testid="MenuOptionGroup-a"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -152,11 +152,11 @@ describe("<Menu />", () => {
           </MenuOptionGroup>
 
           <MenuOptionGroup
-            data-testid="MenuOptionGroup-b"
-            label="order"
             type="checkbox"
+            label="order"
+            data-testid="MenuOptionGroup-b"
           >
-            <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
+            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox">
               Ascending
             </MenuOptionItem>
             <MenuOptionItem value="desc">Descending</MenuOptionItem>
@@ -186,9 +186,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
-            data-testid="MenuOptionGroup-a"
-            label="item"
             type="radio"
+            label="item"
+            data-testid="MenuOptionGroup-a"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -198,13 +198,13 @@ describe("<Menu />", () => {
 
           <MenuOptionGroup
             type="checkbox"
-            label="order"
             defaultValue={["desc"]}
+            label="order"
           >
-            <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
+            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox-a">
               Ascending
             </MenuOptionItem>
-            <MenuOptionItem data-testid="MenuOptionItemCheckbox-b" value="desc">
+            <MenuOptionItem value="desc" data-testid="MenuOptionItemCheckbox-b">
               Descending
             </MenuOptionItem>
           </MenuOptionGroup>
@@ -231,7 +231,7 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Set status</MenuItem>
-          <MenuItem data-testid="MenuItem" isDisabled>
+          <MenuItem isDisabled data-testid="MenuItem">
             Edit Profile
           </MenuItem>
           <MenuItem>Preferences</MenuItem>
@@ -250,9 +250,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
-            data-testid="MenuOptionGroup-a"
-            label="option-group-label"
             type="radio"
+            label="option-group-label"
+            data-testid="MenuOptionGroup-a"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -261,11 +261,11 @@ describe("<Menu />", () => {
           </MenuOptionGroup>
 
           <MenuOptionGroup
-            data-testid="MenuOptionGroup-b"
-            label="order"
             type="checkbox"
+            label="order"
+            data-testid="MenuOptionGroup-b"
           >
-            <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
+            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox">
               Ascending
             </MenuOptionItem>
             <MenuOptionItem value="desc">Descending</MenuOptionItem>
@@ -277,7 +277,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowDown", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -297,7 +297,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowUp", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -318,7 +318,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for Enter", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -420,12 +420,12 @@ describe("<Menu />", () => {
     const { container } = render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>
@@ -441,12 +441,12 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>
@@ -462,12 +462,12 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>

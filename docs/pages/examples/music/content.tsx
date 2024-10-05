@@ -1,14 +1,16 @@
+import type { ImageProps } from "@yamada-ui/next"
+import type { StackProps } from "@yamada-ui/react"
+import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 import { CirclePlus, Podcast } from "@yamada-ui/lucide"
 import { Image } from "@yamada-ui/next"
-import type { ImageProps } from "@yamada-ui/next"
 import {
   Box,
   Button,
   Center,
   Divider,
   FormControl,
-  HStack,
   Heading,
+  HStack,
   Input,
   Modal,
   ModalBody,
@@ -18,94 +20,92 @@ import {
   SegmentedControlButton,
   Spacer,
   Text,
-  VStack,
   useDisclosure,
+  VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
 import { memo, useState } from "react"
-import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 
 interface CarouselItem extends Omit<ImageProps, "alt" | "size"> {
-  title: string
   description: string
+  title: string
 }
 
 const LISTEN_NOW_ITEMS: CarouselItem[] = [
   {
-    src: "https://images.pexels.com/photos/894156/pexels-photo-894156.jpeg",
-    title: "Night Drive",
     description:
       "A playlist for driving on quiet night roads under the starry sky.",
+    src: "https://images.pexels.com/photos/894156/pexels-photo-894156.jpeg",
+    title: "Night Drive",
   },
   {
+    description: "Perfect jazz and soul music for a relaxed afternoon.",
     src: "https://images.pexels.com/photos/10622551/pexels-photo-10622551.jpeg",
     title: "Afternoon at the Cafe",
-    description: "Perfect jazz and soul music for a relaxed afternoon.",
   },
   {
+    description: "Upbeat songs to make your workout more enjoyable.",
     src: "https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg",
     title: "Energetic Workout",
-    description: "Upbeat songs to make your workout more enjoyable.",
   },
   {
+    description: "Music to improve concentration for work or study.",
     src: "https://images.pexels.com/photos/19664604/pexels-photo-19664604.jpeg",
     title: "Music for Concentration",
-    description: "Music to improve concentration for work or study.",
   },
   {
+    description: "Meditation music to calm the mind and relax.",
     src: "https://images.pexels.com/photos/2272854/pexels-photo-2272854.jpeg",
     title: "Relaxation Meditation",
-    description: "Meditation music to calm the mind and relax.",
   },
   {
+    description: "Bright music to start the day refreshingly.",
     src: "https://images.pexels.com/photos/1619779/pexels-photo-1619779.jpeg",
     title: "Morning Awakening",
-    description: "Bright music to start the day refreshingly.",
   },
 ]
 
 const MADE_FOR_YOU_ITEMS: CarouselItem[] = [
   {
+    description: "Songs of love and passion for a special night.",
     src: "https://images.pexels.com/photos/12420808/pexels-photo-12420808.jpeg",
     title: "Romantic Night",
-    description: "Songs of love and passion for a special night.",
   },
   {
+    description: "Summer hits for fun with friends on the beach.",
     src: "https://images.pexels.com/photos/1762578/pexels-photo-1762578.jpeg",
     title: "Beach Party",
-    description: "Summer hits for fun with friends on the beach.",
   },
   {
+    description: "Warm songs to listen to by the window on a snowy day.",
     src: "https://images.pexels.com/photos/89909/pexels-photo-89909.jpeg",
     title: "Winter Solo",
-    description: "Warm songs to listen to by the window on a snowy day.",
   },
   {
-    src: "https://images.pexels.com/photos/417458/pexels-photo-417458.jpeg",
-    title: "Autumn Jazz",
     description:
       "Heartwarming jazz collection to listen to while feeling the falling leaves.",
+    src: "https://images.pexels.com/photos/417458/pexels-photo-417458.jpeg",
+    title: "Autumn Jazz",
   },
   {
-    src: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg",
-    title: "Spring Flowers",
     description:
       "Bright and refreshing melodies that make you feel the arrival of spring.",
+    src: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg",
+    title: "Spring Flowers",
   },
   {
+    description: "Exciting songs perfect for a summer day's adventure.",
     src: "https://images.pexels.com/photos/15079520/pexels-photo-15079520.png",
     title: "Summer Adventure",
-    description: "Exciting songs perfect for a summer day's adventure.",
   },
   {
+    description: "A playlist to enjoy a retro atmosphere with nostalgic songs.",
     src: "https://images.pexels.com/photos/60783/pexels-photo-60783.jpeg",
     title: "Retro Night",
-    description: "A playlist to enjoy a retro atmosphere with nostalgic songs.",
   },
   {
+    description: "Music that colors a modern, sophisticated urban life.",
     src: "https://images.pexels.com/photos/3618362/pexels-photo-3618362.jpeg",
     title: "Urban Lifestyle",
-    description: "Music that colors a modern, sophisticated urban life.",
   },
 ]
 
@@ -119,8 +119,8 @@ export const Content: FC<ContentProps> = memo(({ ...rest }) => {
   return (
     <VStack
       as="section"
-      p={{ base: "lg", sm: "md" }}
       gap={{ base: "lg", sm: "md" }}
+      p={{ base: "lg", sm: "md" }}
       {...rest}
     >
       <ContentHeader mode={mode} setMode={setMode} />
@@ -141,29 +141,29 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
     return (
       <HStack
         as="header"
-        flexDirection={{ base: "row", sm: "column" }}
         alignItems={{ base: "center", sm: "flex-end" }}
+        flexDirection={{ base: "row", sm: "column" }}
         {...rest}
       >
         <SegmentedControl
+          defaultValue="music"
+          size="sm"
           value={mode}
           w={{ base: "auto", sm: "full" }}
-          size="sm"
-          defaultValue="music"
           onChange={(value) => setMode(value as ContentMode)}
         >
           <SegmentedControlButton value="music">Music</SegmentedControlButton>
           <SegmentedControlButton value="podcast">
             Podcast
           </SegmentedControlButton>
-          <SegmentedControlButton value="live" isDisabled>
+          <SegmentedControlButton isDisabled value="live">
             Live
           </SegmentedControlButton>
         </SegmentedControl>
 
         <Spacer display={{ base: "block", sm: "none" }} />
 
-        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlus />}>
+        <Button colorScheme="primary" leftIcon={<CirclePlus />} size="sm">
           Add Music
         </Button>
       </HStack>
@@ -186,7 +186,7 @@ const ContentDisplay: FC<ContentDisplayProps> = memo(({ mode }) => {
       return <ContentPodcasts />
 
     default:
-      return <></>
+      return null
   }
 })
 
@@ -198,15 +198,15 @@ interface ContentItemHeaderProps extends Omit<StackProps, "title"> {
 }
 
 const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
-  ({ title, description, ...rest }) => {
+  ({ description, title, ...rest }) => {
     return (
       <VStack as="header" gap="0" {...rest}>
-        <Heading as="h3" size={{ base: "lg" }} lineClamp={1}>
+        <Heading as="h3" lineClamp={1} size={{ base: "lg" }}>
           {title}
         </Heading>
 
         {description ? (
-          <Text fontSize="sm" color="muted" mb="md" lineClamp={1}>
+          <Text color="muted" fontSize="sm" lineClamp={1} mb="md">
             {description}
           </Text>
         ) : null}
@@ -226,8 +226,8 @@ const ContentMusic: FC<ContentMusicProps> = memo(({ ...rest }) => {
     <VStack gap={{ base: "lg" }} {...rest}>
       <ContentItem>
         <ContentItemHeader
-          title="Listen Now"
           description="Top picks for you. Updated daily."
+          title="Listen Now"
         />
 
         <ContentCarousel items={LISTEN_NOW_ITEMS} />
@@ -235,10 +235,10 @@ const ContentMusic: FC<ContentMusicProps> = memo(({ ...rest }) => {
 
       <ContentItem>
         <ContentItemHeader
-          title="Made for You"
           description="Your personal playlists. Updated daily."
+          title="Made for You"
         />
-        <ContentCarousel size="sm" items={MADE_FOR_YOU_ITEMS} />
+        <ContentCarousel items={MADE_FOR_YOU_ITEMS} size="sm" />
       </ContentItem>
     </VStack>
   )
@@ -249,37 +249,37 @@ ContentMusic.displayName = "ContentMusic"
 interface ContentPodcastsProps extends StackProps {}
 
 const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
   return (
     <>
       <ContentItem {...rest}>
         <ContentItemHeader
-          title="New Episodes"
           description="Your favorite podcasts. Updated daily."
+          title="New Episodes"
         />
 
         <Center
+          borderStyle="dashed"
+          borderWidth="1px"
           flexDirection="column"
           gap="sm"
-          w="full"
           h="lg"
           p="md"
           rounded="md"
-          borderWidth="1px"
-          borderStyle="dashed"
+          w="full"
         >
           <Podcast color={["gray.400", "gray.500"]} fontSize="5xl" />
           <Heading as="h3" size={{ base: "md" }}>
             No episodes added
           </Heading>
 
-          <Text fontSize="sm" color="muted" mb="md">
+          <Text color="muted" fontSize="sm" mb="md">
             You have not added any podcasts. Add one below.
           </Text>
 
           <Button
-            size={{ base: "md", sm: "sm" }}
             colorScheme="primary"
+            size={{ base: "md", sm: "sm" }}
             onClick={onOpen}
           >
             Add Podcast
@@ -287,15 +287,15 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
         </Center>
       </ContentItem>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} size="xl" onClose={onClose}>
         <ModalHeader>Add Podcast</ModalHeader>
 
         <ModalBody
-          mt="0"
-          mb={{ base: "lg", sm: "md" }}
           gap={{ base: "lg", sm: "md" }}
+          mb={{ base: "lg", sm: "md" }}
+          mt="0"
         >
-          <Text fontSize="sm" color="muted">
+          <Text color="muted" fontSize="sm">
             Copy and paste the podcast feed URL to import.
           </Text>
 
@@ -326,7 +326,7 @@ ContentItem.displayName = "ContentItem"
 
 interface ContentCarouselProps extends StackProps {
   items: CarouselItem[]
-  size?: "sm" | "md"
+  size?: "md" | "sm"
 }
 
 const ContentCarousel: FC<ContentCarouselProps> = memo(
@@ -344,46 +344,46 @@ const ContentCarousel: FC<ContentCarouselProps> = memo(
 ContentCarousel.displayName = "ContentCarousel"
 
 interface ContentCarouselItemProps extends CarouselItem {
+  size?: "md" | "sm"
   containerProps?: StackProps
-  size?: "sm" | "md"
 }
 
 const ContentCarouselItem: FC<ContentCarouselItemProps> = memo(
-  ({ containerProps, size = "md", title, description, ...rest }) => {
+  ({ description, size = "md", title, containerProps, ...rest }) => {
     return (
-      <VStack as="article" w="auto" gap="sm" {...containerProps}>
+      <VStack as="article" gap="sm" w="auto" {...containerProps}>
         <Box
+          h={{
+            base: size === "md" ? "sm" : "2xs",
+            sm: size === "md" ? "xs" : "3xs",
+          }}
           overflow="hidden"
+          position="relative"
           rounded="md"
           w={{
             base: size === "md" ? "xs" : "2xs",
             sm: size === "md" ? "2xs" : "3xs",
           }}
-          h={{
-            base: size === "md" ? "sm" : "2xs",
-            sm: size === "md" ? "xs" : "3xs",
-          }}
-          position="relative"
         >
           <Image
+            _hover={{ transform: "scale(1.05)" }}
             alt={title}
             fill
-            sizes="100%"
-            priority
             objectFit="cover"
-            transitionProperty="transform"
+            priority
+            sizes="100%"
             transitionDuration="slow"
-            _hover={{ transform: "scale(1.05)" }}
+            transitionProperty="transform"
             {...rest}
           />
         </Box>
 
         <VStack gap="0">
-          <Heading as="h4" size="sm" lineClamp={1}>
+          <Heading as="h4" lineClamp={1} size="sm">
             {title}
           </Heading>
 
-          <Text fontSize="xs" color="muted" lineClamp={1}>
+          <Text color="muted" fontSize="xs" lineClamp={1}>
             {description}
           </Text>
         </VStack>

@@ -1,5 +1,6 @@
+import type { Project } from "find-packages"
 import { execa, ExecaError } from "execa"
-import { findPackages, Project } from "find-packages"
+import { findPackages } from "find-packages"
 
 const DEFAULT_COMMIT = "HEAD^"
 
@@ -29,7 +30,7 @@ const getDiffPackageNames = (diff: string[]) => {
 
 const symbol = Symbol(`symbol`)
 
-const buildPackages = (packages: Project[]): Promise<void[]> => {
+const buildPackages = async (packages: Project[]): Promise<void[]> => {
   const tasks = packages.map(({ dir, manifest }) => async () => {
     try {
       const start = process.hrtime.bigint()
@@ -54,7 +55,7 @@ const buildPackages = (packages: Project[]): Promise<void[]> => {
   })
 
   return new Promise<void[]>((resolve, reject) => {
-    const result: (void | symbol)[] = Array(tasks.length).fill(symbol)
+    const result: (symbol | void)[] = Array(tasks.length).fill(symbol)
 
     const entries = tasks.entries()
 

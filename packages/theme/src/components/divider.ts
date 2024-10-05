@@ -6,14 +6,14 @@ export const Divider: ComponentStyle<"Divider"> = {
   },
 
   variants: {
-    solid: {
-      borderStyle: "solid",
-    },
     dashed: {
       borderStyle: "dashed",
     },
     dotted: {
       borderStyle: "dotted",
+    },
+    solid: {
+      borderStyle: "solid",
     },
   },
 

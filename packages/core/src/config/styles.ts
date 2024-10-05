@@ -1,6 +1,6 @@
 import type { Dict } from "@yamada-ui/utils"
-import { getMemoizedObject as get } from "@yamada-ui/utils"
 import type { Transform } from "./utils"
+import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export function generateStyles(prefix?: string): Transform {
   return function (value, theme, _css, prev = {}) {

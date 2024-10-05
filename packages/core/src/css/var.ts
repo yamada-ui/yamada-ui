@@ -1,25 +1,25 @@
 import type { Dict } from "@yamada-ui/utils"
+import type { VariableTokens, VariableValue } from "../theme"
+import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
+import type { BreakpointQueries } from "./breakpoint"
 import {
-  escape,
-  merge,
-  isArray,
-  isString,
-  isObject,
   calc,
+  escape,
+  isArray,
+  isObject,
+  isString,
+  merge,
 } from "@yamada-ui/utils"
 import { animation, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
-import type { VariableTokens, VariableValue } from "../theme"
-import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
-import type { BreakpointQueries } from "./breakpoint"
 import { css } from "./css"
 
-type ParsedValue = string | number | undefined
+type ParsedValue = number | string | undefined
 
 interface Variable {
-  variable: string
   reference: string
+  variable: string
 }
 
 export function getVar(token: string) {
@@ -35,9 +35,9 @@ const isAnimation = (token: string) => token.startsWith("animations.")
 const isSpace = (token: string) => token.startsWith("spaces.")
 
 interface CreateThemeVarsOptions {
-  prevTokens?: VariableTokens
   cssMap?: CSSMap
   cssVars?: Dict
+  prevTokens?: VariableTokens
 }
 
 export function getCreateThemeVars(
@@ -50,14 +50,14 @@ export function getCreateThemeVars(
     const variable = `--${[prefix, escape(token, "-")].filter(Boolean).join("-")}`
     const reference = `var(${variable})`
 
-    return { variable, reference }
+    return { reference, variable }
   }
 
   return function (tokens: VariableTokens) {
     return function ({
-      prevTokens,
       cssMap = {},
       cssVars = {},
+      prevTokens,
     }: CreateThemeVarsOptions = {}): { cssMap: CSSMap; cssVars: Dict } {
       const theme = { __cssMap: cssMap } as StyledTheme
 
@@ -70,7 +70,7 @@ export function getCreateThemeVars(
 
         if (!targetToken) return [, value]
 
-        const { variable, reference } = tokenToVar(relatedToken)
+        const { reference, variable } = tokenToVar(relatedToken)
 
         return [variable, reference]
       }
@@ -86,7 +86,7 @@ export function getCreateThemeVars(
 
             if (token) {
               return tokenToVar(value).reference
-            } else if (value in cssMap) {
+            } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
             } else {
               return `var(--${prefix}-${value})`
@@ -105,7 +105,7 @@ export function getCreateThemeVars(
 
         const negativeReference = calc.negate(reference)
 
-        return { negativeToken, negativeReference }
+        return { negativeReference, negativeToken }
       }
 
       function createAnimationVar(value: VariableValue) {
@@ -184,22 +184,22 @@ export function getCreateThemeVars(
       }
 
       for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
-        const { variable, reference } = tokenToVar(token)
+        const { reference, variable } = tokenToVar(token)
 
         if (isAnimation(token)) value = createAnimationVar(value)
 
         createVar(token, value, variable)(isSemantic)
 
         if (!isSemantic && isSpace(token)) {
-          const { negativeToken, negativeReference } = createNegativeVar(
+          const { negativeReference, negativeToken } = createNegativeVar(
             token,
             reference,
           )
 
-          cssMap[negativeToken] = { var: variable, ref: negativeReference }
+          cssMap[negativeToken] = { ref: negativeReference, var: variable }
         }
 
-        cssMap[token] = { var: variable, ref: reference }
+        cssMap[token] = { ref: reference, var: variable }
       }
 
       return { cssMap, cssVars }

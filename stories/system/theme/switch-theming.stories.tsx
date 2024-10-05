@@ -1,17 +1,17 @@
 import type { FC } from "react"
 import {
   Badge,
-  Tag,
   Button,
-  VStack,
-  HStack,
-  Wrap,
-  Heading,
   Container,
-  UIProvider,
-  extendTheme,
   extendConfig,
+  extendTheme,
+  Heading,
+  HStack,
+  Tag,
+  UIProvider,
   useTheme,
+  VStack,
+  Wrap,
 } from "@yamada-ui/react"
 
 export default {
@@ -21,6 +21,18 @@ export default {
 export const basic = () => {
   const theme = extendTheme({
     themeSchemes: {
+      green: {
+        semantics: {
+          colors: {
+            primary: "green.500",
+            secondary: "cyan.500",
+          },
+          colorSchemes: {
+            primary: "green",
+            secondary: "cyan",
+          },
+        },
+      },
       pink: {
         semantics: {
           colors: {
@@ -45,24 +57,12 @@ export const basic = () => {
           },
         },
       },
-      green: {
-        semantics: {
-          colors: {
-            primary: "green.500",
-            secondary: "cyan.500",
-          },
-          colorSchemes: {
-            primary: "green",
-            secondary: "cyan",
-          },
-        },
-      },
     },
   })()
   const config = extendConfig({ initialThemeScheme: "pink" })
 
   const App: FC = () => {
-    const { themeScheme, changeThemeScheme } = useTheme()
+    const { changeThemeScheme, themeScheme } = useTheme()
 
     return (
       <VStack>
@@ -88,12 +88,12 @@ export const basic = () => {
         </HStack>
 
         <Container
-          p="md"
-          gap="md"
-          rounded="md"
           border="1px solid"
           borderColor="inherit"
           boxShadow="md"
+          gap="md"
+          p="md"
+          rounded="md"
         >
           <Heading>{themeScheme} Theme</Heading>
 
@@ -131,7 +131,7 @@ export const basic = () => {
   }
 
   return (
-    <UIProvider theme={theme} config={config}>
+    <UIProvider config={config} theme={theme}>
       <App />
     </UIProvider>
   )

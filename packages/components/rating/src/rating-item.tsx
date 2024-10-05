@@ -1,11 +1,11 @@
-import { ui, forwardRef } from "@yamada-ui/core"
 import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import type { UseRatingItemProps } from "./use-rating-item"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx, getValidChildren, isString, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 import { useRatingContext } from "./rating-context"
-import type { UseRatingItemProps } from "./use-rating-item"
 import { useRatingItem } from "./use-rating-item"
 
 export interface RatingItemProps
@@ -13,18 +13,18 @@ export interface RatingItemProps
     UseRatingItemProps {}
 
 export const RatingItem = forwardRef<RatingItemProps, "input">(
-  ({ className, groupValue, value, fractionValue, color, ...rest }, ref) => {
+  ({ className, color, fractionValue, groupValue, value, ...rest }, ref) => {
     const {
-      styles,
-      inputProps,
       emptyIcon = <StarIcon />,
       filledIcon = <StarIcon />,
+      styles,
+      inputProps,
       itemProps,
     } = useRatingContext()
     const { isActive, isFilled, getInputProps, getItemProps } = useRatingItem({
-      value,
-      groupValue,
       fractionValue,
+      groupValue,
+      value,
     })
 
     const computedItemProps = runIfFunc(itemProps, value)
@@ -83,18 +83,18 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 
   const cloneChildren = validChildren.map((child) =>
     cloneElement(child, {
+      style: {
+        maxHeight: "1em",
+        maxWidth: "1em",
+      },
       focusable: false,
       "aria-hidden": true,
-      style: {
-        maxWidth: "1em",
-        maxHeight: "1em",
-      },
     }),
   )
 
   const css: CSSUIObject = {
-    display: "inline-flex",
     alignItems: "center",
+    display: "inline-flex",
     justifyContent: "center",
     ...styles.icon,
   }
@@ -118,9 +118,9 @@ type StarIconProps = IconProps
 const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
   return (
     <Icon
-      viewBox="0 0 24 24"
       strokeLinecap="round"
       strokeLinejoin="round"
+      viewBox="0 0 24 24"
       {...rest}
     >
       <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />

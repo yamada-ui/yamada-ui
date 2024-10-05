@@ -1,24 +1,24 @@
 import type { UseCheckboxProps } from "@yamada-ui/checkbox"
-import { useCheckbox } from "@yamada-ui/checkbox"
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { MotionTransition } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
+import type { InputHTMLAttributes, ReactElement } from "react"
+import { useCheckbox } from "@yamada-ui/checkbox"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import type { MotionTransition } from "@yamada-ui/motion"
 import { motion } from "@yamada-ui/motion"
-import type { Merge } from "@yamada-ui/utils"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import type { InputHTMLAttributes, ReactElement } from "react"
 import { cloneElement } from "react"
 
 export interface SwitchIconProps {
+  isActive?: boolean
   isChecked?: boolean
   isFocused?: boolean
   isHovered?: boolean
-  isActive?: boolean
 }
 
 interface SwitchOptions {
@@ -26,14 +26,6 @@ interface SwitchOptions {
    * The switch icon to use.
    */
   icon?: ReactElement<SwitchIconProps>
-  /**
-   * Props for switch input element.
-   */
-  inputProps?: InputHTMLAttributes<HTMLInputElement>
-  /**
-   * Props for switch label element.
-   */
-  labelProps?: HTMLUIProps<"span">
   /**
    * Change switch label from right to left.
    *
@@ -44,6 +36,14 @@ interface SwitchOptions {
    * Motion transition settings.
    */
   transition?: MotionTransition
+  /**
+   * Props for switch input element.
+   */
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
+  /**
+   * Props for switch label element.
+   */
+  labelProps?: HTMLUIProps<"span">
 }
 
 export interface SwitchProps
@@ -62,39 +62,39 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Switch", props)
   const {
     className,
-    gap = "0.5rem",
     children,
-    icon,
-    inputProps,
-    labelProps,
-    isReverse,
     flexDirection,
+    gap = "0.5rem",
+    icon,
+    isReverse,
     transition = {
       type: "spring",
-      stiffness: 700,
       damping: 40,
+      stiffness: 700,
     },
+    inputProps,
+    labelProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {
+    isActive,
     isChecked,
     isFocused,
     isHovered,
-    isActive,
+    props: rest,
     getContainerProps,
     getIconProps,
     getInputProps,
     getLabelProps,
-    props: rest,
   } = useCheckbox(computedProps)
 
   const cloneIcon = icon
     ? cloneElement(icon, {
+        isActive,
         isChecked,
         isFocused,
         isHovered,
-        isActive,
       })
     : null
 
@@ -103,22 +103,22 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       ref={ref}
       className={cx("ui-switch", className)}
       __css={{
+        alignItems: "center",
         cursor: "pointer",
-        position: "relative",
         display: "inline-flex",
         flexDirection: flexDirection ?? (isReverse ? "row-reverse" : "row"),
-        alignItems: "center",
-        verticalAlign: "top",
         gap,
+        position: "relative",
+        verticalAlign: "top",
         ...styles.container,
       }}
       {...getContainerProps()}
       {...rest}
     >
       <ui.input
+        className={cx("ui-switch__input", className)}
         role="switch"
         aria-checked={isChecked}
-        className={cx("ui-switch__input", className)}
         {...getInputProps(inputProps, ref)}
       />
 
@@ -126,20 +126,20 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__track", className)}
           __css={{
+            alignItems: "center",
             boxSizing: "content-box",
             display: "inline-flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
             flexShrink: 0,
+            justifyContent: "flex-start",
             ...styles.track,
           }}
           {...getIconProps()}
         >
           <motion.span
             className={cx("ui-switch__thumb", className)}
-            data-checked={dataAttr(isChecked)}
             layout
             transition={transition}
+            data-checked={dataAttr(isChecked)}
             __css={{ ...styles.thumb }}
           />
         </ui.span>

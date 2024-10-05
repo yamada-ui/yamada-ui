@@ -1,4 +1,4 @@
-import { render, screen, a11y } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import {
   RangeSlider,
   RangeSliderFilledTrack,
@@ -10,7 +10,7 @@ describe("<RangeSliderMark />", () => {
   test("should render correctly", async () => {
     await a11y(
       <RangeSlider>
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
       </RangeSlider>,
@@ -20,7 +20,7 @@ describe("<RangeSliderMark />", () => {
   test("should display correct value", () => {
     render(
       <RangeSlider>
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
       </RangeSlider>,
@@ -31,7 +31,7 @@ describe("<RangeSliderMark />", () => {
   test("should have correct value attribute", () => {
     render(
       <RangeSlider>
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
       </RangeSlider>,

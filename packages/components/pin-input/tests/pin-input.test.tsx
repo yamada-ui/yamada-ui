@@ -24,7 +24,7 @@ describe("<PinInput />", () => {
   })
 
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
-    const { user, findAllByRole } = render(<PinInput type="alphanumeric" />)
+    const { findAllByRole, user } = render(<PinInput type="alphanumeric" />)
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
@@ -40,23 +40,23 @@ describe("<PinInput />", () => {
   test("calls onChange and onComplete appropriately", async () => {
     const handleChange = vi.fn()
     const handleComplete = vi.fn()
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput
+        items={2}
         onChange={handleChange}
         onComplete={handleComplete}
-        items={2}
       />,
     )
 
     const inputs = await findAllByRole("textbox")
 
-    await user.type(inputs[0], "1")
+    await user.type(inputs[0]!, "1")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("1")
     })
 
-    await user.type(inputs[1], "2")
+    await user.type(inputs[1]!, "2")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("12")
@@ -65,7 +65,7 @@ describe("<PinInput />", () => {
   })
 
   test('input type should be "password" when mask is true', () => {
-    render(<PinInput mask={true} />)
+    render(<PinInput mask />)
 
     const inputs = screen.getAllByPlaceholderText("○")
 
@@ -86,7 +86,7 @@ describe("<PinInput />", () => {
   })
 
   test('sets autoComplete to "one-time-code" when otp is true', () => {
-    render(<PinInput otp={true} />)
+    render(<PinInput otp />)
 
     const inputs = screen.getAllByRole("textbox")
     inputs.forEach((input) => {
@@ -118,14 +118,14 @@ describe("<PinInput />", () => {
   })
 
   test("correct behavior on input focus", async () => {
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = (await findAllByRole("textbox")) as HTMLInputElement[]
     const firstInput = inputs[0]
     const secondInput = inputs[1]
 
     await waitFor(() => {
-      expect(firstInput.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("○")
     })
 
     await act(async () => {
@@ -135,29 +135,29 @@ describe("<PinInput />", () => {
     await waitFor(() => {
       expect(document.activeElement).toBe(firstInput)
     })
-    expect(firstInput.placeholder).toBe("")
+    expect(firstInput?.placeholder).toBe("")
 
     await act(async () => {
-      await user.click(secondInput)
+      await user.click(secondInput!)
     })
 
     await waitFor(() => {
-      expect(firstInput.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("○")
     })
     expect(document.activeElement).toBe(secondInput)
-    expect(secondInput.placeholder).toBe("")
+    expect(secondInput?.placeholder).toBe("")
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
-    const { user, findAllByRole } = render(
-      <PinInput defaultValue="123" manageFocus={true} />,
+    const { findAllByRole, user } = render(
+      <PinInput defaultValue="123" manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
     const lastInput = inputs[3]
 
     await act(async () => {
-      await user.click(lastInput)
+      await user.click(lastInput!)
       await user.keyboard("[Backspace]")
     })
 
@@ -168,7 +168,7 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue="123" manageFocus={false} />,
     )
 
@@ -176,7 +176,7 @@ describe("<PinInput />", () => {
     const lastInput = inputs[3]
 
     await act(async () => {
-      await user.click(lastInput)
+      await user.click(lastInput!)
       await user.keyboard("[Backspace]")
     })
 
@@ -186,15 +186,15 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus if current input is not empty", async () => {
-    const { user, findAllByRole } = render(
-      <PinInput defaultValue="1234" items={4} manageFocus={true} />,
+    const { findAllByRole, user } = render(
+      <PinInput defaultValue="1234" items={4} manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
     const thirdInput = inputs[2]
 
     await act(async () => {
-      await user.click(thirdInput)
+      await user.click(thirdInput!)
       await user.keyboard("[arrowleft][Backspace]")
     })
 
@@ -205,7 +205,7 @@ describe("<PinInput />", () => {
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
-    const { findAllByRole } = render(<PinInput autoFocus={true} />)
+    const { findAllByRole } = render(<PinInput autoFocus />)
 
     await act(async () => {
       await new Promise((resolve) => requestAnimationFrame(resolve))
@@ -233,12 +233,12 @@ describe("<PinInput />", () => {
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
 
-    await user.click(firstInput)
+    await user.click(firstInput!)
     await user.paste("12")
 
     await waitFor(() => {
@@ -248,7 +248,7 @@ describe("<PinInput />", () => {
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
     const testValue = "1234"
-    const { user, findAllByRole } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput />)
 
     const inputs = await findAllByRole("textbox")
 
@@ -266,7 +266,7 @@ describe("<PinInput />", () => {
 
   test("the change in value does not impact other values", async () => {
     const defaultValue = "1234"
-    const { user, findAllByRole } = render(
+    const { findAllByRole, user } = render(
       <PinInput defaultValue={defaultValue} />,
     )
 
@@ -274,7 +274,7 @@ describe("<PinInput />", () => {
 
     await act(async () => {
       await user.tab()
-      await user.type(inputs[0], "9")
+      await user.type(inputs[0]!, "9")
     })
 
     await waitFor(() => {
@@ -285,8 +285,8 @@ describe("<PinInput />", () => {
     expect(inputs[3]).toHaveValue("4")
 
     await act(async () => {
-      await user.click(inputs[2])
-      await user.type(inputs[2], "{backspace}")
+      await user.click(inputs[2]!)
+      await user.type(inputs[2]!, "{backspace}")
     })
 
     await waitFor(() => {

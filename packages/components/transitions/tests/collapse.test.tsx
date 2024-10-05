@@ -1,4 +1,4 @@
-import { a11y, render, waitFor, screen } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import { Collapse } from "../src"
 
@@ -42,7 +42,7 @@ describe("<Collapse />", () => {
 
   test("no opacity when animationOpacity set to false", async () => {
     render(
-      <Collapse isOpen animationOpacity={false}>
+      <Collapse animationOpacity={false} isOpen>
         Collapse
       </Collapse>,
     )
@@ -59,7 +59,7 @@ describe("<Collapse />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse startingHeight={50} endingHeight={200} isOpen={isOpen}>
+          <Collapse endingHeight={200} isOpen={isOpen} startingHeight={50}>
             Collapse
           </Collapse>
         </>

@@ -1,6 +1,6 @@
-export function cookieStorage(key: string, value: string | null) {
+export function cookieStorage(key: string, value: null | string) {
   Object.defineProperty(document, "cookie", {
-    writable: true,
     value: value ? `${key}=${value}` : "",
+    writable: true,
   })
 }

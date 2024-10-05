@@ -2,7 +2,7 @@ import type { CSSUIObject } from "@yamada-ui/core"
 import { createContext } from "@yamada-ui/utils"
 
 interface StatContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [StatProvider, useStat] = createContext<StatContext>({

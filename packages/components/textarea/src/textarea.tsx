@@ -1,17 +1,18 @@
 import type {
+  ColorModeToken,
+  CSS,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  ColorModeToken,
-  CSS,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ForwardedRef } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import { useFormControlProps } from "@yamada-ui/form-control"
 import {
   addDomEvent,
@@ -24,23 +25,22 @@ import {
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef } from "react"
 import { useRef } from "react"
 import useAutosize from "./use-autosize"
 
 interface TextareaOptions {
   /**
-   * The border color when the input is focused.
+   * If `true`, the Textarea height auto-adjusts to text height.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  autosize?: boolean
   /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * If `true`, the Textarea height auto-adjusts to text height.
+   * The border color when the input is focused.
    */
-  autosize?: boolean
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * Autosize up to maxRows rows.
    *
@@ -60,7 +60,7 @@ interface TextareaOptions {
 }
 
 export interface TextareaProps
-  extends Omit<HTMLUIProps<"textarea">, "disabled" | "required" | "readOnly">,
+  extends Omit<HTMLUIProps<"textarea">, "disabled" | "readOnly" | "required">,
     ThemeProps<"Textarea">,
     TextareaOptions,
     FormControlOptions {}
@@ -72,17 +72,17 @@ export interface TextareaProps
  */
 export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
   const [
-    { h, height, minH, minHeight, maxH, maxHeight, ...styles },
+    { h, height, maxH, maxHeight, minH, minHeight, ...styles },
     mergedProps,
   ] = useComponentStyle("Textarea", props)
   let {
     className,
-    rows,
-    resize = "none",
     autosize,
     maxRows = Infinity,
     minRows = 1,
+    resize = "none",
     resizeRef,
+    rows,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -98,7 +98,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
   if (rows || autosize) {
     css = styles
   } else {
-    css = { h, height, minH, minHeight, maxH, maxHeight, ...styles }
+    css = { h, height, maxH, maxHeight, minH, minHeight, ...styles }
   }
 
   useSafeLayoutEffect(() => {
@@ -130,10 +130,10 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     <ui.textarea
       ref={mergeRefs(ref, textareaRef)}
       className={cx("ui-textarea", className)}
-      __css={css}
       resize={resize}
       rows={rows}
       onChange={handlerAll(autosize ? resizeTextarea : noop, onChange)}
+      __css={css}
       {...rest}
     />
   )

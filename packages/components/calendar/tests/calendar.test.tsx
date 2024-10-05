@@ -153,12 +153,12 @@ describe("<Calendar />", () => {
       }
     })
 
-    test("should change selected date", async () => {
+    test("should change selected date", () => {
       const { container } = render(
         <Calendar
-          variant="solid"
-          today
           defaultValue={new Date(new Date().setDate(1))}
+          today
+          variant="solid"
         />,
       )
       const selectDate = new Date(new Date().setDate(7))
@@ -170,12 +170,12 @@ describe("<Calendar />", () => {
       expect(selectBtn).toHaveAttribute("data-selected")
     })
 
-    test("should change selected month", async () => {
+    test("should change selected month", () => {
       const { container } = render(
         <Calendar
-          variant="subtle"
-          today
           defaultValue={new Date(new Date().setDate(1))}
+          today
+          variant="subtle"
         />,
       )
 
@@ -189,7 +189,7 @@ describe("<Calendar />", () => {
       )
       const targetMonthEl = monthListButtons[7]
       expect(targetMonthEl).toHaveTextContent("Aug")
-      fireEvent.click(targetMonthEl)
+      fireEvent.click(targetMonthEl!)
 
       const headerLabelBtnAfter = container.querySelector(
         `button.ui-calendar__header__label`,
@@ -272,8 +272,8 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar
             defaultValue={new Date(new Date(2024, 2))}
-            minDate={new Date(new Date(2024, 2).setDate(1))}
             maxDate={new Date(new Date(2024, 2).setDate(18))}
+            minDate={new Date(new Date(2024, 2).setDate(1))}
           />,
         )
         const minDateUnder = new Date(new Date(2024, 2).setDate(0))
@@ -422,7 +422,7 @@ describe("<Calendar />", () => {
 
       test("should render with dateFormat 'YYYY年 MMMM'", () => {
         const { container } = render(
-          <Calendar locale="ja" dateFormat="YYYY年 MMMM" />,
+          <Calendar dateFormat="YYYY年 MMMM" locale="ja" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -435,7 +435,7 @@ describe("<Calendar />", () => {
 
       test("should render with yearFormat 'YYYY年'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="month" yearFormat="YYYY年" />,
+          <Calendar defaultType="month" locale="ja" yearFormat="YYYY年" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -446,7 +446,7 @@ describe("<Calendar />", () => {
 
       test("should render with monthFormat 'MM'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="month" monthFormat="MM" />,
+          <Calendar defaultType="month" locale="ja" monthFormat="MM" />,
         )
         const headerLabel = container.querySelector(
           ".ui-calendar__month-list__button",
@@ -456,7 +456,7 @@ describe("<Calendar />", () => {
 
       test("should render with yearFormat 'YY'", () => {
         const { container } = render(
-          <Calendar locale="ja" defaultType="year" yearFormat="YY" />,
+          <Calendar defaultType="year" locale="ja" yearFormat="YY" />,
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
@@ -504,9 +504,9 @@ describe("<Calendar />", () => {
         (number) => {
           const { getByTestId } = render(
             <Calendar
-              data-testid="Calender"
               amountOfMonths={number}
               disableOutsideDays
+              data-testid="Calender"
             />,
           )
           const children = getByTestId("Calender").children
@@ -520,8 +520,8 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar
             amountOfMonths={2}
-            disableOutsideDays
             defaultMonth={new Date("2024-01-18")}
+            disableOutsideDays
           />,
         )
         const headerLabelBtn = container.querySelector(
@@ -551,19 +551,19 @@ describe("<Calendar />", () => {
 
       test.each([
         {
-          paginateBy: 1,
-          expectedPrev: "December 2023",
           expectedNext: "February 2024",
+          expectedPrev: "December 2023",
+          paginateBy: 1,
         },
       ])(
         "should render with paginateBy $paginateBy",
-        ({ paginateBy, expectedPrev, expectedNext }) => {
+        ({ expectedNext, expectedPrev, paginateBy }) => {
           const { container } = render(
             <Calendar
               amountOfMonths={2}
+              defaultMonth={new Date("2024-01-18")}
               disableOutsideDays
               paginateBy={paginateBy}
-              defaultMonth={new Date("2024-01-18")}
             />,
           )
           const headerLabelBtn = container.querySelector(
@@ -603,7 +603,7 @@ describe("<Calendar />", () => {
         const monthDays = container.querySelectorAll(".ui-calendar__month__day")
         const selectDays = [monthDays[7], monthDays[10], monthDays[13]]
         selectDays.forEach((monthDayBtn) => {
-          fireEvent.click(monthDayBtn)
+          fireEvent.click(monthDayBtn!)
           expect(monthDayBtn).toHaveAttribute("data-selected")
         })
 
@@ -617,7 +617,7 @@ describe("<Calendar />", () => {
         )
         const days = [monthDaysPrev[7], monthDaysPrev[10], monthDaysPrev[13]]
         days.forEach((monthDayBtn) => {
-          fireEvent.click(monthDayBtn)
+          fireEvent.click(monthDayBtn!)
           expect(monthDayBtn).toHaveAttribute("data-selected")
         })
 
@@ -630,7 +630,7 @@ describe("<Calendar />", () => {
         })
 
         selectDays.forEach((monthDayBtn) => {
-          fireEvent.click(monthDayBtn)
+          fireEvent.click(monthDayBtn!)
           expect(monthDayBtn).not.toHaveAttribute("data-selected")
         })
       })
@@ -647,7 +647,7 @@ describe("<Calendar />", () => {
           ".ui-calendar__month__day",
         )
         const selectDayFrom = monthDaysPrev[7]
-        fireEvent.click(selectDayFrom)
+        fireEvent.click(selectDayFrom!)
         expect(selectDayFrom).toHaveAttribute("data-selected")
 
         const nextBtn = container.querySelector(
@@ -659,7 +659,7 @@ describe("<Calendar />", () => {
           ".ui-calendar__month__day",
         )
         const selectDayTo = monthDaysNext[7]
-        fireEvent.click(selectDayTo)
+        fireEvent.click(selectDayTo!)
         expect(selectDayTo).toHaveAttribute("data-selected")
 
         Array.from(monthDaysNext)
@@ -689,7 +689,7 @@ describe("<Calendar />", () => {
           ".ui-calendar__month__day",
         )
         const selectDay1 = monthDaysPrev[7]
-        fireEvent.click(selectDay1)
+        fireEvent.click(selectDay1!)
         expect(selectDay1).toHaveAttribute("data-selected")
 
         const nextBtn = container.querySelector(
@@ -700,7 +700,7 @@ describe("<Calendar />", () => {
           ".ui-calendar__month__day",
         )
         const selectDay2 = monthDaysCurrent[14]
-        fireEvent.click(selectDay2)
+        fireEvent.click(selectDay2!)
         expect(selectDay2).toHaveAttribute("data-selected")
 
         fireEvent.click(nextBtn!)
@@ -708,7 +708,7 @@ describe("<Calendar />", () => {
           ".ui-calendar__month__day",
         )
         const selectDay3 = monthDaysNext[21]
-        fireEvent.click(selectDay3)
+        fireEvent.click(selectDay3!)
         expect(selectDay3).toHaveAttribute("data-selected")
 
         const selectDay4 = monthDaysNext[28]
@@ -719,19 +719,19 @@ describe("<Calendar />", () => {
           <Calendar enableRange maxSelectValues={3} />,
         )
         const monthDays = container.querySelectorAll(".ui-calendar__month__day")
-        fireEvent.click(monthDays[14])
+        fireEvent.click(monthDays[14]!)
         expect(monthDays[14]).toHaveAttribute("data-selected")
         expect(monthDays[11]).toHaveAttribute("data-disabled")
         expect(monthDays[17]).toHaveAttribute("data-disabled")
 
-        fireEvent.click(monthDays[16])
+        fireEvent.click(monthDays[16]!)
         expect(monthDays[15]).toHaveAttribute("data-between")
 
-        fireEvent.click(monthDays[14])
+        fireEvent.click(monthDays[14]!)
         expect(monthDays[11]).toHaveAttribute("data-disabled")
         expect(monthDays[17]).toHaveAttribute("data-disabled")
 
-        fireEvent.click(monthDays[12])
+        fireEvent.click(monthDays[12]!)
         expect(monthDays[13]).toHaveAttribute("data-between")
       })
     })

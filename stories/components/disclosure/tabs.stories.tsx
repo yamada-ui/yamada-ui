@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Tabs>
 
 const meta: Meta<typeof Tabs> = {
-  title: "Components / Disclosure / Tabs",
   component: Tabs,
+  title: "Components / Disclosure / Tabs",
 }
 
 export default meta
@@ -267,7 +267,7 @@ export const withVariant: Story = () => {
 
 export const withColorScheme: Story = () => {
   return (
-    <Tabs variant="rounded-solid" colorScheme="red">
+    <Tabs colorScheme="red" variant="rounded-solid">
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>
@@ -392,7 +392,7 @@ export const withOrientation: Story = () => {
 export const withFitted: Story = () => {
   return (
     <>
-      <Tabs variant="line" isFitted>
+      <Tabs isFitted variant="line">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -410,7 +410,7 @@ export const withFitted: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant="sticky" isFitted>
+      <Tabs isFitted variant="sticky">
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>

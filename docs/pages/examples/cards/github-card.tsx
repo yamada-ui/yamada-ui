@@ -2,13 +2,13 @@ import { Circle, Star } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
+  CardBody,
   CardFooter,
   CardHeader,
-  Heading,
-  Text,
   Center,
-  CardBody,
+  Heading,
   Spacer,
+  Text,
 } from "@yamada-ui/react"
 import { memo } from "react"
 
@@ -21,7 +21,7 @@ export const GitHubCard = memo(() => {
       variant="outline"
     >
       <CardHeader>
-        <Heading as="h2" size="md" lineClamp={1}>
+        <Heading as="h2" lineClamp={1} size="md">
           yamada-ui
         </Heading>
 
@@ -38,15 +38,15 @@ export const GitHubCard = memo(() => {
       </CardBody>
 
       <CardFooter
-        flexDirection={{ base: "row", sm: "column" }}
         alignItems={{ base: "center", sm: "flex-start" }}
+        flexDirection={{ base: "row", sm: "column" }}
         gap={{ base: "md", sm: "sm" }}
       >
-        <Text as={Center} gap="xs" color="muted">
+        <Text as={Center} color="muted" gap="xs">
           <Circle /> TypeScript
         </Text>
 
-        <Text as={Center} gap="xs" color="muted">
+        <Text as={Center} color="muted" gap="xs">
           <Star /> 400
         </Text>
 

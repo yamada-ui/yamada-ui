@@ -1,29 +1,29 @@
 import type {
+  ColorModeToken,
+  CSS,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  ColorModeToken,
-  CSS,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import { useFormControlProps } from "@yamada-ui/form-control"
 import { cx } from "@yamada-ui/utils"
 
 interface InputOptions {
   /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * The native HTML `size` attribute to be passed to the `input`.
    */
@@ -33,7 +33,7 @@ interface InputOptions {
 export interface InputProps
   extends Omit<
       HTMLUIProps<"input">,
-      "disabled" | "required" | "readOnly" | "size"
+      "disabled" | "readOnly" | "required" | "size"
     >,
     ThemeProps<"Input">,
     InputOptions,

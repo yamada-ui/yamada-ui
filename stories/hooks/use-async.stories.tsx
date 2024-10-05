@@ -8,7 +8,7 @@ const meta: Meta = {
 export default meta
 
 export const basic = () => {
-  const { loading, error, value } = useAsync(
+  const { error, loading, value } = useAsync(
     async () =>
       new Promise<string>((resolve, reject) => {
         setTimeout(() => {
@@ -22,15 +22,11 @@ export const basic = () => {
     [],
   )
 
-  return (
-    <>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : error ? (
-        <Text>Error: {error.message}</Text>
-      ) : (
-        <Text>Value: {value}</Text>
-      )}
-    </>
+  return loading ? (
+    <Text>Loading...</Text>
+  ) : error ? (
+    <Text>Error: {error.message}</Text>
+  ) : (
+    <Text>Value: {value}</Text>
   )
 }

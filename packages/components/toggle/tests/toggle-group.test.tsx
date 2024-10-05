@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, a11y } from "@yamada-ui/test"
-import { ToggleGroup, Toggle } from "../src"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { Toggle, ToggleGroup } from "../src"
 
 describe("<ToggleGroup />", () => {
   test("should render ToggleGroup and its children correctly", async () => {

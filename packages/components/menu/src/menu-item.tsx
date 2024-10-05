@@ -1,5 +1,12 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type {
+  FC,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEvent,
+  ReactElement,
+} from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { useClickable } from "@yamada-ui/use-clickable"
 import {
   ariaAttr,
@@ -11,29 +18,36 @@ import {
   mergeRefs,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type {
-  FC,
-  KeyboardEvent,
-  KeyboardEventHandler,
-  MouseEvent,
-  ReactElement,
-} from "react"
 import { useCallback, useRef, useState } from "react"
 import {
-  useMenuDescendant,
   UpstreamMenuItemProvider,
   useMenu,
+  useMenuDescendant,
   useUpstreamMenuItem,
 } from "./menu-context"
 
 const isTargetMenuItem = (target: EventTarget | null) => {
   return (
     isHTMLElement(target) &&
-    !!target?.getAttribute("role")?.startsWith("menuitem")
+    !!target.getAttribute("role")?.startsWith("menuitem")
   )
 }
 
 interface MenuItemOptions {
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
+  /**
+   * Right-aligned label text content, useful for displaying hotkeys.
+   */
+  command?: string
+  /**
+   * The menu item icon to use.
+   */
+  icon?: ReactElement
   /**
    * If `true`, the menu item will be disabled.
    *
@@ -46,20 +60,6 @@ interface MenuItemOptions {
    * @default false
    */
   isFocusable?: boolean
-  /**
-   * If `true`, the list element will be closed when selected.
-   *
-   * @default false
-   */
-  closeOnSelect?: boolean
-  /**
-   * The menu item icon to use.
-   */
-  icon?: ReactElement
-  /**
-   * Right-aligned label text content, useful for displaying hotkeys.
-   */
-  command?: string
 }
 
 export interface MenuItemProps extends HTMLUIProps<"li">, MenuItemOptions {}
@@ -68,27 +68,27 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
   (
     {
       className,
+      children,
+      closeOnSelect: customCloseOnSelect,
+      command,
+      icon,
       isDisabled,
       isFocusable,
-      closeOnSelect: customCloseOnSelect,
-      icon,
-      command,
-      children,
       ...props
     },
     ref,
   ) => {
     const {
-      focusedIndex,
-      setFocusedIndex,
-      isOpen,
-      onClose,
-      onUpstreamClose,
       closeOnSelect: generalCloseOnSelect,
+      focusedIndex,
+      isNested,
+      isOpen,
       menuRef,
       requestAnimationFrameId,
-      isNested,
+      setFocusedIndex,
       styles,
+      onClose,
+      onUpstreamClose,
     } = useMenu()
     const { onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
 
@@ -163,14 +163,14 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
     const rest = useClickable<HTMLLIElement>({
       focusOnClick: false,
       ...props,
-      onClick: handlerAll(props.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, onFocus),
-      onMouseOver: handlerAll(props.onMouseOver, onMouseOver),
-      onMouseLeave: handlerAll(props.onMouseLeave, onMouseLeave),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onKeyDownRef.current),
       ref: mergeRefs(register, itemRef, ref),
       isDisabled,
       isFocusable,
+      onClick: handlerAll(props.onClick, onClick),
+      onFocus: handlerAll(props.onFocus, onFocus),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onKeyDownRef.current),
+      onMouseLeave: handlerAll(props.onMouseLeave, onMouseLeave),
+      onMouseOver: handlerAll(props.onMouseOver, onMouseOver),
     })
 
     useUpdateEffect(() => {
@@ -203,34 +203,34 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
       )
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
       alignItems: "center",
-      textAlign: "start",
+      color: "inherit",
+      display: "flex",
       flex: "0 0 auto",
-      outline: 0,
       gap: "0.75rem",
+      outline: 0,
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
       ...styles.item,
     }
 
     return (
       <UpstreamMenuItemProvider
         value={{
+          hasDownstreamRef,
+          setDownstreamOpen,
           onKeyDownRef,
           onUpstreamRestoreFocus: onRestoreFocus,
-          setDownstreamOpen,
-          hasDownstreamRef,
         }}
       >
         <ui.li
           {...rest}
           {...(isDownstreamOpen ? { "data-active": "" } : {})}
+          className={cx("ui-menu__item", className)}
           role="menuitem"
           tabIndex={isFocused ? 0 : -1}
-          className={cx("ui-menu__item", className)}
           __css={css}
         >
           {icon ? <MenuIcon>{icon}</MenuIcon> : null}
@@ -244,13 +244,13 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
 
 interface MenuOptionItemOptions {
   /**
+   * The type of the menu option item.
+   */
+  type?: "checkbox" | "radio"
+  /**
    * The menu option item icon to use.
    */
-  icon?: ReactElement | null
-  /**
-   * The value of the menu option item.
-   */
-  value?: string
+  icon?: null | ReactElement
   /**
    * If `true`, the checkbox or radio will be checked.
    *
@@ -258,26 +258,26 @@ interface MenuOptionItemOptions {
    */
   isChecked?: boolean
   /**
-   * The type of the menu option item.
+   * The value of the menu option item.
    */
-  type?: "radio" | "checkbox"
+  value?: string
 }
 
 export interface MenuOptionItemProps
-  extends Omit<MenuItemProps, "icon" | "command" | "value">,
+  extends Omit<MenuItemProps, "command" | "icon" | "value">,
     MenuOptionItemOptions {}
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
-    { className, icon, isChecked, closeOnSelect = false, children, ...rest },
+    { className, children, closeOnSelect = false, icon, isChecked, ...rest },
     ref,
   ) => {
     return (
       <MenuItem
         ref={ref}
         className={cx("ui-menu__item--option", className)}
-        aria-checked={ariaAttr(isChecked)}
         closeOnSelect={closeOnSelect}
+        aria-checked={ariaAttr(isChecked)}
         {...rest}
       >
         {icon !== null ? (
@@ -298,11 +298,11 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
     const { styles } = useMenu()
 
     const css: CSSUIObject = {
-      flexShrink: 0,
-      display: "inline-flex",
-      justifyContent: "center",
       alignItems: "center",
+      display: "inline-flex",
+      flexShrink: 0,
       fontSize: "0.85em",
+      justifyContent: "center",
       ...styles.icon,
     }
 
@@ -337,7 +337,7 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
 )
 
 const CheckIcon: FC = () => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em">
+  <svg height="1em" viewBox="0 0 14 14" width="1em">
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"

@@ -1,9 +1,11 @@
 import type {
-  RenderOptions as ReactRenderOptions,
-  RenderHookOptions as ReactRenderHookOptions,
   Queries,
   queries,
+  RenderHookOptions as ReactRenderHookOptions,
+  RenderOptions as ReactRenderOptions,
 } from "@testing-library/react"
+import type { ReactElement } from "react"
+import type * as ReactDOMClient from "react-dom/client"
 import {
   render as reactRender,
   renderHook as reactRenderHook,
@@ -11,17 +13,15 @@ import {
 import { userEvent } from "@testing-library/user-event"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
-import type { ReactElement } from "react"
-import type * as ReactDOMClient from "react-dom/client"
 import "@testing-library/jest-dom/vitest"
 
-export type RenderOptions = ReactRenderOptions & {
+export type RenderOptions = {
   withProvider?: boolean
-}
+} & ReactRenderOptions
 
-export type RenderReturn = ReturnType<typeof reactRender> & {
+export type RenderReturn = {
   user: ReturnType<typeof userEvent.setup>
-}
+} & ReturnType<typeof reactRender>
 
 export function render(
   ui: ReactElement,
@@ -45,18 +45,18 @@ type HydrateableContainer = Parameters<
 export type RenderHookOptions<
   Y,
   M extends Queries = typeof queries,
-  D extends RendererableContainer | HydrateableContainer = HTMLElement,
-  H extends RendererableContainer | HydrateableContainer = D,
-> = ReactRenderHookOptions<Y, M, D, H> & {
+  D extends HydrateableContainer | RendererableContainer = HTMLElement,
+  H extends HydrateableContainer | RendererableContainer = D,
+> = {
   withProvider?: boolean
-}
+} & ReactRenderHookOptions<Y, M, D, H>
 
 export function renderHook<
   Y,
   M,
   D extends Queries = typeof queries,
-  H extends RendererableContainer | HydrateableContainer = HTMLElement,
-  R extends RendererableContainer | HydrateableContainer = H,
+  H extends HydrateableContainer | RendererableContainer = HTMLElement,
+  R extends HydrateableContainer | RendererableContainer = H,
 >(
   render: (props: M) => Y,
   { withProvider = true, ...rest }: RenderHookOptions<M, D, H, R> = {},

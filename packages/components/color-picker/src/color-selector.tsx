@@ -1,30 +1,29 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
-import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { FC, ForwardedRef, ReactNode } from "react"
 import type { ColorSelectorBodyProps } from "./color-selector-body"
-import { ColorSelectorBody } from "./color-selector-body"
 import type { ColorSelectorChannelsProps } from "./color-selector-channels"
-import { ColorSelectorChannels } from "./color-selector-channels"
 import type { ColorSelectorSwatchesProps } from "./color-selector-swatches"
-import { ColorSelectorSwatches } from "./color-selector-swatches"
 import type { SaturationSliderProps } from "./saturation-slider"
-import { SaturationSlider } from "./saturation-slider"
 import type { UseColorSelectorProps } from "./use-color-selector"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import { ColorSelectorBody } from "./color-selector-body"
+import { ColorSelectorChannels } from "./color-selector-channels"
+import { ColorSelectorSwatches } from "./color-selector-swatches"
+import { SaturationSlider } from "./saturation-slider"
 import { ColorSelectorProvider, useColorSelector } from "./use-color-selector"
 
 interface ColorSelectorOptions {
+  children?: FC<{ value: string }> | ReactNode
   /**
-   * If `true`, display the saturation, hue, alpha, channels and eye dropper component.
-   *
-   * @default true
+   * Ref for the saturation slider component.
    */
-  withPicker?: boolean
+  saturationSliderRef?: ForwardedRef<HTMLInputElement>
   /**
    * If `true`, display the channels component.
    *
@@ -32,26 +31,27 @@ interface ColorSelectorOptions {
    */
   withChannel?: boolean
   /**
-   * Props for the color selector input element.
+   * If `true`, display the saturation, hue, alpha, channels and eye dropper component.
+   *
+   * @default true
    */
-  inputProps?: HTMLUIProps<"input">
-  /**
-   * Ref for the saturation slider component.
-   */
-  saturationSliderRef?: ForwardedRef<HTMLInputElement>
-  /**
-   * Props for the saturation slider component.
-   */
-  saturationSliderProps?: Omit<SaturationSliderProps, "value" | "defaultValue">
-  /**
-   * Props for the swatches component.
-   */
-  swatchesProps?: ColorSelectorSwatchesProps
+  withPicker?: boolean
   /**
    * Props for the channels component.
    */
   channelsProps?: ColorSelectorChannelsProps
-  children?: ReactNode | FC<{ value: string }>
+  /**
+   * Props for the color selector input element.
+   */
+  inputProps?: HTMLUIProps<"input">
+  /**
+   * Props for the saturation slider component.
+   */
+  saturationSliderProps?: Omit<SaturationSliderProps, "defaultValue" | "value">
+  /**
+   * Props for the swatches component.
+   */
+  swatchesProps?: ColorSelectorSwatchesProps
 }
 
 export interface ColorSelectorProps
@@ -60,18 +60,18 @@ export interface ColorSelectorProps
     ColorSelectorOptions,
     Pick<
       ColorSelectorBodyProps,
-      | "withResult"
-      | "withEyeDropper"
-      | "eyeDropperRef"
-      | "eyeDropperProps"
-      | "hueSliderRef"
-      | "hueSliderProps"
-      | "alphaSliderRef"
       | "alphaSliderProps"
+      | "alphaSliderRef"
+      | "eyeDropperProps"
+      | "eyeDropperRef"
+      | "hueSliderProps"
+      | "hueSliderRef"
+      | "withEyeDropper"
+      | "withResult"
     >,
     Pick<
       ColorSelectorSwatchesProps,
-      "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
+      "swatches" | "swatchesColumns" | "swatchesLabel" | "swatchProps"
     >,
     Pick<ColorSelectorChannelsProps, "channelProps"> {}
 
@@ -88,27 +88,27 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     })
     const {
       className,
+      alphaSliderRef,
       children,
-      withResult = true,
-      withPicker = true,
-      withChannel = true,
+      eyeDropperRef,
+      hueSliderRef,
+      saturationSliderRef,
       swatches,
       swatchesColumns = 7,
-      inputProps,
-      withEyeDropper,
-      eyeDropperRef,
-      eyeDropperProps,
-      saturationSliderRef,
-      saturationSliderProps,
-      hueSliderRef,
-      hueSliderProps,
-      alphaSliderRef,
-      alphaSliderProps,
       swatchesLabel,
-      swatchProps,
-      swatchesProps,
-      channelsProps,
+      withChannel = true,
+      withEyeDropper,
+      withPicker = true,
+      withResult = true,
+      alphaSliderProps,
       channelProps,
+      channelsProps,
+      eyeDropperProps,
+      hueSliderProps,
+      inputProps,
+      saturationSliderProps,
+      swatchesProps,
+      swatchProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
     const {
@@ -126,7 +126,7 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     }
 
     return (
-      <ColorSelectorProvider value={{ styles, size, value, ...rest }}>
+      <ColorSelectorProvider value={{ size, styles, value, ...rest }}>
         <ui.div
           ref={ref}
           className={cx("ui-color-selector", className)}
@@ -137,8 +137,8 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
 
           {withPicker ? (
             <SaturationSlider
-              size={size}
               className="ui-color-selector__saturation-slider"
+              size={size}
               __css={{ ...styles.saturationSlider }}
               {...getSaturationSliderProps(
                 saturationSliderProps,
@@ -150,14 +150,14 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
           {withPicker ? (
             <ColorSelectorBody
               {...{
-                withResult,
-                withEyeDropper,
-                eyeDropperRef,
-                eyeDropperProps,
-                hueSliderRef,
-                hueSliderProps,
                 alphaSliderRef,
+                eyeDropperRef,
+                hueSliderRef,
+                withEyeDropper,
+                withResult,
                 alphaSliderProps,
+                eyeDropperProps,
+                hueSliderProps,
               }}
             />
           ) : null}
@@ -168,9 +168,9 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
 
           <ColorSelectorSwatches
             {...{
-              swatchesLabel,
               swatches,
               swatchesColumns,
+              swatchesLabel,
               swatchProps,
               ...swatchesProps,
             }}

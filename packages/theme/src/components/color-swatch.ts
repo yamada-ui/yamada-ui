@@ -6,17 +6,6 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
     overlay: { boxSize: "full" },
   },
 
-  variants: {
-    basic: {
-      container: { rounded: "md" },
-      overlay: { rounded: "md" },
-    },
-    rounded: {
-      container: { rounded: "full" },
-      overlay: { rounded: "full" },
-    },
-  },
-
   sizes: {
     sm: {
       container: { boxSize: "6" },
@@ -29,8 +18,19 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
     },
   },
 
+  variants: {
+    basic: {
+      container: { rounded: "md" },
+      overlay: { rounded: "md" },
+    },
+    rounded: {
+      container: { rounded: "full" },
+      overlay: { rounded: "full" },
+    },
+  },
+
   defaultProps: {
-    variant: "basic",
     size: "md",
+    variant: "basic",
   },
 }

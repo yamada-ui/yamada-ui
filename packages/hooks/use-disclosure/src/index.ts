@@ -5,11 +5,11 @@ export interface UseDisclosureProps<
   T extends (...args: any[]) => any = () => void,
   K extends (...args: any[]) => any = () => void,
 > {
-  isOpen?: boolean
   defaultIsOpen?: boolean
-  onOpen?: T
+  isOpen?: boolean
+  timing?: "after" | "before"
   onClose?: K
-  timing?: "before" | "after"
+  onOpen?: T
 }
 
 /**
@@ -37,22 +37,22 @@ export const useDisclosure = <
 
   const onOpen = useCallback(
     async (...args: any) => {
-      if (timingRef.current === "before") await handleOpen?.(...args)
+      if (timingRef.current === "before") await handleOpen(...args)
 
       if (!isControlled) setIsOpen(true)
 
-      if (timingRef.current === "after") await handleOpen?.(...args)
+      if (timingRef.current === "after") await handleOpen(...args)
     },
     [isControlled, handleOpen, timingRef],
   ) as unknown as T
 
   const onClose = useCallback(
     async (...args: any) => {
-      if (timingRef.current === "before") await handleClose?.(...args)
+      if (timingRef.current === "before") await handleClose(...args)
 
       if (!isControlled) setIsOpen(false)
 
-      if (timingRef.current === "after") await handleClose?.(...args)
+      if (timingRef.current === "after") await handleClose(...args)
     },
     [isControlled, handleClose, timingRef],
   ) as unknown as K
@@ -60,27 +60,27 @@ export const useDisclosure = <
   const onToggle = useCallback(
     (...args: any) => (!isOpen ? onOpen(...args) : onClose(...args)),
     [isOpen, onOpen, onClose],
-  ) as unknown as T | K
+  ) as unknown as K | T
 
-  return { isOpen, onOpen, onClose, onToggle }
+  return { isOpen, onClose, onOpen, onToggle }
 }
 
 export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
 
-export type LazyMode = "unmount" | "keepMounted"
+export type LazyMode = "keepMounted" | "unmount"
 
 export interface UseLazyDisclosureProps {
   enabled?: boolean
   isSelected?: boolean
-  wasSelected?: boolean
   mode?: LazyMode
+  wasSelected?: boolean
 }
 
 export const useLazyDisclosure = ({
-  wasSelected,
   enabled,
   isSelected,
   mode = "unmount",
+  wasSelected,
 }: UseLazyDisclosureProps) => {
   if (!enabled) return true
 

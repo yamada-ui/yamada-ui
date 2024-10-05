@@ -1,24 +1,27 @@
+import type { ButtonProps, ModalProps, StackProps } from "@yamada-ui/react"
+import type { FC, KeyboardEvent, RefObject } from "react"
 import { File, Hash, SearchIcon } from "@yamada-ui/lucide"
 import {
-  ui,
+  dataAttr,
+  Divider,
+  forwardRef,
+  handlerAll,
+  Highlight,
   HStack,
+  IconButton,
+  isApple,
   Kbd,
   Modal,
   ModalBody,
-  Text,
-  forwardRef,
-  handlerAll,
-  useDisclosure,
-  isApple,
-  Divider,
-  VStack,
   ModalHeader,
-  Highlight,
-  dataAttr,
+  Text,
+  ui,
+  useDisclosure,
   useUpdateEffect,
-  IconButton,
+  VStack,
 } from "@yamada-ui/react"
-import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
+import { useI18n } from "contexts"
+import { useEventListener } from "hooks"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
@@ -31,17 +34,14 @@ import {
   useRef,
   useState,
 } from "react"
-import type { FC, KeyboardEvent, RefObject } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
-import { useI18n } from "contexts"
-import { useEventListener } from "hooks"
 
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
 
 const useSearch = () => {
   const { events } = useRouter()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   useEffect(() => {
     events.on("routeChangeComplete", onClose)
@@ -51,7 +51,7 @@ const useSearch = () => {
     }
   }, [onClose, events])
 
-  return { isOpen, onOpen, onClose }
+  return { isOpen, onClose, onOpen }
 }
 
 export interface SearchProps extends StackProps {}
@@ -59,7 +59,7 @@ export interface SearchProps extends StackProps {}
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
     const { tc } = useI18n()
-    const { isOpen, onOpen, onClose } = useSearch()
+    const { isOpen, onClose, onOpen } = useSearch()
     const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
 
     useEffect(() => {
@@ -75,28 +75,32 @@ export const Search = memo(
 
       ev.preventDefault()
 
-      isOpen ? onClose() : onOpen()
+      if (isOpen) {
+        onClose()
+      } else {
+        onOpen()
+      }
     })
 
     return (
       <>
         <HStack
+          ref={ref}
           as="button"
           type="button"
-          ref={ref}
-          w="full"
-          maxW="lg"
-          h="10"
-          px="3"
-          outline="0"
-          border="1px solid"
-          bg={["white", "black"]}
-          rounded="md"
-          gap="sm"
-          color={["blackAlpha.600", "whiteAlpha.400"]}
           _focusVisible={{ shadow: "outline" }}
-          transitionProperty="common"
+          bg={["white", "black"]}
+          border="1px solid"
+          color={["blackAlpha.600", "whiteAlpha.400"]}
+          gap="sm"
+          h="10"
+          maxW="lg"
+          outline="0"
+          px="3"
+          rounded="md"
           transitionDuration="slower"
+          transitionProperty="common"
+          w="full"
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         >
@@ -115,17 +119,17 @@ export interface SearchButtonProps extends ButtonProps {}
 
 export const SearchButton = memo(
   forwardRef<SearchButtonProps, "button">(({ ...rest }, ref) => {
-    const { isOpen, onOpen, onClose } = useSearch()
+    const { isOpen, onClose, onOpen } = useSearch()
 
     return (
       <>
         <IconButton
-          type="button"
           ref={ref}
-          color="muted"
-          variant="ghost"
+          type="button"
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
+          color="muted"
           icon={<SearchIcon fontSize="2xl" />}
+          variant="ghost"
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         />
@@ -142,10 +146,10 @@ const SearchModal: FC<SearchModalProps> = memo(
   ({ isOpen, onClose, ...rest }) => {
     const [query, setQuery] = useState<string>("")
     const [selectedIndex, setSelectedIndex] = useState<number>(0)
-    const { t, contents } = useI18n()
+    const { contents, t } = useI18n()
     const router = useRouter()
-    const eventRef = useRef<"mouse" | "keyboard" | null>(null)
-    const directionRef = useRef<"up" | "down">("down")
+    const eventRef = useRef<"keyboard" | "mouse" | null>(null)
+    const directionRef = useRef<"down" | "up">("down")
     const compositionRef = useRef<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const itemRefs = useRef<Map<number, RefObject<HTMLAnchorElement>>>(
@@ -186,19 +190,19 @@ const SearchModal: FC<SearchModalProps> = memo(
             directionRef.current = "up"
             setSelectedIndex(selectedIndex - 1)
           },
+          End: () => {
+            directionRef.current = "down"
+            setSelectedIndex(hits.length - 1)
+          },
           Enter: () => {
             if (!hits.length) return
 
             onClose?.()
-            router.push(hits[selectedIndex].slug)
+            router.push(hits[selectedIndex]?.slug)
           },
           Home: () => {
             directionRef.current = "up"
             setSelectedIndex(0)
-          },
-          End: () => {
-            directionRef.current = "down"
-            setSelectedIndex(hits.length - 1)
           },
         }
 
@@ -240,51 +244,51 @@ const SearchModal: FC<SearchModalProps> = memo(
               el.scrollTop = top - 17
             }
           }),
-        scrollMode: "if-needed",
         block: "nearest",
-        inline: "nearest",
         boundary: containerRef.current,
+        inline: "nearest",
+        scrollMode: "if-needed",
       })
     }, [selectedIndex])
 
     return (
       <Modal
+        isOpen={isOpen}
+        placement="top"
         size="3xl"
         withCloseButton={false}
-        placement="top"
-        isOpen={isOpen}
         onClose={onClose}
         {...rest}
       >
-        <ModalHeader fontWeight="normal" fontSize="md" pb="md">
+        <ModalHeader fontSize="md" fontWeight="normal" pb="md">
           <HStack position="relative" w="full">
             <ui.input
-              flex="1"
-              pl="lg"
-              placeholder={t("component.forms.search.placeholder") as string}
-              maxLength={64}
               autoComplete="off"
               autoCorrect="off"
+              flex="1"
+              maxLength={64}
+              pl="lg"
+              placeholder={t("component.forms.search.placeholder") as string}
               spellCheck="false"
               value={query}
               onChange={(ev) => setQuery(ev.target.value)}
-              onKeyDown={onKeyDown}
-              onCompositionStart={() => {
-                compositionRef.current = true
-              }}
               onCompositionEnd={() => {
                 compositionRef.current = false
               }}
+              onCompositionStart={() => {
+                compositionRef.current = true
+              }}
+              onKeyDown={onKeyDown}
             />
 
             <SearchIcon
+              color={["blackAlpha.700", "whiteAlpha.600"]}
               fontSize="2xl"
+              left="0"
+              pointerEvents="none"
               position="absolute"
               top="50%"
-              left="0"
               transform="translateY(-50%)"
-              color={["blackAlpha.700", "whiteAlpha.600"]}
-              pointerEvents="none"
             />
           </HStack>
         </ModalHeader>
@@ -294,7 +298,7 @@ const SearchModal: FC<SearchModalProps> = memo(
             <Divider />
 
             <VStack as="ul" gap="sm">
-              {hits.map(({ title, type, slug, hierarchy }, index) => {
+              {hits.map(({ type, hierarchy, slug, title }, index) => {
                 const isSelected = index === selectedIndex
                 const ref = createRef<HTMLAnchorElement>()
 
@@ -302,25 +306,25 @@ const SearchModal: FC<SearchModalProps> = memo(
 
                 return (
                   <HStack
-                    as={NextLink}
-                    ref={ref}
                     key={slug}
-                    href={slug}
-                    gap="2"
-                    borderWidth="1px"
-                    rounded="md"
-                    minH="16"
-                    py="sm"
-                    px="md"
-                    data-selected={dataAttr(isSelected)}
-                    bg={["blackAlpha.50", "whiteAlpha.50"]}
-                    transitionProperty="colors"
-                    transitionDuration="normal"
+                    ref={ref}
+                    as={NextLink}
+                    _active={{}}
                     _focus={{ outline: "none" }}
                     _focusVisible={{ boxShadow: "outline" }}
                     _hover={{ boxShadow: "outline" }}
                     _selected={{ boxShadow: "outline" }}
-                    _active={{}}
+                    bg={["blackAlpha.50", "whiteAlpha.50"]}
+                    borderWidth="1px"
+                    gap="2"
+                    href={slug}
+                    minH="16"
+                    px="md"
+                    py="sm"
+                    rounded="md"
+                    transitionDuration="normal"
+                    transitionProperty="colors"
+                    data-selected={dataAttr(isSelected)}
                     onClick={onClose}
                     onMouseEnter={() => {
                       eventRef.current = "mouse"
@@ -329,21 +333,21 @@ const SearchModal: FC<SearchModalProps> = memo(
                   >
                     {type === "page" ? (
                       <File
-                        fontSize="2xl"
                         color={["blackAlpha.700", "whiteAlpha.600"]}
+                        fontSize="2xl"
                       />
                     ) : (
                       <Hash
-                        fontSize="2xl"
                         color={["blackAlpha.500", "whiteAlpha.400"]}
+                        fontSize="2xl"
                       />
                     )}
 
                     <VStack gap="0">
                       {type === "fragment" ? (
                         <Highlight
-                          fontSize="xs"
                           color="muted"
+                          fontSize="xs"
                           lineClamp={1}
                           query={query}
                           markProps={{ variant: "text-accent" }}
@@ -353,9 +357,9 @@ const SearchModal: FC<SearchModalProps> = memo(
                       ) : null}
 
                       <Highlight
+                        lineClamp={1}
                         query={query}
                         markProps={{ variant: "text-accent" }}
-                        lineClamp={1}
                       >
                         {title}
                       </Highlight>

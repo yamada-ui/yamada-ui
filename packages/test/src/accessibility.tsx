@@ -1,8 +1,8 @@
-import { axe } from "@koralle/vitest-axe"
 import type { AxeCore, AxeMatchers } from "@koralle/vitest-axe"
 import type { RenderOptions } from "@testing-library/react"
-import { isArray, isString } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
+import { axe } from "@koralle/vitest-axe"
+import { isArray, isString } from "@yamada-ui/utils"
 import { isValidElement } from "react"
 import { render } from "./render"
 
@@ -10,15 +10,15 @@ declare module "vitest" {
   export interface Assertion extends AxeMatchers {}
 }
 
-type A11yConfigureOptions = AxeCore.RunOptions & {
+type A11yConfigureOptions = {
   globalOptions?: AxeCore.Spec
   impactLevels?: AxeCore.ImpactValue[]
-}
+} & AxeCore.RunOptions
 
-export type A11yProps = RenderOptions & { axeOptions?: A11yConfigureOptions }
+export type A11yProps = { axeOptions?: A11yConfigureOptions } & RenderOptions
 
 export async function a11y(
-  ui: ReactElement | HTMLElement,
+  ui: HTMLElement | ReactElement,
   { axeOptions, ...rest }: A11yProps = {},
 ): Promise<void> {
   const container = isValidElement(ui) ? render(ui, rest).container : ui
@@ -36,12 +36,12 @@ export function filterVisuallyHidden(targetContent: string) {
       border: ["0", "0px"],
       clip: ["rect(0, 0, 0, 0)", "rect(0px, 0px, 0px, 0px)"],
       height: "1px",
-      width: "1px",
       margin: "-1px",
-      padding: ["0", "0px"],
       overflow: "hidden",
-      whiteSpace: "nowrap",
+      padding: ["0", "0px"],
       position: "absolute",
+      whiteSpace: "nowrap",
+      width: "1px",
     }
 
     const isVisuallyHidden = Object.entries(visuallyHiddenStyle).every(

@@ -1,8 +1,8 @@
-import { FormControl } from "@yamada-ui/form-control"
-import { act, a11y, render, renderHook, screen } from "@yamada-ui/test"
 import type { ChangeEvent } from "react"
-import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 import type { CheckboxItem } from "../src"
+import { FormControl } from "@yamada-ui/form-control"
+import { a11y, act, render, renderHook, screen } from "@yamada-ui/test"
+import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 
 describe("<Checkbox />", () => {
   test("Checkbox renders correctly", async () => {
@@ -11,7 +11,7 @@ describe("<Checkbox />", () => {
 
   test("should be checked", () => {
     render(
-      <Checkbox data-testid="Checkbox" defaultIsChecked>
+      <Checkbox defaultIsChecked data-testid="Checkbox">
         Yes
       </Checkbox>,
     )
@@ -20,7 +20,7 @@ describe("<Checkbox />", () => {
 
   test("should be disabled", () => {
     render(
-      <Checkbox data-testid="Checkbox" isDisabled>
+      <Checkbox isDisabled data-testid="Checkbox">
         Yes
       </Checkbox>,
     )
@@ -32,8 +32,8 @@ describe("<Checkbox />", () => {
 
   test("should render CheckboxGroup with default value", () => {
     render(
-      <CheckboxGroup data-testid="CheckboxGroup" defaultValue={["Yes"]}>
-        <Checkbox data-testid="Checkbox" value="Yes">
+      <CheckboxGroup defaultValue={["Yes"]} data-testid="CheckboxGroup">
+        <Checkbox value="Yes" data-testid="Checkbox">
           Yes
         </Checkbox>
       </CheckboxGroup>,
@@ -44,7 +44,7 @@ describe("<Checkbox />", () => {
 
   test("should be read only", () => {
     render(
-      <Checkbox data-testid="Checkbox" isReadOnly>
+      <Checkbox isReadOnly data-testid="Checkbox">
         Yes
       </Checkbox>,
     )
@@ -58,7 +58,7 @@ describe("<Checkbox />", () => {
 
   test("should be invalid", () => {
     render(
-      <Checkbox data-testid="Checkbox" isInvalid value="No">
+      <Checkbox isInvalid value="No" data-testid="Checkbox">
         No
       </Checkbox>,
     )
@@ -78,18 +78,18 @@ describe("<Checkbox />", () => {
     render(
       <>
         <CheckboxGroup
-          data-testid="CheckboxGroup1"
-          direction="row"
           defaultValue={["No"]}
+          direction="row"
+          data-testid="CheckboxGroup1"
         >
           <Checkbox value="yes">Yes</Checkbox>
           <Checkbox value="no">No</Checkbox>
         </CheckboxGroup>
 
         <CheckboxGroup
-          data-testid="CheckboxGroup2"
           defaultValue={["No"]}
           items={items}
+          data-testid="CheckboxGroup2"
         />
       </>,
     )
@@ -111,18 +111,18 @@ describe("<Checkbox />", () => {
     render(
       <>
         <Checkbox
-          data-testid="Checkbox1"
           isChecked={allChecked}
           isIndeterminate={isIndeterminate}
+          data-testid="Checkbox1"
         >
           Decision Tree
         </Checkbox>
 
-        <Checkbox data-testid="Checkbox2" isChecked={values[0]}>
+        <Checkbox isChecked={values[0]} data-testid="Checkbox2">
           Yes
         </Checkbox>
 
-        <Checkbox data-testid="Checkbox3" isChecked={values[1]}>
+        <Checkbox isChecked={values[1]} data-testid="Checkbox3">
           No
         </Checkbox>
       </>,

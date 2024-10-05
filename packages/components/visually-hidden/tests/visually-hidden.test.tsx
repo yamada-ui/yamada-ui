@@ -2,13 +2,13 @@ import { render, screen } from "@yamada-ui/test"
 import { VisuallyHidden } from "../src"
 
 describe("<VisuallyHidden />", () => {
-  test("VisuallyHidden renders correctly", async () => {
+  test("VisuallyHidden renders correctly", () => {
     render(<VisuallyHidden>Test</VisuallyHidden>)
     const el = screen.getByText("Test")
     expect(el.textContent).toBe("Test")
   })
 
-  test("VisuallyHidden is visually hidden", async () => {
+  test("VisuallyHidden is visually hidden", () => {
     render(<VisuallyHidden>Test</VisuallyHidden>)
     const style = window.getComputedStyle(screen.getByText("Test"))
     expect(style.clip).toBe("rect(0px, 0px, 0px, 0px)")

@@ -1,5 +1,5 @@
-import path from "path"
 import { glob } from "glob"
+import path from "path"
 
 export const themePath = [
   "node_modules",

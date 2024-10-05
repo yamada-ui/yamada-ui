@@ -8,10 +8,10 @@ const meta: Meta = {
 export default meta
 
 export const basic = () => {
-  const { hovered, ref } = useHover()
+  const { ref, hovered } = useHover()
 
   return (
-    <Box ref={ref} w="full" bg="red.500" p="md" rounded="md" color="white">
+    <Box ref={ref} bg="red.500" color="white" p="md" rounded="md" w="full">
       {hovered ? "I am hovered" : "Put mouse over me please"}
     </Box>
   )

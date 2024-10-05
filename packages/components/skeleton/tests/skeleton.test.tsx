@@ -15,14 +15,14 @@ describe("<Skeleton />", () => {
   test("should render with given props", () => {
     render(
       <>
-        <Skeleton data-testid="Skeleton" h={8} speed={2} />
-        <SkeletonCircle data-testid="SkeletonCircle" boxSize={8} speed={2} />
+        <Skeleton h={8} speed={2} data-testid="Skeleton" />
+        <SkeletonCircle boxSize={8} speed={2} data-testid="SkeletonCircle" />
         <SkeletonText
-          data-testid="SkeletonText"
           gap={4}
-          textHeight={4}
-          speed={2}
           lineClamp={2}
+          speed={2}
+          textHeight={4}
+          data-testid="SkeletonText"
         />
       </>,
     )
@@ -31,11 +31,7 @@ describe("<Skeleton />", () => {
     expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
   })
   test("should render with isLoaded", () => {
-    render(
-      <>
-        <Skeleton data-testid="Skeleton" isLoaded />
-      </>,
-    )
+    render(<Skeleton isLoaded data-testid="Skeleton" />)
     expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
   })
 })

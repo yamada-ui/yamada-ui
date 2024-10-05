@@ -1,6 +1,6 @@
-import { forwardRef, Grid } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
 import type { UserInsights, UserInsightScore } from "insights"
+import { forwardRef, Grid } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 import { useInsights } from "./insights-provider"
 import { DEFAULT_SCORE, getInsightScore } from "./insights-utils"
@@ -12,7 +12,7 @@ export interface UserChartsProps extends GridProps {
 
 export const UserCharts = memo(
   forwardRef<UserChartsProps, "div">(({ isLoading, ...rest }, ref) => {
-    const { users, currentInsights, prevInsights } = useInsights()
+    const { currentInsights, prevInsights, users } = useInsights()
 
     const computedUsers = useMemo(() => {
       interface Data {
@@ -41,7 +41,7 @@ export const UserCharts = memo(
 
             const currentScore = getInsightScore(data)
 
-            const { comments, issues, pullRequests, approved, total } =
+            const { approved, comments, issues, pullRequests, total } =
               currentScore
 
             result[user].currentScore.total += total
@@ -60,14 +60,16 @@ export const UserCharts = memo(
 
             const prevScore = getInsightScore(data)
 
-            const { comments, issues, pullRequests, approved, total } =
+            const { approved, comments, issues, pullRequests, total } =
               prevScore
 
-            result[user].prevScore.total += total
-            result[user].prevScore.comments += comments
-            result[user].prevScore.issues += issues
-            result[user].prevScore.pullRequests += pullRequests
-            result[user].prevScore.approved += approved
+            if (result[user]) {
+              result[user].prevScore.total += total
+              result[user].prevScore.comments += comments
+              result[user].prevScore.issues += issues
+              result[user].prevScore.pullRequests += pullRequests
+              result[user].prevScore.approved += approved
+            }
           })
         })
 
@@ -89,21 +91,21 @@ export const UserCharts = memo(
       <Grid
         ref={ref}
         as="section"
+        gap={{ base: "lg", md: "md" }}
         templateColumns={{
           base: users.length <= 1 ? "1fr" : "repeat(2, 1fr)",
           lg: "1fr",
         }}
-        gap={{ base: "lg", md: "md" }}
         {...rest}
       >
         {computedUsers.map(([id, { currentScore, prevScore, timeline }]) => (
           <UserChart
-            key={id}
             id={id}
+            key={id}
             currentScore={currentScore}
+            isLoading={isLoading}
             prevScore={prevScore}
             timeline={timeline}
-            isLoading={isLoading}
           />
         ))}
       </Grid>

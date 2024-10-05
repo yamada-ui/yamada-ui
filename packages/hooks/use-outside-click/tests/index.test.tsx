@@ -1,7 +1,7 @@
-import { render } from "@yamada-ui/test"
 import type { FC } from "react"
-import { useRef } from "react"
 import type { UseOutsideClickProps } from "../src"
+import { render } from "@yamada-ui/test"
+import { useRef } from "react"
 import { useOutsideClick } from "../src"
 
 describe("useOutsideClick", () => {
@@ -25,7 +25,7 @@ describe("useOutsideClick", () => {
   test("should not call handler on inside click", async () => {
     const handler = vi.fn()
 
-    const { user, getByTestId } = render(<Component handler={handler} />)
+    const { getByTestId, user } = render(<Component handler={handler} />)
 
     const el = getByTestId("el")
 
@@ -37,7 +37,7 @@ describe("useOutsideClick", () => {
   test("should not call handler when disabled", async () => {
     const handler = vi.fn()
 
-    const { user } = render(<Component handler={handler} enabled={false} />)
+    const { user } = render(<Component enabled={false} handler={handler} />)
 
     await user.click(document.body)
 
@@ -60,7 +60,7 @@ describe("useOutsideClick", () => {
   test("does not call handler on touchend inside element", async () => {
     const handler = vi.fn()
 
-    const { user, getByTestId } = render(<Component handler={handler} />)
+    const { getByTestId, user } = render(<Component handler={handler} />)
 
     const el = getByTestId("el")
 

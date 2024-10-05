@@ -1,25 +1,25 @@
 import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
+import type { MotionStyle, MotionVariants } from "@yamada-ui/motion"
+import type { FC } from "react"
+import type { NoticeOptions } from "./notice"
 import { ui } from "@yamada-ui/core"
-import type { MotionVariants, MotionStyle } from "@yamada-ui/motion"
 import { AnimatePresence, motion, useIsPresent } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { cx, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
-import type { FC } from "react"
 import { memo, useEffect, useState, useSyncExternalStore } from "react"
-import type { NoticeOptions } from "./notice"
 import { noticeStore } from "./notice"
 
 export interface NoticeProviderProps
   extends Omit<Required<ThemeConfig>["notice"], "options"> {}
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
-  variants,
-  gap = "fallback(4, 1rem)",
   appendToParentPortal,
-  listProps,
-  itemProps,
   containerRef,
+  gap = "fallback(4, 1rem)",
+  variants,
+  itemProps,
+  listProps,
 }) => {
   const state = useSyncExternalStore(
     noticeStore.subscribe,
@@ -42,17 +42,17 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
       : undefined
 
     const css: CSSUIObject = {
-      position: "fixed",
-      zIndex: "fallback(zarbon, 160)",
-      pointerEvents: "none",
+      bottom,
       display: "flex",
       flexDirection: "column",
-      margin: gap,
       gap,
-      top,
-      bottom,
-      right,
       left,
+      margin: gap,
+      pointerEvents: "none",
+      position: "fixed",
+      right,
+      top,
+      zIndex: "fallback(zarbon, 160)",
     }
 
     return (
@@ -87,20 +87,15 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 }
 
 const defaultVariants: MotionVariants = {
-  initial: ({ placement }) => ({
-    opacity: 0,
-    [["top", "bottom"].includes(placement) ? "y" : "x"]:
-      (placement === "bottom" ? 1 : placement.includes("right") ? 1 : -1) * 24,
-  }),
   animate: {
     opacity: 1,
-    y: 0,
-    x: 0,
     scale: 1,
     transition: {
       duration: 0.4,
       ease: [0.4, 0, 0.2, 1],
     },
+    x: 0,
+    y: 0,
   },
   exit: {
     opacity: 0,
@@ -110,23 +105,28 @@ const defaultVariants: MotionVariants = {
       ease: [0.4, 0, 1, 1],
     },
   },
+  initial: ({ placement }) => ({
+    [["bottom", "top"].includes(placement) ? "y" : "x"]:
+      (placement === "bottom" ? 1 : placement.includes("right") ? 1 : -1) * 24,
+    opacity: 0,
+  }),
 }
 
 interface NoticeComponentProps
   extends NoticeOptions,
-    Pick<NoticeProviderProps, "variants" | "itemProps"> {}
+    Pick<NoticeProviderProps, "itemProps" | "variants"> {}
 
 const NoticeComponent = memo(
   ({
+    style,
+    duration = 5000,
+    isDelete = false,
+    message,
+    placement,
     variants = defaultVariants,
     itemProps,
-    placement,
-    duration = 5000,
-    message,
     onCloseComplete,
-    isDelete = false,
     onDelete,
-    style,
   }: NoticeComponentProps) => {
     const [delay, setDelay] = useState(duration)
     const isPresent = useIsPresent()
@@ -153,23 +153,15 @@ const NoticeComponent = memo(
     useTimeout(onClose, delay)
 
     const css: CSSUIObject = {
-      pointerEvents: "auto",
       maxW: "36rem",
       minW: "20rem",
+      pointerEvents: "auto",
       ...style,
     }
 
     return (
       <motion.li
-        layout
         className="ui-notice__list__item"
-        variants={variants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        onHoverStart={onMouseEnter}
-        onHoverEnd={onMouseLeave}
-        custom={{ placement }}
         style={
           {
             display: "flex",
@@ -180,6 +172,14 @@ const NoticeComponent = memo(
                 : "center",
           } as MotionStyle
         }
+        animate="animate"
+        custom={{ placement }}
+        exit="exit"
+        initial="initial"
+        layout
+        variants={variants}
+        onHoverEnd={onMouseLeave}
+        onHoverStart={onMouseEnter}
         {...itemProps}
       >
         <ui.div className="ui-notice__list__item__inner" __css={css}>

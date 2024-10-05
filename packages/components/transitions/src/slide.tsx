@@ -1,24 +1,24 @@
 import type { CSSUIObject, ThemeProps, Token } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
-  WithTransitionProps,
-  MotionTransitionVariants,
   MotionProps,
+  MotionTransitionVariants,
   MotionVariants,
+  WithTransitionProps,
 } from "@yamada-ui/motion"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
   AnimatePresence,
+  motion,
+  MOTION_TRANSITION_VARIANTS,
+  motionForwardRef,
   transitionEnter,
   transitionExit,
-  MOTION_TRANSITION_VARIANTS,
-  motion,
-  motionForwardRef,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
 
 export const getSlideProps = (
-  placement: "top" | "left" | "bottom" | "right" = "right",
+  placement: "bottom" | "left" | "right" | "top" = "right",
 ) => {
   switch (placement) {
     case "right":
@@ -34,12 +34,12 @@ export const getSlideProps = (
 
 const variants: MotionVariants = {
   enter: ({
-    placement,
-    transition,
-    transitionEnd,
     delay,
     duration,
     enter,
+    placement,
+    transition,
+    transitionEnd,
   } = {}) => ({
     ...getSlideProps(placement).enter,
     transition: transitionEnter(transition?.enter)(delay, duration),
@@ -47,12 +47,12 @@ const variants: MotionVariants = {
     ...enter,
   }),
   exit: ({
-    placement,
-    transition,
-    transitionEnd,
     delay,
     duration,
     exit,
+    placement,
+    transition,
+    transitionEnd,
   } = {}) => ({
     ...getSlideProps(placement).exit,
     transition: transitionExit(transition?.exit)(delay, duration),
@@ -62,9 +62,9 @@ const variants: MotionVariants = {
 } satisfies MotionTransitionVariants
 
 export const slideProps = {
-  initial: "exit",
   animate: "enter",
   exit: "exit",
+  initial: "exit",
   variants,
 }
 
@@ -74,7 +74,7 @@ interface SlideOptions {
    *
    * @default 'right'
    */
-  placement?: Token<"top" | "left" | "bottom" | "right">
+  placement?: Token<"bottom" | "left" | "right" | "top">
 }
 
 export interface SlideProps
@@ -90,14 +90,14 @@ export interface SlideProps
 export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Slide", props)
   let {
-    unmountOnExit,
+    className,
+    delay,
+    duration = { enter: 0.4, exit: 0.3 },
     isOpen,
     placement: _placement,
     transition,
     transitionEnd,
-    delay,
-    duration = { enter: 0.4, exit: 0.3 },
-    className,
+    unmountOnExit,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -106,7 +106,7 @@ export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
 
   const placement = useValue(_placement)
 
-  const custom = { placement, transition, transitionEnd, delay, duration }
+  const custom = { delay, duration, placement, transition, transitionEnd }
 
   isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 

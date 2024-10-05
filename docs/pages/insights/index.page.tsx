@@ -1,24 +1,24 @@
-import { useQuery } from "@tanstack/react-query"
-import { isString, useLoading, VStack } from "@yamada-ui/react"
-import dayjs from "dayjs"
 import type { InsightPeriod, Insights } from "insights"
 import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
   NextPage,
 } from "next"
+import type { InsightsContext } from "./insights-provider"
+import { useQuery } from "@tanstack/react-query"
+import { isString, useLoading, VStack } from "@yamada-ui/react"
+import { Seo } from "components/media-and-icons"
+import { PageProvider, useI18n } from "contexts"
+import dayjs from "dayjs"
+import { TopLayout } from "layouts"
 import { useRouter } from "next/router"
 import { useCallback, useMemo, useState } from "react"
+import { getStaticCommonProps } from "utils/next"
 import { InsightsHeader } from "./insights-header"
-import type { InsightsContext } from "./insights-provider"
 import { InsightsProvider } from "./insights-provider"
 import { getSummarize, INSIGHT_USER_IDS } from "./insights-utils"
 import { TotalChart } from "./total-chart"
 import { UserCharts } from "./user-charts"
-import { SEO } from "components/media-and-icons"
-import { useI18n, PageProvider } from "contexts"
-import { TopLayout } from "layouts"
-import { getStaticCommonProps } from "utils/next"
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
@@ -34,7 +34,7 @@ export const getServerSideProps = async (
       ? query.end
       : dayjs().tz().subtract(1, "d").format("YYYY-MM-DD")
 
-  return { props: { ...props, start, end } }
+  return { props: { ...props, end, start } }
 }
 
 type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -42,8 +42,8 @@ type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
 const Page: NextPage<PageProps> = ({
   currentVersion,
   documentTree,
-  start: startProp,
   end: endProp,
+  start: startProp,
 }) => {
   const { background } = useLoading()
   const router = useRouter()
@@ -62,11 +62,10 @@ const Page: NextPage<PageProps> = ({
 
     const summarize = getSummarize(startDate, endDate)
 
-    return { start: startProp, end: endProp, summarize }
+    return { end: endProp, start: startProp, summarize }
   })
-  const { start, end, summarize } = period
+  const { end, start, summarize } = period
   const { data, isLoading } = useQuery({
-    queryKey: ["get-insights", start, end],
     queryFn: async () => {
       try {
         background.start()
@@ -76,8 +75,8 @@ const Page: NextPage<PageProps> = ({
         const resolveEnd = end ?? dayjs().tz().format("YYYY-MM-DD")
 
         const params = new URLSearchParams({
-          start,
           end: resolveEnd,
+          start,
           summarize,
         })
         const res = await fetch(`/api/insights?${params}`)
@@ -92,19 +91,20 @@ const Page: NextPage<PageProps> = ({
         background.finish()
       }
     },
+    queryKey: ["get-insights", start, end],
   })
 
   const onChangePeriod = useCallback(
     (start: string | undefined, end: string | undefined) => {
       if (!start) {
-        return setPeriod({ start: undefined, end: undefined, summarize: "day" })
+        return setPeriod({ end: undefined, start: undefined, summarize: "day" })
       } else {
         const startDate = new Date(start)
         const endDate = end ? new Date(end) : dayjs().tz().toDate()
 
         const summarize = getSummarize(startDate, endDate)
 
-        setPeriod({ start, end, summarize })
+        setPeriod({ end, start, summarize })
       }
     },
     [],
@@ -114,9 +114,9 @@ const Page: NextPage<PageProps> = ({
     () => ({
       ...data,
       period,
-      onChangePeriod,
-      users,
       setUsers,
+      users,
+      onChangePeriod,
     }),
     [data, period, users, onChangePeriod],
   )
@@ -125,10 +125,10 @@ const Page: NextPage<PageProps> = ({
     <PageProvider {...{ currentVersion, documentTree }}>
       <InsightsProvider value={value}>
         <TopLayout>
-          <SEO
-            title={t("insights.title")}
+          <Seo
             description={t("insights.description")}
             disableTitleTemplate
+            title={t("insights.title")}
           />
 
           <VStack>

@@ -1,8 +1,8 @@
 import type { IconButtonProps } from "@yamada-ui/button"
-import { IconButton } from "@yamada-ui/button"
-import { forwardRef } from "@yamada-ui/core"
 import type { CSSUIObject, FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import { IconButton } from "@yamada-ui/button"
+import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useColorSelectorContext } from "./use-color-selector"
@@ -13,7 +13,7 @@ export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,
   "button"
 >(({ className, ...rest }, ref) => {
-  const { getEyeDropperProps, readOnly, size, styles } =
+  const { readOnly, size, styles, getEyeDropperProps } =
     useColorSelectorContext()
 
   const css: CSSUIObject = {
@@ -26,8 +26,8 @@ export const ColorSelectorEyeDropper = forwardRef<
   return (
     <IconButton
       className={cx("ui-color-selector__eye-dropper", className)}
-      variant="outline"
       size={size}
+      variant="outline"
       __css={css}
       {...getEyeDropperProps(rest, ref)}
     >
@@ -42,12 +42,12 @@ ColorSelectorEyeDropper.__ui__ = "ColorSelectorEyeDropper"
 export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
   return (
     <Icon
-      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
       {...rest}
     >
       <path d="m2 22 1-1h3l9-9" />

@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef } from "react"
 import {
   ChevronDown,
   MenuIcon,
@@ -22,12 +21,13 @@ import {
   Portal,
   useDisclosure,
 } from "@yamada-ui/react"
+import { useRef } from "react"
 
 type Story = StoryFn<typeof Menu>
 
 const meta: Meta<typeof Menu> = {
-  title: "Components / Overlay / Menu",
   component: Menu,
+  title: "Components / Overlay / Menu",
 }
 
 export default meta
@@ -54,8 +54,8 @@ export const withCommand: Story = () => {
       <MenuButton
         as={IconButton}
         icon={<MenuIcon fontSize="2xl" />}
-        aria-label="Menu"
         variant="outline"
+        aria-label="Menu"
       />
 
       <MenuList>
@@ -73,18 +73,18 @@ export const withIcon: Story = () => {
       <MenuButton
         as={IconButton}
         icon={<MenuIcon fontSize="2xl" />}
-        aria-label="Menu"
         variant="outline"
+        aria-label="Menu"
       />
 
       <MenuList>
-        <MenuItem icon={<Plus fontSize="lg" />} command="⌘T">
+        <MenuItem command="⌘T" icon={<Plus fontSize="lg" />}>
           New Tab
         </MenuItem>
-        <MenuItem icon={<SquareArrowOutUpRight fontSize="lg" />} command="⌘N">
+        <MenuItem command="⌘N" icon={<SquareArrowOutUpRight fontSize="lg" />}>
           New Window
         </MenuItem>
-        <MenuItem icon={<SquarePen fontSize="lg" />} command="⌘O">
+        <MenuItem command="⌘O" icon={<SquarePen fontSize="lg" />}>
           Open File
         </MenuItem>
       </MenuList>
@@ -242,14 +242,14 @@ export const withOptionGroup: Story = () => {
       </MenuButton>
 
       <MenuList>
-        <MenuOptionGroup label="order" type="radio">
+        <MenuOptionGroup type="radio" label="order">
           <MenuOptionItem value="asc">Ascending</MenuOptionItem>
           <MenuOptionItem value="desc">Descending</MenuOptionItem>
         </MenuOptionGroup>
 
         <MenuDivider />
 
-        <MenuOptionGroup label="display" type="checkbox">
+        <MenuOptionGroup type="checkbox" label="display">
           <MenuOptionItem value="gender">gender</MenuOptionItem>
           <MenuOptionItem value="email">email</MenuOptionItem>
           <MenuOptionItem value="phone">phone</MenuOptionItem>
@@ -322,7 +322,7 @@ export const disabledCloseOnSelect: Story = () => {
 
       <MenuList>
         <MenuItem>Set status</MenuItem>
-        <MenuItem closeOnSelect={true}>Edit Profile</MenuItem>
+        <MenuItem closeOnSelect>Edit Profile</MenuItem>
         <MenuItem>Preferences</MenuItem>
       </MenuList>
     </Menu>
@@ -396,10 +396,10 @@ export const useLazy: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
-    <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+    <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
       <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
         Menu
       </MenuButton>

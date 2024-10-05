@@ -1,4 +1,11 @@
 import type { AlertProps } from "@yamada-ui/alert"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  SnackComponentProps,
+  SnackConfigOptions,
+} from "@yamada-ui/core"
+import type { FC, ReactNode } from "react"
 import {
   Alert,
   AlertDescription,
@@ -6,15 +13,8 @@ import {
   AlertTitle,
 } from "@yamada-ui/alert"
 import { CloseButton } from "@yamada-ui/close-button"
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  SnackComponentProps,
-  SnackConfigOptions,
-} from "@yamada-ui/core"
 import { forwardRef, ui, useTheme } from "@yamada-ui/core"
 import { cx, merge } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
 import { useCallback, useMemo, useState } from "react"
 
 const createRender = (options: UseSnacksOptions): FC<SnackComponentProps> => {
@@ -22,7 +22,7 @@ const createRender = (options: UseSnacksOptions): FC<SnackComponentProps> => {
 
   const Render: FC<SnackComponentProps> = (props) => {
     if (typeof component === "function") {
-      return component({ ...props, ...options }) as JSX.Element
+      return component({ ...props, ...options })
     } else {
       return <Snack {...props} {...options} />
     }
@@ -32,14 +32,14 @@ const createRender = (options: UseSnacksOptions): FC<SnackComponentProps> => {
 }
 
 export interface Snack {
-  id: string | number
+  id: number | string
   duration: UseSnacksOptions["duration"]
-  status: UseSnacksOptions["status"]
   message: (props: SnackComponentProps) => ReactNode
+  status: UseSnacksOptions["status"]
   onClose: () => void
-  onCloseComplete?: () => void
-  boxShadow?: CSSUIProps["boxShadow"]
   style?: CSSUIObject
+  boxShadow?: CSSUIProps["boxShadow"]
+  onCloseComplete?: () => void
 }
 
 let counter = 0
@@ -68,7 +68,7 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
     () => merge<UseSnacksOptions>(themeOptions, defaultOptions),
     [defaultOptions, themeOptions],
   )
-  const { direction, startIndex, limit = 3 } = computedOptions
+  const { direction, limit = 3, startIndex } = computedOptions
 
   const getOptions = useCallback(
     (options: SnackMethodsOptions) => merge(computedOptions, options),
@@ -85,11 +85,11 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
 
       let {
         id = counter,
-        duration,
-        onCloseComplete,
-        status,
-        boxShadow,
         style,
+        boxShadow,
+        duration,
+        status,
+        onCloseComplete,
       } = options
 
       const onClose = () =>
@@ -97,13 +97,13 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
 
       const snack: Snack = {
         id,
-        status,
+        style,
+        boxShadow,
         duration,
         message,
+        status,
         onClose,
         onCloseComplete,
-        boxShadow,
-        style,
       }
 
       setItems((prev) => [
@@ -115,7 +115,7 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
     }
 
     methods.update = (
-      id: string | number,
+      id: number | string,
       options: Omit<SnackMethodsOptions, "id">,
     ) => {
       options = getOptions(options)
@@ -135,18 +135,18 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
       setItems([])
     }
 
-    methods.close = (id: string | number) => {
+    methods.close = (id: number | string) => {
       setItems((prev) => prev.filter((props) => props.id !== id))
     }
 
-    methods.isActive = (id: string | number) =>
+    methods.isActive = (id: number | string) =>
       !!items.find((props) => props.id === id)
 
     return methods
   }, [items, limit, getOptions])
 
   const snacks = useMemo(
-    () => ({ direction, startIndex, items }),
+    () => ({ direction, items, startIndex }),
     [direction, startIndex, items],
   )
 
@@ -170,17 +170,17 @@ const defaultBoxShadow: CSSUIProps["boxShadow"] = [
 const Snack = forwardRef<SnackProps, "div">(
   (
     {
-      variant = "basic",
-      colorScheme,
-      status,
-      icon,
-      title,
-      description,
-      isClosable = true,
-      closeStrategy = "button",
-      boxShadow = defaultBoxShadow,
       className,
+      boxShadow = defaultBoxShadow,
+      closeStrategy = "button",
+      colorScheme,
+      description,
+      icon,
       index,
+      isClosable = true,
+      status,
+      title,
+      variant = "basic",
       onClose,
     },
     ref,
@@ -194,17 +194,17 @@ const Snack = forwardRef<SnackProps, "div">(
       <Alert
         ref={ref}
         className={cx("ui-snack", className)}
-        status={status}
-        variant={variant}
-        colorScheme={colorScheme}
         alignItems="start"
         boxShadow={index ? boxShadow : undefined}
+        colorScheme={colorScheme}
         pe={isButtonClosable ? 8 : undefined}
+        status={status}
+        variant={variant}
         onClick={isElementClosable ? onClose : undefined}
       >
         <AlertIcon
-          variant={icon?.variant}
           className="ui-snack__icon"
+          variant={icon?.variant}
           {...(icon?.color ? { color: icon.color } : {})}
         >
           {icon?.children}
@@ -226,15 +226,15 @@ const Snack = forwardRef<SnackProps, "div">(
         {isButtonClosable ? (
           <CloseButton
             className="ui-snack__close-button"
+            position="absolute"
+            right={2}
             size="sm"
+            top={2}
             onClick={(ev) => {
               ev.stopPropagation()
 
               onClose?.()
             }}
-            position="absolute"
-            top={2}
-            right={2}
           />
         ) : null}
       </Alert>

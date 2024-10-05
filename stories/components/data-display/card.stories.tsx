@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { colorSchemes } from "../../components"
 import {
+  Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Heading,
-  Text,
+  CardHeader,
   Grid,
-  Button,
+  Heading,
   Image,
+  Text,
   VStack,
 } from "@yamada-ui/react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Card>
 
 const meta: Meta<typeof Card> = {
-  title: "Components / Data Display / Card",
   component: Card,
+  title: "Components / Data Display / Card",
 }
 
 export default meta
@@ -173,9 +173,9 @@ export const withColorScheme: Story = () => {
     <>
       <Heading size="xl">Subtle</Heading>
 
-      <Grid w="full" templateColumns="repeat(4, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
-          <Card key={colorScheme} variant="subtle" colorScheme={colorScheme}>
+          <Card key={colorScheme} colorScheme={colorScheme} variant="subtle">
             <CardHeader>
               <Heading size="md">{colorScheme}</Heading>
             </CardHeader>
@@ -188,9 +188,9 @@ export const withColorScheme: Story = () => {
 
       <Heading size="xl">Solid</Heading>
 
-      <Grid w="full" templateColumns="repeat(4, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
-          <Card key={colorScheme} variant="solid" colorScheme={colorScheme}>
+          <Card key={colorScheme} colorScheme={colorScheme} variant="solid">
             <CardHeader>
               <Heading size="md">{colorScheme}</Heading>
             </CardHeader>
@@ -209,10 +209,10 @@ export const withImage: Story = () => {
     <Card maxW="md">
       <CardHeader justifyContent="center">
         <Image
+          alt="SLAM DUNK"
+          rounded="md"
           src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
           w="full"
-          rounded="md"
-          alt="SLAM DUNK"
         />
       </CardHeader>
 
@@ -240,10 +240,10 @@ export const horizonCard: Story = () => {
       variant="outline"
     >
       <Image
-        src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
-        objectFit="cover"
-        maxW={{ base: "30%", md: "100%" }}
         alt="SLAM DUNK"
+        maxW={{ base: "30%", md: "100%" }}
+        objectFit="cover"
+        src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
       />
 
       <VStack gap="0">
@@ -268,7 +268,7 @@ export const horizonCard: Story = () => {
 
 export const multiCards: Story = () => {
   return (
-    <Grid templateColumns="repeat(auto-fill, minmax(320px, 1fr))" gap="md">
+    <Grid gap="md" templateColumns="repeat(auto-fill, minmax(320px, 1fr))">
       <Card>
         <CardHeader>
           <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>

@@ -14,13 +14,13 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "noUncheckedIndexedAccess": true,
     "downlevelIteration": true,
     "types": ["vitest/globals"],
     "allowJs": true
   },
   "include": [
     "@types",
-    ".eslint",
     "**/*.js",
     "**/*.jsx",
     "**/*.ts",
@@ -29,15 +29,17 @@
     "**/*.mts"
   ],
   "exclude": [
-    "node_modules",
-    "coverage",
-    "examples",
-    "docs",
-    "bin",
-    "dist",
-    ".changelog",
-    ".changeset",
-    ".turbo"
+    "**/node_modules/**",
+    "coverage/**",
+    "examples/**",
+    "docs/**/*",
+    "**/bin/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.turbo/**",
+    ".changelog/**",
+    ".changeset/**",
+    "storybook-static/**"
   ],
   "ts-node": {
     "transpileOnly": true,

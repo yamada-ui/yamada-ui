@@ -10,14 +10,14 @@ import { SNS } from "./sns"
 import { SPONSORS } from "./sponsors"
 
 export const CONSTANT = {
-  SNS,
-  SEO,
+  CONTRIBUTORS,
+  EMERITI,
   I18N,
   MAINTAINERS,
   MEMBERS,
-  EMERITI,
-  CONTRIBUTORS,
-  SPONSORS,
   MENU,
   PATH,
+  SEO,
+  SNS,
+  SPONSORS,
 }

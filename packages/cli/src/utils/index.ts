@@ -1,5 +1,5 @@
 export * from "./assertion"
 export * from "./cli"
-export * from "./prettier"
-export * from "./object"
 export * from "./module"
+export * from "./object"
+export * from "./prettier"

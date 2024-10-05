@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Wrap, ColorSwatch, defaultTheme } from "@yamada-ui/react"
+import { ColorSwatch, defaultTheme, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof ColorSwatch>
 
 const meta: Meta<typeof ColorSwatch> = {
-  title: "Components / Data Display / ColorSwatch",
   component: ColorSwatch,
+  title: "Components / Data Display / ColorSwatch",
 }
 
 export default meta
@@ -20,15 +20,19 @@ export const basic: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, color]) => (
-          <ColorSwatch key={key} color={color} />
-        ))}
+        {Object.entries(defaultTheme.colors.whiteAlpha ?? {}).map(
+          ([key, color]) => (
+            <ColorSwatch key={key} color={color} />
+          ),
+        )}
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.blackAlpha).map(([key, color]) => (
-          <ColorSwatch key={key} color={color} />
-        ))}
+        {Object.entries(defaultTheme.colors.blackAlpha ?? {}).map(
+          ([key, color]) => (
+            <ColorSwatch key={key} color={color} />
+          ),
+        )}
       </Wrap>
     </>
   )

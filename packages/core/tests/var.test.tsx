@@ -1,5 +1,5 @@
-import { renderHook } from "@yamada-ui/test"
 import type { CSSUIObject, StyledTheme, ThemeConfig, UsageTheme } from "../src"
+import { renderHook } from "@yamada-ui/test"
 import {
   createVars,
   css,
@@ -18,19 +18,6 @@ const theme: UsageTheme = {
     "2xl": "90em",
   },
   colors: {
-    red: {
-      50: "#fdeae8",
-      100: "#fbd9d5",
-      200: "#f6b2ac",
-      300: "#f28c82",
-      400: "#ee6a5d",
-      500: "#ea4334",
-      600: "#de2817",
-      700: "#b42013",
-      800: "#8a190f",
-      900: "#66120b",
-      950: "#530f09",
-    },
     blue: {
       50: "#e2edfd",
       100: "#cfe0fc",
@@ -57,6 +44,19 @@ const theme: UsageTheme = {
       900: "#133e1f",
       950: "#0d2b15",
     },
+    red: {
+      50: "#fdeae8",
+      100: "#fbd9d5",
+      200: "#f6b2ac",
+      300: "#f28c82",
+      400: "#ee6a5d",
+      500: "#ea4334",
+      600: "#de2817",
+      700: "#b42013",
+      800: "#8a190f",
+      900: "#66120b",
+      950: "#530f09",
+    },
     yellow: {
       50: "#fef4d7",
       100: "#feefc3",
@@ -73,39 +73,39 @@ const theme: UsageTheme = {
   },
   semantics: {
     colors: {
+      danger: "red.500",
       primary: "blue.500",
       secondary: "red.500",
       tertiary: "green.500",
       warning: "yellow.500",
-      danger: "red.500",
     },
     colorSchemes: {
+      danger: "red",
       primary: "blue",
       secondary: "red",
       tertiary: "green",
       warning: "yellow",
-      danger: "red",
     },
   },
 }
 
 const config: ThemeConfig = {
-  initialThemeScheme: "base",
-  initialColorMode: "light",
-  var: { prefix: "ui" },
   breakpoint: { direction: "down" },
+  initialColorMode: "light",
+  initialThemeScheme: "base",
+  var: { prefix: "ui" },
 }
 
 const transformedTheme = transformTheme(theme, config) as StyledTheme
 
 describe("var", () => {
   describe("useCreateVars", () => {
-    test("returns styles with theme values", async () => {
+    test("returns styles with theme values", () => {
       const { result } = renderHook(
         () => useCreateVars({ color: "primary" }, ["color"]),
         {
           wrapper: ({ children }) => (
-            <ThemeProvider theme={theme} config={config}>
+            <ThemeProvider config={config} theme={theme}>
               {children}
             </ThemeProvider>
           ),
@@ -203,8 +203,8 @@ describe("var", () => {
 
     test("should omit not included keys", () => {
       const cssObj: CSSUIObject = {
-        color: "primary",
         borderColor: "primary",
+        color: "primary",
       }
       const [vars, variableProps] = createVars(cssObj, ["color"])(
         transformedTheme,
@@ -213,16 +213,16 @@ describe("var", () => {
 
       expect(vars).toStrictEqual([
         {
-          name: "color-0",
+          name: "color-1",
           token: "colors",
           value: { base: "primary" },
         },
       ])
       expect(variableProps).toStrictEqual({
-        color: "$color-0",
+        color: "$color-1",
       })
       expect(result).toStrictEqual({
-        "--ui-color-0": "var(--ui-colors-primary)",
+        "--ui-color-1": "var(--ui-colors-primary)",
       })
     })
 
@@ -273,19 +273,19 @@ describe("var", () => {
         color: "$color-0",
       })
       expect(result).toStrictEqual({
-        "--ui-color-0": "var(--ui-colors-primary)",
         "@media screen and (max-width: 768px)": {
           "--ui-color-0": "var(--ui-colors-secondary)",
         },
+        "--ui-color-0": "var(--ui-colors-primary)",
       })
     })
 
     test("should create variables and variable props with nested object", () => {
       const cssObj: CSSUIObject = {
-        color: "primary",
         _dark: {
           color: "secondary",
         },
+        color: "primary",
       }
       const [vars, variableProps] = createVars(cssObj, ["color"])(
         transformedTheme,
@@ -312,10 +312,10 @@ describe("var", () => {
 
     test("should create variables and variable props with nested object and dark mode", () => {
       const cssObj: CSSUIObject = {
-        color: ["primary", "secondary"],
         _focus: {
           color: ["warning", "danger"],
         },
+        color: ["primary", "secondary"],
       }
       const [vars, variableProps] = createVars(cssObj, ["color"])(
         transformedTheme,
@@ -336,25 +336,25 @@ describe("var", () => {
         color: "$color-0",
       })
       expect(result).toStrictEqual({
-        "--ui-color-0": "var(--ui-colors-primary)",
-        [pseudos._dark]: {
-          "--ui-color-0": "var(--ui-colors-secondary)",
-        },
         "&:focus, &[data-focus]": {
           "--ui-color-0": "var(--ui-colors-warning)",
           [pseudos._dark]: {
             "--ui-color-0": "var(--ui-colors-danger)",
           },
         },
+        "--ui-color-0": "var(--ui-colors-primary)",
+        [pseudos._dark]: {
+          "--ui-color-0": "var(--ui-colors-secondary)",
+        },
       })
     })
 
     test("should create variables and variable props with nested object and responsive object", () => {
       const cssObj: CSSUIObject = {
-        color: { base: "primary", md: "secondary" },
         _focus: {
           color: { base: "warning", md: "danger" },
         },
+        color: { base: "primary", md: "secondary" },
       }
 
       const [vars, variableProps] = createVars(cssObj, ["color"])(
@@ -377,16 +377,16 @@ describe("var", () => {
         color: "$color-0",
       })
       expect(result).toStrictEqual({
-        "--ui-color-0": "var(--ui-colors-primary)",
-        "@media screen and (max-width: 768px)": {
-          "--ui-color-0": "var(--ui-colors-secondary)",
-        },
         "&:focus, &[data-focus]": {
-          "--ui-color-0": "var(--ui-colors-warning)",
           "@media screen and (max-width: 768px)": {
             "--ui-color-0": "var(--ui-colors-danger)",
           },
+          "--ui-color-0": "var(--ui-colors-warning)",
         },
+        "@media screen and (max-width: 768px)": {
+          "--ui-color-0": "var(--ui-colors-secondary)",
+        },
+        "--ui-color-0": "var(--ui-colors-primary)",
       })
     })
   })

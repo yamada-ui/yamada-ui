@@ -1,7 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 import {
   AlphaSlider,
   Button,
@@ -10,12 +8,14 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof AlphaSlider>
 
 const meta: Meta<typeof AlphaSlider> = {
-  title: "Components / Forms / AlphaSlider",
   component: AlphaSlider,
+  title: "Components / Forms / AlphaSlider",
 }
 
 export default meta
@@ -31,9 +31,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <AlphaSlider color="#4387f4" size="sm" defaultValue={0.3} />
-      <AlphaSlider color="#895af6" size="md" defaultValue={0.6} />
-      <AlphaSlider color="#3cc360" size="lg" defaultValue={0.9} />
+      <AlphaSlider color="#4387f4" defaultValue={0.3} size="sm" />
+      <AlphaSlider color="#895af6" defaultValue={0.6} size="md" />
+      <AlphaSlider color="#3cc360" defaultValue={0.9} size="lg" />
     </>
   )
 }
@@ -46,9 +46,9 @@ export const withMinMax: Story = () => {
       <Text>Value: {value}</Text>
       <AlphaSlider
         color="#4387f4"
-        value={value}
-        min={0.3}
         max={0.8}
+        min={0.3}
+        value={value}
         onChange={onChange}
       />
     </>
@@ -63,8 +63,8 @@ export const withStep: Story = () => {
       <Text>Value: {value}</Text>
       <AlphaSlider
         color="#4387f4"
-        value={value}
         step={0.1}
+        value={value}
         onChange={onChange}
       />
     </>
@@ -79,12 +79,12 @@ export const withFocusThumbOnChange: Story = () => {
       <Text>Value: {value}</Text>
       <AlphaSlider
         color="#4387f4"
-        value={value}
-        step={0.1}
         focusThumbOnChange={false}
+        step={0.1}
+        value={value}
       />
 
-      <Center w="full" gap="md">
+      <Center gap="md" w="full">
         <Button
           isDisabled={value === 0}
           onClick={() =>
@@ -97,8 +97,8 @@ export const withFocusThumbOnChange: Story = () => {
         </Button>
 
         <Button
-          isDisabled={value === 1}
           colorScheme="blue"
+          isDisabled={value === 1}
           onClick={() =>
             setValue((prev) =>
               prev !== 1 ? Math.round((prev + 0.1) * 10) / 10 : prev,
@@ -122,9 +122,9 @@ export const isDisabled: Story = () => {
       <AlphaSlider color="#4387f4" isDisabled />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isDisabled
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <AlphaSlider color="#4387f4" />
       </FormControl>
@@ -138,9 +138,9 @@ export const isReadonly: Story = () => {
       <AlphaSlider color="#4387f4" isReadOnly />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isReadOnly
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <AlphaSlider color="#4387f4" />
       </FormControl>
@@ -208,9 +208,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -220,15 +220,15 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.alphaSlider?.message}
         isInvalid={!!errors.alphaSlider}
         label="Pick color"
-        errorMessage={errors.alphaSlider?.message}
       >
         <Controller
           name="alphaSlider"
           control={control}
-          rules={{ max: { value: 0.5, message: "The maximum value is 0.5." } }}
           render={({ field }) => <AlphaSlider color="#4387f4" {...field} />}
+          rules={{ max: { message: "The maximum value is 0.5.", value: 0.5 } }}
         />
       </FormControl>
 

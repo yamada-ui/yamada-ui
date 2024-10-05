@@ -46,7 +46,7 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
-    "gen:icons": "tsx ./scripts/generate-icons",
+    "gen:icons": "tsx ./scripts/generate-icons && eslint src/icons/index.ts src/icons/index.types.ts --fix --flag unstable_ts_config",
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {

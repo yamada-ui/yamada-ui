@@ -2,7 +2,7 @@ import { isMac } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
 
 type Modality = "keyboard" | "pointer" | "virtual"
-type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent
+type HandlerEvent = FocusEvent | KeyboardEvent | MouseEvent | PointerEvent
 type Handler = (modality: Modality, e: HandlerEvent | null) => void
 type FocusVisibleCallback = (isFocusVisible: boolean) => void
 
@@ -19,7 +19,7 @@ const trigger = (modality: Modality, ev: HandlerEvent | null) =>
 const onValid = (e: KeyboardEvent) => {
   return !(
     e.metaKey ||
-    (!isMac && e.altKey) ||
+    (!isMac() && e.altKey) ||
     e.ctrlKey ||
     e.key === "Control" ||
     e.key === "Shift" ||
@@ -37,7 +37,7 @@ const onKeyboard = (ev: KeyboardEvent) => {
   }
 }
 
-const onPointer = (ev: PointerEvent | MouseEvent) => {
+const onPointer = (ev: MouseEvent | PointerEvent) => {
   modality = "pointer"
 
   if (
@@ -47,7 +47,7 @@ const onPointer = (ev: PointerEvent | MouseEvent) => {
   ) {
     hasEventBeforeFocus = true
 
-    const target = ev.composedPath ? ev.composedPath()[0] : ev.target
+    const target = ev.composedPath()[0] ?? ev.target
 
     if ((target as HTMLElement).matches(":focus-visible")) return
 
@@ -97,6 +97,7 @@ const setGlobalFocusEvents = () => {
   HTMLElement.prototype.focus = function customFocus(...args) {
     hasEventBeforeFocus = true
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (this) focus.apply(this, args)
   }
 
@@ -153,7 +154,7 @@ export const useFocusVisible = (options?: TrackFocusVisibleOptions) => {
 
   return {
     focusVisible: focusVisible && focus,
-    onFocus: () => setFocus(true),
     onBlur: () => setFocus(false),
+    onFocus: () => setFocus(true),
   }
 }

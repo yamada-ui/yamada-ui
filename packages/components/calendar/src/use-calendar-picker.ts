@@ -1,4 +1,3 @@
-import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import type {
   HTMLProps,
   HTMLUIProps,
@@ -6,12 +5,23 @@ import type {
   RequiredPropGetter,
   ThemeProps,
 } from "@yamada-ui/core"
+import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
+import type {
+  CSSProperties,
+  FocusEvent,
+  FocusEventHandler,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEvent,
+} from "react"
+import type { CalendarBaseProps, CalendarProps } from "./calendar"
+import type { UseCalendarProps } from "./use-calendar"
+import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { FormControlOptions } from "@yamada-ui/form-control"
-import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import {
@@ -24,40 +34,12 @@ import {
   splitObject,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import type {
-  CSSProperties,
-  FocusEvent,
-  FocusEventHandler,
-  KeyboardEvent,
-  KeyboardEventHandler,
-  MouseEvent,
-} from "react"
 import { useCallback, useId, useRef } from "react"
-import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
-import type { UseCalendarProps } from "./use-calendar"
 
 interface CalendarThemeProps extends ThemeProps<"Calendar"> {}
 
 interface UseCalendarPickerOptions {
-  /**
-   * The pattern used to check the input element.
-   *
-   * @default '/[^0-9\-\/]/g'
-   */
-  pattern?: RegExp
-  /**
-   * Function that converts the input value to Date type.
-   */
-  parseDate?: (value: string) => Date | undefined
-  /**
-   * The format used for conversion.
-   * Check the docs to see the format of possible modifiers you can pass.
-   *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
-   * @default 'YYYY/MM/DD'
-   */
-  inputFormat?: string
   /**
    * If `true`, allows input.
    *
@@ -71,22 +53,6 @@ interface UseCalendarPickerOptions {
    */
   allowInputBeyond?: boolean
   /**
-   * Variant for the calendar component.
-   */
-  calendarVariant?: CalendarThemeProps["variant"]
-  /**
-   * Size for the calendar component.
-   */
-  calendarSize?: CalendarThemeProps["size"]
-  /**
-   * ColorScheme for the calendar component.
-   */
-  calendarColorScheme?: CalendarThemeProps["colorScheme"]
-  /**
-   * Props for calendar component.
-   */
-  calendarProps?: CalendarBaseProps
-  /**
    * If `true`, focus will be transferred to the input element when the popover opens and container or clear icon clicked.
    *
    * @private
@@ -94,23 +60,57 @@ interface UseCalendarPickerOptions {
    */
   autoFocus?: boolean
   /**
+   * ColorScheme for the calendar component.
+   */
+  calendarColorScheme?: CalendarThemeProps["colorScheme"]
+  /**
+   * Size for the calendar component.
+   */
+  calendarSize?: CalendarThemeProps["size"]
+  /**
+   * Variant for the calendar component.
+   */
+  calendarVariant?: CalendarThemeProps["variant"]
+  /**
+   * The format used for conversion.
+   * Check the docs to see the format of possible modifiers you can pass.
+   *
+   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @default 'YYYY/MM/DD'
+   */
+  inputFormat?: string
+  /**
+   * Function that converts the input value to Date type.
+   */
+  parseDate?: (value: string) => Date | undefined
+  /**
+   * The pattern used to check the input element.
+   *
+   * @default '/[^0-9\-\/]/g'
+   */
+  pattern?: RegExp
+  /**
+   * Props for calendar component.
+   */
+  calendarProps?: CalendarBaseProps
+  /**
    * The callback invoked when date picker clear icon clicked.
    *
    * @private
    */
   onClear?: () => void
   /**
-   * The callback invoked when you hit the `Enter` key.
-   *
-   * @private
-   */
-  onEnter?: (ev: KeyboardEvent<HTMLDivElement>) => void
-  /**
    * The callback invoked when you hit the `Backspace` key.
    *
    * @private
    */
   onDelete?: (ev: KeyboardEvent<HTMLDivElement>) => void
+  /**
+   * The callback invoked when you hit the `Enter` key.
+   *
+   * @private
+   */
+  onEnter?: (ev: KeyboardEvent<HTMLDivElement>) => void
 }
 
 type UseCalendarPickerBaseProps<
@@ -121,15 +121,15 @@ export type UseCalendarPickerProps<
   T extends UseCalendarProps<any> = UseCalendarProps<any>,
 > = Omit<
   HTMLUIProps<"input">,
-  | keyof UseCalendarPickerBaseProps
+  | "children"
+  | "defaultValue"
   | "disabled"
-  | "required"
+  | "onChange"
   | "readOnly"
+  | "required"
   | "size"
   | "type"
-  | "defaultValue"
-  | "onChange"
-  | "children"
+  | keyof UseCalendarPickerBaseProps
 > &
   UseCalendarPickerBaseProps<T>
 
@@ -140,75 +140,75 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   let {
     id,
-    enableMultiple,
-    enableRange,
-    value,
-    defaultValue,
-    onChange,
     type,
-    defaultType,
-    onChangeType,
-    month,
-    defaultMonth,
-    onChangeMonth,
-    firstDayOfWeek,
-    amountOfMonths,
-    paginateBy,
-    withWeekdays,
-    disableOutsideDays,
-    hiddenOutsideDays,
-    minDate,
-    maxDate,
-    locale,
-    yearFormat,
-    monthFormat,
-    weekdayFormat,
-    dateFormat,
-    weekendDays,
-    today,
-    excludeDate,
-    calendarVariant,
-    calendarSize,
-    calendarColorScheme,
-    holidays,
-    withHeader,
-    withControls,
-    withLabel,
-    maxSelectValues,
-    minSelectValues,
-    __selectType,
-    calendarProps,
     allowInput = true,
     allowInputBeyond = false,
-    parseDate,
-    pattern = /[^0-9\-\/]/g,
-    inputFormat = "YYYY/MM/DD",
+    amountOfMonths,
+    animation,
     autoFocus = true,
-    onClear: onClearProp,
-    isOpen: isOpenProp,
-    defaultIsOpen,
-    onOpen: onOpenProp,
-    onClose: onCloseProp,
+    boundary,
+    calendarColorScheme,
+    calendarSize,
+    calendarVariant,
+    closeDelay,
     closeOnBlur = true,
     closeOnEsc = true,
-    openDelay,
-    closeDelay,
-    isLazy,
-    lazyBehavior,
-    animation,
+    dateFormat,
+    defaultIsOpen,
+    defaultMonth,
+    defaultType,
+    defaultValue,
+    disableOutsideDays,
     duration = 0.2,
-    offset,
-    gutter,
-    preventOverflow,
-    flip,
-    matchWidth,
-    boundary,
+    enableMultiple,
+    enableRange,
     eventListeners,
-    strategy,
-    placement = "bottom-start",
+    excludeDate,
+    firstDayOfWeek,
+    flip,
+    gutter,
+    hiddenOutsideDays,
+    holidays,
+    inputFormat = "YYYY/MM/DD",
+    isLazy,
+    isOpen: isOpenProp,
+    lazyBehavior,
+    locale,
+    matchWidth,
+    maxDate,
+    maxSelectValues,
+    minDate,
+    minSelectValues,
     modifiers,
-    onEnter,
+    month,
+    monthFormat,
+    offset,
+    openDelay,
+    paginateBy,
+    parseDate,
+    pattern = /[^0-9\-\/]/g,
+    placement = "bottom-start",
+    preventOverflow,
+    strategy,
+    today,
+    value,
+    weekdayFormat,
+    weekendDays,
+    withControls,
+    withHeader,
+    withLabel,
+    withWeekdays,
+    yearFormat,
+    calendarProps,
+    onChange,
+    onChangeMonth,
+    onChangeType,
+    onClear: onClearProp,
+    onClose: onCloseProp,
     onDelete,
+    onEnter,
+    onOpen: onOpenProp,
+    __selectType,
     ...rest
   } = useFormControlProps(props)
 
@@ -226,13 +226,13 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const {
     isOpen,
-    onOpen: onInternalOpen,
     onClose,
+    onOpen: onInternalOpen,
   } = useDisclosure({
-    isOpen: isOpenProp,
     defaultIsOpen,
-    onOpen: onOpenProp,
+    isOpen: isOpenProp,
     onClose: onCloseProp,
+    onOpen: onOpenProp,
   })
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -240,8 +240,10 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
-      let date =
-        parseDate?.(value) ?? dayjs(value, inputFormat, locale).toDate()
+      let date = parseDate?.(value)
+
+      if (!date && dayjs(value).isValid())
+        date = dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return undefined
       if (excludeDate?.(date)) return undefined
@@ -274,9 +276,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         if (minDate && isBeforeDate(value, minDate)) value = minDate
       }
 
-      return dayjs(value)
-        .locale(locale ?? "en")
-        .format(inputFormat)
+      return dayjs(value).locale(locale).format(inputFormat)
     },
     [allowInputBeyond, excludeDate, inputFormat, locale, maxDate, minDate],
   )
@@ -323,14 +323,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       const actions: {
         [key: string]: KeyboardEventHandler<HTMLDivElement> | undefined
       } = {
-        Space: !isOpen
-          ? (ev) => {
-              ev.preventDefault()
-              ev.stopPropagation()
-
-              onOpen()
-            }
-          : undefined,
+        Backspace: onDelete,
         Enter: !isOpen
           ? (ev) => {
               ev.preventDefault()
@@ -347,7 +340,14 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
               onClose()
             }
           : undefined,
-        Backspace: onDelete,
+        Space: !isOpen
+          ? (ev) => {
+              ev.preventDefault()
+              ev.stopPropagation()
+
+              onOpen()
+            }
+          : undefined,
       }
 
       const action = actions[ev.key]
@@ -381,8 +381,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   useOutsideClick({
     ref: containerRef,
-    handler: onClose,
     enabled: isOpen && closeOnBlur,
+    handler: onClose,
   })
 
   const getContainerProps: PropGetter = useCallback(
@@ -391,41 +391,41 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       ...containerProps,
       ...props,
       ...formControlProps,
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
       onBlur: handlerAll(
         props.onBlur,
         rest.onBlur as FocusEventHandler<HTMLDivElement>,
         onBlur,
       ),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
     }),
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
-      openDelay,
+      animation,
+      boundary,
       closeDelay,
+      duration,
+      eventListeners,
+      flip,
+      gutter,
       isLazy,
       lazyBehavior,
-      animation,
-      duration,
-      offset,
-      gutter,
-      preventOverflow,
-      flip,
       matchWidth,
-      boundary,
-      eventListeners,
-      strategy,
-      placement,
       modifiers,
+      offset,
+      openDelay,
+      placement,
+      preventOverflow,
+      strategy,
       ...props,
-      isOpen,
-      onOpen,
-      onClose,
-      trigger: "never",
-      closeOnButton: false,
       closeOnBlur: false,
+      closeOnButton: false,
+      isOpen,
+      trigger: "never",
+      onClose,
+      onOpen,
     }),
     [
       animation,
@@ -459,15 +459,15 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       return {
         ref: mergeRefs(inputRef, ref),
-        tabIndex: !allowInput ? 0 : -1,
         role: "combobox",
-        "aria-haspopup": "dialog",
+        tabIndex: !allowInput ? 0 : -1,
         "aria-controls": id,
+        "aria-haspopup": "dialog",
         ...props,
         ...formControlProps,
         style,
-        "data-active": dataAttr(isOpen),
         "aria-expanded": isOpen,
+        "data-active": dataAttr(isOpen),
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(
           props.onKeyDown,
@@ -483,43 +483,43 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     (props?: CalendarProps): CalendarProps => ({
       ...props,
       type,
-      defaultType,
-      onChangeType,
-      month,
-      defaultMonth,
-      onChangeMonth,
-      firstDayOfWeek,
       amountOfMonths,
-      paginateBy,
-      withWeekdays,
-      disableOutsideDays,
-      hiddenOutsideDays,
-      yearFormat,
-      monthFormat,
-      weekdayFormat,
+      colorScheme: calendarColorScheme,
       dateFormat,
-      weekendDays,
-      today,
+      defaultMonth,
+      defaultType,
+      disableOutsideDays,
+      firstDayOfWeek,
+      hiddenOutsideDays,
       holidays,
-      withHeader,
-      withControls,
-      withLabel,
       maxSelectValues,
       minSelectValues,
-      variant: calendarVariant,
+      month,
+      monthFormat,
+      paginateBy,
       size: calendarSize,
-      colorScheme: calendarColorScheme,
+      today,
+      variant: calendarVariant,
+      weekdayFormat,
+      weekendDays,
+      withControls,
+      withHeader,
+      withLabel,
+      withWeekdays,
+      yearFormat,
+      onChangeMonth,
+      onChangeType,
       ...calendarProps,
-      value,
       defaultValue,
-      onChange,
-      minDate,
-      maxDate,
-      excludeDate,
-      locale,
-      __selectType,
       enableMultiple,
       enableRange,
+      excludeDate,
+      locale,
+      maxDate,
+      minDate,
+      value,
+      onChange,
+      __selectType,
     }),
     [
       hiddenOutsideDays,
@@ -564,7 +564,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
 
   const getIconProps: RequiredPropGetter<
-    HTMLProps & { clear: boolean },
+    { clear: boolean } & HTMLProps,
     HTMLProps
   > = useCallback(
     ({ clear, ...props }) => ({
@@ -578,21 +578,21 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   return {
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
     containerRef,
+    dateToString,
     inputRef,
     isOpen,
-    onOpen,
-    onClose,
-    dateToString,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
+    onOpen,
   }
 }
 

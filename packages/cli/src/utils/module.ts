@@ -1,28 +1,31 @@
-import { realpathSync } from "fs"
-import { Script } from "vm"
 import { build } from "esbuild"
+import { realpathSync } from "fs"
 import nodeEval from "node-eval"
+import { Script } from "vm"
+import { isObject } from "./assertion"
 
 export const getModule = async (file: string, cwd: string) => {
   const result = await build({
-    platform: "node",
+    absWorkingDir: cwd,
+    bundle: true,
+    entryPoints: [file],
     format: "cjs",
     mainFields: ["module", "main"],
-    absWorkingDir: cwd,
-    entryPoints: [file],
-    outfile: "out.js",
-    write: false,
-    bundle: true,
-    sourcemap: false,
     metafile: true,
+    outfile: "out.js",
+    platform: "node",
+    sourcemap: false,
+    write: false,
   })
-  const { text: code } = result.outputFiles[0]
-  const dependencies = result.metafile
+  const { text: code } = result.outputFiles[0] ?? {}
+  const dependencies = isObject(result.metafile)
     ? Object.keys(result.metafile.inputs)
     : []
 
   try {
     const realFileName = realpathSync.native(file)
+
+    if (!code) throw new Error("code is undefined")
 
     const script = new Script(code, { filename: realFileName })
     const mod = { exports: {} }
@@ -31,10 +34,10 @@ export const getModule = async (file: string, cwd: string) => {
 
     script.runInThisContext()(mod.exports, require, mod)
 
-    return { mod, code, dependencies }
+    return { code, dependencies, mod }
   } catch {
     const mod = nodeEval(code)
 
-    return { mod, code, dependencies }
+    return { code, dependencies, mod }
   }
 }

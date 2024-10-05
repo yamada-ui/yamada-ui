@@ -1,26 +1,26 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { Icon } from "@yamada-ui/icon"
-import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { ComponentProps, ReactNode } from "react"
 import type { StepContext } from "./step"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/icon"
+import { cx, runIfFunc } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
 export type StepStatusProps = {
-  [key in "complete" | "active" | "incomplete"]?:
-    | ReactNode
+  [key in "active" | "complete" | "incomplete"]?:
     | ((props: Omit<StepContext, "status">) => ReactNode)
+    | ReactNode
 }
 
 export const StepStatus = forwardRef<StepStatusProps, "div">(
   (
     {
       className,
+      active = <StepNumber />,
       complete = <StepIcon />,
       incomplete = <StepNumber />,
-      active = <StepNumber />,
       ...rest
     },
     ref,
@@ -30,7 +30,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
 
     const css: CSSUIObject = { ...styles.status }
 
-    let component: ReactNode | null = null
+    let component: null | ReactNode = null
 
     switch (status) {
       case "complete":
@@ -55,7 +55,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
         __css={css}
         {...rest}
       >
-        {component ? <>{component}</> : null}
+        {component ? component : null}
       </ui.div>
     )
   },
@@ -69,7 +69,7 @@ export interface StepNumberProps extends HTMLUIProps {}
 export const StepNumber = forwardRef<StepNumberProps, "div">(
   ({ className, children, ...rest }, ref) => {
     const { styles } = useStepperContext()
-    const { status, index } = useStepContext()
+    const { index, status } = useStepContext()
 
     const css: CSSUIObject = { ...styles.number }
 
@@ -120,19 +120,19 @@ StepIcon.__ui__ = "StepIcon"
 const CheckIcon = (props: ComponentProps<"svg">) => {
   return (
     <svg
-      stroke="currentColor"
       fill="currentColor"
+      height="1em"
+      stroke="currentColor"
       strokeWidth="0"
       viewBox="0 0 20 20"
-      aria-hidden="true"
-      height="1em"
       width="1em"
+      aria-hidden="true"
       {...props}
     >
       <path
-        fillRule="evenodd"
-        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
         clipRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        fillRule="evenodd"
       />
     </svg>
   )

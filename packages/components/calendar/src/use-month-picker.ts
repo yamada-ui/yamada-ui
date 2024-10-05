@@ -1,30 +1,30 @@
 import type { PropGetter } from "@yamada-ui/core"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { isActiveElement, useUpdateEffect, handlerAll } from "@yamada-ui/utils"
-import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
-import { useCallback, useState } from "react"
 import type { UseCalendarProps } from "./use-calendar"
-import { useCalendarPicker } from "./use-calendar-picker"
 import type { UseCalendarPickerProps } from "./use-calendar-picker"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { handlerAll, isActiveElement, useUpdateEffect } from "@yamada-ui/utils"
+import dayjs from "dayjs"
+import { useCallback, useState } from "react"
+import { useCalendarPicker } from "./use-calendar-picker"
 
 interface CalendarProps
   extends Pick<
     UseCalendarProps<Date | undefined>,
-    | "value"
-    | "defaultValue"
-    | "onChange"
-    | "month"
     | "defaultMonth"
-    | "onChangeMonth"
+    | "defaultValue"
     | "locale"
-    | "minDate"
     | "maxDate"
-    | "yearFormat"
+    | "minDate"
+    | "month"
     | "monthFormat"
-    | "withHeader"
+    | "onChange"
+    | "onChangeMonth"
+    | "value"
     | "withControls"
+    | "withHeader"
     | "withLabel"
+    | "yearFormat"
   > {}
 
 interface UseMonthPickerOptions {
@@ -33,15 +33,17 @@ interface UseMonthPickerOptions {
    */
   type?: "month" | "year"
   /**
+   * If `true`, the calendar component will be closed when value is selected.
+   *
+   * @default true
+   */
+  closeOnSelect?: boolean
+  /**
    * The initial type of the month picker.
    *
    * @default 'month'
    */
   defaultType?: "month" | "year"
-  /**
-   * The callback invoked when type state changes.
-   */
-  onChangeType?: (type: "month" | "year") => void
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
@@ -51,11 +53,9 @@ interface UseMonthPickerOptions {
    */
   inputFormat?: string
   /**
-   * If `true`, the calendar component will be closed when value is selected.
-   *
-   * @default true
+   * The callback invoked when type state changes.
    */
-  closeOnSelect?: boolean
+  onChangeType?: (type: "month" | "year") => void
 }
 
 export interface UseMonthPickerProps
@@ -63,51 +63,50 @@ export interface UseMonthPickerProps
     UseMonthPickerOptions {}
 
 export const useMonthPicker = ({
-  value: valueProp,
-  defaultValue,
-  onChange: onChangeProp,
   type: typeProp,
-  defaultType = "month",
-  onChangeType: onChangeTypeProp,
-  placeholder,
   closeOnSelect = true,
+  defaultType = "month",
+  defaultValue,
+  placeholder,
+  value: valueProp,
+  onChange: onChangeProp,
+  onChangeType: onChangeTypeProp,
   ...rest
 }: UseMonthPickerProps) => {
   const [value, setValue] = useControllableState<Date | undefined>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const [type, setType] = useControllableState({
-    value: typeProp,
     defaultValue: defaultType,
+    value: typeProp,
     onChange: onChangeTypeProp,
   })
 
   const {
-    inputRef,
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
-    onClose,
     dateToString,
+    inputRef,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
   } = useCalendarPicker({
     inputFormat: "YYYY/MM",
     ...rest,
-    __selectType: "month",
-    value,
-    defaultValue,
-    onChange: setValue,
     type,
     defaultType,
+    defaultValue,
+    value,
+    onChange: setValue,
     onChangeType: (type, year, month) => {
       if (type !== "date") {
         setType(type)
@@ -136,6 +135,7 @@ export const useMonthPicker = ({
 
       rest.onClose?.()
     },
+    __selectType: "month",
   })
 
   const [inputValue, setInputValue] = useState<string | undefined>(
@@ -186,13 +186,13 @@ export const useMonthPicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        id,
         ref,
         style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? "",
         onChange: handlerAll(props.onChange, onChange),
       }
     },
@@ -210,13 +210,13 @@ export const useMonthPicker = ({
   return {
     id,
     value,
-    onClose,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   }
 }
 

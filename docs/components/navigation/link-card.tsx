@@ -1,3 +1,5 @@
+import type { CardProps, StringLiteral } from "@yamada-ui/react"
+import type { ReactNode } from "react"
 import {
   Card,
   CardBody,
@@ -7,26 +9,24 @@ import {
   Ripple,
   useRipple,
 } from "@yamada-ui/react"
-import type { CardProps, StringLiteral } from "@yamada-ui/react"
-import Link from "next/link"
-import { memo } from "react"
-import type { ReactNode } from "react"
 import { Label } from "components/data-display"
 import { TextWithCode } from "components/typography"
 import { usePage } from "contexts"
+import Link from "next/link"
+import { memo } from "react"
 
 export interface LinkCardProps extends Omit<CardProps, "title"> {
+  description: ReactNode
   href: string
   title: ReactNode
-  label?: StringLiteral | null
-  description: ReactNode
+  label?: null | StringLiteral
   with_description?: boolean
 }
 
 export const LinkCard = memo(
   forwardRef<LinkCardProps, "div">(
     (
-      { title, label, description, href, with_description = true, ...rest },
+      { description, href, label, title, with_description = true, ...rest },
       ref,
     ) => {
       const { documentMap } = usePage()
@@ -44,31 +44,31 @@ export const LinkCard = memo(
 
       return (
         <Card
-          as={Link}
           ref={ref}
-          href={href}
-          variant="outline"
-          h={with_description ? { base: "40", md: "auto" } : "auto"}
-          size="normal"
-          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          as={Link}
+          _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "outline" }}
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
-          _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
-          transitionProperty="colors"
-          transitionDuration="normal"
-          position="relative"
+          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          h={with_description ? { base: "40", md: "auto" } : "auto"}
+          href={href}
           overflow="hidden"
+          position="relative"
+          size="normal"
+          transitionDuration="normal"
+          transitionProperty="colors"
+          variant="outline"
           {...rest}
           onPointerDown={onPointerDown}
         >
           <CardHeader
             as="div"
-            pt="md"
-            pb={!with_description ? "md" : undefined}
             gap="sm"
+            pb={!with_description ? "md" : undefined}
+            pt="md"
           >
-            <Heading size="md" lineClamp={1}>
+            <Heading lineClamp={1} size="md">
               {title}
             </Heading>
 

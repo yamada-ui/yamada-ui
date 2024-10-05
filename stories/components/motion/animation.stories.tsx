@@ -5,26 +5,26 @@ import {
   Box,
   Button,
   Center,
-  HStack,
   Heading,
+  HStack,
   LayoutGroup,
   Motion,
-  VStack,
   useBoolean,
+  VStack,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: "Components / Motion / Animation",
   component: Motion,
+  title: "Components / Motion / Animation",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
         bg="primary"
@@ -40,14 +40,14 @@ export const basic: Story = () => {
 
 export const withTransition: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        transition={{ ease: "easeOut", duration: 2 }}
         bg="primary"
         color="white"
         p="md"
         rounded="md"
+        transition={{ duration: 2, ease: "easeOut" }}
       >
         Motion
       </Motion>
@@ -57,19 +57,19 @@ export const withTransition: Story = () => {
 
 export const withTransitionType: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial={{ scale: 0 }}
         animate={{ rotate: 360, scale: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
         bg="primary"
         color="white"
+        initial={{ scale: 0 }}
         p="md"
         rounded="md"
+        transition={{
+          type: "spring",
+          damping: 20,
+          stiffness: 260,
+        }}
       >
         Motion
       </Motion>
@@ -79,12 +79,12 @@ export const withTransitionType: Story = () => {
 
 export const withInitial: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial={{ x: -100 }}
         animate={{ x: 100 }}
         bg="primary"
         color="white"
+        initial={{ x: -100 }}
         p="md"
         rounded="md"
       >
@@ -104,11 +104,11 @@ export const withExit: Story = () => {
       <AnimatePresence>
         {isVisible ? (
           <Motion
-            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             bg="primary"
             color="white"
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
             p="md"
             rounded="md"
           >
@@ -122,7 +122,7 @@ export const withExit: Story = () => {
 
 export const useKeyframes: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: [0, 100, 0] }}
         bg="primary"
@@ -138,14 +138,14 @@ export const useKeyframes: Story = () => {
 
 export const withTimes: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: [0, 100, 0] }}
-        transition={{ duration: 3, times: [0, 0.2, 1] }}
         bg="primary"
         color="white"
         p="md"
         rounded="md"
+        transition={{ duration: 3, times: [0, 0.2, 1] }}
       >
         Motion
       </Motion>
@@ -155,23 +155,23 @@ export const withTimes: Story = () => {
 
 export const withRepeat: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{
-          scale: [1, 2, 2, 1, 1],
-          rotate: [0, 0, 180, 180, 0],
           borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+          rotate: [0, 0, 180, 180, 0],
+          scale: [1, 2, 2, 1, 1],
         }}
+        bg="primary"
+        h="xs"
         transition={{
           duration: 2,
           ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.8, 1],
           repeat: Infinity,
           repeatDelay: 1,
+          times: [0, 0.2, 0.5, 0.8, 1],
         }}
         w="xs"
-        h="xs"
-        bg="primary"
       />
     </Center>
   )
@@ -181,25 +181,25 @@ export const withLayout: Story = () => {
   const [flg, { toggle }] = useBoolean()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Box
         as="button"
         bg="primary"
+        display="flex"
+        h="8"
+        justifyContent={!flg ? "flex-start" : "flex-end"}
         p="1"
         rounded="full"
         w="14"
-        h="8"
-        display="flex"
-        justifyContent={!flg ? "flex-start" : "flex-end"}
         onClick={toggle}
       >
         <Motion
-          layout
-          transition={{ type: "spring", stiffness: 700, damping: 30 }}
           bg="white"
-          w="6"
           h="6"
+          layout
           rounded="full"
+          transition={{ type: "spring", damping: 30, stiffness: 700 }}
+          w="6"
         />
       </Box>
     </Center>
@@ -213,21 +213,21 @@ export const useLayoutGroup: Story = () => {
     return (
       <Motion
         as="button"
-        layout
-        w={isOpen ? "32" : "16"}
-        h="16"
-        p="md"
         bg="primary"
-        rounded="md"
-        onClick={toggle}
         display="flex"
+        h="16"
+        layout
+        p="md"
         placeContent="center"
+        rounded="md"
+        w={isOpen ? "32" : "16"}
+        onClick={toggle}
       />
     )
   }
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)" gap="md">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <VStack>
         <Heading size="md">Not using LayoutGroup</Heading>
 

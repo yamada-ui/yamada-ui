@@ -15,7 +15,7 @@
     "gen:styled-system": "tsx scripts/content/styled-system",
     "gen:props": "tsx scripts/component/props",
     "gen:search": "tsx scripts/content/search",
-    "gen:icon-tags": "tsx scripts/generate-icon-tags",
+    "gen:icon-tags": "tsx scripts/generate-icon-tags && eslint pages/icons/tags.ts --fix --flag unstable_ts_config",
     "gen:contributors": "tsx scripts/content/contributors",
     "gen:translate": "tsx scripts/content/translate",
     "gen:label": "tsx scripts/content/label",
@@ -65,6 +65,7 @@
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.13",
     "@octokit/request-error": "^6.1.5",
     "@octokit/rest": "^21.0.2",
     "@octokit/webhooks": "^13.3.0",
@@ -77,6 +78,7 @@
     "chokidar": "^4.0.1",
     "dotenv": "^16.4.5",
     "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
     "execa": "9.3.1",
     "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",

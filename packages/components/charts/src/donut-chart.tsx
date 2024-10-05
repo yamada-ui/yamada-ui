@@ -1,3 +1,5 @@
+import type { PieChartProps } from "./pie-chart"
+import type { UseChartLabelOptions } from "./use-chart-label"
 import {
   forwardRef,
   omitThemeProps,
@@ -17,10 +19,8 @@ import {
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { PieChartProps } from "./pie-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import { useChartLabel } from "./use-chart-label"
-import type { UseChartLabelOptions } from "./use-chart-label"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
@@ -51,75 +51,75 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   const {
     className,
     data,
-    pieProps,
-    chartProps,
-    cellProps,
-    containerProps,
-    withTooltip = true,
-    withLegend = false,
-    tooltipProps,
-    tooltipAnimationDuration,
-    tooltipDataSource = "all",
-    valueFormatter,
-    labelFormatter,
-    unit,
-    paddingAngle,
-    startAngle,
     endAngle,
     withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
     innerRadius = withLabels ? "60%" : "80%",
+    isPercent,
+    labelFormatter,
+    labelOffset,
     outerRadius,
+    paddingAngle,
+    startAngle,
     strokeWidth,
-    legendProps,
+    tooltipAnimationDuration,
+    tooltipDataSource = "all",
+    unit,
+    valueFormatter,
+    withLabelLines,
+    withLegend = false,
+    withTooltip = true,
+    cellProps,
+    chartProps,
+    containerProps,
     labelProps,
+    legendProps,
+    pieProps,
+    tooltipProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const {
     pieVars,
-    getPieProps,
-    getPieChartProps,
-    getCellProps,
     setHighlightedArea,
+    getCellProps,
+    getPieChartProps,
+    getPieProps,
   } = usePieChart({
     data,
-    pieProps,
-    chartProps,
-    cellProps,
+    endAngle,
     innerRadius,
+    isPercent,
+    labelFormatter,
+    labelOffset,
     outerRadius,
     paddingAngle,
     startAngle,
-    endAngle,
     strokeWidth,
-    withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
-    labelFormatter,
     styles,
+    withLabelLines,
+    withLabels,
+    cellProps,
+    chartProps,
+    pieProps,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
-  const { getLabelProps } = useChartLabel({ labelProps, styles })
+  const { getLabelProps } = useChartLabel({ styles, labelProps })
 
   const cells = useMemo(
     () =>
       data.map(({ name }, index) => (
         <Cell
           key={`donut-cell-${name}`}
-          {...getCellProps({ index, className: "ui-donut-chart__cell" })}
+          {...getCellProps({ className: "ui-donut-chart__cell", index })}
         />
       )),
     [data, getCellProps],
@@ -171,8 +171,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
                     className="ui-donut-chart__tooltip"
                     label={label}
                     payload={tooltipDataSource === "segment" ? payload : data}
-                    valueFormatter={valueFormatter}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}

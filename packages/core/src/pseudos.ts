@@ -28,31 +28,22 @@ const toPeer = <Y extends string>(selectors: Y) =>
 const parse = (selectors: string) =>
   selectors.split(",").map((selector) => selector.trim().slice(1))
 
-const merge = (
-  selectors: string[],
-  prefix: string = "&",
-  suffix: string = "",
-) => selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
+const merge = (selectors: string[], prefix = "&", suffix = "") =>
+  selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
 
 export const attributes = {
   /**
-   * The CSS `:selected` attribute selector.
-   *
-   * - `[data-selected]`
-   * - `[aria-selected=true]`
+   * The CSS `[data-accept]` attribute selector.
    */
-  _selected: "&[data-selected], &[aria-selected=true]",
+  _accept: "&[data-accept]",
   /**
-   * The CSS `[hidden]` attribute selector.
-   *
-   * - `[hidden]`
-   * - `[data-hidden]`
+   * The CSS `[data-between]` attribute selector.
    */
-  _hidden: "&[hidden], &[data-hidden]",
+  _between: "&[data-between]",
   /**
-   * The CSS `[hidden]` attribute selector.
+   * The CSS `[data-end]` attribute selector.
    */
-  _nativeHidden: "&[hidden]",
+  _end: "&[data-end]",
   /**
    * The CSS `[aria-selected=true]` attribute selector.
    *
@@ -61,52 +52,27 @@ export const attributes = {
    */
   _expanded: "&[data-expanded], &[aria-expanded=true]",
   /**
-   * The CSS `[aria-busy=true]` attribute selector.
-   *
-   * - `[data-loading]`
-   * - `[aria-busy=true]`
-   */
-  _loading: "&[data-loading], &[aria-busy=true]",
-  /**
    * The CSS `[data-filled]` attribute selector.
    */
   _filled: "&[data-filled]",
   /**
-   * The CSS `[data-start]` attribute selector.
+   * The CSS `[data-grabbed]` attribute selector.
+   *
+   * - `[data-grabbed]`
+   * - `[aria-grabbed=true]`
    */
-  _start: "&[data-start]",
+  _grabbed: "&[data-grabbed], &[aria-grabbed=true]",
   /**
-   * The CSS `[data-end]` attribute selector.
+   * The CSS `[hidden]` attribute selector.
+   *
+   * - `[hidden]`
+   * - `[data-hidden]`
    */
-  _end: "&[data-end]",
-  /**
-   * The CSS `:where([data-outside])` attribute selector.
-   */
-  _outside: "&:where([data-outside])",
-  /**
-   * The CSS `[data-between]` attribute selector.
-   */
-  _between: "&[data-between]",
-  /**
-   * The CSS `:where([data-weekend])` attribute selector.
-   */
-  _weekend: "&:where([data-weekend])",
+  _hidden: "&[hidden], &[data-hidden]",
   /**
    * The CSS `[data-holiday]` attribute selector.
    */
   _holiday: "&[data-holiday]",
-  /**
-   * The CSS `[data-today]` attribute selector.
-   */
-  _today: "&[data-today]",
-  /**
-   * The CSS `[data-accept]` attribute selector.
-   */
-  _accept: "&[data-accept]",
-  /**
-   * The CSS `[data-reject]` attribute selector.
-   */
-  _reject: "&[data-reject]",
   /**
    * The CSS `[data-idle]` attribute selector.
    */
@@ -116,12 +82,20 @@ export const attributes = {
    */
   _loaded: "&[data-loaded]",
   /**
-   * The CSS `[data-grabbed]` attribute selector.
+   * The CSS `[aria-busy=true]` attribute selector.
    *
-   * - `[data-grabbed]`
-   * - `[aria-grabbed=true]`
+   * - `[data-loading]`
+   * - `[aria-busy=true]`
    */
-  _grabbed: "&[data-grabbed], &[aria-grabbed=true]",
+  _loading: "&[data-loading], &[aria-busy=true]",
+  /**
+   * The CSS `[hidden]` attribute selector.
+   */
+  _nativeHidden: "&[hidden]",
+  /**
+   * The CSS `:where([data-outside])` attribute selector.
+   */
+  _outside: "&:where([data-outside])",
   /**
    * The CSS `[data-pressed]` attribute selector.
    *
@@ -129,7 +103,30 @@ export const attributes = {
    * - `[aria-pressed=true]`
    */
   _pressed: "&[data-pressed], &[aria-pressed=true]",
+  /**
+   * The CSS `[data-reject]` attribute selector.
+   */
+  _reject: "&[data-reject]",
   _ripple: "& .ui-ripple",
+  /**
+   * The CSS `:selected` attribute selector.
+   *
+   * - `[data-selected]`
+   * - `[aria-selected=true]`
+   */
+  _selected: "&[data-selected], &[aria-selected=true]",
+  /**
+   * The CSS `[data-start]` attribute selector.
+   */
+  _start: "&[data-start]",
+  /**
+   * The CSS `[data-today]` attribute selector.
+   */
+  _today: "&[data-today]",
+  /**
+   * The CSS `:where([data-weekend])` attribute selector.
+   */
+  _weekend: "&:where([data-weekend])",
 } as const
 
 export type Attributes = typeof attributes
@@ -166,6 +163,10 @@ export const pseudoElements = {
    */
   _cueRegion: "&::cue-region",
   /**
+   * The CSS `::file-selector-button` pseudo-element.
+   */
+  _fileSelector: "&::file-selector-button",
+  /**
    * The CSS `::first-letter` pseudo-element.
    */
   _firstLetter: "&::first-letter",
@@ -173,10 +174,6 @@ export const pseudoElements = {
    * The CSS `::first-line` pseudo-element.
    */
   _firstLine: "&::first-line",
-  /**
-   * The CSS `::file-selector-button` pseudo-element.
-   */
-  _fileSelector: "&::file-selector-button",
   /**
    * The CSS `::marker` pseudo-element.
    */
@@ -189,16 +186,24 @@ export const pseudoElements = {
    */
   _placeholder: "&::placeholder, &[data-placeholder]",
   /**
-   * The CSS `::selection` pseudo-element.
-   */
-  _selection: "&::selection",
-  /**
    * The CSS `::-webkit-scrollbar` pseudo-element.
    *
    * - `::-webkit-scrollbar`
    * - `[data-scrollbar]`
    */
   _scrollbar: "&::-webkit-scrollbar, &[data-scrollbar]",
+  /**
+   * The CSS `::-webkit-scrollbar-button` pseudo-element.
+   */
+  _scrollbarButton: "&::-webkit-scrollbar-button",
+  /**
+   * The CSS `::-webkit-scrollbar-corner` pseudo-element.
+   */
+  _scrollbarCorner: "&::-webkit-scrollbar-corner",
+  /**
+   * The CSS `::-webkit-scrollbar-thumb` pseudo-element.
+   */
+  _scrollbarThumb: "&::-webkit-scrollbar-thumb",
   /**
    * The CSS `::-webkit-scrollbar-track` pseudo-element.
    */
@@ -208,17 +213,9 @@ export const pseudoElements = {
    */
   _scrollbarTrackPiece: "&::-webkit-scrollbar-track-piece",
   /**
-   * The CSS `::-webkit-scrollbar-thumb` pseudo-element.
+   * The CSS `::selection` pseudo-element.
    */
-  _scrollbarThumb: "&::-webkit-scrollbar-thumb",
-  /**
-   * The CSS `::-webkit-scrollbar-button` pseudo-element.
-   */
-  _scrollbarButton: "&::-webkit-scrollbar-button",
-  /**
-   * The CSS `::-webkit-scrollbar-corner` pseudo-element.
-   */
-  _scrollbarCorner: "&::-webkit-scrollbar-corner",
+  _selection: "&::selection",
 } as const
 
 export type PseudoElements = typeof pseudoElements
@@ -235,25 +232,42 @@ export const pseudoElementSelectors = Object.values(pseudoElements)
 
 export const pseudoClasses = {
   /**
-   * The CSS `:fullscreen` pseudo-class.
+   * The CSS `:active` pseudo-class.
+   *
+   * - `:active`
+   * - `[data-active]`
    */
-  _fullScreen: "&:fullscreen",
+  _active: "&:active, &[data-active]",
   /**
-   * The CSS `:modal` pseudo-class.
+   * The CSS `:any-link` pseudo-class.
+   *
+   * - `:any-link`
+   * - `[data-any-link]`
    */
-  _modal: "&:modal",
-  /**
-   * The CSS `:picture-in-picture` pseudo-class.
-   */
-  _picture: "&:picture-in-picture",
+  _anyLink: "&:any-link, &[data-any-link]",
   /**
    * The CSS `:autofill` pseudo-class.
    */
   _autofill: "&:autofill, &:-webkit-autofill",
   /**
-   * The CSS `:enabled` pseudo-class.
+   * The CSS `:blank` pseudo-class.
+   *
+   * - `:blank`
+   * - `[data-blank]`
    */
-  _enabled: "&:enabled, &[data-enabled]",
+  _blank: "&:blank, &[data-blank]",
+  /**
+   * The CSS `:checked` pseudo-class.
+   *
+   * - `:checked`
+   * - `[data-checked]`
+   * - `[aria-checked=true]`
+   */
+  _checked: "&:checked, &[data-checked], &[aria-checked=true]",
+  /**
+   * The CSS `:default` pseudo-class.
+   */
+  _default: "&:default",
   /**
    * The CSS `:disabled` pseudo-class.
    *
@@ -264,54 +278,62 @@ export const pseudoClasses = {
    */
   _disabled: "&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]",
   /**
-   * The CSS `:disabled` pseudo-class.
+   * The CSS `:empty` pseudo-class.
+   */
+  _empty: "&:empty",
+  /**
+   * The CSS `:enabled` pseudo-class.
+   */
+  _enabled: "&:enabled, &[data-enabled]",
+  /**
+   * The CSS `:nth-of-type(even)` pseudo-class.
+   */
+  _even: "&:nth-of-type(even)",
+  /**
+   * The CSS `:first-of-type` pseudo-class.
+   */
+  _first: "&:first-of-type",
+  /**
+   * The CSS `:focus` pseudo-class.
    *
-   * - `:disabled`
-   * - `[disabled]`
+   * - `:focus`
+   * - `[data-focus]`
    */
-  _nativeDisabled: "&:disabled, &[disabled]",
+  _focus: "&:focus, &[data-focus]",
   /**
-   * The CSS `:read-only` pseudo-class.
+   * The CSS `:focus-visible` pseudo-class.
    *
-   * - `[readonly]`
-   * - `[aria-readonly=true]`
-   * - `[data-readonly]`
+   * - `:focus-visible`
+   * - `[data-focus-visible]`
    */
-  _readOnly: "&[readonly], &[data-readonly], &[aria-readonly=true]",
+  _focusVisible: "&:focus-visible, &[data-focus-visible]",
   /**
-   * The CSS `:read-only` pseudo-class.
+   * The CSS `:focus-within` pseudo-class.
    *
-   * - `[readonly]`
-   * - `[aria-readonly=true]`
+   * - `:focus-within`
+   * - `[data-focus-within]`
    */
-  _nativeReadOnly: "&[readonly], &[aria-readonly=true]",
+  _focusWithin: "&:focus-within, &[data-focus-within]",
   /**
-   * The CSS `:read-write` pseudo-class.
+   * The CSS `:fullscreen` pseudo-class.
+   */
+  _fullScreen: "&:fullscreen",
+  /**
+   * The CSS `:horizontal` pseudo-class.
    *
-   * - `:read-write`
-   * - `[data-read-write]`
+   * - `:horizontal`
+   * - `[aria-orientation=horizontal]`
+   * - `[data-orientation=horizontal]`
    */
-  _readWrite: "&:read-write, &[data-read-write]",
+  _horizontal:
+    "&:horizontal, &[data-orientation=horizontal], &[aria-orientation=horizontal]",
   /**
-   * The CSS `:placeholder-shown` pseudo-class.
-   */
-  _placeholderShown: "&:placeholder-shown",
-  /**
-   * The CSS `:default` pseudo-class.
-   */
-  _default: "&:default",
-  /**
-   * The CSS `:checked` pseudo-class.
+   * The CSS `:hover` pseudo-class.
    *
-   * - `:checked`
-   * - `[data-checked]`
-   * - `[aria-checked=true]`
+   * - `:hover`
+   * - `[data-hover]`
    */
-  _checked: "&:checked, &[data-checked], &[aria-checked=true]",
-  /**
-   * The CSS `:checked` pseudo-class.
-   */
-  _nativeChecked: "&:checked",
+  _hover: "&:hover, &[data-hover]",
   /**
    * The CSS `:indeterminate` pseudo-class.
    *
@@ -322,23 +344,12 @@ export const pseudoClasses = {
   _indeterminate:
     "&:indeterminate, &[data-indeterminate], &[aria-checked=mixed]",
   /**
-   * The CSS `:blank` pseudo-class.
+   * The CSS `:in-range` pseudo-class.
    *
-   * - `:blank`
-   * - `[data-blank]`
+   * - `:in-range`
+   * - `[data-in-range]`
    */
-  _blank: "&:blank, &[data-blank]",
-  /**
-   * The CSS `:valid` pseudo-class.
-   *
-   * - `:valid`
-   * - `[data-valid]`
-   */
-  _valid: "&:valid, &[data-valid]",
-  /**
-   * The CSS `:valid` pseudo-class.
-   */
-  _nativeValid: "&:valid",
+  _inRange: "&:in-range, &[data-in-range]",
   /**
    * The CSS `:invalid` attribute selector.
    *
@@ -347,47 +358,9 @@ export const pseudoClasses = {
    */
   _invalid: "&[data-invalid], &[aria-invalid=true]",
   /**
-   * The CSS `:in-range` pseudo-class.
-   *
-   * - `:in-range`
-   * - `[data-in-range]`
+   * The CSS `:last-of-type` pseudo-class.
    */
-  _inRange: "&:in-range, &[data-in-range]",
-  /**
-   * The CSS `:out-of-range` pseudo-class.
-   *
-   * - `:out-of-range`
-   * - `[data-out-of-range]`
-   */
-  _outRange: "&:out-of-range, &[data-out-of-range]",
-  /**
-   * The CSS `:required` pseudo-class.
-   *
-   * - `:required`
-   * - `[required]`
-   */
-  _required: "&:required, &[required]",
-  /**
-   * The CSS `:optional` pseudo-class.
-   *
-   * - `:optional`
-   * - `[data-optional]`
-   */
-  _optional: "&:optional, &[data-optional]",
-  /**
-   * The CSS `:user-invalid` pseudo-class.
-   *
-   * - `:user-invalid`
-   * - `[data-user-invalid]`
-   */
-  _userInvalid: "&:user-invalid, &[data-user-invalid]",
-  /**
-   * The CSS `:any-link` pseudo-class.
-   *
-   * - `:any-link`
-   * - `[data-any-link]`
-   */
-  _anyLink: "&:any-link, &[data-any-link]",
+  _last: "&:last-of-type",
   /**
    * The CSS `:link` pseudo-class.
    *
@@ -396,31 +369,89 @@ export const pseudoClasses = {
    */
   _link: "&:link, &[data-link]",
   /**
-   * The CSS `:visited` pseudo-class.
+   * The CSS `:modal` pseudo-class.
    */
-  _visited: "&:visited",
+  _modal: "&:modal",
   /**
-   * The CSS `:target` pseudo-class.
+   * The CSS `:active` pseudo-class.
+   */
+  _nativeActive: "&:active",
+  /**
+   * The CSS `:checked` pseudo-class.
+   */
+  _nativeChecked: "&:checked",
+  /**
+   * The CSS `:disabled` pseudo-class.
    *
-   * - `:target`
-   * - `[data-target]`
+   * - `:disabled`
+   * - `[disabled]`
    */
-  _target: "&:target, &[data-target]",
+  _nativeDisabled: "&:disabled, &[disabled]",
   /**
-   * The CSS `:not(:target)` pseudo-class.
+   * The CSS `:focus` pseudo-class.
    */
-  _notTarget: "&:not(:target)",
+  _nativeFocus: "&:focus",
+  /**
+   * The CSS `:focus-visible` pseudo-class.
+   */
+  _nativeFocusVisible: "&:focus-visible",
+  /**
+   * The CSS `:focus-within` pseudo-class.
+   */
+  _nativeFocusWithin: "&:focus-within",
+  /**
+   * The CSS `:hover` pseudo-class.
+   */
+  _nativeHover: "&:hover",
+  /**
+   * The CSS `:read-only` pseudo-class.
+   *
+   * - `[readonly]`
+   * - `[aria-readonly=true]`
+   */
+  _nativeReadOnly: "&[readonly], &[aria-readonly=true]",
   /**
    * The CSS `:target` pseudo-class.
    */
   _nativeTarget: "&:target",
   /**
-   * The CSS `:playing` pseudo-class.
-   *
-   * - `:playing`
-   * - `[data-playing]`
+   * The CSS `:valid` pseudo-class.
    */
-  _playing: "&:playing, &[data-playing]",
+  _nativeValid: "&:valid",
+  /**
+   * The CSS `:not(:first-of-type)` pseudo-class.
+   */
+  _notFirst: "&:not(:first-of-type)",
+  /**
+   * The CSS `:not(:last-of-type)` pseudo-class.
+   */
+  _notLast: "&:not(:last-of-type)",
+  /**
+   * The CSS `:not(:target)` pseudo-class.
+   */
+  _notTarget: "&:not(:target)",
+  /**
+   * The CSS `:nth-of-type(odd)` pseudo-class.
+   */
+  _odd: "&:nth-of-type(odd)",
+  /**
+   * The CSS `:only-of-type` pseudo-class.
+   */
+  _only: "&:only-of-type",
+  /**
+   * The CSS `:optional` pseudo-class.
+   *
+   * - `:optional`
+   * - `[data-optional]`
+   */
+  _optional: "&:optional, &[data-optional]",
+  /**
+   * The CSS `:out-of-range` pseudo-class.
+   *
+   * - `:out-of-range`
+   * - `[data-out-of-range]`
+   */
+  _outRange: "&:out-of-range, &[data-out-of-range]",
   /**
    * The CSS `:paused` pseudo-class.
    *
@@ -429,92 +460,63 @@ export const pseudoClasses = {
    */
   _paused: "&:paused, &[data-paused]",
   /**
-   * The CSS `:empty` pseudo-class.
+   * The CSS `:picture-in-picture` pseudo-class.
    */
-  _empty: "&:empty",
+  _picture: "&:picture-in-picture",
   /**
-   * The CSS `:nth-of-type(even)` pseudo-class.
+   * The CSS `:placeholder-shown` pseudo-class.
    */
-  _even: "&:nth-of-type(even)",
+  _placeholderShown: "&:placeholder-shown",
   /**
-   * The CSS `:nth-of-type(odd)` pseudo-class.
-   */
-  _odd: "&:nth-of-type(odd)",
-  /**
-   * The CSS `:first-of-type` pseudo-class.
-   */
-  _first: "&:first-of-type",
-  /**
-   * The CSS `:not(:first-of-type)` pseudo-class.
-   */
-  _notFirst: "&:not(:first-of-type)",
-  /**
-   * The CSS `:last-of-type` pseudo-class.
-   */
-  _last: "&:last-of-type",
-  /**
-   * The CSS `:not(:last-of-type)` pseudo-class.
-   */
-  _notLast: "&:not(:last-of-type)",
-  /**
-   * The CSS `:only-of-type` pseudo-class.
-   */
-  _only: "&:only-of-type",
-  /**
-   * The CSS `:hover` pseudo-class.
+   * The CSS `:playing` pseudo-class.
    *
-   * - `:hover`
-   * - `[data-hover]`
+   * - `:playing`
+   * - `[data-playing]`
    */
-  _hover: "&:hover, &[data-hover]",
+  _playing: "&:playing, &[data-playing]",
   /**
-   * The CSS `:hover` pseudo-class.
-   */
-  _nativeHover: "&:hover",
-  /**
-   * The CSS `:active` pseudo-class.
+   * The CSS `:read-only` pseudo-class.
    *
-   * - `:active`
-   * - `[data-active]`
+   * - `[readonly]`
+   * - `[aria-readonly=true]`
+   * - `[data-readonly]`
    */
-  _active: "&:active, &[data-active]",
+  _readOnly: "&[readonly], &[data-readonly], &[aria-readonly=true]",
   /**
-   * The CSS `:active` pseudo-class.
-   */
-  _nativeActive: "&:active",
-  /**
-   * The CSS `:focus` pseudo-class.
+   * The CSS `:read-write` pseudo-class.
    *
-   * - `:focus`
-   * - `[data-focus]`
+   * - `:read-write`
+   * - `[data-read-write]`
    */
-  _focus: "&:focus, &[data-focus]",
+  _readWrite: "&:read-write, &[data-read-write]",
   /**
-   * The CSS `:focus` pseudo-class.
-   */
-  _nativeFocus: "&:focus",
-  /**
-   * The CSS `:focus-visible` pseudo-class.
+   * The CSS `:required` pseudo-class.
    *
-   * - `:focus-visible`
-   * - `[data-focus-visible]`
+   * - `:required`
+   * - `[required]`
    */
-  _focusVisible: "&:focus-visible, &[data-focus-visible]",
+  _required: "&:required, &[required]",
   /**
-   * The CSS `:focus-visible` pseudo-class.
-   */
-  _nativeFocusVisible: "&:focus-visible",
-  /**
-   * The CSS `:focus-within` pseudo-class.
+   * The CSS `:target` pseudo-class.
    *
-   * - `:focus-within`
-   * - `[data-focus-within]`
+   * - `:target`
+   * - `[data-target]`
    */
-  _focusWithin: "&:focus-within, &[data-focus-within]",
+  _target: "&:target, &[data-target]",
   /**
-   * The CSS `:focus-within` pseudo-class.
+   * The CSS `:user-invalid` pseudo-class.
+   *
+   * - `:user-invalid`
+   * - `[data-user-invalid]`
    */
-  _nativeFocusWithin: "&:focus-within",
+  _userInvalid: "&:user-invalid, &[data-user-invalid]",
+  /**
+   * The CSS `:valid` pseudo-class.
+   *
+   * - `:valid`
+   * - `[data-valid]`
+   */
+  _valid: "&:valid, &[data-valid]",
   /**
    * The CSS `:vertical` pseudo-class.
    *
@@ -525,14 +527,9 @@ export const pseudoClasses = {
   _vertical:
     "&:vertical, &[data-orientation=vertical], &[aria-orientation=vertical]",
   /**
-   * The CSS `:horizontal` pseudo-class.
-   *
-   * - `:horizontal`
-   * - `[aria-orientation=horizontal]`
-   * - `[data-orientation=horizontal]`
+   * The CSS `:visited` pseudo-class.
    */
-  _horizontal:
-    "&:horizontal, &[data-orientation=horizontal], &[aria-orientation=horizontal]",
+  _visited: "&:visited",
 } as const
 
 export type PseudoClasses = typeof pseudoClasses
@@ -549,22 +546,6 @@ export const pseudoClassSelectors = Object.values(pseudoClasses)
 
 export const atRules = {
   /**
-   * The CSS `@media print` media query.
-   */
-  _print: "@media print",
-  /**
-   * The CSS `@media (prefers-color-scheme: light)` media query.
-   */
-  _mediaLight: "@media (prefers-color-scheme: light)",
-  /**
-   * The CSS `@media (prefers-color-scheme: dark)` media query.
-   */
-  _mediaDark: "@media (prefers-color-scheme: dark)",
-  /**
-   * The CSS `@media (prefers-reduced-motion: reduce)` media query.
-   */
-  _mediaReduceMotion: "@media (prefers-reduced-motion: reduce)",
-  /**
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _dark:
@@ -574,6 +555,22 @@ export const atRules = {
    */
   _light:
     ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
+  /**
+   * The CSS `@media (prefers-color-scheme: dark)` media query.
+   */
+  _mediaDark: "@media (prefers-color-scheme: dark)",
+  /**
+   * The CSS `@media (prefers-color-scheme: light)` media query.
+   */
+  _mediaLight: "@media (prefers-color-scheme: light)",
+  /**
+   * The CSS `@media (prefers-reduced-motion: reduce)` media query.
+   */
+  _mediaReduceMotion: "@media (prefers-reduced-motion: reduce)",
+  /**
+   * The CSS `@media print` media query.
+   */
+  _print: "@media print",
 } as const
 
 export type AtRules = typeof atRules
@@ -588,97 +585,33 @@ export const atRuleSelectors = Object.values(atRules)
 
 export const groupAttributes = {
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is selected.
-   */
-  _groupSelected: toGroup(attributes._selected),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is expanded.
-   */
-  _groupExpanded: toGroup(attributes._expanded),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loading.
-   */
-  _groupLoading: toGroup(attributes._loading),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is accepted.
    */
   _groupAccept: toGroup(attributes._accept),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is rejected.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
    */
-  _groupReject: toGroup(attributes._reject),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is idle.
-   */
-  _groupIdle: toGroup(attributes._idle),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loaded.
-   */
-  _groupLoaded: toGroup(attributes._loaded),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is grabbed.
-   */
-  _groupGrabbed: toGroup(attributes._grabbed),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is pressed.
-   */
-  _groupPressed: toGroup(attributes._pressed),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is enabled.
-   */
-  _groupEnabled: toGroup(pseudoClasses._enabled),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
-   */
-  _groupDisabled: toGroup(pseudoClasses._disabled),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
-   */
-  _groupReadOnly: toGroup(pseudoClasses._readOnly),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-write.
-   */
-  _groupReadWrite: toGroup(pseudoClasses._readWrite),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` has a placeholder shown.
-   */
-  _groupPlaceholderShown: toGroup(pseudoClasses._placeholderShown),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is checked.
-   */
-  _groupChecked: toGroup(pseudoClasses._checked),
+  _groupActive: toGroup(pseudoClasses._active),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is blank.
    */
   _groupBlank: toGroup(pseudoClasses._blank),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is valid.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is checked.
    */
-  _groupValid: toGroup(pseudoClasses._valid),
+  _groupChecked: toGroup(pseudoClasses._checked),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
    */
-  _groupInvalid: toGroup(pseudoClasses._invalid),
+  _groupDisabled: toGroup(pseudoClasses._disabled),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is required.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is enabled.
    */
-  _groupRequired: toGroup(pseudoClasses._required),
+  _groupEnabled: toGroup(pseudoClasses._enabled),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is optional.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is expanded.
    */
-  _groupOptional: toGroup(pseudoClasses._optional),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is user-invalid.
-   */
-  _groupUserInvalid: toGroup(pseudoClasses._userInvalid),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is hovered.
-   */
-  _groupHover: toGroup(pseudoClasses._hover),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
-   */
-  _groupActive: toGroup(pseudoClasses._active),
+  _groupExpanded: toGroup(attributes._expanded),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused.
    */
@@ -692,13 +625,77 @@ export const groupAttributes = {
    */
   _groupFocusWithin: toGroup(pseudoClasses._focusWithin),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is vertical.
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is grabbed.
    */
-  _groupVertical: toGroup(pseudoClasses._vertical),
+  _groupGrabbed: toGroup(attributes._grabbed),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is horizontal.
    */
   _groupHorizontal: toGroup(pseudoClasses._horizontal),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is hovered.
+   */
+  _groupHover: toGroup(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is idle.
+   */
+  _groupIdle: toGroup(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
+   */
+  _groupInvalid: toGroup(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loaded.
+   */
+  _groupLoaded: toGroup(attributes._loaded),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loading.
+   */
+  _groupLoading: toGroup(attributes._loading),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is optional.
+   */
+  _groupOptional: toGroup(pseudoClasses._optional),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` has a placeholder shown.
+   */
+  _groupPlaceholderShown: toGroup(pseudoClasses._placeholderShown),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is pressed.
+   */
+  _groupPressed: toGroup(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
+   */
+  _groupReadOnly: toGroup(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-write.
+   */
+  _groupReadWrite: toGroup(pseudoClasses._readWrite),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is rejected.
+   */
+  _groupReject: toGroup(attributes._reject),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is required.
+   */
+  _groupRequired: toGroup(pseudoClasses._required),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is selected.
+   */
+  _groupSelected: toGroup(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is user-invalid.
+   */
+  _groupUserInvalid: toGroup(pseudoClasses._userInvalid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is valid.
+   */
+  _groupValid: toGroup(pseudoClasses._valid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is vertical.
+   */
+  _groupVertical: toGroup(pseudoClasses._vertical),
 } as const
 
 export type GroupAttributes = typeof groupAttributes
@@ -715,97 +712,33 @@ export const groupAttributeSelectors = Object.values(groupAttributes)
 
 export const peerAttributes = {
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is selected.
-   */
-  _peerSelected: toPeer(attributes._selected),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is expanded.
-   */
-  _peerExpanded: toPeer(attributes._expanded),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is loading.
-   */
-  _peerLoading: toPeer(attributes._loading),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is accepted.
    */
   _peerAccept: toPeer(attributes._accept),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is rejected.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is active.
    */
-  _peerReject: toPeer(attributes._reject),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is idle.
-   */
-  _peerIdle: toPeer(attributes._idle),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is loaded.
-   */
-  _peerLoaded: toPeer(attributes._loaded),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is grabbed.
-   */
-  _peerGrabbed: toPeer(attributes._grabbed),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is pressed.
-   */
-  _peerPressed: toPeer(attributes._pressed),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is enabled.
-   */
-  _peerEnabled: toPeer(pseudoClasses._enabled),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
-   */
-  _peerDisabled: toPeer(pseudoClasses._disabled),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
-   */
-  _peerReadOnly: toPeer(pseudoClasses._readOnly),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is read-write.
-   */
-  _peerReadWrite: toPeer(pseudoClasses._readWrite),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` has a placeholder shown.
-   */
-  _peerPlaceholderShown: toPeer(pseudoClasses._placeholderShown),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is checked.
-   */
-  _peerChecked: toPeer(pseudoClasses._checked),
+  _peerActive: toPeer(pseudoClasses._active),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is blank.
    */
   _peerBlank: toPeer(pseudoClasses._blank),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is valid.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is checked.
    */
-  _peerValid: toPeer(pseudoClasses._valid),
+  _peerChecked: toPeer(pseudoClasses._checked),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
    */
-  _peerInvalid: toPeer(pseudoClasses._invalid),
+  _peerDisabled: toPeer(pseudoClasses._disabled),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is required.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is enabled.
    */
-  _peerRequired: toPeer(pseudoClasses._required),
+  _peerEnabled: toPeer(pseudoClasses._enabled),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is optional.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is expanded.
    */
-  _peerOptional: toPeer(pseudoClasses._optional),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is user-invalid.
-   */
-  _peerUserInvalid: toPeer(pseudoClasses._userInvalid),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is hovered.
-   */
-  _peerHover: toPeer(pseudoClasses._hover),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is active.
-   */
-  _peerActive: toPeer(pseudoClasses._active),
+  _peerExpanded: toPeer(attributes._expanded),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is focused.
    */
@@ -819,13 +752,77 @@ export const peerAttributes = {
    */
   _peerFocusWithin: toPeer(pseudoClasses._focusWithin),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is vertical.
+   * Styles to apply when a parent element with `data-peer` or `.peer` is grabbed.
    */
-  _peerVertical: toPeer(pseudoClasses._vertical),
+  _peerGrabbed: toPeer(attributes._grabbed),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is horizontal.
    */
   _peerHorizontal: toPeer(pseudoClasses._horizontal),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is hovered.
+   */
+  _peerHover: toPeer(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is idle.
+   */
+  _peerIdle: toPeer(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
+   */
+  _peerInvalid: toPeer(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is loaded.
+   */
+  _peerLoaded: toPeer(attributes._loaded),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is loading.
+   */
+  _peerLoading: toPeer(attributes._loading),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is optional.
+   */
+  _peerOptional: toPeer(pseudoClasses._optional),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` has a placeholder shown.
+   */
+  _peerPlaceholderShown: toPeer(pseudoClasses._placeholderShown),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is pressed.
+   */
+  _peerPressed: toPeer(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
+   */
+  _peerReadOnly: toPeer(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is read-write.
+   */
+  _peerReadWrite: toPeer(pseudoClasses._readWrite),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is rejected.
+   */
+  _peerReject: toPeer(attributes._reject),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is required.
+   */
+  _peerRequired: toPeer(pseudoClasses._required),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is selected.
+   */
+  _peerSelected: toPeer(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is user-invalid.
+   */
+  _peerUserInvalid: toPeer(pseudoClasses._userInvalid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is valid.
+   */
+  _peerValid: toPeer(pseudoClasses._valid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is vertical.
+   */
+  _peerVertical: toPeer(pseudoClasses._vertical),
 } as const
 
 export type PeerAttributes = typeof peerAttributes

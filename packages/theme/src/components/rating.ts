@@ -8,32 +8,32 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
     group: {
       position: "relative",
     },
+    icon: {
+      fill: "currentColor",
+    },
     item: {
-      cursor: "pointer",
-      rounded: "sm",
-      color: ["blackAlpha.300", "whiteAlpha.300"],
-      outline: "none",
-      _notLast: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-      },
-      _readOnly: {
-        cursor: "default",
-      },
       _disabled: {
-        opacity: 0.4,
         cursor: "not-allowed",
-      },
-      _focusVisible: {
-        boxShadow: "outline",
+        opacity: 0.4,
       },
       _filled: {
         color: [`${c}.500`, `${c}.600`],
       },
-    },
-    icon: {
-      fill: "currentColor",
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _notLast: {
+        left: 0,
+        position: "absolute",
+        top: 0,
+      },
+      _readOnly: {
+        cursor: "default",
+      },
+      color: ["blackAlpha.300", "whiteAlpha.300"],
+      cursor: "pointer",
+      outline: "none",
+      rounded: "sm",
     },
   }),
 
@@ -66,7 +66,7 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
   },
 
   defaultProps: {
-    size: "md",
     colorScheme: "yellow",
+    size: "md",
   },
 }

@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Layout } from 'components/layouts'
 
 const Page: FC = () => {
-  return <Layout></Layout>
+  return <Layout />
 }
 
 export default Page

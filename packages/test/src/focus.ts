@@ -19,6 +19,6 @@ export function blur(el?: HTMLElement | null) {
   if (getActiveElement(el) !== el) return
 
   act(() => {
-    if (el && "blur" in el) el.blur()
+    if ("blur" in el) el.blur()
   })
 }

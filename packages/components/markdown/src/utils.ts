@@ -1,5 +1,5 @@
-import { isNull } from "@yamada-ui/utils"
 import type { Node } from "mdast"
+import { isNull } from "@yamada-ui/utils"
 import { is } from "unist-util-is"
 
 export interface ShouldRemoved extends Node {

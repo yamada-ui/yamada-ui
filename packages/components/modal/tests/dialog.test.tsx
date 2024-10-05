@@ -1,6 +1,6 @@
 import { a11y, render, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
-import { Dialog, DialogHeader, DialogFooter, DialogBody } from "../src"
+import { Dialog, DialogBody, DialogFooter, DialogHeader } from "../src"
 
 describe("<Dialog />", () => {
   const DialogOpenExample = () => {
@@ -13,20 +13,20 @@ describe("<Dialog />", () => {
         </button>
 
         <Dialog
-          data-testid="Dialog"
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
           cancel={{
             children: "dialog-cancel",
           }}
-          onCancel={() => setIsOpen(false)}
+          isOpen={isOpen}
           other={{
             children: "dialog-other",
           }}
-          onOther={() => setIsOpen(false)}
           success={{
             children: "dialog-success",
           }}
+          data-testid="Dialog"
+          onCancel={() => setIsOpen(false)}
+          onClose={() => setIsOpen(false)}
+          onOther={() => setIsOpen(false)}
           onSuccess={() => setIsOpen(false)}
         >
           <DialogHeader data-testid="DialogHeader">header</DialogHeader>
@@ -47,22 +47,22 @@ describe("<Dialog />", () => {
         </button>
 
         <Dialog
-          data-testid="Dialog"
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
           cancel={{
             children: "dialog-cancel",
           }}
-          onCancel={() => setIsOpen(false)}
+          isOpen={isOpen}
           other={{
             children: "dialog-other",
           }}
-          onOther={() => setIsOpen(false)}
           success={{
             children: "dialog-success",
           }}
+          data-testid="Dialog"
+          onCancel={() => setIsOpen(false)}
+          onClose={() => setIsOpen(false)}
+          onOther={() => setIsOpen(false)}
           onSuccess={() => setIsOpen(false)}
-        ></Dialog>
+        />
       </>
     )
   }
@@ -73,7 +73,7 @@ describe("<Dialog />", () => {
   })
 
   test("Dialog renders correctly when open", async () => {
-    const { user, findByTestId } = render(<DialogOpenExample />)
+    const { findByTestId, user } = render(<DialogOpenExample />)
 
     const openDialogButton = await findByTestId("OpenDialog")
     expect(openDialogButton).toBeInTheDocument()
@@ -91,7 +91,7 @@ describe("<Dialog />", () => {
   })
 
   test("Dialog renders correctly when close", async () => {
-    const { user, findByTestId, queryByTestId, getByText } = render(
+    const { findByTestId, getByText, queryByTestId, user } = render(
       <DialogCloseExample />,
     )
 
@@ -101,14 +101,14 @@ describe("<Dialog />", () => {
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const cancelDialogButton = getByText("dialog-cancel")
     await user.click(cancelDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
     await user.click(openDialogButton)
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const otherDialogButton = getByText("dialog-other")
     await user.click(otherDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
 
@@ -116,7 +116,7 @@ describe("<Dialog />", () => {
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const successDialogButton = getByText("dialog-success")
     await user.click(successDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
   })

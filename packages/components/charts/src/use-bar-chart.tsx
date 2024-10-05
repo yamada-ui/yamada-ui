@@ -4,22 +4,22 @@ import type {
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { getVar, useTheme } from "@yamada-ui/core"
-import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
-import type { FC, ComponentPropsWithoutRef, ReactNode } from "react"
-import { useCallback, useState, useId, useMemo } from "react"
+import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import type * as Recharts from "recharts"
-import { Bar, Cell } from "recharts"
-import { getComponentProps } from "./chart-utils"
 import type {
-  BarProps,
-  BarChartType,
   BarChartProps,
+  BarChartType,
+  BarProps,
   ChartLayoutType,
   ReferenceLineProps,
 } from "./chart.types"
-import { barProperties, barChartProperties } from "./rechart-properties"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import { useCallback, useId, useMemo, useState } from "react"
+import { Bar, Cell } from "recharts"
+import { getComponentProps } from "./chart-utils"
+import { barChartProperties, barProperties } from "./rechart-properties"
 
 export interface UseBarChartOptions {
   /**
@@ -31,15 +31,21 @@ export interface UseBarChartOptions {
    */
   series: BarProps[]
   /**
-   * Props for the bars.
-   */
-  barProps?: Partial<BarProps>
-  /**
    * Controls how chart bars are positioned relative to each other.
    *
    * @default `default`
    */
   type?: BarChartType
+  /**
+   * A function that returns a component that renders the bar cells.
+   */
+  cell?: FC<BarCellProps> | ReactNode
+  /**
+   * Controls fill opacity of all bars.
+   *
+   * @default 1
+   */
+  fillOpacity?: [number, number] | number
   /**
    * Chart orientation.
    *
@@ -52,20 +58,6 @@ export interface UseBarChartOptions {
    */
   syncId?: number | string
   /**
-   * Props passed down to recharts `BarChart` component.
-   */
-  chartProps?: BarChartProps
-  /**
-   * Reference lines that should be displayed on the chart.
-   */
-  referenceLineProps?: ReferenceLineProps[]
-  /**
-   * Controls fill opacity of all bars.
-   *
-   * @default 1
-   */
-  fillOpacity?: number | [number, number]
-  /**
    * A label to display below the X axis.
    */
   xAxisLabel?: string
@@ -74,32 +66,40 @@ export interface UseBarChartOptions {
    */
   yAxisLabel?: string
   /**
-   * A function that returns a component that renders the bar cells.
+   * Props for the bars.
    */
-  cell?: ReactNode | FC<BarCellProps>
+  barProps?: Partial<BarProps>
+  /**
+   * Props passed down to recharts `BarChart` component.
+   */
+  chartProps?: BarChartProps
+  /**
+   * Reference lines that should be displayed on the chart.
+   */
+  referenceLineProps?: ReferenceLineProps[]
 }
 
 export interface UseBarChartProps extends UseBarChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useBarChart = ({
-  data,
-  series,
   type = "default",
-  layoutType = "horizontal",
-  referenceLineProps = [],
+  cell = defaultBarCell,
+  data,
   fillOpacity = 1,
+  layoutType = "horizontal",
+  series,
+  styles,
   syncId,
   xAxisLabel,
   yAxisLabel,
-  styles,
-  cell = defaultBarCell,
+  referenceLineProps = [],
   ...rest
 }: UseBarChartProps) => {
   const uuid = useId()
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const stacked = type === "stacked" || type === "percent"
   const shouldHighlight = highlightedArea !== null
   const {
@@ -189,9 +189,9 @@ export const useBarChart = ({
     () =>
       series.map((props, index) => {
         const {
-          dataKey,
           activeBar = {},
           background = {},
+          dataKey,
           dimBar = {},
           ...computedProps
         } = props
@@ -252,25 +252,32 @@ export const useBarChart = ({
   )
 
   const getBarProps: RequiredPropGetter<
-    Partial<Recharts.BarProps> & { index: number },
+    { index: number } & Partial<Recharts.BarProps>,
     Omit<Recharts.BarProps, "ref">
   > = useCallback(
-    ({ index, className: classNameProp, ...props }, ref = null) => {
-      const { id, className, activeBar, background, color, dataKey, ...rest } =
-        barPropsList[index]
+    ({ className: classNameProp, index, ...props }, ref = null) => {
+      const {
+        id,
+        className,
+        activeBar,
+        background,
+        color,
+        dataKey = "",
+        ...rest
+      } = barPropsList[index] ?? {}
 
       return {
+        id,
         ref,
+        name: dataKey,
         className: cx(classNameProp, className),
         activeBar,
         background,
-        id,
-        name: dataKey as string,
         dataKey,
         fill: color,
-        stroke: color,
         isAnimationActive: false,
         stackId: stacked ? "stack" : undefined,
+        stroke: color,
         ...(props as Omit<Recharts.BarProps, "dataKey">),
         ...rest,
       } as Recharts.BarProps
@@ -287,10 +294,10 @@ export const useBarChart = ({
       return (
         <Bar
           key={`bar-${dataKey}`}
-          {...getBarProps({ index, className: "ui-bar-chart__bar" })}
+          {...getBarProps({ className: "ui-bar-chart__bar", index })}
         >
           {data.map((data, index) =>
-            runIfFunc(cell, { series, data, index, hasStack }),
+            runIfFunc(cell, { data, hasStack, index, series }),
           )}
         </Bar>
       )
@@ -305,14 +312,14 @@ export const useBarChart = ({
       ref,
       className: cx(className, barChartClassName),
       data,
-      stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
-      syncId,
       margin: {
         bottom: xAxisLabel ? 30 : undefined,
         left: yAxisLabel ? 10 : undefined,
         right: yAxisLabel ? 5 : undefined,
       },
+      stackOffset: type === "percent" ? "expand" : undefined,
+      syncId,
       ...props,
       ...chartProps,
     }),
@@ -331,26 +338,26 @@ export const useBarChart = ({
   return {
     bars,
     barVars,
-    getBarProps,
-    getBarChartProps,
     setHighlightedArea,
+    getBarChartProps,
+    getBarProps,
   }
 }
 
 export type UseBarChartReturn = ReturnType<typeof useBarChart>
 
 export interface BarCellProps {
-  hasStack: boolean
-  series: BarProps
   data: Dict
+  hasStack: boolean
   index: number
+  series: BarProps
 }
 
 const defaultBarCell: FC<BarCellProps> = ({
-  hasStack,
-  series,
   data,
+  hasStack,
   index,
+  series,
 }) => {
   const { dataKey } = series
   const key = `cell-${dataKey}-${index}`

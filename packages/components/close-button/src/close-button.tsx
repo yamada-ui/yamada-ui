@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { CloseIcon } from "@yamada-ui/icon"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
@@ -11,17 +11,17 @@ import { cx } from "@yamada-ui/utils"
 
 interface CloseButtonOptions {
   /**
-   * If `true`, the button is disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean
-  /**
    * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
    */
   disableRipple?: boolean
+  /**
+   * If `true`, the button is disabled.
+   *
+   * @default false
+   */
+  isDisabled?: boolean
   /**
    * If true, the button is full rounded.
    *
@@ -47,10 +47,10 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
     const {
       className,
       children,
+      disableRipple,
       isDisabled,
       isRounded,
       __css,
-      disableRipple,
       ...rest
     } = omitThemeProps(mergedProps)
     const { onPointerDown, ...rippleProps } = useRipple({
@@ -59,13 +59,13 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
     })
 
     const css: CSSUIObject = {
-      position: "relative",
-      overflow: "hidden",
-      outline: 0,
-      display: "flex",
-      justifyContent: "center",
       alignItems: "center",
+      display: "flex",
       flexShrink: 0,
+      justifyContent: "center",
+      outline: 0,
+      overflow: "hidden",
+      position: "relative",
       ...styles,
       ...__css,
       ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
@@ -75,14 +75,14 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       <ui.button
         ref={ref}
         type="button"
-        aria-label="Close"
         className={cx("ui-close-button", className)}
         disabled={isDisabled}
+        aria-label="Close"
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}
       >
-        {children || <CloseIcon width="1em" height="1em" />}
+        {children || <CloseIcon height="1em" width="1em" />}
 
         <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
       </ui.button>

@@ -1,24 +1,24 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo, useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { Check, ChevronsDown, Trash2 } from "@yamada-ui/lucide"
 import type { SelectItem } from "@yamada-ui/react"
+import type { SubmitHandler } from "react-hook-form"
+import { Check, ChevronsDown, Trash2 } from "@yamada-ui/lucide"
 import {
-  MultiSelect,
-  OptionGroup,
-  Option,
+  Button,
   FormControl,
+  MultiSelect,
+  Option,
+  OptionGroup,
   Tag,
   VStack,
-  Button,
 } from "@yamada-ui/react"
+import { useMemo, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof MultiSelect>
 
 const meta: Meta<typeof MultiSelect> = {
-  title: "Components / Forms / MultiSelect",
   component: MultiSelect,
+  title: "Components / Forms / MultiSelect",
 }
 
 export default meta
@@ -27,15 +27,14 @@ export const basic: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -44,6 +43,7 @@ export const basic: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
@@ -72,7 +72,7 @@ export const basic: Story = () => {
         </OptionGroup>
       </MultiSelect>
 
-      <MultiSelect placeholder="キャラクターを選択" items={items} />
+      <MultiSelect items={items} placeholder="キャラクターを選択" />
     </>
   )
 }
@@ -91,10 +91,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MultiSelect variant="outline" placeholder="outline" />
-      <MultiSelect variant="filled" placeholder="filled" />
-      <MultiSelect variant="flushed" placeholder="flushed" />
-      <MultiSelect variant="unstyled" placeholder="unstyled" />
+      <MultiSelect placeholder="outline" variant="outline" />
+      <MultiSelect placeholder="filled" variant="filled" />
+      <MultiSelect placeholder="flushed" variant="flushed" />
+      <MultiSelect placeholder="unstyled" variant="unstyled" />
     </>
   )
 }
@@ -119,13 +119,10 @@ export const withFooter: Story = () => {
 
   return (
     <MultiSelect
-      value={value}
-      onChange={onChange}
-      placeholder="キャラクターを選択"
       footer={({ onClose }) => (
         <VStack
-          borderTopWidth="1px"
           borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          borderTopWidth="1px"
           p="2"
         >
           <Button
@@ -139,13 +136,16 @@ export const withFooter: Story = () => {
         </VStack>
       )}
       items={items}
+      placeholder="キャラクターを選択"
+      value={value}
+      onChange={onChange}
     />
   )
 }
 
 export const withDefaultValue: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" defaultValue={["ベジータ"]}>
+    <MultiSelect defaultValue={["ベジータ"]} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -162,8 +162,8 @@ export const withBorderColor: Story = () => {
         placeholder="custom border color"
       />
       <MultiSelect
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -184,8 +184,8 @@ export const withComponent: Story = () => {
   return (
     <>
       <MultiSelect
-        placeholder="キャラクターを選択"
         component={({ label }) => <Tag>{label}</Tag>}
+        placeholder="キャラクターを選択"
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -193,10 +193,10 @@ export const withComponent: Story = () => {
       </MultiSelect>
 
       <MultiSelect
-        placeholder="キャラクターを選択"
         component={({ label, onRemove }) => (
           <Tag onClose={onRemove}>{label}</Tag>
         )}
+        placeholder="キャラクターを選択"
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -208,7 +208,7 @@ export const withComponent: Story = () => {
 
 export const withOmitSelectedValues: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" omitSelectedValues={true}>
+    <MultiSelect omitSelectedValues placeholder="キャラクターを選択">
       <OptionGroup label="地球人">
         <Option value="孫悟空">孫悟空</Option>
         <Option value="孫悟飯">孫悟飯</Option>
@@ -229,7 +229,7 @@ export const withOmitSelectedValues: Story = () => {
 
 export const withMaxSelectValues: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" maxSelectValues={3}>
+    <MultiSelect maxSelectValues={3} placeholder="キャラクターを選択">
       <OptionGroup label="地球人">
         <Option value="孫悟空">孫悟空</Option>
         <Option value="孫悟飯">孫悟飯</Option>
@@ -250,7 +250,7 @@ export const withMaxSelectValues: Story = () => {
 
 export const withCloseOnSelect: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" closeOnSelect={true}>
+    <MultiSelect closeOnSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -260,7 +260,7 @@ export const withCloseOnSelect: Story = () => {
 
 export const disabledIsClearable: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" isClearable={false}>
+    <MultiSelect isClearable={false} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -270,7 +270,7 @@ export const disabledIsClearable: Story = () => {
 
 export const disabledCloseOnBlur: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" closeOnBlur={false}>
+    <MultiSelect closeOnBlur={false} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -281,9 +281,9 @@ export const disabledCloseOnBlur: Story = () => {
 export const withPlacement: Story = () => {
   return (
     <MultiSelect
+      maxW="xs"
       placeholder="キャラクターを選択"
       placement="right-start"
-      maxW="xs"
     >
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
@@ -295,8 +295,8 @@ export const withPlacement: Story = () => {
 export const withOffset: Story = () => {
   return (
     <MultiSelect
-      placeholder="キャラクターを選択"
       offset={[16, 16]}
+      placeholder="キャラクターを選択"
       listProps={{ maxW: "xs" }}
     >
       <Option value="孫悟空">孫悟空</Option>
@@ -308,7 +308,7 @@ export const withOffset: Story = () => {
 
 export const withGutter: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" gutter={32}>
+    <MultiSelect gutter={32} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -318,7 +318,7 @@ export const withGutter: Story = () => {
 
 export const withDuration: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" duration={0.4}>
+    <MultiSelect duration={0.4} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -329,10 +329,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <MultiSelect isDisabled variant="outline" placeholder="outline" />
-      <MultiSelect isDisabled variant="filled" placeholder="filled" />
-      <MultiSelect isDisabled variant="flushed" placeholder="flushed" />
-      <MultiSelect isDisabled variant="unstyled" placeholder="unstyled" />
+      <MultiSelect isDisabled placeholder="outline" variant="outline" />
+      <MultiSelect isDisabled placeholder="filled" variant="filled" />
+      <MultiSelect isDisabled placeholder="flushed" variant="flushed" />
+      <MultiSelect isDisabled placeholder="unstyled" variant="unstyled" />
 
       <FormControl
         isDisabled
@@ -347,10 +347,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MultiSelect isReadOnly variant="outline" placeholder="outline" />
-      <MultiSelect isReadOnly variant="filled" placeholder="filled" />
-      <MultiSelect isReadOnly variant="flushed" placeholder="flushed" />
-      <MultiSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+      <MultiSelect isReadOnly placeholder="outline" variant="outline" />
+      <MultiSelect isReadOnly placeholder="filled" variant="filled" />
+      <MultiSelect isReadOnly placeholder="flushed" variant="flushed" />
+      <MultiSelect isReadOnly placeholder="unstyled" variant="unstyled" />
 
       <FormControl
         isReadOnly
@@ -365,15 +365,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MultiSelect isInvalid variant="outline" placeholder="outline" />
-      <MultiSelect isInvalid variant="filled" placeholder="filled" />
-      <MultiSelect isInvalid variant="flushed" placeholder="flushed" />
-      <MultiSelect isInvalid variant="unstyled" placeholder="unstyled" />
+      <MultiSelect isInvalid placeholder="outline" variant="outline" />
+      <MultiSelect isInvalid placeholder="filled" variant="filled" />
+      <MultiSelect isInvalid placeholder="flushed" variant="flushed" />
+      <MultiSelect isInvalid placeholder="unstyled" variant="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <MultiSelect placeholder="Select notifications" />
       </FormControl>
@@ -385,7 +385,7 @@ export const isOptionDisabled: Story = () => {
   return (
     <MultiSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option value="ベジータ" isDisabled>
+      <Option isDisabled value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -397,7 +397,7 @@ export const isOptionFocusable: Story = () => {
   return (
     <MultiSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option value="ベジータ" isDisabled isFocusable>
+      <Option isDisabled isFocusable value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -492,15 +492,14 @@ export const reactHookForm: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -509,14 +508,15 @@ export const reactHookForm: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -526,14 +526,13 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select1?.message}
         isInvalid={!!errors.select1}
         label="Who is your favorite character?"
-        errorMessage={errors.select1?.message}
       >
         <Controller
           name="select1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect placeholder="キャラクターを選択" {...field}>
               <Option value="孫悟空">孫悟空</Option>
@@ -541,18 +540,18 @@ export const reactHookForm: Story = () => {
               <Option value="フリーザ">フリーザ</Option>
             </MultiSelect>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select2?.message}
         isInvalid={!!errors.select2}
         label="Who is your favorite character?"
-        errorMessage={errors.select2?.message}
       >
         <Controller
           name="select2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect placeholder="キャラクターを選択" {...field}>
               <OptionGroup label="地球人">
@@ -571,18 +570,18 @@ export const reactHookForm: Story = () => {
               </OptionGroup>
             </MultiSelect>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select3?.message}
         isInvalid={!!errors.select3}
         label="Who is your favorite character?"
-        errorMessage={errors.select3?.message}
       >
         <Controller
           name="select3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect
               placeholder="キャラクターを選択"
@@ -590,6 +589,7 @@ export const reactHookForm: Story = () => {
               items={items}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -616,15 +616,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -633,14 +632,15 @@ export const reactHookFormWithDefaultValue: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -650,14 +650,13 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select1?.message}
         isInvalid={!!errors.select1}
         label="Who is your favorite character?"
-        errorMessage={errors.select1?.message}
       >
         <Controller
           name="select1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect placeholder="キャラクターを選択" {...field}>
               <Option value="孫悟空">孫悟空</Option>
@@ -665,18 +664,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
               <Option value="フリーザ">フリーザ</Option>
             </MultiSelect>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select2?.message}
         isInvalid={!!errors.select2}
         label="Who is your favorite character?"
-        errorMessage={errors.select2?.message}
       >
         <Controller
           name="select2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect placeholder="キャラクターを選択" {...field}>
               <OptionGroup label="地球人">
@@ -695,18 +694,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
               </OptionGroup>
             </MultiSelect>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select3?.message}
         isInvalid={!!errors.select3}
         label="Who is your favorite character?"
-        errorMessage={errors.select3?.message}
       >
         <Controller
           name="select3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MultiSelect
               placeholder="キャラクターを選択"
@@ -714,6 +713,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
               items={items}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

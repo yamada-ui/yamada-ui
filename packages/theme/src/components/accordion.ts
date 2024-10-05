@@ -2,62 +2,51 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Accordion: ComponentMultiStyle<"Accordion"> = {
   baseStyle: {
-    container: {},
-    item: {},
     button: {
-      transitionProperty: "common",
-      transitionDuration: "normal",
+      "&[aria-disabled=true]": {
+        cursor: "default",
+      },
       _focusVisible: {
         boxShadow: "outline",
       },
       _nativeDisabled: {
-        opacity: 0.4,
         cursor: "not-allowed",
+        opacity: 0.4,
       },
-      "&[aria-disabled=true]": {
-        cursor: "default",
-      },
+      px: "4",
       py: "3",
-      px: "4",
+      transitionDuration: "normal",
+      transitionProperty: "common",
     },
-    panel: {
-      px: "4",
-      pb: "3",
-    },
+    container: {},
     icon: {
-      ml: "auto",
-      fontSize: "1.25em",
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      fontSize: "1.25em",
+      ml: "auto",
+    },
+    item: {},
+    panel: {
+      pb: "3",
+      px: "4",
     },
   },
 
   variants: {
     basic: {
-      item: {
-        borderTopWidth: "1px",
-        borderColor: "inherit",
-        _last: {
-          borderBottomWidth: "1px",
-        },
-      },
       button: {
         "&:hover:not(:disabled):not([aria-disabled=true])": {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
       },
+      item: {
+        _last: {
+          borderBottomWidth: "1px",
+        },
+        borderColor: "inherit",
+        borderTopWidth: "1px",
+      },
     },
     card: {
-      item: {
-        borderWidth: "1px",
-        rounded: "md",
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _expanded: {
-          bg: ["white", "black"],
-        },
-        _notFirst: {
-          mt: "md",
-        },
-      },
       button: {
         _hover: {
           "&:hover:not(:disabled):not([aria-disabled=true])": {
@@ -67,6 +56,17 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
             bg: "none",
           },
         },
+      },
+      item: {
+        _expanded: {
+          bg: ["white", "black"],
+        },
+        _notFirst: {
+          mt: "md",
+        },
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+        borderWidth: "1px",
+        rounded: "md",
       },
     },
     unstyled: {},

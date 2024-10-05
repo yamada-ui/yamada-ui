@@ -1,28 +1,28 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
-  WithTransitionProps,
-  MotionTransitionVariants,
   MotionProps,
+  MotionTransitionVariants,
   MotionVariants,
+  WithTransitionProps,
 } from "@yamada-ui/motion"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
   AnimatePresence,
-  transitionEnter,
-  transitionExit,
   motion,
   motionForwardRef,
+  transitionEnter,
+  transitionExit,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
+  enter: ({ delay, duration, enter, transition, transitionEnd } = {}) => ({
     opacity: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
     ...enter,
   }),
-  exit: ({ transition, transitionEnd, delay, duration, exit } = {}) => ({
+  exit: ({ delay, duration, exit, transition, transitionEnd } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
     transitionEnd: transitionEnd?.exit,
@@ -31,9 +31,9 @@ const variants: MotionVariants = {
 } satisfies MotionTransitionVariants
 
 export const fadeProps = {
-  initial: "exit",
   animate: "enter",
   exit: "exit",
+  initial: "exit",
   variants,
 }
 
@@ -49,19 +49,19 @@ export interface FadeProps
 export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Fade", props)
   let {
-    unmountOnExit,
+    className,
+    delay,
+    duration,
     isOpen,
     transition,
     transitionEnd,
-    delay,
-    duration,
-    className,
+    unmountOnExit,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
-  const custom = { transition, transitionEnd, delay, duration }
+  const custom = { delay, duration, transition, transitionEnd }
 
   isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 

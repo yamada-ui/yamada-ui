@@ -1,7 +1,7 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalCloseButtonProps } from "./modal-close-button"
 import { forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { ModalCloseButtonProps } from "./modal-close-button"
 import { ModalCloseButton } from "./modal-close-button"
 import { useDrawer } from "./modal-context"
 

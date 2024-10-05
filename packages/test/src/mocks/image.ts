@@ -1,4 +1,6 @@
-type Status = "loaded" | "error"
+import { noop } from "@yamada-ui/utils"
+
+type Status = "error" | "loaded"
 
 const originalImage = window.Image
 
@@ -7,9 +9,9 @@ export function image() {
 
   //@ts-expect-error
   window.Image = class Image {
-    onload = () => {}
+    onload = noop
 
-    onerror = () => {}
+    onerror = noop
 
     src = ""
 
@@ -31,17 +33,18 @@ export function image() {
           this.onload()
         }
       }, image.DELAY)
+
       return this
     }
   }
 
   return {
-    simulate(value: Status) {
-      status = value
-    },
-
     restore() {
       window.Image = originalImage
+    },
+
+    simulate(value: Status) {
+      status = value
     },
   }
 }

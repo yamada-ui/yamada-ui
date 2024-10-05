@@ -1,17 +1,17 @@
 import type { ColorModeWithSystem } from "../css"
 
 export interface ColorModeScriptProps {
-  type?: "localStorage" | "cookie"
+  type?: "cookie" | "localStorage"
   initialColorMode?: ColorModeWithSystem
-  storageKey?: string
   nonce?: string
+  storageKey?: string
 }
 
 export const COLOR_MODE_STORAGE_KEY = "ui-color-mode"
 
 const COLOR_MODE_MAP = new Set(["dark", "light", "system"])
 
-const normalizeColorMode = (initialColorMode: "light" | "dark" | "system") => {
+const normalizeColorMode = (initialColorMode: "dark" | "light" | "system") => {
   let value = initialColorMode
 
   if (!COLOR_MODE_MAP.has(value)) value = "light"
@@ -20,8 +20,8 @@ const normalizeColorMode = (initialColorMode: "light" | "dark" | "system") => {
 }
 
 export const getColorModeScript = ({
-  initialColorMode = "light",
   type = "localStorage",
+  initialColorMode = "light",
   storageKey = COLOR_MODE_STORAGE_KEY,
 }: Omit<ColorModeScriptProps, "nonce"> = {}) => {
   const init = normalizeColorMode(initialColorMode)
@@ -45,8 +45,8 @@ export const ColorModeScript = ({ nonce, ...rest }: ColorModeScriptProps) => {
   return (
     <script
       id="ui-color-mode-script"
-      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: html }}
+      nonce={nonce}
     />
   )
 }

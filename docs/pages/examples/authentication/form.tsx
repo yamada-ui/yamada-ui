@@ -1,3 +1,5 @@
+import type { BoxProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   Box,
   Button,
@@ -8,10 +10,8 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import type { BoxProps } from "@yamada-ui/react"
-import { memo } from "react"
-import type { FC } from "react"
 import { Github } from "components/media-and-icons"
+import { memo } from "react"
 
 export interface FormProps extends BoxProps {}
 
@@ -19,27 +19,27 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
   return (
     <Center
       as="section"
-      position="relative"
       p={{ base: "lg", sm: "md" }}
+      position="relative"
       {...rest}
     >
       <Button
-        variant="ghost"
-        position="absolute"
-        top={{ base: "lg", sm: "md" }}
-        right={{ base: "lg", sm: "md" }}
         fontWeight="normal"
+        position="absolute"
+        right={{ base: "lg", sm: "md" }}
+        top={{ base: "lg", sm: "md" }}
+        variant="ghost"
       >
         Login
       </Button>
 
-      <VStack maxW="md" alignItems="stretch" gap="normal">
+      <VStack alignItems="stretch" gap="normal" maxW="md">
         <VStack alignItems="center" gap={{ base: "sm", sm: "0" }}>
           <Heading as="h3" size="lg">
             Create an account
           </Heading>
 
-          <Text fontSize="sm" color="muted">
+          <Text color="muted" fontSize="sm">
             Enter your email below to create your account
           </Text>
         </VStack>
@@ -54,49 +54,49 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
 
         <Center position="relative">
           <Text
-            display="inline-block"
-            px="md"
             bg={["white", "black"]}
-            fontSize="xs"
             color="muted"
+            display="inline-block"
+            fontSize="xs"
+            px="md"
             textTransform="uppercase"
           >
             Or continue with
           </Text>
 
           <Box
-            position="absolute"
-            zIndex="-1"
+            borderBottomWidth="1px"
             left="0"
+            position="absolute"
             right="0"
             w="full"
-            borderBottomWidth="1px"
+            zIndex="-1"
           />
         </Center>
 
         <Button
-          variant="outline"
           borderColor="border"
           fontWeight="normal"
           leftIcon={<Github fontSize="0.875em" />}
+          variant="outline"
         >
           GitHub
         </Button>
 
-        <Text fontSize="sm" textAlign="center" color="muted">
+        <Text color="muted" fontSize="sm" textAlign="center">
           By clicking continue, you agree to our{" "}
           <Link
+            _hover={{ color: ["black", "white"] }}
             color="muted"
             textDecoration="underline"
-            _hover={{ color: ["black", "white"] }}
           >
             Terms of Service
           </Link>{" "}
           and{" "}
           <Link
+            _hover={{ color: ["black", "white"] }}
             color="muted"
             textDecoration="underline"
-            _hover={{ color: ["black", "white"] }}
           >
             Privacy Policy
           </Link>

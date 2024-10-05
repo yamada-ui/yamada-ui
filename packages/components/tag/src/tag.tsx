@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps, CSSUIObject, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -8,7 +8,7 @@ import {
 import { Icon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes, MouseEventHandler, ReactElement } from "react"
+import type { HTMLAttributes, MouseEventHandler, ReactElement } from "react"
 import { useRef } from "react"
 
 interface TagOptions {
@@ -87,6 +87,9 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   )
 })
 
+Tag.displayName = "Tag"
+Tag.__ui__ = "Tag"
+
 const CloseIcon: FC = () => {
   return (
     <Icon verticalAlign="inherit" viewBox="0 0 512 512" fontSize="1.125rem">
@@ -97,6 +100,9 @@ const CloseIcon: FC = () => {
     </Icon>
   )
 }
+
+CloseIcon.displayName = "CloseIcon"
+CloseIcon.__ui__ = "CloseIcon"
 
 type CloseButtonProps = HTMLUIProps<"span"> & { isDisabled?: boolean }
 
@@ -122,3 +128,6 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
     </ui.span>
   )
 }
+
+CloseButton.displayName = "CloseButton"
+CloseButton.__ui__ = "CloseButton"

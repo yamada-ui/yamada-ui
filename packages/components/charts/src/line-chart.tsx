@@ -275,3 +275,6 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+LineChart.displayName = "LineChart"
+LineChart.__ui__ = "LineChart"

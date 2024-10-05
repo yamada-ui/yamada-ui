@@ -22,14 +22,17 @@ export const useBreakpoint = () => {
   } = theme.__config?.breakpoint ?? {}
   const hasContainer = !!containerRef
 
-  if (!breakpoints)
-    throw Error(
+  if (!breakpoints) {
+    console.warn(
       "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
     )
+  }
 
-  const queries = useMemo(
-    () =>
-      breakpoints.queries.map(({ breakpoint, maxW, minMaxQuery, minW }) => {
+  const queries = useMemo(() => {
+    if (!breakpoints) return []
+
+    return breakpoints.queries.map(
+      ({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =
           identifier === "@media screen"
             ? "@media screen and "
@@ -42,14 +45,16 @@ export const useBreakpoint = () => {
           minW,
           query,
         }
-      }),
-    [breakpoints, identifier],
-  )
+      },
+    )
+  }, [breakpoints, identifier])
+
+  const hasQueries = !!queries.length
 
   const [breakpoint, setBreakpoint] = useState(() => {
     const isBrowser = createdDom()
 
-    if (!isBrowser || hasContainer) return "base"
+    if (!isBrowser || hasContainer || !hasQueries) return "base"
 
     for (const { breakpoint, query } of queries) {
       const mql = window.matchMedia(query)
@@ -74,7 +79,7 @@ export const useBreakpoint = () => {
   )
 
   useEffect(() => {
-    if (!hasContainer) return
+    if (!hasContainer || !hasQueries) return
 
     const isBrowser = createdDom()
 
@@ -102,10 +107,10 @@ export const useBreakpoint = () => {
       if (process.env.NODE_ENV !== "test")
         cancelAnimationFrame(animationFrameId.current)
     }
-  }, [hasContainer, containerRef, getBreakpoint])
+  }, [hasQueries, hasContainer, containerRef, getBreakpoint])
 
   useEffect(() => {
-    if (hasContainer) return
+    if (hasContainer || !hasQueries) return
 
     const observer = queries.map(({ breakpoint, query }): (() => void) => {
       const mql = window.matchMedia(query)
@@ -126,7 +131,7 @@ export const useBreakpoint = () => {
     return () => {
       observer.forEach((unobserve) => unobserve())
     }
-  }, [queries, hasContainer])
+  }, [queries, hasQueries, hasContainer])
 
   return breakpoint as Theme["breakpoints"]
 }
@@ -150,12 +155,15 @@ export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
 export const getBreakpointValue =
   <T>(values: ResponsiveObject<T> = {}) =>
   (theme: StyledTheme | undefined, breakpoint: Theme["breakpoints"]): T => {
-    if (!theme) throw Error("getBreakpointValue: `theme` is undefined.")
+    if (!theme) {
+      console.warn("getBreakpointValue: `theme` is undefined.")
+    }
 
-    const breakpoints = theme.__breakpoints?.keys
+    const breakpoints = theme?.__breakpoints?.keys ?? []
 
-    if (!breakpoints)
-      throw Error("getBreakpointValue: `breakpoints` is undefined.")
+    if (!breakpoints.length) {
+      console.warn("getBreakpointValue: `breakpoints` is undefined.")
+    }
 
     const currentIndex = breakpoints.indexOf(breakpoint)
 

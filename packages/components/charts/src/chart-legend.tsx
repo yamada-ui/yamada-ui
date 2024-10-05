@@ -49,3 +49,6 @@ export const ChartLegend = forwardRef<ChartLegendProps, "div">(
     )
   },
 )
+
+ChartLegend.displayName = "ChartLegend"
+ChartLegend.__ui__ = "ChartLegend"

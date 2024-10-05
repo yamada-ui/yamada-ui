@@ -48,5 +48,5 @@ export const Portal = ({
   )
 }
 
-Portal.className = "ui-portal"
-Portal.selector = ".ui-portal"
+Portal.displayName = "Portal"
+Portal.__ui__ = "Portal"

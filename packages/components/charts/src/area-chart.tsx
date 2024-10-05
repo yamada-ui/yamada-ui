@@ -306,3 +306,6 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+AreaChart.displayName = "AreaChart"
+AreaChart.__ui__ = "AreaChart"

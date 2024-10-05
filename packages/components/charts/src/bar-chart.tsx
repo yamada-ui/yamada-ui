@@ -254,3 +254,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+BarChart.displayName = "BarChart"
+BarChart.__ui__ = "BarChart"

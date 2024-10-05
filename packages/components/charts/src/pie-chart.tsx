@@ -200,3 +200,6 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+PieChart.displayName = "PieChart"
+PieChart.__ui__ = "PieChart"

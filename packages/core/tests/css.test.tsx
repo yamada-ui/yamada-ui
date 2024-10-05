@@ -323,12 +323,12 @@ describe("CSS", () => {
 
   test("returns interpolation", () => {
     const result = css({
-      m: "$hoge",
+      m: "$yamada",
       p: "$spaces.4 $spaces.4",
     })(theme)
 
     expect(result).toStrictEqual({
-      margin: "var(--ui-hoge)",
+      margin: "var(--ui-yamada)",
       padding: "var(--ui-spaces-4) var(--ui-spaces-4)",
     })
   })

@@ -14,13 +14,13 @@ describe("<Avatar />", () => {
   test("renders an image", async () => {
     const mock = mocks.image()
     mock.simulate("loaded")
-    render(<Avatar name="Dan Abramov" src="https://bit.ly/dan-abramov" />)
+    render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
 
     act(() => {
       vi.runAllTimers()
     })
 
-    const img = await screen.findByAltText("Dan Abramov")
+    const img = await screen.findByAltText("Hirotomo Yamada")
     expect(img).toBeInTheDocument()
   })
 
@@ -29,7 +29,7 @@ describe("<Avatar />", () => {
     mock.simulate("error")
 
     const src = "https://bit.ly/dan-abramov"
-    const name = "Dan Abramov"
+    const name = "Hirotomo Yamada"
     const onErrorFn = vi.fn()
     render(<Avatar name={name} src={src} onError={onErrorFn} />)
 
@@ -41,23 +41,23 @@ describe("<Avatar />", () => {
   })
 
   test("renders a name avatar if no src", async () => {
-    render(<Avatar name="Dan Abramov" />)
+    render(<Avatar name="Hirotomo Yamada" />)
 
-    const initials = await screen.findByText("DA")
+    const initials = await screen.findByText("HY")
     expect(initials).toBeInTheDocument()
   })
 
   test("renders a single character if only one name is passed", async () => {
-    render(<Avatar name="Dan" />)
+    render(<Avatar name="Hirotomo" />)
 
-    const initials = await screen.findByText("D")
+    const initials = await screen.findByText("H")
     expect(initials).toBeInTheDocument()
   })
 
   test("renders the first characters of the first and last name when more than two names are passed", async () => {
-    render(<Avatar name="Dan React Abramov" />)
+    render(<Avatar name="Hirotomo React Yamada" />)
 
-    const initials = await screen.findByText("DA")
+    const initials = await screen.findByText("HY")
     expect(initials).toBeInTheDocument()
   })
 })

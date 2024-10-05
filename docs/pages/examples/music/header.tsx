@@ -200,7 +200,7 @@ const ACCOUNT_MENU_ITEMS: MenuItem[] = [
     type: "radio",
     items: [
       { label: "Andy", value: "Andy" },
-      { label: "Benoit", value: "Benoit" },
+      { label: "Beloit", value: "Beloit" },
       { label: "Luis", value: "Luis" },
     ],
     label: "Switch Account",

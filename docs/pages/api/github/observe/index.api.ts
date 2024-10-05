@@ -5,7 +5,7 @@ import { updatePullRequests } from "./update-pull-requests"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await verifySignature(req)
+    verifySignature(req)
   } catch {
     return res.status(400).send({ message: "Invalid signature", status: 400 })
   }

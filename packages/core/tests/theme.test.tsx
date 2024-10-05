@@ -314,7 +314,7 @@ describe("transformTheme", () => {
         "linear(to-r, green.200, green.500)",
         "linear(to-r, green.100, green.300)",
       ],
-      orange: "linear(to-r, $colors.orange.200, $hoge)",
+      orange: "linear(to-r, $colors.orange.200, $yamada)",
       red: [
         {
           base: "linear(to-r, red.200, red.500)",
@@ -669,7 +669,7 @@ describe("transformTheme", () => {
       var: "--ui-gradients-orange",
     })
     expect(__cssVars["--ui-gradients-orange"]).toBe(
-      "linear-gradient(to right, var(--ui-colors-orange-200), var(--ui-hoge))",
+      "linear-gradient(to right, var(--ui-colors-orange-200), var(--ui-yamada))",
     )
   })
 

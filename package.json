@@ -98,6 +98,7 @@
     "@clack/prompts": "^0.7.0",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@cspell/eslint-plugin": "^8.14.4",
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@eslint/compat": "^1.1.1",

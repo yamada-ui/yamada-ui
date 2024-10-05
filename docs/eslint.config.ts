@@ -11,6 +11,7 @@ import {
   jsxA11yConfig,
   languageOptionFactory,
   perfectionistConfig,
+  cspellConfig as sharedCspellConfig,
   sharedFiles,
   reactConfig as sharedReactConfig,
   reactHooksConfig as sharedReactHooksConfig,
@@ -54,6 +55,17 @@ const nextConfig: Linter.Config = {
   },
 }
 
+const cspellConfig: Linter.Config = {
+  ...sharedCspellConfig,
+  ignores: [
+    "pages/icons/tags.ts",
+    "constant/maintainers.ts",
+    "constant/emeriti.ts",
+    "constant/members.ts",
+    "constant/contributors.ts",
+  ],
+}
+
 const tsConfigPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "./tsconfig.json",
@@ -68,6 +80,7 @@ export default tseslint.config(
   noConsoleConfig,
   typescriptConfig,
   ...importConfigArray,
+  cspellConfig,
   perfectionistConfig,
   reactConfig,
   reactHooksConfig,

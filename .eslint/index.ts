@@ -1,4 +1,5 @@
 export * from "./base"
+export * from "./cspell"
 export * from "./import"
 export * from "./jsx-a11y"
 export * from "./language-option"

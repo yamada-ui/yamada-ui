@@ -9,6 +9,7 @@ import {
   importConfigArray,
   languageOptionFactory,
   perfectionistConfig,
+  cspellConfig as sharedCspellConfig,
   reactConfig as sharedReactConfig,
   reactHooksConfig as sharedReactHooksConfig,
   testingLibraryConfig,
@@ -112,6 +113,11 @@ const vitestSetupTestsConfig: Linter.Config = {
   },
 }
 
+const cspellConfig: Linter.Config = {
+  ...sharedCspellConfig,
+  ignores: ["packages/components/lucide/src/icons/**"],
+}
+
 const tsConfigPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "./tsconfig.json",
@@ -128,6 +134,7 @@ export default tseslint.config(
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,
+  cspellConfig,
   reactConfig,
   reactHooksConfig,
   storybookConfig,

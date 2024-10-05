@@ -23,3 +23,6 @@ export const DrawerFooter = forwardRef<DrawerFooterProps, "footer">(
     )
   },
 )
+
+DrawerFooter.displayName = "DrawerFooter"
+DrawerFooter.__ui__ = "DrawerFooter"

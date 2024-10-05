@@ -23,3 +23,6 @@ export const DrawerBody = forwardRef<DrawerBodyProps, "main">(
     )
   },
 )
+
+DrawerBody.displayName = "DrawerBody"
+DrawerBody.__ui__ = "DrawerBody"

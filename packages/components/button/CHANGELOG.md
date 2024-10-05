@@ -1,5 +1,17 @@
 # @yamada-ui/button
 
+## 1.0.43
+
+### Patch Changes
+
+- [#2965](https://github.com/yamada-ui/yamada-ui/pull/2965) [`79c2b05`](https://github.com/yamada-ui/yamada-ui/commit/79c2b056174036d997cb277de703c905206e4c44) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Set the displayName for `Button`
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`b265da7`](https://github.com/yamada-ui/yamada-ui/commit/b265da7df8708a2b7948faf806d2074585a5c7d3)]:
+  - @yamada-ui/loading@1.1.17
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/ripple@1.0.39
+
 ## 1.0.42
 
 ### Patch Changes

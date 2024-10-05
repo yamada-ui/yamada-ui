@@ -169,8 +169,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       "aria-readonly": _ariaReadonly,
       ...formControlProps
     } = pickObject(rest, formControlProperties)
+    const uuid = useId()
 
-    id ??= useId()
+    id ??= uuid
 
     const descendants = useDescendants()
 
@@ -389,6 +390,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
   },
 )
 
+PinInput.displayName = "PinInput"
+PinInput.__ui__ = "PinInput"
+
 export interface PinInputFieldProps
   extends HTMLUIProps<"input">,
     FormControlOptions {}
@@ -411,3 +415,6 @@ export const PinInputField = forwardRef<PinInputFieldProps, "input">(
     )
   },
 )
+
+PinInputField.displayName = "PinInputField"
+PinInputField.__ui__ = "PinInputField"

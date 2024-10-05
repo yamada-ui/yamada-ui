@@ -214,3 +214,4 @@ export const CheckboxGroup = forwardRef(
 } & ComponentArgs
 
 CheckboxGroup.displayName = "CheckboxGroup"
+CheckboxGroup.__ui__ = "CheckboxGroup"

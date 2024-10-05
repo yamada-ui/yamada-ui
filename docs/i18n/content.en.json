@@ -42,6 +42,27 @@
     }
   },
   {
+    "title": "Visual Studio Code",
+    "type": "fragment",
+    "slug": "/community/contributing#visual-studio-code",
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Development",
+      "lv3": "Visual Studio Code"
+    }
+  },
+  {
+    "title": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)",
+    "type": "fragment",
+    "slug": "/community/contributing#eslint",
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Development",
+      "lv3": "Visual Studio Code",
+      "lv4": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)"
+    }
+  },
+  {
     "title": "Update the Document",
     "type": "fragment",
     "slug": "/community/contributing#update-the-document",
@@ -8607,25 +8628,6 @@
     "hierarchy": { "lv1": "Box", "lv2": "Usage", "lv3": "Using as" }
   },
   {
-    "title": "Box",
-    "type": "page",
-    "description": "`Box` is the most abstract component on which all other components are built. By default, it renders a `div` element.",
-    "slug": "/components/layouts/box/props",
-    "hierarchy": { "lv1": "Box" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/box/props#props",
-    "hierarchy": { "lv1": "Box", "lv2": "Props" }
-  },
-  {
-    "title": "BoxProps",
-    "type": "fragment",
-    "slug": "/components/layouts/box/props#boxprops",
-    "hierarchy": { "lv1": "Box", "lv2": "Props", "lv3": "BoxProps" }
-  },
-  {
     "title": "Center",
     "type": "page",
     "description": "`Center` is a component that aligns the child elements in the center within the component.",
@@ -8643,25 +8645,6 @@
     "type": "fragment",
     "slug": "/components/layouts/center#usage",
     "hierarchy": { "lv1": "Center", "lv2": "Usage" }
-  },
-  {
-    "title": "Center",
-    "type": "page",
-    "description": "`Center` is a component that aligns the child elements in the center within the component.",
-    "slug": "/components/layouts/center/props",
-    "hierarchy": { "lv1": "Center" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/center/props#props",
-    "hierarchy": { "lv1": "Center", "lv2": "Props" }
-  },
-  {
-    "title": "CenterProps",
-    "type": "fragment",
-    "slug": "/components/layouts/center/props#centerprops",
-    "hierarchy": { "lv1": "Center", "lv2": "Props", "lv3": "CenterProps" }
   },
   {
     "title": "Container",
@@ -8835,25 +8818,6 @@
     "type": "fragment",
     "slug": "/components/layouts/spacer#usage",
     "hierarchy": { "lv1": "Spacer", "lv2": "Usage" }
-  },
-  {
-    "title": "Spacer",
-    "type": "page",
-    "description": "`Spacer` is a component used to add space between elements.",
-    "slug": "/components/layouts/spacer/props",
-    "hierarchy": { "lv1": "Spacer" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/spacer/props#props",
-    "hierarchy": { "lv1": "Spacer", "lv2": "Props" }
-  },
-  {
-    "title": "SpacerProps",
-    "type": "fragment",
-    "slug": "/components/layouts/spacer/props#spacerprops",
-    "hierarchy": { "lv1": "Spacer", "lv2": "Props", "lv3": "SpacerProps" }
   },
   {
     "title": "Stack",
@@ -9266,29 +9230,6 @@
     "type": "fragment",
     "slug": "/components/media-and-icons/native-image#usage",
     "hierarchy": { "lv1": "NativeImage", "lv2": "Usage" }
-  },
-  {
-    "title": "NativeImage",
-    "type": "page",
-    "description": "`NativeImage` is renders a `img` element.",
-    "slug": "/components/media-and-icons/native-image/props",
-    "hierarchy": { "lv1": "NativeImage" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/media-and-icons/native-image/props#props",
-    "hierarchy": { "lv1": "NativeImage", "lv2": "Props" }
-  },
-  {
-    "title": "NativeImageProps",
-    "type": "fragment",
-    "slug": "/components/media-and-icons/native-image/props#nativeimageprops",
-    "hierarchy": {
-      "lv1": "NativeImage",
-      "lv2": "Props",
-      "lv3": "NativeImageProps"
-    }
   },
   {
     "title": "Breadcrumb",
@@ -9873,29 +9814,6 @@
     "type": "fragment",
     "slug": "/components/other/visually-hidden#usage",
     "hierarchy": { "lv1": "VisuallyHidden", "lv2": "Usage" }
-  },
-  {
-    "title": "VisuallyHidden",
-    "type": "page",
-    "description": "`VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.",
-    "slug": "/components/other/visually-hidden/props",
-    "hierarchy": { "lv1": "VisuallyHidden" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/other/visually-hidden/props#props",
-    "hierarchy": { "lv1": "VisuallyHidden", "lv2": "Props" }
-  },
-  {
-    "title": "VisuallyHiddenProps",
-    "type": "fragment",
-    "slug": "/components/other/visually-hidden/props#visuallyhiddenprops",
-    "hierarchy": {
-      "lv1": "VisuallyHidden",
-      "lv2": "Props",
-      "lv3": "VisuallyHiddenProps"
-    }
   },
   {
     "title": "ContextMenu",

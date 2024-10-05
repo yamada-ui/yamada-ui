@@ -21,3 +21,6 @@ export const Tfoot = forwardRef<TableFootProps, "tfoot">(
     )
   },
 )
+
+Tfoot.displayName = "Tfoot"
+Tfoot.__ui__ = "Tfoot"

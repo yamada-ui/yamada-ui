@@ -1,8 +1,8 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import type { MotionProps } from "@yamada-ui/motion"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import type { FC, Key } from "react"
+import type { Key } from "react"
 import type { RippleOptions } from "./use-ripple"
 
 const clamp = (value: number, min: number, max: number) =>
@@ -77,3 +77,6 @@ export const Ripple: FC<RippleProps> = ({
     </>
   )
 }
+
+Ripple.displayName = "Ripple"
+Ripple.__ui__ = "Ripple"

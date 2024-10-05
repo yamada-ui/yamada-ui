@@ -32,3 +32,6 @@ export const TableCaption = forwardRef<TableCaptionProps, "caption">(
     )
   },
 )
+
+TableCaption.displayName = "TableCaption"
+TableCaption.__ui__ = "TableCaption"

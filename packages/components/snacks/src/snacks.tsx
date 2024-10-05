@@ -204,6 +204,9 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
   },
 )
 
+Snacks.displayName = "Snacks"
+Snacks.__ui__ = "Snacks"
+
 const defaultItemVariants: MotionVariants = {
   animate: ({ index }) => ({
     opacity: 1,
@@ -310,3 +313,4 @@ const SnackComponent = memo(
 )
 
 SnackComponent.displayName = "SnackComponent"
+SnackComponent.__ui__ = "SnackComponent"

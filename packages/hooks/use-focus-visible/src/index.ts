@@ -19,7 +19,7 @@ const trigger = (modality: Modality, ev: HandlerEvent | null) =>
 const onValid = (e: KeyboardEvent) => {
   return !(
     e.metaKey ||
-    (!isMac && e.altKey) ||
+    (!isMac() && e.altKey) ||
     e.ctrlKey ||
     e.key === "Control" ||
     e.key === "Shift" ||
@@ -47,7 +47,7 @@ const onPointer = (ev: MouseEvent | PointerEvent) => {
   ) {
     hasEventBeforeFocus = true
 
-    const target = ev.composedPath ? ev.composedPath()[0] : ev.target
+    const target = ev.composedPath()[0] ?? ev.target
 
     if ((target as HTMLElement).matches(":focus-visible")) return
 
@@ -97,6 +97,7 @@ const setGlobalFocusEvents = () => {
   HTMLElement.prototype.focus = function customFocus(...args) {
     hasEventBeforeFocus = true
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (this) focus.apply(this, args)
   }
 

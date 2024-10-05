@@ -132,9 +132,9 @@ describe("<Breadcrumb />", () => {
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(3)
-    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
+    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      listItems[listItems.length - 1].querySelector("span"),
+      listItems[listItems.length - 1]?.querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
@@ -151,9 +151,9 @@ describe("<Breadcrumb />", () => {
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(3)
-    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
+    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      listItems[listItems.length - 1].querySelector("span"),
+      listItems[listItems.length - 1]?.querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
@@ -175,7 +175,7 @@ describe("<Breadcrumb />", () => {
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(4)
-    expect(listItems[listItems.length - 1].firstElementChild).toHaveAttribute(
+    expect(listItems[listItems.length - 1]?.firstElementChild).toHaveAttribute(
       "aria-label",
       "ellipsis",
     )

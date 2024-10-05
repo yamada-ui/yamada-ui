@@ -78,7 +78,7 @@ export interface CalendarContext
   ) => void
   setValue: Dispatch<SetStateAction<MaybeValue>>
   setYear: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: MaybeValue
   year: number
   yearRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
@@ -87,7 +87,7 @@ export interface CalendarContext
 export const [CalendarProvider, useCalendarContext] =
   createContext<CalendarContext>({
     name: "CalendarContext",
-    strict: false,
+    errorMessage: `useCalendarContext returned is 'undefined'. Seems you forgot to wrap the components in "<Calendar />"`,
   })
 
 export interface UseCalendarProps<Y extends MaybeValue = Date> {
@@ -431,8 +431,6 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
     if (isMulti || isRange) return
 
-    if (!value) return
-
     const year = value.getFullYear()
 
     if (type === "year") {
@@ -486,9 +484,9 @@ export const useCalendar = <Y extends MaybeValue = Date>({
           if (!isMulti) {
             return value?.getMonth() === month && value?.getDate() === date
           } else {
-            return value?.some(
+            return value.some(
               (value) =>
-                value?.getMonth() === month && value.getDate() === date,
+                value?.getMonth() === month && value?.getDate() === date,
             )
           }
         })

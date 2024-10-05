@@ -63,11 +63,13 @@ export const UserCharts = memo(
             const { approved, comments, issues, pullRequests, total } =
               prevScore
 
-            result[user].prevScore.total += total
-            result[user].prevScore.comments += comments
-            result[user].prevScore.issues += issues
-            result[user].prevScore.pullRequests += pullRequests
-            result[user].prevScore.approved += approved
+            if (result[user]) {
+              result[user].prevScore.total += total
+              result[user].prevScore.comments += comments
+              result[user].prevScore.issues += issues
+              result[user].prevScore.pullRequests += pullRequests
+              result[user].prevScore.approved += approved
+            }
           })
         })
 

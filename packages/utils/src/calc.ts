@@ -23,7 +23,7 @@ function divide(...args: Operand[]) {
 }
 
 function negate(value: Operand) {
-  if (value != null && !isNaN(parseFloat(value.toString())))
+  if (!isNaN(parseFloat(value.toString())))
     return String(value).startsWith("-") ? String(value).slice(1) : `-${value}`
 
   return multiply(value, -1)

@@ -7,7 +7,7 @@ import { useId } from "react"
 import { useSelectContext, useSelectOption } from "./use-select"
 
 interface OptionOptions {
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface OptionProps extends UseSelectOptionProps, OptionOptions {}

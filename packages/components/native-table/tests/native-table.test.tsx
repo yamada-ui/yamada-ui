@@ -59,7 +59,7 @@ describe("<NativeTable />", () => {
     await a11y(<Table />)
   })
 
-  test("should render a table with provided props", async () => {
+  test("should render a table with provided props", () => {
     render(
       <Table
         colorScheme="gray"

@@ -43,7 +43,7 @@ export const useFocusOnHide = (
 
     if (preventReturnFocus(containerRef)) return
 
-    const el = focusRef?.current || containerRef.current
+    const el = focusRef.current || containerRef.current
 
     if (el) {
       requestAnimationFrame(() => {
@@ -96,7 +96,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
 
       if (tabbableEls.length > 0)
         requestAnimationFrame(() => {
-          tabbableEls[0].focus({ preventScroll })
+          tabbableEls[0]?.focus({ preventScroll })
         })
     }
   }, [visible, preventScroll, element, focusRef])

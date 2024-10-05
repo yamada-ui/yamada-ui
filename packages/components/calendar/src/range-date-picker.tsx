@@ -134,7 +134,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       onClose,
     } = useRangeDatePicker(computedProps)
 
-    const [startValue, endValue] = value ?? []
+    const [startValue, endValue] = value
 
     h ??= height
     minH ??= minHeight

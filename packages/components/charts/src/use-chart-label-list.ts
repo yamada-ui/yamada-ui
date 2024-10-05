@@ -16,7 +16,7 @@ export interface UseChartLabelListOptions {
 }
 
 interface UseChartLabelListProps extends UseChartLabelListOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartLabelList = ({
@@ -42,7 +42,7 @@ export const useChartLabelList = ({
     Omit<Recharts.LabelListProps<Dict>, "ref">
   > = useCallback(
     ({ className, index, ...props }, ref = null) => {
-      const { className: propClassName, ...rest } = propList[index]
+      const { className: propClassName, ...rest } = propList[index] ?? {}
 
       return {
         ref,

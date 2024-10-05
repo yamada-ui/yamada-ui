@@ -6,6 +6,7 @@ import {
   renderHook,
   screen,
 } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
 
@@ -91,8 +92,8 @@ describe("<RangeSlider />", () => {
     const sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     const filledTrack = container.querySelector(".ui-slider__track-filled")
 
-    expect(sliderThumbs[0].id).toContain("-0")
-    expect(sliderThumbs[1].id).toContain("-1")
+    expect(sliderThumbs[0]?.id).toContain("-0")
+    expect(sliderThumbs[1]?.id).toContain("-1")
 
     expect(filledTrack).toHaveStyle("right: 0%")
   })
@@ -137,7 +138,7 @@ describe("<RangeSlider />", () => {
       render(<RangeSlider max={max} min={min} />)
 
     const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(() => {})
+    consoleSpy.mockImplementation(noop)
 
     expect(renderWithInvalidProps).toThrow(
       "Do not assign a number less than 'min' to 'max'",
@@ -181,51 +182,51 @@ describe("<RangeSlider />", () => {
     const sliderThumbs = screen.getAllByRole("slider")
     const sliderInputs = container.getElementsByTagName("input")
 
-    let sliderThumb = sliderThumbs[1]
+    let sliderThumb = sliderThumbs[1]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
-    expect(Number(sliderInputs[1].value)).toBe(60)
+    expect(Number(sliderInputs[1]?.value)).toBe(60)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
-    expect(Number(sliderInputs[1].value)).toBe(60)
+    expect(Number(sliderInputs[1]?.value)).toBe(60)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
-    expect(Number(sliderInputs[1].value)).toBe(50 + tenStep)
+    expect(Number(sliderInputs[1]?.value)).toBe(50 + tenStep)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
-    expect(Number(sliderInputs[1].value)).toBe(Number(sliderInputs[0].value))
+    expect(Number(sliderInputs[1]?.value)).toBe(Number(sliderInputs[0]?.value))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
-    expect(Number(sliderInputs[1].value)).toBe(max)
+    expect(Number(sliderInputs[1]?.value)).toBe(max)
 
-    sliderThumb = sliderThumbs[0]
+    sliderThumb = sliderThumbs[0]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
-    expect(Number(sliderInputs[0].value)).toBe(10)
+    expect(Number(sliderInputs[0]?.value)).toBe(10)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
-    expect(Number(sliderInputs[0].value)).toBe(10)
+    expect(Number(sliderInputs[0]?.value)).toBe(10)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
-    expect(Number(sliderInputs[0].value)).toBe(0 + tenStep)
+    expect(Number(sliderInputs[0]?.value)).toBe(0 + tenStep)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
-    expect(Number(sliderInputs[0].value)).toBe(min)
+    expect(Number(sliderInputs[0]?.value)).toBe(min)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
-    expect(Number(sliderInputs[0].value)).toBe(Number(sliderInputs[1].value))
+    expect(Number(sliderInputs[0]?.value)).toBe(Number(sliderInputs[1]?.value))
   })
 
   test("key down for keys not in the list should do nothing", async () => {
@@ -235,8 +236,8 @@ describe("<RangeSlider />", () => {
       <RangeSlider defaultValue={[0, 50]} max={max} min={min} step={10} />,
     )
 
-    const sliderThumb = screen.getAllByRole("slider")[0]
-    const sliderInput = container.getElementsByTagName("input")[0]
+    const sliderThumb = screen.getAllByRole("slider")[0]!
+    const sliderInput = container.getElementsByTagName("input")[0]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Enter" }))
@@ -331,8 +332,8 @@ describe("<RangeSlider />", () => {
       />,
     )
 
-    const sliderStartThumb = getAllByRole("slider")[0]
-    const sliderEndThumb = getAllByRole("slider")[1]
+    const sliderStartThumb = getAllByRole("slider")[0]!
+    const sliderEndThumb = getAllByRole("slider")[1]!
 
     act(() => {
       fireEvent.focus(sliderStartThumb)

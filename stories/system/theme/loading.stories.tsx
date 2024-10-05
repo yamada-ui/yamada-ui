@@ -19,7 +19,7 @@ export default {
   title: "System / Theme / Loading",
 }
 
-const wait = (ms: number) =>
+const wait = async (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })

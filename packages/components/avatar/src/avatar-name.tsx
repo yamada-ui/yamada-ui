@@ -13,8 +13,9 @@ const defaultFormat = (name: string) => {
     : firstName.charAt(0)
 }
 
-export type AvatarNameProps = HTMLUIProps<"div"> &
-  Pick<AvatarProps, "format" | "name">
+export interface AvatarNameProps
+  extends HTMLUIProps,
+    Pick<AvatarProps, "format" | "name"> {}
 
 export const AvatarName: FC<AvatarNameProps> = ({
   name,

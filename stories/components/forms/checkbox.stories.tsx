@@ -190,14 +190,14 @@ export const indeterminate: Story = () => {
       <VStack gap="sm" pl="md">
         <Checkbox
           isChecked={values[0]}
-          onChange={(e) => setValues([e.target.checked, values[1]])}
+          onChange={(e) => setValues([e.target.checked, values[1]!])}
         >
           孫悟空
         </Checkbox>
 
         <Checkbox
           isChecked={values[1]}
-          onChange={(e) => setValues([values[0], e.target.checked])}
+          onChange={(e) => setValues([values[0]!, e.target.checked])}
         >
           孫悟飯
         </Checkbox>

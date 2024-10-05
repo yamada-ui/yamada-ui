@@ -88,7 +88,7 @@ interface SidebarContext {
 }
 
 const [SidebarProvider, useSidebar] = createContext<SidebarContext>({
-  strict: false,
+  name: "SidebarContext",
 })
 
 export type SidebarProps = {

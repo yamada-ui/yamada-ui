@@ -29,7 +29,9 @@ const clearIcons = async () => {
   const fileNames = await readdir(DIST_PATH)
 
   await Promise.all(
-    fileNames.map((fileName) => unlink(path.resolve(DIST_PATH, fileName))),
+    fileNames.map(async (fileName) =>
+      unlink(path.resolve(DIST_PATH, fileName)),
+    ),
   )
 }
 
@@ -54,7 +56,7 @@ const getIconNames = async () => {
   return iconNames
 }
 
-const createIcons = (iconNames: string[]) =>
+const createIcons = async (iconNames: string[]) =>
   Promise.all(
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
@@ -105,7 +107,7 @@ const main = async () => {
     return `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`
   })
 
-  let data = [`export * from "./index.types"`, ...chunks].join("\n")
+  let data = [`export type * from "./index.types"`, ...chunks].join("\n")
 
   data = await prettier(data)
 

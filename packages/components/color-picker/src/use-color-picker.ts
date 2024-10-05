@@ -38,7 +38,7 @@ const defaultFormatInput = (value: string) => value
 type ColorSelectorThemeProps = ThemeProps<"ColorSelector">
 
 interface ColorPickerContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: string
 }
 
@@ -186,10 +186,10 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     onChange: onChangeProp,
   })
   const formatRef = useRef<ColorFormat>(
-    format ?? calcFormat(value ?? defaultColor ?? ""),
+    format ?? calcFormat(value || defaultColor || ""),
   )
   const isInputFocused = useRef<boolean>(false)
-  const [inputValue, setInputValue] = useState<string>(value ?? "")
+  const [inputValue, setInputValue] = useState<string>(value || "")
   const {
     isOpen,
     onClose: onInternalClose,

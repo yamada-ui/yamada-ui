@@ -247,7 +247,7 @@ const ControlMenu: FC<ControlMenuProps> = memo(
         </ControlMenuButton>
 
         <MenuList>
-          {items?.map(({ items, ...rest }, index) => (
+          {items.map(({ items, ...rest }, index) => (
             <Fragment key={index}>
               {index ? <MenuDivider /> : null}
 

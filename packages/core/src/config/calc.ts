@@ -10,10 +10,7 @@ import {
 
 const OPERATORS = ["+", "-", "*", "/"]
 
-function getValue(
-  value: string | undefined,
-  fallbackValue: string = "",
-): Transform {
+function getValue(value: string | undefined, fallbackValue = ""): Transform {
   return function (token, theme, ...rest) {
     if (!value) return fallbackValue
 
@@ -27,7 +24,7 @@ function getValue(
       const resolvedToken = `${token}.${value}`
 
       return theme.__cssMap && resolvedToken in theme.__cssMap
-        ? theme.__cssMap[resolvedToken].ref
+        ? theme.__cssMap[resolvedToken]?.ref
         : value
     }
   }
@@ -56,7 +53,7 @@ export function generateCalc(token: ThemeToken): Transform {
           (char, prev, next) => isOperator(`${prev}${char}${next}`),
           true,
         ).map((value) => {
-          if (OPERATORS.includes(value)) return value
+          if (value && OPERATORS.includes(value)) return value
 
           return getValue(value)(token, theme, ...rest)
         })

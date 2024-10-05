@@ -46,7 +46,7 @@ export const UserChart = memo(
       const { period } = useInsights()
       const isEmpty = !period.start && !period.end
 
-      const user = useMemo(() => INSIGHT_USERS[id], [id])
+      const user = useMemo(() => INSIGHT_USERS[id]!, [id])
 
       const data = useMemo(
         () =>

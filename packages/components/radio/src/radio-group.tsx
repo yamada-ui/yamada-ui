@@ -141,6 +141,7 @@ export const useRadioGroup = <
         ref,
         name,
         [isNative ? "checked" : "isChecked"]:
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           value != null ? isChecked : undefined,
         "aria-checked": isChecked,
         onChange,
@@ -261,7 +262,7 @@ export const RadioGroup = forwardRef(
 ) as {
   <Y extends number | string = string>(
     props: RadioGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 RadioGroup.displayName = "RadioGroup"

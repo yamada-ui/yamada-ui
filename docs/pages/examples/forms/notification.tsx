@@ -5,6 +5,7 @@ import {
   Checkbox,
   FormControl,
   HStack,
+  noop,
   RadioGroup,
   Spacer,
   Switch,
@@ -66,7 +67,7 @@ export const Notifications: FC<NotificationsProps> = memo(({ ...rest }) => {
     register,
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form

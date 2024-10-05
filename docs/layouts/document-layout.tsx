@@ -3,7 +3,7 @@ import type { FC, PropsWithChildren } from "react"
 import { Box, Center, Divider, Heading, HStack, VStack } from "@yamada-ui/react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import {
   Breadcrumb,
   EditPageLink,
@@ -33,7 +33,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
 
   return (
     <>
-      <SEO description={description} title={title} />
+      <Seo description={description} title={title} />
 
       <StarBanner />
 

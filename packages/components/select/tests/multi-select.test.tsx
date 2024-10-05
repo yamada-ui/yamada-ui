@@ -266,7 +266,7 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          defaultValue={[items[1].label]}
+          defaultValue={["option2"]}
           items={items}
           omitSelectedValues
         />,
@@ -344,7 +344,7 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          defaultValue={[items[1].label]}
+          defaultValue={["option2"]}
           items={items}
           omitSelectedValues
         />,
@@ -384,7 +384,7 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          defaultValue={[items[0].label]}
+          defaultValue={["option1"]}
           items={items}
           omitSelectedValues
         />,

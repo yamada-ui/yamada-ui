@@ -149,7 +149,7 @@ export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
 
 export const getBreakpointValue =
   <T>(values: ResponsiveObject<T> = {}) =>
-  (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
+  (theme: StyledTheme | undefined, breakpoint: Theme["breakpoints"]): T => {
     if (!theme) throw Error("getBreakpointValue: `theme` is undefined.")
 
     const breakpoints = theme.__breakpoints?.keys
@@ -162,7 +162,7 @@ export const getBreakpointValue =
     for (let i = currentIndex; 0 < i; i--) {
       const nextBreakpoint = breakpoints[i]
 
-      if (values.hasOwnProperty(nextBreakpoint)) {
+      if (nextBreakpoint && values.hasOwnProperty(nextBreakpoint)) {
         return values[nextBreakpoint] as T
       }
     }

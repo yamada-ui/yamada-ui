@@ -2,6 +2,7 @@ import { build } from "esbuild"
 import { realpathSync } from "fs"
 import nodeEval from "node-eval"
 import { Script } from "vm"
+import { isObject } from "./assertion"
 
 export const getModule = async (file: string, cwd: string) => {
   const result = await build({
@@ -16,13 +17,15 @@ export const getModule = async (file: string, cwd: string) => {
     sourcemap: false,
     write: false,
   })
-  const { text: code } = result.outputFiles[0]
-  const dependencies = result.metafile
+  const { text: code } = result.outputFiles[0] ?? {}
+  const dependencies = isObject(result.metafile)
     ? Object.keys(result.metafile.inputs)
     : []
 
   try {
     const realFileName = realpathSync.native(file)
+
+    if (!code) throw new Error("code is undefined")
 
     const script = new Script(code, { filename: realFileName })
     const mod = { exports: {} }

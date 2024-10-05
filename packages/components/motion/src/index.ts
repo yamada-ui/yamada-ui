@@ -1,7 +1,7 @@
 export * from "./factory"
 export * from "./forward-ref"
 export { Motion } from "./motion"
-export * from "./motion.types"
+export type * from "./motion.types"
 export * from "./utils"
 export {
   AcceleratedAnimation,

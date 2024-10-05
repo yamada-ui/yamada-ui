@@ -100,7 +100,7 @@ const transformedTheme = transformTheme(theme, config) as StyledTheme
 
 describe("var", () => {
   describe("useCreateVars", () => {
-    test("returns styles with theme values", async () => {
+    test("returns styles with theme values", () => {
       const { result } = renderHook(
         () => useCreateVars({ color: "primary" }, ["color"]),
         {

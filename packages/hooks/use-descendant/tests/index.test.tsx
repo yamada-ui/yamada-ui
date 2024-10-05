@@ -70,8 +70,8 @@ describe("useDescendant", () => {
     render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     expect(descendants.count()).toBe(2)
-    expect(descendants.indexOf(descendants.values()[0].node)).toBe(0)
-    expect(descendants.indexOf(descendants.values()[1].node)).toBe(1)
+    expect(descendants.indexOf(descendants.values()[0]?.node)).toBe(0)
+    expect(descendants.indexOf(descendants.values()[1]?.node)).toBe(1)
   })
 
   test("Retrieve of valid indexes and values", () => {
@@ -92,9 +92,9 @@ describe("useDescendant", () => {
 
     expect(descendants.count()).toBe(3)
     expect(descendants.enabledCount()).toBe(2)
-    expect(descendants.enabledIndexOf(descendants.values()[0].node)).toBe(0)
-    expect(descendants.enabledIndexOf(descendants.values()[1].node)).toBe(1)
-    expect(descendants.enabledIndexOf(descendants.values()[2].node)).toBe(-1)
+    expect(descendants.enabledIndexOf(descendants.values()[0]?.node)).toBe(0)
+    expect(descendants.enabledIndexOf(descendants.values()[1]?.node)).toBe(1)
+    expect(descendants.enabledIndexOf(descendants.values()[2]?.node)).toBe(-1)
   })
 
   test("Value retrieval using filters", () => {
@@ -117,7 +117,7 @@ describe("useDescendant", () => {
     const filter: FilterDescendant = (descendant) => descendant.id === "a"
 
     expect(descendants.values(filter)).toHaveLength(1)
-    expect(descendants.values(filter)[0].id).toBe("a")
+    expect(descendants.values(filter)[0]?.id).toBe("a")
   })
 
   test("Retrieve of next and previous values", () => {
@@ -131,8 +131,8 @@ describe("useDescendant", () => {
 
     render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
-    expect(descendants.nextValue(2)?.node).toBe(descendants.values()[0].node)
-    expect(descendants.prevValue(0)?.node).toBe(descendants.values()[2].node)
+    expect(descendants.nextValue(2)?.node).toBe(descendants.values()[0]?.node)
+    expect(descendants.prevValue(0)?.node).toBe(descendants.values()[2]?.node)
   })
 
   test("Retrieve of valid next and previous values", () => {
@@ -153,10 +153,10 @@ describe("useDescendant", () => {
     )
 
     expect(descendants.enabledNextValue(0)?.node).toBe(
-      descendants.values()[2].node,
+      descendants.values()[2]?.node,
     )
     expect(descendants.enabledPrevValue(2)?.node).toBe(
-      descendants.values()[0].node,
+      descendants.values()[0]?.node,
     )
   })
 
@@ -171,8 +171,8 @@ describe("useDescendant", () => {
 
     render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
-    expect(descendants.firstValue()?.node).toBe(descendants.values()[0].node)
-    expect(descendants.lastValue()?.node).toBe(descendants.values()[2].node)
+    expect(descendants.firstValue()?.node).toBe(descendants.values()[0]?.node)
+    expect(descendants.lastValue()?.node).toBe(descendants.values()[2]?.node)
   })
 
   test("Retrieve of valid first and last values", () => {
@@ -194,10 +194,10 @@ describe("useDescendant", () => {
     )
 
     expect(descendants.enabledFirstValue()?.node).toBe(
-      descendants.values()[1].node,
+      descendants.values()[1]?.node,
     )
     expect(descendants.enabledLastValue()?.node).toBe(
-      descendants.values()[2].node,
+      descendants.values()[2]?.node,
     )
   })
 

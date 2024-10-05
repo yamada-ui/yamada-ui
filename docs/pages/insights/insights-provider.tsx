@@ -13,5 +13,4 @@ export interface InsightsContext {
 
 export const [InsightsProvider, useInsights] = createContext<InsightsContext>({
   name: "InsightsContext",
-  strict: false,
 })

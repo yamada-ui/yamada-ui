@@ -75,7 +75,7 @@ export function transitionEnter(transition?: Transition) {
     return {
       ...(transition ?? MOTION_TRANSITION_DEFAULTS.enter),
       ...(duration
-        ? { duration: isNumber(duration) ? duration : duration?.enter }
+        ? { duration: isNumber(duration) ? duration : duration.enter }
         : {}),
       delay: isNumber(delay) ? delay : delay?.enter,
     }
@@ -90,7 +90,7 @@ export function transitionExit(transition?: Transition) {
     return {
       ...(transition ?? MOTION_TRANSITION_DEFAULTS.exit),
       ...(duration
-        ? { duration: isNumber(duration) ? duration : duration?.exit }
+        ? { duration: isNumber(duration) ? duration : duration.exit }
         : {}),
       delay: isNumber(delay) ? delay : delay?.exit,
     }

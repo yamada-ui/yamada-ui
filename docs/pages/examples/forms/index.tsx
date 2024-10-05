@@ -72,6 +72,6 @@ export const Form: FC<FormProps> = ({ setTypeRef }) => {
     case "display":
       return <Display />
     default:
-      return <></>
+      return null
   }
 }

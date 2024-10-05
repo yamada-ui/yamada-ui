@@ -20,15 +20,19 @@ export const basic: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, color]) => (
-          <ColorSwatch key={key} color={color} />
-        ))}
+        {Object.entries(defaultTheme.colors.whiteAlpha ?? {}).map(
+          ([key, color]) => (
+            <ColorSwatch key={key} color={color} />
+          ),
+        )}
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.blackAlpha).map(([key, color]) => (
-          <ColorSwatch key={key} color={color} />
-        ))}
+        {Object.entries(defaultTheme.colors.blackAlpha ?? {}).map(
+          ([key, color]) => (
+            <ColorSwatch key={key} color={color} />
+          ),
+        )}
       </Wrap>
     </>
   )

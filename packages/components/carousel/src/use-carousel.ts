@@ -39,7 +39,7 @@ interface CarouselContext {
   selectedIndex: number
   slideSize: number | string
   slidesToScroll: number
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [CarouselProvider, useCarouselContext] =
@@ -402,7 +402,7 @@ export interface UseCarouselSlideProps {
 export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const { selectedIndex, slidesToScroll } = useCarouselContext()
 
-  index = Math.floor((index ?? 0) / (slidesToScroll ?? 1))
+  index = Math.floor((index ?? 0) / slidesToScroll)
 
   const isSelected = index === selectedIndex
 

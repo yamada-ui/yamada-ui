@@ -1392,7 +1392,7 @@ export {
   IndentIncrease,
   IndentIncrease as IndentIncreaseIcon,
 } from "./indent-increase"
-export * from "./index.types"
+export type * from "./index.types"
 export { IndianRupee, IndianRupee as IndianRupeeIcon } from "./indian-rupee"
 export { Infinity, Infinity as InfinityIcon } from "./infinity"
 export { Info, Info as InfoIcon } from "./info"

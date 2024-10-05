@@ -56,7 +56,7 @@ export type TableContext = Omit<UseTableReturn, "getTableProps">
 
 export const [TableProvider, useTableContext] = createContext<TableContext>({
   name: "TableContext",
-  strict: false,
+  errorMessage: `useTableContext returned is 'undefined'. Seems you forgot to wrap the components in "<Table />"`,
 })
 
 export interface PropsColumnDef {

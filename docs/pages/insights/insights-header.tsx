@@ -99,7 +99,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
         onChange(INSIGHT_USER_IDS)
       } else if (type === "maintainers") {
         onChange(INSIGHT_MAINTAINERS_IDS)
-      } else if (type === "members") {
+      } else {
         onChange(INSIGHT_MEMBERS_IDS)
       }
       onClose()
@@ -239,7 +239,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       const value: [Date, Date] = [
         dayjs()
           .tz()
-          .subtract(parseInt(count), unit as ManipulateType)
+          .subtract(parseInt(count ?? ""), unit as ManipulateType)
           .toDate(),
         dayjs().tz().subtract(1, "d").toDate(),
       ]

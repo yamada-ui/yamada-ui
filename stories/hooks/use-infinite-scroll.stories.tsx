@@ -8,6 +8,7 @@ import {
   Container,
   Heading,
   Loading,
+  noop,
   Text,
   useInfiniteScroll,
 } from "@yamada-ui/react"
@@ -22,7 +23,7 @@ export default meta
 export const basic = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -61,12 +62,12 @@ export const basic = () => {
 
 export const withRoot = () => {
   const rootRef = useRef<HTMLDivElement>(null)
-  const resetRef = useRef<() => void>(() => {})
+  const resetRef = useRef<() => void>(noop)
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
     resetRef,
     rootRef,
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -118,7 +119,7 @@ export const withRootMargin = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
     rootMargin: "300px 0px 0px 0px",
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -159,7 +160,7 @@ export const withThreshold = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
     threshold: 1,
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -200,7 +201,7 @@ export const withInitialLoad = () => {
   const [count, setCount] = useState<number>(0)
   const { ref, isFinish } = useInfiniteScroll({
     initialLoad: true,
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)
@@ -241,7 +242,7 @@ export const isReverse = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, isFinish } = useInfiniteScroll({
     isReverse: true,
-    onLoad: async ({ finish, index }) => {
+    onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
       setCount((prev) => prev + 50)

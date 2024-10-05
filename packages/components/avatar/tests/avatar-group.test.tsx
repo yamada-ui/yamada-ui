@@ -31,7 +31,7 @@ describe("<AvatarGroup />", () => {
     expect(moreLabel).toBeInTheDocument()
   })
 
-  test("does not render a number avatar showing count of truncated avatars if max is equal to avatars given", async () => {
+  test("does not render a number avatar showing count of truncated avatars if max is equal to avatars given", () => {
     const { container } = render(
       <AvatarGroup max={4}>
         <Avatar />
@@ -44,7 +44,7 @@ describe("<AvatarGroup />", () => {
     expect(moreLabel).not.toBeInTheDocument()
   })
 
-  test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", async () => {
+  test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", () => {
     const { container } = render(
       <AvatarGroup max={6}>
         <Avatar />

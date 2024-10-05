@@ -1,6 +1,7 @@
 import type * as CSS from "csstype"
 import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import * as p from "@clack/prompts"
+import { isUndefined } from "@yamada-ui/utils"
 import c from "chalk"
 import { writeFile } from "fs/promises"
 import { glob } from "glob"
@@ -73,7 +74,7 @@ const getCSSProperties = (doc: Document) => {
     )
     .map(({ href, textContent }) => {
       const prop = textContent?.includes("-")
-        ? toCamelCase(textContent ?? "")
+        ? toCamelCase(textContent)
         : (textContent ?? "")
 
       return {
@@ -239,10 +240,15 @@ const main = async () => {
       },
     )
 
-    const styles = excludedProperties.map((property) => {
-      const { type, deprecated } = cssTypes[property.prop] ?? {}
-      return { ...property, type, deprecated }
-    })
+    const styles = excludedProperties
+      .map((property) => {
+        const { type, deprecated = false } = cssTypes[property.prop] ?? {}
+
+        if (!type) return
+
+        return { ...property, type, deprecated }
+      })
+      .filter((style) => !isUndefined(style))
 
     s.start(`Writing file "${OUT_PATH}"`)
 

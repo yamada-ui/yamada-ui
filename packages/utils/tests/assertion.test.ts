@@ -11,6 +11,7 @@ import {
   isString,
   isUndefined,
   isUnit,
+  noop,
 } from "../src"
 
 describe("Assertion", () => {
@@ -141,7 +142,7 @@ describe("Assertion", () => {
 
   describe("isFunction", () => {
     test("Returns true for functions", () => {
-      expect(isFunction(() => {})).toBeTruthy()
+      expect(isFunction(noop)).toBeTruthy()
     })
 
     test("Returns false for non-functions", () => {

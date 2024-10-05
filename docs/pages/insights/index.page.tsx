@@ -7,7 +7,7 @@ import type {
 import type { InsightsContext } from "./insights-provider"
 import { useQuery } from "@tanstack/react-query"
 import { isString, useLoading, VStack } from "@yamada-ui/react"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import { PageProvider, useI18n } from "contexts"
 import dayjs from "dayjs"
 import { TopLayout } from "layouts"
@@ -125,7 +125,7 @@ const Page: NextPage<PageProps> = ({
     <PageProvider {...{ currentVersion, documentTree }}>
       <InsightsProvider value={value}>
         <TopLayout>
-          <SEO
+          <Seo
             description={t("insights.description")}
             disableTitleTemplate
             title={t("insights.title")}

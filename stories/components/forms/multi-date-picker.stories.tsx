@@ -42,7 +42,7 @@ export const withChildren: Story = () => {
         {({ value, onClose }) => (
           <VStack mt="sm">
             <Button isDisabled={!value} onClick={onClose}>
-              Submit{value ? ` ${value.length} dates` : ""}
+              Submit {value.length} dates
             </Button>
           </VStack>
         )}

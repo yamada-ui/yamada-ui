@@ -54,18 +54,18 @@ const App: FC<ContainerProps> = ({ children }) => {
   return <Container>{children}</Container>
 }
 
-type ColorPalletsProps = {
+interface ColorPalletsProps {
   name: string
   colors: Dict<Dict>
 }
 
 export const ColorPallets: FC<ColorPalletsProps> = ({ name, colors }) => {
-  return Object.entries(colors[name]).map(([tone, value]) => (
+  return Object.entries(colors[name] ?? {}).map(([tone, value]) => (
     <ColorPallet key={tone} {...{ name, tone, value }} />
   ))
 }
 
-type ColorPalletProps = {
+interface ColorPalletProps {
   name: string
   value: string
   tone?: string
@@ -140,7 +140,7 @@ export const PropControl = <K extends PropControlComponent = "Switch">({
   )
 }
 
-type PropControlItemProps<K extends PropControlComponent> = {
+interface PropControlItemProps<K extends PropControlComponent> {
   component: K
   item: PropControlItem<K>
 }

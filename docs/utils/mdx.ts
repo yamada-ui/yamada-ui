@@ -17,7 +17,7 @@ const rehypeCodeMeta: Plugin = () => (tree) => {
     props.forEach((prop) => {
       const [key, value] = prop.split("=")
 
-      node.properties[key] = value
+      if (key) node.properties[key] = value
     })
   })
 }
@@ -91,14 +91,14 @@ const getValidChildren = (
 }
 
 const getAttributes = (
-  content: string = "",
+  content = "",
 ): { attributes: any[]; resolvedContent: string } => {
   const reg = /(\w+)=([^\s]+)(?=\s|$)/g
 
   const attributes = [...content.matchAll(reg)].map(([, name, value]) => ({
     type: "mdxJsxAttribute",
     name,
-    value: value.trim(),
+    value: value?.trim(),
   }))
 
   const resolvedContent = content.replace(reg, "").replace(/^\s+/, "")

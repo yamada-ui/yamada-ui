@@ -73,11 +73,14 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       duration: duration ?? dur,
       __css: {
         ...styles,
-        vars: mergeVars(styles?.vars, [
+        vars: mergeVars(styles.vars, [
           {
             name: "color",
             token: "colors",
-            value: colorProp ?? (color as string) ?? `${colorScheme}.500`,
+            value:
+              colorProp ??
+              (color as string | undefined) ??
+              `${colorScheme}.500`,
           },
           {
             name: "secondary-color",

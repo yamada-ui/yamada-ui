@@ -41,7 +41,7 @@ describe("<SaturationSlider />", () => {
     }
   })
 
-  test("SaturationSlider renders correctly", async () => {
+  test("SaturationSlider renders correctly", () => {
     render(<SaturationSlider data-testid="saturationSlider" />)
 
     const alphaSlider = screen.getByTestId("saturationSlider")

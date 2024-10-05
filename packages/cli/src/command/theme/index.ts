@@ -34,7 +34,7 @@ const ORG_NAME = "yamada-ui"
 const REPO_NAME = "yamada-ui"
 const DEFAULT_BRANCH_NAME = "main"
 
-const isOnline = (): Promise<boolean> => {
+const isOnline = async (): Promise<boolean> => {
   return new Promise((resolve) => {
     dns.lookup("github.com", (err) => {
       if (err && err.code === "ENOTFOUND") {
@@ -80,7 +80,7 @@ const getSource = async (branch: string) => {
 const getFileMap = async (cwd: string, branch: string) => {
   const source = await getSource(branch)
 
-  const fileMap: Map<string, string> = new Map()
+  const fileMap = new Map<string, string>()
 
   const targetPath = `${REPO_NAME}-${branch.replace("/", "-")}/packages/theme/src`
 

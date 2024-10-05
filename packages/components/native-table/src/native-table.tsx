@@ -8,7 +8,7 @@ import {
 import { createContext, cx } from "@yamada-ui/utils"
 
 interface TableStyleContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [TableStyleProvider, useTableStyles] =

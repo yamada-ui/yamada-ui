@@ -1,9 +1,10 @@
+import type { DocumentContext } from 'next/document'
 import { ColorModeScript, ThemeSchemeScript } from '@yamada-ui/react'
-import NextDocument, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
 import { config } from 'theme'
 
 class Document extends NextDocument {
-  static getInitialProps(props: DocumentContext) {
+  static async getInitialProps(props: DocumentContext) {
     return NextDocument.getInitialProps(props)
   }
 

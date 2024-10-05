@@ -1,7 +1,7 @@
 import type { ColorMode, ColorModeWithSystem } from "../css"
 import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
-const hasSupport = !!globalThis?.document
+const hasSupport = !!(globalThis.document as Document | undefined)
 
 export interface ColorModeManager {
   type: "cookie" | "localStorage"

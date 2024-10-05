@@ -8,6 +8,7 @@ import {
   Heading,
   InfiniteScrollArea,
   Loading,
+  noop,
   Text,
 } from "@yamada-ui/react"
 import { useRef, useState } from "react"
@@ -21,7 +22,7 @@ const meta: Meta<typeof InfiniteScrollArea> = {
 
 export default meta
 
-const wait = (ms: number) =>
+const wait = async (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
@@ -32,7 +33,7 @@ export const basic: Story = () => {
   return (
     <InfiniteScrollArea
       loading={<Loading fontSize="2xl" />}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -63,7 +64,7 @@ export const basic: Story = () => {
 export const withRoot: Story = () => {
   const rootRef = useRef<HTMLDivElement>(null)
   const [count, setCount] = useState<number>(50)
-  const resetRef = useRef<() => void>(() => {})
+  const resetRef = useRef<() => void>(noop)
 
   return (
     <>
@@ -79,7 +80,7 @@ export const withRoot: Story = () => {
           loading={<Loading fontSize="2xl" />}
           resetRef={resetRef}
           rootRef={rootRef}
-          onLoad={async ({ finish, index }) => {
+          onLoad={({ finish, index }) => {
             console.log("load", index)
 
             setCount((prev) => prev + 50)
@@ -118,7 +119,7 @@ export const withRootMargin: Story = () => {
     <InfiniteScrollArea
       loading={<Loading fontSize="2xl" />}
       rootMargin="300px 0px 0px 0px"
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -153,7 +154,7 @@ export const withThreshold: Story = () => {
     <InfiniteScrollArea
       loading={<Loading fontSize="2xl" />}
       threshold={1}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -229,7 +230,7 @@ export const withOverflow: Story = () => {
       overflowY="auto"
       p="md"
       rounded="md"
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -266,7 +267,7 @@ export const withOrientation: Story = () => {
       overflowX="auto"
       p="md"
       rounded="md"
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -299,7 +300,7 @@ export const withStartIndex: Story = () => {
     <InfiniteScrollArea
       loading={<Loading fontSize="2xl" />}
       startIndex={3}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -334,7 +335,7 @@ export const withFinish: Story = () => {
     <InfiniteScrollArea
       finish={<>Finished</>}
       loading={<Loading fontSize="2xl" />}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -369,7 +370,7 @@ export const isReverse: Story = () => {
     <InfiniteScrollArea
       isReverse
       loading={<Loading fontSize="2xl" />}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)
@@ -411,7 +412,7 @@ export const isDisabled: Story = () => {
         overflowY="auto"
         p="md"
         rounded="md"
-        onLoad={async ({ finish, index }) => {
+        onLoad={({ finish, index }) => {
           console.log("load", index)
 
           setCount((prev) => prev + 50)
@@ -448,7 +449,7 @@ export const isDisabled: Story = () => {
 }
 
 export const useReset: Story = () => {
-  const resetRef = useRef<() => void>(() => {})
+  const resetRef = useRef<() => void>(noop)
   const [count, setCount] = useState<number>(50)
 
   return (
@@ -461,7 +462,7 @@ export const useReset: Story = () => {
         p="md"
         resetRef={resetRef}
         rounded="md"
-        onLoad={async ({ finish, index }) => {
+        onLoad={({ finish, index }) => {
           console.log("load", index)
 
           setCount((prev) => prev + 50)
@@ -535,7 +536,7 @@ export const customLoading: Story = () => {
   return (
     <InfiniteScrollArea
       loading={<>Loading…</>}
-      onLoad={async ({ finish, index }) => {
+      onLoad={({ finish, index }) => {
         console.log("load", index)
 
         setCount((prev) => prev + 50)

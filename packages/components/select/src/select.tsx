@@ -144,7 +144,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
           const { items = [], label, ...props } = item
 
           return (
-            <OptionGroup key={i} label={label ?? ""} {...props}>
+            <OptionGroup key={i} label={label} {...props}>
               {items.map(({ label, value, ...props }, i) => (
                 <Option key={i} value={value} {...props}>
                   {label}

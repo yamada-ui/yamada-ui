@@ -19,7 +19,7 @@ const hasTransform = (
 ) => !!transforms?.some(({ transform }) => transform === targetTransform)
 
 const addType = (result: string, value: string) =>
-  />$/.test(result) ? result.replace(/>$/, `${value}>`) : result + value
+  result.endsWith(">") ? result.replace(/>$/, `${value}>`) : result + value
 
 const generateType = ({
   type,

@@ -263,7 +263,7 @@ const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
       return <Smile fontSize="2xl" {...rest} />
 
     default:
-      return <></>
+      return null
   }
 })
 

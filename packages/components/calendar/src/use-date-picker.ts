@@ -15,13 +15,13 @@ import { isSameDate } from "./calendar-utils"
 import { useCalendarPicker } from "./use-calendar-picker"
 
 interface DatePickerContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [DatePickerProvider, useDatePickerContext] =
   createContext<DatePickerContext>({
     name: "DatePickerContext",
-    strict: false,
+    errorMessage: `useDatePickerContext returned is 'undefined'. Seems you forgot to wrap the components in "<DatePicker />"`,
   })
 
 interface CalendarProps

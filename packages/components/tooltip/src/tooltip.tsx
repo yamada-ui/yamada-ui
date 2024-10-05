@@ -393,7 +393,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
                   {...(animation !== "none"
                     ? getTooltipProps(animation, duration)
                     : {})}
-                  animate={isOpen ? "enter" : "exit"}
+                  animate="enter"
                   exit="exit"
                   initial="exit"
                   __css={css}

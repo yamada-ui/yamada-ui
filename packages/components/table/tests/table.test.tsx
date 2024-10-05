@@ -203,7 +203,7 @@ describe("<PagingTable />", () => {
     expect(screen.getByRole("button", { name: "Next" })).toBeDisabled()
   })
 
-  test("renders custom pagination when children is not a function", async () => {
+  test("renders custom pagination when children is not a function", () => {
     render(
       <PagingTable columns={columns} data={data}>
         <div>customPagination</div>
@@ -222,7 +222,7 @@ describe("<PagingTable />", () => {
     { expected: "xs", size: "sm" },
   ])(
     "renders Select component with correct size when table size is $size",
-    async ({ expected, size }) => {
+    ({ expected, size }) => {
       render(<PagingTable columns={columns} data={data} size={size} />)
       expect(screen.getByText("Goku")).toHaveStyle(
         `font-size: var(--ui-fontSizes-${expected})`,
@@ -294,7 +294,7 @@ describe("<Tbody />", () => {
   test("checkbox can be clicked and toggled", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
     const checkbox = screen.getByLabelText("Select row")
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(checkbox).not.toBeChecked()
     })
     await user.click(checkbox)
@@ -306,7 +306,7 @@ describe("<Tbody />", () => {
       <Table columns={columns} data={data} rowsClickSelect />,
     )
     const row = screen.getByRole("row", { name: /Goku/i })
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(row).not.toHaveAttribute("aria-selected")
     })
     await user.click(row)
@@ -350,7 +350,7 @@ describe("Sort", () => {
   test("column header click cycles through sort states", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
     const nameHeader = screen.getByText("Name")
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(nameHeader).toHaveAttribute("aria-sort", "none")
     })
     await user.click(nameHeader)

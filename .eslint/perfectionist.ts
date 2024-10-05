@@ -63,10 +63,9 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
   files: sharedFiles,
   plugins: { perfectionist: perfectionistPlugin },
   rules: {
-    "perfectionist/sort-array-includes": ["warn", { type }],
-    "perfectionist/sort-exports": ["warn", { type }],
+    "perfectionist/sort-exports": ["error", { type }],
     "perfectionist/sort-imports": [
-      "warn",
+      "error",
       {
         type,
         groups: [
@@ -83,6 +82,8 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
         newlinesBetween: "never",
       },
     ],
+
+    "perfectionist/sort-array-includes": ["warn", { type }],
     "perfectionist/sort-interfaces": [
       "warn",
       {

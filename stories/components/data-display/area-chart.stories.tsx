@@ -1003,8 +1003,8 @@ export const customTooltip: Story = () => {
               justifyContent="space-between"
               w="full"
             >
-              <Text>{value?.name}</Text>
-              <Text color={value?.color}>{value?.value}</Text>
+              <Text>{value.name}</Text>
+              <Text color={value.color}>{value.value}</Text>
             </HStack>
           ))}
         </CardBody>

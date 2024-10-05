@@ -46,7 +46,8 @@ export const createStorage = <T>(type: StorageType, name: string) => {
         if (
           typeof window === "undefined" ||
           !(type in window) ||
-          window[type] === null ||
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+          window[type] == null ||
           skipStorage
         ) {
           return (defaultValue ?? "") as T

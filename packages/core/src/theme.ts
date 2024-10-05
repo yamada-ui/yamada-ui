@@ -191,37 +191,34 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
     })
     const semanticTokenEntries: [string, VariableToken][] = Object.entries(
       flattenObject(semanticTokenMap, { omitKeys, shouldProcess }),
-    ).reduce(
-      (prev, [token, value]) => {
-        if (token.startsWith("colorSchemes.")) {
-          const [, semanticToken, tone] = token.split(".")
+    ).reduce<[string, VariableToken][]>((prev, [token, value]) => {
+      if (token.startsWith("colorSchemes.")) {
+        const [, semanticToken, tone] = token.split(".")
 
-          if (tone) {
-            const enhancedToken = { isSemantic: false, value }
+        if (tone) {
+          const enhancedToken = { isSemantic: false, value }
+
+          prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
+        } else {
+          TONES.forEach((tone) => {
+            const enhancedToken: VariableToken = {
+              isSemantic: true,
+              value: isArray(value)
+                ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
+                : `${value}.${tone}`,
+            }
 
             prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-          } else {
-            TONES.forEach((tone) => {
-              const enhancedToken: VariableToken = {
-                isSemantic: true,
-                value: isArray(value)
-                  ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
-                  : `${value}.${tone}`,
-              }
-
-              prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-            })
-          }
-        } else {
-          const enhancedToken: VariableToken = { isSemantic: true, value }
-
-          prev.push([token, enhancedToken])
+          })
         }
+      } else {
+        const enhancedToken: VariableToken = { isSemantic: true, value }
 
-        return prev
-      },
-      [] as [string, VariableToken][],
-    )
+        prev.push([token, enhancedToken])
+      }
+
+      return prev
+    }, [])
 
     return objectFromEntries<VariableTokens>([
       ...defaultTokenEntries,
@@ -366,7 +363,7 @@ function internalFilterStyle(
 
     result = func(result, keys)
 
-    Object.entries(result ?? {}).forEach(([nestedKey, style]) => {
+    Object.entries(result).forEach(([nestedKey, style]) => {
       const newKeys = keys.filter((key) => key !== nestedKey)
       const newRefs = [...refs, nestedKey]
 
@@ -418,7 +415,7 @@ function onValidFilterStyleKey(keys: string[], isMulti: boolean): boolean {
 export function pickStyle(
   target: ComponentMultiStyle,
   targetKey: string,
-  withProps: boolean = true,
+  withProps = true,
 ): ComponentStyle {
   const result = {} as ComponentStyle
 
@@ -440,7 +437,7 @@ export function pickStyle(
         ).reduce<{ [key: string]: UIStyle }>((prev, [key, value]) => {
           if (isFunction(value)) {
             prev[key] = (props) => value(props)[targetKey] as CSSUIObject
-          } else {
+          } else if (value[targetKey]) {
             prev[key] = value[targetKey]
           }
 

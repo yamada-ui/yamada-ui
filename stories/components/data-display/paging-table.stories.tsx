@@ -25,7 +25,7 @@ const meta: Meta<typeof PagingTable> = {
 
 export default meta
 
-type Data = {
+interface Data {
   id: string
   age: number
   email: string
@@ -33,12 +33,12 @@ type Data = {
   lastName: string
 }
 
-const wait = (ms: number) =>
+const wait = async (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
 
-const createData = (n: number = 100): Data[] => {
+const createData = (n = 100): Data[] => {
   let mergedData: Data[] = []
 
   for (let i = 0; i < n; i++) {

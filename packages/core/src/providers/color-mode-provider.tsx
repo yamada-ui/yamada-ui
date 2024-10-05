@@ -5,6 +5,7 @@ import type { ColorModeManager } from "./color-mode-manager"
 import type { Environment } from "./environment-provider"
 import {
   funcAll,
+  isEmptyObject,
   noop,
   useCallbackRef,
   useSafeLayoutEffect,
@@ -130,7 +131,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   useEffect(() => {
     const managerValue = colorModeManager.get()(storageKey)
 
-    if (managerValue) changeColorMode(managerValue)
+    changeColorMode(managerValue)
   }, [changeColorMode, colorModeManager, storageKey])
 
   const value = useMemo(
@@ -162,12 +163,20 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
  *
  * @see Docs https://yamada-ui.com/hooks/use-color-mode
  */
-export const useColorMode = () => {
+export const useColorMode = (): ColorModeContext => {
   const context = useContext(ColorModeContext)
 
-  return (
-    context ?? { colorMode: "light", forced: false, internalColorMode: "light" }
-  )
+  if (isEmptyObject(context)) {
+    return {
+      changeColorMode: noop,
+      colorMode: "light",
+      forced: false,
+      internalColorMode: "light",
+      toggleColorMode: noop,
+    }
+  } else {
+    return context
+  }
 }
 
 export interface UseSystemColorModeProps {

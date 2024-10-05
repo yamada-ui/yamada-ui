@@ -29,7 +29,7 @@ import {
 const isTargetMenuItem = (target: EventTarget | null) => {
   return (
     isHTMLElement(target) &&
-    !!target?.getAttribute("role")?.startsWith("menuitem")
+    !!target.getAttribute("role")?.startsWith("menuitem")
   )
 }
 

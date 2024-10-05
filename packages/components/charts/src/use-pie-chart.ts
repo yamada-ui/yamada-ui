@@ -107,7 +107,7 @@ export interface UsePieChartOptions {
 }
 
 interface UsePieChartProps extends UsePieChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const usePieChart = ({
@@ -328,7 +328,7 @@ export const usePieChart = ({
     Recharts.CellProps
   > = useCallback(
     ({ className: classNameProp, index, ...props }, ref = null) => {
-      const { className, color } = cellPropList[index]
+      const { className, color } = cellPropList[index] ?? {}
 
       return {
         ref,

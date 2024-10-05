@@ -1,8 +1,8 @@
+import type { ActionType, NodePlopAPI } from "plop"
 import { findPackages } from "find-packages"
 import { readdirSync } from "fs"
 import { appendFile, readFile, writeFile } from "fs/promises"
 import path from "path"
-import { ActionType, NodePlopAPI } from "plop"
 
 const cwd = process.cwd()
 
@@ -15,7 +15,7 @@ const dashCase = (t: string) =>
 const titleCase = (t: string) =>
   t.replace(/[-_](\w)/g, (_, c) => " " + c.toUpperCase())
 const descCase = (t: string) => t.replace(/[-_]/g, " ")
-const validateDashCase = (i: string) => !/[A-Z]/.test(i) && !/_/.test(i)
+const validateDashCase = (i: string) => !/[A-Z]/.test(i) && !i.includes("_")
 
 const components = readdirSync("./packages/components").filter(
   (n) => !n.includes("."),
@@ -31,20 +31,20 @@ export default function plop(plop: NodePlopAPI) {
   plop.setHelper("descCase", (text) => descCase(text))
 
   plop.setActionType("updateReact", async (answers) => {
-    if (!answers) return "Answer not found."
-
     const { packageName } = answers
 
     const [project] = await findPackages(path.join(cwd, "packages", "react"))
 
-    const { manifest } = project
+    const { manifest } = project ?? {}
 
-    manifest.dependencies = {
-      ...manifest.dependencies,
-      [`@yamada-ui/${dashCase(lowerCase(packageName))}`]: "workspace:*",
+    if (manifest?.dependencies) {
+      manifest.dependencies = {
+        ...manifest.dependencies,
+        [`@yamada-ui/${dashCase(lowerCase(packageName))}`]: "workspace:*",
+      }
     }
 
-    project.writeProjectManifest(manifest)
+    if (manifest) project?.writeProjectManifest(manifest)
 
     await appendFile(
       path.join(cwd, "packages", "react", "src", "index.ts"),
@@ -55,8 +55,6 @@ export default function plop(plop: NodePlopAPI) {
   })
 
   plop.setActionType("updateTheme", async (answers) => {
-    if (!answers) return "Answer not found."
-
     const { packageName } = answers
 
     let data = await readFile(

@@ -16,7 +16,7 @@ type AccordionContext = {
   index: number | number[]
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setIndex: Dispatch<SetStateAction<number | number[]>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 } & Pick<AccordionOptions, "icon" | "iconHidden" | "isMultiple" | "isToggle">
 
 export const [AccordionProvider, useAccordionContext] =

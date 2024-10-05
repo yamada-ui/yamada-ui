@@ -79,19 +79,19 @@ describe("useMediaQuery", () => {
     expect(result2.current[0]).toBeTruthy()
   })
 
-  test("should correctly execute listeners", async () => {
+  test("should correctly execute listeners", () => {
     const { result } = renderHook(() =>
       useMediaQuery("(prefers-color-scheme: dark)"),
     )
 
-    await act(async () => {
+    act(() => {
       mock.useMediaQuery("(prefers-color-scheme: dark)")
     })
 
     expect(result.current[0]).toBeTruthy()
   })
 
-  test("should use addEventListener if addListener is not supported", async () => {
+  test("should use addEventListener if addListener is not supported", () => {
     vi.spyOn(window, "matchMedia").mockImplementation(
       (query) =>
         ({

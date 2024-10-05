@@ -394,7 +394,7 @@ export const useEditableControl = () => {
 
 interface EditableContext {
   isEditing: boolean
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   getCancelProps: PropGetter<"button">
   getEditProps: PropGetter<"button">
   getInputProps: PropGetter<"input">

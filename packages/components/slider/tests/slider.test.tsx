@@ -6,6 +6,7 @@ import {
   renderHook,
   screen,
 } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
 import { useSlider } from "../src/slider"
 
@@ -115,7 +116,7 @@ describe("<Slider />", () => {
 
     await act(() => fireEvent.keyDown(slider, { key: "ArrowRight" }))
 
-    expect(Number(sliderInput.value)).toBe(defaultValue + step)
+    expect(Number(sliderInput?.value)).toBe(defaultValue + step)
   })
 
   test("should throw error when max is less than min", () => {
@@ -125,7 +126,7 @@ describe("<Slider />", () => {
     const renderWithInvalidProps = () => render(<Slider max={max} min={min} />)
 
     const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(() => {})
+    consoleSpy.mockImplementation(noop)
 
     expect(renderWithInvalidProps).toThrow(
       "Do not assign a number less than 'min' to 'max'",
@@ -146,24 +147,24 @@ describe("<Slider />", () => {
     const sliderInput = container.getElementsByTagName("input")[0]
 
     await act(() => fireEvent.keyDown(slider, { key: "ArrowRight" }))
-    expect(Number(sliderInput.value)).toBe(10)
+    expect(Number(sliderInput?.value)).toBe(10)
     await act(() => fireEvent.keyDown(slider, { key: "ArrowLeft" }))
-    expect(Number(sliderInput.value)).toBe(0)
+    expect(Number(sliderInput?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(slider, { key: "ArrowUp" }))
-    expect(Number(sliderInput.value)).toBe(10)
+    expect(Number(sliderInput?.value)).toBe(10)
     await act(() => fireEvent.keyDown(slider, { key: "ArrowDown" }))
-    expect(Number(sliderInput.value)).toBe(0)
+    expect(Number(sliderInput?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(slider, { key: "PageUp" }))
-    expect(Number(sliderInput.value)).toBe(0 + tenStep)
+    expect(Number(sliderInput?.value)).toBe(0 + tenStep)
     await act(() => fireEvent.keyDown(slider, { key: "PageDown" }))
-    expect(Number(sliderInput.value)).toBe(0)
+    expect(Number(sliderInput?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(slider, { key: "Home" }))
-    expect(Number(sliderInput.value)).toBe(min)
+    expect(Number(sliderInput?.value)).toBe(min)
     await act(() => fireEvent.keyDown(slider, { key: "End" }))
-    expect(Number(sliderInput.value)).toBe(max)
+    expect(Number(sliderInput?.value)).toBe(max)
   })
 
   test("if SliderTrack, SliderFilledTrack and SliderThumb are rendered", () => {
@@ -216,7 +217,7 @@ describe("<Slider />", () => {
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Enter" }))
-    expect(Number(sliderInput.value)).toBe(0)
+    expect(Number(sliderInput?.value)).toBe(0)
   })
 
   test("should use slider with props", () => {

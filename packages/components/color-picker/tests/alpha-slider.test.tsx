@@ -30,7 +30,7 @@ describe("<AlphaSlider />", () => {
     })
   })
 
-  test("AlphaSlider renders correctly", async () => {
+  test("AlphaSlider renders correctly", () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
 
     const alphaSlider = screen.getByTestId("alphaSlider")
@@ -38,7 +38,7 @@ describe("<AlphaSlider />", () => {
     expect(alphaSlider).toBeInTheDocument()
   })
 
-  test("AlphaSlider renders overlays correctly with default props", async () => {
+  test("AlphaSlider renders overlays correctly with default props", () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
     const thumb = screen.getByRole("slider")
 

@@ -7,6 +7,7 @@ import {
   FormControl,
   HelperMessage,
   Input,
+  noop,
   Text,
   Textarea,
   VStack,
@@ -50,7 +51,7 @@ export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
     rules: { maxLength: 5 },
   })
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form
@@ -131,7 +132,7 @@ export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
 
                 {errors.urls?.[index]?.url?.message ? (
                   <Text color={["danger.500", "danger.400"]} fontSize="sm">
-                    {errors.urls?.[index]?.url?.message}
+                    {errors.urls[index].url.message}
                   </Text>
                 ) : null}
               </Fragment>

@@ -1,4 +1,5 @@
 import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import {
   Accordion,
   AccordionItem,
@@ -346,9 +347,7 @@ describe("<Accordion />", () => {
   })
 
   test("correct warnings should be issued when isMultiple and isToggle", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <Accordion isMultiple isToggle>
@@ -364,9 +363,7 @@ describe("<Accordion />", () => {
   })
 
   test("correct warnings should be issued when isMultiple and defaultIndex is not array", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <Accordion defaultIndex={1} isMultiple>

@@ -127,7 +127,7 @@ export interface UseAreaChartOptions {
 }
 
 interface UseAreaChartProps extends UseAreaChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useAreaChart = ({
@@ -184,7 +184,7 @@ export const useAreaChart = ({
       splitColors.map((color, index) => ({
         name: `area-split-${index}`,
         token: "colors",
-        value: color ?? "transparent",
+        value: color || "transparent",
       })),
     [splitColors],
   )
@@ -272,15 +272,17 @@ export const useAreaChart = ({
 
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {
-      const dataKey = series[0].dataKey as string
+      const dataKey = series[0]?.dataKey as string
 
-      const dataMax = Math.max(...data.map((item) => item[dataKey]))
-      const dataMin = Math.min(...data.map((item) => item[dataKey]))
+      if (dataKey) {
+        const dataMax = Math.max(...data.map((item) => item[dataKey]))
+        const dataMin = Math.min(...data.map((item) => item[dataKey]))
 
-      if (dataMax <= 0) return 0
-      if (dataMin >= 0) return 1
+        if (dataMax <= 0) return 0
+        if (dataMin >= 0) return 1
 
-      return dataMax / (dataMax - dataMin)
+        return dataMax / (dataMax - dataMin)
+      }
     }
 
     return 0.5
@@ -445,11 +447,11 @@ export const useAreaChart = ({
         className,
         activeDot,
         color,
-        dataKey,
+        dataKey = "",
         dot,
         strokeDasharray,
         ...rest
-      } = areaPropsList[index]
+      } = areaPropsList[index] ?? {}
 
       return {
         id,

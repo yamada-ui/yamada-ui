@@ -79,7 +79,7 @@ export const transforms = {
   gradient,
   grid,
   isTruncated: (value: boolean) => {
-    if (value === true) {
+    if (value) {
       return {
         overflow: "hidden",
         textOverflow: "ellipsis",

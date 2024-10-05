@@ -185,7 +185,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 inputProps={getInputProps(inputProps)}
               />
 
-              {isClearable && !!value?.length ? (
+              {isClearable && !!value.length ? (
                 <DatePickerClearIcon
                   {...getIconProps({ clear: true, ...clearIconProps })}
                 />
@@ -275,9 +275,7 @@ export const MultiDatePickerField = forwardRef<
           const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
             ev.stopPropagation()
 
-            setValue((prev) =>
-              prev?.filter((value) => !isSameDate(value, date)),
-            )
+            setValue((prev) => prev.filter((value) => !isSameDate(value, date)))
 
             inputRef.current?.focus()
           }

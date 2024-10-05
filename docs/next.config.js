@@ -15,7 +15,7 @@ const nextConfig = {
   pageExtensions: ["page.jsx", "page.tsx", "api.js", "api.ts"],
   productionBrowserSourceMaps: false,
   reactStrictMode: false,
-  redirects: async () => [
+  redirects: () => [
     {
       destination: "/examples/mail",
       permanent: true,

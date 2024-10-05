@@ -44,7 +44,7 @@ const main = async () => {
     }),
   )
 
-  let data = `export const TAGS: Record<string, string[]> = ${JSON.stringify(tags)}`
+  let data = `export const TAGS: { [key: string]: string[] } = ${JSON.stringify(tags)}`
 
   data = await prettier(data, { parser: "typescript" })
 

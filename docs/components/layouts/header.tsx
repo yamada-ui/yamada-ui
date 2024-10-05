@@ -189,14 +189,12 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
         />
 
-        {CONSTANT.I18N.LOCALES.length > 1 ? (
-          <I18nButton
-            display={{
-              base: "inline-flex",
-              md: !isMobile ? "none" : undefined,
-            }}
-          />
-        ) : null}
+        <I18nButton
+          display={{
+            base: "inline-flex",
+            md: !isMobile ? "none" : undefined,
+          }}
+        />
 
         <ColorModeButton />
 

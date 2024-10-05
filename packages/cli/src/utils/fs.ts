@@ -2,7 +2,10 @@ import fs from "fs"
 
 export const isWriteable = async (directory: string) => {
   try {
-    await fs.promises.access(directory, (fs.constants || fs).W_OK)
+    await fs.promises.access(
+      directory,
+      ("constants" in fs ? fs.constants : fs).W_OK,
+    )
 
     return true
   } catch {

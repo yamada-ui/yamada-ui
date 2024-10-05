@@ -19,7 +19,7 @@ export const RelatedLinks = memo(
 
     const [, dirName] = package_name.split("/")
 
-    const isHook = dirName.startsWith("use-")
+    const isHook = !!dirName?.startsWith("use-")
 
     return (
       <Wrap ref={ref} gap="md" mt="4" {...rest}>

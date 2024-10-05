@@ -10,6 +10,7 @@ import {
   findChild,
   getValidChildren,
   isEmpty,
+  isUndefined,
   isValidElement,
   omitChildren,
 } from "@yamada-ui/utils"
@@ -111,22 +112,27 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
 
     const css: CSSUIObject = { ...styles.container }
 
-    const cancelButtonProps: ButtonProps = isValidElement(cancel)
-      ? { children: cancel }
-      : cancel
-    const otherButtonProps: ButtonProps = isValidElement(other)
-      ? { children: other }
-      : other
-    const successButtonProps: ButtonProps = isValidElement(success)
-      ? { children: success }
-      : success
+    const cancelButtonProps: ButtonProps =
+      isValidElement(cancel) || isUndefined(cancel)
+        ? { children: cancel }
+        : cancel
+    const otherButtonProps: ButtonProps =
+      isValidElement(other) || isUndefined(other) ? { children: other } : other
+    const successButtonProps: ButtonProps =
+      isValidElement(success) || isUndefined(success)
+        ? { children: success }
+        : success
 
-    if (cancelButtonProps && !cancelButtonProps.variant)
-      cancelButtonProps.variant = "ghost"
-    if (otherButtonProps && !otherButtonProps.colorScheme)
+    if (!cancelButtonProps.variant) cancelButtonProps.variant = "ghost"
+    if (!otherButtonProps.colorScheme)
       otherButtonProps.colorScheme = "secondary"
-    if (successButtonProps && !successButtonProps.colorScheme)
+    if (!successButtonProps.colorScheme)
       successButtonProps.colorScheme = "primary"
+
+    const hasCancelButton = !!cancelButtonProps.children
+    const hasOtherButton = !!otherButtonProps.children
+    const hasSuccessButton = !!successButtonProps.children
+    const hasFooter = hasCancelButton || hasOtherButton || hasSuccessButton
 
     return (
       <DialogProvider value={styles}>
@@ -152,26 +158,23 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
           {customDialogBody ??
             (cloneChildren ? <DialogBody>{cloneChildren}</DialogBody> : null)}
           {customDialogFooter ??
-            (footer ||
-            cancelButtonProps ||
-            otherButtonProps ||
-            successButtonProps ? (
+            (footer || hasFooter ? (
               <DialogFooter>
                 {footer ?? (
                   <>
-                    {cancelButtonProps ? (
+                    {hasCancelButton ? (
                       <Button
                         onClick={() => onCancel?.(onClose)}
                         {...cancelButtonProps}
                       />
                     ) : null}
-                    {otherButtonProps ? (
+                    {hasOtherButton ? (
                       <Button
                         onClick={() => onOther?.(onClose)}
                         {...otherButtonProps}
                       />
                     ) : null}
-                    {successButtonProps ? (
+                    {hasSuccessButton ? (
                       <Button
                         onClick={() => onSuccess?.(onClose)}
                         {...successButtonProps}

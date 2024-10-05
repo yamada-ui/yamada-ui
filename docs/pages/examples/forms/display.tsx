@@ -1,7 +1,12 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { CheckboxGroup, FormControl, HelperMessage } from "@yamada-ui/react"
+import {
+  CheckboxGroup,
+  FormControl,
+  HelperMessage,
+  noop,
+} from "@yamada-ui/react"
 import { memo } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Form } from "./form"
@@ -28,7 +33,7 @@ export const Display: FC<DisplayProps> = memo(({ ...rest }) => {
     handleSubmit,
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form

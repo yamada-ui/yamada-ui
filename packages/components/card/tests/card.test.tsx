@@ -78,7 +78,7 @@ describe("<Card />", () => {
     expect(header).toBeInTheDocument()
   })
 
-  test("<CardBody /> renders correctly", async () => {
+  test("<CardBody /> renders correctly", () => {
     render(
       <Card>
         <CardBody>Card Body</CardBody>
@@ -90,7 +90,7 @@ describe("<Card />", () => {
     expect(body).toHaveTextContent("Card Body")
   })
 
-  test("<CardBody /> applies custom className", async () => {
+  test("<CardBody /> applies custom className", () => {
     render(
       <Card>
         <CardBody className="custom-class">Card Body</CardBody>
@@ -101,7 +101,7 @@ describe("<Card />", () => {
     expect(body).toHaveClass("custom-class")
   })
 
-  test("<CardBody /> applies styles correctly", async () => {
+  test("<CardBody /> applies styles correctly", () => {
     render(
       <Card>
         <CardBody>Card Body</CardBody>

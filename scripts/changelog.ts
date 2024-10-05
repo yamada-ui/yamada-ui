@@ -14,7 +14,7 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 type PullRequests = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"]
 type PullRequest = PullRequests[number]
 
-export type PullRequestData = {
+export interface PullRequestData {
   id: number
   body: string
   date: string
@@ -66,7 +66,9 @@ const manifest = {
   },
 }
 
-const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
+const getPullRequests = async (): Promise<
+  PullRequest | PullRequest[] | undefined
+> => {
   if (arg.includes("--latest")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
@@ -121,10 +123,10 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
   }
 }
 
-let cachePackages: Map<string, Project>
+let cachePackages: Map<string, Project> | undefined
 
 const getPackages = async (): Promise<Map<string, Project>> => {
-  let packages: Map<string, Project> = new Map()
+  let packages = new Map<string, Project>()
 
   if (cachePackages) {
     packages = cachePackages
@@ -143,7 +145,7 @@ const getPackages = async (): Promise<Map<string, Project>> => {
   return packages
 }
 
-let cacheChangelogs: Map<string, string> = new Map()
+let cacheChangelogs = new Map<string, string>()
 
 const getChangelog = async (dir: string) => {
   let changelog = cacheChangelogs.get(dir)
@@ -165,7 +167,8 @@ const restoreChangelog = async (content: string): Promise<string> => {
       .split("\n## ")
       .map((section) => section.replace("## ", "").trim())
       .map(async (name) => {
-        const [, packageName, version] = name.match(/(@?[^@]+)@([^@]+)/) ?? []
+        const [, packageName = "", version] =
+          name.match(/(@?[^@]+)@([^@]+)/) ?? []
 
         const { dir } = packages.get(packageName) ?? {}
 
@@ -290,7 +293,7 @@ const generateChangelog = async ({
     `release_date: ${date}`,
     `version: ${version}`,
     "---",
-    `${content}`,
+    content,
   ].join("\n")
 
   return { id, body, date, url, version }
@@ -357,7 +360,7 @@ const main = async () => {
         ...resolvedData.map(writeVersionFile),
         manifest.write(resolvedData),
       ])
-    } else {
+    } else if (pullRequests) {
       const data = await generateChangelog(pullRequests)
 
       if (!data) throw new Error("Nothing to change")

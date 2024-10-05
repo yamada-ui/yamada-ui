@@ -112,7 +112,7 @@ describe("<SimpleGrid />", () => {
     await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
   })
 
-  test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", async () => {
+  test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
     render(
       <SimpleGrid columns={2} minChildWidth={{ base: "4" }}>
         SimpleGrid
@@ -124,7 +124,7 @@ describe("<SimpleGrid />", () => {
     })
   })
 
-  test("columns - prop works correctly", async () => {
+  test("columns - prop works correctly", () => {
     render(<SimpleGrid columns={3}>SimpleGrid</SimpleGrid>)
     expect(screen.getByText("SimpleGrid")).toHaveStyle({
       gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
@@ -181,15 +181,15 @@ describe("<Stack />", () => {
     { name: "ギニュー" },
   ]
 
-  type ComponentProps = {
-    name: string
-    onUnmount?: (v: string) => void
+  interface ComponentProps {
+    name?: string
+    onUnmount?: (name: string) => void
   }
 
   const Component: FC<ComponentProps> = ({ name, onUnmount }) => {
     useEffect(() => {
       return () => {
-        if (onUnmount) onUnmount(name)
+        if (name && onUnmount) onUnmount(name)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -214,7 +214,7 @@ describe("<Stack />", () => {
   test("renders list of items with provided keys when cloning children", async () => {
     const unMountMock = vi.fn()
 
-    const Wrapper = ({ data }: { data: Record<string, string>[] }) => {
+    const Wrapper = ({ data }: { data: { [key: string]: string }[] }) => {
       const [characters, setCharacters] = useState(data)
 
       return (
@@ -278,7 +278,7 @@ describe("<GridItem />", () => {
     await a11y(<GridItem>GridItem</GridItem>)
   })
 
-  test("renders all the allowed shorthand style props", async () => {
+  test("renders all the allowed shorthand style props", () => {
     render(
       <GridItem colSpan={2} rowSpan={2}>
         GridItem

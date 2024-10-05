@@ -4,7 +4,7 @@ import type {
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import type { ForwardedRef, RefAttributes } from "react"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
@@ -169,7 +169,7 @@ export const ToggleGroup = forwardRef(
 ) as {
   <Y extends (number | string)[] | number | string = string>(
     props: RefAttributes<HTMLDivElement> & ToggleGroupProps<Y>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 ToggleGroup.displayName = "ToggleGroup"

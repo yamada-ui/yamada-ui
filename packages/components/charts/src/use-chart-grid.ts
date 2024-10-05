@@ -28,7 +28,7 @@ export interface UseChartGridOptions {
 }
 
 interface UseChartGridProps extends UseChartGridOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartGrid = ({

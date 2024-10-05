@@ -30,7 +30,7 @@ export interface UseChartTooltipOptions {
 }
 
 interface UseChartTooltipProps extends UseChartTooltipOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartTooltip = ({

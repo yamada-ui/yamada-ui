@@ -6,7 +6,7 @@ import type {
   Token,
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { ReactNode } from "react"
+import type { ReactElement, ReactNode } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -25,7 +25,7 @@ import {
 import { cloneElement, Fragment, useCallback, useMemo } from "react"
 
 const [BreadcrumbProvider, useBreadcrumb] = createContext<{
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }>({
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
@@ -63,7 +63,7 @@ interface BreadcrumbOptions {
    *
    * @default '/'
    */
-  separator?: JSX.Element | string
+  separator?: ReactElement | string
   /**
    * Number of elements visible on the start(left) edges.
    */

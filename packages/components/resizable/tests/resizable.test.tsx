@@ -52,7 +52,7 @@ describe("<Resizable />", () => {
 })
 
 describe("<ResizableTriggerIcon />", () => {
-  test("applies styles `width` and `height` correctly", async () => {
+  test("applies styles `width` and `height` correctly", () => {
     const { getByTestId } = render(
       <ResizableTriggerIcon data-testid="resizable" />,
     )
@@ -61,7 +61,7 @@ describe("<ResizableTriggerIcon />", () => {
     expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
   })
 
-  test("icon renders correctly", async () => {
+  test("icon renders correctly", () => {
     const { getByTestId } = render(
       <Resizable>
         <ResizableItem defaultSize={50}>One</ResizableItem>

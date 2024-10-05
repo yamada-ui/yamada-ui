@@ -10,13 +10,13 @@ export interface RippleOptions {
   y: number
 }
 
-export interface UseRippleProps<T extends any = HTMLElement> {
+export interface UseRippleProps<T = HTMLElement> {
   disabled?: boolean
   isDisabled?: boolean
   onPointerDown?: PointerEventHandler<T>
 }
 
-export const useRipple = <T extends any = HTMLElement>({
+export const useRipple = <T = HTMLElement>({
   disabled,
   isDisabled,
   ...rest

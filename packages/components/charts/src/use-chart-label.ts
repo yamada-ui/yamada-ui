@@ -16,7 +16,7 @@ export interface UseChartLabelOptions {
 }
 
 export interface UseChartLabelProps extends UseChartLabelOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartLabel = ({ styles, ...rest }: UseChartLabelProps) => {

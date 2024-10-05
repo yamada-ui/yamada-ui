@@ -17,7 +17,7 @@ type TabsContext = {
   selectedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 } & Omit<TabsOptions, "defaultIndex" | "index" | "onChange">
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({

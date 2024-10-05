@@ -174,7 +174,7 @@ describe("<FileButton />", () => {
       expect(fileCount).toHaveTextContent("files: 1")
     })
 
-    await fireEvent.click(resetButton)
+    fireEvent.click(resetButton)
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")

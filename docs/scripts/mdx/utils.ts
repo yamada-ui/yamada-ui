@@ -47,8 +47,9 @@ export function getTableOfContents(
   return matches
     .map((match, index) => {
       const nextMatch = matches[index + 1]
-      const title = match[2].trim()
-      const lv = (match[1].trim().split("#").length - 1) as DocumentLevel
+      const title = match[2]?.trim() ?? ""
+      const lv = ((match[1]?.trim().split("#").length ?? 0) -
+        1) as DocumentLevel
 
       const id = slugger.slug(title, false)
 
@@ -62,7 +63,7 @@ export function getTableOfContents(
 
       if (propMatches.length) {
         const props = propMatches.map((match) => {
-          const title = match[1].trim()
+          const title = match[1]?.trim() ?? ""
 
           return {
             id: `${id.replace("props", "")}-${title.toLowerCase()}`,

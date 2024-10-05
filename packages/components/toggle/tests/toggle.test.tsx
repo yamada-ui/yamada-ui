@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { Toggle, ToggleGroup } from "../src"
 
 describe("<Toggle />", () => {
@@ -63,7 +64,7 @@ describe("<Toggle />", () => {
   })
 
   test("should warn when value is not provided in controlled mode", () => {
-    vi.spyOn(console, "warn").mockImplementation(() => {})
+    vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <ToggleGroup value={["toggle1"]}>

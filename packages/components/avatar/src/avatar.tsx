@@ -14,12 +14,12 @@ import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
 
 interface AvatarContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
   name: "AvatarContext",
-  strict: false,
+  errorMessage: `useAvatarContext returned is 'undefined'. Seems you forgot to wrap the components in "<Avatar />"`,
 })
 
 interface AvatarOptions {

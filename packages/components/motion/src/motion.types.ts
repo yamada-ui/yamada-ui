@@ -179,7 +179,7 @@ type ComponentProps<
 
 export interface MotionComponent<Y extends MotionAs, D extends object = {}>
   extends ComponentArgs {
-  <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): JSX.Element
+  <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
 export type MotionAs = keyof DOMMotionComponents

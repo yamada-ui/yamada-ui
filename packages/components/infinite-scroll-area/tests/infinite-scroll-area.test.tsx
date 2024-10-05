@@ -36,7 +36,7 @@ describe("<InfiniteScrollArea />", () => {
     await a11y(container)
   })
 
-  test("InfiniteScrollArea renders with initialLoad correctly", async () => {
+  test("InfiniteScrollArea renders with initialLoad correctly", () => {
     const MyComponent = () => {
       const [count, setCount] = useState<number>(50)
 
@@ -44,7 +44,7 @@ describe("<InfiniteScrollArea />", () => {
         <InfiniteScrollArea
           initialLoad
           loading={<>Loading…</>}
-          onLoad={async ({ finish, index }) => {
+          onLoad={({ finish, index }) => {
             setCount((prev) => prev + 50)
 
             if (index >= 5) finish()

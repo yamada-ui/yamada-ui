@@ -1,5 +1,6 @@
 import { isFunction } from "./assertion"
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {}
 
 export function runIfFunc<T, U extends any[]>(

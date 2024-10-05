@@ -3,7 +3,7 @@ import { ColorPicker } from "../src"
 import { mockEyeDropper, resetEyeDropperMock } from "./utils/mock-eye-dropper"
 
 describe("<ColorPicker />", () => {
-  test("ColorPicker renders correctly", async () => {
+  test("ColorPicker renders correctly", () => {
     render(<ColorPicker data-testid="colorPicker" />)
 
     const colorPicker = screen.getByTestId("colorPicker")

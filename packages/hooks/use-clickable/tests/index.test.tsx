@@ -22,144 +22,144 @@ const setup = (props: UseClickableProps = {}) => {
 }
 
 describe("useClickable", () => {
-  test("calls onKeyDown when key is pressed", async () => {
+  test("calls onKeyDown when key is pressed", () => {
     const onKeyDown = vi.fn()
     const { button } = setup({ onKeyDown })
-    await act(async () => {
+    act(() => {
       fireEvent.focus(button)
       fireEvent.keyDown(button, { key: "ArrowDown" })
     })
-    expect(onKeyDown.mock.calls[0][0]).toMatchObject({
+    expect(onKeyDown.mock.calls[0]?.[0]).toMatchObject({
       key: "ArrowDown",
       type: "keydown",
     })
   })
 
-  test("calls onKeyUp when key is released", async () => {
+  test("calls onKeyUp when key is released", () => {
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyUp })
-    await act(async () => {
+    act(() => {
       fireEvent.focus(button)
       fireEvent.keyUp(button, { key: "ArrowUp" })
     })
-    expect(onKeyUp.mock.calls[0][0]).toMatchObject({
+    expect(onKeyUp.mock.calls[0]?.[0]).toMatchObject({
       key: "ArrowUp",
       type: "keyup",
     })
   })
 
-  test("calls onClick when element is clicked", async () => {
+  test("calls onClick when element is clicked", () => {
     const onClick = vi.fn()
     const { button } = setup({ onClick })
-    await act(async () => {
+    act(() => {
       fireEvent.click(button)
     })
-    expect(onClick.mock.calls[0][0]).toBeDefined()
+    expect(onClick.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("calls onMouseDown and onMouseUp when mouse button is pressed and released", async () => {
+  test("calls onMouseDown and onMouseUp when mouse button is pressed and released", () => {
     const onMouseDown = vi.fn()
     const onMouseUp = vi.fn()
     const { button } = setup({ onMouseDown, onMouseUp })
-    await act(async () => {
+    act(() => {
       fireEvent.mouseDown(button)
       fireEvent.mouseUp(button)
     })
-    expect(onMouseDown.mock.calls[0][0]).toBeDefined()
-    expect(onMouseUp.mock.calls[0][0]).toBeDefined()
+    expect(onMouseDown.mock.calls[0]?.[0]).toBeDefined()
+    expect(onMouseUp.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("does not call onMouseDown when disabled", async () => {
+  test("does not call onMouseDown when disabled", () => {
     const onMouseDown = vi.fn()
     const { button } = setup({ isDisabled: true, onMouseDown })
-    await act(async () => {
+    act(() => {
       fireEvent.mouseDown(button)
     })
     expect(onMouseDown).not.toHaveBeenCalled()
   })
 
-  test("calls onKeyDown with Enter and onKeyUp", async () => {
+  test("calls onKeyDown with Enter and onKeyUp", () => {
     const onKeyDown = vi.fn()
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyDown, onKeyUp })
-    await act(async () => {
+    act(() => {
       fireEvent.keyDown(button, { key: "Enter" })
       fireEvent.keyUp(button)
     })
-    expect(onKeyDown.mock.calls[0][0]).toBeDefined()
-    expect(onKeyUp.mock.calls[0][0]).toBeDefined()
+    expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
+    expect(onKeyUp.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("calls onKeyDown with Space and onKeyUp with Space", async () => {
+  test("calls onKeyDown with Space and onKeyUp with Space", () => {
     const onKeyDown = vi.fn()
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyDown, onKeyUp })
-    await act(async () => {
+    act(() => {
       fireEvent.keyDown(button, { key: " " })
       fireEvent.keyUp(button, { key: " " })
     })
-    expect(onKeyDown.mock.calls[0][0]).toBeDefined()
-    expect(onKeyUp.mock.calls[0][0]).toBeDefined()
+    expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
+    expect(onKeyUp.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("calls onKeyDown with Space and onMouseLeave", async () => {
+  test("calls onKeyDown with Space and onMouseLeave", () => {
     const onKeyDown = vi.fn()
     const onMouseLeave = vi.fn()
     const { button } = setup({ onKeyDown, onMouseLeave })
-    await act(async () => {
+    act(() => {
       fireEvent.keyDown(button, { key: " " })
       fireEvent.mouseLeave(button)
     })
-    expect(onKeyDown.mock.calls[0][0]).toBeDefined()
-    expect(onMouseLeave.mock.calls[0][0]).toBeDefined()
+    expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
+    expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("calls onMouseOver and onMouseLeave", async () => {
+  test("calls onMouseOver and onMouseLeave", () => {
     const onMouseOver = vi.fn()
     const onMouseLeave = vi.fn()
     const { button } = setup({ onMouseLeave, onMouseOver })
-    await act(async () => {
+    act(() => {
       fireEvent.mouseOver(button)
       fireEvent.mouseLeave(button)
     })
-    expect(onMouseOver.mock.calls[0][0]).toBeDefined()
-    expect(onMouseLeave.mock.calls[0][0]).toBeDefined()
+    expect(onMouseOver.mock.calls[0]?.[0]).toBeDefined()
+    expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })
 
-  test("does not call onMouseOver when disabled", async () => {
+  test("does not call onMouseOver when disabled", () => {
     const onMouseOver = vi.fn()
     const { button } = setup({ isDisabled: true, onMouseOver })
-    await act(async () => {
+    act(() => {
       fireEvent.mouseOver(button)
     })
     expect(onMouseOver).not.toHaveBeenCalled()
   })
 
-  test("does not call onClick when disabled", async () => {
+  test("does not call onClick when disabled", () => {
     const onClick = vi.fn()
     const { button } = setup({ isDisabled: true, onClick })
-    await act(async () => {
+    act(() => {
       fireEvent.click(button)
     })
     expect(onClick).not.toHaveBeenCalled()
   })
 
-  test("does not call onClick when disabled but isFocusable", async () => {
+  test("does not call onClick when disabled but isFocusable", () => {
     const onClick = vi.fn()
     const { button } = setup({ isDisabled: true, isFocusable: true, onClick })
-    await act(async () => {
+    act(() => {
       fireEvent.click(button)
     })
     expect(onClick).not.toHaveBeenCalled()
     expect(button).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("onDocumentKeyUp with space triggers preventDefault, stopPropagation and removes listener", async () => {
+  test("onDocumentKeyUp with space triggers preventDefault, stopPropagation and removes listener", () => {
     const onKeyDown = vi.fn()
     const onKeyUp = vi.fn()
     const { user } = setup({ onKeyDown, onKeyUp })
 
-    await act(async () => {
+    act(() => {
       user.keyboard("{space>}{/space}")
     })
 
@@ -167,17 +167,17 @@ describe("useClickable", () => {
     expect(onKeyUp).toBeDefined()
   })
 
-  test("handleMouseLeave triggers preventDefault and setIsPressed", async () => {
+  test("handleMouseLeave triggers preventDefault and setIsPressed", () => {
     const onMouseLeave = vi.fn()
     const { button } = setup({ clickOnSpace: true, onMouseLeave })
-    await act(async () => {
+    act(() => {
       fireEvent.mouseDown(button)
     })
 
-    await act(async () => {
+    act(() => {
       fireEvent.mouseLeave(button)
     })
 
-    expect(onMouseLeave.mock.calls[0][0]).toBeDefined()
+    expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })
 })

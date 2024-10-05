@@ -1,5 +1,5 @@
 import type { ComponentArgs } from "@yamada-ui/core"
-import type { ForwardedRef, RefAttributes } from "react"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import type { MenuGroupProps } from "./menu-group"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
@@ -101,7 +101,7 @@ export const MenuOptionGroup = forwardRef(
 ) as {
   <Y extends string | string[] = string>(
     props: MenuOptionGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 MenuOptionGroup.displayName = "MenuOptionGroup"

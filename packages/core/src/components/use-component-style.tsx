@@ -35,7 +35,7 @@ import { pseudos } from "../pseudos"
 
 type Styles<Y extends boolean = false> = Y extends false
   ? CSSUIObject
-  : { [key: string]: CSSUIObject }
+  : { [key: string]: CSSUIObject | undefined }
 
 type ModifierStyles =
   | ComponentMultiSizes
@@ -104,7 +104,7 @@ function getResponsiveNextQuery(
   let nextQuery: BreakpointQueries[number] | undefined
 
   while (nextIndex < queries.length) {
-    const query = queries[nextIndex] ?? {}
+    const query = queries[nextIndex]!
 
     if (value[query.breakpoint]) {
       const targetIndex = nextIndex - 1
@@ -146,7 +146,7 @@ function getResponsiveStyles<Y extends Dict = Dict, M extends boolean = false>(
       return queries.reduce<Styles<M>>(
         (prev, { breakpoint, maxW, maxWQuery, minW, minWQuery }, index) => {
           const modifier = value[breakpoint]
-          const isFinal = breakpoint === finalQuery.breakpoint
+          const isFinal = breakpoint === finalQuery?.breakpoint
 
           if (breakpoint === "base") return prev
           if (!modifier) return prev
@@ -241,7 +241,7 @@ function getSelectorStyles<Y extends Dict = Dict>(
 }
 
 function getStyles<Y extends Dict = Dict, M extends boolean = false>(
-  stylesOrFunc: { [key: string]: UIStyle<Y> } | UIStyle<Y>,
+  stylesOrFunc: { [key: string]: UIStyle<Y> } | UIStyle<Y> | undefined,
   props: UIStyleProps<Y>,
 ) {
   return function ({
@@ -252,7 +252,7 @@ function getStyles<Y extends Dict = Dict, M extends boolean = false>(
 
     if (isMulti) {
       return Object.fromEntries(
-        Object.entries((styles ?? {}) as { [key: string]: UIStyle }).map(
+        Object.entries(styles as { [key: string]: UIStyle }).map(
           ([name, styleOrFunc]) => {
             const style = runIfFunc(styleOrFunc, props)
 

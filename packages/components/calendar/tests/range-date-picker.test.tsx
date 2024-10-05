@@ -14,7 +14,7 @@ describe("<RangeDatePicker />", () => {
     afterEach(() => {
       vi.useRealTimers()
     })
-    test("should render dates of range", async () => {
+    test("should render dates of range", () => {
       const { container } = render(
         <RangeDatePicker
           defaultValue={[new Date(new Date().setDate(1))]}

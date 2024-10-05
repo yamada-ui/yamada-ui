@@ -42,7 +42,7 @@ import {
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
+  isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
 export const {
   DescendantsContextProvider: SelectDescendantsContextProvider,
@@ -65,7 +65,7 @@ interface SelectContext
   label: MaybeValue | undefined
   listRef: RefObject<HTMLUListElement>
   setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: MaybeValue
   onChange: (newValue: string) => void
   onChangeLabel: (newValue: string, runOmit?: boolean) => void
@@ -79,7 +79,7 @@ interface SelectContext
 
 export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
   name: "SelectContext",
-  strict: false,
+  errorMessage: `useSelectContext returned is 'undefined'. Seems you forgot to wrap the components in "<Select />"`,
 })
 
 export interface UseSelectProps<T extends MaybeValue = string>
@@ -225,7 +225,7 @@ export const useSelect = <T extends MaybeValue = string>(
         if (selectedIndexes.includes(first.index)) {
           const enabledFirst = enabledValues[0]
 
-          setFocusedIndex(enabledFirst.index)
+          setFocusedIndex(enabledFirst?.index ?? -1)
         } else {
           setFocusedIndex(first.index)
         }
@@ -247,7 +247,7 @@ export const useSelect = <T extends MaybeValue = string>(
         if (selectedIndexes.includes(last.index)) {
           const enabledLast = enabledValues.reverse()[0]
 
-          setFocusedIndex(enabledLast.index)
+          setFocusedIndex(enabledLast?.index ?? -1)
         } else {
           setFocusedIndex(last.index)
         }
@@ -287,7 +287,7 @@ export const useSelect = <T extends MaybeValue = string>(
             enabledValues.find(({ index }) => next.index < index) ??
             enabledValues[0]
 
-          setFocusedIndex(enabledNext.index)
+          setFocusedIndex(enabledNext?.index ?? -1)
         } else {
           setFocusedIndex(next.index)
         }
@@ -319,7 +319,7 @@ export const useSelect = <T extends MaybeValue = string>(
             enabledValues.reverse().find(({ index }) => index < prev.index) ??
             enabledValues[0]
 
-          setFocusedIndex(enabledPrev.index)
+          setFocusedIndex(enabledPrev?.index ?? -1)
         } else {
           setFocusedIndex(prev.index)
         }
@@ -343,7 +343,7 @@ export const useSelect = <T extends MaybeValue = string>(
     isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const onChangeLabel = useCallback(
-    (newValue: string, runOmit: boolean = true) => {
+    (newValue: string, runOmit = true) => {
       const values = descendants.values()
 
       if (!values.length) return

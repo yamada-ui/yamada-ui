@@ -12,39 +12,37 @@ export const CopyButton = memo(
     const { hasCopied, onCopy } = useClipboard(value)
 
     return (
-      <>
-        <Tooltip
+      <Tooltip
+        alignItems="center"
+        bg="success"
+        display="inline-flex"
+        h="8"
+        isOpen={hasCopied}
+        label="Copied!"
+        placement="left"
+        zIndex="auto"
+      >
+        <IconButton
+          ref={ref}
+          _hover={{
+            borderColor: hasCopied ? "success" : "whiteAlpha.800",
+            color: hasCopied ? "success" : "whiteAlpha.800",
+          }}
           alignItems="center"
-          bg="success"
-          display="inline-flex"
-          h="8"
-          isOpen={hasCopied}
-          label="Copied!"
-          placement="left"
-          zIndex="auto"
-        >
-          <IconButton
-            ref={ref}
-            _hover={{
-              borderColor: hasCopied ? "success" : "whiteAlpha.800",
-              color: hasCopied ? "success" : "whiteAlpha.800",
-            }}
-            alignItems="center"
-            bg={["neutral.800", "neutral.900"]}
-            border="1px solid"
-            borderColor={hasCopied ? "success" : "whiteAlpha.600"}
-            color={hasCopied ? "success" : "whiteAlpha.600"}
-            display="flex"
-            icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
-            justifyContent="center"
-            size="sm"
-            variant="unstyled"
-            aria-label="Copy the code"
-            {...rest}
-            onClick={onCopy}
-          />
-        </Tooltip>
-      </>
+          bg={["neutral.800", "neutral.900"]}
+          border="1px solid"
+          borderColor={hasCopied ? "success" : "whiteAlpha.600"}
+          color={hasCopied ? "success" : "whiteAlpha.600"}
+          display="flex"
+          icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
+          justifyContent="center"
+          size="sm"
+          variant="unstyled"
+          aria-label="Copy the code"
+          {...rest}
+          onClick={onCopy}
+        />
+      </Tooltip>
     )
   }),
 )

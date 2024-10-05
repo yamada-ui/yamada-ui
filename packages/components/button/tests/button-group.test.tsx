@@ -12,7 +12,7 @@ describe("<Button />", () => {
     )
   })
 
-  test("`isAttached` style is applied correctly", async () => {
+  test("`isAttached` style is applied correctly", () => {
     const { getByRole } = render(
       <ButtonGroup isAttached variant="outline">
         <Button>Button</Button>
@@ -34,7 +34,7 @@ describe("<Button />", () => {
     })
   })
 
-  test("`isAttached` column style is applied correctly", async () => {
+  test("`isAttached` column style is applied correctly", () => {
     const { getByRole } = render(
       <ButtonGroup direction="column" isAttached variant="outline">
         <Button>Button</Button>

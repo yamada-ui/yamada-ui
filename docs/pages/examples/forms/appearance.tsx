@@ -11,6 +11,7 @@ import {
   FormControl,
   HelperMessage,
   HStack,
+  noop,
   Text,
   ui,
   useRadio,
@@ -46,7 +47,7 @@ export const Appearance: FC<AppearanceProps> = memo(({ ...rest }) => {
     onChange: (value) => setValue("theme", value),
   })
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form

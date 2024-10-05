@@ -1,4 +1,5 @@
 import { toHaveNoViolations } from "@koralle/vitest-axe"
+import { noop } from "@yamada-ui/utils"
 import { vi } from "vitest"
 import "@testing-library/jest-dom/vitest"
 
@@ -7,8 +8,8 @@ expect.extend({ toHaveNoViolations })
 const { getComputedStyle } = window
 
 window.getComputedStyle = (elt) => getComputedStyle(elt)
-window.Element.prototype.scrollTo = () => {}
-window.scrollTo = () => {}
+window.Element.prototype.scrollTo = noop
+window.scrollTo = noop
 
 if (typeof window.matchMedia !== "function") {
   Object.defineProperty(window, "matchMedia", {

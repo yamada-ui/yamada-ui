@@ -59,7 +59,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    expect(onSessionStart.mock.calls[0][1]).toMatchObject({
+    expect(onSessionStart.mock.calls[0]?.[1]).toMatchObject({
       delta: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
       point: { x: 0, y: 0 },
@@ -82,7 +82,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onStart.mock.calls[0][1]
+    const { point } = onStart.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(10)
@@ -104,7 +104,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onMove.mock.calls[0][1]
+    const { point } = onMove.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(10)
@@ -126,7 +126,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onEnd.mock.calls[0][1]
+    const { point } = onEnd.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(100)
   })
@@ -146,7 +146,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onSessionEnd.mock.calls[0][1]
+    const { point } = onSessionEnd.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(100)
   })

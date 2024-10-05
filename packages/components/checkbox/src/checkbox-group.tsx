@@ -108,7 +108,7 @@ export const useCheckboxGroup = <
       ...props,
       ref,
       [isNative ? "checked" : "isChecked"]: value.some(
-        (val) => String(props?.value) === String(val),
+        (val) => String(props.value) === String(val),
       ),
       onChange,
     }),
@@ -210,7 +210,7 @@ export const CheckboxGroup = forwardRef(
 ) as {
   <Y extends number | string = string>(
     props: CheckboxGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 CheckboxGroup.displayName = "CheckboxGroup"

@@ -109,7 +109,7 @@ describe("<SegmentedControl />", () => {
     await a11y(container)
   })
 
-  test("focus moves to the next element when the focused element is disabled", async () => {
+  test("focus moves to the next element when the focused element is disabled", () => {
     render(
       <SegmentedControl>
         <SegmentedControlButton value="one">One</SegmentedControlButton>

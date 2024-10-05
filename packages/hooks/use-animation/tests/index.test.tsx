@@ -151,7 +151,7 @@ describe("useAnimation", () => {
 
 describe("useDynamicAnimation", () => {
   test("A animation should be changed dynamically", async () => {
-    const style: Record<string, AnimationStyle> = {
+    const style: { [key: string]: AnimationStyle } = {
       moveLeft: {
         duration: "slower",
         fillMode: "forwards",
@@ -205,7 +205,7 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Multi animation should be changed dynamically", async () => {
-    const style: Record<string, AnimationStyle[]> = {
+    const style: { [key: string]: AnimationStyle[] } = {
       moveLeft: [
         {
           duration: "slower",
@@ -289,7 +289,7 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Should accept multiple keys", async () => {
-    const style: Record<string, AnimationStyle> = {
+    const style: { [key: string]: AnimationStyle } = {
       gradients: {
         duration: "10s",
         iterationCount: "infinite",
@@ -367,8 +367,8 @@ describe("useDynamicAnimation", () => {
     )
   })
 
-  test("Should be undefined if no default key is set", async () => {
-    const style: Record<string, AnimationStyle> = {
+  test("Should be undefined if no default key is set", () => {
+    const style: { [key: string]: AnimationStyle } = {
       moveLeft: {
         keyframes: {},
       },

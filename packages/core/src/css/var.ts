@@ -86,7 +86,7 @@ export function getCreateThemeVars(
 
             if (token) {
               return tokenToVar(value).reference
-            } else if (value in cssMap) {
+            } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
             } else {
               return `var(--${prefix}-${value})`

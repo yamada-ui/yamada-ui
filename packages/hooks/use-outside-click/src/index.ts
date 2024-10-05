@@ -76,7 +76,7 @@ const isValidEvent = (
   ev: MouseEvent | TouchEvent,
   ref: RefObject<HTMLElement>,
 ) => {
-  const target = ev.target as HTMLElement
+  const target = ev.target as HTMLElement | null
 
   if ("button" in ev && ev.button > 0) return false
 

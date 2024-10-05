@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import {
   colorModeManager,
   ColorModeScript,
@@ -7,7 +8,6 @@ import {
   ThemeSchemeScript,
   UIProvider,
 } from '@yamada-ui/react'
-import { ReactNode } from 'react'
 import { config, theme } from 'theme'
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

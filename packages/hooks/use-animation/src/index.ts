@@ -111,7 +111,7 @@ export const useDynamicAnimation = <
           keys.current.map((key) => cache.current.get(key)).join(", "),
         )
       } else {
-        setAnimations(cache.current.get(keys.current ?? ""))
+        setAnimations(cache.current.get(keys.current))
       }
     },
     [arrayOrObj],

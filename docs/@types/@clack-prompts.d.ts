@@ -5,11 +5,11 @@ declare module "@clack/prompts" {
 
   type Spinner = ReturnType<typeof p.spinner>
 
-  type Runner<T extends any[] = any[], K extends any = any> = (
+  type Runner<T extends any[] = any[], K = any> = (
     ...args: T
   ) => (p?: Prompts, s?: Spinner) => K
 
-  type RequiredRunner<T extends any[] = any[], K extends any = any> = (
+  type RequiredRunner<T extends any[] = any[], K = any> = (
     ...args: T
   ) => (p: Prompts, s: Spinner) => K
 }

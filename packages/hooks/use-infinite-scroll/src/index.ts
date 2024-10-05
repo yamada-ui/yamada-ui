@@ -171,7 +171,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   }, [rootMargin, rootRef, threshold])
 
   const onReset = useCallback(
-    (index: number = 1, runScroll: boolean = true) => {
+    (index = 1, runScroll = true) => {
       indexRef.current = index
 
       setIsFinish(false)
@@ -205,7 +205,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
 
   const createObserver = useCallback(() => {
     const observer = new IntersectionObserver(async ([entry]) => {
-      if (!entry.isIntersecting || processingRef.current) return
+      if (!entry?.isIntersecting || processingRef.current) return
 
       const props = { entry, finish: onFinish, index: indexRef.current }
 
@@ -219,7 +219,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
         prevScrollPosition.current = getScrollPosition(root, isVertical)
       }
 
-      await onLoad?.(props)
+      await onLoad(props)
 
       if (isReverse) {
         const position = prevScrollPosition.current

@@ -14,7 +14,7 @@ interface AutocompleteCreateOptions {
   /**
    * The autocomplete create option icon to use.
    */
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface AutocompleteCreateProps

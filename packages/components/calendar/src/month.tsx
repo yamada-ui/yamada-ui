@@ -207,7 +207,7 @@ export const Month: FC<MonthProps> = ({
                             isSelected,
                             isWeekend,
                             row,
-                            weekday: weekdays[col],
+                            weekday: weekdays[col]!,
                           })
 
                           const isDisplayed =

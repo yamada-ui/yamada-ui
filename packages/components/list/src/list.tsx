@@ -14,7 +14,9 @@ import {
 import { Icon } from "@yamada-ui/icon"
 import { createContext, cx, getValidChildren } from "@yamada-ui/utils"
 
-const [ListProvider, useList] = createContext<{ [key: string]: CSSUIObject }>({
+const [ListProvider, useList] = createContext<{
+  [key: string]: CSSUIObject | undefined
+}>({
   name: `ListContext`,
   errorMessage: `useList returned is 'undefined'. Seems you forgot to wrap the components in "<List />" `,
 })

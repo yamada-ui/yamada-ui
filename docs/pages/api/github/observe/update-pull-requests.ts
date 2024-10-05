@@ -1,7 +1,7 @@
 import type { Constant } from "utils/github"
 import type { APIHandler } from "utils/next"
 import { Octokit } from "@octokit/rest"
-import { isObject } from "@yamada-ui/react"
+import { isObject, isUndefined } from "@yamada-ui/react"
 import { sendDiscord } from "utils/discord"
 import {
   getPullRequests as _getPullRequests,
@@ -59,7 +59,7 @@ const getPullRequest = async ({
     repo,
   })
 
-  const { data: reviewers } = await recursiveOctokit(() =>
+  const { data: reviewers } = await recursiveOctokit(async () =>
     octokit.pulls.listReviews({
       owner,
       pull_number,
@@ -83,11 +83,9 @@ const getPullRequests = async ({
 
   await Promise.all(
     _pullRequests.map(async ({ number }) => {
-      const pullRequest = await recursiveOctokit(() =>
+      const pullRequest = await recursiveOctokit(async () =>
         getPullRequest({ owner, pull_number: number, repo }),
       )
-
-      if (!pullRequest) return
 
       pullRequests.push(pullRequest)
 
@@ -153,7 +151,7 @@ const remindReviews = async ({
   if (hasReviewed) {
     try {
       if (runOctokit) {
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.removeLabel({
             name: "review wanted",
             issue_number: number,
@@ -204,12 +202,12 @@ const remindReviews = async ({
 
   if (createdTimestamp < limitTimestamp) {
     const hasReviewWanted = labels.some(
-      (label) => isObject(label) && "review wanted" === label?.name,
+      (label) => isObject(label) && "review wanted" === label.name,
     )
 
     if (!hasReviewWanted) {
       if (runOctokit) {
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.addLabels({
             issue_number: number,
             labels: ["review wanted"],
@@ -264,7 +262,7 @@ const addHelpWanted = async ({
   )
     return
 
-  if (labels.some((label) => isObject(label) && "help wanted" === label?.name))
+  if (labels.some((label) => isObject(label) && "help wanted" === label.name))
     return
 
   if (collaboratorIds.includes(user.login)) return
@@ -277,7 +275,7 @@ const addHelpWanted = async ({
   if (createdTimestamp > limitTimestamp) return
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.createComment({
         body: GITHUB_JOINING_COMMENT(constant)(user.login),
         issue_number: number,
@@ -290,7 +288,7 @@ const addHelpWanted = async ({
   }
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.addLabels({
         issue_number: number,
         labels: ["help wanted"],
@@ -334,7 +332,7 @@ export const updatePullRequests: APIHandler = async ({
   for await (const pullRequest of pullRequests) {
     const { draft, reviewers, user } = pullRequest
 
-    if (!user || draft) continue
+    if (isUndefined(user) || draft) continue
 
     const count = reviewers.reduce(
       (count, { state }) => (state === "APPROVED" ? count + 1 : count),

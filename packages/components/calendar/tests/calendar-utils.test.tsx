@@ -130,7 +130,7 @@ describe("calendar-utils", () => {
         new Date(2024, 1, 3),
       ]
 
-      const result = sortDates([dates[2], dates[0], dates[1]], "asc")
+      const result = sortDates([dates[2]!, dates[0]!, dates[1]!], "asc")
       expect(result).toStrictEqual(dates)
     })
 
@@ -141,7 +141,7 @@ describe("calendar-utils", () => {
         new Date(2024, 1, 1),
       ]
 
-      const result = sortDates([dates[2], dates[0], dates[1]], "desc")
+      const result = sortDates([dates[2]!, dates[0]!, dates[1]!], "desc")
       expect(result).toStrictEqual(dates)
     })
   })

@@ -4,7 +4,32 @@ import { useAnimation } from "@yamada-ui/use-animation"
 import { cx } from "@yamada-ui/utils"
 import { useAvatarContext } from "./avatar"
 
-type AvatarBadgeOptions = {
+const placementStyles: {
+  [key in "bottom-end" | "bottom-start" | "top-end" | "top-start"]: CSSUIObject
+} = {
+  "bottom-end": {
+    bottom: "0",
+    insetEnd: "0",
+    transform: "translate(25%, 25%)",
+  },
+  "bottom-start": {
+    bottom: "0",
+    insetStart: "0",
+    transform: "translate(-25%, 25%)",
+  },
+  "top-end": {
+    insetEnd: "0",
+    top: "0",
+    transform: "translate(25%, -25%)",
+  },
+  "top-start": {
+    insetStart: "0",
+    top: "0",
+    transform: "translate(-25%, -25%)",
+  },
+}
+
+interface AvatarBadgeOptions {
   /**
    * If `true`, make an element scale and fade like a radar ping or ripple of water.
    *
@@ -16,7 +41,7 @@ type AvatarBadgeOptions = {
    *
    * @default '["blackAlpha.400", "whiteAlpha.500"]'
    */
-  pingColor?: HTMLUIProps<"div">["backgroundColor"]
+  pingColor?: HTMLUIProps["backgroundColor"]
   /**
    * It is used for the count of the ping animation.
    *
@@ -43,33 +68,7 @@ type AvatarBadgeOptions = {
   placement?: "bottom-end" | "bottom-start" | "top-end" | "top-start"
 }
 
-export type AvatarBadgeProps = AvatarBadgeOptions & HTMLUIProps<"div">
-
-const placementStyles: Record<
-  "bottom-end" | "bottom-start" | "top-end" | "top-start",
-  CSSUIObject
-> = {
-  "bottom-end": {
-    bottom: "0",
-    insetEnd: "0",
-    transform: "translate(25%, 25%)",
-  },
-  "bottom-start": {
-    bottom: "0",
-    insetStart: "0",
-    transform: "translate(-25%, 25%)",
-  },
-  "top-end": {
-    insetEnd: "0",
-    top: "0",
-    transform: "translate(25%, -25%)",
-  },
-  "top-start": {
-    insetStart: "0",
-    top: "0",
-    transform: "translate(-25%, -25%)",
-  },
-}
+export interface AvatarBadgeProps extends AvatarBadgeOptions, HTMLUIProps {}
 
 export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
   (

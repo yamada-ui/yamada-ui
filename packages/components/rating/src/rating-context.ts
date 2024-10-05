@@ -18,7 +18,7 @@ interface RatingContext {
   roundedValue: number
   setHoveredValue: Dispatch<SetStateAction<number>>
   setValue: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: number
   formControlProps: Dict
   getGroupProps: RequiredPropGetter<

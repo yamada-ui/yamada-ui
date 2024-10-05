@@ -18,7 +18,7 @@ export const submitted: APIHandler = async ({ constant, req }) => {
   if (constant.pullRequest.excludeReviewers.includes(user.login)) return
 
   try {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.addLabels({
         issue_number: number,
         labels: ["merge request"],

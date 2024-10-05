@@ -14,7 +14,12 @@ import type {
   PanelProps,
   PanelResizeHandleProps,
 } from "react-resizable-panels"
-import { createContext, dataAttr, handlerAll } from "@yamada-ui/utils"
+import {
+  createContext,
+  dataAttr,
+  handlerAll,
+  isRefObject,
+} from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useState } from "react"
 import {
   getPanelElement,
@@ -41,7 +46,7 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
   isDisabled: boolean
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ResizableProvider, useResizableContext] =
@@ -139,8 +144,7 @@ export const useResizable = ({
 
     const el = getPanelGroupElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {
@@ -284,8 +288,7 @@ export const useResizableItem = ({
 
     const el = getPanelElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {
@@ -378,8 +381,7 @@ export const useResizableTrigger = ({
 
     const el = getResizeHandleElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {

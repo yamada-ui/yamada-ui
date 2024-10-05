@@ -75,7 +75,11 @@ export const Search = memo(
 
       ev.preventDefault()
 
-      isOpen ? onClose() : onOpen()
+      if (isOpen) {
+        onClose()
+      } else {
+        onOpen()
+      }
     })
 
     return (
@@ -194,7 +198,7 @@ const SearchModal: FC<SearchModalProps> = memo(
             if (!hits.length) return
 
             onClose?.()
-            router.push(hits[selectedIndex].slug)
+            router.push(hits[selectedIndex]?.slug)
           },
           Home: () => {
             directionRef.current = "up"

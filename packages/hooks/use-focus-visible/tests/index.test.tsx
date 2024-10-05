@@ -30,7 +30,7 @@ describe("useFocusVisible", () => {
     matchesMock.mockRestore()
   })
 
-  test("focusVisible becomes true when focused", async () => {
+  test("focusVisible becomes true when focused", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
@@ -50,20 +50,20 @@ describe("useFocusVisible", () => {
 
     expect(el).not.toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.focus(el)
     })
 
     expect(el).toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.blur(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible remains true on pointer down", async () => {
+  test("focusVisible remains true on pointer down", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
@@ -81,14 +81,14 @@ describe("useFocusVisible", () => {
     const { getByTestId } = render(<Component />)
     const el = getByTestId("button")
 
-    await act(async () => {
+    act(() => {
       fireEvent.pointerDown(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible becomes true on click", async () => {
+  test("focusVisible becomes true on click", () => {
     global.PointerEvent = defaultPointerEvent
 
     const Component: FC = () => {
@@ -108,14 +108,14 @@ describe("useFocusVisible", () => {
     const { getByTestId } = render(<Component />)
     const el = getByTestId("button")
 
-    await act(async () => {
+    act(() => {
       fireEvent.click(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible becomes true on keyboard event", async () => {
+  test("focusVisible becomes true on keyboard event", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
@@ -137,7 +137,7 @@ describe("useFocusVisible", () => {
 
     expect(el).not.toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.keyDown(el, { key: "Tab" })
     })
 

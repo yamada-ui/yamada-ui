@@ -104,7 +104,7 @@ export const [FormControlContextProvider, useFormControlContext] =
   })
 
 interface FormControlStylesContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [FormControlStylesProvider, useFormControlStyles] = createContext<

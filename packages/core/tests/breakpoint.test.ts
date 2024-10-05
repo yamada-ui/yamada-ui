@@ -16,7 +16,7 @@ describe("getMinMaxQuery", () => {
       { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config?.breakpoint?.direction!
+    const direction = theme.__config?.breakpoint?.direction ?? "down"
     const pickKey = ["sm", "md"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -30,7 +30,7 @@ describe("getMinMaxQuery", () => {
       { breakpoint: { direction: "up" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config?.breakpoint?.direction!
+    const direction = theme.__config?.breakpoint?.direction ?? "down"
     const pickKey = ["lg", "xl"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -44,7 +44,7 @@ describe("getMinMaxQuery", () => {
       { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config?.breakpoint?.direction!
+    const direction = theme.__config?.breakpoint?.direction ?? "down"
     const pickKey: string[] = []
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -58,7 +58,7 @@ describe("getMinMaxQuery", () => {
       { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config?.breakpoint?.direction!
+    const direction = theme.__config?.breakpoint?.direction ?? "down"
     const pickKey = ["xxl"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 

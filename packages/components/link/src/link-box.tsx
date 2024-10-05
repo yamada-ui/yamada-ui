@@ -11,7 +11,7 @@ import {
 import { createContext, cx } from "@yamada-ui/utils"
 
 interface LinkBoxContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   variableProps: Dict
 }
 

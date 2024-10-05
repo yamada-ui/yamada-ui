@@ -1,4 +1,4 @@
-export const TAGS: Record<string, string[]> = {
+export const TAGS: { [key: string]: string[] } = {
   AArrowDown: ["letter", "font size", "text", "formatting", "smaller"],
   AArrowUp: ["letter", "font size", "text", "formatting", "larger", "bigger"],
   Accessibility: ["disability", "disabled", "dda", "wheelchair"],

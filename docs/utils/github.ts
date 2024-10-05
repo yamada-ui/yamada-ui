@@ -36,7 +36,7 @@ export const generateSignature = (body: any) => {
   return digest
 }
 
-export const verifySignature = async ({ body, headers }: NextApiRequest) => {
+export const verifySignature = ({ body, headers }: NextApiRequest) => {
   const signature = (headers["x-hub-signature-256"] ??
     headers["x-signature"]) as string | undefined
 
@@ -86,7 +86,7 @@ export const getConstant = async (): Promise<Constant> => {
   return result
 }
 
-export const recursiveOctokit = async <T extends any = void>(
+export const recursiveOctokit = async <T = void>(
   callback: () => Promise<T>,
 ): Promise<T> => {
   try {
@@ -98,7 +98,7 @@ export const recursiveOctokit = async <T extends any = void>(
 
     if (isForbidden && isRateLimitExceeded) {
       const ratelimitReset =
-        (e as RequestError).response?.headers?.["x-ratelimit-reset"] ?? "0"
+        (e as RequestError).response?.headers["x-ratelimit-reset"] ?? "0"
       const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
@@ -117,7 +117,7 @@ export type ListEvent = { created_at: number } & Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number]
 
-const pagingOctokit = async <Y extends any>(
+const pagingOctokit = async <Y>(
   func: ({
     page,
     per_page,

@@ -33,7 +33,7 @@ export const opened: APIHandler = async ({ constant, req, res }) => {
       user.login !== github.id,
   )
 
-  await recursiveOctokit(() =>
+  await recursiveOctokit(async () =>
     octokit.issues.addAssignees({
       assignees: ["hirotomoyamada"],
       issue_number: number,
@@ -56,7 +56,7 @@ export const opened: APIHandler = async ({ constant, req, res }) => {
 
     selectedReviewers = ["hirotomoyamada"]
 
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.pulls.requestReviewers({
         owner,
         pull_number: number,
@@ -85,7 +85,7 @@ export const opened: APIHandler = async ({ constant, req, res }) => {
       ]
     }
 
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.pulls.requestReviewers({
         owner,
         pull_number: number,

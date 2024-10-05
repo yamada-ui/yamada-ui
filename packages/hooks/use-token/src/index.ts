@@ -64,8 +64,8 @@ export const getToken =
 
       if (isArray(value)) {
         value = [
-          get<Y>(theme, `${name}.${value[0]}`) ?? value[0],
-          get<Y>(theme, `${name}.${value[1]}`) ?? value[1],
+          get<Y>(theme, `${name}.${value[0]}`, value[0]),
+          get<Y>(theme, `${name}.${value[1]}`, value[1]),
         ]
       } else {
         value = get<undefined | Y>(theme, `${name}.${value}`) ?? value

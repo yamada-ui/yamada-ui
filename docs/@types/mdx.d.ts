@@ -1,20 +1,21 @@
 import type { Document } from "mdx"
 
 declare module "mdx" {
-  type DocumentTree = {
+  interface DocumentTree
+    extends Pick<
+      Document,
+      | "description"
+      | "is_expanded"
+      | "label"
+      | "menu"
+      | "menu_icon"
+      | "slug"
+      | "title"
+    > {
     children: DocumentTree[]
-  } & Pick<
-    Document,
-    | "description"
-    | "is_expanded"
-    | "label"
-    | "menu"
-    | "menu_icon"
-    | "slug"
-    | "title"
-  >
+  }
 
-  type DocumentPagination = {
+  interface DocumentPagination {
     next?: DocumentNavigation
     prev?: DocumentNavigation
   }

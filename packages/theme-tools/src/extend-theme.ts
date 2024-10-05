@@ -53,9 +53,9 @@ function createExtendTheme(initialTheme: Dict = defaultTheme) {
         theme = merge ? initialTheme : {}
       }
 
-      return overrides.reduce(
+      return overrides.reduce<Dict>(
         (prev, extension) => mergeObject(prev, runIfFunc(extension, prev)),
-        theme as Dict,
+        theme ?? {},
       )
     }
   }
@@ -101,7 +101,7 @@ export function extendStyle(
 
   return mergeObject(
     runIfFunc(get<UIStyle>(defaultTheme, `styles.${name}`, {}), props),
-    runIfFunc(style, props) ?? {},
+    runIfFunc(style, props),
   )
 }
 

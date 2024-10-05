@@ -15,10 +15,10 @@ export interface ContextMenuTriggerProps extends HTMLUIProps {}
 
 export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
   ({ className, children, ...rest }, ref) => {
-    const { styles } = useContextMenu()
+    const { styles } = useContextMenu() ?? {}
     const [position, setPosition] = useState<Position>({ left: 0, top: 0 })
 
-    const css: CSSUIObject = { ...styles.container }
+    const css: CSSUIObject = { ...styles?.container }
 
     const onContextMenu = (ev: MouseEvent) => {
       setPosition({ left: ev.pageX, top: ev.pageY })

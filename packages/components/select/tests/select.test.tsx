@@ -1,4 +1,5 @@
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { Option, OptionGroup, Select } from "../src"
 
 describe("<Select />", () => {
@@ -306,7 +307,7 @@ describe("<Select />", () => {
       await user.keyboard("{Escape>}{ArrowDown>}")
 
       const firstOption = await screen.findByRole("option", {
-        name: ITEMS[1].label,
+        name: ITEMS[1]?.label,
       })
       expect(firstOption).toHaveAttribute("data-focus")
     })
@@ -360,7 +361,7 @@ describe("<Select />", () => {
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Space>}")
-      expect(input).toHaveTextContent(ITEMS[0].label)
+      expect(input).toHaveTextContent(ITEMS[0]?.label ?? "")
     })
 
     test("enter keyDown should work correctly", async () => {
@@ -376,7 +377,7 @@ describe("<Select />", () => {
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Enter>}")
-      expect(input).toHaveTextContent(ITEMS[0].label)
+      expect(input).toHaveTextContent(ITEMS[0]?.label ?? "")
     })
 
     test("home keyDown should work correctly", async () => {
@@ -427,9 +428,7 @@ describe("<Select />", () => {
   })
 
   test("correct warnings should be issued when set empty value and placeholder in options", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <Select

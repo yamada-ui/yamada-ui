@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { isUndefined } from "@yamada-ui/react"
 import { getConstant, verifySignature } from "utils/github"
 import { pullRequest } from "./pull-request"
 import { pullRequestReview } from "./pull-request-review"
@@ -10,7 +11,7 @@ const actions = {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await verifySignature(req)
+    verifySignature(req)
   } catch {
     return res.status(400).send({ message: "Invalid signature", status: 400 })
   }
@@ -31,5 +32,5 @@ const getEventHandler = <T extends keyof typeof actions>(
   event: T,
   action: keyof (typeof actions)[T],
 ) => {
-  return actions[event]?.[action]
+  if (!isUndefined(actions[event])) return actions[event][action]
 }

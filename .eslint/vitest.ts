@@ -9,8 +9,9 @@ export const vitestConfig: Linter.Config = {
   plugins: { vitest: fixupPluginRules(vitestPlugin) },
   rules: {
     ...vitestPlugin.configs.recommended.rules,
-    "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/expect-expect": "off",
+
+    "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/no-alias-methods": "error",
     "vitest/no-conditional-expect": "error",
     "vitest/no-conditional-in-test": "error",

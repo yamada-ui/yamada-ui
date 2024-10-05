@@ -31,7 +31,7 @@ describe("<Editable />", () => {
     expect(getByTestId("EditableInput")).toHaveAttribute("value", "Some text")
   })
 
-  test("should render with preview focusable", async () => {
+  test("should render with preview focusable", () => {
     const { getByTestId } = render(
       <Editable
         defaultValue="Some text"
@@ -47,8 +47,8 @@ describe("<Editable />", () => {
       target: {
         value: "Updated text",
       },
-    }),
-      expect(getByTestId("EditablePreview")).toHaveTextContent("Updated text")
+    })
+    expect(getByTestId("EditablePreview")).toHaveTextContent("Updated text")
     expect(getByTestId("EditableInput")).toHaveAttribute(
       "value",
       "Updated text",
@@ -124,12 +124,12 @@ describe("<Editable />", () => {
     fireEvent.keyDown(getByTestId("EditableInput"), {
       key: "Enter",
       shiftKey: true,
-    }),
-      fireEvent.keyDown(getByTestId("EditableInput"), {
-        key: "Enter",
-        metaKey: true,
-      }),
-      expect(onSubmit).not.toHaveBeenCalled()
+    })
+    fireEvent.keyDown(getByTestId("EditableInput"), {
+      key: "Enter",
+      metaKey: true,
+    })
+    expect(onSubmit).not.toHaveBeenCalled()
   })
 
   test("calls onChange when input value changes", () => {
@@ -204,7 +204,7 @@ describe("<Editable />", () => {
     expect(onCancel).not.toHaveBeenCalled()
   })
 
-  test("calls onSubmit when onBlur is triggered with submitOnBlur", async () => {
+  test("calls onSubmit when onBlur is triggered with submitOnBlur", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
@@ -218,13 +218,13 @@ describe("<Editable />", () => {
         <EditableInput data-testid="EditableInput" />
       </Editable>,
     )
-    await act(async () => fireEvent.focus(getByTestId("EditablePreview")))
-    await act(async () => fireEvent.blur(getByTestId("EditableInput")))
+    act(() => fireEvent.focus(getByTestId("EditablePreview")))
+    act(() => fireEvent.blur(getByTestId("EditableInput")))
     expect(onSubmit).toHaveBeenCalledWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
   })
 
-  test("calls onCancel when onBlur", async () => {
+  test("calls onCancel when onBlur", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
@@ -238,8 +238,8 @@ describe("<Editable />", () => {
         <EditableInput data-testid="EditableInput" />
       </Editable>,
     )
-    await act(async () => fireEvent.focus(getByTestId("EditablePreview")))
-    await act(async () => fireEvent.blur(getByTestId("EditableInput")))
+    act(() => fireEvent.focus(getByTestId("EditablePreview")))
+    act(() => fireEvent.blur(getByTestId("EditableInput")))
     expect(onSubmit).not.toHaveBeenCalled()
     expect(onCancel).toHaveBeenCalledWith("Some text")
   })
@@ -286,7 +286,7 @@ describe("<EditableTextarea />", () => {
 })
 
 describe("useEditableControl", () => {
-  test("props are applied correctly", async () => {
+  test("props are applied correctly", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const CustomControls = () => {
@@ -321,13 +321,13 @@ describe("useEditableControl", () => {
     expect(getByTestId("edit")).toHaveAttribute("type", "button")
     expect(getByTestId("submit")).toHaveAttribute("type", "button")
     expect(getByTestId("cancel")).toHaveAttribute("type", "button")
-    await act(async () => fireEvent.click(getByTestId("submit")))
-    await act(async () => fireEvent.click(getByTestId("cancel")))
+    act(() => fireEvent.click(getByTestId("submit")))
+    act(() => fireEvent.click(getByTestId("cancel")))
     expect(onSubmit).toHaveBeenCalledWith("")
     expect(onCancel).toHaveBeenCalledWith("")
   })
 
-  test("switches to edit mode correctly", async () => {
+  test("switches to edit mode correctly", () => {
     const CustomControls = () => {
       const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
         useEditableControl()
@@ -355,7 +355,7 @@ describe("useEditableControl", () => {
       </Editable>,
     )
     expect(getByTestId("edit")).toBeInTheDocument()
-    await act(async () => fireEvent.click(getByTestId("edit")))
+    act(() => fireEvent.click(getByTestId("edit")))
     expect(getByTestId("submit")).toBeInTheDocument()
     expect(getByTestId("cancel")).toBeInTheDocument()
   })

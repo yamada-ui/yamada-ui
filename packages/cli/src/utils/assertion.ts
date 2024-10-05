@@ -8,7 +8,7 @@ export const isNumber = (value: any): value is number =>
 export const isNotNumber = (value: any): boolean =>
   typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
 
-export const isNumeric = (value: number | string): boolean =>
+export const isNumeric = (value: any): boolean =>
   value != null &&
   parseFloat(value.toString()) - parseFloat(value.toString()) + 1 >= 0
 
@@ -16,7 +16,7 @@ export const isString = (value: any): value is string =>
   Object.prototype.toString.call(value) === "[object String]"
 
 export const isUndefined = (value: any): value is undefined =>
-  typeof value === "undefined" && value === undefined
+  typeof value === "undefined"
 
 export const isNull = (value: any): value is null => value === null
 

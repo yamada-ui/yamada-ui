@@ -164,7 +164,7 @@ const defaultFormat = (value: string) => {
   const reg = new RegExp("(" + Object.keys(kanaMap).join("|") + ")", "g")
 
   value = value
-    .replace(reg, (v) => kanaMap[v])
+    .replace(reg, (v) => kanaMap[v]!)
     .replace(/ﾞ/g, "゛")
     .replace(/ﾟ/g, "゜")
 
@@ -459,7 +459,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
         if (selectedIndexes.includes(first.index)) {
           const enabledFirst = enabledValues[0]
 
-          setFocusedIndex(enabledFirst.index)
+          setFocusedIndex(enabledFirst?.index ?? -1)
         } else {
           setFocusedIndex(first.index)
         }
@@ -493,7 +493,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
         if (selectedIndexes.includes(last.index)) {
           const enabledLast = enabledValues.reverse()[0]
 
-          setFocusedIndex(enabledLast.index)
+          setFocusedIndex(enabledLast?.index ?? -1)
         } else {
           setFocusedIndex(last.index)
         }
@@ -545,7 +545,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
               enabledValues.find(({ index }) => next.index < index) ??
               enabledValues[0]
 
-            setFocusedIndex(enabledNext.index)
+            setFocusedIndex(enabledNext?.index ?? -1)
           } else {
             setFocusedIndex(next.index)
           }
@@ -582,7 +582,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
               enabledValues.reverse().find(({ index }) => index < prev.index) ??
               enabledValues[0]
 
-            setFocusedIndex(enabledPrev.index)
+            setFocusedIndex(enabledPrev?.index ?? -1)
           } else {
             setFocusedIndex(prev.index)
           }
@@ -690,8 +690,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
           return selectedValues[0] as T
         } else {
           selectedValues.forEach((selectedValue) => {
-            const isSelected =
-              isArray(prev) && prev.includes(selectedValue ?? "")
+            const isSelected = isArray(prev) && prev.includes(selectedValue)
 
             if (!isSelected) {
               prev = [...(isArray(prev) ? prev : []), selectedValue] as T
@@ -832,7 +831,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
       const targetItem = newItems[i]
 
-      if (i !== -1 && "items" in targetItem) {
+      if (i !== -1 && targetItem && "items" in targetItem) {
         if (secondInsertPositionItem === "first") {
           targetItem.items = [newItem, ...(targetItem.items ?? [])]
         } else {
@@ -910,7 +909,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
     if (!isMulti) {
       onChange("", { forceUpdate: true })
     } else {
-      onChange(value[value.length - 1])
+      onChange(value[value.length - 1]!)
     }
 
     if (!isOpen) onFocus()
@@ -1037,9 +1036,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
   useEffect(() => {
     if (isMulti) {
-      if (
-        JSON.stringify(prevValue.current ?? []) === JSON.stringify(value ?? [])
-      )
+      if (JSON.stringify(prevValue.current ?? []) === JSON.stringify(value))
         return
 
       const label = getSelectedValues(value)

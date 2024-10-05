@@ -25,7 +25,7 @@ describe("<ScrollArea />", () => {
     getByText("Item 1")
   })
 
-  test("can control the scroll position", async () => {
+  test("can control the scroll position", () => {
     const { container } = render(
       <ScrollArea>
         <Content />
@@ -122,7 +122,7 @@ describe("<ScrollArea />", () => {
     )
   })
 
-  test("never style is applied correctly", async () => {
+  test("never style is applied correctly", () => {
     const { getByTestId } = render(
       <ScrollArea type="never" data-testid="ScrollArea">
         <Content />

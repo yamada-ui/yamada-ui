@@ -6,6 +6,7 @@ import {
   AlertTitle,
   Box,
   CloseButton,
+  noop,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Alert>
@@ -307,7 +308,7 @@ export const useCustomLayout: Story = () => {
             か…完全体に………完全体になれさえすれば………！！！
           </AlertDescription>
         </Box>
-        <CloseButton position="absolute" right={2} top={2} onClick={() => {}} />
+        <CloseButton position="absolute" right={2} top={2} onClick={noop} />
       </Alert>
     </>
   )

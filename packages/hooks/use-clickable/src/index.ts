@@ -56,9 +56,7 @@ const isValidElement = (
 ): boolean => {
   const { isContentEditable, tagName } = ev.target as HTMLElement
 
-  return (
-    tagName !== "INPUT" && tagName !== "TEXTAREA" && isContentEditable !== true
-  )
+  return tagName !== "INPUT" && tagName !== "TEXTAREA" && !isContentEditable
 }
 
 export const useClickable = <

@@ -28,7 +28,7 @@ interface AutocompleteContext
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: string | string[]
   formControlProps: { [key: string]: any }
   inputProps: DOMAttributes<HTMLInputElement>

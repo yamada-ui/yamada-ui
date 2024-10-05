@@ -98,7 +98,7 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
     assignIndex(sorted)
   }
 
-  const register = (nodeOrOptions: DescendantOptions<T, K> | null | T) => {
+  const register = (nodeOrOptions?: DescendantOptions<T, K> | null | T) => {
     if (nodeOrOptions == null) return
 
     if (isElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
@@ -106,7 +106,9 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
     return (node: null | T) => setDescendants(node, nodeOrOptions)
   }
 
-  const unregister = (node: T) => {
+  const unregister = (node?: T) => {
+    if (node == null) return
+
     descendants.delete(node)
 
     const sorted = sortNodes(Array.from(descendants.keys()))
@@ -121,10 +123,10 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   const enabledCount = (filter?: FilterDescendant<T, K>) =>
     enabledValues(filter).length
 
-  const indexOf = (node: null | T) =>
+  const indexOf = (node?: null | T) =>
     !node ? -1 : (descendants.get(node)?.index ?? -1)
 
-  const enabledIndexOf = (node: null | T, filter?: FilterDescendant<T, K>) =>
+  const enabledIndexOf = (node?: null | T, filter?: FilterDescendant<T, K>) =>
     node == null
       ? -1
       : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))

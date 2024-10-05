@@ -335,7 +335,7 @@ describe("CSS", () => {
 })
 
 describe("useCSS", () => {
-  test("returns styles with theme values", async () => {
+  test("returns styles with theme values", () => {
     const Component: FC = () => {
       const className = useCSS({
         color: "gray.500",

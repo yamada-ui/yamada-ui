@@ -16,7 +16,7 @@ export interface UseChartReferenceLineOptions {
 }
 
 interface UseChartReferenceLineProps extends UseChartReferenceLineOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartReferenceLine = ({
@@ -52,7 +52,7 @@ export const useChartReferenceLine = ({
     Omit<Recharts.ReferenceLineProps, "ref">
   > = useCallback(
     ({ className, index, ...props }, ref = null) => {
-      const { color, label, propClassName, ...rest } = propList[index]
+      const { color, label, propClassName, ...rest } = propList[index] ?? {}
 
       return {
         ref,

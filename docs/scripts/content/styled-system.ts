@@ -104,9 +104,9 @@ const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
 const sortObject = (obj: { [key: string]: any }) =>
   Object.keys(obj)
     .sort()
-    .reduce(
+    .reduce<{ [key: string]: any }>(
       (prev, key) => ({ ...prev, [key]: obj[key] }),
-      {} as { [key: string]: any },
+      {},
     )
 
 const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {
@@ -162,7 +162,7 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
 }
 
 const getProp =
-  (sourceFile: SourceFile, sourceCode: string = "") =>
+  (sourceFile: SourceFile, sourceCode = "") =>
   (property: PropertyAssignment) => {
     const { name, initializer } = property
 
@@ -206,14 +206,14 @@ const getRelatedProp = (value: string) => {
   if (isStringObject(value)) {
     value = JSON.parse(value).properties
   } else {
-    value = value.split(".")[1]
+    value = value.split(".")[1] ?? ""
   }
 
   return value
 }
 
 const parseProps: p.RequiredRunner =
-  (type: Type, source: string, targetStatements: string[]) => async (_, s) => {
+  (type: Type, source: string, targetStatements: string[]) => (_, s) => {
     s.start(`Parsing the ${type} props`)
 
     const isPseudo = type === "pseudo"
@@ -242,16 +242,17 @@ const parseProps: p.RequiredRunner =
         } else if (!isShorthand) {
           const config = getConfig(prop, value)
 
-          if (config) props[prop] = { ...props[prop], ...config }
+          props[prop] = { ...props[prop], ...config }
         } else {
           const relatedProp = getRelatedProp(value)
 
-          const shorthands = props[relatedProp].shorthands ?? []
+          const shorthands = props[relatedProp]?.shorthands ?? []
 
-          props[relatedProp] = {
-            ...props[relatedProp],
-            shorthands: [...shorthands, prop],
-          }
+          if (props[relatedProp])
+            props[relatedProp] = {
+              ...props[relatedProp],
+              shorthands: [...shorthands, prop],
+            }
         }
       } else if (hasChildren) {
         node.forEachChild(getRecursiveProps(isShorthand))

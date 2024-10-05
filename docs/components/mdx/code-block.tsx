@@ -7,7 +7,7 @@ import dynamic from "next/dynamic"
 import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import { toBoolean } from "utils/boolean"
 
-const EditableCodeBlock = dynamic(() => import("./editable-code-block"))
+const EditableCodeBlock = dynamic(async () => import("./editable-code-block"))
 
 interface Children {
   props: {
@@ -117,13 +117,13 @@ const computeHighlight = (highlight: string) => {
   if (!REG.test(highlight)) return () => false
 
   const lines = REG.exec(highlight)?.[1]
-    .split(`,`)
+    ?.split(`,`)
     .map((str) => str.split(`-`).map((x) => parseInt(x, 10)))
 
   return (index: number) => {
     const line = index + 1
 
-    return lines?.some(([start, end]) =>
+    return lines?.some(([start = 0, end]) =>
       end ? line >= start && line <= end : line === start,
     )
   }

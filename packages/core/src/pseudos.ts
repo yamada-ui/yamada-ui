@@ -28,11 +28,8 @@ const toPeer = <Y extends string>(selectors: Y) =>
 const parse = (selectors: string) =>
   selectors.split(",").map((selector) => selector.trim().slice(1))
 
-const merge = (
-  selectors: string[],
-  prefix: string = "&",
-  suffix: string = "",
-) => selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
+const merge = (selectors: string[], prefix = "&", suffix = "") =>
+  selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
 
 export const attributes = {
   /**

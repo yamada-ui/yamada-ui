@@ -30,7 +30,7 @@ type Collaborator = Awaited<
   ReturnType<typeof octokit.repos.listCollaborators>
 >["data"][number]
 
-type Insight = {
+interface Insight {
   approved: Review[]
   comments: Comment[]
   commits: Commit[]
@@ -55,7 +55,7 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const chunkArray = <T extends any>(array: T[], n: number) =>
+const chunkArray = <T>(array: T[], n: number) =>
   new Array(Math.ceil(array.length / n))
     .fill(0)
     .map((_, i) => array.slice(i * n, (i + 1) * n))
@@ -66,7 +66,7 @@ const getTimestamp = (item: Comment | Issue | Review) =>
 const getCollaborators =
   ({ user }: Options) =>
   async () => {
-    const { data } = await recursiveOctokit(() =>
+    const { data } = await recursiveOctokit(async () =>
       octokit.repos.listCollaborators({
         ...COMMON_PARAMS,
         per_page: 100,
@@ -83,7 +83,7 @@ const getIssuesAndPullRequests =
 
     const start = startDate.format(QUERY_FORMAT)
     const end = endDate.format(QUERY_FORMAT)
-    const query = `org:${COMMON_PARAMS["owner"]} author:${username} created:${start}..${end}`
+    const query = `org:${COMMON_PARAMS.owner} author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
@@ -126,9 +126,9 @@ const getIssuesAndPullRequests =
 const getComments =
   ({ endDate, startDate }: Options) =>
   async () => {
-    const { data: repositories } = await recursiveOctokit(() =>
+    const { data: repositories } = await recursiveOctokit(async () =>
       octokit.repos.listForOrg({
-        org: COMMON_PARAMS["owner"],
+        org: COMMON_PARAMS.owner,
       }),
     )
 
@@ -177,7 +177,7 @@ const getReviews =
 
     const start = startDate.subtract(1, "month").format(QUERY_FORMAT)
     const end = endDate.format(QUERY_FORMAT)
-    const query = `org:${COMMON_PARAMS["owner"]} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
+    const query = `org:${COMMON_PARAMS.owner} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
@@ -206,7 +206,7 @@ const getReviews =
 
     const reviewsAndApproved = (
       await Promise.all(
-        pullRequests.map(({ number, repository_url }) =>
+        pullRequests.map(async ({ number, repository_url }) =>
           recursiveOctokit(async () => {
             const repo = repository_url.split("/").at(-1)!
 
@@ -235,7 +235,7 @@ const getReviews =
 
       if (state !== "APPROVED") {
         reviews.push(item)
-      } else if (state === "APPROVED") {
+      } else {
         approved.push(item)
       }
     })
@@ -247,7 +247,7 @@ const getCommits =
   ({ endDate, startDate }: Options) =>
   async () => {
     const { data: repositories } = await octokit.repos.listForOrg({
-      org: COMMON_PARAMS["owner"],
+      org: COMMON_PARAMS.owner,
     })
 
     let commits: Commit[] = []
@@ -529,9 +529,9 @@ const uploadData =
         repo: "yamada-data",
       })
 
-      const sha = isArray(data) ? data[0].sha : data.sha
+      const sha = isArray(data) ? data[0]?.sha : data.sha
       const downloadUrl = isArray(data)
-        ? data[0].download_url
+        ? data[0]?.download_url
         : data.download_url
 
       const res = await fetch(downloadUrl!)
@@ -564,7 +564,7 @@ const uploadData =
     } catch {}
   }
 
-type CommandOptions = {
+interface CommandOptions {
   end: string | undefined
   extended: boolean | string[] | undefined
   publish: boolean | undefined
@@ -572,7 +572,7 @@ type CommandOptions = {
   upload: boolean | undefined
   user: string[] | undefined
 }
-type Options = {
+interface Options {
   endDate: Dayjs
   extended: boolean | string[]
   publish: boolean
@@ -580,7 +580,7 @@ type Options = {
   user: string[]
 }
 
-const main = async () => {
+const main = () => {
   program
     .option("-s, --start <date>")
     .option("-e, --end <date>")

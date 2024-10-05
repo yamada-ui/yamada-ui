@@ -10,16 +10,14 @@ import { config, theme } from "./theme"
 
 const App = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <UIProvider
-        colorModeManager={colorModeManager.cookieStorage}
-        config={config}
-        theme={theme}
-        themeSchemeManager={themeSchemeManager.cookieStorage}
-      >
-        {children}
-      </UIProvider>
-    </>
+    <UIProvider
+      colorModeManager={colorModeManager.cookieStorage}
+      config={config}
+      theme={theme}
+      themeSchemeManager={themeSchemeManager.cookieStorage}
+    >
+      {children}
+    </UIProvider>
   )
 }
 

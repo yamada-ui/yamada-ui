@@ -62,7 +62,7 @@ export function isAccessible(colorScheme: string) {
   )
 }
 
-export function getColor(color: string, fallback: string = "#000000") {
+export function getColor(color: string, fallback = "#000000") {
   return function (
     theme: Dict = {},
     colorMode: ColorMode = "light",
@@ -176,11 +176,11 @@ export function randomColor({
 }: { colors?: string[]; string?: string } = {}) {
   const fallback = randomHex()
 
-  if (string && colors) return randomColorFromList(string, colors)
+  if (string && colors) return randomColorFromList(string, colors) ?? fallback
 
   if (string && !colors) return randomColorFromString(string)
 
-  if (colors && !string) return randomFromList(colors)
+  if (colors && !string) return randomFromList(colors) ?? fallback
 
   return fallback
 }

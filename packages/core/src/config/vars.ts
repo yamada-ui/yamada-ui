@@ -2,7 +2,7 @@ import type { Dict } from "@yamada-ui/utils"
 import type { CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
-import { flattenObject, isArray, isObject } from "@yamada-ui/utils"
+import { flattenObject, isArray, isObject, isUndefined } from "@yamada-ui/utils"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { tokenToVar } from "./utils"
 
@@ -11,7 +11,7 @@ function insertObject(obj: Dict, segments: string[], value: any): any {
 
   const [head, ...rest] = segments
 
-  obj[head] = insertObject(obj[head] ?? {}, rest, value)
+  if (!isUndefined(head)) obj[head] = insertObject(obj[head] ?? {}, rest, value)
 
   return obj
 }

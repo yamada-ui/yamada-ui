@@ -1,5 +1,4 @@
 import type {
-  GetStaticPathsContext,
   GetStaticPathsResult,
   GetStaticPropsContext,
   InferGetStaticPropsType,
@@ -22,7 +21,7 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { PageProvider, useI18n } from "contexts"
@@ -48,7 +47,7 @@ const generatePaths = (slug: Slug): Paths =>
     params: { slug },
   }))
 
-export const getStaticPaths = async ({}: GetStaticPathsContext) => {
+export const getStaticPaths = () => {
   const paths: Paths = SLUGS.flatMap((slug) => generatePaths(slug))
 
   return { fallback: false, paths }
@@ -111,7 +110,7 @@ const Page: NextPage<PageProps> = ({
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
-        <SEO
+        <Seo
           description={t("examples.description")}
           title={t(`examples.${currentSlug}.title`)}
         />

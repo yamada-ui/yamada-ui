@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
 }
 
 const Index = () => {
-  return <Layout></Layout>
+  return <Layout />
 }
 
 export default Index

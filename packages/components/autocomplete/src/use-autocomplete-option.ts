@@ -16,7 +16,7 @@ import {
 } from "./autocomplete-context"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
+  isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
 export interface UseAutocompleteOptionProps
   extends Omit<HTMLUIProps<"li">, "children" | "value"> {

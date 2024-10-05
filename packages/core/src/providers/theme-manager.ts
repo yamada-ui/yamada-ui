@@ -1,7 +1,7 @@
 import type { Theme } from "../theme.types"
 import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
-const hasSupport = !!globalThis?.document
+const hasSupport = !!(globalThis.document as Document | undefined)
 
 export interface ThemeSchemeManager {
   type: "cookie" | "localStorage"

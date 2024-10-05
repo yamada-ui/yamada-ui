@@ -47,7 +47,7 @@ export interface ThemeProps<
    *
    * @private
    */
-  __styles?: { [key: string]: CSSUIObject } | CSSUIObject
+  __styles?: { [key: string]: CSSUIObject | undefined } | CSSUIObject
 }
 
 export type ColorModeArray<Y, M extends boolean = true> = M extends true

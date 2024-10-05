@@ -442,7 +442,7 @@ export const useCookieStorage: Story = () => {
       getItem: (key) => {
         const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
-        return match ? match[2] : null
+        return match ? (match[2] ?? null) : null
       },
       setItem: (key, value) => {
         document.cookie = `${key}=${value}; max-age=31536000; path=/`

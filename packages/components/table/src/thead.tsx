@@ -1,11 +1,11 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type {
   TableHeadProps as NativeTableHeadProps,
   ThProps,
 } from "@yamada-ui/native-table"
 import type { Column, SortDirection } from "./use-table"
-import { FC } from "@yamada-ui/core"
 import { ChevronIcon, Icon } from "@yamada-ui/icon"
 import {
   Thead as NativeThead,

@@ -80,7 +80,7 @@ export interface UseBarChartOptions {
 }
 
 export interface UseBarChartProps extends UseBarChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useBarChart = ({
@@ -256,13 +256,20 @@ export const useBarChart = ({
     Omit<Recharts.BarProps, "ref">
   > = useCallback(
     ({ className: classNameProp, index, ...props }, ref = null) => {
-      const { id, className, activeBar, background, color, dataKey, ...rest } =
-        barPropsList[index]
+      const {
+        id,
+        className,
+        activeBar,
+        background,
+        color,
+        dataKey = "",
+        ...rest
+      } = barPropsList[index] ?? {}
 
       return {
         id,
         ref,
-        name: dataKey as string,
+        name: dataKey,
         className: cx(classNameProp, className),
         activeBar,
         background,

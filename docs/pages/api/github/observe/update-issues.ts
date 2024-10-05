@@ -60,7 +60,7 @@ const getAssignedEvent = async ({
   owner: string
   repo: string
 }) => {
-  const { data } = await recursiveOctokit(() =>
+  const { data } = await recursiveOctokit(async () =>
     octokit.issues.listEvents({
       issue_number,
       owner,
@@ -125,7 +125,7 @@ const addHelpWanted = async ({
   if (hasPullRequest) return
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.addLabels({
         issue_number: number,
         labels: ["help wanted"],
@@ -193,7 +193,7 @@ const clearAssignees = async ({
   if (!assigneeIds?.length) return
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.createComment({
         body: GITHUB_INFORMATION_COMMENT(constant)(assigneeIds),
         issue_number: number,
@@ -206,7 +206,7 @@ const clearAssignees = async ({
   }
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.removeAssignees({
         assignees: assigneeIds,
         issue_number: number,

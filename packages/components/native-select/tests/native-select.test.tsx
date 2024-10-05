@@ -33,7 +33,7 @@ describe("<NativeSelect />", () => {
     ).toBeFalsy()
   })
 
-  test("should render select without placeholder in options", async () => {
+  test("should render select without placeholder in options", () => {
     render(
       <NativeSelect
         focusBorderColor="green.500"
@@ -112,6 +112,6 @@ describe("<NativeSelect />", () => {
     expect(children).toHaveLength(2)
     const optgroup = screen.getByRole("group", { name: "地球人" })
     expect(optgroup).toBeInTheDocument()
-    expect(optgroup?.children).toHaveLength(3)
+    expect(optgroup.children).toHaveLength(3)
   })
 })

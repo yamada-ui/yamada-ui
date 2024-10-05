@@ -117,23 +117,22 @@ export const transformProps: TransformProps = {
   vars: ["vars"],
 }
 
-export const transformMap = Object.entries(transformProps).reduce(
-  (prev, [_transform, list]) => {
-    const transform = _transform as Transforms
+export const transformMap = Object.entries(transformProps).reduce<{
+  [key in TransformProperties]?: TransformOptions[]
+}>((prev, [_transform, list]) => {
+  const transform = _transform as Transforms
 
-    list.forEach((item) => {
-      if (typeof item === "string") {
-        prev[item] ??= []
-        prev[item].push({ transform })
-      } else {
-        const { args, properties } = item
+  list.forEach((item) => {
+    if (typeof item === "string") {
+      prev[item] ??= []
+      prev[item].push({ transform })
+    } else {
+      const { args, properties } = item
 
-        prev[properties] ??= []
-        prev[properties].push({ args, transform })
-      }
-    })
+      prev[properties] ??= []
+      prev[properties].push({ args, transform })
+    }
+  })
 
-    return prev
-  },
-  {} as { [key in TransformProperties]: TransformOptions[] },
-)
+  return prev
+}, {})

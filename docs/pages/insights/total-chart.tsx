@@ -218,7 +218,7 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
       dataKey="period"
       fillOpacity={[0.8, 0.7]}
       series={series}
-      withActiveDots={true}
+      withActiveDots
       withDots={false}
       xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)(locale)}
       tooltipProps={{
@@ -246,10 +246,10 @@ const BarChart: FC<BarChartProps> = memo(() => {
           getInsightScore(data)
 
         if (result[user]) {
-          result[user]["Comments"] += comments
-          result[user]["Issues"] += issues
+          result[user].Comments += comments
+          result[user].Issues += issues
           result[user]["Pull Requests"] += pullRequests
-          result[user]["Approved"] += approved
+          result[user].Approved += approved
           result[user].total += total
         } else {
           result[user] = {

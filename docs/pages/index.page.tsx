@@ -11,7 +11,7 @@ import {
   Wrap,
 } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { OpenCollective, Patreon, SEO } from "components/media-and-icons"
+import { OpenCollective, Patreon, Seo } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { PageProvider, useI18n } from "contexts"
@@ -28,7 +28,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
-        <SEO
+        <Seo
           description={t("home.description")}
           disableTitleTemplate
           title={t("home.title")}

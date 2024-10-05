@@ -35,7 +35,7 @@ const getVersion = async () => {
     path.resolve(CONSTANT.PATH.ROOT, "packages", "react"),
   )
 
-  const { version } = packages[0].manifest
+  const { version } = packages[0]?.manifest ?? {}
 
   return version ? `v${version}` : null
 }
@@ -52,7 +52,7 @@ export const getStaticCommonProps = async ({
 
 export const getStaticDocumentPaths =
   (name: string) =>
-  async ({ locales = [] }: GetStaticPathsContext) => {
+  ({ locales = [] }: GetStaticPathsContext) => {
     const paths = documentPaths
       .flatMap((path) => {
         if (!path.startsWith(name)) return

@@ -119,7 +119,7 @@ describe("<Markdown />", () => {
         expect(secondLine).toBeInTheDocument()
       })
 
-      test("Nothing should be rendered.", async () => {
+      test("Nothing should be rendered.", () => {
         const content = dedent`
           :::note Status is nothing.
           :::
@@ -350,7 +350,7 @@ describe("<Markdown />", () => {
         expect(thirdLineText).toBeInTheDocument()
       })
 
-      test("if there is no string between `:::note` and `:::`, nothing should be rendered.", async () => {
+      test("if there is no string between `:::note` and `:::`, nothing should be rendered.", () => {
         const content = dedent`
           :::note
           :::

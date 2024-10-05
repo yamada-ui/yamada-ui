@@ -32,7 +32,10 @@ interface PanEventHandlers {
   onStart: PanEventHandler
 }
 
-const subtract = (a: Point, b: Point) => ({ x: a.x - b.x, y: a.y - b.y })
+const subtract = (a: Point, b?: Point) => ({
+  x: a.x - (b?.x ?? 0),
+  y: a.y - (b?.y ?? 0),
+})
 
 const getPanInfo = (info: PointerEventInfo, history: PanEventHistory) => ({
   delta: subtract(info.point, history[history.length - 1]),
@@ -47,7 +50,7 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
   if (history.length < 2) return { x: 0, y: 0 }
 
   let i = history.length - 1
-  let timestampedPoint: null | TimestampedPoint = null
+  let timestampedPoint: TimestampedPoint | undefined = undefined
 
   const lastPoint = history[history.length - 1]
 
@@ -55,8 +58,10 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
     timestampedPoint = history[i]
 
     if (
+      lastPoint &&
+      timestampedPoint &&
       lastPoint.timestamp - timestampedPoint.timestamp >
-      toMilliseconds(timeDelta)
+        toMilliseconds(timeDelta)
     ) {
       break
     }
@@ -64,7 +69,7 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
     i--
   }
 
-  if (!timestampedPoint) return { x: 0, y: 0 }
+  if (!lastPoint || !timestampedPoint) return { x: 0, y: 0 }
 
   const time = (lastPoint.timestamp - timestampedPoint.timestamp) / 1000
 
@@ -83,7 +88,7 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
 }
 
 const pipe =
-  <Y extends any>(...fns: ((a: Y) => Y)[]) =>
+  <Y>(...fns: ((a: Y) => Y)[]) =>
   (v: Y) =>
     fns.reduce((a, b) => b(a), v)
 
@@ -108,7 +113,7 @@ const distance = <Y extends number | Point>(a: Y, b: Y) => {
 const panEvent = (
   ev: AnyPointerEvent,
   handlers: Partial<PanEventHandlers>,
-  threshold: number = 3,
+  threshold = 3,
 ) => {
   if (isMultiTouchEvent(ev)) return
 
@@ -169,7 +174,7 @@ const panEvent = (
 
     if (!onEnd || !startEvent) return
 
-    onEnd?.(ev, panInfo)
+    onEnd(ev, panInfo)
   }
 
   const updateHandlers = (newHandlers: Partial<PanEventHandlers>) => {
@@ -183,7 +188,7 @@ const panEvent = (
   )
 
   const end = () => {
-    removeListeners?.()
+    removeListeners()
 
     cancelSync.update(updatePoint)
   }

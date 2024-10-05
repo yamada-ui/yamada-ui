@@ -14,7 +14,7 @@ const meta: Meta<typeof Table> = {
 
 export default meta
 
-type Data = {
+interface Data {
   name: string
   broadcastPeriod: string
   episode: string

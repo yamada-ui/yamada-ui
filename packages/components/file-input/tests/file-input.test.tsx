@@ -46,7 +46,7 @@ describe("<FileInput />", () => {
   test("should render files with format", () => {
     const { container } = render(
       <FileInput
-        format={({ name }) => `${name.substring(0, name.indexOf("."))}`}
+        format={({ name }) => name.substring(0, name.indexOf("."))}
         multiple
         placeholder="multiple"
         data-testid="FileInput"
@@ -137,7 +137,7 @@ describe("<FileInput />", () => {
     expect(resetRef).toBeTruthy()
     expect(typeof resetRef.current).toBe("function")
     act(() => {
-      resetRef.current && resetRef.current()
+      if (resetRef.current) resetRef.current()
     })
     expect(files).toBeFalsy()
     expect(setFiles).toHaveBeenCalledTimes(2)

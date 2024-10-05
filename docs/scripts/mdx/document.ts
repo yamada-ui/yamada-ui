@@ -12,14 +12,14 @@ export async function generateMDX(filePath: string): Promise<Document> {
 
   const { content, data } = matter(file)
   const {
-    description,
+    description = "",
     is_active,
     order,
     table_of_contents_max_lv,
-    title,
+    title = "",
     with_children_description,
     with_table_of_contents,
-  } = data as FrontMatter
+  } = data as Partial<FrontMatter>
 
   return {
     ...data,

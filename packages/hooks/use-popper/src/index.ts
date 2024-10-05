@@ -7,7 +7,7 @@ import type {
 import type { PropGetter, Token } from "@yamada-ui/core"
 import { createPopper } from "@popperjs/core"
 import { useValue } from "@yamada-ui/use-value"
-import { mergeRefs } from "@yamada-ui/utils"
+import { mergeRefs, noop } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 
 export type PopperProperty = (typeof popperProperties)[number]
@@ -101,7 +101,9 @@ const defaultEventListeners = {
   scroll: true,
 }
 
-const transforms: { [key: string]: string } = {
+const transforms: {
+  [key in Placement]?: string
+} = {
   bottom: "top center",
   "bottom-end": "top right",
   "bottom-start": "top left",
@@ -139,12 +141,12 @@ export const usePopper = ({
   const gutter = useValue(_gutter)
   const placement = useValue(_placement)
 
-  const cleanup = useRef(() => {})
+  const cleanup = useRef(noop)
 
   const setupPopper = useCallback(() => {
     if (!enabled || !reference.current || !popper.current) return
 
-    cleanup.current?.()
+    cleanup.current()
 
     const modifierTransformOrigin: Modifier<"transformOrigin", any> = {
       name: "transformOrigin",
@@ -153,14 +155,14 @@ export const usePopper = ({
         () => {
           state.elements.popper.style.setProperty(
             "--popper-transform-origin",
-            transforms[state.placement],
+            transforms[state.placement] ?? "",
           )
         },
       enabled: true,
       fn: ({ state }) => {
         state.elements.popper.style.setProperty(
           "--popper-transform-origin",
-          transforms[state.placement],
+          transforms[state.placement] ?? "",
         )
       },
       phase: "write",
@@ -207,7 +209,8 @@ export const usePopper = ({
         },
       enabled: !!matchWidth,
       fn: ({ state }) => {
-        state.styles.popper.width = `${state.rects.reference.width}px`
+        if (state.styles.popper)
+          state.styles.popper.width = `${state.rects.reference.width}px`
       },
       phase: "beforeWrite",
       requires: ["computeStyles"],
@@ -298,7 +301,7 @@ export const usePopper = ({
     popperRef,
     referenceRef,
     transformOrigin: "var(--popper-transform-origin)",
-    update: () => instance.current?.update(),
+    update: async () => instance.current?.update(),
     getPopperProps,
     getReferenceProps,
   }

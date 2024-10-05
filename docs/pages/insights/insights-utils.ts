@@ -86,12 +86,13 @@ export const labelFormatter =
       case "day":
         return date.format(locale === "ja" ? "M月D日" : "MMMM D")
 
-      case "week":
+      case "week": {
         const weekEnd = date.endOf("week").add(1, "d")
         const isAfter = dayjs(weekEnd).isAfter(end)
         const template = locale === "ja" ? "M月D日" : "MMM D"
 
         return `${date.format(template)} - ${isAfter ? dayjs(end).format(template) : weekEnd.format(template)}`
+      }
 
       case "month":
         return date.format(locale === "ja" ? "M月" : "MMMM")

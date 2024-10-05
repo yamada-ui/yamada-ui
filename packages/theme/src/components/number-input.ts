@@ -17,9 +17,16 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],
         },
+        _last: {
+          borderColor: "inherit",
+          borderStartWidth: "1px",
+          borderTopWidth: "1px",
+          mt: "-1px",
+        },
         _readOnly: { cursor: "auto" },
         borderColor: "inherit",
-        borderStart: "1px solid",
+        borderStartWidth: "1px",
+        borderStyle: "solid",
         color: ["blackAlpha.600", "whiteAlpha.700"],
       },
     },
@@ -32,9 +39,6 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           },
           _last: {
             borderBottomEndRadius: "sm",
-            borderColor: "inherit",
-            borderTop: "1px solid",
-            mt: "-1px",
           },
           fontSize: "xs",
         },
@@ -46,9 +50,6 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           },
           _last: {
             borderBottomEndRadius: "md",
-            borderColor: "inherit",
-            borderTop: "1px solid",
-            mt: "-1px",
           },
           fontSize: "sm",
         },
@@ -60,9 +61,6 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           },
           _last: {
             borderBottomEndRadius: "md",
-            borderColor: "inherit",
-            borderTop: "1px solid",
-            mt: "-1px",
           },
           fontSize: "md",
         },
@@ -74,9 +72,6 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           },
           _last: {
             borderBottomEndRadius: "md",
-            borderColor: "inherit",
-            borderTop: "1px solid",
-            mt: "-1px",
           },
           fontSize: "lg",
         },

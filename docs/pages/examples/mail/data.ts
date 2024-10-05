@@ -128,4 +128,4 @@ export const MAILS: MailItem[] = [
   },
 ]
 
-export const DEFAULT_MAIL = MAILS[0]
+export const DEFAULT_MAIL = MAILS[0]!

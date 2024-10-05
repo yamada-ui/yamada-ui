@@ -4,6 +4,7 @@ import type { Merge } from "@yamada-ui/utils"
 import type {
   ForwardedRef,
   PropsWithChildren,
+  ReactElement,
   ReactNode,
   RefAttributes,
 } from "react"
@@ -17,7 +18,7 @@ import { cx, dataAttr } from "@yamada-ui/utils"
 import { forwardRef, useCallback, useEffect, useState } from "react"
 import { ReorderItemProvider, useReorderContext } from "./reorder-context"
 
-interface ReorderItemOptions<Y extends any = string> {
+interface ReorderItemOptions<Y = string> {
   /**
    * The value of the reorder item.
    */
@@ -28,7 +29,7 @@ interface ReorderItemOptions<Y extends any = string> {
   label?: ReactNode
 }
 
-export interface ReorderItemProps<Y extends any = string>
+export interface ReorderItemProps<Y = string>
   extends Omit<
       Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
       "children" | "transition" | "value"
@@ -37,6 +38,7 @@ export interface ReorderItemProps<Y extends any = string>
     ReorderItemOptions<Y> {}
 
 export const ReorderItem = forwardRef(
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
   <Y extends any = string>(
     { className, children, label, value, ...rest }: ReorderItemProps<Y>,
     ref: ForwardedRef<HTMLLIElement>,
@@ -108,7 +110,7 @@ export const ReorderItem = forwardRef(
 ) as {
   <Y = string>(
     props: RefAttributes<HTMLLIElement> & ReorderItemProps<Y>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 ReorderItem.displayName = "ReorderItem"

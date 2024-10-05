@@ -35,7 +35,7 @@ function getColor(value: string | undefined, theme: StyledTheme) {
 
   color =
     theme.__cssMap && token in theme.__cssMap
-      ? theme.__cssMap[token].ref
+      ? theme.__cssMap[token]?.ref
       : color
 
   if (percent && !percent.endsWith("%")) percent = `${percent}%`

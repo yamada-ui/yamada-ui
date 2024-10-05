@@ -8,6 +8,10 @@ export const reactConfig: Linter.Config = {
   plugins: { react: reactPlugin },
   rules: {
     ...reactPlugin.configs.recommended.rules,
+
+    "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
+
     "react/forward-ref-uses-ref": "error",
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-brace-presence": "error",
@@ -15,8 +19,6 @@ export const reactConfig: Linter.Config = {
     "react/jsx-no-leaked-render": "error",
     "react/jsx-no-useless-fragment": "error",
     "react/jsx-pascal-case": "error",
-    "react/no-unescaped-entities": "off",
-    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/self-closing-comp": "error",
   },

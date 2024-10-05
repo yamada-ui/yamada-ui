@@ -12,7 +12,7 @@ import { createContext, cx, mergeRefs } from "@yamada-ui/utils"
 import { useMemo, useRef } from "react"
 
 interface InfiniteScrollAreaContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 const [InfiniteScrollAreaProvider, useInfiniteScrollAreaContext] =

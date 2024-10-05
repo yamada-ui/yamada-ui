@@ -48,8 +48,6 @@ const isValidNumericKeyboardEvent = (
   { key, altKey, ctrlKey, metaKey }: KeyboardEvent,
   isValid: (key: string) => boolean,
 ) => {
-  if (key == null) return true
-
   const isModifierKey = ctrlKey || altKey || metaKey
   const isSingleCharacterKey = key.length === 1
 
@@ -111,7 +109,7 @@ export interface UseNumberInputProps
    *
    * It is used to set the `aria-valuetext` property of the input.
    */
-  getAriaValueText?: (value: number | string) => string
+  getAriaValueText?: (value: number | string) => string | undefined
   /**
    * Hints at the type of data that might be entered by the user.
    * It also determines the type of keyboard shown to the user on mobile devices.
@@ -200,7 +198,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       if (!inputSelectionRef.current) return
 
       ev.target.selectionStart =
-        inputSelectionRef.current.start ?? ev.currentTarget.value?.length
+        inputSelectionRef.current.start ?? ev.currentTarget.value.length
       ev.currentTarget.selectionEnd =
         inputSelectionRef.current.end ?? ev.currentTarget.selectionStart
     }),
@@ -240,7 +238,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   })
 
   const valueText = useMemo(() => {
-    let text = getAriaValueText?.(value)
+    let text = getAriaValueText(value)
 
     if (text != null) return text
 
@@ -370,9 +368,9 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   useUpdateEffect(() => {
     if (valueAsNumber > max) {
-      onInvalid?.("rangeOverflow", format(value), valueAsNumber)
+      onInvalid("rangeOverflow", format(value), valueAsNumber)
     } else if (valueAsNumber < min) {
-      onInvalid?.("rangeOverflow", format(value), valueAsNumber)
+      onInvalid("rangeOverflow", format(value), valueAsNumber)
     }
   }, [valueAsNumber, value, format, onInvalid])
 
@@ -687,7 +685,7 @@ export interface NumberInputProps
     NumberInputOptions {}
 
 interface NumberInputContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   getDecrementProps: PropGetter<"button">
   getIncrementProps: PropGetter<"button">
   getInputProps: PropGetter<"input">
@@ -696,7 +694,7 @@ interface NumberInputContext {
 const [NumberInputContextProvider, useNumberInputContext] =
   createContext<NumberInputContext>({
     name: "NumberInputContext",
-    strict: false,
+    errorMessage: `useNumberInputContext returned is 'undefined'. Seems you forgot to wrap the components in "<NumberInput />"`,
   })
 
 /**

@@ -57,7 +57,7 @@ export interface NativeSelectItem
     NativeSelectItemWithItems {}
 
 interface NativeSelectContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 const [NativeSelectProvider, useNativeSelect] =

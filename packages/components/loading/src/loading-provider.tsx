@@ -10,6 +10,7 @@ import type {
   FC,
   MutableRefObject,
   PropsWithChildren,
+  ReactElement,
   ReactNode,
   RefObject,
 } from "react"
@@ -194,7 +195,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
 
 interface ControllerProps extends LoadingConfigOptions {
   controlRefs: ControlRefs
-  render?: (props: LoadingComponentProps) => JSX.Element
+  render?: (props: LoadingComponentProps) => ReactElement
 }
 
 const Controller: FC<ControllerProps> = ({
@@ -307,7 +308,7 @@ interface RenderProps extends LoadingComponentProps {
 
 const Render: FC<RenderProps> = ({ component, ...props }) => {
   if (typeof component === "function") {
-    return component(props) as JSX.Element
+    return component(props)
   } else {
     return null
   }

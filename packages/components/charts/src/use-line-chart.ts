@@ -15,7 +15,7 @@ import type {
   ReferenceLineProps,
 } from "./chart.types"
 import { getVar, useTheme } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { cx, runIfFunc } from "@yamada-ui/utils"
 import { useCallback, useMemo, useState } from "react"
 import { getComponentProps } from "./chart-utils"
 import {
@@ -103,7 +103,7 @@ export interface UseLineChartOptions {
 }
 
 interface UseLineChartProps extends UseLineChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useLineChart = ({
@@ -360,11 +360,11 @@ export const useLineChart = ({
   > = useCallback(
     ({ className: classNameProp, index, ...props }) => {
       const { className, activeDot, color, dataKey, dot, ...rest } =
-        linePropList[index]
+        linePropList[index] ?? {}
 
       return {
         type: curveType,
-        name: dataKey as string,
+        name: runIfFunc(dataKey, {}),
         className: cx(classNameProp, className),
         activeDot,
         connectNulls,

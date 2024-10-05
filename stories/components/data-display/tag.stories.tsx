@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Plus } from "@yamada-ui/lucide"
-import { Tag, Wrap } from "@yamada-ui/react"
+import { noop, Tag, Wrap } from "@yamada-ui/react"
 import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Tag>
@@ -87,23 +87,23 @@ export const withIcon: Story = () => {
 export const withCloseButton: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="primary" rounded="full" onClose={noop}>
         Primary
       </Tag>
 
-      <Tag colorScheme="secondary" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="secondary" rounded="full" onClose={noop}>
         Secondary
       </Tag>
 
-      <Tag colorScheme="success" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="success" rounded="full" onClose={noop}>
         Success
       </Tag>
 
-      <Tag colorScheme="warning" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="warning" rounded="full" onClose={noop}>
         Warning
       </Tag>
 
-      <Tag colorScheme="danger" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="danger" rounded="full" onClose={noop}>
         Danger
       </Tag>
     </Wrap>
@@ -118,7 +118,7 @@ export const withDisabled: Story = () => {
         isDisabled
         rounded="full"
         variant="solid"
-        onClose={() => {}}
+        onClose={noop}
       >
         Primary
       </Tag>
@@ -128,7 +128,7 @@ export const withDisabled: Story = () => {
         isDisabled
         rounded="full"
         variant="solid"
-        onClose={() => {}}
+        onClose={noop}
       >
         Secondary
       </Tag>
@@ -138,7 +138,7 @@ export const withDisabled: Story = () => {
         isDisabled
         rounded="full"
         variant="solid"
-        onClose={() => {}}
+        onClose={noop}
       >
         Warning
       </Tag>
@@ -148,7 +148,7 @@ export const withDisabled: Story = () => {
         isDisabled
         rounded="full"
         variant="solid"
-        onClose={() => {}}
+        onClose={noop}
       >
         Danger
       </Tag>

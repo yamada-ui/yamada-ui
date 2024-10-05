@@ -27,7 +27,7 @@ export const trackElementSize = (
     let width: number
     let height: number
 
-    if ("borderBoxSize" in entry) {
+    if (entry && "borderBoxSize" in entry) {
       const borderSizeEntry = entry.borderBoxSize
       const borderSize = isArray(borderSizeEntry)
         ? borderSizeEntry[0]
@@ -48,10 +48,10 @@ export const trackElementSize = (
   return () => observer.unobserve(el)
 }
 
-const trackMutation = (el: HTMLElement | null, cb: () => void) => {
-  if (!el || !el.parentElement) return
+const trackMutation = (el: HTMLElement | null | undefined, cb: () => void) => {
+  if (!el?.parentElement) return
 
-  const win = el.ownerDocument?.defaultView ?? window
+  const win = el.ownerDocument.defaultView ?? window
 
   const observer = new win.MutationObserver(() => {
     cb()

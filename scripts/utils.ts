@@ -1,5 +1,5 @@
-import type { RequestError } from "@octokit/request-error"
 import type { Options } from "prettier"
+import { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
 import { isArray } from "@yamada-ui/react"
 import { config } from "dotenv"
@@ -42,39 +42,46 @@ export const toKebabCase = (value: {} & string) =>
     .toLowerCase()
     .replace(/^-/, "")
 
-export const wait = (ms: number) =>
+export const wait = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
-export const recursiveOctokit = async <T extends any = void>(
+export const recursiveOctokit = async <T = void>(
   callback: () => Promise<T>,
 ): Promise<T> => {
   try {
     return await callback()
   } catch (e) {
-    const { message, response, status } = e as RequestError
+    if (e instanceof RequestError) {
+      const { message, response, status } = e
 
-    const isForbidden = status === 403
-    const isRateLimitExceeded =
-      response?.headers["x-ratelimit-remaining"] === "0"
-    const isTimeoutError = status === 500 && message === "Connect Timeout Error"
+      const isForbidden = status === 403
+      const isRateLimitExceeded =
+        response?.headers["x-ratelimit-remaining"] === "0"
+      const isTimeoutError =
+        status === 500 && message === "Connect Timeout Error"
 
-    if (isForbidden && isRateLimitExceeded) {
-      const ratelimitReset = response?.headers?.["x-ratelimit-reset"] ?? "0"
-      const resetTime = parseInt(ratelimitReset) * 1000
-      const waitTime = resetTime - Date.now() + 1000
+      if (isForbidden && isRateLimitExceeded) {
+        const ratelimitReset = response.headers["x-ratelimit-reset"] ?? "0"
+        const resetTime = parseInt(ratelimitReset) * 1000
+        const waitTime = resetTime - Date.now() + 1000
 
-      await wait(waitTime)
-      return await recursiveOctokit(callback)
-    } else if (isTimeoutError) {
-      await wait(3000)
-      return await recursiveOctokit(callback)
+        await wait(waitTime)
+        return await recursiveOctokit(callback)
+      } else if (isTimeoutError) {
+        await wait(3000)
+        return await recursiveOctokit(callback)
+      } else {
+        throw e
+      }
     } else {
       throw e
     }
   }
 }
 
-export type Constant = Record<string, any>
+export interface Constant {
+  [key: string]: any
+}
 
 export const getConstant = async (): Promise<Constant> => {
   const result: Constant = {}

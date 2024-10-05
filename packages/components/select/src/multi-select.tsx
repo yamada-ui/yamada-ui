@@ -39,7 +39,7 @@ interface MultiSelectOptions {
   component?: FC<{
     index: number
     label: string
-    value: number | string
+    value: string
     onRemove: MouseEventHandler<HTMLElement>
   }>
   /**
@@ -159,7 +159,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
           return (
             <OptionGroup
               key={i}
-              label={label ?? ""}
+              label={label}
               {...(props as HTMLUIProps<"ul">)}
             >
               {items.map(({ label, value, ...props }, i) => (
@@ -291,15 +291,15 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
 
-                onChange(value[index])
+                onChange(value[index] ?? "")
               }
 
               const el = component({
                 index,
                 label,
-                value: value[index],
+                value: value[index] ?? "",
                 onRemove,
-              }) as ReactElement
+              }) as null | ReactElement
 
               const style: CSSProperties = {
                 marginBlockEnd: "0.125rem",

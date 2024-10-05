@@ -45,8 +45,8 @@ const { DescendantsContextProvider, useDescendant, useDescendants } =
   createDescendant<HTMLButtonElement>()
 
 interface SegmentedControlContext {
-  selectedValue: string
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
+  value: string
   getInputProps: RequiredPropGetter<
     {
       index: number
@@ -71,7 +71,7 @@ interface SegmentedControlContext {
 const [SegmentedControlProvider, useSegmentedControl] =
   createContext<SegmentedControlContext>({
     name: "SegmentedControlContext",
-    strict: false,
+    errorMessage: `useSegmentedControl returned is 'undefined'. Seems you forgot to wrap the components in "<SegmentedControl />"`,
   })
 
 interface SegmentedControlOptions {
@@ -136,7 +136,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       isDisabled,
       isReadOnly,
       items = [],
-      value,
+      value: valueProp,
       onChange: onChangeProp,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -153,9 +153,9 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const [selectedValue, setSelectedValue] = useControllableState({
+    const [value, setValue] = useControllableState({
       defaultValue,
-      value,
+      value: valueProp,
       onChange: onChangeRef,
     })
 
@@ -167,9 +167,9 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
           return
         }
 
-        setSelectedValue(ev.target.value)
+        setValue(ev.target.value)
       },
-      [isDisabled, isReadOnly, setSelectedValue],
+      [isDisabled, isReadOnly, setValue],
     )
 
     const onFocus = useCallback(
@@ -221,7 +221,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       ) => {
         const disabled = props.disabled ?? isDisabledProp ?? isDisabled
         const readOnly = props.readOnly ?? isReadOnlyProp ?? isReadOnly
-        const checked = props.value === selectedValue
+        const checked = props.value === value
 
         return {
           ...props,
@@ -254,7 +254,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
           ),
         }
       },
-      [isDisabled, isReadOnly, selectedValue, id, name, focusedIndex, onChange],
+      [isDisabled, isReadOnly, value, id, name, focusedIndex, onChange],
     )
 
     const getLabelProps: RequiredPropGetter<
@@ -279,7 +279,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       ) => {
         const disabled = props.disabled ?? isDisabledProp ?? isDisabled
         const readOnly = props.readOnly ?? isReadOnlyProp ?? isReadOnly
-        const checked = props.value === selectedValue
+        const checked = props.value === value
         const focused = index === focusedIndex
 
         return {
@@ -305,14 +305,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             : {}),
         }
       },
-      [
-        focusedIndex,
-        isDisabled,
-        isFocusVisible,
-        isReadOnly,
-        onFocus,
-        selectedValue,
-      ],
+      [focusedIndex, isDisabled, isFocusVisible, isReadOnly, onFocus, value],
     )
 
     useEffect(() => {
@@ -338,7 +331,8 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       computedChildren = validChildren
     }
 
-    if (selectedValue == null && defaultValue == null) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (value == null && defaultValue == null) {
       for (const child of computedChildren) {
         if (child.type !== SegmentedControlButton)
           if (
@@ -349,7 +343,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
         const value = child.props.value
 
-        setSelectedValue(value)
+        setValue(value)
 
         break
       }
@@ -358,7 +352,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     return (
       <DescendantsContextProvider value={descendants}>
         <SegmentedControlProvider
-          value={{ selectedValue, styles, getInputProps, getLabelProps }}
+          value={{ styles, value, getInputProps, getLabelProps }}
         >
           <LayoutGroup id={id}>
             <ui.div
@@ -415,8 +409,12 @@ export const SegmentedControlButton = forwardRef<
     ref,
   ) => {
     const [, isMounted] = useIsMounted({ rerender: true })
-    const { selectedValue, styles, getInputProps, getLabelProps } =
-      useSegmentedControl()
+    const {
+      styles,
+      value: selectedValue,
+      getInputProps,
+      getLabelProps,
+    } = useSegmentedControl()
 
     const { index, register } = useDescendant({
       disabled: isDisabled || isReadOnly,
@@ -441,7 +439,7 @@ export const SegmentedControlButton = forwardRef<
       ...styles.button,
     }
 
-    const isSelected = selectedValue === value
+    const isSelected = value === selectedValue
 
     return (
       <ui.label

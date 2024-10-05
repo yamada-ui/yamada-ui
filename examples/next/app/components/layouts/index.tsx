@@ -1,7 +1,8 @@
 'use client'
 
-import { Center, StackProps, VStack } from '@yamada-ui/react'
-import { FC } from 'react'
+import type { StackProps } from '@yamada-ui/react'
+import type { FC } from 'react'
+import { Center, VStack } from '@yamada-ui/react'
 import { Header } from './header'
 
 export interface LayoutProps extends StackProps {}

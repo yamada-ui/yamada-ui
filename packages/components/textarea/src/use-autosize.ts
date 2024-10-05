@@ -17,7 +17,7 @@ const useAutosize = (
     if (value === valueRef.current) return
     else valueRef.current = value
 
-    value ??= placeholder ?? "x"
+    value ||= placeholder || "x"
 
     const nodeSizeData = getSizingData(el)
 
@@ -72,7 +72,7 @@ interface SizingData {
 }
 
 const getSizingData = (el: HTMLElement): null | SizingData => {
-  const style = window?.getComputedStyle(el)
+  const style = window.getComputedStyle(el) as CSSStyleDeclaration | undefined
 
   if (style == null) return null
 

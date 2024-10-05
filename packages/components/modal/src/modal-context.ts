@@ -3,7 +3,7 @@ import type { ModalOptions } from "./modal"
 import { createContext } from "@yamada-ui/utils"
 
 interface ModalContext extends ModalOptions {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContext>({
@@ -12,7 +12,7 @@ export const [ModalProvider, useModal] = createContext<ModalContext>({
 })
 
 interface DialogContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [DialogProvider, useDialog] = createContext<DialogContext>({
@@ -21,7 +21,7 @@ export const [DialogProvider, useDialog] = createContext<DialogContext>({
 })
 
 interface DrawerContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [DrawerProvider, useDrawer] = createContext<DrawerContext>({

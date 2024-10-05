@@ -4,7 +4,10 @@ import { config } from "dotenv"
 import { execa } from "execa"
 import { recursiveOctokit, wait } from "./utils"
 
-type Story = { name: string; messages: string[] }
+interface Story {
+  name: string
+  messages: string[]
+}
 type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
 >["data"][number]
@@ -85,16 +88,13 @@ const getIssues = async () => {
 }
 
 const getExistStories = (issues: Issue[]) =>
-  issues.reduce(
-    (prev, issue) => {
-      const [, path] = issue.body?.match(/^path: ([^\s]+)/m) ?? []
+  issues.reduce<{ [key: string]: Issue }>((prev, issue) => {
+    const [, path] = issue.body?.match(/^path: ([^\s]+)/m) ?? []
 
-      if (path) prev[path] = issue
+    if (path) prev[path] = issue
 
-      return prev
-    },
-    {} as Record<string, Issue>,
-  )
+    return prev
+  }, {})
 
 const createReport = async () => {
   const { stderr } = await execa("pnpm", ["test:a11y"]).catch((e) => e)
@@ -107,7 +107,7 @@ const getStories = (data: string) => {
 
   const stories: Story[] = []
 
-  let draftStory: { name?: string; data?: string } = {}
+  const draftStory: { name?: string; data?: string } = {}
 
   lines.forEach((line, index) => {
     if (line.match(/^\s*●.*smoke-test$/) || lines.length === index + 1) {
@@ -146,11 +146,11 @@ const getStories = (data: string) => {
 
 const sortReport = (report: string) => {
   const lines = report.split("\n")
-  const passes: Set<string> = new Set()
-  const fails: Map<string, Story[]> = new Map()
+  const passes = new Set<string>()
+  const fails = new Map<string, Story[]>()
 
   let capture = false
-  let draftFail: { data?: string; path?: string } = {}
+  const draftFail: { data?: string; path?: string } = {}
 
   lines.forEach((line) => {
     const [path] = line.match(/stories\/.+?\.stories.(tsx|ts)/) ?? []
@@ -197,27 +197,28 @@ const sortReport = (report: string) => {
 }
 
 const createIssues = async (
-  existStories: Record<string, Issue>,
+  existStories: { [key: string]: Issue },
   fails: [string, Story[]][],
 ) => {
   for await (const [path, stories] of fails) {
     let [, name] = path.match(/\/([\w-]+)\.stories.(tsx|ts)/) ?? []
-    name = toCamelCase(name)
+
+    name = toCamelCase(name ?? "")
 
     const isExist = Object.keys(existStories).includes(path)
     const body = ISSUE_BODY(name, path, stories)
 
     await recursiveOctokit(async () => {
       if (isExist) {
-        const { body: prevBody, number } = existStories[path]
+        const { body: prevBody, number } = existStories[path] ?? {}
 
-        if (prevBody === body) {
+        if (prevBody === body || !number) {
           console.log("Skipped issue", number, path)
 
           return
         }
 
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.update({
             ...COMMON_PARAMS,
             body,
@@ -227,7 +228,7 @@ const createIssues = async (
 
         console.log("Updated issue", number, path)
       } else {
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.create({
             ...COMMON_PARAMS,
             body,

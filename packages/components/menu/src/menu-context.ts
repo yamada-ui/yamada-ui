@@ -24,7 +24,7 @@ interface MenuContext extends MenuOptions {
   menuRef: RefObject<HTMLDivElement>
   requestAnimationFrameId: MutableRefObject<null | number>
   setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   onClose: () => void
   onFocusFirstItem: () => void
   onFocusLastItem: () => void
@@ -38,7 +38,7 @@ export const [MenuProvider, useMenu] = createContext<MenuContext>({
 })
 
 interface ContextMenuContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ContextMenuProvider, useContextMenu] =

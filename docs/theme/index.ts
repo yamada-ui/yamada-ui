@@ -18,7 +18,7 @@ export const customTheme: UsageTheme = {
   components,
   semantics,
   styles: { globalStyle, layerStyles, mdx, otherStyle, resetStyle, textStyles },
-  themeSchemes: COLOR_SCHEMES.reduce(
+  themeSchemes: COLOR_SCHEMES.reduce<ThemeSchemes>(
     (prev, colorScheme) => ({
       ...prev,
       [colorScheme]: {
@@ -34,7 +34,7 @@ export const customTheme: UsageTheme = {
         },
       },
     }),
-    {} as ThemeSchemes,
+    {},
   ),
   ...tokens,
 }

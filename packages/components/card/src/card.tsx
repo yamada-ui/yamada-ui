@@ -7,7 +7,9 @@ import {
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
-const [CardProvider, useCard] = createContext<{ [key: string]: CSSUIObject }>({
+const [CardProvider, useCard] = createContext<{
+  [key: string]: CSSUIObject | undefined
+}>({
   name: `CardContext`,
   errorMessage: `useCard returned is 'undefined'. Seems you forgot to wrap the components in "<Card />" `,
 })

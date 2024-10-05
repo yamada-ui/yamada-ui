@@ -29,7 +29,7 @@ export type Status = keyof typeof defaultStatuses
 
 interface AlertContext {
   status: Status
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [AlertProvider, useAlert] = createContext<AlertContext>({

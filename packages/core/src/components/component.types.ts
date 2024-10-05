@@ -61,7 +61,7 @@ export interface ComponentArgs
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
-  <M extends As = Y>(props: ComponentProps<Y, M, D>): JSX.Element
+  <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
 export type FC<Y = {}> = FunctionComponent<Y>

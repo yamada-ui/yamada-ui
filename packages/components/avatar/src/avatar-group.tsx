@@ -13,16 +13,17 @@ import {
 } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 
-type AvatarGroupOptions = {
+interface AvatarGroupOptions {
   /**
    * The maximum number of visible avatars.
    */
   max?: number
 }
 
-export type AvatarGroupProps = AvatarGroupOptions &
-  HTMLUIProps<"div"> &
-  ThemeProps<"Avatar">
+export interface AvatarGroupProps
+  extends AvatarGroupOptions,
+    HTMLUIProps,
+    ThemeProps<"Avatar"> {}
 
 export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
   const [styles] = useComponentMultiStyle("Avatar", props)

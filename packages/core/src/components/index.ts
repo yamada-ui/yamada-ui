@@ -1,5 +1,5 @@
-export * from "./component.types"
-export * from "./element.types"
+export type * from "./component.types"
+export type * from "./element.types"
 export * from "./forward-ref"
 export * from "./should-forward-prop"
 export * from "./use-component-style"

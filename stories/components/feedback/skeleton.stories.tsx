@@ -18,7 +18,7 @@ const meta: Meta<typeof Skeleton> = {
 
 export default meta
 
-const wait = (ms: number) =>
+const wait = async (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms)
   })

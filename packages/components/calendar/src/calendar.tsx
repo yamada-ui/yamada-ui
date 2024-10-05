@@ -4,7 +4,7 @@ import type {
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import type { ForwardedRef, RefAttributes } from "react"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import type { MonthProps } from "./month"
 import type { MonthListProps } from "./month-list"
@@ -165,11 +165,10 @@ export const Calendar = forwardRef(
       </CalendarProvider>
     )
   },
-) as {
-  <Y extends MaybeValue = Date>(
-    props: CalendarProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
-} & ComponentArgs
+) as (<Y extends MaybeValue = Date>(
+  props: CalendarProps<Y> & RefAttributes<HTMLDivElement>,
+) => ReactElement) &
+  ComponentArgs
 
 Calendar.displayName = "Calendar"
 Calendar.__ui__ = "Calendar"

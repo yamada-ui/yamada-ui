@@ -11,7 +11,7 @@ interface AutocompleteOptionOptions {
   /**
    * The autocomplete option icon to use.
    */
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface AutocompleteOptionProps

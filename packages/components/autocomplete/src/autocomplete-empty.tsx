@@ -14,7 +14,7 @@ interface AutocompleteEmptyOptions {
   /**
    * The autocomplete empty option icon to use.
    */
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface AutocompleteEmptyProps
@@ -54,6 +54,7 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
             {icon || <AutocompleteMinusIcon />}
           </AutocompleteItemIcon>
         ) : null}
+
         {icon ? (
           <ui.span style={{ flex: 1, pointerEvents: "none" }} lineClamp={1}>
             {children}

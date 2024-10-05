@@ -9,6 +9,7 @@ export const reactHooksConfig: Linter.Config = {
   plugins: { "react-hooks": fixupPluginRules(reactHooksPlugin) },
   rules: {
     ...reactHooksPlugin.configs.recommended.rules,
+
     "react-hooks/exhaustive-deps": "error",
   },
 }

@@ -9,7 +9,7 @@ import { getComponentProps } from "./chart-utils"
 import { containerProperties } from "./rechart-properties"
 
 interface ChartContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ChartProvider, useChartContext] = createContext<ChartContext>({
@@ -51,22 +51,22 @@ export const useChart = ({ containerProps = {} }: UseChartProps) => {
 
 export type UseChartReturn = ReturnType<typeof useChart>
 
-export interface UseLegendProps {}
-
-export const useLegend = ({}: UseLegendProps = {}) => {
+export const useLegend = () => {
   const { styles } = useChartContext()
+
   return {
     styles,
   }
 }
+
 export type UseLegendReturn = ReturnType<typeof useLegend>
 
-export interface UseTooltipProps {}
-
-export const useTooltip = ({}: UseTooltipProps = {}) => {
+export const useTooltip = () => {
   const { styles } = useChartContext()
+
   return {
     styles,
   }
 }
+
 export type UseTooltipReturn = ReturnType<typeof useTooltip>

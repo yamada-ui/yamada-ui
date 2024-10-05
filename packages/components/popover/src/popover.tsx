@@ -183,7 +183,7 @@ interface PopoverContext
     "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
   > {
   forceUpdate: () => undefined | void
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
   getPopperProps: PropGetter<ComponentProps<"div">>
@@ -193,7 +193,7 @@ interface PopoverContext
 
 const [PopoverProvider, usePopover] = createContext<PopoverContext>({
   name: "PopoverContext",
-  strict: false,
+  errorMessage: `usePopoverContext returned is 'undefined'. Seems you forgot to wrap the components in "<Popover />"`,
 })
 
 export { usePopover }

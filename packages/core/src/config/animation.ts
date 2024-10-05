@@ -11,17 +11,17 @@ const styleSheet = createdDom()
   : undefined
 
 function transformAnimationValue(value: Dict) {
-  return Object.entries(value).reduce((prev, [key, value]) => {
+  return Object.entries(value).reduce<Dict>((prev, [key, value]) => {
     if (key === "duration") {
-      prev["animationDuration"] = value
+      prev.animationDuration = value
     } else if (key === "timingFunction") {
-      prev["animationTimingFunction"] = value
+      prev.animationTimingFunction = value
     } else {
       prev[key] = value
     }
 
     return prev
-  }, {} as Dict)
+  }, {})
 }
 
 export function animation(

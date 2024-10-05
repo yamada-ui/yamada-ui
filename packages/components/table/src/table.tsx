@@ -1,6 +1,6 @@
 import type { RowData } from "@tanstack/react-table"
 import type { ComponentArgs, CSSUIObject } from "@yamada-ui/core"
-import type { ForwardedRef, RefAttributes } from "react"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
 import type { TableHeadProps } from "./thead"
@@ -146,7 +146,7 @@ export const Table = forwardRef(
 ) as {
   <Y extends RowData>(
     props: RefAttributes<HTMLTableElement> & TableProps<Y>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 Table.displayName = "Table"

@@ -21,7 +21,7 @@ interface FrontMatter {
 type UpdateFrontMatterTransform = (data: FrontMatter) => FrontMatter
 
 const updateFrontMatter =
-  (transform: UpdateFrontMatterTransform, enableRecursive: boolean = false) =>
+  (transform: UpdateFrontMatterTransform, enableRecursive = false) =>
   async (contentPath: string) => {
     try {
       const stats = await stat(contentPath)
@@ -55,7 +55,7 @@ const updateMDX = async (
   if (names.length) {
     const isMultiple = names.length > 1
     const query = isMultiple ? `{${names.join(",")}}` : names[0]
-    const contentPaths = await getPaths(query)
+    const contentPaths = await getPaths(query ?? "")
 
     await Promise.all(contentPaths.map(updateFrontMatter(callback, true)))
   } else {
@@ -87,7 +87,7 @@ interface ResetOptions {
   exclude: string[]
 }
 
-const main = async () => {
+const main = () => {
   program
     .command("add <name...>")
     .option("-l, --label <label>")

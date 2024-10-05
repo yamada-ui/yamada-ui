@@ -42,7 +42,7 @@ const validate = (value: string, type: PinInputProps["type"]) => {
 }
 
 interface PinInputContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   getInputProps: (
     props: {
       index: number
@@ -53,7 +53,7 @@ interface PinInputContext {
 
 const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
   name: "PinInputContext",
-  strict: false,
+  errorMessage: `PinInputContext returned is 'undefined'. Seems you forgot to wrap the components in "<PinInput />"`,
 })
 
 const { DescendantsContextProvider, useDescendant, useDescendants } =
@@ -208,7 +208,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const setValue = useCallback(
-      (value: string, index: number, isFocus: boolean = true) => {
+      (value: string, index: number, isFocus = true) => {
         let nextValues = [...values]
 
         nextValues[index] = value
@@ -218,9 +218,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         nextValues = nextValues.filter(Boolean)
 
         const isComplete =
-          value !== "" &&
-          nextValues.length === descendants.count() &&
-          nextValues.every((value) => value != null && value !== "")
+          value !== "" && nextValues.length === descendants.count()
 
         if (isComplete) {
           onComplete?.(nextValues.join(""))
@@ -238,9 +236,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
         if (!value?.length) return nextValue
 
-        if (value[0] === eventValue.charAt(0)) {
+        if (value.startsWith(eventValue.charAt(0))) {
           nextValue = eventValue.charAt(1)
-        } else if (value[0] === eventValue.charAt(1)) {
+        } else if (value.startsWith(eventValue.charAt(1))) {
           nextValue = eventValue.charAt(0)
         }
 
@@ -303,7 +301,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
             if (!prevInput) return
 
             setValue("", index - 1, false)
-            prevInput.node?.focus()
+            prevInput.node.focus()
             setMoveFocus(true)
           } else {
             setMoveFocus(false)

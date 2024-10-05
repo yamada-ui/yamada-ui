@@ -2,7 +2,7 @@ import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { DatePicker } from "@yamada-ui/calendar"
-import { Autocomplete, FormControl, Input } from "@yamada-ui/react"
+import { Autocomplete, FormControl, Input, noop } from "@yamada-ui/react"
 import { memo } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Form } from "./form"
@@ -35,7 +35,7 @@ export const Account: FC<AccountProps> = memo(({ ...rest }) => {
     register,
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form

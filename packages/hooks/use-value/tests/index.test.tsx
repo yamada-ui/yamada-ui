@@ -37,7 +37,7 @@ describe("useValue", () => {
     expect(result.current).toBe("base")
   })
 
-  test("Returns the correct breakpoint value based on the current screen width", async () => {
+  test("Returns the correct breakpoint value based on the current screen width", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(() => useValue({ base: "base", md: "md" }), {

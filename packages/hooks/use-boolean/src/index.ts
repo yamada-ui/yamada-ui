@@ -5,7 +5,7 @@ import { useCallback, useState } from "react"
  *
  * @see Docs https://yamada-ui.com/hooks/use-boolean
  */
-export const useBoolean = (init: boolean = false): UseBooleanReturn => {
+export const useBoolean = (init = false): UseBooleanReturn => {
   const [flg, setFlg] = useState<boolean>(init)
 
   const on = useCallback(() => setFlg(true), [])

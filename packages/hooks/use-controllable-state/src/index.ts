@@ -7,31 +7,53 @@ import {
 } from "@yamada-ui/utils"
 import { useState } from "react"
 
-export interface UseControllableStateProps<T> {
-  defaultValue?: (() => T) | T
-  value?: T
-  onChange?: (value: T) => void
-  onUpdate?: (prev: T, next: T) => boolean
+interface UseControllableStateMethods<Y> {
+  onChange?: (value: Y) => void
+  onUpdate?: (prev: Y, next: Y) => boolean
 }
 
-export const useControllableState = <T>({
+export interface UseControllableStateProps<Y>
+  extends UseControllableStateMethods<Y> {
+  defaultValue?: (() => Y) | Y
+  value?: Y
+}
+
+export function useControllableState<Y>(
+  props: {
+    value: Y
+    defaultValue?: (() => Y) | Y
+  } & UseControllableStateMethods<Y>,
+): [Y, Dispatch<SetStateAction<Y>>]
+
+export function useControllableState<Y>(
+  props: {
+    defaultValue: (() => Y) | Y
+    value?: Y
+  } & UseControllableStateMethods<Y>,
+): [Y, Dispatch<SetStateAction<Y>>]
+
+export function useControllableState<Y>(
+  props: UseControllableStateProps<Y>,
+): [Y, Dispatch<SetStateAction<Y>>]
+
+export function useControllableState<Y>({
   value,
   ...rest
-}: UseControllableStateProps<T>) => {
+}: UseControllableStateProps<Y>) {
   rest.onUpdate ??= (prev, next) => prev !== next
 
   const onChange = useCallbackRef(rest.onChange)
   const onUpdate = useCallbackRef(rest.onUpdate)
 
-  const [defaultValue, setDefaultValue] = useState(rest.defaultValue as T)
+  const [defaultValue, setDefaultValue] = useState(rest.defaultValue)
   const controlled = value !== undefined
   const resolvedValue = controlled ? value : defaultValue
 
   const setValue = useCallbackRef(
-    (next: SetStateAction<T>) => {
-      const nextValue = runIfFunc(next, resolvedValue)
+    (next: SetStateAction<Y>) => {
+      const nextValue = runIfFunc(next, resolvedValue as Y)
 
-      if (!onUpdate(resolvedValue, nextValue)) return
+      if (!onUpdate(resolvedValue as Y, nextValue)) return
 
       if (!controlled || isUndefined(nextValue) || isNull(nextValue))
         setDefaultValue(nextValue)
@@ -41,5 +63,5 @@ export const useControllableState = <T>({
     [controlled, resolvedValue, onChange, onUpdate],
   )
 
-  return [resolvedValue, setValue] as [T, Dispatch<SetStateAction<T>>]
+  return [resolvedValue, setValue]
 }

@@ -12,7 +12,7 @@ export const dismissed: APIHandler = async ({ req }) => {
   const repo = repository.name
   const { number } = pull_request
 
-  const { data: reviewers } = await recursiveOctokit(() =>
+  const { data: reviewers } = await recursiveOctokit(async () =>
     octokit.pulls.listReviews({
       owner,
       pull_number: number,
@@ -25,7 +25,7 @@ export const dismissed: APIHandler = async ({ req }) => {
   if (hasApproved) return
 
   try {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.removeLabel({
         name: "merge request",
         issue_number: number,

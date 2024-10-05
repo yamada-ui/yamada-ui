@@ -34,6 +34,9 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     year,
   } = useCalendarContext()
 
+  const minRangeYear = rangeYears[0] ?? minYear
+  const maxRangeYear = rangeYears[rangeYears.length - 1] ?? maxYear
+
   const onChangeType = useCallback(() => {
     switch (type) {
       case "month":
@@ -103,7 +106,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
           const isDisabled = (() => {
             switch (type) {
               case "year":
-                return rangeYears[0] <= minYear
+                return minRangeYear <= minYear
 
               case "month":
                 return year <= minYear
@@ -119,7 +122,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
           const isDisabled = (() => {
             switch (type) {
               case "year":
-                return maxYear <= rangeYears[rangeYears.length - 1]
+                return maxYear <= maxRangeYear
 
               case "month":
                 return maxYear <= year
@@ -143,18 +146,19 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       action(ev)
     },
     [
-      maxDate,
-      maxYear,
-      minDate,
-      minYear,
-      nextMonth,
-      onNext,
-      onPrev,
       onChangeType,
-      prevMonth,
-      rangeYears,
+      onPrev,
       type,
+      minRangeYear,
+      minYear,
       year,
+      prevMonth,
+      maxDate,
+      minDate,
+      onNext,
+      maxYear,
+      maxRangeYear,
+      nextMonth,
     ],
   )
 
@@ -181,9 +185,9 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
         switch (type) {
           case "year":
             if (isPrev) {
-              return rangeYears[0] <= minYear
+              return minRangeYear <= minYear
             } else {
-              return maxYear <= rangeYears[rangeYears.length - 1]
+              return maxYear <= maxRangeYear
             }
 
           case "month":
@@ -224,14 +228,15 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       amountOfMonths,
       index,
       maxDate,
+      maxRangeYear,
       maxYear,
       minDate,
+      minRangeYear,
       minYear,
       nextMonth,
       onNext,
       onPrev,
       prevMonth,
-      rangeYears,
       type,
       year,
     ],

@@ -4,7 +4,7 @@ import { createContext } from "@yamada-ui/utils"
 
 interface ReorderContext {
   orientation: "horizontal" | "vertical"
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ReorderProvider, useReorderContext] =

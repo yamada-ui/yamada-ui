@@ -41,19 +41,18 @@ export const useYearList = () => {
   const isMulti = isArray(selectedValue)
   const containerRef = useRef<HTMLDivElement>(null)
   const beforeInternalYear = useRef<null | number>(null)
-  const minYearLabel = getFormattedLabel(rangeYears[0], locale, yearFormat)
-  const maxYearLabel = getFormattedLabel(
-    rangeYears[rangeYears.length - 1],
-    locale,
-    yearFormat,
-  )
+  const minRangeYear = rangeYears[0] ?? minYear
+  const maxRangeYear = rangeYears[rangeYears.length - 1] ?? maxYear
+  const minYearLabel = getFormattedLabel(minRangeYear, locale, yearFormat)
+  const maxYearLabel = getFormattedLabel(maxRangeYear, locale, yearFormat)
+
   const label = `${minYearLabel} - ${maxYearLabel}`
   const ariaLabel = `From ${minYearLabel} to ${maxYearLabel}`
 
   const onFocusPrev = useCallback(
     (targetIndex: number) => {
       if (targetIndex < 0) {
-        if (rangeYears[0] <= minYear) return
+        if (minRangeYear <= minYear) return
 
         setInternalYear((prev) => {
           beforeInternalYear.current = prev
@@ -69,13 +68,13 @@ export const useYearList = () => {
         }
       }
     },
-    [minYear, rangeYears, setInternalYear, yearRefs],
+    [minYear, minRangeYear, setInternalYear, yearRefs],
   )
 
   const onFocusNext = useCallback(
     (targetIndex: number) => {
       if (11 < targetIndex) {
-        if (maxYear <= rangeYears[rangeYears.length - 1]) return
+        if (maxYear <= maxRangeYear) return
 
         setInternalYear((prev) => {
           beforeInternalYear.current = prev
@@ -91,7 +90,7 @@ export const useYearList = () => {
         }
       }
     },
-    [maxYear, rangeYears, setInternalYear, yearRefs],
+    [maxYear, maxRangeYear, setInternalYear, yearRefs],
   )
 
   const onKeyDown = useCallback(
@@ -179,7 +178,7 @@ export const useYearList = () => {
   )
 
   const getButtonProps: RequiredPropGetter<
-    { index: number; value: number } & HTMLProps<"button">,
+    { index: number; value: number } & Omit<HTMLProps<"button">, "value">,
     HTMLProps<"button">
   > = useCallback(
     ({ index, value, ...props }, ref = null) => {
@@ -208,7 +207,7 @@ export const useYearList = () => {
         "aria-selected": ariaAttr(isSelected),
         "data-disabled": dataAttr(isDisabled),
         "data-selected": dataAttr(isSelected),
-        "data-value": value ?? "",
+        "data-value": value,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },

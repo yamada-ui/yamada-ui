@@ -484,7 +484,7 @@ export const Checkbox = forwardRef(
 ) as {
   <Y extends number | string = string>(
     props: { ref?: Ref<HTMLInputElement> } & CheckboxProps<Y>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 Checkbox.displayName = "Checkbox"

@@ -110,7 +110,7 @@ describe("useBreakpoint", () => {
     mock.clear()
   })
 
-  test("Returns the correct breakpoint based on the current screen width", async () => {
+  test("Returns the correct breakpoint based on the current screen width", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(() => useBreakpoint(), {
@@ -201,7 +201,7 @@ describe("useBreakpointValue", () => {
     mock.clear()
   })
 
-  test("Returns the value of the current breakpoint when base is md", async () => {
+  test("Returns the value of the current breakpoint when base is md", () => {
     const { result } = renderHook(() => useBreakpointValue({ base: "md" }), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -222,7 +222,7 @@ describe("getBreakpointValue", () => {
     mock.clear()
   })
 
-  test("Returns the value of base", async () => {
+  test("Returns the value of base", () => {
     const { result } = renderHook(() => getBreakpointValue({ base: "md" }), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -277,7 +277,7 @@ describe("useBreakpointState", () => {
     mock.clear()
   })
 
-  test("Returns the state corresponding to the current breakpoint", async () => {
+  test("Returns the state corresponding to the current breakpoint", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(
@@ -303,7 +303,7 @@ describe("useBreakpointEffect", () => {
     mock.clear()
   })
 
-  test("Executes callback when breakpoint changes", async () => {
+  test("Executes callback when breakpoint changes", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const callback = vi.fn()
@@ -328,7 +328,7 @@ describe("useUpdateBreakpointEffect", () => {
     mock.clear()
   })
 
-  test("Executes callback when breakpoint changes, skipping initial render", async () => {
+  test("Executes callback when breakpoint changes, skipping initial render", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const callback = vi.fn()

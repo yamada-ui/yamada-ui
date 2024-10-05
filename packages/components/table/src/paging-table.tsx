@@ -2,7 +2,12 @@ import type { PaginationInstance, RowData } from "@tanstack/react-table"
 import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { PaginationProps } from "@yamada-ui/pagination"
 import type { SelectProps } from "@yamada-ui/select"
-import type { ForwardedRef, ReactNode, RefAttributes } from "react"
+import type {
+  ForwardedRef,
+  ReactElement,
+  ReactNode,
+  RefAttributes,
+} from "react"
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
 import type { TableHeadProps } from "./thead"
@@ -283,7 +288,7 @@ export const PagingTable = forwardRef(
 ) as {
   <Y extends RowData>(
     props: PagingTableProps<Y> & RefAttributes<HTMLTableElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 PagingTable.displayName = "PagingTable"

@@ -5,22 +5,36 @@ export type MaybeRenderProp<Y> =
   | ((props: Y) => React.ReactNode)
   | React.ReactNode
 
-interface Options<ContextType extends any = any> {
+interface Options<Y = any> {
   name?: string
-  defaultValue?: ContextType
+  defaultValue?: Y
   errorMessage?: string
   strict?: boolean
 }
 
-type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
+type CreateContextReturn<Y> = [React.Provider<Y>, () => Y, React.Context<Y>]
 
-export function createContext<ContextType extends any = any>({
+export function createContext<Y = any>(options: {
+  name?: string
+  defaultValue?: Y
+  errorMessage?: string
+  strict?: true
+}): CreateContextReturn<Y>
+
+export function createContext<Y = any>(options: {
+  name?: string
+  defaultValue?: Y
+  errorMessage?: string
+  strict?: false
+}): CreateContextReturn<undefined | Y>
+
+export function createContext<Y = any>({
   name,
   defaultValue,
   errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   strict = true,
-}: Options<ContextType> = {}) {
-  const Context = React.createContext<ContextType | undefined>(defaultValue)
+}: Options<Y> = {}) {
+  const Context = React.createContext<undefined | Y>(defaultValue)
 
   Context.displayName = name
 
@@ -30,21 +44,19 @@ export function createContext<ContextType extends any = any>({
     if (!context && strict) {
       const error = new Error(errorMessage)
       error.name = "ContextError"
-      Error.captureStackTrace?.(error, useContext)
+      Error.captureStackTrace(error, useContext)
       throw error
     }
 
     return context
   }
 
-  return [
-    Context.Provider,
-    useContext,
-    Context,
-  ] as CreateContextReturn<ContextType>
+  return [Context.Provider, useContext, Context] as CreateContextReturn<
+    undefined | Y
+  >
 }
 
-export const useSafeLayoutEffect = Boolean(globalThis?.document)
+export const useSafeLayoutEffect = Boolean(globalThis.document)
   ? React.useLayoutEffect
   : React.useEffect
 
@@ -195,10 +207,7 @@ export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
 }
 
-export function assignRef<T extends any = any>(
-  ref: ReactRef<T> | undefined,
-  value: T,
-) {
+export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
   if (ref == null) return
 
   if (typeof ref === "function") {
@@ -215,7 +224,7 @@ export function assignRef<T extends any = any>(
   }
 }
 
-export function mergeRefs<T extends any = any>(
+export function mergeRefs<T = any>(
   ...refs: (null | ReactRef<T> | undefined)[]
 ) {
   return function (node: null | T) {
@@ -225,9 +234,7 @@ export function mergeRefs<T extends any = any>(
   }
 }
 
-export function useMergeRefs<T extends any = any>(
-  ...refs: (ReactRef<T> | undefined)[]
-) {
+export function useMergeRefs<T = any>(...refs: (ReactRef<T> | undefined)[]) {
   return React.useMemo(() => mergeRefs(...refs), [refs])
 }
 
@@ -393,7 +400,7 @@ export function useAsyncRetry<T>(
   return { ...state, retry }
 }
 
-let createIdCounter: number = 0
+let createIdCounter = 0
 
 export function createId(prefix: string) {
   return `${prefix}-${++createIdCounter}-${new Date().getTime()}`

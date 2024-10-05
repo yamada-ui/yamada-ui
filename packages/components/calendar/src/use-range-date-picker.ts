@@ -65,7 +65,7 @@ export const useRangeDatePicker = ({
     value: valueProp,
     onChange: onChangeProp,
   })
-  const [startValue, endValue] = value ?? []
+  const [startValue, endValue] = value
   const minDate =
     endValue && isNumber(maxSelectValues)
       ? dayjs(endValue)
@@ -133,7 +133,7 @@ export const useRangeDatePicker = ({
       rest.onClick?.(ev)
     },
     onClose: () => {
-      const [startValue, endValue] = draftValue.current ?? value ?? []
+      const [startValue, endValue] = draftValue.current ?? value
 
       setStartInputValue(dateToString(startValue) ?? "")
       setEndInputValue(dateToString(endValue) ?? "")
@@ -285,7 +285,7 @@ export const useRangeDatePicker = ({
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
         tabIndex: !allowInput ? -1 : 0,
-        value: startInputValue ?? "",
+        value: startInputValue,
         zIndex: !startInputValue ? 1 : undefined,
         onChange: handlerAll(props.onChange, onStartChange),
         onClick: handlerAll(props.onClick, (ev) => {
@@ -335,7 +335,7 @@ export const useRangeDatePicker = ({
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
         tabIndex: !allowInput || !startInputValue ? -1 : 0,
-        value: endInputValue ?? "",
+        value: endInputValue,
         onChange: handlerAll(props.onChange, onEndChange),
         onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()

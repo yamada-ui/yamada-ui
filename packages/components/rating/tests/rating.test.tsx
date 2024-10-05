@@ -83,23 +83,23 @@ describe("<Rating />", () => {
     const { container, user } = render(<Rating onChange={onChange} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
-    await user.click(items[3])
+    await user.click(items[3]!)
 
     expect(onChange).toHaveBeenCalledWith(3)
   })
 
-  test("value should be updated correctly on the touchStart event", async () => {
+  test("value should be updated correctly on the touchStart event", () => {
     const onChange = vi.fn()
 
     const { container } = render(<Rating onChange={onChange} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
-    fireEvent.touchStart(items[3])
+    fireEvent.touchStart(items[3]!)
 
     expect(onChange).toHaveBeenCalledWith(3)
   })
 
-  test("highlightSelectedOnly should work correctly", async () => {
+  test("highlightSelectedOnly should work correctly", () => {
     const { container } = render(
       <Rating defaultValue={3} highlightSelectedOnly />,
     )
@@ -120,10 +120,10 @@ describe("<Rating />", () => {
 
     const items = container.querySelectorAll(".ui-rating__item")
 
-    await user.click(items[3])
+    await user.click(items[3]!)
     expect(items[3]).toHaveAttribute("data-focus")
 
-    await user.click(items[4])
+    await user.click(items[4]!)
     expect(items[3]).not.toHaveAttribute("data-focus")
   })
 })

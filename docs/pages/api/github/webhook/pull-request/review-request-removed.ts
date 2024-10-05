@@ -17,10 +17,10 @@ export const reviewRequestedRemoved: APIHandler = async ({
   const owner = "yamada-ui"
   const repo = repository.name
   const { html_url, number, requested_reviewers, title, user } = pull_request
-  const omittedRequestReviewers = requested_reviewers?.filter(
+  const omittedRequestReviewers = requested_reviewers.filter(
     ({ login }: any) => !constant.pullRequest.excludeReviewers.includes(login),
   )
-  const count = omittedRequestReviewers?.length ?? 0
+  const count = omittedRequestReviewers.length
   const { login } = requested_reviewer ?? {}
   const collaborators = [...constant.maintainers, ...constant.members].filter(
     ({ github }) =>
@@ -59,7 +59,7 @@ export const reviewRequestedRemoved: APIHandler = async ({
   if (!github.id)
     return res.status(400).send({ message: "Not found github id", status: 400 })
 
-  await recursiveOctokit(() =>
+  await recursiveOctokit(async () =>
     octokit.pulls.requestReviewers({
       owner,
       pull_number: number,

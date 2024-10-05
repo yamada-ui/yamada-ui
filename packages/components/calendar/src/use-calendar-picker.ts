@@ -240,8 +240,10 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
-      let date =
-        parseDate?.(value) ?? dayjs(value, inputFormat, locale).toDate()
+      let date = parseDate?.(value)
+
+      if (!date && dayjs(value).isValid())
+        date = dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return undefined
       if (excludeDate?.(date)) return undefined
@@ -274,9 +276,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         if (minDate && isBeforeDate(value, minDate)) value = minDate
       }
 
-      return dayjs(value)
-        .locale(locale ?? "en")
-        .format(inputFormat)
+      return dayjs(value).locale(locale).format(inputFormat)
     },
     [allowInputBeyond, excludeDate, inputFormat, locale, maxDate, minDate],
   )

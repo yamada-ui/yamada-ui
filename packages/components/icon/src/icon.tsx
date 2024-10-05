@@ -51,7 +51,7 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   }
 
   if (fontSize) {
-    css.vars = mergeVars(css?.vars, [
+    css.vars = mergeVars(css.vars, [
       { name: "boxSize", token: "fontSizes", value: fontSize },
     ])
     css.boxSize = "$boxSize"

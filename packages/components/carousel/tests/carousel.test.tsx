@@ -115,7 +115,7 @@ describe("<Carousel />", () => {
     fireEvent.click(
       document.querySelectorAll(".ui-carousel__indicators__indicator")[
         slidesContentArr.length - 1
-      ],
+      ]!,
     )
 
     expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
@@ -200,7 +200,7 @@ describe("<Carousel />", () => {
     fireEvent.click(
       document.querySelectorAll(".ui-carousel__indicators__indicator")[
         slidesContentArr.length - 1
-      ],
+      ]!,
     )
 
     // When last slide the next button should be disabled

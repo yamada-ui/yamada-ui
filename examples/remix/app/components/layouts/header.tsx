@@ -1,23 +1,26 @@
+import type {
+  CenterProps,
+  ColorModeWithSystem,
+  IconButtonProps,
+  MenuProps,
+  PopoverProps,
+} from "@yamada-ui/react"
+import type { FC } from "react"
 import { Moon, Palette, Sun } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
-  CenterProps,
-  ColorModeWithSystem,
   HStack,
   IconButton,
-  IconButtonProps,
   Image,
   Menu,
   MenuButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  MenuProps,
   Popover,
   PopoverBody,
   PopoverContent,
-  PopoverProps,
   PopoverTrigger,
   Spacer,
   useColorMode,
@@ -26,7 +29,7 @@ import {
   useScroll,
   useTheme,
 } from "@yamada-ui/react"
-import { FC, memo, useRef, useState } from "react"
+import { memo, useRef, useState } from "react"
 
 export interface HeaderProps extends CenterProps {}
 

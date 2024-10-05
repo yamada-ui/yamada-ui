@@ -15,7 +15,7 @@ import { useMemo } from "react"
  *
  * @see Docs https://yamada-ui.com/hooks/use-value
  */
-export const useValue = <T extends any>(
+export const useValue = <T>(
   value: ColorModeArray<T> | ResponsiveObject<T> | T,
 ): T => {
   const { theme } = useTheme()
@@ -28,7 +28,7 @@ export const useValue = <T extends any>(
 }
 
 export const getValue =
-  <T extends any>(value: ColorModeArray<T> | ResponsiveObject<T> | T) =>
+  <T>(value: ColorModeArray<T> | ResponsiveObject<T> | T) =>
   (
     theme: StyledTheme,
     colorMode: ColorMode,

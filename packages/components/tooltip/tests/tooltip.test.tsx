@@ -201,7 +201,7 @@ describe("<Tooltip />", () => {
       })
       expect(tooltip).toBeVisible()
 
-      await user.keyboard(`${key}`)
+      await user.keyboard(key)
 
       expect(tooltip).toBeVisible()
     },

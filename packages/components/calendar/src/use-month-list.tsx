@@ -214,7 +214,7 @@ export const useMonthList = () => {
         "aria-selected": ariaAttr(isSelected),
         "data-disabled": dataAttr(isDisabled),
         "data-selected": dataAttr(isSelected),
-        "data-value": value ?? "",
+        "data-value": value,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },

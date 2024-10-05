@@ -47,7 +47,7 @@ import { useCallback, useRef, useState } from "react"
 
 export const getThumbSize = (
   thumbSize: CSSUIProps["boxSize"] | undefined,
-  styles: { [key: string]: CSSUIObject },
+  styles: { [key: string]: CSSUIObject | undefined },
 ) =>
   (thumbSize ??
     styles.thumb?.boxSize ??
@@ -596,7 +596,7 @@ interface SliderContext
       | "isVertical"
     >,
     Omit<SliderOptions, "input"> {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [SliderProvider, useSliderContext] = createContext<SliderContext>({

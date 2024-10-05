@@ -50,13 +50,13 @@ describe("<PinInput />", () => {
 
     const inputs = await findAllByRole("textbox")
 
-    await user.type(inputs[0], "1")
+    await user.type(inputs[0]!, "1")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("1")
     })
 
-    await user.type(inputs[1], "2")
+    await user.type(inputs[1]!, "2")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("12")
@@ -125,7 +125,7 @@ describe("<PinInput />", () => {
     const secondInput = inputs[1]
 
     await waitFor(() => {
-      expect(firstInput.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("○")
     })
 
     await act(async () => {
@@ -135,17 +135,17 @@ describe("<PinInput />", () => {
     await waitFor(() => {
       expect(document.activeElement).toBe(firstInput)
     })
-    expect(firstInput.placeholder).toBe("")
+    expect(firstInput?.placeholder).toBe("")
 
     await act(async () => {
-      await user.click(secondInput)
+      await user.click(secondInput!)
     })
 
     await waitFor(() => {
-      expect(firstInput.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("○")
     })
     expect(document.activeElement).toBe(secondInput)
-    expect(secondInput.placeholder).toBe("")
+    expect(secondInput?.placeholder).toBe("")
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
@@ -157,7 +157,7 @@ describe("<PinInput />", () => {
     const lastInput = inputs[3]
 
     await act(async () => {
-      await user.click(lastInput)
+      await user.click(lastInput!)
       await user.keyboard("[Backspace]")
     })
 
@@ -176,7 +176,7 @@ describe("<PinInput />", () => {
     const lastInput = inputs[3]
 
     await act(async () => {
-      await user.click(lastInput)
+      await user.click(lastInput!)
       await user.keyboard("[Backspace]")
     })
 
@@ -194,7 +194,7 @@ describe("<PinInput />", () => {
     const thirdInput = inputs[2]
 
     await act(async () => {
-      await user.click(thirdInput)
+      await user.click(thirdInput!)
       await user.keyboard("[arrowleft][Backspace]")
     })
 
@@ -238,7 +238,7 @@ describe("<PinInput />", () => {
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
 
-    await user.click(firstInput)
+    await user.click(firstInput!)
     await user.paste("12")
 
     await waitFor(() => {
@@ -274,7 +274,7 @@ describe("<PinInput />", () => {
 
     await act(async () => {
       await user.tab()
-      await user.type(inputs[0], "9")
+      await user.type(inputs[0]!, "9")
     })
 
     await waitFor(() => {
@@ -285,8 +285,8 @@ describe("<PinInput />", () => {
     expect(inputs[3]).toHaveValue("4")
 
     await act(async () => {
-      await user.click(inputs[2])
-      await user.type(inputs[2], "{backspace}")
+      await user.click(inputs[2]!)
+      await user.type(inputs[2]!, "{backspace}")
     })
 
     await waitFor(() => {

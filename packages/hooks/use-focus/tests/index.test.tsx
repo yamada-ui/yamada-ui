@@ -36,7 +36,7 @@ describe("useFocusOnHide", () => {
     })
   })
 
-  test("does not focus on the element when shouldFocus is false", async () => {
+  test("does not focus on the element when shouldFocus is false", () => {
     const { getByTestId } = render(
       <Component shouldFocus={false} visible={false} />,
     )
@@ -165,7 +165,7 @@ describe("useFocusOnPointerDown", () => {
     const { getByTestId } = render(<Component />)
     const button = getByTestId("button")
 
-    await act(async () => fireEvent.pointerDown(button))
+    act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
       expect(button).toHaveFocus()
@@ -176,7 +176,7 @@ describe("useFocusOnPointerDown", () => {
     const { getByTestId } = render(<Component enabled={false} />)
     const button = getByTestId("button")
 
-    await act(async () => fireEvent.pointerDown(button))
+    act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
       expect(button).not.toHaveFocus()

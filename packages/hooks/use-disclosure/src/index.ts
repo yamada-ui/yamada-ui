@@ -37,22 +37,22 @@ export const useDisclosure = <
 
   const onOpen = useCallback(
     async (...args: any) => {
-      if (timingRef.current === "before") await handleOpen?.(...args)
+      if (timingRef.current === "before") await handleOpen(...args)
 
       if (!isControlled) setIsOpen(true)
 
-      if (timingRef.current === "after") await handleOpen?.(...args)
+      if (timingRef.current === "after") await handleOpen(...args)
     },
     [isControlled, handleOpen, timingRef],
   ) as unknown as T
 
   const onClose = useCallback(
     async (...args: any) => {
-      if (timingRef.current === "before") await handleClose?.(...args)
+      if (timingRef.current === "before") await handleClose(...args)
 
       if (!isControlled) setIsOpen(false)
 
-      if (timingRef.current === "after") await handleClose?.(...args)
+      if (timingRef.current === "after") await handleClose(...args)
     },
     [isControlled, handleClose, timingRef],
   ) as unknown as K

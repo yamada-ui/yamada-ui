@@ -186,7 +186,7 @@ const ContentDisplay: FC<ContentDisplayProps> = memo(({ mode }) => {
       return <ContentPodcasts />
 
     default:
-      return <></>
+      return null
   }
 })
 

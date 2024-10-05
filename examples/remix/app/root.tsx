@@ -1,5 +1,5 @@
-import type { LinksFunction } from "@remix-run/node"
-import { json, LoaderFunction } from "@remix-run/node"
+import type { LinksFunction, LoaderFunction } from "@remix-run/node"
+import { json } from "@remix-run/node"
 import {
   Links,
   Meta,
@@ -21,7 +21,7 @@ export const links: LinksFunction = () => [
   { type: "image/svg+xml", href: "/favicon.svg", rel: "icon" },
 ]
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = ({ request }) => {
   const cookies = request.headers.get("Cookie")
 
   return json({ cookies })

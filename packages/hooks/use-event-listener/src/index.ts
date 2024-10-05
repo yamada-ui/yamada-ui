@@ -26,7 +26,7 @@ export const useEventListener = <E extends Events>(
   useEffect(() => {
     const el = typeof target === "function" ? target() : (target ?? document)
 
-    if (!handler || !el) return
+    if (!el) return
 
     el.addEventListener(
       event,

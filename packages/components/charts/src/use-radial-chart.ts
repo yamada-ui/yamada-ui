@@ -73,7 +73,7 @@ export interface UseRadialChartOptions {
 }
 
 interface UseRadialChartProps extends UseRadialChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useRadialChart = ({
@@ -137,7 +137,7 @@ export const useRadialChart = ({
   const [radialBarProps, radialBarClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [computedRadialBarProps ?? {}, radialBarProperties],
+        [computedRadialBarProps, radialBarProperties],
         styles.radialBar,
       )(theme),
     [computedRadialBarProps, styles.radialBar, theme],

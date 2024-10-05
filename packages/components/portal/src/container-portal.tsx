@@ -25,7 +25,7 @@ export const ContainerPortal: FC<ContainerPortalProps> = ({
 
     const node = ownerDocument.createElement("div")
 
-    if (node) node.className = "ui-portal"
+    node.className = "ui-portal"
 
     return node
   }, [parent])

@@ -1,5 +1,6 @@
 import type { AutocompleteItem } from "../src"
 import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { useState } from "react"
 import {
   Autocomplete,
@@ -204,7 +205,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      await user.click(optionElements[0])
+      await user.click(optionElements[0]!)
 
       await waitFor(() =>
         expect(screen.getByRole("combobox")).toHaveValue("option1"),
@@ -268,7 +269,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      await user.click(optionElements[0])
+      await user.click(optionElements[0]!)
 
       optionElements.forEach(async (o) => {
         await waitFor(() => expect(o).toBeVisible())
@@ -594,9 +595,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("correct warnings should be issued when both `allowCreate` and `children` are present", () => {
-      const consoleWarnSpy = vi
-        .spyOn(console, "warn")
-        .mockImplementation(() => {})
+      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
       render(
         <Autocomplete allowCreate>
@@ -705,7 +704,7 @@ describe("<Autocomplete />", () => {
       test("correct warnings should be  issued when insertPosition does not exist", async () => {
         const consoleWarnSpy = vi
           .spyOn(console, "warn")
-          .mockImplementation(() => {})
+          .mockImplementation(noop)
 
         const { container, user } = render(
           <Autocomplete

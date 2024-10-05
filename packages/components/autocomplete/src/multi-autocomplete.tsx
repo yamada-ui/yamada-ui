@@ -329,7 +329,11 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
 
       if (component) {
         return (label as string[]).map((label, index) => {
+          if (!value[index]) return null
+
           const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
+            if (!value[index]) return
+
             ev.stopPropagation()
 
             onChange(value[index])
@@ -398,13 +402,13 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
             minW="0px"
             overflow="hidden"
             placeholder={
-              !label || !label?.length || (keepPlaceholder && isOpen)
+              !label?.length || (keepPlaceholder && isOpen)
                 ? placeholder
                 : undefined
             }
             aria-label="Input value"
             aria-multiselectable="true"
-            {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
+            {...getInputProps({ ...inputProps, value: inputValue }, ref)}
           />
         </ui.div>
       </PopoverTrigger>

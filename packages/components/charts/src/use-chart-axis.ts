@@ -100,7 +100,7 @@ export interface UseChartAxisOptions {
 }
 
 export interface UseChartAxisProps extends UseChartAxisOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartAxis = ({

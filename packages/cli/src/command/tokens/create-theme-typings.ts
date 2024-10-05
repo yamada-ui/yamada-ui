@@ -32,19 +32,18 @@ const print = (unions: { [key: string]: string[] } | Component) =>
     .join("\n")
 
 const extractComponents = ({ components = {} }: Dict) =>
-  Object.entries<{ sizes?: object; variants?: object }>(components).reduce(
-    (obj, [key, { sizes, variants }]) => {
-      if (sizes || variants) {
-        obj[key] = {
-          sizes: Object.keys(sizes ?? {}),
-          variants: Object.keys(variants ?? {}),
-        }
+  Object.entries<{ sizes?: object; variants?: object }>(components).reduce<{
+    [key: string]: Component
+  }>((obj, [key, { sizes, variants }]) => {
+    if (sizes || variants) {
+      obj[key] = {
+        sizes: Object.keys(sizes ?? {}),
+        variants: Object.keys(variants ?? {}),
       }
+    }
 
-      return obj
-    },
-    {} as { [key: string]: Component },
-  )
+    return obj
+  }, {})
 
 const isTone = (value: any) => {
   if (!isObject(value)) return false
@@ -106,7 +105,7 @@ const extractPaths = (
 ) => {
   if ((!isObject(target) && !isArray(target)) || !maxDepth) return []
 
-  return Object.entries(target).reduce((prev, [key, value]) => {
+  return Object.entries(target).reduce<string[]>((prev, [key, value]) => {
     if (
       isObject(value) &&
       !Object.keys(value).some((key) => omitKeys.includes(key)) &&
@@ -120,7 +119,7 @@ const extractPaths = (
     }
 
     return prev
-  }, [] as string[])
+  }, [])
 }
 
 const extractKeys = (obj: Dict, key: string) => {
@@ -153,7 +152,7 @@ export const createThemeTypings = async (
     shouldProcess = (obj: Dict) => !isResponsive(obj)
   }
 
-  const tokens = config.reduce(
+  const tokens = config.reduce<{ [key: string]: string[] }>(
     (
       prev,
       {
@@ -187,12 +186,12 @@ export const createThemeTypings = async (
           shouldProcess,
         ).flatMap(flatMap)
 
-        prev[replaceKey ?? key].push(...semanticKeys)
+        prev[replaceKey ?? key]?.push(...semanticKeys)
       }
 
       return prev
     },
-    {} as { [key: string]: string[] },
+    {},
   )
 
   const textStyles = extractKeys(theme, "styles.textStyles")
@@ -201,7 +200,7 @@ export const createThemeTypings = async (
   const themeSchemes = extractThemeSchemes(theme)
   const components = extractComponents(theme)
 
-  tokens.colors = [...tokens.colors, ...colorSchemeColors]
+  tokens.colors = [...(tokens.colors ?? []), ...colorSchemeColors]
 
   return prettier(
     [

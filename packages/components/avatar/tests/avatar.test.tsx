@@ -24,7 +24,7 @@ describe("<Avatar />", () => {
     expect(img).toBeInTheDocument()
   })
 
-  test("fires onError if image fails to load", async () => {
+  test("fires onError if image fails to load", () => {
     const mock = mocks.image()
     mock.simulate("error")
 
@@ -183,7 +183,7 @@ describe("<AvatarBadge />", () => {
     expect(pingEl).toHaveStyle({ background: "rgb(255, 0, 0)" })
 
     const style = window.getComputedStyle(pingEl!)
-    expect(style["animation"]).toMatch(
+    expect(style.animation).toMatch(
       /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
     )
   })

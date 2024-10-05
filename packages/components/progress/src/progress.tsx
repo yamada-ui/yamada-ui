@@ -17,7 +17,7 @@ import { useAnimation } from "@yamada-ui/use-animation"
 import { createContext, cx, valueToPercent } from "@yamada-ui/utils"
 
 const [ProgressProvider, useProgress] = createContext<{
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }>({
   name: `ProgressStylesContext`,
   errorMessage: `useProgress returned is 'undefined'. Seems you forgot to wrap the components in "<Progress />" `,

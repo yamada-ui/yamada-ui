@@ -144,24 +144,24 @@ const getBaseComponents = (theme: string, paths: { [key: string]: string }) => {
   const componentNames =
     theme
       .match(/(mergeStyle|mergeMultiStyle)\(\s*([^{)]+)/)?.[2]
-      .trim()
+      ?.trim()
       .replace(/,$/, "")
       .split(",")
       .map((value) => value.replace(/pickStyle\(/, "").trim())
       .filter((value) => /^[A-Z]/.test(value)) ?? []
 
-  if (!componentNames.length) return
+  if (!componentNames.length) return []
 
   return componentNames.map((name) => {
-    let path: string | undefined = paths[toKebabCase(name ?? "")]
+    let path: string = paths[toKebabCase(name)] ?? ""
 
-    if (path) path = "/" + path.replace(/^contents\//, "")
+    path = "/" + path.replace(/^contents\//, "")
 
     return { name, path }
   })
 }
 
-const generateContent = async ({
+const generateContent = ({
   data,
   locale,
   paths,
@@ -220,7 +220,7 @@ const generateMDXFiles: p.RequiredRunner =
 
             data = { ...data, order: 2, tab: LOCALE_TAB_MAP[locale] }
 
-            const content = await generateContent({
+            const content = generateContent({
               data,
               locale,
               paths,

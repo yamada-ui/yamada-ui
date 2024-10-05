@@ -15,7 +15,7 @@ describe("<DatePicker />", () => {
       vi.useRealTimers()
     })
 
-    test("should change selected date", async () => {
+    test("should change selected date", () => {
       const { container } = render(
         <DatePicker
           defaultValue={new Date(new Date().setDate(1))}
@@ -33,7 +33,7 @@ describe("<DatePicker />", () => {
       expect(selectBtn).toHaveAttribute("data-selected")
     })
 
-    test("whether Calendar is displayed when DatePicker is focused", async () => {
+    test("whether Calendar is displayed when DatePicker is focused", () => {
       const { container } = render(
         <DatePicker
           defaultValue={new Date(new Date().setDate(1))}

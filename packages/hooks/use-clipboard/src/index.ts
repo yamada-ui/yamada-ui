@@ -13,7 +13,7 @@ export interface UseClipboardOptions {
  * @see Docs https://yamada-ui.com/hooks/use-clipboard
  */
 export const useClipboard = (
-  defaultValue: string = "",
+  defaultValue = "",
   timeoutOrOptions: number | UseClipboardOptions = {},
 ) => {
   const [hasCopied, setHasCopied] = useState(false)

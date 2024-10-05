@@ -1,5 +1,5 @@
+import type { FC } from "@yamada-ui/core"
 import type { TableBodyProps as NativeTableBodyProps } from "@yamada-ui/native-table"
-import { FC } from "@yamada-ui/core"
 import { Tbody as NativeTbody, Td, Tr } from "@yamada-ui/native-table"
 import { ariaAttr, dataAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { render, useTableContext } from "./use-table"

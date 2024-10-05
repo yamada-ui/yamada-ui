@@ -15,7 +15,7 @@ export const NotFound: FC<NotFoundProps> = memo(
 
     const Icon = [Rabbit, Snail, Squirrel, Bird, Fish][
       Math.floor(Math.random() * 5)
-    ]
+    ]!
 
     return (
       <Center flexDirection="column" gap="lg" {...rest}>

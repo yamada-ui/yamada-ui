@@ -1,5 +1,5 @@
 import type { Dict, Path, StringLiteral } from "@yamada-ui/react"
-import type { FC, PropsWithChildren } from "react"
+import type { FC, PropsWithChildren, ReactElement } from "react"
 import type { Locale, UI } from "utils/i18n"
 import {
   getMemoizedObject as get,
@@ -31,8 +31,8 @@ interface I18nContext {
   ) => string
   tc: (
     path: Path<UI> | StringLiteral,
-    callback?: (str: string, index: number) => JSX.Element,
-  ) => JSX.Element[] | string
+    callback?: (str: string, index: number) => ReactElement,
+  ) => ReactElement[] | string
 }
 
 const I18nContext = createContext<I18nContext>({
@@ -62,7 +62,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     (
       path: Path<UI> | StringLiteral,
       replaceValue?: { [key: string]: number | string } | number | string,
-      pattern: string = "label",
+      pattern = "label",
     ) => {
       let value = get<string>(ui, path, "")
 
@@ -89,7 +89,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const tc = useCallback(
     (
       path: Path<UI> | StringLiteral,
-      callback?: (str: string, index: number) => JSX.Element,
+      callback?: (str: string, index: number) => ReactElement,
     ) => {
       const strOrArray = get<string | string[]>(ui, path, "")
 
@@ -122,7 +122,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
 
 const renderElement = (
   str: string,
-  callback?: (str: string, index: number) => JSX.Element,
+  callback?: (str: string, index: number) => ReactElement,
 ) => {
   const array = str.split(/(`[^`]+`)/)
 

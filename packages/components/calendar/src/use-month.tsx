@@ -117,7 +117,7 @@ export const useMonth = () => {
       const [firstIndex, , firstDay] =
         getRangeFirstDay(dayRefs)?.split("-").map(Number) ?? []
 
-      if (firstIndex === targetDay && targetDay < firstDay) {
+      if (firstIndex === targetDay && firstDay && targetDay < firstDay) {
         if (!isMonthInRange({ date: prevMonth, maxDate, minDate })) return
         dayRefs.current.clear()
 
@@ -133,7 +133,7 @@ export const useMonth = () => {
 
         if (ref?.current) {
           if (isShouldHovered)
-            setHoveredValue(dayjs(ref.current.dataset["value"]).toDate())
+            setHoveredValue(dayjs(ref.current.dataset.value).toDate())
 
           ref.current.focus()
           ref.current.tabIndex = 0
@@ -157,7 +157,7 @@ export const useMonth = () => {
       const [lastIndex, , lastDay] =
         getRangeLastDay(dayRefs)?.split("-").map(Number) ?? []
 
-      if (lastIndex === targetIndex && lastDay < targetDay) {
+      if (lastIndex === targetIndex && lastDay && lastDay < targetDay) {
         if (!isMonthInRange({ date: nextMonth, maxDate, minDate })) return
         dayRefs.current.clear()
 
@@ -173,7 +173,7 @@ export const useMonth = () => {
 
         if (ref?.current) {
           if (isShouldHovered)
-            setHoveredValue(dayjs(ref.current.dataset["value"]).toDate())
+            setHoveredValue(dayjs(ref.current.dataset.value).toDate())
 
           ref.current.focus()
           ref.current.tabIndex = 0
@@ -206,21 +206,25 @@ export const useMonth = () => {
 
       const actions: { [key: string]: Function | undefined } = {
         ArrowDown: () => {
+          if (!isNumber(focusedMonth)) return
+
           const lastOfMonthDay = dayjs(new Date(year, focusedMonth))
             .endOf("month")
             .date()
 
-          if (focusedDay + 7 <= lastOfMonthDay)
-            onFocusNext(focusedIndex, focusedMonth, focusedDay + 7)
+          if (focusedDay && focusedDay + 7 <= lastOfMonthDay)
+            onFocusNext(focusedIndex ?? -1, focusedMonth, focusedDay + 7)
         },
         ArrowLeft: () => {
           if (focusedIndex !== firstIndex) {
+            if (!isNumber(focusedMonth)) return
+
             const firstOfMonthDay = dayjs(new Date(year, focusedMonth))
               .startOf("month")
               .date()
 
-            if (firstOfMonthDay < focusedDay) {
-              onFocusNext(focusedIndex, focusedMonth, focusedDay - 1)
+            if (focusedDay && firstOfMonthDay < focusedDay) {
+              onFocusNext(focusedIndex ?? -1, focusedMonth, focusedDay - 1)
             } else {
               const prevLastOfMonthDay = dayjs(new Date(year, focusedMonth))
                 .subtract(1, "month")
@@ -228,23 +232,25 @@ export const useMonth = () => {
                 .date()
 
               onFocusNext(
-                focusedIndex - 1,
+                focusedIndex ? focusedIndex - 1 : -1,
                 focusedMonth - 1,
                 prevLastOfMonthDay,
               )
             }
-          } else {
-            onFocusPrev(focusedIndex, focusedMonth, focusedDay - 1)
+          } else if (isNumber(focusedMonth) && isNumber(focusedDay)) {
+            onFocusPrev(focusedIndex ?? -1, focusedMonth, focusedDay - 1)
           }
         },
         ArrowRight: () => {
           if (focusedIndex !== lastIndex) {
+            if (!isNumber(focusedMonth)) return
+
             const lastOfMonthDay = dayjs(new Date(year, focusedMonth))
               .endOf("month")
               .date()
 
-            if (focusedDay < lastOfMonthDay) {
-              onFocusNext(focusedIndex, focusedMonth, focusedDay + 1)
+            if (focusedDay && focusedDay < lastOfMonthDay) {
+              onFocusNext(focusedIndex ?? -1, focusedMonth, focusedDay + 1)
             } else {
               const nextFirstOfMonthDay = dayjs(new Date(year, focusedMonth))
                 .add(1, "month")
@@ -252,25 +258,33 @@ export const useMonth = () => {
                 .date()
 
               onFocusNext(
-                focusedIndex + 1,
+                focusedIndex ? focusedIndex + 1 : -1,
                 focusedMonth + 1,
                 nextFirstOfMonthDay,
               )
             }
-          } else {
-            onFocusNext(focusedIndex, focusedMonth, focusedDay + 1)
+          } else if (isNumber(focusedMonth) && isNumber(focusedDay)) {
+            onFocusNext(focusedIndex ?? -1, focusedMonth, focusedDay + 1)
           }
         },
         ArrowUp: () => {
+          if (!isNumber(focusedMonth)) return
+
           const firstOfMonthDay = dayjs(new Date(year, focusedMonth))
             .startOf("month")
             .date()
 
-          if (focusedDay - 7 >= firstOfMonthDay)
-            onFocusNext(focusedIndex, focusedMonth, focusedDay - 7)
+          if (focusedDay && focusedDay - 7 >= firstOfMonthDay)
+            onFocusNext(focusedIndex ?? -1, focusedMonth, focusedDay - 7)
         },
-        End: () => onFocusNext(lastIndex, lastMonth, lastDay),
-        Home: () => onFocusPrev(firstIndex, firstMonth, firstDay),
+        End: () =>
+          isNumber(lastMonth) && isNumber(lastDay)
+            ? onFocusNext(lastIndex ?? -1, lastMonth, lastDay)
+            : undefined,
+        Home: () =>
+          isNumber(firstMonth) && isNumber(firstDay)
+            ? onFocusPrev(firstIndex ?? -1, firstMonth, firstDay)
+            : undefined,
       }
 
       const action = actions[ev.key]
@@ -455,7 +469,7 @@ export const useMonth = () => {
         "data-selected": dataAttr(isTrulySelected),
         "data-start": dataAttr(isTrulyStart),
         "data-today": dataAttr(isToday),
-        "data-value": value.getDate() ?? "",
+        "data-value": value.getDate(),
         "data-weekend": dataAttr(isWeekend),
         onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(

@@ -194,7 +194,7 @@ describe("<Modal />", () => {
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
     const closeButton = await findByTestId("ModalCloseButton")
     await user.click(closeButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Modal")).toBeNull()
     })
   })
@@ -208,7 +208,7 @@ describe("<Modal />", () => {
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
     const ModalOverlay = await findByTestId("ModalOverlay")
     await user.click(ModalOverlay)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Modal")).toBeNull()
     })
   })
@@ -221,7 +221,7 @@ describe("<Modal />", () => {
     const modal = getByTestId("Modal")
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
     await act(() => fireEvent.keyDown(modal, { key: "Escape" }))
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Modal")).toBeNull()
     })
   })

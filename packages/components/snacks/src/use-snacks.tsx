@@ -22,7 +22,7 @@ const createRender = (options: UseSnacksOptions): FC<SnackComponentProps> => {
 
   const Render: FC<SnackComponentProps> = (props) => {
     if (typeof component === "function") {
-      return component({ ...props, ...options }) as JSX.Element
+      return component({ ...props, ...options })
     } else {
       return <Snack {...props} {...options} />
     }

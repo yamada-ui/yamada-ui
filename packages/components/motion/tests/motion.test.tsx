@@ -7,12 +7,12 @@ describe("<Motion />", () => {
     await a11y(<Motion />)
   })
 
-  test("Motion renders correctly with div", async () => {
+  test("Motion renders correctly with div", () => {
     const { container } = render(<Motion />)
     expect(container.firstChild).toBeInstanceOf(HTMLDivElement)
   })
 
-  test("Motion renders correctly with initial", async () => {
+  test("Motion renders correctly with initial", () => {
     render(<Motion initial={{ opacity: 0, x: 10 }}>Motion</Motion>)
     expect(screen.queryByText("Motion")).toHaveStyle(
       "transform: translateX(10px);",

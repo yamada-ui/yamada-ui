@@ -4,7 +4,7 @@ import { ColorSelector } from "../src"
 import { mockEyeDropper, resetEyeDropperMock } from "./utils/mock-eye-dropper"
 
 describe("<ColorSelector />", () => {
-  test("ColorSelector renders correctly", async () => {
+  test("ColorSelector renders correctly", () => {
     render(<ColorSelector data-testid="ColorSelector" />)
 
     const alphaSlider = screen.getByTestId("ColorSelector")
@@ -20,7 +20,7 @@ describe("<ColorSelector />", () => {
     const buttons = screen.getAllByRole("button")
 
     const eyeDropperButton = buttons[0]
-    expect(eyeDropperButton.getAttribute("aria-label")).toBe("Pick a color")
+    expect(eyeDropperButton?.getAttribute("aria-label")).toBe("Pick a color")
 
     resetEyeDropperMock()
   })
@@ -61,9 +61,9 @@ describe("<ColorSelector />", () => {
 
     const inputs = screen.getAllByRole("spinbutton")
 
-    const inputR = inputs[0]
-    const inputG = inputs[1]
-    const inputB = inputs[2]
+    const inputR = inputs[0]!
+    const inputG = inputs[1]!
+    const inputB = inputs[2]!
 
     fireEvent.change(inputR, { target: { value: "128" } })
     fireEvent.change(inputG, { target: { value: "64" } })

@@ -93,7 +93,7 @@ interface ColorSelectorContext {
   channels: Channel[]
   eyeDropperSupported: boolean
   isInteractive: boolean
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   value: string
   withAlpha: boolean
   getAlphaSliderProps: PropGetter<AlphaSliderProps>
@@ -204,7 +204,7 @@ export const useColorSelector = ({
     onChange: onChangeProp,
   })
   const format = useMemo(
-    () => formatProp ?? calcFormat(value ?? "#ffffff"),
+    () => formatProp ?? calcFormat(value || "#ffffff"),
     [value, formatProp],
   )
   const resolvedValue = convertColor(value, "#ffffff")(format) as string
@@ -386,7 +386,7 @@ export const useColorSelector = ({
   }, [valueProp])
 
   useUpdateEffect(() => {
-    if (!format || !value) return
+    if (!value) return
 
     const nextValue = convertColor(value, fallbackValue)(format)
 

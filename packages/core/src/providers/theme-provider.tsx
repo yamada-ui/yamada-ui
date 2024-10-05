@@ -20,6 +20,7 @@ import {
 } from "@emotion/react"
 import {
   getMemoizedObject as get,
+  isEmptyObject,
   isUndefined,
   merge,
   runIfFunc,
@@ -134,7 +135,7 @@ export const ResetStyle: FC = () => {
       styles={
         ((theme) => {
           const { themeScheme } = theme as StyledTheme
-          let style = get<UIStyle>(theme, "styles.resetStyle", {})
+          const style = get<UIStyle>(theme, "styles.resetStyle", {})
 
           const computedStyle = runIfFunc(style, {
             colorMode,
@@ -142,7 +143,7 @@ export const ResetStyle: FC = () => {
             themeScheme,
           })
 
-          if (!computedStyle) return undefined
+          if (isEmptyObject(computedStyle)) return undefined
 
           return css(computedStyle)(theme)
         }) satisfies StyledProps<Dict> as Interpolation
@@ -167,7 +168,7 @@ export const GlobalStyle: FC = () => {
             themeScheme,
           })
 
-          if (!computedStyle) return undefined
+          if (isEmptyObject(computedStyle)) return undefined
 
           return css(computedStyle)(theme)
         }) satisfies StyledProps<Dict> as Interpolation

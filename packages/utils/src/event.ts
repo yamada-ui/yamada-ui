@@ -40,7 +40,7 @@ export function getEventWindow(ev: Event): typeof globalThis {
 export function pointFromTouch(e: TouchEvent, type: PointType = "page") {
   const point = e.touches[0] || e.changedTouches[0]
 
-  return { x: point[`${type}X`], y: point[`${type}Y`] }
+  return { x: point?.[`${type}X`] ?? 0, y: point?.[`${type}Y`] ?? 0 }
 }
 
 export function pointFromMouse(
@@ -74,7 +74,7 @@ function filter(cb: EventListener): EventListener {
   return function (ev: Event) {
     const isMouse = isMouseEvent(ev)
 
-    if (!isMouse || (isMouse && ev.button === 0)) cb(ev)
+    if (!isMouse || ev.button === 0) cb(ev)
   }
 }
 

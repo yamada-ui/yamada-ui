@@ -24,8 +24,6 @@ export const DefaultPortal: FC<
       ? (parent ?? ownerDocument.body)
       : ownerDocument.body
 
-    if (!host) return
-
     el.current = ownerDocument.createElement("div")
     el.current.className = "ui-portal"
 

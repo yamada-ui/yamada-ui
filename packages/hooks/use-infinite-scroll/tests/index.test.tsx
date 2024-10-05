@@ -1,4 +1,5 @@
 import { render, renderHook, waitFor } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { useRef } from "react"
 import { useInfiniteScroll } from "../src"
 
@@ -20,7 +21,7 @@ describe("useInfiniteScroll", () => {
   afterEach(() => {
     vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
-  test("should not be finish and not called onLoad", async () => {
+  test("should not be finish and not called onLoad", () => {
     const mockOnLoad = vi.fn()
     const { result } = renderHook(() =>
       useInfiniteScroll({
@@ -32,8 +33,8 @@ describe("useInfiniteScroll", () => {
     expect(result.current.isFinish).toBeFalsy()
   })
 
-  test("should be called onLoad when initial loaded", async () => {
-    const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+  test("should be called onLoad when initial loaded", () => {
+    const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
       finish()
     })
     const { result } = renderHook(() =>
@@ -52,11 +53,11 @@ describe("useInfiniteScroll", () => {
 
   test("should be called onReset scroll to root", async () => {
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
       const rootRef = useRef<HTMLDivElement>(null)
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         resetRef,
         rootRef,
@@ -90,10 +91,10 @@ describe("useInfiniteScroll", () => {
 
   test("should be called onReset scroll to body", async () => {
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         resetRef,
         onLoad: mockOnLoad,
@@ -125,11 +126,11 @@ describe("useInfiniteScroll", () => {
 
   test("should be called onReset reverse scroll to root", async () => {
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
       const rootRef = useRef<HTMLDivElement>(null)
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         isReverse: true,
         resetRef,
@@ -164,11 +165,11 @@ describe("useInfiniteScroll", () => {
 
   test("should be called onReset horizontal reverse scroll to root", async () => {
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
       const rootRef = useRef<HTMLDivElement>(null)
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         isReverse: true,
         orientation: "horizontal",
@@ -204,10 +205,10 @@ describe("useInfiniteScroll", () => {
 
   test("should be called onReset horizontal scroll to body", async () => {
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         orientation: "horizontal",
         resetRef,
@@ -251,11 +252,11 @@ describe("useInfiniteScroll", () => {
     vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
 
     const MyComponent = () => {
-      const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
       })
       const rootRef = useRef<HTMLDivElement>(null)
-      const resetRef = useRef<() => void>(() => {})
+      const resetRef = useRef<() => void>(noop)
       const { ref, isFinish } = useInfiniteScroll({
         isDisabled: true,
         resetRef,

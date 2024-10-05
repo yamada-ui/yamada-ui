@@ -8,7 +8,7 @@ const RADIAN = Math.PI / 180
 const DEFAULT_LABEL_OFFSET = 22
 
 export interface PieChartLabelProps {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
   className?: string
   cx?: number
   cy?: number
@@ -81,7 +81,7 @@ interface Point {
 }
 
 export interface PieChartLabelLineProps {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
   className?: string
   cx?: number
   cy?: number
@@ -115,7 +115,7 @@ export const pieChartLabelLine: (
   const x = cxProp + (middleRadius + labelOffset) * Math.cos(-midAngle * RADIAN)
   const y = cyProp + (middleRadius + labelOffset) * Math.sin(-midAngle * RADIAN)
 
-  const d: string = `M ${points[0].x} ${points[0].y} L ${x} ${y}`
+  const d = `M ${points[0]?.x} ${points[0]?.y} L ${x} ${y}`
 
   return (
     <ui.path

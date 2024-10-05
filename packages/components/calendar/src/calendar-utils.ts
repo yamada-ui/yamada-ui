@@ -40,7 +40,7 @@ export const getLastOfWeek = (
 export const getWeekdays = (
   locale: string,
   firstDayOfWeek: "monday" | "sunday",
-  format: string = "dd",
+  format = "dd",
 ): string[] => {
   let weekdays: string[] = []
 
@@ -115,11 +115,13 @@ export const getRangeMonths = (locale: string, format: string): string[] => {
 }
 
 export const getFormattedLabel = (
-  dateOrYear: Date | number,
+  dateOrYear: Date | number | undefined,
   locale: string,
   format: string,
 ): string => {
-  if (dateOrYear instanceof Date) {
+  if (dateOrYear == null || dateOrYear === -1) {
+    return ""
+  } else if (dateOrYear instanceof Date) {
     return dayjs(dateOrYear).locale(locale).format(format)
   } else {
     return dayjs(new Date(dateOrYear, 1, 1))
@@ -242,7 +244,7 @@ export const isBeforeDate = (value: MaybeDate, date: MaybeDate | undefined) =>
 export const onShouldFocus = <T = any>(
   refs: MutableRefObject<Map<T, RefObject<HTMLButtonElement>>>,
   validateFunc: (value: T) => boolean,
-  isFirst: boolean = true,
+  isFirst = true,
 ): void => {
   let targetValue: T | undefined
   let targetEl: HTMLButtonElement | null | undefined
@@ -262,7 +264,7 @@ export const onShouldFocus = <T = any>(
     const firstRef = values[0]
     const lastRef = values[values.length - 1]
 
-    targetEl = isFirst ? firstRef.current : lastRef.current
+    targetEl = isFirst ? firstRef?.current : lastRef?.current
   }
 
   if (targetEl) {

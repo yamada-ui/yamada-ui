@@ -15,13 +15,13 @@ function omitObjectHelper<Y extends Dict, M extends keyof Y>(
 
   const [primaryKey, ...restKeys] = path
 
-  if (restKeys.length === 0 && primaryKey in obj) {
+  if (restKeys.length === 0 && primaryKey && primaryKey in obj) {
     const { [primaryKey]: _, ...rest } = obj
 
     return rest
   }
 
-  if (obj[primaryKey] && isObject(obj[primaryKey])) {
+  if (primaryKey && obj[primaryKey] && isObject(obj[primaryKey])) {
     return {
       ...obj,
       [primaryKey]: omitObjectHelper(obj[primaryKey], restKeys),
@@ -109,7 +109,7 @@ export function filterUndefined<Y extends Dict>(obj: Y): Y {
 export function merge<Y extends Dict>(
   target: any,
   source: any,
-  mergeArray: boolean = false,
+  mergeArray = false,
 ): Y {
   let result = Object.assign({}, target)
 
@@ -155,10 +155,10 @@ export function flattenObject<Y extends Dict>(
 
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
-  return Object.entries(obj).reduce((result, [key, value]) => {
+  return Object.entries(obj).reduce<any>((result, [key, value]) => {
     if (
       isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys?.includes(key)) &&
+      !Object.keys(value).some((key) => omitKeys.includes(key)) &&
       (!shouldProcess || shouldProcess(value))
     ) {
       Object.entries(
@@ -176,15 +176,15 @@ export function flattenObject<Y extends Dict>(
     }
 
     return result
-  }, {} as any) as Y
+  }, {}) as Y
 }
 
 export function objectFromEntries<Y extends Dict>(entries: any[][]): Y {
-  return entries.reduce((result, [key, value]) => {
+  return entries.reduce<any>((result, [key, value]) => {
     result[key] = value
 
     return result
-  }, {} as any) as Y
+  }, {}) as Y
 }
 
 export function keysFormObject<Y extends object>(obj: Y): (keyof Y)[] {
@@ -198,28 +198,32 @@ export function replaceObject<Y = any>(
   if (isArray(objOrArray)) {
     return objOrArray.map(callBack) as Y
   } else if (isObject(objOrArray)) {
-    return Object.entries(objOrArray).reduce((obj, [key, value]) => {
+    return Object.entries(objOrArray).reduce<Dict>((obj, [key, value]) => {
       obj[key] = callBack(value)
 
       return obj
-    }, {} as Dict) as Y
+    }, {}) as Y
   } else {
     return callBack(objOrArray)
   }
 }
 
 export function getObject(
-  obj: Dict,
+  obj: Dict | undefined,
   path: number | string,
   fallback?: any,
   i?: number,
 ) {
-  const k = isString(path) ? path.split(/\[(.*?)\]|\./).filter(Boolean) : [path]
+  const keys = isString(path)
+    ? path.split(/\[(.*?)\]|\./).filter(Boolean)
+    : [path]
 
-  for (i = 0; i < k.length; i += 1) {
+  for (i = 0; i < keys.length; i += 1) {
     if (!obj) break
 
-    obj = obj[k[i]]
+    const key = keys[i]
+
+    obj = key ? obj[key] : undefined
   }
 
   return obj === undefined ? fallback : obj
@@ -255,9 +259,6 @@ export function memoizeObject(func: typeof getObject) {
 export const getMemoizedObject = memoizeObject(getObject)
 
 export function assignAfter(target: { [key: string]: any }, ...sources: any[]) {
-  if (target == null)
-    throw new TypeError("Cannot convert undefined or null to object")
-
   const result: { [key: string]: unknown } = { ...target }
 
   for (const nextSource of sources) {

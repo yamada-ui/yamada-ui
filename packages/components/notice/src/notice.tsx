@@ -105,7 +105,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
 
   const Render: FC<NoticeComponentProps> = (props) => {
     if (typeof component === "function") {
-      return component({ ...props, ...options }) as JSX.Element
+      return component({ ...props, ...options })
     } else {
       return <Notice {...props} {...options} />
     }
@@ -251,7 +251,7 @@ const createNoticeStore = (initialState: State): Store => {
       const { id, placement } = notice
 
       setState((prev) => {
-        let prevNotices = prev[placement] ?? []
+        let prevNotices = prev[placement]
 
         if (
           limit !== undefined &&
@@ -306,7 +306,7 @@ const createNoticeStore = (initialState: State): Store => {
         const next = { ...prev }
         const { index, placement } = findNotice(next, id)
 
-        if (placement && index !== -1) {
+        if (placement && index !== -1 && next[placement][index]) {
           next[placement][index] = {
             ...next[placement][index],
             ...options,

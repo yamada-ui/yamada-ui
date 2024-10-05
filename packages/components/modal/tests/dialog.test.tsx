@@ -101,14 +101,14 @@ describe("<Dialog />", () => {
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const cancelDialogButton = getByText("dialog-cancel")
     await user.click(cancelDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
     await user.click(openDialogButton)
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const otherDialogButton = getByText("dialog-other")
     await user.click(otherDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
 
@@ -116,7 +116,7 @@ describe("<Dialog />", () => {
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const successDialogButton = getByText("dialog-success")
     await user.click(successDialogButton)
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(queryByTestId("Dialog")).toBeNull()
     })
   })

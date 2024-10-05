@@ -41,7 +41,7 @@ interface DropzoneContext {
   isDragAccept: boolean
   isDragIdle: boolean
   isDragReject: boolean
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   isLoading?: boolean
 }
 

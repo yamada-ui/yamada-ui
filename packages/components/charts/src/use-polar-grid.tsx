@@ -20,7 +20,7 @@ export interface UsePolarGridOptions {
 }
 
 interface UsePolarGridProps extends UsePolarGridOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const usePolarGrid = ({

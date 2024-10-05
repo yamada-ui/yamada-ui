@@ -1,4 +1,9 @@
-import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
+import type {
+  AvatarProps,
+  GridProps,
+  StackProps,
+  StringLiteral,
+} from "@yamada-ui/react"
 import type { FC } from "react"
 import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import { Github, X } from "components/media-and-icons"
@@ -72,7 +77,7 @@ export const User: FC<UserProps> = ({
 }
 
 export interface UsersProps extends GridProps {
-  type: "maintainers" | "members"
+  type: "maintainers" | "members" | StringLiteral
 }
 
 export const Users: FC<UsersProps> = ({ type, ...rest }) => {

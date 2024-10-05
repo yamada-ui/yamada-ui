@@ -1,5 +1,6 @@
 import type { AutocompleteItem } from "../src"
 import { render, screen, waitFor } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { AutocompleteOption, MultiAutocomplete } from "../src"
 
 describe("<MultiAutoComplete />", () => {
@@ -265,7 +266,7 @@ describe("<MultiAutoComplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      await user.click(optionElements[0])
+      await user.click(optionElements[0]!)
 
       await waitFor(() =>
         expect(optionElements[2]).toHaveAttribute("data-focus"),
@@ -473,9 +474,7 @@ describe("<MultiAutoComplete />", () => {
     })
 
     test("correct warnings should be issued when both `allowCreate` and `children` are present", () => {
-      const consoleWarnSpy = vi
-        .spyOn(console, "warn")
-        .mockImplementation(() => {})
+      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
       render(
         <MultiAutocomplete allowCreate>
@@ -592,7 +591,7 @@ describe("<MultiAutoComplete />", () => {
       test("correct warnings should be  issued when insertPosition does not exist", async () => {
         const consoleWarnSpy = vi
           .spyOn(console, "warn")
-          .mockImplementation(() => {})
+          .mockImplementation(noop)
 
         const { container, user } = render(
           <MultiAutocomplete

@@ -160,9 +160,9 @@ export const withMulti = () => {
 }
 
 export const withDynamic = () => {
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<"moveLeft" | "moveRight", AnimationStyle>
-  >({
+  const [animation, setAnimation] = useDynamicAnimation<{
+    [key in "moveLeft" | "moveRight"]: AnimationStyle
+  }>({
     moveLeft: {
       duration: "slower",
       fillMode: "forwards",
@@ -211,9 +211,9 @@ export const withDynamic = () => {
 }
 
 export const withDynamicAndMulti = () => {
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<"moveLeft" | "moveRight", AnimationStyle[]>
-  >({
+  const [animation, setAnimation] = useDynamicAnimation<{
+    [key in "moveLeft" | "moveRight"]: AnimationStyle[]
+  }>({
     moveLeft: [
       {
         duration: "slower",

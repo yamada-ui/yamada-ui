@@ -97,7 +97,7 @@ export interface UseRadarChartOptions {
 }
 
 interface UseRadarChartProps extends UseRadarChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useRadarChart = ({
@@ -360,8 +360,14 @@ export const useRadarChart = ({
     Omit<Recharts.RadarProps, "ref">
   > = useCallback(
     ({ className: classNameProp, index, ...props }, ref = null) => {
-      const { className, activeDot, color, dataKey, dot, ...rest } =
-        radarPropList[index]
+      const {
+        className,
+        activeDot,
+        color,
+        dataKey = "",
+        dot,
+        ...rest
+      } = radarPropList[index] ?? {}
 
       return {
         ref,

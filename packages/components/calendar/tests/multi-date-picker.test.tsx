@@ -15,7 +15,7 @@ describe("<MultiDatePicker />", () => {
       vi.useRealTimers()
     })
 
-    test("should change selected dates", async () => {
+    test("should change selected dates", () => {
       const { container } = render(
         <MultiDatePicker
           defaultValue={[new Date(new Date().setDate(1))]}

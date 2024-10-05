@@ -151,7 +151,7 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
         if (Object.keys(OVERRIDE_PATHS).includes(name)) {
           const names = OVERRIDE_PATHS[name]
 
-          names.forEach((name) => {
+          names?.forEach((name) => {
             if (typeof name === "string") {
               const displayName = toCamelCase(name)
               const nestedDoc = doc[displayName]
@@ -216,20 +216,14 @@ const getPaths: p.RequiredRunner = () => async (_, s) => {
   return paths
 }
 
-const generateContent = async ({
-  doc,
-  locale,
-}: {
-  doc: Doc
-  locale: Locale
-}) => {
+const generateContent = ({ doc, locale }: { doc: Doc; locale: Locale }) => {
   const content = [`## ${LOCALE_TITLE_MAP[locale]}`]
 
   Object.entries(doc).map(([title, props]) => {
     content.push(`\n### ${title}Props\n`)
 
     Object.entries(props).map(
-      async ([
+      ([
         name,
         { type, defaultValue, deprecated, description, required, see },
       ]) => {
@@ -320,7 +314,7 @@ const generateMDXFiles: p.RequiredRunner =
 
             data = { ...data, order: 1, tab: LOCALE_TAB_MAP[locale] }
 
-            const content = await generateContent({ doc, locale })
+            const content = generateContent({ doc, locale })
 
             const outPath = path.join(dirPath, getMDXFileName("props", locale))
 

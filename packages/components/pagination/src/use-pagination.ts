@@ -5,13 +5,13 @@ import { createContext } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 
 interface PaginationContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [PaginationProvider, usePaginationContext] =
   createContext<PaginationContext>({
     name: "PaginationContext",
-    strict: false,
+    errorMessage: `usePaginationContext returned is 'undefined'. Seems you forgot to wrap the components in "<Pagination />"`,
   })
 
 export const computedRange = (start: number, end: number) =>

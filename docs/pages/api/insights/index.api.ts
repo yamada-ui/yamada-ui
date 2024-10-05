@@ -58,8 +58,10 @@ const getSummarizeRangeDates = (
     }
   }
 
-  rangeDates[0][0] = dayjs(minDate).format("YYYY-MM-DD")
-  rangeDates[rangeDates.length - 1][1] = dayjs(maxDate).format("YYYY-MM-DD")
+  if (rangeDates[0]) rangeDates[0][0] = dayjs(minDate).format("YYYY-MM-DD")
+  if (rangeDates[rangeDates.length - 1])
+    // @ts-expect-error
+    rangeDates[rangeDates.length - 1][1] = dayjs(maxDate).format("YYYY-MM-DD")
 
   return rangeDates
 }
@@ -175,7 +177,7 @@ const handler = async (
   res: NextApiResponse<ResponseData>,
 ) => {
   try {
-    const { end, start, summarize } = (query ?? {}) as RequestQuery
+    const { end, start, summarize } = query as RequestQuery
 
     if (!start || !end) throw new Error("Invalid parameters")
 

@@ -169,16 +169,15 @@ export const tokens: Tokens = {
   zIndices: ["zIndex"],
 }
 
-export const tokenMap = Object.entries(tokens).reduce(
-  (prev, [key, list]) => {
-    list.forEach((item) => {
-      prev[item] = key as ThemeToken
-    })
+export const tokenMap = Object.entries(tokens).reduce<{
+  [key in CSSProperties | UIProperties]?: ThemeToken
+}>((prev, [key, list]) => {
+  list.forEach((item) => {
+    prev[item] = key as ThemeToken
+  })
 
-    return prev
-  },
-  {} as { [key in CSSProperties | UIProperties]: ThemeToken },
-)
+  return prev
+}, {})
 
 export const tokenPropertyMap: { [key: string]: ThemeToken[] } = {
   animation: ["animations"],

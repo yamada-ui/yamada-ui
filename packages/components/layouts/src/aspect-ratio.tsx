@@ -3,7 +3,7 @@ import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, replaceObject } from "@yamada-ui/utils"
 import { Children } from "react"
 
-type AspectRatioOptions = {
+interface AspectRatioOptions {
   /**
    * The aspect ratio of the Box.
    *
@@ -12,7 +12,7 @@ type AspectRatioOptions = {
   ratio?: Token<number>
 }
 
-export type AspectRatioProps = AspectRatioOptions & HTMLUIProps<"div">
+export interface AspectRatioProps extends AspectRatioOptions, HTMLUIProps {}
 
 /**
  * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.

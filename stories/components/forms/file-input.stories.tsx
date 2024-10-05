@@ -56,7 +56,7 @@ export const withTag: Story = () => {
 export const withFormat: Story = () => {
   return (
     <FileInput
-      format={({ name }) => `${name.substring(0, name.indexOf("."))}`}
+      format={({ name }) => name.substring(0, name.indexOf("."))}
       multiple
       placeholder="multiple"
     />

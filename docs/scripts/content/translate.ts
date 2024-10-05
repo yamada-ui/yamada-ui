@@ -84,7 +84,7 @@ const restoreCodeBlocks = (
   placeholders: string[],
 ) => {
   placeholders.forEach((placeholder, index) => {
-    content = content.replace(placeholder, codeBlocks[index])
+    content = content.replace(placeholder, codeBlocks[index]!)
   })
 
   return content
@@ -93,7 +93,7 @@ const restoreCodeBlocks = (
 const translateContent = async (
   content: string,
   locale: keyof typeof LOCALE_MAP,
-  retry: number = 0,
+  retry = 0,
 ): Promise<string> => {
   try {
     const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
@@ -123,7 +123,7 @@ const translateContent = async (
     })
 
     return restoreCodeBlocks(
-      choices[0].message.content ?? "",
+      choices[0]?.message.content ?? "",
       codeBlocks,
       placeholders,
     )

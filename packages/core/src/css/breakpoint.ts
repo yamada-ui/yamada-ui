@@ -27,7 +27,7 @@ export interface Breakpoints {
 export function createQuery(
   min: number | undefined,
   max: number | undefined,
-  identifier: string = "@media screen",
+  identifier = "@media screen",
 ): string | undefined {
   const query = [identifier]
 
@@ -116,7 +116,7 @@ export function analyzeBreakpoints(
 
   const queries = createQueries(breakpoints, options)
 
-  const isResponsive = (obj: Dict, strict: boolean = false) => {
+  const isResponsive = (obj: Dict, strict = false) => {
     const providedKeys = Object.keys(obj)
 
     if (!providedKeys.length) return false

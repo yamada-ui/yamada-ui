@@ -65,8 +65,6 @@ const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data, Status> = (
   cell: ({ getValue }) => {
     const value = getValue()
 
-    if (!value) return null
-
     const Icon = STATUS[value].icon
 
     return (
@@ -88,8 +86,6 @@ const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data, Priority> = (
   accessorKey: "priority",
   cell: ({ getValue }) => {
     const value = getValue()
-
-    if (!value) return null
 
     const Icon = PRIORITY[value].icon
 
@@ -155,9 +151,9 @@ export const DataTable: FC<DataTableProps> = memo(
     const computedData = useMemo<Data[]>(
       () =>
         DATA.filter(({ priority, status, title }) => {
-          let isSelectedStatus: boolean = true
-          let isSelectedPriority: boolean = true
-          let isSelectedTitle: boolean = true
+          let isSelectedStatus = true
+          let isSelectedPriority = true
+          let isSelectedTitle = true
 
           if (inputtedTitle.length)
             isSelectedTitle = title

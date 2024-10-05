@@ -283,7 +283,7 @@ export const useRangeSlider = ({
       )
       const isThumbStacked = thumbsPosition.length > 1
 
-      if (isThumbStacked && pointValue > values[i])
+      if (isThumbStacked && pointValue > values[i]!)
         i = i + thumbsPosition.length - 1
 
       setActiveIndex(i)
@@ -342,7 +342,7 @@ export const useRangeSlider = ({
 
       if (!isInteractive) return
 
-      const { max, min } = valueBounds[i]
+      const { max = 100, min = 0 } = valueBounds[i] ?? {}
 
       value = parseFloat(roundNumberToStep(value, min, oneStep))
       value = clampNumber(value, min, max)
@@ -360,7 +360,7 @@ export const useRangeSlider = ({
     (i: number, step = oneStep) => {
       const { values } = latestRef.current
 
-      const value = values[i]
+      const value = values[i]!
 
       constrain(i, isReversed ? value - step : value + step)
     },
@@ -371,7 +371,7 @@ export const useRangeSlider = ({
     (i: number, step = oneStep) => {
       const { values } = latestRef.current
 
-      const value = values[i]
+      const value = values[i]!
 
       constrain(i, isReversed ? value + step : value - step)
     },
@@ -386,7 +386,7 @@ export const useRangeSlider = ({
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
       const { valueBounds } = latestRef.current
-      const { max, min } = valueBounds[activeIndex]
+      const { max = 100, min = 0 } = valueBounds[activeIndex] ?? {}
 
       const actions: { [key: string]: KeyboardEventHandler } = {
         ArrowDown: () => stepDown(activeIndex),
@@ -707,7 +707,7 @@ interface RangeSliderContext
       | "isVertical"
     >,
     RangeSliderOptions {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [RangeSliderProvider, useRangeSliderContext] =

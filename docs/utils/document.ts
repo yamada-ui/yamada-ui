@@ -95,7 +95,7 @@ export const getDocumentPagination = (
   let pagination: DocumentPagination = {}
 
   for (let i = 0; i < flattenTree.length; i++) {
-    if (flattenTree[i].slug !== document.slug) continue
+    if (flattenTree[i]?.slug !== document.slug) continue
 
     const prev = flattenTree[i - 1]
     const next = flattenTree[i + 1]
@@ -105,7 +105,7 @@ export const getDocumentPagination = (
 
       title = menu ?? title
 
-      pagination["prev"] = { slug, title }
+      pagination.prev = { slug, title }
     }
 
     if (next) {
@@ -113,7 +113,7 @@ export const getDocumentPagination = (
 
       if (menu) title = menu
 
-      pagination["next"] = { slug, title }
+      pagination.next = { slug, title }
     }
   }
 

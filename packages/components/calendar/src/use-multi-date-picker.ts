@@ -64,7 +64,7 @@ export const useMultiDatePicker = ({
   })
   const [inputValue, setInputValue] = useState<string>("")
 
-  const resolvedValue = getResolvedValue([...(value ?? []), draftValue.current])
+  const resolvedValue = getResolvedValue([...value, draftValue.current])
 
   const {
     id,
@@ -89,14 +89,14 @@ export const useMultiDatePicker = ({
     maxSelectValues,
     value: resolvedValue,
     onChange: (value: Date[]) => {
-      value = value?.filter((value) => !isSameDate(value, draftValue.current))
+      value = value.filter((value) => !isSameDate(value, draftValue.current))
 
       setValue(value)
       setInputValue("")
 
       draftValue.current = undefined
 
-      if (closeOnSelect && !!value?.length) onClose()
+      if (closeOnSelect && !!value.length) onClose()
     },
     onClear: () => {
       setValue([])
@@ -124,11 +124,11 @@ export const useMultiDatePicker = ({
         setValue((prev) => {
           if (prev.length === maxSelectValues) return prev
 
-          const isSelected = prev?.some((prevValue) =>
+          const isSelected = prev.some((prevValue) =>
             isSameDate(prevValue, value),
           )
 
-          return !isSelected ? [...(prev ?? []), value!] : prev
+          return !isSelected ? [...prev, value!] : prev
         })
       }
 
@@ -191,7 +191,7 @@ export const useMultiDatePicker = ({
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
         tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? "",
+        value: inputValue,
         onChange: handlerAll(props.onChange, onChange),
         onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),
         onCompositionStart: handlerAll(

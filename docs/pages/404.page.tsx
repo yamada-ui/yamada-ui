@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType, NextPage } from "next"
 import { Text, VStack } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { PageProvider, useI18n } from "contexts"
 import { TopLayout } from "layouts"
@@ -17,7 +17,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
-        <SEO
+        <Seo
           description={tc("not-found.description") as string}
           title={tc("not-found.title") as string}
         />

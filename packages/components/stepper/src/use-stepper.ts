@@ -4,7 +4,7 @@ import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
 
 type StepperContext = {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 } & Omit<UseStepperReturn, "descendants" | "getContainerProps">
 
 export const {

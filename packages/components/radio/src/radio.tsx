@@ -12,6 +12,7 @@ import type {
   ForwardedRef,
   InputHTMLAttributes,
   KeyboardEvent,
+  ReactElement,
   RefAttributes,
   SyntheticEvent,
 } from "react"
@@ -164,10 +165,10 @@ export const useRadio = <
       "data-focus": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocused && isFocusVisible),
       "data-hover": dataAttr(isHovered),
-      onMouseDown: handlerAll(props?.onMouseDown, () => setActive(true)),
-      onMouseEnter: handlerAll(props?.onMouseEnter, () => setHovered(true)),
-      onMouseLeave: handlerAll(props?.onMouseLeave, () => setHovered(false)),
-      onMouseUp: handlerAll(props?.onMouseUp, () => setActive(false)),
+      onMouseDown: handlerAll(props.onMouseDown, () => setActive(true)),
+      onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
+      onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
+      onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
     }),
     [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
   )
@@ -197,11 +198,11 @@ export const useRadio = <
       required,
       value,
       "aria-checked": checked,
-      onBlur: handlerAll(props?.onBlur, onBlur, () => setFocused(false)),
-      onChange: handlerAll(props?.onChange, onChange),
-      onFocus: handlerAll(props?.onFocus, onFocus, () => setFocused(true)),
-      onKeyDown: handlerAll(props?.onKeyDown, onKeyDown),
-      onKeyUp: handlerAll(props?.onKeyUp, onKeyUp),
+      onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
+      onChange: handlerAll(props.onChange, onChange),
+      onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+      onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
       formControlProps,
@@ -226,11 +227,11 @@ export const useRadio = <
       ...props,
       ref,
       "data-checked": dataAttr(checked),
-      onMouseDown: handlerAll(props?.onMouseDown, (ev: SyntheticEvent) => {
+      onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
       }),
-      onTouchStart: handlerAll(props?.onTouchStart, (ev: SyntheticEvent) => {
+      onTouchStart: handlerAll(props.onTouchStart, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
       }),
@@ -375,7 +376,7 @@ export const Radio = forwardRef(
 ) as {
   <Y extends number | string = string>(
     props: RadioProps<Y> & RefAttributes<HTMLInputElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 Radio.displayName = "Radio"

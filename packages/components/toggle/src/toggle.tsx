@@ -95,12 +95,16 @@ export const Toggle = forwardRef(
   ) => {
     const {
       isControlled,
+      isDisabled: groupIsDisabled,
+      isReadOnly: groupIsReadOnly,
       value: groupValue,
       onChange: onChangeGroup,
       ...group
     } = useToggleGroup() ?? {}
     const [styles, mergedProps] = useComponentMultiStyle("Toggle", {
       ...group,
+      isDisabled: groupIsDisabled,
+      isReadOnly: groupIsReadOnly,
       ...props,
     })
     const {
@@ -110,8 +114,8 @@ export const Toggle = forwardRef(
       disableRipple,
       icon,
       isActive,
-      isDisabled = group?.isDisabled,
-      isReadOnly = group?.isReadOnly,
+      isDisabled = groupIsDisabled,
+      isReadOnly = groupIsReadOnly,
       isRounded,
       isSelected: isSelectedProp,
       value,
@@ -187,7 +191,7 @@ export const Toggle = forwardRef(
 ) as {
   <Y extends number | string = string>(
     props: RefAttributes<HTMLButtonElement> & ToggleProps<Y>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 Toggle.displayName = "Toggle"

@@ -80,7 +80,7 @@ describe("useSizes", () => {
     )
   })
 
-  test("returns sizes of multiple elements correctly", async () => {
+  test("returns sizes of multiple elements correctly", () => {
     const Component: FC = () => {
       const ref = useRef<HTMLDivElement>(null)
       const sizes = useSizes({ getNodes: () => [ref.current] })
@@ -127,7 +127,7 @@ describe("useSizes", () => {
     })
   })
 
-  test("returns undefined size when element is null", async () => {
+  test("returns undefined size when element is null", () => {
     const Component: FC = () => {
       const sizes = useSizes({ getNodes: () => [null] })
 
@@ -214,7 +214,7 @@ describe("useSize", () => {
     )
   }
 
-  test("returns size of a single element correctly", async () => {
+  test("returns size of a single element correctly", () => {
     const { getByTestId } = render(<Component />)
 
     expect(getByTestId("el")).toHaveTextContent("400 x 320")

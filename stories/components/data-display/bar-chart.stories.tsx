@@ -306,15 +306,15 @@ export const withSync: Story = () => {
   return (
     <VStack>
       <BarChart
-        data={data[0]}
+        data={data[0]!}
         dataKey="month"
-        series={series[0]}
+        series={series[0]!}
         syncId="syncId"
       />
       <BarChart
-        data={data[1]}
+        data={data[1]!}
         dataKey="month"
-        series={series[1]}
+        series={series[1]!}
         syncId="syncId"
       />
     </VStack>
@@ -883,8 +883,8 @@ export const customTooltip: Story = () => {
               justifyContent="space-between"
               w="full"
             >
-              <Text>{value?.name}</Text>
-              <Text color={value?.color}>{value?.value}</Text>
+              <Text>{value.name}</Text>
+              <Text color={value.color}>{value.value}</Text>
             </HStack>
           ))}
         </CardBody>

@@ -99,6 +99,13 @@ tab: Props
 />
 
 <PropsCard
+  id="toggle-value"
+  name="value"
+  type="Y"
+  description={"The value of the toggle button."}
+/>
+
+<PropsCard
   id="toggle-variant"
   name="variant"
   type='"subtle" | "solid" | "outline" | "unstyled"'
@@ -109,9 +116,16 @@ tab: Props
 ### ToggleGroupProps
 
 <PropsCard
+  id="togglegroup-defaultvalue"
+  name="defaultValue"
+  type="NonNullable<Y extends any[] ? Y : Y | undefined>"
+  description={"The initial value of the toggle button group."}
+/>
+
+<PropsCard
   id="togglegroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
   description={"The CSS `flex-direction` property."}
 />
 

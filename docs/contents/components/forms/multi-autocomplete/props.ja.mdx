@@ -30,7 +30,7 @@ tab: Props
 <PropsCard
   id="multiautocomplete-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -110,14 +110,14 @@ tab: Props
 <PropsCard
   id="multiautocomplete-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for multi autocomplete container element."}
 />
 
 <PropsCard
   id="multiautocomplete-contentprops"
   name="contentProps"
-  type='Omit<MotionProps<"div">, "children">'
+  type='Omit<MotionProps, "children">'
   description={"Props for multi autocomplete content element."}
 />
 
@@ -145,7 +145,7 @@ tab: Props
 <PropsCard
   id="multiautocomplete-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 

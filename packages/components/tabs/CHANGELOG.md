@@ -1,5 +1,37 @@
 # @yamada-ui/tabs
 
+## 1.0.40
+
+### Patch Changes
+
+- [#2975](https://github.com/yamada-ui/yamada-ui/pull/2975) [`d9e4bd3`](https://github.com/yamada-ui/yamada-ui/commit/d9e4bd3aa9420cf80ab6b11475bbdcd8d20ecf3f) Thanks [@Shunii85](https://github.com/Shunii85)! - set `displayName` and `__ui__`.
+
+- [#2922](https://github.com/yamada-ui/yamada-ui/pull/2922) [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replace `findChildren` with `findChild`.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/ripple@1.0.39
+  - @yamada-ui/use-clickable@1.2.9
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-descendant@1.0.22
+  - @yamada-ui/use-disclosure@1.0.21
+
+## 1.0.39
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf), [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750), [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1), [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e)]:
+  - @yamada-ui/use-controllable-state@1.0.20
+  - @yamada-ui/use-descendant@1.0.21
+  - @yamada-ui/use-disclosure@1.0.20
+  - @yamada-ui/ripple@1.0.38
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/core@1.15.0
+  - @yamada-ui/use-clickable@1.2.8
+
 ## 1.0.38
 
 ### Patch Changes

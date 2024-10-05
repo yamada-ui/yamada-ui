@@ -208,7 +208,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
 
     const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
-    const labelId = useId()
+    const id = useId()
     const { isOpen, onOpen, onClose } = useDisclosure({
       isOpen: isOpenProp,
       defaultIsOpen: defaultIsOpenProp,
@@ -342,10 +342,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
 
     const trigger = cloneElement(
       child,
-      getTriggerProps(
-        { ...child.props, "aria-describedby": labelId },
-        child.ref,
-      ),
+      getTriggerProps({ ...child.props, "aria-describedby": id }, child.ref),
     )
 
     const css: CSSUIObject = {
@@ -363,7 +360,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
         {trigger}
 
         <ui.span
-          id={labelId}
+          id={id}
           style={{
             border: "0px",
             clip: "rect(0px, 0px, 0px, 0px)",
@@ -411,3 +408,6 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     )
   },
 )
+
+Tooltip.displayName = "Tooltip"
+Tooltip.__ui__ = "Tooltip"

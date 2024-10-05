@@ -56,4 +56,9 @@ describe("<AvatarGroup />", () => {
     const moreLabel = container.querySelector(".ui-avatar__excess")
     expect(moreLabel).not.toBeInTheDocument()
   })
+
+  test("should have the correct displayName and __ui__", () => {
+    expect(AvatarGroup.displayName).toBe("AvatarGroup")
+    expect(AvatarGroup.__ui__).toBe("AvatarGroup")
+  })
 })

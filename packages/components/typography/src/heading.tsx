@@ -29,3 +29,6 @@ export const Heading = forwardRef<HeadingProps, "h1">((props, ref) => {
     />
   )
 })
+
+Heading.displayName = "Heading"
+Heading.__ui__ = "Heading"

@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next"
 import { isInRange } from "@yamada-ui/calendar"
 import dayjs from "dayjs"
 import type { Insights, UserInsights, InsightSummarize } from "insights"
+import type { NextApiRequest, NextApiResponse } from "next"
 import { CONSTANT } from "constant"
 
 const getData = async (): Promise<Insights> => {

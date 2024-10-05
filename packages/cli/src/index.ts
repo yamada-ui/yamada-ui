@@ -16,6 +16,7 @@ export const run = async () => {
 
   program
     .command("tokens <path>")
+    .option("--cwd <path>", "Current working directory")
     .option("-o, --out <path>", `Output file to ${path.join(...themePath)}`)
     .option("-w, --watch [path]", "Watch directory for changes and rebuild")
     .action(actionTokens)

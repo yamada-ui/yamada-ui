@@ -39,6 +39,27 @@
     }
   },
   {
+    "title": "Visual Studio Code",
+    "type": "fragment",
+    "slug": "/community/contributing#visual-studio-code",
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "Visual Studio Code"
+    }
+  },
+  {
+    "title": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)",
+    "type": "fragment",
+    "slug": "/community/contributing#eslint",
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "Visual Studio Code",
+      "lv4": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)"
+    }
+  },
+  {
     "title": "ドキュメントを更新する",
     "type": "fragment",
     "slug": "/community/contributing#ドキュメントを更新する",
@@ -1100,7 +1121,7 @@
   {
     "title": "ColorSwatch",
     "type": "page",
-    "description": "`ColorPicker`は、色の見本を表示するコンポーネントです。",
+    "description": "`ColorSwatch`は、色の見本を表示するコンポーネントです。",
     "slug": "/components/data-display/color-swatch",
     "hierarchy": { "lv1": "ColorSwatch" }
   },
@@ -14816,6 +14837,15 @@
     "hierarchy": {
       "lv1": "テーマをカスタマイズする",
       "lv2": "トークンを変更する"
+    }
+  },
+  {
+    "title": "トークンにレスポンシブオブジェクトを設定する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#トークンにレスポンシブオブジェクトを設定する",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "トークンにレスポンシブオブジェクトを設定する"
     }
   },
   {

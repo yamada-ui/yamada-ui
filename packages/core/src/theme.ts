@@ -1,4 +1,4 @@
-import type { Dict, Union } from "@yamada-ui/utils"
+import type { Dict, FlattenObjectOptions, Union } from "@yamada-ui/utils"
 import {
   flattenObject,
   objectFromEntries,
@@ -12,25 +12,42 @@ import {
   isArray,
 } from "@yamada-ui/utils"
 import type {
+  Breakpoints,
   CreateThemeVars,
   CSSUIObject,
   ThemeProps,
   UIStyle,
   UIStyleProps,
 } from "./css"
-import { analyzeBreakpoints, createThemeVars } from "./css"
+import { analyzeBreakpoints, getCreateThemeVars } from "./css"
 import type {
   CSSMap,
   ComponentMultiSizes,
   ComponentMultiStyle,
   ComponentMultiVariants,
   ComponentStyle,
+  StyledTheme,
   ThemeConfig,
+  ThemeValue,
 } from "./theme.types"
+
+export type VariableResponsiveValue = Dict<
+  ThemeValue | [ThemeValue, ThemeValue]
+>
+
+export type VariableColorModeValue = [
+  ThemeValue | Dict<ThemeValue>,
+  ThemeValue | Dict<ThemeValue>,
+]
+
+export type VariableValue =
+  | ThemeValue
+  | VariableColorModeValue
+  | VariableResponsiveValue
 
 interface VariableToken {
   isSemantic: boolean
-  value: string | number | [string | number, string | number]
+  value: VariableValue
 }
 
 export interface VariableTokens {
@@ -64,33 +81,47 @@ export type ThemeToken =
   | "transitions.property"
   | "transitions.easing"
 
-export function transformTheme(theme: Dict, config?: ThemeConfig): Dict {
-  theme = omitTheme(theme)
-  const { breakpoints, themeSchemes } = theme ?? {}
-  const prefix = config?.var?.prefix
+export type TransformTheme = Omit<
+  StyledTheme,
+  "themeScheme" | "changeThemeScheme"
+>
 
-  const primaryTokens = createTokens(theme)
-  const secondaryTokens = createTokens(theme, "secondary")
-  const animationTokens = createTokens(theme, "animation")
+export function transformTheme(
+  theme: Dict,
+  config?: ThemeConfig,
+): TransformTheme {
+  theme = omitTheme(theme)
+  const prefix = config?.var?.prefix
+  const breakpoints = analyzeBreakpoints(theme.breakpoints, config?.breakpoint)
+  const createThemeTokens = getCreateThemeTokens(
+    breakpoints,
+    config?.theme?.responsive,
+  )
+  const { queries = [] } = breakpoints ?? {}
+  const createThemeVars = getCreateThemeVars(prefix, queries)
+
+  const primaryTokens = createThemeTokens(theme)
+  const secondaryTokens = createThemeTokens(theme, "secondary")
+  const animationTokens = createThemeTokens(theme, "animation")
 
   let { cssMap, cssVars } = mergeVars(
-    createThemeVars(primaryTokens, prefix),
-    createThemeVars(secondaryTokens, prefix),
-    createThemeVars(animationTokens, prefix),
+    createThemeVars(primaryTokens),
+    createThemeVars(secondaryTokens),
+    createThemeVars(animationTokens),
   )()
 
-  if (themeSchemes) {
+  if (theme.themeSchemes) {
     for (const [themeScheme, nestedTheme] of Object.entries<Dict>(
-      themeSchemes,
+      theme.themeSchemes,
     )) {
-      const nestedPrimaryTokens = createTokens(nestedTheme)
-      const nestedSecondaryTokens = createTokens(nestedTheme, "secondary")
-      const nestedAnimationTokens = createTokens(nestedTheme, "animation")
+      const nestedPrimaryTokens = createThemeTokens(nestedTheme)
+      const nestedSecondaryTokens = createThemeTokens(nestedTheme, "secondary")
+      const nestedAnimationTokens = createThemeTokens(nestedTheme, "animation")
 
       let { cssVars: nestedCSSVars } = mergeVars(
-        createThemeVars(nestedPrimaryTokens, prefix),
-        createThemeVars(nestedSecondaryTokens, prefix),
-        createThemeVars(nestedAnimationTokens, prefix),
+        createThemeVars(nestedPrimaryTokens),
+        createThemeVars(nestedSecondaryTokens),
+        createThemeVars(nestedAnimationTokens),
       )({ ...primaryTokens, ...secondaryTokens, ...animationTokens })
 
       cssVars = {
@@ -101,98 +132,102 @@ export function transformTheme(theme: Dict, config?: ThemeConfig): Dict {
     }
   }
 
-  const defaultCSSVars: Dict = {}
-
   Object.assign(theme, {
     __config: config,
-    __cssVars: { ...defaultCSSVars, ...cssVars },
+    __cssVars: cssVars,
     __cssMap: cssMap,
-    __breakpoints: analyzeBreakpoints(breakpoints, config?.breakpoint),
+    __breakpoints: breakpoints,
   })
 
-  return theme
+  return theme as TransformTheme
 }
 
-function createTokens(
-  theme: Dict,
-  target: "primary" | "secondary" | "animation" = "primary",
-): VariableTokens {
-  let defaultTokens: string[] = []
-  let semanticTokens: string[] = []
-  let omitKeys: string[] = []
+function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
+  return function (
+    theme: Dict,
+    target: "primary" | "secondary" | "animation" = "primary",
+  ) {
+    let shouldProcess: FlattenObjectOptions["shouldProcess"] = undefined
+    let defaultTokens: string[] = []
+    let semanticTokens: string[] = []
+    let omitKeys: string[] = []
 
-  switch (target) {
-    case "primary":
-      defaultTokens = [...primaryTokens, "transitions"]
-      semanticTokens = [...primaryTokens, "transitions", "colorSchemes"]
+    if (responsive)
+      shouldProcess = (obj) => !breakpoints?.isResponsive(obj, true)
 
-      break
+    switch (target) {
+      case "primary":
+        defaultTokens = [...primaryTokens, "transitions"]
+        semanticTokens = [...primaryTokens, "transitions", "colorSchemes"]
 
-    case "secondary":
-      defaultTokens = [...secondaryTokens]
-      semanticTokens = [...secondaryTokens]
+        break
 
-      break
+      case "secondary":
+        defaultTokens = [...secondaryTokens]
+        semanticTokens = [...secondaryTokens]
 
-    case "animation":
-      defaultTokens = ["animations"]
-      semanticTokens = ["animations"]
-      omitKeys = ["keyframes"]
+        break
 
-      break
+      case "animation":
+        defaultTokens = ["animations"]
+        semanticTokens = ["animations"]
+        omitKeys = ["keyframes"]
 
-    default:
-      break
-  }
+        break
 
-  const defaultTokenMap = pickObject(theme, defaultTokens)
-  const semanticTokenMap = pickObject(theme.semantics ?? {}, semanticTokens)
+      default:
+        break
+    }
 
-  const defaultTokenEntries: [string, VariableToken][] = Object.entries(
-    flattenObject(defaultTokenMap, { omitKeys }),
-  ).map(([token, value]) => {
-    const enhancedToken: VariableToken = { isSemantic: false, value }
+    const defaultTokenMap = pickObject(theme, defaultTokens)
+    const semanticTokenMap = pickObject(theme.semantics ?? {}, semanticTokens)
 
-    return [token, enhancedToken]
-  })
-  const semanticTokenEntries: [string, VariableToken][] = Object.entries(
-    flattenObject(semanticTokenMap, { omitKeys }),
-  ).reduce(
-    (prev, [token, value]) => {
-      if (token.startsWith("colorSchemes.")) {
-        const [, semanticToken, tone] = token.split(".")
+    const defaultTokenEntries: [string, VariableToken][] = Object.entries(
+      flattenObject(defaultTokenMap, { omitKeys, shouldProcess }),
+    ).map(([token, value]) => {
+      const enhancedToken: VariableToken = { isSemantic: false, value }
 
-        if (tone) {
-          const enhancedToken = { isSemantic: false, value }
+      return [token, enhancedToken]
+    })
+    const semanticTokenEntries: [string, VariableToken][] = Object.entries(
+      flattenObject(semanticTokenMap, { omitKeys, shouldProcess }),
+    ).reduce(
+      (prev, [token, value]) => {
+        if (token.startsWith("colorSchemes.")) {
+          const [, semanticToken, tone] = token.split(".")
 
-          prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-        } else {
-          TONES.forEach((tone) => {
-            const enhancedToken: VariableToken = {
-              isSemantic: true,
-              value: isArray(value)
-                ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
-                : `${value}.${tone}`,
-            }
+          if (tone) {
+            const enhancedToken = { isSemantic: false, value }
 
             prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-          })
+          } else {
+            TONES.forEach((tone) => {
+              const enhancedToken: VariableToken = {
+                isSemantic: true,
+                value: isArray(value)
+                  ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
+                  : `${value}.${tone}`,
+              }
+
+              prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
+            })
+          }
+        } else {
+          const enhancedToken: VariableToken = { isSemantic: true, value }
+
+          prev.push([token, enhancedToken])
         }
-      } else {
-        const enhancedToken: VariableToken = { isSemantic: true, value }
 
-        prev.push([token, enhancedToken])
-      }
+        return prev
+      },
+      [] as [string, VariableToken][],
+    )
 
-      return prev
-    },
-    [] as [string, VariableToken][],
-  )
-
-  return objectFromEntries<VariableTokens>([
-    ...defaultTokenEntries,
-    ...semanticTokenEntries,
-  ])
+    return objectFromEntries<VariableTokens>([
+      ...defaultTokenEntries,
+      ...semanticTokenEntries,
+    ])
+  }
 }
 
 function mergeVars(...funcs: CreateThemeVars[]) {

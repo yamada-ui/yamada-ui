@@ -41,7 +41,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -59,7 +59,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-calendarcolorscheme"
   name="calendarColorScheme"
-  type='(string & {}) | "link" | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+  type='"link" | (string & {}) | "whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | ... 12 more ... | "danger"'
   description={"ColorScheme for the calendar component."}
 />
 
@@ -137,14 +137,14 @@ tab: Props
 <PropsCard
   id="rangedatepicker-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for date picker container element."}
 />
 
 <PropsCard
   id="rangedatepicker-contentprops"
   name="contentProps"
-  type='Omit<MotionProps<"div">, "children">'
+  type='Omit<MotionProps, "children">'
   description={"Props for date picker container element."}
 />
 
@@ -177,7 +177,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-defaulttype"
   name="defaultType"
-  type='"date" | "month" | "year"'
+  type='"month" | "year" | "date"'
   description={"The initial type of the calendar."}
 />
 
@@ -199,7 +199,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -213,7 +213,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-endplaceholder"
   name="endPlaceholder"
-  type="boolean"
+  type="string"
   description={"The end date placeholder"}
 />
 
@@ -248,7 +248,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-fieldprops"
   name="fieldProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for date picker field element."}
 />
 
@@ -429,6 +429,13 @@ tab: Props
 />
 
 <PropsCard
+  id="rangedatepicker-minselectvalues"
+  name="minSelectValues"
+  type="number"
+  description={"The minimum selectable value."}
+/>
+
+<PropsCard
   id="rangedatepicker-modifiers"
   name="modifiers"
   type="Partial<Modifier<string, any>>[]"
@@ -485,7 +492,7 @@ tab: Props
   id="rangedatepicker-onchangetype"
   name="onChangeType"
   type='(
-  type: "date" | "month" | "year",
+  type: "month" | "year" | "date",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -589,14 +596,14 @@ tab: Props
 <PropsCard
   id="rangedatepicker-startplaceholder"
   name="startPlaceholder"
-  type="boolean"
+  type="string"
   description={"The start date placeholder"}
 />
 
 <PropsCard
   id="rangedatepicker-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />
@@ -612,7 +619,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-type"
   name="type"
-  type='"date" | "month" | "year"'
+  type='"month" | "year" | "date"'
   description={"The type of the calendar."}
 />
 

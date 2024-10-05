@@ -7,11 +7,11 @@ import {
   forwardRef,
 } from "@yamada-ui/react"
 import type { GridItemProps, GridProps } from "@yamada-ui/react"
-import { useI18n, usePage } from "contexts"
-import type { DocumentNavigation } from "mdx"
 import Link from "next/link"
 import { memo } from "react"
 import type { FC } from "react"
+import { useI18n, usePage } from "contexts"
+import type { DocumentNavigation } from "mdx"
 
 export interface PaginationProps extends GridProps {}
 

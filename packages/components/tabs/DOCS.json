@@ -1,7 +1,7 @@
 {
   "Tabs": {
     "align": {
-      "type": "\"center\" | \"start\" | \"end\"",
+      "type": "\"start\" | \"end\" | \"center\"",
       "required": false,
       "description": "The alignment of the tabs."
     },
@@ -57,7 +57,7 @@
       "description": "The callback invoked when the index changes."
     },
     "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
+      "type": "\"vertical\" | \"horizontal\"",
       "defaultValue": "'horizontal'",
       "required": false,
       "description": "The orientation of the tab list."
@@ -122,6 +122,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+    },
+    "ref": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLElement | null) => void)\n  | RefObject<HTMLElement>",
+      "required": false,
+      "description": "The ref for the element."
     }
   },
   "TabPanels": {},

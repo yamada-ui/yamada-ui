@@ -82,18 +82,4 @@ export const MAINTAINERS = [
     },
     discord: { id: "831092312238719026" },
   },
-  {
-    name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },
-    description: {
-      en: "Engineer based in Fukuoka.",
-      ja: "福岡在住のエンジニア。",
-    },
-    github: {
-      id: "setodeve",
-      icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
-      url: "https://github.com/setodeve",
-    },
-    x: { url: "https://x.com/hjuko00" },
-    discord: { id: "441961406980554772" },
-  },
 ]

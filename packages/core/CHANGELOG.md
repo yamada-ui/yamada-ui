@@ -1,5 +1,39 @@
 # @yamada-ui/core
 
+## 1.15.1
+
+### Patch Changes
+
+- [#2930](https://github.com/yamada-ui/yamada-ui/pull/2930) [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `mergeVars` function.
+
+- [#2846](https://github.com/yamada-ui/yamada-ui/pull/2846) [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance element type checks and sorting.
+
+- [#2942](https://github.com/yamada-ui/yamada-ui/pull/2942) [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `FunctionComponent` and `FC` type.
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2)]:
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/portal@1.0.22
+
+## 1.15.0
+
+### Minor Changes
+
+- [#2791](https://github.com/yamada-ui/yamada-ui/pull/2791) [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `group` and `peer` style handlers.
+
+- [#2825](https://github.com/yamada-ui/yamada-ui/pull/2825) [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded the functionality so that you can set responsive objects in the theme.
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2788](https://github.com/yamada-ui/yamada-ui/pull/2788) [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated theme and type references, enhanced null checks.
+
+- [#2834](https://github.com/yamada-ui/yamada-ui/pull/2834) [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `createVars` was not generating CSS variables correctly.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3)]:
+  - @yamada-ui/portal@1.0.21
+  - @yamada-ui/utils@1.5.1
+
 ## 1.14.0
 
 ### Minor Changes

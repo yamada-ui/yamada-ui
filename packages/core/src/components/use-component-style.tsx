@@ -21,7 +21,7 @@ import type {
   UIStyleProps,
   UIValue,
 } from "../css"
-import { useTheme, useColorMode } from "../providers"
+import { useTheme, useColorMode, getColorModeValue } from "../providers"
 import { pseudos } from "../pseudos"
 import type {
   ComponentDefaultProps,
@@ -309,8 +309,12 @@ function setStyles<Y extends Dict = Dict, M extends boolean = false>(
 
       props = mergeProps<Y>(props, defaultProps, overrideProps)
 
-      const { variant, size } = props
-      const resolvedProps = omitObject(props, ["children"]) as Y
+      const { variant, size, colorScheme: _colorScheme } = props
+      const colorScheme = isArray(_colorScheme)
+        ? getColorModeValue(_colorScheme[0], _colorScheme[1])(colorMode)
+        : _colorScheme
+      const computedProps = { ...props, colorScheme }
+      const resolvedProps = omitObject(computedProps, ["children"]) as Y
 
       let styles: Styles<M> = {}
 

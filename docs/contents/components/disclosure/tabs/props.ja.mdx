@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="tabs-align"
   name="align"
-  type='"center" | "start" | "end"'
+  type='"start" | "end" | "center"'
   description={"The alignment of the tabs."}
 />
 
@@ -96,7 +96,7 @@ order: 1
 <PropsCard
   id="tabs-orientation"
   name="orientation"
-  type='"horizontal" | "vertical"'
+  type='"vertical" | "horizontal"'
   description={"The orientation of the tab list."}
   defaultValue={"'horizontal'"}
 />
@@ -187,6 +187,15 @@ order: 1
     "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
   }
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tab-ref"
+  name="ref"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: HTMLElement | null) => void)
+  | RefObject<HTMLElement>"
+  description={"The ref for the element."}
 />
 
 ### TabPanelsProps

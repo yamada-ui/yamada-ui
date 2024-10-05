@@ -7,8 +7,9 @@
       "description": "If `true`, the opacity of the content will be animated."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
@@ -16,12 +17,12 @@
       "description": "The visual color appearance of the component."
     },
     "delay": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -53,12 +54,12 @@
       "description": "The height you want the content in its collapsed state."
     },
     "transition": {
-      "type": "Partial<Record<\"exit\" | \"enter\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"exit\" | \"enter\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },
@@ -75,16 +76,17 @@
   },
   "Fade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "delay": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -99,12 +101,12 @@
       "description": "Show the component. triggers when enter or exit states."
     },
     "transition": {
-      "type": "Partial<Record<\"exit\" | \"enter\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"exit\" | \"enter\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },
@@ -116,8 +118,9 @@
   },
   "ScaleFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
@@ -125,12 +128,12 @@
       "description": "The visual color appearance of the component."
     },
     "delay": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -162,12 +165,12 @@
       "description": "The size of the ScaleFade."
     },
     "transition": {
-      "type": "Partial<Record<\"exit\" | \"enter\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"exit\" | \"enter\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },
@@ -184,8 +187,9 @@
   },
   "Slide": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
@@ -193,12 +197,12 @@
       "description": "The visual color appearance of the component."
     },
     "delay": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -224,12 +228,12 @@
       "description": "The size of the Slide."
     },
     "transition": {
-      "type": "Partial<Record<\"exit\" | \"enter\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"exit\" | \"enter\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },
@@ -246,8 +250,9 @@
   },
   "SlideFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
@@ -255,12 +260,12 @@
       "description": "The visual color appearance of the component."
     },
     "delay": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -298,12 +303,12 @@
       "description": "The size of the SlideFade."
     },
     "transition": {
-      "type": "Partial<Record<\"exit\" | \"enter\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"exit\" | \"enter\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },

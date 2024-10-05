@@ -23,7 +23,7 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
       top: 0,
       left: 0,
       w: "100vw",
-      h: "100vh",
+      h: "100dvh",
       ...(__css ? __css : styles.overlay),
     }
 
@@ -45,3 +45,6 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
     )
   },
 )
+
+ModalOverlay.displayName = "ModalOverlay"
+ModalOverlay.__ui__ = "ModalOverlay"

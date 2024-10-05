@@ -21,3 +21,6 @@ export const StatLabel = forwardRef<StatLabelProps, "dt">(
     )
   },
 )
+
+StatLabel.displayName = "StatLabel"
+StatLabel.__ui__ = "StatLabel"

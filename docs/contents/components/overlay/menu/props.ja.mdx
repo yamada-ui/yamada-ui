@@ -14,7 +14,7 @@ tab: Props
 <PropsCard
   id="menu-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -85,7 +85,7 @@ tab: Props
 <PropsCard
   id="menu-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -239,7 +239,7 @@ tab: Props
 <PropsCard
   id="menu-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />
@@ -380,6 +380,13 @@ tab: Props
   description={"The type of the menu option item."}
 />
 
+<PropsCard
+  id="menuoptionitem-value"
+  name="value"
+  type="string"
+  description={"The value of the menu option item."}
+/>
+
 ### MenuIconProps
 
 ### MenuCommandProps
@@ -454,7 +461,7 @@ tab: Props
 <PropsCard
   id="contextmenu-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -525,7 +532,7 @@ tab: Props
 <PropsCard
   id="contextmenu-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -679,7 +686,7 @@ tab: Props
 <PropsCard
   id="contextmenu-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />

@@ -28,7 +28,7 @@ tab: Props
 <PropsCard
   id="reorder-aria-autocomplete"
   name="aria-autocomplete"
-  type='"list" | "none" | "inline" | "both"'
+  type='"none" | "list" | "inline" | "both"'
 />
 
 <PropsCard
@@ -245,7 +245,18 @@ tab: Props
 
 <PropsCard id="reorder-aria-valuetext" name="aria-valuetext" type="string" />
 
-<PropsCard id="reorder-autocapitalize" name="autoCapitalize" type="string" />
+<PropsCard
+  id="reorder-autocapitalize"
+  name="autoCapitalize"
+  type='type ONLY_FOR_FORMAT =
+  | "off"
+  | "none"
+  | "on"
+  | "sentences"
+  | "words"
+  | "characters"
+  | (string & {})'
+/>
 
 <PropsCard id="reorder-autocorrect" name="autoCorrect" type="string" />
 
@@ -293,6 +304,19 @@ tab: Props
 <PropsCard id="reorder-dir" name="dir" type="string" />
 
 <PropsCard id="reorder-draggable" name="draggable" type="Booleanish" />
+
+<PropsCard
+  id="reorder-enterkeyhint"
+  name="enterKeyHint"
+  type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "enter"
+  | "done"
+  | "go"
+  | "next"
+  | "previous"
+  | "send"'
+/>
 
 <PropsCard id="reorder-hidden" name="hidden" type="boolean" />
 
@@ -1341,7 +1365,7 @@ tab: Props
 
 <PropsCard id="reorder-typeof" name="typeof" type="string" />
 
-<PropsCard id="reorder-unselectable" name="unselectable" type='"on" | "off"' />
+<PropsCard id="reorder-unselectable" name="unselectable" type='"off" | "on"' />
 
 <PropsCard
   id="reorder-variant"
@@ -1370,7 +1394,7 @@ tab: Props
 <PropsCard
   id="reorderitem-aria-autocomplete"
   name="aria-autocomplete"
-  type='"list" | "none" | "inline" | "both"'
+  type='"none" | "list" | "inline" | "both"'
 />
 
 <PropsCard
@@ -1622,7 +1646,14 @@ tab: Props
 <PropsCard
   id="reorderitem-autocapitalize"
   name="autoCapitalize"
-  type="string"
+  type='type ONLY_FOR_FORMAT =
+  | "off"
+  | "none"
+  | "on"
+  | "sentences"
+  | "words"
+  | "characters"
+  | (string & {})'
 />
 
 <PropsCard id="reorderitem-autocorrect" name="autoCorrect" type="string" />
@@ -1668,6 +1699,19 @@ tab: Props
 <PropsCard id="reorderitem-dir" name="dir" type="string" />
 
 <PropsCard id="reorderitem-draggable" name="draggable" type="Booleanish" />
+
+<PropsCard
+  id="reorderitem-enterkeyhint"
+  name="enterKeyHint"
+  type='type ONLY_FOR_FORMAT =
+  | "search"
+  | "enter"
+  | "done"
+  | "go"
+  | "next"
+  | "previous"
+  | "send"'
+/>
 
 <PropsCard id="reorderitem-hidden" name="hidden" type="boolean" />
 
@@ -2699,7 +2743,7 @@ tab: Props
 <PropsCard
   id="reorderitem-unselectable"
   name="unselectable"
-  type='"on" | "off"'
+  type='"off" | "on"'
 />
 
 <PropsCard

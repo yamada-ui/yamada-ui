@@ -7,6 +7,7 @@ import {
 } from "./autocomplete-context"
 
 export const useAutocompleteList = () => {
+  const uuid = useId()
   const { focusedIndex, isOpen, listRef, rebirthOptions } =
     useAutocompleteContext()
 
@@ -65,10 +66,10 @@ export const useAutocompleteList = () => {
       role: "listbox",
       tabIndex: -1,
       position: "relative",
-      id: props.id || useId(),
+      id: props.id ?? uuid,
       ...props,
     }),
-    [listRef],
+    [listRef, uuid],
   )
 
   return {

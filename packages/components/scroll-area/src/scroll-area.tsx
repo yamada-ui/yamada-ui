@@ -209,6 +209,8 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     )
   }
 })
+ScrollArea.displayName = "ScrollArea"
+ScrollArea.__ui__ = "ScrollArea"
 
 type InternalScrollAreaProps = HTMLUIProps & Pick<ScrollAreaProps, "innerProps">
 
@@ -232,3 +234,6 @@ const InternalScrollArea = forwardRef<InternalScrollAreaProps, "div">(
     )
   },
 )
+
+InternalScrollArea.displayName = "InternalScrollArea"
+InternalScrollArea.__ui__ = "InternalScrollArea"

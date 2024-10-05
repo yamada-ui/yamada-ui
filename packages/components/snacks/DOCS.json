@@ -9,8 +9,9 @@
       "required": true
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | ... 148 more ... | \"view\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"title\" | \"style\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"div\" | \"animate\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "containerVariants": {
       "type": "Variants",

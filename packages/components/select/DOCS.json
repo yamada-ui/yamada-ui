@@ -1,5 +1,11 @@
 {
   "Select": {
+    "animation": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the popover."
+    },
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
@@ -36,12 +42,12 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for select container element."
     },
     "contentProps": {
-      "type": "Omit<MotionProps<\"div\">, \"children\">",
+      "type": "Omit<MotionProps, \"children\">",
       "required": false,
       "description": "Props for select content element."
     },
@@ -56,7 +62,7 @@
       "description": "The initial value of the select."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -262,6 +268,12 @@
     }
   },
   "MultiSelect": {
+    "animation": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the popover."
+    },
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
@@ -308,7 +320,7 @@
       "description": "The custom display value to use."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for multi select container element."
     },
@@ -323,7 +335,7 @@
       "description": "The initial value of the select."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -549,6 +561,11 @@
       "type": "string",
       "required": true,
       "description": "The label of the option group."
+    },
+    "labelProps": {
+      "type": "HTMLUIProps<\"span\">",
+      "required": false,
+      "description": "Props for option group element."
     }
   },
   "Option": {

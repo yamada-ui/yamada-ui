@@ -1,5 +1,21 @@
 # @yamada-ui/use-clipboard
 
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2)]:
+  - @yamada-ui/utils@1.5.2
+
+## 1.0.21
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3)]:
+  - @yamada-ui/utils@1.5.1
+
 ## 1.0.20
 
 ### Patch Changes

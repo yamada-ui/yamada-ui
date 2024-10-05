@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 import type {
   ChartTooltip,
   BarChartProps,
@@ -18,8 +20,6 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof BarChart>
 

@@ -15,6 +15,14 @@ tab: Props
 ### MultiSelectProps
 
 <PropsCard
+  id="multiselect-animation"
+  name="animation"
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue={"'scale'"}
+/>
+
+<PropsCard
   id="multiselect-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
@@ -89,7 +97,7 @@ tab: Props
 <PropsCard
   id="multiselect-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for multi select container element."}
 />
 
@@ -110,7 +118,7 @@ tab: Props
 <PropsCard
   id="multiselect-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 

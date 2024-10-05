@@ -1,5 +1,41 @@
 # @yamada-ui/menu
 
+## 1.3.14
+
+### Patch Changes
+
+- Updated dependencies [[`23198ab`](https://github.com/yamada-ui/yamada-ui/commit/23198abb2e5bda00638414938a8fcf34d50a9dcc), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`915ecee`](https://github.com/yamada-ui/yamada-ui/commit/915ecee35b52c883e8f22a485ec5638fbe9082ff), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/popover@1.3.3
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/transitions@1.1.6
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/use-clickable@1.2.9
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-descendant@1.0.22
+  - @yamada-ui/use-disclosure@1.0.21
+
+## 1.3.13
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2840](https://github.com/yamada-ui/yamada-ui/pull/2840) [`69a4588`](https://github.com/yamada-ui/yamada-ui/commit/69a458820c1b6878de8abffba38e07f362244ca1) Thanks [@KekmaTime](https://github.com/KekmaTime)! - fixed the position of context menu
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf), [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750), [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1), [`5b31777`](https://github.com/yamada-ui/yamada-ui/commit/5b3177788f218e2f0fd9886643e2db5d1b8c8f9d), [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e)]:
+  - @yamada-ui/use-controllable-state@1.0.20
+  - @yamada-ui/transitions@1.1.5
+  - @yamada-ui/use-descendant@1.0.21
+  - @yamada-ui/use-disclosure@1.0.20
+  - @yamada-ui/popover@1.3.2
+  - @yamada-ui/motion@2.2.2
+  - @yamada-ui/icon@1.1.6
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/core@1.15.0
+  - @yamada-ui/use-clickable@1.2.8
+
 ## 1.3.12
 
 ### Patch Changes

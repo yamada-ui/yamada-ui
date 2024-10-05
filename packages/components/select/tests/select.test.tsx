@@ -536,4 +536,9 @@ describe("<Select />", () => {
       expect(footerElement).toBeNull()
     })
   })
+
+  test("should have correct displayName and __ui__", () => {
+    expect(Select.displayName).toBe("Select")
+    expect(Select.__ui__).toBe("Select")
+  })
 })

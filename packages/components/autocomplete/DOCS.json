@@ -12,7 +12,7 @@
       "description": "If `true`, enables the free input."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -53,12 +53,12 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for autocomplete container element."
     },
     "contentProps": {
-      "type": "Omit<MotionProps<\"div\">, \"children\">",
+      "type": "Omit<MotionProps, \"children\">",
       "required": false,
       "description": "Props for autocomplete content element."
     },
@@ -78,7 +78,7 @@
       "description": "The initial value of the autocomplete."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -308,6 +308,11 @@
       "type": "string",
       "required": true,
       "description": "The label of the autocomplete option group."
+    },
+    "labelProps": {
+      "type": "HTMLUIProps<\"span\">",
+      "required": false,
+      "description": "Props for autocomplete option group element."
     }
   },
   "AutocompleteOption": {
@@ -326,18 +331,18 @@
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true`, the select option will be disabled."
+      "description": "If `true`, the autocomplete option will be disabled."
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true`, the select option will be focusable."
+      "description": "If `true`, the autocomplete option will be focusable."
     },
     "value": {
       "type": "string",
       "required": false,
-      "description": "The value of the select option."
+      "description": "The value of the autocomplete option."
     }
   },
   "AutocompleteCreate": {
@@ -367,7 +372,7 @@
       "description": "If `true`, enables the free input."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -418,12 +423,12 @@
       "description": "The custom display value to use."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for multi autocomplete container element."
     },
     "contentProps": {
-      "type": "Omit<MotionProps<\"div\">, \"children\">",
+      "type": "Omit<MotionProps, \"children\">",
       "required": false,
       "description": "Props for multi autocomplete content element."
     },
@@ -443,7 +448,7 @@
       "description": "The initial value of the autocomplete."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },

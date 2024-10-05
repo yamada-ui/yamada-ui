@@ -2,6 +2,7 @@
 title: ColorPicker
 description: "`ColorPicker`は、ユーザーが色を選択したり任意の色の値を入力するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/color-picker"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -36,6 +37,14 @@ tab: Props
 />
 
 <PropsCard
+  id="colorpicker-animation"
+  name="animation"
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue={"'scale'"}
+/>
+
+<PropsCard
   id="colorpicker-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
@@ -57,6 +66,14 @@ tab: Props
   name="channelsProps"
   type="ColorSelectorChannelsProps"
   description={"Props for the channels component."}
+/>
+
+<PropsCard
+  id="colorpicker-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -89,14 +106,14 @@ tab: Props
 <PropsCard
   id="colorpicker-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="colorpicker-colorselectorcolorscheme"
   name="colorSelectorColorScheme"
-  type='"link" | (string & {}) | "whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | ... 12 more ... | "fuchsia"'
+  type='"blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | (string & {}) | "primary" | "secondary" | ... 12 more ... | "sky"'
   description={"ColorScheme for the color selector component."}
 />
 
@@ -124,7 +141,7 @@ tab: Props
 <PropsCard
   id="colorpicker-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for color picker container element."}
 />
 
@@ -152,7 +169,7 @@ tab: Props
 <PropsCard
   id="colorpicker-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -385,6 +402,14 @@ tab: Props
 />
 
 <PropsCard
+  id="colorpicker-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="colorpicker-placement"
   name="placement"
   type="UIValue<Placement>"
@@ -408,15 +433,6 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="colorpicker-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
 />
 
 <PropsCard

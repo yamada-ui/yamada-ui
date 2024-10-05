@@ -1,7 +1,7 @@
 {
   "Popover": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -48,7 +48,7 @@
       "description": "If `true`, the popover will be initially opened."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -149,7 +149,7 @@
       "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "strategy": {
-      "type": "\"fixed\" | \"absolute\"",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
@@ -163,7 +163,7 @@
   },
   "ComboBox": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -198,7 +198,7 @@
       "description": "If `true`, the popover will be initially opened."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -283,7 +283,7 @@
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
     "strategy": {
-      "type": "\"fixed\" | \"absolute\"",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
@@ -311,11 +311,12 @@
   },
   "PopoverContent": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | ... 148 more ... | \"view\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"button\" | \"form\" | \"style\" | \"title\" | \"animate\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "The props of the container element."
     }

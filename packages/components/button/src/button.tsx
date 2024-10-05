@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps, CSSUIObject, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -9,7 +9,7 @@ import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, merge, dataAttr, mergeRefs } from "@yamada-ui/utils"
-import type { ElementType, FC, ReactElement } from "react"
+import type { ElementType, ReactElement } from "react"
 import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
@@ -171,21 +171,27 @@ export const Button = forwardRef<ButtonProps, "button">(
         onPointerDown={onPointerDown}
       >
         {isLoading && loadingPlacement === "start" ? (
-          <Loading className="ui-button__loading--start" {...loadingProps} />
+          <ButtonLoading
+            className="ui-button__loading--start"
+            {...loadingProps}
+          />
         ) : null}
 
         {isLoading ? (
           loadingText || (
             <ui.span opacity={0}>
-              <Content {...contentProps} />
+              <ButtonContent {...contentProps} />
             </ui.span>
           )
         ) : (
-          <Content {...contentProps} />
+          <ButtonContent {...contentProps} />
         )}
 
         {isLoading && loadingPlacement === "end" ? (
-          <Loading className="ui-button__loading--end" {...loadingProps} />
+          <ButtonLoading
+            className="ui-button__loading--end"
+            {...loadingProps}
+          />
         ) : null}
 
         <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
@@ -194,9 +200,17 @@ export const Button = forwardRef<ButtonProps, "button">(
   },
 )
 
-const Loading: FC<
-  Pick<ButtonProps, "className" | "loadingIcon" | "loadingText">
-> = ({ className, loadingIcon, loadingText }) => {
+Button.displayName = "Button"
+Button.__ui__ = "Button"
+
+interface ButtonLoadingProps
+  extends Pick<ButtonProps, "className" | "loadingIcon" | "loadingText"> {}
+
+const ButtonLoading: FC<ButtonLoadingProps> = ({
+  className,
+  loadingIcon,
+  loadingText,
+}) => {
   const css = useMemo(
     (): CSSUIObject => ({
       display: "flex",
@@ -223,21 +237,32 @@ const Loading: FC<
   )
 }
 
-const Content: FC<Pick<ButtonProps, "leftIcon" | "rightIcon" | "children">> = ({
+ButtonLoading.displayName = "ButtonLoading"
+ButtonLoading.__ui__ = "ButtonLoading"
+
+interface ButtonContentProps
+  extends Pick<ButtonProps, "leftIcon" | "rightIcon" | "children"> {}
+
+const ButtonContent: FC<ButtonContentProps> = ({
   leftIcon,
   rightIcon,
   children,
 }) => {
   return (
     <>
-      {leftIcon ? <Icon>{leftIcon}</Icon> : null}
+      {leftIcon ? <ButtonIcon>{leftIcon}</ButtonIcon> : null}
       {children}
-      {rightIcon ? <Icon>{rightIcon}</Icon> : null}
+      {rightIcon ? <ButtonIcon>{rightIcon}</ButtonIcon> : null}
     </>
   )
 }
 
-const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
+ButtonContent.displayName = "ButtonContent"
+ButtonContent.__ui__ = "ButtonContent"
+
+interface ButtonIconProps extends HTMLUIProps<"span"> {}
+
+const ButtonIcon: FC<ButtonIconProps> = ({ children, className, ...rest }) => {
   return (
     <ui.span
       className={cx("ui-button__icon", className)}
@@ -251,6 +276,9 @@ const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
     </ui.span>
   )
 }
+
+ButtonIcon.displayName = "ButtonIcon"
+ButtonIcon.__ui__ = "ButtonIcon"
 
 export const useButtonType = (value?: ElementType) => {
   const isButton = useRef(!value)

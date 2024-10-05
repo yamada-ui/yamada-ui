@@ -6,7 +6,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for container element."
     },
@@ -21,7 +21,7 @@
       "description": "The border color when the input is focused."
     },
     "iconProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for icon element."
     },

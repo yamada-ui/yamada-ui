@@ -1,5 +1,19 @@
 # @yamada-ui/utils
 
+## 1.5.2
+
+### Patch Changes
+
+- [#2846](https://github.com/yamada-ui/yamada-ui/pull/2846) [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance element type checks and sorting.
+
+- [#2922](https://github.com/yamada-ui/yamada-ui/pull/2922) [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `findChild` function.
+
+## 1.5.1
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
 ## 1.5.0
 
 ### Minor Changes

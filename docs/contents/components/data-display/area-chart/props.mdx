@@ -18,7 +18,7 @@ tab: Props
   id="areachart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -84,6 +84,14 @@ tab: Props
   type="ChartCurveType"
   description={"Type of the curve."}
   defaultValue={"`monotone`"}
+/>
+
+<PropsCard
+  id="areachart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all areas."}
+  defaultValue={"0.4"}
 />
 
 <PropsCard
@@ -158,6 +166,24 @@ tab: Props
 />
 
 <PropsCard
+  id="areachart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
+  defaultValue={"'5 5'"}
+/>
+
+<PropsCard
+  id="areachart-strokewidth"
+  name="strokeWidth"
+  type="number"
+  description={"Stroke width for the chart areas."}
+  defaultValue={"2"}
+/>
+
+<PropsCard
   id="areachart-syncid"
   name="syncId"
   type="string | number"
@@ -196,7 +222,7 @@ tab: Props
   name="type"
   type="AreaChartType"
   description={
-    "Controls how chart areas are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other"
+    "Controls how chart areas are positioned relative to each other."
   }
   defaultValue={"`default`"}
 />

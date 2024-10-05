@@ -1,5 +1,27 @@
 # @yamada-ui/test
 
+## 1.5.2
+
+### Patch Changes
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/theme@1.18.2
+  - @yamada-ui/providers@1.2.8
+
+## 1.5.1
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2769](https://github.com/yamada-ui/yamada-ui/pull/2769) [`130f892`](https://github.com/yamada-ui/yamada-ui/commit/130f89250146b8ed0676d3057b9691f8c5922c39) Thanks [@koralle](https://github.com/koralle)! - Use `@koralle/vitest-axe` instead of `vitest-axe`
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`5b31777`](https://github.com/yamada-ui/yamada-ui/commit/5b3177788f218e2f0fd9886643e2db5d1b8c8f9d)]:
+  - @yamada-ui/providers@1.2.7
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/theme@1.18.1
+
 ## 1.5.0
 
 ### Minor Changes

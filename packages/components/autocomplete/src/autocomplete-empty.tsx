@@ -1,7 +1,7 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import { useAutocompleteEmpty } from "./use-autocomplete-option"
@@ -50,7 +50,9 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
         {...getEmptyProps(rest, ref)}
       >
         {icon !== null ? (
-          <AutocompleteItemIcon>{icon || <MinusIcon />}</AutocompleteItemIcon>
+          <AutocompleteItemIcon>
+            {icon || <AutocompleteMinusIcon />}
+          </AutocompleteItemIcon>
         ) : null}
         {icon ? (
           <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
@@ -64,7 +66,10 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
   },
 )
 
-const MinusIcon: FC = () => (
+AutocompleteEmpty.displayName = "AutocompleteEmpty"
+AutocompleteEmpty.__ui__ = "AutocompleteEmpty"
+
+const AutocompleteMinusIcon: FC = () => (
   <svg viewBox="0 0 448 512" width="1em" height="1em">
     <path
       fill="currentColor"
@@ -72,3 +77,6 @@ const MinusIcon: FC = () => (
     />
   </svg>
 )
+
+AutocompleteMinusIcon.displayName = "AutocompleteMinusIcon"
+AutocompleteMinusIcon.__ui__ = "AutocompleteMinusIcon"

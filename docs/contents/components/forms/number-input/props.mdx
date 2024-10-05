@@ -14,7 +14,7 @@ tab: Props
 <PropsCard
   id="numberinput-addonprops"
   name="addonProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for addon component."}
 />
 
@@ -46,7 +46,7 @@ tab: Props
 <PropsCard
   id="numberinput-containerprops"
   name="containerProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for container element."}
 />
 
@@ -55,6 +55,15 @@ tab: Props
   name="decrementProps"
   type="NumberDecrementStepperProps"
   description={"Props for decrement component."}
+/>
+
+<PropsCard
+  id="numberinput-defaultvalue"
+  name="defaultValue"
+  type="string | number"
+  description={
+    "The initial value of the counter.\nShould be less than `max` and greater than `min`."
+  }
 />
 
 <PropsCard
@@ -165,10 +174,37 @@ tab: Props
 />
 
 <PropsCard
+  id="numberinput-max"
+  name="max"
+  type="number"
+  description={"The maximum value of the counter"}
+  defaultValue={"Number.MAX_SAFE_INTEGER"}
+/>
+
+<PropsCard
+  id="numberinput-min"
+  name="min"
+  type="number"
+  description={"The minimum value of the counter"}
+  defaultValue={"Number.MIN_SAFE_INTEGER"}
+/>
+
+<PropsCard
   id="numberinput-onchange"
   name="onChange"
   type="(valueAsString: string, valueAsNumber: number) => void"
   description={"The callback fired when the value changes."}
+/>
+
+<PropsCard
+  id="numberinput-oninvalid"
+  name="onInvalid"
+  type="(
+  message: ValidityState,
+  value: string,
+  valueAsNumber: number,
+) => void"
+  description={"The callback invoked when invalid number is entered."}
 />
 
 <PropsCard
@@ -193,6 +229,23 @@ tab: Props
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the NumberInput."}
   defaultValue={"md"}
+/>
+
+<PropsCard
+  id="numberinput-step"
+  name="step"
+  type="number"
+  description={"The step used to increment or decrement the value."}
+  defaultValue={"1"}
+/>
+
+<PropsCard
+  id="numberinput-value"
+  name="value"
+  type="string | number"
+  description={
+    "The value of the counter.\nShould be less than `max` and greater than `min`."
+  }
 />
 
 <PropsCard
@@ -269,13 +322,13 @@ tab: Props
   name="inputMode"
   type='type ONLY_FOR_FORMAT =
   | "text"
-  | "search"
+  | "decimal"
   | "none"
   | "tel"
   | "url"
   | "email"
   | "numeric"
-  | "decimal"'
+  | "search"'
   description={
     "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."
   }

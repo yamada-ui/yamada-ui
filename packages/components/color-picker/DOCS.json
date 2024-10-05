@@ -31,7 +31,7 @@
       "description": "The initial value of the color selector."
     },
     "eyeDropperProps": {
-      "type": "IconButtonProps",
+      "type": "ColorSelectorEyeDropperProps",
       "required": false,
       "description": "Props for the eye dropper component."
     },
@@ -209,6 +209,12 @@
       "required": false,
       "description": "Ref for the alpha slider component."
     },
+    "animation": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the popover."
+    },
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
@@ -254,7 +260,7 @@
       "description": "The visual color appearance of the component."
     },
     "colorSelectorColorScheme": {
-      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "\"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | (string & {}) | \"primary\" | \"secondary\" | ... 12 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the color selector component."
     },
@@ -274,7 +280,7 @@
       "description": "Variant for the color selector component."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for color picker container element."
     },
@@ -294,7 +300,7 @@
       "description": "The initial value of the color selector."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -618,13 +624,11 @@
     },
     "max": {
       "type": "number",
-      "defaultValue": "360",
       "required": false,
       "description": "The maximum allowed value of the slider. Cannot be less than min."
     },
     "min": {
       "type": "number",
-      "defaultValue": "0",
       "required": false,
       "description": "The minimum allowed value of the slider. Cannot be greater than max."
     },
@@ -649,7 +653,7 @@
       "description": "Function called when the user starts selecting a new value."
     },
     "overlays": {
-      "type": "HTMLUIProps<\"div\">[]",
+      "type": "HTMLUIProps[]",
       "required": false,
       "description": "The overlay used for the slider."
     },
@@ -666,17 +670,17 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | \"whiteAlpha.700\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },
     "thumbProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for slider thumb element."
     },
     "trackProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for slider track element."
     },
@@ -751,13 +755,11 @@
     },
     "max": {
       "type": "number",
-      "defaultValue": "1",
       "required": false,
       "description": "The maximum allowed value of the slider. Cannot be less than min."
     },
     "min": {
       "type": "number",
-      "defaultValue": "0",
       "required": false,
       "description": "The minimum allowed value of the slider. Cannot be greater than max."
     },
@@ -782,7 +784,7 @@
       "description": "Function called when the user starts selecting a new value."
     },
     "overlays": {
-      "type": "HTMLUIProps<\"div\">[]",
+      "type": "HTMLUIProps[]",
       "required": false,
       "description": "The overlay used for the slider."
     },
@@ -799,17 +801,17 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | \"whiteAlpha.700\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },
     "thumbProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for slider thumb element."
     },
     "trackProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for slider track element."
     },
@@ -832,7 +834,7 @@
   },
   "ColorSwatch": {
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
       "defaultValue": "#ffffff00",
       "required": false,
       "description": "The color used for the swatch element."
@@ -849,7 +851,7 @@
       "description": "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round."
     },
     "overlays": {
-      "type": "HTMLUIProps<\"div\">[]",
+      "type": "HTMLUIProps[]",
       "required": false,
       "description": "The overlay used for the swatch element."
     },
@@ -891,7 +893,7 @@
       "description": "If `false`, the saturation slider handle will not capture focus when value changes."
     },
     "innerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for saturation slider inner element."
     },
@@ -968,17 +970,17 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | \"whiteAlpha.700\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },
     "thumbProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for saturation slider thumb element."
     },
     "trackProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for saturation slider track element."
     },

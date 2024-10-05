@@ -1,8 +1,15 @@
 {
   "Tooltip": {
+    "animation": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "defaultValue": "'scale'",
+      "required": false,
+      "description": "The animation of the tooltip."
+    },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "closeDelay": {
       "type": "number",
@@ -46,7 +53,7 @@
       "description": "If `true`, the tooltip will be initially shown."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },

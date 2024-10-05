@@ -13,7 +13,7 @@
       "description": "If `true`, disable ripple effects when pressing a element."
     },
     "errorBorderColor": {
-      "type": "\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | ... 318 more ... | [...]",
+      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
       "required": false,
       "description": "The border color when the button is invalid."
     },
@@ -27,7 +27,7 @@
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true`, the button is disabled.\n\n\nIf `true`, the form control will be disabled."
+      "description": "If `true`, the button is disabled."
     },
     "isInvalid": {
       "type": "boolean",
@@ -65,7 +65,7 @@
       "description": "The icon to display at the left side of the button."
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | (UIValue<string> &\n      (\"grid\" | \"audio\" | \"oval\" | \"dots\" | \"puff\" | \"rings\" | \"circles\"))",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
       "required": false,
       "description": "The icon to display when the button is loading."
     },

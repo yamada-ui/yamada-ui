@@ -120,16 +120,14 @@ tab: Props
 <PropsCard
   id="resizableitem-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "as"> &
-  Omit<PanelProps, "id" | "children" | "tagName"> &
-  As'
+  type='Omit<HTMLUIProps, "as"> & ResizableItemProps'
   description={"Props for resizable item container element."}
 />
 
 <PropsCard
   id="resizableitem-controlref"
   name="controlRef"
-  type="RefObject<ImperativePanelHandle>"
+  type="RefObject<ResizableItemControl>"
   description={"Ref of the resizable item callback."}
 />
 
@@ -216,8 +214,15 @@ tab: Props
 <PropsCard
   id="resizabletrigger-iconprops"
   name="iconProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for resizable trigger icon component."}
+/>
+
+<PropsCard
+  id="resizabletrigger-id"
+  name="id"
+  type="string"
+  description={"id assigned to resizable trigger element."}
 />
 
 <PropsCard
@@ -233,7 +238,7 @@ tab: Props
 <PropsCard
   id="resizabletriggericon-size"
   name="size"
-  type='UIValue<number | (string & {}) | "small" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "2xs" | "xs" | "3xl" | "4xl" | ... 13 more ... | "smaller">'
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
   description={"The CSS `font-size` property."}
   deprecated={"Use `fontSize` instead."}
 />

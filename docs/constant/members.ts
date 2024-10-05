@@ -94,20 +94,6 @@ export const MEMBERS = [
     discord: { id: "1063410330153259078" },
   },
   {
-    name: { en: "Hirono Kobari", ja: "Hirono Kobari" },
-    description: {
-      en: "Front-end engineer, interested in typography. ",
-      ja: "フロントエンドエンジニア。タイポグラフィに興味があります。",
-    },
-    github: {
-      id: "hironokobari",
-      icon: "https://avatars.githubusercontent.com/u/129595457?v=4",
-      url: "https://github.com/hironokobari",
-    },
-    x: { url: "https://x.com/unikoroshi0" },
-    discord: { id: "1100994785185103913" },
-  },
-  {
     name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
     description: {
       en: "Former pharmacist turned front-end engineer.",
@@ -150,34 +136,6 @@ export const MEMBERS = [
     discord: { id: "1110399456588869682" },
   },
   {
-    name: { en: "Kazunori Ueno", ja: "Kazunori Ueno" },
-    description: {
-      en: "Still a novice front-end engineer.",
-      ja: "まだまだペーペーのフロントエンドエンジニア。",
-    },
-    github: {
-      id: "kaz-uen",
-      icon: "https://avatars.githubusercontent.com/u/83698603?v=4",
-      url: "https://github.com/kaz-uen",
-    },
-    x: { url: "https://x.com/kazu190603" },
-    discord: { id: "1063259535743131648" },
-  },
-  {
-    name: { en: "ShiroHat", ja: "白帽子" },
-    description: {
-      en: "I'm a student interested in front-end development and UI design as a hobby.",
-      ja: "フロントエンド開発とUIデザインを趣味として取り組んでいる学生。",
-    },
-    github: {
-      id: "shiro8t",
-      icon: "https://avatars.githubusercontent.com/u/178459492?v=4",
-      url: "https://github.com/shiro8t",
-    },
-    x: { url: "https://x.com/_shirohat" },
-    discord: { id: "1278688441080479764" },
-  },
-  {
     name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
     description: {
       en: "Web engineer living in Tokyo.",
@@ -206,20 +164,6 @@ export const MEMBERS = [
     discord: { id: "841466932187234354" },
   },
   {
-    name: { en: "Aose Yuu", ja: "Aose Yuu" },
-    description: {
-      en: "Front-end engineer. Vimmer who likes Vue and CLI.",
-      ja: "フロントエンドエンジニア。VueとCLIが好きなVimmer。",
-    },
-    github: {
-      id: "aose-yuu",
-      icon: "https://avatars.githubusercontent.com/aose-yuu",
-      url: "https://github.com/aose-yuu",
-    },
-    x: { url: "https://x.com/aose_developer" },
-    discord: { id: "901658696197738577" },
-  },
-  {
     name: { en: "neginasu", ja: "neginasu" },
     description: {
       en: "Front-end engineer. Dream to be a cool front-end engineer sister.",
@@ -232,16 +176,6 @@ export const MEMBERS = [
     },
     x: { url: "https://x.com/neginasu_grid" },
     discord: { id: "1100973371912638505" },
-  },
-  {
-    name: { en: "Haruki Saito", ja: "Haruki Saito" },
-    description: { en: "Web engineer.", ja: "Webエンジニア。" },
-    github: {
-      id: "Haruki0261",
-      icon: "https://avatars.githubusercontent.com/u/127657966?v=4",
-      url: "https://github.com/Haruki0261",
-    },
-    discord: { id: "1246087065616253012" },
   },
   {
     name: { en: "Kae Okamura", ja: "Okamura Kae" },
@@ -269,5 +203,58 @@ export const MEMBERS = [
     },
     x: { url: "https://x.com/calcat256" },
     discord: { id: "554506041409142784" },
+  },
+  {
+    name: { en: "Ryota Katada", ja: "Ryota Katada" },
+    description: {
+      en: "Frontend developer. Remix, Neovim.",
+      ja: "フロントエンドが好きなソフトウェアエンジニア。RemixとNeovimが好き。",
+    },
+    github: {
+      id: "aiirononeko",
+      icon: "https://avatars.githubusercontent.com/u/52910491?v=4",
+      url: "https://github.com/aiirononeko",
+    },
+    x: { url: "https://x.com/aiirononeko2" },
+    discord: { id: "666148215837425674" },
+  },
+  {
+    name: { en: "Itsuki54", ja: "Itsuki54" },
+    description: {
+      en: "Web-algo student from tmcit.",
+      ja: "Web系競プロ高専生。",
+    },
+    github: {
+      id: "Itsuki54",
+      icon: "https://avatars.githubusercontent.com/u/104209850?v=4",
+      url: "https://github.com/Itsuki54",
+    },
+    x: { url: "https://x.com/404_Bad_Gateway" },
+    discord: { id: "656432806435618817" },
+  },
+  {
+    name: { en: "Taisei Miyazaki", ja: "Taisei Miyazaki" },
+    description: { en: "Web/Mobile Developer.", ja: "Web/Mobileエンジニア。" },
+    github: {
+      id: "taiseiiiii",
+      icon: "https://avatars.githubusercontent.com/u/66340131?v=4",
+      url: "https://github.com/taiseiiiii",
+    },
+    x: { url: "https://x.com/zaki_ise" },
+    discord: { id: "1258340374062301288" },
+  },
+  {
+    name: { en: "Mingzhe Yang", ja: "Mingzhe Yang" },
+    description: {
+      en: "Ph.D. student, ML/Web Engineer.",
+      ja: "博士課程学生。時々ML/Webエンジニア。",
+    },
+    github: {
+      id: "mei28",
+      icon: "https://avatars.githubusercontent.com/u/51149822?v=4",
+      url: "https://github.com/mei28",
+    },
+    x: { url: "https://x.com/_mei28_" },
+    discord: { id: "471965760349011968" },
   },
 ]

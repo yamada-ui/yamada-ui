@@ -64,8 +64,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   let {
     className,
-    startColor,
-    endColor,
+    startColor: _startColor,
+    endColor: _endColor,
     fadeDuration = 0.4,
     speed = 0.8,
     isLoaded,
@@ -76,8 +76,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [isMounted] = useIsMounted()
   const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
-  const computedStartColor = useValue(startColor)
-  const computedEndColor = useValue(endColor)
+  const startColor = useValue(_startColor)
+  const endColor = useValue(_endColor)
   const hasChildren = !!validChildren.length
 
   isFitContent ??= hasChildren
@@ -98,12 +98,12 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const animation = useAnimation({
     keyframes: {
       "0%": {
-        borderColor: computedStartColor,
-        background: computedStartColor,
+        borderColor: startColor,
+        background: startColor,
       },
       "100%": {
-        borderColor: computedEndColor,
-        background: computedEndColor,
+        borderColor: endColor,
+        background: endColor,
       },
     },
     duration: typeof speed === "string" ? speed : `${speed}s`,
@@ -157,3 +157,6 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     )
   }
 })
+
+Skeleton.displayName = "Skeleton"
+Skeleton.__ui__ = "Skeleton"

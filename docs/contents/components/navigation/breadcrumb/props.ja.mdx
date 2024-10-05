@@ -28,7 +28,7 @@ order: 1
 <PropsCard
   id="breadcrumb-gap"
   name="gap"
-  type='UIValue<number | (string & {}) | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "normal" | "sm" | "md" | "lg" | "xl" | "2xl" | "1" | "-1" | "2" | "-2" | ... 97 more ... | "auto">'
+  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 97 more ... | "-4xl">'
   description={"The left and right margin applied to the separator."}
   defaultValue={"'2'"}
 />
@@ -63,6 +63,14 @@ order: 1
 />
 
 ### BreadcrumbItemProps
+
+<PropsCard
+  id="breadcrumbitem-gap"
+  name="gap"
+  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 97 more ... | "-4xl">'
+  description={"The left and right margin applied to the separator."}
+  defaultValue={"'2'"}
+/>
 
 <PropsCard
   id="breadcrumbitem-iscurrentpage"
@@ -100,12 +108,21 @@ order: 1
 
 ### BreadcrumbSeparatorProps
 
+<PropsCard
+  id="breadcrumbseparator-gap"
+  name="gap"
+  type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 102 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={
+    "The CSS `margin-inline-start`, and `margin-inline-end` property."
+  }
+/>
+
 ### BreadcrumbEllipsisProps
 
 <PropsCard
   id="breadcrumbellipsis-size"
   name="size"
-  type='UIValue<number | (string & {}) | "small" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | "xs" | "3xl" | "4xl" | "large" | ... 13 more ... | "9xl">'
+  type='UIValue<number | (string & {}) | "small" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "xs" | "3xl" | "4xl" | "large" | ... 13 more ... | "9xl">'
   description={"The CSS `font-size` property."}
   deprecated={"Use `fontSize` instead."}
 />

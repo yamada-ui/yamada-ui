@@ -1,7 +1,7 @@
 {
   "Carousel": {
     "align": {
-      "type": "AlignmentOptionType | Partial<Record<Breakpoint, AlignmentOptionType | [AlignmentOptionType | undefined, AlignmentOptionType | undefined] | undefined>> | [...]",
+      "type": "AlignmentOptionType | { [x: string & {}]: AlignmentOptionType | [AlignmentOptionType | undefined, AlignmentOptionType | undefined] | undefined; ... 5 more ...; base?: AlignmentOptionType | ... 1 more ... | undefined; } | [...]",
       "defaultValue": "'center'",
       "required": false,
       "description": "The alignment of the carousel."
@@ -18,23 +18,23 @@
       "description": "The visual color appearance of the component."
     },
     "containScroll": {
-      "type": "ScrollContainOptionType | Partial<Record<Breakpoint, ScrollContainOptionType | [ScrollContainOptionType | undefined, ScrollContainOptionType | undefined] | undefined>> | [...]",
+      "type": "ScrollContainOptionType | { [x: string & {}]: ScrollContainOptionType | [ScrollContainOptionType | undefined, ScrollContainOptionType | undefined] | undefined; ... 5 more ...; base?: ScrollContainOptionType | ... 1 more ... | undefined; } | [...]",
       "defaultValue": "''",
       "required": false,
       "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
     },
     "controlNextProps": {
-      "type": "IconButtonProps",
+      "type": "CarouselControlProps",
       "required": false,
       "description": "Props for next of the carousel control element."
     },
     "controlPrevProps": {
-      "type": "IconButtonProps",
+      "type": "CarouselControlProps",
       "required": false,
       "description": "Props for previous of the carousel control element."
     },
     "controlProps": {
-      "type": "IconButtonProps",
+      "type": "CarouselControlProps",
       "required": false,
       "description": "Props for carousel control element."
     },
@@ -90,12 +90,12 @@
       "description": "Props for carousel indicators element."
     },
     "innerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for carousel inner element."
     },
     "inViewThreshold": {
-      "type": "number | number[] | Partial<Record<Breakpoint, number | number[] | [number | number[] | undefined, number | number[] | undefined] | undefined>> | [...]",
+      "type": "number | number[] | { [x: string & {}]: number | number[] | [number | number[] | undefined, number | number[] | undefined] | undefined; sm?: number | number[] | [number | number[] | undefined, number | ... 1 more ... | undefined] | undefined; ... 4 more ...; base?: number | ... 2 more ... | undefined; } | [...]",
       "defaultValue": "0",
       "required": false,
       "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
@@ -135,7 +135,7 @@
       "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true."
     },
     "slideSize": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 71 more ... | \"9xl\">",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 71 more ... | \"9xl\">",
       "required": false,
       "description": "The CSS `width` property."
     },
@@ -190,7 +190,7 @@
   "CarouselSlide": {
     "index": { "type": "number", "required": false },
     "size": {
-      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `width` property."
     }

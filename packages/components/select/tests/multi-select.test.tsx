@@ -440,4 +440,9 @@ describe("<MultiSelect />", () => {
       expect(options[1]).toHaveAttribute("data-focus")
     })
   })
+
+  test("should have correct displayName and __ui__", () => {
+    expect(MultiSelect.displayName).toBe("MultiSelect")
+    expect(MultiSelect.__ui__).toBe("MultiSelect")
+  })
 })

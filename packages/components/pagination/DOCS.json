@@ -59,7 +59,7 @@
       "description": "Props for edge button element."
     },
     "innerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for inner element."
     },

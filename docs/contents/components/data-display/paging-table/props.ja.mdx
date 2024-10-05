@@ -29,7 +29,7 @@ tab: Props
 <PropsCard
   id="pagingtable-checkboxprops"
   name="checkboxProps"
-  type="CheckboxProps"
+  type="CheckboxProps<string>"
   description={"Props for table checkbox element."}
 />
 
@@ -44,7 +44,7 @@ tab: Props
 <PropsCard
   id="pagingtable-containerprops"
   name="containerProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for table container element."}
 />
 
@@ -148,7 +148,7 @@ tab: Props
 <PropsCard
   id="pagingtable-layout"
   name="layout"
-  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<Breakpoint, TableLayout | [TableLayout, TableLayout]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type='"auto" | "fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | { [x: string & {}]: TableLayout | [TableLayout, TableLayout] | undefined; ... 5 more ...; base?: TableLayout | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 
@@ -227,7 +227,7 @@ tab: Props
 <PropsCard
   id="pagingtable-pagingcontrolprops"
   name="pagingControlProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for paging control element."}
 />
 
@@ -271,10 +271,10 @@ tab: Props
   id="pagingtable-selectprops"
   name="selectProps"
   type='Omit<SelectProps,
-  | "data"
   | "defaultValue"
   | "children"
   | "onChange"
+  | "data"
   | "value"
   | "placeholderInOptions">'
   description={"Props for select element."}

@@ -74,12 +74,12 @@
       "description": "If `true`, the resizable item can be collapsed."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"as\"> &\n  Omit<PanelProps, \"id\" | \"children\" | \"tagName\"> &\n  As",
+      "type": "Omit<HTMLUIProps, \"as\"> & ResizableItemProps",
       "required": false,
       "description": "Props for resizable item container element."
     },
     "controlRef": {
-      "type": "RefObject<ImperativePanelHandle>",
+      "type": "RefObject<ResizableItemControl>",
       "required": false,
       "description": "Ref of the resizable item callback."
     },
@@ -137,9 +137,14 @@
       "description": "The resizable trigger icon to use."
     },
     "iconProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for resizable trigger icon component."
+    },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to resizable trigger element."
     },
     "isDisabled": {
       "type": "boolean",
@@ -150,7 +155,7 @@
   },
   "ResizableTriggerIcon": {
     "size": {
-      "type": "UIValue<number | (string & {}) | \"small\" | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"2xs\" | \"xs\" | \"3xl\" | \"4xl\" | ... 13 more ... | \"smaller\">",
+      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
       "required": false,
       "deprecated": "Use `fontSize` instead.",
       "description": "The CSS `font-size` property."

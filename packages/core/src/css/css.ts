@@ -10,10 +10,29 @@ import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 
-function isProcessSkip(key: string) {
+function isProcessSkip(key: string): boolean {
   return processSkipProperties.includes(key as ProcessSkipProperty)
 }
-function expandColorMode(
+
+function isAdditionalObject(obj: Dict) {
+  return function (breakpointKeys: string[]): boolean {
+    const keys = Object.keys(obj)
+
+    if (!keys.length) return false
+
+    if (!keys.includes("base")) return false
+
+    return keys.every((key) => {
+      return (
+        breakpointKeys?.includes(key) ||
+        key.startsWith("@") ||
+        key.startsWith("_")
+      )
+    })
+  }
+}
+
+function expandColorModeArray(
   key: string,
   value: any[],
   queries: BreakpointQueries,
@@ -21,7 +40,7 @@ function expandColorMode(
   let computedCSS: Dict = {}
 
   if (isObject(value[0])) {
-    computedCSS = expandResponsive(key, value[0], queries)
+    computedCSS = expandResponsiveObject(key, value[0], queries)
   } else {
     computedCSS[key] = value[0]
   }
@@ -31,7 +50,7 @@ function expandColorMode(
   return computedCSS
 }
 
-function expandResponsive(
+function expandResponsiveObject(
   key: string,
   value: Dict,
   queries: BreakpointQueries,
@@ -42,9 +61,42 @@ function expandResponsive(
     if (query) {
       if (breakpointValue) prev[query] = { [key]: breakpointValue }
     } else if (isArray(breakpointValue)) {
-      prev = merge(prev, expandColorMode(key, breakpointValue, queries))
+      prev = merge(prev, expandColorModeArray(key, breakpointValue, queries))
     } else {
       prev[key] = breakpointValue
+    }
+
+    return prev
+  }, {} as Dict)
+}
+
+function expandAdditionalObject(
+  key: string,
+  value: Dict,
+  queries: BreakpointQueries,
+) {
+  return Object.entries(value).reduce((prev, [query, value]) => {
+    if (query === "base") {
+      if (isArray(value)) {
+        prev = merge(prev, expandColorModeArray(key, value, queries))
+      } else {
+        prev[key] = value
+      }
+    } else {
+      query =
+        queries.find(({ breakpoint }) => breakpoint === query)?.query ?? query
+
+      if (isObject(value)) {
+        prev = merge(prev, {
+          [query]: expandResponsiveObject(key, value, queries),
+        })
+      } else if (isArray(value)) {
+        prev = merge(prev, {
+          [query]: expandColorModeArray(key, value, queries),
+        })
+      } else {
+        prev[query] = { [key]: value }
+      }
     }
 
     return prev
@@ -55,7 +107,7 @@ function expandCSS(css: Dict) {
   return function (theme: StyledTheme): Dict {
     if (!theme.__breakpoints) return css
 
-    const { isResponsive, queries } = theme.__breakpoints
+    const { keys, isResponsive, queries } = theme.__breakpoints
 
     let computedCSS: Dict = {}
 
@@ -65,13 +117,32 @@ function expandCSS(css: Dict) {
       if (value == null) continue
 
       if (isArray(value) && !isProcessSkip(key)) {
-        computedCSS = merge(computedCSS, expandColorMode(key, value, queries))
+        computedCSS = merge(
+          computedCSS,
+          expandColorModeArray(key, value, queries),
+        )
 
         continue
       }
 
       if (isObject(value) && isResponsive(value) && !isProcessSkip(key)) {
-        computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
+        computedCSS = merge(
+          computedCSS,
+          expandResponsiveObject(key, value, queries),
+        )
+
+        continue
+      }
+
+      if (
+        isObject(value) &&
+        isAdditionalObject(value)(keys) &&
+        !isProcessSkip(key)
+      ) {
+        computedCSS = merge(
+          computedCSS,
+          expandAdditionalObject(key, value, queries),
+        )
 
         continue
       }
@@ -83,7 +154,7 @@ function expandCSS(css: Dict) {
   }
 }
 
-function parseVar(value: any, theme: StyledTheme) {
+function valueToVar(value: any, theme: StyledTheme) {
   if (isArray(value) || isObject(value)) {
     return value
   } else if (isString(value)) {
@@ -119,7 +190,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
         if (disableStyleProp?.(prop)) continue
 
         value = runIfFunc(value, theme)
-        value = parseVar(value, theme)
+        value = valueToVar(value, theme)
 
         if (value == null) continue
 

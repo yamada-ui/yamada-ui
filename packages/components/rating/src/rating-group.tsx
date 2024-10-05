@@ -54,3 +54,6 @@ export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
     )
   },
 )
+
+RatingGroup.displayName = "RatingGroup"
+RatingGroup.__ui__ = "RatingGroup"

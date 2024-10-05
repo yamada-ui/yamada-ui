@@ -152,8 +152,9 @@ export const useRating = ({
   })
   const [hoveredValue, setHoveredValue] = useState<number>(-1)
   const [isOutside, setIsOutside] = useState(true)
+  const uuid = useId()
 
-  id ??= useId()
+  id ??= uuid
   name ??= `rating-${id}`
 
   const { "aria-readonly": _isReadOnly, ...formControlProps } = pickObject(

@@ -15,14 +15,14 @@ import {
   useUpdateEffect,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
+import type { RefObject } from "react"
+import { createRef, memo, useRef, useState } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
 import { ScrollShadow } from "components/data-display"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts"
 import { useEventListener } from "hooks"
 import type { DocumentContent } from "mdx"
-import type { RefObject } from "react"
-import { createRef, memo, useRef, useState } from "react"
-import scrollIntoView from "scroll-into-view-if-needed"
 
 export interface TableOfContentsProps extends StackProps {
   contents: DocumentContent[]

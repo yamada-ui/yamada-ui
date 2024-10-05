@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
-import { Box, useInterval } from "@yamada-ui/react"
 import { useState } from "react"
+import { Box, useInterval } from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useInterval",

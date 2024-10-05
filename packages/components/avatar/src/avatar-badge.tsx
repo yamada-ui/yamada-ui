@@ -138,3 +138,6 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
     )
   },
 )
+
+AvatarBadge.displayName = "AvatarBadge"
+AvatarBadge.__ui__ = "AvatarBadge"

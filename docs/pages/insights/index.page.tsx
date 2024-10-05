@@ -1,24 +1,24 @@
-import { SEO } from "components/media-and-icons"
-import { useI18n, PageProvider } from "contexts"
-import { TopLayout } from "layouts"
+import { useQuery } from "@tanstack/react-query"
+import { isString, useLoading, VStack } from "@yamada-ui/react"
+import dayjs from "dayjs"
+import type { InsightPeriod, Insights } from "insights"
 import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
   NextPage,
 } from "next"
-import { getStaticCommonProps } from "utils/next"
-import { TotalChart } from "./total-chart"
-import { UserCharts } from "./user-charts"
-import type { InsightsContext } from "./insights-provider"
-import { InsightsProvider } from "./insights-provider"
+import { useRouter } from "next/router"
 import { useCallback, useMemo, useState } from "react"
 import { InsightsHeader } from "./insights-header"
-import { isString, useLoading, VStack } from "@yamada-ui/react"
-import type { InsightPeriod, Insights } from "insights"
+import type { InsightsContext } from "./insights-provider"
+import { InsightsProvider } from "./insights-provider"
 import { getSummarize, INSIGHT_USER_IDS } from "./insights-utils"
-import dayjs from "dayjs"
-import { useRouter } from "next/router"
-import { useQuery } from "@tanstack/react-query"
+import { TotalChart } from "./total-chart"
+import { UserCharts } from "./user-charts"
+import { SEO } from "components/media-and-icons"
+import { useI18n, PageProvider } from "contexts"
+import { TopLayout } from "layouts"
+import { getStaticCommonProps } from "utils/next"
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,

@@ -31,3 +31,6 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
     )
   },
 )
+
+PopoverCloseButton.displayName = "PopoverCloseButton"
+PopoverCloseButton.__ui__ = "PopoverCloseButton"

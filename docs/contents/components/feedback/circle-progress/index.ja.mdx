@@ -22,10 +22,10 @@ import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
 
 ### サイズを変更する
 
-`size`に文字列または数値を設定することで、`boxSize`(`width`, `height`)を変更できます。
+サイズを変更したい場合は、`boxSize`に文字列または数値を設定します。
 
 ```tsx
-<CircleProgress value={18} size={32} />
+<CircleProgress value={18} boxSize={32} />
 ```
 
 ### 太さを変更する
@@ -40,7 +40,7 @@ import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
 
 ```tsx
 <CircleProgress
-  size="120px"
+  boxSize="120px"
   min={0}
   max={1000}
   value={444}

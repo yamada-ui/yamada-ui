@@ -25,7 +25,7 @@ cd yamada-ui
 
 3. `pnpm install`を実行して、すべての依存関係とパッケージをセットアップします。このコマンドは、依存関係をインストールします。
 
-4. `pnpm dev`を実行してローカルサーバーを起動します。
+4. `pnpm docs:dev`を実行してローカルサーバーを起動します。
 
 ## 開発手段
 
@@ -42,6 +42,24 @@ cd yamada-ui
 - **`pnpm docs:start`**: プロダクションサーバーを起動します。
 - **`pnpm docs:build`**: サイトを構築します。
 - **`pnpm docs:lint`**: コードの問題をチェックします。
+- **`pnpm docs:typecheck`**: 型の問題をチェックします。
+
+### Visual Studio Code
+
+#### [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+拡張機能を正しく動作させるために、`.vscode/setting.json`に以下の設定を追加してください。
+
+```json
+{
+  ...
+  "eslint.options": {
+    "flags": ["unstable_ts_config"]
+  },
+  "eslint.workingDirectories": ["docs"],
+  ...
+}
+```
 
 ## ドキュメントを更新する
 

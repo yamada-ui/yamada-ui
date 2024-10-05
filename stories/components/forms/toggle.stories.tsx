@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import { Bold, Italic, Underline } from "@yamada-ui/lucide"
 import { Toggle, ToggleGroup, Wrap } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Toggle>
 

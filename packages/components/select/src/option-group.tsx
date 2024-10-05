@@ -63,3 +63,6 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
     )
   },
 )
+
+OptionGroup.displayName = "OptionGroup"
+OptionGroup.__ui__ = "OptionGroup"

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -17,7 +17,7 @@ import {
   runIfFunc,
   splitObject,
 } from "@yamada-ui/utils"
-import type { FC, ReactNode, RefAttributes } from "react"
+import type { ReactNode, RefAttributes } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"
@@ -202,6 +202,9 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
   },
 )
 
+RangeDatePicker.displayName = "RangeDatePicker"
+RangeDatePicker.__ui__ = "RangeDatePicker"
+
 interface RangeDatePickerFieldOptions {
   value: [Date?, Date?] | undefined
 }
@@ -291,6 +294,9 @@ export const RangeDatePickerField = forwardRef<
   },
 )
 
+RangeDatePickerField.displayName = "RangeDatePickerField"
+RangeDatePickerField.__ui__ = "RangeDatePickerField"
+
 interface AutosizingInputProps extends HTMLUIProps<"input"> {}
 
 const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
@@ -323,3 +329,6 @@ const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
     )
   },
 )
+
+AutosizingInput.displayName = "AutosizingInput"
+AutosizingInput.__ui__ = "AutosizingInput"

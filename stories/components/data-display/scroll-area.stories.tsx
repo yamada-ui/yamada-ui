@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useRef } from "react"
 import {
   Button,
   Heading,
@@ -7,7 +8,6 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
-import { useRef } from "react"
 
 type Story = StoryFn<typeof ScrollArea>
 

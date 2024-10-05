@@ -1,5 +1,17 @@
 # @yamada-ui/switch
 
+## 1.1.10
+
+### Patch Changes
+
+- [#2949](https://github.com/yamada-ui/yamada-ui/pull/2949) [`256a9af`](https://github.com/yamada-ui/yamada-ui/commit/256a9af8030ff3c1c55565b46640a31eca1417dc) Thanks [@aiirononeko](https://github.com/aiirononeko)! - Set `displayName` for easier debugging.
+
+- Updated dependencies [[`e2cebfe`](https://github.com/yamada-ui/yamada-ui/commit/e2cebfed43c964934fb9b6a72e4d9fed9892e396), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac)]:
+  - @yamada-ui/checkbox@1.1.9
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/motion@2.2.3
+
 ## 1.1.9
 
 ### Patch Changes

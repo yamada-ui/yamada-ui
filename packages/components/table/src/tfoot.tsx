@@ -1,3 +1,4 @@
+import { FC } from "@yamada-ui/core"
 import type { TableFootProps as NativeTableFootProps } from "@yamada-ui/native-table"
 import { Tfoot as NativeTfoot, Tr, Th } from "@yamada-ui/native-table"
 import { ariaAttr, runIfFunc } from "@yamada-ui/utils"
@@ -6,7 +7,7 @@ import { useTableContext, render } from "./use-table"
 
 export interface TableFootProps extends NativeTableFootProps {}
 
-export const Tfoot = ({ ...rest }: TableFootProps) => {
+export const Tfoot: FC = ({ ...rest }: TableFootProps) => {
   const { footerGroups, footerGroupProps, footerProps } = useTableContext()
 
   return (
@@ -37,3 +38,6 @@ export const Tfoot = ({ ...rest }: TableFootProps) => {
     </NativeTfoot>
   )
 }
+
+Tfoot.displayName = "Tfoot"
+Tfoot.__ui__ = "Tfoot"

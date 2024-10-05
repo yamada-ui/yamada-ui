@@ -46,3 +46,6 @@ export const StatIcon = forwardRef<StatIconProps, "svg">(
     )
   },
 )
+
+StatIcon.displayName = "StatIcon"
+StatIcon.__ui__ = "StatIcon"

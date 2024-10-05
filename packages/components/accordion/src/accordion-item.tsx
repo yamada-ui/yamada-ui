@@ -55,7 +55,10 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     { id, className, isDisabled = false, label, icon, children, ...rest },
     ref,
   ) => {
-    id ??= useId()
+    const uuid = useId()
+
+    id ??= uuid
+
     const itemId = `${id}-item`
     const panelId = `${id}-panel`
 
@@ -219,3 +222,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     )
   },
 )
+
+AccordionItem.displayName = "AccordionItem"
+AccordionItem.__ui__ = "AccordionItem"

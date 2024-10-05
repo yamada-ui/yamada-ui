@@ -80,4 +80,9 @@ describe("<Toggle />", () => {
     )
     vi.restoreAllMocks()
   })
+
+  test("should have correct displayName and __ui__", () => {
+    expect(Toggle.displayName).toBe("Toggle")
+    expect(Toggle.__ui__).toBe("Toggle")
+  })
 })

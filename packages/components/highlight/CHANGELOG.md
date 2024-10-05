@@ -1,5 +1,14 @@
 # @yamada-ui/highlight
 
+## 1.0.38
+
+### Patch Changes
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`46c0fae`](https://github.com/yamada-ui/yamada-ui/commit/46c0fae2b6da67380c54ba519964dd2f127ae2fb)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/typography@1.0.38
+
 ## 1.0.37
 
 ### Patch Changes

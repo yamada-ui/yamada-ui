@@ -157,3 +157,6 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     </ui.label>
   )
 })
+
+Switch.displayName = "Switch"
+Switch.__ui__ = "Switch"

@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises"
 import matter from "gray-matter"
-import type { Document, FrontMatter } from "mdx"
 import { getEditUrl, getSlug, getTableOfContents } from "./utils"
+import type { Document, FrontMatter } from "mdx"
 
 export async function generateMDX(filePath: string): Promise<Document> {
   filePath = filePath.replace(/\\/g, "/")

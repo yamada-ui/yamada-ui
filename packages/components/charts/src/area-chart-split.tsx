@@ -1,5 +1,4 @@
-import { getVar, useTheme } from "@yamada-ui/core"
-import type { FC } from "react"
+import { FC, getVar, useTheme } from "@yamada-ui/core"
 
 export interface AreaSplitProps {
   offset: number
@@ -25,3 +24,6 @@ export const AreaSplit: FC<AreaSplitProps> = ({ offset, id, fillOpacity }) => {
     </linearGradient>
   )
 }
+
+AreaSplit.displayName = "AreaSplit"
+AreaSplit.__ui__ = "AreaSplit"

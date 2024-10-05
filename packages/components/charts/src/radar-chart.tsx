@@ -242,3 +242,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+RadarChart.displayName = "RadarChart"
+RadarChart.__ui__ = "RadarChart"

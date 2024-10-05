@@ -28,3 +28,6 @@ export const StepSeparator = forwardRef<StepSeparatorProps, "div">(
     )
   },
 )
+
+StepSeparator.displayName = "StepSeparator"
+StepSeparator.__ui__ = "StepSeparator"

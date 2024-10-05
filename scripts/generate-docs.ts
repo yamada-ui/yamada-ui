@@ -137,19 +137,19 @@ const extractThemeProps = (
     result[name] = {
       colorScheme: {
         type: colorSchemeType,
-        defaultValue: colorScheme,
+        defaultValue: JSON.stringify(colorScheme),
         description: "The visual color appearance of the component.",
         required: false,
       },
       size: {
         type: sizes ? toLiteralStringType(Object.keys(sizes)) : "string",
-        defaultValue: size?.toString(),
+        defaultValue: JSON.stringify(size),
         description: `The size of the ${name}.`,
         required: false,
       },
       variant: {
         type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
-        defaultValue: variant?.toString(),
+        defaultValue: JSON.stringify(variant),
         description: `The variant of the ${name}.`,
         required: false,
       },

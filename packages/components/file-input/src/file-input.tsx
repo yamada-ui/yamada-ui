@@ -252,3 +252,6 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     )
   },
 )
+
+FileInput.displayName = "FileInput"
+FileInput.__ui__ = "FileInput"

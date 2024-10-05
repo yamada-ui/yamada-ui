@@ -30,7 +30,7 @@ import {
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { createQuery } from "../css"
-import { useColorMode, useTheme } from "../providers"
+import { getColorModeValue, useColorMode, useTheme } from "../providers"
 import { pseudos } from "../pseudos"
 
 type Styles<Y extends boolean = false> = Y extends false
@@ -309,8 +309,12 @@ function useStyles<Y extends Dict = Dict, M extends boolean = false>(
 
       props = mergeProps<Y>(props, defaultProps, overrideProps)
 
-      const { size, variant } = props
-      const resolvedProps = omitObject(props, ["children"]) as Y
+      const { colorScheme: _colorScheme, size, variant } = props
+      const colorScheme = isArray(_colorScheme)
+        ? getColorModeValue(_colorScheme[0], _colorScheme[1])(colorMode)
+        : _colorScheme
+      const computedProps = { ...props, colorScheme }
+      const resolvedProps = omitObject(computedProps, ["children"]) as Y
 
       let styles: Styles<M> = {}
 

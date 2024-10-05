@@ -24,3 +24,6 @@ export const StepDescription = forwardRef<StepDescriptionProps, "p">(
     )
   },
 )
+
+StepDescription.displayName = "StepDescription"
+StepDescription.__ui__ = "StepDescription"

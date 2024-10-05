@@ -21,13 +21,17 @@ type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
     ? UIValue<Theme["components"][Y]["sizes"]>
     : UIValue<string>
 
+type ThemeColorScheme =
+  | [Theme["colorSchemes"], Theme["colorSchemes"]]
+  | Theme["colorSchemes"]
+
 export interface ThemeProps<
   Y extends keyof Theme["components"] | unknown = unknown,
 > {
   /**
    * The color scheme of the component.
    */
-  colorScheme?: Theme["colorSchemes"]
+  colorScheme?: ThemeColorScheme
   /**
    * The size of the component.
    */

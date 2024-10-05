@@ -136,20 +136,6 @@ export const MEMBERS = [
     x: { url: "https://x.com/hinata_engin" },
   },
   {
-    name: { en: "Kazunori Ueno", ja: "Kazunori Ueno" },
-    description: {
-      en: "Still a novice front-end engineer.",
-      ja: "まだまだペーペーのフロントエンドエンジニア。",
-    },
-    discord: { id: "1063259535743131648" },
-    github: {
-      id: "kaz-uen",
-      icon: "https://avatars.githubusercontent.com/u/83698603?v=4",
-      url: "https://github.com/kaz-uen",
-    },
-    x: { url: "https://x.com/kazu190603" },
-  },
-  {
     name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
     description: {
       en: "Web engineer living in Tokyo.",

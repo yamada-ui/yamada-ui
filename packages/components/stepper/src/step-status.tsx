@@ -61,6 +61,9 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
   },
 )
 
+StepStatus.displayName = "StepStatus"
+StepStatus.__ui__ = "StepStatus"
+
 export interface StepNumberProps extends HTMLUIProps {}
 
 export const StepNumber = forwardRef<StepNumberProps, "div">(
@@ -83,6 +86,9 @@ export const StepNumber = forwardRef<StepNumberProps, "div">(
     )
   },
 )
+
+StepNumber.displayName = "StepNumber"
+StepNumber.__ui__ = "StepNumber"
 
 export interface StepIconProps extends IconProps {}
 
@@ -107,6 +113,9 @@ export const StepIcon = forwardRef<StepIconProps, "svg">(
     )
   },
 )
+
+StepIcon.displayName = "StepIcon"
+StepIcon.__ui__ = "StepIcon"
 
 const CheckIcon = (props: ComponentProps<"svg">) => {
   return (

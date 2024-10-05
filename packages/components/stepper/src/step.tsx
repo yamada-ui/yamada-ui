@@ -33,3 +33,6 @@ export const Step = forwardRef<StepProps, "div">(
     )
   },
 )
+
+Step.displayName = "Step"
+Step.__ui__ = "Step"

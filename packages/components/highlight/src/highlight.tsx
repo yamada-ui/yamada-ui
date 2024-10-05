@@ -1,11 +1,6 @@
-/**
- * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
- *
- * @see Docs https://yamada-ui.com/components/typography/highlight
- */
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { TextProps } from "@yamada-ui/typography"
-import type { FC, ReactNode } from "react"
+import type { ReactNode } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -70,6 +65,11 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
   markProps?: MarkProps
 }
 
+/**
+ * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
+ *
+ * @see Docs https://yamada-ui.com/components/typography/highlight
+ */
 export const Highlight: FC<HighlightProps> = ({
   children: text,
   isFragment = false,
@@ -100,6 +100,9 @@ export const Highlight: FC<HighlightProps> = ({
   )
 }
 
+Highlight.displayName = "Highlight"
+Highlight.__ui__ = "Highlight"
+
 export interface MarkProps extends HTMLUIProps<"mark">, ThemeProps<"Mark"> {}
 
 export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
@@ -121,3 +124,6 @@ export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
     />
   )
 })
+
+Mark.displayName = "Mark"
+Mark.__ui__ = "Mark"

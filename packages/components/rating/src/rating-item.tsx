@@ -1,10 +1,9 @@
 import { ui, forwardRef } from "@yamada-ui/core"
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx, getValidChildren, isString, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement } from "react"
-import type { FC } from "react"
 import { useRatingContext } from "./rating-context"
 import type { UseRatingItemProps } from "./use-rating-item"
 import { useRatingItem } from "./use-rating-item"
@@ -72,6 +71,9 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
   },
 )
 
+RatingItem.displayName = "RatingItem"
+RatingItem.__ui__ = "RatingItem"
+
 interface RatingIconProps extends HTMLUIProps {}
 
 const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
@@ -108,6 +110,9 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   )
 }
 
+RatingIcon.displayName = "RatingIcon"
+RatingIcon.__ui__ = "RatingIcon"
+
 type StarIconProps = IconProps
 
 const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
@@ -122,3 +127,6 @@ const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
     </Icon>
   )
 }
+
+StarIcon.displayName = "StarIcon"
+StarIcon.__ui__ = "StarIcon"

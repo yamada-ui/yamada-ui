@@ -390,6 +390,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
   },
 )
 
+PinInput.displayName = "PinInput"
+PinInput.__ui__ = "PinInput"
+
 export interface PinInputFieldProps
   extends HTMLUIProps<"input">,
     FormControlOptions {}
@@ -412,3 +415,6 @@ export const PinInputField = forwardRef<PinInputFieldProps, "input">(
     )
   },
 )
+
+PinInputField.displayName = "PinInputField"
+PinInputField.__ui__ = "PinInputField"

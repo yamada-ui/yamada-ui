@@ -534,6 +534,9 @@ export const Editable = forwardRef<EditableProps, "div">(
   },
 )
 
+Editable.displayName = "Editable"
+Editable.__ui__ = "Editable"
+
 export interface EditablePreviewProps extends HTMLUIProps<"span"> {}
 
 export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
@@ -553,6 +556,9 @@ export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
     )
   },
 )
+
+EditablePreview.displayName = "EditablePreview"
+EditablePreview.__ui__ = "EditablePreview"
 
 export interface EditableInputProps extends HTMLUIProps<"input"> {}
 
@@ -574,6 +580,9 @@ export const EditableInput = forwardRef<EditableInputProps, "input">(
   },
 )
 
+EditableInput.displayName = "EditableInput"
+EditableInput.__ui__ = "EditableInput"
+
 export interface EditableTextareaProps extends HTMLUIProps<"textarea"> {}
 
 export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
@@ -593,3 +602,6 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
     )
   },
 )
+
+EditableTextarea.displayName = "EditableTextarea"
+EditableTextarea.__ui__ = "EditableTextarea"

@@ -38,7 +38,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
       >
         {icon !== null ? (
           <AutocompleteItemIcon opacity={isSelected ? 1 : 0}>
-            {icon || <CheckIcon />}
+            {icon || <AutocompleteCheckIcon />}
           </AutocompleteItemIcon>
         ) : null}
 
@@ -53,7 +53,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
 AutocompleteOption.displayName = "AutocompleteOption"
 AutocompleteOption.__ui__ = "AutocompleteOption"
 
-const CheckIcon: FC = () => (
+const AutocompleteCheckIcon: FC = () => (
   <svg viewBox="0 0 14 14" width="1em" height="1em">
     <polygon
       fill="currentColor"
@@ -62,5 +62,5 @@ const CheckIcon: FC = () => (
   </svg>
 )
 
-CheckIcon.displayName = "CheckIcon"
-CheckIcon.__ui__ = "CheckIcon"
+AutocompleteCheckIcon.displayName = "AutocompleteCheckIcon"
+AutocompleteCheckIcon.__ui__ = "AutocompleteCheckIcon"

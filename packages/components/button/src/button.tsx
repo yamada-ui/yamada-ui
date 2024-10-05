@@ -178,21 +178,27 @@ export const Button = forwardRef<ButtonProps, "button">(
         onPointerDown={onPointerDown}
       >
         {isLoading && loadingPlacement === "start" ? (
-          <Loading className="ui-button__loading--start" {...loadingProps} />
+          <ButtonLoading
+            className="ui-button__loading--start"
+            {...loadingProps}
+          />
         ) : null}
 
         {isLoading ? (
           loadingText || (
             <ui.span opacity={0}>
-              <Content {...contentProps} />
+              <ButtonContent {...contentProps} />
             </ui.span>
           )
         ) : (
-          <Content {...contentProps} />
+          <ButtonContent {...contentProps} />
         )}
 
         {isLoading && loadingPlacement === "end" ? (
-          <Loading className="ui-button__loading--end" {...loadingProps} />
+          <ButtonLoading
+            className="ui-button__loading--end"
+            {...loadingProps}
+          />
         ) : null}
 
         <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
@@ -204,9 +210,14 @@ export const Button = forwardRef<ButtonProps, "button">(
 Button.displayName = "Button"
 Button.__ui__ = "Button"
 
-const Loading: FC<
-  Pick<ButtonProps, "className" | "loadingIcon" | "loadingText">
-> = ({ className, loadingIcon, loadingText }) => {
+interface ButtonLoadingProps
+  extends Pick<ButtonProps, "className" | "loadingIcon" | "loadingText"> {}
+
+const ButtonLoading: FC<ButtonLoadingProps> = ({
+  className,
+  loadingIcon,
+  loadingText,
+}) => {
   const css = useMemo(
     (): CSSUIObject => ({
       display: "flex",
@@ -233,31 +244,37 @@ const Loading: FC<
   )
 }
 
-Loading.displayName = "Loading"
-Loading.__ui__ = "Loading"
-
-const Content: FC<
-  Pick<
+interface ButtonContentProps
+  extends Pick<
     ButtonProps,
-    "startIcon" | "leftIcon" | "endIcon" | "rightIcon" | "children"
-  >
-> = ({ startIcon, leftIcon, endIcon, rightIcon, children }) => {
+    "startIcon" | "endIcon" | "leftIcon" | "rightIcon" | "children"
+  > {}
+
+const ButtonContent: FC<ButtonContentProps> = ({
+  startIcon,
+  leftIcon,
+  endIcon,
+  rightIcon,
+  children,
+}) => {
   startIcon ??= leftIcon
   endIcon ??= rightIcon
 
   return (
     <>
-      {startIcon ? <Icon>{startIcon}</Icon> : null}
+      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
       {children}
-      {endIcon ? <Icon>{endIcon}</Icon> : null}
+      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
     </>
   )
 }
 
-Content.displayName = "Content"
-Content.__ui__ = "Content"
+ButtonContent.displayName = "ButtonContent"
+ButtonContent.__ui__ = "ButtonContent"
 
-const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
+interface ButtonIconProps extends HTMLUIProps<"span"> {}
+
+const ButtonIcon: FC<ButtonIconProps> = ({ children, className, ...rest }) => {
   return (
     <ui.span
       className={cx("ui-button__icon", className)}
@@ -272,8 +289,8 @@ const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
   )
 }
 
-Icon.displayName = "Icon"
-Icon.__ui__ = "Icon"
+ButtonIcon.displayName = "ButtonIcon"
+ButtonIcon.__ui__ = "ButtonIcon"
 
 export const useButtonType = (value?: ElementType) => {
   const isButton = useRef(!value)

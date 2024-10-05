@@ -1,6 +1,11 @@
 import type { AlertProps } from "@yamada-ui/alert"
 import { Alert, AlertDescription, AlertIcon } from "@yamada-ui/alert"
-import type { ColorModeArray, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  ColorModeArray,
+  FC,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -9,7 +14,6 @@ import {
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, filterEmpty } from "@yamada-ui/utils"
-import type { FC } from "react"
 import ReactMarkdown from "react-markdown"
 import type { Components, Options } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -105,6 +109,9 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   )
 })
 
+Markdown.displayName = "Markdown"
+Markdown.__ui__ = "Markdown"
+
 interface CodeProps extends MarkdownComponentProps<"code"> {
   theme?: CodeThemeNames | ColorModeArray<CodeThemeNames>
 }
@@ -141,3 +148,6 @@ const Code: FC<CodeProps> = ({
     </ui.pre>
   )
 }
+
+Code.displayName = "Code"
+Code.__ui__ = "Code"

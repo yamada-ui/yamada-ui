@@ -16,13 +16,6 @@ import { cx, valueToPercent } from "@yamada-ui/utils"
 
 interface CircleProgressOptions {
   /**
-   * The CSS `box-size` property.
-   *
-   * @default '6rem'
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
-  /**
    * The CSS `width` property.
    *
    * @default '0.625ewm'
@@ -80,7 +73,7 @@ interface CircleProgressOptions {
 
 export interface CircleProgressProps
   extends Omit<HTMLUIProps, "color">,
-    Omit<ThemeProps<"CircleProgress">, "size">,
+    ThemeProps<"CircleProgress">,
     CircleProgressOptions {}
 
 /**
@@ -90,14 +83,11 @@ export interface CircleProgressProps
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (props, ref) => {
-    const [styles, { size = "6rem", ...mergedProps }] = useComponentStyle(
-      "CircleProgress",
-      props,
-    )
+    const [styles, mergedProps] = useComponentStyle("CircleProgress", props)
     let {
       className,
       children,
-      boxSize = size,
+      boxSize = "6rem",
       thickness = "0.625rem",
       color = "primary",
       trackColor = "border",

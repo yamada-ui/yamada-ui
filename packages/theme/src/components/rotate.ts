@@ -1,20 +1,5 @@
 import type { ComponentStyle } from "@yamada-ui/core"
+import { mergeStyle } from "@yamada-ui/core"
+import { Airy } from "./airy"
 
-export const Rotate: ComponentStyle<"Rotate"> = {
-  baseStyle: {
-    common: {
-      width: "fit-content",
-      userSelect: "none",
-    },
-    _disabled: {
-      opacity: 0.4,
-      cursor: "not-allowed",
-    },
-  },
-
-  variants: {},
-
-  sizes: {},
-
-  defaultProps: {},
-}
+export const Rotate: ComponentStyle<"Rotate"> = mergeStyle(Airy)()

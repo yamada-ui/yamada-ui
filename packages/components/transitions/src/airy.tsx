@@ -1,25 +1,28 @@
-import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
+import type { ReactElement } from "react"
+import {
+  omitThemeProps,
+  useComponentStyle,
+  useCreateVars,
+} from "@yamada-ui/core"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { Merge } from "@yamada-ui/utils"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import { useCallback, type ReactElement } from "react"
+import { useCallback } from "react"
 
 export type AiryIdent = "from" | "to"
 
 interface AiryOptions {
   /**
-   * Passing React elements to "from" and "to" is required.
+   * Passing React elements to "from" is required.
    */
   from: ReactElement
-  to: ReactElement
   /**
-   * Use this when you want to control the animation from outside the component.
+   * Passing React elements to "to" is required.
    */
-  value?: AiryIdent
-  onChange?: () => void
+  to: ReactElement
   /**
    * You can set the initial state.
    *
@@ -27,17 +30,17 @@ interface AiryOptions {
    */
   defaultValue?: AiryIdent
   /**
-   * The animation duration.
-   *
-   * @default 0.1
-   */
-  duration?: number
-  /**
    *　The animation delay.
    *
    * @default 0
    */
   delay?: number
+  /**
+   * The animation duration.
+   *
+   * @default 0.2
+   */
+  duration?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -50,6 +53,14 @@ interface AiryOptions {
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
+  value?: AiryIdent
+  /**
+   * This is a callback function that is called when the animation state changes.
+   */
+  onChange?: (value: AiryIdent) => void
 }
 
 export interface AiryProps
@@ -57,31 +68,36 @@ export interface AiryProps
     ThemeProps<"Airy"> {}
 
 /**
- * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked
+ * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked.
  *
  * @see Docs https://yamada-ui.com/components/transitions/airy
  */
 export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
-  const [style, mergedProps] = useComponentStyle("Airy", props)
+  const [styles, mergedProps] = useComponentStyle("Airy", props)
   const {
+    className,
+    defaultValue = "from",
+    delay = 0,
+    duration = 0.2,
     from,
+    isDisabled,
+    isReadOnly,
     to,
     value: valueProp,
-    defaultValue = "from",
     onChange: onChangeProp,
-    duration = 0.1,
-    delay = 0,
-    isDisabled = false,
-    isReadOnly = false,
-    className,
     ...rest
   } = omitThemeProps(mergedProps)
+  const [vars, { opacity }] = useCreateVars(
+    { opacity: 1, ...styles, ...rest },
+    ["opacity"],
+    { transform: true },
+  )
 
   const animate = useMotionAnimation()
 
   const [value, setValue] = useControllableState<AiryIdent>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
 
@@ -90,30 +106,31 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
   const onClick = useCallback(async () => {
     if (isReadOnly) return
 
-    await animate.start({ opacity: 0 })
+    await animate.start({ opacity: 0, transition: { delay, duration } })
 
     setValue((prev) => (prev === "from" ? "to" : "from"))
 
-    await animate.start({ opacity: 1 })
-  }, [animate, setValue, isReadOnly])
+    await animate.start({ opacity, transition: { duration } })
+  }, [animate, setValue, isReadOnly, opacity, duration, delay])
+
+  const css: CSSUIObject = {
+    vars,
+    ...styles,
+  }
 
   return (
     <motion.button
-      type="button"
       ref={ref}
+      type="button"
+      className={cx("ui-airy", `ui-airy--${value}`, className)}
+      animate={animate}
       disabled={isDisabled}
-      data-value={value}
+      initial={{ opacity }}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
+      data-value={value}
       onClick={onClick}
-      className={cx("ui-airy", `ui-airy--${value}`, className)}
-      __css={style}
-      animate={animate}
-      initial={{ opacity: 1 }}
-      transition={{
-        duration,
-        delay,
-      }}
+      __css={css}
       {...rest}
     >
       {isFrom ? from : to}

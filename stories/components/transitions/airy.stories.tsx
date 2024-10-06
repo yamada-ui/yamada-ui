@@ -1,128 +1,116 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import { Menu, X } from "@yamada-ui/lucide"
 import type { AiryIdent } from "@yamada-ui/react"
-import { Airy, Text, Center } from "@yamada-ui/react"
+import { Menu, X } from "@yamada-ui/lucide"
+import { Airy, Center, Text } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Airy>
 
 const meta: Meta<typeof Airy> = {
-  title: "Components / Transitions / Airy",
   component: Airy,
+  title: "Components / Transitions / Airy",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
       <Airy
-        from={
-          <Text w="xs" fontSize="5xl">
-            ON
-          </Text>
-        }
-        to={
-          <Text w="xs" fontSize="5xl">
-            OFF
-          </Text>
-        }
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
       />
 
-      <Airy from={<Menu fontSize="6xl" />} to={<X fontSize="6xl" />} />
+      <Airy from={<Menu fontSize="2xl" />} to={<X fontSize="2xl" />} />
     </Center>
   )
 }
 
 export const withDuration: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
       <Airy
-        from={
-          <Text w="xs" fontSize="5xl">
-            ON
-          </Text>
-        }
-        to={
-          <Text w="xs" fontSize="5xl">
-            OFF
-          </Text>
-        }
         duration={0.6}
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
       />
 
       <Airy
-        from={<Menu fontSize="6xl" />}
-        to={<X fontSize="6xl" />}
         duration={0.6}
+        from={<Menu fontSize="2xl" />}
+        to={<X fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const withDelay: Story = () => {
+  return (
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Airy
+        delay={1}
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+
+      <Airy
+        delay={1}
+        from={<Menu fontSize="2xl" />}
+        to={<X fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const isDisabled: Story = () => {
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        isDisabled
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+    </Center>
+  )
+}
+
+export const isReadonly: Story = () => {
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        isReadOnly
+        to={<Text fontSize="2xl">OFF</Text>}
       />
     </Center>
   )
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<AiryIdent>("to")
-
-  const onChangeAiryAnimation = () => {
-    console.log(`current element is ${currentElement}`)
-    onChange((prev) => (prev === "from" ? "to" : "from"))
-  }
+  const [value, onChange] = useState<AiryIdent>("to")
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Airy
-        value={currentElement}
-        onChange={onChangeAiryAnimation}
-        from={
-          <Text w="xs" fontSize="5xl">
-            ON
-          </Text>
-        }
-        to={
-          <Text w="xs" fontSize="5xl">
-            OFF
-          </Text>
-        }
-      />
-    </Center>
-  )
-}
-
-export const withDisabled: Story = () => {
-  return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Airy
-        isDisabled
-        from={
-          <Text w="fit-content" fontSize="5xl">
-            ON
-          </Text>
-        }
-        to={
-          <Text w="fit-content" fontSize="5xl">
-            OFF
-          </Text>
-        }
-      />
-    </Center>
-  )
-}
-
-export const withReadOnly: Story = () => {
-  return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Airy
-        isReadOnly
-        from={
-          <Text w="fit-content" fontSize="5xl">
-            ON
-          </Text>
-        }
-        to={
-          <Text w="fit-content" fontSize="5xl">
-            OFF
-          </Text>
-        }
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+        value={value}
+        onChange={onChange}
       />
     </Center>
   )

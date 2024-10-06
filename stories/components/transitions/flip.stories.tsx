@@ -1,69 +1,51 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import { Apple, Cherry } from "@yamada-ui/lucide"
 import type { FlipIdent } from "@yamada-ui/react"
-import { Flip, Avatar, Card, Center, Text } from "@yamada-ui/react"
+import { Apple, Cherry } from "@yamada-ui/lucide"
+import { Avatar, Center, Flip, Text } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Flip>
 
 const meta: Meta<typeof Flip> = {
-  title: "Components / Transitions / Flip",
   component: Flip,
+  title: "Components / Transitions / Flip",
 }
 
 export default meta
 
 const FrontOfCard = () => {
   return (
-    <Card
-      borderRadius="xl"
-      bg="white"
-      w="xs"
-      h="sm"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      border="1px solid gray"
-    >
-      <Text fontSize="xl" color="black">
+    <Center bg="white" borderRadius="lg" borderWidth="1px" h="2xs" w="3xs">
+      <Text color="black" fontSize="lg">
         Yamada UI
       </Text>
-    </Card>
+    </Center>
   )
 }
 
 const BackOfCard = () => {
   return (
-    <Card
-      borderRadius="xl"
-      bg="black"
-      w="xs"
-      h="sm"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      border="1px solid gray"
-    >
+    <Center bg="black" borderRadius="lg" borderWidth="1px" h="2xs" w="3xs">
       <Avatar
-        size="xl"
         name="Hirotomo Yamada"
+        size="lg"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       />
-    </Card>
+    </Center>
   )
 }
 
 export const basic: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Flip from={<BackOfCard />} to={<FrontOfCard />} />
 
-      <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+      <Flip from={<Apple fontSize="2xl" />} to={<Cherry fontSize="2xl" />} />
     </Center>
   )
 }
@@ -71,17 +53,17 @@ export const basic: Story = () => {
 export const flipVertical: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Flip from={<BackOfCard />} to={<FrontOfCard />} orientation="vertical" />
+      <Flip from={<BackOfCard />} orientation="vertical" to={<FrontOfCard />} />
 
       <Flip
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
+        from={<Apple fontSize="2xl" />}
         orientation="vertical"
+        to={<Cherry fontSize="2xl" />}
       />
     </Center>
   )
@@ -90,17 +72,17 @@ export const flipVertical: Story = () => {
 export const withDuration: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Flip from={<BackOfCard />} to={<FrontOfCard />} duration={1.5} />
+      <Flip duration={1.4} from={<BackOfCard />} to={<FrontOfCard />} />
 
       <Flip
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
-        duration={1.5}
+        duration={1.4}
+        from={<Apple fontSize="2xl" />}
+        to={<Cherry fontSize="2xl" />}
       />
     </Center>
   )
@@ -109,17 +91,17 @@ export const withDuration: Story = () => {
 export const withDelay: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Flip from={<BackOfCard />} to={<FrontOfCard />} delay={0.5} />
+      <Flip delay={1} from={<BackOfCard />} to={<FrontOfCard />} />
 
       <Flip
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
-        delay={0.5}
+        delay={1}
+        from={<Apple fontSize="2xl" />}
+        to={<Cherry fontSize="2xl" />}
       />
     </Center>
   )
@@ -128,81 +110,76 @@ export const withDelay: Story = () => {
 export const useSpring: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Flip
         from={<BackOfCard />}
         to={<FrontOfCard />}
         transition={{
           type: "spring",
-          stiffness: 80,
           damping: 10,
+          stiffness: 80,
         }}
       />
 
       <Flip
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
+        from={<Apple fontSize="2xl" />}
+        to={<Cherry fontSize="2xl" />}
         transition={{
           type: "spring",
-          stiffness: 120,
           damping: 10,
+          stiffness: 120,
         }}
       />
+    </Center>
+  )
+}
+
+export const isDisabled: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Flip from={<BackOfCard />} isDisabled to={<FrontOfCard />} />
+    </Center>
+  )
+}
+
+export const isReadOnly: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Flip from={<BackOfCard />} isReadOnly to={<FrontOfCard />} />
     </Center>
   )
 }
 
 export const customControl: Story = () => {
-  const [currentIdent, onChange] = useState<FlipIdent>("from")
-
-  const onChangeFlipAnimation = () => {
-    console.log(`current ident is ${currentIdent}`)
-    onChange((prev) => (prev === "from" ? "to" : "from"))
-  }
+  const [value, onChange] = useState<FlipIdent>("from")
 
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Flip
-        value={currentIdent}
-        onChange={onChangeFlipAnimation}
         from={<BackOfCard />}
         to={<FrontOfCard />}
+        value={value}
+        onChange={onChange}
       />
-    </Center>
-  )
-}
-
-export const withDisabled: Story = () => {
-  return (
-    <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
-      display="flex"
-      gap="4xl"
-    >
-      <Flip isDisabled from={<BackOfCard />} to={<FrontOfCard />} />
-    </Center>
-  )
-}
-
-export const withReadOnly: Story = () => {
-  return (
-    <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
-      display="flex"
-      gap="4xl"
-    >
-      <Flip isReadOnly from={<BackOfCard />} to={<FrontOfCard />} />
     </Center>
   )
 }

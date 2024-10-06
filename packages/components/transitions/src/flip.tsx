@@ -1,60 +1,28 @@
-import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
-import { motionForwardRef, motion } from "@yamada-ui/motion"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type {
+  MotionProps,
+  MotionTransition,
+  MotionTransitionVariants,
+  MotionVariants,
+} from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
+import type { ReactElement } from "react"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
+import { motion, motionForwardRef } from "@yamada-ui/motion"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, dataAttr, useSafeLayoutEffect } from "@yamada-ui/utils"
-import { useRef, useState, type ReactElement } from "react"
+import { useRef, useState } from "react"
 
-type Rotate = {
-  rotateY?: number
-  rotateX?: number
-}
-
-type MotionState = {
-  initial: Rotate
-  animate: (isVisible: boolean) => Rotate
-}
-
-type FlipMotion = {
-  [key in FlipOrientation]: {
-    from: MotionState
-    to: MotionState
-  }
-}
-
-const variants: FlipMotion = {
-  horizontal: {
-    from: {
-      initial: { rotateY: 0 },
-      animate: (isVisible: boolean) => ({
-        rotateY: isVisible ? 180 : 0,
-      }),
-    },
-    to: {
-      initial: { rotateY: 180 },
-
-      animate: (isVisible: boolean) => ({
-        rotateY: isVisible ? 0 : 180,
-      }),
-    },
-  },
-  vertical: {
-    from: {
-      initial: { rotateX: 0 },
-      animate: (isVisible: boolean) => ({
-        rotateX: isVisible ? 180 : 0,
-      }),
-    },
-    to: {
-      initial: { rotateX: 180 },
-      animate: (isVisible: boolean) => ({
-        rotateX: isVisible ? 0 : 180,
-      }),
-    },
-  },
-}
+const variants: MotionVariants = {
+  enter: ({ ident, isVisible, orientation }) => ({
+    [orientation === "horizontal" ? "rotateY" : "rotateX"]:
+      ident === "from" ? (isVisible ? 180 : 0) : isVisible ? 0 : 180,
+  }),
+  exit: ({ ident, orientation }) => ({
+    [orientation === "horizontal" ? "rotateY" : "rotateX"]:
+      ident === "from" ? 0 : 180,
+  }),
+} satisfies MotionTransitionVariants
 
 export type FlipIdent = "from" | "to"
 
@@ -62,15 +30,13 @@ export type FlipOrientation = "horizontal" | "vertical"
 
 export interface FlipOptions {
   /**
-   * Passing React elements to "from" and "to" is required.
+   * Passing React elements to "from" is required.
    */
   from: ReactElement
-  to: ReactElement
   /**
-   * Use this when you want to control the animation from outside the component.
+   * Passing React elements to "to" is required.
    */
-  value?: FlipIdent
-  onChange?: () => void
+  to: ReactElement
   /**
    * You can set the initial state.
    *
@@ -78,29 +44,17 @@ export interface FlipOptions {
    */
   defaultValue?: FlipIdent
   /**
-   * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
-   *
-   * @default 'horizontal'
-   */
-  orientation?: FlipOrientation
-  /**
-   * The animation transition.
-   *
-   * @default {}
-   */
-  transition?: MotionTransition
-  /**
-   * The animation duration.
-   *
-   * @default 0.2
-   */
-  duration?: number
-  /**
    *　The animation delay.
    *
    * @default 0
    */
   delay?: number
+  /**
+   * The animation duration.
+   *
+   * @default 0.4
+   */
+  duration?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -113,6 +67,30 @@ export interface FlipOptions {
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: FlipOrientation
+  /**
+   * The animation transition.
+   */
+  transition?: MotionTransition
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
+  value?: FlipIdent
+  /**
+   * This is a callback function that is called when the animation state changes.
+   */
+  onChange?: (value: FlipIdent) => void
+}
+
+const flipProps = {
+  animate: "enter",
+  initial: "exit",
+  variants,
 }
 
 export interface FlipProps
@@ -126,46 +104,46 @@ export interface FlipProps
  */
 export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const [dimensions, setDimensions] = useState<{
-    width?: number
     height?: number
+    width?: number
   }>({})
   const fromRef = useRef<HTMLDivElement | null>(null)
   const toRef = useRef<HTMLDivElement | null>(null)
 
   const [styles, mergedProps] = useComponentMultiStyle("Flip", props)
   const {
-    from,
-    to,
-    value: valueProp,
+    className,
     defaultValue = "from",
-    onChange: onChangeProp,
-    orientation = "horizontal",
-    transition = {},
-    duration = 0.2,
     delay = 0,
+    duration = 0.4,
+    from,
     isDisabled = false,
     isReadOnly = false,
-    className,
+    orientation = "horizontal",
+    to,
+    transition: transitionProp = {},
+    value: valueProp,
+    onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue: defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
 
   const isVisible = value === "to"
 
-  const switchVisibility = () => {
+  const onClick = () => {
     if (isReadOnly) return
 
     setValue((prev) => (prev === "from" ? "to" : "from"))
   }
 
   useSafeLayoutEffect(() => {
-    const fromElement = fromRef?.current
-    const toElement = toRef?.current
+    const fromElement = fromRef.current
+    const toElement = toRef.current
 
     if (!fromElement || !toElement) return
 
@@ -174,58 +152,56 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     const toWidth = toElement.offsetWidth
     const toHeight = toElement.offsetHeight
 
-    /**
-     * Since the width and height of the 'to' element and 'from' element must be the same for the animation to behave correctly,
-     * I have added the following error handling.
-     */
     if (fromWidth !== toWidth || fromHeight !== toHeight) {
       console.warn(
-        `Dimensions do not match: 
-        "from" element (Width: ${fromWidth}px, Height: ${fromHeight}px) 
-        does not match "to" element (Width: ${toWidth}px, Height: ${toHeight}px). 
+        `Dimensions do not match:
+        "from" element (Width: ${fromWidth}px, Height: ${fromHeight}px)
+        does not match "to" element (Width: ${toWidth}px, Height: ${toHeight}px).
         Please ensure both elements have the same dimensions.`,
       )
     }
 
-    setDimensions({ width: fromWidth, height: fromHeight })
+    setDimensions({ height: fromHeight, width: fromWidth })
   }, [fromRef, toRef])
+
+  const css: CSSUIObject = {
+    h: dimensions.height ? `${dimensions.height}px` : "auto",
+    w: dimensions.width ? `${dimensions.width}px` : "auto",
+    ...styles.container,
+  }
+
+  const transition = {
+    delay,
+    duration,
+    ...transitionProp,
+  }
 
   return (
     <motion.button
-      type="button"
       ref={ref}
+      type="button"
+      className={cx("ui-flip", `ui-flip__${orientation}`, className)}
       disabled={isDisabled}
-      data-value={value}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
-      className={cx("ui-flip", `ui-flip__${orientation}`, className)}
-      __css={{
-        w: dimensions.width ? `${dimensions.width}px` : "auto",
-        h: dimensions.height ? `${dimensions.height}px` : "auto",
-        ...styles.container,
-      }}
-      onClick={switchVisibility}
+      data-value={value}
+      onClick={onClick}
+      __css={css}
       {...rest}
     >
       <motion.span
         ref={fromRef}
-        custom={isVisible}
         className={cx(
           "ui-flip__from",
           `ui-flip__from--${orientation}`,
           className,
         )}
-        variants={variants[orientation].from}
-        initial="initial"
-        animate="animate"
+        custom={{ ident: "from", isVisible, orientation }}
+        {...flipProps}
+        transition={transition}
         __css={{
           ...styles.flipIdent,
           ...styles.from,
-        }}
-        transition={{
-          duration,
-          delay,
-          ...transition,
         }}
       >
         {from}
@@ -233,19 +209,13 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
 
       <motion.span
         ref={toRef}
-        custom={isVisible}
         className={cx("ui-flip__to", `ui-flip__to--${orientation}`, className)}
-        variants={variants[orientation].to}
-        initial="initial"
-        animate="animate"
+        custom={{ ident: "to", isVisible, orientation }}
+        {...flipProps}
+        transition={transition}
         __css={{
           ...styles.flipIdent,
           ...styles.to,
-        }}
-        transition={{
-          duration,
-          delay,
-          ...transition,
         }}
       >
         {to}

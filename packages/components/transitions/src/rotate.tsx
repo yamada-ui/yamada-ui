@@ -1,25 +1,28 @@
-import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
+import type { ReactElement } from "react"
+import {
+  omitThemeProps,
+  useComponentStyle,
+  useCreateVars,
+} from "@yamada-ui/core"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { Merge } from "@yamada-ui/utils"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import { useCallback, type ReactElement } from "react"
+import { useCallback } from "react"
 
 export type RotateIdent = "from" | "to"
 
 interface RotateOptions {
   /**
-   * Passing React elements to "from" and "to" is required.
+   * Passing React elements to "from" is required.
    */
   from: ReactElement
-  to: ReactElement
   /**
-   * Use this when you want to control the animation from outside the component.
+   * Passing React elements to "to" is required.
    */
-  value?: RotateIdent
-  onChange?: () => void
+  to: ReactElement
   /**
    * You can set the initial state.
    *
@@ -27,23 +30,17 @@ interface RotateOptions {
    */
   defaultValue?: RotateIdent
   /**
-   * The animation rotation.
-   *
-   * @default 45
-   */
-  rotate?: number
-  /**
-   * The animation duration.
-   *
-   * @default 0.3
-   */
-  duration?: number
-  /**
    *　The animation delay.
    *
    * @default 0
    */
   delay?: number
+  /**
+   * The animation duration.
+   *
+   * @default 0.4
+   */
+  duration?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -56,6 +53,20 @@ interface RotateOptions {
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * The animation rotation.
+   *
+   * @default 45
+   */
+  rotate?: number
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
+  value?: RotateIdent
+  /**
+   * This is a callback function that is called when the animation state changes.
+   */
+  onChange?: (value: RotateIdent) => void
 }
 
 export interface RotateProps
@@ -68,27 +79,32 @@ export interface RotateProps
  * @see Docs https://yamada-ui.com/components/transitions/rotate
  */
 export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
-  const [style, mergedProps] = useComponentStyle("Rotate", props)
+  const [styles, mergedProps] = useComponentStyle("Rotate", props)
   const {
+    className,
+    defaultValue = "from",
+    delay = 0,
+    duration = 0.4,
     from,
+    isDisabled,
+    isReadOnly,
+    rotate = 45,
     to,
     value: valueProp,
-    defaultValue = "from",
     onChange: onChangeProp,
-    duration = 0.3,
-    delay = 0,
-    rotate = 45,
-    isDisabled = false,
-    isReadOnly = false,
-    className,
     ...rest
   } = omitThemeProps(mergedProps)
+  const [vars, { opacity }] = useCreateVars(
+    { opacity: 1, ...styles, ...rest },
+    ["opacity"],
+    { transform: true },
+  )
 
   const animate = useMotionAnimation()
 
   const [value, setValue] = useControllableState<RotateIdent>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
 
@@ -100,29 +116,37 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
     await animate.start({
       opacity: 0,
       rotate: `${rotate}deg`,
+      transition: { delay, duration },
     })
+
     setValue((prev) => (prev === "from" ? "to" : "from"))
-    await animate.start({ opacity: 1, rotate: "0deg" })
-  }, [animate, rotate, setValue, isReadOnly])
+
+    await animate.start({
+      opacity: opacity,
+      rotate: "0deg",
+      transition: { duration },
+    })
+  }, [isReadOnly, animate, rotate, duration, delay, setValue, opacity])
+
+  const css: CSSUIObject = {
+    vars,
+    ...styles,
+  }
 
   return (
     <motion.button
-      type="button"
       ref={ref}
+      type="button"
+      className={cx("ui-rotate", `ui-rotate--${value}`, className)}
+      animate={animate}
+      custom={rotate}
       disabled={isDisabled}
-      data-value={value}
+      initial={{ opacity, rotate: "0deg" }}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
-      custom={rotate}
-      className={cx("ui-rotate", `ui-rotate--${value}`, className)}
+      data-value={value}
       onClick={onClick}
-      animate={animate}
-      initial={{ opacity: 1, rotate: "0deg" }}
-      transition={{
-        duration,
-        delay,
-      }}
-      __css={style}
+      __css={css}
       {...rest}
     >
       {isFrom ? from : to}

@@ -1,14 +1,14 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import { Apple, Cherry, Moon, Sun } from "@yamada-ui/lucide"
 import type { RotateIdent } from "@yamada-ui/react"
-import { Rotate, Center } from "@yamada-ui/react"
+import { Apple, Cherry, Grab, HandMetal, Moon, Sun } from "@yamada-ui/lucide"
+import { Center, Rotate } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Rotate>
 
 const meta: Meta<typeof Rotate> = {
-  title: "Components / Transitions / Rotate",
   component: Rotate,
+  title: "Components / Transitions / Rotate",
 }
 
 export default meta
@@ -16,14 +16,14 @@ export default meta
 export const basic: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Rotate from={<Sun fontSize="50px" />} to={<Moon fontSize="50px" />} />
+      <Rotate from={<Sun fontSize="2xl" />} to={<Moon fontSize="2xl" />} />
 
-      <Rotate from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+      <Rotate from={<Apple fontSize="2xl" />} to={<Cherry fontSize="2xl" />} />
     </Center>
   )
 }
@@ -31,80 +31,121 @@ export const basic: Story = () => {
 export const withRotate: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Rotate
-        from={<Sun fontSize="50px" />}
-        to={<Moon fontSize="50px" />}
+        from={<Grab fontSize="2xl" />}
         rotate={360}
+        to={<HandMetal fontSize="2xl" />}
       />
 
       <Rotate
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
+        from={<Apple fontSize="2xl" />}
         rotate={-360}
+        to={<Cherry fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const withDuration: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Rotate
+        duration={0.6}
+        from={<Sun fontSize="2xl" />}
+        to={<Moon fontSize="2xl" />}
+      />
+
+      <Rotate
+        duration={0.6}
+        from={<Apple fontSize="2xl" />}
+        to={<Cherry fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const withDelay: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Rotate
+        delay={1}
+        from={<Sun fontSize="2xl" />}
+        to={<Moon fontSize="2xl" />}
+      />
+
+      <Rotate
+        delay={1}
+        from={<Apple fontSize="2xl" />}
+        to={<Cherry fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const isDisabled: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Rotate
+        from={<Sun fontSize="2xl" />}
+        isDisabled
+        to={<Moon fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const isReadonly: Story = () => {
+  return (
+    <Center
+      display="flex"
+      gap="4xl"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Rotate
+        from={<Sun fontSize="2xl" />}
+        isReadOnly
+        to={<Moon fontSize="2xl" />}
       />
     </Center>
   )
 }
 
 export const customControl: Story = () => {
-  const [currentIdent, onChange] = useState<RotateIdent>("to")
-
-  const onChangeRotateAnimation = () => {
-    console.log(`current ident is ${currentIdent}`)
-    onChange((prev) => (prev === "from" ? "to" : "from"))
-  }
+  const [value, onChange] = useState<RotateIdent>("to")
 
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       display="flex"
       gap="4xl"
-    >
-      <Rotate
-        value={currentIdent}
-        onChange={onChangeRotateAnimation}
-        from={<Sun fontSize="50px" />}
-        to={<Moon fontSize="50px" />}
-      />
-    </Center>
-  )
-}
-
-export const withDisabled: Story = () => {
-  return (
-    <Center
-      w="calc(100vw - 16px * 2)"
       h="calc(100vh - 16px * 2)"
-      display="flex"
-      gap="4xl"
-    >
-      <Rotate
-        isDisabled
-        from={<Sun fontSize="50px" />}
-        to={<Moon fontSize="50px" />}
-      />
-    </Center>
-  )
-}
-
-export const withReadOnly: Story = () => {
-  return (
-    <Center
       w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
-      display="flex"
-      gap="4xl"
     >
       <Rotate
-        isReadOnly
-        from={<Sun fontSize="50px" />}
-        to={<Moon fontSize="50px" />}
+        from={<Sun fontSize="2xl" />}
+        to={<Moon fontSize="2xl" />}
+        value={value}
+        onChange={onChange}
       />
     </Center>
   )

@@ -165,13 +165,13 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         ...props,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
-        tabIndex: -1,
         "aria-checked": isSelected,
         "aria-disabled": ariaAttr(isDisabled),
         "data-disabled": dataAttr(isDisabled),
         "data-focus": dataAttr(isFocused),
         "data-target": dataAttr(true),
         "data-value": optionValue ?? "",
+        tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
@@ -223,8 +223,8 @@ export const useAutocompleteCreate = () => {
         ref,
         ...props,
         style: isHit ? style : undefined,
-        tabIndex: -1,
         "data-focus": dataAttr(!isHit),
+        tabIndex: -1,
         onClick: handlerAll(props.onClick, onCreate),
       }
     },

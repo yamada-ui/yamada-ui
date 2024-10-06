@@ -284,14 +284,14 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
 
   return {
     id: id ?? control?.id,
-    disabled,
-    readOnly,
-    required,
     "aria-disabled": ariaAttr(disabled),
     "aria-invalid": ariaAttr(isInvalid),
     "aria-readonly": ariaAttr(readOnly),
     "aria-required": ariaAttr(required),
     "data-readonly": dataAttr(readOnly),
+    disabled,
+    readOnly,
+    required,
     onBlur: handlerAll(control?.onBlur, onBlur),
     onFocus: handlerAll(control?.onFocus, onFocus),
     ...(disabled || readOnly
@@ -433,8 +433,8 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
       <ui.span
         ref={ref}
         className={cx("ui-form__required-indicator", className)}
-        role="presentation"
         aria-hidden
+        role="presentation"
         __css={css}
         {...rest}
       >

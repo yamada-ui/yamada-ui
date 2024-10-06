@@ -9,10 +9,6 @@ export const Input: ComponentMultiStyle<"Input"> = {
       color: ["blackAlpha.600", "whiteAlpha.700"],
     },
     field: {
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
       appearance: "none",
       minWidth: 0,
       outline: 0,
@@ -20,6 +16,10 @@ export const Input: ComponentMultiStyle<"Input"> = {
       transitionDuration: "normal",
       transitionProperty: "common",
       width: "100%",
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
     },
   },
 
@@ -102,6 +102,9 @@ export const Input: ComponentMultiStyle<"Input"> = {
           border: "2px solid transparent",
         },
         field: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          border: "2px solid",
+          borderColor: "transparent",
           _active: {
             bg: "transparent",
             borderColor: focusBorderColor,
@@ -123,9 +126,6 @@ export const Input: ComponentMultiStyle<"Input"> = {
             boxShadow: "none !important",
             userSelect: "all",
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-          border: "2px solid",
-          borderColor: "transparent",
         },
       }
     },
@@ -150,6 +150,11 @@ export const Input: ComponentMultiStyle<"Input"> = {
           rounded: "0",
         },
         field: {
+          bg: "transparent",
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          px: "0",
+          rounded: "0",
           _active: {
             borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
@@ -169,11 +174,6 @@ export const Input: ComponentMultiStyle<"Input"> = {
             boxShadow: "none !important",
             userSelect: "all",
           },
-          bg: "transparent",
-          borderBottom: "1px solid",
-          borderColor: "inherit",
-          px: "0",
-          rounded: "0",
         },
       }
     },
@@ -197,6 +197,9 @@ export const Input: ComponentMultiStyle<"Input"> = {
           borderColor: ["inherit", "whiteAlpha.50"],
         },
         field: {
+          bg: "inherit",
+          border: "1px solid",
+          borderColor: "inherit",
           _active: {
             borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -217,9 +220,6 @@ export const Input: ComponentMultiStyle<"Input"> = {
             boxShadow: "none !important",
             userSelect: "all",
           },
-          bg: "inherit",
-          border: "1px solid",
-          borderColor: "inherit",
         },
       }
     },

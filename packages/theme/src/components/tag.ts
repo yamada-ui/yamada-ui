@@ -11,6 +11,10 @@ import {
 export const Tag: ComponentMultiStyle<"Tag"> = {
   baseStyle: {
     closeButton: {
+      opacity: 0.5,
+      rounded: "full",
+      transitionDuration: "normal",
+      transitionProperty: "common",
       _active: {
         opacity: 1,
       },
@@ -22,24 +26,20 @@ export const Tag: ComponentMultiStyle<"Tag"> = {
         boxShadow: "outline",
       },
       _hover: {
+        opacity: 0.8,
         _disabled: {
           cursor: "not-allowed",
           opacity: 0.4,
         },
-        opacity: 0.8,
       },
-      opacity: 0.5,
-      rounded: "full",
-      transitionDuration: "normal",
-      transitionProperty: "common",
     },
     container: {
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       fontWeight: "medium",
       outline: 0,
       rounded: "md",
+      _focusVisible: {
+        boxShadow: "outline",
+      },
     },
     label: {
       overflow: "visible",
@@ -78,7 +78,7 @@ export const Tag: ComponentMultiStyle<"Tag"> = {
 
   variants: {
     outline: {
-      container: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => {
+      container: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
         const color = mode(
           getColor(`${c}.500`)(t, m),
           getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
@@ -91,13 +91,13 @@ export const Tag: ComponentMultiStyle<"Tag"> = {
       },
     },
     solid: {
-      container: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+      container: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
         bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
         color: `white`,
       }),
     },
     subtle: {
-      container: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+      container: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
         bg: [
           isGray(c) ? `${c}.50` : `${c}.100`,
           shadeColor(`${c}.300`, 58)(t, m),

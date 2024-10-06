@@ -245,11 +245,11 @@ export const PagingTable = forwardRef(
               >
                 <Pagination
                   colorScheme={colorScheme}
+                  size={size === "sm" ? "xs" : size}
                   gridColumnEnd={3}
                   gridColumnStart={2}
                   justifyContent="center"
                   page={state.pagination.pageIndex + 1}
-                  size={size === "sm" ? "xs" : size}
                   total={totalPage}
                   withEdges
                   onChange={(page) => setPageIndex(page - 1)}
@@ -257,14 +257,6 @@ export const PagingTable = forwardRef(
                 />
 
                 <Select
-                  gridColumnEnd={4}
-                  gridColumnStart={3}
-                  items={pageSizeList.map((pageSize) => ({
-                    label: formatPageSizeLabel(pageSize),
-                    value: String(pageSize),
-                  }))}
-                  justifySelf="flex-end"
-                  maxW="3xs"
                   size={
                     size === "xl"
                       ? "lg"
@@ -274,6 +266,14 @@ export const PagingTable = forwardRef(
                           ? "sm"
                           : "xs"
                   }
+                  gridColumnEnd={4}
+                  gridColumnStart={3}
+                  items={pageSizeList.map((pageSize) => ({
+                    label: formatPageSizeLabel(pageSize),
+                    value: String(pageSize),
+                  }))}
+                  justifySelf="flex-end"
+                  maxW="3xs"
                   value={String(state.pagination.pageSize)}
                   onChange={(pageSize) => setPageSize(Number(pageSize))}
                   {...selectProps}

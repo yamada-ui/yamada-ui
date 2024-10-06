@@ -19,9 +19,9 @@ export const StepSeparator = forwardRef<StepSeparatorProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-step__separator", className)}
-        role="separator"
         data-orientation={orientation}
         data-status={status}
+        role="separator"
         __css={css}
         {...rest}
       />

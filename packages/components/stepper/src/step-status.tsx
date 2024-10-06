@@ -120,13 +120,13 @@ StepIcon.__ui__ = "StepIcon"
 const CheckIcon = (props: ComponentProps<"svg">) => {
   return (
     <svg
+      aria-hidden="true"
       fill="currentColor"
       height="1em"
       stroke="currentColor"
       strokeWidth="0"
       viewBox="0 0 20 20"
       width="1em"
-      aria-hidden="true"
       {...props}
     >
       <path

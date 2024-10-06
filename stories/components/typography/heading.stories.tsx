@@ -13,35 +13,35 @@ export default meta
 export const basic: Story = () => {
   return (
     <VStack gap="md">
-      <Heading as="h1" isTruncated size="4xl">
+      <Heading as="h1" size="4xl" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h2" isTruncated size="3xl">
+      <Heading as="h2" size="3xl" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h2" isTruncated size="2xl">
+      <Heading as="h2" size="2xl" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h3" isTruncated size="xl">
+      <Heading as="h3" size="xl" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h3" isTruncated size="lg">
+      <Heading as="h3" size="lg" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h4" isTruncated size="md">
+      <Heading as="h4" size="md" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h5" isTruncated size="sm">
+      <Heading as="h5" size="sm" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
 
-      <Heading as="h6" isTruncated size="xs">
+      <Heading as="h6" size="xs" isTruncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>
     </VStack>
@@ -51,10 +51,10 @@ export const basic: Story = () => {
 export const gradient: Story = () => {
   return (
     <Heading
+      size="2xl"
       bgClip="text"
       bgGradient="linear(to-l, #7928CA, #FF0080)"
       isTruncated
-      size="2xl"
       w="full"
     >
       クリリンのことか……クリリンのことかーーーっ！！！！！

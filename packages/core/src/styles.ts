@@ -1743,11 +1743,15 @@ export type UIStyleProperty = keyof typeof uiStyles
 
 export const uiStyles = {
   apply: { isProcessResult: true, transform: transforms.styles() },
-  isTruncated: { transform: transforms.isTruncated },
   layerStyle: {
     isProcessResult: true,
     transform: transforms.styles("layerStyles"),
   },
+  textStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("textStyles"),
+  },
+  isTruncated: { transform: transforms.isTruncated },
   lineClamp: {
     properties: "--ui-line-clamp",
     static: {
@@ -1757,10 +1761,6 @@ export const uiStyles = {
       WebkitBoxOrient: "vertical",
       WebkitLineClamp: "var(--ui-line-clamp)",
     },
-  },
-  textStyle: {
-    isProcessResult: true,
-    transform: transforms.styles("textStyles"),
   },
   vars: { isProcessSkip: true, transform: transforms.vars },
 } as const satisfies StyleConfigs
@@ -2227,150 +2227,24 @@ export const layoutStyleProperties = [
 
 export interface StyleProps {
   /**
-   * The `@container` of CSS at-rule.
-   * @experimental
+   * Apply other styles defined in `theme.styles`.
    *
    * @example
    * ```jsx
-   * <Box containerType="size">
-   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
+   * <Box apply='mdx.h1'>Box</Box>
    * ```
+   *
+   * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  _container?: {
-    [key: string]: any
-    name?: StringLiteral
-    css?: CSSUIObject
-    aspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
-    maxAspectRatio?: CSS.Property.AspectRatio
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    minAspectRatio?: CSS.Property.AspectRatio
-    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
-    orientation?: "landscape" | "portrait" | StringLiteral
-    query?: StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
-  }[]
+  apply?: Token<StringLiteral>
   /**
-   * The `@media` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box
-   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
-   * >
-   *   Box
-   * </Box>
-   * ```
+   * Apply layer styles defined in `theme.layerStyles`.
    */
-  _media?: {
-    [key: string]: any
-    type?: "all" | "print" | "screen" | "speech" | StringLiteral
-    css?: CSSUIObject
-    anyHover?: "hover" | "none" | StringLiteral
-    anyPointer?: "coarse" | "fine" | "none" | StringLiteral
-    aspectRatio?: CSS.Property.AspectRatio
-    color?: number | StringLiteral
-    colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
-    colorIndex?: number | StringLiteral
-    deviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
-    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    displayMode?:
-      | "browser"
-      | "fullscreen"
-      | "minimal-ui"
-      | "picture-in-picture"
-      | "standalone"
-      | "window-controls-overlay"
-      | StringLiteral
-    dynamicRange?: "high" | "standard" | StringLiteral
-    forcedColors?: "active" | "none" | StringLiteral
-    grid?: "StringLiteral" | 0 | 1
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    hover?: "hover" | "none" | StringLiteral
-    invertedColors?: "inverted" | "none" | StringLiteral
-    maxColor?: number | StringLiteral
-    maxColorIndex?: number | StringLiteral
-    maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxMonochrome?: number | StringLiteral
-    maxResolution?: StringLiteral
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    minColor?: number | StringLiteral
-    minColorIndex?: number | StringLiteral
-    minDeviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minMonochrome?: number | StringLiteral
-    minResolution?: StringLiteral
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
-    monochrome?: number | StringLiteral
-    orientation?: "landscape" | "portrait" | StringLiteral
-    overflowBlock?:
-      | "none"
-      | "optional-paged"
-      | "paged"
-      | "scroll"
-      | StringLiteral
-    overflowInline?: "none" | "scroll" | StringLiteral
-    pointer?: "coarse" | "fine" | "none" | StringLiteral
-    prefersColorScheme?: "dark" | "light" | StringLiteral
-    prefersContrast?:
-      | "custom"
-      | "high"
-      | "low"
-      | "no-preference"
-      | StringLiteral
-    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
-    query?: StringLiteral
-    resolution?: StringLiteral
-    scan?: "interlace" | "progressive" | StringLiteral
-    scripting?: "enabled" | "initial-only" | "none" | StringLiteral
-    update?: "fast" | "none" | "slow" | StringLiteral
-    videoDynamicRange?: "high" | "standard" | StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
-  }[]
+  layerStyle?: Token<StringLiteral, "layerStyles">
   /**
-   * The `@supports` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box containerType="size">
-   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
-   * ```
+   * Apply text styles defined in `theme.textStyles`.
    */
-  _supports?: { css?: CSSUIObject; query?: StringLiteral }[]
+  textStyle?: Token<StringLiteral, "textStyles">
   /**
    * The CSS `accent-color` property.
    *
@@ -2509,17 +2383,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
    */
   appearance?: Token<CSS.Property.Appearance>
-  /**
-   * Apply other styles defined in `theme.styles`.
-   *
-   * @example
-   * ```jsx
-   * <Box apply='mdx.h1'>Box</Box>
-   * ```
-   *
-   * This will apply styles defined in `theme.styles.mdx.h1`
-   */
-  apply?: Token<StringLiteral>
   /**
    * The CSS `aspect-ratio` property.
    *
@@ -4289,10 +4152,6 @@ export interface StyleProps {
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
   /**
-   * Apply layer styles defined in `theme.layerStyles`.
-   */
-  layerStyle?: Token<StringLiteral, "layerStyles">
-  /**
    * The CSS `line-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
@@ -5921,10 +5780,6 @@ export interface StyleProps {
    */
   textSizeAdjust?: Token<CSS.Property.TextSizeAdjust>
   /**
-   * Apply text styles defined in `theme.textStyles`.
-   */
-  textStyle?: Token<StringLiteral, "textStyles">
-  /**
    * The CSS `text-transform` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
@@ -6207,4 +6062,149 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
    */
   zoom?: Token<CSS.Property.Zoom>
+  /**
+   * The `@container` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
+   */
+  _container?: {
+    [key: string]: any
+    name?: StringLiteral
+    css?: CSSUIObject
+    aspectRatio?: CSS.Property.AspectRatio
+    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
+    maxAspectRatio?: CSS.Property.AspectRatio
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    minAspectRatio?: CSS.Property.AspectRatio
+    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    orientation?: "landscape" | "portrait" | StringLiteral
+    query?: StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+  }[]
+  /**
+   * The `@media` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box
+   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
+   * >
+   *   Box
+   * </Box>
+   * ```
+   */
+  _media?: {
+    [key: string]: any
+    type?: "all" | "print" | "screen" | "speech" | StringLiteral
+    css?: CSSUIObject
+    anyHover?: "hover" | "none" | StringLiteral
+    anyPointer?: "coarse" | "fine" | "none" | StringLiteral
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: number | StringLiteral
+    colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
+    colorIndex?: number | StringLiteral
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
+    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+      | StringLiteral
+    dynamicRange?: "high" | "standard" | StringLiteral
+    forcedColors?: "active" | "none" | StringLiteral
+    grid?: "StringLiteral" | 0 | 1
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    hover?: "hover" | "none" | StringLiteral
+    invertedColors?: "inverted" | "none" | StringLiteral
+    maxColor?: number | StringLiteral
+    maxColorIndex?: number | StringLiteral
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxMonochrome?: number | StringLiteral
+    maxResolution?: StringLiteral
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minColor?: number | StringLiteral
+    minColorIndex?: number | StringLiteral
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minMonochrome?: number | StringLiteral
+    minResolution?: StringLiteral
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    monochrome?: number | StringLiteral
+    orientation?: "landscape" | "portrait" | StringLiteral
+    overflowBlock?:
+      | "none"
+      | "optional-paged"
+      | "paged"
+      | "scroll"
+      | StringLiteral
+    overflowInline?: "none" | "scroll" | StringLiteral
+    pointer?: "coarse" | "fine" | "none" | StringLiteral
+    prefersColorScheme?: "dark" | "light" | StringLiteral
+    prefersContrast?:
+      | "custom"
+      | "high"
+      | "low"
+      | "no-preference"
+      | StringLiteral
+    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
+    query?: StringLiteral
+    resolution?: StringLiteral
+    scan?: "interlace" | "progressive" | StringLiteral
+    scripting?: "enabled" | "initial-only" | "none" | StringLiteral
+    update?: "fast" | "none" | "slow" | StringLiteral
+    videoDynamicRange?: "high" | "standard" | StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+  }[]
+  /**
+   * The `@supports` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
+   */
+  _supports?: { css?: CSSUIObject; query?: StringLiteral }[]
 }

@@ -50,10 +50,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="xs" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="sm" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="md" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="lg" />
+      <RangeDatePicker size="xs" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="sm" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="md" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="lg" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -71,10 +71,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" variant="outline" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" variant="filled" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" variant="flushed" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" variant="unstyled" />
+      <RangeDatePicker variant="outline" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -233,10 +233,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <RangeDatePicker isDisabled placeholder="YYYY/MM/DD" variant="outline" />
-      <RangeDatePicker isDisabled placeholder="YYYY/MM/DD" variant="filled" />
-      <RangeDatePicker isDisabled placeholder="YYYY/MM/DD" variant="flushed" />
-      <RangeDatePicker isDisabled placeholder="YYYY/MM/DD" variant="unstyled" />
+      <RangeDatePicker variant="outline" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isDisabled placeholder="YYYY/MM/DD" />
 
       <FormControl isDisabled label="What date would you like to reserve?">
         <RangeDatePicker placeholder="YYYY/MM/DD" />
@@ -248,10 +248,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <RangeDatePicker isReadOnly placeholder="YYYY/MM/DD" variant="outline" />
-      <RangeDatePicker isReadOnly placeholder="YYYY/MM/DD" variant="filled" />
-      <RangeDatePicker isReadOnly placeholder="YYYY/MM/DD" variant="flushed" />
-      <RangeDatePicker isReadOnly placeholder="YYYY/MM/DD" variant="unstyled" />
+      <RangeDatePicker variant="outline" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isReadOnly placeholder="YYYY/MM/DD" />
 
       <FormControl isReadOnly label="What date would you like to reserve?">
         <RangeDatePicker placeholder="YYYY/MM/DD" />
@@ -263,10 +263,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <RangeDatePicker isInvalid placeholder="YYYY/MM/DD" variant="outline" />
-      <RangeDatePicker isInvalid placeholder="YYYY/MM/DD" variant="filled" />
-      <RangeDatePicker isInvalid placeholder="YYYY/MM/DD" variant="flushed" />
-      <RangeDatePicker isInvalid placeholder="YYYY/MM/DD" variant="unstyled" />
+      <RangeDatePicker variant="outline" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isInvalid placeholder="YYYY/MM/DD" />
 
       <FormControl
         errorMessage="This is required."

@@ -142,8 +142,8 @@ export const withColorScheme: Story = () => {
         <SegmentedControl
           key={colorScheme}
           colorScheme={colorScheme}
-          items={items}
           variant="rounded"
+          items={items}
         />
       ))}
     </Grid>

@@ -121,30 +121,30 @@ describe("<PagingTable />", () => {
           <div>
             <p>Page: {pageIndex + 1}</p>
             <button
-              disabled={!getCanPreviousPage()}
               data-testid="previous-button"
+              disabled={!getCanPreviousPage()}
               onClick={previousPage}
             >
               Previous
             </button>
             <button
-              disabled={!getCanNextPage()}
               data-testid="next-button"
+              disabled={!getCanNextPage()}
               onClick={nextPage}
             >
               Next
             </button>
             <input
               type="number"
+              data-testid="page-index-input"
               max={totalPage}
               min={1}
               value={pageSize}
-              data-testid="page-index-input"
               onChange={(e) => setPageIndex(parseInt(e.target.value) - 1)}
             />
             <select
-              value={pageSize}
               data-testid="page-size-select"
+              value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
             >
               {[1, 2, 3, 4, 5].map((size) => (
@@ -216,14 +216,14 @@ describe("<PagingTable />", () => {
   })
 
   test.each([
-    { expected: "lg", size: "xl" },
-    { expected: "md", size: "lg" },
-    { expected: "sm", size: "md" },
-    { expected: "xs", size: "sm" },
+    { size: "xl", expected: "lg" },
+    { size: "lg", expected: "md" },
+    { size: "md", expected: "sm" },
+    { size: "sm", expected: "xs" },
   ])(
     "renders Select component with correct size when table size is $size",
-    ({ expected, size }) => {
-      render(<PagingTable columns={columns} data={data} size={size} />)
+    ({ size, expected }) => {
+      render(<PagingTable size={size} columns={columns} data={data} />)
       expect(screen.getByText("Goku")).toHaveStyle(
         `font-size: var(--ui-fontSizes-${expected})`,
       )

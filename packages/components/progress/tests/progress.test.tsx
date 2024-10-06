@@ -10,20 +10,20 @@ describe("<Progress />", () => {
     render(
       <>
         <Progress
+          size="md"
+          data-testid="progress-a"
           borderRadius="md"
           filledTrackColor="green.500"
           isAnimation
-          size="md"
           value={50}
-          data-testid="progress-a"
         />
         <Progress
           colorScheme="purple"
+          data-testid="progress-b"
           hasStripe
           isStripeAnimation
           rounded="md"
           value={100}
-          data-testid="progress-b"
         />
       </>,
     )
@@ -32,7 +32,7 @@ describe("<Progress />", () => {
   })
 
   test("Whether the value is render correctly", () => {
-    render(<Progress value={50} data-testid="progress" />)
+    render(<Progress data-testid="progress" value={50} />)
 
     const progressChild = screen.getByTestId("progress").children[0]
     expect(progressChild).toHaveStyle({
@@ -41,7 +41,7 @@ describe("<Progress />", () => {
   })
 
   test("Whether the colorScheme is render correctly", () => {
-    render(<Progress colorScheme="red" value={50} data-testid="progress" />)
+    render(<Progress colorScheme="red" data-testid="progress" value={50} />)
     const progressChild = screen.getByTestId("progress").children[0]
     expect(progressChild).toHaveStyle({
       backgroundColor: "rgb(234, 67, 52)",

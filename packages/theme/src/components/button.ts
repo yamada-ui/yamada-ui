@@ -11,6 +11,11 @@ import {
 
 export const Button: ComponentStyle<"Button"> = {
   baseStyle: {
+    cursor: "pointer",
+    fontWeight: "semibold",
+    rounded: "md",
+    transitionDuration: "slower",
+    transitionProperty: "common",
     _disabled: {
       boxShadow: "none",
       cursor: "not-allowed",
@@ -25,16 +30,11 @@ export const Button: ComponentStyle<"Button"> = {
       },
     },
     _readOnly: {
+      cursor: "default",
       _ripple: {
         display: "none",
       },
-      cursor: "default",
     },
-    cursor: "pointer",
-    fontWeight: "semibold",
-    rounded: "md",
-    transitionDuration: "slower",
-    transitionProperty: "common",
   },
 
   sizes: {
@@ -70,8 +70,8 @@ export const Button: ComponentStyle<"Button"> = {
 
   variants: {
     ghost: ({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       errorBorderColor: ec = ["danger.500", "danger.400"],
       theme: t,
     }) => {
@@ -80,6 +80,10 @@ export const Button: ComponentStyle<"Button"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        bg: "transparent",
+        color: isGray(c)
+          ? ["blackAlpha.800", "whiteAlpha.700"]
+          : [`${c}.600`, `${c}.500`],
         _focusVisible: {
           borderColor: "transparent",
           boxShadow: "outline",
@@ -92,40 +96,36 @@ export const Button: ComponentStyle<"Button"> = {
           borderColor: errorBorderColor,
           boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
-        bg: "transparent",
-        color: isGray(c)
-          ? ["blackAlpha.800", "whiteAlpha.700"]
-          : [`${c}.600`, `${c}.500`],
       }
     },
     link: ({ colorScheme: c = "gray" }) => ({
-      _active: {
-        _disabled: {
-          color: [`${c}.600`, `${c}.500`],
-        },
-        color: [`${c}.700`, `${c}.600`],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-      _hover: {
-        _disabled: {
-          textDecoration: "none",
-        },
-        textDecoration: "underline",
-      },
-      _ripple: {
-        display: "none",
-      },
       color: [`${c}.600`, `${c}.500`],
       height: "auto",
       lineHeight: "normal",
       padding: 0,
       verticalAlign: "baseline",
+      _active: {
+        color: [`${c}.700`, `${c}.600`],
+        _disabled: {
+          color: [`${c}.600`, `${c}.500`],
+        },
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _hover: {
+        textDecoration: "underline",
+        _disabled: {
+          textDecoration: "none",
+        },
+      },
+      _ripple: {
+        display: "none",
+      },
     }),
     outline: ({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       errorBorderColor: ec = ["danger.500", "danger.400"],
       theme: t,
     }) => {
@@ -134,11 +134,17 @@ export const Button: ComponentStyle<"Button"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        bg: "transparent",
+        border: "1px solid",
+        borderColor: [`${c}.600`, `${c}.500`],
+        color: isGray(c)
+          ? ["blackAlpha.800", "whiteAlpha.700"]
+          : [`${c}.600`, `${c}.500`],
         _focusVisible: {
+          boxShadow: "outline",
           _invalid: {
             borderColor: "transparent",
           },
-          boxShadow: "outline",
         },
         _hover: {
           bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
@@ -147,17 +153,11 @@ export const Button: ComponentStyle<"Button"> = {
           borderColor: [errorBorderColor, errorBorderColor],
           boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
-        bg: "transparent",
-        border: "1px solid",
-        borderColor: [`${c}.600`, `${c}.500`],
-        color: isGray(c)
-          ? ["blackAlpha.800", "whiteAlpha.700"]
-          : [`${c}.600`, `${c}.500`],
       }
     },
     solid: ({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       errorBorderColor: ec = ["danger.500", "danger.400"],
       theme: t,
     }) => {
@@ -166,41 +166,41 @@ export const Button: ComponentStyle<"Button"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        bg: isGray(c)
+          ? [`${c}.50`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         _focusVisible: {
           borderColor: "transparent",
           boxShadow: "outline",
         },
         _hover: {
+          bg: isGray(c)
+            ? [`${c}.100`, `${c}.800`]
+            : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
           _disabled: {
             bg: isGray(c)
               ? [`${c}.50`, `${c}.700`]
               : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           },
-          bg: isGray(c)
-            ? [`${c}.100`, `${c}.800`]
-            : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
         },
         _invalid: {
           border: "1px solid",
           borderColor: errorBorderColor,
           boxShadow: `0 0 0 1px ${errorBorderColor}`,
         },
-        bg: isGray(c)
-          ? [`${c}.50`, `${c}.700`]
-          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
       }
     },
     unstyled: {
-      _ripple: {
-        display: "none",
-      },
       bg: "none",
       color: "inherit",
       display: "inline",
       lineHeight: "inherit",
       m: 0,
       p: 0,
+      _ripple: {
+        display: "none",
+      },
     },
   },
 

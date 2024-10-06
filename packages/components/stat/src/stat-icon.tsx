@@ -26,8 +26,8 @@ export const StatIcon = forwardRef<StatIconProps, "svg">(
       <Icon
         ref={ref}
         className={cx("ui-stat__icon", className)}
-        viewBox="0 0 24 24"
         aria-label={type === "increase" ? "Increased by" : "Decreased by"}
+        viewBox="0 0 24 24"
         __css={css}
         {...rest}
       >

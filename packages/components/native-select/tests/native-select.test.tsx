@@ -5,7 +5,7 @@ import { NativeOption, NativeSelect } from "../src"
 describe("<NativeSelect />", () => {
   test("NativeSelect renders correctly", async () => {
     await a11y(
-      <NativeSelect placeholder="Options" aria-label="Select value">
+      <NativeSelect aria-label="Select value" placeholder="Options">
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
       </NativeSelect>,
@@ -15,10 +15,10 @@ describe("<NativeSelect />", () => {
   test("should render select with props", async () => {
     const { user } = render(
       <NativeSelect
-        focusBorderColor="green.500"
-        placeholder="Options"
         variant="outline"
         data-testid="select"
+        focusBorderColor="green.500"
+        placeholder="Options"
       >
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
@@ -36,16 +36,16 @@ describe("<NativeSelect />", () => {
   test("should render select without placeholder in options", () => {
     render(
       <NativeSelect
+        variant="outline"
+        data-testid="select"
         focusBorderColor="green.500"
         placeholder="Options"
         placeholderInOptions={false}
-        variant="outline"
-        data-testid="select"
       >
-        <NativeOption value="one" data-testid="option">
+        <NativeOption data-testid="option" value="one">
           Option 1
         </NativeOption>
-        <NativeOption value="two" data-testid="option">
+        <NativeOption data-testid="option" value="two">
           Option 2
         </NativeOption>
       </NativeSelect>,
@@ -54,12 +54,12 @@ describe("<NativeSelect />", () => {
   })
 
   test("should disable select", () => {
-    render(<NativeSelect isDisabled data-testid="select" />)
+    render(<NativeSelect data-testid="select" isDisabled />)
     expect(screen.getByTestId("select")).toBeDisabled()
   })
 
   test("should be read only", () => {
-    render(<NativeSelect isReadOnly data-testid="select" />)
+    render(<NativeSelect data-testid="select" isReadOnly />)
     expect(screen.getByTestId("select")).not.toHaveAttribute(
       "aria-readonly",
       "true",
@@ -68,7 +68,7 @@ describe("<NativeSelect />", () => {
   })
 
   test("should be invalid", () => {
-    render(<NativeSelect isInvalid data-testid="select" />)
+    render(<NativeSelect data-testid="select" isInvalid />)
     expect(screen.getByTestId("select")).toHaveAttribute("aria-invalid", "true")
   })
 
@@ -90,7 +90,7 @@ describe("<NativeSelect />", () => {
       { label: "孫悟飯", value: "孫悟飯" },
       { label: "クリリン", value: "クリリン" },
     ]
-    render(<NativeSelect items={items} data-testid="select" />)
+    render(<NativeSelect data-testid="select" items={items} />)
     const children = screen.getByTestId("select").children
     expect(children).toHaveLength(3)
   })
@@ -107,7 +107,7 @@ describe("<NativeSelect />", () => {
         label: "地球人",
       },
     ]
-    render(<NativeSelect items={items} data-testid="select" />)
+    render(<NativeSelect data-testid="select" items={items} />)
     const children = screen.getByTestId("select").children
     expect(children).toHaveLength(2)
     const optgroup = screen.getByRole("group", { name: "地球人" })

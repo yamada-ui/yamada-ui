@@ -16,6 +16,13 @@ import { cx, valueToPercent } from "@yamada-ui/utils"
 
 interface CircleProgressOptions {
   /**
+   * The CSS `box-size` property.
+   *
+   * @default '6rem'
+   * @deprecated Use `boxSize` instead.
+   */
+  size?: CSSUIProps["boxSize"]
+  /**
    * The CSS `color` property.
    *
    * @default 'primary'
@@ -45,13 +52,6 @@ interface CircleProgressOptions {
    * @default 0
    */
   min?: number
-  /**
-   * The CSS `box-size` property.
-   *
-   * @default '6rem'
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
   /**
    * The animation speed in seconds.
    *

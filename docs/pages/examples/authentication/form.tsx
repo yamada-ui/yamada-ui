@@ -24,11 +24,11 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
       {...rest}
     >
       <Button
+        variant="ghost"
         fontWeight="normal"
         position="absolute"
         right={{ base: "lg", sm: "md" }}
         top={{ base: "lg", sm: "md" }}
-        variant="ghost"
       >
         Login
       </Button>
@@ -75,10 +75,10 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
         </Center>
 
         <Button
+          variant="outline"
           borderColor="border"
           fontWeight="normal"
           leftIcon={<Github fontSize="0.875em" />}
-          variant="outline"
         >
           GitHub
         </Button>
@@ -86,17 +86,17 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
         <Text color="muted" fontSize="sm" textAlign="center">
           By clicking continue, you agree to our{" "}
           <Link
-            _hover={{ color: ["black", "white"] }}
             color="muted"
             textDecoration="underline"
+            _hover={{ color: ["black", "white"] }}
           >
             Terms of Service
           </Link>{" "}
           and{" "}
           <Link
-            _hover={{ color: ["black", "white"] }}
             color="muted"
             textDecoration="underline"
+            _hover={{ color: ["black", "white"] }}
           >
             Privacy Policy
           </Link>

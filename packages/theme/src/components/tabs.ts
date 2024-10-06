@@ -9,6 +9,10 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       flexDirection: orientation === "vertical" ? "row" : "column",
     }),
     tab: ({ isFitted }) => ({
+      flex: isFitted ? 1 : undefined,
+      transitionDuration: "normal",
+      transitionProperty: "common",
+      whiteSpace: "nowrap",
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -19,10 +23,6 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       },
       _hover: { opacity: 0.7 },
       _selected: { _hover: { opacity: 1 } },
-      flex: isFitted ? 1 : undefined,
-      transitionDuration: "normal",
-      transitionProperty: "common",
-      whiteSpace: "nowrap",
     }),
     tabList: ({ align, orientation }) => ({
       flexDirection: orientation === "vertical" ? "column" : "row",
@@ -64,11 +64,11 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
 
       return {
         tab: {
+          borderColor: "transparent",
           _selected: {
             borderColor: "currentColor",
             color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
           },
-          borderColor: "transparent",
           ...(isVertical
             ? {
                 borderEndStyle: "solid",
@@ -90,7 +90,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         },
       }
     },
-    rounded: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => {
+    rounded: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
         getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
@@ -98,21 +98,22 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
 
       return {
         tab: {
+          borderRadius: "full",
           _selected: {
             boxShadow: `inset 0 0 0px 1px ${color}`,
             color,
           },
-          borderRadius: "full",
         },
         tabList: { gap: "sm" },
       }
     },
     "rounded-solid": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       theme: t,
     }) => ({
       tab: {
+        borderRadius: "full",
         _selected: {
           bg: [
             tintColor(`${c}.600`, 24)(t, m),
@@ -120,16 +121,16 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           ],
           color: `white`,
         },
-        borderRadius: "full",
       },
       tabList: { gap: "sm" },
     }),
     "rounded-subtle": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       theme: t,
     }) => ({
       tab: {
+        borderRadius: "full",
         _selected: {
           bg: [
             isGray(c) ? `${c}.50` : `${c}.100`,
@@ -137,7 +138,6 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           ],
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
-        borderRadius: "full",
       },
       tabList: { gap: "sm" },
     }),
@@ -146,6 +146,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
 
       return {
         tab: {
+          borderColor: "transparent",
           _selected: {
             borderColor: "inherit",
             color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
@@ -153,7 +154,6 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
               ? { borderEndColor: ["white", "black"] }
               : { borderBottomColor: ["white", "black"] }),
           },
-          borderColor: "transparent",
           ...(isVertical
             ? {
                 borderStyle: "solid",
@@ -178,8 +178,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       }
     },
     "sticky-solid": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       orientation,
       theme: t,
     }) => {
@@ -187,6 +187,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
 
       return {
         tab: {
+          borderColor: "inherit",
           _notLast: {
             ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
           },
@@ -197,7 +198,6 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
             ],
             color: `white`,
           },
-          borderColor: "inherit",
           ...(isVertical
             ? {
                 borderStyle: "solid",
@@ -219,8 +219,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       }
     },
     "sticky-subtle": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       orientation,
       theme: t,
     }) => {
@@ -228,6 +228,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
 
       return {
         tab: {
+          borderColor: "inherit",
           _notLast: {
             ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
           },
@@ -238,7 +239,6 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
             ],
             color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
           },
-          borderColor: "inherit",
           ...(isVertical
             ? {
                 borderStyle: "solid",

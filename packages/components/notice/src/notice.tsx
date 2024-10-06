@@ -330,14 +330,14 @@ export interface NoticeProps
 
 const Notice: FC<NoticeProps> = ({
   className,
-  closeStrategy = "button",
   colorScheme,
+  variant = "basic",
+  closeStrategy = "button",
   description,
   icon,
   isClosable,
   status,
   title,
-  variant = "basic",
   onClose,
 }) => {
   const isButtonClosable =
@@ -348,12 +348,12 @@ const Notice: FC<NoticeProps> = ({
   return (
     <Alert
       className={cx("ui-notice", className)}
+      colorScheme={colorScheme}
+      variant={variant}
       alignItems="start"
       boxShadow="fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))"
-      colorScheme={colorScheme}
       pe={isButtonClosable ? 8 : undefined}
       status={status}
-      variant={variant}
       onClick={isElementClosable ? onClose : undefined}
     >
       <AlertIcon
@@ -380,9 +380,9 @@ const Notice: FC<NoticeProps> = ({
       {isButtonClosable ? (
         <CloseButton
           className="ui-notice__close-button"
+          size="sm"
           position="absolute"
           right={2}
-          size="sm"
           top={2}
           onClick={(ev) => {
             ev.stopPropagation()

@@ -14,6 +14,10 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       "&[data-status=complete]": {
         bg: [`${c}.500`, `${c}.400`],
       },
+      bg: "border",
+      flex: 1,
+      transitionDuration: "slow",
+      transitionProperty: "common",
       _horizontal: {
         h: 0.5,
         ms: 2,
@@ -24,10 +28,6 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         position: "absolute",
         w: 0.5,
       },
-      bg: "border",
-      flex: 1,
-      transitionDuration: "slow",
-      transitionProperty: "common",
     },
     status: {
       "&[data-status=active]": {
@@ -53,16 +53,19 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       "&:last-of-type:not([data-stretch])": {
         flex: "initial",
       },
-      _horizontal: {
-        alignItems: "center",
-      },
       display: "flex",
       flex: 1,
       flexShrink: 0,
       gap: 2,
       position: "relative",
+      _horizontal: {
+        alignItems: "center",
+      },
     },
     stepper: {
+      display: "flex",
+      justifyContent: "space-between",
+      w: "100%",
       _horizontal: {
         alignItems: "center",
         flexDirection: "row",
@@ -73,9 +76,6 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         flexDirection: "column",
         gap: 0,
       },
-      display: "flex",
-      justifyContent: "space-between",
-      w: "100%",
     },
     title: {
       fontWeight: "medium",

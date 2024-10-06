@@ -302,8 +302,8 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
           maxHeight: "1em",
           maxWidth: "1em",
         },
-        focusable: false,
         "aria-hidden": true,
+        focusable: false,
       }),
     )
 

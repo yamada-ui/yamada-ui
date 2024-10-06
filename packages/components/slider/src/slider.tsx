@@ -145,6 +145,7 @@ export const useSlider = ({
   let {
     id,
     name,
+    "aria-valuetext": ariaValueText,
     defaultValue,
     isReversed,
     max = 100,
@@ -153,17 +154,16 @@ export const useSlider = ({
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
-    "aria-valuetext": ariaValueText,
     onChange,
     onChangeEnd: onChangeEndProp,
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const {
+    "aria-readonly": ariaReadonly,
     disabled,
     readOnly,
     required,
-    "aria-readonly": ariaReadonly,
     onBlur,
     onFocus,
     ...formControlProps
@@ -533,14 +533,14 @@ export const useSlider = ({
         ...props,
         ref: mergeRefs(ref, thumbRef),
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-orientation": orientation,
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
         "aria-valuetext": ariaValueText ?? value.toString(),
         "data-active": dataAttr(isDragging && focusThumbOnChange),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
         onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),

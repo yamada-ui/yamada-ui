@@ -140,9 +140,6 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
                   key={value}
                   as="button"
                   type="button"
-                  _hover={{
-                    bg: ["blackAlpha.200", "whiteAlpha.200"],
-                  }}
                   bg={["blackAlpha.100", "whiteAlpha.100"]}
                   fontSize="sm"
                   h="8"
@@ -150,6 +147,9 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
                   transitionDuration="slower"
                   transitionProperty="background"
                   w="full"
+                  _hover={{
+                    bg: ["blackAlpha.200", "whiteAlpha.200"],
+                  }}
                   onClick={() => onSuggestChange(value)}
                 >
                   {t(`insights.user.${value}`)}
@@ -287,9 +287,6 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
               key={value}
               as="button"
               type="button"
-              _hover={{
-                bg: ["blackAlpha.200", "whiteAlpha.200"],
-              }}
               bg={["blackAlpha.100", "whiteAlpha.100"]}
               fontSize="sm"
               h="8"
@@ -297,6 +294,9 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
               transitionDuration="slower"
               transitionProperty="background"
               w="full"
+              _hover={{
+                bg: ["blackAlpha.200", "whiteAlpha.200"],
+              }}
               onClick={() => onSuggestChange(value)}
             >
               {t(`insights.period.${value}`)}

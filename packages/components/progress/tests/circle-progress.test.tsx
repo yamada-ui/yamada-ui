@@ -9,6 +9,7 @@ describe("<CircleProgress />", () => {
   test("renders correctly without animation", () => {
     render(
       <CircleProgress
+        data-testid="circle-progress-a"
         boxSize="8rem"
         color="green.500"
         isRounded
@@ -17,7 +18,6 @@ describe("<CircleProgress />", () => {
         thickness="0.5rem"
         trackColor="gray.300"
         value={75}
-        data-testid="circle-progress-a"
       />,
     )
     expect(screen.getByTestId("circle-progress-a")).toBeInTheDocument()
@@ -27,14 +27,14 @@ describe("<CircleProgress />", () => {
     render(
       <>
         <CircleProgress
+          data-testid="circle-progress-b"
           isAnimation
           speed={["1s", "3s"]}
-          data-testid="circle-progress-b"
         />
         <CircleProgress
+          data-testid="circle-progress-c"
           isAnimation
           speed={[1, 3]}
-          data-testid="circle-progress-c"
         />
       </>,
     )
@@ -45,9 +45,9 @@ describe("<CircleProgress />", () => {
   test("Whether the boxSize is render correctly", () => {
     render(
       <CircleProgress
+        data-testid="circle-progress"
         boxSize="120px"
         value={50}
-        data-testid="circle-progress"
       />,
     )
 

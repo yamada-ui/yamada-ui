@@ -22,15 +22,15 @@ describe("Event", () => {
       clientY: number
 
       constructor({
+        target,
         clientX,
         clientY,
         identifier,
-        target,
       }: {
+        target: EventTarget
         clientX: number
         clientY: number
         identifier: number
-        target: EventTarget
       }) {
         this.identifier = identifier
         this.target = target
@@ -66,9 +66,9 @@ describe("Event", () => {
 
   test("isMultiTouchEvent identifies multi-touch events", () => {
     const touchEvent = new TouchEvent("touchstart", {
-      changedTouches: [new Touch({ identifier: 1, target: document })],
+      changedTouches: [new Touch({ target: document, identifier: 1 })],
       targetTouches: [],
-      touches: [new Touch({ identifier: 1, target: document })],
+      touches: [new Touch({ target: document, identifier: 1 })],
     })
     expect(isMultiTouchEvent(touchEvent)).toBeFalsy()
   })
@@ -80,10 +80,10 @@ describe("Event", () => {
 
   test("pointFromTouch extracts point from touch event", () => {
     const touch = new Touch({
+      target: document,
       clientX: 100,
       clientY: 200,
       identifier: 1,
-      target: document,
     })
     const touchEvent = new TouchEvent("touchstart", {
       changedTouches: [touch],
@@ -112,10 +112,10 @@ describe("Event", () => {
     })
 
     const touch = new Touch({
+      target: document,
       clientX: 300,
       clientY: 400,
       identifier: 1,
-      target: document,
     })
     const touchEvent = new TouchEvent("touchstart", {
       changedTouches: [touch],

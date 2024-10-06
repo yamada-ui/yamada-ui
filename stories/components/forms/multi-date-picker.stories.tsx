@@ -54,10 +54,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <MultiDatePicker placeholder="extra small size" size="xs" />
-      <MultiDatePicker placeholder="small size" size="sm" />
-      <MultiDatePicker placeholder="medium size" size="md" />
-      <MultiDatePicker placeholder="large size" size="lg" />
+      <MultiDatePicker size="xs" placeholder="extra small size" />
+      <MultiDatePicker size="sm" placeholder="small size" />
+      <MultiDatePicker size="md" placeholder="medium size" />
+      <MultiDatePicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -75,10 +75,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MultiDatePicker placeholder="outline" variant="outline" />
-      <MultiDatePicker placeholder="filled" variant="filled" />
-      <MultiDatePicker placeholder="flushed" variant="flushed" />
-      <MultiDatePicker placeholder="unstyled" variant="unstyled" />
+      <MultiDatePicker variant="outline" placeholder="outline" />
+      <MultiDatePicker variant="filled" placeholder="filled" />
+      <MultiDatePicker variant="flushed" placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -245,10 +245,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <MultiDatePicker isDisabled placeholder="outline" variant="outline" />
-      <MultiDatePicker isDisabled placeholder="filled" variant="filled" />
-      <MultiDatePicker isDisabled placeholder="flushed" variant="flushed" />
-      <MultiDatePicker isDisabled placeholder="unstyled" variant="unstyled" />
+      <MultiDatePicker variant="outline" isDisabled placeholder="outline" />
+      <MultiDatePicker variant="filled" isDisabled placeholder="filled" />
+      <MultiDatePicker variant="flushed" isDisabled placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -260,10 +260,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MultiDatePicker isReadOnly placeholder="outline" variant="outline" />
-      <MultiDatePicker isReadOnly placeholder="filled" variant="filled" />
-      <MultiDatePicker isReadOnly placeholder="flushed" variant="flushed" />
-      <MultiDatePicker isReadOnly placeholder="unstyled" variant="unstyled" />
+      <MultiDatePicker variant="outline" isReadOnly placeholder="outline" />
+      <MultiDatePicker variant="filled" isReadOnly placeholder="filled" />
+      <MultiDatePicker variant="flushed" isReadOnly placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -275,10 +275,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MultiDatePicker isInvalid placeholder="outline" variant="outline" />
-      <MultiDatePicker isInvalid placeholder="filled" variant="filled" />
-      <MultiDatePicker isInvalid placeholder="flushed" variant="flushed" />
-      <MultiDatePicker isInvalid placeholder="unstyled" variant="unstyled" />
+      <MultiDatePicker variant="outline" isInvalid placeholder="outline" />
+      <MultiDatePicker variant="filled" isInvalid placeholder="filled" />
+      <MultiDatePicker variant="flushed" isInvalid placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

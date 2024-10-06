@@ -141,6 +141,7 @@ export const TotalChart = memo(
             </Grid>
 
             <IconButton
+              variant="ghost"
               icon={
                 isAreaChart ? (
                   <ChartColumn fontSize="1.5em" />
@@ -149,7 +150,6 @@ export const TotalChart = memo(
                 )
               }
               isDisabled={isEmpty || isInvalid || isSingle}
-              variant="ghost"
               onClick={toggle}
             />
           </HStack>

@@ -19,13 +19,13 @@ export const Tabs = memo(
           {documentTabs.map(({ slug, title }) => (
             <Tab key={slug} as="li" p="0">
               <NextLink
+                href={slug}
+                color="inherit"
+                px="md"
+                py="sm"
                 _hover={{
                   textDecoration: "inherit",
                 }}
-                color="inherit"
-                href={slug}
-                px="md"
-                py="sm"
               >
                 {title}
               </NextLink>

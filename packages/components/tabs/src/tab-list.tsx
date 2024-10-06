@@ -66,8 +66,8 @@ export const TabList = forwardRef<TabListProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-tabs__list", className)}
-        role="tablist"
         aria-orientation={orientation}
+        role="tablist"
         __css={css}
         {...tabListProps}
         {...rest}

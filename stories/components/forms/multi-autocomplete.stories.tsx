@@ -80,10 +80,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <MultiAutocomplete placeholder="extra small size" size="xs" />
-      <MultiAutocomplete placeholder="small size" size="sm" />
-      <MultiAutocomplete placeholder="medium size" size="md" />
-      <MultiAutocomplete placeholder="large size" size="lg" />
+      <MultiAutocomplete size="xs" placeholder="extra small size" />
+      <MultiAutocomplete size="sm" placeholder="small size" />
+      <MultiAutocomplete size="md" placeholder="medium size" />
+      <MultiAutocomplete size="lg" placeholder="large size" />
     </>
   )
 }
@@ -91,10 +91,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MultiAutocomplete placeholder="outline" variant="outline" />
-      <MultiAutocomplete placeholder="filled" variant="filled" />
-      <MultiAutocomplete placeholder="flushed" variant="flushed" />
-      <MultiAutocomplete placeholder="unstyled" variant="unstyled" />
+      <MultiAutocomplete variant="outline" placeholder="outline" />
+      <MultiAutocomplete variant="filled" placeholder="filled" />
+      <MultiAutocomplete variant="flushed" placeholder="flushed" />
+      <MultiAutocomplete variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -493,10 +493,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <MultiAutocomplete isDisabled placeholder="outline" variant="outline" />
-      <MultiAutocomplete isDisabled placeholder="filled" variant="filled" />
-      <MultiAutocomplete isDisabled placeholder="flushed" variant="flushed" />
-      <MultiAutocomplete isDisabled placeholder="unstyled" variant="unstyled" />
+      <MultiAutocomplete variant="outline" isDisabled placeholder="outline" />
+      <MultiAutocomplete variant="filled" isDisabled placeholder="filled" />
+      <MultiAutocomplete variant="flushed" isDisabled placeholder="flushed" />
+      <MultiAutocomplete variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -511,10 +511,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MultiAutocomplete isReadOnly placeholder="outline" variant="outline" />
-      <MultiAutocomplete isReadOnly placeholder="filled" variant="filled" />
-      <MultiAutocomplete isReadOnly placeholder="flushed" variant="flushed" />
-      <MultiAutocomplete isReadOnly placeholder="unstyled" variant="unstyled" />
+      <MultiAutocomplete variant="outline" isReadOnly placeholder="outline" />
+      <MultiAutocomplete variant="filled" isReadOnly placeholder="filled" />
+      <MultiAutocomplete variant="flushed" isReadOnly placeholder="flushed" />
+      <MultiAutocomplete variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -529,10 +529,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MultiAutocomplete isInvalid placeholder="outline" variant="outline" />
-      <MultiAutocomplete isInvalid placeholder="filled" variant="filled" />
-      <MultiAutocomplete isInvalid placeholder="flushed" variant="flushed" />
-      <MultiAutocomplete isInvalid placeholder="unstyled" variant="unstyled" />
+      <MultiAutocomplete variant="outline" isInvalid placeholder="outline" />
+      <MultiAutocomplete variant="filled" isInvalid placeholder="filled" />
+      <MultiAutocomplete variant="flushed" isInvalid placeholder="flushed" />
+      <MultiAutocomplete variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

@@ -3,9 +3,9 @@ export const SPONSORS = {
   GOLD: [],
   PLATINUM: [
     {
-      alt: "Avap Co., Ltd.",
       href: "https://avap.co.jp",
       src: "/sponsors/avap.svg",
+      alt: "Avap Co., Ltd.",
     },
   ],
   SILVER: [],

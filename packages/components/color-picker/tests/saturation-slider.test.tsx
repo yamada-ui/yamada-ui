@@ -96,8 +96,8 @@ describe("<SaturationSlider />", () => {
     const slider = screen.getByRole("slider")
 
     await drag(user)({
-      coords: (i) => ({ x: i * 100, y: i * -100 }),
       target: slider,
+      coords: (i) => ({ x: i * 100, y: i * -100 }),
     })
 
     await waitFor(() => {

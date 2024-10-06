@@ -1,7 +1,7 @@
-import { Link as LinkIcon } from "@yamada-ui/lucide"
-import { Link, Text } from "@yamada-ui/react"
 import type { HeadingProps } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Link as LinkIcon } from "@yamada-ui/lucide"
+import { Link, Text } from "@yamada-ui/react"
 
 export interface LinkedHeadingProps extends HeadingProps {}
 
@@ -24,16 +24,16 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({
 
       {id ? (
         <Link
-          href={`#${id}`}
-          aria-label="anchor"
-          display={{ base: "inline-block", md: "none" }}
-          ps="2"
-          color="link"
-          opacity="0"
-          _hover={{ opacity: 1 }}
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "none" }}
+          _hover={{ opacity: 1 }}
+          color="link"
+          display={{ base: "inline-block", md: "none" }}
+          href={`#${id}`}
+          opacity="0"
+          ps="2"
           tabIndex={-1}
+          aria-label="anchor"
         >
           <LinkIcon fontSize="0.875em" />
         </Link>

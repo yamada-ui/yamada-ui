@@ -1,106 +1,106 @@
 import type { CSSUIObject } from "@yamada-ui/react"
 
 export const mdx: { [key: string]: CSSUIObject } = {
-  h1: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    mt: "12",
-    mb: "6",
-    fontSize: "4xl",
-  },
-  h2: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    mt: "12",
-    mb: "6",
-    fontSize: "3xl",
-  },
-  h3: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    mt: "8",
-    mb: "6",
-    fontSize: "2xl",
-  },
-  h4: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    mt: "6",
-    mb: "4",
-    fontSize: "xl",
-  },
-  h5: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    my: "6",
-    fontSize: "lg",
-  },
-  h6: {
-    fontFamily: "heading",
-    fontWeight: "bold",
-    my: "6",
-    fontSize: "md",
-  },
-  p: {
-    my: "6",
-    lineHeight: "tall",
-    "blockquote &": {
-      mt: "0",
-    },
-  },
-  strong: {
-    fontWeight: "semibold",
-  },
-  code: {
-    fontFamily: "body",
-    color: ["violet.600", "purple.300"],
-  },
   a: {
-    color: "link",
     code: {
       color: "inherit !important",
     },
+    color: "link",
+  },
+  alert: {
+    "& p": { my: "0" },
+    my: "6",
+  },
+  code: {
+    color: ["violet.600", "purple.300"],
+    fontFamily: "body",
+  },
+  h1: {
+    fontFamily: "heading",
+    fontSize: "4xl",
+    fontWeight: "bold",
+    mb: "6",
+    mt: "12",
+  },
+  h2: {
+    fontFamily: "heading",
+    fontSize: "3xl",
+    fontWeight: "bold",
+    mb: "6",
+    mt: "12",
+  },
+  h3: {
+    fontFamily: "heading",
+    fontSize: "2xl",
+    fontWeight: "bold",
+    mb: "6",
+    mt: "8",
+  },
+  h4: {
+    fontFamily: "heading",
+    fontSize: "xl",
+    fontWeight: "bold",
+    mb: "4",
+    mt: "6",
+  },
+  h5: {
+    fontFamily: "heading",
+    fontSize: "lg",
+    fontWeight: "bold",
+    my: "6",
+  },
+  h6: {
+    fontFamily: "heading",
+    fontSize: "md",
+    fontWeight: "bold",
+    my: "6",
   },
   hr: {
     my: "8",
   },
-  ul: {
-    my: "6",
-    gap: "3",
-    "& ul,ol": {
-      mt: "2",
-      mb: "0",
-    },
-  },
-  ol: {
-    my: "6",
-    gap: "3",
-    "& ul,ol": {
-      mt: "2",
-      mb: "0",
-    },
-  },
   li: {
     "& > p": { my: "0" },
   },
-  "table-container": {
+  ol: {
+    "& ul,ol": {
+      mb: "0",
+      mt: "2",
+    },
+    gap: "3",
     my: "6",
-    th: {
-      fontFamily: "body",
-      fontWeight: "semibold",
-      textTransform: "none",
-      letterSpacing: "normal",
+  },
+  p: {
+    "blockquote &": {
+      mt: "0",
     },
-    td: {
-      verticalAlign: "middle",
-      whiteSpace: "normal",
-    },
+    lineHeight: "tall",
+    my: "6",
+  },
+  strong: {
+    fontWeight: "semibold",
   },
   table: {
     w: "full",
   },
-  alert: {
+  "table-container": {
     my: "6",
-    "& p": { my: "0" },
+    td: {
+      verticalAlign: "middle",
+      whiteSpace: "normal",
+    },
+    th: {
+      fontFamily: "body",
+      fontWeight: "semibold",
+      letterSpacing: "normal",
+      textTransform: "none",
+    },
+  },
+  ul: {
+    "& ul,ol": {
+      mb: "0",
+      mt: "2",
+    },
+    gap: "3",
+    my: "6",
   },
 }

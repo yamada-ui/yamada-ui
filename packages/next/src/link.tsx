@@ -1,13 +1,13 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
+import type { LinkProps as NextLinkProps } from "next/link"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
-import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import type { LinkProps as NextLinkProps } from "next/link"
 import NextLink from "next/link"
 
 export interface LinkProps

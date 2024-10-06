@@ -20,8 +20,8 @@ export const SocialMediaCard = memo(() => {
       variant="outline"
     >
       <CardHeader
-        flexDirection={{ base: "row", sm: "column" }}
         alignItems={{ base: "center", sm: "flex-start" }}
+        flexDirection={{ base: "row", sm: "column" }}
       >
         <HStack flex="1">
           <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />

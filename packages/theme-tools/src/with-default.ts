@@ -1,10 +1,10 @@
-import type { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
+import type { ComponentDefaultProps, Theme, UsageTheme } from "@yamada-ui/core"
 import type { Union } from "@yamada-ui/utils"
 import { isArray, merge } from "@yamada-ui/utils"
 
 export function withDefaultSize({
-  size,
   components,
+  size,
 }: {
   size: ComponentDefaultProps["size"]
   components?: Union<keyof Theme["components"]>[]
@@ -23,8 +23,8 @@ export function withDefaultSize({
 }
 
 export function withDefaultVariant({
-  variant,
   components,
+  variant,
 }: {
   variant: ComponentDefaultProps["variant"]
   components?: Union<keyof Theme["components"]>[]
@@ -63,8 +63,8 @@ export function withDefaultColorScheme({
 }
 
 export function withDefaultProps({
-  defaultProps,
   components,
+  defaultProps,
 }: {
   defaultProps: ComponentDefaultProps
   components?: Union<keyof Theme["components"]>[]

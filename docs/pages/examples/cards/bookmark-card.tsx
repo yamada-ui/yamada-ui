@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   Heading,
-  Text,
-  VStack,
-  Spacer,
   IconButton,
   Image,
+  Spacer,
+  Text,
+  VStack,
 } from "@yamada-ui/react"
 import { memo } from "react"
 
@@ -31,15 +31,15 @@ export const BookmarkCard = memo(() => {
           <Text color="muted">Tokyo, Japan</Text>
         </VStack>
 
-        <IconButton variant="ghost" icon={<Bookmark fontSize="2xl" />} />
+        <IconButton icon={<Bookmark fontSize="2xl" />} variant="ghost" />
       </CardHeader>
 
       <CardBody>
         <Image
-          src="https://images.pexels.com/photos/248195/pexels-photo-248195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="Japan"
-          w="full"
           rounded="md"
+          src="https://images.pexels.com/photos/248195/pexels-photo-248195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          w="full"
         />
       </CardBody>
 

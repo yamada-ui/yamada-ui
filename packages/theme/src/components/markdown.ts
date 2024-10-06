@@ -2,27 +2,43 @@ import type { ComponentStyle } from "@yamada-ui/core"
 
 export const Markdown: ComponentStyle<"Markdown"> = {
   baseStyle: {
-    w: "full",
     "*:first-of-type": {
       mt: "0 !important",
     },
-    "h1, h2, h3, h4, h5, h6": {
-      mt: "24px",
-      mb: "16px",
-      fontWeight: "semibold",
-      lineHeight: "1.25",
+    a: { color: "link", textDecoration: "none" },
+    blockquote: {
+      borderLeft: "0.25em solid",
+      borderLeftColor: "border",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      px: "1em",
+    },
+    "blockquote>:last-child": { mb: 0 },
+    "code:not(pre > *)": {
+      bg: ["blackAlpha.200", "whiteAlpha.300"],
+      fontFamily: "mono",
+      fontSize: "85%",
+      m: 0,
+      px: "0.4em",
+      py: "0.2em",
+      rounded: "6px",
     },
     h1: {
-      pb: ".3em",
-      fontSize: "2em",
       borderBottom: "1px solid",
       borderBottomColor: "border",
+      fontSize: "2em",
+      pb: ".3em",
+    },
+    "h1, h2, h3, h4, h5, h6": {
+      fontWeight: "semibold",
+      lineHeight: "1.25",
+      mb: "16px",
+      mt: "24px",
     },
     h2: {
-      pb: ".3em",
-      fontSize: "1.5em",
       borderBottom: "1px solid",
       borderBottomColor: "border",
+      fontSize: "1.5em",
+      pb: ".3em",
     },
     h3: {
       fontSize: "1.25em",
@@ -36,51 +52,35 @@ export const Markdown: ComponentStyle<"Markdown"> = {
     h6: {
       fontSize: "0.85em",
     },
-    "p, blockquote, ul, ol, dl, table, pre, details": {
-      mt: "0px",
-      mb: "16px",
-    },
-    strong: { fontWeight: "semibold" },
-    a: { color: "link", textDecoration: "none" },
-    img: { maxW: "100%", boxSizing: "content-box" },
-    blockquote: {
-      px: "1em",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      borderLeft: "0.25em solid",
-      borderLeftColor: "border",
-    },
-    "blockquote>:last-child": { mb: 0 },
-    ul: {
-      pl: "2em",
-      listStyleType: "disc",
-    },
+    hr: { bg: "border", border: 0, h: "0.25em", my: "24px", p: 0 },
+    img: { boxSizing: "content-box", maxW: "100%" },
     "li + li": { mt: "0.25em" },
-    "code:not(pre > *)": {
-      py: "0.2em",
-      px: "0.4em",
-      m: 0,
-      fontFamily: "mono",
-      fontSize: "85%",
-      bg: ["blackAlpha.200", "whiteAlpha.300"],
-      rounded: "6px",
+    "p, blockquote, ul, ol, dl, table, pre, details": {
+      mb: "16px",
+      mt: "0px",
     },
-    pre: { mt: "16px", fontSize: "92.5%", lineHeight: 1.45, rounded: "6px" },
-    hr: { h: "0.25em", p: 0, my: "24px", bg: "border", border: 0 },
+    pre: { fontSize: "92.5%", lineHeight: 1.45, mt: "16px", rounded: "6px" },
+    strong: { fontWeight: "semibold" },
     table: {
       display: "block",
-      w: "max-content",
       maxW: "100%",
       overflow: "auto",
+      w: "max-content",
     },
-    tr: { borderTop: "1px solid", borderTopColor: "border" },
     th: {
       fontWeight: "semibold",
     },
     "th, td": {
-      py: "6px",
-      px: "13px",
       border: "1px solid",
       borderColor: "border",
+      px: "13px",
+      py: "6px",
     },
+    tr: { borderTop: "1px solid", borderTopColor: "border" },
+    ul: {
+      listStyleType: "disc",
+      pl: "2em",
+    },
+    w: "full",
   },
 }

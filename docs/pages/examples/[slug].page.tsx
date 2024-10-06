@@ -1,11 +1,18 @@
+import type {
+  GetStaticPathsResult,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next"
+import type { Slug } from "./data"
 import { ArrowRight, Blocks } from "@yamada-ui/lucide"
 import {
   Avatar,
   AvatarGroup,
   Box,
   Center,
-  HStack,
   Heading,
+  HStack,
   ScrollArea,
   SegmentedControl,
   SegmentedControlButton,
@@ -13,45 +20,37 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import type {
-  GetStaticPathsContext,
-  GetStaticPathsResult,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  NextPage,
-} from "next"
+import { Section } from "components/layouts"
+import { Seo } from "components/media-and-icons"
+import { NextLinkButton } from "components/navigation"
+import { CONSTANT } from "constant"
+import { PageProvider, useI18n } from "contexts"
+import { TopLayout } from "layouts"
 import Link from "next/link"
 import { useMemo } from "react"
+import { getStaticCommonProps } from "utils/next"
 import { Authentication } from "./authentication"
 import { Cards } from "./cards"
 import { Dashboard } from "./dashboard"
-import { SLUGS, AUTHORS } from "./data"
-import type { Slug } from "./data"
+import { AUTHORS, SLUGS } from "./data"
 import { Forms } from "./forms"
 import { Mail } from "./mail"
 import { Music } from "./music"
 import { Playground } from "./playground"
 import { Tasks } from "./tasks"
-import { Section } from "components/layouts"
-import { SEO } from "components/media-and-icons"
-import { NextLinkButton } from "components/navigation"
-import { CONSTANT } from "constant"
-import { useI18n, PageProvider } from "contexts"
-import { TopLayout } from "layouts"
-import { getStaticCommonProps } from "utils/next"
 
 type Paths = GetStaticPathsResult["paths"]
 
 const generatePaths = (slug: Slug): Paths =>
   CONSTANT.I18N.LOCALES.map(({ value }) => ({
-    params: { slug },
     locale: value,
+    params: { slug },
   }))
 
-export const getStaticPaths = async ({}: GetStaticPathsContext) => {
+export const getStaticPaths = () => {
   const paths: Paths = SLUGS.flatMap((slug) => generatePaths(slug))
 
-  return { paths, fallback: false }
+  return { fallback: false, paths }
 }
 
 export const getStaticProps = async ({
@@ -72,8 +71,8 @@ type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const Page: NextPage<PageProps> = ({
   currentVersion,
-  slug: currentSlug,
   documentTree,
+  slug: currentSlug,
 }) => {
   const { t, tc } = useI18n()
 
@@ -111,17 +110,17 @@ const Page: NextPage<PageProps> = ({
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
-        <SEO
-          title={t(`examples.${currentSlug}.title`)}
+        <Seo
           description={t("examples.description")}
+          title={t(`examples.${currentSlug}.title`)}
         />
 
-        <Section pt="xl" pb="0">
+        <Section pb="0" pt="xl">
           <VStack alignItems="center">
             <Heading
               as="h1"
-              fontSize={{ base: "7xl", lg: "6xl", md: "5xl", sm: "4xl" }}
               fontFamily="heading"
+              fontSize={{ base: "7xl", sm: "4xl", md: "5xl", lg: "6xl" }}
               fontWeight="extrabold"
               textAlign="center"
               textTransform={{ base: "inherit", md: "capitalize" }}
@@ -134,11 +133,11 @@ const Page: NextPage<PageProps> = ({
             </Heading>
 
             <Text
-              w="full"
-              maxW="3xl"
-              fontSize={{ base: "xl", sm: "lg" }}
               color={["blackAlpha.600", "whiteAlpha.600"]}
+              fontSize={{ base: "xl", sm: "lg" }}
+              maxW="3xl"
               textAlign="center"
+              w="full"
             >
               {t("examples.hero.message")}
             </Text>
@@ -149,37 +148,37 @@ const Page: NextPage<PageProps> = ({
             justifyContent="center"
           >
             <NextLinkButton
-              size="xl"
               colorScheme="primary"
-              w={{ base: "auto", md: "full" }}
-              rightIcon={<ArrowRight />}
               href="/getting-started"
+              rightIcon={<ArrowRight />}
+              size="xl"
+              w={{ base: "auto", md: "full" }}
             >
               {t("examples.hero.started")}
             </NextLinkButton>
 
             <NextLinkButton
+              href="/components"
+              rightIcon={<Blocks />}
               size="xl"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<Blocks />}
-              href="/components"
             >
               {t("examples.hero.components")}
             </NextLinkButton>
           </HStack>
         </Section>
 
-        <Section display="block" pt="xl" pb="0">
-          <ScrollArea as={Center} type="never" tabIndex={-1} m="0 auto">
-            <SegmentedControl as="nav" variant="simple" value={currentSlug}>
+        <Section display="block" pb="0" pt="xl">
+          <ScrollArea as={Center} type="never" m="0 auto" tabIndex={-1}>
+            <SegmentedControl as="nav" value={currentSlug} variant="simple">
               {SLUGS.map((slug) => {
                 return (
                   <SegmentedControlButton
                     key={slug}
                     as={Link}
+                    href={`/examples/${slug}`}
                     tabIndex={-1}
                     value={slug}
-                    href={`/examples/${slug}`}
                   >
                     {t(`examples.${slug}.title`)}
                   </SegmentedControlButton>
@@ -188,31 +187,31 @@ const Page: NextPage<PageProps> = ({
             </SegmentedControl>
           </ScrollArea>
 
-          <Box mt="normal" borderWidth="1px" rounded="md" overflow="hidden">
+          <Box borderWidth="1px" mt="normal" overflow="hidden" rounded="md">
             {examples}
           </Box>
         </Section>
 
         {AUTHORS[currentSlug].length ? (
-          <Center mt="normal" gap="sm">
+          <Center gap="sm" mt="normal">
             <Text color="muted">{t("examples.author.description")}</Text>
 
             <AvatarGroup borderColor={["white", "black"]} gap="-3">
-              {AUTHORS[currentSlug].map(({ name, src, href }) => (
+              {AUTHORS[currentSlug].map(({ name, href, src }) => (
                 <Box
                   key={name}
-                  position="relative"
-                  borderRadius="full"
                   sx={{ borderWidth: { base: "5px", sm: "3px" } }}
+                  borderRadius="full"
+                  position="relative"
                 >
-                  <Tooltip label={name} placement="top" flexShrink="0">
+                  <Tooltip flexShrink="0" label={name} placement="top">
                     <Avatar
                       as="a"
-                      target="_blank"
-                      href={href}
                       name={name}
-                      src={src}
                       boxSize="10"
+                      href={href}
+                      src={src}
+                      target="_blank"
                     />
                   </Tooltip>
                 </Box>

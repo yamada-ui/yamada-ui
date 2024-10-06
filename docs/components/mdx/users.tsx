@@ -1,22 +1,27 @@
-import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
-import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
+import type {
+  AvatarProps,
+  GridProps,
+  StackProps,
+  StringLiteral,
+} from "@yamada-ui/react"
 import type { FC } from "react"
+import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 
 export interface UserProps extends StackProps, Pick<AvatarProps, "name"> {
-  icon?: string
   description: string
   github?: string
+  icon?: string
   x?: string
 }
 
 export const User: FC<UserProps> = ({
   name,
-  icon,
   description,
   github,
+  icon,
   x,
   ...rest
 }) => {
@@ -30,16 +35,16 @@ export const User: FC<UserProps> = ({
         <HStack fontSize="sm" gap="2">
           {github ? (
             <Link
-              href={github}
-              target="_blank"
-              aria-label={`GitHub profile of ${name}`}
-              color={[`primary.600`, `primary.400`]}
-              _hover={{
-                color: [`primary.500`, `primary.300`],
-              }}
               _active={{
                 color: [`primary.700`, `primary.500`],
               }}
+              _hover={{
+                color: [`primary.500`, `primary.300`],
+              }}
+              color={[`primary.600`, `primary.400`]}
+              href={github}
+              target="_blank"
+              aria-label={`GitHub profile of ${name}`}
             >
               <Github />
             </Link>
@@ -47,23 +52,23 @@ export const User: FC<UserProps> = ({
 
           {x ? (
             <Link
-              href={x}
-              target="_blank"
-              aria-label={`X ${name}`}
-              color={[`primary.600`, `primary.400`]}
-              _hover={{
-                color: [`primary.500`, `primary.300`],
-              }}
               _active={{
                 color: [`primary.700`, `primary.500`],
               }}
+              _hover={{
+                color: [`primary.500`, `primary.300`],
+              }}
+              color={[`primary.600`, `primary.400`]}
+              href={x}
+              target="_blank"
+              aria-label={`X ${name}`}
             >
               <X />
             </Link>
           ) : null}
         </HStack>
 
-        <Text fontSize="sm" lineClamp={2} color="muted">
+        <Text color="muted" fontSize="sm" lineClamp={2}>
           {description}
         </Text>
       </VStack>
@@ -72,7 +77,7 @@ export const User: FC<UserProps> = ({
 }
 
 export interface UsersProps extends GridProps {
-  type: "maintainers" | "members"
+  type: "maintainers" | "members" | StringLiteral
 }
 
 export const Users: FC<UsersProps> = ({ type, ...rest }) => {
@@ -87,9 +92,9 @@ export const Users: FC<UsersProps> = ({ type, ...rest }) => {
 
   return (
     <Grid
+      gap="6"
       my="6"
       templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(1, 1fr)" }}
-      gap="6"
       {...rest}
     >
       {users.map(({ name, description, github, x }) => (
@@ -97,8 +102,8 @@ export const Users: FC<UsersProps> = ({ type, ...rest }) => {
           key={github.id}
           name={name[locale]}
           description={description[locale]}
-          icon={github.icon}
           github={github.url}
+          icon={github.icon}
           x={x?.url}
         />
       ))}

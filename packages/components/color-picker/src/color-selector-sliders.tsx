@@ -1,30 +1,30 @@
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ForwardedRef } from "react"
 import type { AlphaSliderProps } from "./alpha-slider"
-import { AlphaSlider } from "./alpha-slider"
 import type { HueSliderProps } from "./hue-slider"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { AlphaSlider } from "./alpha-slider"
 import { HueSlider } from "./hue-slider"
 import { useColorSelectorContext } from "./use-color-selector"
 
 interface ColorSelectorSlidersOptions {
   /**
-   * Ref for the hue slider component.
-   */
-  hueSliderRef?: ForwardedRef<HTMLInputElement>
-  /**
-   * Props for the hue slider component.
-   */
-  hueSliderProps?: Omit<HueSliderProps, "value" | "defaultValue">
-  /**
    * Ref for the alpha slider component.
    */
   alphaSliderRef?: ForwardedRef<HTMLInputElement>
   /**
+   * Ref for the hue slider component.
+   */
+  hueSliderRef?: ForwardedRef<HTMLInputElement>
+  /**
    * Props for the alpha slider component.
    */
-  alphaSliderProps?: Omit<AlphaSliderProps, "value" | "defaultValue">
+  alphaSliderProps?: Omit<AlphaSliderProps, "defaultValue" | "value">
+  /**
+   * Props for the hue slider component.
+   */
+  hueSliderProps?: Omit<HueSliderProps, "defaultValue" | "value">
 }
 
 export interface ColorSelectorSlidersProps
@@ -38,15 +38,15 @@ export const ColorSelectorSliders = forwardRef<
   (
     {
       className,
-      hueSliderRef,
-      hueSliderProps,
       alphaSliderRef,
+      hueSliderRef,
       alphaSliderProps,
+      hueSliderProps,
       ...rest
     },
     ref,
   ) => {
-    let { size, withAlpha, getHueSliderProps, getAlphaSliderProps, styles } =
+    let { size, styles, withAlpha, getAlphaSliderProps, getHueSliderProps } =
       useColorSelectorContext()
 
     if (size === "full") size = "lg"
@@ -65,16 +65,16 @@ export const ColorSelectorSliders = forwardRef<
         {...rest}
       >
         <HueSlider
-          size={size}
           className="ui-color-selector__hue-slider"
+          size={size}
           __css={{ ...styles.hueSlider }}
           {...getHueSliderProps(hueSliderProps, hueSliderRef)}
         />
 
         {withAlpha ? (
           <AlphaSlider
-            size={size}
             className="ui-color-selector__alpha-slider"
+            size={size}
             __css={{ ...styles.alphaSlider }}
             {...getAlphaSliderProps(alphaSliderProps, alphaSliderRef)}
           />

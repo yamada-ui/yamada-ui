@@ -1,33 +1,33 @@
+import type { GridItemProps, GridProps } from "@yamada-ui/react"
+import type { DocumentNavigation } from "mdx"
+import type { FC } from "react"
 import {
   Box,
   ChevronIcon,
+  forwardRef,
   Grid,
   GridItem,
   Text,
-  forwardRef,
 } from "@yamada-ui/react"
-import type { GridItemProps, GridProps } from "@yamada-ui/react"
+import { useI18n, usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
-import type { FC } from "react"
-import { useI18n, usePage } from "contexts"
-import type { DocumentNavigation } from "mdx"
 
 export interface PaginationProps extends GridProps {}
 
 export const Pagination = memo(
   forwardRef<PaginationProps, "div">(({ ...rest }, ref) => {
     const { documentPagination } = usePage()
-    const { prev, next } = documentPagination ?? {}
+    const { next, prev } = documentPagination ?? {}
 
     if (!prev && !next) return
 
     return (
       <Grid
         ref={ref}
-        templateColumns="repeat(2, 1fr)"
         gap={{ base: "lg", sm: "md" }}
         mt="xl"
+        templateColumns="repeat(2, 1fr)"
         {...rest}
       >
         {prev ? <PaginationItem {...prev} isPrev /> : <Box />}
@@ -45,9 +45,9 @@ export interface PaginationItemProps
 }
 
 const PaginationItem: FC<PaginationItemProps> = ({
-  title,
-  slug,
   isPrev,
+  slug,
+  title,
   ...rest
 }) => {
   const { t } = useI18n()
@@ -57,19 +57,19 @@ const PaginationItem: FC<PaginationItemProps> = ({
   return (
     <GridItem
       as={Link}
-      href={slug}
+      _focus={{ outline: "none" }}
+      _focusVisible={{ boxShadow: "outline" }}
       display="flex"
       flexDirection="column"
       gap="sm"
+      href={slug}
       rounded="md"
-      _focus={{ outline: "none" }}
-      _focusVisible={{ boxShadow: "outline" }}
       {...rest}
     >
       <Text
         as="span"
-        fontSize="sm"
         color="muted"
+        fontSize="sm"
         {...(isPrev ? { ms: "1" } : { me: "1" })}
       >
         {t(`component.pagination.${isPrev ? "prev" : "next"}`)}
@@ -77,23 +77,23 @@ const PaginationItem: FC<PaginationItemProps> = ({
 
       <Text
         as="span"
-        display="flex"
-        alignItems="center"
-        gap="0"
-        fontSize={{ base: "lg", sm: "md" }}
-        fontWeight="semibold"
-        transitionProperty="colors"
-        transitionDuration="fast"
-        color={[`primary.500`, `primary.500`]}
-        _hover={{
-          color: [`primary.600`, `primary.600`],
-        }}
         _active={{
           color: [`primary.700`, `primary.700`],
         }}
+        _hover={{
+          color: [`primary.600`, `primary.600`],
+        }}
+        alignItems="center"
+        color={[`primary.500`, `primary.500`]}
+        display="flex"
+        fontSize={{ base: "lg", sm: "md" }}
+        fontWeight="semibold"
+        gap="0"
+        transitionDuration="fast"
+        transitionProperty="colors"
       >
         {isPrev ? (
-          <ChevronIcon transform="rotate(90deg)" fontSize="1.3em" />
+          <ChevronIcon fontSize="1.3em" transform="rotate(90deg)" />
         ) : null}
 
         <Text as="span" lineClamp={1}>
@@ -101,7 +101,7 @@ const PaginationItem: FC<PaginationItemProps> = ({
         </Text>
 
         {!isPrev ? (
-          <ChevronIcon transform="rotate(-90deg)" fontSize="1.3em" />
+          <ChevronIcon fontSize="1.3em" transform="rotate(-90deg)" />
         ) : null}
       </Text>
     </GridItem>

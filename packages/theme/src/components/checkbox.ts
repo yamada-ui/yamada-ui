@@ -3,28 +3,18 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
   baseStyle: {
     container: {
-      _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
+      _readOnly: { cursor: "auto" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
-      transitionProperty: "box-shadow",
-      transitionDuration: "normal",
-      border: "2px solid",
-      borderColor: "inherit",
-      color: ["white", "black"],
       _checked: {
-        bg: `${c}.500`,
-        borderColor: `${c}.500`,
-        color: ["white", "black"],
+        _disabled: {
+          bg: ["blackAlpha.400", "whiteAlpha.300"],
+        },
         _hover: {
           bg: `${c}.600`,
           borderColor: `${c}.600`,
         },
-        _disabled: {
-          bg: ["blackAlpha.400", "whiteAlpha.300"],
-        },
-      },
-      _indeterminate: {
         bg: `${c}.500`,
         borderColor: `${c}.500`,
         color: ["white", "black"],
@@ -36,39 +26,49 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
       _focusVisible: {
         boxShadow: "outline",
       },
+      _indeterminate: {
+        bg: `${c}.500`,
+        borderColor: `${c}.500`,
+        color: ["white", "black"],
+      },
       _invalid: {
-        borderColor: ["danger.500", "danger.400"],
         _focusVisible: {
-          borderColor: "inherit",
           _checked: {
             borderColor: `${c}.500`,
           },
+          borderColor: "inherit",
         },
+        borderColor: ["danger.500", "danger.400"],
       },
+      border: "2px solid",
+      borderColor: "inherit",
+      color: ["white", "black"],
+      transitionDuration: "normal",
+      transitionProperty: "box-shadow",
     }),
     label: {
-      userSelect: "none",
       _disabled: { opacity: 0.4 },
+      userSelect: "none",
     },
   },
 
   sizes: {
     sm: {
-      icon: { boxSize: "3.5", rounded: "base", fontSize: "2xs" },
+      icon: { boxSize: "3.5", fontSize: "2xs", rounded: "base" },
       label: { fontSize: "sm" },
     },
     md: {
-      icon: { boxSize: "4", rounded: "base", fontSize: "2xs" },
+      icon: { boxSize: "4", fontSize: "2xs", rounded: "base" },
       label: { fontSize: "md" },
     },
     lg: {
-      icon: { boxSize: "5", rounded: "base", fontSize: "sm" },
+      icon: { boxSize: "5", fontSize: "sm", rounded: "base" },
       label: { fontSize: "lg" },
     },
   },
 
   defaultProps: {
-    size: "md",
     colorScheme: "primary",
+    size: "md",
   },
 }

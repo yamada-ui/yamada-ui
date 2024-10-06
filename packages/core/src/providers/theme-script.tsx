@@ -1,17 +1,17 @@
 import type { Theme } from "../theme.types"
 
 export interface ThemeSchemeScriptProps {
-  type?: "localStorage" | "cookie"
+  type?: "cookie" | "localStorage"
   initialThemeScheme?: Theme["themeSchemes"]
-  storageKey?: string
   nonce?: string
+  storageKey?: string
 }
 
 export const THEME_SCHEME_STORAGE_KEY = "ui-theme-scheme"
 
 export const getThemeSchemeScript = ({
-  initialThemeScheme: init = "base",
   type = "localStorage",
+  initialThemeScheme: init = "base",
   storageKey = THEME_SCHEME_STORAGE_KEY,
 }: Omit<ThemeSchemeScriptProps, "nonce"> = {}) => {
   const isCookie = type === "cookie"
@@ -34,8 +34,8 @@ export const ThemeSchemeScript = ({
   return (
     <script
       id="ui-theme-script"
-      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: html }}
+      nonce={nonce}
     />
   )
 }

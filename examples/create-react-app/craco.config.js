@@ -1,5 +1,5 @@
-const path = require("path")
 const { getLoader, loaderByName } = require("@craco/craco")
+const path = require("path")
 
 const absolutePath = path.join(__dirname, "../../packages/react")
 

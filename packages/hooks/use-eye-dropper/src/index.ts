@@ -17,7 +17,7 @@ export const useEyeDropper = () => {
   }, [])
 
   const onOpen = useCallback(
-    (
+    async (
       options: EyeDropperOptions = {},
     ): Promise<EyeDropperReturn | undefined> => {
       if (supported) {

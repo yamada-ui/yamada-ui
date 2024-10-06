@@ -1,7 +1,7 @@
 import type { HTMLUIProps, PropGetter } from "@yamada-ui/core"
+import type { CSSProperties } from "react"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import { isArray, splitObject } from "@yamada-ui/utils"
-import type { CSSProperties } from "react"
 import { useCallback } from "react"
 import {
   useAutocompleteContext,
@@ -19,7 +19,7 @@ export const useAutocompleteOptionGroup = ({
   label,
   ...rest
 }: UseAutocompleteOptionGroupProps) => {
-  const { value, omitSelectedValues } = useAutocompleteContext()
+  const { omitSelectedValues, value } = useAutocompleteContext()
 
   const isMulti = isArray(value)
 
@@ -34,7 +34,7 @@ export const useAutocompleteOptionGroup = ({
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(
-    ({ node, index }) =>
+    ({ index, node }) =>
       node.parentElement?.dataset.label === label &&
       !selectedIndexes.includes(index) &&
       "target" in node.dataset,
@@ -50,12 +50,12 @@ export const useAutocompleteOptionGroup = ({
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
@@ -63,8 +63,8 @@ export const useAutocompleteOptionGroup = ({
         ...props,
         ...containerProps,
         style: isEmpty ? style : undefined,
-        "data-label": label,
         role: "autocomplete-group-container",
+        "data-label": label,
       }
     },
     [containerProps, isEmpty, label],
@@ -75,8 +75,8 @@ export const useAutocompleteOptionGroup = ({
       ref,
       ...props,
       ...groupProps,
-      "data-label": label,
       role: "autocomplete-group",
+      "data-label": label,
     }),
     [groupProps, label],
   )

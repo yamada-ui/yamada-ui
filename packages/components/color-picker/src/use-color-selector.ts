@@ -1,67 +1,67 @@
 import type {
   CSSUIObject,
   HTMLUIProps,
-  ThemeProps,
   PropGetter,
   RequiredPropGetter,
+  ThemeProps,
 } from "@yamada-ui/core"
-import {
-  useFormControlProps,
-  formControlProperties,
-} from "@yamada-ui/form-control"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { InputProps } from "@yamada-ui/input"
+import type { ColorFormat, Dict } from "@yamada-ui/utils"
+import type { ChangeEvent } from "react"
+import type { AlphaSliderProps } from "./alpha-slider"
+import type { ColorSwatchProps } from "./color-swatch"
+import type { HueSliderProps } from "./hue-slider"
+import type { SaturationSliderProps } from "./saturation-slider"
+import {
+  formControlProperties,
+  useFormControlProps,
+} from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
-import type { ColorFormat, Dict } from "@yamada-ui/utils"
 import {
   calcFormat,
   convertColor,
   createContext,
   handlerAll,
+  hslaTo,
   hsvTo,
   isString,
+  parseToHsla,
   parseToHsv,
+  parseToRgba,
+  rgbaTo,
+  splitObject,
   useCallbackRef,
   useUpdateEffect,
-  parseToRgba,
-  parseToHsla,
-  rgbaTo,
-  hslaTo,
-  splitObject,
 } from "@yamada-ui/utils"
-import type { ChangeEvent } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
-import type { AlphaSliderProps } from "./alpha-slider"
-import type { ColorSwatchProps } from "./color-swatch"
-import type { HueSliderProps } from "./hue-slider"
-import type { SaturationSliderProps } from "./saturation-slider"
 
 type Space = keyof Hsla | keyof Rgba
 interface Hsla {
-  h: number
-  s: number
-  l: number
   a: number
+  h: number
+  l: number
+  s: number
 }
 interface Rgba {
-  r: number
-  g: number
-  b: number
   a: number
+  b: number
+  g: number
+  r: number
 }
 interface Hsva {
+  a: number
   h: number
   s: number
   v: number
-  a: number
 }
 interface Channel {
   label: string
+  max: number
+  min: number
   space: Space
   value: number
-  min: number
-  max: number
 }
 
 const convertHsla = (value: string, fallback?: string): Hsla => {
@@ -69,7 +69,7 @@ const convertHsla = (value: string, fallback?: string): Hsla => {
 
   if (a > 1) a = 1
 
-  return { h, s, l, a }
+  return { a, h, l, s }
 }
 
 const convertRgba = (value: string, fallback?: string): Rgba => {
@@ -80,31 +80,31 @@ const convertRgba = (value: string, fallback?: string): Rgba => {
   if (b > 255) b = 255
   if (a > 1) a = 1
 
-  return { r, g, b, a }
+  return { a, b, g, r }
 }
 
 const convertHsva = (value: string, fallback?: string): Hsva => {
   const [h, s, v, a] = parseToHsv(value, fallback)
 
-  return { h, s, v, a }
+  return { a, h, s, v }
 }
 
 interface ColorSelectorContext {
-  value: string
-  onChange: (value: string | Partial<Hsva>) => void
+  channels: Channel[]
   eyeDropperSupported: boolean
-  withAlpha: boolean
   isInteractive: boolean
+  styles: { [key: string]: CSSUIObject | undefined }
+  value: string
+  withAlpha: boolean
+  getAlphaSliderProps: PropGetter<AlphaSliderProps>
+  getChannelProps: RequiredPropGetter<{ space: Space } & InputProps, InputProps>
+  getEyeDropperProps: PropGetter<"button">
+  getHueSliderProps: PropGetter<HueSliderProps>
+  getSwatchProps: PropGetter<ColorSwatchProps>
+  onChange: (value: Partial<Hsva> | string) => void
   disabled?: boolean
   readOnly?: boolean
-  channels: Channel[]
   size?: ThemeProps<"ColorSelector">["size"]
-  getHueSliderProps: PropGetter<HueSliderProps>
-  getAlphaSliderProps: PropGetter<AlphaSliderProps>
-  getEyeDropperProps: PropGetter<"button">
-  getChannelProps: RequiredPropGetter<InputProps & { space: Space }, InputProps>
-  getSwatchProps: PropGetter<ColorSwatchProps>
-  styles: { [key: string]: CSSUIObject }
 }
 
 export const [ColorSelectorProvider, useColorSelectorContext] =
@@ -124,10 +124,6 @@ interface UseColorSelectorOptions {
    */
   name?: string
   /**
-   * The value of the color selector.
-   */
-  value?: string
-  /**
    * The initial value of the color selector.
    */
   defaultValue?: string
@@ -136,23 +132,27 @@ interface UseColorSelectorOptions {
    */
   fallbackValue?: string
   /**
-   * Function called whenever the color selector value changes.
-   */
-  onChange?: (value: string) => void
-  /**
-   * Function called when the user starts selecting a new value.
-   */
-  onChangeStart?: (value: string) => void
-  /**
-   * Function called when the user is done selecting a new value.
-   */
-  onChangeEnd?: (value: string) => void
-  /**
    * Color format. For example, `hex`, `rgba`, etc.
    *
    * @default "hexa"
    */
   format?: ColorFormat
+  /**
+   * The value of the color selector.
+   */
+  value?: string
+  /**
+   * Function called whenever the color selector value changes.
+   */
+  onChange?: (value: string) => void
+  /**
+   * Function called when the user is done selecting a new value.
+   */
+  onChangeEnd?: (value: string) => void
+  /**
+   * Function called when the user starts selecting a new value.
+   */
+  onChangeStart?: (value: string) => void
   /**
    * Function called whenever the color swatch click.
    */
@@ -164,7 +164,7 @@ export interface UseColorSelectorBaseProps
     FormControlOptions {}
 
 export interface UseColorSelectorProps
-  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "children">,
+  extends Omit<HTMLUIProps, "children" | "defaultValue" | "onChange">,
     UseColorSelectorBaseProps {}
 
 export const useColorSelector = ({
@@ -174,22 +174,22 @@ export const useColorSelector = ({
   const {
     id,
     name,
-    value: valueProp,
     defaultValue,
     fallbackValue,
-    onChange: onChangeProp,
-    onChangeStart: onChangeStartProp,
-    onChangeEnd: onChangeEndProp,
     format: formatProp,
+    value: valueProp,
+    onChange: onChangeProp,
+    onChangeEnd: onChangeEndProp,
+    onChangeStart: onChangeStartProp,
     onSwatchClick,
     ...rest
   } = useFormControlProps({ isInvalid, ...props })
   const [
     {
-      "aria-readonly": ariaReadonly,
-      required,
       disabled,
       readOnly,
+      required,
+      "aria-readonly": ariaReadonly,
       ...formControlProps
     },
     containerProps,
@@ -199,12 +199,12 @@ export const useColorSelector = ({
   const onChangeEndRef = useCallbackRef(onChangeEndProp)
   const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue: defaultValue ?? fallbackValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const format = useMemo(
-    () => formatProp ?? calcFormat(value ?? "#ffffff"),
+    () => formatProp ?? calcFormat(value || "#ffffff"),
     [value, formatProp],
   )
   const resolvedValue = convertColor(value, "#ffffff")(format) as string
@@ -213,29 +213,29 @@ export const useColorSelector = ({
   const [parsedValue, setParsedValue] = useState<Hsva>(
     convertHsva(resolvedValue, fallbackValue),
   )
-  const { h, s, v, a } = parsedValue
+  const { a, h, s, v } = parsedValue
   const withAlpha = format.endsWith("a")
   const isInteractive = !(disabled || readOnly)
 
   const channels: Channel[] = useMemo(() => {
     if (resolvedValue.startsWith("hsl")) {
-      const { h, s, l, a } = convertHsla(resolvedValue, fallbackValue)
+      const { a, h, l, s } = convertHsla(resolvedValue, fallbackValue)
 
       let channels: Channel[] = [
-        { label: "H", space: "h", value: Math.round(h), min: 0, max: 360 },
+        { label: "H", max: 360, min: 0, space: "h", value: Math.round(h) },
         {
           label: "S(%)",
+          max: 100,
+          min: 0,
           space: "s",
           value: Math.round(s * 100),
-          min: 0,
-          max: 100,
         },
         {
           label: "L(%)",
+          max: 100,
+          min: 0,
           space: "l",
           value: Math.round(l * 100),
-          min: 0,
-          max: 100,
         },
       ]
 
@@ -244,22 +244,22 @@ export const useColorSelector = ({
           ...channels,
           {
             label: "A(%)",
+            max: 100,
+            min: 0,
             space: "a",
             value: Math.round(a * 100),
-            min: 0,
-            max: 100,
           },
         ]
       }
 
       return channels
     } else {
-      const { r, g, b, a } = convertRgba(resolvedValue, fallbackValue)
+      const { a, b, g, r } = convertRgba(resolvedValue, fallbackValue)
 
       let channels: Channel[] = [
-        { label: "R", space: "r", value: Math.round(r), min: 0, max: 255 },
-        { label: "G", space: "g", value: Math.round(g), min: 0, max: 255 },
-        { label: "B", space: "b", value: Math.round(b), min: 0, max: 255 },
+        { label: "R", max: 255, min: 0, space: "r", value: Math.round(r) },
+        { label: "G", max: 255, min: 0, space: "g", value: Math.round(g) },
+        { label: "B", max: 255, min: 0, space: "b", value: Math.round(b) },
       ]
 
       if (withAlpha) {
@@ -267,10 +267,10 @@ export const useColorSelector = ({
           ...channels,
           {
             label: "A(%)",
+            max: 100,
+            min: 0,
             space: "a",
             value: Math.round(a * 100),
-            min: 0,
-            max: 100,
           },
         ]
       }
@@ -280,7 +280,7 @@ export const useColorSelector = ({
   }, [resolvedValue, withAlpha, fallbackValue])
 
   const onChange = useCallback(
-    (value: string | Partial<Hsva>) => {
+    (value: Partial<Hsva> | string) => {
       if (isString(value)) {
         setParsedValue(convertHsva(value, fallbackValue))
       } else {
@@ -296,7 +296,7 @@ export const useColorSelector = ({
 
       isDraggingRef.current = true
 
-      const { h, s, v, a } = { ...parsedValue, ...value }
+      const { a, h, s, v } = { ...parsedValue, ...value }
 
       const nextValue = hsvTo([h, s, v, a], fallbackValue)(format)
 
@@ -306,7 +306,7 @@ export const useColorSelector = ({
   )
 
   const onChangeEnd = useCallback(
-    (value: string | Partial<Hsva>) => {
+    (value: Partial<Hsva> | string) => {
       window.clearTimeout(timeoutId.current)
 
       timeoutId.current = window.setTimeout(() => {
@@ -318,7 +318,7 @@ export const useColorSelector = ({
       if (isString(value)) {
         nextValue = convertColor(value, fallbackValue)(format)
       } else {
-        const { h, s, v, a } = { ...parsedValue, ...value }
+        const { a, h, s, v } = { ...parsedValue, ...value }
 
         nextValue = hsvTo([h, s, v, a], fallbackValue)(format)
       }
@@ -334,19 +334,19 @@ export const useColorSelector = ({
 
       if (isNaN(n)) n = 0
 
-      if (["s", "l", "a"].includes(space)) n = n / 100
+      if (["a", "l", "s"].includes(space)) n = n / 100
 
       let nextValue: string | undefined
 
       if (resolvedValue.startsWith("hsl")) {
-        const { h, s, l, a } = Object.assign(
+        const { a, h, l, s } = Object.assign(
           convertHsla(resolvedValue, fallbackValue),
           { [space]: n },
         )
 
         nextValue = hslaTo([h, s, l, a], fallbackValue)(format)
       } else {
-        const { r, g, b, a } = Object.assign(
+        const { a, b, g, r } = Object.assign(
           convertRgba(resolvedValue, fallbackValue),
           { [space]: n },
         )
@@ -386,7 +386,7 @@ export const useColorSelector = ({
   }, [valueProp])
 
   useUpdateEffect(() => {
-    if (!format || !value) return
+    if (!value) return
 
     const nextValue = convertColor(value, fallbackValue)(format)
 
@@ -412,10 +412,10 @@ export const useColorSelector = ({
       ref,
       type: "hidden",
       name,
-      value: resolvedValue,
-      required,
       disabled,
       readOnly,
+      required,
+      value: resolvedValue,
     }),
     [
       formControlProps,
@@ -432,19 +432,19 @@ export const useColorSelector = ({
   const getSaturationSliderProps: PropGetter<SaturationSliderProps> =
     useCallback(
       (props = {}, ref = null) => ({
-        required,
         disabled,
-        readOnly,
         isInvalid,
+        readOnly,
+        required,
         ...props,
         ref,
         value: [h, s, v],
         onChange: handlerAll(props.onChange, ([, s, v]) => onChange({ s, v })),
-        onChangeStart: handlerAll(props.onChangeStart, ([, s, v]) =>
-          onChangeStart({ s, v }),
-        ),
         onChangeEnd: handlerAll(props.onChangeEnd, ([, s, v]) =>
           onChangeEnd({ s, v }),
+        ),
+        onChangeStart: handlerAll(props.onChangeStart, ([, s, v]) =>
+          onChangeStart({ s, v }),
         ),
       }),
       [
@@ -463,18 +463,18 @@ export const useColorSelector = ({
 
   const getHueSliderProps: PropGetter<HueSliderProps> = useCallback(
     (props = {}, ref = null) => ({
-      required,
       disabled,
-      readOnly,
       isInvalid,
+      readOnly,
+      required,
       ...props,
       ref,
       value: h,
       onChange: handlerAll(props.onChange, (h) => onChange({ h })),
+      onChangeEnd: handlerAll(props.onChangeEnd, (h) => onChangeEnd({ h })),
       onChangeStart: handlerAll(props.onChangeStart, (h) =>
         onChangeStart({ h }),
       ),
-      onChangeEnd: handlerAll(props.onChangeEnd, (h) => onChangeEnd({ h })),
     }),
     [
       required,
@@ -490,19 +490,19 @@ export const useColorSelector = ({
 
   const getAlphaSliderProps: PropGetter<AlphaSliderProps> = useCallback(
     (props = {}, ref = null) => ({
-      required,
       disabled,
-      readOnly,
       isInvalid,
+      readOnly,
+      required,
       ...props,
       ref,
-      value: a,
       color: hsvTo([h, s, v, a], fallbackValue)(format),
+      value: a,
       onChange: handlerAll(props.onChange, (a) => onChange({ a })),
+      onChangeEnd: handlerAll(props.onChangeEnd, (a) => onChangeEnd({ a })),
       onChangeStart: handlerAll(props.onChangeStart, (a) =>
         onChangeStart({ a }),
       ),
-      onChangeEnd: handlerAll(props.onChangeEnd, (a) => onChangeEnd({ a })),
     }),
     [
       fallbackValue,
@@ -522,15 +522,15 @@ export const useColorSelector = ({
   )
 
   const getChannelProps: RequiredPropGetter<
-    InputProps & { space: Space },
+    { space: Space } & InputProps,
     InputProps
   > = useCallback(
     ({ space, ...props }, ref = null) => {
       return {
-        required,
         disabled,
-        readOnly,
         isInvalid,
+        readOnly,
+        required,
         ...props,
         ref,
         type: "number",
@@ -556,9 +556,9 @@ export const useColorSelector = ({
 
   const getSwatchProps: PropGetter<ColorSwatchProps> = useCallback(
     ({ color, ...props } = {}, ref = null) => ({
-      "aria-label": `Select ${color} as the color`,
       disabled,
       readOnly,
+      "aria-label": `Select ${color} as the color`,
       ...props,
       ref,
       color,
@@ -574,22 +574,22 @@ export const useColorSelector = ({
   )
 
   return {
-    value: resolvedValue,
-    onChange,
-    eyeDropperSupported,
-    withAlpha,
-    isInteractive,
-    disabled,
-    readOnly,
     channels,
+    disabled,
+    eyeDropperSupported,
+    isInteractive,
+    readOnly,
+    value: resolvedValue,
+    withAlpha,
+    getAlphaSliderProps,
+    getChannelProps,
     getContainerProps,
+    getEyeDropperProps,
+    getHueSliderProps,
     getInputProps,
     getSaturationSliderProps,
-    getHueSliderProps,
-    getAlphaSliderProps,
-    getEyeDropperProps,
-    getChannelProps,
     getSwatchProps,
+    onChange,
   }
 }
 

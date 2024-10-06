@@ -8,88 +8,196 @@ import {
 
 export const Calendar: ComponentMultiStyle<"Calendar"> = {
   baseStyle: {
+    button: {
+      _disabled: {
+        _focusVisible: {
+          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
+        },
+        boxShadow: "none",
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
+    },
+    cell: {
+      transitionDuration: "slower",
+      transitionProperty: "common",
+    },
     container: {
       gap: "md",
+    },
+    content: {},
+    control: {
+      _hidden: {
+        opacity: 0,
+        pointerEvents: "none",
+      },
+      color: ["blackAlpha.500", "whiteAlpha.500"],
+      fontSize: "1.5em",
+    },
+    date: {},
+    day: {
+      _disabled: {
+        _ripple: {
+          display: "none",
+        },
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _holiday: {
+        color: ["red.600", "red.400"],
+      },
+      _outside: {
+        color: ["blackAlpha.500", "whiteAlpha.500"],
+      },
+      _weekend: {
+        color: ["red.600", "red.400"],
+      },
+      color: ["blackAlpha.800", "whiteAlpha.700"],
     },
     header: {},
     label: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
     },
     labelIcon: {
-      fontSize: "1.5em",
-      color: ["blackAlpha.500", "whiteAlpha.500"],
-    },
-    control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
       fontSize: "1.5em",
-      _hidden: {
-        opacity: 0,
-        pointerEvents: "none",
-      },
-    },
-    prev: {},
-    next: {},
-    content: {},
-    year: {
-      gridTemplateColumns: "repeat(4, 1fr)",
     },
     month: {
       gridTemplateColumns: "repeat(3, 1fr)",
     },
-    button: {
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-        boxShadow: "none",
-        _focusVisible: {
-          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
-        },
-      },
-    },
-    date: {},
+    next: {},
+    prev: {},
     row: {},
-    cell: {
-      transitionProperty: "common",
-      transitionDuration: "slower",
-    },
     weekday: {
-      userSelect: "none",
+      alignItems: "center",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       justifyContent: "center",
-      alignItems: "center",
+      userSelect: "none",
     },
-    day: {
-      color: ["blackAlpha.800", "whiteAlpha.700"],
-      _weekend: {
-        color: ["red.600", "red.400"],
+    year: {
+      gridTemplateColumns: "repeat(4, 1fr)",
+    },
+  },
+
+  sizes: {
+    sm: {
+      button: {
+        h: 8,
       },
-      _outside: {
-        color: ["blackAlpha.500", "whiteAlpha.500"],
+      container: {
+        fontSize: "xs",
       },
-      _holiday: {
-        color: ["red.600", "red.400"],
+      content: {
+        w: 56,
       },
-      _focusVisible: {
-        boxShadow: "outline",
+      control: {
+        h: 8,
+        w: 8,
       },
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-        _ripple: {
-          display: "none",
-        },
+      day: {
+        h: 8,
+        w: 8,
+      },
+      label: {
+        h: 8,
+      },
+      weekday: {
+        h: 8,
+        w: 8,
+      },
+    },
+    md: {
+      button: {
+        h: 10,
+      },
+      container: {
+        fontSize: "sm",
+      },
+      content: {
+        w: "17.5rem",
+      },
+      control: {
+        h: 10,
+        w: 10,
+      },
+      day: {
+        h: 10,
+        w: 10,
+      },
+      label: {
+        h: 10,
+      },
+      weekday: {
+        h: 10,
+        w: 10,
+      },
+    },
+    lg: {
+      button: {
+        h: 12,
+      },
+      container: {
+        fontSize: "md",
+      },
+      content: {
+        w: "21rem",
+      },
+      control: {
+        h: 12,
+        w: 12,
+      },
+      day: {
+        h: 12,
+        w: 12,
+      },
+      label: {
+        h: 12,
+      },
+      weekday: {
+        h: 12,
+        w: 12,
+      },
+    },
+    full: {
+      button: {
+        h: 12,
+      },
+      container: {
+        fontSize: "md",
+        w: "full",
+      },
+      content: {
+        w: "full",
+      },
+      control: {
+        h: 12,
+        w: 12,
+      },
+      day: {
+        h: 12,
+        w: "full",
+      },
+      label: {
+        h: 12,
+      },
+      weekday: {
+        h: 12,
+        w: "full",
       },
     },
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    solid: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
       button: {
         _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _disabled: {
             bg: ["initial", "initial"],
           },
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: isGray(c)
@@ -100,21 +208,23 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       cell: {
         _between: {
+          _end: {
+            roundedRight: "md",
+          },
+          _start: {
+            roundedLeft: "md",
+          },
           bg: [
             isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
             shadeColor(`${c}.300`, 72)(t, m),
           ],
-          _start: {
-            roundedLeft: "md",
-          },
-          _end: {
-            roundedRight: "md",
-          },
         },
       },
       day: {
+        _end: {
+          roundedLeft: "0",
+        },
         _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -126,35 +236,33 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
               ? [`${c}.100`, `${c}.700`]
               : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           },
-        },
-        _today: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _between: {
-            bg: ["initial", "initial"],
-          },
-        },
-        _start: {
-          roundedRight: "0",
-        },
-        _end: {
-          roundedLeft: "0",
         },
         _selected: {
           bg: isGray(c)
             ? [`${c}.100`, `${c}.700`]
             : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
           borderColor: ["transparent", "transparent"],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _today: {
+          _between: {
+            bg: ["initial", "initial"],
+          },
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
       },
     }),
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
       button: {
         _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _disabled: {
             bg: ["initial", "initial"],
           },
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: [
@@ -166,23 +274,25 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       cell: {
         _between: {
+          _end: {
+            roundedRight: "md",
+          },
+          _start: {
+            roundedLeft: "md",
+          },
           bg: [
             isGray(c)
               ? transparentizeColor(`${c}.50`, 0.24)(t, m)
               : transparentizeColor(`${c}.50`, 0.64)(t, m),
             shadeColor(`${c}.300`, 76)(t, m),
           ],
-          _start: {
-            roundedLeft: "md",
-          },
-          _end: {
-            roundedRight: "md",
-          },
         },
       },
       day: {
+        _end: {
+          roundedLeft: "0",
+        },
         _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -195,58 +305,53 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
               shadeColor(`${c}.300`, 58)(t, m),
             ],
           },
-        },
-        _today: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _between: {
-            bg: ["initial", "initial"],
-          },
-        },
-        _start: {
-          roundedRight: "0",
-        },
-        _end: {
-          roundedLeft: "0",
         },
         _selected: {
           bg: [
             isGray(c) ? `${c}.50` : `${c}.100`,
             shadeColor(`${c}.300`, 58)(t, m),
           ],
-          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
           borderColor: ["transparent", "transparent"],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _today: {
+          _between: {
+            bg: ["initial", "initial"],
+          },
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
       },
     }),
     unstyled: {
+      button: {
+        _active: {
+          bg: "inherit",
+        },
+        _disabled: {
+          _focusVisible: {
+            boxShadow: "inherit",
+          },
+          boxShadow: "inherit",
+          cursor: "inherit",
+          opacity: "inherit",
+        },
+        _hover: {
+          bg: "inherit",
+        },
+        h: "auto",
+      },
       container: {
-        gap: "inherit",
         fontSize: "inherit",
+        gap: "inherit",
       },
       content: {
         w: "auto",
       },
-      label: {
-        h: "auto",
-        pointerEvents: "inherit",
-        _hover: {
-          bg: "inherit",
-        },
-        _active: {
-          bg: "inherit",
-          pointerEvents: "inherit",
-        },
-      },
-      labelIcon: {
-        color: "inherit",
-      },
       control: {
-        fontSize: "inherit",
-        w: "auto",
-        h: "auto",
-        _hover: {
-          bg: "inherit",
-        },
         _active: {
           bg: "inherit",
         },
@@ -254,171 +359,66 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           opacity: "inherit",
           pointerEvents: "inherit",
         },
-      },
-      button: {
-        h: "auto",
         _hover: {
           bg: "inherit",
         },
+        fontSize: "inherit",
+        h: "auto",
+        w: "auto",
+      },
+      day: {
         _active: {
           bg: "inherit",
         },
         _disabled: {
-          opacity: "inherit",
-          cursor: "inherit",
-          boxShadow: "inherit",
           _focusVisible: {
             boxShadow: "inherit",
           },
-        },
-      },
-      weekday: {
-        userSelect: "auto",
-        color: "inherit",
-        w: "auto",
-        h: "auto",
-      },
-      day: {
-        w: "auto",
-        h: "auto",
-        _hover: {
-          bg: "inherit",
-        },
-        _active: {
-          bg: "inherit",
-        },
-        _weekend: {
-          color: "inherit",
-        },
-        _outside: {
-          color: "inherit",
+          boxShadow: "inherit",
+          cursor: "inherit",
+          opacity: "inherit",
         },
         _holiday: {
           color: "inherit",
         },
-        _disabled: {
-          opacity: "inherit",
-          cursor: "inherit",
-          boxShadow: "inherit",
-          _focusVisible: {
-            boxShadow: "inherit",
-          },
+        _hover: {
+          bg: "inherit",
         },
-      },
-    },
-  },
-
-  sizes: {
-    sm: {
-      container: {
-        fontSize: "xs",
-      },
-      content: {
-        w: 56,
+        _outside: {
+          color: "inherit",
+        },
+        _weekend: {
+          color: "inherit",
+        },
+        h: "auto",
+        w: "auto",
       },
       label: {
-        h: 8,
+        _active: {
+          bg: "inherit",
+          pointerEvents: "inherit",
+        },
+        _hover: {
+          bg: "inherit",
+        },
+        h: "auto",
+        pointerEvents: "inherit",
       },
-      control: {
-        w: 8,
-        h: 8,
-      },
-      button: {
-        h: 8,
-      },
-      weekday: {
-        w: 8,
-        h: 8,
-      },
-      day: {
-        w: 8,
-        h: 8,
-      },
-    },
-    md: {
-      container: {
-        fontSize: "sm",
-      },
-      content: {
-        w: "17.5rem",
-      },
-      label: {
-        h: 10,
-      },
-      control: {
-        w: 10,
-        h: 10,
-      },
-      button: {
-        h: 10,
+      labelIcon: {
+        color: "inherit",
       },
       weekday: {
-        w: 10,
-        h: 10,
-      },
-      day: {
-        w: 10,
-        h: 10,
-      },
-    },
-    lg: {
-      container: {
-        fontSize: "md",
-      },
-      content: {
-        w: "21rem",
-      },
-      label: {
-        h: 12,
-      },
-      control: {
-        w: 12,
-        h: 12,
-      },
-      button: {
-        h: 12,
-      },
-      weekday: {
-        w: 12,
-        h: 12,
-      },
-      day: {
-        w: 12,
-        h: 12,
-      },
-    },
-    full: {
-      container: {
-        w: "full",
-        fontSize: "md",
-      },
-      content: {
-        w: "full",
-      },
-      label: {
-        h: 12,
-      },
-      control: {
-        w: 12,
-        h: 12,
-      },
-      button: {
-        h: 12,
-      },
-      weekday: {
-        w: "full",
-        h: 12,
-      },
-      day: {
-        w: "full",
-        h: 12,
+        color: "inherit",
+        h: "auto",
+        userSelect: "auto",
+        w: "auto",
       },
     },
   },
 
   defaultProps: {
+    colorScheme: "primary",
     size: "md",
     variant: "solid",
-    colorScheme: "primary",
   },
 }

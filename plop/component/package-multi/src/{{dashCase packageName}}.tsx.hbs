@@ -8,7 +8,7 @@ import {
 import { createContext, cx } from "@yamada-ui/utils"
 
 interface {{upperCase packageName}}Context {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 const [{{upperCase packageName}}Provider, use{{upperCase packageName}}] = createContext<{{upperCase packageName}}Context>({
@@ -39,3 +39,6 @@ export const {{upperCase packageName}} = forwardRef<{{upperCase packageName}}Pro
     </{{upperCase packageName}}Provider>
   )
 })
+
+{{upperCase packageName}}.displayName = "{{upperCase packageName}}"
+{{upperCase packageName}}.__ui__ = "{{upperCase packageName}}"

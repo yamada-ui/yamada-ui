@@ -1,22 +1,22 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
+import type { Hsv } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 import {
-  SaturationSlider,
   Button,
   FormControl,
+  SaturationSlider,
   Text,
   VStack,
   Wrap,
 } from "@yamada-ui/react"
-import type { Hsv } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof SaturationSlider>
 
 const meta: Meta<typeof SaturationSlider> = {
-  title: "Components / Forms / SaturationSlider",
   component: SaturationSlider,
+  title: "Components / Forms / SaturationSlider",
 }
 
 export default meta
@@ -32,9 +32,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <SaturationSlider size="sm" defaultValue={[120, 0.33, 0.33]} />
-      <SaturationSlider size="md" defaultValue={[180, 0.66, 0.66]} />
-      <SaturationSlider size="lg" defaultValue={[240, 1, 1]} />
+      <SaturationSlider defaultValue={[120, 0.33, 0.33]} size="sm" />
+      <SaturationSlider defaultValue={[180, 0.66, 0.66]} size="md" />
+      <SaturationSlider defaultValue={[240, 1, 1]} size="lg" />
     </>
   )
 }
@@ -45,7 +45,7 @@ export const withStep: Story = () => {
   return (
     <>
       <Text>Value: {JSON.stringify(value)}</Text>
-      <SaturationSlider value={value} step={0.1} onChange={onChange} />
+      <SaturationSlider step={0.1} value={value} onChange={onChange} />
     </>
   )
 }
@@ -54,7 +54,7 @@ export const withFocusThumbOnChange: Story = () => {
   const [value, setValue] = useState<Hsv>([180, 1, 1])
   const [, s, v] = value
 
-  const onChange = (space: "s" | "v", type: "increment" | "decrement") => {
+  const onChange = (space: "s" | "v", type: "decrement" | "increment") => {
     const i = space === "s" ? 1 : 2
 
     setValue((prev) => {
@@ -71,10 +71,10 @@ export const withFocusThumbOnChange: Story = () => {
   return (
     <>
       <Text>Value: {JSON.stringify(value)}</Text>
-      <SaturationSlider value={value} step={10} focusThumbOnChange={false} />
+      <SaturationSlider focusThumbOnChange={false} step={10} value={value} />
 
       <Wrap gap="md">
-        <VStack w="auto" gap="sm">
+        <VStack gap="sm" w="auto">
           <Text>Saturation</Text>
 
           <Wrap gap="md">
@@ -86,8 +86,8 @@ export const withFocusThumbOnChange: Story = () => {
             </Button>
 
             <Button
-              isDisabled={s === 1}
               colorScheme="blue"
+              isDisabled={s === 1}
               onClick={() => onChange("s", "increment")}
             >
               +0.1
@@ -95,7 +95,7 @@ export const withFocusThumbOnChange: Story = () => {
           </Wrap>
         </VStack>
 
-        <VStack w="auto" gap="sm">
+        <VStack gap="sm" w="auto">
           <Text>Brightness</Text>
 
           <Wrap gap="md">
@@ -107,8 +107,8 @@ export const withFocusThumbOnChange: Story = () => {
             </Button>
 
             <Button
-              isDisabled={v === 1}
               colorScheme="blue"
+              isDisabled={v === 1}
               onClick={() => onChange("v", "increment")}
             >
               +0.1
@@ -130,9 +130,9 @@ export const isDisabled: Story = () => {
       <SaturationSlider isDisabled />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isDisabled
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <SaturationSlider />
       </FormControl>
@@ -146,9 +146,9 @@ export const isReadonly: Story = () => {
       <SaturationSlider isReadOnly />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isReadOnly
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <SaturationSlider />
       </FormControl>
@@ -215,9 +215,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -227,9 +227,9 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.saturationSlider?.message}
         isInvalid={!!errors.saturationSlider}
         label="Pick color"
-        errorMessage={errors.saturationSlider?.message}
       >
         <Controller
           name="saturationSlider"

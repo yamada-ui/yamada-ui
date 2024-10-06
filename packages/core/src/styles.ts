@@ -1,11 +1,11 @@
 import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { StyleConfigs } from "./config"
-import { transforms } from "./config"
-import { pipe } from "./config/utils"
 import type { CSSUIObject, Token } from "./css"
 import type { ThemeToken } from "./theme"
 import type { Theme } from "./theme.types"
+import { transforms } from "./config"
+import { pipe } from "./config/utils"
 
 export type StandardStyleProperty = keyof typeof standardStyles
 
@@ -17,6 +17,7 @@ export const standardStyles = {
   },
   alignContent: true,
   alignItems: true,
+  alignmentBaseline: true,
   alignSelf: true,
   all: true,
   animation: {
@@ -47,6 +48,49 @@ export const standardStyles = {
   },
   appearance: true,
   aspectRatio: true,
+  azimuth: true,
+  backdropBlur: {
+    properties: "--ui-backdrop-blur",
+    token: "blurs",
+    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
+  },
+  backdropBrightness: {
+    properties: "--ui-backdrop-brightness",
+    transform: transforms.function("brightness"),
+  },
+  backdropContrast: {
+    properties: "--ui-backdrop-contrast",
+    transform: transforms.function("contrast"),
+  },
+  backdropDropShadow: {
+    properties: "--ui-backdrop-drop-shadow",
+    token: "shadows",
+    transform: pipe(
+      transforms.token("shadows"),
+      transforms.function("drop-shadow"),
+    ),
+  },
+  backdropFilter: { transform: transforms.filter("backdrop") },
+  backdropGrayscale: {
+    properties: "--ui-backdrop-grayscale",
+    transform: transforms.function("grayscale"),
+  },
+  backdropHueRotate: {
+    properties: "--ui-backdrop-hue-rotate",
+    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
+  },
+  backdropInvert: {
+    properties: "--ui-backdrop-invert",
+    transform: transforms.function("invert"),
+  },
+  backdropSaturate: {
+    properties: "--ui-backdrop-saturate",
+    transform: transforms.function("saturate"),
+  },
+  backdropSepia: {
+    properties: "--ui-backdrop-sepia",
+    transform: transforms.function("sepia"),
+  },
   backfaceVisibility: {
     properties: "backfaceVisibility",
     token: "sizes",
@@ -84,6 +128,7 @@ export const standardStyles = {
   backgroundPositionY: true,
   backgroundRepeat: true,
   backgroundSize: true,
+  baselineShift: true,
   blockSize: {
     properties: "blockSize",
     token: "sizes",
@@ -93,6 +138,11 @@ export const standardStyles = {
       transforms.px,
       transforms.calc("sizes"),
     ),
+  },
+  blur: {
+    properties: "--ui-blur",
+    token: "blurs",
+    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
   },
   border: {
     properties: "border",
@@ -156,6 +206,15 @@ export const standardStyles = {
   },
   borderBottomLeftRadius: {
     properties: "borderBottomLeftRadius",
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
+  },
+  borderBottomRadius: {
+    properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -238,6 +297,15 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  borderInlineEndRadius: {
+    properties: ["borderEndStartRadius", "borderEndEndRadius"],
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
+  },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
     properties: "borderInlineEndWidth",
@@ -252,6 +320,15 @@ export const standardStyles = {
     properties: "borderInlineStartColor",
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  borderInlineStartRadius: {
+    properties: ["borderStartStartRadius", "borderStartEndRadius"],
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
@@ -273,6 +350,15 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  borderLeftRadius: {
+    properties: ["borderTopLeftRadius", "borderBottomLeftRadius"],
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
+  },
   borderLeftStyle: true,
   borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
   borderRadius: {
@@ -293,6 +379,15 @@ export const standardStyles = {
     properties: "borderRightColor",
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  borderRightRadius: {
+    properties: ["borderTopRightRadius", "borderBottomRightRadius"],
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
   },
   borderRightStyle: true,
   borderRightWidth: {
@@ -338,6 +433,15 @@ export const standardStyles = {
       transforms.calc("radii"),
     ),
   },
+  borderTopRadius: {
+    properties: ["borderTopLeftRadius", "borderTopRightRadius"],
+    token: "radii",
+    transform: pipe(
+      transforms.token("radii"),
+      transforms.px,
+      transforms.calc("radii"),
+    ),
+  },
   borderTopRightRadius: {
     properties: "borderTopRightRadius",
     token: "radii",
@@ -350,6 +454,16 @@ export const standardStyles = {
   borderTopStyle: true,
   borderTopWidth: { properties: "borderTopWidth", transform: transforms.px },
   borderWidth: { properties: "borderWidth", transform: transforms.px },
+  borderX: {
+    properties: ["borderLeft", "borderRight"],
+    token: "borders",
+    transform: pipe(transforms.token("borders"), transforms.px),
+  },
+  borderY: {
+    properties: ["borderTop", "borderBottom"],
+    token: "borders",
+    transform: pipe(transforms.token("borders"), transforms.px),
+  },
   bottom: {
     properties: "bottom",
     token: "spaces",
@@ -373,10 +487,24 @@ export const standardStyles = {
     token: "shadows",
     transform: transforms.token("shadows"),
   },
+  boxSize: {
+    properties: ["width", "height"],
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.calc("sizes"),
+    ),
+  },
   boxSizing: true,
   breakAfter: true,
   breakBefore: true,
   breakInside: true,
+  brightness: {
+    properties: "--ui-brightness",
+    transform: transforms.function("brightness"),
+  },
   captionSide: true,
   caretColor: {
     properties: "caretColor",
@@ -393,6 +521,7 @@ export const standardStyles = {
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   colorInterpolation: true,
+  colorMode: { properties: "colorScheme" },
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -412,6 +541,7 @@ export const standardStyles = {
   },
   columnRuleStyle: true,
   columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
+  columns: true,
   columnSpan: true,
   columnWidth: {
     properties: "columnWidth",
@@ -423,8 +553,10 @@ export const standardStyles = {
       transforms.calc("sizes"),
     ),
   },
-  columns: true,
   contain: true,
+  container: true,
+  containerName: true,
+  containerType: true,
   containIntrinsicBlockSize: true,
   containIntrinsicHeight: true,
   containIntrinsicInlineSize: true,
@@ -439,11 +571,12 @@ export const standardStyles = {
       transforms.calc("sizes"),
     ),
   },
-  container: true,
-  containerName: true,
-  containerType: true,
   content: true,
   contentVisibility: true,
+  contrast: {
+    properties: "--ui-contrast",
+    transform: transforms.function("contrast"),
+  },
   counterIncrement: true,
   counterReset: true,
   counterSet: true,
@@ -451,6 +584,14 @@ export const standardStyles = {
   direction: true,
   display: true,
   dominantBaseline: true,
+  dropShadow: {
+    properties: "--ui-drop-shadow",
+    token: "shadows",
+    transform: pipe(
+      transforms.token("shadows"),
+      transforms.function("drop-shadow"),
+    ),
+  },
   emptyCells: true,
   fill: {
     properties: "fill",
@@ -459,6 +600,7 @@ export const standardStyles = {
   },
   fillOpacity: true,
   fillRule: true,
+  filter: { transform: transforms.filter() },
   flex: true,
   flexBasis: {
     properties: "flexBasis",
@@ -476,6 +618,12 @@ export const standardStyles = {
   flexShrink: true,
   flexWrap: true,
   float: true,
+  floodColor: {
+    properties: "floodColor",
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  floodOpacity: true,
   font: true,
   fontFamily: {
     properties: "fontFamily",
@@ -528,6 +676,11 @@ export const standardStyles = {
       transforms.px,
       transforms.calc("spaces"),
     ),
+  },
+  glyphOrientationVertical: true,
+  grayscale: {
+    properties: "--ui-grayscale",
+    transform: transforms.function("grayscale"),
   },
   grid: true,
   gridArea: true,
@@ -590,6 +743,10 @@ export const standardStyles = {
       transforms.px,
       transforms.calc("sizes"),
     ),
+  },
+  hueRotate: {
+    properties: "--ui-hue-rotate",
+    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
   },
   hyphenateCharacter: true,
   hyphenateLimitChars: true,
@@ -671,6 +828,28 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  insetX: {
+    properties: ["left", "right"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  insetY: {
+    properties: ["top", "bottom"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  invert: {
+    properties: "--ui-invert",
+    transform: transforms.function("invert"),
+  },
   isolation: true,
   justifyContent: true,
   justifyItems: true,
@@ -688,6 +867,11 @@ export const standardStyles = {
     properties: "letterSpacing",
     token: "letterSpacings",
     transform: transforms.token("letterSpacings"),
+  },
+  lightingColor: {
+    properties: "lightingColor",
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   lineBreak: true,
   lineHeight: {
@@ -804,6 +988,24 @@ export const standardStyles = {
     ),
   },
   marginTrim: true,
+  marginX: {
+    properties: ["marginInlineStart", "marginInlineEnd"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  marginY: {
+    properties: ["marginTop", "marginBottom"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
   marker: true,
   markerEnd: true,
   markerMid: true,
@@ -835,6 +1037,16 @@ export const standardStyles = {
   mathStyle: true,
   maxBlockSize: {
     properties: "maxBlockSize",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.calc("sizes"),
+    ),
+  },
+  maxBoxSize: {
+    properties: ["maxWidth", "maxHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -875,6 +1087,16 @@ export const standardStyles = {
   },
   minBlockSize: {
     properties: "minBlockSize",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.calc("sizes"),
+    ),
+  },
+  minBoxSize: {
+    properties: ["minWidth", "minHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1047,6 +1269,24 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  paddingX: {
+    properties: ["paddingInlineStart", "paddingInlineEnd"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  paddingY: {
+    properties: ["paddingTop", "paddingBottom"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
   page: true,
   pageBreakAfter: true,
   pageBreakBefore: true,
@@ -1071,6 +1311,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  rotate: { properties: "--ui-rotate", transform: transforms.deg },
   rowGap: {
     properties: "rowGap",
     token: "spaces",
@@ -1082,6 +1323,20 @@ export const standardStyles = {
   },
   rubyAlign: true,
   rubyPosition: true,
+  saturate: {
+    properties: "--ui-saturate",
+    transform: transforms.function("saturate"),
+  },
+  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
+  scaleX: { properties: "--ui-scale-x" },
+  scaleY: { properties: "--ui-scale-y" },
+  scrollbarColor: {
+    properties: "scrollbarColor",
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  scrollbarGutter: true,
+  scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
   scrollBehavior: true,
   scrollMargin: {
     properties: "scrollMargin",
@@ -1127,6 +1382,24 @@ export const standardStyles = {
   },
   scrollMarginTop: {
     properties: "scrollMarginTop",
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  scrollMarginX: {
+    properties: ["scrollMarginLeft", "scrollMarginRight"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  scrollMarginY: {
+    properties: ["scrollMarginTop", "scrollMarginBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1185,23 +1458,37 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  scrollPaddingX: {
+    properties: ["scrollPaddingLeft", "scrollPaddingRight"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  scrollPaddingY: {
+    properties: ["scrollPaddingTop", "scrollPaddingBottom"],
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
   scrollSnapAlign: true,
   scrollSnapStop: true,
   scrollSnapType: true,
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  scrollbarColor: {
-    properties: "scrollbarColor",
-    token: "colors",
-    transform: pipe(transforms.token("colors"), transforms.colorMix),
-  },
-  scrollbarGutter: true,
-  scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
+  sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
   shapeRendering: true,
+  skewX: { properties: "--ui-skew-x", transform: transforms.deg },
+  skewY: { properties: "--ui-skew-y", transform: transforms.deg },
   stopColor: true,
   stopOpacity: true,
   stroke: {
@@ -1216,8 +1503,8 @@ export const standardStyles = {
   strokeMiterlimit: true,
   strokeOpacity: true,
   strokeWidth: { properties: "strokeWidth", transform: transforms.px },
-  tabSize: true,
   tableLayout: true,
+  tabSize: true,
   textAlign: true,
   textAlignLast: true,
   textAnchor: true,
@@ -1290,6 +1577,24 @@ export const standardStyles = {
     transform: transforms.token("transitions.easing"),
   },
   translate: true,
+  translateX: {
+    properties: "--ui-translate-x",
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  translateY: {
+    properties: "--ui-translate-y",
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
   unicodeBidi: true,
   userSelect: true,
   vectorEffect: true,
@@ -1323,311 +1628,6 @@ export const standardStyles = {
     transform: transforms.token("zIndices"),
   },
   zoom: true,
-  alignmentBaseline: true,
-  azimuth: true,
-  baselineShift: true,
-  floodColor: {
-    properties: "floodColor",
-    token: "colors",
-    transform: pipe(transforms.token("colors"), transforms.colorMix),
-  },
-  floodOpacity: true,
-  glyphOrientationVertical: true,
-  lightingColor: {
-    properties: "lightingColor",
-    token: "colors",
-    transform: pipe(transforms.token("colors"), transforms.colorMix),
-  },
-  marginX: {
-    properties: ["marginInlineStart", "marginInlineEnd"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  marginY: {
-    properties: ["marginTop", "marginBottom"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  paddingX: {
-    properties: ["paddingInlineStart", "paddingInlineEnd"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  paddingY: {
-    properties: ["paddingTop", "paddingBottom"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  scrollMarginX: {
-    properties: ["scrollMarginLeft", "scrollMarginRight"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  scrollMarginY: {
-    properties: ["scrollMarginTop", "scrollMarginBottom"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  scrollPaddingX: {
-    properties: ["scrollPaddingLeft", "scrollPaddingRight"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  scrollPaddingY: {
-    properties: ["scrollPaddingTop", "scrollPaddingBottom"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  insetX: {
-    properties: ["left", "right"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  insetY: {
-    properties: ["top", "bottom"],
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  borderY: {
-    properties: ["borderTop", "borderBottom"],
-    token: "borders",
-    transform: pipe(transforms.token("borders"), transforms.px),
-  },
-  borderX: {
-    properties: ["borderLeft", "borderRight"],
-    token: "borders",
-    transform: pipe(transforms.token("borders"), transforms.px),
-  },
-  borderTopRadius: {
-    properties: ["borderTopLeftRadius", "borderTopRightRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  borderBottomRadius: {
-    properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  borderRightRadius: {
-    properties: ["borderTopRightRadius", "borderBottomRightRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  borderLeftRadius: {
-    properties: ["borderTopLeftRadius", "borderBottomLeftRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  borderInlineStartRadius: {
-    properties: ["borderStartStartRadius", "borderStartEndRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  borderInlineEndRadius: {
-    properties: ["borderEndStartRadius", "borderEndEndRadius"],
-    token: "radii",
-    transform: pipe(
-      transforms.token("radii"),
-      transforms.px,
-      transforms.calc("radii"),
-    ),
-  },
-  boxSize: {
-    properties: ["width", "height"],
-    token: "sizes",
-    transform: pipe(
-      transforms.token("sizes"),
-      transforms.fraction,
-      transforms.px,
-      transforms.calc("sizes"),
-    ),
-  },
-  minBoxSize: {
-    properties: ["minWidth", "minHeight"],
-    token: "sizes",
-    transform: pipe(
-      transforms.token("sizes"),
-      transforms.fraction,
-      transforms.px,
-      transforms.calc("sizes"),
-    ),
-  },
-  maxBoxSize: {
-    properties: ["maxWidth", "maxHeight"],
-    token: "sizes",
-    transform: pipe(
-      transforms.token("sizes"),
-      transforms.fraction,
-      transforms.px,
-      transforms.calc("sizes"),
-    ),
-  },
-  translateX: {
-    properties: "--ui-translate-x",
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  translateY: {
-    properties: "--ui-translate-y",
-    token: "spaces",
-    transform: pipe(
-      transforms.token("spaces"),
-      transforms.px,
-      transforms.calc("spaces"),
-    ),
-  },
-  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
-  scaleX: { properties: "--ui-scale-x" },
-  scaleY: { properties: "--ui-scale-y" },
-  rotate: { properties: "--ui-rotate", transform: transforms.deg },
-  skewX: { properties: "--ui-skew-x", transform: transforms.deg },
-  skewY: { properties: "--ui-skew-y", transform: transforms.deg },
-  filter: { transform: transforms.filter() },
-  blur: {
-    properties: "--ui-blur",
-    token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
-  },
-  brightness: {
-    properties: "--ui-brightness",
-    transform: transforms.function("brightness"),
-  },
-  contrast: {
-    properties: "--ui-contrast",
-    transform: transforms.function("contrast"),
-  },
-  dropShadow: {
-    properties: "--ui-drop-shadow",
-    token: "shadows",
-    transform: pipe(
-      transforms.token("shadows"),
-      transforms.function("drop-shadow"),
-    ),
-  },
-  grayscale: {
-    properties: "--ui-grayscale",
-    transform: transforms.function("grayscale"),
-  },
-  hueRotate: {
-    properties: "--ui-hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
-  },
-  invert: {
-    properties: "--ui-invert",
-    transform: transforms.function("invert"),
-  },
-  saturate: {
-    properties: "--ui-saturate",
-    transform: transforms.function("saturate"),
-  },
-  sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
-  backdropFilter: { transform: transforms.filter("backdrop") },
-  backdropBlur: {
-    properties: "--ui-backdrop-blur",
-    token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
-  },
-  backdropBrightness: {
-    properties: "--ui-backdrop-brightness",
-    transform: transforms.function("brightness"),
-  },
-  backdropContrast: {
-    properties: "--ui-backdrop-contrast",
-    transform: transforms.function("contrast"),
-  },
-  backdropDropShadow: {
-    properties: "--ui-backdrop-drop-shadow",
-    token: "shadows",
-    transform: pipe(
-      transforms.token("shadows"),
-      transforms.function("drop-shadow"),
-    ),
-  },
-  backdropGrayscale: {
-    properties: "--ui-backdrop-grayscale",
-    transform: transforms.function("grayscale"),
-  },
-  backdropHueRotate: {
-    properties: "--ui-backdrop-hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
-  },
-  backdropInvert: {
-    properties: "--ui-backdrop-invert",
-    transform: transforms.function("invert"),
-  },
-  backdropSaturate: {
-    properties: "--ui-backdrop-saturate",
-    transform: transforms.function("saturate"),
-  },
-  backdropSepia: {
-    properties: "--ui-backdrop-sepia",
-    transform: transforms.function("sepia"),
-  },
-  colorMode: { properties: "colorScheme" },
 } as const satisfies StyleConfigs
 
 export type ShorthandStyleProperty = keyof typeof shorthandStyles
@@ -1639,97 +1639,97 @@ export const shorthandStyles = {
   bgBlendMode: { properties: "backgroundBlendMode" },
   bgClip: standardStyles.backgroundClip,
   bgColor: standardStyles.backgroundColor,
+  bgGradient: standardStyles.backgroundImage,
   bgImage: standardStyles.backgroundImage,
   bgImg: standardStyles.backgroundImage,
-  bgGradient: standardStyles.backgroundImage,
   bgOrigin: { properties: "backgroundOrigin" },
   bgPosition: { properties: "backgroundPosition" },
   bgPositionX: { properties: "backgroundPositionX" },
-  bgPosX: { properties: "backgroundPositionX" },
   bgPositionY: { properties: "backgroundPositionY" },
+  bgPosX: { properties: "backgroundPositionX" },
   bgPosY: { properties: "backgroundPositionY" },
   bgRepeat: { properties: "backgroundRepeat" },
   bgSize: { properties: "backgroundSize" },
-  roundedBottomLeft: standardStyles.borderBottomLeftRadius,
-  roundedBottomRight: standardStyles.borderBottomRightRadius,
+  blendMode: { properties: "mixBlendMode" },
   borderBottomEndRadius: standardStyles.borderEndEndRadius,
-  roundedBottomEnd: standardStyles.borderEndEndRadius,
   borderBottomStartRadius: standardStyles.borderEndStartRadius,
-  roundedBottomStart: standardStyles.borderEndStartRadius,
   borderEnd: standardStyles.borderInlineEnd,
   borderEndColor: standardStyles.borderInlineEndColor,
+  borderEndRadius: standardStyles.borderInlineEndRadius,
   borderEndStyle: { properties: "borderInlineEndStyle" },
   borderEndWidth: standardStyles.borderInlineEndWidth,
   borderStart: standardStyles.borderInlineStart,
   borderStartColor: standardStyles.borderInlineStartColor,
+  borderStartRadius: standardStyles.borderInlineStartRadius,
   borderStartStyle: { properties: "borderInlineStartStyle" },
   borderStartWidth: standardStyles.borderInlineStartWidth,
-  rounded: standardStyles.borderRadius,
   borderTopEndRadius: standardStyles.borderStartEndRadius,
-  roundedTopEnd: standardStyles.borderStartEndRadius,
   borderTopStartRadius: standardStyles.borderStartStartRadius,
-  roundedTopStart: standardStyles.borderStartStartRadius,
-  roundedTopLeft: standardStyles.borderTopLeftRadius,
-  roundedTopRight: standardStyles.borderTopRightRadius,
-  shadow: standardStyles.boxShadow,
   caret: standardStyles.caretColor,
-  textColor: standardStyles.color,
-  gx: standardStyles.columnGap,
-  gapX: standardStyles.columnGap,
   flexDir: { properties: "flexDirection" },
-  text: standardStyles.fontSize,
   g: standardStyles.gap,
+  gapX: standardStyles.columnGap,
+  gapY: standardStyles.rowGap,
+  gx: standardStyles.columnGap,
+  gy: standardStyles.rowGap,
   h: standardStyles.height,
   insetEnd: standardStyles.insetInlineEnd,
   insetStart: standardStyles.insetInlineStart,
-  tracking: standardStyles.letterSpacing,
   leading: standardStyles.lineHeight,
   listStyleImg: standardStyles.listStyleImage,
   listStylePos: { properties: "listStylePosition" },
   m: standardStyles.margin,
-  mb: standardStyles.marginBottom,
-  me: standardStyles.marginInlineEnd,
   marginEnd: standardStyles.marginInlineEnd,
-  ms: standardStyles.marginInlineStart,
   marginStart: standardStyles.marginInlineStart,
-  ml: standardStyles.marginLeft,
-  mr: standardStyles.marginRight,
-  mt: standardStyles.marginTop,
   maxH: standardStyles.maxHeight,
   maxW: standardStyles.maxWidth,
+  mb: standardStyles.marginBottom,
+  me: standardStyles.marginInlineEnd,
   minH: standardStyles.minHeight,
   minW: standardStyles.minWidth,
-  blendMode: { properties: "mixBlendMode" },
+  ml: standardStyles.marginLeft,
+  mr: standardStyles.marginRight,
+  ms: standardStyles.marginInlineStart,
+  mt: standardStyles.marginTop,
+  mx: standardStyles.marginX,
+  my: standardStyles.marginY,
   overscroll: { properties: "overscrollBehavior" },
   overscrollX: { properties: "overscrollBehaviorX" },
   overscrollY: { properties: "overscrollBehaviorY" },
   p: standardStyles.padding,
+  paddingEnd: standardStyles.paddingInlineEnd,
+  paddingStart: standardStyles.paddingInlineStart,
   pb: standardStyles.paddingBottom,
   pe: standardStyles.paddingInlineEnd,
-  paddingEnd: standardStyles.paddingInlineEnd,
-  ps: standardStyles.paddingInlineStart,
-  paddingStart: standardStyles.paddingInlineStart,
   pl: standardStyles.paddingLeft,
-  pr: standardStyles.paddingRight,
-  pt: standardStyles.paddingTop,
   pos: { properties: "position" },
-  gy: standardStyles.rowGap,
-  gapY: standardStyles.rowGap,
-  textDecor: { properties: "textDecoration" },
-  w: standardStyles.width,
-  z: standardStyles.zIndex,
-  mx: standardStyles.marginX,
-  my: standardStyles.marginY,
+  pr: standardStyles.paddingRight,
+  ps: standardStyles.paddingInlineStart,
+  pt: standardStyles.paddingTop,
   px: standardStyles.paddingX,
   py: standardStyles.paddingY,
-  roundedTop: standardStyles.borderTopRadius,
+  rounded: standardStyles.borderRadius,
   roundedBottom: standardStyles.borderBottomRadius,
-  roundedRight: standardStyles.borderRightRadius,
-  roundedLeft: standardStyles.borderLeftRadius,
-  borderStartRadius: standardStyles.borderInlineStartRadius,
-  roundedStart: standardStyles.borderInlineStartRadius,
-  borderEndRadius: standardStyles.borderInlineEndRadius,
+  roundedBottomEnd: standardStyles.borderEndEndRadius,
+  roundedBottomLeft: standardStyles.borderBottomLeftRadius,
+  roundedBottomRight: standardStyles.borderBottomRightRadius,
+  roundedBottomStart: standardStyles.borderEndStartRadius,
   roundedEnd: standardStyles.borderInlineEndRadius,
+  roundedLeft: standardStyles.borderLeftRadius,
+  roundedRight: standardStyles.borderRightRadius,
+  roundedStart: standardStyles.borderInlineStartRadius,
+  roundedTop: standardStyles.borderTopRadius,
+  roundedTopEnd: standardStyles.borderStartEndRadius,
+  roundedTopLeft: standardStyles.borderTopLeftRadius,
+  roundedTopRight: standardStyles.borderTopRightRadius,
+  roundedTopStart: standardStyles.borderStartStartRadius,
+  shadow: standardStyles.boxShadow,
+  text: standardStyles.fontSize,
+  textColor: standardStyles.color,
+  textDecor: { properties: "textDecoration" },
+  tracking: standardStyles.letterSpacing,
+  w: standardStyles.width,
+  z: standardStyles.zIndex,
 } as const satisfies StyleConfigs
 
 export type PseudoStyleProperty = keyof typeof pseudoStyles
@@ -1742,34 +1742,34 @@ export const pseudoStyles = {
 export type UIStyleProperty = keyof typeof uiStyles
 
 export const uiStyles = {
-  lineClamp: {
-    properties: "--ui-line-clamp",
-    static: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
-    },
-  },
+  apply: { isProcessResult: true, transform: transforms.styles() },
   isTruncated: { transform: transforms.isTruncated },
   layerStyle: {
     isProcessResult: true,
     transform: transforms.styles("layerStyles"),
   },
+  lineClamp: {
+    properties: "--ui-line-clamp",
+    static: {
+      display: "-webkit-box",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
+  },
   textStyle: {
     isProcessResult: true,
     transform: transforms.styles("textStyles"),
   },
-  apply: { isProcessResult: true, transform: transforms.styles() },
   vars: { isProcessSkip: true, transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
-  _media: { isProcessSkip: true, transform: transforms.media },
   _container: { isProcessSkip: true, transform: transforms.container },
+  _media: { isProcessSkip: true, transform: transforms.media },
   _supports: { isProcessSkip: true, transform: transforms.supports },
 } as const satisfies StyleConfigs
 
@@ -2227,17 +2227,162 @@ export const layoutStyleProperties = [
 
 export interface StyleProps {
   /**
-   * The CSS `accent-color` property.
+   * The `@container` of CSS at-rule.
+   * @experimental
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
    */
-  accentColor?: Token<CSS.Property.AccentColor, "colors">
+  _container?: {
+    [key: string]: any
+    name?: StringLiteral
+    css?: CSSUIObject
+    aspectRatio?: CSS.Property.AspectRatio
+    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
+    maxAspectRatio?: CSS.Property.AspectRatio
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    minAspectRatio?: CSS.Property.AspectRatio
+    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    orientation?: "landscape" | "portrait" | StringLiteral
+    query?: StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+  }[]
+  /**
+   * The `@media` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box
+   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
+   * >
+   *   Box
+   * </Box>
+   * ```
+   */
+  _media?: {
+    [key: string]: any
+    type?: "all" | "print" | "screen" | "speech" | StringLiteral
+    css?: CSSUIObject
+    anyHover?: "hover" | "none" | StringLiteral
+    anyPointer?: "coarse" | "fine" | "none" | StringLiteral
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: number | StringLiteral
+    colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
+    colorIndex?: number | StringLiteral
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
+    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+      | StringLiteral
+    dynamicRange?: "high" | "standard" | StringLiteral
+    forcedColors?: "active" | "none" | StringLiteral
+    grid?: "StringLiteral" | 0 | 1
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    hover?: "hover" | "none" | StringLiteral
+    invertedColors?: "inverted" | "none" | StringLiteral
+    maxColor?: number | StringLiteral
+    maxColorIndex?: number | StringLiteral
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxMonochrome?: number | StringLiteral
+    maxResolution?: StringLiteral
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minColor?: number | StringLiteral
+    minColorIndex?: number | StringLiteral
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minMonochrome?: number | StringLiteral
+    minResolution?: StringLiteral
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    monochrome?: number | StringLiteral
+    orientation?: "landscape" | "portrait" | StringLiteral
+    overflowBlock?:
+      | "none"
+      | "optional-paged"
+      | "paged"
+      | "scroll"
+      | StringLiteral
+    overflowInline?: "none" | "scroll" | StringLiteral
+    pointer?: "coarse" | "fine" | "none" | StringLiteral
+    prefersColorScheme?: "dark" | "light" | StringLiteral
+    prefersContrast?:
+      | "custom"
+      | "high"
+      | "low"
+      | "no-preference"
+      | StringLiteral
+    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
+    query?: StringLiteral
+    resolution?: StringLiteral
+    scan?: "interlace" | "progressive" | StringLiteral
+    scripting?: "enabled" | "initial-only" | "none" | StringLiteral
+    update?: "fast" | "none" | "slow" | StringLiteral
+    videoDynamicRange?: "high" | "standard" | StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+  }[]
+  /**
+   * The `@supports` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
+   */
+  _supports?: { css?: CSSUIObject; query?: StringLiteral }[]
   /**
    * The CSS `accent-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
    */
   accent?: Token<CSS.Property.AccentColor, "colors">
+  /**
+   * The CSS `accent-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   */
+  accentColor?: Token<CSS.Property.AccentColor, "colors">
   /**
    * The CSS `align-content` property.
    *
@@ -2250,6 +2395,12 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
    */
   alignItems?: Token<CSS.Property.AlignItems>
+  /**
+   * The CSS `alignment-baseline` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
+   */
+  alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
   /**
    * The CSS `align-self` property.
    *
@@ -2359,11 +2510,72 @@ export interface StyleProps {
    */
   appearance?: Token<CSS.Property.Appearance>
   /**
+   * Apply other styles defined in `theme.styles`.
+   *
+   * @example
+   * ```jsx
+   * <Box apply='mdx.h1'>Box</Box>
+   * ```
+   *
+   * This will apply styles defined in `theme.styles.mdx.h1`
+   */
+  apply?: Token<StringLiteral>
+  /**
    * The CSS `aspect-ratio` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
    */
   aspectRatio?: Token<CSS.Property.AspectRatio>
+  /**
+   * The CSS `azimuth` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/azimuth
+   *
+   * @deprecated
+   */
+  azimuth?: Token<CSS.Property.Azimuth>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
+   */
+  backdropBlur?: Token<StringLiteral, "blurs">
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.
+   */
+  backdropBrightness?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.
+   */
+  backdropContrast?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
+   */
+  backdropDropShadow?: Token<StringLiteral, "shadows">
+  /**
+   * The CSS `backdrop-filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
+   */
+  backdropFilter?: Token<"auto" | CSS.Property.BackdropFilter>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
+   */
+  backdropGrayscale?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.
+   */
+  backdropHueRotate?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.
+   */
+  backdropInvert?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.
+   */
+  backdropSaturate?: Token<StringLiteral>
+  /**
+   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.
+   */
+  backdropSepia?: Token<StringLiteral>
   /**
    * The CSS `backface-visibility` property.
    *
@@ -2377,17 +2589,83 @@ export interface StyleProps {
    */
   background?: Token<CSS.Property.Background, "colors">
   /**
-   * The CSS `background` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
-   */
-  bg?: Token<CSS.Property.Background, "colors">
-  /**
    * The CSS `background-attachment` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
    */
   backgroundAttachment?: Token<CSS.Property.BackgroundAttachment>
+  /**
+   * The CSS `background-blend-mode` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+   */
+  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  /**
+   * The CSS `background-clip` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
+   */
+  backgroundClip?: Token<CSS.Property.BackgroundClip>
+  /**
+   * The CSS `background-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
+   */
+  backgroundColor?: Token<CSS.Property.BackgroundColor, "colors">
+  /**
+   * The CSS `background-image` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   */
+  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  /**
+   * The CSS `background-origin` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
+   */
+  backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
+  /**
+   * The CSS `background-position` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
+   */
+  backgroundPosition?: Token<CSS.Property.BackgroundPosition>
+  /**
+   * The CSS `background-position-x` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   */
+  backgroundPositionX?: Token<CSS.Property.BackgroundPositionX>
+  /**
+   * The CSS `background-position-y` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   */
+  backgroundPositionY?: Token<CSS.Property.BackgroundPositionY>
+  /**
+   * The CSS `background-repeat` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+   */
+  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
+  /**
+   * The CSS `background-size` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+   */
+  backgroundSize?: Token<CSS.Property.BackgroundSize>
+  /**
+   * The CSS `baseline-shift` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
+   */
+  baselineShift?: Token<CSS.Property.BaselineShift>
+  /**
+   * The CSS `background` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
+   */
+  bg?: Token<CSS.Property.Background, "colors">
   /**
    * The CSS `background-attachment` property.
    *
@@ -2399,19 +2677,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
    */
-  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
-  /**
-   * The CSS `background-blend-mode` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
-   */
   bgBlendMode?: Token<CSS.Property.BackgroundBlendMode>
-  /**
-   * The CSS `background-clip` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
-   */
-  backgroundClip?: Token<CSS.Property.BackgroundClip>
   /**
    * The CSS `background-clip` property.
    *
@@ -2423,19 +2689,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
    */
-  backgroundColor?: Token<CSS.Property.BackgroundColor, "colors">
-  /**
-   * The CSS `background-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
-   */
   bgColor?: Token<CSS.Property.BackgroundColor, "colors">
   /**
    * The CSS `background-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
    */
-  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
    * The CSS `background-image` property.
    *
@@ -2449,29 +2709,11 @@ export interface StyleProps {
    */
   bgImg?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
-   * The CSS `background-image` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-   */
-  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
-  /**
-   * The CSS `background-origin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-   */
-  backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
-  /**
    * The CSS `background-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
    */
   bgOrigin?: Token<CSS.Property.BackgroundOrigin>
-  /**
-   * The CSS `background-position` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-   */
-  backgroundPosition?: Token<CSS.Property.BackgroundPosition>
   /**
    * The CSS `background-position` property.
    *
@@ -2483,13 +2725,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
    */
-  backgroundPositionX?: Token<CSS.Property.BackgroundPositionX>
-  /**
-   * The CSS `background-position-x` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
-   */
   bgPositionX?: Token<CSS.Property.BackgroundPositionX>
+  /**
+   * The CSS `background-position-y` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   */
+  bgPositionY?: Token<CSS.Property.BackgroundPositionY>
   /**
    * The CSS `background-position-x` property.
    *
@@ -2501,25 +2743,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY?: Token<CSS.Property.BackgroundPositionY>
-  /**
-   * The CSS `background-position-y` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
-   */
-  bgPositionY?: Token<CSS.Property.BackgroundPositionY>
-  /**
-   * The CSS `background-position-y` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
-   */
   bgPosY?: Token<CSS.Property.BackgroundPositionY>
-  /**
-   * The CSS `background-repeat` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-   */
-  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
   /**
    * The CSS `background-repeat` property.
    *
@@ -2531,19 +2755,23 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
    */
-  backgroundSize?: Token<CSS.Property.BackgroundSize>
-  /**
-   * The CSS `background-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-   */
   bgSize?: Token<CSS.Property.BackgroundSize>
+  /**
+   * The CSS `mix-blend-mode` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+   */
+  blendMode?: Token<CSS.Property.MixBlendMode>
   /**
    * The CSS `block-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/block-size
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
+  /**
+   * If `filter=auto`, sets the value of `--ui-blur`.
+   */
+  blur?: Token<StringLiteral, "blurs">
   /**
    * The CSS `border` property.
    *
@@ -2635,6 +2863,15 @@ export interface StyleProps {
    */
   borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
   /**
+   * The CSS `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   */
+  borderBottomEndRadius?: Token<
+    CSS.Property.BorderEndEndRadius | number,
+    "radii"
+  >
+  /**
    * The CSS `border-bottom-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
@@ -2644,12 +2881,15 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-bottom-left-radius` property.
+   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomLeft?: Token<
-    CSS.Property.BorderBottomLeftRadius | number,
+  borderBottomRadius?: Token<
+    | CSS.Property.BorderBottomLeftRadius
+    | CSS.Property.BorderBottomRightRadius
+    | number,
     "radii"
   >
   /**
@@ -2662,12 +2902,12 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-bottom-right-radius` property.
+   * The CSS `border-end-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomRight?: Token<
-    CSS.Property.BorderBottomRightRadius | number,
+  borderBottomStartRadius?: Token<
+    CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
   /**
@@ -2695,26 +2935,35 @@ export interface StyleProps {
    */
   borderColor?: Token<CSS.Property.BorderColor, "colors">
   /**
+   * The CSS `border-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
+   */
+  borderEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
+  /**
+   * The CSS `border-inline-end-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   */
+  borderEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  /**
    * The CSS `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    */
   borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
   /**
-   * The CSS `border-end-end-radius` property.
+   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomEndRadius?: Token<
-    CSS.Property.BorderEndEndRadius | number,
+  borderEndRadius?: Token<
+    | CSS.Property.BorderEndEndRadius
+    | CSS.Property.BorderEndStartRadius
+    | number,
     "radii"
   >
-  /**
-   * The CSS `border-end-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   */
-  roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
   /**
    * The CSS `border-end-start-radius` property.
    *
@@ -2725,23 +2974,17 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-end-start-radius` property.
+   * The CSS `border-inline-end-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
    */
-  borderBottomStartRadius?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
-   * The CSS `border-end-start-radius` property.
+   * The CSS `border-inline-end-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
    */
-  roundedBottomStart?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
    * The CSS `border-image` property.
    *
@@ -2797,23 +3040,23 @@ export interface StyleProps {
    */
   borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
   /**
-   * The CSS `border-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
-   */
-  borderEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
-  /**
    * The CSS `border-inline-end-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
    */
   borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
   /**
-   * The CSS `border-inline-end-color` property.
+   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  borderEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndRadius?: Token<
+    | CSS.Property.BorderEndEndRadius
+    | CSS.Property.BorderEndStartRadius
+    | number,
+    "radii"
+  >
   /**
    * The CSS `border-inline-end-style` property.
    *
@@ -2821,23 +3064,11 @@ export interface StyleProps {
    */
   borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
-   * The CSS `border-inline-end-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
-   */
-  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
-  /**
    * The CSS `border-inline-end-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
    */
   borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
-  /**
-   * The CSS `border-inline-end-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
-   */
-  borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
    * The CSS `border-inline-start` property.
    *
@@ -2845,23 +3076,23 @@ export interface StyleProps {
    */
   borderInlineStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
   /**
-   * The CSS `border-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
-   */
-  borderStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
-  /**
    * The CSS `border-inline-start-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
    */
   borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
   /**
-   * The CSS `border-inline-start-color` property.
+   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  borderStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderInlineStartRadius?: Token<
+    | CSS.Property.BorderStartEndRadius
+    | CSS.Property.BorderStartStartRadius
+    | number,
+    "radii"
+  >
   /**
    * The CSS `border-inline-start-style` property.
    *
@@ -2869,23 +3100,11 @@ export interface StyleProps {
    */
   borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
   /**
-   * The CSS `border-inline-start-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
-   */
-  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
-  /**
    * The CSS `border-inline-start-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
    */
   borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
-  /**
-   * The CSS `border-inline-start-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
-   */
-  borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
   /**
    * The CSS `border-inline-style` property.
    *
@@ -2911,6 +3130,18 @@ export interface StyleProps {
    */
   borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors">
   /**
+   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   */
+  borderLeftRadius?: Token<
+    | CSS.Property.BorderBottomLeftRadius
+    | CSS.Property.BorderTopLeftRadius
+    | number,
+    "radii"
+  >
+  /**
    * The CSS `border-left-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
@@ -2929,12 +3160,6 @@ export interface StyleProps {
    */
   borderRadius?: Token<CSS.Property.BorderRadius | number, "radii">
   /**
-   * The CSS `border-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
-   */
-  rounded?: Token<CSS.Property.BorderRadius | number, "radii">
-  /**
    * The CSS `border-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
@@ -2946,6 +3171,18 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
    */
   borderRightColor?: Token<CSS.Property.BorderRightColor, "colors">
+  /**
+   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   */
+  borderRightRadius?: Token<
+    | CSS.Property.BorderBottomRightRadius
+    | CSS.Property.BorderTopRightRadius
+    | number,
+    "radii"
+  >
   /**
    * The CSS `border-right-style` property.
    *
@@ -2965,6 +3202,18 @@ export interface StyleProps {
    */
   borderSpacing?: Token<CSS.Property.BorderSpacing>
   /**
+   * The CSS `border-inline-start` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
+   */
+  borderStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
+  /**
+   * The CSS `border-inline-start-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   */
+  borderStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  /**
    * The CSS `border-start-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
@@ -2974,20 +3223,17 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-start-end-radius` property.
+   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  borderTopEndRadius?: Token<
-    CSS.Property.BorderStartEndRadius | number,
+  borderStartRadius?: Token<
+    | CSS.Property.BorderStartEndRadius
+    | CSS.Property.BorderStartStartRadius
+    | number,
     "radii"
   >
-  /**
-   * The CSS `border-start-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   */
-  roundedTopEnd?: Token<CSS.Property.BorderStartEndRadius | number, "radii">
   /**
    * The CSS `border-start-start-radius` property.
    *
@@ -2998,20 +3244,17 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-start-start-radius` property.
+   * The CSS `border-inline-start-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
    */
-  borderTopStartRadius?: Token<
-    CSS.Property.BorderStartStartRadius | number,
-    "radii"
-  >
+  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
   /**
-   * The CSS `border-start-start-radius` property.
+   * The CSS `border-inline-start-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
    */
-  roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, "radii">
+  borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
   /**
    * The CSS `border-style` property.
    *
@@ -3031,6 +3274,15 @@ export interface StyleProps {
    */
   borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
   /**
+   * The CSS `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   */
+  borderTopEndRadius?: Token<
+    CSS.Property.BorderStartEndRadius | number,
+    "radii"
+  >
+  /**
    * The CSS `border-top-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
@@ -3040,11 +3292,17 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-top-left-radius` property.
+   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  roundedTopLeft?: Token<CSS.Property.BorderTopLeftRadius | number, "radii">
+  borderTopRadius?: Token<
+    | CSS.Property.BorderTopLeftRadius
+    | CSS.Property.BorderTopRightRadius
+    | number,
+    "radii"
+  >
   /**
    * The CSS `border-top-right-radius` property.
    *
@@ -3055,11 +3313,14 @@ export interface StyleProps {
     "radii"
   >
   /**
-   * The CSS `border-top-right-radius` property.
+   * The CSS `border-start-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  roundedTopRight?: Token<CSS.Property.BorderTopRightRadius | number, "radii">
+  borderTopStartRadius?: Token<
+    CSS.Property.BorderStartStartRadius | number,
+    "radii"
+  >
   /**
    * The CSS `border-top-style` property.
    *
@@ -3078,6 +3339,26 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
    */
   borderWidth?: Token<CSS.Property.BorderWidth | number>
+  /**
+   * The CSS `border-left` and `border-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
+   */
+  borderX?: Token<
+    CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
+    "borders"
+  >
+  /**
+   * The CSS `border-top` and `border-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
+   */
+  borderY?: Token<
+    CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
+    "borders"
+  >
   /**
    * The CSS `bottom` property.
    *
@@ -3161,11 +3442,12 @@ export interface StyleProps {
    */
   boxShadow?: Token<CSS.Property.BoxShadow, "shadows">
   /**
-   * The CSS `box-shadow` property.
+   * The CSS `width` and `height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
-  shadow?: Token<CSS.Property.BoxShadow, "shadows">
+  boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
   /**
    * The CSS `box-sizing` property.
    *
@@ -3191,6 +3473,10 @@ export interface StyleProps {
    */
   breakInside?: Token<CSS.Property.BreakInside>
   /**
+   * If `filter=auto`, sets the value of `--ui-brightness`.
+   */
+  brightness?: Token<StringLiteral>
+  /**
    * The CSS `caption-side` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
@@ -3201,13 +3487,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
    */
-  caretColor?: Token<CSS.Property.CaretColor, "colors">
+  caret?: Token<CSS.Property.CaretColor, "colors">
   /**
    * The CSS `caret-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
    */
-  caret?: Token<CSS.Property.CaretColor, "colors">
+  caretColor?: Token<CSS.Property.CaretColor, "colors">
   /**
    * The CSS `clear` property.
    *
@@ -3239,17 +3525,17 @@ export interface StyleProps {
    */
   color?: Token<CSS.Property.Color, "colors">
   /**
-   * The CSS `color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
-   */
-  textColor?: Token<CSS.Property.Color, "colors">
-  /**
    * The CSS `color-interpolation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation
    */
   colorInterpolation?: Token<CSS.Property.ColorInterpolation>
+  /**
+   * The CSS `color-scheme` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   */
+  colorMode?: Token<CSS.Property.ColorScheme>
   /**
    * The CSS `column-count` property.
    *
@@ -3268,18 +3554,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
   columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
-  /**
-   * The CSS `column-gap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-   */
-  gx?: Token<CSS.Property.ColumnGap | number, "spaces">
-  /**
-   * The CSS `column-gap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-   */
-  gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `column-rule` property.
    *
@@ -3305,6 +3579,12 @@ export interface StyleProps {
    */
   columnRuleWidth?: Token<CSS.Property.ColumnRuleWidth | number>
   /**
+   * The CSS `columns` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/columns
+   */
+  columns?: Token<CSS.Property.Columns>
+  /**
    * The CSS `column-span` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
@@ -3317,17 +3597,29 @@ export interface StyleProps {
    */
   columnWidth?: Token<CSS.Property.ColumnWidth | number, "sizes">
   /**
-   * The CSS `columns` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/columns
-   */
-  columns?: Token<CSS.Property.Columns>
-  /**
    * The CSS `contain` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain
    */
   contain?: Token<CSS.Property.Contain>
+  /**
+   * The CSS `container` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container
+   */
+  container?: Token<CSS.Property.Container>
+  /**
+   * The CSS `container-name` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
+   */
+  containerName?: Token<CSS.Property.ContainerName>
+  /**
+   * The CSS `container-type` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
+   */
+  containerType?: Token<CSS.Property.ContainerType>
   /**
    * The CSS `contain-intrinsic-block-size` property.
    *
@@ -3362,24 +3654,6 @@ export interface StyleProps {
     "sizes"
   >
   /**
-   * The CSS `container` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container
-   */
-  container?: Token<CSS.Property.Container>
-  /**
-   * The CSS `container-name` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
-   */
-  containerName?: Token<CSS.Property.ContainerName>
-  /**
-   * The CSS `container-type` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
-   */
-  containerType?: Token<CSS.Property.ContainerType>
-  /**
    * The CSS `content` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content
@@ -3391,6 +3665,10 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
    */
   contentVisibility?: Token<CSS.Property.ContentVisibility>
+  /**
+   * If `filter=auto`, sets the value of `--ui-contrast`.
+   */
+  contrast?: Token<StringLiteral>
   /**
    * The CSS `counter-increment` property.
    *
@@ -3434,6 +3712,10 @@ export interface StyleProps {
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
+   * If `filter=auto`, sets the value of `--ui-drop-shadow`.
+   */
+  dropShadow?: Token<StringLiteral, "shadows">
+  /**
    * The CSS `empty-cells` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
@@ -3458,6 +3740,12 @@ export interface StyleProps {
    */
   fillRule?: Token<CSS.Property.FillRule>
   /**
+   * The CSS `filter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+   */
+  filter?: Token<"auto" | CSS.Property.Filter>
+  /**
    * The CSS `flex` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex
@@ -3474,13 +3762,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
-  flexDirection?: Token<CSS.Property.FlexDirection>
+  flexDir?: Token<CSS.Property.FlexDirection>
   /**
    * The CSS `flex-direction` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
-  flexDir?: Token<CSS.Property.FlexDirection>
+  flexDirection?: Token<CSS.Property.FlexDirection>
   /**
    * The CSS `flex-flow` property.
    *
@@ -3511,6 +3799,18 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/float
    */
   float?: Token<CSS.Property.Float>
+  /**
+   * The CSS `flood-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
+   */
+  floodColor?: Token<CSS.Property.FloodColor, "colors">
+  /**
+   * The CSS `flood-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
+   */
+  floodOpacity?: Token<CSS.Property.FloodOpacity>
   /**
    * The CSS `font` property.
    *
@@ -3559,12 +3859,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
    */
   fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
-  /**
-   * The CSS `font-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-   */
-  text?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
    * The CSS `font-size-adjust` property.
    *
@@ -3690,13 +3984,35 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
-  gap?: Token<CSS.Property.Gap | number, "spaces">
+  g?: Token<CSS.Property.Gap | number, "spaces">
   /**
    * The CSS `gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
-  g?: Token<CSS.Property.Gap | number, "spaces">
+  gap?: Token<CSS.Property.Gap | number, "spaces">
+  /**
+   * The CSS `column-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   */
+  gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * The CSS `row-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   */
+  gapY?: Token<CSS.Property.RowGap | number, "spaces">
+  /**
+   * The CSS `glyph-orientation-vertical` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/glyph-orientation-vertical
+   */
+  glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
+  /**
+   * If `filter=auto`, sets the value of `--ui-grayscale`.
+   */
+  grayscale?: Token<StringLiteral>
   /**
    * The CSS `grid` property.
    *
@@ -3791,6 +4107,24 @@ export interface StyleProps {
    */
   gridTemplateRows?: Token<CSS.Property.GridTemplateRows | number, "sizes">
   /**
+   * The CSS `column-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   */
+  gx?: Token<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * The CSS `row-gap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   */
+  gy?: Token<CSS.Property.RowGap | number, "spaces">
+  /**
+   * The CSS `height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   */
+  h?: Token<CSS.Property.Height | number, "sizes">
+  /**
    * The CSS `hanging-punctuation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
@@ -3803,11 +4137,9 @@ export interface StyleProps {
    */
   height?: Token<CSS.Property.Height | number, "sizes">
   /**
-   * The CSS `height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * If `filter=auto`, sets the value of `--ui-hue-rotate`.
    */
-  h?: Token<CSS.Property.Height | number, "sizes">
+  hueRotate?: Token<StringLiteral>
   /**
    * The CSS `hyphenate-character` property.
    *
@@ -3881,6 +4213,12 @@ export interface StyleProps {
    */
   insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, "spaces">
   /**
+   * The CSS `inset-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
+   */
+  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
+  /**
    * The CSS `inset-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline
@@ -3892,12 +4230,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
    */
   insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
-  /**
-   * The CSS `inset-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
-   */
-  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
    * The CSS `inset-inline-start` property.
    *
@@ -3911,11 +4243,33 @@ export interface StyleProps {
    */
   insetStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
   /**
+   * The CSS `left` and `right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
+   */
+  insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  /**
+   * The CSS `top` and `bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
+   */
+  insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  /**
+   * If `filter=auto`, sets the value of `--ui-invert`.
+   */
+  invert?: Token<StringLiteral>
+  /**
    * The CSS `isolation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
    */
   isolation?: Token<CSS.Property.Isolation>
+  /**
+   * If `true`, it clamps truncate a text after one line.
+   */
+  isTruncated?: Token<boolean>
   /**
    * The CSS `justify-content` property.
    *
@@ -3935,6 +4289,16 @@ export interface StyleProps {
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
   /**
+   * Apply layer styles defined in `theme.layerStyles`.
+   */
+  layerStyle?: Token<StringLiteral, "layerStyles">
+  /**
+   * The CSS `line-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   */
+  leading?: Token<CSS.Property.LineHeight, "lineHeights">
+  /**
    * The CSS `left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
@@ -3947,11 +4311,11 @@ export interface StyleProps {
    */
   letterSpacing?: Token<CSS.Property.LetterSpacing, "letterSpacings">
   /**
-   * The CSS `letter-spacing` property.
+   * The CSS `lighting-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
    */
-  tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
+  lightingColor?: Token<CSS.Property.LightingColor, "colors">
   /**
    * The CSS `line-break` property.
    *
@@ -3959,17 +4323,15 @@ export interface StyleProps {
    */
   lineBreak?: Token<CSS.Property.LineBreak>
   /**
-   * The CSS `line-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   * Used to visually truncate a text after a number of lines.
    */
-  lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
+  lineClamp?: Token<number>
   /**
    * The CSS `line-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
    */
-  leading?: Token<CSS.Property.LineHeight, "lineHeights">
+  lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
   /**
    * The CSS `line-height-step` property.
    *
@@ -3999,13 +4361,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
    */
-  listStylePosition?: Token<CSS.Property.ListStylePosition>
+  listStylePos?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
    */
-  listStylePos?: Token<CSS.Property.ListStylePosition>
+  listStylePosition?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-type` property.
    *
@@ -4017,13 +4379,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
    */
-  margin?: Token<CSS.Property.Margin | number, "spaces">
+  m?: Token<CSS.Property.Margin | number, "spaces">
   /**
    * The CSS `margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
    */
-  m?: Token<CSS.Property.Margin | number, "spaces">
+  margin?: Token<CSS.Property.Margin | number, "spaces">
   /**
    * The CSS `margin-block` property.
    *
@@ -4049,11 +4411,11 @@ export interface StyleProps {
    */
   marginBottom?: Token<CSS.Property.MarginBottom | number, "spaces">
   /**
-   * The CSS `margin-bottom` property.
+   * The CSS `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    */
-  mb?: Token<CSS.Property.MarginBottom | number, "spaces">
+  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * The CSS `margin-inline` property.
    *
@@ -4067,35 +4429,11 @@ export interface StyleProps {
    */
   marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
-   * The CSS `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   */
-  me?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
-  /**
-   * The CSS `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   */
-  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
-  /**
    * The CSS `margin-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
   marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
-  /**
-   * The CSS `margin-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  ms?: Token<CSS.Property.MarginInlineStart | number, "spaces">
-  /**
-   * The CSS `margin-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  marginStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * The CSS `margin-left` property.
    *
@@ -4103,23 +4441,17 @@ export interface StyleProps {
    */
   marginLeft?: Token<CSS.Property.MarginLeft | number, "spaces">
   /**
-   * The CSS `margin-left` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
-   */
-  ml?: Token<CSS.Property.MarginLeft | number, "spaces">
-  /**
    * The CSS `margin-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
    */
   marginRight?: Token<CSS.Property.MarginRight | number, "spaces">
   /**
-   * The CSS `margin-right` property.
+   * The CSS `margin-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  mr?: Token<CSS.Property.MarginRight | number, "spaces">
+  marginStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * The CSS `margin-top` property.
    *
@@ -4127,17 +4459,31 @@ export interface StyleProps {
    */
   marginTop?: Token<CSS.Property.MarginTop | number, "spaces">
   /**
-   * The CSS `margin-top` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
-   */
-  mt?: Token<CSS.Property.MarginTop | number, "spaces">
-  /**
    * The CSS `margin-trim` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-trim
    */
   marginTrim?: Token<CSS.Property.MarginTrim>
+  /**
+   * The CSS `margin-inline-start` and `margin-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   */
+  marginX?: Token<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * The CSS `margin-top` and `margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   */
+  marginY?: Token<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
   /**
    * The CSS `marker` property.
    *
@@ -4295,17 +4641,27 @@ export interface StyleProps {
    */
   maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, "sizes">
   /**
-   * The CSS `max-height` property.
+   * The CSS `max-width` and `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
+  maxBoxSize?: Token<
+    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
+    "sizes"
+  >
   /**
    * The CSS `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    */
   maxH?: Token<CSS.Property.MaxHeight | number, "sizes">
+  /**
+   * The CSS `max-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+   */
+  maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
   /**
    * The CSS `max-inline-size` property.
    *
@@ -4317,13 +4673,25 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
+  maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
   /**
    * The CSS `max-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
+  maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
+  /**
+   * The CSS `margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   */
+  mb?: Token<CSS.Property.MarginBottom | number, "spaces">
+  /**
+   * The CSS `margin-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   */
+  me?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * The CSS `min-block-size` property.
    *
@@ -4331,17 +4699,27 @@ export interface StyleProps {
    */
   minBlockSize?: Token<CSS.Property.MinBlockSize | number, "sizes">
   /**
-   * The CSS `min-height` property.
+   * The CSS `min-width` and `min-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
+  minBoxSize?: Token<
+    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
+    "sizes"
+  >
   /**
    * The CSS `min-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    */
   minH?: Token<CSS.Property.MinHeight | number, "sizes">
+  /**
+   * The CSS `min-height` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
+   */
+  minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
   /**
    * The CSS `min-inline-size` property.
    *
@@ -4353,13 +4731,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
+  minW?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `min-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minW?: Token<CSS.Property.MinWidth | number, "sizes">
+  minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `mix-blend-mode` property.
    *
@@ -4367,11 +4745,49 @@ export interface StyleProps {
    */
   mixBlendMode?: Token<CSS.Property.MixBlendMode>
   /**
-   * The CSS `mix-blend-mode` property.
+   * The CSS `margin-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
    */
-  blendMode?: Token<CSS.Property.MixBlendMode>
+  ml?: Token<CSS.Property.MarginLeft | number, "spaces">
+  /**
+   * The CSS `margin-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
+   */
+  mr?: Token<CSS.Property.MarginRight | number, "spaces">
+  /**
+   * The CSS `margin-inline-start` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   */
+  ms?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  /**
+   * The CSS `margin-top` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   */
+  mt?: Token<CSS.Property.MarginTop | number, "spaces">
+  /**
+   * The CSS `margin-inline-start` and `margin-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   */
+  mx?: Token<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * The CSS `margin-top` and `margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   */
+  my?: Token<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
   /**
    * The CSS `object-fit` property.
    *
@@ -4527,13 +4943,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
    */
-  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
+  overscroll?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
    */
-  overscroll?: Token<CSS.Property.OverscrollBehavior>
+  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior-block` property.
    *
@@ -4553,17 +4969,17 @@ export interface StyleProps {
    */
   overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
-   * The CSS `overscroll-behavior-x` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
-   */
-  overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
-  /**
    * The CSS `overscroll-behavior-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
    */
   overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY>
+  /**
+   * The CSS `overscroll-behavior-x` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+   */
+  overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
    * The CSS `overscroll-behavior-y` property.
    *
@@ -4575,13 +4991,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
    */
-  padding?: Token<CSS.Property.Padding | number, "spaces">
+  p?: Token<CSS.Property.Padding | number, "spaces">
   /**
    * The CSS `padding` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
    */
-  p?: Token<CSS.Property.Padding | number, "spaces">
+  padding?: Token<CSS.Property.Padding | number, "spaces">
   /**
    * The CSS `padding-block` property.
    *
@@ -4607,11 +5023,11 @@ export interface StyleProps {
    */
   paddingBottom?: Token<CSS.Property.PaddingBottom | number, "spaces">
   /**
-   * The CSS `padding-bottom` property.
+   * The CSS `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    */
-  pb?: Token<CSS.Property.PaddingBottom | number, "spaces">
+  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * The CSS `padding-inline` property.
    *
@@ -4625,35 +5041,11 @@ export interface StyleProps {
    */
   paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
-   * The CSS `padding-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   */
-  pe?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
-  /**
-   * The CSS `padding-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   */
-  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
-  /**
    * The CSS `padding-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
   paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
-  /**
-   * The CSS `padding-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  ps?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
-  /**
-   * The CSS `padding-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * The CSS `padding-left` property.
    *
@@ -4661,23 +5053,17 @@ export interface StyleProps {
    */
   paddingLeft?: Token<CSS.Property.PaddingLeft | number, "spaces">
   /**
-   * The CSS `padding-left` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
-   */
-  pl?: Token<CSS.Property.PaddingLeft | number, "spaces">
-  /**
    * The CSS `padding-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
    */
   paddingRight?: Token<CSS.Property.PaddingRight | number, "spaces">
   /**
-   * The CSS `padding-right` property.
+   * The CSS `padding-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  pr?: Token<CSS.Property.PaddingRight | number, "spaces">
+  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * The CSS `padding-top` property.
    *
@@ -4685,11 +5071,25 @@ export interface StyleProps {
    */
   paddingTop?: Token<CSS.Property.PaddingTop | number, "spaces">
   /**
-   * The CSS `padding-top` property.
+   * The CSS `padding-inline-start` and `padding-inline-end` property.
    *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   */
+  paddingX?: Token<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * The CSS `padding-top` and `padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
-  pt?: Token<CSS.Property.PaddingTop | number, "spaces">
+  paddingY?: Token<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
   /**
    * The CSS `page` property.
    *
@@ -4721,6 +5121,18 @@ export interface StyleProps {
    */
   paintOrder?: Token<CSS.Property.PaintOrder>
   /**
+   * The CSS `padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   */
+  pb?: Token<CSS.Property.PaddingBottom | number, "spaces">
+  /**
+   * The CSS `padding-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   */
+  pe?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
+  /**
    * The CSS `perspective` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
@@ -4732,6 +5144,12 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
    */
   perspectiveOrigin?: Token<CSS.Property.PerspectiveOrigin>
+  /**
+   * The CSS `padding-left` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
+   */
+  pl?: Token<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * The CSS `place-content` property.
    *
@@ -4761,19 +5179,57 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
    */
-  position?: Token<CSS.Property.Position>
+  pos?: Token<CSS.Property.Position>
   /**
    * The CSS `position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
    */
-  pos?: Token<CSS.Property.Position>
+  position?: Token<CSS.Property.Position>
+  /**
+   * The CSS `padding-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
+   */
+  pr?: Token<CSS.Property.PaddingRight | number, "spaces">
   /**
    * The CSS `print-color-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust
    */
   printColorAdjust?: Token<CSS.Property.PrintColorAdjust>
+  /**
+   * The CSS `padding-inline-start` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   */
+  ps?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
+  /**
+   * The CSS `padding-top` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   */
+  pt?: Token<CSS.Property.PaddingTop | number, "spaces">
+  /**
+   * The CSS `padding-inline-start` and `padding-inline-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   */
+  px?: Token<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * The CSS `padding-top` and `padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   */
+  py?: Token<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
   /**
    * The CSS `quotes` property.
    *
@@ -4793,23 +5249,150 @@ export interface StyleProps {
    */
   right?: Token<CSS.Property.Right | number, "spaces">
   /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.
+   */
+  rotate?: Token<StringLiteral>
+  /**
+   * The CSS `border-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+   */
+  rounded?: Token<CSS.Property.BorderRadius | number, "radii">
+  /**
+   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   */
+  roundedBottom?: Token<
+    | CSS.Property.BorderBottomLeftRadius
+    | CSS.Property.BorderBottomRightRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   */
+  roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  /**
+   * The CSS `border-bottom-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   */
+  roundedBottomLeft?: Token<
+    CSS.Property.BorderBottomLeftRadius | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   */
+  roundedBottomRight?: Token<
+    CSS.Property.BorderBottomRightRadius | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-end-start-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   */
+  roundedBottomStart?: Token<
+    CSS.Property.BorderEndStartRadius | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   */
+  roundedEnd?: Token<
+    | CSS.Property.BorderEndEndRadius
+    | CSS.Property.BorderEndStartRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   */
+  roundedLeft?: Token<
+    | CSS.Property.BorderBottomLeftRadius
+    | CSS.Property.BorderTopLeftRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   */
+  roundedRight?: Token<
+    | CSS.Property.BorderBottomRightRadius
+    | CSS.Property.BorderTopRightRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   */
+  roundedStart?: Token<
+    | CSS.Property.BorderStartEndRadius
+    | CSS.Property.BorderStartStartRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   */
+  roundedTop?: Token<
+    | CSS.Property.BorderTopLeftRadius
+    | CSS.Property.BorderTopRightRadius
+    | number,
+    "radii"
+  >
+  /**
+   * The CSS `border-start-end-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   */
+  roundedTopEnd?: Token<CSS.Property.BorderStartEndRadius | number, "radii">
+  /**
+   * The CSS `border-top-left-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   */
+  roundedTopLeft?: Token<CSS.Property.BorderTopLeftRadius | number, "radii">
+  /**
+   * The CSS `border-top-right-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   */
+  roundedTopRight?: Token<CSS.Property.BorderTopRightRadius | number, "radii">
+  /**
+   * The CSS `border-start-start-radius` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   */
+  roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, "radii">
+  /**
    * The CSS `row-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
    */
   rowGap?: Token<CSS.Property.RowGap | number, "spaces">
-  /**
-   * The CSS `row-gap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
-   */
-  gy?: Token<CSS.Property.RowGap | number, "spaces">
-  /**
-   * The CSS `row-gap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
-   */
-  gapY?: Token<CSS.Property.RowGap | number, "spaces">
   /**
    * The CSS `ruby-align` property.
    *
@@ -4822,6 +5405,40 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-position
    */
   rubyPosition?: Token<CSS.Property.RubyPosition>
+  /**
+   * If `filter=auto`, sets the value of `--ui-saturate`.
+   */
+  saturate?: Token<StringLiteral>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
+   */
+  scale?: Token<StringLiteral>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.
+   */
+  scaleX?: Token<StringLiteral>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.
+   */
+  scaleY?: Token<StringLiteral>
+  /**
+   * The CSS `scrollbar-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
+   */
+  scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
+  /**
+   * The CSS `scrollbar-gutter` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+   */
+  scrollbarGutter?: Token<CSS.Property.ScrollbarGutter>
+  /**
+   * The CSS `scrollbar-width` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
+   */
+  scrollbarWidth?: Token<CSS.Property.ScrollbarWidth | number>
   /**
    * The CSS `scroll-behavior` property.
    *
@@ -4895,6 +5512,26 @@ export interface StyleProps {
    */
   scrollMarginTop?: Token<CSS.Property.ScrollMarginTop | number, "spaces">
   /**
+   * The CSS `scroll-margin-left` and `scroll-margin-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+   */
+  scrollMarginX?: Token<
+    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
+    "spaces"
+  >
+  /**
+   * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+   */
+  scrollMarginY?: Token<
+    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
+    "spaces"
+  >
+  /**
    * The CSS `scroll-padding` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
@@ -4964,6 +5601,26 @@ export interface StyleProps {
    */
   scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, "spaces">
   /**
+   * The CSS `scroll-padding-left` and `scroll-padding-right` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+   */
+  scrollPaddingX?: Token<
+    CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
+    "spaces"
+  >
+  /**
+   * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+   */
+  scrollPaddingY?: Token<
+    CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
+    "spaces"
+  >
+  /**
    * The CSS `scroll-snap-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
@@ -5000,23 +5657,15 @@ export interface StyleProps {
    */
   scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
   /**
-   * The CSS `scrollbar-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
+   * If `filter=auto`, sets the value of `--ui-sepia`.
    */
-  scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
+  sepia?: Token<StringLiteral>
   /**
-   * The CSS `scrollbar-gutter` property.
+   * The CSS `box-shadow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
    */
-  scrollbarGutter?: Token<CSS.Property.ScrollbarGutter>
-  /**
-   * The CSS `scrollbar-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
-   */
-  scrollbarWidth?: Token<CSS.Property.ScrollbarWidth | number>
+  shadow?: Token<CSS.Property.BoxShadow, "shadows">
   /**
    * The CSS `shape-image-threshold` property.
    *
@@ -5041,6 +5690,14 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-rendering
    */
   shapeRendering?: Token<CSS.Property.ShapeRendering>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.
+   */
+  skewX?: Token<StringLiteral>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.
+   */
+  skewY?: Token<StringLiteral>
   /**
    * The CSS `stop-color` property.
    *
@@ -5102,17 +5759,23 @@ export interface StyleProps {
    */
   strokeWidth?: Token<CSS.Property.StrokeWidth | number>
   /**
+   * The CSS `table-layout` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+   */
+  tableLayout?: Token<CSS.Property.TableLayout>
+  /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
    */
   tabSize?: Token<CSS.Property.TabSize>
   /**
-   * The CSS `table-layout` property.
+   * The CSS `font-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
    */
-  tableLayout?: Token<CSS.Property.TableLayout>
+  text?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
    * The CSS `text-align` property.
    *
@@ -5132,6 +5795,12 @@ export interface StyleProps {
    */
   textAnchor?: Token<CSS.Property.TextAnchor>
   /**
+   * The CSS `color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
+   */
+  textColor?: Token<CSS.Property.Color, "colors">
+  /**
    * The CSS `text-combine-upright` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-combine-upright
@@ -5142,13 +5811,13 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
    */
-  textDecoration?: Token<CSS.Property.TextDecoration>
+  textDecor?: Token<CSS.Property.TextDecoration>
   /**
    * The CSS `text-decoration` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
    */
-  textDecor?: Token<CSS.Property.TextDecoration>
+  textDecoration?: Token<CSS.Property.TextDecoration>
   /**
    * The CSS `text-decoration-color` property.
    *
@@ -5252,6 +5921,10 @@ export interface StyleProps {
    */
   textSizeAdjust?: Token<CSS.Property.TextSizeAdjust>
   /**
+   * Apply text styles defined in `theme.textStyles`.
+   */
+  textStyle?: Token<StringLiteral, "textStyles">
+  /**
    * The CSS `text-transform` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
@@ -5293,6 +5966,12 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
    */
   touchAction?: Token<CSS.Property.TouchAction>
+  /**
+   * The CSS `letter-spacing` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+   */
+  tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
   /**
    * The CSS `transform` property.
    *
@@ -5367,7 +6046,15 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/translate
    */
-  translate?: Token<CSS.Property.Translate | "yes" | "no">
+  translate?: Token<"no" | "yes" | CSS.Property.Translate>
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
+   */
+  translateX?: Token<number | StringLiteral, "spaces">
+  /**
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
+   */
+  translateY?: Token<number | StringLiteral, "spaces">
   /**
    * The CSS `unicode-bidi` property.
    *
@@ -5380,6 +6067,26 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
    */
   userSelect?: Token<CSS.Property.UserSelect>
+  /**
+   * Set CSS variables.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box
+   *   vars={[{ name:"space", token: "spaces", value: "md" }]
+   *   m="calc($space * 2)"
+   * >
+   *   Box
+   * </Box>
+   * ```
+   */
+  vars?: {
+    name: string
+    token?: ThemeToken
+    value?: Token<number | StringLiteral>
+    __prefix?: string
+  }[]
   /**
    * The CSS `vector-effect` property.
    *
@@ -5429,6 +6136,12 @@ export interface StyleProps {
    */
   visibility?: Token<CSS.Property.Visibility>
   /**
+   * The CSS `width` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
+   */
+  w?: Token<CSS.Property.Width | number, "sizes">
+  /**
    * The CSS `white-space` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
@@ -5452,12 +6165,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
   width?: Token<CSS.Property.Width | number, "sizes">
-  /**
-   * The CSS `width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
-   */
-  w?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `will-change` property.
    *
@@ -5487,724 +6194,17 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
    */
-  zIndex?: Token<CSS.Property.ZIndex, "zIndices">
+  z?: Token<CSS.Property.ZIndex, "zIndices">
   /**
    * The CSS `z-index` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
    */
-  z?: Token<CSS.Property.ZIndex, "zIndices">
+  zIndex?: Token<CSS.Property.ZIndex, "zIndices">
   /**
    * The CSS `zoom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
    */
   zoom?: Token<CSS.Property.Zoom>
-  /**
-   * The CSS `alignment-baseline` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
-   */
-  alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
-  /**
-   * The CSS `azimuth` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/azimuth
-   *
-   * @deprecated
-   */
-  azimuth?: Token<CSS.Property.Azimuth>
-  /**
-   * The CSS `baseline-shift` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
-   */
-  baselineShift?: Token<CSS.Property.BaselineShift>
-  /**
-   * The CSS `flood-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
-   */
-  floodColor?: Token<CSS.Property.FloodColor, "colors">
-  /**
-   * The CSS `flood-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
-   */
-  floodOpacity?: Token<CSS.Property.FloodOpacity>
-  /**
-   * The CSS `glyph-orientation-vertical` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/glyph-orientation-vertical
-   */
-  glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
-  /**
-   * The CSS `lighting-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
-   */
-  lightingColor?: Token<CSS.Property.LightingColor, "colors">
-  /**
-   * The CSS `margin-inline-start` and `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  marginX?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
-  /**
-   * The CSS `margin-inline-start` and `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  mx?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
-  /**
-   * The CSS `margin-top` and `margin-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
-   */
-  marginY?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `margin-top` and `margin-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
-   */
-  my?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `padding-inline-start` and `padding-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  paddingX?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
-  /**
-   * The CSS `padding-inline-start` and `padding-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  px?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
-  /**
-   * The CSS `padding-top` and `padding-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
-   */
-  paddingY?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `padding-top` and `padding-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
-   */
-  py?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `scroll-margin-left` and `scroll-margin-right` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
-   */
-  scrollMarginX?: Token<
-    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
-    "spaces"
-  >
-  /**
-   * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
-   */
-  scrollMarginY?: Token<
-    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `scroll-padding-left` and `scroll-padding-right` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
-   */
-  scrollPaddingX?: Token<
-    CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
-    "spaces"
-  >
-  /**
-   * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
-   */
-  scrollPaddingY?: Token<
-    CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `left` and `right` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
-   */
-  insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
-  /**
-   * The CSS `top` and `bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
-   */
-  insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
-  /**
-   * The CSS `border-top` and `border-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
-   */
-  borderY?: Token<
-    CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
-    "borders"
-  >
-  /**
-   * The CSS `border-left` and `border-right` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
-   */
-  borderX?: Token<
-    CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
-    "borders"
-  >
-  /**
-   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-   */
-  borderTopRadius?: Token<
-    | CSS.Property.BorderTopLeftRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-   */
-  roundedTop?: Token<
-    | CSS.Property.BorderTopLeftRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   */
-  borderBottomRadius?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderBottomRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   */
-  roundedBottom?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderBottomRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-   */
-  borderRightRadius?: Token<
-    | CSS.Property.BorderBottomRightRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
-   */
-  roundedRight?: Token<
-    | CSS.Property.BorderBottomRightRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   */
-  borderLeftRadius?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderTopLeftRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   */
-  roundedLeft?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderTopLeftRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
-   */
-  borderInlineStartRadius?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
-   */
-  borderStartRadius?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
-   */
-  roundedStart?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
-   */
-  borderInlineEndRadius?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
-   */
-  borderEndRadius?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
-   */
-  roundedEnd?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
-    "radii"
-  >
-  /**
-   * The CSS `width` and `height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
-   */
-  boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
-  /**
-   * The CSS `min-width` and `min-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
-   */
-  minBoxSize?: Token<
-    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
-    "sizes"
-  >
-  /**
-   * The CSS `max-width` and `max-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
-   */
-  maxBoxSize?: Token<
-    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
-    "sizes"
-  >
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
-   */
-  translateX?: Token<StringLiteral | number, "spaces">
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
-   */
-  translateY?: Token<StringLiteral | number, "spaces">
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
-   */
-  scale?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.
-   */
-  scaleX?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.
-   */
-  scaleY?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.
-   */
-  rotate?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.
-   */
-  skewX?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.
-   */
-  skewY?: Token<StringLiteral>
-  /**
-   * The CSS `filter` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
-   */
-  filter?: Token<CSS.Property.Filter | "auto">
-  /**
-   * If `filter=auto`, sets the value of `--ui-blur`.
-   */
-  blur?: Token<StringLiteral, "blurs">
-  /**
-   * If `filter=auto`, sets the value of `--ui-brightness`.
-   */
-  brightness?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-contrast`.
-   */
-  contrast?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-drop-shadow`.
-   */
-  dropShadow?: Token<StringLiteral, "shadows">
-  /**
-   * If `filter=auto`, sets the value of `--ui-grayscale`.
-   */
-  grayscale?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-hue-rotate`.
-   */
-  hueRotate?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-invert`.
-   */
-  invert?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-saturate`.
-   */
-  saturate?: Token<StringLiteral>
-  /**
-   * If `filter=auto`, sets the value of `--ui-sepia`.
-   */
-  sepia?: Token<StringLiteral>
-  /**
-   * The CSS `backdrop-filter` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
-   */
-  backdropFilter?: Token<CSS.Property.BackdropFilter | "auto">
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
-   */
-  backdropBlur?: Token<StringLiteral, "blurs">
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.
-   */
-  backdropBrightness?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.
-   */
-  backdropContrast?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
-   */
-  backdropDropShadow?: Token<StringLiteral, "shadows">
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
-   */
-  backdropGrayscale?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.
-   */
-  backdropHueRotate?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.
-   */
-  backdropInvert?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.
-   */
-  backdropSaturate?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.
-   */
-  backdropSepia?: Token<StringLiteral>
-  /**
-   * The CSS `color-scheme` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
-   */
-  colorMode?: Token<CSS.Property.ColorScheme>
-  /**
-   * Used to visually truncate a text after a number of lines.
-   */
-  lineClamp?: Token<number>
-  /**
-   * If `true`, it clamps truncate a text after one line.
-   */
-  isTruncated?: Token<boolean>
-  /**
-   * Apply layer styles defined in `theme.layerStyles`.
-   */
-  layerStyle?: Token<StringLiteral, "layerStyles">
-  /**
-   * Apply text styles defined in `theme.textStyles`.
-   */
-  textStyle?: Token<StringLiteral, "textStyles">
-  /**
-   * Apply other styles defined in `theme.styles`.
-   *
-   * @example
-   * ```jsx
-   * <Box apply='mdx.h1'>Box</Box>
-   * ```
-   *
-   * This will apply styles defined in `theme.styles.mdx.h1`
-   */
-  apply?: Token<StringLiteral>
-  /**
-   * Set CSS variables.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box
-   *   vars={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc($space * 2)"
-   * >
-   *   Box
-   * </Box>
-   * ```
-   */
-  vars?: {
-    __prefix?: string
-    name: string
-    token?: ThemeToken
-    value?: Token<number | StringLiteral>
-  }[]
-  /**
-   * The `@media` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box
-   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
-   * >
-   *   Box
-   * </Box>
-   * ```
-   */
-  _media?: {
-    type?: "all" | "print" | "screen" | "speech" | StringLiteral
-    query?: StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    anyHover?: "none" | "hover" | StringLiteral
-    anyPointer?: "none" | "coarse" | "fine" | StringLiteral
-    aspectRatio?: CSS.Property.AspectRatio
-    color?: number | StringLiteral
-    minColor?: number | StringLiteral
-    maxColor?: number | StringLiteral
-    colorGamut?: "srgb" | "p3" | "rec2020" | StringLiteral
-    colorIndex?: number | StringLiteral
-    minColorIndex?: number | StringLiteral
-    maxColorIndex?: number | StringLiteral
-    deviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
-    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    displayMode?:
-      | "browser"
-      | "fullscreen"
-      | "minimal-ui"
-      | "picture-in-picture"
-      | "standalone"
-      | "window-controls-overlay"
-      | StringLiteral
-    dynamicRange?: "standard" | "high" | StringLiteral
-    forcedColors?: "none" | "active" | StringLiteral
-    grid?: 0 | 1 | "StringLiteral"
-    hover?: "none" | "hover" | StringLiteral
-    invertedColors?: "none" | "inverted" | StringLiteral
-    monochrome?: number | StringLiteral
-    minMonochrome?: number | StringLiteral
-    maxMonochrome?: number | StringLiteral
-    orientation?: "portrait" | "landscape" | StringLiteral
-    overflowBlock?:
-      | "none"
-      | "scroll"
-      | "paged"
-      | "optional-paged"
-      | StringLiteral
-    overflowInline?: "none" | "scroll" | StringLiteral
-    pointer?: "none" | "coarse" | "fine" | StringLiteral
-    prefersColorScheme?: "light" | "dark" | StringLiteral
-    prefersContrast?:
-      | "no-preference"
-      | "high"
-      | "low"
-      | "custom"
-      | StringLiteral
-    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
-    resolution?: StringLiteral
-    minResolution?: StringLiteral
-    maxResolution?: StringLiteral
-    scan?: "interlace" | "progressive" | StringLiteral
-    scripting?: "none" | "initial-only" | "enabled" | StringLiteral
-    update?: "none" | "slow" | "fast" | StringLiteral
-    videoDynamicRange?: "standard" | "high" | StringLiteral
-    css?: CSSUIObject
-    [key: string]: any
-  }[]
-  /**
-   * The `@container` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box containerType="size">
-   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
-   * ```
-   */
-  _container?: {
-    name?: StringLiteral
-    query?: StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    aspectRatio?: CSS.Property.AspectRatio
-    minAspectRatio?: CSS.Property.AspectRatio
-    maxAspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
-    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
-    orientation?: "portrait" | "landscape" | StringLiteral
-    css?: CSSUIObject
-    [key: string]: any
-  }[]
-  /**
-   * The `@supports` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box containerType="size">
-   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
-   * ```
-   */
-  _supports?: { query?: StringLiteral; css?: CSSUIObject }[]
 }

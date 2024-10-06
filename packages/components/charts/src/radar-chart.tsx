@@ -1,42 +1,40 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UseChartProps } from "./use-chart"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
+import type { UsePolarGridOptions } from "./use-polar-grid"
+import type { UseRadarChartOptions } from "./use-radar-chart"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
-  ResponsiveContainer,
-  RadarChart as ReChartsRadarChart,
-  PolarGrid,
+  Legend,
   PolarAngleAxis,
+  PolarGrid,
   PolarRadiusAxis,
   Radar,
+  RadarChart as ReChartsRadarChart,
+  ResponsiveContainer,
   Tooltip,
-  Legend,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePolarGrid } from "./use-polar-grid"
-import type { UsePolarGridOptions } from "./use-polar-grid"
-import type { UseRadarChartOptions } from "./use-radar-chart"
 import { useRadarChart } from "./use-radar-chart"
 
 interface RadarChartOptions {
   /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
+   * Unit displayed next to each tick in y-axis.
    */
-  withTooltip?: boolean
+  unit?: string
   /**
    * If `true`, legend is visible.
    *
@@ -44,17 +42,17 @@ interface RadarChartOptions {
    */
   withLegend?: boolean
   /**
-   * Determines whether polarGrid should be displayed.
-   *
-   * @default true
-   */
-  withPolarGrid?: boolean
-  /**
    * Determines whether polarAngleAxis should be displayed.
    *
    * @default true
    */
   withPolarAngleAxis?: boolean
+  /**
+   * Determines whether polarGrid should be displayed.
+   *
+   * @default true
+   */
+  withPolarGrid?: boolean
   /**
    * Determines whether polarRadiusAxis should be displayed.
    *
@@ -62,13 +60,15 @@ interface RadarChartOptions {
    */
   withPolarRadiusAxis?: boolean
   /**
-   * Unit displayed next to each tick in y-axis.
+   * If `true`, tooltip is visible.
+   *
+   * @default true
    */
-  unit?: string
+  withTooltip?: boolean
 }
 
 export interface RadarChartProps
-  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
     ThemeProps<"RadarChart">,
     RadarChartOptions,
     UseChartProps,
@@ -87,75 +87,75 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const {
     className,
     data,
-    series,
     dataKey,
-    radarProps,
-    chartProps,
-    polarGridProps,
-    polarAngleAxisProps,
-    polarAngleAxisTickProps,
-    polarRadiusAxisProps,
-    polarRadiusAxisTickProps,
-    containerProps,
-    tooltipProps,
-    legendProps,
+    fillOpacity,
+    polarAngleAxisTickFormatter,
+    polarRadiusAxisTickFormatter,
+    series,
+    strokeDasharray,
+    strokeWidth,
     tooltipAnimationDuration,
     unit,
     valueFormatter,
-    polarAngleAxisTickFormatter,
-    polarRadiusAxisTickFormatter,
-    strokeDasharray,
-    withDots,
     withActiveDots,
-    strokeWidth,
-    fillOpacity,
-    withTooltip = true,
+    withDots,
     withLegend = false,
-    withPolarGrid = true,
     withPolarAngleAxis = true,
+    withPolarGrid = true,
     withPolarRadiusAxis = false,
+    withTooltip = true,
+    chartProps,
+    containerProps,
+    legendProps,
+    polarAngleAxisProps,
+    polarAngleAxisTickProps,
+    polarGridProps,
+    polarRadiusAxisProps,
+    polarRadiusAxisTickProps,
+    radarProps,
+    tooltipProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const {
-    getRadarProps,
-    getRadarChartProps,
-    getPolarAngleAxisProps,
-    getPolarRadiusAxisProps,
     radarVars,
     setHighlightedArea,
+    getPolarAngleAxisProps,
+    getPolarRadiusAxisProps,
+    getRadarChartProps,
+    getRadarProps,
   } = useRadarChart({
     data,
-    series,
     dataKey,
-    radarProps,
+    fillOpacity,
+    polarAngleAxisTickFormatter,
+    polarRadiusAxisTickFormatter,
+    series,
+    strokeWidth,
+    styles,
+    withActiveDots,
+    withDots,
     chartProps,
     polarAngleAxisProps,
     polarAngleAxisTickProps,
     polarRadiusAxisProps,
     polarRadiusAxisTickProps,
-    withDots,
-    withActiveDots,
-    strokeWidth,
-    fillOpacity,
-    polarAngleAxisTickFormatter,
-    polarRadiusAxisTickFormatter,
-    styles,
+    radarProps,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
   const { getPolarGridProps } = usePolarGrid({
-    polarGridProps,
     strokeDasharray,
     styles,
+    polarGridProps,
   })
 
   const radars = useMemo(
@@ -163,7 +163,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
       series.map(({ dataKey }, index) => (
         <Radar
           key={`radar-${dataKey}`}
-          {...getRadarProps({ index, className: "ui-radar-chart__radar" })}
+          {...getRadarProps({ className: "ui-radar-chart__radar", index })}
         />
       )),
     [getRadarProps, series],
@@ -226,8 +226,8 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
                     className="ui-line-chart__tooltip"
                     label={label}
                     payload={payload}
-                    valueFormatter={valueFormatter}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}
@@ -242,3 +242,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+RadarChart.displayName = "RadarChart"
+RadarChart.__ui__ = "RadarChart"

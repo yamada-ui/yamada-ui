@@ -18,12 +18,12 @@ export const StatCard = memo(() => {
     >
       <CardBody>
         <Stat
-          label="Total Downloads"
-          number="1,993,818"
-          icon="increase"
-          helperMessage="21% more than last month"
           centerContent
+          helperMessage="21% more than last month"
+          icon="increase"
+          label="Total Downloads"
           mx="auto"
+          number="1,993,818"
         />
       </CardBody>
 
@@ -32,8 +32,8 @@ export const StatCard = memo(() => {
         gap={{ base: "md", sm: "sm" }}
       >
         <Button
-          size="sm"
           colorScheme="primary"
+          size="sm"
           w={{ base: undefined, sm: "full" }}
         >
           Add to Watch list
@@ -42,8 +42,8 @@ export const StatCard = memo(() => {
         <Spacer display={{ base: "block", sm: "none" }} />
 
         <Button
-          size="sm"
           colorScheme="primary"
+          size="sm"
           variant="outline"
           w={{ base: undefined, sm: "full" }}
         >

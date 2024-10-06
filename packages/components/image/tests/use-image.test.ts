@@ -2,21 +2,21 @@ import { shouldShowFallbackImage } from "../src/use-image"
 
 describe("useImage", () => {
   test.each<{
-    status: "loading" | "failed" | "pending" | "loaded"
-    strategy: "onError" | "beforeLoadOrError"
     result: boolean
+    status: "failed" | "loaded" | "loading" | "pending"
+    strategy: "beforeLoadOrError" | "onError"
   }>([
-    { status: "loading", strategy: "beforeLoadOrError", result: true },
-    { status: "loaded", strategy: "beforeLoadOrError", result: false },
-    { status: "failed", strategy: "beforeLoadOrError", result: true },
-    { status: "pending", strategy: "beforeLoadOrError", result: true },
-    { status: "loading", strategy: "onError", result: false },
-    { status: "loaded", strategy: "onError", result: false },
-    { status: "failed", strategy: "onError", result: true },
-    { status: "pending", strategy: "onError", result: false },
+    { result: true, status: "loading", strategy: "beforeLoadOrError" },
+    { result: false, status: "loaded", strategy: "beforeLoadOrError" },
+    { result: true, status: "failed", strategy: "beforeLoadOrError" },
+    { result: true, status: "pending", strategy: "beforeLoadOrError" },
+    { result: false, status: "loading", strategy: "onError" },
+    { result: false, status: "loaded", strategy: "onError" },
+    { result: true, status: "failed", strategy: "onError" },
+    { result: false, status: "pending", strategy: "onError" },
   ])(
     "shouldShowFallbackImage with status: $status strategy:$strategy returns $result",
-    ({ status, result, strategy }) => {
+    ({ result, status, strategy }) => {
       expect(shouldShowFallbackImage(status, strategy)).toBe(result)
     },
   )

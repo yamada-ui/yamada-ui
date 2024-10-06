@@ -15,8 +15,8 @@ export default meta
 export const basic = () => {
   const [device, setDevice] = useBreakpointState({
     base: "desktop",
-    md: "tablet",
     sm: "mobile",
+    md: "tablet",
   })
 
   useBreakpointEffect((breakpoint) => {
@@ -33,16 +33,16 @@ export const basic = () => {
     <Box
       bg={{
         base: "red.500",
-        xl: "blue.500",
-        lg: "green.500",
-        md: "yellow.500",
         sm: "purple.500",
+        md: "yellow.500",
+        lg: "green.500",
+        xl: "blue.500",
       }}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current device is "{device}"
     </Box>
@@ -52,8 +52,8 @@ export const basic = () => {
 export const skipSideEffects = () => {
   const [device, setDevice] = useBreakpointState({
     base: "desktop",
-    md: "tablet",
     sm: "mobile",
+    md: "tablet",
   })
 
   useUpdateBreakpointEffect((breakpoint) => {
@@ -70,16 +70,16 @@ export const skipSideEffects = () => {
     <Box
       bg={{
         base: "red.500",
-        xl: "blue.500",
-        lg: "green.500",
-        md: "yellow.500",
         sm: "purple.500",
+        md: "yellow.500",
+        lg: "green.500",
+        xl: "blue.500",
       }}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current device is "{device}"
     </Box>

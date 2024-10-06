@@ -1,5 +1,5 @@
-import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import type { FC, PropsWithChildren, RefObject } from "react"
+import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useMemo, useState } from "react"
 import { createPortal } from "react-dom"
 import { PortalProvider } from "./portal-provider"
@@ -10,9 +10,9 @@ interface ContainerPortalProps extends PropsWithChildren {
 }
 
 export const ContainerPortal: FC<ContainerPortalProps> = ({
+  appendToParentPortal,
   children,
   containerRef,
-  appendToParentPortal,
 }) => {
   const parent = containerRef.current
   const host =
@@ -25,7 +25,7 @@ export const ContainerPortal: FC<ContainerPortalProps> = ({
 
     const node = ownerDocument.createElement("div")
 
-    if (node) node.className = "ui-portal"
+    node.className = "ui-portal"
 
     return node
   }, [parent])

@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -30,13 +30,13 @@ export interface DividerProps
 export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
   const [
     {
-      borderRightWidth,
-      borderLeftWidth,
-      borderTopWidth,
       borderBottomWidth,
-      borderWidth,
-      borderStyle,
       borderColor,
+      borderLeftWidth,
+      borderRightWidth,
+      borderStyle,
+      borderTopWidth,
+      borderWidth,
       ...styles
     },
     mergedProps,
@@ -50,21 +50,21 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
 
   const customStyles = useMemo(
     () => ({
+      horizontal: {
+        border: "0",
+        borderBottomWidth:
+          borderBottomWidth || borderTopWidth || borderWidth || "1px",
+        borderColor,
+        borderStyle,
+        width: "100%",
+      },
       vertical: {
         border: "0",
-        borderStyle,
         borderColor,
         borderLeftWidth:
           borderLeftWidth || borderRightWidth || borderWidth || "1px",
-        height: "100%",
-      },
-      horizontal: {
-        border: "0",
         borderStyle,
-        borderColor,
-        borderBottomWidth:
-          borderBottomWidth || borderTopWidth || borderWidth || "1px",
-        width: "100%",
+        height: "100%",
       },
     }),
     [

@@ -1,3 +1,10 @@
+import type {
+  ButtonGroupProps,
+  ButtonProps,
+  HeadingProps,
+  StackProps,
+} from "@yamada-ui/react"
+import type { ElementType, FC, ReactElement } from "react"
 import {
   CirclePlay,
   Globe,
@@ -11,6 +18,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  createContext,
   Divider,
   Heading,
   Icon,
@@ -18,28 +26,20 @@ import {
   Text,
   Tooltip,
   VStack,
-  createContext,
-} from "@yamada-ui/react"
-import type {
-  ButtonGroupProps,
-  ButtonProps,
-  HeadingProps,
-  StackProps,
 } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
-import type { ElementType, FC, ReactElement } from "react"
 
 type MenuItem = {
-  icon?: ElementType
   label: string
+  icon?: ElementType
   isSelected?: boolean
 } & Omit<ButtonProps, "children">
 
 const DISCOVER_MENU_ITEMS: MenuItem[] = [
   {
     icon: CirclePlay,
-    label: "Listen Now",
     isSelected: true,
+    label: "Listen Now",
   },
   {
     icon: Globe,
@@ -88,12 +88,12 @@ interface SidebarContext {
 }
 
 const [SidebarProvider, useSidebar] = createContext<SidebarContext>({
-  strict: false,
+  name: "SidebarContext",
 })
 
-export type SidebarProps = StackProps & {
+export type SidebarProps = {
   isCollapse: boolean
-}
+} & StackProps
 
 export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
   const value = useMemo(() => ({ isCollapse }), [isCollapse])
@@ -102,19 +102,19 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
     <SidebarProvider value={value}>
       <VStack
         as="nav"
-        py="lg"
-        px="sm"
-        gap={!isCollapse ? { base: "lg", lg: "md" } : "md"}
         divider={
           <Divider
             display={isCollapse ? "block" : { base: "none", lg: "block" }}
           />
         }
+        gap={!isCollapse ? { base: "lg", lg: "md" } : "md"}
+        px="sm"
+        py="lg"
         {...rest}
       >
-        <SidebarGroup label="Discover" items={DISCOVER_MENU_ITEMS} />
-        <SidebarGroup label="Library" items={LIBRARY_MENU_ITEMS} />
-        <SidebarGroup label="Playlists" items={PLAYLISTS_MENU_ITEMS} />
+        <SidebarGroup items={DISCOVER_MENU_ITEMS} label="Discover" />
+        <SidebarGroup items={LIBRARY_MENU_ITEMS} label="Library" />
+        <SidebarGroup items={PLAYLISTS_MENU_ITEMS} label="Playlists" />
       </VStack>
     </SidebarProvider>
   )
@@ -122,24 +122,24 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
 
 Sidebar.displayName = "Sidebar"
 
-type SidebarGroupProps = StackProps & {
+type SidebarGroupProps = {
   label: string
-  labelProps?: HeadingProps
-  buttonGroupProps?: ButtonGroupProps
   items?: MenuItem[]
-}
+  buttonGroupProps?: ButtonGroupProps
+  labelProps?: HeadingProps
+} & StackProps
 
 const SidebarGroup: FC<SidebarGroupProps> = memo(
-  ({ label, labelProps, buttonGroupProps, items, children, ...rest }) => {
+  ({ children, items, label, buttonGroupProps, labelProps, ...rest }) => {
     const { isCollapse } = useSidebar()
 
     return (
       <VStack gap="sm" {...rest}>
         <Box
-          px="3"
           display={isCollapse ? "none" : { base: "block", lg: "none" }}
+          px="3"
         >
-          <Heading as="h3" size="md" fontWeight="semibold" {...labelProps}>
+          <Heading as="h3" fontWeight="semibold" size="md" {...labelProps}>
             {label}
           </Heading>
         </Box>
@@ -147,10 +147,9 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
         <ButtonGroup as="ul" direction="column" gap="xs" {...buttonGroupProps}>
           {items
             ? items.map(
-                ({ icon = ListMusic, label, isSelected, ...rest }, index) => (
+                ({ icon = ListMusic, isSelected, label, ...rest }, index) => (
                   <Box key={index} as="li">
                     <SidebarButton
-                      variant={isSelected ? "solid" : "ghost"}
                       colorScheme={isSelected ? "primary" : "gray"}
                       icon={
                         <Icon
@@ -158,6 +157,7 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
                           color={isSelected ? "white" : "muted"}
                         />
                       }
+                      variant={isSelected ? "solid" : "ghost"}
                       {...rest}
                     >
                       {label}
@@ -174,25 +174,25 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
 
 SidebarGroup.displayName = "SidebarGroup"
 
-type SidebarButtonProps = ButtonProps & {
+type SidebarButtonProps = {
   icon?: ReactElement
-}
+} & ButtonProps
 
 const SidebarButton: FC<SidebarButtonProps> = memo(
-  ({ icon, children, ...rest }) => {
+  ({ children, icon, ...rest }) => {
     const { isCollapse } = useSidebar()
 
     return isCollapse ? (
-      <Tooltip placement="right" label={children}>
+      <Tooltip label={children} placement="right">
         <IconButton icon={icon} {...rest} />
       </Tooltip>
     ) : (
       <Button
-        w="full"
-        justifyContent="flex-start"
         fontWeight="normal"
+        justifyContent="flex-start"
         leftIcon={icon}
         px="3"
+        w="full"
         {...rest}
       >
         <Text as="span" display={{ base: "inline", lg: "none" }}>

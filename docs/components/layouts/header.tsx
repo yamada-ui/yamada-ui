@@ -1,39 +1,3 @@
-import { Languages, Moon, Palette, Sun, MenuIcon } from "@yamada-ui/lucide"
-import {
-  Box,
-  Center,
-  CloseButton,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  HStack,
-  IconButton,
-  Image,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuOptionGroup,
-  MenuOptionItem,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Ripple,
-  Spacer,
-  Tag,
-  VStack,
-  forwardRef,
-  mergeRefs,
-  noop,
-  useBreakpoint,
-  useBreakpointValue,
-  useColorMode,
-  useDisclosure,
-  useMotionValueEvent,
-  useRipple,
-  useScroll,
-  useTheme,
-} from "@yamada-ui/react"
 import type {
   BoxProps,
   CenterProps,
@@ -44,15 +8,51 @@ import type {
   PopoverProps,
   UseDisclosureReturn,
 } from "@yamada-ui/react"
-import Link from "next/link"
-import { useRouter } from "next/router"
 import type { FC } from "react"
-import { memo, useEffect, useRef, useState } from "react"
+import { Languages, MenuIcon, Moon, Palette, Sun } from "@yamada-ui/lucide"
+import {
+  Box,
+  Center,
+  CloseButton,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  forwardRef,
+  HStack,
+  IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuOptionGroup,
+  MenuOptionItem,
+  mergeRefs,
+  noop,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Ripple,
+  Spacer,
+  Tag,
+  useBreakpoint,
+  useBreakpointValue,
+  useColorMode,
+  useDisclosure,
+  useMotionValueEvent,
+  useRipple,
+  useScroll,
+  useTheme,
+  VStack,
+} from "@yamada-ui/react"
 import { Search, SearchButton } from "components/forms"
 import { Discord, Github } from "components/media-and-icons"
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { memo, useEffect, useRef, useState } from "react"
 
 export interface HeaderProps extends CenterProps {}
 
@@ -62,7 +62,7 @@ export const Header = memo(
     const headerRef = useRef<HTMLHeadingElement>()
     const { scrollY } = useScroll()
     const [y, setY] = useState<number>(0)
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onClose, onOpen } = useDisclosure()
     const { height = 0 } = headerRef.current?.getBoundingClientRect() ?? {}
 
     useMotionValueEvent(scrollY, "change", setY)
@@ -74,52 +74,52 @@ export const Header = memo(
         <Center
           ref={mergeRefs(ref, headerRef)}
           as="header"
-          w="full"
-          bg={isScroll ? ["whiteAlpha.500", "blackAlpha.200"] : undefined}
+          backdropBlur="10px"
           backdropFilter="auto"
           backdropSaturate="180%"
-          backdropBlur="10px"
-          shadow={isScroll ? ["base", "dark-sm"] : undefined}
-          transitionProperty="common"
-          transitionDuration="slower"
-          position="sticky"
-          top="0"
+          bg={isScroll ? ["whiteAlpha.500", "blackAlpha.200"] : undefined}
           left="0"
+          position="sticky"
           right="0"
+          shadow={isScroll ? ["base", "dark-sm"] : undefined}
+          top="0"
+          transitionDuration="slower"
+          transitionProperty="common"
+          w="full"
           zIndex="guldo"
           {...rest}
         >
-          <HStack w="full" maxW="9xl" py="3" px={{ base: "lg", md: "md" }}>
+          <HStack maxW="9xl" px={{ base: "lg", md: "md" }} py="3" w="full">
             <Box
               as={Link}
-              href="/"
-              aria-label="Yamada UI"
-              _hover={{ opacity: 0.7 }}
-              transitionProperty="opacity"
-              transitionDuration="slower"
               _focus={{ outline: "none" }}
               _focusVisible={{ boxShadow: "outline" }}
+              _hover={{ opacity: 0.7 }}
+              href="/"
               rounded="md"
+              transitionDuration="slower"
+              transitionProperty="opacity"
+              aria-label="Yamada UI"
             >
               <Image
-                src="/logo-black.png"
-                alt="Yamada UI"
-                w="auto"
-                h={{ base: "10", sm: "8" }}
                 _dark={{ display: "none" }}
+                alt="Yamada UI"
+                h={{ base: "10", sm: "8" }}
+                src="/logo-black.png"
+                w="auto"
               />
               <Image
-                src="/logo-white.png"
-                alt="Yamada UI"
-                w="auto"
-                h={{ base: "10", sm: "8" }}
                 _light={{ display: "none" }}
+                alt="Yamada UI"
+                h={{ base: "10", sm: "8" }}
+                src="/logo-white.png"
+                w="auto"
               />
             </Box>
 
             <Tag
-              display={{ base: "inline-flex", md: "none" }}
               colorScheme="gray"
+              display={{ base: "inline-flex", md: "none" }}
               letterSpacing="1px"
               minW="auto"
             >
@@ -129,16 +129,16 @@ export const Header = memo(
             <Spacer />
 
             <Search
-              display={{ base: "flex", md: "none" }}
-              borderColor={isScroll ? "transparent" : "border"}
+              backdropBlur="10px"
+              backdropFilter="auto"
+              backdropSaturate="180%"
               bg={
                 isScroll
                   ? ["whiteAlpha.600", "blackAlpha.500"]
                   : ["white", "black"]
               }
-              backdropFilter="auto"
-              backdropSaturate="180%"
-              backdropBlur="10px"
+              borderColor={isScroll ? "transparent" : "border"}
+              display={{ base: "flex", md: "none" }}
             />
 
             <ButtonGroup {...{ isOpen, onOpen }} />
@@ -156,7 +156,7 @@ interface ButtonGroupProps extends Partial<UseDisclosureReturn> {
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = memo(
-  ({ isMobile, isOpen, onOpen, onClose }) => {
+  ({ isMobile, isOpen, onClose, onOpen }) => {
     return (
       <HStack gap="sm">
         <SearchButton
@@ -164,60 +164,58 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
         />
 
         <NextLinkIconButton
-          href={CONSTANT.SNS.DISCORD}
-          isExternal
-          aria-label="GitHub repository"
-          variant="ghost"
-          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
-          color="muted"
-          icon={<Discord />}
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+          color="muted"
+          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
+          href={CONSTANT.SNS.DISCORD}
+          icon={<Discord />}
+          isExternal
+          variant="ghost"
+          aria-label="GitHub repository"
         />
 
         <NextLinkIconButton
-          href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-          isExternal
-          aria-label="Discord server"
-          variant="ghost"
-          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
-          color="muted"
-          icon={<Github />}
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+          color="muted"
+          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
+          href={CONSTANT.SNS.GITHUB.YAMADA_UI}
+          icon={<Github />}
+          isExternal
+          variant="ghost"
+          aria-label="Discord server"
         />
 
         <ThemeSchemeButton
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
         />
 
-        {CONSTANT.I18N.LOCALES.length > 1 ? (
-          <I18nButton
-            display={{
-              base: "inline-flex",
-              md: !isMobile ? "none" : undefined,
-            }}
-          />
-        ) : null}
+        <I18nButton
+          display={{
+            base: "inline-flex",
+            md: !isMobile ? "none" : undefined,
+          }}
+        />
 
         <ColorModeButton />
 
         {!isOpen ? (
           <IconButton
+            _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
+            color="muted"
+            display={{ base: "none", lg: "inline-flex" }}
+            icon={<MenuIcon fontSize="2xl" />}
             variant="ghost"
             aria-label="Open navigation menu"
-            display={{ base: "none", lg: "inline-flex" }}
-            color="muted"
             onClick={onOpen}
-            icon={<MenuIcon fontSize="2xl" />}
-            _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
           />
         ) : (
           <CloseButton
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+            color="muted"
+            display={{ base: "none", lg: "inline-flex" }}
             size="lg"
             aria-label="Close navigation menu"
-            display={{ base: "none", lg: "inline-flex" }}
-            color="muted"
             onClick={onClose}
-            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           />
         )}
       </HStack>
@@ -233,45 +231,45 @@ interface I18nButtonProps extends IconButtonProps {
 
 const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
   const padding = useBreakpointValue({ base: 32, md: 16 })
-  const { locale, changeLocale } = useI18n()
+  const { changeLocale, locale } = useI18n()
 
   return (
     <Menu
-      placement="bottom"
       modifiers={[
         {
           name: "preventOverflow",
           options: {
             padding: {
-              top: padding,
               bottom: padding,
               left: padding,
               right: padding,
+              top: padding,
             },
           },
         },
       ]}
+      placement="bottom"
       restoreFocus={false}
       {...menuProps}
     >
       <MenuButton
         as={IconButton}
-        aria-label="Open language switching menu"
-        variant="ghost"
+        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         color="muted"
         icon={<Languages fontSize="2xl" />}
-        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+        variant="ghost"
+        aria-label="Open language switching menu"
         {...rest}
       />
 
       <MenuList>
         <MenuOptionGroup<string>
+          type="radio"
           value={locale}
           onChange={changeLocale}
-          type="radio"
         >
           {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
-            <MenuOptionItem key={value} value={value} closeOnSelect>
+            <MenuOptionItem key={value} closeOnSelect value={value}>
               {label}
             </MenuOptionItem>
           ))}
@@ -290,31 +288,30 @@ interface ColorModeButtonProps extends IconButtonProps {
 const ColorModeButton: FC<ColorModeButtonProps> = memo(
   ({ menuProps, ...rest }) => {
     const padding = useBreakpointValue({ base: 32, md: 16 })
-    const { colorMode, internalColorMode, changeColorMode } = useColorMode()
+    const { changeColorMode, colorMode, internalColorMode } = useColorMode()
 
     return (
       <Menu
-        placement="bottom"
         modifiers={[
           {
             name: "preventOverflow",
             options: {
               padding: {
-                top: padding,
                 bottom: padding,
                 left: padding,
                 right: padding,
+                top: padding,
               },
             },
           },
         ]}
+        placement="bottom"
         restoreFocus={false}
         {...menuProps}
       >
         <MenuButton
           as={IconButton}
-          aria-label="Open color mode switching menu"
-          variant="ghost"
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           color="muted"
           icon={
             colorMode === "dark" ? (
@@ -323,23 +320,24 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
               <Moon fontSize="2xl" />
             )
           }
-          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+          variant="ghost"
+          aria-label="Open color mode switching menu"
           {...rest}
         />
 
         <MenuList>
           <MenuOptionGroup<ColorModeWithSystem>
+            type="radio"
             value={internalColorMode}
             onChange={changeColorMode}
-            type="radio"
           >
-            <MenuOptionItem value="light" closeOnSelect>
+            <MenuOptionItem closeOnSelect value="light">
               Light
             </MenuOptionItem>
-            <MenuOptionItem value="dark" closeOnSelect>
+            <MenuOptionItem closeOnSelect value="dark">
               Dark
             </MenuOptionItem>
-            <MenuOptionItem value="system" closeOnSelect>
+            <MenuOptionItem closeOnSelect value="system">
               System
             </MenuOptionItem>
           </MenuOptionGroup>
@@ -357,27 +355,27 @@ interface ThemeSchemeButtonProps extends IconButtonProps {
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const { theme, changeThemeScheme } = useTheme()
+    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { changeThemeScheme, theme } = useTheme()
     const { colorSchemes = [] } = theme
 
     return (
       <Popover
         {...popoverProps}
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        placement="bottom"
         closeOnButton={false}
+        isOpen={isOpen}
+        placement="bottom"
         restoreFocus={false}
+        onClose={onClose}
+        onOpen={onOpen}
       >
         <PopoverTrigger>
           <IconButton
-            aria-label="Open color mode switching menu"
-            variant="ghost"
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             color="muted"
             icon={<Palette fontSize="2xl" />}
-            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+            variant="ghost"
+            aria-label="Open color mode switching menu"
             {...rest}
           />
         </PopoverTrigger>
@@ -417,19 +415,19 @@ const ColorButton: FC<ColorButtonProps> = memo(({ colorScheme, ...rest }) => {
     <Box
       as="button"
       type="button"
-      position="relative"
-      overflow="hidden"
-      bg={`${colorScheme}.500`}
-      minW={{ base: "12", md: "10" }}
-      minH={{ base: "12", md: "10" }}
-      rounded="md"
-      boxShadow="inner"
-      outline="0"
-      _hover={{ bg: `${colorScheme}.600` }}
       _active={{ bg: `${colorScheme}.700` }}
       _focusVisible={{ shadow: "outline" }}
-      transitionProperty="common"
+      _hover={{ bg: `${colorScheme}.600` }}
+      bg={`${colorScheme}.500`}
+      boxShadow="inner"
+      minH={{ base: "12", md: "10" }}
+      minW={{ base: "12", md: "10" }}
+      outline="0"
+      overflow="hidden"
+      position="relative"
+      rounded="md"
       transitionDuration="slower"
+      transitionProperty="common"
       {...rest}
       onPointerDown={onPointerDown}
     >
@@ -460,53 +458,53 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
 
   return (
     <Drawer
-      isOpen={isOpen}
-      onClose={onClose}
-      withCloseButton={false}
-      isFullHeight
       closeOnDrag
-      withDragBar={false}
+      isFullHeight
+      isOpen={isOpen}
       w="sm"
+      withCloseButton={false}
+      withDragBar={false}
+      onClose={onClose}
     >
       <DrawerHeader
-        justifyContent="flex-end"
-        pt="sm"
         fontSize="md"
         fontWeight="normal"
+        justifyContent="flex-end"
+        pt="sm"
       >
         <ButtonGroup isMobile {...{ isOpen, onClose }} />
       </DrawerHeader>
 
-      <DrawerBody position="relative" my="sm">
+      <DrawerBody my="sm" position="relative">
         <VStack as="nav" overflowY="auto" overscrollBehavior="contain">
           <Tree py="sm" />
         </VStack>
 
         <Box
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="3"
           bgGradient={[
             "linear(to-t, rgba(255, 255, 255, 0), white)",
             "linear(to-t, rgba(0, 0, 0, 0), black)",
           ]}
+          h="3"
+          left="0"
+          position="absolute"
+          right="0"
+          top="0"
+          w="full"
+          zIndex="kurillin"
         />
         <Box
-          position="absolute"
-          bottom="0"
-          left="0"
-          right="0"
-          zIndex="kurillin"
-          w="full"
-          h="3"
           bgGradient={[
             "linear(to-b, rgba(255, 255, 255, 0), white)",
             "linear(to-b, rgba(0, 0, 0, 0), black)",
           ]}
+          bottom="0"
+          h="3"
+          left="0"
+          position="absolute"
+          right="0"
+          w="full"
+          zIndex="kurillin"
         />
       </DrawerBody>
     </Drawer>

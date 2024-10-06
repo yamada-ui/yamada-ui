@@ -1,15 +1,17 @@
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { Icon, CloseIcon } from "@yamada-ui/icon"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
+import type { HTMLAttributes, ReactNode, RefAttributes } from "react"
+import type { UseDatePickerProps } from "./use-date-picker"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { CloseIcon, Icon } from "@yamada-ui/icon"
+import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
 import { useClickable } from "@yamada-ui/use-clickable"
 import {
@@ -19,10 +21,8 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { HTMLAttributes, ReactNode, RefAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { Calendar } from "./calendar"
-import type { UseDatePickerProps } from "./use-date-picker"
 import {
   DatePickerProvider,
   useDatePicker,
@@ -30,6 +30,15 @@ import {
 } from "./use-date-picker"
 
 interface DatePickerOptions {
+  children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If `true`, display the date picker clear icon.
    *
@@ -37,13 +46,9 @@ interface DatePickerOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * Props for date picker clear icon element.
    */
-  focusBorderColor?: string
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: string
+  clearIconProps?: DatePickerIconProps
   /**
    * Props for date picker container element.
    */
@@ -55,19 +60,15 @@ interface DatePickerOptions {
   /**
    * Props for date picker field element.
    */
-  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
-  /**
-   * Props for date picker input element.
-   */
-  inputProps?: DatePickerFieldProps["inputProps"]
+  fieldProps?: Omit<DatePickerFieldProps, "children" | "inputProps">
   /**
    * Props for date picker icon element.
    */
   iconProps?: DatePickerIconProps
   /**
-   * Props for date picker clear icon element.
+   * Props for date picker input element.
    */
-  clearIconProps?: DatePickerIconProps
+  inputProps?: DatePickerFieldProps["inputProps"]
   /**
    * Props to be forwarded to the portal component.
    *
@@ -75,7 +76,6 @@ interface DatePickerOptions {
    *
    */
   portalProps?: Omit<PortalProps, "children">
-  children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
 export interface DatePickerProps
@@ -93,41 +93,41 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   let {
     className,
     children,
-    isClearable = true,
     color,
     h,
     height,
+    isClearable = true,
     minH,
     minHeight,
+    clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
-    inputProps,
     iconProps,
-    clearIconProps,
+    inputProps,
     portalProps = { isDisabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {
-    getPopoverProps,
-    getContainerProps,
-    getCalendarProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
-    onClose,
-    value,
     id,
+    value,
+    getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   } = useDatePicker(computedProps)
 
   h ??= height
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
+    h: "fit-content",
+    w: "100%",
     ...styles.container,
   }
 
@@ -161,11 +161,11 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              as="div"
               id={id}
+              as="div"
+              className="ui-date-picker__content"
               role="dialog"
               aria-modal="true"
-              className="ui-date-picker__content"
               __css={{ ...styles.content }}
               {...contentProps}
             >
@@ -198,14 +198,14 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
   ({ className, h, minH, inputProps, ...rest }, ref) => {
     const styles = useDatePickerContext()
     const { ref: inputRef, ...computedInputProps } =
-      inputProps as RefAttributes<HTMLInputElement> & HTMLUIProps<"input">
+      inputProps as HTMLUIProps<"input"> & RefAttributes<HTMLInputElement>
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
       ...styles.field,
     }
 
@@ -217,11 +217,11 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
           {...rest}
         >
           <ui.input
-            aria-label="Input date value"
             ref={mergeRefs(ref, inputRef)}
             className="ui-date-picker__field__input"
             display="inline-block"
             w="100%"
+            aria-label="Input date value"
             {...computedInputProps}
           />
         </ui.div>
@@ -240,14 +240,14 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
     const styles = useDatePickerContext()
 
     const css: CSSUIObject = {
+      alignItems: "center",
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "center",
+      pointerEvents: "none",
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
       ...styles.icon,
       ...__css,
     }
@@ -256,13 +256,13 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
 
     const cloneChildren = validChildren.map((child) =>
       cloneElement(child, {
+        style: {
+          color: "currentColor",
+          maxHeight: "1em",
+          maxWidth: "1em",
+        },
         focusable: false,
         "aria-hidden": true,
-        style: {
-          maxWidth: "1em",
-          maxHeight: "1em",
-          color: "currentColor",
-        },
       }),
     )
 
@@ -295,8 +295,8 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
       {...rest}
     >
       <path
-        fill="currentColor"
         d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+        fill="currentColor"
       />
     </Icon>
   )
@@ -327,12 +327,12 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
 
   return (
     <DatePickerIcon
-      aria-label="Clear value"
       className={cx("ui-date-picker__icon--clear", className)}
+      aria-label="Clear value"
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon w="0.5em" h="0.5em" />}
+      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
     </DatePickerIcon>
   )
 }

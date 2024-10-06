@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Flex, Box, Spacer } from "@yamada-ui/react"
+import { Box, Flex, Spacer } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Flex>
 
 const meta: Meta<typeof Flex> = {
-  title: "Components / Layouts / Flex",
   component: Flex,
+  title: "Components / Layouts / Flex",
 }
 
 export default meta
@@ -13,19 +13,19 @@ export default meta
 export const horizontal: Story = () => {
   return (
     <Flex gap="md">
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
     </Flex>
@@ -35,19 +35,19 @@ export const horizontal: Story = () => {
 export const vertical: Story = () => {
   return (
     <Flex direction="column" gap="md">
-      <Box p="md" rounded="4" bg="primary" color="white">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
     </Flex>
@@ -56,22 +56,22 @@ export const vertical: Story = () => {
 
 export const spacer: Story = () => {
   return (
-    <Flex w="full" gap="md">
-      <Box p="md" rounded="4" bg="primary" color="white">
+    <Flex gap="md" w="full">
+      <Box bg="primary" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="secondary" color="white">
+      <Box bg="secondary" color="white" p="md" rounded="4">
         Box
       </Box>
 
       <Spacer />
 
-      <Box p="md" rounded="4" bg="warning" color="white">
+      <Box bg="warning" color="white" p="md" rounded="4">
         Box
       </Box>
 
-      <Box p="md" rounded="4" bg="danger" color="white">
+      <Box bg="danger" color="white" p="md" rounded="4">
         Box
       </Box>
     </Flex>

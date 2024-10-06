@@ -1,16 +1,16 @@
+import type { CenterProps } from "@yamada-ui/react"
 import {
   Center,
+  forwardRef,
   HStack,
   Link,
   Text,
   VStack,
-  forwardRef,
 } from "@yamada-ui/react"
-import type { CenterProps } from "@yamada-ui/react"
-import { memo } from "react"
 import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
+import { memo } from "react"
 
 export interface FooterProps extends CenterProps {}
 
@@ -29,10 +29,10 @@ export const Footer = memo(
       >
         <VStack
           alignItems="center"
-          w="full"
           maxW="9xl"
-          py="xl"
           px={{ base: "lg", md: "md" }}
+          py="xl"
+          w="full"
         >
           <Text
             color={["blackAlpha.600", "whiteAlpha.600"]}

@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useId } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import {
+  Button,
+  HStack,
   Label,
   Switch,
-  Wrap,
   useBoolean,
-  HStack,
   VStack,
-  Button,
+  Wrap,
 } from "@yamada-ui/react"
+import { useId } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Switch>
 
 const meta: Meta<typeof Switch> = {
-  title: "Components / Forms / Switch",
   component: Switch,
+  title: "Components / Forms / Switch",
 }
 
 export default meta
@@ -78,7 +78,7 @@ export const isDisabled: Story = () => {
   return (
     <>
       <Switch isDisabled>disabled</Switch>
-      <Switch isDisabled defaultIsChecked>
+      <Switch defaultIsChecked isDisabled>
         disabled
       </Switch>
     </>
@@ -89,7 +89,7 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Switch isReadOnly>read only</Switch>
-      <Switch isReadOnly defaultIsChecked>
+      <Switch defaultIsChecked isReadOnly>
         read only
       </Switch>
     </>

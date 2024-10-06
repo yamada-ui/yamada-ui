@@ -1,19 +1,18 @@
 import type { ColorMode, ColorModeWithSystem } from "../css"
 import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
-const hasSupport = !!globalThis?.document
+const hasSupport = !!(globalThis.document as Document | undefined)
 
 export interface ColorModeManager {
   type: "cookie" | "localStorage"
-  ssr?: boolean
   get: (
     initColorMode?: ColorModeWithSystem,
   ) => (storageKey?: string) => ColorModeWithSystem
   set: (colorMode: ColorModeWithSystem) => (storageKey?: string) => void
+  ssr?: boolean
 }
 
 const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
-  ssr: false,
   type: "localStorage",
   get:
     (initColorMode = "light") =>
@@ -28,7 +27,6 @@ const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
         return initColorMode
       }
     },
-
   set:
     (colorMode) =>
     (storageKey = defaultStorageKey) => {
@@ -36,6 +34,8 @@ const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
         localStorage.setItem(storageKey, colorMode)
       } catch {}
     },
+
+  ssr: false,
 })
 
 const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
@@ -48,7 +48,6 @@ const createCookieStorage = (
   defaultStorageKey: string,
   cookie?: string,
 ): ColorModeManager => ({
-  ssr: !!cookie,
   type: "cookie",
   get:
     (initColorMode = "light") =>
@@ -59,16 +58,17 @@ const createCookieStorage = (
 
       return parseCookie(document.cookie, storageKey) || initColorMode
     },
-
   set:
     (colorMode) =>
     (storageKey = defaultStorageKey) => {
       document.cookie = `${storageKey}=${colorMode}; max-age=31536000; path=/`
     },
+
+  ssr: !!cookie,
 })
 
 export const createColorModeManager = (
-  type: "local" | "cookie" | "ssr" = "local",
+  type: "cookie" | "local" | "ssr" = "local",
   cookie?: string,
 ) => {
   switch (type) {
@@ -85,9 +85,9 @@ export const createColorModeManager = (
 }
 
 export const colorModeManager = {
-  localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
   cookieStorage: createCookieStorage(COLOR_MODE_STORAGE_KEY),
-  ssr: (cookie?: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
-  createLocalStorage,
   createCookieStorage,
+  createLocalStorage,
+  localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
+  ssr: (cookie?: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
 }

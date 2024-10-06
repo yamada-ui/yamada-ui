@@ -9,28 +9,28 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
   {
     baseStyle: {
       container: {},
+      content: {
+        minW: "auto",
+        p: "2",
+        w: "auto",
+      },
       field: {
-        cursor: "text",
-        pb: "px",
         _focus: {
           zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",
         },
-      },
-      content: {
-        w: "auto",
-        minW: "auto",
-        p: "2",
+        cursor: "text",
+        pb: "px",
       },
     },
 
     sizes: {
       xs: {
         icon: {
-          pt: "2",
           fontSize: "md",
+          pt: "2",
         },
       },
     },

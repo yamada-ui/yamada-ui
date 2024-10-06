@@ -1,5 +1,5 @@
-import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import type { FC, PropsWithChildren } from "react"
+import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { PortalProvider, usePortal } from "./portal-provider"
@@ -23,8 +23,6 @@ export const DefaultPortal: FC<
     const host = appendToParentPortal
       ? (parent ?? ownerDocument.body)
       : ownerDocument.body
-
-    if (!host) return
 
     el.current = ownerDocument.createElement("div")
     el.current.className = "ui-portal"

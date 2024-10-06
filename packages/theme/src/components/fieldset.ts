@@ -7,17 +7,17 @@ export const Fieldset: ComponentMultiStyle<"Fieldset"> = mergeMultiStyle(
   {
     baseStyle: {
       legend: {
-        display: "block",
-        fontSize: "md",
-        me: "3",
-        mb: "2",
-        fontWeight: "medium",
-        transitionProperty: "common",
-        transitionDuration: "normal",
-        opacity: 1,
         _disabled: {
           opacity: 0.4,
         },
+        display: "block",
+        fontSize: "md",
+        fontWeight: "medium",
+        mb: "2",
+        me: "3",
+        opacity: 1,
+        transitionDuration: "normal",
+        transitionProperty: "common",
       },
     },
   },

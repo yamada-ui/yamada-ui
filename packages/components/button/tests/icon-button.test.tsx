@@ -13,7 +13,7 @@ describe("<IconButton />", () => {
     )
   })
 
-  test("renders children correctly", async () => {
+  test("renders children correctly", () => {
     const { getByTestId } = render(
       <IconButton colorScheme="primary" aria-label="Open menu">
         <ChevronIcon data-testid="icon" />

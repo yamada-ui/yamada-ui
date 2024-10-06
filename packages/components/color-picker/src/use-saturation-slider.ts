@@ -1,30 +1,30 @@
 import type { CSSUIProps, HTMLUIProps, PropGetter } from "@yamada-ui/core"
-import {
-  useFormControlProps,
-  formControlProperties,
-} from "@yamada-ui/form-control"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
+import {
+  formControlProperties,
+  useFormControlProps,
+} from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
 import {
+  clampNumber,
   dataAttr,
   handlerAll,
-  mergeRefs,
-  useCallbackRef,
-  runIfFunc,
-  clampNumber,
   hsvTo,
+  mergeRefs,
   roundNumberToStep,
-  useUpdateEffect,
+  runIfFunc,
   splitObject,
+  useCallbackRef,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
 
 export type Hsv = [number, number, number]
-type Overlay = HTMLUIProps | ((value: Hsv) => HTMLUIProps)
+type Overlay = ((value: Hsv) => HTMLUIProps) | HTMLUIProps
 
 const defaultOverlays = (withShadow: boolean): Overlay[] => {
   let overlays: Overlay[] = [
@@ -57,33 +57,11 @@ interface UseSaturationSliderOptions {
    */
   name?: string
   /**
-   * The value of the saturation slider.
-   */
-  value?: Hsv
-  /**
    * The initial value of the saturation slider.
    *
    * @default "[0, 0, 1]"
    */
   defaultValue?: Hsv
-  /**
-   * Function called whenever the saturation slider value changes.
-   */
-  onChange?: (value: Hsv) => void
-  /**
-   * Function called when the user starts selecting a new value.
-   */
-  onChangeStart?: (value: Hsv) => void
-  /**
-   * Function called when the user is done selecting a new value.
-   */
-  onChangeEnd?: (value: Hsv) => void
-  /**
-   * The step in which increments or decrements have to be made.
-   *
-   * @default 0.01
-   */
-  step?: number
   /**
    * If `false`, the saturation slider handle will not capture focus when value changes.
    *
@@ -91,9 +69,23 @@ interface UseSaturationSliderOptions {
    */
   focusThumbOnChange?: boolean
   /**
+   * The overlay used for the saturation slider.
+   */
+  overlays?: Overlay[]
+  /**
+   * The step in which increments or decrements have to be made.
+   *
+   * @default 0.01
+   */
+  step?: number
+  /**
    * The CSS `background` property. Used in `background` of thumb element.
    */
   thumbColor?: CSSUIProps["bg"]
+  /**
+   * The value of the saturation slider.
+   */
+  value?: Hsv
   /**
    * If `true`, the slider has an inner `box-shadow`.
    *
@@ -101,9 +93,17 @@ interface UseSaturationSliderOptions {
    */
   withShadow?: boolean
   /**
-   * The overlay used for the saturation slider.
+   * Function called whenever the saturation slider value changes.
    */
-  overlays?: Overlay[]
+  onChange?: (value: Hsv) => void
+  /**
+   * Function called when the user is done selecting a new value.
+   */
+  onChangeEnd?: (value: Hsv) => void
+  /**
+   * Function called when the user starts selecting a new value.
+   */
+  onChangeStart?: (value: Hsv) => void
 }
 
 export interface UseSaturationSliderProps
@@ -120,23 +120,23 @@ export const useSaturationSlider = ({
   let {
     id,
     name,
-    value: valueProp,
     defaultValue = [0, 0, 1],
-    onChange: onChangeProp,
-    onChangeStart: onChangeStartProp,
-    onChangeEnd: onChangeEndProp,
-    step = 0.01,
-    thumbColor,
     withShadow = true,
     overlays: overlaysProp = defaultOverlays(withShadow),
+    step = 0.01,
+    thumbColor,
+    value: valueProp,
+    onChange: onChangeProp,
+    onChangeEnd: onChangeEndProp,
+    onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const [
     {
-      "aria-readonly": _ariaReadonly,
-      required,
       disabled,
       readOnly,
+      required,
+      "aria-readonly": _ariaReadonly,
       ...formControlProps
     },
     containerProps,
@@ -146,8 +146,8 @@ export const useSaturationSlider = ({
   const onChangeEnd = useCallbackRef(onChangeEndProp)
 
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const [isDragging, setDragging] = useState(false)
@@ -161,11 +161,11 @@ export const useSaturationSlider = ({
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
   const latestRef = useLatestRef({
-    value,
-    step,
-    isInteractive,
-    eventSource: null as "pointer" | "keyboard" | null,
+    eventSource: null as "keyboard" | "pointer" | null,
     focusThumbOnChange,
+    isInteractive,
+    step,
+    value,
   })
 
   const thumbSize = useSize(thumbRef)
@@ -183,7 +183,7 @@ export const useSaturationSlider = ({
 
       latestRef.current.eventSource = "pointer"
 
-      const { bottom, left, height, width } =
+      const { bottom, height, left, width } =
         trackRef.current.getBoundingClientRect()
       const { clientX, clientY } = ev.touches?.[0] ?? ev
 
@@ -200,7 +200,7 @@ export const useSaturationSlider = ({
     [latestRef],
   )
 
-  const setValueFromPointer = (ev: MouseEvent | TouchEvent | PointerEvent) => {
+  const setValueFromPointer = (ev: MouseEvent | PointerEvent | TouchEvent) => {
     const { value } = latestRef.current
     const [nextS, nextV] = getValueFromPointer(ev)
 
@@ -234,10 +234,10 @@ export const useSaturationSlider = ({
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
       const actions: { [key: string]: KeyboardEventHandler } = {
+        ArrowDown: () => constrain([s, v - step]),
+        ArrowLeft: () => constrain([s - step, v]),
         ArrowRight: () => constrain([s + step, v]),
         ArrowUp: () => constrain([s, v + step]),
-        ArrowLeft: () => constrain([s - step, v]),
-        ArrowDown: () => constrain([s, v - step]),
       }
 
       const action = actions[ev.key]
@@ -255,15 +255,12 @@ export const useSaturationSlider = ({
   )
 
   usePanEvent(containerRef, {
-    onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+    onMove: (ev) => {
+      const { isInteractive } = latestRef.current
 
       if (!isInteractive) return
 
-      setDragging(true)
-      focusThumb()
       setValueFromPointer(ev)
-      onChangeStart(value)
     },
     onSessionEnd: () => {
       const { isInteractive, value } = latestRef.current
@@ -273,12 +270,15 @@ export const useSaturationSlider = ({
       setDragging(false)
       onChangeEnd(value)
     },
-    onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+    onSessionStart: (ev) => {
+      const { isInteractive, value } = latestRef.current
 
       if (!isInteractive) return
 
+      setDragging(true)
+      focusThumb()
       setValueFromPointer(ev)
+      onChangeStart(value)
     },
   })
 
@@ -326,10 +326,10 @@ export const useSaturationSlider = ({
       ref,
       type: "hidden",
       name,
-      value: [h, s, v].toString(),
-      required,
       disabled,
       readOnly,
+      required,
+      value: [h, s, v].toString(),
     }),
     [formControlProps, id, name, h, s, v, required, disabled, readOnly],
   )
@@ -345,36 +345,36 @@ export const useSaturationSlider = ({
 
   const getThumbProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const { width, height } = thumbSize ?? { width: 0, height: 0 }
+      const { height, width } = thumbSize ?? { height: 0, width: 0 }
       const x = s * 100
       const y = v * 100
 
       const style: CSSProperties = {
         ...props.style,
-        position: "absolute",
-        userSelect: "none",
-        touchAction: "none",
-        left: `calc(${x}% - ${width / 2}px)`,
         bottom: `calc(${y}% - ${height / 2}px)`,
+        left: `calc(${x}% - ${width / 2}px)`,
+        position: "absolute",
+        touchAction: "none",
+        userSelect: "none",
       }
 
       return {
-        "aria-label": "Saturation and brightness thumb",
         bg: thumbColor ?? hsvTo([h, s, v])(),
+        "aria-label": "Saturation and brightness thumb",
         ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        style,
         role: "slider",
-        "aria-valuenow": s,
-        "aria-valuemin": 0,
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-valuemax": 100,
+        "aria-valuemin": 0,
+        "aria-valuenow": s,
         "aria-valuetext": `saturation ${s}, brightness ${v}`,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, rest.onFocus),
         onBlur: handlerAll(props.onBlur, rest.onBlur),
-        style,
+        onFocus: handlerAll(props.onFocus, rest.onFocus),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }
     },
     [
@@ -393,13 +393,13 @@ export const useSaturationSlider = ({
   )
 
   return {
-    value,
     overlays,
+    value,
     getContainerProps,
     getInnerProps,
-    getTrackProps,
     getInputProps,
     getThumbProps,
+    getTrackProps,
   }
 }
 

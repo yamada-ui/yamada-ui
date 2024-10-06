@@ -1,5 +1,5 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
 
@@ -10,8 +10,8 @@ export const PopoverFooter = forwardRef<PopoverFooterProps, "footer">(
     const { styles } = usePopover()
 
     const css: CSSUIObject = {
-      display: "flex",
       alignItems: "center",
+      display: "flex",
       justifyContent: "flex-start",
       ...styles.footer,
     }

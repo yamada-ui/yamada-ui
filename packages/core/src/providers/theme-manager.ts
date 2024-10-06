@@ -1,19 +1,18 @@
 import type { Theme } from "../theme.types"
 import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
-const hasSupport = !!globalThis?.document
+const hasSupport = !!(globalThis.document as Document | undefined)
 
 export interface ThemeSchemeManager {
   type: "cookie" | "localStorage"
-  ssr?: boolean
   get: (
     initialThemeScheme?: Theme["themeSchemes"],
   ) => (storageKey?: string) => Theme["themeSchemes"]
   set: (themeScheme: Theme["themeSchemes"]) => (storageKey?: string) => void
+  ssr?: boolean
 }
 
 const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
-  ssr: false,
   type: "localStorage",
   get:
     (initThemeScheme = "base") =>
@@ -22,15 +21,14 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
 
       try {
         const themeScheme = localStorage.getItem(storageKey) as
-          | Theme["themeSchemes"]
           | null
+          | Theme["themeSchemes"]
 
         return themeScheme || initThemeScheme
       } catch {
         return initThemeScheme
       }
     },
-
   set:
     (themeScheme) =>
     (storageKey = defaultStorageKey) => {
@@ -38,6 +36,8 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
         localStorage.setItem(storageKey, String(themeScheme))
       } catch {}
     },
+
+  ssr: false,
 })
 
 const parseCookie = (
@@ -53,7 +53,6 @@ const createCookieStorage = (
   defaultStorageKey: string,
   cookie?: string,
 ): ThemeSchemeManager => ({
-  ssr: !!cookie,
   type: "cookie",
   get:
     (initThemeScheme = "base") =>
@@ -64,16 +63,17 @@ const createCookieStorage = (
 
       return parseCookie(document.cookie, storageKey) || initThemeScheme
     },
-
   set:
     (themeScheme) =>
     (storageKey = defaultStorageKey) => {
       document.cookie = `${storageKey}=${themeScheme}; max-age=31536000; path=/`
     },
+
+  ssr: !!cookie,
 })
 
 export const createThemeSchemeManager = (
-  type: "local" | "cookie" | "ssr" = "local",
+  type: "cookie" | "local" | "ssr" = "local",
   cookie?: string,
 ) => {
   switch (type) {
@@ -90,10 +90,10 @@ export const createThemeSchemeManager = (
 }
 
 export const themeSchemeManager = {
-  localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
   cookieStorage: createCookieStorage(THEME_SCHEME_STORAGE_KEY),
+  createCookieStorage,
+  createLocalStorage,
+  localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
   ssr: (cookie?: string) =>
     createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie),
-  createLocalStorage,
-  createCookieStorage,
 }

@@ -1,7 +1,7 @@
 import type { Transform } from "./utils"
 
 export function generateFilter(
-  type: "filter" | "backdrop" = "filter",
+  type: "backdrop" | "filter" = "filter",
 ): Transform {
   return function (value) {
     if (value !== "auto") return value

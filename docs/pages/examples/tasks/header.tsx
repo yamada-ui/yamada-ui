@@ -1,7 +1,10 @@
+import type { StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   Avatar,
+  Box,
+  Heading,
   HStack,
-  VStack,
   Menu,
   MenuButton,
   MenuDivider,
@@ -9,12 +12,9 @@ import {
   MenuItem,
   MenuList,
   Text,
-  Heading,
-  Box,
+  VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 
 export interface HeaderProps extends StackProps {}
 
@@ -44,7 +44,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
             </Box>
 
             <Box as="li">
-              <Text fontSize="sm" color="muted" lineClamp={1}>
+              <Text color="muted" fontSize="sm" lineClamp={1}>
                 mail@example.com
               </Text>
             </Box>

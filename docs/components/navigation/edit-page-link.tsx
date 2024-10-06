@@ -1,7 +1,7 @@
-import { Pencil } from "@yamada-ui/lucide"
-import { HStack, Text } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Pencil } from "@yamada-ui/lucide"
+import { HStack, Text } from "@yamada-ui/react"
 import { useI18n } from "contexts"
 
 export interface EditPageLinkProps extends StackProps {
@@ -14,18 +14,18 @@ export const EditPageLink: FC<EditPageLinkProps> = ({ href, ...rest }) => {
   return (
     <HStack
       as="a"
-      href={href}
-      target="_blank"
-      mt="xl"
-      alignSelf="flex-start"
-      gap="sm"
-      fontSize="sm"
-      color="muted"
       _focus={{ outline: "none" }}
       _focusVisible={{ boxShadow: "outline" }}
       _hover={{ color: ["black", "white"] }}
-      transitionProperty="colors"
+      alignSelf="flex-start"
+      color="muted"
+      fontSize="sm"
+      gap="sm"
+      href={href}
+      mt="xl"
+      target="_blank"
       transitionDuration="normal"
+      transitionProperty="colors"
       {...rest}
     >
       <Pencil />

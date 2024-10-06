@@ -1,7 +1,7 @@
-import { readFile } from "fs/promises"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { config } from "dotenv"
+import { readFile } from "fs/promises"
 import fetch from "node-fetch"
 
 config()
@@ -34,14 +34,14 @@ const main = async () => {
     s.start(`Sending to Discord`)
 
     const data = {
-      username: "GitHub",
       content,
+      username: "GitHub",
     }
 
     const headers = { "Content-Type": "application/json" }
     const body = JSON.stringify(data)
 
-    const { ok } = await fetch(url, { method: "POST", headers, body })
+    const { ok } = await fetch(url, { body, headers, method: "POST" })
 
     if (!ok) throw new Error("Failed to send message to Discord\n")
 

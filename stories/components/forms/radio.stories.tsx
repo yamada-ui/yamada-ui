@@ -1,28 +1,28 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { RadioItem, UseRadioGroupReturn } from "@yamada-ui/react"
 import type { FC } from "react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import {
+  Box,
+  Button,
   FormControl,
+  HStack,
   Radio,
   RadioGroup,
   useRadio,
   useRadioGroup,
-  Wrap,
-  HStack,
-  Box,
   VStack,
-  Button,
+  Wrap,
 } from "@yamada-ui/react"
-import type { RadioItem, UseRadioGroupReturn } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Radio>
 
 const meta: Meta<typeof Radio> = {
-  title: "Components / Forms / Radio",
   component: Radio,
+  title: "Components / Forms / Radio",
 }
 
 export default meta
@@ -61,13 +61,13 @@ export const isDisabled: Story = () => {
   return (
     <>
       <Radio isDisabled>All Notifications</Radio>
-      <Radio isDisabled defaultIsChecked>
+      <Radio defaultIsChecked isDisabled>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio value="important" isDisabled>
+        <Radio isDisabled value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
@@ -98,13 +98,13 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Radio isReadOnly>All Notifications</Radio>
-      <Radio isReadOnly defaultIsChecked>
+      <Radio defaultIsChecked isReadOnly>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio value="important" isReadOnly>
+        <Radio isReadOnly value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
@@ -135,30 +135,30 @@ export const isInvalid: Story = () => {
   return (
     <>
       <Radio isInvalid>All Notifications</Radio>
-      <Radio isInvalid defaultIsChecked>
+      <Radio defaultIsChecked isInvalid>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio value="important" isInvalid>
+        <Radio isInvalid value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <Radio>All Notifications</Radio>
       </FormControl>
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <RadioGroup defaultValue="all">
           <Radio value="all">All Notifications</Radio>
@@ -185,7 +185,7 @@ export const withGroup: Story = () => {
         <Radio value="フリーザ">フリーザ</Radio>
       </RadioGroup>
 
-      <RadioGroup direction="row" defaultValue="孫悟空">
+      <RadioGroup defaultValue="孫悟空" direction="row">
         <Radio value="孫悟空">孫悟空</Radio>
         <Radio value="ベジータ">ベジータ</Radio>
         <Radio value="フリーザ">フリーザ</Radio>
@@ -212,7 +212,7 @@ export const customHook: Story = () => {
   const CustomRadio: FC<ReturnType<UseRadioGroupReturn["getRadioProps"]>> = (
     props,
   ) => {
-    const { getInputProps, getIconProps } = useRadio(props)
+    const { getIconProps, getInputProps } = useRadio(props)
 
     return (
       <Box as="label">
@@ -221,16 +221,16 @@ export const customHook: Story = () => {
         <Box
           as="span"
           {...getIconProps()}
-          cursor="pointer"
-          borderWidth="1px"
-          py="xs"
-          px="sm"
-          rounded="md"
           _checked={{
             bg: "blue.500",
-            color: "white",
             borderColor: "blue.500",
+            color: "white",
           }}
+          borderWidth="1px"
+          cursor="pointer"
+          px="sm"
+          py="xs"
+          rounded="md"
         >
           {props.value}
         </Box>
@@ -258,9 +258,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -270,14 +270,13 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.radio?.message}
         isInvalid={!!errors.radio}
         label="Who is your favorite character?"
-        errorMessage={errors.radio?.message}
       >
         <Controller
           name="radio"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RadioGroup {...field}>
               <Radio value="孫悟空">孫悟空</Radio>
@@ -285,6 +284,7 @@ export const reactHookForm: Story = () => {
               <Radio value="フリーザ">フリーザ</Radio>
             </RadioGroup>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -306,9 +306,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -318,14 +318,13 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.radio?.message}
         isInvalid={!!errors.radio}
         label="Who is your favorite character?"
-        errorMessage={errors.radio?.message}
       >
         <Controller
           name="radio"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RadioGroup {...field}>
               <Radio value="孫悟空">孫悟空</Radio>
@@ -333,6 +332,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
               <Radio value="フリーザ">フリーザ</Radio>
             </RadioGroup>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

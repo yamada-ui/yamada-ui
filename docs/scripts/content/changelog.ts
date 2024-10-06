@@ -1,20 +1,20 @@
-import { readdir } from "fs/promises"
-import path from "path"
+import type { Content, Data } from "../utils"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { config } from "dotenv"
-import type { Content, Data } from "../utils"
-import { getMDXFile, getMDXFileName, writeMDXFile } from "../utils"
 import { CONSTANT } from "constant"
+import { config } from "dotenv"
+import { readdir } from "fs/promises"
+import path from "path"
 import { locales } from "utils/i18n"
+import { getMDXFile, getMDXFileName, writeMDXFile } from "../utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
 interface MDXFile {
   name: string
-  version: number[]
-  data: Data
   content: Content
+  data: Data
+  version: number[]
 }
 
 const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, ".changelog")
@@ -39,9 +39,9 @@ const getMDXFiles: p.RequiredRunner = () => async (_, s) => {
 
       if (name.startsWith("manifest")) return
 
-      const { data, content } = await getMDXFile(`${path}/${name}`)
+      const { content, data } = await getMDXFile(`${path}/${name}`)
 
-      mdxFiles.push({ name, data, content })
+      mdxFiles.push({ name, content, data })
 
       return
     }),
@@ -78,7 +78,7 @@ const generateMDXFiles: p.RequiredRunner =
     let wroteList: string[] = []
 
     await Promise.all(
-      mdxFiles.map(async ({ name, data, content }, index) => {
+      mdxFiles.map(async ({ name, content, data }, index) => {
         const outPath = path.join(DIST_PATH, name)
 
         data.table_of_contents_max_lv = 3

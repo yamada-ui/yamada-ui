@@ -14,8 +14,8 @@ export const otherLocales = CONSTANT.I18N.LOCALES.map(
 
 export type UI = typeof UI_EN
 
-export const ui = { ja: UI_JA, en: UI_EN }
-export const contents = { ja: CONTENT_JA, en: CONTENT_EN }
+export const ui = { en: UI_EN, ja: UI_JA }
+export const contents = { en: CONTENT_EN, ja: CONTENT_JA }
 
 export const getUI = (locale: Locale) => ui[locale]
 export const getContents = (locale: Locale) => contents[locale]

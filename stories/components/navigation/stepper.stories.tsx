@@ -1,39 +1,39 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { colorSchemes } from "../../components"
-import { Ghost } from "@yamada-ui/lucide"
 import type { Steps } from "@yamada-ui/react"
+import { Ghost } from "@yamada-ui/lucide"
 import {
-  Stepper,
-  Step,
-  StepTitle,
-  StepDescription,
-  StepSeparator,
-  StepStatus,
-  useSteps,
+  Box,
   Button,
   HStack,
-  Box,
+  Step,
+  StepDescription,
+  Stepper,
+  StepSeparator,
+  StepStatus,
+  StepTitle,
+  useSteps,
 } from "@yamada-ui/react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Stepper>
 
 const meta: Meta<typeof Stepper> = {
-  title: "Components / Navigation / Stepper",
   component: Stepper,
+  title: "Components / Navigation / Stepper",
 }
 
 export default meta
 
 export const basic: Story = () => {
   const steps: Steps = [
-    { title: "孫悟空少年編", description: "レッドリボン軍" },
-    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    { description: "レッドリボン軍", title: "孫悟空少年編" },
+    { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
+    { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 1,
     count: steps.length,
+    index: 1,
   })
 
   return (
@@ -50,27 +50,27 @@ export const basic: Story = () => {
 
 export const withSize: Story = () => {
   const steps: Steps = [
-    { title: "孫悟空少年編", description: "レッドリボン軍" },
-    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    { description: "レッドリボン軍", title: "孫悟空少年編" },
+    { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
+    { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   return (
     <>
-      <Stepper size="sm" index={1} steps={steps} />
+      <Stepper index={1} size="sm" steps={steps} />
 
-      <Stepper size="md" index={1} steps={steps} />
+      <Stepper index={1} size="md" steps={steps} />
 
-      <Stepper size="lg" index={1} steps={steps} />
+      <Stepper index={1} size="lg" steps={steps} />
     </>
   )
 }
 
 export const withColorScheme: Story = () => {
   const steps: Steps = [
-    { title: "孫悟空少年編", description: "レッドリボン軍" },
-    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    { description: "レッドリボン軍", title: "孫悟空少年編" },
+    { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
+    { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   return (
@@ -89,21 +89,21 @@ export const withColorScheme: Story = () => {
 
 export const withOrientation: Story = () => {
   const steps: Steps = [
-    { title: "孫悟空少年編", description: "レッドリボン軍" },
-    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    { description: "レッドリボン軍", title: "孫悟空少年編" },
+    { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
+    { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 1,
     count: steps.length,
+    index: 1,
   })
 
   return (
     <>
-      <Stepper index={activeStep} steps={steps} orientation="horizontal" />
+      <Stepper index={activeStep} orientation="horizontal" steps={steps} />
 
-      <Stepper index={activeStep} steps={steps} orientation="vertical" h="sm" />
+      <Stepper h="sm" index={activeStep} orientation="vertical" steps={steps} />
 
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>
@@ -115,20 +115,20 @@ export const withOrientation: Story = () => {
 
 export const customStep: Story = () => {
   const steps: Steps = [
-    { title: "孫悟空少年編", description: "レッドリボン軍" },
-    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    { description: "レッドリボン軍", title: "孫悟空少年編" },
+    { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
+    { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 1,
     count: steps.length,
+    index: 1,
   })
 
   return (
     <>
       <Stepper index={activeStep}>
-        {steps.map(({ title, description }, index) => (
+        {steps.map(({ description, title }, index) => (
           <Step key={index}>
             <StepStatus />
 
@@ -153,25 +153,25 @@ export const customStep: Story = () => {
 export const customStatus: Story = () => {
   const steps: Steps = [
     {
-      title: "孫悟空少年編",
       description: "レッドリボン軍",
-      statusProps: { complete: `😇`, incomplete: `😑`, active: `😎` },
+      title: "孫悟空少年編",
+      statusProps: { active: `😎`, complete: `😇`, incomplete: `😑` },
     },
     {
-      title: "ピッコロ大魔王編",
       description: "ピッコロ大魔王",
-      statusProps: { complete: `😇`, incomplete: `😑`, active: `😎` },
+      title: "ピッコロ大魔王編",
+      statusProps: { active: `😎`, complete: `😇`, incomplete: `😑` },
     },
     {
-      title: "サイヤ人編",
       description: "ベジータ・ナッパ",
-      statusProps: { complete: `😇`, incomplete: `😑`, active: `😎` },
+      title: "サイヤ人編",
+      statusProps: { active: `😎`, complete: `😇`, incomplete: `😑` },
     },
   ]
 
   const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 1,
     count: steps.length,
+    index: 1,
   })
 
   return (
@@ -179,7 +179,7 @@ export const customStatus: Story = () => {
       <Stepper index={activeStep} steps={steps} />
 
       <Stepper index={activeStep}>
-        {steps.map(({ title, description }, index) => (
+        {steps.map(({ description, title }, index) => (
           <Step key={index}>
             <StepStatus complete={<Ghost fontSize="xl" />} />
 

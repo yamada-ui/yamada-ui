@@ -1,22 +1,22 @@
-import { createId, handlerAll } from "@yamada-ui/utils"
 import type React from "react"
 import type { Key, PointerEventHandler } from "react"
+import { createId, handlerAll } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 
 export interface RippleOptions {
   key: React.Key
+  size: number
   x: number
   y: number
-  size: number
 }
 
-export interface UseRippleProps<T extends any = HTMLElement> {
+export interface UseRippleProps<T = HTMLElement> {
   disabled?: boolean
   isDisabled?: boolean
   onPointerDown?: PointerEventHandler<T>
 }
 
-export const useRipple = <T extends any = HTMLElement>({
+export const useRipple = <T = HTMLElement>({
   disabled,
   isDisabled,
   ...rest
@@ -51,8 +51,8 @@ export const useRipple = <T extends any = HTMLElement>({
 
   return {
     ripples,
-    onPointerDown: handlerAll(onPointerDown, rest.onPointerDown),
     onClear,
+    onPointerDown: handlerAll(onPointerDown, rest.onPointerDown),
   }
 }
 

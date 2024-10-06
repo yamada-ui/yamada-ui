@@ -5,8 +5,8 @@ import { Button, VisuallyHidden } from "@yamada-ui/react"
 type Story = StoryFn<typeof VisuallyHidden>
 
 const meta: Meta<typeof VisuallyHidden> = {
-  title: "Components / Other / VisuallyHidden",
   component: VisuallyHidden,
+  title: "Components / Other / VisuallyHidden",
 }
 
 export default meta

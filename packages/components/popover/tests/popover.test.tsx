@@ -1,3 +1,4 @@
+import type { PopoverProps } from "../src"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import {
@@ -9,7 +10,6 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from "../src"
-import type { PopoverProps } from "../src"
 
 describe("<Popover />", () => {
   const PopoverExample = (props: PopoverProps) => {
@@ -122,9 +122,9 @@ describe("<Popover />", () => {
           </button>
 
           <Popover
+            closeOnBlur={false}
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
-            closeOnBlur={false}
           >
             <PopoverTrigger>
               <span>Popover Target</span>
@@ -163,7 +163,7 @@ describe("<Popover />", () => {
   })
 
   test.each<{
-    animation: "scale" | "top" | "left" | "bottom" | "right"
+    animation: "bottom" | "left" | "right" | "scale" | "top"
     transform: string
   }>([
     {
@@ -189,7 +189,7 @@ describe("<Popover />", () => {
   ])(
     "when animation is %s, the popover should be displayed",
     async ({ animation, transform }) => {
-      const { user, container } = render(
+      const { container, user } = render(
         <PopoverExample animation={animation} />,
       )
 

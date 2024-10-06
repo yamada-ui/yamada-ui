@@ -1,10 +1,10 @@
-import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
 import type { ButtonProps, FlexProps, LinkProps, Merge } from "@yamada-ui/react"
 import type { FC } from "react"
-import { memo } from "react"
+import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
 import { Github, Npm } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
+import { memo } from "react"
 
 export interface RelatedLinksProps extends FlexProps {}
 
@@ -19,10 +19,10 @@ export const RelatedLinks = memo(
 
     const [, dirName] = package_name.split("/")
 
-    const isHook = dirName.startsWith("use-")
+    const isHook = !!dirName?.startsWith("use-")
 
     return (
-      <Wrap ref={ref} mt="4" gap="md" {...rest}>
+      <Wrap ref={ref} gap="md" mt="4" {...rest}>
         {dirName ? (
           <DocumentLink
             href={`${CONSTANT.SNS.GITHUB.UI_EDIT_URL}/${
@@ -58,28 +58,28 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (
     <Button
       as={Link}
-      variant="outline"
-      display="inline-flex"
-      alignItems="center"
-      h="8"
-      rounded="md"
-      borderWidth="1px"
-      borderColor="border"
-      px="3"
-      fontSize="sm"
-      fontWeight="normal"
-      lineHeight="1.2"
-      textDecoration="inherit"
-      cursor="pointer"
-      transitionProperty="common"
-      transitionDuration="slower"
-      color="muted"
       _hover={{
-        color: ["blackAlpha.700", "whiteAlpha.600"],
         bg: [`blackAlpha.50`, `whiteAlpha.50`],
+        color: ["blackAlpha.700", "whiteAlpha.600"],
         textDecoration: "none",
       }}
+      alignItems="center"
+      borderColor="border"
+      borderWidth="1px"
+      color="muted"
+      cursor="pointer"
+      display="inline-flex"
+      fontSize="sm"
+      fontWeight="normal"
+      h="8"
       isExternal
+      lineHeight="1.2"
+      px="3"
+      rounded="md"
+      textDecoration="inherit"
+      transitionDuration="slower"
+      transitionProperty="common"
+      variant="outline"
       {...rest}
     />
   )

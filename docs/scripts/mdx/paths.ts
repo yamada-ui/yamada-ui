@@ -1,6 +1,6 @@
+import type { EventName } from "./utils"
 import { writeFileSync } from "fs"
 import path from "path"
-import type { EventName } from "./utils"
 import { MDX_PATH } from "./utils"
 
 let PATHS: string[] = []

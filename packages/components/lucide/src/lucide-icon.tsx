@@ -1,5 +1,5 @@
-import { forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 

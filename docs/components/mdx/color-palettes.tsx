@@ -1,15 +1,15 @@
+import type { defaultTheme, GridProps, StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   Box,
   Grid,
   HStack,
   Text,
-  VStack,
   useTheme,
   useToken,
   useValue,
+  VStack,
 } from "@yamada-ui/react"
-import type { GridProps, StackProps, defaultTheme } from "@yamada-ui/react"
-import type { FC } from "react"
 
 export interface ColorPaletterProps extends Omit<StackProps, "color"> {
   color: string
@@ -17,8 +17,8 @@ export interface ColorPaletterProps extends Omit<StackProps, "color"> {
 }
 
 export const ColorPaletter: FC<ColorPaletterProps> = ({
-  label,
   color,
+  label,
   ...rest
 }) => {
   if (!label) label = color
@@ -28,13 +28,13 @@ export const ColorPaletter: FC<ColorPaletterProps> = ({
 
   return (
     <HStack {...rest}>
-      <Box bg={color} minW="12" minH="12" rounded="md" boxShadow="inner" />
+      <Box bg={color} boxShadow="inner" minH="12" minW="12" rounded="md" />
 
       <VStack gap="1">
         <Text fontWeight="semibold" lineClamp={1} textTransform="capitalize">
           {label}
         </Text>
-        <Text lineClamp={1} color="muted">
+        <Text color="muted" lineClamp={1}>
           {computedValue}
         </Text>
       </VStack>
@@ -58,8 +58,8 @@ export const ColorPaletters: FC<ColorPalettersProps> = ({
       {Object.keys(theme.colors?.[colorScheme] ?? {}).map((tone) => (
         <ColorPaletter
           key={`${colorScheme}.${tone}`}
-          label={`${colorScheme} ${tone}`}
           color={`${colorScheme}.${tone}`}
+          label={`${colorScheme} ${tone}`}
         />
       ))}
     </ColorPaletterContainer>
@@ -73,13 +73,13 @@ export const ColorPaletterContainer: FC<ColorPaletterContainerProps> = ({
 }) => {
   return (
     <Grid
+      gap="4"
       my="6"
       templateColumns={{
         base: "repeat(3, 1fr)",
-        md: "repeat(2, 1fr)",
         sm: "repeat(1, 1fr)",
+        md: "repeat(2, 1fr)",
       }}
-      gap="4"
       {...rest}
     />
   )

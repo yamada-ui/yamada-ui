@@ -1,55 +1,52 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
+import type {
+  CSSProperties,
+  Dispatch,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+  RefAttributes,
+  SetStateAction,
+} from "react"
+import type { DatePickerIconProps } from "./date-picker"
+import type { UseMultiDatePickerProps } from "./use-multi-date-picker"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
 import { cx, mergeRefs, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement, useMemo, useRef } from "react"
-import type {
-  CSSProperties,
-  ReactElement,
-  MouseEventHandler,
-  Dispatch,
-  SetStateAction,
-  RefAttributes,
-  ReactNode,
-} from "react"
 import { Calendar } from "./calendar"
 import { isSameDate } from "./calendar-utils"
-import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"
 import { DatePickerProvider, useDatePickerContext } from "./use-date-picker"
-import type { UseMultiDatePickerProps } from "./use-multi-date-picker"
 import { useMultiDatePicker } from "./use-multi-date-picker"
 
 interface MultiDatePickerOptions {
-  /**
-   * The visual separator between each value.
-   *
-   * @default ','
-   */
-  separator?: string
+  children?: FC<{ value: Date[]; onClose: () => void }> | ReactNode
   /**
    * The custom display value to use.
    */
   component?: FC<{
-    value: Date
-    label: string
     index: number
+    label: string
+    value: Date
     onRemove: MouseEventHandler<HTMLElement>
   }>
   /**
-   * If `true`, keep the placeholder.
-   *
-   * @default false
+   * The border color when the input is invalid.
    */
-  keepPlaceholder?: boolean
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If `true`, display the date picker clear icon.
    *
@@ -57,13 +54,21 @@ interface MultiDatePickerOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * If `true`, keep the placeholder.
+   *
+   * @default false
    */
-  focusBorderColor?: string
+  keepPlaceholder?: boolean
   /**
-   * The border color when the input is invalid.
+   * The visual separator between each value.
+   *
+   * @default ','
    */
-  errorBorderColor?: string
+  separator?: string
+  /**
+   * Props for date picker clear icon element.
+   */
+  clearIconProps?: DatePickerIconProps
   /**
    * Props for date picker container element.
    */
@@ -77,17 +82,13 @@ interface MultiDatePickerOptions {
    */
   fieldProps?: Omit<HTMLUIProps, "children">
   /**
-   * Props for date picker input element.
-   */
-  inputProps?: HTMLUIProps<"input">
-  /**
    * Props for date picker icon element.
    */
   iconProps?: DatePickerIconProps
   /**
-   * Props for date picker clear icon element.
+   * Props for date picker input element.
    */
-  clearIconProps?: DatePickerIconProps
+  inputProps?: HTMLUIProps<"input">
   /**
    * Props to be forwarded to the portal component.
    *
@@ -95,7 +96,6 @@ interface MultiDatePickerOptions {
    *
    */
   portalProps?: Omit<PortalProps, "children">
-  children?: ReactNode | FC<{ value: Date[]; onClose: () => void }>
 }
 
 export interface MultiDatePickerProps
@@ -117,47 +117,47 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     let {
       className,
       children,
-      component,
-      separator,
-      isClearable = true,
-      keepPlaceholder = false,
       color,
+      component,
       h,
       height,
+      isClearable = true,
+      keepPlaceholder = false,
       minH,
       minHeight,
+      separator,
+      clearIconProps,
       containerProps,
       contentProps,
       fieldProps,
-      inputProps,
       iconProps,
-      clearIconProps,
+      inputProps,
       portalProps = { isDisabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const {
-      getPopoverProps,
-      getContainerProps,
-      getCalendarProps,
-      getFieldProps,
-      getInputProps,
-      getIconProps,
-      onClose,
-      isOpen,
-      value,
-      setValue,
-      dateToString,
       id,
+      dateToString,
+      isOpen,
+      setValue,
+      value,
+      getCalendarProps,
+      getContainerProps,
+      getFieldProps,
+      getIconProps,
+      getInputProps,
+      getPopoverProps,
+      onClose,
     } = useMultiDatePicker(computedProps)
 
     h ??= height
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
+      h: "fit-content",
+      w: "100%",
       ...styles.container,
     }
 
@@ -175,17 +175,17 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
             >
               <MultiDatePickerField
                 component={component}
-                separator={separator}
+                dateToString={dateToString}
                 isOpen={isOpen}
                 keepPlaceholder={keepPlaceholder}
-                value={value}
+                separator={separator}
                 setValue={setValue}
-                dateToString={dateToString}
+                value={value}
                 {...getFieldProps({ h, minH, ...fieldProps }, ref)}
                 inputProps={getInputProps(inputProps)}
               />
 
-              {isClearable && !!value?.length ? (
+              {isClearable && !!value.length ? (
                 <DatePickerClearIcon
                   {...getIconProps({ clear: true, ...clearIconProps })}
                 />
@@ -198,11 +198,11 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                as="div"
                 id={id}
+                as="div"
+                className="ui-multi-date-picker__content"
                 role="dialog"
                 aria-modal="true"
-                className="ui-multi-date-picker__content"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -225,10 +225,10 @@ MultiDatePicker.displayName = "MultiDatePicker"
 MultiDatePicker.__ui__ = "MultiDatePicker"
 
 interface MultiDatePickerFieldOptions {
-  isOpen: boolean
-  value: Date[]
-  setValue: Dispatch<SetStateAction<Date[]>>
   dateToString: (value: Date | undefined) => string | undefined
+  isOpen: boolean
+  setValue: Dispatch<SetStateAction<Date[]>>
+  value: Date[]
 }
 
 export interface MultiDatePickerFieldProps
@@ -236,7 +236,7 @@ export interface MultiDatePickerFieldProps
     MultiDatePickerFieldOptions,
     Pick<
       MultiDatePickerProps,
-      "component" | "separator" | "keepPlaceholder" | "inputProps"
+      "component" | "inputProps" | "keepPlaceholder" | "separator"
     > {}
 
 export const MultiDatePickerField = forwardRef<
@@ -246,16 +246,16 @@ export const MultiDatePickerField = forwardRef<
   (
     {
       className,
-      h,
-      minH,
-      inputProps,
-      isOpen,
-      value = [],
-      setValue,
-      dateToString,
       component,
-      separator = ",",
+      dateToString,
+      h,
+      isOpen,
       keepPlaceholder,
+      minH,
+      separator = ",",
+      setValue,
+      value = [],
+      inputProps,
       ...rest
     },
     ref,
@@ -266,8 +266,8 @@ export const MultiDatePickerField = forwardRef<
       ref: inputPropRef,
       placeholder,
       ...computedInputProps
-    } = (inputProps ?? {}) as RefAttributes<HTMLInputElement> &
-      HTMLUIProps<"input">
+    } = (inputProps ?? {}) as HTMLUIProps<"input"> &
+      RefAttributes<HTMLInputElement>
 
     const cloneChildren = useMemo(() => {
       if (component) {
@@ -275,23 +275,21 @@ export const MultiDatePickerField = forwardRef<
           const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
             ev.stopPropagation()
 
-            setValue((prev) =>
-              prev?.filter((value) => !isSameDate(value, date)),
-            )
+            setValue((prev) => prev.filter((value) => !isSameDate(value, date)))
 
             inputRef.current?.focus()
           }
 
           const el = component({
-            value: date,
-            label: dateToString(date)!,
             index,
+            label: dateToString(date)!,
+            value: date,
             onRemove,
           })
 
           const style: CSSProperties = {
-            marginBlockStart: "0.125rem",
             marginBlockEnd: "0.125rem",
+            marginBlockStart: "0.125rem",
             marginInlineEnd: "0.25rem",
           }
 
@@ -314,12 +312,12 @@ export const MultiDatePickerField = forwardRef<
     }, [component, setValue, dateToString, isOpen, separator, value])
 
     const css: CSSUIObject = {
-      pe: "2rem",
-      h,
-      minH,
+      alignItems: "center",
       display: "flex",
       flexWrap: "wrap",
-      alignItems: "center",
+      h,
+      minH,
+      pe: "2rem",
       ...styles.field,
     }
 
@@ -333,19 +331,19 @@ export const MultiDatePickerField = forwardRef<
           {cloneChildren}
 
           <ui.input
-            aria-label="Input date value"
             ref={mergeRefs(ref, inputPropRef, inputRef)}
             className="ui-multi-date-picker__field__input"
             display="inline-block"
             flex="1"
-            overflow="hidden"
-            marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"
+            marginBlockStart="0.125rem"
+            overflow="hidden"
             placeholder={
               !value.length || (keepPlaceholder && isOpen)
                 ? placeholder
                 : undefined
             }
+            aria-label="Input date value"
             {...computedInputProps}
           />
         </ui.div>

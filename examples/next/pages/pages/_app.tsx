@@ -1,6 +1,6 @@
-import { UIProvider, createColorModeManager, createThemeSchemeManager } from '@yamada-ui/react'
 import type { AppProps } from 'next/app'
-import { theme, config } from 'theme'
+import { createColorModeManager, createThemeSchemeManager, UIProvider } from '@yamada-ui/react'
+import { config, theme } from 'theme'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { cookies } = pageProps
@@ -9,9 +9,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <UIProvider
-      theme={theme}
-      config={config}
       colorModeManager={colorModeManager}
+      config={config}
+      theme={theme}
       themeSchemeManager={themeSchemeManager}
     >
       <Component {...pageProps} />

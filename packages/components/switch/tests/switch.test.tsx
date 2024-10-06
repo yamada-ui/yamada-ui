@@ -1,4 +1,4 @@
-import { render, screen, a11y, TestIcon } from "@yamada-ui/test"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import { Switch } from "../src"
 
 describe("<Switch />", () => {

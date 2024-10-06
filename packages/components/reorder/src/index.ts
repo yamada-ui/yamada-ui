@@ -1,5 +1,5 @@
 export { Reorder } from "./reorder"
-export type { ReorderProps, ReorderGenerateItem } from "./reorder"
+export type { ReorderGenerateItem, ReorderProps } from "./reorder"
 export { ReorderItem } from "./reorder-item"
 export type { ReorderItemProps } from "./reorder-item"
 export { ReorderTrigger } from "./reorder-trigger"

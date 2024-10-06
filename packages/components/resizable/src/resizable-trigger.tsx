@@ -3,15 +3,15 @@ import type {
   HTMLUIProps,
   HTMLUIPropsWithoutAs,
 } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { Icon } from "@yamada-ui/icon"
 import type { Merge } from "@yamada-ui/utils"
+import type { FC, ReactElement } from "react"
+import type { UseResizableTriggerProps } from "./use-resizable"
+import { ui } from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { forwardRef } from "react"
-import type { FC, ReactElement } from "react"
 import { PanelResizeHandle } from "react-resizable-panels"
-import type { UseResizableTriggerProps } from "./use-resizable"
 import { useResizableContext, useResizableTrigger } from "./use-resizable"
 
 interface ResizableTriggerOptions {
@@ -33,9 +33,9 @@ export interface ResizableTriggerProps
     ResizableTriggerOptions {}
 
 export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
-  ({ className, icon, children, iconProps, ...rest }, ref) => {
+  ({ className, children, icon, iconProps, ...rest }, ref) => {
     const { styles } = useResizableContext()
-    const { getTriggerProps, getIconProps } = useResizableTrigger({
+    const { getIconProps, getTriggerProps } = useResizableTrigger({
       ref,
       ...rest,
     })
@@ -53,15 +53,15 @@ export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
           <ui.div
             className="ui-resizable__trigger__icon"
             __css={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "auto",
-              translateY: "-50%",
-              translateX: "-50%",
+              alignItems: "center",
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              left: "50%",
+              position: "absolute",
+              top: "50%",
+              transform: "auto",
+              translateX: "-50%",
+              translateY: "-50%",
               ...styles.icon,
             }}
             {...getIconProps(iconProps)}
@@ -82,7 +82,7 @@ export type ResizableTriggerIconProps = IconProps
 
 export const ResizableTriggerIcon: FC<ResizableTriggerIconProps> = (rest) => {
   return (
-    <Icon viewBox="0 0 23 39" w="0.5rem" h="1rem" {...rest}>
+    <Icon h="1rem" viewBox="0 0 23 39" w="0.5rem" {...rest}>
       <path
         d="M 5 0 C 7.761 0 10 2.239 10 5 C 10 7.761 7.761 10 5 10 C 2.239 10 0 7.761 0 5 C 0 2.239 2.239 0 5 0 Z"
         fill="currentColor"

@@ -7,11 +7,11 @@ export default {
 export const basic = () => {
   return (
     <Box
+      bg="$bg"
+      color="white"
       p="md"
       rounded="md"
-      color="white"
       vars={[{ name: "bg", token: "colors", value: "primary" }]}
-      bg="$bg"
     >
       Box
     </Box>

@@ -1,14 +1,15 @@
 import type {
-  CSSUIObject,
   ComponentArgs,
+  CSSUIObject,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
@@ -19,19 +20,10 @@ import {
   isArray,
   isUndefined,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import { useMemo } from "react"
 import { useToggleGroup } from "./toggle-group"
 
-interface ToggleOptions<Y extends string | number = string> {
-  /**
-   * The value of the toggle button.
-   */
-  value?: Y
-  /**
-   * If `true`, the toggle button will be selected.
-   */
-  isSelected?: boolean
+interface ToggleOptions<Y extends number | string = string> {
   /**
     *If `true`, the toggle button will be initially selected.
    *
@@ -39,19 +31,15 @@ interface ToggleOptions<Y extends string | number = string> {
    */
   defaultIsSelected?: boolean
   /**
-   * The callback invoked when selected state changes.
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
    */
-  onChange?: (isSelected: boolean) => void
+  disableRipple?: boolean
   /**
    * The icon to be used in the button.
    */
   icon?: ReactElement
-  /**
-   * If true, the toggle button is full rounded. Else, it'll be slightly round.
-   *
-   * @default false
-   */
-  isRounded?: boolean
   /**
    * If `true`, the toggle button is represented as active.
    *
@@ -71,15 +59,27 @@ interface ToggleOptions<Y extends string | number = string> {
    */
   isReadOnly?: boolean
   /**
-   * If `true`, disable ripple effects when pressing a element.
+   * If true, the toggle button is full rounded. Else, it'll be slightly round.
    *
    * @default false
    */
-  disableRipple?: boolean
+  isRounded?: boolean
+  /**
+   * If `true`, the toggle button will be selected.
+   */
+  isSelected?: boolean
+  /**
+   * The value of the toggle button.
+   */
+  value?: Y
+  /**
+   * The callback invoked when selected state changes.
+   */
+  onChange?: (isSelected: boolean) => void
 }
 
-export interface ToggleProps<Y extends string | number = string>
-  extends Omit<HTMLUIProps<"button">, "value" | "onChange">,
+export interface ToggleProps<Y extends number | string = string>
+  extends Omit<HTMLUIProps<"button">, "onChange" | "value">,
     ThemeProps<"Toggle">,
     ToggleOptions<Y> {}
 
@@ -89,38 +89,42 @@ export interface ToggleProps<Y extends string | number = string>
  * @see Docs https://yamada-ui.com/components/forms/toggle
  */
 export const Toggle = forwardRef(
-  <Y extends string | number = string>(
+  <Y extends number | string = string>(
     props: ToggleProps<Y>,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const {
+      isControlled,
+      isDisabled: groupIsDisabled,
+      isReadOnly: groupIsReadOnly,
       value: groupValue,
       onChange: onChangeGroup,
-      isControlled,
       ...group
     } = useToggleGroup() ?? {}
     const [styles, mergedProps] = useComponentMultiStyle("Toggle", {
       ...group,
+      isDisabled: groupIsDisabled,
+      isReadOnly: groupIsReadOnly,
       ...props,
     })
     const {
-      value,
       className,
-      icon,
-      isSelected: isSelectedProp,
-      defaultIsSelected = false,
-      onChange,
-      isRounded,
-      isActive,
-      isDisabled = group?.isDisabled,
-      isReadOnly = group?.isReadOnly,
-      disableRipple,
       children,
+      defaultIsSelected = false,
+      disableRipple,
+      icon,
+      isActive,
+      isDisabled = groupIsDisabled,
+      isReadOnly = groupIsReadOnly,
+      isRounded,
+      isSelected: isSelectedProp,
+      value,
+      onChange,
       ...rest
     } = omitThemeProps(mergedProps)
     const [isSelected, setIsSelected] = useControllableState({
-      value: isSelectedProp,
       defaultValue: defaultIsSelected,
+      value: isSelectedProp,
       onChange,
     })
 
@@ -145,17 +149,17 @@ export const Toggle = forwardRef(
 
     const css: CSSUIObject = useMemo(
       () => ({
-        display: "inline-flex",
         alignItems: "center",
-        justifyContent: "center",
-        gap: "fallback(2, 0.5rem)",
         appearance: "none",
-        userSelect: "none",
-        position: "relative",
-        verticalAlign: "middle",
-        overflow: "hidden",
+        display: "inline-flex",
+        gap: "fallback(2, 0.5rem)",
+        justifyContent: "center",
         outline: "none",
+        overflow: "hidden",
         pointerEvents: isReadOnly ? "none" : "auto",
+        position: "relative",
+        userSelect: "none",
+        verticalAlign: "middle",
         ...styles,
         ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }),
@@ -166,13 +170,13 @@ export const Toggle = forwardRef(
       <ui.button
         ref={ref}
         type="button"
-        tabIndex={isReadOnly ? -1 : 0}
-        disabled={isDisabled}
-        data-active={dataAttr(isActive)}
-        data-selected={dataAttr(trulySelected)}
-        data-readonly={dataAttr(isReadOnly)}
-        aria-pressed={trulySelected}
         className={cx("ui-toggle", className)}
+        disabled={isDisabled}
+        tabIndex={isReadOnly ? -1 : 0}
+        aria-pressed={trulySelected}
+        data-active={dataAttr(isActive)}
+        data-readonly={dataAttr(isReadOnly)}
+        data-selected={dataAttr(trulySelected)}
         __css={css}
         {...rest}
         onClick={handlerAll(rest.onClick, onClick)}
@@ -185,9 +189,9 @@ export const Toggle = forwardRef(
     )
   },
 ) as {
-  <Y extends string | number = string>(
-    props: ToggleProps<Y> & RefAttributes<HTMLButtonElement>,
-  ): JSX.Element
+  <Y extends number | string = string>(
+    props: RefAttributes<HTMLButtonElement> & ToggleProps<Y>,
+  ): ReactElement
 } & ComponentArgs
 
 Toggle.displayName = "Toggle"

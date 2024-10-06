@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
+import type { SegmentedControlItem } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import {
+  Button,
+  FormControl,
   Grid,
   SegmentedControl,
   SegmentedControlButton,
   VStack,
-  Button,
-  FormControl,
 } from "@yamada-ui/react"
-import type { SegmentedControlItem } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof SegmentedControl>
 
 const meta: Meta<typeof SegmentedControl> = {
-  title: "Components / Forms / SegmentedControl",
   component: SegmentedControl,
+  title: "Components / Forms / SegmentedControl",
 }
 
 export default meta
@@ -127,23 +127,23 @@ export const withColorScheme: Story = () => {
 
   return (
     <Grid
-      w="full"
-      templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(1, 1fr)" }}
       gap="md"
+      templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(1, 1fr)" }}
+      w="full"
     >
       {colorSchemes.map((colorScheme) => (
         <SegmentedControl
           key={colorScheme}
-          items={items}
           colorScheme={colorScheme}
+          items={items}
         />
       ))}
       {colorSchemes.map((colorScheme) => (
         <SegmentedControl
           key={colorScheme}
-          variant="rounded"
-          items={items}
           colorScheme={colorScheme}
+          items={items}
+          variant="rounded"
         />
       ))}
     </Grid>
@@ -165,7 +165,7 @@ export const isDisabled: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value="ベジータ" isDisabled>
+        <SegmentedControlButton isDisabled value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">
@@ -191,7 +191,7 @@ export const isReadOnly: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton value="ベジータ" isReadOnly>
+        <SegmentedControlButton isReadOnly value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">
@@ -225,9 +225,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -237,14 +237,13 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.segmentedControl?.message}
         isInvalid={!!errors.segmentedControl}
         label="Who is your favorite character?"
-        errorMessage={errors.segmentedControl?.message}
       >
         <Controller
           name="segmentedControl"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <SegmentedControl {...field}>
               <SegmentedControlButton value="孫悟空">
@@ -258,6 +257,7 @@ export const reactHookForm: Story = () => {
               </SegmentedControlButton>
             </SegmentedControl>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

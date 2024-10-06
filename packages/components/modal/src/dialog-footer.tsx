@@ -1,8 +1,8 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalFooterProps } from "./modal-footer"
 import { forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useDialog } from "./modal-context"
-import type { ModalFooterProps } from "./modal-footer"
 import { ModalFooter } from "./modal-footer"
 
 export interface DialogFooterProps extends ModalFooterProps {}

@@ -1,29 +1,29 @@
-import type { ComponentArgs, ThemeProps, PropGetter } from "@yamada-ui/core"
+import type { ComponentArgs, PropGetter, ThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
-import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
-import { Flex } from "@yamada-ui/layouts"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Dict } from "@yamada-ui/utils"
-import {
-  cx,
-  isObject,
-  useCallbackRef,
-  getValidChildren,
-} from "@yamada-ui/utils"
 import type {
   ChangeEvent,
   ForwardedRef,
   ReactElement,
   RefAttributes,
 } from "react"
-import { forwardRef, useCallback } from "react"
 import type { CheckboxProps } from "./checkbox"
-import { Checkbox } from "./checkbox"
 import type { CheckboxGroupContext } from "./checkbox-context"
+import { useFormControl } from "@yamada-ui/form-control"
+import { Flex } from "@yamada-ui/layouts"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import {
+  cx,
+  getValidChildren,
+  isObject,
+  useCallbackRef,
+} from "@yamada-ui/utils"
+import { forwardRef, useCallback } from "react"
+import { Checkbox } from "./checkbox"
 import { CheckboxGroupProvider } from "./checkbox-context"
 
-export interface CheckboxItem<Y extends string | number = string>
+export interface CheckboxItem<Y extends number | string = string>
   extends CheckboxProps<Y> {
   label?: string
 }
@@ -31,19 +31,11 @@ export interface CheckboxItem<Y extends string | number = string>
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
-export interface UseCheckboxGroupProps<Y extends string | number = string> {
-  /**
-   * The value of the checkbox group.
-   */
-  value?: Y[]
+export interface UseCheckboxGroupProps<Y extends number | string = string> {
   /**
    * The initial value of the checkbox group.
    */
   defaultValue?: Y[]
-  /**
-   * The callback fired when any children checkbox is checked or unchecked.
-   */
-  onChange?: (value: Y[]) => void
   /**
    * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
    *
@@ -52,23 +44,31 @@ export interface UseCheckboxGroupProps<Y extends string | number = string> {
    * @default false
    */
   isNative?: boolean
+  /**
+   * The value of the checkbox group.
+   */
+  value?: Y[]
+  /**
+   * The callback fired when any children checkbox is checked or unchecked.
+   */
+  onChange?: (value: Y[]) => void
 }
 
 export const useCheckboxGroup = <
-  Y extends string | number,
+  Y extends number | string,
   M extends Dict = Dict,
 >({
-  value: valueProp,
   defaultValue = [],
-  onChange: onChangeProp,
   isNative,
+  value: valueProp,
+  onChange: onChangeProp,
   ...props
-}: UseCheckboxGroupProps<Y> & M) => {
+}: M & UseCheckboxGroupProps<Y>) => {
   const onChangeRef = useCallbackRef(onChangeProp)
 
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeRef,
   })
 
@@ -102,13 +102,13 @@ export const useCheckboxGroup = <
 
   const getCheckboxProps: PropGetter<
     { value?: Y },
-    { value?: Y; checked?: boolean; isChecked?: boolean }
+    { checked?: boolean; isChecked?: boolean; value?: Y }
   > = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref,
       [isNative ? "checked" : "isChecked"]: value.some(
-        (val) => String(props?.value) === String(val),
+        (val) => String(props.value) === String(val),
       ),
       onChange,
     }),
@@ -117,18 +117,18 @@ export const useCheckboxGroup = <
 
   return {
     props,
-    value,
     setValue,
-    onChange,
-    getContainerProps,
+    value,
     getCheckboxProps,
+    getContainerProps,
+    onChange,
   }
 }
 
-export type UseCheckboxGroupReturn<Y extends string | number = string> =
+export type UseCheckboxGroupReturn<Y extends number | string = string> =
   ReturnType<typeof useCheckboxGroup<Y>>
 
-export interface CheckboxGroupProps<Y extends string | number = string>
+export interface CheckboxGroupProps<Y extends number | string = string>
   extends ThemeProps<"Checkbox">,
     Omit<FlexProps, "defaultValue" | "onChange">,
     UseCheckboxGroupProps<Y>,
@@ -142,27 +142,27 @@ export interface CheckboxGroupProps<Y extends string | number = string>
 }
 
 export const CheckboxGroup = forwardRef(
-  <Y extends string | number = string>(
+  <Y extends number | string = string>(
     {
       className,
-      size,
-      variant,
-      colorScheme,
       children,
-      items = [],
+      colorScheme,
       direction = "column",
       gap,
+      items = [],
+      size,
+      variant,
       ...props
     }: CheckboxGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const {
-      value,
-      onChange,
       props: computedProps,
+      value,
       getContainerProps,
+      onChange,
     } = useCheckboxGroup<Y>(props)
-    const { labelId, isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
+    const { isDisabled, isInvalid, isReadOnly, isRequired, labelId, ...rest } =
       useFormControl(computedProps)
 
     const validChildren = getValidChildren(children)
@@ -180,14 +180,14 @@ export const CheckboxGroup = forwardRef(
       <CheckboxGroupProvider
         value={
           {
-            size,
-            variant,
             colorScheme,
-            isRequired,
-            isReadOnly,
             isDisabled,
             isInvalid,
+            isReadOnly,
+            isRequired,
+            size,
             value,
+            variant,
             onChange,
           } as CheckboxGroupContext
         }
@@ -208,9 +208,9 @@ export const CheckboxGroup = forwardRef(
     )
   },
 ) as {
-  <Y extends string | number = string>(
+  <Y extends number | string = string>(
     props: CheckboxGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 CheckboxGroup.displayName = "CheckboxGroup"

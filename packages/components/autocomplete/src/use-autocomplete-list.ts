@@ -61,19 +61,19 @@ export const useAutocompleteList = () => {
 
   const getListProps: PropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
-      as: "ul",
+      id: props.id ?? uuid,
       ref: mergeRefs(listRef, ref),
+      as: "ul",
+      position: "relative",
       role: "listbox",
       tabIndex: -1,
-      position: "relative",
-      id: props.id ?? uuid,
       ...props,
     }),
     [listRef, uuid],
   )
 
   return {
-    onAnimationComplete,
     getListProps,
+    onAnimationComplete,
   }
 }

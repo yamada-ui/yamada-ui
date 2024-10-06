@@ -1,3 +1,5 @@
+import type { ButtonProps, StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import { MenuIcon } from "@yamada-ui/lucide"
 import {
   Autocomplete,
@@ -14,22 +16,20 @@ import {
   Spacer,
   useBoolean,
 } from "@yamada-ui/react"
-import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 
 const TEAM_ITEMS = [
   {
-    label: "Personal Account",
     items: [{ label: "Hirotomo Yamada", value: "Hirotomo Yamada" }],
+    label: "Personal Account",
   },
   {
-    label: "Term",
     items: [
       { label: "Yamada Inc.", value: "Yamada Inc." },
       { label: "Monsters Inc.", value: "Monsters Inc." },
       { label: "Dragon Inc.", value: "Dragon Inc." },
     ],
+    label: "Term",
   },
 ]
 
@@ -39,21 +39,21 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   return (
     <HStack
       as="header"
-      w="full"
       borderBottomWidth="1px"
       px={{ base: "lg", sm: "md" }}
       py="md"
+      w="full"
       {...rest}
     >
       <Autocomplete
+        autoComplete="username"
+        defaultValue="Hirotomo Yamada"
+        items={TEAM_ITEMS}
         maxW="xs"
         placeholder="Select term…"
-        defaultValue="Hirotomo Yamada"
-        autoComplete="username"
-        items={TEAM_ITEMS}
       />
 
-      <ButtonGroup gap="md" display={{ base: "flex", md: "none" }}>
+      <ButtonGroup display={{ base: "flex", md: "none" }} gap="md">
         <ControlButton defaultIsSelected>Overview</ControlButton>
         <ControlButton>Customers</ControlButton>
         <ControlButton>Products</ControlButton>
@@ -65,8 +65,8 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
       <Menu>
         <MenuButton
           as={IconButton}
-          variant="ghost"
           display={{ base: "none", md: "flex" }}
+          variant="ghost"
         >
           <MenuIcon fontSize="2xl" />
         </MenuButton>
@@ -81,14 +81,14 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
       <HStack display={{ base: "flex", md: "none" }}>
         <Input
-          maxW="xs"
           type="email"
           autoComplete="email"
+          maxW="xs"
           placeholder="Search…"
         />
         <Avatar
-          src="https://avatars.githubusercontent.com/u/84060430?v=4"
           size="sm"
+          src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
         M
       </HStack>
@@ -98,19 +98,19 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
 Header.displayName = "Header"
 
-type ControlButtonProps = ButtonProps & {
+type ControlButtonProps = {
   defaultIsSelected?: boolean
-}
+} & ButtonProps
 
 const ControlButton: FC<ControlButtonProps> = memo(
   ({ defaultIsSelected, ...rest }) => {
     const [isSelected] = useBoolean(defaultIsSelected)
     return (
       <Button
-        variant="unstyled"
-        fontWeight="normal"
-        color={isSelected ? ["black", "white"] : "muted"}
         _hover={isSelected ? {} : { color: ["black", "white"] }}
+        color={isSelected ? ["black", "white"] : "muted"}
+        fontWeight="normal"
+        variant="unstyled"
         {...rest}
       />
     )

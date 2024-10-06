@@ -1,20 +1,50 @@
 import type {
-  HTMLUIProps,
   CSSUIObject,
   CSSUIProps,
+  FC,
+  HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { cx, valueToPercent } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 interface CircleProgressOptions {
+  /**
+   * The CSS `color` property.
+   *
+   * @default 'primary'
+   */
+  color?: CSSUIProps["color"]
+  /**
+   * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
+   *
+   * @default false
+   */
+  isAnimation?: boolean
+  /**
+   * If `true`, the cap of the progress indicator will be rounded.
+   *
+   * @default false
+   */
+  isRounded?: boolean
+  /**
+   * The maximum value of the progress.
+   *
+   * @default 100
+   */
+  max?: number
+  /**
+   * The minimum value of the progress.
+   *
+   * @default 0
+   */
+  min?: number
   /**
    * The CSS `box-size` property.
    *
@@ -23,17 +53,17 @@ interface CircleProgressOptions {
    */
   size?: CSSUIProps["boxSize"]
   /**
+   * The animation speed in seconds.
+   *
+   * @default '[1.4s, 2s]'
+   */
+  speed?: [number | string, number | string]
+  /**
    * The CSS `width` property.
    *
    * @default '0.625ewm'
    */
   thickness?: CSSUIProps["width"]
-  /**
-   * The CSS `color` property.
-   *
-   * @default 'primary'
-   */
-  color?: CSSUIProps["color"]
   /**
    * The CSS `color` property.
    *
@@ -46,36 +76,6 @@ interface CircleProgressOptions {
    * @default 0
    */
   value?: number
-  /**
-   * The minimum value of the progress.
-   *
-   * @default 0
-   */
-  min?: number
-  /**
-   * The maximum value of the progress.
-   *
-   * @default 100
-   */
-  max?: number
-  /**
-   * If `true`, the cap of the progress indicator will be rounded.
-   *
-   * @default false
-   */
-  isRounded?: boolean
-  /**
-   * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
-   *
-   * @default false
-   */
-  isAnimation?: boolean
-  /**
-   * The animation speed in seconds.
-   *
-   * @default '[1.4s, 2s]'
-   */
-  speed?: [string | number, string | number]
 }
 
 export interface CircleProgressProps
@@ -96,17 +96,17 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
     )
     let {
       className,
-      children,
       boxSize = size,
-      thickness = "0.625rem",
+      children,
       color = "primary",
-      trackColor = "border",
-      value = 0,
-      min = 0,
-      max = 100,
       isAnimation = false,
       isRounded,
+      max = 100,
+      min = 0,
       speed = ["1.4s", "2s"],
+      thickness = "0.625rem",
+      trackColor = "border",
+      value = 0,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -116,6 +116,8 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
     const interval = !isAnimation ? percent * 2.64 : undefined
 
     const animation = useAnimation({
+      duration: typeof speed[0] === "string" ? speed[0] : `${speed[0]}s`,
+      iterationCount: "infinite",
       keyframes: {
         "0%": {
           strokeDasharray: "1, 400",
@@ -130,30 +132,28 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           strokeDashoffset: "-260",
         },
       },
-      duration: typeof speed[0] === "string" ? speed[0] : `${speed[0]}s`,
-      iterationCount: "infinite",
       timingFunction: "linear",
     })
 
     const css: CSSUIObject = {
       ...styles,
+      fontSize: "$boxSize",
       vars: [
         { name: "boxSize", token: "sizes", value: boxSize },
         { name: "thickness", token: "sizes", value: thickness },
       ],
-      fontSize: "$boxSize",
     }
 
-    const circleProps: CircleProps = isAnimation
+    const circleProps: CircleProgressCircleProps = isAnimation
       ? {
           animation,
         }
       : {
-          strokeDashoffset: 66,
           strokeDasharray:
             interval == null ? undefined : `${interval} ${264 - interval}`,
-          transitionProperty: "stroke-dasharray, stroke",
+          strokeDashoffset: 66,
           transitionDuration: "0.6s",
+          transitionProperty: "stroke-dasharray, stroke",
           transitionTimingFunction: "ease",
         }
 
@@ -164,34 +164,51 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         __css={css}
         {...rest}
       >
-        <Shape boxSize={boxSize} isAnimation={isAnimation} speed={speed}>
-          <Circle stroke={trackColor} strokeWidth="$thickness" />
-          <Circle
-            stroke={color}
-            strokeWidth="$thickness"
-            strokeLinecap={isRounded ? "round" : undefined}
+        <CircleProgressShape
+          boxSize={boxSize}
+          isAnimation={isAnimation}
+          speed={speed}
+        >
+          <CircleProgressCircle stroke={trackColor} strokeWidth="$thickness" />
+          <CircleProgressCircle
             opacity={isTransparent ? 0 : undefined}
+            stroke={color}
+            strokeLinecap={isRounded ? "round" : undefined}
+            strokeWidth="$thickness"
             {...circleProps}
           />
-        </Shape>
+        </CircleProgressShape>
         {children}
       </ui.div>
     )
   },
 )
 
-interface CircleProps extends HTMLUIProps<"circle"> {}
+CircleProgress.displayName = "CircleProgress"
+CircleProgress.__ui__ = "CircleProgress"
 
-const Circle: FC<CircleProps> = ({ ...rest }) => (
-  <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />
+interface CircleProgressCircleProps extends HTMLUIProps<"circle"> {}
+
+const CircleProgressCircle: FC<CircleProgressCircleProps> = ({ ...rest }) => (
+  <ui.circle cx={50} cy={50} fill="transparent" r={42} {...rest} />
 )
 
-interface ShapeProps
+CircleProgressCircle.displayName = "CircleProgressCircle"
+CircleProgressCircle.__ui__ = "CircleProgressCircle"
+
+interface CircleProgressShapeProps
   extends Omit<HTMLUIProps<"svg">, "children" | "speed">,
     Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed"> {}
 
-const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
+const CircleProgressShape: FC<CircleProgressShapeProps> = ({
+  boxSize,
+  isAnimation,
+  speed,
+  ...rest
+}) => {
   const animation = useAnimation({
+    duration: typeof speed[1] === "string" ? speed[1] : `${speed[1]}s`,
+    iterationCount: "infinite",
     keyframes: {
       "0%": {
         transform: "rotate(0deg)",
@@ -200,28 +217,32 @@ const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
         transform: "rotate(360deg)",
       },
     },
-    duration: typeof speed[1] === "string" ? speed[1] : `${speed[1]}s`,
-    iterationCount: "infinite",
     timingFunction: "linear",
   })
 
   const css: CSSUIObject = {
-    display: "block",
     boxSize,
+    display: "block",
     ...(isAnimation ? { animation } : {}),
   }
 
   return <ui.svg viewBox="0 0 100 100" __css={css} {...rest} />
 }
 
+CircleProgressShape.displayName = "CircleProgressShape"
+CircleProgressShape.__ui__ = "CircleProgressShape"
+
 export const CircleProgressLabel = ui("span", {
   baseStyle: {
-    position: "absolute",
-    top: "50%",
+    fontSize: "0.25em",
     left: "50%",
+    position: "absolute",
+    textAlign: "center",
+    top: "50%",
     transform: "translate(-50%, -50%)",
     width: "100%",
-    fontSize: "0.25em",
-    textAlign: "center",
   },
 })
+
+CircleProgressLabel.displayName = "CircleProgressLabel"
+CircleProgressLabel.__ui__ = "CircleProgressLabel"

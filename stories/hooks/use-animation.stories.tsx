@@ -15,6 +15,8 @@ export default meta
 
 export const basic = () => {
   const animation = useAnimation({
+    duration: "10s",
+    iterationCount: "infinite",
     keyframes: {
       "0%": {
         bg: "red.500",
@@ -35,16 +37,16 @@ export const basic = () => {
         bg: "red.500",
       },
     },
-    duration: "10s",
-    iterationCount: "infinite",
     timingFunction: "linear",
   })
 
-  return <Box w="full" h="xs" animation={animation} />
+  return <Box animation={animation} h="xs" w="full" />
 }
 
 export const pseudo = () => {
   const animation = useAnimation({
+    duration: "10s",
+    iterationCount: "infinite",
     keyframes: {
       "0%": {
         bg: "red.500",
@@ -65,30 +67,28 @@ export const pseudo = () => {
         bg: "red.500",
       },
     },
-    duration: "10s",
-    iterationCount: "infinite",
     timingFunction: "linear",
   })
 
   return (
     <Box
-      pos="relative"
+      _after={{
+        animation,
+        bg: "secondary",
+        color: "white",
+        content: "'after'",
+        left: "lg",
+        p: "lg",
+        pos: "absolute",
+        rounded: "lg",
+        top: "lg",
+      }}
       bg="primary"
+      color="white"
       m="lg"
       p="lg"
+      pos="relative"
       rounded="lg"
-      color="white"
-      _after={{
-        content: "'after'",
-        pos: "absolute",
-        top: "lg",
-        left: "lg",
-        bg: "secondary",
-        p: "lg",
-        rounded: "lg",
-        color: "white",
-        animation,
-      }}
     >
       Box
     </Box>
@@ -98,6 +98,8 @@ export const pseudo = () => {
 export const withMulti = () => {
   const animation = useAnimation([
     {
+      duration: "10s",
+      iterationCount: "infinite",
       keyframes: {
         "0%": {
           bg: "red.500",
@@ -118,11 +120,11 @@ export const withMulti = () => {
           bg: "red.500",
         },
       },
-      duration: "10s",
-      iterationCount: "infinite",
       timingFunction: "linear",
     },
     {
+      duration: "10s",
+      iterationCount: "infinite",
       keyframes: {
         "0%": {
           h: "xs",
@@ -134,11 +136,11 @@ export const withMulti = () => {
           h: "xs",
         },
       },
-      duration: "10s",
-      iterationCount: "infinite",
       timingFunction: "linear",
     },
     {
+      duration: "10s",
+      iterationCount: "infinite",
       keyframes: {
         "0%": {
           w: "full",
@@ -150,20 +152,20 @@ export const withMulti = () => {
           w: "full",
         },
       },
-      duration: "10s",
-      iterationCount: "infinite",
       timingFunction: "linear",
     },
   ])
 
-  return <Box w="full" h="xs" animation={animation} />
+  return <Box animation={animation} h="xs" w="full" />
 }
 
 export const withDynamic = () => {
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<"moveLeft" | "moveRight", AnimationStyle>
-  >({
+  const [animation, setAnimation] = useDynamicAnimation<{
+    [key in "moveLeft" | "moveRight"]: AnimationStyle
+  }>({
     moveLeft: {
+      duration: "slower",
+      fillMode: "forwards",
       keyframes: {
         "0%": {
           transform: "translateX(400%)",
@@ -172,11 +174,11 @@ export const withDynamic = () => {
           transform: "translateX(0%)",
         },
       },
-      duration: "slower",
-      fillMode: "forwards",
       timingFunction: "ease-in-out",
     },
     moveRight: {
+      duration: "slower",
+      fillMode: "forwards",
       keyframes: {
         "0%": {
           transform: "translateX(0%)",
@@ -185,8 +187,6 @@ export const withDynamic = () => {
           transform: "translateX(400%)",
         },
       },
-      duration: "slower",
-      fillMode: "forwards",
       timingFunction: "ease-in-out",
     },
   })
@@ -203,7 +203,7 @@ export const withDynamic = () => {
         Please Click
       </Button>
 
-      <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
+      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
         Box
       </Box>
     </>
@@ -211,11 +211,13 @@ export const withDynamic = () => {
 }
 
 export const withDynamicAndMulti = () => {
-  const [animation, setAnimation] = useDynamicAnimation<
-    Record<"moveLeft" | "moveRight", AnimationStyle[]>
-  >({
+  const [animation, setAnimation] = useDynamicAnimation<{
+    [key in "moveLeft" | "moveRight"]: AnimationStyle[]
+  }>({
     moveLeft: [
       {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(400%)",
@@ -224,11 +226,11 @@ export const withDynamicAndMulti = () => {
             transform: "translateX(0%)",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
       {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             bg: "secondary",
@@ -237,13 +239,13 @@ export const withDynamicAndMulti = () => {
             bg: "primary",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
     ],
     moveRight: [
       {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(0%)",
@@ -252,11 +254,11 @@ export const withDynamicAndMulti = () => {
             transform: "translateX(400%)",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
       {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             bg: "primary",
@@ -265,8 +267,6 @@ export const withDynamicAndMulti = () => {
             bg: "secondary",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
     ],
@@ -284,7 +284,7 @@ export const withDynamicAndMulti = () => {
         Please Click
       </Button>
 
-      <Box bg="primary" p="md" rounded="md" color="white" animation={animation}>
+      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
         Box
       </Box>
     </>

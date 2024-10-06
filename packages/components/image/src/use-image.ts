@@ -1,10 +1,29 @@
-import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import type { ImgHTMLAttributes, SyntheticEvent } from "react"
+import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 type HTMLImageElementProps = ImgHTMLAttributes<HTMLImageElement>
 
 export interface UseImageProps {
+  /**
+   * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
+   * This tells the browser to request cross-origin access when trying to download the image data.
+   */
+  crossOrigin?: HTMLImageElementProps["crossOrigin"]
+  /**
+   * If `true`, opt out of the `fallbackSrc` logic and use as `img`.
+   *
+   * @default false
+   */
+  ignoreFallback?: boolean
+  /**
+   * The image `loading` attribute.
+   */
+  loading?: HTMLImageElementProps["loading"]
+  /**
+   * The image `sizes` attribute.
+   */
+  sizes?: string
   /**
    * The image `src` attribute.
    */
@@ -14,52 +33,33 @@ export interface UseImageProps {
    */
   srcSet?: string
   /**
-   * The image `sizes` attribute.
-   */
-  sizes?: string
-  /**
-   * A callback for when the image `src` has been loaded.
-   */
-  onLoad?: HTMLImageElementProps["onLoad"]
-  /**
    * A callback for when there was an error loading the image `src`.
    */
   onError?: HTMLImageElementProps["onError"]
   /**
-   * If `true`, opt out of the `fallbackSrc` logic and use as `img`.
-   *
-   * @default false
+   * A callback for when the image `src` has been loaded.
    */
-  ignoreFallback?: boolean
-  /**
-   * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
-   * This tells the browser to request cross-origin access when trying to download the image data.
-   */
-  crossOrigin?: HTMLImageElementProps["crossOrigin"]
-  /**
-   * The image `loading` attribute.
-   */
-  loading?: HTMLImageElementProps["loading"]
+  onLoad?: HTMLImageElementProps["onLoad"]
 }
 
-type Status = "loading" | "failed" | "pending" | "loaded"
+type Status = "failed" | "loaded" | "loading" | "pending"
 
 export const shouldShowFallbackImage = (
   status: Status,
-  fallbackStrategy: "onError" | "beforeLoadOrError",
+  fallbackStrategy: "beforeLoadOrError" | "onError",
 ) =>
   (status !== "loaded" && fallbackStrategy === "beforeLoadOrError") ||
   (status === "failed" && fallbackStrategy === "onError")
 
 export const useImage = ({
+  crossOrigin,
+  ignoreFallback,
   loading,
+  sizes,
   src,
   srcSet,
-  onLoad,
   onError,
-  crossOrigin,
-  sizes,
-  ignoreFallback,
+  onLoad,
 }: UseImageProps) => {
   const [status, setStatus] = useState<Status>("pending")
 

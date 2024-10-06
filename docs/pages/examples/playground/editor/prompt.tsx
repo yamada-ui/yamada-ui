@@ -1,9 +1,9 @@
-import { FormControl, Grid, Textarea, assignRef } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { memo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
-import { DEFAULT_EDITOR_MODE } from "."
 import type { EditorMode } from "."
+import { assignRef, FormControl, Grid, Textarea } from "@yamada-ui/react"
+import { memo, useState } from "react"
+import { DEFAULT_EDITOR_MODE } from "."
 
 export interface PromptProps extends GridProps {
   onChangeModeRef: MutableRefObject<(mode: EditorMode) => void>
@@ -23,6 +23,7 @@ export const Prompt: FC<PromptProps> = memo(({ onChangeModeRef, ...rest }) => {
 
   return (
     <Grid
+      gap={{ base: isEdit ? "md" : "lg", sm: "md" }}
       templateColumns={
         isEdit
           ? { base: "repeat(2, 1fr)", xl: "1fr" }
@@ -30,7 +31,6 @@ export const Prompt: FC<PromptProps> = memo(({ onChangeModeRef, ...rest }) => {
             ? { base: "repeat(2, 1fr)", xl: "1fr" }
             : { base: "1fr" }
       }
-      gap={{ base: isEdit ? "md" : "lg", sm: "md" }}
       templateRows="repeat(3, auto-fit)"
       {...rest}
     >
@@ -50,16 +50,16 @@ export const Prompt: FC<PromptProps> = memo(({ onChangeModeRef, ...rest }) => {
 
       {isInsert || isEdit ? (
         <Textarea
-          isReadOnly
-          mt={{ base: isEdit ? "lg" : undefined, xl: "sm" }}
           bg={["blackAlpha.50", "whiteAlpha.50"]}
-          vars={[{ name: "space-top", token: "spaces", value: "lg" }]}
+          gridColumn={isEdit ? { base: "2 / 3", xl: "inherit" } : undefined}
+          gridRow={isEdit ? { base: "1 / 3", xl: "inherit" } : undefined}
+          isReadOnly
           minH={{
             base: isEdit ? "calc(100% - $space-top)" : "4xl",
             xl: "md",
           }}
-          gridColumn={isEdit ? { base: "2 / 3", xl: "inherit" } : undefined}
-          gridRow={isEdit ? { base: "1 / 3", xl: "inherit" } : undefined}
+          mt={{ base: isEdit ? "lg" : undefined, xl: "sm" }}
+          vars={[{ name: "space-top", token: "spaces", value: "lg" }]}
         />
       ) : null}
     </Grid>

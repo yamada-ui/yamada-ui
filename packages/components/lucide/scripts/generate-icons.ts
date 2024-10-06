@@ -1,9 +1,9 @@
-import { readdir, readFile, unlink, writeFile } from "fs/promises"
-import path from "path"
+import type { Options } from "prettier"
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { toKebabCase } from "@yamada-ui/utils"
-import type { Options } from "prettier"
+import { readdir, readFile, unlink, writeFile } from "fs/promises"
+import path from "path"
 import { format, resolveConfig } from "prettier"
 
 const ENTRY_PATH = "node_modules/lucide-react/dist/esm/icons/index.js"
@@ -29,7 +29,9 @@ const clearIcons = async () => {
   const fileNames = await readdir(DIST_PATH)
 
   await Promise.all(
-    fileNames.map((fileName) => unlink(path.resolve(DIST_PATH, fileName))),
+    fileNames.map(async (fileName) =>
+      unlink(path.resolve(DIST_PATH, fileName)),
+    ),
   )
 }
 
@@ -37,8 +39,8 @@ const getIconNames = async () => {
   const data = await readFile(path.resolve(ENTRY_PATH), "utf-8")
 
   const ast = parse(data, {
-    sourceType: "module",
     plugins: ["jsx"],
+    sourceType: "module",
   })
 
   const iconNames: string[] = []
@@ -54,15 +56,15 @@ const getIconNames = async () => {
   return iconNames
 }
 
-const createIcons = (iconNames: string[]) =>
+const createIcons = async (iconNames: string[]) =>
   Promise.all(
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
       let data = [
+        `import type { LucideIconProps } from "../lucide-icon"`,
         `import { forwardRef } from "@yamada-ui/core"`,
         `import { ${iconName} as ${iconName}Icon } from "lucide-react"`,
         `import { LucideIcon } from "../lucide-icon"`,
-        `import type { LucideIconProps } from "../lucide-icon"`,
         ``,
         `/**`,
         ` * \`${iconName}\` is [Lucide](https://lucide.dev) SVG icon component.`,
@@ -81,7 +83,7 @@ const createIcons = (iconNames: string[]) =>
   )
 
 const createTypes = async (iconNames: string[]) => {
-  const fileName = "index.types.tsx"
+  const fileName = "index.types.ts"
   let data = [
     `export type IconNames = ${iconNames.flatMap((iconName) => [`\"${iconName}\"`, `\"${iconName}Icon\"`]).join(" | ")}`,
   ].join("\n")
@@ -105,7 +107,7 @@ const main = async () => {
     return `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`
   })
 
-  let data = [`export * from "./index.types"`, ...chunks].join("\n")
+  let data = [`export type * from "./index.types"`, ...chunks].join("\n")
 
   data = await prettier(data)
 

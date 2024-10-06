@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
@@ -20,8 +20,8 @@ export const Badge = forwardRef<BadgeProps, "span">((props, ref) => {
 
   const css: CSSUIObject = {
     display: "inline-block",
-    whiteSpace: "nowrap",
     verticalAlign: "middle",
+    whiteSpace: "nowrap",
     ...styles,
   }
 

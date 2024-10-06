@@ -3,141 +3,43 @@ import { mode } from "@yamada-ui/core"
 import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 
 export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
-  baseStyle: ({ theme: t, colorMode: m }) => ({
+  baseStyle: ({ colorMode: m, theme: t }) => ({
     container: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      rounded: "md",
-      w: "100%",
-      p: "md",
-      bg: ["blackAlpha.50", "whiteAlpha.50"],
-      outline: 0,
-      overflow: "hidden",
-      transitionProperty: "common",
-      transitionDuration: "normal",
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-      },
-      _hover: {
-        cursor: "pointer",
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-      },
-      _loading: {
-        cursor: "not-allowed",
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-      },
       _accept: {
         bg: ["success.50", transparentizeColor("success.400", 0.12)(t, m)],
         borderColor: ["success.500", "success.400"],
+      },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
+      _hover: {
+        bg: ["blackAlpha.100", "whiteAlpha.100"],
+        cursor: "pointer",
+      },
+      _loading: {
+        bg: ["blackAlpha.100", "whiteAlpha.100"],
+        cursor: "not-allowed",
       },
       _reject: {
         bg: ["danger.50", transparentizeColor("danger.400", 0.12)(t, m)],
         borderColor: ["danger.500", "danger.400"],
       },
+      bg: ["blackAlpha.50", "whiteAlpha.50"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      outline: 0,
+      overflow: "hidden",
+      p: "md",
+      rounded: "md",
+      transitionDuration: "normal",
+      transitionProperty: "common",
+      w: "100%",
     },
     overlay: {
       bg: ["whiteAlpha.600", "blackAlpha.600"],
       zIndex: "kurillin",
     },
   }),
-
-  variants: {
-    solid: ({
-      theme: t,
-      colorMode: m,
-      focusBorderColor: fc = "focus",
-      errorBorderColor: ec = ["danger.500", "danger.400"],
-    }) => {
-      const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
-        : getColor(fc, fc)(t, m)
-      const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
-        : getColor(ec, ec)(t, m)
-
-      return {
-        container: {
-          borderWidth: "1px",
-          borderStyle: "solid",
-          _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
-          },
-          _focus: {
-            zIndex: "yamcha",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-          _focusVisible: {
-            zIndex: "yamcha",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-        },
-      }
-    },
-    dashed: ({
-      theme: t,
-      colorMode: m,
-      focusBorderColor: fc = "focus",
-      errorBorderColor: ec = ["danger.500", "danger.400"],
-    }) => {
-      const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
-        : getColor(fc, fc)(t, m)
-      const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
-        : getColor(ec, ec)(t, m)
-
-      return {
-        container: {
-          borderWidth: "1px",
-          borderStyle: "dashed",
-          _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
-          },
-          _focus: {
-            zIndex: "yamcha",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-          _focusVisible: {
-            zIndex: "yamcha",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-        },
-      }
-    },
-    unstyled: {
-      container: {
-        color: "inherit",
-        rounded: "inherit",
-        bg: "transparent",
-        h: "auto",
-        _hover: {
-          cursor: "inherit",
-          bg: "transparent",
-        },
-        _loading: {
-          cursor: "auto",
-          bg: "transparent",
-        },
-        _accept: {
-          bg: "transparent",
-          borderColor: "inherit",
-        },
-        _reject: {
-          bg: "transparent",
-          borderColor: "inherit",
-        },
-      },
-      overlay: {
-        bg: "transparent",
-      },
-    },
-  },
 
   sizes: {
     xs: {
@@ -154,6 +56,104 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
     },
     full: {
       container: { h: "full" },
+    },
+  },
+
+  variants: {
+    dashed: ({
+      colorMode: m,
+      errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        container: {
+          _focus: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            zIndex: "yamcha",
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            zIndex: "yamcha",
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          borderStyle: "dashed",
+          borderWidth: "1px",
+        },
+      }
+    },
+    solid: ({
+      colorMode: m,
+      errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        container: {
+          _focus: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            zIndex: "yamcha",
+          },
+          _focusVisible: {
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            zIndex: "yamcha",
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          borderStyle: "solid",
+          borderWidth: "1px",
+        },
+      }
+    },
+    unstyled: {
+      container: {
+        _accept: {
+          bg: "transparent",
+          borderColor: "inherit",
+        },
+        _hover: {
+          bg: "transparent",
+          cursor: "inherit",
+        },
+        _loading: {
+          bg: "transparent",
+          cursor: "auto",
+        },
+        _reject: {
+          bg: "transparent",
+          borderColor: "inherit",
+        },
+        bg: "transparent",
+        color: "inherit",
+        h: "auto",
+        rounded: "inherit",
+      },
+      overlay: {
+        bg: "transparent",
+      },
     },
   },
 

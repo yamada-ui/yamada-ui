@@ -2,8 +2,8 @@ import { renderHook } from "@yamada-ui/test"
 import {
   pseudos,
   ThemeProvider,
-  useComponentStyle,
   useComponentMultiStyle,
+  useComponentStyle,
 } from "../src"
 
 describe("useComponentStyle", () => {
@@ -18,19 +18,8 @@ describe("useComponentStyle", () => {
     components: {
       Button: {
         baseStyle: {
-          padding: "8px 12px",
           borderRadius: "4px",
-        },
-        variants: {
-          solid: {
-            bg: "blue.500",
-            color: "white",
-          },
-          outline: {
-            border: "1px solid",
-            borderColor: "blue.500",
-            color: "blue.500",
-          },
+          padding: "8px 12px",
         },
         sizes: {
           sm: {
@@ -40,6 +29,17 @@ describe("useComponentStyle", () => {
           md: {
             fontSize: "md",
             padding: "8px 12px",
+          },
+        },
+        variants: {
+          outline: {
+            border: "1px solid",
+            borderColor: "blue.500",
+            color: "blue.500",
+          },
+          solid: {
+            bg: "blue.500",
+            color: "white",
           },
         },
         defaultProps: {
@@ -71,17 +71,17 @@ describe("useComponentStyle", () => {
     })
 
     expect(result.current[0]).toStrictEqual({
-      padding: "8px 12px",
-      borderRadius: "4px",
       bg: "blue.500",
-      fontSize: "md",
+      borderRadius: "4px",
       color: "white",
+      fontSize: "md",
+      padding: "8px 12px",
     })
   })
 
   test("overrides default props with provided props", () => {
     const { result } = renderHook(
-      () => useComponentStyle("Button", { variant: "outline", size: "sm" }),
+      () => useComponentStyle("Button", { size: "sm", variant: "outline" }),
       {
         wrapper: ({ children }) => (
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -90,12 +90,12 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "4px 8px",
-      borderRadius: "4px",
       border: "1px solid",
       borderColor: "blue.500",
-      fontSize: "sm",
+      borderRadius: "4px",
       color: "blue.500",
+      fontSize: "sm",
+      padding: "4px 8px",
     })
   })
 
@@ -103,8 +103,8 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          variant: ["solid", "outline"],
           size: "sm",
+          variant: ["solid", "outline"],
         }),
       {
         wrapper: ({ children }) => (
@@ -114,12 +114,12 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "4px 8px",
-      borderRadius: "4px",
-      fontSize: "sm",
-      [pseudos._light]: { bg: "blue.500", color: "white" },
       ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]":
         { border: "1px solid", borderColor: "blue.500", color: "blue.500" },
+      borderRadius: "4px",
+      fontSize: "sm",
+      padding: "4px 8px",
+      [pseudos._light]: { bg: "blue.500", color: "white" },
     })
   })
 
@@ -127,8 +127,8 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          variant: { base: "solid", md: "outline" },
           size: "sm",
+          variant: { base: "solid", md: "outline" },
         }),
       {
         wrapper: ({ children }) => (
@@ -138,18 +138,18 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "4px 8px",
-      borderRadius: "4px",
-      fontSize: "sm",
-      "@media screen and (min-width: 769px)": {
-        bg: "blue.500",
-        color: "white",
-      },
       "@media screen and (max-width: 768px)": {
         border: "1px solid",
         borderColor: "blue.500",
         color: "blue.500",
       },
+      "@media screen and (min-width: 769px)": {
+        bg: "blue.500",
+        color: "white",
+      },
+      borderRadius: "4px",
+      fontSize: "sm",
+      padding: "4px 8px",
     })
   })
 
@@ -157,8 +157,8 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          variant: { base: "solid" },
           size: { base: "sm" },
+          variant: { base: "solid" },
         }),
       {
         wrapper: ({ children }) => (
@@ -169,10 +169,10 @@ describe("useComponentStyle", () => {
 
     expect(result.current[0]).toStrictEqual({
       bg: "blue.500",
+      borderRadius: "4px",
       color: "white",
       fontSize: "sm",
       padding: "4px 8px",
-      borderRadius: "4px",
     })
   })
 
@@ -187,11 +187,11 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
+      bg: "blue.500",
+      borderRadius: "4px",
+      color: "white",
       fontSize: "sm",
       padding: "4px 8px",
-      borderRadius: "4px",
-      bg: "blue.500",
-      color: "white",
     })
   })
 
@@ -199,8 +199,8 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          variant: { sm: "solid", md: "outline", lg: "solid" },
           size: { sm: "sm", md: "md", lg: "lg" },
+          variant: { sm: "solid", md: "outline", lg: "solid" },
         }),
       {
         wrapper: ({ children }) => (
@@ -210,25 +210,25 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "8px 12px",
-      borderRadius: "4px",
+      "@media screen and (max-width: 480px)": {
+        bg: "blue.500",
+        color: "white",
+        fontSize: "sm",
+        padding: "4px 8px",
+      },
+      "@media screen and (min-width: 481px) and (max-width: 768px)": {
+        border: "1px solid",
+        borderColor: "blue.500",
+        color: "blue.500",
+        fontSize: "md",
+        padding: "8px 12px",
+      },
       "@media screen and (min-width: 769px) and (max-width: 976px)": {
         bg: "blue.500",
         color: "white",
       },
-      "@media screen and (min-width: 481px) and (max-width: 768px)": {
-        fontSize: "md",
-        padding: "8px 12px",
-        border: "1px solid",
-        borderColor: "blue.500",
-        color: "blue.500",
-      },
-      "@media screen and (max-width: 480px)": {
-        fontSize: "sm",
-        padding: "4px 8px",
-        bg: "blue.500",
-        color: "white",
-      },
+      borderRadius: "4px",
+      padding: "8px 12px",
     })
   })
 
@@ -236,8 +236,8 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          variant: ["solid", "outline"],
           size: "md",
+          variant: ["solid", "outline"],
         }),
       {
         wrapper: ({ children }) => (
@@ -247,9 +247,9 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "8px 12px",
       borderRadius: "4px",
       fontSize: "md",
+      padding: "8px 12px",
       [pseudos._dark]: {
         border: "1px solid",
         borderColor: "blue.500",
@@ -266,11 +266,11 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
+          size: { base: ["md", "sm"], md: ["sm", "md"] },
           variant: [
             { base: "solid", md: "outline" },
             { base: "outline", md: "solid" },
           ],
-          size: { base: ["md", "sm"], md: ["sm", "md"] },
         }),
       {
         wrapper: ({ children }) => (
@@ -280,34 +280,34 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      padding: "8px 12px",
-      borderRadius: "4px",
-      "@media screen and (min-width: 769px)": {
-        [pseudos._light]: { fontSize: "md", padding: "8px 12px" },
-        [pseudos._dark]: { fontSize: "sm", padding: "4px 8px" },
-      },
       "@media screen and (max-width: 768px)": {
-        [pseudos._light]: { fontSize: "sm", padding: "4px 8px" },
         [pseudos._dark]: { fontSize: "md", padding: "8px 12px" },
+        [pseudos._light]: { fontSize: "sm", padding: "4px 8px" },
       },
-      [pseudos._light]: {
-        "@media screen and (min-width: 769px)": {
+      "@media screen and (min-width: 769px)": {
+        [pseudos._dark]: { fontSize: "sm", padding: "4px 8px" },
+        [pseudos._light]: { fontSize: "md", padding: "8px 12px" },
+      },
+      borderRadius: "4px",
+      padding: "8px 12px",
+      [pseudos._dark]: {
+        "@media screen and (max-width: 768px)": {
           bg: "blue.500",
           color: "white",
         },
-        "@media screen and (max-width: 768px)": {
-          border: "1px solid",
-          borderColor: "blue.500",
-          color: "blue.500",
-        },
-      },
-      [pseudos._dark]: {
         "@media screen and (min-width: 769px)": {
           border: "1px solid",
           borderColor: "blue.500",
           color: "blue.500",
         },
+      },
+      [pseudos._light]: {
         "@media screen and (max-width: 768px)": {
+          border: "1px solid",
+          borderColor: "blue.500",
+          color: "blue.500",
+        },
+        "@media screen and (min-width: 769px)": {
           bg: "blue.500",
           color: "white",
         },
@@ -328,19 +328,7 @@ describe("useComponentMultiStyle", () => {
     components: {
       Button: {
         baseStyle: {
-          container: { padding: "8px 12px", borderRadius: "4px" },
-        },
-        variants: {
-          solid: {
-            container: { bg: "blue.500", color: "white" },
-          },
-          outline: {
-            container: {
-              border: "1px solid",
-              borderColor: "blue.500",
-              color: "blue.500",
-            },
-          },
+          container: { borderRadius: "4px", padding: "8px 12px" },
         },
         sizes: {
           sm: {
@@ -348,6 +336,18 @@ describe("useComponentMultiStyle", () => {
           },
           md: {
             container: { fontSize: "md", padding: "8px 12px" },
+          },
+        },
+        variants: {
+          outline: {
+            container: {
+              border: "1px solid",
+              borderColor: "blue.500",
+              color: "blue.500",
+            },
+          },
+          solid: {
+            container: { bg: "blue.500", color: "white" },
           },
         },
         defaultProps: {
@@ -360,7 +360,7 @@ describe("useComponentMultiStyle", () => {
 
   test("returns the correct styles for multi-variant components", () => {
     const { result } = renderHook(
-      () => useComponentMultiStyle("Button", { variant: "solid", size: "sm" }),
+      () => useComponentMultiStyle("Button", { size: "sm", variant: "solid" }),
       {
         wrapper: ({ children }) => (
           <ThemeProvider theme={theme}>{children}</ThemeProvider>

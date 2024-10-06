@@ -1,13 +1,17 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { PortalProps } from "@yamada-ui/portal"
+import type { FC, ReactNode } from "react"
+import type { ColorSelectorProps } from "./color-selector"
+import type { ColorSwatchProps } from "./color-swatch"
+import type { UseColorPickerProps } from "./use-color-picker"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
-import type { PortalProps } from "@yamada-ui/portal"
 import {
   cx,
   getValidChildren,
@@ -17,11 +21,10 @@ import {
 import type { FC, ReactNode } from "react"
 import { cloneElement, useId } from "react"
 import type { ColorSelectorProps } from "./color-selector"
+
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
-import type { ColorSwatchProps } from "./color-swatch"
 import { ColorSwatch } from "./color-swatch"
-import type { UseColorPickerProps } from "./use-color-picker"
 import {
   ColorPickerProvider,
   useColorPicker,
@@ -29,12 +32,15 @@ import {
 } from "./use-color-picker"
 
 interface ColorPickerOptions {
+  children?: FC<{ value: string; onClose: () => void }> | ReactNode
   /**
-   * If `true`, display the color swatch component.
-   *
-   * @default true
+   * The border color when the input is invalid.
    */
-  withSwatch?: boolean
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If `true`, display the eye dropper component.
    *
@@ -42,36 +48,33 @@ interface ColorPickerOptions {
    */
   withEyeDropper?: boolean
   /**
-   * The border color when the input is focused.
+   * If `true`, display the color swatch component.
+   *
+   * @default true
    */
-  focusBorderColor?: string
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: string
+  withSwatch?: boolean
   /**
    * Props for color picker container element.
    */
   containerProps?: Omit<HTMLUIProps, "children">
   /**
-   * Props for color picker element.
-   */
-  inputProps?: HTMLUIProps<"input">
-  /**
-   * Props for color swatch component.
-   */
-  swatchProps?: ColorPickerSwatchProps
-  /**
    * Props for color eye dropper component.
    */
   eyeDropperProps?: ColorPickerEyeDropperProps
+  /**
+   * Props for color picker element.
+   */
+  inputProps?: HTMLUIProps<"input">
   /**
    * Props to be forwarded to the portal component.
    *
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
-  children?: ReactNode | FC<{ value: string; onClose: () => void }>
+  /**
+   * Props for color swatch component.
+   */
+  swatchProps?: ColorPickerSwatchProps
 }
 
 export interface ColorPickerProps
@@ -80,15 +83,15 @@ export interface ColorPickerProps
     ColorPickerOptions,
     Pick<
       ColorSelectorProps,
-      | "saturationSliderRef"
-      | "saturationSliderProps"
-      | "swatchesProps"
-      | "hueSliderRef"
-      | "hueSliderProps"
-      | "alphaSliderRef"
       | "alphaSliderProps"
-      | "channelsProps"
+      | "alphaSliderRef"
       | "channelProps"
+      | "channelsProps"
+      | "hueSliderProps"
+      | "hueSliderRef"
+      | "saturationSliderProps"
+      | "saturationSliderRef"
+      | "swatchesProps"
     > {}
 
 /**
@@ -105,38 +108,38 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     const id = useId()
     let {
       className,
+      alphaSliderRef,
       children,
-      withEyeDropper = true,
       color,
       h,
       height,
+      hueSliderRef,
       minH,
       minHeight,
-      containerProps,
-      inputProps,
-      swatchProps,
-      eyeDropperProps,
       saturationSliderRef,
+      withEyeDropper = true,
+      alphaSliderProps,
+      channelProps,
+      channelsProps,
+      containerProps,
+      eyeDropperProps,
+      hueSliderProps,
+      inputProps,
+      portalProps = { isDisabled: true },
       saturationSliderProps,
       swatchesProps,
-      hueSliderRef,
-      hueSliderProps,
-      alphaSliderRef,
-      alphaSliderProps,
-      channelsProps,
-      channelProps,
-      portalProps = { isDisabled: true },
+      swatchProps,
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
-      value,
       allowInput,
       eyeDropperSupported,
-      getPopoverProps,
+      value,
       getContainerProps,
-      getFieldProps,
-      getSelectorProps,
       getEyeDropperProps,
+      getFieldProps,
+      getPopoverProps,
+      getSelectorProps,
       onClose,
       ...rest
     } = useColorPicker(computedProps)
@@ -145,9 +148,9 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
+      h: "fit-content",
+      w: "100%",
       ...styles.container,
     }
 
@@ -162,8 +165,8 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
             <ui.div
               className="ui-color-picker__inner"
               __css={{
-                position: "relative",
                 cursor: !allowInput ? "pointer" : undefined,
+                position: "relative",
                 ...styles.inner,
               }}
             >
@@ -196,15 +199,15 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                 <ColorSelector
                   className="ui-color-picker__picker"
                   {...getSelectorProps({
+                    alphaSliderRef,
+                    hueSliderRef,
                     saturationSliderRef,
+                    alphaSliderProps,
+                    channelProps,
+                    channelsProps,
+                    hueSliderProps,
                     saturationSliderProps,
                     swatchesProps,
-                    hueSliderRef,
-                    hueSliderProps,
-                    alphaSliderRef,
-                    alphaSliderProps,
-                    channelsProps,
-                    channelProps,
                   })}
                 >
                   {runIfFunc(children, { value, onClose })}
@@ -228,12 +231,12 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
     const { styles } = useColorPickerContext()
 
     const css: CSSUIObject = {
-      ps: "2rem",
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
+      ps: "2rem",
       ...styles.field,
     }
 
@@ -255,7 +258,7 @@ type ColorPickerSwatchProps = ColorSwatchProps
 
 const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
   ({ className, ...rest }, ref) => {
-    const { value, styles } = useColorPickerContext()
+    const { styles, value } = useColorPickerContext()
 
     const css: CSSUIObject = {
       position: "absolute",
@@ -269,9 +272,9 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
       <ColorSwatch
         ref={ref}
         className={cx("ui-color-picker__swatch", className)}
-        __css={css}
         color={value}
         isRounded
+        __css={css}
         {...rest}
       />
     )
@@ -288,12 +291,12 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
     const { styles } = useColorPickerContext()
 
     const css: CSSUIObject = {
+      alignItems: "center",
+      display: "inline-flex",
+      justifyContent: "center",
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
       zIndex: 1,
       ...styles.eyeDropper,
     }
@@ -302,13 +305,13 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
 
     const cloneChildren = validChildren.map((child) =>
       cloneElement(child, {
+        style: {
+          color: "currentColor",
+          maxHeight: "1em",
+          maxWidth: "1em",
+        },
         focusable: false,
         "aria-hidden": true,
-        style: {
-          maxWidth: "1em",
-          maxHeight: "1em",
-          color: "currentColor",
-        },
       }),
     )
 

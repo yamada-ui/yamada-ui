@@ -1,7 +1,7 @@
-import { Octokit } from "@octokit/rest"
-import { recursiveOctokit } from "utils/github"
 import type { Event } from "utils/github"
 import type { APIHandler } from "utils/next"
+import { Octokit } from "@octokit/rest"
+import { recursiveOctokit } from "utils/github"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
@@ -12,11 +12,11 @@ export const dismissed: APIHandler = async ({ req }) => {
   const repo = repository.name
   const { number } = pull_request
 
-  const { data: reviewers } = await recursiveOctokit(() =>
+  const { data: reviewers } = await recursiveOctokit(async () =>
     octokit.pulls.listReviews({
       owner,
-      repo,
       pull_number: number,
+      repo,
     }),
   )
 
@@ -25,12 +25,12 @@ export const dismissed: APIHandler = async ({ req }) => {
   if (hasApproved) return
 
   try {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.removeLabel({
+        name: "merge request",
+        issue_number: number,
         owner,
         repo,
-        issue_number: number,
-        name: "merge request",
       }),
     )
   } catch {}

@@ -1,5 +1,3 @@
-import path from "path"
-import { findPackages } from "find-packages"
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
@@ -7,9 +5,10 @@ import type {
   NextApiResponse,
 } from "next"
 import type { Constant } from "./github"
-import { mdx } from "./mdx"
 import { CONSTANT } from "constant"
+import { findPackages } from "find-packages"
 import { documentPaths } from "mdx"
+import path from "path"
 import {
   getDocument,
   getDocumentBreadcrumbs,
@@ -19,15 +18,16 @@ import {
   getDocumentTree,
   omitDocumentTabs,
 } from "utils/document"
+import { mdx } from "./mdx"
 
 export type APIHandler = ({
+  constant,
   req,
   res,
-  constant,
 }: {
+  constant: Constant
   req: NextApiRequest
   res: NextApiResponse
-  constant: Constant
 }) => Promise<void>
 
 const getVersion = async () => {
@@ -35,7 +35,7 @@ const getVersion = async () => {
     path.resolve(CONSTANT.PATH.ROOT, "packages", "react"),
   )
 
-  const { version } = packages[0].manifest
+  const { version } = packages[0]?.manifest ?? {}
 
   return version ? `v${version}` : null
 }
@@ -52,23 +52,23 @@ export const getStaticCommonProps = async ({
 
 export const getStaticDocumentPaths =
   (name: string) =>
-  async ({ locales = [] }: GetStaticPathsContext) => {
+  ({ locales = [] }: GetStaticPathsContext) => {
     const paths = documentPaths
       .flatMap((path) => {
         if (!path.startsWith(name)) return
 
         const slug = path.split("/").slice(1)
 
-        return locales.map((locale) => ({ params: { slug }, locale }))
+        return locales.map((locale) => ({ locale, params: { slug } }))
       })
       .filter(Boolean)
 
-    return { paths, fallback: false }
+    return { fallback: false, paths }
   }
 
 export const getStaticDocumentProps =
   (name: string) =>
-  async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
+  async ({ defaultLocale, locale, params }: GetStaticPropsContext) => {
     const paths = [name, ...(params?.slug ?? [])]
     const path = paths.join("/")
 
@@ -79,12 +79,12 @@ export const getStaticDocumentProps =
 
     if (!document)
       return {
+        notFound: true,
         props: {
           currentVersion,
           documentTree,
           source: null,
         },
-        notFound: true,
       }
 
     const { body, ...rest } = document
@@ -109,13 +109,13 @@ export const getStaticDocumentProps =
     return {
       props: {
         ...rest,
-        source,
         currentVersion,
-        documentTree,
         documentBreadcrumbs,
         documentChildrenTree,
-        documentTabs,
         documentPagination,
+        documentTabs,
+        documentTree,
+        source,
       },
     }
   }

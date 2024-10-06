@@ -1,34 +1,34 @@
+import type { ReorderGenerateItem } from "../src"
 import { a11y, act, drag, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
-import type { ReorderGenerateItem } from "../src"
 import { Reorder, ReorderItem, ReorderTrigger } from "../src"
 
 describe("<Reorder />", () => {
   beforeAll(() => {
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
+        configurable: true,
         get() {
           return this.clientX
         },
-        configurable: true,
       },
       pageY: {
+        configurable: true,
         get() {
           return this.clientY
         },
-        configurable: true,
       },
     })
   })
 
   afterAll(() => {
     Object.defineProperty(MouseEvent.prototype, "pageX", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
     Object.defineProperty(MouseEvent.prototype, "pageY", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
   })
 
@@ -67,7 +67,7 @@ describe("<Reorder />", () => {
 
   test("handles orientation correctly", () => {
     render(
-      <Reorder data-testid="Reorder" orientation="horizontal">
+      <Reorder orientation="horizontal" data-testid="Reorder">
         <ReorderItem value="Item 1">Item 1</ReorderItem>
         <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
@@ -80,7 +80,7 @@ describe("<Reorder />", () => {
 
   test("applies correct styles for vertical orientation", () => {
     render(
-      <Reorder data-testid="Reorder" orientation="vertical">
+      <Reorder orientation="vertical" data-testid="Reorder">
         <ReorderItem value="Item 1">Item 1</ReorderItem>
         <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
@@ -176,7 +176,7 @@ describe("<Reorder />", () => {
 
     const el = screen.getByText("Item 1")
 
-    await drag(user)({ target: el, coords: (i) => ({ x: 0, y: i * 100 }) })
+    await drag(user)({ coords: (i) => ({ x: 0, y: i * 100 }), target: el })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])

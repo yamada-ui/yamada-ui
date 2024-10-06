@@ -1,3 +1,10 @@
+import type {
+  Environment,
+  SkeletonProps,
+  UIProviderProps,
+} from "@yamada-ui/react"
+import type { PrismTheme } from "prism-react-renderer"
+import type { FC, PropsWithChildren } from "react"
 import createEmotionCache from "@emotion/cache"
 import { CacheProvider } from "@emotion/react"
 import weakMemoize from "@emotion/weak-memoize"
@@ -10,94 +17,87 @@ import * as ChartComponents from "@yamada-ui/charts"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
-  Icon as LucideIcon,
-  Ghost,
-  Check,
-  Plus,
-  Minus,
-  Sun,
-  Moon,
-  Bold,
-  Italic,
-  Underline,
+  Activity,
+  Angry,
   ArrowLeft,
   ArrowRight,
+  Bold,
+  Check,
   ChevronDown,
-  ChevronsDown,
   ChevronLeft,
   ChevronRight,
-  MenuIcon,
-  FilePenLine,
+  ChevronsDown,
+  CircleCheck,
   ExternalLink,
   File,
-  X,
+  FilePenLine,
+  Frown,
+  Ghost,
   Image as ImageIcon,
-  Upload,
+  Italic,
+  Laugh,
+  Icon as LucideIcon,
   Mail,
-  Phone,
-  Activity,
-  Trash,
+  MenuIcon,
+  Minus,
+  Moon,
   MoveHorizontal,
   Pen,
-  Angry,
-  Frown,
-  Laugh,
+  Phone,
+  Plus,
   Smile,
   SmilePlus,
-  CircleCheck,
+  Sun,
+  Trash,
+  Underline,
+  Upload,
+  X,
 } from "@yamada-ui/lucide"
 import * as MarkdownComponents from "@yamada-ui/markdown"
 import * as UIComponents from "@yamada-ui/react"
 import {
-  ui,
   Box,
-  Text,
-  ScrollArea,
-  useDisclosure,
-  useBoolean,
   Button,
-  useUpdateEffect,
-  useResizeObserver,
-  Skeleton,
-  useColorMode,
-  useTheme,
   createThemeSchemeManager,
   EnvironmentProvider,
-  ThemeProvider,
-  LoadingProvider,
-  ResetStyle,
   GlobalStyle,
+  LoadingProvider,
   NoticeProvider,
-} from "@yamada-ui/react"
-import type {
-  SkeletonProps,
-  Environment,
-  UIProviderProps,
+  ResetStyle,
+  ScrollArea,
+  Skeleton,
+  Text,
+  ThemeProvider,
+  ui,
+  useBoolean,
+  useColorMode,
+  useDisclosure,
+  useResizeObserver,
+  useTheme,
+  useUpdateEffect,
 } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
-import type { PrismTheme } from "prism-react-renderer"
-import React, { useEffect, useRef, useState } from "react"
-import type { FC, PropsWithChildren } from "react"
-import { createPortal } from "react-dom"
-import { useForm, Controller } from "react-hook-form"
-import { FaRobot } from "react-icons/fa"
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts"
-import { theme as defaultTheme, config as defaultConfig } from "theme"
+import React, { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
+import { Controller, useForm } from "react-hook-form"
+import { FaRobot } from "react-icons/fa"
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
+import { config as defaultConfig, theme as defaultTheme } from "theme"
 import { wait } from "utils/async"
 import "dayjs/locale/ja"
 
-const UIProvider: FC<UIProviderProps & { environment?: Environment }> = ({
-  theme = defaultTheme,
+const UIProvider: FC<{ environment?: Environment } & UIProviderProps> = ({
+  children,
   config = defaultConfig,
   environment,
-  children,
+  theme = defaultTheme,
   ...rest
 }) => {
   return (
     <EnvironmentProvider environment={environment}>
-      <ThemeProvider theme={theme} config={config} {...rest}>
+      <ThemeProvider config={config} theme={theme} {...rest}>
         <LoadingProvider {...config.loading}>
           <ResetStyle />
           <GlobalStyle />
@@ -120,52 +120,52 @@ const components = {
   ...CalendarComponents,
   ...DropzoneComponents,
   ...MarkdownComponents,
-  LucideIcon,
   FontAwesomeIcon,
+  LucideIcon,
   UIProvider,
 }
 const fontAwesomeIcons = {
   faPoo,
 }
 const lucideIcons = {
-  Ghost,
-  Check,
-  CircleCheck,
-  Plus,
-  Minus,
-  Sun,
-  Moon,
-  Bold,
-  Italic,
-  Underline,
+  Activity,
+  Angry,
   ArrowLeft,
   ArrowRight,
+  Bold,
+  Check,
   ChevronDown,
-  ChevronsDown,
   ChevronLeft,
   ChevronRight,
-  MenuIcon,
-  FilePenLine,
+  ChevronsDown,
+  CircleCheck,
   ExternalLink,
   File,
+  FilePenLine,
+  Frown,
+  Ghost,
   ImageIcon,
+  Italic,
+  Laugh,
   Mail,
-  Phone,
-  Upload,
-  Activity,
-  Trash,
+  MenuIcon,
+  Minus,
+  Moon,
   MoveHorizontal,
   Pen,
-  X,
-  Angry,
-  Frown,
-  Laugh,
+  Phone,
+  Plus,
   Smile,
   SmilePlus,
+  Sun,
+  Trash,
+  Underline,
+  Upload,
+  X,
 }
 const lucideLabIcons = { burger }
 const reactIcons = { FaRobot }
-const utils = { wait, faker, useForm, Controller }
+const utils = { Controller, faker, useForm, wait }
 
 const scope = {
   ...react,
@@ -181,9 +181,9 @@ export interface EditableCodeBlockProps {
   code: string
   disabled?: boolean
   enableTypeScript?: boolean
-  language?: string
   functional?: boolean
   iframe?: boolean
+  language?: string
   noInline?: boolean
   theme?: PrismTheme
   transformCode?: (code: string) => void
@@ -221,29 +221,29 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
         <Preview>
           {iframe ? (
             <Iframe>
-              <Box as={LivePreview} w="full" h="full" p="md" overflow="auto" />
+              <Box as={LivePreview} h="full" overflow="auto" p="md" w="full" />
             </Iframe>
           ) : (
             <Box
               as={LivePreview}
-              p="md"
               borderWidth="1px"
-              rounded="md"
               overflowX="auto"
+              p="md"
+              rounded="md"
             />
           )}
         </Preview>
 
-        <Box rounded="md" overflow="hidden" my="4" position="relative">
-          <Box py="2" bg={["neutral.800", "neutral.900"]} w="full">
+        <Box my="4" overflow="hidden" position="relative" rounded="md">
+          <Box bg={["neutral.800", "neutral.900"]} py="2" w="full">
             <Text
               color="whiteAlpha.700"
               fontSize="xs"
               fontWeight="semibold"
+              pointerEvents="none"
               textAlign="center"
               textTransform="uppercase"
               userSelect="none"
-              pointerEvents="none"
             >
               {t("component.editable-code-block.label")}
             </Text>
@@ -252,30 +252,30 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
           <Editor>
             <Box
               as={LiveEditor}
-              onChange={onChange}
-              px="md"
+              sx={{ "& > pre": { bg: "none !important", p: "0px !important" } }}
               fontSize="sm"
               overflowX="auto"
-              sx={{ "& > pre": { p: "0px !important", bg: "none !important" } }}
+              px="md"
+              onChange={onChange}
             />
           </Editor>
 
           <CopyButton
-            value={code}
             position="absolute"
-            top="1.125rem"
             right="4"
+            top="1.125rem"
+            value={code}
           />
         </Box>
 
         <Box
           as={LiveError}
           bg="danger"
-          overflowX="auto"
-          rounded="md"
-          p="md"
-          fontSize="sm"
           color="white"
+          fontSize="sm"
+          overflowX="auto"
+          p="md"
+          rounded="md"
         />
       </Box>
     </LiveProvider>
@@ -286,8 +286,8 @@ export default EditableCodeBlock
 
 const createCache = weakMemoize((container: Node) =>
   createEmotionCache({
-    container,
     key: "iframe-css",
+    container,
   }),
 )
 
@@ -333,20 +333,20 @@ const Iframe: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ui.iframe
-      title="react-live-iframe"
       ref={iframeRef}
-      w="full"
-      h="xl"
       border="1px solid"
       borderColor="border"
+      h="xl"
       rounded="md"
+      title="react-live-iframe"
+      w="full"
     >
       {head && body
         ? createPortal(
             <CacheProvider value={createCache(head)}>
               <UIProvider
-                themeSchemeManager={themeSchemeManager}
                 environment={environment}
+                themeSchemeManager={themeSchemeManager}
               >
                 {children}
               </UIProvider>
@@ -365,10 +365,10 @@ const Preview: FC<SkeletonProps> = ({ ...rest }) => {
 
   return (
     <Skeleton
+      isFitContent
       isLoaded={isMounted}
       rounded="md"
       w="full"
-      isFitContent
       {...rest}
     />
   )
@@ -376,8 +376,8 @@ const Preview: FC<SkeletonProps> = ({ ...rest }) => {
 
 const Editor: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useI18n()
-  const [isMax, { on, off }] = useBoolean()
-  const { isOpen, onToggle, onClose } = useDisclosure()
+  const [isMax, { off, on }] = useBoolean()
+  const { isOpen, onClose, onToggle } = useDisclosure()
   const [ref, rect] = useResizeObserver<HTMLDivElement>()
 
   useUpdateEffect(() => {
@@ -395,19 +395,19 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
     <>
       <ScrollArea
         ref={ref}
-        bg={["neutral.800", "neutral.900"]}
-        sx={{ "& > div": { pt: "0", pb: isMax ? "10" : "6" } }}
-        maxH={isOpen ? "full" : "sm"}
+        sx={{ "& > div": { pb: isMax ? "10" : "6", pt: "0" } }}
         _scrollbarThumb={{
-          bg: "whiteAlpha.600",
-          bgClip: "padding-box",
-          border: "3px solid transparent",
-          rounded: "full",
           _nativeHover: {
             bg: "whiteAlpha.800",
             bgClip: "padding-box",
           },
+          bg: "whiteAlpha.600",
+          bgClip: "padding-box",
+          border: "3px solid transparent",
+          rounded: "full",
         }}
+        bg={["neutral.800", "neutral.900"]}
+        maxH={isOpen ? "full" : "sm"}
         tabIndex={-1}
       >
         {children}
@@ -415,11 +415,11 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
 
       {isMax ? (
         <Button
-          size="sm"
-          position="absolute"
-          rounded="full"
           bottom="2"
           left="50%"
+          position="absolute"
+          rounded="full"
+          size="sm"
           transform="translateX(-50%)"
           onClick={onToggle}
         >

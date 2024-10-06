@@ -7,8 +7,8 @@ export const Authentication = memo(() => {
   return (
     <Grid
       as="section"
-      templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr" }}
       minH={{ base: "5xl", sm: "2xl" }}
+      templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr" }}
     >
       <Company />
       <Form />

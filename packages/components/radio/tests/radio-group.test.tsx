@@ -1,6 +1,6 @@
-import { ui } from "@yamada-ui/core"
-import { a11y, render, screen, renderHook, fireEvent } from "@yamada-ui/test"
 import type { RadioItem } from "../src"
+import { ui } from "@yamada-ui/core"
+import { a11y, fireEvent, render, renderHook, screen } from "@yamada-ui/test"
 import { Radio, RadioGroup, useRadioGroup } from "../src"
 
 describe("<RadioGroup />", () => {
@@ -65,7 +65,7 @@ describe("<RadioGroup />", () => {
 
   test("should return checked attribute when isNative is false", () => {
     const { result } = renderHook(() =>
-      useRadioGroup({ value: undefined, isNative: false }),
+      useRadioGroup({ isNative: false, value: undefined }),
     )
     const props = result.current.getRadioProps()
 
@@ -74,9 +74,9 @@ describe("<RadioGroup />", () => {
 
   test("renders Radio components from items when validChildren is empty and items is not empty", async () => {
     const items: RadioItem[] = [
-      { value: "1", label: "Option 1" },
-      { value: "2", label: "Option 2" },
-      { value: "3", label: "Option 3" },
+      { label: "Option 1", value: "1" },
+      { label: "Option 2", value: "2" },
+      { label: "Option 3", value: "3" },
     ]
 
     render(<RadioGroup items={items} />)

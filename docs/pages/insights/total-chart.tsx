@@ -1,9 +1,11 @@
-import type { BarProps, AreaProps } from "@yamada-ui/charts"
+import type { AreaProps, BarProps } from "@yamada-ui/charts"
+import type { StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   AreaChart as UIAreaChart,
   BarChart as UIBarChart,
 } from "@yamada-ui/charts"
-import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
+import { ChartColumn, ChartLine } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -19,8 +21,8 @@ import {
   useTheme,
   VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
-import type { FC } from "react"
+import { CountUp } from "components/transitions"
+import { useI18n } from "contexts"
 import { memo, useEffect, useMemo } from "react"
 import { ChartTooltip } from "./chart-tooltip"
 import { useInsights } from "./insights-provider"
@@ -34,8 +36,6 @@ import {
   xAxisTickFormatter,
 } from "./insights-utils"
 import { ScoreLegend } from "./score-legend"
-import { CountUp } from "components/transitions"
-import { useI18n } from "contexts"
 
 export interface TotalChartProps extends StackProps {
   isLoading: boolean
@@ -44,11 +44,11 @@ export interface TotalChartProps extends StackProps {
 export const TotalChart = memo(
   forwardRef<TotalChartProps, "div">(({ isLoading, ...rest }, ref) => {
     const { t } = useI18n()
-    const { currentInsights, prevInsights, users, period } = useInsights()
+    const { currentInsights, period, prevInsights, users } = useInsights()
     const isEmpty = !isLoading && !Object.keys(currentInsights ?? {}).length
     const isInvalid = !users.length || (!period.start && !period.end)
     const isSingle = Object.keys(currentInsights ?? {}).length <= 1
-    const [isAreaChart, { toggle, off }] = useBoolean(true)
+    const [isAreaChart, { off, toggle }] = useBoolean(true)
 
     const currentScore = useMemo(
       () => getInsightTotalScore(currentInsights, users),
@@ -73,28 +73,28 @@ export const TotalChart = memo(
       <VStack
         ref={ref}
         as="section"
-        position="relative"
-        zIndex="kurillin"
-        gap="0"
         borderWidth="1px"
+        gap="0"
+        position="relative"
         rounded="md"
+        zIndex="kurillin"
         {...rest}
       >
         <HStack
-          justifyContent="space-between"
-          borderBottomWidth="1px"
-          py="md"
-          px="6"
           bg={["whiteAlpha.500", "blackAlpha.300"]}
+          borderBottomWidth="1px"
+          justifyContent="space-between"
+          px="6"
+          py="md"
         >
           <Skeleton isLoaded={!isLoading} rounded="md">
             <HStack>
               <CountUp
-                minW="2.5ch"
-                fontSize="4xl"
-                lineHeight="1"
-                fontWeight="semibold"
                 count={!isLoading ? currentScore.total : null}
+                fontSize="4xl"
+                fontWeight="semibold"
+                lineHeight="1"
+                minW="2.5ch"
               />
 
               {!isUndefined(trend) ? (
@@ -106,43 +106,41 @@ export const TotalChart = memo(
           <HStack>
             <Grid
               display={{ base: "grid", sm: "none" }}
-              templateColumns="repeat(4, 1fr)"
               gapX="md"
               gapY="xs"
+              templateColumns="repeat(4, 1fr)"
             >
               <ScoreLegend
-                isLoaded={!isLoading}
-                label="Pull Requests"
                 color={INSIGHT_SCORE_COLORS.pullRequests}
                 count={!isLoading ? currentScore.pullRequests : null}
-                containerProps={{ minW: "3ch", fontSize: "md" }}
+                isLoaded={!isLoading}
+                label="Pull Requests"
+                containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
-                isLoaded={!isLoading}
-                label="Issues"
                 color={INSIGHT_SCORE_COLORS.issues}
                 count={!isLoading ? currentScore.issues : null}
-                containerProps={{ minW: "3ch", fontSize: "md" }}
+                isLoaded={!isLoading}
+                label="Issues"
+                containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
-                isLoaded={!isLoading}
-                label="Approved"
                 color={INSIGHT_SCORE_COLORS.approved}
                 count={!isLoading ? currentScore.approved : null}
-                containerProps={{ minW: "3ch", fontSize: "md" }}
+                isLoaded={!isLoading}
+                label="Approved"
+                containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
-                isLoaded={!isLoading}
-                label="Comments"
                 color={INSIGHT_SCORE_COLORS.comments}
                 count={!isLoading ? currentScore.comments : null}
-                containerProps={{ minW: "3ch", fontSize: "md" }}
+                isLoaded={!isLoading}
+                label="Comments"
+                containerProps={{ fontSize: "md", minW: "3ch" }}
               />
             </Grid>
 
             <IconButton
-              variant="ghost"
-              isDisabled={isEmpty || isInvalid || isSingle}
               icon={
                 isAreaChart ? (
                   <ChartColumn fontSize="1.5em" />
@@ -150,6 +148,8 @@ export const TotalChart = memo(
                   <ChartLine fontSize="1.5em" />
                 )
               }
+              isDisabled={isEmpty || isInvalid || isSingle}
+              variant="ghost"
               onClick={toggle}
             />
           </HStack>
@@ -163,7 +163,7 @@ export const TotalChart = memo(
               </Text>
             </Center>
           ) : (
-            <Skeleton isLoaded={!isLoading} w="full" h="md" rounded="md">
+            <Skeleton h="md" isLoaded={!isLoading} rounded="md" w="full">
               <Box ms="-6">{isAreaChart ? <AreaChart /> : <BarChart />}</Box>
             </Skeleton>
           )}
@@ -179,7 +179,7 @@ interface AreaChartProps {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
   const { locale } = useI18n()
-  const { currentInsights, users, period } = useInsights()
+  const { currentInsights, period, users } = useInsights()
   const { theme } = useTheme()
   const { colorSchemes = [] } = theme
 
@@ -204,8 +204,8 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
         const c = colorSchemes[randomIndex(string, colorSchemes.length)]
 
         return {
-          dataKey: string,
           color: `${c}.500`,
+          dataKey: string,
         }
       }),
     [users, colorSchemes],
@@ -213,14 +213,14 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
 
   return (
     <UIAreaChart
-      data={data}
-      series={series}
-      dataKey="period"
       curveType="linear"
-      xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)(locale)}
+      data={data}
+      dataKey="period"
       fillOpacity={[0.8, 0.7]}
+      series={series}
+      withActiveDots
       withDots={false}
-      withActiveDots={true}
+      xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)(locale)}
       tooltipProps={{
         content: ChartTooltip,
       }}
@@ -242,23 +242,23 @@ const BarChart: FC<BarChartProps> = memo(() => {
       Object.entries(data).forEach(([user, data]) => {
         if (!users.includes(user)) return
 
-        const { comments, issues, pullRequests, approved, total } =
+        const { approved, comments, issues, pullRequests, total } =
           getInsightScore(data)
 
         if (result[user]) {
-          result[user]["Comments"] += comments
-          result[user]["Issues"] += issues
+          result[user].Comments += comments
+          result[user].Issues += issues
           result[user]["Pull Requests"] += pullRequests
-          result[user]["Approved"] += approved
+          result[user].Approved += approved
           result[user].total += total
         } else {
           result[user] = {
-            user,
+            Approved: approved,
             Comments: comments,
             Issues: issues,
             "Pull Requests": pullRequests,
-            Approved: approved,
             total,
+            user,
           }
         }
       })
@@ -272,25 +272,25 @@ const BarChart: FC<BarChartProps> = memo(() => {
   const series: BarProps[] = useMemo(
     () => [
       {
-        dataKey: "Pull Requests",
         color: INSIGHT_SCORE_COLORS.pullRequests,
+        dataKey: "Pull Requests",
         stackId: "total",
       },
       {
-        dataKey: "Issues",
         color: INSIGHT_SCORE_COLORS.issues,
+        dataKey: "Issues",
         stackId: "total",
       },
       {
-        dataKey: "Approved",
         color: INSIGHT_SCORE_COLORS.approved,
+        dataKey: "Approved",
         stackId: "total",
       },
       {
-        dataKey: "Comments",
         color: INSIGHT_SCORE_COLORS.comments,
-        stackId: "total",
+        dataKey: "Comments",
         radius: [4, 4, 0, 0],
+        stackId: "total",
       },
     ],
     [],
@@ -299,8 +299,8 @@ const BarChart: FC<BarChartProps> = memo(() => {
   return (
     <UIBarChart
       data={data}
-      series={series}
       dataKey="user"
+      series={series}
       tooltipProps={{
         content: ChartTooltip,
       }}

@@ -4,7 +4,6 @@ describe("generate", () => {
   describe("spaces", () => {
     test("should generate spaces", () => {
       const expectedSpaces = {
-        px: "1px",
         0.5: "0.25rem",
         1: "0.5rem",
         1.5: "0.75rem",
@@ -49,6 +48,7 @@ describe("generate", () => {
         88: "44rem",
         92: "46rem",
         96: "48rem",
+        px: "1px",
       }
 
       const spaces = generate.spaces(2)
@@ -58,7 +58,6 @@ describe("generate", () => {
 
     test("should not change when 1 is passed", () => {
       const expectedSpaces = {
-        px: "1px",
         0.5: "0.125rem",
         1: "0.25rem",
         1.5: "0.375rem",
@@ -103,6 +102,7 @@ describe("generate", () => {
         88: "22rem",
         92: "23rem",
         96: "24rem",
+        px: "1px",
       }
 
       const spaces = generate.spaces(1)

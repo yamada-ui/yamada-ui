@@ -1,8 +1,8 @@
-import type { NextPage, InferGetStaticPropsType } from "next"
-import { List } from "./list"
-import { useI18n, PageProvider } from "contexts"
+import type { InferGetStaticPropsType, NextPage } from "next"
+import { PageProvider, useI18n } from "contexts"
 import { DocumentLayout } from "layouts/document-layout"
 import { getStaticCommonProps } from "utils/next"
+import { List } from "./list"
 
 export const getStaticProps = getStaticCommonProps
 
@@ -14,8 +14,8 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <DocumentLayout
-        title={t("icons.title")}
         description={t("icons.description")}
+        title={t("icons.title")}
       >
         <List />
       </DocumentLayout>

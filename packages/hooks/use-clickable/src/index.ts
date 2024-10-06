@@ -1,25 +1,17 @@
-import { useEventListeners } from "@yamada-ui/use-event-listener"
 import type { Dict } from "@yamada-ui/utils"
-import { dataAttr, isTouchDevice, mergeRefs } from "@yamada-ui/utils"
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
+import { useEventListeners } from "@yamada-ui/use-event-listener"
+import { dataAttr, isTouchDevice, mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
   M extends HTMLAttributes<Y> = HTMLAttributes<Y>,
-> = M & {
+> = {
   /**
-   * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
-   *
-   * @default false
+   * The ref for the element.
    */
-  isDisabled?: boolean
-  /**
-   * If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.
-   *
-   * @default false
-   */
-  isFocusable?: boolean
+  ref?: Ref<HTMLElement>
   /**
    * Whether or not trigger click on pressing `Enter`.
    *
@@ -33,6 +25,12 @@ export type UseClickableProps<
    */
   clickOnSpace?: boolean
   /**
+   * Disable the touch device behavior.
+   *
+   * @default true
+   */
+  disableTouchBehavior?: boolean
+  /**
    * Whether or not to focus the element when it is clicked.
    * If `true`, the element will receive focus upon click.
    *
@@ -40,25 +38,25 @@ export type UseClickableProps<
    */
   focusOnClick?: boolean
   /**
-   * Disable the touch device behavior.
+   * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
    *
-   * @default true
+   * @default false
    */
-  disableTouchBehavior?: boolean
+  isDisabled?: boolean
   /**
-   * The ref for the element.
+   * If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.
+   *
+   * @default false
    */
-  ref?: Ref<HTMLElement>
-}
+  isFocusable?: boolean
+} & M
 
 const isValidElement = (
   ev: KeyboardEvent | KeyboardEvent["nativeEvent"],
 ): boolean => {
-  const { tagName, isContentEditable } = ev.target as HTMLElement
+  const { isContentEditable, tagName } = ev.target as HTMLElement
 
-  return (
-    tagName !== "INPUT" && tagName !== "TEXTAREA" && isContentEditable !== true
-  )
+  return tagName !== "INPUT" && tagName !== "TEXTAREA" && !isContentEditable
 }
 
 export const useClickable = <
@@ -67,20 +65,20 @@ export const useClickable = <
 >(
   {
     ref,
-    isDisabled,
-    isFocusable,
     clickOnEnter = true,
     clickOnSpace = true,
-    focusOnClick = true,
     disableTouchBehavior = true,
-    onMouseDown,
-    onMouseUp,
+    focusOnClick = true,
+    isDisabled,
+    isFocusable,
+    tabIndex: _tabIndex,
     onClick,
     onKeyDown,
     onKeyUp,
-    tabIndex: _tabIndex,
-    onMouseOver,
+    onMouseDown,
     onMouseLeave,
+    onMouseOver,
+    onMouseUp,
     ...props
   }: UseClickableProps<Y, M> = {} as UseClickableProps<Y, M>,
 ) => {
@@ -255,31 +253,31 @@ export const useClickable = <
       ...props,
       ref: mergeRefs(ref, refCb),
       type: "button",
-      "aria-disabled": trulyDisabled ? undefined : isDisabled,
       disabled: trulyDisabled,
+      "aria-disabled": trulyDisabled ? undefined : isDisabled,
       onClick: handleClick,
-      onMouseDown,
-      onMouseUp,
-      onKeyUp,
       onKeyDown,
-      onMouseOver,
+      onKeyUp,
+      onMouseDown,
       onMouseLeave,
+      onMouseOver,
+      onMouseUp,
     }
   } else {
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
       role: "button",
-      "data-active": dataAttr(isPressed),
-      "aria-disabled": isDisabled ? ("true" as const) : undefined,
       tabIndex: trulyDisabled ? undefined : tabIndex,
+      "aria-disabled": isDisabled ? ("true" as const) : undefined,
+      "data-active": dataAttr(isPressed),
       onClick: handleClick,
-      onMouseDown: handleMouseDown,
-      onMouseUp: handleMouseUp,
-      onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
-      onMouseOver: handleMouseOver,
+      onKeyUp: handleKeyUp,
+      onMouseDown: handleMouseDown,
       onMouseLeave: handleMouseLeave,
+      onMouseOver: handleMouseOver,
+      onMouseUp: handleMouseUp,
     }
   }
 }

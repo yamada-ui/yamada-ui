@@ -1,27 +1,27 @@
 import { act, renderHook, waitFor } from "@yamada-ui/test"
 import { createRef } from "react"
 import {
+  assignRef,
   createContext,
-  useSafeLayoutEffect,
-  useUnmountEffect,
-  useIsMounted,
-  getValidChildren,
-  isValidElement,
+  createId,
   cx,
-  isRefObject,
-  useMergeRefs,
-  useCallbackRef,
   findChildren,
+  getValidChildren,
   includesChildren,
+  isRefObject,
+  isValidElement,
+  mergeRefs,
   omitChildren,
   pickChildren,
-  useUpdateEffect,
-  useAsyncRetry,
-  createId,
-  assignRef,
-  mergeRefs,
   useAsync,
   useAsyncFunc,
+  useAsyncRetry,
+  useCallbackRef,
+  useIsMounted,
+  useMergeRefs,
+  useSafeLayoutEffect,
+  useUnmountEffect,
+  useUpdateEffect,
 } from "../src"
 
 describe("React", () => {
@@ -70,8 +70,8 @@ describe("React", () => {
       ]
       const validChildren = getValidChildren(children)
       expect(validChildren).toHaveLength(2)
-      expect(validChildren[0].type).toBe("div")
-      expect(validChildren[1].type).toBe("span")
+      expect(validChildren[0]?.type).toBe("div")
+      expect(validChildren[1]?.type).toBe("span")
     })
   })
 
@@ -149,7 +149,7 @@ describe("React", () => {
       ]
       const pickedChildren = pickChildren(children, "span")
       expect(pickedChildren).toHaveLength(1)
-      expect(pickedChildren[0].type).toBe("span")
+      expect(pickedChildren[0]?.type).toBe("span")
     })
   })
 
@@ -250,7 +250,7 @@ describe("React", () => {
 
   describe("useAsync", () => {
     test("should handle async function execution", async () => {
-      const asyncFunction = () => Promise.resolve("test")
+      const asyncFunction = async () => Promise.resolve("test")
       const { result } = renderHook(() => useAsync(asyncFunction, []))
       await waitFor(() => {
         expect(result.current.value).toBe("test")
@@ -260,12 +260,12 @@ describe("React", () => {
 
   describe("useAsyncFunc", () => {
     test("should return a function that handles async execution", async () => {
-      const asyncFunction = () => Promise.resolve("test")
+      const asyncFunction = async () => Promise.resolve("test")
       const { result } = renderHook(() => useAsyncFunc(asyncFunction, []))
 
       let asyncResult: Promise<string>
 
-      await act(async () => {
+      act(() => {
         asyncResult = result.current[1]()
       })
 
@@ -292,7 +292,7 @@ describe("React", () => {
       expect(result.current.loading).toBeTruthy()
 
       await waitFor(() => expect(result.current.loading).toBeFalsy())
-      await waitFor(async () => {
+      await waitFor(() => {
         result.current.retry()
       })
       await waitFor(() => expect(result.current.loading).toBeFalsy())

@@ -3,8 +3,8 @@ import {
   Card,
   CardBody,
   CardHeader,
-  HStack,
   Heading,
+  HStack,
   Input,
   Text,
 } from "@yamada-ui/react"
@@ -19,7 +19,7 @@ export const ShareDocumentCard = memo(() => {
       rounded="xl"
       variant="outline"
     >
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">
           Share this document
         </Heading>
@@ -28,12 +28,12 @@ export const ShareDocumentCard = memo(() => {
 
       <CardBody>
         <HStack
-          w="full"
-          gap="sm"
-          flexDirection={{ base: "row", sm: "column" }}
           alignItems={{ base: "center", sm: "stretch" }}
+          flexDirection={{ base: "row", sm: "column" }}
+          gap="sm"
+          w="full"
         >
-          <Input flex={1} defaultValue="https://example.com/link/to/document" />
+          <Input defaultValue="https://example.com/link/to/document" flex={1} />
 
           <Button>Copy Link</Button>
         </HStack>
@@ -42,24 +42,24 @@ export const ShareDocumentCard = memo(() => {
 
         <UserCard
           avatarSrc="https://avatars.githubusercontent.com/u/84060430?v=4"
-          username="Hirotomo Yamada"
-          userId="@hirotomoyamada"
           defaultValue="Can edit"
           options={["Can edit", "Can view"]}
+          userId="@hirotomoyamada"
+          username="Hirotomo Yamada"
         />
         <UserCard
           avatarSrc="https://avatars.githubusercontent.com/u/61367823?v=4"
-          username="Shintaro Jokagi"
-          userId="@taroj1205"
           defaultValue="Can edit"
           options={["Can edit", "Can view"]}
+          userId="@taroj1205"
+          username="Shintaro Jokagi"
         />
         <UserCard
           avatarSrc="https://avatars.githubusercontent.com/u/24850340?v=4"
-          username="hajimemat"
-          userId="@hajime_mat"
           defaultValue="Can view"
           options={["Can edit", "Can view"]}
+          userId="@hajime_mat"
+          username="hajimemat"
         />
       </CardBody>
     </Card>

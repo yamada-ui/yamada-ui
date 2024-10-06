@@ -1,7 +1,7 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { UseCarouselSlideProps } from "./use-carousel"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useCarouselContext, useCarouselSlide } from "./use-carousel"
 
 interface CarouselSlideOptions {
@@ -18,7 +18,7 @@ export interface CarouselSlideProps
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   ({ className, size, ...rest }, ref) => {
-    const { slideSize, includeGapInSize, orientation, gap } =
+    const { gap, includeGapInSize, orientation, slideSize } =
       useCarouselContext()
 
     const { getSlideProps } = useCarouselSlide(rest)
@@ -26,8 +26,8 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
     size ??= slideSize
 
     const css: CSSUIObject = {
-      position: "relative",
       flex: `0 0 ${size}`,
+      position: "relative",
       ...(includeGapInSize
         ? { [orientation === "vertical" ? "pb" : "pr"]: gap }
         : { [orientation === "vertical" ? "mb" : "mr"]: gap }),
@@ -56,8 +56,8 @@ const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
       <ui.div
         ref={ref}
         className="ui-carousel__slide__inner"
-        w="100%"
         h="100%"
+        w="100%"
         {...rest}
       />
     )

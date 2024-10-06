@@ -8,19 +8,17 @@ describe("<CircleProgress />", () => {
 
   test("renders correctly without animation", () => {
     render(
-      <>
-        <CircleProgress
-          data-testid="circle-progress-a"
-          boxSize="8rem"
-          thickness="0.5rem"
-          color="green.500"
-          trackColor="gray.300"
-          value={75}
-          min={0}
-          max={100}
-          isRounded
-        />
-      </>,
+      <CircleProgress
+        boxSize="8rem"
+        color="green.500"
+        isRounded
+        max={100}
+        min={0}
+        thickness="0.5rem"
+        trackColor="gray.300"
+        value={75}
+        data-testid="circle-progress-a"
+      />,
     )
     expect(screen.getByTestId("circle-progress-a")).toBeInTheDocument()
   })
@@ -29,14 +27,14 @@ describe("<CircleProgress />", () => {
     render(
       <>
         <CircleProgress
-          data-testid="circle-progress-b"
           isAnimation
           speed={["1s", "3s"]}
+          data-testid="circle-progress-b"
         />
         <CircleProgress
-          data-testid="circle-progress-c"
           isAnimation
           speed={[1, 3]}
+          data-testid="circle-progress-c"
         />
       </>,
     )
@@ -47,17 +45,17 @@ describe("<CircleProgress />", () => {
   test("Whether the boxSize is render correctly", () => {
     render(
       <CircleProgress
-        data-testid="circle-progress"
-        value={50}
         boxSize="120px"
+        value={50}
+        data-testid="circle-progress"
       />,
     )
 
     const circleProgressChild =
       screen.getByTestId("circle-progress").children[0]
     expect(circleProgressChild).toHaveStyle({
-      width: "120px",
       height: "120px",
+      width: "120px",
     })
   })
 

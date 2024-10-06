@@ -1,15 +1,15 @@
-import {
-  FormControl,
-  SegmentedControl,
-  SegmentedControlButton,
-} from "@yamada-ui/react"
 import type {
   FormControlProps,
   Merge,
   SegmentedControlProps,
 } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
+import {
+  FormControl,
+  SegmentedControl,
+  SegmentedControlButton,
+} from "@yamada-ui/react"
+import { memo } from "react"
 import { CompleteIcon } from "./complete-icon"
 import { EditIcon } from "./edit-icon"
 import { InsertIcon } from "./insert-icon"
@@ -19,30 +19,30 @@ export interface SwitchModeProps
 
 export const SwitchMode: FC<SwitchModeProps> = memo(
   ({
-    isRequired,
+    errorMessage,
+    helperMessage,
     isDisabled,
     isInvalid,
     isReadOnly,
     isReplace,
+    isRequired,
     label = "Mode",
-    helperMessage,
-    errorMessage,
     ...rest
   }) => {
     return (
       <FormControl
         {...{
-          isRequired,
+          errorMessage,
+          helperMessage,
           isDisabled,
           isInvalid,
           isReadOnly,
           isReplace,
+          isRequired,
           label,
-          helperMessage,
-          errorMessage,
         }}
       >
-        <SegmentedControl w="full" minW="auto" {...rest}>
+        <SegmentedControl minW="auto" w="full" {...rest}>
           <SegmentedControlButton value="complete">
             <CompleteIcon fontSize={{ base: "1.25rem" }} />
           </SegmentedControlButton>

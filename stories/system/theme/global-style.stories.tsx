@@ -1,6 +1,6 @@
-import type { FC } from "react"
 import type { UIStyle } from "@yamada-ui/react"
-import { UIProvider, extendTheme, Center, Image } from "@yamada-ui/react"
+import type { FC } from "react"
+import { Center, extendTheme, Image, UIProvider } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Global Style",
@@ -23,11 +23,11 @@ export const customGlobalStyle = () => {
 
 const App: FC = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Image
-        w="full"
         maxW="xl"
         src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"
+        w="full"
       />
     </Center>
   )

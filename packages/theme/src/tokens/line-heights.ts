@@ -1,13 +1,16 @@
 import type { ThemeTokens } from "@yamada-ui/core"
 
 export const lineHeights: ThemeTokens = {
+  base: 1.5,
+
   normal: "normal",
-  none: 1,
+
   shorter: 1.25,
   short: 1.375,
-  base: 1.5,
   tall: 1.625,
-  taller: "2",
+  taller: 2,
+  none: 1,
+
   "3": ".75rem",
   "4": "1rem",
   "5": "1.25rem",

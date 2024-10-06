@@ -1,58 +1,58 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UseChartProps } from "./use-chart"
+import type { UseChartAxisOptions } from "./use-chart-axis"
+import type { UseChartGridOptions } from "./use-chart-grid"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
+import type { UseLineChartOptions } from "./use-line-chart"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
-  LineChart as ReChartsLineChart,
-  Legend,
   CartesianGrid,
+  Label,
+  Legend,
+  Line,
+  LineChart as ReChartsLineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-  ReferenceLine,
-  Line,
-  Label,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip } from "./use-chart-tooltip"
-import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useLineChart } from "./use-line-chart"
-import type { UseLineChartOptions } from "./use-line-chart"
 
 interface LineChartOptions {
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
   /**
    * If `true`, legend is visible.
    *
    * @default false
    */
   withLegend?: boolean
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
 }
 
 export interface LineChartProps
-  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
     ThemeProps<"LineChart">,
     LineChartOptions,
     UseChartProps,
@@ -71,109 +71,109 @@ export interface LineChartProps
 export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("LineChart", props)
   const {
-    className,
-    containerProps,
-    gridProps,
-    gridAxis,
-    strokeDasharray,
-    dataKey,
     type,
-    layoutType,
-    tickLine,
-    withXAxis,
-    withYAxis,
-    xAxisProps,
-    yAxisProps,
-    xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
-    unit,
-    yAxisTickFormatter,
-    xAxisTickFormatter,
-    valueFormatter,
+    className,
+    connectNulls,
+    curveType,
+    data,
+    dataKey,
+    fillOpacity,
+    gridAxis,
     labelFormatter,
-    referenceLineProps,
-    tooltipProps,
+    layoutType,
+    series,
+    strokeDasharray,
+    strokeWidth,
+    syncId,
+    tickLine,
     tooltipAnimationDuration,
-    legendProps,
+    unit,
+    valueFormatter,
+    withActiveDots,
+    withDots,
     withLegend = false,
     withTooltip = true,
-    series,
-    data,
+    withXAxis,
+    withYAxis,
+    xAxisLabel,
+    xAxisTickFormatter,
+    yAxisLabel,
+    yAxisTickFormatter,
     chartProps,
+    containerProps,
+    gridProps,
+    legendProps,
     lineProps,
-    withDots,
-    withActiveDots,
-    curveType,
-    strokeWidth,
-    connectNulls,
-    fillOpacity,
-    syncId,
+    referenceLineProps,
+    tooltipProps,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getLineProps, getLineChartProps, lineVars, setHighlightedArea } =
+  const { lineVars, setHighlightedArea, getLineChartProps, getLineProps } =
     useLineChart({
+      connectNulls,
+      curveType,
+      data,
+      fillOpacity,
       layoutType,
       series,
-      referenceLineProps,
-      data,
-      chartProps,
-      lineProps,
-      withDots,
-      withActiveDots,
-      curveType,
       strokeWidth,
-      connectNulls,
-      fillOpacity,
+      styles,
       syncId,
+      withActiveDots,
+      withDots,
       xAxisLabel,
       yAxisLabel,
-      styles,
+      chartProps,
+      lineProps,
+      referenceLineProps,
     })
   const { getContainerProps } = useChart({ containerProps })
   const {
-    getXAxisProps,
-    getYAxisProps,
     getXAxisLabelProps,
+    getXAxisProps,
     getYAxisLabelProps,
+    getYAxisProps,
   } = useChartAxis({
-    dataKey,
     type,
-    layoutType,
-    tickLine,
+    dataKey,
     gridAxis,
+    layoutType,
+    styles,
+    tickLine,
+    unit,
     withXAxis,
     withYAxis,
-    xAxisProps,
-    yAxisProps,
     xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
-    unit,
-    yAxisTickFormatter,
     xAxisTickFormatter,
-    styles,
+    yAxisLabel,
+    yAxisTickFormatter,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
-    referenceLineProps,
     styles,
+    referenceLineProps,
   })
   const { getGridProps } = useChartGrid({
-    gridProps,
     gridAxis,
     strokeDasharray,
     styles,
+    gridProps,
   })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
 
@@ -182,7 +182,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       series.map(({ dataKey }, index) => (
         <Line
           key={`line-${dataKey}`}
-          {...getLineProps({ index, className: "ui-line-chart__line" })}
+          {...getLineProps({ className: "ui-line-chart__line", index })}
         />
       )),
     [getLineProps, series],
@@ -194,8 +194,8 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
         <ReferenceLine
           key={`referenceLine-${index}`}
           {...getReferenceLineProps({
-            index,
             className: "ui-line-chart__reference-line",
+            index,
           })}
         />
       )),
@@ -256,10 +256,10 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                   <ChartTooltip
                     className="ui-line-chart__tooltip"
                     label={label}
-                    payload={payload}
-                    valueFormatter={valueFormatter}
                     labelFormatter={labelFormatter}
+                    payload={payload}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}
@@ -275,3 +275,6 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+LineChart.displayName = "LineChart"
+LineChart.__ui__ = "LineChart"

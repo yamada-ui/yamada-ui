@@ -1,7 +1,7 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalBodyProps } from "./modal-body"
 import { forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { ModalBodyProps } from "./modal-body"
 import { ModalBody } from "./modal-body"
 import { useDialog } from "./modal-context"
 

@@ -1,34 +1,34 @@
+import type { UseRadioGroupReturn } from "@yamada-ui/react"
+import type { FC, ReactNode } from "react"
 import { CreditCard } from "@yamada-ui/lucide"
 import {
+  Autocomplete,
+  AutocompleteOption,
+  Box,
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
+  Center,
   FormControl,
-  HStack,
   Heading,
+  HStack,
   Input,
   Text,
-  VStack,
   ui,
   useRadio,
-  Box,
   useRadioGroup,
-  Center,
-  Autocomplete,
-  AutocompleteOption,
+  VStack,
 } from "@yamada-ui/react"
-import type { UseRadioGroupReturn } from "@yamada-ui/react"
-import { memo } from "react"
-import type { FC, ReactNode } from "react"
 import { Apple, Paypal } from "components/media-and-icons"
+import { memo } from "react"
 
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<
-    ReturnType<UseRadioGroupReturn["getRadioProps"]> & { icon: ReactNode }
+    { icon: ReactNode } & ReturnType<UseRadioGroupReturn["getRadioProps"]>
   > = ({ icon, value, ...rest }) => {
-    const { getInputProps, getIconProps } = useRadio({ value, ...rest })
+    const { getIconProps, getInputProps } = useRadio({ value, ...rest })
 
     return (
       <Box as="label" w="full">
@@ -37,31 +37,31 @@ export const PaymentMethodCard = memo(() => {
         <Box
           as={VStack}
           {...getIconProps()}
-          cursor="pointer"
-          py={{ base: "md", sm: "sm" }}
-          px={{ base: "lg", sm: "md" }}
-          rounded="md"
-          gap="xs"
-          borderWidth="3px"
-          borderColor={["blackAlpha.200", "whiteAlpha.100"]}
           _checked={{
             borderColor: ["primary", "primary"],
           }}
           _hover={{
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
             _checked: {
               bg: ["transparent", "transparent"],
             },
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
           }}
-          transitionProperty="background"
+          borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          borderWidth="3px"
+          cursor="pointer"
+          gap="xs"
+          px={{ base: "lg", sm: "md" }}
+          py={{ base: "md", sm: "sm" }}
+          rounded="md"
           transitionDuration="slow"
+          transitionProperty="background"
         >
           <Center>{icon}</Center>
 
           <Text
             as="span"
-            textAlign="center"
             fontSize={{ base: "md", sm: "xs" }}
+            textAlign="center"
           >
             {value}
           </Text>
@@ -99,7 +99,7 @@ export const PaymentMethodCard = memo(() => {
       rounded="xl"
       variant="outline"
     >
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">
           Payment method
         </Heading>
@@ -132,9 +132,9 @@ export const PaymentMethodCard = memo(() => {
         </FormControl>
 
         <HStack
-          w="full"
           flexDirection={{ base: "row", sm: "column" }}
           gap={{ base: "sm", sm: "md" }}
+          w="full"
         >
           <FormControl isRequired label="Expires">
             <Autocomplete placeholder="Month">
@@ -163,7 +163,7 @@ export const PaymentMethodCard = memo(() => {
       </CardBody>
 
       <CardFooter>
-        <Button w="full" colorScheme="primary">
+        <Button colorScheme="primary" w="full">
           Continue
         </Button>
       </CardFooter>

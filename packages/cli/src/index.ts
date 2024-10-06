@@ -1,6 +1,6 @@
-import path from "path"
 import c from "chalk"
 import { Command } from "commander"
+import path from "path"
 import pkg from "../package.json"
 import { actionTheme, actionTokens, themePath } from "./command"
 import { initCLI } from "./utils"

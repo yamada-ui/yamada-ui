@@ -1,8 +1,8 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalHeaderProps } from "./modal-header"
 import { forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useDrawer } from "./modal-context"
-import type { ModalHeaderProps } from "./modal-header"
 import { ModalHeader } from "./modal-header"
 
 export interface DrawerHeaderProps extends ModalHeaderProps {}

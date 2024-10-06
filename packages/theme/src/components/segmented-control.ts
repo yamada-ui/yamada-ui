@@ -3,37 +3,58 @@ import { isAccessible, isGray } from "@yamada-ui/utils"
 
 export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   baseStyle: {
-    container: {
-      p: "1",
-      bg: ["blackAlpha.100", "whiteAlpha.50"],
+    button: {
+      _disabled: { cursor: "not-allowed", opacity: 0.4 },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _hover: {
+        _checked: {
+          opacity: 1,
+        },
+        opacity: 0.7,
+      },
       _readOnly: { cursor: "default" },
+      color: ["blackAlpha.800", "whiteAlpha.800"],
+      fontWeight: "medium",
+      transitionDuration: "ultra-slow",
+      transitionProperty: "common",
+      whiteSpace: "nowrap",
+    },
+    container: {
       _disabled: { cursor: "not-allowed" },
+      _readOnly: { cursor: "default" },
+      bg: ["blackAlpha.100", "whiteAlpha.50"],
+      p: "1",
     },
     cursor: {
       boxShadow: ["md", "dark-md"],
     },
-    button: {
-      transitionProperty: "common",
-      transitionDuration: "ultra-slow",
-      fontWeight: "medium",
-      whiteSpace: "nowrap",
-      color: ["blackAlpha.800", "whiteAlpha.800"],
-      _hover: {
-        opacity: 0.7,
-        _checked: {
-          opacity: 1,
-        },
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-      _readOnly: { cursor: "default" },
-      _disabled: { opacity: 0.4, cursor: "not-allowed" },
+  },
+
+  sizes: {
+    sm: {
+      button: { fontSize: "sm", px: "2", py: "1" },
+      container: { minW: "xs" },
+    },
+    md: {
+      button: { fontSize: "md", px: "3", py: "1.5" },
+      container: { minW: "sm" },
+    },
+    lg: {
+      button: { px: "4", py: "2" },
+      container: { minW: "md" },
     },
   },
 
   variants: {
     basic: ({ colorScheme: c = "gray" }) => ({
+      button: {
+        _checked: {
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+        },
+        rounded: "md",
+      },
       container: {
         rounded: "lg",
       },
@@ -44,14 +65,14 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "md",
       },
+    }),
+    rounded: ({ colorScheme: c = "gray" }) => ({
       button: {
-        rounded: "md",
         _checked: {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
+        rounded: "full",
       },
-    }),
-    rounded: ({ colorScheme: c = "gray" }) => ({
       container: {
         rounded: "full",
       },
@@ -62,32 +83,11 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "full",
       },
-      button: {
-        rounded: "full",
-        _checked: {
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-        },
-      },
     }),
   },
 
-  sizes: {
-    sm: {
-      container: { minW: "xs" },
-      button: { py: "1", px: "2", fontSize: "sm" },
-    },
-    md: {
-      container: { minW: "sm" },
-      button: { py: "1.5", px: "3", fontSize: "md" },
-    },
-    lg: {
-      container: { minW: "md" },
-      button: { py: "2", px: "4" },
-    },
-  },
-
   defaultProps: {
-    variant: "basic",
     size: "md",
+    variant: "basic",
   },
 }

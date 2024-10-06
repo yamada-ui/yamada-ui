@@ -8,7 +8,7 @@ export const useEventListener = <K extends keyof DocumentEventMap>(
   event: K | StringLiteral,
   handler?: (event: DocumentEventMap[K]) => void,
   env?: (() => DocumentOrElement) | DocumentOrElement,
-  options?: boolean | AddEventListenerOptions,
+  options?: AddEventListenerOptions | boolean,
 ) => {
   const listener = useCallbackRef(handler)
 

@@ -1,29 +1,29 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { NativeTableProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { useState } from "react"
-import { colorSchemes } from "../../components"
 import {
-  NativeTable,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  ScrollArea,
   Box,
   defaultTheme,
-  TableContainer,
   isString,
+  NativeTable,
+  ScrollArea,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
 } from "@yamada-ui/react"
-import type { NativeTableProps } from "@yamada-ui/react"
+import { useState } from "react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof NativeTable>
 
 const meta: Meta<typeof NativeTable> = {
-  title: "Components / Data Display / NativeTable",
   component: NativeTable,
+  title: "Components / Data Display / NativeTable",
 }
 
 export default meta
@@ -260,7 +260,7 @@ export const withColorScheme: Story = () => {
   return (
     <>
       {colorSchemes.map((colorScheme) => (
-        <Table key={colorScheme} variant="striped" colorScheme={colorScheme} />
+        <Table key={colorScheme} colorScheme={colorScheme} variant="striped" />
       ))}
     </>
   )
@@ -537,18 +537,18 @@ export const withStickyHeader: Story = () => {
   return (
     <TableContainer w="full">
       <ScrollArea
-        w="full"
         h="xs"
+        w="full"
         onScrollPositionChange={({ y }) => setIsScrolled(y !== 0)}
       >
         <NativeTable>
           <Thead
+            bg={["white", "black"]}
+            boxShadow={isScrolled ? "md" : undefined}
             position="sticky"
             top={0}
-            bg={["white", "black"]}
-            transitionProperty="box-shadow"
             transitionDuration="slow"
-            boxShadow={isScrolled ? "md" : undefined}
+            transitionProperty="box-shadow"
           >
             <Tr>
               <Th>Name</Th>
@@ -564,7 +564,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.25rem</Td>
               <Td isNumeric>4px</Td>
               <Td>
-                <Box maxW="0.25rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="0.25rem" />
               </Td>
             </Tr>
             <Tr>
@@ -572,7 +572,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>0.5rem</Td>
               <Td isNumeric>8px</Td>
               <Td>
-                <Box maxW="0.5rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="0.5rem" />
               </Td>
             </Tr>
             <Tr>
@@ -580,7 +580,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1rem</Td>
               <Td isNumeric>16px</Td>
               <Td>
-                <Box maxW="1rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="1rem" />
               </Td>
             </Tr>
             <Tr>
@@ -588,7 +588,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>1.5rem</Td>
               <Td isNumeric>24px</Td>
               <Td>
-                <Box maxW="1.5rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="1.5rem" />
               </Td>
             </Tr>
             <Tr>
@@ -596,7 +596,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>2rem</Td>
               <Td isNumeric>32px</Td>
               <Td>
-                <Box maxW="2rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="2rem" />
               </Td>
             </Tr>
             <Tr>
@@ -604,7 +604,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>3rem</Td>
               <Td isNumeric>48px</Td>
               <Td>
-                <Box maxW="3rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="3rem" />
               </Td>
             </Tr>
             <Tr>
@@ -612,7 +612,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>4.5rem</Td>
               <Td isNumeric>72px</Td>
               <Td>
-                <Box maxW="4.5rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="4.5rem" />
               </Td>
             </Tr>
             <Tr>
@@ -620,7 +620,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>6rem</Td>
               <Td isNumeric>96px</Td>
               <Td>
-                <Box maxW="6rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="6rem" />
               </Td>
             </Tr>
             <Tr>
@@ -628,7 +628,7 @@ export const withStickyHeader: Story = () => {
               <Td isNumeric>10rem</Td>
               <Td isNumeric>160px</Td>
               <Td>
-                <Box maxW="10rem" h="9xs" bg="red.500" />
+                <Box bg="red.500" h="9xs" maxW="10rem" />
               </Td>
             </Tr>
             {Object.entries(defaultTheme.spaces)
@@ -643,7 +643,7 @@ export const withStickyHeader: Story = () => {
                     <Td isNumeric>{value}</Td>
                     <Td isNumeric>{`${parseFloat(value) * 16}px`}</Td>
                     <Td>
-                      <Box maxW={value} h="9xs" bg="green.500" />
+                      <Box bg="green.500" h="9xs" maxW={value} />
                     </Td>
                   </Tr>
                 )

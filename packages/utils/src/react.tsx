@@ -2,25 +2,39 @@ import * as React from "react"
 import { isNumber, isObject, isString } from "./assertion"
 
 export type MaybeRenderProp<Y> =
-  | React.ReactNode
   | ((props: Y) => React.ReactNode)
+  | React.ReactNode
 
-interface Options<ContextType extends any = any> {
-  strict?: boolean
-  errorMessage?: string
+interface Options<Y = any> {
   name?: string
-  defaultValue?: ContextType
+  defaultValue?: Y
+  errorMessage?: string
+  strict?: boolean
 }
 
-type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
+type CreateContextReturn<Y> = [React.Provider<Y>, () => Y, React.Context<Y>]
 
-export function createContext<ContextType extends any = any>({
-  strict = true,
-  errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
+export function createContext<Y = any>(options: {
+  name?: string
+  defaultValue?: Y
+  errorMessage?: string
+  strict?: true
+}): CreateContextReturn<Y>
+
+export function createContext<Y = any>(options: {
+  name?: string
+  defaultValue?: Y
+  errorMessage?: string
+  strict?: false
+}): CreateContextReturn<undefined | Y>
+
+export function createContext<Y = any>({
   name,
   defaultValue,
-}: Options<ContextType> = {}) {
-  const Context = React.createContext<ContextType | undefined>(defaultValue)
+  errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
+  strict = true,
+}: Options<Y> = {}) {
+  const Context = React.createContext<undefined | Y>(defaultValue)
 
   Context.displayName = name
 
@@ -30,21 +44,19 @@ export function createContext<ContextType extends any = any>({
     if (!context && strict) {
       const error = new Error(errorMessage)
       error.name = "ContextError"
-      Error.captureStackTrace?.(error, useContext)
+      Error.captureStackTrace(error, useContext)
       throw error
     }
 
     return context
   }
 
-  return [
-    Context.Provider,
-    useContext,
-    Context,
-  ] as CreateContextReturn<ContextType>
+  return [Context.Provider, useContext, Context] as CreateContextReturn<
+    undefined | Y
+  >
 }
 
-export const useSafeLayoutEffect = Boolean(globalThis?.document)
+export const useSafeLayoutEffect = Boolean(globalThis.document)
   ? React.useLayoutEffect
   : React.useEffect
 
@@ -54,13 +66,13 @@ export function useUnmountEffect(callback: () => void) {
 }
 
 export interface UseIsMountedProps {
-  rerender?: boolean
   delay?: number
+  rerender?: boolean
 }
 
 export function useIsMounted({
-  rerender = false,
   delay = 0,
+  rerender = false,
 }: UseIsMountedProps = {}): [() => boolean, boolean] {
   const isMountedRef = React.useRef(false)
   const [isMounted, setIsMounted] = React.useState(false)
@@ -122,7 +134,7 @@ export function isSomeElement(child: any, type: any): boolean {
 
 export function findChild(
   children: React.ReactElement[],
-  ...types: (string | React.JSXElementConstructor<any>)[]
+  ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement | undefined {
   const child = children.find((child) =>
     types.some((type) => isSomeElement(child, type)),
@@ -133,7 +145,7 @@ export function findChild(
 
 export function findChildren(
   children: React.ReactElement[],
-  ...types: (string | React.JSXElementConstructor<any>)[]
+  ...types: (React.JSXElementConstructor<any> | string)[]
 ): [React.ReactElement | undefined, ...React.ReactElement[]] {
   const child = children.find((child) =>
     types.some((type) => isSomeElement(child, type)),
@@ -156,7 +168,7 @@ export function findChildren(
 
 export function includesChildren(
   children: React.ReactElement[],
-  ...types: (string | React.JSXElementConstructor<any>)[]
+  ...types: (React.JSXElementConstructor<any> | string)[]
 ): boolean {
   return children.some((child) => {
     if (types.some((type) => isSomeElement(child, type))) return true
@@ -169,7 +181,7 @@ export function includesChildren(
 
 export function omitChildren(
   children: React.ReactElement[],
-  ...types: (string | React.JSXElementConstructor<any>)[]
+  ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement[] {
   return children.filter((child) =>
     types.every((type) => !isSomeElement(child, type)),
@@ -178,7 +190,7 @@ export function omitChildren(
 
 export function pickChildren(
   children: React.ReactElement[],
-  ...types: (string | React.JSXElementConstructor<any>)[]
+  ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement[] {
   return children.filter((child) =>
     types.every((type) => isSomeElement(child, type)),
@@ -189,16 +201,13 @@ export function cx(...classNames: (string | undefined)[]) {
   return classNames.filter(Boolean).join(" ")
 }
 
-type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T> | React.LegacyRef<T>
+type ReactRef<T> = React.LegacyRef<T> | React.MutableRefObject<T> | React.Ref<T>
 
 export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
 }
 
-export function assignRef<T extends any = any>(
-  ref: ReactRef<T> | undefined,
-  value: T,
-) {
+export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
   if (ref == null) return
 
   if (typeof ref === "function") {
@@ -215,19 +224,17 @@ export function assignRef<T extends any = any>(
   }
 }
 
-export function mergeRefs<T extends any = any>(
-  ...refs: (ReactRef<T> | null | undefined)[]
+export function mergeRefs<T = any>(
+  ...refs: (null | ReactRef<T> | undefined)[]
 ) {
-  return function (node: T | null) {
+  return function (node: null | T) {
     return refs.forEach((ref) => {
       assignRef(ref, node)
     })
   }
 }
 
-export function useMergeRefs<T extends any = any>(
-  ...refs: (ReactRef<T> | undefined)[]
-) {
+export function useMergeRefs<T = any>(...refs: (ReactRef<T> | undefined)[]) {
   return React.useMemo(() => mergeRefs(...refs), [refs])
 }
 
@@ -301,24 +308,24 @@ export function useAsync<T extends FunctionReturningPromise>(
 
 export type AsyncState<T> =
   | {
+      error: Error
+      loading: false
+      value?: undefined
+    }
+  | {
       loading: boolean
       error?: undefined
       value?: undefined
     }
   | {
+      loading: false
+      value: T
+      error?: undefined
+    }
+  | {
       loading: true
       error?: Error | undefined
       value?: T
-    }
-  | {
-      loading: false
-      error: Error
-      value?: undefined
-    }
-  | {
-      loading: false
-      error?: undefined
-      value: T
     }
 
 export type PromiseType<P extends Promise<any>> =
@@ -351,7 +358,7 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
       return func(...args).then(
         (value) => {
           if (isMounted() && callId === lastCallId.current)
-            setState({ value, loading: false })
+            setState({ loading: false, value })
 
           return value
         },
@@ -370,9 +377,9 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
   return [state, callback as unknown as T]
 }
 
-export type AsyncStateRetry<T> = AsyncState<T> & {
+export type AsyncStateRetry<T> = {
   retry(): void
-}
+} & AsyncState<T>
 
 export function useAsyncRetry<T>(
   func: () => Promise<T>,
@@ -393,7 +400,7 @@ export function useAsyncRetry<T>(
   return { ...state, retry }
 }
 
-let createIdCounter: number = 0
+let createIdCounter = 0
 
 export function createId(prefix: string) {
   return `${prefix}-${++createIdCounter}-${new Date().getTime()}`

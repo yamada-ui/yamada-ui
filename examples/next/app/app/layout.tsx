@@ -1,14 +1,14 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import {
   colorModeManager,
-  themeSchemeManager,
-  UIProvider,
   ColorModeScript,
+  themeSchemeManager,
   ThemeSchemeScript,
+  UIProvider,
 } from '@yamada-ui/react'
-import { ReactNode } from 'react'
-import { theme, config } from 'theme'
+import { config, theme } from 'theme'
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -16,21 +16,21 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <head>
         <title>Next.js App - Yamada UI</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.svg' />
+        <link href='/favicon.svg' rel='icon' />
       </head>
 
       <body>
-        <ColorModeScript type='cookie' nonce='testing' initialColorMode={config.initialColorMode} />
+        <ColorModeScript type='cookie' initialColorMode={config.initialColorMode} nonce='testing' />
         <ThemeSchemeScript
           type='cookie'
-          nonce='testing'
           initialThemeScheme={config.initialThemeScheme}
+          nonce='testing'
         />
 
         <UIProvider
+          colorModeManager={colorModeManager.cookieStorage}
           config={config}
           theme={theme}
-          colorModeManager={colorModeManager.cookieStorage}
           themeSchemeManager={themeSchemeManager.cookieStorage}
         >
           {children}

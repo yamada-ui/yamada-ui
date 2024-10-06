@@ -1,15 +1,15 @@
-import { a11y, render, screen } from "@yamada-ui/test"
 import type { FC } from "react"
 import type { NativeTableProps } from "../src"
+import { a11y, render, screen } from "@yamada-ui/test"
 import {
   NativeTable,
-  TableContainer,
   TableCaption,
-  Thead,
-  Tfoot,
-  Th,
+  TableContainer,
   Tbody,
   Td,
+  Tfoot,
+  Th,
+  Thead,
   Tr,
 } from "../src"
 
@@ -24,7 +24,7 @@ describe("<NativeTable />", () => {
       <TableContainer>
         <NativeTable {...rest}>
           {withCaption ? (
-            <TableCaption data-testid="TableCaption" placement="top">
+            <TableCaption placement="top" data-testid="TableCaption">
               Table Caption
             </TableCaption>
           ) : null}
@@ -59,15 +59,15 @@ describe("<NativeTable />", () => {
     await a11y(<Table />)
   })
 
-  test("should render a table with provided props", async () => {
+  test("should render a table with provided props", () => {
     render(
       <Table
-        variant="striped"
         colorScheme="gray"
-        data-testid="Table"
-        withColumnBorders
-        withBorder
         highlightOnHover
+        variant="striped"
+        withBorder
+        withColumnBorders
+        data-testid="Table"
       />,
     )
     expect(screen.getByTestId("Table")).toHaveStyle({

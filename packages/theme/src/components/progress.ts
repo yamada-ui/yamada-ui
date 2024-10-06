@@ -4,16 +4,13 @@ import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Progress: ComponentMultiStyle<"Progress"> = {
   baseStyle: {
-    track: {
-      bg: "border",
-    },
     filledTrack: ({
-      theme: t,
       colorMode: m,
       colorScheme: c = "primary",
+      filledTrackColor: f,
       hasStripe,
       isAnimation,
-      filledTrackColor: f,
+      theme: t,
     }) => {
       hasStripe = !isAnimation && hasStripe
 
@@ -46,12 +43,15 @@ export const Progress: ComponentMultiStyle<"Progress"> = {
           : undefined
 
       return {
-        transitionProperty: "common",
-        transitionDuration: "slow",
         bgImage,
+        transitionDuration: "slow",
+        transitionProperty: "common",
         ...(hasStripe ? { bgSize: "1rem 1rem" } : {}),
         ...(!isAnimation ? { bgColor } : {}),
       }
+    },
+    track: {
+      bg: "border",
     },
   },
 
@@ -79,7 +79,7 @@ export const Progress: ComponentMultiStyle<"Progress"> = {
   },
 
   defaultProps: {
-    size: "md",
     colorScheme: "primary",
+    size: "md",
   },
 }

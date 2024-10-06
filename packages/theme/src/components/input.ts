@@ -5,234 +5,234 @@ import { getColor, isArray } from "@yamada-ui/utils"
 export const Input: ComponentMultiStyle<"Input"> = {
   baseStyle: {
     container: {},
-    field: {
-      width: "100%",
-      minWidth: 0,
-      outline: 0,
-      position: "relative",
-      appearance: "none",
-      transitionProperty: "common",
-      transitionDuration: "normal",
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-      },
-    },
     element: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
     },
-  },
-
-  variants: {
-    outline: ({
-      theme: t,
-      colorMode: m,
-      focusBorderColor: fc = "focus",
-      errorBorderColor: ec = ["danger.500", "danger.400"],
-    }) => {
-      const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
-        : getColor(fc, fc)(t, m)
-      const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
-        : getColor(ec, ec)(t, m)
-
-      return {
-        field: {
-          border: "1px solid",
-          borderColor: "inherit",
-          bg: "inherit",
-          _hover: {
-            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
-          },
-          _readOnly: {
-            boxShadow: "none !important",
-            userSelect: "all",
-          },
-          _invalid: {
-            borderColor: [errorBorderColor, errorBorderColor],
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
-          },
-          _active: {
-            borderColor: [focusBorderColor, focusBorderColor],
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-          _focusVisible: {
-            zIndex: "yamcha",
-            borderColor: [focusBorderColor, focusBorderColor],
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-        },
-        addon: {
-          border: "1px solid",
-          borderColor: ["inherit", "whiteAlpha.50"],
-          bg: ["blackAlpha.300", "whiteAlpha.300"],
-        },
-      }
-    },
-    filled: ({
-      theme: t,
-      colorMode: m,
-      focusBorderColor: fc = "focus",
-      errorBorderColor: ec = ["danger.500", "danger.400"],
-    }) => {
-      const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
-        : getColor(fc, fc)(t, m)
-      const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
-        : getColor(ec, ec)(t, m)
-
-      return {
-        field: {
-          border: "2px solid",
-          borderColor: "transparent",
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _hover: {
-            bg: ["blackAlpha.100", "whiteAlpha.100"],
-          },
-          _readOnly: {
-            boxShadow: "none !important",
-            userSelect: "all",
-          },
-          _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
-          },
-          _active: {
-            bg: "transparent",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-          _focusVisible: {
-            bg: "transparent",
-            borderColor: focusBorderColor,
-            boxShadow: `0 0 0 1px ${focusBorderColor}`,
-          },
-        },
-        addon: {
-          border: "2px solid transparent",
-          bg: ["blackAlpha.300", "whiteAlpha.300"],
-        },
-      }
-    },
-    flushed: ({
-      theme: t,
-      colorMode: m,
-      focusBorderColor: fc = "focus",
-      errorBorderColor: ec = ["danger.500", "danger.400"],
-    }) => {
-      const focusBorderColor = isArray(fc)
-        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
-        : getColor(fc, fc)(t, m)
-      const errorBorderColor = isArray(ec)
-        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
-        : getColor(ec, ec)(t, m)
-
-      return {
-        field: {
-          borderBottom: "1px solid",
-          borderColor: "inherit",
-          rounded: "0",
-          px: "0",
-          bg: "transparent",
-          _hover: {
-            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
-          },
-          _readOnly: {
-            boxShadow: "none !important",
-            userSelect: "all",
-          },
-          _invalid: {
-            borderColor: [errorBorderColor, errorBorderColor],
-            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
-          },
-          _active: {
-            borderColor: [focusBorderColor, focusBorderColor],
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
-          },
-          _focusVisible: {
-            borderColor: [focusBorderColor, focusBorderColor],
-            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
-          },
-        },
-        addon: {
-          borderBottom: "1px solid",
-          borderColor: "inherit",
-          bg: "transparent",
-          rounded: "0",
-        },
-      }
-    },
-    unstyled: {
-      field: {
-        bg: "transparent",
-        minH: "auto",
-        px: "0",
+    field: {
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
       },
-      addon: {
-        bg: "transparent",
-        minH: "auto",
-        px: "0",
-      },
+      appearance: "none",
+      minWidth: 0,
+      outline: 0,
+      position: "relative",
+      transitionDuration: "normal",
+      transitionProperty: "common",
+      width: "100%",
     },
   },
 
   sizes: {
     xs: {
-      field: {
-        fontSize: "xs",
-        px: "2",
-        minH: "6",
-        rounded: "sm",
-      },
       addon: {
         fontSize: "xs",
-        px: "2",
         minH: "6",
+        px: "2",
+        rounded: "sm",
+      },
+      field: {
+        fontSize: "xs",
+        minH: "6",
+        px: "2",
         rounded: "sm",
       },
     },
     sm: {
-      field: {
-        fontSize: "sm",
-        px: "2",
-        minH: "8",
-        rounded: "md",
-      },
       addon: {
         fontSize: "sm",
-        px: "2",
         minH: "8",
+        px: "2",
+        rounded: "md",
+      },
+      field: {
+        fontSize: "sm",
+        minH: "8",
+        px: "2",
         rounded: "md",
       },
     },
     md: {
-      field: {
-        fontSize: "md",
-        px: "3",
-        minH: "10",
-        rounded: "md",
-      },
       addon: {
         fontSize: "md",
-        px: "3",
         minH: "10",
+        px: "3",
+        rounded: "md",
+      },
+      field: {
+        fontSize: "md",
+        minH: "10",
+        px: "3",
         rounded: "md",
       },
     },
     lg: {
-      field: {
-        fontSize: "lg",
-        px: "4",
-        minH: "12",
-        rounded: "md",
-      },
       addon: {
         fontSize: "lg",
-        px: "4",
         minH: "12",
+        px: "4",
         rounded: "md",
+      },
+      field: {
+        fontSize: "lg",
+        minH: "12",
+        px: "4",
+        rounded: "md",
+      },
+    },
+  },
+
+  variants: {
+    filled: ({
+      colorMode: m,
+      errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        addon: {
+          bg: ["blackAlpha.300", "whiteAlpha.300"],
+          border: "2px solid transparent",
+        },
+        field: {
+          _active: {
+            bg: "transparent",
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+          _focusVisible: {
+            bg: "transparent",
+            borderColor: focusBorderColor,
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+          _hover: {
+            bg: ["blackAlpha.100", "whiteAlpha.100"],
+          },
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          border: "2px solid",
+          borderColor: "transparent",
+        },
+      }
+    },
+    flushed: ({
+      colorMode: m,
+      errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        addon: {
+          bg: "transparent",
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          rounded: "0",
+        },
+        field: {
+          _active: {
+            borderColor: [focusBorderColor, focusBorderColor],
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: [focusBorderColor, focusBorderColor],
+            boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
+          },
+          _hover: {
+            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
+          },
+          _invalid: {
+            borderColor: [errorBorderColor, errorBorderColor],
+            boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
+          },
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          bg: "transparent",
+          borderBottom: "1px solid",
+          borderColor: "inherit",
+          px: "0",
+          rounded: "0",
+        },
+      }
+    },
+    outline: ({
+      colorMode: m,
+      errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
+    }) => {
+      const focusBorderColor = isArray(fc)
+        ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
+        : getColor(fc, fc)(t, m)
+      const errorBorderColor = isArray(ec)
+        ? mode(getColor(ec[0], ec[0])(t, m), getColor(ec[1], ec[1])(t, m))(m)
+        : getColor(ec, ec)(t, m)
+
+      return {
+        addon: {
+          bg: ["blackAlpha.300", "whiteAlpha.300"],
+          border: "1px solid",
+          borderColor: ["inherit", "whiteAlpha.50"],
+        },
+        field: {
+          _active: {
+            borderColor: [focusBorderColor, focusBorderColor],
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+          },
+          _focusVisible: {
+            borderColor: [focusBorderColor, focusBorderColor],
+            boxShadow: `0 0 0 1px ${focusBorderColor}`,
+            zIndex: "yamcha",
+          },
+          _hover: {
+            borderColor: ["blackAlpha.500", "whiteAlpha.400"],
+          },
+          _invalid: {
+            borderColor: [errorBorderColor, errorBorderColor],
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
+          _readOnly: {
+            boxShadow: "none !important",
+            userSelect: "all",
+          },
+          bg: "inherit",
+          border: "1px solid",
+          borderColor: "inherit",
+        },
+      }
+    },
+    unstyled: {
+      addon: {
+        bg: "transparent",
+        minH: "auto",
+        px: "0",
+      },
+      field: {
+        bg: "transparent",
+        minH: "auto",
+        px: "0",
       },
     },
   },

@@ -1,27 +1,32 @@
 import type {
-  FC,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   ColorModeToken,
   CSS,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentMultiStyle,
+  CSSUIObject,
+  FC,
+  HTMLUIProps,
+  ThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { LoadingProps } from "@yamada-ui/loading"
+import type { FadeProps } from "@yamada-ui/transitions"
+import type { Merge } from "@yamada-ui/utils"
+import type { ForwardedRef, PropsWithChildren } from "react"
+import type {
+  Accept,
+  DropzoneOptions as ReactDropzoneOptions,
+} from "react-dropzone-esm"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading } from "@yamada-ui/loading"
-import type { FadeProps } from "@yamada-ui/transitions"
 import { Fade } from "@yamada-ui/transitions"
-import type { Merge } from "@yamada-ui/utils"
 import {
   assignRef,
   createContext,
@@ -30,20 +35,14 @@ import {
   isArray,
   splitObject,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, PropsWithChildren } from "react"
-import { Fragment } from "react"
-import type {
-  Accept,
-  DropzoneOptions as ReactDropzoneOptions,
-} from "react-dropzone-esm"
 import { useDropzone } from "react-dropzone-esm"
 
 interface DropzoneContext {
-  isLoading?: boolean
   isDragAccept: boolean
-  isDragReject: boolean
   isDragIdle: boolean
-  styles: { [key: string]: CSSUIObject }
+  isDragReject: boolean
+  styles: { [key: string]: CSSUIObject | undefined }
+  isLoading?: boolean
 }
 
 const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
@@ -53,13 +52,17 @@ const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
 
 interface DropzoneOptions {
   /**
-   * The border color when the input is focused.
+   * File types to accept.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  accept?: Accept | string[]
   /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * If `true`, display the dropzone loading icon.
    *
@@ -67,21 +70,17 @@ interface DropzoneOptions {
    */
   isLoading?: boolean
   /**
-   * Props for dropzone overlay element.
+   * Ref to a open function.
    */
-  overlayProps?: FadeProps
+  openRef?: ForwardedRef<() => undefined | void>
   /**
    * Props for dropzone loading icon element.
    */
   loadingProps?: LoadingProps
   /**
-   * File types to accept.
+   * Props for dropzone overlay element.
    */
-  accept?: Accept | string[]
-  /**
-   * Ref to a open function.
-   */
-  openRef?: ForwardedRef<() => void | undefined>
+  overlayProps?: FadeProps
 }
 
 export interface DropzoneProps
@@ -101,30 +100,30 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     id,
     name,
     className,
-    isLoading,
-    overlayProps,
-    loadingProps,
-    openRef,
     accept,
-    onDrop,
-    onDropAccepted,
-    onDropRejected,
-    multiple,
-    maxSize,
-    maxFiles,
     autoFocus,
+    children,
+    isLoading,
+    maxFiles,
+    maxSize,
+    multiple,
     noClick,
     noDrag,
     noDragEventsBubbling,
     noKeyboard,
+    openRef,
+    preventDropOnDocument,
+    useFsAccessApi,
+    loadingProps,
+    overlayProps,
     onDragEnter,
     onDragLeave,
     onDragOver,
+    onDrop,
+    onDropAccepted,
+    onDropRejected,
     onFileDialogCancel,
     onFileDialogOpen,
-    preventDropOnDocument,
-    useFsAccessApi,
-    children,
     ...rest
   } = useFormControlProps(omitThemeProps(mergedProps))
 
@@ -135,30 +134,30 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     formControlProperties,
   )
 
-  const { getRootProps, getInputProps, isDragAccept, isDragReject, open } =
+  const { isDragAccept, isDragReject, open, getInputProps, getRootProps } =
     useDropzone({
-      disabled,
       accept: isArray(accept)
         ? accept.reduce((prev, current) => ({ ...prev, [current]: [] }), {})
         : accept,
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      multiple,
-      maxSize,
-      maxFiles,
       autoFocus,
+      disabled,
+      maxFiles,
+      maxSize,
+      multiple,
       noClick,
       noDrag,
       noDragEventsBubbling,
       noKeyboard,
+      preventDropOnDocument,
+      useFsAccessApi,
       onDragEnter,
       onDragLeave,
       onDragOver,
+      onDrop,
+      onDropAccepted,
+      onDropRejected,
       onFileDialogCancel,
       onFileDialogOpen,
-      preventDropOnDocument,
-      useFsAccessApi,
     })
 
   assignRef(openRef, open)
@@ -166,16 +165,16 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const isDragIdle = !isDragAccept && !isDragReject
 
   const css: CSSUIObject = {
-    position: "relative",
+    alignItems: "center",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    position: "relative",
     ...styles.container,
   }
 
   return (
     <DropzoneProvider
-      value={{ isLoading, isDragAccept, isDragReject, isDragIdle, styles }}
+      value={{ isDragAccept, isDragIdle, isDragReject, isLoading, styles }}
     >
       <ui.div
         className={cx("ui-dropzone", className)}
@@ -183,14 +182,15 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
         {...containerProps}
         {...getRootProps({})}
         data-accept={dataAttr(isDragAccept)}
-        data-reject={dataAttr(isDragReject)}
         data-idle={dataAttr(isDragIdle)}
         data-loading={dataAttr(isLoading)}
+        data-reject={dataAttr(isDragReject)}
       >
-        <LoadingOverlay loadingProps={loadingProps} {...overlayProps} />
+        <DropzoneLoadingOverlay loadingProps={loadingProps} {...overlayProps} />
+
         <ui.input
-          ref={ref}
           id={id}
+          ref={ref}
           name={name}
           {...formControlProps}
           {...getInputProps()}
@@ -204,30 +204,33 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 Dropzone.displayName = "Dropzone"
 Dropzone.__ui__ = "Dropzone"
 
-interface LoadingOverlayProps extends FadeProps {
+interface DropzoneLoadingOverlayProps extends FadeProps {
   loadingProps?: LoadingProps
 }
 
-const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
+const DropzoneLoadingOverlay: FC<DropzoneLoadingOverlayProps> = ({
+  loadingProps,
+  ...rest
+}) => {
   const { isLoading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
+    alignItems: "center",
+    display: "flex",
+    h: "100%",
+    justifyContent: "center",
+    left: 0,
     position: "absolute",
     top: 0,
-    left: 0,
     w: "100%",
-    h: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     ...styles.overlay,
   }
 
   return (
     <Fade
+      className="ui-dropzone__overlay"
       isOpen={isLoading}
       unmountOnExit
-      className="ui-dropzone__overlay"
       __css={css}
       {...rest}
     >
@@ -240,13 +243,13 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   )
 }
 
-LoadingOverlay.displayName = "LoadingOverlay"
-LoadingOverlay.__ui__ = "LoadingOverlay"
+DropzoneLoadingOverlay.displayName = "DropzoneLoadingOverlay"
+DropzoneLoadingOverlay.__ui__ = "DropzoneLoadingOverlay"
 
 export const DropzoneAccept: FC<PropsWithChildren> = ({ children }) => {
   const { isDragAccept } = useDropzoneContext()
 
-  return isDragAccept ? <Fragment>{children}</Fragment> : null
+  return isDragAccept ? children : null
 }
 
 DropzoneAccept.displayName = "DropzoneAccept"
@@ -255,7 +258,7 @@ DropzoneAccept.__ui__ = "DropzoneAccept"
 export const DropzoneReject: FC<PropsWithChildren> = ({ children }) => {
   const { isDragReject } = useDropzoneContext()
 
-  return isDragReject ? <Fragment>{children}</Fragment> : null
+  return isDragReject ? children : null
 }
 
 DropzoneReject.displayName = "DropzoneReject"
@@ -264,7 +267,7 @@ DropzoneReject.__ui__ = "DropzoneReject"
 export const DropzoneIdle: FC<PropsWithChildren> = ({ children }) => {
   const { isDragIdle } = useDropzoneContext()
 
-  return isDragIdle ? <Fragment>{children}</Fragment> : null
+  return isDragIdle ? children : null
 }
 
 DropzoneIdle.displayName = "DropzoneIdle"

@@ -1,8 +1,8 @@
-import { fixupPluginRules } from "@eslint/compat"
 import type { Linter } from "eslint"
+import { fixupPluginRules } from "@eslint/compat"
 import { flatConfigs } from "eslint-plugin-import"
-import pluginImportReplace from "eslint-plugin-import-replace"
-import pluginUnusedImports from "eslint-plugin-unused-imports"
+import importReplacePlugin from "eslint-plugin-import-replace"
+import unusedImportsPlugin from "eslint-plugin-unused-imports"
 import { sharedFiles, sharedTestFiles } from "./shared"
 
 export const importConfigArray: Linter.Config[] = [
@@ -13,10 +13,7 @@ export const importConfigArray: Linter.Config[] = [
       import: fixupPluginRules(flatConfigs.recommended.plugins.import),
     },
     rules: {
-      ...flatConfigs.recommended.rules,
-      "import/order": ["error", { alphabetize: { order: "asc" } }],
-      "import/named": "off",
-      "import/no-named-as-default-member": "off",
+      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     },
     settings: {
       "import/parsers": {
@@ -33,8 +30,8 @@ export const importConfigArray: Linter.Config[] = [
         ],
       },
       "import/resolver": {
-        typescript: true,
         node: true,
+        typescript: true,
       },
     },
   },
@@ -42,7 +39,7 @@ export const importConfigArray: Linter.Config[] = [
     name: "eslint/import/replace",
     files: sharedTestFiles,
     plugins: {
-      "import-replace": pluginImportReplace,
+      "import-replace": importReplacePlugin,
     },
     rules: {
       "import-replace/import-replace": [
@@ -58,7 +55,7 @@ export const importConfigArray: Linter.Config[] = [
   },
   {
     plugins: {
-      "unused-imports": pluginUnusedImports,
+      "unused-imports": unusedImportsPlugin,
     },
     rules: {
       "unused-imports/no-unused-imports": "error",

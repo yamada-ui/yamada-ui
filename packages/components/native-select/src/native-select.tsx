@@ -1,12 +1,17 @@
-import type { FC, CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-  layoutStyleProperties,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type {
+  DetailedHTMLProps,
+  OptionHTMLAttributes,
+  ReactElement,
+} from "react"
+import {
+  forwardRef,
+  layoutStyleProperties,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -15,17 +20,12 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import {
   createContext,
   cx,
-  splitObject,
   getValidChildren,
   isValidElement,
-  pickObject,
   omitObject,
+  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
-import type {
-  DetailedHTMLProps,
-  OptionHTMLAttributes,
-  ReactElement,
-} from "react"
 import { cloneElement } from "react"
 
 interface NativeSelectBaseItem
@@ -34,7 +34,7 @@ interface NativeSelectBaseItem
       OptionHTMLAttributes<HTMLOptionElement>,
       HTMLOptionElement
     >,
-    "label" | "children" | "value"
+    "children" | "label" | "value"
   > {
   label?: string
 }
@@ -57,7 +57,7 @@ export interface NativeSelectItem
     NativeSelectItemWithItems {}
 
 interface NativeSelectContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 const [NativeSelectProvider, useNativeSelect] =
@@ -67,6 +67,14 @@ const [NativeSelectProvider, useNativeSelect] =
   })
 
 interface NativeSelectOptions {
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If provided, generate options based on items.
    *
@@ -83,14 +91,6 @@ interface NativeSelectOptions {
    * @default true
    */
   placeholderInOptions?: boolean
-  /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: string
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: string
   /**
    * Props for container element.
    */
@@ -118,18 +118,18 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
     const {
       className,
       children,
-      placeholderInOptions = true,
       color,
       items = [],
       placeholder,
+      placeholderInOptions = true,
       containerProps,
       iconProps,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
     const {
       "aria-readonly": _ariaReadonly,
-      onFocus: _onFocus,
       onBlur: _onBlur,
+      onFocus: _onFocus,
       ...formControlProps
     } = pickObject(rest, formControlProperties)
     const [{ h, height, minH, minHeight, ...layoutProps }, selectProps] =
@@ -149,7 +149,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
               </NativeOption>
             )
           } else if ("items" in item) {
-            const { label, items = [], ...props } = item
+            const { items = [], label, ...props } = item
 
             return (
               <NativeOptionGroup key={i} label={label} {...props}>
@@ -170,10 +170,10 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
         <ui.div
           className="ui-select"
           __css={{
+            color,
+            h: "fit-content",
             position: "relative",
             w: "100%",
-            h: "fit-content",
-            color,
             ...styles.container,
           }}
           {...layoutProps}
@@ -184,15 +184,15 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
             ref={ref}
             className={cx("ui-select__field", className)}
             __css={{
-              pe: "2rem",
               h: h ?? height,
               minH: minH ?? minHeight,
+              pe: "2rem",
               ...styles.field,
             }}
             {...selectProps}
           >
             {placeholder ? (
-              <NativeOption value="" hidden={!placeholderInOptions}>
+              <NativeOption hidden={!placeholderInOptions} value="">
                 {placeholder}
               </NativeOption>
             ) : null}
@@ -219,11 +219,11 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   const styles = useNativeSelect()
 
   const css: CSSUIObject = {
-    position: "absolute",
-    display: "inline-flex",
     alignItems: "center",
+    display: "inline-flex",
     justifyContent: "center",
     pointerEvents: "none",
+    position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",
     ...styles.icon,
@@ -233,13 +233,13 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
 
   const cloneChildren = validChildren.map((child) =>
     cloneElement(child, {
+      style: {
+        color: "currentColor",
+        height: "1em",
+        width: "1em",
+      },
       focusable: false,
       "aria-hidden": true,
-      style: {
-        width: "1em",
-        height: "1em",
-        color: "currentColor",
-      },
     }),
   )
 

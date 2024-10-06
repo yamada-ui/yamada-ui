@@ -1,12 +1,12 @@
-import { ThemeContext } from "@emotion/react"
 import type { Dict } from "@yamada-ui/utils"
-import { flattenObject, isObject, merge } from "@yamada-ui/utils"
-import { useContext, useMemo } from "react"
 import type { StyleConfig } from "../config"
 import type { StyleProperty } from "../styles"
-import { styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { CSSUIObject, CSSUIProps } from "./css.types"
+import { ThemeContext } from "@emotion/react"
+import { flattenObject, isObject, merge } from "@yamada-ui/utils"
+import { useContext, useMemo } from "react"
+import { styles } from "../styles"
 
 type Format<Y> = (name: Y, index: number) => string
 type Variable = Required<CSSUIProps>["vars"][number]
@@ -58,7 +58,7 @@ export const createVars =
 
         if (!variable) return
 
-        const additionalValue = rest.reduceRight<string | Dict>(
+        const additionalValue = rest.reduceRight<Dict | string>(
           (acc, key) => ({ [key]: acc }),
           isObject(value) ? value : { base: value },
         ) as Dict
@@ -72,7 +72,7 @@ export const createVars =
           styles[name as StyleProperty]
         const token = isObject(style) ? style.token : undefined
 
-        const additionalValue = rest.reduceRight<string | Dict>(
+        const additionalValue = rest.reduceRight<Dict | string>(
           (acc, key) => ({ [key]: acc }),
           isObject(value) ? value : { base: value },
         ) as Dict

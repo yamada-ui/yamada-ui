@@ -1,13 +1,13 @@
+import type { ThemeSemantics, ThemeTokens } from "@yamada-ui/react"
 import type { FC } from "react"
-import type { ThemeTokens, ThemeSemantics } from "@yamada-ui/react"
 import {
-  UIProvider,
-  extendTheme,
   Box,
-  useColorMode,
   Center,
-  Image,
+  extendTheme,
   extendToken,
+  Image,
+  UIProvider,
+  useColorMode,
 } from "@yamada-ui/react"
 
 export default {
@@ -27,11 +27,11 @@ export const useColorModeToken = () => {
     <UIProvider theme={theme}>
       <Box
         bg="primary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
-        transitionProperty="all"
         transitionDuration="normal"
+        transitionProperty="all"
       >
         The current colorMode is "{colorMode}"
       </Box>
@@ -54,9 +54,9 @@ export const useExtendToken = () => {
 export const useSemanticToken = () => {
   const semantics: ThemeSemantics = {
     colors: {
-      primary: "#FF7F0B", // override token primary
-      newPrimary: "red.500",
       extendPrimary: "primary",
+      newPrimary: "red.500",
+      primary: "#FF7F0B", // override token primary
     },
   }
 
@@ -64,15 +64,15 @@ export const useSemanticToken = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Box bg="primary" w="full" p="4" rounded="md" color="white">
+      <Box bg="primary" color="white" p="4" rounded="md" w="full">
         override primary
       </Box>
 
-      <Box bg="newPrimary" w="full" p="4" rounded="md" color="white">
+      <Box bg="newPrimary" color="white" p="4" rounded="md" w="full">
         new primary
       </Box>
 
-      <Box bg="extendPrimary" w="full" p="4" rounded="md" color="white">
+      <Box bg="extendPrimary" color="white" p="4" rounded="md" w="full">
         extend primary
       </Box>
     </UIProvider>
@@ -81,11 +81,11 @@ export const useSemanticToken = () => {
 
 const App: FC = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Image
-        w="full"
         maxW="32rem"
         src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"
+        w="full"
       />
     </Center>
   )

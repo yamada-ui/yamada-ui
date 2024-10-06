@@ -1,5 +1,6 @@
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
-import { Select, Option, OptionGroup } from "../src"
+import { noop } from "@yamada-ui/utils"
+import { Option, OptionGroup, Select } from "../src"
 
 describe("<Select />", () => {
   describe("rendered correctly", () => {
@@ -60,8 +61,8 @@ describe("<Select />", () => {
         <Select
           items={[
             {
-              label: "Numbers",
               items: [{ label: "One", value: "one" }],
+              label: "Numbers",
             },
             {
               label: "Two",
@@ -192,7 +193,7 @@ describe("<Select />", () => {
 
     test("should be readonly", async () => {
       render(
-        <Select placeholder="Numbers" isReadOnly>
+        <Select isReadOnly placeholder="Numbers">
           <Option value="one">One</Option>
           <Option value="two">Two</Option>
         </Select>,
@@ -206,7 +207,7 @@ describe("<Select />", () => {
     test("should be disable option", async () => {
       const { user } = render(
         <Select>
-          <Option value="one" isDisabled>
+          <Option isDisabled value="one">
             One
           </Option>
           <Option value="two">Two</Option>
@@ -297,7 +298,7 @@ describe("<Select />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
+      const { user } = render(<Select defaultValue="option2" items={ITEMS} />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -306,7 +307,7 @@ describe("<Select />", () => {
       await user.keyboard("{Escape>}{ArrowDown>}")
 
       const firstOption = await screen.findByRole("option", {
-        name: ITEMS[1].label,
+        name: ITEMS[1]?.label,
       })
       expect(firstOption).toHaveAttribute("data-focus")
     })
@@ -335,7 +336,7 @@ describe("<Select />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
+      const { user } = render(<Select defaultValue="option2" items={ITEMS} />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -360,7 +361,7 @@ describe("<Select />", () => {
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Space>}")
-      expect(input).toHaveTextContent(ITEMS[0].label)
+      expect(input).toHaveTextContent(ITEMS[0]?.label ?? "")
     })
 
     test("enter keyDown should work correctly", async () => {
@@ -376,7 +377,7 @@ describe("<Select />", () => {
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Enter>}")
-      expect(input).toHaveTextContent(ITEMS[0].label)
+      expect(input).toHaveTextContent(ITEMS[0]?.label ?? "")
     })
 
     test("home keyDown should work correctly", async () => {
@@ -427,18 +428,16 @@ describe("<Select />", () => {
   })
 
   test("correct warnings should be issued when set empty value and placeholder in options", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <Select
-        placeholder="Select numbers"
-        placeholderInOptions={true}
         items={[
           { label: "One", value: "" },
           { label: "Two", value: "" },
         ]}
+        placeholder="Select numbers"
+        placeholderInOptions
       />,
     )
 
@@ -459,12 +458,12 @@ describe("<Select />", () => {
       render(
         <Select
           header={renderHeader()}
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions
         />,
       )
 
@@ -478,12 +477,12 @@ describe("<Select />", () => {
     test("should be displayed properly when NOT present", () => {
       const { container } = render(
         <Select
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions
         />,
       )
 
@@ -504,12 +503,12 @@ describe("<Select />", () => {
       render(
         <Select
           footer={renderFooter()}
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions
         />,
       )
 
@@ -523,12 +522,12 @@ describe("<Select />", () => {
     test("should be displayed properly when NOT present", () => {
       const { container } = render(
         <Select
-          placeholder="Select numbers"
-          placeholderInOptions={true}
           items={[
             { label: "One", value: "" },
             { label: "Two", value: "" },
           ]}
+          placeholder="Select numbers"
+          placeholderInOptions
         />,
       )
 

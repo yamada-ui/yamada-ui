@@ -7,22 +7,22 @@ export default {
 export const after = () => {
   return (
     <Box
-      pos="relative"
+      _after={{
+        bg: "secondary",
+        color: "white",
+        content: "'after'",
+        left: "lg",
+        p: "lg",
+        pos: "absolute",
+        rounded: "lg",
+        top: "lg",
+      }}
       bg="primary"
+      color="white"
       m="lg"
       p="lg"
+      pos="relative"
       rounded="lg"
-      color="white"
-      _after={{
-        content: "'after'",
-        pos: "absolute",
-        top: "lg",
-        left: "lg",
-        bg: "secondary",
-        p: "lg",
-        rounded: "lg",
-        color: "white",
-      }}
     >
       Box
     </Box>
@@ -32,22 +32,22 @@ export const after = () => {
 export const before = () => {
   return (
     <Box
-      pos="relative"
+      _before={{
+        bg: "danger",
+        color: "white",
+        content: "'before'",
+        left: "-lg",
+        p: "lg",
+        pos: "absolute",
+        rounded: "lg",
+        top: "-lg",
+      }}
       bg="warning"
+      color="white"
       m="lg"
       p="lg"
+      pos="relative"
       rounded="lg"
-      color="white"
-      _before={{
-        content: "'before'",
-        pos: "absolute",
-        top: "-lg",
-        left: "-lg",
-        bg: "danger",
-        p: "lg",
-        rounded: "lg",
-        color: "white",
-      }}
     >
       Box
     </Box>
@@ -57,15 +57,15 @@ export const before = () => {
 export const hover = () => {
   return (
     <Box
+      _hover={{ bg: "secondary" }}
       bg="primary"
-      p="md"
-      rounded="md"
       color="white"
       cursor="pointer"
-      transitionProperty="all"
+      p="md"
+      rounded="md"
       transitionDuration="slower"
+      transitionProperty="all"
       transitionTimingFunction="ease-in-out"
-      _hover={{ bg: "secondary" }}
     >
       Please Hover
     </Box>
@@ -75,25 +75,25 @@ export const hover = () => {
 export const group = () => {
   return (
     <VStack
+      _focusVisible={{ boxShadow: "outline" }}
+      borderWidth="1px"
+      outline="0"
+      p="md"
       role="group"
+      rounded="md"
       tabIndex={0}
       w="auto"
-      p="md"
-      borderWidth="1px"
-      rounded="md"
-      outline="0"
-      _focusVisible={{ boxShadow: "outline" }}
     >
       <Text textAlign="center">Focus me!</Text>
 
       <HStack>
-        <Center p="md" _groupFocus={{ color: "success" }}>
+        <Center _groupFocus={{ color: "success" }} p="md">
           1
         </Center>
-        <Center p="md" _groupFocus={{ color: "warning" }}>
+        <Center _groupFocus={{ color: "warning" }} p="md">
           2
         </Center>
-        <Center p="md" _groupFocus={{ color: "danger" }}>
+        <Center _groupFocus={{ color: "danger" }} p="md">
           3
         </Center>
       </HStack>
@@ -105,18 +105,18 @@ export const peer = () => {
   return (
     <HStack>
       <Center
-        data-peer
-        tabIndex={0}
-        p="md"
-        borderWidth="1px"
-        rounded="md"
-        outline="0"
         _focusVisible={{ boxShadow: "outline" }}
+        borderWidth="1px"
+        outline="0"
+        p="md"
+        rounded="md"
+        tabIndex={0}
+        data-peer
       >
         Focus me!
       </Center>
 
-      <Center p="md" bg="primary" rounded="md" _peerFocus={{ bg: "secondary" }}>
+      <Center _peerFocus={{ bg: "secondary" }} bg="primary" p="md" rounded="md">
         Focus the peer
       </Center>
     </HStack>
@@ -130,11 +130,11 @@ export const other = () => {
       {numbers.map((number) => (
         <Center
           key={number}
-          _odd={{ bg: "red.500" }}
           _even={{ bg: "blue.500" }}
+          _odd={{ bg: "red.500" }}
           boxSize="5xs"
-          rounded="md"
           color="white"
+          rounded="md"
         >
           {number}
         </Center>

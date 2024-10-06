@@ -1,28 +1,37 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverContent } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
+import type { ReactNode } from "react"
+import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
+import type { UseYearPickerProps } from "./use-year-picker"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverContent } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { Calendar } from "./calendar"
-import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
 import {
-  DatePickerField,
   DatePickerClearIcon,
+  DatePickerField,
   DatePickerIcon,
 } from "./date-picker"
 import { DatePickerProvider } from "./use-date-picker"
-import type { UseYearPickerProps } from "./use-year-picker"
 import { useYearPicker } from "./use-year-picker"
 
 interface YearPickerOptions {
+  children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If `true`, display the year picker clear icon.
    *
@@ -30,13 +39,9 @@ interface YearPickerOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * Props for year picker clear icon element.
    */
-  focusBorderColor?: string
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: string
+  clearIconProps?: DatePickerIconProps
   /**
    * Props for year picker container element.
    */
@@ -48,19 +53,15 @@ interface YearPickerOptions {
   /**
    * Props for year picker field element.
    */
-  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
-  /**
-   * Props for year picker input element.
-   */
-  inputProps?: DatePickerFieldProps["inputProps"]
+  fieldProps?: Omit<DatePickerFieldProps, "children" | "inputProps">
   /**
    * Props for year picker icon element.
    */
   iconProps?: DatePickerIconProps
   /**
-   * Props for year picker clear icon element.
+   * Props for year picker input element.
    */
-  clearIconProps?: DatePickerIconProps
+  inputProps?: DatePickerFieldProps["inputProps"]
   /**
    * Props to be forwarded to the portal component.
    *
@@ -68,7 +69,6 @@ interface YearPickerOptions {
    *
    */
   portalProps?: Omit<PortalProps, "children">
-  children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
 export interface YearPickerProps
@@ -86,41 +86,41 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   let {
     className,
     children,
-    isClearable = true,
     color,
     h,
     height,
+    isClearable = true,
     minH,
     minHeight,
+    clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
-    inputProps,
     iconProps,
-    clearIconProps,
+    inputProps,
     portalProps = { isDisabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {
-    getPopoverProps,
-    getContainerProps,
-    getCalendarProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
-    onClose,
-    value,
     id,
+    value,
+    getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   } = useYearPicker(computedProps)
 
   h ??= height
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
+    h: "fit-content",
+    w: "100%",
     ...styles.container,
   }
 
@@ -157,11 +157,11 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              as="div"
               id={id}
+              as="div"
+              className="ui-year-picker__content"
               role="dialog"
               aria-modal="true"
-              className="ui-year-picker__content"
               __css={{ ...styles.content }}
               {...contentProps}
             >

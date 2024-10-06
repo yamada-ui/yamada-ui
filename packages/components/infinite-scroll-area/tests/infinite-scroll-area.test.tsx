@@ -1,8 +1,8 @@
-import { a11y, render, fireEvent, waitFor } from "@yamada-ui/test"
-import { useState, useRef } from "react"
+import type { InfiniteScrollAreaProps } from "../src"
+import { a11y, fireEvent, render, waitFor } from "@yamada-ui/test"
+import { useRef, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
 import { InfiniteScrollArea } from "../src"
-import type { InfiniteScrollAreaProps } from "../src"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
@@ -36,19 +36,19 @@ describe("<InfiniteScrollArea />", () => {
     await a11y(container)
   })
 
-  test("InfiniteScrollArea renders with initialLoad correctly", async () => {
+  test("InfiniteScrollArea renders with initialLoad correctly", () => {
     const MyComponent = () => {
       const [count, setCount] = useState<number>(50)
 
       return (
         <InfiniteScrollArea
-          onLoad={async ({ index, finish }) => {
+          initialLoad
+          loading={<>Loading…</>}
+          onLoad={({ finish, index }) => {
             setCount((prev) => prev + 50)
 
             if (index >= 5) finish()
           }}
-          initialLoad
-          loading={<>Loading…</>}
         >
           {Array(count)
             .fill(0)
@@ -73,8 +73,8 @@ describe("<InfiniteScrollArea />", () => {
         <div ref={rootRef}>
           <InfiniteScrollArea
             isReverse={isReverse}
-            rootRef={rootRef}
             loading={<>Loading…</>}
+            rootRef={rootRef}
           >
             {Array(50)
               .fill(0)
@@ -86,7 +86,7 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { container } = render(<MyComponent isReverse={true} />)
+    const { container } = render(<MyComponent isReverse />)
     fireEvent.scroll(container, {
       target: {
         scrollTop: 1000,

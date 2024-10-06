@@ -1,5 +1,6 @@
-import { Center, StackProps, VStack } from "@yamada-ui/react"
-import { FC } from "react"
+import type { StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
+import { Center, VStack } from "@yamada-ui/react"
 import { Header } from "./header"
 
 export interface LayoutProps extends StackProps {}
@@ -12,11 +13,11 @@ export const Layout: FC<LayoutProps> = ({ ...rest }) => {
       <Center as="main" w="full">
         <VStack
           alignItems="flex-start"
-          w="full"
-          maxW="9xl"
           gap={{ base: "lg", md: "md" }}
-          py="lg"
+          maxW="9xl"
           px={{ base: "lg", md: "md" }}
+          py="lg"
+          w="full"
           {...rest}
         />
       </Center>

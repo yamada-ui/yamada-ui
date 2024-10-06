@@ -1,31 +1,31 @@
 import type {
-  HTMLUIProps,
-  ThemeProps,
   CSSUIObject,
   CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
   Token,
 } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
+import type { ReactElement, ReactNode } from "react"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
-import type { IconProps } from "@yamada-ui/icon"
 import { useValue } from "@yamada-ui/use-value"
 import {
-  cx,
   createContext,
+  cx,
   getValidChildren,
   isNumber,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
-import { Fragment, cloneElement, useCallback, useMemo } from "react"
+import { cloneElement, Fragment, useCallback, useMemo } from "react"
 
 const [BreadcrumbProvider, useBreadcrumb] = createContext<{
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }>({
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
@@ -33,17 +33,21 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<{
 
 export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
   name?: ReactNode
-  containerProps?: Omit<BreadcrumbItemProps, "isLastChild">
   isEllipsisPage?: boolean
+  containerProps?: Omit<BreadcrumbItemProps, "isLastChild">
 }
 
 interface BreadcrumbOptions {
   /**
-   * The visual separator between each breadcrumb item.
-   *
-   * @default '/'
+   * The icon to be used in the ellipsis.
    */
-  separator?: string | JSX.Element
+  ellipsis?:
+    | ((props: { items: BreadcrumbGenerateItem[] }) => ReactNode)
+    | ReactNode
+  /**
+   * Number of elements visible on the end(right) edges.
+   */
+  endBoundaries?: Token<number>
   /**
    * The left and right margin applied to the separator.
    *
@@ -51,27 +55,23 @@ interface BreadcrumbOptions {
    */
   gap?: CSSUIProps["mx"]
   /**
-   * Props for ol element.
-   */
-  listProps?: HTMLUIProps<"ol">
-  /**
    * If provided, generate breadcrumb items based on items.
    */
   items?: BreadcrumbGenerateItem[]
+  /**
+   * The visual separator between each breadcrumb item.
+   *
+   * @default '/'
+   */
+  separator?: ReactElement | string
   /**
    * Number of elements visible on the start(left) edges.
    */
   startBoundaries?: Token<number>
   /**
-   * Number of elements visible on the end(right) edges.
+   * Props for ol element.
    */
-  endBoundaries?: Token<number>
-  /**
-   * The icon to be used in the ellipsis.
-   */
-  ellipsis?:
-    | ReactNode
-    | ((props: { items: BreadcrumbGenerateItem[] }) => ReactNode)
+  listProps?: HTMLUIProps<"ol">
 }
 
 export interface BreadcrumbProps
@@ -90,13 +90,13 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   const {
     className,
     children,
-    separator = "/",
-    gap = "fallback(2, 0.5rem)",
-    listProps,
-    items = [],
-    startBoundaries: _startBoundaries,
-    endBoundaries: _endBoundaries,
     ellipsis,
+    endBoundaries: _endBoundaries,
+    gap = "fallback(2, 0.5rem)",
+    items = [],
+    separator = "/",
+    startBoundaries: _startBoundaries,
+    listProps,
     ...rest
   } = omitThemeProps(mergedProps)
   let startBoundaries = useValue(_startBoundaries)
@@ -113,8 +113,8 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
   const css: CSSUIObject = {
-    display: "flex",
     alignItems: "center",
+    display: "flex",
     ...styles.container,
   }
 
@@ -138,22 +138,22 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     if (hasChildren) {
       return validChildren.map((child, index) =>
         cloneElement(child, {
-          separator,
           gap,
           isLastChild: validChildren.length === index + 1,
+          separator,
         }),
       )
     } else {
       let hiddenEllipsis: BreadcrumbGenerateItem[] = []
 
       return items.map((item, index) => {
-        const { containerProps, name, isCurrentPage, isEllipsisPage, ...rest } =
+        const { name, isCurrentPage, isEllipsisPage, containerProps, ...rest } =
           item
         const isLastChild = items.length === index + 1
         const props: BreadcrumbItemProps = {
-          separator,
           gap,
           isCurrentPage,
+          separator,
           ...containerProps,
         }
 
@@ -226,8 +226,8 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
       <ui.nav
         ref={ref}
         className={cx("ui-breadcrumb", className)}
-        __css={styles.container}
         aria-label="Breadcrumb"
+        __css={styles.container}
         {...rest}
       >
         <ui.ol className="ui-breadcrumb__list" {...listProps} __css={css}>
@@ -242,7 +242,7 @@ Breadcrumb.displayName = "Breadcrumb"
 Breadcrumb.__ui__ = "Breadcrumb"
 
 interface BreadcrumbItemOptions
-  extends Pick<BreadcrumbProps, "separator" | "gap"> {
+  extends Pick<BreadcrumbProps, "gap" | "separator"> {
   /**
    * If `true`, change to span element.
    *
@@ -266,10 +266,10 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     {
       className,
       children,
-      separator,
+      gap,
       isCurrentPage,
       isLastChild,
-      gap,
+      separator,
       ...rest
     },
     ref,
@@ -287,8 +287,8 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
 
       if (child.type === BreadcrumbSeparator) {
         return cloneElement(child, {
-          gap,
           children: child.props.children || separator,
+          gap,
         })
       }
 
@@ -296,8 +296,8 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     })
 
     const css: CSSUIObject = {
-      display: "inline-flex",
       alignItems: "center",
+      display: "inline-flex",
       ...styles.item,
     }
 
@@ -335,16 +335,16 @@ export interface BreadcrumbLinkProps
     BreadcrumbLinkOptions {}
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
-  ({ className, children, isCurrentPage, href, ...rest }, ref) => {
+  ({ className, children, href, isCurrentPage, ...rest }, ref) => {
     const styles = useBreadcrumb()
 
     return (
       <ui.a
         ref={ref}
         as={!isCurrentPage ? "a" : "span"}
+        className={cx("ui-breadcrumb__link", className)}
         href={!isCurrentPage ? href : undefined}
         aria-current={isCurrentPage ? "page" : undefined}
-        className={cx("ui-breadcrumb__link", className)}
         __css={styles.link}
         {...rest}
       >
@@ -398,7 +398,7 @@ export interface BreadcrumbEllipsisProps
     BreadcrumbEllipsisOptions {}
 
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
-  ({ children, className, ...rest }, ref) => {
+  ({ className, children, ...rest }, ref) => {
     const styles = useBreadcrumb()
 
     const css: CSSUIObject = {
@@ -409,20 +409,20 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
       children ?? (
         <Icon
           ref={ref}
-          aria-label="ellipsis"
           className={cx("ui-breadcrumb__item__ellipsis", className)}
-          __css={css}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 36 24"
           stroke="currentColor"
-          strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeWidth="1.5"
+          viewBox="0 0 36 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="ellipsis"
+          __css={css}
           {...rest}
         >
-          <circle cx="10" cy="12" r="2" fill="currentColor" />
-          <circle cx="20" cy="12" r="2" fill="currentColor" />
-          <circle cx="30" cy="12" r="2" fill="currentColor" />
+          <circle cx="10" cy="12" fill="currentColor" r="2" />
+          <circle cx="20" cy="12" fill="currentColor" r="2" />
+          <circle cx="30" cy="12" fill="currentColor" r="2" />
         </Icon>
       )
     )

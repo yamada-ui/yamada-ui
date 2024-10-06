@@ -19,7 +19,7 @@ export const Cards = memo(() => {
   return (
     <Box
       as="section"
-      columnCount={{ base: 3, xl: 2, lg: 1 }}
+      columnCount={{ base: 3, lg: 1, xl: 2 }}
       gap={{ base: "lg", sm: "md" }}
       p={{ base: "lg", sm: "md" }}
     >

@@ -1,6 +1,6 @@
-import { tokens } from "./tokens"
-import type { Properties } from "."
 import type { PseudoSelector, Transforms } from "@yamada-ui/react"
+import type { Properties } from "."
+import { tokens } from "./tokens"
 
 type TransformProperties = Properties | PseudoSelector
 
@@ -20,26 +20,40 @@ type TransformProps = {
 
 export const transformProps: TransformProps = {
   colorMix: tokens.colors,
+
   gradient: tokens.gradients,
+
   animation: tokens.animations,
+
   bgClip: ["backgroundClip"],
+
   transform: ["transform"],
+
   filter: [
-    { properties: "filter", args: [] },
-    { properties: "backdropFilter", args: ["backdrop"] },
+    { args: [], properties: "filter" },
+    { args: ["backdrop"], properties: "backdropFilter" },
   ],
+
   content: ["&::before", "&::after"],
+
   styles: [
-    { properties: "apply", args: [] },
-    { properties: "layerStyle", args: ["layerStyles"] },
-    { properties: "textStyle", args: ["textStyles"] },
+    { args: [], properties: "apply" },
+    { args: ["layerStyles"], properties: "layerStyle" },
+    { args: ["textStyles"], properties: "textStyle" },
   ],
+
   vars: ["vars"],
+
   isTruncated: ["isTruncated"],
+
   media: ["_media"],
+
   container: ["_container"],
+
   supports: ["_supports"],
+
   fraction: tokens.sizes,
+
   px: [
     ...(tokens.fontSizes ?? []),
     ...(tokens.spaces ?? []),
@@ -65,75 +79,78 @@ export const transformProps: TransformProps = {
     "scrollbarWidth",
     "strokeWidth",
   ],
+
   deg: ["rotate", "skewX", "skewY", "hueRotate", "backdropHueRotate"],
+
   function: [
-    { properties: "blur", args: ["blur"] },
-    { properties: "brightness", args: ["brightness"] },
-    { properties: "contrast", args: ["contrast"] },
-    { properties: "dropShadow", args: ["drop-shadow"] },
-    { properties: "grayscale", args: ["grayscale"] },
-    { properties: "hueRotate", args: ["hue-rotate"] },
-    { properties: "invert", args: ["invert"] },
-    { properties: "saturate", args: ["saturate"] },
-    { properties: "sepia", args: ["sepia"] },
-    { properties: "backdropBlur", args: ["blur"] },
-    { properties: "backdropBrightness", args: ["brightness"] },
-    { properties: "backdropContrast", args: ["contrast"] },
-    { properties: "backdropDropShadow", args: ["drop-shadow"] },
-    { properties: "backdropGrayscale", args: ["grayscale"] },
-    { properties: "backdropHueRotate", args: ["hue-rotate"] },
-    { properties: "backdropInvert", args: ["invert"] },
-    { properties: "backdropSaturate", args: ["saturate"] },
-    { properties: "backdropSepia", args: ["sepia"] },
+    { args: ["blur"], properties: "blur" },
+    { args: ["brightness"], properties: "brightness" },
+    { args: ["contrast"], properties: "contrast" },
+    { args: ["drop-shadow"], properties: "dropShadow" },
+    { args: ["grayscale"], properties: "grayscale" },
+    { args: ["hue-rotate"], properties: "hueRotate" },
+    { args: ["invert"], properties: "invert" },
+    { args: ["saturate"], properties: "saturate" },
+    { args: ["sepia"], properties: "sepia" },
+    { args: ["blur"], properties: "backdropBlur" },
+    { args: ["brightness"], properties: "backdropBrightness" },
+    { args: ["contrast"], properties: "backdropContrast" },
+    { args: ["drop-shadow"], properties: "backdropDropShadow" },
+    { args: ["grayscale"], properties: "backdropGrayscale" },
+    { args: ["hue-rotate"], properties: "backdropHueRotate" },
+    { args: ["invert"], properties: "backdropInvert" },
+    { args: ["saturate"], properties: "backdropSaturate" },
+    { args: ["sepia"], properties: "backdropSepia" },
   ],
+
   grid: [
     "gridTemplateColumns",
     "gridTemplateRows",
     "gridAutoColumns",
     "gridAutoRows",
   ],
+
   calc: [
     ...(tokens.sizes
       ?.filter(
         (properties) =>
           ![
-            "gridTemplateColumns",
-            "gridTemplateRows",
             "gridAutoColumns",
             "gridAutoRows",
+            "gridTemplateColumns",
+            "gridTemplateRows",
           ].includes(properties),
       )
-      .map((properties) => ({ properties, args: ["sizes"] })) ?? []),
+      .map((properties) => ({ args: ["sizes"], properties })) ?? []),
     ...(tokens.spaces?.map((properties) => ({
-      properties,
       args: ["spaces"],
+      properties,
     })) ?? []),
-    ...(tokens.radii?.map((properties) => ({ properties, args: ["radii"] })) ??
+    ...(tokens.radii?.map((properties) => ({ args: ["radii"], properties })) ??
       []),
     ...(tokens.fontSizes?.map((properties) => ({
-      properties,
       args: ["fontSizes"],
+      properties,
     })) ?? []),
   ],
 }
 
-export const transformMap = Object.entries(transformProps).reduce(
-  (prev, [_transform, list]) => {
-    const transform = _transform as Transforms
+export const transformMap = Object.entries(transformProps).reduce<{
+  [key in TransformProperties]?: TransformOptions[]
+}>((prev, [_transform, list]) => {
+  const transform = _transform as Transforms
 
-    list.forEach((item) => {
-      if (typeof item === "string") {
-        prev[item] ??= []
-        prev[item].push({ transform })
-      } else {
-        const { properties, args } = item
+  list.forEach((item) => {
+    if (typeof item === "string") {
+      prev[item] ??= []
+      prev[item].push({ transform })
+    } else {
+      const { args, properties } = item
 
-        prev[properties] ??= []
-        prev[properties].push({ transform, args })
-      }
-    })
+      prev[properties] ??= []
+      prev[properties].push({ args, transform })
+    }
+  })
 
-    return prev
-  },
-  {} as { [key in TransformProperties]: TransformOptions[] },
-)
+  return prev
+}, {})

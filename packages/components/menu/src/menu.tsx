@@ -1,10 +1,10 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { PopoverProps } from "@yamada-ui/popover"
+import type { FC } from "react"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { Popover } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { funcAll, useUnmountEffect, useUpdateEffect } from "@yamada-ui/utils"
-import type { FC } from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 import {
   DescendantsContextProvider,
@@ -42,19 +42,19 @@ export const Menu: FC<MenuProps> = (props) => {
     styles: contextMenuStyles,
   })
   let {
-    initialFocusRef,
-    closeOnSelect = true,
     closeOnBlur,
-    placement,
+    closeOnSelect = true,
     duration = 0.2,
+    initialFocusRef,
     offset,
-    onOpen: onOpenProp,
+    placement,
     onClose: onCloseProp,
+    onOpen: onOpenProp,
     ...rest
   } = omitThemeProps(mergedProps)
-  const { relatedRef, onUpstreamClose, onDownstreamCloseMapRef } =
+  const { relatedRef, onDownstreamCloseMapRef, onUpstreamClose } =
     useUpstreamMenu() ?? {}
-  const { setDownstreamOpen, hasDownstreamRef } = useUpstreamMenuItem() ?? {}
+  const { hasDownstreamRef, setDownstreamOpen } = useUpstreamMenuItem() ?? {}
   const isNested = !!relatedRef
 
   if (isNested) {
@@ -71,7 +71,7 @@ export const Menu: FC<MenuProps> = (props) => {
 
   const menuRef = useRef<HTMLDivElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
-  const requestAnimationFrameId = useRef<number | null>(null)
+  const requestAnimationFrameId = useRef<null | number>(null)
   const onCloseMapRef = useRef<Map<string, () => void>>(new Map())
 
   const onFocusMenu = useCallback(() => {
@@ -119,10 +119,10 @@ export const Menu: FC<MenuProps> = (props) => {
   }, [onCloseProp])
 
   const id = useId()
-  const { isOpen, onOpen, onClose } = useDisclosure({
+  const { isOpen, onClose, onOpen } = useDisclosure({
     ...props,
-    onOpen: onOpenInternal,
     onClose: onCloseInternal,
+    onOpen: onOpenInternal,
   })
 
   useEffect(() => {
@@ -167,35 +167,35 @@ export const Menu: FC<MenuProps> = (props) => {
       >
         <MenuProvider
           value={{
-            isOpen,
-            onOpen,
-            onClose,
-            onUpstreamClose,
-            onFocusFirstItem,
-            onFocusLastItem,
             closeOnSelect,
             focusedIndex,
-            setFocusedIndex,
+            isNested,
+            isOpen,
             menuRef,
             requestAnimationFrameId,
-            isNested,
+            setFocusedIndex,
             styles,
+            onClose,
+            onFocusFirstItem,
+            onFocusLastItem,
+            onOpen,
+            onUpstreamClose,
           }}
         >
           <Popover
             {...{
               trigger: isNested ? "hover" : "click",
               ...rest,
-              isOpen,
-              onOpen,
-              onClose,
-              placement,
-              offset,
+              closeOnBlur,
+              closeOnButton: false,
               duration,
               initialFocusRef,
+              isOpen,
+              offset,
+              placement,
               relatedRef,
-              closeOnButton: false,
-              closeOnBlur,
+              onClose,
+              onOpen,
             }}
           />
         </MenuProvider>

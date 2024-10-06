@@ -9,11 +9,11 @@ export const RadialChart: ComponentMultiStyle<"RadialChart"> = mergeMultiStyle(
       background: {
         fill: "transparent",
       },
-      labelList: {
-        fill: "white",
-      },
       cursor: {
         stroke: "none",
+      },
+      labelList: {
+        fill: "white",
       },
       polarGrid: {
         stroke: ["blackAlpha.400", "whiteAlpha.400"],

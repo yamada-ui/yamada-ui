@@ -1,33 +1,33 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { ModalProps } from "@yamada-ui/react"
 import {
   Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalCloseButton,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Wrap,
-  Text,
   Container,
-  Image,
   Heading,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  Wrap,
 } from "@yamada-ui/react"
+import { useState } from "react"
 
 type Story = StoryFn<typeof Modal>
 
 const meta: Meta<typeof Modal> = {
-  title: "Components / Overlay / Modal",
   component: Modal,
+  title: "Components / Overlay / Modal",
 }
 
 export default meta
 
 export const basic: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -53,13 +53,13 @@ export const basic: Story = () => {
 }
 
 export const withDuration: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} duration={0.4}>
+      <Modal duration={0.4} isOpen={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -80,7 +80,7 @@ export const withDuration: Story = () => {
 
 export const withSize: Story = () => {
   const [size, setSize] = useState<ModalProps["size"]>("md")
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={size}>
+      <Modal isOpen={isOpen} size={size} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -152,7 +152,7 @@ export const withSize: Story = () => {
 
 export const withPlacement: Story = () => {
   const [placement, setPlacement] = useState<ModalProps["placement"]>("center")
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -239,7 +239,7 @@ export const withPlacement: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} placement={placement}>
+      <Modal isOpen={isOpen} placement={placement} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -260,7 +260,7 @@ export const withPlacement: Story = () => {
 
 export const withAnimation: Story = () => {
   const [animation, setAnimation] = useState<ModalProps["animation"]>("scale")
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -311,7 +311,7 @@ export const withAnimation: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} animation={animation}>
+      <Modal animation={animation} isOpen={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -357,8 +357,8 @@ export const nestedModal: Story = () => {
 
         <Modal
           isOpen={secondControls.isOpen}
-          onClose={secondControls.onClose}
           size="sm"
+          onClose={secondControls.onClose}
         >
           <ModalHeader>あらすじ</ModalHeader>
 
@@ -379,7 +379,7 @@ export const nestedModal: Story = () => {
 }
 
 export const disabledCloseButton: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -405,7 +405,7 @@ export const disabledCloseButton: Story = () => {
 }
 
 export const customCloseButton: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -433,13 +433,13 @@ export const customCloseButton: Story = () => {
 }
 
 export const disabledOverlay: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} withOverlay={false}>
+      <Modal isOpen={isOpen} withOverlay={false} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -459,14 +459,14 @@ export const disabledOverlay: Story = () => {
 }
 
 export const customOverlay: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+        <ModalOverlay backdropFilter="blur(10px)" bg="blackAlpha.300" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
 
@@ -489,7 +489,7 @@ export const customOverlay: Story = () => {
 export const scrollBehavior: Story = () => {
   const [scrollBehavior, setScrollBehavior] =
     useState<ModalProps["scrollBehavior"]>("inside")
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -513,7 +513,7 @@ export const scrollBehavior: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={scrollBehavior}>
+      <Modal isOpen={isOpen} scrollBehavior={scrollBehavior} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -557,26 +557,26 @@ export const scrollBehavior: Story = () => {
 }
 
 export const scrollOnMount: Story = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
       <Container
-        p="md"
-        gap="md"
-        rounded="md"
         alignItems="center"
-        textAlign="center"
         border="1px solid"
         borderColor="inherit"
         boxShadow="md"
+        gap="md"
+        p="md"
+        rounded="md"
+        textAlign="center"
       >
         <Image
-          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
-          maxW="sm"
           alt="ドラゴンボール"
+          maxW="sm"
+          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -609,7 +609,7 @@ export const scrollOnMount: Story = () => {
         </Text>
       </Container>
 
-      <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>

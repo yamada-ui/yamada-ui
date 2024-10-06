@@ -5,21 +5,26 @@ import type {
   PropGetter,
 } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
-import { createContext, dataAttr, handlerAll } from "@yamada-ui/utils"
 import type { ForwardedRef, RefObject } from "react"
+import type {
+  ImperativePanelHandle,
+  PanelGroupOnLayout,
+  PanelGroupProps,
+  PanelGroupStorage,
+  PanelProps,
+  PanelResizeHandleProps,
+} from "react-resizable-panels"
+import {
+  createContext,
+  dataAttr,
+  handlerAll,
+  isRefObject,
+} from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useState } from "react"
 import {
   getPanelElement,
   getPanelGroupElement,
   getResizeHandleElement,
-} from "react-resizable-panels"
-import type {
-  PanelResizeHandleProps,
-  PanelGroupProps,
-  PanelProps,
-  PanelGroupOnLayout,
-  PanelGroupStorage,
-  ImperativePanelHandle,
 } from "react-resizable-panels"
 
 interface As {
@@ -27,13 +32,13 @@ interface As {
 }
 
 interface ResizableGroupProps
-  extends Omit<Partial<PanelGroupProps>, "id" | "tagName" | "children">,
+  extends Omit<Partial<PanelGroupProps>, "children" | "id" | "tagName">,
     As {}
 interface ResizableItemProps
-  extends Omit<PanelProps, "id" | "tagName" | "children">,
+  extends Omit<PanelProps, "children" | "id" | "tagName">,
     As {}
 interface ResizableTriggerProps
-  extends Omit<PanelResizeHandleProps, "id" | "tagName" | "children">,
+  extends Omit<PanelResizeHandleProps, "children" | "id" | "tagName">,
     As {}
 
 export interface ResizableStorage extends PanelGroupStorage {}
@@ -41,7 +46,7 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
   isDisabled: boolean
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ResizableProvider, useResizableContext] =
@@ -76,34 +81,34 @@ export interface UseResizableProps {
    */
   keyboardStep?: number
   /**
+   * A callback that gets and sets a value in custom storage.
+   */
+  storage?: PanelGroupStorage
+  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
   storageKey?: string
   /**
-   * A callback that gets and sets a value in custom storage.
+   * Props for resizable component.
    */
-  storage?: PanelGroupStorage
+  groupProps?: ResizableGroupProps
   /**
    * The callback invoked when resizable items are resized.
    */
   onLayout?: PanelGroupOnLayout
-  /**
-   * Props for resizable component.
-   */
-  groupProps?: ResizableGroupProps
 }
 
 export const useResizable = ({
   id,
-  direction = "horizontal",
-  storageKey,
-  keyboardStep,
-  isDisabled = false,
-  onLayout,
-  storage,
   ref,
+  direction = "horizontal",
+  isDisabled = false,
+  keyboardStep,
+  storage,
+  storageKey,
   groupProps,
+  onLayout,
   ...rest
 }: UseResizableProps) => {
   const uuid = useId()
@@ -122,12 +127,12 @@ export const useResizable = ({
       return {
         ...props,
         id,
-        direction,
-        tagName: as,
         autoSaveId: storageKey,
+        direction,
         keyboardResizeBy: keyboardStep,
-        onLayout,
         storage,
+        tagName: as,
+        onLayout,
         ...rest,
       }
     },
@@ -139,8 +144,7 @@ export const useResizable = ({
 
     const el = getPanelGroupElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {
@@ -162,27 +166,39 @@ interface UseResizableItemOptions {
    */
   ref?: ForwardedRef<HTMLElement>
   /**
+   * The collapsed size of the resizable item.
+   */
+  collapsedSize?: number
+  /**
    * If `true`, the resizable item can be collapsed.
    *
    * @default false
    */
   collapsible?: boolean
   /**
-   * The collapsed size of the resizable item.
+   * Ref of the resizable item callback.
    */
-  collapsedSize?: number
+  controlRef?: RefObject<ResizableItemControl>
   /**
    * The initial size of the resizable item.
    */
   defaultSize?: number
   /**
+   * The maximum allowed value of the resizable item.
+   */
+  maxSize?: number
+  /**
    * The minimum allowed value of the resizable item.
    */
   minSize?: number
   /**
-   * The maximum allowed value of the resizable item.
+   * Order for the resizable item.
    */
-  maxSize?: number
+  order?: number
+  /**
+   * Props for resizable item container element.
+   */
+  containerProps?: Omit<HTMLUIProps, "as"> & ResizableItemProps
   /**
    * The callback invoked when resizable item are collapsed.
    */
@@ -195,18 +211,6 @@ interface UseResizableItemOptions {
    * The callback invoked when resizable item are resized.
    */
   onResize?: (size: number, prevSize: number | undefined) => void
-  /**
-   * Order for the resizable item.
-   */
-  order?: number
-  /**
-   * Ref of the resizable item callback.
-   */
-  controlRef?: RefObject<ResizableItemControl>
-  /**
-   * Props for resizable item container element.
-   */
-  containerProps?: Omit<HTMLUIProps, "as"> & ResizableItemProps
 }
 
 export interface UseResizableItemProps
@@ -218,15 +222,15 @@ export const useResizableItem = ({
   ref,
   collapsedSize,
   collapsible,
+  controlRef,
   defaultSize,
   maxSize,
   minSize,
+  order,
+  containerProps,
   onCollapse,
   onExpand,
   onResize,
-  order,
-  controlRef,
-  containerProps,
   ...innerProps
 }: UseResizableItemProps) => {
   const uuid = useId()
@@ -242,18 +246,18 @@ export const useResizableItem = ({
 
       return {
         ...props,
-        ref: controlRef,
         id,
-        tagName: as,
+        ref: controlRef,
+        collapsedSize,
         collapsible,
         defaultSize,
         maxSize,
         minSize,
-        collapsedSize,
+        order,
+        tagName: as,
         onCollapse,
         onExpand,
         onResize,
-        order,
         ...(collapsible ? { "aria-labelledby": id } : { "aria-label": id }),
         ...rest,
       }
@@ -284,13 +288,12 @@ export const useResizableItem = ({
 
     const el = getPanelElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {
-    getPanelProps,
     getItemProps,
+    getPanelProps,
   }
 }
 
@@ -350,16 +353,16 @@ export const useResizableTrigger = ({
       ({
         ...props,
         id,
-        tagName: as,
         disabled: trulyDisabled,
+        tagName: as,
         onDragging: handlerAll(onDragging, (isActive) => setIsActive(isActive)),
         ...rest,
-        "data-active": dataAttr(isActive),
         style: {
           ...props.style,
           ...rest.style,
           ...(trulyDisabled ? { cursor: "default" } : {}),
         },
+        "data-active": dataAttr(isActive),
       }) as PanelResizeHandleProps,
     [id, as, trulyDisabled, onDragging, rest, isActive],
   )
@@ -378,13 +381,12 @@ export const useResizableTrigger = ({
 
     const el = getResizeHandleElement(id)
 
-    // @ts-expect-error
-    if (ref) ref.current = el
+    if (isRefObject(ref)) ref.current = el
   }, [ref, id])
 
   return {
-    getTriggerProps,
     getIconProps,
+    getTriggerProps,
   }
 }
 

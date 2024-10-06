@@ -1,9 +1,9 @@
-import { useSafeLayoutEffect, isRefObject, isArray } from "@yamada-ui/utils"
+import { isArray, isRefObject, useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useState } from "react"
 
 interface Size {
-  width: number
   height: number
+  width: number
 }
 
 export const trackElementSize = (
@@ -16,7 +16,7 @@ export const trackElementSize = (
     return
   }
 
-  cb({ width: el.offsetWidth, height: el.offsetHeight })
+  cb({ height: el.offsetHeight, width: el.offsetWidth })
 
   const win = el.ownerDocument.defaultView ?? window
 
@@ -27,7 +27,7 @@ export const trackElementSize = (
     let width: number
     let height: number
 
-    if ("borderBoxSize" in entry) {
+    if (entry && "borderBoxSize" in entry) {
       const borderSizeEntry = entry.borderBoxSize
       const borderSize = isArray(borderSizeEntry)
         ? borderSizeEntry[0]
@@ -40,7 +40,7 @@ export const trackElementSize = (
       height = el.offsetHeight
     }
 
-    cb({ width, height })
+    cb({ height, width })
   })
 
   observer.observe(el, { box: "border-box" })
@@ -48,10 +48,10 @@ export const trackElementSize = (
   return () => observer.unobserve(el)
 }
 
-const trackMutation = (el: HTMLElement | null, cb: () => void) => {
-  if (!el || !el.parentElement) return
+const trackMutation = (el: HTMLElement | null | undefined, cb: () => void) => {
+  if (!el?.parentElement) return
 
-  const win = el.ownerDocument?.defaultView ?? window
+  const win = el.ownerDocument.defaultView ?? window
 
   const observer = new win.MutationObserver(() => {
     cb()
@@ -110,16 +110,16 @@ export const useSizes = <T extends HTMLElement | null>({
 }
 
 export const useSize = <T extends HTMLElement | null>(
-  refOrEl: T | React.RefObject<T>,
+  refOrEl: React.RefObject<T> | T,
 ) => {
   const [size] = useSizes({
-    observeMutation: false,
-
     getNodes: () => {
       const node = isRefObject(refOrEl) ? refOrEl.current : refOrEl
 
       return [node]
     },
+
+    observeMutation: false,
   })
 
   return size as Size | undefined

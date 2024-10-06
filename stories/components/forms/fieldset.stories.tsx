@@ -1,18 +1,18 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  Fieldset,
-  Legend,
-  HelperMessage,
-  ErrorMessage,
-  Tag,
   Checkbox,
+  ErrorMessage,
+  Fieldset,
+  HelperMessage,
+  Legend,
+  Tag,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Fieldset>
 
 const meta: Meta<typeof Fieldset> = {
-  title: "Components / Forms / Fieldset",
   component: Fieldset,
+  title: "Components / Forms / Fieldset",
 }
 
 export default meta
@@ -28,8 +28,8 @@ export const basic: Story = () => {
 export const withHelperMessage: Story = () => {
   return (
     <Fieldset
-      legend="Terms and Conditions"
       helperMessage="Please review the terms carefully before agreeing."
+      legend="Terms and Conditions"
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -39,9 +39,9 @@ export const withHelperMessage: Story = () => {
 export const withErrorMessage: Story = () => {
   return (
     <Fieldset
+      errorMessage="Agreement is required."
       isInvalid
       legend="Terms and Conditions"
-      errorMessage="Agreement is required."
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -52,21 +52,21 @@ export const isReplace: Story = () => {
   return (
     <>
       <Fieldset
-        isInvalid
-        legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
         errorMessage="Agreement is required."
-        isReplace={true}
+        helperMessage="Please review the terms carefully before agreeing."
+        isInvalid
+        isReplace
+        legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>
 
       <Fieldset
-        isInvalid
-        legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
         errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
+        isInvalid
         isReplace={false}
+        legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>
@@ -77,10 +77,10 @@ export const isReplace: Story = () => {
 export const isRequired: Story = () => {
   return (
     <Fieldset
+      errorMessage="Agreement is required."
+      helperMessage="Please review the terms carefully before agreeing."
       isRequired
       legend="Terms and Conditions"
-      helperMessage="Please review the terms carefully before agreeing."
-      errorMessage="Agreement is required."
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -90,10 +90,10 @@ export const isRequired: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <Fieldset
+      errorMessage="Agreement is required."
+      helperMessage="Please review the terms carefully before agreeing."
       isDisabled
       legend="Terms and Conditions"
-      helperMessage="Please review the terms carefully before agreeing."
-      errorMessage="Agreement is required."
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -103,10 +103,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <Fieldset
+      errorMessage="Agreement is required."
+      helperMessage="Please review the terms carefully before agreeing."
       isReadOnly
       legend="Terms and Conditions"
-      helperMessage="Please review the terms carefully before agreeing."
-      errorMessage="Agreement is required."
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -149,7 +149,7 @@ export const customRequiredIndicator: Story = () => {
         isRequired
         legend="Terms and Conditions"
         requiredIndicator={
-          <Tag size="sm" colorScheme="red" ms={2}>
+          <Tag colorScheme="red" ms={2} size="sm">
             required
           </Tag>
         }
@@ -160,7 +160,7 @@ export const customRequiredIndicator: Story = () => {
       <Fieldset isRequired>
         <Legend
           requiredIndicator={
-            <Tag size="sm" colorScheme="red" ms={2}>
+            <Tag colorScheme="red" ms={2} size="sm">
               required
             </Tag>
           }
@@ -179,7 +179,7 @@ export const customOptionalIndicator: Story = () => {
       <Fieldset
         legend="Terms and Conditions"
         optionalIndicator={
-          <Tag size="sm" colorScheme="primary" ms={2}>
+          <Tag colorScheme="primary" ms={2} size="sm">
             optional
           </Tag>
         }
@@ -190,7 +190,7 @@ export const customOptionalIndicator: Story = () => {
       <Fieldset>
         <Legend
           optionalIndicator={
-            <Tag size="sm" colorScheme="primary" ms={2}>
+            <Tag colorScheme="primary" ms={2} size="sm">
               optional
             </Tag>
           }

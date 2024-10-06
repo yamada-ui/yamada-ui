@@ -1,19 +1,19 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
+  Center,
   ContextMenu,
   ContextMenuTrigger,
-  Text,
+  MenuDivider,
   MenuItem,
   MenuList,
-  MenuDivider,
-  Center,
+  Text,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof ContextMenu>
 
 const meta: Meta<typeof ContextMenu> = {
-  title: "Components / Overlay / ContextMenu",
   component: ContextMenu,
+  title: "Components / Overlay / ContextMenu",
 }
 
 export default meta
@@ -23,12 +23,12 @@ export const basic: Story = () => {
     <ContextMenu>
       <ContextMenuTrigger
         as={Center}
-        w="full"
-        h="xs"
-        borderWidth="1px"
         borderStyle="dashed"
+        borderWidth="1px"
+        h="xs"
         p="md"
         rounded="md"
+        w="full"
       >
         <Text>Right click here</Text>
       </ContextMenuTrigger>

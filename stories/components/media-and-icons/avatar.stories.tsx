@@ -5,8 +5,8 @@ import { Avatar, AvatarBadge, AvatarGroup, Wrap } from "@yamada-ui/react"
 type Story = StoryFn<typeof Avatar>
 
 const meta: Meta<typeof Avatar> = {
-  title: "Components / Media And Icons / Avatar",
   component: Avatar,
+  title: "Components / Media And Icons / Avatar",
 }
 
 export default meta
@@ -23,13 +23,13 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <Wrap gap="md">
-      <Avatar size="2xs" name="Hirotomo Yamada" />
-      <Avatar size="xs" name="Hirotomo Yamada" />
-      <Avatar size="sm" name="Hirotomo Yamada" />
-      <Avatar size="md" name="Hirotomo Yamada" />
-      <Avatar size="lg" name="Hirotomo Yamada" />
-      <Avatar size="xl" name="Hirotomo Yamada" />
-      <Avatar size="2xl" name="Hirotomo Yamada" />
+      <Avatar name="Hirotomo Yamada" size="2xs" />
+      <Avatar name="Hirotomo Yamada" size="xs" />
+      <Avatar name="Hirotomo Yamada" size="sm" />
+      <Avatar name="Hirotomo Yamada" size="md" />
+      <Avatar name="Hirotomo Yamada" size="lg" />
+      <Avatar name="Hirotomo Yamada" size="xl" />
+      <Avatar name="Hirotomo Yamada" size="2xl" />
     </Wrap>
   )
 }
@@ -41,8 +41,8 @@ export const withName: Story = () => {
 export const withImage: Story = () => {
   return (
     <Avatar
-      src="https://avatars.githubusercontent.com/u/84060430?v=4"
       alt="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
     />
   )
 }
@@ -51,7 +51,7 @@ export const withFallback: Story = () => {
   return (
     <Wrap gap="md">
       <Avatar bg="secondary" src="https://not-found.com" />
-      <Avatar src="https://not-found.com" alt="alternative text" />
+      <Avatar alt="alternative text" src="https://not-found.com" />
       <Avatar icon={<Ghost fontSize="2xl" />} src="https://not-found.com" />
     </Wrap>
   )

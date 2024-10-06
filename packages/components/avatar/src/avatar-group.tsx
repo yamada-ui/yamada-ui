@@ -1,39 +1,40 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import {
   cx,
+  filterUndefined,
   getValidChildren,
   isUndefined,
-  filterUndefined,
 } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 
-type AvatarGroupOptions = {
+interface AvatarGroupOptions {
   /**
    * The maximum number of visible avatars.
    */
   max?: number
 }
 
-export type AvatarGroupProps = HTMLUIProps<"div"> &
-  ThemeProps<"Avatar"> &
-  AvatarGroupOptions
+export interface AvatarGroupProps
+  extends AvatarGroupOptions,
+    HTMLUIProps,
+    ThemeProps<"Avatar"> {}
 
 export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
   const [styles] = useComponentMultiStyle("Avatar", props)
   const {
     className,
-    max,
     borderColor,
-    gap = "fallback(-2, -0.5rem)",
     borderRadius = "fallback(full, 9999px)",
-    rounded = "fallback(full, 9999px)",
     children,
+    gap = "fallback(-2, -0.5rem)",
+    max,
+    rounded = "fallback(full, 9999px)",
     ...rest
   } = omitThemeProps(props)
 
@@ -51,10 +52,10 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     cloneElement(
       child,
       filterUndefined({
-        marginEnd: !i ? 0 : gap,
-        size: props.size,
         borderColor: child.props.borderColor ?? borderColor,
         borderWidth: "2px",
+        marginEnd: !i ? 0 : gap,
+        size: props.size,
       }),
     ),
   )
@@ -62,13 +63,13 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
   return (
     <ui.div
       ref={ref}
-      role="group"
       className={cx("ui-avatar-group", className)}
+      role="group"
       __css={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "row-reverse",
         justifyContent: "flex-end",
-        alignItems: "center",
         ...styles.group,
       }}
       {...rest}
@@ -77,18 +78,18 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
         <ui.span
           className="ui-avatar__excess"
           borderRadius={borderRadius}
-          rounded={rounded}
           ms={gap}
+          rounded={rounded}
           __css={{
-            position: "relative",
-            display: "inline-flex",
-            justifyContent: "center",
             alignItems: "center",
+            borderWidth: "2px",
+            display: "inline-flex",
             flexShrink: 0,
+            fontWeight: "medium",
+            justifyContent: "center",
+            position: "relative",
             textAlign: "center",
             textTransform: "uppercase",
-            fontWeight: "medium",
-            borderWidth: "2px",
             ...styles.excess,
           }}
         >

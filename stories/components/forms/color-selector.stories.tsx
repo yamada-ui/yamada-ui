@@ -1,7 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 import {
   Button,
   ColorSelector,
@@ -10,12 +8,14 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof ColorSelector>
 
 const meta: Meta<typeof ColorSelector> = {
-  title: "Components / Forms / ColorSelector",
   component: ColorSelector,
+  title: "Components / Forms / ColorSelector",
 }
 
 export default meta
@@ -60,9 +60,9 @@ export const withFormat: Story = () => {
 export const withStep: Story = () => {
   return (
     <ColorSelector
-      saturationSliderProps={{ step: 0.1 }}
-      hueSliderProps={{ step: 10 }}
       alphaSliderProps={{ step: 0.1 }}
+      hueSliderProps={{ step: 10 }}
+      saturationSliderProps={{ step: 0.1 }}
     />
   )
 }
@@ -70,7 +70,6 @@ export const withStep: Story = () => {
 export const withSwatches: Story = () => {
   return (
     <ColorSelector
-      swatchesLabel="Saved Colors"
       swatches={[
         "#2e2e2e",
         "#868e96",
@@ -87,6 +86,7 @@ export const withSwatches: Story = () => {
         "#fab005",
         "#fd7e14",
       ]}
+      swatchesLabel="Saved Colors"
     />
   )
 }
@@ -94,8 +94,6 @@ export const withSwatches: Story = () => {
 export const withSwatchesColumns: Story = () => {
   return (
     <ColorSelector
-      swatchesLabel="Saved Colors"
-      swatchesColumns={{ base: 8, md: 7 }}
       swatches={[
         "#2e2e2e",
         "#868e96",
@@ -112,6 +110,8 @@ export const withSwatchesColumns: Story = () => {
         "#fab005",
         "#fd7e14",
       ]}
+      swatchesColumns={{ base: 8, md: 7 }}
+      swatchesLabel="Saved Colors"
     />
   )
 }
@@ -133,7 +133,6 @@ export const isDisabled: Story = () => {
     <>
       <ColorSelector
         isDisabled
-        swatchesLabel="Saved Colors"
         swatches={[
           "#2e2e2e",
           "#868e96",
@@ -150,12 +149,13 @@ export const isDisabled: Story = () => {
           "#fab005",
           "#fd7e14",
         ]}
+        swatchesLabel="Saved Colors"
       />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isDisabled
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <ColorSelector />
       </FormControl>
@@ -168,7 +168,6 @@ export const isReadonly: Story = () => {
     <>
       <ColorSelector
         isReadOnly
-        swatchesLabel="Saved Colors"
         swatches={[
           "#2e2e2e",
           "#868e96",
@@ -185,12 +184,13 @@ export const isReadonly: Story = () => {
           "#fab005",
           "#fd7e14",
         ]}
+        swatchesLabel="Saved Colors"
       />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isReadOnly
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <ColorSelector />
       </FormControl>
@@ -270,9 +270,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -282,9 +282,9 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.colorPicker?.message}
         isInvalid={!!errors.colorPicker}
         label="Pick color"
-        errorMessage={errors.colorPicker?.message}
       >
         <Controller
           name="colorPicker"

@@ -1,33 +1,33 @@
 import type { CSSUIObject, RequiredPropGetter } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import type { Dict, Merge } from "@yamada-ui/utils"
-import { createContext } from "@yamada-ui/utils"
 import type { Dispatch, ReactNode, SetStateAction } from "react"
 import type { GroupProps, InputProps, ItemProps } from "./use-rating"
+import { createContext } from "@yamada-ui/utils"
 
 interface RatingContext {
+  id: string
+  name: string
+  decimal: number
+  emptyIcon: ((value: number) => ReactNode) | ReactNode | undefined
+  filledIcon: ((value: number) => ReactNode) | ReactNode | undefined
+  highlightSelectedOnly: boolean
+  hoveredValue: number
+  isOutside: boolean
+  resolvedValue: number
+  roundedValue: number
+  setHoveredValue: Dispatch<SetStateAction<number>>
+  setValue: Dispatch<SetStateAction<number>>
+  styles: { [key: string]: CSSUIObject | undefined }
+  value: number
+  formControlProps: Dict
   getGroupProps: RequiredPropGetter<
     Merge<MotionProps, { value: number }>,
     MotionProps
   >
-  id: string
-  name: string
-  value: number
-  roundedValue: number
-  hoveredValue: number
-  resolvedValue: number
-  isOutside: boolean
-  setValue: Dispatch<SetStateAction<number>>
-  setHoveredValue: Dispatch<SetStateAction<number>>
-  decimal: number
-  highlightSelectedOnly: boolean
-  formControlProps: Dict
   groupProps: GroupProps | undefined
-  itemProps: ItemProps | undefined
   inputProps: InputProps | undefined
-  emptyIcon: ReactNode | ((value: number) => ReactNode) | undefined
-  filledIcon: ReactNode | ((value: number) => ReactNode) | undefined
-  styles: { [key: string]: CSSUIObject }
+  itemProps: ItemProps | undefined
 }
 
 export const [RatingProvider, useRatingContext] = createContext<RatingContext>({

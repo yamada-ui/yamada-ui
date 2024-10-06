@@ -1,30 +1,30 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef } from "react"
 import { Box, Center, Motion, useDragControls } from "@yamada-ui/react"
+import { useRef } from "react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: "Components / Motion / Drag",
   component: Motion,
+  title: "Components / Motion / Drag",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        drag
-        onDrag={(_, info) => console.log("Drag", info)}
-        onDragStart={(_, info) => console.log("Drag starts", info)}
-        onDragEnd={(_, info) => console.log("Drag ends", info)}
-        w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="grab"
         _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
+        drag
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
+        onDrag={(_, info) => console.log("Drag", info)}
+        onDragEnd={(_, info) => console.log("Drag ends", info)}
+        onDragStart={(_, info) => console.log("Drag starts", info)}
       />
     </Center>
   )
@@ -32,26 +32,26 @@ export const basic: Story = () => {
 
 export const withConstraints: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)" gap="md">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        drag="x"
-        w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="grab"
         _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
+        drag="x"
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
       />
 
       <Motion
-        drag
-        dragConstraints={{ top: -100, left: -100, bottom: 100, right: 100 }}
-        w="2xs"
-        h="2xs"
-        bg="secondary"
-        rounded="3xl"
-        cursor="grab"
         _active={{ cursor: "grabbing" }}
+        bg="secondary"
+        cursor="grab"
+        drag
+        dragConstraints={{ bottom: 100, left: -100, right: 100, top: -100 }}
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
       />
     </Center>
   )
@@ -63,19 +63,19 @@ export const withConstraintsRef: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
-        w="2xs"
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )
@@ -87,20 +87,20 @@ export const withElastic: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
         dragElastic={0}
-        w="2xs"
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )
@@ -112,20 +112,20 @@ export const withMomentum: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
         dragMomentum={false}
-        w="2xs"
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )
@@ -137,20 +137,20 @@ export const withTransition: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
-        dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-        w="2xs"
+        dragTransition={{ bounceDamping: 10, bounceStiffness: 600 }}
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )
@@ -163,31 +163,31 @@ export const usePropagation: Story = () => {
   return (
     <Center
       ref={containerRef}
-      w="calc(100vw - 16px * 2)"
       h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Motion
         ref={itemRef}
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={containerRef}
-        w="2xs"
         h="2xs"
         p="md"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       >
         <Motion
+          _active={{ cursor: "grabbing" }}
+          bg="secondary"
+          cursor="grab"
           drag
           dragConstraints={itemRef}
           dragPropagation
-          w="4xs"
           h="4xs"
-          bg="secondary"
           rounded="3xl"
-          cursor="grab"
-          _active={{ cursor: "grabbing" }}
+          w="4xs"
         />
       </Motion>
     </Center>
@@ -201,29 +201,29 @@ export const useControls: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Box
-        w="2xs"
-        h="2xs"
         bg="secondary"
-        rounded="3xl"
         cursor="pointer"
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
         onPointerDown={(ev) => dragControls.start(ev, { snapToCursor: true })}
       />
 
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
         dragControls={dragControls}
-        w="2xs"
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )
@@ -236,30 +236,30 @@ export const disabledListener: Story = () => {
   return (
     <Center
       ref={constraintsRef}
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Box
-        w="2xs"
-        h="2xs"
         bg="secondary"
-        rounded="3xl"
         cursor="pointer"
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
         onPointerDown={(ev) => dragControls.start(ev, { snapToCursor: true })}
       />
 
       <Motion
+        _active={{ cursor: "grabbing" }}
+        bg="primary"
+        cursor="grab"
         drag
         dragConstraints={constraintsRef}
         dragControls={dragControls}
         dragListener={false}
-        w="2xs"
         h="2xs"
-        bg="primary"
         rounded="3xl"
-        cursor="grab"
-        _active={{ cursor: "grabbing" }}
+        w="2xs"
       />
     </Center>
   )

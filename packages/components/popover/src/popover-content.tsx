@@ -1,13 +1,13 @@
 import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
+import type { PropsWithChildren } from "react"
+import type { PopoverProps } from "./popover"
 import { ui } from "@yamada-ui/core"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
-import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
 import { useMemo } from "react"
-import type { PropsWithChildren } from "react"
 import { usePopover } from "./popover"
-import type { PopoverProps } from "./popover"
 import { PopoverCloseButton } from "./popover-close-button"
 
 export interface PopoverContentProps
@@ -24,9 +24,9 @@ const getPopoverContentProps = (
   duration?: PopoverProps["duration"],
 ) => {
   const custom = {
-    reverse: true,
     duration,
     enter: { visibility: "visible" },
+    reverse: true,
     transitionEnd: { exit: { visibility: "hidden" } },
   }
 
@@ -64,30 +64,30 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     {
       as = "section",
       className,
-      containerProps,
       children,
-      w,
-      width,
-      minW,
-      minWidth,
       maxW,
       maxWidth,
+      minW,
+      minWidth,
+      w,
+      width,
       z,
       zIndex,
+      containerProps,
       __css,
       ...rest
     },
     ref,
   ) => {
     const {
-      isOpen,
-      closeOnButton,
-      getPopperProps,
-      getPopoverProps,
-      onAnimationComplete,
       animation,
+      closeOnButton,
       duration,
+      isOpen,
       styles,
+      getPopoverProps,
+      getPopperProps,
+      onAnimationComplete,
     } = usePopover()
 
     const validChildren = getValidChildren(children)
@@ -101,23 +101,23 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     const css = __css ?? styles.container ?? {}
 
     const computedCSS: CSSUIObject = {
-      position: "relative",
-      w: "100%",
       display: "flex",
       flexDirection: "column",
       outline: 0,
+      position: "relative",
+      w: "100%",
       ...css,
     }
 
     width ??= w
-    width ??= (css?.width ?? css?.w) as CSSUIProps["width"]
+    width ??= (css.width ?? css.w) as CSSUIProps["width"]
     minWidth ??= minW
-    minWidth ??= (css?.minWidth ?? css?.minW) as CSSUIProps["minWidth"]
+    minWidth ??= (css.minWidth ?? css.minW) as CSSUIProps["minWidth"]
     maxWidth ??= maxW
-    maxWidth ??= (css?.maxWidth ?? css?.maxW) as CSSUIProps["maxWidth"]
+    maxWidth ??= (css.maxWidth ?? css.maxW) as CSSUIProps["maxWidth"]
 
     zIndex ??= z
-    zIndex ??= (css?.zIndex ?? css?.z) as CSSUIProps["zIndex"]
+    zIndex ??= (css.zIndex ?? css.z) as CSSUIProps["zIndex"]
 
     return (
       <ui.div
@@ -125,10 +125,10 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
           style: { visibility: isOpen ? "visible" : "hidden" },
         })}
         className="ui-popover"
+        maxWidth={maxWidth}
+        minWidth={minWidth}
         outline="none"
         width={width}
-        minWidth={minWidth}
-        maxWidth={maxWidth}
         zIndex={zIndex}
         {...containerProps}
       >
@@ -138,9 +138,9 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             ? getPopoverContentProps(animation, duration)
             : {})}
           {...getPopoverProps(rest, ref)}
-          initial="exit"
           animate={isOpen ? "enter" : "exit"}
           exit="exit"
+          initial="exit"
           onAnimationComplete={funcAll(
             onAnimationComplete,
             rest.onAnimationComplete,

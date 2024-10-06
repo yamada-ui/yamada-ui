@@ -1,20 +1,28 @@
 import type {
+  ColorModeToken,
+  CSS,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  ColorModeToken,
-  CSS,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type {
+  ChangeEvent,
+  CSSProperties,
+  FC,
+  ForwardedRef,
+  ReactElement,
+  ReactNode,
+} from "react"
 import {
-  useFormControlProps,
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import {
   formControlProperties,
+  useFormControlProps,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
@@ -26,65 +34,57 @@ import {
   mergeRefs,
   pickObject,
 } from "@yamada-ui/utils"
-import type {
-  ChangeEvent,
-  CSSProperties,
-  FC,
-  ForwardedRef,
-  ReactElement,
-  ReactNode,
-} from "react"
 import { cloneElement, useCallback, useMemo, useRef } from "react"
 
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 interface FileInputOptions {
+  children?: (files: File[] | undefined) => ReactNode
   /**
-   * The border color when the input is focused.
+   * The component that displays uploaded files.
    */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * The value of the file input.
-   */
-  value?: File[]
+  component?: FC<{ index: number; value: File }>
   /**
    * The initial value of the file input.
    */
   defaultValue?: File[]
   /**
-   * Function to be called when a file change event occurs.
+   * The border color when the input is invalid.
    */
-  onChange?: (files: File[] | undefined) => void
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * The component that displays uploaded files.
+   * The border color when the input is focused.
    */
-  component?: FC<{ value: File; index: number }>
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * A callback that formats the name of the uploaded file.
    */
   format?: (value: File, index: number) => string
+  /**
+   * Ref to a reset function.
+   */
+  resetRef?: ForwardedRef<() => void>
   /**
    * The string to separate uploaded files.
    *
    * @default ','
    */
   separator?: string
-  children?: (files: File[] | undefined) => ReactNode
   /**
-   * Ref to a reset function.
+   * The value of the file input.
    */
-  resetRef?: ForwardedRef<() => void>
+  value?: File[]
+  /**
+   * Function to be called when a file change event occurs.
+   */
+  onChange?: (files: File[] | undefined) => void
 }
 
 interface InputProps
   extends Partial<Pick<HTMLInputElement, "accept" | "multiple">> {}
 
 export interface FileInputProps
-  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "children">,
+  extends Omit<HTMLUIProps, "children" | "defaultValue" | "onChange">,
     ThemeProps<"Input">,
     InputProps,
     FileInputOptions,
@@ -99,20 +99,20 @@ export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("FileInput", props)
     const {
-      className,
       id,
-      name,
-      accept,
-      multiple,
       form,
-      placeholder,
-      value,
-      defaultValue,
+      name,
+      className,
+      accept,
       component,
+      defaultValue,
       format = defaultFormat,
       lineClamp = 1,
-      separator = ",",
+      multiple,
+      placeholder,
       resetRef,
+      separator = ",",
+      value,
       onChange: onChangeProp,
       onClick: onClickProp,
       ...rest
@@ -127,8 +127,8 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [values, setValues] = useControllableState<File[] | undefined>({
-      value,
       defaultValue,
+      value,
       onChange: onChangeProp,
     })
 
@@ -169,16 +169,16 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         return (
           <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
-              const el = component({ value, index })
+              const el = component({ index, value })
 
               const style: CSSProperties = {
-                marginBlockStart: "0.125rem",
                 marginBlockEnd: "0.125rem",
+                marginBlockStart: "0.125rem",
                 marginInlineEnd: "0.25rem",
               }
 
               return el
-                ? cloneElement(el as ReactElement, { style, key: index })
+                ? cloneElement(el as ReactElement, { key: index, style })
                 : null
             })}
           </ui.span>
@@ -202,37 +202,37 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     }, [children, format, lineClamp, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
-      display: "flex",
       alignItems: "center",
       cursor: !readOnly ? "pointer" : "auto",
+      display: "flex",
       ...styles.field,
     }
 
     return (
       <>
         <ui.input
-          ref={mergeRefs(inputRef, ref)}
-          type="file"
-          aria-hidden
-          tabIndex={-1}
           id={id}
-          name={name}
+          ref={mergeRefs(inputRef, ref)}
           form={form}
-          accept={accept}
-          multiple={multiple}
+          type="file"
+          name={name}
           style={{
             border: "0px",
             clip: "rect(0px, 0px, 0px, 0px)",
             height: "1px",
-            width: "1px",
             margin: "-1px",
-            padding: "0px",
             overflow: "hidden",
-            whiteSpace: "nowrap",
+            padding: "0px",
             position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
           }}
-          onChange={onChange}
+          accept={accept}
+          multiple={multiple}
+          tabIndex={-1}
+          aria-hidden
           aria-readonly={ariaReadonly}
+          onChange={onChange}
           {...formControlProps}
         />
 
@@ -241,10 +241,10 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           className={cx("ui-file-input", className)}
           py={values?.length && component ? "0.125rem" : undefined}
           {...rest}
-          __css={css}
           tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}
           onClick={handlerAll(onClickProp, onClick)}
+          __css={css}
         >
           {cloneChildren}
         </ui.div>
@@ -252,3 +252,6 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     )
   },
 )
+
+FileInput.displayName = "FileInput"
+FileInput.__ui__ = "FileInput"

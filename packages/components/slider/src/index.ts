@@ -1,29 +1,29 @@
 export {
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
-} from "./slider"
-export type {
-  SliderProps,
-  SliderTrackProps,
-  SliderFilledTrackProps,
-  SliderThumbProps,
-  SliderMarkProps,
-} from "./slider"
-export {
   RangeSlider,
-  RangeSliderTrack,
-  RangeSliderFilledTrack,
-  RangeSliderStartThumb,
   RangeSliderEndThumb,
+  RangeSliderFilledTrack,
   RangeSliderMark,
+  RangeSliderStartThumb,
+  RangeSliderTrack,
 } from "./range-slider"
 export type {
-  RangeSliderProps,
-  RangeSliderTrackProps,
   RangeSliderFilledTrackProps,
-  RangeSliderThumbProps,
   RangeSliderMarkProps,
+  RangeSliderProps,
+  RangeSliderThumbProps,
+  RangeSliderTrackProps,
 } from "./range-slider"
+export {
+  Slider,
+  SliderFilledTrack,
+  SliderMark,
+  SliderThumb,
+  SliderTrack,
+} from "./slider"
+export type {
+  SliderFilledTrackProps,
+  SliderMarkProps,
+  SliderProps,
+  SliderThumbProps,
+  SliderTrackProps,
+} from "./slider"

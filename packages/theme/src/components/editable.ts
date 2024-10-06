@@ -7,18 +7,11 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
     container: {
       w: "full",
     },
-    preview: {
-      rounded: "md",
-      p: "1",
-      whiteSpace: "pre-line",
-      transitionProperty: "common",
-      transitionDuration: "normal",
-    },
     input: ({
-      theme: t,
       colorMode: m,
-      focusBorderColor: fc = "focus",
       errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -28,30 +21,37 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
-        rounded: "md",
-        p: "1",
-        w: "full",
-        transitionProperty: "common",
-        transitionDuration: "normal",
-        _placeholder: { opacity: 0.6 },
+        _focus: {
+          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
+          zIndex: "yamcha",
+        },
+        _focusVisible: {
+          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
+          zIndex: "yamcha",
+        },
         _invalid: {
           boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
         },
-        _focus: {
-          zIndex: "yamcha",
-          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
-        },
-        _focusVisible: {
-          zIndex: "yamcha",
-          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
-        },
+        _placeholder: { opacity: 0.6 },
+        p: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "full",
       }
     },
+    preview: {
+      p: "1",
+      rounded: "md",
+      transitionDuration: "normal",
+      transitionProperty: "common",
+      whiteSpace: "pre-line",
+    },
     textarea: ({
-      theme: t,
       colorMode: m,
-      focusBorderColor: fc = "focus",
       errorBorderColor: ec = ["danger.500", "danger.400"],
+      focusBorderColor: fc = "focus",
+      theme: t,
     }) => {
       const focusBorderColor = isArray(fc)
         ? mode(getColor(fc[0], fc[0])(t, m), getColor(fc[1], fc[1])(t, m))(m)
@@ -61,25 +61,25 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
-        boxSizing: "content-box",
-        rounded: "md",
-        p: "1",
-        w: "full",
-        h: "1lh",
-        transitionProperty: "common",
-        transitionDuration: "normal",
-        _placeholder: { opacity: 0.6 },
+        _focus: {
+          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
+          zIndex: "yamcha",
+        },
+        _focusVisible: {
+          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
+          zIndex: "yamcha",
+        },
         _invalid: {
           boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
         },
-        _focus: {
-          zIndex: "yamcha",
-          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
-        },
-        _focusVisible: {
-          zIndex: "yamcha",
-          boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
-        },
+        _placeholder: { opacity: 0.6 },
+        boxSizing: "content-box",
+        h: "1lh",
+        p: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "full",
       }
     },
   },

@@ -4,43 +4,77 @@ import { isGray, shadeColor } from "@yamada-ui/utils"
 export const Switch: ComponentMultiStyle<"Switch"> = {
   baseStyle: {
     container: {
-      _readOnly: { cursor: "auto" },
       _disabled: {
-        opacity: 0.4,
         cursor: "not-allowed",
+        opacity: 0.4,
       },
+      _readOnly: { cursor: "auto" },
+    },
+    label: {
+      userSelect: "none",
+    },
+    thumb: {
+      bg: "white",
+      rounded: "inherit",
     },
     track: {
-      rounded: "full",
-      bg: ["blackAlpha.400", "whiteAlpha.300"],
-      transitionProperty: "common",
-      transitionDuration: "fast",
       _checked: {
         justifyContent: "flex-end",
       },
       _focusVisible: {
         boxShadow: "outline",
       },
-    },
-    thumb: {
-      rounded: "inherit",
-      bg: "white",
-    },
-    label: {
-      userSelect: "none",
+      bg: ["blackAlpha.400", "whiteAlpha.300"],
+      rounded: "full",
+      transitionDuration: "fast",
+      transitionProperty: "common",
     },
   },
 
-  variants: {
-    thick: ({ colorScheme: c = "primary" }) => ({
+  sizes: {
+    sm: ({ variant: v }) => ({
+      label: { fontSize: "sm" },
+      thumb: {
+        h: "3",
+        w: "3",
+      },
       track: {
-        p: "1",
+        h: v === "thin" ? "2" : undefined,
+        w: "6",
+      },
+    }),
+    md: ({ variant: v }) => ({
+      label: { fontSize: "md" },
+      thumb: {
+        h: "4",
+        w: "4",
+      },
+      track: {
+        h: v === "thin" ? "3" : undefined,
+        w: "8",
+      },
+    }),
+    lg: ({ variant: v }) => ({
+      label: { fontSize: "lg" },
+      thumb: {
+        h: "5",
+        w: "5",
+      },
+      track: {
+        h: v === "thin" ? "4" : undefined,
+        w: "10",
+      },
+    }),
+  },
+
+  variants: {
+    thin: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+      thumb: {
         _checked: {
           bg: [`${c}.500`, `${c}.600`],
         },
+        boxShadow: "dark-md",
       },
-    }),
-    thin: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       track: {
         _checked: {
           bg: [
@@ -49,54 +83,20 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
           ],
         },
       },
-      thumb: {
-        boxShadow: "dark-md",
+    }),
+    thick: ({ colorScheme: c = "primary" }) => ({
+      track: {
         _checked: {
           bg: [`${c}.500`, `${c}.600`],
         },
+        p: "1",
       },
-    }),
-  },
-
-  sizes: {
-    sm: ({ variant: v }) => ({
-      track: {
-        w: "6",
-        h: v === "thin" ? "2" : undefined,
-      },
-      thumb: {
-        w: "3",
-        h: "3",
-      },
-      label: { fontSize: "sm" },
-    }),
-    md: ({ variant: v }) => ({
-      track: {
-        w: "8",
-        h: v === "thin" ? "3" : undefined,
-      },
-      thumb: {
-        w: "4",
-        h: "4",
-      },
-      label: { fontSize: "md" },
-    }),
-    lg: ({ variant: v }) => ({
-      track: {
-        w: "10",
-        h: v === "thin" ? "4" : undefined,
-      },
-      thumb: {
-        w: "5",
-        h: "5",
-      },
-      label: { fontSize: "lg" },
     }),
   },
 
   defaultProps: {
+    colorScheme: "primary",
     size: "md",
     variant: "thick",
-    colorScheme: "primary",
   },
 }

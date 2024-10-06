@@ -1,9 +1,9 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { Icon } from "@yamada-ui/icon"
-import { cx, handlerAll, mergeRefs, dataAttr } from "@yamada-ui/utils"
 import type { FC } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/icon"
+import { cx, dataAttr, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import { useReorderContext, useReorderItemContext } from "./reorder-context"
 
 export interface ReorderTriggerProps extends HTMLUIProps {}
@@ -11,16 +11,16 @@ export interface ReorderTriggerProps extends HTMLUIProps {}
 export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
   ({ className, children = <ReorderTriggerIcon />, ...rest }, ref) => {
     const { styles } = useReorderContext()
-    const { register, isDrag, dragControls } = useReorderItemContext()
+    const { dragControls, isDrag, register } = useReorderItemContext()
 
     const css: CSSUIObject = {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      cursor: "grab",
       _selected: {
         cursor: "grabbing",
       },
+      alignItems: "center",
+      cursor: "grab",
+      display: "flex",
+      justifyContent: "center",
       ...styles.trigger,
     }
 

@@ -10,7 +10,7 @@ import { assert } from "./utils"
 describe("<Resizable />", () => {
   test.skip("Resizable renders correctly", async () => {
     const { container } = render(
-      <Resizable h="md" rounded="md" borderWidth="1px">
+      <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem>One</ResizableItem>
 
         <ResizableTrigger />
@@ -24,7 +24,7 @@ describe("<Resizable />", () => {
 
   test("The default size of the left panel should be 30 and 70", () => {
     const { container } = render(
-      <Resizable h="md" rounded="md" borderWidth="1px">
+      <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem id="left-item" defaultSize={30}>
           One
         </ResizableItem>
@@ -52,7 +52,7 @@ describe("<Resizable />", () => {
 })
 
 describe("<ResizableTriggerIcon />", () => {
-  test("applies styles `width` and `height` correctly", async () => {
+  test("applies styles `width` and `height` correctly", () => {
     const { getByTestId } = render(
       <ResizableTriggerIcon data-testid="resizable" />,
     )
@@ -61,14 +61,14 @@ describe("<ResizableTriggerIcon />", () => {
     expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
   })
 
-  test("icon renders correctly", async () => {
+  test("icon renders correctly", () => {
     const { getByTestId } = render(
       <Resizable>
         <ResizableItem defaultSize={50}>One</ResizableItem>
 
         <ResizableTrigger
-          data-testid="resizable"
           icon={<ResizableTriggerIcon />}
+          data-testid="resizable"
         />
 
         <ResizableItem defaultSize={50}>Two</ResizableItem>

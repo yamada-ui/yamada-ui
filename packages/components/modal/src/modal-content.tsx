@@ -1,11 +1,11 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
+import type { PropsWithChildren } from "react"
+import type { ModalProps } from "./modal"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
-import { cx, getValidChildren, findChildren } from "@yamada-ui/utils"
-import type { PropsWithChildren } from "react"
+import { cx, findChildren, getValidChildren } from "@yamada-ui/utils"
 import { DialogCloseButton } from "./dialog-close-button"
-import type { ModalProps } from "./modal"
 import { ModalCloseButton } from "./modal-close-button"
 import { useModal } from "./modal-context"
 
@@ -17,27 +17,27 @@ const getModalContentProps = (
     case "scale":
       return {
         ...scaleFadeProps,
-        custom: { scale: 0.95, reverse: true, duration },
+        custom: { duration, reverse: true, scale: 0.95 },
       }
     case "top":
       return {
         ...slideFadeProps,
-        custom: { offsetY: -16, reverse: true, duration },
+        custom: { duration, offsetY: -16, reverse: true },
       }
     case "right":
       return {
         ...slideFadeProps,
-        custom: { offsetX: 16, reverse: true, duration },
+        custom: { duration, offsetX: 16, reverse: true },
       }
     case "left":
       return {
         ...slideFadeProps,
-        custom: { offsetX: -16, reverse: true, duration },
+        custom: { duration, offsetX: -16, reverse: true },
       }
     case "bottom":
       return {
         ...slideFadeProps,
-        custom: { offsetY: 16, reverse: true, duration },
+        custom: { duration, offsetY: 16, reverse: true },
       }
   }
 }
@@ -45,19 +45,19 @@ const getModalContentProps = (
 export interface ModalContentProps
   extends Omit<
       MotionProps<"section">,
-      "transition" | "scrollBehavior" | "animation" | "children"
+      "animation" | "children" | "scrollBehavior" | "transition"
     >,
     PropsWithChildren {}
 
 export const ModalContent = motionForwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
     const {
-      styles,
-      scrollBehavior,
-      withCloseButton,
-      onClose,
       animation,
       duration,
+      scrollBehavior,
+      styles,
+      withCloseButton,
+      onClose,
     } = useModal()
 
     const validChildren = getValidChildren(children)
@@ -72,22 +72,22 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
       animation !== "none" ? getModalContentProps(animation, duration) : {}
 
     const css: CSSUIObject = {
-      position: "relative",
-      maxH: "100%",
       display: "flex",
       flexDirection: "column",
-      overflow: scrollBehavior === "inside" ? "hidden" : "auto",
+      maxH: "100%",
       outline: 0,
+      overflow: scrollBehavior === "inside" ? "hidden" : "auto",
+      position: "relative",
       ...(__css ? __css : styles.container),
     }
 
     return (
       <motion.section
-        role="dialog"
-        aria-modal="true"
         ref={ref}
         className={cx("ui-modal", className)}
+        role="dialog"
         tabIndex={-1}
+        aria-modal="true"
         __css={css}
         {...props}
         {...rest}

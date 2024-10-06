@@ -1,12 +1,12 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UseColorSliderProps } from "./use-color-slider"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { UseColorSliderProps } from "./use-color-slider"
 import { useColorSlider } from "./use-color-slider"
 
 const defaultOverlays = (
@@ -38,17 +38,21 @@ const defaultOverlays = (
 
 interface HueSliderOptions {
   /**
+   * The maximum allowed value of the slider. Cannot be less than min.
+   *
+   * @default 360
+   */
+  max?: number
+  /**
    * The minimum allowed value of the slider. Cannot be greater than max.
    *
    * @default 0
    */
   min?: number
   /**
-   * The maximum allowed value of the slider. Cannot be less than min.
-   *
-   * @default 360
+   * The overlay used for the slider.
    */
-  max?: number
+  overlays?: HTMLUIProps[]
   /**
    * The step in which increments or decrements have to be made.
    *
@@ -66,17 +70,13 @@ interface HueSliderOptions {
    */
   inputProps?: HTMLUIProps<"input">
   /**
-   * Props for slider track element.
-   */
-  trackProps?: HTMLUIProps
-  /**
    * Props for slider thumb element.
    */
   thumbProps?: HTMLUIProps
   /**
-   * The overlay used for the slider.
+   * Props for slider track element.
    */
-  overlays?: HTMLUIProps[]
+  trackProps?: HTMLUIProps
 }
 
 /**
@@ -93,18 +93,18 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("HueSlider", props)
   const {
     className,
-    inputProps,
-    trackProps,
-    thumbProps,
-    min = 0,
     max = 360,
+    min = 0,
     withShadow = true,
     overlays = defaultOverlays(min, max, withShadow),
+    inputProps,
+    thumbProps,
+    trackProps,
     __css,
     ...computedProps
   } = omitThemeProps(mergedProps)
-  const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =
-    useColorSlider({ min, max, step: 1, ...computedProps })
+  const { getContainerProps, getInputProps, getThumbProps, getTrackProps } =
+    useColorSlider({ max, min, step: 1, ...computedProps })
 
   const css: CSSUIObject = {
     position: "relative",
@@ -125,11 +125,11 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
           key={index}
           className="ui-hue-slider__overlay"
           __css={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
             bottom: 0,
+            left: 0,
+            position: "absolute",
+            right: 0,
+            top: 0,
             ...styles.overlay,
           }}
           {...props}
@@ -138,7 +138,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
 
       <ui.div
         className="ui-hue-slider__track"
-        __css={{ position: "relative", w: "100%", h: "100%", ...styles.track }}
+        __css={{ h: "100%", position: "relative", w: "100%", ...styles.track }}
         {...getTrackProps(trackProps)}
       >
         <ui.div

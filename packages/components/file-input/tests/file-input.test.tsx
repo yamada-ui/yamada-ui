@@ -7,13 +7,13 @@ describe("<FileInput />", () => {
   })
 
   test("should render FileInput", () => {
-    render(<FileInput placeholder="basic" data-testid="FileInput" />)
+    render(<FileInput data-testid="FileInput" placeholder="basic" />)
     expect(screen.getByTestId("FileInput")).toBeInTheDocument()
   })
 
   test("should render FileInput with multiple inputs", () => {
     const { container } = render(
-      <FileInput multiple placeholder="multiple" data-testid="FileInput" />,
+      <FileInput data-testid="FileInput" multiple placeholder="multiple" />,
     )
     expect(container.getElementsByTagName("input")[0]).toHaveAttribute(
       "multiple",
@@ -32,7 +32,7 @@ describe("<FileInput />", () => {
 
   test("should render files with provided separator", () => {
     const { container } = render(
-      <FileInput multiple separator=";" data-testid="FileInput" />,
+      <FileInput data-testid="FileInput" multiple separator=";" />,
     )
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
     const fileInput = container.querySelector('input[type="file"]')!
@@ -46,10 +46,10 @@ describe("<FileInput />", () => {
   test("should render files with format", () => {
     const { container } = render(
       <FileInput
+        data-testid="FileInput"
         format={({ name }) => name.substring(0, name.indexOf("."))}
         multiple
         placeholder="multiple"
-        data-testid="FileInput"
       />,
     )
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
@@ -63,7 +63,7 @@ describe("<FileInput />", () => {
 
   test("should render files with children", () => {
     const { container } = render(
-      <FileInput multiple data-testid="FileInput">
+      <FileInput data-testid="FileInput" multiple>
         {(files) => <div>Selected: {files?.length ?? 0}</div>}
       </FileInput>,
     )
@@ -78,14 +78,14 @@ describe("<FileInput />", () => {
 
   test("should be disabled", () => {
     const { container } = render(
-      <FileInput isDisabled data-testid="FileInput" />,
+      <FileInput data-testid="FileInput" isDisabled />,
     )
     expect(container.querySelector('input[type="file"]')).toBeDisabled()
   })
 
   test("should be read only", () => {
     const { container } = render(
-      <FileInput isReadOnly data-testid="FileInput" />,
+      <FileInput data-testid="FileInput" isReadOnly />,
     )
     expect(container.querySelector('input[type="file"]')).toHaveAttribute(
       "readonly",
@@ -94,7 +94,7 @@ describe("<FileInput />", () => {
 
   test("should be invalid", () => {
     const { container } = render(
-      <FileInput isInvalid data-testid="FileInput" />,
+      <FileInput data-testid="FileInput" isInvalid />,
     )
     expect(container.querySelector('input[type="file"]')).toHaveAttribute(
       "aria-invalid",
@@ -110,9 +110,9 @@ describe("<FileInput />", () => {
     })
     const { container } = render(
       <FileInput
+        data-testid="FileInput"
         multiple
         resetRef={resetRef}
-        data-testid="FileInput"
         onChange={setFiles}
       />,
     )
@@ -150,7 +150,7 @@ describe("<FileInput />", () => {
     })
 
     const { container } = render(
-      <FileInput multiple data-testid="FileInput" onChange={setFiles} />,
+      <FileInput data-testid="FileInput" multiple onChange={setFiles} />,
     )
 
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
@@ -192,6 +192,7 @@ describe("<FileInput />", () => {
     const { container } = render(
       <div>
         <FileInput
+          data-testid="FileInput"
           component={({ index, value }) => {
             files.push(value)
             return (
@@ -204,7 +205,6 @@ describe("<FileInput />", () => {
             )
           }}
           multiple
-          data-testid="FileInput"
         />
       </div>,
     )
@@ -230,12 +230,12 @@ describe("<FileInput />", () => {
     const { container } = render(
       <div>
         <FileInput
+          data-testid="FileInput"
           component={({ value }) => {
             files.push(value)
             return null
           }}
           multiple
-          data-testid="FileInput"
         />
       </div>,
     )
@@ -255,7 +255,7 @@ describe("<FileInput />", () => {
 
   test("click should not be called in the inner input element after click when disabled", () => {
     const { container } = render(
-      <FileInput isDisabled data-testid="file-input" />,
+      <FileInput data-testid="file-input" isDisabled />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
     const listener = vi.fn()
@@ -268,7 +268,7 @@ describe("<FileInput />", () => {
 
   test("click should not be called in the inner input element after click when readonly", () => {
     const { container } = render(
-      <FileInput isReadOnly data-testid="file-input" />,
+      <FileInput data-testid="file-input" isReadOnly />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
     const listener = vi.fn()

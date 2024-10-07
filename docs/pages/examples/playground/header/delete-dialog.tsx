@@ -16,11 +16,11 @@ export const DeleteDialog: FC<DeleteDialogProps> = memo(
 
     return (
       <Dialog
+        size="xl"
         cancel="Cancel"
         header="Are you absolutely sure?"
         isOpen={isOpen}
-        size="xl"
-        success={{ children: "Delete", colorScheme: "danger" }}
+        success={{ colorScheme: "danger", children: "Delete" }}
         onCancel={onClose}
         onClose={onClose}
         onSuccess={onClose}

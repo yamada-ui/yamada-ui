@@ -12,14 +12,14 @@ export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
     channels: {},
     container: { w: "full" },
     eyeDropper: {
+      borderColor: "border",
+      color: ["blackAlpha.600", "whiteAlpha.700"],
       _hover: {
+        borderColor: ["blackAlpha.500", "whiteAlpha.400"],
         _disabled: {
           borderColor: "inherit",
         },
-        borderColor: ["blackAlpha.500", "whiteAlpha.400"],
       },
-      borderColor: "border",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
     },
     hueSlider: {},
     result: {},

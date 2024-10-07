@@ -88,7 +88,6 @@ export const Search = memo(
           ref={ref}
           as="button"
           type="button"
-          _focusVisible={{ shadow: "outline" }}
           bg={["white", "black"]}
           border="1px solid"
           color={["blackAlpha.600", "whiteAlpha.400"]}
@@ -101,6 +100,7 @@ export const Search = memo(
           transitionDuration="slower"
           transitionProperty="common"
           w="full"
+          _focusVisible={{ shadow: "outline" }}
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         >
@@ -126,10 +126,10 @@ export const SearchButton = memo(
         <IconButton
           ref={ref}
           type="button"
-          _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
+          variant="ghost"
           color="muted"
           icon={<SearchIcon fontSize="2xl" />}
-          variant="ghost"
+          _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         />
@@ -253,9 +253,9 @@ const SearchModal: FC<SearchModalProps> = memo(
 
     return (
       <Modal
+        size="3xl"
         isOpen={isOpen}
         placement="top"
-        size="3xl"
         withCloseButton={false}
         onClose={onClose}
         {...rest}
@@ -309,22 +309,22 @@ const SearchModal: FC<SearchModalProps> = memo(
                     key={slug}
                     ref={ref}
                     as={NextLink}
-                    _active={{}}
-                    _focus={{ outline: "none" }}
-                    _focusVisible={{ boxShadow: "outline" }}
-                    _hover={{ boxShadow: "outline" }}
-                    _selected={{ boxShadow: "outline" }}
+                    href={slug}
+                    data-selected={dataAttr(isSelected)}
                     bg={["blackAlpha.50", "whiteAlpha.50"]}
                     borderWidth="1px"
                     gap="2"
-                    href={slug}
                     minH="16"
                     px="md"
                     py="sm"
                     rounded="md"
                     transitionDuration="normal"
                     transitionProperty="colors"
-                    data-selected={dataAttr(isSelected)}
+                    _active={{}}
+                    _focus={{ outline: "none" }}
+                    _focusVisible={{ boxShadow: "outline" }}
+                    _hover={{ boxShadow: "outline" }}
+                    _selected={{ boxShadow: "outline" }}
                     onClick={onClose}
                     onMouseEnter={() => {
                       eventRef.current = "mouse"

@@ -58,11 +58,7 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (
     <Button
       as={Link}
-      _hover={{
-        bg: [`blackAlpha.50`, `whiteAlpha.50`],
-        color: ["blackAlpha.700", "whiteAlpha.600"],
-        textDecoration: "none",
-      }}
+      variant="outline"
       alignItems="center"
       borderColor="border"
       borderWidth="1px"
@@ -79,7 +75,11 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
       textDecoration="inherit"
       transitionDuration="slower"
       transitionProperty="common"
-      variant="outline"
+      _hover={{
+        bg: [`blackAlpha.50`, `whiteAlpha.50`],
+        color: ["blackAlpha.700", "whiteAlpha.600"],
+        textDecoration: "none",
+      }}
       {...rest}
     />
   )

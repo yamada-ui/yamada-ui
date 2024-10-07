@@ -40,13 +40,13 @@ export const AspectRatio = forwardRef<AspectRatioProps, "div">(
       "& > img, & > video": {
         objectFit: "cover",
       },
+      position: "relative",
       _before: {
         content: `""`,
         display: "block",
         h: 0,
         pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),
       },
-      position: "relative",
     }
 
     return (

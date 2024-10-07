@@ -7,6 +7,9 @@ export const MultiSelect: ComponentMultiStyle<"MultiSelect"> = mergeMultiStyle(
   {
     baseStyle: {
       clearIcon: {
+        pointerEvents: "auto",
+        transitionDuration: "normal",
+        transitionProperty: "common",
         _disabled: {
           opacity: 0.4,
           pointerEvents: "none",
@@ -20,9 +23,6 @@ export const MultiSelect: ComponentMultiStyle<"MultiSelect"> = mergeMultiStyle(
         _readOnly: {
           pointerEvents: "none",
         },
-        pointerEvents: "auto",
-        transitionDuration: "normal",
-        transitionProperty: "common",
       },
     },
   },

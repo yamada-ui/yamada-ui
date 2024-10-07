@@ -34,10 +34,11 @@ export interface LinkOverlayProps
     LinkOverlayOptions {}
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
-  ({ className, children, href, isExternal, rel, target, ...rest }, ref) => {
+  ({ href, target, className, children, isExternal, rel, ...rest }, ref) => {
     const { styles, variableProps } = useLinkBox()
 
     const css: CSSUIObject = {
+      position: "static",
       _before: {
         content: '""',
         cursor: "inherit",
@@ -50,17 +51,16 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
         zIndex: 0,
         ...variableProps,
       },
-      position: "static",
       ...styles.overlay,
     }
 
     return (
       <ui.a
         ref={ref}
-        className={cx("ui-link-box__overlay", className)}
         href={href}
-        rel={isExternal ? "noopener" : rel}
         target={isExternal ? "_blank" : target}
+        className={cx("ui-link-box__overlay", className)}
+        rel={isExternal ? "noopener" : rel}
         __css={css}
         {...rest}
       >

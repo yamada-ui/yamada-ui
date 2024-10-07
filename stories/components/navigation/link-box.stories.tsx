@@ -23,7 +23,7 @@ export const basic: Story = () => {
     >
       <Text as="span">鳥山明</Text>
 
-      <Heading my="sm" size="md">
+      <Heading size="md" my="sm">
         <LinkOverlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
           isExternal
@@ -53,7 +53,7 @@ export const withNestedLink: Story = () => {
     >
       <Text as="span">鳥山明</Text>
 
-      <Heading my="sm" size="md">
+      <Heading size="md" my="sm">
         <LinkOverlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
           isExternal
@@ -68,8 +68,8 @@ export const withNestedLink: Story = () => {
       </Text>
 
       <Link
-        fontWeight="bold"
         href="https://dragon-ball-official.com/"
+        fontWeight="bold"
         isExternal
       >
         オフィシャルサイト

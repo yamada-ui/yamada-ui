@@ -34,9 +34,9 @@ export const Sponsors: FC<SponsorsProps> = ({ type, ...rest }) => {
 
   return (
     <Wrap gap="6" minH="12" {...rest}>
-      {items.map(({ alt, href, src, ...rest }, index) => (
+      {items.map(({ href, src, alt, ...rest }, index) => (
         <ui.a key={index} href={href} target="_blank">
-          <Image alt={alt} h={h} maxW="full" src={src} {...rest} />
+          <Image src={src} alt={alt} h={h} maxW="full" {...rest} />
         </ui.a>
       ))}
     </Wrap>

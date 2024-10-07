@@ -31,11 +31,11 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
     },
     tr: {
       _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
         _hover: {
           bg: ["initial", "initial"],
         },
-        cursor: "not-allowed",
-        opacity: 0.4,
       },
     },
   },
@@ -134,8 +134,8 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
 
   variants: {
     simple: (({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       highlightOnHover,
       highlightOnSelected,
       theme: t,
@@ -161,15 +161,15 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
             : {}),
           ...(highlightOnHover
             ? {
+                cursor: "pointer",
+                transitionDuration: "slow",
+                transitionProperty: "common",
                 _hover: {
                   bg: [
                     transparentizeColor(`${c}.400`, 0.08)(t, m),
                     transparentizeColor(`${c}.300`, 0.12)(t, m),
                   ],
                 },
-                cursor: "pointer",
-                transitionDuration: "slow",
-                transitionProperty: "common",
               }
             : {}),
         },
@@ -197,8 +197,8 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
       },
     })) as UIMultiStyle,
     striped: (({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       highlightOnHover,
       theme: t,
       withBorder,
@@ -219,15 +219,15 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
           },
           ...(highlightOnHover
             ? {
+                cursor: "pointer",
+                transitionDuration: "slow",
+                transitionProperty: "common",
                 _hover: {
                   bg: [
                     transparentizeColor(`${c}.400`, 0.08)(t, m),
                     transparentizeColor(`${c}.300`, 0.12)(t, m),
                   ],
                 },
-                cursor: "pointer",
-                transitionDuration: "slow",
-                transitionProperty: "common",
               }
             : {}),
         },

@@ -395,6 +395,8 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
 
           <ui.input
             className="ui-multi-autocomplete__field__input"
+            aria-label="Input value"
+            aria-multiselectable="true"
             display="inline-block"
             flex="1"
             marginBlockEnd="0.125rem"
@@ -406,8 +408,6 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
                 ? placeholder
                 : undefined
             }
-            aria-label="Input value"
-            aria-multiselectable="true"
             {...getInputProps({ ...inputProps, value: inputValue }, ref)}
           />
         </ui.div>

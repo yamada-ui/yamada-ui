@@ -44,10 +44,10 @@ export const basic: Story = () => {
 export const withItems: Story = () => {
   const items = useMemo<BreadcrumbGenerateItem[]>(
     () => [
-      { name: "サイヤ人編", href: "/" },
-      { name: "ナメック星編", href: "/" },
-      { name: "人造人間編", href: "/" },
-      { name: "魔人ブウ編", href: "/", isCurrentPage: true },
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
     ],
     [],
   )
@@ -58,10 +58,10 @@ export const withItems: Story = () => {
 export const withBoundaries: Story = () => {
   const items = useMemo<BreadcrumbGenerateItem[]>(
     () => [
-      { name: "サイヤ人編", href: "/" },
-      { name: "ナメック星編", href: "/" },
-      { name: "人造人間編", href: "/" },
-      { name: "魔人ブウ編", href: "/", isCurrentPage: true },
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
     ],
     [],
   )
@@ -72,10 +72,10 @@ export const withBoundaries: Story = () => {
 export const customBoundaries: Story = () => {
   const items = useMemo<BreadcrumbGenerateItem[]>(
     () => [
-      { name: "サイヤ人編", href: "/" },
-      { name: "ナメック星編", href: "/", isEllipsisPage: true },
-      { name: "人造人間編", href: "/", isEllipsisPage: true },
-      { name: "魔人ブウ編", href: "/", isCurrentPage: true },
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編", isEllipsisPage: true },
+      { href: "/", name: "人造人間編", isEllipsisPage: true },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
     ],
     [],
   )
@@ -86,10 +86,10 @@ export const customBoundaries: Story = () => {
 export const customEllipsis: Story = () => {
   const items = useMemo<BreadcrumbGenerateItem[]>(
     () => [
-      { name: "サイヤ人編", href: "/" },
-      { name: "ナメック星編", href: "/" },
-      { name: "人造人間編", href: "/" },
-      { name: "魔人ブウ編", href: "/", isCurrentPage: true },
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
     ],
     [],
   )
@@ -104,7 +104,7 @@ export const customEllipsis: Story = () => {
             </MenuButton>
 
             <MenuList>
-              {items.map(({ name, href }, index) => (
+              {items.map(({ href, name }, index) => (
                 <MenuItem key={index} as="a" href={href}>
                   {name}
                 </MenuItem>

@@ -180,6 +180,7 @@ export const tokenMap = Object.entries(tokens).reduce<{
 }, {})
 
 export const tokenPropertyMap: { [key: string]: ThemeToken[] } = {
+  size: ["sizes"],
   animation: ["animations"],
   blur: ["blurs"],
   border: ["borders"],
@@ -188,7 +189,6 @@ export const tokenPropertyMap: { [key: string]: ThemeToken[] } = {
   gradient: ["gradients"],
   radius: ["radii"],
   shadow: ["shadows"],
-  size: ["sizes"],
   space: ["spaces"],
   transition: [
     "transitions.property",

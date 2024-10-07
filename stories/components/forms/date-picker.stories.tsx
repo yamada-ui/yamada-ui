@@ -48,10 +48,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <DatePicker placeholder="extra small size" size="xs" />
-      <DatePicker placeholder="small size" size="sm" />
-      <DatePicker placeholder="medium size" size="md" />
-      <DatePicker placeholder="large size" size="lg" />
+      <DatePicker size="xs" placeholder="extra small size" />
+      <DatePicker size="sm" placeholder="small size" />
+      <DatePicker size="md" placeholder="medium size" />
+      <DatePicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -69,10 +69,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <DatePicker placeholder="outline" variant="outline" />
-      <DatePicker placeholder="filled" variant="filled" />
-      <DatePicker placeholder="flushed" variant="flushed" />
-      <DatePicker placeholder="unstyled" variant="unstyled" />
+      <DatePicker variant="outline" placeholder="outline" />
+      <DatePicker variant="filled" placeholder="filled" />
+      <DatePicker variant="flushed" placeholder="flushed" />
+      <DatePicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -209,10 +209,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <DatePicker isDisabled placeholder="outline" variant="outline" />
-      <DatePicker isDisabled placeholder="filled" variant="filled" />
-      <DatePicker isDisabled placeholder="flushed" variant="flushed" />
-      <DatePicker isDisabled placeholder="unstyled" variant="unstyled" />
+      <DatePicker variant="outline" isDisabled placeholder="outline" />
+      <DatePicker variant="filled" isDisabled placeholder="filled" />
+      <DatePicker variant="flushed" isDisabled placeholder="flushed" />
+      <DatePicker variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="What is your birthday?">
         <DatePicker placeholder="YYYY/MM/DD" />
@@ -224,10 +224,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <DatePicker isReadOnly placeholder="outline" variant="outline" />
-      <DatePicker isReadOnly placeholder="filled" variant="filled" />
-      <DatePicker isReadOnly placeholder="flushed" variant="flushed" />
-      <DatePicker isReadOnly placeholder="unstyled" variant="unstyled" />
+      <DatePicker variant="outline" isReadOnly placeholder="outline" />
+      <DatePicker variant="filled" isReadOnly placeholder="filled" />
+      <DatePicker variant="flushed" isReadOnly placeholder="flushed" />
+      <DatePicker variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="What is your birthday?">
         <DatePicker placeholder="YYYY/MM/DD" />
@@ -239,10 +239,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <DatePicker isInvalid placeholder="outline" variant="outline" />
-      <DatePicker isInvalid placeholder="filled" variant="filled" />
-      <DatePicker isInvalid placeholder="flushed" variant="flushed" />
-      <DatePicker isInvalid placeholder="unstyled" variant="unstyled" />
+      <DatePicker variant="outline" isInvalid placeholder="outline" />
+      <DatePicker variant="filled" isInvalid placeholder="filled" />
+      <DatePicker variant="flushed" isInvalid placeholder="flushed" />
+      <DatePicker variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

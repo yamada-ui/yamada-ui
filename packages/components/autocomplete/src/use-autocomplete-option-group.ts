@@ -63,8 +63,8 @@ export const useAutocompleteOptionGroup = ({
         ...props,
         ...containerProps,
         style: isEmpty ? style : undefined,
-        role: "autocomplete-group-container",
         "data-label": label,
+        role: "autocomplete-group-container",
       }
     },
     [containerProps, isEmpty, label],
@@ -75,8 +75,8 @@ export const useAutocompleteOptionGroup = ({
       ref,
       ...props,
       ...groupProps,
-      role: "autocomplete-group",
       "data-label": label,
+      role: "autocomplete-group",
     }),
     [groupProps, label],
   )

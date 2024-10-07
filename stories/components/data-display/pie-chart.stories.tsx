@@ -254,9 +254,9 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <PieChart data={data} size="sm" />
-      <PieChart data={data} size="md" />
-      <PieChart data={data} size="lg" />
+      <PieChart size="sm" data={data} />
+      <PieChart size="md" data={data} />
+      <PieChart size="lg" data={data} />
     </>
   )
 }
@@ -304,9 +304,9 @@ export const withLabelFormatter: Story = () => {
 
   return (
     <PieChart
+      size="lg"
       data={data}
       labelFormatter={(value) => value.toLocaleString()}
-      size="lg"
       withLabels
     />
   )

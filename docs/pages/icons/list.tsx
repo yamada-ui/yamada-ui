@@ -100,15 +100,15 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
                   <AspectRatio ratio={1 / 1}>
                     <Center
                       as="button"
-                      _focusVisible={{ boxShadow: "outline" }}
-                      _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
+                      aria-label={name}
                       bg={["blackAlpha.50", "whiteAlpha.50"]}
                       cursor="pointer"
                       outline="0"
                       rounded="md"
                       transitionDuration="slower"
                       transitionProperty="background"
-                      aria-label={name}
+                      _focusVisible={{ boxShadow: "outline" }}
+                      _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
                       onClick={() => openRef.current(name as IconNames)}
                     >
                       <Icon fontSize="2xl" />

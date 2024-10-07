@@ -31,9 +31,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <AlphaSlider color="#4387f4" defaultValue={0.3} size="sm" />
-      <AlphaSlider color="#895af6" defaultValue={0.6} size="md" />
-      <AlphaSlider color="#3cc360" defaultValue={0.9} size="lg" />
+      <AlphaSlider size="sm" color="#4387f4" defaultValue={0.3} />
+      <AlphaSlider size="md" color="#895af6" defaultValue={0.6} />
+      <AlphaSlider size="lg" color="#3cc360" defaultValue={0.9} />
     </>
   )
 }

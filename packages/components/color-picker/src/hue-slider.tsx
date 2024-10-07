@@ -79,16 +79,16 @@ interface HueSliderOptions {
   trackProps?: HTMLUIProps
 }
 
-/**
- * `HueSlider` is a component used to allow the user to select a color hue.
- *
- * @see Docs https://yamada-ui.com/components/forms/hue-slider
- */
 export interface HueSliderProps
   extends ThemeProps<"HueSlider">,
     Partial<UseColorSliderProps>,
     HueSliderOptions {}
 
+/**
+ * `HueSlider` is a component used to allow the user to select a color hue.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/hue-slider
+ */
 export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("HueSlider", props)
   const {

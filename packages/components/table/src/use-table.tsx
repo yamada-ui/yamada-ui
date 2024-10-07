@@ -64,9 +64,9 @@ export interface PropsColumnDef {
   css?: CSSUIObject
   style?: CSSProperties
   sx?: CSSUIObject
+  "aria-label"?: string
   colSpan?: number
   rowSpan?: number
-  "aria-label"?: string
 }
 
 export interface GroupColumnDef<Y extends RowData, M = any> {
@@ -637,6 +637,7 @@ export const mergeColumns = <Y extends RowData>({
           ),
         }
       : {}),
+    "aria-hidden": ariaAttr(!withFooterSelect),
     cell: ({ row }) => {
       const { getCanSelect, getIsSelected, getToggleSelectedHandler } = row
 
@@ -655,7 +656,6 @@ export const mergeColumns = <Y extends RowData>({
         </Center>
       )
     },
-    "aria-hidden": ariaAttr(!withFooterSelect),
     ...selectColumnProps,
     css: { w: "0", ...selectColumnProps?.css },
   },

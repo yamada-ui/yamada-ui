@@ -57,10 +57,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <ColorPicker placeholder="extra small size" size="xs" />
-      <ColorPicker placeholder="small size" size="sm" />
-      <ColorPicker placeholder="medium size" size="md" />
-      <ColorPicker placeholder="large size" size="lg" />
+      <ColorPicker size="xs" placeholder="extra small size" />
+      <ColorPicker size="sm" placeholder="small size" />
+      <ColorPicker size="md" placeholder="medium size" />
+      <ColorPicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -79,10 +79,10 @@ export const withColorSelectorSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <ColorPicker placeholder="outline" variant="outline" />
-      <ColorPicker placeholder="filled" variant="filled" />
-      <ColorPicker placeholder="flushed" variant="flushed" />
-      <ColorPicker placeholder="unstyled" variant="unstyled" />
+      <ColorPicker variant="outline" placeholder="outline" />
+      <ColorPicker variant="filled" placeholder="filled" />
+      <ColorPicker variant="flushed" placeholder="flushed" />
+      <ColorPicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }

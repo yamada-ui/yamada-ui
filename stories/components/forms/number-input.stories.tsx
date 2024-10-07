@@ -27,10 +27,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <NumberInput placeholder="extra small size" size="xs" />
-      <NumberInput placeholder="small size" size="sm" />
-      <NumberInput placeholder="medium size" size="md" />
-      <NumberInput placeholder="large size" size="lg" />
+      <NumberInput size="xs" placeholder="extra small size" />
+      <NumberInput size="sm" placeholder="small size" />
+      <NumberInput size="md" placeholder="medium size" />
+      <NumberInput size="lg" placeholder="large size" />
     </>
   )
 }
@@ -38,10 +38,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <NumberInput placeholder="outline" variant="outline" />
-      <NumberInput placeholder="filled" variant="filled" />
-      <NumberInput placeholder="flushed" variant="flushed" />
-      <NumberInput placeholder="unstyled" variant="unstyled" />
+      <NumberInput variant="outline" placeholder="outline" />
+      <NumberInput variant="filled" placeholder="filled" />
+      <NumberInput variant="flushed" placeholder="flushed" />
+      <NumberInput variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -64,23 +64,23 @@ export const withBorderColor: Story = () => {
 }
 
 export const withDefaultValue: Story = () => {
-  return <NumberInput defaultValue={18} aria-label="Number input" />
+  return <NumberInput aria-label="Number input" defaultValue={18} />
 }
 
 export const withMinMax: Story = () => {
   return (
-    <NumberInput defaultValue={18} max={31} min={8} aria-label="Number input" />
+    <NumberInput aria-label="Number input" defaultValue={18} max={31} min={8} />
   )
 }
 
 export const withStep: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       defaultValue={15}
       max={30}
       min={5}
       step={5}
-      aria-label="Number input"
     />
   )
 }
@@ -88,10 +88,10 @@ export const withStep: Story = () => {
 export const withPrecision: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       defaultValue={15}
       precision={2}
       step={0.2}
-      aria-label="Number input"
     />
   )
 }
@@ -99,10 +99,10 @@ export const withPrecision: Story = () => {
 export const disabledClampValueOnBlur: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       clampValueOnBlur={false}
       defaultValue={15}
       max={30}
-      aria-label="Number input"
     />
   )
 }
@@ -110,11 +110,11 @@ export const disabledClampValueOnBlur: Story = () => {
 export const disabledKeepWithinRange: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       clampValueOnBlur={false}
       defaultValue={15}
       keepWithinRange={false}
       max={30}
-      aria-label="Number input"
     />
   )
 }
@@ -122,10 +122,10 @@ export const disabledKeepWithinRange: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <NumberInput isDisabled placeholder="outline" variant="outline" />
-      <NumberInput isDisabled placeholder="filled" variant="filled" />
-      <NumberInput isDisabled placeholder="flushed" variant="flushed" />
-      <NumberInput isDisabled placeholder="unstyled" variant="unstyled" />
+      <NumberInput variant="outline" isDisabled placeholder="outline" />
+      <NumberInput variant="filled" isDisabled placeholder="filled" />
+      <NumberInput variant="flushed" isDisabled placeholder="flushed" />
+      <NumberInput variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         helperMessage="Please enter the quantity you wish to order."
@@ -141,10 +141,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <NumberInput isReadOnly placeholder="outline" variant="outline" />
-      <NumberInput isReadOnly placeholder="filled" variant="filled" />
-      <NumberInput isReadOnly placeholder="flushed" variant="flushed" />
-      <NumberInput isReadOnly placeholder="unstyled" variant="unstyled" />
+      <NumberInput variant="outline" isReadOnly placeholder="outline" />
+      <NumberInput variant="filled" isReadOnly placeholder="filled" />
+      <NumberInput variant="flushed" isReadOnly placeholder="flushed" />
+      <NumberInput variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         helperMessage="Please enter the quantity you wish to order."
@@ -160,10 +160,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <NumberInput isInvalid placeholder="outline" variant="outline" />
-      <NumberInput isInvalid placeholder="filled" variant="filled" />
-      <NumberInput isInvalid placeholder="flushed" variant="flushed" />
-      <NumberInput isInvalid placeholder="unstyled" variant="unstyled" />
+      <NumberInput variant="outline" isInvalid placeholder="outline" />
+      <NumberInput variant="filled" isInvalid placeholder="filled" />
+      <NumberInput variant="flushed" isInvalid placeholder="flushed" />
+      <NumberInput variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Order quantity is required."
@@ -210,13 +210,13 @@ export const stylingPlaceholder: Story = () => {
     <>
       <NumberInput placeholder="default placeholder" />
       <NumberInput
-        _placeholder={{ color: "gray.500", opacity: 1 }}
         placeholder="custom placeholder"
+        _placeholder={{ color: "gray.500", opacity: 1 }}
       />
       <NumberInput
-        _placeholder={{ color: "inherit" }}
         color="green.500"
         placeholder="custom placeholder"
+        _placeholder={{ color: "inherit" }}
       />
     </>
   )

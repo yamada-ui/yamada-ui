@@ -9,21 +9,21 @@ import {
 
 export const Toggle: ComponentStyle<"Toggle"> = {
   baseStyle: {
+    cursor: "pointer",
+    rounded: "md",
+    transitionDuration: "slower",
+    transitionProperty: "common",
     _disabled: {
       boxShadow: "none",
       cursor: "not-allowed",
       opacity: 0.4,
     },
     _readOnly: {
+      cursor: "default",
       _ripple: {
         display: "none",
       },
-      cursor: "default",
     },
-    cursor: "pointer",
-    rounded: "md",
-    transitionDuration: "slower",
-    transitionProperty: "common",
   },
 
   sizes: {
@@ -50,13 +50,15 @@ export const Toggle: ComponentStyle<"Toggle"> = {
   },
 
   variants: {
-    outline: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => {
+    outline: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
       return {
+        border: "1px solid",
+        borderColor: "border",
         _focusVisible: {
+          boxShadow: "outline",
           _invalid: {
             borderColor: "transparent",
           },
-          boxShadow: "outline",
         },
         _hover: {
           bg: [
@@ -74,11 +76,9 @@ export const Toggle: ComponentStyle<"Toggle"> = {
             shadeColor(`${c}.300`, 72)(t, m),
           ],
         },
-        border: "1px solid",
-        borderColor: "border",
       }
     },
-    solid: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => {
+    solid: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
       return {
         _focusVisible: {
           borderColor: "transparent",
@@ -98,7 +98,7 @@ export const Toggle: ComponentStyle<"Toggle"> = {
         },
       }
     },
-    subtle: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => {
+    subtle: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
       return {
         _focusVisible: {
           borderColor: "transparent",
@@ -119,15 +119,15 @@ export const Toggle: ComponentStyle<"Toggle"> = {
       }
     },
     unstyled: {
-      _ripple: {
-        display: "none",
-      },
       bg: "none",
       color: "inherit",
       display: "inline",
       lineHeight: "inherit",
       m: 0,
       p: 0,
+      _ripple: {
+        display: "none",
+      },
     },
   },
 

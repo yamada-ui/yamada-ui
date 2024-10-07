@@ -79,10 +79,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Autocomplete placeholder="extra small size" size="xs" />
-      <Autocomplete placeholder="small size" size="sm" />
-      <Autocomplete placeholder="medium size" size="md" />
-      <Autocomplete placeholder="large size" size="lg" />
+      <Autocomplete size="xs" placeholder="extra small size" />
+      <Autocomplete size="sm" placeholder="small size" />
+      <Autocomplete size="md" placeholder="medium size" />
+      <Autocomplete size="lg" placeholder="large size" />
     </>
   )
 }
@@ -90,10 +90,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Autocomplete placeholder="outline" variant="outline" />
-      <Autocomplete placeholder="filled" variant="filled" />
-      <Autocomplete placeholder="flushed" variant="flushed" />
-      <Autocomplete placeholder="unstyled" variant="unstyled" />
+      <Autocomplete variant="outline" placeholder="outline" />
+      <Autocomplete variant="filled" placeholder="filled" />
+      <Autocomplete variant="flushed" placeholder="flushed" />
+      <Autocomplete variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -381,10 +381,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Autocomplete isDisabled placeholder="outline" variant="outline" />
-      <Autocomplete isDisabled placeholder="filled" variant="filled" />
-      <Autocomplete isDisabled placeholder="flushed" variant="flushed" />
-      <Autocomplete isDisabled placeholder="unstyled" variant="unstyled" />
+      <Autocomplete variant="outline" isDisabled placeholder="outline" />
+      <Autocomplete variant="filled" isDisabled placeholder="filled" />
+      <Autocomplete variant="flushed" isDisabled placeholder="flushed" />
+      <Autocomplete variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -399,10 +399,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Autocomplete isReadOnly placeholder="outline" variant="outline" />
-      <Autocomplete isReadOnly placeholder="filled" variant="filled" />
-      <Autocomplete isReadOnly placeholder="flushed" variant="flushed" />
-      <Autocomplete isReadOnly placeholder="unstyled" variant="unstyled" />
+      <Autocomplete variant="outline" isReadOnly placeholder="outline" />
+      <Autocomplete variant="filled" isReadOnly placeholder="filled" />
+      <Autocomplete variant="flushed" isReadOnly placeholder="flushed" />
+      <Autocomplete variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -417,10 +417,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Autocomplete isInvalid placeholder="outline" variant="outline" />
-      <Autocomplete isInvalid placeholder="filled" variant="filled" />
-      <Autocomplete isInvalid placeholder="flushed" variant="flushed" />
-      <Autocomplete isInvalid placeholder="unstyled" variant="unstyled" />
+      <Autocomplete variant="outline" isInvalid placeholder="outline" />
+      <Autocomplete variant="filled" isInvalid placeholder="filled" />
+      <Autocomplete variant="flushed" isInvalid placeholder="flushed" />
+      <Autocomplete variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

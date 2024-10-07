@@ -15,13 +15,13 @@ import { memo } from "react"
 export const GitHubCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader>
-        <Heading as="h2" lineClamp={1} size="md">
+        <Heading as="h2" size="md" lineClamp={1}>
           yamada-ui
         </Heading>
 

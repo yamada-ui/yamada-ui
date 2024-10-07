@@ -57,13 +57,13 @@ const PaginationItem: FC<PaginationItemProps> = ({
   return (
     <GridItem
       as={Link}
-      _focus={{ outline: "none" }}
-      _focusVisible={{ boxShadow: "outline" }}
+      href={slug}
       display="flex"
       flexDirection="column"
       gap="sm"
-      href={slug}
       rounded="md"
+      _focus={{ outline: "none" }}
+      _focusVisible={{ boxShadow: "outline" }}
       {...rest}
     >
       <Text
@@ -77,12 +77,6 @@ const PaginationItem: FC<PaginationItemProps> = ({
 
       <Text
         as="span"
-        _active={{
-          color: [`primary.700`, `primary.700`],
-        }}
-        _hover={{
-          color: [`primary.600`, `primary.600`],
-        }}
         alignItems="center"
         color={[`primary.500`, `primary.500`]}
         display="flex"
@@ -91,6 +85,12 @@ const PaginationItem: FC<PaginationItemProps> = ({
         gap="0"
         transitionDuration="fast"
         transitionProperty="colors"
+        _active={{
+          color: [`primary.700`, `primary.700`],
+        }}
+        _hover={{
+          color: [`primary.600`, `primary.600`],
+        }}
       >
         {isPrev ? (
           <ChevronIcon fontSize="1.3em" transform="rotate(90deg)" />

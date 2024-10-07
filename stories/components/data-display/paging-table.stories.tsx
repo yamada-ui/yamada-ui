@@ -113,28 +113,28 @@ export const withSize: Story = () => {
   return (
     <>
       <PagingTable
-        columns={columns}
-        data={data}
-        defaultPageSize={5}
         size="sm"
-      />
-      <PagingTable
         columns={columns}
         data={data}
         defaultPageSize={5}
+      />
+      <PagingTable
         size="md"
-      />
-      <PagingTable
         columns={columns}
         data={data}
         defaultPageSize={5}
+      />
+      <PagingTable
         size="lg"
-      />
-      <PagingTable
         columns={columns}
         data={data}
         defaultPageSize={5}
+      />
+      <PagingTable
         size="xl"
+        columns={columns}
+        data={data}
+        defaultPageSize={5}
       />
     </>
   )
@@ -168,16 +168,16 @@ export const withVariant: Story = () => {
   return (
     <>
       <PagingTable
+        variant="simple"
         columns={columns}
         data={data}
         defaultPageSize={5}
-        variant="simple"
       />
       <PagingTable
+        variant="striped"
         columns={columns}
         data={data}
         defaultPageSize={5}
-        variant="striped"
       />
     </>
   )
@@ -214,10 +214,10 @@ export const withColorScheme: Story = () => {
         <PagingTable
           key={colorScheme}
           colorScheme={colorScheme}
+          variant="striped"
           columns={columns}
           data={data}
           defaultPageSize={5}
-          variant="striped"
         />
       ))}
     </>
@@ -622,28 +622,28 @@ export const customPagination: Story = () => {
             </Text>
 
             <IconButton
-              icon={<ChevronLeft fontSize="lg" />}
-              isDisabled={!getCanPreviousPage()}
               size="sm"
               aria-label="Go to previous page"
+              icon={<ChevronLeft fontSize="lg" />}
+              isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
             />
 
             <NumberInput
-              max={totalPage}
-              min={1}
               size="sm"
-              value={pageIndex + 1}
               variant="flushed"
               aria-label="Change page"
+              max={totalPage}
+              min={1}
+              value={pageIndex + 1}
               onChange={(_, page) => setPageIndex(page - 1)}
             />
 
             <IconButton
-              icon={<ChevronRight fontSize="lg" />}
-              isDisabled={!getCanNextPage()}
               size="sm"
               aria-label="Go to next page"
+              icon={<ChevronRight fontSize="lg" />}
+              isDisabled={!getCanNextPage()}
               onClick={nextPage}
             />
 

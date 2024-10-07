@@ -149,7 +149,7 @@ export const customRequiredIndicator: Story = () => {
         isRequired
         legend="Terms and Conditions"
         requiredIndicator={
-          <Tag colorScheme="red" ms={2} size="sm">
+          <Tag colorScheme="red" size="sm" ms={2}>
             required
           </Tag>
         }
@@ -160,7 +160,7 @@ export const customRequiredIndicator: Story = () => {
       <Fieldset isRequired>
         <Legend
           requiredIndicator={
-            <Tag colorScheme="red" ms={2} size="sm">
+            <Tag colorScheme="red" size="sm" ms={2}>
               required
             </Tag>
           }
@@ -179,7 +179,7 @@ export const customOptionalIndicator: Story = () => {
       <Fieldset
         legend="Terms and Conditions"
         optionalIndicator={
-          <Tag colorScheme="primary" ms={2} size="sm">
+          <Tag colorScheme="primary" size="sm" ms={2}>
             optional
           </Tag>
         }
@@ -190,7 +190,7 @@ export const customOptionalIndicator: Story = () => {
       <Fieldset>
         <Legend
           optionalIndicator={
-            <Tag colorScheme="primary" ms={2} size="sm">
+            <Tag colorScheme="primary" size="sm" ms={2}>
               optional
             </Tag>
           }

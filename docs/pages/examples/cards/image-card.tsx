@@ -15,13 +15,13 @@ import { memo } from "react"
 export const ImageCard = memo(() => {
   return (
     <Card
+      variant="outline"
       bgImage="https://picsum.photos/400?grayscale"
       bgSize="cover"
       breakInside="avoid"
       h="sm"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader>
         <Tag>New</Tag>

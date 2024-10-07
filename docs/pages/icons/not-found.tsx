@@ -20,10 +20,10 @@ export const NotFound: FC<NotFoundProps> = memo(
     return (
       <Center flexDirection="column" gap="lg" {...rest}>
         <Icon
-          _hover={{ transform: "scaleX(-1)" }}
           color={["#5b5b5b", "#cccccc"]}
           fontSize="12rem"
           strokeWidth="1"
+          _hover={{ transform: "scaleX(-1)" }}
         />
 
         <Text color="muted" fontSize="2xl" lineClamp={1}>

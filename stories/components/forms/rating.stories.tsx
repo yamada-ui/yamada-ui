@@ -21,11 +21,11 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Rating defaultValue={3} size="xs" />
-      <Rating defaultValue={3} size="sm" />
-      <Rating defaultValue={3} size="md" />
-      <Rating defaultValue={3} size="lg" />
-      <Rating defaultValue={3} size="xl" />
+      <Rating size="xs" defaultValue={3} />
+      <Rating size="sm" defaultValue={3} />
+      <Rating size="md" defaultValue={3} />
+      <Rating size="lg" defaultValue={3} />
+      <Rating size="xl" defaultValue={3} />
     </>
   )
 }

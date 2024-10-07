@@ -29,8 +29,8 @@ export const AvatarName: FC<AvatarNameProps> = ({
   return (
     <ui.div
       className="ui-avatar__name"
-      role="img"
       aria-label={name}
+      role="img"
       __css={css}
       {...rest}
     >

@@ -50,7 +50,6 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "embla-carousel-react": "^8.3.0"

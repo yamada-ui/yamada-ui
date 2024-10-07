@@ -173,3 +173,6 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     </>
   )
 })
+
+FileButton.displayName = "FileButton"
+FileButton.__ui__ = "FileButton"

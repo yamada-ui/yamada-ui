@@ -276,8 +276,8 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
       <MenuItem
         ref={ref}
         className={cx("ui-menu__item--option", className)}
-        closeOnSelect={closeOnSelect}
         aria-checked={ariaAttr(isChecked)}
+        closeOnSelect={closeOnSelect}
         {...rest}
       >
         {icon !== null ? (

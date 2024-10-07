@@ -6,6 +6,10 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
       "&[aria-disabled=true]": {
         cursor: "default",
       },
+      px: "4",
+      py: "3",
+      transitionDuration: "normal",
+      transitionProperty: "common",
       _focusVisible: {
         boxShadow: "outline",
       },
@@ -13,10 +17,6 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
         cursor: "not-allowed",
         opacity: 0.4,
       },
-      px: "4",
-      py: "3",
-      transitionDuration: "normal",
-      transitionProperty: "common",
     },
     container: {},
     icon: {
@@ -39,11 +39,11 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
         },
       },
       item: {
+        borderColor: "inherit",
+        borderTopWidth: "1px",
         _last: {
           borderBottomWidth: "1px",
         },
-        borderColor: "inherit",
-        borderTopWidth: "1px",
       },
     },
     card: {
@@ -58,15 +58,15 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
         },
       },
       item: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+        borderWidth: "1px",
+        rounded: "md",
         _expanded: {
           bg: ["white", "black"],
         },
         _notFirst: {
           mt: "md",
         },
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        borderWidth: "1px",
-        rounded: "md",
       },
     },
     unstyled: {},

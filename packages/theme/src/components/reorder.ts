@@ -6,11 +6,11 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       w: "100%",
     },
     item: {
+      h: "100%",
+      w: "100%",
       _selected: {
         boxShadow: ["md", "dark-md"],
       },
-      h: "100%",
-      w: "100%",
     },
     trigger: {
       color: ["blackAlpha.300", "whiteAlpha.300"],
@@ -46,7 +46,7 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       },
     },
     unstyled: {
-      item: { _selected: { boxShadow: "unset" }, p: 0, rounded: 0 },
+      item: { p: 0, rounded: 0, _selected: { boxShadow: "unset" } },
     },
   },
 

@@ -44,14 +44,14 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
   (
     {
       className,
+      size,
+      variant,
       columnGap,
       direction: flexDirection,
       gap,
       isAttached,
       isDisabled,
       rowGap,
-      size,
-      variant,
       ...rest
     },
     ref,
@@ -65,7 +65,7 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
     }
 
     const context: ButtonGroupContext = useMemo(
-      () => ({ isDisabled, size, variant }),
+      () => ({ size, variant, isDisabled }),
       [size, variant, isDisabled],
     )
 
@@ -94,8 +94,8 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
         <ui.div
           ref={ref}
           className={cx("ui-button-group", className)}
-          role="group"
           data-attached={dataAttr(isAttached)}
+          role="group"
           __css={css}
           {...rest}
         />

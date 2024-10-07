@@ -37,15 +37,6 @@ export const PaymentMethodCard = memo(() => {
         <Box
           as={VStack}
           {...getIconProps()}
-          _checked={{
-            borderColor: ["primary", "primary"],
-          }}
-          _hover={{
-            _checked: {
-              bg: ["transparent", "transparent"],
-            },
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
-          }}
           borderColor={["blackAlpha.200", "whiteAlpha.100"]}
           borderWidth="3px"
           cursor="pointer"
@@ -55,6 +46,15 @@ export const PaymentMethodCard = memo(() => {
           rounded="md"
           transitionDuration="slow"
           transitionProperty="background"
+          _checked={{
+            borderColor: ["primary", "primary"],
+          }}
+          _hover={{
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
+            _checked: {
+              bg: ["transparent", "transparent"],
+            },
+          }}
         >
           <Center>{icon}</Center>
 
@@ -94,10 +94,10 @@ export const PaymentMethodCard = memo(() => {
 
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">

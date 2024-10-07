@@ -274,8 +274,8 @@ export const useRating = ({
         ref,
         whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
         ...props,
-        tabIndex: -1,
         "data-active": dataAttr(isActive),
+        tabIndex: -1,
       }
     },
     [disabled, hoveredValue, readOnly],

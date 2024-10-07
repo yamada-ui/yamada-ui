@@ -17,10 +17,10 @@ import { memo } from "react"
 export const BookmarkCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader>
         <VStack gap="xs">
@@ -31,14 +31,14 @@ export const BookmarkCard = memo(() => {
           <Text color="muted">Tokyo, Japan</Text>
         </VStack>
 
-        <IconButton icon={<Bookmark fontSize="2xl" />} variant="ghost" />
+        <IconButton variant="ghost" icon={<Bookmark fontSize="2xl" />} />
       </CardHeader>
 
       <CardBody>
         <Image
+          src="https://images.pexels.com/photos/248195/pexels-photo-248195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="Japan"
           rounded="md"
-          src="https://images.pexels.com/photos/248195/pexels-photo-248195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           w="full"
         />
       </CardBody>

@@ -342,23 +342,23 @@ export const withVariant: Story = () => {
 export const withDisabled: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" isDisabled variant="solid">
+      <Button colorScheme="primary" variant="solid" isDisabled>
         Solid
       </Button>
 
-      <Button colorScheme="secondary" isDisabled variant="outline">
+      <Button colorScheme="secondary" variant="outline" isDisabled>
         Outline
       </Button>
 
-      <Button colorScheme="warning" isDisabled variant="ghost">
+      <Button colorScheme="warning" variant="ghost" isDisabled>
         Ghost
       </Button>
 
-      <Button colorScheme="danger" isDisabled variant="link">
+      <Button colorScheme="danger" variant="link" isDisabled>
         Link
       </Button>
 
-      <Button isDisabled variant="unstyled">
+      <Button variant="unstyled" isDisabled>
         Unstyle
       </Button>
     </Wrap>
@@ -368,23 +368,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" leftIcon={<Plus />} variant="solid">
+      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
-        rightIcon={<ArrowRight />}
         variant="outline"
+        rightIcon={<ArrowRight />}
       >
         Button
       </Button>
 
-      <Button colorScheme="warning" leftIcon={<Mail />} variant="ghost">
+      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
         Button
       </Button>
 
-      <Button colorScheme="danger" leftIcon={<Check />} variant="link">
+      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
         Button
       </Button>
     </Wrap>
@@ -396,28 +396,28 @@ export const iconButton: Story = () => {
     <Wrap gap="md">
       <IconButton
         colorScheme="primary"
-        icon={<Plus fontSize="2xl" />}
         aria-label="Plus"
+        icon={<Plus fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="secondary"
-        icon={<Minus fontSize="2xl" />}
         aria-label="Minus"
+        icon={<Minus fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="warning"
-        icon={<Sun fontSize="2xl" />}
         size="lg"
         aria-label="Light"
+        icon={<Sun fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="danger"
-        icon={<Moon fontSize="2xl" />}
         size="lg"
         aria-label="Dark"
+        icon={<Moon fontSize="2xl" />}
       />
     </Wrap>
   )
@@ -446,11 +446,11 @@ export const withLoading: Story = () => {
         Button
       </Button>
 
-      <Button colorScheme="warning" isLoading variant="outline">
+      <Button colorScheme="warning" variant="outline" isLoading>
         Button
       </Button>
 
-      <Button colorScheme="danger" isLoading variant="ghost">
+      <Button colorScheme="danger" variant="ghost" isLoading>
         Button
       </Button>
 
@@ -460,11 +460,11 @@ export const withLoading: Story = () => {
 
       <Button
         colorScheme="secondary"
+        variant="outline"
         isLoading
         loadingIcon="grid"
         loadingPlacement="end"
         loadingText="Loading..."
-        variant="outline"
       >
         Button
       </Button>
@@ -475,9 +475,9 @@ export const withLoading: Story = () => {
 export const buttonGroup: Story = () => {
   return (
     <>
-      <ButtonGroup isAttached variant="outline">
+      <ButtonGroup variant="outline" isAttached>
         <Button>Button</Button>
-        <IconButton icon={<Plus />} aria-label="Add" />
+        <IconButton aria-label="Add" icon={<Plus />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">
@@ -486,7 +486,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup isAttached isDisabled variant="outline">
+      <ButtonGroup variant="outline" isAttached isDisabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -498,7 +498,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup direction="column" isAttached variant="outline">
+      <ButtonGroup variant="outline" direction="column" isAttached>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

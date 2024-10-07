@@ -119,10 +119,10 @@ export type PropControlProps<K extends PropControlComponent> = {
 
 export const PropControl = <K extends PropControlComponent = "Switch">({
   colorScheme,
-  component,
-  items,
   size,
   variant,
+  component,
+  items,
   ...rest
 }: PropControlProps<K>) => {
   const props = { colorScheme, size, variant }

@@ -24,7 +24,7 @@ export const SaveModal: FC<SaveModalProps> = memo(({ onOpenRef, ...rest }) => {
   assignRef(onOpenRef, onOpen)
 
   return (
-    <Modal isOpen={isOpen} size="xl" onClose={onClose} {...rest}>
+    <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
       <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
         <Text as="h3">Save preset</Text>
 

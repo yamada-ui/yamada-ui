@@ -53,9 +53,9 @@ export const withCommand: Story = () => {
     <Menu>
       <MenuButton
         as={IconButton}
-        icon={<MenuIcon fontSize="2xl" />}
         variant="outline"
         aria-label="Menu"
+        icon={<MenuIcon fontSize="2xl" />}
       />
 
       <MenuList>
@@ -72,9 +72,9 @@ export const withIcon: Story = () => {
     <Menu>
       <MenuButton
         as={IconButton}
-        icon={<MenuIcon fontSize="2xl" />}
         variant="outline"
         aria-label="Menu"
+        icon={<MenuIcon fontSize="2xl" />}
       />
 
       <MenuList>

@@ -165,8 +165,8 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
     const {
-      readOnly,
       "aria-readonly": _ariaReadonly,
+      readOnly,
       ...formControlProps
     } = pickObject(rest, formControlProperties)
     const uuid = useId()

@@ -7,11 +7,11 @@ export default {
 export const basic = () => {
   return (
     <Center
-      _media={[{ type: "print", css: { color: "red" } }]}
       borderWidth="1px"
       boxSize="3xs"
       p="md"
       rounded="md"
+      _media={[{ type: "print", css: { color: "red" } }]}
     >
       <Text>Print me</Text>
     </Center>

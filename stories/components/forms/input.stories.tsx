@@ -31,10 +31,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Input placeholder="extra small size" size="xs" />
-      <Input placeholder="small size" size="sm" />
-      <Input placeholder="medium size" size="md" />
-      <Input placeholder="large size" size="lg" />
+      <Input size="xs" placeholder="extra small size" />
+      <Input size="sm" placeholder="small size" />
+      <Input size="md" placeholder="medium size" />
+      <Input size="lg" placeholder="large size" />
     </>
   )
 }
@@ -42,16 +42,16 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Input placeholder="outline" variant="outline" />
-      <Input placeholder="filled" variant="filled" />
-      <Input placeholder="flushed" variant="flushed" />
-      <Input placeholder="unstyled" variant="unstyled" />
+      <Input variant="outline" placeholder="outline" />
+      <Input variant="filled" placeholder="filled" />
+      <Input variant="flushed" placeholder="flushed" />
+      <Input variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
 
 export const withHTMLSize: Story = () => {
-  return <Input htmlSize={4} width="auto" aria-label="Input" />
+  return <Input aria-label="Input" htmlSize={4} width="auto" />
 }
 
 export const withBorderColor: Story = () => {
@@ -71,10 +71,10 @@ export const withBorderColor: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Input isDisabled placeholder="outline" variant="outline" />
-      <Input isDisabled placeholder="filled" variant="filled" />
-      <Input isDisabled placeholder="flushed" variant="flushed" />
-      <Input isDisabled placeholder="unstyled" variant="unstyled" />
+      <Input variant="outline" isDisabled placeholder="outline" />
+      <Input variant="filled" isDisabled placeholder="filled" />
+      <Input variant="flushed" isDisabled placeholder="flushed" />
+      <Input variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         helperMessage="We'll never share your email."
@@ -90,10 +90,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Input isReadOnly placeholder="outline" variant="outline" />
-      <Input isReadOnly placeholder="filled" variant="filled" />
-      <Input isReadOnly placeholder="flushed" variant="flushed" />
-      <Input isReadOnly placeholder="unstyled" variant="unstyled" />
+      <Input variant="outline" isReadOnly placeholder="outline" />
+      <Input variant="filled" isReadOnly placeholder="filled" />
+      <Input variant="flushed" isReadOnly placeholder="flushed" />
+      <Input variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         helperMessage="We'll never share your email."
@@ -109,10 +109,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Input isInvalid placeholder="outline" variant="outline" />
-      <Input isInvalid placeholder="filled" variant="filled" />
-      <Input isInvalid placeholder="flushed" variant="flushed" />
-      <Input isInvalid placeholder="unstyled" variant="unstyled" />
+      <Input variant="outline" isInvalid placeholder="outline" />
+      <Input variant="filled" isInvalid placeholder="filled" />
+      <Input variant="flushed" isInvalid placeholder="flushed" />
+      <Input variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Email is required."
@@ -171,7 +171,7 @@ export const useElement: Story = () => {
           pr="4.5rem"
         />
         <InputRightElement isClickable w="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={toggle}>
+          <Button size="sm" h="1.75rem" onClick={toggle}>
             {show ? "Hide" : "Show"}
           </Button>
         </InputRightElement>
@@ -185,17 +185,17 @@ export const stylingPlaceholder: Story = () => {
     <>
       <Input placeholder="default placeholder" />
       <Input
+        placeholder="custom placeholder"
         _dark={{ _placeholder: { color: "blue.500", opacity: 1 } }}
         _placeholder={{ color: "blue.500", opacity: 1 }}
-        placeholder="custom placeholder"
       />
       <Input
+        color="green.500"
+        placeholder="custom placeholder"
         _dark={{
           _placeholder: { color: "inherit" },
         }}
         _placeholder={{ color: "inherit" }}
-        color="green.500"
-        placeholder="custom placeholder"
       />
     </>
   )
@@ -203,7 +203,7 @@ export const stylingPlaceholder: Story = () => {
 
 export const customType: Story = () => {
   return (
-    <Input type="datetime-local" placeholder="Select Date and Time" size="md" />
+    <Input type="datetime-local" size="md" placeholder="Select Date and Time" />
   )
 }
 

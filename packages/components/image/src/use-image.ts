@@ -6,6 +6,14 @@ type HTMLImageElementProps = ImgHTMLAttributes<HTMLImageElement>
 
 export interface UseImageProps {
   /**
+   * The image `src` attribute.
+   */
+  src?: string
+  /**
+   * The image `srcset` attribute.
+   */
+  srcSet?: string
+  /**
    * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
    * This tells the browser to request cross-origin access when trying to download the image data.
    */
@@ -24,14 +32,6 @@ export interface UseImageProps {
    * The image `sizes` attribute.
    */
   sizes?: string
-  /**
-   * The image `src` attribute.
-   */
-  src?: string
-  /**
-   * The image `srcset` attribute.
-   */
-  srcSet?: string
   /**
    * A callback for when there was an error loading the image `src`.
    */
@@ -52,12 +52,12 @@ export const shouldShowFallbackImage = (
   (status === "failed" && fallbackStrategy === "onError")
 
 export const useImage = ({
+  src,
+  srcSet,
   crossOrigin,
   ignoreFallback,
   loading,
   sizes,
-  src,
-  srcSet,
   onError,
   onLoad,
 }: UseImageProps) => {

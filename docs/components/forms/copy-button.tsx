@@ -24,10 +24,9 @@ export const CopyButton = memo(
       >
         <IconButton
           ref={ref}
-          _hover={{
-            borderColor: hasCopied ? "success" : "whiteAlpha.800",
-            color: hasCopied ? "success" : "whiteAlpha.800",
-          }}
+          size="sm"
+          variant="unstyled"
+          aria-label="Copy the code"
           alignItems="center"
           bg={["neutral.800", "neutral.900"]}
           border="1px solid"
@@ -36,9 +35,10 @@ export const CopyButton = memo(
           display="flex"
           icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
           justifyContent="center"
-          size="sm"
-          variant="unstyled"
-          aria-label="Copy the code"
+          _hover={{
+            borderColor: hasCopied ? "success" : "whiteAlpha.800",
+            color: hasCopied ? "success" : "whiteAlpha.800",
+          }}
           {...rest}
           onClick={onCopy}
         />

@@ -100,7 +100,7 @@ describe("<Autocomplete />", () => {
     })
 
     test.each(["xs", "sm", "md", "lg"])(`with size prop %s`, (size) => {
-      const { container } = render(<Autocomplete items={ITEMS} size={size} />)
+      const { container } = render(<Autocomplete size={size} items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()

@@ -290,10 +290,10 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
       return (
         <MenuButton
           as={Button}
-          bg={isOpen ? "$bg" : "transparent"}
-          disableRipple
           size="sm"
           variant="ghost"
+          bg={isOpen ? "$bg" : "transparent"}
+          disableRipple
           vars={[
             {
               name: "bg",

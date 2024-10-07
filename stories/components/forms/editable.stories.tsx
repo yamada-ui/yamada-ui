@@ -187,7 +187,7 @@ export const customControl: Story = () => {
       useEditableControl()
 
     return isEditing ? (
-      <ButtonGroup gap="sm" size="sm">
+      <ButtonGroup size="sm" gap="sm">
         <IconButton
           icon={<Check />}
           {...getSubmitProps()}
@@ -196,7 +196,7 @@ export const customControl: Story = () => {
         <IconButton icon={<X />} {...getCancelProps()} aria-label="Cancel" />
       </ButtonGroup>
     ) : (
-      <ButtonGroup gap="sm" size="sm">
+      <ButtonGroup size="sm" gap="sm">
         <IconButton icon={<Pencil />} {...getEditProps()} aria-label="Edit" />
       </ButtonGroup>
     )

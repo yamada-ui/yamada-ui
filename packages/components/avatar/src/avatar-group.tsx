@@ -52,10 +52,10 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     cloneElement(
       child,
       filterUndefined({
+        size: props.size,
         borderColor: child.props.borderColor ?? borderColor,
         borderWidth: "2px",
         marginEnd: !i ? 0 : gap,
-        size: props.size,
       }),
     ),
   )

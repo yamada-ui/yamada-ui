@@ -14,11 +14,11 @@ describe("<Loading />", () => {
   test("render with default class", () => {
     const { getByTestId } = render(
       <Loading
+        variant="oval"
+        data-testid="loading"
         color="red.500"
         fontSize="6xl"
         secondaryColor="blue.500"
-        variant="oval"
-        data-testid="loading"
       />,
     )
 
@@ -44,9 +44,9 @@ describe("<Loading />", () => {
             data-testid={`loading-${variant}`}
           />
           <Loading
-            duration={10}
             variant={variant as LoadingProps["variant"]}
             data-testid={`loading-${variant}-with-duration`}
+            duration={10}
           />
         </>,
       )

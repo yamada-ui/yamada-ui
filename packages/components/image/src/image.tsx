@@ -13,6 +13,12 @@ import { shouldShowFallbackImage, useImage } from "./use-image"
 
 interface ImageOptions {
   /**
+   * The CSS `box-size` property.
+   *
+   * @deprecated Use `boxSize` instead.
+   */
+  size?: CSSUIProps["boxSize"]
+  /**
    * Fallback image `src` or element to show if image is loading or image fails.
    */
   fallback?: ReactElement | string
@@ -27,12 +33,6 @@ interface ImageOptions {
    * The CSS `object-fit` property.
    */
   fit?: CSSUIProps["objectFit"]
-  /**
-   * The CSS `box-size` property.
-   *
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
 }
 
 export interface ImageProps
@@ -49,6 +49,8 @@ export interface ImageProps
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   const [styles, { size, ...mergedProps }] = useComponentStyle("Image", props)
   let {
+    src,
+    srcSet,
     className,
     boxSize,
     crossOrigin,
@@ -58,8 +60,6 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     ignoreFallback,
     loading,
     referrerPolicy,
-    src,
-    srcSet,
     onError,
     onLoad,
     ...rest
@@ -84,8 +84,8 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       return (
         <ui.img
           ref={ref}
-          className={cx("ui-image--fallback", className)}
           src={fallback as string | undefined}
+          className={cx("ui-image--fallback", className)}
           __css={css}
           {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
         />
@@ -96,12 +96,12 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   return (
     <ui.img
       ref={ref}
+      src={src}
+      srcSet={srcSet}
       className={cx("ui-image", className)}
       crossOrigin={crossOrigin}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      src={src}
-      srcSet={srcSet}
       __css={css}
       {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
     />

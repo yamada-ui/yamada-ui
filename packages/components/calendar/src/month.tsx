@@ -214,9 +214,6 @@ export const Month: FC<MonthProps> = ({
                             !isNull(day) && !isUndefined(day) && !isBoolean(day)
 
                           const css: CSSUIObject = {
-                            _ripple: {
-                              display: "block",
-                            },
                             display:
                               isHidden || !isDisplayed ? "none" : "inline-flex",
                             fontSize: undefined,
@@ -224,6 +221,9 @@ export const Month: FC<MonthProps> = ({
                             h: "auto",
                             minW: "auto",
                             p: 0,
+                            _ripple: {
+                              display: "block",
+                            },
                             ...styles.day,
                           }
 

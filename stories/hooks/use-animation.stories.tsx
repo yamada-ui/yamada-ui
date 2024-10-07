@@ -72,6 +72,12 @@ export const pseudo = () => {
 
   return (
     <Box
+      bg="primary"
+      color="white"
+      m="lg"
+      p="lg"
+      pos="relative"
+      rounded="lg"
       _after={{
         animation,
         bg: "secondary",
@@ -83,12 +89,6 @@ export const pseudo = () => {
         rounded: "lg",
         top: "lg",
       }}
-      bg="primary"
-      color="white"
-      m="lg"
-      p="lg"
-      pos="relative"
-      rounded="lg"
     >
       Box
     </Box>

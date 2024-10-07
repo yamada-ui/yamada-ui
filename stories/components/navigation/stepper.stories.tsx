@@ -57,11 +57,11 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <Stepper index={1} size="sm" steps={steps} />
+      <Stepper size="sm" index={1} steps={steps} />
 
-      <Stepper index={1} size="md" steps={steps} />
+      <Stepper size="md" index={1} steps={steps} />
 
-      <Stepper index={1} size="lg" steps={steps} />
+      <Stepper size="lg" index={1} steps={steps} />
     </>
   )
 }

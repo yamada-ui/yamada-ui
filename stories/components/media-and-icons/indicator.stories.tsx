@@ -20,7 +20,7 @@ export const basic: Story = () => {
         />
       </Indicator>
 
-      <Indicator offset={1.5} size="lg">
+      <Indicator size="lg" offset={1.5}>
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -33,19 +33,19 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <Wrap gap="md">
-      <Indicator label="new" size="sm">
+      <Indicator size="sm" label="new">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator label="new" size="md">
+      <Indicator size="md" label="new">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator label="new" size="lg">
+      <Indicator size="lg" label="new">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -58,13 +58,13 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <Wrap gap="md">
-      <Indicator label="new" variant="solid">
+      <Indicator variant="solid" label="new">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
-      <Indicator label="new" variant="subtle">
+      <Indicator variant="subtle" label="new">
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -135,8 +135,8 @@ export const withOffset: Story = () => {
     <Indicator label="new" offset={4}>
       <Avatar
         name="Hirotomo Yamada"
-        size="2xl"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        size="2xl"
       />
     </Indicator>
   )
@@ -215,21 +215,21 @@ export const withPing: Story = () => {
         />
       </Indicator>
 
-      <Indicator label="new" ping pingScale={1.4} variant="subtle">
+      <Indicator variant="subtle" label="new" ping pingScale={1.4}>
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
 
-      <Indicator offset={1.5} ping size="lg">
+      <Indicator size="lg" offset={1.5} ping>
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
         />
       </Indicator>
 
-      <Indicator offset={1.5} ping size="lg" variant="subtle">
+      <Indicator size="lg" variant="subtle" offset={1.5} ping>
         <Avatar
           name="Hirotomo Yamada"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"

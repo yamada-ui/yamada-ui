@@ -43,7 +43,7 @@ export const ViewCodeModal: FC<ViewCodeModalProps> = memo(
     assignRef(onOpenRef, onOpen)
 
     return (
-      <Modal isOpen={isOpen} size="xl" onClose={onClose} {...rest}>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
         <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
           <Text as="h3">Save preset</Text>
 
@@ -77,7 +77,7 @@ const CodeBlock: FC<CodeBlockProps> = memo(({ ...rest }) => {
     <Box bg="blackAlpha.950" p="md" rounded="md" w="full" {...rest}>
       <Highlight code={CODE} language={LANGUAGE} theme={THEME}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Box fontSize="sm" overflowX="auto" data-language={LANGUAGE}>
+          <Box data-language={LANGUAGE} fontSize="sm" overflowX="auto">
             <Box
               as="pre"
               className={className}

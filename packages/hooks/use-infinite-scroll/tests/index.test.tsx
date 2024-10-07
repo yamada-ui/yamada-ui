@@ -8,7 +8,7 @@ describe("useInfiniteScroll", () => {
   const IntersectionObserverMock = vi.fn((cb) => ({
     disconnect: vi.fn(),
     observe: vi.fn().mockImplementation((el) => {
-      cb([{ isIntersecting: true, target: el }])
+      cb([{ target: el, isIntersecting: true }])
     }),
     takeRecords: vi.fn(),
     unobserve: vi.fn(),
@@ -244,7 +244,7 @@ describe("useInfiniteScroll", () => {
     const IntersectionObserverMock = vi.fn((cb) => ({
       disconnect: vi.fn(),
       observe: mockObserve.mockImplementation((el) => {
-        cb([{ isIntersecting: true, target: el }])
+        cb([{ target: el, isIntersecting: true }])
       }),
       takeRecords: vi.fn(),
       unobserve: vi.fn(),

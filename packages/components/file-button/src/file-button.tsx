@@ -85,10 +85,10 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     ...formControlProps
   } = pickObject(rest, formControlProperties)
   const {
+    "aria-invalid": isInvalid,
     disabled,
     readOnly,
     required,
-    "aria-invalid": isInvalid,
   } = formControlProps
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -150,10 +150,10 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
           whiteSpace: "nowrap",
           width: "1px",
         }}
+        aria-hidden
         accept={accept}
         multiple={multiple}
         tabIndex={-1}
-        aria-hidden
         onChange={onChange}
         {...formControlProps}
       />

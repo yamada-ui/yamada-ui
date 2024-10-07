@@ -12,10 +12,6 @@ export const Popover: ComponentMultiStyle<"Popover"> = {
       top: "2",
     },
     container: {
-      _focusVisible: {
-        boxShadow: "outline",
-        outline: 0,
-      },
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
@@ -23,6 +19,10 @@ export const Popover: ComponentMultiStyle<"Popover"> = {
       color: "inherit",
       rounded: "md",
       zIndex: "guldo",
+      _focusVisible: {
+        boxShadow: "outline",
+        outline: 0,
+      },
     },
     footer: {
       borderColor: "inherit",

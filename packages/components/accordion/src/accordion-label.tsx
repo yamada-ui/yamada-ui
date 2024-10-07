@@ -69,7 +69,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         : generalIcon
 
     return (
-      <ui.div role="heading" aria-level={3} {...containerProps}>
+      <ui.div aria-level={3} role="heading" {...containerProps}>
         <ui.button
           {...getLabelProps(rest, ref)}
           className={cx("ui-accordion__label", className)}

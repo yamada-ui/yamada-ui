@@ -9,7 +9,7 @@ export const Mark: ComponentStyle<"Mark"> = {
   },
 
   variants: {
-    outline: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => {
+    outline: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
         getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
@@ -20,11 +20,11 @@ export const Mark: ComponentStyle<"Mark"> = {
         color,
       }
     },
-    solid: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => ({
+    solid: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
       bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
       color: `white`,
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "gray", theme: t }) => ({
+    subtle: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
       bg: [
         isGray(c) ? `${c}.50` : `${c}.100`,
         shadeColor(`${c}.300`, 58)(t, m),

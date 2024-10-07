@@ -13,7 +13,7 @@ describe("<Link />", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
-      <Link href={url} isExternal data-testid="Link">
+      <Link href={url} data-testid="Link" isExternal>
         Welcome page
       </Link>,
     )
@@ -62,7 +62,7 @@ describe("<LinkOverlay />", () => {
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
       <LinkBox>
-        <LinkOverlay className="custom-class" href={url}>
+        <LinkOverlay href={url} className="custom-class">
           Welcome page
         </LinkOverlay>
       </LinkBox>,

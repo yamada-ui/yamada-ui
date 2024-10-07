@@ -40,9 +40,9 @@ export const PropsCard: FC<PropsCardProps> = ({
     <Card
       id={id}
       css={{ scrollMarginBlock: "6rem" }}
+      variant="outline"
       mt="8"
       position="relative"
-      variant="outline"
     >
       <CardHeader
         bg={["white", "black"]}

@@ -171,8 +171,8 @@ export const useMonthList = () => {
 
   const getGridProps: PropGetter = useCallback(
     (props = {}) => ({
-      role: "grid",
       "aria-label": label,
+      role: "grid",
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
     }),
@@ -209,12 +209,12 @@ export const useMonthList = () => {
         ref: mergeRefs(ref, monthRefs.current.get(value)),
         disabled: isDisabled,
         ...props,
-        tabIndex,
         "aria-disabled": ariaAttr(isDisabled),
         "aria-selected": ariaAttr(isSelected),
         "data-disabled": dataAttr(isDisabled),
         "data-selected": dataAttr(isSelected),
         "data-value": value,
+        tabIndex,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },

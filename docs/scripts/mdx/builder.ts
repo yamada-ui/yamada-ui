@@ -1,9 +1,9 @@
+import type { DocumentMap } from "./utils"
 import { writeFile } from "fs/promises"
-import path from "path"
 import { glob } from "glob"
+import path from "path"
 import { generateMDX } from "./document"
 import { initMDX } from "./package"
-import type { DocumentMap } from "./utils"
 import { getLocale, getSlug, MDX_PATH } from "./utils"
 
 async function builderMDX() {

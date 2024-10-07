@@ -1,8 +1,8 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { UseAutocompleteOptionGroupProps } from "./use-autocomplete-option-group"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useAutocompleteContext } from "./autocomplete-context"
-import type { UseAutocompleteOptionGroupProps } from "./use-autocomplete-option-group"
 import { useAutocompleteOptionGroup } from "./use-autocomplete-option-group"
 
 interface AutocompleteOptionGroupOptions
@@ -24,12 +24,12 @@ export const AutocompleteOptionGroup = forwardRef<
   (
     {
       className,
+      children,
       color,
       h,
       height,
       minH,
       minHeight,
-      children,
       labelProps,
       ...rest
     },
@@ -49,13 +49,13 @@ export const AutocompleteOptionGroup = forwardRef<
           "ui-autocomplete__item--group",
           className,
         )}
-        __css={{ w: "100%", h: "fit-content", color }}
+        __css={{ color, h: "fit-content", w: "100%" }}
         {...getContainerProps()}
       >
         <ui.span
           className="ui-autocomplete__item__group-label"
-          __css={styles.groupLabel}
           lineClamp={1}
+          __css={styles.groupLabel}
           {...labelProps}
         >
           {label}

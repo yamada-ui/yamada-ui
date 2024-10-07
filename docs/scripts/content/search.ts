@@ -1,25 +1,25 @@
-import { existsSync } from "fs"
-import { readFile, readdir, writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
+import { existsSync } from "fs"
+import { readdir, readFile, writeFile } from "fs/promises"
 import matter from "gray-matter"
-import { otherLocales } from "../../utils/i18n"
 import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { getResolvedPath } from "utils/path"
+import { otherLocales } from "../../utils/i18n"
 
 interface Content {
-  title: string
-  type: "page" | "fragment"
-  description?: string
-  slug: string
+  type: "fragment" | "page"
   hierarchy: {
     lv1: string
     lv2?: string
     lv3?: string
     lv4?: string
   }
+  slug: string
+  title: string
+  description?: string
 }
 
 const getRecursivePaths = async (path: string): Promise<string[]> => {
@@ -131,11 +131,11 @@ const generateSearchContent: p.RequiredRunner =
             paths.map(async (path) => {
               const file = await readFile(path, "utf8")
 
-              const { data, content } = matter(file)
+              const { content, data } = matter(file)
 
               if (!Object.keys(data).length) return []
 
-              let { title, description } = data
+              let { description, title } = data
 
               const slug = getSlug(path)
 
@@ -149,11 +149,11 @@ const generateSearchContent: p.RequiredRunner =
 
               const contents: Content[] = [
                 {
-                  title,
                   type: "page",
                   description,
-                  slug,
                   hierarchy: { lv1: title },
+                  slug,
+                  title,
                 },
               ]
 
@@ -166,10 +166,10 @@ const generateSearchContent: p.RequiredRunner =
                 item.content = formatTitle(item.content)
 
                 const content: Content = {
-                  title: item.content,
                   type: "fragment",
-                  slug: slug + fragment,
                   hierarchy: { lv1: title },
+                  slug: slug + fragment,
+                  title: item.content,
                 }
 
                 if (item.lvl <= 2) {

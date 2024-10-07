@@ -1,13 +1,13 @@
 import {
-  isMouseEvent,
-  isTouchEvent,
-  isMultiTouchEvent,
-  getEventWindow,
-  pointFromTouch,
-  pointFromMouse,
-  getEventPoint,
   addDomEvent,
   addPointerEvent,
+  getEventPoint,
+  getEventWindow,
+  isMouseEvent,
+  isMultiTouchEvent,
+  isTouchEvent,
+  pointFromMouse,
+  pointFromTouch,
 } from "../src"
 
 describe("Event", () => {
@@ -22,15 +22,15 @@ describe("Event", () => {
       clientY: number
 
       constructor({
-        identifier,
         target,
         clientX,
         clientY,
+        identifier,
       }: {
-        identifier: number
         target: EventTarget
         clientX: number
         clientY: number
+        identifier: number
       }) {
         this.identifier = identifier
         this.target = target
@@ -66,9 +66,9 @@ describe("Event", () => {
 
   test("isMultiTouchEvent identifies multi-touch events", () => {
     const touchEvent = new TouchEvent("touchstart", {
-      touches: [new Touch({ identifier: 1, target: document })],
+      changedTouches: [new Touch({ target: document, identifier: 1 })],
       targetTouches: [],
-      changedTouches: [new Touch({ identifier: 1, target: document })],
+      touches: [new Touch({ target: document, identifier: 1 })],
     })
     expect(isMultiTouchEvent(touchEvent)).toBeFalsy()
   })
@@ -80,15 +80,15 @@ describe("Event", () => {
 
   test("pointFromTouch extracts point from touch event", () => {
     const touch = new Touch({
-      identifier: 1,
       target: document,
       clientX: 100,
       clientY: 200,
+      identifier: 1,
     })
     const touchEvent = new TouchEvent("touchstart", {
-      touches: [touch],
-      targetTouches: [],
       changedTouches: [touch],
+      targetTouches: [],
+      touches: [touch],
     })
     expect(pointFromTouch(touchEvent, "client")).toStrictEqual({
       x: 100,
@@ -112,15 +112,15 @@ describe("Event", () => {
     })
 
     const touch = new Touch({
-      identifier: 1,
       target: document,
       clientX: 300,
       clientY: 400,
+      identifier: 1,
     })
     const touchEvent = new TouchEvent("touchstart", {
-      touches: [touch],
-      targetTouches: [],
       changedTouches: [touch],
+      targetTouches: [],
+      touches: [touch],
     })
     expect(getEventPoint(touchEvent, "client")).toStrictEqual({
       x: 300,

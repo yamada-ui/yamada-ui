@@ -6,14 +6,29 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       w: "100%",
     },
     item: {
-      w: "100%",
       h: "100%",
+      w: "100%",
       _selected: {
         boxShadow: ["md", "dark-md"],
       },
     },
     trigger: {
       color: ["blackAlpha.300", "whiteAlpha.300"],
+    },
+  },
+
+  sizes: {
+    sm: {
+      item: { p: "sm", rounded: "base" },
+    },
+    md: {
+      item: { p: "md", rounded: "md" },
+    },
+    normal: {
+      item: { p: "normal", rounded: "lg" },
+    },
+    lg: {
+      item: { p: "lg", rounded: "xl" },
     },
   },
 
@@ -31,27 +46,12 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       },
     },
     unstyled: {
-      item: { rounded: 0, p: 0, _selected: { boxShadow: "unset" } },
-    },
-  },
-
-  sizes: {
-    sm: {
-      item: { rounded: "base", p: "sm" },
-    },
-    md: {
-      item: { rounded: "md", p: "md" },
-    },
-    normal: {
-      item: { rounded: "lg", p: "normal" },
-    },
-    lg: {
-      item: { rounded: "xl", p: "lg" },
+      item: { p: 0, rounded: 0, _selected: { boxShadow: "unset" } },
     },
   },
 
   defaultProps: {
-    variant: "outline",
     size: "md",
+    variant: "outline",
   },
 }

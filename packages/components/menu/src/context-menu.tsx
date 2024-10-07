@@ -1,7 +1,7 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FC } from "react"
 import type { MenuProps } from "./menu"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { Menu } from "./menu"
 import { ContextMenuProvider } from "./menu-context"
 

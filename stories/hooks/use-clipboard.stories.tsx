@@ -16,7 +16,7 @@ const meta: Meta = {
 export default meta
 
 export const basic = () => {
-  const { onCopy, value, setValue, hasCopied } = useClipboard()
+  const { hasCopied, setValue, value, onCopy } = useClipboard()
 
   return (
     <>
@@ -38,7 +38,7 @@ export const basic = () => {
 }
 
 export const withTimeout = () => {
-  const { onCopy, value, setValue, hasCopied } = useClipboard("", 5000)
+  const { hasCopied, setValue, value, onCopy } = useClipboard("", 5000)
 
   return (
     <>
@@ -60,13 +60,13 @@ export const withTimeout = () => {
 }
 
 export const directCopy = () => {
-  const { onCopy, hasCopied } = useClipboard()
+  const { hasCopied, onCopy } = useClipboard()
 
   const value = "孫悟空"
 
   return (
     <HStack gap="md">
-      <Input value={value} isReadOnly />
+      <Input isReadOnly value={value} />
       <Button onClick={() => onCopy(value)}>
         {hasCopied ? "Copied!" : "Copy"}
       </Button>

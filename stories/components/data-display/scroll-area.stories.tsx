@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef } from "react"
 import {
   Button,
   Heading,
@@ -8,12 +7,13 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
+import { useRef } from "react"
 
 type Story = StoryFn<typeof ScrollArea>
 
 const meta: Meta<typeof ScrollArea> = {
-  title: "Components / Data Display / ScrollArea",
   component: ScrollArea,
+  title: "Components / Data Display / ScrollArea",
 }
 
 export default meta
@@ -245,8 +245,8 @@ export const withScrollHideDelay: Story = () => {
   return (
     <ScrollArea
       type="scroll"
-      scrollHideDelay={4000}
       h="xs"
+      scrollHideDelay={4000}
       innerProps={{ as: VStack, gap: "md" }}
     >
       <Heading size="sm">孫悟空少年編</Heading>
@@ -295,16 +295,16 @@ export const useScrollTo: Story = () => {
   const ref = useRef<HTMLDivElement>(null)
 
   const scrollToTop = () =>
-    ref.current?.scrollTo({ top: 0, behavior: "smooth" })
+    ref.current?.scrollTo({ behavior: "smooth", top: 0 })
 
   const scrollToCenter = () =>
     ref.current?.scrollTo({
-      top: ref.current.scrollHeight / 2,
       behavior: "smooth",
+      top: ref.current.scrollHeight / 2,
     })
 
   const scrollToBottom = () =>
-    ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: "smooth" })
+    ref.current?.scrollTo({ behavior: "smooth", top: ref.current.scrollHeight })
 
   return (
     <>

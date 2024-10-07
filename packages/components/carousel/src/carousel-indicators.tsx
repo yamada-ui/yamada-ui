@@ -1,7 +1,7 @@
-import type { HTMLUIProps, CSSUIObject, FC } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { ReactElement } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 import { useCarouselContext, useCarouselIndicators } from "./use-carousel"
 
@@ -18,15 +18,15 @@ export interface CarouselIndicatorsProps
 
 export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   ({ className, component, ...rest }, ref) => {
-    const { selectedIndex, orientation, styles } = useCarouselContext()
+    const { orientation, selectedIndex, styles } = useCarouselContext()
 
     const { indexes, getIndicatorProps } = useCarouselIndicators()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      zIndex: "fallback(kurillin, 9)",
       display: "flex",
       justifyContent: "center",
+      position: "absolute",
+      zIndex: "fallback(kurillin, 9)",
       ...styles.indicators,
       ...(orientation === "vertical"
         ? { flexDirection: "column" }
@@ -47,7 +47,7 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
             const child = component({
               index,
               isSelected,
-            }) as ReactElement | null
+            }) as null | ReactElement
 
             if (!child) return null
 
@@ -81,8 +81,8 @@ const CarouselIndicator: FC<CarouselIndicatorProps> = ({
   return (
     <ui.button
       type="button"
-      tabIndex={-1}
       className={cx("ui-carousel__indicators__indicator", className)}
+      tabIndex={-1}
       __css={css}
       {...rest}
     />

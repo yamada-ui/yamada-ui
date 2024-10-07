@@ -3,29 +3,13 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Stat: ComponentMultiStyle<"Stat"> = {
   baseStyle: {
     container: {},
-    label: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      fontWeight: "medium",
-    },
-    number: ({ colorScheme: c }) => ({
-      fontFeatureSettings: '"pnum"',
-      fontVariantNumeric: "proportional-nums",
-      verticalAlign: "baseline",
-      fontSize: "5xl",
-      color: c
-        ? [`${c}.500`, `${c}.600`]
-        : ["blackAlpha.800", "whiteAlpha.700"],
-      fontWeight: "extrabold",
-    }),
     helperMessage: {
-      fontSize: "sm",
       color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontSize: "sm",
     },
     icon: {
-      marginEnd: "1",
-      w: "3.5",
       h: "3.5",
-      verticalAlign: "middle",
+      marginEnd: "1",
       vars: [
         {
           name: "increase",
@@ -38,7 +22,23 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
           value: "danger.400",
         },
       ],
+      verticalAlign: "middle",
+      w: "3.5",
     },
+    label: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontWeight: "medium",
+    },
+    number: ({ colorScheme: c }) => ({
+      color: c
+        ? [`${c}.500`, `${c}.600`]
+        : ["blackAlpha.800", "whiteAlpha.700"],
+      fontFeatureSettings: '"pnum"',
+      fontSize: "5xl",
+      fontVariantNumeric: "proportional-nums",
+      fontWeight: "extrabold",
+      verticalAlign: "baseline",
+    }),
   },
 
   defaultProps: {},

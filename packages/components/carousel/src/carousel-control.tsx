@@ -1,7 +1,7 @@
 import type { IconButtonProps } from "@yamada-ui/button"
-import { IconButton } from "@yamada-ui/button"
 import type { CSSUIObject } from "@yamada-ui/core"
-import { forwardRef, useColorModeValue } from "@yamada-ui/core"
+import { IconButton } from "@yamada-ui/button"
+import { forwardRef } from "@yamada-ui/core"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useCarouselContext, useCarouselControl } from "./use-carousel"
@@ -16,7 +16,6 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
 
     return (
       <CarouselControl
-        operation="prev"
         className={cx("ui-carousel__control--prev", className)}
         aria-label="Go to previous slide"
         icon={
@@ -28,6 +27,7 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
             }}
           />
         }
+        operation="prev"
         {...getControlProps(rest, ref)}
       />
     )
@@ -45,7 +45,6 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
 
     return (
       <CarouselControl
-        operation="next"
         className={cx("ui-carousel__control--next", className)}
         aria-label="Go to next slide"
         icon={
@@ -57,6 +56,7 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
             }}
           />
         }
+        operation="next"
         {...getControlProps(rest, ref)}
       />
     )
@@ -67,11 +67,10 @@ CarouselControlNext.displayName = "CarouselControlNext"
 CarouselControlNext.__ui__ = "CarouselControlNext"
 
 const CarouselControl = forwardRef<
-  CarouselControlProps & { operation: "prev" | "next" },
+  { operation: "next" | "prev" } & CarouselControlProps,
   "button"
 >(({ className, operation, ...rest }, ref) => {
   const { styles } = useCarouselContext()
-  const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha")
 
   const css: CSSUIObject = {
     position: "absolute",
@@ -84,7 +83,7 @@ const CarouselControl = forwardRef<
     <IconButton
       ref={ref}
       className={cx("ui-carousel__control", className)}
-      colorScheme={colorScheme}
+      colorScheme={["whiteAlpha", "blackAlpha"]}
       isRounded
       __css={css}
       {...rest}

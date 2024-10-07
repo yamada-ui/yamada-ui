@@ -1,9 +1,9 @@
 import type { ChartTooltipProps as OriginChartTooltipProps } from "@yamada-ui/charts"
-import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
+import { useI18n } from "contexts"
 import { useInsights } from "./insights-provider"
 import { labelFormatter } from "./insights-utils"
-import { useI18n } from "contexts"
 
 export interface ChartTooltipProps extends OriginChartTooltipProps {}
 
@@ -12,7 +12,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = ({
   payload = [],
 }) => {
   const { period } = useInsights()
-  const { t, locale } = useI18n()
+  const { locale, t } = useI18n()
 
   const total = payload.reduce(
     (acc, { value }) => (!isArray(value) ? acc + Number(value) : 0),
@@ -21,18 +21,18 @@ export const ChartTooltip: FC<ChartTooltipProps> = ({
 
   return (
     <VStack
-      minW="56"
-      gap="sm"
-      rounded="md"
       bg={["white", "black"]}
       border="1px solid"
       borderColor={["blackAlpha.200", "whiteAlpha.100"]}
-      p="3"
-      fontWeight="medium"
-      fontSize="sm"
-      color="inherit"
       boxShadow={["md", "dark-md"]}
+      color="inherit"
+      fontSize="sm"
+      fontWeight="medium"
+      gap="sm"
       maxW="64"
+      minW="56"
+      p="3"
+      rounded="md"
       zIndex="dodoria"
     >
       {label ? (
@@ -50,10 +50,10 @@ export const ChartTooltip: FC<ChartTooltipProps> = ({
       </HStack>
 
       <VStack gap="xs">
-        {payload.map(({ color, name, value }, index) => {
+        {payload.map(({ name, color, value }, index) => {
           return (
             <HStack key={index} gap="sm">
-              <Box boxSize="3" rounded="full" bg={color} />
+              <Box bg={color} boxSize="3" rounded="full" />
 
               <Text as="span" color={["blackAlpha.800", "whiteAlpha.700"]}>
                 {name}

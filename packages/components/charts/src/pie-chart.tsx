@@ -1,4 +1,9 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { TooltipDataSourceType } from "./chart.types"
+import type { UseChartProps } from "./use-chart"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
+import type { UsePieChartOptions } from "./use-pie-chart"
 import {
   forwardRef,
   omitThemeProps,
@@ -17,29 +22,12 @@ import {
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { TooltipDataSourceType } from "./chart.types"
-import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartTooltip } from "./use-chart-tooltip"
-import type { UseChartTooltipOptions } from "./use-chart-tooltip"
-import type { UsePieChartOptions } from "./use-pie-chart"
 import { usePieChart } from "./use-pie-chart"
 
 interface PieChartOptions {
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
-  /**
-   * If `true`, legend is visible.
-   *
-   * @default false
-   */
-  withLegend?: boolean
   /**
    * Determines which data is displayed in the tooltip.
    *
@@ -50,10 +38,22 @@ interface PieChartOptions {
    * Unit displayed next to each value in tooltip.
    */
   unit?: string
+  /**
+   * If `true`, legend is visible.
+   *
+   * @default false
+   */
+  withLegend?: boolean
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
 }
 
 export interface PieChartProps
-  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity">,
+  extends Omit<HTMLUIProps, "fillOpacity" | "strokeWidth">,
     ThemeProps<"pieChart">,
     PieChartOptions,
     UsePieChartOptions,
@@ -71,64 +71,64 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const {
     className,
     data,
-    pieProps,
-    chartProps,
-    cellProps,
-    containerProps,
-    withTooltip = true,
-    withLegend = false,
-    tooltipProps,
-    tooltipAnimationDuration,
-    tooltipDataSource = "all",
-    valueFormatter,
-    labelFormatter,
-    unit,
+    endAngle,
     innerRadius,
+    isPercent,
+    labelFormatter,
+    labelOffset,
     outerRadius,
     paddingAngle,
     startAngle,
-    endAngle,
-    withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
     strokeWidth,
+    tooltipAnimationDuration,
+    tooltipDataSource = "all",
+    unit,
+    valueFormatter,
+    withLabelLines,
+    withLabels,
+    withLegend = false,
+    withTooltip = true,
+    cellProps,
+    chartProps,
+    containerProps,
     legendProps,
+    pieProps,
+    tooltipProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const {
     pieVars,
-    getPieProps,
-    getPieChartProps,
-    getCellProps,
     setHighlightedArea,
+    getCellProps,
+    getPieChartProps,
+    getPieProps,
   } = usePieChart({
     data,
-    pieProps,
-    chartProps,
-    cellProps,
+    endAngle,
     innerRadius,
+    isPercent,
+    labelFormatter,
+    labelOffset,
     outerRadius,
     paddingAngle,
     startAngle,
-    endAngle,
     strokeWidth,
-    withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
-    labelFormatter,
     styles,
+    withLabelLines,
+    withLabels,
+    cellProps,
+    chartProps,
+    pieProps,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
 
@@ -137,7 +137,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
       data.map(({ name }, index) => (
         <Cell
           key={`pie-cell-${name}`}
-          {...getCellProps({ index, className: "ui-pie-chart__cell" })}
+          {...getCellProps({ className: "ui-pie-chart__cell", index })}
         />
       )),
     [data, getCellProps],
@@ -186,8 +186,8 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
                     className="ui-pie-chart__tooltip"
                     label={label}
                     payload={tooltipDataSource === "segment" ? payload : data}
-                    valueFormatter={valueFormatter}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}
@@ -200,3 +200,6 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+PieChart.displayName = "PieChart"
+PieChart.__ui__ = "PieChart"

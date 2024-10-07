@@ -1,5 +1,5 @@
-import { writeFile } from "fs/promises"
 import { findPackages } from "find-packages"
+import { writeFile } from "fs/promises"
 
 const main = async () => {
   const packages = await findPackages("packages")

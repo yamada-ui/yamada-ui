@@ -1,6 +1,6 @@
 import { match } from "ts-pattern"
 
-type FragmentPosition = "start" | "end"
+type FragmentPosition = "end" | "start"
 
 export const getFragmentPattern = (
   position: FragmentPosition,

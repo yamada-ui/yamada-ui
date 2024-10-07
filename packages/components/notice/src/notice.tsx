@@ -1,4 +1,12 @@
 import type { AlertProps } from "@yamada-ui/alert"
+import type {
+  CSSUIObject,
+  NoticeComponentProps,
+  NoticeConfigOptions,
+  NoticePlacement,
+  StyledTheme,
+} from "@yamada-ui/core"
+import type { FC, ReactNode } from "react"
 import {
   Alert,
   AlertDescription,
@@ -6,43 +14,35 @@ import {
   AlertTitle,
 } from "@yamada-ui/alert"
 import { CloseButton } from "@yamada-ui/close-button"
-import type {
-  CSSUIObject,
-  NoticePlacement,
-  NoticeComponentProps,
-  NoticeConfigOptions,
-  StyledTheme,
-} from "@yamada-ui/core"
 import { ui, useTheme } from "@yamada-ui/core"
 import { cx, merge } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
 import { useMemo } from "react"
 
 export interface UseNoticeOptions extends NoticeConfigOptions {}
 
 export interface NoticeOptions {
-  id: string | number
-  placement: NoticePlacement
+  id: number | string
   duration: UseNoticeOptions["duration"]
-  status: UseNoticeOptions["status"]
   message: (props: NoticeComponentProps) => ReactNode
-  isDelete?: boolean
+  placement: NoticePlacement
+  status: UseNoticeOptions["status"]
   onDelete: () => void
-  onCloseComplete?: () => void
   style?: CSSUIObject
+  isDelete?: boolean
+  onCloseComplete?: () => void
 }
 
 const findId = (
   options: NoticeOptions[],
-  id: string | number,
+  id: number | string,
 ): NoticeOptions | undefined => options.find((notice) => notice.id === id)
 
 const findNotice = (
   state: State,
-  id: string | number,
+  id: number | string,
 ): {
-  placement: NoticePlacement | undefined
   index: number
+  placement: NoticePlacement | undefined
 } => {
   const placement = getNoticePlacement(state, id)
 
@@ -50,12 +50,12 @@ const findNotice = (
     ? state[placement].findIndex((notice) => notice.id === id)
     : -1
 
-  return { placement, index }
+  return { index, placement }
 }
 
 const getNoticePlacement = (
   state: State,
-  id: string | number,
+  id: number | string,
 ): NoticePlacement | undefined => {
   for (const [placement, values] of Object.entries(state)) {
     if (findId(values, id)) return placement as NoticePlacement
@@ -66,7 +66,7 @@ interface CreateNoticeOptions
   extends Partial<
     Pick<
       NoticeOptions,
-      "id" | "placement" | "status" | "duration" | "onCloseComplete" | "style"
+      "duration" | "id" | "onCloseComplete" | "placement" | "status" | "style"
     >
   > {}
 
@@ -76,11 +76,11 @@ const createNotice = (
   message: (props: NoticeComponentProps) => ReactNode,
   {
     id,
-    placement = "top",
-    duration,
-    onCloseComplete,
-    status,
     style,
+    duration,
+    placement = "top",
+    status,
+    onCloseComplete,
   }: CreateNoticeOptions,
 ) => {
   counter += 1
@@ -89,14 +89,14 @@ const createNotice = (
 
   return {
     id,
+    style,
+    duration,
+    isDelete: false,
+    message,
     placement,
     status,
-    duration,
-    message,
-    onDelete: () => noticeStore.remove(String(id), placement),
-    isDelete: false,
     onCloseComplete,
-    style,
+    onDelete: () => noticeStore.remove(String(id), placement),
   }
 }
 
@@ -105,7 +105,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
 
   const Render: FC<NoticeComponentProps> = (props) => {
     if (typeof component === "function") {
-      return component({ ...props, ...options }) as JSX.Element
+      return component({ ...props, ...options })
     } else {
       return <Notice {...props} {...options} />
     }
@@ -132,7 +132,7 @@ const createNoticeFunc = (
   }
 
   notice.update = (
-    id: string | number,
+    id: number | string,
     options: Omit<UseNoticeOptions, "id">,
   ) => {
     options = computedOptions(options)
@@ -170,26 +170,26 @@ type State = {
 }
 
 interface Store {
-  subscribe: (onStoreChange: () => void) => () => void
-  getSnapshot: () => State
+  close: (id: number | string) => void
+  closeAll: (options?: { placement?: NoticePlacement[] }) => void
   create: (
     message: (props: NoticeComponentProps) => ReactNode,
     options: UseNoticeOptions,
-  ) => string | number
-  close: (id: string | number) => void
-  closeAll: (options?: { placement?: NoticePlacement[] }) => void
-  update: (id: string | number, options: Omit<UseNoticeOptions, "id">) => void
-  remove: (id: string | number, placement: NoticePlacement) => void
-  isActive: (id: string | number) => boolean
+  ) => number | string
+  getSnapshot: () => State
+  isActive: (id: number | string) => boolean
+  remove: (id: number | string, placement: NoticePlacement) => void
+  subscribe: (onStoreChange: () => void) => () => void
+  update: (id: number | string, options: Omit<UseNoticeOptions, "id">) => void
 }
 
 const initialState = {
-  top: [],
-  "top-left": [],
-  "top-right": [],
   bottom: [],
   "bottom-left": [],
   "bottom-right": [],
+  top: [],
+  "top-left": [],
+  "top-right": [],
 }
 
 const createNoticeStore = (initialState: State): Store => {
@@ -202,74 +202,18 @@ const createNoticeStore = (initialState: State): Store => {
   }
 
   return {
-    getSnapshot: () => state,
-
-    subscribe: (onStoreChange) => {
-      storeChangeCache.add(onStoreChange)
-
-      return () => {
-        setState(() => initialState)
-        storeChangeCache.delete(onStoreChange)
-      }
-    },
-
-    remove: (id, placement) => {
-      setState((prevState) => ({
-        ...prevState,
-        [placement]: prevState[placement].filter((notice) => notice.id != id),
-      }))
-    },
-
-    create: (message, options) => {
-      const limit = options.limit
-
-      const notice = createNotice(message, options)
-      const { placement, id } = notice
-
+    close: (id) => {
       setState((prev) => {
-        let prevNotices = prev[placement] ?? []
+        const placement = getNoticePlacement(prev, id)
 
-        if (
-          limit !== undefined &&
-          limit > 0 &&
-          prevNotices.length > limit - 1
-        ) {
-          const n = prevNotices.length - (limit - 1)
-          const notices = placement.includes("top")
-            ? prevNotices.slice(n * -1)
-            : prevNotices.slice(0, n)
+        if (!placement) return prev
 
-          const ids = notices.map(({ id }) => id)
-
-          prevNotices = prevNotices.map((notice) =>
-            ids.includes(notice.id) ? { ...notice, isDelete: true } : notice,
-          )
+        return {
+          ...prev,
+          [placement]: prev[placement].map((notice) =>
+            notice.id == id ? { ...notice, isDelete: true } : notice,
+          ),
         }
-
-        const notices = placement.includes("top")
-          ? [notice, ...prevNotices]
-          : [...prevNotices, notice]
-
-        return { ...prev, [placement]: notices }
-      })
-
-      return id
-    },
-
-    update: (id, options) => {
-      setState((prev) => {
-        const next = { ...prev }
-        const { placement, index } = findNotice(next, id)
-
-        if (placement && index !== -1) {
-          next[placement][index] = {
-            ...next[placement][index],
-            ...options,
-            message: createRender(options),
-          }
-        }
-
-        return next
       })
     },
 
@@ -300,23 +244,79 @@ const createNoticeStore = (initialState: State): Store => {
       })
     },
 
-    close: (id) => {
+    create: (message, options) => {
+      const limit = options.limit
+
+      const notice = createNotice(message, options)
+      const { id, placement } = notice
+
       setState((prev) => {
-        const placement = getNoticePlacement(prev, id)
+        let prevNotices = prev[placement]
 
-        if (!placement) return prev
+        if (
+          limit !== undefined &&
+          limit > 0 &&
+          prevNotices.length > limit - 1
+        ) {
+          const n = prevNotices.length - (limit - 1)
+          const notices = placement.includes("top")
+            ? prevNotices.slice(n * -1)
+            : prevNotices.slice(0, n)
 
-        return {
-          ...prev,
-          [placement]: prev[placement].map((notice) =>
-            notice.id == id ? { ...notice, isDelete: true } : notice,
-          ),
+          const ids = notices.map(({ id }) => id)
+
+          prevNotices = prevNotices.map((notice) =>
+            ids.includes(notice.id) ? { ...notice, isDelete: true } : notice,
+          )
         }
+
+        const notices = placement.includes("top")
+          ? [notice, ...prevNotices]
+          : [...prevNotices, notice]
+
+        return { ...prev, [placement]: notices }
       })
+
+      return id
     },
+
+    getSnapshot: () => state,
 
     isActive: (id) =>
       Boolean(findNotice(noticeStore.getSnapshot(), id).placement),
+
+    remove: (id, placement) => {
+      setState((prevState) => ({
+        ...prevState,
+        [placement]: prevState[placement].filter((notice) => notice.id != id),
+      }))
+    },
+
+    subscribe: (onStoreChange) => {
+      storeChangeCache.add(onStoreChange)
+
+      return () => {
+        setState(() => initialState)
+        storeChangeCache.delete(onStoreChange)
+      }
+    },
+
+    update: (id, options) => {
+      setState((prev) => {
+        const next = { ...prev }
+        const { index, placement } = findNotice(next, id)
+
+        if (placement && index !== -1 && next[placement][index]) {
+          next[placement][index] = {
+            ...next[placement][index],
+            ...options,
+            message: createRender(options),
+          }
+        }
+
+        return next
+      })
+    },
   }
 }
 
@@ -329,15 +329,15 @@ export interface NoticeProps
 }
 
 const Notice: FC<NoticeProps> = ({
-  variant = "basic",
-  colorScheme,
-  status,
-  icon,
-  title,
-  description,
-  isClosable,
-  closeStrategy = "button",
   className,
+  colorScheme,
+  variant = "basic",
+  closeStrategy = "button",
+  description,
+  icon,
+  isClosable,
+  status,
+  title,
   onClose,
 }) => {
   const isButtonClosable =
@@ -347,18 +347,18 @@ const Notice: FC<NoticeProps> = ({
 
   return (
     <Alert
-      status={status}
-      variant={variant}
+      className={cx("ui-notice", className)}
       colorScheme={colorScheme}
+      variant={variant}
       alignItems="start"
       boxShadow="fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))"
-      className={cx("ui-notice", className)}
       pe={isButtonClosable ? 8 : undefined}
+      status={status}
       onClick={isElementClosable ? onClose : undefined}
     >
       <AlertIcon
-        variant={icon?.variant}
         className="ui-notice__icon"
+        variant={icon?.variant}
         {...(icon?.color ? { color: icon.color } : {})}
       >
         {icon?.children}
@@ -381,14 +381,14 @@ const Notice: FC<NoticeProps> = ({
         <CloseButton
           className="ui-notice__close-button"
           size="sm"
+          position="absolute"
+          right={2}
+          top={2}
           onClick={(ev) => {
             ev.stopPropagation()
 
             onClose?.()
           }}
-          position="absolute"
-          top={2}
-          right={2}
         />
       ) : null}
     </Alert>

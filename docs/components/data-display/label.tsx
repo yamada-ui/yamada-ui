@@ -1,5 +1,5 @@
-import { forwardRef, Tag } from "@yamada-ui/react"
 import type { TagProps } from "@yamada-ui/react"
+import { forwardRef, Tag } from "@yamada-ui/react"
 import { memo } from "react"
 
 export interface LabelProps extends TagProps {}
@@ -30,7 +30,7 @@ export const Label = memo(
     }
 
     return children ? (
-      <Tag ref={ref} size="sm" colorScheme={colorScheme} {...rest}>
+      <Tag ref={ref} colorScheme={colorScheme} size="sm" {...rest}>
         {children}
       </Tag>
     ) : null

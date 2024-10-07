@@ -1,23 +1,23 @@
 import type { FunctionInterpolation } from "@emotion/styled"
-import createStyled from "@emotion/styled"
 import type { Dict } from "@yamada-ui/utils"
-import {
-  filterObject,
-  runIfFunc,
-  assignAfter,
-  filterUndefined,
-  interopDefault,
-} from "@yamada-ui/utils"
 import type { ComponentType } from "react"
-import { createElement, forwardRef } from "react"
 import type {
+  As,
+  InterpolationProps,
   StyledOptions,
   UIComponent,
-  InterpolationProps,
-  As,
 } from "./components"
-import { shouldForwardProp } from "./components"
 import type { CSSUIProps } from "./css"
+import createStyled from "@emotion/styled"
+import {
+  assignAfter,
+  filterObject,
+  filterUndefined,
+  interopDefault,
+  runIfFunc,
+} from "@yamada-ui/utils"
+import { createElement, forwardRef } from "react"
+import { shouldForwardProp } from "./components"
 import { css } from "./css"
 import { useColorMode } from "./providers"
 import { pseudos } from "./pseudos"
@@ -35,7 +35,7 @@ export function toCSSObject({
   disableStyleProp,
 }: ToCSSObjectOptions): FunctionInterpolation<InterpolationProps> {
   return function (props: InterpolationProps) {
-    const { theme, css: customCSS, __css, sx, ...rest } = props
+    const { css: customCSS, sx, theme, __css, ...rest } = props
     const propsCSS = filterObject<Dict, CSSUIProps>(
       rest,
       (prop) => prop in styleProps,

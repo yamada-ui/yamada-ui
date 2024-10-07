@@ -1,25 +1,25 @@
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { ImageProps, UseImageProps } from "@yamada-ui/image"
+import type { HTMLAttributeReferrerPolicy, ReactElement } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import { useImage } from "@yamada-ui/image"
 import { createContext, cx, dataAttr, handlerAll } from "@yamada-ui/utils"
-import type { HTMLAttributeReferrerPolicy, ReactElement } from "react"
 import { cloneElement, useState } from "react"
 import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
 
 interface AvatarContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
-  strict: false,
   name: "AvatarContext",
+  errorMessage: `useAvatarContext returned is 'undefined'. Seems you forgot to wrap the components in "<Avatar />"`,
 })
 
 interface AvatarOptions {
@@ -39,9 +39,17 @@ interface AvatarOptions {
    */
   srcSet?: ImageProps["srcSet"]
   /**
-   * Defines loading strategy.
+   * The `HTMLImageElement` property `alt`.
    */
-  loading?: ImageProps["loading"]
+  alt?: HTMLUIProps<"img">["alt"]
+  /**
+   * Function to get the initials to display.
+   */
+  format?: (name: string) => string
+  /**
+   * The avatar icon to use.
+   */
+  icon?: ReactElement
   /**
    * If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times.
    *
@@ -49,27 +57,19 @@ interface AvatarOptions {
    */
   ignoreFallback?: ImageProps["ignoreFallback"]
   /**
-   * The avatar icon to use.
+   * Defines loading strategy.
    */
-  icon?: ReactElement
-  /**
-   * Function to get the initials to display.
-   */
-  format?: (name: string) => string
+  loading?: ImageProps["loading"]
   /**
    * Defining which referrer is sent when fetching the resource.
    */
   referrerPolicy?: HTMLAttributeReferrerPolicy
-  /**
-   * The `HTMLImageElement` property `alt`.
-   */
-  alt?: HTMLUIProps<"img">["alt"]
 }
 
-export type AvatarProps = HTMLUIProps<"span"> &
-  ThemeProps<"Avatar"> &
-  AvatarOptions &
-  Pick<UseImageProps, "onLoad" | "onError" | "crossOrigin">
+export type AvatarProps = AvatarOptions &
+  HTMLUIProps<"span"> &
+  Pick<UseImageProps, "crossOrigin" | "onError" | "onLoad"> &
+  ThemeProps<"Avatar">
 
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
@@ -79,36 +79,36 @@ export type AvatarProps = HTMLUIProps<"span"> &
 export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Avatar", props)
   const {
-    className,
+    name,
     src,
     srcSet,
-    name,
-    loading,
     alt,
+    className,
+    borderRadius = "fallback(full, 9999px)",
+    children,
+    crossOrigin,
+    format,
     icon,
     ignoreFallback,
+    loading,
     referrerPolicy,
-    borderRadius = "fallback(full, 9999px)",
     rounded = "fallback(full, 9999px)",
     onError,
     onLoad,
-    crossOrigin,
-    format,
-    children,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const css: CSSUIObject = {
-    position: "relative",
-    display: "inline-flex",
-    justifyContent: "center",
     alignItems: "center",
+    display: "inline-flex",
     flexShrink: 0,
+    fontWeight: "medium",
+    justifyContent: "center",
+    position: "relative",
     textAlign: "center",
     textTransform: "uppercase",
-    fontWeight: "medium",
     ...styles.container,
   }
 
@@ -124,20 +124,20 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
         {...rest}
       >
         <AvatarImage
+          name={name}
           src={src}
-          alt={alt}
           srcSet={srcSet}
-          loading={loading}
+          alt={alt}
           borderRadius={borderRadius}
-          rounded={rounded}
-          onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
-          onError={onError}
           crossOrigin={crossOrigin}
           format={format}
-          name={name}
           icon={icon}
           ignoreFallback={ignoreFallback}
+          loading={loading}
           referrerPolicy={referrerPolicy}
+          rounded={rounded}
+          onError={onError}
+          onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
         />
         {children}
       </ui.span>
@@ -149,25 +149,25 @@ Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
 type AvatarImageProps = ImageProps &
-  Pick<AvatarProps, "name" | "format" | "icon" | "ignoreFallback">
+  Pick<AvatarProps, "format" | "icon" | "ignoreFallback" | "name">
 
 const AvatarImage: FC<AvatarImageProps> = ({
-  src,
-  alt,
-  srcSet,
-  onError,
-  onLoad,
-  format,
-  borderRadius,
-  rounded,
   name,
-  loading,
+  src,
+  srcSet,
+  alt,
+  borderRadius,
+  crossOrigin,
+  format,
   icon = <AvatarIcon />,
   ignoreFallback,
-  crossOrigin,
+  loading,
   referrerPolicy,
+  rounded,
+  onError,
+  onLoad,
 }) => {
-  const status = useImage({ src, onLoad, onError, crossOrigin, ignoreFallback })
+  const status = useImage({ src, crossOrigin, ignoreFallback, onError, onLoad })
 
   const isLoaded = status === "loaded"
 
@@ -177,24 +177,24 @@ const AvatarImage: FC<AvatarImageProps> = ({
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (
-      cloneElement(icon, { role: "img", "aria-label": alt ?? "Avatar Icon" })
+      cloneElement(icon, { "aria-label": alt ?? "Avatar Icon", role: "img" })
     )
 
   const css: CSSUIObject = {
-    width: "100%",
     height: "100%",
     objectFit: "cover",
+    width: "100%",
   }
 
   return (
     <ui.img
-      className="ui-avatar__image"
       src={src}
       srcSet={srcSet}
       alt={alt ?? name}
+      className="ui-avatar__image"
+      borderRadius={borderRadius}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      borderRadius={borderRadius}
       rounded={rounded}
       __css={css}
     />

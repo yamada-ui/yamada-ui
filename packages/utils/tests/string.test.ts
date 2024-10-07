@@ -1,4 +1,4 @@
-import { escape, antonym, toCamelCase, toKebabCase, toTitleCase } from "../src"
+import { antonym, escape, toCamelCase, toKebabCase, toTitleCase } from "../src"
 
 describe("String", () => {
   describe("escape", () => {

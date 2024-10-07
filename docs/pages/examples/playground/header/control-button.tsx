@@ -1,3 +1,6 @@
+import type { IconButtonProps, MenuProps } from "@yamada-ui/react"
+import type { FC } from "react"
+import type { ModalType } from "."
 import { Ellipsis } from "@yamada-ui/lucide"
 import {
   IconButton,
@@ -6,14 +9,11 @@ import {
   MenuItem,
   MenuList,
 } from "@yamada-ui/react"
-import type { IconButtonProps, MenuProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
-import type { ModalType } from "."
 
 export interface ControlButtonProps extends IconButtonProps {
-  menuProps?: MenuProps
   onOpen: (type: ModalType) => void
+  menuProps?: MenuProps
 }
 
 export const ControlButton: FC<ControlButtonProps> = memo(

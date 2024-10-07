@@ -1,4 +1,4 @@
-import { screen, render, a11y } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { useRef } from "react"
 import { Portal } from "../src"
 
@@ -86,7 +86,7 @@ describe("<Portal />", () => {
 
       return (
         <>
-          <Portal isDisabled containerRef={ref}>
+          <Portal containerRef={ref} isDisabled>
             order2
           </Portal>
           <div ref={ref}>order1</div>

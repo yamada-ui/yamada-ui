@@ -1,9 +1,9 @@
+import type { Plugin } from "unified"
 import { serialize } from "next-mdx-remote/serialize"
 import remarkBreaks from "remark-breaks"
 import remarkEmoji from "remark-emoji"
 import remarkGfm from "remark-gfm"
 import remarkSlug from "remark-slug"
-import type { Plugin } from "unified"
 import { visit } from "unist-util-visit"
 
 const rehypeCodeMeta: Plugin = () => (tree) => {
@@ -17,7 +17,7 @@ const rehypeCodeMeta: Plugin = () => (tree) => {
     props.forEach((prop) => {
       const [key, value] = prop.split("=")
 
-      node.properties[key] = value
+      if (key) node.properties[key] = value
     })
   })
 }
@@ -91,14 +91,14 @@ const getValidChildren = (
 }
 
 const getAttributes = (
-  content: string = "",
+  content = "",
 ): { attributes: any[]; resolvedContent: string } => {
   const reg = /(\w+)=([^\s]+)(?=\s|$)/g
 
   const attributes = [...content.matchAll(reg)].map(([, name, value]) => ({
     type: "mdxJsxAttribute",
     name,
-    value: value.trim(),
+    value: value?.trim(),
   }))
 
   const resolvedContent = content.replace(reg, "").replace(/^\s+/, "")
@@ -109,8 +109,8 @@ const getAttributes = (
 const insertElement =
   ({
     name,
-    children = [],
     attributes = [],
+    children = [],
   }: {
     name: string
     children: any[]
@@ -126,6 +126,7 @@ const insertElement =
 export const mdx = async (source: string) => {
   const mdxSource = await serialize(source, {
     mdxOptions: {
+      rehypePlugins: [rehypeCodeMeta],
       remarkPlugins: [
         remarkSlug as Plugin,
         remarkGfm,
@@ -133,7 +134,6 @@ export const mdx = async (source: string) => {
         remarkUIComponent,
         remarkBreaks,
       ],
-      rehypePlugins: [rehypeCodeMeta],
     },
   })
 

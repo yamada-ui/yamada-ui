@@ -1,48 +1,48 @@
+import type { UsageTheme } from "@yamada-ui/core"
+import type { SourceFile, Symbol, TypeChecker } from "typescript"
+import { defaultTheme } from "@yamada-ui/theme"
+import { TONES } from "@yamada-ui/utils"
 import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import { format, resolveConfig } from "prettier"
-import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
-  readConfigFile,
+  createProgram,
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
   parseJsonConfigFileContent,
-  createProgram,
+  readConfigFile,
   sys,
 } from "typescript"
-import type { UsageTheme } from "@yamada-ui/core"
-import { defaultTheme } from "@yamada-ui/theme"
-import { TONES } from "@yamada-ui/utils"
 
-type ComponentTypeInfo = {
+interface ComponentTypeInfo {
   type: string
-  defaultValue?: string | boolean | null
   required: boolean
-  description?: string
+  defaultValue?: boolean | null | string
   deprecated?: string
+  description?: string
   see?: string
 }
 
-type ComponentTypeProperties = {
+interface ComponentTypeProperties {
   [component: string]: ComponentTypeInfo
 }
 
 type ThemingProps = Partial<{
-  variant: string | number
-  size: string | number
   colorScheme: string
+  size: number | string
+  variant: number | string
 }>
 
 type PropertyInfo = {
   [K in keyof ThemingProps]?: {
     type: string
-    defaultValue?: string
-    required: boolean
     description: string
+    required: boolean
+    defaultValue?: string
   }
 }
 
-type TypeSearchOptions = {
+interface TypeSearchOptions {
   shouldIgnoreProperty?: (property: Symbol) => boolean | undefined
 }
 
@@ -57,16 +57,16 @@ const isString = (value: unknown): value is string => typeof value === "string"
 const isArray = <T extends any[]>(value: any): value is T =>
   Array.isArray(value)
 
-const isObject = (value: unknown): value is Record<string, unknown> =>
+const isObject = (value: unknown): value is { [key: string]: unknown } =>
   typeof value === "object" && value !== null
 
 const isFunction = <T extends Function = Function>(value: any): value is T =>
   typeof value === "function"
 
-const merge = <T extends Record<string, any>>(
+const merge = <T extends { [key: string]: any }>(
   target: any,
   source: any,
-  mergeArray: boolean = false,
+  mergeArray = false,
 ): T => {
   let result = Object.assign({}, target)
 
@@ -95,7 +95,7 @@ const merge = <T extends Record<string, any>>(
   return result as T
 }
 
-const isTone = (value: unknown): value is Record<string, string> =>
+const isTone = (value: unknown): value is { [key: string]: string } =>
   isObject(value) && TONES.every((k) => isString(value[k]))
 
 const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
@@ -108,10 +108,9 @@ const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
 
     validColors.push(key)
 
-    const semanticKeys =
-      Object.entries(semantics.colorSchemes ?? {})
-        .filter(([, relatedKey]) => key === relatedKey)
-        .map(([key]) => key) ?? []
+    const semanticKeys = Object.entries(semantics.colorSchemes ?? {})
+      .filter(([, relatedKey]) => key === relatedKey)
+      .map(([key]) => key)
 
     if (!semanticKeys.length) return
 
@@ -121,36 +120,38 @@ const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
   return toLiteralStringType(validColors)
 }
 
-const extractThemeProps = (theme: UsageTheme): Record<string, PropertyInfo> => {
-  const result: Record<string, PropertyInfo> = {}
+const extractThemeProps = (
+  theme: UsageTheme,
+): { [key: string]: PropertyInfo } => {
+  const result: { [key: string]: PropertyInfo } = {}
 
   const colorSchemeType = extractColorScheme(theme)
 
-  for (const [name, { defaultProps, variants, sizes }] of Object.entries(
+  for (const [name, { sizes, variants, defaultProps }] of Object.entries(
     theme.components ?? {},
   )) {
     if (!defaultProps) continue
 
-    const { variant, size, colorScheme } = defaultProps
+    const { colorScheme, size, variant } = defaultProps
 
     result[name] = {
-      variant: {
-        defaultValue: variant?.toString(),
-        type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
+      colorScheme: {
+        type: colorSchemeType,
+        defaultValue: JSON.stringify(colorScheme),
+        description: "The visual color appearance of the component.",
         required: false,
-        description: `The variant of the ${name}.`,
       },
       size: {
-        defaultValue: size?.toString(),
         type: sizes ? toLiteralStringType(Object.keys(sizes)) : "string",
-        required: false,
+        defaultValue: JSON.stringify(size),
         description: `The size of the ${name}.`,
-      },
-      colorScheme: {
-        defaultValue: colorScheme,
-        type: colorSchemeType,
         required: false,
-        description: "The visual color appearance of the component.",
+      },
+      variant: {
+        type: variants ? toLiteralStringType(Object.keys(variants)) : "string",
+        defaultValue: JSON.stringify(variant),
+        description: `The variant of the ${name}.`,
+        required: false,
       },
     }
   }
@@ -191,7 +192,7 @@ const sortByRequiredProperties = (properties: ComponentTypeProperties) =>
   )
 
 const extractPropertiesOfTypeName = async (
-  searchTerm: string | RegExp,
+  searchTerm: RegExp | string,
   sourceFile: SourceFile,
   typeChecker: TypeChecker,
   { shouldIgnoreProperty = () => false }: TypeSearchOptions = {},
@@ -206,7 +207,7 @@ const extractPropertiesOfTypeName = async (
       new RegExp(regexSearchTerm).test(statement.name.getText()),
   )
 
-  const results: Record<string, ComponentTypeProperties> = {}
+  const results: { [key: string]: ComponentTypeProperties } = {}
 
   for (const typeStatement of typeStatements) {
     const properties: ComponentTypeProperties = {}
@@ -234,7 +235,7 @@ const extractPropertiesOfTypeName = async (
         docTags
           .find(({ name }) => name === "default")
           ?.text?.map(({ text }) => text)
-          ?.join("\n") || undefined
+          .join("\n") || undefined
 
       const nonNullableType = type.getNonNullableType()
 
@@ -246,20 +247,20 @@ const extractPropertiesOfTypeName = async (
       properties[propertyName] = {
         type: prettyType,
         defaultValue: formatValue(defaultValue),
-        required,
         deprecated,
         description:
           property
             .getDocumentationComment(typeChecker)
             .map((comment) => comment.text)
             .join("\n") || undefined,
+        required,
         see,
       }
     }
 
     let typeName = (typeStatement as any).name.getText() as string
 
-    if (/Props$/.test(typeName)) {
+    if (typeName.endsWith("Props")) {
       typeName = typeName.replace(/Props$/, "")
 
       results[typeName] = sortByRequiredProperties(properties)
@@ -272,7 +273,7 @@ const extractPropertiesOfTypeName = async (
 }
 
 const extractTypeExports = (code: string) => {
-  type ExportedType = {
+  interface ExportedType {
     [typeName: string]: any
   }
 
@@ -282,12 +283,12 @@ const extractTypeExports = (code: string) => {
   let match = exportedTypeRegex.exec(code)
 
   while (match != null) {
-    const types = match[1].split(",").map((s) => s.trim())
+    const types = match[1]?.split(",").map((s) => s.trim())
 
-    types.forEach((type) => {
-      let [typeName] = type.split(" ") ?? []
+    types?.forEach((type) => {
+      const [typeName] = type.split(" ")
 
-      exported[typeName] = true
+      if (typeName) exported[typeName] = true
     })
 
     match = exportedTypeRegex.exec(code)
@@ -316,7 +317,7 @@ const createTypeSearch = (
   return async (
     searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0],
   ) => {
-    let results: Record<string, ComponentTypeProperties> = {}
+    let results: { [key: string]: ComponentTypeProperties } = {}
 
     await Promise.all(
       fileNames.map(async (fileName) => {
@@ -346,7 +347,7 @@ const getSourceFileName = (symbol: Symbol): string | undefined => {
 
   if (!declarations || declarations.length === 0) return undefined
 
-  const sourceFile = declarations[0].getSourceFile()
+  const sourceFile = declarations[0]?.getSourceFile()
 
   return sourceFile ? sourceFile.fileName : undefined
 }
@@ -373,7 +374,7 @@ const main = async () => {
     .filter((value) => Object.keys(value).length !== 0)
     .reduce((acc, value) => ({ ...acc, ...value }), {})
 
-  const typeExportsWithThemeProps: Record<string, unknown> = {}
+  const typeExportsWithThemeProps: { [key: string]: unknown } = {}
 
   for (const [name, values] of Object.entries(transformTypeExports)) {
     typeExportsWithThemeProps[name] = sortByRequiredProperties({

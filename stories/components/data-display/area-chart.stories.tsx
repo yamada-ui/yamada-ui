@@ -1,37 +1,37 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 import type {
-  ChartCurveType,
+  AreaChartProps,
   AreaChartType,
-  ChartLayoutType,
   AreaProps,
   ChartAxisType,
-  AreaChartProps,
+  ChartCurveType,
+  ChartLayoutType,
   ChartTooltip,
 } from "@yamada-ui/charts"
-import { AreaChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
+import { AreaChart } from "@yamada-ui/charts"
 import {
+  Card,
+  CardBody,
+  CardHeader,
   FormControl,
   HStack,
   Slider,
-  VStack,
-  useBoolean,
-  Tooltip,
   SliderThumb,
-  Card,
   Text,
+  Tooltip,
+  useBoolean,
+  VStack,
   Wrap,
-  CardBody,
-  CardHeader,
 } from "@yamada-ui/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof AreaChart>
 
 const meta: Meta<typeof AreaChart> = {
-  title: "Components / Data Display / AreaChart",
   component: AreaChart,
+  title: "Components / Data Display / AreaChart",
 }
 
 export default meta
@@ -45,23 +45,23 @@ export const basic: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
 
-  return <AreaChart data={data} series={series} dataKey="name" />
+  return <AreaChart data={data} dataKey="name" series={series} />
 }
 
 export const custom: Story = () => {
@@ -71,55 +71,55 @@ export const custom: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
 
   const [props, setProps] = useState<AreaChartProps>({
+    type: "default",
+    connectNulls: true,
+    curveType: "monotone",
     data: data,
-    series: series,
     dataKey: "name",
-    chartProps: {
-      margin: {
-        top: 20,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      },
-    },
+    fillOpacity: 0.4,
+    gridAxis: "x",
+    layoutType: "horizontal",
+    series: series,
+    splitColors: ["#28412c", "#ff0000"],
+    strokeDasharray: "5 5",
+    strokeWidth: 2,
+    tickLine: "y",
+    tooltipAnimationDuration: 0,
+    withActiveDots: true,
+    withDots: true,
+    withLegend: false,
+    withTooltip: true,
     withXAxis: true,
     withYAxis: true,
-    withDots: true,
-    withActiveDots: true,
-    withTooltip: true,
-    withLegend: false,
-    connectNulls: true,
-    strokeWidth: 2,
-    tooltipAnimationDuration: 0,
-    fillOpacity: 0.4,
-    tickLine: "y",
-    strokeDasharray: "5 5",
-    curveType: "monotone",
-    gridAxis: "x",
-    type: "default",
-    splitColors: ["#28412c", "#ff0000"],
-    layoutType: "horizontal",
+    chartProps: {
+      margin: {
+        bottom: 5,
+        left: 20,
+        right: 30,
+        top: 20,
+      },
+    },
   })
 
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <Wrap alignItems="flex-start" gap="md">
       <AreaChart {...props} />
 
       <Wrap gap="md">
@@ -128,7 +128,6 @@ export const custom: Story = () => {
             component="Select"
             items={[
               {
-                label: "Chart type",
                 defaultValue: "default",
                 items: [
                   { label: "default", value: "default" },
@@ -136,6 +135,7 @@ export const custom: Story = () => {
                   { label: "stacked", value: "stacked" },
                   { label: "percent", value: "percent" },
                 ],
+                label: "Chart type",
                 value: props.type,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -145,7 +145,6 @@ export const custom: Story = () => {
                 },
               },
               {
-                label: "Curve type",
                 defaultValue: "monotone",
                 items: [
                   { label: "monotone", value: "monotone" },
@@ -156,6 +155,7 @@ export const custom: Story = () => {
                   { label: "stepBefore", value: "stepBefore" },
                   { label: "stepAfter", value: "stepAfter" },
                 ],
+                label: "Curve type",
                 value: props.curveType,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -165,12 +165,12 @@ export const custom: Story = () => {
                 },
               },
               {
-                label: "Layout type",
                 defaultValue: "horizontal",
                 items: [
                   { label: "horizontal", value: "horizontal" },
                   { label: "vertical", value: "vertical" },
                 ],
+                label: "Layout type",
                 value: props.layoutType,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -186,13 +186,13 @@ export const custom: Story = () => {
             component="SegmentedControl"
             items={[
               {
-                label: "Tick line",
                 items: [
                   { label: "x", value: "x" },
                   { label: "y", value: "y" },
                   { label: "xy", value: "xy" },
                   { label: "none", value: "none" },
                 ],
+                label: "Tick line",
                 value: props.tickLine,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -202,13 +202,13 @@ export const custom: Story = () => {
                 },
               },
               {
-                label: "Grid axis",
                 items: [
                   { label: "x", value: "x" },
                   { label: "y", value: "y" },
                   { label: "xy", value: "xy" },
                   { label: "none", value: "none" },
                 ],
+                label: "Grid axis",
                 value: props.gridAxis,
                 onChange: (value) => {
                   setProps((prev) => ({
@@ -227,29 +227,29 @@ export const custom: Story = () => {
             items={[
               {
                 label: "Fill opacity",
-                value: props.fillOpacity as number,
-                min: 0,
                 max: 1,
+                min: 0,
                 step: 0.1,
+                value: props.fillOpacity as number,
                 onChange: (value) => {
                   setProps((prev) => ({ ...prev, fillOpacity: value }))
                 },
               },
               {
                 label: "Stroke width",
-                value: props.strokeWidth,
-                min: 0.5,
                 max: 5,
+                min: 0.5,
                 step: 0.5,
+                value: props.strokeWidth,
                 onChange: (value) => {
                   setProps((prev) => ({ ...prev, strokeWidth: value }))
                 },
               },
               {
                 label: "Tooltip animation duration",
-                value: props.tooltipAnimationDuration,
-                min: 0,
                 max: 2000,
+                min: 0,
+                value: props.tooltipAnimationDuration,
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
@@ -260,13 +260,13 @@ export const custom: Story = () => {
             ]}
           />
 
-          <Wrap gap="md" alignItems="flex-start">
+          <Wrap alignItems="flex-start" gap="md">
             <PropControl
               component="Switch"
               items={[
                 {
-                  label: "x axis",
                   isChecked: props.withXAxis,
+                  label: "x axis",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -274,8 +274,8 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "y axis",
                   isChecked: props.withYAxis,
+                  label: "y axis",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -283,8 +283,8 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "legend",
                   isChecked: props.withLegend,
+                  label: "legend",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -292,8 +292,8 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "tooltip",
                   isChecked: props.withTooltip,
+                  label: "tooltip",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -307,8 +307,8 @@ export const custom: Story = () => {
               component="Switch"
               items={[
                 {
-                  label: "dots",
                   isChecked: props.withDots,
+                  label: "dots",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -316,8 +316,8 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "active dots",
                   isChecked: props.withActiveDots,
+                  label: "active dots",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -325,11 +325,11 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "gradient",
                   isChecked:
                     typeof props.withGradient === "boolean"
                       ? props.withGradient
                       : props.type === "default",
+                  label: "gradient",
                   onChange: () =>
                     setProps((prev) => ({
                       ...prev,
@@ -352,28 +352,28 @@ export const withSize: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
 
   return (
     <>
-      <AreaChart data={data} series={series} dataKey="name" size="sm" />
-      <AreaChart data={data} series={series} dataKey="name" size="md" />
-      <AreaChart data={data} series={series} dataKey="name" size="lg" />
-      <AreaChart data={data} series={series} dataKey="name" size="full" />
+      <AreaChart size="sm" data={data} dataKey="name" series={series} />
+      <AreaChart size="md" data={data} dataKey="name" series={series} />
+      <AreaChart size="lg" data={data} dataKey="name" series={series} />
+      <AreaChart size="full" data={data} dataKey="name" series={series} />
     </>
   )
 }
@@ -393,15 +393,15 @@ export const withDash: Story = () => {
   const series: AreaProps[] = useMemo(
     () => [
       {
-        dataKey: "uv",
         color: ["primary.500", "primary.400"],
+        dataKey: "uv",
         strokeDasharray: "5 5",
       },
     ],
     [],
   )
 
-  return <AreaChart data={data} series={series} dataKey="name" />
+  return <AreaChart data={data} dataKey="name" series={series} />
 }
 
 export const withSplit: Story = () => {
@@ -417,38 +417,38 @@ export const withSplit: Story = () => {
   )
 
   const series: AreaProps[] = useMemo(
-    () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
+    () => [{ color: ["primary.500", "primary.400"], dataKey: "uv" }],
     [],
   )
 
   const [splitOffset, setSplitOffset] = useState<number | undefined>()
-  const [isOpen, { on, off }] = useBoolean()
+  const [isOpen, { off, on }] = useBoolean()
 
   return (
     <VStack>
       <FormControl label="Split offset" w="xs">
         <Slider
-          value={splitOffset !== undefined ? splitOffset * 100 : 0}
-          min={0}
           max={100}
+          min={0}
+          value={splitOffset !== undefined ? splitOffset * 100 : 0}
           onChange={(value) => {
             setSplitOffset(value / 100)
           }}
           onMouseEnter={on}
           onMouseLeave={off}
         >
-          <Tooltip placement="top" label={splitOffset} isOpen={isOpen}>
+          <Tooltip isOpen={isOpen} label={splitOffset} placement="top">
             <SliderThumb />
           </Tooltip>
         </Slider>
       </FormControl>
 
       <AreaChart
-        height="sm"
-        data={data}
-        series={series}
-        dataKey="name"
         type="split"
+        data={data}
+        dataKey="name"
+        height="sm"
+        series={series}
         splitColors={["red.400", "green.400"]}
         splitOffset={splitOffset}
       />
@@ -469,17 +469,17 @@ export const withConnectNulls: Story = () => {
   )
 
   const series: AreaProps[] = useMemo(
-    () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
+    () => [{ color: ["primary.500", "primary.400"], dataKey: "uv" }],
     [],
   )
 
   return (
     <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
       type="default"
       connectNulls={false}
+      data={data}
+      dataKey="name"
+      series={series}
     />
   )
 }
@@ -491,26 +491,26 @@ export const withSync: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
 
   return (
     <VStack>
-      <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
-      <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
+      <AreaChart data={data} dataKey="name" series={series} syncId="syncId" />
+      <AreaChart data={data} dataKey="name" series={series} syncId="syncId" />
     </VStack>
   )
 }
@@ -522,18 +522,18 @@ export const withReferenceLine: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -541,11 +541,11 @@ export const withReferenceLine: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       referenceLineProps={[
-        { y: 3000, label: "x line", color: "red.500" },
-        { x: "Page F", label: "y line" },
+        { color: "red.500", label: "x line", y: 3000 },
+        { label: "y line", x: "Page F" },
       ]}
     />
   )
@@ -558,23 +558,23 @@ export const withLegend: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
 
-  return <AreaChart data={data} series={series} dataKey="name" withLegend />
+  return <AreaChart data={data} dataKey="name" series={series} withLegend />
 }
 
 export const withValueFormatter: Story = () => {
@@ -584,18 +584,18 @@ export const withValueFormatter: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -603,8 +603,8 @@ export const withValueFormatter: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       valueFormatter={(value) => value.toLocaleString()}
     />
   )
@@ -617,18 +617,18 @@ export const withXAxisTickFormatter: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -636,8 +636,8 @@ export const withXAxisTickFormatter: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       xAxisTickFormatter={(value) => value.replace("Page", "Page:")}
     />
   )
@@ -650,18 +650,18 @@ export const withYAxisTickFormatter: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -669,8 +669,8 @@ export const withYAxisTickFormatter: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       yAxisTickFormatter={(value) => value.toLocaleString()}
     />
   )
@@ -683,18 +683,18 @@ export const withLabelFormatter: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -702,9 +702,9 @@ export const withLabelFormatter: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
       labelFormatter={(value) => value.replace("Page", "Page:")}
+      series={series}
     />
   )
 }
@@ -716,18 +716,18 @@ export const withStrokeDasharray: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -735,9 +735,9 @@ export const withStrokeDasharray: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
       gridAxis="xy"
+      series={series}
       strokeDasharray="15 15"
     />
   )
@@ -750,18 +750,18 @@ export const withFillOpacity: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -769,9 +769,9 @@ export const withFillOpacity: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
       fillOpacity={[0.8, 0.7]}
+      series={series}
     />
   )
 }
@@ -783,18 +783,18 @@ export const withUnit: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -802,8 +802,8 @@ export const withUnit: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       unit="views"
       yAxisProps={{ width: 75 }}
     />
@@ -817,18 +817,18 @@ export const withAxisLabel: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -836,8 +836,8 @@ export const withAxisLabel: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       xAxisLabel="page"
       yAxisLabel="view"
     />
@@ -857,15 +857,15 @@ export const useRangeData: Story = () => {
   )
 
   const series: AreaProps[] = useMemo(
-    () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
+    () => [{ color: ["primary.500", "primary.400"], dataKey: "uv" }],
     [],
   )
 
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       withDots={false}
       withGradient={false}
       yAxisProps={{ width: 75 }}
@@ -880,18 +880,18 @@ export const customAxis: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -899,16 +899,16 @@ export const customAxis: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       tickLine="xy"
-      yAxisProps={{ tickMargin: 15, orientation: "right", domain: [0, 15000] }}
       xAxisProps={{
-        tickMargin: 15,
+        color: ["red.500", "red.500"],
         orientation: "top",
         padding: { left: 30, right: 30 },
-        color: ["red.500", "red.500"],
+        tickMargin: 15,
       }}
+      yAxisProps={{ domain: [0, 15000], orientation: "right", tickMargin: 15 }}
     />
   )
 }
@@ -920,9 +920,9 @@ export const customDots: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
@@ -930,28 +930,28 @@ export const customDots: Story = () => {
   const series: AreaProps[] = useMemo(
     () => [
       {
-        dataKey: "uv",
         color: ["primary.500", "primary.400"],
+        dataKey: "uv",
         dot: { fill: ["black", "white"] },
       },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       areaProps={{
-        dot: {
-          r: 8,
-        },
         activeDot: {
+          fill: ["white", "black"],
           r: 7,
           strokeWidth: 1,
-          fill: ["white", "black"],
+        },
+        dot: {
+          r: 8,
         },
       }}
     />
@@ -965,18 +965,18 @@ export const customTooltip: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -989,7 +989,7 @@ export const customTooltip: Story = () => {
     if (!payload) return null
 
     return (
-      <Card variant="subtle" colorScheme="gray">
+      <Card colorScheme="gray" variant="subtle">
         <CardHeader>
           <Text fontSize="lg" fontWeight="semibold">
             {label}
@@ -1000,11 +1000,11 @@ export const customTooltip: Story = () => {
           {payload.map((value, index) => (
             <HStack
               key={`payload-${index}`}
-              w="full"
               justifyContent="space-between"
+              w="full"
             >
-              <Text>{value?.name}</Text>
-              <Text color={value?.color}>{value?.value}</Text>
+              <Text>{value.name}</Text>
+              <Text color={value.color}>{value.value}</Text>
             </HStack>
           ))}
         </CardBody>
@@ -1015,8 +1015,8 @@ export const customTooltip: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       tooltipProps={{
         content: CustomTooltip,
       }}
@@ -1031,18 +1031,18 @@ export const customLegend: Story = () => {
         .fill(0)
         .map((_, index) => ({
           name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
           amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
         })),
     [],
   )
 
   const series: AreaProps[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+      { color: ["primary.500", "primary.400"], dataKey: "uv" },
+      { color: ["secondary.500", "secondary.400"], dataKey: "pv" },
+      { color: ["warning.500", "warning.400"], dataKey: "amt" },
     ],
     [],
   )
@@ -1050,10 +1050,10 @@ export const customLegend: Story = () => {
   return (
     <AreaChart
       data={data}
-      series={series}
       dataKey="name"
+      series={series}
       withLegend
-      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
+      legendProps={{ mb: "0", mt: "4", verticalAlign: "bottom" }}
     />
   )
 }

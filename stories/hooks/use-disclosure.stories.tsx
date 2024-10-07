@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react"
-import { Button, Dialog, useDisclosure, Text } from "@yamada-ui/react"
+import { Button, Dialog, Text, useDisclosure } from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useDisclosure",
@@ -8,19 +8,19 @@ const meta: Meta = {
 export default meta
 
 export const basic = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Dialog</Button>
 
       <Dialog
-        isOpen={isOpen}
-        onClose={onClose}
-        header="孫悟空"
         cancel="わけない"
-        onCancel={onClose}
+        header="孫悟空"
+        isOpen={isOpen}
         success="わける"
+        onCancel={onClose}
+        onClose={onClose}
         onSuccess={onClose}
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
@@ -43,11 +43,11 @@ export const useToggle = () => {
 }
 
 export const withChain = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure({
-    onOpen: (...args: string[]) => {
+  const { isOpen, onClose, onOpen } = useDisclosure({
+    onClose: (...args: string[]) => {
       console.log("Args:", args)
     },
-    onClose: (...args: string[]) => {
+    onOpen: (...args: string[]) => {
       console.log("Args:", args)
     },
   })
@@ -57,12 +57,12 @@ export const withChain = () => {
       <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
       <Dialog
-        isOpen={isOpen}
-        onClose={() => onClose("This is arg")}
-        header="孫悟空"
         cancel="わけない"
-        onCancel={() => onClose("This is arg")}
+        header="孫悟空"
+        isOpen={isOpen}
         success="わける"
+        onCancel={() => onClose("This is arg")}
+        onClose={() => onClose("This is arg")}
         onSuccess={() => onClose("This is arg")}
       >
         だ…大地よ海よ　そして生きているすべての　みんな…

@@ -1,9 +1,9 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ForwardedRef } from "react"
-import { Panel } from "react-resizable-panels"
 import type { UseResizableItemProps } from "./use-resizable"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { Panel } from "react-resizable-panels"
 import { useResizableContext, useResizableItem } from "./use-resizable"
 
 const panelProps = new Set(["order"])
@@ -25,27 +25,27 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
   (
     {
       className,
+      boxSize,
       children,
-      innerRef,
-      w,
-      width,
-      minW,
-      minWidth,
-      maxW,
-      maxWidth,
       h,
       height,
-      minH,
-      minHeight,
+      innerRef,
       maxH,
       maxHeight,
-      boxSize,
+      maxW,
+      maxWidth,
+      minH,
+      minHeight,
+      minW,
+      minWidth,
+      w,
+      width,
       ...rest
     },
     ref,
   ) => {
     const { styles } = useResizableContext()
-    const { getPanelProps, getItemProps } = useResizableItem({
+    const { getItemProps, getPanelProps } = useResizableItem({
       ref,
       ...rest,
     })
@@ -55,19 +55,19 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
     return (
       <UIPanel
         {...getPanelProps({
-          w,
-          width,
-          minW,
-          minWidth,
-          maxW,
-          maxWidth,
+          boxSize,
           h,
           height,
-          minH,
-          minHeight,
           maxH,
           maxHeight,
-          boxSize,
+          maxW,
+          maxWidth,
+          minH,
+          minHeight,
+          minW,
+          minWidth,
+          w,
+          width,
         })}
       >
         <ui.div

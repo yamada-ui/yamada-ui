@@ -1,19 +1,19 @@
 declare module "markdown-toc" {
   interface TocOptions {
     append?: string
-    filter?: Function
-    slugify?: Function
     bullets?: string[]
-    maxdepth?: number
+    filter?: Function
     firsth1?: boolean
+    maxdepth?: number
+    slugify?: Function
     stripHeadingTags?: boolean
   }
 
   export interface TocResult {
     json: {
       content: string
-      slug: string
       lvl: 1 | 2 | 3 | 4
+      slug: string
     }[]
   }
 

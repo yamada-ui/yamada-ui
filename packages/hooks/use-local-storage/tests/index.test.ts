@@ -1,4 +1,4 @@
-import { renderHook, act } from "@yamada-ui/test"
+import { act, renderHook } from "@yamada-ui/test"
 import { useLocalStorage } from "../src"
 
 describe("useLocalStorage", () => {
@@ -15,24 +15,24 @@ describe("useLocalStorage", () => {
     localStorage.clear()
   })
 
-  test("returns the default value", async () => {
+  test("returns the default value", () => {
     const { result } = renderHook(() => useLocalStorage({ key }))
     expect(result.current[0]).toBe("")
   })
 
-  test("returns the default value in the initial state", async () => {
+  test("returns the default value in the initial state", () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
     expect(result.current[0]).toBe(initialValue)
   })
 
-  test("sets a value and saves it to localStorage", async () => {
+  test("sets a value and saves it to localStorage", () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    await act(async () => {
+    act(() => {
       result.current[1]("newValue")
     })
 
@@ -40,12 +40,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("newValue")
   })
 
-  test("sets a value and callback function", async () => {
+  test("sets a value and callback function", () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    await act(async () => {
+    act(() => {
       result.current[1]((prev) => "prev-" + prev)
     })
 
@@ -53,12 +53,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("prev-initialValue")
   })
 
-  test("removes a value from localStorage", async () => {
+  test("removes a value from localStorage", () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    await act(async () => {
+    act(() => {
       result.current[2]()
     })
 
@@ -66,12 +66,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe(initialValue)
   })
 
-  test("updates the value when a storage event occurs", async () => {
+  test("updates the value when a storage event occurs", () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    await act(async () => {
+    act(() => {
       window.dispatchEvent(
         new StorageEvent("storage", {
           key,
@@ -84,7 +84,7 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("updatedValue")
   })
 
-  test("uses a custom serialize function", async () => {
+  test("uses a custom serialize function", () => {
     const serialize = (value: any) => `serialized-${value}`
 
     const { result } = renderHook(() =>
@@ -95,14 +95,14 @@ describe("useLocalStorage", () => {
       }),
     )
 
-    await act(async () => {
+    act(() => {
       result.current[1]("testValue")
     })
 
     expect(localStorage.getItem(key)).toBe("serialized-testValue")
   })
 
-  test("uses a custom deserialize function", async () => {
+  test("uses a custom deserialize function", () => {
     const deserialize = (value: string | undefined) => {
       return `deserialized-${value}`
     }

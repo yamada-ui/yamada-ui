@@ -1,24 +1,24 @@
-import { render, screen, fireEvent, waitFor } from "@yamada-ui/test"
+import { fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { useRef } from "react"
-import { useSnacks, Snacks } from "../src"
+import { Snacks, useSnacks } from "../src"
 
 describe("<Snacks />", () => {
   const SnackExample = () => {
     const { snack, snacks } = useSnacks()
-    const ref = useRef<string | number | undefined>(undefined)
+    const ref = useRef<number | string | undefined>(undefined)
 
     const onOpen = () => {
       ref.current = snack({
-        title: "test-title",
         description: "test-description",
+        title: "test-title",
       })
     }
 
     const onUpdate = () => {
       if (ref.current)
         snack.update(ref.current, {
-          title: "test-title-update",
           description: "test-description-update",
+          title: "test-title-update",
         })
     }
 
@@ -44,7 +44,7 @@ describe("<Snacks />", () => {
           Close all
         </button>
 
-        <Snacks snacks={snacks} gutter={[0, "md"]} />
+        <Snacks gutter={[0, "md"]} snacks={snacks} />
       </>
     )
   }
@@ -59,23 +59,21 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toHaveClass("ui-snack__title")
-      expect(screen.queryByText("test-description")).toHaveClass(
-        "ui-snack__desc",
-      )
     })
+    expect(screen.queryByText("test-description")).toHaveClass("ui-snack__desc")
 
     fireEvent.click(updateBtn)
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
-      expect(screen.queryByText("test-title-update")).toHaveClass(
-        "ui-snack__title",
-      )
-      expect(screen.queryByText("test-description-update")).toHaveClass(
-        "ui-snack__desc",
-      )
     })
+    expect(screen.queryByText("test-description")).toBeNull()
+    expect(screen.queryByText("test-title-update")).toHaveClass(
+      "ui-snack__title",
+    )
+    expect(screen.queryByText("test-description-update")).toHaveClass(
+      "ui-snack__desc",
+    )
   })
 
   test("Snacks renders correctly when close", async () => {
@@ -89,8 +87,8 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
     })
+    expect(screen.queryByText("test-description")).toBeNull()
   })
 
   test("Snacks renders correctly when close all", async () => {
@@ -111,7 +109,7 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       expect(screen.queryByText("test-title")).toBeNull()
-      expect(screen.queryByText("test-description")).toBeNull()
     })
+    expect(screen.queryByText("test-description")).toBeNull()
   })
 })

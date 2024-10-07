@@ -11,7 +11,7 @@ describe("<CloseButton />", () => {
     expect(screen.getByLabelText("Close")).toBeInTheDocument()
   })
 
-  test("should call onClick", async () => {
+  test("should call onClick", () => {
     const onClickMock = vi.fn()
     render(<CloseButton onClick={onClickMock} />)
     const button = screen.getByRole("button")
@@ -19,9 +19,9 @@ describe("<CloseButton />", () => {
     expect(onClickMock).toHaveBeenCalledTimes(1)
   })
 
-  test("should not call onClick", async () => {
+  test("should not call onClick", () => {
     const onClickMock = vi.fn()
-    render(<CloseButton onClick={onClickMock} isDisabled />)
+    render(<CloseButton isDisabled onClick={onClickMock} />)
     const button = screen.getByRole("button")
     fireEvent.click(button)
     expect(onClickMock).toHaveBeenCalledTimes(0)

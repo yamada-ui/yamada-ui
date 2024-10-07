@@ -4,8 +4,8 @@ import { Button, Slide, Text, useBoolean, VStack } from "@yamada-ui/react"
 type Story = StoryFn<typeof Slide>
 
 const meta: Meta<typeof Slide> = {
-  title: "Components / Transitions / Slide",
   component: Slide,
+  title: "Components / Transitions / Slide",
 }
 
 export default meta
@@ -18,12 +18,12 @@ export const basic: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Slide isOpen={isOpen} placement="bottom">
-        <VStack w="full" bg="orange.500" p="md">
+        <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf="flex-end">
+          <Button alignSelf="flex-end" onClick={toggle}>
             Close
           </Button>
         </VStack>
@@ -39,13 +39,13 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement="bottom" duration={0.7}>
-        <VStack w="full" bg="orange.500" p="md">
+      <Slide duration={0.7} isOpen={isOpen} placement="bottom">
+        <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf="flex-end">
+          <Button alignSelf="flex-end" onClick={toggle}>
             Close
           </Button>
         </VStack>
@@ -62,12 +62,12 @@ export const withPlacement: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Slide isOpen={isOpen} placement="left">
-        <VStack w="full" bg="orange.500" p="md">
+        <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
-          <Button onClick={toggle} alignSelf="flex-end">
+          <Button alignSelf="flex-end" onClick={toggle}>
             Close
           </Button>
         </VStack>

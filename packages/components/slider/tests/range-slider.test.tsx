@@ -1,11 +1,12 @@
 import {
-  render,
-  screen,
   a11y,
   act,
   fireEvent,
+  render,
   renderHook,
+  screen,
 } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
 
@@ -34,8 +35,8 @@ describe("<RangeSlider />", () => {
   })
 
   test("RangeSlider thumbs should have correct aria-valuemin and aria-valuemax", () => {
-    const { min, max } = { min: 0, max: 100 }
-    render(<RangeSlider min={min} max={max} />)
+    const { max, min } = { max: 100, min: 0 }
+    render(<RangeSlider max={max} min={min} />)
 
     const sliderThumbs = screen.getAllByRole("slider")
 
@@ -61,7 +62,7 @@ describe("<RangeSlider />", () => {
 
   test("can change RangeSlider orientation", () => {
     const { container, rerender } = render(
-      <RangeSlider orientation="vertical" data-testid="slider" />,
+      <RangeSlider data-testid="slider" orientation="vertical" />,
     )
 
     let sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
@@ -72,7 +73,7 @@ describe("<RangeSlider />", () => {
     })
     expect(filledTrack).toHaveStyle("height: 100%")
 
-    rerender(<RangeSlider orientation="horizontal" data-testid="slider" />)
+    rerender(<RangeSlider data-testid="slider" orientation="horizontal" />)
 
     sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     filledTrack = container.querySelector(".ui-slider__track")
@@ -84,15 +85,15 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be reversed", () => {
-    const { min, max } = { min: 0, max: 100 }
+    const { max, min } = { max: 100, min: 0 }
     const { container } = render(
-      <RangeSlider isReversed min={min} max={max} defaultValue={[min, max]} />,
+      <RangeSlider defaultValue={[min, max]} isReversed max={max} min={min} />,
     )
     const sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     const filledTrack = container.querySelector(".ui-slider__track-filled")
 
-    expect(sliderThumbs[0].id).toContain("-0")
-    expect(sliderThumbs[1].id).toContain("-1")
+    expect(sliderThumbs[0]?.id).toContain("-0")
+    expect(sliderThumbs[1]?.id).toContain("-1")
 
     expect(filledTrack).toHaveStyle("right: 0%")
   })
@@ -134,10 +135,10 @@ describe("<RangeSlider />", () => {
     const max = 5
 
     const renderWithInvalidProps = () =>
-      render(<RangeSlider min={min} max={max} />)
+      render(<RangeSlider max={max} min={min} />)
 
     const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(() => {})
+    consoleSpy.mockImplementation(noop)
 
     expect(renderWithInvalidProps).toThrow(
       "Do not assign a number less than 'min' to 'max'",
@@ -171,72 +172,72 @@ describe("<RangeSlider />", () => {
     const { container } = render(
       <RangeSlider
         data-testid="slider"
-        min={min}
-        max={max}
-        step={10}
         defaultValue={[0, 50]}
+        max={max}
+        min={min}
+        step={10}
       />,
     )
 
     const sliderThumbs = screen.getAllByRole("slider")
     const sliderInputs = container.getElementsByTagName("input")
 
-    let sliderThumb = sliderThumbs[1]
+    let sliderThumb = sliderThumbs[1]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
-    expect(Number(sliderInputs[1].value)).toBe(60)
+    expect(Number(sliderInputs[1]?.value)).toBe(60)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
-    expect(Number(sliderInputs[1].value)).toBe(60)
+    expect(Number(sliderInputs[1]?.value)).toBe(60)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
-    expect(Number(sliderInputs[1].value)).toBe(50 + tenStep)
+    expect(Number(sliderInputs[1]?.value)).toBe(50 + tenStep)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
-    expect(Number(sliderInputs[1].value)).toBe(50)
+    expect(Number(sliderInputs[1]?.value)).toBe(50)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
-    expect(Number(sliderInputs[1].value)).toBe(Number(sliderInputs[0].value))
+    expect(Number(sliderInputs[1]?.value)).toBe(Number(sliderInputs[0]?.value))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
-    expect(Number(sliderInputs[1].value)).toBe(max)
+    expect(Number(sliderInputs[1]?.value)).toBe(max)
 
-    sliderThumb = sliderThumbs[0]
+    sliderThumb = sliderThumbs[0]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
-    expect(Number(sliderInputs[0].value)).toBe(10)
+    expect(Number(sliderInputs[0]?.value)).toBe(10)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
-    expect(Number(sliderInputs[0].value)).toBe(10)
+    expect(Number(sliderInputs[0]?.value)).toBe(10)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
-    expect(Number(sliderInputs[0].value)).toBe(0 + tenStep)
+    expect(Number(sliderInputs[0]?.value)).toBe(0 + tenStep)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
-    expect(Number(sliderInputs[0].value)).toBe(0)
+    expect(Number(sliderInputs[0]?.value)).toBe(0)
 
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
-    expect(Number(sliderInputs[0].value)).toBe(min)
+    expect(Number(sliderInputs[0]?.value)).toBe(min)
     await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
-    expect(Number(sliderInputs[0].value)).toBe(Number(sliderInputs[1].value))
+    expect(Number(sliderInputs[0]?.value)).toBe(Number(sliderInputs[1]?.value))
   })
 
   test("key down for keys not in the list should do nothing", async () => {
     const min = 0
     const max = 100
     const { container } = render(
-      <RangeSlider min={min} max={max} step={10} defaultValue={[0, 50]} />,
+      <RangeSlider defaultValue={[0, 50]} max={max} min={min} step={10} />,
     )
 
-    const sliderThumb = screen.getAllByRole("slider")[0]
-    const sliderInput = container.getElementsByTagName("input")[0]
+    const sliderThumb = screen.getAllByRole("slider")[0]!
+    const sliderInput = container.getElementsByTagName("input")[0]!
 
     await act(() => fireEvent.focus(sliderThumb))
     await act(() => fireEvent.keyDown(sliderThumb, { key: "Enter" }))
@@ -276,16 +277,16 @@ describe("<RangeSlider />", () => {
       useRangeSlider({
         id: "test-slider",
         name: "test-slider",
-        min: 0,
-        max: 100,
-        step: 1,
         defaultValue: [25, 75],
-        orientation: "horizontal",
-        isReversed: false,
         focusThumbOnChange: true,
-        onChangeStart,
-        onChangeEnd,
+        isReversed: false,
+        max: 100,
+        min: 0,
+        orientation: "horizontal",
+        step: 1,
         onChange,
+        onChangeEnd,
+        onChangeStart,
       }),
     )
 
@@ -319,20 +320,20 @@ describe("<RangeSlider />", () => {
       <RangeSlider
         id="test-slider"
         name="test"
-        min={0}
-        max={100}
-        step={1}
         defaultValue={[25, 75]}
-        orientation="horizontal"
         isReversed={false}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
+        max={100}
+        min={0}
+        orientation="horizontal"
+        step={1}
         onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
       />,
     )
 
-    const sliderStartThumb = getAllByRole("slider")[0]
-    const sliderEndThumb = getAllByRole("slider")[1]
+    const sliderStartThumb = getAllByRole("slider")[0]!
+    const sliderEndThumb = getAllByRole("slider")[1]!
 
     act(() => {
       fireEvent.focus(sliderStartThumb)

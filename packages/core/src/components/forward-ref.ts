@@ -1,11 +1,11 @@
 import type { Merge } from "@yamada-ui/utils"
-import * as React from "react"
 import type { As, Component, WithoutAs } from "./component.types"
+import * as React from "react"
 
 export function forwardRef<Y extends object, M extends As>(
   render: React.ForwardRefRenderFunction<
     any,
-    Merge<React.ComponentPropsWithoutRef<M>, WithoutAs<Y>> & { as?: As }
+    { as?: As } & Merge<React.ComponentPropsWithoutRef<M>, WithoutAs<Y>>
   >,
 ) {
   return React.forwardRef(

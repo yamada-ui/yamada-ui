@@ -6,9 +6,9 @@ export const BarChart: ComponentMultiStyle<"BarChart"> = mergeMultiStyle(
   LineChart,
   {
     baseStyle: {
-      bar: {},
       activeBar: {},
       background: { fill: "transparent" },
+      bar: {},
       cursor: { strokeDasharray: "5 5" },
     },
   },

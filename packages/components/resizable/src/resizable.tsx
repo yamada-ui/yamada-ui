@@ -1,14 +1,14 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { ForwardedRef } from "react"
+import type { UseResizableProps } from "./use-resizable"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { ForwardedRef } from "react"
 import { PanelGroup } from "react-resizable-panels"
-import type { UseResizableProps } from "./use-resizable"
 import { ResizableProvider, useResizable } from "./use-resizable"
 
 interface ResizableOptions {
@@ -42,7 +42,7 @@ export const Resizable = forwardRef<ResizableProps, "div">(
       ...computedProps,
     })
 
-    const css: CSSUIObject = { w: "100%", h: "100%", ...styles.container }
+    const css: CSSUIObject = { h: "100%", w: "100%", ...styles.container }
 
     return (
       <ResizableProvider value={{ styles, ...rest }}>

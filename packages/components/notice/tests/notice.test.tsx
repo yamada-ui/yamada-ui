@@ -13,16 +13,12 @@ describe("useNotice()", () => {
     const notice = useNotice()
     const onOpen = () => {
       notice({
-        title: "NoticeTitle",
         description: "NoticeDescription",
+        title: "NoticeTitle",
       })
     }
 
-    return (
-      <>
-        <button onClick={onOpen}>Open Notice</button>
-      </>
-    )
+    return <button onClick={onOpen}>Open Notice</button>
   }
 
   test("Notice renders correctly", async () => {
@@ -50,16 +46,12 @@ describe("useNotice()", () => {
       const notice = useNotice({ limit: 3 })
       const onOpen = () => {
         notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
+          title: "NoticeTitle",
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -82,16 +74,12 @@ describe("useNotice()", () => {
       const notice = useNotice({ limit: 1 })
       const onOpen = () => {
         notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
+          title: "NoticeTitle",
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -114,16 +102,12 @@ describe("useNotice()", () => {
       const notice = useNotice({ limit: -1 })
       const onOpen = () => {
         notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
+          title: "NoticeTitle",
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<LimitedNoticeExample />)
@@ -142,22 +126,22 @@ describe("useNotice()", () => {
   test("Update notice", async () => {
     const UpdateNoticeExample = () => {
       const notice = useNotice()
-      const ref = useRef<string | number | undefined>(undefined)
+      const ref = useRef<number | string | undefined>(undefined)
       const onOpen = () => {
         ref.current = notice({
-          title: "Notification",
-          description: "This is description.",
           colorScheme: "orange",
+          description: "This is description.",
           duration: 30000,
+          title: "Notification",
         })
       }
       const onUpdate = () => {
         if (ref.current)
           notice.update(ref.current, {
-            title: "Updated notification",
-            description: "This is updated description.",
             colorScheme: "blue",
+            description: "This is updated description.",
             duration: 30000,
+            title: "Updated notification",
           })
       }
 
@@ -202,8 +186,8 @@ describe("useNotice()", () => {
       const notice = useNotice()
       const onOpen = () => {
         notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
+          title: "NoticeTitle",
         })
       }
       const onCloseAll = () => {
@@ -243,12 +227,12 @@ describe("useNotice()", () => {
   test("Close notice with using close", async () => {
     const CloseNoticeExample = () => {
       const notice = useNotice()
-      const [noticeId, setNoticeId] = useState<number | string | null>(null)
+      const [noticeId, setNoticeId] = useState<null | number | string>(null)
 
       const onOpen = () => {
         const id = notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
+          title: "NoticeTitle",
         })
         setNoticeId(id)
       }
@@ -286,17 +270,13 @@ describe("useNotice()", () => {
       const notice = useNotice()
       const onOpen = () => {
         notice({
-          title: "NoticeTitle",
           description: "NoticeDescription",
           isClosable: true,
+          title: "NoticeTitle",
         })
       }
 
-      return (
-        <>
-          <button onClick={onOpen}>Open Notice</button>
-        </>
-      )
+      return <button onClick={onOpen}>Open Notice</button>
     }
 
     const { user } = render(<CloseNoticeExample />)

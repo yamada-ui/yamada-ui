@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-type OmittedTheme = Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
+type OmittedTheme = Omit<Theme, "colorSchemes" | "components" | "themeSchemes">
 
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
@@ -15,11 +15,11 @@ type OmittedTheme = Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
  * @see Docs https://yamada-ui.com/hooks/use-token
  */
 export const useToken = <
-  Y extends string | number = string,
+  Y extends number | string = string,
   M extends keyof OmittedTheme = keyof OmittedTheme,
 >(
   name: M,
-  path: Theme[M] | number | undefined,
+  path: number | Theme[M] | undefined,
 ) => {
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
@@ -32,11 +32,11 @@ export const useToken = <
 
 export const getToken =
   <
-    Y extends string | number = string,
+    Y extends number | string = string,
     M extends keyof OmittedTheme = keyof OmittedTheme,
   >(
     name: M,
-    path: Theme[M] | number | undefined,
+    path: number | Theme[M] | undefined,
   ) =>
   (theme: StyledTheme, colorMode: ColorMode) => {
     if (name === "layerStyles") name = "styles.layerStyles" as M
@@ -49,7 +49,7 @@ export const getToken =
 
     if (name === "transitionEasing") name = "transitions.easing" as M
 
-    let value = get<Y | [Y, Y] | undefined>(theme, `${name}.${path}`)
+    let value = get<[Y, Y] | undefined | Y>(theme, `${name}.${path}`)
 
     if (!isUndefined(value)) {
       if (isArray(value)) {
@@ -60,15 +60,15 @@ export const getToken =
         return value
       }
     } else {
-      value = get<Y | [Y, Y] | undefined>(theme, `semantics.${name}.${path}`)
+      value = get<[Y, Y] | undefined | Y>(theme, `semantics.${name}.${path}`)
 
       if (isArray(value)) {
         value = [
-          get<Y>(theme, `${name}.${value[0]}`) ?? value[0],
-          get<Y>(theme, `${name}.${value[1]}`) ?? value[1],
+          get<Y>(theme, `${name}.${value[0]}`, value[0]),
+          get<Y>(theme, `${name}.${value[1]}`, value[1]),
         ]
       } else {
-        value = get<Y | undefined>(theme, `${name}.${value}`) ?? value
+        value = get<undefined | Y>(theme, `${name}.${value}`) ?? value
       }
 
       if (isArray(value)) {

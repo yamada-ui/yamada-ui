@@ -1,38 +1,40 @@
 'use client'
 
+import type {
+  CenterProps,
+  ColorModeWithSystem,
+  IconButtonProps,
+  MenuProps,
+  PopoverProps,
+} from '@yamada-ui/react'
+import type { FC } from 'react'
 import { Moon, Palette, Sun } from '@yamada-ui/lucide'
 import {
+  Box,
+  Center,
   HStack,
-  Spacer,
-  useColorMode,
-  MenuButton,
   IconButton,
+  Image,
   Menu,
+  MenuButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  IconButtonProps,
-  MenuProps,
   Popover,
-  PopoverTrigger,
-  useDisclosure,
-  useTheme,
-  PopoverContent,
   PopoverBody,
-  Box,
-  PopoverProps,
-  Center,
-  CenterProps,
-  useScroll,
+  PopoverContent,
+  PopoverTrigger,
+  Spacer,
+  useColorMode,
+  useDisclosure,
   useMotionValueEvent,
-  Image,
-  ColorModeWithSystem,
+  useScroll,
+  useTheme,
 } from '@yamada-ui/react'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { useState } from 'react'
 import { memo } from 'react'
-import { FC } from 'react'
 
 export interface HeaderProps extends CenterProps {}
 
@@ -50,45 +52,45 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
     <Center
       ref={ref}
       as='header'
-      w='full'
-      bg={isScroll ? ['whiteAlpha.500', 'blackAlpha.200'] : undefined}
+      backdropBlur='10px'
       backdropFilter='auto'
       backdropSaturate='180%'
-      backdropBlur='10px'
-      shadow={isScroll ? ['base', 'dark-sm'] : undefined}
-      transitionProperty='common'
-      transitionDuration='slower'
-      position='sticky'
-      top='0'
+      bg={isScroll ? ['whiteAlpha.500', 'blackAlpha.200'] : undefined}
       left='0'
+      position='sticky'
       right='0'
+      shadow={isScroll ? ['base', 'dark-sm'] : undefined}
+      top='0'
+      transitionDuration='slower'
+      transitionProperty='common'
+      w='full'
       zIndex='guldo'
       {...rest}
     >
-      <HStack w='full' maxW='9xl' py='3' px={{ base: 'lg', md: 'md' }}>
+      <HStack maxW='9xl' px={{ base: 'lg', md: 'md' }} py='3' w='full'>
         <Box
           as={Link}
           href='/'
           aria-label='Yamada UI'
-          _hover={{ opacity: 0.7 }}
-          transitionProperty='opacity'
+          rounded='md'
           transitionDuration='slower'
+          transitionProperty='opacity'
           _focus={{ outline: 'none' }}
           _focusVisible={{ boxShadow: 'outline' }}
-          rounded='md'
+          _hover={{ opacity: 0.7 }}
         >
           <Image
             src='/logo-black.png'
             alt='Yamada UI'
-            w='auto'
             h={{ base: '10', sm: '8' }}
+            w='auto'
             _dark={{ display: 'none' }}
           />
           <Image
             src='/logo-white.png'
             alt='Yamada UI'
-            w='auto'
             h={{ base: '10', sm: '8' }}
+            w='auto'
             _light={{ display: 'none' }}
           />
         </Box>
@@ -103,36 +105,36 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = IconButtonProps & {
+type ColorModeButtonProps = {
   menuProps?: MenuProps
-}
+} & IconButtonProps
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) => {
-  const { colorMode, internalColorMode, changeColorMode } = useColorMode()
+  const { changeColorMode, colorMode, internalColorMode } = useColorMode()
 
   return (
     <Menu
-      restoreFocus={false}
       modifiers={[
         {
           name: 'preventOverflow',
           options: {
             padding: {
-              top: 32,
               bottom: 32,
               left: 32,
               right: 32,
+              top: 32,
             },
           },
         },
       ]}
+      restoreFocus={false}
       {...menuProps}
     >
       <MenuButton
         as={IconButton}
-        aria-label='Open color mode switching menu'
-        variant='ghost'
         colorScheme='gray'
+        variant='ghost'
+        aria-label='Open color mode switching menu'
         color='muted'
         icon={colorMode === 'dark' ? <Sun fontSize='2xl' /> : <Moon fontSize='2xl' />}
         {...rest}
@@ -140,17 +142,17 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
       <MenuList>
         <MenuOptionGroup<ColorModeWithSystem>
+          type='radio'
           value={internalColorMode}
           onChange={changeColorMode}
-          type='radio'
         >
-          <MenuOptionItem value='light' closeOnSelect>
+          <MenuOptionItem closeOnSelect value='light'>
             Light
           </MenuOptionItem>
-          <MenuOptionItem value='dark' closeOnSelect>
+          <MenuOptionItem closeOnSelect value='dark'>
             Dark
           </MenuOptionItem>
-          <MenuOptionItem value='system' closeOnSelect>
+          <MenuOptionItem closeOnSelect value='system'>
             System
           </MenuOptionItem>
         </MenuOptionGroup>
@@ -161,42 +163,42 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
 ColorModeButton.displayName = 'ColorModeButton'
 
-type ThemeSchemeButtonProps = IconButtonProps & {
+type ThemeSchemeButtonProps = {
   popoverProps?: PopoverProps
-}
+} & IconButtonProps
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...rest }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { theme, changeThemeScheme } = useTheme()
+  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { changeThemeScheme, theme } = useTheme()
   const { colorSchemes = [] } = theme
 
   return (
     <Popover
       {...popoverProps}
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
       closeOnButton={false}
-      restoreFocus={false}
+      isOpen={isOpen}
       modifiers={[
         {
           name: 'preventOverflow',
           options: {
             padding: {
-              top: 32,
               bottom: 32,
               left: 32,
               right: 32,
+              top: 32,
             },
           },
         },
       ]}
+      restoreFocus={false}
+      onClose={onClose}
+      onOpen={onOpen}
     >
       <PopoverTrigger>
         <IconButton
-          aria-label='Open color mode switching menu'
-          variant='ghost'
           colorScheme='gray'
+          variant='ghost'
+          aria-label='Open color mode switching menu'
           color='muted'
           icon={<Palette fontSize='2xl' />}
           {...rest}
@@ -207,20 +209,20 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
         <PopoverBody display='grid' gridTemplateColumns={{ base: 'repeat(4, 1fr)' }}>
           {colorSchemes.map((colorScheme: string) => (
             <Box
+              key={colorScheme}
               as='button'
               type='button'
-              key={colorScheme}
               bg={`${colorScheme}.500`}
-              minW={{ base: '12', md: '10' }}
-              minH={{ base: '12', md: '10' }}
-              rounded='md'
               boxShadow='inner'
+              minH={{ base: '12', md: '10' }}
+              minW={{ base: '12', md: '10' }}
               outline='0'
-              _hover={{ bg: `${colorScheme}.600` }}
+              rounded='md'
+              transitionDuration='slower'
+              transitionProperty='common'
               _active={{ bg: `${colorScheme}.700` }}
               _focusVisible={{ shadow: 'outline' }}
-              transitionProperty='common'
-              transitionDuration='slower'
+              _hover={{ bg: `${colorScheme}.600` }}
               onClick={() => {
                 changeThemeScheme(colorScheme)
                 onClose()

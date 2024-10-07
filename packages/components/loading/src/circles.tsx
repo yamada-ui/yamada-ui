@@ -1,5 +1,5 @@
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 
 export interface CirclesProps extends Omit<IconProps, "color"> {
@@ -18,123 +18,123 @@ export interface CirclesProps extends Omit<IconProps, "color"> {
 export const Circles = forwardRef<CirclesProps, "svg">(
   ({ color, duration = "3s", ...rest }, ref) => {
     return (
-      <Icon ref={ref} viewBox="0 0 58 58" stroke={color} {...rest}>
+      <Icon ref={ref} stroke={color} viewBox="0 0 58 58" {...rest}>
         <g fill="none" fillRule="evenodd">
-          <g transform="translate(2 1)" stroke={color} strokeWidth="1.5">
+          <g stroke={color} strokeWidth="1.5" transform="translate(2 1)">
             <ui.circle
               cx="42.601"
               cy="11.462"
-              r="5"
-              fillOpacity="1"
               fill={color}
+              fillOpacity="1"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="1;0;0;0;0;0;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="1;0;0;0;0;0;0;0"
               />
             </ui.circle>
             <ui.circle
               cx="49.063"
               cy="27.063"
-              r="5"
-              fillOpacity="0"
               fill={color}
+              fillOpacity="0"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;1;0;0;0;0;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;1;0;0;0;0;0;0"
               />
             </ui.circle>
             <ui.circle
               cx="42.601"
               cy="42.663"
-              r="5"
-              fillOpacity="0"
               fill={color}
+              fillOpacity="0"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;1;0;0;0;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;1;0;0;0;0;0"
               />
             </ui.circle>
-            <ui.circle cx="27" cy="49.125" r="5" fillOpacity="0" fill={color}>
+            <ui.circle cx="27" cy="49.125" fill={color} fillOpacity="0" r="5">
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;0;1;0;0;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;0;1;0;0;0;0"
               />
             </ui.circle>
             <ui.circle
               cx="11.399"
               cy="42.663"
-              r="5"
-              fillOpacity="0"
               fill={color}
+              fillOpacity="0"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;0;0;1;0;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;0;0;1;0;0;0"
               />
             </ui.circle>
             <ui.circle
               cx="4.938"
               cy="27.063"
-              r="5"
-              fillOpacity="0"
               fill={color}
+              fillOpacity="0"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;0;0;0;1;0;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;0;0;0;1;0;0"
               />
             </ui.circle>
             <ui.circle
               cx="11.399"
               cy="11.462"
-              r="5"
-              fillOpacity="0"
               fill={color}
+              fillOpacity="0"
+              r="5"
             >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;0;0;0;0;1;0"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;0;0;0;0;1;0"
               />
             </ui.circle>
-            <ui.circle cx="27" cy="5" r="5" fillOpacity="0" fill={color}>
+            <ui.circle cx="27" cy="5" fill={color} fillOpacity="0" r="5">
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
-                dur={duration}
-                values="0;0;0;0;0;0;0;1"
                 calcMode="linear"
+                dur={duration}
                 repeatCount="indefinite"
+                values="0;0;0;0;0;0;0;1"
               />
             </ui.circle>
           </g>

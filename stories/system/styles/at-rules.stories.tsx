@@ -7,10 +7,10 @@ export default {
 export const basic = () => {
   return (
     <Center
-      p="md"
-      rounded="md"
       borderWidth="1px"
       boxSize="3xs"
+      p="md"
+      rounded="md"
       _media={[{ type: "print", css: { color: "red" } }]}
     >
       <Text>Print me</Text>
@@ -21,17 +21,17 @@ export const basic = () => {
 export const container = () => {
   return (
     <Center
-      containerType="size"
-      p="md"
-      rounded="md"
       borderWidth="1px"
-      resize="both"
-      overflow="auto"
       boxSize="3xs"
+      containerType="size"
+      overflow="auto"
+      p="md"
+      resize="both"
+      rounded="md"
     >
       <Text
         _container={[
-          { minW: "320px", maxW: "560px", css: { color: "primary" } },
+          { css: { color: "primary" }, maxW: "560px", minW: "320px" },
         ]}
       >
         Resize me
@@ -43,36 +43,36 @@ export const container = () => {
 export const withContainerName = () => {
   return (
     <Center
+      borderWidth="1px"
+      boxSize="xs"
       containerName="parent"
       containerType="size"
-      p="md"
-      rounded="md"
-      borderWidth="1px"
-      resize="both"
       overflow="auto"
-      boxSize="xs"
+      p="md"
+      resize="both"
+      rounded="md"
     >
       <Center
+        borderWidth="1px"
+        boxSize="3xs"
         containerName="child"
         containerType="size"
-        p="md"
-        rounded="md"
-        borderWidth="1px"
-        resize="both"
         overflow="auto"
-        boxSize="3xs"
+        p="md"
+        resize="both"
+        rounded="md"
       >
         <Text
           _container={[
             {
               name: "parent",
-              orientation: "portrait",
               css: { color: "primary" },
+              orientation: "portrait",
             },
             {
               name: "child",
-              orientation: "landscape",
               css: { color: "danger" },
+              orientation: "landscape",
             },
           ]}
         >
@@ -85,7 +85,7 @@ export const withContainerName = () => {
 
 export const supports = () => {
   return (
-    <Box _supports={[{ query: "(display: flex)", css: { color: "red" } }]}>
+    <Box _supports={[{ css: { color: "red" }, query: "(display: flex)" }]}>
       <Text>Supported flex</Text>
     </Box>
   )

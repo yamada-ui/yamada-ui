@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { VStack, Heading } from "@yamada-ui/react"
+import { Heading, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Heading>
 
 const meta: Meta<typeof Heading> = {
-  title: "Components / Typography / Heading",
   component: Heading,
+  title: "Components / Typography / Heading",
 }
 
 export default meta
@@ -51,11 +51,11 @@ export const basic: Story = () => {
 export const gradient: Story = () => {
   return (
     <Heading
-      w="full"
       size="2xl"
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
       bgClip="text"
+      bgGradient="linear(to-l, #7928CA, #FF0080)"
       isTruncated
+      w="full"
     >
       クリリンのことか……クリリンのことかーーーっ！！！！！
     </Heading>

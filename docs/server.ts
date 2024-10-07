@@ -1,8 +1,8 @@
-import { createServer } from "http"
-import { parse } from "url"
 import chokidar from "chokidar"
+import { createServer } from "http"
 import next from "next"
 import { watchMDX } from "scripts/mdx"
+import { parse } from "url"
 
 const hostname = "localhost"
 let port = 3000

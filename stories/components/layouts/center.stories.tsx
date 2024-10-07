@@ -5,15 +5,15 @@ import { Center } from "@yamada-ui/react"
 type Story = StoryFn<typeof Center>
 
 const meta: Meta<typeof Center> = {
-  title: "Components / Layouts / Center",
   component: Center,
+  title: "Components / Layouts / Center",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center minW="xs" minH="xs" rounded="md" bg="primary" color="white">
+    <Center bg="primary" color="white" minH="xs" minW="xs" rounded="md">
       Center
     </Center>
   )
@@ -21,7 +21,7 @@ export const basic: Story = () => {
 
 export const iconWithFrame: Story = () => {
   return (
-    <Center minW="6xs" minH="6xs" rounded="full" bg="gray.500" color="white">
+    <Center bg="gray.500" color="white" minH="6xs" minW="6xs" rounded="full">
       <Skull fontSize="3xl" />
     </Center>
   )

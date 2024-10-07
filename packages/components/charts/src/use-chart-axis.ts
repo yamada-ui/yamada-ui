@@ -1,19 +1,19 @@
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx } from "@yamada-ui/utils"
 import type { SVGProps } from "react"
-import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
 import type {
+  AreaChartType,
   ChartAxisType,
   ChartLayoutType,
+  LabelProps,
   XAxisProps,
   YAxisProps,
-  AreaChartType,
-  LabelProps,
 } from "./chart.types"
+import { useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback, useMemo } from "react"
+import { getComponentProps } from "./chart-utils"
 import {
   labelProperties,
   xAxisProperties,
@@ -32,6 +32,12 @@ export interface UseChartAxisOptions {
    */
   type?: AreaChartType
   /**
+   * Specifies which lines should be displayed in the grid.
+   *
+   * @default 'x'
+   */
+  gridAxis?: ChartAxisType
+  /**
    * Chart orientation.
    *
    * @default 'horizontal'
@@ -44,11 +50,9 @@ export interface UseChartAxisOptions {
    */
   tickLine?: ChartAxisType
   /**
-   * Specifies which lines should be displayed in the grid.
-   *
-   * @default 'x'
+   * Unit displayed next to each tick in y-axis.
    */
-  gridAxis?: ChartAxisType
+  unit?: string
   /**
    * If `true`, X axis is visible.
    *
@@ -62,65 +66,61 @@ export interface UseChartAxisOptions {
    */
   withYAxis?: boolean
   /**
-   * Props passed down to recharts 'XAxis' component.
-   */
-  xAxisProps?: XAxisProps
-  /**
-   * Props passed down to recharts 'YAxis' component.
-   */
-  yAxisProps?: YAxisProps
-  /**
    * A label to display below the X axis.
    */
   xAxisLabel?: string
+  /**
+   * A function to format X axis tick.
+   */
+  xAxisTickFormatter?: (value: any) => string
   /**
    * A label to display below the Y axis.
    */
   yAxisLabel?: string
   /**
+   * A function to format Y axis tick.
+   */
+  yAxisTickFormatter?: (value: any) => string
+  /**
    * Props passed down to recharts 'XAxisLabel' component.
    */
   xAxisLabelProps?: LabelProps
+  /**
+   * Props passed down to recharts 'XAxis' component.
+   */
+  xAxisProps?: XAxisProps
   /**
    * Props passed down to recharts 'YAxisLabel' component.
    */
   yAxisLabelProps?: LabelProps
   /**
-   * Unit displayed next to each tick in y-axis.
+   * Props passed down to recharts 'YAxis' component.
    */
-  unit?: string
-  /**
-   * A function to format Y axis tick.
-   */
-  yAxisTickFormatter?: (value: any) => string
-  /**
-   * A function to format X axis tick.
-   */
-  xAxisTickFormatter?: (value: any) => string
+  yAxisProps?: YAxisProps
 }
 
 export interface UseChartAxisProps extends UseChartAxisOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useChartAxis = ({
-  dataKey,
   type,
-  layoutType = "horizontal",
-  tickLine = "y",
+  dataKey,
   gridAxis = "x",
+  layoutType = "horizontal",
+  styles,
+  tickLine = "y",
+  unit,
   withXAxis = true,
   withYAxis = true,
   xAxisLabel: xAxisLabelProp,
-  yAxisLabel: yAxisLabelProp,
-  unit,
-  yAxisTickFormatter = type === "percent" && layoutType === "horizontal"
-    ? valueToPercent
-    : undefined,
   xAxisTickFormatter = type === "percent" && layoutType === "vertical"
     ? valueToPercent
     : undefined,
-  styles,
+  yAxisLabel: yAxisLabelProp,
+  yAxisTickFormatter = type === "percent" && layoutType === "horizontal"
+    ? valueToPercent
+    : undefined,
   ...rest
 }: UseChartAxisProps) => {
   const { theme } = useTheme()
@@ -132,7 +132,7 @@ export const useChartAxis = ({
   const yAxisKey: Recharts.YAxisProps = useMemo(
     () =>
       layoutType === "vertical"
-        ? { dataKey, type: "category" }
+        ? { type: "category", dataKey }
         : { type: "number" },
     [dataKey, layoutType],
   )
@@ -184,15 +184,15 @@ export const useChartAxis = ({
       className: cx(className, xAxisClassName),
       hide: !withXAxis,
       ...xAxisKey,
-      tick: {
-        transform: "translate(0, 10)",
-        fill: "currentColor",
-      },
-      stroke: "",
       interval: "preserveStartEnd",
-      tickLine: xTickLine,
       minTickGap: 5,
+      stroke: "",
+      tick: {
+        fill: "currentColor",
+        transform: "translate(0, 10)",
+      },
       tickFormatter: xAxisTickFormatter,
+      tickLine: xTickLine,
       ...props,
       ...(xAxisProps as Recharts.XAxisProps),
     }),
@@ -212,17 +212,17 @@ export const useChartAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, yAxisClassName),
-      hide: !withYAxis,
       axisLine: false,
+      hide: !withYAxis,
       ...yAxisKey,
-      tickLine: yTickLine,
-      tick: {
-        transform: "translate(-10, 0)",
-        fill: "currentColor",
-      },
       allowDecimals: true,
-      unit: unit,
+      tick: {
+        fill: "currentColor",
+        transform: "translate(-10, 0)",
+      },
       tickFormatter: yAxisTickFormatter,
+      tickLine: yTickLine,
+      unit: unit,
       ...props,
       ...(yAxisProps as Recharts.YAxisProps),
     }),
@@ -243,9 +243,9 @@ export const useChartAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, xAxisLabelClassName),
-      value: xAxisLabel,
-      position: "insideBottom",
       offset: -20,
+      position: "insideBottom",
+      value: xAxisLabel,
       ...props,
       ...xAxisLabelProps,
     }),
@@ -258,11 +258,11 @@ export const useChartAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, yAxisLabelClassName),
-      value: yAxisLabel,
-      position: "insideLeft",
       angle: -90,
-      textAnchor: "middle",
       offset: -5,
+      position: "insideLeft",
+      textAnchor: "middle",
+      value: yAxisLabel,
       ...props,
       ...yAxisLabelProps,
     }),
@@ -270,10 +270,10 @@ export const useChartAxis = ({
   )
 
   return {
-    getXAxisProps,
-    getYAxisProps,
     getXAxisLabelProps,
+    getXAxisProps,
     getYAxisLabelProps,
+    getYAxisProps,
   }
 }
 

@@ -2,9 +2,9 @@ import type {
   IconDefinition,
   IconProp,
 } from "@fortawesome/fontawesome-svg-core"
+import type { IconProps as UIIconProps } from "@yamada-ui/icon"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { forwardRef } from "@yamada-ui/core"
-import type { IconProps as UIIconProps } from "@yamada-ui/icon"
 import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -27,13 +27,13 @@ export interface IconProps extends UIIconProps, IconOptions {}
  * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
  */
 export const Icon = forwardRef<IconProps, "svg">(
-  ({ className, icon, size: fontSize, __css, ...rest }, ref) => {
+  ({ className, size: fontSize, icon, __css, ...rest }, ref) => {
     const css = useMemo(
       () => ({
+        color: "currentcolor",
         display: "inline-block",
         flexShrink: 0,
         fontSize,
-        color: "currentcolor",
         ...__css,
       }),
       [__css, fontSize],
@@ -43,8 +43,8 @@ export const Icon = forwardRef<IconProps, "svg">(
       <UIIcon
         ref={ref}
         as={FontAwesomeIcon}
-        icon={icon}
         className={cx("ui-fontawesome-icon", className)}
+        icon={icon}
         __css={css}
         {...rest}
       />

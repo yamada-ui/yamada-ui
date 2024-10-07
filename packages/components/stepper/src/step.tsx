@@ -1,7 +1,7 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx, createContext, dataAttr } from "@yamada-ui/utils"
 import type { UseStepReturn } from "./use-stepper"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { useStep, useStepperContext } from "./use-stepper"
 
 export interface StepContext extends Omit<UseStepReturn, "getStepProps"> {}
@@ -16,20 +16,23 @@ export interface StepProps extends HTMLUIProps {}
 export const Step = forwardRef<StepProps, "div">(
   ({ className, ...rest }, ref) => {
     const { orientation, showLastSeparator, styles } = useStepperContext()
-    const { index, status, isFirst, isLast, getStepProps } = useStep()
+    const { index, isFirst, isLast, status, getStepProps } = useStep()
 
     const css: CSSUIObject = { ...styles.step }
 
     return (
-      <StepProvider value={{ index, status, isFirst, isLast }}>
+      <StepProvider value={{ index, isFirst, isLast, status }}>
         <ui.div
           className={cx("ui-step", className)}
-          __css={css}
           data-orientation={orientation}
           data-stretch={dataAttr(showLastSeparator)}
+          __css={css}
           {...getStepProps(rest, ref)}
         />
       </StepProvider>
     )
   },
 )
+
+Step.displayName = "Step"
+Step.__ui__ = "Step"

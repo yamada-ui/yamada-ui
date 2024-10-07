@@ -1,8 +1,8 @@
-import { Text } from "@yamada-ui/react"
 import type { TextProps } from "@yamada-ui/react"
-import { Fragment, memo } from "react"
 import type { FC } from "react"
+import { Text } from "@yamada-ui/react"
 import { NextLink } from "components/navigation"
+import { Fragment, memo } from "react"
 
 export interface TextWithCodeOrLinkProps extends TextProps {}
 
@@ -19,8 +19,8 @@ export const TextWithCodeOrLink: FC<TextWithCodeOrLinkProps> = memo(
               return (
                 <NextLink
                   key={index}
-                  apply="mdx.a"
                   href={href}
+                  apply="mdx.a"
                   isExternal
                   onClick={(ev) => {
                     ev.stopPropagation()

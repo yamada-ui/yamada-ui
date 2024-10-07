@@ -1,25 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import httpMocks from "node-mocks-http"
-import handler from "./index.api"
 import { generateSignature } from "utils/github"
+import handler from "./index.api"
 
 describe("updateIssues", () => {
   test("responds 200 to GET", async () => {
     const body = {
-      owner: "yamada-ui",
-      repo: "yamada-ui",
-      publish: false,
       octokit: false,
+      owner: "yamada-ui",
+      publish: false,
       pullRequest: false,
+      repo: "yamada-ui",
     }
 
     const signature = generateSignature(body)
 
     const req = httpMocks.createRequest<NextApiRequest>({
+      body,
       headers: {
         "x-hub-signature-256": signature,
       },
-      body,
     })
     const res = httpMocks.createResponse<NextApiResponse>()
 

@@ -1,15 +1,15 @@
+import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
 import {
-  Breadcrumb as UIBreadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
   ChevronIcon,
   forwardRef,
+  Breadcrumb as UIBreadcrumb,
 } from "@yamada-ui/react"
-import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
+import { usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
-import { usePage } from "contexts"
 
 export interface BreadcrumbProps extends UIBreadcrumbProps {}
 
@@ -20,15 +20,15 @@ export const Breadcrumb = memo(
     return documentBreadcrumbs.length ? (
       <UIBreadcrumb
         ref={ref}
-        separator={<ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />}
-        mb="sm"
-        gap="1"
-        fontSize="sm"
         color="muted"
+        fontSize="sm"
+        gap="1"
+        mb="sm"
+        separator={<ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />}
         listProps={{ h: 6 }}
         {...rest}
       >
-        {documentBreadcrumbs.map(({ title, slug }, index) => (
+        {documentBreadcrumbs.map(({ slug, title }, index) => (
           <BreadcrumbItem key={slug}>
             <BreadcrumbLink as={Link} href={slug}>
               {title}

@@ -1,13 +1,10 @@
-import {
-  COLOR_SCHEMES,
-  ThemeSchemes,
-  extendConfig,
-  extendTheme,
-} from "@yamada-ui/react"
+import type { ThemeSchemes } from "@yamada-ui/react"
+import { COLOR_SCHEMES, extendConfig, extendTheme } from "@yamada-ui/react"
 import { customConfig } from "./config"
 
 export const customTheme = {
-  themeSchemes: COLOR_SCHEMES.reduce(
+  colorSchemes: COLOR_SCHEMES,
+  themeSchemes: COLOR_SCHEMES.reduce<ThemeSchemes>(
     (prev, colorScheme) => ({
       ...prev,
       [colorScheme]: {
@@ -23,9 +20,8 @@ export const customTheme = {
         },
       },
     }),
-    {} as ThemeSchemes,
+    {},
   ),
-  colorSchemes: COLOR_SCHEMES,
 }
 
 export const theme = extendTheme(customTheme)()

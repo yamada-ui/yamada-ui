@@ -18,10 +18,7 @@ import {
   isValidElement,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
 import { cloneElement, useId } from "react"
-import type { ColorSelectorProps } from "./color-selector"
-
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
 import { ColorSwatch } from "./color-swatch"
@@ -190,10 +187,10 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                className="ui-color-picker__content"
                 containerProps={{
                   id,
                 }}
-                className="ui-color-picker__content"
                 __css={{ ...styles.content }}
               >
                 <ColorSelector

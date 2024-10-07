@@ -1,10 +1,10 @@
 import type {
   CSSUIObject,
   CSSUIProps,
+  FC,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import type { FC } from "react"
 import {
   forwardRef,
   mergeVars,
@@ -136,3 +136,9 @@ export const ChevronIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+
+CheckIcon.displayName = "CheckIcon"
+InfoIcon.displayName = "InfoIcon"
+WarningIcon.displayName = "WarningIcon"
+CloseIcon.displayName = "CloseIcon"
+ChevronIcon.displayName = "ChevronIcon"

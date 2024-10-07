@@ -1,1 +1,0 @@
-import{j as m}from"./extends-CwFRzn3r.js";import{m as r}from"./forward-ref-scR1bmHx.js";import{m as n}from"./motion-I-9Hg3gW.js";import{b as a,c as e}from"./factory-CYpx3TMG.js";const p=["transition"],c=o=>p.includes(o),d=a("div",{disableStyleProp:c}),b=r(({as:o="div",className:s,...t},i)=>m.jsx(d,{ref:i,as:n[o],className:e("ui-motion",s),...t}));export{b as M};

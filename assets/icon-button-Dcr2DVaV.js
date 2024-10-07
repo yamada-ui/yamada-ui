@@ -1,1 +1,0 @@
-import{j as a}from"./extends-CwFRzn3r.js";import{B as i}from"./button-Bx26J9Y6.js";import{f as c}from"./forward-ref-BWI-Phbn.js";import{c as u}from"./factory-CYpx3TMG.js";const o=c(({icon:t,children:r,className:n,...s},m)=>a.jsx(i,{className:u("ui-icon-button",n),ref:m,p:0,...s,children:t||r}));o.displayName="IconButton";o.__ui__="IconButton";export{o as I};

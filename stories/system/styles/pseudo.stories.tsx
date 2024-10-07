@@ -126,11 +126,11 @@ export const peer = () => {
 export const orientation = () => {
   return (
     <Box
-      _portrait={{ bg: "secondary" }}
       bg="primary"
       color="white"
       p="md"
       rounded="lg"
+      _portrait={{ bg: "secondary" }}
     >
       Box
     </Box>

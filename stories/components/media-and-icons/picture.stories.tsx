@@ -14,45 +14,45 @@ export const basic: Story = () => {
   return (
     <>
       <Picture
+        src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
         alt="ドラゴンボール"
         boxSize="xl"
         sources={[
           {
-            media: "xl",
             srcSet:
               "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
+            media: "xl",
           },
           {
-            media: "lg",
             srcSet:
               "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+            media: "lg",
           },
           {
-            media: "md",
             srcSet:
               "https://dragon-ball-official.com/assets/img/intro/intro_4.png",
+            media: "md",
           },
         ]}
-        src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
       />
 
       <Picture>
         <Source
-          media="md"
           srcSet="https://dragon-ball-official.com/assets/img/intro/intro_4.png"
+          media="md"
         />
         <Source
-          media="lg"
           srcSet="https://dragon-ball-official.com/assets/img/intro/intro_3.png"
+          media="lg"
         />
         <Source
-          media="xl"
           srcSet="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+          media="xl"
         />
         <Image
+          src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
           alt="ドラゴンボール"
           boxSize="xl"
-          src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
         />
       </Picture>
     </>
@@ -62,31 +62,31 @@ export const basic: Story = () => {
 export const customMedia: Story = () => {
   return (
     <Picture
+      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
       alt="ドラゴンボール"
       boxSize="xl"
       sources={[
         {
+          srcSet:
+            "https://dragon-ball-official.com/assets/img/intro/intro_5.png",
           media: "(max-width: 480px)",
-          srcSet:
-            "https://dragon-ball-official.com/assets/img/intro/intro_5.png",
         },
         {
+          srcSet:
+            "https://dragon-ball-official.com/assets/img/intro/intro_5.png",
           maxW: "4xl",
-          srcSet:
-            "https://dragon-ball-official.com/assets/img/intro/intro_5.png",
         },
         {
-          maxW: "976px",
           srcSet:
             "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+          maxW: "976px",
         },
         {
-          maxW: 1280,
           srcSet:
             "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
+          maxW: 1280,
         },
       ]}
-      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
     />
   )
 }
@@ -94,22 +94,22 @@ export const customMedia: Story = () => {
 export const disableSorting: Story = () => {
   return (
     <Picture
+      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
       alt="ドラゴンボール"
       boxSize="xl"
       enableSorting={false}
       sources={[
         {
-          media: "lg",
           srcSet:
             "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+          media: "lg",
         },
         {
-          media: "(max-width: 1280px)",
           srcSet:
             "https://dragon-ball-official.com/assets/img/intro/intro_.png",
+          media: "(max-width: 1280px)",
         },
       ]}
-      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
     />
   )
 }

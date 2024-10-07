@@ -8,13 +8,13 @@ describe("<Picture />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <Picture
+        src={src}
         alt="img"
         sources={[
-          { media: "xl", srcSet: src },
-          { media: "lg", srcSet: src },
-          { media: "md", srcSet: src },
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
         ]}
-        src={src}
       />,
     )
   })
@@ -22,13 +22,13 @@ describe("<Picture />", () => {
   test("should render source elements", () => {
     const { container } = render(
       <Picture
+        src={src}
         alt="img"
         sources={[
-          { media: "xl", srcSet: src },
-          { media: "lg", srcSet: src },
-          { media: "md", srcSet: src },
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
         ]}
-        src={src}
       />,
     )
     const sources = container.querySelectorAll("source")
@@ -38,10 +38,10 @@ describe("<Picture />", () => {
   test("should render custom source elements", () => {
     const { container } = render(
       <Picture>
-        <Source media="md" srcSet={src} />
-        <Source media="lg" srcSet={src} />
-        <Source media="xl" srcSet={src} />
-        <Image alt="img" src={src} />
+        <Source srcSet={src} media="md" />
+        <Source srcSet={src} media="lg" />
+        <Source srcSet={src} media="xl" />
+        <Image src={src} alt="img" />
       </Picture>,
     )
     const sources = container.querySelectorAll("source")
@@ -54,13 +54,13 @@ describe("<Picture />", () => {
   test("should apply correct media queries from theme breakpoints", () => {
     const { container } = render(
       <Picture
+        src={src}
         alt="img"
         sources={[
-          { media: "xl", srcSet: src },
-          { media: "lg", srcSet: src },
-          { media: "md", srcSet: src },
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
         ]}
-        src={src}
       />,
     )
     const sources = container.querySelectorAll("source")
@@ -72,13 +72,13 @@ describe("<Picture />", () => {
   test("should apply correct media queries from maxW or minW", () => {
     const { container } = render(
       <Picture
+        src={src}
         alt="img"
         sources={[
-          { maxW: "1280px", srcSet: src },
-          { maxW: 976, minW: 769, srcSet: src },
-          { maxW: "48rem", srcSet: src },
+          { srcSet: src, maxW: "1280px" },
+          { srcSet: src, maxW: 976, minW: 769 },
+          { srcSet: src, maxW: "48rem" },
         ]}
-        src={src}
       />,
     )
     const sources = container.querySelectorAll("source")
@@ -92,13 +92,13 @@ describe("<Picture />", () => {
   test("should sort sources", () => {
     const { container } = render(
       <Picture
+        src={src}
         alt="img"
         sources={[
-          { media: "lg", srcSet: src },
-          { media: "(max-width: 768px)", srcSet: src },
-          { media: "xl", srcSet: src },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "(max-width: 768px)" },
+          { srcSet: src, media: "xl" },
         ]}
-        src={src}
       />,
     )
     const sources = container.querySelectorAll("source")
@@ -110,14 +110,14 @@ describe("<Picture />", () => {
   test("should not sort sources when enableSorting is false", () => {
     const { container } = render(
       <Picture
+        src={src}
         alt="img"
         enableSorting={false}
         sources={[
-          { media: "md", srcSet: src },
-          { media: "(max-width: 976px)", srcSet: src },
-          { media: "xl", srcSet: src },
+          { srcSet: src, media: "md" },
+          { srcSet: src, media: "(max-width: 976px)" },
+          { srcSet: src, media: "xl" },
         ]}
-        src={src}
       />,
     )
     const sources = container.querySelectorAll("source")
@@ -143,13 +143,13 @@ describe("<Picture />", () => {
         }}
       >
         <Picture
+          src={src}
           alt="img"
           sources={[
-            { media: "xl", srcSet: src },
-            { media: "lg", srcSet: src },
-            { media: "md", srcSet: src },
+            { srcSet: src, media: "xl" },
+            { srcSet: src, media: "lg" },
+            { srcSet: src, media: "md" },
           ]}
-          src={src}
         />
       </ThemeProvider>,
     )

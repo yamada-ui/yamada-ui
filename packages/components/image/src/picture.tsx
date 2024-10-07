@@ -24,6 +24,10 @@ const createQuery = (
 
 export interface PictureSource extends SourceProps {
   /**
+   * The source set for the source element.
+   */
+  srcSet?: string
+  /**
    * The maximum width for the source.
    *
    * If media is set, media takes precedence.
@@ -35,10 +39,6 @@ export interface PictureSource extends SourceProps {
    * If media is set, media takes precedence.
    */
   minW?: number | Theme["sizes"]
-  /**
-   * The source set for the source element.
-   */
-  srcSet?: string
 }
 
 interface PictureOptions {

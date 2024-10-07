@@ -1,16 +1,4 @@
 import type { Dict, FlattenObjectOptions, Union } from "@yamada-ui/utils"
-import {
-  flattenObject,
-  objectFromEntries,
-  pickObject,
-  omitObject,
-  TONES,
-  isObject,
-  runIfFunc,
-  isFunction,
-  merge,
-  isArray,
-} from "@yamada-ui/utils"
 import type {
   Breakpoints,
   CreateThemeVars,
@@ -19,25 +7,37 @@ import type {
   UIStyle,
   UIStyleProps,
 } from "./css"
-import { analyzeBreakpoints, getCreateThemeVars } from "./css"
 import type {
-  CSSMap,
   ComponentMultiSizes,
   ComponentMultiStyle,
   ComponentMultiVariants,
   ComponentStyle,
+  CSSMap,
   StyledTheme,
   ThemeConfig,
   ThemeValue,
 } from "./theme.types"
+import {
+  flattenObject,
+  isArray,
+  isFunction,
+  isObject,
+  merge,
+  objectFromEntries,
+  omitObject,
+  pickObject,
+  runIfFunc,
+  TONES,
+} from "@yamada-ui/utils"
+import { analyzeBreakpoints, getCreateThemeVars } from "./css"
 
 export type VariableResponsiveValue = Dict<
-  ThemeValue | [ThemeValue, ThemeValue]
+  [ThemeValue, ThemeValue] | ThemeValue
 >
 
 export type VariableColorModeValue = [
-  ThemeValue | Dict<ThemeValue>,
-  ThemeValue | Dict<ThemeValue>,
+  Dict<ThemeValue> | ThemeValue,
+  Dict<ThemeValue> | ThemeValue,
 ]
 
 export type VariableValue =
@@ -73,17 +73,17 @@ const primaryTokens = [
 const secondaryTokens = ["gradients"] as const
 
 export type ThemeToken =
-  | (typeof primaryTokens)[number]
-  | (typeof secondaryTokens)[number]
   | "animations"
   | "breakpoints"
   | "transitions.duration"
-  | "transitions.property"
   | "transitions.easing"
+  | "transitions.property"
+  | (typeof primaryTokens)[number]
+  | (typeof secondaryTokens)[number]
 
 export type TransformTheme = Omit<
   StyledTheme,
-  "themeScheme" | "changeThemeScheme"
+  "changeThemeScheme" | "themeScheme"
 >
 
 export function transformTheme(
@@ -133,10 +133,10 @@ export function transformTheme(
   }
 
   Object.assign(theme, {
-    __config: config,
-    __cssVars: cssVars,
-    __cssMap: cssMap,
     __breakpoints: breakpoints,
+    __config: config,
+    __cssMap: cssMap,
+    __cssVars: cssVars,
   })
 
   return theme as TransformTheme
@@ -145,7 +145,7 @@ export function transformTheme(
 function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
   return function (
     theme: Dict,
-    target: "primary" | "secondary" | "animation" = "primary",
+    target: "animation" | "primary" | "secondary" = "primary",
   ) {
     let shouldProcess: FlattenObjectOptions["shouldProcess"] = undefined
     let defaultTokens: string[] = []
@@ -191,37 +191,34 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
     })
     const semanticTokenEntries: [string, VariableToken][] = Object.entries(
       flattenObject(semanticTokenMap, { omitKeys, shouldProcess }),
-    ).reduce(
-      (prev, [token, value]) => {
-        if (token.startsWith("colorSchemes.")) {
-          const [, semanticToken, tone] = token.split(".")
+    ).reduce<[string, VariableToken][]>((prev, [token, value]) => {
+      if (token.startsWith("colorSchemes.")) {
+        const [, semanticToken, tone] = token.split(".")
 
-          if (tone) {
-            const enhancedToken = { isSemantic: false, value }
+        if (tone) {
+          const enhancedToken = { isSemantic: false, value }
+
+          prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
+        } else {
+          TONES.forEach((tone) => {
+            const enhancedToken: VariableToken = {
+              isSemantic: true,
+              value: isArray(value)
+                ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
+                : `${value}.${tone}`,
+            }
 
             prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-          } else {
-            TONES.forEach((tone) => {
-              const enhancedToken: VariableToken = {
-                isSemantic: true,
-                value: isArray(value)
-                  ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
-                  : `${value}.${tone}`,
-              }
-
-              prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-            })
-          }
-        } else {
-          const enhancedToken: VariableToken = { isSemantic: true, value }
-
-          prev.push([token, enhancedToken])
+          })
         }
+      } else {
+        const enhancedToken: VariableToken = { isSemantic: true, value }
 
-        return prev
-      },
-      [] as [string, VariableToken][],
-    )
+        prev.push([token, enhancedToken])
+      }
+
+      return prev
+    }, [])
 
     return objectFromEntries<VariableTokens>([
       ...defaultTokenEntries,
@@ -237,9 +234,9 @@ function mergeVars(...funcs: CreateThemeVars[]) {
 
     for (const func of funcs) {
       const { cssMap, cssVars } = func({
-        prevTokens,
         cssMap: resolvedCSSMap,
         cssVars: resolvedCSSVars,
+        prevTokens,
       })
 
       resolvedCSSMap = { ...resolvedCSSMap, ...cssMap }
@@ -256,7 +253,7 @@ function omitTheme(theme: Dict): Dict {
 
 export function omitThemeProps<
   T extends ThemeProps,
-  K extends Exclude<keyof T, "size" | "variant" | "colorScheme"> = never,
+  K extends Exclude<keyof T, "colorScheme" | "size" | "variant"> = never,
 >(props: T, keys: K[] = []) {
   return omitObject(props, ["size", "variant", "colorScheme", ...keys])
 }
@@ -290,7 +287,7 @@ export function mergeMultiStyle(
     return sources.reduce(
       (prev, source) =>
         recursiveMergeStyle(
-          filterStyle(prev)({ omit, pick, isMulti: true }),
+          filterStyle(prev)({ isMulti: true, omit, pick }),
           source,
         ),
       target,
@@ -298,7 +295,7 @@ export function mergeMultiStyle(
   }
 }
 
-function recursiveMergeStyle<T extends ComponentStyle | ComponentMultiStyle>(
+function recursiveMergeStyle<T extends ComponentMultiStyle | ComponentStyle>(
   target: T,
   source: T,
 ): T {
@@ -333,15 +330,15 @@ function recursiveMergeStyle<T extends ComponentStyle | ComponentMultiStyle>(
 }
 
 interface FilterStyleOptions {
-  omit: Union<keyof (ComponentStyle | ComponentMultiStyle)>[]
-  pick: Union<keyof (ComponentStyle | ComponentMultiStyle)>[]
+  omit: Union<keyof (ComponentMultiStyle | ComponentStyle)>[]
+  pick: Union<keyof (ComponentMultiStyle | ComponentStyle)>[]
   isMulti?: boolean
 }
 
-function filterStyle<T extends ComponentStyle | ComponentMultiStyle>(
+function filterStyle<T extends ComponentMultiStyle | ComponentStyle>(
   target: T,
 ) {
-  return function ({ omit, pick, isMulti = false }: FilterStyleOptions): T {
+  return function ({ isMulti = false, omit, pick }: FilterStyleOptions): T {
     if (!isObject(target)) return target
 
     if (omit.length)
@@ -366,7 +363,7 @@ function internalFilterStyle(
 
     result = func(result, keys)
 
-    Object.entries(result ?? {}).forEach(([nestedKey, style]) => {
+    Object.entries(result).forEach(([nestedKey, style]) => {
       const newKeys = keys.filter((key) => key !== nestedKey)
       const newRefs = [...refs, nestedKey]
 
@@ -418,7 +415,7 @@ function onValidFilterStyleKey(keys: string[], isMulti: boolean): boolean {
 export function pickStyle(
   target: ComponentMultiStyle,
   targetKey: string,
-  withProps: boolean = true,
+  withProps = true,
 ): ComponentStyle {
   const result = {} as ComponentStyle
 
@@ -436,11 +433,11 @@ export function pickStyle(
       case "variants":
       case "sizes":
         result[key] = Object.entries(
-          value as ComponentMultiVariants | ComponentMultiSizes,
+          value as ComponentMultiSizes | ComponentMultiVariants,
         ).reduce<{ [key: string]: UIStyle }>((prev, [key, value]) => {
           if (isFunction(value)) {
             prev[key] = (props) => value(props)[targetKey] as CSSUIObject
-          } else {
+          } else if (value[targetKey]) {
             prev[key] = value[targetKey]
           }
 

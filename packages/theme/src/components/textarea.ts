@@ -6,35 +6,35 @@ export const Textarea: ComponentStyle<"Textarea"> = mergeStyle(
   pickStyle(Input, "field"),
   {
     baseStyle: {
-      py: "2",
       lineHeight: "short",
+      py: "2",
       verticalAlign: "top",
+    },
+
+    sizes: {
+      xs: {
+        minH: "20",
+        py: "2",
+      },
+      sm: {
+        minH: "20",
+        py: "2",
+      },
+      md: {
+        minH: "20",
+        py: "2",
+      },
+      lg: {
+        minH: "20",
+        py: "3",
+      },
     },
 
     variants: {
       unstyled: {
         h: "auto",
-        py: "0",
         px: "0",
-      },
-    },
-
-    sizes: {
-      xs: {
-        py: "2",
-        minH: "20",
-      },
-      sm: {
-        py: "2",
-        minH: "20",
-      },
-      md: {
-        py: "2",
-        minH: "20",
-      },
-      lg: {
-        py: "3",
-        minH: "20",
+        py: "0",
       },
     },
   },

@@ -1,9 +1,9 @@
 import type { ComponentType } from "react"
 import type {
-  UIFactory,
   DOMElements,
-  StyledOptions,
   HTMLUIComponents,
+  StyledOptions,
+  UIFactory,
 } from "./components"
 import { styled } from "./styled"
 

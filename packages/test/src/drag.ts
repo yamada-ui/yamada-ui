@@ -5,8 +5,6 @@ import { sleep } from "./utils"
 const DEFAULT_COUNT = 11
 
 export interface PointerCoords {
-  x?: number
-  y?: number
   clientX?: number
   clientY?: number
   offsetX?: number
@@ -15,22 +13,24 @@ export interface PointerCoords {
   pageY?: number
   screenX?: number
   screenY?: number
+  x?: number
+  y?: number
 }
 
 export interface PointerInput {
   target?: HTMLElement
-  keys?: string
   coords?: PointerCoords
+  keys?: string
   node?: Node
   offset?: number
 }
 
 export interface DragOptions {
   target?: HTMLElement
+  coords?: ((index: number) => PointerCoords | undefined) | PointerCoords
   count?: number
   interval?: number
-  keys?: string | ((index: number) => string | undefined)
-  coords?: PointerCoords | ((index: number) => PointerCoords | undefined)
+  keys?: ((index: number) => string | undefined) | string
 }
 
 const defaultKeys = (i: number) => {
@@ -56,10 +56,10 @@ export const drag =
   (user: UserEvent) =>
   async ({
     target,
+    coords: _coords = defaultCoords,
     count = DEFAULT_COUNT,
     interval = 50,
     keys: _keys = defaultKeys,
-    coords: _coords = defaultCoords,
   }: DragOptions) => {
     const timeline = [...Array(count).keys()]
 

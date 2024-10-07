@@ -1,26 +1,26 @@
 import * as c from "color2k"
 import {
-  getColor,
-  lightenColor,
-  darkenColor,
-  transparentizeColor,
-  tintColor,
-  shadeColor,
-  randomColor,
-  isTone,
-  isLight,
-  isDark,
-  convertColor,
+  alphaToHex,
   calcFormat,
+  convertColor,
+  darkenColor,
   getAlpha,
-  parseToRgba,
-  parseToHsla,
-  parseToHsv,
-  rgbaTo,
+  getColor,
   hslaTo,
   hsvTo,
+  isDark,
+  isLight,
+  isTone,
+  lightenColor,
+  parseToHsla,
+  parseToHsv,
+  parseToRgba,
+  randomColor,
+  rgbaTo,
   sameColor,
-  alphaToHex,
+  shadeColor,
+  tintColor,
+  transparentizeColor,
 } from "../src/color"
 
 const defaultTheme = {
@@ -92,7 +92,7 @@ describe("Color", () => {
     const color1 = randomColor()
     const color2 = randomColor({ string: "Hirotomo Yamada" })
     const color3 = randomColor({ colors })
-    const color4 = randomColor({ string: "Hirotomo Yamada", colors })
+    const color4 = randomColor({ colors, string: "Hirotomo Yamada" })
 
     expect(/^#[0-9A-F]{6}$/i.test(color1)).toBeTruthy()
     expect(color2).toBe("#7e967c")
@@ -116,7 +116,7 @@ describe("Color", () => {
     ]
 
     const color1 = randomColor({ string: "" })
-    const color2 = randomColor({ string: "", colors })
+    const color2 = randomColor({ colors, string: "" })
 
     expect(/^#[0-9A-F]{6}$/i.test(color1)).toBeTruthy()
     expect(colors.includes(color2)).toBeTruthy()

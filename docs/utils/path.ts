@@ -1,5 +1,5 @@
-import path from "path"
 import { CONSTANT } from "constant"
+import path from "path"
 
 export const getResolvedPath = (targetPath: string) =>
   path.join(

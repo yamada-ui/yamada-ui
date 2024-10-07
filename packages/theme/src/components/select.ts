@@ -8,28 +8,28 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
   Menu,
   {
     baseStyle: {
-      inner: {},
-      header: {},
       content: {
         w: "100%",
       },
-      list: {
-        maxH: "xs",
-        overflowY: "auto",
-      },
       footer: {},
+      header: {},
+      inner: {},
       item: {
+        _active: {
+          bg: ["blackAlpha.200", "whiteAlpha.200"],
+        },
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],
           _disabled: {
             bg: ["white", "black"],
           },
         },
-        _active: {
-          bg: ["blackAlpha.200", "whiteAlpha.200"],
-        },
       },
       itemIcon: {},
+      list: {
+        maxH: "xs",
+        overflowY: "auto",
+      },
     },
   },
 )({ omit: ["button", "command"] })

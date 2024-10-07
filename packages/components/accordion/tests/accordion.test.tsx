@@ -1,4 +1,5 @@
 import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import {
   Accordion,
   AccordionItem,
@@ -117,8 +118,8 @@ describe("<Accordion />", () => {
       <Accordion
         icon={({ isExpanded }) => (
           <TestIcon
-            data-testid="custom-icon"
             data-icon={!isExpanded ? "plus" : "minus"}
+            data-testid="custom-icon"
           />
         )}
       >
@@ -143,13 +144,13 @@ describe("<Accordion />", () => {
     const { user } = render(
       <Accordion>
         <AccordionItem
-          label="Accordion Label"
           icon={({ isExpanded }) => (
             <TestIcon
-              data-testid="custom-icon"
               data-icon={!isExpanded ? "plus" : "minus"}
+              data-testid="custom-icon"
             />
           )}
+          label="Accordion Label"
         >
           This is an accordion item
         </AccordionItem>
@@ -174,8 +175,8 @@ describe("<Accordion />", () => {
           <AccordionLabel
             icon={({ isExpanded }) => (
               <TestIcon
-                data-testid="custom-icon"
                 data-icon={!isExpanded ? "plus" : "minus"}
+                data-testid="custom-icon"
               />
             )}
           >
@@ -215,7 +216,7 @@ describe("<Accordion />", () => {
     const { user } = render(
       <Accordion>
         <AccordionItem
-          label={({ isExpanded, isDisabled }) => {
+          label={({ isDisabled, isExpanded }) => {
             if (isDisabled) return <p>Is disabled</p>
 
             if (isExpanded) return <p>Is expanded</p>
@@ -346,9 +347,7 @@ describe("<Accordion />", () => {
   })
 
   test("correct warnings should be issued when isMultiple and isToggle", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
       <Accordion isMultiple isToggle>
@@ -364,12 +363,10 @@ describe("<Accordion />", () => {
   })
 
   test("correct warnings should be issued when isMultiple and defaultIndex is not array", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
-      <Accordion isMultiple defaultIndex={1}>
+      <Accordion defaultIndex={1} isMultiple>
         <AccordionItem label="Accordion Label">
           This is an accordion item
         </AccordionItem>

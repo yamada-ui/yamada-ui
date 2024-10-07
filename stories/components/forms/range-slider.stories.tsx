@@ -1,31 +1,31 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import { Activity } from "@yamada-ui/lucide"
 import {
+  Button,
+  Center,
+  Flex,
+  FormControl,
   RangeSlider,
+  RangeSliderEndThumb,
   RangeSliderFilledTrack,
   RangeSliderMark,
   RangeSliderStartThumb,
-  RangeSliderEndThumb,
   RangeSliderTrack,
-  FormControl,
   Text,
-  VStack,
-  useBoolean,
   Tooltip,
-  Center,
-  Button,
-  Flex,
+  useBoolean,
+  VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof RangeSlider>
 
 const meta: Meta<typeof RangeSlider> = {
-  title: "Components / Forms / RangeSlider",
   component: RangeSlider,
+  title: "Components / Forms / RangeSlider",
 }
 
 export default meta
@@ -59,7 +59,7 @@ export const withColorScheme: Story = () => {
 }
 
 export const withOrientation: Story = () => {
-  return <RangeSlider orientation="vertical" h="calc(100vh - 16px * 2)" />
+  return <RangeSlider h="calc(100vh - 16px * 2)" orientation="vertical" />
 }
 
 export const withReversed: Story = () => {
@@ -67,9 +67,9 @@ export const withReversed: Story = () => {
     <>
       <RangeSlider isReversed />
       <RangeSlider
+        h="calc(100vh - 16px * 3 - 14px)"
         isReversed
         orientation="vertical"
-        h="calc(100vh - 16px * 3 - 14px)"
       />
     </>
   )
@@ -83,7 +83,7 @@ export const withMinMax: Story = () => {
       <Text>
         Min: {value[0]}, Max: {value[1]}
       </Text>
-      <RangeSlider value={value} min={0} max={200} onChange={onChange} />
+      <RangeSlider max={200} min={0} value={value} onChange={onChange} />
     </>
   )
 }
@@ -96,7 +96,7 @@ export const withStep: Story = () => {
       <Text>
         Min: {value[0]}, Max: {value[1]}
       </Text>
-      <RangeSlider value={value} step={5} onChange={onChange} />
+      <RangeSlider step={5} value={value} onChange={onChange} />
     </>
   )
 }
@@ -113,10 +113,10 @@ export const withFocusThumbOnChange: Story = () => {
       <Text>
         Min: {value[0]}, Max: {value[1]}
       </Text>
-      <RangeSlider value={value} step={5} focusThumbOnChange={false} />
+      <RangeSlider focusThumbOnChange={false} step={5} value={value} />
 
-      <Center w="full" gap="xl">
-        <Flex direction="column" align="center" gap="sm">
+      <Center gap="xl" w="full">
+        <Flex align="center" direction="column" gap="sm">
           <Text>Min</Text>
 
           <Center gap="md">
@@ -132,8 +132,8 @@ export const withFocusThumbOnChange: Story = () => {
             </Button>
 
             <Button
-              isDisabled={value[0] === 100 || value[0] === value[1]}
               colorScheme="blue"
+              isDisabled={value[0] === 100 || value[0] === value[1]}
               onClick={() =>
                 setValue((prev) =>
                   prev[0] !== 100 && value[0] !== value[1]
@@ -147,7 +147,7 @@ export const withFocusThumbOnChange: Story = () => {
           </Center>
         </Flex>
 
-        <Flex direction="column" align="center" gap="sm">
+        <Flex align="center" direction="column" gap="sm">
           <Text>Max</Text>
 
           <Center gap="md">
@@ -165,8 +165,8 @@ export const withFocusThumbOnChange: Story = () => {
             </Button>
 
             <Button
-              isDisabled={value[1] === 100}
               colorScheme="blue"
+              isDisabled={value[1] === 100}
               onClick={() =>
                 setValue((prev) =>
                   prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev,
@@ -186,37 +186,37 @@ export const withMark: Story = () => {
   return (
     <VStack gap="lg">
       <RangeSlider size="sm">
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
-        <RangeSliderMark value={50} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={50} w="10">
           50%
         </RangeSliderMark>
-        <RangeSliderMark value={75} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={75} w="10">
           75%
         </RangeSliderMark>
       </RangeSlider>
 
       <RangeSlider size="md">
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
-        <RangeSliderMark value={50} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={50} w="10">
           50%
         </RangeSliderMark>
-        <RangeSliderMark value={75} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={75} w="10">
           75%
         </RangeSliderMark>
       </RangeSlider>
 
       <RangeSlider size="lg">
-        <RangeSliderMark value={25} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={25} w="10">
           25%
         </RangeSliderMark>
-        <RangeSliderMark value={50} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={50} w="10">
           50%
         </RangeSliderMark>
-        <RangeSliderMark value={75} w="10" ml="-5">
+        <RangeSliderMark ml="-5" value={75} w="10">
           75%
         </RangeSliderMark>
       </RangeSlider>
@@ -226,31 +226,31 @@ export const withMark: Story = () => {
 
 export const withTooltip: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
-  const [isOpen, { on, off }] = useBoolean(false)
+  const [isOpen, { off, on }] = useBoolean(false)
 
   return (
     <RangeSlider
+      mt="10"
       value={value}
       onChange={onChange}
-      mt="10"
       onMouseEnter={on}
       onMouseLeave={off}
     >
-      <RangeSliderMark value={25} w="10" ml="-5">
+      <RangeSliderMark ml="-5" value={25} w="10">
         25%
       </RangeSliderMark>
-      <RangeSliderMark value={50} w="10" ml="-5">
+      <RangeSliderMark ml="-5" value={50} w="10">
         50%
       </RangeSliderMark>
-      <RangeSliderMark value={75} w="10" ml="-5">
+      <RangeSliderMark ml="-5" value={75} w="10">
         75%
       </RangeSliderMark>
 
-      <Tooltip placement="top" label={`${value[0]}%`} isOpen={isOpen}>
+      <Tooltip isOpen={isOpen} label={`${value[0]}%`} placement="top">
         <RangeSliderStartThumb />
       </Tooltip>
 
-      <Tooltip placement="top" label={`${value[1]}%`} isOpen={isOpen}>
+      <Tooltip isOpen={isOpen} label={`${value[1]}%`} placement="top">
         <RangeSliderEndThumb />
       </Tooltip>
     </RangeSlider>
@@ -263,9 +263,9 @@ export const isDisabled: Story = () => {
       <RangeSlider isDisabled />
 
       <FormControl
+        helperMessage="Please select your preferred volume."
         isDisabled
         label="volume (sound)"
-        helperMessage="Please select your preferred volume."
       >
         <RangeSlider />
       </FormControl>
@@ -279,9 +279,9 @@ export const isReadonly: Story = () => {
       <RangeSlider isReadOnly />
 
       <FormControl
+        helperMessage="Please select your preferred volume."
         isReadOnly
         label="volume (sound)"
-        helperMessage="Please select your preferred volume."
       >
         <RangeSlider />
       </FormControl>
@@ -301,9 +301,9 @@ export const isInvalid: Story = () => {
       />
 
       <FormControl
+        errorMessage="Min volume should be set to 20 or higher."
         isInvalid={value[0] < 20}
         label="volume (sound)"
-        errorMessage="Min volume should be set to 20 or higher."
       >
         <RangeSlider value={value} onChange={onChange} />
       </FormControl>
@@ -315,15 +315,15 @@ export const customColor: Story = () => {
   return (
     <>
       <RangeSlider
-        trackColor="orange.200"
         filledTrackColor="orange.500"
         thumbColor="orange.700"
+        trackColor="orange.200"
       />
 
       <RangeSlider
-        trackProps={{ bg: "green.200" }}
         filledTrackProps={{ bg: "green.500" }}
         thumbProps={{ bg: "green.700" }}
+        trackProps={{ bg: "green.200" }}
       />
 
       <RangeSlider>
@@ -349,18 +349,18 @@ export const customThumb: Story = () => {
     <>
       <RangeSlider
         thumbProps={{
-          color: "blue.500",
           boxSize: "6",
           children: <Activity />,
+          color: "blue.500",
         }}
       />
 
       <RangeSlider>
-        <RangeSliderStartThumb color="blue.500" boxSize="6">
+        <RangeSliderStartThumb boxSize="6" color="blue.500">
           <Activity />
         </RangeSliderStartThumb>
 
-        <RangeSliderEndThumb color="blue.500" boxSize="6">
+        <RangeSliderEndThumb boxSize="6" color="blue.500">
           <Activity />
         </RangeSliderEndThumb>
       </RangeSlider>
@@ -372,43 +372,41 @@ export const customMark: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
 
   return (
-    <>
-      <RangeSlider value={value} onChange={onChange} mt="10">
-        <RangeSliderMark value={25} w="10" ml="-5">
-          25%
-        </RangeSliderMark>
-        <RangeSliderMark value={50} w="10" ml="-5">
-          50%
-        </RangeSliderMark>
-        <RangeSliderMark value={75} w="10" ml="-5">
-          75%
-        </RangeSliderMark>
-        <RangeSliderMark
-          value={value[0]}
-          bg="blue.500"
-          color="white"
-          py="0.5"
-          rounded="md"
-          w="10"
-          mt="-10"
-          ml="-5"
-        >
-          {value[0]}%
-        </RangeSliderMark>
-        <RangeSliderMark
-          value={value[1]}
-          bg="blue.500"
-          color="white"
-          py="0.5"
-          rounded="md"
-          w="10"
-          mt="-10"
-          ml="-5"
-        >
-          {value[1]}%
-        </RangeSliderMark>
-      </RangeSlider>
-    </>
+    <RangeSlider mt="10" value={value} onChange={onChange}>
+      <RangeSliderMark ml="-5" value={25} w="10">
+        25%
+      </RangeSliderMark>
+      <RangeSliderMark ml="-5" value={50} w="10">
+        50%
+      </RangeSliderMark>
+      <RangeSliderMark ml="-5" value={75} w="10">
+        75%
+      </RangeSliderMark>
+      <RangeSliderMark
+        bg="blue.500"
+        color="white"
+        ml="-5"
+        mt="-10"
+        py="0.5"
+        rounded="md"
+        value={value[0]}
+        w="10"
+      >
+        {value[0]}%
+      </RangeSliderMark>
+      <RangeSliderMark
+        bg="blue.500"
+        color="white"
+        ml="-5"
+        mt="-10"
+        py="0.5"
+        rounded="md"
+        value={value[1]}
+        w="10"
+      >
+        {value[1]}%
+      </RangeSliderMark>
+    </RangeSlider>
   )
 }
 
@@ -474,9 +472,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -486,9 +484,9 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.rangeSlider?.message}
         isInvalid={!!errors.rangeSlider}
         label="Volume"
-        errorMessage={errors.rangeSlider?.message}
       >
         <Controller
           name="rangeSlider"

@@ -1,11 +1,11 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
 import {
   forwardRef,
   mergeVars,
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
-import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import { Audio } from "./audio"
@@ -27,17 +27,17 @@ interface LoadingOptions {
    *
    * @default 'oval'
    */
-  variant?: "oval" | "grid" | "audio" | "dots" | "puff" | "rings" | "circles"
+  variant?: "audio" | "circles" | "dots" | "grid" | "oval" | "puff" | "rings"
+  /**
+   * The CSS `dur` property.
+   */
+  duration?: IconProps["dur"]
   /**
    * The CSS `color` property.
    *
    * @default 'primary'
    */
   secondaryColor?: CSSUIProps["color"]
-  /**
-   * The CSS `dur` property.
-   */
-  duration?: IconProps["dur"]
 }
 
 export interface LoadingProps
@@ -53,14 +53,14 @@ export interface LoadingProps
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
     { color, ...styles },
-    { variant = "oval", size = "1em", colorScheme, ...mergedProps },
+    { colorScheme, size = "1em", variant = "oval", ...mergedProps },
   ] = useComponentStyle("Loading", props)
   const {
     className,
     color: colorProp,
-    secondaryColor,
     dur,
     duration,
+    secondaryColor,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -73,11 +73,14 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       duration: duration ?? dur,
       __css: {
         ...styles,
-        vars: mergeVars(styles?.vars, [
+        vars: mergeVars(styles.vars, [
           {
             name: "color",
             token: "colors",
-            value: colorProp ?? (color as string) ?? `${colorScheme}.500`,
+            value:
+              colorProp ??
+              (color as string | undefined) ??
+              `${colorScheme}.500`,
           },
           {
             name: "secondary-color",

@@ -1,5 +1,5 @@
-import { a11y, render, screen, fireEvent, waitFor } from "@yamada-ui/test"
-import { useState, useRef } from "react"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { useRef, useState } from "react"
 import { FileButton } from "../src"
 
 describe("<FileButton />", () => {
@@ -49,7 +49,7 @@ describe("<FileButton />", () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
-      <FileButton onClick={onClickMock} isReadOnly>
+      <FileButton isReadOnly onClick={onClickMock}>
         Upload
       </FileButton>,
     )
@@ -63,7 +63,7 @@ describe("<FileButton />", () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
-      <FileButton onClick={onClickMock} isDisabled>
+      <FileButton isDisabled onClick={onClickMock}>
         Upload
       </FileButton>,
     )
@@ -89,7 +89,7 @@ describe("<FileButton />", () => {
       return (
         <>
           <p data-testid="file-count">files: {files ? files.length : 0}</p>
-          <FileButton onChange={handleFileChange} multiple>
+          <FileButton multiple onChange={handleFileChange}>
             Upload
           </FileButton>
         </>
@@ -110,23 +110,23 @@ describe("<FileButton />", () => {
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 1")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
 
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
     fireEvent.change(fileInput, { target: { files: [file1, file2] } })
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 2")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
 
     fireEvent.change(fileInput, { target: { files: [] } })
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")
-      expect(handleFileChangeMock).toHaveBeenCalledWith([])
     })
+    expect(handleFileChangeMock).toHaveBeenCalledWith([])
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })
@@ -174,7 +174,7 @@ describe("<FileButton />", () => {
       expect(fileCount).toHaveTextContent("files: 1")
     })
 
-    await fireEvent.click(resetButton)
+    fireEvent.click(resetButton)
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")

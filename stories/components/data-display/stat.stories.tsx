@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { colorSchemes } from "../../components"
 import {
   Grid,
   Stat,
@@ -8,12 +7,13 @@ import {
   StatLabel,
   StatNumber,
 } from "@yamada-ui/react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Stat>
 
 const meta: Meta<typeof Stat> = {
-  title: "Components / Data Display / Stat",
   component: Stat,
+  title: "Components / Data Display / Stat",
 }
 
 export default meta
@@ -22,10 +22,10 @@ export const basic: Story = () => {
   return (
     <>
       <Stat
+        helperMessage="21% more than last month"
+        icon="increase"
         label="Total Page Views"
         number="1,993,818"
-        icon="increase"
-        helperMessage="21% more than last month"
       />
 
       <Stat>
@@ -43,22 +43,22 @@ export const basic: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <Grid
-      w="full"
+      gap="md"
       templateColumns={{
         base: "repeat(4, 1fr)",
-        lg: "repeat(3, 1fr)",
-        md: "repeat(2, 1fr)",
         sm: "repeat(1, 1fr)",
+        md: "repeat(2, 1fr)",
+        lg: "repeat(3, 1fr)",
       }}
-      gap="md"
+      w="full"
     >
       {colorSchemes.map((colorScheme) => (
         <Stat
           key={colorScheme}
           colorScheme={colorScheme}
+          helperMessage="21% more than last month"
           label="Total Likes"
           number="818K"
-          helperMessage="21% more than last month"
         />
       ))}
     </Grid>
@@ -67,15 +67,13 @@ export const withColorScheme: Story = () => {
 
 export const withCenterContent: Story = () => {
   return (
-    <>
-      <Stat
-        label="Downloads"
-        number="18K"
-        icon="increase"
-        helperMessage="From August 1 to August 18"
-        centerContent
-      />
-    </>
+    <Stat
+      centerContent
+      helperMessage="From August 1 to August 18"
+      icon="increase"
+      label="Downloads"
+      number="18K"
+    />
   )
 }
 
@@ -83,10 +81,10 @@ export const withDecrease: Story = () => {
   return (
     <>
       <Stat
+        helperMessage="21% more than last month"
+        icon="decrease"
         label="Total Page Views"
         number="1,993,818"
-        icon="decrease"
-        helperMessage="21% more than last month"
       />
 
       <Stat>

@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, getValidChildren } from "@yamada-ui/utils"
 import { createElement } from "react"
 import { TabPanelProvider, useTabsContext } from "./tabs-context"
@@ -8,7 +8,7 @@ export interface TabPanelsProps extends HTMLUIProps {}
 
 export const TabPanels = forwardRef<TabPanelsProps, "div">(
   ({ className, children, ...rest }, ref) => {
-    const { selectedIndex, tabPanelsProps, styles } = useTabsContext()
+    const { selectedIndex, styles, tabPanelsProps } = useTabsContext()
 
     const validChildren = getValidChildren(children)
 

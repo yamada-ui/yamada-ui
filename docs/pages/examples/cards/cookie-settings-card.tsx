@@ -5,20 +5,20 @@ import {
   CardFooter,
   CardHeader,
   Heading,
-  Text,
   Switch,
+  Text,
 } from "@yamada-ui/react"
 import { memo } from "react"
 
 export const CookieSettingsCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">
           Cookie Settings
         </Heading>
@@ -51,7 +51,7 @@ export const CookieSettingsCard = memo(() => {
       </CardBody>
 
       <CardFooter>
-        <Button w="full" variant="outline" colorScheme="primary">
+        <Button colorScheme="primary" variant="outline" w="full">
           Save Preferences
         </Button>
       </CardFooter>

@@ -1,34 +1,21 @@
-import { renderHook, act, render } from "@yamada-ui/test"
-import { TONES } from "@yamada-ui/utils"
 import type { ThemeConfig, UsageTheme } from "../src"
+import { act, render, renderHook } from "@yamada-ui/test"
+import { TONES } from "@yamada-ui/utils"
 import {
+  createThemeSchemeManager,
   GlobalStyle,
+  pseudos,
   ResetStyle,
   THEME_SCHEME_STORAGE_KEY,
   ThemeProvider,
-  ThemeSchemeScript,
-  createThemeSchemeManager,
-  pseudos,
   themeSchemeManager,
+  ThemeSchemeScript,
   transformTheme,
   useTheme,
 } from "../src"
 
 describe("ThemeProvider", () => {
   const theme: UsageTheme = {
-    styles: {
-      resetStyle: {
-        body: {
-          margin: 0,
-          padding: 0,
-        },
-      },
-      globalStyle: {
-        body: {
-          fontFamily: "Arial",
-        },
-      },
-    },
     colors: {
       primary: "#0070f3",
       secondary: "#ff4081",
@@ -37,6 +24,19 @@ describe("ThemeProvider", () => {
       sm: "0.875rem",
       md: "1rem",
       lg: "1.25rem",
+    },
+    styles: {
+      globalStyle: {
+        body: {
+          fontFamily: "Arial",
+        },
+      },
+      resetStyle: {
+        body: {
+          margin: 0,
+          padding: 0,
+        },
+      },
     },
   }
 
@@ -54,11 +54,11 @@ describe("ThemeProvider", () => {
   test("allows theme updates through changeThemeScheme", () => {
     let themeScheme = "light"
 
-    const { result, rerender } = renderHook(() => useTheme(), {
+    const { rerender, result } = renderHook(() => useTheme(), {
       wrapper: ({ children }) => (
         <ThemeProvider
-          theme={theme}
           config={{ initialThemeScheme: themeScheme }}
+          theme={theme}
         >
           {children}
         </ThemeProvider>
@@ -192,12 +192,45 @@ describe("ThemeSchemeScript", () => {
 
 describe("transformTheme", () => {
   const theme: UsageTheme = {
-    breakpoints: {
-      sm: "30em",
-      md: "48em",
-      lg: "61em",
-      xl: "80em",
-      "2xl": "90em",
+    animations: {
+      gradient: {
+        duration: "10s",
+        iterationCount: "infinite",
+        keyframes: {
+          "0%": {
+            bg: "red.500",
+          },
+          "25%": {
+            bg: "green.500",
+          },
+          "50%": {
+            bg: "blue.500",
+          },
+          "75%": {
+            bg: "green.500",
+          },
+          "100%": {
+            bg: "red.500",
+          },
+        },
+        timingFunction: "linear",
+      },
+      resizeHeight: {
+        duration: "10s",
+        iterationCount: "infinite",
+        keyframes: {
+          "0%": {
+            h: "xs",
+          },
+          "50%": {
+            h: "md",
+          },
+          "100%": {
+            h: "xs",
+          },
+        },
+        timingFunction: "linear",
+      },
     },
     borders: {
       md: [
@@ -209,21 +242,14 @@ describe("transformTheme", () => {
         sm: ["2px solid #000", "2px solid #FFF"],
       },
     },
+    breakpoints: {
+      sm: "30em",
+      md: "48em",
+      lg: "61em",
+      xl: "80em",
+      "2xl": "90em",
+    },
     colors: {
-      border: ["#dcdcde", "#434248"],
-      red: {
-        50: "#fdeae8",
-        100: "#fbd9d5",
-        200: "#f6b2ac",
-        300: "#f28c82",
-        400: "#ee6a5d",
-        500: "#ea4334",
-        600: "#de2817",
-        700: "#b42013",
-        800: "#8a190f",
-        900: "#66120b",
-        950: "#530f09",
-      },
       blue: {
         50: "#e2edfd",
         100: "#cfe0fc",
@@ -237,6 +263,7 @@ describe("transformTheme", () => {
         900: "#07357d",
         950: "#062c6a",
       },
+      border: ["#dcdcde", "#434248"],
       green: {
         50: "#e0f5e6",
         100: "#d0f1d9",
@@ -263,30 +290,31 @@ describe("transformTheme", () => {
         900: "#5e2902",
         950: "#461e02",
       },
-    },
-    spaces: {
-      1: { base: "0.25rem", md: "0.125rem" },
-      2: { base: "0.5rem", md: "0.25rem" },
-      3: { base: "0.75rem", md: "0.375rem" },
-      4: { base: "1rem", md: "0.5rem" },
-    },
-    sizes: {
-      full: "100%",
-      xs: "15rem",
-      sm: "20rem",
-      md: "24rem",
-      lg: "28rem",
+      red: {
+        50: "#fdeae8",
+        100: "#fbd9d5",
+        200: "#f6b2ac",
+        300: "#f28c82",
+        400: "#ee6a5d",
+        500: "#ea4334",
+        600: "#de2817",
+        700: "#b42013",
+        800: "#8a190f",
+        900: "#66120b",
+        950: "#530f09",
+      },
     },
     gradients: {
       blue: {
         base: "linear(to-r, blue.300, green.400)",
-        lg: "linear(to-r, blue.200, green.300)",
         md: "linear(to-r, blue.100, green.200)",
+        lg: "linear(to-r, blue.200, green.300)",
       },
       green: [
         "linear(to-r, green.200, green.500)",
         "linear(to-r, green.100, green.300)",
       ],
+      orange: "linear(to-r, $colors.orange.200, $yamada)",
       red: [
         {
           base: "linear(to-r, red.200, red.500)",
@@ -297,57 +325,45 @@ describe("transformTheme", () => {
           sm: "linear(to-r, red.200, red.400)",
         },
       ],
-      orange: "linear(to-r, $colors.orange.200, $hoge)",
-    },
-    animations: {
-      gradient: {
-        keyframes: {
-          "0%": {
-            bg: "red.500",
-          },
-          "25%": {
-            bg: "green.500",
-          },
-          "50%": {
-            bg: "blue.500",
-          },
-          "75%": {
-            bg: "green.500",
-          },
-          "100%": {
-            bg: "red.500",
-          },
-        },
-        duration: "10s",
-        iterationCount: "infinite",
-        timingFunction: "linear",
-      },
-      resizeHeight: {
-        keyframes: {
-          "0%": {
-            h: "xs",
-          },
-          "50%": {
-            h: "md",
-          },
-          "100%": {
-            h: "xs",
-          },
-        },
-        duration: "10s",
-        iterationCount: "infinite",
-        timingFunction: "linear",
-      },
     },
     semantics: {
-      spaces: {
-        sm: { base: "2", sm: "1" },
-        md: { base: "3", sm: "2" },
-        lg: { base: "4", sm: "3" },
+      animations: {
+        banner: "gradient",
+        dot: [
+          "gradient",
+          {
+            duration: "10s",
+            iterationCount: "infinite",
+            keyframes: {
+              "0%": {
+                transform: "translateX(0%)",
+              },
+              "100%": {
+                transform: "translateX(400%)",
+              },
+            },
+            timingFunction: "linear",
+          },
+        ],
+        hero: ["gradient", "resizeHeight"],
+        resizeWidth: {
+          duration: "10s",
+          iterationCount: "infinite",
+          keyframes: {
+            "0%": {
+              w: "full",
+            },
+            "50%": {
+              w: "50%",
+            },
+            "100%": {
+              w: "full",
+            },
+          },
+          timingFunction: "linear",
+        },
       },
       colors: {
-        primary: ["blue.500", "red.500"],
-        secondary: "green.500",
         pink: {
           50: "#fde8ed",
           100: "#fcd9e3",
@@ -361,63 +377,47 @@ describe("transformTheme", () => {
           900: "#880c2d",
           950: "#710a25",
         },
-      },
-      gradients: {
-        hero: "blue",
-        banner: ["green", "red"],
-        pink: "linear(to-r, pink.200, pink.500)",
-      },
-      animations: {
-        hero: ["gradient", "resizeHeight"],
-        banner: "gradient",
-        dot: [
-          "gradient",
-          {
-            keyframes: {
-              "0%": {
-                transform: "translateX(0%)",
-              },
-              "100%": {
-                transform: "translateX(400%)",
-              },
-            },
-            duration: "10s",
-            iterationCount: "infinite",
-            timingFunction: "linear",
-          },
-        ],
-        resizeWidth: {
-          keyframes: {
-            "0%": {
-              w: "full",
-            },
-            "50%": {
-              w: "50%",
-            },
-            "100%": {
-              w: "full",
-            },
-          },
-          duration: "10s",
-          iterationCount: "infinite",
-          timingFunction: "linear",
-        },
+        primary: ["blue.500", "red.500"],
+        secondary: "green.500",
       },
       colorSchemes: {
         primary: ["blue", "red"],
         secondary: "green",
         tertiary: "pink",
       },
+      gradients: {
+        banner: ["green", "red"],
+        hero: "blue",
+        pink: "linear(to-r, pink.200, pink.500)",
+      },
+      spaces: {
+        sm: { base: "2", sm: "1" },
+        md: { base: "3", sm: "2" },
+        lg: { base: "4", sm: "3" },
+      },
+    },
+    sizes: {
+      xs: "15rem",
+      sm: "20rem",
+      md: "24rem",
+      lg: "28rem",
+      full: "100%",
+    },
+    spaces: {
+      1: { base: "0.25rem", md: "0.125rem" },
+      2: { base: "0.5rem", md: "0.25rem" },
+      3: { base: "0.75rem", md: "0.375rem" },
+      4: { base: "1rem", md: "0.5rem" },
     },
     themeSchemes: {
-      red: {
-        colors: {
-          border: ["$colors.red.500", "pink"],
-        },
-      },
       blue: {
         colors: {
           border: ["blue", "cyan"],
+        },
+      },
+      red: {
+        colors: {
+          border: ["$colors.red.500", "pink"],
         },
       },
     },
@@ -434,47 +434,47 @@ describe("transformTheme", () => {
   }
 
   const themeQueries = {
-    red: "[data-theme=red] &:not([data-theme]), &[data-theme=red]",
     blue: "[data-theme=blue] &:not([data-theme]), &[data-theme=blue]",
+    red: "[data-theme=red] &:not([data-theme]), &[data-theme=red]",
   }
 
   test("applies responsive theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["spaces.1"]).toStrictEqual({
-      var: "--ui-spaces-1",
       ref: "var(--ui-spaces-1)",
+      var: "--ui-spaces-1",
     })
     expect(__cssMap["spaces.2"]).toStrictEqual({
-      var: "--ui-spaces-2",
       ref: "var(--ui-spaces-2)",
+      var: "--ui-spaces-2",
     })
     expect(__cssMap["spaces.3"]).toStrictEqual({
-      var: "--ui-spaces-3",
       ref: "var(--ui-spaces-3)",
+      var: "--ui-spaces-3",
     })
     expect(__cssMap["spaces.4"]).toStrictEqual({
-      var: "--ui-spaces-4",
       ref: "var(--ui-spaces-4)",
+      var: "--ui-spaces-4",
     })
     expect(__cssMap["sizes.full"]).toStrictEqual({
-      var: "--ui-sizes-full",
       ref: "var(--ui-sizes-full)",
+      var: "--ui-sizes-full",
     })
     expect(__cssMap["sizes.xs"]).toStrictEqual({
-      var: "--ui-sizes-xs",
       ref: "var(--ui-sizes-xs)",
+      var: "--ui-sizes-xs",
     })
     expect(__cssMap["sizes.sm"]).toStrictEqual({
-      var: "--ui-sizes-sm",
       ref: "var(--ui-sizes-sm)",
+      var: "--ui-sizes-sm",
     })
     expect(__cssMap["sizes.md"]).toStrictEqual({
-      var: "--ui-sizes-md",
       ref: "var(--ui-sizes-md)",
+      var: "--ui-sizes-md",
     })
     expect(__cssMap["sizes.lg"]).toStrictEqual({
-      var: "--ui-sizes-lg",
       ref: "var(--ui-sizes-lg)",
+      var: "--ui-sizes-lg",
     })
     expect(__cssVars["--ui-spaces-1"]).toBe("0.25rem")
     expect(__cssVars["--ui-spaces-2"]).toBe("0.5rem")
@@ -494,8 +494,8 @@ describe("transformTheme", () => {
   test("applies color mode theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["colors.border"]).toStrictEqual({
-      var: "--ui-colors-border",
       ref: "var(--ui-colors-border)",
+      var: "--ui-colors-border",
     })
     expect(__cssVars["--ui-colors-border"]).toBe("#dcdcde")
     expect(__cssVars[pseudos._dark]["--ui-colors-border"]).toBe("#434248")
@@ -504,12 +504,12 @@ describe("transformTheme", () => {
   test("applies responsive and color mode theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["borders.md"]).toStrictEqual({
-      var: "--ui-borders-md",
       ref: "var(--ui-borders-md)",
+      var: "--ui-borders-md",
     })
     expect(__cssMap["borders.lg"]).toStrictEqual({
-      var: "--ui-borders-lg",
       ref: "var(--ui-borders-lg)",
+      var: "--ui-borders-lg",
     })
     expect(__cssVars["--ui-borders-md"]).toBe("2px solid #000")
     expect(__cssVars[queries.sm]["--ui-borders-md"]).toBe("1px solid #000")
@@ -528,24 +528,24 @@ describe("transformTheme", () => {
   test("applies semantic theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["spaces.sm"]).toStrictEqual({
-      var: "--ui-spaces-sm",
       ref: "var(--ui-spaces-sm)",
+      var: "--ui-spaces-sm",
     })
     expect(__cssMap["spaces.md"]).toStrictEqual({
-      var: "--ui-spaces-md",
       ref: "var(--ui-spaces-md)",
+      var: "--ui-spaces-md",
     })
     expect(__cssMap["spaces.lg"]).toStrictEqual({
-      var: "--ui-spaces-lg",
       ref: "var(--ui-spaces-lg)",
+      var: "--ui-spaces-lg",
     })
     expect(__cssMap["colors.primary"]).toStrictEqual({
-      var: "--ui-colors-primary",
       ref: "var(--ui-colors-primary)",
+      var: "--ui-colors-primary",
     })
     expect(__cssMap["colors.secondary"]).toStrictEqual({
-      var: "--ui-colors-secondary",
       ref: "var(--ui-colors-secondary)",
+      var: "--ui-colors-secondary",
     })
     expect(__cssVars["--ui-spaces-sm"]).toBe("var(--ui-spaces-2)")
     expect(__cssVars["--ui-spaces-md"]).toBe("var(--ui-spaces-3)")
@@ -562,15 +562,15 @@ describe("transformTheme", () => {
     )
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.pink.${tone}`]).toStrictEqual({
-        var: `--ui-colors-pink-${tone}`,
         ref: `var(--ui-colors-pink-${tone})`,
+        var: `--ui-colors-pink-${tone}`,
       })
       expect(__cssVars).haveOwnProperty(`--ui-colors-pink-${tone}`)
     })
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.primary.${tone}`]).toStrictEqual({
-        var: `--ui-colors-primary-${tone}`,
         ref: `var(--ui-colors-primary-${tone})`,
+        var: `--ui-colors-primary-${tone}`,
       })
       expect(__cssVars[`--ui-colors-primary-${tone}`]).toBe(
         `var(--ui-colors-blue-${tone})`,
@@ -581,8 +581,8 @@ describe("transformTheme", () => {
     })
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.secondary.${tone}`]).toStrictEqual({
-        var: `--ui-colors-secondary-${tone}`,
         ref: `var(--ui-colors-secondary-${tone})`,
+        var: `--ui-colors-secondary-${tone}`,
       })
       expect(__cssVars[`--ui-colors-secondary-${tone}`]).toBe(
         `var(--ui-colors-green-${tone})`,
@@ -590,8 +590,8 @@ describe("transformTheme", () => {
     })
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.tertiary.${tone}`]).toStrictEqual({
-        var: `--ui-colors-tertiary-${tone}`,
         ref: `var(--ui-colors-tertiary-${tone})`,
+        var: `--ui-colors-tertiary-${tone}`,
       })
       expect(__cssVars[`--ui-colors-tertiary-${tone}`]).toBe(
         `var(--ui-colors-pink-${tone})`,
@@ -602,28 +602,28 @@ describe("transformTheme", () => {
   test("applies gradient theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["gradients.blue"]).toStrictEqual({
-      var: "--ui-gradients-blue",
       ref: "var(--ui-gradients-blue)",
+      var: "--ui-gradients-blue",
     })
     expect(__cssMap["gradients.green"]).toStrictEqual({
-      var: "--ui-gradients-green",
       ref: "var(--ui-gradients-green)",
+      var: "--ui-gradients-green",
     })
     expect(__cssMap["gradients.red"]).toStrictEqual({
-      var: "--ui-gradients-red",
       ref: "var(--ui-gradients-red)",
+      var: "--ui-gradients-red",
     })
     expect(__cssMap["gradients.hero"]).toStrictEqual({
-      var: "--ui-gradients-hero",
       ref: "var(--ui-gradients-hero)",
+      var: "--ui-gradients-hero",
     })
     expect(__cssMap["gradients.banner"]).toStrictEqual({
-      var: "--ui-gradients-banner",
       ref: "var(--ui-gradients-banner)",
+      var: "--ui-gradients-banner",
     })
     expect(__cssMap["gradients.pink"]).toStrictEqual({
-      var: "--ui-gradients-pink",
       ref: "var(--ui-gradients-pink)",
+      var: "--ui-gradients-pink",
     })
     expect(__cssVars["--ui-gradients-blue"]).toBe(
       "linear-gradient(to right, var(--ui-colors-blue-300), var(--ui-colors-green-400))",
@@ -665,31 +665,31 @@ describe("transformTheme", () => {
   test("applies interpolation theme token", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["gradients.orange"]).toStrictEqual({
-      var: "--ui-gradients-orange",
       ref: "var(--ui-gradients-orange)",
+      var: "--ui-gradients-orange",
     })
     expect(__cssVars["--ui-gradients-orange"]).toBe(
-      "linear-gradient(to right, var(--ui-colors-orange-200), var(--ui-hoge))",
+      "linear-gradient(to right, var(--ui-colors-orange-200), var(--ui-yamada))",
     )
   })
 
   test("applies animation theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["animations.gradient"]).toStrictEqual({
-      var: "--ui-animations-gradient",
       ref: "var(--ui-animations-gradient)",
+      var: "--ui-animations-gradient",
     })
     expect(__cssMap["animations.resizeHeight"]).toStrictEqual({
-      var: "--ui-animations-resizeHeight",
       ref: "var(--ui-animations-resizeHeight)",
+      var: "--ui-animations-resizeHeight",
     })
     expect(__cssMap["animations.dot"]).toStrictEqual({
-      var: "--ui-animations-dot",
       ref: "var(--ui-animations-dot)",
+      var: "--ui-animations-dot",
     })
     expect(__cssMap["animations.resizeWidth"]).toStrictEqual({
-      var: "--ui-animations-resizeWidth",
       ref: "var(--ui-animations-resizeWidth)",
+      var: "--ui-animations-resizeWidth",
     })
     expect(__cssVars["--ui-animations-gradient"]).toMatch(
       /animation-.* 10s linear 0s infinite normal none running/,
@@ -717,12 +717,12 @@ describe("transformTheme", () => {
     expect(__cssVars).toHaveProperty(themeQueries.red)
     expect(__cssVars).toHaveProperty(themeQueries.blue)
     expect(__cssMap["colors.border"]).toStrictEqual({
-      var: "--ui-colors-border",
       ref: "var(--ui-colors-border)",
+      var: "--ui-colors-border",
     })
     expect(__cssMap["colors.border"]).toStrictEqual({
-      var: "--ui-colors-border",
       ref: "var(--ui-colors-border)",
+      var: "--ui-colors-border",
     })
     expect(__cssVars[themeQueries.red]["--ui-colors-border"]).toBe(
       "var(--ui-colors-red-500)",

@@ -1,32 +1,32 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef, useState } from "react"
-import { colorSchemes } from "../../components"
 import type { CalendarProps } from "@yamada-ui/calendar"
 import { Calendar } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import {
-  Heading,
-  Wrap,
-  Tooltip,
+  Button,
   Center,
-  Text,
+  Flex,
+  Heading,
   Popover,
-  PopoverTrigger,
+  PopoverBody,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
+  PopoverTrigger,
   Portal,
+  Text,
+  Tooltip,
   VStack,
-  Button,
-  Flex,
+  Wrap,
 } from "@yamada-ui/react"
+import { useRef, useState } from "react"
+import { colorSchemes } from "../../components"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof Calendar>
 
 const meta: Meta<typeof Calendar> = {
-  title: "Components / Data Display / Calendar",
   component: Calendar,
+  title: "Components / Data Display / Calendar",
 }
 
 export default meta
@@ -54,20 +54,20 @@ export const withVariant: Story = () => {
     <>
       <Calendar
         variant="solid"
-        today
         defaultValue={new Date(new Date().setDate(1))}
+        today
       />
 
       <Calendar
         variant="subtle"
-        today
         defaultValue={new Date(new Date().setDate(1))}
+        today
       />
 
       <Calendar
         variant="unstyled"
-        today
         defaultValue={new Date(new Date().setDate(1))}
+        today
       />
     </>
   )
@@ -82,20 +82,20 @@ export const withColorScheme: Story = () => {
         {colorSchemes.map((colorScheme) => (
           <Calendar
             key={colorScheme}
-            variant="solid"
             colorScheme={colorScheme}
-            today
+            variant="solid"
             defaultValue={new Date(new Date().setDate(1))}
+            today
           />
         ))}
 
         {colorSchemes.map((colorScheme) => (
           <Calendar
             key={colorScheme}
-            variant="subtle"
             colorScheme={colorScheme}
-            today
+            variant="subtle"
             defaultValue={new Date(new Date().setDate(1))}
+            today
           />
         ))}
       </Wrap>
@@ -136,8 +136,8 @@ export const withFirstDayOfWeek: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <Calendar
-      minDate={new Date(new Date().setDate(1))}
       maxDate={new Date(new Date().setDate(18))}
+      minDate={new Date(new Date().setDate(1))}
     />
   )
 }
@@ -228,13 +228,13 @@ export const withLocale: Story = () => {
 export const withFormat: Story = () => {
   return (
     <Wrap gap="md">
-      <Calendar locale="ja" dateFormat="YYYY年 MMMM" />
+      <Calendar dateFormat="YYYY年 MMMM" locale="ja" />
 
-      <Calendar locale="ja" defaultType="month" yearFormat="YYYY年" />
+      <Calendar defaultType="month" locale="ja" yearFormat="YYYY年" />
 
-      <Calendar locale="ja" defaultType="month" monthFormat="MM" />
+      <Calendar defaultType="month" locale="ja" monthFormat="MM" />
 
-      <Calendar locale="ja" defaultType="year" yearFormat="YY" />
+      <Calendar defaultType="year" locale="ja" yearFormat="YY" />
 
       <Calendar locale="ja" weekdayFormat="dd曜" />
     </Wrap>
@@ -287,7 +287,7 @@ export const useMultiValue: Story = () => {
       <Calendar enableMultiple />
       <Calendar defaultValue={[]} />
       <Calendar enableMultiple maxSelectValues={3} />
-      <Calendar enableMultiple amountOfMonths={3} />
+      <Calendar amountOfMonths={3} enableMultiple />
     </>
   )
 }
@@ -299,10 +299,10 @@ export const useRangeValue: Story = () => {
       <Calendar enableRange maxSelectValues={3} />
       <Calendar
         enableRange
-        minDate={new Date(new Date().setDate(5))}
         maxDate={new Date(new Date().setDate(25))}
+        minDate={new Date(new Date().setDate(5))}
       />
-      <Calendar enableRange amountOfMonths={3} />
+      <Calendar amountOfMonths={3} enableRange />
     </>
   )
 }
@@ -325,10 +325,10 @@ export const useControl: Story = () => {
       </Wrap>
 
       <Calendar
-        withHeader={false}
-        typeRef={typeRef}
-        prevRef={prevRef}
         nextRef={nextRef}
+        prevRef={prevRef}
+        typeRef={typeRef}
+        withHeader={false}
       />
     </>
   )
@@ -392,7 +392,7 @@ export const customYearButton: Story = () => {
         yearProps={{
           component: ({ year }) => (
             <Tooltip label={year}>
-              <Center as="span" w="full" h="full">
+              <Center as="span" h="full" w="full">
                 {year}
               </Center>
             </Tooltip>
@@ -411,9 +411,9 @@ export const customMonthButton: Story = () => {
       <Calendar
         defaultType="month"
         monthProps={{
-          component: ({ year, month }) => (
+          component: ({ month, year }) => (
             <Tooltip label={year}>
-              <Center as="span" w="full" h="full">
+              <Center as="span" h="full" w="full">
                 {month}
               </Center>
             </Tooltip>
@@ -433,8 +433,8 @@ export const customWeekday: Story = () => {
         locale="ja"
         weekdayProps={{
           component: ({ weekday }) => (
-            <Tooltip label={`${weekday}曜日`} gutter={-8}>
-              <Center as="span" w="full" h="full">
+            <Tooltip gutter={-8} label={`${weekday}曜日`}>
+              <Center as="span" h="full" w="full">
                 {weekday}
               </Center>
             </Tooltip>
@@ -452,22 +452,22 @@ export const customDayButton: Story = () => {
         <Calendar
           dayProps={{
             color: "blue.500",
-            _weekend: { color: "green.500" },
             _outside: { color: "orange.500" },
+            _weekend: { color: "green.500" },
           }}
         />
 
         <Calendar
           dayProps={{
             sx: { _outside: { pointerEvents: "none" } },
-            component: ({ isOutside, date }) =>
+            component: ({ date, isOutside }) =>
               !isOutside ? <Text as="span">{date.getDate()}</Text> : null,
           }}
         />
 
         <Calendar
           dayProps={{
-            component: ({ isSelected, col, row, date }) => (
+            component: ({ col, date, isSelected, row }) => (
               <Text
                 as="span"
                 color={
@@ -488,7 +488,7 @@ export const customDayButton: Story = () => {
           dayProps={{
             component: ({ date }) => (
               <Tooltip label="No schedule">
-                <Center as="span" w="full" h="full">
+                <Center as="span" h="full" w="full">
                   {date.getDate()}
                 </Center>
               </Tooltip>
@@ -497,14 +497,14 @@ export const customDayButton: Story = () => {
         />
 
         <Calendar
+          colorScheme="primary"
           dateFormat="YYYY年 MMMM"
           locale="ja"
-          colorScheme="primary"
           dayProps={{
             component: ({ date }) => (
               <Popover>
                 <PopoverTrigger>
-                  <Center as="span" w="full" h="full">
+                  <Center as="span" h="full" w="full">
                     {date.getDate()}
                   </Center>
                 </PopoverTrigger>
@@ -515,14 +515,14 @@ export const customDayButton: Story = () => {
                       {date.getMonth() + 1}月{date.getDate()}日
                     </PopoverHeader>
                     <PopoverBody>
-                      <VStack minW="sm" gap="sm">
+                      <VStack gap="sm" minW="sm">
                         <Flex
-                          px="sm"
                           bg="secondary"
                           color="white"
-                          rounded="md"
-                          lineHeight="taller"
                           fontSize="sm"
+                          lineHeight="taller"
+                          px="sm"
+                          rounded="md"
                         >
                           <Text>山田の誕生日</Text>
                         </Flex>
@@ -537,57 +537,57 @@ export const customDayButton: Story = () => {
       </Wrap>
 
       <Calendar
+        type="date"
+        size="full"
         dateFormat="YYYY年 MMMM"
         locale="ja"
-        size="full"
-        type="date"
-        headerProps={{ mb: 2 }}
-        labelProps={{ pointerEvents: "none", icon: { display: "none" } }}
-        tableProps={{
-          border: "1px solid",
-          borderColor: "border",
-          th: { border: "1px solid", borderColor: "border" },
-          td: { border: "1px solid", borderColor: "border" },
-        }}
         dayProps={{
           variant: "ghost",
-          h: "auto",
-          p: 2,
-          _selected: {},
-          _hover: {},
-          _active: {},
-          _ripple: {
-            display: "none",
-          },
-          transitionProperty: "none",
           component: ({ date, isSelected }) => (
             <VStack alignItems="center">
               <Center
                 bg={isSelected ? "primary" : undefined}
-                w={8}
+                color={isSelected ? "white" : undefined}
                 lineHeight={8}
                 rounded="full"
-                color={isSelected ? "white" : undefined}
-                transitionProperty="background"
                 transitionDuration="normal"
+                transitionProperty="background"
+                w={8}
               >
                 {date.getDate()}
               </Center>
 
               <VStack gap="sm">
                 <Flex
-                  px="sm"
                   bg="secondary"
                   color="white"
-                  rounded="md"
-                  lineHeight="taller"
                   fontSize="sm"
+                  lineHeight="taller"
+                  px="sm"
+                  rounded="md"
                 >
                   <Text>山田の誕生日</Text>
                 </Flex>
               </VStack>
             </VStack>
           ),
+          h: "auto",
+          p: 2,
+          transitionProperty: "none",
+          _active: {},
+          _hover: {},
+          _ripple: {
+            display: "none",
+          },
+          _selected: {},
+        }}
+        headerProps={{ mb: 2 }}
+        labelProps={{ icon: { display: "none" }, pointerEvents: "none" }}
+        tableProps={{
+          border: "1px solid",
+          borderColor: "border",
+          td: { border: "1px solid", borderColor: "border" },
+          th: { border: "1px solid", borderColor: "border" },
         }}
       />
     </>

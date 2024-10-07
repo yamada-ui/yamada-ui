@@ -1,29 +1,29 @@
+import type { Dict } from "@yamada-ui/utils"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, isArray } from "@yamada-ui/utils"
-import type { Dict } from "@yamada-ui/utils"
 import { useTooltip } from "./use-chart"
 
 export interface ChartTooltipProps {
-  label?: string
-  dataKey?: string
   payload: Dict[] | undefined
-  valueFormatter?: (value: any) => string
+  dataKey?: string
+  isRadialChart?: boolean
+  label?: string
   labelFormatter?: (label: string) => string
   unit?: string
-  isRadialChart?: boolean
+  valueFormatter?: (value: any) => string
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
   (
     {
-      label,
-      dataKey = "value",
       className,
-      payload = [],
-      valueFormatter,
-      labelFormatter,
-      unit,
+      dataKey = "value",
       isRadialChart,
+      label,
+      labelFormatter,
+      payload = [],
+      unit,
+      valueFormatter,
       ...rest
     },
     ref,
@@ -33,8 +33,8 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     const items = payload.map(
       (
         {
-          color: colorProp,
           name: nameProp,
+          color: colorProp,
           [dataKey]: valueProp,
           payload,
         } = {},
@@ -56,8 +56,8 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
 
         return (
           <ui.div
-            className="ui-chart__tooltip-item"
             key={`tooltip-payload-${index}`}
+            className="ui-chart__tooltip-item"
             __css={styles.tooltipItem}
           >
             <ui.div
@@ -105,3 +105,6 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     )
   },
 )
+
+ChartTooltip.displayName = "ChartTooltip"
+ChartTooltip.__ui__ = "ChartTooltip"

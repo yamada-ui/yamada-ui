@@ -119,7 +119,7 @@ describe("<Markdown />", () => {
         expect(secondLine).toBeInTheDocument()
       })
 
-      test("Nothing should be rendered.", async () => {
+      test("Nothing should be rendered.", () => {
         const content = dedent`
           :::note Status is nothing.
           :::
@@ -153,7 +153,7 @@ describe("<Markdown />", () => {
         ${"yamada"}  | ${"Status is yamada."}
       `(
         "should render as an `Alert` component with status=`$status`.",
-        async ({ status, expected }) => {
+        async ({ expected, status }) => {
           const content = dedent`
             :::note status=${status}
             Status is ${status}.
@@ -178,7 +178,7 @@ describe("<Markdown />", () => {
         ${"loading"} | ${"Status is loading."}
       `(
         "when written in a single line in Markdown, it also should be rendered as an `Alert` component with status=`$status`.",
-        async ({ status, expected }) => {
+        async ({ expected, status }) => {
           const content = dedent`:::note status=${status} Status is ${status}. :::`
           render(<Markdown>{content}</Markdown>)
 
@@ -199,7 +199,7 @@ describe("<Markdown />", () => {
         ${"loading"} | ${":::note status=loading"} | ${"Status is loading."}
       `(
         "should render as a simple text (includes status=`$status`).",
-        async ({ status, expectedFirstLine, expectedSecondLine }) => {
+        async ({ expectedFirstLine, expectedSecondLine, status }) => {
           const content = dedent`
             :::note status=${status}
             Status is ${status}.
@@ -227,7 +227,7 @@ describe("<Markdown />", () => {
         ${"loading"} | ${":::note status=loading Status is loading."}
       `(
         "when written in a single line in Markdown, it also should be rendered as a simple text (includes status=`$status`).",
-        async ({ status, expected }) => {
+        async ({ expected, status }) => {
           const content = dedent`:::note status=${status} Status is ${status}.`
           render(<Markdown>{content}</Markdown>)
 
@@ -350,7 +350,7 @@ describe("<Markdown />", () => {
         expect(thirdLineText).toBeInTheDocument()
       })
 
-      test("if there is no string between `:::note` and `:::`, nothing should be rendered.", async () => {
+      test("if there is no string between `:::note` and `:::`, nothing should be rendered.", () => {
         const content = dedent`
           :::note
           :::

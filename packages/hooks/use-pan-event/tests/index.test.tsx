@@ -1,35 +1,35 @@
-import { drag, render, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
-import { useRef } from "react"
 import type { UsePanEventProps } from "../src"
+import { drag, render, waitFor } from "@yamada-ui/test"
+import { useRef } from "react"
 import { usePanEvent } from "../src"
 
 describe("usePanEvent", () => {
   beforeAll(() => {
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
+        configurable: true,
         get() {
           return this.clientX
         },
-        configurable: true,
       },
       pageY: {
+        configurable: true,
         get() {
           return this.clientY
         },
-        configurable: true,
       },
     })
   })
 
   afterAll(() => {
     Object.defineProperty(MouseEvent.prototype, "pageX", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
     Object.defineProperty(MouseEvent.prototype, "pageY", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
   })
 
@@ -43,14 +43,14 @@ describe("usePanEvent", () => {
   test("should start pan session on pointerdown", async () => {
     const onSessionStart = vi.fn()
 
-    const { user, getByTestId } = render(<Component {...{ onSessionStart }} />)
+    const { getByTestId, user } = render(<Component {...{ onSessionStart }} />)
 
     const el = getByTestId("el")
 
     await user.pointer({
       target: el,
-      keys: "[MouseLeft]",
       coords: { x: 0, y: 0 },
+      keys: "[MouseLeft]",
     })
 
     await waitFor(() =>
@@ -59,10 +59,10 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    expect(onSessionStart.mock.calls[0][1]).toMatchObject({
-      point: { x: 0, y: 0 },
+    expect(onSessionStart.mock.calls[0]?.[1]).toMatchObject({
       delta: { x: 0, y: 0 },
       offset: { x: 0, y: 0 },
+      point: { x: 0, y: 0 },
       velocity: { x: 0, y: 0 },
     })
   })
@@ -70,7 +70,7 @@ describe("usePanEvent", () => {
   test("should call onStart when pan starts", async () => {
     const onStart = vi.fn()
 
-    const { user, getByTestId } = render(<Component {...{ onStart }} />)
+    const { getByTestId, user } = render(<Component {...{ onStart }} />)
 
     const el = getByTestId("el")
 
@@ -82,7 +82,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onStart.mock.calls[0][1]
+    const { point } = onStart.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(10)
@@ -92,7 +92,7 @@ describe("usePanEvent", () => {
   test("should call onMove during pan", async () => {
     const onMove = vi.fn()
 
-    const { user, getByTestId } = render(<Component {...{ onMove }} />)
+    const { getByTestId, user } = render(<Component {...{ onMove }} />)
 
     const el = getByTestId("el")
 
@@ -104,7 +104,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onMove.mock.calls[0][1]
+    const { point } = onMove.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(10)
@@ -114,7 +114,7 @@ describe("usePanEvent", () => {
   test("should call onEnd when pan ends", async () => {
     const onEnd = vi.fn()
 
-    const { user, getByTestId } = render(<Component {...{ onEnd }} />)
+    const { getByTestId, user } = render(<Component {...{ onEnd }} />)
 
     const el = getByTestId("el")
 
@@ -126,7 +126,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onEnd.mock.calls[0][1]
+    const { point } = onEnd.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(100)
   })
@@ -134,7 +134,7 @@ describe("usePanEvent", () => {
   test("should call onSessionEnd when pan session ends", async () => {
     const onSessionEnd = vi.fn()
 
-    const { user, getByTestId } = render(<Component {...{ onSessionEnd }} />)
+    const { getByTestId, user } = render(<Component {...{ onSessionEnd }} />)
 
     const el = getByTestId("el")
 
@@ -146,7 +146,7 @@ describe("usePanEvent", () => {
         expect.any(Object),
       ),
     )
-    const { point } = onSessionEnd.mock.calls[0][1]
+    const { point } = onSessionEnd.mock.calls[0]?.[1] ?? {}
     expect(point.x).toBeGreaterThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(100)
   })

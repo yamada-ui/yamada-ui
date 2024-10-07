@@ -9,13 +9,13 @@ describe("<LoadingProvider />", () => {
 
     expect(document.querySelector(".ui-loading-screen")).not.toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.screen.start()
     })
 
     expect(document.querySelector(".ui-loading-screen")).toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.screen.finish()
     })
 
@@ -35,13 +35,13 @@ describe("<LoadingProvider />", () => {
 
     expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.page.start()
     })
 
     expect(document.querySelector(".ui-loading-page")).toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.page.finish()
     })
 
@@ -63,13 +63,13 @@ describe("<LoadingProvider />", () => {
       document.querySelector(".ui-loading-background"),
     ).not.toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.background.start()
     })
 
     expect(document.querySelector(".ui-loading-background")).toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.background.finish()
     })
 
@@ -93,13 +93,13 @@ describe("<LoadingProvider />", () => {
       document.querySelector(".ui-loading-background"),
     ).not.toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.background.start()
     })
 
     expect(document.querySelector(".ui-loading-background")).toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       result.current.background.force({
         loadingCount: 1,
         message: "Please wait",
@@ -110,7 +110,7 @@ describe("<LoadingProvider />", () => {
       expect(screen.getByText("Please wait")).toBeInTheDocument()
     })
 
-    await act(async () => {
+    act(() => {
       result.current.background.finish()
     })
 

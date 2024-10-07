@@ -1,15 +1,15 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject, FC } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
+import type { ElementType, ReactElement } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
-import { cx, merge, dataAttr, mergeRefs } from "@yamada-ui/utils"
-import type { ElementType, ReactElement } from "react"
+import { cx, dataAttr, merge, mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
@@ -21,17 +21,11 @@ interface ButtonOptions {
    */
   type?: "button" | "reset" | "submit"
   /**
-   * If true, the button is full rounded. Else, it'll be slightly round.
+   * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
    */
-  isRounded?: boolean
-  /**
-   * If `true`, the loading state of the button is represented.
-   *
-   * @default false
-   */
-  isLoading?: boolean
+  disableRipple?: boolean
   /**
    * If `true`, the button is represented as active.
    *
@@ -45,33 +39,39 @@ interface ButtonOptions {
    */
   isDisabled?: boolean
   /**
+   * If `true`, the loading state of the button is represented.
+   *
+   * @default false
+   */
+  isLoading?: boolean
+  /**
+   * If true, the button is full rounded. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
+  /**
    * The icon to display at the left side of the button.
    */
   leftIcon?: ReactElement
   /**
-   * The icon to display at the right side of the button.
-   */
-  rightIcon?: ReactElement
-  /**
    * The icon to display when the button is loading.
    */
-  loadingIcon?: ReactElement | LoadingProps["variant"]
-  /**
-   * The text to display when the button is loading.
-   */
-  loadingText?: string
+  loadingIcon?: LoadingProps["variant"] | ReactElement
   /**
    * The placement of the loading indicator. Accepts `start` or `end`.
    *
    * @default 'start'
    */
-  loadingPlacement?: "start" | "end"
+  loadingPlacement?: "end" | "start"
   /**
-   * If `true`, disable ripple effects when pressing a element.
-   *
-   * @default false
+   * The text to display when the button is loading.
    */
-  disableRipple?: boolean
+  loadingText?: string
+  /**
+   * The icon to display at the right side of the button.
+   */
+  rightIcon?: ReactElement
 }
 
 export interface ButtonProps
@@ -96,19 +96,19 @@ export const Button = forwardRef<ButtonProps, "button">(
       { isProcessSkip: __isProcessSkip, styles: __styles },
     )
     const {
-      className,
       as,
       type,
-      isRounded,
-      isLoading,
+      className,
+      disableRipple,
       isActive,
       isDisabled = group?.isDisabled,
+      isLoading,
+      isRounded,
       leftIcon,
-      rightIcon,
       loadingIcon,
-      loadingText,
       loadingPlacement = "start",
-      disableRipple,
+      loadingText,
+      rightIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -128,17 +128,17 @@ export const Button = forwardRef<ButtonProps, "button">(
           : {}
 
       return {
-        display: "inline-flex",
         alignItems: "center",
-        justifyContent: "center",
-        gap: "fallback(2, 0.5rem)",
         appearance: "none",
-        userSelect: "none",
-        position: "relative",
-        whiteSpace: "nowrap",
-        verticalAlign: "middle",
-        overflow: "hidden",
+        display: "inline-flex",
+        gap: "fallback(2, 0.5rem)",
+        justifyContent: "center",
         outline: "none",
+        overflow: "hidden",
+        position: "relative",
+        userSelect: "none",
+        verticalAlign: "middle",
+        whiteSpace: "nowrap",
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),
@@ -147,9 +147,9 @@ export const Button = forwardRef<ButtonProps, "button">(
     }, [styles, __css, group, isRounded])
 
     const contentProps = {
+      children,
       leftIcon,
       rightIcon,
-      children,
     }
 
     const loadingProps = {
@@ -161,11 +161,11 @@ export const Button = forwardRef<ButtonProps, "button">(
       <ui.button
         ref={mergeRefs(ref, buttonRef)}
         as={as}
-        className={cx("ui-button", className)}
         type={type ?? defaultType}
-        disabled={trulyDisabled}
+        className={cx("ui-button", className)}
         data-active={dataAttr(isActive)}
         data-loading={dataAttr(isLoading)}
+        disabled={trulyDisabled}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}
@@ -213,18 +213,18 @@ const ButtonLoading: FC<ButtonLoadingProps> = ({
 }) => {
   const css = useMemo(
     (): CSSUIObject => ({
-      display: "flex",
       alignItems: "center",
-      position: loadingText ? "relative" : "absolute",
+      display: "flex",
       fontSize: "1em",
       lineHeight: "normal",
+      position: loadingText ? "relative" : "absolute",
     }),
     [loadingText],
   )
 
   const element = useMemo(() => {
     if (typeof loadingIcon === "string") {
-      return <LoadingIcon color="current" variant={loadingIcon} />
+      return <LoadingIcon variant={loadingIcon} color="current" />
     } else {
       return loadingIcon || <LoadingIcon color="current" />
     }
@@ -241,12 +241,12 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<ButtonProps, "leftIcon" | "rightIcon" | "children"> {}
+  extends Pick<ButtonProps, "children" | "leftIcon" | "rightIcon"> {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
+  children,
   leftIcon,
   rightIcon,
-  children,
 }) => {
   return (
     <>
@@ -262,14 +262,14 @@ ButtonContent.__ui__ = "ButtonContent"
 
 interface ButtonIconProps extends HTMLUIProps<"span"> {}
 
-const ButtonIcon: FC<ButtonIconProps> = ({ children, className, ...rest }) => {
+const ButtonIcon: FC<ButtonIconProps> = ({ className, children, ...rest }) => {
   return (
     <ui.span
       className={cx("ui-button__icon", className)}
-      display="inline-flex"
+      aria-hidden
       alignSelf="center"
+      display="inline-flex"
       flexShrink={0}
-      aria-hidden={true}
       {...rest}
     >
       {children}

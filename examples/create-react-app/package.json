@@ -24,18 +24,17 @@
     "@types/node": "^22.7.4",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-react-app": "^7.0.1",
+    "globals": "^15.9.0",
+    "jiti": "^2.0.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.2"
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "build": "craco build",
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
   },
   "browserslist": {
     "production": [

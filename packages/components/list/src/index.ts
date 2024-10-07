@@ -1,2 +1,2 @@
-export { List, ListIcon, ListItem, DiscList, DecimalList } from "./list"
-export type { ListProps, ListIconProps, ListItemProps } from "./list"
+export { DecimalList, DiscList, List, ListIcon, ListItem } from "./list"
+export type { ListIconProps, ListItemProps, ListProps } from "./list"

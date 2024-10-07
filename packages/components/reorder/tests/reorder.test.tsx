@@ -1,34 +1,34 @@
+import type { ReorderGenerateItem } from "../src"
 import { a11y, act, drag, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
-import type { ReorderGenerateItem } from "../src"
 import { Reorder, ReorderItem, ReorderTrigger } from "../src"
 
 describe("<Reorder />", () => {
   beforeAll(() => {
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
+        configurable: true,
         get() {
           return this.clientX
         },
-        configurable: true,
       },
       pageY: {
+        configurable: true,
         get() {
           return this.clientY
         },
-        configurable: true,
       },
     })
   })
 
   afterAll(() => {
     Object.defineProperty(MouseEvent.prototype, "pageX", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
     Object.defineProperty(MouseEvent.prototype, "pageY", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
   })
 

@@ -1,7 +1,7 @@
+import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
 import { FileChartColumnIncreasing as FileChartColumnIncreasingIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
-import type { LucideIconProps } from "../lucide-icon"
 
 /**
  * `FileChartColumnIncreasing` is [Lucide](https://lucide.dev) SVG icon component.

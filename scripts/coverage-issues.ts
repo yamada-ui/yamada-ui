@@ -13,9 +13,9 @@ const API_ENDPOINT = `https://codecov.io/api/v2/${SERVICE_NAME}/${ORGANIZATION_N
 const REPORT_ENDPOINT = `https://app.codecov.io/gh/yamada-ui/yamada-ui/blob/main`
 const REQUEST_OPTIONS: RequestInit = {
   headers: {
-    method: "GET",
-    Authorization: `bearer ${process.env.CODECOV_API_TOKEN}`,
     accept: "application/json",
+    Authorization: `bearer ${process.env.CODECOV_API_TOKEN}`,
+    method: "GET",
   },
 }
 
@@ -23,7 +23,7 @@ const TARGET_COVERAGE = 95
 
 const GITHUB_OPTIONS = { owner: "yamada-ui", repo: "yamada-ui" }
 
-const ISSUE_BODY = (packageName: string, files: Record<string, number[]>) =>
+const ISSUE_BODY = (packageName: string, files: { [key: string]: number[] }) =>
   [
     `package: ${packageName}`,
     "",
@@ -50,36 +50,36 @@ type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
 >["data"][number]
 
-type CoverageReportTotals = {
+interface CoverageReportTotals {
+  branches: number
+  complexity: number
+  complexity_ratio: number
+  complexity_total: number
+  coverage: number
+  diff: any
   files: number
-  lines: number
   hits: number
+  lines: number
+  messages: number
+  methods: number
   misses: number
   partials: number
-  coverage: number
-  branches: number
-  methods: number
-  messages: number
   sessions: number
-  complexity: number
-  complexity_total: number
-  complexity_ratio: number
-  diff: any
 }
 
-type CoverageReportFile = {
+interface CoverageReportFile {
   name: string
-  totals: CoverageReportTotals
   line_coverage: [number, number][]
-}
-
-type CoverageReport = {
   totals: CoverageReportTotals
-  files: CoverageReportFile[]
-  commit_file_url: string
 }
 
-const codecov = async <T extends any>(path: string, options?: RequestInit) => {
+interface CoverageReport {
+  commit_file_url: string
+  files: CoverageReportFile[]
+  totals: CoverageReportTotals
+}
+
+const codecov = async <T>(path: string, options?: RequestInit) => {
   const res = await fetch(`${API_ENDPOINT}/${path}`, {
     ...REQUEST_OPTIONS,
     ...options,
@@ -98,10 +98,10 @@ const getIssues = async () => {
   const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...GITHUB_OPTIONS,
-      state: "open",
       labels: "coverage",
-      per_page: perPage,
       page,
+      per_page: perPage,
+      state: "open",
     })
 
     issues.push(...data)
@@ -123,16 +123,13 @@ const getIssues = async () => {
 }
 
 const getExistPackages = (issues: Issue[]) =>
-  issues.reduce(
-    (prev, issue) => {
-      const packageName = issue.body?.match(/^package: ([^\s]+)/m)?.[1]
+  issues.reduce<{ [key: string]: Issue }>((prev, issue) => {
+    const packageName = issue.body?.match(/^package: ([^\s]+)/m)?.[1]
 
-      if (packageName) prev[packageName] = issue
+    if (packageName) prev[packageName] = issue
 
-      return prev
-    },
-    {} as Record<string, Issue>,
-  )
+    return prev
+  }, {})
 
 const getCoverageReport = async () => {
   const data = await codecov<CoverageReport>(`repos/${REPO_NAME}/report`)
@@ -141,10 +138,10 @@ const getCoverageReport = async () => {
 }
 
 const getTargetFiles = (files: CoverageReportFile[]) => {
-  const targetFiles: Record<string, number[]> = {}
+  const targetFiles: { [key: string]: number[] } = {}
 
-  files.forEach(({ name, totals, line_coverage }) => {
-    const { lines, misses, partials, coverage } = totals
+  files.forEach(({ name, line_coverage, totals }) => {
+    const { coverage, lines, misses, partials } = totals
 
     if (coverage >= TARGET_COVERAGE) return
 
@@ -166,27 +163,26 @@ const getTargetFiles = (files: CoverageReportFile[]) => {
   return targetFiles
 }
 
-const getTargetPackages = (files: Record<string, number[]>) => {
-  return Object.entries(files).reduce(
-    (prev, [path, lines]) => {
-      const resolvedPath = path.replace(/^packages\//, "")
-      const isGroup = /^(components|hooks)\//.test(resolvedPath)
+const getTargetPackages = (files: { [key: string]: number[] }) => {
+  return Object.entries(files).reduce<{
+    [key: string]: { [key: string]: number[] }
+  }>((prev, [path, lines]) => {
+    const resolvedPath = path.replace(/^packages\//, "")
+    const isGroup = /^(components|hooks)\//.test(resolvedPath)
 
-      let packageName = resolvedPath.split("/")[isGroup ? 1 : 0]
+    let packageName = resolvedPath.split("/")[isGroup ? 1 : 0]
 
-      packageName = `@yamada-ui/${packageName}`
+    packageName = `@yamada-ui/${packageName}`
 
-      prev[packageName] = { ...prev[packageName], [path]: lines }
+    prev[packageName] = { ...prev[packageName], [path]: lines }
 
-      return prev
-    },
-    {} as Record<string, Record<string, number[]>>,
-  )
+    return prev
+  }, {})
 }
 
 const createIssues = async (
-  existPackages: Record<string, Issue>,
-  packages: Record<string, Record<string, number[]>>,
+  existPackages: { [key: string]: Issue },
+  packages: { [key: string]: { [key: string]: number[] } },
 ) => {
   for await (const [packageName, files] of Object.entries(packages)) {
     const isExist = Object.keys(existPackages).includes(packageName)
@@ -194,9 +190,9 @@ const createIssues = async (
 
     await recursiveOctokit(async () => {
       if (isExist) {
-        const { number, body: prevBody } = existPackages[packageName]
+        const { body: prevBody, number } = existPackages[packageName] ?? {}
 
-        if (prevBody === body) {
+        if (prevBody === body || !number) {
           console.log("Skipped issue", number, packageName)
 
           return
@@ -204,17 +200,17 @@ const createIssues = async (
 
         await octokit.issues.update({
           ...GITHUB_OPTIONS,
-          issue_number: number,
           body,
+          issue_number: number,
         })
 
         console.log("Updated issue", number, packageName)
       } else {
         await octokit.issues.create({
           ...GITHUB_OPTIONS,
-          title: `Enhance Test Coverage for \`${packageName}\``,
           body,
           labels: ["coverage", "test", "good first issue"],
+          title: `Enhance Test Coverage for \`${packageName}\``,
         })
 
         console.log("Created issue", packageName)

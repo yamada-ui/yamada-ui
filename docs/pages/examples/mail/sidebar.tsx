@@ -1,3 +1,5 @@
+import type { Component, IconProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   Archive,
   CircleAlert,
@@ -10,12 +12,11 @@ import {
   Trash,
   Users,
 } from "@yamada-ui/lucide"
-import type { Component, IconProps } from "@yamada-ui/react"
 import {
   Button,
   Divider,
-  HStack,
   Heading,
+  HStack,
   IconButton,
   Spacer,
   Text,
@@ -23,7 +24,6 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
@@ -48,7 +48,7 @@ interface SidebarProps {
 
 export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
   return (
-    <VStack h="full" gap="0">
+    <VStack gap="0" h="full">
       <Header
         justifyContent={
           isCollapse ? "center" : { base: "flex-start", xl: "center" }
@@ -64,27 +64,27 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
       </Header>
 
       <VStack as="nav" divider={<Divider />} gap="0">
-        <VStack as="ul" p="sm" gap="sm">
+        <VStack as="ul" gap="sm" p="sm">
           {MAIN_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem
               key={label}
               icon={icon}
-              label={label}
-              num={num}
               isCollapse={isCollapse}
               isSelected={label === "Inbox"}
+              label={label}
+              num={num}
             />
           ))}
         </VStack>
 
-        <VStack as="ul" p="sm" gap="sm">
+        <VStack as="ul" gap="sm" p="sm">
           {SUB_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem
               key={label}
               icon={icon}
+              isCollapse={isCollapse}
               label={label}
               num={num}
-              isCollapse={isCollapse}
             />
           ))}
         </VStack>
@@ -98,20 +98,19 @@ Sidebar.displayName = "Sidebar"
 interface SidebarItemProps {
   icon: Component<"svg", IconProps>
   label: string
-  num?: number
   isCollapse?: boolean
   isSelected?: boolean
+  num?: number
 }
 
 const SidebarItem: FC<SidebarItemProps> = memo(
-  ({ icon: Icon, label, num, isCollapse = false, isSelected = false }) => {
+  ({ icon: Icon, isCollapse = false, isSelected = false, label, num }) => {
     const showNum = num && num > 0
 
     return (
       <HStack as="li" justifyContent={isCollapse ? "center" : "flex-start"}>
         {isCollapse ? (
           <Tooltip
-            placement="right"
             label={
               <HStack gap="sm">
                 <Text as="span">{label}</Text>
@@ -123,26 +122,27 @@ const SidebarItem: FC<SidebarItemProps> = memo(
                 ) : null}
               </HStack>
             }
+            placement="right"
           >
             <IconButton
-              variant={isSelected ? "solid" : "ghost"}
               colorScheme={isSelected ? "primary" : "gray"}
+              variant={isSelected ? "solid" : "ghost"}
               icon={<Icon color={isSelected ? "white" : "muted"} />}
             />
           </Tooltip>
         ) : (
           <Button
-            w="full"
-            variant={isSelected ? "solid" : "ghost"}
             colorScheme={isSelected ? "primary" : "gray"}
+            variant={isSelected ? "solid" : "ghost"}
+            justifyContent="flex-start"
             leftIcon={<Icon color={isSelected ? "white" : "muted"} />}
             px="3"
-            justifyContent="flex-start"
+            w="full"
           >
             <Text
               as="span"
-              fontSize="md"
               display={{ base: "inline", xl: "none" }}
+              fontSize="md"
             >
               {label}
             </Text>
@@ -152,9 +152,9 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             {showNum ? (
               <Text
                 as="span"
+                display={{ base: "inline", xl: "none" }}
                 fontSize="sm"
                 fontWeight="semibold"
-                display={{ base: "inline", xl: "none" }}
               >
                 {num}
               </Text>

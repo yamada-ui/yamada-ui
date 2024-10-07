@@ -4,4 +4,4 @@ import { fonts } from "./fonts"
 import { gradients } from "./gradients"
 import { shadows } from "./shadows"
 
-export const tokens = { fonts, colors, gradients, shadows, animations }
+export const tokens = { animations, colors, fonts, gradients, shadows }

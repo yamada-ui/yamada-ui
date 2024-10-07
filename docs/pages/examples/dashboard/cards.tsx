@@ -1,4 +1,12 @@
-import { Users, CreditCard, Activity, DollarSign } from "@yamada-ui/lucide"
+import type {
+  CardProps,
+  Component,
+  GridProps,
+  IconProps,
+  StatProps,
+} from "@yamada-ui/react"
+import type { FC } from "react"
+import { Activity, CreditCard, DollarSign, Users } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -8,44 +16,36 @@ import {
   Spacer,
   Stat,
 } from "@yamada-ui/react"
-import type {
-  CardProps,
-  Component,
-  GridProps,
-  IconProps,
-  StatProps,
-} from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 
 const ITEMS: ItemProps[] = [
   {
-    title: "Total Revenue",
+    helperMessage: "20.1% from last month",
     icon: DollarSign,
     number: "$4,649.758",
     statIcon: "increase",
-    helperMessage: "20.1% from last month",
+    title: "Total Revenue",
   },
   {
-    title: "Subscriptions",
+    helperMessage: "180.1% from last month",
     icon: Users,
     number: "+818",
     statIcon: "increase",
-    helperMessage: "180.1% from last month",
+    title: "Subscriptions",
   },
   {
-    title: "Sales",
+    helperMessage: "19% from last month",
     icon: CreditCard,
     number: "+1,993",
     statIcon: "increase",
-    helperMessage: "19% from last month",
+    title: "Sales",
   },
   {
-    title: "Active Now",
+    helperMessage: "201 since last hour",
     icon: Activity,
     number: "+4,545",
     statIcon: "increase",
-    helperMessage: "201 since last hour",
+    title: "Active Now",
   },
 ]
 
@@ -55,12 +55,12 @@ export const Cards: FC<CardsProps> = memo(({ ...rest }) => {
   return (
     <Grid
       as="section"
+      gap="md"
       templateColumns={{
         base: "repeat(4, 1fr)",
-        lg: "repeat(2, 1fr)",
         sm: "1fr",
+        lg: "repeat(2, 1fr)",
       }}
-      gap="md"
       {...rest}
     >
       {ITEMS.map((props, index) => (
@@ -74,22 +74,22 @@ Cards.displayName = "Cards"
 
 export interface ItemProps
   extends CardProps,
-    Pick<StatProps, "number" | "helperMessage"> {
-  title: string
+    Pick<StatProps, "helperMessage" | "number"> {
   icon: Component<"svg", IconProps>
+  title: string
+  statIcon?: StatProps["icon"]
   iconProps?: IconProps
   statProps?: StatProps
-  statIcon?: StatProps["icon"]
 }
 
 const Item: FC<ItemProps> = memo(
   ({
-    title,
-    icon: Icon,
-    iconProps,
-    number,
     helperMessage,
+    icon: Icon,
+    number,
     statIcon,
+    title,
+    iconProps,
     statProps,
     ...rest
   }) => {
@@ -108,7 +108,7 @@ const Item: FC<ItemProps> = memo(
         <CardBody pt={{ base: "sm", sm: "xs" }}>
           <Stat
             numberProps={{ fontSize: "2xl" }}
-            {...{ number, helperMessage, icon: statIcon }}
+            {...{ helperMessage, icon: statIcon, number }}
             {...statProps}
           />
         </CardBody>

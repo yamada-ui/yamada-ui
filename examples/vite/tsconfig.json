@@ -16,7 +16,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "strictNullChecks": true,
     "strict": true,
     "target": "esnext",
     "allowSyntheticDefaultImports": true,

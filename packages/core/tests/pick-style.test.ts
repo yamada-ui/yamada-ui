@@ -1,6 +1,6 @@
+import type { ComponentMultiStyle, ComponentStyle, StyledTheme } from "../src"
 import { runIfFunc } from "@yamada-ui/utils"
 import { pickStyle } from "../src"
-import type { ComponentMultiStyle, ComponentStyle, StyledTheme } from "../src"
 
 const props = { theme: {} as StyledTheme }
 
@@ -9,10 +9,10 @@ describe("pickStyle", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "primary",
-          fontSize: "sm",
           bg: { base: "warning", lg: "danger" },
           borderColor: "border",
+          color: "primary",
+          fontSize: "sm",
         },
         inner: { p: "md" },
       },
@@ -24,10 +24,10 @@ describe("pickStyle", () => {
     }
     const expected: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
+        color: "primary",
+        fontSize: "sm",
       },
       variants: {
         outline: {
@@ -43,10 +43,10 @@ describe("pickStyle", () => {
     const target: ComponentMultiStyle = {
       baseStyle: () => ({
         container: {
-          color: "primary",
-          fontSize: "sm",
           bg: { base: "warning", lg: "danger" },
           borderColor: "border",
+          color: "primary",
+          fontSize: "sm",
         },
         inner: { p: "md" },
       }),
@@ -58,10 +58,10 @@ describe("pickStyle", () => {
     }
     const expected: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
+        color: "primary",
+        fontSize: "sm",
       },
       variants: {
         outline: {
@@ -83,10 +83,10 @@ describe("pickStyle", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "primary",
-          fontSize: "sm",
           bg: { base: "warning", lg: "danger" },
           borderColor: "border",
+          color: "primary",
+          fontSize: "sm",
         },
         inner: { p: "md" },
       },
@@ -96,10 +96,10 @@ describe("pickStyle", () => {
     }
     const expected: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
+        color: "primary",
+        fontSize: "sm",
       },
     }
 

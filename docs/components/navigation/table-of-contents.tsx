@@ -1,28 +1,28 @@
+import type { StackProps } from "@yamada-ui/react"
+import type { DocumentContent } from "mdx"
+import type { RefObject } from "react"
 import { List as ListIcon } from "@yamada-ui/lucide"
 import {
   Box,
+  dataAttr,
+  forwardRef,
   HStack,
   List,
   ListItem,
-  Text,
-  VStack,
-  dataAttr,
-  forwardRef,
   mergeRefs,
+  Text,
   useMotionValueEvent,
   useScroll,
   useToken,
   useUpdateEffect,
+  VStack,
 } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
-import type { RefObject } from "react"
-import { createRef, memo, useRef, useState } from "react"
-import scrollIntoView from "scroll-into-view-if-needed"
 import { ScrollShadow } from "components/data-display"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts"
 import { useEventListener } from "hooks"
-import type { DocumentContent } from "mdx"
+import { createRef, memo, useRef, useState } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
 
 export interface TableOfContentsProps extends StackProps {
   contents: DocumentContent[]
@@ -36,7 +36,7 @@ export const TableOfContents = memo(
     const pl = useToken("spaces", "4")
     const { scrollY } = useScroll()
     const prevValue = useRef<number>(0)
-    const directionRef = useRef<"up" | "down">("down")
+    const directionRef = useRef<"down" | "up">("down")
     const { t } = useI18n()
 
     useMotionValueEvent(scrollY, "change", (value) => {
@@ -80,10 +80,10 @@ export const TableOfContents = memo(
               el.scrollTop = top - 16
             }
           }),
-        scrollMode: "if-needed",
         block: "nearest",
-        inline: "nearest",
         boundary: containerRef.current,
+        inline: "nearest",
+        scrollMode: "if-needed",
       })
     }, [selectedId])
 
@@ -91,26 +91,26 @@ export const TableOfContents = memo(
       <VStack
         ref={mergeRefs(ref, containerRef)}
         as="nav"
+        maxH="calc(100dvh - 4rem)"
         position="sticky"
         top="4rem"
         w="sm"
-        maxH="calc(100dvh - 4rem)"
         {...rest}
       >
         <VStack
-          pt="lg"
-          pb="16"
-          pl="md"
           overflowY="auto"
           overscrollBehavior="contain"
+          pb="16"
+          pl="md"
+          pt="lg"
         >
           <HStack gap="sm">
             <ListIcon fontSize="2xl" />
             <Text>{t("component.table-of-contents.title")}</Text>
           </HStack>
 
-          <List gap="0" fontSize="sm" color="muted" ml="sm">
-            {contents.map(({ lv, title, id }) => {
+          <List color="muted" fontSize="sm" gap="0" ml="sm">
+            {contents.map(({ id, lv, title }) => {
               const isSelected = selectedId == id
               const ref = createRef<HTMLLIElement>()
 
@@ -120,40 +120,36 @@ export const TableOfContents = memo(
                 <ListItem key={id} ref={ref}>
                   <Box
                     as="a"
-                    display="block"
                     href={`#${id}`}
+                    display="block"
                     outline="0"
-                    _hover={{
-                      color: isSelected ? undefined : ["black", "white"],
-                    }}
+                    transitionDuration="normal"
+                    transitionProperty="colors"
                     _focusVisible={{
                       boxShadow: "inline",
                     }}
-                    transitionProperty="colors"
-                    transitionDuration="normal"
+                    _hover={{
+                      color: isSelected ? undefined : ["black", "white"],
+                    }}
                   >
                     <Box
                       data-selected={dataAttr(isSelected)}
-                      py="sm"
+                      borderLeftColor={isSelected ? `primary.400` : "border"}
+                      borderLeftWidth="1px"
                       pl={`calc(${lv - 1} * ${pl})`}
                       position="relative"
-                      zIndex="-1"
+                      py="sm"
                       userSelect="none"
-                      borderLeftWidth="1px"
-                      borderLeftColor={isSelected ? `primary.400` : "border"}
-                      _selected={{
-                        color: [`black`, "white"],
-                        bg: [`primary.300`, `primary.300`],
-                      }}
+                      zIndex="-1"
                       _before={{
-                        content: "''",
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
                         bg: "white",
+                        bottom: 0,
+                        content: "''",
+                        left: 0,
                         opacity: 0.8,
+                        position: "absolute",
+                        right: 0,
+                        top: 0,
                       }}
                       _dark={{
                         _before: {
@@ -161,11 +157,15 @@ export const TableOfContents = memo(
                           opacity: 0.86,
                         },
                       }}
+                      _selected={{
+                        bg: [`primary.300`, `primary.300`],
+                        color: [`black`, "white"],
+                      }}
                     >
                       <TextWithCode
+                        isTruncated
                         position="relative"
                         zIndex="yamcha"
-                        isTruncated
                       >
                         {title}
                       </TextWithCode>

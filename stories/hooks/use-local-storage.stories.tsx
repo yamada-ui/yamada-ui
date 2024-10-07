@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react"
-import { Button, Wrap, useLocalStorage } from "@yamada-ui/react"
+import { Button, useLocalStorage, Wrap } from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useLocalStorage",

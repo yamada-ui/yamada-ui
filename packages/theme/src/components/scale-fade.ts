@@ -5,7 +5,7 @@ export const ScaleFade: ComponentStyle<"ScaleFade"> = {
     w: "100%",
   },
   defaultProps: {
-    scale: 0.95,
     reverse: true,
+    scale: 0.95,
   },
 }

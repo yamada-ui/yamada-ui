@@ -1,20 +1,20 @@
+import type { AppProps } from "next/app"
+import type { FC } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
-  UIProvider,
   createColorModeManager,
   createThemeSchemeManager,
+  UIProvider,
 } from "@yamada-ui/react"
+import { I18nProvider } from "contexts"
 import dayjs from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
-import type { AppProps } from "next/app"
 import { Inter } from "next/font/google"
 import Head from "next/head"
-import type { FC } from "react"
-import { I18nProvider } from "contexts"
-import { theme, config } from "theme"
+import { config, theme } from "theme"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -23,17 +23,17 @@ dayjs.tz.setDefault("Asia/Tokyo")
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
       refetchOnWindowFocus: false,
+      retry: false,
     },
   },
 })
 
 const inter = Inter({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin", "latin-ext"],
   style: "normal",
   display: "block",
+  subsets: ["latin", "latin-ext"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 })
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
@@ -45,16 +45,16 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <Head>
         <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Yamada UI</title>
-        <link rel="icon" href="/favicon.svg" />
+        <link href="/favicon.svg" rel="icon" />
       </Head>
 
       <QueryClientProvider client={queryClient}>
         <UIProvider
-          theme={theme}
-          config={config}
           colorModeManager={colorModeManager}
+          config={config}
+          theme={theme}
           themeSchemeManager={themeSchemeManager}
         >
           <I18nProvider>

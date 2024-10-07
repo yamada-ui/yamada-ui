@@ -14,7 +14,7 @@ export interface UseMediaQueryOptions {
  */
 export const useMediaQuery = (
   query: string | string[],
-  { ssr = true, fallback }: UseMediaQueryOptions = {},
+  { fallback, ssr = true }: UseMediaQueryOptions = {},
 ): boolean[] => {
   const { getWindow } = useEnvironment()
 
@@ -26,10 +26,10 @@ export const useMediaQuery = (
 
   const [value, setValue] = useState(() => {
     return queries.map((media, index) => ({
-      media,
       matches: ssr
         ? !!fallbackValues[index]
         : !!getWindow()?.matchMedia(media).matches,
+      media,
     }))
   })
 
@@ -40,8 +40,8 @@ export const useMediaQuery = (
 
     setValue(
       queries.map((media) => ({
-        media,
         matches: win.matchMedia(media).matches,
+        media,
       })),
     )
 

@@ -1,10 +1,10 @@
 import { renderHook } from "@yamada-ui/test"
 import { useEyeDropper } from "../src"
 
-type WindowWithEyeDropper = Window &
-  typeof globalThis & {
-    EyeDropper: any
-  }
+type WindowWithEyeDropper = {
+  EyeDropper: any
+} & typeof globalThis &
+  Window
 
 describe("useEyeDropper", () => {
   const defaultEyeDropper =
@@ -12,11 +12,11 @@ describe("useEyeDropper", () => {
 
   beforeEach(() => {
     Object.defineProperty(window, "EyeDropper", {
+      configurable: true,
       value: vi.fn().mockImplementation(() => ({
         open: vi.fn().mockResolvedValue({ sRGBHex: "#FFFFFF" }),
       })),
       writable: true,
-      configurable: true,
     })
   })
 

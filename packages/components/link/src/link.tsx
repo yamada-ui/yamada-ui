@@ -1,8 +1,8 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -34,8 +34,8 @@ export const Link = forwardRef<LinkProps, "a">((props, ref) => {
     <ui.a
       ref={ref}
       target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener" : undefined}
       className={cx("ui-link", className)}
+      rel={isExternal ? "noopener" : undefined}
       __css={css}
       {...rest}
     />

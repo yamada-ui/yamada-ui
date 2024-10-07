@@ -1,26 +1,26 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  Plus,
-  Minus,
-  Check,
   ArrowRight,
+  Check,
   Mail,
-  Sun,
+  Minus,
   Moon,
+  Plus,
+  Sun,
 } from "@yamada-ui/lucide"
 import {
-  Wrap,
   Button,
-  IconButton,
   ButtonGroup,
   CloseButton,
+  IconButton,
+  Wrap,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Button>
 
 const meta: Meta<typeof Button> = {
-  title: "Components / Forms / Button",
   component: Button,
+  title: "Components / Forms / Button",
 }
 
 export default meta
@@ -84,103 +84,103 @@ export const solid: Story = () => {
 export const outline: Story = () => {
   return (
     <Wrap gap="md">
-      <Button variant="outline" colorScheme="primary">
+      <Button colorScheme="primary" variant="outline">
         Primary
       </Button>
 
-      <Button variant="outline" colorScheme="secondary">
+      <Button colorScheme="secondary" variant="outline">
         Secondary
       </Button>
 
-      <Button variant="outline" colorScheme="success">
+      <Button colorScheme="success" variant="outline">
         Success
       </Button>
 
-      <Button variant="outline" colorScheme="warning">
+      <Button colorScheme="warning" variant="outline">
         Warning
       </Button>
 
-      <Button variant="outline" colorScheme="danger">
+      <Button colorScheme="danger" variant="outline">
         Danger
       </Button>
 
-      <Button variant="outline" colorScheme="link">
+      <Button colorScheme="link" variant="outline">
         Link
       </Button>
 
-      <Button variant="outline" colorScheme="gray">
+      <Button colorScheme="gray" variant="outline">
         Gray
       </Button>
 
-      <Button variant="outline" colorScheme="neutral">
+      <Button colorScheme="neutral" variant="outline">
         Neutral
       </Button>
 
-      <Button variant="outline" colorScheme="red">
+      <Button colorScheme="red" variant="outline">
         Red
       </Button>
 
-      <Button variant="outline" colorScheme="rose">
+      <Button colorScheme="rose" variant="outline">
         Rose
       </Button>
 
-      <Button variant="outline" colorScheme="pink">
+      <Button colorScheme="pink" variant="outline">
         Pink
       </Button>
 
-      <Button variant="outline" colorScheme="orange">
+      <Button colorScheme="orange" variant="outline">
         Orange
       </Button>
 
-      <Button variant="outline" colorScheme="amber">
+      <Button colorScheme="amber" variant="outline">
         Amber
       </Button>
 
-      <Button variant="outline" colorScheme="yellow">
+      <Button colorScheme="yellow" variant="outline">
         Yellow
       </Button>
 
-      <Button variant="outline" colorScheme="lime">
+      <Button colorScheme="lime" variant="outline">
         Lime
       </Button>
 
-      <Button variant="outline" colorScheme="green">
+      <Button colorScheme="green" variant="outline">
         Green
       </Button>
 
-      <Button variant="outline" colorScheme="emerald">
+      <Button colorScheme="emerald" variant="outline">
         Emerald
       </Button>
 
-      <Button variant="outline" colorScheme="teal">
+      <Button colorScheme="teal" variant="outline">
         Teal
       </Button>
 
-      <Button variant="outline" colorScheme="cyan">
+      <Button colorScheme="cyan" variant="outline">
         Cyan
       </Button>
 
-      <Button variant="outline" colorScheme="sky">
+      <Button colorScheme="sky" variant="outline">
         Sky
       </Button>
 
-      <Button variant="outline" colorScheme="blue">
+      <Button colorScheme="blue" variant="outline">
         Blue
       </Button>
 
-      <Button variant="outline" colorScheme="indigo">
+      <Button colorScheme="indigo" variant="outline">
         Indigo
       </Button>
 
-      <Button variant="outline" colorScheme="violet">
+      <Button colorScheme="violet" variant="outline">
         Violet
       </Button>
 
-      <Button variant="outline" colorScheme="purple">
+      <Button colorScheme="purple" variant="outline">
         Purple
       </Button>
 
-      <Button variant="outline" colorScheme="fuchsia">
+      <Button colorScheme="fuchsia" variant="outline">
         Fuchsia
       </Button>
     </Wrap>
@@ -190,103 +190,103 @@ export const outline: Story = () => {
 export const ghost: Story = () => {
   return (
     <Wrap gap="md">
-      <Button variant="ghost" colorScheme="primary">
+      <Button colorScheme="primary" variant="ghost">
         Primary
       </Button>
 
-      <Button variant="ghost" colorScheme="secondary">
+      <Button colorScheme="secondary" variant="ghost">
         Secondary
       </Button>
 
-      <Button variant="ghost" colorScheme="success">
+      <Button colorScheme="success" variant="ghost">
         Success
       </Button>
 
-      <Button variant="ghost" colorScheme="warning">
+      <Button colorScheme="warning" variant="ghost">
         Warning
       </Button>
 
-      <Button variant="ghost" colorScheme="danger">
+      <Button colorScheme="danger" variant="ghost">
         Danger
       </Button>
 
-      <Button variant="ghost" colorScheme="link">
+      <Button colorScheme="link" variant="ghost">
         Link
       </Button>
 
-      <Button variant="ghost" colorScheme="gray">
+      <Button colorScheme="gray" variant="ghost">
         Gray
       </Button>
 
-      <Button variant="ghost" colorScheme="neutral">
+      <Button colorScheme="neutral" variant="ghost">
         Neutral
       </Button>
 
-      <Button variant="ghost" colorScheme="red">
+      <Button colorScheme="red" variant="ghost">
         Red
       </Button>
 
-      <Button variant="ghost" colorScheme="rose">
+      <Button colorScheme="rose" variant="ghost">
         Rose
       </Button>
 
-      <Button variant="ghost" colorScheme="pink">
+      <Button colorScheme="pink" variant="ghost">
         Pink
       </Button>
 
-      <Button variant="ghost" colorScheme="orange">
+      <Button colorScheme="orange" variant="ghost">
         Orange
       </Button>
 
-      <Button variant="ghost" colorScheme="amber">
+      <Button colorScheme="amber" variant="ghost">
         Amber
       </Button>
 
-      <Button variant="ghost" colorScheme="yellow">
+      <Button colorScheme="yellow" variant="ghost">
         Yellow
       </Button>
 
-      <Button variant="ghost" colorScheme="lime">
+      <Button colorScheme="lime" variant="ghost">
         Lime
       </Button>
 
-      <Button variant="ghost" colorScheme="green">
+      <Button colorScheme="green" variant="ghost">
         Green
       </Button>
 
-      <Button variant="ghost" colorScheme="emerald">
+      <Button colorScheme="emerald" variant="ghost">
         Emerald
       </Button>
 
-      <Button variant="ghost" colorScheme="teal">
+      <Button colorScheme="teal" variant="ghost">
         Teal
       </Button>
 
-      <Button variant="ghost" colorScheme="cyan">
+      <Button colorScheme="cyan" variant="ghost">
         Cyan
       </Button>
 
-      <Button variant="ghost" colorScheme="sky">
+      <Button colorScheme="sky" variant="ghost">
         Sky
       </Button>
 
-      <Button variant="ghost" colorScheme="blue">
+      <Button colorScheme="blue" variant="ghost">
         Blue
       </Button>
 
-      <Button variant="ghost" colorScheme="indigo">
+      <Button colorScheme="indigo" variant="ghost">
         Indigo
       </Button>
 
-      <Button variant="ghost" colorScheme="violet">
+      <Button colorScheme="violet" variant="ghost">
         Violet
       </Button>
 
-      <Button variant="ghost" colorScheme="purple">
+      <Button colorScheme="purple" variant="ghost">
         Purple
       </Button>
 
-      <Button variant="ghost" colorScheme="fuchsia">
+      <Button colorScheme="fuchsia" variant="ghost">
         Fuchsia
       </Button>
     </Wrap>
@@ -396,28 +396,28 @@ export const iconButton: Story = () => {
     <Wrap gap="md">
       <IconButton
         colorScheme="primary"
-        icon={<Plus fontSize="2xl" />}
         aria-label="Plus"
+        icon={<Plus fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="secondary"
-        icon={<Minus fontSize="2xl" />}
         aria-label="Minus"
+        icon={<Minus fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="warning"
         size="lg"
-        icon={<Sun fontSize="2xl" />}
         aria-label="Light"
+        icon={<Sun fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
-        icon={<Moon fontSize="2xl" />}
         aria-label="Dark"
+        icon={<Moon fontSize="2xl" />}
       />
     </Wrap>
   )
@@ -438,33 +438,33 @@ export const closeButton: Story = () => {
 export const withLoading: Story = () => {
   return (
     <Wrap gap="md">
-      <Button isLoading colorScheme="primary">
+      <Button colorScheme="primary" isLoading>
         Button
       </Button>
 
-      <Button isLoading colorScheme="secondary" loadingIcon="dots">
+      <Button colorScheme="secondary" isLoading loadingIcon="dots">
         Button
       </Button>
 
-      <Button isLoading colorScheme="warning" variant="outline">
+      <Button colorScheme="warning" variant="outline" isLoading>
         Button
       </Button>
 
-      <Button isLoading colorScheme="danger" variant="ghost">
+      <Button colorScheme="danger" variant="ghost" isLoading>
         Button
       </Button>
 
-      <Button isLoading loadingText="Loading..." colorScheme="primary">
+      <Button colorScheme="primary" isLoading loadingText="Loading...">
         Button
       </Button>
 
       <Button
-        isLoading
-        loadingText="Loading..."
-        loadingPlacement="end"
-        loadingIcon="grid"
         colorScheme="secondary"
         variant="outline"
+        isLoading
+        loadingIcon="grid"
+        loadingPlacement="end"
+        loadingText="Loading..."
       >
         Button
       </Button>
@@ -475,9 +475,9 @@ export const withLoading: Story = () => {
 export const buttonGroup: Story = () => {
   return (
     <>
-      <ButtonGroup isAttached variant="outline">
+      <ButtonGroup variant="outline" isAttached>
         <Button>Button</Button>
-        <IconButton icon={<Plus />} aria-label="Add" />
+        <IconButton aria-label="Add" icon={<Plus />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">
@@ -486,7 +486,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup isAttached isDisabled variant="outline">
+      <ButtonGroup variant="outline" isAttached isDisabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -498,7 +498,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup direction="column" isAttached variant="outline">
+      <ButtonGroup variant="outline" direction="column" isAttached>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

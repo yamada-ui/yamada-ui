@@ -1,13 +1,13 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { MotionPanInfo } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
+import type { DrawerProps } from "./drawer"
 import { ui } from "@yamada-ui/core"
 import { motionForwardRef } from "@yamada-ui/motion"
-import type { MotionPanInfo } from "@yamada-ui/motion"
 import { Slide } from "@yamada-ui/transitions"
 import { useValue } from "@yamada-ui/use-value"
-import type { Merge } from "@yamada-ui/utils"
-import { getValidChildren, findChildren, cx, isArray } from "@yamada-ui/utils"
+import { cx, findChildren, getValidChildren, isArray } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
-import type { DrawerProps } from "./drawer"
 import { DrawerCloseButton } from "./drawer-close-button"
 import { DrawerDragBar } from "./drawer-drag-bar"
 import { useDrawer, useModal } from "./modal-context"
@@ -18,11 +18,11 @@ export interface DrawerContentProps
     Required<
       Pick<
         DrawerProps,
-        | "placement"
         | "dragConstraints"
         | "dragElastic"
         | "dragOffset"
         | "dragVelocity"
+        | "placement"
         | "placement"
       >
     >
@@ -33,20 +33,20 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     {
       className,
       children,
-      placement: _placement,
-      withCloseButton,
-      withDragBar,
       closeOnDrag,
       dragConstraints,
       dragElastic,
       dragOffset,
       dragVelocity,
+      placement: _placement,
+      withCloseButton,
+      withDragBar,
       blankForDragProps,
       ...rest
     },
     ref,
   ) => {
-    const { isOpen, onClose, duration } = useModal()
+    const { duration, isOpen, onClose } = useModal()
     const styles = useDrawer()
     const placement = useValue(_placement)
 
@@ -75,7 +75,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
 
       switch (placement) {
         case "top":
-          position = { top: "calc(-100dvh + 1px)", left: 0, right: 0 }
+          position = { left: 0, right: 0, top: "calc(-100dvh + 1px)" }
           break
 
         case "bottom":
@@ -83,11 +83,11 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
           break
 
         case "left":
-          position = { left: "calc(-100% + 1px)", top: 0, bottom: 0 }
+          position = { bottom: 0, left: "calc(-100% + 1px)", top: 0 }
           break
 
         case "right":
-          position = { right: "calc(-100% + 1px)", top: 0, bottom: 0 }
+          position = { bottom: 0, right: "calc(-100% + 1px)", top: 0 }
           break
       }
 
@@ -95,12 +95,12 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
 
       return {
         _after: {
+          bg: lightBg,
           content: '""',
           display: "block",
-          w: "100%",
           h: "100dvh",
-          bg: lightBg,
           position: "absolute",
+          w: "100%",
           ...position,
           ...blankForDragProps,
         },
@@ -181,18 +181,18 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
       <Slide
         ref={ref}
         className={cx("ui-drawer", className)}
-        isOpen={isOpen}
-        placement={placement}
-        duration={duration}
         drag={closeOnDrag ? getDragDirection() : false}
         dragConstraints={getDragDirectionRestriction(dragConstraints)}
         dragElastic={getDragDirectionRestriction(dragElastic)}
-        dragSnapToOrigin
         dragMomentum={false}
+        dragSnapToOrigin
+        duration={duration}
+        isOpen={isOpen}
+        placement={placement}
+        tabIndex={-1}
         onDragEnd={(_, info) => {
           if (isCloseByDragInfo(info)) onClose?.()
         }}
-        tabIndex={-1}
         __css={css}
         {...rest}
       >

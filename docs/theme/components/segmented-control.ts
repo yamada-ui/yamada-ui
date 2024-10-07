@@ -1,36 +1,36 @@
-import { isGray, isAccessible } from "@yamada-ui/react"
 import type { ComponentMultiStyle } from "@yamada-ui/react"
+import { isAccessible, isGray } from "@yamada-ui/react"
 
 export const SegmentedControl: ComponentMultiStyle = {
   variants: {
     simple: ({ colorScheme: c = "gray" }) => ({
-      container: {
-        p: "0",
-        bg: "inherit",
-      },
-      cursor: {
-        boxShadow: "inherit",
-        bg: isGray(c)
-          ? [`${c}.50`, `${c}.700`]
-          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-        rounded: "full",
-      },
       button: {
-        rounded: "full",
         color: "muted",
         fontWeight: "semibold",
-        px: "6",
         outline: 0,
+        px: "6",
+        rounded: "full",
+        _checked: {
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+        },
         _focusVisible: {
           boxShadow: "inline",
         },
         _hover: {
-          opacity: 1,
           color: [`black`, `white`],
+          opacity: 1,
         },
-        _checked: {
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-        },
+      },
+      container: {
+        bg: "inherit",
+        p: "0",
+      },
+      cursor: {
+        bg: isGray(c)
+          ? [`${c}.50`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        boxShadow: "inherit",
+        rounded: "full",
       },
     }),
   },

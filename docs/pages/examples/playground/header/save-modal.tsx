@@ -1,4 +1,7 @@
+import type { ModalProps } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
 import {
+  assignRef,
   Button,
   FormControl,
   Input,
@@ -7,25 +10,22 @@ import {
   ModalFooter,
   ModalHeader,
   Text,
-  assignRef,
   useDisclosure,
 } from "@yamada-ui/react"
-import type { ModalProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC, MutableRefObject } from "react"
 
 export interface SaveModalProps extends Omit<ModalProps, "isOpen" | "onClose"> {
   onOpenRef: MutableRefObject<() => void>
 }
 
 export const SaveModal: FC<SaveModalProps> = memo(({ onOpenRef, ...rest }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   assignRef(onOpenRef, onOpen)
 
   return (
     <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
-      <ModalHeader flexDirection="column" gap="sm" alignItems="flex-start">
+      <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
         <Text as="h3">Save preset</Text>
 
         <Text color="muted" fontSize="md" fontWeight="normal">

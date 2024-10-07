@@ -4,46 +4,46 @@ import { Grid, GridItem } from "@yamada-ui/react"
 type Story = StoryFn<typeof Grid>
 
 const meta: Meta<typeof Grid> = {
-  title: "Components / Layouts / Grid",
   component: Grid,
+  title: "Components / Layouts / Grid",
 }
 
 export default meta
 
 export const templateColumns: Story = () => {
   return (
-    <Grid w="full" templateColumns="repeat(4, 1fr)" gap="md">
+    <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
       <GridItem
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem p="md" rounded="4" bg="danger" color="white" textAlign="center">
+      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
         GridItem
       </GridItem>
     </Grid>
@@ -52,38 +52,38 @@ export const templateColumns: Story = () => {
 
 export const templateRows: Story = () => {
   return (
-    <Grid w="full" templateRows="repeat(4, 1fr)" gap="md">
+    <Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
       <GridItem
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem p="md" rounded="4" bg="danger" color="white" textAlign="center">
+      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
         GridItem
       </GridItem>
     </Grid>
@@ -93,110 +93,110 @@ export const templateRows: Story = () => {
 export const templateColumnsAndRows: Story = () => {
   return (
     <Grid
-      w="full"
+      gap="md"
       templateColumns="repeat(3, 1fr)"
       templateRows="repeat(4, 1fr)"
-      gap="md"
+      w="full"
     >
       <GridItem
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem p="md" rounded="4" bg="danger" color="white" textAlign="center">
+      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem p="md" rounded="4" bg="danger" color="white" textAlign="center">
+      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
+        p="md"
+        rounded="4"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem p="md" rounded="4" bg="danger" color="white" textAlign="center">
+      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
         GridItem
       </GridItem>
     </Grid>
@@ -206,106 +206,106 @@ export const templateColumnsAndRows: Story = () => {
 export const templateAreas: Story = () => {
   return (
     <Grid
-      w="full"
+      gap="md"
       templateAreas={`
         "one one two three"
         "four five two six"
         "four seven seven eight"
       `}
-      gap="md"
+      w="full"
     >
       <GridItem
+        alignItems="center"
         area="one"
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="two"
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="three"
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="four"
-        p="md"
-        rounded="4"
         bg="danger"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="five"
-        p="md"
-        rounded="4"
         bg="primary"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="six"
-        p="md"
-        rounded="4"
         bg="secondary"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="seven"
-        p="md"
-        rounded="4"
         bg="warning"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
+        alignItems="center"
         area="eight"
-        p="md"
-        rounded="4"
         bg="danger"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
@@ -316,60 +316,60 @@ export const templateAreas: Story = () => {
 export const customStartAndEnd: Story = () => {
   return (
     <Grid
-      w="full"
+      gap="md"
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(3, 1fr)"
-      gap="md"
+      w="full"
     >
       <GridItem
-        colSpan={2}
-        p="md"
-        rounded="4"
+        alignItems="center"
         bg="primary"
         color="white"
+        colSpan={2}
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        colSpan={2}
-        rowSpan={3}
-        p="md"
-        rounded="4"
+        alignItems="center"
         bg="secondary"
         color="white"
+        colSpan={2}
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
+        rowSpan={3}
       >
         GridItem
       </GridItem>
 
       <GridItem
-        rowStart={2}
-        rowEnd={4}
-        p="md"
-        rounded="4"
+        alignItems="center"
         bg="warning"
         color="white"
         justifyContent="center"
-        alignItems="center"
+        p="md"
+        rounded="4"
+        rowEnd={4}
+        rowStart={2}
       >
         GridItem
       </GridItem>
 
       <GridItem
-        colStart={2}
+        alignItems="center"
+        bg="danger"
         colEnd={3}
-        rowStart={2}
-        rowEnd={4}
+        color="white"
+        colStart={2}
+        justifyContent="center"
         p="md"
         rounded="4"
-        bg="danger"
-        color="white"
-        justifyContent="center"
-        alignItems="center"
+        rowEnd={4}
+        rowStart={2}
       >
         GridItem
       </GridItem>

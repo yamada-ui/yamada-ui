@@ -1,36 +1,27 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
 import type {
+  HTMLMotionProps,
   MotionConfigProps,
   Variants,
-  HTMLMotionProps,
 } from "framer-motion"
 import type { FC, ReactNode, RefObject } from "react"
 import type { HTMLUIProps } from "./components"
 import type {
-  UIStyle,
-  AnimationStyle,
-  ThemeProps,
   AnalyzeBreakpointsReturn,
-  CSSUIProps,
+  AnimationStyle,
   CSSUIObject,
+  CSSUIProps,
+  ThemeProps,
   UIMultiStyle,
+  UIStyle,
 } from "./css"
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
 
-export type BreakpointDirection = "up" | "down"
+export type BreakpointDirection = "down" | "up"
 
 export interface BreakpointOptions {
-  /**
-   * The `breakpoint` direction controls the responsive design approach.
-   *
-   * - `up`: mobile-first using `min-width`.
-   * - `down`: desktop-first using `max-width`.
-   *
-   * @default "down"
-   */
-  direction?: BreakpointDirection
   /**
    * The base value for the `breakpoint` when `direction` is "down".
    * This is treated as the largest `breakpoint`.
@@ -47,37 +38,46 @@ export interface BreakpointOptions {
    */
   containerRef?: RefObject<HTMLElement>
   /**
+   * The `breakpoint` direction controls the responsive design approach.
+   *
+   * - `up`: mobile-first using `min-width`.
+   * - `down`: desktop-first using `max-width`.
+   *
+   * @default "down"
+   */
+  direction?: BreakpointDirection
+  /**
    * The `breakpoint` custom identifier.
    *
    * @external
    *
    * @default "@media screen"
    */
-  identifier?: "@media screen" | `@container` | `@container ${string}`
+  identifier?: "@media screen" | `@container ${string}` | `@container`
 }
 
 export type LoadingVariant =
-  | "oval"
-  | "grid"
   | "audio"
+  | "circles"
   | "dots"
+  | "grid"
+  | "oval"
   | "puff"
   | "rings"
-  | "circles"
 
 export type NoticePlacement =
-  | "top"
-  | "top-left"
-  | "top-right"
   | "bottom"
   | "bottom-left"
   | "bottom-right"
+  | "top"
+  | "top-left"
+  | "top-right"
 
 export type AlertStatuses = {
-  [key in AlertStatus]?: { icon?: FC; colorScheme?: Theme["colorSchemes"] }
+  [key in AlertStatus]?: { colorScheme?: Theme["colorSchemes"]; icon?: FC }
 }
 
-export type AlertStatus = "info" | "success" | "warning" | "error" | "loading"
+export type AlertStatus = "error" | "info" | "loading" | "success" | "warning"
 
 export interface NoticeComponentProps extends NoticeConfigOptions {
   onClose: () => void
@@ -85,11 +85,23 @@ export interface NoticeComponentProps extends NoticeConfigOptions {
 
 export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
   /**
-   * The placement of the notice.
-   *
-   * @default 'top'
+   * The custom style to use.
    */
-  placement?: NoticePlacement
+  style?: CSSUIObject
+  /**
+   * The strategy to remove the notice when `isClosable` is set to `true`
+   *
+   * @default 'button'
+   */
+  closeStrategy?: "both" | "button" | "element"
+  /**
+   * The custom notice component to use.
+   */
+  component?: (props: NoticeComponentProps) => ReactNode
+  /**
+   * The description of the notice.
+   */
+  description?: ReactNode
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
@@ -98,40 +110,18 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 5000
    */
-  duration?: number | null
-  /**
-   * The maximum value at which notice will be displayed.
-   */
-  limit?: number
-  /**
-   * The status of the notice.
-   *
-   * @default 'info'
-   */
-  status?: AlertStatus
+  duration?: null | number
   /**
    * The loading icon to use.
    */
   icon?: {
     variant?: LoadingVariant
+    children?: ReactNode
     /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
-    children?: ReactNode
   }
-  /**
-   * The title of the notice.
-   */
-  title?: ReactNode
-  /**
-   * The description of the notice.
-   */
-  description?: ReactNode
-  /**
-   * The custom notice component to use.
-   */
-  component?: (props: NoticeComponentProps) => ReactNode
   /**
    * If `true`, allows the notice to be removed.
    *
@@ -139,18 +129,28 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    */
   isClosable?: boolean
   /**
-   * The strategy to remove the notice when `isClosable` is set to `true`
-   *
-   * @default 'button'
+   * The maximum value at which notice will be displayed.
    */
-  closeStrategy?: "element" | "button" | "both"
+  limit?: number
   /**
-   * The custom style to use.
+   * The placement of the notice.
+   *
+   * @default 'top'
    */
-  style?: CSSUIObject
+  placement?: NoticePlacement
+  /**
+   * The status of the notice.
+   *
+   * @default 'info'
+   */
+  status?: AlertStatus
+  /**
+   * The title of the notice.
+   */
+  title?: ReactNode
 }
 
-export type SnackDirection = "top" | "bottom"
+export type SnackDirection = "bottom" | "top"
 
 export interface SnackComponentProps extends SnackConfigOptions {
   index: number
@@ -159,17 +159,35 @@ export interface SnackComponentProps extends SnackConfigOptions {
 
 export interface SnackConfigOptions extends ThemeProps<"Alert"> {
   /**
+   * The custom style to use.
+   */
+  style?: CSSUIObject
+  /**
+   * The CSS `box-shadow` property.
+   *
+   * @default '["base", "dark-sm"]'
+   */
+  boxShadow?: CSSUIProps["boxShadow"]
+  /**
+   * The strategy to remove the snack when `isClosable` is set to `true`
+   *
+   * @default 'button'
+   */
+  closeStrategy?: "both" | "button" | "element"
+  /**
+   * The custom snack component to use.
+   */
+  component?: (props: SnackComponentProps) => ReactNode
+  /**
+   * The description of the snack.
+   */
+  description?: ReactNode
+  /**
    * The direction of the snacks.
    *
    * @default 'top'
    */
   direction?: SnackDirection
-  /**
-   * If set the stack will start from the given index.
-   *
-   * @default 0
-   */
-  startIndex?: number
   /**
    * The number of `ms` the snack will continue to be displayed.
    *
@@ -178,42 +196,18 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default null
    */
-  duration?: number | null
-  /**
-   * The maximum value at which snack will be displayed.
-   *
-   * @default 3
-   */
-  limit?: number | null
-  /**
-   * The status of the snack.
-   *
-   * @default 'info'
-   */
-  status?: AlertStatus
+  duration?: null | number
   /**
    * The loading icon to use.
    */
   icon?: {
     variant?: LoadingVariant
+    children?: ReactNode
     /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
-    children?: ReactNode
   }
-  /**
-   * The title of the snack.
-   */
-  title?: ReactNode
-  /**
-   * The description of the snack.
-   */
-  description?: ReactNode
-  /**
-   * The custom snack component to use.
-   */
-  component?: (props: SnackComponentProps) => ReactNode
   /**
    * If `true`, allows the snack to be removed.
    *
@@ -221,43 +215,86 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    */
   isClosable?: boolean
   /**
-   * The strategy to remove the snack when `isClosable` is set to `true`
+   * The maximum value at which snack will be displayed.
    *
-   * @default 'button'
+   * @default 3
    */
-  closeStrategy?: "element" | "button" | "both"
+  limit?: null | number
   /**
-   * The CSS `box-shadow` property.
+   * If set the stack will start from the given index.
    *
-   * @default '["base", "dark-sm"]'
+   * @default 0
    */
-  boxShadow?: CSSUIProps["boxShadow"]
+  startIndex?: number
   /**
-   * The custom style to use.
+   * The status of the snack.
+   *
+   * @default 'info'
    */
-  style?: CSSUIObject
+  status?: AlertStatus
+  /**
+   * The title of the snack.
+   */
+  title?: ReactNode
 }
 
 export interface LoadingComponentProps {
-  initialState?: boolean
+  duration: null | number
   icon: LoadingConfigOptions["icon"]
-  text: LoadingConfigOptions["text"]
-  duration: number | null
   message: ReactNode | undefined
+  text: LoadingConfigOptions["text"]
   onFinish: () => void
+  initialState?: boolean
 }
 
 export interface LoadingConfigOptions {
   /**
-   * If `true`, loaded from the initial rendering.
+   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
-   * @default false
+   * @default false.
    */
-  initialState?: boolean
+  allowPinchZoom?: boolean
+  /**
+   * If `true`, the portal will check if it is within a parent portal
+   * and append itself to the parent's portal node.
+   * This provides nesting for portals.
+   *
+   * If `false`, the portal will always append to `document.body`
+   * regardless of nesting. It is used to opt out of portal nesting.
+   *
+   * @default true
+   */
+  appendToParentPortal?: PortalProps["appendToParentPortal"]
+  /**
+   * If `true`, scrolling will be disabled on the `body` when the modal opens.
+   *
+   * @default true
+   */
+  blockScrollOnMount?: boolean
+  /**
+   * The custom loading component to use.
+   */
+  component?: (props: LoadingComponentProps) => ReactNode
+  /**
+   * The `ref` to the component where the portal will be attached to.
+   */
+  containerRef?: PortalProps["containerRef"]
+  /**
+   * The number of `ms` the loading will continue to be displayed.
+   *
+   * If `null`, the loading will continue to display.
+   *
+   * @default null
+   */
+  duration?: null | number
   /**
    * Props for loading icon element.
    */
   icon?: {
+    /**
+     * The CSS `box-size` property.
+     */
+    size?: CSSUIProps["boxSize"]
     variant?: LoadingVariant
     /**
      * The CSS `color` property.
@@ -267,23 +304,25 @@ export interface LoadingConfigOptions {
      * The CSS `color` property.
      */
     secondaryColor?: CSSUIProps["color"]
-    /**
-     * The CSS `box-size` property.
-     */
-    size?: CSSUIProps["boxSize"]
   }
+  /**
+   * If `true`, loaded from the initial rendering.
+   *
+   * @default false
+   */
+  initialState?: boolean
   /**
    * Props for loading text element.
    */
   text?: {
     /**
-     * The CSS `font-family` property.
-     */
-    fontFamily?: CSSUIProps["fontFamily"]
-    /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
+    /**
+     * The CSS `font-family` property.
+     */
+    fontFamily?: CSSUIProps["fontFamily"]
     /**
      * The CSS `font-size` property.
      */
@@ -301,69 +340,18 @@ export interface LoadingConfigOptions {
      */
     lineHeight?: CSSUIProps["letterSpacing"]
   }
-  /**
-   * The number of `ms` the loading will continue to be displayed.
-   *
-   * If `null`, the loading will continue to display.
-   *
-   * @default null
-   */
-  duration?: number | null
-  /**
-   * The custom loading component to use.
-   */
-  component?: (props: LoadingComponentProps) => ReactNode
-  /**
-   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
-   *
-   * @default false.
-   */
-  allowPinchZoom?: boolean
-  /**
-   * If `true`, scrolling will be disabled on the `body` when the modal opens.
-   *
-   * @default true
-   */
-  blockScrollOnMount?: boolean
-  /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
 }
 
 export interface ThemeConfig {
   /**
-   * The initial theme scheme.
-   * This is only applicable if multiple themes are provided.
-   *
-   * @default 'base'
+   * The config of the alert.
    */
-  initialThemeScheme?: Theme["themeSchemes"]
-  /**
-   * The initial color mode.
-   * If `system`, the system will apply the color mode.
-   *
-   * @default 'light'
-   */
-  initialColorMode?: "light" | "dark" | "system"
-  /**
-   * If `true`, temporarily disable transitions.
-   * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
-   *
-   * @default false
-   */
-  disableTransitionOnChange?: boolean
+  alert?: {
+    /**
+     * The statuses of the alert.
+     */
+    statuses?: AlertStatuses
+  }
   /**
    * The config of breakpoint.
    */
@@ -382,57 +370,62 @@ export interface ThemeConfig {
     locale?: string
   }
   /**
-   * The config of CSS variables.
+   * If `true`, temporarily disable transitions.
+   * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
+   *
+   * @default false
    */
-  var?: {
+  disableTransitionOnChange?: boolean
+  /**
+   * The initial color mode.
+   * If `system`, the system will apply the color mode.
+   *
+   * @default 'light'
+   */
+  initialColorMode?: "dark" | "light" | "system"
+  /**
+   * The initial theme scheme.
+   * This is only applicable if multiple themes are provided.
+   *
+   * @default 'base'
+   */
+  initialThemeScheme?: Theme["themeSchemes"]
+  /**
+   * The config of the loading.
+   */
+  loading?: {
     /**
-     * The prefix to attach to variable names when converting each token of the theme to CSS variable names.
-     *
-     * @default 'ui'
+     * The options of the background loading.
      */
-    prefix?: StringLiteral
+    background?: LoadingConfigOptions
+    /**
+     * The options of the custom loading.
+     */
+    custom?: LoadingConfigOptions
+    /**
+     * The options of the page loading.
+     */
+    page?: LoadingConfigOptions
+    /**
+     * The options of the screen loading.
+     */
+    screen?: LoadingConfigOptions
   }
   /**
-   * The config of the theme.
+   * The config of the `framer-motion`.
    */
-  theme?: {
+  motion?: {
     /**
-     * If `true`, the theme tokens are converted into responsive object.
+     * Set configuration options for `framer-motion`.
      *
-     * @default false
+     * @see Docs https://www.framer.com/motion/motion-config/
      */
-    responsive?: boolean
-  }
-  /**
-   * The config of the alert.
-   */
-  alert?: {
-    /**
-     * The statuses of the alert.
-     */
-    statuses?: AlertStatuses
+    config?: Omit<MotionConfigProps, "children">
   }
   /**
    * The config of the notice.
    */
   notice?: {
-    /**
-     * The options of the notice.
-     */
-    options?: NoticeConfigOptions
-    /**
-     * The variants of the notice.
-     * Check the docs to see the variants of possible modifiers you can pass.
-     *
-     * @see Docs https://www.framer.com/motion/animation/#variants
-     */
-    variants?: Variants
-    /**
-     * The CSS `gap` property.
-     *
-     * @default 'md'
-     */
-    gap?: CSSUIProps["gap"]
     /**
      * If `true`, the portal will check if it is within a parent portal
      * and append itself to the parent's portal node.
@@ -449,29 +442,35 @@ export interface ThemeConfig {
      */
     containerRef?: PortalProps["containerRef"]
     /**
-     * Props for notice list element.
+     * The CSS `gap` property.
+     *
+     * @default 'md'
      */
-    listProps?: HTMLUIProps<"ul">
+    gap?: CSSUIProps["gap"]
     /**
-     * Props for notice item element.
+     * The options of the notice.
      */
-    itemProps?: HTMLMotionProps<"li">
-  }
-  /**
-   * The config of the snacks.
-   */
-  snacks?: {
+    options?: NoticeConfigOptions
     /**
-     * The options of the snack.
-     */
-    options?: SnackConfigOptions
-    /**
-     * The variants of the snack.
+     * The variants of the notice.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
      * @see Docs https://www.framer.com/motion/animation/#variants
      */
     variants?: Variants
+    /**
+     * Props for notice item element.
+     */
+    itemProps?: HTMLMotionProps<"li">
+    /**
+     * Props for notice list element.
+     */
+    listProps?: HTMLUIProps<"ul">
+  }
+  /**
+   * The config of the snacks.
+   */
+  snacks?: {
     /**
      * The CSS `gap` property.
      *
@@ -490,38 +489,39 @@ export interface ThemeConfig {
      * @default true
      */
     negateMargin?: boolean
-  }
-  /**
-   * The config of the loading.
-   */
-  loading?: {
     /**
-     * The options of the screen loading.
+     * The options of the snack.
      */
-    screen?: LoadingConfigOptions
+    options?: SnackConfigOptions
     /**
-     * The options of the page loading.
-     */
-    page?: LoadingConfigOptions
-    /**
-     * The options of the background loading.
-     */
-    background?: LoadingConfigOptions
-    /**
-     * The options of the custom loading.
-     */
-    custom?: LoadingConfigOptions
-  }
-  /**
-   * The config of the `framer-motion`.
-   */
-  motion?: {
-    /**
-     * Set configuration options for `framer-motion`.
+     * The variants of the snack.
+     * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Docs https://www.framer.com/motion/motion-config/
+     * @see Docs https://www.framer.com/motion/animation/#variants
      */
-    config?: Omit<MotionConfigProps, "children">
+    variants?: Variants
+  }
+  /**
+   * The config of the theme.
+   */
+  theme?: {
+    /**
+     * If `true`, the theme tokens are converted into responsive object.
+     *
+     * @default false
+     */
+    responsive?: boolean
+  }
+  /**
+   * The config of CSS variables.
+   */
+  var?: {
+    /**
+     * The prefix to attach to variable names when converting each token of the theme to CSS variable names.
+     *
+     * @default 'ui'
+     */
+    prefix?: StringLiteral
   }
 }
 
@@ -531,12 +531,12 @@ export interface LayerStyles {
 export interface TextStyles {
   [key: string]: CSSUIObject
 }
-export type ThemeValue = string | number
+export type ThemeValue = number | string
 export interface ThemeTokens {
   [key: ThemeValue]:
-    | ThemeValue
-    | [ThemeValue | Dict<ThemeValue>, ThemeValue | Dict<ThemeValue>]
+    | [Dict<ThemeValue> | ThemeValue, Dict<ThemeValue> | ThemeValue]
     | ThemeTokens
+    | ThemeValue
 }
 export interface ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
@@ -544,9 +544,9 @@ export interface ThemeAnimationTokens<
   [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
 }
 export interface ThemeTransitionTokens {
-  property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
+  property?: ThemeTokens
 }
 export interface ThemeBreakpointTokens {
   [key: ThemeValue]: ThemeValue
@@ -554,31 +554,31 @@ export interface ThemeBreakpointTokens {
 
 export interface SemanticColorSchemes {
   [key: string]:
-    | Theme["colorSchemes"]
     | [Theme["colorSchemes"], Theme["colorSchemes"]]
+    | Theme["colorSchemes"]
     | ThemeTokens
 }
 
 export interface ThemeSemanticTokens
   extends Omit<
     BaseTheme,
-    | "styles"
+    | "animations"
+    | "breakpoints"
     | "components"
     | "semantics"
+    | "styles"
     | "themeSchemes"
-    | "breakpoints"
-    | "animations"
   > {}
 
 export interface ThemeSemantics extends ThemeSemanticTokens {
-  colorSchemes?: SemanticColorSchemes
   animations?: ThemeAnimationTokens<AnimationStyle | string>
+  colorSchemes?: SemanticColorSchemes
 }
 
 export interface NestedTheme
   extends Omit<
     BaseTheme,
-    "styles" | "components" | "themeSchemes" | "breakpoints"
+    "breakpoints" | "components" | "styles" | "themeSchemes"
   > {}
 
 export interface ThemeSchemes {
@@ -586,22 +586,16 @@ export interface ThemeSchemes {
 }
 
 export interface ThemeComponents {
-  [key: string]: ComponentStyle | ComponentMultiStyle
+  [key: string]: ComponentMultiStyle | ComponentStyle
 }
 
 interface BaseTheme {
-  styles?: {
-    globalStyle?: UIStyle
-    resetStyle?: UIStyle
-    layerStyles?: LayerStyles
-    textStyles?: TextStyles
-    [key: string]: any
-  }
   animations?: ThemeAnimationTokens
   blurs?: ThemeTokens
   borders?: ThemeTokens
   breakpoints?: ThemeBreakpointTokens
   colors?: ThemeTokens
+  components?: ThemeComponents
   fonts?: ThemeTokens
   fontSizes?: ThemeTokens
   fontWeights?: ThemeTokens
@@ -609,14 +603,20 @@ interface BaseTheme {
   letterSpacings?: ThemeTokens
   lineHeights?: ThemeTokens
   radii?: ThemeTokens
+  semantics?: ThemeSemantics
   shadows?: ThemeTokens
   sizes?: ThemeTokens
   spaces?: ThemeTokens
+  styles?: {
+    [key: string]: any
+    globalStyle?: UIStyle
+    layerStyles?: LayerStyles
+    resetStyle?: UIStyle
+    textStyles?: TextStyles
+  }
+  themeSchemes?: ThemeSchemes
   transitions?: ThemeTransitionTokens
   zIndices?: ThemeTokens
-  semantics?: ThemeSemantics
-  themeSchemes?: ThemeSchemes
-  components?: ThemeComponents
 }
 
 export interface UsageTheme extends BaseTheme {
@@ -633,7 +633,7 @@ export interface ComponentSizes<Y extends Dict = Dict> {
 type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = Partial<Omit<M, "variant" | "size" | "colorScheme">> & ThemeProps<Y>
+> = Partial<Omit<M, "colorScheme" | "size" | "variant">> & ThemeProps<Y>
 export type ComponentDefaultProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
@@ -642,8 +642,8 @@ export type ComponentOverrideProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
 > =
-  | ComponentProps<Y, M>
   | ((props: ComponentProps<Y, M>) => ComponentProps<Y, M>)
+  | ComponentProps<Y, M>
 
 interface ComponentSharedStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
@@ -705,8 +705,8 @@ export interface ComponentMultiStyle<
 
 export interface CSSMap {
   [key: string]: {
-    var: string
     ref: string
+    var: string
   }
 }
 
@@ -723,11 +723,11 @@ export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
 export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 
-export type StyledTheme<T extends InternalTheme = InternalTheme> = T & {
-  themeScheme: Theme["themeSchemes"]
+export type StyledTheme<T extends InternalTheme = InternalTheme> = {
   changeThemeScheme: ChangeThemeScheme
-  __config?: ThemeConfig
-  __cssVars?: Dict
-  __cssMap?: CSSMap
+  themeScheme: Theme["themeSchemes"]
   __breakpoints?: AnalyzeBreakpointsReturn
-}
+  __config?: ThemeConfig
+  __cssMap?: CSSMap
+  __cssVars?: Dict
+} & T

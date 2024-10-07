@@ -1,5 +1,5 @@
 import type { LayerStyles } from "@yamada-ui/react"
-import { UIProvider, extendTheme, Center } from "@yamada-ui/react"
+import { Center, extendTheme, UIProvider } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Layer Styles",
@@ -8,26 +8,26 @@ export default {
 export const useLayerStyle = () => {
   const layerStyles: LayerStyles = {
     masterRoshi: {
-      position: "relative",
-      m: "md",
-      boxSize: "4xs",
-      border: "6px solid #000",
-      rounded: "full",
       bg: "#FFF",
-      fontFamily: "serif",
+      border: "6px solid #000",
+      boxSize: "4xs",
       color: "#000",
+      fontFamily: "serif",
       fontSize: "8xl",
       fontWeight: "bold",
+      m: "md",
+      position: "relative",
+      rounded: "full",
       _after: {
-        content: '""',
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        zIndex: -1,
-        rounded: "md",
         bg: "#FF7F0B",
         boxSize: "3xs",
+        content: '""',
+        left: "50%",
+        position: "absolute",
+        rounded: "md",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+        zIndex: -1,
       },
     },
   }

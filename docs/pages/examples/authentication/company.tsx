@@ -1,8 +1,8 @@
+import type { StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import { Mountain } from "@yamada-ui/lucide"
 import { Heading, HStack, Spacer, Text, VStack } from "@yamada-ui/react"
-import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 
 export interface CompanyProps extends StackProps {}
 
@@ -10,19 +10,19 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
   return (
     <VStack
       as="section"
-      display={{ base: "flex", lg: "none" }}
       bgGradient={[
         "linear(-60deg, primary.500, secondary.500)",
         "linear(-60deg, primary.600, secondary.600)",
       ]}
       color="white"
+      display={{ base: "flex", lg: "none" }}
       p="lg"
       {...rest}
     >
       <HStack as="header" alignItems="flex-end" gap="sm">
         <Mountain fontSize="3xl" />
 
-        <Heading as="h2" size="md" lineHeight={1.125} fontWeight="normal">
+        <Heading as="h2" size="md" fontWeight="normal" lineHeight={1.125}>
           Yamada Inc
         </Heading>
       </HStack>

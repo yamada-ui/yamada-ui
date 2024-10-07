@@ -1,14 +1,14 @@
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentMultiStyle,
-} from "@yamada-ui/core"
 import type {
   CSSUIObject,
   CSSUIProps,
   HTMLUIProps,
   ThemeProps,
+} from "@yamada-ui/core"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
@@ -20,8 +20,8 @@ const defaultOverlays = (
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
-      bgSize: `8px 8px`,
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
+      bgSize: `8px 8px`,
       vars: [
         {
           name: "checkers",
@@ -57,6 +57,12 @@ interface ColorSwatchOptions {
    */
   color?: CSSUIProps["color"]
   /**
+   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
+  /**
    * The overlay used for the swatch element.
    */
   overlays?: HTMLUIProps[]
@@ -66,12 +72,6 @@ interface ColorSwatchOptions {
    * @default true
    */
   withShadow?: boolean
-  /**
-   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
-   *
-   * @default false
-   */
-  isRounded?: boolean
 }
 
 export interface ColorSwatchProps
@@ -89,33 +89,33 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const {
     className,
     color = "#ffffff00",
+    isRounded,
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
-    isRounded,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
+    "& > *": {
+      alignItems: "center",
+      bottom: "0",
+      display: "flex",
+      h: "100%",
+      justifyContent: "center",
+      left: "0",
+      overflow: "hidden",
+      position: "absolute",
+      right: "0",
+      top: "0",
+      w: "100%",
+    },
     position: "relative",
     _before: {
       content: `""`,
       display: "block",
       h: 0,
       pb: "100%",
-    },
-    "& > *": {
-      overflow: "hidden",
-      position: "absolute",
-      top: "0",
-      right: "0",
-      bottom: "0",
-      left: "0",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      w: "100%",
-      h: "100%",
     },
     ...styles.container,
     ...__css,
@@ -134,11 +134,11 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
           <ui.div
             key={index}
             __css={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
               bottom: 0,
+              left: 0,
+              position: "absolute",
+              right: 0,
+              top: 0,
               ...styles.overlay,
             }}
             {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}

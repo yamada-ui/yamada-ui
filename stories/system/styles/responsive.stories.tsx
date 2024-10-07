@@ -1,4 +1,3 @@
-import { useRef } from "react"
 import type { FC } from "react"
 import { Calendar } from "@yamada-ui/calendar"
 import {
@@ -11,6 +10,7 @@ import {
   useBreakpoint,
   useBreakpointValue,
 } from "@yamada-ui/react"
+import { useRef } from "react"
 
 export default {
   title: "System / Styles / Responsive",
@@ -23,17 +23,17 @@ export const basic = () => {
     <Box
       bg={{
         base: "red.500",
-        "2xl": "pink.500",
-        xl: "blue.500",
-        lg: "green.500",
-        md: "yellow.500",
         sm: "purple.500",
+        md: "yellow.500",
+        lg: "green.500",
+        xl: "blue.500",
+        "2xl": "pink.500",
       }}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"
     </Box>
@@ -44,21 +44,21 @@ export const useHook = () => {
   const breakpoint = useBreakpoint()
   const bg = useBreakpointValue({
     base: "red.500",
-    "2xl": "pink.500",
-    xl: "blue.500",
-    lg: "green.500",
-    md: "yellow.500",
     sm: "purple.500",
+    md: "yellow.500",
+    lg: "green.500",
+    xl: "blue.500",
+    "2xl": "pink.500",
   })
 
   return (
     <Box
       bg={bg}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"
     </Box>
@@ -83,11 +83,11 @@ export const withContainer = () => {
       <Text
         color={{
           base: "red.500",
-          "2xl": "pink.500",
-          xl: "blue.500",
-          lg: "green.500",
-          md: "yellow.500",
           sm: "purple.500",
+          md: "yellow.500",
+          lg: "green.500",
+          xl: "blue.500",
+          "2xl": "pink.500",
         }}
       >
         The container breakpoint is "{breakpoint}"
@@ -98,22 +98,22 @@ export const withContainer = () => {
   return (
     <Box
       ref={containerRef}
-      containerType="inline-size"
-      resize="inline"
-      overflow="auto"
-      w="full"
-      p="md"
       borderWidth="1px"
+      containerType="inline-size"
+      overflow="auto"
+      p="md"
+      resize="inline"
       rounded="md"
+      w="full"
     >
       <Text
         color={{
           base: "red.500",
-          "2xl": "pink.500",
-          xl: "blue.500",
-          lg: "green.500",
-          md: "yellow.500",
           sm: "purple.500",
+          md: "yellow.500",
+          lg: "green.500",
+          xl: "blue.500",
+          "2xl": "pink.500",
         }}
       >
         The root breakpoint is "{breakpoint}"

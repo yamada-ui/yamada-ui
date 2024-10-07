@@ -14,14 +14,14 @@ import { memo } from "react"
 export const SocialMediaCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader
-        flexDirection={{ base: "row", sm: "column" }}
         alignItems={{ base: "center", sm: "flex-start" }}
+        flexDirection={{ base: "row", sm: "column" }}
       >
         <HStack flex="1">
           <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
@@ -38,9 +38,9 @@ export const SocialMediaCard = memo(() => {
 
         <Button
           colorScheme="primary"
+          size="sm"
           isRounded
           px="normal"
-          size="sm"
           w={{ base: undefined, sm: "full" }}
         >
           Follow

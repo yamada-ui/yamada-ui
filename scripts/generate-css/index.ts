@@ -1,7 +1,9 @@
-import { writeFile } from "fs/promises"
-import * as p from "@clack/prompts"
-import c from "chalk"
 import type * as CSS from "csstype"
+import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
+import * as p from "@clack/prompts"
+import { isUndefined } from "@yamada-ui/utils"
+import c from "chalk"
+import { writeFile } from "fs/promises"
 import { glob } from "glob"
 import { JSDOM } from "jsdom"
 import ListIt from "list-it"
@@ -13,7 +15,6 @@ import {
 import { toCamelCase } from "../utils"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
-import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
 const SOURCE_URL = "https://developer.mozilla.org"
 export const OUT_PATH = "packages/core/src/styles.ts"
@@ -21,13 +22,13 @@ export const OUT_PATH = "packages/core/src/styles.ts"
 export type CSSProperty = ReturnType<typeof getCSSProperties>[number]
 export type Properties = CSSProperties | UIProperties
 export type CSSProperties =
+  | keyof CSS.ObsoleteProperties
   | keyof CSS.StandardProperties
   | keyof CSS.SvgProperties
-  | keyof CSS.ObsoleteProperties
 export type UIProperties =
   | keyof typeof additionalProps
-  | keyof typeof uiProps
   | keyof typeof atRuleProps
+  | keyof typeof uiProps
 
 const omittedList = new ListIt({
   headerColor: "gray",
@@ -71,9 +72,9 @@ const getCSSProperties = (doc: Document) => {
     .filter(
       ({ textContent }) => textContent && !/^(-moz|-webkit)/.test(textContent),
     )
-    .map(({ textContent, href }) => {
+    .map(({ href, textContent }) => {
       const prop = textContent?.includes("-")
-        ? toCamelCase(textContent ?? "")
+        ? toCamelCase(textContent)
         : (textContent ?? "")
 
       return {
@@ -152,8 +153,8 @@ const omitProperties = (
 
   if (pickedProperties.length) {
     const table = pickedProperties.map(({ name, url }, index) => ({
-      row: index + 1,
       name,
+      row: index + 1,
       url,
     }))
 
@@ -181,8 +182,8 @@ const excludeProperties = (
 
   if (pickedProperties.length) {
     const table = pickedProperties.map(({ name, url }, index) => ({
-      row: index + 1,
       name,
+      row: index + 1,
       url,
     }))
 
@@ -239,10 +240,15 @@ const main = async () => {
       },
     )
 
-    const styles = excludedProperties.map((property) => {
-      const { type, deprecated } = cssTypes[property.prop] ?? {}
-      return { ...property, type, deprecated }
-    })
+    const styles = excludedProperties
+      .map((property) => {
+        const { type, deprecated = false } = cssTypes[property.prop] ?? {}
+
+        if (!type) return
+
+        return { ...property, type, deprecated }
+      })
+      .filter((style) => !isUndefined(style))
 
     s.start(`Writing file "${OUT_PATH}"`)
 
@@ -254,8 +260,8 @@ const main = async () => {
 
     if (pickedStyles.length) {
       const table = pickedStyles.map(({ name, url }, index) => ({
-        row: index + 1,
         name,
+        row: index + 1,
         url,
       }))
 

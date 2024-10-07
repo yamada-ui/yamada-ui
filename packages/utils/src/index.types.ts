@@ -1,13 +1,13 @@
 export type Primitive =
-  | null
-  | undefined
-  | string
-  | number
-  | boolean
-  | symbol
   | bigint
+  | boolean
+  | null
+  | number
+  | string
+  | symbol
+  | undefined
 
-type PathImpl<Y extends string | number | symbol, M> = Y extends string | number
+type PathImpl<Y extends number | string | symbol, M> = Y extends number | string
   ? M extends Primitive
     ? `${Y}`
     : `${Y}.${Path<M>}`
@@ -23,7 +23,7 @@ export interface Dict<Y = any> {
 
 export interface ObjectLiteral {}
 
-export type StringLiteral = string & {}
+export type StringLiteral = {} & string
 
 export type Replace<
   Y extends string,
@@ -34,10 +34,10 @@ export type Replace<
   ? Replace<R, M, D, `${H}${T}${D}`>
   : `${H}${Y}`
 
-export type Union<Y> = Y | StringLiteral
+export type Union<Y> = StringLiteral | Y
 
 export type Length<T extends any[]> = T["length"]
 
-export type Merge<Y, M> = Omit<Y, keyof M> & M
+export type Merge<Y, M> = M & Omit<Y, keyof M>
 
 export type MergeIfDefined<Y, M> = M extends undefined ? Y : Merge<Y, M>

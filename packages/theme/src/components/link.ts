@@ -2,18 +2,18 @@ import type { ComponentStyle } from "@yamada-ui/core"
 
 export const Link: ComponentStyle<"Link"> = {
   baseStyle: {
-    transitionProperty: "common",
-    transitionDuration: "fast",
-    transitionTimingFunction: "ease-out",
-    cursor: "pointer",
-    textDecoration: "none",
-    outline: "none",
     color: "link",
-    _hover: {
-      textDecoration: "underline",
-    },
+    cursor: "pointer",
+    outline: "none",
+    textDecoration: "none",
+    transitionDuration: "fast",
+    transitionProperty: "common",
+    transitionTimingFunction: "ease-out",
     _focusVisible: {
       boxShadow: "outline",
+    },
+    _hover: {
+      textDecoration: "underline",
     },
   },
 }

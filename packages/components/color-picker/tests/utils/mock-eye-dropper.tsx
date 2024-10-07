@@ -1,7 +1,7 @@
-type WindowWithEyeDropper = Window &
-  typeof globalThis & {
-    EyeDropper: any
-  }
+type WindowWithEyeDropper = {
+  EyeDropper: any
+} & typeof globalThis &
+  Window
 
 const mockEyeDropperFn = vi.fn()
 

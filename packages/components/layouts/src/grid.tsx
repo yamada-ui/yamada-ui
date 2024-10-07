@@ -1,25 +1,29 @@
 import type {
-  HTMLUIProps,
   CSSUIObject,
-  Token,
+  HTMLUIProps,
   StyledTheme,
+  Token,
 } from "@yamada-ui/core"
-import { ui, forwardRef, useTheme, transforms } from "@yamada-ui/core"
-import { replaceObject, getMemoizedObject as get } from "@yamada-ui/utils"
+import { forwardRef, transforms, ui, useTheme } from "@yamada-ui/core"
+import { getMemoizedObject as get, replaceObject } from "@yamada-ui/utils"
 
 interface GridOptions {
   /**
-   * The CSS `grid-template-columns` property.
+   * The CSS `grid-area` property.
    */
-  templateColumns?: CSSUIObject["gridTemplateColumns"]
+  area?: CSSUIObject["gridArea"]
   /**
-   * The CSS `grid-template-rows` property.
+   * The CSS `grid-auto-columns` property.
    */
-  templateRows?: CSSUIObject["gridTemplateRows"]
+  autoColumns?: CSSUIObject["gridAutoColumns"]
   /**
-   * The CSS `grid-template-areas` property.
+   * The CSS `grid-auto-flow` property.
    */
-  templateAreas?: CSSUIObject["gridTemplateAreas"]
+  autoFlow?: CSSUIObject["gridAutoFlow"]
+  /**
+   * The CSS `grid-auto-rows` property.
+   */
+  autoRows?: CSSUIObject["gridAutoRows"]
   /**
    * The CSS `grid-column` property.
    */
@@ -29,21 +33,17 @@ interface GridOptions {
    */
   row?: CSSUIObject["gridRow"]
   /**
-   * The CSS `grid-area` property.
+   * The CSS `grid-template-areas` property.
    */
-  area?: CSSUIObject["gridArea"]
+  templateAreas?: CSSUIObject["gridTemplateAreas"]
   /**
-   * The CSS `grid-auto-flow` property.
+   * The CSS `grid-template-columns` property.
    */
-  autoFlow?: CSSUIObject["gridAutoFlow"]
+  templateColumns?: CSSUIObject["gridTemplateColumns"]
   /**
-   * The CSS `grid-auto-columns` property.
+   * The CSS `grid-template-rows` property.
    */
-  autoColumns?: CSSUIObject["gridAutoColumns"]
-  /**
-   * The CSS `grid-auto-rows` property.
-   */
-  autoRows?: CSSUIObject["gridAutoRows"]
+  templateRows?: CSSUIObject["gridTemplateRows"]
 }
 
 export interface GridProps extends HTMLUIProps, GridOptions {}
@@ -56,36 +56,36 @@ export interface GridProps extends HTMLUIProps, GridOptions {}
 export const Grid = forwardRef<GridProps, "div">(
   (
     {
+      area: gridArea,
+      autoColumns: gridAutoColumns,
+      autoFlow: gridAutoFlow,
+      autoRows: gridAutoRows,
+      column: gridColumn,
+      columnGap,
+      gap,
+      row: gridRow,
+      rowGap,
+      templateAreas: gridTemplateAreas,
       templateColumns: gridTemplateColumns,
       templateRows: gridTemplateRows,
-      templateAreas: gridTemplateAreas,
-      column: gridColumn,
-      row: gridRow,
-      area: gridArea,
-      gap,
-      rowGap,
-      columnGap,
-      autoFlow: gridAutoFlow,
-      autoColumns: gridAutoColumns,
-      autoRows: gridAutoRows,
       ...rest
     },
     ref,
   ) => {
     const css: CSSUIObject = {
+      columnGap,
       display: "grid",
-      gridTemplateColumns,
-      gridTemplateRows,
-      gridTemplateAreas,
+      gap,
+      gridArea,
+      gridAutoColumns,
+      gridAutoFlow,
+      gridAutoRows,
       gridColumn,
       gridRow,
-      gridArea,
-      gap,
+      gridTemplateAreas,
+      gridTemplateColumns,
+      gridTemplateRows,
       rowGap,
-      columnGap,
-      gridAutoFlow,
-      gridAutoColumns,
-      gridAutoRows,
     }
 
     return <ui.div ref={ref} __css={css} {...rest} />
@@ -112,14 +112,14 @@ const transformColumns =
 
 interface SimpleGridOptions {
   /**
+   * The number of columns.
+   */
+  columns?: Token<number>
+  /**
    * The width at which child elements will break into columns.
    * Pass a number for pixel values or a string for any other valid CSS length.
    */
   minChildWidth?: GridProps["minWidth"]
-  /**
-   * The number of columns.
-   */
-  columns?: Token<number>
 }
 
 export interface SimpleGridProps
@@ -132,7 +132,7 @@ export interface SimpleGridProps
  * @see Docs https://yamada-ui.com/components/layouts/simple-grid
  */
 export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
-  ({ minChildWidth, columns, ...rest }, ref) => {
+  ({ columns, minChildWidth, ...rest }, ref) => {
     const { theme } = useTheme()
     const templateColumns = transformColumns(columns, minChildWidth)(theme)
 
@@ -146,29 +146,29 @@ interface GridItemOptions {
    */
   area?: CSSUIObject["gridArea"]
   /**
+   * The CSS `grid-column-end` property.
+   */
+  colEnd?: CSSUIObject["gridColumnEnd"]
+  /**
    * The number of columns the grid item should `span`.
    */
   colSpan?: Token<number>
-  /**
-   * The number of rows the grid item should `span`.
-   */
-  rowSpan?: Token<number>
   /**
    * The CSS `grid-column-start` property.
    */
   colStart?: CSSUIObject["gridColumnStart"]
   /**
-   * The CSS `grid-column-end` property.
+   * The CSS `grid-row-end` property.
    */
-  colEnd?: CSSUIObject["gridColumnEnd"]
+  rowEnd?: CSSUIObject["gridRowEnd"]
+  /**
+   * The number of rows the grid item should `span`.
+   */
+  rowSpan?: Token<number>
   /**
    * The CSS `grid-row-start` property.
    */
   rowStart?: CSSUIObject["gridRowStart"]
-  /**
-   * The CSS `grid-row-end` property.
-   */
-  rowEnd?: CSSUIObject["gridRowEnd"]
 }
 
 export interface GridItemProps extends HTMLUIProps, GridItemOptions {}
@@ -177,28 +177,28 @@ export const GridItem = forwardRef<GridItemProps, "div">(
   (
     {
       area: gridArea,
-      colSpan,
-      rowSpan,
-      colStart: gridColumnStart,
       colEnd: gridColumnEnd,
-      rowStart: gridRowStart,
+      colSpan,
+      colStart: gridColumnStart,
       rowEnd: gridRowEnd,
+      rowSpan,
+      rowStart: gridRowStart,
       ...rest
     },
     ref,
   ) => {
     const css: CSSUIObject = {
+      gridArea,
       gridColumn: replaceObject(colSpan, (value) =>
         value != null ? `span ${value}/span ${value}` : undefined,
       ),
+      gridColumnEnd,
+      gridColumnStart,
       gridRow: replaceObject(rowSpan, (value) =>
         value != null ? `span ${value}/span ${value}` : undefined,
       ),
-      gridColumnStart,
-      gridColumnEnd,
-      gridRowStart,
       gridRowEnd,
-      gridArea,
+      gridRowStart,
     }
 
     return <ui.div ref={ref} __css={css} {...rest} />

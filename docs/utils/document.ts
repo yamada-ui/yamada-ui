@@ -1,10 +1,10 @@
-import { CONSTANT } from "constant"
 import type {
   Document,
   DocumentNavigation,
   DocumentPagination,
   DocumentTree,
 } from "mdx"
+import { CONSTANT } from "constant"
 import { documentMap } from "mdx"
 import { flattenArray } from "utils/array"
 
@@ -51,14 +51,14 @@ export const getDocumentTree =
       .sort((a, b) => a.order - b.order)
       .map(
         ({
-          title,
           description,
-          slug,
+          is_expanded,
+          label,
           menu,
           menu_icon,
-          label,
-          is_expanded,
           paths,
+          slug,
+          title,
         }) => {
           title = menu ?? title
 
@@ -71,11 +71,11 @@ export const getDocumentTree =
           const children = getDocumentTree(documents, paths)(currentPaths)
 
           const tree: DocumentTree = {
-            title,
-            description,
-            slug,
             children,
+            description,
             is_expanded,
+            slug,
+            title,
           }
 
           if (menu_icon) tree.menu_icon = menu_icon
@@ -95,25 +95,25 @@ export const getDocumentPagination = (
   let pagination: DocumentPagination = {}
 
   for (let i = 0; i < flattenTree.length; i++) {
-    if (flattenTree[i].slug !== document.slug) continue
+    if (flattenTree[i]?.slug !== document.slug) continue
 
     const prev = flattenTree[i - 1]
     const next = flattenTree[i + 1]
 
     if (prev) {
-      let { title, menu, slug } = prev
+      let { menu, slug, title } = prev
 
       title = menu ?? title
 
-      pagination["prev"] = { title, slug }
+      pagination.prev = { slug, title }
     }
 
     if (next) {
-      let { title, menu, slug } = next
+      let { menu, slug, title } = next
 
       if (menu) title = menu
 
-      pagination["next"] = { title, slug }
+      pagination.next = { slug, title }
     }
   }
 
@@ -134,11 +134,11 @@ export const getDocumentBreadcrumbs = (
 
     if (!document) continue
 
-    let { title, menu, slug } = document
+    let { menu, slug, title } = document
 
     if (menu) title = menu
 
-    breadcrumbs = [...breadcrumbs, { title, slug }]
+    breadcrumbs = [...breadcrumbs, { slug, title }]
   }
 
   return breadcrumbs
@@ -155,9 +155,9 @@ const computeDocumentTabs = (documents: Document[]) =>
 
       return a.order - b.order
     })
-    .map(({ title, menu, tab, slug }) => ({
-      title: tab ?? menu ?? title,
+    .map(({ menu, slug, tab, title }) => ({
       slug,
+      title: tab ?? menu ?? title,
     }))
 
 const pickDocumentTabs = (documents: Document[], parentSlug: string) =>

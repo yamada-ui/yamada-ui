@@ -4,13 +4,7 @@ import { defineConfig } from "vitest/config"
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ["packages/**/*.test.{ts,tsx}"],
-    environment: "jsdom",
-    globals: true,
-    watch: false,
     coverage: {
-      provider: "v8",
-      include: ["packages"],
       exclude: [
         "**/dist",
         "**/bin",
@@ -23,8 +17,14 @@ export default defineConfig({
         "packages/**/tests",
         "packages/**/scripts",
       ],
+      include: ["packages"],
+      provider: "v8",
     },
-    onConsoleLog: (_log, type) => type !== "stderr",
+    environment: "jsdom",
+    globals: true,
+    include: ["packages/**/*.test.{ts,tsx}"],
     setupFiles: ["./scripts/setup-test.ts"],
+    watch: false,
+    onConsoleLog: (_log, type) => type !== "stderr",
   },
 })

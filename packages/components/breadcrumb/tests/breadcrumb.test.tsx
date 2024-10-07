@@ -1,5 +1,5 @@
-import { a11y, render, screen } from "@yamada-ui/test"
 import type { BreadcrumbGenerateItem } from "../src"
+import { a11y, render, screen } from "@yamada-ui/test"
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -127,14 +127,14 @@ describe("<Breadcrumb />", () => {
       { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
     ]
 
-    render(<Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />)
+    render(<Breadcrumb endBoundaries={1} items={items} startBoundaries={1} />)
 
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(3)
-    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
+    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      listItems[listItems.length - 1].querySelector("span"),
+      listItems[listItems.length - 1]?.querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
@@ -151,9 +151,9 @@ describe("<Breadcrumb />", () => {
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(3)
-    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
+    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      listItems[listItems.length - 1].querySelector("span"),
+      listItems[listItems.length - 1]?.querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
@@ -165,8 +165,8 @@ describe("<Breadcrumb />", () => {
       {
         href: "/4",
         name: "魔人ブウ編",
-        isEllipsisPage: true,
         isCurrentPage: true,
+        isEllipsisPage: true,
       },
     ]
 
@@ -175,7 +175,7 @@ describe("<Breadcrumb />", () => {
     const listItems = screen.getAllByRole("listitem")
 
     expect(listItems).toHaveLength(4)
-    expect(listItems[listItems.length - 1].firstElementChild).toHaveAttribute(
+    expect(listItems[listItems.length - 1]?.firstElementChild).toHaveAttribute(
       "aria-label",
       "ellipsis",
     )
@@ -198,15 +198,15 @@ describe("<Breadcrumb />", () => {
     )
 
     render(
-      <Breadcrumb data-testid="breadCrumb2" items={items} endBoundaries={1} />,
+      <Breadcrumb data-testid="breadCrumb2" endBoundaries={1} items={items} />,
     )
 
     render(
       <Breadcrumb
         data-testid="breadCrumb3"
+        endBoundaries={0}
         items={items}
         startBoundaries={0}
-        endBoundaries={0}
       />,
     )
 
@@ -233,10 +233,10 @@ describe("<Breadcrumb />", () => {
 
     render(
       <Breadcrumb
+        ellipsis={ellipsis}
+        endBoundaries={1}
         items={items}
         startBoundaries={1}
-        endBoundaries={1}
-        ellipsis={ellipsis}
       />,
     )
 

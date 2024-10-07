@@ -8,22 +8,22 @@ import { useModal } from "./modal-context"
 export interface ModalOverlayProps extends MotionProps {}
 
 export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
-  ({ className, __css, onClick, ...rest }, ref) => {
+  ({ className, onClick, __css, ...rest }, ref) => {
     const {
-      styles,
-      closeOnOverlay,
-      onOverlayClick,
-      onClose,
       animation,
+      closeOnOverlay,
       duration,
+      styles,
+      onClose,
+      onOverlayClick,
     } = useModal()
 
     const css: CSSUIObject = {
+      h: "100dvh",
+      left: 0,
       position: "fixed",
       top: 0,
-      left: 0,
       w: "100vw",
-      h: "100dvh",
       ...(__css ? __css : styles.overlay),
     }
 
@@ -34,11 +34,11 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
         ref={ref}
         className={cx("ui-modal__overlay", className)}
         custom={{ duration }}
-        __css={css}
         onClick={handlerAll(onClick, onOverlayClick, (ev) => {
           ev.stopPropagation()
           if (closeOnOverlay) onClose?.()
         })}
+        __css={css}
         {...props}
         {...rest}
       />

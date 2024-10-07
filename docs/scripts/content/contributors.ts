@@ -1,13 +1,13 @@
-import { writeFile } from "fs/promises"
-import path from "path"
-import * as p from "@clack/prompts"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
+import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
-import { config } from "dotenv"
-import { getConstant } from "../utils"
 import { CONSTANT } from "constant"
+import { config } from "dotenv"
+import { writeFile } from "fs/promises"
 import { prettier } from "libs/prettier"
+import path from "path"
+import { getConstant } from "../utils"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>
@@ -32,9 +32,9 @@ const getTeam: p.RequiredRunner = () => async (_, s) => {
 
   s.stop(`Got the Yamada UI team`)
 
-  const { maintainers, members, emeriti } = constant
+  const { emeriti, maintainers, members } = constant
 
-  return { maintainers, members, emeriti }
+  return { emeriti, maintainers, members }
 }
 
 const getContributors: p.RequiredRunner = () => async (_, s) => {
@@ -48,8 +48,8 @@ const getContributors: p.RequiredRunner = () => async (_, s) => {
   do {
     const { data } = await octokit.repos.listContributors({
       ...REPO_REQUEST_PARAMETERS,
-      per_page: 100,
       page,
+      per_page: 100,
     })
 
     contributors.push(...data)
@@ -110,7 +110,7 @@ const writeContributors: p.RequiredRunner =
     s.start(`Writing file "${distPath}"`)
 
     const resolvedContributors = contributors.map(
-      ({ id, login, avatar_url, html_url }) => ({
+      ({ id, avatar_url, html_url, login }) => ({
         id,
         name: login,
         icon: avatar_url,
@@ -137,7 +137,7 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const { maintainers, members, emeriti } = await getTeam()(p, s)
+    const { emeriti, maintainers, members } = await getTeam()(p, s)
     const contributors: Contributors = await getContributors()(p, s)
 
     const omitIds: string[] = [...maintainers, ...members, ...emeriti].map(

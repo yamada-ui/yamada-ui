@@ -26,10 +26,10 @@ describe("<Stat />", () => {
     render(
       <Stat
         data-testid="stat-icon"
+        helperMessage="21% more than last month"
+        icon="decrease"
         label="Total Page Views"
         number="1,993,818"
-        icon="decrease"
-        helperMessage="21% more than last month"
       />,
     )
     expect(

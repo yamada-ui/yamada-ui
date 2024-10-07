@@ -5,18 +5,24 @@ import type {
   PropGetter,
   ThemeProps,
 } from "@yamada-ui/core"
-import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { useAnimationObserver } from "@yamada-ui/use-animation"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
+import type { UsePopperProps } from "@yamada-ui/use-popper"
+import type {
+  ComponentProps,
+  PropsWithChildren,
+  RefAttributes,
+  RefObject,
+} from "react"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
+import { useAnimationObserver } from "@yamada-ui/use-animation"
 import { useDisclosure, useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import {
   useFocusOnHide,
-  useFocusOnShow,
   useFocusOnPointerDown,
+  useFocusOnShow,
 } from "@yamada-ui/use-focus"
-import type { UsePopperProps } from "@yamada-ui/use-popper"
-import { usePopper, popperProperties } from "@yamada-ui/use-popper"
+import { popperProperties, usePopper } from "@yamada-ui/use-popper"
 import {
   createContext,
   getEventRelatedTarget,
@@ -25,12 +31,6 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type {
-  ComponentProps,
-  PropsWithChildren,
-  RefAttributes,
-  RefObject,
-} from "react"
 import { useCallback, useEffect, useRef } from "react"
 
 export type PopoverProperty = (typeof popoverProperties)[number]
@@ -59,41 +59,22 @@ export const popoverProperties = [
 export interface ComboBoxProps
   extends Omit<
       PopoverOptions,
+      | "autoFocus"
+      | "closeOnButton"
       | "initialFocusRef"
       | "relatedRef"
-      | "autoFocus"
       | "restoreFocus"
-      | "closeOnButton"
       | "trigger"
     >,
     Omit<UsePopperProps, "enabled"> {}
 
 interface PopoverOptions {
   /**
-   * If `true`, the popover will be opened.
+   * The animation of the popover.
+   *
+   * @default 'scale'
    */
-  isOpen?: boolean
-  /**
-   * If `true`, the popover will be initially opened.
-   */
-  defaultIsOpen?: boolean
-  /**
-   * Callback fired when the popover opens.
-   */
-  onOpen?: () => void
-  /**
-   * Callback fired when the popover closes.
-   */
-  onClose?: () => void
-  /**
-   * The `ref` of the element that should receive focus when the popover opens.
-   */
-  initialFocusRef?: RefObject<{ focus(): void }>
-  /**
-   * The `ref` of the element related to the popover.
-   * This is used during the `onBlur` event.
-   */
-  relatedRef?: RefObject<HTMLElement>
+  animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
   /**
    * If `true`, focus will be transferred to the first interactive element when the popover opens.
    *
@@ -101,11 +82,11 @@ interface PopoverOptions {
    */
   autoFocus?: boolean
   /**
-   * If `true`, focus will be returned to the element that triggers the popover when it closes.
+   * The number of delay time to close.
    *
-   * @default true
+   * @default 200
    */
-  restoreFocus?: boolean
+  closeDelay?: number
   /**
    * If `true`, the popover will close when you blur out it by clicking outside or tabbing out.
    *
@@ -113,44 +94,39 @@ interface PopoverOptions {
    */
   closeOnBlur?: boolean
   /**
-   * If `true`, the popover will close when you hit the `Esc` key.
-   *
-   * @default true
-   */
-  closeOnEsc?: boolean
-  /**
    * If `true`, display the popover close button.
    *
    * @default true
    */
   closeOnButton?: boolean
   /**
-   * The interaction that triggers the popover.
+   * If `true`, the popover will close when you hit the `Esc` key.
    *
-   * - `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.
-   * - `click`: means the popover will open on click or press `Enter` to `Space` on keyboard.
-   *
-   * @default 'click'
+   * @default true
    */
-  trigger?: "click" | "hover" | "never" | "contextmenu"
+  closeOnEsc?: boolean
   /**
-   * The number of delay time to open.
-   *
-   * @default 200
+   * If `true`, the popover will be initially opened.
    */
-  openDelay?: number
+  defaultIsOpen?: boolean
   /**
-   * The number of delay time to close.
-   *
-   * @default 200
+   * The animation duration.
    */
-  closeDelay?: number
+  duration?: MotionTransitionProps["duration"]
+  /**
+   * The `ref` of the element that should receive focus when the popover opens.
+   */
+  initialFocusRef?: RefObject<{ focus(): void }>
   /**
    * If `true`, the PopoverContent rendering will be deferred until the popover is open.
    *
    * @default false
    */
   isLazy?: boolean
+  /**
+   * If `true`, the popover will be opened.
+   */
+  isOpen?: boolean
   /**
    * The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`
    *
@@ -161,15 +137,39 @@ interface PopoverOptions {
    */
   lazyBehavior?: LazyMode
   /**
-   * The animation of the popover.
+   * The number of delay time to open.
    *
-   * @default 'scale'
+   * @default 200
    */
-  animation?: "scale" | "top" | "right" | "left" | "bottom" | "none"
+  openDelay?: number
   /**
-   * The animation duration.
+   * The `ref` of the element related to the popover.
+   * This is used during the `onBlur` event.
    */
-  duration?: MotionTransitionProps["duration"]
+  relatedRef?: RefObject<HTMLElement>
+  /**
+   * If `true`, focus will be returned to the element that triggers the popover when it closes.
+   *
+   * @default true
+   */
+  restoreFocus?: boolean
+  /**
+   * The interaction that triggers the popover.
+   *
+   * - `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.
+   * - `click`: means the popover will open on click or press `Enter` to `Space` on keyboard.
+   *
+   * @default 'click'
+   */
+  trigger?: "click" | "contextmenu" | "hover" | "never"
+  /**
+   * Callback fired when the popover closes.
+   */
+  onClose?: () => void
+  /**
+   * Callback fired when the popover opens.
+   */
+  onOpen?: () => void
 }
 
 export interface PopoverProps
@@ -180,20 +180,20 @@ export interface PopoverProps
 interface PopoverContext
   extends Pick<
     PopoverOptions,
-    "isOpen" | "onClose" | "closeOnButton" | "animation" | "duration"
+    "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
   > {
-  onAnimationComplete: () => void
-  forceUpdate: () => void | undefined
-  getTriggerProps: PropGetter
+  forceUpdate: () => undefined | void
+  styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
-  getPopperProps: PropGetter<ComponentProps<"div">>
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
-  styles: { [key: string]: CSSUIObject }
+  getPopperProps: PropGetter<ComponentProps<"div">>
+  getTriggerProps: PropGetter
+  onAnimationComplete: () => void
 }
 
 const [PopoverProvider, usePopover] = createContext<PopoverContext>({
-  strict: false,
   name: "PopoverContext",
+  errorMessage: `usePopoverContext returned is 'undefined'. Seems you forgot to wrap the components in "<Popover />"`,
 })
 
 export { usePopover }
@@ -206,33 +206,33 @@ export { usePopover }
 export const Popover: FC<PopoverProps> = (props) => {
   const [styles, mergedProps] = useComponentMultiStyle("Popover", props)
   const {
-    children,
-    initialFocusRef,
-    restoreFocus = true,
+    animation = "scale",
     autoFocus = true,
-    closeOnBlur = true,
-    closeOnEsc = true,
-    closeOnButton = true,
-    trigger = "click",
-    openDelay = 200,
+    children,
     closeDelay = 200,
+    closeOnBlur = true,
+    closeOnButton = true,
+    closeOnEsc = true,
+    duration,
+    initialFocusRef,
     isLazy,
     lazyBehavior = "unmount",
-    animation = "scale",
-    duration,
+    openDelay = 200,
     relatedRef,
+    restoreFocus = true,
+    trigger = "click",
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure(mergedProps)
+  const { isOpen, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
 
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
 
   const { present, onAnimationComplete } = useAnimationObserver({
-    isOpen,
     ref: popoverRef,
+    isOpen,
   })
 
   const openTimeout = useRef<number | undefined>(undefined)
@@ -244,7 +244,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   if (isOpen) hasBeenOpened.current = true
 
-  const { referenceRef, getPopperProps, forceUpdate, transformOrigin } =
+  const { forceUpdate, referenceRef, transformOrigin, getPopperProps } =
     usePopper({
       ...rest,
       enabled: isOpen,
@@ -259,29 +259,29 @@ export const Popover: FC<PopoverProps> = (props) => {
   }, [])
 
   useFocusOnPointerDown({
-    enabled: isOpen,
     ref: triggerRef,
+    enabled: isOpen,
   })
 
   useFocusOnHide(popoverRef, {
     focusRef: triggerRef,
-    visible: isOpen,
     shouldFocus:
       restoreFocus && (trigger === "click" || trigger === "contextmenu"),
+    visible: isOpen,
   })
 
   useFocusOnShow(popoverRef, {
     focusRef: initialFocusRef,
-    visible: isOpen,
     shouldFocus:
       autoFocus && (trigger === "click" || trigger === "contextmenu"),
+    visible: isOpen,
   })
 
   const shouldRenderChildren = useLazyDisclosure({
-    wasSelected: hasBeenOpened.current,
     enabled: isLazy,
-    mode: lazyBehavior,
     isSelected: present,
+    mode: lazyBehavior,
+    wasSelected: hasBeenOpened.current,
   })
 
   const getPopoverProps: PropGetter<
@@ -291,16 +291,13 @@ export const Popover: FC<PopoverProps> = (props) => {
     (props = {}, ref = null) => {
       const popoverProps: MotionProps & RefAttributes<any> = {
         ...props,
+        ref: mergeRefs(popoverRef, ref),
         style: {
           ...props.style,
           transformOrigin,
         },
-        ref: mergeRefs(popoverRef, ref),
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
-        onKeyDown: handlerAll(props.onKeyDown, (ev) => {
-          if (closeOnEsc && ev.key === "Escape") onClose()
-        }),
         onBlur: handlerAll(props.onBlur, (ev) => {
           const relatedTarget = getEventRelatedTarget(ev)
           const targetIsPopover = isContains(popoverRef.current, relatedTarget)
@@ -313,6 +310,9 @@ export const Popover: FC<PopoverProps> = (props) => {
             !targetIsPopover && !targetIsTrigger && !targetIsRelated
 
           if (isOpen && closeOnBlur && isValidBlur) onClose()
+        }),
+        onKeyDown: handlerAll(props.onKeyDown, (ev) => {
+          if (closeOnEsc && ev.key === "Escape") onClose()
         }),
       }
 
@@ -445,24 +445,24 @@ export const Popover: FC<PopoverProps> = (props) => {
   return (
     <PopoverProvider
       value={{
-        isOpen,
-        onClose,
-        closeOnButton,
-        onAnimationComplete,
-        forceUpdate,
-        getTriggerProps,
-        getAnchorProps,
-        getPopperProps,
-        getPopoverProps,
         animation,
+        closeOnButton,
         duration,
+        forceUpdate,
+        isOpen,
         styles,
+        getAnchorProps,
+        getPopoverProps,
+        getPopperProps,
+        getTriggerProps,
+        onAnimationComplete,
+        onClose,
       }}
     >
       {runIfFunc(children, {
+        forceUpdate,
         isOpen,
         onClose,
-        forceUpdate,
       })}
     </PopoverProvider>
   )

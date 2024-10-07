@@ -1,6 +1,6 @@
 import type { StyledTheme } from "@yamada-ui/core"
-import { getCSS } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
+import { getCSS } from "@yamada-ui/core"
 import { cx, isString, splitObject } from "@yamada-ui/utils"
 
 export const getClassName =

@@ -1,18 +1,27 @@
+import type {
+  Component,
+  IconButtonProps,
+  IconProps,
+  StackProps,
+} from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
+import type { MailItem } from "./data"
 import {
+  Archive,
+  Clock,
+  EllipsisVertical,
   Reply,
   ReplyAll,
   Share,
-  Clock,
   Trash,
-  Archive,
-  EllipsisVertical,
 } from "@yamada-ui/lucide"
 import {
+  assignRef,
   Avatar,
   Button,
   Divider,
-  HStack,
   Heading,
+  HStack,
   IconButton,
   Spacer,
   Switch,
@@ -20,28 +29,19 @@ import {
   Textarea,
   Tooltip,
   VStack,
-  assignRef,
-} from "@yamada-ui/react"
-import type {
-  Component,
-  IconButtonProps,
-  IconProps,
-  StackProps,
 } from "@yamada-ui/react"
 import { memo, useState } from "react"
-import type { MutableRefObject, FC } from "react"
-import type { MailItem } from "./data"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
 
-type DetailProps = StackProps & {
+type DetailProps = {
   defaultMail: MailItem
   setMailRef: MutableRefObject<(mail: MailItem) => void>
-}
+} & StackProps
 
 export const Detail: FC<DetailProps> = memo(
   ({ defaultMail, setMailRef, ...rest }) => {
-    const [{ title, authorName, timestamp, content, email }, setMail] =
+    const [{ authorName, content, email, timestamp, title }, setMail] =
       useState<MailItem>(defaultMail)
 
     assignRef(setMailRef, setMail)
@@ -53,14 +53,14 @@ export const Detail: FC<DetailProps> = memo(
             <ControlIcon icon={Archive} label="Archive" />
             <ControlIcon icon={Trash} label="Move to trash" />
             <Divider
-              orientation="vertical"
-              h="6"
               display={{ base: "block", sm: "none" }}
+              h="6"
+              orientation="vertical"
             />
             <ControlIcon
+              display={{ base: "flex", sm: "none" }}
               icon={Clock}
               label="Snooze"
-              display={{ base: "flex", sm: "none" }}
             />
           </HStack>
 
@@ -71,23 +71,23 @@ export const Detail: FC<DetailProps> = memo(
             <ControlIcon icon={ReplyAll} label="Reply all" />
             <ControlIcon icon={Share} label="Forward" />
             <Divider
-              orientation="vertical"
-              h="6"
               display={{ base: "block", sm: "none" }}
+              h="6"
+              orientation="vertical"
             />
             <ControlIcon icon={EllipsisVertical} />
           </HStack>
         </Header>
 
-        <VStack flex="1" gap="0" divider={<Divider />}>
-          <HStack p="md" align="start">
+        <VStack divider={<Divider />} flex="1" gap="0">
+          <HStack align="start" p="md">
             <Avatar name={authorName} />
 
             <HStack
-              w="full"
-              direction={{ base: "row", sm: "column" }}
               align="start"
+              direction={{ base: "row", sm: "column" }}
               gap="xs"
+              w="full"
             >
               <VStack gap="xs">
                 <Heading as="h6" size="xs">
@@ -96,9 +96,9 @@ export const Detail: FC<DetailProps> = memo(
 
                 <Heading
                   as="h5"
+                  color="muted"
                   fontSize="xs"
                   fontWeight="normal"
-                  color="muted"
                 >
                   {title}
                 </Heading>
@@ -113,22 +113,22 @@ export const Detail: FC<DetailProps> = memo(
 
               <Spacer display={{ base: "block", sm: "none" }} />
 
-              <Text textWrap="nowrap" color="muted" fontSize="xs">
+              <Text color="muted" fontSize="xs" textWrap="nowrap">
                 {getTimestamp(timestamp)}
               </Text>
             </HStack>
           </HStack>
 
-          <VStack p="md" flex="1">
+          <VStack flex="1" p="md">
             <Text>{content}</Text>
           </VStack>
 
           <VStack p="md">
             <Textarea
-              placeholder={`Reply ${authorName}`}
               autosize
-              minRows={3}
               maxRows={6}
+              minRows={3}
+              placeholder={`Reply ${authorName}`}
             />
 
             <HStack>
@@ -149,18 +149,18 @@ export const Detail: FC<DetailProps> = memo(
 
 Detail.displayName = "Detail"
 
-type ControlIconProps = Omit<IconButtonProps, "icon"> & {
+type ControlIconProps = {
   icon: Component<"svg", IconProps>
   label?: string
-}
+} & Omit<IconButtonProps, "icon">
 
 const ControlIcon: FC<ControlIconProps> = memo(
   ({ icon: Icon, label, ...rest }) => {
     return (
       <Tooltip label={label} placement="top">
         <IconButton
-          icon={<Icon fontSize="md" color="muted" />}
           variant="ghost"
+          icon={<Icon color="muted" fontSize="md" />}
           {...rest}
         />
       </Tooltip>

@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor, isGray, isAccessible } from "@yamada-ui/utils"
+import { isAccessible, isGray, transparentizeColor } from "@yamada-ui/utils"
 
 export const Pagination: ComponentMultiStyle<"Pagination"> = {
   baseStyle: {
@@ -8,45 +8,176 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         cursor: "not-allowed",
       },
     },
+    dots: { pointerEvents: "none" },
+    first: {},
     inner: {
       flex: 1,
     },
     item: {
-      px: 1,
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      px: 1,
       rounded: "md",
-      transitionProperty: "common",
       transitionDuration: "slower",
-      _selected: { cursor: "default", pointerEvents: "none" },
+      transitionProperty: "common",
+      _disabled: {
+        boxShadow: "none",
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
       _focus: {
         outline: "none",
       },
-      _disabled: {
-        opacity: 0.4,
-        cursor: "not-allowed",
-        boxShadow: "none",
+      _focusVisible: {
+        boxShadow: "outline",
       },
       _hover: {
         _disabled: {
           bg: ["initial", "initial"],
         },
       },
-      _focusVisible: {
-        boxShadow: "outline",
+      _selected: { cursor: "default", pointerEvents: "none" },
+    },
+    last: {},
+    next: {},
+    prev: {},
+  },
+
+  sizes: {
+    xs: {
+      container: {
+        gap: "xs",
+      },
+      inner: {
+        gap: "xs",
+      },
+      item: {
+        fontSize: "xs",
+        minH: 6,
+        minW: 6,
       },
     },
-    first: {},
-    last: {},
-    prev: {},
-    next: {},
-    dots: { pointerEvents: "none" },
+    sm: {
+      container: {
+        gap: "xs",
+      },
+      inner: {
+        gap: "xs",
+      },
+      item: {
+        fontSize: "sm",
+        minH: 7,
+        minW: 7,
+      },
+    },
+    md: {
+      container: {
+        gap: "sm",
+      },
+      inner: {
+        gap: "sm",
+      },
+      item: {
+        fontSize: "md",
+        minH: 8,
+        minW: 8,
+      },
+    },
+    lg: {
+      container: {
+        gap: "sm",
+      },
+      inner: {
+        gap: "sm",
+      },
+      item: {
+        fontSize: "lg",
+        minH: 10,
+        minW: 10,
+      },
+    },
+    xl: {
+      container: {
+        gap: "md",
+      },
+      inner: {
+        gap: "md",
+      },
+      item: {
+        fontSize: "xl",
+        minH: 12,
+        minW: 12,
+      },
+    },
   },
 
   variants: {
+    ghost: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
+      return {
+        item: {
+          _active: {
+            bg: isGray(c)
+              ? [`${c}.300`, `whiteAlpha.300`]
+              : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
+          },
+          _hover: {
+            bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
+          },
+          _selected: {
+            bg: isGray(c) ? undefined : "transparent",
+            color: isGray(c)
+              ? ["blackAlpha.800", "whiteAlpha.700"]
+              : [`${c}.600`, `${c}.500`],
+            fontWeight: "semibold",
+          },
+        },
+      }
+    },
+    outline: ({ colorScheme: c = "primary" }) => {
+      return {
+        dots: {
+          border: "0",
+        },
+        item: {
+          border: "1px solid",
+          borderColor: "border",
+          _active: {
+            bg: ["blackAlpha.100", "whiteAlpha.100"],
+          },
+          _hover: {
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
+            _disabled: {
+              bg: ["initial", "initial"],
+            },
+          },
+          _selected: {
+            bg: "transparent",
+            borderColor: [`${c}.600`, `${c}.500`],
+            color: isGray(c)
+              ? ["blackAlpha.800", "whiteAlpha.700"]
+              : [`${c}.600`, `${c}.500`],
+            _hover: {
+              bg: ["transparent", "transparent"],
+            },
+          },
+        },
+      }
+    },
     solid: ({ colorScheme: c = "primary" }) => ({
+      dots: {
+        border: "0",
+      },
       item: {
         border: "1px solid",
         borderColor: "border",
+        _active: {
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
+        },
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
+        },
         _selected: {
           bg: isGray(c)
             ? [`${c}.50`, `${c}.700`]
@@ -61,150 +192,19 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
               : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
           },
         },
-        _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _disabled: {
-            bg: ["initial", "initial"],
-          },
-        },
-        _active: {
-          bg: ["blackAlpha.100", "whiteAlpha.100"],
-        },
-      },
-      dots: {
-        border: "0",
       },
     }),
-    outline: ({ colorScheme: c = "primary" }) => {
-      return {
-        item: {
-          border: "1px solid",
-          borderColor: "border",
-          _selected: {
-            bg: "transparent",
-            borderColor: [`${c}.600`, `${c}.500`],
-            color: isGray(c)
-              ? ["blackAlpha.800", "whiteAlpha.700"]
-              : [`${c}.600`, `${c}.500`],
-            _hover: {
-              bg: ["transparent", "transparent"],
-            },
-          },
-          _hover: {
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
-            _disabled: {
-              bg: ["initial", "initial"],
-            },
-          },
-          _active: {
-            bg: ["blackAlpha.100", "whiteAlpha.100"],
-          },
-        },
-        dots: {
-          border: "0",
-        },
-      }
-    },
-    ghost: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
-      return {
-        item: {
-          _selected: {
-            bg: isGray(c) ? undefined : "transparent",
-            fontWeight: "semibold",
-            color: isGray(c)
-              ? ["blackAlpha.800", "whiteAlpha.700"]
-              : [`${c}.600`, `${c}.500`],
-          },
-          _hover: {
-            bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
-          },
-          _active: {
-            bg: isGray(c)
-              ? [`${c}.300`, `whiteAlpha.300`]
-              : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
-          },
-        },
-      }
-    },
     unstyled: {
       container: { gap: 0 },
       inner: { gap: 0 },
-      item: { bg: "none", color: "inherit", minW: "auto", minH: "auto" },
+      item: { bg: "none", color: "inherit", minH: "auto", minW: "auto" },
       _ripple: { display: "none" },
     },
   },
 
-  sizes: {
-    xs: {
-      container: {
-        gap: "xs",
-      },
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        minW: 6,
-        minH: 6,
-        fontSize: "xs",
-      },
-    },
-    sm: {
-      container: {
-        gap: "xs",
-      },
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        minW: 7,
-        minH: 7,
-        fontSize: "sm",
-      },
-    },
-    md: {
-      container: {
-        gap: "sm",
-      },
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        minW: 8,
-        minH: 8,
-        fontSize: "md",
-      },
-    },
-    lg: {
-      container: {
-        gap: "sm",
-      },
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        minW: 10,
-        minH: 10,
-        fontSize: "lg",
-      },
-    },
-    xl: {
-      container: {
-        gap: "md",
-      },
-      inner: {
-        gap: "md",
-      },
-      item: {
-        minW: 12,
-        minH: 12,
-        fontSize: "xl",
-      },
-    },
-  },
-
   defaultProps: {
-    variant: "solid",
-    size: "md",
     colorScheme: "primary",
+    size: "md",
+    variant: "solid",
   },
 }

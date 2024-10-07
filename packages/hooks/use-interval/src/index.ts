@@ -6,11 +6,11 @@ import { useEffect } from "react"
  *
  * @see Docs https://yamada-ui.com/hooks/use-interval
  */
-export const useInterval = (callback: () => void, delay: number | null) => {
+export const useInterval = (callback: () => void, delay: null | number) => {
   const func = useCallbackRef(callback)
 
   useEffect(() => {
-    let timeoutId: number | null = null
+    let timeoutId: null | number = null
 
     if (delay !== null) timeoutId = window.setInterval(() => func(), delay)
 

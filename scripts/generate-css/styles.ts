@@ -1,3 +1,8 @@
+import type { ThemeToken, Transforms } from "@yamada-ui/react"
+import type { CSSProperty, Properties } from "."
+import type { TransformOptions } from "./transform-props"
+import type { UIOptions } from "./ui-props"
+import { pseudoSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
@@ -5,13 +10,8 @@ import { layoutStyleProperties } from "./layout-props"
 import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap, tokenPropertyMap } from "./tokens"
-import type { TransformOptions } from "./transform-props"
 import { transformMap } from "./transform-props"
-import type { UIOptions } from "./ui-props"
 import { additionalProps, atRuleProps, uiProps } from "./ui-props"
-import type { CSSProperty, Properties } from "."
-import { pseudoSelectors } from "@yamada-ui/react"
-import type { Transforms, ThemeToken } from "@yamada-ui/react"
 
 const hasTransform = (
   targetTransform: Transforms,
@@ -19,20 +19,20 @@ const hasTransform = (
 ) => !!transforms?.some(({ transform }) => transform === targetTransform)
 
 const addType = (result: string, value: string) =>
-  />$/.test(result) ? result.replace(/>$/, `${value}>`) : result + value
+  result.endsWith(">") ? result.replace(/>$/, `${value}>`) : result + value
 
 const generateType = ({
   type,
   isProcessSkip = false,
+  prop,
   token,
   transforms,
-  prop,
 }: {
   type: string | string[]
   isProcessSkip?: boolean
+  prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
-  prop?: Properties
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
@@ -75,15 +75,15 @@ const generateType = ({
 }
 
 const generateDocs = ({
+  deprecated,
+  description = [],
   properties,
   urls = [],
-  description = [],
-  deprecated,
 }: {
   properties: string | string[] | undefined
-  urls?: string[]
-  description?: string[]
   deprecated?: boolean
+  description?: string[]
+  urls?: string[]
 }) => {
   if (!description.length) {
     if (!properties) return ""
@@ -112,7 +112,7 @@ const generateDocs = ({
 }
 
 export const generateStyles = async (
-  styles: (CSSProperty & { type: string; deprecated: boolean })[],
+  styles: ({ type: string; deprecated: boolean } & CSSProperty)[],
 ) => {
   const standardStyles: string[] = []
   const shorthandStyles: string[] = []
@@ -122,7 +122,7 @@ export const generateStyles = async (
   const styleProps: string[] = []
   const processSkipProps: string[] = []
   const tokenProps: { [key in ThemeToken]?: string[] } = {}
-  const pickedStyles: (CSSProperty & { type: string })[] = []
+  const pickedStyles: ({ type: string } & CSSProperty)[] = []
 
   checkProps(styles)
 
@@ -139,8 +139,8 @@ export const generateStyles = async (
   styles = styles.filter((style) => {
     const isExists = [
       ...Object.keys(additionalProps),
-      ...Object.keys(uiProps),
       ...Object.keys(atRuleProps),
+      ...Object.keys(uiProps),
     ].includes(style.prop)
 
     if (isExists) pickedStyles.push(style)
@@ -148,14 +148,14 @@ export const generateStyles = async (
     return !isExists
   })
 
-  styles.forEach(({ name, prop, url, type, deprecated }) => {
+  styles.forEach(({ type, name, deprecated, prop, url }) => {
     const token = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transforms = transformMap[prop]
     const config = generateConfig({ properties: prop, token, transforms })()
-    const docs = generateDocs({ properties: name, urls: [url], deprecated })
+    const docs = generateDocs({ deprecated, properties: name, urls: [url] })
 
-    type = generateType({ type, token, transforms, prop })
+    type = generateType({ type, prop, token, transforms })
     standardStyles.push(`${prop}: ${config}`)
     styleProps.push(...[docs, `${prop}?: ${type}`])
 
@@ -182,12 +182,12 @@ export const generateStyles = async (
     [
       prop,
       {
-        properties,
-        static: css,
         type,
+        description,
         isProcessResult,
         isProcessSkip,
-        description,
+        properties,
+        static: css,
       },
     ]: [string, UIOptions],
     targetStyles: string[],
@@ -208,21 +208,21 @@ export const generateStyles = async (
 
     type = generateType({
       type: type ?? types,
-      token,
       isProcessSkip,
+      token,
       transforms,
     })
 
     const config = generateConfig({
+      css,
+      isProcessResult,
+      isProcessSkip,
       properties,
       token,
       transforms,
-      isProcessResult,
-      isProcessSkip,
-      css,
     })(true)
 
-    const docs = generateDocs({ properties, description, urls, deprecated })
+    const docs = generateDocs({ deprecated, description, properties, urls })
 
     targetStyles.push(`${prop}: ${config}`)
     styleProps.push(...[docs, `${prop}?: ${type}`])
@@ -277,11 +277,11 @@ export const generateStyles = async (
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
     import type { StyleConfigs } from "./config"
-    import { transforms } from "./config"
-    import { pipe } from "./config/utils"
     import type { CSSUIObject, Token } from "./css"
     import type { ThemeToken } from "./theme"
     import type { Theme } from "./theme.types"
+    import { transforms } from "./config"
+    import { pipe } from "./config/utils"
 
     export type StandardStyleProperty = keyof typeof standardStyles
 

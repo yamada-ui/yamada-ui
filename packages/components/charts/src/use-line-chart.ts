@@ -1,23 +1,23 @@
-import { getVar, useTheme } from "@yamada-ui/core"
 import type {
   CSSUIObject,
   CSSUIProps,
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
 import type {
-  ChartLayoutType,
-  LineProps,
-  LineChartProps,
-  ReferenceLineProps,
   ChartCurveType,
+  ChartLayoutType,
+  LineChartProps,
+  LineProps,
+  ReferenceLineProps,
 } from "./chart.types"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import { useCallback, useMemo, useState } from "react"
+import { getComponentProps } from "./chart-utils"
 import {
   dotProperties,
   lineChartProperties,
@@ -34,36 +34,11 @@ export interface UseLineChartOptions {
    */
   series: LineProps[]
   /**
-   * Props for the lines.
-   */
-  lineProps?: Partial<LineProps>
-  /**
-   * If any two categorical charts have the same syncId,
-   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
-   */
-  syncId?: number | string
-  /**
-   * Props passed down to recharts `LineChart` component.
-   */
-  chartProps?: LineChartProps
-  /**
-   * Chart orientation.
-   *
-   * @default 'horizontal'
-   */
-  layoutType?: ChartLayoutType
-  /**
-   * Determines whether dots should be displayed.
+   * Determines whether points with `null` values should be connected.
    *
    * @default true
    */
-  withDots?: boolean
-  /**
-   * Determines whether activeDots should be displayed.
-   *
-   * @default true
-   */
-  withActiveDots?: boolean
+  connectNulls?: boolean
   /**
    * Type of the curve.
    *
@@ -71,27 +46,40 @@ export interface UseLineChartOptions {
    */
   curveType?: ChartCurveType
   /**
+   * Controls fill opacity of all lines.
+   *
+   * @default 1
+   */
+  fillOpacity?: [number, number] | number
+  /**
+   * Chart orientation.
+   *
+   * @default 'horizontal'
+   */
+  layoutType?: ChartLayoutType
+  /**
    * Stroke width for the chart lines.
    *
    * @default 2
    */
   strokeWidth?: number
   /**
-   * Determines whether points with `null` values should be connected.
+   * If any two categorical charts have the same syncId,
+   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
+   */
+  syncId?: number | string
+  /**
+   * Determines whether activeDots should be displayed.
    *
    * @default true
    */
-  connectNulls?: boolean
+  withActiveDots?: boolean
   /**
-   * Reference lines that should be displayed on the chart.
-   */
-  referenceLineProps?: ReferenceLineProps[]
-  /**
-   * Controls fill opacity of all lines.
+   * Determines whether dots should be displayed.
    *
-   * @default 1
+   * @default true
    */
-  fillOpacity?: number | [number, number]
+  withDots?: boolean
   /**
    * A label to display below the X axis.
    */
@@ -100,37 +88,49 @@ export interface UseLineChartOptions {
    * A label to display below the Y axis.
    */
   yAxisLabel?: string
+  /**
+   * Props passed down to recharts `LineChart` component.
+   */
+  chartProps?: LineChartProps
+  /**
+   * Props for the lines.
+   */
+  lineProps?: Partial<LineProps>
+  /**
+   * Reference lines that should be displayed on the chart.
+   */
+  referenceLineProps?: ReferenceLineProps[]
 }
 
 interface UseLineChartProps extends UseLineChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useLineChart = ({
-  data,
-  series,
-  layoutType = "horizontal",
-  withDots = true,
-  withActiveDots = true,
-  curveType = "monotone",
-  strokeWidth = 2,
   connectNulls = true,
-  referenceLineProps,
+  curveType = "monotone",
+  data,
   fillOpacity = 1,
+  layoutType = "horizontal",
+  series,
+  strokeWidth = 2,
+  styles,
   syncId,
+  withActiveDots = true,
+  withDots = true,
   xAxisLabel,
   yAxisLabel,
-  styles,
+  referenceLineProps,
   ...rest
 }: UseLineChartProps) => {
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const shouldHighlight = highlightedArea !== null
   const {
-    dot = {},
     activeDot = {},
     dimDot,
     dimLine,
+    dot = {},
     ...computedLineProps
   } = rest.lineProps ?? {}
 
@@ -229,11 +229,11 @@ export const useLineChart = ({
     () =>
       series.map((props, index) => {
         const {
-          dataKey,
-          dot = {},
           activeDot = {},
+          dataKey,
           dimDot = {},
           dimLine = {},
+          dot = {},
           ...computedProps
         } = props
         const color = getVar(`line-${index}`)(theme)
@@ -251,7 +251,7 @@ export const useLineChart = ({
           dimmed ? dimLineClassName : undefined,
         )(theme, true)
 
-        let resolvedActiveDot: Recharts.DotProps | boolean
+        let resolvedActiveDot: boolean | Recharts.DotProps
 
         if (withActiveDots) {
           const computedActiveDot = { ...activeDotProps, ...activeDot }
@@ -264,15 +264,15 @@ export const useLineChart = ({
           resolvedActiveDot = {
             className: cx("ui-line-chart__active-dot", className),
             fill: color,
-            stroke: color,
             r: 4,
+            stroke: color,
             ...rest,
           } as Recharts.DotProps
         } else {
           resolvedActiveDot = false
         }
 
-        let resolvedDot: Recharts.DotProps | boolean
+        let resolvedDot: boolean | Recharts.DotProps
 
         if (withDots) {
           const computedDimDot = { ...dimDotProps, ...dimDot }
@@ -299,9 +299,9 @@ export const useLineChart = ({
 
         return {
           ...rest,
+          activeDot: resolvedActiveDot,
           color,
           dataKey,
-          activeDot: resolvedActiveDot,
           dot: resolvedDot,
         }
       }),
@@ -334,12 +334,12 @@ export const useLineChart = ({
       className: cx(className, lineChartClassName),
       data,
       layout: layoutType,
-      syncId,
       margin: {
         bottom: xAxisLabel ? 30 : undefined,
         left: yAxisLabel ? 10 : undefined,
         right: yAxisLabel ? 5 : undefined,
       },
+      syncId,
       ...props,
       ...chartProps,
     }),
@@ -355,25 +355,25 @@ export const useLineChart = ({
   )
 
   const getLineProps: RequiredPropGetter<
-    Partial<Recharts.LineProps> & { index: number },
+    { index: number } & Partial<Recharts.LineProps>,
     Omit<Recharts.LineProps, "ref">
   > = useCallback(
-    ({ index, className: classNameProp, ...props }) => {
-      const { color, className, dataKey, activeDot, dot, ...rest } =
-        linePropList[index]
+    ({ className: classNameProp, index, ...props }) => {
+      const { className, activeDot, color, dataKey, dot, ...rest } =
+        linePropList[index] ?? {}
 
       return {
+        type: curveType,
+        name: runIfFunc(dataKey, {}),
         className: cx(classNameProp, className),
         activeDot,
-        dot,
-        name: dataKey as string,
-        type: curveType,
-        dataKey,
-        fill: color,
-        strokeWidth,
-        stroke: color,
-        isAnimationActive: false,
         connectNulls,
+        dataKey,
+        dot,
+        fill: color,
+        isAnimationActive: false,
+        stroke: color,
+        strokeWidth,
         ...(props as Omit<Recharts.LineProps, "dataKey">),
         ...rest,
       }
@@ -382,10 +382,10 @@ export const useLineChart = ({
   )
 
   return {
-    getLineProps,
-    getLineChartProps,
     lineVars,
     setHighlightedArea,
+    getLineChartProps,
+    getLineProps,
   }
 }
 

@@ -1,4 +1,4 @@
-import { UIProvider, extendTheme, Heading } from "@yamada-ui/react"
+import { extendTheme, Heading, UIProvider } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Other Styles",
@@ -9,8 +9,8 @@ export const useOtherStyle = () => {
     styles: {
       mdx: {
         h1: {
-          fontSize: "2xl",
           color: "primary",
+          fontSize: "2xl",
         },
       },
     },

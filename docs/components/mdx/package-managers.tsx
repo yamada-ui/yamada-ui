@@ -65,13 +65,13 @@ export const PackageManagers: FC<PackageManagersProps> = ({
           {Object.keys(PACKAGE_MANAGER_COMMANDS).map((name) => (
             <Tab
               key={name}
+              color={["whiteAlpha.700", "whiteAlpha.600"]}
+              fontSize="xs"
               _focusVisible={{ bg: "whiteAlpha.50" }}
               _selected={{
                 borderColor: [`primary.500`, `primary.400`],
                 color: ["white", "white"],
               }}
-              color={["whiteAlpha.700", "whiteAlpha.600"]}
-              fontSize="xs"
               onClick={() => setSelectedPackageName(name as PackageMangerNames)}
             >
               {name}

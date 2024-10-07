@@ -21,7 +21,7 @@ export const useTextStyle = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Heading isTruncated textStyle="gradient">
+      <Heading textStyle="gradient" isTruncated>
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Heading>
     </UIProvider>

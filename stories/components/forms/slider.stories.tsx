@@ -39,9 +39,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Slider defaultValue={25} size="sm" />
-      <Slider defaultValue={50} size="md" />
-      <Slider defaultValue={75} size="lg" />
+      <Slider size="sm" defaultValue={25} />
+      <Slider size="md" defaultValue={50} />
+      <Slider size="lg" defaultValue={75} />
     </>
   )
 }

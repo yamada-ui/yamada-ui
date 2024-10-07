@@ -392,7 +392,7 @@ export const withOrientation: Story = () => {
 export const withFitted: Story = () => {
   return (
     <>
-      <Tabs isFitted variant="line">
+      <Tabs variant="line" isFitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -410,7 +410,7 @@ export const withFitted: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs isFitted variant="sticky">
+      <Tabs variant="sticky" isFitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>

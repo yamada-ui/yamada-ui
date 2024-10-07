@@ -161,24 +161,24 @@ describe("mergeStyle", () => {
   test("should merge nested style objects", () => {
     const target: ComponentStyle = {
       baseStyle: {
-        _hover: { color: "secondary" },
         color: "primary",
         p: { base: "md", lg: "sm" },
+        _hover: { color: "secondary" },
       },
     }
     const source: ComponentStyle = {
       baseStyle: {
-        _hover: { boxShadow: "outline" },
         m: "md",
         p: "lg",
+        _hover: { boxShadow: "outline" },
       },
     }
     const expected: ComponentStyle = {
       baseStyle: {
-        _hover: { boxShadow: "outline", color: "secondary" },
         color: "primary",
         m: "md",
         p: "lg",
+        _hover: { boxShadow: "outline", color: "secondary" },
       },
     }
 
@@ -323,7 +323,7 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects with omitted keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -357,7 +357,7 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects or empty objects with omitted keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -392,7 +392,7 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects or functions with omitted keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: () => ({
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
       }),
     }
@@ -419,7 +419,7 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects with picked keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -429,12 +429,12 @@ describe("mergeMultiStyle", () => {
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -453,7 +453,7 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects or empty objects with picked keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -463,12 +463,12 @@ describe("mergeMultiStyle", () => {
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
       variants: {
         solid: { container: { bg: "primary" } },
@@ -486,19 +486,19 @@ describe("mergeMultiStyle", () => {
   test("should correctly merge style objects or functions with picked keys", () => {
     const target: ComponentMultiStyle = {
       baseStyle: () => ({
-        container: { _hover: { color: "secondary" }, color: "primary" },
+        container: { color: "primary", _hover: { color: "secondary" } },
         inner: { p: { base: "md", lg: "sm" } },
         item: { mt: "md" },
       }),
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
         inner: { p: { base: "md", lg: "sm" } },
         item: { mt: "md" },
       },
@@ -519,24 +519,24 @@ describe("mergeMultiStyle", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          _hover: { color: "secondary" },
           color: "primary",
           p: { base: "md", lg: "sm" },
+          _hover: { color: "secondary" },
         },
       },
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { _hover: { color: "success" }, m: "md", p: "lg" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          _hover: { color: "success" },
           color: "primary",
           m: "md",
           p: "lg",
+          _hover: { color: "success" },
         },
       },
     }

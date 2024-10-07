@@ -204,7 +204,6 @@ export const withOnCompleteChange: Story = () => {
 export const useContainerScroll: Story = () => {
   return (
     <Reorder
-      _focusVisible={{ boxShadow: "outline" }}
       borderWidth="1px"
       h="xs"
       layoutScroll
@@ -213,6 +212,7 @@ export const useContainerScroll: Story = () => {
       p="md"
       rounded="md"
       tabIndex={0}
+      _focusVisible={{ boxShadow: "outline" }}
     >
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>
       <ReorderItem value="リクーム">リクーム</ReorderItem>

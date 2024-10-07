@@ -47,10 +47,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <YearPicker placeholder="extra small size" size="xs" />
-      <YearPicker placeholder="small size" size="sm" />
-      <YearPicker placeholder="medium size" size="md" />
-      <YearPicker placeholder="large size" size="lg" />
+      <YearPicker size="xs" placeholder="extra small size" />
+      <YearPicker size="sm" placeholder="small size" />
+      <YearPicker size="md" placeholder="medium size" />
+      <YearPicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -68,10 +68,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <YearPicker placeholder="outline" variant="outline" />
-      <YearPicker placeholder="filled" variant="filled" />
-      <YearPicker placeholder="flushed" variant="flushed" />
-      <YearPicker placeholder="unstyled" variant="unstyled" />
+      <YearPicker variant="outline" placeholder="outline" />
+      <YearPicker variant="filled" placeholder="filled" />
+      <YearPicker variant="flushed" placeholder="flushed" />
+      <YearPicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -175,10 +175,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <YearPicker isDisabled placeholder="outline" variant="outline" />
-      <YearPicker isDisabled placeholder="filled" variant="filled" />
-      <YearPicker isDisabled placeholder="flushed" variant="flushed" />
-      <YearPicker isDisabled placeholder="unstyled" variant="unstyled" />
+      <YearPicker variant="outline" isDisabled placeholder="outline" />
+      <YearPicker variant="filled" isDisabled placeholder="filled" />
+      <YearPicker variant="flushed" isDisabled placeholder="flushed" />
+      <YearPicker variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="What is your birthday?">
         <YearPicker placeholder="YYYY" />
@@ -190,10 +190,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <YearPicker isReadOnly placeholder="outline" variant="outline" />
-      <YearPicker isReadOnly placeholder="filled" variant="filled" />
-      <YearPicker isReadOnly placeholder="flushed" variant="flushed" />
-      <YearPicker isReadOnly placeholder="unstyled" variant="unstyled" />
+      <YearPicker variant="outline" isReadOnly placeholder="outline" />
+      <YearPicker variant="filled" isReadOnly placeholder="filled" />
+      <YearPicker variant="flushed" isReadOnly placeholder="flushed" />
+      <YearPicker variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="What is your birthday?">
         <YearPicker placeholder="YYYY" />
@@ -205,10 +205,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <YearPicker isInvalid placeholder="outline" variant="outline" />
-      <YearPicker isInvalid placeholder="filled" variant="filled" />
-      <YearPicker isInvalid placeholder="flushed" variant="flushed" />
-      <YearPicker isInvalid placeholder="unstyled" variant="unstyled" />
+      <YearPicker variant="outline" isInvalid placeholder="outline" />
+      <YearPicker variant="filled" isInvalid placeholder="filled" />
+      <YearPicker variant="flushed" isInvalid placeholder="flushed" />
+      <YearPicker variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

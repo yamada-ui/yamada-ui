@@ -9,7 +9,7 @@ describe("<NumberInput />", () => {
 
   test("render input with props", async () => {
     render(
-      <NumberInput placeholder="Enter a number" size="md" variant="outline" />,
+      <NumberInput size="md" variant="outline" placeholder="Enter a number" />,
     )
 
     const numberInput = await screen.findByRole("spinbutton")

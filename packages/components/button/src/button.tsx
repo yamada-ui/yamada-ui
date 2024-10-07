@@ -163,9 +163,9 @@ export const Button = forwardRef<ButtonProps, "button">(
         as={as}
         type={type ?? defaultType}
         className={cx("ui-button", className)}
-        disabled={trulyDisabled}
         data-active={dataAttr(isActive)}
         data-loading={dataAttr(isLoading)}
+        disabled={trulyDisabled}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}
@@ -224,7 +224,7 @@ const ButtonLoading: FC<ButtonLoadingProps> = ({
 
   const element = useMemo(() => {
     if (typeof loadingIcon === "string") {
-      return <LoadingIcon color="current" variant={loadingIcon} />
+      return <LoadingIcon variant={loadingIcon} color="current" />
     } else {
       return loadingIcon || <LoadingIcon color="current" />
     }
@@ -266,10 +266,10 @@ const ButtonIcon: FC<ButtonIconProps> = ({ className, children, ...rest }) => {
   return (
     <ui.span
       className={cx("ui-button__icon", className)}
+      aria-hidden
       alignSelf="center"
       display="inline-flex"
       flexShrink={0}
-      aria-hidden
       {...rest}
     >
       {children}

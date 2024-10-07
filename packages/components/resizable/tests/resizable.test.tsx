@@ -67,8 +67,8 @@ describe("<ResizableTriggerIcon />", () => {
         <ResizableItem defaultSize={50}>One</ResizableItem>
 
         <ResizableTrigger
-          icon={<ResizableTriggerIcon />}
           data-testid="resizable"
+          icon={<ResizableTriggerIcon />}
         />
 
         <ResizableItem defaultSize={50}>Two</ResizableItem>

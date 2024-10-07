@@ -14,18 +14,18 @@ export const EditPageLink: FC<EditPageLinkProps> = ({ href, ...rest }) => {
   return (
     <HStack
       as="a"
-      _focus={{ outline: "none" }}
-      _focusVisible={{ boxShadow: "outline" }}
-      _hover={{ color: ["black", "white"] }}
+      href={href}
+      target="_blank"
       alignSelf="flex-start"
       color="muted"
       fontSize="sm"
       gap="sm"
-      href={href}
       mt="xl"
-      target="_blank"
       transitionDuration="normal"
       transitionProperty="colors"
+      _focus={{ outline: "none" }}
+      _focusVisible={{ boxShadow: "outline" }}
+      _hover={{ color: ["black", "white"] }}
       {...rest}
     >
       <Pencil />

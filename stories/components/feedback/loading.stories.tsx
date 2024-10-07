@@ -13,13 +13,13 @@ export default meta
 export const basic: Story = () => {
   return (
     <Wrap gap="md">
-      <Loading color="red.500" fontSize="6xl" variant="oval" />
-      <Loading color="orange.500" fontSize="6xl" variant="grid" />
-      <Loading color="yellow.500" fontSize="6xl" variant="audio" />
-      <Loading color="green.500" fontSize="6xl" variant="dots" />
-      <Loading color="teal.500" fontSize="6xl" variant="puff" />
-      <Loading color="blue.500" fontSize="6xl" variant="rings" />
-      <Loading color="cyan.500" fontSize="6xl" variant="circles" />
+      <Loading variant="oval" color="red.500" fontSize="6xl" />
+      <Loading variant="grid" color="orange.500" fontSize="6xl" />
+      <Loading variant="audio" color="yellow.500" fontSize="6xl" />
+      <Loading variant="dots" color="green.500" fontSize="6xl" />
+      <Loading variant="puff" color="teal.500" fontSize="6xl" />
+      <Loading variant="rings" color="blue.500" fontSize="6xl" />
+      <Loading variant="circles" color="cyan.500" fontSize="6xl" />
     </Wrap>
   )
 }

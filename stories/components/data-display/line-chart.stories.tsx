@@ -333,10 +333,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <LineChart data={data} dataKey="name" series={series} size="sm" />
-      <LineChart data={data} dataKey="name" series={series} size="md" />
-      <LineChart data={data} dataKey="name" series={series} size="lg" />
-      <LineChart data={data} dataKey="name" series={series} size="full" />
+      <LineChart size="sm" data={data} dataKey="name" series={series} />
+      <LineChart size="md" data={data} dataKey="name" series={series} />
+      <LineChart size="lg" data={data} dataKey="name" series={series} />
+      <LineChart size="full" data={data} dataKey="name" series={series} />
     </>
   )
 }

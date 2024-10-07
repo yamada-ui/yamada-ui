@@ -78,9 +78,9 @@ export const Thead: FC = ({ ...rest }: TableHeadProps) => {
                 css,
                 style,
                 sx,
+                "aria-label": ariaLabel,
                 colSpan: customColSpan,
                 rowSpan: customRowSpan,
-                "aria-label": ariaLabel,
               } = columnDef as Column<unknown>
               const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
 
@@ -160,6 +160,7 @@ export const SortIcon: FC<SortIconProps> = ({
     return (
       <Icon
         className={cx("ui-table__sort-icon", className)}
+        aria-hidden
         fill="none"
         focusable="false"
         stroke="currentColor"
@@ -167,7 +168,6 @@ export const SortIcon: FC<SortIconProps> = ({
         strokeLinejoin="round"
         strokeWidth="1.5"
         viewBox="0 0 24 24"
-        aria-hidden
         __css={css}
         {...rest}
       >

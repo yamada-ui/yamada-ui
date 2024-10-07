@@ -67,7 +67,7 @@ describe("<Reorder />", () => {
 
   test("handles orientation correctly", () => {
     render(
-      <Reorder orientation="horizontal" data-testid="Reorder">
+      <Reorder data-testid="Reorder" orientation="horizontal">
         <ReorderItem value="Item 1">Item 1</ReorderItem>
         <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
@@ -80,7 +80,7 @@ describe("<Reorder />", () => {
 
   test("applies correct styles for vertical orientation", () => {
     render(
-      <Reorder orientation="vertical" data-testid="Reorder">
+      <Reorder data-testid="Reorder" orientation="vertical">
         <ReorderItem value="Item 1">Item 1</ReorderItem>
         <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
@@ -176,7 +176,7 @@ describe("<Reorder />", () => {
 
     const el = screen.getByText("Item 1")
 
-    await drag(user)({ coords: (i) => ({ x: 0, y: i * 100 }), target: el })
+    await drag(user)({ target: el, coords: (i) => ({ x: 0, y: i * 100 }) })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])

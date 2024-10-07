@@ -24,16 +24,16 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({
 
       {id ? (
         <Link
-          _focus={{ outline: "none" }}
-          _focusVisible={{ boxShadow: "none" }}
-          _hover={{ opacity: 1 }}
+          href={`#${id}`}
+          aria-label="anchor"
           color="link"
           display={{ base: "inline-block", md: "none" }}
-          href={`#${id}`}
           opacity="0"
           ps="2"
           tabIndex={-1}
-          aria-label="anchor"
+          _focus={{ outline: "none" }}
+          _focusVisible={{ boxShadow: "none" }}
+          _hover={{ opacity: 1 }}
         >
           <LinkIcon fontSize="0.875em" />
         </Link>

@@ -29,7 +29,7 @@ export const Form: FC<FormProps> = memo(
         {...containerProps}
       >
         <VStack as="header" gap="xs">
-          <Heading as="h3" fontWeight="semibold" size="md">
+          <Heading as="h3" size="md" fontWeight="semibold">
             {title}
           </Heading>
 
@@ -43,8 +43,8 @@ export const Form: FC<FormProps> = memo(
 
           <Button
             type="submit"
-            alignSelf="flex-start"
             colorScheme="primary"
+            alignSelf="flex-start"
             {...buttonProps}
           >
             {submit}

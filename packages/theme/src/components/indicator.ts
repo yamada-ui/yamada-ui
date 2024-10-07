@@ -35,7 +35,7 @@ export const Indicator: ComponentStyle<"Indicator"> = {
         },
       ],
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       bg: [
         isGray(c) ? `${c}.50` : `${c}.100`,
         shadeColor(`${c}.300`, 58)(t, m),

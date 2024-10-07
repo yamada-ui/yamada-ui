@@ -65,8 +65,8 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
       <Menu>
         <MenuButton
           as={IconButton}
-          display={{ base: "none", md: "flex" }}
           variant="ghost"
+          display={{ base: "none", md: "flex" }}
         >
           <MenuIcon fontSize="2xl" />
         </MenuButton>
@@ -87,8 +87,8 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
           placeholder="Search…"
         />
         <Avatar
-          size="sm"
           src="https://avatars.githubusercontent.com/u/84060430?v=4"
+          size="sm"
         />
         M
       </HStack>
@@ -107,10 +107,10 @@ const ControlButton: FC<ControlButtonProps> = memo(
     const [isSelected] = useBoolean(defaultIsSelected)
     return (
       <Button
-        _hover={isSelected ? {} : { color: ["black", "white"] }}
+        variant="unstyled"
         color={isSelected ? ["black", "white"] : "muted"}
         fontWeight="normal"
-        variant="unstyled"
+        _hover={isSelected ? {} : { color: ["black", "white"] }}
         {...rest}
       />
     )

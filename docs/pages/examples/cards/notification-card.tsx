@@ -13,10 +13,10 @@ import { memo } from "react"
 export const NotificationsCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading size="md">Notifications</Heading>
@@ -27,11 +27,11 @@ export const NotificationsCard = memo(() => {
       <CardBody>
         <VStack gap="sm">
           <HStack
-            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
             cursor="pointer"
             p="md"
             rounded="md"
             w="full"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
             <Bell fontSize="2xl" />
 
@@ -57,11 +57,11 @@ export const NotificationsCard = memo(() => {
           </HStack>
 
           <HStack
-            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
             cursor="pointer"
             p="md"
             rounded="md"
             w="full"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
             <EyeOff fontSize="2xl" />
 

@@ -27,7 +27,7 @@ export interface IconProps extends UIIconProps, IconOptions {}
  * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
  */
 export const Icon = forwardRef<IconProps, "svg">(
-  ({ className, icon, size: fontSize, __css, ...rest }, ref) => {
+  ({ className, size: fontSize, icon, __css, ...rest }, ref) => {
     const css = useMemo(
       () => ({
         color: "currentcolor",

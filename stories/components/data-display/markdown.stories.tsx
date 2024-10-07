@@ -25,10 +25,10 @@ export const customComponent: Story = () => {
       components={{
         h2: (props) => (
           <Heading
+            size="2xl"
             bgClip="text"
             bgGradient="linear(to-l, #f37bdf, #59a9e1)"
             isTruncated
-            size="2xl"
             {...props}
           />
         ),

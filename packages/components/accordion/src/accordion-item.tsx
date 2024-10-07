@@ -169,8 +169,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     const getPanelProps: PropGetter = useCallback(
       (props = {}, ref = null) => ({
         id: panelId,
-        role: "region",
         "aria-labelledby": itemId,
+        role: "region",
         ...props,
         ref,
       }),

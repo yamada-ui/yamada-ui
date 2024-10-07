@@ -80,8 +80,8 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
           <Menu>
             <MenuButton
               as={IconButton}
-              display={{ base: "none", md: "flex" }}
               variant="ghost"
+              display={{ base: "none", md: "flex" }}
             >
               <ChevronDown fontSize="2xl" />
             </MenuButton>

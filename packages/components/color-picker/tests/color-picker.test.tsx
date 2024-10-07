@@ -23,7 +23,7 @@ describe("<ColorPicker />", () => {
   })
 
   test("ColorPicker renders with the correct initial value", () => {
-    render(<ColorPicker defaultValue="#00ff00" data-testid="colorPicker" />)
+    render(<ColorPicker data-testid="colorPicker" defaultValue="#00ff00" />)
 
     const colorPicker = screen.getByTestId("colorPicker")
 
@@ -35,9 +35,9 @@ describe("<ColorPicker />", () => {
 
     render(
       <ColorPicker
+        data-testid="colorPicker"
         defaultValue="#00ff00"
         withEyeDropper
-        data-testid="colorPicker"
       />,
     )
 

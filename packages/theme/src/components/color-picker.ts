@@ -15,6 +15,15 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
         w: "auto",
       },
       eyeDropper: {
+        color: ["blackAlpha.600", "whiteAlpha.700"],
+        fontSize: "lg",
+        outline: 0,
+        pointerEvents: "auto",
+        py: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "6",
         _disabled: {
           opacity: 0.4,
           pointerEvents: "none",
@@ -25,25 +34,16 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
         _hover: {
           color: ["blackAlpha.500", "whiteAlpha.600"],
         },
-        color: ["blackAlpha.600", "whiteAlpha.700"],
-        fontSize: "lg",
-        outline: 0,
-        pointerEvents: "auto",
-        py: "1",
-        rounded: "md",
-        transitionDuration: "normal",
-        transitionProperty: "common",
-        w: "6",
       },
       field: {
+        pb: "px",
+        pr: "8",
         _focus: {
           zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",
         },
-        pb: "px",
-        pr: "8",
       },
       inner: {},
       swatch: {},

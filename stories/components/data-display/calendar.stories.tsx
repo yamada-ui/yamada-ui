@@ -53,21 +53,21 @@ export const withVariant: Story = () => {
   return (
     <>
       <Calendar
-        defaultValue={new Date(new Date().setDate(1))}
-        today
         variant="solid"
+        defaultValue={new Date(new Date().setDate(1))}
+        today
       />
 
       <Calendar
-        defaultValue={new Date(new Date().setDate(1))}
-        today
         variant="subtle"
+        defaultValue={new Date(new Date().setDate(1))}
+        today
       />
 
       <Calendar
+        variant="unstyled"
         defaultValue={new Date(new Date().setDate(1))}
         today
-        variant="unstyled"
       />
     </>
   )
@@ -83,9 +83,9 @@ export const withColorScheme: Story = () => {
           <Calendar
             key={colorScheme}
             colorScheme={colorScheme}
+            variant="solid"
             defaultValue={new Date(new Date().setDate(1))}
             today
-            variant="solid"
           />
         ))}
 
@@ -93,9 +93,9 @@ export const withColorScheme: Story = () => {
           <Calendar
             key={colorScheme}
             colorScheme={colorScheme}
+            variant="subtle"
             defaultValue={new Date(new Date().setDate(1))}
             today
-            variant="subtle"
           />
         ))}
       </Wrap>
@@ -451,9 +451,9 @@ export const customDayButton: Story = () => {
       <Wrap gap="md">
         <Calendar
           dayProps={{
+            color: "blue.500",
             _outside: { color: "orange.500" },
             _weekend: { color: "green.500" },
-            color: "blue.500",
           }}
         />
 
@@ -538,16 +538,11 @@ export const customDayButton: Story = () => {
 
       <Calendar
         type="date"
+        size="full"
         dateFormat="YYYY年 MMMM"
         locale="ja"
-        size="full"
         dayProps={{
-          _active: {},
-          _hover: {},
-          _ripple: {
-            display: "none",
-          },
-          _selected: {},
+          variant: "ghost",
           component: ({ date, isSelected }) => (
             <VStack alignItems="center">
               <Center
@@ -579,7 +574,12 @@ export const customDayButton: Story = () => {
           h: "auto",
           p: 2,
           transitionProperty: "none",
-          variant: "ghost",
+          _active: {},
+          _hover: {},
+          _ripple: {
+            display: "none",
+          },
+          _selected: {},
         }}
         headerProps={{ mb: 2 }}
         labelProps={{ icon: { display: "none" }, pointerEvents: "none" }}

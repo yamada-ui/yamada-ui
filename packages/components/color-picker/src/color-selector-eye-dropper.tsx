@@ -13,7 +13,7 @@ export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,
   "button"
 >(({ className, ...rest }, ref) => {
-  const { readOnly, size, styles, getEyeDropperProps } =
+  const { size, readOnly, styles, getEyeDropperProps } =
     useColorSelectorContext()
 
   const css: CSSUIObject = {

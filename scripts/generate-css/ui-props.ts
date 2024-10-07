@@ -223,14 +223,19 @@ export const uiProps = {
     ],
     isProcessResult: true,
   },
-  isTruncated: {
-    type: "boolean",
-    description: ["If `true`, it clamps truncate a text after one line."],
-  },
   layerStyle: {
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
     isProcessResult: true,
+  },
+  textStyle: {
+    type: `StringLiteral, "textStyles"`,
+    description: ["Apply text styles defined in `theme.textStyles`."],
+    isProcessResult: true,
+  },
+  isTruncated: {
+    type: "boolean",
+    description: ["If `true`, it clamps truncate a text after one line."],
   },
   lineClamp: {
     type: "number",
@@ -243,11 +248,6 @@ export const uiProps = {
       WebkitBoxOrient: "vertical",
       WebkitLineClamp: "var(--ui-line-clamp)",
     },
-  },
-  textStyle: {
-    type: `StringLiteral, "textStyles"`,
-    description: ["Apply text styles defined in `theme.textStyles`."],
-    isProcessResult: true,
   },
   vars: {
     type: "{ __prefix?: string; name: string; token?: ThemeToken, value?: Token<number | StringLiteral> }[]",

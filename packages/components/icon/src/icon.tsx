@@ -79,6 +79,9 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   )
 })
 
+Icon.displayName = "Icon"
+Icon.__ui__ = "Icon"
+
 export const CheckIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 24 24" {...props}>

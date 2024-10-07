@@ -13,7 +13,6 @@ import {
   Text,
   useMotionValueEvent,
   useScroll,
-  useToken,
   useUpdateEffect,
   VStack,
 } from "@yamada-ui/react"
@@ -33,7 +32,6 @@ export const TableOfContents = memo(
     const [selectedId, setSelectedId] = useState<string>("")
     const containerRef = useRef<HTMLDivElement>(null)
     const itemRefs = useRef<Map<string, RefObject<HTMLLIElement>>>(new Map())
-    const pl = useToken("spaces", "4")
     const { scrollY } = useScroll()
     const prevValue = useRef<number>(0)
     const directionRef = useRef<"down" | "up">("down")
@@ -136,7 +134,7 @@ export const TableOfContents = memo(
                       data-selected={dataAttr(isSelected)}
                       borderLeftColor={isSelected ? `primary.400` : "border"}
                       borderLeftWidth="1px"
-                      pl={`calc(${lv - 1} * ${pl})`}
+                      pl={`calc(${lv - 1} * $spaces.4)`}
                       position="relative"
                       py="sm"
                       userSelect="none"

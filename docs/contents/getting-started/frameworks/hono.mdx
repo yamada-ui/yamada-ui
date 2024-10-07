@@ -109,12 +109,13 @@ import { renderToString } from "react-dom/server"
 const app = new Hono()
 
 app.get("*", (c) => {
-  const colorMode = getCookie(c, "ui-color-mode")
+  const colorMode = getCookie(c, "ui-color-mode") as
+    | ColorModeWithSystem
+    | undefined
   const themeScheme = getCookie(c, "ui-theme-scheme")
 
-  const initialColorMode: ColorModeWithSystem | undefined = colorMode
-    ? (colorMode as ColorModeWithSystem)
-    : defaultConfig.initialColorMode
+  const initialColorMode = colorMode ?? config.initialColorMode
+  const initialThemeScheme = themeScheme ?? config.initialThemeScheme
 
   return c.html(
     renderToString(
@@ -132,7 +133,7 @@ app.get("*", (c) => {
           <ThemeSchemeScript
             type="cookie"
             nonce="testing"
-            initialThemeScheme={themeScheme ?? defaultConfig.initialThemeScheme}
+            initialThemeScheme={initialThemeScheme}
           />
           <div id="root"></div>
         </body>

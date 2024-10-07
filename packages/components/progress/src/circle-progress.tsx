@@ -144,7 +144,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       ],
     }
 
-    const circleProps: CircleProps = isAnimation
+    const circleProps: CircleProgressCircleProps = isAnimation
       ? {
           animation,
         }
@@ -164,16 +164,20 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         __css={css}
         {...rest}
       >
-        <Shape boxSize={boxSize} isAnimation={isAnimation} speed={speed}>
-          <Circle stroke={trackColor} strokeWidth="$thickness" />
-          <Circle
+        <CircleProgressShape
+          boxSize={boxSize}
+          isAnimation={isAnimation}
+          speed={speed}
+        >
+          <CircleProgressCircle stroke={trackColor} strokeWidth="$thickness" />
+          <CircleProgressCircle
             opacity={isTransparent ? 0 : undefined}
             stroke={color}
             strokeLinecap={isRounded ? "round" : undefined}
             strokeWidth="$thickness"
             {...circleProps}
           />
-        </Shape>
+        </CircleProgressShape>
         {children}
       </ui.div>
     )
@@ -183,20 +187,25 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
 CircleProgress.displayName = "CircleProgress"
 CircleProgress.__ui__ = "CircleProgress"
 
-interface CircleProps extends HTMLUIProps<"circle"> {}
+interface CircleProgressCircleProps extends HTMLUIProps<"circle"> {}
 
-const Circle: FC<CircleProps> = ({ ...rest }) => (
+const CircleProgressCircle: FC<CircleProgressCircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} fill="transparent" r={42} {...rest} />
 )
 
-Circle.displayName = "Circle"
-Circle.__ui__ = "Circle"
+CircleProgressCircle.displayName = "CircleProgressCircle"
+CircleProgressCircle.__ui__ = "CircleProgressCircle"
 
-interface ShapeProps
+interface CircleProgressShapeProps
   extends Omit<HTMLUIProps<"svg">, "children" | "speed">,
     Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed"> {}
 
-const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
+const CircleProgressShape: FC<CircleProgressShapeProps> = ({
+  boxSize,
+  isAnimation,
+  speed,
+  ...rest
+}) => {
   const animation = useAnimation({
     duration: typeof speed[1] === "string" ? speed[1] : `${speed[1]}s`,
     iterationCount: "infinite",
@@ -220,8 +229,8 @@ const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
   return <ui.svg viewBox="0 0 100 100" __css={css} {...rest} />
 }
 
-Shape.displayName = "Shape"
-Shape.__ui__ = "Shape"
+CircleProgressShape.displayName = "CircleProgressShape"
+CircleProgressShape.__ui__ = "CircleProgressShape"
 
 export const CircleProgressLabel = ui("span", {
   baseStyle: {

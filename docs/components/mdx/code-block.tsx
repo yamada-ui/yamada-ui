@@ -143,7 +143,7 @@ export const Highlight: FC<HighlightProps> = ({
   return (
     <ReactHighlight language={language} {...rest}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Box fontSize="sm" overflowX="auto" data-language={language}>
+        <Box data-language={language} fontSize="sm" overflowX="auto">
           <Box
             as="pre"
             className={className}

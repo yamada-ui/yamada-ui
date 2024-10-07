@@ -19,8 +19,8 @@ export const LinkCards = memo(
             <GridItem key={slug}>
               <LinkCard
                 {...{
-                  description,
                   href: slug,
+                  description,
                   label,
                   title,
                   with_description,

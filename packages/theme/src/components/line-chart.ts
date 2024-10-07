@@ -27,9 +27,6 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       justifyContent: "flex-end",
     },
     legendItem: {
-      _hover: {
-        bg: ["blackAlpha.50", "whiteAlpha.100"],
-      },
       alignItems: "center",
       color: ["blackAlpha.800", "whiteAlpha.700"],
       display: "flex",
@@ -37,6 +34,9 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       rounded: "md",
       transitionDuration: "slower",
       transitionProperty: "common",
+      _hover: {
+        bg: ["blackAlpha.50", "whiteAlpha.100"],
+      },
     },
     legendSwatch: {
       boxSize: "3",

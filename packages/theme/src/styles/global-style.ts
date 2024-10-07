@@ -10,11 +10,6 @@ export const globalStyle: UIStyle = {
   "*::placeholder, *[data-placeholder]": {
     color: "blackAlpha.600",
   },
-  _dark: {
-    "*::placeholder, *[data-placeholder]": {
-      color: "whiteAlpha.400",
-    },
-  },
   body: {
     bg: ["white", "black"],
     color: ["black", "white"],
@@ -23,5 +18,10 @@ export const globalStyle: UIStyle = {
     overflowX: "hidden",
     transitionDuration: "normal",
     transitionProperty: "background-color",
+  },
+  _dark: {
+    "*::placeholder, *[data-placeholder]": {
+      color: "whiteAlpha.400",
+    },
   },
 }

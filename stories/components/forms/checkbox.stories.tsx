@@ -266,16 +266,16 @@ export const customHook: Story = () => {
 
         <Box
           {...getIconProps()}
-          _checked={{
-            bg: "blue.500",
-            borderColor: "blue.500",
-            color: "white",
-          }}
           borderWidth="1px"
           cursor="pointer"
           px="sm"
           py="xs"
           rounded="md"
+          _checked={{
+            bg: "blue.500",
+            borderColor: "blue.500",
+            color: "white",
+          }}
         >
           {props.value}
         </Box>

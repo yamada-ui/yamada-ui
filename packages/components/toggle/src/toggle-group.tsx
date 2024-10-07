@@ -81,13 +81,13 @@ export const ToggleGroup = forwardRef(
   <Y extends (number | string)[] | number | string = string>(
     {
       className,
+      size,
+      variant,
       defaultValue,
       direction: flexDirection,
       isDisabled,
       isReadOnly,
-      size,
       value: valueProp,
-      variant,
       onChange: onChangeProp,
       ...rest
     }: ToggleGroupProps<Y>,
@@ -137,12 +137,12 @@ export const ToggleGroup = forwardRef(
 
     const values: ToggleGroupContext = useMemo(
       () => ({
+        size,
+        variant,
         isControlled: isControlledRef.current,
         isDisabled,
         isReadOnly,
-        size,
         value,
-        variant,
         onChange,
       }),
       [value, size, variant, isDisabled, isReadOnly, onChange],

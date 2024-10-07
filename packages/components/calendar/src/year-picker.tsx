@@ -160,8 +160,8 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
               id={id}
               as="div"
               className="ui-year-picker__content"
-              role="dialog"
               aria-modal="true"
+              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

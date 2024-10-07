@@ -96,7 +96,7 @@ const Item: FC<ItemProps> = memo(
     return (
       <Card variant="outline" {...rest}>
         <CardHeader>
-          <Heading as="h4" color="muted" size="sm">
+          <Heading as="h4" size="sm" color="muted">
             {title}
           </Heading>
 

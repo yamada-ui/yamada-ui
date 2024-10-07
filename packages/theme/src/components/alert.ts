@@ -29,16 +29,19 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
   },
 
   variants: {
-    basic: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    basic: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: { bg: ["white", "black"], borderWidth: "1px" },
       icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
     "island-accent": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       theme: t,
     }) => ({
       container: {
+        bg: ["white", "black"],
+        borderWidth: "1px",
+        pl: 7,
         _before: {
           bg: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
           content: '""',
@@ -50,15 +53,12 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
           transform: "translateY(-50%)",
           w: 1,
         },
-        bg: ["white", "black"],
-        borderWidth: "1px",
-        pl: 7,
       },
       icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
     "left-accent": ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       theme: t,
     }) => ({
       container: {
@@ -70,17 +70,17 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
       },
       icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
-    solid: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
         color: "white",
       },
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: { bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)] },
       icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
-    "top-accent": ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    "top-accent": ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
         borderTop: "0.25rem solid",

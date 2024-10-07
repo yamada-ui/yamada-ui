@@ -156,9 +156,9 @@ describe("<Calendar />", () => {
     test("should change selected date", () => {
       const { container } = render(
         <Calendar
+          variant="solid"
           defaultValue={new Date(new Date().setDate(1))}
           today
-          variant="solid"
         />,
       )
       const selectDate = new Date(new Date().setDate(7))
@@ -173,9 +173,9 @@ describe("<Calendar />", () => {
     test("should change selected month", () => {
       const { container } = render(
         <Calendar
+          variant="subtle"
           defaultValue={new Date(new Date().setDate(1))}
           today
-          variant="subtle"
         />,
       )
 
@@ -504,9 +504,9 @@ describe("<Calendar />", () => {
         (number) => {
           const { getByTestId } = render(
             <Calendar
+              data-testid="Calender"
               amountOfMonths={number}
               disableOutsideDays
-              data-testid="Calender"
             />,
           )
           const children = getByTestId("Calender").children

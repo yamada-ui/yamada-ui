@@ -5,8 +5,8 @@ import { getColor, isArray } from "@yamada-ui/utils"
 export const Progress: ComponentMultiStyle<"Progress"> = {
   baseStyle: {
     filledTrack: ({
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       filledTrackColor: f,
       hasStripe,
       isAnimation,

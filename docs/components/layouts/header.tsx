@@ -92,28 +92,28 @@ export const Header = memo(
           <HStack maxW="9xl" px={{ base: "lg", md: "md" }} py="3" w="full">
             <Box
               as={Link}
-              _focus={{ outline: "none" }}
-              _focusVisible={{ boxShadow: "outline" }}
-              _hover={{ opacity: 0.7 }}
               href="/"
+              aria-label="Yamada UI"
               rounded="md"
               transitionDuration="slower"
               transitionProperty="opacity"
-              aria-label="Yamada UI"
+              _focus={{ outline: "none" }}
+              _focusVisible={{ boxShadow: "outline" }}
+              _hover={{ opacity: 0.7 }}
             >
               <Image
-                _dark={{ display: "none" }}
+                src="/logo-black.png"
                 alt="Yamada UI"
                 h={{ base: "10", sm: "8" }}
-                src="/logo-black.png"
                 w="auto"
+                _dark={{ display: "none" }}
               />
               <Image
-                _light={{ display: "none" }}
+                src="/logo-white.png"
                 alt="Yamada UI"
                 h={{ base: "10", sm: "8" }}
-                src="/logo-white.png"
                 w="auto"
+                _light={{ display: "none" }}
               />
             </Box>
 
@@ -164,25 +164,25 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
         />
 
         <NextLinkIconButton
-          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-          color="muted"
-          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
           href={CONSTANT.SNS.DISCORD}
-          icon={<Discord />}
-          isExternal
           variant="ghost"
           aria-label="GitHub repository"
+          color="muted"
+          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
+          icon={<Discord />}
+          isExternal
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
 
         <NextLinkIconButton
-          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-          color="muted"
-          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
           href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-          icon={<Github />}
-          isExternal
           variant="ghost"
           aria-label="Discord server"
+          color="muted"
+          display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
+          icon={<Github />}
+          isExternal
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
 
         <ThemeSchemeButton
@@ -200,21 +200,21 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
         {!isOpen ? (
           <IconButton
-            _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
+            variant="ghost"
+            aria-label="Open navigation menu"
             color="muted"
             display={{ base: "none", lg: "inline-flex" }}
             icon={<MenuIcon fontSize="2xl" />}
-            variant="ghost"
-            aria-label="Open navigation menu"
+            _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
             onClick={onOpen}
           />
         ) : (
           <CloseButton
-            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-            color="muted"
-            display={{ base: "none", lg: "inline-flex" }}
             size="lg"
             aria-label="Close navigation menu"
+            color="muted"
+            display={{ base: "none", lg: "inline-flex" }}
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             onClick={onClose}
           />
         )}
@@ -254,11 +254,11 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
     >
       <MenuButton
         as={IconButton}
-        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-        color="muted"
-        icon={<Languages fontSize="2xl" />}
         variant="ghost"
         aria-label="Open language switching menu"
+        color="muted"
+        icon={<Languages fontSize="2xl" />}
+        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         {...rest}
       />
 
@@ -311,7 +311,8 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
       >
         <MenuButton
           as={IconButton}
-          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+          variant="ghost"
+          aria-label="Open color mode switching menu"
           color="muted"
           icon={
             colorMode === "dark" ? (
@@ -320,8 +321,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
               <Moon fontSize="2xl" />
             )
           }
-          variant="ghost"
-          aria-label="Open color mode switching menu"
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           {...rest}
         />
 
@@ -371,11 +371,11 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       >
         <PopoverTrigger>
           <IconButton
-            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-            color="muted"
-            icon={<Palette fontSize="2xl" />}
             variant="ghost"
             aria-label="Open color mode switching menu"
+            color="muted"
+            icon={<Palette fontSize="2xl" />}
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             {...rest}
           />
         </PopoverTrigger>
@@ -415,9 +415,6 @@ const ColorButton: FC<ColorButtonProps> = memo(({ colorScheme, ...rest }) => {
     <Box
       as="button"
       type="button"
-      _active={{ bg: `${colorScheme}.700` }}
-      _focusVisible={{ shadow: "outline" }}
-      _hover={{ bg: `${colorScheme}.600` }}
       bg={`${colorScheme}.500`}
       boxShadow="inner"
       minH={{ base: "12", md: "10" }}
@@ -428,6 +425,9 @@ const ColorButton: FC<ColorButtonProps> = memo(({ colorScheme, ...rest }) => {
       rounded="md"
       transitionDuration="slower"
       transitionProperty="common"
+      _active={{ bg: `${colorScheme}.700` }}
+      _focusVisible={{ shadow: "outline" }}
+      _hover={{ bg: `${colorScheme}.600` }}
       {...rest}
       onPointerDown={onPointerDown}
     >

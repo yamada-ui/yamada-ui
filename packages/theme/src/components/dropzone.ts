@@ -5,6 +5,15 @@ import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
   baseStyle: ({ colorMode: m, theme: t }) => ({
     container: {
+      bg: ["blackAlpha.50", "whiteAlpha.50"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      outline: 0,
+      overflow: "hidden",
+      p: "md",
+      rounded: "md",
+      transitionDuration: "normal",
+      transitionProperty: "common",
+      w: "100%",
       _accept: {
         bg: ["success.50", transparentizeColor("success.400", 0.12)(t, m)],
         borderColor: ["success.500", "success.400"],
@@ -25,15 +34,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
         bg: ["danger.50", transparentizeColor("danger.400", 0.12)(t, m)],
         borderColor: ["danger.500", "danger.400"],
       },
-      bg: ["blackAlpha.50", "whiteAlpha.50"],
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      outline: 0,
-      overflow: "hidden",
-      p: "md",
-      rounded: "md",
-      transitionDuration: "normal",
-      transitionProperty: "common",
-      w: "100%",
     },
     overlay: {
       bg: ["whiteAlpha.600", "blackAlpha.600"],
@@ -75,6 +75,8 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
 
       return {
         container: {
+          borderStyle: "dashed",
+          borderWidth: "1px",
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -89,8 +91,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
-          borderStyle: "dashed",
-          borderWidth: "1px",
         },
       }
     },
@@ -109,6 +109,8 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
 
       return {
         container: {
+          borderStyle: "solid",
+          borderWidth: "1px",
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -123,13 +125,15 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
             borderColor: errorBorderColor,
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
-          borderStyle: "solid",
-          borderWidth: "1px",
         },
       }
     },
     unstyled: {
       container: {
+        bg: "transparent",
+        color: "inherit",
+        h: "auto",
+        rounded: "inherit",
         _accept: {
           bg: "transparent",
           borderColor: "inherit",
@@ -146,10 +150,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
           bg: "transparent",
           borderColor: "inherit",
         },
-        bg: "transparent",
-        color: "inherit",
-        h: "auto",
-        rounded: "inherit",
       },
       overlay: {
         bg: "transparent",

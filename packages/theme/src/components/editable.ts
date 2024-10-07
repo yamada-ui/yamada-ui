@@ -21,6 +21,11 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        p: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "full",
         _focus: {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
@@ -33,11 +38,6 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
           boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
         },
         _placeholder: { opacity: 0.6 },
-        p: "1",
-        rounded: "md",
-        transitionDuration: "normal",
-        transitionProperty: "common",
-        w: "full",
       }
     },
     preview: {
@@ -61,6 +61,13 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        boxSizing: "content-box",
+        h: "1lh",
+        p: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "full",
         _focus: {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
@@ -73,13 +80,6 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
           boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
         },
         _placeholder: { opacity: 0.6 },
-        boxSizing: "content-box",
-        h: "1lh",
-        p: "1",
-        rounded: "md",
-        transitionDuration: "normal",
-        transitionProperty: "common",
-        w: "full",
       }
     },
   },

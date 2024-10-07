@@ -44,7 +44,7 @@ export const Tree = memo(
           <RecursiveListItem key={document.slug} {...document} />
         ))}
 
-        {CONSTANT.MENU.map(({ name, href, icon, isExternal }) => (
+        {CONSTANT.MENU.map(({ href, name, icon, isExternal }) => (
           <ListItemLink
             key={name}
             isExternal={isExternal}
@@ -134,6 +134,15 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
   }) => {
     return (
       <HStack
+        data-selected={dataAttr(isSelected)}
+        color={isNested ? "muted" : undefined}
+        cursor="pointer"
+        gap="0"
+        position="relative"
+        rounded="md"
+        transitionDuration="normal"
+        transitionProperty="colors"
+        userSelect="none"
         _active={{
           bg: !isSelected ? ["blackAlpha.500", "whiteAlpha.500"] : undefined,
         }}
@@ -161,32 +170,23 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           bg: [`primary.300`, `primary.300`],
           color: [`black`, "white"],
         }}
-        color={isNested ? "muted" : undefined}
-        cursor="pointer"
-        gap="0"
-        position="relative"
-        rounded="md"
-        transitionDuration="normal"
-        transitionProperty="colors"
-        userSelect="none"
-        data-selected={dataAttr(isSelected)}
       >
         <Text
           as={Link}
-          _focus={{ outline: "none" }}
-          _focusVisible={{ boxShadow: "inline" }}
+          href={slug}
+          target={isExternal ? "_blank" : undefined}
           alignItems="center"
           display="inline-flex"
           flex="1"
-          href={slug}
           pl="3"
           position="static"
           pr={!withToggleButton ? "3" : undefined}
           py="sm"
           rel={isExternal ? "noopener" : undefined}
           rounded="md"
-          target={isExternal ? "_blank" : undefined}
           zIndex="yamcha"
+          _focus={{ outline: "none" }}
+          _focusVisible={{ boxShadow: "inline" }}
           onClick={!isOpen ? onToggle : undefined}
         >
           <ListItemIcon color="muted" icon={menu_icon} me="sm" />
@@ -201,15 +201,15 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         {withToggleButton ? (
           <Center
             as="button"
-            _focus={{ outline: "none" }}
-            _focusVisible={{ boxShadow: "inline" }}
+            aria-label="Toggle children"
             boxSizing="content-box"
             fontSize="1.5em"
             p="sm"
             position="static"
             rounded="md"
             zIndex="yamcha"
-            aria-label="Toggle children"
+            _focus={{ outline: "none" }}
+            _focusVisible={{ boxShadow: "inline" }}
             onClick={onToggle}
           >
             <ChevronIcon

@@ -98,9 +98,9 @@ export const ReorderItem = forwardRef(
           __css={css}
           {...rest}
           style={{ ...rest.style, x, y }}
+          data-selected={dataAttr(isDrag)}
           dragControls={dragControls}
           dragListener={!hasTrigger}
-          data-selected={dataAttr(isDrag)}
         >
           {children ?? label}
         </ui.li>

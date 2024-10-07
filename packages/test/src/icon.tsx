@@ -4,9 +4,9 @@ export const TestIcon: FC<ComponentProps<"svg">> = ({ ...props }) => {
   return (
     <svg
       style={{ height: "1rem", width: "1rem" }}
+      data-testid="test-icon"
       color="currentcolor"
       viewBox="0 0 24 24"
-      data-testid="test-icon"
       {...props}
     >
       <path

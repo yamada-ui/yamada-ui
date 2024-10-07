@@ -70,9 +70,9 @@ describe("<AvatarBadge />", () => {
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="top-start"
-          aria-label="This is the avatar badge of Hirotomo Yamada."
         />
       </Avatar>,
     )
@@ -94,9 +94,9 @@ describe("<AvatarBadge />", () => {
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="top-end"
-          aria-label="This is the avatar badge of Hirotomo Yamada."
         />
       </Avatar>,
     )
@@ -118,9 +118,9 @@ describe("<AvatarBadge />", () => {
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="bottom-start"
-          aria-label="This is the avatar badge of Hirotomo Yamada."
         />
       </Avatar>,
     )
@@ -142,9 +142,9 @@ describe("<AvatarBadge />", () => {
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="bottom-end"
-          aria-label="This is the avatar badge of Hirotomo Yamada."
         />
       </Avatar>,
     )
@@ -165,10 +165,10 @@ describe("<AvatarBadge />", () => {
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           ping
           pingColor="rgb(255, 0, 0)"
-          aria-label="This is the avatar badge of Hirotomo Yamada."
         />
       </Avatar>,
     )

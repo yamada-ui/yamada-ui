@@ -33,9 +33,9 @@ export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   return (
     <ui.a
       ref={ref}
+      target={isExternal ? "_blank" : undefined}
       className={cx("ui-link", className)}
       rel={isExternal ? "noopener" : undefined}
-      target={isExternal ? "_blank" : undefined}
       __css={css}
       {...rest}
     />

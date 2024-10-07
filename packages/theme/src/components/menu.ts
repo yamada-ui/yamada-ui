@@ -36,11 +36,17 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       color: ["blackAlpha.600", "whiteAlpha.700"],
     },
     item: {
+      cursor: "pointer",
+      px: "3",
+      py: "1.5",
+      transitionDuration: "ultra-fast",
+      transitionProperty: "background",
+      transitionTimingFunction: "ease-in",
       _active: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
         _disabled: {
           bg: ["white", "black"],
         },
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
       },
       _disabled: {
         cursor: "not-allowed",
@@ -49,12 +55,6 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       _focus: {
         bg: ["blackAlpha.50", "whiteAlpha.50"],
       },
-      cursor: "pointer",
-      px: "3",
-      py: "1.5",
-      transitionDuration: "ultra-fast",
-      transitionProperty: "background",
-      transitionTimingFunction: "ease-in",
     },
     list: {
       outline: "none",

@@ -49,13 +49,13 @@ export const Card: ComponentMultiStyle<"Card"> = {
         borderWidth: "1px",
       },
     },
-    solid: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
         color: "white",
       },
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
       },

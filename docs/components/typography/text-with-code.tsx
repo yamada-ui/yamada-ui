@@ -19,8 +19,8 @@ export const TextWithCodeOrLink: FC<TextWithCodeOrLinkProps> = memo(
               return (
                 <NextLink
                   key={index}
-                  apply="mdx.a"
                   href={href}
+                  apply="mdx.a"
                   isExternal
                   onClick={(ev) => {
                     ev.stopPropagation()

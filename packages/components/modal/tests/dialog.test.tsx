@@ -13,6 +13,7 @@ describe("<Dialog />", () => {
         </button>
 
         <Dialog
+          data-testid="Dialog"
           cancel={{
             children: "dialog-cancel",
           }}
@@ -23,7 +24,6 @@ describe("<Dialog />", () => {
           success={{
             children: "dialog-success",
           }}
-          data-testid="Dialog"
           onCancel={() => setIsOpen(false)}
           onClose={() => setIsOpen(false)}
           onOther={() => setIsOpen(false)}
@@ -47,6 +47,7 @@ describe("<Dialog />", () => {
         </button>
 
         <Dialog
+          data-testid="Dialog"
           cancel={{
             children: "dialog-cancel",
           }}
@@ -57,7 +58,6 @@ describe("<Dialog />", () => {
           success={{
             children: "dialog-success",
           }}
-          data-testid="Dialog"
           onCancel={() => setIsOpen(false)}
           onClose={() => setIsOpen(false)}
           onOther={() => setIsOpen(false)}

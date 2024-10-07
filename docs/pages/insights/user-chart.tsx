@@ -110,21 +110,21 @@ export const UserChart = memo(
             <HStack>
               <Box
                 as="a"
-                cursor="pointer"
                 href={user.github.url}
                 target="_blank"
+                cursor="pointer"
               >
                 <Avatar src={user.github.icon} />
               </Box>
 
               <VStack gap="xs">
-                <Heading as="h3" lineClamp={1} size="md">
+                <Heading as="h3" size="md" lineClamp={1}>
                   {user.name[locale]}
                 </Heading>
 
                 <Link
-                  fontSize="sm"
                   href={user.github.url}
+                  fontSize="sm"
                   isExternal
                   lineClamp={1}
                 >

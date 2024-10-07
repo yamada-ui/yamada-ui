@@ -41,8 +41,8 @@ export const basic: Story = () => {
 export const withVariant: Story = () => {
   return (
     <Wrap gap="md">
-      <ColorSwatch color="#4387f4" variant="basic" />
-      <ColorSwatch color="rgba(234, 22, 174, 0.5)" variant="rounded" />
+      <ColorSwatch variant="basic" color="#4387f4" />
+      <ColorSwatch variant="rounded" color="rgba(234, 22, 174, 0.5)" />
     </Wrap>
   )
 }
@@ -50,9 +50,9 @@ export const withVariant: Story = () => {
 export const withSize: Story = () => {
   return (
     <Wrap gap="md">
-      <ColorSwatch color="#4387f4" size="sm" />
-      <ColorSwatch color="rgba(234, 22, 174, 0.5)" size="md" />
-      <ColorSwatch color="hsla(251, 87%, 67%, 0.7)" size="lg" />
+      <ColorSwatch size="sm" color="#4387f4" />
+      <ColorSwatch size="md" color="rgba(234, 22, 174, 0.5)" />
+      <ColorSwatch size="lg" color="hsla(251, 87%, 67%, 0.7)" />
     </Wrap>
   )
 }

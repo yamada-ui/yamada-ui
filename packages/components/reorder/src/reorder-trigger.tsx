@@ -14,13 +14,13 @@ export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
     const { dragControls, isDrag, register } = useReorderItemContext()
 
     const css: CSSUIObject = {
-      _selected: {
-        cursor: "grabbing",
-      },
       alignItems: "center",
       cursor: "grab",
       display: "flex",
       justifyContent: "center",
+      _selected: {
+        cursor: "grabbing",
+      },
       ...styles.trigger,
     }
 

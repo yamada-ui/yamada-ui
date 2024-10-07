@@ -7,7 +7,15 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
       _readOnly: { cursor: "auto" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
+      border: "2px solid",
+      borderColor: "inherit",
+      color: ["white", "black"],
+      transitionDuration: "normal",
+      transitionProperty: "box-shadow",
       _checked: {
+        bg: `${c}.500`,
+        borderColor: `${c}.500`,
+        color: ["white", "black"],
         _disabled: {
           bg: ["blackAlpha.400", "whiteAlpha.300"],
         },
@@ -15,9 +23,6 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
           bg: `${c}.600`,
           borderColor: `${c}.600`,
         },
-        bg: `${c}.500`,
-        borderColor: `${c}.500`,
-        color: ["white", "black"],
       },
       _disabled: {
         bg: ["blackAlpha.200", "whiteAlpha.100"],
@@ -32,23 +37,18 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
         color: ["white", "black"],
       },
       _invalid: {
+        borderColor: ["danger.500", "danger.400"],
         _focusVisible: {
+          borderColor: "inherit",
           _checked: {
             borderColor: `${c}.500`,
           },
-          borderColor: "inherit",
         },
-        borderColor: ["danger.500", "danger.400"],
       },
-      border: "2px solid",
-      borderColor: "inherit",
-      color: ["white", "black"],
-      transitionDuration: "normal",
-      transitionProperty: "box-shadow",
     }),
     label: {
-      _disabled: { opacity: 0.4 },
       userSelect: "none",
+      _disabled: { opacity: 0.4 },
     },
   },
 

@@ -175,9 +175,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "basic",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
-              variant: "basic",
             })
           }
         >
@@ -187,9 +187,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "solid",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
-              variant: "solid",
             })
           }
         >
@@ -199,9 +199,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "subtle",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
-              variant: "subtle",
             })
           }
         >
@@ -211,9 +211,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "top-accent",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
-              variant: "top-accent",
             })
           }
         >
@@ -223,9 +223,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "left-accent",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
-              variant: "left-accent",
             })
           }
         >
@@ -253,11 +253,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "subtle",
               description: "オッス！オラ悟空！",
               icon: { variant: "oval" },
               status: "loading",
               title: "孫悟空",
-              variant: "subtle",
             })
           }
         >
@@ -267,11 +267,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "solid",
               description: "オッス！オラ悟空！",
               icon: { variant: "grid" },
               status: "loading",
               title: "孫悟空",
-              variant: "solid",
             })
           }
         >
@@ -281,11 +281,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "subtle",
               description: "オッス！オラ悟空！",
               icon: { variant: "puff" },
               status: "loading",
               title: "孫悟空",
-              variant: "subtle",
             })
           }
         >
@@ -295,11 +295,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
+              variant: "solid",
               description: "オッス！オラ悟空！",
               icon: { variant: "dots" },
               status: "loading",
               title: "孫悟空",
-              variant: "solid",
             })
           }
         >

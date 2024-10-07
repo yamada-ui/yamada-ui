@@ -1,5 +1,5 @@
 import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
-import { List, ListIcon, ListItem, DiscList, DecimalList } from "../src"
+import { DecimalList, DiscList, List, ListIcon, ListItem } from "../src"
 
 describe("<List />", () => {
   test("List renders correctly", async () => {
@@ -63,7 +63,7 @@ describe("<List />", () => {
     render(
       <List>
         <ListItem>
-          <ListIcon aria-label="icon" as={TestIcon} />
+          <ListIcon as={TestIcon} aria-label="icon" />
         </ListItem>
       </List>,
     )

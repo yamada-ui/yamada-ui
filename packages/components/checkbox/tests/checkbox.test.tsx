@@ -1,8 +1,8 @@
-import { FormControl } from "@yamada-ui/form-control"
-import { act, a11y, render, renderHook, screen } from "@yamada-ui/test"
 import type { ChangeEvent } from "react"
-import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 import type { CheckboxItem } from "../src"
+import { FormControl } from "@yamada-ui/form-control"
+import { a11y, act, render, renderHook, screen } from "@yamada-ui/test"
+import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 
 describe("<Checkbox />", () => {
   test("Checkbox renders correctly", async () => {
@@ -79,8 +79,8 @@ describe("<Checkbox />", () => {
       <>
         <CheckboxGroup
           data-testid="CheckboxGroup1"
-          direction="row"
           defaultValue={["No"]}
+          direction="row"
         >
           <Checkbox value="yes">Yes</Checkbox>
           <Checkbox value="no">No</Checkbox>

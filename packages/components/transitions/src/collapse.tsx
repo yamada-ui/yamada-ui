@@ -1,34 +1,34 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
-  WithTransitionProps,
-  MotionTransitionVariants,
   MotionProps,
+  MotionTransitionVariants,
   MotionVariants,
+  WithTransitionProps,
 } from "@yamada-ui/motion"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
   AnimatePresence,
+  motion,
+  MOTION_TRANSITION_EASINGS,
+  motionForwardRef,
   transitionEnter,
   transitionExit,
-  MOTION_TRANSITION_EASINGS,
-  motion,
-  motionForwardRef,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
 import { useEffect, useMemo, useState } from "react"
 
-const isNumeric = (value?: string | number) =>
+const isNumeric = (value?: number | string) =>
   value != null && parseFloat(value.toString()) > 0
 
 const variants: MotionVariants = {
   enter: ({
     animationOpacity,
-    endingHeight: height,
-    transition,
-    transitionEnd,
     delay,
     duration,
+    endingHeight: height,
     enter,
+    transition,
+    transitionEnd,
   } = {}) => ({
     ...(animationOpacity ? { opacity: 1 } : {}),
     height,
@@ -38,12 +38,12 @@ const variants: MotionVariants = {
   }),
   exit: ({
     animationOpacity,
-    startingHeight: height,
-    transition,
-    transitionEnd,
     delay,
     duration,
     exit,
+    startingHeight: height,
+    transition,
+    transitionEnd,
   } = {}) => ({
     ...(animationOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
     height,
@@ -54,9 +54,9 @@ const variants: MotionVariants = {
 } satisfies MotionTransitionVariants
 
 export const collapseProps = {
-  initial: "exit",
   animate: "enter",
   exit: "exit",
+  initial: "exit",
   variants,
 }
 
@@ -68,17 +68,17 @@ interface CollapseOptions {
    */
   animationOpacity?: boolean
   /**
-   * The height you want the content in its collapsed state.
-   *
-   * @default 0
-   */
-  startingHeight?: number | string
-  /**
    * The height you want the content in its expanded state.
    *
    * @default "auto"
    */
   endingHeight?: number | string
+  /**
+   * The height you want the content in its collapsed state.
+   *
+   * @default 0
+   */
+  startingHeight?: number | string
 }
 
 export interface CollapseProps
@@ -94,16 +94,16 @@ export interface CollapseProps
 export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Collapse", props)
   let {
-    unmountOnExit,
-    isOpen,
+    className,
     animationOpacity,
-    startingHeight,
-    endingHeight,
-    transition: transitionProp,
-    transitionEnd,
     delay,
     duration,
-    className,
+    endingHeight,
+    isOpen,
+    startingHeight,
+    transition: transitionProp,
+    transitionEnd,
+    unmountOnExit,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -152,12 +152,12 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
 
   const custom = {
     animationOpacity,
-    startingHeight,
-    endingHeight,
-    transition,
-    transitionEnd,
     delay,
     duration,
+    endingHeight,
+    startingHeight,
+    transition,
+    transitionEnd,
   }
 
   const css: CSSUIObject = {
@@ -166,18 +166,18 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
   }
 
   return (
-    <AnimatePresence initial={false} custom={custom}>
+    <AnimatePresence custom={custom} initial={false}>
       {isOpen ? (
         <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}
           {...rest}
           {...collapseProps}
-          custom={custom}
+          style={{ overflow: "hidden", ...rest.style }}
           animate={animate}
+          custom={custom}
           initial={unmountOnExit ? "exit" : false}
           __css={css}
-          style={{ overflow: "hidden", ...rest.style }}
         />
       ) : null}
     </AnimatePresence>

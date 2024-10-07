@@ -1,13 +1,13 @@
+import type { Dict, StringLiteral } from "./index.types"
 import * as c from "color2k"
 import { isArray, isNumber, isObject } from "./assertion"
-import type { Dict, StringLiteral } from "./index.types"
 import { getMemoizedObject as get } from "./object"
 
-type ThemeValue = string | number
+type ThemeValue = number | string
 type Breakpoint = "base" | StringLiteral
-type ColorMode = "light" | "dark"
+type ColorMode = "dark" | "light"
 
-export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
+export type ColorFormat = "hex" | "hexa" | "hsl" | "hsla" | "rgb" | "rgba"
 
 export const SEMANTIC_COLOR_SCHEMES = [
   "mono",
@@ -62,7 +62,7 @@ export function isAccessible(colorScheme: string) {
   )
 }
 
-export function getColor(color: string, fallback: string = "#000000") {
+export function getColor(color: string, fallback = "#000000") {
   return function (
     theme: Dict = {},
     colorMode: ColorMode = "light",
@@ -86,7 +86,7 @@ export function getColor(color: string, fallback: string = "#000000") {
       if (relatedColor) color = relatedColor
     }
 
-    const hex = get<ThemeValue | [ThemeValue, ThemeValue] | Dict<ThemeValue>>(
+    const hex = get<[ThemeValue, ThemeValue] | Dict<ThemeValue> | ThemeValue>(
       theme,
       `colors.${color}`,
       color,
@@ -171,16 +171,16 @@ export function transparentizeColor(color: string, alpha: number) {
 }
 
 export function randomColor({
-  string,
   colors,
-}: { string?: string; colors?: string[] } = {}) {
+  string,
+}: { colors?: string[]; string?: string } = {}) {
   const fallback = randomHex()
 
-  if (string && colors) return randomColorFromList(string, colors)
+  if (string && colors) return randomColorFromList(string, colors) ?? fallback
 
   if (string && !colors) return randomColorFromString(string)
 
-  if (colors && !string) return randomFromList(colors)
+  if (colors && !string) return randomFromList(colors) ?? fallback
 
   return fallback
 }

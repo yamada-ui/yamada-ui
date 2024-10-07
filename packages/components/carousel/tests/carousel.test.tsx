@@ -1,6 +1,6 @@
+import type { FC } from "react"
 import { Button } from "@yamada-ui/button"
 import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
-import type { FC } from "react"
 import { Carousel, CarouselSlide } from "../src"
 
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
@@ -115,7 +115,7 @@ describe("<Carousel />", () => {
     fireEvent.click(
       document.querySelectorAll(".ui-carousel__indicators__indicator")[
         slidesContentArr.length - 1
-      ],
+      ]!,
     )
 
     expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
@@ -159,7 +159,7 @@ describe("<Carousel />", () => {
   test("should stop autoplay on mouse enter", () => {
     vi.useFakeTimers()
     const carouselElement = (
-      <Carousel delay={500} autoplay stopMouseEnterAutoplay>
+      <Carousel autoplay delay={500} stopMouseEnterAutoplay>
         {slidesContentArr.map((value) => (
           <CarouselSlide key={value}>{value}</CarouselSlide>
         ))}
@@ -181,11 +181,11 @@ describe("<Carousel />", () => {
   test("should disabled next and prev button when looping is disabled", () => {
     render(
       <Carousel
+        loop={false}
         controlNextProps={{ icon: <span>Next slide</span> }}
         controlPrevProps={{
           icon: <span>Prev slide</span>,
         }}
-        loop={false}
       >
         {slidesContentArr.map((value) => (
           <CarouselSlide key={value}>{value}</CarouselSlide>
@@ -200,7 +200,7 @@ describe("<Carousel />", () => {
     fireEvent.click(
       document.querySelectorAll(".ui-carousel__indicators__indicator")[
         slidesContentArr.length - 1
-      ],
+      ]!,
     )
 
     // When last slide the next button should be disabled

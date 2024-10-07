@@ -1,5 +1,5 @@
 import { a11y, render, screen } from "@yamada-ui/test"
-import { Select, Option, MultiSelect } from "../src"
+import { MultiSelect, Option, Select } from "../src"
 
 describe("<MultiSelect />", () => {
   describe("rendered correctly", () => {
@@ -57,8 +57,8 @@ describe("<MultiSelect />", () => {
         <MultiSelect
           items={[
             {
-              label: "Numbers",
               items: [{ label: "One", value: "one" }],
+              label: "Numbers",
             },
             {
               label: "Two",
@@ -142,7 +142,7 @@ describe("<MultiSelect />", () => {
         label: string
         onRemove: React.MouseEventHandler<HTMLElement>
       }) => (
-        <div onClick={onRemove} data-testid="custom-option">
+        <div data-testid="custom-option" onClick={onRemove}>
           {label}
         </div>
       )
@@ -226,7 +226,7 @@ describe("<MultiSelect />", () => {
         },
       ]
 
-      const { user } = render(<MultiSelect omitSelectedValues items={items} />)
+      const { user } = render(<MultiSelect items={items} omitSelectedValues />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -266,9 +266,9 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          omitSelectedValues
+          defaultValue={["option2"]}
           items={items}
-          defaultValue={[items[1].label]}
+          omitSelectedValues
         />,
       )
 
@@ -304,7 +304,7 @@ describe("<MultiSelect />", () => {
         },
       ]
 
-      const { user } = render(<MultiSelect omitSelectedValues items={items} />)
+      const { user } = render(<MultiSelect items={items} omitSelectedValues />)
 
       const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
@@ -344,9 +344,9 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          omitSelectedValues
+          defaultValue={["option2"]}
           items={items}
-          defaultValue={[items[1].label]}
+          omitSelectedValues
         />,
       )
 
@@ -384,9 +384,9 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          omitSelectedValues
+          defaultValue={["option1"]}
           items={items}
-          defaultValue={[items[0].label]}
+          omitSelectedValues
         />,
       )
 
@@ -421,9 +421,9 @@ describe("<MultiSelect />", () => {
 
       const { user } = render(
         <MultiSelect
-          omitSelectedValues
-          items={items}
           defaultValue={["option3"]}
+          items={items}
+          omitSelectedValues
         />,
       )
 

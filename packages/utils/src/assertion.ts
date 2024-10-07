@@ -31,7 +31,7 @@ export function isBoolean(value: any): value is boolean {
 }
 
 export function isUndefined(value: any): value is undefined {
-  return typeof value === "undefined" && value === undefined
+  return typeof value === "undefined"
 }
 
 export function isNull(value: any): value is null {
@@ -52,6 +52,10 @@ export function isArray<T extends any[]>(value: any): value is T {
 
 export function isEmpty(value: any): boolean {
   return !isArray(value) || !value.length || value.every((v) => v == null)
+}
+
+export function isEmptyObject(value: any): boolean {
+  return isObject(value) && !Object.keys(value).length
 }
 
 export function isFunction<T extends Function = Function>(

@@ -7,24 +7,24 @@ import {
   CardHeader,
   Divider,
   FormControl,
-  HStack,
   Heading,
+  HStack,
   Input,
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { memo } from "react"
 import { Github, X } from "components/media-and-icons"
+import { memo } from "react"
 
 export const AccountCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">
           Create an account
         </Heading>
@@ -36,11 +36,11 @@ export const AccountCard = memo(() => {
 
       <CardBody>
         <ButtonGroup variant="outline" gap="sm" w="full">
-          <Button w="full" leftIcon={<Github boxSize="1.25rem" />}>
+          <Button leftIcon={<Github boxSize="1.25rem" />} w="full">
             GitHub
           </Button>
 
-          <Button w="full" leftIcon={<X boxSize="1.25rem" />}>
+          <Button leftIcon={<X boxSize="1.25rem" />} w="full">
             X
           </Button>
         </ButtonGroup>
@@ -48,7 +48,7 @@ export const AccountCard = memo(() => {
         <HStack w="full">
           <Divider />
 
-          <Text whiteSpace="nowrap" fontSize="sm" color="muted">
+          <Text color="muted" fontSize="sm" whiteSpace="nowrap">
             OR CONTINUE WITH
           </Text>
 
@@ -67,7 +67,7 @@ export const AccountCard = memo(() => {
       </CardBody>
 
       <CardFooter>
-        <Button w="full" colorScheme="primary">
+        <Button colorScheme="primary" w="full">
           Create account
         </Button>
       </CardFooter>

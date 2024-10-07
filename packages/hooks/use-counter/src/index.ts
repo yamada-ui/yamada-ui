@@ -8,37 +8,10 @@ import { useCallback, useState } from "react"
 
 export interface UseCounterProps {
   /**
-   * The value of the counter.
-   * Should be less than `max` and greater than `min`.
-   */
-  value?: string | number
-  /**
    * The initial value of the counter.
    * Should be less than `max` and greater than `min`.
    */
-  defaultValue?: string | number
-  /**
-   * The step used to increment or decrement the value.
-   *
-   * @default 1
-   */
-  step?: number
-  /**
-   * The minimum value of the counter
-   *
-   * @default Number.MIN_SAFE_INTEGER
-   */
-  min?: number
-  /**
-   * The maximum value of the counter
-   *
-   * @default Number.MAX_SAFE_INTEGER
-   */
-  max?: number
-  /**
-   * The number of decimal points used to round the value.
-   */
-  precision?: number
+  defaultValue?: number | string
   /**
    * This controls the value update behavior in general.
    *
@@ -51,34 +24,61 @@ export interface UseCounterProps {
    */
   keepWithinRange?: boolean
   /**
+   * The maximum value of the counter
+   *
+   * @default Number.MAX_SAFE_INTEGER
+   */
+  max?: number
+  /**
+   * The minimum value of the counter
+   *
+   * @default Number.MIN_SAFE_INTEGER
+   */
+  min?: number
+  /**
+   * The number of decimal points used to round the value.
+   */
+  precision?: number
+  /**
+   * The step used to increment or decrement the value.
+   *
+   * @default 1
+   */
+  step?: number
+  /**
+   * The value of the counter.
+   * Should be less than `max` and greater than `min`.
+   */
+  value?: number | string
+  /**
    * The callback fired when the value changes.
    */
   onChange?: (valueAsString: string, valueAsNumber: number) => void
 }
 
 export const useCounter = ({
-  min = Number.MIN_SAFE_INTEGER,
-  max = Number.MAX_SAFE_INTEGER,
   keepWithinRange = true,
+  max = Number.MAX_SAFE_INTEGER,
+  min = Number.MIN_SAFE_INTEGER,
   ...props
 }: UseCounterProps = {}) => {
   const onChange = useCallbackRef(props.onChange)
 
-  const [defaultValue, setValue] = useState<string | number>(() => {
+  const [defaultValue, setValue] = useState<number | string>(() => {
     if (props.defaultValue == null) return ""
 
     return casting(props.defaultValue, props.step ?? 1, props.precision) ?? ""
   })
 
   const isControlled = typeof props.value !== "undefined"
-  const value = isControlled ? (props.value as string | number) : defaultValue
+  const value = isControlled ? (props.value as number | string) : defaultValue
 
   const countDecimal = getCountDecimal(parse(value), props.step ?? 1)
 
   const precision = props.precision ?? countDecimal
 
   const update = useCallback(
-    (next: string | number) => {
+    (next: number | string) => {
       if (next === value) return
 
       if (!isControlled) setValue(next.toString())
@@ -101,7 +101,7 @@ export const useCounter = ({
 
   const increment = useCallback(
     (step = props.step ?? 1) => {
-      let next: string | number
+      let next: number | string
 
       if (value === "") {
         next = parse(step)
@@ -118,7 +118,7 @@ export const useCounter = ({
 
   const decrement = useCallback(
     (step = props.step ?? 1) => {
-      let next: string | number
+      let next: number | string
 
       if (value === "") {
         next = parse(-step)
@@ -134,7 +134,7 @@ export const useCounter = ({
   )
 
   const reset = useCallback(() => {
-    let next: string | number
+    let next: number | string
 
     if (props.defaultValue == null) {
       next = ""
@@ -147,7 +147,7 @@ export const useCounter = ({
   }, [props.defaultValue, props.precision, props.step, update, min])
 
   const cast = useCallback(
-    (value: string | number) => {
+    (value: number | string) => {
       const nextValue = casting(value, props.step ?? 1, precision) ?? min
 
       update(nextValue)
@@ -162,32 +162,32 @@ export const useCounter = ({
   const isMin = valueAsNumber === min
 
   return {
-    isOut,
+    cast,
+    clamp,
+    decrement,
+    increment,
     isMax,
     isMin,
+    isOut,
     precision,
+    reset,
+    setValue,
+    update,
     value,
     valueAsNumber,
-    update,
-    reset,
-    increment,
-    decrement,
-    clamp,
-    cast,
-    setValue,
   }
 }
 
 export type UseCounterReturn = ReturnType<typeof useCounter>
 
-const parse = (value: string | number): number =>
+const parse = (value: number | string): number =>
   parseFloat(value.toString().replace(/[^\w.-]+/g, ""))
 
 const getCountDecimal = (value: number, step: number): number =>
   Math.max(countDecimal(step), countDecimal(value))
 
 const casting = (
-  value: string | number,
+  value: number | string,
   step: number,
   precision?: number,
 ): string | undefined => {

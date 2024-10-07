@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
@@ -33,8 +33,8 @@ interface ButtonGroupContext extends ThemeProps<"Button"> {
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
   {
-    strict: false,
     name: "ButtonGroupContext",
+    strict: false,
   },
 )
 
@@ -46,11 +46,11 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
       className,
       size,
       variant,
+      columnGap,
       direction: flexDirection,
+      gap,
       isAttached,
       isDisabled,
-      gap,
-      columnGap,
       rowGap,
       ...rest
     },
@@ -74,17 +74,17 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
         "> *:first-of-type:not(:last-of-type)": isColumn
           ? { borderBottomRadius: 0, marginBlockEnd: "-1px" }
           : { borderRightRadius: 0, marginInlineEnd: "-1px" },
-        "> *:not(:first-of-type):not(:last-of-type)": isColumn
-          ? { borderRadius: 0, marginBlockStart: "-1px" }
-          : { borderRadius: 0, marginInlineEnd: "-1px" },
         "> *:not(:first-of-type):last-of-type": isColumn
           ? { borderTopRadius: 0, marginBlockStart: "-1px" }
           : { borderLeftRadius: 0 },
+        "> *:not(:first-of-type):not(:last-of-type)": isColumn
+          ? { borderRadius: 0, marginBlockStart: "-1px" }
+          : { borderRadius: 0, marginInlineEnd: "-1px" },
       })
     } else {
       Object.assign(css, {
-        gap,
         columnGap,
+        gap,
         rowGap,
       })
     }
@@ -93,9 +93,9 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
       <ButtonGroupProvider value={context}>
         <ui.div
           ref={ref}
-          role="group"
           className={cx("ui-button-group", className)}
           data-attached={dataAttr(isAttached)}
+          role="group"
           __css={css}
           {...rest}
         />

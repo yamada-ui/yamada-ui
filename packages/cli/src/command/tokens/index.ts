@@ -1,19 +1,20 @@
-import { writeFile } from "fs/promises"
-import path from "path"
+import type { Dict } from "../../utils"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import chokidar from "chokidar"
-import { getModule, type Dict } from "../../utils"
+import { writeFile } from "fs/promises"
+import path from "path"
+import { getModule } from "../../utils"
 import { createThemeTypings } from "./create-theme-typings"
 import { resolveOutputPath, themePath } from "./resolve-output-path"
 
 const generateThemeTypings = async ({
-  theme,
   config,
   outFile,
+  theme,
 }: {
-  theme: Dict
   config: Dict
+  theme: Dict
   outFile?: string
 }) => {
   p.intro(c.magenta(`Generating Yamada UI theme typings`))
@@ -68,21 +69,21 @@ export const actionTokens = async (
 ) => {
   const readFile = async () => {
     const filePath = path.resolve(themePath)
-    const { mod, dependencies } = await getModule(filePath, cwd)
+    const { dependencies, mod } = await getModule(filePath, cwd)
 
     const theme =
       mod?.default ?? mod?.theme ?? mod?.customTheme ?? mod?.defaultTheme ?? {}
     const config = mod?.config ?? mod?.customConfig ?? mod?.defaultConfig ?? {}
 
-    return { theme, config, dependencies }
+    return { config, dependencies, theme }
   }
 
   let file = await readFile()
 
-  const { theme, config, dependencies } = file
+  const { config, dependencies, theme } = file
 
   const buildFile = async () => {
-    await generateThemeTypings({ theme, config, outFile })
+    await generateThemeTypings({ config, outFile, theme })
 
     if (watchFile) console.log("\n", "⌛️ Watching for changes...")
   }

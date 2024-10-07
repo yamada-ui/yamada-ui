@@ -1,4 +1,7 @@
 import type { PropGetter } from "@yamada-ui/core"
+import type { ChangeEvent, CSSProperties } from "react"
+import type { UseCalendarProps } from "./use-calendar"
+import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   getActiveElement,
@@ -10,34 +13,31 @@ import {
   useUpdateEffect,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import type { ChangeEvent, CSSProperties } from "react"
 import { useCallback, useRef, useState } from "react"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
-import type { UseCalendarProps } from "./use-calendar"
-import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useCalendarPicker } from "./use-calendar-picker"
 
 interface CalendarProps
   extends Omit<
     UseCalendarProps<[Date?, Date?]>,
-    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+    "enableMultiple" | "enableRange" | "nextRef" | "prevRef" | "typeRef"
   > {}
 
 interface UseRangeDatePickerOptions {
-  /**
-   * The start date placeholder
-   */
-  startPlaceholder?: string
-  /**
-   * The end date placeholder
-   */
-  endPlaceholder?: string
   /**
    * If `true`, the list element will be closed when value is selected.
    *
    * @default true
    */
   closeOnSelect?: boolean
+  /**
+   * The end date placeholder
+   */
+  endPlaceholder?: string
+  /**
+   * The start date placeholder
+   */
+  startPlaceholder?: string
 }
 
 export interface UseRangeDatePickerProps
@@ -45,15 +45,15 @@ export interface UseRangeDatePickerProps
     UseRangeDatePickerOptions {}
 
 export const useRangeDatePicker = ({
-  value: valueProp,
+  allowInputBeyond = false,
+  closeOnSelect = true,
   defaultValue = [],
-  onChange: onChangeProp,
+  endPlaceholder,
+  maxSelectValues,
   placeholder,
   startPlaceholder,
-  endPlaceholder,
-  closeOnSelect = true,
-  allowInputBeyond = false,
-  maxSelectValues,
+  value: valueProp,
+  onChange: onChangeProp,
   ...rest
 }: UseRangeDatePickerProps) => {
   const isComposition = useRef<boolean>(false)
@@ -61,11 +61,11 @@ export const useRangeDatePicker = ({
   const endInputRef = useRef<HTMLInputElement>(null)
   const draftValue = useRef<[Date?, Date?] | undefined>(undefined)
   const [value, setValue] = useControllableState<[Date?, Date?]>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
-  const [startValue, endValue] = value ?? []
+  const [startValue, endValue] = value
   const minDate =
     endValue && isNumber(maxSelectValues)
       ? dayjs(endValue)
@@ -80,29 +80,29 @@ export const useRangeDatePicker = ({
       : undefined
 
   const {
-    containerRef,
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
-    isOpen,
-    onClose,
+    containerRef,
     dateToString,
+    isOpen,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
   } = useCalendarPicker({
     ...rest,
-    maxSelectValues,
     allowInputBeyond,
-    enableRange: true,
-    value,
-    defaultValue,
     autoFocus: false,
+    defaultValue,
+    enableRange: true,
+    maxSelectValues,
+    value,
     onChange: ([startValue, endValue]: [Date?, Date?]) => {
       setStartInputValue(dateToString(startValue) ?? "")
       setEndInputValue(dateToString(endValue) ?? "")
@@ -133,7 +133,7 @@ export const useRangeDatePicker = ({
       rest.onClick?.(ev)
     },
     onClose: () => {
-      const [startValue, endValue] = draftValue.current ?? value ?? []
+      const [startValue, endValue] = draftValue.current ?? value
 
       setStartInputValue(dateToString(startValue) ?? "")
       setEndInputValue(dateToString(endValue) ?? "")
@@ -141,6 +141,27 @@ export const useRangeDatePicker = ({
       draftValue.current = undefined
 
       rest.onClose?.()
+    },
+    onDelete: (ev) => {
+      if (!endInputRef.current || endInputRef.current.value.length > 1) return
+
+      if (!containerRef.current) return
+
+      const activeEl = getActiveElement(containerRef.current)
+
+      if (!isContains(activeEl, endInputRef.current)) return
+
+      ev.preventDefault()
+      ev.stopPropagation()
+
+      setEndInputValue("")
+      setValue([startValue, undefined])
+
+      const startInputValue = startInputRef.current?.value ?? ""
+      const index = startInputValue.length
+
+      startInputRef.current?.focus()
+      startInputRef.current?.setSelectionRange(index, index)
     },
     onEnter: () => {
       if (isComposition.current) return
@@ -168,27 +189,6 @@ export const useRangeDatePicker = ({
 
         if (value) setEndInputValue(value)
       }
-    },
-    onDelete: (ev) => {
-      if (!endInputRef.current || endInputRef.current.value.length > 1) return
-
-      if (!containerRef.current) return
-
-      const activeEl = getActiveElement(containerRef.current)
-
-      if (!isContains(activeEl, endInputRef.current)) return
-
-      ev.preventDefault()
-      ev.stopPropagation()
-
-      setEndInputValue("")
-      setValue([startValue, undefined])
-
-      const startInputValue = startInputRef.current?.value ?? ""
-      const index = startInputValue.length
-
-      startInputRef.current?.focus()
-      startInputRef.current?.setSelectionRange(index, index)
     },
   })
 
@@ -279,28 +279,28 @@ export const useRangeDatePicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        id,
         ref: mergeRefs(ref, startInputRef),
         style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        zIndex: !startInputValue ? 1 : undefined,
-        value: startInputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput ? -1 : 0,
+        value: startInputValue,
+        zIndex: !startInputValue ? 1 : undefined,
         onChange: handlerAll(props.onChange, onStartChange),
         onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()
           ev.stopPropagation()
         }),
-        onCompositionStart: handlerAll(
-          props.onCompositionStart,
-          () => (isComposition.current = true),
-        ),
         onCompositionEnd: handlerAll(props.onCompositionEnd, () => {
           isComposition.current = false
 
           setStartInputValue((prev) => prev.replace(pattern, ""))
         }),
+        onCompositionStart: handlerAll(
+          props.onCompositionStart,
+          () => (isComposition.current = true),
+        ),
       }
     },
     [
@@ -329,27 +329,27 @@ export const useRangeDatePicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        id,
         ref: mergeRefs(ref, endInputRef),
         style,
-        id,
-        tabIndex: !allowInput || !startInputValue ? -1 : 0,
-        value: endInputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput || !startInputValue ? -1 : 0,
+        value: endInputValue,
         onChange: handlerAll(props.onChange, onEndChange),
         onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()
           ev.stopPropagation()
         }),
-        onCompositionStart: handlerAll(
-          props.onCompositionStart,
-          () => (isComposition.current = true),
-        ),
         onCompositionEnd: handlerAll(props.onCompositionEnd, () => {
           isComposition.current = false
 
           setEndInputValue((prev) => prev.replace(pattern, ""))
         }),
+        onCompositionStart: handlerAll(
+          props.onCompositionStart,
+          () => (isComposition.current = true),
+        ),
       }
     },
     [
@@ -368,17 +368,17 @@ export const useRangeDatePicker = ({
 
   return {
     id,
-    value,
-    inputValue: [startInputValue, endInputValue],
-    onClose,
     dateToString,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
-    getStartInputProps,
-    getEndInputProps,
-    getIconProps,
+    inputValue: [startInputValue, endInputValue],
+    value,
     getCalendarProps,
+    getContainerProps,
+    getEndInputProps,
+    getFieldProps,
+    getIconProps,
+    getPopoverProps,
+    getStartInputProps,
+    onClose,
   }
 }
 

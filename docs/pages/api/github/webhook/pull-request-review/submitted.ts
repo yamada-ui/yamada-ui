@@ -1,16 +1,16 @@
-import { Octokit } from "@octokit/rest"
-import { recursiveOctokit } from "utils/github"
 import type { Event } from "utils/github"
 import type { APIHandler } from "utils/next"
+import { Octokit } from "@octokit/rest"
+import { recursiveOctokit } from "utils/github"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-export const submitted: APIHandler = async ({ req, constant }) => {
-  const { review, pull_request, repository } =
+export const submitted: APIHandler = async ({ constant, req }) => {
+  const { pull_request, repository, review } =
     req.body as Event<"pull_request_review.submitted">
   const owner = "yamada-ui"
   const repo = repository.name
-  const { user, state } = review
+  const { state, user } = review
   const { number } = pull_request
 
   if (!user || state !== "approved") return
@@ -18,12 +18,12 @@ export const submitted: APIHandler = async ({ req, constant }) => {
   if (constant.pullRequest.excludeReviewers.includes(user.login)) return
 
   try {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.addLabels({
-        owner,
-        repo,
         issue_number: number,
         labels: ["merge request"],
+        owner,
+        repo,
       }),
     )
   } catch {}

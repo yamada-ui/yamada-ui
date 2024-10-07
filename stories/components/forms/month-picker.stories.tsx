@@ -1,20 +1,20 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { MonthPickerProps } from "@yamada-ui/calendar"
+import type { SubmitHandler } from "react-hook-form"
+import { MonthPicker } from "@yamada-ui/calendar"
+import { Ghost } from "@yamada-ui/lucide"
+import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { colorSchemes } from "../../components"
-import { MonthPicker } from "@yamada-ui/calendar"
-import type { MonthPickerProps } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
-import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MonthPicker>
 
 const meta: Meta<typeof MonthPicker> = {
-  title: "Components / Forms / MonthPicker",
   component: MonthPicker,
+  title: "Components / Forms / MonthPicker",
 }
 
 export default meta
@@ -32,7 +32,7 @@ export const withChildren: Story = () => {
         </VStack>
       </MonthPicker>
 
-      <MonthPicker placeholder="MMM YYYY" closeOnSelect={false}>
+      <MonthPicker closeOnSelect={false} placeholder="MMM YYYY">
         {({ value, onClose }) => (
           <VStack mt="sm">
             <Button isDisabled={!value} onClick={onClose}>
@@ -48,10 +48,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <MonthPicker placeholder="extra small size" size="xs" />
-      <MonthPicker placeholder="small size" size="sm" />
-      <MonthPicker placeholder="medium size" size="md" />
-      <MonthPicker placeholder="large size" size="lg" />
+      <MonthPicker size="xs" placeholder="extra small size" />
+      <MonthPicker size="sm" placeholder="small size" />
+      <MonthPicker size="md" placeholder="medium size" />
+      <MonthPicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -59,9 +59,9 @@ export const withSize: Story = () => {
 export const withCalendarSize: Story = () => {
   return (
     <>
-      <MonthPicker placeholder="small size" calendarSize="sm" />
-      <MonthPicker placeholder="medium size" calendarSize="md" />
-      <MonthPicker placeholder="large size" calendarSize="lg" />
+      <MonthPicker calendarSize="sm" placeholder="small size" />
+      <MonthPicker calendarSize="md" placeholder="medium size" />
+      <MonthPicker calendarSize="lg" placeholder="large size" />
     </>
   )
 }
@@ -82,12 +82,12 @@ export const withColorScheme: Story = () => {
     <>
       <Heading size="xl">Solid</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <MonthPicker
             key={colorScheme}
-            calendarVariant="solid"
             calendarColorScheme={colorScheme}
+            calendarVariant="solid"
             defaultValue={new Date()}
           />
         ))}
@@ -95,12 +95,12 @@ export const withColorScheme: Story = () => {
 
       <Heading size="xl">Subtle</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <MonthPicker
             key={colorScheme}
-            calendarVariant="subtle"
             calendarColorScheme={colorScheme}
+            calendarVariant="subtle"
             defaultValue={new Date()}
           />
         ))}
@@ -116,16 +116,16 @@ export const withDefaultValue: Story = () => {
 export const withDefaultType: Story = () => {
   return (
     <>
-      <MonthPicker placeholder="month" defaultType="month" />
+      <MonthPicker defaultType="month" placeholder="month" />
 
-      <MonthPicker placeholder="year" defaultType="year" />
+      <MonthPicker defaultType="year" placeholder="year" />
     </>
   )
 }
 
 export const withDefaultMonth: Story = () => {
   return (
-    <MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08")} />
+    <MonthPicker defaultMonth={new Date("1993-08")} placeholder="YYYY/MM" />
   )
 }
 
@@ -140,8 +140,8 @@ export const withBorderColor: Story = () => {
       />
 
       <MonthPicker
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -151,24 +151,24 @@ export const withBorderColor: Story = () => {
 export const withPattern: Story = () => {
   return (
     <MonthPicker
-      placeholder="MMM YYYY"
+      defaultValue={new Date()}
       inputFormat="MMM YYYY"
       pattern={/[^\w, ]/g}
-      defaultValue={new Date()}
+      placeholder="MMM YYYY"
     />
   )
 }
 
 export const withInputFormat: Story = () => {
-  return <MonthPicker placeholder="YYYY-MM" inputFormat="YYYY-MM" />
+  return <MonthPicker inputFormat="YYYY-MM" placeholder="YYYY-MM" />
 }
 
 export const withParseDate: Story = () => {
   return (
     <MonthPicker
-      placeholder="YYYY/MM"
       inputFormat="YYYY/MM"
       parseDate={(value) => new Date(value)}
+      placeholder="YYYY/MM"
     />
   )
 }
@@ -178,24 +178,24 @@ export const withPlacement: Story = () => {
 }
 
 export const withOffset: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" offset={[16, 16]} />
+  return <MonthPicker offset={[16, 16]} placeholder="YYYY/MM" />
 }
 
 export const withGutter: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" gutter={32} />
+  return <MonthPicker gutter={32} placeholder="YYYY/MM" />
 }
 
 export const withDuration: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" duration={0.4} />
+  return <MonthPicker duration={0.4} placeholder="YYYY/MM" />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <MonthPicker isDisabled variant="outline" placeholder="outline" />
-      <MonthPicker isDisabled variant="filled" placeholder="filled" />
-      <MonthPicker isDisabled variant="flushed" placeholder="flushed" />
-      <MonthPicker isDisabled variant="unstyled" placeholder="unstyled" />
+      <MonthPicker variant="outline" isDisabled placeholder="outline" />
+      <MonthPicker variant="filled" isDisabled placeholder="filled" />
+      <MonthPicker variant="flushed" isDisabled placeholder="flushed" />
+      <MonthPicker variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="What is your birthday?">
         <MonthPicker placeholder="YYYY/MM" />
@@ -207,10 +207,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MonthPicker isReadOnly variant="outline" placeholder="outline" />
-      <MonthPicker isReadOnly variant="filled" placeholder="filled" />
-      <MonthPicker isReadOnly variant="flushed" placeholder="flushed" />
-      <MonthPicker isReadOnly variant="unstyled" placeholder="unstyled" />
+      <MonthPicker variant="outline" isReadOnly placeholder="outline" />
+      <MonthPicker variant="filled" isReadOnly placeholder="filled" />
+      <MonthPicker variant="flushed" isReadOnly placeholder="flushed" />
+      <MonthPicker variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="What is your birthday?">
         <MonthPicker placeholder="YYYY/MM" />
@@ -222,15 +222,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MonthPicker isInvalid variant="outline" placeholder="outline" />
-      <MonthPicker isInvalid variant="filled" placeholder="filled" />
-      <MonthPicker isInvalid variant="flushed" placeholder="flushed" />
-      <MonthPicker isInvalid variant="unstyled" placeholder="unstyled" />
+      <MonthPicker variant="outline" isInvalid placeholder="outline" />
+      <MonthPicker variant="filled" isInvalid placeholder="filled" />
+      <MonthPicker variant="flushed" isInvalid placeholder="flushed" />
+      <MonthPicker variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="What is your birthday?"
-        errorMessage="This is required."
       >
         <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
@@ -241,9 +241,9 @@ export const isInvalid: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <MonthPicker
-      placeholder="YYYY/MM"
-      minDate={new Date(1993, 8)}
       maxDate={new Date(2000, 10)}
+      minDate={new Date(1993, 8)}
+      placeholder="YYYY/MM"
     />
   )
 }
@@ -256,25 +256,25 @@ export const withLocale: Story = () => {
 
 export const withFormat: Story = () => {
   return (
-    <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+    <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
       <MonthPicker
-        placeholder="YYYY/MM"
-        locale="ja"
         defaultType="month"
+        locale="ja"
+        placeholder="YYYY/MM"
         yearFormat="YYYY年"
       />
 
       <MonthPicker
-        placeholder="YYYY/MM"
-        locale="ja"
         defaultType="month"
+        locale="ja"
         monthFormat="MM"
+        placeholder="YYYY/MM"
       />
 
       <MonthPicker
-        placeholder="YYYY/MM"
-        locale="ja"
         defaultType="year"
+        locale="ja"
+        placeholder="YYYY/MM"
         yearFormat="YY"
       />
     </Grid>
@@ -282,19 +282,19 @@ export const withFormat: Story = () => {
 }
 
 export const disabledCloseOnSelect: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" closeOnSelect={false} />
+  return <MonthPicker closeOnSelect={false} placeholder="YYYY/MM" />
 }
 
 export const disabledCloseOnBlur: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" closeOnBlur={false} />
+  return <MonthPicker closeOnBlur={false} placeholder="YYYY/MM" />
 }
 
 export const disabledIsClearable: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" isClearable={false} />
+  return <MonthPicker isClearable={false} placeholder="YYYY/MM" />
 }
 
 export const disabledAllowInput: Story = () => {
-  return <MonthPicker placeholder="YYYY/MM" allowInput={false} />
+  return <MonthPicker allowInput={false} placeholder="YYYY/MM" />
 }
 
 export const disabledControls: Story = () => {
@@ -316,8 +316,8 @@ export const customControlType: Story = () => {
 
   return (
     <MonthPicker
-      placeholder="YYYY/MM"
       type={type}
+      placeholder="YYYY/MM"
       onChangeType={onChangeType}
     />
   )
@@ -328,8 +328,8 @@ export const customControlMonth: Story = () => {
 
   return (
     <MonthPicker
-      placeholder="YYYY/MM"
       month={month}
+      placeholder="YYYY/MM"
       onChangeMonth={onChangeMonth}
     />
   )
@@ -348,9 +348,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -360,17 +360,17 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.monthPicker?.message}
         isInvalid={!!errors.monthPicker}
         label="Birthday"
-        errorMessage={errors.monthPicker?.message}
       >
         <Controller
           name="monthPicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MonthPicker placeholder="YYYY/MM" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -392,9 +392,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -404,17 +404,17 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.monthPicker?.message}
         isInvalid={!!errors.monthPicker}
         label="Birthday"
-        errorMessage={errors.monthPicker?.message}
       >
         <Controller
           name="monthPicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <MonthPicker placeholder="YYYY/MM" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

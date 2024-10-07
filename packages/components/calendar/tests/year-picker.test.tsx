@@ -14,9 +14,9 @@ describe("<YearPicker />", () => {
     afterEach(() => {
       vi.useRealTimers()
     })
-    test("should change selected Year", async () => {
+    test("should change selected Year", () => {
       const { container } = render(
-        <YearPicker placeholder="basic" defaultValue={new Date()} />,
+        <YearPicker defaultValue={new Date()} placeholder="basic" />,
       )
 
       const nextYearStr = (new Date().getFullYear() + 1).toString()
@@ -28,7 +28,7 @@ describe("<YearPicker />", () => {
 
       expect(selectBtn).toHaveAttribute("data-selected")
     })
-    test("should not selected any year when no value is selected", async () => {
+    test("should not selected any year when no value is selected", () => {
       const { container } = render(<YearPicker placeholder="basic" />)
 
       const yearListButtons = container.querySelectorAll(

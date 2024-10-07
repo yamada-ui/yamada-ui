@@ -3,7 +3,7 @@ export type MixedArray = string | string[] | undefined
 export const toArray = (mixedArray: MixedArray) =>
   (Array.isArray(mixedArray) ? mixedArray.flat() : [mixedArray]).filter(Boolean)
 
-export const flattenArray = <T extends any = any>(array: T[], key: keyof T) => {
+export const flattenArray = <T = any>(array: T[], key: keyof T) => {
   let result: T[] = []
 
   array.forEach((item) => {

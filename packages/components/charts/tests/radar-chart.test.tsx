@@ -1,5 +1,5 @@
-import { a11y, render, waitFor, screen, fireEvent } from "@yamada-ui/test"
 import type { RadarProps } from "../src"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { RadarChart } from "../src"
 
 describe("<RadarChart />", () => {
@@ -35,62 +35,62 @@ describe("<RadarChart />", () => {
   const data = [
     {
       name: "Page A",
-      uv: 4000,
-      pv: 2400,
       amt: 2400,
+      pv: 2400,
+      uv: 4000,
     },
     {
       name: "Page B",
-      uv: 3000,
-      pv: 1398,
       amt: 2210,
+      pv: 1398,
+      uv: 3000,
     },
     {
       name: "Page C",
-      uv: 2000,
-      pv: 9800,
       amt: 2290,
+      pv: 9800,
+      uv: 2000,
     },
     {
       name: "Page D",
-      uv: 2780,
-      pv: 3908,
       amt: 2000,
+      pv: 3908,
+      uv: 2780,
     },
     {
       name: "Page E",
-      uv: 1890,
-      pv: 4800,
       amt: 2181,
+      pv: 4800,
+      uv: 1890,
     },
     {
       name: "Page F",
-      uv: 2390,
-      pv: 3800,
       amt: 2500,
+      pv: 3800,
+      uv: 2390,
     },
     {
       name: "Page G",
-      uv: 3490,
-      pv: 4300,
       amt: 2400,
+      pv: 4300,
+      uv: 3490,
     },
   ]
 
   const series: RadarProps[] = [
-    { dataKey: "uv", color: "primary.500" },
-    { dataKey: "pv", color: "secondary.500" },
-    { dataKey: "amt", color: "warning.500" },
+    { color: "primary.500", dataKey: "uv" },
+    { color: "secondary.500", dataKey: "pv" },
+    { color: "warning.500", dataKey: "amt" },
   ]
 
   describe("render", () => {
     test("should pass a11y test", async () => {
       await a11y(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
     })
@@ -98,10 +98,10 @@ describe("<RadarChart />", () => {
     test("3 radar should be rendered", async () => {
       const { container } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -113,13 +113,13 @@ describe("<RadarChart />", () => {
     })
 
     test("dots should be rendered according to withDots", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withDots={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -131,11 +131,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withDots={true}
+          withDots
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -147,14 +147,14 @@ describe("<RadarChart />", () => {
     })
 
     test("activeDots should be rendered according to withActiveDots", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withDots={true}
-          withActiveDots={true}
+          withActiveDots
+          withDots
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -178,12 +178,12 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withDots={true}
           withActiveDots={false}
+          withDots
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -207,13 +207,13 @@ describe("<RadarChart />", () => {
     })
 
     test("polar-angle-axis should be rendered according to withPolarAngleAxis", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withPolarAngleAxis={true}
+          withPolarAngleAxis
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -229,11 +229,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withPolarAngleAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -249,13 +249,13 @@ describe("<RadarChart />", () => {
     })
 
     test("polar-radius-axis should be rendered according to withPolarRadiusAxis", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withPolarRadiusAxis={true}
+          withPolarRadiusAxis
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -267,11 +267,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withPolarRadiusAxis={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -283,13 +283,13 @@ describe("<RadarChart />", () => {
     })
 
     test("polar-grid should be rendered according to withPolarGrid", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withPolarGrid={true}
+          withPolarGrid
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -301,11 +301,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withPolarGrid={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -319,14 +319,14 @@ describe("<RadarChart />", () => {
 
   describe("tooltip & legend", () => {
     test("tooltip should be rendered according to withTooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withTooltip={true}
           withPolarAngleAxis={false}
+          withTooltip
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -353,12 +353,12 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withTooltip={false}
           withPolarAngleAxis={false}
+          withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -382,13 +382,13 @@ describe("<RadarChart />", () => {
     })
 
     test("cursor should be rendered along with tooltip", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withTooltip={true}
+          withTooltip
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -410,11 +410,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withTooltip={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -438,13 +438,13 @@ describe("<RadarChart />", () => {
     })
 
     test("legend should be rendered according to withLegend", async () => {
-      const { rerender, container } = render(
+      const { container, rerender } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
-          withLegend={true}
+          withLegend
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -460,11 +460,11 @@ describe("<RadarChart />", () => {
 
       rerender(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           withLegend={false}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -484,11 +484,11 @@ describe("<RadarChart />", () => {
     test("valueFormatter should function properly in tooltip", async () => {
       const { container } = render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
           series={series}
           valueFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -513,11 +513,11 @@ describe("<RadarChart />", () => {
     test("polarAngleAxisTickFormatter should function properly in polarAngleAxis", async () => {
       render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
-          series={series}
+          dataKey="name"
           polarAngleAxisTickFormatter={(value) => String(value).toUpperCase()}
+          series={series}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 
@@ -528,12 +528,12 @@ describe("<RadarChart />", () => {
     test("polarRadiusAxisTickFormatter should function properly in polarRadiusAxis", async () => {
       render(
         <RadarChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
           data={data}
+          dataKey="name"
+          polarRadiusAxisTickFormatter={(value) => `${value} views`}
           series={series}
           withPolarRadiusAxis
-          polarRadiusAxisTickFormatter={(value) => `${value} views`}
+          containerProps={{ height: "80%", width: 400 }}
         />,
       )
 

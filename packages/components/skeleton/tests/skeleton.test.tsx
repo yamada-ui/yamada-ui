@@ -20,9 +20,9 @@ describe("<Skeleton />", () => {
         <SkeletonText
           data-testid="SkeletonText"
           gap={4}
-          textHeight={4}
-          speed={2}
           lineClamp={2}
+          speed={2}
+          textHeight={4}
         />
       </>,
     )
@@ -31,11 +31,7 @@ describe("<Skeleton />", () => {
     expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
   })
   test("should render with isLoaded", () => {
-    render(
-      <>
-        <Skeleton data-testid="Skeleton" isLoaded />
-      </>,
-    )
+    render(<Skeleton data-testid="Skeleton" isLoaded />)
     expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
   })
 })

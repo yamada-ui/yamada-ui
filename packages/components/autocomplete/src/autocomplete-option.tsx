@@ -1,17 +1,17 @@
 import type { CSSUIObject, FC } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
+import type { UseAutocompleteOptionProps } from "./use-autocomplete-option"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
-import type { UseAutocompleteOptionProps } from "./use-autocomplete-option"
 import { useAutocompleteOption } from "./use-autocomplete-option"
 
 interface AutocompleteOptionOptions {
   /**
    * The autocomplete option icon to use.
    */
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface AutocompleteOptionProps
@@ -21,22 +21,22 @@ export interface AutocompleteOptionProps
 export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
-    const { isSelected, customIcon, children, getOptionProps } =
+    const { children, customIcon, isSelected, getOptionProps } =
       useAutocompleteOption(rest)
 
     icon ??= customIcon
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
       alignItems: "center",
-      textAlign: "start",
+      color: "inherit",
+      display: "flex",
       flex: "0 0 auto",
-      outline: 0,
       gap: "0.75rem",
+      outline: 0,
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
       ...styles.item,
     }
 
@@ -64,7 +64,7 @@ AutocompleteOption.displayName = "AutocompleteOption"
 AutocompleteOption.__ui__ = "AutocompleteOption"
 
 const AutocompleteCheckIcon: FC = () => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em">
+  <svg height="1em" viewBox="0 0 14 14" width="1em">
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"

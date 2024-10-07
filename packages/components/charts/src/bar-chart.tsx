@@ -1,65 +1,65 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UseBarChartOptions } from "./use-bar-chart"
+import type { UseChartProps } from "./use-chart"
+import type { UseChartAxisOptions } from "./use-chart-axis"
+import type { UseChartGridOptions } from "./use-chart-grid"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
+  CartesianGrid,
+  Label,
   Legend,
   BarChart as ReChartsBarChart,
-  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-  ResponsiveContainer,
-  ReferenceLine,
-  Label,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import { useBarChart } from "./use-bar-chart"
-import type { UseBarChartOptions } from "./use-bar-chart"
-import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
 import { useChartGrid } from "./use-chart-grid"
-import type { UseChartGridOptions } from "./use-chart-grid"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
-import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 interface BarChartOptions {
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
   /**
    * If `true`, legend is visible.
    *
    * @default false
    */
   withLegend?: boolean
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
 }
 
-export type BarChartProps = HTMLUIProps &
+export type BarChartProps = BarChartOptions &
+  HTMLUIProps &
   ThemeProps<"BarChart"> &
-  BarChartOptions &
   UseBarChartOptions &
-  UseChartProps &
   UseChartAxisOptions &
-  UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipOptions &
-  UseChartLegendProps
+  UseChartLegendProps &
+  UseChartProps &
+  UseChartReferenceLineOptions &
+  UseChartTooltipOptions
 
 /**
  * `BarChart` is a component for drawing bar charts to compare multiple sets of data.
@@ -69,101 +69,101 @@ export type BarChartProps = HTMLUIProps &
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("BarChart", props)
   const {
+    type = "default",
     className,
-    series,
+    cell,
+    data,
     dataKey,
-    layoutType,
-    tickLine,
+    fillOpacity,
     gridAxis,
+    labelFormatter,
+    layoutType,
+    series,
+    strokeDasharray,
+    syncId,
+    tickLine,
+    tooltipAnimationDuration,
+    unit,
+    valueFormatter,
+    withLegend = false,
+    withTooltip = true,
     withXAxis,
     withYAxis,
-    barProps,
-    xAxisProps,
-    yAxisProps,
     xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
-    type = "default",
-    withTooltip = true,
-    withLegend = false,
-    containerProps,
-    unit,
-    yAxisTickFormatter,
     xAxisTickFormatter,
-    valueFormatter,
-    labelFormatter,
-    tooltipProps,
-    tooltipAnimationDuration,
-    legendProps,
-    data,
-    referenceLineProps = [],
-    gridProps,
-    strokeDasharray,
-    fillOpacity,
+    yAxisLabel,
+    yAxisTickFormatter,
+    barProps,
     chartProps,
-    syncId,
-    cell,
+    containerProps,
+    gridProps,
+    legendProps,
+    referenceLineProps = [],
+    tooltipProps,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { bars, barVars, getBarChartProps, setHighlightedArea } = useBarChart({
-    data,
-    series,
-    cell,
+  const { bars, barVars, setHighlightedArea, getBarChartProps } = useBarChart({
     type,
-    layoutType,
-    chartProps,
-    barProps,
-    referenceLineProps,
+    cell,
+    data,
     fillOpacity,
+    layoutType,
+    series,
+    styles,
     syncId,
     xAxisLabel,
     yAxisLabel,
-    styles,
+    barProps,
+    chartProps,
+    referenceLineProps,
   })
   const { getContainerProps } = useChart({ containerProps })
   const {
-    getXAxisProps,
-    getYAxisProps,
     getXAxisLabelProps,
+    getXAxisProps,
     getYAxisLabelProps,
+    getYAxisProps,
   } = useChartAxis({
-    dataKey,
     type,
-    layoutType,
-    tickLine,
+    dataKey,
     gridAxis,
+    layoutType,
+    styles,
+    tickLine,
+    unit,
     withXAxis,
     withYAxis,
-    xAxisProps,
-    yAxisProps,
     xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
-    unit,
-    yAxisTickFormatter,
     xAxisTickFormatter,
-    styles,
+    yAxisLabel,
+    yAxisTickFormatter,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
-    referenceLineProps,
     styles,
+    referenceLineProps,
   })
   const { getGridProps } = useChartGrid({
-    gridProps,
     gridAxis,
     strokeDasharray,
     styles,
+    gridProps,
   })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
 
@@ -173,8 +173,8 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
         <ReferenceLine
           key={`referenceLine-${index}`}
           {...getReferenceLineProps({
-            index,
             className: "ui-bar-chart__reference-line",
+            index,
           })}
         />
       )),
@@ -235,10 +235,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                   <ChartTooltip
                     className="ui-bar-chart__tooltip"
                     label={label}
-                    payload={payload}
-                    valueFormatter={valueFormatter}
                     labelFormatter={labelFormatter}
+                    payload={payload}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}
@@ -254,3 +254,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+BarChart.displayName = "BarChart"
+BarChart.__ui__ = "BarChart"

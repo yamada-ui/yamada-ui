@@ -1,17 +1,17 @@
 import type {
-  CSSUIProps,
   CSSUIObject,
+  CSSUIProps,
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { getVar, useTheme } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
-import { useCallback, useMemo, useState } from "react"
 import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
-import { getClassName, getComponentProps } from "./chart-utils"
 import type { RadialBarProps, RadialChartProps } from "./chart.types"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback, useMemo, useState } from "react"
+import { getClassName, getComponentProps } from "./chart-utils"
 import {
   radialBarProperties,
   radialChartProperties,
@@ -29,13 +29,17 @@ export interface UseRadialChartOptions {
    */
   dataKey?: string
   /**
-   * Props passed down to recharts `RadialBarChart` component.
+   * Controls angle at which chart ends.
+   *
+   * @default -180
    */
-  chartProps?: RadialChartProps
+  endAngle?: number
   /**
-   * Props for the radialBar.
+   * Controls fill opacity of all pies.
+   *
+   * @default 1
    */
-  radialBarProps?: Partial<RadialBarProps>
+  fillOpacity?: [number, number] | number
   /**
    * Controls innerRadius of the chart segments.
    * If it is a number, it is the width of the radius.
@@ -59,36 +63,32 @@ export interface UseRadialChartOptions {
    */
   startAngle?: number
   /**
-   * Controls angle at which chart ends.
-   *
-   * @default -180
+   * Props passed down to recharts `RadialBarChart` component.
    */
-  endAngle?: number
+  chartProps?: RadialChartProps
   /**
-   * Controls fill opacity of all pies.
-   *
-   * @default 1
+   * Props for the radialBar.
    */
-  fillOpacity?: number | [number, number]
+  radialBarProps?: Partial<RadialBarProps>
 }
 
 interface UseRadialChartProps extends UseRadialChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useRadialChart = ({
   data: dataProp,
   dataKey = "value",
+  endAngle = -180,
+  fillOpacity = 1,
   innerRadius = "10%",
   outerRadius = "80%",
   startAngle = 90,
-  endAngle = -180,
-  fillOpacity = 1,
   styles,
   ...rest
 }: UseRadialChartProps) => {
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const shouldHighlight = highlightedArea !== null
   const {
     background: backgroundProps = {},
@@ -137,7 +137,7 @@ export const useRadialChart = ({
   const [radialBarProps, radialBarClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [computedRadialBarProps ?? {}, radialBarProperties],
+        [computedRadialBarProps, radialBarProperties],
         styles.radialBar,
       )(theme),
     [computedRadialBarProps, styles.radialBar, theme],
@@ -148,9 +148,9 @@ export const useRadialChart = ({
       dataProp.map((props, index) => {
         const {
           name,
-          value,
           color,
           dimRadialBar = {},
+          value,
           ...computedProps
         } = props
         const dimmed = shouldHighlight && highlightedArea !== name
@@ -165,11 +165,11 @@ export const useRadialChart = ({
         )(theme)
 
         return {
-          className,
-          fill: getVar(`radial-bar-${index}`)(theme),
           name,
-          value,
+          className,
           color,
+          fill: getVar(`radial-bar-${index}`)(theme),
+          value,
         }
       }),
     [
@@ -190,10 +190,10 @@ export const useRadialChart = ({
       ref,
       className: cx(className, chartClassName),
       data,
+      endAngle,
       innerRadius,
       outerRadius,
       startAngle,
-      endAngle,
       ...props,
       ...chartProps,
     }),
@@ -215,9 +215,9 @@ export const useRadialChart = ({
     ({ className, ...props }, ref = null) => ({
       ref,
       className: cx(className, radialBarClassName),
+      background,
       dataKey,
       isAnimationActive: false,
-      background,
       ...props,
       ...radialBarProps,
     }),
@@ -227,8 +227,8 @@ export const useRadialChart = ({
   return {
     radialVars,
     setHighlightedArea,
-    getRadialChartProps,
     getRadialBarProps,
+    getRadialChartProps,
   }
 }
 

@@ -1,10 +1,10 @@
-import { GetServerSidePropsContext, NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import { Layout } from 'components/layouts'
 
 interface Props {}
 
 const Page: NextPage<Props> = () => {
-  return <Layout></Layout>
+  return <Layout />
 }
 
 export default Page

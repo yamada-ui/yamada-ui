@@ -7,27 +7,27 @@ export default {
 export const min = () => {
   return (
     <VStack
-      p="md"
-      rounded="md"
       borderWidth="1px"
-      resize="inline"
       overflow="auto"
+      p="md"
+      resize="inline"
+      rounded="md"
     >
-      <Center w="min(100%, lg)" bg="primary" p="md" rounded="md" color="white">
+      <Center bg="primary" color="white" p="md" rounded="md" w="min(100%, lg)">
         Min
       </Center>
 
       <Center
-        w="min(100%, calc(md + md))"
         bg="primary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
+        w="min(100%, calc(md + md))"
       >
         Min with calc
       </Center>
 
-      <Center w="min(md)" bg="secondary" p="md" rounded="md" color="white">
+      <Center bg="secondary" color="white" p="md" rounded="md" w="min(md)">
         Omitted Min
       </Center>
     </VStack>
@@ -37,27 +37,27 @@ export const min = () => {
 export const max = () => {
   return (
     <VStack
-      p="md"
-      rounded="md"
       borderWidth="1px"
-      resize="inline"
       overflow="auto"
+      p="md"
+      resize="inline"
+      rounded="md"
     >
-      <Center w="max(100%, lg)" bg="primary" p="md" rounded="md" color="white">
+      <Center bg="primary" color="white" p="md" rounded="md" w="max(100%, lg)">
         Max
       </Center>
 
       <Center
-        w="max(100%, calc(md + md))"
         bg="primary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
+        w="max(100%, calc(md + md))"
       >
         Max with calc
       </Center>
 
-      <Center w="max(md)" bg="secondary" p="md" rounded="md" color="white">
+      <Center bg="secondary" color="white" p="md" rounded="md" w="max(md)">
         Omitted Max
       </Center>
     </VStack>
@@ -67,38 +67,38 @@ export const max = () => {
 export const clamp = () => {
   return (
     <VStack
-      p="md"
-      rounded="md"
       borderWidth="1px"
-      resize="inline"
       overflow="auto"
+      p="md"
+      resize="inline"
+      rounded="md"
     >
       <Center
-        w="clamp(md, 100%, xl)"
         bg="primary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
+        w="clamp(md, 100%, xl)"
       >
         Clamp
       </Center>
 
       <Center
-        w="clamp(md, 100%, calc(md + md))"
         bg="primary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
+        w="clamp(md, 100%, calc(md + md))"
       >
         Clamp with calc
       </Center>
 
       <Center
-        w="clamp(md, lg)"
         bg="secondary"
+        color="white"
         p="md"
         rounded="md"
-        color="white"
+        w="clamp(md, lg)"
       >
         Omitted Clamp
       </Center>

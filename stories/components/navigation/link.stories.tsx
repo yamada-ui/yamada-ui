@@ -4,8 +4,8 @@ import { Link } from "@yamada-ui/react"
 type Story = StoryFn<typeof Link>
 
 const meta: Meta<typeof Link> = {
-  title: "Components / Navigation / Link",
   component: Link,
+  title: "Components / Navigation / Link",
 }
 
 export default meta

@@ -1,20 +1,20 @@
 import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import { useAutocompleteEmpty } from "./use-autocomplete-option"
 
 interface AutocompleteEmptyOptions {
   /**
-   * The autocomplete empty option icon to use.
-   */
-  icon?: ReactElement
-  /**
    * The label of the autocomplete empty option.
    */
   children?: string
+  /**
+   * The autocomplete empty option icon to use.
+   */
+  icon?: null | ReactElement
 }
 
 export interface AutocompleteEmptyProps
@@ -22,24 +22,24 @@ export interface AutocompleteEmptyProps
     AutocompleteEmptyOptions {}
 
 export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
-  ({ className, icon, children, ...rest }, ref) => {
+  ({ className, children, icon, ...rest }, ref) => {
     const { emptyMessage, styles } = useAutocompleteContext()
     const { getEmptyProps } = useAutocompleteEmpty()
 
     children ??= emptyMessage
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
       alignItems: "center",
-      textAlign: "start",
+      color: "inherit",
+      display: "flex",
       flex: "0 0 auto",
-      outline: 0,
       gap: "0.75rem",
+      outline: 0,
       pointerEvents: "none",
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
       ...styles.item,
     }
 
@@ -54,8 +54,9 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
             {icon || <AutocompleteMinusIcon />}
           </AutocompleteItemIcon>
         ) : null}
+
         {icon ? (
-          <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
+          <ui.span style={{ flex: 1, pointerEvents: "none" }} lineClamp={1}>
             {children}
           </ui.span>
         ) : (
@@ -70,10 +71,10 @@ AutocompleteEmpty.displayName = "AutocompleteEmpty"
 AutocompleteEmpty.__ui__ = "AutocompleteEmpty"
 
 const AutocompleteMinusIcon: FC = () => (
-  <svg viewBox="0 0 448 512" width="1em" height="1em">
+  <svg height="1em" viewBox="0 0 448 512" width="1em">
     <path
-      fill="currentColor"
       d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"
+      fill="currentColor"
     />
   </svg>
 )

@@ -1,3 +1,6 @@
+import type { CardProps, StackProps } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
+import type { MailItem } from "./data"
 import { Search } from "@yamada-ui/lucide"
 import {
   Box,
@@ -5,8 +8,9 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  HStack,
+  handlerAll,
   Heading,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -15,22 +19,18 @@ import {
   Spacer,
   Tag,
   Text,
-  VStack,
-  handlerAll,
   useBoolean,
+  VStack,
 } from "@yamada-ui/react"
-import type { CardProps, StackProps } from "@yamada-ui/react"
 import { memo, useRef, useState } from "react"
-import type { MutableRefObject, FC } from "react"
-import type { MailItem } from "./data"
 import { Header } from "./header"
 import { getDateDiff } from "./utils"
 
-type Props = StackProps & {
-  mails: MailItem[]
+type Props = {
   defaultMail: MailItem
+  mails: MailItem[]
   setMailRef: MutableRefObject<(mail: MailItem) => void>
-}
+} & StackProps
 
 export const Inbox: FC<Props> = memo(
   ({ defaultMail, mails, setMailRef, ...rest }) => {
@@ -38,7 +38,7 @@ export const Inbox: FC<Props> = memo(
     const resetMapRef = useRef<Map<number, () => void>>(new Map())
 
     return (
-      <VStack h="full" gap="0" {...rest}>
+      <VStack gap="0" h="full" {...rest}>
         <Header>
           <Heading as="h4" size="md">
             Inbox
@@ -48,9 +48,9 @@ export const Inbox: FC<Props> = memo(
 
           <SegmentedControl
             size="sm"
+            display={{ base: "flex", sm: "none" }}
             value={mode}
             onChange={changeMode}
-            display={{ base: "flex", sm: "none" }}
           >
             <SegmentedControlButton value="all">
               All Mail
@@ -75,12 +75,12 @@ export const Inbox: FC<Props> = memo(
 
           <VStack
             as="ul"
-            pb="sm"
-            px="sm"
-            gap="sm"
             flexBasis="0"
             flexGrow="1"
+            gap="sm"
             overflowY="auto"
+            pb="sm"
+            px="sm"
           >
             {mails.map((props) => {
               const { id, unRead } = props
@@ -89,8 +89,8 @@ export const Inbox: FC<Props> = memo(
 
               return (
                 <Box
-                  as="li"
                   key={id}
+                  as="li"
                   display={mode === "unread" && !unRead ? "none" : "block"}
                 >
                   <InboxItem
@@ -111,27 +111,27 @@ export const Inbox: FC<Props> = memo(
 
 Inbox.displayName = "Inbox"
 
-type InboxItemProps = Omit<CardProps, "id"> &
-  MailItem & {
-    defaultIsSelected?: boolean
-    resetMapRef: MutableRefObject<Map<number, () => void>>
-  }
+type InboxItemProps = {
+  resetMapRef: MutableRefObject<Map<number, () => void>>
+  defaultIsSelected?: boolean
+} & MailItem &
+  Omit<CardProps, "id">
 
 const InboxItem: FC<InboxItemProps> = memo(
   ({
     id,
     authorName,
+    content,
+    defaultIsSelected,
+    resetMapRef,
+    tags,
     timestamp,
     title,
-    defaultIsSelected,
-    content,
-    tags,
     unRead,
     onClick,
-    resetMapRef,
     ...rest
   }) => {
-    const [isSelected, { on, off }] = useBoolean(defaultIsSelected)
+    const [isSelected, { off, on }] = useBoolean(defaultIsSelected)
 
     resetMapRef.current.set(id, off)
 
@@ -145,8 +145,8 @@ const InboxItem: FC<InboxItemProps> = memo(
       <Card
         as="article"
         variant="outline"
-        cursor="pointer"
         bg={isSelected ? ["blackAlpha.50", "whiteAlpha.100"] : "transparent"}
+        cursor="pointer"
         onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >
@@ -155,20 +155,20 @@ const InboxItem: FC<InboxItemProps> = memo(
             {authorName}
           </Heading>
 
-          {unRead ? <Box boxSize="2" bg="primary" rounded="full" /> : null}
+          {unRead ? <Box bg="primary" boxSize="2" rounded="full" /> : null}
           <Spacer />
 
-          <Text fontSize="xs" color="muted">
+          <Text color="muted" fontSize="xs">
             {getDateDiff(timestamp)}
           </Text>
         </CardHeader>
 
-        <CardBody pt="sm" gap="xs">
+        <CardBody gap="xs" pt="sm">
           <Heading as="h5" size="xs" fontWeight="normal">
             {title}
           </Heading>
 
-          <Text lineClamp={2} fontSize="xs" color="muted">
+          <Text color="muted" fontSize="xs" lineClamp={2}>
             {content}
           </Text>
         </CardBody>

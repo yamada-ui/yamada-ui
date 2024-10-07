@@ -1,8 +1,8 @@
 import {
-  useBoolean,
   Resizable,
   ResizableItem,
   ResizableTrigger,
+  useBoolean,
   VStack,
 } from "@yamada-ui/react"
 import { memo } from "react"
@@ -11,7 +11,7 @@ import { Header } from "./header"
 import { Sidebar } from "./sidebar"
 
 export const Music = memo(() => {
-  const [isCollapse, { on, off }] = useBoolean()
+  const [isCollapse, { off, on }] = useBoolean()
 
   return (
     <VStack as="section" gap="0">
@@ -19,13 +19,13 @@ export const Music = memo(() => {
 
       <Resizable>
         <ResizableItem
-          defaultSize={20}
           collapsedSize={4}
           collapsible
-          minSize={15}
+          defaultSize={20}
           maxSize={30}
-          minW={{ base: isCollapse ? "14" : "56", lg: "14" }}
           maxW={{ base: undefined, lg: "14" }}
+          minSize={15}
+          minW={{ base: isCollapse ? "14" : "56", lg: "14" }}
           onCollapse={on}
           onExpand={off}
         >

@@ -1,16 +1,24 @@
 import type {
-  HTMLUIProps,
-  ThemeProps,
   CSSUIObject,
-  Token,
   CSSUIProps,
   FC,
+  HTMLUIProps,
+  ThemeProps,
+  Token,
 } from "@yamada-ui/core"
+import type { CarouselControlProps } from "./carousel-control"
+import type { CarouselIndicatorsProps } from "./carousel-indicators"
+import type {
+  AlignmentOptionType,
+  ScrollContainOptionType,
+  SlidesInViewOptionsType,
+  UseCarouselProps,
+} from "./use-carousel"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
@@ -23,17 +31,9 @@ import {
   pickChildren,
 } from "@yamada-ui/utils"
 import { cloneElement } from "react"
-import type { CarouselControlProps } from "./carousel-control"
 import { CarouselControlNext, CarouselControlPrev } from "./carousel-control"
-import type { CarouselIndicatorsProps } from "./carousel-indicators"
 import { CarouselIndicators } from "./carousel-indicators"
 import { CarouselSlide } from "./carousel-slide"
-import type {
-  AlignmentOptionType,
-  ScrollContainOptionType,
-  SlidesInViewOptionsType,
-  UseCarouselProps,
-} from "./use-carousel"
 import {
   CarouselProvider,
   useCarousel,
@@ -42,17 +42,17 @@ import {
 
 interface CarouselOptions {
   /**
-   * The orientation of the carousel.
-   *
-   * @default 'horizontal'
-   */
-  orientation?: Token<"vertical" | "horizontal">
-  /**
    * The alignment of the carousel.
    *
    * @default 'center'
    */
   align?: Token<AlignmentOptionType>
+  /**
+   * If `true`, the carousel will be autoplay.
+   *
+   * @default false
+   */
+  autoplay?: Token<boolean>
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
@@ -61,11 +61,11 @@ interface CarouselOptions {
    */
   containScroll?: Token<ScrollContainOptionType>
   /**
-   * The number of slides that should be scrolled with next or previous buttons.
+   * The number for the autoplay interval of the carousel.
    *
-   * @default 1
+   * @default 4000
    */
-  slidesToScroll?: Token<number>
+  delay?: Token<number>
   /**
    * If `true`, momentum scrolling will be enabled.
    *
@@ -78,6 +78,20 @@ interface CarouselOptions {
    * @default true
    */
   draggable?: Token<boolean>
+  /**
+   * Set scroll duration when triggered by any of the API methods.
+   * Higher numbers enables slower scrolling.
+   * Drag interactions are not affected because duration is then determined by the drag force.
+   *
+   * @default 25
+   */
+  duration?: Token<number>
+  /**
+   * If `true`, gap will be treated as part of the carousel slide size.
+   *
+   * @default true
+   */
+  includeGapInSize?: Token<boolean>
   /**
    * Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.
    *
@@ -92,6 +106,12 @@ interface CarouselOptions {
    */
   loop?: Token<boolean>
   /**
+   * The orientation of the carousel.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: Token<"horizontal" | "vertical">
+  /**
    * If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.
    * Note that this option will be ignored if the dragFree option is set to true.
    *
@@ -99,25 +119,15 @@ interface CarouselOptions {
    */
   skipSnaps?: Token<boolean>
   /**
-   * Set scroll duration when triggered by any of the API methods.
-   * Higher numbers enables slower scrolling.
-   * Drag interactions are not affected because duration is then determined by the drag force.
-   *
-   * @default 25
+   * The CSS `width` property.
    */
-  duration?: Token<number>
+  slideSize?: CSSUIProps["width"]
   /**
-   * The number for the autoplay interval of the carousel.
+   * The number of slides that should be scrolled with next or previous buttons.
    *
-   * @default 4000
+   * @default 1
    */
-  delay?: Token<number>
-  /**
-   * If `true`, the carousel will be autoplay.
-   *
-   * @default false
-   */
-  autoplay?: Token<boolean>
+  slidesToScroll?: Token<number>
   /**
    * If `true`, autoplay will pause when the mouse entries over.
    *
@@ -125,37 +135,11 @@ interface CarouselOptions {
    */
   stopMouseEnterAutoplay?: Token<boolean>
   /**
-   * If `true`, gap will be treated as part of the carousel slide size.
-   *
-   * @default true
-   */
-  includeGapInSize?: Token<boolean>
-  /**
-   * The CSS `width` property.
-   */
-  slideSize?: CSSUIProps["width"]
-  /**
-   * Props for carousel inner element.
-   */
-  innerProps?: HTMLUIProps
-  /**
    * If `true`, display the carousel control buttons.
    *
    * @default true
    */
   withControls?: Token<boolean>
-  /**
-   * Props for carousel control element.
-   */
-  controlProps?: CarouselControlProps
-  /**
-   * Props for previous of the carousel control element.
-   */
-  controlPrevProps?: CarouselControlProps
-  /**
-   * Props for next of the carousel control element.
-   */
-  controlNextProps?: CarouselControlProps
   /**
    * If `true`, display the carousel indicator buttons.
    *
@@ -163,24 +147,40 @@ interface CarouselOptions {
    */
   withIndicators?: Token<boolean>
   /**
+   * Props for next of the carousel control element.
+   */
+  controlNextProps?: CarouselControlProps
+  /**
+   * Props for previous of the carousel control element.
+   */
+  controlPrevProps?: CarouselControlProps
+  /**
+   * Props for carousel control element.
+   */
+  controlProps?: CarouselControlProps
+  /**
    * Props for carousel indicators element.
    */
   indicatorsProps?: CarouselIndicatorsProps
+  /**
+   * Props for carousel inner element.
+   */
+  innerProps?: HTMLUIProps
 }
 
 export interface CarouselProps
   extends ThemeProps<"Carousel">,
-    Omit<HTMLUIProps, "onChange" | "draggable">,
+    Omit<HTMLUIProps, "draggable" | "onChange">,
     Pick<
       UseCarouselProps,
-      | "index"
+      | "controlRef"
       | "defaultIndex"
+      | "index"
       | "onChange"
       | "onScrollProgress"
       | "watchDrag"
       | "watchResize"
       | "watchSlides"
-      | "controlRef"
     >,
     CarouselOptions {}
 
@@ -212,39 +212,39 @@ export const Carousel = forwardRef<CarouselProps, "div">(
 
     const [styles, mergedProps] = useComponentMultiStyle("Carousel", {
       ...props,
-      orientation,
       align,
       autoplay,
-      stopMouseEnterAutoplay,
-      loop,
-      duration,
-      delay,
-      slidesToScroll,
-      draggable,
-      dragFree,
-      inViewThreshold,
-      skipSnaps,
       containScroll,
-      includeGapInSize,
+      delay,
+      dragFree,
+      draggable,
+      duration,
       gap,
+      includeGapInSize,
+      inViewThreshold,
+      loop,
+      orientation,
+      skipSnaps,
       slideSize,
+      slidesToScroll,
+      stopMouseEnterAutoplay,
     })
     const {
       className,
-      innerProps,
       withControls = true,
-      controlProps,
-      controlPrevProps,
-      controlNextProps,
       withIndicators = true,
+      controlNextProps,
+      controlPrevProps,
+      controlProps,
       indicatorsProps,
+      innerProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const computedWithControls = useValue(withControls)
     const computedWithIndicators = useValue(withIndicators)
 
-    const { getContainerProps, getSlidesProps, children, ...rest } =
+    const { children, getContainerProps, getSlidesProps, ...rest } =
       useCarousel({
         ...computedProps,
       })
@@ -284,8 +284,8 @@ export const Carousel = forwardRef<CarouselProps, "div">(
         <ui.div
           className={cx("ui-carousel", className)}
           __css={{
-            position: "relative",
             h: "fit-content",
+            position: "relative",
             ...styles.container,
           }}
           {...getContainerProps({}, ref)}
@@ -327,7 +327,7 @@ type CarouselSlidesProps = HTMLUIProps
 
 const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   ({ ...rest }, ref) => {
-    const css: CSSUIObject = { w: "100%", h: "fit-content", overflow: "hidden" }
+    const css: CSSUIObject = { h: "fit-content", overflow: "hidden", w: "100%" }
 
     return (
       <ui.div ref={ref} className="ui-carousel__sliders" __css={css}>
@@ -343,7 +343,7 @@ CarouselSlides.__ui__ = "CarouselSlides"
 type CarouselSlidesInnerProps = HTMLUIProps
 
 const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
-  const { orientation, includeGapInSize, gap, styles } = useCarouselContext()
+  const { gap, includeGapInSize, orientation, styles } = useCarouselContext()
 
   const css: CSSUIObject = {
     display: "flex",
@@ -351,8 +351,8 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...styles.inner,
     ...(includeGapInSize
       ? {
-          vars: [{ name: "gap", token: "spaces", value: gap }],
           [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * -1)",
+          vars: [{ name: "gap", token: "spaces", value: gap }],
         }
       : {}),
   }

@@ -1,10 +1,11 @@
 import type {
-  CSSUIObject,
   ComponentArgs,
+  CSSUIObject,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   createContext,
@@ -13,41 +14,32 @@ import {
   isUndefined,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, RefAttributes } from "react"
 import { useCallback, useMemo, useRef } from "react"
 
-type ToggleGroupContext = ThemeProps<"Button"> & {
+type ToggleGroupContext = {
   isControlled: boolean
-  value?: string | number | (string | number)[]
-  onChange?: <M extends string | number = string>(value: M | undefined) => void
   isDisabled?: boolean
   isReadOnly?: boolean
-}
+  value?: (number | string)[] | number | string
+  onChange?: <M extends number | string = string>(value: M | undefined) => void
+} & ThemeProps<"Button">
 
 const [ToggleGroupProvider, useToggleGroup] = createContext<ToggleGroupContext>(
   {
-    strict: false,
     name: "ToggleGroupContext",
+    strict: false,
   },
 )
 
 export { useToggleGroup }
 
 interface ToggleGroupOptions<
-  Y extends string | number | (string | number)[] = string,
+  Y extends (number | string)[] | number | string = string,
 > {
-  /**
-   * The value of the toggle button group.
-   */
-  value?: Y extends any[] ? Y : Y | undefined
   /**
    * The initial value of the toggle button group.
    */
-  defaultValue?: Y extends any[] ? Y : Y | undefined
-  /**
-   * The callback fired when any children toggle button is selected or unselected.
-   */
-  onChange?: (value: Y extends any[] ? Y : Y | undefined) => void
+  defaultValue?: Y extends any[] ? Y : undefined | Y
   /**
    * The CSS `flex-direction` property.
    */
@@ -64,6 +56,14 @@ interface ToggleGroupOptions<
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * The value of the toggle button group.
+   */
+  value?: Y extends any[] ? Y : undefined | Y
+  /**
+   * The callback fired when any children toggle button is selected or unselected.
+   */
+  onChange?: (value: Y extends any[] ? Y : undefined | Y) => void
 }
 
 /**
@@ -72,38 +72,38 @@ interface ToggleGroupOptions<
  * @see Docs https://yamada-ui.com/components/forms/toggle
  */
 export interface ToggleGroupProps<
-  Y extends string | number | (string | number)[] = string,
-> extends Omit<HTMLUIProps, "direction" | "defaultValue" | "onChange">,
+  Y extends (number | string)[] | number | string = string,
+> extends Omit<HTMLUIProps, "defaultValue" | "direction" | "onChange">,
     ThemeProps<"Toggle">,
     ToggleGroupOptions<Y> {}
 
 export const ToggleGroup = forwardRef(
-  <Y extends string | number | (string | number)[] = string>(
+  <Y extends (number | string)[] | number | string = string>(
     {
-      value: valueProp,
-      defaultValue,
-      onChange: onChangeProp,
       className,
       size,
       variant,
+      defaultValue,
       direction: flexDirection,
       isDisabled,
       isReadOnly,
+      value: valueProp,
+      onChange: onChangeProp,
       ...rest
     }: ToggleGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    type Value = Y extends any[] ? Y : Y | undefined
+    type Value = Y extends any[] ? Y : undefined | Y
 
     const [value, setValue] = useControllableState<Value>({
-      value: valueProp,
       defaultValue,
+      value: valueProp,
       onChange: onChangeProp,
     })
     const isControlledRef = useRef<boolean>(!isUndefined(value))
 
     const onChange = useCallback(
-      <M extends string | number = Y extends any[] ? Y[number] : Y>(
+      <M extends number | string = Y extends any[] ? Y[number] : Y>(
         value: M | undefined,
       ) => {
         if (isUndefined(value)) return
@@ -118,7 +118,7 @@ export const ToggleGroup = forwardRef(
               return [...prev, value] as Value
             }
           } else {
-            if (value === (prev as string | number | undefined)) {
+            if (value === (prev as number | string | undefined)) {
               return undefined as Value
             } else {
               return value as unknown as Value
@@ -131,18 +131,18 @@ export const ToggleGroup = forwardRef(
 
     const css: CSSUIObject = {
       display: "inline-flex",
-      gap: "0.5rem",
       flexDirection,
+      gap: "0.5rem",
     }
 
     const values: ToggleGroupContext = useMemo(
       () => ({
-        value,
         size,
         variant,
+        isControlled: isControlledRef.current,
         isDisabled,
         isReadOnly,
-        isControlled: isControlledRef.current,
+        value,
         onChange,
       }),
       [value, size, variant, isDisabled, isReadOnly, onChange],
@@ -158,8 +158,8 @@ export const ToggleGroup = forwardRef(
       <ToggleGroupProvider value={values}>
         <ui.div
           ref={ref}
-          role="group"
           className={cx("ui-toggle-group", className)}
+          role="group"
           __css={css}
           {...rest}
         />
@@ -167,9 +167,9 @@ export const ToggleGroup = forwardRef(
     )
   },
 ) as {
-  <Y extends string | number | (string | number)[] = string>(
-    props: ToggleGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  <Y extends (number | string)[] | number | string = string>(
+    props: RefAttributes<HTMLDivElement> & ToggleGroupProps<Y>,
+  ): ReactElement
 } & ComponentArgs
 
 ToggleGroup.displayName = "ToggleGroup"

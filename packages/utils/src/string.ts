@@ -1,6 +1,6 @@
 import type { StringLiteral } from "./index.types"
 
-export function escape(value: string, replaceValue: string = ""): string {
+export function escape(value: string, replaceValue = ""): string {
   return value.replace(/\s+/g, replaceValue)
 }
 

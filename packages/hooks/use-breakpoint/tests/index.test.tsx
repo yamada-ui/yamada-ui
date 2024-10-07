@@ -1,6 +1,7 @@
-import { ui, ThemeProvider } from "@yamada-ui/core"
 import type { StyledTheme, ThemeConfig } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
+import type { FC } from "react"
+import { ThemeProvider, ui } from "@yamada-ui/core"
 import {
   act,
   mocks,
@@ -10,7 +11,6 @@ import {
   waitFor,
 } from "@yamada-ui/test"
 import { noop } from "@yamada-ui/utils"
-import type { FC } from "react"
 import {
   getBreakpointValue,
   useBreakpoint,
@@ -21,8 +21,6 @@ import {
 } from "../src"
 
 const theme: StyledTheme = {
-  themeScheme: "base",
-  changeThemeScheme: noop,
   breakpoints: {
     sm: "30em",
     md: "48em",
@@ -30,73 +28,75 @@ const theme: StyledTheme = {
     xl: "80em",
     "2xl": "90em",
   },
-  __config: {},
-  __cssVars: {},
-  __cssMap: {},
+  changeThemeScheme: noop,
+  themeScheme: "base",
   __breakpoints: {
-    keys: ["base", "2xl", "xl", "lg", "md", "sm"],
     isResponsive: () => false,
+    keys: ["base", "2xl", "xl", "lg", "md", "sm"],
     queries: [
       {
         breakpoint: "base",
-        minW: 1441,
         maxW: undefined,
-        query: undefined,
         maxWQuery: undefined,
-        minWQuery: "@media screen and (min-width: 1441px)",
         minMaxQuery: "@media screen and (min-width: 1441px)",
+        minW: 1441,
+        minWQuery: "@media screen and (min-width: 1441px)",
+        query: undefined,
       },
       {
         breakpoint: "2xl",
-        minW: 1281,
         maxW: 1440,
-        query: "@media screen and (max-width: 1440px)",
         maxWQuery: "@media screen and (max-width: 1440px)",
-        minWQuery: "@media screen and (min-width: 1281px)",
         minMaxQuery:
           "@media screen and (min-width: 1281px) and (max-width: 1440px)",
+        minW: 1281,
+        minWQuery: "@media screen and (min-width: 1281px)",
+        query: "@media screen and (max-width: 1440px)",
       },
       {
         breakpoint: "xl",
-        minW: 977,
         maxW: 1280,
-        query: "@media screen and (max-width: 1280px)",
         maxWQuery: "@media screen and (max-width: 1280px)",
-        minWQuery: "@media screen and (min-width: 977px)",
         minMaxQuery:
           "@media screen and (min-width: 977px) and (max-width: 1280px)",
+        minW: 977,
+        minWQuery: "@media screen and (min-width: 977px)",
+        query: "@media screen and (max-width: 1280px)",
       },
       {
         breakpoint: "lg",
-        minW: 769,
         maxW: 976,
-        query: "@media screen and (max-width: 976px)",
         maxWQuery: "@media screen and (max-width: 976px)",
-        minWQuery: "@media screen and (min-width: 769px)",
         minMaxQuery:
           "@media screen and (min-width: 769px) and (max-width: 976px)",
+        minW: 769,
+        minWQuery: "@media screen and (min-width: 769px)",
+        query: "@media screen and (max-width: 976px)",
       },
       {
         breakpoint: "md",
-        minW: 481,
         maxW: 768,
-        query: "@media screen and (max-width: 768px)",
         maxWQuery: "@media screen and (max-width: 768px)",
-        minWQuery: "@media screen and (min-width: 481px)",
         minMaxQuery:
           "@media screen and (min-width: 481px) and (max-width: 768px)",
+        minW: 481,
+        minWQuery: "@media screen and (min-width: 481px)",
+        query: "@media screen and (max-width: 768px)",
       },
       {
         breakpoint: "sm",
-        minW: undefined,
         maxW: 480,
-        query: "@media screen and (max-width: 480px)",
         maxWQuery: "@media screen and (max-width: 480px)",
-        minWQuery: undefined,
         minMaxQuery: "@media screen and (max-width: 480px)",
+        minW: undefined,
+        minWQuery: undefined,
+        query: "@media screen and (max-width: 480px)",
       },
     ],
   },
+  __config: {},
+  __cssMap: {},
+  __cssVars: {},
 }
 
 describe("useBreakpoint", () => {
@@ -110,7 +110,7 @@ describe("useBreakpoint", () => {
     mock.clear()
   })
 
-  test("Returns the correct breakpoint based on the current screen width", async () => {
+  test("Returns the correct breakpoint based on the current screen width", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(() => useBreakpoint(), {
@@ -123,9 +123,7 @@ describe("useBreakpoint", () => {
   })
 
   test("Outputs a warning message if theme is undefined", () => {
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     renderHook(() => useBreakpoint(), { withProvider: false })
 
@@ -144,8 +142,8 @@ describe("useBreakpoint", () => {
             [
               {
                 contentRect: {
-                  width: 1200,
                   height: 0,
+                  width: 1200,
                 },
               },
             ] as ResizeObserverEntry[],
@@ -173,7 +171,7 @@ describe("useBreakpoint", () => {
     }
 
     render(
-      <ThemeProvider theme={theme} config={config}>
+      <ThemeProvider config={config} theme={theme}>
         <ui.div ref={containerRef} containerType="inline-size">
           <Component />
         </ui.div>
@@ -198,7 +196,7 @@ describe("useBreakpointValue", () => {
     mock.clear()
   })
 
-  test("Returns the value of the current breakpoint when base is md", async () => {
+  test("Returns the value of the current breakpoint when base is md", () => {
     const { result } = renderHook(() => useBreakpointValue({ base: "md" }), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -219,7 +217,7 @@ describe("getBreakpointValue", () => {
     mock.clear()
   })
 
-  test("Returns the value of base", async () => {
+  test("Returns the value of base", () => {
     const { result } = renderHook(() => getBreakpointValue({ base: "md" }), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -229,14 +227,12 @@ describe("getBreakpointValue", () => {
     expect(result.current(theme, "md")).toBe("md")
   })
 
-  test("Outputs a warning message if theme is undefined", async () => {
+  test("Outputs a warning message if theme is undefined", () => {
     const theme = undefined as unknown as StyledTheme
 
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
-    renderHook(async () => getBreakpointValue({ base: "md" })(theme, "base"), {
+    renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
       withProvider: false,
     })
 
@@ -248,9 +244,7 @@ describe("getBreakpointValue", () => {
   test("Outputs a warning message if breakpoints are undefined", () => {
     const theme = {} as StyledTheme
 
-    const consoleWarnSpy = vi
-      .spyOn(console, "warn")
-      .mockImplementation(() => {})
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
       withProvider: false,
@@ -271,7 +265,7 @@ describe("useBreakpointState", () => {
     mock.clear()
   })
 
-  test("Returns the state corresponding to the current breakpoint", async () => {
+  test("Returns the state corresponding to the current breakpoint", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(
@@ -297,7 +291,7 @@ describe("useBreakpointEffect", () => {
     mock.clear()
   })
 
-  test("Executes callback when breakpoint changes", async () => {
+  test("Executes callback when breakpoint changes", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const callback = vi.fn()
@@ -322,7 +316,7 @@ describe("useUpdateBreakpointEffect", () => {
     mock.clear()
   })
 
-  test("Executes callback when breakpoint changes, skipping initial render", async () => {
+  test("Executes callback when breakpoint changes, skipping initial render", () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const callback = vi.fn()

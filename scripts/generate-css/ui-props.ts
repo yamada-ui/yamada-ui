@@ -1,140 +1,39 @@
-import type { CSSProperties } from "."
 import type { CSSObject, Union } from "@yamada-ui/react"
+import type { CSSProperties } from "."
 
 export interface UIOptions {
-  static?: CSSObject
+  type?: string
+  description?: string[]
   isProcessResult?: boolean
   isProcessSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
-  type?: string
-  description?: string[]
+  static?: CSSObject
 }
 
 export const additionalProps = {
-  marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
-  marginY: { properties: ["marginTop", "marginBottom"] },
-  paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
-  paddingY: { properties: ["paddingTop", "paddingBottom"] },
-  scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
-  scrollMarginY: { properties: ["scrollMarginTop", "scrollMarginBottom"] },
-  scrollPaddingX: { properties: ["scrollPaddingLeft", "scrollPaddingRight"] },
-  scrollPaddingY: { properties: ["scrollPaddingTop", "scrollPaddingBottom"] },
-  insetX: { properties: ["left", "right"] },
-  insetY: { properties: ["top", "bottom"] },
-  borderY: { properties: ["borderTop", "borderBottom"] },
-  borderX: { properties: ["borderLeft", "borderRight"] },
-  borderTopRadius: {
-    properties: ["borderTopLeftRadius", "borderTopRightRadius"],
-  },
-  borderBottomRadius: {
-    properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
-  },
-  borderRightRadius: {
-    properties: ["borderTopRightRadius", "borderBottomRightRadius"],
-  },
-  borderLeftRadius: {
-    properties: ["borderTopLeftRadius", "borderBottomLeftRadius"],
-  },
-  borderInlineStartRadius: {
-    properties: ["borderStartStartRadius", "borderStartEndRadius"],
-  },
-  borderInlineEndRadius: {
-    properties: ["borderEndStartRadius", "borderEndEndRadius"],
-  },
-  boxSize: { properties: ["width", "height"] },
-  minBoxSize: { properties: ["minWidth", "minHeight"] },
-  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
-  translateX: {
-    properties: "--ui-translate-x",
+  backdropBlur: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.",
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
     ],
+    properties: "--ui-backdrop-blur",
   },
-  translateY: {
-    properties: "--ui-translate-y",
+  backdropBrightness: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.",
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
     ],
+    properties: "--ui-backdrop-brightness",
   },
-  scale: {
-    properties: ["--ui-scale-x", "--ui-scale-y"],
+  backdropContrast: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.",
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
     ],
+    properties: "--ui-backdrop-contrast",
   },
-  scaleX: {
-    properties: "--ui-scale-x",
+  backdropDropShadow: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.",
+      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
     ],
-  },
-  scaleY: {
-    properties: "--ui-scale-y",
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.",
-    ],
-  },
-  rotate: {
-    properties: "--ui-rotate",
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.",
-    ],
-  },
-  skewX: {
-    properties: "--ui-skew-x",
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.",
-    ],
-  },
-  skewY: {
-    properties: "--ui-skew-y",
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.",
-    ],
-  },
-  filter: {
-    type: `CSS.Property.Filter | "auto"`,
-    description: [
-      "The CSS `filter` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
-    ],
-  },
-  blur: {
-    properties: "--ui-blur",
-    description: ["If `filter=auto`, sets the value of `--ui-blur`."],
-  },
-  brightness: {
-    properties: "--ui-brightness",
-    description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
-  },
-  contrast: {
-    properties: "--ui-contrast",
-    description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
-  },
-  dropShadow: {
-    properties: "--ui-drop-shadow",
-    description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
-  },
-  grayscale: {
-    properties: "--ui-grayscale",
-    description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
-  },
-  hueRotate: {
-    properties: "--ui-hue-rotate",
-    description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
-  },
-  invert: {
-    properties: "--ui-invert",
-    description: ["If `filter=auto`, sets the value of `--ui-invert`."],
-  },
-  saturate: {
-    properties: "--ui-saturate",
-    description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
-  },
-  sepia: {
-    properties: "--ui-sepia",
-    description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
+    properties: "--ui-backdrop-drop-shadow",
   },
   backdropFilter: {
     type: `CSS.Property.BackdropFilter | "auto"`,
@@ -144,100 +43,174 @@ export const additionalProps = {
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter",
     ],
   },
-  backdropBlur: {
-    properties: "--ui-backdrop-blur",
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
-    ],
-  },
-  backdropBrightness: {
-    properties: "--ui-backdrop-brightness",
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
-    ],
-  },
-  backdropContrast: {
-    properties: "--ui-backdrop-contrast",
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
-    ],
-  },
-  backdropDropShadow: {
-    properties: "--ui-backdrop-drop-shadow",
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
-    ],
-  },
   backdropGrayscale: {
-    properties: "--ui-backdrop-grayscale",
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.",
     ],
+    properties: "--ui-backdrop-grayscale",
   },
   backdropHueRotate: {
-    properties: "--ui-backdrop-hue-rotate",
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.",
     ],
+    properties: "--ui-backdrop-hue-rotate",
   },
   backdropInvert: {
-    properties: "--ui-backdrop-invert",
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.",
     ],
+    properties: "--ui-backdrop-invert",
   },
   backdropSaturate: {
-    properties: "--ui-backdrop-saturate",
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.",
     ],
+    properties: "--ui-backdrop-saturate",
   },
   backdropSepia: {
-    properties: "--ui-backdrop-sepia",
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
     ],
+    properties: "--ui-backdrop-sepia",
+  },
+  blur: {
+    description: ["If `filter=auto`, sets the value of `--ui-blur`."],
+    properties: "--ui-blur",
+  },
+  borderBottomRadius: {
+    properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
+  },
+  borderInlineEndRadius: {
+    properties: ["borderEndStartRadius", "borderEndEndRadius"],
+  },
+  borderInlineStartRadius: {
+    properties: ["borderStartStartRadius", "borderStartEndRadius"],
+  },
+  borderLeftRadius: {
+    properties: ["borderTopLeftRadius", "borderBottomLeftRadius"],
+  },
+  borderRightRadius: {
+    properties: ["borderTopRightRadius", "borderBottomRightRadius"],
+  },
+  borderTopRadius: {
+    properties: ["borderTopLeftRadius", "borderTopRightRadius"],
+  },
+  borderX: { properties: ["borderLeft", "borderRight"] },
+  borderY: { properties: ["borderTop", "borderBottom"] },
+  boxSize: { properties: ["width", "height"] },
+  brightness: {
+    description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
+    properties: "--ui-brightness",
   },
   colorMode: {
-    properties: "colorScheme",
     type: "CSS.Property.ColorScheme",
     description: [
       "The CSS `color-scheme` property.",
       "",
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
     ],
+    properties: "colorScheme",
+  },
+  contrast: {
+    description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
+    properties: "--ui-contrast",
+  },
+  dropShadow: {
+    description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
+    properties: "--ui-drop-shadow",
+  },
+  filter: {
+    type: `CSS.Property.Filter | "auto"`,
+    description: [
+      "The CSS `filter` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
+    ],
+  },
+  grayscale: {
+    description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
+    properties: "--ui-grayscale",
+  },
+  hueRotate: {
+    description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
+    properties: "--ui-hue-rotate",
+  },
+  insetX: { properties: ["left", "right"] },
+  insetY: { properties: ["top", "bottom"] },
+  invert: {
+    description: ["If `filter=auto`, sets the value of `--ui-invert`."],
+    properties: "--ui-invert",
+  },
+  marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
+  marginY: { properties: ["marginTop", "marginBottom"] },
+  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
+  minBoxSize: { properties: ["minWidth", "minHeight"] },
+  paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
+  paddingY: { properties: ["paddingTop", "paddingBottom"] },
+  rotate: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.",
+    ],
+    properties: "--ui-rotate",
+  },
+  saturate: {
+    description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
+    properties: "--ui-saturate",
+  },
+  scale: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.",
+    ],
+    properties: ["--ui-scale-x", "--ui-scale-y"],
+  },
+  scaleX: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.",
+    ],
+    properties: "--ui-scale-x",
+  },
+  scaleY: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.",
+    ],
+    properties: "--ui-scale-y",
+  },
+  scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
+  scrollMarginY: { properties: ["scrollMarginTop", "scrollMarginBottom"] },
+  scrollPaddingX: { properties: ["scrollPaddingLeft", "scrollPaddingRight"] },
+  scrollPaddingY: { properties: ["scrollPaddingTop", "scrollPaddingBottom"] },
+  sepia: {
+    description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
+    properties: "--ui-sepia",
+  },
+  skewX: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.",
+    ],
+    properties: "--ui-skew-x",
+  },
+  skewY: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.",
+    ],
+    properties: "--ui-skew-y",
+  },
+  translateX: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.",
+    ],
+    properties: "--ui-translate-x",
+  },
+  translateY: {
+    description: [
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.",
+    ],
+    properties: "--ui-translate-y",
   },
 } as const satisfies { [key: string]: UIOptions }
 
 export const uiProps = {
-  lineClamp: {
-    static: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
-    },
-    properties: "--ui-line-clamp",
-    type: "number",
-    description: ["Used to visually truncate a text after a number of lines."],
-  },
-  isTruncated: {
-    type: "boolean",
-    description: ["If `true`, it clamps truncate a text after one line."],
-  },
-  layerStyle: {
-    isProcessResult: true,
-    type: `StringLiteral, "layerStyles"`,
-    description: ["Apply layer styles defined in `theme.layerStyles`."],
-  },
-  textStyle: {
-    isProcessResult: true,
-    type: `StringLiteral, "textStyles"`,
-    description: ["Apply text styles defined in `theme.textStyles`."],
-  },
   apply: {
-    isProcessResult: true,
     description: [
       "Apply other styles defined in `theme.styles`.",
       "",
@@ -248,9 +221,35 @@ export const uiProps = {
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
+    isProcessResult: true,
+  },
+  layerStyle: {
+    type: `StringLiteral, "layerStyles"`,
+    description: ["Apply layer styles defined in `theme.layerStyles`."],
+    isProcessResult: true,
+  },
+  textStyle: {
+    type: `StringLiteral, "textStyles"`,
+    description: ["Apply text styles defined in `theme.textStyles`."],
+    isProcessResult: true,
+  },
+  isTruncated: {
+    type: "boolean",
+    description: ["If `true`, it clamps truncate a text after one line."],
+  },
+  lineClamp: {
+    type: "number",
+    description: ["Used to visually truncate a text after a number of lines."],
+    properties: "--ui-line-clamp",
+    static: {
+      display: "-webkit-box",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
   },
   vars: {
-    isProcessSkip: true,
     type: "{ __prefix?: string; name: string; token?: ThemeToken, value?: Token<number | StringLiteral> }[]",
     description: [
       "Set CSS variables.",
@@ -266,12 +265,56 @@ export const uiProps = {
       "</Box>",
       "```",
     ],
+    isProcessSkip: true,
   },
 } as const satisfies { [key: string]: UIOptions }
 
 export const atRuleProps = {
-  _media: {
+  _container: {
+    type: `{ ${[
+      "name?: StringLiteral",
+      "query?: StringLiteral",
+      'w?: CSS.Property.Width | number | Theme["sizes"]',
+      'width?: CSS.Property.Width | number | Theme["sizes"]',
+      'minW?: CSS.Property.MinWidth | number | Theme["sizes"]',
+      'minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]',
+      'maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]',
+      'maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]',
+      'h?: CSS.Property.Height | number | Theme["sizes"]',
+      'height?: CSS.Property.Height | number | Theme["sizes"]',
+      'minH?: CSS.Property.MinHeight | number | Theme["sizes"]',
+      'minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]',
+      'maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]',
+      'maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]',
+      "aspectRatio?: CSS.Property.AspectRatio",
+      "minAspectRatio?: CSS.Property.AspectRatio",
+      "maxAspectRatio?: CSS.Property.AspectRatio",
+      'blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]',
+      'minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]',
+      'maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]',
+      'inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]',
+      'minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]',
+      'maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]',
+      'orientation?: "portrait" | "landscape" | StringLiteral',
+      "css?: CSSUIObject",
+      "[key: string]: any",
+    ].join(";")}}[]`,
+    description: [
+      "The `@container` of CSS at-rule.",
+      "@experimental",
+      "",
+      "@example",
+      "```jsx",
+      '<Box containerType="size">',
+      '  <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>',
+      "    Box",
+      "  </Text>",
+      "</Box>",
+      "```",
+    ],
     isProcessSkip: true,
+  },
+  _media: {
     type: `{ ${[
       'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
       "query?: StringLiteral",
@@ -345,53 +388,9 @@ export const atRuleProps = {
       "</Box>",
       "```",
     ],
-  },
-  _container: {
     isProcessSkip: true,
-    type: `{ ${[
-      "name?: StringLiteral",
-      "query?: StringLiteral",
-      'w?: CSS.Property.Width | number | Theme["sizes"]',
-      'width?: CSS.Property.Width | number | Theme["sizes"]',
-      'minW?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'h?: CSS.Property.Height | number | Theme["sizes"]',
-      'height?: CSS.Property.Height | number | Theme["sizes"]',
-      'minH?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]',
-      'maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]',
-      "aspectRatio?: CSS.Property.AspectRatio",
-      "minAspectRatio?: CSS.Property.AspectRatio",
-      "maxAspectRatio?: CSS.Property.AspectRatio",
-      'blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]',
-      'minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]',
-      'maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]',
-      'inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]',
-      'minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]',
-      'maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]',
-      'orientation?: "portrait" | "landscape" | StringLiteral',
-      "css?: CSSUIObject",
-      "[key: string]: any",
-    ].join(";")}}[]`,
-    description: [
-      "The `@container` of CSS at-rule.",
-      "@experimental",
-      "",
-      "@example",
-      "```jsx",
-      '<Box containerType="size">',
-      '  <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>',
-      "    Box",
-      "  </Text>",
-      "</Box>",
-      "```",
-    ],
   },
   _supports: {
-    isProcessSkip: true,
     type: `{${["query?: StringLiteral", "css?: CSSUIObject"].join(";")}}[]`,
     description: [
       "The `@supports` of CSS at-rule.",
@@ -406,5 +405,6 @@ export const atRuleProps = {
       "</Box>",
       "```",
     ],
+    isProcessSkip: true,
   },
 } as const satisfies { [key: string]: UIOptions }

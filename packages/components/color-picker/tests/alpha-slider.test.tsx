@@ -5,32 +5,32 @@ describe("<AlphaSlider />", () => {
   beforeAll(() => {
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
+        configurable: true,
         get() {
           return this.clientX
         },
-        configurable: true,
       },
       pageY: {
+        configurable: true,
         get() {
           return this.clientY
         },
-        configurable: true,
       },
     })
   })
 
   afterAll(() => {
     Object.defineProperty(MouseEvent.prototype, "pageX", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
     Object.defineProperty(MouseEvent.prototype, "pageY", {
-      value: undefined,
       configurable: true,
+      value: undefined,
     })
   })
 
-  test("AlphaSlider renders correctly", async () => {
+  test("AlphaSlider renders correctly", () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
 
     const alphaSlider = screen.getByTestId("alphaSlider")
@@ -38,7 +38,7 @@ describe("<AlphaSlider />", () => {
     expect(alphaSlider).toBeInTheDocument()
   })
 
-  test("AlphaSlider renders overlays correctly with default props", async () => {
+  test("AlphaSlider renders overlays correctly with default props", () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
     const thumb = screen.getByRole("slider")
 
@@ -49,7 +49,7 @@ describe("<AlphaSlider />", () => {
   })
 
   test("AlphaSlider renders correctly with custom props", () => {
-    render(<AlphaSlider data-testid="alphaSlider" min={0.2} max={0.8} />)
+    render(<AlphaSlider data-testid="alphaSlider" max={0.8} min={0.2} />)
 
     const alphaSlider = screen.getByTestId("alphaSlider")
 
@@ -74,7 +74,7 @@ describe("<AlphaSlider />", () => {
 
   test("AlphaSlider disabled behavior", () => {
     const onChange = vi.fn()
-    const { getByRole } = render(<AlphaSlider onChange={onChange} disabled />)
+    const { getByRole } = render(<AlphaSlider disabled onChange={onChange} />)
 
     const sliderThumb = getByRole("slider")
 
@@ -87,16 +87,16 @@ describe("<AlphaSlider />", () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    const { min, max, step } = { min: 0, max: 1, step: 0.01 }
+    const { max, min, step } = { max: 1, min: 0, step: 0.01 }
 
     const { user } = render(
       <AlphaSlider
-        min={min}
         max={max}
+        min={min}
         step={step}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
         onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
       />,
     )
 

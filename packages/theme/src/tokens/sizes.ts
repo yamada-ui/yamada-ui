@@ -3,9 +3,11 @@ import { spaces } from "./spaces"
 
 export const sizes: ThemeTokens = {
   ...spaces,
+
+  full: "100%",
   max: "max-content",
   min: "min-content",
-  full: "100%",
+
   "9xs": "1rem",
   "8xs": "1.5rem",
   "7xs": "2rem",

@@ -7,13 +7,13 @@ describe("<IconButton />", () => {
     await a11y(
       <IconButton
         colorScheme="primary"
-        icon={<ChevronIcon />}
         aria-label="Open menu"
+        icon={<ChevronIcon />}
       />,
     )
   })
 
-  test("renders children correctly", async () => {
+  test("renders children correctly", () => {
     const { getByTestId } = render(
       <IconButton colorScheme="primary" aria-label="Open menu">
         <ChevronIcon data-testid="icon" />

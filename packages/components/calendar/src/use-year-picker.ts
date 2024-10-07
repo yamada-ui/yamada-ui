@@ -1,29 +1,35 @@
 import type { PropGetter } from "@yamada-ui/core"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { isActiveElement, useUpdateEffect, handlerAll } from "@yamada-ui/utils"
-import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
-import { useCallback, useState } from "react"
 import type { UseCalendarProps } from "./use-calendar"
-import { useCalendarPicker } from "./use-calendar-picker"
 import type { UseCalendarPickerProps } from "./use-calendar-picker"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { handlerAll, isActiveElement, useUpdateEffect } from "@yamada-ui/utils"
+import dayjs from "dayjs"
+import { useCallback, useState } from "react"
+import { useCalendarPicker } from "./use-calendar-picker"
 
 interface CalendarProps
   extends Pick<
     UseCalendarProps<Date | undefined>,
-    | "value"
     | "defaultValue"
-    | "onChange"
     | "locale"
-    | "minDate"
     | "maxDate"
-    | "yearFormat"
-    | "withHeader"
+    | "minDate"
+    | "onChange"
+    | "value"
     | "withControls"
+    | "withHeader"
     | "withLabel"
+    | "yearFormat"
   > {}
 
 interface UseYearPickerOptions {
+  /**
+   * If `true`, the calendar component will be closed when value is selected.
+   *
+   * @default true
+   */
+  closeOnSelect?: boolean
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
@@ -32,12 +38,6 @@ interface UseYearPickerOptions {
    * @default 'YYYY'
    */
   inputFormat?: string
-  /**
-   * If `true`, the calendar component will be closed when value is selected.
-   *
-   * @default true
-   */
-  closeOnSelect?: boolean
 }
 
 export interface UseYearPickerProps
@@ -45,42 +45,41 @@ export interface UseYearPickerProps
     UseYearPickerOptions {}
 
 export const useYearPicker = ({
-  value: valueProp,
-  defaultValue,
-  onChange: onChangeProp,
-  placeholder,
   closeOnSelect = true,
+  defaultValue,
+  placeholder,
+  value: valueProp,
+  onChange: onChangeProp,
   ...rest
 }: UseYearPickerProps) => {
   const [value, setValue] = useControllableState<Date | undefined>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
 
   const {
-    inputRef,
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
-    onClose,
     dateToString,
+    inputRef,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
   } = useCalendarPicker({
     inputFormat: "YYYY",
     ...rest,
-    __selectType: "year",
-    value,
-    defaultValue,
-    onChange: setValue,
     type: "year",
+    defaultValue,
+    value,
+    onChange: setValue,
     onChangeType: (__type, year, month) => {
       let value: Date | undefined = undefined
 
@@ -105,6 +104,7 @@ export const useYearPicker = ({
 
       rest.onClose?.()
     },
+    __selectType: "year",
   })
 
   const [inputValue, setInputValue] = useState<string | undefined>(
@@ -155,13 +155,13 @@ export const useYearPicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        id,
         ref,
         style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? "",
         onChange: handlerAll(props.onChange, onChange),
       }
     },
@@ -179,13 +179,13 @@ export const useYearPicker = ({
   return {
     id,
     value,
-    onClose,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   }
 }
 

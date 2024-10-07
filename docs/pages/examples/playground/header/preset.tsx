@@ -1,7 +1,7 @@
-import { Autocomplete } from "@yamada-ui/react"
 import type { AutocompleteItem, AutocompleteProps } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
+import { Autocomplete } from "@yamada-ui/react"
+import { memo } from "react"
 
 const OPTIONS: AutocompleteItem[] = [
   {
@@ -24,9 +24,9 @@ export interface PresetProps extends AutocompleteProps {}
 export const Preset: FC<PresetProps> = memo(({ ...rest }) => {
   return (
     <Autocomplete
-      placeholder="Search presets…"
       items={OPTIONS}
       minW={{ base: "72" }}
+      placeholder="Search presets…"
       {...rest}
     />
   )

@@ -3,25 +3,25 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
   baseStyle: {
     container: {},
+    ellipsis: {},
     item: {},
     link: {
-      transitionProperty: "common",
-      transitionDuration: "fast",
-      transitionTimingFunction: "ease-out",
-      textDecoration: "none",
-      outline: "none",
-      color: "inherit",
       "&:not([aria-current=page])": {
         cursor: "pointer",
-        _hover: {
-          textDecoration: "underline",
-        },
         _focusVisible: {
           boxShadow: "outline",
         },
+        _hover: {
+          textDecoration: "underline",
+        },
       },
+      color: "inherit",
+      outline: "none",
+      textDecoration: "none",
+      transitionDuration: "fast",
+      transitionProperty: "common",
+      transitionTimingFunction: "ease-out",
     },
     separator: {},
-    ellipsis: {},
   },
 }

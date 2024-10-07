@@ -1,4 +1,4 @@
-import type { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
+import type { ComponentDefaultProps, Theme, UsageTheme } from "@yamada-ui/core"
 import type { Union } from "@yamada-ui/utils"
 import { isArray, merge } from "@yamada-ui/utils"
 
@@ -63,8 +63,8 @@ export function withDefaultColorScheme({
 }
 
 export function withDefaultProps({
-  defaultProps,
   components,
+  defaultProps,
 }: {
   defaultProps: ComponentDefaultProps
   components?: Union<keyof Theme["components"]>[]

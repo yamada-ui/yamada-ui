@@ -1,5 +1,7 @@
 import { a11y, act, fireEvent, render, screen, TestIcon } from "@yamada-ui/test"
 import {
+  ContextMenu,
+  ContextMenuTrigger,
   Menu,
   MenuButton,
   MenuDivider,
@@ -9,8 +11,6 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  ContextMenu,
-  ContextMenuTrigger,
 } from "../src"
 
 describe("<Menu />", () => {
@@ -46,7 +46,7 @@ describe("<Menu />", () => {
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuItem command="⌘N" data-testid="MenuItem">
+          <MenuItem data-testid="MenuItem" command="⌘N">
             Add item
           </MenuItem>
           <MenuItem command="⌘E">Edit item</MenuItem>
@@ -141,9 +141,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
+            type="radio"
             data-testid="MenuOptionGroup-a"
             label="item"
-            type="radio"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -152,9 +152,9 @@ describe("<Menu />", () => {
           </MenuOptionGroup>
 
           <MenuOptionGroup
+            type="checkbox"
             data-testid="MenuOptionGroup-b"
             label="order"
-            type="checkbox"
           >
             <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
               Ascending
@@ -186,9 +186,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
+            type="radio"
             data-testid="MenuOptionGroup-a"
             label="item"
-            type="radio"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -198,8 +198,8 @@ describe("<Menu />", () => {
 
           <MenuOptionGroup
             type="checkbox"
-            label="order"
             defaultValue={["desc"]}
+            label="order"
           >
             <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
               Ascending
@@ -250,9 +250,9 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
+            type="radio"
             data-testid="MenuOptionGroup-a"
             label="option-group-label"
-            type="radio"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -261,9 +261,9 @@ describe("<Menu />", () => {
           </MenuOptionGroup>
 
           <MenuOptionGroup
+            type="checkbox"
             data-testid="MenuOptionGroup-b"
             label="order"
-            type="checkbox"
           >
             <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
               Ascending
@@ -277,7 +277,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowDown", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -297,7 +297,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowUp", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -318,7 +318,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for Enter", async () => {
-    const { user, getByRole } = render(
+    const { getByRole, user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -420,12 +420,12 @@ describe("<Menu />", () => {
     const { container } = render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>
@@ -441,12 +441,12 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>
@@ -462,12 +462,12 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          w="full"
-          h="xs"
-          borderWidth="1px"
           borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
           p="md"
           rounded="md"
+          w="full"
         >
           Right click here
         </ContextMenuTrigger>

@@ -1,10 +1,10 @@
 import type { FC } from "react"
 import {
-  UIProvider,
-  extendConfig,
-  Center,
-  useNotice,
   Button,
+  Center,
+  extendConfig,
+  UIProvider,
+  useNotice,
 } from "@yamada-ui/react"
 
 export default {
@@ -15,8 +15,8 @@ export const basic = () => {
   const config = extendConfig({
     notice: {
       options: {
-        placement: "bottom-right",
         limit: 3,
+        placement: "bottom-right",
       },
     },
   })
@@ -32,12 +32,12 @@ const App: FC = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
+            title: "孫悟空",
           })
         }
       >

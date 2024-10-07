@@ -1,7 +1,7 @@
 import type { Environment } from "./environment-provider"
 
 export const preventTransition = (environment: Environment) => {
-  const { getWindow, getDocument } = environment
+  const { getDocument, getWindow } = environment
   const win = getWindow()
   const doc = getDocument()
 

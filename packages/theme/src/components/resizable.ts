@@ -4,66 +4,56 @@ import { isGray, transparentizeColor } from "@yamada-ui/utils"
 export const Resizable: ComponentMultiStyle<"Resizable"> = {
   baseStyle: ({ direction: d }) => ({
     container: {},
-    item: {},
-    trigger: {},
     icon: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
       rotate: d === "vertical" ? "90deg" : "0deg",
     },
+    item: {},
+    trigger: {},
   }),
 
   variants: {
     border: ({ direction: d }) => ({
+      icon: {
+        bg: "border",
+        p: "1",
+        rounded: "full",
+      },
       trigger: {
         bg: "border",
         ...(d === "vertical" ? { h: "px" } : { w: "px" }),
-        _focus: {
-          outline: "none",
-        },
-        _focusVisible: {
-          outline: "none",
-          bg: "focus",
-        },
         _after: {
           content: "''",
           position: "absolute",
           ...(d === "vertical"
             ? { left: "0", right: "0", transform: "translateY(-50%)" }
-            : { top: "0", bottom: "0", transform: "translateX(-50%)" }),
+            : { bottom: "0", top: "0", transform: "translateX(-50%)" }),
           ...(d === "vertical" ? { h: "2" } : { w: "2" }),
-        },
-      },
-      icon: {
-        p: "1",
-        bg: "border",
-        rounded: "full",
-      },
-    }),
-    spacer: ({
-      direction: d,
-      theme: t,
-      colorMode: m,
-      colorScheme: c = "gray",
-    }) => ({
-      trigger: {
-        ...(d === "vertical" ? { p: "1" } : { p: "1" }),
-        _after: {
-          transitionProperty: "common",
-          transitionDuration: "slower",
-          bg: "transparent",
-          content: "''",
-          display: "block",
-          rounded: "full",
-          ...(d === "vertical" ? { w: "full", h: "2" } : { w: "2", h: "full" }),
-        },
-        _dark: {
-          _after: {
-            bg: "transparent",
-          },
         },
         _focus: {
           outline: "none",
         },
+        _focusVisible: {
+          bg: "focus",
+          outline: "none",
+        },
+      },
+    }),
+    spacer: ({
+      colorScheme: c = "gray",
+      colorMode: m,
+      direction: d,
+      theme: t,
+    }) => ({
+      icon: {
+        transitionDuration: "slower",
+        transitionProperty: "common",
+        _active: {
+          color: ["transparent", "transparent"],
+        },
+      },
+      trigger: {
+        ...(d === "vertical" ? { p: "1" } : { p: "1" }),
         _active: {
           _after: {
             bg: isGray(c) ? "border" : `${c}.50`,
@@ -75,6 +65,23 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
                 : transparentizeColor(`${c}.600`, 0.12)(t, m),
             },
           },
+        },
+        _after: {
+          bg: "transparent",
+          content: "''",
+          display: "block",
+          rounded: "full",
+          transitionDuration: "slower",
+          transitionProperty: "common",
+          ...(d === "vertical" ? { h: "2", w: "full" } : { h: "full", w: "2" }),
+        },
+        _dark: {
+          _after: {
+            bg: "transparent",
+          },
+        },
+        _focus: {
+          outline: "none",
         },
         _focusVisible: {
           outline: "none",
@@ -90,13 +97,6 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
           },
         },
       },
-      icon: {
-        transitionProperty: "common",
-        transitionDuration: "slower",
-        _active: {
-          color: ["transparent", "transparent"],
-        },
-      },
     }),
     unstyled: ({ direction: d }) => ({
       trigger: {
@@ -105,7 +105,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
           position: "absolute",
           ...(d === "vertical"
             ? { left: "0", right: "0", transform: "translateY(-50%)" }
-            : { top: "0", bottom: "0", transform: "translateX(-50%)" }),
+            : { bottom: "0", top: "0", transform: "translateX(-50%)" }),
           ...(d === "vertical" ? { h: "2" } : { w: "2" }),
         },
       },
@@ -113,7 +113,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
   },
 
   defaultProps: {
-    variant: "border",
     colorScheme: "gray",
+    variant: "border",
   },
 }

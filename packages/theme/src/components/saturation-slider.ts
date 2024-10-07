@@ -3,14 +3,14 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
   baseStyle: {
     container: {
-      w: "full",
-      rounded: "md",
       cursor: "pointer",
-      _readOnly: { cursor: "auto" },
+      rounded: "md",
+      w: "full",
       _disabled: {
-        opacity: 0.6,
         cursor: "not-allowed",
+        opacity: 0.6,
       },
+      _readOnly: { cursor: "auto" },
     },
     inner: {
       rounded: "md",
@@ -18,15 +18,14 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
     overlay: {
       rounded: "md",
     },
-    track: {},
     thumb: {
-      rounded: "full",
-      outline: 0,
-      borderWidth: "3px",
       borderColor: "whiteAlpha.950",
+      borderWidth: "3px",
       boxShadow: ["md", "dark-md"],
-      transitionProperty: "transform",
+      outline: 0,
+      rounded: "full",
       transitionDuration: "normal",
+      transitionProperty: "transform",
       _active: {
         transform: `scale(1.15)`,
       },
@@ -34,6 +33,7 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
         boxShadow: ["outline", "outline"],
       },
     },
+    track: {},
   },
 
   sizes: {

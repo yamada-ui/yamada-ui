@@ -1,6 +1,6 @@
-import { Check, Copy } from "@yamada-ui/lucide"
-import { forwardRef, IconButton, useClipboard, Tooltip } from "@yamada-ui/react"
 import type { ButtonProps } from "@yamada-ui/react"
+import { Check, Copy } from "@yamada-ui/lucide"
+import { forwardRef, IconButton, Tooltip, useClipboard } from "@yamada-ui/react"
 import { memo } from "react"
 
 export interface CopyButtonProps extends Omit<ButtonProps, "value"> {
@@ -12,39 +12,37 @@ export const CopyButton = memo(
     const { hasCopied, onCopy } = useClipboard(value)
 
     return (
-      <>
-        <Tooltip
-          label="Copied!"
-          placement="left"
-          isOpen={hasCopied}
-          bg="success"
-          h="8"
-          display="inline-flex"
+      <Tooltip
+        alignItems="center"
+        bg="success"
+        display="inline-flex"
+        h="8"
+        isOpen={hasCopied}
+        label="Copied!"
+        placement="left"
+        zIndex="auto"
+      >
+        <IconButton
+          ref={ref}
+          size="sm"
+          variant="unstyled"
+          aria-label="Copy the code"
           alignItems="center"
-          zIndex="auto"
-        >
-          <IconButton
-            ref={ref}
-            size="sm"
-            aria-label="Copy the code"
-            variant="unstyled"
-            color={hasCopied ? "success" : "whiteAlpha.600"}
-            border="1px solid"
-            borderColor={hasCopied ? "success" : "whiteAlpha.600"}
-            bg={["neutral.800", "neutral.900"]}
-            _hover={{
-              color: hasCopied ? "success" : "whiteAlpha.800",
-              borderColor: hasCopied ? "success" : "whiteAlpha.800",
-            }}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
-            {...rest}
-            onClick={onCopy}
-          />
-        </Tooltip>
-      </>
+          bg={["neutral.800", "neutral.900"]}
+          border="1px solid"
+          borderColor={hasCopied ? "success" : "whiteAlpha.600"}
+          color={hasCopied ? "success" : "whiteAlpha.600"}
+          display="flex"
+          icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
+          justifyContent="center"
+          _hover={{
+            borderColor: hasCopied ? "success" : "whiteAlpha.800",
+            color: hasCopied ? "success" : "whiteAlpha.800",
+          }}
+          {...rest}
+          onClick={onCopy}
+        />
+      </Tooltip>
     )
   }),
 )

@@ -3,17 +3,14 @@ import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
 
-type StepperContext = Omit<
-  UseStepperReturn,
-  "descendants" | "getContainerProps"
-> & {
-  styles: { [key: string]: CSSUIObject }
-}
+type StepperContext = {
+  styles: { [key: string]: CSSUIObject | undefined }
+} & Omit<UseStepperReturn, "descendants" | "getContainerProps">
 
 export const {
   DescendantsContextProvider: StepperDescendantsContextProvider,
-  useDescendants: useStepperDescendants,
   useDescendant: useStepperDescendant,
+  useDescendants: useStepperDescendants,
 } = createDescendant<HTMLDivElement>()
 
 export const [StepperProvider, useStepperContext] =
@@ -50,7 +47,7 @@ export const useStepper = ({
   const descendants = useStepperDescendants()
 
   const getStepStatus = useCallback(
-    (step: number): "complete" | "active" | "incomplete" => {
+    (step: number): "active" | "complete" | "incomplete" => {
       if (step < index) return "complete"
       if (step > index) return "incomplete"
 
@@ -71,10 +68,10 @@ export const useStepper = ({
 
   return {
     descendants,
+    getStepStatus,
     index,
     orientation,
     showLastSeparator,
-    getStepStatus,
     getContainerProps,
   }
 }
@@ -82,9 +79,9 @@ export const useStepper = ({
 export type UseStepperReturn = ReturnType<typeof useStepper>
 
 export const useStep = () => {
-  const { orientation, getStepStatus } = useStepperContext()
+  const { getStepStatus, orientation } = useStepperContext()
 
-  const { index, register, descendants } = useStepperDescendant()
+  const { descendants, index, register } = useStepperDescendant()
 
   const isFirst = index === 0
   const isLast = index === descendants.lastValue()?.index
@@ -95,13 +92,13 @@ export const useStep = () => {
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, register),
-      "data-status": status,
       "data-orientation": orientation,
+      "data-status": status,
     }),
     [orientation, register, status],
   )
 
-  return { index, status, isFirst, isLast, getStepProps }
+  return { index, isFirst, isLast, status, getStepProps }
 }
 
 export type UseStepReturn = ReturnType<typeof useStep>

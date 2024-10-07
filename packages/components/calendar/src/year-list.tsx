@@ -1,9 +1,9 @@
 import type { ButtonProps } from "@yamada-ui/button"
-import { Button } from "@yamada-ui/button"
 import type { FC, HTMLUIProps } from "@yamada-ui/core"
+import type { CalendarHeaderProps } from "./calendar-header"
+import { Button } from "@yamada-ui/button"
 import { ui } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
-import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
 import { getFormattedLabel } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
@@ -21,27 +21,27 @@ interface YearListOptions {
   /**
    * Props for calendar year button element.
    */
-  yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
+  yearProps?: { component?: FC<{ index: number; year: number }> } & ButtonProps
 }
 
 export interface YearListProps
   extends HTMLUIProps,
-    Omit<CalendarHeaderProps, "label" | "index">,
+    Omit<CalendarHeaderProps, "index" | "label">,
     YearListOptions {}
 
 export const YearList: FC<YearListProps> = ({
   className,
+  controlProps,
   headerProps,
   labelProps,
-  controlProps,
-  prevProps,
   nextProps,
-  yearProps,
+  prevProps,
   yearGridProps,
+  yearProps,
   ...rest
 }) => {
-  const { locale, yearFormat, styles } = useCalendarContext()
-  const { label, rangeYears, getGridProps, getButtonProps } = useYearList()
+  const { locale, styles, yearFormat } = useCalendarContext()
+  const { label, rangeYears, getButtonProps, getGridProps } = useYearList()
 
   const { component: customYear, ...computedYearProps } = yearProps ?? {}
 
@@ -58,27 +58,27 @@ export const YearList: FC<YearListProps> = ({
         {...{
           ...headerProps,
           label,
-          labelProps,
           controlProps,
-          prevProps,
+          labelProps,
           nextProps,
+          prevProps,
         }}
       />
 
       <ui.div
         className={cx("ui-calendar__year-list", className)}
         __css={{
-          w: styles.content?.w ?? styles.content?.width,
-          minW: styles.content?.minW ?? styles.content?.minWidth,
-          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
-          h: styles.content?.h ?? styles.content?.height,
-          minH: styles.content?.minH ?? styles.content?.minHeight,
-          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
           display: "grid",
+          h: styles.content?.h ?? styles.content?.height,
+          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
+          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+          minH: styles.content?.minH ?? styles.content?.minHeight,
+          minW: styles.content?.minW ?? styles.content?.minWidth,
+          w: styles.content?.w ?? styles.content?.width,
           ...styles.year,
         }}
         {...getGridProps({
-          ...filterUndefined({ w, minW, maxW, h, minH, maxH }),
+          ...filterUndefined({ h, maxH, maxW, minH, minW, w }),
           ...yearGridProps,
         })}
       >
@@ -88,17 +88,17 @@ export const YearList: FC<YearListProps> = ({
             className="ui-calendar__year-list__button"
             variant="ghost"
             __css={{
-              minW: "auto",
-              h: "auto",
-              p: 0,
               fontSize: undefined,
               fontWeight: "normal",
+              h: "auto",
+              minW: "auto",
+              p: 0,
               ...styles.button,
             }}
-            {...getButtonProps({ ...computedYearProps, value: year, index })}
+            {...getButtonProps({ ...computedYearProps, index, value: year })}
           >
             {customYear
-              ? customYear({ year, index })
+              ? customYear({ index, year })
               : getFormattedLabel(year, locale, yearFormat)}
           </Button>
         ))}

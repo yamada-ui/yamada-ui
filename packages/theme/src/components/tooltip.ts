@@ -2,17 +2,17 @@ import type { ComponentStyle } from "@yamada-ui/core"
 
 export const Tooltip: ComponentStyle<"Tooltip"> = {
   baseStyle: {
-    rounded: "md",
     bg: ["white", "black"],
     border: "1px solid",
     borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+    boxShadow: ["md", "dark-md"],
+    color: "inherit",
+    fontSize: "sm",
+    fontWeight: "medium",
+    maxW: "xs",
     px: "sm",
     py: "0.5",
-    fontWeight: "medium",
-    fontSize: "sm",
-    color: "inherit",
-    boxShadow: ["md", "dark-md"],
-    maxW: "xs",
+    rounded: "md",
     zIndex: "dodoria",
   },
 }

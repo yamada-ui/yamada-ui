@@ -3,30 +3,25 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Radio: ComponentMultiStyle<"Radio"> = {
   baseStyle: {
     container: {
-      _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
+      _readOnly: { cursor: "auto" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
-      transitionProperty: "box-shadow",
-      transitionDuration: "normal",
+      alignItems: "center",
       border: "2px solid",
       borderColor: "inherit",
-      rounded: "full",
       color: "white",
       display: "inline-flex",
       justifyContent: "center",
-      alignItems: "center",
+      rounded: "full",
+      transitionDuration: "normal",
+      transitionProperty: "box-shadow",
       _checked: {
         _before: {
+          bg: [`${c}.500`, `${c}.600`],
           content: `""`,
           display: "inline-block",
           rounded: "full",
-          bg: [`${c}.500`, `${c}.600`],
-        },
-        _hover: {
-          _before: {
-            bg: [`${c}.600`, `${c}.700`],
-          },
         },
         _disabled: {
           _before: {
@@ -36,6 +31,11 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
             _before: {
               bg: "whiteAlpha.300",
             },
+          },
+        },
+        _hover: {
+          _before: {
+            bg: [`${c}.600`, `${c}.700`],
           },
         },
       },
@@ -89,7 +89,7 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
   },
 
   defaultProps: {
-    size: "md",
     colorScheme: "primary",
+    size: "md",
   },
 }

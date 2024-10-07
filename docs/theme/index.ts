@@ -1,23 +1,24 @@
-import type { UsageTheme, ThemeSchemes } from "@yamada-ui/react"
+import type { ThemeSchemes, UsageTheme } from "@yamada-ui/react"
 import { COLOR_SCHEMES, extendConfig, extendTheme } from "@yamada-ui/react"
 import { components } from "./components"
 import { customConfig } from "./config"
 import { semantics } from "./semantics"
 import {
   globalStyle,
-  resetStyle,
   layerStyles,
-  textStyles,
   mdx,
   otherStyle,
+  resetStyle,
+  textStyles,
 } from "./styles"
 import { tokens } from "./tokens"
 
 export const customTheme: UsageTheme = {
-  styles: { globalStyle, resetStyle, layerStyles, textStyles, otherStyle, mdx },
-  semantics,
+  colorSchemes: COLOR_SCHEMES,
   components,
-  themeSchemes: COLOR_SCHEMES.reduce(
+  semantics,
+  styles: { globalStyle, layerStyles, mdx, otherStyle, resetStyle, textStyles },
+  themeSchemes: COLOR_SCHEMES.reduce<ThemeSchemes>(
     (prev, colorScheme) => ({
       ...prev,
       [colorScheme]: {
@@ -33,9 +34,8 @@ export const customTheme: UsageTheme = {
         },
       },
     }),
-    {} as ThemeSchemes,
+    {},
   ),
-  colorSchemes: COLOR_SCHEMES,
   ...tokens,
 }
 

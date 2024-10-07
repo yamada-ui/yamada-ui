@@ -1,24 +1,24 @@
 import type { BoxProps } from "@yamada-ui/react"
-import { Box, Text } from "@yamada-ui/react"
-import dynamic from "next/dynamic"
-import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import type { HighlightProps as ReactHighlightProps } from "prism-react-renderer"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import { Box, Text } from "@yamada-ui/react"
 import { CopyButton } from "components/forms"
+import dynamic from "next/dynamic"
+import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import { toBoolean } from "utils/boolean"
 
-const EditableCodeBlock = dynamic(() => import("./editable-code-block"))
+const EditableCodeBlock = dynamic(async () => import("./editable-code-block"))
 
 interface Children {
   props: {
     className?: string
-    title?: string
-    functional?: string | boolean
-    iframe?: string | boolean
-    live?: string | boolean
-    noInline?: string | boolean
     children?: string
+    functional?: boolean | string
     highlight?: string
+    iframe?: boolean | string
+    live?: boolean | string
+    noInline?: boolean | string
+    title?: string
   }
 }
 
@@ -28,13 +28,13 @@ export interface PreProps
 export const Pre: FC<PreProps> = ({ children }) => {
   let {
     className,
-    title,
-    live = true,
-    functional = false,
-    iframe = false,
-    noInline,
     children: raw,
+    functional = false,
     highlight,
+    iframe = false,
+    live = true,
+    noInline,
+    title,
   } = (children as Children).props
 
   live = toBoolean(live)
@@ -50,12 +50,12 @@ export const Pre: FC<PreProps> = ({ children }) => {
   if (isJSXorTSX && live) {
     return (
       <EditableCodeBlock
-        {...{ code, language, theme, noInline, functional, iframe }}
+        {...{ code, functional, iframe, language, noInline, theme }}
       />
     )
   }
 
-  return <CodeBlock {...{ title, code, language, theme, highlight }} />
+  return <CodeBlock {...{ code, highlight, language, theme, title }} />
 }
 
 export interface CodeBlockProps extends HighlightProps, BoxProps {
@@ -64,47 +64,47 @@ export interface CodeBlockProps extends HighlightProps, BoxProps {
 }
 
 export const CodeBlock: FC<CodeBlockProps> = ({
-  title,
   code,
+  highlight,
   language,
   theme,
-  highlight,
+  title,
   innerProps,
   ...rest
 }) => {
   return (
-    <Box position="relative" my="6" {...rest}>
+    <Box my="6" position="relative" {...rest}>
       <Box
-        h="full"
-        rounded="md"
-        bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div": { py: "6" } }}
+        bg={["neutral.800", "neutral.900"]}
+        h="full"
         overflow="hidden"
+        rounded="md"
         {...innerProps}
       >
         {title ? (
           <Text
-            display="block"
-            py="sm"
-            px="md"
-            borderBottomWidth="1px"
             bg={["whiteAlpha.200", "whiteAlpha.100"]}
-            fontSize="xs"
+            borderBottomWidth="1px"
             color={["whiteAlpha.700", "whiteAlpha.600"]}
+            display="block"
+            fontSize="xs"
             isTruncated
+            px="md"
+            py="sm"
           >
             {title}
           </Text>
         ) : null}
 
-        <Highlight {...{ code, language, theme, highlight }} />
+        <Highlight {...{ code, highlight, language, theme }} />
       </Box>
 
       <CopyButton
-        value={code}
         position="absolute"
-        top={title ? "3.3rem" : "1.125rem"}
         right="4"
+        top={title ? "3.3rem" : "1.125rem"}
+        value={code}
         zIndex="1"
       />
     </Box>
@@ -117,13 +117,13 @@ const computeHighlight = (highlight: string) => {
   if (!REG.test(highlight)) return () => false
 
   const lines = REG.exec(highlight)?.[1]
-    .split(`,`)
+    ?.split(`,`)
     .map((str) => str.split(`-`).map((x) => parseInt(x, 10)))
 
   return (index: number) => {
     const line = index + 1
 
-    return lines?.some(([start, end]) =>
+    return lines?.some(([start = 0, end]) =>
       end ? line >= start && line <= end : line === start,
     )
   }
@@ -134,8 +134,8 @@ export interface HighlightProps extends Omit<ReactHighlightProps, "children"> {
 }
 
 export const Highlight: FC<HighlightProps> = ({
-  language,
   highlight,
+  language,
   ...rest
 }) => {
   const shouldHighlight = computeHighlight(highlight ?? "")
@@ -143,20 +143,20 @@ export const Highlight: FC<HighlightProps> = ({
   return (
     <ReactHighlight language={language} {...rest}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Box fontSize="sm" overflowX="auto" data-language={language}>
+        <Box data-language={language} fontSize="sm" overflowX="auto">
           <Box
             as="pre"
             className={className}
-            minW="fit-content"
             style={{ ...style, backgroundColor: "inherit" }}
+            minW="fit-content"
           >
             {tokens.map((line, index) => (
               <Box
                 key={index}
+                bg={shouldHighlight(index) ? "whiteAlpha.200" : undefined}
                 minW="fit-content"
                 pl="4"
                 pr="16"
-                bg={shouldHighlight(index) ? "whiteAlpha.200" : undefined}
                 {...getLineProps({ line })}
               >
                 {line.map((token, index) => (

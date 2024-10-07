@@ -1,57 +1,61 @@
 declare module "insights" {
-  type InsightSummarize = "day" | "week" | "month"
+  type InsightSummarize = "day" | "month" | "week"
 
-  type InsightPeriod = {
-    start: string | undefined
+  interface InsightPeriod {
     end: string | undefined
+    start: string | undefined
     summarize: InsightSummarize
   }
 
-  type InsightComment = {
+  interface InsightComment {
+    created_at: string
     html_url: string
     issue_url: string
-    created_at: string
   }
 
-  type InsightReview = {
+  interface InsightReview {
     html_url: string
     pull_request_url: string
     submitted_at: string | undefined
   }
 
-  type InsightIssue = {
+  interface InsightIssue {
+    closed_at: null | string
+    created_at: string
+    html_url: string
     number: number
     title: string
-    html_url: string
-    created_at: string
-    closed_at: string | null
   }
 
-  type InsightPullRequest = {
+  interface InsightPullRequest {
+    closed_at: null | string
+    created_at: string
+    html_url: string
     number: number
     title: string
-    html_url: string
-    created_at: string
-    closed_at: string | null
   }
 
-  type UserInsight = {
+  interface UserInsight {
+    approved?: InsightReview[]
     comments?: InsightComment[]
-    reviews?: InsightReview[]
     issues?: InsightIssue[]
     pullRequests?: InsightPullRequest[]
-    approved?: InsightReview[]
+    reviews?: InsightReview[]
   }
 
-  type UserInsightScore = {
+  interface UserInsightScore {
+    approved: number
     comments: number
     issues: number
     pullRequests: number
-    approved: number
     total: number
   }
 
-  type UserInsights = Record<string, UserInsight | null>
+  interface UserInsights {
+    [key: string]: null | UserInsight
+  }
 
-  type Insights = Record<string, UserInsights>
+  interface Insights {
+    [key: string]: UserInsights
+  }
 }

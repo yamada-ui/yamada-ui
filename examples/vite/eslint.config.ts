@@ -1,85 +1,63 @@
-import { fixupPluginRules } from "@eslint/compat"
-import eslint from "@eslint/js"
+import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import globals from "globals"
-import pluginReact from "eslint-plugin-react"
-import pluginReactHooks from "eslint-plugin-react-hooks"
 import tseslint from "typescript-eslint"
-import type { TSESLint } from "@typescript-eslint/utils"
+import {
+  baseConfig,
+  importConfigArray,
+  jsxA11yConfig,
+  languageOptionFactory,
+  perfectionistConfig,
+  reactConfig,
+  reactHooksConfig,
+  typescriptConfig,
+} from "../../.eslint"
 
-const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  {
-    ignores: ["**/dist/**", "**/node_modules/**"],
-  },
-  {
+const ignoresConfig = {
+  name: "eslint/ignores",
+  ignores: ["**/dist/**", "**/node_modules/**"],
+}
+
+const tsConfigPath = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "./tsconfig.json",
+)
+
+const tsConfigNodePath = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "./tsconfig.node.json",
+)
+
+export default tseslint.config(
+  ignoresConfig,
+  languageOptionFactory(tsConfigPath, {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     languageOptions: {
-      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: "latest",
         ecmaFeatures: {
           jsx: true,
         },
-        sourceType: "module",
-        project: resolve(
-          dirname(fileURLToPath(import.meta.url)),
-          "tsconfig.json",
-        ),
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.es2025,
+        ecmaVersion: "latest",
       },
     },
-  },
-  {
+  }),
+  languageOptionFactory(tsConfigNodePath, {
     files: ["eslint.config.mjs", "vite.config.ts"],
     languageOptions: {
-      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        project: resolve(
-          dirname(fileURLToPath(import.meta.url)),
-          "tsconfig.node.json",
-        ),
-      },
-      globals: {
-        ...globals.node,
-        ...globals.es2025,
-      },
-    },
-  },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
-  {
-    plugins: {
-      "@typescript-eslint": tseslint.plugin,
-    },
-    rules: {
-      "@typescript-eslint/no-empty-object-type": [
-        "error",
-        {
-          allowInterfaces: "always",
+        ecmaFeatures: {
+          jsx: true,
         },
-      ],
+        ecmaVersion: "latest",
+      },
     },
-  },
-  {
-    files: ["src/**/*.ts", "src/**/*.tsx"],
-    plugins: {
-      react: pluginReact,
-      "react-hooks": fixupPluginRules(pluginReactHooks),
-    },
-    rules: {
-      ...pluginReact.configs.recommended.rules,
-      ...pluginReactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-    },
-  },
+  }),
+  baseConfig,
+  typescriptConfig,
+  ...importConfigArray,
+  perfectionistConfig,
+  reactConfig,
+  reactHooksConfig,
+  jsxA11yConfig,
+  prettierConfig,
 )
-
-export default config

@@ -1,16 +1,12 @@
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps, Token } from "@yamada-ui/core"
-import { cx, replaceObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import type { ColorSwatchProps } from "./color-swatch"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { cx, replaceObject } from "@yamada-ui/utils"
 import { ColorSwatch } from "./color-swatch"
 import { useColorSelectorContext } from "./use-color-selector"
 
 interface ColorSelectorSwatchesOptions {
-  /**
-   * The swatches label to use.
-   */
-  swatchesLabel?: ReactNode
   /**
    * An array of colors in one of the supported formats.
    * Used to render swatches list below the color selector.
@@ -23,13 +19,17 @@ interface ColorSelectorSwatchesOptions {
    */
   swatchesColumns?: Token<number>
   /**
-   * Props for the color swatch component.
+   * The swatches label to use.
    */
-  swatchProps?: ColorSwatchProps
+  swatchesLabel?: ReactNode
   /**
    * Props for the swatches container element.
    */
   swatchesContainerProps?: Omit<HTMLUIProps, "children">
+  /**
+   * Props for the color swatch component.
+   */
+  swatchProps?: ColorSwatchProps
 }
 
 export interface ColorSelectorSwatchesProps
@@ -43,16 +43,16 @@ export const ColorSelectorSwatches = forwardRef<
   (
     {
       className,
-      swatchesLabel,
       swatches,
+      swatchesColumns,
+      swatchesLabel,
       swatchesContainerProps,
       swatchProps,
-      swatchesColumns,
       ...rest
     },
     ref,
   ) => {
-    const { getSwatchProps, readOnly, styles } = useColorSelectorContext()
+    const { readOnly, styles, getSwatchProps } = useColorSelectorContext()
 
     const css: CSSUIObject = {
       display: "grid",
@@ -81,8 +81,8 @@ export const ColorSelectorSwatches = forwardRef<
         >
           {swatches.map((color) => (
             <ColorSwatch
-              as="button"
               key={color}
+              as="button"
               __css={{
                 boxSize: "100%",
                 pointerEvents: readOnly ? "none" : undefined,

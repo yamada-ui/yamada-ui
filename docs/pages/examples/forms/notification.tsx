@@ -1,18 +1,19 @@
-import {
-  Spacer,
-  Text,
-  Checkbox,
-  VStack,
-  HStack,
-  Switch,
-  FormControl,
-  RadioGroup,
-} from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
-import { Controller, useForm } from "react-hook-form"
 import type { SubmitHandler } from "react-hook-form"
+import {
+  Checkbox,
+  FormControl,
+  HStack,
+  noop,
+  RadioGroup,
+  Spacer,
+  Switch,
+  Text,
+  VStack,
+} from "@yamada-ui/react"
+import { memo } from "react"
+import { Controller, useForm } from "react-hook-form"
 import { Form } from "./form"
 
 const NOTIFY_ME_ABOUT_ITEMS = [
@@ -27,32 +28,32 @@ const NOTIFY_ME_ABOUT_ITEMS = [
 const EMAIL_NOTIFICATIONS_ITEMS = [
   {
     name: "communicationEmails",
-    title: "Communication emails",
     description: "Receive emails about your account activity.",
+    title: "Communication emails",
   },
   {
     name: "marketingEmails",
-    title: "Marketing emails",
     description: "Receive emails about new products, features, and more.",
+    title: "Marketing emails",
   },
   {
     name: "socialEmails",
-    title: "Social emails",
     description: "Receive emails for friend requests, follows, and more.",
+    title: "Social emails",
   },
   {
     name: "securityEmails",
-    title: "Security emails",
     description: "Receive emails about your account activity and security.",
+    title: "Security emails",
   },
 ] as const
 
 interface Data {
-  notifyMeAbout: string
   communicationEmails: boolean
   marketingEmails: boolean
-  socialEmails: boolean
+  notifyMeAbout: string
   securityEmails: boolean
+  socialEmails: boolean
   useDifferent: boolean
 }
 
@@ -61,33 +62,33 @@ export interface NotificationsProps extends StackProps {}
 export const Notifications: FC<NotificationsProps> = memo(({ ...rest }) => {
   const {
     control,
-    register,
     formState: { errors },
     handleSubmit,
+    register,
   } = useForm<Data>()
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form
-      title="Notifications"
       description="Configure how you receive notifications."
       submit="Update notifications"
+      title="Notifications"
       onSubmit={handleSubmit(onSubmit)}
       {...rest}
     >
       <FormControl
-        label="Notify me about..."
-        isInvalid={!!errors.notifyMeAbout?.message}
         errorMessage={errors.notifyMeAbout?.message}
+        isInvalid={!!errors.notifyMeAbout?.message}
+        label="Notify me about..."
       >
         <Controller
           name="notifyMeAbout"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RadioGroup items={NOTIFY_ME_ABOUT_ITEMS} {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -95,11 +96,11 @@ export const Notifications: FC<NotificationsProps> = memo(({ ...rest }) => {
         <Text fontSize="xl">Email Notifications</Text>
 
         {EMAIL_NOTIFICATIONS_ITEMS.map(
-          ({ name, title, description }, index) => (
-            <HStack key={index} as="li" borderWidth="1px" rounded="md" p="md">
+          ({ name, description, title }, index) => (
+            <HStack key={index} as="li" borderWidth="1px" p="md" rounded="md">
               <VStack gap="xs">
                 <Text fontSize="lg">{title}</Text>
-                <Text fontSize="sm" color="muted">
+                <Text color="muted" fontSize="sm">
                   {description}
                 </Text>
               </VStack>

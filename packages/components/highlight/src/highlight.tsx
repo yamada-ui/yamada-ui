@@ -1,29 +1,24 @@
-/**
- * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
- *
- * @see Docs https://yamada-ui.com/components/typography/highlight
- */
-import type { FC, HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { TextProps } from "@yamada-ui/typography"
+import type { ReactNode } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import { Text } from "@yamada-ui/typography"
 import { cx, isArray } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { Fragment, useMemo } from "react"
 
 interface Options {
-  text: string
   query: string | string[]
+  text: string
 }
 
 interface Chunk {
-  text: string
   match: boolean
+  text: string
 }
 
 const escapeRegexp = (term: string): string =>
@@ -35,21 +30,29 @@ const buildRegex = (query: string[]): RegExp | undefined => {
   if (query.length) return new RegExp(`(${query.join("|")})`, "ig")
 }
 
-const highlightWords = ({ text, query }: Options): Chunk[] => {
+const highlightWords = ({ query, text }: Options): Chunk[] => {
   const regex = buildRegex(isArray(query) ? query : [query])
 
-  if (!regex) return [{ text, match: false }]
+  if (!regex) return [{ match: false, text }]
 
   return text
     .split(regex)
     .filter(Boolean)
-    .map((text) => ({ text, match: regex.test(text) }))
+    .map((text) => ({ match: regex.test(text), text }))
 }
 
-export const useHighlight = ({ text, query }: Options): Chunk[] =>
-  useMemo(() => highlightWords({ text, query }), [text, query])
+export const useHighlight = ({ query, text }: Options): Chunk[] =>
+  useMemo(() => highlightWords({ query, text }), [text, query])
 
 export interface HighlightProps extends Omit<TextProps, "children"> {
+  /**
+   * Accepts a string or a function. If it's a function, it should return a `ReactNode` and accept an array of `Chunk` objects as its argument.
+   */
+  children: ((props: Chunk[]) => ReactNode) | string
+  /**
+   * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
+   */
+  query: string | string[]
   /**
    * If `true`, `Fragment` is used for rendering.
    *
@@ -57,25 +60,22 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
    */
   isFragment?: boolean
   /**
-   * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
-   */
-  query: string | string[]
-  /**
-   * Accepts a string or a function. If it's a function, it should return a `ReactNode` and accept an array of `Chunk` objects as its argument.
-   */
-  children: string | ((props: Chunk[]) => ReactNode)
-  /**
    * Properties passed to the Mark component which is used to highlight the matched terms.
    */
   markProps?: MarkProps
 }
 
+/**
+ * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
+ *
+ * @see Docs https://yamada-ui.com/components/typography/highlight
+ */
 export const Highlight: FC<HighlightProps> = ({
-  isFragment = false,
-  query,
   children: text,
-  markProps,
+  isFragment = false,
   lineHeight = "tall",
+  query,
+  markProps,
   ...rest
 }) => {
   if (typeof text !== "string")
@@ -87,7 +87,7 @@ export const Highlight: FC<HighlightProps> = ({
 
   return (
     <Component {...(!isFragment ? { lineHeight } : {})} {...rest}>
-      {chunks.map(({ text, match }, i) =>
+      {chunks.map(({ match, text }, i) =>
         match ? (
           <Mark key={i} {...markProps}>
             {text}

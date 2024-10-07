@@ -1,4 +1,4 @@
-import { render, a11y, screen } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { Button } from "../src"
 
 describe("<Button />", () => {
@@ -7,7 +7,7 @@ describe("<Button />", () => {
   })
 
   test("renders with icon", () => {
-    const { rerender, getByText } = render(
+    const { getByText, rerender } = render(
       <Button rightIcon={<>right icon</>} />,
     )
     expect(getByText("right icon")).toBeTruthy()
@@ -17,12 +17,12 @@ describe("<Button />", () => {
   })
 
   test("shows loading text if isLoading, loadingText and loadingIcon", () => {
-    const { rerender, getByTestId } = render(
+    const { getByTestId, rerender } = render(
       <Button
         data-testid="btn"
         isLoading
-        loadingText="Submitting"
         loadingIcon={<>loading start</>}
+        loadingText="Submitting"
       >
         Submit
       </Button>,
@@ -43,9 +43,9 @@ describe("<Button />", () => {
     rerender(
       <Button
         isLoading
+        loadingIcon={<>loading end</>}
         loadingPlacement="end"
         loadingText="Test if loading placement"
-        loadingIcon={<>loading end</>}
       >
         Submit
       </Button>,
@@ -57,7 +57,7 @@ describe("<Button />", () => {
   })
 
   test("has the proper aria attributes", () => {
-    const { rerender, getByTestId } = render(
+    const { getByTestId, rerender } = render(
       <Button data-testid="btn">Hello</Button>,
     )
 
@@ -82,14 +82,14 @@ describe("<Button />", () => {
     expect(getByTestId("btn")).toHaveAttribute("type", "button")
 
     rerender(
-      <Button data-testid="btn" type="submit">
+      <Button type="submit" data-testid="btn">
         Submit
       </Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "submit")
 
     rerender(
-      <Button data-testid="btn" as="button">
+      <Button as="button" data-testid="btn">
         Submit
       </Button>,
     )
@@ -98,7 +98,7 @@ describe("<Button />", () => {
 
   test("has no the type", () => {
     const { getByTestId } = render(
-      <Button data-testid="btn" as="span">
+      <Button as="span" data-testid="btn">
         Submit
       </Button>,
     )
@@ -106,8 +106,8 @@ describe("<Button />", () => {
   })
 
   test("should be disabled", () => {
-    const { getByTestId, getByRole, rerender } = render(
-      <Button isDisabled data-testid="btn">
+    const { getByRole, getByTestId, rerender } = render(
+      <Button data-testid="btn" isDisabled>
         Invalid Button
       </Button>,
     )
@@ -115,7 +115,7 @@ describe("<Button />", () => {
     expect(button).toBeDisabled()
 
     rerender(
-      <Button as="div" isDisabled data-testid="btn">
+      <Button as="div" data-testid="btn" isDisabled>
         Invalid Button
       </Button>,
     )

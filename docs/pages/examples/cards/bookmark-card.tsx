@@ -6,21 +6,21 @@ import {
   CardFooter,
   CardHeader,
   Heading,
-  Text,
-  VStack,
-  Spacer,
   IconButton,
   Image,
+  Spacer,
+  Text,
+  VStack,
 } from "@yamada-ui/react"
 import { memo } from "react"
 
 export const BookmarkCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader>
         <VStack gap="xs">
@@ -38,8 +38,8 @@ export const BookmarkCard = memo(() => {
         <Image
           src="https://images.pexels.com/photos/248195/pexels-photo-248195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="Japan"
-          w="full"
           rounded="md"
+          w="full"
         />
       </CardBody>
 

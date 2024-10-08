@@ -3,9 +3,10 @@ import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
 
-type StepperContext = {
+interface StepperContext
+  extends Omit<UseStepperReturn, "descendants" | "getContainerProps"> {
   styles: { [key: string]: CSSUIObject | undefined }
-} & Omit<UseStepperReturn, "descendants" | "getContainerProps">
+}
 
 export const {
   DescendantsContextProvider: StepperDescendantsContextProvider,

@@ -2,7 +2,7 @@ import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
 import type { RefObject } from "react"
 import type { Snack, UseSnacksOptions, UseSnacksReturn } from "./use-snacks"
-import { forwardRef, ui, useTheme } from "@yamada-ui/core"
+import { forwardRef, memo, ui, useTheme } from "@yamada-ui/core"
 import {
   AnimatePresence,
   motion,
@@ -11,7 +11,7 @@ import {
 } from "@yamada-ui/motion"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { calc, cx, noop, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
-import { createRef, memo, useEffect, useMemo, useRef, useState } from "react"
+import { createRef, useEffect, useMemo, useRef, useState } from "react"
 
 const defaultContainerVariants: MotionVariants = {
   animate: ({ gutter }) => ({

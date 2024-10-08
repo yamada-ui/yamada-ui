@@ -1,0 +1,23 @@
+---
+title: Toggle
+description: "`Toggle` is a component that has two states: on or off."
+package_name: "@yamada-ui/toggle"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+## Keyboard Interaction
+
+| Key     | Description                 | State |
+| ------- | --------------------------- | ----- |
+| `Tab`   | Focuses the toggle.         | -     |
+| `Enter` | Toggles the focused toggle. | -     |
+| `Space` | Toggles the focused toggle. | -     |
+
+## ARIA Roles and Attributes
+
+| Component     | Role and Attributes | Usage                                                           |
+| ------------- | ------------------- | --------------------------------------------------------------- |
+| `ToggleGroup` | `role="group"`      | Indicates that it's a group.                                    |
+| `Toggle`      | `aria-pressed`      | Set to `true` when the toggle is on, and `false` when it's off. |

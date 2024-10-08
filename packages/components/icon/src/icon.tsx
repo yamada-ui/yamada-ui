@@ -138,7 +138,12 @@ export const ChevronIcon: FC<IconProps> = (props) => {
 }
 
 CheckIcon.displayName = "CheckIcon"
+CheckIcon.__ui__ = "CheckIcon"
 InfoIcon.displayName = "InfoIcon"
+InfoIcon.__ui__ = "InfoIcon"
 WarningIcon.displayName = "WarningIcon"
+WarningIcon.__ui__ = "WarningIcon"
 CloseIcon.displayName = "CloseIcon"
+CloseIcon.__ui__ = "CloseIcon"
 ChevronIcon.displayName = "ChevronIcon"
+ChevronIcon.__ui__ = "ChevronIcon"

@@ -35,7 +35,10 @@ describe("DOM", () => {
 
   describe("getPlatform", () => {
     test("should return the platform of the user agent", () => {
-      expect(getPlatform()).toBe(navigator.platform)
+      //@ts-ignore
+      expect(getPlatform()).toBe(
+        navigator.userAgentData?.platform || navigator.platform,
+      )
     })
   })
 

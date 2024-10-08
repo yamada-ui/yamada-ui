@@ -27,3 +27,6 @@ export const Kbd = forwardRef<KbdProps, "kbd">((props, ref) => {
     />
   )
 })
+
+Kbd.displayName = "Kbd"
+Kbd.__ui__ = "Kbd"

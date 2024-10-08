@@ -190,7 +190,7 @@ export function getCreateThemeVars(
 
         createVar(token, value, variable)(isSemantic)
 
-        if (!isSemantic && isSpace(token)) {
+        if (isSpace(token)) {
           const { negativeReference, negativeToken } = createNegativeVar(
             token,
             reference,

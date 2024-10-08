@@ -23,6 +23,12 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
           display: "inline-block",
           rounded: "full",
         },
+        _hover: {
+          _before: {
+            bg: [`${c}.600`, `${c}.700`],
+          },
+        },
+        // eslint-disable-next-line perfectionist/sort-objects
         _disabled: {
           _before: {
             bg: ["blackAlpha.400", "whiteAlpha.300"],
@@ -31,11 +37,6 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
             _before: {
               bg: "whiteAlpha.300",
             },
-          },
-        },
-        _hover: {
-          _before: {
-            bg: [`${c}.600`, `${c}.700`],
           },
         },
       },

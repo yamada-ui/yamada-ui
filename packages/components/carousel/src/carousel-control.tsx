@@ -11,7 +11,6 @@ export interface CarouselControlProps extends IconButtonProps {}
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-
     const { getControlProps } = useCarouselControl({ operation: "prev" })
 
     return (
@@ -40,7 +39,6 @@ CarouselControlPrev.__ui__ = "CarouselControlPrev"
 export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-
     const { getControlProps } = useCarouselControl({ operation: "next" })
 
     return (

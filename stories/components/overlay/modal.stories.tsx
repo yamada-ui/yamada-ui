@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} size={size} onClose={onClose}>
+      <Modal size={size} isOpen={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -356,8 +356,8 @@ export const nestedModal: Story = () => {
         </ModalFooter>
 
         <Modal
-          isOpen={secondControls.isOpen}
           size="sm"
+          isOpen={secondControls.isOpen}
           onClose={secondControls.onClose}
         >
           <ModalHeader>あらすじ</ModalHeader>
@@ -574,9 +574,9 @@ export const scrollOnMount: Story = () => {
         textAlign="center"
       >
         <Image
+          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
           alt="ドラゴンボール"
           maxW="sm"
-          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

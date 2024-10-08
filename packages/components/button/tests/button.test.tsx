@@ -19,10 +19,10 @@ describe("<Button />", () => {
   test("shows loading text if isLoading, loadingText and loadingIcon", () => {
     const { getByTestId, rerender } = render(
       <Button
+        data-testid="btn"
         isLoading
         loadingIcon={<>loading start</>}
         loadingText="Submitting"
-        data-testid="btn"
       >
         Submit
       </Button>,
@@ -107,7 +107,7 @@ describe("<Button />", () => {
 
   test("should be disabled", () => {
     const { getByRole, getByTestId, rerender } = render(
-      <Button isDisabled data-testid="btn">
+      <Button data-testid="btn" isDisabled>
         Invalid Button
       </Button>,
     )
@@ -115,7 +115,7 @@ describe("<Button />", () => {
     expect(button).toBeDisabled()
 
     rerender(
-      <Button as="div" isDisabled data-testid="btn">
+      <Button as="div" data-testid="btn" isDisabled>
         Invalid Button
       </Button>,
     )

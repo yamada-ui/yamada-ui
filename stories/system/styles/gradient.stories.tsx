@@ -18,10 +18,10 @@ export const withToken = () => {
 export const withColorCode = () => {
   return (
     <Heading
+      size="2xl"
       bgClip="text"
       bgGradient="linear(to-l, #7928CA, #FF0080)"
       isTruncated
-      size="2xl"
       w="full"
     >
       クリリンのことか……クリリンのことかーーーっ！！！！！

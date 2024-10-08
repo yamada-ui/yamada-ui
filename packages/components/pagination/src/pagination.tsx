@@ -125,12 +125,12 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
       range.map((page, key) => (
         <Component
           key={key}
-          isActive={currentPage === page}
-          isDisabled={isDisabled}
-          page={page}
           aria-label={
             page === "dots" ? "Jump to omitted pages" : `Go to page ${page}`
           }
+          isActive={currentPage === page}
+          isDisabled={isDisabled}
+          page={page}
           {...(itemProps as ComponentPropsWithoutRef<"button">)}
           onClick={handlerAll(
             itemProps?.onClick,
@@ -160,9 +160,9 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {withEdges ? (
           <Component
             className="ui-pagination__item--first"
+            aria-label="Go to first page"
             isDisabled={isDisabled || currentPage === 1}
             page="first"
-            aria-label="Go to first page"
             {...(edgeProps as ComponentPropsWithoutRef<"button">)}
             {...(edgeFirstProps as ComponentPropsWithoutRef<"button">)}
             onClick={handlerAll(
@@ -176,9 +176,9 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {withControls ? (
           <Component
             className="ui-pagination__item--prev"
+            aria-label="Go to previous page"
             isDisabled={isDisabled || currentPage === 1}
             page="prev"
-            aria-label="Go to previous page"
             {...(controlProps as ComponentPropsWithoutRef<"button">)}
             {...(controlPrevProps as ComponentPropsWithoutRef<"button">)}
             onClick={handlerAll(
@@ -205,9 +205,9 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {withControls ? (
           <Component
             className="ui-pagination__item--next"
+            aria-label="Go to next page"
             isDisabled={isDisabled || currentPage === total}
             page="next"
-            aria-label="Go to next page"
             {...(controlProps as ComponentPropsWithoutRef<"button">)}
             {...(controlNextProps as ComponentPropsWithoutRef<"button">)}
             onClick={handlerAll(
@@ -221,9 +221,9 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {withEdges ? (
           <Component
             className="ui-pagination__item--last"
+            aria-label="Go to last page"
             isDisabled={isDisabled || currentPage === total}
             page="last"
-            aria-label="Go to last page"
             {...(edgeProps as ComponentPropsWithoutRef<"button">)}
             {...(edgeLastProps as ComponentPropsWithoutRef<"button">)}
             onClick={handlerAll(
@@ -237,3 +237,6 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
     </PaginationProvider>
   )
 })
+
+Pagination.displayName = "Pagination"
+Pagination.__ui__ = "Pagination"

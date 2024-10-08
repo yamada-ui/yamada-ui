@@ -46,7 +46,7 @@ describe("<Menu />", () => {
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuItem command="⌘N" data-testid="MenuItem">
+          <MenuItem data-testid="MenuItem" command="⌘N">
             Add item
           </MenuItem>
           <MenuItem command="⌘E">Edit item</MenuItem>
@@ -94,7 +94,7 @@ describe("<Menu />", () => {
       <Menu placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuGroup label="item" data-testid="MenuGroup">
+          <MenuGroup data-testid="MenuGroup" label="item">
             <MenuItem>Add item</MenuItem>
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>
@@ -142,8 +142,8 @@ describe("<Menu />", () => {
         <MenuList>
           <MenuOptionGroup
             type="radio"
-            label="item"
             data-testid="MenuOptionGroup-a"
+            label="item"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -153,10 +153,10 @@ describe("<Menu />", () => {
 
           <MenuOptionGroup
             type="checkbox"
-            label="order"
             data-testid="MenuOptionGroup-b"
+            label="order"
           >
-            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox">
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
               Ascending
             </MenuOptionItem>
             <MenuOptionItem value="desc">Descending</MenuOptionItem>
@@ -187,8 +187,8 @@ describe("<Menu />", () => {
         <MenuList>
           <MenuOptionGroup
             type="radio"
-            label="item"
             data-testid="MenuOptionGroup-a"
+            label="item"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -201,10 +201,10 @@ describe("<Menu />", () => {
             defaultValue={["desc"]}
             label="order"
           >
-            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox-a">
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
               Ascending
             </MenuOptionItem>
-            <MenuOptionItem value="desc" data-testid="MenuOptionItemCheckbox-b">
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-b" value="desc">
               Descending
             </MenuOptionItem>
           </MenuOptionGroup>
@@ -231,7 +231,7 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Set status</MenuItem>
-          <MenuItem isDisabled data-testid="MenuItem">
+          <MenuItem data-testid="MenuItem" isDisabled>
             Edit Profile
           </MenuItem>
           <MenuItem>Preferences</MenuItem>
@@ -251,8 +251,8 @@ describe("<Menu />", () => {
         <MenuList>
           <MenuOptionGroup
             type="radio"
-            label="option-group-label"
             data-testid="MenuOptionGroup-a"
+            label="option-group-label"
           >
             <MenuOptionItem data-testid="MenuOptionItemRadio">
               Add item
@@ -262,10 +262,10 @@ describe("<Menu />", () => {
 
           <MenuOptionGroup
             type="checkbox"
-            label="order"
             data-testid="MenuOptionGroup-b"
+            label="order"
           >
-            <MenuOptionItem value="asc" data-testid="MenuOptionItemCheckbox">
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
               Ascending
             </MenuOptionItem>
             <MenuOptionItem value="desc">Descending</MenuOptionItem>

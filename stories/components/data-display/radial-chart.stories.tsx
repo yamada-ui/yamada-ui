@@ -42,10 +42,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <RadialChart data={data} size="sm" />
-      <RadialChart data={data} size="md" />
-      <RadialChart data={data} size="lg" />
-      <RadialChart data={data} size="full" />
+      <RadialChart size="sm" data={data} />
+      <RadialChart size="md" data={data} />
+      <RadialChart size="lg" data={data} />
+      <RadialChart size="full" data={data} />
     </>
   )
 }

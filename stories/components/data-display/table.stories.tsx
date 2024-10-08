@@ -125,10 +125,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <Table columns={columns} data={data} size="sm" />
-      <Table columns={columns} data={data} size="md" />
-      <Table columns={columns} data={data} size="lg" />
-      <Table columns={columns} data={data} size="xl" />
+      <Table size="sm" columns={columns} data={data} />
+      <Table size="md" columns={columns} data={data} />
+      <Table size="lg" columns={columns} data={data} />
+      <Table size="xl" columns={columns} data={data} />
     </>
   )
 }
@@ -185,8 +185,8 @@ export const withVariant: Story = () => {
 
   return (
     <>
-      <Table columns={columns} data={data} variant="simple" />
-      <Table columns={columns} data={data} variant="striped" />
+      <Table variant="simple" columns={columns} data={data} />
+      <Table variant="striped" columns={columns} data={data} />
     </>
   )
 }
@@ -247,9 +247,9 @@ export const withColorScheme: Story = () => {
         <Table
           key={colorScheme}
           colorScheme={colorScheme}
+          variant="striped"
           columns={columns}
           data={data}
-          variant="striped"
         />
       ))}
     </>
@@ -467,12 +467,12 @@ export const withCaption: Story = () => {
 
   return (
     <>
-      <Table columns={columns} data={data} variant="simple">
+      <Table variant="simple" columns={columns} data={data}>
         <TableCaption placement="top">
           ©バードスタジオ/集英社・東映アニメーション
         </TableCaption>
       </Table>
-      <Table columns={columns} data={data} variant="striped">
+      <Table variant="striped" columns={columns} data={data}>
         <TableCaption placement="bottom">
           ©バードスタジオ/集英社・東映アニメーション
         </TableCaption>
@@ -1729,22 +1729,22 @@ export const customProps: Story = () => {
   const columns = useMemo<Column<Data>[]>(
     () => [
       {
+        "aria-label": "作品名",
         accessorKey: "name",
         footer: "作品名",
         header: "作品名",
-        "aria-label": "作品名",
       },
       {
+        "aria-label": "放送期間",
         accessorKey: "broadcastPeriod",
         footer: "放送期間",
         header: "放送期間",
-        "aria-label": "放送期間",
       },
       {
+        "aria-label": "話数",
         accessorKey: "episode",
         footer: "話数",
         header: "話数",
-        "aria-label": "話数",
       },
     ],
     [],

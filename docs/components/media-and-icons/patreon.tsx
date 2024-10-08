@@ -7,11 +7,11 @@ export const Patreon = forwardRef<SVGSVGElement, IconProps>(
     return (
       <Icon
         ref={ref}
+        aria-hidden="true"
         boxSize={boxSize}
         focusable="false"
         viewBox="0 0 569 546"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
         {...rest}
       >
         <circle cx="362.589996" cy="204.589996" fill="#f96854" r="204.589996" />

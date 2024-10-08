@@ -241,7 +241,7 @@ describe("<Tooltip />", () => {
       })
       expect(tooltip).toBeVisible()
 
-      await user.pointer({ keys: "[MouseLeft]", target: tooltipTriggerElement })
+      await user.pointer({ target: tooltipTriggerElement, keys: "[MouseLeft]" })
       await waitFor(() => {
         expect(
           screen.queryByRole("tooltip", { name: /Tooltip hover/i }),

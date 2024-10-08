@@ -32,8 +32,8 @@ export const basic: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Plus fontSize="2xl" />}
         aria-label="Upload file"
+        icon={<Plus fontSize="2xl" />}
       />
 
       <FileButton>
@@ -50,9 +50,9 @@ export const withMultiple: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         multiple
-        aria-label="Upload file"
       />
 
       <FileButton multiple>
@@ -69,9 +69,9 @@ export const withAccept: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         accept="image/png,image/jpeg"
         icon={<Plus fontSize="2xl" />}
-        aria-label="Upload file"
       />
 
       <FileButton accept="image/png,image/jpeg">
@@ -154,21 +154,21 @@ export const isDisabled: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isDisabled
-        aria-label="Upload file"
       />
 
       <FileButton isDisabled>
         {({ isDisabled, onClick }) => (
           <Link
+            cursor={isDisabled ? "not-allowed" : "pointer"}
+            opacity={isDisabled ? 0.4 : 1}
             _hover={
               isDisabled
                 ? { textDecoration: "inherit" }
                 : { textDecoration: "underline" }
             }
-            cursor={isDisabled ? "not-allowed" : "pointer"}
-            opacity={isDisabled ? 0.4 : 1}
             onClick={onClick}
           >
             Upload
@@ -194,20 +194,20 @@ export const isReadonly: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isReadOnly
-        aria-label="Upload file"
       />
 
       <FileButton isReadOnly>
         {({ isReadOnly, onClick }) => (
           <Link
+            cursor={isReadOnly ? "default" : "pointer"}
             _hover={
               isReadOnly
                 ? { textDecoration: "inherit" }
                 : { textDecoration: "underline" }
             }
-            cursor={isReadOnly ? "default" : "pointer"}
             onClick={onClick}
           >
             Upload
@@ -233,9 +233,9 @@ export const isInvalid: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isInvalid
-        aria-label="Upload file"
       />
 
       <FormControl

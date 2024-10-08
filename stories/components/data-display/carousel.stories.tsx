@@ -213,7 +213,7 @@ export const withSlideSize: Story = () => {
       <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
-      <CarouselSlide as={Center} bg="secondary" size="100%">
+      <CarouselSlide as={Center} size="100%" bg="secondary">
         2
       </CarouselSlide>
       <CarouselSlide as={Center} bg="warning">
@@ -317,9 +317,9 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             alt="いちご100%"
             rounded="md"
-            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
           />
         </CardHeader>
@@ -340,9 +340,9 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             alt="いちご100%"
             rounded="md"
-            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
           />
         </CardHeader>
@@ -363,9 +363,9 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             alt="いちご100%"
             rounded="md"
-            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
           />
         </CardHeader>
@@ -386,9 +386,9 @@ export const withCard: Story = () => {
       <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             alt="いちご100%"
             rounded="md"
-            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
           />
         </CardHeader>
@@ -776,10 +776,10 @@ export const customIndicators: Story = () => {
         <CarouselIndicators
           sx={{
             "& > *": {
-              _selected: { w: "12" },
               transitionDuration: "slower",
               transitionProperty: "width",
               w: "4",
+              _selected: { w: "12" },
             },
           }}
         />

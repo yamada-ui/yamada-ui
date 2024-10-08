@@ -110,13 +110,13 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
       top: "0",
       w: "100%",
     },
+    position: "relative",
     _before: {
       content: `""`,
       display: "block",
       h: 0,
       pb: "100%",
     },
-    position: "relative",
     ...styles.container,
     ...__css,
   }

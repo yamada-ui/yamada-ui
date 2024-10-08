@@ -370,10 +370,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <AreaChart data={data} dataKey="name" series={series} size="sm" />
-      <AreaChart data={data} dataKey="name" series={series} size="md" />
-      <AreaChart data={data} dataKey="name" series={series} size="lg" />
-      <AreaChart data={data} dataKey="name" series={series} size="full" />
+      <AreaChart size="sm" data={data} dataKey="name" series={series} />
+      <AreaChart size="md" data={data} dataKey="name" series={series} />
+      <AreaChart size="lg" data={data} dataKey="name" series={series} />
+      <AreaChart size="full" data={data} dataKey="name" series={series} />
     </>
   )
 }

@@ -12,15 +12,15 @@ import { memo } from "react"
 
 export const OverflowImageCard = memo(() => {
   return (
-    <Card breakInside="avoid" h="xl" rounded="xl" variant="outline">
+    <Card variant="outline" breakInside="avoid" h="xl" rounded="xl">
       <CardHeader
         as={Image}
+        src="https://picsum.photos/400"
         h="md"
         objectFit="cover"
         overflow="hidden"
         p="0"
         roundedTop="xl"
-        src="https://picsum.photos/400"
       />
 
       <CardBody gap="xs">

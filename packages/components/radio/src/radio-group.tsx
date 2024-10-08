@@ -140,10 +140,10 @@ export const useRadioGroup = <
         ...props,
         ref,
         name,
+        "aria-checked": isChecked,
         [isNative ? "checked" : "isChecked"]:
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           value != null ? isChecked : undefined,
-        "aria-checked": isChecked,
         onChange,
       }
     },
@@ -184,13 +184,13 @@ export const RadioGroup = forwardRef(
     {
       id: idProp,
       className,
-      children,
       colorScheme,
+      size,
+      variant,
+      children,
       direction = "column",
       gap,
       items = [],
-      size,
-      variant,
       ...props
     }: RadioGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
@@ -232,13 +232,13 @@ export const RadioGroup = forwardRef(
           {
             name,
             colorScheme,
+            size,
+            variant,
             isDisabled,
             isInvalid,
             isReadOnly,
             isRequired,
-            size,
             value,
-            variant,
             onChange,
           } as RadioGroupContext
         }

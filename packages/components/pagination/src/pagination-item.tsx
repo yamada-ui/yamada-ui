@@ -1,5 +1,5 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
+import type { ComponentPropsWithoutRef, ReactNode } from "react"
 import { ui } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
@@ -83,10 +83,10 @@ export const PaginationItem: FC<PaginationItemProps> = ({
     <ui.button
       type="button"
       className={cx("ui-pagination__item", className)}
-      disabled={isDisabled}
-      tabIndex={page !== "dots" ? 0 : -1}
       data-disabled={dataAttr(isDisabled)}
       data-selected={dataAttr(isActive)}
+      disabled={isDisabled}
+      tabIndex={page !== "dots" ? 0 : -1}
       __css={css}
       {...rest}
       onPointerDown={onPointerDown}
@@ -97,3 +97,5 @@ export const PaginationItem: FC<PaginationItemProps> = ({
     </ui.button>
   )
 }
+PaginationItem.displayName = "PaginationItem"
+PaginationItem.__ui__ = "PaginationItem"

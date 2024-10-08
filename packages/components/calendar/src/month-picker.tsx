@@ -160,8 +160,8 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
               id={id}
               as="div"
               className="ui-month-picker__content"
-              role="dialog"
               aria-modal="true"
+              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

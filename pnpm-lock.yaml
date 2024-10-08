@@ -2602,12 +2602,6 @@ importers:
       '@yamada-ui/use-timeout':
         specifier: workspace:*
         version: link:../../hooks/use-timeout
-      '@yamada-ui/use-token':
-        specifier: workspace:*
-        version: link:../../hooks/use-token
-      '@yamada-ui/use-value':
-        specifier: workspace:*
-        version: link:../../hooks/use-value
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

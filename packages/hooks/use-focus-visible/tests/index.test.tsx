@@ -121,9 +121,9 @@ describe("useFocusVisible", () => {
 
       return (
         <div
-          tabIndex={0}
           data-focus-visible={dataAttr(focusVisible)}
           data-testid="button"
+          tabIndex={0}
           {...rest}
         >
           Virtual Button

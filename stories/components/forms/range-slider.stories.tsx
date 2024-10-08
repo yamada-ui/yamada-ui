@@ -41,9 +41,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <RangeSlider defaultValue={[0, 25]} size="sm" />
-      <RangeSlider defaultValue={[25, 50]} size="md" />
-      <RangeSlider defaultValue={[50, 75]} size="lg" />
+      <RangeSlider size="sm" defaultValue={[0, 25]} />
+      <RangeSlider size="md" defaultValue={[25, 50]} />
+      <RangeSlider size="lg" defaultValue={[50, 75]} />
     </>
   )
 }

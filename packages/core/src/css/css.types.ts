@@ -127,9 +127,9 @@ export type UIStyleProps<
   M extends InternalTheme = InternalTheme,
 > = {
   theme: StyledTheme<M>
+  colorScheme?: Theme["colorSchemes"]
   breakpoint?: Breakpoint
   colorMode?: ColorMode
-  colorScheme?: Theme["colorSchemes"]
   themeScheme?: Theme["themeSchemes"]
 } & Y
 

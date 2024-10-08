@@ -24,7 +24,7 @@ describe("<RangeSlider />", () => {
   test("should have correct default values", () => {
     const defaultValue: [number, number] = [0, 25]
     const { getByTestId } = render(
-      <RangeSlider defaultValue={defaultValue} data-testid="slider" />,
+      <RangeSlider data-testid="slider" defaultValue={defaultValue} />,
     )
 
     const inputs = getByTestId("slider").getElementsByTagName("input")
@@ -62,7 +62,7 @@ describe("<RangeSlider />", () => {
 
   test("can change RangeSlider orientation", () => {
     const { container, rerender } = render(
-      <RangeSlider orientation="vertical" data-testid="slider" />,
+      <RangeSlider data-testid="slider" orientation="vertical" />,
     )
 
     let sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
@@ -73,7 +73,7 @@ describe("<RangeSlider />", () => {
     })
     expect(filledTrack).toHaveStyle("height: 100%")
 
-    rerender(<RangeSlider orientation="horizontal" data-testid="slider" />)
+    rerender(<RangeSlider data-testid="slider" orientation="horizontal" />)
 
     sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     filledTrack = container.querySelector(".ui-slider__track")
@@ -114,7 +114,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be readOnly", () => {
-    render(<RangeSlider isReadOnly data-testid="slider" />)
+    render(<RangeSlider data-testid="slider" isReadOnly />)
 
     const slider = screen.getByTestId("slider")
     const sliderInputs = slider.getElementsByTagName("input")
@@ -148,7 +148,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("should set isReadOnly to true when focusThumbOnChange is false", () => {
-    render(<RangeSlider focusThumbOnChange={false} data-testid="slider" />)
+    render(<RangeSlider data-testid="slider" focusThumbOnChange={false} />)
 
     const slider = screen.getByTestId("slider")
     const sliderInputs = slider.getElementsByTagName("input")
@@ -171,11 +171,11 @@ describe("<RangeSlider />", () => {
     const tenStep = (max - min) / 10
     const { container } = render(
       <RangeSlider
+        data-testid="slider"
         defaultValue={[0, 50]}
         max={max}
         min={min}
         step={10}
-        data-testid="slider"
       />,
     )
 

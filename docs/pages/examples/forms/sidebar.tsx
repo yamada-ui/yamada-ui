@@ -69,12 +69,12 @@ export const SidebarButton: FC<SidebarButtonProps> = memo(
 
     return (
       <Button
-        _hover={isSelected ? {} : undefined}
         colorScheme="gray"
+        variant={isSelected ? "solid" : "ghost"}
         fontWeight="normal"
         justifyContent="flex-start"
-        variant={isSelected ? "solid" : "ghost"}
         w="full"
+        _hover={isSelected ? {} : undefined}
         onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >

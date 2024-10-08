@@ -39,9 +39,9 @@ const TITLE_COLUMN: Column<Data> = {
         {label ? (
           <Tag
             colorScheme={colorScheme}
-            minW="auto"
             size="sm"
             variant="outline"
+            minW="auto"
             whiteSpace="nowrap"
           >
             {label}
@@ -247,9 +247,9 @@ const ControlMenu = memo(
       <Menu isLazy>
         <MenuButton
           as={IconButton}
-          icon={<Ellipsis />}
           size="sm"
           variant="ghost"
+          icon={<Ellipsis />}
           onClick={(ev) => {
             ev.stopPropagation()
           }}

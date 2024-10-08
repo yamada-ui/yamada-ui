@@ -5,6 +5,11 @@ export const SegmentedControl: ComponentMultiStyle = {
   variants: {
     simple: ({ colorScheme: c = "gray" }) => ({
       button: {
+        color: "muted",
+        fontWeight: "semibold",
+        outline: 0,
+        px: "6",
+        rounded: "full",
         _checked: {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
@@ -15,11 +20,6 @@ export const SegmentedControl: ComponentMultiStyle = {
           color: [`black`, `white`],
           opacity: 1,
         },
-        color: "muted",
-        fontWeight: "semibold",
-        outline: 0,
-        px: "6",
-        rounded: "full",
       },
       container: {
         bg: "inherit",

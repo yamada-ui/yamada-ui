@@ -107,10 +107,10 @@ export const useColorSlider = ({
   } = useFormControlProps(props)
   const [
     {
+      "aria-readonly": ariaReadonly,
       disabled,
       readOnly,
       required,
-      "aria-readonly": ariaReadonly,
       onBlur: onBlurProp,
       onFocus: onFocusProp,
       ...formControlProps
@@ -344,19 +344,19 @@ export const useColorSlider = ({
       }
 
       return {
-        bg: thumbColor ?? `hsl(${value}, 100%, 50%)`,
         "aria-label": "Slider thumb",
+        bg: thumbColor ?? `hsl(${value}, 100%, 50%)`,
         ...formControlProps,
         "aria-readonly": ariaReadonly,
         ...props,
         ref: mergeRefs(ref, thumbRef),
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlurProp),
         onFocus: handlerAll(props.onFocus, onFocusProp),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),

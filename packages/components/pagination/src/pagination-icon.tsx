@@ -1,5 +1,5 @@
+import type { FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { FC } from "react"
 import { Icon } from "@yamada-ui/icon"
 
 export const DotsIcon: FC<IconProps> = (props) => {
@@ -12,6 +12,8 @@ export const DotsIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+DotsIcon.displayName = "DotIcon"
+DotsIcon.__ui__ = "DotIcon"
 
 export const FirstIcon: FC<IconProps> = (props) => {
   return (
@@ -24,6 +26,9 @@ export const FirstIcon: FC<IconProps> = (props) => {
   )
 }
 
+FirstIcon.displayName = "LastIcon"
+FirstIcon.__ui__ = "LastIcon"
+
 export const LastIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
@@ -34,6 +39,8 @@ export const LastIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+LastIcon.displayName = "LastIcon"
+LastIcon.__ui__ = "LastIcon"
 
 export const PrevIcon: FC<IconProps> = (props) => {
   return (
@@ -56,3 +63,5 @@ export const NextIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+NextIcon.displayName = "NextIcon"
+NextIcon.__ui__ = "NextIcon"

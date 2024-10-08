@@ -123,8 +123,8 @@ const ThemeCard: FC<ThemeCardProps> = (props) => {
 
       <Box
         {...getIconProps()}
-        _checked={{ "& > div": { borderColor: "primary" } }}
         cursor="pointer"
+        _checked={{ "& > div": { borderColor: "primary" } }}
       >
         <Box borderColor="transparent" borderWidth="3px" p="1" rounded="10px">
           <VStack

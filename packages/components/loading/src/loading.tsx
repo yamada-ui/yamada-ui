@@ -23,6 +23,12 @@ interface ComponentProps extends Omit<IconProps, "color"> {
 
 interface LoadingOptions {
   /**
+   * The variant of the Loading.
+   *
+   * @default 'oval'
+   */
+  variant?: "audio" | "circles" | "dots" | "grid" | "oval" | "puff" | "rings"
+  /**
    * The CSS `dur` property.
    */
   duration?: IconProps["dur"]
@@ -32,12 +38,6 @@ interface LoadingOptions {
    * @default 'primary'
    */
   secondaryColor?: CSSUIProps["color"]
-  /**
-   * The variant of the Loading.
-   *
-   * @default 'oval'
-   */
-  variant?: "audio" | "circles" | "dots" | "grid" | "oval" | "puff" | "rings"
 }
 
 export interface LoadingProps
@@ -67,8 +67,8 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
-      color: "$color",
       size,
+      color: "$color",
       ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
       __css: {

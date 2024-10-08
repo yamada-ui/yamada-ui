@@ -25,18 +25,18 @@ export const StarBanner = memo(
 
           <Button
             as="a"
+            href={CONSTANT.SNS.GITHUB.YAMADA_UI}
+            target="_blank"
+            size="sm"
+            bg="blackAlpha.300"
+            color="whiteAlpha.900"
+            cursor="pointer"
             _active={{
               bg: `whiteAlpha.400`,
             }}
             _hover={{
               bg: `whiteAlpha.300`,
             }}
-            bg="blackAlpha.300"
-            color="whiteAlpha.900"
-            cursor="pointer"
-            href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-            size="sm"
-            target="_blank"
           >
             <Star />
             {tc("component.feedback.ad-banner.button")}

@@ -47,8 +47,8 @@ export const Inbox: FC<Props> = memo(
           <Spacer />
 
           <SegmentedControl
-            display={{ base: "flex", sm: "none" }}
             size="sm"
+            display={{ base: "flex", sm: "none" }}
             value={mode}
             onChange={changeMode}
           >
@@ -144,9 +144,9 @@ const InboxItem: FC<InboxItemProps> = memo(
     return (
       <Card
         as="article"
+        variant="outline"
         bg={isSelected ? ["blackAlpha.50", "whiteAlpha.100"] : "transparent"}
         cursor="pointer"
-        variant="outline"
         onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >
@@ -164,7 +164,7 @@ const InboxItem: FC<InboxItemProps> = memo(
         </CardHeader>
 
         <CardBody gap="xs" pt="sm">
-          <Heading as="h5" fontWeight="normal" size="xs">
+          <Heading as="h5" size="xs" fontWeight="normal">
             {title}
           </Heading>
 

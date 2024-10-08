@@ -271,9 +271,9 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <DonutChart data={data} size="sm" />
-      <DonutChart data={data} size="md" />
-      <DonutChart data={data} size="lg" />
+      <DonutChart size="sm" data={data} />
+      <DonutChart size="md" data={data} />
+      <DonutChart size="lg" data={data} />
     </>
   )
 }

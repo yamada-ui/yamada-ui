@@ -1,5 +1,5 @@
-import type { IconProps } from "@yamada-ui/icon"
 import type { FC } from "@yamada-ui/core"
+import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 
 export const DotsIcon: FC<IconProps> = (props) => {

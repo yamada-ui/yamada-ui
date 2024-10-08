@@ -20,10 +20,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Textarea placeholder="extra small size" size="xs" />
-      <Textarea placeholder="small size" size="sm" />
-      <Textarea placeholder="medium size" size="md" />
-      <Textarea placeholder="large size" size="lg" />
+      <Textarea size="xs" placeholder="extra small size" />
+      <Textarea size="sm" placeholder="small size" />
+      <Textarea size="md" placeholder="medium size" />
+      <Textarea size="lg" placeholder="large size" />
     </>
   )
 }
@@ -31,10 +31,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Textarea placeholder="outline" variant="outline" />
-      <Textarea placeholder="filled" variant="filled" />
-      <Textarea placeholder="flushed" variant="flushed" />
-      <Textarea placeholder="unstyled" variant="unstyled" />
+      <Textarea variant="outline" placeholder="outline" />
+      <Textarea variant="filled" placeholder="filled" />
+      <Textarea variant="flushed" placeholder="flushed" />
+      <Textarea variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -81,17 +81,17 @@ export const withBorderColor: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Textarea isDisabled placeholder="outline" variant="outline" />
-      <Textarea isDisabled placeholder="filled" variant="filled" />
-      <Textarea isDisabled placeholder="flushed" variant="flushed" />
-      <Textarea isDisabled placeholder="unstyled" variant="unstyled" />
+      <Textarea variant="outline" isDisabled placeholder="outline" />
+      <Textarea variant="filled" isDisabled placeholder="filled" />
+      <Textarea variant="flushed" isDisabled placeholder="flushed" />
+      <Textarea variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         helperMessage="We would like to get your feedback."
         isDisabled
         label="Feedback"
       >
-        <Textarea placeholder="your feedback" variant="outline" />
+        <Textarea variant="outline" placeholder="your feedback" />
       </FormControl>
     </>
   )
@@ -100,17 +100,17 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Textarea isReadOnly placeholder="outline" variant="outline" />
-      <Textarea isReadOnly placeholder="filled" variant="filled" />
-      <Textarea isReadOnly placeholder="flushed" variant="flushed" />
-      <Textarea isReadOnly placeholder="unstyled" variant="unstyled" />
+      <Textarea variant="outline" isReadOnly placeholder="outline" />
+      <Textarea variant="filled" isReadOnly placeholder="filled" />
+      <Textarea variant="flushed" isReadOnly placeholder="flushed" />
+      <Textarea variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         helperMessage="We would like to get your feedback."
         isReadOnly
         label="Feedback"
       >
-        <Textarea placeholder="your feedback" variant="outline" />
+        <Textarea variant="outline" placeholder="your feedback" />
       </FormControl>
     </>
   )
@@ -119,17 +119,17 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Textarea isInvalid placeholder="outline" variant="outline" />
-      <Textarea isInvalid placeholder="filled" variant="filled" />
-      <Textarea isInvalid placeholder="flushed" variant="flushed" />
-      <Textarea isInvalid placeholder="unstyled" variant="unstyled" />
+      <Textarea variant="outline" isInvalid placeholder="outline" />
+      <Textarea variant="filled" isInvalid placeholder="filled" />
+      <Textarea variant="flushed" isInvalid placeholder="flushed" />
+      <Textarea variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Feedback is required."
         isInvalid
         label="Feedback"
       >
-        <Textarea placeholder="your feedback" variant="outline" />
+        <Textarea variant="outline" placeholder="your feedback" />
       </FormControl>
     </>
   )
@@ -140,13 +140,13 @@ export const stylingPlaceholder: Story = () => {
     <>
       <Textarea placeholder="default placeholder" />
       <Textarea
-        _placeholder={{ color: "gray.500", opacity: 1 }}
         placeholder="custom placeholder"
+        _placeholder={{ color: "gray.500", opacity: 1 }}
       />
       <Textarea
-        _placeholder={{ color: "inherit" }}
         color="green.500"
         placeholder="custom placeholder"
+        _placeholder={{ color: "inherit" }}
       />
     </>
   )

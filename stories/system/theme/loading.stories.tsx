@@ -170,7 +170,7 @@ export const useCustomLoading = () => {
                   },
                 }}
               >
-                <Loading fontSize="6xl" variant="dots" />
+                <Loading variant="dots" fontSize="6xl" />
 
                 <VStack align="center" gap="sm" mb="md">
                   <Text>Downloading files…</Text>

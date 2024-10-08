@@ -396,30 +396,30 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
       <ScrollArea
         ref={ref}
         sx={{ "& > div": { pb: isMax ? "10" : "6", pt: "0" } }}
+        bg={["neutral.800", "neutral.900"]}
+        maxH={isOpen ? "full" : "sm"}
+        tabIndex={-1}
         _scrollbarThumb={{
-          _nativeHover: {
-            bg: "whiteAlpha.800",
-            bgClip: "padding-box",
-          },
           bg: "whiteAlpha.600",
           bgClip: "padding-box",
           border: "3px solid transparent",
           rounded: "full",
+          _nativeHover: {
+            bg: "whiteAlpha.800",
+            bgClip: "padding-box",
+          },
         }}
-        bg={["neutral.800", "neutral.900"]}
-        maxH={isOpen ? "full" : "sm"}
-        tabIndex={-1}
       >
         {children}
       </ScrollArea>
 
       {isMax ? (
         <Button
+          size="sm"
           bottom="2"
           left="50%"
           position="absolute"
           rounded="full"
-          size="sm"
           transform="translateX(-50%)"
           onClick={onToggle}
         >

@@ -182,8 +182,8 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
                 id={id}
                 as="div"
                 className="ui-range-date-picker__content"
-                role="dialog"
                 aria-modal="true"
+                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -268,15 +268,15 @@ export const RangeDatePickerField = forwardRef<
           <AutosizingInput
             ref={mergeRefs(ref, startInputRef)}
             className="ui-range-date-picker__field__start-input"
-            placeholder={startPlaceholder}
             aria-label="Start date"
+            placeholder={startPlaceholder}
             {...computedStartInputProps}
           />
 
           {hasSeparator && !!separator ? (
             <ui.span
-              marginInline="0.25rem"
               data-placeholder={dataAttr(!startValue)}
+              marginInline="0.25rem"
             >
               {separator}
             </ui.span>
@@ -284,8 +284,8 @@ export const RangeDatePickerField = forwardRef<
 
           <AutosizingInput
             className="ui-range-date-picker__field__end-input"
-            placeholder={endPlaceholder}
             aria-label="End date"
+            placeholder={endPlaceholder}
             {...computedEndInputProps}
           />
         </ui.div>
@@ -314,7 +314,7 @@ const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
 
     return (
       <ui.div className={className} __css={css} {...containerProps}>
-        <ui.span opacity={value ? 0 : 1} data-placeholder={dataAttr(!value)}>
+        <ui.span data-placeholder={dataAttr(!value)} opacity={value ? 0 : 1}>
           {value || placeholder}
         </ui.span>
 

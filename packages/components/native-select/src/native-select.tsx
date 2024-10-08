@@ -238,8 +238,8 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
         height: "1em",
         width: "1em",
       },
-      focusable: false,
       "aria-hidden": true,
+      focusable: false,
     }),
   )
 

@@ -21,17 +21,17 @@ const trackImageOnload = () => {
 
 describe("<Image />", () => {
   test("creates an instance of Image when mounted", () => {
-    render(<Image fallback={fallback} src={src} />)
+    render(<Image src={src} fallback={fallback} />)
 
     expect(screen.getByRole("img")).toBeInstanceOf(HTMLImageElement)
   })
 
   test("passes a11y test", async () => {
-    await a11y(<Image alt="img" fallback={fallback} src={src} />)
+    await a11y(<Image src={src} alt="img" fallback={fallback} />)
   })
 
   test("renders placeholder first, before image load", () => {
-    render(<Image fallback={fallback} src={src} />)
+    render(<Image src={src} fallback={fallback} />)
 
     expect(screen.getByRole("img")).toHaveAttribute("src", fallback)
   })
@@ -47,7 +47,7 @@ describe("<Image />", () => {
 
     const onLoad = vi.fn()
 
-    render(<Image fallback={fallback} src={src} onLoad={onLoad} />)
+    render(<Image src={src} fallback={fallback} onLoad={onLoad} />)
 
     act(() => {
       imageOnload()

@@ -74,10 +74,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <FileInput placeholder="extra small size" size="xs" />
-      <FileInput placeholder="small size" size="sm" />
-      <FileInput placeholder="medium size" size="md" />
-      <FileInput placeholder="large size" size="lg" />
+      <FileInput size="xs" placeholder="extra small size" />
+      <FileInput size="sm" placeholder="small size" />
+      <FileInput size="md" placeholder="medium size" />
+      <FileInput size="lg" placeholder="large size" />
     </>
   )
 }
@@ -85,10 +85,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <FileInput placeholder="outline" variant="outline" />
-      <FileInput placeholder="filled" variant="filled" />
-      <FileInput placeholder="flushed" variant="flushed" />
-      <FileInput placeholder="unstyled" variant="unstyled" />
+      <FileInput variant="outline" placeholder="outline" />
+      <FileInput variant="filled" placeholder="filled" />
+      <FileInput variant="flushed" placeholder="flushed" />
+      <FileInput variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -113,10 +113,10 @@ export const withBorderColor: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <FileInput isDisabled placeholder="outline" variant="outline" />
-      <FileInput isDisabled placeholder="filled" variant="filled" />
-      <FileInput isDisabled placeholder="flushed" variant="flushed" />
-      <FileInput isDisabled placeholder="unstyled" variant="unstyled" />
+      <FileInput variant="outline" isDisabled placeholder="outline" />
+      <FileInput variant="filled" isDisabled placeholder="filled" />
+      <FileInput variant="flushed" isDisabled placeholder="flushed" />
+      <FileInput variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="Upload file">
         <FileInput type="email" placeholder="your file" />
@@ -128,10 +128,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <FileInput isReadOnly placeholder="outline" variant="outline" />
-      <FileInput isReadOnly placeholder="filled" variant="filled" />
-      <FileInput isReadOnly placeholder="flushed" variant="flushed" />
-      <FileInput isReadOnly placeholder="unstyled" variant="unstyled" />
+      <FileInput variant="outline" isReadOnly placeholder="outline" />
+      <FileInput variant="filled" isReadOnly placeholder="filled" />
+      <FileInput variant="flushed" isReadOnly placeholder="flushed" />
+      <FileInput variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="Upload file">
         <FileInput type="email" placeholder="your file" />
@@ -143,10 +143,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <FileInput isInvalid placeholder="outline" variant="outline" />
-      <FileInput isInvalid placeholder="filled" variant="filled" />
-      <FileInput isInvalid placeholder="flushed" variant="flushed" />
-      <FileInput isInvalid placeholder="unstyled" variant="unstyled" />
+      <FileInput variant="outline" isInvalid placeholder="outline" />
+      <FileInput variant="filled" isInvalid placeholder="filled" />
+      <FileInput variant="flushed" isInvalid placeholder="flushed" />
+      <FileInput variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="File is required."

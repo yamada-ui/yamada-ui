@@ -139,7 +139,7 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
           display={isCollapse ? "none" : { base: "block", lg: "none" }}
           px="3"
         >
-          <Heading as="h3" fontWeight="semibold" size="md" {...labelProps}>
+          <Heading as="h3" size="md" fontWeight="semibold" {...labelProps}>
             {label}
           </Heading>
         </Box>
@@ -151,13 +151,13 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
                   <Box key={index} as="li">
                     <SidebarButton
                       colorScheme={isSelected ? "primary" : "gray"}
+                      variant={isSelected ? "solid" : "ghost"}
                       icon={
                         <Icon
                           as={icon}
                           color={isSelected ? "white" : "muted"}
                         />
                       }
-                      variant={isSelected ? "solid" : "ghost"}
                       {...rest}
                     >
                       {label}

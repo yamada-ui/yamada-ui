@@ -88,10 +88,10 @@ export const useRadio = <
   } = useFormControlProps({ id, ...props })
   const [
     {
+      "aria-readonly": _ariaReadonly,
       disabled,
       readOnly,
       required,
-      "aria-readonly": _ariaReadonly,
       onBlur: onBlurProp,
       onFocus: onFocusProp,
       ...formControlProps
@@ -192,12 +192,12 @@ export const useRadio = <
         whiteSpace: "nowrap",
         width: "1px",
       },
+      "aria-checked": checked,
       checked,
       disabled,
       readOnly,
       required,
       value,
-      "aria-checked": checked,
       onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
       onChange: handlerAll(props.onChange, onChange),
       onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),

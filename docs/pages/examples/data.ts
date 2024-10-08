@@ -10,91 +10,91 @@ export const SLUGS = [
 ] as const
 
 export const AUTHORS: {
-  [_key in Slug]: { name: string; href: string; src: string }[]
+  [_key in Slug]: { href: string; name: string; src: string }[]
 } = {
   authentication: [
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   cards: [
     {
-      name: "taroj1205",
       href: "https://github.com/taroj1205",
+      name: "taroj1205",
       src: "https://avatars.githubusercontent.com/u/61367823?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   dashboard: [
     {
-      name: "tasukuwato",
       href: "https://github.com/tasukuwato",
+      name: "tasukuwato",
       src: "https://avatars.githubusercontent.com/u/116733827?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   forms: [
     {
-      name: "kaitobq",
       href: "https://github.com/kaitobq",
+      name: "kaitobq",
       src: "https://avatars.githubusercontent.com/u/157810570?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   mail: [
     {
-      name: "umaidashi",
       href: "https://github.com/umaidashi",
+      name: "umaidashi",
       src: "https://avatars.githubusercontent.com/u/99778758?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   music: [
     {
-      name: "Hayato1031",
       href: "https://github.com/Hayato1031",
+      name: "Hayato1031",
       src: "https://avatars.githubusercontent.com/u/105223982?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   playground: [
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],
   tasks: [
     {
-      name: "mst-mkt",
       href: "https://github.com/mst-mkt",
+      name: "mst-mkt",
       src: "https://avatars.githubusercontent.com/u/131662659?v=4",
     },
     {
-      name: "hirotomoyamada",
       href: "https://github.com/hirotomoyamada",
+      name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     },
   ],

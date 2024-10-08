@@ -80,10 +80,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <MultiSelect placeholder="extra small size" size="xs" />
-      <MultiSelect placeholder="small size" size="sm" />
-      <MultiSelect placeholder="medium size" size="md" />
-      <MultiSelect placeholder="large size" size="lg" />
+      <MultiSelect size="xs" placeholder="extra small size" />
+      <MultiSelect size="sm" placeholder="small size" />
+      <MultiSelect size="md" placeholder="medium size" />
+      <MultiSelect size="lg" placeholder="large size" />
     </>
   )
 }
@@ -91,10 +91,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MultiSelect placeholder="outline" variant="outline" />
-      <MultiSelect placeholder="filled" variant="filled" />
-      <MultiSelect placeholder="flushed" variant="flushed" />
-      <MultiSelect placeholder="unstyled" variant="unstyled" />
+      <MultiSelect variant="outline" placeholder="outline" />
+      <MultiSelect variant="filled" placeholder="filled" />
+      <MultiSelect variant="flushed" placeholder="flushed" />
+      <MultiSelect variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -329,10 +329,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <MultiSelect isDisabled placeholder="outline" variant="outline" />
-      <MultiSelect isDisabled placeholder="filled" variant="filled" />
-      <MultiSelect isDisabled placeholder="flushed" variant="flushed" />
-      <MultiSelect isDisabled placeholder="unstyled" variant="unstyled" />
+      <MultiSelect variant="outline" isDisabled placeholder="outline" />
+      <MultiSelect variant="filled" isDisabled placeholder="filled" />
+      <MultiSelect variant="flushed" isDisabled placeholder="flushed" />
+      <MultiSelect variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -347,10 +347,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MultiSelect isReadOnly placeholder="outline" variant="outline" />
-      <MultiSelect isReadOnly placeholder="filled" variant="filled" />
-      <MultiSelect isReadOnly placeholder="flushed" variant="flushed" />
-      <MultiSelect isReadOnly placeholder="unstyled" variant="unstyled" />
+      <MultiSelect variant="outline" isReadOnly placeholder="outline" />
+      <MultiSelect variant="filled" isReadOnly placeholder="filled" />
+      <MultiSelect variant="flushed" isReadOnly placeholder="flushed" />
+      <MultiSelect variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -365,10 +365,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MultiSelect isInvalid placeholder="outline" variant="outline" />
-      <MultiSelect isInvalid placeholder="filled" variant="filled" />
-      <MultiSelect isInvalid placeholder="flushed" variant="flushed" />
-      <MultiSelect isInvalid placeholder="unstyled" variant="unstyled" />
+      <MultiSelect variant="outline" isInvalid placeholder="outline" />
+      <MultiSelect variant="filled" isInvalid placeholder="filled" />
+      <MultiSelect variant="flushed" isInvalid placeholder="flushed" />
+      <MultiSelect variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

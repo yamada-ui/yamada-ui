@@ -45,7 +45,7 @@ describe("<List />", () => {
 
   test("should render list with a gap", async () => {
     render(
-      <List gap="lg" aria-label="List">
+      <List aria-label="List" gap="lg">
         <ListItem>Item one</ListItem>
         <ListItem>Item two</ListItem>
       </List>,
@@ -76,11 +76,11 @@ describe("<List />", () => {
   test("should render list with different style types", async () => {
     render(
       <>
-        <List styleType="square" aria-label="list-square">
+        <List aria-label="list-square" styleType="square">
           <ListItem>Item</ListItem>
         </List>
 
-        <List styleType="circle" aria-label="list-circle">
+        <List aria-label="list-circle" styleType="circle">
           <ListItem>Item</ListItem>
         </List>
       </>,

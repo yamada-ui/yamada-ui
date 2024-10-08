@@ -271,10 +271,10 @@ export const withSize: Story = () => {
   )
   return (
     <>
-      <BarChart data={data} dataKey="month" series={series} size="sm" />
-      <BarChart data={data} dataKey="month" series={series} size="md" />
-      <BarChart data={data} dataKey="month" series={series} size="lg" />
-      <BarChart data={data} dataKey="month" series={series} size="full" />
+      <BarChart size="sm" data={data} dataKey="month" series={series} />
+      <BarChart size="md" data={data} dataKey="month" series={series} />
+      <BarChart size="lg" data={data} dataKey="month" series={series} />
+      <BarChart size="full" data={data} dataKey="month" series={series} />
     </>
   )
 }

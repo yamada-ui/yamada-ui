@@ -76,8 +76,8 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
         ref={ref}
         type="button"
         className={cx("ui-close-button", className)}
-        disabled={isDisabled}
         aria-label="Close"
+        disabled={isDisabled}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}

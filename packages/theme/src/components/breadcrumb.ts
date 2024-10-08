@@ -7,13 +7,13 @@ export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
     item: {},
     link: {
       "&:not([aria-current=page])": {
+        cursor: "pointer",
         _focusVisible: {
           boxShadow: "outline",
         },
         _hover: {
           textDecoration: "underline",
         },
-        cursor: "pointer",
       },
       color: "inherit",
       outline: "none",

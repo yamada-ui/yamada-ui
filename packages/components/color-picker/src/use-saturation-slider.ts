@@ -133,10 +133,10 @@ export const useSaturationSlider = ({
   } = useFormControlProps(props)
   const [
     {
+      "aria-readonly": _ariaReadonly,
       disabled,
       readOnly,
       required,
-      "aria-readonly": _ariaReadonly,
       ...formControlProps
     },
     containerProps,
@@ -359,19 +359,19 @@ export const useSaturationSlider = ({
       }
 
       return {
-        bg: thumbColor ?? hsvTo([h, s, v])(),
         "aria-label": "Saturation and brightness thumb",
+        bg: thumbColor ?? hsvTo([h, s, v])(),
         ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-valuemax": 100,
         "aria-valuemin": 0,
         "aria-valuenow": s,
         "aria-valuetext": `saturation ${s}, brightness ${v}`,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, rest.onBlur),
         onFocus: handlerAll(props.onFocus, rest.onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),

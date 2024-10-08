@@ -16,11 +16,11 @@ export const Avatar: ComponentMultiStyle<"Avatar"> = {
         : mode("gray.200", "gray.500")(m)
 
       return {
-        _loaded: { bg: "inherit" },
         bg,
         borderColor: ["white", "black"],
         color: isDark(bg)(t, m) ? "white" : "black",
         verticalAlign: "top",
+        _loaded: { bg: "inherit" },
       }
     },
     excess: {

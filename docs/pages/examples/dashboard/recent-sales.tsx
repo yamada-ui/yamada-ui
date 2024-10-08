@@ -15,33 +15,33 @@ import { memo } from "react"
 const ITEMS: ItemProps[] = [
   {
     name: "Hirotomo Yamada",
+    src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     email: "hirotomoyamada@email.com",
     number: 530000,
-    src: "https://avatars.githubusercontent.com/u/84060430?v=4",
   },
   {
     name: "tasukuwato",
+    src: "https://avatars.githubusercontent.com/u/116733827?v=4",
     email: "tasukuwato@email.com",
     number: 758,
-    src: "https://avatars.githubusercontent.com/u/116733827?v=4",
   },
   {
     name: "Kazuki Shirai",
+    src: "https://avatars.githubusercontent.com/u/9676316?v=4",
     email: "kazukishirai@email.com",
     number: 4649,
-    src: "https://avatars.githubusercontent.com/u/9676316?v=4",
   },
   {
     name: "koralle",
+    src: "https://avatars.githubusercontent.com/u/33865215?v=4",
     email: "koralle@email.com",
     number: 891,
-    src: "https://avatars.githubusercontent.com/u/33865215?v=4",
   },
   {
     name: "Ichinose Yuto",
+    src: "https://avatars.githubusercontent.com/u/60034520?v=4",
     email: "ichinoseyuto@email.com",
     number: 818,
-    src: "https://avatars.githubusercontent.com/u/60034520?v=4",
   },
 ]
 
@@ -75,18 +75,18 @@ RecentSales.displayName = "RecentSales"
 
 export interface ItemProps extends StackProps {
   name: ReactNode
+  src: string
   email: ReactNode
   number: number
-  src: string
   isIncrease?: boolean
   avatarProps?: AvatarProps
 }
 
 const Item: FC<ItemProps> = memo(
-  ({ name, email, isIncrease = true, number, src, avatarProps, ...rest }) => {
+  ({ name, src, email, isIncrease = true, number, avatarProps, ...rest }) => {
     return (
       <HStack as="li" gap={{ base: "md", sm: "sm" }} {...rest}>
-        <Avatar boxSize={{ base: "10", sm: "8" }} src={src} {...avatarProps} />
+        <Avatar src={src} boxSize={{ base: "10", sm: "8" }} {...avatarProps} />
 
         <VStack gap="0">
           <Text

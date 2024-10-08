@@ -201,8 +201,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 id={id}
                 as="div"
                 className="ui-multi-date-picker__content"
-                role="dialog"
                 aria-modal="true"
+                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -333,6 +333,7 @@ export const MultiDatePickerField = forwardRef<
           <ui.input
             ref={mergeRefs(ref, inputPropRef, inputRef)}
             className="ui-multi-date-picker__field__input"
+            aria-label="Input date value"
             display="inline-block"
             flex="1"
             marginBlockEnd="0.125rem"
@@ -343,7 +344,6 @@ export const MultiDatePickerField = forwardRef<
                 ? placeholder
                 : undefined
             }
-            aria-label="Input date value"
             {...computedInputProps}
           />
         </ui.div>

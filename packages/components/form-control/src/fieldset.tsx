@@ -145,11 +145,11 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
           <ui.fieldset
             ref={ref}
             className={cx("ui-fieldset", className)}
-            disabled={isDisabled}
             data-disabled={dataAttr(isDisabled)}
             data-focus={dataAttr(isFocused)}
             data-invalid={dataAttr(isInvalid)}
             data-readonly={dataAttr(isReadOnly)}
+            disabled={isDisabled}
             __css={css}
             {...rest}
           >

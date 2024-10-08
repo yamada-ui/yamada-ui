@@ -37,20 +37,20 @@ describe("<Rating />", () => {
   })
 
   test("disabled Rating renders correctly", () => {
-    render(<Rating isDisabled data-testid="rating" />)
+    render(<Rating data-testid="rating" isDisabled />)
 
     expect(screen.getByTestId("rating")).toHaveAttribute("disabled")
   })
 
   test("readonly Rating renders correctly", () => {
-    render(<Rating isReadOnly data-testid="rating" />)
+    render(<Rating data-testid="rating" isReadOnly />)
 
     expect(screen.getByTestId("rating")).toHaveAttribute("readonly")
   })
 
   test("should be filled to the point of hovering", async () => {
     const { container, user } = render(
-      <Rating height={20} width={100} data-testid="rating" />,
+      <Rating data-testid="rating" height={20} width={100} />,
     )
 
     const rating = screen.getByTestId("rating")
@@ -61,7 +61,7 @@ describe("<Rating />", () => {
       expect(items[i]).not.toHaveAttribute("data-filled")
     }
 
-    await user.pointer({ coords: { x: 50, y: 10 }, target: rating })
+    await user.pointer({ target: rating, coords: { x: 50, y: 10 } })
 
     for (let i = 1; i < 3; i++) {
       expect(items[i]).toHaveAttribute("data-filled")

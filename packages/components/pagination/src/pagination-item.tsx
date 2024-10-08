@@ -83,10 +83,10 @@ export const PaginationItem: FC<PaginationItemProps> = ({
     <ui.button
       type="button"
       className={cx("ui-pagination__item", className)}
-      disabled={isDisabled}
-      tabIndex={page !== "dots" ? 0 : -1}
       data-disabled={dataAttr(isDisabled)}
       data-selected={dataAttr(isActive)}
+      disabled={isDisabled}
+      tabIndex={page !== "dots" ? 0 : -1}
       __css={css}
       {...rest}
       onPointerDown={onPointerDown}

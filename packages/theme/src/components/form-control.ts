@@ -19,9 +19,6 @@ export const FormControl: ComponentMultiStyle<"FormControl"> = {
       mt: "2",
     },
     label: {
-      _disabled: {
-        opacity: 0.4,
-      },
       fontSize: "md",
       fontWeight: "medium",
       mb: "2",
@@ -29,6 +26,9 @@ export const FormControl: ComponentMultiStyle<"FormControl"> = {
       opacity: 1,
       transitionDuration: "normal",
       transitionProperty: "common",
+      _disabled: {
+        opacity: 0.4,
+      },
     },
     requiredIndicator: {
       color: ["danger.500", "danger.400"],

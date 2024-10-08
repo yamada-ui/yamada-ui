@@ -49,7 +49,7 @@ describe("<AlphaSlider />", () => {
   })
 
   test("AlphaSlider renders correctly with custom props", () => {
-    render(<AlphaSlider max={0.8} min={0.2} data-testid="alphaSlider" />)
+    render(<AlphaSlider data-testid="alphaSlider" max={0.8} min={0.2} />)
 
     const alphaSlider = screen.getByTestId("alphaSlider")
 
@@ -103,8 +103,8 @@ describe("<AlphaSlider />", () => {
     const sliderThumb = screen.getByRole("slider")
 
     await drag(user)({
-      coords: (i) => ({ x: i * 100, y: 0 }),
       target: sliderThumb,
+      coords: (i) => ({ x: i * 100, y: 0 }),
     })
 
     await waitFor(() => {

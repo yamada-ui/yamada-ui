@@ -16,8 +16,8 @@ import Link from "next/link"
 import { memo } from "react"
 
 export interface LinkCardProps extends Omit<CardProps, "title"> {
-  description: ReactNode
   href: string
+  description: ReactNode
   title: ReactNode
   label?: null | StringLiteral
   with_description?: boolean
@@ -26,7 +26,7 @@ export interface LinkCardProps extends Omit<CardProps, "title"> {
 export const LinkCard = memo(
   forwardRef<LinkCardProps, "div">(
     (
-      { description, href, label, title, with_description = true, ...rest },
+      { href, description, label, title, with_description = true, ...rest },
       ref,
     ) => {
       const { documentMap } = usePage()
@@ -46,19 +46,19 @@ export const LinkCard = memo(
         <Card
           ref={ref}
           as={Link}
+          href={href}
+          size="normal"
+          variant="outline"
+          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          h={with_description ? { base: "40", md: "auto" } : "auto"}
+          overflow="hidden"
+          position="relative"
+          transitionDuration="normal"
+          transitionProperty="colors"
           _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "outline" }}
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
-          bg={["blackAlpha.50", "whiteAlpha.50"]}
-          h={with_description ? { base: "40", md: "auto" } : "auto"}
-          href={href}
-          overflow="hidden"
-          position="relative"
-          size="normal"
-          transitionDuration="normal"
-          transitionProperty="colors"
-          variant="outline"
           {...rest}
           onPointerDown={onPointerDown}
         >
@@ -68,7 +68,7 @@ export const LinkCard = memo(
             pb={!with_description ? "md" : undefined}
             pt="md"
           >
-            <Heading lineClamp={1} size="md">
+            <Heading size="md" lineClamp={1}>
               {title}
             </Heading>
 

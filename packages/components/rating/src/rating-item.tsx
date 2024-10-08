@@ -87,8 +87,8 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
         maxHeight: "1em",
         maxWidth: "1em",
       },
-      focusable: false,
       "aria-hidden": true,
+      focusable: false,
     }),
   )
 

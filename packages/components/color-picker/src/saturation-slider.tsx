@@ -39,16 +39,16 @@ interface SaturationSliderOptions {
   trackProps?: HTMLUIProps
 }
 
-/**
- * `SaturationSlider` is a component used to allow the user to select a color saturation.
- *
- * @see Docs https://yamada-ui.com/components/forms/saturation-slider
- */
 export interface SaturationSliderProps
   extends ThemeProps<"SaturationSlider">,
     UseSaturationSliderProps,
     SaturationSliderOptions {}
 
+/**
+ * `SaturationSlider` is a component used to allow the user to select a color saturation.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/saturation-slider
+ */
 export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle(
@@ -87,13 +87,13 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
         top: "0",
         w: "100%",
       },
+      position: "relative",
       _before: {
         content: `""`,
         display: "block",
         h: 0,
         pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),
       },
-      position: "relative",
       ...styles.container,
       ...__css,
     }

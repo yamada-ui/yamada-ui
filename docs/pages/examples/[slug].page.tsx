@@ -148,10 +148,10 @@ const Page: NextPage<PageProps> = ({
             justifyContent="center"
           >
             <NextLinkButton
-              colorScheme="primary"
               href="/getting-started"
-              rightIcon={<ArrowRight />}
+              colorScheme="primary"
               size="xl"
+              rightIcon={<ArrowRight />}
               w={{ base: "auto", md: "full" }}
             >
               {t("examples.hero.started")}
@@ -159,8 +159,8 @@ const Page: NextPage<PageProps> = ({
 
             <NextLinkButton
               href="/components"
-              rightIcon={<Blocks />}
               size="xl"
+              rightIcon={<Blocks />}
               w={{ base: "auto", md: "full" }}
             >
               {t("examples.hero.components")}
@@ -170,7 +170,7 @@ const Page: NextPage<PageProps> = ({
 
         <Section display="block" pb="0" pt="xl">
           <ScrollArea as={Center} type="never" m="0 auto" tabIndex={-1}>
-            <SegmentedControl as="nav" value={currentSlug} variant="simple">
+            <SegmentedControl as="nav" variant="simple" value={currentSlug}>
               {SLUGS.map((slug) => {
                 return (
                   <SegmentedControlButton
@@ -197,7 +197,7 @@ const Page: NextPage<PageProps> = ({
             <Text color="muted">{t("examples.author.description")}</Text>
 
             <AvatarGroup borderColor={["white", "black"]} gap="-3">
-              {AUTHORS[currentSlug].map(({ name, href, src }) => (
+              {AUTHORS[currentSlug].map(({ href, name, src }) => (
                 <Box
                   key={name}
                   sx={{ borderWidth: { base: "5px", sm: "3px" } }}
@@ -207,11 +207,11 @@ const Page: NextPage<PageProps> = ({
                   <Tooltip flexShrink="0" label={name} placement="top">
                     <Avatar
                       as="a"
-                      name={name}
-                      boxSize="10"
                       href={href}
+                      name={name}
                       src={src}
                       target="_blank"
+                      boxSize="10"
                     />
                   </Tooltip>
                 </Box>

@@ -40,7 +40,7 @@ export const withSize: Story = () => {
 export const withBorderRadius: Story = () => {
   return (
     <>
-      <Progress borderRadius="md" colorScheme="orange" value={10} />
+      <Progress colorScheme="orange" borderRadius="md" value={10} />
       <Progress colorScheme="yellow" rounded="md" value={31} />
     </>
   )

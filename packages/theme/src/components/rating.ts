@@ -12,6 +12,10 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       fill: "currentColor",
     },
     item: {
+      color: ["blackAlpha.300", "whiteAlpha.300"],
+      cursor: "pointer",
+      outline: "none",
+      rounded: "sm",
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -30,10 +34,6 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       _readOnly: {
         cursor: "default",
       },
-      color: ["blackAlpha.300", "whiteAlpha.300"],
-      cursor: "pointer",
-      outline: "none",
-      rounded: "sm",
     },
   }),
 

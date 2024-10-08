@@ -20,21 +20,21 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const neverStyles: CSSUIObject = {
   "&::-webkit-scrollbar": { display: "none" },
-  _scrollbar: { display: "none" },
   scrollbarWidth: "none",
+  _scrollbar: { display: "none" },
 }
 
 const hiddenStyles: CSSUIObject = {
   "&::-webkit-scrollbar-thumb": { bg: "transparent" },
   "&::-webkit-scrollbar-track": { bg: "transparent" },
   "@-moz-document url-prefix()": {
+    scrollbarColor: "transparent transparent",
     _dark: {
       scrollbarColor: "transparent transparent",
     },
     _light: {
       scrollbarColor: "transparent transparent",
     },
-    scrollbarColor: "transparent transparent",
   },
   _dark: {
     "&::-webkit-scrollbar-thumb": { bg: "transparent" },

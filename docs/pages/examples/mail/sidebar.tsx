@@ -57,7 +57,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
         <Cloud fontSize="xl" />
 
         {!isCollapse ? (
-          <Heading as="h3" display={{ base: "inline", xl: "none" }} size="md">
+          <Heading as="h3" size="md" display={{ base: "inline", xl: "none" }}>
             Yamada UI
           </Heading>
         ) : null}
@@ -126,17 +126,17 @@ const SidebarItem: FC<SidebarItemProps> = memo(
           >
             <IconButton
               colorScheme={isSelected ? "primary" : "gray"}
-              icon={<Icon color={isSelected ? "white" : "muted"} />}
               variant={isSelected ? "solid" : "ghost"}
+              icon={<Icon color={isSelected ? "white" : "muted"} />}
             />
           </Tooltip>
         ) : (
           <Button
             colorScheme={isSelected ? "primary" : "gray"}
+            variant={isSelected ? "solid" : "ghost"}
             justifyContent="flex-start"
             leftIcon={<Icon color={isSelected ? "white" : "muted"} />}
             px="3"
-            variant={isSelected ? "solid" : "ghost"}
             w="full"
           >
             <Text

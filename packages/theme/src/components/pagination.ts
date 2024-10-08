@@ -14,6 +14,11 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       flex: 1,
     },
     item: {
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+      px: 1,
+      rounded: "md",
+      transitionDuration: "slower",
+      transitionProperty: "common",
       _disabled: {
         boxShadow: "none",
         cursor: "not-allowed",
@@ -31,11 +36,6 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         },
       },
       _selected: { cursor: "default", pointerEvents: "none" },
-      color: ["blackAlpha.600", "whiteAlpha.700"],
-      px: 1,
-      rounded: "md",
-      transitionDuration: "slower",
-      transitionProperty: "common",
     },
     last: {},
     next: {},
@@ -111,7 +111,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
   },
 
   variants: {
-    ghost: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => {
+    ghost: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       return {
         item: {
           _active: {
@@ -138,27 +138,27 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
           border: "0",
         },
         item: {
+          border: "1px solid",
+          borderColor: "border",
           _active: {
             bg: ["blackAlpha.100", "whiteAlpha.100"],
           },
           _hover: {
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
             _disabled: {
               bg: ["initial", "initial"],
             },
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
           },
           _selected: {
-            _hover: {
-              bg: ["transparent", "transparent"],
-            },
             bg: "transparent",
             borderColor: [`${c}.600`, `${c}.500`],
             color: isGray(c)
               ? ["blackAlpha.800", "whiteAlpha.700"]
               : [`${c}.600`, `${c}.500`],
+            _hover: {
+              bg: ["transparent", "transparent"],
+            },
           },
-          border: "1px solid",
-          borderColor: "border",
         },
       }
     },
@@ -167,21 +167,18 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         border: "0",
       },
       item: {
+        border: "1px solid",
+        borderColor: "border",
         _active: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],
         },
         _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _disabled: {
             bg: ["initial", "initial"],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
-          _hover: {
-            bg: isGray(c)
-              ? [`${c}.100`, `${c}.800`]
-              : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
-          },
           bg: isGray(c)
             ? [`${c}.50`, `${c}.700`]
             : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
@@ -189,16 +186,19 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
             ? [`${c}.50`, `${c}.700`]
             : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+          _hover: {
+            bg: isGray(c)
+              ? [`${c}.100`, `${c}.800`]
+              : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
+          },
         },
-        border: "1px solid",
-        borderColor: "border",
       },
     }),
     unstyled: {
-      _ripple: { display: "none" },
       container: { gap: 0 },
       inner: { gap: 0 },
       item: { bg: "none", color: "inherit", minH: "auto", minW: "auto" },
+      _ripple: { display: "none" },
     },
   },
 

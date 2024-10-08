@@ -3,8 +3,8 @@ import type { Union } from "@yamada-ui/utils"
 import { isArray, merge } from "@yamada-ui/utils"
 
 export function withDefaultSize({
-  components,
   size,
+  components,
 }: {
   size: ComponentDefaultProps["size"]
   components?: Union<keyof Theme["components"]>[]
@@ -23,8 +23,8 @@ export function withDefaultSize({
 }
 
 export function withDefaultVariant({
-  components,
   variant,
+  components,
 }: {
   variant: ComponentDefaultProps["variant"]
   components?: Union<keyof Theme["components"]>[]

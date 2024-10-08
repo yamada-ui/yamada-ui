@@ -25,9 +25,9 @@ describe("<Modal />", () => {
         <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
         <Modal
+          aria-labelledby={modalHeaderId}
           isOpen={isOpen}
           placement={placement}
-          aria-labelledby={modalHeaderId}
           onClose={() => setIsOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
@@ -52,15 +52,15 @@ describe("<Modal />", () => {
           Open Modal
         </button>
         <Modal
-          isOpen={isOpen}
           data-testid="Modal"
+          isOpen={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <ModalCloseButton data-testid="ModalCloseButton" />
           <ModalOverlay
+            data-testid="ModalOverlay"
             backdropFilter="blur(10px)"
             bg="blackAlpha.300"
-            data-testid="ModalOverlay"
           />
           <ModalHeader data-testid="ModalHeader">Modal Header</ModalHeader>
 
@@ -118,8 +118,8 @@ describe("<Modal />", () => {
           <button onClick={() => setIsPrimaryOpen(true)}>Open Modal</button>
 
           <Modal
-            isOpen={isPrimaryOpen}
             aria-labelledby={primaryModalHeaderId}
+            isOpen={isPrimaryOpen}
             onClose={() => setIsPrimaryOpen(false)}
           >
             <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
@@ -136,9 +136,9 @@ describe("<Modal />", () => {
             </ModalFooter>
 
             <Modal
-              isOpen={isSecondaryOpen}
               size="sm"
               aria-labelledby={secondaryModalHeaderId}
+              isOpen={isSecondaryOpen}
               onClose={() => setIsSecondaryOpen(false)}
             >
               <ModalHeader id={secondaryModalHeaderId}>

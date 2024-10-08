@@ -136,6 +136,7 @@ export const useRangeSlider = ({
   let {
     id,
     name,
+    "aria-valuetext": ariaValueText,
     betweenThumbs = 0,
     defaultValue,
     isReversed,
@@ -145,17 +146,16 @@ export const useRangeSlider = ({
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
-    "aria-valuetext": ariaValueText,
     onChange,
     onChangeEnd: onChangeEndProp,
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const {
+    "aria-readonly": ariaReadonly,
     disabled,
     readOnly,
     required,
-    "aria-readonly": ariaReadonly,
     onBlur,
     onFocus,
     ...formControlProps
@@ -630,8 +630,6 @@ export const useRangeSlider = ({
         id: getThumbId(i),
         ref,
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-orientation": orientation,
         "aria-valuemax": max,
         "aria-valuemin": min,
@@ -640,6 +638,8 @@ export const useRangeSlider = ({
         "data-active": dataAttr(
           isDragging && focusThumbOnChange && activeIndex === i,
         ),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => {
           setFocused(false)
           setActiveIndex(-1)

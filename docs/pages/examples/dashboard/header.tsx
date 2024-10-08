@@ -98,9 +98,9 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
 Header.displayName = "Header"
 
-type ControlButtonProps = {
+interface ControlButtonProps extends ButtonProps {
   defaultIsSelected?: boolean
-} & ButtonProps
+}
 
 const ControlButton: FC<ControlButtonProps> = memo(
   ({ defaultIsSelected, ...rest }) => {

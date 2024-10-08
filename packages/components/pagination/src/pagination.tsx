@@ -238,6 +238,5 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
   )
 })
 
-
-Pagination.displayName = 'Pagination'
-Pagination.__ui__ = 'Pagination'
+Pagination.displayName = "Pagination"
+Pagination.__ui__ = "Pagination"

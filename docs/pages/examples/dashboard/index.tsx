@@ -53,7 +53,7 @@ export const Dashboard = memo(() => {
 
 Dashboard.displayName = "Dashboard"
 
-type ContentProps = {} & StackProps
+interface ContentProps extends StackProps {}
 
 const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
   return (

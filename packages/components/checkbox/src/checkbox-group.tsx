@@ -145,13 +145,13 @@ export const CheckboxGroup = forwardRef(
   <Y extends number | string = string>(
     {
       className,
-      children,
       colorScheme,
+      size,
+      variant,
+      children,
       direction = "column",
       gap,
       items = [],
-      size,
-      variant,
       ...props
     }: CheckboxGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
@@ -181,13 +181,13 @@ export const CheckboxGroup = forwardRef(
         value={
           {
             colorScheme,
+            size,
+            variant,
             isDisabled,
             isInvalid,
             isReadOnly,
             isRequired,
-            size,
             value,
-            variant,
             onChange,
           } as CheckboxGroupContext
         }

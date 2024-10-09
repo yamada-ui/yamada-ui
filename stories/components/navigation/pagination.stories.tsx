@@ -32,10 +32,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Pagination total={10} variant="solid" />
-      <Pagination total={10} variant="outline" />
-      <Pagination total={10} variant="ghost" />
-      <Pagination total={10} variant="unstyled" />
+      <Pagination variant="solid" total={10} />
+      <Pagination variant="outline" total={10} />
+      <Pagination variant="ghost" total={10} />
+      <Pagination variant="unstyled" total={10} />
     </>
   )
 }
@@ -48,8 +48,8 @@ export const withColorScheme: Story = () => {
           <Pagination
             key={colorScheme}
             colorScheme={colorScheme}
-            total={10}
             variant="solid"
+            total={10}
           />
         ))}
       </VStack>
@@ -59,8 +59,8 @@ export const withColorScheme: Story = () => {
           <Pagination
             key={colorScheme}
             colorScheme={colorScheme}
-            total={10}
             variant="outline"
+            total={10}
           />
         ))}
       </VStack>
@@ -70,8 +70,8 @@ export const withColorScheme: Story = () => {
           <Pagination
             key={colorScheme}
             colorScheme={colorScheme}
-            total={10}
             variant="ghost"
+            total={10}
           />
         ))}
       </VStack>
@@ -102,10 +102,10 @@ export const withBoundaries: Story = () => {
 export const withDisabled: Story = () => {
   return (
     <>
-      <Pagination isDisabled total={10} variant="solid" />
-      <Pagination isDisabled total={10} variant="outline" />
-      <Pagination isDisabled total={10} variant="ghost" />
-      <Pagination isDisabled total={10} variant="unstyled" />
+      <Pagination variant="solid" isDisabled total={10} />
+      <Pagination variant="outline" isDisabled total={10} />
+      <Pagination variant="ghost" isDisabled total={10} />
+      <Pagination variant="unstyled" isDisabled total={10} />
     </>
   )
 }

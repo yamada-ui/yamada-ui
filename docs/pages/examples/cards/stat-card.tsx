@@ -11,10 +11,10 @@ import { memo } from "react"
 export const StatCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardBody>
         <Stat

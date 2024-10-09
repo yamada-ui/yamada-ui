@@ -1352,9 +1352,6 @@ importers:
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
-      '@yamada-ui/use-token':
-        specifier: workspace:*
-        version: link:../../hooks/use-token
       '@yamada-ui/use-value':
         specifier: workspace:*
         version: link:../../hooks/use-value
@@ -2602,12 +2599,6 @@ importers:
       '@yamada-ui/use-timeout':
         specifier: workspace:*
         version: link:../../hooks/use-timeout
-      '@yamada-ui/use-token':
-        specifier: workspace:*
-        version: link:../../hooks/use-token
-      '@yamada-ui/use-value':
-        specifier: workspace:*
-        version: link:../../hooks/use-value
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

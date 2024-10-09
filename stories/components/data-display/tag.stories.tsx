@@ -69,15 +69,15 @@ export const withSize: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" leftIcon={<Plus />} size="sm">
+      <Tag colorScheme="primary" size="sm" leftIcon={<Plus />}>
         Small
       </Tag>
 
-      <Tag colorScheme="secondary" rightIcon={<Plus />} size="md">
+      <Tag colorScheme="secondary" size="md" rightIcon={<Plus />}>
         Medium
       </Tag>
 
-      <Tag colorScheme="warning" leftIcon={<Plus />} size="lg">
+      <Tag colorScheme="warning" size="lg" leftIcon={<Plus />}>
         Large
       </Tag>
     </Wrap>
@@ -115,9 +115,9 @@ export const withDisabled: Story = () => {
     <Wrap alignItems="flex-start" gap="md">
       <Tag
         colorScheme="primary"
+        variant="solid"
         isDisabled
         rounded="full"
-        variant="solid"
         onClose={noop}
       >
         Primary
@@ -125,9 +125,9 @@ export const withDisabled: Story = () => {
 
       <Tag
         colorScheme="secondary"
+        variant="solid"
         isDisabled
         rounded="full"
-        variant="solid"
         onClose={noop}
       >
         Secondary
@@ -135,9 +135,9 @@ export const withDisabled: Story = () => {
 
       <Tag
         colorScheme="warning"
+        variant="solid"
         isDisabled
         rounded="full"
-        variant="solid"
         onClose={noop}
       >
         Warning
@@ -145,9 +145,9 @@ export const withDisabled: Story = () => {
 
       <Tag
         colorScheme="danger"
+        variant="solid"
         isDisabled
         rounded="full"
-        variant="solid"
         onClose={noop}
       >
         Danger

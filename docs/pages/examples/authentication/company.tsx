@@ -22,7 +22,7 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
       <HStack as="header" alignItems="flex-end" gap="sm">
         <Mountain fontSize="3xl" />
 
-        <Heading as="h2" fontWeight="normal" lineHeight={1.125} size="md">
+        <Heading as="h2" size="md" fontWeight="normal" lineHeight={1.125}>
           Yamada Inc
         </Heading>
       </HStack>

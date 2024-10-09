@@ -16,16 +16,19 @@ export interface LinkProps
 
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
-  const { className, href, ...rest } = omitThemeProps(mergedProps)
+  const { href, className, ...rest } = omitThemeProps(mergedProps)
 
   return (
     <ui.a
       ref={ref}
       as={NextLink}
-      className={cx("ui-link", className)}
       href={href}
+      className={cx("ui-link", className)}
       __css={css}
       {...rest}
     />
   )
 })
+
+Link.displayName = "Link"
+Link.__ui__ = "Link"

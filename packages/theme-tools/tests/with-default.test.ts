@@ -39,8 +39,8 @@ describe("withDefaultSize", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultSize({
-      components,
       size: "lg",
+      components,
     })
 
     const expected = {
@@ -96,8 +96,8 @@ describe("withDefaultVariant", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultVariant({
-      components,
       variant: "outline",
+      components,
     })
 
     const expected = {

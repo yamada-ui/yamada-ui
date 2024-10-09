@@ -11,12 +11,12 @@ export interface CarouselControlProps extends IconButtonProps {}
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-
     const { getControlProps } = useCarouselControl({ operation: "prev" })
 
     return (
       <CarouselControl
         className={cx("ui-carousel__control--prev", className)}
+        aria-label="Go to previous slide"
         icon={
           <ChevronIcon
             __css={{
@@ -27,7 +27,6 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
           />
         }
         operation="prev"
-        aria-label="Go to previous slide"
         {...getControlProps(rest, ref)}
       />
     )
@@ -40,12 +39,12 @@ CarouselControlPrev.__ui__ = "CarouselControlPrev"
 export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-
     const { getControlProps } = useCarouselControl({ operation: "next" })
 
     return (
       <CarouselControl
         className={cx("ui-carousel__control--next", className)}
+        aria-label="Go to next slide"
         icon={
           <ChevronIcon
             __css={{
@@ -56,7 +55,6 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
           />
         }
         operation="next"
-        aria-label="Go to next slide"
         {...getControlProps(rest, ref)}
       />
     )

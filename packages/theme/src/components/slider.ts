@@ -4,14 +4,14 @@ import { shadeColor, tintColor } from "@yamada-ui/utils"
 export const Slider: ComponentMultiStyle<"Slider"> = {
   baseStyle: {
     container: ({ orientation: o }) => ({
+      cursor: "pointer",
+      display: "inline-block",
+      position: "relative",
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
       _readOnly: { cursor: "auto" },
-      cursor: "pointer",
-      display: "inline-block",
-      position: "relative",
       ...(o === "vertical" ? { h: "100%" } : { w: "100%" }),
     }),
     filledTrack: ({ colorScheme: c = "primary" }) => ({
@@ -23,12 +23,6 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       fontSize: "sm",
     },
     thumb: ({ colorMode: m, orientation: o, theme: t }) => ({
-      _disabled: {
-        bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       alignItems: "center",
       bg: "white",
       border: "1px solid",
@@ -42,29 +36,35 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       transitionDuration: "normal",
       transitionProperty: "transform",
       zIndex: "yamcha",
+      _disabled: {
+        bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       ...(o === "vertical"
         ? {
+            left: "50%",
+            transform: `translateX(-50%)`,
             _active: {
               transform: `translateX(-50%) scale(1.15)`,
             },
-            left: "50%",
-            transform: `translateX(-50%)`,
           }
         : {
+            top: "50%",
+            transform: `translateY(-50%)`,
             _active: {
               transform: `translateY(-50%) scale(1.15)`,
             },
-            top: "50%",
-            transform: `translateY(-50%)`,
           }),
     }),
     track: {
-      _disabled: {
-        bg: ["blackAlpha.200", "whiteAlpha.400"],
-      },
       bg: "border",
       overflow: "hidden",
       rounded: "sm",
+      _disabled: {
+        bg: ["blackAlpha.200", "whiteAlpha.400"],
+      },
     },
   },
 

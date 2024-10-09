@@ -26,11 +26,11 @@ import { memo, useRef, useState } from "react"
 import { Header } from "./header"
 import { getDateDiff } from "./utils"
 
-type Props = {
+interface Props extends StackProps {
   defaultMail: MailItem
   mails: MailItem[]
   setMailRef: MutableRefObject<(mail: MailItem) => void>
-} & StackProps
+}
 
 export const Inbox: FC<Props> = memo(
   ({ defaultMail, mails, setMailRef, ...rest }) => {
@@ -47,8 +47,8 @@ export const Inbox: FC<Props> = memo(
           <Spacer />
 
           <SegmentedControl
-            display={{ base: "flex", sm: "none" }}
             size="sm"
+            display={{ base: "flex", sm: "none" }}
             value={mode}
             onChange={changeMode}
           >
@@ -111,11 +111,12 @@ export const Inbox: FC<Props> = memo(
 
 Inbox.displayName = "Inbox"
 
-type InboxItemProps = {
+interface InboxItemProps
+  extends MailItem,
+    Omit<CardProps, "content" | "id" | "title"> {
   resetMapRef: MutableRefObject<Map<number, () => void>>
   defaultIsSelected?: boolean
-} & MailItem &
-  Omit<CardProps, "id">
+}
 
 const InboxItem: FC<InboxItemProps> = memo(
   ({
@@ -144,9 +145,9 @@ const InboxItem: FC<InboxItemProps> = memo(
     return (
       <Card
         as="article"
+        variant="outline"
         bg={isSelected ? ["blackAlpha.50", "whiteAlpha.100"] : "transparent"}
         cursor="pointer"
-        variant="outline"
         onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >
@@ -164,7 +165,7 @@ const InboxItem: FC<InboxItemProps> = memo(
         </CardHeader>
 
         <CardBody gap="xs" pt="sm">
-          <Heading as="h5" fontWeight="normal" size="xs">
+          <Heading as="h5" size="xs" fontWeight="normal">
             {title}
           </Heading>
 

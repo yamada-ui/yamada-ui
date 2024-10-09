@@ -66,10 +66,10 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
             justifyContent="center"
           >
             <NextLinkButton
-              colorScheme="primary"
               href="/getting-started"
-              rightIcon={<ArrowRight />}
+              colorScheme="primary"
               size="xl"
+              rightIcon={<ArrowRight />}
               w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.started")}
@@ -122,8 +122,8 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   <Spacer display={{ base: "block", sm: "none" }} />
 
                   <NextLinkButton
-                    colorScheme="primary"
                     href="https://opencollective.com/yamada-ui"
+                    colorScheme="primary"
                     isExternal
                     px="lg"
                     w={{ base: "auto", sm: "full" }}
@@ -156,8 +156,8 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   <Spacer display={{ base: "block", sm: "none" }} />
 
                   <NextLinkButton
-                    colorScheme="primary"
                     href="https://www.patreon.com/hirotomoyamada"
+                    colorScheme="primary"
                     isExternal
                     px="lg"
                     w={{ base: "auto", sm: "full" }}
@@ -169,7 +169,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
 
               {CONSTANT.SPONSORS.PLATINUM.length ? (
                 <>
-                  <Heading as="h3" color="white" size="lg">
+                  <Heading as="h3" size="lg" color="white">
                     {t("home.support.platinum-sponsors")}
                   </Heading>
 
@@ -187,17 +187,18 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                     w="full"
                   >
                     {CONSTANT.SPONSORS.PLATINUM.map(
-                      ({ alt, href, src, ...rest }, index) => (
+                      ({ href, src, alt, ...rest }, index) => (
                         <Center
                           key={index}
                           as="a"
+                          href={href}
+                          target="_blank"
                           bg="white"
                           flexBasis={{
                             base: "calc((100% - $space * 2) / 3)",
                             sm: "100%",
                             md: "calc((100% - $space * 1) / 2)",
                           }}
-                          href={href}
                           maxW={{
                             base: "calc((100% - $space * 2) / 3)",
                             sm: "100%",
@@ -205,12 +206,11 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                           }}
                           p="normal"
                           rounded="md"
-                          target="_blank"
                         >
                           <Image
+                            src={src}
                             alt={alt}
                             boxSize="full"
-                            src={src}
                             {...rest}
                             colorMode="light"
                           />
@@ -223,7 +223,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
 
               {CONSTANT.SPONSORS.GOLD.length ? (
                 <>
-                  <Heading as="h3" color="white" size="lg">
+                  <Heading as="h3" size="lg" color="white">
                     {t("home.support.gold-sponsors")}
                   </Heading>
 

@@ -79,9 +79,9 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       {rightIcon}
 
       {onClose ? (
-        <CloseButton isDisabled={isDisabled} onClick={onClose}>
-          <CloseIcon />
-        </CloseButton>
+        <TagCloseButton isDisabled={isDisabled} onClick={onClose}>
+          <TagCloseIcon />
+        </TagCloseButton>
       ) : null}
     </ui.span>
   )
@@ -90,7 +90,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
 Tag.displayName = "Tag"
 Tag.__ui__ = "Tag"
 
-const CloseIcon: FC = () => {
+const TagCloseIcon: FC = () => {
   return (
     <Icon fontSize="1.125rem" verticalAlign="inherit" viewBox="0 0 512 512">
       <path
@@ -101,14 +101,14 @@ const CloseIcon: FC = () => {
   )
 }
 
-CloseIcon.displayName = "CloseIcon"
-CloseIcon.__ui__ = "CloseIcon"
+TagCloseIcon.displayName = "TagCloseIcon"
+TagCloseIcon.__ui__ = "TagCloseIcon"
 
-interface CloseButtonProps extends HTMLUIProps<"span"> {
+interface TagCloseButtonProps extends HTMLUIProps<"span"> {
   isDisabled?: boolean
 }
 
-const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
+const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
   const [styles] = useComponentMultiStyle("Tag", props)
@@ -131,5 +131,5 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   )
 }
 
-CloseButton.displayName = "CloseButton"
-CloseButton.__ui__ = "CloseButton"
+TagCloseButton.displayName = "TagCloseButton"
+TagCloseButton.__ui__ = "TagCloseButton"

@@ -10,8 +10,6 @@ import {
   useIsPresent,
 } from "@yamada-ui/motion"
 import { useTimeout } from "@yamada-ui/use-timeout"
-import { useToken } from "@yamada-ui/use-token"
-import { useValue } from "@yamada-ui/use-value"
 import { calc, cx, noop, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
 import { createRef, memo, useEffect, useMemo, useRef, useState } from "react"
 
@@ -96,17 +94,30 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
       () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
-    const _top = useValue(gutter[0])
-    const _bottom = useValue(gutter[1])
-    const top = useToken("spaces", _top) ?? 0
-    const bottom = useToken("spaces", _bottom) ?? 0
+
+    const top = "var(--ui-top)"
+    const bottom = "var(--ui-bottom)"
     const negatedTop = calc(top).negate().toString()
     const negatedBottom = calc(bottom).negate().toString()
     const isShow = !!count || isExist
 
     const css: CSSUIObject = {
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
-      vars: [{ name: "space", token: "spaces", value: gap }],
+      vars: [
+        { name: "gap", token: "spaces", value: gap },
+        {
+          name: "top",
+          token: "spaces",
+          value: gutter[0] || "0px",
+          __prefix: "ui",
+        },
+        {
+          name: "bottom",
+          token: "spaces",
+          value: gutter[1] || "0px",
+          __prefix: "ui",
+        },
+      ],
       w: "100%",
     }
 
@@ -254,14 +265,14 @@ const SnackComponent = memo(
       const onMouseLeave = () => setDelay(duration)
 
       const zIndex = startIndex + index
-      const space = `calc($space * ${direction === "top" ? lastIndex : index})`
+      const gap = `calc($gap * ${direction === "top" ? lastIndex : index})`
 
       const css: CSSUIObject = {
         left: 0,
         maxW: "100%",
         position: "absolute",
         right: 0,
-        top: space,
+        top: gap,
         w: "100%",
         zIndex,
         ...style,

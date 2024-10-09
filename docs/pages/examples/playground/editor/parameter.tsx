@@ -57,8 +57,8 @@ export const Parameter: FC<ParameterProps> = memo(
 
           <Slider
             size="lg"
-            value={value}
             variant=""
+            value={value}
             onChange={setValue}
             {...rest}
           />

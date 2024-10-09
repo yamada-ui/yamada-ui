@@ -18,16 +18,16 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
       rounded: "inherit",
     },
     track: {
+      bg: ["blackAlpha.400", "whiteAlpha.300"],
+      rounded: "full",
+      transitionDuration: "fast",
+      transitionProperty: "common",
       _checked: {
         justifyContent: "flex-end",
       },
       _focusVisible: {
         boxShadow: "outline",
       },
-      bg: ["blackAlpha.400", "whiteAlpha.300"],
-      rounded: "full",
-      transitionDuration: "fast",
-      transitionProperty: "common",
     },
   },
 
@@ -68,12 +68,12 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
   },
 
   variants: {
-    thin: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    thin: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       thumb: {
+        boxShadow: "dark-md",
         _checked: {
           bg: [`${c}.500`, `${c}.600`],
         },
-        boxShadow: "dark-md",
       },
       track: {
         _checked: {
@@ -86,10 +86,10 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
     }),
     thick: ({ colorScheme: c = "primary" }) => ({
       track: {
+        p: "1",
         _checked: {
           bg: [`${c}.500`, `${c}.600`],
         },
-        p: "1",
       },
     }),
   },

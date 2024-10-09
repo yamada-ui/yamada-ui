@@ -115,12 +115,12 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    * The loading icon to use.
    */
   icon?: {
+    variant?: LoadingVariant
     children?: ReactNode
     /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
-    variant?: LoadingVariant
   }
   /**
    * If `true`, allows the notice to be removed.
@@ -201,12 +201,12 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    * The loading icon to use.
    */
   icon?: {
+    variant?: LoadingVariant
     children?: ReactNode
     /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
-    variant?: LoadingVariant
   }
   /**
    * If `true`, allows the snack to be removed.
@@ -292,6 +292,11 @@ export interface LoadingConfigOptions {
    */
   icon?: {
     /**
+     * The CSS `box-size` property.
+     */
+    size?: CSSUIProps["boxSize"]
+    variant?: LoadingVariant
+    /**
      * The CSS `color` property.
      */
     color?: CSSUIProps["color"]
@@ -299,11 +304,6 @@ export interface LoadingConfigOptions {
      * The CSS `color` property.
      */
     secondaryColor?: CSSUIProps["color"]
-    /**
-     * The CSS `box-size` property.
-     */
-    size?: CSSUIProps["boxSize"]
-    variant?: LoadingVariant
   }
   /**
    * If `true`, loaded from the initial rendering.

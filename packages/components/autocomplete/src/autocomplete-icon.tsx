@@ -35,8 +35,8 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
           maxHeight: "1em",
           maxWidth: "1em",
         },
-        focusable: false,
         "aria-hidden": true,
+        focusable: false,
       }),
     )
 

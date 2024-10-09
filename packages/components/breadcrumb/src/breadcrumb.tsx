@@ -335,15 +335,15 @@ export interface BreadcrumbLinkProps
     BreadcrumbLinkOptions {}
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
-  ({ className, children, href, isCurrentPage, ...rest }, ref) => {
+  ({ href, className, children, isCurrentPage, ...rest }, ref) => {
     const styles = useBreadcrumb()
 
     return (
       <ui.a
         ref={ref}
         as={!isCurrentPage ? "a" : "span"}
-        className={cx("ui-breadcrumb__link", className)}
         href={!isCurrentPage ? href : undefined}
+        className={cx("ui-breadcrumb__link", className)}
         aria-current={isCurrentPage ? "page" : undefined}
         __css={styles.link}
         {...rest}
@@ -410,13 +410,13 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
         <Icon
           ref={ref}
           className={cx("ui-breadcrumb__item__ellipsis", className)}
+          aria-label="ellipsis"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="1.5"
           viewBox="0 0 36 24"
           xmlns="http://www.w3.org/2000/svg"
-          aria-label="ellipsis"
           __css={css}
           {...rest}
         >

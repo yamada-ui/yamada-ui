@@ -19,10 +19,10 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
           bg: ["blackAlpha.200", "whiteAlpha.200"],
         },
         _hover: {
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
           _disabled: {
             bg: ["white", "black"],
           },
-          bg: ["blackAlpha.100", "whiteAlpha.100"],
         },
       },
       itemIcon: {},

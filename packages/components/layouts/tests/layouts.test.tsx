@@ -20,7 +20,7 @@ describe("<AspectRatio />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <AspectRatio>
-        <img alt="placeholder" src="https://image.xyz/source" />
+        <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
   })
@@ -154,11 +154,11 @@ describe("<Stack />", () => {
   test("renders all the allowed shorthand style props", () => {
     render(
       <Stack
+        data-testid="stack"
         align="stretch"
         direction="row"
         justify="start"
         wrap="nowrap"
-        data-testid="stack"
       >
         Stack
       </Stack>,

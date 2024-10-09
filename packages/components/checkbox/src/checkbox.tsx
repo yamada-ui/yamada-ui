@@ -124,10 +124,10 @@ export const useCheckbox = <
   } = useFormControlProps({ id, ...props })
   const [
     {
+      "aria-readonly": _ariaReadonly,
       disabled,
       readOnly,
       required,
-      "aria-readonly": _ariaReadonly,
       onBlur: onBlurProp,
       onFocus: onFocusProp,
       ...formControlProps
@@ -276,13 +276,13 @@ export const useCheckbox = <
         whiteSpace: "nowrap",
         width: "1px",
       },
+      "aria-checked": isIndeterminate ? "mixed" : checked,
       checked,
       disabled,
       readOnly,
       required,
       tabIndex,
       value,
-      "aria-checked": isIndeterminate ? "mixed" : checked,
       onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
       onChange: handlerAll(props.onChange, onChange),
       onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),

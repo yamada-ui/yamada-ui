@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer isOpen={isOpen} size={size} onClose={onClose}>
+      <Drawer size={size} isOpen={isOpen} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -466,9 +466,9 @@ export const scrollOnMount: Story = () => {
         textAlign="center"
       >
         <Image
+          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
           alt="ドラゴンボール"
           maxW="sm"
-          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

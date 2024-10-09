@@ -40,17 +40,17 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
       },
     }),
     spacer: ({
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
       direction: d,
       theme: t,
     }) => ({
       icon: {
+        transitionDuration: "slower",
+        transitionProperty: "common",
         _active: {
           color: ["transparent", "transparent"],
         },
-        transitionDuration: "slower",
-        transitionProperty: "common",
       },
       trigger: {
         ...(d === "vertical" ? { p: "1" } : { p: "1" }),
@@ -84,6 +84,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
           outline: "none",
         },
         _focusVisible: {
+          outline: "none",
           _after: {
             bg: isGray(c) ? "border" : `${c}.100`,
           },
@@ -94,7 +95,6 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
                 : transparentizeColor(`${c}.600`, 0.24)(t, m),
             },
           },
-          outline: "none",
         },
       },
     }),

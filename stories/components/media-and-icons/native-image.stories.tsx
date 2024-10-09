@@ -13,9 +13,9 @@ export default meta
 export const basic: Story = () => {
   return (
     <NativeImage
+      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
       alt="ドラゴンボール"
       height="512px"
-      src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
       width="512px"
     />
   )

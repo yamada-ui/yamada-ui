@@ -7,6 +7,10 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
   {
     baseStyle: {
       stepper: {
+        borderColor: "inherit",
+        borderStartWidth: "1px",
+        borderStyle: "solid",
+        color: ["blackAlpha.600", "whiteAlpha.700"],
         _active: {
           bg: ["blackAlpha.200", "whiteAlpha.200"],
         },
@@ -24,56 +28,52 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           mt: "-1px",
         },
         _readOnly: { cursor: "auto" },
-        borderColor: "inherit",
-        borderStartWidth: "1px",
-        borderStyle: "solid",
-        color: ["blackAlpha.600", "whiteAlpha.700"],
       },
     },
 
     sizes: {
       xs: {
         stepper: {
+          fontSize: "xs",
           _first: {
             borderTopEndRadius: "sm",
           },
           _last: {
             borderBottomEndRadius: "sm",
           },
-          fontSize: "xs",
         },
       },
       sm: {
         stepper: {
+          fontSize: "sm",
           _first: {
             borderTopEndRadius: "md",
           },
           _last: {
             borderBottomEndRadius: "md",
           },
-          fontSize: "sm",
         },
       },
       md: {
         stepper: {
+          fontSize: "md",
           _first: {
             borderTopEndRadius: "md",
           },
           _last: {
             borderBottomEndRadius: "md",
           },
-          fontSize: "md",
         },
       },
       lg: {
         stepper: {
+          fontSize: "lg",
           _first: {
             borderTopEndRadius: "md",
           },
           _last: {
             borderBottomEndRadius: "md",
           },
-          fontSize: "lg",
         },
       },
     },
@@ -81,6 +81,8 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
     variants: {
       flushed: {
         stepper: {
+          bg: "transparent",
+          border: "none",
           _active: {
             bg: "transparent",
             opacity: 0.7,
@@ -92,12 +94,12 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           _last: {
             border: "none",
           },
-          bg: "transparent",
-          border: "none",
         },
       },
       unstyled: {
         stepper: {
+          bg: "transparent",
+          border: "none",
           _active: {
             bg: "transparent",
           },
@@ -107,8 +109,6 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
           _last: {
             border: "none",
           },
-          bg: "transparent",
-          border: "none",
         },
       },
     },

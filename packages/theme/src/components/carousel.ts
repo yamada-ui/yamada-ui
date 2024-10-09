@@ -7,6 +7,10 @@ export const Carousel: ComponentMultiStyle<"Carousel"> = {
     },
     control: {},
     indicator: ({ orientation: o }) => ({
+      bg: ["whiteAlpha.400", "blackAlpha.400"],
+      rounded: "full",
+      transitionDuration: "slower",
+      transitionProperty: "common",
       _active: {
         bg: [`whiteAlpha.600`, `blackAlpha.600`],
       },
@@ -16,10 +20,6 @@ export const Carousel: ComponentMultiStyle<"Carousel"> = {
       _selected: {
         bg: [`whiteAlpha.700`, `blackAlpha.700`],
       },
-      bg: ["whiteAlpha.400", "blackAlpha.400"],
-      rounded: "full",
-      transitionDuration: "slower",
-      transitionProperty: "common",
       ...(o === "vertical" ? { h: "8", right: "4" } : { bottom: "4", w: "8" }),
     }),
     indicators: ({ orientation: o }) => ({

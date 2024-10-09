@@ -54,7 +54,7 @@ describe("<Dropzone />", () => {
 
   test("Is the isDisabled property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isDisabled variant="dashed">
+      <Dropzone variant="dashed" isDisabled>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
@@ -67,7 +67,7 @@ describe("<Dropzone />", () => {
 
   test("Is the isReadOnly property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isReadOnly variant="dashed">
+      <Dropzone variant="dashed" isReadOnly>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
@@ -80,7 +80,7 @@ describe("<Dropzone />", () => {
 
   test("Is the isLoading property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isLoading variant="dashed">
+      <Dropzone variant="dashed" isLoading>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )

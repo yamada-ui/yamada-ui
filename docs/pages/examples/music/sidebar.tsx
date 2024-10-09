@@ -29,11 +29,11 @@ import {
 } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 
-type MenuItem = {
+interface MenuItem extends Omit<ButtonProps, "children"> {
   label: string
   icon?: ElementType
   isSelected?: boolean
-} & Omit<ButtonProps, "children">
+}
 
 const DISCOVER_MENU_ITEMS: MenuItem[] = [
   {
@@ -91,9 +91,9 @@ const [SidebarProvider, useSidebar] = createContext<SidebarContext>({
   name: "SidebarContext",
 })
 
-export type SidebarProps = {
+export interface SidebarProps extends StackProps {
   isCollapse: boolean
-} & StackProps
+}
 
 export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
   const value = useMemo(() => ({ isCollapse }), [isCollapse])
@@ -122,12 +122,12 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
 
 Sidebar.displayName = "Sidebar"
 
-type SidebarGroupProps = {
+interface SidebarGroupProps extends StackProps {
   label: string
   items?: MenuItem[]
   buttonGroupProps?: ButtonGroupProps
   labelProps?: HeadingProps
-} & StackProps
+}
 
 const SidebarGroup: FC<SidebarGroupProps> = memo(
   ({ children, items, label, buttonGroupProps, labelProps, ...rest }) => {
@@ -139,7 +139,7 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
           display={isCollapse ? "none" : { base: "block", lg: "none" }}
           px="3"
         >
-          <Heading as="h3" fontWeight="semibold" size="md" {...labelProps}>
+          <Heading as="h3" size="md" fontWeight="semibold" {...labelProps}>
             {label}
           </Heading>
         </Box>
@@ -151,13 +151,13 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
                   <Box key={index} as="li">
                     <SidebarButton
                       colorScheme={isSelected ? "primary" : "gray"}
+                      variant={isSelected ? "solid" : "ghost"}
                       icon={
                         <Icon
                           as={icon}
                           color={isSelected ? "white" : "muted"}
                         />
                       }
-                      variant={isSelected ? "solid" : "ghost"}
                       {...rest}
                     >
                       {label}
@@ -174,9 +174,9 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
 
 SidebarGroup.displayName = "SidebarGroup"
 
-type SidebarButtonProps = {
+interface SidebarButtonProps extends ButtonProps {
   icon?: ReactElement
-} & ButtonProps
+}
 
 const SidebarButton: FC<SidebarButtonProps> = memo(
   ({ children, icon, ...rest }) => {

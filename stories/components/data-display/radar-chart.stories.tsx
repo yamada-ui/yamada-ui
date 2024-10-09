@@ -83,10 +83,10 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <RadarChart data={data} dataKey="fruit" series={series} size="sm" />
-      <RadarChart data={data} dataKey="fruit" series={series} size="md" />
-      <RadarChart data={data} dataKey="fruit" series={series} size="lg" />
-      <RadarChart data={data} dataKey="fruit" series={series} size="full" />
+      <RadarChart size="sm" data={data} dataKey="fruit" series={series} />
+      <RadarChart size="md" data={data} dataKey="fruit" series={series} />
+      <RadarChart size="lg" data={data} dataKey="fruit" series={series} />
+      <RadarChart size="full" data={data} dataKey="fruit" series={series} />
     </>
   )
 }

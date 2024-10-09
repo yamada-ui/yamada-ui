@@ -367,9 +367,9 @@ export const useMonth = () => {
       const label = getFormattedLabel(month, locale, dateFormat)
 
       return {
-        role: "grid",
         "aria-label": label,
         "aria-multiselectable": ariaAttr(isMulti),
+        role: "grid",
         ...props,
         onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
       }
@@ -458,7 +458,6 @@ export const useMonth = () => {
         isStart,
         isWeekend,
         ...props,
-        tabIndex: !!index || isControlled ? -1 : isShouldFocus ? 0 : -1,
         "aria-disabled": ariaAttr(isTrulyDisabled),
         "aria-selected": ariaAttr(isTrulySelected),
         "data-between": dataAttr(isBetween),
@@ -471,6 +470,7 @@ export const useMonth = () => {
         "data-today": dataAttr(isToday),
         "data-value": value.getDate(),
         "data-weekend": dataAttr(isWeekend),
+        tabIndex: !!index || isControlled ? -1 : isShouldFocus ? 0 : -1,
         onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(
           () => onPointerEnter(value),

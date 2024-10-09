@@ -12,6 +12,7 @@ import type { Merge } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import {
   forwardRef,
+  mergeVars,
   omitThemeProps,
   ui,
   useComponentMultiStyle,
@@ -136,6 +137,7 @@ export const useRangeSlider = ({
   let {
     id,
     name,
+    "aria-valuetext": ariaValueText,
     betweenThumbs = 0,
     defaultValue,
     isReversed,
@@ -145,17 +147,16 @@ export const useRangeSlider = ({
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
-    "aria-valuetext": ariaValueText,
     onChange,
     onChangeEnd: onChangeEndProp,
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const {
+    "aria-readonly": ariaReadonly,
     disabled,
     readOnly,
     required,
-    "aria-readonly": ariaReadonly,
     onBlur,
     onFocus,
     ...formControlProps
@@ -175,9 +176,9 @@ export const useRangeSlider = ({
     onChange,
   })
 
+  const uuid = useId()
   const [isDragging, setDragging] = useState(false)
   const [isFocused, setFocused] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(-1)
   const isInteractive = !(disabled || readOnly)
 
   const tenStep = (max - min) / 10
@@ -217,9 +218,12 @@ export const useRangeSlider = ({
     valueBounds,
     values,
   })
+
+  const activeIndexRef = useRef<number>(-1)
   const eventSourceRef = useRef<"keyboard" | "pointer" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
+
   const thumbSizes = useSizes({
     getNodes: () => {
       const nodes =
@@ -228,7 +232,6 @@ export const useRangeSlider = ({
       return nodes ? Array.from(nodes) : []
     },
   })
-  const uuid = useId()
 
   id ??= uuid
   name ??= id
@@ -242,13 +245,12 @@ export const useRangeSlider = ({
 
   usePanEvent(containerRef, {
     onMove: (ev) => {
+      const activeIndex = activeIndexRef.current
       const { isInteractive } = latestRef.current
 
       if (!isInteractive || activeIndex == -1) return
 
       const pointValue = getValueFromPointer(ev) || 0
-
-      setActiveIndex(activeIndex)
 
       constrain(activeIndex, pointValue)
 
@@ -286,7 +288,8 @@ export const useRangeSlider = ({
       if (isThumbStacked && pointValue > values[i]!)
         i = i + thumbsPosition.length - 1
 
-      setActiveIndex(i)
+      activeIndexRef.current = i
+
       constrain(i, pointValue)
       focusThumb(i)
 
@@ -322,9 +325,7 @@ export const useRangeSlider = ({
   )
 
   const focusThumb = useCallback(
-    (i?: number) => {
-      i ??= activeIndex
-
+    (i: number) => {
       if (i === -1 || !focusThumbOnChange) return
 
       const id = getThumbId(i)
@@ -333,7 +334,7 @@ export const useRangeSlider = ({
 
       if (el) setTimeout(() => el.focus())
     },
-    [activeIndex, focusThumbOnChange, getThumbId],
+    [focusThumbOnChange, getThumbId],
   )
 
   const constrain = useCallback(
@@ -385,6 +386,7 @@ export const useRangeSlider = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
+      const activeIndex = activeIndexRef.current
       const { valueBounds } = latestRef.current
       const { max = 100, min = 0 } = valueBounds[activeIndex] ?? {}
 
@@ -410,7 +412,7 @@ export const useRangeSlider = ({
 
       eventSourceRef.current = "keyboard"
     },
-    [activeIndex, constrain, latestRef, stepDown, stepUp, tenStep],
+    [constrain, latestRef, stepDown, stepUp, tenStep],
   )
 
   useUpdateEffect(() => {
@@ -421,8 +423,8 @@ export const useRangeSlider = ({
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      let w: number | string = "$thumbSize"
-      let h: number | string = "$thumbSize"
+      let w: number | string = "var(--ui-thumb-size)"
+      let h: number | string = "var(--ui-thumb-size)"
 
       if (thumbSizes.length) {
         const p = isVertical ? "height" : "width"
@@ -430,11 +432,11 @@ export const useRangeSlider = ({
         const { height, width } =
           thumbSizes.reduce((a = z, b = z) => (a[p] > b[p] ? a : b), z) ?? {}
 
-        if (width) w = width
-        if (height) h = height
+        if (width) w = `${width}px`
+        if (height) h = `${height}px`
       }
 
-      const padding = isVertical
+      const paddingStyle = isVertical
         ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
         : { paddingBottom: `calc(${h} / 2)`, paddingTop: `calc(${h} / 2)` }
 
@@ -445,7 +447,7 @@ export const useRangeSlider = ({
         touchAction: "none",
         userSelect: "none",
         WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-        ...padding,
+        ...paddingStyle,
       }
 
       return {
@@ -455,13 +457,14 @@ export const useRangeSlider = ({
         ref: mergeRefs(ref, containerRef),
         style,
         tabIndex: -1,
-        vars: [
+        vars: mergeVars(rest.vars, [
           {
-            name: "thumbSize",
+            name: "thumb-size",
             token: "sizes",
             value: thumbSizeProp,
+            __prefix: "ui",
           },
-        ],
+        ]),
       }
     },
     [id, isVertical, rest, thumbSizeProp, thumbSizes],
@@ -596,8 +599,8 @@ export const useRangeSlider = ({
   > = useCallback(
     ({ index: i, ...props }, ref = null) => {
       const n = thumbPercents[i]
-      let w: number | string = "$thumbSize"
-      let h: number | string = "$thumbSize"
+      let w: number | string = "var(--ui-thumb-size)"
+      let h: number | string = "var(--ui-thumb-size)"
 
       if (thumbSizes[i]) {
         w = `${thumbSizes[i]?.width}px`
@@ -630,23 +633,25 @@ export const useRangeSlider = ({
         id: getThumbId(i),
         ref,
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-orientation": orientation,
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
         "aria-valuetext": ariaValueText ?? value.toString(),
         "data-active": dataAttr(
-          isDragging && focusThumbOnChange && activeIndex === i,
+          isDragging && focusThumbOnChange && activeIndexRef.current === i,
         ),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => {
+          activeIndexRef.current = -1
+
           setFocused(false)
-          setActiveIndex(-1)
         }),
         onFocus: handlerAll(props.onFocus, onFocus, () => {
+          activeIndexRef.current = i
+
           setFocused(true)
-          setActiveIndex(i)
         }),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }
@@ -664,7 +669,6 @@ export const useRangeSlider = ({
       min,
       max,
       isDragging,
-      activeIndex,
       orientation,
       ariaValueText,
       onKeyDown,
@@ -681,7 +685,6 @@ export const useRangeSlider = ({
     isFocused,
     isVertical,
     reset,
-    setActiveIndex,
     stepDown,
     stepUp,
     values,

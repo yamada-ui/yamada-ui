@@ -15,13 +15,13 @@ export const basic: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
         onDrag={(_, info) => console.log("Drag", info)}
         onDragEnd={(_, info) => console.log("Drag ends", info)}
         onDragStart={(_, info) => console.log("Drag starts", info)}
@@ -34,17 +34,16 @@ export const withConstraints: Story = () => {
   return (
     <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag="x"
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
 
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="secondary"
         cursor="grab"
         drag
@@ -52,6 +51,7 @@ export const withConstraints: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -68,7 +68,6 @@ export const withConstraintsRef: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -76,6 +75,7 @@ export const withConstraintsRef: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -92,7 +92,6 @@ export const withElastic: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -101,6 +100,7 @@ export const withElastic: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -117,7 +117,6 @@ export const withMomentum: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -126,6 +125,7 @@ export const withMomentum: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -142,7 +142,6 @@ export const withTransition: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -151,6 +150,7 @@ export const withTransition: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -168,7 +168,6 @@ export const usePropagation: Story = () => {
     >
       <Motion
         ref={itemRef}
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -177,9 +176,9 @@ export const usePropagation: Story = () => {
         p="md"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       >
         <Motion
-          _active={{ cursor: "grabbing" }}
           bg="secondary"
           cursor="grab"
           drag
@@ -188,6 +187,7 @@ export const usePropagation: Story = () => {
           h="4xs"
           rounded="3xl"
           w="4xs"
+          _active={{ cursor: "grabbing" }}
         />
       </Motion>
     </Center>
@@ -215,7 +215,6 @@ export const useControls: Story = () => {
       />
 
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -224,6 +223,7 @@ export const useControls: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )
@@ -250,7 +250,6 @@ export const disabledListener: Story = () => {
       />
 
       <Motion
-        _active={{ cursor: "grabbing" }}
         bg="primary"
         cursor="grab"
         drag
@@ -260,6 +259,7 @@ export const disabledListener: Story = () => {
         h="2xs"
         rounded="3xl"
         w="2xs"
+        _active={{ cursor: "grabbing" }}
       />
     </Center>
   )

@@ -169,8 +169,8 @@ export const useYearList = () => {
   const getGridProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
-      role: "grid",
       "aria-label": ariaLabel,
+      role: "grid",
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
     }),
@@ -202,12 +202,12 @@ export const useYearList = () => {
         ref: mergeRefs(ref, yearRefs.current.get(index)),
         disabled: isDisabled,
         ...props,
-        tabIndex,
         "aria-disabled": ariaAttr(isDisabled),
         "aria-selected": ariaAttr(isSelected),
         "data-disabled": dataAttr(isDisabled),
         "data-selected": dataAttr(isSelected),
         "data-value": value,
+        tabIndex,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },

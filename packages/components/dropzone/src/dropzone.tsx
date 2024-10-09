@@ -186,7 +186,8 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
         data-loading={dataAttr(isLoading)}
         data-reject={dataAttr(isDragReject)}
       >
-        <LoadingOverlay loadingProps={loadingProps} {...overlayProps} />
+        <DropzoneLoadingOverlay loadingProps={loadingProps} {...overlayProps} />
+
         <ui.input
           id={id}
           ref={ref}
@@ -203,11 +204,14 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 Dropzone.displayName = "Dropzone"
 Dropzone.__ui__ = "Dropzone"
 
-interface LoadingOverlayProps extends FadeProps {
+interface DropzoneLoadingOverlayProps extends FadeProps {
   loadingProps?: LoadingProps
 }
 
-const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
+const DropzoneLoadingOverlay: FC<DropzoneLoadingOverlayProps> = ({
+  loadingProps,
+  ...rest
+}) => {
   const { isLoading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
@@ -239,8 +243,8 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   )
 }
 
-LoadingOverlay.displayName = "LoadingOverlay"
-LoadingOverlay.__ui__ = "LoadingOverlay"
+DropzoneLoadingOverlay.displayName = "DropzoneLoadingOverlay"
+DropzoneLoadingOverlay.__ui__ = "DropzoneLoadingOverlay"
 
 export const DropzoneAccept: FC<PropsWithChildren> = ({ children }) => {
   const { isDragAccept } = useDropzoneContext()

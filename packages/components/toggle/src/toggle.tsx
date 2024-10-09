@@ -171,12 +171,12 @@ export const Toggle = forwardRef(
         ref={ref}
         type="button"
         className={cx("ui-toggle", className)}
-        disabled={isDisabled}
-        tabIndex={isReadOnly ? -1 : 0}
         aria-pressed={trulySelected}
         data-active={dataAttr(isActive)}
         data-readonly={dataAttr(isReadOnly)}
         data-selected={dataAttr(trulySelected)}
+        disabled={isDisabled}
+        tabIndex={isReadOnly ? -1 : 0}
         __css={css}
         {...rest}
         onClick={handlerAll(rest.onClick, onClick)}

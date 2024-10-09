@@ -12,6 +12,7 @@ import type { Merge } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import {
   forwardRef,
+  mergeVars,
   omitThemeProps,
   ui,
   useComponentMultiStyle,
@@ -34,6 +35,7 @@ import {
   handlerAll,
   includesChildren,
   isEmpty,
+  isNumber,
   mergeRefs,
   omitChildren,
   percentToValue,
@@ -145,6 +147,7 @@ export const useSlider = ({
   let {
     id,
     name,
+    "aria-valuetext": ariaValueText,
     defaultValue,
     isReversed,
     max = 100,
@@ -153,17 +156,16 @@ export const useSlider = ({
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
-    "aria-valuetext": ariaValueText,
     onChange,
     onChangeEnd: onChangeEndProp,
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const {
+    "aria-readonly": ariaReadonly,
     disabled,
     readOnly,
     required,
-    "aria-readonly": ariaReadonly,
     onBlur,
     onFocus,
     ...formControlProps
@@ -353,12 +355,15 @@ export const useSlider = ({
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const { height: h, width: w } = thumbSize ?? {
-        height: "$thumbSize",
-        width: "$thumbSize",
+      let { height: h, width: w } = thumbSize ?? {
+        height: "var(--ui-thumb-size)",
+        width: "var(--ui-thumb-size)",
       }
 
-      const padding = isVertical
+      if (isNumber(w)) w = `${w}px`
+      if (isNumber(h)) h = `${h}px`
+
+      const paddingStyle = isVertical
         ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
         : { paddingBottom: `calc(${h} / 2)`, paddingTop: `calc(${h} / 2)` }
 
@@ -369,7 +374,7 @@ export const useSlider = ({
         touchAction: "none",
         userSelect: "none",
         WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-        ...padding,
+        ...paddingStyle,
       }
 
       return {
@@ -378,13 +383,14 @@ export const useSlider = ({
         ref: mergeRefs(ref, containerRef),
         style,
         tabIndex: -1,
-        vars: [
+        vars: mergeVars(rest.vars, [
           {
-            name: "thumbSize",
+            name: "thumb-size",
             token: "sizes",
             value: thumbSizeProp,
+            __prefix: "ui",
           },
-        ],
+        ]),
       }
     },
     [isVertical, rest, thumbSize, thumbSizeProp],
@@ -507,8 +513,8 @@ export const useSlider = ({
   const getThumbProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
-      let w: number | string = "$thumbSize"
-      let h: number | string = "$thumbSize"
+      let w: number | string = "var(--ui-thumb-size)"
+      let h: number | string = "var(--ui-thumb-size)"
 
       if (thumbSize) {
         w = `${thumbSize.width}px`
@@ -533,14 +539,14 @@ export const useSlider = ({
         ...props,
         ref: mergeRefs(ref, thumbRef),
         style,
-        role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         "aria-orientation": orientation,
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
         "aria-valuetext": ariaValueText ?? value.toString(),
         "data-active": dataAttr(isDragging && focusThumbOnChange),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
         onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),

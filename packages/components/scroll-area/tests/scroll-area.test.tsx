@@ -5,7 +5,7 @@ import { Content } from "./content"
 describe("<ScrollArea />", () => {
   test("renders with no errors", async () => {
     const { container, getByTestId } = render(
-      <ScrollArea h="xs" data-testid="ScrollArea">
+      <ScrollArea data-testid="ScrollArea" h="xs">
         <Content />
       </ScrollArea>,
     )

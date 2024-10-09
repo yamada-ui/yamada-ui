@@ -369,6 +369,8 @@ export const useCarousel = ({
       ref,
       role: "region",
       "aria-roledescription": "carousel",
+      "aria-label": "Highlighted sections",
+      "aria-live": autoplay ? "off" : "polite",
       vars: mergeVars(vars, [
         { name: "gap", token: "spaces", value: gap },
         { name: "slideSize", token: "sizes", value: slideSize },
@@ -380,7 +382,7 @@ export const useCarousel = ({
         setIsMouseEnter(false)
       }),
     }),
-    [containerProps, gap, slideSize, vars],
+    [autoplay, containerProps, gap, slideSize, vars],
   )
 
   const getSlidesProps: PropGetter = useCallback(
@@ -412,10 +414,11 @@ export interface UseCarouselSlideProps {
 }
 
 export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
-  const { selectedIndex, slidesToScroll } = useCarouselContext()
+  const { selectedIndex, slidesToScroll, indexes } = useCarouselContext()
 
   index = Math.floor((index ?? 0) / slidesToScroll)
 
+  const totalSlides = indexes.length
   const isSelected = index === selectedIndex
 
   const getSlideProps: PropGetter = useCallback(
@@ -423,10 +426,11 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
       ...props,
       role: "group",
       "aria-roledescription": "slide",
+      "aria-label": `${index + 1} of ${totalSlides}`,
       "data-index": index,
       "data-selected": dataAttr(isSelected),
     }),
-    [isSelected, index],
+    [index, isSelected, totalSlides],
   )
 
   return { getSlideProps }
@@ -466,6 +470,7 @@ export const useCarouselControl = ({
       ...props,
       ref,
       disabled,
+      "aria-label": "Carousel items",
       onClick: handlerAll(props.onClick, onClick),
     }),
     [disabled, onClick],

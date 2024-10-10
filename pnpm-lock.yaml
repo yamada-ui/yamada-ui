@@ -2862,9 +2862,9 @@ importers:
         specifier: workspace:*
         version: link:../../utils
     devDependencies:
-      '@yamada-ui/react':
+      '@yamada-ui/lucide':
         specifier: workspace:*
-        version: link:../../react
+        version: link:../lucide
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

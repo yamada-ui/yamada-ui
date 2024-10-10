@@ -1,9 +1,9 @@
 import type { Plugin } from "unified"
 import { serialize } from "next-mdx-remote/serialize"
+import rehypeSlug from "rehype-slug"
 import remarkBreaks from "remark-breaks"
 import remarkEmoji from "remark-emoji"
 import remarkGfm from "remark-gfm"
-import remarkSlug from "remark-slug"
 import { visit } from "unist-util-visit"
 
 const rehypeCodeMeta: Plugin = () => (tree) => {
@@ -126,14 +126,8 @@ const insertElement =
 export const mdx = async (source: string) => {
   const mdxSource = await serialize(source, {
     mdxOptions: {
-      rehypePlugins: [rehypeCodeMeta],
-      remarkPlugins: [
-        remarkSlug as Plugin,
-        remarkGfm,
-        remarkEmoji,
-        remarkUIComponent,
-        remarkBreaks,
-      ],
+      rehypePlugins: [rehypeCodeMeta, rehypeSlug],
+      remarkPlugins: [remarkGfm, remarkEmoji, remarkUIComponent, remarkBreaks],
     },
   })
 

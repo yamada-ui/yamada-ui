@@ -31,6 +31,8 @@ import {
   isArray,
   isContains,
   isHTMLElement,
+  isNumber,
+  isString,
   isUndefined,
   mergeRefs,
   omitObject,
@@ -934,12 +936,33 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
 
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-
+  const hasPlaceholder = !!placeholder && placeholderInOptions
+  const isPlaceholder = hasPlaceholder && index === 0
   const isMulti = isArray(value)
+
+  if (!isPlaceholder && isUndefined(optionValue)) {
+    if (isString(children) || isNumber(children)) {
+      optionValue = children.toString()
+    } else {
+      console.warn(
+        `${
+          !isMulti ? "Select" : "MultiSelect"
+        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+      )
+    }
+  }
+
+  if (hasPlaceholder && index > 0 && !optionValue) {
+    console.warn(
+      `${
+        !isMulti ? "Select" : "MultiSelect"
+      }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
+    )
+  }
+
   const isDuplicated = !isMulti
     ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
-
   const isSelected =
     !isDuplicated &&
     (!isMulti
@@ -947,13 +970,6 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       : value.includes(optionValue ?? ""))
   const isFocused = index === focusedIndex
 
-  if (!!placeholder && index > 0 && placeholderInOptions && !optionValue) {
-    console.warn(
-      `${
-        !isMulti ? "Select" : "MultiSelect"
-      }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
-    )
-  }
   const onClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
       ev.preventDefault()

@@ -93,6 +93,9 @@ export const CheckIcon: FC<IconProps> = (props) => {
   )
 }
 
+CheckIcon.displayName = "CheckIcon"
+CheckIcon.__ui__ = "CheckIcon"
+
 export const InfoIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 24 24" {...props}>
@@ -103,6 +106,9 @@ export const InfoIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+
+InfoIcon.displayName = "InfoIcon"
+InfoIcon.__ui__ = "InfoIcon"
 
 export const WarningIcon: FC<IconProps> = (props) => {
   return (
@@ -115,6 +121,9 @@ export const WarningIcon: FC<IconProps> = (props) => {
   )
 }
 
+WarningIcon.displayName = "WarningIcon"
+WarningIcon.__ui__ = "WarningIcon"
+
 export const CloseIcon: FC<IconProps> = (props) => {
   return (
     <Icon aria-hidden focusable="false" viewBox="0 0 24 24" {...props}>
@@ -125,6 +134,9 @@ export const CloseIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+
+CloseIcon.displayName = "CloseIcon"
+CloseIcon.__ui__ = "CloseIcon"
 
 export const ChevronIcon: FC<IconProps> = (props) => {
   return (
@@ -137,13 +149,5 @@ export const ChevronIcon: FC<IconProps> = (props) => {
   )
 }
 
-CheckIcon.displayName = "CheckIcon"
-CheckIcon.__ui__ = "CheckIcon"
-InfoIcon.displayName = "InfoIcon"
-InfoIcon.__ui__ = "InfoIcon"
-WarningIcon.displayName = "WarningIcon"
-WarningIcon.__ui__ = "WarningIcon"
-CloseIcon.displayName = "CloseIcon"
-CloseIcon.__ui__ = "CloseIcon"
 ChevronIcon.displayName = "ChevronIcon"
 ChevronIcon.__ui__ = "ChevronIcon"

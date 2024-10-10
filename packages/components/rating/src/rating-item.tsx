@@ -113,7 +113,7 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 RatingIcon.displayName = "RatingIcon"
 RatingIcon.__ui__ = "RatingIcon"
 
-type RatingStarIconProps = IconProps
+interface RatingStarIconProps extends IconProps {}
 
 const RatingStarIcon: FC<RatingStarIconProps> = ({ ...rest }) => {
   return (

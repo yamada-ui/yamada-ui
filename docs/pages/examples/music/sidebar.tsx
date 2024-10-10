@@ -29,11 +29,11 @@ import {
 } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 
-type MenuItem = {
+interface MenuItem extends Omit<ButtonProps, "children"> {
   label: string
   icon?: ElementType
   isSelected?: boolean
-} & Omit<ButtonProps, "children">
+}
 
 const DISCOVER_MENU_ITEMS: MenuItem[] = [
   {
@@ -91,9 +91,9 @@ const [SidebarProvider, useSidebar] = createContext<SidebarContext>({
   name: "SidebarContext",
 })
 
-export type SidebarProps = {
+export interface SidebarProps extends StackProps {
   isCollapse: boolean
-} & StackProps
+}
 
 export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
   const value = useMemo(() => ({ isCollapse }), [isCollapse])
@@ -122,12 +122,12 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
 
 Sidebar.displayName = "Sidebar"
 
-type SidebarGroupProps = {
+interface SidebarGroupProps extends StackProps {
   label: string
   items?: MenuItem[]
   buttonGroupProps?: ButtonGroupProps
   labelProps?: HeadingProps
-} & StackProps
+}
 
 const SidebarGroup: FC<SidebarGroupProps> = memo(
   ({ children, items, label, buttonGroupProps, labelProps, ...rest }) => {
@@ -174,9 +174,9 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
 
 SidebarGroup.displayName = "SidebarGroup"
 
-type SidebarButtonProps = {
+interface SidebarButtonProps extends ButtonProps {
   icon?: ReactElement
-} & ButtonProps
+}
 
 const SidebarButton: FC<SidebarButtonProps> = memo(
   ({ children, icon, ...rest }) => {

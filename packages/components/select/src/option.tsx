@@ -60,7 +60,7 @@ export const Option = forwardRef<OptionProps, "li">(
 Option.displayName = "Option"
 Option.__ui__ = "Option"
 
-type OptionIconProps = HTMLUIProps<"span">
+interface OptionIconProps extends HTMLUIProps<"span"> {}
 
 const OptionIcon = forwardRef<OptionIconProps, "span">(
   ({ className, ...rest }, ref) => {

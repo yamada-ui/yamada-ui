@@ -11,14 +11,15 @@ export const {
   useDescendantsContext: useTabsDescendantsContext,
 } = createDescendant<HTMLButtonElement>()
 
-type TabsContext = {
+interface TabsContext
+  extends Omit<TabsOptions, "defaultIndex" | "index" | "onChange"> {
   disableRipple: boolean
   focusedIndex: number
   selectedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
-} & Omit<TabsOptions, "defaultIndex" | "index" | "onChange">
+}
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({
   name: "TabsContext",

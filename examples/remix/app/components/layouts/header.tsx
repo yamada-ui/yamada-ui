@@ -101,9 +101,9 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = {
+interface ColorModeButtonProps extends IconButtonProps {
   menuProps?: MenuProps
-} & IconButtonProps
+}
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(
   ({ menuProps, ...rest }) => {
@@ -167,9 +167,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-type ThemeSchemeButtonProps = {
+interface ThemeSchemeButtonProps extends IconButtonProps {
   popoverProps?: PopoverProps
-} & IconButtonProps
+}
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {

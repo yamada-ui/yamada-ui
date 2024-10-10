@@ -138,13 +138,13 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
       ref={ref}
       type="button"
       className={cx("ui-rotate", `ui-rotate--${value}`, className)}
+      data-disabled={dataAttr(isDisabled)}
+      data-readonly={dataAttr(isReadOnly)}
+      data-value={value}
       animate={animate}
       custom={rotate}
       disabled={isDisabled}
       initial={{ opacity, rotate: "0deg" }}
-      data-disabled={dataAttr(isDisabled)}
-      data-readonly={dataAttr(isReadOnly)}
-      data-value={value}
       onClick={onClick}
       __css={css}
       {...rest}

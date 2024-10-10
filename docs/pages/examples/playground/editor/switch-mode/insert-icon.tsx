@@ -7,13 +7,13 @@ export const InsertIcon = forwardRef<SVGSVGElement, IconProps>(
     return (
       <Icon
         ref={ref}
+        aria-hidden="true"
         boxSize={boxSize}
         fill="currentColor"
         focusable="false"
         stroke="none"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
         {...rest}
       >
         <path

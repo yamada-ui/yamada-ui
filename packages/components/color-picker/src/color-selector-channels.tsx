@@ -67,7 +67,7 @@ export const ColorSelectorChannel = forwardRef<
   "input"
 >(({ className, channelLabel, ...rest }, ref) => {
   const id = useId()
-  let { disabled, readOnly, size, styles } = useColorSelectorContext()
+  let { size, disabled, readOnly, styles } = useColorSelectorContext()
 
   if (size === "full") size = "lg"
 

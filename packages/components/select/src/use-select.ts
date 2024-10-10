@@ -658,9 +658,9 @@ export const useSelect = <T extends MaybeValue = string>(
 
       return {
         ref: mergeRefs(fieldRef, ref),
+        "aria-label": ariaLabel,
         role: "combobox",
         tabIndex: 0,
-        "aria-label": ariaLabel,
         ...fieldProps,
         ...props,
         "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
@@ -772,10 +772,10 @@ export const useSelectList = () => {
     (props = {}, ref = null) => ({
       id,
       ref: mergeRefs(listRef, ref),
+      "aria-multiselectable": ariaAttr(isMulti),
       position: "relative",
       role: "listbox",
       tabIndex: -1,
-      "aria-multiselectable": ariaAttr(isMulti),
       ...props,
     }),
     [id, isMulti, listRef],
@@ -853,8 +853,8 @@ export const useSelectOptionGroup = ({
 
       return {
         ref,
-        role: "group",
         "aria-label": ariaLabel,
+        role: "group",
         ...props,
         ...groupProps,
         "data-label": label,
@@ -1020,12 +1020,12 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
         ...computedProps,
         ...props,
         style: omitSelectedValues && isSelected ? style : undefined,
-        tabIndex: -1,
         "aria-checked": ariaAttr(isSelected),
         "aria-disabled": ariaAttr(isDisabled),
         "data-disabled": dataAttr(isDisabled),
         "data-focus": dataAttr(isFocused),
         "data-value": optionValue ?? "",
+        tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },

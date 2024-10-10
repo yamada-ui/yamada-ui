@@ -41,8 +41,8 @@ export const withName: Story = () => {
 export const withImage: Story = () => {
   return (
     <Avatar
-      alt="Hirotomo Yamada"
       src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      alt="Hirotomo Yamada"
     />
   )
 }
@@ -50,9 +50,9 @@ export const withImage: Story = () => {
 export const withFallback: Story = () => {
   return (
     <Wrap gap="md">
-      <Avatar bg="secondary" src="https://not-found.com" />
-      <Avatar alt="alternative text" src="https://not-found.com" />
-      <Avatar icon={<Ghost fontSize="2xl" />} src="https://not-found.com" />
+      <Avatar src="https://not-found.com" bg="secondary" />
+      <Avatar src="https://not-found.com" alt="alternative text" />
+      <Avatar src="https://not-found.com" icon={<Ghost fontSize="2xl" />} />
     </Wrap>
   )
 }

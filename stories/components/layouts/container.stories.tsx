@@ -23,9 +23,9 @@ export const basic: Story = () => {
       textAlign="center"
     >
       <Image
+        src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         alt="ドラゴンボール"
         maxW="sm"
-        src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
       />
 
       <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

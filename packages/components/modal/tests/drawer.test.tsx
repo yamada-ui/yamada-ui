@@ -21,16 +21,16 @@ describe("<Drawer />", () => {
         </button>
 
         <Drawer
-          isOpen={isOpen}
           data-testid="Drawer"
+          isOpen={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <DrawerOverlay
+            data-testid="DrawerOverlay"
             backdropFilter="blur(10px)"
             bg="blackAlpha.300"
-            data-testid="DrawerOverlay"
           />
-          <DrawerCloseButton color="red.500" data-testid="DrawerCloseButton" />
+          <DrawerCloseButton data-testid="DrawerCloseButton" color="red.500" />
           <DrawerHeader data-testid="DrawerHeader">header</DrawerHeader>
           <DrawerBody data-testid="DrawerBody">body</DrawerBody>
           <DrawerFooter data-testid="DrawerFooter">footer</DrawerFooter>
@@ -72,18 +72,18 @@ describe("<Drawer />", () => {
         </button>
 
         <Drawer
+          data-testid="Drawer"
           closeOnDrag
           isOpen={isOpen}
           placement={placement}
-          data-testid="Drawer"
           onClose={() => setIsOpen(false)}
         >
           <DrawerOverlay
+            data-testid="DrawerOverlay"
             backdropFilter="blur(10px)"
             bg="blackAlpha.300"
-            data-testid="DrawerOverlay"
           />
-          <DrawerCloseButton color="red.500" data-testid="DrawerCloseButton" />
+          <DrawerCloseButton data-testid="DrawerCloseButton" color="red.500" />
           <DrawerHeader data-testid="DrawerHeader">header</DrawerHeader>
           <DrawerBody data-testid="DrawerBody">body</DrawerBody>
           <DrawerFooter data-testid="DrawerFooter">footer</DrawerFooter>

@@ -82,11 +82,11 @@ export interface DrawerProps
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = motionForwardRef<DrawerProps, "div">(
-  ({ closeOnDrag = false, placement = "right", size, ...props }, ref) => {
+  ({ size, closeOnDrag = false, placement = "right", ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Drawer", {
+      size,
       closeOnDrag,
       placement,
-      size,
       ...props,
     })
     const {

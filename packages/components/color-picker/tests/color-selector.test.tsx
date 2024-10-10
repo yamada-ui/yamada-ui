@@ -15,7 +15,7 @@ describe("<ColorSelector />", () => {
   test("ColorSelector with eye dropper", () => {
     mockEyeDropper()
 
-    render(<ColorSelector withEyeDropper data-testid="ColorSelector" />)
+    render(<ColorSelector data-testid="ColorSelector" withEyeDropper />)
 
     const buttons = screen.getAllByRole("button")
 

@@ -15,8 +15,8 @@ export interface RatingItemProps
 export const RatingItem = forwardRef<RatingItemProps, "input">(
   ({ className, color, fractionValue, groupValue, value, ...rest }, ref) => {
     const {
-      emptyIcon = <StarIcon />,
-      filledIcon = <StarIcon />,
+      emptyIcon = <RatingStarIcon />,
+      filledIcon = <RatingStarIcon />,
       styles,
       inputProps,
       itemProps,
@@ -87,8 +87,8 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
         maxHeight: "1em",
         maxWidth: "1em",
       },
-      focusable: false,
       "aria-hidden": true,
+      focusable: false,
     }),
   )
 
@@ -113,9 +113,9 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 RatingIcon.displayName = "RatingIcon"
 RatingIcon.__ui__ = "RatingIcon"
 
-type StarIconProps = IconProps
+interface RatingStarIconProps extends IconProps {}
 
-const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
+const RatingStarIcon: FC<RatingStarIconProps> = ({ ...rest }) => {
   return (
     <Icon
       strokeLinecap="round"
@@ -128,5 +128,5 @@ const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
   )
 }
 
-StarIcon.displayName = "StarIcon"
-StarIcon.__ui__ = "StarIcon"
+RatingStarIcon.displayName = "RatingStarIcon"
+RatingStarIcon.__ui__ = "RatingStarIcon"

@@ -13,9 +13,9 @@ import {
   Tr,
 } from "../src"
 
-type TestTableProps = {
+interface TestTableProps extends NativeTableProps {
   withCaption?: boolean
-} & NativeTableProps
+}
 
 describe("<NativeTable />", () => {
   const Table: FC<TestTableProps> = (props) => {
@@ -24,7 +24,7 @@ describe("<NativeTable />", () => {
       <TableContainer>
         <NativeTable {...rest}>
           {withCaption ? (
-            <TableCaption placement="top" data-testid="TableCaption">
+            <TableCaption data-testid="TableCaption" placement="top">
               Table Caption
             </TableCaption>
           ) : null}
@@ -63,11 +63,11 @@ describe("<NativeTable />", () => {
     render(
       <Table
         colorScheme="gray"
-        highlightOnHover
         variant="striped"
+        data-testid="Table"
+        highlightOnHover
         withBorder
         withColumnBorders
-        data-testid="Table"
       />,
     )
     expect(screen.getByTestId("Table")).toHaveStyle({

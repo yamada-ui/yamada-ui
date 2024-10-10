@@ -14,10 +14,10 @@ import { memo } from "react"
 export const SocialMediaCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader
         alignItems={{ base: "center", sm: "flex-start" }}
@@ -38,9 +38,9 @@ export const SocialMediaCard = memo(() => {
 
         <Button
           colorScheme="primary"
+          size="sm"
           isRounded
           px="normal"
-          size="sm"
           w={{ base: undefined, sm: "full" }}
         >
           Follow

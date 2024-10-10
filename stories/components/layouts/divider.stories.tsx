@@ -13,11 +13,11 @@ export default meta
 export const horizontal: Story = () => {
   return (
     <>
-      <Divider orientation="horizontal" variant="solid" w="lg" />
+      <Divider variant="solid" orientation="horizontal" w="lg" />
 
-      <Divider orientation="horizontal" variant="dashed" w="lg" />
+      <Divider variant="dashed" orientation="horizontal" w="lg" />
 
-      <Divider orientation="horizontal" variant="dotted" w="lg" />
+      <Divider variant="dotted" orientation="horizontal" w="lg" />
     </>
   )
 }
@@ -25,11 +25,11 @@ export const horizontal: Story = () => {
 export const vertical: Story = () => {
   return (
     <Flex gap="md">
-      <Divider h="lg" orientation="vertical" variant="solid" />
+      <Divider variant="solid" h="lg" orientation="vertical" />
 
-      <Divider h="lg" orientation="vertical" variant="dashed" />
+      <Divider variant="dashed" h="lg" orientation="vertical" />
 
-      <Divider h="lg" orientation="vertical" variant="dotted" />
+      <Divider variant="dotted" h="lg" orientation="vertical" />
     </Flex>
   )
 }

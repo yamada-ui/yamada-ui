@@ -48,9 +48,9 @@ describe("usePanEvent", () => {
     const el = getByTestId("el")
 
     await user.pointer({
+      target: el,
       coords: { x: 0, y: 0 },
       keys: "[MouseLeft]",
-      target: el,
     })
 
     await waitFor(() =>
@@ -74,7 +74,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await drag(user)({ coords: (i) => ({ x: i * 10, y: i * 10 }), target: el })
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onStart).toHaveBeenCalledWith(
@@ -96,7 +96,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await drag(user)({ coords: (i) => ({ x: i * 10, y: i * 10 }), target: el })
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onMove).toHaveBeenCalledWith(
@@ -118,7 +118,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await drag(user)({ coords: (i) => ({ x: i * 10, y: i * 10 }), target: el })
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onEnd).toHaveBeenCalledWith(
@@ -138,7 +138,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await drag(user)({ coords: (i) => ({ x: i * 10, y: i * 10 }), target: el })
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onSessionEnd).toHaveBeenCalledWith(

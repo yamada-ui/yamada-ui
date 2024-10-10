@@ -85,9 +85,9 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
       <motion.section
         ref={ref}
         className={cx("ui-modal", className)}
+        aria-modal="true"
         role="dialog"
         tabIndex={-1}
-        aria-modal="true"
         __css={css}
         {...props}
         {...rest}

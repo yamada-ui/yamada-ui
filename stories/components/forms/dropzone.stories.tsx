@@ -259,11 +259,11 @@ export const withBorderColor: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Dropzone isDisabled variant="dashed">
+      <Dropzone variant="dashed" isDisabled>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isDisabled variant="solid">
+      <Dropzone variant="solid" isDisabled>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
@@ -279,11 +279,11 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Dropzone isReadOnly variant="dashed">
+      <Dropzone variant="dashed" isReadOnly>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isReadOnly variant="solid">
+      <Dropzone variant="solid" isReadOnly>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
@@ -299,11 +299,11 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Dropzone isInvalid variant="dashed">
+      <Dropzone variant="dashed" isInvalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isInvalid variant="solid">
+      <Dropzone variant="solid" isInvalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
@@ -323,11 +323,11 @@ export const isInvalid: Story = () => {
 export const isLoading: Story = () => {
   return (
     <>
-      <Dropzone isLoading variant="dashed">
+      <Dropzone variant="dashed" isLoading>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isLoading variant="solid">
+      <Dropzone variant="solid" isLoading>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>

@@ -282,10 +282,10 @@ describe("var", () => {
 
     test("should create variables and variable props with nested object", () => {
       const cssObj: CSSUIObject = {
+        color: "primary",
         _dark: {
           color: "secondary",
         },
-        color: "primary",
       }
       const [vars, variableProps] = createVars(cssObj, ["color"])(
         transformedTheme,
@@ -312,10 +312,10 @@ describe("var", () => {
 
     test("should create variables and variable props with nested object and dark mode", () => {
       const cssObj: CSSUIObject = {
+        color: ["primary", "secondary"],
         _focus: {
           color: ["warning", "danger"],
         },
-        color: ["primary", "secondary"],
       }
       const [vars, variableProps] = createVars(cssObj, ["color"])(
         transformedTheme,
@@ -351,10 +351,10 @@ describe("var", () => {
 
     test("should create variables and variable props with nested object and responsive object", () => {
       const cssObj: CSSUIObject = {
+        color: { base: "primary", md: "secondary" },
         _focus: {
           color: { base: "warning", md: "danger" },
         },
-        color: { base: "primary", md: "secondary" },
       }
 
       const [vars, variableProps] = createVars(cssObj, ["color"])(

@@ -32,79 +32,79 @@ interface CarouselItem extends Omit<ImageProps, "alt" | "size"> {
 
 const LISTEN_NOW_ITEMS: CarouselItem[] = [
   {
+    src: "https://images.pexels.com/photos/894156/pexels-photo-894156.jpeg",
     description:
       "A playlist for driving on quiet night roads under the starry sky.",
-    src: "https://images.pexels.com/photos/894156/pexels-photo-894156.jpeg",
     title: "Night Drive",
   },
   {
-    description: "Perfect jazz and soul music for a relaxed afternoon.",
     src: "https://images.pexels.com/photos/10622551/pexels-photo-10622551.jpeg",
+    description: "Perfect jazz and soul music for a relaxed afternoon.",
     title: "Afternoon at the Cafe",
   },
   {
-    description: "Upbeat songs to make your workout more enjoyable.",
     src: "https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg",
+    description: "Upbeat songs to make your workout more enjoyable.",
     title: "Energetic Workout",
   },
   {
-    description: "Music to improve concentration for work or study.",
     src: "https://images.pexels.com/photos/19664604/pexels-photo-19664604.jpeg",
+    description: "Music to improve concentration for work or study.",
     title: "Music for Concentration",
   },
   {
-    description: "Meditation music to calm the mind and relax.",
     src: "https://images.pexels.com/photos/2272854/pexels-photo-2272854.jpeg",
+    description: "Meditation music to calm the mind and relax.",
     title: "Relaxation Meditation",
   },
   {
-    description: "Bright music to start the day refreshingly.",
     src: "https://images.pexels.com/photos/1619779/pexels-photo-1619779.jpeg",
+    description: "Bright music to start the day refreshingly.",
     title: "Morning Awakening",
   },
 ]
 
 const MADE_FOR_YOU_ITEMS: CarouselItem[] = [
   {
-    description: "Songs of love and passion for a special night.",
     src: "https://images.pexels.com/photos/12420808/pexels-photo-12420808.jpeg",
+    description: "Songs of love and passion for a special night.",
     title: "Romantic Night",
   },
   {
-    description: "Summer hits for fun with friends on the beach.",
     src: "https://images.pexels.com/photos/1762578/pexels-photo-1762578.jpeg",
+    description: "Summer hits for fun with friends on the beach.",
     title: "Beach Party",
   },
   {
-    description: "Warm songs to listen to by the window on a snowy day.",
     src: "https://images.pexels.com/photos/89909/pexels-photo-89909.jpeg",
+    description: "Warm songs to listen to by the window on a snowy day.",
     title: "Winter Solo",
   },
   {
+    src: "https://images.pexels.com/photos/417458/pexels-photo-417458.jpeg",
     description:
       "Heartwarming jazz collection to listen to while feeling the falling leaves.",
-    src: "https://images.pexels.com/photos/417458/pexels-photo-417458.jpeg",
     title: "Autumn Jazz",
   },
   {
+    src: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg",
     description:
       "Bright and refreshing melodies that make you feel the arrival of spring.",
-    src: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg",
     title: "Spring Flowers",
   },
   {
-    description: "Exciting songs perfect for a summer day's adventure.",
     src: "https://images.pexels.com/photos/15079520/pexels-photo-15079520.png",
+    description: "Exciting songs perfect for a summer day's adventure.",
     title: "Summer Adventure",
   },
   {
-    description: "A playlist to enjoy a retro atmosphere with nostalgic songs.",
     src: "https://images.pexels.com/photos/60783/pexels-photo-60783.jpeg",
+    description: "A playlist to enjoy a retro atmosphere with nostalgic songs.",
     title: "Retro Night",
   },
   {
-    description: "Music that colors a modern, sophisticated urban life.",
     src: "https://images.pexels.com/photos/3618362/pexels-photo-3618362.jpeg",
+    description: "Music that colors a modern, sophisticated urban life.",
     title: "Urban Lifestyle",
   },
 ]
@@ -146,8 +146,8 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
         {...rest}
       >
         <SegmentedControl
-          defaultValue="music"
           size="sm"
+          defaultValue="music"
           value={mode}
           w={{ base: "auto", sm: "full" }}
           onChange={(value) => setMode(value as ContentMode)}
@@ -163,7 +163,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
 
         <Spacer display={{ base: "block", sm: "none" }} />
 
-        <Button colorScheme="primary" leftIcon={<CirclePlus />} size="sm">
+        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlus />}>
           Add Music
         </Button>
       </HStack>
@@ -201,7 +201,7 @@ const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
   ({ description, title, ...rest }) => {
     return (
       <VStack as="header" gap="0" {...rest}>
-        <Heading as="h3" lineClamp={1} size={{ base: "lg" }}>
+        <Heading as="h3" size={{ base: "lg" }} lineClamp={1}>
           {title}
         </Heading>
 
@@ -238,7 +238,7 @@ const ContentMusic: FC<ContentMusicProps> = memo(({ ...rest }) => {
           description="Your personal playlists. Updated daily."
           title="Made for You"
         />
-        <ContentCarousel items={MADE_FOR_YOU_ITEMS} size="sm" />
+        <ContentCarousel size="sm" items={MADE_FOR_YOU_ITEMS} />
       </ContentItem>
     </VStack>
   )
@@ -287,7 +287,7 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
         </Center>
       </ContentItem>
 
-      <Modal isOpen={isOpen} size="xl" onClose={onClose}>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
         <ModalHeader>Add Podcast</ModalHeader>
 
         <ModalBody
@@ -330,7 +330,7 @@ interface ContentCarouselProps extends StackProps {
 }
 
 const ContentCarousel: FC<ContentCarouselProps> = memo(
-  ({ items, size = "md", ...rest }) => {
+  ({ size = "md", items, ...rest }) => {
     return (
       <HStack gap={{ base: "md", sm: "sm" }} overflowX="auto" {...rest}>
         {items.map(({ ...rest }, index) => (
@@ -349,7 +349,7 @@ interface ContentCarouselItemProps extends CarouselItem {
 }
 
 const ContentCarouselItem: FC<ContentCarouselItemProps> = memo(
-  ({ description, size = "md", title, containerProps, ...rest }) => {
+  ({ size = "md", description, title, containerProps, ...rest }) => {
     return (
       <VStack as="article" gap="sm" w="auto" {...containerProps}>
         <Box
@@ -366,7 +366,6 @@ const ContentCarouselItem: FC<ContentCarouselItemProps> = memo(
           }}
         >
           <Image
-            _hover={{ transform: "scale(1.05)" }}
             alt={title}
             fill
             objectFit="cover"
@@ -374,12 +373,13 @@ const ContentCarouselItem: FC<ContentCarouselItemProps> = memo(
             sizes="100%"
             transitionDuration="slow"
             transitionProperty="transform"
+            _hover={{ transform: "scale(1.05)" }}
             {...rest}
           />
         </Box>
 
         <VStack gap="0">
-          <Heading as="h4" lineClamp={1} size="sm">
+          <Heading as="h4" size="sm" lineClamp={1}>
             {title}
           </Heading>
 

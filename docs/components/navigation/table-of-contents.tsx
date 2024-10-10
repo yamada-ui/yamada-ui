@@ -13,7 +13,6 @@ import {
   Text,
   useMotionValueEvent,
   useScroll,
-  useToken,
   useUpdateEffect,
   VStack,
 } from "@yamada-ui/react"
@@ -33,7 +32,6 @@ export const TableOfContents = memo(
     const [selectedId, setSelectedId] = useState<string>("")
     const containerRef = useRef<HTMLDivElement>(null)
     const itemRefs = useRef<Map<string, RefObject<HTMLLIElement>>>(new Map())
-    const pl = useToken("spaces", "4")
     const { scrollY } = useScroll()
     const prevValue = useRef<number>(0)
     const directionRef = useRef<"down" | "up">("down")
@@ -120,19 +118,27 @@ export const TableOfContents = memo(
                 <ListItem key={id} ref={ref}>
                   <Box
                     as="a"
+                    href={`#${id}`}
+                    display="block"
+                    outline="0"
+                    transitionDuration="normal"
+                    transitionProperty="colors"
                     _focusVisible={{
                       boxShadow: "inline",
                     }}
                     _hover={{
                       color: isSelected ? undefined : ["black", "white"],
                     }}
-                    display="block"
-                    href={`#${id}`}
-                    outline="0"
-                    transitionDuration="normal"
-                    transitionProperty="colors"
                   >
                     <Box
+                      data-selected={dataAttr(isSelected)}
+                      borderLeftColor={isSelected ? `primary.400` : "border"}
+                      borderLeftWidth="1px"
+                      pl={`calc(${lv - 1} * $spaces.4)`}
+                      position="relative"
+                      py="sm"
+                      userSelect="none"
+                      zIndex="-1"
                       _before={{
                         bg: "white",
                         bottom: 0,
@@ -153,14 +159,6 @@ export const TableOfContents = memo(
                         bg: [`primary.300`, `primary.300`],
                         color: [`black`, "white"],
                       }}
-                      borderLeftColor={isSelected ? `primary.400` : "border"}
-                      borderLeftWidth="1px"
-                      pl={`calc(${lv - 1} * ${pl})`}
-                      position="relative"
-                      py="sm"
-                      userSelect="none"
-                      zIndex="-1"
-                      data-selected={dataAttr(isSelected)}
                     >
                       <TextWithCode
                         isTruncated

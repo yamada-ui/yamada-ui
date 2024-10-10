@@ -53,7 +53,7 @@ export const Dashboard = memo(() => {
 
 Dashboard.displayName = "Dashboard"
 
-type ContentProps = {} & StackProps
+interface ContentProps extends StackProps {}
 
 const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
   return (
@@ -80,8 +80,8 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
           <Menu>
             <MenuButton
               as={IconButton}
-              display={{ base: "none", md: "flex" }}
               variant="ghost"
+              display={{ base: "none", md: "flex" }}
             >
               <ChevronDown fontSize="2xl" />
             </MenuButton>

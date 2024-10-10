@@ -27,7 +27,7 @@ export const User: FC<UserProps> = ({
 }) => {
   return (
     <HStack alignItems="flex-start" gap="6" {...rest}>
-      <Avatar name={name} boxSize="20" src={icon} />
+      <Avatar name={name} src={icon} boxSize="20" />
 
       <VStack gap="2">
         <Text fontWeight="semibold">{name}</Text>
@@ -35,16 +35,16 @@ export const User: FC<UserProps> = ({
         <HStack fontSize="sm" gap="2">
           {github ? (
             <Link
+              href={github}
+              target="_blank"
+              aria-label={`GitHub profile of ${name}`}
+              color={[`primary.600`, `primary.400`]}
               _active={{
                 color: [`primary.700`, `primary.500`],
               }}
               _hover={{
                 color: [`primary.500`, `primary.300`],
               }}
-              color={[`primary.600`, `primary.400`]}
-              href={github}
-              target="_blank"
-              aria-label={`GitHub profile of ${name}`}
             >
               <Github />
             </Link>
@@ -52,16 +52,16 @@ export const User: FC<UserProps> = ({
 
           {x ? (
             <Link
+              href={x}
+              target="_blank"
+              aria-label={`X ${name}`}
+              color={[`primary.600`, `primary.400`]}
               _active={{
                 color: [`primary.700`, `primary.500`],
               }}
               _hover={{
                 color: [`primary.500`, `primary.300`],
               }}
-              color={[`primary.600`, `primary.400`]}
-              href={x}
-              target="_blank"
-              aria-label={`X ${name}`}
             >
               <X />
             </Link>

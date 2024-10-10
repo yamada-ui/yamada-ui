@@ -22,7 +22,7 @@ describe("<Slider />", () => {
   })
 
   test("should have correct default value", () => {
-    render(<Slider defaultValue={25} data-testid="slider" />)
+    render(<Slider data-testid="slider" defaultValue={25} />)
     expect(
       screen.getByTestId("slider").getElementsByTagName("input")[0],
     ).toHaveValue(String(25))
@@ -71,7 +71,7 @@ describe("<Slider />", () => {
   })
 
   test("can be disabled", () => {
-    render(<Slider isDisabled data-testid="slider" />)
+    render(<Slider data-testid="slider" isDisabled />)
 
     const slider = screen.getByTestId("slider")
     const sliderInput = slider.getElementsByTagName("input")[0]
@@ -83,7 +83,7 @@ describe("<Slider />", () => {
   })
 
   test("Slider readOnly tests", () => {
-    const { rerender } = render(<Slider isReadOnly data-testid="slider1" />)
+    const { rerender } = render(<Slider data-testid="slider1" isReadOnly />)
 
     let slider = screen.getByTestId("slider1")
     let sliderInput = slider.getElementsByTagName("input")[0]
@@ -93,7 +93,7 @@ describe("<Slider />", () => {
     expect(sliderInput).toHaveAttribute("readonly", "")
     expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
 
-    rerender(<Slider focusThumbOnChange={false} data-testid="slider2" />)
+    rerender(<Slider data-testid="slider2" focusThumbOnChange={false} />)
 
     slider = screen.getByTestId("slider2")
     sliderInput = slider.getElementsByTagName("input")[0]

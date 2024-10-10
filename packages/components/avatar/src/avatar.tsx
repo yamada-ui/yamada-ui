@@ -31,6 +31,14 @@ interface AvatarOptions {
    */
   name?: string
   /**
+   * The image url of the avatar.
+   */
+  src?: ImageProps["src"]
+  /**
+   * List of sources to use for different screen resolutions.
+   */
+  srcSet?: ImageProps["srcSet"]
+  /**
    * The `HTMLImageElement` property `alt`.
    */
   alt?: HTMLUIProps<"img">["alt"]
@@ -56,14 +64,6 @@ interface AvatarOptions {
    * Defining which referrer is sent when fetching the resource.
    */
   referrerPolicy?: HTMLAttributeReferrerPolicy
-  /**
-   * The image url of the avatar.
-   */
-  src?: ImageProps["src"]
-  /**
-   * List of sources to use for different screen resolutions.
-   */
-  srcSet?: ImageProps["srcSet"]
 }
 
 export type AvatarProps = AvatarOptions &
@@ -80,8 +80,10 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Avatar", props)
   const {
     name,
-    className,
+    src,
+    srcSet,
     alt,
+    className,
     borderRadius = "fallback(full, 9999px)",
     children,
     crossOrigin,
@@ -91,8 +93,6 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     loading,
     referrerPolicy,
     rounded = "fallback(full, 9999px)",
-    src,
-    srcSet,
     onError,
     onLoad,
     ...rest
@@ -117,14 +117,16 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
       <ui.span
         ref={ref}
         className={cx("ui-avatar", className)}
+        data-loaded={dataAttr(isLoaded)}
         borderRadius={borderRadius}
         rounded={rounded}
-        data-loaded={dataAttr(isLoaded)}
         __css={css}
         {...rest}
       >
         <AvatarImage
           name={name}
+          src={src}
+          srcSet={srcSet}
           alt={alt}
           borderRadius={borderRadius}
           crossOrigin={crossOrigin}
@@ -134,8 +136,6 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
           loading={loading}
           referrerPolicy={referrerPolicy}
           rounded={rounded}
-          src={src}
-          srcSet={srcSet}
           onError={onError}
           onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
         />
@@ -148,11 +148,14 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
 Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
-type AvatarImageProps = ImageProps &
-  Pick<AvatarProps, "format" | "icon" | "ignoreFallback" | "name">
+interface AvatarImageProps
+  extends ImageProps,
+    Pick<AvatarProps, "format" | "icon" | "ignoreFallback" | "name"> {}
 
 const AvatarImage: FC<AvatarImageProps> = ({
   name,
+  src,
+  srcSet,
   alt,
   borderRadius,
   crossOrigin,
@@ -162,12 +165,10 @@ const AvatarImage: FC<AvatarImageProps> = ({
   loading,
   referrerPolicy,
   rounded,
-  src,
-  srcSet,
   onError,
   onLoad,
 }) => {
-  const status = useImage({ crossOrigin, ignoreFallback, src, onError, onLoad })
+  const status = useImage({ src, crossOrigin, ignoreFallback, onError, onLoad })
 
   const isLoaded = status === "loaded"
 
@@ -177,7 +178,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (
-      cloneElement(icon, { role: "img", "aria-label": alt ?? "Avatar Icon" })
+      cloneElement(icon, { "aria-label": alt ?? "Avatar Icon", role: "img" })
     )
 
   const css: CSSUIObject = {
@@ -188,14 +189,14 @@ const AvatarImage: FC<AvatarImageProps> = ({
 
   return (
     <ui.img
-      className="ui-avatar__image"
+      src={src}
+      srcSet={srcSet}
       alt={alt ?? name}
+      className="ui-avatar__image"
       borderRadius={borderRadius}
       loading={loading}
       referrerPolicy={referrerPolicy}
       rounded={rounded}
-      src={src}
-      srcSet={srcSet}
       __css={css}
     />
   )

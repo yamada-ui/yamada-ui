@@ -21,7 +21,7 @@ describe("<Editable />", () => {
 
   test("should render editable component", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" data-testid="Editable">
+      <Editable data-testid="Editable" defaultValue="Some text">
         <EditablePreview data-testid="EditablePreview" />
         <EditableInput data-testid="EditableInput" />
       </Editable>,
@@ -34,9 +34,9 @@ describe("<Editable />", () => {
   test("should render with preview focusable", () => {
     const { getByTestId } = render(
       <Editable
+        data-testid="Editable"
         defaultValue="Some text"
         isPreviewFocusable
-        data-testid="Editable"
       >
         <EditablePreview data-testid="EditablePreview" />
         <EditableInput data-testid="EditableInput" />
@@ -247,9 +247,9 @@ describe("<Editable />", () => {
   test("initially in correct edit mode", () => {
     const { getByTestId } = render(
       <Editable
+        data-testid="Editable"
         defaultValue="Some text"
         startWithEditView
-        data-testid="Editable"
       >
         <EditablePreview data-testid="EditablePreview" />
         <EditableInput data-testid="EditableInput" />

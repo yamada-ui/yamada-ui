@@ -209,9 +209,9 @@ export const withImage: Story = () => {
     <Card maxW="md">
       <CardHeader justifyContent="center">
         <Image
+          src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
           alt="SLAM DUNK"
           rounded="md"
-          src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
           w="full"
         />
       </CardHeader>
@@ -235,15 +235,15 @@ export const withImage: Story = () => {
 export const horizonCard: Story = () => {
   return (
     <Card
+      variant="outline"
       direction={{ base: "row", md: "column" }}
       overflow="hidden"
-      variant="outline"
     >
       <Image
+        src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
         alt="SLAM DUNK"
         maxW={{ base: "30%", md: "100%" }}
         objectFit="cover"
-        src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
       />
 
       <VStack gap="0">

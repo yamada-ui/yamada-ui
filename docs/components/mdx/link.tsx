@@ -6,7 +6,7 @@ import { NextLink } from "components/navigation"
 
 export interface LinkProps extends NextLinkProps {}
 
-export const Link: FC<LinkProps> = ({ children, href, ...rest }) => {
+export const Link: FC<LinkProps> = ({ href, children, ...rest }) => {
   const isExternal = !(href?.startsWith("/") || href?.startsWith("#"))
 
   return (

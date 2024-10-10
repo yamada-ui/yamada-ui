@@ -227,11 +227,11 @@ export const FileInput = forwardRef<FileInputProps, "input">(
             whiteSpace: "nowrap",
             width: "1px",
           }}
+          aria-hidden
+          aria-readonly={ariaReadonly}
           accept={accept}
           multiple={multiple}
           tabIndex={-1}
-          aria-hidden
-          aria-readonly={ariaReadonly}
           onChange={onChange}
           {...formControlProps}
         />
@@ -241,8 +241,8 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           className={cx("ui-file-input", className)}
           py={values?.length && component ? "0.125rem" : undefined}
           {...rest}
-          tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}
+          tabIndex={0}
           onClick={handlerAll(onClickProp, onClick)}
           __css={css}
         >

@@ -117,8 +117,8 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     >
       <ui.input
         className={cx("ui-switch__input", className)}
-        role="switch"
         aria-checked={isChecked}
+        role="switch"
         {...getInputProps(inputProps, ref)}
       />
 
@@ -137,9 +137,9 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         >
           <motion.span
             className={cx("ui-switch__thumb", className)}
+            data-checked={dataAttr(isChecked)}
             layout
             transition={transition}
-            data-checked={dataAttr(isChecked)}
             __css={{ ...styles.thumb }}
           />
         </ui.span>

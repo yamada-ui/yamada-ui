@@ -31,7 +31,7 @@ describe("<SegmentedControl />", () => {
           <SegmentedControlButton value="three">Three</SegmentedControlButton>
         </SegmentedControl>
 
-        <SegmentedControl items={items} data-testid="SegmentedControlItems" />
+        <SegmentedControl data-testid="SegmentedControlItems" items={items} />
       </>,
     )
     expect(screen.getByTestId("SegmentedControl")).toBeInTheDocument()
@@ -40,10 +40,10 @@ describe("<SegmentedControl />", () => {
 
   test("should render segmented control with default value", () => {
     render(
-      <SegmentedControl defaultValue="one" data-testid="SegmentedControl">
+      <SegmentedControl data-testid="SegmentedControl" defaultValue="one">
         <SegmentedControlButton
-          value="one"
           data-testid="SegmentedControlButton"
+          value="one"
         >
           One
         </SegmentedControlButton>
@@ -58,7 +58,7 @@ describe("<SegmentedControl />", () => {
 
   test("should disable segmented control", () => {
     render(
-      <SegmentedControl isDisabled data-testid="SegmentedControl">
+      <SegmentedControl data-testid="SegmentedControl" isDisabled>
         <SegmentedControlButton value="one">One</SegmentedControlButton>
         <SegmentedControlButton value="two">Two</SegmentedControlButton>
         <SegmentedControlButton value="three">Three</SegmentedControlButton>
@@ -99,7 +99,7 @@ describe("<SegmentedControl />", () => {
 
   test("SegmentedControl with non-SegmentedControlButton children renders correctly", async () => {
     const { container } = render(
-      <SegmentedControl isDisabled data-testid="SegmentedControl">
+      <SegmentedControl data-testid="SegmentedControl" isDisabled>
         <option>one</option>
         <option>two</option>
         <option>three</option>

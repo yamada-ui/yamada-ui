@@ -27,8 +27,8 @@ export const NextLinkButton: FC<NextLinkButtonProps> = ({
   return (
     <Button
       as={Link}
-      rel={isExternal ? "noopener" : undefined}
       target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener" : undefined}
       {...rest}
     />
   )
@@ -46,8 +46,8 @@ export const NextLinkIconButton: FC<NextLinkIconButtonProps> = ({
   return (
     <IconButton
       as={Link}
-      rel={isExternal ? "noopener" : undefined}
       target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener" : undefined}
       {...rest}
     />
   )

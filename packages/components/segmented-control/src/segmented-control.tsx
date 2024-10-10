@@ -240,13 +240,13 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             whiteSpace: "nowrap",
             width: "1px",
           },
-          checked,
-          disabled: disabled || readOnly,
-          readOnly,
           "aria-disabled": ariaAttr(disabled),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(index === focusedIndex),
           "data-readonly": dataAttr(readOnly),
+          checked,
+          disabled: disabled || readOnly,
+          readOnly,
           onChange: handlerAll(props.onChange, (ev) =>
             !disabled && !readOnly
               ? onChange(ev as ChangeEvent<HTMLInputElement>)

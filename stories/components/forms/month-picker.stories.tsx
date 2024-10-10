@@ -48,10 +48,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <MonthPicker placeholder="extra small size" size="xs" />
-      <MonthPicker placeholder="small size" size="sm" />
-      <MonthPicker placeholder="medium size" size="md" />
-      <MonthPicker placeholder="large size" size="lg" />
+      <MonthPicker size="xs" placeholder="extra small size" />
+      <MonthPicker size="sm" placeholder="small size" />
+      <MonthPicker size="md" placeholder="medium size" />
+      <MonthPicker size="lg" placeholder="large size" />
     </>
   )
 }
@@ -69,10 +69,10 @@ export const withCalendarSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <MonthPicker placeholder="outline" variant="outline" />
-      <MonthPicker placeholder="filled" variant="filled" />
-      <MonthPicker placeholder="flushed" variant="flushed" />
-      <MonthPicker placeholder="unstyled" variant="unstyled" />
+      <MonthPicker variant="outline" placeholder="outline" />
+      <MonthPicker variant="filled" placeholder="filled" />
+      <MonthPicker variant="flushed" placeholder="flushed" />
+      <MonthPicker variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -192,10 +192,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <MonthPicker isDisabled placeholder="outline" variant="outline" />
-      <MonthPicker isDisabled placeholder="filled" variant="filled" />
-      <MonthPicker isDisabled placeholder="flushed" variant="flushed" />
-      <MonthPicker isDisabled placeholder="unstyled" variant="unstyled" />
+      <MonthPicker variant="outline" isDisabled placeholder="outline" />
+      <MonthPicker variant="filled" isDisabled placeholder="filled" />
+      <MonthPicker variant="flushed" isDisabled placeholder="flushed" />
+      <MonthPicker variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl isDisabled label="What is your birthday?">
         <MonthPicker placeholder="YYYY/MM" />
@@ -207,10 +207,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <MonthPicker isReadOnly placeholder="outline" variant="outline" />
-      <MonthPicker isReadOnly placeholder="filled" variant="filled" />
-      <MonthPicker isReadOnly placeholder="flushed" variant="flushed" />
-      <MonthPicker isReadOnly placeholder="unstyled" variant="unstyled" />
+      <MonthPicker variant="outline" isReadOnly placeholder="outline" />
+      <MonthPicker variant="filled" isReadOnly placeholder="filled" />
+      <MonthPicker variant="flushed" isReadOnly placeholder="flushed" />
+      <MonthPicker variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl isReadOnly label="What is your birthday?">
         <MonthPicker placeholder="YYYY/MM" />
@@ -222,10 +222,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <MonthPicker isInvalid placeholder="outline" variant="outline" />
-      <MonthPicker isInvalid placeholder="filled" variant="filled" />
-      <MonthPicker isInvalid placeholder="flushed" variant="flushed" />
-      <MonthPicker isInvalid placeholder="unstyled" variant="unstyled" />
+      <MonthPicker variant="outline" isInvalid placeholder="outline" />
+      <MonthPicker variant="filled" isInvalid placeholder="filled" />
+      <MonthPicker variant="flushed" isInvalid placeholder="flushed" />
+      <MonthPicker variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

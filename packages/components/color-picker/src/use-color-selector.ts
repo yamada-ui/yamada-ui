@@ -102,9 +102,9 @@ interface ColorSelectorContext {
   getHueSliderProps: PropGetter<HueSliderProps>
   getSwatchProps: PropGetter<ColorSwatchProps>
   onChange: (value: Partial<Hsva> | string) => void
+  size?: ThemeProps<"ColorSelector">["size"]
   disabled?: boolean
   readOnly?: boolean
-  size?: ThemeProps<"ColorSelector">["size"]
 }
 
 export const [ColorSelectorProvider, useColorSelectorContext] =
@@ -186,10 +186,10 @@ export const useColorSelector = ({
   } = useFormControlProps({ isInvalid, ...props })
   const [
     {
+      "aria-readonly": ariaReadonly,
       disabled,
       readOnly,
       required,
-      "aria-readonly": ariaReadonly,
       ...formControlProps
     },
     containerProps,
@@ -545,8 +545,8 @@ export const useColorSelector = ({
 
   const getEyeDropperProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
-      disabled,
       "aria-label": "Pick a color",
+      disabled,
       ...props,
       ref,
       onClick: handlerAll(props.onClick, onEyeDropperClick),
@@ -556,9 +556,9 @@ export const useColorSelector = ({
 
   const getSwatchProps: PropGetter<ColorSwatchProps> = useCallback(
     ({ color, ...props } = {}, ref = null) => ({
+      "aria-label": `Select ${color} as the color`,
       disabled,
       readOnly,
-      "aria-label": `Select ${color} as the color`,
       ...props,
       ref,
       color,

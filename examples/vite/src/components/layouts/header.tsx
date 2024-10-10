@@ -29,9 +29,7 @@ import {
   useScroll,
   useTheme,
 } from "@yamada-ui/react"
-import { useRef } from "react"
-import { useState } from "react"
-import { memo } from "react"
+import { memo, useRef, useState } from "react"
 
 export interface HeaderProps extends CenterProps {}
 
@@ -67,28 +65,28 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
       <HStack maxW="9xl" px={{ base: "lg", md: "md" }} py="3" w="full">
         <Box
           as="a"
-          _focus={{ outline: "none" }}
-          _focusVisible={{ boxShadow: "outline" }}
-          _hover={{ opacity: 0.7 }}
           href="/"
+          aria-label="Yamada UI"
           rounded="md"
           transitionDuration="slower"
           transitionProperty="opacity"
-          aria-label="Yamada UI"
+          _focus={{ outline: "none" }}
+          _focusVisible={{ boxShadow: "outline" }}
+          _hover={{ opacity: 0.7 }}
         >
           <Image
-            _dark={{ display: "none" }}
+            src="/logo-black.png"
             alt="Yamada UI"
             h={{ base: "10", sm: "8" }}
-            src="/logo-black.png"
             w="auto"
+            _dark={{ display: "none" }}
           />
           <Image
-            _light={{ display: "none" }}
+            src="/logo-white.png"
             alt="Yamada UI"
             h={{ base: "10", sm: "8" }}
-            src="/logo-white.png"
             w="auto"
+            _light={{ display: "none" }}
           />
         </Box>
 
@@ -103,9 +101,9 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = {
+interface ColorModeButtonProps extends IconButtonProps {
   menuProps?: MenuProps
-} & IconButtonProps
+}
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(
   ({ menuProps, ...rest }) => {
@@ -131,8 +129,10 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
       >
         <MenuButton
           as={IconButton}
-          color="muted"
           colorScheme="gray"
+          variant="ghost"
+          aria-label="Open color mode switching menu"
+          color="muted"
           icon={
             colorMode === "dark" ? (
               <Sun fontSize="2xl" />
@@ -140,8 +140,6 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
               <Moon fontSize="2xl" />
             )
           }
-          variant="ghost"
-          aria-label="Open color mode switching menu"
           {...rest}
         />
 
@@ -169,9 +167,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-type ThemeSchemeButtonProps = {
+interface ThemeSchemeButtonProps extends IconButtonProps {
   popoverProps?: PopoverProps
-} & IconButtonProps
+}
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
@@ -203,11 +201,11 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       >
         <PopoverTrigger>
           <IconButton
-            color="muted"
             colorScheme="gray"
-            icon={<Palette fontSize="2xl" />}
             variant="ghost"
             aria-label="Open color mode switching menu"
+            color="muted"
+            icon={<Palette fontSize="2xl" />}
             {...rest}
           />
         </PopoverTrigger>
@@ -222,9 +220,6 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
                 key={colorScheme}
                 as="button"
                 type="button"
-                _active={{ bg: `${colorScheme}.700` }}
-                _focusVisible={{ shadow: "outline" }}
-                _hover={{ bg: `${colorScheme}.600` }}
                 bg={`${colorScheme}.500`}
                 boxShadow="inner"
                 minH={{ base: "12", md: "10" }}
@@ -233,6 +228,9 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
                 rounded="md"
                 transitionDuration="slower"
                 transitionProperty="common"
+                _active={{ bg: `${colorScheme}.700` }}
+                _focusVisible={{ shadow: "outline" }}
+                _hover={{ bg: `${colorScheme}.600` }}
                 onClick={() => {
                   changeThemeScheme(colorScheme)
                   onClose()

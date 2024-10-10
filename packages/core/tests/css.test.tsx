@@ -206,10 +206,10 @@ describe("CSS", () => {
 
   test("returns nested system props styles", () => {
     const result = css({
+      color: "gray.500",
       _hover: {
         color: "gray.300",
       },
-      color: "gray.500",
     })(theme)
 
     expect(result).toStrictEqual({

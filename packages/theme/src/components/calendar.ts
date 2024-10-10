@@ -10,12 +10,12 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
   baseStyle: {
     button: {
       _disabled: {
-        _focusVisible: {
-          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
-        },
         boxShadow: "none",
         cursor: "not-allowed",
         opacity: 0.4,
+        _focusVisible: {
+          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
+        },
       },
     },
     cell: {
@@ -27,21 +27,22 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     },
     content: {},
     control: {
+      color: ["blackAlpha.500", "whiteAlpha.500"],
+      fontSize: "1.5em",
       _hidden: {
         opacity: 0,
         pointerEvents: "none",
       },
-      color: ["blackAlpha.500", "whiteAlpha.500"],
-      fontSize: "1.5em",
     },
     date: {},
     day: {
+      color: ["blackAlpha.800", "whiteAlpha.700"],
       _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
         _ripple: {
           display: "none",
         },
-        cursor: "not-allowed",
-        opacity: 0.4,
       },
       _focusVisible: {
         boxShadow: "outline",
@@ -55,7 +56,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       _weekend: {
         color: ["red.600", "red.400"],
       },
-      color: ["blackAlpha.800", "whiteAlpha.700"],
     },
     header: {},
     label: {
@@ -191,13 +191,13 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
   },
 
   variants: {
-    solid: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       button: {
         _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _disabled: {
             bg: ["initial", "initial"],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: isGray(c)
@@ -208,16 +208,16 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       cell: {
         _between: {
+          bg: [
+            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
+            shadeColor(`${c}.300`, 72)(t, m),
+          ],
           _end: {
             roundedRight: "md",
           },
           _start: {
             roundedLeft: "md",
           },
-          bg: [
-            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
-            shadeColor(`${c}.300`, 72)(t, m),
-          ],
         },
       },
       day: {
@@ -225,6 +225,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedLeft: "0",
         },
         _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -236,7 +237,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
               ? [`${c}.100`, `${c}.700`]
               : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: isGray(c)
@@ -249,20 +249,20 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedRight: "0",
         },
         _today: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
       },
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       button: {
         _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _disabled: {
             bg: ["initial", "initial"],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: [
@@ -274,18 +274,18 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       cell: {
         _between: {
-          _end: {
-            roundedRight: "md",
-          },
-          _start: {
-            roundedLeft: "md",
-          },
           bg: [
             isGray(c)
               ? transparentizeColor(`${c}.50`, 0.24)(t, m)
               : transparentizeColor(`${c}.50`, 0.64)(t, m),
             shadeColor(`${c}.300`, 76)(t, m),
           ],
+          _end: {
+            roundedRight: "md",
+          },
+          _start: {
+            roundedLeft: "md",
+          },
         },
       },
       day: {
@@ -293,6 +293,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedLeft: "0",
         },
         _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -305,7 +306,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
               shadeColor(`${c}.300`, 58)(t, m),
             ],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: [
@@ -319,30 +319,30 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedRight: "0",
         },
         _today: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
           _between: {
             bg: ["initial", "initial"],
           },
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
       },
     }),
     unstyled: {
       button: {
+        h: "auto",
         _active: {
           bg: "inherit",
         },
         _disabled: {
-          _focusVisible: {
-            boxShadow: "inherit",
-          },
           boxShadow: "inherit",
           cursor: "inherit",
           opacity: "inherit",
+          _focusVisible: {
+            boxShadow: "inherit",
+          },
         },
         _hover: {
           bg: "inherit",
         },
-        h: "auto",
       },
       container: {
         fontSize: "inherit",
@@ -352,6 +352,9 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         w: "auto",
       },
       control: {
+        fontSize: "inherit",
+        h: "auto",
+        w: "auto",
         _active: {
           bg: "inherit",
         },
@@ -362,21 +365,20 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         _hover: {
           bg: "inherit",
         },
-        fontSize: "inherit",
-        h: "auto",
-        w: "auto",
       },
       day: {
+        h: "auto",
+        w: "auto",
         _active: {
           bg: "inherit",
         },
         _disabled: {
-          _focusVisible: {
-            boxShadow: "inherit",
-          },
           boxShadow: "inherit",
           cursor: "inherit",
           opacity: "inherit",
+          _focusVisible: {
+            boxShadow: "inherit",
+          },
         },
         _holiday: {
           color: "inherit",
@@ -390,10 +392,10 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         _weekend: {
           color: "inherit",
         },
-        h: "auto",
-        w: "auto",
       },
       label: {
+        h: "auto",
+        pointerEvents: "inherit",
         _active: {
           bg: "inherit",
           pointerEvents: "inherit",
@@ -401,8 +403,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         _hover: {
           bg: "inherit",
         },
-        h: "auto",
-        pointerEvents: "inherit",
       },
       labelIcon: {
         color: "inherit",

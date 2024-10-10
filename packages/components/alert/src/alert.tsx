@@ -111,8 +111,8 @@ export interface AlertIconProps extends HTMLUIProps<"span"> {
 
 export const AlertIcon: FC<AlertIconProps> = ({
   className,
-  children,
   variant = "oval",
+  children,
   ...rest
 }) => {
   const { status, styles } = useAlert()
@@ -135,7 +135,7 @@ export const AlertIcon: FC<AlertIconProps> = ({
       {children || (
         <Icon
           {...(status === "loading"
-            ? { color: "currentcolor", variant }
+            ? { variant, color: "currentcolor" }
             : { boxSize: "100%" })}
         />
       )}

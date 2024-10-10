@@ -59,12 +59,12 @@ export const rewriteDefaultProps = () => {
   // Rewrite default props for specified component
   const theme = extendTheme(
     withDefaultSize({
-      components: ["Badge", "Tag", "Button"], // If empty, rewrite for all components
       size: "lg",
+      components: ["Badge", "Tag", "Button"], // If empty, rewrite for all components
     }),
     withDefaultVariant({
-      components: ["Badge", "Tag", "Button"], // If empty, rewrite for all components
       variant: "solid",
+      components: ["Badge", "Tag", "Button"], // If empty, rewrite for all components
     }),
     withDefaultColorScheme({
       colorScheme: "primary",
@@ -151,8 +151,8 @@ const App: FC = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Image
-        maxW="32rem"
         src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"
+        maxW="32rem"
         w="full"
       />
     </Center>

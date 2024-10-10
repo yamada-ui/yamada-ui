@@ -32,9 +32,9 @@ export const withDefaultValue: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <SaturationSlider defaultValue={[120, 0.33, 0.33]} size="sm" />
-      <SaturationSlider defaultValue={[180, 0.66, 0.66]} size="md" />
-      <SaturationSlider defaultValue={[240, 1, 1]} size="lg" />
+      <SaturationSlider size="sm" defaultValue={[120, 0.33, 0.33]} />
+      <SaturationSlider size="md" defaultValue={[180, 0.66, 0.66]} />
+      <SaturationSlider size="lg" defaultValue={[240, 1, 1]} />
     </>
   )
 }

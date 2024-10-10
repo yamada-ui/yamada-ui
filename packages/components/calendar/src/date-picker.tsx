@@ -164,8 +164,8 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
               id={id}
               as="div"
               className="ui-date-picker__content"
-              role="dialog"
               aria-modal="true"
+              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >
@@ -219,9 +219,9 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
           <ui.input
             ref={mergeRefs(ref, inputRef)}
             className="ui-date-picker__field__input"
+            aria-label="Input date value"
             display="inline-block"
             w="100%"
-            aria-label="Input date value"
             {...computedInputProps}
           />
         </ui.div>
@@ -261,8 +261,8 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
           maxHeight: "1em",
           maxWidth: "1em",
         },
-        focusable: false,
         "aria-hidden": true,
+        focusable: false,
       }),
     )
 

@@ -13,10 +13,10 @@ import { memo } from "react"
 export const CookieSettingsCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">

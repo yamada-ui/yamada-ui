@@ -75,8 +75,8 @@ export const Tab = forwardRef<TabProps, "button">(
         {...props}
         {...rest}
         type="button"
-        tabIndex={isSelected ? 0 : -1}
         aria-selected={ariaAttr(isSelected)}
+        tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
         onPointerDown={onPointerDown}
       >

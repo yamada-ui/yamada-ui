@@ -34,10 +34,10 @@ import { memo, useState } from "react"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
 
-type DetailProps = {
+interface DetailProps extends StackProps {
   defaultMail: MailItem
   setMailRef: MutableRefObject<(mail: MailItem) => void>
-} & StackProps
+}
 
 export const Detail: FC<DetailProps> = memo(
   ({ defaultMail, setMailRef, ...rest }) => {
@@ -159,8 +159,8 @@ const ControlIcon: FC<ControlIconProps> = memo(
     return (
       <Tooltip label={label} placement="top">
         <IconButton
-          icon={<Icon color="muted" fontSize="md" />}
           variant="ghost"
+          icon={<Icon color="muted" fontSize="md" />}
           {...rest}
         />
       </Tooltip>

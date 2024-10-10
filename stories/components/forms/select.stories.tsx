@@ -80,10 +80,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Select placeholder="extra small size" size="xs" />
-      <Select placeholder="small size" size="sm" />
-      <Select placeholder="medium size" size="md" />
-      <Select placeholder="large size" size="lg" />
+      <Select size="xs" placeholder="extra small size" />
+      <Select size="sm" placeholder="small size" />
+      <Select size="md" placeholder="medium size" />
+      <Select size="lg" placeholder="large size" />
     </>
   )
 }
@@ -91,10 +91,10 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <Select placeholder="outline" variant="outline" />
-      <Select placeholder="filled" variant="filled" />
-      <Select placeholder="flushed" variant="flushed" />
-      <Select placeholder="unstyled" variant="unstyled" />
+      <Select variant="outline" placeholder="outline" />
+      <Select variant="filled" placeholder="filled" />
+      <Select variant="flushed" placeholder="flushed" />
+      <Select variant="unstyled" placeholder="unstyled" />
     </>
   )
 }
@@ -234,10 +234,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Select isDisabled placeholder="outline" variant="outline" />
-      <Select isDisabled placeholder="filled" variant="filled" />
-      <Select isDisabled placeholder="flushed" variant="flushed" />
-      <Select isDisabled placeholder="unstyled" variant="unstyled" />
+      <Select variant="outline" isDisabled placeholder="outline" />
+      <Select variant="filled" isDisabled placeholder="filled" />
+      <Select variant="flushed" isDisabled placeholder="flushed" />
+      <Select variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -252,10 +252,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Select isReadOnly placeholder="outline" variant="outline" />
-      <Select isReadOnly placeholder="filled" variant="filled" />
-      <Select isReadOnly placeholder="flushed" variant="flushed" />
-      <Select isReadOnly placeholder="unstyled" variant="unstyled" />
+      <Select variant="outline" isReadOnly placeholder="outline" />
+      <Select variant="filled" isReadOnly placeholder="filled" />
+      <Select variant="flushed" isReadOnly placeholder="flushed" />
+      <Select variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -270,10 +270,10 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Select isInvalid placeholder="outline" variant="outline" />
-      <Select isInvalid placeholder="filled" variant="filled" />
-      <Select isInvalid placeholder="flushed" variant="flushed" />
-      <Select isInvalid placeholder="unstyled" variant="unstyled" />
+      <Select variant="outline" isInvalid placeholder="outline" />
+      <Select variant="filled" isInvalid placeholder="filled" />
+      <Select variant="flushed" isInvalid placeholder="flushed" />
+      <Select variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."

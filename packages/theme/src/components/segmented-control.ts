@@ -4,28 +4,28 @@ import { isAccessible, isGray } from "@yamada-ui/utils"
 export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   baseStyle: {
     button: {
-      _disabled: { cursor: "not-allowed", opacity: 0.4 },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-      _hover: {
-        _checked: {
-          opacity: 1,
-        },
-        opacity: 0.7,
-      },
-      _readOnly: { cursor: "default" },
       color: ["blackAlpha.800", "whiteAlpha.800"],
       fontWeight: "medium",
       transitionDuration: "ultra-slow",
       transitionProperty: "common",
       whiteSpace: "nowrap",
+      _disabled: { cursor: "not-allowed", opacity: 0.4 },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _hover: {
+        opacity: 0.7,
+        _checked: {
+          opacity: 1,
+        },
+      },
+      _readOnly: { cursor: "default" },
     },
     container: {
-      _disabled: { cursor: "not-allowed" },
-      _readOnly: { cursor: "default" },
       bg: ["blackAlpha.100", "whiteAlpha.50"],
       p: "1",
+      _disabled: { cursor: "not-allowed" },
+      _readOnly: { cursor: "default" },
     },
     cursor: {
       boxShadow: ["md", "dark-md"],
@@ -50,10 +50,10 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   variants: {
     basic: ({ colorScheme: c = "gray" }) => ({
       button: {
+        rounded: "md",
         _checked: {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
-        rounded: "md",
       },
       container: {
         rounded: "lg",
@@ -68,10 +68,10 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
     }),
     rounded: ({ colorScheme: c = "gray" }) => ({
       button: {
+        rounded: "full",
         _checked: {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
-        rounded: "full",
       },
       container: {
         rounded: "full",

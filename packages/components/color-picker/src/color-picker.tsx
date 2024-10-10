@@ -216,7 +216,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 ColorPicker.displayName = "ColorPicker"
 ColorPicker.__ui__ = "ColorPicker"
 
-type ColorPickerFieldProps = HTMLUIProps<"input">
+interface ColorPickerFieldProps extends HTMLUIProps<"input"> {}
 
 const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
   ({ className, h, minH, ...rest }, ref) => {
@@ -246,7 +246,7 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
 ColorPickerField.displayName = "ColorPickerField"
 ColorPickerField.__ui__ = "ColorPickerField"
 
-type ColorPickerSwatchProps = ColorSwatchProps
+interface ColorPickerSwatchProps extends ColorSwatchProps {}
 
 const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
   ({ className, ...rest }, ref) => {
@@ -276,7 +276,7 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
 ColorPickerSwatch.displayName = "ColorPickerSwatch"
 ColorPickerSwatch.__ui__ = "ColorPickerSwatch"
 
-type ColorPickerEyeDropperProps = HTMLUIProps<"button">
+interface ColorPickerEyeDropperProps extends HTMLUIProps<"button"> {}
 
 const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
   ({ className, children, ...rest }, ref) => {
@@ -302,8 +302,8 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
           maxHeight: "1em",
           maxWidth: "1em",
         },
-        focusable: false,
         "aria-hidden": true,
+        focusable: false,
       }),
     )
 

@@ -3,22 +3,23 @@ import type { ComponentStyle } from "@yamada-ui/core"
 export const ScrollArea: ComponentStyle<"ScrollArea"> = {
   baseStyle: {
     "@-moz-document url-prefix()": {
+      scrollbarColor: "whiteAlpha.600 transparent",
       _dark: {
         scrollbarColor: "whiteAlpha.600 transparent",
       },
       _light: {
         scrollbarColor: "whiteAlpha.600 transparent",
       },
-      scrollbarColor: "whiteAlpha.600 transparent",
     },
+    outline: 0,
     _dark: {
       _scrollbarThumb: {
+        bg: "whiteAlpha.600",
+        bgClip: "padding-box",
         _nativeHover: {
           bg: "whiteAlpha.800",
           bgClip: "padding-box",
         },
-        bg: "whiteAlpha.600",
-        bgClip: "padding-box",
       },
     },
     _focusVisible: {
@@ -33,18 +34,17 @@ export const ScrollArea: ComponentStyle<"ScrollArea"> = {
       bg: "transparent",
     },
     _scrollbarThumb: {
-      _nativeHover: {
-        bg: "blackAlpha.800",
-        bgClip: "padding-box",
-      },
       bg: "blackAlpha.600",
       bgClip: "padding-box",
       border: "3px solid transparent",
       rounded: "full",
+      _nativeHover: {
+        bg: "blackAlpha.800",
+        bgClip: "padding-box",
+      },
     },
     _scrollbarTrack: {
       bg: "transparent",
     },
-    outline: 0,
   },
 }

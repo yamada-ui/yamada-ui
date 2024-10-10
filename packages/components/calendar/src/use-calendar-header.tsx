@@ -217,10 +217,10 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       return {
         "aria-label": ariaLabel,
         ...props,
-        tabIndex: -1,
         "aria-disabled": ariaAttr(isHidden),
         "data-disabled": dataAttr(isHidden),
         "data-hidden": dataAttr(isHidden),
+        tabIndex: -1,
         onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
       }
     },
@@ -247,8 +247,8 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       return {
         pointerEvents: type !== "year" ? "auto" : "none",
         ...props,
-        tabIndex: !!index ? -1 : 0,
         "aria-live": "polite",
+        tabIndex: !!index ? -1 : 0,
         onClick: handlerAll(props.onClick, onChangeType),
       }
     },

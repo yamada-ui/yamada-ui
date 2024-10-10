@@ -165,21 +165,21 @@ export const customButton: Story = () => {
 
       <Dialog
         cancel={{
-          children: "わけない",
           colorScheme: "red",
           variant: "outline",
+          children: "わけない",
         }}
         header="孫悟空"
         isOpen={isOpen}
         other={{
-          children: "どちらでもよい",
           colorScheme: "orange",
           variant: "outline",
+          children: "どちらでもよい",
         }}
         success={{
-          children: "わける",
           colorScheme: "blue",
           variant: "outline",
+          children: "わける",
         }}
         onCancel={onClose}
         onClose={onClose}
@@ -272,10 +272,10 @@ export const withSize: Story = () => {
       </Wrap>
 
       <Dialog
+        size={size}
         cancel="わけない"
         header="孫悟空"
         isOpen={isOpen}
-        size={size}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -582,9 +582,9 @@ export const scrollOnMount: Story = () => {
         textAlign="center"
       >
         <Image
+          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
           alt="ドラゴンボール"
           maxW="sm"
-          src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

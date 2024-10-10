@@ -18,9 +18,9 @@ export const Footer: FC<FooterProps> = memo(({ ...rest }) => {
       </Button>
 
       <IconButton
-        icon={<History color="muted" fontSize="2xl" />}
         size={{ base: "lg" }}
         variant="ghost"
+        icon={<History color="muted" fontSize="2xl" />}
       />
     </HStack>
   )

@@ -7,8 +7,8 @@ describe("<IconButton />", () => {
     await a11y(
       <IconButton
         colorScheme="primary"
-        icon={<ChevronIcon />}
         aria-label="Open menu"
+        icon={<ChevronIcon />}
       />,
     )
   })

@@ -18,7 +18,7 @@ export const Badge: ComponentStyle<"Badge"> = {
   },
 
   variants: {
-    outline: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => {
+    outline: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
         getColor(
@@ -31,11 +31,11 @@ export const Badge: ComponentStyle<"Badge"> = {
         color,
       }
     },
-    solid: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
       color: `white`,
     }),
-    subtle: ({ colorMode: m, colorScheme: c = "primary", theme: t }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       bg: [
         isGray(c) ? `${c}.50` : `${c}.100`,
         shadeColor(`${c}.300`, 58)(t, m),

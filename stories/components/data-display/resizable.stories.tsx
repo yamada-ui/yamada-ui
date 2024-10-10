@@ -44,7 +44,7 @@ export const withVariant: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable h="md" variant="spacer">
+      <Resizable variant="spacer" h="md">
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           One
         </ResizableItem>
@@ -56,7 +56,7 @@ export const withVariant: Story = () => {
         </ResizableItem>
       </Resizable>
 
-      <Resizable h="md" variant="unstyled">
+      <Resizable variant="unstyled" h="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
         <ResizableTrigger />
@@ -70,7 +70,7 @@ export const withVariant: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <Resizable colorScheme="primary" h="md" variant="spacer">
+      <Resizable colorScheme="primary" variant="spacer" h="md">
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           One
         </ResizableItem>
@@ -82,7 +82,7 @@ export const withColorScheme: Story = () => {
         </ResizableItem>
       </Resizable>
 
-      <Resizable colorScheme="red" h="md" variant="spacer">
+      <Resizable colorScheme="red" variant="spacer" h="md">
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           One
         </ResizableItem>
@@ -256,7 +256,7 @@ export const withIcon: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable direction="vertical" h="md" variant="spacer">
+      <Resizable variant="spacer" direction="vertical" h="md">
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           One
         </ResizableItem>

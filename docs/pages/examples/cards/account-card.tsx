@@ -19,10 +19,10 @@ import { memo } from "react"
 export const AccountCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h2" size="md">
@@ -35,7 +35,7 @@ export const AccountCard = memo(() => {
       </CardHeader>
 
       <CardBody>
-        <ButtonGroup gap="sm" variant="outline" w="full">
+        <ButtonGroup variant="outline" gap="sm" w="full">
           <Button leftIcon={<Github boxSize="1.25rem" />} w="full">
             GitHub
           </Button>

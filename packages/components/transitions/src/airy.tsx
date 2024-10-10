@@ -123,12 +123,12 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
       ref={ref}
       type="button"
       className={cx("ui-airy", `ui-airy--${value}`, className)}
-      animate={animate}
-      disabled={isDisabled}
-      initial={{ opacity }}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
       data-value={value}
+      animate={animate}
+      disabled={isDisabled}
+      initial={{ opacity }}
       onClick={onClick}
       __css={css}
       {...rest}

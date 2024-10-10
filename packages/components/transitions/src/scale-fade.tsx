@@ -1,22 +1,22 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
-  WithTransitionProps,
-  MotionTransitionVariants,
   MotionProps,
+  MotionTransitionVariants,
   MotionVariants,
+  WithTransitionProps,
 } from "@yamada-ui/motion"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
   AnimatePresence,
-  transitionEnter,
-  transitionExit,
   motion,
   motionForwardRef,
+  transitionEnter,
+  transitionExit,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
 const variants: MotionVariants = {
-  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
+  enter: ({ delay, duration, enter, transition, transitionEnd } = {}) => ({
     opacity: 1,
     scale: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
@@ -24,13 +24,13 @@ const variants: MotionVariants = {
     ...enter,
   }),
   exit: ({
-    scale,
-    reverse,
-    transition,
-    transitionEnd,
     delay,
     duration,
     exit,
+    reverse,
+    scale,
+    transition,
+    transitionEnd,
   } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
@@ -42,25 +42,25 @@ const variants: MotionVariants = {
 } satisfies MotionTransitionVariants
 
 export const scaleFadeProps = {
-  initial: "exit",
   animate: "enter",
   exit: "exit",
+  initial: "exit",
   variants,
 }
 
 interface ScaleFadeOptions {
-  /**
-   * The initial scale of the element.
-   *
-   * @default 0.95
-   */
-  scale?: number
   /**
    * If `true`, the element will transition back to exit state.
    *
    * @default true
    */
   reverse?: boolean
+  /**
+   * The initial scale of the element.
+   *
+   * @default 0.95
+   */
+  scale?: number
 }
 
 export interface ScaleFadeProps
@@ -77,26 +77,26 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("ScaleFade", props)
     let {
-      unmountOnExit,
-      isOpen,
-      scale,
-      reverse,
-      transition,
-      transitionEnd,
+      className,
       delay,
       duration,
-      className,
+      isOpen,
+      reverse,
+      scale,
+      transition,
+      transitionEnd,
+      unmountOnExit,
       ...rest
     } = omitThemeProps(mergedProps)
     const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const custom = {
-      scale,
-      reverse,
-      transition,
-      transitionEnd,
       delay,
       duration,
+      reverse,
+      scale,
+      transition,
+      transitionEnd,
     }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true

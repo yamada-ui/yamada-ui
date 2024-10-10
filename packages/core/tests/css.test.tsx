@@ -1,12 +1,60 @@
-import { render, screen } from "@yamada-ui/test"
 import type { Dict } from "@yamada-ui/utils"
 import type { FC } from "react"
 import type { MockInstance } from "vitest"
 import type { StyledTheme } from "../src"
-import { css, transformTheme, useCSS, ui } from "../src"
+import { render, screen } from "@yamada-ui/test"
+import { css, transformTheme, ui, useCSS } from "../src"
 
 const theme = transformTheme(
   {
+    breakpoints: {
+      sm: "30em",
+      md: "48em",
+      lg: "61em",
+      xl: "80em",
+      "2xl": "90em",
+    },
+    colors: {
+      blackAlpha: {
+        50: "rgba(0, 0, 0, 0.04)",
+        100: "rgba(0, 0, 0, 0.06)",
+        200: "rgba(0, 0, 0, 0.08)",
+        300: "rgba(0, 0, 0, 0.16)",
+        400: "rgba(0, 0, 0, 0.24)",
+        500: "rgba(0, 0, 0, 0.36)",
+        600: "rgba(0, 0, 0, 0.48)",
+        700: "rgba(0, 0, 0, 0.64)",
+        800: "rgba(0, 0, 0, 0.80)",
+        900: "rgba(0, 0, 0, 0.92)",
+        950: "rgba(0, 0, 0, 0.96)",
+      },
+      gray: {
+        50: "#dedfe3",
+        100: "#d3d5da",
+        200: "#b7bbc3",
+        300: "#9ea3ae",
+        400: "#828997",
+        500: "#6b7280",
+        600: "#565c67",
+        700: "#434851",
+        800: "#2e3138",
+        900: "#1c1e21",
+        950: "#101113",
+      },
+      whiteAlpha: {
+        50: "rgba(255, 255, 255, 0.04)",
+        100: "rgba(255, 255, 255, 0.06)",
+        200: "rgba(255, 255, 255, 0.08)",
+        300: "rgba(255, 255, 255, 0.16)",
+        400: "rgba(255, 255, 255, 0.24)",
+        500: "rgba(255, 255, 255, 0.36)",
+        600: "rgba(255, 255, 255, 0.48)",
+        700: "rgba(255, 255, 255, 0.64)",
+        800: "rgba(255, 255, 255, 0.80)",
+        900: "rgba(255, 255, 255, 0.92)",
+        950: "rgba(255, 255, 255, 0.96)",
+      },
+    },
     fontSizes: {
       "2xs": "0.625rem",
       xs: "0.75rem",
@@ -35,7 +83,6 @@ const theme = transformTheme(
       black: 900,
     },
     spaces: {
-      px: "1px",
       0.5: "0.125rem",
       1: "0.25rem",
       1.5: "0.375rem",
@@ -68,77 +115,30 @@ const theme = transformTheme(
       72: "18rem",
       80: "20rem",
       96: "24rem",
-    },
-    colors: {
-      whiteAlpha: {
-        50: "rgba(255, 255, 255, 0.04)",
-        100: "rgba(255, 255, 255, 0.06)",
-        200: "rgba(255, 255, 255, 0.08)",
-        300: "rgba(255, 255, 255, 0.16)",
-        400: "rgba(255, 255, 255, 0.24)",
-        500: "rgba(255, 255, 255, 0.36)",
-        600: "rgba(255, 255, 255, 0.48)",
-        700: "rgba(255, 255, 255, 0.64)",
-        800: "rgba(255, 255, 255, 0.80)",
-        900: "rgba(255, 255, 255, 0.92)",
-        950: "rgba(255, 255, 255, 0.96)",
-      },
-      blackAlpha: {
-        50: "rgba(0, 0, 0, 0.04)",
-        100: "rgba(0, 0, 0, 0.06)",
-        200: "rgba(0, 0, 0, 0.08)",
-        300: "rgba(0, 0, 0, 0.16)",
-        400: "rgba(0, 0, 0, 0.24)",
-        500: "rgba(0, 0, 0, 0.36)",
-        600: "rgba(0, 0, 0, 0.48)",
-        700: "rgba(0, 0, 0, 0.64)",
-        800: "rgba(0, 0, 0, 0.80)",
-        900: "rgba(0, 0, 0, 0.92)",
-        950: "rgba(0, 0, 0, 0.96)",
-      },
-      gray: {
-        50: "#dedfe3",
-        100: "#d3d5da",
-        200: "#b7bbc3",
-        300: "#9ea3ae",
-        400: "#828997",
-        500: "#6b7280",
-        600: "#565c67",
-        700: "#434851",
-        800: "#2e3138",
-        900: "#1c1e21",
-        950: "#101113",
-      },
-    },
-    breakpoints: {
-      sm: "30em",
-      md: "48em",
-      lg: "61em",
-      xl: "80em",
-      "2xl": "90em",
+      px: "1px",
     },
     styles: {
+      heading: {
+        "2xl": { fontSize: "2xl" },
+      },
       layerStyles: {
         muted: { bg: "gray.500" },
       },
       textStyles: {
         gradient: {
-          w: "full",
-          fontSize: "5xl",
-          bgGradient: "linear(to-l, #7928CA, #FF0080)",
           bgClip: "text",
+          bgGradient: "linear(to-l, #7928CA, #FF0080)",
+          fontSize: "5xl",
+          w: "full",
         },
-      },
-      heading: {
-        "2xl": { fontSize: "2xl" },
       },
     },
   },
   {
-    initialThemeScheme: "base",
-    initialColorMode: "light",
-    var: { prefix: "ui" },
     breakpoint: { direction: "down" },
+    initialColorMode: "light",
+    initialThemeScheme: "base",
+    var: { prefix: "ui" },
   },
 ) as StyledTheme
 
@@ -162,15 +162,15 @@ describe("CSS", () => {
 
   test("returns system props styles", () => {
     const result = css({
-      display: "block",
       color: "gray.500",
+      display: "block",
       fontSize: "md",
       mx: "4",
     })(theme)
 
     expect(result).toStrictEqual({
-      display: "block",
       color: "var(--ui-colors-gray-500)",
+      display: "block",
       fontSize: "var(--ui-fontSizes-md)",
       marginInlineEnd: "var(--ui-spaces-4)",
       marginInlineStart: "var(--ui-spaces-4)",
@@ -269,11 +269,11 @@ describe("CSS", () => {
 
     expect(result).toStrictEqual({
       "--ui-line-clamp": 1,
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
       display: "-webkit-box",
       overflow: "hidden",
       textOverflow: "ellipsis",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
     })
   })
 
@@ -323,35 +323,35 @@ describe("CSS", () => {
 
   test("returns interpolation", () => {
     const result = css({
+      m: "$yamada",
       p: "$spaces.4 $spaces.4",
-      m: "$hoge",
     })(theme)
 
     expect(result).toStrictEqual({
+      margin: "var(--ui-yamada)",
       padding: "var(--ui-spaces-4) var(--ui-spaces-4)",
-      margin: "var(--ui-hoge)",
     })
   })
 })
 
 describe("useCSS", () => {
-  test("returns styles with theme values", async () => {
+  test("returns styles with theme values", () => {
     const Component: FC = () => {
       const className = useCSS({
-        display: "block",
         color: "gray.500",
+        display: "block",
         fontSize: "md",
         mx: "4",
       })
 
-      return <ui.div data-testid="component" className={className} />
+      return <ui.div className={className} data-testid="component" />
     }
 
     render(<Component />)
 
     expect(screen.getByTestId("component")).toHaveStyle({
-      display: "block",
       color: "var(--ui-colors-gray-500)",
+      display: "block",
       fontSize: "var(--ui-fontSizes-md)",
       marginInlineEnd: "var(--ui-spaces-4)",
       marginInlineStart: "var(--ui-spaces-4)",
@@ -364,7 +364,7 @@ describe("useCSS", () => {
         color: (t: Dict) => t.colors?.gray?.[500],
       })
 
-      return <ui.div data-testid="component" className={className} />
+      return <ui.div className={className} data-testid="component" />
     }
 
     render(<Component />)

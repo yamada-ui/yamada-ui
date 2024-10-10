@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useEffect, useRef } from "react"
 
 /**
  * `usePrevious` is a custom hook for obtaining the previous value.
@@ -12,5 +12,5 @@ export const usePrevious = <T>(value: T) => {
     ref.current = value
   }, [value])
 
-  return ref.current as T
+  return ref.current
 }

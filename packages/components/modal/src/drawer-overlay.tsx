@@ -1,8 +1,8 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalOverlayProps } from "./modal-overlay"
 import { motionForwardRef } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 import { useDrawer } from "./modal-context"
-import type { ModalOverlayProps } from "./modal-overlay"
 import { ModalOverlay } from "./modal-overlay"
 
 export interface DrawerOverlayProps extends ModalOverlayProps {}

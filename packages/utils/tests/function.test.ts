@@ -1,4 +1,4 @@
-import { noop, runIfFunc, handlerAll, funcAll } from "../src"
+import { funcAll, handlerAll, noop, runIfFunc } from "../src"
 
 describe("Function", () => {
   describe("noop", () => {

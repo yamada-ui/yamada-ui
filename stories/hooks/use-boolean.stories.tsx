@@ -19,7 +19,7 @@ export const basic = () => {
 }
 
 export const useOnOff = () => {
-  const [flg, { on, off }] = useBoolean()
+  const [flg, { off, on }] = useBoolean()
 
   return (
     <Text w="full" onMouseEnter={on} onMouseLeave={off}>

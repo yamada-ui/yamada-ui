@@ -1,9 +1,9 @@
-import { forwardRef } from "@yamada-ui/core"
 import type { IconProps as UIIconProps } from "@yamada-ui/icon"
+import type { IconNode } from "lucide-react"
+import { forwardRef } from "@yamada-ui/core"
 import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { Icon as LucideIcon } from "lucide-react"
-import type { IconNode } from "lucide-react"
 
 interface IconOptions {
   /**
@@ -25,8 +25,8 @@ export const Icon = forwardRef<IconProps, "svg">(
       <UIIcon
         ref={ref}
         as={LucideIcon}
-        iconNode={icon}
         className={cx("ui-lucide-icon", className)}
+        iconNode={icon}
         {...rest}
       />
     )

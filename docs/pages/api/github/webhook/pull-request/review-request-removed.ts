@@ -1,26 +1,26 @@
-import { Octokit } from "@octokit/rest"
-import { DISCORD_REVIEW_COMMENT } from "./opened"
-import { sendDiscord } from "utils/discord"
-import { getListEventsForTimeline, recursiveOctokit } from "utils/github"
 import type { Event } from "utils/github"
 import type { APIHandler } from "utils/next"
+import { Octokit } from "@octokit/rest"
+import { sendDiscord } from "utils/discord"
+import { getListEventsForTimeline, recursiveOctokit } from "utils/github"
+import { DISCORD_REVIEW_COMMENT } from "./opened"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 export const reviewRequestedRemoved: APIHandler = async ({
+  constant,
   req,
   res,
-  constant,
 }) => {
-  const { repository, pull_request, requested_reviewer } =
+  const { pull_request, repository, requested_reviewer } =
     req.body as Event<"pull_request.review_request_removed">
   const owner = "yamada-ui"
   const repo = repository.name
-  const { number, title, html_url, user, requested_reviewers } = pull_request
-  const omittedRequestReviewers = requested_reviewers?.filter(
+  const { html_url, number, requested_reviewers, title, user } = pull_request
+  const omittedRequestReviewers = requested_reviewers.filter(
     ({ login }: any) => !constant.pullRequest.excludeReviewers.includes(login),
   )
-  const count = omittedRequestReviewers?.length ?? 0
+  const count = omittedRequestReviewers.length
   const { login } = requested_reviewer ?? {}
   const collaborators = [...constant.maintainers, ...constant.members].filter(
     ({ github }) =>
@@ -31,12 +31,12 @@ export const reviewRequestedRemoved: APIHandler = async ({
   if (count >= constant.pullRequest.assignReviewerCount) return
 
   if (!login)
-    return res.status(400).send({ status: 400, message: "Invalid github id" })
+    return res.status(400).send({ message: "Invalid github id", status: 400 })
 
   const timeline = await getListEventsForTimeline({
+    issue_number: number,
     owner,
     repo,
-    issue_number: number,
   })
 
   const previousReviewers = timeline
@@ -53,17 +53,17 @@ export const reviewRequestedRemoved: APIHandler = async ({
     ({ github }) => !previousReviewers.includes(github.id),
   )
 
-  const { github, discord } =
+  const { discord, github } =
     omitCollaborators.sort(() => 0.5 - Math.random())[0] ?? {}
 
   if (!github.id)
-    return res.status(400).send({ status: 400, message: "Not found github id" })
+    return res.status(400).send({ message: "Not found github id", status: 400 })
 
-  await recursiveOctokit(() =>
+  await recursiveOctokit(async () =>
     octokit.pulls.requestReviewers({
       owner,
-      repo,
       pull_number: number,
+      repo,
       reviewers: [github.id],
     }),
   )
@@ -75,6 +75,6 @@ export const reviewRequestedRemoved: APIHandler = async ({
     )
   } catch (e) {
     if (e instanceof Error)
-      return res.status(500).send({ status: 500, message: e.message })
+      return res.status(500).send({ message: e.message, status: 500 })
   }
 }

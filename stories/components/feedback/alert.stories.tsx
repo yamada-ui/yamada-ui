@@ -1,18 +1,19 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   Alert,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
   Box,
   CloseButton,
+  noop,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Alert>
 
 const meta: Meta<typeof Alert> = {
-  title: "Components / Feedback / Alert",
   component: Alert,
+  title: "Components / Feedback / Alert",
 }
 
 export default meta
@@ -58,7 +59,7 @@ export const basic: Story = () => {
 export const subtle: Story = () => {
   return (
     <>
-      <Alert status="info" variant="subtle">
+      <Alert variant="subtle" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -66,7 +67,7 @@ export const subtle: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" variant="subtle">
+      <Alert variant="subtle" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -74,7 +75,7 @@ export const subtle: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" variant="subtle">
+      <Alert variant="subtle" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -82,7 +83,7 @@ export const subtle: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" variant="subtle">
+      <Alert variant="subtle" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -96,7 +97,7 @@ export const subtle: Story = () => {
 export const solid: Story = () => {
   return (
     <>
-      <Alert status="info" variant="solid">
+      <Alert variant="solid" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -104,7 +105,7 @@ export const solid: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" variant="solid">
+      <Alert variant="solid" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -112,7 +113,7 @@ export const solid: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" variant="solid">
+      <Alert variant="solid" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -120,7 +121,7 @@ export const solid: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" variant="solid">
+      <Alert variant="solid" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -134,28 +135,28 @@ export const solid: Story = () => {
 export const islandAccent: Story = () => {
   return (
     <>
-      <Alert status="info" variant="island-accent">
+      <Alert variant="island-accent" status="info">
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
           か…完全体に………完全体になれさえすれば………！！！
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" variant="island-accent">
+      <Alert variant="island-accent" status="success">
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
           か…完全体に………完全体になれさえすれば………！！！
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" variant="island-accent">
+      <Alert variant="island-accent" status="warning">
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
           か…完全体に………完全体になれさえすれば………！！！
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" variant="island-accent">
+      <Alert variant="island-accent" status="error">
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
           か…完全体に………完全体になれさえすれば………！！！
@@ -168,7 +169,7 @@ export const islandAccent: Story = () => {
 export const topAccent: Story = () => {
   return (
     <>
-      <Alert status="info" variant="top-accent">
+      <Alert variant="top-accent" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -176,7 +177,7 @@ export const topAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" variant="top-accent">
+      <Alert variant="top-accent" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -184,7 +185,7 @@ export const topAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" variant="top-accent">
+      <Alert variant="top-accent" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -192,7 +193,7 @@ export const topAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" variant="top-accent">
+      <Alert variant="top-accent" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -206,7 +207,7 @@ export const topAccent: Story = () => {
 export const leftAccent: Story = () => {
   return (
     <>
-      <Alert status="info" variant="left-accent">
+      <Alert variant="left-accent" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -214,7 +215,7 @@ export const leftAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" variant="left-accent">
+      <Alert variant="left-accent" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -222,7 +223,7 @@ export const leftAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" variant="left-accent">
+      <Alert variant="left-accent" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -230,7 +231,7 @@ export const leftAccent: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" variant="left-accent">
+      <Alert variant="left-accent" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -244,7 +245,7 @@ export const leftAccent: Story = () => {
 export const withColorMode: Story = () => {
   return (
     <>
-      <Alert status="info" colorScheme="green">
+      <Alert colorScheme="green" status="info">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -252,7 +253,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="success" colorScheme="purple">
+      <Alert colorScheme="purple" status="success">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -260,7 +261,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="warning" colorScheme="gray">
+      <Alert colorScheme="gray" status="warning">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -268,7 +269,7 @@ export const withColorMode: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="error" colorScheme="pink">
+      <Alert colorScheme="pink" status="error">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -283,15 +284,15 @@ export const useCustomLayout: Story = () => {
   return (
     <>
       <Alert
-        status="success"
-        flexDirection="column"
-        justifyContent="center"
         alignItems="center"
-        textAlign="center"
+        flexDirection="column"
         h="2xs"
+        justifyContent="center"
+        status="success"
+        textAlign="center"
       >
         <AlertIcon boxSize="40px" mr={0} />
-        <AlertTitle fontSize="lg" mt={4} mb={1} mr={0}>
+        <AlertTitle fontSize="lg" mb={1} mr={0} mt={4}>
           セル
         </AlertTitle>
         <AlertDescription>
@@ -307,7 +308,7 @@ export const useCustomLayout: Story = () => {
             か…完全体に………完全体になれさえすれば………！！！
           </AlertDescription>
         </Box>
-        <CloseButton position="absolute" top={2} right={2} onClick={() => {}} />
+        <CloseButton position="absolute" right={2} top={2} onClick={noop} />
       </Alert>
     </>
   )
@@ -316,7 +317,7 @@ export const useCustomLayout: Story = () => {
 export const withLoading: Story = () => {
   return (
     <>
-      <Alert status="loading" variant="subtle">
+      <Alert variant="subtle" status="loading">
         <AlertIcon />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -324,7 +325,7 @@ export const withLoading: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="loading" variant="solid">
+      <Alert variant="solid" status="loading">
         <AlertIcon variant="grid" />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -332,7 +333,7 @@ export const withLoading: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="loading" variant="subtle">
+      <Alert variant="subtle" status="loading">
         <AlertIcon variant="puff" color="blue.500" />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>
@@ -340,7 +341,7 @@ export const withLoading: Story = () => {
         </AlertDescription>
       </Alert>
 
-      <Alert status="loading" variant="solid">
+      <Alert variant="solid" status="loading">
         <AlertIcon variant="dots" />
         <AlertTitle>セル</AlertTitle>
         <AlertDescription>

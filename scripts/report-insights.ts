@@ -1,14 +1,14 @@
-import { Octokit } from "@octokit/rest"
-import { program } from "commander"
+import type { Dict } from "@yamada-ui/react"
 import type { Dayjs } from "dayjs"
+import { Octokit } from "@octokit/rest"
+import { getRangeDates } from "@yamada-ui/calendar"
+import { isArray, merge } from "@yamada-ui/react"
+import { program } from "commander"
 import dayjs from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { config } from "dotenv"
 import { getConstant, recursiveOctokit } from "./utils"
-import { getRangeDates } from "@yamada-ui/calendar"
-import type { Dict } from "@yamada-ui/react"
-import { isArray, merge } from "@yamada-ui/react"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -30,15 +30,15 @@ type Collaborator = Awaited<
   ReturnType<typeof octokit.repos.listCollaborators>
 >["data"][number]
 
-type Insight = {
-  login: string
-  html_url: string
-  commits: Commit[]
-  comments: Comment[]
-  reviews: Review[]
-  issues: Issue[]
-  pullRequests: Issue[]
+interface Insight {
   approved: Review[]
+  comments: Comment[]
+  commits: Commit[]
+  html_url: string
+  issues: Issue[]
+  login: string
+  pullRequests: Issue[]
+  reviews: Review[]
 }
 
 const COMMON_PARAMS = {
@@ -55,18 +55,18 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const chunkArray = <T extends any>(array: T[], n: number) =>
+const chunkArray = <T>(array: T[], n: number) =>
   new Array(Math.ceil(array.length / n))
     .fill(0)
     .map((_, i) => array.slice(i * n, (i + 1) * n))
 
-const getTimestamp = (item: Review | Issue | Comment) =>
+const getTimestamp = (item: Comment | Issue | Review) =>
   dayjs("created_at" in item ? item.created_at : item.submitted_at)
 
 const getCollaborators =
   ({ user }: Options) =>
   async () => {
-    const { data } = await recursiveOctokit(() =>
+    const { data } = await recursiveOctokit(async () =>
       octokit.repos.listCollaborators({
         ...COMMON_PARAMS,
         per_page: 100,
@@ -77,24 +77,24 @@ const getCollaborators =
   }
 
 const getIssuesAndPullRequests =
-  ({ startDate, endDate }: Options) =>
+  ({ endDate, startDate }: Options) =>
   async (username: string) => {
     let issuesAndPullRequests: Issue[] = []
 
     const start = startDate.format(QUERY_FORMAT)
     const end = endDate.format(QUERY_FORMAT)
-    const query = `org:${COMMON_PARAMS["owner"]} author:${username} created:${start}..${end}`
+    const query = `org:${COMMON_PARAMS.owner} author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
 
     const getIssuesAndPullRequests = async () => {
       const { data } = await octokit.search.issuesAndPullRequests({
-        q: query,
-        per_page: perPage,
         page,
+        per_page: perPage,
+        q: query,
       })
-      const { total_count, items } = data
+      const { items, total_count } = data
 
       issuesAndPullRequests.push(...items)
 
@@ -124,11 +124,11 @@ const getIssuesAndPullRequests =
   }
 
 const getComments =
-  ({ startDate, endDate }: Options) =>
+  ({ endDate, startDate }: Options) =>
   async () => {
-    const { data: repositories } = await recursiveOctokit(() =>
+    const { data: repositories } = await recursiveOctokit(async () =>
       octokit.repos.listForOrg({
-        org: COMMON_PARAMS["owner"],
+        org: COMMON_PARAMS.owner,
       }),
     )
 
@@ -142,12 +142,12 @@ const getComments =
       const listCommentsForRepo = async () => {
         const { data } = await octokit.issues.listCommentsForRepo({
           ...COMMON_PARAMS,
+          direction: "asc",
+          page,
+          per_page: perPage,
           repo: name,
           since: startDate.format(QUERY_FORMAT),
           until: endDate.format(QUERY_FORMAT),
-          direction: "asc",
-          per_page: perPage,
-          page,
         })
 
         comments.push(...data)
@@ -171,13 +171,13 @@ const getComments =
   }
 
 const getReviews =
-  ({ startDate, endDate }: Options) =>
+  ({ endDate, startDate }: Options) =>
   async (username: string) => {
     let pullRequests: Issue[] = []
 
     const start = startDate.subtract(1, "month").format(QUERY_FORMAT)
     const end = endDate.format(QUERY_FORMAT)
-    const query = `org:${COMMON_PARAMS["owner"]} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
+    const query = `org:${COMMON_PARAMS.owner} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
@@ -186,9 +186,9 @@ const getReviews =
       const {
         data: { items },
       } = await octokit.search.issuesAndPullRequests({
-        q: query,
-        per_page: perPage,
         page,
+        per_page: perPage,
+        q: query,
       })
 
       pullRequests.push(...items)
@@ -206,14 +206,14 @@ const getReviews =
 
     const reviewsAndApproved = (
       await Promise.all(
-        pullRequests.map(({ number, repository_url }) =>
+        pullRequests.map(async ({ number, repository_url }) =>
           recursiveOctokit(async () => {
             const repo = repository_url.split("/").at(-1)!
 
             const { data } = await octokit.pulls.listReviews({
               ...COMMON_PARAMS,
-              repo,
               pull_number: number,
+              repo,
             })
 
             return data
@@ -226,7 +226,7 @@ const getReviews =
     const approved: Review[] = []
 
     reviewsAndApproved.forEach((item) => {
-      const { user, state, submitted_at } = item
+      const { state, submitted_at, user } = item
 
       if (user?.login !== username) return
 
@@ -235,19 +235,19 @@ const getReviews =
 
       if (state !== "APPROVED") {
         reviews.push(item)
-      } else if (state === "APPROVED") {
+      } else {
         approved.push(item)
       }
     })
 
-    return { reviews, approved }
+    return { approved, reviews }
   }
 
 const getCommits =
-  ({ startDate, endDate }: Options) =>
+  ({ endDate, startDate }: Options) =>
   async () => {
     const { data: repositories } = await octokit.repos.listForOrg({
-      org: COMMON_PARAMS["owner"],
+      org: COMMON_PARAMS.owner,
     })
 
     let commits: Commit[] = []
@@ -260,11 +260,11 @@ const getCommits =
       const listCommits = async () => {
         const { data } = await octokit.repos.listCommits({
           ...COMMON_PARAMS,
+          page,
+          per_page: perPage,
           repo: name,
           since: startDate.format(QUERY_FORMAT),
           until: endDate.format(QUERY_FORMAT),
-          per_page: perPage,
-          page,
         })
 
         commits.push(...data)
@@ -294,22 +294,22 @@ const getInsights =
       ({ login }) => !constant.insights.excludeUsers.includes(login),
     )
 
-    for await (const { login, html_url } of omittedCollaborators) {
+    for await (const { html_url, login } of omittedCollaborators) {
       const { issues, pullRequests } =
         await getIssuesAndPullRequests(options)(login)
-      const { reviews, approved } = await getReviews(options)(login)
+      const { approved, reviews } = await getReviews(options)(login)
       const comments = allComments.filter(({ user }) => user?.login === login)
       const commits = allCommits.filter(({ author }) => author?.login === login)
 
       insights.push({
-        login,
-        html_url,
-        commits,
-        comments,
-        reviews,
-        issues,
-        pullRequests,
         approved,
+        comments,
+        commits,
+        html_url,
+        issues,
+        login,
+        pullRequests,
+        reviews,
       })
     }
 
@@ -320,14 +320,14 @@ const createReports = (options: Options) => (insights: Insight[]) =>
   insights
     .map(
       ({
-        login,
-        html_url,
-        comments,
-        reviews,
-        commits,
-        issues,
-        pullRequests,
         approved,
+        comments,
+        commits,
+        html_url,
+        issues,
+        login,
+        pullRequests,
+        reviews,
       }) => {
         const issueCount = issues.length
         const pullRequestCount = pullRequests.length
@@ -338,7 +338,6 @@ const createReports = (options: Options) => (insights: Insight[]) =>
           issueCount + pullRequestCount + approvedCount + commentCount
 
         return {
-          total: totalCount,
           content: [
             `- [${login}](${html_url}): ${totalCount}`,
             createReport(options)("Issue", issues),
@@ -347,6 +346,7 @@ const createReports = (options: Options) => (insights: Insight[]) =>
             createReport(options)("Comment", [...comments, ...reviews]),
             `  - Commit: ${commitCount}`,
           ].join("\n"),
+          total: totalCount,
         }
       },
     )
@@ -355,7 +355,7 @@ const createReports = (options: Options) => (insights: Insight[]) =>
 
 const createReport =
   ({ extended }: Options) =>
-  (type: string, list: Review[] | Issue[] | (Comment | Review)[]) => {
+  (type: string, list: (Comment | Review)[] | Issue[] | Review[]) => {
     const count = list.length
     const isExtended =
       extended === true ||
@@ -382,7 +382,7 @@ const createReport =
   }
 
 const sendDiscordChannel =
-  ({ startDate, endDate, publish }: Options) =>
+  ({ endDate, publish, startDate }: Options) =>
   async (reports: string[]) => {
     const url = process.env.DISCORD_INSIGHTS_WEBHOOK_URL
 
@@ -413,12 +413,12 @@ const sendDiscordChannel =
       if (publish) {
         if (!url) throw new Error("Missing Discord Webhook URL\n")
 
-        const data = { username: "GitHub", content }
+        const data = { content, username: "GitHub" }
 
         const headers = { "Content-Type": "application/json" }
         const body = JSON.stringify(data)
 
-        const { ok } = await fetch(url, { method: "POST", headers, body })
+        const { ok } = await fetch(url, { body, headers, method: "POST" })
 
         if (!ok) throw new Error("Failed to send message to Discord\n")
       } else {
@@ -427,7 +427,7 @@ const sendDiscordChannel =
     }
   }
 
-const getSomeDates = <T extends Review | Issue | Comment | Review>(
+const getSomeDates = <T extends Comment | Issue | Review | Review>(
   date: string,
   list: T[],
 ) =>
@@ -439,7 +439,7 @@ const getSomeDates = <T extends Review | Issue | Comment | Review>(
   )
 
 const uploadData =
-  ({ startDate, endDate }: Options) =>
+  ({ endDate, startDate }: Options) =>
   async (insights: Insight[]) => {
     const rangeDates = getRangeDates(
       startDate.add(9, "hour").toDate(),
@@ -455,10 +455,10 @@ const uploadData =
         Object.fromEntries(
           insights.map(({ login, ...rest }) => {
             const comments = getSomeDates(date, rest.comments).map(
-              ({ html_url, issue_url, created_at }) => ({
+              ({ created_at, html_url, issue_url }) => ({
+                created_at,
                 html_url,
                 issue_url,
-                created_at,
               }),
             )
 
@@ -471,22 +471,22 @@ const uploadData =
             )
 
             const issues = getSomeDates(date, rest.issues).map(
-              ({ html_url, title, number, created_at, closed_at }) => ({
+              ({ closed_at, created_at, html_url, number, title }) => ({
+                closed_at,
+                created_at,
+                html_url,
                 number,
                 title,
-                html_url,
-                created_at,
-                closed_at,
               }),
             )
 
             const pullRequests = getSomeDates(date, rest.pullRequests).map(
-              ({ html_url, title, number, created_at, closed_at }) => ({
+              ({ closed_at, created_at, html_url, number, title }) => ({
+                closed_at,
+                created_at,
+                html_url,
                 number,
                 title,
-                html_url,
-                created_at,
-                closed_at,
               }),
             )
 
@@ -525,13 +525,13 @@ const uploadData =
     try {
       const { data } = await octokit.repos.getContent({
         ...COMMON_PARAMS,
-        repo: "yamada-data",
         path: "activity.json",
+        repo: "yamada-data",
       })
 
-      const sha = isArray(data) ? data[0].sha : data.sha
+      const sha = isArray(data) ? data[0]?.sha : data.sha
       const downloadUrl = isArray(data)
-        ? data[0].download_url
+        ? data[0]?.download_url
         : data.download_url
 
       const res = await fetch(downloadUrl!)
@@ -554,33 +554,33 @@ const uploadData =
 
       await octokit.repos.createOrUpdateFileContents({
         ...COMMON_PARAMS,
-        repo: "yamada-data",
-        path: "activity.json",
-        message: "build: updated activity",
-        content,
-        sha,
         branch: "main",
+        content,
+        message: "build: updated activity",
+        path: "activity.json",
+        repo: "yamada-data",
+        sha,
       })
     } catch {}
   }
 
-type CommandOptions = {
-  start: string | undefined
+interface CommandOptions {
   end: string | undefined
-  user: string[] | undefined
   extended: boolean | string[] | undefined
   publish: boolean | undefined
+  start: string | undefined
   upload: boolean | undefined
+  user: string[] | undefined
 }
-type Options = {
-  startDate: Dayjs
+interface Options {
   endDate: Dayjs
-  user: string[]
   extended: boolean | string[]
   publish: boolean
+  startDate: Dayjs
+  user: string[]
 }
 
-const main = async () => {
+const main = () => {
   program
     .option("-s, --start <date>")
     .option("-e, --end <date>")
@@ -590,12 +590,12 @@ const main = async () => {
     .option("--upload")
     .action(
       async ({
-        start,
         end,
-        user = [],
         extended = false,
         publish = false,
+        start,
         upload = false,
+        user = [],
       }: CommandOptions) => {
         let startDate: Dayjs
         let endDate: Dayjs
@@ -620,7 +620,7 @@ const main = async () => {
           endDate = dayjs().hour(23).minute(59).second(59).subtract(9, "hour")
         }
 
-        const options: Options = { startDate, endDate, user, extended, publish }
+        const options: Options = { endDate, extended, publish, startDate, user }
 
         const collaborators = await getCollaborators(options)()
         const insights = await getInsights(options)(collaborators)

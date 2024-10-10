@@ -1,13 +1,14 @@
 import type { ButtonProps } from "@yamada-ui/button"
-import { Button } from "@yamada-ui/button"
 import type { ColorModeToken, CSS, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ChangeEvent, ForwardedRef, ReactNode } from "react"
+import { Button } from "@yamada-ui/button"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -21,7 +22,6 @@ import {
   mergeRefs,
   pickObject,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, ForwardedRef, ReactNode } from "react"
 import { useCallback, useRef } from "react"
 
 interface Props extends FormControlOptions {
@@ -32,26 +32,26 @@ interface Props extends FormControlOptions {
 }
 
 interface FileButtonOptions {
+  children?: ((props: Props) => ReactNode) | ReactNode
   /**
    * The border color when the button is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * Function to be called when a file change event occurs.
-   */
-  onChange?: (files: File[] | undefined) => void
-  children?: ReactNode | ((props: Props) => ReactNode)
-  /**
    * Ref to a reset function.
    */
   resetRef?: ForwardedRef<() => void>
+  /**
+   * Function to be called when a file change event occurs.
+   */
+  onChange?: (files: File[] | undefined) => void
 }
 
 interface InputProps
   extends Partial<Pick<HTMLInputElement, "accept" | "multiple">> {}
 
 export interface FileButtonProps
-  extends Omit<ButtonProps, "onChange" | "children">,
+  extends Omit<ButtonProps, "children" | "onChange">,
     ThemeProps<"FileButton">,
     InputProps,
     FileButtonOptions,
@@ -66,29 +66,29 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("FileButton", props)
   const computedProps = omitThemeProps(mergedProps)
   let {
-    className,
-    resetRef,
-    as: As,
-    children,
     id,
-    name,
-    accept,
-    multiple,
+    as: As,
     form,
-    onClick: onClickProp,
+    name,
+    className,
+    accept,
+    children,
+    multiple,
+    resetRef,
     onChange: onChangeProp,
+    onClick: onClickProp,
     ...rest
   } = useFormControlProps(computedProps)
   const {
-    onFocus: _onFocus,
     onBlur: _onBlur,
+    onFocus: _onFocus,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
   const {
+    "aria-invalid": isInvalid,
     disabled,
     readOnly,
     required,
-    "aria-invalid": isInvalid,
   } = formControlProps
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -134,42 +134,45 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
   return (
     <>
       <ui.input
-        ref={mergeRefs(inputRef, ref)}
-        type="file"
-        aria-hidden
-        tabIndex={-1}
         id={id}
-        name={name}
+        ref={mergeRefs(inputRef, ref)}
         form={form}
-        accept={accept}
-        multiple={multiple}
+        type="file"
+        name={name}
         style={{
           border: "0px",
           clip: "rect(0px, 0px, 0px, 0px)",
           height: "1px",
-          width: "1px",
           margin: "-1px",
-          padding: "0px",
           overflow: "hidden",
-          whiteSpace: "nowrap",
+          padding: "0px",
           position: "absolute",
+          whiteSpace: "nowrap",
+          width: "1px",
         }}
+        aria-hidden
+        accept={accept}
+        multiple={multiple}
+        tabIndex={-1}
         onChange={onChange}
         {...formControlProps}
       />
 
       {isFunction(children)
         ? children({
-            onClick,
             disabled,
-            readOnly,
-            required,
             isDisabled: disabled,
+            isInvalid,
             isReadOnly: readOnly,
             isRequired: required,
-            isInvalid,
+            readOnly,
+            required,
+            onClick,
           })
         : children}
     </>
   )
 })
+
+FileButton.displayName = "FileButton"
+FileButton.__ui__ = "FileButton"

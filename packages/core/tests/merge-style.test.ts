@@ -1,5 +1,5 @@
+import type { ComponentMultiStyle, ComponentStyle, StyledTheme } from "../src"
 import { runIfFunc } from "@yamada-ui/utils"
-import type { StyledTheme, ComponentStyle, ComponentMultiStyle } from "../src"
 import { mergeMultiStyle, mergeStyle } from "../src/theme"
 
 const props = { theme: {} as StyledTheme }
@@ -8,27 +8,27 @@ describe("mergeStyle", () => {
   test("should merge two style objects", () => {
     const target: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
+        color: "primary",
+        fontSize: "sm",
       },
     }
     const source: ComponentStyle = {
       baseStyle: {
-        color: "secondary",
-        m: "md",
         bg: "success",
         borderColor: ["black", "white"],
+        color: "secondary",
+        m: "md",
       },
     }
     const expected: ComponentStyle = {
       baseStyle: {
+        bg: "success",
+        borderColor: ["black", "white"],
         color: "secondary",
         fontSize: "sm",
         m: "md",
-        bg: "success",
-        borderColor: ["black", "white"],
       },
     }
 
@@ -38,18 +38,18 @@ describe("mergeStyle", () => {
   test("should merge many style objects", () => {
     const target1: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
+        color: "primary",
+        fontSize: "sm",
       },
     }
     const target2: ComponentStyle = {
       baseStyle: {
-        color: "secondary",
-        m: "md",
         bg: "success",
         borderColor: ["black", "white"],
+        color: "secondary",
+        m: "md",
       },
     }
     const source: ComponentStyle = {
@@ -60,12 +60,12 @@ describe("mergeStyle", () => {
     }
     const expected: ComponentStyle = {
       baseStyle: {
+        bg: "success",
+        borderColor: ["black", "white"],
         color: "warning",
         fontSize: "sm",
         m: "md",
         p: "lg",
-        bg: "success",
-        borderColor: ["black", "white"],
       },
     }
 
@@ -75,34 +75,34 @@ describe("mergeStyle", () => {
   test("should correctly merge style objects with omitted keys", () => {
     const target: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
-      },
-      variants: {
-        solid: { bg: "primary" },
+        color: "primary",
+        fontSize: "sm",
       },
       sizes: {
         sm: { w: "sm" },
         md: { w: "md" },
       },
+      variants: {
+        solid: { bg: "primary" },
+      },
     }
     const source: ComponentStyle = {
       baseStyle: {
-        color: "secondary",
-        m: "md",
         bg: "success",
         borderColor: ["black", "white"],
+        color: "secondary",
+        m: "md",
       },
     }
     const expected: ComponentStyle = {
       baseStyle: {
+        bg: "success",
+        borderColor: ["black", "white"],
         color: "secondary",
         fontSize: "sm",
         m: "md",
-        bg: "success",
-        borderColor: ["black", "white"],
       },
       sizes: {
         md: { w: "md" },
@@ -117,39 +117,39 @@ describe("mergeStyle", () => {
   test("should correctly merge style objects with picked keys", () => {
     const target: ComponentStyle = {
       baseStyle: {
-        color: "primary",
-        fontSize: "sm",
         bg: { base: "warning", lg: "danger" },
         borderColor: "border",
-      },
-      variants: {
-        solid: { bg: "primary" },
+        color: "primary",
+        fontSize: "sm",
       },
       sizes: {
         sm: { w: "sm" },
         md: { w: "md" },
       },
+      variants: {
+        solid: { bg: "primary" },
+      },
     }
     const source: ComponentStyle = {
       baseStyle: {
-        color: "secondary",
-        m: "md",
         bg: "success",
         borderColor: ["black", "white"],
+        color: "secondary",
+        m: "md",
       },
     }
     const expected: ComponentStyle = {
       baseStyle: {
-        color: "secondary",
-        m: "md",
         bg: "success",
         borderColor: ["black", "white"],
-      },
-      variants: {
-        solid: { bg: "primary" },
+        color: "secondary",
+        m: "md",
       },
       sizes: {
         sm: { w: "sm" },
+      },
+      variants: {
+        solid: { bg: "primary" },
       },
     }
 
@@ -168,17 +168,17 @@ describe("mergeStyle", () => {
     }
     const source: ComponentStyle = {
       baseStyle: {
+        m: "md",
         p: "lg",
         _hover: { boxShadow: "outline" },
-        m: "md",
       },
     }
     const expected: ComponentStyle = {
       baseStyle: {
         color: "primary",
-        p: "lg",
-        _hover: { color: "secondary", boxShadow: "outline" },
         m: "md",
+        p: "lg",
+        _hover: { boxShadow: "outline", color: "secondary" },
       },
     }
 
@@ -241,10 +241,10 @@ describe("mergeMultiStyle", () => {
     const target: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "primary",
-          fontSize: "sm",
           bg: { base: "warning", lg: "danger" },
           borderColor: "border",
+          color: "primary",
+          fontSize: "sm",
         },
         inner: { p: "md" },
       },
@@ -252,21 +252,21 @@ describe("mergeMultiStyle", () => {
     const source: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "secondary",
-          m: "md",
           bg: "success",
           borderColor: ["black", "white"],
+          color: "secondary",
+          m: "md",
         },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
         container: {
+          bg: "success",
+          borderColor: ["black", "white"],
           color: "secondary",
           fontSize: "sm",
           m: "md",
-          bg: "success",
-          borderColor: ["black", "white"],
         },
         inner: { p: "md" },
       },
@@ -279,20 +279,20 @@ describe("mergeMultiStyle", () => {
     const target1: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "primary",
-          fontSize: "sm",
           bg: { base: "warning", lg: "danger" },
           borderColor: "border",
+          color: "primary",
+          fontSize: "sm",
         },
       },
     }
     const target2: ComponentMultiStyle = {
       baseStyle: {
         container: {
-          color: "secondary",
-          m: "md",
           bg: "success",
           borderColor: ["black", "white"],
+          color: "secondary",
+          m: "md",
         },
       },
     }
@@ -307,12 +307,12 @@ describe("mergeMultiStyle", () => {
     const expected: ComponentMultiStyle = {
       baseStyle: {
         container: {
+          bg: "success",
+          borderColor: ["black", "white"],
           color: "warning",
           fontSize: "sm",
           m: "md",
           p: "lg",
-          bg: "success",
-          borderColor: ["black", "white"],
         },
       },
     }
@@ -327,8 +327,8 @@ describe("mergeMultiStyle", () => {
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
-        solid: { container: { bg: "primary" } },
         outline: { container: { borderWidth: "1px" } },
+        solid: { container: { bg: "primary" } },
       },
     }
     const source: ComponentMultiStyle = {
@@ -361,11 +361,11 @@ describe("mergeMultiStyle", () => {
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
+        outline: { container: { borderWidth: "1px" } },
         solid: {
           container: { bg: "primary" },
           inner: { borderColor: ["black", "white"] },
         },
-        outline: { container: { borderWidth: "1px" } },
       },
     }
     const source: ComponentMultiStyle = {
@@ -379,8 +379,8 @@ describe("mergeMultiStyle", () => {
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
-        solid: { inner: { borderColor: ["black", "white"] } },
         outline: {},
+        solid: { inner: { borderColor: ["black", "white"] } },
       },
     }
 
@@ -423,18 +423,18 @@ describe("mergeMultiStyle", () => {
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
-        solid: { container: { bg: "primary" } },
         outline: { container: { borderColor: "border" } },
+        solid: { container: { bg: "primary" } },
       },
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
@@ -457,18 +457,18 @@ describe("mergeMultiStyle", () => {
         inner: { p: { base: "md", lg: "sm" } },
       },
       variants: {
-        solid: { container: { bg: "primary" } },
         outline: { container: { borderColor: "border" } },
+        solid: { container: { bg: "primary" } },
       },
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
       variants: {
         solid: { container: { bg: "primary" } },
@@ -493,14 +493,14 @@ describe("mergeMultiStyle", () => {
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
         inner: { p: { base: "md", lg: "sm" } },
         item: { mt: "md" },
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
       },
     }
 
@@ -527,16 +527,16 @@ describe("mergeMultiStyle", () => {
     }
     const source: ComponentMultiStyle = {
       baseStyle: {
-        container: { p: "lg", _hover: { color: "success" }, m: "md" },
+        container: { m: "md", p: "lg", _hover: { color: "success" } },
       },
     }
     const expected: ComponentMultiStyle = {
       baseStyle: {
         container: {
           color: "primary",
+          m: "md",
           p: "lg",
           _hover: { color: "success" },
-          m: "md",
         },
       },
     }

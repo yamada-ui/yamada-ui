@@ -1,9 +1,9 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
@@ -27,3 +27,6 @@ export const Kbd = forwardRef<KbdProps, "kbd">((props, ref) => {
     />
   )
 })
+
+Kbd.displayName = "Kbd"
+Kbd.__ui__ = "Kbd"

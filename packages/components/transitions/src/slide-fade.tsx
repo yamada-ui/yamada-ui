@@ -1,69 +1,69 @@
 import type { ThemeProps, Token } from "@yamada-ui/core"
-import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
-  WithTransitionProps,
-  MotionTransitionVariants,
   MotionProps,
+  MotionTransitionVariants,
   MotionVariants,
+  WithTransitionProps,
 } from "@yamada-ui/motion"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
   AnimatePresence,
-  transitionEnter,
-  transitionExit,
   motion,
   motionForwardRef,
+  transitionEnter,
+  transitionExit,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
 
 const variants: MotionVariants = {
-  initial: ({
-    offsetX,
-    offsetY,
-    transition,
-    transitionEnd,
-    delay,
-    duration,
-    initial,
-  }) => ({
-    opacity: 0,
-    x: offsetX,
-    y: offsetY,
-    transition: transitionExit(transition?.exit)(delay, duration),
-    transitionEnd: transitionEnd?.exit,
-    ...initial,
-  }),
-  enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
+  enter: ({ delay, duration, enter, transition, transitionEnd } = {}) => ({
     opacity: 1,
-    x: 0,
-    y: 0,
     transition: transitionEnter(transition?.enter)(delay, duration),
     transitionEnd: transitionEnd?.enter,
+    x: 0,
+    y: 0,
     ...enter,
   }),
   exit: ({
+    delay,
+    duration,
+    exit,
     offsetX,
     offsetY,
     reverse,
     transition,
     transitionEnd,
-    delay,
-    duration,
-    exit,
   } = {}) => ({
     opacity: 0,
     transition: transitionExit(transition?.exit)(delay, duration),
     ...(reverse
-      ? { x: offsetX, y: offsetY, transitionEnd: transitionEnd?.exit }
+      ? { transitionEnd: transitionEnd?.exit, x: offsetX, y: offsetY }
       : { transitionEnd: { x: offsetX, y: offsetY, ...transitionEnd?.exit } }),
     ...exit,
+  }),
+  initial: ({
+    delay,
+    duration,
+    initial,
+    offsetX,
+    offsetY,
+    transition,
+    transitionEnd,
+  }) => ({
+    opacity: 0,
+    transition: transitionExit(transition?.exit)(delay, duration),
+    transitionEnd: transitionEnd?.exit,
+    x: offsetX,
+    y: offsetY,
+    ...initial,
   }),
 } satisfies MotionTransitionVariants
 
 export const slideFadeProps = {
-  initial: "exit",
   animate: "enter",
   exit: "exit",
+  initial: "exit",
   variants,
 }
 
@@ -73,13 +73,13 @@ interface SlideFadeOptions {
    *
    * @default 0
    */
-  offsetX?: Token<string | number>
+  offsetX?: Token<number | string>
   /**
    * The offset on the vertical or `y` axis.
    *
    * @default 8
    */
-  offsetY?: Token<string | number>
+  offsetY?: Token<number | string>
   /**
    * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
    *
@@ -102,16 +102,16 @@ export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("SlideFade", props)
     let {
-      unmountOnExit,
+      className,
+      delay,
+      duration,
       isOpen,
       offsetX: _offsetX,
       offsetY: _offsetY,
       reverse,
       transition,
       transitionEnd,
-      delay,
-      duration,
-      className,
+      unmountOnExit,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -121,13 +121,13 @@ export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
     const offsetY = useValue(_offsetY)
 
     const custom = {
+      delay,
+      duration,
       offsetX,
       offsetY,
       reverse,
       transition,
       transitionEnd,
-      delay,
-      duration,
     }
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true

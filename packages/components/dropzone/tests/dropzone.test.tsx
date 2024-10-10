@@ -1,4 +1,4 @@
-import { act, fireEvent, a11y, render } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render } from "@yamada-ui/test"
 import {
   Dropzone,
   DropzoneAccept,
@@ -17,7 +17,7 @@ describe("<Dropzone />", () => {
     await a11y(container)
   })
 
-  test("Children property renders correctly", async () => {
+  test("Children property renders correctly", () => {
     const text = "Drag file here or click to select file"
     const { container } = render(
       <Dropzone>
@@ -27,7 +27,7 @@ describe("<Dropzone />", () => {
     expect(container.textContent).toBe(text)
   })
 
-  test("Is the multiple property being reflected correctly", async () => {
+  test("Is the multiple property being reflected correctly", () => {
     const { container } = render(
       <Dropzone multiple>
         <p>Drag file here or click to select file</p>
@@ -36,7 +36,7 @@ describe("<Dropzone />", () => {
     expect(container.querySelector("input")).toHaveAttribute("multiple")
   })
 
-  test("Is the accept property being reflected correctly", async () => {
+  test("Is the accept property being reflected correctly", () => {
     const { container } = render(
       <Dropzone
         accept={{
@@ -52,9 +52,9 @@ describe("<Dropzone />", () => {
     )
   })
 
-  test("Is the isDisabled property being reflected correctly", async () => {
+  test("Is the isDisabled property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isDisabled variant="dashed">
+      <Dropzone variant="dashed" isDisabled>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
@@ -65,9 +65,9 @@ describe("<Dropzone />", () => {
     )
   })
 
-  test("Is the isReadOnly property being reflected correctly", async () => {
+  test("Is the isReadOnly property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isReadOnly variant="dashed">
+      <Dropzone variant="dashed" isReadOnly>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
@@ -78,9 +78,9 @@ describe("<Dropzone />", () => {
     )
   })
 
-  test("Is the isLoading property being reflected correctly", async () => {
+  test("Is the isLoading property being reflected correctly", () => {
     const { container } = render(
-      <Dropzone isLoading variant="dashed">
+      <Dropzone variant="dashed" isLoading>
         <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
@@ -96,14 +96,14 @@ describe("<Dropzone />", () => {
 
     const dropzone = container.querySelector(".ui-dropzone")
 
-    await act(async () => {
+    await act(() =>
       fireEvent.drop(dropzone!, {
         dataTransfer: {
           files: [file],
           types: ["Files"],
         },
-      })
-    })
+      }),
+    )
 
     expect(onDrop).toHaveBeenCalledWith([file], [], expect.anything())
   })
@@ -120,14 +120,14 @@ describe("<Dropzone />", () => {
 
     const dropzone = container.querySelector(".ui-dropzone")
 
-    await act(async () => {
+    await act(() =>
       fireEvent.dragEnter(dropzone!, {
         dataTransfer: {
           files: [file],
           types: ["Files"],
         },
-      })
-    })
+      }),
+    )
 
     expect(container.textContent).toContain("Accepted")
   })
@@ -144,19 +144,19 @@ describe("<Dropzone />", () => {
 
     const dropzone = container.querySelector(".ui-dropzone")
 
-    await act(async () => {
+    await act(() =>
       fireEvent.dragEnter(dropzone!, {
         dataTransfer: {
           files: [file],
           types: ["Files"],
         },
-      })
-    })
+      }),
+    )
 
     expect(container.textContent).toContain("Rejected")
   })
 
-  test("DropzoneIdle renders correctly when not dragging files", async () => {
+  test("DropzoneIdle renders correctly when not dragging files", () => {
     const { container } = render(
       <Dropzone>
         <DropzoneIdle>

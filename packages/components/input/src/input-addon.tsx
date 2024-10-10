@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useInputGroup } from "./input-context"
 
@@ -30,10 +30,10 @@ const InputAddon = forwardRef<InputAddonProps, "div">(
     }
 
     const css: CSSUIObject = {
+      alignItems: "center",
+      display: "flex",
       flex: "0 0 auto",
       w: "auto",
-      display: "flex",
-      alignItems: "center",
       whiteSpace: "nowrap",
       ...styles.addon,
       ...placementStyles[placement],

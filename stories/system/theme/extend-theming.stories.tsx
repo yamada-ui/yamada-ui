@@ -1,23 +1,23 @@
+import type { ComponentStyle, ThemeTokens, UIStyle } from "@yamada-ui/react"
 import type { FC } from "react"
-import type { ComponentStyle, UIStyle, ThemeTokens } from "@yamada-ui/react"
 import {
-  Center,
-  Image,
   Badge,
-  Tag,
   Button,
-  Wrap,
-  UIProvider,
-  extendTheme,
-  withDefaultSize,
-  withDefaultVariant,
-  withDefaultColorScheme,
-  extendToken,
-  extendStyle,
+  Center,
+  extendComponent,
+  extendComponentDefaultProps,
   extendComponentSize,
   extendComponentVariant,
-  extendComponentDefaultProps,
-  extendComponent,
+  extendStyle,
+  extendTheme,
+  extendToken,
+  Image,
+  Tag,
+  UIProvider,
+  withDefaultColorScheme,
+  withDefaultSize,
+  withDefaultVariant,
+  Wrap,
 } from "@yamada-ui/react"
 
 export default {
@@ -83,7 +83,7 @@ export const rewriteDefaultProps = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Wrap gap="md" align="flex-start">
+      <Wrap align="flex-start" gap="md">
         <Badge>Badge</Badge>
         <Tag>Tag</Tag>
         <Button>Button</Button>
@@ -117,12 +117,12 @@ export const othersExtend = () => {
        * Define a new style
        */
     },
-    variants: extendComponentVariant("Tag", {
+    sizes: extendComponentSize("Tag", {
       /**
        * Define the token you want to customize
        */
     }),
-    sizes: extendComponentSize("Tag", {
+    variants: extendComponentVariant("Tag", {
       /**
        * Define the token you want to customize
        */
@@ -135,9 +135,9 @@ export const othersExtend = () => {
   }
 
   const theme = extendTheme({
-    styles: { resetStyle },
     colors,
     components: { Button, Tag },
+    styles: { resetStyle },
   })({ merge: false })
 
   return (
@@ -149,11 +149,11 @@ export const othersExtend = () => {
 
 const App: FC = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Image
-        w="full"
-        maxW="32rem"
         src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"
+        maxW="32rem"
+        w="full"
       />
     </Center>
   )

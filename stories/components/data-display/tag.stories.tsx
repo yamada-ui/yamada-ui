@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { colorSchemes } from "../../components"
 import { Plus } from "@yamada-ui/lucide"
-import { Wrap, Tag } from "@yamada-ui/react"
+import { noop, Tag, Wrap } from "@yamada-ui/react"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Tag>
 
 const meta: Meta<typeof Tag> = {
-  title: "Components / Data Display / Tag",
   component: Tag,
+  title: "Components / Data Display / Tag",
 }
 
 export default meta
@@ -28,7 +28,7 @@ export const solid: Story = () => {
   return (
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
-        <Tag key={colorScheme} variant="solid" colorScheme={colorScheme}>
+        <Tag key={colorScheme} colorScheme={colorScheme} variant="solid">
           {colorScheme}
         </Tag>
       ))}
@@ -40,7 +40,7 @@ export const outline: Story = () => {
   return (
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
-        <Tag key={colorScheme} variant="outline" colorScheme={colorScheme}>
+        <Tag key={colorScheme} colorScheme={colorScheme} variant="outline">
           {colorScheme}
         </Tag>
       ))}
@@ -50,7 +50,7 @@ export const outline: Story = () => {
 
 export const withSize: Story = () => {
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <Wrap alignItems="flex-start" gap="md">
       <Tag colorScheme="primary" size="sm">
         Small
       </Tag>
@@ -68,7 +68,7 @@ export const withSize: Story = () => {
 
 export const withIcon: Story = () => {
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <Wrap alignItems="flex-start" gap="md">
       <Tag colorScheme="primary" size="sm" leftIcon={<Plus />}>
         Small
       </Tag>
@@ -86,24 +86,24 @@ export const withIcon: Story = () => {
 
 export const withCloseButton: Story = () => {
   return (
-    <Wrap gap="md" alignItems="flex-start">
-      <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
+    <Wrap alignItems="flex-start" gap="md">
+      <Tag colorScheme="primary" rounded="full" onClose={noop}>
         Primary
       </Tag>
 
-      <Tag colorScheme="secondary" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="secondary" rounded="full" onClose={noop}>
         Secondary
       </Tag>
 
-      <Tag colorScheme="success" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="success" rounded="full" onClose={noop}>
         Success
       </Tag>
 
-      <Tag colorScheme="warning" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="warning" rounded="full" onClose={noop}>
         Warning
       </Tag>
 
-      <Tag colorScheme="danger" rounded="full" onClose={() => {}}>
+      <Tag colorScheme="danger" rounded="full" onClose={noop}>
         Danger
       </Tag>
     </Wrap>
@@ -112,43 +112,43 @@ export const withCloseButton: Story = () => {
 
 export const withDisabled: Story = () => {
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <Wrap alignItems="flex-start" gap="md">
       <Tag
-        variant="solid"
         colorScheme="primary"
-        rounded="full"
-        onClose={() => {}}
+        variant="solid"
         isDisabled
+        rounded="full"
+        onClose={noop}
       >
         Primary
       </Tag>
 
       <Tag
-        variant="solid"
         colorScheme="secondary"
-        rounded="full"
-        onClose={() => {}}
+        variant="solid"
         isDisabled
+        rounded="full"
+        onClose={noop}
       >
         Secondary
       </Tag>
 
       <Tag
-        variant="solid"
         colorScheme="warning"
-        rounded="full"
-        onClose={() => {}}
+        variant="solid"
         isDisabled
+        rounded="full"
+        onClose={noop}
       >
         Warning
       </Tag>
 
       <Tag
-        variant="solid"
         colorScheme="danger"
-        rounded="full"
-        onClose={() => {}}
+        variant="solid"
         isDisabled
+        rounded="full"
+        onClose={noop}
       >
         Danger
       </Tag>

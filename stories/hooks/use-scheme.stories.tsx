@@ -13,11 +13,11 @@ export const basic = () => {
   return (
     <Box
       bg={["blackAlpha.800", "whiteAlpha.800"]}
+      color={["whiteAlpha.800", "blackAlpha.800"]}
       p="md"
       rounded="md"
-      color={["whiteAlpha.800", "blackAlpha.800"]}
-      transitionProperty="all"
       transitionDuration="normal"
+      transitionProperty="all"
     >
       The current colorMode is "{colorMode}"
     </Box>
@@ -32,11 +32,11 @@ export const withValue = () => {
   return (
     <Box
       bg={bg}
+      color={color}
       p="md"
       rounded="md"
-      color={color}
-      transitionProperty="all"
       transitionDuration="normal"
+      transitionProperty="all"
     >
       The current colorMode is "{colorMode}"
     </Box>

@@ -27,16 +27,16 @@ describe("<Image />", () => {
   })
 
   test("passes a11y test", async () => {
-    await a11y(<Image alt="img" src={src} fallback={fallback} />)
+    await a11y(<Image src={src} alt="img" fallback={fallback} />)
   })
 
-  test("renders placeholder first, before image load", async () => {
+  test("renders placeholder first, before image load", () => {
     render(<Image src={src} fallback={fallback} />)
 
     expect(screen.getByRole("img")).toHaveAttribute("src", fallback)
   })
 
-  test("renders image if there is no fallback behavior defined", async () => {
+  test("renders image if there is no fallback behavior defined", () => {
     render(<Image src={src} />)
 
     expect(screen.getByRole("img")).toHaveAttribute("src", src)

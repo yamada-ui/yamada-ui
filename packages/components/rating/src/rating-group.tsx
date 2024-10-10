@@ -7,15 +7,15 @@ import { RatingItem } from "./rating-item"
 import { getRoundedValue } from "./rating-utils"
 
 interface RatingGroupOptions {
-  value: number
   items: number
+  value: number
 }
 
 export interface RatingGroupProps extends MotionProps, RatingGroupOptions {}
 
 export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
-  ({ className, value: groupValue, items, color, ...rest }, ref) => {
-    const { styles, decimal, groupProps, getGroupProps } = useRatingContext()
+  ({ className, color, items, value: groupValue, ...rest }, ref) => {
+    const { decimal, styles, getGroupProps, groupProps } = useRatingContext()
 
     const computedGroupProps = runIfFunc(groupProps, groupValue)
 
@@ -43,10 +43,10 @@ export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
             return (
               <RatingItem
                 key={`${groupValue}-${fractionValue}`}
+                color={color}
+                fractionValue={fractionValue}
                 groupValue={groupValue}
                 value={value}
-                fractionValue={fractionValue}
-                color={color}
               />
             )
           })}
@@ -54,3 +54,6 @@ export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
     )
   },
 )
+
+RatingGroup.displayName = "RatingGroup"
+RatingGroup.__ui__ = "RatingGroup"

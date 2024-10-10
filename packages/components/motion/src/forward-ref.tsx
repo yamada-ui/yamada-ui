@@ -1,12 +1,12 @@
 import type { WithoutAs } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
+import type { MotionAs, MotionComponent } from "./motion.types"
 import * as React from "react"
-import type { MotionComponent, MotionAs } from "./motion.types"
 
 export function motionForwardRef<Y extends object, M extends MotionAs>(
   render: React.ForwardRefRenderFunction<
     any,
-    Merge<React.ComponentPropsWithoutRef<M>, WithoutAs<Y>> & { as?: MotionAs }
+    { as?: MotionAs } & Merge<React.ComponentPropsWithoutRef<M>, WithoutAs<Y>>
   >,
 ) {
   return React.forwardRef(

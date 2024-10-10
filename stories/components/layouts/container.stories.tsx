@@ -4,8 +4,8 @@ import { Container, Heading, Image, Text } from "@yamada-ui/react"
 type Story = StoryFn<typeof Container>
 
 const meta: Meta<typeof Container> = {
-  title: "Components / Layouts / Container",
   component: Container,
+  title: "Components / Layouts / Container",
 }
 
 export default meta
@@ -13,19 +13,19 @@ export default meta
 export const basic: Story = () => {
   return (
     <Container
-      p="md"
-      gap="md"
-      rounded="md"
       alignItems="center"
-      textAlign="center"
       border="1px solid"
       borderColor="inherit"
       boxShadow="md"
+      gap="md"
+      p="md"
+      rounded="md"
+      textAlign="center"
     >
       <Image
         src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
-        maxW="sm"
         alt="ドラゴンボール"
+        maxW="sm"
       />
 
       <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

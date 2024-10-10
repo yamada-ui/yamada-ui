@@ -1,56 +1,56 @@
+import type { SliderProps, StackProps, TooltipProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   HStack,
   Slider,
   Text,
   Tooltip,
-  VStack,
   useControllableState,
+  VStack,
 } from "@yamada-ui/react"
-import type { SliderProps, StackProps, TooltipProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 
 export interface ParameterProps extends SliderProps {
-  label: string
   description: string
+  label: string
+  containerProps?: StackProps
   labelProps?: StackProps
   tooltipProps?: TooltipProps
-  containerProps?: StackProps
 }
 
 export const Parameter: FC<ParameterProps> = memo(
   ({
-    label,
+    defaultValue,
     description,
+    label,
+    value: valueProp,
+    containerProps,
     labelProps,
     tooltipProps,
-    containerProps,
-    value: valueProp,
-    defaultValue,
     onChange,
     ...rest
   }) => {
     const [value, setValue] = useControllableState({
-      value: valueProp,
       defaultValue,
+      value: valueProp,
       onChange,
     })
 
     return (
       <Tooltip
-        label={description}
-        placement={{ base: "left", lg: "bottom" }}
-        p="md"
         fontSize="md"
-        whiteSpace="pre-line"
         gutter={{ base: 16 }}
+        label={description}
+        p="md"
+        placement={{ base: "left", lg: "bottom" }}
+        whiteSpace="pre-line"
         {...tooltipProps}
       >
         <VStack gap="sm" {...containerProps}>
           <HStack {...labelProps}>
             <Text fontWeight="medium">{label}</Text>
 
-            <Text ms="auto" color="muted">
+            <Text color="muted" ms="auto">
               {value}
             </Text>
           </HStack>

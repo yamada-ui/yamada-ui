@@ -1,8 +1,8 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
+import type { ComponentPropsWithoutRef, ReactNode } from "react"
 import { ui } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef, FC, ReactNode } from "react"
 import {
   DotsIcon,
   FirstIcon,
@@ -16,7 +16,13 @@ interface PaginationItemOptions {
   /**
    * The type of the page or item assigned to the pagination item.
    */
-  page: number | "dots" | "prev" | "next" | "first" | "last"
+  page: "dots" | "first" | "last" | "next" | "prev" | number
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
   /**
    * If `true`, the pagination item will be activated.
    *
@@ -29,12 +35,6 @@ interface PaginationItemOptions {
    * @default false
    */
   isDisabled?: boolean
-  /**
-   * If `true`, disable ripple effects when pressing a element.
-   *
-   * @default false
-   */
-  disableRipple?: boolean
 }
 
 export interface PaginationItemProps
@@ -42,22 +42,22 @@ export interface PaginationItemProps
     PaginationItemOptions {}
 
 const iconMap: {
-  [key in number | "dots" | "prev" | "next" | "first" | "last"]: ReactNode
+  [key in "dots" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
   dots: <DotsIcon />,
-  next: <NextIcon />,
-  prev: <PrevIcon />,
   first: <FirstIcon />,
   last: <LastIcon />,
+  next: <NextIcon />,
+  prev: <PrevIcon />,
 }
 
 export const PaginationItem: FC<PaginationItemProps> = ({
   className,
-  isActive,
-  page,
-  isDisabled,
-  disableRipple,
   children,
+  disableRipple,
+  isActive,
+  isDisabled,
+  page,
   ...rest
 }) => {
   const styles = usePaginationContext()
@@ -69,24 +69,24 @@ export const PaginationItem: FC<PaginationItemProps> = ({
   children ??= iconMap[page] ?? page
 
   const css: CSSUIObject = {
-    position: "relative",
-    overflow: "hidden",
-    userSelect: "none",
+    alignItems: "center",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    overflow: "hidden",
+    position: "relative",
+    userSelect: "none",
     ...styles.item,
     ...styles[page],
   }
 
   return (
     <ui.button
-      className={cx("ui-pagination__item", className)}
       type="button"
-      tabIndex={page !== "dots" ? 0 : -1}
-      disabled={isDisabled}
-      data-selected={dataAttr(isActive)}
+      className={cx("ui-pagination__item", className)}
       data-disabled={dataAttr(isDisabled)}
+      data-selected={dataAttr(isActive)}
+      disabled={isDisabled}
+      tabIndex={page !== "dots" ? 0 : -1}
       __css={css}
       {...rest}
       onPointerDown={onPointerDown}
@@ -97,3 +97,5 @@ export const PaginationItem: FC<PaginationItemProps> = ({
     </ui.button>
   )
 }
+PaginationItem.displayName = "PaginationItem"
+PaginationItem.__ui__ = "PaginationItem"

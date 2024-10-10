@@ -1,11 +1,11 @@
-import ReactDOM from "react-dom/client"
 import { App } from "@/app"
-import { theme, config } from "@/theme"
+import { config, theme } from "@/theme"
 import {
-  UIProvider,
   getColorModeScript,
   getThemeSchemeScript,
+  UIProvider,
 } from "@yamada-ui/react"
+import ReactDOM from "react-dom/client"
 
 const injectScript = (textContent: string) => {
   const script = document.createElement("script")
@@ -28,7 +28,7 @@ injectScript(
 )
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <UIProvider theme={theme} config={config}>
+  <UIProvider config={config} theme={theme}>
     <App />
   </UIProvider>,
 )

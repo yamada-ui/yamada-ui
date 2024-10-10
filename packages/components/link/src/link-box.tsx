@@ -1,17 +1,17 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import {
-  ui,
   forwardRef,
-  radiusProperties,
   omitThemeProps,
+  radiusProperties,
+  ui,
   useComponentMultiStyle,
   useCreateVars,
 } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx } from "@yamada-ui/utils"
 
 interface LinkBoxContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
   variableProps: Dict
 }
 
@@ -34,7 +34,7 @@ export interface LinkOverlayProps
     LinkOverlayOptions {}
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
-  ({ className, isExternal, target, rel, href, children, ...rest }, ref) => {
+  ({ href, target, className, children, isExternal, rel, ...rest }, ref) => {
     const { styles, variableProps } = useLinkBox()
 
     const css: CSSUIObject = {
@@ -43,12 +43,12 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
         content: '""',
         cursor: "inherit",
         display: "block",
+        height: "100%",
+        left: 0,
         position: "absolute",
         top: 0,
-        left: 0,
-        zIndex: 0,
         width: "100%",
-        height: "100%",
+        zIndex: 0,
         ...variableProps,
       },
       ...styles.overlay,
@@ -57,10 +57,10 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
     return (
       <ui.a
         ref={ref}
-        target={isExternal ? "_blank" : target}
-        rel={isExternal ? "noopener" : rel}
-        className={cx("ui-link-box__overlay", className)}
         href={href}
+        target={isExternal ? "_blank" : target}
+        className={cx("ui-link-box__overlay", className)}
+        rel={isExternal ? "noopener" : rel}
         __css={css}
         {...rest}
       >
@@ -83,11 +83,11 @@ export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
   const [vars, variableProps] = useCreateVars(rest, radiusProperties)
 
   const css: CSSUIObject = {
-    position: "relative",
     "a[href]:not(.ui-link-box__overlay), abbr[title]": {
       position: "relative",
       zIndex: "fallback(yamcha, 1)",
     },
+    position: "relative",
     vars,
     ...styles.container,
   }

@@ -1,15 +1,15 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { Angry, Frown, Laugh, Smile, SmilePlus, Ghost } from "@yamada-ui/lucide"
+import { Angry, Frown, Ghost, Laugh, Smile, SmilePlus } from "@yamada-ui/lucide"
 import { Button, FormControl, Rating, VStack } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Rating>
 
 const meta: Meta<typeof Rating> = {
-  title: "Components / Forms / Rating",
   component: Rating,
+  title: "Components / Forms / Rating",
 }
 
 export default meta
@@ -56,9 +56,9 @@ export const withItems: Story = () => {
 export const withFractions: Story = () => {
   return (
     <>
-      <Rating fractions={2} defaultValue={1.5} />
-      <Rating fractions={3} defaultValue={2.33} />
-      <Rating fractions={4} defaultValue={3.75} />
+      <Rating defaultValue={1.5} fractions={2} />
+      <Rating defaultValue={2.33} fractions={3} />
+      <Rating defaultValue={3.75} fractions={4} />
     </>
   )
 }
@@ -70,7 +70,7 @@ export const withHighlightSelectedOnly: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Rating isDisabled defaultValue={3} />
+      <Rating defaultValue={3} isDisabled />
 
       <FormControl isDisabled label="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
@@ -82,7 +82,7 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Rating isReadOnly defaultValue={3} />
+      <Rating defaultValue={3} isReadOnly />
 
       <FormControl isReadOnly label="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
@@ -174,21 +174,21 @@ export const customIcon: Story = () => {
 
       <Rating
         defaultValue={2}
-        fractions={3}
         emptyIcon={<Ghost />}
         filledIcon={<Ghost />}
+        fractions={3}
       />
 
-      <Rating gap="xs" emptyIcon={getIcon} filledIcon={getIcon} />
+      <Rating emptyIcon={getIcon} filledIcon={getIcon} gap="xs" />
 
       <Rating
-        gap="xs"
         color={getColor}
         emptyIcon={getIcon}
         filledIcon={getIcon}
+        gap="xs"
       />
 
-      <Rating gap="xs" fractions={3} emptyIcon={getIcon} filledIcon={getIcon} />
+      <Rating emptyIcon={getIcon} filledIcon={getIcon} fractions={3} gap="xs" />
     </>
   )
 }
@@ -210,9 +210,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -222,9 +222,9 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.rating?.message}
         isInvalid={!!errors.rating}
         label="How satisfied are you with Yamada UI?"
-        errorMessage={errors.rating?.message}
       >
         <Controller
           name="rating"

@@ -9,18 +9,18 @@ import type {
 import type * as Recharts from "recharts"
 
 export type ChartLayoutType = "horizontal" | "vertical"
-export type AreaChartType = "default" | "stacked" | "percent" | "split"
+export type AreaChartType = "default" | "percent" | "split" | "stacked"
 export type BarChartType = Exclude<AreaChartType, "split">
-export type ChartAxisType = "x" | "y" | "xy" | "none"
+export type ChartAxisType = "none" | "x" | "xy" | "y"
 export type ChartCurveType =
   | "bump"
   | "linear"
-  | "natural"
   | "monotone"
+  | "natural"
   | "step"
-  | "stepBefore"
   | "stepAfter"
-export type TooltipDataSourceType = "segment" | "all"
+  | "stepBefore"
+export type TooltipDataSourceType = "all" | "segment"
 
 export interface AreaChartProps
   extends Merge<
@@ -64,10 +64,10 @@ export interface AreaProps
     Merge<CSSUIProps, Recharts.AreaProps>,
     {
       color: CSSUIProps["color"]
-      dot?: DotProps
       activeDot?: DotProps
-      dimDot?: DotProps
       dimArea?: Partial<AreaProps>
+      dimDot?: DotProps
+      dot?: DotProps
     }
   > {}
 export interface LineProps
@@ -76,9 +76,9 @@ export interface LineProps
     {
       color: CSSUIProps["color"]
       activeDot?: DotProps
-      dot?: DotProps
       dimDot?: DotProps
       dimLine?: Partial<LineProps>
+      dot?: DotProps
     }
   > {}
 export interface BarProps
@@ -96,10 +96,10 @@ export interface RadarProps
     Merge<CSSUIProps, Recharts.RadarProps>,
     {
       color: CSSUIProps["color"]
-      dot?: DotProps
       activeDot?: DotProps
       dimDot?: DotProps
       dimRadar?: Partial<RadarProps>
+      dot?: DotProps
     }
   > {}
 export interface PieProps
@@ -130,7 +130,7 @@ export interface DotProps
 export interface XAxisProps
   extends Merge<
     CSSUIProps,
-    Omit<Recharts.XAxisProps, "color" | "stroke" | "fill">
+    Omit<Recharts.XAxisProps, "color" | "fill" | "stroke">
   > {}
 export interface YAxisProps
   extends Merge<CSSUIProps, Omit<Recharts.YAxisProps, "color">> {}
@@ -154,13 +154,13 @@ export interface LabelProps
 export interface LabelListProps
   extends Merge<Recharts.LabelListProps<Dict>, Omit<CSSUIProps, "position">> {}
 export type ChartTooltipProps = Recharts.TooltipProps<
-  number | string | (number | string)[],
+  (number | string)[] | number | string,
   number | string
 >
 export type ChartTooltip =
-  | ReactElement
   | ((props: ChartTooltipProps) => ReactNode)
+  | ReactElement
 export interface ChartLabelProps
-  extends Omit<React.SVGProps<SVGTextElement>, "viewBox" | "fill" | "offset">,
+  extends Omit<React.SVGProps<SVGTextElement>, "fill" | "offset" | "viewBox">,
     LabelProps {}
-export type ChartLabel = ReactElement | ((props: ChartLabelProps) => ReactNode)
+export type ChartLabel = ((props: ChartLabelProps) => ReactNode) | ReactElement

@@ -1,17 +1,17 @@
+import type { ModalProps } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
 import {
-  Switch,
+  assignRef,
   Button,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Switch,
   Text,
-  assignRef,
   useDisclosure,
 } from "@yamada-ui/react"
-import type { ModalProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC, MutableRefObject } from "react"
 
 export interface FilterModalProps
   extends Omit<ModalProps, "isOpen" | "onClose"> {
@@ -20,13 +20,13 @@ export interface FilterModalProps
 
 export const FilterModal: FC<FilterModalProps> = memo(
   ({ onOpenRef, ...rest }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onClose, onOpen } = useDisclosure()
 
     assignRef(onOpenRef, onOpen)
 
     return (
       <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
-        <ModalHeader flexDirection="column" gap="sm" alignItems="flex-start">
+        <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
           <Text as="h3">Save preset</Text>
 
           <Text color="muted" fontSize="md" fontWeight="normal">
@@ -36,21 +36,21 @@ export const FilterModal: FC<FilterModalProps> = memo(
         </ModalHeader>
 
         <ModalBody py="md">
-          <Text as="h4" fontWeight="medium" color="muted">
+          <Text as="h4" color="muted" fontWeight="medium">
             Playground Warnings
           </Text>
 
-          <Switch defaultIsChecked alignItems="flex-start" gap="md">
+          <Switch alignItems="flex-start" defaultIsChecked gap="md">
             <Text as="span" display="inline-block" fontWeight="medium">
               Show a warning when content is flagged
             </Text>
 
             <Text
               as="span"
-              mt="xs"
-              display="inline-block"
               color="muted"
+              display="inline-block"
               fontSize="sm"
+              mt="xs"
             >
               A warning will be shown when sexual, hateful, violent or self-harm
               content is detected.

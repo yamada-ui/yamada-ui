@@ -4,20 +4,20 @@ import {
   Box,
   Button,
   Center,
+  extendConfig,
   Motion,
   Text,
   UIProvider,
   useBoolean,
   useScroll,
   useTransform,
-  extendConfig,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: "Components / Motion / Utils",
   component: Motion,
+  title: "Components / Motion / Utils",
 }
 
 export default meta
@@ -32,11 +32,11 @@ export const animatePresence: Story = () => {
       <AnimatePresence>
         {isVisible ? (
           <Motion
-            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             bg="primary"
             color="white"
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
             p="md"
             rounded="md"
           >
@@ -55,7 +55,7 @@ export const motionConfig: Story = () => {
 
   return (
     <UIProvider config={config}>
-      <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
         <Motion
           animate={{ x: 100 }}
           bg="primary"
@@ -78,47 +78,47 @@ export const useScrollAndTransform: Story = () => {
   const y4 = useTransform(scrollYProgress, [0, 1], [0, -200])
 
   return (
-    <Box position="relative" w="full" h="300vh">
+    <Box h="300vh" position="relative" w="full">
       <Text>Please scroll</Text>
 
       <Motion
         style={{ y: y1 }}
         bg="primary"
         boxSize="2xs"
-        rounded="full"
-        position="absolute"
-        top="110vh"
         left="0"
+        position="absolute"
+        rounded="full"
+        top="110vh"
       />
 
       <Motion
         style={{ y: y2 }}
         bg="warning"
         boxSize="sm"
-        rounded="full"
-        position="absolute"
-        top="120vh"
         left="20%"
+        position="absolute"
+        rounded="full"
+        top="120vh"
       />
 
       <Motion
         style={{ y: y3 }}
         bg="danger"
         boxSize="3xs"
-        rounded="full"
         position="absolute"
-        top="110vh"
         right="30%"
+        rounded="full"
+        top="110vh"
       />
 
       <Motion
         style={{ y: y4 }}
         bg="secondary"
         boxSize="xs"
-        rounded="full"
         position="absolute"
-        top="120vh"
         right="0"
+        rounded="full"
+        top="120vh"
       />
     </Box>
   )

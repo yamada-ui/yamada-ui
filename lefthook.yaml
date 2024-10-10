@@ -16,7 +16,7 @@ pre-commit:
 eslint:
   parallel: true
   commands:
-    eslint-root:
+    base:
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       exclude:
         - examples/**
@@ -25,35 +25,49 @@ eslint:
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    eslint-docs:
+    docs:
       root: docs/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    eslint-example-vite:
+    create-react-app:
       root: examples/vite/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    eslint-example-remix:
+    hono:
+      root: examples/vite/
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+      run: |
+        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+      stage_fixed: true
+
+    vite:
+      root: examples/vite/
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+      run: |
+        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+      stage_fixed: true
+
+    remix:
       root: examples/remix/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    eslint-example-next-app:
+    next-app:
       root: examples/next/app/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    eslint-example-next-pages:
+    next-pages:
       root: examples/next/pages/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |

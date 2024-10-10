@@ -1,9 +1,9 @@
-import { readFile, stat } from "fs/promises"
-import path from "path"
 import c from "chalk"
 import { program } from "commander"
+import { readFile, stat } from "fs/promises"
 import { glob } from "glob"
 import matter from "gray-matter"
+import path from "path"
 import { writeMDXFile } from "scripts/utils"
 
 const getPaths = async (query: string) => {
@@ -21,7 +21,7 @@ interface FrontMatter {
 type UpdateFrontMatterTransform = (data: FrontMatter) => FrontMatter
 
 const updateFrontMatter =
-  (transform: UpdateFrontMatterTransform, enableRecursive: boolean = false) =>
+  (transform: UpdateFrontMatterTransform, enableRecursive = false) =>
   async (contentPath: string) => {
     try {
       const stats = await stat(contentPath)
@@ -55,7 +55,7 @@ const updateMDX = async (
   if (names.length) {
     const isMultiple = names.length > 1
     const query = isMultiple ? `{${names.join(",")}}` : names[0]
-    const contentPaths = await getPaths(query)
+    const contentPaths = await getPaths(query ?? "")
 
     await Promise.all(contentPaths.map(updateFrontMatter(callback, true)))
   } else {
@@ -73,7 +73,7 @@ const addLabel =
 
 const removeLabel =
   (exclude: string[]): UpdateFrontMatterTransform =>
-  ({ label, data }) => {
+  ({ data, label }) => {
     if (exclude.includes(label)) return { label, ...data }
 
     return { ...data }
@@ -87,7 +87,7 @@ interface ResetOptions {
   exclude: string[]
 }
 
-const main = async () => {
+const main = () => {
   program
     .command("add <name...>")
     .option("-l, --label <label>")

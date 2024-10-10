@@ -9,28 +9,28 @@ export const Mark: ComponentStyle<"Mark"> = {
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => ({
-      bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
-      color: `white`,
-    }),
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => ({
-      bg: [
-        isGray(c) ? `${c}.50` : `${c}.100`,
-        shadeColor(`${c}.300`, 58)(t, m),
-      ],
-      color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
-    }),
-    outline: ({ theme: t, colorMode: m, colorScheme: c = "gray" }) => {
+    outline: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
       const color = mode(
         getColor(`${c}.500`)(t, m),
         getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
       )(m)
 
       return {
-        color,
         boxShadow: `inset 0 0 0px 1px ${color}`,
+        color,
       }
     },
+    solid: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
+      bg: [tintColor(`${c}.600`, 24)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
+      color: `white`,
+    }),
+    subtle: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
+      bg: [
+        isGray(c) ? `${c}.50` : `${c}.100`,
+        shadeColor(`${c}.300`, 58)(t, m),
+      ],
+      color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+    }),
     "text-accent": ({ colorScheme: c = "gray" }) => ({
       color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
       p: 0,
@@ -41,7 +41,7 @@ export const Mark: ComponentStyle<"Mark"> = {
   },
 
   defaultProps: {
-    variant: "subtle",
     colorScheme: "secondary",
+    variant: "subtle",
   },
 }

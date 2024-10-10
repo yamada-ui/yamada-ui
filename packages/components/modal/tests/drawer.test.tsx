@@ -1,14 +1,14 @@
+import type { DrawerProps } from "../src"
 import { a11y, render } from "@yamada-ui/test"
 import { useState } from "react"
 import {
   Drawer,
-  DrawerHeader,
-  DrawerFooter,
   DrawerBody,
   DrawerCloseButton,
+  DrawerFooter,
+  DrawerHeader,
   DrawerOverlay,
 } from "../src"
-import type { DrawerProps } from "../src"
 
 describe("<Drawer />", () => {
   const DrawerOpenExample = () => {
@@ -27,8 +27,8 @@ describe("<Drawer />", () => {
         >
           <DrawerOverlay
             data-testid="DrawerOverlay"
-            bg="blackAlpha.300"
             backdropFilter="blur(10px)"
+            bg="blackAlpha.300"
           />
           <DrawerCloseButton data-testid="DrawerCloseButton" color="red.500" />
           <DrawerHeader data-testid="DrawerHeader">header</DrawerHeader>
@@ -45,7 +45,7 @@ describe("<Drawer />", () => {
   })
 
   test("Drawer renders correctly when open", async () => {
-    const { user, findByTestId } = render(<DrawerOpenExample />)
+    const { findByTestId, user } = render(<DrawerOpenExample />)
 
     const openDrawerButton = await findByTestId("OpenDrawer")
     expect(openDrawerButton).toBeInTheDocument()
@@ -73,15 +73,15 @@ describe("<Drawer />", () => {
 
         <Drawer
           data-testid="Drawer"
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          placement={placement}
           closeOnDrag
+          isOpen={isOpen}
+          placement={placement}
+          onClose={() => setIsOpen(false)}
         >
           <DrawerOverlay
             data-testid="DrawerOverlay"
-            bg="blackAlpha.300"
             backdropFilter="blur(10px)"
+            bg="blackAlpha.300"
           />
           <DrawerCloseButton data-testid="DrawerCloseButton" color="red.500" />
           <DrawerHeader data-testid="DrawerHeader">header</DrawerHeader>
@@ -92,20 +92,20 @@ describe("<Drawer />", () => {
     )
   }
 
-  type TestDrawerPlacement = "top" | "left" | "bottom" | "right"
+  type TestDrawerPlacement = "bottom" | "left" | "right" | "top"
   interface ExpectedStyle {
-    top?: string
-    left?: string
     bottom?: string
+    left?: string
     right?: string
+    top?: string
   }
 
   const testDrawerPlacement = async (
     placement: TestDrawerPlacement,
     expectedStyle: ExpectedStyle,
   ) => {
-    const { user, findByTestId } = render(
-      <DrawerPlacementExample placement={placement} isOpen={false} />,
+    const { findByTestId, user } = render(
+      <DrawerPlacementExample isOpen={false} placement={placement} />,
     )
 
     const openDrawerButton = await findByTestId("OpenDrawer")
@@ -131,33 +131,33 @@ describe("<Drawer />", () => {
 
   test("Drawer renders by placement top", async () => {
     await testDrawerPlacement("top", {
-      top: "0",
       left: "0",
       right: "0",
+      top: "0",
     })
   })
 
   test("Drawer renders by placement left", async () => {
     await testDrawerPlacement("left", {
-      top: "0",
-      left: "0",
       bottom: "0",
+      left: "0",
+      top: "0",
     })
   })
 
   test("Drawer renders by placement bottom", async () => {
     await testDrawerPlacement("bottom", {
-      left: "0",
       bottom: "0",
+      left: "0",
       right: "0",
     })
   })
 
   test("Drawer renders by placement right", async () => {
     await testDrawerPlacement("right", {
-      top: "0",
       bottom: "0",
       right: "0",
+      top: "0",
     })
   })
 })

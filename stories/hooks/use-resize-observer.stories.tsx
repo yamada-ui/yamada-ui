@@ -18,9 +18,9 @@ export const basic = () => {
 
       <Button
         ref={ref}
-        onClick={toggle}
-        w={flg ? "xl" : "sm"}
         h={flg ? "xl" : "sm"}
+        w={flg ? "xl" : "sm"}
+        onClick={toggle}
       >
         Click me to toggle the boolean value
       </Button>

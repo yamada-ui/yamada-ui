@@ -1,6 +1,7 @@
 import type { ButtonProps } from "@yamada-ui/button"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
+import type { CalendarHeaderProps } from "./calendar-header"
 import { Button } from "@yamada-ui/button"
-import type { CSSUIObject, HTMLUIProps, FC } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import {
   cx,
@@ -12,21 +13,24 @@ import {
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import { useMemo } from "react"
-import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
 import { getFormattedLabel, getMonthDays, getWeekdays } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
 import { useMonth } from "./use-month"
 
 interface MonthTableProps extends HTMLUIProps<"table"> {
-  thead?: HTMLUIProps<"thead">
   tbody?: HTMLUIProps<"tbody">
-  tr?: HTMLUIProps<"tr">
-  th?: HTMLUIProps<"th">
   td?: HTMLUIProps<"td">
+  th?: HTMLUIProps<"th">
+  thead?: HTMLUIProps<"thead">
+  tr?: HTMLUIProps<"tr">
 }
 
 interface MonthOptions {
+  /**
+   * Props for calendar day button element.
+   */
+  dayProps?: { component?: FC<DayProps> } & ButtonProps
   /**
    * Props for calendar header element.
    */
@@ -38,51 +42,47 @@ interface MonthOptions {
   /**
    * Props for calendar weekday element.
    */
-  weekdayProps?: HTMLUIProps & { component?: FC<WeekdayProps> }
-  /**
-   * Props for calendar day button element.
-   */
-  dayProps?: ButtonProps & { component?: FC<DayProps> }
+  weekdayProps?: { component?: FC<WeekdayProps> } & HTMLUIProps
 }
 
 export interface MonthProps
   extends HTMLUIProps,
-    Omit<CalendarHeaderProps, "label" | "index">,
+    Omit<CalendarHeaderProps, "index" | "label">,
     MonthOptions {}
 
 export const Month: FC<MonthProps> = ({
   className,
-  headerProps,
-  tableProps,
-  labelProps,
   controlProps,
-  prevProps,
-  nextProps,
-  weekdayProps,
   dayProps,
+  headerProps,
+  labelProps,
+  nextProps,
+  prevProps,
+  tableProps,
+  weekdayProps,
   ...rest
 }) => {
   const {
-    month: selectedMonth,
     amountOfMonths,
-    withWeekdays,
+    dateFormat,
     firstDayOfWeek,
     locale,
-    weekdayFormat,
-    dateFormat,
+    month: selectedMonth,
     styles,
+    weekdayFormat,
+    withWeekdays,
   } = useCalendarContext()
-  const { getGridProps, getButtonProps } = useMonth()
+  const { getButtonProps, getGridProps } = useMonth()
 
   const { component: customWeekday = Weekday, ...computedWeekdayProps } =
     weekdayProps ?? {}
   const { component: customDay = Day, ...computedDayProps } = dayProps ?? {}
   const {
-    thead: theadProps,
     tbody: tbodyProps,
-    tr: trProps,
-    th: thProps,
     td: tdProps,
+    th: thProps,
+    thead: theadProps,
+    tr: trProps,
     ...computedTableProps
   } = tableProps ?? {}
 
@@ -117,35 +117,35 @@ export const Month: FC<MonthProps> = ({
               <CalendarHeader
                 {...{
                   ...headerProps,
-                  label: formattedLabel,
                   index,
-                  labelProps,
+                  label: formattedLabel,
                   controlProps,
-                  prevProps,
+                  labelProps,
                   nextProps,
+                  prevProps,
                 }}
               />
 
               <ui.table
                 className={cx("ui-calendar__month", className)}
                 __css={{
-                  w: styles.content?.w ?? styles.content?.width,
-                  minW: styles.content?.minW ?? styles.content?.minWidth,
-                  maxW: styles.content?.maxW ?? styles.content?.maxWidth,
                   h: styles.content?.h ?? styles.content?.height,
-                  minH: styles.content?.minH ?? styles.content?.minHeight,
                   maxH: styles.content?.maxH ?? styles.content?.maxHeight,
+                  maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+                  minH: styles.content?.minH ?? styles.content?.minHeight,
+                  minW: styles.content?.minW ?? styles.content?.minWidth,
+                  w: styles.content?.w ?? styles.content?.width,
                   ...styles.date,
                 }}
                 {...getGridProps({
                   month,
                   ...filterUndefined({
-                    w,
-                    minW,
-                    maxW,
                     h,
-                    minH,
                     maxH,
+                    maxW,
+                    minH,
+                    minW,
+                    w,
                     ...computedTableProps,
                   }),
                 })}
@@ -165,13 +165,13 @@ export const Month: FC<MonthProps> = ({
                           <ui.div
                             className="ui-calendar__month__weekday"
                             __css={{
-                              w: "100%",
                               display: "flex",
+                              w: "100%",
                               ...styles.weekday,
                             }}
                             {...computedWeekdayProps}
                           >
-                            {customWeekday({ weekday, index })}
+                            {customWeekday({ index, weekday })}
                           </ui.div>
                         </ui.th>
                       ))}
@@ -185,29 +185,29 @@ export const Month: FC<MonthProps> = ({
                       <ui.tr key={row} __css={{ ...styles.row }} {...trProps}>
                         {cells.map((date, col) => {
                           const {
-                            isSelected,
-                            isWeekend,
-                            isOutside,
-                            isStart,
-                            isEnd,
                             isBetween,
+                            isEnd,
                             isHidden,
+                            isOutside,
+                            isSelected,
+                            isStart,
+                            isWeekend,
                             ...props
                           } = getButtonProps({
                             ...computedDayProps,
+                            index,
                             month,
                             value: date,
-                            index,
                           })
 
                           const day = customDay({
-                            date,
-                            row,
                             col,
-                            weekday: weekdays[col],
+                            date,
+                            isOutside,
                             isSelected,
                             isWeekend,
-                            isOutside,
+                            row,
+                            weekday: weekdays[col]!,
                           })
 
                           const isDisplayed =
@@ -216,11 +216,11 @@ export const Month: FC<MonthProps> = ({
                           const css: CSSUIObject = {
                             display:
                               isHidden || !isDisplayed ? "none" : "inline-flex",
-                            minW: "auto",
-                            h: "auto",
-                            p: 0,
                             fontSize: undefined,
                             fontWeight: "normal",
+                            h: "auto",
+                            minW: "auto",
+                            p: 0,
                             _ripple: {
                               display: "block",
                             },
@@ -230,10 +230,10 @@ export const Month: FC<MonthProps> = ({
                           return (
                             <ui.td
                               key={col}
-                              __css={{ ...styles.cell }}
-                              data-start={dataAttr(isStart)}
-                              data-end={dataAttr(isEnd)}
                               data-between={dataAttr(isBetween)}
+                              data-end={dataAttr(isEnd)}
+                              data-start={dataAttr(isStart)}
+                              __css={{ ...styles.cell }}
                               {...tdProps}
                             >
                               <Button
@@ -263,8 +263,8 @@ Month.displayName = "Month"
 Month.__ui__ = "Month"
 
 export interface WeekdayProps {
-  weekday: string
   index: number
+  weekday: string
 }
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
@@ -277,13 +277,13 @@ Weekday.displayName = "Weekday"
 Weekday.__ui__ = "Weekday"
 
 export interface DayProps {
+  col: number
   date: Date
-  weekday: string
+  isOutside: boolean
   isSelected: boolean
   isWeekend: boolean
-  isOutside: boolean
   row: number
-  col: number
+  weekday: string
 }
 
 export const Day: FC<DayProps> = ({ date }) => {

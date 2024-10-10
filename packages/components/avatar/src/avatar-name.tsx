@@ -1,6 +1,6 @@
-import type { HTMLUIProps, CSSUIObject, FC } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { AvatarProps } from "./avatar"
+import { ui } from "@yamada-ui/core"
 import { useAvatarContext } from "./avatar"
 
 const defaultFormat = (name: string) => {
@@ -13,8 +13,9 @@ const defaultFormat = (name: string) => {
     : firstName.charAt(0)
 }
 
-export type AvatarNameProps = HTMLUIProps<"div"> &
-  Pick<AvatarProps, "name" | "format">
+export interface AvatarNameProps
+  extends HTMLUIProps,
+    Pick<AvatarProps, "format" | "name"> {}
 
 export const AvatarName: FC<AvatarNameProps> = ({
   name,
@@ -28,8 +29,8 @@ export const AvatarName: FC<AvatarNameProps> = ({
   return (
     <ui.div
       className="ui-avatar__name"
-      role="img"
       aria-label={name}
+      role="img"
       __css={css}
       {...rest}
     >

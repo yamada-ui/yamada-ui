@@ -10,8 +10,8 @@ export interface CenterProps extends HTMLUIProps {}
  */
 export const Center = ui("div", {
   baseStyle: {
-    justifyContent: "center",
-    display: "flex",
     alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
   },
 })

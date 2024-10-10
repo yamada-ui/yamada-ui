@@ -9,7 +9,7 @@ describe("<Stepper />", () => {
     await a11y(container)
   })
 
-  test("correctly renders empty step", async () => {
+  test("correctly renders empty step", () => {
     render(<Stepper index={0} steps={[{}]} />)
 
     screen.getByText(1)

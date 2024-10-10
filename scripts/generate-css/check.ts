@@ -1,10 +1,10 @@
+import type { CSSProperty } from "."
 import { shorthandProps } from "./shorthand-props"
 import { tokens } from "./tokens"
 import { additionalProps, atRuleProps, uiProps } from "./ui-props"
-import type { CSSProperty } from "."
 
 export const checkProps = (
-  styles: (CSSProperty & { type: string; deprecated: boolean })[],
+  styles: ({ type: string; deprecated: boolean } & CSSProperty)[],
 ) => {
   const propMap = styles.map(({ prop }) => prop) as string[]
   const uiPropMap = [

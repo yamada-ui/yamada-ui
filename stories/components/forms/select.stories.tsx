@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { Check, ChevronsDown } from "@yamada-ui/lucide"
 import type { SelectItem } from "@yamada-ui/react"
+import type { SubmitHandler } from "react-hook-form"
+import { Check, ChevronsDown } from "@yamada-ui/lucide"
 import {
-  Select,
-  OptionGroup,
-  Option,
-  FormControl,
-  VStack,
   Button,
+  FormControl,
+  Option,
+  OptionGroup,
+  Select,
+  VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Select>
 
 const meta: Meta<typeof Select> = {
-  title: "Components / Forms / Select",
   component: Select,
+  title: "Components / Forms / Select",
 }
 
 export default meta
@@ -26,16 +26,15 @@ export const basic: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
-      value: "",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
+      value: "",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -44,6 +43,7 @@ export const basic: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
@@ -72,7 +72,7 @@ export const basic: Story = () => {
         </OptionGroup>
       </Select>
 
-      <Select placeholder="キャラクターを選択" items={items} />
+      <Select items={items} placeholder="キャラクターを選択" />
     </>
   )
 }
@@ -80,10 +80,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Select placeholder="extra small size" size="xs" />
-      <Select placeholder="small size" size="sm" />
-      <Select placeholder="medium size" size="md" />
-      <Select placeholder="large size" size="lg" />
+      <Select size="xs" placeholder="extra small size" />
+      <Select size="sm" placeholder="small size" />
+      <Select size="md" placeholder="medium size" />
+      <Select size="lg" placeholder="large size" />
     </>
   )
 }
@@ -109,13 +109,10 @@ export const withFooter: Story = () => {
 
   return (
     <Select
-      value={value}
-      onChange={onChange}
-      placeholder="キャラクターを選択"
       footer={({ onClose }) => (
         <VStack
-          borderTopWidth="1px"
           borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          borderTopWidth="1px"
           p="2"
         >
           <Button
@@ -129,13 +126,16 @@ export const withFooter: Story = () => {
         </VStack>
       )}
       items={items}
+      placeholder="キャラクターを選択"
+      value={value}
+      onChange={onChange}
     />
   )
 }
 
 export const withDefaultValue: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" defaultValue="ベジータ">
+    <Select defaultValue="ベジータ" placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -149,8 +149,8 @@ export const withBorderColor: Story = () => {
       <Select placeholder="default border color" />
       <Select focusBorderColor="green.500" placeholder="custom border color" />
       <Select
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -169,7 +169,7 @@ export const disabledPlaceholderInOptions: Story = () => {
 
 export const disabledCloseOnSelect: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" closeOnSelect={false}>
+    <Select closeOnSelect={false} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -179,7 +179,7 @@ export const disabledCloseOnSelect: Story = () => {
 
 export const disabledCloseOnBlur: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" closeOnBlur={false}>
+    <Select closeOnBlur={false} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -189,7 +189,7 @@ export const disabledCloseOnBlur: Story = () => {
 
 export const withPlacement: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" placement="right-start" maxW="xs">
+    <Select maxW="xs" placeholder="キャラクターを選択" placement="right-start">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -200,8 +200,8 @@ export const withPlacement: Story = () => {
 export const withOffset: Story = () => {
   return (
     <Select
-      placeholder="キャラクターを選択"
       offset={[16, 16]}
+      placeholder="キャラクターを選択"
       listProps={{ maxW: "xs" }}
     >
       <Option value="孫悟空">孫悟空</Option>
@@ -213,7 +213,7 @@ export const withOffset: Story = () => {
 
 export const withGutter: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" gutter={32}>
+    <Select gutter={32} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -223,7 +223,7 @@ export const withGutter: Story = () => {
 
 export const withDuration: Story = () => {
   return (
-    <Select placeholder="キャラクターを選択" duration={0.4}>
+    <Select duration={0.4} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -234,10 +234,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Select isDisabled variant="outline" placeholder="outline" />
-      <Select isDisabled variant="filled" placeholder="filled" />
-      <Select isDisabled variant="flushed" placeholder="flushed" />
-      <Select isDisabled variant="unstyled" placeholder="unstyled" />
+      <Select variant="outline" isDisabled placeholder="outline" />
+      <Select variant="filled" isDisabled placeholder="filled" />
+      <Select variant="flushed" isDisabled placeholder="flushed" />
+      <Select variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -252,10 +252,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Select isReadOnly variant="outline" placeholder="outline" />
-      <Select isReadOnly variant="filled" placeholder="filled" />
-      <Select isReadOnly variant="flushed" placeholder="flushed" />
-      <Select isReadOnly variant="unstyled" placeholder="unstyled" />
+      <Select variant="outline" isReadOnly placeholder="outline" />
+      <Select variant="filled" isReadOnly placeholder="filled" />
+      <Select variant="flushed" isReadOnly placeholder="flushed" />
+      <Select variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -270,15 +270,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Select isInvalid variant="outline" placeholder="outline" />
-      <Select isInvalid variant="filled" placeholder="filled" />
-      <Select isInvalid variant="flushed" placeholder="flushed" />
-      <Select isInvalid variant="unstyled" placeholder="unstyled" />
+      <Select variant="outline" isInvalid placeholder="outline" />
+      <Select variant="filled" isInvalid placeholder="filled" />
+      <Select variant="flushed" isInvalid placeholder="flushed" />
+      <Select variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <Select placeholder="Select notifications" />
       </FormControl>
@@ -290,7 +290,7 @@ export const isOptionDisabled: Story = () => {
   return (
     <Select placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option value="ベジータ" isDisabled>
+      <Option isDisabled value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -302,7 +302,7 @@ export const isOptionFocusable: Story = () => {
   return (
     <Select placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option value="ベジータ" isDisabled isFocusable>
+      <Option isDisabled isFocusable value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -377,15 +377,14 @@ export const reactHookForm: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -394,14 +393,15 @@ export const reactHookForm: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -411,14 +411,13 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select1?.message}
         isInvalid={!!errors.select1}
         label="Who is your favorite character?"
-        errorMessage={errors.select1?.message}
       >
         <Controller
           name="select1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field}>
               <Option value="孫悟空">孫悟空</Option>
@@ -426,18 +425,18 @@ export const reactHookForm: Story = () => {
               <Option value="フリーザ">フリーザ</Option>
             </Select>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select2?.message}
         isInvalid={!!errors.select2}
         label="Who is your favorite character?"
-        errorMessage={errors.select2?.message}
       >
         <Controller
           name="select2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field}>
               <OptionGroup label="地球人">
@@ -456,21 +455,22 @@ export const reactHookForm: Story = () => {
               </OptionGroup>
             </Select>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select3?.message}
         isInvalid={!!errors.select3}
         label="Who is your favorite character?"
-        errorMessage={errors.select3?.message}
       >
         <Controller
           name="select3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field} items={items} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -497,15 +497,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -514,14 +513,15 @@ export const reactHookFormWithDefaultValue: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -531,14 +531,13 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.select1?.message}
         isInvalid={!!errors.select1}
         label="Who is your favorite character?"
-        errorMessage={errors.select1?.message}
       >
         <Controller
           name="select1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field}>
               <Option value="孫悟空">孫悟空</Option>
@@ -546,18 +545,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
               <Option value="フリーザ">フリーザ</Option>
             </Select>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select2?.message}
         isInvalid={!!errors.select2}
         label="Who is your favorite character?"
-        errorMessage={errors.select2?.message}
       >
         <Controller
           name="select2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field}>
               <OptionGroup label="地球人">
@@ -576,21 +575,22 @@ export const reactHookFormWithDefaultValue: Story = () => {
               </OptionGroup>
             </Select>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.select3?.message}
         isInvalid={!!errors.select3}
         label="Who is your favorite character?"
-        errorMessage={errors.select3?.message}
       >
         <Controller
           name="select3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Select placeholder="キャラクターを選択" {...field} items={items} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

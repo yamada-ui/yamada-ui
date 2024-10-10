@@ -3,8 +3,8 @@ import {
   Card,
   CardBody,
   CardHeader,
-  HStack,
   Heading,
+  HStack,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -13,12 +13,12 @@ import { memo } from "react"
 export const NotificationsCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading size="md">Notifications</Heading>
 
         <Text color="muted">Choose what you want to be notified about.</Text>
@@ -28,10 +28,10 @@ export const NotificationsCard = memo(() => {
         <VStack gap="sm">
           <HStack
             cursor="pointer"
-            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
-            w="full"
-            rounded="md"
             p="md"
+            rounded="md"
+            w="full"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
             <Bell fontSize="2xl" />
 
@@ -42,11 +42,11 @@ export const NotificationsCard = memo(() => {
           </HStack>
 
           <HStack
-            cursor="pointer"
             bg={["blackAlpha.50", "whiteAlpha.50"]}
-            w="full"
-            rounded="md"
+            cursor="pointer"
             p="md"
+            rounded="md"
+            w="full"
           >
             <User fontSize="2xl" />
 
@@ -58,10 +58,10 @@ export const NotificationsCard = memo(() => {
 
           <HStack
             cursor="pointer"
-            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
-            w="full"
-            rounded="md"
             p="md"
+            rounded="md"
+            w="full"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
             <EyeOff fontSize="2xl" />
 

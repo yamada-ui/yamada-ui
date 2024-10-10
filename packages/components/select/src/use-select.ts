@@ -1,54 +1,54 @@
 import type { CSSUIObject, HTMLUIProps, PropGetter } from "@yamada-ui/core"
-import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
+import type { Merge } from "@yamada-ui/utils"
+import type {
+  CSSProperties,
+  Dispatch,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+  RefObject,
+  SetStateAction,
+} from "react"
+import type { OptionProps } from "./option"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { PopoverProps, ComboBoxProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Merge } from "@yamada-ui/utils"
 import {
+  ariaAttr,
   createContext,
   dataAttr,
   funcAll,
+  getEventRelatedTarget,
   handlerAll,
+  isArray,
+  isContains,
+  isHTMLElement,
+  isUndefined,
+  mergeRefs,
   omitObject,
   pickObject,
   splitObject,
   useUnmountEffect,
   useUpdateEffect,
-  mergeRefs,
-  isHTMLElement,
-  ariaAttr,
-  isArray,
-  isUndefined,
-  getEventRelatedTarget,
-  isContains,
 } from "@yamada-ui/utils"
-import type {
-  Dispatch,
-  KeyboardEvent,
-  RefObject,
-  SetStateAction,
-  FocusEvent,
-  MouseEvent,
-  CSSProperties,
-} from "react"
-import { useCallback, useRef, useState, useEffect, useId } from "react"
-import type { OptionProps } from "./option"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
+  isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
 export const {
   DescendantsContextProvider: SelectDescendantsContextProvider,
-  useDescendantsContext: useSelectDescendantsContext,
-  useDescendants: useSelectDescendants,
   useDescendant: useSelectDescendant,
+  useDescendants: useSelectDescendants,
+  useDescendantsContext: useSelectDescendantsContext,
 } = createDescendant()
 
 export type MaybeValue = string | string[]
@@ -56,55 +56,40 @@ export type MaybeValue = string | string[]
 interface SelectContext
   extends Omit<
     UseSelectProps,
-    "value" | "defaultValue" | "onChange" | "isEmpty"
+    "defaultValue" | "isEmpty" | "onChange" | "value"
   > {
-  value: MaybeValue
+  containerRef: RefObject<HTMLDivElement>
+  fieldRef: RefObject<HTMLDivElement>
+  focusedIndex: number
+  isOpen: boolean
   label: MaybeValue | undefined
+  listRef: RefObject<HTMLUListElement>
+  setFocusedIndex: Dispatch<SetStateAction<number>>
+  styles: { [key: string]: CSSUIObject | undefined }
+  value: MaybeValue
   onChange: (newValue: string) => void
   onChangeLabel: (newValue: string, runOmit?: boolean) => void
-  isOpen: boolean
-  onOpen: () => void
   onClose: () => void
   onFocusFirst: () => void
   onFocusLast: () => void
   onFocusNext: () => void
   onFocusPrev: () => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  containerRef: RefObject<HTMLDivElement>
-  fieldRef: RefObject<HTMLDivElement>
-  listRef: RefObject<HTMLUListElement>
-  styles: { [key: string]: CSSUIObject }
+  onOpen: () => void
 }
 
 export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
-  strict: false,
   name: "SelectContext",
+  errorMessage: `useSelectContext returned is 'undefined'. Seems you forgot to wrap the components in "<Select />"`,
 })
 
 export interface UseSelectProps<T extends MaybeValue = string>
   extends Merge<Omit<HTMLUIProps, "defaultValue" | "onChange">, ComboBoxProps>,
     FormControlOptions {
+  isEmpty: boolean
   /**
    * The HTML `name` attribute used for forms.
    */
   name?: string
-  /**
-   * The placeholder of the select.
-   */
-  placeholder?: string
-  /**
-   * The value of the select.
-   */
-  value?: T
-  /**
-   * The initial value of the select.
-   */
-  defaultValue?: T
-  /**
-   * The callback invoked when value state changes.
-   */
-  onChange?: (value: T) => void
   /**
    * If `true`, the list element will be closed when value is selected.
    *
@@ -112,12 +97,13 @@ export interface UseSelectProps<T extends MaybeValue = string>
    */
   closeOnSelect?: boolean
   /**
-   * If `true`, include placeholders in options.
-   *
-   * @default true
+   * The initial value of the select.
    */
-  placeholderInOptions?: boolean
-  isEmpty: boolean
+  defaultValue?: T
+  /**
+   * The maximum selectable value.
+   */
+  maxSelectValues?: number
   /**
    * If `true`, the selected item(s) will be excluded from the list.
    *
@@ -125,51 +111,65 @@ export interface UseSelectProps<T extends MaybeValue = string>
    */
   omitSelectedValues?: boolean
   /**
-   * The maximum selectable value.
+   * The placeholder of the select.
    */
-  maxSelectValues?: number
+  placeholder?: string
+  /**
+   * If `true`, include placeholders in options.
+   *
+   * @default true
+   */
+  placeholderInOptions?: boolean
+  /**
+   * The value of the select.
+   */
+  value?: T
   /**
    * Props for select option element.
    */
-  optionProps?: Omit<OptionProps, "value" | "children">
+  optionProps?: Omit<OptionProps, "children" | "value">
+  /**
+   * The callback invoked when value state changes.
+   */
+  onChange?: (value: T) => void
 }
 
 export const useSelect = <T extends MaybeValue = string>(
   props: UseSelectProps<T>,
 ) => {
   const {
-    placeholder,
-    closeOnSelect = true,
-    placeholderInOptions = true,
-    omitSelectedValues = false,
-    maxSelectValues,
-    isEmpty,
-    value: valueProp,
-    defaultValue,
-    onChange: onChangeProp,
-    optionProps,
-    isOpen: isOpenProp,
-    defaultIsOpen,
-    onOpen: onOpenProp,
-    onClose: onCloseProp,
+    animation,
+    boundary,
+    closeDelay,
     closeOnBlur = true,
     closeOnEsc = true,
-    openDelay,
-    closeDelay,
-    isLazy,
-    lazyBehavior,
-    animation,
+    closeOnSelect = true,
+    defaultIsOpen,
+    defaultValue,
     duration = 0.2,
-    offset,
-    gutter,
-    preventOverflow,
-    flip,
-    matchWidth = true,
-    boundary,
     eventListeners,
-    strategy,
-    placement = "bottom-start",
+    flip,
+    gutter,
+    isEmpty,
+    isLazy,
+    isOpen: isOpenProp,
+    lazyBehavior,
+    matchWidth = true,
+    maxSelectValues,
     modifiers,
+    offset,
+    omitSelectedValues = false,
+    openDelay,
+    placeholder,
+    placeholderInOptions = true,
+    placement = "bottom-start",
+    preventOverflow,
+    strategy,
+    value: valueProp,
+    optionProps,
+    onChange: onChangeProp,
+    onClose: onCloseProp,
+    onOpen: onOpenProp,
     ...rest
   } = useFormControlProps(props)
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
@@ -192,8 +192,8 @@ export const useSelect = <T extends MaybeValue = string>(
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const [label, setLabel] = useState<T | undefined>(undefined)
@@ -225,7 +225,7 @@ export const useSelect = <T extends MaybeValue = string>(
         if (selectedIndexes.includes(first.index)) {
           const enabledFirst = enabledValues[0]
 
-          setFocusedIndex(enabledFirst.index)
+          setFocusedIndex(enabledFirst?.index ?? -1)
         } else {
           setFocusedIndex(first.index)
         }
@@ -247,7 +247,7 @@ export const useSelect = <T extends MaybeValue = string>(
         if (selectedIndexes.includes(last.index)) {
           const enabledLast = enabledValues.reverse()[0]
 
-          setFocusedIndex(enabledLast.index)
+          setFocusedIndex(enabledLast?.index ?? -1)
         } else {
           setFocusedIndex(last.index)
         }
@@ -287,7 +287,7 @@ export const useSelect = <T extends MaybeValue = string>(
             enabledValues.find(({ index }) => next.index < index) ??
             enabledValues[0]
 
-          setFocusedIndex(enabledNext.index)
+          setFocusedIndex(enabledNext?.index ?? -1)
         } else {
           setFocusedIndex(next.index)
         }
@@ -319,7 +319,7 @@ export const useSelect = <T extends MaybeValue = string>(
             enabledValues.reverse().find(({ index }) => index < prev.index) ??
             enabledValues[0]
 
-          setFocusedIndex(enabledPrev.index)
+          setFocusedIndex(enabledPrev?.index ?? -1)
         } else {
           setFocusedIndex(prev.index)
         }
@@ -343,14 +343,14 @@ export const useSelect = <T extends MaybeValue = string>(
     isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const onChangeLabel = useCallback(
-    (newValue: string, runOmit: boolean = true) => {
+    (newValue: string, runOmit = true) => {
       const values = descendants.values()
 
       if (!values.length) return
 
       const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node, index }) => {
+        .map(({ index, node }) => {
           if (!(!!placeholder && placeholderInOptions) || index !== 0) {
             const el = Array.from(node.children).find(
               (child) => child.getAttribute("data-label") !== null,
@@ -421,13 +421,13 @@ export const useSelect = <T extends MaybeValue = string>(
 
   const {
     isOpen,
-    onOpen: onInternalOpen,
     onClose,
+    onOpen: onInternalOpen,
   } = useDisclosure({
-    isOpen: isOpenProp,
     defaultIsOpen,
-    onOpen: onOpenProp,
+    isOpen: isOpenProp,
     onClose: onCloseProp,
+    onOpen: onOpenProp,
   })
 
   const onOpen = useCallback(() => {
@@ -509,19 +509,19 @@ export const useSelect = <T extends MaybeValue = string>(
           : !isOpen
             ? funcAll(onOpen, onFocusLastOrSelected)
             : undefined,
-        Space: isFocused
-          ? onSelect
-          : !isOpen
-            ? funcAll(onOpen, onFocusFirstOrSelected)
-            : undefined,
+        End: isOpen ? onFocusLast : undefined,
         Enter: isFocused
           ? onSelect
           : !isOpen
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
-        Home: isOpen ? onFocusFirst : undefined,
-        End: isOpen ? onFocusLast : undefined,
         Escape: closeOnEsc ? onClose : undefined,
+        Home: isOpen ? onFocusFirst : undefined,
+        Space: isFocused
+          ? onSelect
+          : !isOpen
+            ? funcAll(onOpen, onFocusFirstOrSelected)
+            : undefined,
       }
 
       const action = actions[ev.key]
@@ -552,8 +552,8 @@ export const useSelect = <T extends MaybeValue = string>(
 
   useOutsideClick({
     ref: containerRef,
-    handler: onClose,
     enabled: isOpen && closeOnBlur,
+    handler: onClose,
   })
 
   useEffect(() => {
@@ -590,29 +590,29 @@ export const useSelect = <T extends MaybeValue = string>(
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
-      closeOnBlur,
-      openDelay,
+      animation,
+      boundary,
       closeDelay,
+      closeOnBlur,
+      duration,
+      eventListeners,
+      flip,
+      gutter,
       isLazy,
       lazyBehavior,
-      animation,
-      duration,
-      offset,
-      gutter,
-      preventOverflow,
-      flip,
       matchWidth,
-      boundary,
-      eventListeners,
-      strategy,
-      placement,
       modifiers,
+      offset,
+      openDelay,
+      placement,
+      preventOverflow,
+      strategy,
       ...props,
-      trigger: "never",
       closeOnButton: false,
       isOpen,
-      onOpen,
+      trigger: "never",
       onClose,
+      onOpen,
     }),
     [
       closeOnBlur,
@@ -644,8 +644,8 @@ export const useSelect = <T extends MaybeValue = string>(
       ...containerProps,
       ...props,
       ...formControlProps,
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
     }),
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
@@ -657,19 +657,19 @@ export const useSelect = <T extends MaybeValue = string>(
         `Select ${isMulti ? "one or more options." : "an option."}`
 
       return {
+        ref: mergeRefs(fieldRef, ref),
         "aria-label": ariaLabel,
         role: "combobox",
-        ref: mergeRefs(fieldRef, ref),
         tabIndex: 0,
         ...fieldProps,
         ...props,
+        "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
+        "aria-controls": listRef.current?.id,
+        "aria-expanded": isOpen,
         "data-active": dataAttr(isOpen),
         "data-placeholder": dataAttr(
           !isMulti ? label === undefined : !label?.length,
         ),
-        "aria-controls": listRef.current?.id,
-        "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
-        "aria-expanded": isOpen,
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
       }
@@ -689,41 +689,41 @@ export const useSelect = <T extends MaybeValue = string>(
   )
 
   return {
+    closeOnSelect,
+    containerRef,
     descendants,
-    value,
-    label,
+    fieldRef,
     focusedIndex,
+    isOpen,
+    label,
+    listRef,
+    omitSelectedValues,
     placeholder,
     placeholderInOptions,
-    omitSelectedValues,
-    closeOnSelect,
-    isOpen,
-    containerRef,
-    fieldRef,
-    listRef,
-    optionProps,
+    setFocusedIndex,
+    value,
     formControlProps,
-    onChangeLabel,
+    getContainerProps,
+    getFieldProps,
+    getPopoverProps,
+    optionProps,
     onChange,
+    onChangeLabel,
     onClear,
-    onOpen,
     onClose,
     onFocusFirst,
     onFocusLast,
-    onFocusSelected,
     onFocusNext,
     onFocusPrev,
-    setFocusedIndex,
-    getPopoverProps,
-    getContainerProps,
-    getFieldProps,
+    onFocusSelected,
+    onOpen,
   }
 }
 
 export type UseSelectReturn = ReturnType<typeof useSelect>
 
 export const useSelectList = () => {
-  const { value, listRef, focusedIndex } = useSelectContext()
+  const { focusedIndex, listRef, value } = useSelectContext()
 
   const descendants = useSelectDescendantsContext()
 
@@ -772,10 +772,10 @@ export const useSelectList = () => {
     (props = {}, ref = null) => ({
       id,
       ref: mergeRefs(listRef, ref),
-      role: "listbox",
       "aria-multiselectable": ariaAttr(isMulti),
-      tabIndex: -1,
       position: "relative",
+      role: "listbox",
+      tabIndex: -1,
       ...props,
     }),
     [id, isMulti, listRef],
@@ -799,7 +799,7 @@ export const useSelectOptionGroup = ({
   label,
   ...rest
 }: UseSelectOptionGroupProps) => {
-  const { value, omitSelectedValues } = useSelectContext()
+  const { omitSelectedValues, value } = useSelectContext()
 
   const isMulti = isArray(value)
 
@@ -814,7 +814,7 @@ export const useSelectOptionGroup = ({
       : []
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const childValues = values.filter(
-    ({ node, index }) =>
+    ({ index, node }) =>
       node.parentElement?.dataset.label === label &&
       !selectedIndexes.includes(index),
   )
@@ -829,12 +829,12 @@ export const useSelectOptionGroup = ({
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
@@ -852,8 +852,8 @@ export const useSelectOptionGroup = ({
       ariaLabel ??= label
 
       return {
-        "aria-label": ariaLabel,
         ref,
+        "aria-label": ariaLabel,
         role: "group",
         ...props,
         ...groupProps,
@@ -874,9 +874,11 @@ export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
 export interface UseSelectOptionProps extends Omit<HTMLUIProps<"li">, "value"> {
   /**
-   * The value of the select option.
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
    */
-  value?: string
+  closeOnSelect?: boolean
   /**
    * If `true`, the select option will be disabled.
    *
@@ -890,36 +892,34 @@ export interface UseSelectOptionProps extends Omit<HTMLUIProps<"li">, "value"> {
    */
   isFocusable?: boolean
   /**
-   * If `true`, the list element will be closed when selected.
-   *
-   * @default false
+   * The value of the select option.
    */
-  closeOnSelect?: boolean
+  value?: string
 }
 
 export const useSelectOption = (props: UseSelectOptionProps) => {
   const {
+    closeOnSelect: generalCloseOnSelect,
     fieldRef,
-    value,
+    focusedIndex,
+    omitSelectedValues,
     placeholder,
     placeholderInOptions,
-    omitSelectedValues,
-    closeOnSelect: generalCloseOnSelect,
-    focusedIndex,
+    setFocusedIndex,
+    value,
     optionProps,
     onChange,
     onChangeLabel,
-    onFocusNext,
     onClose,
-    setFocusedIndex,
+    onFocusNext,
   } = useSelectContext()
 
   let {
+    children,
+    closeOnSelect: customCloseOnSelect,
     icon: customIcon,
     isDisabled,
     isFocusable,
-    closeOnSelect: customCloseOnSelect,
-    children,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
@@ -928,7 +928,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
 
   const itemRef = useRef<HTMLLIElement>(null)
 
-  const { index, register, descendants } = useSelectDescendant({
+  const { descendants, index, register } = useSelectDescendant({
     disabled: trulyDisabled,
   })
 
@@ -1006,26 +1006,26 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
-        role: "option",
         ref: mergeRefs(itemRef, ref, register),
+        role: "option",
         ...computedProps,
         ...props,
-        tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
-        "data-value": optionValue ?? "",
-        "data-focus": dataAttr(isFocused),
-        "data-disabled": dataAttr(isDisabled),
         "aria-checked": ariaAttr(isSelected),
         "aria-disabled": ariaAttr(isDisabled),
+        "data-disabled": dataAttr(isDisabled),
+        "data-focus": dataAttr(isFocused),
+        "data-value": optionValue ?? "",
+        tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
@@ -1042,10 +1042,10 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
   )
 
   return {
-    isSelected,
-    isFocused,
-    customIcon,
     children,
+    customIcon,
+    isFocused,
+    isSelected,
     getOptionProps,
   }
 }

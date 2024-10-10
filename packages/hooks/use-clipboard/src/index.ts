@@ -1,10 +1,10 @@
 import { isNumber, isString } from "@yamada-ui/utils"
 import copy from "copy-to-clipboard"
-import { useState, useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export interface UseClipboardOptions {
-  timeout?: number
   format?: string
+  timeout?: number
 }
 
 /**
@@ -13,7 +13,7 @@ export interface UseClipboardOptions {
  * @see Docs https://yamada-ui.com/hooks/use-clipboard
  */
 export const useClipboard = (
-  defaultValue: string = "",
+  defaultValue = "",
   timeoutOrOptions: number | UseClipboardOptions = {},
 ) => {
   const [hasCopied, setHasCopied] = useState(false)
@@ -42,7 +42,7 @@ export const useClipboard = (
   )
 
   useEffect(() => {
-    let timeoutId: number | null = null
+    let timeoutId: null | number = null
 
     if (hasCopied)
       timeoutId = window.setTimeout(() => {
@@ -55,9 +55,9 @@ export const useClipboard = (
   }, [timeout, hasCopied])
 
   return {
-    value,
-    setValue,
-    onCopy,
     hasCopied,
+    setValue,
+    value,
+    onCopy,
   }
 }

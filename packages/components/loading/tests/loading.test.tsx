@@ -1,5 +1,5 @@
-import { render, a11y } from "@yamada-ui/test"
 import type { LoadingProps } from "../src"
+import { a11y, render } from "@yamada-ui/test"
 import { Loading } from "../src"
 
 describe("<Loading />", () => {
@@ -14,10 +14,10 @@ describe("<Loading />", () => {
   test("render with default class", () => {
     const { getByTestId } = render(
       <Loading
-        data-testid="loading"
         variant="oval"
-        fontSize="6xl"
+        data-testid="loading"
         color="red.500"
+        fontSize="6xl"
         secondaryColor="blue.500"
       />,
     )
@@ -40,12 +40,12 @@ describe("<Loading />", () => {
       const { getByTestId } = render(
         <>
           <Loading
-            data-testid={`loading-${variant}`}
             variant={variant as LoadingProps["variant"]}
+            data-testid={`loading-${variant}`}
           />
           <Loading
-            data-testid={`loading-${variant}-with-duration`}
             variant={variant as LoadingProps["variant"]}
+            data-testid={`loading-${variant}-with-duration`}
             duration={10}
           />
         </>,

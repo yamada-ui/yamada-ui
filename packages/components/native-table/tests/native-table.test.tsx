@@ -1,21 +1,21 @@
-import { a11y, render, screen } from "@yamada-ui/test"
 import type { FC } from "react"
 import type { NativeTableProps } from "../src"
+import { a11y, render, screen } from "@yamada-ui/test"
 import {
   NativeTable,
-  TableContainer,
   TableCaption,
-  Thead,
-  Tfoot,
-  Th,
+  TableContainer,
   Tbody,
   Td,
+  Tfoot,
+  Th,
+  Thead,
   Tr,
 } from "../src"
 
-type TestTableProps = {
+interface TestTableProps extends NativeTableProps {
   withCaption?: boolean
-} & NativeTableProps
+}
 
 describe("<NativeTable />", () => {
   const Table: FC<TestTableProps> = (props) => {
@@ -59,15 +59,15 @@ describe("<NativeTable />", () => {
     await a11y(<Table />)
   })
 
-  test("should render a table with provided props", async () => {
+  test("should render a table with provided props", () => {
     render(
       <Table
-        variant="striped"
         colorScheme="gray"
+        variant="striped"
         data-testid="Table"
-        withColumnBorders
-        withBorder
         highlightOnHover
+        withBorder
+        withColumnBorders
       />,
     )
     expect(screen.getByTestId("Table")).toHaveStyle({

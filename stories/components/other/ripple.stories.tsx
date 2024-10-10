@@ -4,8 +4,8 @@ import { Box, Ripple, Text, useRipple } from "@yamada-ui/react"
 type Story = StoryFn<typeof Box>
 
 const meta: Meta<typeof Box> = {
-  title: "Components / Other / Ripple",
   component: Box,
+  title: "Components / Other / Ripple",
 }
 
 export default meta
@@ -17,12 +17,12 @@ export const basic: Story = () => {
     <Box
       as="button"
       type="button"
-      p="md"
-      rounded="md"
       bg="primary"
       color="white"
-      position="relative"
       overflow="hidden"
+      p="md"
+      position="relative"
+      rounded="md"
       onPointerDown={onPointerDown}
     >
       <Text>Button</Text>
@@ -39,12 +39,12 @@ export const withIsDisabled: Story = () => {
     <Box
       as="button"
       type="button"
-      p="md"
-      rounded="md"
       bg="primary"
       color="white"
-      position="relative"
       overflow="hidden"
+      p="md"
+      position="relative"
+      rounded="md"
       onPointerDown={onPointerDown}
     >
       <Text>Button</Text>

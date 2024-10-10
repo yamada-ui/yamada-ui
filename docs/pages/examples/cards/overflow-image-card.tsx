@@ -5,20 +5,20 @@ import {
   CardHeader,
   Divider,
   Heading,
-  Text,
   Image,
+  Text,
 } from "@yamada-ui/react"
 import { memo } from "react"
 
 export const OverflowImageCard = memo(() => {
   return (
-    <Card breakInside="avoid" rounded="xl" variant="outline" h="xl">
+    <Card variant="outline" breakInside="avoid" h="xl" rounded="xl">
       <CardHeader
-        h="md"
-        overflow="hidden"
         as={Image}
         src="https://picsum.photos/400"
+        h="md"
         objectFit="cover"
+        overflow="hidden"
         p="0"
         roundedTop="xl"
       />
@@ -38,7 +38,7 @@ export const OverflowImageCard = memo(() => {
 
       <Divider />
 
-      <CardFooter backdropFilter="blur(10px)" roundedBottom="xl" pt="md">
+      <CardFooter backdropFilter="blur(10px)" pt="md" roundedBottom="xl">
         <Text fontSize="sm">1.2k views</Text>
 
         <Divider orientation="vertical" />

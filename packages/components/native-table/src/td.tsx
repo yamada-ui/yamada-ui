@@ -1,5 +1,5 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useTableStyles } from "./native-table"
 
@@ -24,8 +24,8 @@ export const Td = forwardRef<TdProps, "td">(
       <ui.td
         ref={ref}
         className={cx("ui-table__td", className)}
-        __css={css}
         data-is-numeric={isNumeric}
+        __css={css}
         {...rest}
       />
     )

@@ -1,17 +1,17 @@
+import type { BoxProps, ModalProps } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
 import {
+  assignRef,
   Box,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
   Text,
-  assignRef,
   useDisclosure,
 } from "@yamada-ui/react"
-import type { BoxProps, ModalProps } from "@yamada-ui/react"
 import { Highlight, themes } from "prism-react-renderer"
 import { memo } from "react"
-import type { FC, MutableRefObject } from "react"
 
 const LANGUAGE = "py"
 const THEME = themes.oneDark
@@ -38,13 +38,13 @@ export interface ViewCodeModalProps
 
 export const ViewCodeModal: FC<ViewCodeModalProps> = memo(
   ({ onOpenRef, ...rest }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onClose, onOpen } = useDisclosure()
 
     assignRef(onOpenRef, onOpen)
 
     return (
       <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
-        <ModalHeader flexDirection="column" gap="sm" alignItems="flex-start">
+        <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
           <Text as="h3">Save preset</Text>
 
           <Text color="muted" fontSize="md" fontWeight="normal">
@@ -74,27 +74,27 @@ interface CodeBlockProps extends BoxProps {}
 
 const CodeBlock: FC<CodeBlockProps> = memo(({ ...rest }) => {
   return (
-    <Box w="full" rounded="md" p="md" bg="blackAlpha.950" {...rest}>
-      <Highlight language={LANGUAGE} theme={THEME} code={CODE}>
+    <Box bg="blackAlpha.950" p="md" rounded="md" w="full" {...rest}>
+      <Highlight code={CODE} language={LANGUAGE} theme={THEME}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Box fontSize="sm" overflowX="auto" data-language={LANGUAGE}>
+          <Box data-language={LANGUAGE} fontSize="sm" overflowX="auto">
             <Box
               as="pre"
               className={className}
-              minW="fit-content"
               style={{ ...style, backgroundColor: "inherit" }}
+              minW="fit-content"
             >
               {tokens.map((line, index) => (
                 <Box
                   key={index}
                   minW="fit-content"
-                  {...getLineProps({ line, key: index })}
+                  {...getLineProps({ key: index, line })}
                 >
                   {line.map((token, index) => (
                     <Text
                       key={index}
                       as="span"
-                      {...getTokenProps({ token, key: index })}
+                      {...getTokenProps({ key: index, token })}
                     />
                   ))}
                 </Box>

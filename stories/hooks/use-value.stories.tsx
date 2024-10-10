@@ -12,21 +12,21 @@ export const basic = () => {
   const breakpoint = useBreakpoint()
   const bg = useValue({
     base: "red.500",
-    xl: "blue.500",
-    lg: "green.500",
-    md: "yellow.500",
     sm: "purple.500",
+    md: "yellow.500",
+    lg: "green.500",
+    xl: "blue.500",
   })
   const color = useValue(["whiteAlpha.800", "blackAlpha.800"])
 
   return (
     <Box
       bg={bg}
+      color={color}
       p="md"
       rounded="md"
-      color={color}
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}", colorMode is "{colorMode}"
     </Box>

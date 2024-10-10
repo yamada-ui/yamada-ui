@@ -1,40 +1,40 @@
 import type { ButtonProps, IconButtonProps } from "@yamada-ui/button"
-import { IconButton, Button } from "@yamada-ui/button"
-import type { FC, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import type { ReactElement } from "react"
+import type { UseCalendarHeaderProps } from "./use-calendar-header"
+import { Button, IconButton } from "@yamada-ui/button"
+import { ui } from "@yamada-ui/core"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx, isValidElement } from "@yamada-ui/utils"
-import type { ReactElement } from "react"
 import { useCalendarContext } from "./use-calendar"
-import type { UseCalendarHeaderProps } from "./use-calendar-header"
 import { useCalendarHeader } from "./use-calendar-header"
 
 interface CalendarHeaderOptions {
+  /**
+   * The label of the current calendar type.
+   */
+  label: string
   /**
    * Props for calendar control button element.
    */
   controlProps?: Omit<CalendarControlProps, "operation">
   /**
-   * Props for calendar previous control button element.
+   * Props for calendar label button element.
    */
-  prevProps?: Omit<CalendarControlProps, "operation">
+  labelProps?: { icon?: IconProps | ReactElement } & CalendarLabelProps
   /**
    * Props for calendar next control button element.
    */
   nextProps?: Omit<CalendarControlProps, "operation">
   /**
-   * Props for calendar label button element.
+   * Props for calendar previous control button element.
    */
-  labelProps?: CalendarLabelProps & { icon?: IconProps | ReactElement }
-  /**
-   * The label of the current calendar type.
-   */
-  label: string
+  prevProps?: Omit<CalendarControlProps, "operation">
 }
 
 export interface CalendarHeaderProps
-  extends Omit<HTMLUIProps, "value" | "defaultValue" | "onChange">,
+  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "value">,
     CalendarHeaderOptions,
     UseCalendarHeaderProps {}
 
@@ -43,19 +43,19 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   index,
   label,
   controlProps,
-  prevProps,
-  nextProps,
   labelProps,
+  nextProps,
+  prevProps,
   ...rest
 }) => {
-  const { type, withHeader, withControls, withLabel, styles } =
+  const { type, styles, withControls, withHeader, withLabel } =
     useCalendarContext()
   const { getContainerProps, getControlProps, getLabelProps } =
     useCalendarHeader({ index })
 
   const css: CSSUIObject = {
-    display: "flex",
     alignItems: "center",
+    display: "flex",
     w: "100%",
     ...styles.header,
   }
@@ -113,10 +113,10 @@ const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
 
   const css: CSSUIObject = {
     flex: 1,
-    h: "auto",
     fontSize: undefined,
     fontWeight: "normal",
     gap: 1,
+    h: "auto",
     ...styles.label,
   }
 
@@ -166,9 +166,9 @@ const CalendarControlPrev: FC<CalendarControlSharedProps> = ({
 }) => {
   return (
     <CalendarControl
-      operation="prev"
       className={cx("ui-calendar__header__control--prev", className)}
       icon={<ChevronIcon __css={{ transform: "rotate(90deg)" }} />}
+      operation="prev"
       {...rest}
     />
   )
@@ -183,9 +183,9 @@ const CalendarControlNext: FC<CalendarControlSharedProps> = ({
 }) => {
   return (
     <CalendarControl
-      operation="next"
       className={cx("ui-calendar__header__control--next", className)}
       icon={<ChevronIcon __css={{ transform: "rotate(-90deg)" }} />}
+      operation="next"
       {...rest}
     />
   )
@@ -195,7 +195,7 @@ CalendarControlNext.displayName = "CalendarControlNext"
 CalendarControlNext.__ui__ = "CalendarControlNext"
 
 export interface CalendarControlProps extends IconButtonProps {
-  operation: "prev" | "next"
+  operation: "next" | "prev"
 }
 
 const CalendarControl: FC<CalendarControlProps> = ({
@@ -206,8 +206,8 @@ const CalendarControl: FC<CalendarControlProps> = ({
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
-    minW: "auto",
     h: "auto",
+    minW: "auto",
     ...styles.control,
     ...styles[operation],
   }

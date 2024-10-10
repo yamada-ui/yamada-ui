@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Link, Heading, LinkBox, LinkOverlay, Text } from "@yamada-ui/react"
+import { Heading, Link, LinkBox, LinkOverlay, Text } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof LinkBox>
 
 const meta: Meta<typeof LinkBox> = {
-  title: "Components / Navigation / LinkBox",
   component: LinkBox,
+  title: "Components / Navigation / LinkBox",
 }
 
 export default meta
@@ -14,12 +14,12 @@ export const basic: Story = () => {
   return (
     <LinkBox
       as="article"
-      maxW="sm"
-      p="md"
-      rounded="md"
       border="1px solid"
       borderColor="inherit"
       boxShadow="md"
+      maxW="sm"
+      p="md"
+      rounded="md"
     >
       <Text as="span">鳥山明</Text>
 
@@ -44,12 +44,12 @@ export const withNestedLink: Story = () => {
   return (
     <LinkBox
       as="article"
-      maxW="sm"
-      p="md"
-      rounded="md"
       border="1px solid"
       borderColor="inherit"
       boxShadow="md"
+      maxW="sm"
+      p="md"
+      rounded="md"
     >
       <Text as="span">鳥山明</Text>
 
@@ -69,8 +69,8 @@ export const withNestedLink: Story = () => {
 
       <Link
         href="https://dragon-ball-official.com/"
-        isExternal
         fontWeight="bold"
+        isExternal
       >
         オフィシャルサイト
       </Link>

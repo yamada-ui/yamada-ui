@@ -1,60 +1,60 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UseAreaChartOptions } from "./use-area-chart"
+import type { UseChartProps } from "./use-chart"
+import type { UseChartAxisOptions } from "./use-chart-axis"
+import type { UseChartGridOptions } from "./use-chart-grid"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { Fragment, useMemo } from "react"
 import {
+  Area,
   CartesianGrid,
+  Label,
   Legend,
   AreaChart as ReChartsAreaChart,
-  Area,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-  Label,
 } from "recharts"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
-import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 interface AreaChartOptions {
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
   /**
    * If `true`, legend is visible.
    *
    * @default false
    */
   withLegend?: boolean
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
 }
 
 export interface AreaChartProps
-  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
     ThemeProps<"AreaChart">,
     AreaChartOptions,
     UseAreaChartOptions,
@@ -73,122 +73,122 @@ export interface AreaChartProps
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("AreaChart", props)
   const {
-    className,
-    series,
-    dataKey,
-    layoutType,
-    tickLine,
-    gridAxis,
-    withXAxis,
-    withYAxis,
-    xAxisProps,
-    yAxisProps,
-    xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
     type = "default",
-    withTooltip = true,
-    withLegend = false,
-    referenceLineProps = [],
-    containerProps,
-    unit,
-    gridProps,
-    strokeDasharray,
-    yAxisTickFormatter,
-    xAxisTickFormatter,
-    valueFormatter,
-    labelFormatter,
-    tooltipProps,
-    tooltipAnimationDuration,
-    legendProps,
-    data,
-    chartProps,
-    areaProps,
-    withGradient,
-    withDots,
-    withActiveDots,
-    curveType,
-    strokeWidth,
+    className,
     connectNulls,
+    curveType,
+    data,
+    dataKey,
     fillOpacity,
+    gridAxis,
+    labelFormatter,
+    layoutType,
+    series,
     splitColors,
     splitOffset,
+    strokeDasharray,
+    strokeWidth,
     syncId,
+    tickLine,
+    tooltipAnimationDuration,
+    unit,
+    valueFormatter,
+    withActiveDots,
+    withDots,
+    withGradient,
+    withLegend = false,
+    withTooltip = true,
+    withXAxis,
+    withYAxis,
+    xAxisLabel,
+    xAxisTickFormatter,
+    yAxisLabel,
+    yAxisTickFormatter,
+    areaProps,
+    chartProps,
+    containerProps,
+    gridProps,
+    legendProps,
+    referenceLineProps = [],
+    tooltipProps,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const {
-    getAreaChartProps,
-    getAreaSplitProps,
-    getAreaProps,
-    getAreaGradientProps,
     areaVars,
     setHighlightedArea,
+    getAreaChartProps,
+    getAreaGradientProps,
+    getAreaProps,
+    getAreaSplitProps,
   } = useAreaChart({
-    layoutType,
     type,
-    series,
-    referenceLineProps,
-    data,
-    chartProps,
-    areaProps,
-    withGradient,
-    withDots,
-    withActiveDots,
-    curveType,
-    strokeWidth,
     connectNulls,
+    curveType,
+    data,
     fillOpacity,
+    layoutType,
+    series,
     splitColors,
     splitOffset,
+    strokeWidth,
+    styles,
     syncId,
+    withActiveDots,
+    withDots,
+    withGradient,
     xAxisLabel,
     yAxisLabel,
-    styles,
+    areaProps,
+    chartProps,
+    referenceLineProps,
   })
   const { getContainerProps } = useChart({ containerProps })
   const {
-    getXAxisProps,
-    getYAxisProps,
     getXAxisLabelProps,
+    getXAxisProps,
     getYAxisLabelProps,
+    getYAxisProps,
   } = useChartAxis({
-    dataKey,
     type,
-    layoutType,
-    tickLine,
+    dataKey,
     gridAxis,
+    layoutType,
+    styles,
+    tickLine,
+    unit,
     withXAxis,
     withYAxis,
-    xAxisProps,
-    yAxisProps,
     xAxisLabel,
-    yAxisLabel,
-    xAxisLabelProps,
-    yAxisLabelProps,
-    unit,
-    yAxisTickFormatter,
     xAxisTickFormatter,
-    styles,
+    yAxisLabel,
+    yAxisTickFormatter,
+    xAxisLabelProps,
+    xAxisProps,
+    yAxisLabelProps,
+    yAxisProps,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
-    referenceLineProps,
     styles,
+    referenceLineProps,
   })
   const { getGridProps } = useChartGrid({
-    gridProps,
     gridAxis,
     strokeDasharray,
     styles,
+    gridProps,
   })
-  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+  const { getTooltipProps, tooltipProps: computedTooltipProps } =
     useChartTooltip({
-      tooltipProps,
-      tooltipAnimationDuration,
       styles,
+      tooltipAnimationDuration,
+      tooltipProps,
     })
-  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+  const { getLegendProps, legendProps: computedLegendProps } = useChartLegend({
     legendProps,
   })
 
@@ -196,8 +196,8 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     () =>
       series.map(({ dataKey }, index) => {
         const { id, stroke, ...rest } = getAreaProps({
-          index,
           className: "ui-area-chart__area",
+          index,
         })
 
         return (
@@ -219,8 +219,8 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
         <ReferenceLine
           key={`referenceLine-${index}`}
           {...getReferenceLineProps({
-            index,
             className: "ui-area-chart__reference-line",
+            index,
           })}
         />
       )),
@@ -281,10 +281,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                   <ChartTooltip
                     className="ui-area-chart__tooltip"
                     label={label}
-                    payload={payload}
-                    valueFormatter={valueFormatter}
                     labelFormatter={labelFormatter}
+                    payload={payload}
                     unit={unit}
+                    valueFormatter={valueFormatter}
                     {...computedTooltipProps}
                   />
                 )}
@@ -306,3 +306,6 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     </ChartProvider>
   )
 })
+
+AreaChart.displayName = "AreaChart"
+AreaChart.__ui__ = "AreaChart"

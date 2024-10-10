@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm, Controller } from "react-hook-form"
-import { ChevronsDown, Check } from "@yamada-ui/lucide"
 import type { AutocompleteItem } from "@yamada-ui/react"
+import type { SubmitHandler } from "react-hook-form"
+import { Check, ChevronsDown } from "@yamada-ui/lucide"
 import {
   Autocomplete,
-  AutocompleteOptionGroup,
   AutocompleteOption,
-  FormControl,
+  AutocompleteOptionGroup,
   Button,
+  FormControl,
   VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Autocomplete>
 
 const meta: Meta<typeof Autocomplete> = {
-  title: "Components / Forms / Autocomplete",
   component: Autocomplete,
+  title: "Components / Forms / Autocomplete",
 }
 
 export default meta
@@ -26,15 +26,14 @@ export const basic: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -43,6 +42,7 @@ export const basic: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
@@ -71,7 +71,7 @@ export const basic: Story = () => {
         </AutocompleteOptionGroup>
       </Autocomplete>
 
-      <Autocomplete placeholder="キャラクターを選択" items={items} />
+      <Autocomplete items={items} placeholder="キャラクターを選択" />
     </>
   )
 }
@@ -79,10 +79,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <Autocomplete placeholder="extra small size" size="xs" />
-      <Autocomplete placeholder="small size" size="sm" />
-      <Autocomplete placeholder="medium size" size="md" />
-      <Autocomplete placeholder="large size" size="lg" />
+      <Autocomplete size="xs" placeholder="extra small size" />
+      <Autocomplete size="sm" placeholder="small size" />
+      <Autocomplete size="md" placeholder="medium size" />
+      <Autocomplete size="lg" placeholder="large size" />
     </>
   )
 }
@@ -108,13 +108,10 @@ export const withFooter: Story = () => {
 
   return (
     <Autocomplete
-      value={value}
-      onChange={onChange}
-      placeholder="キャラクターを選択"
       footer={({ onClose }) => (
         <VStack
-          borderTopWidth="1px"
           borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          borderTopWidth="1px"
           p="2"
         >
           <Button
@@ -128,13 +125,16 @@ export const withFooter: Story = () => {
         </VStack>
       )}
       items={items}
+      placeholder="キャラクターを選択"
+      value={value}
+      onChange={onChange}
     />
   )
 }
 
 export const withDefaultValue: Story = () => {
   return (
-    <Autocomplete placeholder="キャラクターを選択" defaultValue="ベジータ">
+    <Autocomplete defaultValue="ベジータ" placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -145,8 +145,8 @@ export const withDefaultValue: Story = () => {
 export const withEmptyMessage: Story = () => {
   return (
     <Autocomplete
-      placeholder="キャラクターを選択"
       emptyMessage="キャラクターが存在しません"
+      placeholder="キャラクターを選択"
     >
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -159,15 +159,14 @@ export const withAllowCreate: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -176,14 +175,15 @@ export const withAllowCreate: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   return (
     <Autocomplete
-      placeholder="キャラクターを選択"
-      items={items}
       allowCreate
+      items={items}
+      placeholder="キャラクターを選択"
       onCreate={(newItem, newItems) =>
         console.log("created item", newItem, "new items", newItems)
       }
@@ -195,15 +195,14 @@ export const withAllowFree: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -212,14 +211,15 @@ export const withAllowFree: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   return (
     <Autocomplete
-      placeholder="キャラクターを選択"
-      items={items}
       allowFree
+      items={items}
+      placeholder="キャラクターを選択"
       onChange={(value) => console.log("new value:", value)}
     />
   )
@@ -229,15 +229,14 @@ export const withInsertPositionItem: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -246,34 +245,35 @@ export const withInsertPositionItem: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   return (
     <>
       <Autocomplete
-        placeholder="キャラクターを選択"
-        items={items}
         allowCreate
         insertPositionItem="first"
+        items={items}
+        placeholder="キャラクターを選択"
       />
       <Autocomplete
-        placeholder="キャラクターを選択"
-        items={items}
         allowCreate
         insertPositionItem="last"
+        items={items}
+        placeholder="キャラクターを選択"
       />
       <Autocomplete
-        placeholder="キャラクターを選択"
-        items={items}
         allowCreate
         insertPositionItem="地球人"
+        items={items}
+        placeholder="キャラクターを選択"
       />
       <Autocomplete
-        placeholder="キャラクターを選択"
-        items={items}
         allowCreate
         insertPositionItem={["フリーザ軍", "last"]}
+        items={items}
+        placeholder="キャラクターを選択"
       />
     </>
   )
@@ -298,8 +298,8 @@ export const withBorderColor: Story = () => {
       </Autocomplete>
 
       <Autocomplete
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -312,7 +312,7 @@ export const withBorderColor: Story = () => {
 
 export const disabledCloseOnSelect: Story = () => {
   return (
-    <Autocomplete placeholder="キャラクターを選択" closeOnSelect={false}>
+    <Autocomplete closeOnSelect={false} placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -322,7 +322,7 @@ export const disabledCloseOnSelect: Story = () => {
 
 export const disabledCloseOnBlur: Story = () => {
   return (
-    <Autocomplete placeholder="キャラクターを選択" closeOnBlur={false}>
+    <Autocomplete closeOnBlur={false} placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -333,9 +333,9 @@ export const disabledCloseOnBlur: Story = () => {
 export const withPlacement: Story = () => {
   return (
     <Autocomplete
+      maxW="xs"
       placeholder="キャラクターを選択"
       placement="right-start"
-      maxW="xs"
     >
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -347,8 +347,8 @@ export const withPlacement: Story = () => {
 export const withOffset: Story = () => {
   return (
     <Autocomplete
-      placeholder="キャラクターを選択"
       offset={[16, 16]}
+      placeholder="キャラクターを選択"
       listProps={{ maxW: "xs" }}
     >
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -360,7 +360,7 @@ export const withOffset: Story = () => {
 
 export const withGutter: Story = () => {
   return (
-    <Autocomplete placeholder="キャラクターを選択" gutter={32}>
+    <Autocomplete gutter={32} placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -370,7 +370,7 @@ export const withGutter: Story = () => {
 
 export const withDuration: Story = () => {
   return (
-    <Autocomplete placeholder="キャラクターを選択" duration={0.4}>
+    <Autocomplete duration={0.4} placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -381,10 +381,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Autocomplete isDisabled variant="outline" placeholder="outline" />
-      <Autocomplete isDisabled variant="filled" placeholder="filled" />
-      <Autocomplete isDisabled variant="flushed" placeholder="flushed" />
-      <Autocomplete isDisabled variant="unstyled" placeholder="unstyled" />
+      <Autocomplete variant="outline" isDisabled placeholder="outline" />
+      <Autocomplete variant="filled" isDisabled placeholder="filled" />
+      <Autocomplete variant="flushed" isDisabled placeholder="flushed" />
+      <Autocomplete variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -399,10 +399,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <Autocomplete isReadOnly variant="outline" placeholder="outline" />
-      <Autocomplete isReadOnly variant="filled" placeholder="filled" />
-      <Autocomplete isReadOnly variant="flushed" placeholder="flushed" />
-      <Autocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
+      <Autocomplete variant="outline" isReadOnly placeholder="outline" />
+      <Autocomplete variant="filled" isReadOnly placeholder="filled" />
+      <Autocomplete variant="flushed" isReadOnly placeholder="flushed" />
+      <Autocomplete variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
         isReadOnly
@@ -417,15 +417,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <Autocomplete isInvalid variant="outline" placeholder="outline" />
-      <Autocomplete isInvalid variant="filled" placeholder="filled" />
-      <Autocomplete isInvalid variant="flushed" placeholder="flushed" />
-      <Autocomplete isInvalid variant="unstyled" placeholder="unstyled" />
+      <Autocomplete variant="outline" isInvalid placeholder="outline" />
+      <Autocomplete variant="filled" isInvalid placeholder="filled" />
+      <Autocomplete variant="flushed" isInvalid placeholder="flushed" />
+      <Autocomplete variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="Which notifications would you like to receive?"
-        errorMessage="This is required."
       >
         <Autocomplete placeholder="Autocomplete notifications" />
       </FormControl>
@@ -437,7 +437,7 @@ export const isOptionDisabled: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-      <AutocompleteOption value="ベジータ" isDisabled>
+      <AutocompleteOption isDisabled value="ベジータ">
         ベジータ
       </AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -449,7 +449,7 @@ export const isOptionFocusable: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-      <AutocompleteOption value="ベジータ" isDisabled isFocusable>
+      <AutocompleteOption isDisabled isFocusable value="ベジータ">
         ベジータ
       </AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -531,15 +531,14 @@ export const reactHookForm: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -548,14 +547,15 @@ export const reactHookForm: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -565,14 +565,13 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.autocomplete1?.message}
         isInvalid={!!errors.autocomplete1}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete1?.message}
       >
         <Controller
           name="autocomplete1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete placeholder="キャラクターを選択" {...field}>
               <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -580,18 +579,18 @@ export const reactHookForm: Story = () => {
               <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
             </Autocomplete>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.autocomplete2?.message}
         isInvalid={!!errors.autocomplete2}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete2?.message}
       >
         <Controller
           name="autocomplete2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete placeholder="キャラクターを選択" {...field}>
               <AutocompleteOptionGroup label="地球人">
@@ -618,18 +617,18 @@ export const reactHookForm: Story = () => {
               </AutocompleteOptionGroup>
             </Autocomplete>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.autocomplete3?.message}
         isInvalid={!!errors.autocomplete3}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete3?.message}
       >
         <Controller
           name="autocomplete3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete
               placeholder="キャラクターを選択"
@@ -637,6 +636,7 @@ export const reactHookForm: Story = () => {
               items={items}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -663,15 +663,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
   const items: AutocompleteItem[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
-      label: "地球人",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
         { label: "クリリン", value: "クリリン" },
       ],
+      label: "地球人",
     },
     {
-      label: "フリーザ軍",
       items: [
         { label: "フリーザ", value: "フリーザ" },
         { label: "ギニュー", value: "ギニュー" },
@@ -680,14 +679,15 @@ export const reactHookFormWithDefaultValue: Story = () => {
         { label: "ジース", value: "ジース" },
         { label: "グルド", value: "グルド" },
       ],
+      label: "フリーザ軍",
     },
   ]
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -697,14 +697,13 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.autocomplete1?.message}
         isInvalid={!!errors.autocomplete1}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete1?.message}
       >
         <Controller
           name="autocomplete1"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete placeholder="キャラクターを選択" {...field}>
               <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -712,18 +711,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
               <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
             </Autocomplete>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.autocomplete2?.message}
         isInvalid={!!errors.autocomplete2}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete2?.message}
       >
         <Controller
           name="autocomplete2"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete placeholder="キャラクターを選択" {...field}>
               <AutocompleteOptionGroup label="地球人">
@@ -750,18 +749,18 @@ export const reactHookFormWithDefaultValue: Story = () => {
               </AutocompleteOptionGroup>
             </Autocomplete>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
+        errorMessage={errors.autocomplete3?.message}
         isInvalid={!!errors.autocomplete3}
         label="Who is your favorite character?"
-        errorMessage={errors.autocomplete3?.message}
       >
         <Controller
           name="autocomplete3"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete
               placeholder="キャラクターを選択"
@@ -769,6 +768,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
               items={items}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

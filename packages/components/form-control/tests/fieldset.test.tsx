@@ -1,5 +1,5 @@
-import { a11y, render, screen, filterVisuallyHidden } from "@yamada-ui/test"
 import type { ComponentProps, FC } from "react"
+import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
 import { Fieldset, useFormControlProps } from "../src"
 
 const Checkbox: FC<ComponentProps<"input">> = ({ children, ...props }) => {
@@ -17,8 +17,8 @@ describe("<Fieldset />", () => {
   test("Fieldset renders correctly", async () => {
     await a11y(
       <Fieldset
-        legend="Terms and Conditions"
         helperMessage="Please review the terms carefully before agreeing."
+        legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -28,8 +28,8 @@ describe("<Fieldset />", () => {
   test("should render form control", () => {
     render(
       <Fieldset
-        legend="Terms and Conditions"
         helperMessage="Please review the terms carefully before agreeing."
+        legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -48,9 +48,9 @@ describe("<Fieldset />", () => {
   test("should render invalid form control", () => {
     render(
       <Fieldset
+        errorMessage="Agreement is required."
         isInvalid
         legend="Terms and Conditions"
-        errorMessage="Agreement is required."
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -67,11 +67,11 @@ describe("<Fieldset />", () => {
   test("should be hidden helperMessage", () => {
     render(
       <Fieldset
-        isInvalid
-        legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
         errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
+        isInvalid
         isReplace
+        legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -90,17 +90,15 @@ describe("<Fieldset />", () => {
 
   test("should be appeared helperMessage", () => {
     render(
-      <>
-        <Fieldset
-          isInvalid
-          legend="Terms and Conditions"
-          helperMessage="Please review the terms carefully before agreeing."
-          errorMessage="Agreement is required."
-          isReplace={false}
-        >
-          <Checkbox>I agree to the Terms and Conditions.</Checkbox>
-        </Fieldset>
-      </>,
+      <Fieldset
+        errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
+        isInvalid
+        isReplace={false}
+        legend="Terms and Conditions"
+      >
+        <Checkbox>I agree to the Terms and Conditions.</Checkbox>
+      </Fieldset>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Agreement is required.")),
@@ -117,10 +115,10 @@ describe("<Fieldset />", () => {
   test("should be required", () => {
     render(
       <Fieldset
+        errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
         isRequired
         legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
-        errorMessage="Agreement is required."
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -131,10 +129,10 @@ describe("<Fieldset />", () => {
   test("should be disabled", () => {
     render(
       <Fieldset
+        errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
         isDisabled
         legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
-        errorMessage="Agreement is required."
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -145,10 +143,10 @@ describe("<Fieldset />", () => {
   test("should be readonly", () => {
     render(
       <Fieldset
+        errorMessage="Agreement is required."
+        helperMessage="Please review the terms carefully before agreeing."
         isReadOnly
         legend="Terms and Conditions"
-        helperMessage="Please review the terms carefully before agreeing."
-        errorMessage="Agreement is required."
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,

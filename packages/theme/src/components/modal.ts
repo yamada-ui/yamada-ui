@@ -2,39 +2,39 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Modal: ComponentMultiStyle<"Modal"> = {
   baseStyle: {
-    container: {
-      w: "100%",
-      rounded: "md",
-      bg: ["white", "black"],
-      color: "inherit",
-      boxShadow: ["lg", "dark-lg"],
-      zIndex: "recoome",
+    body: {
+      flex: "1",
+      gap: "md",
+      my: "md",
+      px: "md",
     },
     closeButton: {
-      top: "3",
       right: "3",
+      top: "3",
+    },
+    container: {
+      bg: ["white", "black"],
+      boxShadow: ["lg", "dark-lg"],
+      color: "inherit",
+      rounded: "md",
+      w: "100%",
+      zIndex: "recoome",
+    },
+    footer: {
+      gap: "md",
+      pb: "md",
+      px: "md",
+    },
+    header: {
+      fontSize: "xl",
+      fontWeight: "semibold",
+      gap: "md",
+      pt: "md",
+      px: "md",
     },
     overlay: {
       bg: "blackAlpha.600",
       zIndex: "burter",
-    },
-    header: {
-      pt: "md",
-      px: "md",
-      gap: "md",
-      fontSize: "xl",
-      fontWeight: "semibold",
-    },
-    body: {
-      my: "md",
-      px: "md",
-      gap: "md",
-      flex: "1",
-    },
-    footer: {
-      px: "md",
-      pb: "md",
-      gap: "md",
     },
   },
 
@@ -50,7 +50,7 @@ export const Modal: ComponentMultiStyle<"Modal"> = {
     "5xl": { container: { maxW: "5xl" } },
     "6xl": { container: { maxW: "6xl" } },
     full: {
-      container: { minW: "100vw", minH: "100dvh", rounded: 0 },
+      container: { minH: "100dvh", minW: "100vw", rounded: 0 },
     },
   },
 

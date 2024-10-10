@@ -4,7 +4,7 @@ import { useEffect } from "react"
 type Handler<E extends string> = E extends keyof WindowEventMap
   ? (ev: WindowEventMap[E]) => void
   : (ev: CustomEvent) => void
-type Options = boolean | AddEventListenerOptions
+type Options = AddEventListenerOptions | boolean
 
 /**
  * `useWindowEvent` is a custom hook that assigns an event listener to `window`.

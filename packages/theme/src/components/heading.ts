@@ -7,24 +7,24 @@ export const Heading: ComponentStyle<"Heading"> = {
   },
 
   sizes: {
-    "4xl": {
-      fontSize: { base: "7xl", sm: "6xl" },
-    },
-    "3xl": {
-      fontSize: { base: "6xl", sm: "5xl" },
-    },
-    "2xl": {
-      fontSize: { base: "5xl", sm: "4xl" },
+    xs: { fontSize: "sm" },
+    sm: { fontSize: "md" },
+    md: { fontSize: "xl" },
+    lg: {
+      fontSize: { base: "3xl", sm: "2xl" },
     },
     xl: {
       fontSize: { base: "4xl", sm: "3xl" },
     },
-    lg: {
-      fontSize: { base: "3xl", sm: "2xl" },
+    "2xl": {
+      fontSize: { base: "5xl", sm: "4xl" },
     },
-    md: { fontSize: "xl" },
-    sm: { fontSize: "md" },
-    xs: { fontSize: "sm" },
+    "3xl": {
+      fontSize: { base: "6xl", sm: "5xl" },
+    },
+    "4xl": {
+      fontSize: { base: "7xl", sm: "6xl" },
+    },
   },
 
   defaultProps: { size: "xl" },

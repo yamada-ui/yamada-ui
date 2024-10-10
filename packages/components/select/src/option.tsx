@@ -1,13 +1,13 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { FC, ReactElement } from "react"
+import type { UseSelectOptionProps } from "./use-select"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useId } from "react"
-import type { ReactElement, FC } from "react"
-import type { UseSelectOptionProps } from "./use-select"
 import { useSelectContext, useSelectOption } from "./use-select"
 
 interface OptionOptions {
-  icon?: ReactElement
+  icon?: null | ReactElement
 }
 
 export interface OptionProps extends UseSelectOptionProps, OptionOptions {}
@@ -15,7 +15,7 @@ export interface OptionProps extends UseSelectOptionProps, OptionOptions {}
 export const Option = forwardRef<OptionProps, "li">(
   ({ id, className, icon, ...rest }, ref) => {
     const { styles } = useSelectContext()
-    const { isSelected, customIcon, children, getOptionProps } =
+    const { children, customIcon, isSelected, getOptionProps } =
       useSelectOption(rest)
     const uuid = useId()
 
@@ -23,16 +23,16 @@ export const Option = forwardRef<OptionProps, "li">(
     icon ??= customIcon
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
       alignItems: "center",
-      textAlign: "start",
+      color: "inherit",
+      display: "flex",
       flex: "0 0 auto",
-      outline: 0,
       gap: "0.75rem",
+      outline: 0,
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
       ...styles.item,
     }
 
@@ -60,18 +60,18 @@ export const Option = forwardRef<OptionProps, "li">(
 Option.displayName = "Option"
 Option.__ui__ = "Option"
 
-type OptionIconProps = HTMLUIProps<"span">
+interface OptionIconProps extends HTMLUIProps<"span"> {}
 
 const OptionIcon = forwardRef<OptionIconProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      flexShrink: 0,
-      display: "inline-flex",
-      justifyContent: "center",
       alignItems: "center",
+      display: "inline-flex",
+      flexShrink: 0,
       fontSize: "0.85em",
+      justifyContent: "center",
       ...styles.itemIcon,
     }
 
@@ -90,7 +90,7 @@ OptionIcon.displayName = "OptionIcon"
 OptionIcon.__ui__ = "OptionIcon"
 
 const CheckIcon: FC = () => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em">
+  <svg height="1em" viewBox="0 0 14 14" width="1em">
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"

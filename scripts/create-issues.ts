@@ -1,6 +1,6 @@
+import type { Project } from "find-packages"
 import { Octokit } from "@octokit/rest"
 import { config } from "dotenv"
-import type { Project } from "find-packages"
 import { findPackages } from "find-packages"
 import { recursiveOctokit, wait } from "./utils"
 
@@ -42,10 +42,10 @@ const getIssues = async () => {
   const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...COMMON_PARAMS,
-      state: "open",
       labels: "enhancement",
-      per_page: perPage,
       page,
+      per_page: perPage,
+      state: "open",
     })
 
     issues.push(...data)
@@ -67,18 +67,15 @@ const getIssues = async () => {
 }
 
 const getExistIssues = (issues: Issue[]) =>
-  issues.reduce(
-    (prev, issue) => {
-      const packageName = issue.body?.match(
-        new RegExp(`^script: ${SCRIPT_CODE}\\s+${TARGET_KEY}: ([^\s]+)`, "m"),
-      )?.[1]
+  issues.reduce<{ [key: string]: Issue }>((prev, issue) => {
+    const packageName = issue.body?.match(
+      new RegExp(`^script: ${SCRIPT_CODE}\\s+${TARGET_KEY}: ([^\s]+)`, "m"),
+    )?.[1]
 
-      if (packageName) prev[packageName] = issue
+    if (packageName) prev[packageName] = issue
 
-      return prev
-    },
-    {} as Record<string, Issue>,
-  )
+    return prev
+  }, {})
 
 const main = async () => {
   const issues = await getIssues()
@@ -94,9 +91,9 @@ const main = async () => {
 
       await octokit.issues.create({
         ...COMMON_PARAMS,
-        title,
         body,
         labels: ["enhancement", "good first issue"],
+        title,
       })
     })
 

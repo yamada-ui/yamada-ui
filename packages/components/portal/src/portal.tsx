@@ -3,10 +3,6 @@ import { ContainerPortal } from "./container-portal"
 import { DefaultPortal } from "./default-portal"
 
 export interface PortalProps {
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: RefObject<HTMLElement | null>
   children: ReactNode
   /**
    * If `true`, the portal will check if it is within a parent portal
@@ -20,6 +16,10 @@ export interface PortalProps {
    */
   appendToParentPortal?: boolean
   /**
+   * The `ref` to the component where the portal will be attached to.
+   */
+  containerRef?: RefObject<HTMLElement | null>
+  /**
    * If `true`, the forwarding will be disabled.
    */
   isDisabled?: boolean
@@ -31,10 +31,10 @@ export interface PortalProps {
  * @see Docs https://yamada-ui.com/components/other/portal
  */
 export const Portal = ({
-  containerRef,
   appendToParentPortal = true,
-  isDisabled,
   children,
+  containerRef,
+  isDisabled,
 }: PortalProps) => {
   if (isDisabled) return children
 
@@ -48,5 +48,5 @@ export const Portal = ({
   )
 }
 
-Portal.className = "ui-portal"
-Portal.selector = ".ui-portal"
+Portal.displayName = "Portal"
+Portal.__ui__ = "Portal"

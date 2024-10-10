@@ -1,33 +1,33 @@
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
-import {
-  isActiveElement,
-  useUpdateEffect,
-  createContext,
-  handlerAll,
-} from "@yamada-ui/utils"
-import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
-import { useCallback, useState } from "react"
-import { isSameDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
 import type { UseCalendarPickerProps } from "./use-calendar-picker"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import {
+  createContext,
+  handlerAll,
+  isActiveElement,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
+import dayjs from "dayjs"
+import { useCallback, useState } from "react"
+import { isSameDate } from "./calendar-utils"
 import { useCalendarPicker } from "./use-calendar-picker"
 
 interface DatePickerContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [DatePickerProvider, useDatePickerContext] =
   createContext<DatePickerContext>({
-    strict: false,
     name: "DatePickerContext",
+    errorMessage: `useDatePickerContext returned is 'undefined'. Seems you forgot to wrap the components in "<DatePicker />"`,
   })
 
 interface CalendarProps
   extends Omit<
     UseCalendarProps<Date | undefined>,
-    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+    "enableMultiple" | "enableRange" | "nextRef" | "prevRef" | "typeRef"
   > {}
 
 interface UseDatePickerOptions {
@@ -44,39 +44,39 @@ export interface UseDatePickerProps
     UseDatePickerOptions {}
 
 export const useDatePicker = ({
-  value: valueProp,
-  defaultValue,
-  onChange: onChangeProp,
-  placeholder,
   closeOnSelect = true,
+  defaultValue,
+  placeholder,
+  value: valueProp,
+  onChange: onChangeProp,
   ...rest
 }: UseDatePickerProps) => {
   const [value, setValue] = useControllableState<Date | undefined>({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
     onUpdate: (prev, next) => !isSameDate(prev, next),
   })
 
   const {
-    inputRef,
     id,
     allowInput,
-    pattern,
-    inputProps,
-    formControlProps,
-    onClose,
     dateToString,
+    inputRef,
+    pattern,
     stringToDate,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
+    formControlProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
     getIconProps,
+    getPopoverProps,
+    inputProps,
+    onClose,
   } = useCalendarPicker({
     ...rest,
-    value,
     defaultValue,
+    value,
     onChange: (value: Date | undefined) => {
       const inputValue = dateToString(value)
 
@@ -147,13 +147,13 @@ export const useDatePicker = ({
         autoComplete: "off",
         ...inputProps,
         ...props,
+        id,
         ref,
         style,
-        id,
-        tabIndex: !allowInput ? -1 : 0,
-        value: inputValue ?? "",
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
+        tabIndex: !allowInput ? -1 : 0,
+        value: inputValue ?? "",
         onChange: handlerAll(props.onChange, onChange),
       }
     },
@@ -171,13 +171,13 @@ export const useDatePicker = ({
   return {
     id,
     value,
-    onClose,
-    getContainerProps,
-    getPopoverProps,
-    getFieldProps,
-    getInputProps,
-    getIconProps,
     getCalendarProps,
+    getContainerProps,
+    getFieldProps,
+    getIconProps,
+    getInputProps,
+    getPopoverProps,
+    onClose,
   }
 }
 

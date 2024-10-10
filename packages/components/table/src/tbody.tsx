@@ -1,18 +1,18 @@
-import { FC } from "@yamada-ui/core"
+import type { FC } from "@yamada-ui/core"
 import type { TableBodyProps as NativeTableBodyProps } from "@yamada-ui/native-table"
-import { Tbody as NativeTbody, Tr, Td } from "@yamada-ui/native-table"
-import { dataAttr, ariaAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
-import { useTableContext, render } from "./use-table"
+import { Tbody as NativeTbody, Td, Tr } from "@yamada-ui/native-table"
+import { ariaAttr, dataAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import { render, useTableContext } from "./use-table"
 
 export interface TableBodyProps extends NativeTableBodyProps {}
 
 export const Tbody: FC = ({ ...rest }: TableBodyProps) => {
   const {
-    rows,
-    rowProps,
-    cellProps,
     enableRowSelection,
+    rows,
     rowsClickSelect,
+    cellProps,
+    rowProps,
     onClickRow,
     onDoubleClickRow,
   } = useTableContext()
@@ -22,9 +22,9 @@ export const Tbody: FC = ({ ...rest }: TableBodyProps) => {
       {rows.map((row) => {
         const {
           id,
-          getVisibleCells,
-          getIsSelected,
           getCanSelect,
+          getIsSelected,
+          getVisibleCells,
           toggleSelected,
         } = row
 
@@ -56,11 +56,11 @@ export const Tbody: FC = ({ ...rest }: TableBodyProps) => {
             key={id}
             {...(rowsClickSelect && !isDisabled ? { cursor: "pointer" } : {})}
             {...mergedRowProps}
-            data-selected={dataAttr(isSelected)}
-            data-disabled={dataAttr(isDisabled)}
-            aria-selected={ariaAttr(isSelected)}
             aria-disabled={ariaAttr(isDisabled)}
             aria-rowindex={row.index + 1}
+            aria-selected={ariaAttr(isSelected)}
+            data-disabled={dataAttr(isDisabled)}
+            data-selected={dataAttr(isSelected)}
           >
             {cells.map((cell, index) => {
               const { id, column, getContext } = cell

@@ -1,10 +1,10 @@
-import type { TransformOptions } from "./transform-props"
-import type { CSSProperties, UIProperties } from "."
 import type { CSSObject, ThemeToken, Union } from "@yamada-ui/react"
+import type { CSSProperties, UIProperties } from "."
+import type { TransformOptions } from "./transform-props"
 
 const generateTransform = (...transforms: TransformOptions[]) => {
   let transform = transforms
-    .map(({ transform, args }) => {
+    .map(({ args, transform }) => {
       let func = `transforms.${transform}`
 
       if (args) func += `(${args.map((arg) => `"${arg}"`).join(", ")})`
@@ -19,24 +19,24 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 }
 
 interface GetConfigOptions {
+  css?: CSSObject
+  isProcessResult?: boolean
+  isProcessSkip?: boolean
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]
   token?: ThemeToken
   transforms?: TransformOptions[]
-  css?: CSSObject
-  isProcessResult?: boolean
-  isProcessSkip?: boolean
 }
 
 export const generateConfig =
   ({
-    properties,
-    token,
-    transforms,
     css,
     isProcessResult,
     isProcessSkip,
+    properties,
+    token,
+    transforms,
   }: GetConfigOptions) =>
   (isConfig?: boolean) => {
     if (!isConfig && !token && !transforms && !css) return true
@@ -63,7 +63,7 @@ export const generateConfig =
     if (transforms || token) {
       transforms ??= []
 
-      if (token) transforms.unshift({ transform: "token", args: [token] })
+      if (token) transforms.unshift({ args: [token], transform: "token" })
 
       config.push(generateTransform(...transforms))
     }

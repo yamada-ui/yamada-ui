@@ -32,7 +32,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render siblings correctly", () => {
-    render(<Pagination total={77} siblings={3} />)
+    render(<Pagination siblings={3} total={77} />)
 
     fireEvent.click(screen.getByText("7"))
 
@@ -42,7 +42,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render boundaries correctly", () => {
-    render(<Pagination total={77} boundaries={3} />)
+    render(<Pagination boundaries={3} total={77} />)
 
     fireEvent.click(screen.getByText("7"))
 
@@ -52,7 +52,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render disabled correctly", () => {
-    render(<Pagination total={77} isDisabled />)
+    render(<Pagination isDisabled total={77} />)
 
     expect(screen.getByRole("navigation")).toHaveAttribute("data-disabled")
 
@@ -65,7 +65,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render pagination with previous dots and without next dots correctly", () => {
-    render(<Pagination total={100} page={95} siblings={2} boundaries={2} />)
+    render(<Pagination boundaries={2} page={95} siblings={2} total={100} />)
 
     for (let page = 93; page <= 100; page++) {
       expect(screen.getByText(page.toString())).toBeInTheDocument()

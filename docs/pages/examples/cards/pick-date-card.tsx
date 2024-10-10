@@ -5,10 +5,10 @@ import { memo } from "react"
 export const PickDateCard = memo(() => {
   return (
     <Card
+      variant="outline"
       breakInside="avoid"
       mb={{ base: "lg", sm: "md" }}
       rounded="xl"
-      variant="outline"
     >
       <CardHeader>
         <Heading as="h2" size="md">

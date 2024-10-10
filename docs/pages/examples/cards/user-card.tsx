@@ -1,22 +1,22 @@
-import { HStack, VStack, Avatar, Text, Select, Option } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
+import { Avatar, HStack, Option, Select, Text, VStack } from "@yamada-ui/react"
+import { memo } from "react"
 
 export interface UserCardProps {
   avatarSrc: string
-  username: string
-  userId: string
   defaultValue: string
   options: string[]
+  userId: string
+  username: string
 }
 
 export const UserCard: FC<UserCardProps> = memo(
-  ({ avatarSrc, username, userId, defaultValue, options }) => {
+  ({ avatarSrc, defaultValue, options, userId, username }) => {
     return (
       <HStack
-        w="full"
-        flexDirection={{ base: "row", sm: "column" }}
         alignItems={{ base: "center", sm: "stretch" }}
+        flexDirection={{ base: "row", sm: "column" }}
+        w="full"
       >
         <HStack flex="1">
           <Avatar src={avatarSrc} />
@@ -30,8 +30,8 @@ export const UserCard: FC<UserCardProps> = memo(
         </HStack>
 
         <Select
-          w={{ base: "fit-content", sm: "full" }}
           defaultValue={defaultValue}
+          w={{ base: "fit-content", sm: "full" }}
         >
           {options.map((option) => (
             <Option key={option} value={option}>

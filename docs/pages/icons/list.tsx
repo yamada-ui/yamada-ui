@@ -1,6 +1,7 @@
 import type { IconNames } from "@yamada-ui/lucide"
-import { icons, SearchIcon } from "@yamada-ui/lucide"
 import type { InputGroupProps, InputProps, StackProps } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
+import { icons, SearchIcon } from "@yamada-ui/lucide"
 import {
   AspectRatio,
   assignRef,
@@ -15,13 +16,12 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
+import { useI18n } from "contexts"
 import { matchSorter } from "match-sorter"
-import type { FC, MutableRefObject } from "react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { IconDrawer } from "./icon-drawer"
 import { NotFound } from "./not-found"
 import { TAGS } from "./tags"
-import { useI18n } from "contexts"
 
 const resolvedIcons = Object.entries(icons).filter(
   ([name]) => !name.endsWith("Icon"),
@@ -29,8 +29,8 @@ const resolvedIcons = Object.entries(icons).filter(
 
 const DATA = resolvedIcons.map(([name, Icon]) => ({
   name,
-  tags: TAGS[name] ?? [],
   Icon,
+  tags: TAGS[name] ?? [],
 }))
 const PER_PAGE = 200
 const TOTAL_COUNT = resolvedIcons.length
@@ -76,24 +76,24 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
 
   return (
     <>
-      <VStack mt="6" gap={{ base: "xl", md: "md" }} {...rest}>
+      <VStack gap={{ base: "xl", md: "md" }} mt="6" {...rest}>
         <Search valueResetRef={valueResetRef} onSearch={onSearch} />
 
         <InfiniteScrollArea
           isDisabled={index === totalIndex}
-          onLoad={({ index, finish }) => {
+          loading={<Box h="px" w="full" />}
+          resetRef={scrollResetRef}
+          rootMargin="0px 0px 640px 0px"
+          onLoad={({ finish, index }) => {
             setIndex(index)
 
             if (index >= totalIndex) finish()
           }}
-          loading={<Box w="full" h="px" />}
-          rootMargin="0px 0px 640px 0px"
-          resetRef={scrollResetRef}
         >
           {data.length ? (
             <Grid
-              templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
               gap="md"
+              templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
             >
               {data.map(({ name, Icon }) => (
                 <Tooltip key={name} label={name}>
@@ -101,14 +101,14 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
                     <Center
                       as="button"
                       aria-label={name}
-                      cursor="pointer"
                       bg={["blackAlpha.50", "whiteAlpha.50"]}
-                      rounded="md"
+                      cursor="pointer"
                       outline="0"
-                      transitionProperty="background"
+                      rounded="md"
                       transitionDuration="slower"
-                      _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
+                      transitionProperty="background"
                       _focusVisible={{ boxShadow: "outline" }}
+                      _hover={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
                       onClick={() => openRef.current(name as IconNames)}
                     >
                       <Icon fontSize="2xl" />
@@ -131,13 +131,13 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
 List.displayName = "List"
 
 interface SearchProps extends InputProps {
+  valueResetRef: MutableRefObject<() => void>
   onSearch: (value: string) => void
   containerProps?: InputGroupProps
-  valueResetRef: MutableRefObject<() => void>
 }
 
 const Search: FC<SearchProps> = memo(
-  ({ onSearch, containerProps, valueResetRef, ...rest }) => {
+  ({ valueResetRef, containerProps, onSearch, ...rest }) => {
     const [value, setValue] = useState<string>("")
     const { t } = useI18n()
 

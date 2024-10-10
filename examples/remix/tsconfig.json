@@ -1,5 +1,11 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.ts"],
+  "include": [
+    "../../@types",
+    "env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "eslint.config.ts"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,

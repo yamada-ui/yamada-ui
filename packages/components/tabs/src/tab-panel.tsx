@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import { cx } from "@yamada-ui/utils"
 import { useRef } from "react"
@@ -17,10 +17,10 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
     if (isSelected) hasBeenSelected.current = true
 
     const shouldRenderChildren = useLazyDisclosure({
-      wasSelected: hasBeenSelected.current,
-      isSelected,
       enabled,
+      isSelected,
       mode,
+      wasSelected: hasBeenSelected.current,
     })
 
     const css: CSSUIObject = { ...styles.tabPanel }

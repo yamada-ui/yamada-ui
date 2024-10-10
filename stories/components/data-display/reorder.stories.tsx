@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo } from "react"
-import { Ghost } from "@yamada-ui/lucide"
 import type { ReorderGenerateItem } from "@yamada-ui/react"
+import { Ghost } from "@yamada-ui/lucide"
 import {
   Divider,
   HStack,
@@ -10,12 +9,13 @@ import {
   ReorderTrigger,
   Text,
 } from "@yamada-ui/react"
+import { useMemo } from "react"
 
 type Story = StoryFn<typeof Reorder>
 
 const meta: Meta<typeof Reorder> = {
-  title: "Components / Data Display / Reorder",
   component: Reorder,
+  title: "Components / Data Display / Reorder",
 }
 
 export default meta
@@ -204,14 +204,14 @@ export const withOnCompleteChange: Story = () => {
 export const useContainerScroll: Story = () => {
   return (
     <Reorder
-      h="xs"
-      p="md"
       borderWidth="1px"
-      rounded="md"
-      overflowY="scroll"
+      h="xs"
       layoutScroll
-      tabIndex={0}
       outline="0"
+      overflowY="scroll"
+      p="md"
+      rounded="md"
+      tabIndex={0}
       _focusVisible={{ boxShadow: "outline" }}
     >
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>

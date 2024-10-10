@@ -1,14 +1,14 @@
-import { createRoot } from "react-dom/client"
-import { App } from "./app"
 import { UIProvider } from "@yamada-ui/react"
-import { theme, config } from "theme"
+import { createRoot } from "react-dom/client"
+import { config, theme } from "theme"
+import { App } from "./app"
 
 const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
 root.render(
-  <UIProvider theme={theme} config={config}>
+  <UIProvider config={config} theme={theme}>
     <App />
   </UIProvider>,
 )

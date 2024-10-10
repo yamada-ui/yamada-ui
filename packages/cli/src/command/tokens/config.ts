@@ -1,9 +1,9 @@
 export interface Config {
   key: string
-  replaceKey?: string
+  flatMap?: (value: string) => string | string[]
   maxScanDepth?: number
   omitScanKeys?: string[]
-  flatMap?: (value: string) => string | string[]
+  replaceKey?: string
 }
 
 export const config: Config[] = [

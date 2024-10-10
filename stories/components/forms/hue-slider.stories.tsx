@@ -1,7 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 import {
   Button,
   Center,
@@ -10,12 +8,14 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof HueSlider>
 
 const meta: Meta<typeof HueSlider> = {
-  title: "Components / Forms / HueSlider",
   component: HueSlider,
+  title: "Components / Forms / HueSlider",
 }
 
 export default meta
@@ -44,7 +44,7 @@ export const withMinMax: Story = () => {
   return (
     <>
       <Text>Value: {value}</Text>
-      <HueSlider value={value} min={120} max={180} onChange={onChange} />
+      <HueSlider max={180} min={120} value={value} onChange={onChange} />
     </>
   )
 }
@@ -55,7 +55,7 @@ export const withStep: Story = () => {
   return (
     <>
       <Text>Value: {value}</Text>
-      <HueSlider value={value} step={10} onChange={onChange} />
+      <HueSlider step={10} value={value} onChange={onChange} />
     </>
   )
 }
@@ -66,9 +66,9 @@ export const withFocusThumbOnChange: Story = () => {
   return (
     <>
       <Text>Value: {value}</Text>
-      <HueSlider value={value} step={10} focusThumbOnChange={false} />
+      <HueSlider focusThumbOnChange={false} step={10} value={value} />
 
-      <Center w="full" gap="md">
+      <Center gap="md" w="full">
         <Button
           isDisabled={value === 0}
           onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
@@ -77,8 +77,8 @@ export const withFocusThumbOnChange: Story = () => {
         </Button>
 
         <Button
-          isDisabled={value === 100}
           colorScheme="blue"
+          isDisabled={value === 100}
           onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
         >
           +10
@@ -98,9 +98,9 @@ export const isDisabled: Story = () => {
       <HueSlider isDisabled />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isDisabled
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <HueSlider />
       </FormControl>
@@ -114,9 +114,9 @@ export const isReadonly: Story = () => {
       <HueSlider isReadOnly />
 
       <FormControl
+        helperMessage="Please select your favorite color"
         isReadOnly
         label="Pick color"
-        helperMessage="Please select your favorite color"
       >
         <HueSlider />
       </FormControl>
@@ -178,9 +178,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -190,15 +190,15 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.hueSlider?.message}
         isInvalid={!!errors.hueSlider}
         label="Pick color"
-        errorMessage={errors.hueSlider?.message}
       >
         <Controller
           name="hueSlider"
           control={control}
-          rules={{ max: { value: 180, message: "The maximum value is 180." } }}
           render={({ field }) => <HueSlider {...field} />}
+          rules={{ max: { message: "The maximum value is 180.", value: 180 } }}
         />
       </FormControl>
 

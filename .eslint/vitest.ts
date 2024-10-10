@@ -1,27 +1,28 @@
-import { fixupPluginRules } from "@eslint/compat"
-import pluginVitest from "@vitest/eslint-plugin"
 import type { Linter } from "eslint"
+import { fixupPluginRules } from "@eslint/compat"
+import vitestPlugin from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
 export const vitestConfig: Linter.Config = {
   name: "eslint/vitest",
   files: sharedTestFiles,
-  plugins: { vitest: fixupPluginRules(pluginVitest) },
+  plugins: { vitest: fixupPluginRules(vitestPlugin) },
   rules: {
-    ...pluginVitest.configs.recommended.rules,
-    "vitest/consistent-test-it": ["error", { fn: "test" }],
+    ...vitestPlugin.configs.recommended.rules,
     "vitest/expect-expect": "off",
+
+    "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/no-alias-methods": "error",
     "vitest/no-conditional-expect": "error",
     "vitest/no-conditional-in-test": "error",
     "vitest/no-conditional-tests": "error",
-    "vitest/prefer-comparison-matcher": "error",
-    "vitest/no-test-return-statement": "error",
-    "vitest/no-standalone-expect": "error",
     "vitest/no-duplicate-hooks": "error",
     "vitest/no-focused-tests": "error",
     "vitest/no-import-node-test": "error",
+    "vitest/no-standalone-expect": "error",
+    "vitest/no-test-return-statement": "error",
     "vitest/prefer-called-with": "error",
+    "vitest/prefer-comparison-matcher": "error",
     "vitest/prefer-each": "error",
     "vitest/prefer-expect-resolves": "error",
     "vitest/prefer-hooks-in-order": "error",

@@ -29,3 +29,6 @@ export const Link = forwardRef<LinkProps, "a">((props, ref) => {
     />
   )
 })
+
+Link.displayName = "Link"
+Link.__ui__ = "Link"

@@ -318,7 +318,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
 Carousel.displayName = "Carousel"
 Carousel.__ui__ = "Carousel"
 
-type CarouselSlidesProps = HTMLUIProps
+interface CarouselSlidesProps extends HTMLUIProps {}
 
 const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   ({ ...rest }, ref) => {
@@ -335,7 +335,7 @@ const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
 CarouselSlides.displayName = "CarouselSlides"
 CarouselSlides.__ui__ = "CarouselSlides"
 
-type CarouselSlidesInnerProps = HTMLUIProps
+interface CarouselSlidesInnerProps extends HTMLUIProps {}
 
 const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
   const { includeGapInSize, orientation, styles } = useCarouselContext()

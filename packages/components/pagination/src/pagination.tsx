@@ -126,7 +126,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         <Component
           key={key}
           aria-label={
-            page === "dots" ? "Jump to omitted pages" : `Go to page ${page}`
+            page === "ellipsis" ? "Jump to omitted pages" : `Go to page ${page}`
           }
           isActive={currentPage === page}
           isDisabled={isDisabled}
@@ -134,7 +134,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           {...(itemProps as ComponentPropsWithoutRef<"button">)}
           onClick={handlerAll(
             itemProps?.onClick,
-            page !== "dots" ? () => onChange(page) : undefined,
+            page !== "ellipsis" ? () => onChange(page) : undefined,
           )}
         />
       )),

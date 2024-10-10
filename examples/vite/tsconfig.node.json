@@ -2,10 +2,18 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
+    "module": "esnext",
+    "strict": true,
+    "target": "esnext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
+    "allowJs": true,
+    "strictNullChecks": true
   },
-  "include": ["eslint.config.ts", "vite.config.ts", "../../.eslint/*.ts"]
+  "include": [
+    "../../@types",
+    "eslint.config.ts",
+    "vite.config.ts",
+    "../../.eslint/*.ts"
+  ]
 }

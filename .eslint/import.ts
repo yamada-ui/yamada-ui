@@ -54,6 +54,8 @@ export const importConfigArray: Linter.Config[] = [
     },
   },
   {
+    name: "eslint/import/unused",
+    files: sharedFiles,
     plugins: {
       "unused-imports": unusedImportsPlugin,
     },

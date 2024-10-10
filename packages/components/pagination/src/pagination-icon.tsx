@@ -2,7 +2,7 @@ import type { FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 
-export const DotsIcon: FC<IconProps> = (props) => {
+export const PaginationEllipsisIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -12,10 +12,11 @@ export const DotsIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
-DotsIcon.displayName = "DotIcon"
-DotsIcon.__ui__ = "DotIcon"
 
-export const FirstIcon: FC<IconProps> = (props) => {
+PaginationEllipsisIcon.displayName = "PaginationEllipsisIcon"
+PaginationEllipsisIcon.__ui__ = "PaginationEllipsisIcon"
+
+export const PaginationFirstIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -26,10 +27,10 @@ export const FirstIcon: FC<IconProps> = (props) => {
   )
 }
 
-FirstIcon.displayName = "LastIcon"
-FirstIcon.__ui__ = "LastIcon"
+PaginationFirstIcon.displayName = "PaginationFirstIcon"
+PaginationFirstIcon.__ui__ = "PaginationFirstIcon"
 
-export const LastIcon: FC<IconProps> = (props) => {
+export const PaginationLastIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -39,10 +40,11 @@ export const LastIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
-LastIcon.displayName = "LastIcon"
-LastIcon.__ui__ = "LastIcon"
 
-export const PrevIcon: FC<IconProps> = (props) => {
+PaginationLastIcon.displayName = "PaginationLastIcon"
+PaginationLastIcon.__ui__ = "PaginationLastIcon"
+
+export const PaginationPrevIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -53,7 +55,10 @@ export const PrevIcon: FC<IconProps> = (props) => {
   )
 }
 
-export const NextIcon: FC<IconProps> = (props) => {
+PaginationPrevIcon.displayName = "PaginationPrevIcon"
+PaginationPrevIcon.__ui__ = "PaginationPrevIcon"
+
+export const PaginationNextIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -63,5 +68,6 @@ export const NextIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
-NextIcon.displayName = "NextIcon"
-NextIcon.__ui__ = "NextIcon"
+
+PaginationNextIcon.displayName = "PaginationNextIcon"
+PaginationNextIcon.__ui__ = "PaginationNextIcon"

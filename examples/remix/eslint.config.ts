@@ -1,3 +1,4 @@
+import type { TSESLint } from "@typescript-eslint/utils"
 import type { Linter } from "eslint"
 import prettierConfig from "eslint-config-prettier"
 import globals from "globals"
@@ -32,7 +33,7 @@ const languageOptionConfig = languageOptionFactory(true, {
   },
 })
 
-export default tseslint.config(
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ignoresConfig,
   languageOptionConfig,
   baseConfig,
@@ -45,3 +46,5 @@ export default tseslint.config(
   jsxA11yConfig,
   prettierConfig,
 )
+
+export default config

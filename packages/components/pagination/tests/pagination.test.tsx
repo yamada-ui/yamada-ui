@@ -64,7 +64,7 @@ describe("<Pagination />", () => {
       )
   })
 
-  test("should render pagination with previous dots and without next dots correctly", () => {
+  test("should render pagination with previous ellipsis and without next ellipsis correctly", () => {
     render(<Pagination boundaries={2} page={95} siblings={2} total={100} />)
 
     for (let page = 93; page <= 100; page++) {
@@ -75,19 +75,19 @@ describe("<Pagination />", () => {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const dots = screen.getByLabelText("Jump to omitted pages")
-    expect(dots).toBeInTheDocument()
+    const ellipsis = screen.getByLabelText("Jump to omitted pages")
+    expect(ellipsis).toBeInTheDocument()
   })
 
-  test("should not render dots when there are less than 7 pages", () => {
+  test("should not render ellipsis when there are less than 7 pages", () => {
     render(<Pagination total={6} />)
 
     for (let page = 1; page <= 6; page++) {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const dots = screen.queryByLabelText("Jump to omitted pages")
-    expect(dots).not.toBeInTheDocument()
+    const ellipsis = screen.queryByLabelText("Jump to omitted pages")
+    expect(ellipsis).not.toBeInTheDocument()
   })
 
   test("should correctly apply itemProps to pagination props", () => {

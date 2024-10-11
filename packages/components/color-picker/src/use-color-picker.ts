@@ -6,7 +6,13 @@ import type {
 } from "@yamada-ui/core"
 import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import type { ColorFormat } from "@yamada-ui/utils"
-import type { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react"
+import type {
+  ChangeEvent,
+  CSSProperties,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+} from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import type { UseColorSelectorBaseProps } from "./use-color-selector"
 import { layoutStyleProperties } from "@yamada-ui/core"
@@ -163,15 +169,19 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     onChange: onChangeProp,
     onChangeEnd,
     onChangeStart,
+    onClick,
     onClose: onCloseProp,
+    onKeyDown,
     onOpen: onOpenProp,
     onSwatchClick,
     ...rest
   } = useFormControlProps(props)
-  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
-    rest,
-    formControlProperties,
-  )
+  const {
+    "aria-readonly": _ariaReadonly,
+    onBlur,
+    onFocus,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
   const { disabled, readOnly } = formControlProps
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
 
@@ -400,40 +410,72 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ...containerProps,
       ...props,
       ...formControlProps,
-      onBlur: handlerAll(props.onBlur, rest.onBlur, onContainerBlur),
-      onClick: handlerAll(props.onClick, rest.onClick, onContainerClick),
+      onBlur: handlerAll(props.onBlur, onBlur, onContainerBlur),
+      onClick: handlerAll(props.onClick, onClick, onContainerClick),
     }),
-    [containerProps, formControlProps, onContainerBlur, onContainerClick, rest],
+    [
+      containerProps,
+      formControlProps,
+      onBlur,
+      onClick,
+      onContainerBlur,
+      onContainerClick,
+    ],
   )
 
-  const getFieldProps: PropGetter<"input"> = useCallback(
+  const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ref: mergeRefs(fieldRef, ref),
-      tabIndex: !allowInput ? -1 : 0,
-      ...inputProps,
-      ...props,
-      style: {
-        ...props.style,
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
-      },
       "aria-expanded": dataAttr(isOpen),
       "data-active": dataAttr(isOpen),
-      value: inputValue,
+      "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
+      tabIndex: !allowInput ? -1 : 0,
+      ...formControlProps,
+      ...props,
+      ref: mergeRefs(fieldRef, ref),
       onBlur: handlerAll(props.onFocus, onInputBlur),
-      onChange: handlerAll(props.onChange, onInputChange),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onInputFocus),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onInputKeyDown),
+      onFocus: handlerAll(props.onFocus, onFocus, onInputFocus),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onInputKeyDown),
     }),
     [
       allowInput,
-      inputProps,
-      inputValue,
+      formControlProps,
       isOpen,
-      rest,
-      onInputFocus,
-      onInputKeyDown,
-      onInputChange,
+      readOnly,
+      disabled,
       onInputBlur,
+      onFocus,
+      onInputFocus,
+      onKeyDown,
+      onInputKeyDown,
+    ],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    (props = {}, ref = null) => {
+      const style: CSSProperties = {
+        ...props.style,
+        ...inputProps.style,
+        ...(disabled || !allowInput ? { pointerEvents: "none" } : {}),
+      }
+
+      return {
+        tabIndex: !allowInput ? -1 : 0,
+        ...formControlProps,
+        ...inputProps,
+        ...props,
+        ref,
+        style,
+        value: inputValue,
+        onChange: handlerAll(props.onChange, onInputChange),
+      }
+    },
+    [
+      inputProps,
+      allowInput,
+      disabled,
+      formControlProps,
+      inputValue,
+      onInputChange,
     ],
   )
 
@@ -507,6 +549,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     getContainerProps,
     getEyeDropperProps,
     getFieldProps,
+    getInputProps,
     getPopoverProps,
     getSelectorProps,
     onClose,

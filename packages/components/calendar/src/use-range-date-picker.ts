@@ -270,23 +270,23 @@ export const useRangeDatePicker = ({
     (props = {}, ref) => {
       const style: CSSProperties = {
         ...props.style,
-        ...(inputProps as { style?: CSSProperties }).style,
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
+        ...inputProps.style,
+        ...(formControlProps.disabled || !allowInput
+          ? { pointerEvents: "none" }
+          : {}),
       }
 
       return {
+        id,
         placeholder: startPlaceholder ?? placeholder,
+        tabIndex: !allowInput ? -1 : 0,
+        zIndex: !startInputValue ? 1 : undefined,
         ...formControlProps,
         ...inputProps,
         ...props,
-        id,
         ref: mergeRefs(ref, startInputRef),
         style,
-        cursor: formControlProps.readOnly ? "default" : "text",
-        pointerEvents: formControlProps.disabled ? "none" : "auto",
-        tabIndex: !allowInput ? -1 : 0,
         value: startInputValue,
-        zIndex: !startInputValue ? 1 : undefined,
         onChange: handlerAll(props.onChange, onStartChange),
         onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()

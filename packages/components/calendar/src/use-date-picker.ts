@@ -137,22 +137,22 @@ export const useDatePicker = ({
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
-        ...(inputProps as { style?: CSSProperties }).style,
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
+        ...inputProps.style,
+        ...(formControlProps.disabled || !allowInput
+          ? { pointerEvents: "none" }
+          : {}),
       }
 
       return {
-        placeholder,
-        ...formControlProps,
+        id,
         autoComplete: "off",
+        placeholder,
+        tabIndex: !allowInput ? -1 : 0,
+        ...formControlProps,
         ...inputProps,
         ...props,
-        id,
         ref,
         style,
-        cursor: formControlProps.readOnly ? "default" : "text",
-        pointerEvents: formControlProps.disabled ? "none" : "auto",
-        tabIndex: !allowInput ? -1 : 0,
         value: inputValue ?? "",
         onChange: handlerAll(props.onChange, onChange),
       }

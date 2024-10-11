@@ -2,80 +2,80 @@
   "Dropzone": {
     "accept": {
       "type": "string[] | Accept",
-      "required": false,
-      "description": "File types to accept."
+      "description": "File types to accept.",
+      "required": false
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "errorBorderColor": {
-      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
-      "required": false,
-      "description": "The border color when the input is invalid."
+      "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
+      "description": "The border color when the input is invalid.",
+      "required": false
     },
     "focusBorderColor": {
-      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
-      "required": false,
-      "description": "The border color when the input is focused."
+      "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
+      "description": "The border color when the input is focused.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, display the dropzone loading icon."
+      "description": "If `true`, display the dropzone loading icon.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "loadingProps": {
       "type": "LoadingProps",
-      "required": false,
-      "description": "Props for dropzone loading icon element."
+      "description": "Props for dropzone loading icon element.",
+      "required": false
     },
     "openRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void | undefined) | null) => void)\n  | MutableRefObject<(() => void | undefined) | null>",
-      "required": false,
-      "description": "Ref to a open function."
+      "description": "Ref to a open function.",
+      "required": false
     },
     "overlayProps": {
       "type": "FadeProps",
-      "required": false,
-      "description": "Props for dropzone overlay element."
+      "description": "Props for dropzone overlay element.",
+      "required": false
     },
     "size": {
-      "defaultValue": "sm",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the Dropzone."
+      "defaultValue": "\"sm\"",
+      "description": "The size of the Dropzone.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "dashed",
-      "type": "\"solid\" | \"dashed\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Dropzone."
+      "type": "\"dashed\" | \"solid\" | \"unstyled\"",
+      "defaultValue": "\"dashed\"",
+      "description": "The variant of the Dropzone.",
+      "required": false
     }
   }
 }

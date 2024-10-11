@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="colorswatch-color"
   name="color"
-  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
+  type='UIValue<"border" | Color | ({} & string) | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
   description={"The color used for the swatch element."}
   defaultValue={"#ffffff00"}
 />
@@ -22,7 +22,7 @@ order: 1
 <PropsCard
   id="colorswatch-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -48,7 +48,7 @@ order: 1
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the ColorSwatch."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -56,7 +56,7 @@ order: 1
   name="variant"
   type='"basic" | "rounded"'
   description={"The variant of the ColorSwatch."}
-  defaultValue={"basic"}
+  defaultValue={'"basic"'}
 />
 
 <PropsCard

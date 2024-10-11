@@ -6,6 +6,9 @@ import {
   handlerAll,
   isArray,
   isHTMLElement,
+  isNumber,
+  isString,
+  isUndefined,
   mergeRefs,
   useUpdateEffect,
 } from "@yamada-ui/utils"
@@ -84,12 +87,23 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-
   const isMulti = isArray(value)
+
+  if (isUndefined(optionValue)) {
+    if (isString(children) || isNumber(children)) {
+      optionValue = children.toString()
+    } else {
+      console.warn(
+        `${
+          !isMulti ? "Autocomplete" : "MultiAutocomplete"
+        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+      )
+    }
+  }
+
   const isDuplicated = !isMulti
     ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
-
   const isSelected =
     !isDuplicated &&
     (!isMulti

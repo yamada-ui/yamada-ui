@@ -187,7 +187,7 @@ DatePicker.displayName = "DatePicker"
 DatePicker.__ui__ = "DatePicker"
 
 interface DatePickerFieldOptions {
-  inputProps?: HTMLUIProps<"input">
+  inputProps?: HTMLUIProps<"input"> & RefAttributes<HTMLInputElement>
 }
 
 export interface DatePickerFieldProps
@@ -197,8 +197,7 @@ export interface DatePickerFieldProps
 export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
   ({ className, h, minH, inputProps, ...rest }, ref) => {
     const styles = useDatePickerContext()
-    const { ref: inputRef, ...computedInputProps } =
-      inputProps as HTMLUIProps<"input"> & RefAttributes<HTMLInputElement>
+    const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
     const css: CSSUIObject = {
       alignItems: "center",

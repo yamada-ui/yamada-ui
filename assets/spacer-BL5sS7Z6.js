@@ -1,0 +1,1 @@
+import{b as e}from"./factory-uBtAHRUq.js";const s=e("div",{baseStyle:{alignSelf:"stretch",flex:1,justifySelf:"stretch"}});export{s as S};

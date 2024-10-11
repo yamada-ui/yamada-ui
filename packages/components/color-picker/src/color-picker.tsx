@@ -1,6 +1,6 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { PortalProps } from "@yamada-ui/portal"
-import type { FC, ReactNode } from "react"
+import type { FC, ReactNode, RefAttributes } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import type { ColorSwatchProps } from "./color-swatch"
 import type { UseColorPickerProps } from "./use-color-picker"
@@ -16,6 +16,7 @@ import {
   cx,
   getValidChildren,
   isValidElement,
+  mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
 import { cloneElement } from "react"
@@ -59,7 +60,11 @@ interface ColorPickerOptions {
    */
   eyeDropperProps?: ColorPickerEyeDropperProps
   /**
-   * Props for color picker element.
+   * Props for color picker field element.
+   */
+  fieldProps?: Omit<ColorPickerFieldProps, "children" | "inputProps">
+  /**
+   * Props for color picker input element.
    */
   inputProps?: HTMLUIProps<"input">
   /**
@@ -119,6 +124,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       channelsProps,
       containerProps,
       eyeDropperProps,
+      fieldProps,
       hueSliderProps,
       inputProps,
       portalProps = { isDisabled: true },
@@ -128,12 +134,12 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
-      allowInput,
       eyeDropperSupported,
       value,
       getContainerProps,
       getEyeDropperProps,
       getFieldProps,
+      getInputProps,
       getPopoverProps,
       getSelectorProps,
       onClose,
@@ -161,20 +167,18 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
             <ui.div
               className="ui-color-picker__inner"
               __css={{
-                cursor: !allowInput ? "pointer" : undefined,
                 position: "relative",
                 ...styles.inner,
               }}
             >
               {withSwatch ? <ColorPickerSwatch {...swatchProps} /> : null}
 
-              <PopoverTrigger>
-                <ColorPickerField
-                  h={h}
-                  minH={minH}
-                  {...getFieldProps(inputProps, ref)}
-                />
-              </PopoverTrigger>
+              <ColorPickerField
+                h={h}
+                minH={minH}
+                {...getFieldProps(fieldProps, ref)}
+                inputProps={getInputProps(inputProps)}
+              />
 
               {eyeDropperSupported && withEyeDropper ? (
                 <ColorPickerEyeDropper
@@ -216,11 +220,16 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 ColorPicker.displayName = "ColorPicker"
 ColorPicker.__ui__ = "ColorPicker"
 
-interface ColorPickerFieldProps extends HTMLUIProps<"input"> {}
+interface ColorPickerFieldOptions {
+  inputProps?: HTMLUIProps<"input"> & RefAttributes<HTMLInputElement>
+}
+
+interface ColorPickerFieldProps extends HTMLUIProps, ColorPickerFieldOptions {}
 
 const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
-  ({ className, h, minH, ...rest }, ref) => {
+  ({ className, h, minH, inputProps, ...rest }, ref) => {
     const { styles } = useColorPickerContext()
+    const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -233,12 +242,21 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
     }
 
     return (
-      <ui.input
-        ref={ref}
-        className={cx("ui-color-picker__field", className)}
-        __css={css}
-        {...rest}
-      />
+      <PopoverTrigger>
+        <ui.div
+          className={cx("ui-color-picker__field", className)}
+          __css={css}
+          {...rest}
+        >
+          <ui.input
+            ref={mergeRefs(ref, inputRef)}
+            className="ui-color-picker-picker__field__input"
+            display="inline-block"
+            w="100%"
+            {...computedInputProps}
+          />
+        </ui.div>
+      </PopoverTrigger>
     )
   },
 )
@@ -256,7 +274,7 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
-      zIndex: 2,
+      zIndex: 1,
       ...styles.swatch,
     }
 

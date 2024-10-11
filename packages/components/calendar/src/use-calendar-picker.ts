@@ -8,7 +8,6 @@ import type {
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import type {
-  CSSProperties,
   FocusEvent,
   FocusEventHandler,
   KeyboardEvent,
@@ -389,8 +388,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
-      ...props,
       ...formControlProps,
+      ...props,
       onBlur: handlerAll(
         props.onBlur,
         rest.onBlur as FocusEventHandler<HTMLDivElement>,
@@ -452,22 +451,17 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        ...props.style,
-        ...(!allowInput ? { cursor: "pointer" } : {}),
-      }
-
       return {
-        ref: mergeRefs(inputRef, ref),
         "aria-controls": id,
+        "aria-expanded": isOpen,
         "aria-haspopup": "dialog",
+        "data-active": dataAttr(isOpen),
+        "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
         role: "combobox",
         tabIndex: !allowInput ? 0 : -1,
-        ...props,
         ...formControlProps,
-        style,
-        "aria-expanded": isOpen,
-        "data-active": dataAttr(isOpen),
+        ...props,
+        ref: mergeRefs(inputRef, ref),
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(
           props.onKeyDown,
@@ -476,7 +470,17 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         ),
       }
     },
-    [id, allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
+    [
+      id,
+      allowInput,
+      disabled,
+      readOnly,
+      formControlProps,
+      isOpen,
+      rest,
+      onFocus,
+      onKeyDown,
+    ],
   )
 
   const getCalendarProps = useCallback(

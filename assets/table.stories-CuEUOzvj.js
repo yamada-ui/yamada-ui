@@ -1,0 +1,1093 @@
+import{j as e}from"./extends-CwFRzn3r.js";import{r as n}from"./index-BwDkhjyp.js";import{c as ko}from"./components-C1WImaIs.js";import{u as vo,T as Bo,a as zo,b as _o,c as Ho}from"./thead-WSsjlutY.js";import{f as Oo}from"./tr-k90Hv05D.js";import{T as B}from"./table-caption-DxtRO4hM.js";import{a as Eo}from"./use-component-style-Dk4hKw8J.js";import{o as No}from"./theme-provider-CXgbrDrx.js";import{p as Vo,a2 as Lo,b as qo,c as Ao}from"./factory-uBtAHRUq.js";import{B as Ko}from"./button-DIEsmS57.js";import{T as Jo}from"./text-CdDC9Ji7.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-CdVvibsY.js";import"./index-D7AEQMi7.js";import"./index-BneYb4WH.js";import"./ui-provider-DYaGvWuk.js";import"./index-CBUgSXuT.js";import"./motion-I-9Hg3gW.js";import"./loading-provider-BLWcNkD_.js";import"./index-BQx3ENRf.js";import"./Combination-IUp2vs9T.js";import"./loading-B8wvkUDD.js";import"./icon-fUKD81HD.js";import"./use-var-OedIQrNj.js";import"./forward-ref-BWI-Phbn.js";import"./factory-BoNL08IU.js";import"./portal-DePa0xuj.js";import"./index-Drt3gf4w.js";import"./notice-BlPHBy7w.js";import"./alert-CXSVmj5E.js";import"./close-button-C86qv8Qn.js";import"./use-ripple-B-yka01P.js";import"./container-BlIYaC_j.js";import"./stack-CekQ0zhE.js";import"./box-CTROe-BY.js";import"./checkbox-CkEAHoEI.js";import"./index-HkLDcr_A.js";import"./form-control-k6ikkRb0.js";import"./index-B_fkAghs.js";import"./index-D47CARfE.js";import"./event-C_48urmU.js";import"./number-CcP_arM8.js";import"./tooltip-Cqor-UkF.js";import"./index-JkdTfK17.js";import"./index-B1JaSA3I.js";import"./index-DQDd-j7z.js";import"./index-Dh2DJXhk.js";import"./index-xmsMNee1.js";import"./slide-fade-B_1RBE5b.js";import"./forward-ref-scR1bmHx.js";import"./utils-CZR-v0D9.js";import"./scale-fade-BS37GZ5e.js";import"./index-DSunIB56.js";import"./index-BAaRSIWS.js";import"./select-DpgcrBwj.js";import"./select-list-B4MdLokO.js";import"./index-CMM3kl6L.js";import"./popover-trigger-CiVhXs2R.js";import"./index-E0gn0kzD.js";import"./index-CoJrGj-T.js";import"./index-BySA8SAb.js";const s=n.forwardRef(({colorScheme:o,highlightOnSelected:a=!0,...r},d)=>{const[z,go]=Eo("Table",{colorScheme:o,highlightOnSelected:a,...r}),{className:So,children:Mo,layout:Co,withFooter:To=!1,checkboxProps:wo,tbodyProps:xo,tfootProps:Do,theadProps:fo,...jo}=No(go,["highlightOnSelected","highlightOnHover","withBorder","withColumnBorders"]),{getTableProps:Go,...Zo}=vo({...jo,checkboxProps:{colorScheme:o,...wo}}),Io={tableLayout:Co,w:"100%",...z.table},Ro=Vo(Mo),Fo=Lo(Ro,B);return e.jsx(Oo,{value:z,children:e.jsx(Bo,{value:{...Zo},children:e.jsxs(qo.table,{className:Ao("ui-table",So),__css:Io,...Go({},d),children:[e.jsx(zo,{...fo}),e.jsx(_o,{...xo}),To?e.jsx(Ho,{...Do}):null,Fo]})})})});s.displayName="Table";s.__ui__="Table";const on={component:s,title:"Components / Data Display / Table"},c=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a})},t=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{size:"sm",columns:o,data:a}),e.jsx(s,{size:"md",columns:o,data:a}),e.jsx(s,{size:"lg",columns:o,data:a}),e.jsx(s,{size:"xl",columns:o,data:a})]})},i=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{variant:"simple",columns:o,data:a}),e.jsx(s,{variant:"striped",columns:o,data:a})]})},m=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(e.Fragment,{children:ko.map(r=>e.jsx(s,{colorScheme:r,variant:"striped",columns:o,data:a},r))})},p=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,withColumnBorders:!0})},l=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,withBorder:!0})},u=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,highlightOnHover:!0})},b=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{variant:"simple",columns:o,data:a,children:e.jsx(B,{placement:"top",children:"©バードスタジオ/集英社・東映アニメーション"})}),e.jsx(s,{variant:"striped",columns:o,data:a,children:e.jsx(B,{placement:"bottom",children:"©バードスタジオ/集英社・東映アニメーション"})})]})},P=()=>{const o=n.useMemo(()=>[{accessorKey:"name",footer:"作品名",header:"作品名"},{accessorKey:"broadcastPeriod",footer:"放送期間",header:"放送期間"},{accessorKey:"episode",footer:"話数",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{columns:o,data:a,withFooter:!0}),e.jsx(s,{columns:o,data:a,withFooter:!0,withFooterSelect:!0})]})},h=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,rowId:"name"})},y=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,defaultSort:[{id:"name",desc:!1}],rowId:"name",onChangeSort:r=>{console.log("sort",r)}})},K=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,manualSorting:!0,rowId:"name",onChangeSort:r=>{console.log("sort",r)}})},g=()=>{const[o,a]=n.useState([]),r=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),d=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(Ko,{onClick:()=>a([]),children:"Reset sort"}),e.jsx(s,{columns:r,data:d,manualSorting:!0,rowId:"name",sort:o,onChangeSort:a})]})},S=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,maxMultiSortColCount:2,rowId:"name",onChangeSort:r=>{console.log("sort",r)}})},M=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",enableSorting:!1,header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{columns:o,data:a,enableSorting:!1}),e.jsx(s,{columns:o,data:a,onChangeSort:r=>{console.log("sort",r)}})]})},C=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名",sortDescFirst:!0},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{columns:o,data:a,sortDescFirst:!0,onChangeSort:r=>{console.log("sort",r)}}),e.jsx(s,{columns:o,data:a,onChangeSort:r=>{console.log("sort",r)}})]})},T=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,enableMultiSort:!1,onChangeSort:r=>{console.log("sort",r)}})},w=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,defaultSelectedRowIds:["ドラゴンボール"],rowId:"name",onChangeSelect:r=>{console.log("selectedIds",r)}})},x=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,disabledRowIds:["ドラゴンボールZ"],rowId:"name",onChangeSelect:r=>{console.log("selectedIds",r)}})},D=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,rowId:"name",rowsClickSelect:!0,onChangeSelect:r=>{console.log("selectedIds",r)}})},f=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,enableRowSelection:!1})},j=()=>{const[o,a]=n.useState([]),r=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),d=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(Ko,{onClick:()=>a([]),children:"Reset select"}),e.jsx(s,{columns:r,data:d,rowId:"name",selectedRowIds:o,onChangeSelect:a})]})},G=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,onClickRow:r=>{console.log("row",r)}})},Z=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,onDoubleClickRow:r=>{console.log("row",r)}})},I=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,checkboxProps:{colorScheme:"red"}})},R=()=>{const o=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a,selectColumnProps:{css:{w:"40px"}}})},F=()=>{const[o,a]=n.useState([]),r=n.useMemo(()=>[{accessorKey:"name",header:"作品名"},{accessorKey:"broadcastPeriod",header:"放送期間"},{accessorKey:"episode",header:"話数"}],[]),d=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsxs(Jo,{children:["Select ids ",o.join(", ")]}),e.jsx(s,{columns:r,data:d,rowsClickSelect:!0,selectedRowIds:o,selectColumnProps:!1,onChangeSelect:a})]})},k=()=>{const o=n.useMemo(()=>[{css:{color:"primary"},accessorKey:"name",header:"作品名"},{sx:{color:"secondary"},accessorKey:"broadcastPeriod",header:"放送期間"},{style:{color:"red"},accessorKey:"episode",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsx(s,{columns:o,data:a})},v=()=>{const o=n.useMemo(()=>[{"aria-label":"作品名",accessorKey:"name",footer:"作品名",header:"作品名"},{"aria-label":"放送期間",accessorKey:"broadcastPeriod",footer:"放送期間",header:"放送期間"},{"aria-label":"話数",accessorKey:"episode",footer:"話数",header:"話数"}],[]),a=n.useMemo(()=>[{name:"ドラゴンボール",broadcastPeriod:"1986年2月26日 - 1989年4月19日",episode:"全153話"},{name:"ドラゴンボールZ",broadcastPeriod:"1989年4月26日 - 1996年1月31日",episode:"全291話 + スペシャル2話"},{name:"ドラゴンボールGT",broadcastPeriod:"1996年2月7日 - 1997年11月19日",episode:"全64話 + 番外編1話"},{name:"ドラゴンボール改",broadcastPeriod:"2009年4月5日 - 2015年6月28日",episode:"全159話"},{name:"ドラゴンボール超",broadcastPeriod:"2015年7月5日 - 2018年3月25日",episode:"全131話"}],[]);return e.jsxs(e.Fragment,{children:[e.jsx(s,{columns:o,data:a,withFooter:!0,tbodyProps:{bg:["green.200","green.700"]},tfootProps:{bg:["blue.200","blue.700"]},theadProps:{bg:["red.200","red.700"]}}),e.jsx(s,{columns:o,data:a,withFooter:!0,footerGroupProps:{bg:["blue.200","blue.700"]},headerGroupProps:{bg:["red.200","red.700"]},rowProps:{bg:["green.200","green.700"]}}),e.jsx(s,{columns:o,data:a,withFooter:!0,cellProps:({column:r})=>{if(r.columnDef.header==="作品名")return{color:["red.400","red.300"]}},footerProps:({column:r})=>{if(r.columnDef.footer==="作品名")return{color:["red.400","red.300"]}},headerProps:({column:r})=>{if(r.columnDef.header==="作品名")return{color:["red.400","red.300"]}}})]})};var _,H,O;c.parameters={...c.parameters,docs:{...(_=c.parameters)==null?void 0:_.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} />;
+}`,...(O=(H=c.parameters)==null?void 0:H.docs)==null?void 0:O.source}}};var E,N,V;t.parameters={...t.parameters,docs:{...(E=t.parameters)==null?void 0:E.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table size="sm" columns={columns} data={data} />
+      <Table size="md" columns={columns} data={data} />
+      <Table size="lg" columns={columns} data={data} />
+      <Table size="xl" columns={columns} data={data} />
+    </>;
+}`,...(V=(N=t.parameters)==null?void 0:N.docs)==null?void 0:V.source}}};var L,q,A;i.parameters={...i.parameters,docs:{...(L=i.parameters)==null?void 0:L.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table variant="simple" columns={columns} data={data} />
+      <Table variant="striped" columns={columns} data={data} />
+    </>;
+}`,...(A=(q=i.parameters)==null?void 0:q.docs)==null?void 0:A.source}}};var J,Q,U;m.parameters={...m.parameters,docs:{...(J=m.parameters)==null?void 0:J.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      {colorSchemes.map(colorScheme => <Table key={colorScheme} colorScheme={colorScheme} variant="striped" columns={columns} data={data} />)}
+    </>;
+}`,...(U=(Q=m.parameters)==null?void 0:Q.docs)==null?void 0:U.source}}};var W,X,Y;p.parameters={...p.parameters,docs:{...(W=p.parameters)==null?void 0:W.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} withColumnBorders />;
+}`,...(Y=(X=p.parameters)==null?void 0:X.docs)==null?void 0:Y.source}}};var $,ee,oe;l.parameters={...l.parameters,docs:{...($=l.parameters)==null?void 0:$.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} withBorder />;
+}`,...(oe=(ee=l.parameters)==null?void 0:ee.docs)==null?void 0:oe.source}}};var ae,ne,se;u.parameters={...u.parameters,docs:{...(ae=u.parameters)==null?void 0:ae.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} highlightOnHover />;
+}`,...(se=(ne=u.parameters)==null?void 0:ne.docs)==null?void 0:se.source}}};var re,de,ce;b.parameters={...b.parameters,docs:{...(re=b.parameters)==null?void 0:re.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table variant="simple" columns={columns} data={data}>
+        <TableCaption placement="top">
+          ©バードスタジオ/集英社・東映アニメーション
+        </TableCaption>
+      </Table>
+      <Table variant="striped" columns={columns} data={data}>
+        <TableCaption placement="bottom">
+          ©バードスタジオ/集英社・東映アニメーション
+        </TableCaption>
+      </Table>
+    </>;
+}`,...(ce=(de=b.parameters)==null?void 0:de.docs)==null?void 0:ce.source}}};var te,ie,me;P.parameters={...P.parameters,docs:{...(te=P.parameters)==null?void 0:te.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    footer: "作品名",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    footer: "放送期間",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    footer: "話数",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table columns={columns} data={data} withFooter />
+      <Table columns={columns} data={data} withFooter withFooterSelect />
+    </>;
+}`,...(me=(ie=P.parameters)==null?void 0:ie.docs)==null?void 0:me.source}}};var pe,le,ue;h.parameters={...h.parameters,docs:{...(pe=h.parameters)==null?void 0:pe.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} rowId="name" />;
+}`,...(ue=(le=h.parameters)==null?void 0:le.docs)==null?void 0:ue.source}}};var be,Pe,he;y.parameters={...y.parameters,docs:{...(be=y.parameters)==null?void 0:be.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} defaultSort={[{
+    id: "name",
+    desc: false
+  }]} rowId="name" onChangeSort={sort => {
+    console.log("sort", sort);
+  }} />;
+}`,...(he=(Pe=y.parameters)==null?void 0:Pe.docs)==null?void 0:he.source}}};var ye,Ke,ge;K.parameters={...K.parameters,docs:{...(ye=K.parameters)==null?void 0:ye.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} manualSorting rowId="name" onChangeSort={sort => {
+    console.log("sort", sort);
+  }} />;
+}`,...(ge=(Ke=K.parameters)==null?void 0:Ke.docs)==null?void 0:ge.source}}};var Se,Me,Ce;g.parameters={...g.parameters,docs:{...(Se=g.parameters)==null?void 0:Se.docs,source:{originalSource:`() => {
+  const [sort, onChangeSort] = useState<Sort<Data>>([]);
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Button onClick={() => onChangeSort([])}>Reset sort</Button>
+
+      <Table columns={columns} data={data} manualSorting rowId="name" sort={sort} onChangeSort={onChangeSort} />
+    </>;
+}`,...(Ce=(Me=g.parameters)==null?void 0:Me.docs)==null?void 0:Ce.source}}};var Te,we,xe;S.parameters={...S.parameters,docs:{...(Te=S.parameters)==null?void 0:Te.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} maxMultiSortColCount={2} rowId="name" onChangeSort={sort => {
+    console.log("sort", sort);
+  }} />;
+}`,...(xe=(we=S.parameters)==null?void 0:we.docs)==null?void 0:xe.source}}};var De,fe,je;M.parameters={...M.parameters,docs:{...(De=M.parameters)==null?void 0:De.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    enableSorting: false,
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table columns={columns} data={data} enableSorting={false} />
+
+      <Table columns={columns} data={data} onChangeSort={sort => {
+      console.log("sort", sort);
+    }} />
+    </>;
+}`,...(je=(fe=M.parameters)==null?void 0:fe.docs)==null?void 0:je.source}}};var Ge,Ze,Ie;C.parameters={...C.parameters,docs:{...(Ge=C.parameters)==null?void 0:Ge.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名",
+    sortDescFirst: true
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table columns={columns} data={data} sortDescFirst onChangeSort={sort => {
+      console.log("sort", sort);
+    }} />
+      <Table columns={columns} data={data} onChangeSort={sort => {
+      console.log("sort", sort);
+    }} />
+    </>;
+}`,...(Ie=(Ze=C.parameters)==null?void 0:Ze.docs)==null?void 0:Ie.source}}};var Re,Fe,ke;T.parameters={...T.parameters,docs:{...(Re=T.parameters)==null?void 0:Re.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} enableMultiSort={false} onChangeSort={sort => {
+    console.log("sort", sort);
+  }} />;
+}`,...(ke=(Fe=T.parameters)==null?void 0:Fe.docs)==null?void 0:ke.source}}};var ve,Be,ze;w.parameters={...w.parameters,docs:{...(ve=w.parameters)==null?void 0:ve.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} defaultSelectedRowIds={["ドラゴンボール"]} rowId="name" onChangeSelect={selectedIds => {
+    console.log("selectedIds", selectedIds);
+  }} />;
+}`,...(ze=(Be=w.parameters)==null?void 0:Be.docs)==null?void 0:ze.source}}};var _e,He,Oe;x.parameters={...x.parameters,docs:{...(_e=x.parameters)==null?void 0:_e.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} disabledRowIds={["ドラゴンボールZ"]} rowId="name" onChangeSelect={selectedIds => {
+    console.log("selectedIds", selectedIds);
+  }} />;
+}`,...(Oe=(He=x.parameters)==null?void 0:He.docs)==null?void 0:Oe.source}}};var Ee,Ne,Ve;D.parameters={...D.parameters,docs:{...(Ee=D.parameters)==null?void 0:Ee.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} rowId="name" rowsClickSelect onChangeSelect={selectedIds => {
+    console.log("selectedIds", selectedIds);
+  }} />;
+}`,...(Ve=(Ne=D.parameters)==null?void 0:Ne.docs)==null?void 0:Ve.source}}};var Le,qe,Ae;f.parameters={...f.parameters,docs:{...(Le=f.parameters)==null?void 0:Le.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} enableRowSelection={false} />;
+}`,...(Ae=(qe=f.parameters)==null?void 0:qe.docs)==null?void 0:Ae.source}}};var Je,Qe,Ue;j.parameters={...j.parameters,docs:{...(Je=j.parameters)==null?void 0:Je.docs,source:{originalSource:`() => {
+  const [selectedRowIds, onChangeSelect] = useState<string[]>([]);
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Button onClick={() => onChangeSelect([])}>Reset select</Button>
+
+      <Table columns={columns} data={data} rowId="name" selectedRowIds={selectedRowIds} onChangeSelect={onChangeSelect} />
+    </>;
+}`,...(Ue=(Qe=j.parameters)==null?void 0:Qe.docs)==null?void 0:Ue.source}}};var We,Xe,Ye;G.parameters={...G.parameters,docs:{...(We=G.parameters)==null?void 0:We.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} onClickRow={row => {
+    console.log("row", row);
+  }} />;
+}`,...(Ye=(Xe=G.parameters)==null?void 0:Xe.docs)==null?void 0:Ye.source}}};var $e,eo,oo;Z.parameters={...Z.parameters,docs:{...($e=Z.parameters)==null?void 0:$e.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} onDoubleClickRow={row => {
+    console.log("row", row);
+  }} />;
+}`,...(oo=(eo=Z.parameters)==null?void 0:eo.docs)==null?void 0:oo.source}}};var ao,no,so;I.parameters={...I.parameters,docs:{...(ao=I.parameters)==null?void 0:ao.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} checkboxProps={{
+    colorScheme: "red"
+  }} />;
+}`,...(so=(no=I.parameters)==null?void 0:no.docs)==null?void 0:so.source}}};var ro,co,to;R.parameters={...R.parameters,docs:{...(ro=R.parameters)==null?void 0:ro.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} selectColumnProps={{
+    css: {
+      w: "40px"
+    }
+  }} />;
+}`,...(to=(co=R.parameters)==null?void 0:co.docs)==null?void 0:to.source}}};var io,mo,po;F.parameters={...F.parameters,docs:{...(io=F.parameters)==null?void 0:io.docs,source:{originalSource:`() => {
+  const [selectedRowIds, onChangeSelect] = useState<string[]>([]);
+  const columns = useMemo<Column<Data>[]>(() => [{
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Text>Select ids {selectedRowIds.join(", ")}</Text>
+
+      <Table columns={columns} data={data} rowsClickSelect selectedRowIds={selectedRowIds} selectColumnProps={false} onChangeSelect={onChangeSelect} />
+    </>;
+}`,...(po=(mo=F.parameters)==null?void 0:mo.docs)==null?void 0:po.source}}};var lo,uo,bo;k.parameters={...k.parameters,docs:{...(lo=k.parameters)==null?void 0:lo.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    css: {
+      color: "primary"
+    },
+    accessorKey: "name",
+    header: "作品名"
+  }, {
+    sx: {
+      color: "secondary"
+    },
+    accessorKey: "broadcastPeriod",
+    header: "放送期間"
+  }, {
+    style: {
+      color: "red"
+    },
+    accessorKey: "episode",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <Table columns={columns} data={data} />;
+}`,...(bo=(uo=k.parameters)==null?void 0:uo.docs)==null?void 0:bo.source}}};var Po,ho,yo;v.parameters={...v.parameters,docs:{...(Po=v.parameters)==null?void 0:Po.docs,source:{originalSource:`() => {
+  const columns = useMemo<Column<Data>[]>(() => [{
+    "aria-label": "作品名",
+    accessorKey: "name",
+    footer: "作品名",
+    header: "作品名"
+  }, {
+    "aria-label": "放送期間",
+    accessorKey: "broadcastPeriod",
+    footer: "放送期間",
+    header: "放送期間"
+  }, {
+    "aria-label": "話数",
+    accessorKey: "episode",
+    footer: "話数",
+    header: "話数"
+  }], []);
+  const data = useMemo<Data[]>(() => [{
+    name: "ドラゴンボール",
+    broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+    episode: "全153話"
+  }, {
+    name: "ドラゴンボールZ",
+    broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+    episode: "全291話 + スペシャル2話"
+  }, {
+    name: "ドラゴンボールGT",
+    broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+    episode: "全64話 + 番外編1話"
+  }, {
+    name: "ドラゴンボール改",
+    broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+    episode: "全159話"
+  }, {
+    name: "ドラゴンボール超",
+    broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+    episode: "全131話"
+  }], []);
+  return <>
+      <Table columns={columns} data={data} withFooter tbodyProps={{
+      bg: ["green.200", "green.700"]
+    }} tfootProps={{
+      bg: ["blue.200", "blue.700"]
+    }} theadProps={{
+      bg: ["red.200", "red.700"]
+    }} />
+
+      <Table columns={columns} data={data} withFooter footerGroupProps={{
+      bg: ["blue.200", "blue.700"]
+    }} headerGroupProps={{
+      bg: ["red.200", "red.700"]
+    }} rowProps={{
+      bg: ["green.200", "green.700"]
+    }} />
+
+      <Table columns={columns} data={data} withFooter cellProps={({
+      column
+    }) => {
+      if (column.columnDef.header === "作品名") return {
+        color: ["red.400", "red.300"]
+      };
+    }} footerProps={({
+      column
+    }) => {
+      if (column.columnDef.footer === "作品名") return {
+        color: ["red.400", "red.300"]
+      };
+    }} headerProps={({
+      column
+    }) => {
+      if (column.columnDef.header === "作品名") return {
+        color: ["red.400", "red.300"]
+      };
+    }} />
+    </>;
+}`,...(yo=(ho=v.parameters)==null?void 0:ho.docs)==null?void 0:yo.source}}};const an=["basic","withSize","withVariant","withColorScheme","withColumnBorders","withBorder","withHighlightOnHover","withCaption","withFooter","withRowId","withDefaultSort","manualSort","customControlSort","withMaxMultiSortColCount","disabledSort","withSortDescFirst","disabledMultiSort","withDefaultSelectedRowIds","disabledRowIds","withRowsClickSelect","disabledSelect","customControlSelect","useClickRow","useDoubleClickRow","withCheckboxProps","withSelectColumnProps","disabledSelectColumn","withColumnStyles","customProps"];export{an as __namedExportsOrder,c as basic,j as customControlSelect,g as customControlSort,v as customProps,on as default,T as disabledMultiSort,x as disabledRowIds,f as disabledSelect,F as disabledSelectColumn,M as disabledSort,K as manualSort,G as useClickRow,Z as useDoubleClickRow,l as withBorder,b as withCaption,I as withCheckboxProps,m as withColorScheme,p as withColumnBorders,k as withColumnStyles,w as withDefaultSelectedRowIds,y as withDefaultSort,P as withFooter,u as withHighlightOnHover,S as withMaxMultiSortColCount,h as withRowId,D as withRowsClickSelect,R as withSelectColumnProps,t as withSize,C as withSortDescFirst,i as withVariant};

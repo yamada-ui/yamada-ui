@@ -41,6 +41,7 @@ export default defineWorkspace([
       browser: {
         name: "chromium",
         enabled: true,
+        headless: true,
         provider: "playwright",
       },
       exclude: [

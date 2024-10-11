@@ -21,7 +21,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: /home/runner/.cache/ms-playwright
-        key: playwright-${PLAYWRIGHT_BROWSER}-${{ steps.get-playwright-version.outputs.playwright-version }}
+        key: playwright-${PLAYWRIGHT_BROWSER}-v${{ steps.get-playwright-version.outputs.playwright-version }}
       env:
         PLAYWRIGHT_BROWSER: ${{ inputs.playwright_browser }}
 
@@ -38,4 +38,4 @@ runs:
       uses: actions/cache@v4
       with:
         path: /home/runner/.cache/ms-playwright
-        key: playwright-${PLAYWRIGHT_BROWSER}-${{ steps.get-playwright-version.outputs.playwright-version }}
+        key: playwright-${PLAYWRIGHT_BROWSER}-v${{ steps.get-playwright-version.outputs.playwright-version }}

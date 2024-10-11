@@ -1,1291 +1,440 @@
 {
-  "LineChart": {
+  "AreaChart": {
     "data": {
       "type": "Dict<any>[]",
-      "required": true,
-      "description": "Chart data."
+      "description": "Chart data.",
+      "required": true
     },
     "dataKey": {
       "type": "string",
-      "required": true,
-      "description": "The key of a group of data which should be unique in an chart."
+      "description": "The key of a group of data which should be unique in an chart.",
+      "required": true
     },
     "series": {
-      "type": "LineProps[]",
-      "required": true,
-      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
+      "type": "AreaProps[]",
+      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.",
+      "required": true
+    },
+    "areaProps": {
+      "type": "Partial<AreaProps>",
+      "description": "Props for the areas.",
+      "required": false
     },
     "chartProps": {
-      "type": "LineChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `LineChart` component."
+      "type": "AreaChartProps",
+      "description": "Props passed down to recharts `AreaChart` component.",
+      "required": false
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "connectNulls": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Determines whether points with `null` values should be connected."
+      "description": "Determines whether points with `null` values should be connected.",
+      "required": false
     },
     "containerProps": {
       "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
     },
     "curveType": {
       "type": "ChartCurveType",
       "defaultValue": "`monotone`",
-      "required": false,
-      "description": "Type of the curve."
+      "description": "Type of the curve.",
+      "required": false
     },
     "fillOpacity": {
       "type": "number | [number, number]",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Controls fill opacity of all lines."
+      "defaultValue": "0.4",
+      "description": "Controls fill opacity of all areas.",
+      "required": false
     },
     "gridAxis": {
       "type": "ChartAxisType",
       "defaultValue": "'x'",
-      "required": false,
-      "description": "Specifies which lines should be displayed in the grid."
+      "description": "Specifies which lines should be displayed in the grid.",
+      "required": false
     },
     "gridProps": {
       "type": "GridProps",
-      "required": false,
-      "description": "Props passed down to recharts 'CartesianGrid' component."
+      "description": "Props passed down to recharts 'CartesianGrid' component.",
+      "required": false
     },
     "labelFormatter": {
       "type": "(label: string) => string",
-      "required": false,
-      "description": "A function to format labels on inside the tooltip."
+      "description": "A function to format labels on inside the tooltip.",
+      "required": false
     },
     "layoutType": {
       "type": "ChartLayoutType",
       "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "Chart orientation."
+      "description": "Chart orientation.",
+      "required": false
     },
     "legendProps": {
       "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "lineProps": {
-      "type": "Partial<LineProps>",
-      "required": false,
-      "description": "Props for the lines."
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
     },
     "referenceLineProps": {
       "type": "ReferenceLineProps[]",
-      "required": false,
-      "description": "Reference lines that should be displayed on the chart."
+      "description": "Reference lines that should be displayed on the chart.",
+      "required": false
     },
     "size": {
-      "defaultValue": "full",
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the LineChart."
+      "defaultValue": "\"full\"",
+      "description": "The size of the AreaChart.",
+      "required": false
+    },
+    "splitColors": {
+      "type": "[string, string]",
+      "defaultValue": "'[\"red.400\", \"green.400\"]'",
+      "description": "A tuple of colors used when `type=\"split\"` is set, ignored in all other cases.",
+      "required": false
+    },
+    "splitOffset": {
+      "type": "number",
+      "description": "Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.\nMust be generated from the data array with `getSplitOffset` function.",
+      "required": false
     },
     "strokeDasharray": {
       "type": "string | number",
       "defaultValue": "'5 5'",
-      "required": false,
-      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.",
+      "required": false
     },
     "strokeWidth": {
       "type": "number",
       "defaultValue": "2",
-      "required": false,
-      "description": "Stroke width for the chart lines."
+      "description": "Stroke width for the chart areas.",
+      "required": false
     },
     "syncId": {
       "type": "string | number",
-      "required": false,
-      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush.",
+      "required": false
     },
     "tickLine": {
       "type": "ChartAxisType",
       "defaultValue": "'y'",
-      "required": false,
-      "description": "The option is the configuration of tick lines."
+      "description": "The option is the configuration of tick lines.",
+      "required": false
     },
     "tooltipAnimationDuration": {
       "type": "number",
       "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
     },
     "tooltipProps": {
       "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
     },
     "type": {
       "type": "AreaChartType",
       "defaultValue": "`default`",
-      "required": false,
-      "description": "Controls how chart areas are positioned relative to each other"
+      "description": "Controls how chart areas are positioned relative to each other.",
+      "required": false
     },
     "unit": {
       "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
+      "description": "Unit displayed next to each tick in y-axis.",
+      "required": false
     },
     "valueFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the LineChart."
+      "description": "The variant of the AreaChart.",
+      "required": false
     },
     "withActiveDots": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Determines whether activeDots should be displayed."
+      "description": "Determines whether activeDots should be displayed.",
+      "required": false
     },
     "withDots": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Determines whether dots should be displayed."
+      "description": "Determines whether dots should be displayed.",
+      "required": false
+    },
+    "withGradient": {
+      "type": "boolean",
+      "description": "Determines whether the chart area should be represented with a gradient instead of the solid color.",
+      "required": false
     },
     "withLegend": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
+      "description": "If `true`, legend is visible.",
+      "required": false
     },
     "withTooltip": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
+      "description": "If `true`, tooltip is visible.",
+      "required": false
     },
     "withXAxis": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, X axis is visible."
+      "description": "If `true`, X axis is visible.",
+      "required": false
     },
     "withYAxis": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, Y axis is visible."
+      "description": "If `true`, Y axis is visible.",
+      "required": false
     },
     "xAxisLabel": {
       "type": "string",
-      "required": false,
-      "description": "A label to display below the X axis."
+      "description": "A label to display below the X axis.",
+      "required": false
     },
     "xAxisLabelProps": {
       "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxisLabel' component."
+      "description": "Props passed down to recharts 'XAxisLabel' component.",
+      "required": false
     },
     "xAxisProps": {
       "type": "XAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxis' component."
+      "description": "Props passed down to recharts 'XAxis' component.",
+      "required": false
     },
     "xAxisTickFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format X axis tick."
+      "description": "A function to format X axis tick.",
+      "required": false
     },
     "yAxisLabel": {
       "type": "string",
-      "required": false,
-      "description": "A label to display below the Y axis."
+      "description": "A label to display below the Y axis.",
+      "required": false
     },
     "yAxisLabelProps": {
       "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxisLabel' component."
+      "description": "Props passed down to recharts 'YAxisLabel' component.",
+      "required": false
     },
     "yAxisProps": {
       "type": "YAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxis' component."
+      "description": "Props passed down to recharts 'YAxis' component.",
+      "required": false
     },
     "yAxisTickFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format Y axis tick."
+      "description": "A function to format Y axis tick.",
+      "required": false
     }
   },
   "BarChart": {
     "data": {
       "type": "Dict<any>[]",
-      "required": true,
-      "description": "Chart data."
+      "description": "Chart data.",
+      "required": true
     },
     "dataKey": {
       "type": "string",
-      "required": true,
-      "description": "The key of a group of data which should be unique in an chart."
+      "description": "The key of a group of data which should be unique in an chart.",
+      "required": true
     },
     "series": {
       "type": "BarProps[]",
-      "required": true,
-      "description": "An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array."
+      "description": "An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.",
+      "required": true
     },
     "barProps": {
       "type": "Partial<BarProps>",
-      "required": false,
-      "description": "Props for the bars."
+      "description": "Props for the bars.",
+      "required": false
     },
     "cell": {
       "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>",
-      "required": false,
-      "description": "A function that returns a component that renders the bar cells."
+      "description": "A function that returns a component that renders the bar cells.",
+      "required": false
     },
     "chartProps": {
       "type": "BarChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `BarChart` component."
+      "description": "Props passed down to recharts `BarChart` component.",
+      "required": false
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "containerProps": {
       "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
     },
     "gridAxis": {
       "type": "ChartAxisType",
       "defaultValue": "'x'",
-      "required": false,
-      "description": "Specifies which lines should be displayed in the grid."
+      "description": "Specifies which lines should be displayed in the grid.",
+      "required": false
     },
     "gridProps": {
       "type": "GridProps",
-      "required": false,
-      "description": "Props passed down to recharts 'CartesianGrid' component."
+      "description": "Props passed down to recharts 'CartesianGrid' component.",
+      "required": false
     },
     "labelFormatter": {
       "type": "(label: string) => string",
-      "required": false,
-      "description": "A function to format labels on inside the tooltip."
+      "description": "A function to format labels on inside the tooltip.",
+      "required": false
     },
     "layoutType": {
       "type": "ChartLayoutType",
       "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "Chart orientation."
+      "description": "Chart orientation.",
+      "required": false
     },
     "legendProps": {
       "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
     },
     "referenceLineProps": {
       "type": "ReferenceLineProps[]",
-      "required": false,
-      "description": "Reference lines that should be displayed on the chart."
+      "description": "Reference lines that should be displayed on the chart.",
+      "required": false
     },
     "size": {
-      "defaultValue": "full",
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the BarChart."
+      "defaultValue": "\"full\"",
+      "description": "The size of the BarChart.",
+      "required": false
     },
     "syncId": {
       "type": "string | number",
-      "required": false,
-      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush.",
+      "required": false
     },
     "tickLine": {
       "type": "ChartAxisType",
       "defaultValue": "'y'",
-      "required": false,
-      "description": "The option is the configuration of tick lines."
+      "description": "The option is the configuration of tick lines.",
+      "required": false
     },
     "tooltipAnimationDuration": {
       "type": "number",
       "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
     },
     "tooltipProps": {
       "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
     },
     "type": {
-      "type": "\"default\" | \"stacked\" | \"percent\"",
+      "type": "\"default\" | \"percent\" | \"stacked\"",
       "defaultValue": "`default`",
-      "required": false,
-      "description": "Controls how chart bars are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other"
+      "description": "Controls how chart bars are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other",
+      "required": false
     },
     "unit": {
       "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
+      "description": "Unit displayed next to each tick in y-axis.",
+      "required": false
     },
     "valueFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the BarChart."
+      "description": "The variant of the BarChart.",
+      "required": false
     },
     "withLegend": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
+      "description": "If `true`, legend is visible.",
+      "required": false
     },
     "withTooltip": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
+      "description": "If `true`, tooltip is visible.",
+      "required": false
     },
     "withXAxis": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, X axis is visible."
+      "description": "If `true`, X axis is visible.",
+      "required": false
     },
     "withYAxis": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, Y axis is visible."
+      "description": "If `true`, Y axis is visible.",
+      "required": false
     },
     "xAxisLabel": {
       "type": "string",
-      "required": false,
-      "description": "A label to display below the X axis."
+      "description": "A label to display below the X axis.",
+      "required": false
     },
     "xAxisLabelProps": {
       "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxisLabel' component."
+      "description": "Props passed down to recharts 'XAxisLabel' component.",
+      "required": false
     },
     "xAxisProps": {
       "type": "XAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxis' component."
+      "description": "Props passed down to recharts 'XAxis' component.",
+      "required": false
     },
     "xAxisTickFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format X axis tick."
+      "description": "A function to format X axis tick.",
+      "required": false
     },
     "yAxisLabel": {
       "type": "string",
-      "required": false,
-      "description": "A label to display below the Y axis."
+      "description": "A label to display below the Y axis.",
+      "required": false
     },
     "yAxisLabelProps": {
       "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxisLabel' component."
+      "description": "Props passed down to recharts 'YAxisLabel' component.",
+      "required": false
     },
     "yAxisProps": {
       "type": "YAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxis' component."
+      "description": "Props passed down to recharts 'YAxis' component.",
+      "required": false
     },
     "yAxisTickFormatter": {
       "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format Y axis tick."
+      "description": "A function to format Y axis tick.",
+      "required": false
     }
   },
-  "BarCell": {
-    "data": { "type": "Dict<any>", "required": true },
-    "hasStack": { "type": "boolean", "required": true },
-    "index": { "type": "number", "required": true },
-    "series": { "type": "BarProps", "required": true }
-  },
-  "AreaChart": {
-    "data": {
-      "type": "Dict<any>[]",
-      "required": true,
-      "description": "Chart data."
-    },
-    "dataKey": {
-      "type": "string",
-      "required": true,
-      "description": "The key of a group of data which should be unique in an chart."
-    },
-    "series": {
-      "type": "AreaProps[]",
-      "required": true,
-      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
-    },
-    "areaProps": {
-      "type": "Partial<AreaProps>",
-      "required": false,
-      "description": "Props for the areas."
-    },
-    "chartProps": {
-      "type": "AreaChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `AreaChart` component."
-    },
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "connectNulls": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether points with `null` values should be connected."
-    },
-    "containerProps": {
-      "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
-    },
-    "curveType": {
-      "type": "ChartCurveType",
-      "defaultValue": "`monotone`",
-      "required": false,
-      "description": "Type of the curve."
-    },
-    "fillOpacity": {
-      "type": "number | [number, number]",
-      "defaultValue": "0.4",
-      "required": false,
-      "description": "Controls fill opacity of all areas."
-    },
-    "gridAxis": {
-      "type": "ChartAxisType",
-      "defaultValue": "'x'",
-      "required": false,
-      "description": "Specifies which lines should be displayed in the grid."
-    },
-    "gridProps": {
-      "type": "GridProps",
-      "required": false,
-      "description": "Props passed down to recharts 'CartesianGrid' component."
-    },
-    "labelFormatter": {
-      "type": "(label: string) => string",
-      "required": false,
-      "description": "A function to format labels on inside the tooltip."
-    },
-    "layoutType": {
-      "type": "ChartLayoutType",
-      "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "Chart orientation."
-    },
-    "legendProps": {
-      "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "referenceLineProps": {
-      "type": "ReferenceLineProps[]",
-      "required": false,
-      "description": "Reference lines that should be displayed on the chart."
-    },
-    "size": {
-      "defaultValue": "full",
-      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the AreaChart."
-    },
-    "splitColors": {
-      "type": "[string, string]",
-      "defaultValue": "'[\"red.400\", \"green.400\"]'",
-      "required": false,
-      "description": "A tuple of colors used when `type=\"split\"` is set, ignored in all other cases."
-    },
-    "splitOffset": {
-      "type": "number",
-      "required": false,
-      "description": "Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.\nMust be generated from the data array with `getSplitOffset` function."
-    },
-    "strokeDasharray": {
-      "type": "string | number",
-      "defaultValue": "'5 5'",
-      "required": false,
-      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
-    },
-    "strokeWidth": {
-      "type": "number",
-      "defaultValue": "2",
-      "required": false,
-      "description": "Stroke width for the chart areas."
-    },
-    "syncId": {
-      "type": "string | number",
-      "required": false,
-      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
-    },
-    "tickLine": {
-      "type": "ChartAxisType",
-      "defaultValue": "'y'",
-      "required": false,
-      "description": "The option is the configuration of tick lines."
-    },
-    "tooltipAnimationDuration": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
-    },
-    "tooltipProps": {
-      "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
-    },
-    "type": {
-      "type": "AreaChartType",
-      "defaultValue": "`default`",
-      "required": false,
-      "description": "Controls how chart areas are positioned relative to each other."
-    },
-    "unit": {
-      "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
-    },
-    "valueFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the AreaChart."
-    },
-    "withActiveDots": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether activeDots should be displayed."
-    },
-    "withDots": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether dots should be displayed."
-    },
-    "withGradient": {
-      "type": "boolean",
-      "required": false,
-      "description": "Determines whether the chart area should be represented with a gradient instead of the solid color."
-    },
-    "withLegend": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
-    },
-    "withTooltip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
-    },
-    "withXAxis": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, X axis is visible."
-    },
-    "withYAxis": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, Y axis is visible."
-    },
-    "xAxisLabel": {
-      "type": "string",
-      "required": false,
-      "description": "A label to display below the X axis."
-    },
-    "xAxisLabelProps": {
-      "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxisLabel' component."
-    },
-    "xAxisProps": {
-      "type": "XAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'XAxis' component."
-    },
-    "xAxisTickFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format X axis tick."
-    },
-    "yAxisLabel": {
-      "type": "string",
-      "required": false,
-      "description": "A label to display below the Y axis."
-    },
-    "yAxisLabelProps": {
-      "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxisLabel' component."
-    },
-    "yAxisProps": {
-      "type": "YAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts 'YAxis' component."
-    },
-    "yAxisTickFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format Y axis tick."
-    }
-  },
-  "RadarChart": {
-    "data": {
-      "type": "Dict<any>[]",
-      "required": true,
-      "description": "Chart data."
-    },
-    "dataKey": {
-      "type": "string",
-      "required": true,
-      "description": "The key of a group of data which should be unique in an chart."
-    },
-    "series": {
-      "type": "RadarProps[]",
-      "required": true,
-      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
-    },
-    "chartProps": {
-      "type": "RadarChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `RadarChart` component."
-    },
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "containerProps": {
-      "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
-    },
-    "fillOpacity": {
-      "type": "number | [number, number]",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Controls fill opacity of all radars."
-    },
-    "legendProps": {
-      "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "polarAngleAxisProps": {
-      "type": "PolarAngleAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts `PolarAngleAxis` component."
-    },
-    "polarAngleAxisTickFormatter": {
-      "type": "(value: number) => string",
-      "required": false,
-      "description": "A function to format Y axis tick."
-    },
-    "polarAngleAxisTickProps": {
-      "type": "CSSUIProps",
-      "required": false,
-      "description": "Props passed down to recharts `tick` of `PolarAngleAxis` component."
-    },
-    "polarGridProps": {
-      "type": "PolarGridProps",
-      "required": false,
-      "description": "Props passed down to recharts `PolarGrid` component."
-    },
-    "polarRadiusAxisProps": {
-      "type": "PolarRadiusAxisProps",
-      "required": false,
-      "description": "Props passed down to recharts `PolarRadiusAxis` component."
-    },
-    "polarRadiusAxisTickFormatter": {
-      "type": "(value: number) => string",
-      "required": false,
-      "description": "A function to format X axis tick."
-    },
-    "polarRadiusAxisTickProps": {
-      "type": "CSSUIProps",
-      "required": false,
-      "description": "Props passed down to recharts `tick` of `PolarRadiusAxis` component."
-    },
-    "radarProps": {
-      "type": "Partial<RadarProps>",
-      "required": false,
-      "description": "Props for the radar."
-    },
-    "size": {
-      "defaultValue": "full",
-      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the RadarChart."
-    },
-    "strokeDasharray": {
-      "type": "string | number",
-      "required": false,
-      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
-    },
-    "strokeWidth": {
-      "type": "number",
-      "defaultValue": "2",
-      "required": false,
-      "description": "Stroke width for the chart radars."
-    },
-    "tooltipAnimationDuration": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
-    },
-    "tooltipProps": {
-      "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
-    },
-    "unit": {
-      "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
-    },
-    "valueFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the RadarChart."
-    },
-    "withActiveDots": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether activeDots should be displayed."
-    },
-    "withDots": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether dots should be displayed."
-    },
-    "withLegend": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
-    },
-    "withPolarAngleAxis": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether polarAngleAxis should be displayed."
-    },
-    "withPolarGrid": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Determines whether polarGrid should be displayed."
-    },
-    "withPolarRadiusAxis": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether polarRadiusAxis should be displayed."
-    },
-    "withTooltip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
-    }
-  },
-  "DonutChart": {
-    "data": {
-      "type": "CellProps[]",
-      "required": true,
-      "description": "Chart data."
-    },
-    "cellProps": {
-      "type": "Partial<CellProps>",
-      "required": false,
-      "description": "Props for the cell."
-    },
-    "chartProps": {
-      "type": "PieChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `PieChart` component."
-    },
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "containerProps": {
-      "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
-    },
-    "endAngle": {
-      "type": "number",
-      "defaultValue": "-270",
-      "required": false,
-      "description": "Controls angle at which chart ends."
-    },
-    "fillOpacity": {
-      "type": "number | [number, number]",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Controls fill opacity of all pies."
-    },
-    "innerRadius": {
-      "type": "string | number",
-      "defaultValue": "'0%'",
-      "required": false,
-      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "isPercent": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether labels should be displayed as percentages."
-    },
-    "labelFormatter": {
-      "type": "(value: number) => string",
-      "required": false,
-      "description": "A function to format labels."
-    },
-    "labelOffset": {
-      "type": "number",
-      "required": false,
-      "description": "Distance between chart and label."
-    },
-    "labelProps": {
-      "type": "LabelProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Label' component."
-    },
-    "legendProps": {
-      "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "outerRadius": {
-      "type": "string | number",
-      "defaultValue": "'80%'",
-      "required": false,
-      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "paddingAngle": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Controls padding between segments."
-    },
-    "pieProps": {
-      "type": "Partial<PieProps>",
-      "required": false,
-      "description": "Props for the pie."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the DonutChart."
-    },
-    "startAngle": {
-      "type": "number",
-      "defaultValue": "90",
-      "required": false,
-      "description": "Controls angle at which chart starts."
-    },
-    "strokeWidth": {
-      "type": "number",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Stroke width for the chart pies."
-    },
-    "tooltipAnimationDuration": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
-    },
-    "tooltipDataSource": {
-      "type": "TooltipDataSourceType",
-      "defaultValue": "'all'",
-      "required": false,
-      "description": "Determines which data is displayed in the tooltip."
-    },
-    "tooltipProps": {
-      "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
-    },
-    "unit": {
-      "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each value in tooltip."
-    },
-    "valueFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the DonutChart."
-    },
-    "withLabelLines": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether segments labels should have lines that connect the segment with the label."
-    },
-    "withLabels": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether each segment should have associated label."
-    },
-    "withLegend": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
-    },
-    "withTooltip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
-    }
-  },
-  "PieChart": {
-    "data": {
-      "type": "CellProps[]",
-      "required": true,
-      "description": "Chart data."
-    },
-    "cellProps": {
-      "type": "Partial<CellProps>",
-      "required": false,
-      "description": "Props for the cell."
-    },
-    "chartProps": {
-      "type": "PieChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `PieChart` component."
-    },
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "containerProps": {
-      "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
-    },
-    "endAngle": {
-      "type": "number",
-      "defaultValue": "-270",
-      "required": false,
-      "description": "Controls angle at which chart ends."
-    },
-    "fillOpacity": {
-      "type": "number | [number, number]",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Controls fill opacity of all pies."
-    },
-    "innerRadius": {
-      "type": "string | number",
-      "defaultValue": "'0%'",
-      "required": false,
-      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "isPercent": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether labels should be displayed as percentages."
-    },
-    "labelFormatter": {
-      "type": "(value: number) => string",
-      "required": false,
-      "description": "A function to format labels."
-    },
-    "labelOffset": {
-      "type": "number",
-      "required": false,
-      "description": "Distance between chart and label."
-    },
-    "legendProps": {
-      "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "outerRadius": {
-      "type": "string | number",
-      "defaultValue": "'80%'",
-      "required": false,
-      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "paddingAngle": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Controls padding between segments."
-    },
-    "pieProps": {
-      "type": "Partial<PieProps>",
-      "required": false,
-      "description": "Props for the pie."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the PieChart."
-    },
-    "startAngle": {
-      "type": "number",
-      "defaultValue": "90",
-      "required": false,
-      "description": "Controls angle at which chart starts."
-    },
-    "strokeWidth": {
-      "type": "number",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Stroke width for the chart pies."
-    },
-    "tooltipAnimationDuration": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
-    },
-    "tooltipDataSource": {
-      "type": "TooltipDataSourceType",
-      "defaultValue": "'all'",
-      "required": false,
-      "description": "Determines which data is displayed in the tooltip."
-    },
-    "tooltipProps": {
-      "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
-    },
-    "unit": {
-      "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each value in tooltip."
-    },
-    "valueFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the PieChart."
-    },
-    "withLabelLines": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether segments labels should have lines that connect the segment with the label."
-    },
-    "withLabels": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether each segment should have associated label."
-    },
-    "withLegend": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
-    },
-    "withTooltip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
-    }
-  },
-  "RadialChart": {
-    "data": {
-      "type": "Dict<any>[]",
-      "required": true,
-      "description": "Chart data."
-    },
-    "chartProps": {
-      "type": "RadialChartProps",
-      "required": false,
-      "description": "Props passed down to recharts `RadialBarChart` component."
-    },
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "containerProps": {
-      "type": "ResponsiveContainerProps",
-      "required": false,
-      "description": "Props passed down to recharts `ResponsiveContainer` component."
-    },
-    "dataKey": {
-      "type": "string",
-      "defaultValue": "'value'",
-      "required": false,
-      "description": "The key of a group of data which should be unique in an chart."
-    },
-    "endAngle": {
-      "type": "number",
-      "defaultValue": "-180",
-      "required": false,
-      "description": "Controls angle at which chart ends."
-    },
-    "fillOpacity": {
-      "type": "number | [number, number]",
-      "defaultValue": "1",
-      "required": false,
-      "description": "Controls fill opacity of all pies."
-    },
-    "innerRadius": {
-      "type": "string | number",
-      "defaultValue": "'10%'",
-      "required": false,
-      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "labelFormatter": {
-      "type": "(label: string) => string",
-      "required": false,
-      "description": "A function to format labels on inside the tooltip."
-    },
-    "labelListProps": {
-      "type": "LabelListProps[]",
-      "required": false,
-      "description": "Props passed down to recharts `LabelList` components."
-    },
-    "legendProps": {
-      "type": "LegendProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Legend' component."
-    },
-    "outerRadius": {
-      "type": "string | number",
-      "defaultValue": "'80%'",
-      "required": false,
-      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
-    },
-    "polarGridProps": {
-      "type": "PolarGridProps",
-      "required": false,
-      "description": "Props passed down to recharts `PolarGrid` component."
-    },
-    "radialBarProps": {
-      "type": "Partial<RadialBarProps>",
-      "required": false,
-      "description": "Props for the radialBar."
-    },
-    "size": {
-      "defaultValue": "full",
-      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
-      "required": false,
-      "description": "The size of the RadialChart."
-    },
-    "startAngle": {
-      "type": "number",
-      "defaultValue": "90",
-      "required": false,
-      "description": "Controls angle at which chart starts."
-    },
-    "strokeDasharray": {
-      "type": "string | number",
-      "required": false,
-      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
-    },
-    "tooltipAnimationDuration": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "Specifies the duration of animation, the unit of this option is ms."
-    },
-    "tooltipDataSource": {
-      "type": "TooltipDataSourceType",
-      "defaultValue": "'all'",
-      "required": false,
-      "description": "Determines which data is displayed in the tooltip."
-    },
-    "tooltipProps": {
-      "type": "TooltipProps",
-      "required": false,
-      "description": "Props passed down to recharts 'Tooltip' component."
-    },
-    "unit": {
-      "type": "string",
-      "required": false,
-      "description": "Unit displayed next to each value in tooltip."
-    },
-    "valueFormatter": {
-      "type": "(value: any) => string",
-      "required": false,
-      "description": "A function to format values on inside the tooltip."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the RadialChart."
-    },
-    "withLegend": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, legend is visible."
-    },
-    "withPolarGrid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Determines whether polarGrid should be displayed."
-    },
-    "withTooltip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, tooltip is visible."
-    }
+  "Area": {
+    "activeDot": { "type": "DotProps", "required": false },
+    "color": {
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "required": false
+    },
+    "dimArea": { "type": "Partial<AreaProps>", "required": false },
+    "dimDot": { "type": "DotProps", "required": false },
+    "dot": { "type": "DotProps", "required": false }
   },
   "Bar": {
     "activeBar": {
@@ -1297,47 +446,17 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
       "required": false
     },
     "dimBar": { "type": "Partial<BarProps>", "required": false }
-  },
-  "Area": {
-    "activeDot": { "type": "DotProps", "required": false },
-    "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
-      "required": false
-    },
-    "dimArea": { "type": "Partial<AreaProps>", "required": false },
-    "dimDot": { "type": "DotProps", "required": false },
-    "dot": { "type": "DotProps", "required": false }
-  },
-  "Line": {
-    "activeDot": { "type": "DotProps", "required": false },
-    "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
-      "required": false
-    },
-    "dimDot": { "type": "DotProps", "required": false },
-    "dimLine": { "type": "Partial<LineProps>", "required": false },
-    "dot": { "type": "DotProps", "required": false }
-  },
-  "Radar": {
-    "activeDot": { "type": "DotProps", "required": false },
-    "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
-      "required": false
-    },
-    "dimDot": { "type": "DotProps", "required": false },
-    "dimRadar": { "type": "Partial<RadarProps>", "required": false },
-    "dot": { "type": "DotProps", "required": false }
   },
   "Cell": {
     "name": { "type": "string", "required": true },
     "value": { "type": "number", "required": true },
     "dimCell": { "type": "Partial<CellProps>", "required": false }
   },
-  "Dot": {},
+  "ChartLabel": {},
   "ChartTooltip": {
     "dataKey": { "type": "string", "required": false },
     "isRadialChart": { "type": "boolean", "required": false },
@@ -1350,5 +469,886 @@
     "unit": { "type": "string", "required": false },
     "valueFormatter": { "type": "(value: any) => string", "required": false }
   },
-  "ChartLabel": {}
+  "Dot": {},
+  "Line": {
+    "activeDot": { "type": "DotProps", "required": false },
+    "color": {
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "required": false
+    },
+    "dimDot": { "type": "DotProps", "required": false },
+    "dimLine": { "type": "Partial<LineProps>", "required": false },
+    "dot": { "type": "DotProps", "required": false }
+  },
+  "Radar": {
+    "activeDot": { "type": "DotProps", "required": false },
+    "color": {
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "required": false
+    },
+    "dimDot": { "type": "DotProps", "required": false },
+    "dimRadar": { "type": "Partial<RadarProps>", "required": false },
+    "dot": { "type": "DotProps", "required": false }
+  },
+  "DonutChart": {
+    "data": {
+      "type": "CellProps[]",
+      "description": "Chart data.",
+      "required": true
+    },
+    "cellProps": {
+      "type": "Partial<CellProps>",
+      "description": "Props for the cell.",
+      "required": false
+    },
+    "chartProps": {
+      "type": "PieChartProps",
+      "description": "Props passed down to recharts `PieChart` component.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-270",
+      "description": "Controls angle at which chart ends.",
+      "required": false
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "description": "Controls fill opacity of all pies.",
+      "required": false
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'0%'",
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "isPercent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether labels should be displayed as percentages.",
+      "required": false
+    },
+    "labelFormatter": {
+      "type": "(value: number) => string",
+      "description": "A function to format labels.",
+      "required": false
+    },
+    "labelOffset": {
+      "type": "number",
+      "description": "Distance between chart and label.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "LabelProps",
+      "description": "Props passed down to recharts 'Label' component.",
+      "required": false
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "paddingAngle": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Controls padding between segments.",
+      "required": false
+    },
+    "pieProps": {
+      "type": "Partial<PieProps>",
+      "description": "Props for the pie.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the DonutChart.",
+      "required": false
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "description": "Controls angle at which chart starts.",
+      "required": false
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "Stroke width for the chart pies.",
+      "required": false
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "description": "Determines which data is displayed in the tooltip.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit displayed next to each value in tooltip.",
+      "required": false
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the DonutChart.",
+      "required": false
+    },
+    "withLabelLines": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether segments labels should have lines that connect the segment with the label.",
+      "required": false
+    },
+    "withLabels": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether each segment should have associated label.",
+      "required": false
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, legend is visible.",
+      "required": false
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, tooltip is visible.",
+      "required": false
+    }
+  },
+  "LineChart": {
+    "data": {
+      "type": "Dict<any>[]",
+      "description": "Chart data.",
+      "required": true
+    },
+    "dataKey": {
+      "type": "string",
+      "description": "The key of a group of data which should be unique in an chart.",
+      "required": true
+    },
+    "series": {
+      "type": "LineProps[]",
+      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.",
+      "required": true
+    },
+    "chartProps": {
+      "type": "LineChartProps",
+      "description": "Props passed down to recharts `LineChart` component.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "connectNulls": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether points with `null` values should be connected.",
+      "required": false
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
+    },
+    "curveType": {
+      "type": "ChartCurveType",
+      "defaultValue": "`monotone`",
+      "description": "Type of the curve.",
+      "required": false
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "description": "Controls fill opacity of all lines.",
+      "required": false
+    },
+    "gridAxis": {
+      "type": "ChartAxisType",
+      "defaultValue": "'x'",
+      "description": "Specifies which lines should be displayed in the grid.",
+      "required": false
+    },
+    "gridProps": {
+      "type": "GridProps",
+      "description": "Props passed down to recharts 'CartesianGrid' component.",
+      "required": false
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "description": "A function to format labels on inside the tooltip.",
+      "required": false
+    },
+    "layoutType": {
+      "type": "ChartLayoutType",
+      "defaultValue": "'horizontal'",
+      "description": "Chart orientation.",
+      "required": false
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
+    },
+    "lineProps": {
+      "type": "Partial<LineProps>",
+      "description": "Props for the lines.",
+      "required": false
+    },
+    "referenceLineProps": {
+      "type": "ReferenceLineProps[]",
+      "description": "Reference lines that should be displayed on the chart.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "defaultValue": "\"full\"",
+      "description": "The size of the LineChart.",
+      "required": false
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "defaultValue": "'5 5'",
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.",
+      "required": false
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "2",
+      "description": "Stroke width for the chart lines.",
+      "required": false
+    },
+    "syncId": {
+      "type": "string | number",
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush.",
+      "required": false
+    },
+    "tickLine": {
+      "type": "ChartAxisType",
+      "defaultValue": "'y'",
+      "description": "The option is the configuration of tick lines.",
+      "required": false
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
+    },
+    "type": {
+      "type": "AreaChartType",
+      "defaultValue": "`default`",
+      "description": "Controls how chart areas are positioned relative to each other",
+      "required": false
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit displayed next to each tick in y-axis.",
+      "required": false
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the LineChart.",
+      "required": false
+    },
+    "withActiveDots": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether activeDots should be displayed.",
+      "required": false
+    },
+    "withDots": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether dots should be displayed.",
+      "required": false
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, legend is visible.",
+      "required": false
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, tooltip is visible.",
+      "required": false
+    },
+    "withXAxis": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, X axis is visible.",
+      "required": false
+    },
+    "withYAxis": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, Y axis is visible.",
+      "required": false
+    },
+    "xAxisLabel": {
+      "type": "string",
+      "description": "A label to display below the X axis.",
+      "required": false
+    },
+    "xAxisLabelProps": {
+      "type": "LabelProps",
+      "description": "Props passed down to recharts 'XAxisLabel' component.",
+      "required": false
+    },
+    "xAxisProps": {
+      "type": "XAxisProps",
+      "description": "Props passed down to recharts 'XAxis' component.",
+      "required": false
+    },
+    "xAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format X axis tick.",
+      "required": false
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "description": "A label to display below the Y axis.",
+      "required": false
+    },
+    "yAxisLabelProps": {
+      "type": "LabelProps",
+      "description": "Props passed down to recharts 'YAxisLabel' component.",
+      "required": false
+    },
+    "yAxisProps": {
+      "type": "YAxisProps",
+      "description": "Props passed down to recharts 'YAxis' component.",
+      "required": false
+    },
+    "yAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format Y axis tick.",
+      "required": false
+    }
+  },
+  "PieChart": {
+    "data": {
+      "type": "CellProps[]",
+      "description": "Chart data.",
+      "required": true
+    },
+    "cellProps": {
+      "type": "Partial<CellProps>",
+      "description": "Props for the cell.",
+      "required": false
+    },
+    "chartProps": {
+      "type": "PieChartProps",
+      "description": "Props passed down to recharts `PieChart` component.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-270",
+      "description": "Controls angle at which chart ends.",
+      "required": false
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "description": "Controls fill opacity of all pies.",
+      "required": false
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'0%'",
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "isPercent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether labels should be displayed as percentages.",
+      "required": false
+    },
+    "labelFormatter": {
+      "type": "(value: number) => string",
+      "description": "A function to format labels.",
+      "required": false
+    },
+    "labelOffset": {
+      "type": "number",
+      "description": "Distance between chart and label.",
+      "required": false
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "paddingAngle": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Controls padding between segments.",
+      "required": false
+    },
+    "pieProps": {
+      "type": "Partial<PieProps>",
+      "description": "Props for the pie.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the PieChart.",
+      "required": false
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "description": "Controls angle at which chart starts.",
+      "required": false
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "Stroke width for the chart pies.",
+      "required": false
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "description": "Determines which data is displayed in the tooltip.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit displayed next to each value in tooltip.",
+      "required": false
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the PieChart.",
+      "required": false
+    },
+    "withLabelLines": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether segments labels should have lines that connect the segment with the label.",
+      "required": false
+    },
+    "withLabels": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether each segment should have associated label.",
+      "required": false
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, legend is visible.",
+      "required": false
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, tooltip is visible.",
+      "required": false
+    }
+  },
+  "RadarChart": {
+    "data": {
+      "type": "Dict<any>[]",
+      "description": "Chart data.",
+      "required": true
+    },
+    "dataKey": {
+      "type": "string",
+      "description": "The key of a group of data which should be unique in an chart.",
+      "required": true
+    },
+    "series": {
+      "type": "RadarProps[]",
+      "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.",
+      "required": true
+    },
+    "chartProps": {
+      "type": "RadarChartProps",
+      "description": "Props passed down to recharts `RadarChart` component.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "description": "Controls fill opacity of all radars.",
+      "required": false
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
+    },
+    "polarAngleAxisProps": {
+      "type": "PolarAngleAxisProps",
+      "description": "Props passed down to recharts `PolarAngleAxis` component.",
+      "required": false
+    },
+    "polarAngleAxisTickFormatter": {
+      "type": "(value: number) => string",
+      "description": "A function to format Y axis tick.",
+      "required": false
+    },
+    "polarAngleAxisTickProps": {
+      "type": "CSSUIProps",
+      "description": "Props passed down to recharts `tick` of `PolarAngleAxis` component.",
+      "required": false
+    },
+    "polarGridProps": {
+      "type": "PolarGridProps",
+      "description": "Props passed down to recharts `PolarGrid` component.",
+      "required": false
+    },
+    "polarRadiusAxisProps": {
+      "type": "PolarRadiusAxisProps",
+      "description": "Props passed down to recharts `PolarRadiusAxis` component.",
+      "required": false
+    },
+    "polarRadiusAxisTickFormatter": {
+      "type": "(value: number) => string",
+      "description": "A function to format X axis tick.",
+      "required": false
+    },
+    "polarRadiusAxisTickProps": {
+      "type": "CSSUIProps",
+      "description": "Props passed down to recharts `tick` of `PolarRadiusAxis` component.",
+      "required": false
+    },
+    "radarProps": {
+      "type": "Partial<RadarProps>",
+      "description": "Props for the radar.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "defaultValue": "\"full\"",
+      "description": "The size of the RadarChart.",
+      "required": false
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.",
+      "required": false
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "2",
+      "description": "Stroke width for the chart radars.",
+      "required": false
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit displayed next to each tick in y-axis.",
+      "required": false
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the RadarChart.",
+      "required": false
+    },
+    "withActiveDots": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether activeDots should be displayed.",
+      "required": false
+    },
+    "withDots": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether dots should be displayed.",
+      "required": false
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, legend is visible.",
+      "required": false
+    },
+    "withPolarAngleAxis": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether polarAngleAxis should be displayed.",
+      "required": false
+    },
+    "withPolarGrid": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Determines whether polarGrid should be displayed.",
+      "required": false
+    },
+    "withPolarRadiusAxis": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether polarRadiusAxis should be displayed.",
+      "required": false
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, tooltip is visible.",
+      "required": false
+    }
+  },
+  "RadialChart": {
+    "data": {
+      "type": "Dict<any>[]",
+      "description": "Chart data.",
+      "required": true
+    },
+    "chartProps": {
+      "type": "RadialChartProps",
+      "description": "Props passed down to recharts `RadialBarChart` component.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "description": "Props passed down to recharts `ResponsiveContainer` component.",
+      "required": false
+    },
+    "dataKey": {
+      "type": "string",
+      "defaultValue": "'value'",
+      "description": "The key of a group of data which should be unique in an chart.",
+      "required": false
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-180",
+      "description": "Controls angle at which chart ends.",
+      "required": false
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "description": "Controls fill opacity of all pies.",
+      "required": false
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'10%'",
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "description": "A function to format labels on inside the tooltip.",
+      "required": false
+    },
+    "labelListProps": {
+      "type": "LabelListProps[]",
+      "description": "Props passed down to recharts `LabelList` components.",
+      "required": false
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "description": "Props passed down to recharts 'Legend' component.",
+      "required": false
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`.",
+      "required": false
+    },
+    "polarGridProps": {
+      "type": "PolarGridProps",
+      "description": "Props passed down to recharts `PolarGrid` component.",
+      "required": false
+    },
+    "radialBarProps": {
+      "type": "Partial<RadialBarProps>",
+      "description": "Props for the radialBar.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "defaultValue": "\"full\"",
+      "description": "The size of the RadialChart.",
+      "required": false
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "description": "Controls angle at which chart starts.",
+      "required": false
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.",
+      "required": false
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "Specifies the duration of animation, the unit of this option is ms.",
+      "required": false
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "description": "Determines which data is displayed in the tooltip.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "description": "Props passed down to recharts 'Tooltip' component.",
+      "required": false
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit displayed next to each value in tooltip.",
+      "required": false
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "description": "A function to format values on inside the tooltip.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the RadialChart.",
+      "required": false
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, legend is visible.",
+      "required": false
+    },
+    "withPolarGrid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether polarGrid should be displayed.",
+      "required": false
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, tooltip is visible.",
+      "required": false
+    }
+  },
+  "BarCell": {
+    "data": { "type": "Dict<any>", "required": true },
+    "hasStack": { "type": "boolean", "required": true },
+    "index": { "type": "number", "required": true },
+    "series": { "type": "BarProps", "required": true }
+  }
 }

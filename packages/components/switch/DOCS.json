@@ -1,125 +1,125 @@
 {
-  "Switch": {
-    "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "defaultIsChecked": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be initially checked."
-    },
-    "icon": {
-      "type": "ReactElement<\n  SwitchIconProps,\n  string | JSXElementConstructor<any>\n>",
-      "required": false,
-      "description": "The switch icon to use."
-    },
-    "id": {
-      "type": "string",
-      "required": false,
-      "description": "id assigned to input."
-    },
-    "inputProps": {
-      "type": "InputHTMLAttributes<HTMLInputElement>",
-      "required": false,
-      "description": "Props for switch input element."
-    },
-    "isChecked": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be checked."
-    },
-    "isDisabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
-    },
-    "isInvalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
-    },
-    "isReadOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
-    },
-    "isRequired": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
-    },
-    "isReverse": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Change switch label from right to left."
-    },
-    "labelProps": {
-      "type": "HTMLUIProps<\"span\">",
-      "required": false,
-      "description": "Props for switch label element."
-    },
-    "name": {
-      "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
-    },
-    "onBlur": {
-      "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is blurred."
-    },
-    "onChange": {
-      "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checked state changes."
-    },
-    "onFocus": {
-      "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is focused."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Switch."
-    },
-    "tabIndex": {
-      "type": "number",
-      "required": false,
-      "description": "The tab-index property of the underlying input element."
-    },
-    "transition": {
-      "type": "Transition$1",
-      "required": false,
-      "description": "Motion transition settings."
-    },
-    "value": {
-      "type": "string",
-      "required": false,
-      "description": "The value to be used in the checkbox input."
-    },
-    "variant": {
-      "defaultValue": "thick",
-      "type": "\"thick\" | \"thin\"",
-      "required": false,
-      "description": "The variant of the Switch."
-    }
-  },
   "SwitchIcon": {
     "isActive": { "type": "boolean", "required": false },
     "isChecked": { "type": "boolean", "required": false },
     "isFocused": { "type": "boolean", "required": false },
     "isHovered": { "type": "boolean", "required": false }
+  },
+  "Switch": {
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultIsChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement<\n  SwitchIconProps,\n  string | JSXElementConstructor<any>\n>",
+      "description": "The switch icon to use.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "id assigned to input.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "InputHTMLAttributes<HTMLInputElement>",
+      "description": "Props for switch input element.",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "isReverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Change switch label from right to left.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "HTMLUIProps<\"span\">",
+      "description": "Props for switch label element.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
+    },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checkbox is blurred.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
+    },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the Switch.",
+      "required": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
+    },
+    "transition": {
+      "type": "Transition$1",
+      "description": "Motion transition settings.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to be used in the checkbox input.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"thin\" | \"thick\"",
+      "defaultValue": "\"thick\"",
+      "description": "The variant of the Switch.",
+      "required": false
+    }
   }
 }

@@ -17,7 +17,7 @@ tab: Props
 <PropsCard
   id="multiselect-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -78,7 +78,7 @@ tab: Props
 <PropsCard
   id="multiselect-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -86,9 +86,9 @@ tab: Props
   id="multiselect-component"
   name="component"
   type="FC<{
-  value: string | number
-  label: string
   index: number
+  label: string
+  value: string
   onRemove: MouseEventHandler<HTMLElement>
 }>"
   description={"The custom display value to use."}
@@ -134,7 +134,7 @@ tab: Props
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  | { resize?: boolean | undefined; scroll?: boolean | undefined }"
   description={
     "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
   }
@@ -412,7 +412,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the MultiSelect."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -433,7 +433,7 @@ tab: Props
 <PropsCard
   id="multiselect-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the MultiSelect."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />

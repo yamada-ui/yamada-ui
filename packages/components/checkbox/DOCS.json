@@ -1,346 +1,346 @@
 {
+  "CheckboxIcon": {
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"svg\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"view\"",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the icon will be checked.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
+    "isIndeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the icon will be indeterminate.",
+      "required": false
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    }
+  },
   "Checkbox": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be initially checked."
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
     },
     "iconProps": {
-      "type": "Omit<HTMLUIProps<\"span\">, \"children\"> & {\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n}",
-      "required": false,
-      "description": "Props for icon component."
+      "type": "{\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n} & Omit<HTMLUIProps<\"span\">, \"children\">",
+      "description": "Props for icon component.",
+      "required": false
     },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "id assigned to input."
+      "description": "id assigned to input.",
+      "required": false
     },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
-      "required": false,
-      "description": "Props for input element."
+      "description": "Props for input element.",
+      "required": false
     },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be checked."
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be indeterminate."
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "labelProps": {
       "type": "HTMLUIProps<\"span\">",
-      "required": false,
-      "description": "Props for label element."
+      "description": "Props for label element.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
     },
     "onBlur": {
       "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is blurred."
+      "description": "The callback invoked when the checkbox is blurred.",
+      "required": false
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checked state changes."
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
     },
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is focused."
+      "description": "The callback invoked when the checkbox is focused.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Checkbox."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Checkbox.",
+      "required": false
     },
     "tabIndex": {
       "type": "number",
-      "required": false,
-      "description": "The tab-index property of the underlying input element."
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value to be used in the checkbox input."
+      "description": "The value to be used in the checkbox input.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Checkbox."
-    }
-  },
-  "CheckboxIcon": {
-    "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"label\" | \"form\" | \"style\" | \"title\" | \"animate\" | \"svg\" | \"a\" | \"abbr\" | \"address\" | \"area\" | ... 149 more ... | \"view\"",
-      "required": false,
-      "description": "The HTML element to render."
-    },
-    "isChecked": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the icon will be checked."
-    },
-    "isDisabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
-    },
-    "isIndeterminate": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the icon will be indeterminate."
-    },
-    "isInvalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
-    },
-    "isReadOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
-    },
-    "isRequired": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "The variant of the Checkbox.",
+      "required": false
     }
   },
   "UseCheckbox": {
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be initially checked."
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
     },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "id assigned to input."
+      "description": "id assigned to input.",
+      "required": false
     },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be checked."
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox will be indeterminate."
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
     },
     "onBlur": {
       "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is blurred."
+      "description": "The callback invoked when the checkbox is blurred.",
+      "required": false
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checked state changes."
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
     },
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checkbox is focused."
+      "description": "The callback invoked when the checkbox is focused.",
+      "required": false
     },
     "tabIndex": {
       "type": "number",
-      "required": false,
-      "description": "The tab-index property of the underlying input element."
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value to be used in the checkbox input."
+      "description": "The value to be used in the checkbox input.",
+      "required": false
     }
   },
   "CheckboxGroup": {
     "align": {
       "type": "UIValue<AlignItems>",
-      "required": false,
-      "description": "The CSS `align-items` property."
+      "description": "The CSS `align-items` property.",
+      "required": false
     },
     "basis": {
-      "type": "UIValue<number | \"content\" | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"auto\" | \"max\" | \"min\" | \"1\" | \"2\" | \"3\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | ... 67 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `flex-basis` property."
+      "type": "UIValue<number | \"content\" | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"auto\" | \"max\" | \"min\" | \"1\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | ... 68 more ... | \"xs\">",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
     },
     "defaultValue": {
       "type": "Y[]",
-      "required": false,
-      "description": "The initial value of the checkbox group."
+      "description": "The initial value of the checkbox group.",
+      "required": false
     },
     "direction": {
       "type": "UIValue<FlexDirection>",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
+      "description": "The CSS `flex-direction` property.",
+      "required": false
     },
     "grow": {
       "type": "UIValue<FlexGrow>",
-      "required": false,
-      "description": "The CSS `flex-grow` property."
+      "description": "The CSS `flex-grow` property.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "items": {
       "type": "CheckboxItem<Y>[]",
       "defaultValue": "'[]'",
-      "required": false,
-      "description": "If provided, generate checkboxes based on items."
+      "description": "If provided, generate checkboxes based on items.",
+      "required": false
     },
     "justify": {
       "type": "UIValue<JustifyContent>",
-      "required": false,
-      "description": "The CSS `justify-content` property."
+      "description": "The CSS `justify-content` property.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y[]) => void",
-      "required": false,
-      "description": "The callback fired when any children checkbox is checked or unchecked."
+      "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
     },
     "shrink": {
       "type": "UIValue<FlexShrink>",
-      "required": false,
-      "description": "The CSS `flex-shrink` property."
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
     },
     "value": {
       "type": "Y[]",
-      "required": false,
-      "description": "The value of the checkbox group."
+      "description": "The value of the checkbox group.",
+      "required": false
     },
     "wrap": {
       "type": "UIValue<FlexWrap>",
-      "required": false,
-      "description": "The CSS `flex-wrap` property."
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
     }
   },
   "UseCheckboxGroup": {
     "defaultValue": {
       "type": "Y[]",
-      "required": false,
-      "description": "The initial value of the checkbox group."
+      "description": "The initial value of the checkbox group.",
+      "required": false
     },
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y[]) => void",
-      "required": false,
-      "description": "The callback fired when any children checkbox is checked or unchecked."
+      "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
     },
     "value": {
       "type": "Y[]",
-      "required": false,
-      "description": "The value of the checkbox group."
+      "description": "The value of the checkbox group.",
+      "required": false
     }
   }
 }

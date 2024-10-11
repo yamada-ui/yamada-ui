@@ -93,6 +93,12 @@ export const attributes = {
    */
   _nativeHidden: "&[hidden]",
   /**
+   * The CSS `[data-not-allowed]` attribute selector.
+   *
+   * - `[data-not-allowed]`
+   */
+  _notAllowed: "&[data-not-allowed]",
+  /**
    * The CSS `:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",

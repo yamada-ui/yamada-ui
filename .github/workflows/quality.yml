@@ -65,6 +65,10 @@ jobs:
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
+      - name: Install browser for Playwright
+        if: steps.check-modified.outputs.changed == 'true'
+        uses: ./.github/composite-actions/install-playwright-browser
+
       - name: Run tests
         if: steps.check-modified.outputs.changed == 'true'
         run: pnpm test:ci

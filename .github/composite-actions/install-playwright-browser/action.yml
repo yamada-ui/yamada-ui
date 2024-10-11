@@ -1,0 +1,38 @@
+name: "Install Browser for Playwright"
+description: "Installs a browser for Playwright"
+
+inputs:
+  playwright_browser:
+    description: "The browser to install"
+    required: false
+    default: "chromium"
+
+runs:
+  using: composite
+  steps:
+    - name: Get Playwright version for browser cache key
+      id: get-playwright-version
+      run: |
+        echo "playwright-version=$(pnpm playwright --version | awk '{print $2}')" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Restore cache browser for Playwright
+      id: restore-cache-playwright-browser
+      uses: actions/cache@v4
+      path: /home/runner/.cache/ms-playwright
+      key: playwright-${PLAYWRIGHT_BROWSER}-${{ steps.get-playwright-version.outputs.playwright-version }}
+      env:
+        PLAYWRIGHT_BROWSER: ${{ inputs.playwright_browser }}
+
+    - name: Install browser for Playwright
+      run: pnpm exec playwright install ${PLAYWRIGHT_BROWSER}
+      if: ${{ steps.restore-cache-playwright-browser.outputs.cache-hit != 'true' }}
+      env:
+        PLAYWRIGHT_BROWSER: ${{ inputs.playwright_browser }}
+
+    - name: Save cache – browser for Playwright
+      id: save-cache-playwright-browser
+      uses: actions/cache@v4
+      with:
+        path: /home/runner/.cache/ms-playwright
+        key: ${{ steps.restore-cache-playwright-browser.outputs.cache-primary-key }}

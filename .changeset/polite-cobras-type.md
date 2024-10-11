@@ -2,4 +2,4 @@
 "@yamada-ui/tag": patch
 ---
 
-add displayName and **ui** to tag component.
+add `displayName` and `__ui__` to tag component.

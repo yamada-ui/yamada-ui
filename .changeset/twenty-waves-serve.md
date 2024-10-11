@@ -2,4 +2,4 @@
 "@yamada-ui/editable": patch
 ---
 
-Set displayname and ui after each component definition
+Set `displayName` and `__ui__` after each component definition

@@ -2,4 +2,4 @@
 "@yamada-ui/pin-input": patch
 ---
 
-add displayName to PinInput
+Add `displayName` to `PinInput` component.

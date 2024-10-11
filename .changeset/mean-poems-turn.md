@@ -2,4 +2,4 @@
 "@yamada-ui/file-button": patch
 ---
 
-add displayName and **ui** properties
+add `displayName` and `__ui__` properties

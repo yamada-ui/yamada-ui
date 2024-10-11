@@ -2,4 +2,4 @@
 "@yamada-ui/fontawesome": patch
 ---
 
-add displayName to Icon Component
+add `displayName` to Icon Component

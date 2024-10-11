@@ -38,4 +38,4 @@ runs:
       uses: actions/cache@v4
       with:
         path: /home/runner/.cache/ms-playwright
-        key: ${{ steps.restore-cache-playwright-browser.outputs.cache-primary-key }}
+        key: playwright-${PLAYWRIGHT_BROWSER}-${{ steps.get-playwright-version.outputs.playwright-version }}

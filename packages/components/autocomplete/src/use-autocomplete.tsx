@@ -8,6 +8,7 @@ import type {
   FocusEvent,
   KeyboardEvent,
   MouseEvent,
+  ReactElement,
 } from "react"
 import type { AutocompleteOptionProps } from "./autocomplete-option"
 import type { AutocompleteOptionGroupProps } from "./autocomplete-option-group"
@@ -31,6 +32,7 @@ import {
   mergeRefs,
   pickObject,
   splitObject,
+  useSafeLayoutEffect,
   useUnmountEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
@@ -42,12 +44,6 @@ import {
 } from "./autocomplete-context"
 import { AutocompleteOption } from "./autocomplete-option"
 import { AutocompleteOptionGroup } from "./autocomplete-option-group"
-
-export interface ChangeOptions {
-  forceUpdate?: boolean
-  runOmit?: boolean
-  runRebirth?: boolean
-}
 
 interface AutocompleteItemWithValue extends AutocompleteOptionProps {
   label?: string
@@ -63,6 +59,8 @@ interface AutocompleteItemWithItems
 export type AutocompleteItem =
   | AutocompleteItemWithItems
   | AutocompleteItemWithValue
+
+type MaybeValue = string | string[]
 
 const kanaMap: { [key: string]: string } = {
   "｡": "。",
@@ -200,7 +198,9 @@ const flattenItems = (
   return filterItems(items).flat(Infinity) as AutocompleteItemWithValue[]
 }
 
-type UseAutocompleteBaseProps<T extends string | string[] = string> = {
+interface UseAutocompleteBaseProps<T extends MaybeValue = string>
+  extends ComboBoxProps,
+    FormControlOptions {
   /**
    * If `true`, enables the creation of autocomplete option.
    *
@@ -271,21 +271,21 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = {
    * The callback invoked when search input.
    */
   onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
-} & ComboBoxProps &
-  FormControlOptions
+}
 
-export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
-  HTMLUIProps<"input">,
-  | "disabled"
-  | "list"
-  | "readOnly"
-  | "required"
-  | "size"
-  | keyof UseAutocompleteBaseProps
-> &
-  UseAutocompleteBaseProps<T>
+export interface UseAutocompleteProps<T extends MaybeValue = string>
+  extends Omit<
+      HTMLUIProps<"input">,
+      | "disabled"
+      | "list"
+      | "readOnly"
+      | "required"
+      | "size"
+      | keyof UseAutocompleteBaseProps
+    >,
+    UseAutocompleteBaseProps<T> {}
 
-export const useAutocomplete = <T extends string | string[] = string>(
+export const useAutocomplete = <T extends MaybeValue = string>(
   props: UseAutocompleteProps<T>,
 ) => {
   const {
@@ -405,29 +405,35 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
   const computedChildren = useMemo(
     () =>
-      resolvedItems?.map((item, i) => {
-        if ("value" in item) {
-          const { label, value, ...props } = item
+      resolvedItems
+        ?.map((item, index) => {
+          if ("value" in item) {
+            const { label, value, ...props } = item
 
-          return (
-            <AutocompleteOption key={i} value={value} {...props}>
-              {label}
-            </AutocompleteOption>
-          )
-        } else if ("items" in item) {
-          const { items = [], label, ...props } = item
+            return (
+              <AutocompleteOption key={index} value={value} {...props}>
+                {label}
+              </AutocompleteOption>
+            )
+          } else if ("items" in item) {
+            const { items = [], label, ...props } = item
 
-          return (
-            <AutocompleteOptionGroup key={i} label={label as string} {...props}>
-              {items.map(({ label, value, ...props }, i) => (
-                <AutocompleteOption key={i} value={value} {...props}>
-                  {label}
-                </AutocompleteOption>
-              ))}
-            </AutocompleteOptionGroup>
-          )
-        }
-      }),
+            return (
+              <AutocompleteOptionGroup
+                key={index}
+                label={label as string}
+                {...props}
+              >
+                {items.map(({ label, value, ...props }, index) => (
+                  <AutocompleteOption key={index} value={value} {...props}>
+                    {label}
+                  </AutocompleteOption>
+                ))}
+              </AutocompleteOptionGroup>
+            )
+          }
+        })
+        .filter(Boolean) as ReactElement[] | undefined,
     [resolvedItems],
   )
 
@@ -651,70 +657,39 @@ export const useAutocomplete = <T extends string | string[] = string>(
     [descendants, onFocusFirst],
   )
 
-  const getSelectedValues = useCallback(
-    (newValues: string | string[]) => {
-      const enabledValues = descendants.enabledValues()
+  const onChangeLabel = useCallback(
+    (newValue: MaybeValue) => {
+      const values = descendants.values()
 
-      const resolvedValues = isArray(newValues) ? newValues : [newValues]
+      if (!values.length) return
 
-      const selectedValues = resolvedValues
+      const resolvedValues = isArray(newValue) ? newValue : [newValue]
+
+      const selectedLabel = resolvedValues
         .map((value) => {
           const { node } =
-            enabledValues.find(({ node }) => node.dataset.value === value) ?? {}
+            values.find(({ node }) => node.dataset.value === value) ?? {}
 
           if (node) {
-            const el = Array.from(node.children).find(
-              (child) => child.getAttribute("data-label") !== null,
-            )
+            const { textContent } =
+              Array.from(node.children).find(
+                (child) => child.getAttribute("data-label") !== null,
+              ) ?? {}
 
-            return el?.textContent ?? undefined
+            return textContent
           } else {
             return allowFree ? value : undefined
           }
         })
-        .filter(Boolean) as string[]
+        .filter((label) => !isUndefined(label))
 
-      return selectedValues
+      setLabel((!isMulti ? selectedLabel[0] : selectedLabel) as T)
     },
-    [allowFree, descendants],
-  )
-
-  const onChangeLabel = useCallback(
-    (newValue: string, { forceUpdate, runOmit = true }: ChangeOptions = {}) => {
-      const selectedValues = getSelectedValues(newValue)
-
-      if (!forceUpdate && !selectedValues.length) return
-
-      setLabel((prev) => {
-        if (!isMulti) {
-          return selectedValues[0] as T
-        } else {
-          selectedValues.forEach((selectedValue) => {
-            const isSelected = isArray(prev) && prev.includes(selectedValue)
-
-            if (!isSelected) {
-              prev = [...(isArray(prev) ? prev : []), selectedValue] as T
-            } else if (runOmit) {
-              prev = (
-                isArray(prev)
-                  ? prev.filter((value) => value !== selectedValue)
-                  : undefined
-              ) as T
-            }
-          })
-
-          return prev
-        }
-      })
-    },
-    [getSelectedValues, isMulti],
+    [allowFree, descendants, isMulti],
   )
 
   const onChange = useCallback(
-    (
-      newValue: string,
-      { forceUpdate, runRebirth = true }: ChangeOptions = {},
-    ) => {
+    (newValue: string, runRebirth = true) => {
       setValue((prev) => {
         let next: T
 
@@ -731,6 +706,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
         }
 
         prevValue.current = next
+
         return next
       })
 
@@ -741,16 +717,14 @@ export const useAutocomplete = <T extends string | string[] = string>(
             format(node.textContent ?? "").includes(newValue),
           ).length > 0
 
-      onChangeLabel(newValue, { forceUpdate })
-
-      if (allowFree || isHit) setInputValue("")
+      if (allowCreate || allowFree || isHit) setInputValue("")
 
       if (isMulti && runRebirth) rebirthOptions(false)
     },
     [
       allowFree,
+      allowCreate,
       isMulti,
-      onChangeLabel,
       rebirthOptions,
       setValue,
       descendants,
@@ -896,7 +870,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
       if (!closeOnBlur && isHit) return
 
-      if (allowFree && !!inputValue) onChange(inputValue, { runRebirth: false })
+      if (allowFree && !!inputValue) onChange(inputValue, false)
 
       setInputValue("")
 
@@ -907,7 +881,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
   const onDelete = useCallback(() => {
     if (!isMulti) {
-      onChange("", { forceUpdate: true })
+      onChange("")
     } else {
       onChange(value[value.length - 1]!)
     }
@@ -1034,20 +1008,9 @@ export const useAutocomplete = <T extends string | string[] = string>(
     maxSelectValues,
   ])
 
-  useEffect(() => {
-    if (isMulti) {
-      if (JSON.stringify(prevValue.current ?? []) === JSON.stringify(value))
-        return
-
-      const label = getSelectedValues(value)
-
-      setLabel(label as T)
-    } else {
-      if (prevValue.current === value) return
-
-      onChangeLabel(value, { runOmit: false })
-    }
-  }, [isMulti, value, onChangeLabel, getSelectedValues])
+  useSafeLayoutEffect(() => {
+    onChangeLabel(value)
+  }, [value])
 
   useUpdateEffect(() => {
     if (isOpen || allowFree) return
@@ -1165,8 +1128,8 @@ export const useAutocomplete = <T extends string | string[] = string>(
     id,
     allowCreate,
     allowFree,
+    children: children ?? computedChildren,
     closeOnSelect,
-    computedChildren,
     descendants,
     emptyMessage,
     focusedIndex,
@@ -1190,7 +1153,6 @@ export const useAutocomplete = <T extends string | string[] = string>(
     inputProps: inputProps as DOMAttributes<HTMLInputElement>,
     optionProps,
     onChange,
-    onChangeLabel,
     onClear,
     onClose,
     onCompositionEnd,

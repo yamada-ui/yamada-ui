@@ -4,7 +4,8 @@ import type { ReactNode } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
-import { useSelectContext, useSelectList } from "./use-select"
+import { useSelectContext } from "./use-select"
+import { useSelectList } from "./use-select-list"
 
 export interface SelectListProps extends HTMLUIProps<"ul"> {
   footer?: ReactNode
@@ -31,7 +32,6 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
     ref,
   ) => {
     const { styles } = useSelectContext()
-
     const { getListProps } = useSelectList()
 
     width ??= w

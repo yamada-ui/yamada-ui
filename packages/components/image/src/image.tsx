@@ -1,34 +1,34 @@
-import type { HTMLUIProps, CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIProps, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { ReactElement } from "react"
+import type { UseImageProps } from "./use-image"
 import {
-  ui,
   forwardRef,
-  useComponentStyle,
   omitThemeProps,
+  ui,
+  useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { ReactElement } from "react"
 import { isValidElement, useMemo } from "react"
-import type { UseImageProps } from "./use-image"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
 interface ImageOptions {
-  /**
-   * Fallback image `src` or element to show if image is loading or image fails.
-   */
-  fallback?: string | ReactElement
-  /**
-   * - beforeLoadOrError: loads the fallbackImage while loading the src.
-   * - onError: loads the fallbackImage only if there is an error fetching the src.
-   *
-   * @default "beforeLoadOrError"
-   */
-  fallbackStrategy?: "onError" | "beforeLoadOrError"
   /**
    * The CSS `box-size` property.
    *
    * @deprecated Use `boxSize` instead.
    */
   size?: CSSUIProps["boxSize"]
+  /**
+   * Fallback image `src` or element to show if image is loading or image fails.
+   */
+  fallback?: ReactElement | string
+  /**
+   * - beforeLoadOrError: loads the fallbackImage while loading the src.
+   * - onError: loads the fallbackImage only if there is an error fetching the src.
+   *
+   * @default "beforeLoadOrError"
+   */
+  fallbackStrategy?: "beforeLoadOrError" | "onError"
   /**
    * The CSS `object-fit` property.
    */
@@ -49,19 +49,19 @@ export interface ImageProps
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   const [styles, { size, ...mergedProps }] = useComponentStyle("Image", props)
   let {
-    boxSize,
-    fit: objectFit,
-    fallback,
     src,
     srcSet,
-    loading,
-    ignoreFallback,
-    crossOrigin,
     className,
+    boxSize,
+    crossOrigin,
+    fallback,
     fallbackStrategy = "beforeLoadOrError",
+    fit: objectFit,
+    ignoreFallback,
+    loading,
+    referrerPolicy,
     onError,
     onLoad,
-    referrerPolicy,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -84,8 +84,8 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       return (
         <ui.img
           ref={ref}
-          className={cx("ui-image--fallback", className)}
           src={fallback as string | undefined}
+          className={cx("ui-image--fallback", className)}
           __css={css}
           {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
         />
@@ -98,12 +98,15 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       ref={ref}
       src={src}
       srcSet={srcSet}
+      className={cx("ui-image", className)}
       crossOrigin={crossOrigin}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      className={cx("ui-image", className)}
       __css={css}
       {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
     />
   )
 })
+
+Image.displayName = "Image"
+Image.__ui__ = "Image"

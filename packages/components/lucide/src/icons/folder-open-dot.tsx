@@ -1,7 +1,7 @@
+import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
 import { FolderOpenDot as FolderOpenDotIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
-import type { LucideIconProps } from "../lucide-icon"
 
 /**
  * `FolderOpenDot` is [Lucide](https://lucide.dev) SVG icon component.

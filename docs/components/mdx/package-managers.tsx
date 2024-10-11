@@ -1,26 +1,26 @@
-import { Box, Tab, Tabs, isArray, isObject } from "@yamada-ui/react"
 import type { BoxProps, StringLiteral } from "@yamada-ui/react"
+import type { FC } from "react"
+import { Box, isArray, isObject, Tab, Tabs } from "@yamada-ui/react"
+import { CopyButton } from "components/forms"
 import { themes } from "prism-react-renderer"
 import { useState } from "react"
-import type { FC } from "react"
 import { Highlight } from "./code-block"
-import { CopyButton } from "components/forms"
 
-type PackageMangerNames = "pnpm" | "npm" | "yarn" | "bun"
+type PackageMangerNames = "bun" | "npm" | "pnpm" | "yarn"
 
 const PACKAGE_MANAGER_COMMANDS: { [_key in PackageMangerNames]: string } = {
-  pnpm: "pnpm add",
-  npm: "npm install",
-  yarn: "yarn add",
   bun: "bun install",
+  npm: "npm install",
+  pnpm: "pnpm add",
+  yarn: "yarn add",
 }
 
 const getCode = (
   selectedPackageName: PackageMangerNames & StringLiteral,
   packageNameOrCommand:
+    | { [_key in PackageMangerNames]: string }
     | string
-    | string[]
-    | { [_key in PackageMangerNames]: string },
+    | string[],
 ): string => {
   if (isObject(packageNameOrCommand) && !isArray(packageNameOrCommand)) {
     return packageNameOrCommand[selectedPackageName]
@@ -38,9 +38,9 @@ const getCode = (
 
 export interface PackageManagersProps extends BoxProps {
   packageNameOrCommand:
+    | { [_key in PackageMangerNames]: string }
     | string
     | string[]
-    | { [_key in PackageMangerNames]: string }
 }
 
 export const PackageManagers: FC<PackageManagersProps> = ({
@@ -54,25 +54,25 @@ export const PackageManagers: FC<PackageManagersProps> = ({
   const theme = themes.nightOwl
 
   return (
-    <Box position="relative" my="6" {...rest}>
+    <Box my="6" position="relative" {...rest}>
       <Box
-        rounded="md"
-        bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div:last-child": { py: "6" } }}
+        bg={["neutral.800", "neutral.900"]}
         overflow="hidden"
+        rounded="md"
       >
         <Tabs bg={["whiteAlpha.200", "whiteAlpha.100"]}>
           {Object.keys(PACKAGE_MANAGER_COMMANDS).map((name) => (
             <Tab
               key={name}
-              fontSize="xs"
               color={["whiteAlpha.700", "whiteAlpha.600"]}
+              fontSize="xs"
+              _focusVisible={{ bg: "whiteAlpha.50" }}
               _selected={{
-                color: ["white", "white"],
                 borderColor: [`primary.500`, `primary.400`],
+                color: ["white", "white"],
               }}
               onClick={() => setSelectedPackageName(name as PackageMangerNames)}
-              _focusVisible={{ bg: "whiteAlpha.50" }}
             >
               {name}
             </Tab>
@@ -82,7 +82,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({
         <Highlight {...{ code, language, theme }} />
       </Box>
 
-      <CopyButton value={code} position="absolute" top="3.3rem" right="4" />
+      <CopyButton position="absolute" right="4" top="3.3rem" value={code} />
     </Box>
   )
 }

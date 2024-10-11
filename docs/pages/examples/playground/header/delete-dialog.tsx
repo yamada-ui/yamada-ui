@@ -1,7 +1,7 @@
-import { Dialog, Text, assignRef, useDisclosure } from "@yamada-ui/react"
 import type { DialogProps } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
+import { assignRef, Dialog, Text, useDisclosure } from "@yamada-ui/react"
+import { memo } from "react"
 
 export interface DeleteDialogProps
   extends Omit<DialogProps, "isOpen" | "onClose"> {
@@ -10,19 +10,19 @@ export interface DeleteDialogProps
 
 export const DeleteDialog: FC<DeleteDialogProps> = memo(
   ({ onOpenRef, ...rest }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onClose, onOpen } = useDisclosure()
 
     assignRef(onOpenRef, onOpen)
 
     return (
       <Dialog
         size="xl"
-        isOpen={isOpen}
-        onClose={onClose}
-        header="Are you absolutely sure?"
         cancel="Cancel"
-        onCancel={onClose}
+        header="Are you absolutely sure?"
+        isOpen={isOpen}
         success={{ colorScheme: "danger", children: "Delete" }}
+        onCancel={onClose}
+        onClose={onClose}
         onSuccess={onClose}
         {...rest}
       >

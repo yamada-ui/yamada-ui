@@ -1,45 +1,51 @@
-import { layoutStyleProperties } from "@yamada-ui/core"
 import type {
   CSSUIObject,
-  ThemeProps,
   HTMLUIProps,
   PropGetter,
+  ThemeProps,
 } from "@yamada-ui/core"
+import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
+import type { ColorFormat } from "@yamada-ui/utils"
+import type {
+  ChangeEvent,
+  CSSProperties,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+} from "react"
+import type { ColorSelectorProps } from "./color-selector"
+import type { UseColorSelectorBaseProps } from "./use-color-selector"
+import { layoutStyleProperties } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { ColorFormat } from "@yamada-ui/utils"
 import {
+  calcFormat,
+  convertColor,
   createContext,
   dataAttr,
+  getEventRelatedTarget,
   handlerAll,
+  isContains,
   mergeRefs,
   pickObject,
   splitObject,
-  getEventRelatedTarget,
-  isContains,
-  convertColor,
-  calcFormat,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react"
 import { useCallback, useRef, useState } from "react"
-import type { ColorSelectorProps } from "./color-selector"
-import type { UseColorSelectorBaseProps } from "./use-color-selector"
 
 const defaultFormatInput = (value: string) => value
 
 type ColorSelectorThemeProps = ThemeProps<"ColorSelector">
 
 interface ColorPickerContext {
+  styles: { [key: string]: CSSUIObject | undefined }
   value: string
-  styles: { [key: string]: CSSUIObject }
 }
 
 export const [ColorPickerProvider, useColorPickerContext] =
@@ -50,25 +56,35 @@ export const [ColorPickerProvider, useColorPickerContext] =
 
 interface UseColorPickerOptions {
   /**
-   * The initial value of the color selector.
-   */
-  defaultColor?: string
-  /**
    * If `true`, allows input.
    *
    * @default true
    */
   allowInput?: boolean
   /**
+   * If `true`, the color swatch will be closed when value is selected.
+   */
+  closeOnSelectSwatch?: boolean
+  /**
+   * ColorScheme for the color selector component.
+   */
+  colorSelectorColorScheme?: ColorSelectorThemeProps["colorScheme"]
+  /**
+   * Size for the color selector component.
+   */
+  colorSelectorSize?: ColorSelectorThemeProps["size"]
+  /**
+   * Variant for the color selector component.
+   */
+  colorSelectorVariant?: ColorSelectorThemeProps["variant"]
+  /**
+   * The initial value of the color selector.
+   */
+  defaultColor?: string
+  /**
    * A callback function to format the input entered.
    */
   formatInput?: (value: string) => string
-  /**
-   * If `true`, display the result component.
-   *
-   * @default false
-   */
-  withResult?: boolean
   /**
    * If `true` display the eye dropper component.
    *
@@ -76,21 +92,11 @@ interface UseColorPickerOptions {
    */
   withColorSelectorEyeDropper?: boolean
   /**
-   * If `true`, the color swatch will be closed when value is selected.
+   * If `true`, display the result component.
+   *
+   * @default false
    */
-  closeOnSelectSwatch?: boolean
-  /**
-   * Variant for the color selector component.
-   */
-  colorSelectorVariant?: ColorSelectorThemeProps["variant"]
-  /**
-   * Size for the color selector component.
-   */
-  colorSelectorSize?: ColorSelectorThemeProps["size"]
-  /**
-   * ColorScheme for the color selector component.
-   */
-  colorSelectorColorScheme?: ColorSelectorThemeProps["colorScheme"]
+  withResult?: boolean
   /**
    * Props for color selector component.
    */
@@ -100,78 +106,82 @@ interface UseColorPickerOptions {
 export interface UseColorPickerProps
   extends Omit<
       HTMLUIProps<"input">,
-      | "size"
-      | "offset"
-      | "value"
-      | "defaultValue"
-      | "onChange"
       | "animation"
       | "children"
+      | "defaultValue"
+      | "offset"
+      | "onChange"
+      | "size"
+      | "value"
     >,
     Omit<UseColorSelectorBaseProps, "id" | "name">,
     ComboBoxProps,
     Pick<
       ColorSelectorProps,
-      | "withPicker"
-      | "withChannel"
-      | "swatchesLabel"
       | "swatches"
       | "swatchesColumns"
+      | "swatchesLabel"
+      | "withChannel"
+      | "withPicker"
     >,
     UseColorPickerOptions {}
 
 export const useColorPicker = (props: UseColorPickerProps) => {
   const {
-    value: valueProp,
-    defaultValue,
-    fallbackValue,
-    defaultColor,
-    onChange: onChangeProp,
-    onChangeStart,
-    onChangeEnd,
-    onSwatchClick,
-    formatInput = defaultFormatInput,
     allowInput = true,
-    closeOnSelectSwatch,
-    format,
-    swatchesLabel,
-    swatches,
-    swatchesColumns,
-    withPicker,
-    withChannel,
-    withResult = false,
-    withColorSelectorEyeDropper = false,
-    colorSelectorVariant,
-    colorSelectorSize,
-    colorSelectorColorScheme,
-    isOpen: isOpenProp,
-    defaultIsOpen,
-    onOpen: onOpenProp,
-    onClose: onCloseProp,
+    animation,
+    boundary,
+    closeDelay,
     closeOnBlur = true,
     closeOnEsc = true,
-    openDelay,
-    closeDelay,
-    isLazy,
-    lazyBehavior,
-    animation,
+    closeOnSelectSwatch,
+    colorSelectorColorScheme,
+    colorSelectorSize,
+    colorSelectorVariant,
+    defaultColor,
+    defaultIsOpen,
+    defaultValue,
     duration = 0.2,
-    offset,
-    gutter,
-    preventOverflow,
-    flip,
-    matchWidth = colorSelectorSize === "full",
-    boundary,
     eventListeners,
-    strategy,
-    placement = "bottom-start",
+    fallbackValue,
+    flip,
+    format,
+    formatInput = defaultFormatInput,
+    gutter,
+    isLazy,
+    isOpen: isOpenProp,
+    lazyBehavior,
+    matchWidth = colorSelectorSize === "full",
     modifiers,
+    offset,
+    openDelay,
+    placement = "bottom-start",
+    preventOverflow,
+    strategy,
+    swatches,
+    swatchesColumns,
+    swatchesLabel,
+    value: valueProp,
+    withChannel,
+    withColorSelectorEyeDropper = false,
+    withPicker,
+    withResult = false,
+    onChange: onChangeProp,
+    onChangeEnd,
+    onChangeStart,
+    onClick,
+    onClose: onCloseProp,
+    onKeyDown,
+    onOpen: onOpenProp,
+    onSwatchClick,
     ...rest
   } = useFormControlProps(props)
-  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
-    rest,
-    formControlProperties,
-  )
+  const {
+    "aria-readonly": _ariaReadonly,
+    onBlur,
+    onFocus,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
   const { disabled, readOnly } = formControlProps
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
 
@@ -181,24 +191,24 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const { supported: eyeDropperSupported, onOpen: onEyeDropperOpen } =
     useEyeDropper()
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const formatRef = useRef<ColorFormat>(
-    format ?? calcFormat(value ?? defaultColor ?? ""),
+    format ?? calcFormat(value || defaultColor || ""),
   )
   const isInputFocused = useRef<boolean>(false)
-  const [inputValue, setInputValue] = useState<string>(value ?? "")
+  const [inputValue, setInputValue] = useState<string>(value || "")
   const {
     isOpen,
-    onOpen: onInternalOpen,
     onClose: onInternalClose,
+    onOpen: onInternalOpen,
   } = useDisclosure({
-    isOpen: isOpenProp,
     defaultIsOpen,
-    onOpen: onOpenProp,
+    isOpen: isOpenProp,
     onClose: onCloseProp,
+    onOpen: onOpenProp,
   })
 
   const onOpen = useCallback(() => {
@@ -265,9 +275,9 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       if (disabled || readOnly) return
 
       const actions: { [key: string]: Function | undefined } = {
-        Space: !isOpen ? onOpen : undefined,
         Enter: !isOpen ? onOpen : undefined,
         Escape: closeOnEsc ? onClose : undefined,
+        Space: !isOpen ? onOpen : undefined,
       }
 
       const action = actions[ev.key]
@@ -321,8 +331,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
   useOutsideClick({
     ref: containerRef,
-    handler: onClose,
     enabled: isOpen && closeOnBlur,
+    handler: onClose,
   })
 
   useUpdateEffect(() => {
@@ -346,29 +356,29 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
-      closeOnBlur,
-      openDelay,
+      animation,
+      boundary,
       closeDelay,
+      closeOnBlur,
+      duration,
+      eventListeners,
+      flip,
+      gutter,
       isLazy,
       lazyBehavior,
-      animation,
-      duration,
-      offset,
-      gutter,
-      preventOverflow,
-      flip,
       matchWidth,
-      boundary,
-      eventListeners,
-      strategy,
-      placement,
       modifiers,
+      offset,
+      openDelay,
+      placement,
+      preventOverflow,
+      strategy,
       ...props,
-      trigger: "never",
       closeOnButton: false,
       isOpen,
-      onOpen,
+      trigger: "never",
       onClose,
+      onOpen,
     }),
     [
       closeOnBlur,
@@ -400,47 +410,79 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ...containerProps,
       ...props,
       ...formControlProps,
-      onClick: handlerAll(props.onClick, rest.onClick, onContainerClick),
-      onBlur: handlerAll(props.onBlur, rest.onBlur, onContainerBlur),
+      onBlur: handlerAll(props.onBlur, onBlur, onContainerBlur),
+      onClick: handlerAll(props.onClick, onClick, onContainerClick),
     }),
-    [containerProps, formControlProps, onContainerBlur, onContainerClick, rest],
+    [
+      containerProps,
+      formControlProps,
+      onBlur,
+      onClick,
+      onContainerBlur,
+      onContainerClick,
+    ],
   )
 
-  const getFieldProps: PropGetter<"input"> = useCallback(
+  const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ref: mergeRefs(fieldRef, ref),
-      tabIndex: !allowInput ? -1 : 0,
-      ...inputProps,
-      ...props,
-      style: {
-        ...props.style,
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
-      },
-      value: inputValue,
-      "data-active": dataAttr(isOpen),
       "aria-expanded": dataAttr(isOpen),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onInputFocus),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onInputKeyDown),
-      onChange: handlerAll(props.onChange, onInputChange),
+      "data-active": dataAttr(isOpen),
+      "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
+      tabIndex: !allowInput ? -1 : 0,
+      ...formControlProps,
+      ...props,
+      ref: mergeRefs(fieldRef, ref),
       onBlur: handlerAll(props.onFocus, onInputBlur),
+      onFocus: handlerAll(props.onFocus, onFocus, onInputFocus),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onInputKeyDown),
     }),
     [
       allowInput,
-      inputProps,
-      inputValue,
+      formControlProps,
       isOpen,
-      rest,
-      onInputFocus,
-      onInputKeyDown,
-      onInputChange,
+      readOnly,
+      disabled,
       onInputBlur,
+      onFocus,
+      onInputFocus,
+      onKeyDown,
+      onInputKeyDown,
+    ],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    (props = {}, ref = null) => {
+      const style: CSSProperties = {
+        ...props.style,
+        ...inputProps.style,
+        ...(disabled || !allowInput ? { pointerEvents: "none" } : {}),
+      }
+
+      return {
+        tabIndex: !allowInput ? -1 : 0,
+        ...formControlProps,
+        ...inputProps,
+        ...props,
+        ref,
+        style,
+        value: inputValue,
+        onChange: handlerAll(props.onChange, onInputChange),
+      }
+    },
+    [
+      inputProps,
+      allowInput,
+      disabled,
+      formControlProps,
+      inputValue,
+      onInputChange,
     ],
   )
 
   const getEyeDropperProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
-      disabled,
       "aria-label": "Pick a color",
+      disabled,
       ...props,
       ref,
       style: { ...props.style, pointerEvents: readOnly ? "none" : undefined },
@@ -453,27 +495,27 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     (props) => ({
       ...formControlProps,
       ...props,
-      value,
+      colorScheme: colorSelectorColorScheme,
+      size: colorSelectorSize,
+      variant: colorSelectorVariant,
       defaultValue: defaultColor,
       fallbackValue,
+      format: formatRef.current,
+      swatches,
+      swatchesColumns,
+      swatchesLabel,
+      value,
+      withChannel,
+      withEyeDropper: withColorSelectorEyeDropper,
+      withPicker,
+      withResult,
       onChange: onColorSelectorChange,
-      onChangeStart,
       onChangeEnd,
+      onChangeStart,
       onSwatchClick: handlerAll(
         onSwatchClick,
         closeOnSelectSwatch ? onClose : undefined,
       ),
-      format: formatRef.current,
-      withPicker,
-      withChannel,
-      withResult,
-      withEyeDropper: withColorSelectorEyeDropper,
-      swatchesLabel,
-      swatches,
-      swatchesColumns,
-      variant: colorSelectorVariant,
-      size: colorSelectorSize,
-      colorScheme: colorSelectorColorScheme,
     }),
     [
       formControlProps,
@@ -501,15 +543,16 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
 
   return {
-    value,
-    eyeDropperSupported,
     allowInput,
-    onClose,
-    getPopoverProps,
+    eyeDropperSupported,
+    value,
     getContainerProps,
-    getFieldProps,
-    getSelectorProps,
     getEyeDropperProps,
+    getFieldProps,
+    getInputProps,
+    getPopoverProps,
+    getSelectorProps,
+    onClose,
   }
 }
 

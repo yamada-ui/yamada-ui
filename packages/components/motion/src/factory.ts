@@ -1,8 +1,8 @@
-import { styled } from "@yamada-ui/core"
 import type { StyledOptions } from "@yamada-ui/core"
-import { motion as _motion } from "framer-motion"
 import type { ComponentType } from "react"
 import type { MotionAs, MotionComponents, MotionFactory } from "./motion.types"
+import { styled } from "@yamada-ui/core"
+import { motion as _motion } from "framer-motion"
 
 interface Factory extends MotionFactory, MotionComponents {}
 

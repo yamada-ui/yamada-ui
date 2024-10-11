@@ -1,58 +1,46 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
-import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren, runIfFunc } from "@yamada-ui/utils"
-import type { FC, ReactElement, ReactNode } from "react"
-import type { OptionProps } from "./option"
-import { Option } from "./option"
-import type { OptionGroupProps } from "./option-group"
-import { OptionGroup } from "./option-group"
+import type { FC, ReactNode } from "react"
 import type { SelectIconProps } from "./select-icon"
-import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
-import { SelectList } from "./select-list"
 import type { UseSelectProps } from "./use-select"
 import {
-  useSelect,
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { Portal } from "@yamada-ui/portal"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import { Option } from "./option"
+import { SelectIcon } from "./select-icon"
+import { SelectList } from "./select-list"
+import {
   SelectDescendantsContextProvider,
   SelectProvider,
+  useSelect,
   useSelectContext,
 } from "./use-select"
 
-interface SelectItemWithValue extends OptionProps {
-  label?: ReactNode
-  value?: string
-}
-
-interface SelectItemWithItems extends OptionGroupProps {
-  items?: SelectItemWithValue[]
-}
-
-export type SelectItem = SelectItemWithValue | SelectItemWithItems
-
 interface SelectOptions {
   /**
-   * If provided, generate options based on items.
-   *
-   * @default '[]'
+   * The border color when the input is invalid.
    */
-  items?: SelectItem[]
+  errorBorderColor?: string
   /**
    * The border color when the input is focused.
    */
   focusBorderColor?: string
   /**
-   * The border color when the input is invalid.
+   * The footer of the select content element.
    */
-  errorBorderColor?: string
+  footer?: FC<{ value: string | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The header of the select content element.
+   */
+  header?: FC<{ value: string | undefined; onClose: () => void }> | ReactNode
   /**
    * Props for select container element.
    */
@@ -62,10 +50,6 @@ interface SelectOptions {
    */
   contentProps?: Omit<MotionProps, "children">
   /**
-   * Props for select list element.
-   */
-  listProps?: Omit<SelectListProps, "children">
-  /**
    * Props for select field element.
    */
   fieldProps?: Omit<SelectFieldProps, "children">
@@ -74,24 +58,23 @@ interface SelectOptions {
    */
   iconProps?: SelectIconProps
   /**
+   * Props for select list element.
+   */
+  listProps?: Omit<SelectListProps, "children">
+  /**
    * Props to be forwarded to the portal component.
    *
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
-  /**
-   * The header of the select content element.
-   */
-  header?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
-  /**
-   * The footer of the select content element.
-   */
-  footer?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
 }
 
-export type SelectProps = ThemeProps<"Select"> &
-  Omit<UseSelectProps, "isEmpty" | "maxSelectValues" | "omitSelectedValues"> &
-  SelectOptions
+export type SelectProps = Omit<
+  UseSelectProps,
+  "isEmpty" | "maxSelectValues" | "omitSelectedValues"
+> &
+  SelectOptions &
+  ThemeProps<"Select">
 
 /**
  * `Select` is a component used for allowing a user to choose one option from a list.
@@ -102,87 +85,50 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Select", props)
   let {
     className,
-    placeholder,
-    defaultValue = "",
-    placeholderInOptions = true,
-    items = [],
     color,
+    defaultValue = "",
+    footer,
     h,
+    header,
     height,
     minH,
     minHeight,
+    placeholder,
+    placeholderInOptions = true,
     containerProps,
     contentProps,
-    listProps,
     fieldProps,
     iconProps,
+    listProps,
     portalProps = { isDisabled: true },
-    header,
-    footer,
-    children,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
-  let computedChildren: ReactElement[] = []
-
-  if (!validChildren.length && items.length) {
-    computedChildren = items
-      .map((item, i) => {
-        if ("value" in item) {
-          const { label, value, ...props } = item
-
-          return (
-            <Option key={i} value={value} {...props}>
-              {label}
-            </Option>
-          )
-        } else if ("items" in item) {
-          const { label, items = [], ...props } = item
-
-          return (
-            <OptionGroup key={i} label={label ?? ""} {...props}>
-              {items.map(({ label, value, ...props }, i) => (
-                <Option key={i} value={value} {...props}>
-                  {label}
-                </Option>
-              ))}
-            </OptionGroup>
-          )
-        }
-      })
-      .filter(Boolean) as ReactElement[]
-  }
-
-  const isEmpty =
-    !validChildren.length &&
-    !computedChildren.length &&
-    !(!!placeholder && placeholderInOptions)
-
   const {
-    value,
-    onClose,
+    children,
     descendants,
+    isEmpty,
+    value,
     formControlProps,
-    getPopoverProps,
     getContainerProps,
     getFieldProps,
+    getPopoverProps,
+    onClose,
     ...rest
   } = useSelect({
     ...computedProps,
+    defaultValue,
     placeholder,
     placeholderInOptions,
-    defaultValue,
-    isEmpty,
   })
 
   h ??= height
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
+    h: "fit-content",
+    w: "100%",
     ...styles.container,
   }
 
@@ -191,11 +137,11 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
       <SelectProvider
         value={{
           ...rest,
-          value,
-          onClose,
           placeholder,
           placeholderInOptions,
           styles,
+          value,
+          onClose,
         }}
       >
         <Popover {...getPopoverProps()}>
@@ -222,8 +168,8 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
             {!isEmpty ? (
               <Portal {...portalProps}>
                 <SelectList
-                  header={runIfFunc(header, { value, onClose })}
                   footer={runIfFunc(footer, { value, onClose })}
+                  header={runIfFunc(header, { value, onClose })}
                   contentProps={contentProps}
                   {...listProps}
                 >
@@ -231,7 +177,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
                     <Option>{placeholder}</Option>
                   ) : null}
 
-                  {children ?? computedChildren}
+                  {children}
                 </SelectList>
               </Portal>
             ) : null}
@@ -248,15 +194,15 @@ Select.__ui__ = "Select"
 interface SelectFieldProps extends HTMLUIProps {}
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
-  ({ className, isTruncated = true, lineClamp, h, minH, ...rest }, ref) => {
+  ({ className, h, isTruncated = true, lineClamp, minH, ...rest }, ref) => {
     const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
       ...styles.field,
     }
 
@@ -268,11 +214,11 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
         {...rest}
       >
         <ui.span
-          isTruncated={isTruncated}
-          lineClamp={lineClamp}
           dangerouslySetInnerHTML={{
             __html: label ?? placeholder ?? "",
           }}
+          isTruncated={isTruncated}
+          lineClamp={lineClamp}
         />
       </ui.div>
     )

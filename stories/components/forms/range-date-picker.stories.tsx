@@ -1,20 +1,20 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import dayjs from "dayjs"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
-import { RangeDatePicker } from "@yamada-ui/calendar"
 import type { RangeDatePickerProps } from "@yamada-ui/calendar"
+import type { SubmitHandler } from "react-hook-form"
+import { RangeDatePicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
+import dayjs from "dayjs"
+import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof RangeDatePicker>
 
 const meta: Meta<typeof RangeDatePicker> = {
-  title: "Components / Forms / RangeDatePicker",
   component: RangeDatePicker,
+  title: "Components / Forms / RangeDatePicker",
 }
 
 export default meta
@@ -32,7 +32,7 @@ export const withChildren: Story = () => {
         </VStack>
       </RangeDatePicker>
 
-      <RangeDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+      <RangeDatePicker closeOnSelect={false} placeholder="YYYY/MM/DD">
         {({ value, onClose }) => (
           <VStack mt="sm">
             <Button isDisabled={!value} onClick={onClose}>
@@ -50,10 +50,10 @@ export const withChildren: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="xs" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="sm" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="md" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" size="lg" />
+      <RangeDatePicker size="xs" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="sm" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="md" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker size="lg" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -61,9 +61,9 @@ export const withSize: Story = () => {
 export const withCalendarSize: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="sm" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="md" />
-      <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="lg" />
+      <RangeDatePicker calendarSize="sm" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker calendarSize="md" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker calendarSize="lg" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -84,34 +84,34 @@ export const withColorScheme: Story = () => {
     <>
       <Heading size="xl">Solid</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <RangeDatePicker
             key={colorScheme}
-            calendarVariant="solid"
             calendarColorScheme={colorScheme}
-            today
+            calendarVariant="solid"
             defaultValue={[
               new Date(new Date().setDate(5)),
               new Date(new Date().setDate(15)),
             ]}
+            today
           />
         ))}
       </Grid>
 
       <Heading size="xl">Subtle</Heading>
 
-      <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+      <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
         {colorSchemes.map((colorScheme) => (
           <RangeDatePicker
             key={colorScheme}
-            calendarVariant="subtle"
             calendarColorScheme={colorScheme}
-            today
+            calendarVariant="subtle"
             defaultValue={[
               new Date(new Date().setDate(5)),
               new Date(new Date().setDate(15)),
             ]}
+            today
           />
         ))}
       </Grid>
@@ -133,11 +133,11 @@ export const withDefaultValue: Story = () => {
 export const withDefaultType: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="date" />
+      <RangeDatePicker defaultType="date" placeholder="YYYY/MM/DD" />
 
-      <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="month" />
+      <RangeDatePicker defaultType="month" placeholder="YYYY/MM/DD" />
 
-      <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="year" />
+      <RangeDatePicker defaultType="year" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -145,8 +145,8 @@ export const withDefaultType: Story = () => {
 export const withDefaultMonth: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       defaultMonth={new Date("1993-08-18")}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -154,9 +154,9 @@ export const withDefaultMonth: Story = () => {
 export const withFirstDayOfWeek: Story = () => {
   return (
     <>
-      <RangeDatePicker placeholder="YYYY/MM/DD" firstDayOfWeek="monday" />
+      <RangeDatePicker firstDayOfWeek="monday" placeholder="YYYY/MM/DD" />
 
-      <RangeDatePicker placeholder="YYYY/MM/DD" firstDayOfWeek="sunday" />
+      <RangeDatePicker firstDayOfWeek="sunday" placeholder="YYYY/MM/DD" />
     </>
   )
 }
@@ -169,8 +169,8 @@ export const withBorderColor: Story = () => {
       <RangeDatePicker focusBorderColor="green.500" placeholder="YYYY/MM/DD" />
 
       <RangeDatePicker
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="YYYY/MM/DD"
       />
     </>
@@ -192,24 +192,24 @@ export const withMinSelectedValue: Story = () => {
 export const withPattern: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="MMMM D, YYYY"
+      defaultValue={[new Date()]}
       inputFormat="MMMM D, YYYY"
       pattern={/[^\w, ]/g}
-      defaultValue={[new Date()]}
+      placeholder="MMMM D, YYYY"
     />
   )
 }
 
 export const withInputFormat: Story = () => {
-  return <RangeDatePicker placeholder="YYYY-MM-DD" inputFormat="YYYY-MM-DD" />
+  return <RangeDatePicker inputFormat="YYYY-MM-DD" placeholder="YYYY-MM-DD" />
 }
 
 export const withParseDate: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       inputFormat="YYYY/MM/DD"
       parseDate={(value) => new Date(value)}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -219,24 +219,24 @@ export const withPlacement: Story = () => {
 }
 
 export const withOffset: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" offset={[16, 16]} />
+  return <RangeDatePicker offset={[16, 16]} placeholder="YYYY/MM/DD" />
 }
 
 export const withGutter: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" gutter={32} />
+  return <RangeDatePicker gutter={32} placeholder="YYYY/MM/DD" />
 }
 
 export const withDuration: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" duration={0.4} />
+  return <RangeDatePicker duration={0.4} placeholder="YYYY/MM/DD" />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <RangeDatePicker isDisabled variant="outline" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isDisabled variant="filled" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isDisabled variant="flushed" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isDisabled variant="unstyled" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isDisabled placeholder="YYYY/MM/DD" />
 
       <FormControl isDisabled label="What date would you like to reserve?">
         <RangeDatePicker placeholder="YYYY/MM/DD" />
@@ -248,10 +248,10 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <RangeDatePicker isReadOnly variant="outline" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isReadOnly variant="filled" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isReadOnly variant="flushed" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isReadOnly variant="unstyled" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isReadOnly placeholder="YYYY/MM/DD" />
 
       <FormControl isReadOnly label="What date would you like to reserve?">
         <RangeDatePicker placeholder="YYYY/MM/DD" />
@@ -263,15 +263,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <RangeDatePicker isInvalid variant="outline" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isInvalid variant="filled" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isInvalid variant="flushed" placeholder="YYYY/MM/DD" />
-      <RangeDatePicker isInvalid variant="unstyled" placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" isInvalid placeholder="YYYY/MM/DD" />
 
       <FormControl
+        errorMessage="This is required."
         isInvalid
         label="What date would you like to reserve?"
-        errorMessage="This is required."
       >
         <RangeDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
@@ -282,9 +282,9 @@ export const isInvalid: Story = () => {
 export const withMinMaxDate: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
-      minDate={new Date(new Date().setDate(1))}
       maxDate={new Date(new Date().setDate(18))}
+      minDate={new Date(new Date().setDate(1))}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -292,10 +292,10 @@ export const withMinMaxDate: Story = () => {
 export const withAllowInputBeyond: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
-      minDate={new Date(new Date().setDate(1))}
-      maxDate={new Date(new Date().setDate(18))}
       allowInputBeyond
+      maxDate={new Date(new Date().setDate(18))}
+      minDate={new Date(new Date().setDate(1))}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -366,14 +366,14 @@ export const withHolidays: Story = () => {
     new Date("2024-11-23"),
   ]
 
-  return <RangeDatePicker placeholder="YYYY/MM/DD" holidays={holidays} />
+  return <RangeDatePicker holidays={holidays} placeholder="YYYY/MM/DD" />
 }
 
 export const withExcludeDate: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
@@ -386,37 +386,37 @@ export const withLocale: Story = () => {
 
 export const withFormat: Story = () => {
   return (
-    <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
+    <Grid gap="md" templateColumns="repeat(3, 1fr)" w="full">
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         dateFormat="YYYY年 MMMM"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="month"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
         yearFormat="YYYY年"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="month"
+        locale="ja"
         monthFormat="MM"
+        placeholder="YYYY/MM/DD"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
-        locale="ja"
         defaultType="year"
+        locale="ja"
+        placeholder="YYYY/MM/DD"
         yearFormat="YY"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
         locale="ja"
+        placeholder="YYYY/MM/DD"
         weekdayFormat="dd曜"
       />
     </Grid>
@@ -427,21 +427,21 @@ export const withAmountOfMonths: Story = () => {
   return (
     <>
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={1}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={2}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
 
       <RangeDatePicker
-        placeholder="YYYY/MM/DD"
         amountOfMonths={3}
         disableOutsideDays
+        placeholder="YYYY/MM/DD"
       />
     </>
   )
@@ -450,32 +450,32 @@ export const withAmountOfMonths: Story = () => {
 export const withPaginateBy: Story = () => {
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       amountOfMonths={3}
       disableOutsideDays
       paginateBy={1}
+      placeholder="YYYY/MM/DD"
     />
   )
 }
 
 export const disabledCloseOnSelect: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false} />
+  return <RangeDatePicker closeOnSelect={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledCloseOnBlur: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" closeOnBlur={false} />
+  return <RangeDatePicker closeOnBlur={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledIsClearable: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+  return <RangeDatePicker isClearable={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledAllowInput: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" allowInput={false} />
+  return <RangeDatePicker allowInput={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledOutsideDays: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
+  return <RangeDatePicker disableOutsideDays placeholder="YYYY/MM/DD" />
 }
 
 export const disabledControls: Story = () => {
@@ -487,7 +487,7 @@ export const disabledWeekdays: Story = () => {
 }
 
 export const hiddenOutsideDays: Story = () => {
-  return <RangeDatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+  return <RangeDatePicker hiddenOutsideDays placeholder="YYYY/MM/DD" />
 }
 
 export const customIcon: Story = () => {
@@ -511,8 +511,8 @@ export const customControlType: Story = () => {
 
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       type={type}
+      placeholder="YYYY/MM/DD"
       onChangeType={onChangeType}
     />
   )
@@ -523,8 +523,8 @@ export const customControlMonth: Story = () => {
 
   return (
     <RangeDatePicker
-      placeholder="YYYY/MM/DD"
       month={month}
+      placeholder="YYYY/MM/DD"
       onChangeMonth={onChangeMonth}
     />
   )
@@ -549,9 +549,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -561,17 +561,17 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.multiDatePicker?.message}
         isInvalid={!!errors.multiDatePicker}
         label="Date to reserve"
-        errorMessage={errors.multiDatePicker?.message}
       >
         <Controller
           name="multiDatePicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RangeDatePicker placeholder="YYYY/MM/DD" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
@@ -593,9 +593,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -605,17 +605,17 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.multiDatePicker?.message}
         isInvalid={!!errors.multiDatePicker}
         label="Date to reserve"
-        errorMessage={errors.multiDatePicker?.message}
       >
         <Controller
           name="multiDatePicker"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <RangeDatePicker placeholder="YYYY/MM/DD" {...field} />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

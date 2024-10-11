@@ -1,7 +1,7 @@
-import { act, fireEvent, render, waitFor } from "@yamada-ui/test"
-import { dataAttr } from "@yamada-ui/utils"
 import type { FC } from "react"
 import type { MockInstance } from "vitest"
+import { act, fireEvent, render, waitFor } from "@yamada-ui/test"
+import { dataAttr } from "@yamada-ui/utils"
 import { useFocusVisible } from "../src"
 
 describe("useFocusVisible", () => {
@@ -30,14 +30,14 @@ describe("useFocusVisible", () => {
     matchesMock.mockRestore()
   })
 
-  test("focusVisible becomes true when focused", async () => {
+  test("focusVisible becomes true when focused", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -50,27 +50,27 @@ describe("useFocusVisible", () => {
 
     expect(el).not.toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.focus(el)
     })
 
     expect(el).toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.blur(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible remains true on pointer down", async () => {
+  test("focusVisible remains true on pointer down", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -81,14 +81,14 @@ describe("useFocusVisible", () => {
     const { getByTestId } = render(<Component />)
     const el = getByTestId("button")
 
-    await act(async () => {
+    act(() => {
       fireEvent.pointerDown(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible becomes true on click", async () => {
+  test("focusVisible becomes true on click", () => {
     global.PointerEvent = defaultPointerEvent
 
     const Component: FC = () => {
@@ -96,8 +96,8 @@ describe("useFocusVisible", () => {
 
       return (
         <div
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
           {...rest}
         >
           Virtual Button
@@ -108,22 +108,22 @@ describe("useFocusVisible", () => {
     const { getByTestId } = render(<Component />)
     const el = getByTestId("button")
 
-    await act(async () => {
+    act(() => {
       fireEvent.click(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
   })
 
-  test("focusVisible becomes true on keyboard event", async () => {
+  test("focusVisible becomes true on keyboard event", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
       return (
         <div
-          tabIndex={0}
-          data-testid="button"
           data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
+          tabIndex={0}
           {...rest}
         >
           Virtual Button
@@ -137,7 +137,7 @@ describe("useFocusVisible", () => {
 
     expect(el).not.toHaveAttribute("data-focus-visible")
 
-    await act(async () => {
+    act(() => {
       fireEvent.keyDown(el, { key: "Tab" })
     })
 

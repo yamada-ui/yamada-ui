@@ -32,7 +32,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render siblings correctly", () => {
-    render(<Pagination total={77} siblings={3} />)
+    render(<Pagination siblings={3} total={77} />)
 
     fireEvent.click(screen.getByText("7"))
 
@@ -42,7 +42,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render boundaries correctly", () => {
-    render(<Pagination total={77} boundaries={3} />)
+    render(<Pagination boundaries={3} total={77} />)
 
     fireEvent.click(screen.getByText("7"))
 
@@ -52,7 +52,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render disabled correctly", () => {
-    render(<Pagination total={77} isDisabled />)
+    render(<Pagination isDisabled total={77} />)
 
     expect(screen.getByRole("navigation")).toHaveAttribute("data-disabled")
 
@@ -64,8 +64,8 @@ describe("<Pagination />", () => {
       )
   })
 
-  test("should render pagination with previous dots and without next dots correctly", () => {
-    render(<Pagination total={100} page={95} siblings={2} boundaries={2} />)
+  test("should render pagination with previous ellipsis and without next ellipsis correctly", () => {
+    render(<Pagination boundaries={2} page={95} siblings={2} total={100} />)
 
     for (let page = 93; page <= 100; page++) {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
@@ -75,19 +75,19 @@ describe("<Pagination />", () => {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const dots = screen.getByLabelText("Jump to omitted pages")
-    expect(dots).toBeInTheDocument()
+    const ellipsis = screen.getByLabelText("Jump to omitted pages")
+    expect(ellipsis).toBeInTheDocument()
   })
 
-  test("should not render dots when there are less than 7 pages", () => {
+  test("should not render ellipsis when there are less than 7 pages", () => {
     render(<Pagination total={6} />)
 
     for (let page = 1; page <= 6; page++) {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const dots = screen.queryByLabelText("Jump to omitted pages")
-    expect(dots).not.toBeInTheDocument()
+    const ellipsis = screen.queryByLabelText("Jump to omitted pages")
+    expect(ellipsis).not.toBeInTheDocument()
   })
 
   test("should correctly apply itemProps to pagination props", () => {

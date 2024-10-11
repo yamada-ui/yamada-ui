@@ -4,8 +4,8 @@ import { isNumber, isUndefined } from "./assertion"
 export function createdDom(): boolean {
   return !!(
     typeof window !== "undefined" &&
-    window.document &&
-    window.document.createElement
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    window.document?.createElement
   )
 }
 
@@ -58,9 +58,9 @@ export function isHidden(el: HTMLElement): boolean {
 
 export function isDisabled(el: HTMLElement): boolean {
   return (
-    Boolean(el.getAttribute("disabled")) === true ||
-    Boolean(el.getAttribute("data-disabled")) === true ||
-    Boolean(el.getAttribute("aria-disabled")) === true
+    Boolean(el.getAttribute("disabled")) ||
+    Boolean(el.getAttribute("data-disabled")) ||
+    Boolean(el.getAttribute("aria-disabled"))
   )
 }
 
@@ -85,7 +85,7 @@ export function isContains(
   return parent === child || parent?.contains(child)
 }
 
-export function getPx(value: string | number | undefined): number {
+export function getPx(value: number | string | undefined): number {
   if (isNumber(value)) return value
 
   if (isUndefined(value)) return 0
@@ -111,7 +111,7 @@ export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 
-type Booleanish = boolean | "true" | "false"
+type Booleanish = "false" | "true" | boolean
 
 export function dataAttr(condition: boolean | undefined) {
   return (condition ? "" : undefined) as Booleanish
@@ -162,7 +162,7 @@ export function isFocusable(el: HTMLElement): boolean {
   const { localName } = el
   const focusableTags = ["input", "select", "textarea", "button"]
 
-  if (focusableTags.indexOf(localName) >= 0) return true
+  if (focusableTags.includes(localName)) return true
 
   const others = {
     a: () => el.hasAttribute("href"),
@@ -193,16 +193,16 @@ export function isTouchDevice(): boolean {
 
 export function getOwnerWindow(
   node?: Element | null,
-): Window & typeof globalThis {
-  return getOwnerDocument(node)?.defaultView ?? window
+): typeof globalThis & Window {
+  return getOwnerDocument(node).defaultView ?? window
 }
 
 export function getOwnerDocument(el?: Element | null): Document {
   return isElement(el) ? el.ownerDocument : document
 }
 
-export function getActiveElement(el?: HTMLElement): HTMLElement {
-  return getOwnerDocument(el).activeElement as HTMLElement
+export function getActiveElement(el?: HTMLElement): HTMLElement | null {
+  return getOwnerDocument(el).activeElement as HTMLElement | null
 }
 
 export function isActiveElement(el: HTMLElement): boolean {

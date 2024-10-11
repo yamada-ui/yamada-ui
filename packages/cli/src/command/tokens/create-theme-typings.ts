@@ -19,7 +19,7 @@ const printComponent = (components: { [key: string]: Component }) =>
     )
     .join(`\n`)} }`
 
-const print = (unions: Component | { [key: string]: string[] }) =>
+const print = (unions: { [key: string]: string[] } | Component) =>
   Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
@@ -32,19 +32,18 @@ const print = (unions: Component | { [key: string]: string[] }) =>
     .join("\n")
 
 const extractComponents = ({ components = {} }: Dict) =>
-  Object.entries<{ sizes?: object; variants?: object }>(components).reduce(
-    (obj, [key, { sizes, variants }]) => {
-      if (sizes || variants) {
-        obj[key] = {
-          sizes: Object.keys(sizes ?? {}),
-          variants: Object.keys(variants ?? {}),
-        }
+  Object.entries<{ sizes?: object; variants?: object }>(components).reduce<{
+    [key: string]: Component
+  }>((obj, [key, { sizes, variants }]) => {
+    if (sizes || variants) {
+      obj[key] = {
+        sizes: Object.keys(sizes ?? {}),
+        variants: Object.keys(variants ?? {}),
       }
+    }
 
-      return obj
-    },
-    {} as { [key: string]: Component },
-  )
+    return obj
+  }, {})
 
 const isTone = (value: any) => {
   if (!isObject(value)) return false
@@ -60,7 +59,7 @@ const extractColorSchemes = (theme: Dict) => {
   let colorSchemes: string[] = []
   let colorSchemeColors: string[] = []
 
-  if (!isObject(colors)) return { colorSchemes, colorSchemeColors }
+  if (!isObject(colors)) return { colorSchemeColors, colorSchemes }
 
   Object.entries(colors).forEach(([key, value]) => {
     if (!isTone(value)) return
@@ -69,7 +68,7 @@ const extractColorSchemes = (theme: Dict) => {
   })
 
   if (!isObject(semantics?.colorSchemes))
-    return { colorSchemes, colorSchemeColors }
+    return { colorSchemeColors, colorSchemes }
 
   Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
     if (isTone(value)) {
@@ -87,7 +86,7 @@ const extractColorSchemes = (theme: Dict) => {
     }
   })
 
-  return { colorSchemes, colorSchemeColors }
+  return { colorSchemeColors, colorSchemes }
 }
 
 const extractThemeSchemes = (theme: Dict) => {
@@ -106,7 +105,7 @@ const extractPaths = (
 ) => {
   if ((!isObject(target) && !isArray(target)) || !maxDepth) return []
 
-  return Object.entries(target).reduce((prev, [key, value]) => {
+  return Object.entries(target).reduce<string[]>((prev, [key, value]) => {
     if (
       isObject(value) &&
       !Object.keys(value).some((key) => omitKeys.includes(key)) &&
@@ -120,7 +119,7 @@ const extractPaths = (
     }
 
     return prev
-  }, [] as string[])
+  }, [])
 }
 
 const extractKeys = (obj: Dict, key: string) => {
@@ -153,15 +152,15 @@ export const createThemeTypings = async (
     shouldProcess = (obj: Dict) => !isResponsive(obj)
   }
 
-  const tokens = config.reduce(
+  const tokens = config.reduce<{ [key: string]: string[] }>(
     (
       prev,
       {
         key,
-        replaceKey,
+        flatMap = (value) => value,
         maxScanDepth,
         omitScanKeys,
-        flatMap = (value) => value,
+        replaceKey,
       },
     ) => {
       const target = getObject(theme, key)
@@ -187,21 +186,21 @@ export const createThemeTypings = async (
           shouldProcess,
         ).flatMap(flatMap)
 
-        prev[replaceKey ?? key].push(...semanticKeys)
+        prev[replaceKey ?? key]?.push(...semanticKeys)
       }
 
       return prev
     },
-    {} as { [key: string]: string[] },
+    {},
   )
 
   const textStyles = extractKeys(theme, "styles.textStyles")
   const layerStyles = extractKeys(theme, "styles.layerStyles")
-  const { colorSchemes, colorSchemeColors } = extractColorSchemes(theme)
+  const { colorSchemeColors, colorSchemes } = extractColorSchemes(theme)
   const themeSchemes = extractThemeSchemes(theme)
   const components = extractComponents(theme)
 
-  tokens.colors = [...tokens.colors, ...colorSchemeColors]
+  tokens.colors = [...(tokens.colors ?? []), ...colorSchemeColors]
 
   return prettier(
     [
@@ -210,9 +209,9 @@ export const createThemeTypings = async (
       `export interface GeneratedTheme extends UITheme {`,
       print({
         ...tokens,
-        textStyles,
-        layerStyles,
         colorSchemes,
+        layerStyles,
+        textStyles,
         themeSchemes,
       }),
       printComponent(components),

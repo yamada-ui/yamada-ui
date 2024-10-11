@@ -1,6 +1,6 @@
 import type { CloseButtonProps } from "@yamada-ui/close-button"
-import { CloseButton } from "@yamada-ui/close-button"
 import type { CSSUIObject } from "@yamada-ui/core"
+import { CloseButton } from "@yamada-ui/close-button"
 import { forwardRef } from "@yamada-ui/core"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
@@ -20,12 +20,12 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
       <CloseButton
         ref={ref}
         className={cx("ui-popover__close-button")}
-        __css={css}
+        size="sm"
         onClick={handlerAll(onClick, (ev) => {
           ev.stopPropagation()
           onClose?.()
         })}
-        size="sm"
+        __css={css}
         {...rest}
       />
     )

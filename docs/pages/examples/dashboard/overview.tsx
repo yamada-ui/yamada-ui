@@ -1,9 +1,9 @@
-import { BarChart } from "@yamada-ui/charts"
 import type { BarProps } from "@yamada-ui/charts"
-import { Card, CardBody, CardHeader, Heading, isNumber } from "@yamada-ui/react"
 import type { CardProps } from "@yamada-ui/react"
-import { memo, useMemo } from "react"
 import type { FC } from "react"
+import { BarChart } from "@yamada-ui/charts"
+import { Card, CardBody, CardHeader, Heading, isNumber } from "@yamada-ui/react"
+import { memo, useMemo } from "react"
 
 export interface OverviewProps extends CardProps {}
 
@@ -28,7 +28,7 @@ export const Overview: FC<OverviewProps> = memo(({ ...rest }) => {
 
   const series = useMemo<BarProps[]>(
     () => [
-      { dataKey: "value", color: ["black", "white"], radius: [4, 4, 0, 0] },
+      { color: ["black", "white"], dataKey: "value", radius: [4, 4, 0, 0] },
     ],
     [],
   )
@@ -44,13 +44,13 @@ export const Overview: FC<OverviewProps> = memo(({ ...rest }) => {
       <CardBody>
         <BarChart
           data={data}
-          series={series}
           dataKey="month"
-          withTooltip={false}
+          gridAxis="none"
+          series={series}
           valueFormatter={(value) =>
             isNumber(value) ? `$${value}` : `${value}`
           }
-          gridAxis="none"
+          withTooltip={false}
         />
       </CardBody>
     </Card>

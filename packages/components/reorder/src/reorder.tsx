@@ -1,48 +1,54 @@
 import type {
-  CSSUIObject,
   ComponentArgs,
+  CSSUIObject,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
-import { MotionReorder } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
+import type {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactElement,
+  RefAttributes,
+} from "react"
+import type { ReorderItemProps } from "./reorder-item"
+import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
+import { MotionReorder } from "@yamada-ui/motion"
 import {
   cx,
   getValidChildren,
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, PropsWithChildren, RefAttributes } from "react"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 import { ReorderProvider } from "./reorder-context"
 import { ReorderItem } from "./reorder-item"
-import type { ReorderItemProps } from "./reorder-item"
 
-export type ReorderGenerateItem<Y extends any = string> = ReorderItemProps<Y>
+export type ReorderGenerateItem<Y = string> = ReorderItemProps<Y>
 
-const omitDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
-  Array.from(new Set(values))
+type DuplicatedFunc = <Y = string>(values: Y[]) => Y[]
 
-const pickDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
+const omitDuplicated: DuplicatedFunc = (values) => Array.from(new Set(values))
+
+const pickDuplicated: DuplicatedFunc = (values) =>
   values.filter(
     (value, index, self) =>
       self.indexOf(value) === index && index !== self.lastIndexOf(value),
   )
 
-interface ReorderOptions<Y extends any = string> {
-  /**
-   * The orientation of the reorder.
-   *
-   * @default 'vertical'
-   */
-  orientation?: "vertical" | "horizontal"
+interface ReorderOptions<Y = string> {
   /**
    * If provided, generate reorder items based on items.
    *
    */
   items?: ReorderGenerateItem[]
+  /**
+   * The orientation of the reorder.
+   *
+   * @default 'vertical'
+   */
+  orientation?: "horizontal" | "vertical"
   /**
    * The callback invoked when reorder items are moved.
    */
@@ -53,10 +59,10 @@ interface ReorderOptions<Y extends any = string> {
   onCompleteChange?: (values: Y[]) => void
 }
 
-export interface ReorderProps<Y extends any = string>
+export interface ReorderProps<Y = string>
   extends Omit<
       Merge<HTMLUIProps<"ul">, HTMLMotionProps<"ul">>,
-      "onChange" | "transition" | "children"
+      "children" | "onChange" | "transition"
     >,
     PropsWithChildren,
     ThemeProps<"Reorder">,
@@ -68,6 +74,7 @@ export interface ReorderProps<Y extends any = string>
  * @see Docs https://yamada-ui.com/components/data-display/reorder
  */
 export const Reorder = forwardRef(
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
   <Y extends any = string>(
     props: ReorderProps<Y>,
     ref: ForwardedRef<HTMLUListElement>,
@@ -75,12 +82,12 @@ export const Reorder = forwardRef(
     const [styles, mergedProps] = useComponentMultiStyle("Reorder", props)
     const {
       className,
-      orientation = "vertical",
+      children,
       gap = "fallback(4, 1rem)",
       items = [],
+      orientation = "vertical",
       onChange,
       onCompleteChange,
-      children,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -185,8 +192,8 @@ export const Reorder = forwardRef(
   },
 ) as {
   <Y = string>(
-    props: ReorderProps<Y> & RefAttributes<HTMLUListElement>,
-  ): JSX.Element
+    props: RefAttributes<HTMLUListElement> & ReorderProps<Y>,
+  ): ReactElement
 } & ComponentArgs
 
 Reorder.displayName = "Reorder"

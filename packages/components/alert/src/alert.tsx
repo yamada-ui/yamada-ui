@@ -1,35 +1,35 @@
 import type {
+  AlertStatuses,
+  CSSUIObject,
+  FC,
   HTMLUIProps,
   ThemeProps,
-  CSSUIObject,
-  AlertStatuses,
 } from "@yamada-ui/core"
+import type { LoadingProps } from "@yamada-ui/loading"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
   useTheme,
 } from "@yamada-ui/core"
-import { InfoIcon, WarningIcon, CheckIcon } from "@yamada-ui/icon"
-import type { LoadingProps } from "@yamada-ui/loading"
+import { CheckIcon, InfoIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
 import { createContext, cx } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 const defaultStatuses = {
-  info: { icon: InfoIcon, colorScheme: "info" },
-  success: { icon: CheckIcon, colorScheme: "success" },
-  warning: { icon: WarningIcon, colorScheme: "warning" },
-  error: { icon: WarningIcon, colorScheme: "danger" },
-  loading: { icon: Loading, colorScheme: "primary" },
+  error: { colorScheme: "danger", icon: WarningIcon },
+  info: { colorScheme: "info", icon: InfoIcon },
+  loading: { colorScheme: "primary", icon: Loading },
+  success: { colorScheme: "success", icon: CheckIcon },
+  warning: { colorScheme: "warning", icon: WarningIcon },
 } as const
 
 export type Status = keyof typeof defaultStatuses
 
 interface AlertContext {
   status: Status
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [AlertProvider, useAlert] = createContext<AlertContext>({
@@ -65,7 +65,7 @@ export interface AlertProps
  * @see Docs https://yamada-ui.com/components/feedback/alert
  */
 export const Alert = forwardRef<AlertProps, "div">(
-  ({ status = "info", colorScheme, ...props }, ref) => {
+  ({ colorScheme, status = "info", ...props }, ref) => {
     const { theme } = useTheme()
     const statuses = theme.__config?.alert?.statuses ?? {}
 
@@ -78,11 +78,11 @@ export const Alert = forwardRef<AlertProps, "div">(
     const { className, children, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {
-      w: "100%",
-      display: "flex",
       alignItems: "center",
-      position: "relative",
+      display: "flex",
       overflow: "hidden",
+      position: "relative",
+      w: "100%",
       ...styles.container,
     }
 
@@ -102,14 +102,17 @@ export const Alert = forwardRef<AlertProps, "div">(
   },
 )
 
+Alert.displayName = "Alert"
+Alert.__ui__ = "Alert"
+
 export interface AlertIconProps extends HTMLUIProps<"span"> {
   variant?: LoadingProps["variant"]
 }
 
 export const AlertIcon: FC<AlertIconProps> = ({
   className,
-  children,
   variant = "oval",
+  children,
   ...rest
 }) => {
   const { status, styles } = useAlert()
@@ -124,8 +127,8 @@ export const AlertIcon: FC<AlertIconProps> = ({
 
   return (
     <ui.span
-      display="inherit"
       className={cx("ui-alert__icon", className)}
+      display="inherit"
       __css={css}
       {...rest}
     >
@@ -139,6 +142,9 @@ export const AlertIcon: FC<AlertIconProps> = ({
     </ui.span>
   )
 }
+
+AlertIcon.displayName = "AlertIcon"
+AlertIcon.__ui__ = "AlertIcon"
 
 export interface AlertTitleProps extends HTMLUIProps<"p"> {}
 
@@ -162,6 +168,9 @@ export const AlertTitle = forwardRef<AlertTitleProps, "p">(
   },
 )
 
+AlertTitle.displayName = "AlertTitle"
+AlertTitle.__ui__ = "AlertTitle"
+
 export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
 
 export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
@@ -183,5 +192,5 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
   },
 )
 
-Alert.displayName = "Alert"
-Alert.__ui__ = "Alert"
+AlertDescription.displayName = "AlertDescription"
+AlertDescription.__ui__ = "AlertDescription"

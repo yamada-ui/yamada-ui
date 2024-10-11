@@ -1,10 +1,10 @@
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { Input } from "@yamada-ui/input"
 import type { InputProps } from "@yamada-ui/input"
+import type { ReactNode } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { Input } from "@yamada-ui/input"
 import { cx } from "@yamada-ui/utils"
 import { useId } from "react"
-import type { ReactNode } from "react"
 import { useColorSelectorContext } from "./use-color-selector"
 
 interface ColorSelectorChannelsOptions {
@@ -22,7 +22,7 @@ export const ColorSelectorChannels = forwardRef<
   ColorSelectorChannelsProps,
   "div"
 >(({ className, channelProps, ...rest }, ref) => {
-  const { withAlpha, channels, getChannelProps, styles } =
+  const { channels, styles, withAlpha, getChannelProps } =
     useColorSelectorContext()
 
   const css: CSSUIObject = {
@@ -38,11 +38,11 @@ export const ColorSelectorChannels = forwardRef<
       __css={css}
       {...rest}
     >
-      {channels.map(({ label, space, value, min, max }) => (
+      {channels.map(({ label, max, min, space, value }) => (
         <ColorSelectorChannel
           key={label}
           channelLabel={label}
-          {...getChannelProps({ ...channelProps, space, value, min, max })}
+          {...getChannelProps({ ...channelProps, max, min, space, value })}
         />
       ))}
     </ui.div>
@@ -56,11 +56,11 @@ interface ColorSelectorChannelOptions {
   channelLabel?: ReactNode
 }
 
-export type ColorSelectorChannelProps = Omit<
-  InputProps,
-  "type" | "pattern" | "min" | "max" | "value" | "defaultValue"
-> &
-  ColorSelectorChannelOptions
+export type ColorSelectorChannelProps = ColorSelectorChannelOptions &
+  Omit<
+    InputProps,
+    "defaultValue" | "max" | "min" | "pattern" | "type" | "value"
+  >
 
 export const ColorSelectorChannel = forwardRef<
   ColorSelectorChannelProps,
@@ -89,7 +89,7 @@ export const ColorSelectorChannel = forwardRef<
         </ui.label>
       ) : null}
 
-      <Input ref={ref} id={id} size={size} __css={css} {...rest} />
+      <Input id={id} ref={ref} size={size} __css={css} {...rest} />
     </ui.div>
   )
 })

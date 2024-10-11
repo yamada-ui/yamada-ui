@@ -1,33 +1,33 @@
 import type { PropGetter } from "@yamada-ui/core"
+import type { ChangeEvent } from "react"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import { dataAttr, handlerAll } from "@yamada-ui/utils"
-import type { ChangeEvent } from "react"
 import { useCallback, useEffect, useState } from "react"
 import { useRatingContext } from "./rating-context"
 
 export interface UseRatingItemProps {
-  groupValue: number
   fractionValue: number
+  groupValue: number
   value: number
 }
 
 export const useRatingItem = ({
-  groupValue,
   fractionValue,
+  groupValue,
   value,
 }: UseRatingItemProps) => {
   const {
     id,
     name,
-    formControlProps,
-    isOutside,
     highlightSelectedOnly,
-    roundedValue,
+    isOutside,
     resolvedValue,
-    setValue,
+    roundedValue,
     setHoveredValue,
+    setValue,
+    formControlProps,
   } = useRatingContext()
-  const { readOnly, disabled } = formControlProps
+  const { disabled, readOnly } = formControlProps
   const [isFocused, setFocused] = useState<boolean>(false)
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const isActive = value === resolvedValue
@@ -83,13 +83,13 @@ export const useRatingItem = ({
         htmlFor: `${id}-${groupValue}-${value}`,
         ...formControlProps,
         ...props,
-        zIndex: fractionValue !== 1 ? zIndex : undefined,
-        onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
-        onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
         "data-active": dataAttr(isActive),
         "data-filled": dataAttr(isFilled),
         "data-focus": dataAttr(isFocused),
         "data-focus-visible": dataAttr(isFocused && isFocusVisible),
+        zIndex: fractionValue !== 1 ? zIndex : undefined,
+        onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
+        onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
       }
     },
     [
@@ -114,31 +114,31 @@ export const useRatingItem = ({
         "aria-label": `${value}`,
         ...formControlProps,
         ...props,
+        id: `${id}-${groupValue}-${value}`,
+        type: "radio",
+        name,
         style: {
           border: "0px",
           clip: "rect(0px, 0px, 0px, 0px)",
           height: "1px",
-          width: "1px",
           margin: "-1px",
-          padding: "0px",
           overflow: "hidden",
-          whiteSpace: "nowrap",
+          padding: "0px",
           position: "absolute",
+          whiteSpace: "nowrap",
+          width: "1px",
         },
-        type: "radio",
-        id: `${id}-${groupValue}-${value}`,
-        name,
-        value,
+        "data-active": dataAttr(isActive),
+        "data-checked": dataAttr(isChecked),
         checked: isChecked,
+        value,
+        onBlur: handlerAll(onBlur, props.onBlur),
         onChange: handlerAll(onInputChange, props.onChange),
         onFocus: handlerAll(() => setFocused(true), props.onFocus),
-        onBlur: handlerAll(onBlur, props.onBlur),
         onKeyDown: handlerAll(
           (ev) => (ev.key === " " ? onChange(value) : void 0),
           props.onKeyDown,
         ),
-        "data-active": dataAttr(isActive),
-        "data-checked": dataAttr(isChecked),
       }
     },
     [
@@ -163,8 +163,8 @@ export const useRatingItem = ({
     isActive,
     isChecked,
     isFilled,
-    getItemProps,
     getInputProps,
+    getItemProps,
   }
 }
 

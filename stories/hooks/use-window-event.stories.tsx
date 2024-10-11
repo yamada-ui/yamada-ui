@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
-import { useRef } from "react"
 import { Input, Kbd, Text, useWindowEvent } from "@yamada-ui/react"
+import { useRef } from "react"
 
 const meta: Meta = {
   title: "Hooks / useWindowEvent",

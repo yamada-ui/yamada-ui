@@ -70,7 +70,7 @@ describe("<Tooltip />", () => {
 
   test("should always display", async () => {
     render(
-      <Tooltip label="Tooltip hover" isOpen>
+      <Tooltip isOpen label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -84,7 +84,7 @@ describe("<Tooltip />", () => {
 
   test("should disable even if hover", async () => {
     const { user } = render(
-      <Tooltip label="Tooltip hover" isDisabled>
+      <Tooltip isDisabled label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -120,7 +120,7 @@ describe("<Tooltip />", () => {
 
   test("When `isOpen` is true, the tooltip should be displayed", async () => {
     const { user } = render(
-      <Tooltip label="Tooltip hover" isOpen>
+      <Tooltip isOpen label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -136,7 +136,7 @@ describe("<Tooltip />", () => {
 
   test("When `closeOnEsc` is false, the tooltip should not be closed when `Escape` pressed", async () => {
     const { user } = render(
-      <Tooltip label="Tooltip hover" closeOnEsc={false}>
+      <Tooltip closeOnEsc={false} label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -156,7 +156,7 @@ describe("<Tooltip />", () => {
 
   test("When `closeOnClick` is true, the tooltip should be closed when clicked", async () => {
     const { user } = render(
-      <Tooltip label="Tooltip hover" closeOnClick>
+      <Tooltip closeOnClick label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -201,7 +201,7 @@ describe("<Tooltip />", () => {
       })
       expect(tooltip).toBeVisible()
 
-      await user.keyboard(`${key}`)
+      await user.keyboard(key)
 
       expect(tooltip).toBeVisible()
     },
@@ -225,9 +225,9 @@ describe("<Tooltip />", () => {
     async ({ closeOnMouseDown, closeOnPointerDown }) => {
       const { user } = render(
         <Tooltip
-          label="Tooltip hover"
           closeOnMouseDown={closeOnMouseDown}
           closeOnPointerDown={closeOnPointerDown}
+          label="Tooltip hover"
         >
           <span>Hover</span>
         </Tooltip>,
@@ -299,7 +299,7 @@ describe("<Tooltip />", () => {
     expect(queryTooltip()).toBeNull()
   })
 
-  test.each<{ animation: "top" | "left" | "bottom" | "right" }>([
+  test.each<{ animation: "bottom" | "left" | "right" | "top" }>([
     {
       animation: "top",
     },
@@ -316,7 +316,7 @@ describe("<Tooltip />", () => {
     "When `animation` is %s, the tooltip should be displayed",
     async ({ animation }) => {
       const { user } = render(
-        <Tooltip label="Tooltip hover" animation={animation}>
+        <Tooltip animation={animation} label="Tooltip hover">
           <span>Hover</span>
         </Tooltip>,
       )

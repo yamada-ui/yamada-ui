@@ -1,15 +1,15 @@
-import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
+import type * as Recharts from "recharts"
+import type { ResponsiveContainerProps } from "./chart.types"
+import { useTheme } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
-import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ResponsiveContainerProps } from "./chart.types"
 import { containerProperties } from "./rechart-properties"
 
 interface ChartContext {
-  styles: { [key: string]: CSSUIObject }
+  styles: { [key: string]: CSSUIObject | undefined }
 }
 
 export const [ChartProvider, useChartContext] = createContext<ChartContext>({
@@ -51,22 +51,22 @@ export const useChart = ({ containerProps = {} }: UseChartProps) => {
 
 export type UseChartReturn = ReturnType<typeof useChart>
 
-export interface UseLegendProps {}
-
-export const useLegend = ({}: UseLegendProps = {}) => {
+export const useLegend = () => {
   const { styles } = useChartContext()
+
   return {
     styles,
   }
 }
+
 export type UseLegendReturn = ReturnType<typeof useLegend>
 
-export interface UseTooltipProps {}
-
-export const useTooltip = ({}: UseTooltipProps = {}) => {
+export const useTooltip = () => {
   const { styles } = useChartContext()
+
   return {
     styles,
   }
 }
+
 export type UseTooltipReturn = ReturnType<typeof useTooltip>

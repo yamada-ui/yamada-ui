@@ -1,3 +1,6 @@
+import type { IconProps, ListProps } from "@yamada-ui/react"
+import type { DocumentTree } from "mdx"
+import type { FC } from "react"
 import {
   AppWindowMac,
   Blocks,
@@ -14,22 +17,19 @@ import {
   Center,
   ChevronIcon,
   Collapse,
+  dataAttr,
+  forwardRef,
   HStack,
   List,
   ListItem,
   Text,
-  dataAttr,
-  forwardRef,
   useBoolean,
 } from "@yamada-ui/react"
-import type { IconProps, ListProps } from "@yamada-ui/react"
-import Link from "next/link"
-import type { FC } from "react"
-import { memo, useEffect } from "react"
 import { Label } from "components/data-display"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
-import type { DocumentTree } from "mdx"
+import Link from "next/link"
+import { memo, useEffect } from "react"
 
 export interface TreeProps extends ListProps {}
 
@@ -39,18 +39,18 @@ export const Tree = memo(
     const { t } = useI18n()
 
     return (
-      <List ref={ref} gap="sm" fontSize="sm" {...rest}>
+      <List ref={ref} fontSize="sm" gap="sm" {...rest}>
         {documentTree.map((document) => (
           <RecursiveListItem key={document.slug} {...document} />
         ))}
 
-        {CONSTANT.MENU.map(({ icon, name, href, isExternal }) => (
+        {CONSTANT.MENU.map(({ href, name, icon, isExternal }) => (
           <ListItemLink
             key={name}
+            isExternal={isExternal}
             menu_icon={icon}
             slug={href}
             title={t(`component.tree.${name}`)}
-            isExternal={isExternal}
           />
         ))}
       </List>
@@ -63,8 +63,8 @@ interface RecursiveListItemProps extends DocumentTree {
 }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ menu_icon, title, slug, label, children, isNested, is_expanded }) => {
-    const [isOpen, { on, toggle }] = useBoolean(is_expanded)
+  ({ children, is_expanded, isNested, label, menu_icon, slug, title }) => {
+    const [isOpen, { toggle, on }] = useBoolean(is_expanded)
 
     useEffect(() => {
       if (is_expanded) on()
@@ -78,13 +78,13 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
       <ListItem>
         <ListItemLink
           {...{
-            menu_icon,
-            title,
-            label,
-            slug,
             isNested,
-            isSelected,
             isOpen,
+            isSelected,
+            label,
+            menu_icon,
+            slug,
+            title,
             withToggleButton,
             onToggle: toggle,
           }}
@@ -92,7 +92,7 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
 
         {children.length ? (
           <Collapse isOpen={isOpen} unmountOnExit>
-            <List mt="sm" gap="sm" borderLeftWidth="1px" ml="3" pl="3">
+            <List borderLeftWidth="1px" gap="sm" ml="3" mt="sm" pl="3">
               {children.map((doc) => (
                 <RecursiveListItem key={doc.slug} {...doc} isNested />
               ))}
@@ -110,59 +110,51 @@ RecursiveListItem.displayName = "RecursiveListItem"
 interface ListItemLinkProps
   extends Pick<
     RecursiveListItemProps,
-    "title" | "label" | "slug" | "isNested" | "menu_icon"
+    "isNested" | "label" | "menu_icon" | "slug" | "title"
   > {
-  isSelected?: boolean
+  isExternal?: boolean
   isOpen?: boolean
+  isSelected?: boolean
   withToggleButton?: boolean
   onToggle?: () => void
-  isExternal?: boolean
 }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
   ({
-    menu_icon,
-    title,
-    label,
-    slug,
+    isExternal,
     isNested,
     isOpen,
     isSelected,
+    label,
+    menu_icon,
+    slug,
+    title,
     withToggleButton,
     onToggle,
-    isExternal,
   }) => {
     return (
       <HStack
         data-selected={dataAttr(isSelected)}
-        cursor="pointer"
-        userSelect="none"
-        rounded="md"
-        gap="0"
         color={isNested ? "muted" : undefined}
-        _selected={{
-          color: [`black`, "white"],
-          bg: [`primary.300`, `primary.300`],
-        }}
-        _hover={{
-          color: ["black", "white"],
-          bg: !isSelected ? [`blackAlpha.400`, "whiteAlpha.400"] : undefined,
-        }}
+        cursor="pointer"
+        gap="0"
+        position="relative"
+        rounded="md"
+        transitionDuration="normal"
+        transitionProperty="colors"
+        userSelect="none"
         _active={{
           bg: !isSelected ? ["blackAlpha.500", "whiteAlpha.500"] : undefined,
         }}
-        transitionProperty="colors"
-        transitionDuration="normal"
-        position="relative"
         _before={{
-          content: "''",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
           bg: "white",
+          bottom: 0,
+          content: "''",
+          left: 0,
           opacity: 0.8,
+          position: "absolute",
+          right: 0,
+          top: 0,
         }}
         _dark={{
           _before: {
@@ -170,26 +162,34 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             opacity: 0.86,
           },
         }}
+        _hover={{
+          bg: !isSelected ? [`blackAlpha.400`, "whiteAlpha.400"] : undefined,
+          color: ["black", "white"],
+        }}
+        _selected={{
+          bg: [`primary.300`, `primary.300`],
+          color: [`black`, "white"],
+        }}
       >
         <Text
           as={Link}
           href={slug}
-          position="static"
-          zIndex="yamcha"
-          display="inline-flex"
+          target={isExternal ? "_blank" : undefined}
           alignItems="center"
+          display="inline-flex"
+          flex="1"
           pl="3"
+          position="static"
           pr={!withToggleButton ? "3" : undefined}
           py="sm"
-          flex="1"
+          rel={isExternal ? "noopener" : undefined}
           rounded="md"
+          zIndex="yamcha"
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "inline" }}
           onClick={!isOpen ? onToggle : undefined}
-          target={isExternal ? "_blank" : undefined}
-          rel={isExternal ? "noopener" : undefined}
         >
-          <ListItemIcon icon={menu_icon} color="muted" me="sm" />
+          <ListItemIcon color="muted" icon={menu_icon} me="sm" />
 
           <Text as="span" lineClamp={1}>
             {title}
@@ -201,21 +201,21 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
         {withToggleButton ? (
           <Center
             as="button"
-            position="static"
-            zIndex="yamcha"
-            p="sm"
-            fontSize="1.5em"
-            rounded="md"
+            aria-label="Toggle children"
             boxSizing="content-box"
+            fontSize="1.5em"
+            p="sm"
+            position="static"
+            rounded="md"
+            zIndex="yamcha"
             _focus={{ outline: "none" }}
             _focusVisible={{ boxShadow: "inline" }}
             onClick={onToggle}
-            aria-label="Toggle children"
           >
             <ChevronIcon
               transform={isOpen ? undefined : "rotate(-90deg)"}
-              transitionProperty="transform"
               transitionDuration="slow"
+              transitionProperty="transform"
             />
           </Center>
         ) : null}
@@ -227,7 +227,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
 ListItemLink.displayName = "ListItemLink"
 
 interface ListItemIconProps extends IconProps {
-  icon?: string | null
+  icon?: null | string
 }
 
 const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
@@ -263,7 +263,7 @@ const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
       return <Smile fontSize="2xl" {...rest} />
 
     default:
-      return <></>
+      return null
   }
 })
 

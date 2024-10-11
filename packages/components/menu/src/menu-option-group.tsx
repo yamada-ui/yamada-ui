@@ -1,27 +1,27 @@
 import type { ComponentArgs } from "@yamada-ui/core"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
+import type { MenuGroupProps } from "./menu-group"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
-import type { ForwardedRef, RefAttributes } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
-import type { MenuGroupProps } from "./menu-group"
 import { MenuGroup } from "./menu-group"
 import { MenuOptionItem } from "./menu-item"
 
 interface MenuOptionGroupOptions<Y extends string | string[] = string> {
   /**
-   * The value of the menu item group.
+   * The type of the menu option group.
+   *
+   * @default 'checkbox'
    */
-  value?: Y
+  type?: "checkbox" | "radio"
   /**
    * The initial value of the menu item group.
    */
   defaultValue?: Y
   /**
-   * The type of the menu option group.
-   *
-   * @default 'checkbox'
+   * The value of the menu item group.
    */
-  type?: "radio" | "checkbox"
+  value?: Y
   /**
    * The callback fired when any children checkbox is checked or unchecked.
    */
@@ -35,12 +35,12 @@ export interface MenuOptionGroupProps<Y extends string | string[] = string>
 export const MenuOptionGroup = forwardRef(
   <Y extends string | string[] = string>(
     {
-      className,
-      value: valueProp,
-      defaultValue,
-      onChange: onChangeProp,
       type,
+      className,
       children,
+      defaultValue,
+      value: valueProp,
+      onChange: onChangeProp,
       ...rest
     }: MenuOptionGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
@@ -50,8 +50,8 @@ export const MenuOptionGroup = forwardRef(
     defaultValue ??= (isRadio ? "" : []) as Y
 
     const [value, setValue] = useControllableState({
-      value: valueProp,
       defaultValue,
+      value: valueProp,
       onChange: onChangeProp,
     })
 
@@ -85,7 +85,7 @@ export const MenuOptionGroup = forwardRef(
           ? value.includes(child.props.value)
           : child.props.value === value
 
-      return cloneElement(child, { type, onClick, isChecked })
+      return cloneElement(child, { type, isChecked, onClick })
     })
 
     return (
@@ -101,7 +101,7 @@ export const MenuOptionGroup = forwardRef(
 ) as {
   <Y extends string | string[] = string>(
     props: MenuOptionGroupProps<Y> & RefAttributes<HTMLDivElement>,
-  ): JSX.Element
+  ): ReactElement
 } & ComponentArgs
 
 MenuOptionGroup.displayName = "MenuOptionGroup"

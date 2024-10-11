@@ -1,4 +1,5 @@
 import { render, renderHook } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { Highlight, useHighlight } from "../src"
 
 describe("<Highlight />", () => {
@@ -15,8 +16,8 @@ describe("<Highlight />", () => {
       )
 
       expect(result.current).toHaveLength(1)
-      expect(result.current[0].match).toBeFalsy()
-      expect(result.current[0].text).toBe(text)
+      expect(result.current[0]?.match).toBeFalsy()
+      expect(result.current[0]?.text).toBe(text)
     },
   )
 
@@ -25,7 +26,7 @@ describe("<Highlight />", () => {
       render(<Highlight query="Highlight">{1 as any}</Highlight>)
 
     const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(() => {})
+    consoleSpy.mockImplementation(noop)
     expect(renderResult).toThrow(
       "The children prop of Highlight must be a string",
     )

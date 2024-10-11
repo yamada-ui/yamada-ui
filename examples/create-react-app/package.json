@@ -21,21 +21,21 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@types/node": "^22.7.4",
-    "@types/react": "^18.3.10",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-react-app": "^7.0.1",
+    "globals": "^15.10.0",
+    "jiti": "^2.3.3",
     "prettier": "^3.3.3",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.7.0"
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "build": "craco build",
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
   },
   "browserslist": {
     "production": [

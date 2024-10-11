@@ -17,20 +17,19 @@ describe("withDefaultSize", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (isObject(styles.defaultProps)) {
-            styles.defaultProps.size = "lg"
-          } else {
-            styles.defaultProps = { size: "lg" }
-          }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (isObject(styles.defaultProps)) {
+          styles.defaultProps.size = "lg"
+        } else {
+          styles.defaultProps = { size: "lg" }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -46,22 +45,21 @@ describe("withDefaultSize", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (components.includes(name)) {
-            if (isObject(styles.defaultProps)) {
-              styles.defaultProps.size = "lg"
-            } else {
-              styles.defaultProps = { size: "lg" }
-            }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (components.includes(name)) {
+          if (isObject(styles.defaultProps)) {
+            styles.defaultProps.size = "lg"
+          } else {
+            styles.defaultProps = { size: "lg" }
           }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -76,20 +74,19 @@ describe("withDefaultVariant", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (isObject(styles.defaultProps)) {
-            styles.defaultProps.variant = "solid"
-          } else {
-            styles.defaultProps = { variant: "solid" }
-          }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (isObject(styles.defaultProps)) {
+          styles.defaultProps.variant = "solid"
+        } else {
+          styles.defaultProps = { variant: "solid" }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -105,22 +102,21 @@ describe("withDefaultVariant", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (components.includes(name)) {
-            if (isObject(styles.defaultProps)) {
-              styles.defaultProps.variant = "outline"
-            } else {
-              styles.defaultProps = { variant: "outline" }
-            }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (components.includes(name)) {
+          if (isObject(styles.defaultProps)) {
+            styles.defaultProps.variant = "outline"
+          } else {
+            styles.defaultProps = { variant: "outline" }
           }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -135,20 +131,19 @@ describe("withDefaultColorScheme", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (isObject(styles.defaultProps)) {
-            styles.defaultProps.colorScheme = "blue"
-          } else {
-            styles.defaultProps = { colorScheme: "blue" }
-          }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (isObject(styles.defaultProps)) {
+          styles.defaultProps.colorScheme = "blue"
+        } else {
+          styles.defaultProps = { colorScheme: "blue" }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -164,22 +159,21 @@ describe("withDefaultColorScheme", () => {
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (components.includes(name)) {
-            if (isObject(styles.defaultProps)) {
-              styles.defaultProps.colorScheme = "red"
-            } else {
-              styles.defaultProps = { colorScheme: "red" }
-            }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (components.includes(name)) {
+          if (isObject(styles.defaultProps)) {
+            styles.defaultProps.colorScheme = "red"
+          } else {
+            styles.defaultProps = { colorScheme: "red" }
           }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -189,31 +183,30 @@ describe("withDefaultColorScheme", () => {
 describe("withDefaultProps", () => {
   test("should change default color scheme", () => {
     const customTheme = withDefaultProps({
-      defaultProps: { size: "lg", variant: "outline", colorScheme: "blue" },
+      defaultProps: { colorScheme: "blue", size: "lg", variant: "outline" },
     })
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (isObject(styles.defaultProps)) {
-            styles.defaultProps.size = "lg"
-            styles.defaultProps.variant = "outline"
-            styles.defaultProps.colorScheme = "blue"
-          } else {
-            styles.defaultProps = {
-              size: "lg",
-              variant: "outline",
-              colorScheme: "blue",
-            }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (isObject(styles.defaultProps)) {
+          styles.defaultProps.size = "lg"
+          styles.defaultProps.variant = "outline"
+          styles.defaultProps.colorScheme = "blue"
+        } else {
+          styles.defaultProps = {
+            colorScheme: "blue",
+            size: "lg",
+            variant: "outline",
           }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)
@@ -223,34 +216,33 @@ describe("withDefaultProps", () => {
     const components = ["Tag"]
 
     const customTheme = withDefaultProps({
-      defaultProps: { size: "lg", variant: "outline", colorScheme: "blue" },
       components,
+      defaultProps: { colorScheme: "blue", size: "lg", variant: "outline" },
     })
 
     const expected = {
       ...defaultTheme,
-      components: Object.entries(defaultTheme.components).reduce(
-        (prev, [name, styles]) => {
-          if (components.includes(name)) {
-            if (isObject(styles.defaultProps)) {
-              styles.defaultProps.size = "lg"
-              styles.defaultProps.variant = "outline"
-              styles.defaultProps.colorScheme = "blue"
-            } else {
-              styles.defaultProps = {
-                size: "lg",
-                variant: "outline",
-                colorScheme: "blue",
-              }
+      components: Object.entries(
+        defaultTheme.components,
+      ).reduce<ThemeComponents>((prev, [name, styles]) => {
+        if (components.includes(name)) {
+          if (isObject(styles.defaultProps)) {
+            styles.defaultProps.size = "lg"
+            styles.defaultProps.variant = "outline"
+            styles.defaultProps.colorScheme = "blue"
+          } else {
+            styles.defaultProps = {
+              colorScheme: "blue",
+              size: "lg",
+              variant: "outline",
             }
           }
+        }
 
-          prev[name] = styles
+        prev[name] = styles
 
-          return prev
-        },
-        {} as ThemeComponents,
-      ),
+        return prev
+      }, {}),
     }
 
     expect(extendTheme(customTheme)()).toStrictEqual(expected)

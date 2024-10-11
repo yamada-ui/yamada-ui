@@ -1,30 +1,24 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
+import type { FocusEventHandler, ReactNode } from "react"
 import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import {
+  ariaAttr,
   createContext,
   cx,
+  dataAttr,
+  findChild,
   getValidChildren,
   handlerAll,
-  dataAttr,
-  ariaAttr,
-  findChild,
 } from "@yamada-ui/utils"
-import type { ReactNode, FocusEventHandler } from "react"
-import { useState, useId, isValidElement } from "react"
+import { isValidElement, useId, useState } from "react"
 
 export interface FormControlOptions {
-  /**
-   * If `true`, the form control will be required.
-   *
-   * @default false
-   */
-  isRequired?: boolean
   /**
    * If `true`, the form control will be disabled.
    *
@@ -43,9 +37,23 @@ export interface FormControlOptions {
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * If `true`, the form control will be required.
+   *
+   * @default false
+   */
+  isRequired?: boolean
 }
 
 interface FormControlAdditionalOptions extends LabelOptions {
+  /**
+   * The form control error message to use.
+   */
+  errorMessage?: ReactNode
+  /**
+   * The form control helper message to use.
+   */
+  helperMessage?: ReactNode
   /**
    * If `true`, switch between helper message and error message using isInvalid.
    *
@@ -57,25 +65,17 @@ interface FormControlAdditionalOptions extends LabelOptions {
    */
   label?: ReactNode
   /**
-   * The form control helper message to use.
+   * Props the error message component.
    */
-  helperMessage?: ReactNode
-  /**
-   * The form control error message to use.
-   */
-  errorMessage?: ReactNode
-  /**
-   * Props the label component.
-   */
-  labelProps?: LabelProps
+  errorMessageProps?: ErrorMessageProps
   /**
    * Props the label component.
    */
   helperMessageProps?: HelperMessageProps
   /**
-   * Props the error message component.
+   * Props the label component.
    */
-  errorMessageProps?: ErrorMessageProps
+  labelProps?: LabelProps
 }
 
 export interface FormControlProps
@@ -85,33 +85,33 @@ export interface FormControlProps
     FormControlAdditionalOptions {}
 
 interface FormControlContext {
-  id?: string
-  labelId?: string
-  isFocused: boolean
-  isRequired: boolean
   isDisabled: boolean
+  isFocused: boolean
   isInvalid: boolean
   isReadOnly: boolean
   isReplace: boolean
-  onFocus: () => void
+  isRequired: boolean
   onBlur: () => void
+  onFocus: () => void
+  id?: string
+  labelId?: string
 }
 
 export const [FormControlContextProvider, useFormControlContext] =
   createContext<FormControlContext | undefined>({
-    strict: false,
     name: "FormControlContext",
+    strict: false,
   })
 
 interface FormControlStylesContext {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 export const [FormControlStylesProvider, useFormControlStyles] = createContext<
   FormControlStylesContext | undefined
 >({
-  strict: false,
   name: "FormControlStyleContext",
+  strict: false,
 })
 
 /**
@@ -124,20 +124,20 @@ export const FormControl = forwardRef<FormControlProps, "div">(
     const [styles, mergedProps] = useComponentMultiStyle("FormControl", props)
     const {
       className,
-      isRequired = false,
+      children,
+      errorMessage,
+      helperMessage,
       isDisabled = false,
       isInvalid = false,
       isReadOnly = false,
       isReplace = true,
+      isRequired = false,
       label,
-      helperMessage,
-      errorMessage,
-      children,
-      requiredIndicator,
       optionalIndicator,
-      labelProps,
-      helperMessageProps,
+      requiredIndicator,
       errorMessageProps,
+      helperMessageProps,
+      labelProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -164,23 +164,23 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       <FormControlContextProvider
         value={{
           id,
-          labelId,
-          isFocused,
-          isRequired,
           isDisabled,
+          isFocused,
           isInvalid,
           isReadOnly,
           isReplace,
-          onFocus: () => setFocused(true),
+          isRequired,
+          labelId,
           onBlur: () => setFocused(false),
+          onFocus: () => setFocused(true),
         }}
       >
         <FormControlStylesProvider value={styles}>
           <ui.div
             ref={ref}
             className={cx("ui-form__control", className)}
-            data-focus={dataAttr(isFocused)}
             data-disabled={dataAttr(isDisabled)}
+            data-focus={dataAttr(isFocused)}
             data-invalid={dataAttr(isInvalid)}
             data-readonly={dataAttr(isReadOnly)}
             __css={css}
@@ -188,8 +188,8 @@ export const FormControl = forwardRef<FormControlProps, "div">(
           >
             {!isCustomLabel && label ? (
               <Label
-                requiredIndicator={requiredIndicator}
                 optionalIndicator={optionalIndicator}
+                requiredIndicator={requiredIndicator}
                 {...labelProps}
               >
                 {label}
@@ -224,12 +224,12 @@ interface UseFormControlOptions extends FormControlOptions {
 export const useFormControl = <Y extends Dict = Dict>({
   id: idProp,
   disabled,
-  readOnly,
-  required,
   isDisabled: isDisabledProp,
+  isInvalid: isInvalidProp,
   isReadOnly: isReadOnlyProp,
   isRequired: isRequiredProp,
-  isInvalid: isInvalidProp,
+  readOnly,
+  required,
   ...rest
 }: UseFormControlOptions & Y) => {
   const control = useFormControlContext()
@@ -243,11 +243,11 @@ export const useFormControl = <Y extends Dict = Dict>({
 
   return {
     id,
-    labelId,
     isDisabled,
+    isInvalid,
     isReadOnly,
     isRequired,
-    isInvalid,
+    labelId,
     ...rest,
   }
 }
@@ -255,26 +255,26 @@ export const useFormControl = <Y extends Dict = Dict>({
 export interface UseFormControlProps<Y extends HTMLElement>
   extends FormControlOptions {
   id?: string
-  onFocus?: FocusEventHandler<Y>
-  onBlur?: FocusEventHandler<Y>
   disabled?: boolean
   readOnly?: boolean
   required?: boolean
+  onBlur?: FocusEventHandler<Y>
+  onFocus?: FocusEventHandler<Y>
 }
 
 export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   id,
   disabled,
-  readOnly,
-  required,
   isDisabled,
+  isInvalid,
   isReadOnly,
   isRequired,
-  isInvalid,
-  onFocus,
+  readOnly,
+  required,
   onBlur,
+  onFocus,
   ...rest
-}: UseFormControlProps<Y> & M) => {
+}: M & UseFormControlProps<Y>) => {
   const control = useFormControlContext()
 
   disabled ??= isDisabled ?? control?.isDisabled
@@ -284,23 +284,23 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
 
   return {
     id: id ?? control?.id,
-    disabled,
-    required,
-    readOnly,
     "aria-disabled": ariaAttr(disabled),
+    "aria-invalid": ariaAttr(isInvalid),
     "aria-readonly": ariaAttr(readOnly),
     "aria-required": ariaAttr(required),
-    "aria-invalid": ariaAttr(isInvalid),
     "data-readonly": dataAttr(readOnly),
-    onFocus: handlerAll(control?.onFocus, onFocus),
+    disabled,
+    readOnly,
+    required,
     onBlur: handlerAll(control?.onBlur, onBlur),
+    onFocus: handlerAll(control?.onFocus, onFocus),
     ...(disabled || readOnly
       ? {
-          _hover: {},
           _active: {},
           _focus: {},
-          _invalid: {},
           _focusVisible: {},
+          _hover: {},
+          _invalid: {},
         }
       : {}),
     ...rest,
@@ -348,9 +348,9 @@ export const getFormControlProperties = ({
 }
 
 interface LabelOptions {
-  requiredIndicator?: ReactNode
-  optionalIndicator?: ReactNode
   isRequired?: boolean
+  optionalIndicator?: ReactNode
+  requiredIndicator?: ReactNode
 }
 
 export interface LabelProps extends HTMLUIProps<"label">, LabelOptions {}
@@ -359,24 +359,24 @@ export const Label = forwardRef<LabelProps, "label">(
   (
     {
       id: idProp,
-      className,
       htmlFor,
-      isRequired: isRequiredProp,
-      requiredIndicator = null,
-      optionalIndicator = null,
+      className,
       children,
+      isRequired: isRequiredProp,
+      optionalIndicator = null,
+      requiredIndicator = null,
       ...rest
     },
     ref,
   ) => {
     const {
       id: formControlId,
-      labelId,
-      isRequired,
-      isFocused,
       isDisabled,
+      isFocused,
       isInvalid,
       isReadOnly,
+      isRequired,
+      labelId,
     } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
@@ -391,16 +391,16 @@ export const Label = forwardRef<LabelProps, "label">(
 
     return (
       <ui.label
-        ref={ref}
         id={idProp}
-        className={cx("ui-form__label", className)}
-        data-focus={dataAttr(isFocused)}
-        data-disabled={dataAttr(isDisabled)}
-        data-readonly={dataAttr(isReadOnly)}
-        data-invalid={dataAttr(isInvalid)}
+        ref={ref}
         htmlFor={htmlFor ?? formControlId}
-        __css={css}
+        className={cx("ui-form__label", className)}
         style={{ cursor: isDisabled ? "not-allowed" : undefined }}
+        data-disabled={dataAttr(isDisabled)}
+        data-focus={dataAttr(isFocused)}
+        data-invalid={dataAttr(isInvalid)}
+        data-readonly={dataAttr(isReadOnly)}
+        __css={css}
         {...rest}
       >
         {children}
@@ -433,8 +433,8 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
       <ui.span
         ref={ref}
         className={cx("ui-form__required-indicator", className)}
+        aria-hidden
         role="presentation"
-        aria-hidden={true}
         __css={css}
         {...rest}
       >
@@ -464,8 +464,8 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
       <ui.span
         ref={ref}
         className={cx("ui-form__helper-message", className)}
-        __css={css}
         aria-describedby={id}
+        __css={css}
         {...rest}
       />
     )

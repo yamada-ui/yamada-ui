@@ -1,5 +1,6 @@
 import type { CSSUIObject, HTMLUIProps, PropGetter } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
 import {
   ariaAttr,
   cx,
@@ -12,7 +13,6 @@ import {
   mergeRefs,
   omitChildren,
 } from "@yamada-ui/utils"
-import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
 import { useCallback, useId } from "react"
 import {
   AccordionItemProvider,
@@ -23,6 +23,15 @@ import { AccordionLabel } from "./accordion-label"
 import { AccordionPanel } from "./accordion-panel"
 
 export interface AccordionItemOptions {
+  children?:
+    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
+    | ReactNode
+  /**
+   * The accordion icon to use.
+   */
+  icon?:
+    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
+    | ReactNode
   /**
    * If `true`, the accordion item will be disabled.
    *
@@ -33,17 +42,8 @@ export interface AccordionItemOptions {
    * The accordion label to use.
    */
   label?:
+    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
     | ReactNode
-    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
-  /**
-   * The accordion icon to use.
-   */
-  icon?:
-    | ReactNode
-    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
-  children?:
-    | ReactNode
-    | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
 export interface AccordionItemProps
@@ -52,7 +52,7 @@ export interface AccordionItemProps
 
 export const AccordionItem = forwardRef<AccordionItemProps, "div">(
   (
-    { id, className, isDisabled = false, label, icon, children, ...rest },
+    { id, className, children, icon, isDisabled = false, label, ...rest },
     ref,
   ) => {
     const uuid = useId()
@@ -62,13 +62,13 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     const itemId = `${id}-item`
     const panelId = `${id}-panel`
 
-    const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
+    const { index, isMultiple, isToggle, setFocusedIndex, setIndex, styles } =
       useAccordionContext()
 
     const {
+      descendants,
       index: i,
       register,
-      descendants,
     } = useAccordionDescendant({ disabled: isDisabled })
 
     const isOpen =
@@ -114,15 +114,15 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
 
             prev?.node.focus()
           },
-          Home: () => {
-            const first = descendants.enabledFirstValue()
-
-            first?.node.focus()
-          },
           End: () => {
             const last = descendants.enabledLastValue()
 
             last?.node.focus()
+          },
+          Home: () => {
+            const first = descendants.enabledFirstValue()
+
+            first?.node.focus()
           },
         }
 
@@ -140,14 +140,14 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       (props = {}, ref = null) => ({
         id: itemId,
         type: "button",
-        "aria-expanded": isOpen,
         "aria-controls": panelId,
         "aria-disabled": ariaAttr(
           (!isMultiple && !isToggle && isOpen) || isDisabled,
         ),
+        "aria-expanded": isOpen,
         ...props,
-        disabled: isDisabled,
         ref: mergeRefs(register, ref),
+        disabled: isDisabled,
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -169,8 +169,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     const getPanelProps: PropGetter = useCallback(
       (props = {}, ref = null) => ({
         id: panelId,
-        role: "region",
         "aria-labelledby": itemId,
+        role: "region",
         ...props,
         ref,
       }),
@@ -182,13 +182,13 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     const cloneLabel =
       typeof label === "function"
         ? label({
-            isExpanded: isOpen,
             isDisabled,
+            isExpanded: isOpen,
           })
         : label
 
     if (typeof children === "function")
-      children = children({ isExpanded: isOpen, isDisabled })
+      children = children({ isDisabled, isExpanded: isOpen })
 
     const validChildren = getValidChildren(children)
 
@@ -201,12 +201,12 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
 
     return (
       <AccordionItemProvider
-        value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
+        value={{ icon, isDisabled, isOpen, getLabelProps, getPanelProps }}
       >
         <ui.div
+          id={id}
           ref={ref}
           className={cx("ui-accordion__item", className)}
-          id={id}
           data-expanded={dataAttr(isOpen)}
           __css={css}
           {...rest}

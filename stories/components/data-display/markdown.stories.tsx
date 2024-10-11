@@ -5,8 +5,8 @@ import { Heading } from "@yamada-ui/react"
 type Story = StoryFn<typeof Markdown>
 
 const meta: Meta<typeof Markdown> = {
-  title: "Components / Data Display / Markdown",
   component: Markdown,
+  title: "Components / Data Display / Markdown",
 }
 
 export default meta
@@ -23,14 +23,15 @@ export const customComponent: Story = () => {
   return (
     <Markdown
       components={{
-        h2: (props) => (
+        h2: ({ children }) => (
           <Heading
             size="2xl"
-            bgGradient="linear(to-l, #f37bdf, #59a9e1)"
             bgClip="text"
+            bgGradient="linear(to-l, #f37bdf, #59a9e1)"
             isTruncated
-            {...props}
-          />
+          >
+            {children}
+          </Heading>
         ),
       }}
     >

@@ -1,8 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo } from "react"
-import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
-import { ChevronsRight } from "@yamada-ui/lucide"
 import type { BreadcrumbGenerateItem } from "@yamada-ui/react"
+import { ChevronsRight } from "@yamada-ui/lucide"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,12 +10,14 @@ import {
   MenuItem,
   MenuList,
 } from "@yamada-ui/react"
+import { useMemo } from "react"
+import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
 
 type Story = StoryFn<typeof Breadcrumb>
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: "Components / Navigation / Breadcrumb",
   component: Breadcrumb,
+  title: "Components / Navigation / Breadcrumb",
 }
 
 export default meta
@@ -66,7 +66,7 @@ export const withBoundaries: Story = () => {
     [],
   )
 
-  return <Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />
+  return <Breadcrumb endBoundaries={1} items={items} startBoundaries={1} />
 }
 
 export const customBoundaries: Story = () => {
@@ -96,9 +96,6 @@ export const customEllipsis: Story = () => {
 
   return (
     <Breadcrumb
-      items={items}
-      startBoundaries={1}
-      endBoundaries={1}
       ellipsis={({ items }) => {
         return (
           <Menu>
@@ -116,6 +113,9 @@ export const customEllipsis: Story = () => {
           </Menu>
         )
       }}
+      endBoundaries={1}
+      items={items}
+      startBoundaries={1}
     />
   )
 }

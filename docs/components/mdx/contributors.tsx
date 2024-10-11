@@ -1,6 +1,6 @@
-import { Avatar, Wrap } from "@yamada-ui/react"
 import type { FlexProps } from "@yamada-ui/react"
 import type { FC } from "react"
+import { Avatar, Wrap } from "@yamada-ui/react"
 import { NextLink } from "components/navigation"
 import { CONSTANT } from "constant"
 

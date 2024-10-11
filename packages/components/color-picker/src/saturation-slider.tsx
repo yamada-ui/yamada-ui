@@ -1,17 +1,17 @@
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
   Token,
 } from "@yamada-ui/core"
-import { cx, replaceObject } from "@yamada-ui/utils"
 import type { UseSaturationSliderProps } from "./use-saturation-slider"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { cx, replaceObject } from "@yamada-ui/utils"
 import { useSaturationSlider } from "./use-saturation-slider"
 
 interface SaturationSliderOptions {
@@ -30,25 +30,25 @@ interface SaturationSliderOptions {
    */
   inputProps?: HTMLUIProps<"input">
   /**
-   * Props for saturation slider track element.
-   */
-  trackProps?: HTMLUIProps
-  /**
    * Props for saturation slider thumb element.
    */
   thumbProps?: HTMLUIProps
+  /**
+   * Props for saturation slider track element.
+   */
+  trackProps?: HTMLUIProps
 }
+
+export interface SaturationSliderProps
+  extends ThemeProps<"SaturationSlider">,
+    UseSaturationSliderProps,
+    SaturationSliderOptions {}
 
 /**
  * `SaturationSlider` is a component used to allow the user to select a color saturation.
  *
  * @see Docs https://yamada-ui.com/components/forms/saturation-slider
  */
-export interface SaturationSliderProps
-  extends ThemeProps<"SaturationSlider">,
-    UseSaturationSliderProps,
-    SaturationSliderOptions {}
-
 export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle(
@@ -60,8 +60,8 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
       ratio = 16 / 9,
       innerProps,
       inputProps,
-      trackProps,
       thumbProps,
+      trackProps,
       __css,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -69,30 +69,30 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
       overlays,
       getContainerProps,
       getInnerProps,
-      getTrackProps,
       getInputProps,
       getThumbProps,
+      getTrackProps,
     } = useSaturationSlider(computedProps)
 
     const css: CSSUIObject = {
+      "& > *": {
+        alignItems: "center",
+        bottom: "0",
+        display: "flex",
+        h: "100%",
+        justifyContent: "center",
+        left: "0",
+        position: "absolute",
+        right: "0",
+        top: "0",
+        w: "100%",
+      },
       position: "relative",
       _before: {
         content: `""`,
         display: "block",
         h: 0,
         pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),
-      },
-      "& > *": {
-        position: "absolute",
-        top: "0",
-        right: "0",
-        bottom: "0",
-        left: "0",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        w: "100%",
-        h: "100%",
       },
       ...styles.container,
       ...__css,
@@ -116,11 +116,11 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
               key={index}
               className="ui-saturation-slider__overlay"
               __css={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
                 bottom: 0,
+                left: 0,
+                position: "absolute",
+                right: 0,
+                top: 0,
                 ...styles.overlay,
               }}
               {...props}
@@ -130,9 +130,9 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
           <ui.div
             className="ui-saturation-slider__track"
             __css={{
+              h: "100%",
               position: "relative",
               w: "100%",
-              h: "100%",
               ...styles.track,
             }}
             {...getTrackProps(trackProps)}

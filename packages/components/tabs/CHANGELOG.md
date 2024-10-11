@@ -1,5 +1,20 @@
 # @yamada-ui/tabs
 
+## 1.0.41
+
+### Patch Changes
+
+- [#2962](https://github.com/yamada-ui/yamada-ui/pull/2962) [`b209a91`](https://github.com/yamada-ui/yamada-ui/commit/b209a91c46e151609092e2e17056c8f01989bae8) Thanks [@uraaaa24](https://github.com/uraaaa24)! - add `aria-orientation` attribute to `TabList` component.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`7a32bb8`](https://github.com/yamada-ui/yamada-ui/commit/7a32bb8d0e715276a276b92a66bb78345251e978)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/ripple@1.0.40
+  - @yamada-ui/use-clickable@1.2.10
+  - @yamada-ui/use-descendant@1.0.23
+  - @yamada-ui/use-disclosure@1.0.22
+
 ## 1.0.40
 
 ### Patch Changes

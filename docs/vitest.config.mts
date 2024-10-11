@@ -2,12 +2,12 @@ import { defineConfig } from "vitest/config"
 
 export default defineConfig({
   test: {
-    include: ["pages/api/**/*.test.{ts,tsx}"],
     environment: "node",
-    testTimeout: 10000,
     globals: true,
+    include: ["pages/api/**/*.test.{ts,tsx}"],
+    setupFiles: ["scripts/setup-test.ts"],
+    testTimeout: 10000,
     watch: false,
     onConsoleLog: (_log, type) => type !== "stderr",
-    setupFiles: ["scripts/setup-test.ts"],
   },
 })

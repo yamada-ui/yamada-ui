@@ -1,9 +1,9 @@
-import { Text, VStack } from "@yamada-ui/react"
 import type { InferGetStaticPropsType, NextPage } from "next"
+import { Text, VStack } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
-import { useI18n, PageProvider } from "contexts"
+import { PageProvider, useI18n } from "contexts"
 import { TopLayout } from "layouts"
 import { getStaticCommonProps } from "utils/next"
 
@@ -17,17 +17,17 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
   return (
     <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
-        <SEO
-          title={tc("not-found.title") as string}
+        <Seo
           description={tc("not-found.description") as string}
+          title={tc("not-found.title") as string}
         />
 
         <Section alignItems="center">
           <VStack alignItems="center">
             <Text
               as="h1"
-              fontSize={{ base: "5xl", md: "3xl", sm: "2xl" }}
               fontFamily="heading"
+              fontSize={{ base: "5xl", sm: "2xl", md: "3xl" }}
               fontWeight="bold"
               textAlign="center"
             >
@@ -35,10 +35,10 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
             </Text>
 
             <Text
-              w="full"
-              maxW="2xl"
               fontSize={{ base: "xl", sm: "lg" }}
+              maxW="2xl"
               textAlign="center"
+              w="full"
             >
               {tc("not-found.message")}
             </Text>

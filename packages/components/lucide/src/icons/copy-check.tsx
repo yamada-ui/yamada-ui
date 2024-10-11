@@ -1,7 +1,7 @@
+import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
 import { CopyCheck as CopyCheckIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
-import type { LucideIconProps } from "../lucide-icon"
 
 /**
  * `CopyCheck` is [Lucide](https://lucide.dev) SVG icon component.

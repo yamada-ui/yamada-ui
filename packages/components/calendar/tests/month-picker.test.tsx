@@ -1,5 +1,4 @@
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
-
 import { MonthPicker } from "../src"
 
 describe("<MonthPicker />", () => {

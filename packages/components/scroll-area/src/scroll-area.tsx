@@ -1,8 +1,9 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { UIEvent } from "react"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import {
@@ -15,41 +16,40 @@ import {
   useSafeLayoutEffect,
   vendor,
 } from "@yamada-ui/utils"
-import type { UIEvent } from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const neverStyles: CSSUIObject = {
+  "&::-webkit-scrollbar": { display: "none" },
   scrollbarWidth: "none",
   _scrollbar: { display: "none" },
-  "&::-webkit-scrollbar": { display: "none" },
 }
 
 const hiddenStyles: CSSUIObject = {
-  _scrollbarTrack: { bg: "transparent" },
-  "&::-webkit-scrollbar-track": { bg: "transparent" },
-  _scrollbarThumb: { bg: "transparent" },
   "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-  _light: {
-    _scrollbarTrack: { bg: "transparent" },
-    "&::-webkit-scrollbar-track": { bg: "transparent" },
-    _scrollbarThumb: { bg: "transparent" },
-    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-  },
-  _dark: {
-    _scrollbarTrack: { bg: "transparent" },
-    "&::-webkit-scrollbar-track": { bg: "transparent" },
-    _scrollbarThumb: { bg: "transparent" },
-    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-  },
+  "&::-webkit-scrollbar-track": { bg: "transparent" },
   "@-moz-document url-prefix()": {
     scrollbarColor: "transparent transparent",
-    _light: {
-      scrollbarColor: "transparent transparent",
-    },
     _dark: {
       scrollbarColor: "transparent transparent",
     },
+    _light: {
+      scrollbarColor: "transparent transparent",
+    },
   },
+  _dark: {
+    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+    "&::-webkit-scrollbar-track": { bg: "transparent" },
+    _scrollbarThumb: { bg: "transparent" },
+    _scrollbarTrack: { bg: "transparent" },
+  },
+  _light: {
+    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+    "&::-webkit-scrollbar-track": { bg: "transparent" },
+    _scrollbarThumb: { bg: "transparent" },
+    _scrollbarTrack: { bg: "transparent" },
+  },
+  _scrollbarThumb: { bg: "transparent" },
+  _scrollbarTrack: { bg: "transparent" },
 }
 
 interface ScrollAreaOptions {
@@ -58,17 +58,17 @@ interface ScrollAreaOptions {
    *
    * @default 'hover'
    */
-  type?: "always" | "scroll" | "hover" | "never"
-  /**
-   * Props for inner element.
-   */
-  innerProps?: HTMLUIProps
+  type?: "always" | "hover" | "never" | "scroll"
   /**
    * Delay in milliseconds before scrollbars are hidden.
    *
    * @default 1000
    */
   scrollHideDelay?: number
+  /**
+   * Props for inner element.
+   */
+  innerProps?: HTMLUIProps
   /**
    * Callback function for when the scroll position changes.
    */
@@ -192,8 +192,8 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
       <InternalScrollArea
         key={componentKey}
         ref={mergeRefs(ref, scrollAreaRef)}
-        data-key={componentKey}
         data-hovered={dataAttr(isHovered)}
+        data-key={componentKey}
         data-scrolling={dataAttr(isScrolling)}
         {...computedProps}
       />
@@ -215,7 +215,7 @@ ScrollArea.__ui__ = "ScrollArea"
 type InternalScrollAreaProps = HTMLUIProps & Pick<ScrollAreaProps, "innerProps">
 
 const InternalScrollArea = forwardRef<InternalScrollAreaProps, "div">(
-  ({ className, innerProps, children, ...rest }, ref) => {
+  ({ className, children, innerProps, ...rest }, ref) => {
     return (
       <ui.div
         ref={ref}

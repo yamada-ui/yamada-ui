@@ -1,14 +1,17 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-  layoutStyleProperties,
-} from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
+import type { ReactNode, RefAttributes } from "react"
+import type { DatePickerIconProps } from "./date-picker"
+import type { UseRangeDatePickerProps } from "./use-range-date-picker"
+import {
+  forwardRef,
+  layoutStyleProperties,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
 import {
   cx,
@@ -17,21 +20,21 @@ import {
   runIfFunc,
   splitObject,
 } from "@yamada-ui/utils"
-import type { ReactNode, RefAttributes } from "react"
 import { Calendar } from "./calendar"
-import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"
 import { DatePickerProvider, useDatePickerContext } from "./use-date-picker"
-import type { UseRangeDatePickerProps } from "./use-range-date-picker"
 import { useRangeDatePicker } from "./use-range-date-picker"
 
 interface RangeDatePickerOptions {
+  children?: FC<{ value: [Date?, Date?]; onClose: () => void }> | ReactNode
   /**
-   * The visual separator between each value.
-   *
-   * @default '-'
+   * The border color when the input is invalid.
    */
-  separator?: string
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
   /**
    * If `true`, display the date picker clear icon.
    *
@@ -39,13 +42,15 @@ interface RangeDatePickerOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * The visual separator between each value.
+   *
+   * @default '-'
    */
-  focusBorderColor?: string
+  separator?: string
   /**
-   * The border color when the input is invalid.
+   * Props for date picker clear icon element.
    */
-  errorBorderColor?: string
+  clearIconProps?: DatePickerIconProps
   /**
    * Props for date picker container element.
    */
@@ -55,25 +60,17 @@ interface RangeDatePickerOptions {
    */
   contentProps?: Omit<MotionProps, "children">
   /**
-   * Props for date picker field element.
-   */
-  fieldProps?: Omit<HTMLUIProps, "children">
-  /**
-   * Props for date picker start input element.
-   */
-  startInputProps?: HTMLUIProps<"input">
-  /**
    * Props for date picker end input element.
    */
   endInputProps?: HTMLUIProps<"input">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<HTMLUIProps, "children">
+  /**
    * Props for date picker icon element.
    */
   iconProps?: DatePickerIconProps
-  /**
-   * Props for date picker clear icon element.
-   */
-  clearIconProps?: DatePickerIconProps
   /**
    * Props to be forwarded to the portal component.
    *
@@ -81,7 +78,10 @@ interface RangeDatePickerOptions {
    *
    */
   portalProps?: Omit<PortalProps, "children">
-  children?: ReactNode | FC<{ value: [Date?, Date?]; onClose: () => void }>
+  /**
+   * Props for date picker start input element.
+   */
+  startInputProps?: HTMLUIProps<"input">
 }
 
 export interface RangeDatePickerProps
@@ -103,46 +103,46 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
     let {
       className,
       children,
-      isClearable = true,
-      separator,
       color,
       h,
       height,
+      isClearable = true,
       minH,
       minHeight,
+      separator,
+      clearIconProps,
       containerProps,
       contentProps,
-      fieldProps,
-      startInputProps,
       endInputProps,
+      fieldProps,
       iconProps,
-      clearIconProps,
       portalProps = { isDisabled: true },
+      startInputProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const {
-      getPopoverProps,
-      getContainerProps,
-      getCalendarProps,
-      getFieldProps,
-      getStartInputProps,
-      getEndInputProps,
-      getIconProps,
-      onClose,
-      value,
       id,
+      value,
+      getCalendarProps,
+      getContainerProps,
+      getEndInputProps,
+      getFieldProps,
+      getIconProps,
+      getPopoverProps,
+      getStartInputProps,
+      onClose,
     } = useRangeDatePicker(computedProps)
 
-    const [startValue, endValue] = value ?? []
+    const [startValue, endValue] = value
 
     h ??= height
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
+      h: "fit-content",
+      w: "100%",
       ...styles.container,
     }
 
@@ -162,8 +162,8 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
                 separator={separator}
                 value={value}
                 {...getFieldProps({ h, minH, ...fieldProps })}
-                startInputProps={getStartInputProps(startInputProps, ref)}
                 endInputProps={getEndInputProps(endInputProps)}
+                startInputProps={getStartInputProps(startInputProps, ref)}
               />
 
               {isClearable && (!!startValue || !!endValue) ? (
@@ -179,11 +179,11 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                as="div"
                 id={id}
-                role="dialog"
-                aria-modal="true"
+                as="div"
                 className="ui-range-date-picker__content"
+                aria-modal="true"
+                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -213,7 +213,7 @@ export interface RangeDatePickerFieldProps
   extends HTMLUIProps,
     Pick<
       RangeDatePickerProps,
-      "separator" | "startInputProps" | "endInputProps"
+      "endInputProps" | "separator" | "startInputProps"
     >,
     RangeDatePickerFieldOptions {}
 
@@ -224,12 +224,12 @@ export const RangeDatePickerField = forwardRef<
   (
     {
       className,
-      value = [],
       h,
       minH,
-      startInputProps,
-      endInputProps,
       separator = "-",
+      value = [],
+      endInputProps,
+      startInputProps,
       ...rest
     },
     ref,
@@ -238,11 +238,11 @@ export const RangeDatePickerField = forwardRef<
 
     const [startValue, endValue] = value
     const {
-      placeholder: startPlaceholder,
       ref: startInputRef,
+      placeholder: startPlaceholder,
       ...computedStartInputProps
-    } = (startInputProps ?? {}) as RefAttributes<HTMLInputElement> &
-      HTMLUIProps<"input">
+    } = (startInputProps ?? {}) as HTMLUIProps<"input"> &
+      RefAttributes<HTMLInputElement>
     const { placeholder: endPlaceholder, ...computedEndInputProps } =
       endInputProps ?? {}
     const hasPlaceholder = !!startPlaceholder || !!endPlaceholder
@@ -250,11 +250,11 @@ export const RangeDatePickerField = forwardRef<
     const hasSeparator = hasPlaceholder || hasValue
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
       ...styles.field,
     }
 
@@ -300,16 +300,16 @@ RangeDatePickerField.__ui__ = "RangeDatePickerField"
 interface AutosizingInputProps extends HTMLUIProps<"input"> {}
 
 const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
-  ({ className, value, placeholder, ...rest }, ref) => {
+  ({ className, placeholder, value, ...rest }, ref) => {
     const [containerProps, inputProps] = splitObject(
       rest,
       layoutStyleProperties,
     )
 
     const css: CSSUIObject = {
-      position: "relative",
-      display: "inline-flex",
       alignItems: "center",
+      display: "inline-flex",
+      position: "relative",
     }
 
     return (
@@ -320,9 +320,9 @@ const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
 
         <ui.input
           ref={ref}
-          value={value}
-          position="absolute"
           left="0"
+          position="absolute"
+          value={value}
           {...inputProps}
         />
       </ui.div>

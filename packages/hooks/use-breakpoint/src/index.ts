@@ -1,8 +1,8 @@
-import type { Theme, ResponsiveObject, StyledTheme } from "@yamada-ui/core"
+import type { ResponsiveObject, StyledTheme, Theme } from "@yamada-ui/core"
+import type { DependencyList } from "react"
 import { useTheme } from "@yamada-ui/core"
 import { createdDom, useUpdateEffect } from "@yamada-ui/utils"
-import type { DependencyList } from "react"
-import { useState, useMemo, useEffect, useRef, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 /**
  * `useBreakpoint` is a custom hook that returns the current breakpoint.
@@ -22,14 +22,17 @@ export const useBreakpoint = () => {
   } = theme.__config?.breakpoint ?? {}
   const hasContainer = !!containerRef
 
-  if (!breakpoints)
-    throw Error(
+  if (!breakpoints) {
+    console.warn(
       "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
     )
+  }
 
-  const queries = useMemo(
-    () =>
-      breakpoints.queries.map(({ breakpoint, minMaxQuery, minW, maxW }) => {
+  const queries = useMemo(() => {
+    if (!breakpoints) return []
+
+    return breakpoints.queries.map(
+      ({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =
           identifier === "@media screen"
             ? "@media screen and "
@@ -38,18 +41,20 @@ export const useBreakpoint = () => {
 
         return {
           breakpoint,
-          query,
-          minW,
           maxW,
+          minW,
+          query,
         }
-      }),
-    [breakpoints, identifier],
-  )
+      },
+    )
+  }, [breakpoints, identifier])
+
+  const hasQueries = !!queries.length
 
   const [breakpoint, setBreakpoint] = useState(() => {
     const isBrowser = createdDom()
 
-    if (!isBrowser || hasContainer) return "base"
+    if (!isBrowser || hasContainer || !hasQueries) return "base"
 
     for (const { breakpoint, query } of queries) {
       const mql = window.matchMedia(query)
@@ -60,7 +65,7 @@ export const useBreakpoint = () => {
 
   const getBreakpoint = useCallback(
     (width: number) => {
-      for (const { breakpoint, minW, maxW } of queries) {
+      for (const { breakpoint, maxW, minW } of queries) {
         if (direction !== "up") {
           if ((minW ?? 0) <= width) return breakpoint
         } else {
@@ -74,7 +79,7 @@ export const useBreakpoint = () => {
   )
 
   useEffect(() => {
-    if (!hasContainer) return
+    if (!hasContainer || !hasQueries) return
 
     const isBrowser = createdDom()
 
@@ -102,10 +107,10 @@ export const useBreakpoint = () => {
       if (process.env.NODE_ENV !== "test")
         cancelAnimationFrame(animationFrameId.current)
     }
-  }, [hasContainer, containerRef, getBreakpoint])
+  }, [hasQueries, hasContainer, containerRef, getBreakpoint])
 
   useEffect(() => {
-    if (hasContainer) return
+    if (hasContainer || !hasQueries) return
 
     const observer = queries.map(({ breakpoint, query }): (() => void) => {
       const mql = window.matchMedia(query)
@@ -126,7 +131,7 @@ export const useBreakpoint = () => {
     return () => {
       observer.forEach((unobserve) => unobserve())
     }
-  }, [queries, hasContainer])
+  }, [queries, hasQueries, hasContainer])
 
   return breakpoint as Theme["breakpoints"]
 }
@@ -149,20 +154,23 @@ export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
 
 export const getBreakpointValue =
   <T>(values: ResponsiveObject<T> = {}) =>
-  (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
-    if (!theme) throw Error("getBreakpointValue: `theme` is undefined.")
+  (theme: StyledTheme | undefined, breakpoint: Theme["breakpoints"]): T => {
+    if (!theme) {
+      console.warn("getBreakpointValue: `theme` is undefined.")
+    }
 
-    const breakpoints = theme.__breakpoints?.keys
+    const breakpoints = theme?.__breakpoints?.keys ?? []
 
-    if (!breakpoints)
-      throw Error("getBreakpointValue: `breakpoints` is undefined.")
+    if (!breakpoints.length) {
+      console.warn("getBreakpointValue: `breakpoints` is undefined.")
+    }
 
     const currentIndex = breakpoints.indexOf(breakpoint)
 
     for (let i = currentIndex; 0 < i; i--) {
       const nextBreakpoint = breakpoints[i]
 
-      if (values.hasOwnProperty(nextBreakpoint)) {
+      if (nextBreakpoint && values.hasOwnProperty(nextBreakpoint)) {
         return values[nextBreakpoint] as T
       }
     }

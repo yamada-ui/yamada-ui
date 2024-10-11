@@ -1,12 +1,11 @@
-import { ui, forwardRef } from "@yamada-ui/core"
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import type { UseRatingItemProps } from "./use-rating-item"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx, getValidChildren, isString, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement } from "react"
-import type { FC } from "react"
 import { useRatingContext } from "./rating-context"
-import type { UseRatingItemProps } from "./use-rating-item"
 import { useRatingItem } from "./use-rating-item"
 
 export interface RatingItemProps
@@ -14,18 +13,18 @@ export interface RatingItemProps
     UseRatingItemProps {}
 
 export const RatingItem = forwardRef<RatingItemProps, "input">(
-  ({ className, groupValue, value, fractionValue, color, ...rest }, ref) => {
+  ({ className, color, fractionValue, groupValue, value, ...rest }, ref) => {
     const {
+      emptyIcon = <RatingStarIcon />,
+      filledIcon = <RatingStarIcon />,
       styles,
       inputProps,
-      emptyIcon = <StarIcon />,
-      filledIcon = <StarIcon />,
       itemProps,
     } = useRatingContext()
     const { isActive, isFilled, getInputProps, getItemProps } = useRatingItem({
-      value,
-      groupValue,
       fractionValue,
+      groupValue,
+      value,
     })
 
     const computedItemProps = runIfFunc(itemProps, value)
@@ -72,6 +71,9 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
   },
 )
 
+RatingItem.displayName = "RatingItem"
+RatingItem.__ui__ = "RatingItem"
+
 interface RatingIconProps extends HTMLUIProps {}
 
 const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
@@ -81,18 +83,18 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 
   const cloneChildren = validChildren.map((child) =>
     cloneElement(child, {
-      focusable: false,
-      "aria-hidden": true,
       style: {
-        maxWidth: "1em",
         maxHeight: "1em",
+        maxWidth: "1em",
       },
+      "aria-hidden": true,
+      focusable: false,
     }),
   )
 
   const css: CSSUIObject = {
-    display: "inline-flex",
     alignItems: "center",
+    display: "inline-flex",
     justifyContent: "center",
     ...styles.icon,
   }
@@ -108,17 +110,23 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   )
 }
 
-type StarIconProps = IconProps
+RatingIcon.displayName = "RatingIcon"
+RatingIcon.__ui__ = "RatingIcon"
 
-const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
+interface RatingStarIconProps extends IconProps {}
+
+const RatingStarIcon: FC<RatingStarIconProps> = ({ ...rest }) => {
   return (
     <Icon
-      viewBox="0 0 24 24"
       strokeLinecap="round"
       strokeLinejoin="round"
+      viewBox="0 0 24 24"
       {...rest}
     >
       <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
     </Icon>
   )
 }
+
+RatingStarIcon.displayName = "RatingStarIcon"
+RatingStarIcon.__ui__ = "RatingStarIcon"

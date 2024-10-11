@@ -1,26 +1,26 @@
-import { forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
+import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 
 export interface OvalProps extends IconProps {
-  /**
-   * The CSS `stroke` property.
-   */
-  secondaryColor?: string
   /**
    * The CSS `dur` property.
    *
    * @default '1s'
    */
   duration?: IconProps["dur"]
+  /**
+   * The CSS `stroke` property.
+   */
+  secondaryColor?: string
 }
 
 export const Oval = forwardRef<OvalProps, "svg">(
-  ({ color, secondaryColor, duration = "1s", ...rest }, ref) => {
+  ({ color, duration = "1s", secondaryColor, ...rest }, ref) => {
     return (
-      <Icon ref={ref} viewBox="0 0 38 38" stroke={color} {...rest}>
+      <Icon ref={ref} stroke={color} viewBox="0 0 38 38" {...rest}>
         <g fill="none" fillRule="evenodd">
-          <g transform="translate(1 1)" strokeWidth="2">
+          <g strokeWidth="2" transform="translate(1 1)">
             <circle
               {...(secondaryColor
                 ? { stroke: secondaryColor }
@@ -31,12 +31,12 @@ export const Oval = forwardRef<OvalProps, "svg">(
             />
             <path d="M36 18c0-9.94-8.06-18-18-18">
               <animateTransform
-                attributeName="transform"
                 type="rotate"
-                from="0 18 18"
-                to="360 18 18"
+                attributeName="transform"
                 dur={duration}
+                from="0 18 18"
                 repeatCount="indefinite"
+                to="360 18 18"
               />
             </path>
           </g>

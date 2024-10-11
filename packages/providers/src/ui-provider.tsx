@@ -1,48 +1,28 @@
 import type {
-  ThemeConfig,
   ColorModeManager,
-  ThemeSchemeManager,
   Environment,
+  ThemeConfig,
+  ThemeSchemeManager,
 } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
+import type { FC, ReactNode } from "react"
 import {
-  ThemeProvider,
   ColorModeProvider,
-  ResetStyle,
-  GlobalStyle,
   EnvironmentProvider,
+  GlobalStyle,
+  ResetStyle,
+  ThemeProvider,
 } from "@yamada-ui/core"
 import { LoadingProvider } from "@yamada-ui/loading"
 import { MotionConfig } from "@yamada-ui/motion"
 import { NoticeProvider } from "@yamada-ui/notice"
-import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
-import type { Dict } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
+import { defaultConfig, defaultTheme } from "@yamada-ui/theme"
 
 export interface UIProviderProps {
   /**
-   * The theme of the yamada ui.
-   *
-   * If omitted, uses the default theme provided by yamada ui.
+   * Application content.
    */
-  theme?: Dict
-  /**
-   * The config of the yamada ui.
-   *
-   * If omitted, uses the default config provided by yamada ui.
-   */
-  config?: ThemeConfig
-  /**
-   * If `true`, `ResetStyle` component will be mounted to help reset browser styles.
-   *
-   * @default true
-   */
-  disableResetStyle?: boolean
-  /**
-   * If `true`, will not mount the global styles defined in the theme.
-   *
-   * @default true
-   */
-  disableGlobalStyle?: boolean
+  children: ReactNode
   /**
    * Manager to persist a user's color mode preference.
    *
@@ -53,14 +33,34 @@ export interface UIProviderProps {
    */
   colorModeManager?: ColorModeManager
   /**
-   * Manager to persist a user's theme scheme preference.
-   *
-   * Omit if you don't render server-side.
-   * For SSR, choose `themeSchemeManager.ssr`.
-   *
-   * @default 'themeSchemeManager.localStorage'
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
    */
-  themeSchemeManager?: ThemeSchemeManager
+  colorModeStorageKey?: string
+  /**
+   * The config of the yamada ui.
+   *
+   * If omitted, uses the default config provided by yamada ui.
+   */
+  config?: ThemeConfig
+  /**
+   * If `true`,  the use of automatic window and document detection will be disabled.
+   *
+   * @default false
+   */
+  disableEnvironment?: boolean
+  /**
+   * If `true`, will not mount the global styles defined in the theme.
+   *
+   * @default true
+   */
+  disableGlobalStyle?: boolean
+  /**
+   * If `true`, `ResetStyle` component will be mounted to help reset browser styles.
+   *
+   * @default true
+   */
+  disableResetStyle?: boolean
   /**
    * The environment `window` and `document` to be used by all components and hooks.
    *
@@ -69,20 +69,20 @@ export interface UIProviderProps {
    */
   environment?: Environment
   /**
-   * If `true`,  the use of automatic window and document detection will be disabled.
+   * The theme of the yamada ui.
    *
-   * @default false
+   * If omitted, uses the default theme provided by yamada ui.
    */
-  disableEnvironment?: boolean
+  theme?: Dict
   /**
-   * Application content.
+   * Manager to persist a user's theme scheme preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `themeSchemeManager.ssr`.
+   *
+   * @default 'themeSchemeManager.localStorage'
    */
-  children: ReactNode
-  /**
-   * Key of value saved in storage.
-   * By default, it is saved to `local storage`.
-   */
-  colorModeStorageKey?: string
+  themeSchemeManager?: ThemeSchemeManager
   /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
@@ -94,33 +94,33 @@ export interface UIProviderProps {
  * The global provider that must be added to make all Yamada UI components work correctly.
  */
 export const UIProvider: FC<UIProviderProps> = ({
-  theme = defaultTheme,
-  config = defaultConfig,
-  disableResetStyle,
-  disableGlobalStyle,
+  children,
   colorModeManager,
   colorModeStorageKey,
+  config = defaultConfig,
+  disableEnvironment,
+  disableGlobalStyle,
+  disableResetStyle,
+  environment,
+  theme = defaultTheme,
   themeSchemeManager,
   themeSchemeStorageKey,
-  environment,
-  disableEnvironment,
-  children,
 }) => {
   return (
     <EnvironmentProvider
-      environment={environment}
       disabled={disableEnvironment}
+      environment={environment}
     >
       <ThemeProvider
-        theme={theme}
         config={config}
-        themeSchemeManager={themeSchemeManager}
         storageKey={themeSchemeStorageKey}
+        theme={theme}
+        themeSchemeManager={themeSchemeManager}
       >
         <ColorModeProvider
           colorModeManager={colorModeManager}
-          storageKey={colorModeStorageKey}
           config={config}
+          storageKey={colorModeStorageKey}
         >
           <MotionConfig {...config.motion?.config}>
             <LoadingProvider {...config.loading}>

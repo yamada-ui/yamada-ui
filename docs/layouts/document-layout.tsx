@@ -1,39 +1,39 @@
-import { Box, Center, Divider, HStack, Heading, VStack } from "@yamada-ui/react"
+import type { Document } from "mdx"
 import type { FC, PropsWithChildren } from "react"
+import { Box, Center, Divider, Heading, HStack, VStack } from "@yamada-ui/react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
-import { SEO } from "components/media-and-icons"
+import { Seo } from "components/media-and-icons"
 import {
-  Pagination,
   Breadcrumb,
-  Tabs,
-  LinkCards,
   EditPageLink,
+  LinkCards,
+  Pagination,
   RelatedLinks,
   TableOfContents,
+  Tabs,
 } from "components/navigation"
 import { TextWithCodeOrLink } from "components/typography"
 import { usePage } from "contexts"
-import type { Document } from "mdx"
 
 export type DocumentLayoutProps = PropsWithChildren<Partial<Document>>
 
 export const DocumentLayout: FC<DocumentLayoutProps> = ({
-  title,
+  children,
+  contents,
   description,
   edit_url,
-  with_table_of_contents,
-  with_description,
+  title,
   with_children,
   with_children_description,
-  contents,
-  children,
+  with_description,
+  with_table_of_contents,
 }) => {
   const { documentChildrenTree } = usePage()
 
   return (
     <>
-      <SEO title={title} description={description} />
+      <Seo description={description} title={title} />
 
       <StarBanner />
 
@@ -42,24 +42,24 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
       <Center as="main">
         <HStack
           alignItems="flex-start"
-          w="full"
-          maxW="9xl"
           gap="0"
+          maxW="9xl"
           px={{ base: "lg", md: "md" }}
+          w="full"
         >
           <Sidebar display={{ base: "flex", lg: "none" }} />
 
           <VStack
             flex="1"
-            minW="0"
             gap="0"
-            py={{ base: "lg", md: "normal" }}
+            minW="0"
             pl={{ base: "md", lg: "0" }}
             pr={
               with_table_of_contents && contents?.length
                 ? { base: "md", xl: "0" }
                 : undefined
             }
+            py={{ base: "lg", md: "normal" }}
           >
             <Breadcrumb />
 
@@ -96,8 +96,8 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
 
           {with_table_of_contents && contents?.length ? (
             <TableOfContents
-              display={{ base: "flex", xl: "none" }}
               contents={contents}
+              display={{ base: "flex", xl: "none" }}
             />
           ) : null}
         </HStack>

@@ -1,7 +1,7 @@
+import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
 import { BatteryMedium as BatteryMediumIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
-import type { LucideIconProps } from "../lucide-icon"
 
 /**
  * `BatteryMedium` is [Lucide](https://lucide.dev) SVG icon component.

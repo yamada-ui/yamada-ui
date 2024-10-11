@@ -1,33 +1,33 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo } from "react"
 import type { MotionVariants } from "@yamada-ui/react"
 import { Center, Motion } from "@yamada-ui/react"
+import { useMemo } from "react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: "Components / Motion / Gestures",
   component: Motion,
+  title: "Components / Motion / Gestures",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
+        bg="primary"
+        cursor="pointer"
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
+        whileFocus={{ scale: 1.2 }}
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
-        whileFocus={{ scale: 1.2 }}
-        onHoverStart={(_, info) => console.log("Hover starts", info)}
         onHoverEnd={(_, info) => console.log("Hover ends", info)}
-        onTapStart={(_, info) => console.log("Tap starts", info)}
+        onHoverStart={(_, info) => console.log("Hover starts", info)}
         onTapCancel={(_, info) => console.log("Tap cancels", info)}
-        w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="pointer"
+        onTapStart={(_, info) => console.log("Tap starts", info)}
       />
     </Center>
   )
@@ -35,15 +35,15 @@ export const basic: Story = () => {
 
 export const withTransition: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
+        bg="primary"
+        cursor="pointer"
+        h="2xs"
+        rounded="3xl"
+        w="2xs"
         whileHover={{ scale: 1.2, transition: { duration: 1 } }}
         whileTap={{ scale: 0.9 }}
-        w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="pointer"
       />
     </Center>
   )
@@ -59,16 +59,16 @@ export const withVariants: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        whileHover="enlarge"
-        whileTap="reduce"
+        bg="primary"
+        cursor="pointer"
+        h="2xs"
+        rounded="3xl"
         variants={variants}
         w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="pointer"
+        whileHover="enlarge"
+        whileTap="reduce"
       />
     </Center>
   )
@@ -84,25 +84,25 @@ export const useStopPropagation: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        whileHover="enlarge"
-        whileTap="reduce"
-        variants={variants}
-        w="2xs"
-        h="2xs"
         bg="primary"
-        rounded="3xl"
         cursor="pointer"
         display="flex"
+        h="2xs"
         placeContent="center"
         placeItems="center"
+        rounded="3xl"
+        variants={variants}
+        w="2xs"
+        whileHover="enlarge"
+        whileTap="reduce"
       >
         <Motion
-          w="4xs"
-          h="4xs"
           bg="white"
+          h="4xs"
           rounded="2xl"
+          w="4xs"
           onPointerDownCapture={(ev) => ev.stopPropagation()}
         />
       </Motion>

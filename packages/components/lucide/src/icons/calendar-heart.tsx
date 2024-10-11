@@ -1,7 +1,7 @@
+import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
 import { CalendarHeart as CalendarHeartIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
-import type { LucideIconProps } from "../lucide-icon"
 
 /**
  * `CalendarHeart` is [Lucide](https://lucide.dev) SVG icon component.

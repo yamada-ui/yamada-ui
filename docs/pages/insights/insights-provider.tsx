@@ -1,17 +1,16 @@
-import { createContext } from "@yamada-ui/react"
-import type { Insights, InsightPeriod } from "insights"
+import type { InsightPeriod, Insights } from "insights"
 import type { Dispatch, SetStateAction } from "react"
+import { createContext } from "@yamada-ui/react"
 
 export interface InsightsContext {
+  period: InsightPeriod
+  setUsers: Dispatch<SetStateAction<string[]>>
+  users: string[]
+  onChangePeriod: (start: string | undefined, end: string | undefined) => void
   currentInsights?: Insights
   prevInsights?: Insights
-  period: InsightPeriod
-  onChangePeriod: (start: string | undefined, end: string | undefined) => void
-  users: string[]
-  setUsers: Dispatch<SetStateAction<string[]>>
 }
 
 export const [InsightsProvider, useInsights] = createContext<InsightsContext>({
-  strict: false,
   name: "InsightsContext",
 })

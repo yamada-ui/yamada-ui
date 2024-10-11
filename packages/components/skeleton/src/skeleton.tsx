@@ -1,13 +1,13 @@
 import type {
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
 } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
@@ -17,13 +17,21 @@ import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
 
 interface SkeletonOptions {
   /**
-   * The color at the animation start.
-   */
-  startColor?: CSSUIProps["color"]
-  /**
    * The color at the animation end.
    */
   endColor?: CSSUIProps["color"]
+  /**
+   * The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.
+   *
+   * @default 0.4
+   */
+  fadeDuration?: number | string
+  /**
+   * If `true`, the skeleton will take the width of it's children.
+   *
+   * @default false
+   */
+  isFitContent?: boolean
   /**
    * If `true`, it'll render its children with a nice fade transition.
    *
@@ -35,19 +43,11 @@ interface SkeletonOptions {
    *
    * @default 0.8
    */
-  speed?: string | number
+  speed?: number | string
   /**
-   * The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.
-   *
-   * @default 0.4
+   * The color at the animation start.
    */
-  fadeDuration?: string | number
-  /**
-   * If `true`, the skeleton will take the width of it's children.
-   *
-   * @default false
-   */
-  isFitContent?: boolean
+  startColor?: CSSUIProps["color"]
 }
 
 export interface SkeletonProps
@@ -64,13 +64,13 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   let {
     className,
-    startColor: _startColor,
+    children,
     endColor: _endColor,
     fadeDuration = 0.4,
-    speed = 0.8,
-    isLoaded,
     isFitContent,
-    children,
+    isLoaded,
+    speed = 0.8,
+    startColor: _startColor,
     ...rest
   } = omitThemeProps(mergedProps)
   const [isMounted] = useIsMounted()
@@ -83,6 +83,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   isFitContent ??= hasChildren
 
   const fadeIn = useAnimation({
+    duration:
+      typeof fadeDuration === "string" ? fadeDuration : `${fadeDuration}s`,
     keyframes: {
       "0%": {
         opacity: 0,
@@ -91,40 +93,38 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         opacity: 1,
       },
     },
-    duration:
-      typeof fadeDuration === "string" ? fadeDuration : `${fadeDuration}s`,
   })
 
   const animation = useAnimation({
-    keyframes: {
-      "0%": {
-        borderColor: startColor,
-        background: startColor,
-      },
-      "100%": {
-        borderColor: endColor,
-        background: endColor,
-      },
-    },
+    direction: "alternate",
     duration: typeof speed === "string" ? speed : `${speed}s`,
     iterationCount: "infinite",
-    direction: "alternate",
+    keyframes: {
+      "0%": {
+        background: startColor,
+        borderColor: startColor,
+      },
+      "100%": {
+        background: endColor,
+        borderColor: endColor,
+      },
+    },
     timingFunction: "linear",
   })
 
   const css: CSSUIObject = {
-    w: isFitContent ? "fit-content" : "100%",
-    maxW: "100%",
-    h: isFitContent ? "fit-content" : "fallback(4, 1rem)",
-    boxShadow: "none",
-    backgroundClip: "padding-box",
-    cursor: "default",
-    color: "transparent",
-    pointerEvents: "none",
-    userSelect: "none",
     "&::before, &::after, *": {
       visibility: "hidden",
     },
+    backgroundClip: "padding-box",
+    boxShadow: "none",
+    color: "transparent",
+    cursor: "default",
+    h: isFitContent ? "fit-content" : "fallback(4, 1rem)",
+    maxW: "100%",
+    pointerEvents: "none",
+    userSelect: "none",
+    w: isFitContent ? "fit-content" : "100%",
     ...styles,
   }
 
@@ -136,8 +136,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-skeleton", "ui-skeleton--loaded", className)}
         {...rest}
-        animation={animation}
         aria-busy="false"
+        animation={animation}
       >
         {validChildren}
       </ui.div>
@@ -149,8 +149,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         className={cx("ui-skeleton", className)}
         __css={css}
         {...rest}
-        animation={animation}
         aria-busy="true"
+        animation={animation}
       >
         {validChildren}
       </ui.div>

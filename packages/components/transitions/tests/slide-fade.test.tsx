@@ -39,7 +39,7 @@ describe("<SlideFade />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade isOpen={isOpen} initial="initial">
+          <SlideFade initial="initial" isOpen={isOpen}>
             SlideFade
           </SlideFade>
         </>

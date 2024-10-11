@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
+import { render, screen, waitFor } from "@yamada-ui/test"
 import { useRef, useState } from "react"
-import { useSizes, useSize } from "../src"
+import { useSize, useSizes } from "../src"
 
 describe("useSizes", () => {
   const defaultResizeObserver = global.ResizeObserver
@@ -23,8 +23,8 @@ describe("useSizes", () => {
             {
               borderBoxSize: [
                 {
-                  inlineSize: 400,
                   blockSize: 320,
+                  inlineSize: 400,
                 },
               ],
             },
@@ -51,14 +51,14 @@ describe("useSizes", () => {
     }
 
     Object.defineProperties(HTMLElement.prototype, {
-      offsetWidth: {
-        get() {
-          return parseFloat(window.getComputedStyle(this).width) || 400
-        },
-      },
       offsetHeight: {
         get() {
           return parseFloat(window.getComputedStyle(this).height) || 320
+        },
+      },
+      offsetWidth: {
+        get() {
+          return parseFloat(window.getComputedStyle(this).width) || 400
         },
       },
     })
@@ -80,14 +80,14 @@ describe("useSizes", () => {
     )
   })
 
-  test("returns sizes of multiple elements correctly", async () => {
+  test("returns sizes of multiple elements correctly", () => {
     const Component: FC = () => {
       const ref = useRef<HTMLDivElement>(null)
       const sizes = useSizes({ getNodes: () => [ref.current] })
 
       return (
         <div>
-          <div ref={ref} data-testid="el" style={{ width: 400, height: 320 }}>
+          <div ref={ref} style={{ height: 320, width: 400 }} data-testid="el">
             {sizes[0]?.width} x {sizes[0]?.height}
           </div>
         </div>
@@ -100,17 +100,17 @@ describe("useSizes", () => {
 
   test.skip("updates size when element size changes", async () => {
     const Component: FC = () => {
-      const [{ width, height }, setSize] = useState({ width: 400, height: 320 })
+      const [{ height, width }, setSize] = useState({ height: 320, width: 400 })
       const ref = useRef<HTMLDivElement>(null)
       const sizes = useSizes({ getNodes: () => [ref.current] })
 
       return (
         <div>
-          <button onClick={() => setSize({ width: 300, height: 300 })}>
+          <button onClick={() => setSize({ height: 300, width: 300 })}>
             Resize
           </button>
 
-          <div ref={ref} data-testid="el" style={{ width, height }}>
+          <div ref={ref} style={{ height, width }} data-testid="el">
             {sizes[0]?.width} x {sizes[0]?.height}
           </div>
         </div>
@@ -127,7 +127,7 @@ describe("useSizes", () => {
     })
   })
 
-  test("returns undefined size when element is null", async () => {
+  test("returns undefined size when element is null", () => {
     const Component: FC = () => {
       const sizes = useSizes({ getNodes: () => [null] })
 
@@ -161,8 +161,8 @@ describe("useSize", () => {
           [
             {
               contentRect: {
-                width: 800,
                 height: 640,
+                width: 800,
               },
             },
           ] as ResizeObserverEntry[],
@@ -175,14 +175,14 @@ describe("useSize", () => {
     }
 
     Object.defineProperties(HTMLElement.prototype, {
-      offsetWidth: {
-        get() {
-          return parseFloat(window.getComputedStyle(this).width) || 400
-        },
-      },
       offsetHeight: {
         get() {
           return parseFloat(window.getComputedStyle(this).height) || 320
+        },
+      },
+      offsetWidth: {
+        get() {
+          return parseFloat(window.getComputedStyle(this).width) || 400
         },
       },
     })
@@ -208,13 +208,13 @@ describe("useSize", () => {
     const size = useSize(ref)
 
     return (
-      <div ref={ref} data-testid="el" style={{ width: 400, height: 320 }}>
+      <div ref={ref} style={{ height: 320, width: 400 }} data-testid="el">
         {size?.width} x {size?.height}
       </div>
     )
   }
 
-  test("returns size of a single element correctly", async () => {
+  test("returns size of a single element correctly", () => {
     const { getByTestId } = render(<Component />)
 
     expect(getByTestId("el")).toHaveTextContent("400 x 320")

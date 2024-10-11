@@ -5,16 +5,16 @@ import type {
   ThemeProps,
   Token,
 } from "@yamada-ui/core"
+import type { ReactNode } from "react"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { useMemo } from "react"
 
 interface IndicatorOptions {
@@ -26,20 +26,15 @@ interface IndicatorOptions {
    * */
   inline?: Token<boolean>
   /**
-   * The placement of the indicator.
+   * If `true`, the indicator will be disabled.
    *
-   * @default 'top-right'
+   * @default false
    */
-  placement?: Token<
-    | "top"
-    | "top-left"
-    | "top-right"
-    | "left"
-    | "right"
-    | "bottom"
-    | "bottom-left"
-    | "bottom-right"
-  >
+  isDisabled?: boolean
+  /**
+   * The indicator label to use.
+   */
+  label?: ReactNode
   /**
    * Changes position offset, usually used when element has border-radius.
    *
@@ -47,37 +42,11 @@ interface IndicatorOptions {
    */
   offset?: Token<number>
   /**
-   * The indicator label to use.
-   */
-  label?: ReactNode
-  /**
    * If `label` is of type number, the maximum number displayed.
    *
    * @default 99
    */
   overflowCount?: number
-  /**
-   * If `true`, display 0.
-   *
-   * @default true
-   */
-  showZero?: boolean
-  /**
-   * If `true`, the indicator will be disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, display the border of the indicator.
-   *
-   * @default false
-   */
-  withBorder?: boolean
-  /**
-   * Props for indicator wrapper element.
-   */
-  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * If `true`, make an element scale and fade like a radar ping or ripple of water.
    *
@@ -91,12 +60,6 @@ interface IndicatorOptions {
    */
   pingColor?: HTMLUIProps["backgroundColor"]
   /**
-   * It is used for the scale of the ping animation.
-   *
-   * @default 1.8
-   */
-  pingScale?: number
-  /**
    * It is used for the count of the ping animation.
    *
    * @default "infinite"
@@ -108,6 +71,43 @@ interface IndicatorOptions {
    * @default "1.4s"
    */
   pingDuration?: AnimationStyle["direction"]
+  /**
+   * It is used for the scale of the ping animation.
+   *
+   * @default 1.8
+   */
+  pingScale?: number
+  /**
+   * The placement of the indicator.
+   *
+   * @default 'top-right'
+   */
+  placement?: Token<
+    | "bottom"
+    | "bottom-left"
+    | "bottom-right"
+    | "left"
+    | "right"
+    | "top"
+    | "top-left"
+    | "top-right"
+  >
+  /**
+   * If `true`, display 0.
+   *
+   * @default true
+   */
+  showZero?: boolean
+  /**
+   * If `true`, display the border of the indicator.
+   *
+   * @default false
+   */
+  withBorder?: boolean
+  /**
+   * Props for indicator wrapper element.
+   */
+  containerProps?: Omit<HTMLUIProps, "children">
 }
 
 export interface IndicatorProps
@@ -117,14 +117,14 @@ export interface IndicatorProps
 
 const getPlacementStyle = (
   placement:
-    | "top"
-    | "top-left"
-    | "top-right"
-    | "left"
-    | "right"
     | "bottom"
     | "bottom-left"
-    | "bottom-right",
+    | "bottom-right"
+    | "left"
+    | "right"
+    | "top"
+    | "top-left"
+    | "top-right",
   offset: number,
 ): CSSUIObject => {
   const styles: CSSUIObject = {}
@@ -167,33 +167,33 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)
   let {
     className,
-    inline = false,
-    placement = "top-right",
-    offset = 0,
-    label,
-    overflowCount = 99,
-    showZero = true,
     children,
+    inline = false,
     isDisabled,
-    containerProps,
+    label,
+    offset = 0,
+    overflowCount = 99,
     ping,
     pingColor = "$ping",
-    pingDuration = "1.4s",
     pingCount = "infinite",
+    pingDuration = "1.4s",
     pingScale = 1.8,
+    placement = "top-right",
+    showZero = true,
+    containerProps,
     ...rest
   } = omitThemeProps(mergedProps, ["withBorder"])
   const animation = useAnimation({
+    duration: pingDuration,
+    fillMode: "forwards",
+    iterationCount: pingCount,
     keyframes: {
       "75%, 100%": {
-        transform: `scale(${pingScale})`,
         opacity: 0,
+        transform: `scale(${pingScale})`,
       },
     },
-    fillMode: "forwards",
-    duration: pingDuration,
     timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
-    iterationCount: pingCount,
   })
 
   const isNumeric = typeof label === "number"
@@ -233,8 +233,8 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
       ref={ref}
       className={cx("ui-indicator", className)}
       __css={{
-        position: "relative",
         display: computedInline ? "inline-block" : "block",
+        position: "relative",
       }}
       {...containerProps}
     >
@@ -250,15 +250,15 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
           {ping ? (
             <ui.div
               className="ui-indicator__icon__ping"
-              __css={{
-                position: "absolute",
-                boxSize: "100%",
-                rounded: "fallback(full, 9999px)",
-                opacity: 0.75,
-                zIndex: -1,
-                bg: pingColor,
-              }}
               animation={animation}
+              __css={{
+                bg: pingColor,
+                boxSize: "100%",
+                opacity: 0.75,
+                position: "absolute",
+                rounded: "fallback(full, 9999px)",
+                zIndex: -1,
+              }}
             />
           ) : null}
         </ui.div>

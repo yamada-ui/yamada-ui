@@ -1,5 +1,17 @@
 # @yamada-ui/next
 
+## 1.0.4
+
+### Patch Changes
+
+- [#3080](https://github.com/yamada-ui/yamada-ui/pull/3080) [`b798839`](https://github.com/yamada-ui/yamada-ui/commit/b798839aaa32787297079da51410b35a61edcf3c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#3034](https://github.com/yamada-ui/yamada-ui/pull/3034) [`0b5592f`](https://github.com/yamada-ui/yamada-ui/commit/0b5592f5037d778a1a608a9c991acdfaa1f7bf41) Thanks [@kurakke](https://github.com/kurakke)! - Set the `displayName` and `__ui__` of the Link component
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+
 ## 1.0.3
 
 ### Patch Changes

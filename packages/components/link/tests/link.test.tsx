@@ -13,7 +13,7 @@ describe("<Link />", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
-      <Link data-testid="Link" href={url} isExternal>
+      <Link href={url} data-testid="Link" isExternal>
         Welcome page
       </Link>,
     )

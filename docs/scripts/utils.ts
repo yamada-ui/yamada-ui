@@ -1,28 +1,28 @@
-import { readFile, writeFile } from "fs/promises"
-import { Octokit } from "@octokit/rest"
-import { config } from "dotenv"
-import matter from "gray-matter"
 import type { GrayMatterFile } from "gray-matter"
-import { CONSTANT } from "constant"
-import { prettier } from "libs/prettier"
 import type { Locale } from "utils/i18n"
+import { Octokit } from "@octokit/rest"
+import { CONSTANT } from "constant"
+import { config } from "dotenv"
+import { readFile, writeFile } from "fs/promises"
+import matter from "gray-matter"
+import { prettier } from "libs/prettier"
 
-export type Input = string | Buffer
+export type Input = Buffer | string
 export type Data = GrayMatterFile<Input>["data"]
 export type Content = GrayMatterFile<Input>["content"]
 
 const COMMON_PARAMS = {
-  owner: "yamada-ui",
-  repo: "yamada-data",
-  path: "",
   ref: "main",
+  owner: "yamada-ui",
+  path: "",
+  repo: "yamada-data",
 }
 
 config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const toCamelCase = (value: string & {}) =>
+const toCamelCase = (value: {} & string) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
 export interface Constant {

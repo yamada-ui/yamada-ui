@@ -1,18 +1,18 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Check, CircleCheck } from "@yamada-ui/lucide"
 import {
-  List,
-  DiscList,
   DecimalList,
-  ListItem,
+  DiscList,
+  List,
   ListIcon,
+  ListItem,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof List>
 
 const meta: Meta<typeof List> = {
-  title: "Components / Data Display / List",
   component: List,
+  title: "Components / Data Display / List",
 }
 
 export default meta
@@ -153,7 +153,7 @@ export const others: Story = () => {
         <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
       </List>
 
-      <List styleType="lower-alpha" ms="1.2em">
+      <List ms="1.2em" styleType="lower-alpha">
         <ListItem ps="0.2em">
           よろしければわたしが喜びのダンスを踊りましょうか！
         </ListItem>

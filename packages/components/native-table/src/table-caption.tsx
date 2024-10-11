@@ -1,5 +1,5 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useTableStyles } from "./native-table"
 
@@ -9,7 +9,7 @@ interface TableCaptionOptions {
    *
    * @default 'bottom'
    */
-  placement?: "top" | "bottom"
+  placement?: "bottom" | "top"
 }
 
 export interface TableCaptionProps

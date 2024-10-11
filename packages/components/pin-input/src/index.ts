@@ -1,2 +1,2 @@
 export { PinInput, PinInputField } from "./pin-input"
-export type { PinInputProps, PinInputFieldProps } from "./pin-input"
+export type { PinInputFieldProps, PinInputProps } from "./pin-input"

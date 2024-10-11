@@ -24,7 +24,7 @@ function spaces(x: number) {
     return `${n * x}${unit}`
   }
 
-  const computedSpaces = Object.entries(defaultSpaces).reduce(
+  const computedSpaces = Object.entries(defaultSpaces).reduce<ThemeTokens>(
     (prev, [key, value]) => {
       if (key === "px") {
         prev[key] = value
@@ -45,7 +45,7 @@ function spaces(x: number) {
 
       return prev
     },
-    {} as ThemeTokens,
+    {},
   )
 
   return computedSpaces
@@ -57,7 +57,7 @@ function tones(hex: string) {
   const x = ((v ? 1 : 0.95) - l) / 5
   const y = (l - (!v ? 0.05 : 0.15)) / 5
 
-  const tokens = TONES.reduce((prev, tone) => {
+  const tokens = TONES.reduce<ThemeTokens>((prev, tone) => {
     if (tone === 500) {
       prev[tone] = hex
     } else {
@@ -70,7 +70,7 @@ function tones(hex: string) {
     }
 
     return prev
-  }, {} as ThemeTokens)
+  }, {})
 
   return tokens
 }

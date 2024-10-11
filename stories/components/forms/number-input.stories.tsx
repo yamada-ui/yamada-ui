@@ -1,21 +1,21 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { useForm, Controller } from "react-hook-form"
 import {
   Button,
   FormControl,
   HStack,
   Input,
   NumberInput,
-  VStack,
   useNumberInput,
+  VStack,
 } from "@yamada-ui/react"
+import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof NumberInput>
 
 const meta: Meta<typeof NumberInput> = {
-  title: "Components / Forms / NumberInput",
   component: NumberInput,
+  title: "Components / Forms / NumberInput",
 }
 
 export default meta
@@ -27,10 +27,10 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <NumberInput placeholder="extra small size" size="xs" />
-      <NumberInput placeholder="small size" size="sm" />
-      <NumberInput placeholder="medium size" size="md" />
-      <NumberInput placeholder="large size" size="lg" />
+      <NumberInput size="xs" placeholder="extra small size" />
+      <NumberInput size="sm" placeholder="small size" />
+      <NumberInput size="md" placeholder="medium size" />
+      <NumberInput size="lg" placeholder="large size" />
     </>
   )
 }
@@ -55,8 +55,8 @@ export const withBorderColor: Story = () => {
         placeholder="custom border color"
       />
       <NumberInput
-        isInvalid
         errorBorderColor="orange.500"
+        isInvalid
         placeholder="custom border color"
       />
     </>
@@ -64,23 +64,23 @@ export const withBorderColor: Story = () => {
 }
 
 export const withDefaultValue: Story = () => {
-  return <NumberInput defaultValue={18} aria-label="Number input" />
+  return <NumberInput aria-label="Number input" defaultValue={18} />
 }
 
 export const withMinMax: Story = () => {
   return (
-    <NumberInput defaultValue={18} min={8} max={31} aria-label="Number input" />
+    <NumberInput aria-label="Number input" defaultValue={18} max={31} min={8} />
   )
 }
 
 export const withStep: Story = () => {
   return (
     <NumberInput
-      defaultValue={15}
-      step={5}
-      min={5}
-      max={30}
       aria-label="Number input"
+      defaultValue={15}
+      max={30}
+      min={5}
+      step={5}
     />
   )
 }
@@ -88,10 +88,10 @@ export const withStep: Story = () => {
 export const withPrecision: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
       defaultValue={15}
       precision={2}
       step={0.2}
-      aria-label="Number input"
     />
   )
 }
@@ -99,10 +99,10 @@ export const withPrecision: Story = () => {
 export const disabledClampValueOnBlur: Story = () => {
   return (
     <NumberInput
+      aria-label="Number input"
+      clampValueOnBlur={false}
       defaultValue={15}
       max={30}
-      clampValueOnBlur={false}
-      aria-label="Number input"
     />
   )
 }
@@ -110,11 +110,11 @@ export const disabledClampValueOnBlur: Story = () => {
 export const disabledKeepWithinRange: Story = () => {
   return (
     <NumberInput
-      defaultValue={15}
-      max={30}
-      keepWithinRange={false}
-      clampValueOnBlur={false}
       aria-label="Number input"
+      clampValueOnBlur={false}
+      defaultValue={15}
+      keepWithinRange={false}
+      max={30}
     />
   )
 }
@@ -122,15 +122,15 @@ export const disabledKeepWithinRange: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <NumberInput isDisabled variant="outline" placeholder="outline" />
-      <NumberInput isDisabled variant="filled" placeholder="filled" />
-      <NumberInput isDisabled variant="flushed" placeholder="flushed" />
-      <NumberInput isDisabled variant="unstyled" placeholder="unstyled" />
+      <NumberInput variant="outline" isDisabled placeholder="outline" />
+      <NumberInput variant="filled" isDisabled placeholder="filled" />
+      <NumberInput variant="flushed" isDisabled placeholder="flushed" />
+      <NumberInput variant="unstyled" isDisabled placeholder="unstyled" />
 
       <FormControl
+        helperMessage="Please enter the quantity you wish to order."
         isDisabled
         label="Order quantity"
-        helperMessage="Please enter the quantity you wish to order."
       >
         <NumberInput />
       </FormControl>
@@ -141,15 +141,15 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <NumberInput isReadOnly variant="outline" placeholder="outline" />
-      <NumberInput isReadOnly variant="filled" placeholder="filled" />
-      <NumberInput isReadOnly variant="flushed" placeholder="flushed" />
-      <NumberInput isReadOnly variant="unstyled" placeholder="unstyled" />
+      <NumberInput variant="outline" isReadOnly placeholder="outline" />
+      <NumberInput variant="filled" isReadOnly placeholder="filled" />
+      <NumberInput variant="flushed" isReadOnly placeholder="flushed" />
+      <NumberInput variant="unstyled" isReadOnly placeholder="unstyled" />
 
       <FormControl
+        helperMessage="Please enter the quantity you wish to order."
         isReadOnly
         label="Order quantity"
-        helperMessage="Please enter the quantity you wish to order."
       >
         <NumberInput />
       </FormControl>
@@ -160,15 +160,15 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <NumberInput isInvalid variant="outline" placeholder="outline" />
-      <NumberInput isInvalid variant="filled" placeholder="filled" />
-      <NumberInput isInvalid variant="flushed" placeholder="flushed" />
-      <NumberInput isInvalid variant="unstyled" placeholder="unstyled" />
+      <NumberInput variant="outline" isInvalid placeholder="outline" />
+      <NumberInput variant="filled" isInvalid placeholder="filled" />
+      <NumberInput variant="flushed" isInvalid placeholder="flushed" />
+      <NumberInput variant="unstyled" isInvalid placeholder="unstyled" />
 
       <FormControl
+        errorMessage="Order quantity is required."
         isInvalid
         label="Order quantity"
-        errorMessage="Order quantity is required."
       >
         <NumberInput />
       </FormControl>
@@ -180,24 +180,24 @@ export const customStepper: Story = () => {
   return (
     <NumberInput
       aria-label="Number input"
-      incrementProps={{ px: "xs", children: "+" }}
-      decrementProps={{ px: "xs", children: "-" }}
+      decrementProps={{ children: "-", px: "xs" }}
+      incrementProps={{ children: "+", px: "xs" }}
     />
   )
 }
 
 export const customComponent: Story = () => {
-  const { getInputProps, getIncrementProps, getDecrementProps } =
+  const { getDecrementProps, getIncrementProps, getInputProps } =
     useNumberInput({
-      step: 0.01,
       defaultValue: 3.14,
-      min: 3,
       max: 4,
+      min: 3,
       precision: 2,
+      step: 0.01,
     })
 
   return (
-    <HStack maxW="xs" gap="sm">
+    <HStack gap="sm" maxW="xs">
       <Button {...getIncrementProps()}>+</Button>
       <Input {...getInputProps()} aria-label="Number input" />
       <Button {...getDecrementProps()}>-</Button>
@@ -211,7 +211,7 @@ export const stylingPlaceholder: Story = () => {
       <NumberInput placeholder="default placeholder" />
       <NumberInput
         placeholder="custom placeholder"
-        _placeholder={{ opacity: 1, color: "gray.500" }}
+        _placeholder={{ color: "gray.500", opacity: 1 }}
       />
       <NumberInput
         color="green.500"
@@ -229,9 +229,9 @@ export const reactHookForm: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -241,18 +241,18 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.numberInput?.message}
         isInvalid={!!errors.numberInput}
         label="Age"
-        errorMessage={errors.numberInput?.message}
       >
         <Controller
           name="numberInput"
           control={control}
-          rules={{
-            required: { value: true, message: "This is required." },
-            max: { value: 5, message: "The maximum value is 5." },
-          }}
           render={({ field }) => <NumberInput {...field} />}
+          rules={{
+            max: { message: "The maximum value is 5.", value: 5 },
+            required: { message: "This is required.", value: true },
+          }}
         />
       </FormControl>
 
@@ -274,9 +274,9 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   const {
     control,
+    formState: { errors },
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
@@ -286,15 +286,15 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.numberInput?.message}
         isInvalid={!!errors.numberInput}
         label="Age"
-        errorMessage={errors.numberInput?.message}
       >
         <Controller
           name="numberInput"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => <NumberInput {...field} />}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

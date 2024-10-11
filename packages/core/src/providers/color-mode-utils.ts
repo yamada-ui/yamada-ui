@@ -1,6 +1,6 @@
 import type { ColorMode } from "../css"
-import { defaultEnvironment } from "./environment-provider"
 import type { Environment } from "./environment-provider"
+import { defaultEnvironment } from "./environment-provider"
 import { preventTransition } from "./provider-utils"
 
 const classNames = {
@@ -14,15 +14,15 @@ const queries = {
 }
 
 interface GetColorModeUtilsProps {
-  isPreventTransition?: boolean
   environment?: Environment
+  isPreventTransition?: boolean
 }
 
 export const getColorModeUtils = ({
-  isPreventTransition = true,
   environment = defaultEnvironment,
+  isPreventTransition = true,
 }: GetColorModeUtilsProps) => {
-  const { getWindow, getDocument } = environment
+  const { getDocument, getWindow } = environment
 
   const setDataset = (colorMode: ColorMode) => {
     const doc = getDocument()
@@ -86,10 +86,10 @@ export const getColorModeUtils = ({
   }
 
   return {
-    setDataset,
-    setClassName,
-    query,
     getSystemColorMode,
+    query,
+    setClassName,
+    setDataset,
     systemColorModeObserver,
   }
 }

@@ -4,9 +4,9 @@ import { Children, cloneElement } from "react"
 import { usePopover } from "./popover"
 
 export const PopoverTrigger: FC<PropsWithChildren<{}>> = ({ children }) => {
-  const child = Children.only(children) as ReactElement & {
+  const child = Children.only(children) as {
     ref: RefObject<any>
-  }
+  } & ReactElement
   const { getTriggerProps } = usePopover()
 
   return cloneElement(child, getTriggerProps(child.props, child.ref))

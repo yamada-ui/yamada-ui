@@ -9,93 +9,96 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
   {
     baseStyle: {
       container: {},
-      inner: {},
+      content: {
+        minW: "auto",
+        p: "2",
+        w: "auto",
+      },
+      eyeDropper: {
+        color: ["blackAlpha.600", "whiteAlpha.700"],
+        fontSize: "lg",
+        outline: 0,
+        pointerEvents: "auto",
+        py: "1",
+        rounded: "md",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        w: "6",
+        _disabled: {
+          opacity: 0.4,
+          pointerEvents: "none",
+        },
+        _focusVisible: {
+          boxShadow: "outline",
+        },
+        _hover: {
+          color: ["blackAlpha.500", "whiteAlpha.600"],
+        },
+      },
       field: {
-        pr: "8",
         pb: "px",
+        pr: "8",
         _focus: {
           zIndex: "unset",
+        },
+        _notAllowed: {
+          cursor: "pointer",
         },
         _readOnly: {
           pointerEvents: "none",
         },
       },
+      inner: {},
       swatch: {},
-      eyeDropper: {
-        w: "6",
-        py: "1",
-        fontSize: "lg",
-        outline: 0,
-        rounded: "md",
-        transitionProperty: "common",
-        transitionDuration: "normal",
-        pointerEvents: "auto",
-        color: ["blackAlpha.600", "whiteAlpha.700"],
-        _hover: {
-          color: ["blackAlpha.500", "whiteAlpha.600"],
-        },
-        _disabled: {
-          pointerEvents: "none",
-          opacity: 0.4,
-        },
-        _focusVisible: {
-          boxShadow: "outline",
-        },
-      },
-      content: {
-        w: "auto",
-        minW: "auto",
-        p: "2",
-      },
     },
 
     sizes: {
       xs: ({ withSwatch }) => ({
+        eyeDropper: {
+          fontSize: "sm",
+          insetEnd: "1",
+        },
         field: {
           pl: withSwatch ? "6" : "2",
         },
         swatch: {
-          insetStart: "1",
           boxSize: "4",
-        },
-        eyeDropper: {
-          insetEnd: "1",
-          fontSize: "sm",
+          insetStart: "1",
         },
       }),
       sm: ({ withSwatch }) => ({
+        eyeDropper: {
+          insetEnd: "2",
+        },
         field: {
           pl: withSwatch ? "9" : "2",
         },
         swatch: {
-          insetStart: "2",
           boxSize: "5",
-        },
-        eyeDropper: {
-          insetEnd: "2",
+          insetStart: "2",
         },
       }),
       md: ({ withSwatch }) => ({
+        eyeDropper: {
+          insetEnd: "2",
+        },
         field: {
           pl: withSwatch ? "10" : "3",
         },
         swatch: {
-          insetStart: "2",
           boxSize: "6",
-        },
-        eyeDropper: {
-          insetEnd: "2",
+          insetStart: "2",
         },
       }),
       lg: ({ withSwatch }) => ({
+        eyeDropper: {
+          insetEnd: "2",
+        },
         field: {
           pl: withSwatch ? "12" : "4",
         },
         swatch: {
           insetStart: "2",
-        },
-        eyeDropper: {
-          insetEnd: "2",
         },
       }),
     },

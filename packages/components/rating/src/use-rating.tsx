@@ -5,13 +5,16 @@ import type {
   RequiredPropGetter,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { MotionProps } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
+import type { MouseEvent, ReactNode, TouchEvent } from "react"
+import type { RatingGroupProps } from "./rating-group"
+import type { RatingItemProps } from "./rating-item"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { MotionProps } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { Merge } from "@yamada-ui/utils"
 import {
   clampNumber,
   dataAttr,
@@ -20,30 +23,27 @@ import {
   pickObject,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { MouseEvent, ReactNode, TouchEvent } from "react"
 import { useCallback, useId, useRef, useState } from "react"
 import { RatingGroup } from "./rating-group"
-import type { RatingGroupProps } from "./rating-group"
-import type { RatingItemProps } from "./rating-item"
 import { getRoundedValue } from "./rating-utils"
 
-type OmittedGroupProps = Omit<RatingGroupProps, "value" | "items" | "children">
+type OmittedGroupProps = Omit<RatingGroupProps, "children" | "items" | "value">
 type OmittedItemProps = Omit<
   RatingItemProps,
-  "value" | "groupValue" | "fractionValue" | "children"
+  "children" | "fractionValue" | "groupValue" | "value"
 >
 type OmittedInputProps = Omit<
   HTMLUIProps<"input">,
-  "value" | "defaultValue" | "checked"
+  "checked" | "defaultValue" | "value"
 >
 
 export type GroupProps =
-  | OmittedGroupProps
   | ((value: number) => OmittedGroupProps)
-export type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
+  | OmittedGroupProps
+export type ItemProps = ((value: number) => OmittedItemProps) | OmittedItemProps
 export type InputProps =
-  | OmittedInputProps
   | ((value: number) => OmittedInputProps)
+  | OmittedInputProps
 
 interface UseRatingOptions {
   /**
@@ -56,9 +56,9 @@ interface UseRatingOptions {
    */
   name?: string
   /**
-   * The value of the rating.
+   * The color of the filled icons.
    */
-  value?: number
+  color?: ((value: number) => CSSUIProps["color"]) | CSSUIProps["color"]
   /**
    * The initial value of the rating.
    *
@@ -66,19 +66,13 @@ interface UseRatingOptions {
    */
   defaultValue?: number
   /**
-   * The callback invoked when value state changes.
+   * The empty icon for the rating.
    */
-  onChange?: (value: number) => void
+  emptyIcon?: ((value: number) => ReactNode) | ReactNode
   /**
-   * The callback invoked when hovering over the rating.
+   * The filled icon for the rating.
    */
-  onHover?: (value: number) => void
-  /**
-   * Number of controls that should be rendered.
-   *
-   * @default 5
-   */
-  items?: number
+  filledIcon?: ((value: number) => ReactNode) | ReactNode
   /**
    * Number of fractions each item can be divided into,
    *
@@ -92,53 +86,56 @@ interface UseRatingOptions {
    */
   highlightSelectedOnly?: boolean
   /**
-   * The color of the filled icons.
+   * Number of controls that should be rendered.
+   *
+   * @default 5
    */
-  color?: CSSUIProps["color"] | ((value: number) => CSSUIProps["color"])
+  items?: number
   /**
-   * The empty icon for the rating.
+   * The value of the rating.
    */
-  emptyIcon?: ReactNode | ((value: number) => ReactNode)
-  /**
-   * The filled icon for the rating.
-   */
-  filledIcon?: ReactNode | ((value: number) => ReactNode)
+  value?: number
   /**
    * Props for the rating group.
    */
   groupProps?: GroupProps
   /**
+   * Props for the input element.
+   */
+  inputProps?: InputProps
+  /**
    * Props for the rating item.
    */
   itemProps?: ItemProps
   /**
-   * Props for the input element.
+   * The callback invoked when value state changes.
    */
-  inputProps?: InputProps
+  onChange?: (value: number) => void
+  /**
+   * The callback invoked when hovering over the rating.
+   */
+  onHover?: (value: number) => void
 }
 
-export type UseRatingProps = Omit<
-  HTMLUIProps,
-  "color" | "id" | "defaultValue" | "onChange"
-> &
-  UseRatingOptions &
-  FormControlOptions
+export type UseRatingProps = FormControlOptions &
+  Omit<HTMLUIProps, "color" | "defaultValue" | "id" | "onChange"> &
+  UseRatingOptions
 
 export const useRating = ({
   name,
   color,
-  value: valueProp,
   defaultValue = 0,
-  onChange: onChangeProp,
-  items = 5,
-  fractions = 1,
-  highlightSelectedOnly = false,
-  onHover,
-  groupProps,
-  itemProps,
-  inputProps,
   emptyIcon,
   filledIcon,
+  fractions = 1,
+  highlightSelectedOnly = false,
+  items = 5,
+  value: valueProp,
+  groupProps,
+  inputProps,
+  itemProps,
+  onChange: onChangeProp,
+  onHover,
   ...props
 }: UseRatingProps) => {
   let { id, ...rest } = useFormControlProps(props)
@@ -146,8 +143,8 @@ export const useRating = ({
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
-    value: valueProp,
     defaultValue,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const [hoveredValue, setHoveredValue] = useState<number>(-1)
@@ -242,18 +239,18 @@ export const useRating = ({
         props.onMouseEnter,
         rest.onMouseEnter,
       ),
-      onMouseMove: handlerAll(onMouseMove, props.onMouseMove, rest.onMouseMove),
       onMouseLeave: handlerAll(
         onMouseLeave,
         props.onMouseLeave,
         rest.onMouseLeave,
       ),
+      onMouseMove: handlerAll(onMouseMove, props.onMouseMove, rest.onMouseMove),
+      onTouchEnd: handlerAll(onTouchEnd, props.onTouchEnd, rest.onTouchEnd),
       onTouchStart: handlerAll(
         onTouchStart,
         props.onTouchStart,
         rest.onTouchStart,
       ),
-      onTouchEnd: handlerAll(onTouchEnd, props.onTouchEnd, rest.onTouchEnd),
     }),
     [
       onMouseEnter,
@@ -277,8 +274,8 @@ export const useRating = ({
         ref,
         whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
         ...props,
-        tabIndex: -1,
         "data-active": dataAttr(isActive),
+        tabIndex: -1,
       }
     },
     [disabled, hoveredValue, readOnly],
@@ -292,34 +289,34 @@ export const useRating = ({
       return (
         <RatingGroup
           key={value}
-          value={value}
           color={runIfFunc(color, value)}
           items={index === 0 ? resolvedFractions + 1 : resolvedFractions}
+          value={value}
         />
       )
     })
 
   return {
-    getContainerProps,
-    getGroupProps,
     id,
     name,
-    value,
-    roundedValue,
-    hoveredValue,
-    resolvedValue,
-    isOutside,
-    setValue,
-    setHoveredValue,
-    decimal,
-    highlightSelectedOnly,
-    formControlProps,
-    groupProps,
-    itemProps,
-    inputProps,
     children,
+    decimal,
     emptyIcon,
     filledIcon,
+    highlightSelectedOnly,
+    hoveredValue,
+    isOutside,
+    resolvedValue,
+    roundedValue,
+    setHoveredValue,
+    setValue,
+    value,
+    formControlProps,
+    getContainerProps,
+    getGroupProps,
+    groupProps,
+    inputProps,
+    itemProps,
   }
 }
 

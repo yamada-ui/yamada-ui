@@ -1,5 +1,5 @@
-import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import type { NativeSelectItem } from "../src"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import { NativeOption, NativeSelect } from "../src"
 
 describe("<NativeSelect />", () => {
@@ -15,9 +15,9 @@ describe("<NativeSelect />", () => {
   test("should render select with props", async () => {
     const { user } = render(
       <NativeSelect
+        variant="outline"
         data-testid="select"
         focusBorderColor="green.500"
-        variant="outline"
         placeholder="Options"
       >
         <NativeOption value="one">Option 1</NativeOption>
@@ -33,12 +33,12 @@ describe("<NativeSelect />", () => {
     ).toBeFalsy()
   })
 
-  test("should render select without placeholder in options", async () => {
+  test("should render select without placeholder in options", () => {
     render(
       <NativeSelect
+        variant="outline"
         data-testid="select"
         focusBorderColor="green.500"
-        variant="outline"
         placeholder="Options"
         placeholderInOptions={false}
       >
@@ -54,12 +54,12 @@ describe("<NativeSelect />", () => {
   })
 
   test("should disable select", () => {
-    render(<NativeSelect isDisabled data-testid="select" />)
+    render(<NativeSelect data-testid="select" isDisabled />)
     expect(screen.getByTestId("select")).toBeDisabled()
   })
 
   test("should be read only", () => {
-    render(<NativeSelect isReadOnly data-testid="select" />)
+    render(<NativeSelect data-testid="select" isReadOnly />)
     expect(screen.getByTestId("select")).not.toHaveAttribute(
       "aria-readonly",
       "true",
@@ -68,7 +68,7 @@ describe("<NativeSelect />", () => {
   })
 
   test("should be invalid", () => {
-    render(<NativeSelect isInvalid data-testid="select" />)
+    render(<NativeSelect data-testid="select" isInvalid />)
     expect(screen.getByTestId("select")).toHaveAttribute("aria-invalid", "true")
   })
 
@@ -99,12 +99,12 @@ describe("<NativeSelect />", () => {
     const items: NativeSelectItem[] = [
       { label: "ベジータ", value: "ベジータ" },
       {
-        label: "地球人",
         items: [
           { label: "孫悟空", value: "孫悟空" },
           { label: "孫悟飯", value: "孫悟飯" },
           { label: "クリリン", value: "クリリン" },
         ],
+        label: "地球人",
       },
     ]
     render(<NativeSelect data-testid="select" items={items} />)
@@ -112,6 +112,6 @@ describe("<NativeSelect />", () => {
     expect(children).toHaveLength(2)
     const optgroup = screen.getByRole("group", { name: "地球人" })
     expect(optgroup).toBeInTheDocument()
-    expect(optgroup?.children).toHaveLength(3)
+    expect(optgroup.children).toHaveLength(3)
   })
 })

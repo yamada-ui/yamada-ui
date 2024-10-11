@@ -1,4 +1,4 @@
-import { a11y, render, screen, fireEvent } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { NumberInput } from "../src"
 
 describe("<NumberInput />", () => {
@@ -9,7 +9,7 @@ describe("<NumberInput />", () => {
 
   test("render input with props", async () => {
     render(
-      <NumberInput placeholder="Enter a number" size="md" variant="outline" />,
+      <NumberInput size="md" variant="outline" placeholder="Enter a number" />,
     )
 
     const numberInput = await screen.findByRole("spinbutton")
@@ -17,7 +17,7 @@ describe("<NumberInput />", () => {
   })
 
   test("should render input with default value", async () => {
-    render(<NumberInput defaultValue={20} step={5} min={5} max={30} />)
+    render(<NumberInput defaultValue={20} max={30} min={5} step={5} />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toHaveValue("20")
@@ -52,7 +52,7 @@ describe("<NumberInput />", () => {
 
   test("should disable keep within range", async () => {
     const { user } = render(
-      <NumberInput defaultValue={15} max={30} keepWithinRange={false} />,
+      <NumberInput defaultValue={15} keepWithinRange={false} max={30} />,
     )
 
     const numberInput = await screen.findByRole("spinbutton")
@@ -74,8 +74,8 @@ describe("<NumberInput />", () => {
   test("should render a custom stepper input", async () => {
     render(
       <NumberInput
-        incrementProps={{ px: "xs", children: "+" }}
-        decrementProps={{ px: "xs", children: "-" }}
+        decrementProps={{ children: "-", px: "xs" }}
+        incrementProps={{ children: "+", px: "xs" }}
       />,
     )
 
@@ -86,7 +86,7 @@ describe("<NumberInput />", () => {
   })
 
   test("should correctly reflect value changes with keyboard operations", async () => {
-    const { user } = render(<NumberInput defaultValue={10} min={0} max={30} />)
+    const { user } = render(<NumberInput defaultValue={10} max={30} min={0} />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toHaveValue("10")
@@ -122,7 +122,7 @@ describe("<NumberInput />", () => {
   })
 
   test("should correctly reflect value changes with stepper elements", async () => {
-    const { user } = render(<NumberInput defaultValue={10} min={0} max={30} />)
+    const { user } = render(<NumberInput defaultValue={10} max={30} min={0} />)
 
     const numberInput = await screen.findByRole("spinbutton")
     const incrementStepper = document.querySelector(
@@ -141,7 +141,7 @@ describe("<NumberInput />", () => {
   })
 
   test("increments the value on wheel up", async () => {
-    const { user } = render(<NumberInput defaultValue={10} allowMouseWheel />)
+    const { user } = render(<NumberInput allowMouseWheel defaultValue={10} />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toHaveValue("10")
@@ -153,7 +153,7 @@ describe("<NumberInput />", () => {
   })
 
   test("decrements the value on wheel down", async () => {
-    const { user } = render(<NumberInput defaultValue={10} allowMouseWheel />)
+    const { user } = render(<NumberInput allowMouseWheel defaultValue={10} />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toHaveValue("10")

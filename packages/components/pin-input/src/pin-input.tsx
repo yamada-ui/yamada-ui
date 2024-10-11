@@ -1,17 +1,18 @@
 import type {
+  ColorModeToken,
+  CSS,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  ColorModeToken,
-  CSS,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ChangeEvent, KeyboardEvent, Ref } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -21,13 +22,12 @@ import { createDescendant } from "@yamada-ui/use-descendant"
 import {
   createContext,
   cx,
+  filterUndefined,
+  getValidChildren,
   handlerAll,
   mergeRefs,
   pickObject,
-  filterUndefined,
-  getValidChildren,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, KeyboardEvent, Ref } from "react"
 import { useCallback, useEffect, useId, useState } from "react"
 
 const toArray = (value?: string) => value?.split("")
@@ -42,21 +42,21 @@ const validate = (value: string, type: PinInputProps["type"]) => {
 }
 
 interface PinInputContext {
+  styles: { [key: string]: CSSUIObject | undefined }
   getInputProps: (
-    props: PinInputFieldProps & {
+    props: {
       index: number
       ref?: Ref<HTMLInputElement>
-    },
+    } & PinInputFieldProps,
   ) => PinInputFieldProps
-  styles: { [key: string]: CSSUIObject }
 }
 
 const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
-  strict: false,
   name: "PinInputContext",
+  errorMessage: `PinInputContext returned is 'undefined'. Seems you forgot to wrap the components in "<PinInput />"`,
 })
 
-const { DescendantsContextProvider, useDescendants, useDescendant } =
+const { DescendantsContextProvider, useDescendant, useDescendants } =
   createDescendant<HTMLInputElement>()
 
 interface PinInputOptions {
@@ -72,6 +72,44 @@ interface PinInputOptions {
    */
   type?: "alphanumeric" | "number"
   /**
+   * If `true`, the pin input receives focus on mount.
+   *
+   * @default false
+   */
+  autoFocus?: boolean
+  /**
+   * The initial value of the pin input.
+   */
+  defaultValue?: string
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * The number of inputs to display.
+   *
+   * @default 4
+   */
+  items?: number
+  /**
+   * If `true`, focus will move automatically to the next input once filled.
+   *
+   * @default true
+   */
+  manageFocus?: boolean
+  /**
+   * If `true`, the input's value will be masked just like `type=password`.
+   */
+  mask?: boolean
+  /**
+   * If `true`, the pin input component signals to its fields that they should.
+   */
+  otp?: boolean
+  /**
    * The placeholder for the pin input.
    *
    * @default '○'
@@ -82,30 +120,6 @@ interface PinInputOptions {
    */
   value?: string
   /**
-   * The initial value of the pin input.
-   */
-  defaultValue?: string
-  /**
-   * If `true`, the pin input receives focus on mount.
-   *
-   * @default false
-   */
-  autoFocus?: boolean
-  /**
-   * If `true`, focus will move automatically to the next input once filled.
-   *
-   * @default true
-   */
-  manageFocus?: boolean
-  /**
-   * If `true`, the pin input component signals to its fields that they should.
-   */
-  otp?: boolean
-  /**
-   * If `true`, the input's value will be masked just like `type=password`.
-   */
-  mask?: boolean
-  /**
    * Function called on input change.
    */
   onChange?: (value: string) => void
@@ -113,24 +127,10 @@ interface PinInputOptions {
    * Function called when all inputs have valid values.
    */
   onComplete?: (value: string) => void
-  /**
-   * The number of inputs to display.
-   *
-   * @default 4
-   */
-  items?: number
-  /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
 }
 
 export interface PinInputProps
-  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "mask">,
+  extends Omit<HTMLUIProps, "defaultValue" | "mask" | "onChange">,
     ThemeProps<"PinInput">,
     FormControlOptions,
     PinInputOptions {}
@@ -141,32 +141,32 @@ export interface PinInputProps
  * @see Docs https://yamada-ui.com/components/forms/pin-input
  */
 export const PinInput = forwardRef<PinInputProps, "div">(
-  ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
+  ({ errorBorderColor, focusBorderColor, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("PinInput", {
-      focusBorderColor,
       errorBorderColor,
+      focusBorderColor,
       ...props,
     })
     let {
       id,
-      className,
       type = "number",
+      className,
+      autoFocus,
+      children,
+      defaultValue,
+      items = 4,
+      manageFocus = true,
+      mask,
+      otp = false,
       placeholder = "○",
       value,
-      defaultValue,
-      autoFocus,
-      manageFocus = true,
-      otp = false,
-      mask,
       onChange: onChangeProp,
       onComplete,
-      items = 4,
-      children,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
     const {
-      readOnly,
       "aria-readonly": _ariaReadonly,
+      readOnly,
       ...formControlProps
     } = pickObject(rest, formControlProperties)
     const uuid = useId()
@@ -189,8 +189,8 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     }, [autoFocus, descendants])
 
     const [values, setValues] = useControllableState<string[]>({
-      value: toArray(value),
       defaultValue: toArray(defaultValue) || [],
+      value: toArray(value),
       onChange: (values) => onChangeProp?.(values.join("")),
     })
 
@@ -208,7 +208,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const setValue = useCallback(
-      (value: string, index: number, isFocus: boolean = true) => {
+      (value: string, index: number, isFocus = true) => {
         let nextValues = [...values]
 
         nextValues[index] = value
@@ -218,9 +218,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         nextValues = nextValues.filter(Boolean)
 
         const isComplete =
-          value !== "" &&
-          nextValues.length === descendants.count() &&
-          nextValues.every((value) => value != null && value !== "")
+          value !== "" && nextValues.length === descendants.count()
 
         if (isComplete) {
           onComplete?.(nextValues.join(""))
@@ -238,9 +236,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
         if (!value?.length) return nextValue
 
-        if (value[0] === eventValue.charAt(0)) {
+        if (value.startsWith(eventValue.charAt(0))) {
           nextValue = eventValue.charAt(1)
-        } else if (value[0] === eventValue.charAt(1)) {
+        } else if (value.startsWith(eventValue.charAt(1))) {
           nextValue = eventValue.charAt(0)
         }
 
@@ -303,7 +301,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
             if (!prevInput) return
 
             setValue("", index - 1, false)
-            prevInput.node?.focus()
+            prevInput.node.focus()
             setMoveFocus(true)
           } else {
             setMoveFocus(false)
@@ -323,25 +321,25 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       ({
         index,
         ...props
-      }: PinInputFieldProps & {
+      }: {
         index: number
         ref?: Ref<HTMLInputElement>
-      }): PinInputFieldProps => ({
-        inputMode: type === "number" ? "numeric" : "text",
+      } & PinInputFieldProps): PinInputFieldProps => ({
         type: mask ? "password" : type === "number" ? "tel" : "text",
+        inputMode: type === "number" ? "numeric" : "text",
         ...formControlProps,
         ...filterUndefined(props),
         id: `${id}-${index}`,
-        value: values[index] || "",
-        onChange: handlerAll(props.onChange, onChange(index)),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
-        onFocus: handlerAll(props.onFocus, onFocus(index)),
-        onBlur: handlerAll(props.onBlur, onBlur),
         autoComplete: otp ? "one-time-code" : "off",
         placeholder:
           focusedIndex === index && !readOnly && !props.readOnly
             ? ""
             : placeholder,
+        value: values[index] || "",
+        onBlur: handlerAll(props.onBlur, onBlur),
+        onChange: handlerAll(props.onChange, onChange(index)),
+        onFocus: handlerAll(props.onFocus, onFocus(index)),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
       }),
       [
         type,
@@ -361,8 +359,8 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const css: CSSUIObject = {
-      display: "flex",
       alignItems: "center",
+      display: "flex",
       ...styles.container,
     }
 
@@ -375,7 +373,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
     return (
       <DescendantsContextProvider value={descendants}>
-        <PinInputProvider value={{ getInputProps, styles }}>
+        <PinInputProvider value={{ styles, getInputProps }}>
           <ui.div
             ref={ref}
             className={cx("ui-pin-input", className)}
@@ -390,13 +388,16 @@ export const PinInput = forwardRef<PinInputProps, "div">(
   },
 )
 
+PinInput.displayName = "PinInput"
+PinInput.__ui__ = "PinInput"
+
 export interface PinInputFieldProps
   extends HTMLUIProps<"input">,
     FormControlOptions {}
 
 export const PinInputField = forwardRef<PinInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {
-    const { getInputProps, styles } = usePinInputContext()
+    const { styles, getInputProps } = usePinInputContext()
     const { index, register } = useDescendant()
 
     rest = useFormControlProps(rest)
@@ -412,3 +413,6 @@ export const PinInputField = forwardRef<PinInputFieldProps, "input">(
     )
   },
 )
+
+PinInputField.displayName = "PinInputField"
+PinInputField.__ui__ = "PinInputField"

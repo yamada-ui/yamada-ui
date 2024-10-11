@@ -1,9 +1,9 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
+import type { KeyboardEvent, KeyboardEventHandler } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu-context"
 
@@ -12,8 +12,8 @@ export interface MenuListProps extends HTMLUIProps<"ul"> {
 }
 
 export const MenuList = forwardRef<MenuListProps, "ul">(
-  ({ className, contentProps, children, ...rest }, ref) => {
-    const { menuRef, focusedIndex, setFocusedIndex, onClose, styles } =
+  ({ className, children, contentProps, ...rest }, ref) => {
+    const { focusedIndex, menuRef, setFocusedIndex, styles, onClose } =
       useMenu()
 
     const descendants = useMenuDescendantsContext()
@@ -45,12 +45,12 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
         const actions: { [key: string]: KeyboardEventHandler } = {
-          Tab: (ev) => ev.preventDefault(),
-          Escape: onClose,
           ArrowDown: focusedIndex === -1 ? onFirst : onNext,
           ArrowUp: focusedIndex === -1 ? onLast : onPrev,
-          Home: onFirst,
           End: onLast,
+          Escape: onClose,
+          Home: onFirst,
+          Tab: (ev) => ev.preventDefault(),
         }
 
         const action = actions[ev.key]
@@ -73,8 +73,8 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
       >
         <ui.ul
           ref={mergeRefs(menuRef, ref)}
-          role="menu"
           className={cx("ui-menu__list", className)}
+          role="menu"
           tabIndex={-1}
           __css={{ ...styles.list }}
           {...rest}

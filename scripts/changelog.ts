@@ -1,24 +1,24 @@
+import type { RestEndpointMethodTypes } from "@octokit/rest"
+import type { Project } from "find-packages"
+import * as p from "@clack/prompts"
+import { Octokit } from "@octokit/rest"
+import { isArray } from "@yamada-ui/react"
+import c from "chalk"
+import { findPackages } from "find-packages"
 import { existsSync } from "fs"
 import { mkdir, readFile, writeFile } from "fs/promises"
-import * as p from "@clack/prompts"
-import type { RestEndpointMethodTypes } from "@octokit/rest"
-import { Octokit } from "@octokit/rest"
-import c from "chalk"
-import type { Project } from "find-packages"
-import { findPackages } from "find-packages"
 import { prettier } from "./utils"
-import { isArray } from "@yamada-ui/react"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 type PullRequests = RestEndpointMethodTypes["pulls"]["list"]["response"]["data"]
 type PullRequest = PullRequests[number]
 
-export type PullRequestData = {
+export interface PullRequestData {
   id: number
-  url: string
   body: string
   date: string
+  url: string
   version: string | undefined
 }
 
@@ -32,16 +32,6 @@ const REPO_REQUEST_PARAMETERS = {
 
 const manifest = {
   path: ".changelog/manifest.json",
-
-  async write(data: PullRequestData[]) {
-    data = data.sort((a, b) => b.id - a.id)
-
-    const body = await prettier(JSON.stringify(data, null, 2), {
-      parser: "json",
-    })
-
-    return writeFile(this.path, body)
-  },
 
   async read(): Promise<PullRequestData[]> {
     try {
@@ -64,24 +54,36 @@ const manifest = {
 
     return this.write(computedData)
   },
+
+  async write(data: PullRequestData[]) {
+    data = data.sort((a, b) => b.id - a.id)
+
+    const body = await prettier(JSON.stringify(data, null, 2), {
+      parser: "json",
+    })
+
+    return writeFile(this.path, body)
+  },
 }
 
-const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
+const getPullRequests = async (): Promise<
+  PullRequest | PullRequest[] | undefined
+> => {
   if (arg.includes("--latest")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
-      state: "closed",
       base: "main",
       head: "yamada-ui:changeset-release/main",
+      state: "closed",
     })
 
     return data[0]
   } else if (arg.includes("--current")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
-      state: "open",
       base: "main",
       head: "yamada-ui:changeset-release/main",
+      state: "open",
     })
 
     return data[0]
@@ -103,11 +105,11 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
     do {
       const { data } = await octokit.pulls.list({
         ...REPO_REQUEST_PARAMETERS,
-        state: "all",
         base: "main",
         head: "yamada-ui:changeset-release/main",
-        per_page: perPage,
         page,
+        per_page: perPage,
+        state: "all",
       })
 
       pullRequests.push(...data)
@@ -121,10 +123,10 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
   }
 }
 
-let cachePackages: Map<string, Project>
+let cachePackages: Map<string, Project> | undefined
 
 const getPackages = async (): Promise<Map<string, Project>> => {
-  let packages: Map<string, Project> = new Map()
+  let packages = new Map<string, Project>()
 
   if (cachePackages) {
     packages = cachePackages
@@ -143,7 +145,7 @@ const getPackages = async (): Promise<Map<string, Project>> => {
   return packages
 }
 
-let cacheChangelogs: Map<string, string> = new Map()
+let cacheChangelogs = new Map<string, string>()
 
 const getChangelog = async (dir: string) => {
   let changelog = cacheChangelogs.get(dir)
@@ -165,7 +167,8 @@ const restoreChangelog = async (content: string): Promise<string> => {
       .split("\n## ")
       .map((section) => section.replace("## ", "").trim())
       .map(async (name) => {
-        const [, packageName, version] = name.match(/(@?[^@]+)@([^@]+)/) ?? []
+        const [, packageName = "", version] =
+          name.match(/(@?[^@]+)@([^@]+)/) ?? []
 
         const { dir } = packages.get(packageName) ?? {}
 
@@ -202,10 +205,10 @@ const restoreChangelog = async (content: string): Promise<string> => {
 
 const generateChangelog = async ({
   body: content,
-  merged_at,
-  updated_at,
-  number: id,
   html_url: url,
+  merged_at,
+  number: id,
+  updated_at,
 }: PullRequest): Promise<PullRequestData | undefined> => {
   if (!content) return
 
@@ -213,9 +216,9 @@ const generateChangelog = async ({
   content = parts[1] || content
 
   const date = new Date(merged_at ?? updated_at).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
     day: "numeric",
+    month: "long",
+    year: "numeric",
   })
 
   const match = content.match(/## @yamada-ui\/react\@(?<version>\d.+)/)
@@ -243,9 +246,9 @@ const generateChangelog = async ({
     .slice(1)
     .map((str) => "### " + str.trim())
 
-  const { main, dependencies } = sections.reduce<{
-    main: string[]
+  const { dependencies, main } = sections.reduce<{
     dependencies: string[]
+    main: string[]
   }>(
     (prev, section) => {
       if (/-\s+\[#\d+\]\(.+\)|-\s+\[`[^\]]+`\]\(.+\)/g.test(section)) {
@@ -256,8 +259,8 @@ const generateChangelog = async ({
       return prev
     },
     {
-      main: [],
       dependencies: [],
+      main: [],
     },
   )
 
@@ -290,15 +293,15 @@ const generateChangelog = async ({
     `release_date: ${date}`,
     `version: ${version}`,
     "---",
-    `${content}`,
+    content,
   ].join("\n")
 
-  return { id, url, body, date, version }
+  return { id, body, date, url, version }
 }
 
 const writeVersionFile = async ({
-  version,
   body,
+  version,
 }: PullRequestData): Promise<void> => {
   if (!existsSync(".changelog")) await mkdir(".changelog")
 
@@ -357,7 +360,7 @@ const main = async () => {
         ...resolvedData.map(writeVersionFile),
         manifest.write(resolvedData),
       ])
-    } else {
+    } else if (pullRequests) {
       const data = await generateChangelog(pullRequests)
 
       if (!data) throw new Error("Nothing to change")

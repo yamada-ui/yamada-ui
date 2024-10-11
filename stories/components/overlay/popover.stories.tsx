@@ -1,32 +1,32 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   Button,
+  Center,
   Popover,
-  PopoverTrigger,
+  PopoverAnchor,
+  PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
-  PopoverBody,
   PopoverFooter,
-  Center,
-  Wrap,
-  PopoverAnchor,
+  PopoverHeader,
+  PopoverTrigger,
   Text,
   useDisclosure,
+  Wrap,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Popover>
 
 const meta: Meta<typeof Popover> = {
-  title: "Components / Overlay / Popover",
   component: Popover,
+  title: "Components / Overlay / Popover",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -43,7 +43,7 @@ export const basic: Story = () => {
 
 export const withFooter: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -61,7 +61,7 @@ export const withFooter: Story = () => {
 
 export const withAnchor: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)" gap="md">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover closeOnBlur={false}>
         <PopoverAnchor>
           <Text>Here display Popover</Text>
@@ -83,7 +83,7 @@ export const withAnchor: Story = () => {
 
 export const withDuration: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover duration={0.7}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -102,10 +102,10 @@ export const controlPopover: Story = () => {
   const { isOpen, onClose, onToggle } = useDisclosure()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)" gap="md">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button onClick={onToggle}>Open Popover</Button>
 
-      <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+      <Popover closeOnBlur={false} isOpen={isOpen} onClose={onClose}>
         <PopoverTrigger>
           <Button colorScheme="primary">Target Popover</Button>
         </PopoverTrigger>
@@ -121,7 +121,7 @@ export const controlPopover: Story = () => {
 
 export const withOffset: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover offset={[16, 16]}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -138,7 +138,7 @@ export const withOffset: Story = () => {
 
 export const withGutter: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover gutter={32}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -392,7 +392,7 @@ export const withPlacement: Story = () => {
 
 export const disabledCloseButton: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover closeOnButton={false}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -409,7 +409,7 @@ export const disabledCloseButton: Story = () => {
 
 export const customCloseButton: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -427,7 +427,7 @@ export const customCloseButton: Story = () => {
 
 export const changeTrigger: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover trigger="hover">
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -444,7 +444,7 @@ export const changeTrigger: Story = () => {
 
 export const disabledCloseBlur: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover closeOnBlur={false}>
         <PopoverTrigger>
           <Button>Open Popover</Button>
@@ -461,7 +461,7 @@ export const disabledCloseBlur: Story = () => {
 
 export const useLazy: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Popover isLazy>
         <PopoverTrigger>
           <Button>Open Popover</Button>

@@ -1,45 +1,45 @@
-import {
-  Card,
-  Text,
-  Heading,
-  CardHeader,
-  CardBody,
-  HStack,
-  VStack,
-  Avatar,
-} from "@yamada-ui/react"
 import type { AvatarProps, CardProps, StackProps } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC, ReactNode } from "react"
+import {
+  Avatar,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@yamada-ui/react"
+import { memo } from "react"
 
 const ITEMS: ItemProps[] = [
   {
-    src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     name: "Hirotomo Yamada",
+    src: "https://avatars.githubusercontent.com/u/84060430?v=4",
     email: "hirotomoyamada@email.com",
     number: 530000,
   },
   {
-    src: "https://avatars.githubusercontent.com/u/116733827?v=4",
     name: "tasukuwato",
+    src: "https://avatars.githubusercontent.com/u/116733827?v=4",
     email: "tasukuwato@email.com",
     number: 758,
   },
   {
-    src: "https://avatars.githubusercontent.com/u/9676316?v=4",
     name: "Kazuki Shirai",
+    src: "https://avatars.githubusercontent.com/u/9676316?v=4",
     email: "kazukishirai@email.com",
     number: 4649,
   },
   {
-    src: "https://avatars.githubusercontent.com/u/33865215?v=4",
     name: "koralle",
+    src: "https://avatars.githubusercontent.com/u/33865215?v=4",
     email: "koralle@email.com",
     number: 891,
   },
   {
-    src: "https://avatars.githubusercontent.com/u/60034520?v=4",
     name: "Ichinose Yuto",
+    src: "https://avatars.githubusercontent.com/u/60034520?v=4",
     email: "ichinoseyuto@email.com",
     number: 818,
   },
@@ -50,7 +50,7 @@ export interface RecentSalesProps extends CardProps {}
 export const RecentSales: FC<RecentSalesProps> = memo(({ ...rest }) => {
   return (
     <Card variant="outline" {...rest}>
-      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+      <CardHeader alignItems="flex-start" flexDirection="column" gap="0">
         <Heading as="h4" size="md">
           RecentSales
         </Heading>
@@ -74,16 +74,16 @@ export const RecentSales: FC<RecentSalesProps> = memo(({ ...rest }) => {
 RecentSales.displayName = "RecentSales"
 
 export interface ItemProps extends StackProps {
-  src: string
-  avatarProps?: AvatarProps
   name: ReactNode
+  src: string
   email: ReactNode
-  isIncrease?: boolean
   number: number
+  isIncrease?: boolean
+  avatarProps?: AvatarProps
 }
 
 const Item: FC<ItemProps> = memo(
-  ({ src, avatarProps, name, email, isIncrease = true, number, ...rest }) => {
+  ({ name, src, email, isIncrease = true, number, avatarProps, ...rest }) => {
     return (
       <HStack as="li" gap={{ base: "md", sm: "sm" }} {...rest}>
         <Avatar src={src} boxSize={{ base: "10", sm: "8" }} {...avatarProps} />
@@ -93,17 +93,17 @@ const Item: FC<ItemProps> = memo(
             as="h5"
             fontSize={{ base: "lg", sm: "sm" }}
             fontWeight="semibold"
-            wordBreak="break-all"
             lineClamp={1}
+            wordBreak="break-all"
           >
             {name}
           </Text>
 
           <Text
-            fontSize={{ base: "sm", sm: "xs" }}
             color="muted"
-            wordBreak="break-all"
+            fontSize={{ base: "sm", sm: "xs" }}
             lineClamp={1}
+            wordBreak="break-all"
           >
             {email}
           </Text>
@@ -116,8 +116,8 @@ const Item: FC<ItemProps> = memo(
         >
           {isIncrease ? `+` : `-`}$
           {number.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
             maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
           })}
         </Text>
       </HStack>

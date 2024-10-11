@@ -1,5 +1,4 @@
 import type { AlertStatus } from "@yamada-ui/core"
-import { isNull, isUndefined } from "@yamada-ui/utils"
 import type { Parent as HastParent } from "hast"
 import type {
   Break,
@@ -10,12 +9,13 @@ import type {
   Text,
 } from "mdast"
 import type { ElementContent } from "react-markdown/lib"
-import { match, P } from "ts-pattern"
 import type { Plugin } from "unified"
+import type { ShouldRemoved } from "./utils"
+import { isNull, isUndefined, noop } from "@yamada-ui/utils"
+import { match, P } from "ts-pattern"
 import { remove } from "unist-util-remove"
 import { visit } from "unist-util-visit"
 import { getFragmentPattern } from "./patterns"
-import type { ShouldRemoved } from "./utils"
 import { shouldRemoved } from "./utils"
 
 const getStatus = (str: string | undefined): AlertStatus => {
@@ -49,7 +49,7 @@ interface OneLineNote extends Text {
   readonly status: AlertStatus
 }
 
-const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
+const oneLineNoteFactory = (textNode: Text): null | OneLineNote => {
   const startFragmentCapturedGroups = getFragmentPattern("start", true).exec(
     textNode.value,
   )
@@ -61,20 +61,16 @@ const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
   const startFragment = startFragmentCapturedGroups?.groups?.startFragment
   const endFragment = endFragmentCapturedGroups?.groups?.endFragment
 
-  if (isUndefined(startFragment) || isUndefined(endFragment)) {
-    return null
-  }
+  if (isUndefined(startFragment) || isUndefined(endFragment)) return null
 
   return new Proxy(textNode, {
-    get: (
-      target: Text,
-      property: keyof Pick<OneLineNote, "content" | "status">,
-    ) => {
+    get: (target: Text, property: string) => {
       switch (property) {
         case "content":
           return target.value
             .replace(startFragment, "")
             .replace(endFragment, "")
+
         case "status":
           return getStatus(startFragmentCapturedGroups?.groups?.status)
       }
@@ -86,13 +82,13 @@ interface StartFragment extends Text {
   readonly status: AlertStatus
 }
 
-const startFragmentFactory = (textNode: Text): StartFragment | null => {
+const startFragmentFactory = (textNode: Text): null | StartFragment => {
   const capturedGroups = getFragmentPattern("start", false).exec(textNode.value)
 
   if (isNull(capturedGroups)) return null
 
   return new Proxy(textNode, {
-    get: (_target: Text, property: keyof Pick<StartFragment, "status">) => {
+    get: (_target: Text, property: string) => {
       switch (property) {
         case "status":
           return getStatus(capturedGroups.groups?.status)
@@ -128,6 +124,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             if (!isNull(oneLineNote)) {
               if (isMergingChildren) {
                 buf.push(textNode)
+
                 return
               }
 
@@ -137,13 +134,13 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
                 ...node,
                 type: "custom" as "paragraph",
                 data: {
-                  hName: "note",
                   hChildren: [
                     {
                       type: "text",
                       value: content,
                     },
                   ],
+                  hName: "note",
                   hProperties: {
                     status: oneLineNote.status,
                   },
@@ -154,30 +151,30 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             }
 
             const startFragment = startFragmentFactory(textNode)
+
             if (!isNull(startFragment)) {
               isMergingChildren = true
 
               status = startFragment.status
 
-              if (buf.length > 0) {
-                nested++
-              }
+              if (buf.length > 0) nested++
             }
 
-            if (!isMergingChildren) {
-              return
-            }
+            if (!isMergingChildren) return
 
             buf.push(textNode)
 
             const endFragment = endFragmentFactory(textNode)
+
             if (!isNull(endFragment)) {
               if (nested > 0) {
                 nested--
+
                 return
               }
 
               isMergingChildren = false
+
               paragraph = {
                 type: "paragraph",
                 children: buf.slice(2, -2),
@@ -187,16 +184,12 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             }
           })
           .with({ type: "break" }, (breakNode) => {
-            if (isMergingChildren) {
-              buf.push(breakNode)
-            }
+            if (isMergingChildren) buf.push(breakNode)
           })
           .with({ type: "strong" }, (strongNode) => {
-            if (isMergingChildren) {
-              buf.push(strongNode)
-            }
+            if (isMergingChildren) buf.push(strongNode)
           })
-          .with(P._, () => {})
+          .with(P._, noop)
       }
 
       if (isMergingChildren) {
@@ -214,11 +207,9 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             ...node,
             type: "custom" as "paragraph",
             data: {
-              hName: "note",
               hChildren: paragraph.children as ElementContent[],
-              hProperties: {
-                status: status,
-              },
+              hName: "note",
+              hProperties: { status },
             },
           })
 
@@ -227,17 +218,18 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
       }
     })
 
-    remove(tree, (node) => {
-      return shouldRemoved(node)
-    })
+    remove(tree, shouldRemoved)
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (isMergingChildren) {
       tree.children.push({
         type: "paragraph",
         children: buf,
       })
     }
+
     isMergingChildren = false
+
     buf = []
   }
 }
@@ -247,18 +239,18 @@ export const rehypePlugin: Plugin = () => {
     visit(tree, "break", (_, index, parent: HastParent) => {
       parent.children.splice(index!, 1, {
         type: "element",
-        tagName: "br",
-        properties: {},
         children: [],
+        properties: {},
+        tagName: "br",
       })
     })
 
     visit(tree, "strong", (node: Strong, index: number, parent: HastParent) => {
       parent.children.splice(index!, 1, {
         type: "element",
-        tagName: "strong",
-        properties: {},
         children: [...node.children] as ElementContent[],
+        properties: {},
+        tagName: "strong",
       })
     })
   }

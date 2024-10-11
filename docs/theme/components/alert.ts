@@ -3,7 +3,7 @@ import { shadeColor, tintColor } from "@yamada-ui/react"
 
 export const Alert: ComponentMultiStyle = {
   variants: {
-    note: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    note: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [
           tintColor(`${c}.100`, 0.12)(t, m),

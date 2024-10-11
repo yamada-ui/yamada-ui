@@ -1,14 +1,16 @@
 import type { HTMLUIProps, PropGetter } from "@yamada-ui/core"
+import type { CSSProperties, MouseEvent } from "react"
 import {
   ariaAttr,
   dataAttr,
   handlerAll,
   isArray,
   isHTMLElement,
+  isNumber,
+  isString,
+  isUndefined,
   mergeRefs,
-  useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { CSSProperties, MouseEvent } from "react"
 import { useCallback, useId, useRef } from "react"
 import {
   useAutocompleteContext,
@@ -16,18 +18,20 @@ import {
 } from "./autocomplete-context"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
+  isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
 export interface UseAutocompleteOptionProps
-  extends Omit<HTMLUIProps<"li">, "value" | "children"> {
-  /**
-   * The value of the autocomplete option.
-   */
-  value?: string
+  extends Omit<HTMLUIProps<"li">, "children" | "value"> {
   /**
    * The label of the autocomplete option.
    */
   children?: string
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
   /**
    * If `true`, the autocomplete option will be disabled.
    *
@@ -41,35 +45,32 @@ export interface UseAutocompleteOptionProps
    */
   isFocusable?: boolean
   /**
-   * If `true`, the list element will be closed when selected.
-   *
-   * @default false
+   * The value of the autocomplete option.
    */
-  closeOnSelect?: boolean
+  value?: string
 }
 
 export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   const {
-    value,
-    omitSelectedValues,
-    onChange,
-    onChangeLabel,
+    closeOnSelect,
     focusedIndex,
-    setFocusedIndex,
-    onClose,
-    closeOnSelect: generalCloseOnSelect,
-    optionProps,
     inputRef,
+    omitSelectedValues,
+    setFocusedIndex,
+    value,
+    optionProps,
+    onChange,
+    onClose,
     onFocusNext,
   } = useAutocompleteContext()
   const id = useId()
 
   let {
+    children,
+    closeOnSelect: customCloseOnSelect,
     icon: customIcon,
     isDisabled,
     isFocusable,
-    closeOnSelect: customCloseOnSelect,
-    children,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
@@ -78,18 +79,29 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const itemRef = useRef<HTMLLIElement>(null)
 
-  const { index, register, descendants } = useAutocompleteDescendant({
+  const { descendants, index, register } = useAutocompleteDescendant({
     disabled: trulyDisabled,
   })
 
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-
   const isMulti = isArray(value)
-  const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
-    : false
 
+  if (isUndefined(optionValue)) {
+    if (isString(children) || isNumber(children)) {
+      optionValue = children.toString()
+    } else {
+      console.warn(
+        `${
+          !isMulti ? "Autocomplete" : "MultiAutocomplete"
+        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+      )
+    }
+  }
+
+  const isDuplicated = frontValues.some(
+    ({ node }) => node.dataset.value === (optionValue ?? ""),
+  )
   const isSelected =
     !isDuplicated &&
     (!isMulti
@@ -102,29 +114,24 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     (ev: MouseEvent<HTMLLIElement>) => {
       ev.stopPropagation()
 
-      if (isDisabled) {
+      if (isDisabled || !isTargetOption(ev.currentTarget)) {
         if (inputRef.current) inputRef.current.focus()
 
         return
       }
 
-      if (!isTargetOption(ev.currentTarget)) {
-        if (inputRef.current) inputRef.current.focus()
-
-        return
-      }
-
-      setFocusedIndex(index)
+      if (!isDuplicated) setFocusedIndex(index)
 
       onChange(optionValue ?? "")
 
       if (inputRef.current) inputRef.current.focus()
 
-      if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
+      if (customCloseOnSelect ?? closeOnSelect) onClose()
 
       if (omitSelectedValues) onFocusNext(index)
     },
     [
+      isDuplicated,
       onFocusNext,
       omitSelectedValues,
       isDisabled,
@@ -133,15 +140,11 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       index,
       onChange,
       customCloseOnSelect,
-      generalCloseOnSelect,
+      closeOnSelect,
       onClose,
       inputRef,
     ],
   )
-
-  useUpdateEffect(() => {
-    if (isSelected) onChangeLabel(optionValue ?? "", { runOmit: false })
-  }, [optionValue])
 
   const getOptionProps: PropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
@@ -149,34 +152,36 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
-        ref: mergeRefs(itemRef, ref, register),
         id,
+        ref: mergeRefs(itemRef, ref, register),
         role: "option",
         ...computedProps,
         ...props,
-        tabIndex: -1,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
-        "data-target": dataAttr(true),
-        "data-value": optionValue ?? "",
-        "data-focus": dataAttr(isFocused),
-        "data-disabled": dataAttr(isDisabled),
         "aria-checked": isSelected,
         "aria-disabled": ariaAttr(isDisabled),
+        "data-disabled": dataAttr(isDisabled),
+        "data-duplicated": dataAttr(isDuplicated),
+        "data-focus": dataAttr(isFocused),
+        "data-target": dataAttr(true),
+        "data-value": optionValue ?? "",
+        tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
     [
       id,
+      isDuplicated,
       optionValue,
       computedProps,
       isDisabled,
@@ -190,10 +195,10 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   return {
-    isSelected,
-    isFocused,
-    customIcon,
     children,
+    customIcon,
+    isFocused,
+    isSelected,
     getOptionProps,
   }
 }
@@ -211,20 +216,20 @@ export const useAutocompleteCreate = () => {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
         ref,
         ...props,
-        tabIndex: -1,
         style: isHit ? style : undefined,
         "data-focus": dataAttr(!isHit),
+        tabIndex: -1,
         onClick: handlerAll(props.onClick, onCreate),
       }
     },
@@ -239,7 +244,7 @@ export type UseAutocompleteCreateReturn = ReturnType<
 >
 
 export const useAutocompleteEmpty = () => {
-  const { isHit, isEmpty } = useAutocompleteContext()
+  const { isEmpty, isHit } = useAutocompleteContext()
 
   const getEmptyProps: PropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
@@ -247,19 +252,19 @@ export const useAutocompleteEmpty = () => {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
         height: "1px",
-        width: "1px",
         margin: "-1px",
-        padding: "0px",
         overflow: "hidden",
-        whiteSpace: "nowrap",
+        padding: "0px",
         position: "absolute",
+        whiteSpace: "nowrap",
+        width: "1px",
       }
 
       return {
         ref,
         ...props,
-        tabIndex: -1,
         style: isHit && !isEmpty ? style : undefined,
+        tabIndex: -1,
       }
     },
     [isHit, isEmpty],

@@ -1,16 +1,17 @@
 import {
-  isNumber,
-  isNotNumber,
-  isNumeric,
-  isString,
-  isUndefined,
-  isNull,
-  isObject,
+  is,
   isArray,
   isEmpty,
   isFunction,
+  isNotNumber,
+  isNull,
+  isNumber,
+  isNumeric,
+  isObject,
+  isString,
+  isUndefined,
   isUnit,
-  is,
+  noop,
 } from "../src"
 
 describe("Assertion", () => {
@@ -141,7 +142,7 @@ describe("Assertion", () => {
 
   describe("isFunction", () => {
     test("Returns true for functions", () => {
-      expect(isFunction(() => {})).toBeTruthy()
+      expect(isFunction(noop)).toBeTruthy()
     })
 
     test("Returns false for non-functions", () => {

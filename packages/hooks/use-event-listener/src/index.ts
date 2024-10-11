@@ -3,10 +3,10 @@ import { useCallback, useEffect, useRef } from "react"
 
 type Events =
   | keyof DocumentEventMap
-  | keyof WindowEventMap
   | keyof GlobalEventHandlersEventMap
-type Target = EventTarget | null | (() => EventTarget | null)
-type Options = boolean | AddEventListenerOptions
+  | keyof WindowEventMap
+type Target = (() => EventTarget | null) | EventTarget | null
+type Options = AddEventListenerOptions | boolean
 type Handler<E extends Events> = E extends keyof DocumentEventMap
   ? (event: DocumentEventMap[E]) => void
   : E extends keyof WindowEventMap
@@ -26,7 +26,7 @@ export const useEventListener = <E extends Events>(
   useEffect(() => {
     const el = typeof target === "function" ? target() : (target ?? document)
 
-    if (!handler || !el) return
+    if (!el) return
 
     el.addEventListener(
       event,
@@ -63,9 +63,9 @@ export const useEventListeners = () => {
       el: EventTarget,
       event: E,
       listener: any,
-      options: boolean | AddEventListenerOptions,
+      options: AddEventListenerOptions | boolean,
     ) => {
-      listeners.current.set(listener, { event, el, options })
+      listeners.current.set(listener, { el, event, options })
 
       el.addEventListener(
         event,

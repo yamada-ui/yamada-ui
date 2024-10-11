@@ -1,6 +1,6 @@
+import type { SkeletonProps } from "./skeleton"
 import { forwardRef } from "@yamada-ui/core"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import type { SkeletonProps } from "./skeleton"
 import { Skeleton } from "./skeleton"
 
 export interface SkeletonCircleProps extends SkeletonProps {}
@@ -25,8 +25,8 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
       <Skeleton
         ref={ref}
         className={cx("ui-skeleton__circle", className)}
-        rounded="fallback(full, 9999px)"
         isFitContent={isFitContent}
+        rounded="fallback(full, 9999px)"
         {...(!isFitContent ? { boxSize } : {})}
         {...rest}
       >

@@ -7,21 +7,21 @@ export default {
 export const after = () => {
   return (
     <Box
-      pos="relative"
       bg="primary"
+      color="white"
       m="lg"
       p="lg"
+      pos="relative"
       rounded="lg"
-      color="white"
       _after={{
-        content: "'after'",
-        pos: "absolute",
-        top: "lg",
-        left: "lg",
         bg: "secondary",
-        p: "lg",
-        rounded: "lg",
         color: "white",
+        content: "'after'",
+        left: "lg",
+        p: "lg",
+        pos: "absolute",
+        rounded: "lg",
+        top: "lg",
       }}
     >
       Box
@@ -32,21 +32,21 @@ export const after = () => {
 export const before = () => {
   return (
     <Box
-      pos="relative"
       bg="warning"
+      color="white"
       m="lg"
       p="lg"
+      pos="relative"
       rounded="lg"
-      color="white"
       _before={{
-        content: "'before'",
-        pos: "absolute",
-        top: "-lg",
-        left: "-lg",
         bg: "danger",
-        p: "lg",
-        rounded: "lg",
         color: "white",
+        content: "'before'",
+        left: "-lg",
+        p: "lg",
+        pos: "absolute",
+        rounded: "lg",
+        top: "-lg",
       }}
     >
       Box
@@ -58,12 +58,12 @@ export const hover = () => {
   return (
     <Box
       bg="primary"
-      p="md"
-      rounded="md"
       color="white"
       cursor="pointer"
-      transitionProperty="all"
+      p="md"
+      rounded="md"
       transitionDuration="slower"
+      transitionProperty="all"
       transitionTimingFunction="ease-in-out"
       _hover={{ bg: "secondary" }}
     >
@@ -75,13 +75,13 @@ export const hover = () => {
 export const group = () => {
   return (
     <VStack
+      borderWidth="1px"
+      outline="0"
+      p="md"
       role="group"
+      rounded="md"
       tabIndex={0}
       w="auto"
-      p="md"
-      borderWidth="1px"
-      rounded="md"
-      outline="0"
       _focusVisible={{ boxShadow: "outline" }}
     >
       <Text textAlign="center">Focus me!</Text>
@@ -106,17 +106,17 @@ export const peer = () => {
     <HStack>
       <Center
         data-peer
-        tabIndex={0}
-        p="md"
         borderWidth="1px"
-        rounded="md"
         outline="0"
+        p="md"
+        rounded="md"
+        tabIndex={0}
         _focusVisible={{ boxShadow: "outline" }}
       >
         Focus me!
       </Center>
 
-      <Center p="md" bg="primary" rounded="md" _peerFocus={{ bg: "secondary" }}>
+      <Center bg="primary" p="md" rounded="md" _peerFocus={{ bg: "secondary" }}>
         Focus the peer
       </Center>
     </HStack>
@@ -130,11 +130,11 @@ export const other = () => {
       {numbers.map((number) => (
         <Center
           key={number}
-          _odd={{ bg: "red.500" }}
-          _even={{ bg: "blue.500" }}
           boxSize="5xs"
-          rounded="md"
           color="white"
+          rounded="md"
+          _even={{ bg: "blue.500" }}
+          _odd={{ bg: "red.500" }}
         >
           {number}
         </Center>

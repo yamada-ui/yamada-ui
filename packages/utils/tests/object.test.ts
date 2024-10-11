@@ -1,17 +1,17 @@
-import { describe, expect, test } from "vitest"
 import type { Dict } from "../src"
+import { describe, expect, test } from "vitest"
 import {
-  omitObject,
-  pickObject,
-  splitObject,
   filterObject,
   filterUndefined,
-  merge,
   flattenObject,
-  objectFromEntries,
-  keysFormObject,
-  replaceObject,
   getObject,
+  keysFormObject,
+  merge,
+  objectFromEntries,
+  omitObject,
+  pickObject,
+  replaceObject,
+  splitObject,
 } from "../src"
 
 describe("Object", () => {

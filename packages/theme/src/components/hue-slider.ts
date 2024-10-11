@@ -3,27 +3,26 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
   baseStyle: {
     container: {
-      w: "100%",
-      rounded: "full",
       cursor: "pointer",
-      _readOnly: { cursor: "auto" },
+      rounded: "full",
+      w: "100%",
       _disabled: {
-        opacity: 0.6,
         cursor: "not-allowed",
+        opacity: 0.6,
       },
+      _readOnly: { cursor: "auto" },
     },
     overlay: {
       rounded: "full",
     },
-    track: {},
     thumb: {
-      rounded: "full",
-      outline: 0,
-      borderWidth: "3px",
       borderColor: "whiteAlpha.950",
+      borderWidth: "3px",
       boxShadow: ["md", "dark-md"],
-      transitionProperty: "transform",
+      outline: 0,
+      rounded: "full",
       transitionDuration: "normal",
+      transitionProperty: "transform",
       _active: {
         transform: `scale(1.15)`,
       },
@@ -31,6 +30,7 @@ export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
         boxShadow: ["outline", "outline"],
       },
     },
+    track: {},
   },
 
   sizes: {

@@ -1,43 +1,43 @@
 {
   "Tag": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the tag is disabled."
+      "description": "If `true`, the tag is disabled.",
+      "required": false
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "Icon to be displayed to the left of the tag."
+      "description": "Icon to be displayed to the left of the tag.",
+      "required": false
     },
     "onClose": {
       "type": "MouseEventHandler<HTMLElement>",
-      "required": false,
-      "description": "Function to be executed when the close button is clicked."
+      "description": "Function to be executed when the close button is clicked.",
+      "required": false
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "Icon to be displayed to the right of the tag."
+      "description": "Icon to be displayed to the right of the tag.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Tag."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Tag.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "subtle",
-      "type": "\"solid\" | \"subtle\" | \"outline\"",
-      "required": false,
-      "description": "The variant of the Tag."
+      "type": "\"outline\" | \"solid\" | \"subtle\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the Tag.",
+      "required": false
     }
   }
 }

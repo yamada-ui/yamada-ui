@@ -14,9 +14,9 @@ tab: Props
 <PropsCard
   id="resizable-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"gray"}
+  defaultValue={'"gray"'}
 />
 
 <PropsCard
@@ -93,7 +93,7 @@ tab: Props
   name="variant"
   type='"border" | "spacer" | "unstyled"'
   description={"The variant of the Resizable."}
-  defaultValue={"border"}
+  defaultValue={'"border"'}
 />
 
 ### ResizableItemProps
@@ -194,6 +194,16 @@ tab: Props
   description={"Order for the resizable item."}
 />
 
+### ResizableTriggerIconProps
+
+<PropsCard
+  id="resizabletriggericon-size"
+  name="size"
+  type='UIValue<number | "small" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 17 more ... | "xs">'
+  description={"The CSS `font-size` property."}
+  deprecated={"Use `fontSize` instead."}
+/>
+
 ### ResizableTriggerProps
 
 <PropsCard
@@ -229,14 +239,4 @@ tab: Props
   type="boolean"
   description={"If `true`, the resizable trigger will be disabled."}
   defaultValue={"false"}
-/>
-
-### ResizableTriggerIconProps
-
-<PropsCard
-  id="resizabletriggericon-size"
-  name="size"
-  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
-  description={"The CSS `font-size` property."}
-  deprecated={"Use `fontSize` instead."}
 />

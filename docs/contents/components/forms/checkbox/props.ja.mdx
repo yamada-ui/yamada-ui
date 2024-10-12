@@ -9,14 +9,71 @@ tab: Props
 
 ## Props
 
+### CheckboxIconProps
+
+<PropsCard
+  id="checkboxicon-as"
+  name="as"
+  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
+  description={"The HTML element to render."}
+/>
+
+<PropsCard
+  id="checkboxicon-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the icon will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the icon will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
 ### CheckboxProps
 
 <PropsCard
   id="checkbox-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -30,9 +87,9 @@ tab: Props
 <PropsCard
   id="checkbox-iconprops"
   name="iconProps"
-  type='Omit<HTMLUIProps<"span">, "children"> & {
+  type='{
   children: ReactElement<any, string | JSXElementConstructor<any>>
-}'
+} & Omit<HTMLUIProps<"span">, "children">'
   description={"Props for icon component."}
 />
 
@@ -138,7 +195,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Checkbox."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -160,63 +217,6 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Checkbox."}
-/>
-
-### CheckboxIconProps
-
-<PropsCard
-  id="checkboxicon-as"
-  name="as"
-  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "label" | "form" | "style" | "title" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | ... 149 more ... | "view"'
-  description={"The HTML element to render."}
-/>
-
-<PropsCard
-  id="checkboxicon-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the icon will be checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the icon will be indeterminate."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
 />
 
 ### UseCheckboxProps
@@ -338,7 +338,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-basis"
   name="basis"
-  type='UIValue<number | "content" | "px" | "initial" | "inherit" | (string & {}) | "auto" | "max" | "min" | "1" | "2" | "3" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | ... 67 more ... | "9xl">'
+  type='UIValue<number | "content" | "px" | "initial" | "inherit" | (string & {}) | "auto" | "max" | "min" | "1" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | ... 68 more ... | "xs">'
   description={"The CSS `flex-basis` property."}
 />
 

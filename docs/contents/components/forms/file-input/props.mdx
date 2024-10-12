@@ -14,14 +14,14 @@ tab: Props
 <PropsCard
   id="fileinput-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="fileinput-component"
   name="component"
-  type="FC<{ value: File; index: number }>"
+  type="FC<{ index: number; value: File }>"
   description={"The component that displays uploaded files."}
 />
 
@@ -35,14 +35,14 @@ tab: Props
 <PropsCard
   id="fileinput-errorbordercolor"
   name="errorBorderColor"
-  type='"border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 321 more ... | [...]'
+  type='"border" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 320 more ... | [...]'
   description={"The border color when the input is invalid."}
 />
 
 <PropsCard
   id="fileinput-focusbordercolor"
   name="focusBorderColor"
-  type='"border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 321 more ... | [...]'
+  type='"border" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 320 more ... | [...]'
   description={"The border color when the input is focused."}
 />
 
@@ -114,7 +114,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the FileInput."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -127,7 +127,7 @@ tab: Props
 <PropsCard
   id="fileinput-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the FileInput."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />

@@ -1,5 +1,20 @@
 # @yamada-ui/dropzone
 
+## 1.0.46
+
+### Patch Changes
+
+- [#3049](https://github.com/yamada-ui/yamada-ui/pull/3049) [`f58f3a3`](https://github.com/yamada-ui/yamada-ui/commit/f58f3a3f4e9735de1f275e7f4b0a9e841db2a892) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated component structure and naming.
+
+- [#2994](https://github.com/yamada-ui/yamada-ui/pull/2994) [`3c51069`](https://github.com/yamada-ui/yamada-ui/commit/3c5106931903c47559d71fa3e968f8169d9099de) Thanks [@kaz-uen](https://github.com/kaz-uen)! - Set `displayName` and `__ui__` after each component definition
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/loading@1.1.18
+  - @yamada-ui/transitions@1.1.7
+
 ## 1.0.45
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { Dispatch, DOMAttributes, RefObject, SetStateAction } from "react"
-import type { ChangeOptions, UseAutocompleteProps } from "./use-autocomplete"
+import type { UseAutocompleteProps } from "./use-autocomplete"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext } from "@yamada-ui/utils"
 
@@ -32,8 +32,7 @@ interface AutocompleteContext
   value: string | string[]
   formControlProps: { [key: string]: any }
   inputProps: DOMAttributes<HTMLInputElement>
-  onChange: (newValue: string, options?: ChangeOptions) => void
-  onChangeLabel: (newValue: string, options?: ChangeOptions) => void
+  onChange: (newValue: string, runRebirth?: boolean) => void
   onClose: () => void
   onCreate: () => void
   onFocusFirst: () => void

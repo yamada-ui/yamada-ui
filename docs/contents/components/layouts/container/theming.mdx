@@ -14,17 +14,21 @@ tab: Theming
 The `Container` is a [single part component](/styled-system/theming/component-styles#single-part-components).
 
 :::note
+`Container` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
 export const Container: ComponentStyle<"Container"> = {
   baseStyle: {
-    w: "100%",
     display: "flex",
     flexDirection: "column",
     gap: { base: "lg", sm: "md" },
     p: { base: "lg", sm: "md" },
+    w: "100%",
   },
 }
 ```

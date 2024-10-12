@@ -1,104 +1,104 @@
 {
   "Indicator": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps, \"children\">",
-      "required": false,
-      "description": "Props for indicator wrapper element."
+      "description": "Props for indicator wrapper element.",
+      "required": false
     },
     "inline": {
       "type": "UIValue<boolean>",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, set the indicator as an inline element."
+      "description": "If `true`, set the indicator as an inline element.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the indicator will be disabled."
+      "description": "If `true`, the indicator will be disabled.",
+      "required": false
     },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
-      "required": false,
-      "description": "The indicator label to use."
+      "description": "The indicator label to use.",
+      "required": false
     },
     "offset": {
       "type": "UIValue<number>",
       "defaultValue": "0",
-      "required": false,
-      "description": "Changes position offset, usually used when element has border-radius."
+      "description": "Changes position offset, usually used when element has border-radius.",
+      "required": false
     },
     "overflowCount": {
       "type": "number",
       "defaultValue": "99",
-      "required": false,
-      "description": "If `label` is of type number, the maximum number displayed."
+      "description": "If `label` is of type number, the maximum number displayed.",
+      "required": false
     },
     "ping": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water."
+      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water.",
+      "required": false
     },
     "pingColor": {
-      "type": "UIValue<\"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | ({} & string) | BackgroundColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | ... 320 more ... | \"yellow.950\">",
       "defaultValue": "var(--ui-ping)",
-      "required": false,
-      "description": "It is used for the color of the ping animation."
+      "description": "It is used for the color of the ping animation.",
+      "required": false
     },
     "pingCount": {
       "type": "AnimationIterationCount",
       "defaultValue": "infinite",
-      "required": false,
-      "description": "It is used for the count of the ping animation."
+      "description": "It is used for the count of the ping animation.",
+      "required": false
     },
     "pingDuration": {
       "type": "AnimationDirection",
       "defaultValue": "1.4s",
-      "required": false,
-      "description": "It is used for the duration of the ping animation."
+      "description": "It is used for the duration of the ping animation.",
+      "required": false
     },
     "pingScale": {
       "type": "number",
       "defaultValue": "1.8",
-      "required": false,
-      "description": "It is used for the scale of the ping animation."
+      "description": "It is used for the scale of the ping animation.",
+      "required": false
     },
     "placement": {
-      "type": "UIValue<\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n>",
+      "type": "UIValue<\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n  | \"top-left\"\n  | \"top-right\"\n>",
       "defaultValue": "'top-right'",
-      "required": false,
-      "description": "The placement of the indicator."
+      "description": "The placement of the indicator.",
+      "required": false
     },
     "showZero": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display 0."
+      "description": "If `true`, display 0.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Indicator."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Indicator.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "solid",
       "type": "\"solid\" | \"subtle\"",
-      "required": false,
-      "description": "The variant of the Indicator."
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the Indicator.",
+      "required": false
     },
     "withBorder": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, display the border of the indicator."
+      "description": "If `true`, display the border of the indicator.",
+      "required": false
     }
   }
 }

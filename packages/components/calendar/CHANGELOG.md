@@ -1,5 +1,24 @@
 # @yamada-ui/calendar
 
+## 1.8.2
+
+### Patch Changes
+
+- [#3092](https://github.com/yamada-ui/yamada-ui/pull/3092) [`8c794a5`](https://github.com/yamada-ui/yamada-ui/commit/8c794a54aaffec793b3d270db81ff03efc99d537) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where invalid style was incorrect when `allowInput` was `false`.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`0604931`](https://github.com/yamada-ui/yamada-ui/commit/0604931287d4edee29c86609ae6cb76f6d8b730d), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b), [`5186075`](https://github.com/yamada-ui/yamada-ui/commit/5186075a55c30a9b051208d8bd88dcbbd210b980)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/portal@1.0.23
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/button@1.0.44
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/popover@1.3.4
+  - @yamada-ui/use-clickable@1.2.10
+  - @yamada-ui/use-disclosure@1.0.22
+  - @yamada-ui/use-outside-click@1.0.22
+
 ## 1.8.1
 
 ### Patch Changes

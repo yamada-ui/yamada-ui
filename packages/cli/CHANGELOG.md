@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.2.2
+
+### Patch Changes
+
+- [#3080](https://github.com/yamada-ui/yamada-ui/pull/3080) [`b798839`](https://github.com/yamada-ui/yamada-ui/commit/b798839aaa32787297079da51410b35a61edcf3c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
 ## 1.2.1
 
 ### Patch Changes

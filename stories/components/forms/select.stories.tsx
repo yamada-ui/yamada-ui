@@ -32,7 +32,6 @@ export const basic: Story = () => {
         { label: "クリリン", value: "クリリン" },
       ],
       label: "地球人",
-      value: "",
     },
     {
       items: [

@@ -1,5 +1,15 @@
 # @yamada-ui/close-button
 
+## 1.0.42
+
+### Patch Changes
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b), [`7a32bb8`](https://github.com/yamada-ui/yamada-ui/commit/7a32bb8d0e715276a276b92a66bb78345251e978)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/ripple@1.0.40
+
 ## 1.0.41
 
 ### Patch Changes

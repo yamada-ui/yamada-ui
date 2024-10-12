@@ -1,74 +1,74 @@
 {
   "NativeTable": {
     "colorScheme": {
-      "defaultValue": "gray",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"gray\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "highlightOnHover": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, highlight the row when the table row is hovered."
+      "description": "If `true`, highlight the row when the table row is hovered.",
+      "required": false
     },
     "layout": {
-      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | { [x: string & {}]: TableLayout | [TableLayout, TableLayout] | undefined; ... 5 more ...; base?: TableLayout | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `table-layout` property."
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | [TableLayout | { [x: string]: TableLayout | undefined; ... 5 more ...; xl?: TableLayout | undefined; }, TableLayout | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `table-layout` property.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
-      "required": false,
-      "description": "The size of the NativeTable."
+      "defaultValue": "\"md\"",
+      "description": "The size of the NativeTable.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "simple",
       "type": "\"simple\" | \"striped\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the NativeTable."
+      "defaultValue": "\"simple\"",
+      "description": "The variant of the NativeTable.",
+      "required": false
     },
     "withBorder": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, display the outer border of the table."
+      "description": "If `true`, display the outer border of the table.",
+      "required": false
     },
     "withColumnBorders": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, display line on the columns of the table."
-    }
-  },
-  "TableContainer": {},
-  "TableHead": {},
-  "TableBody": {},
-  "TableFoot": {},
-  "Tr": {},
-  "Th": {
-    "isNumeric": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Aligns the cell content to the right."
-    }
-  },
-  "Td": {
-    "isNumeric": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "Aligns the cell content to the right."
+      "description": "If `true`, display line on the columns of the table.",
+      "required": false
     }
   },
   "TableCaption": {
     "placement": {
       "type": "\"bottom\" | \"top\"",
       "defaultValue": "'bottom'",
-      "required": false,
-      "description": "The placement of the table caption."
+      "description": "The placement of the table caption.",
+      "required": false
     }
-  }
+  },
+  "TableContainer": {},
+  "TableBody": {},
+  "Td": {
+    "isNumeric": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Aligns the cell content to the right.",
+      "required": false
+    }
+  },
+  "TableFoot": {},
+  "Th": {
+    "isNumeric": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Aligns the cell content to the right.",
+      "required": false
+    }
+  },
+  "TableHead": {},
+  "Tr": {}
 }

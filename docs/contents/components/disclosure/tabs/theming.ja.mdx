@@ -12,6 +12,10 @@ order: 2
 `Tabs`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
+`Tabs`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
@@ -22,29 +26,53 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       display: "flex",
       flexDirection: orientation === "vertical" ? "row" : "column",
     }),
-    tabList: ({ align, orientation }) => ({
-      flexDirection: orientation === "vertical" ? "column" : "row",
-      justifyContent: align === "center" ? align : `flex-${align}`,
-    }),
     tab: ({ isFitted }) => ({
       flex: isFitted ? 1 : undefined,
-      whiteSpace: "nowrap",
-      transitionProperty: "common",
       transitionDuration: "normal",
-      _hover: { opacity: 0.7 },
-      _focusVisible: {
-        zIndex: "yamcha",
-        boxShadow: "outline",
-      },
-      _selected: { _hover: { opacity: 1 } },
+      transitionProperty: "common",
+      whiteSpace: "nowrap",
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
       },
+      _focusVisible: {
+        boxShadow: "outline",
+        zIndex: "yamcha",
+      },
+      _hover: { opacity: 0.7 },
+      _selected: { _hover: { opacity: 1 } },
     }),
-    tabPanels: {},
+    tabList: ({ align, orientation }) => ({
+      flexDirection: orientation === "vertical" ? "column" : "row",
+      justifyContent: align === "center" ? align : `flex-${align}`,
+    }),
     tabPanel: {
       p: "md",
+    },
+    tabPanels: {},
+  },
+
+  sizes: {
+    sm: {
+      tab: {
+        fontSize: "sm",
+        px: 3,
+        py: 1,
+      },
+    },
+    md: {
+      tab: {
+        fontSize: "md",
+        px: 4,
+        py: 2,
+      },
+    },
+    lg: {
+      tab: {
+        fontSize: "lg",
+        px: 5,
+        py: 3,
+      },
     },
   },
 
@@ -53,125 +81,129 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       const isVertical = orientation === "vertical"
 
       return {
-        tabList: {
-          borderColor: "inherit",
-          ...(isVertical
-            ? { borderEndWidth: "1px" }
-            : { borderBottomWidth: "1px" }),
-        },
         tab: {
           borderColor: "transparent",
           _selected: {
-            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
             borderColor: "currentColor",
+            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
           },
           ...(isVertical
             ? {
-                borderEndWidth: "1px",
                 borderEndStyle: "solid",
+                borderEndWidth: "1px",
                 me: "-1px",
               }
             : {
-                borderBottomWidth: "1px",
                 borderBottomStyle: "solid",
+                borderBottomWidth: "1px",
                 mb: "-1px",
               }),
           _ripple: { display: "none" },
         },
-      }
-    },
-    sticky: ({ colorScheme: c = "primary", orientation }) => {
-      const isVertical = orientation === "vertical"
-
-      return {
         tabList: {
           borderColor: "inherit",
           ...(isVertical
             ? { borderEndWidth: "1px" }
             : { borderBottomWidth: "1px" }),
         },
+      }
+    },
+    rounded: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
+      const color = mode(
+        getColor(`${c}.500`)(t, m),
+        getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
+      )(m)
+
+      return {
+        tab: {
+          borderRadius: "full",
+          _selected: {
+            boxShadow: `inset 0 0 0px 1px ${color}`,
+            color,
+          },
+        },
+        tabList: { gap: "sm" },
+      }
+    },
+    "rounded-solid": ({
+      colorScheme: c = "primary",
+      colorMode: m,
+      theme: t,
+    }) => ({
+      tab: {
+        borderRadius: "full",
+        _selected: {
+          bg: [
+            tintColor(`${c}.600`, 24)(t, m),
+            shadeColor(`${c}.600`, 16)(t, m),
+          ],
+          color: `white`,
+        },
+      },
+      tabList: { gap: "sm" },
+    }),
+    "rounded-subtle": ({
+      colorScheme: c = "primary",
+      colorMode: m,
+      theme: t,
+    }) => ({
+      tab: {
+        borderRadius: "full",
+        _selected: {
+          bg: [
+            isGray(c) ? `${c}.50` : `${c}.100`,
+            shadeColor(`${c}.300`, 58)(t, m),
+          ],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+        },
+      },
+      tabList: { gap: "sm" },
+    }),
+    sticky: ({ colorScheme: c = "primary", orientation }) => {
+      const isVertical = orientation === "vertical"
+
+      return {
         tab: {
           borderColor: "transparent",
           _selected: {
-            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
             borderColor: "inherit",
+            color: [`${c}.500`, isGray(c) ? `${c}.100` : `${c}.400`],
             ...(isVertical
               ? { borderEndColor: ["white", "black"] }
               : { borderBottomColor: ["white", "black"] }),
           },
           ...(isVertical
             ? {
-                roundedLeft: "md",
-                borderWidth: "1px",
                 borderStyle: "solid",
+                borderWidth: "1px",
                 me: "-2px",
+                roundedLeft: "md",
               }
             : {
-                roundedTop: "md",
-                borderWidth: "1px",
                 borderStyle: "solid",
+                borderWidth: "1px",
                 mb: "-2px",
+                roundedTop: "md",
               }),
           _ripple: { display: "none" },
         },
-      }
-    },
-    "sticky-subtle": ({
-      theme: t,
-      colorMode: m,
-      colorScheme: c = "primary",
-      orientation,
-    }) => {
-      const isVertical = orientation === "vertical"
-
-      return {
         tabList: {
           borderColor: "inherit",
           ...(isVertical
             ? { borderEndWidth: "1px" }
             : { borderBottomWidth: "1px" }),
-        },
-        tab: {
-          borderColor: "inherit",
-          _notLast: {
-            ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
-          },
-          _selected: {
-            bg: [
-              isGray(c) ? `${c}.50` : `${c}.100`,
-              shadeColor(`${c}.300`, 58)(t, m),
-            ],
-            color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
-          },
-          ...(isVertical
-            ? {
-                borderWidth: "1px",
-                borderStyle: "solid",
-                me: "-1px",
-              }
-            : {
-                borderWidth: "1px",
-                borderStyle: "solid",
-                mb: "-1px",
-              }),
         },
       }
     },
     "sticky-solid": ({
-      theme: t,
-      colorMode: m,
       colorScheme: c = "primary",
+      colorMode: m,
       orientation,
+      theme: t,
     }) => {
       const isVertical = orientation === "vertical"
 
       return {
-        tabList: {
-          borderColor: "inherit",
-          ...(isVertical
-            ? { borderEndWidth: "1px" }
-            : { borderBottomWidth: "1px" }),
-        },
         tab: {
           borderColor: "inherit",
           _notLast: {
@@ -186,69 +218,65 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           },
           ...(isVertical
             ? {
-                borderWidth: "1px",
                 borderStyle: "solid",
+                borderWidth: "1px",
                 me: "-1px",
               }
             : {
-                borderWidth: "1px",
                 borderStyle: "solid",
+                borderWidth: "1px",
                 mb: "-1px",
               }),
         },
+        tabList: {
+          borderColor: "inherit",
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
+        },
       }
     },
-    rounded: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => {
-      const color = mode(
-        getColor(`${c}.500`)(t, m),
-        getColor(isGray(c) ? `${c}.100` : `${c}.400`)(t, m),
-      )(m)
+    "sticky-subtle": ({
+      colorScheme: c = "primary",
+      colorMode: m,
+      orientation,
+      theme: t,
+    }) => {
+      const isVertical = orientation === "vertical"
 
       return {
-        tabList: { gap: "sm" },
         tab: {
-          borderRadius: "full",
-          _selected: {
-            color,
-            boxShadow: `inset 0 0 0px 1px ${color}`,
+          borderColor: "inherit",
+          _notLast: {
+            ...(isVertical ? { borderBottom: "none" } : { borderEnd: "none" }),
           },
+          _selected: {
+            bg: [
+              isGray(c) ? `${c}.50` : `${c}.100`,
+              shadeColor(`${c}.300`, 58)(t, m),
+            ],
+            color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+          },
+          ...(isVertical
+            ? {
+                borderStyle: "solid",
+                borderWidth: "1px",
+                me: "-1px",
+              }
+            : {
+                borderStyle: "solid",
+                borderWidth: "1px",
+                mb: "-1px",
+              }),
+        },
+        tabList: {
+          borderColor: "inherit",
+          ...(isVertical
+            ? { borderEndWidth: "1px" }
+            : { borderBottomWidth: "1px" }),
         },
       }
     },
-    "rounded-subtle": ({
-      theme: t,
-      colorMode: m,
-      colorScheme: c = "primary",
-    }) => ({
-      tabList: { gap: "sm" },
-      tab: {
-        borderRadius: "full",
-        _selected: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 58)(t, m),
-          ],
-          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
-        },
-      },
-    }),
-    "rounded-solid": ({
-      theme: t,
-      colorMode: m,
-      colorScheme: c = "primary",
-    }) => ({
-      tabList: { gap: "sm" },
-      tab: {
-        borderRadius: "full",
-        _selected: {
-          bg: [
-            tintColor(`${c}.600`, 24)(t, m),
-            shadeColor(`${c}.600`, 16)(t, m),
-          ],
-          color: `white`,
-        },
-      },
-    }),
     unstyled: {
       tab: {
         _hover: { opacity: "inherit" },
@@ -257,34 +285,10 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
     },
   },
 
-  sizes: {
-    sm: {
-      tab: {
-        py: 1,
-        px: 3,
-        fontSize: "sm",
-      },
-    },
-    md: {
-      tab: {
-        fontSize: "md",
-        py: 2,
-        px: 4,
-      },
-    },
-    lg: {
-      tab: {
-        fontSize: "lg",
-        py: 3,
-        px: 5,
-      },
-    },
-  },
-
   defaultProps: {
+    colorScheme: "primary",
     size: "md",
     variant: "line",
-    colorScheme: "primary",
   },
 }
 ```

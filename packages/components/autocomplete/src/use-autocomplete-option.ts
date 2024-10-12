@@ -6,8 +6,10 @@ import {
   handlerAll,
   isArray,
   isHTMLElement,
+  isNumber,
+  isString,
+  isUndefined,
   mergeRefs,
-  useUpdateEffect,
 } from "@yamada-ui/utils"
 import { useCallback, useId, useRef } from "react"
 import {
@@ -50,7 +52,7 @@ export interface UseAutocompleteOptionProps
 
 export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   const {
-    closeOnSelect: generalCloseOnSelect,
+    closeOnSelect,
     focusedIndex,
     inputRef,
     omitSelectedValues,
@@ -58,7 +60,6 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     value,
     optionProps,
     onChange,
-    onChangeLabel,
     onClose,
     onFocusNext,
   } = useAutocompleteContext()
@@ -84,12 +85,23 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-
   const isMulti = isArray(value)
-  const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
-    : false
 
+  if (isUndefined(optionValue)) {
+    if (isString(children) || isNumber(children)) {
+      optionValue = children.toString()
+    } else {
+      console.warn(
+        `${
+          !isMulti ? "Autocomplete" : "MultiAutocomplete"
+        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+      )
+    }
+  }
+
+  const isDuplicated = frontValues.some(
+    ({ node }) => node.dataset.value === (optionValue ?? ""),
+  )
   const isSelected =
     !isDuplicated &&
     (!isMulti
@@ -102,29 +114,24 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     (ev: MouseEvent<HTMLLIElement>) => {
       ev.stopPropagation()
 
-      if (isDisabled) {
+      if (isDisabled || !isTargetOption(ev.currentTarget)) {
         if (inputRef.current) inputRef.current.focus()
 
         return
       }
 
-      if (!isTargetOption(ev.currentTarget)) {
-        if (inputRef.current) inputRef.current.focus()
-
-        return
-      }
-
-      setFocusedIndex(index)
+      if (!isDuplicated) setFocusedIndex(index)
 
       onChange(optionValue ?? "")
 
       if (inputRef.current) inputRef.current.focus()
 
-      if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
+      if (customCloseOnSelect ?? closeOnSelect) onClose()
 
       if (omitSelectedValues) onFocusNext(index)
     },
     [
+      isDuplicated,
       onFocusNext,
       omitSelectedValues,
       isDisabled,
@@ -133,15 +140,11 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       index,
       onChange,
       customCloseOnSelect,
-      generalCloseOnSelect,
+      closeOnSelect,
       onClose,
       inputRef,
     ],
   )
-
-  useUpdateEffect(() => {
-    if (isSelected) onChangeLabel(optionValue ?? "", { runOmit: false })
-  }, [optionValue])
 
   const getOptionProps: PropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
@@ -168,6 +171,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         "aria-checked": isSelected,
         "aria-disabled": ariaAttr(isDisabled),
         "data-disabled": dataAttr(isDisabled),
+        "data-duplicated": dataAttr(isDuplicated),
         "data-focus": dataAttr(isFocused),
         "data-target": dataAttr(true),
         "data-value": optionValue ?? "",
@@ -177,6 +181,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     },
     [
       id,
+      isDuplicated,
       optionValue,
       computedProps,
       isDisabled,

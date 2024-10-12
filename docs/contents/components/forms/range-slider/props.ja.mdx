@@ -24,9 +24,9 @@ tab: Props
 <PropsCard
   id="rangeslider-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -39,7 +39,7 @@ tab: Props
 <PropsCard
   id="rangeslider-filledtrackcolor"
   name="filledTrackColor"
-  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
+  type='UIValue<"border" | ({} & string) | Color | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
   description={
     "The CSS `color` property. Used in `color` of filled track element."
   }
@@ -180,7 +180,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the RangeSlider."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -194,7 +194,7 @@ tab: Props
 <PropsCard
   id="rangeslider-thumbcolor"
   name="thumbColor"
-  type='UIValue<"border" | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | "whiteAlpha.700" | ... 319 more ... | Background<...>>'
+  type='UIValue<"border" | ({} & string) | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | "amber.950" | ... 318 more ... | Background<...>>'
   description={
     "The CSS `background` property. Used in `background` of thumb element."
   }
@@ -210,7 +210,7 @@ tab: Props
 <PropsCard
   id="rangeslider-thumbsize"
   name="thumbSize"
-  type='UIValue<number | "px" | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 74 more ... | "9xl">'
+  type='UIValue<number | "px" | "max" | "min" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 75 more ... | "xs">'
   description={
     "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element."
   }
@@ -219,7 +219,7 @@ tab: Props
 <PropsCard
   id="rangeslider-trackcolor"
   name="trackColor"
-  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
+  type='UIValue<"border" | ({} & string) | Color | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
   description={"The CSS `color` property. Used in `color` of track element."}
 />
 
@@ -233,7 +233,7 @@ tab: Props
 <PropsCard
   id="rangeslider-tracksize"
   name="trackSize"
-  type='UIValue<number | "px" | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 70 more ... | "9xl">'
+  type='UIValue<number | "px" | "max" | "min" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 71 more ... | "xs">'
   description={"The CSS `height` property. Used in `height` of track element."}
 />
 

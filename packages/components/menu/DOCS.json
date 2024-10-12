@@ -1,159 +1,311 @@
 {
-  "Menu": {
+  "ContextMenu": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
-      "required": false,
-      "description": "The animation of the popover."
+      "description": "The animation of the popover.",
+      "required": false
     },
     "autoFocus": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be transferred to the first interactive element when the popover opens."
+      "description": "If `true`, focus will be transferred to the first interactive element when the popover opens.",
+      "required": false
     },
     "boundary": {
-      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
+      "type": "\"clippingParents\" | \"scrollParent\" | HTMLElement",
       "defaultValue": "'clippingParents'",
-      "required": false,
-      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier.",
+      "required": false
     },
     "closeDelay": {
       "type": "number",
       "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to close."
+      "description": "The number of delay time to close.",
+      "required": false
     },
     "closeOnBlur": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out.",
+      "required": false
     },
     "closeOnEsc": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popover will close when you hit the `Esc` key."
+      "description": "If `true`, the popover will close when you hit the `Esc` key.",
+      "required": false
     },
     "closeOnSelect": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the list element will be closed when value is selected."
+      "description": "If `true`, the list element will be closed when value is selected.",
+      "required": false
     },
     "defaultIsOpen": {
       "type": "boolean",
-      "required": false,
-      "description": "If `true`, the popover will be initially opened."
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
-      "required": false,
-      "description": "The animation duration."
+      "description": "The animation duration.",
+      "required": false
     },
     "eventListeners": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { resize?: boolean | undefined; scroll?: boolean | undefined }",
       "defaultValue": true,
-      "required": false,
-      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.",
+      "required": false
     },
     "flip": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+      "required": false
     },
     "gutter": {
       "type": "UIValue<number>",
       "defaultValue": "8",
-      "required": false,
-      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+      "required": false
     },
     "initialFocusRef": {
       "type": "RefObject<{ focus(): void }>",
-      "required": false,
-      "description": "The `ref` of the element that should receive focus when the popover opens."
+      "description": "The `ref` of the element that should receive focus when the popover opens.",
+      "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
     },
     "isOpen": {
       "type": "boolean",
-      "required": false,
-      "description": "If `true`, the popover will be opened."
+      "description": "If `true`, the popover will be opened.",
+      "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "required": false,
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "required": false
     },
     "matchWidth": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+      "required": false
     },
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
-      "required": false,
       "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "required": false,
       "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "offset": {
       "type": "[number, number]",
-      "required": false,
-      "description": "The main and cross-axis offset to displace popper element from its reference element."
+      "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
     },
     "onClose": {
       "type": "() => void",
-      "required": false,
-      "description": "Callback fired when the popover closes."
+      "description": "Callback fired when the popover closes.",
+      "required": false
     },
     "onOpen": {
       "type": "() => void",
-      "required": false,
-      "description": "Callback fired when the popover opens."
+      "description": "Callback fired when the popover opens.",
+      "required": false
     },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to open."
+      "description": "The number of delay time to open.",
+      "required": false
     },
     "placement": {
       "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
-      "required": false,
-      "description": "The placement of the popper relative to its reference."
+      "description": "The placement of the popper relative to its reference.",
+      "required": false
     },
     "preventOverflow": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
     },
     "restoreFocus": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
+      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes.",
+      "required": false
     },
     "strategy": {
       "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "'absolute'",
+      "description": "The CSS positioning strategy to use.",
+      "required": false
+    }
+  },
+  "ContextMenuTrigger": {},
+  "Menu": {
+    "animation": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "defaultValue": "'scale'",
+      "description": "The animation of the popover.",
+      "required": false
+    },
+    "autoFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, focus will be transferred to the first interactive element when the popover opens.",
+      "required": false
+    },
+    "boundary": {
+      "type": "\"clippingParents\" | \"scrollParent\" | HTMLElement",
+      "defaultValue": "'clippingParents'",
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier.",
+      "required": false
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "description": "The number of delay time to close.",
+      "required": false
+    },
+    "closeOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out.",
+      "required": false
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the popover will close when you hit the `Esc` key.",
+      "required": false
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the list element will be closed when value is selected.",
+      "required": false
+    },
+    "defaultIsOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "eventListeners": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { resize?: boolean | undefined; scroll?: boolean | undefined }",
+      "defaultValue": true,
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.",
+      "required": false
+    },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+      "required": false
+    },
+    "gutter": {
+      "type": "UIValue<number>",
+      "defaultValue": "8",
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+      "required": false
+    },
+    "initialFocusRef": {
+      "type": "RefObject<{ focus(): void }>",
+      "description": "The `ref` of the element that should receive focus when the popover opens.",
+      "required": false
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
+    "isOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "required": false
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+      "required": false
+    },
+    "modifiers": {
+      "type": "Partial<Modifier<string, any>>[]",
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
       "required": false,
-      "description": "The CSS positioning strategy to use."
+      "see": "https://popper.js.org/docs/v2/modifiers/"
+    },
+    "offset": {
+      "type": "[number, number]",
+      "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void",
+      "description": "Callback fired when the popover closes.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void",
+      "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "description": "The number of delay time to open.",
+      "required": false
+    },
+    "placement": {
+      "type": "UIValue<Placement>",
+      "defaultValue": "'bottom'",
+      "description": "The placement of the popper relative to its reference.",
+      "required": false
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes.",
+      "required": false
+    },
+    "strategy": {
+      "type": "\"absolute\" | \"fixed\"",
+      "defaultValue": "'absolute'",
+      "description": "The CSS positioning strategy to use.",
+      "required": false
     },
     "trigger": {
-      "type": "\"click\" | \"hover\" | \"never\" | \"contextmenu\"",
+      "type": "\"click\" | \"contextmenu\" | \"hover\" | \"never\"",
       "defaultValue": "'click'",
-      "required": false,
-      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard."
+      "description": "The interaction that triggers the popover.\n\n- `hover`: means the popover will open when you hover with mouse or focus with keyboard on the popover trigger.\n- `click`: means the popover will open on click or press `Enter` to `Space` on keyboard.",
+      "required": false
     }
   },
   "MenuButton": {},
@@ -165,278 +317,126 @@
     "iconProps": { "type": "MenuIconProps", "required": false },
     "innerProps": { "type": "HTMLUIProps<\"span\">", "required": false }
   },
-  "MenuList": {
-    "contentProps": { "type": "MotionPropsWithoutChildren", "required": false }
+  "MenuDivider": {},
+  "MenuGroup": {
+    "label": {
+      "type": "string",
+      "description": "The label of the group.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "HTMLUIProps<\"span\">",
+      "description": "Props for menu group element.",
+      "required": false
+    }
   },
+  "MenuCommand": {},
+  "MenuIcon": {},
   "MenuItem": {
     "closeOnSelect": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the list element will be closed when selected."
+      "description": "If `true`, the list element will be closed when selected.",
+      "required": false
     },
     "command": {
       "type": "string",
-      "required": false,
-      "description": "Right-aligned label text content, useful for displaying hotkeys."
+      "description": "Right-aligned label text content, useful for displaying hotkeys.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The menu item icon to use."
+      "description": "The menu item icon to use.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the menu item will be disabled."
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the menu item will be focusable."
+      "description": "If `true`, the menu item will be focusable.",
+      "required": false
     }
   },
   "MenuOptionItem": {
     "closeOnSelect": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the list element will be closed when selected."
+      "description": "If `true`, the list element will be closed when selected.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The menu option item icon to use."
+      "description": "The menu option item icon to use.",
+      "required": false
     },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the checkbox or radio will be checked."
+      "description": "If `true`, the checkbox or radio will be checked.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the menu item will be disabled."
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the menu item will be focusable."
+      "description": "If `true`, the menu item will be focusable.",
+      "required": false
     },
     "type": {
       "type": "\"checkbox\" | \"radio\"",
-      "required": false,
-      "description": "The type of the menu option item."
+      "description": "The type of the menu option item.",
+      "required": false
     },
     "value": {
       "type": "string",
-      "required": false,
-      "description": "The value of the menu option item."
+      "description": "The value of the menu option item.",
+      "required": false
     }
   },
-  "MenuIcon": {},
-  "MenuCommand": {},
-  "MenuGroup": {
-    "label": {
-      "type": "string",
-      "required": false,
-      "description": "The label of the group."
-    },
-    "labelProps": {
-      "type": "HTMLUIProps<\"span\">",
-      "required": false,
-      "description": "Props for menu group element."
-    }
+  "MenuList": {
+    "contentProps": { "type": "MotionPropsWithoutChildren", "required": false }
   },
   "MenuOptionGroup": {
     "defaultValue": {
       "type": "Y",
-      "required": false,
-      "description": "The initial value of the menu item group."
+      "description": "The initial value of the menu item group.",
+      "required": false
     },
     "label": {
       "type": "string",
-      "required": false,
-      "description": "The label of the group."
+      "description": "The label of the group.",
+      "required": false
     },
     "labelProps": {
       "type": "HTMLUIProps<\"span\">",
-      "required": false,
-      "description": "Props for menu group element."
+      "description": "Props for menu group element.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y) => void",
-      "required": false,
-      "description": "The callback fired when any children checkbox is checked or unchecked."
+      "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
     },
     "type": {
       "type": "\"checkbox\" | \"radio\"",
       "defaultValue": "'checkbox'",
-      "required": false,
-      "description": "The type of the menu option group."
+      "description": "The type of the menu option group.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value of the menu item group."
+      "description": "The value of the menu item group.",
+      "required": false
     }
-  },
-  "MenuDivider": {},
-  "ContextMenu": {
-    "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
-      "defaultValue": "'scale'",
-      "required": false,
-      "description": "The animation of the popover."
-    },
-    "autoFocus": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be transferred to the first interactive element when the popover opens."
-    },
-    "boundary": {
-      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
-      "defaultValue": "'clippingParents'",
-      "required": false,
-      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
-    },
-    "closeDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to close."
-    },
-    "closeOnBlur": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
-    },
-    "closeOnEsc": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popover will close when you hit the `Esc` key."
-    },
-    "closeOnSelect": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the list element will be closed when value is selected."
-    },
-    "defaultIsOpen": {
-      "type": "boolean",
-      "required": false,
-      "description": "If `true`, the popover will be initially opened."
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "required": false,
-      "description": "The animation duration."
-    },
-    "eventListeners": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
-      "defaultValue": true,
-      "required": false,
-      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
-    },
-    "flip": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
-    },
-    "gutter": {
-      "type": "UIValue<number>",
-      "defaultValue": "8",
-      "required": false,
-      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
-    },
-    "initialFocusRef": {
-      "type": "RefObject<{ focus(): void }>",
-      "required": false,
-      "description": "The `ref` of the element that should receive focus when the popover opens."
-    },
-    "isLazy": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
-    },
-    "isOpen": {
-      "type": "boolean",
-      "required": false,
-      "description": "If `true`, the popover will be opened."
-    },
-    "lazyBehavior": {
-      "type": "LazyMode",
-      "defaultValue": "'unmount'",
-      "required": false,
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
-    },
-    "matchWidth": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
-    },
-    "modifiers": {
-      "type": "Partial<Modifier<string, any>>[]",
-      "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
-      "see": "https://popper.js.org/docs/v2/modifiers/"
-    },
-    "offset": {
-      "type": "[number, number]",
-      "required": false,
-      "description": "The main and cross-axis offset to displace popper element from its reference element."
-    },
-    "onClose": {
-      "type": "() => void",
-      "required": false,
-      "description": "Callback fired when the popover closes."
-    },
-    "onOpen": {
-      "type": "() => void",
-      "required": false,
-      "description": "Callback fired when the popover opens."
-    },
-    "openDelay": {
-      "type": "number",
-      "defaultValue": "200",
-      "required": false,
-      "description": "The number of delay time to open."
-    },
-    "placement": {
-      "type": "UIValue<Placement>",
-      "defaultValue": "'bottom'",
-      "required": false,
-      "description": "The placement of the popper relative to its reference."
-    },
-    "preventOverflow": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "restoreFocus": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
-    },
-    "strategy": {
-      "type": "\"absolute\" | \"fixed\"",
-      "defaultValue": "'absolute'",
-      "required": false,
-      "description": "The CSS positioning strategy to use."
-    }
-  },
-  "ContextMenuTrigger": {}
+  }
 }

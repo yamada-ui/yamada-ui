@@ -11,12 +11,54 @@ order: 1
 
 ## Props
 
+### SegmentedControlButtonProps
+
+<PropsCard
+  id="segmentedcontrolbutton-value"
+  name="value"
+  required
+  type="string"
+  description={"The value of the segmented control button."}
+/>
+
+<PropsCard
+  id="segmentedcontrolbutton-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="segmentedcontrolbutton-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="segmentedcontrolbutton-motionprops"
+  name="motionProps"
+  type="MotionProps"
+  description={"Props for motion component."}
+/>
+
+<PropsCard
+  id="segmentedcontrolbutton-onchange"
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
+/>
+
 ### SegmentedControlProps
 
 <PropsCard
   id="segmentedcontrol-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -74,7 +116,7 @@ order: 1
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the SegmentedControl."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -89,47 +131,5 @@ order: 1
   name="variant"
   type='"basic" | "rounded"'
   description={"The variant of the SegmentedControl."}
-  defaultValue={"basic"}
-/>
-
-### SegmentedControlButtonProps
-
-<PropsCard
-  id="segmentedcontrolbutton-value"
-  name="value"
-  required
-  type="string"
-  description={"The value of the segmented control button."}
-/>
-
-<PropsCard
-  id="segmentedcontrolbutton-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the segmented control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="segmentedcontrolbutton-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the segmented control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="segmentedcontrolbutton-motionprops"
-  name="motionProps"
-  type="MotionProps"
-  description={"Props for motion component."}
-/>
-
-<PropsCard
-  id="segmentedcontrolbutton-onchange"
-  name="onChange"
-  type="ChangeEventHandler<HTMLInputElement>"
-  description={
-    "The callback fired when any children radio is checked or unchecked."
-  }
+  defaultValue={'"basic"'}
 />

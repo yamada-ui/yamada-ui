@@ -14,18 +14,49 @@ tab: Theming
 The `Card` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
 
 :::note
+`Card` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
 export const Card: ComponentMultiStyle<"Card"> = {
   baseStyle: {
-    container: {},
-    header: {},
     body: {
       flex: "1",
     },
+    container: {},
     footer: {},
+    header: {},
+  },
+
+  sizes: {
+    sm: {
+      body: { gap: "sm", px: "sm", py: "sm" },
+      container: { rounded: "base" },
+      footer: { gap: "sm", pb: "sm", px: "sm" },
+      header: { gap: "sm", pt: "sm", px: "sm" },
+    },
+    md: {
+      body: { gap: "md", px: "md", py: "md" },
+      container: { rounded: "md" },
+      footer: { gap: "md", pb: "md", px: "md" },
+      header: { gap: "md", pt: "md", px: "md" },
+    },
+    normal: {
+      body: { gap: "normal", px: "normal", py: "normal" },
+      container: { rounded: "lg" },
+      footer: { gap: "normal", pb: "normal", px: "normal" },
+      header: { gap: "normal", pt: "normal", px: "normal" },
+    },
+    lg: {
+      body: { gap: "lg", px: "lg", py: "lg" },
+      container: { rounded: "xl" },
+      footer: { gap: "lg", pb: "lg", px: "lg" },
+      header: { gap: "lg", pt: "lg", px: "lg" },
+    },
   },
 
   variants: {
@@ -39,56 +70,29 @@ export const Card: ComponentMultiStyle<"Card"> = {
         borderWidth: "1px",
       },
     },
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
         color: "white",
       },
     }),
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
         bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
       },
     }),
     unstyled: {
-      container: { rounded: 0 },
-      header: { p: 0 },
       body: { p: 0 },
+      container: { rounded: 0 },
       footer: { p: 0 },
-    },
-  },
-
-  sizes: {
-    sm: {
-      container: { rounded: "base" },
-      header: { pt: "sm", px: "sm", gap: "sm" },
-      body: { py: "sm", px: "sm", gap: "sm" },
-      footer: { pb: "sm", px: "sm", gap: "sm" },
-    },
-    md: {
-      container: { rounded: "md" },
-      header: { pt: "md", px: "md", gap: "md" },
-      body: { py: "md", px: "md", gap: "md" },
-      footer: { pb: "md", px: "md", gap: "md" },
-    },
-    normal: {
-      container: { rounded: "lg" },
-      header: { pt: "normal", px: "normal", gap: "normal" },
-      body: { py: "normal", px: "normal", gap: "normal" },
-      footer: { pb: "normal", px: "normal", gap: "normal" },
-    },
-    lg: {
-      container: { rounded: "xl" },
-      header: { pt: "lg", px: "lg", gap: "lg" },
-      body: { py: "lg", px: "lg", gap: "lg" },
-      footer: { pb: "lg", px: "lg", gap: "lg" },
+      header: { p: 0 },
     },
   },
 
   defaultProps: {
-    variant: "elevated",
     colorScheme: "primary",
     size: "md",
+    variant: "elevated",
   },
 }
 ```

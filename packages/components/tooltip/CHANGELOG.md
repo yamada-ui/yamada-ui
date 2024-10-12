@@ -1,5 +1,20 @@
 # @yamada-ui/tooltip
 
+## 1.1.13
+
+### Patch Changes
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`0604931`](https://github.com/yamada-ui/yamada-ui/commit/0604931287d4edee29c86609ae6cb76f6d8b730d)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/portal@1.0.23
+  - @yamada-ui/motion@2.2.4
+  - @yamada-ui/transitions@1.1.7
+  - @yamada-ui/use-popper@1.0.39
+  - @yamada-ui/use-disclosure@1.0.22
+  - @yamada-ui/use-event-listener@1.0.22
+  - @yamada-ui/use-outside-click@1.0.22
+
 ## 1.1.12
 
 ### Patch Changes

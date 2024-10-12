@@ -12,6 +12,10 @@ tab: テーマ
 `List`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
+`List`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
@@ -19,12 +23,12 @@ tab: テーマ
 export const List: ComponentMultiStyle<"List"> = {
   baseStyle: {
     container: {},
-    item: {},
     icon: {
-      me: "2",
       display: "inline-block",
+      me: "2",
       verticalAlign: "middle",
     },
+    item: {},
   },
 }
 ```

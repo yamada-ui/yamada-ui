@@ -57,7 +57,7 @@ tab: Props
 <PropsCard
   id="areachart-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -143,7 +143,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the AreaChart."}
-  defaultValue={"full"}
+  defaultValue={'"full"'}
 />
 
 <PropsCard
@@ -368,7 +368,7 @@ tab: Props
 <PropsCard
   id="area-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | "link.950">'
+  type='UIValue<"border" | ({} & string) | Color | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
 />
 
 <PropsCard id="area-dimarea" name="dimArea" type="Partial<AreaProps>" />

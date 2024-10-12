@@ -1,5 +1,20 @@
 # @yamada-ui/progress
 
+## 1.1.4
+
+### Patch Changes
+
+- [#3048](https://github.com/yamada-ui/yamada-ui/pull/3048) [`fa8f9f1`](https://github.com/yamada-ui/yamada-ui/commit/fa8f9f13350ea45d9ec6fb9b5cd055a594ece603) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated component naming and structure.
+
+- [#3025](https://github.com/yamada-ui/yamada-ui/pull/3025) [`fe6e812`](https://github.com/yamada-ui/yamada-ui/commit/fe6e8124e0d59db08aaee46bdf0b96706fb3330a) Thanks [@mei28](https://github.com/mei28)! - fix: `displayName` is not set for the component of "@yamada-ui/progress"
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-animation@1.0.39
+  - @yamada-ui/use-token@1.1.27
+  - @yamada-ui/use-value@1.1.27
+
 ## 1.1.3
 
 ### Patch Changes

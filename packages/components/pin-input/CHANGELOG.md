@@ -1,5 +1,18 @@
 # @yamada-ui/pin-input
 
+## 1.0.43
+
+### Patch Changes
+
+- [#3030](https://github.com/yamada-ui/yamada-ui/pull/3030) [`5a8d5b0`](https://github.com/yamada-ui/yamada-ui/commit/5a8d5b0a4fe3e8fe2e86921d9018d77acca4c4dc) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Add `displayName` to `PinInput` component.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/use-descendant@1.0.23
+
 ## 1.0.42
 
 ### Patch Changes

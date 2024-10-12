@@ -1,134 +1,134 @@
 {
-  "Tabs": {
-    "align": {
-      "type": "\"start\" | \"end\" | \"center\"",
-      "required": false,
-      "description": "The alignment of the tabs."
-    },
-    "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "defaultIndex": {
-      "type": "number",
-      "required": false,
-      "description": "The index of the selected tab."
-    },
-    "disableRipple": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing the tab."
-    },
-    "index": {
-      "type": "number",
-      "required": false,
-      "description": "The index of the selected tab."
-    },
-    "isFitted": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, tabs will stretch to width of the tablist."
-    },
-    "isLazy": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, rendering of the tab panel's will be deferred until it is selected."
-    },
-    "isManual": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus."
-    },
-    "lazyBehavior": {
-      "type": "LazyMode",
-      "defaultValue": "'unmount'",
-      "required": false,
-      "description": "The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.\n\n- `unmount`: The content of inactive tab panels are always unmounted.\n- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected."
-    },
-    "onChange": {
-      "type": "(index: number) => void",
-      "required": false,
-      "description": "The callback invoked when the index changes."
-    },
-    "orientation": {
-      "type": "\"vertical\" | \"horizontal\"",
-      "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the tab list."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Tabs."
-    },
-    "tabListProps": {
-      "type": "TabListProps",
-      "required": false,
-      "description": "Props for tab list component."
-    },
-    "tabPanelsProps": {
-      "type": "TabPanelsProps",
-      "required": false,
-      "description": "Props for tab panels components."
-    },
-    "variant": {
-      "defaultValue": "line",
-      "type": "\"line\" | \"sticky\" | \"sticky-subtle\" | \"sticky-solid\" | \"rounded\" | \"rounded-subtle\" | \"rounded-solid\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Tabs."
-    }
-  },
-  "TabList": {},
   "Tab": {
     "clickOnEnter": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Whether or not trigger click on pressing `Enter`."
+      "description": "Whether or not trigger click on pressing `Enter`.",
+      "required": false
     },
     "clickOnSpace": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Whether or not trigger click on pressing `Space`."
+      "description": "Whether or not trigger click on pressing `Space`.",
+      "required": false
     },
     "disableTouchBehavior": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Disable the touch device behavior."
+      "description": "Disable the touch device behavior.",
+      "required": false
     },
     "focusOnClick": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "Whether or not to focus the element when it is clicked.\nIf `true`, the element will receive focus upon click."
+      "description": "Whether or not to focus the element when it is clicked.\nIf `true`, the element will receive focus upon click.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+      "description": "If `true`, the element will be disabled. It will set the `disabled` HTML attribute.",
+      "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+      "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.",
+      "required": false
     },
     "ref": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLElement | null) => void)\n  | RefObject<HTMLElement>",
-      "required": false,
-      "description": "The ref for the element."
+      "description": "The ref for the element.",
+      "required": false
     }
   },
+  "TabList": {},
+  "TabPanel": {},
   "TabPanels": {},
-  "TabPanel": {}
+  "Tabs": {
+    "align": {
+      "type": "\"center\" | \"end\" | \"start\"",
+      "description": "The alignment of the tabs.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultIndex": {
+      "type": "number",
+      "description": "The index of the selected tab.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, disable ripple effects when pressing the tab.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the selected tab.",
+      "required": false
+    },
+    "isFitted": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, tabs will stretch to width of the tablist.",
+      "required": false
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, rendering of the tab panel's will be deferred until it is selected.",
+      "required": false
+    },
+    "isManual": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.",
+      "required": false
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "description": "The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.\n\n- `unmount`: The content of inactive tab panels are always unmounted.\n- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(index: number) => void",
+      "description": "The callback invoked when the index changes.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "description": "The orientation of the tab list.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the Tabs.",
+      "required": false
+    },
+    "tabListProps": {
+      "type": "TabListProps",
+      "description": "Props for tab list component.",
+      "required": false
+    },
+    "tabPanelsProps": {
+      "type": "TabPanelsProps",
+      "description": "Props for tab panels components.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"line\" | \"rounded\" | \"rounded-solid\" | \"rounded-subtle\" | \"sticky\" | \"sticky-solid\" | \"sticky-subtle\" | \"unstyled\"",
+      "defaultValue": "\"line\"",
+      "description": "The variant of the Tabs.",
+      "required": false
+    }
+  }
 }

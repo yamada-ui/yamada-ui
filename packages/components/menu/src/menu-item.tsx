@@ -79,7 +79,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
     ref,
   ) => {
     const {
-      closeOnSelect: generalCloseOnSelect,
+      closeOnSelect,
       focusedIndex,
       isNested,
       isOpen,
@@ -122,12 +122,12 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
 
         const hasDownstream = hasDownstreamRef.current
 
-        if (customCloseOnSelect ?? (!hasDownstream && generalCloseOnSelect)) {
+        if (customCloseOnSelect ?? (!hasDownstream && closeOnSelect)) {
           onClose()
           onUpstreamClose?.()
         }
       },
-      [customCloseOnSelect, generalCloseOnSelect, onClose, onUpstreamClose],
+      [customCloseOnSelect, closeOnSelect, onClose, onUpstreamClose],
     )
 
     const onFocus = useCallback(() => {

@@ -1,38 +1,38 @@
 {
   "CloseButton": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is disabled."
+      "description": "If `true`, the button is disabled.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the button is full rounded."
+      "description": "If true, the button is full rounded.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the CloseButton."
+      "defaultValue": "\"md\"",
+      "description": "The size of the CloseButton.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the CloseButton."
+      "description": "The variant of the CloseButton.",
+      "required": false
     }
   }
 }

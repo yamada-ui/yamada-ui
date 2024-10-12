@@ -3,15 +3,15 @@
     "onClear": { "type": "(key: Key) => void", "required": true },
     "ripples": { "type": "RippleOptions[]", "required": true },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"span\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
-      "required": false,
-      "description": "The HTML element to render."
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"span\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "description": "The HTML element to render.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     }
   },
   "UseRipple": {

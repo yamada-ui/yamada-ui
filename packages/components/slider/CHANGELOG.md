@@ -1,5 +1,21 @@
 # @yamada-ui/slider
 
+## 1.2.7
+
+### Patch Changes
+
+- [#3072](https://github.com/yamada-ui/yamada-ui/pull/3072) [`6e1f6a6`](https://github.com/yamada-ui/yamada-ui/commit/6e1f6a6157147f0f9b3e4f32065e3e0c9d2c2210) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the height of the thumb element was not added to the top and bottom margins of the `Slider` container element.
+
+- [#3072](https://github.com/yamada-ui/yamada-ui/pull/3072) [`6e1f6a6`](https://github.com/yamada-ui/yamada-ui/commit/6e1f6a6157147f0f9b3e4f32065e3e0c9d2c2210) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `RangeSlider` thumb was not working properly.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/use-pan-event@1.0.24
+  - @yamada-ui/use-size@1.0.22
+
 ## 1.2.6
 
 ### Patch Changes

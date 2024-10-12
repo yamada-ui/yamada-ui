@@ -41,7 +41,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -59,7 +59,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-calendarcolorscheme"
   name="calendarColorScheme"
-  type='"link" | (string & {}) | "whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | ... 12 more ... | "danger"'
+  type="ThemeColorScheme"
   description={"ColorScheme for the calendar component."}
 />
 
@@ -73,14 +73,14 @@ tab: Props
 <PropsCard
   id="rangedatepicker-calendarsize"
   name="calendarSize"
-  type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+  type='UIValue<"lg" | "md" | "sm" | ({} & string) | "full">'
   description={"Size for the calendar component."}
 />
 
 <PropsCard
   id="rangedatepicker-calendarvariant"
   name="calendarVariant"
-  type='UIValue<(string & {}) | "solid" | "subtle" | "unstyled">'
+  type='UIValue<({} & string) | "solid" | "subtle" | "unstyled">'
   description={"Variant for the calendar component."}
 />
 
@@ -130,7 +130,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -177,7 +177,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-defaulttype"
   name="defaultType"
-  type='"month" | "year" | "date"'
+  type='"month" | "date" | "year"'
   description={"The initial type of the calendar."}
 />
 
@@ -229,7 +229,7 @@ tab: Props
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  | { resize?: boolean | undefined; scroll?: boolean | undefined }"
   description={
     "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
   }
@@ -255,7 +255,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-firstdayofweek"
   name="firstDayOfWeek"
-  type='"sunday" | "monday"'
+  type='"monday" | "sunday"'
   description={"Define the first day of the week."}
   defaultValue={"'monday'"}
 />
@@ -492,7 +492,7 @@ tab: Props
   id="rangedatepicker-onchangetype"
   name="onChangeType"
   type='(
-  type: "month" | "year" | "date",
+  type: "month" | "date" | "year",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -583,7 +583,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the RangeDatePicker."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -619,7 +619,7 @@ tab: Props
 <PropsCard
   id="rangedatepicker-type"
   name="type"
-  type='"month" | "year" | "date"'
+  type='"month" | "date" | "year"'
   description={"The type of the calendar."}
 />
 
@@ -633,9 +633,9 @@ tab: Props
 <PropsCard
   id="rangedatepicker-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the RangeDatePicker."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />
 
 <PropsCard

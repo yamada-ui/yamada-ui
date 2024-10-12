@@ -39,7 +39,7 @@ tab: Props
 <PropsCard
   id="numberinput-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -69,14 +69,14 @@ tab: Props
 <PropsCard
   id="numberinput-errorbordercolor"
   name="errorBorderColor"
-  type='"border" | "link" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 320 more ... | [...]'
+  type='"border" | "link" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 319 more ... | [...]'
   description={"The border color when the input is invalid."}
 />
 
 <PropsCard
   id="numberinput-focusbordercolor"
   name="focusBorderColor"
-  type='"border" | "link" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 320 more ... | [...]'
+  type='"border" | "link" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 319 more ... | [...]'
   description={"The border color when the input is focused."}
 />
 
@@ -102,7 +102,7 @@ tab: Props
 <PropsCard
   id="numberinput-getariavaluetext"
   name="getAriaValueText"
-  type="(value: string | number) => string"
+  type="(value: string | number) => string | undefined"
   description={
     "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input."
   }
@@ -228,7 +228,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the NumberInput."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -251,9 +251,9 @@ tab: Props
 <PropsCard
   id="numberinput-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the NumberInput."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />
 
 ### UseNumberInputProps
@@ -309,7 +309,7 @@ tab: Props
 <PropsCard
   id="usenumberinput-getariavaluetext"
   name="getAriaValueText"
-  type="(value: string | number) => string"
+  type="(value: string | number) => string | undefined"
   description={
     "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input."
   }
@@ -322,13 +322,13 @@ tab: Props
   name="inputMode"
   type='type ONLY_FOR_FORMAT =
   | "text"
+  | "search"
   | "decimal"
   | "none"
   | "tel"
   | "url"
   | "email"
-  | "numeric"
-  | "search"'
+  | "numeric"'
   description={
     "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."
   }

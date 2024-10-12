@@ -1,5 +1,20 @@
 # @yamada-ui/number-input
 
+## 1.1.16
+
+### Patch Changes
+
+- [#3022](https://github.com/yamada-ui/yamada-ui/pull/3022) [`3ce08e5`](https://github.com/yamada-ui/yamada-ui/commit/3ce08e5fa0305b472423a1f3d0246f768b8de9a5) Thanks [@Itsuki54](https://github.com/Itsuki54)! - Added `displayName` and ui properties to `@yamada-ui/number-input` for improved debugging and internal use.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/use-counter@1.0.23
+  - @yamada-ui/use-event-listener@1.0.22
+  - @yamada-ui/use-interval@1.0.22
+
 ## 1.1.15
 
 ### Patch Changes

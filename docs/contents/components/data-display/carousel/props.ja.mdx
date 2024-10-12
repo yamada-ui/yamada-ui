@@ -14,7 +14,7 @@ tab: Props
 <PropsCard
   id="carousel-align"
   name="align"
-  type="AlignmentOptionType | { [x: string & {}]: AlignmentOptionType | [AlignmentOptionType | undefined, AlignmentOptionType | undefined] | undefined; ... 5 more ...; base?: AlignmentOptionType | ... 1 more ... | undefined; } | [...]"
+  type="AlignmentOptionType | [AlignmentOptionType | { [x: string]: AlignmentOptionType | undefined; base?: AlignmentOptionType | undefined; ... 4 more ...; xl?: AlignmentOptionType | undefined; } | undefined, AlignmentOptionType | ... 1 more ... | undefined] | { ...; }"
   description={"The alignment of the carousel."}
   defaultValue={"'center'"}
 />
@@ -30,14 +30,14 @@ tab: Props
 <PropsCard
   id="carousel-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="carousel-containscroll"
   name="containScroll"
-  type="ScrollContainOptionType | { [x: string & {}]: ScrollContainOptionType | [ScrollContainOptionType | undefined, ScrollContainOptionType | undefined] | undefined; ... 5 more ...; base?: ScrollContainOptionType | ... 1 more ... | undefined; } | [...]"
+  type="ScrollContainOptionType | [ScrollContainOptionType | { [x: string]: ScrollContainOptionType | undefined; ... 5 more ...; xl?: ScrollContainOptionType | undefined; } | undefined, ScrollContainOptionType | ... 1 more ... | undefined] | { ...; }"
   description={
     "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
   }
@@ -150,7 +150,7 @@ tab: Props
 <PropsCard
   id="carousel-inviewthreshold"
   name="inViewThreshold"
-  type="number | number[] | { [x: string & {}]: number | number[] | [number | number[] | undefined, number | number[] | undefined] | undefined; sm?: number | number[] | [number | number[] | undefined, number | ... 1 more ... | undefined] | undefined; ... 4 more ...; base?: number | ... 2 more ... | undefined; } | [...]"
+  type='number | number[] | [number | number[] | { [x: string]: number | number[] | undefined; base?: number | number[] | undefined; "2xl"?: number | number[] | undefined; lg?: number | number[] | undefined; md?: number | ... 1 more ... | undefined; sm?: number | ... 1 more ... | undefined; xl?: number | ... 1 more ... | un...'
   description={
     "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
   }
@@ -186,7 +186,7 @@ tab: Props
 <PropsCard
   id="carousel-orientation"
   name="orientation"
-  type='UIValue<"vertical" | "horizontal">'
+  type='UIValue<"horizontal" | "vertical">'
   description={"The orientation of the carousel."}
   defaultValue={"'horizontal'"}
 />
@@ -196,7 +196,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "xl"'
   description={"The size of the Carousel."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -212,7 +212,7 @@ tab: Props
 <PropsCard
   id="carousel-slidesize"
   name="slideSize"
-  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 71 more ... | "9xl">'
+  type='UIValue<number | "px" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | ... 72 more ... | "xs">'
   description={"The CSS `width` property."}
 />
 
@@ -287,17 +287,6 @@ tab: Props
   defaultValue={"true"}
 />
 
-### CarouselSlideProps
-
-<PropsCard id="carouselslide-index" name="index" type="number" />
-
-<PropsCard
-  id="carouselslide-size"
-  name="size"
-  type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)'
-  description={"The CSS `width` property."}
-/>
-
 ### CarouselControlProps
 
 <PropsCard
@@ -356,4 +345,15 @@ tab: Props
   name="component"
   type="FC<{ index: number; isSelected: boolean }>"
   description={"The custom carousel indicator to use."}
+/>
+
+### CarouselSlideProps
+
+<PropsCard id="carouselslide-index" name="index" type="number" />
+
+<PropsCard
+  id="carouselslide-size"
+  name="size"
+  type='number | "px" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | ... 77 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `width` property."}
 />

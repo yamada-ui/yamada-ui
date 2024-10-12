@@ -9,6 +9,46 @@ order: 1
 
 ## Props
 
+### StepProps
+
+### StepDescriptionProps
+
+### StepSeparatorProps
+
+### StepIconProps
+
+<PropsCard
+  id="stepicon-size"
+  name="size"
+  type='UIValue<number | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "small" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 17 more ... | "xs">'
+  description={"The CSS `font-size` property."}
+  deprecated={"Use `fontSize` instead."}
+/>
+
+### StepNumberProps
+
+### StepStatusProps
+
+<PropsCard
+  id="stepstatus-active"
+  name="active"
+  type='string | number | boolean | ((props: Omit<StepContext, "status">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal'
+/>
+
+<PropsCard
+  id="stepstatus-complete"
+  name="complete"
+  type='string | number | boolean | ((props: Omit<StepContext, "status">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal'
+/>
+
+<PropsCard
+  id="stepstatus-incomplete"
+  name="incomplete"
+  type='string | number | boolean | ((props: Omit<StepContext, "status">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal'
+/>
+
+### StepTitleProps
+
 ### StepperProps
 
 <PropsCard
@@ -22,9 +62,9 @@ order: 1
 <PropsCard
   id="stepper-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -50,7 +90,7 @@ order: 1
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Stepper."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -72,43 +112,3 @@ order: 1
 <PropsCard id="usesteps-count" name="count" type="number" />
 
 <PropsCard id="usesteps-index" name="index" type="number" />
-
-### StepProps
-
-### StepTitleProps
-
-### StepDescriptionProps
-
-### StepSeparatorProps
-
-### StepStatusProps
-
-<PropsCard
-  id="stepstatus-active"
-  name="active"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
-/>
-
-<PropsCard
-  id="stepstatus-complete"
-  name="complete"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
-/>
-
-<PropsCard
-  id="stepstatus-incomplete"
-  name="incomplete"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)"
-/>
-
-### StepNumberProps
-
-### StepIconProps
-
-<PropsCard
-  id="stepicon-size"
-  name="size"
-  type='UIValue<number | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "small" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 16 more ... | "9xl">'
-  description={"The CSS `font-size` property."}
-  deprecated={"Use `fontSize` instead."}
-/>

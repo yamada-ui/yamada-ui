@@ -1,5 +1,17 @@
 # @yamada-ui/markdown
 
+## 1.0.45
+
+### Patch Changes
+
+- [#2979](https://github.com/yamada-ui/yamada-ui/pull/2979) [`e688d4a`](https://github.com/yamada-ui/yamada-ui/commit/e688d4a7e673f62f64f7fa2f6482fc89922b1ce4) Thanks [@0xtkey256](https://github.com/0xtkey256)! - Set `displayName` to make debugging easier.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`b4985d2`](https://github.com/yamada-ui/yamada-ui/commit/b4985d2ae5b1dd7dc3b5367854aa5d6f61fc22bc)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/alert@1.0.42
+  - @yamada-ui/use-value@1.1.27
+
 ## 1.0.44
 
 ### Patch Changes

@@ -22,9 +22,9 @@ tab: Props
 <PropsCard
   id="calendar-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -48,7 +48,7 @@ tab: Props
 <PropsCard
   id="calendar-dayprops"
   name="dayProps"
-  type="ButtonProps & { component?: FC<DayProps> | undefined }"
+  type="{ component?: FC<DayProps> | undefined } & ButtonProps"
   description={"Props for calendar day button element."}
 />
 
@@ -63,7 +63,7 @@ tab: Props
 <PropsCard
   id="calendar-defaulttype"
   name="defaultType"
-  type='"month" | "year" | "date"'
+  type='"month" | "date" | "year"'
   description={"The initial type of the calendar."}
 />
 
@@ -110,7 +110,7 @@ tab: Props
 <PropsCard
   id="calendar-firstdayofweek"
   name="firstDayOfWeek"
-  type='"sunday" | "monday"'
+  type='"monday" | "sunday"'
   description={"Define the first day of the week."}
   defaultValue={"'monday'"}
 />
@@ -139,12 +139,12 @@ tab: Props
 <PropsCard
   id="calendar-labelprops"
   name="labelProps"
-  type="CalendarLabelProps & {
+  type="{
   icon?:
     | IconProps
     | ReactElement<any, string | JSXElementConstructor<any>>
     | undefined
-}"
+} & CalendarLabelProps"
   description={"Props for calendar label button element."}
 />
 
@@ -215,9 +215,9 @@ tab: Props
 <PropsCard
   id="calendar-monthprops"
   name="monthProps"
-  type="ButtonProps & {
-  component?: FC<{ month: string; year: number; index: number }> | undefined
-}"
+  type="{
+  component?: FC<{ index: number; month: string; year: number }> | undefined
+} & ButtonProps"
   description={"Props for calendar month button element."}
 />
 
@@ -255,7 +255,7 @@ tab: Props
   id="calendar-onchangetype"
   name="onChangeType"
   type='(
-  type: "month" | "year" | "date",
+  type: "month" | "date" | "year",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -291,7 +291,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the Calendar."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -312,7 +312,7 @@ tab: Props
 <PropsCard
   id="calendar-type"
   name="type"
-  type='"month" | "year" | "date"'
+  type='"month" | "date" | "year"'
   description={"The type of the calendar."}
 />
 
@@ -337,7 +337,7 @@ tab: Props
   name="variant"
   type='"solid" | "subtle" | "unstyled"'
   description={"The variant of the Calendar."}
-  defaultValue={"solid"}
+  defaultValue={'"solid"'}
 />
 
 <PropsCard
@@ -354,8 +354,8 @@ tab: Props
 <PropsCard
   id="calendar-weekdayprops"
   name="weekdayProps"
-  type='Omit<HTMLProps<"div">, keyof UIProps> &
-  UIProps & { component?: FC<WeekdayProps> | undefined }'
+  type='{ component?: FC<WeekdayProps> | undefined } & UIProps &
+  Omit<HTMLProps<"div">, keyof UIProps>'
   description={"Props for calendar weekday element."}
 />
 
@@ -420,8 +420,8 @@ tab: Props
 <PropsCard
   id="calendar-yearprops"
   name="yearProps"
-  type="ButtonProps & {
-  component?: FC<{ year: number; index: number }> | undefined
-}"
+  type="{
+  component?: FC<{ index: number; year: number }> | undefined
+} & ButtonProps"
   description={"Props for calendar year button element."}
 />

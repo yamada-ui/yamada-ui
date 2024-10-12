@@ -99,7 +99,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
     const [styles, mergedProps] = useComponentMultiStyle("Autocomplete", props)
     let {
       className,
-      children,
       color,
       defaultValue = "",
       footer,
@@ -122,7 +121,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
 
     const {
       allowCreate,
-      computedChildren,
+      children,
       descendants,
       inputValue,
       isEmpty,
@@ -133,7 +132,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       getPopoverProps,
       onClose,
       ...rest
-    } = useAutocomplete({ ...computedProps, children, defaultValue })
+    } = useAutocomplete({ ...computedProps, defaultValue })
 
     h ??= height
     minH ??= minHeight
@@ -179,39 +178,30 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                 <AutocompleteIcon {...iconProps} {...formControlProps} />
               </ui.div>
 
-              {!isEmpty ? (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    footer={runIfFunc(footer, { value, onClose })}
-                    header={runIfFunc(header, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
+              <Portal {...portalProps}>
+                <AutocompleteList
+                  footer={runIfFunc(footer, { value, onClose })}
+                  header={runIfFunc(header, { value, onClose })}
+                  contentProps={contentProps}
+                  {...listProps}
+                >
+                  {!isEmpty ? (
+                    <>
+                      {allowCreate ? (
+                        <AutocompleteCreate {...createProps} />
+                      ) : (
+                        <AutocompleteEmpty {...emptyProps} />
+                      )}
 
-                    {children ?? computedChildren}
-                  </AutocompleteList>
-                </Portal>
-              ) : (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    footer={runIfFunc(footer, { value, onClose })}
-                    header={runIfFunc(header, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate && inputValue ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
-                  </AutocompleteList>
-                </Portal>
-              )}
+                      {children}
+                    </>
+                  ) : allowCreate && inputValue ? (
+                    <AutocompleteCreate {...createProps} />
+                  ) : (
+                    <AutocompleteEmpty {...emptyProps} />
+                  )}
+                </AutocompleteList>
+              </Portal>
             </ui.div>
           </Popover>
         </AutocompleteProvider>

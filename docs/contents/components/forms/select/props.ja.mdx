@@ -15,7 +15,7 @@ tab: Props
 <PropsCard
   id="select-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -69,7 +69,7 @@ tab: Props
 <PropsCard
   id="select-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -120,7 +120,7 @@ tab: Props
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  | { resize?: boolean | undefined; scroll?: boolean | undefined }"
   description={
     "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
   }
@@ -236,7 +236,6 @@ tab: Props
   name="items"
   type="SelectItem[]"
   description={"If provided, generate options based on items."}
-  defaultValue={"'[]'"}
 />
 
 <PropsCard
@@ -374,7 +373,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Select."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -395,7 +394,7 @@ tab: Props
 <PropsCard
   id="select-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the Select."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />

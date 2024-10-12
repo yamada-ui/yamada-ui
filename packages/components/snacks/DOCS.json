@@ -1,34 +1,34 @@
 {
-  "Snack": {
-    "index": { "type": "number", "required": true },
-    "onClose": { "type": "() => void", "required": false }
-  },
   "Snacks": {
     "snacks": {
-      "type": "{\n  direction: SnackDirection | undefined\n  startIndex: number | undefined\n  items: Snack[]\n}",
+      "type": "{\n  direction: SnackDirection | undefined\n  items: Snack[]\n  startIndex: number | undefined\n}",
       "required": true
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"title\" | \"style\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"div\" | \"animate\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 149 more ... | \"textPath\"",
-      "required": false,
-      "description": "The HTML element to render."
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "description": "The HTML element to render.",
+      "required": false
     },
     "containerVariants": {
       "type": "Variants",
-      "required": false,
       "description": "The variants of the snacks container.\nCheck the docs to see the variants of possible modifiers you can pass.",
+      "required": false,
       "see": "https://www.framer.com/motion/animation/#variants"
     },
     "listProps": {
       "type": "MotionProps<\"ul\">",
-      "required": false,
-      "description": "Props for the snacks list element."
+      "description": "Props for the snacks list element.",
+      "required": false
     },
     "listVariants": {
       "type": "Variants",
-      "required": false,
       "description": "The variants of the snacks list.\nCheck the docs to see the variants of possible modifiers you can pass.",
+      "required": false,
       "see": "https://www.framer.com/motion/animation/#variants"
     }
+  },
+  "Snack": {
+    "index": { "type": "number", "required": true },
+    "onClose": { "type": "() => void", "required": false }
   }
 }

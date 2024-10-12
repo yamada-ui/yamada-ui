@@ -1,9 +1,7 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
-import type { FC, ReactElement, ReactNode } from "react"
-import type { OptionProps } from "./option"
-import type { OptionGroupProps } from "./option-group"
+import type { FC, ReactNode } from "react"
 import type { SelectIconProps } from "./select-icon"
 import type { SelectListProps } from "./select-list"
 import type { UseSelectProps } from "./use-select"
@@ -15,9 +13,8 @@ import {
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren, runIfFunc } from "@yamada-ui/utils"
+import { cx, runIfFunc } from "@yamada-ui/utils"
 import { Option } from "./option"
-import { OptionGroup } from "./option-group"
 import { SelectIcon } from "./select-icon"
 import { SelectList } from "./select-list"
 import {
@@ -26,17 +23,6 @@ import {
   useSelect,
   useSelectContext,
 } from "./use-select"
-
-interface SelectItemWithValue extends OptionProps {
-  label?: ReactNode
-  value?: string
-}
-
-interface SelectItemWithItems extends OptionGroupProps {
-  items?: SelectItemWithValue[]
-}
-
-export type SelectItem = SelectItemWithItems | SelectItemWithValue
 
 interface SelectOptions {
   /**
@@ -55,12 +41,6 @@ interface SelectOptions {
    * The header of the select content element.
    */
   header?: FC<{ value: string | undefined; onClose: () => void }> | ReactNode
-  /**
-   * If provided, generate options based on items.
-   *
-   * @default '[]'
-   */
-  items?: SelectItem[]
   /**
    * Props for select container element.
    */
@@ -105,14 +85,12 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Select", props)
   let {
     className,
-    children,
     color,
     defaultValue = "",
     footer,
     h,
     header,
     height,
-    items = [],
     minH,
     minHeight,
     placeholder,
@@ -126,44 +104,10 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
-  let computedChildren: ReactElement[] = []
-
-  if (!validChildren.length && items.length) {
-    computedChildren = items
-      .map((item, i) => {
-        if ("value" in item) {
-          const { label, value, ...props } = item
-
-          return (
-            <Option key={i} value={value} {...props}>
-              {label}
-            </Option>
-          )
-        } else if ("items" in item) {
-          const { items = [], label, ...props } = item
-
-          return (
-            <OptionGroup key={i} label={label} {...props}>
-              {items.map(({ label, value, ...props }, i) => (
-                <Option key={i} value={value} {...props}>
-                  {label}
-                </Option>
-              ))}
-            </OptionGroup>
-          )
-        }
-      })
-      .filter(Boolean) as ReactElement[]
-  }
-
-  const isEmpty =
-    !validChildren.length &&
-    !computedChildren.length &&
-    !(!!placeholder && placeholderInOptions)
-
   const {
+    children,
     descendants,
+    isEmpty,
     value,
     formControlProps,
     getContainerProps,
@@ -174,7 +118,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   } = useSelect({
     ...computedProps,
     defaultValue,
-    isEmpty,
     placeholder,
     placeholderInOptions,
   })
@@ -234,7 +177,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
                     <Option>{placeholder}</Option>
                   ) : null}
 
-                  {children ?? computedChildren}
+                  {children}
                 </SelectList>
               </Portal>
             ) : null}

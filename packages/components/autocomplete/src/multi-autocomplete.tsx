@@ -150,7 +150,6 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
     )
     let {
       className,
-      children,
       closeOnSelect = false,
       color,
       component,
@@ -179,7 +178,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
 
     const {
       allowCreate,
-      computedChildren,
+      children,
       descendants,
       inputValue,
       isEmpty,
@@ -193,7 +192,6 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       ...rest
     } = useAutocomplete<string[]>({
       ...computedProps,
-      children,
       closeOnSelect,
       defaultValue,
     })
@@ -253,39 +251,30 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                 )}
               </ui.div>
 
-              {!isEmpty ? (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    footer={runIfFunc(footer, { value, onClose })}
-                    header={runIfFunc(header, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
+              <Portal {...portalProps}>
+                <AutocompleteList
+                  footer={runIfFunc(footer, { value, onClose })}
+                  header={runIfFunc(header, { value, onClose })}
+                  contentProps={contentProps}
+                  {...listProps}
+                >
+                  {!isEmpty ? (
+                    <>
+                      {allowCreate ? (
+                        <AutocompleteCreate {...createProps} />
+                      ) : (
+                        <AutocompleteEmpty {...emptyProps} />
+                      )}
 
-                    {children ?? computedChildren}
-                  </AutocompleteList>
-                </Portal>
-              ) : (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    footer={runIfFunc(footer, { value, onClose })}
-                    header={runIfFunc(header, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate && inputValue ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
-                  </AutocompleteList>
-                </Portal>
-              )}
+                      {children}
+                    </>
+                  ) : allowCreate && inputValue ? (
+                    <AutocompleteCreate {...createProps} />
+                  ) : (
+                    <AutocompleteEmpty {...emptyProps} />
+                  )}
+                </AutocompleteList>
+              </Portal>
             </ui.div>
           </Popover>
         </AutocompleteProvider>
@@ -383,11 +372,12 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
       cursor: "text",
     }
 
+    if (label?.length && component) css.py = "0.125rem"
+
     return (
       <PopoverTrigger>
         <ui.div
           className={cx("ui-multi-autocomplete__field", className)}
-          py={label?.length && component ? "0.125rem" : undefined}
           __css={css}
           {...rest}
         >

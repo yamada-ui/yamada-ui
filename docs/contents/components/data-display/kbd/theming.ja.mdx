@@ -12,21 +12,25 @@ tab: テーマ
 `Kbd`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
 
 :::note
+`Kbd`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
 ```ts
 export const Kbd: ComponentStyle<"Kbd"> = {
   baseStyle: {
-    fontFamily: "mono",
     bg: ["blackAlpha.50", "whiteAlpha.50"],
-    rounded: "md",
     borderWidth: "1px",
+    fontFamily: "mono",
     fontSize: "0.8em",
     fontWeight: "bold",
     lineHeight: "shorter",
-    py: "0.2em",
     px: "0.4em",
+    py: "0.2em",
+    rounded: "md",
     whiteSpace: "nowrap",
   },
 }

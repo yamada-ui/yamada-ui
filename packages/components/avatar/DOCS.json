@@ -2,115 +2,115 @@
   "Avatar": {
     "alt": {
       "type": "string",
-      "required": false,
-      "description": "The `HTMLImageElement` property `alt`."
+      "description": "The `HTMLImageElement` property `alt`.",
+      "required": false
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "crossOrigin": {
       "type": "\"\" | \"anonymous\" | \"use-credentials\"",
-      "required": false,
-      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data.",
+      "required": false
     },
     "format": {
       "type": "(name: string) => string",
-      "required": false,
-      "description": "Function to get the initials to display."
+      "description": "Function to get the initials to display.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The avatar icon to use."
+      "description": "The avatar icon to use.",
+      "required": false
     },
     "ignoreFallback": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times."
+      "description": "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times.",
+      "required": false
     },
     "loading": {
       "type": "\"eager\" | \"lazy\"",
-      "required": false,
-      "description": "Defines loading strategy."
+      "description": "Defines loading strategy.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The name of the person in the avatar.\n\n- If `src` has loaded, the name will be used as the `alt` attribute of the `img`\n- If `src` is not loaded, the name will be used to create the initials"
+      "description": "The name of the person in the avatar.\n\n- If `src` has loaded, the name will be used as the `alt` attribute of the `img`\n- If `src` is not loaded, the name will be used to create the initials",
+      "required": false
     },
     "referrerPolicy": {
       "type": "HTMLAttributeReferrerPolicy",
-      "required": false,
-      "description": "Defining which referrer is sent when fetching the resource."
+      "description": "Defining which referrer is sent when fetching the resource.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
-      "required": false,
-      "description": "The size of the Avatar."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Avatar.",
+      "required": false
     },
     "src": {
       "type": "string",
-      "required": false,
-      "description": "The image url of the avatar."
+      "description": "The image url of the avatar.",
+      "required": false
     },
     "srcSet": {
       "type": "string",
-      "required": false,
-      "description": "List of sources to use for different screen resolutions."
+      "description": "List of sources to use for different screen resolutions.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Avatar."
-    }
-  },
-  "AvatarGroup": {
-    "max": {
-      "type": "number",
-      "required": false,
-      "description": "The maximum number of visible avatars."
+      "description": "The variant of the Avatar.",
+      "required": false
     }
   },
   "AvatarBadge": {
     "ping": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water."
+      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water.",
+      "required": false
     },
     "pingColor": {
-      "type": "UIValue<\"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | BackgroundColor | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | ... 320 more ... | \"yellow.950\">",
       "defaultValue": "'[\"blackAlpha.400\", \"whiteAlpha.500\"]'",
-      "required": false,
-      "description": "It is used for the color of the ping animation."
+      "description": "It is used for the color of the ping animation.",
+      "required": false
     },
     "pingCount": {
       "type": "AnimationIterationCount",
       "defaultValue": "infinite",
-      "required": false,
-      "description": "It is used for the count of the ping animation."
+      "description": "It is used for the count of the ping animation.",
+      "required": false
     },
     "pingDuration": {
       "type": "AnimationDirection",
       "defaultValue": "1.4s",
-      "required": false,
-      "description": "It is used for the duration of the ping animation."
+      "description": "It is used for the duration of the ping animation.",
+      "required": false
     },
     "pingScale": {
       "type": "number",
       "defaultValue": "1.8",
-      "required": false,
-      "description": "It is used for the scale of the ping animation."
+      "description": "It is used for the scale of the ping animation.",
+      "required": false
     },
     "placement": {
-      "type": "\"top-start\" | \"top-end\" | \"bottom-start\" | \"bottom-end\"",
+      "type": "\"bottom-end\" | \"bottom-start\" | \"top-end\" | \"top-start\"",
       "defaultValue": "'bottom-end'",
-      "required": false,
-      "description": "The placement of the badge."
+      "description": "The placement of the badge.",
+      "required": false
+    }
+  },
+  "AvatarGroup": {
+    "max": {
+      "type": "number",
+      "description": "The maximum number of visible avatars.",
+      "required": false
     }
   }
 }

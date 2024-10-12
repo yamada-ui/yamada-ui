@@ -1,40 +1,40 @@
 {
+  "CardBody": {},
+  "CardFooter": {},
+  "CardHeader": {},
   "Card": {
     "align": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `align-items` property."
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"self-end\" | \"self-start\" | \"start\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `align-items` property.",
+      "required": false
     },
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
     },
     "justify": {
-      "type": "\"left\" | \"right\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | \"stretch\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `justify-content` property."
+      "type": "\"left\" | \"right\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `justify-content` property.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"normal\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Card."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Card.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "elevated",
       "type": "\"elevated\" | \"outline\" | \"solid\" | \"subtle\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Card."
+      "defaultValue": "\"elevated\"",
+      "description": "The variant of the Card.",
+      "required": false
     }
-  },
-  "CardHeader": {},
-  "CardBody": {},
-  "CardFooter": {}
+  }
 }

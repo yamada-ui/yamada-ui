@@ -1,74 +1,74 @@
 {
+  "Step": {},
+  "StepDescription": {},
+  "StepSeparator": {},
+  "StepIcon": {
+    "size": {
+      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | \"xxx-large\" | ... 17 more ... | \"xs\">",
+      "deprecated": "Use `fontSize` instead.",
+      "description": "The CSS `font-size` property.",
+      "required": false
+    }
+  },
+  "StepNumber": {},
+  "StepStatus": {
+    "active": {
+      "type": "string | number | boolean | ((props: Omit<StepContext, \"status\">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal",
+      "required": false
+    },
+    "complete": {
+      "type": "string | number | boolean | ((props: Omit<StepContext, \"status\">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal",
+      "required": false
+    },
+    "incomplete": {
+      "type": "string | number | boolean | ((props: Omit<StepContext, \"status\">) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal",
+      "required": false
+    }
+  },
+  "StepTitle": {},
   "Stepper": {
     "index": {
       "type": "number",
-      "required": true,
-      "description": "The active step index."
+      "description": "The active step index.",
+      "required": true
     },
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "orientation": {
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the stepper."
+      "description": "The orientation of the stepper.",
+      "required": false
     },
     "showLastSeparator": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "Whether to show or not the last separator while in vertical orientation."
+      "description": "Whether to show or not the last separator while in vertical orientation.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Stepper."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Stepper.",
+      "required": false
     },
     "steps": {
       "type": "Steps",
-      "required": false,
-      "description": "If provided, generate step components based on steps."
+      "description": "If provided, generate step components based on steps.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Stepper."
+      "description": "The variant of the Stepper.",
+      "required": false
     }
   },
   "UseSteps": {
     "count": { "type": "number", "required": false },
     "index": { "type": "number", "required": false }
-  },
-  "Step": {},
-  "StepTitle": {},
-  "StepDescription": {},
-  "StepSeparator": {},
-  "StepStatus": {
-    "active": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
-      "required": false
-    },
-    "complete": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
-      "required": false
-    },
-    "incomplete": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: Omit<...>) => ReactNode)",
-      "required": false
-    }
-  },
-  "StepNumber": {},
-  "StepIcon": {
-    "size": {
-      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | \"xxx-large\" | ... 16 more ... | \"9xl\">",
-      "required": false,
-      "deprecated": "Use `fontSize` instead.",
-      "description": "The CSS `font-size` property."
-    }
   }
 }

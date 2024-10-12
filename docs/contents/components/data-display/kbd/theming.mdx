@@ -12,21 +12,25 @@ tab: Theming
 The `Kbd` is a [single part component](/styled-system/theming/component-styles#single-part-components).
 
 :::note
+`Kbd` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
 export const Kbd: ComponentStyle<"Kbd"> = {
   baseStyle: {
-    fontFamily: "mono",
     bg: ["blackAlpha.50", "whiteAlpha.50"],
-    rounded: "md",
     borderWidth: "1px",
+    fontFamily: "mono",
     fontSize: "0.8em",
     fontWeight: "bold",
     lineHeight: "shorter",
-    py: "0.2em",
     px: "0.4em",
+    py: "0.2em",
+    rounded: "md",
     whiteSpace: "nowrap",
   },
 }

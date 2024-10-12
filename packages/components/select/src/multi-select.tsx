@@ -7,7 +7,6 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import type { SelectItem } from "./select"
 import type { SelectIconProps } from "./select-icon"
 import type { SelectListProps } from "./select-list"
 import type { UseSelectProps } from "./use-select"
@@ -19,10 +18,8 @@ import {
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement, useMemo } from "react"
-import { Option } from "./option"
-import { OptionGroup } from "./option-group"
 import { SelectClearIcon, SelectIcon } from "./select-icon"
 import { SelectList } from "./select-list"
 import {
@@ -64,10 +61,6 @@ interface MultiSelectOptions {
    * @default true
    */
   isClearable?: boolean
-  /**
-   * If provided, generate options based on items.
-   */
-  items?: SelectItem[]
   /**
    * The visual separator between each value.
    *
@@ -116,7 +109,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   let {
     className,
-    children,
     closeOnSelect = false,
     color,
     component,
@@ -126,7 +118,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     header,
     height,
     isClearable = true,
-    items = [],
     minH,
     minHeight,
     separator,
@@ -139,45 +130,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
-  let computedChildren: ReactElement[] = []
-
-  if (!validChildren.length && items.length) {
-    computedChildren = items
-      .map((item, i) => {
-        if ("value" in item) {
-          const { label, value, ...props } = item
-
-          return (
-            <Option key={i} value={value} {...props}>
-              {label}
-            </Option>
-          )
-        } else if ("items" in item) {
-          const { items = [], label, ...props } = item
-
-          return (
-            <OptionGroup
-              key={i}
-              label={label}
-              {...(props as HTMLUIProps<"ul">)}
-            >
-              {items.map(({ label, value, ...props }, i) => (
-                <Option key={i} value={value} {...props}>
-                  {label}
-                </Option>
-              ))}
-            </OptionGroup>
-          )
-        }
-      })
-      .filter(Boolean) as ReactElement[]
-  }
-
-  let isEmpty = !validChildren.length && !computedChildren.length
-
   const {
+    children,
     descendants,
+    isEmpty,
     placeholder,
     value,
     formControlProps,
@@ -191,7 +147,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     ...computedProps,
     closeOnSelect,
     defaultValue,
-    isEmpty,
     placeholderInOptions: false,
   })
 
@@ -246,7 +201,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
                   header={runIfFunc(header, { value, onClose })}
                   {...listProps}
                 >
-                  {children ?? computedChildren}
+                  {children}
                 </SelectList>
               </Portal>
             ) : null}
@@ -353,11 +308,12 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       ...styles.field,
     }
 
+    if (label?.length && component) css.py = "0.125rem"
+
     return (
       <ui.div
         ref={ref}
         className={cx("ui-multi-select__field", className)}
-        py={label?.length && component ? "0.125rem" : undefined}
         __css={css}
         {...rest}
       >

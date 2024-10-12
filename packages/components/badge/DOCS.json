@@ -1,21 +1,21 @@
 {
   "Badge": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "size": {
       "type": "string",
-      "required": false,
-      "description": "The size of the Badge."
+      "description": "The size of the Badge.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "subtle",
-      "type": "\"solid\" | \"subtle\" | \"outline\"",
-      "required": false,
-      "description": "The variant of the Badge."
+      "type": "\"outline\" | \"solid\" | \"subtle\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the Badge.",
+      "required": false
     }
   }
 }

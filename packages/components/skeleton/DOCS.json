@@ -1,124 +1,124 @@
 {
   "Skeleton": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "endColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation end."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation end.",
+      "required": false
     },
     "fadeDuration": {
       "type": "string | number",
       "defaultValue": "0.4",
-      "required": false,
-      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
+      "required": false
     },
     "isFitContent": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the skeleton will take the width of it's children."
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
     },
     "isLoaded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it'll render its children with a nice fade transition."
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
     },
     "size": {
       "type": "string",
-      "required": false,
-      "description": "The size of the Skeleton."
+      "description": "The size of the Skeleton.",
+      "required": false
     },
     "speed": {
       "type": "string | number",
       "defaultValue": "0.8",
-      "required": false,
-      "description": "The animation speed in seconds."
+      "description": "The animation speed in seconds.",
+      "required": false
     },
     "startColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation start."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation start.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Skeleton."
+      "description": "The variant of the Skeleton.",
+      "required": false
     }
   },
   "SkeletonCircle": {
     "endColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation end."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation end.",
+      "required": false
     },
     "fadeDuration": {
       "type": "string | number",
       "defaultValue": "0.4",
-      "required": false,
-      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
+      "required": false
     },
     "isFitContent": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the skeleton will take the width of it's children."
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
     },
     "isLoaded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it'll render its children with a nice fade transition."
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
     },
     "speed": {
       "type": "string | number",
       "defaultValue": "0.8",
-      "required": false,
-      "description": "The animation speed in seconds."
+      "description": "The animation speed in seconds.",
+      "required": false
     },
     "startColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation start."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation start.",
+      "required": false
     }
   },
   "SkeletonText": {
     "endColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation end."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation end.",
+      "required": false
     },
     "fadeDuration": {
       "type": "string | number",
       "defaultValue": "0.4",
-      "required": false,
-      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
+      "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
+      "required": false
     },
     "isLoaded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it'll render its children with a nice fade transition."
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
     },
     "speed": {
       "type": "string | number",
       "defaultValue": "0.8",
-      "required": false,
-      "description": "The animation speed in seconds."
+      "description": "The animation speed in seconds.",
+      "required": false
     },
     "startColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The color at the animation start."
+      "type": "UIValue<\"border\" | Color | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The color at the animation start.",
+      "required": false
     },
     "textHeight": {
-      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-max-content\" | \"-moz-min-content\" | ... 67 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `height` property."
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-max-content\" | ... 68 more ... | \"xs\">",
+      "description": "The CSS `height` property.",
+      "required": false
     }
   }
 }

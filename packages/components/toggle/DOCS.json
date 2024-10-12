@@ -1,112 +1,112 @@
 {
   "Toggle": {
     "colorScheme": {
-      "defaultValue": "gray",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"gray\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "defaultIsSelected": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the toggle button will be initially selected."
+      "description": "If `true`, the toggle button will be initially selected.",
+      "required": false
     },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to be used in the button."
+      "description": "The icon to be used in the button.",
+      "required": false
     },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the toggle button is represented as active."
+      "description": "If `true`, the toggle button is represented as active.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the toggle button will be disabled."
+      "description": "If `true`, the toggle button will be disabled.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the toggle button will be readonly."
+      "description": "If `true`, the toggle button will be readonly.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round."
+      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+      "required": false
     },
     "isSelected": {
       "type": "boolean",
-      "required": false,
-      "description": "If `true`, the toggle button will be selected."
+      "description": "If `true`, the toggle button will be selected.",
+      "required": false
     },
     "onChange": {
       "type": "(isSelected: boolean) => void",
-      "required": false,
-      "description": "The callback invoked when selected state changes."
+      "description": "The callback invoked when selected state changes.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Toggle."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Toggle.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value of the toggle button."
+      "description": "The value of the toggle button.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "subtle",
-      "type": "\"subtle\" | \"solid\" | \"outline\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Toggle."
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"unstyled\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the Toggle.",
+      "required": false
     }
   },
   "ToggleGroup": {
     "defaultValue": {
       "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
-      "required": false,
-      "description": "The initial value of the toggle button group."
+      "description": "The initial value of the toggle button group.",
+      "required": false
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, all wrapped toggle button will be disabled."
+      "description": "If `true`, all wrapped toggle button will be disabled.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, all wrapped toggle button will be readonly."
+      "description": "If `true`, all wrapped toggle button will be readonly.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y extends any[] ? Y : Y | undefined) => void",
-      "required": false,
-      "description": "The callback fired when any children toggle button is selected or unselected."
+      "description": "The callback fired when any children toggle button is selected or unselected.",
+      "required": false
     },
     "value": {
       "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
-      "required": false,
-      "description": "The value of the toggle button group."
+      "description": "The value of the toggle button group.",
+      "required": false
     }
   }
 }

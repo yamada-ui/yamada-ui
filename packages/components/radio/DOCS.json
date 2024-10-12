@@ -1,22 +1,22 @@
 {
   "Radio": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the radio will be initially checked."
+      "description": "If `true`, the radio will be initially checked.",
+      "required": false
     },
     "iconProps": { "type": "HTMLUIProps<\"span\">", "required": false },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "id assigned to input."
+      "description": "id assigned to input.",
+      "required": false
     },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
@@ -25,243 +25,243 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the radio will be checked."
+      "description": "If `true`, the radio will be checked.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "labelProps": { "type": "HTMLUIProps<\"span\">", "required": false },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The name of the input field in a radio."
+      "description": "The name of the input field in a radio.",
+      "required": false
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checked state changes."
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Radio."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Radio.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value to be used in the radio button."
+      "description": "The value to be used in the radio button.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Radio."
+      "description": "The variant of the Radio.",
+      "required": false
     }
   },
   "UseRadio": {
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the radio will be initially checked."
+      "description": "If `true`, the radio will be initially checked.",
+      "required": false
     },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "id assigned to input."
+      "description": "id assigned to input.",
+      "required": false
     },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the radio will be checked."
+      "description": "If `true`, the radio will be checked.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The name of the input field in a radio."
+      "description": "The name of the input field in a radio.",
+      "required": false
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback invoked when the checked state changes."
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value to be used in the radio button."
+      "description": "The value to be used in the radio button.",
+      "required": false
     }
   },
   "RadioGroup": {
     "align": {
       "type": "UIValue<AlignItems>",
-      "required": false,
-      "description": "The CSS `align-items` property."
+      "description": "The CSS `align-items` property.",
+      "required": false
     },
     "basis": {
-      "type": "UIValue<number | \"content\" | \"px\" | \"1\" | \"2\" | \"3\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"-moz-fit-content\" | ... 66 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `flex-basis` property."
+      "type": "UIValue<number | \"content\" | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | (string & {}) | \"-moz-fit-content\" | ... 69 more ... | \"xs\">",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
     },
     "defaultValue": {
       "type": "Y",
-      "required": false,
-      "description": "The initial value of the radio group."
+      "description": "The initial value of the radio group.",
+      "required": false
     },
     "direction": {
       "type": "UIValue<FlexDirection>",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
+      "description": "The CSS `flex-direction` property.",
+      "required": false
     },
     "grow": {
       "type": "UIValue<FlexGrow>",
-      "required": false,
-      "description": "The CSS `flex-grow` property."
+      "description": "The CSS `flex-grow` property.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "items": {
       "type": "RadioItem<Y>[]",
       "defaultValue": "'[]'",
-      "required": false,
-      "description": "If provided, generate radios based on items."
+      "description": "If provided, generate radios based on items.",
+      "required": false
     },
     "justify": {
       "type": "UIValue<JustifyContent>",
-      "required": false,
-      "description": "The CSS `justify-content` property."
+      "description": "The CSS `justify-content` property.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y) => void",
-      "required": false,
-      "description": "The callback fired when any children radio is checked or unchecked."
+      "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
     },
     "shrink": {
       "type": "UIValue<FlexShrink>",
-      "required": false,
-      "description": "The CSS `flex-shrink` property."
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value of the radio group."
+      "description": "The value of the radio group.",
+      "required": false
     },
     "wrap": {
       "type": "UIValue<FlexWrap>",
-      "required": false,
-      "description": "The CSS `flex-wrap` property."
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
     }
   },
   "UseRadioGroup": {
     "defaultValue": {
       "type": "Y",
-      "required": false,
-      "description": "The initial value of the radio group."
+      "description": "The initial value of the radio group.",
+      "required": false
     },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "The top-level id string that will be applied to the radios.\nThe index of the radio will be appended to this top-level id."
+      "description": "The top-level id string that will be applied to the radios.\nThe index of the radio will be appended to this top-level id.",
+      "required": false
     },
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
     },
     "onChange": {
       "type": "(value: Y) => void",
-      "required": false,
-      "description": "The callback fired when any children radio is checked or unchecked."
+      "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
     },
     "value": {
       "type": "Y",
-      "required": false,
-      "description": "The value of the radio group."
+      "description": "The value of the radio group.",
+      "required": false
     }
   }
 }

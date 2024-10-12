@@ -14,9 +14,9 @@ tab: Props
 <PropsCard
   id="toggle-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"gray"}
+  defaultValue={'"gray"'}
 />
 
 <PropsCard
@@ -95,7 +95,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Toggle."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -108,9 +108,9 @@ tab: Props
 <PropsCard
   id="toggle-variant"
   name="variant"
-  type='"subtle" | "solid" | "outline" | "unstyled"'
+  type='"outline" | "solid" | "subtle" | "unstyled"'
   description={"The variant of the Toggle."}
-  defaultValue={"subtle"}
+  defaultValue={'"subtle"'}
 />
 
 ### ToggleGroupProps
@@ -125,7 +125,7 @@ tab: Props
 <PropsCard
   id="togglegroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
   description={"The CSS `flex-direction` property."}
 />
 

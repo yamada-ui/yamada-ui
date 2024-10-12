@@ -1,5 +1,17 @@
 # @yamada-ui/theme
 
+## 1.18.3
+
+### Patch Changes
+
+- [#3092](https://github.com/yamada-ui/yamada-ui/pull/3092) [`8c794a5`](https://github.com/yamada-ui/yamada-ui/commit/8c794a54aaffec793b3d270db81ff03efc99d537) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where invalid style was incorrect when `allowInput` was `false`.
+
+- [#3093](https://github.com/yamada-ui/yamada-ui/pull/3093) [`bb7e5e7`](https://github.com/yamada-ui/yamada-ui/commit/bb7e5e7170f4b77be988d0d9c4aa5af0bd8b0a4c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated transition properties for `Input` component.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+
 ## 1.18.2
 
 ### Patch Changes

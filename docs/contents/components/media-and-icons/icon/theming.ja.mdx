@@ -12,18 +12,22 @@ tab: テーマ
 `Icon`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
 
 :::note
+`Icon`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
 ```ts
 export const Icon: ComponentStyle<"Icon"> = {
   baseStyle: {
-    w: "1em",
-    h: "1em",
-    display: "inline-block",
-    lineHeight: "1em",
-    flexShrink: 0,
     color: "currentColor",
+    display: "inline-block",
+    flexShrink: 0,
+    h: "1em",
+    lineHeight: "1em",
+    w: "1em",
   },
 }
 ```

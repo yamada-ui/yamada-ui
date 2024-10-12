@@ -1,5 +1,15 @@
 # @yamada-ui/use-breakpoint
 
+## 1.4.10
+
+### Patch Changes
+
+- [#2835](https://github.com/yamada-ui/yamada-ui/pull/2835) [`e1992ac`](https://github.com/yamada-ui/yamada-ui/commit/e1992ac0773d88a75c93105f1585ae5ed2eef05d) Thanks [@kaehehehe](https://github.com/kaehehehe)! - change change throw Error to console.warn
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+
 ## 1.4.9
 
 ### Patch Changes

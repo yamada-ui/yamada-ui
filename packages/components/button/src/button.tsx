@@ -188,6 +188,8 @@ export const Button = forwardRef<ButtonProps, "button">(
     )
   },
 )
+Button.displayName = "Button"
+Button.__ui__ = "Button"
 
 const Loading: FC<
   Pick<ButtonProps, "className" | "loadingIcon" | "loadingText">

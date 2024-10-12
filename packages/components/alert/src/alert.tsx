@@ -98,12 +98,18 @@ export const Alert = forwardRef<AlertProps, "div">(
     )
   },
 )
+Alert.displayName = "Alert"
+Alert.__ui__ = "Alert"
 
 export type AlertIconProps = HTMLUIProps<"span"> & {
   variant?: LoadingProps["variant"]
 }
 
-export const AlertIcon: FC<AlertIconProps> = ({
+interface AlertIconComponent extends FC<AlertIconProps> {
+  __ui__?: string
+}
+
+export const AlertIcon: AlertIconComponent = ({
   className,
   children,
   variant = "oval",
@@ -136,6 +142,8 @@ export const AlertIcon: FC<AlertIconProps> = ({
     </ui.span>
   )
 }
+AlertIcon.displayName = "AlertIcon"
+AlertIcon.__ui__ = "AlertIcon"
 
 export type AlertTitleProps = HTMLUIProps<"p">
 
@@ -158,6 +166,8 @@ export const AlertTitle = forwardRef<AlertTitleProps, "p">(
     )
   },
 )
+AlertTitle.displayName = "AlertTitle"
+AlertTitle.__ui__ = "AlertTitle"
 
 export type AlertDescriptionProps = HTMLUIProps<"span">
 
@@ -179,3 +189,5 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
     )
   },
 )
+AlertDescription.displayName = "AlertDescription"
+AlertDescription.__ui__ = "AlertDescription"

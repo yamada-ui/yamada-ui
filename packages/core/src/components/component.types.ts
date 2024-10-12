@@ -85,6 +85,7 @@ export type ComponentArgs = {
   contextTypes?: React.ValidationMap<any>
   defaultProps?: Partial<any>
   id?: string
+  __ui__?: string
 }
 
 export type Component<Y extends As, M extends object = {}> = {

@@ -11,10 +11,10 @@ import {
   ListItem,
   NativeTable,
   TableContainer,
+  Tag,
   Td,
   Text,
   Th,
-  Tag,
 } from "@yamada-ui/react"
 import { CardContainer, LinkCard } from "components/navigation"
 import { Pre } from "./code-block"

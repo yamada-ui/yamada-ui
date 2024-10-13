@@ -50,6 +50,9 @@ const InputAddon = forwardRef<InputAddonProps, "div">(
   },
 )
 
+InputAddon.displayName = "InputAddon"
+InputAddon.__ui__ = "InputAddon"
+
 export const InputLeftAddon = forwardRef<InputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
@@ -63,6 +66,9 @@ export const InputLeftAddon = forwardRef<InputAddonProps, "div">(
   },
 )
 
+InputLeftAddon.displayName = "InputLeftAddon"
+InputLeftAddon.__ui__ = "InputLeftAddon"
+
 export const InputRightAddon = forwardRef<InputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
@@ -75,3 +81,6 @@ export const InputRightAddon = forwardRef<InputAddonProps, "div">(
     )
   },
 )
+
+InputRightAddon.displayName = "InputRightAddon"
+InputRightAddon.__ui__ = "InputRightAddon"

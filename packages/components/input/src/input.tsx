@@ -62,3 +62,6 @@ export const Input = forwardRef<InputProps, "input">((props, ref) => {
     />
   )
 })
+
+Input.displayName = "Input"
+Input.__ui__ = "Input"

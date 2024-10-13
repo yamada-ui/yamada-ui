@@ -64,6 +64,9 @@ const InputElement = forwardRef<InputElementProps, "div">(
   },
 )
 
+InputElement.displayName = "InputElement"
+InputElement.__ui__ = "InputElement"
+
 export const InputLeftElement = forwardRef<InputElementProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
@@ -77,6 +80,9 @@ export const InputLeftElement = forwardRef<InputElementProps, "div">(
   },
 )
 
+InputLeftElement.displayName = "InputLeftElement"
+InputLeftElement.__ui__ = "InputLeftElement"
+
 export const InputRightElement = forwardRef<InputElementProps, "div">(
   ({ className, ...rest }, ref) => {
     return (
@@ -89,3 +95,6 @@ export const InputRightElement = forwardRef<InputElementProps, "div">(
     )
   },
 )
+
+InputRightElement.displayName = "InputRightElement"
+InputRightElement.__ui__ = "InputRightElement"

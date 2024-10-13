@@ -95,3 +95,6 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
     </InputGroupProvider>
   )
 })
+
+InputGroup.displayName = "InputGroup"
+InputGroup.__ui__ = "InputGroup"

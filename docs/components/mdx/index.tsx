@@ -14,6 +14,7 @@ import {
   Td,
   Text,
   Th,
+  Tag,
 } from "@yamada-ui/react"
 import { CardContainer, LinkCard } from "components/navigation"
 import { Pre } from "./code-block"
@@ -32,7 +33,7 @@ import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
 import { Users } from "./users"
 
-const uiComponents = { Box }
+const uiComponents = { Box, Tag }
 
 export const components: MDXComponents = {
   ...uiComponents,

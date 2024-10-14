@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { SubmitHandler } from "react-hook-form"
 import { Ghost } from "@yamada-ui/lucide"
 import { Button, ColorPicker, FormControl, VStack } from "@yamada-ui/react"
 import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof ColorPicker>

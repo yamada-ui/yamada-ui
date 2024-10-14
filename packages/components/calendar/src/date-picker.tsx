@@ -2,7 +2,7 @@ import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { MotionProps } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
-import type { HTMLAttributes, ReactNode, RefAttributes } from "react"
+import type { ReactNode, RefAttributes } from "react"
 import type { UseDatePickerProps } from "./use-date-picker"
 import {
   forwardRef,
@@ -321,7 +321,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
   const rest = useClickable({
     ref,
     isDisabled,
-    ...(props as HTMLAttributes<HTMLElement>),
+    ...props,
   })
 
   return (

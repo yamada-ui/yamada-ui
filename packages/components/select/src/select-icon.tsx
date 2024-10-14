@@ -3,7 +3,6 @@ import type {
   FunctionComponent,
   HTMLUIProps,
 } from "@yamada-ui/core"
-import type { HTMLAttributes } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
@@ -77,7 +76,7 @@ export const SelectClearIcon: FunctionComponent<SelectClearIconProps> = ({
   const rest = useClickable({
     ref,
     isDisabled,
-    ...(props as HTMLAttributes<HTMLElement>),
+    ...props,
   })
 
   return (

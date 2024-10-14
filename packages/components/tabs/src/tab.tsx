@@ -44,7 +44,7 @@ export const Tab = forwardRef<TabProps, "button">(
       if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
     }
 
-    const rest = useClickable({
+    const rest = useClickable<HTMLButtonElement>({
       ref: mergeRefs(register, ref),
       clickOnEnter,
       clickOnSpace,

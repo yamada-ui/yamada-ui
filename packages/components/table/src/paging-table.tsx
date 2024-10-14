@@ -11,17 +11,17 @@ import type {
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
 import type { TableHeadProps } from "./thead"
-import type { TableContext, UseTableProps } from "./use-table"
+import type { UseTableProps } from "./use-table"
 import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
 import { TableStyleProvider } from "@yamada-ui/native-table"
-import { Pagination } from "@yamada-ui/pagination"
-import { Select } from "@yamada-ui/select"
 import { cx, isFunction } from "@yamada-ui/utils"
 import { forwardRef } from "react"
+import { PagingTableControl } from "./paging-table-control"
+import { TableProvider } from "./table-context"
 import { Tbody } from "./tbody"
 import { Tfoot } from "./tfoot"
 import { Thead } from "./thead"
-import { TableProvider, useTable } from "./use-table"
+import { useTable } from "./use-table"
 
 interface PaginationComponentProps<Y extends RowData>
   extends Pick<
@@ -37,8 +37,6 @@ interface PaginationComponentProps<Y extends RowData>
   pageSize: number
   totalPage: number
 }
-
-const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
 
 interface TableOptions<Y extends RowData> {
   children?: ((props: PaginationComponentProps<Y>) => ReactNode) | ReactNode
@@ -152,7 +150,7 @@ export const PagingTable = forwardRef(
     const {
       className,
       children,
-      formatPageSizeLabel = defaultFormatPageSizeLabel,
+      formatPageSizeLabel,
       layout,
       withFooter = false,
       withPagingControl = true,
@@ -200,9 +198,12 @@ export const PagingTable = forwardRef(
 
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ ...rest } as TableContext}>
+        <TableProvider<Y>
+          {...{ pageSizeList, setPageIndex, setPageSize, state, totalPage }}
+          {...rest}
+        >
           <ui.div
-            className={cx("ui-paging-table__container", className)}
+            className="ui-paging-table__container"
             __css={{
               display: "flex",
               flexDirection: "column",
@@ -238,47 +239,16 @@ export const PagingTable = forwardRef(
                 children
               )
             ) : withPagingControl ? (
-              <ui.div
-                className={cx("ui-paging-table__control", className)}
-                __css={{ display: "grid", ...styles.pagingControl }}
-                {...pagingControlProps}
-              >
-                <Pagination
-                  colorScheme={colorScheme}
-                  size={size === "sm" ? "xs" : size}
-                  gridColumnEnd={3}
-                  gridColumnStart={2}
-                  justifyContent="center"
-                  page={state.pagination.pageIndex + 1}
-                  total={totalPage}
-                  withEdges
-                  onChange={(page) => setPageIndex(page - 1)}
-                  {...paginationProps}
-                />
-
-                <Select
-                  size={
-                    size === "xl"
-                      ? "lg"
-                      : size === "lg"
-                        ? "md"
-                        : size === "md"
-                          ? "sm"
-                          : "xs"
-                  }
-                  gridColumnEnd={4}
-                  gridColumnStart={3}
-                  items={pageSizeList.map((pageSize) => ({
-                    label: formatPageSizeLabel(pageSize),
-                    value: String(pageSize),
-                  }))}
-                  justifySelf="flex-end"
-                  maxW="3xs"
-                  value={String(state.pagination.pageSize)}
-                  onChange={(pageSize) => setPageSize(Number(pageSize))}
-                  {...selectProps}
-                />
-              </ui.div>
+              <PagingTableControl
+                {...{
+                  colorScheme,
+                  size,
+                  formatPageSizeLabel,
+                  paginationProps,
+                  selectProps,
+                  ...pagingControlProps,
+                }}
+              />
             ) : null}
           </ui.div>
         </TableProvider>

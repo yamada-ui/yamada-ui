@@ -2711,6 +2711,9 @@ importers:
       '@yamada-ui/select':
         specifier: workspace:*
         version: link:../select
+      '@yamada-ui/use-clickable':
+        specifier: workspace:*
+        version: link:../../hooks/use-clickable
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
@@ -3005,6 +3008,9 @@ importers:
 
   packages/hooks/use-clickable:
     dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
       '@yamada-ui/use-event-listener':
         specifier: workspace:*
         version: link:../use-event-listener

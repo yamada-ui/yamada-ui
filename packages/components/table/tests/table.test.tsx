@@ -1,8 +1,8 @@
-import { render, screen, a11y, waitFor } from "@yamada-ui/test"
 import { PagingTable, Table } from "@yamada-ui/table"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<Table />", () => {
-  const columns = [{ header: "作品名", accessorKey: "name" }]
+  const columns = [{ accessorKey: "name", header: "作品名" }]
   const data = [{ name: "ドラゴンボール" }]
 
   test("Table renders correctly", async () => {
@@ -28,19 +28,19 @@ describe("<Table />", () => {
 describe("<Tfoot />", () => {
   const columns = [
     {
-      header: "作品名",
       accessorKey: "name",
       footer: "作品名",
+      header: "作品名",
     },
     {
-      header: "放送期間",
       accessorKey: "broadcastPeriod",
       footer: "放送期間",
+      header: "放送期間",
     },
     {
-      header: "話数",
       accessorKey: "episode",
       footer: "話数",
+      header: "話数",
     },
   ]
   const data = [
@@ -68,20 +68,20 @@ describe("<Tfoot />", () => {
 
 describe("<PagingTable />", () => {
   const columns = [
-    { header: "Name", accessorKey: "Name" },
-    { header: "Age", accessorKey: "age" },
-    { header: "Email", accessorKey: "email" },
+    { accessorKey: "Name", header: "Name" },
+    { accessorKey: "age", header: "Age" },
+    { accessorKey: "email", header: "Email" },
   ]
   const data = [
     {
-      Name: "Goku",
       age: 35,
       email: "goku@dbz.com",
+      Name: "Goku",
     },
     {
-      Name: "Vegeta",
       age: 37,
       email: "vegeta@dbz.com",
+      Name: "Vegeta",
     },
   ]
 
@@ -100,52 +100,52 @@ describe("<PagingTable />", () => {
   })
 
   test("renders custom pagination when children is a function", async () => {
-    const { user, getByTestId } = render(
+    const { getByTestId, user } = render(
       <PagingTable
         columns={columns}
         data={data}
-        defaultPageSize={1}
         defaultPageIndex={0}
+        defaultPageSize={1}
       >
         {({
-          pageIndex,
-          pageSize,
-          totalPage,
           getCanNextPage,
           getCanPreviousPage,
-          setPageIndex,
-          previousPage,
           nextPage,
+          pageIndex,
+          pageSize,
+          previousPage,
+          setPageIndex,
           setPageSize,
+          totalPage,
         }) => (
           <div>
             <p>Page: {pageIndex + 1}</p>
             <button
-              onClick={previousPage}
-              disabled={!getCanPreviousPage()}
               data-testid="previous-button"
+              disabled={!getCanPreviousPage()}
+              onClick={previousPage}
             >
               Previous
             </button>
             <button
-              onClick={nextPage}
-              disabled={!getCanNextPage()}
               data-testid="next-button"
+              disabled={!getCanNextPage()}
+              onClick={nextPage}
             >
               Next
             </button>
             <input
               type="number"
-              value={pageSize}
-              min={1}
-              max={totalPage}
               data-testid="page-index-input"
+              max={totalPage}
+              min={1}
+              value={pageSize}
               onChange={(e) => setPageIndex(parseInt(e.target.value) - 1)}
             />
             <select
+              data-testid="page-size-select"
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
-              data-testid="page-size-select"
             >
               {[1, 2, 3, 4, 5].map((size) => (
                 <option key={size} value={size}>
@@ -203,7 +203,7 @@ describe("<PagingTable />", () => {
     expect(screen.getByRole("button", { name: "Next" })).toBeDisabled()
   })
 
-  test("renders custom pagination when children is not a function", async () => {
+  test("renders custom pagination when children is not a function", () => {
     render(
       <PagingTable columns={columns} data={data}>
         <div>customPagination</div>
@@ -222,8 +222,8 @@ describe("<PagingTable />", () => {
     { size: "sm", expected: "xs" },
   ])(
     "renders Select component with correct size when table size is $size",
-    async ({ size, expected }) => {
-      render(<PagingTable columns={columns} data={data} size={size} />)
+    ({ size, expected }) => {
+      render(<PagingTable size={size} columns={columns} data={data} />)
       expect(screen.getByText("Goku")).toHaveStyle(
         `font-size: var(--ui-fontSizes-${expected})`,
       )
@@ -234,34 +234,34 @@ describe("<PagingTable />", () => {
 describe("<Thead />", () => {
   const columns = [
     {
-      header: "作品名",
       accessorKey: "name",
+      header: "作品名",
     },
     {
-      header: "放送期間",
       accessorKey: "broadcastPeriod",
       columns: [
         {
-          header: "初回放送",
           accessorKey: "firstBroadcast",
+          header: "初回放送",
         },
         {
-          header: "最終回放送",
           accessorKey: "lastBroadcast",
+          header: "最終回放送",
         },
       ],
+      header: "放送期間",
     },
     {
-      header: "話数",
       accessorKey: "episode",
+      header: "話数",
     },
   ]
   const data = [
     {
       name: "ドラゴンボール超",
+      episode: "全131話",
       firstBroadcast: "2015年7月5日",
       lastBroadcast: "2018年3月25日",
-      episode: "全131話",
     },
   ]
 
@@ -279,22 +279,22 @@ describe("<Thead />", () => {
 
 describe("<Tbody />", () => {
   const columns = [
-    { header: "Name", accessorKey: "Name" },
-    { header: "Age", accessorKey: "age" },
-    { header: "Email", accessorKey: "email" },
+    { accessorKey: "Name", header: "Name" },
+    { accessorKey: "age", header: "Age" },
+    { accessorKey: "email", header: "Email" },
   ]
   const data = [
     {
-      Name: "Goku",
       age: 35,
       email: "goku@dbz.com",
+      Name: "Goku",
     },
   ]
 
   test("checkbox can be clicked and toggled", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
     const checkbox = screen.getByLabelText("Select row")
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(checkbox).not.toBeChecked()
     })
     await user.click(checkbox)
@@ -303,10 +303,10 @@ describe("<Tbody />", () => {
 
   test("if rowsClickSelect is true, you can select a row by clicking on it", async () => {
     const { user } = render(
-      <Table columns={columns} data={data} rowsClickSelect={true} />,
+      <Table columns={columns} data={data} rowsClickSelect />,
     )
     const row = screen.getByRole("row", { name: /Goku/i })
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(row).not.toHaveAttribute("aria-selected")
     })
     await user.click(row)
@@ -330,32 +330,32 @@ describe("<Tbody />", () => {
 
 describe("Sort", () => {
   const columns = [
-    { header: "Name", accessorKey: "Name" },
-    { header: "Age", accessorKey: "age" },
-    { header: "Email", accessorKey: "email" },
+    { accessorKey: "Name", header: "Name" },
+    { accessorKey: "age", header: "Age" },
+    { accessorKey: "email", header: "Email" },
   ]
   const data = [
     {
-      Name: "Goku",
       age: 35,
       email: "goku@dbz.com",
+      Name: "Goku",
     },
     {
-      Name: "Vegeta",
       age: 37,
       email: "vegeta@dbz.com",
+      Name: "Vegeta",
     },
   ]
 
   test("column header click cycles through sort states", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
     const nameHeader = screen.getByText("Name")
-    await waitFor(async () => {
-      expect(nameHeader).toHaveAttribute("aria-sort", "none")
+    await waitFor(() => {
+      expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "none")
     })
     await user.click(nameHeader)
-    expect(nameHeader).toHaveAttribute("aria-sort", "ascending")
+    expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "ascending")
     await user.click(nameHeader)
-    expect(nameHeader).toHaveAttribute("aria-sort", "descending")
+    expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "descending")
   })
 })

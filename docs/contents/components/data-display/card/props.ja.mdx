@@ -9,34 +9,40 @@ tab: Props
 
 ## Props
 
+### CardBodyProps
+
+### CardFooterProps
+
+### CardHeaderProps
+
 ### CardProps
 
 <PropsCard
   id="card-align"
   name="align"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "center" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "center" | "end" | "flex-end" | "flex-start" | "self-end" | "self-start" | "start" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="card-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
   id="card-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="card-justify"
   name="justify"
-  type='"left" | "right" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | "stretch" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='"left" | "right" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "center" | "end" | "flex-end" | "flex-start" | "start" | "normal" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
 />
 
@@ -45,7 +51,7 @@ tab: Props
   name="size"
   type='"sm" | "md" | "normal" | "lg"'
   description={"The size of the Card."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -53,11 +59,5 @@ tab: Props
   name="variant"
   type='"elevated" | "outline" | "solid" | "subtle" | "unstyled"'
   description={"The variant of the Card."}
-  defaultValue={"elevated"}
+  defaultValue={'"elevated"'}
 />
-
-### CardHeaderProps
-
-### CardBodyProps
-
-### CardFooterProps

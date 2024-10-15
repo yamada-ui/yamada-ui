@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { Box, Button, Input, Snacks, useSnacks, Wrap } from "@yamada-ui/react"
 import { useRef } from "react"
-import { Box, Button, Input, Snacks, Wrap, useSnacks } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Snacks>
 
@@ -20,8 +20,8 @@ export const basic: Story = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -33,7 +33,7 @@ export const basic: Story = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -50,8 +50,8 @@ export const withDirection = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -63,7 +63,7 @@ export const withDirection = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -80,8 +80,8 @@ export const withLimit = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -93,7 +93,7 @@ export const withLimit = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -110,8 +110,8 @@ export const withGutter = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -124,10 +124,10 @@ export const withGutter = () => {
       </Wrap>
 
       <Snacks
-        snacks={snacks}
         gutter={[0, "lg"]}
-        negateMargin={false}
         mb="-md"
+        negateMargin={false}
+        snacks={snacks}
       />
 
       <Input placeholder="Input" />
@@ -145,9 +145,9 @@ export const withDuration = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               duration: 30000,
+              title: "孫悟空",
             })
           }}
         >
@@ -159,7 +159,7 @@ export const withDuration = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -175,9 +175,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "basic",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -187,9 +187,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "solid",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -199,9 +199,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -211,9 +211,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "top-accent",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -223,9 +223,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "left-accent",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -237,7 +237,7 @@ export const withVariant = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -253,11 +253,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
               icon: { variant: "oval" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -267,11 +267,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "solid",
+              description: "オッス！オラ悟空！",
               icon: { variant: "grid" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -281,11 +281,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
               icon: { variant: "puff" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -295,11 +295,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "solid",
+              description: "オッス！オラ悟空！",
               icon: { variant: "dots" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -311,7 +311,7 @@ export const withLoadingVariant = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -328,9 +328,9 @@ export const withStatus = () => {
           colorScheme="primary"
           onClick={() =>
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "info",
+              title: "孫悟空",
             })
           }
         >
@@ -341,9 +341,9 @@ export const withStatus = () => {
           colorScheme="success"
           onClick={() =>
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "success",
+              title: "孫悟空",
             })
           }
         >
@@ -354,9 +354,9 @@ export const withStatus = () => {
           colorScheme="warning"
           onClick={() =>
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "warning",
+              title: "孫悟空",
             })
           }
         >
@@ -367,9 +367,9 @@ export const withStatus = () => {
           colorScheme="danger"
           onClick={() =>
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "error",
+              title: "孫悟空",
             })
           }
         >
@@ -379,9 +379,9 @@ export const withStatus = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -393,7 +393,7 @@ export const withStatus = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -410,10 +410,10 @@ export const withColorScheme = () => {
           colorScheme="green"
           onClick={() =>
             snack({
-              title: "孫悟空",
+              colorScheme: "green",
               description: "オッス！オラ悟空！",
               status: "info",
-              colorScheme: "green",
+              title: "孫悟空",
             })
           }
         >
@@ -424,10 +424,10 @@ export const withColorScheme = () => {
           colorScheme="purple"
           onClick={() =>
             snack({
-              title: "孫悟空",
+              colorScheme: "purple",
               description: "オッス！オラ悟空！",
               status: "success",
-              colorScheme: "purple",
+              title: "孫悟空",
             })
           }
         >
@@ -437,10 +437,10 @@ export const withColorScheme = () => {
         <Button
           onClick={() =>
             snack({
-              title: "孫悟空",
+              colorScheme: "gray",
               description: "オッス！オラ悟空！",
               status: "warning",
-              colorScheme: "gray",
+              title: "孫悟空",
             })
           }
         >
@@ -451,10 +451,10 @@ export const withColorScheme = () => {
           colorScheme="pink"
           onClick={() =>
             snack({
-              title: "孫悟空",
+              colorScheme: "pink",
               description: "オッス！オラ悟空！",
               status: "error",
-              colorScheme: "pink",
+              title: "孫悟空",
             })
           }
         >
@@ -466,7 +466,7 @@ export const withColorScheme = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -483,9 +483,9 @@ export const withCloseStrategy = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               closeStrategy: "element",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -497,7 +497,7 @@ export const withCloseStrategy = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -506,12 +506,12 @@ export const withCloseStrategy = () => {
 
 export const useClose = () => {
   const { snack, snacks } = useSnacks()
-  const ref = useRef<string | number | undefined>(undefined)
+  const ref = useRef<number | string | undefined>(undefined)
 
   const onOpen = () => {
     ref.current = snack({
-      title: "孫悟空",
       description: "オッス！オラ悟空！",
+      title: "孫悟空",
     })
   }
 
@@ -535,7 +535,7 @@ export const useClose = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -544,21 +544,21 @@ export const useClose = () => {
 
 export const useUpdate = () => {
   const { snack, snacks } = useSnacks()
-  const ref = useRef<string | number | undefined>(undefined)
+  const ref = useRef<number | string | undefined>(undefined)
 
   const onOpen = () => {
     ref.current = snack({
-      title: "孫悟空",
       description: "オッス！オラ悟空！",
+      title: "孫悟空",
     })
   }
 
   const onUpdate = () => {
     if (ref.current)
       snack.update(ref.current, {
-        title: "ベジータ",
-        description: "よくも…よくも…オレの…ブルマを!!",
         colorScheme: "purple",
+        description: "よくも…よくも…オレの…ブルマを!!",
+        title: "ベジータ",
       })
   }
 
@@ -578,7 +578,7 @@ export const useUpdate = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -596,7 +596,7 @@ export const customComponent = () => {
           onClick={() => {
             snack({
               component: () => (
-                <Box color="white" py={3} px={4} bg="purple.500">
+                <Box bg="purple.500" color="white" px={4} py={3}>
                   ギャルのパンティーおくれーーーっ！！！！！
                 </Box>
               ),
@@ -611,7 +611,7 @@ export const customComponent = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -628,11 +628,11 @@ export const customStyle = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               style: {
                 w: "60%",
               },
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }}
         >
@@ -644,7 +644,7 @@ export const customStyle = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>
@@ -661,9 +661,9 @@ export const disabledClosable = () => {
           colorScheme="primary"
           onClick={() => {
             snack({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               isClosable: false,
+              title: "孫悟空",
             })
           }}
         >
@@ -675,7 +675,7 @@ export const disabledClosable = () => {
         </Button>
       </Wrap>
 
-      <Snacks snacks={snacks} gutter={[0, "md"]} />
+      <Snacks gutter={[0, "md"]} snacks={snacks} />
 
       <Input placeholder="Input" />
     </>

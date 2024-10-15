@@ -2,14 +2,14 @@ import { pseudoProperties } from "../pseudos"
 import { styleProperties } from "../styles"
 
 const UIProps = new Set([
-  ...styleProperties,
-  ...pseudoProperties,
-  "as",
   "__css",
+  "as",
   "css",
-  "sx",
-  "focusBorderColor",
   "errorBorderColor",
+  "focusBorderColor",
+  "sx",
+  ...pseudoProperties,
+  ...styleProperties,
 ])
 
 export function shouldForwardProp(

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -54,6 +54,7 @@
     "@yamada-ui/native-table": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/select": "workspace:*",
+    "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },

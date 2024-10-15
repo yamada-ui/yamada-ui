@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useMemo } from "react"
 import type { MotionVariants } from "@yamada-ui/react"
 import { Center, Motion } from "@yamada-ui/react"
+import { useMemo } from "react"
 
 type Story = StoryFn<typeof Motion>
 
 const meta: Meta<typeof Motion> = {
-  title: "Components / Motion / Variants",
   component: Motion,
+  title: "Components / Motion / Variants",
 }
 
 export default meta
@@ -22,16 +22,16 @@ export const basic: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial="hidden"
         animate="visible"
+        bg="primary"
+        cursor="pointer"
+        h="2xs"
+        initial="hidden"
+        rounded="3xl"
         variants={variants}
         w="2xs"
-        h="2xs"
-        bg="primary"
-        rounded="3xl"
-        cursor="pointer"
       />
     </Center>
   )
@@ -55,25 +55,25 @@ export const usePropagation: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial="hidden"
         animate="visible"
-        variants={list}
-        w="2xs"
-        p="md"
         bg="primary"
-        overflow="hidden"
-        rounded="3xl"
         cursor="pointer"
         display="flex"
         flexDirection="column"
         gap="md"
+        initial="hidden"
+        overflow="hidden"
+        p="md"
+        rounded="3xl"
+        variants={list}
+        w="2xs"
       >
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
       </Motion>
     </Center>
   )
@@ -88,7 +88,7 @@ export const useOrchestration: Story = () => {
       },
       visible: {
         opacity: 1,
-        transition: { when: "beforeChildren", staggerChildren: 0.5 },
+        transition: { staggerChildren: 0.5, when: "beforeChildren" },
       },
     }),
     [],
@@ -103,25 +103,25 @@ export const useOrchestration: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial="hidden"
         animate="visible"
-        variants={list}
-        w="2xs"
-        p="md"
         bg="primary"
-        overflow="hidden"
-        rounded="3xl"
         cursor="pointer"
         display="flex"
         flexDirection="column"
         gap="md"
+        initial="hidden"
+        overflow="hidden"
+        p="md"
+        rounded="3xl"
+        variants={list}
+        w="2xs"
       >
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
-        <Motion variants={item} bg="white" w="full" h="4" rounded="md" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
       </Motion>
     </Center>
   )
@@ -141,60 +141,60 @@ export const useDynamicVariants: Story = () => {
       hidden: { opacity: 0, x: -100 },
       visible: (i) => ({
         opacity: 1,
-        x: 0,
         transition: { delay: i * 0.3 },
+        x: 0,
       }),
     }),
     [],
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        initial="hidden"
         animate="visible"
-        variants={list}
-        w="2xs"
-        p="md"
         bg="primary"
-        overflow="hidden"
-        rounded="3xl"
         cursor="pointer"
         display="flex"
         flexDirection="column"
         gap="md"
+        initial="hidden"
+        overflow="hidden"
+        p="md"
+        rounded="3xl"
+        variants={list}
+        w="2xs"
       >
         <Motion
-          variants={item}
+          bg="white"
           custom={1}
-          bg="white"
-          w="full"
           h="4"
           rounded="md"
+          variants={item}
+          w="full"
         />
         <Motion
-          variants={item}
+          bg="white"
           custom={2}
-          bg="white"
-          w="full"
           h="4"
           rounded="md"
+          variants={item}
+          w="full"
         />
         <Motion
-          variants={item}
+          bg="white"
           custom={3}
-          bg="white"
-          w="full"
           h="4"
           rounded="md"
+          variants={item}
+          w="full"
         />
         <Motion
-          variants={item}
-          custom={4}
           bg="white"
-          w="full"
+          custom={4}
           h="4"
           rounded="md"
+          variants={item}
+          w="full"
         />
       </Motion>
     </Center>
@@ -204,16 +204,16 @@ export const useDynamicVariants: Story = () => {
 export const useValueSpecific: Story = () => {
   const variants: MotionVariants = useMemo(
     () => ({
-      hidden: { pathLength: 0, opacity: 0 },
+      hidden: { opacity: 0, pathLength: 0 },
       visible: (i) => {
         const delay = 1 + i * 0.5
 
         return {
-          pathLength: 1,
           opacity: 1,
+          pathLength: 1,
           transition: {
-            pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
             opacity: { delay, duration: 0.01 },
+            pathLength: { type: "spring", bounce: 0, delay, duration: 1.5 },
           },
         }
       },
@@ -222,77 +222,77 @@ export const useValueSpecific: Story = () => {
   )
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         as="svg"
-        w="800px"
-        h="200px"
-        viewBox="0 0 800 200"
-        initial="hidden"
         animate="visible"
+        h="200px"
+        initial="hidden"
+        viewBox="0 0 800 200"
+        w="800px"
       >
         <Motion
           as="circle"
+          custom={1}
           cx="100"
           cy="100"
+          fill="transparent"
           r="80"
           stroke="#ed3237"
-          variants={variants}
-          custom={1}
-          strokeWidth="10px"
           strokeLinecap="round"
-          fill="transparent"
+          strokeWidth="10px"
+          variants={variants}
         />
         <Motion
           as="line"
-          x1="220"
-          y1="30"
-          x2="360"
-          y2="170"
-          stroke="#f5c535"
-          variants={variants}
           custom={2}
-          strokeWidth="10px"
-          strokeLinecap="round"
           fill="transparent"
+          stroke="#f5c535"
+          strokeLinecap="round"
+          strokeWidth="10px"
+          variants={variants}
+          x1="220"
+          x2="360"
+          y1="30"
+          y2="170"
         />
         <Motion
           as="line"
-          x1="220"
-          y1="170"
-          x2="360"
-          y2="30"
-          stroke="#f5c535"
-          variants={variants}
           custom={2.5}
-          strokeWidth="10px"
-          strokeLinecap="round"
           fill="transparent"
+          stroke="#f5c535"
+          strokeLinecap="round"
+          strokeWidth="10px"
+          variants={variants}
+          x1="220"
+          x2="360"
+          y1="170"
+          y2="30"
         />
         <Motion
           as="rect"
-          w="140px"
+          custom={3}
+          fill="transparent"
           h="140px"
-          x="410"
-          y="30"
           rx="20"
           stroke="#0789c7"
-          variants={variants}
-          custom={3}
-          strokeWidth="10px"
           strokeLinecap="round"
-          fill="transparent"
+          strokeWidth="10px"
+          variants={variants}
+          w="140px"
+          x="410"
+          y="30"
         />
         <Motion
           as="polygon"
+          custom={4}
+          fill="transparent"
           points="670 30, 600 170, 740 170"
           stroke="#42b7a5"
-          variants={variants}
-          custom={4}
-          strokeWidth="10px"
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill="transparent"
+          strokeWidth="10px"
+          variants={variants}
         />
       </Motion>
     </Center>

@@ -1,23 +1,23 @@
 import type { ComponentType } from "react"
 import type {
-  UIFactory,
-  DOMElements,
-  StyledOptions,
+  DOMElement,
   HTMLUIComponents,
+  StyledOptions,
+  UIFactory,
 } from "./components"
 import { styled } from "./styled"
 
 interface Factory extends UIFactory, HTMLUIComponents {}
 
 function factory() {
-  const cache = new Map<DOMElements, ComponentType>()
+  const cache = new Map<DOMElement, ComponentType>()
 
   return new Proxy(styled, {
-    apply: (_target, _thisArg, [el, options]: [DOMElements, StyledOptions]) => {
+    apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
       return styled(el, options)
     },
 
-    get: (_target, el: DOMElements) => {
+    get: (_target, el: DOMElement) => {
       if (!cache.has(el)) cache.set(el, styled(el))
 
       return cache.get(el)

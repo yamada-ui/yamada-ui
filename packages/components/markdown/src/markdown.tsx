@@ -1,11 +1,13 @@
 import type { AlertProps } from "@yamada-ui/alert"
-import { Alert, AlertDescription, AlertIcon } from "@yamada-ui/alert"
 import type {
   ColorModeArray,
   FC,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
+import type { Components, Options } from "react-markdown"
+import type { CodeThemeNames } from "./code-theme"
+import { Alert, AlertDescription, AlertIcon } from "@yamada-ui/alert"
 import {
   forwardRef,
   omitThemeProps,
@@ -15,12 +17,10 @@ import {
 import { useValue } from "@yamada-ui/use-value"
 import { cx, filterEmpty } from "@yamada-ui/utils"
 import ReactMarkdown from "react-markdown"
-import type { Components, Options } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
 import remarkBreaks from "remark-breaks"
 import remarkGfm from "remark-gfm"
-import type { CodeThemeNames } from "./code-theme"
 import { codeThemes } from "./code-theme"
 import { rehypePlugin, remarkUIComponent } from "./remark-ui-component"
 
@@ -62,7 +62,7 @@ interface MarkdownOptions extends Options {
 }
 
 export interface MarkdownProps
-  extends Omit<HTMLUIProps, "className" | "children">,
+  extends Omit<HTMLUIProps, "children" | "className">,
     ThemeProps<"Markdown">,
     MarkdownOptions {}
 
@@ -75,9 +75,9 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Markdown", props)
   let {
     className,
-    remarkPlugins,
-    rehypePlugins,
     components,
+    rehypePlugins,
+    remarkPlugins,
     codeProps,
     noteProps,
     ...rest
@@ -97,12 +97,12 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
 
   return (
     <ui.div
-      as={ReactMarkdown}
       ref={ref}
+      as={ReactMarkdown}
       className={cx("ui-markdown", className ?? undefined)}
-      remarkPlugins={remarkPlugins}
-      rehypePlugins={rehypePlugins}
       components={components}
+      rehypePlugins={rehypePlugins}
+      remarkPlugins={remarkPlugins}
       __css={css}
       {...rest}
     />
@@ -135,8 +135,8 @@ const Code: FC<CodeProps> = ({
     <ui.pre
       as={SyntaxHighlighter as any}
       className={cx("ui-markdown__code", className)}
-      language={language}
       style={codeThemes[theme]}
+      language={language}
     >
       {String(children).replace(/\n$/, "")}
     </ui.pre>

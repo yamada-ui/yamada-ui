@@ -1,10 +1,12 @@
+import type { SegmentedControlItem, StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import { ChevronDown } from "@yamada-ui/lucide"
 import {
   Button,
   Grid,
-  HStack,
   Heading,
+  HStack,
   IconButton,
   Menu,
   MenuButton,
@@ -14,9 +16,7 @@ import {
   Spacer,
   VStack,
 } from "@yamada-ui/react"
-import type { SegmentedControlItem, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { FC } from "react"
 import { Cards } from "./cards"
 import { Header } from "./header"
 import { Overview } from "./overview"
@@ -24,9 +24,9 @@ import { RecentSales } from "./recent-sales"
 
 const DASHBOARD_ITEMS: SegmentedControlItem[] = [
   { label: "Overview", value: "Overview" },
-  { label: "Analytics", value: "Analytics", isDisabled: true },
-  { label: "Reports", value: "Reports", isDisabled: true },
-  { label: "Notifications", value: "Notifications", isDisabled: true },
+  { isDisabled: true, label: "Analytics", value: "Analytics" },
+  { isDisabled: true, label: "Reports", value: "Reports" },
+  { isDisabled: true, label: "Notifications", value: "Notifications" },
 ]
 
 export const Dashboard = memo(() => {
@@ -38,9 +38,9 @@ export const Dashboard = memo(() => {
         <Cards />
 
         <Grid
-          templateColumns={{ base: "1.5fr 1fr", lg: "1fr" }}
           gap="md"
           pb={{ base: "lg", sm: "md" }}
+          templateColumns={{ base: "1.5fr 1fr", lg: "1fr" }}
         >
           <Overview />
 
@@ -53,7 +53,7 @@ export const Dashboard = memo(() => {
 
 Dashboard.displayName = "Dashboard"
 
-type ContentProps = StackProps & {}
+interface ContentProps extends StackProps {}
 
 const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
   return (
@@ -67,10 +67,10 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
           <Spacer />
 
           <RangeDatePicker
+            amountOfMonths={2}
             display={{ base: "block", md: "none" }}
             maxW="sm"
             placeholder="YYYY/MM/DD"
-            amountOfMonths={2}
           />
 
           <Button colorScheme="primary" display={{ base: "flex", md: "none" }}>
@@ -96,8 +96,8 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
 
         <SegmentedControl
           alignSelf="flex-start"
-          items={DASHBOARD_ITEMS}
           display={{ base: "block", md: "none" }}
+          items={DASHBOARD_ITEMS}
         />
       </VStack>
 

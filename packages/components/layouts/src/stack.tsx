@@ -1,12 +1,12 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import {
-  getValidChildren,
-  cx,
-  replaceObject,
-  mergeRefs,
-} from "@yamada-ui/utils"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { ReactElement, RefObject } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
+import {
+  cx,
+  getValidChildren,
+  mergeRefs,
+  replaceObject,
+} from "@yamada-ui/utils"
 import {
   cloneElement,
   createRef,
@@ -20,25 +20,25 @@ import {
 
 interface StackOptions {
   /**
+   * The CSS `align-items` property.
+   */
+  align?: CSSUIObject["alignItems"]
+  /**
    * The CSS `flex-direction` property.
    */
   direction?: CSSUIObject["flexDirection"]
+  /**
+   * If `true`, each stack item will show a divider.
+   */
+  divider?: ReactElement
   /**
    * The CSS `justify-content` property.
    */
   justify?: CSSUIObject["justifyContent"]
   /**
-   * The CSS `align-items` property.
-   */
-  align?: CSSUIObject["alignItems"]
-  /**
    * The CSS `flex-wrap` property.
    */
   wrap?: CSSUIObject["flexWrap"]
-  /**
-   * If `true`, each stack item will show a divider.
-   */
-  divider?: ReactElement
 }
 
 export interface StackProps
@@ -53,14 +53,14 @@ export interface StackProps
 export const Stack = forwardRef<StackProps, "div">(
   (
     {
-      direction: flexDirection = "column",
-      justify: justifyContent,
-      align: alignItems,
-      wrap: flexWrap,
-      gap = "fallback(md, 1rem)",
-      divider,
       className,
+      align: alignItems,
       children,
+      direction: flexDirection = "column",
+      divider,
+      gap = "fallback(md, 1rem)",
+      justify: justifyContent,
+      wrap: flexWrap,
       ...rest
     },
     ref,
@@ -70,17 +70,17 @@ export const Stack = forwardRef<StackProps, "div">(
 
     const dividerCSS = useMemo(
       () => ({
-        w: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? "100%" : "fit-content",
-        ),
-        h: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? "fit-content" : "100%",
+        borderBottomWidth: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? "1px" : 0,
         ),
         borderLeftWidth: replaceObject(flexDirection, (value) =>
           isColumn(value) ? 0 : "1px",
         ),
-        borderBottomWidth: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? "1px" : 0,
+        h: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? "fit-content" : "100%",
+        ),
+        w: replaceObject(flexDirection, (value) =>
+          isColumn(value) ? "100%" : "fit-content",
         ),
       }),
       [flexDirection],
@@ -107,12 +107,12 @@ export const Stack = forwardRef<StackProps, "div">(
 
     const css: CSSUIObject = useMemo(
       () => ({
+        alignItems,
         display: "flex",
         flexDirection,
-        justifyContent,
-        alignItems,
         flexWrap,
         gap,
+        justifyContent,
       }),
       [alignItems, flexDirection, flexWrap, gap, justifyContent],
     )
@@ -140,8 +140,8 @@ export const HStack = forwardRef<StackProps, "div">(
     <Stack
       ref={ref}
       className={cx("ui-stack--horizontal", className)}
-      direction="row"
       align="center"
+      direction="row"
       {...rest}
     />
   ),
@@ -157,8 +157,8 @@ export const VStack = forwardRef<StackProps, "div">(
     <Stack
       ref={ref}
       className={cx("ui-stack--vertical", className)}
-      direction="column"
       align="stretch"
+      direction="column"
       w="100%"
       {...rest}
     />
@@ -167,25 +167,25 @@ export const VStack = forwardRef<StackProps, "div">(
 
 interface ZStackOptions {
   /**
-   * If set the stack will start from the given index.
-   *
-   * @default 0
-   */
-  startIndex?: number
-  /**
    * Stack in the specified direction.
    *
    * @default "bottom"
    */
   direction?:
-    | "top"
-    | "right"
     | "bottom"
-    | "left"
-    | "top-left"
-    | "top-right"
     | "bottom-left"
     | "bottom-right"
+    | "left"
+    | "right"
+    | "top"
+    | "top-left"
+    | "top-right"
+  /**
+   * If `true`, calculate the `width` and `height` of the element and assign container.
+   *
+   * @default true
+   */
+  fit?: boolean
   /**
    * If `true`, reverse direction.
    *
@@ -193,11 +193,11 @@ interface ZStackOptions {
    */
   reverse?: boolean
   /**
-   * If `true`, calculate the `width` and `height` of the element and assign container.
+   * If set the stack will start from the given index.
    *
-   * @default true
+   * @default 0
    */
-  fit?: boolean
+  startIndex?: number
 }
 
 export interface ZStackProps
@@ -213,30 +213,30 @@ export const ZStack = forwardRef<ZStackProps, "div">(
   (
     {
       className,
+      children,
       direction = "bottom",
-      startIndex = 0,
+      fit = true,
       gap = "fallback(md, 1rem)",
       reverse = false,
-      fit = true,
-      children,
+      startIndex = 0,
       ...rest
     },
     ref,
   ) => {
     const refMap = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
-    const [rect, setRect] = useState<{ width: number; height: number }>({
-      width: 0,
+    const [rect, setRect] = useState<{ height: number; width: number }>({
       height: 0,
+      width: 0,
     })
 
     const boxSize: CSSUIObject = {
-      minWidth: `${rect.width}px`,
       minHeight: `${rect.height}px`,
+      minWidth: `${rect.width}px`,
     }
 
     const css: CSSUIObject = {
-      position: "relative",
       overflow: "hidden",
+      position: "relative",
       vars: [{ name: "space", token: "spaces", value: gap }],
       ...(fit ? boxSize : {}),
     }
@@ -268,9 +268,9 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     )
 
     const cloneChildren = useMemo(() => {
-      const validChildren = getValidChildren(children) as (ReactElement & {
+      const validChildren = getValidChildren(children) as ({
         ref: RefObject<any>
-      })[]
+      } & ReactElement)[]
 
       const clonedChildren = validChildren.map((child, index) => {
         const ref = createRef<HTMLDivElement>()
@@ -323,7 +323,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
       for (const ref of refMap.current.values()) {
         if (!ref.current) continue
 
-        let { offsetParent, offsetWidth, offsetHeight, offsetTop, offsetLeft } =
+        let { offsetHeight, offsetLeft, offsetParent, offsetTop, offsetWidth } =
           ref.current
 
         if (!offsetParent && process.env.NODE_ENV !== "test") continue
@@ -349,7 +349,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
         if (offsetHeight > height) height = offsetHeight
       }
 
-      setRect({ width, height })
+      setRect({ height, width })
     }, [cloneChildren, direction, reverse, fit])
 
     return (

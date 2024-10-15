@@ -1,25 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  optimizeFonts: true,
-  reactStrictMode: false,
   experimental: {
     externalDir: true,
+  },
+  i18n: {
+    defaultLocale: "en",
+    localeDetection: false,
+    locales: ["en", "ja"],
   },
   images: {
     domains: ["images.pexels.com"],
   },
+  optimizeFonts: true,
   pageExtensions: ["page.jsx", "page.tsx", "api.js", "api.ts"],
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "ja"],
-    localeDetection: false,
-  },
   productionBrowserSourceMaps: false,
-  redirects: async () => [
+  reactStrictMode: false,
+  redirects: () => [
     {
-      source: "/examples",
       destination: "/examples/mail",
       permanent: true,
+      source: "/examples",
     },
   ],
 }

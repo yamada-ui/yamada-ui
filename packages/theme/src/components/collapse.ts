@@ -6,7 +6,7 @@ export const Collapse: ComponentStyle<"Collapse"> = {
   },
   defaultProps: {
     animationOpacity: true,
-    startingHeight: 0,
     endingHeight: "auto",
+    startingHeight: 0,
   },
 }

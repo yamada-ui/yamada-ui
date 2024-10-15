@@ -1,91 +1,104 @@
 import type {
-  ColumnDef,
-  Row,
+  AccessorColumnDef,
   Cell,
-  RowData,
+  CellContext,
+  ColumnDef,
+  ColumnDefTemplate,
   CoreOptions,
-  RowSelectionOptions,
-  SortingOptions,
+  DisplayColumnDef,
   Header,
-  PartialKeys,
-  SortingState,
-  RowSelectionState,
+  HeaderContext,
   OnChangeFn,
   PaginationOptions,
-  HeaderContext,
-  DisplayColumnDef,
-  AccessorColumnDef,
-} from "@tanstack/react-table"
-import {
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-  getPaginationRowModel,
+  PartialKeys,
+  Row,
+  RowData,
+  RowSelectionOptions,
+  SortingOptions,
+  SortingState,
 } from "@tanstack/react-table"
 import type { CheckboxProps } from "@yamada-ui/checkbox"
-import { Checkbox } from "@yamada-ui/checkbox"
 import type {
   CSSUIObject,
   HTMLUIProps,
-  ThemeProps,
   PropGetter,
+  ThemeProps,
 } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
-import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { TdProps, ThProps, TrProps } from "@yamada-ui/native-table"
+import type {
+  CSSProperties,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  RefObject,
+} from "react"
+import type { SelectColumn } from "./table-utils"
 import {
-  ariaAttr,
-  createContext,
-  handlerAll,
-  runIfFunc,
-} from "@yamada-ui/utils"
-import type { CSSProperties } from "react"
-import { useCallback, useMemo } from "react"
-
-export { flexRender as render, createColumnHelper } from "@tanstack/react-table"
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { runIfFunc } from "@yamada-ui/utils"
+import { useCallback, useMemo, useRef, useState } from "react"
+import {
+  generateGroups,
+  generateRowSelection,
+  getEnableRowSelection,
+  mergeColumns,
+} from "./table-utils"
+import { generateRowId } from "./table-utils"
+export { createColumnHelper, flexRender as render } from "@tanstack/react-table"
 export type {
-  SortDirection,
-  Row,
   Cell,
   CellContext,
+  Row,
   RowData,
+  SortDirection,
 } from "@tanstack/react-table"
 
-export type TableContext = Omit<UseTableReturn, "getTableProps">
-
-export const [TableProvider, useTableContext] = createContext<TableContext>({
-  strict: false,
-  name: "TableContext",
-})
+export type CellMap = Map<string, RefObject<HTMLTableCellElement>>
 
 export interface PropsColumnDef {
   className?: string
+  css?: CSSUIObject
   style?: CSSProperties
   sx?: CSSUIObject
-  css?: CSSUIObject
+  "aria-label"?: string
   colSpan?: number
   rowSpan?: number
-  "aria-label"?: string
 }
 
 export interface GroupColumnDef<Y extends RowData, M = any> {
   columns?: Column<Y, M>[]
 }
 
+interface ColumnProps {
+  referenceRef: RefObject<any>
+  tabIndex: number
+}
+
+interface ColumnBase<Y extends RowData, M = any> {
+  cell?: ColumnDefTemplate<CellContext<Y, M> & ColumnProps>
+  footer?: ColumnDefTemplate<ColumnProps & HeaderContext<Y, M>>
+  header?: ColumnDefTemplate<ColumnProps & HeaderContext<Y, M>>
+}
+
 export type Column<Y extends RowData, M = any> = (
-  | DisplayColumnDef<Y, M>
-  | AccessorColumnDef<Y, M>
+  | Omit<AccessorColumnDef<Y, M>, keyof ColumnBase<Y, M>>
+  | Omit<DisplayColumnDef<Y, M>, keyof ColumnBase<Y, M>>
 ) &
+  ColumnBase<Y, M> &
   GroupColumnDef<Y, M> &
   PropsColumnDef
 
-export type InternalColumn<Y extends RowData, M = any> = Column<Y, M> & {
-  "aria-hidden"?: boolean
-}
-
-interface SelectColumn<Y extends RowData, M = any>
-  extends Omit<Column<Y, M>, "accessorKey" | "accessorFn"> {}
+export type DefaultColumn<Y extends RowData, M = any> = (
+  | AccessorColumnDef<Y, M>
+  | DisplayColumnDef<Y, M>
+) &
+  GroupColumnDef<Y, M> &
+  PropsColumnDef
 
 export interface ColumnSort<Y extends RowData> {
   id: keyof Y
@@ -101,11 +114,11 @@ export interface UseTableOptions<Y extends RowData>
         | "columns"
         | "defaultColumn"
         | "getCoreRowModel"
-        | "state"
-        | "initialState"
-        | "onStateChange"
         | "getSubRows"
+        | "initialState"
         | "mergeOptions"
+        | "onStateChange"
+        | "state"
       >,
       "renderFallbackValue"
     >,
@@ -123,17 +136,17 @@ interface TableProps
     ThemeProps<"Table"> {}
 
 type HeaderGroupProps<Y extends RowData> =
-  | Omit<TrProps, "key">
   | ((headers: Header<Y, unknown>[]) => Omit<TrProps, "key"> | void)
-type HeaderProps<Y extends RowData> =
-  | Omit<ThProps, "key">
-  | ((header: Header<Y, unknown>) => Omit<ThProps, "key"> | void)
-type RowProps<Y extends RowData> =
   | Omit<TrProps, "key">
+type HeaderProps<Y extends RowData> =
+  | ((header: Header<Y, unknown>) => Omit<ThProps, "key"> | void)
+  | Omit<ThProps, "key">
+type RowProps<Y extends RowData> =
   | ((row: Row<Y>) => Omit<TrProps, "key"> | void)
+  | Omit<TrProps, "key">
 type CellProps<Y extends RowData> =
-  | Omit<TdProps, "key">
   | ((cell: Cell<Y, unknown>) => Omit<TdProps, "key"> | void)
+  | Omit<TdProps, "key">
 
 export interface UseTableProps<Y extends RowData>
   extends TableProps,
@@ -145,39 +158,7 @@ export interface UseTableProps<Y extends RowData>
   /**
    * Default column options to use for all column defs supplied to the table.
    */
-  defaultColumn?: Partial<Column<Y>>
-  /**
-   * The id used to store the value when selected.
-   */
-  rowId?: keyof Y
-  /**
-   * The sort of the table.
-   */
-  sort?: Sort<Y>
-  /**
-   * The initial sort of the table.
-   */
-  defaultSort?: Sort<Y>
-  /**
-   * The callback invoked when table sort is changed.
-   */
-  onChangeSort?: (sort: Sort<Y>) => void
-  /**
-   * The ids of the selected row.
-   */
-  selectedRowIds?: string[]
-  /**
-   * The initial ids of the selected row.
-   */
-  defaultSelectedRowIds?: string[]
-  /**
-   * The callback invoked when row is selected.
-   */
-  onChangeSelect?: (rowSelection: string[]) => void
-  /**
-   * The page index of the paging table.
-   */
-  pageIndex?: number
+  defaultColumn?: Partial<DefaultColumn<Y>>
   /**
    * The initial page index of the paging table.
    *
@@ -185,47 +166,43 @@ export interface UseTableProps<Y extends RowData>
    */
   defaultPageIndex?: number
   /**
-   * The callback invoked when page index is changed.
-   */
-  onChangePageIndex?: (pageIndex: number) => void
-  /**
-   * The page size of the paging table.
-   */
-  pageSize?: number
-  /**
    * The initial page size of the paging table.
    *
    * @default 20
    */
   defaultPageSize?: number
   /**
-   * The callback invoked when page size is changed.
+   * The initial ids of the selected row.
    */
-  onChangePageSize?: (pageIndex: number) => void
+  defaultSelectedRowIds?: string[]
   /**
-   * If `true`, allows selection by clicking on a row.
-   *
-   * @default false
+   * The initial sort of the table.
    */
-  rowsClickSelect?: boolean
-  /**
-   * The callback invoked when a row is clicked.
-   */
-  onClickRow?: (row: Row<Y>) => void
-  /**
-   * The callback invoked when a row is double clicked.
-   */
-  onDoubleClickRow?: (row: Row<Y>) => void
-  /**
-   * If `true`, display the checkbox in table footer.
-   *
-   * @default false
-   */
-  withFooterSelect?: boolean
+  defaultSort?: Sort<Y>
   /**
    * The ids that disabled in selection.
    */
   disabledRowIds?: string[]
+  /**
+   * If `true`, enables pagination.
+   *
+   * @default false
+   */
+  enablePagination?: boolean
+  /**
+   * If `true`, the table cell will be focusable.
+   *
+   * @default true
+   */
+  isFocusable?: boolean
+  /**
+   * The page index of the paging table.
+   */
+  pageIndex?: number
+  /**
+   * The page size of the paging table.
+   */
+  pageSize?: number
   /**
    * The list of the page size.
    *
@@ -233,17 +210,48 @@ export interface UseTableProps<Y extends RowData>
    */
   pageSizeList?: number[]
   /**
+   * The role used for the row header.
+   * This is used for accessibility to announce the selected row.
+   */
+  rowHeader?: keyof Y
+  /**
+   * The id used to store the value when selected.
+   */
+  rowId?: keyof Y
+  /**
+   * If `true`, allows selection by clicking on a row.
+   *
+   * @default false
+   */
+  rowsClickSelect?: boolean
+  /**
+   * The ids of the selected row.
+   */
+  selectedRowIds?: string[]
+  /**
+   * The sort of the table.
+   */
+  sort?: Sort<Y>
+  /**
+   * If `true`, display the table footer.
+   *
+   * @default false
+   */
+  withFooter?: boolean
+  /**
+   * If `true`, display the checkbox in table footer.
+   *
+   * @default false
+   */
+  withFooterSelect?: boolean
+  /**
+   * Props for table cell component.
+   */
+  cellProps?: CellProps<Y>
+  /**
    * Props for table checkbox element.
    */
   checkboxProps?: CheckboxProps
-  /**
-   * Props for table header group component.
-   */
-  headerGroupProps?: HeaderGroupProps<Y>
-  /**
-   * Props for table header component.
-   */
-  headerProps?: HeaderProps<Y>
   /**
    * Props for table footer group component.
    */
@@ -253,131 +261,131 @@ export interface UseTableProps<Y extends RowData>
    */
   footerProps?: HeaderProps<Y>
   /**
-   * Props for table sort icon element.
+   * Props for table header group component.
    */
-  sortIconProps?: IconProps
+  headerGroupProps?: HeaderGroupProps<Y>
+  /**
+   * Props for table header component.
+   */
+  headerProps?: HeaderProps<Y>
   /**
    * Props for table row component.
    */
   rowProps?: RowProps<Y>
   /**
-   * Props for table cell component.
-   */
-  cellProps?: CellProps<Y>
-  /**
    * Props for table select column component.
    */
-  selectColumnProps?: SelectColumn<Y> | false
+  selectColumnProps?: false | SelectColumn<Y>
   /**
-   * If `true`, enables pagination.
-   *
-   * @default false
+   * Props for table sort icon element.
    */
-  enablePagination?: boolean
+  sortIconProps?: IconProps
+  /**
+   * The callback invoked when page index is changed.
+   */
+  onChangePageIndex?: (pageIndex: number) => void
+  /**
+   * The callback invoked when page size is changed.
+   */
+  onChangePageSize?: (pageIndex: number) => void
+  /**
+   * The callback invoked when row is selected.
+   */
+  onChangeSelect?: (rowSelection: string[]) => void
+  /**
+   * The callback invoked when table sort is changed.
+   */
+  onChangeSort?: (sort: Sort<Y>) => void
+  /**
+   * The callback invoked when a row is clicked.
+   */
+  onClickRow?: (row: Row<Y>) => void
+  /**
+   * The callback invoked when a row is double clicked.
+   */
+  onDoubleClickRow?: (row: Row<Y>) => void
 }
-
-const generateRowSelection = <Y extends RowData>(
-  rowSelection: string[] | undefined,
-  enableRowSelection: UseTableProps<Y>["enableRowSelection"],
-): RowSelectionState => {
-  if (!enableRowSelection) return {}
-
-  if (rowSelection) {
-    return rowSelection.reduce<RowSelectionState>(
-      (prev, id) => ({ ...prev, [String(id)]: true }),
-      {},
-    )
-  } else {
-    return {}
-  }
-}
-
-const generateRowId = <Y extends RowData>(key: keyof Y | undefined) =>
-  key ? (row: Y) => String(row[key]) : undefined
-
-const computedEnableRowSelection = <Y extends RowData>(
-  { id }: Row<Y>,
-  disabledRowIds?: string[],
-) => !disabledRowIds?.includes(id)
 
 export const useTable = <Y extends RowData>({
-  rowId,
-  disabledRowIds,
-  sort,
-  defaultSort,
-  onChangeSort,
-  selectedRowIds,
-  defaultSelectedRowIds,
-  onChangeSelect,
-  pageIndex,
-  defaultPageIndex = 0,
-  onChangePageIndex,
-  pageSize,
-  defaultPageSize = 20,
-  onChangePageSize,
-  rowsClickSelect,
-  onClickRow,
-  onDoubleClickRow,
-  withFooterSelect,
-  pageSizeList = [20, 50, 100],
-  checkboxProps,
-  headerGroupProps,
-  headerProps,
-  footerGroupProps,
-  footerProps,
-  sortIconProps,
-  rowProps,
-  cellProps,
-  selectColumnProps,
-  data,
-  columns,
-  defaultColumn,
-  debugAll,
-  debugTable,
-  debugHeaders,
-  debugColumns,
-  debugRows,
   autoResetAll,
-  meta,
-  getRowId = generateRowId(rowId),
-  renderFallbackValue,
-  manualSorting,
-  enableSorting,
-  enableSortingRemoval,
+  autoResetPageIndex,
+  columns,
+  data,
+  debugAll,
+  debugColumns,
+  debugHeaders,
+  debugRows,
+  debugTable,
+  defaultColumn,
+  defaultPageIndex = 0,
+  defaultPageSize = 20,
+  defaultSelectedRowIds,
+  defaultSort,
+  disabledRowIds,
   enableMultiRemove,
   enableMultiSort,
-  sortDescFirst,
-  maxMultiSortColCount,
-  isMultiSortEvent,
-  sortingFns,
-  enableRowSelection = (row) => computedEnableRowSelection(row, disabledRowIds),
-  pageCount,
-  manualPagination,
-  autoResetPageIndex,
   enablePagination = false,
+  enableRowSelection = (row) => getEnableRowSelection(row, disabledRowIds),
+  enableSorting,
+  enableSortingRemoval,
+  rowId,
+  getRowId = generateRowId(rowId),
+  isFocusable = true,
+  isMultiSortEvent,
+  manualPagination,
+  manualSorting,
+  maxMultiSortColCount,
+  meta,
+  pageCount,
+  pageIndex,
+  pageSize,
+  pageSizeList = [20, 50, 100],
+  renderFallbackValue,
+  rowHeader,
+  rowsClickSelect,
+  selectedRowIds,
+  sort,
+  sortDescFirst,
+  sortingFns,
+  withFooter = false,
+  withFooterSelect,
+  cellProps,
+  checkboxProps,
+  footerGroupProps,
+  footerProps,
+  headerGroupProps,
+  headerProps,
+  rowProps,
+  selectColumnProps,
+  sortIconProps,
+  onChangePageIndex,
+  onChangePageSize,
+  onChangeSelect,
+  onChangeSort,
+  onClickRow,
+  onDoubleClickRow,
   ...rest
 }: UseTableProps<Y>) => {
+  const cellMapRef = useRef<CellMap>(new Map())
+  const [focusedCell, setFocusedCell] = useState<[number, number]>([0, 0])
   const [sorting, onSortingChange] = useControllableState({
-    value: sort,
     defaultValue: defaultSort,
+    value: sort,
     onChange: onChangeSort,
   }) as unknown as [SortingState, OnChangeFn<SortingState>]
-
   const [rowSelection, onRowSelectionChange] = useControllableState({
-    value: selectedRowIds,
     defaultValue: defaultSelectedRowIds,
+    value: selectedRowIds,
     onChange: onChangeSelect,
   })
-
   const [internalPageIndex, setInternalPageIndex] = useControllableState({
-    value: pageIndex,
     defaultValue: defaultPageIndex,
+    value: pageIndex,
     onChange: onChangePageIndex,
   })
-
   const [internalPageSize, setInternalPageSize] = useControllableState({
-    value: pageSize,
     defaultValue: defaultPageSize,
+    value: pageSize,
     onChange: onChangePageSize,
   })
 
@@ -403,15 +411,17 @@ export const useTable = <Y extends RowData>({
     () =>
       enableRowSelection && selectColumnProps !== false
         ? mergeColumns<Y>({
-            enablePagination,
             columns,
-            checkboxProps,
-            withFooterSelect,
-            selectColumnProps,
             disabledRowIds,
+            enablePagination,
+            rowHeader,
+            withFooterSelect,
+            checkboxProps,
+            selectColumnProps,
           })
         : columns,
     [
+      rowHeader,
       checkboxProps,
       columns,
       disabledRowIds,
@@ -428,57 +438,59 @@ export const useTable = <Y extends RowData>({
   )
 
   const {
-    getHeaderGroups,
-    getRowModel,
-    getFooterGroups,
-    getState,
-    setPageIndex,
-    previousPage,
-    nextPage,
+    getAllFlatColumns,
     getCanNextPage,
     getCanPreviousPage,
-    setPageSize,
+    getFooterGroups,
+    getHeaderGroups,
     getPageCount,
+    getRowModel,
+    getState,
+    nextPage,
+    previousPage,
+    setPageIndex,
+    setPageSize,
   } = useReactTable<Y>({
-    data,
-    columns: mergedColumns as ColumnDef<Y, any>[],
-    state: {
-      sorting,
-      rowSelection: computedRowSelection,
-      ...(enablePagination ? { pagination } : {}),
-    },
-    defaultColumn,
-    debugAll,
-    debugTable,
-    debugHeaders,
-    debugColumns,
-    debugRows,
     autoResetAll,
-    meta,
-    getRowId,
-    renderFallbackValue,
-    manualSorting,
-    onSortingChange,
-    enableSorting,
-    enableSortingRemoval,
+    columns: mergedColumns as ColumnDef<Y, any>[],
+    data,
+    debugAll,
+    debugColumns,
+    debugHeaders,
+    debugRows,
+    debugTable,
+    defaultColumn,
     enableMultiRemove,
     enableMultiSort,
-    sortDescFirst,
+    enableSorting,
+    enableSortingRemoval,
+    getRowId,
+    manualSorting,
     maxMultiSortColCount,
+    meta,
+    renderFallbackValue,
+    sortDescFirst,
     sortingFns,
+    state: {
+      rowSelection: computedRowSelection,
+      sorting,
+      ...(enablePagination ? { pagination } : {}),
+    },
+    onSortingChange,
     ...(isMultiSortEvent ? { isMultiSortEvent } : {}),
     enableRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     onRowSelectionChange: (updaterOrValue) =>
       onRowSelectionChange(
         Object.keys(runIfFunc(updaterOrValue, computedRowSelection)),
       ),
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     ...(enablePagination
       ? {
-          pageCount,
-          manualPagination,
           autoResetPageIndex,
+          getPaginationRowModel: getPaginationRowModel(),
+          manualPagination,
+          pageCount,
           onPaginationChange: (updaterOrValue) => {
             const { pageIndex, pageSize } = runIfFunc(
               updaterOrValue,
@@ -488,7 +500,6 @@ export const useTable = <Y extends RowData>({
             setInternalPageIndex(pageIndex)
             setInternalPageSize(pageSize)
           },
-          getPaginationRowModel: getPaginationRowModel(),
         }
       : {}),
   })
@@ -505,159 +516,128 @@ export const useTable = <Y extends RowData>({
   )
 
   const state = getState()
-  const headerGroups = getHeaderGroups()
-  const footerGroups = getFooterGroups()
-  const { rows, flatRows, rowsById } = getRowModel()
+  const _headerGroups = getHeaderGroups()
+  const _footerGroups = getFooterGroups()
+  const flatColumns = getAllFlatColumns()
+  const { flatRows, rows, rowsById } = getRowModel()
   const totalPage = getPageCount()
 
+  const headerGroups = useMemo(
+    () => generateGroups<Y>(_headerGroups),
+    [_headerGroups],
+  )
+
+  const footerGroups = useMemo(
+    () => generateGroups<Y>(_footerGroups, true),
+    [_footerGroups],
+  )
+
+  const headerCount = headerGroups.length
+  const rowCount = rows.length
+  const footerCount = withFooter ? footerGroups.length : 0
+  const colCount = flatColumns.length
+  const maxRowCount = headerCount + rowCount + footerCount - 1
+  const maxColIndex = colCount - 1
+
+  const getOnKeyDown = useCallback(
+    (rowIndex: number, colIndex: number) =>
+      (ev: KeyboardEvent<HTMLTableCellElement>) => {
+        const onFocusCell = (nextRowIndex: number, nextColIndex: number) => {
+          const currentEl = cellMapRef.current.get(`${rowIndex}-${colIndex}`)
+          const nextEl = cellMapRef.current.get(
+            `${nextRowIndex}-${nextColIndex}`,
+          )
+          const isNotfound = !nextEl
+          const isSome = currentEl === nextEl
+
+          if (isSome || isNotfound) {
+            const onKeyDown = getOnKeyDown(nextRowIndex, nextColIndex)
+
+            onKeyDown(ev)
+          } else {
+            setFocusedCell([nextRowIndex, nextColIndex])
+
+            setTimeout(() => {
+              cellMapRef.current
+                .get(`${nextRowIndex}-${nextColIndex}`)
+                ?.current?.focus()
+            })
+          }
+        }
+
+        const actions: { [key: string]: KeyboardEventHandler } = {
+          ArrowDown: () => {
+            if (rowIndex >= maxRowCount) return
+
+            onFocusCell(rowIndex + 1, colIndex)
+          },
+          ArrowLeft: () => {
+            if (colIndex <= 0) return
+
+            onFocusCell(rowIndex, colIndex - 1)
+          },
+          ArrowRight: () => {
+            if (colIndex >= maxColIndex) return
+
+            onFocusCell(rowIndex, colIndex + 1)
+          },
+          ArrowUp: () => {
+            if (rowIndex <= 0) return
+
+            onFocusCell(rowIndex - 1, colIndex)
+          },
+          End: () => {
+            onFocusCell(rowIndex, maxColIndex)
+          },
+          Home: () => {
+            onFocusCell(rowIndex, 0)
+          },
+        }
+
+        const action = actions[ev.key]
+
+        if (!action) return
+
+        ev.preventDefault()
+        action(ev)
+      },
+    [maxColIndex, maxRowCount],
+  )
+
   return {
-    state,
-    getTableProps,
-    headerGroups,
-    footerGroups,
-    rows,
-    flatRows,
-    rowsById,
+    cellMapRef,
     enableRowSelection,
-    rowsClickSelect,
-    onClickRow,
-    onDoubleClickRow,
-    setPageIndex,
-    previousPage,
-    nextPage,
+    flatRows,
+    focusedCell,
+    footerGroups,
     getCanNextPage,
     getCanPreviousPage,
-    setPageSize,
-    totalPage,
+    getOnKeyDown,
+    headerGroups,
+    isFocusable,
+    nextPage,
     pageSizeList: computedPageSizeList,
-    headerGroupProps,
-    headerProps,
+    previousPage,
+    rowHeader,
+    rows,
+    rowsById,
+    rowsClickSelect,
+    setPageIndex,
+    setPageSize,
+    state,
+    totalPage,
+    withFooter,
+    cellProps,
     footerGroupProps,
     footerProps,
-    sortIconProps,
+    getTableProps,
+    headerGroupProps,
+    headerProps,
     rowProps,
-    cellProps,
+    sortIconProps,
+    onClickRow,
+    onDoubleClickRow,
   }
 }
 
-export type UseTableReturn = ReturnType<typeof useTable>
-
-const Center = ui("div", {
-  baseStyle: {
-    w: "100%",
-    h: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-})
-
-const TotalCheckbox = <Y extends RowData>({
-  table,
-  checkboxProps,
-  enablePagination,
-  disabledRowIds = [],
-}: {
-  table: HeaderContext<Y, unknown>["table"]
-  checkboxProps: CheckboxProps
-  enablePagination: boolean
-  disabledRowIds?: string[]
-}) => {
-  const {
-    getState,
-    getRowModel,
-    getIsAllRowsSelected,
-    getIsSomeRowsSelected,
-    getToggleAllRowsSelectedHandler,
-    getIsAllPageRowsSelected,
-    getIsSomePageRowsSelected,
-    getToggleAllPageRowsSelectedHandler,
-  } = table
-
-  const state = getState()
-  const { rows } = getRowModel()
-  const rowIds = rows.map(({ id }) => id)
-  const selectedRowIds = Object.keys(state.rowSelection)
-  const unselectedRowIds = rowIds.filter((id) => !selectedRowIds.includes(id))
-
-  const isAllChecked = unselectedRowIds.every((id) =>
-    disabledRowIds.includes(id),
-  )
-  const isChecked = !enablePagination
-    ? getIsAllRowsSelected()
-    : getIsAllPageRowsSelected()
-  const isIndeterminate = !enablePagination
-    ? getIsSomeRowsSelected()
-    : getIsSomePageRowsSelected()
-  const onChange = !enablePagination
-    ? getToggleAllRowsSelectedHandler()
-    : getToggleAllPageRowsSelectedHandler()
-
-  return (
-    <Center>
-      <Checkbox
-        inputProps={{ "aria-label": "Select all row" }}
-        {...{ gap: 0, ...checkboxProps }}
-        isChecked={isAllChecked || isChecked}
-        {...(!isAllChecked ? { isIndeterminate } : {})}
-        onChange={handlerAll(checkboxProps.onChange, onChange)}
-      />
-    </Center>
-  )
-}
-
-export const mergeColumns = <Y extends RowData>({
-  enablePagination,
-  columns,
-  checkboxProps = {},
-  withFooterSelect,
-  selectColumnProps,
-  disabledRowIds,
-}: {
-  enablePagination: boolean
-  columns: Column<Y>[]
-  checkboxProps?: CheckboxProps
-  withFooterSelect?: boolean
-  selectColumnProps?: SelectColumn<Y>
-  disabledRowIds?: string[]
-}): InternalColumn<Y>[] => [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <TotalCheckbox
-        {...{ table, checkboxProps, enablePagination, disabledRowIds }}
-      />
-    ),
-    ...(withFooterSelect
-      ? {
-          footer: ({ table }) => (
-            <TotalCheckbox
-              {...{ table, checkboxProps, enablePagination, disabledRowIds }}
-            />
-          ),
-        }
-      : {}),
-    cell: ({ row }) => {
-      const { getIsSelected, getCanSelect, getToggleSelectedHandler } = row
-
-      return (
-        <Center>
-          <Checkbox
-            inputProps={{ "aria-label": "Select row" }}
-            {...{ gap: 0, ...checkboxProps }}
-            isChecked={getIsSelected()}
-            isDisabled={!getCanSelect()}
-            onChange={handlerAll(
-              checkboxProps.onChange,
-              getToggleSelectedHandler(),
-            )}
-          />
-        </Center>
-      )
-    },
-    "aria-hidden": ariaAttr(!withFooterSelect),
-    ...selectColumnProps,
-    css: { w: "0", ...selectColumnProps?.css },
-  },
-  ...columns,
-]
+export type UseTableReturn<Y extends RowData> = ReturnType<typeof useTable<Y>>

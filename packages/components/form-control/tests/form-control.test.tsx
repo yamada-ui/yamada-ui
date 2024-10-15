@@ -1,5 +1,5 @@
-import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
 import type { ComponentProps, FC } from "react"
+import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
 import { FormControl, useFormControlProps } from "../src"
 
 const Input: FC<ComponentProps<"input">> = (props) => {
@@ -15,7 +15,7 @@ describe("<FormControl />", () => {
 
   test("should render form control", () => {
     render(
-      <FormControl label="Email" helperMessage="Please enter your email">
+      <FormControl helperMessage="Please enter your email" label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -28,7 +28,7 @@ describe("<FormControl />", () => {
 
   test("should render invalid form control", () => {
     render(
-      <FormControl label="Email" isInvalid errorMessage="Email is required.">
+      <FormControl errorMessage="Email is required." isInvalid label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -42,11 +42,11 @@ describe("<FormControl />", () => {
   test("should be hidden helperMessage", () => {
     render(
       <FormControl
-        label="Email"
-        isInvalid
         errorMessage="Email is required."
         helperMessage="Please enter your email"
+        isInvalid
         isReplace
+        label="Email"
       >
         <Input type="email" />
       </FormControl>,
@@ -61,17 +61,15 @@ describe("<FormControl />", () => {
 
   test("should be appeared helperMessage", () => {
     render(
-      <>
-        <FormControl
-          label="Email"
-          isInvalid
-          errorMessage="Email is required."
-          helperMessage="Please enter your email"
-          isReplace={false}
-        >
-          <Input type="email" />
-        </FormControl>
-      </>,
+      <FormControl
+        errorMessage="Email is required."
+        helperMessage="Please enter your email"
+        isInvalid
+        isReplace={false}
+        label="Email"
+      >
+        <Input type="email" />
+      </FormControl>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Email is required.")),
@@ -83,7 +81,7 @@ describe("<FormControl />", () => {
 
   test("should be required", () => {
     render(
-      <FormControl label="Email" isRequired>
+      <FormControl isRequired label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -92,7 +90,7 @@ describe("<FormControl />", () => {
 
   test("should be disabled", () => {
     render(
-      <FormControl label="Email" isDisabled>
+      <FormControl isDisabled label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -101,7 +99,7 @@ describe("<FormControl />", () => {
 
   test("should be readonly", () => {
     render(
-      <FormControl label="Email" isReadOnly>
+      <FormControl isReadOnly label="Email">
         <Input type="email" />
       </FormControl>,
     )

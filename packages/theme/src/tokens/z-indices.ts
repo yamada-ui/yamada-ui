@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { ThemeTokens } from "@yamada-ui/core"
 
 export const zIndices: ThemeTokens = {

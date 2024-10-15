@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import { Ripple, useRipple } from "@yamada-ui/ripple"
 import type { UseClickableProps } from "@yamada-ui/use-clickable"
-import { useClickable } from "@yamada-ui/use-clickable"
 import type { Merge } from "@yamada-ui/utils"
+import { forwardRef, ui } from "@yamada-ui/core"
+import { Ripple, useRipple } from "@yamada-ui/ripple"
+import { useClickable } from "@yamada-ui/use-clickable"
 import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import { useTabsContext, useTabsDescendant } from "./tabs-context"
 
@@ -14,21 +14,21 @@ export const Tab = forwardRef<TabProps, "button">(
   (
     {
       className,
-      isDisabled,
-      isFocusable,
+      children,
       clickOnEnter,
       clickOnSpace,
-      children,
+      isDisabled,
+      isFocusable,
       ...props
     },
     ref,
   ) => {
     const {
-      selectedIndex,
-      isManual,
       disableRipple,
-      setSelectedIndex,
+      isManual,
+      selectedIndex,
       setFocusedIndex,
+      setSelectedIndex,
       styles,
     } = useTabsContext()
 
@@ -44,12 +44,12 @@ export const Tab = forwardRef<TabProps, "button">(
       if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
     }
 
-    const rest = useClickable({
+    const rest = useClickable<HTMLButtonElement>({
       ref: mergeRefs(register, ref),
-      isDisabled,
-      isFocusable,
       clickOnEnter,
       clickOnSpace,
+      isDisabled,
+      isFocusable,
       onClick: handlerAll(props.onClick, () => setSelectedIndex(index)),
     })
     const { onPointerDown, ...rippleProps } = useRipple({
@@ -58,27 +58,27 @@ export const Tab = forwardRef<TabProps, "button">(
     })
 
     const css: CSSUIObject = {
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
       alignItems: "center",
+      display: "flex",
       justifyContent: "center",
       outline: "0",
+      overflow: "hidden",
+      position: "relative",
       ...styles.tab,
     }
 
     return (
       <ui.button
         className={cx("ui-tabs__tab", className)}
-        __css={css}
         role="tab"
+        __css={css}
         {...props}
         {...rest}
         type="button"
-        tabIndex={isSelected ? 0 : -1}
         aria-selected={ariaAttr(isSelected)}
-        onPointerDown={onPointerDown}
+        tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
+        onPointerDown={onPointerDown}
       >
         {children}
 

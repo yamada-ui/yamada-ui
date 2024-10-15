@@ -1,8 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useRef, useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 import { Plus } from "@yamada-ui/lucide"
 import {
   Button,
@@ -12,15 +9,18 @@ import {
   IconButton,
   Link,
   Text,
-  Wrap,
   VStack,
+  Wrap,
 } from "@yamada-ui/react"
+import { useRef, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof FileButton>
 
 const meta: Meta<typeof FileButton> = {
-  title: "Components / Forms / FileButton",
   component: FileButton,
+  title: "Components / Forms / FileButton",
 }
 
 export default meta
@@ -32,8 +32,8 @@ export const basic: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Plus fontSize="2xl" />}
         aria-label="Upload file"
+        icon={<Plus fontSize="2xl" />}
       />
 
       <FileButton>
@@ -50,9 +50,9 @@ export const withMultiple: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         multiple
-        aria-label="Upload file"
       />
 
       <FileButton multiple>
@@ -69,9 +69,9 @@ export const withAccept: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Plus fontSize="2xl" />}
-        accept="image/png,image/jpeg"
         aria-label="Upload file"
+        accept="image/png,image/jpeg"
+        icon={<Plus fontSize="2xl" />}
       />
 
       <FileButton accept="image/png,image/jpeg">
@@ -141,7 +141,7 @@ export const withVariant: Story = () => {
 
 export const withBorderColor: Story = () => {
   return (
-    <FileButton isInvalid errorBorderColor="orange.500">
+    <FileButton errorBorderColor="orange.500" isInvalid>
       Upload
     </FileButton>
   )
@@ -154,22 +154,22 @@ export const isDisabled: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isDisabled
-        aria-label="Upload file"
       />
 
       <FileButton isDisabled>
-        {({ onClick, isDisabled }) => (
+        {({ isDisabled, onClick }) => (
           <Link
-            onClick={onClick}
-            opacity={isDisabled ? 0.4 : 1}
             cursor={isDisabled ? "not-allowed" : "pointer"}
+            opacity={isDisabled ? 0.4 : 1}
             _hover={
               isDisabled
                 ? { textDecoration: "inherit" }
                 : { textDecoration: "underline" }
             }
+            onClick={onClick}
           >
             Upload
           </Link>
@@ -177,9 +177,9 @@ export const isDisabled: Story = () => {
       </FileButton>
 
       <FormControl
+        helperMessage="Please select a file to upload."
         isDisabled
         label="Upload file"
-        helperMessage="Please select a file to upload."
       >
         <FileButton>Upload</FileButton>
       </FormControl>
@@ -194,21 +194,21 @@ export const isReadonly: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isReadOnly
-        aria-label="Upload file"
       />
 
       <FileButton isReadOnly>
-        {({ onClick, isReadOnly }) => (
+        {({ isReadOnly, onClick }) => (
           <Link
-            onClick={onClick}
             cursor={isReadOnly ? "default" : "pointer"}
             _hover={
               isReadOnly
                 ? { textDecoration: "inherit" }
                 : { textDecoration: "underline" }
             }
+            onClick={onClick}
           >
             Upload
           </Link>
@@ -216,9 +216,9 @@ export const isReadonly: Story = () => {
       </FileButton>
 
       <FormControl
+        helperMessage="Please select a file to upload."
         isReadOnly
         label="Upload file"
-        helperMessage="Please select a file to upload."
       >
         <FileButton>Upload</FileButton>
       </FormControl>
@@ -233,15 +233,15 @@ export const isInvalid: Story = () => {
 
       <FileButton
         as={IconButton}
+        aria-label="Upload file"
         icon={<Plus fontSize="2xl" />}
         isInvalid
-        aria-label="Upload file"
       />
 
       <FormControl
+        errorMessage="File is required."
         isInvalid
         label="Upload file"
-        errorMessage="File is required."
       >
         <FileButton>Upload</FileButton>
       </FormControl>
@@ -281,10 +281,10 @@ export const reactHookForm: Story = () => {
   const resetRef = useRef<() => void>(null)
   const {
     control,
-    handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
+    handleSubmit,
+    setValue,
+    watch,
   } = useForm<Data>()
 
   const onReset = () => {
@@ -298,18 +298,17 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
+        errorMessage={errors.fileButton?.message}
         isInvalid={!!errors.fileButton}
         label="Files"
-        errorMessage={errors.fileButton?.message}
       >
         <Controller
           name="fileButton"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
-          render={({ field: { ref, name, onChange, onBlur } }) => (
+          render={({ field: { ref, name, onBlur, onChange } }) => (
             <HStack>
               <FileButton
-                {...{ ref, name, onChange, onBlur }}
+                {...{ ref, name, onBlur, onChange }}
                 resetRef={resetRef}
               >
                 Upload
@@ -318,6 +317,7 @@ export const reactHookForm: Story = () => {
               <Button onClick={onReset}>Reset</Button>
             </HStack>
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 

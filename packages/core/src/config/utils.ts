@@ -1,10 +1,10 @@
 import type { CSSObject, Keyframes } from "@emotion/react"
-import { keyframes as emotionKeyframes } from "@emotion/react"
 import type { Dict } from "@yamada-ui/utils"
-import { isObject, isString } from "@yamada-ui/utils"
 import type { ColorMode, CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
+import { keyframes as emotionKeyframes } from "@emotion/react"
+import { isObject, isString, isUndefined } from "@yamada-ui/utils"
 
 export type Transform = (
   value: any,
@@ -14,10 +14,10 @@ export type Transform = (
 ) => any
 
 export const globalValues = new Set([
-  "none",
   "-moz-initial",
   "inherit",
   "initial",
+  "none",
   "revert",
   "unset",
 ])
@@ -55,7 +55,7 @@ export function splitValues(
     if (current === "(") depth++
     if (current === ")") depth--
 
-    if (cb(current, prev, next) && depth === 0) {
+    if (!isUndefined(current) && cb(current, prev, next) && depth === 0) {
       if (value) result.push(value.trim())
 
       if (addSeparator) result.push(current)
@@ -79,7 +79,7 @@ export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
-  return { isUnitless: !unit, value, unit }
+  return { isUnitless: !unit, unit, value }
 }
 
 export function tokenToVar(token: ThemeToken, value: any) {
@@ -95,7 +95,7 @@ export function tokenToVar(token: ThemeToken, value: any) {
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-      return theme.__cssMap[resolvedToken].ref
+      return theme.__cssMap[resolvedToken]?.ref
     } else {
       return fallbackValue ?? value
     }
@@ -103,7 +103,7 @@ export function tokenToVar(token: ThemeToken, value: any) {
 }
 
 export function mode<L, D>(light: L, dark: D) {
-  return function (colorMode: ColorMode | undefined = "light"): L | D {
+  return function (colorMode: ColorMode | undefined = "light"): D | L {
     return colorMode === "light" ? light : dark
   }
 }

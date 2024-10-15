@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
@@ -24,3 +24,6 @@ export const StepDescription = forwardRef<StepDescriptionProps, "p">(
     )
   },
 )
+
+StepDescription.displayName = "StepDescription"
+StepDescription.__ui__ = "StepDescription"

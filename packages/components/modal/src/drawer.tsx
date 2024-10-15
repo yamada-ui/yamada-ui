@@ -1,37 +1,21 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
-import { motionForwardRef } from "@yamada-ui/motion"
 import type { SlideProps } from "@yamada-ui/transitions"
-import { getValidChildren, findChildren } from "@yamada-ui/utils"
+import type { ModalProps } from "./modal"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
+import { motionForwardRef } from "@yamada-ui/motion"
+import { findChildren, getValidChildren } from "@yamada-ui/utils"
 import { DrawerContent } from "./drawer-content"
 import { DrawerOverlay } from "./drawer-overlay"
 import { Modal } from "./modal"
-import type { ModalProps } from "./modal"
 import { DrawerProvider } from "./modal-context"
 
 interface DrawerOptions {
-  /**
-   * The placement of the drawer.
-   *
-   * @default 'right'
-   */
-  placement?: SlideProps["placement"]
-  /**
-   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
-   */
-  isFullHeight?: boolean
   /**
    * If `true`, then the drawer will close on drag.
    *
    * @default false
    */
   closeOnDrag?: boolean
-  /**
-   * If `true`, display the drag bar when `closeOnDrag` is `true`.
-   *
-   * @default true
-   */
-  withDragBar?: boolean
   /**
    * Applies constraints on the permitted draggable area.
    *
@@ -57,6 +41,22 @@ interface DrawerOptions {
    */
   dragVelocity?: number
   /**
+   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
+   */
+  isFullHeight?: boolean
+  /**
+   * The placement of the drawer.
+   *
+   * @default 'right'
+   */
+  placement?: SlideProps["placement"]
+  /**
+   * If `true`, display the drag bar when `closeOnDrag` is `true`.
+   *
+   * @default true
+   */
+  withDragBar?: boolean
+  /**
    * Props for the blank area when `closeOnDrag` is `true`.
    */
   blankForDragProps?: CSSUIObject
@@ -65,12 +65,12 @@ interface DrawerOptions {
 export interface DrawerProps
   extends Omit<
       ModalProps,
-      | "scrollBehavior"
       | "animation"
-      | "outside"
-      | "placement"
       | "dragConstraints"
       | "dragElastic"
+      | "outside"
+      | "placement"
+      | "scrollBehavior"
       | keyof ThemeProps
     >,
     ThemeProps<"Drawer">,
@@ -82,40 +82,40 @@ export interface DrawerProps
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = motionForwardRef<DrawerProps, "div">(
-  ({ size, placement = "right", closeOnDrag = false, ...props }, ref) => {
+  ({ size, closeOnDrag = false, placement = "right", ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Drawer", {
       size,
-      placement,
       closeOnDrag,
+      placement,
       ...props,
     })
     const {
-      children,
-      isOpen,
-      onClose,
-      onOverlayClick,
-      onEsc,
-      onCloseComplete,
-      withCloseButton = !closeOnDrag,
-      withOverlay = true,
-      withDragBar = true,
       allowPinchZoom,
       autoFocus,
-      restoreFocus,
-      initialFocusRef,
-      finalFocusRef,
       blockScrollOnMount,
-      closeOnOverlay,
+      children,
       closeOnEsc,
-      lockFocusAcrossFrames,
-      duration = { enter: 0.4, exit: 0.3 },
+      closeOnOverlay,
       dragConstraints = 0,
       dragElastic = 0.1,
       dragOffset = 80,
       dragVelocity = 100,
+      duration = { enter: 0.4, exit: 0.3 },
+      finalFocusRef,
+      initialFocusRef,
+      isOpen,
+      lockFocusAcrossFrames,
+      restoreFocus,
+      withCloseButton = !closeOnDrag,
+      withDragBar = true,
+      withOverlay = true,
       blankForDragProps,
-      portalProps,
       containerProps,
+      portalProps,
+      onClose,
+      onCloseComplete,
+      onEsc,
+      onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps, ["isFullHeight"])
 
@@ -131,25 +131,25 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
         <Modal
           ref={ref}
           {...{
-            isOpen,
-            onClose,
-            onOverlayClick,
-            onEsc,
-            onCloseComplete,
-            withCloseButton: false,
-            withOverlay: false,
             allowPinchZoom,
             autoFocus,
-            restoreFocus,
-            initialFocusRef,
-            finalFocusRef,
             blockScrollOnMount,
-            closeOnOverlay,
             closeOnEsc,
-            lockFocusAcrossFrames,
+            closeOnOverlay,
             duration,
-            portalProps,
+            finalFocusRef,
+            initialFocusRef,
+            isOpen,
+            lockFocusAcrossFrames,
+            restoreFocus,
+            withCloseButton: false,
+            withOverlay: false,
             containerProps,
+            portalProps,
+            onClose,
+            onCloseComplete,
+            onEsc,
+            onOverlayClick,
           }}
         >
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
@@ -164,8 +164,8 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
               withDragBar,
               blankForDragProps,
               ...rest,
-              placement,
               closeOnDrag,
+              placement,
             }}
           >
             {cloneChildren}

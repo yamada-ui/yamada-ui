@@ -1,18 +1,18 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Tooltip, Text, Center } from "@yamada-ui/react"
+import { Center, Text, Tooltip } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Tooltip>
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components / Overlay / Tooltip",
   component: Tooltip,
+  title: "Components / Overlay / Tooltip",
 }
 
 export default meta
 
 export const basic: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Tooltip label="へっ！きたねぇ花火だ">
         <Text>Please Hover</Text>
       </Tooltip>
@@ -22,8 +22,8 @@ export const basic: Story = () => {
 
 export const withDuration: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Tooltip label="へっ！きたねぇ花火だ" duration={0.7}>
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Tooltip duration={0.7} label="へっ！きたねぇ花火だ">
         <Text>Please Hover</Text>
       </Tooltip>
     </Center>
@@ -32,7 +32,7 @@ export const withDuration: Story = () => {
 
 export const withOffset: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Tooltip label="へっ！きたねぇ花火だ" offset={[16, 16]}>
         <Text>Please Hover</Text>
       </Tooltip>
@@ -42,8 +42,8 @@ export const withOffset: Story = () => {
 
 export const withGutter: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Tooltip label="へっ！きたねぇ花火だ" gutter={32}>
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Tooltip gutter={32} label="へっ！きたねぇ花火だ">
         <Text>Please Hover</Text>
       </Tooltip>
     </Center>
@@ -53,28 +53,28 @@ export const withGutter: Story = () => {
 export const withAnimation: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       flexDirection="column"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Tooltip label="へっ！きたねぇ花火だ" animation="scale">
+      <Tooltip animation="scale" label="へっ！きたねぇ花火だ">
         <Text>Open scale Tooltip</Text>
       </Tooltip>
 
-      <Tooltip label="へっ！きたねぇ花火だ" animation="top">
+      <Tooltip animation="top" label="へっ！きたねぇ花火だ">
         <Text>Open top Hover</Text>
       </Tooltip>
 
-      <Tooltip label="へっ！きたねぇ花火だ" animation="left">
+      <Tooltip animation="left" label="へっ！きたねぇ花火だ">
         <Text>Open left Hover</Text>
       </Tooltip>
 
-      <Tooltip label="へっ！きたねぇ花火だ" animation="bottom">
+      <Tooltip animation="bottom" label="へっ！きたねぇ花火だ">
         <Text>Open bottom Hover</Text>
       </Tooltip>
 
-      <Tooltip label="へっ！きたねぇ花火だ" animation="right">
+      <Tooltip animation="right" label="へっ！きたねぇ花火だ">
         <Text>Open right Hover</Text>
       </Tooltip>
     </Center>
@@ -84,16 +84,16 @@ export const withAnimation: Story = () => {
 export const withDelay: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       flexDirection="column"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
-      <Tooltip label="へっ！きたねぇ花火だ" placement="top" openDelay={500}>
+      <Tooltip label="へっ！きたねぇ花火だ" openDelay={500} placement="top">
         <Text>Delay Open 500ms</Text>
       </Tooltip>
 
-      <Tooltip label="へっ！きたねぇ花火だ" placement="bottom" closeDelay={500}>
+      <Tooltip closeDelay={500} label="へっ！きたねぇ花火だ" placement="bottom">
         <Text>Delay Close 500ms</Text>
       </Tooltip>
     </Center>
@@ -103,10 +103,10 @@ export const withDelay: Story = () => {
 export const withPlacement: Story = () => {
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       flexDirection="column"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Tooltip label="へっ！きたねぇ花火だ" placement="top">
         <Text>Open top Tooltip</Text>
@@ -161,8 +161,8 @@ export const withPlacement: Story = () => {
 
 export const withDisabled: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Tooltip label="へっ！きたねぇ花火だ" isDisabled>
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Tooltip isDisabled label="へっ！きたねぇ花火だ">
         <Text>Please Hover</Text>
       </Tooltip>
     </Center>
@@ -171,8 +171,8 @@ export const withDisabled: Story = () => {
 
 export const alwaysOpen: Story = () => {
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
-      <Tooltip label="へっ！きたねぇ花火だ" isOpen>
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Tooltip isOpen label="へっ！きたねぇ花火だ">
         <Text>Please Hover</Text>
       </Tooltip>
     </Center>

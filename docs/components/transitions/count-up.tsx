@@ -1,3 +1,5 @@
+import type { MotionProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import {
   animate,
   isNumber,
@@ -5,12 +7,10 @@ import {
   useMotionValue,
   useTransform,
 } from "@yamada-ui/react"
-import type { MotionProps } from "@yamada-ui/react"
 import { memo, useEffect } from "react"
-import type { FC } from "react"
 
 export interface CountUpProps extends MotionProps<"span"> {
-  count: number | null
+  count: null | number
 }
 
 export const CountUp: FC<CountUpProps> = memo(

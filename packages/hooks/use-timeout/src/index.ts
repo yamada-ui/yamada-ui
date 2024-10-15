@@ -8,14 +8,14 @@ import { useEffect } from "react"
  */
 export const useTimeout = (
   callback: (...args: any[]) => void,
-  delay: number | null,
+  delay: null | number,
 ) => {
   const func = useCallbackRef(callback)
 
   useEffect(() => {
     if (delay == null) return undefined
 
-    let timeoutId: number | null = null
+    let timeoutId: null | number = null
 
     timeoutId = window.setTimeout(func, delay)
 

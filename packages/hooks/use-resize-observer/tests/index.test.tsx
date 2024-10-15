@@ -76,7 +76,7 @@ describe("useElementSize", () => {
   })
 
   const ButtonWithSize = () => {
-    const { ref, width, height } = useElementSize()
+    const { ref, height, width } = useElementSize()
     return (
       <button ref={ref}>
         {width} x {height}

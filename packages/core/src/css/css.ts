@@ -1,14 +1,14 @@
 import type { Dict } from "@yamada-ui/utils"
-import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
 import type { StyleConfig } from "../config"
-import { DEFAULT_VAR_PREFIX } from "../constant"
 import type { PseudoProperty } from "../pseudos"
-import { pseudos } from "../pseudos"
 import type { ProcessSkipProperty, StyleProperty } from "../styles"
-import { processSkipProperties, styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
+import { DEFAULT_VAR_PREFIX } from "../constant"
+import { pseudos } from "../pseudos"
+import { processSkipProperties, styles } from "../styles"
 
 function isProcessSkip(key: string): boolean {
   return processSkipProperties.includes(key as ProcessSkipProperty)
@@ -24,7 +24,7 @@ function isAdditionalObject(obj: Dict) {
 
     return keys.every((key) => {
       return (
-        breakpointKeys?.includes(key) ||
+        breakpointKeys.includes(key) ||
         key.startsWith("@") ||
         key.startsWith("_")
       )
@@ -55,7 +55,7 @@ function expandResponsiveObject(
   value: Dict,
   queries: BreakpointQueries,
 ): Dict {
-  return queries.reduce((prev, { breakpoint, query }) => {
+  return queries.reduce<Dict>((prev, { breakpoint, query }) => {
     const breakpointValue = value[breakpoint]
 
     if (query) {
@@ -67,7 +67,7 @@ function expandResponsiveObject(
     }
 
     return prev
-  }, {} as Dict)
+  }, {})
 }
 
 function expandAdditionalObject(
@@ -75,7 +75,7 @@ function expandAdditionalObject(
   value: Dict,
   queries: BreakpointQueries,
 ) {
-  return Object.entries(value).reduce((prev, [query, value]) => {
+  return Object.entries(value).reduce<Dict>((prev, [query, value]) => {
     if (query === "base") {
       if (isArray(value)) {
         prev = merge(prev, expandColorModeArray(key, value, queries))
@@ -100,14 +100,14 @@ function expandAdditionalObject(
     }
 
     return prev
-  }, {} as Dict)
+  }, {})
 }
 
 function expandCSS(css: Dict) {
   return function (theme: StyledTheme): Dict {
     if (!theme.__breakpoints) return css
 
-    const { keys, isResponsive, queries } = theme.__breakpoints
+    const { isResponsive, keys, queries } = theme.__breakpoints
 
     let computedCSS: Dict = {}
 
@@ -162,10 +162,10 @@ function valueToVar(value: any, theme: StyledTheme) {
 
     return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
       if (isObject(theme.__cssMap) && value in theme.__cssMap) {
-        return theme.__cssMap[value].ref
-      } else {
-        return `var(--${prefix}-${value})`
+        if (theme.__cssMap[value]?.ref) return theme.__cssMap[value].ref
       }
+
+      return `var(--${prefix}-${value})`
     })
   } else {
     return value
@@ -179,7 +179,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
   ) {
     function createCSS(
       cssOrFunc: CSSObjectOrFunc | CSSUIObject,
-      isNested: boolean = false,
+      isNested = false,
     ): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
@@ -196,8 +196,10 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
         if (prop in pseudos) prop = pseudos[prop as PseudoProperty]
 
-        let style: StyleConfig | true | undefined =
-          styles[prop as StyleProperty]
+        let style = styles[prop as StyleProperty] as
+          | StyleConfig
+          | true
+          | undefined
 
         if (style === true) style = { properties: prop }
 

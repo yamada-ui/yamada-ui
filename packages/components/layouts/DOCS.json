@@ -1,276 +1,276 @@
 {
-  "Box": {},
-  "Flex": {
-    "align": {
-      "type": "UIValue<AlignItems>",
-      "required": false,
-      "description": "The CSS `align-items` property."
-    },
-    "basis": {
-      "type": "UIValue<number | \"content\" | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | \"fit-content\">",
-      "required": false,
-      "description": "The CSS `flex-basis` property."
-    },
-    "direction": {
-      "type": "UIValue<FlexDirection>",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
-    },
-    "grow": {
-      "type": "UIValue<FlexGrow>",
-      "required": false,
-      "description": "The CSS `flex-grow` property."
-    },
-    "justify": {
-      "type": "UIValue<JustifyContent>",
-      "required": false,
-      "description": "The CSS `justify-content` property."
-    },
-    "shrink": {
-      "type": "UIValue<FlexShrink>",
-      "required": false,
-      "description": "The CSS `flex-shrink` property."
-    },
-    "wrap": {
-      "type": "UIValue<FlexWrap>",
-      "required": false,
-      "description": "The CSS `flex-wrap` property."
-    }
-  },
-  "Center": {},
-  "Grid": {
-    "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridArea | [GridArea, GridArea] | undefined; ... 5 more ...; base?: GridArea | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-area` property."
-    },
-    "autoColumns": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-auto-columns` property."
-    },
-    "autoFlow": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | (string & {}) | \"dense\" | { [x: string & {}]: GridAutoFlow | [GridAutoFlow, GridAutoFlow] | undefined; ... 5 more ...; base?: GridAutoFlow | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledThem...",
-      "required": false,
-      "description": "The CSS `grid-auto-flow` property."
-    },
-    "autoRows": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-auto-rows` property."
-    },
-    "column": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridColumn | [GridColumn, GridColumn] | undefined; ... 5 more ...; base?: GridColumn | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `grid-column` property."
-    },
-    "row": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridRow | [GridRow, GridRow] | undefined; ... 5 more ...; base?: GridRow | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-row` property."
-    },
-    "templateAreas": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"none\" | { [x: string & {}]: GridTemplateAreas | [GridTemplateAreas, GridTemplateAreas] | undefined; ... 5 more ...; base?: GridTemplateAreas | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledThem...",
-      "required": false,
-      "description": "The CSS `grid-template-areas` property."
-    },
-    "templateColumns": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-template-columns` property."
-    },
-    "templateRows": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-template-rows` property."
-    }
-  },
-  "SimpleGrid": {
-    "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridArea | [GridArea, GridArea] | undefined; ... 5 more ...; base?: GridArea | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-area` property."
-    },
-    "autoColumns": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-auto-columns` property."
-    },
-    "autoFlow": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | (string & {}) | \"dense\" | { [x: string & {}]: GridAutoFlow | [GridAutoFlow, GridAutoFlow] | undefined; ... 5 more ...; base?: GridAutoFlow | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledThem...",
-      "required": false,
-      "description": "The CSS `grid-auto-flow` property."
-    },
-    "autoRows": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-auto-rows` property."
-    },
-    "column": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridColumn | [GridColumn, GridColumn] | undefined; ... 5 more ...; base?: GridColumn | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `grid-column` property."
-    },
-    "columns": {
-      "type": "UIValue<number>",
-      "required": false,
-      "description": "The number of columns."
-    },
-    "minChildWidth": {
-      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 72 more ... | \"min-intrinsic\">",
-      "required": false,
-      "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length."
-    },
-    "row": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridRow | [GridRow, GridRow] | undefined; ... 5 more ...; base?: GridRow | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-row` property."
-    },
-    "templateAreas": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"none\" | { [x: string & {}]: GridTemplateAreas | [GridTemplateAreas, GridTemplateAreas] | undefined; ... 5 more ...; base?: GridTemplateAreas | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledThem...",
-      "required": false,
-      "description": "The CSS `grid-template-areas` property."
-    },
-    "templateColumns": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-template-columns` property."
-    },
-    "templateRows": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | (string & {}) | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-template-rows` property."
-    }
-  },
-  "GridItem": {
-    "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridArea | [GridArea, GridArea] | undefined; ... 5 more ...; base?: GridArea | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `grid-area` property."
-    },
-    "colEnd": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridColumnEnd | [GridColumnEnd, GridColumnEnd] | undefined; ... 5 more ...; base?: GridColumnEnd | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledThem...",
-      "required": false,
-      "description": "The CSS `grid-column-end` property."
-    },
-    "colSpan": {
-      "type": "UIValue<number>",
-      "required": false,
-      "description": "The number of columns the grid item should `span`."
-    },
-    "colStart": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridColumnStart | [GridColumnStart, GridColumnStart] | undefined; ... 5 more ...; base?: GridColumnStart | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: St...",
-      "required": false,
-      "description": "The CSS `grid-column-start` property."
-    },
-    "rowEnd": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridRowEnd | [GridRowEnd, GridRowEnd] | undefined; ... 5 more ...; base?: GridRowEnd | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `grid-row-end` property."
-    },
-    "rowSpan": {
-      "type": "UIValue<number>",
-      "required": false,
-      "description": "The number of rows the grid item should `span`."
-    },
-    "rowStart": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | { [x: string & {}]: GridRowStart | [GridRowStart, GridRowStart] | undefined; ... 5 more ...; base?: GridRowStart | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) =...",
-      "required": false,
-      "description": "The CSS `grid-row-start` property."
-    }
-  },
-  "Container": {
-    "centerContent": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, container will center its children regardless of their width."
-    }
-  },
-  "Stack": {
-    "align": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"stretch\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `align-items` property."
-    },
-    "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
-    },
-    "divider": {
-      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "If `true`, each stack item will show a divider."
-    },
-    "justify": {
-      "type": "\"left\" | \"right\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"space-around\" | \"space-between\" | \"space-evenly\" | \"stretch\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `justify-content` property."
-    },
-    "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | { [x: string & {}]: FlexWrap | [FlexWrap, FlexWrap] | undefined; ... 5 more ...; base?: FlexWrap | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `flex-wrap` property."
-    }
-  },
-  "ZStack": {
-    "direction": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"",
-      "defaultValue": "bottom",
-      "required": false,
-      "description": "Stack in the specified direction."
-    },
-    "fit": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `true`, calculate the `width` and `height` of the element and assign container."
-    },
-    "reverse": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, reverse direction."
-    },
-    "startIndex": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "If set the stack will start from the given index."
-    }
-  },
-  "Spacer": {},
-  "Divider": {
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the divider."
-    },
-    "size": {
-      "type": "string",
-      "required": false,
-      "description": "The size of the Divider."
-    },
-    "variant": {
-      "defaultValue": "solid",
-      "type": "\"solid\" | \"dashed\" | \"dotted\"",
-      "required": false,
-      "description": "The variant of the Divider."
-    }
-  },
   "AspectRatio": {
     "ratio": {
       "type": "UIValue<number>",
       "defaultValue": "'4 / 3'",
-      "required": false,
-      "description": "The aspect ratio of the Box."
+      "description": "The aspect ratio of the Box.",
+      "required": false
+    }
+  },
+  "Box": {},
+  "Center": {},
+  "Container": {
+    "centerContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, container will center its children regardless of their width.",
+      "required": false
+    }
+  },
+  "Divider": {
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "description": "The orientation of the divider.",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Divider.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"dashed\" | \"dotted\" | \"solid\"",
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the Divider.",
+      "required": false
+    }
+  },
+  "Flex": {
+    "align": {
+      "type": "UIValue<AlignItems>",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "basis": {
+      "type": "UIValue<number | \"content\" | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | ... 69 more ... | \"fit-content\">",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "direction": {
+      "type": "UIValue<FlexDirection>",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "grow": {
+      "type": "UIValue<FlexGrow>",
+      "description": "The CSS `flex-grow` property.",
+      "required": false
+    },
+    "justify": {
+      "type": "UIValue<JustifyContent>",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "shrink": {
+      "type": "UIValue<FlexShrink>",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "wrap": {
+      "type": "UIValue<FlexWrap>",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "GridItem": {
+    "area": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-area` property.",
+      "required": false
+    },
+    "colEnd": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumnEnd | { [x: string]: GridColumnEnd | undefined; ... 5 more ...; xl?: GridColumnEnd | undefined; }, GridColumnEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "description": "The CSS `grid-column-end` property.",
+      "required": false
+    },
+    "colSpan": {
+      "type": "UIValue<number>",
+      "description": "The number of columns the grid item should `span`.",
+      "required": false
+    },
+    "colStart": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumnStart | { [x: string]: GridColumnStart | undefined; ... 5 more ...; xl?: GridColumnStart | undefined; }, GridColumnStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme)...",
+      "description": "The CSS `grid-column-start` property.",
+      "required": false
+    },
+    "rowEnd": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRowEnd | { [x: string]: GridRowEnd | undefined; ... 5 more ...; xl?: GridRowEnd | undefined; }, GridRowEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-row-end` property.",
+      "required": false
+    },
+    "rowSpan": {
+      "type": "UIValue<number>",
+      "description": "The number of rows the grid item should `span`.",
+      "required": false
+    },
+    "rowStart": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRowStart | { [x: string]: GridRowStart | undefined; ... 5 more ...; xl?: GridRowStart | undefined; }, GridRowStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...",
+      "description": "The CSS `grid-row-start` property.",
+      "required": false
+    }
+  },
+  "Grid": {
+    "area": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-area` property.",
+      "required": false
+    },
+    "autoColumns": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-auto-columns` property.",
+      "required": false
+    },
+    "autoFlow": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"column\" | \"row\" | \"dense\" | [GridAutoFlow | { [x: string]: GridAutoFlow | undefined; ... 5 more ...; xl?: GridAutoFlow | undefined; }, GridAutoFlow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "description": "The CSS `grid-auto-flow` property.",
+      "required": false
+    },
+    "autoRows": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-auto-rows` property.",
+      "required": false
+    },
+    "column": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-column` property.",
+      "required": false
+    },
+    "row": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-row` property.",
+      "required": false
+    },
+    "templateAreas": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"none\" | [GridTemplateAreas | { [x: string]: GridTemplateAreas | undefined; ... 5 more ...; xl?: GridTemplateAreas | undefined; }, GridTemplateAreas | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "description": "The CSS `grid-template-areas` property.",
+      "required": false
+    },
+    "templateColumns": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-template-columns` property.",
+      "required": false
+    },
+    "templateRows": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-template-rows` property.",
+      "required": false
+    }
+  },
+  "SimpleGrid": {
+    "area": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-area` property.",
+      "required": false
+    },
+    "autoColumns": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-auto-columns` property.",
+      "required": false
+    },
+    "autoFlow": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"column\" | \"row\" | \"dense\" | [GridAutoFlow | { [x: string]: GridAutoFlow | undefined; ... 5 more ...; xl?: GridAutoFlow | undefined; }, GridAutoFlow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "description": "The CSS `grid-auto-flow` property.",
+      "required": false
+    },
+    "autoRows": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-auto-rows` property.",
+      "required": false
+    },
+    "column": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-column` property.",
+      "required": false
+    },
+    "columns": {
+      "type": "UIValue<number>",
+      "description": "The number of columns.",
+      "required": false
+    },
+    "minChildWidth": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 73 more ... | \"min-intrinsic\">",
+      "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length.",
+      "required": false
+    },
+    "row": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-row` property.",
+      "required": false
+    },
+    "templateAreas": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"none\" | [GridTemplateAreas | { [x: string]: GridTemplateAreas | undefined; ... 5 more ...; xl?: GridTemplateAreas | undefined; }, GridTemplateAreas | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "description": "The CSS `grid-template-areas` property.",
+      "required": false
+    },
+    "templateColumns": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-template-columns` property.",
+      "required": false
+    },
+    "templateRows": {
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `grid-template-rows` property.",
+      "required": false
+    }
+  },
+  "Spacer": {},
+  "Stack": {
+    "align": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"self-end\" | \"self-start\" | \"start\" | \"baseline\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "direction": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"column-reverse\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "divider": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "If `true`, each stack item will show a divider.",
+      "required": false
+    },
+    "justify": {
+      "type": "\"left\" | \"right\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"stretch\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "wrap": {
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | [FlexWrap | { [x: string]: FlexWrap | undefined; ... 5 more ...; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "ZStack": {
+    "direction": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n  | \"top-left\"\n  | \"top-right\"",
+      "defaultValue": "bottom",
+      "description": "Stack in the specified direction.",
+      "required": false
+    },
+    "fit": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, calculate the `width` and `height` of the element and assign container.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, reverse direction.",
+      "required": false
+    },
+    "startIndex": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "If set the stack will start from the given index.",
+      "required": false
     }
   }
 }

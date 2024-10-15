@@ -1,41 +1,49 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
+import type { PortalProps } from "@yamada-ui/portal"
+import type { FC, ReactNode } from "react"
+import type { AutocompleteCreateProps } from "./autocomplete-create"
+import type { AutocompleteEmptyProps } from "./autocomplete-empty"
+import type { AutocompleteIconProps } from "./autocomplete-icon"
+import type { AutocompleteListProps } from "./autocomplete-list"
+import type { UseAutocompleteProps } from "./use-autocomplete"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
-import type { PortalProps } from "@yamada-ui/portal"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
 import {
   AutocompleteDescendantsContextProvider,
   AutocompleteProvider,
   useAutocompleteContext,
 } from "./autocomplete-context"
 import { AutocompleteCreate } from "./autocomplete-create"
-import type { AutocompleteCreateProps } from "./autocomplete-create"
 import { AutocompleteEmpty } from "./autocomplete-empty"
-import type { AutocompleteEmptyProps } from "./autocomplete-empty"
-import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteIcon } from "./autocomplete-icon"
-import type { AutocompleteListProps } from "./autocomplete-list"
 import { AutocompleteList } from "./autocomplete-list"
-import type { UseAutocompleteProps } from "./use-autocomplete"
 import { useAutocomplete, useAutocompleteInput } from "./use-autocomplete"
 
 interface AutocompleteOptions {
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: string
   /**
    * The border color when the input is focused.
    */
   focusBorderColor?: string
   /**
-   * The border color when the input is invalid.
+   * The footer of the autocomplete content element.
    */
-  errorBorderColor?: string
+  footer?: FC<{ value: string | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The header of the autocomplete content element.
+   */
+  header?: FC<{ value: string | undefined; onClose: () => void }> | ReactNode
   /**
    * Props for autocomplete container element.
    */
@@ -45,28 +53,6 @@ interface AutocompleteOptions {
    */
   contentProps?: Omit<MotionProps, "children">
   /**
-   * Props for autocomplete list element.
-   */
-  listProps?: Omit<AutocompleteListProps, "children">
-  /**
-   * Props for autocomplete field element.
-   */
-  fieldProps?: Omit<AutocompleteFieldProps, "inputProps" | "children">
-  /**
-   * Props for autocomplete input element.
-   */
-  inputProps?: HTMLUIProps<"input">
-  /**
-   * Props for autocomplete icon element.
-   */
-  iconProps?: AutocompleteIconProps
-  /**
-   * Props to be forwarded to the portal component.
-   *
-   * @default '{ isDisabled: true }'
-   */
-  portalProps?: Omit<PortalProps, "children">
-  /**
    * Props for autocomplete create element.
    */
   createProps?: Omit<AutocompleteCreateProps, "children">
@@ -75,13 +61,27 @@ interface AutocompleteOptions {
    */
   emptyProps?: Omit<AutocompleteEmptyProps, "children">
   /**
-   * The header of the autocomplete content element.
+   * Props for autocomplete field element.
    */
-  header?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
+  fieldProps?: Omit<AutocompleteFieldProps, "children" | "inputProps">
   /**
-   * The footer of the autocomplete content element.
+   * Props for autocomplete icon element.
    */
-  footer?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
+  iconProps?: AutocompleteIconProps
+  /**
+   * Props for autocomplete input element.
+   */
+  inputProps?: HTMLUIProps<"input">
+  /**
+   * Props for autocomplete list element.
+   */
+  listProps?: Omit<AutocompleteListProps, "children">
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export interface AutocompleteProps
@@ -99,49 +99,48 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
     const [styles, mergedProps] = useComponentMultiStyle("Autocomplete", props)
     let {
       className,
-      defaultValue = "",
       color,
+      defaultValue = "",
+      footer,
       h,
+      header,
       height,
       minH,
       minHeight,
       containerProps,
       contentProps,
-      listProps,
-      fieldProps,
-      inputProps,
-      iconProps,
-      portalProps = { isDisabled: true },
       createProps,
       emptyProps,
-      header,
-      footer,
-      children,
+      fieldProps,
+      iconProps,
+      inputProps,
+      listProps,
+      portalProps = { isDisabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const {
-      value,
-      onClose,
+      allowCreate,
+      children,
       descendants,
+      inputValue,
+      isEmpty,
+      value,
       formControlProps,
-      getPopoverProps,
       getContainerProps,
       getFieldProps,
-      allowCreate,
-      isEmpty,
-      inputValue,
-      computedChildren,
+      getPopoverProps,
+      onClose,
       ...rest
-    } = useAutocomplete({ ...computedProps, defaultValue, children })
+    } = useAutocomplete({ ...computedProps, defaultValue })
 
     h ??= height
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
+      h: "fit-content",
+      w: "100%",
       ...styles.container,
     }
 
@@ -150,13 +149,13 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
         <AutocompleteProvider
           value={{
             ...rest,
-            value,
-            onClose,
-            formControlProps,
-            inputValue,
             allowCreate,
+            inputValue,
             isEmpty,
             styles,
+            value,
+            formControlProps,
+            onClose,
           }}
         >
           <Popover {...getPopoverProps()}>
@@ -179,39 +178,30 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                 <AutocompleteIcon {...iconProps} {...formControlProps} />
               </ui.div>
 
-              {!isEmpty ? (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    header={runIfFunc(header, { value, onClose })}
-                    footer={runIfFunc(footer, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
+              <Portal {...portalProps}>
+                <AutocompleteList
+                  footer={runIfFunc(footer, { value, onClose })}
+                  header={runIfFunc(header, { value, onClose })}
+                  contentProps={contentProps}
+                  {...listProps}
+                >
+                  {!isEmpty ? (
+                    <>
+                      {allowCreate ? (
+                        <AutocompleteCreate {...createProps} />
+                      ) : (
+                        <AutocompleteEmpty {...emptyProps} />
+                      )}
 
-                    {children ?? computedChildren}
-                  </AutocompleteList>
-                </Portal>
-              ) : (
-                <Portal {...portalProps}>
-                  <AutocompleteList
-                    header={runIfFunc(header, { value, onClose })}
-                    footer={runIfFunc(footer, { value, onClose })}
-                    contentProps={contentProps}
-                    {...listProps}
-                  >
-                    {allowCreate && inputValue ? (
-                      <AutocompleteCreate {...createProps} />
-                    ) : (
-                      <AutocompleteEmpty {...emptyProps} />
-                    )}
-                  </AutocompleteList>
-                </Portal>
-              )}
+                      {children}
+                    </>
+                  ) : allowCreate && inputValue ? (
+                    <AutocompleteCreate {...createProps} />
+                  ) : (
+                    <AutocompleteEmpty {...emptyProps} />
+                  )}
+                </AutocompleteList>
+              </Portal>
             </ui.div>
           </Popover>
         </AutocompleteProvider>
@@ -229,15 +219,15 @@ interface AutocompleteFieldProps
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
   ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {
-    const { label, inputValue, styles } = useAutocompleteContext()
+    const { inputValue, label, styles } = useAutocompleteContext()
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
       ...styles.field,
       cursor: "text",
     }
@@ -252,8 +242,8 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
           <ui.input
             className="ui-autocomplete__field__input"
             display="inline-block"
-            w="100%"
             placeholder={placeholder}
+            w="100%"
             {...getInputProps(
               { ...inputProps, value: inputValue || label || "" },
               ref,

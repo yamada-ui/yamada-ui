@@ -2,6 +2,8 @@ import type { ThemeAnimationTokens } from "@yamada-ui/react"
 
 export const animations: ThemeAnimationTokens = {
   gradient: {
+    duration: "10s",
+    iterationCount: "infinite",
     keyframes: {
       "0%": {
         bg: "red.500",
@@ -22,8 +24,6 @@ export const animations: ThemeAnimationTokens = {
         bg: "red.500",
       },
     },
-    duration: "10s",
-    iterationCount: "infinite",
     timingFunction: "linear",
   },
 }

@@ -1,10 +1,10 @@
-import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
+import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import { createContext, useContext, useMemo, useReducer, useRef } from "react"
 
 export interface Environment {
-  getWindow: () => Window | undefined
   getDocument: () => Document | undefined
+  getWindow: () => undefined | Window
 }
 
 export const defaultEnvironment: Environment = {
@@ -22,8 +22,8 @@ export interface EnvironmentProviderProps {
 
 export const EnvironmentProvider: FC<EnvironmentProviderProps> = ({
   children,
-  environment,
   disabled,
+  environment,
 }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
@@ -42,7 +42,7 @@ export const EnvironmentProvider: FC<EnvironmentProviderProps> = ({
     <EnvironmentContext.Provider value={context}>
       {children}
 
-      {enabled ? <span id="__ui_dev" hidden ref={ref} /> : null}
+      {enabled ? <span id="__ui_dev" ref={ref} hidden /> : null}
     </EnvironmentContext.Provider>
   )
 }

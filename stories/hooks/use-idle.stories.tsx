@@ -13,11 +13,11 @@ export const basic = () => {
   return (
     <Box
       bg={idle ? "blue.500" : "red.500"}
+      color="white"
       p="md"
       rounded="md"
-      color="white"
-      transitionProperty="all"
       transitionDuration="slower"
+      transitionProperty="all"
     >
       Current state: {idle ? "idle" : "not idle"}
     </Box>

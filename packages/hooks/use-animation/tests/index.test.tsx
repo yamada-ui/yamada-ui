@@ -6,21 +6,6 @@ import { useAnimation, useAnimationObserver, useDynamicAnimation } from "../src"
 const theme = {
   animations: {},
   transitions: {
-    property: {
-      common:
-        "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
-      colors: "background-color, border-color, color, fill, stroke",
-      dimensions: "width, height",
-      position: "left, right, top, bottom",
-      background: "background-color, background-image, background-position",
-    },
-
-    easing: {
-      "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
-      "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
-      "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
-    },
-
     duration: {
       "ultra-fast": "50ms",
       faster: "100ms",
@@ -30,12 +15,29 @@ const theme = {
       slower: "400ms",
       "ultra-slow": "500ms",
     },
+
+    easing: {
+      "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
+      "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
+    },
+
+    property: {
+      background: "background-color, background-image, background-position",
+      colors: "background-color, border-color, color, fill, stroke",
+      common:
+        "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
+      dimensions: "width, height",
+      position: "left, right, top, bottom",
+    },
   },
 }
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
     const style: AnimationStyle = {
+      duration: "10s",
+      iterationCount: "infinite",
       keyframes: {
         "0%": {
           bg: "red.500",
@@ -56,8 +58,6 @@ describe("useAnimation", () => {
           bg: "red.500",
         },
       },
-      duration: "10s",
-      iterationCount: "infinite",
       timingFunction: "linear",
     }
 
@@ -77,6 +77,8 @@ describe("useAnimation", () => {
   test("should generate a multi animation string", () => {
     const style: AnimationStyle[] = [
       {
+        duration: "10s",
+        iterationCount: "infinite",
         keyframes: {
           "0%": {
             bg: "red.500",
@@ -97,11 +99,11 @@ describe("useAnimation", () => {
             bg: "red.500",
           },
         },
-        duration: "10s",
-        iterationCount: "infinite",
         timingFunction: "linear",
       },
       {
+        duration: "10s",
+        iterationCount: "infinite",
         keyframes: {
           "0%": {
             h: "xs",
@@ -113,11 +115,11 @@ describe("useAnimation", () => {
             h: "xs",
           },
         },
-        duration: "10s",
-        iterationCount: "infinite",
         timingFunction: "linear",
       },
       {
+        duration: "10s",
+        iterationCount: "infinite",
         keyframes: {
           "0%": {
             w: "full",
@@ -129,8 +131,6 @@ describe("useAnimation", () => {
             w: "full",
           },
         },
-        duration: "10s",
-        iterationCount: "infinite",
         timingFunction: "linear",
       },
     ]
@@ -151,8 +151,10 @@ describe("useAnimation", () => {
 
 describe("useDynamicAnimation", () => {
   test("A animation should be changed dynamically", async () => {
-    const style: Record<string, AnimationStyle> = {
+    const style: { [key: string]: AnimationStyle } = {
       moveLeft: {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(400%)",
@@ -161,11 +163,11 @@ describe("useDynamicAnimation", () => {
             transform: "translateX(0%)",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
       moveRight: {
+        duration: "slow",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(0%)",
@@ -174,8 +176,6 @@ describe("useDynamicAnimation", () => {
             transform: "translateX(400%)",
           },
         },
-        duration: "slow",
-        fillMode: "forwards",
         timingFunction: "ease-out",
       },
     }
@@ -205,9 +205,11 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Multi animation should be changed dynamically", async () => {
-    const style: Record<string, AnimationStyle[]> = {
+    const style: { [key: string]: AnimationStyle[] } = {
       moveLeft: [
         {
+          duration: "slower",
+          fillMode: "forwards",
           keyframes: {
             "0%": {
               transform: "translateX(400%)",
@@ -216,11 +218,11 @@ describe("useDynamicAnimation", () => {
               transform: "translateX(0%)",
             },
           },
-          duration: "slower",
-          fillMode: "forwards",
           timingFunction: "ease-in-out",
         },
         {
+          duration: "slower",
+          fillMode: "forwards",
           keyframes: {
             "0%": {
               bg: "secondary",
@@ -229,13 +231,13 @@ describe("useDynamicAnimation", () => {
               bg: "primary",
             },
           },
-          duration: "slower",
-          fillMode: "forwards",
           timingFunction: "ease-in-out",
         },
       ],
       moveRight: [
         {
+          duration: "slower",
+          fillMode: "forwards",
           keyframes: {
             "0%": {
               transform: "translateX(0%)",
@@ -244,11 +246,11 @@ describe("useDynamicAnimation", () => {
               transform: "translateX(400%)",
             },
           },
-          duration: "slower",
-          fillMode: "forwards",
           timingFunction: "ease-in-out",
         },
         {
+          duration: "slower",
+          fillMode: "forwards",
           keyframes: {
             "0%": {
               bg: "primary",
@@ -257,8 +259,6 @@ describe("useDynamicAnimation", () => {
               bg: "secondary",
             },
           },
-          duration: "slower",
-          fillMode: "forwards",
           timingFunction: "ease-in-out",
         },
       ],
@@ -289,21 +289,10 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Should accept multiple keys", async () => {
-    const style: Record<string, AnimationStyle> = {
-      moveLeft: {
-        keyframes: {
-          "0%": {
-            transform: "translateX(400%)",
-          },
-          "100%": {
-            transform: "translateX(0%)",
-          },
-        },
-        duration: "slower",
-        fillMode: "forwards",
-        timingFunction: "ease-in-out",
-      },
+    const style: { [key: string]: AnimationStyle } = {
       gradients: {
+        duration: "10s",
+        iterationCount: "infinite",
         keyframes: {
           "0%": {
             bg: "red.500",
@@ -324,11 +313,24 @@ describe("useDynamicAnimation", () => {
             bg: "red.500",
           },
         },
-        duration: "10s",
-        iterationCount: "infinite",
         timingFunction: "linear",
       },
+      moveLeft: {
+        duration: "slower",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": {
+            transform: "translateX(400%)",
+          },
+          "100%": {
+            transform: "translateX(0%)",
+          },
+        },
+        timingFunction: "ease-in-out",
+      },
       moveRight: {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(0%)",
@@ -337,8 +339,6 @@ describe("useDynamicAnimation", () => {
             transform: "translateX(400%)",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
     }
@@ -367,8 +367,8 @@ describe("useDynamicAnimation", () => {
     )
   })
 
-  test("Should be undefined if no default key is set", async () => {
-    const style: Record<string, AnimationStyle> = {
+  test("Should be undefined if no default key is set", () => {
+    const style: { [key: string]: AnimationStyle } = {
       moveLeft: {
         keyframes: {},
       },
@@ -393,8 +393,8 @@ describe("useAnimationObserver", () => {
   test("should handle open and close animations correctly", () => {
     let isOpen = false
     const ref = { current: document.createElement("div") }
-    const { result, rerender } = renderHook(() =>
-      useAnimationObserver({ isOpen, ref }),
+    const { rerender, result } = renderHook(() =>
+      useAnimationObserver({ ref, isOpen }),
     )
 
     expect(result.current.present).toBeFalsy()

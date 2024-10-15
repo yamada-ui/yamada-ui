@@ -1,4 +1,4 @@
-import { render, a11y, screen } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import {
   Input,
   InputGroup,

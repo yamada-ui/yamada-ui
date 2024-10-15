@@ -5,22 +5,22 @@ import { Modal } from "./modal"
 
 export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
   baseStyle: {
+    body: {
+      overflow: "auto",
+    },
     container: ({ isFullHeight, placement }) => ({
       ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),
       [`rounded${toCamelCase(placement)}`]: 0,
     }),
-    inner: {},
-    body: {
-      overflow: "auto",
-    },
     dragBar: ({ placement }) => ({
       [`margin${toCamelCase(antonym(placement))}`]: "md",
       ...(placement === "top" || placement === "bottom"
-        ? { mx: "auto", w: "3xs", minH: "2" }
-        : { my: "auto", minW: "2", h: "3xs" }),
+        ? { minH: "2", mx: "auto", w: "3xs" }
+        : { h: "3xs", minW: "2", my: "auto" }),
       bg: ["blackAlpha.100", "whiteAlpha.100"],
       rounded: "full",
     }),
+    inner: {},
   },
 
   sizes: {
@@ -30,7 +30,7 @@ export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
     lg: { container: { maxW: "2xl" } },
     xl: { container: { maxW: "4xl" } },
     full: {
-      container: { minW: "100vw", minH: "100dvh", rounded: 0 },
+      container: { minH: "100dvh", minW: "100vw", rounded: 0 },
     },
   },
 

@@ -79,7 +79,7 @@ describe("extendTheme", () => {
 
     const expected = {
       ...defaultTheme,
-      colors: { ...defaultTheme.colors, tertiary: "#FF0", quaternary: "#00F" },
+      colors: { ...defaultTheme.colors, quaternary: "#00F", tertiary: "#FF0" },
     }
 
     expect(extendTheme(customTheme1, customTheme2)()).toStrictEqual(expected)
@@ -191,7 +191,7 @@ describe("extendComponent", () => {
       baseStyle: { display: "block" },
     })
 
-    const expected = merge(defaultTheme.components["Tag"], {
+    const expected = merge(defaultTheme.components.Tag, {
       baseStyle: { display: "block" },
     })
 
@@ -201,7 +201,7 @@ describe("extendComponent", () => {
   test("returns default style even if no style is set", () => {
     const style = extendComponent("Tag")
 
-    const expected = defaultTheme.components["Tag"]
+    const expected = defaultTheme.components.Tag
 
     expect(style).toStrictEqual(expected)
   })
@@ -216,7 +216,7 @@ describe("extendComponentSize", () => {
     })
 
     const expected = {
-      ...defaultTheme.components["Tag"].sizes,
+      ...defaultTheme.components.Tag.sizes,
       "3xl": {
         fontSize: "3xl",
       },
@@ -228,7 +228,7 @@ describe("extendComponentSize", () => {
   test("returns default size even if no size is set", () => {
     const sizes = extendComponentSize("Tag")
 
-    const expected = defaultTheme.components["Tag"].sizes
+    const expected = defaultTheme.components.Tag.sizes
 
     expect(sizes).toStrictEqual(expected)
   })
@@ -243,7 +243,7 @@ describe("extendComponentVariant", () => {
     })
 
     const expected = {
-      ...defaultTheme.components["Tag"].variants,
+      ...defaultTheme.components.Tag.variants,
       muted: {
         bg: "#333333",
       },
@@ -255,7 +255,7 @@ describe("extendComponentVariant", () => {
   test("returns default variant even if no variant is set", () => {
     const variants = extendComponentVariant("Tag")
 
-    const expected = defaultTheme.components["Tag"].variants
+    const expected = defaultTheme.components.Tag.variants
 
     expect(variants).toStrictEqual(expected)
   })
@@ -268,7 +268,7 @@ describe("extendComponentDefaultProps", () => {
     })
 
     const expected = {
-      ...defaultTheme.components["Tag"].defaultProps,
+      ...defaultTheme.components.Tag.defaultProps,
       colorScheme: "blue",
     }
 
@@ -278,7 +278,7 @@ describe("extendComponentDefaultProps", () => {
   test("returns default props even if no props is set", () => {
     const variants = extendComponentDefaultProps("Tag")
 
-    const expected = defaultTheme.components["Tag"].defaultProps
+    const expected = defaultTheme.components.Tag.defaultProps
 
     expect(variants).toStrictEqual(expected)
   })

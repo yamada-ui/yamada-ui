@@ -1,8 +1,8 @@
+import type { EventName } from "./utils"
 import { generateMDX } from "./document"
 import { generateMDXMap } from "./map"
 import { initMDX } from "./package"
 import { generateMDXPaths } from "./paths"
-import type { EventName } from "./utils"
 import { getLocale, getSlug, isDefaultLocale } from "./utils"
 
 initMDX()

@@ -1,27 +1,27 @@
 import type { UIStyle } from "@yamada-ui/core"
 
 export const globalStyle: UIStyle = {
-  body: {
-    fontFamily: "body",
-    bg: ["white", "black"],
-    color: ["black", "white"],
-    transitionProperty: "background-color",
-    transitionDuration: "normal",
-    lineHeight: "base",
-    overflowX: "hidden",
+  "*, *::before, *::after": {
+    borderColor: "border",
+    borderStyle: "solid",
+    borderWidth: "0",
+    wordWrap: "break-word",
   },
   "*::placeholder, *[data-placeholder]": {
     color: "blackAlpha.600",
+  },
+  body: {
+    bg: ["white", "black"],
+    color: ["black", "white"],
+    fontFamily: "body",
+    lineHeight: "base",
+    overflowX: "hidden",
+    transitionDuration: "normal",
+    transitionProperty: "background-color",
   },
   _dark: {
     "*::placeholder, *[data-placeholder]": {
       color: "whiteAlpha.400",
     },
-  },
-  "*, *::before, *::after": {
-    borderWidth: "0",
-    borderStyle: "solid",
-    borderColor: "border",
-    wordWrap: "break-word",
   },
 }

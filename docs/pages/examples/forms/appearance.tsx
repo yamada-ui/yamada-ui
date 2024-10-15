@@ -1,24 +1,25 @@
-import {
-  FormControl,
-  Autocomplete,
-  HelperMessage,
-  useRadioGroup,
-  HStack,
-  Box,
-  useRadio,
-  ui,
-  VStack,
-  Text,
-} from "@yamada-ui/react"
 import type {
   CSSUIProps,
   StackProps,
   UseRadioGroupReturn,
 } from "@yamada-ui/react"
-import { memo } from "react"
 import type { FC } from "react"
-import { Controller, useForm } from "react-hook-form"
 import type { SubmitHandler } from "react-hook-form"
+import {
+  Autocomplete,
+  Box,
+  FormControl,
+  HelperMessage,
+  HStack,
+  noop,
+  Text,
+  ui,
+  useRadio,
+  useRadioGroup,
+  VStack,
+} from "@yamada-ui/react"
+import { memo } from "react"
+import { Controller, useForm } from "react-hook-form"
 import { Form } from "./form"
 
 const FONT_ITEMS = [
@@ -38,50 +39,50 @@ export const Appearance: FC<AppearanceProps> = memo(({ ...rest }) => {
   const {
     control,
     formState: { errors },
-    setValue,
     handleSubmit,
+    setValue,
   } = useForm<Data>({ defaultValues: { font: "Inter" } })
   const { getContainerProps, getRadioProps } = useRadioGroup<string>({
     defaultValue: "light",
     onChange: (value) => setValue("theme", value),
   })
 
-  const onSubmit: SubmitHandler<Data> = () => {}
+  const onSubmit: SubmitHandler<Data> = noop
 
   return (
     <Form
-      title="Appearance"
       description="Customize the appearance of the app. Automatically switch between day and night themes."
       submit="Update appearance"
+      title="Appearance"
       onSubmit={handleSubmit(onSubmit)}
       {...rest}
     >
       <FormControl
-        label="Font"
-        helperMessage="This is the language that will be used in the dashboard."
-        isReplace={false}
-        isInvalid={!!errors.font?.message}
         errorMessage={errors.font?.message}
+        helperMessage="This is the language that will be used in the dashboard."
+        isInvalid={!!errors.font?.message}
+        isReplace={false}
+        label="Font"
       >
         <Controller
           name="font"
           control={control}
-          rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
             <Autocomplete
+              items={FONT_ITEMS}
               maxW="xs"
               placeholder="Select font"
-              items={FONT_ITEMS}
               {...field}
             />
           )}
+          rules={{ required: { message: "This is required.", value: true } }}
         />
       </FormControl>
 
       <FormControl
-        label="Theme"
-        isInvalid={!!errors.theme?.message}
         errorMessage={errors.theme?.message}
+        isInvalid={!!errors.theme?.message}
+        label="Theme"
       >
         <HelperMessage mb="sm">
           Select the theme for the dashboard.
@@ -102,7 +103,7 @@ type ThemeCardProps = ReturnType<UseRadioGroupReturn["getRadioProps"]>
 
 const ThemeCard: FC<ThemeCardProps> = (props) => {
   const { value } = props
-  const { getInputProps, getIconProps } = useRadio(props)
+  const { getIconProps, getInputProps } = useRadio(props)
   const isLight = value === "light"
   const bgColor: CSSUIProps["bg"] = isLight
     ? ["blackAlpha.200", "whiteAlpha.800"]
@@ -125,42 +126,42 @@ const ThemeCard: FC<ThemeCardProps> = (props) => {
         cursor="pointer"
         _checked={{ "& > div": { borderColor: "primary" } }}
       >
-        <Box p="1" rounded="10px" borderWidth="3px" borderColor="transparent">
+        <Box borderColor="transparent" borderWidth="3px" p="1" rounded="10px">
           <VStack
+            bg={bgColor}
+            gap={{ base: "3", sm: "2" }}
+            p={{ base: "3", sm: "2" }}
             rounded="md"
             w={{ base: "52", md: "full" }}
-            p={{ base: "3", sm: "2" }}
-            gap={{ base: "3", sm: "2" }}
-            bg={bgColor}
           >
             <VStack
+              bg={containerColor}
               gap={{ base: "3", sm: "1" }}
               p={{ base: "3", sm: "2" }}
-              bg={containerColor}
               rounded="4px"
             >
-              <Box w="full" h="2" bg={textColor} rounded="full" />
-              <Box w="full" h="2" bg={textColor} rounded="full" />
+              <Box bg={textColor} h="2" rounded="full" w="full" />
+              <Box bg={textColor} h="2" rounded="full" w="full" />
             </VStack>
 
             <HStack
+              bg={containerColor}
               gap={{ base: "3", sm: "1" }}
               p={{ base: "3", sm: "2" }}
-              bg={containerColor}
               rounded="4px"
             >
-              <Box boxSize="4" bg={textColor} rounded="full" />
-              <Box flex="1" h="2" bg={textColor} rounded="full" />
+              <Box bg={textColor} boxSize="4" rounded="full" />
+              <Box bg={textColor} flex="1" h="2" rounded="full" />
             </HStack>
 
             <HStack
+              bg={containerColor}
               gap={{ base: "3", sm: "1" }}
               p={{ base: "3", sm: "2" }}
-              bg={containerColor}
               rounded="4px"
             >
-              <Box boxSize="4" bg={textColor} rounded="full" />
-              <Box flex="1" h="2" bg={textColor} rounded="full" />
+              <Box bg={textColor} boxSize="4" rounded="full" />
+              <Box bg={textColor} flex="1" h="2" rounded="full" />
             </HStack>
           </VStack>
         </Box>
@@ -168,9 +169,9 @@ const ThemeCard: FC<ThemeCardProps> = (props) => {
         <Text
           as="span"
           display="block"
+          fontSize="sm"
           mt="sm"
           textAlign="center"
-          fontSize="sm"
         >
           {value.charAt(0).toUpperCase() + value.slice(1)}
         </Text>

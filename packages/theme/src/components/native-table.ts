@@ -1,16 +1,33 @@
 import type { ComponentMultiStyle, UIMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor, isGray, tintColor } from "@yamada-ui/utils"
+import { isGray, tintColor, transparentizeColor } from "@yamada-ui/utils"
 
 export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
   baseStyle: {
+    caption: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontFamily: "heading",
+      fontWeight: "medium",
+      textAlign: "center",
+    },
     container: {
       w: "100%",
     },
     table: {
+      borderCollapse: "collapse",
+      fontVariantNumeric: "lining-nums tabular-nums",
       h: "100%",
       w: "100%",
-      fontVariantNumeric: "lining-nums tabular-nums",
-      borderCollapse: "collapse",
+    },
+    td: {
+      textAlign: "start",
+    },
+    th: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontFamily: "heading",
+      fontWeight: "semibold",
+      letterSpacing: "wider",
+      textAlign: "start",
+      textTransform: "uppercase",
     },
     tr: {
       _disabled: {
@@ -21,51 +38,112 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
         },
       },
     },
-    th: {
-      fontFamily: "heading",
-      fontWeight: "semibold",
-      textAlign: "start",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      textTransform: "uppercase",
-      letterSpacing: "wider",
+  },
+
+  sizes: {
+    sm: {
+      caption: {
+        fontSize: "xs",
+        mt: 1,
+        px: 2,
+        py: 1,
+      },
+      container: {
+        gap: 2,
+      },
+      td: {
+        fontSize: "xs",
+        lineHeight: 5,
+        px: 2,
+        py: 1,
+      },
+      th: {
+        fontSize: "xs",
+        lineHeight: 5,
+        px: 2,
+        py: 1,
+      },
     },
-    td: {
-      textAlign: "start",
+    md: {
+      caption: {
+        fontSize: "sm",
+        mt: 2,
+        px: 3,
+        py: 2,
+      },
+      container: {
+        gap: 4,
+      },
+      td: {
+        fontSize: "sm",
+        lineHeight: 5,
+        px: 3,
+        py: 2,
+      },
+      th: {
+        fontSize: "sm",
+        lineHeight: 5,
+        px: 3,
+        py: 2,
+      },
     },
-    caption: {
-      fontFamily: "heading",
-      fontWeight: "medium",
-      textAlign: "center",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+    lg: {
+      caption: {
+        mt: 3,
+        px: 4,
+        py: 3,
+      },
+      container: {
+        gap: 6,
+      },
+      td: {
+        lineHeight: 6,
+        px: 4,
+        py: 3,
+      },
+      th: {
+        lineHeight: 6,
+        px: 4,
+        py: 3,
+      },
+    },
+    xl: {
+      caption: {
+        fontSize: "lg",
+        mt: 4,
+        px: 6,
+        py: 4,
+      },
+      container: {
+        gap: 8,
+      },
+      td: {
+        fontSize: "lg",
+        lineHeight: 6,
+        px: 6,
+        py: 4,
+      },
+      th: {
+        fontSize: "lg",
+        lineHeight: 6,
+        px: 6,
+        py: 4,
+      },
     },
   },
 
   variants: {
     simple: (({
-      theme: t,
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
+      highlightOnHover,
+      highlightOnSelected,
+      theme: t,
       withBorder,
       withColumnBorders,
-      highlightOnSelected,
-      highlightOnHover,
     }) => ({
       table: {
         ...(withBorder ? { borderWidth: "1px" } : {}),
-      },
-      th: {
-        borderBottomWidth: "1px",
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
-      },
-      td: {
-        borderBottomWidth: "1px",
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
       },
       tbody: {
         tr: {
@@ -84,8 +162,8 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
           ...(highlightOnHover
             ? {
                 cursor: "pointer",
-                transitionProperty: "common",
                 transitionDuration: "slow",
+                transitionProperty: "common",
                 _hover: {
                   bg: [
                     transparentizeColor(`${c}.400`, 0.08)(t, m),
@@ -96,6 +174,13 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
             : {}),
         },
       },
+      td: {
+        "&[data-is-numeric=true]": {
+          textAlign: "end",
+        },
+        borderBottomWidth: "1px",
+        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
+      },
       tfoot: {
         tr: {
           _last: {
@@ -103,31 +188,24 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
           },
         },
       },
+      th: {
+        "&[data-is-numeric=true]": {
+          textAlign: "end",
+        },
+        borderBottomWidth: "1px",
+        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
+      },
     })) as UIMultiStyle,
     striped: (({
-      theme: t,
-      colorMode: m,
       colorScheme: c = "gray",
+      colorMode: m,
+      highlightOnHover,
+      theme: t,
       withBorder,
       withColumnBorders,
-      highlightOnHover,
     }) => ({
       table: {
         ...(withBorder ? { borderWidth: "1px" } : {}),
-      },
-      th: {
-        borderBottomWidth: "1px",
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
-      },
-      td: {
-        borderBottomWidth: "1px",
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
       },
       tbody: {
         tr: {
@@ -142,8 +220,8 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
           ...(highlightOnHover
             ? {
                 cursor: "pointer",
-                transitionProperty: "common",
                 transitionDuration: "slow",
+                transitionProperty: "common",
                 _hover: {
                   bg: [
                     transparentizeColor(`${c}.400`, 0.08)(t, m),
@@ -154,6 +232,13 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
             : {}),
         },
       },
+      td: {
+        "&[data-is-numeric=true]": {
+          textAlign: "end",
+        },
+        borderBottomWidth: "1px",
+        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
+      },
       tfoot: {
         tr: {
           _last: {
@@ -161,105 +246,20 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
           },
         },
       },
+      th: {
+        "&[data-is-numeric=true]": {
+          textAlign: "end",
+        },
+        borderBottomWidth: "1px",
+        ...(withColumnBorders ? { _notLast: { borderRightWidth: "1px" } } : {}),
+      },
     })) as UIMultiStyle,
     unstyled: {},
   },
 
-  sizes: {
-    sm: {
-      container: {
-        gap: 2,
-      },
-      th: {
-        px: 2,
-        py: 1,
-        fontSize: "xs",
-        lineHeight: 5,
-      },
-      td: {
-        px: 2,
-        py: 1,
-        fontSize: "xs",
-        lineHeight: 5,
-      },
-      caption: {
-        mt: 1,
-        px: 2,
-        py: 1,
-        fontSize: "xs",
-      },
-    },
-    md: {
-      container: {
-        gap: 4,
-      },
-      th: {
-        px: 3,
-        py: 2,
-        fontSize: "sm",
-        lineHeight: 5,
-      },
-      td: {
-        px: 3,
-        py: 2,
-        fontSize: "sm",
-        lineHeight: 5,
-      },
-      caption: {
-        mt: 2,
-        px: 3,
-        py: 2,
-        fontSize: "sm",
-      },
-    },
-    lg: {
-      container: {
-        gap: 6,
-      },
-      th: {
-        px: 4,
-        py: 3,
-        lineHeight: 6,
-      },
-      td: {
-        px: 4,
-        py: 3,
-        lineHeight: 6,
-      },
-      caption: {
-        mt: 3,
-        px: 4,
-        py: 3,
-      },
-    },
-    xl: {
-      container: {
-        gap: 8,
-      },
-      th: {
-        px: 6,
-        py: 4,
-        fontSize: "lg",
-        lineHeight: 6,
-      },
-      td: {
-        px: 6,
-        py: 4,
-        fontSize: "lg",
-        lineHeight: 6,
-      },
-      caption: {
-        mt: 4,
-        px: 6,
-        py: 4,
-        fontSize: "lg",
-      },
-    },
-  },
-
   defaultProps: {
-    variant: "simple",
-    size: "md",
     colorScheme: "gray",
+    size: "md",
+    variant: "simple",
   },
 }

@@ -1,14 +1,5 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
-import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
-import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import type {
   CSSProperties,
   FC,
@@ -16,42 +7,54 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import { cloneElement, useMemo } from "react"
-import { Option } from "./option"
-import { OptionGroup } from "./option-group"
-import type { SelectItem } from "./select"
 import type { SelectIconProps } from "./select-icon"
-import { SelectIcon, SelectClearIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
-import { SelectList } from "./select-list"
 import type { UseSelectProps } from "./use-select"
 import {
-  useSelect,
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
+import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { Portal } from "@yamada-ui/portal"
+import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import { cloneElement, useMemo } from "react"
+import { SelectClearIcon, SelectIcon } from "./select-icon"
+import { SelectList } from "./select-list"
+import {
   SelectDescendantsContextProvider,
   SelectProvider,
+  useSelect,
   useSelectContext,
 } from "./use-select"
 
 interface MultiSelectOptions {
   /**
-   * If provided, generate options based on items.
-   */
-  items?: SelectItem[]
-  /**
    * The custom display value to use.
    */
   component?: FC<{
-    value: string | number
-    label: string
     index: number
+    label: string
+    value: string
     onRemove: MouseEventHandler<HTMLElement>
   }>
   /**
-   * The visual separator between each value.
-   *
-   * @default ','
+   * The border color when the input is invalid.
    */
-  separator?: string
+  errorBorderColor?: string
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
+  /**
+   * The footer of the multi select content element.
+   */
+  footer?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
+  /**
+   * The header of the multi select content element.
+   */
+  header?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
   /**
    * If `true`, display the multi select clear icon.
    *
@@ -59,21 +62,19 @@ interface MultiSelectOptions {
    */
   isClearable?: boolean
   /**
-   * The border color when the input is focused.
+   * The visual separator between each value.
+   *
+   * @default ','
    */
-  focusBorderColor?: string
+  separator?: string
   /**
-   * The border color when the input is invalid.
+   * Props for multi select clear icon element.
    */
-  errorBorderColor?: string
+  clearIconProps?: SelectIconProps
   /**
    * Props for multi select container element.
    */
   containerProps?: Omit<HTMLUIProps, "children">
-  /**
-   * Props for multi select list element.
-   */
-  listProps?: Omit<SelectListProps, "children">
   /**
    * Props for multi select field element.
    */
@@ -83,28 +84,20 @@ interface MultiSelectOptions {
    */
   iconProps?: SelectIconProps
   /**
-   * Props for multi select clear icon element.
+   * Props for multi select list element.
    */
-  clearIconProps?: SelectIconProps
+  listProps?: Omit<SelectListProps, "children">
   /**
    * Props to be forwarded to the portal component.
    *
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
-  /**
-   * The header of the multi select content element.
-   */
-  header?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
-  /**
-   * The footer of the multi select content element.
-   */
-  footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
 }
 
 export interface MultiSelectProps
   extends ThemeProps<"MultiSelect">,
-    Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty">,
+    Omit<UseSelectProps<string[]>, "isEmpty" | "placeholderInOptions">,
     MultiSelectOptions {}
 
 /**
@@ -116,98 +109,60 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   let {
     className,
-    defaultValue = [],
-    component,
-    separator,
-    isClearable = true,
-    items = [],
+    closeOnSelect = false,
     color,
+    component,
+    defaultValue = [],
+    footer,
     h,
+    header,
     height,
+    isClearable = true,
     minH,
     minHeight,
-    closeOnSelect = false,
+    separator,
+    clearIconProps,
     containerProps,
-    listProps,
     fieldProps,
     iconProps,
-    clearIconProps,
+    listProps,
     portalProps = { isDisabled: true },
-    header,
-    footer,
-    children,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const validChildren = getValidChildren(children)
-  let computedChildren: ReactElement[] = []
-
-  if (!validChildren.length && items.length) {
-    computedChildren = items
-      .map((item, i) => {
-        if ("value" in item) {
-          const { label, value, ...props } = item
-
-          return (
-            <Option key={i} value={value} {...props}>
-              {label}
-            </Option>
-          )
-        } else if ("items" in item) {
-          const { label, items = [], ...props } = item
-
-          return (
-            <OptionGroup
-              key={i}
-              label={label ?? ""}
-              {...(props as HTMLUIProps<"ul">)}
-            >
-              {items.map(({ label, value, ...props }, i) => (
-                <Option key={i} value={value} {...props}>
-                  {label}
-                </Option>
-              ))}
-            </OptionGroup>
-          )
-        }
-      })
-      .filter(Boolean) as ReactElement[]
-  }
-
-  let isEmpty = !validChildren.length && !computedChildren.length
-
   const {
-    value,
-    onClose,
+    children,
     descendants,
+    isEmpty,
+    placeholder,
+    value,
     formControlProps,
-    getPopoverProps,
     getContainerProps,
     getFieldProps,
-    placeholder,
+    getPopoverProps,
     onClear,
+    onClose,
     ...rest
   } = useSelect<string[]>({
     ...computedProps,
+    closeOnSelect,
     defaultValue,
     placeholderInOptions: false,
-    closeOnSelect,
-    isEmpty,
   })
 
   h ??= height
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
+    h: "fit-content",
+    w: "100%",
     ...styles.container,
   }
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
-      <SelectProvider value={{ ...rest, value, onClose, placeholder, styles }}>
+      <SelectProvider value={{ ...rest, placeholder, styles, value, onClose }}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-multi-select", className)}
@@ -221,9 +176,9 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
               <PopoverTrigger>
                 <MultiSelectField
                   component={component}
-                  separator={separator}
                   h={h}
                   minH={minH}
+                  separator={separator}
                   {...getFieldProps(fieldProps, ref)}
                 />
               </PopoverTrigger>
@@ -242,11 +197,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
             {!isEmpty ? (
               <Portal {...portalProps}>
                 <SelectList
-                  header={runIfFunc(header, { value, onClose })}
                   footer={runIfFunc(footer, { value, onClose })}
+                  header={runIfFunc(header, { value, onClose })}
                   {...listProps}
                 >
-                  {children ?? computedChildren}
+                  {children}
                 </SelectList>
               </Portal>
             ) : null}
@@ -269,16 +224,16 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     {
       className,
       component,
-      separator = ",",
+      h,
       isTruncated,
       lineClamp = 1,
-      h,
       minH,
+      separator = ",",
       ...rest
     },
     ref,
   ) => {
-    const { value, label, onChange, placeholder, styles } = useSelectContext()
+    const { label, placeholder, styles, value, onChange } = useSelectContext()
 
     const cloneChildren = useMemo(() => {
       if (!label?.length)
@@ -291,19 +246,19 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
 
-                onChange(value[index])
+                onChange(value[index] ?? "")
               }
 
               const el = component({
-                value: value[index],
-                label,
                 index,
+                label,
+                value: value[index] ?? "",
                 onRemove,
-              }) as ReactElement
+              }) as null | ReactElement
 
               const style: CSSProperties = {
-                marginBlockStart: "0.125rem",
                 marginBlockEnd: "0.125rem",
+                marginBlockStart: "0.125rem",
                 marginInlineEnd: "0.25rem",
               }
 
@@ -322,11 +277,11 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
               return (
                 <ui.span
                   key={index}
-                  display="inline-block"
-                  me="0.25rem"
                   dangerouslySetInnerHTML={{
                     __html: `${value}${!isLast ? separator : ""}`,
                   }}
+                  display="inline-block"
+                  me="0.25rem"
                 />
               )
             })}
@@ -345,20 +300,21 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     ])
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      alignItems: "center",
+      display: "flex",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
+      pe: "2rem",
       ...styles.field,
     }
+
+    if (label?.length && component) css.py = "0.125rem"
 
     return (
       <ui.div
         ref={ref}
         className={cx("ui-multi-select__field", className)}
         __css={css}
-        py={label?.length && component ? "0.125rem" : undefined}
         {...rest}
       >
         {cloneChildren}

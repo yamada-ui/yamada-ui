@@ -1,13 +1,13 @@
-import { Octokit } from "@octokit/rest"
-import { isObject } from "@yamada-ui/react"
-import { sendDiscord } from "utils/discord"
-import {
-  recursiveOctokit,
-  getPullRequests as _getPullRequests,
-  getListEventsForTimeline,
-} from "utils/github"
 import type { Constant } from "utils/github"
 import type { APIHandler } from "utils/next"
+import { Octokit } from "@octokit/rest"
+import { isObject, isUndefined } from "@yamada-ui/react"
+import { sendDiscord } from "utils/discord"
+import {
+  getPullRequests as _getPullRequests,
+  getListEventsForTimeline,
+  recursiveOctokit,
+} from "utils/github"
 
 type PullRequest = Awaited<ReturnType<typeof getPullRequest>>
 
@@ -46,24 +46,24 @@ const DISCORD_REMIND_REVIEW_COMMENT =
 
 const getPullRequest = async ({
   owner,
-  repo,
   pull_number,
+  repo,
 }: {
   owner: string
-  repo: string
   pull_number: number
+  repo: string
 }) => {
   const { data } = await octokit.pulls.get({
     owner,
-    repo,
     pull_number,
+    repo,
   })
 
-  const { data: reviewers } = await recursiveOctokit(() =>
+  const { data: reviewers } = await recursiveOctokit(async () =>
     octokit.pulls.listReviews({
       owner,
-      repo,
       pull_number,
+      repo,
     }),
   )
 
@@ -83,11 +83,9 @@ const getPullRequests = async ({
 
   await Promise.all(
     _pullRequests.map(async ({ number }) => {
-      const pullRequest = await recursiveOctokit(() =>
-        getPullRequest({ owner, repo, pull_number: number }),
+      const pullRequest = await recursiveOctokit(async () =>
+        getPullRequest({ owner, pull_number: number, repo }),
       )
-
-      if (!pullRequest) return
 
       pullRequests.push(pullRequest)
 
@@ -99,42 +97,42 @@ const getPullRequests = async ({
 }
 
 const remindReviews = async ({
-  owner,
-  repo,
-  pullRequest,
   constant,
+  owner,
   publish,
+  pullRequest,
+  repo,
   runOctokit,
 }: {
-  owner: string
-  repo: string
-  pullRequest: PullRequest
   constant: Constant
+  owner: string
   publish: boolean
+  pullRequest: PullRequest
+  repo: string
   runOctokit: boolean
 }) => {
   const {
-    number,
-    title,
-    labels,
     created_at,
-    html_url,
-    requested_reviewers,
     head,
+    html_url,
+    labels,
+    number,
+    requested_reviewers,
+    title,
   } = pullRequest
   if (
     [
-      "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
+      "yamada-ui:changeset-release/main",
       "yamada-ui:documentation",
     ].includes(head.label)
   )
     return
 
   const timeline = await getListEventsForTimeline({
+    issue_number: number,
     owner,
     repo,
-    issue_number: number,
   })
 
   const commitIndex = timeline.findLastIndex(
@@ -153,12 +151,12 @@ const remindReviews = async ({
   if (hasReviewed) {
     try {
       if (runOctokit) {
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.removeLabel({
+            name: "review wanted",
+            issue_number: number,
             owner,
             repo,
-            issue_number: number,
-            name: "review wanted",
           }),
         )
       } else {
@@ -204,17 +202,17 @@ const remindReviews = async ({
 
   if (createdTimestamp < limitTimestamp) {
     const hasReviewWanted = labels.some(
-      (label) => isObject(label) && "review wanted" === label?.name,
+      (label) => isObject(label) && "review wanted" === label.name,
     )
 
     if (!hasReviewWanted) {
       if (runOctokit) {
-        await recursiveOctokit(() =>
+        await recursiveOctokit(async () =>
           octokit.issues.addLabels({
-            owner,
-            repo,
             issue_number: number,
             labels: ["review wanted"],
+            owner,
+            repo,
           }),
         )
       } else {
@@ -235,36 +233,36 @@ const remindReviews = async ({
 }
 
 const addHelpWanted = async ({
-  owner,
-  repo,
-  pullRequest,
   collaboratorIds,
   constant,
+  owner,
   publish,
+  pullRequest,
+  repo,
   runOctokit,
 }: {
-  owner: string
-  repo: string
-  pullRequest: PullRequest
   collaboratorIds: string[]
   constant: Constant
+  owner: string
   publish: boolean
+  pullRequest: PullRequest
+  repo: string
   runOctokit: boolean
 }) => {
-  const { number, title, user, labels, created_at, html_url, head } =
+  const { created_at, head, html_url, labels, number, title, user } =
     pullRequest
   if (user.type === "Bot") return
 
   if (
     [
-      "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
+      "yamada-ui:changeset-release/main",
       "yamada-ui:documentation",
     ].includes(head.label)
   )
     return
 
-  if (labels.some((label) => isObject(label) && "help wanted" === label?.name))
+  if (labels.some((label) => isObject(label) && "help wanted" === label.name))
     return
 
   if (collaboratorIds.includes(user.login)) return
@@ -277,12 +275,12 @@ const addHelpWanted = async ({
   if (createdTimestamp > limitTimestamp) return
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.createComment({
+        body: GITHUB_JOINING_COMMENT(constant)(user.login),
+        issue_number: number,
         owner,
         repo,
-        issue_number: number,
-        body: GITHUB_JOINING_COMMENT(constant)(user.login),
       }),
     )
   } else {
@@ -290,12 +288,12 @@ const addHelpWanted = async ({
   }
 
   if (runOctokit) {
-    await recursiveOctokit(() =>
+    await recursiveOctokit(async () =>
       octokit.issues.addLabels({
-        owner,
-        repo,
         issue_number: number,
         labels: ["help wanted"],
+        owner,
+        repo,
       }),
     )
   } else {
@@ -314,17 +312,17 @@ const addHelpWanted = async ({
 }
 
 export const updatePullRequests: APIHandler = async ({
+  constant,
   req,
   res,
-  constant,
 }) => {
-  const { owner, repo, publish = true, octokit: runOctokit = true } = req.body
+  const { octokit: runOctokit = true, owner, publish = true, repo } = req.body
 
   if (!owner)
-    return res.status(400).send({ status: 400, message: "Invalid owner" })
+    return res.status(400).send({ message: "Invalid owner", status: 400 })
 
   if (!repo)
-    return res.status(400).send({ status: 400, message: "Invalid repo" })
+    return res.status(400).send({ message: "Invalid repo", status: 400 })
 
   const collaborators = [...constant.maintainers, ...constant.members]
   const collaboratorIds = collaborators.map(({ github }) => github.id)
@@ -332,9 +330,9 @@ export const updatePullRequests: APIHandler = async ({
   const pullRequests = await getPullRequests({ owner, repo })
 
   for await (const pullRequest of pullRequests) {
-    const { user, draft, reviewers } = pullRequest
+    const { draft, reviewers, user } = pullRequest
 
-    if (!user || draft) continue
+    if (isUndefined(user) || draft) continue
 
     const count = reviewers.reduce(
       (count, { state }) => (state === "APPROVED" ? count + 1 : count),
@@ -344,21 +342,21 @@ export const updatePullRequests: APIHandler = async ({
     if (count >= constant.pullRequest.requireApprovalCount) continue
 
     await remindReviews({
-      owner,
-      repo,
-      pullRequest,
       constant,
+      owner,
       publish,
+      pullRequest,
+      repo,
       runOctokit,
     })
 
     await addHelpWanted({
-      owner,
-      repo,
-      pullRequest,
       collaboratorIds,
       constant,
+      owner,
       publish,
+      pullRequest,
+      repo,
       runOctokit,
     })
   }

@@ -1,90 +1,90 @@
 {
-  "Breadcrumb": {
-    "ellipsis": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
-      "required": false,
-      "description": "The icon to be used in the ellipsis."
-    },
-    "endBoundaries": {
-      "type": "UIValue<number>",
-      "required": false,
-      "description": "Number of elements visible on the end(right) edges."
-    },
-    "gap": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 97 more ... | \"-4xl\">",
-      "defaultValue": "'2'",
-      "required": false,
-      "description": "The left and right margin applied to the separator."
-    },
-    "items": {
-      "type": "BreadcrumbGenerateItem[]",
-      "required": false,
-      "description": "If provided, generate breadcrumb items based on items."
-    },
-    "listProps": {
-      "type": "HTMLUIProps<\"ol\">",
-      "required": false,
-      "description": "Props for ol element."
-    },
-    "separator": {
-      "type": "string | Element",
-      "defaultValue": "'/'",
-      "required": false,
-      "description": "The visual separator between each breadcrumb item."
-    },
-    "startBoundaries": {
-      "type": "UIValue<number>",
-      "required": false,
-      "description": "Number of elements visible on the start(left) edges."
+  "BreadcrumbEllipsis": {
+    "size": {
+      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | \"xxx-large\" | ... 17 more ... | \"xs\">",
+      "deprecated": "Use `fontSize` instead.",
+      "description": "The CSS `font-size` property.",
+      "required": false
     }
   },
   "BreadcrumbItem": {
     "gap": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 97 more ... | \"-4xl\">",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"3xl\" | \"4xl\" | ... 100 more ... | \"normal\">",
       "defaultValue": "'2'",
-      "required": false,
-      "description": "The left and right margin applied to the separator."
+      "description": "The left and right margin applied to the separator.",
+      "required": false
     },
     "isCurrentPage": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, change to span element."
+      "description": "If `true`, change to span element.",
+      "required": false
     },
     "isLastChild": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, not show separator."
+      "description": "If `true`, not show separator.",
+      "required": false
     },
     "separator": {
-      "type": "string | Element",
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<any, string | JSXElementConstructor<any>>",
       "defaultValue": "'/'",
-      "required": false,
-      "description": "The visual separator between each breadcrumb item."
+      "description": "The visual separator between each breadcrumb item.",
+      "required": false
     }
   },
   "BreadcrumbLink": {
     "isCurrentPage": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, change to span element."
+      "description": "If `true`, change to span element.",
+      "required": false
+    }
+  },
+  "Breadcrumb": {
+    "ellipsis": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "description": "The icon to be used in the ellipsis.",
+      "required": false
+    },
+    "endBoundaries": {
+      "type": "UIValue<number>",
+      "description": "Number of elements visible on the end(right) edges.",
+      "required": false
+    },
+    "gap": {
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"3xl\" | \"4xl\" | ... 100 more ... | \"normal\">",
+      "defaultValue": "'2'",
+      "description": "The left and right margin applied to the separator.",
+      "required": false
+    },
+    "items": {
+      "type": "BreadcrumbGenerateItem[]",
+      "description": "If provided, generate breadcrumb items based on items.",
+      "required": false
+    },
+    "listProps": {
+      "type": "HTMLUIProps<\"ol\">",
+      "description": "Props for ol element.",
+      "required": false
+    },
+    "separator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<any, string | JSXElementConstructor<any>>",
+      "defaultValue": "'/'",
+      "description": "The visual separator between each breadcrumb item.",
+      "required": false
+    },
+    "startBoundaries": {
+      "type": "UIValue<number>",
+      "description": "Number of elements visible on the start(left) edges.",
+      "required": false
     }
   },
   "BreadcrumbSeparator": {
     "gap": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 102 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `margin-inline-start`, and `margin-inline-end` property."
-    }
-  },
-  "BreadcrumbEllipsis": {
-    "size": {
-      "type": "UIValue<number | (string & {}) | \"small\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
-      "required": false,
-      "deprecated": "Use `fontSize` instead.",
-      "description": "The CSS `font-size` property."
+      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"3xl\" | \"4xl\" | \"xs\" | ... 104 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `margin-inline-start`, and `margin-inline-end` property.",
+      "required": false
     }
   }
 }

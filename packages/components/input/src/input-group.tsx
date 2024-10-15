@@ -1,21 +1,21 @@
 import type {
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
 } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
   useCreateVars,
 } from "@yamada-ui/core"
 import { cx, filterUndefined, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 import { InputLeftAddon, InputRightAddon } from "./input-addon"
 import { InputGroupProvider } from "./input-context"
-import { InputRightElement, InputLeftElement } from "./input-element"
+import { InputLeftElement, InputRightElement } from "./input-element"
 
 export interface InputGroupProps extends HTMLUIProps, ThemeProps<"Input"> {}
 
@@ -36,10 +36,10 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
   const fieldFontSize = variableProps.fontSize
 
   const css: CSSUIObject = {
-    width: "100%",
     display: "flex",
     position: "relative",
     vars,
+    width: "100%",
     ...styles.container,
   }
 
@@ -82,7 +82,7 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
   })
 
   return (
-    <InputGroupProvider value={{ styles, fieldHeight, fieldFontSize }}>
+    <InputGroupProvider value={{ fieldFontSize, fieldHeight, styles }}>
       <ui.div
         ref={ref}
         className={cx("ui-input-group", className)}

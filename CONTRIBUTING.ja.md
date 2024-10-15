@@ -62,6 +62,8 @@ cd yamada-ui
   },
   "eslint.workingDirectories": [
     "docs",
+    "examples/create-react-app",
+    "examples/hono",
     "examples/next/app",
     "examples/next/pages",
     "examples/remix",

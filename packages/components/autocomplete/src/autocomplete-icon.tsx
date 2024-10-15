@@ -1,9 +1,9 @@
 import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { HTMLAttributes } from "react"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
-import type { HTMLAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { useAutocompleteContext } from "./autocomplete-context"
 
@@ -14,14 +14,14 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
     const { styles } = useAutocompleteContext()
 
     const css: CSSUIObject = {
+      alignItems: "center",
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "center",
+      pointerEvents: "none",
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
       ...styles.icon,
       ...__css,
     }
@@ -30,13 +30,13 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
 
     const cloneChildren = validChildren.map((child) =>
       cloneElement(child, {
-        focusable: false,
-        "aria-hidden": true,
         style: {
-          maxWidth: "1em",
-          maxHeight: "1em",
           color: "currentColor",
+          maxHeight: "1em",
+          maxWidth: "1em",
         },
+        "aria-hidden": true,
+        focusable: false,
       }),
     )
 
@@ -78,12 +78,12 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
 
   return (
     <AutocompleteIcon
-      aria-label="Clear value"
       className={cx("ui-autocomplete__icon--clear", className)}
+      aria-label="Clear value"
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon w="0.5em" h="0.5em" />}
+      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
     </AutocompleteIcon>
   )
 }
@@ -100,11 +100,11 @@ export const AutocompleteItemIcon = forwardRef<
   const { styles } = useAutocompleteContext()
 
   const css: CSSUIObject = {
-    flexShrink: 0,
-    display: "inline-flex",
-    justifyContent: "center",
     alignItems: "center",
+    display: "inline-flex",
+    flexShrink: 0,
     fontSize: "0.85em",
+    justifyContent: "center",
     ...styles.itemIcon,
   }
 

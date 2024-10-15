@@ -3,11 +3,11 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const List: ComponentMultiStyle<"List"> = {
   baseStyle: {
     container: {},
-    item: {},
     icon: {
-      me: "2",
       display: "inline-block",
+      me: "2",
       verticalAlign: "middle",
     },
+    item: {},
   },
 }

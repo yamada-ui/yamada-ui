@@ -1,9 +1,9 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { ModalOverlayProps } from "./modal-overlay"
 import { motionForwardRef } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 import { useDialog } from "./modal-context"
 import { ModalOverlay } from "./modal-overlay"
-import type { ModalOverlayProps } from "./modal-overlay"
 
 export interface DialogOverlayProps extends ModalOverlayProps {}
 

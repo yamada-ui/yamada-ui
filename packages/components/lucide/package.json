@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/lucide",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Yamada UI lucide component",
   "keywords": [
     "yamada",
@@ -46,18 +46,18 @@
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
-    "gen:icons": "tsx ./scripts/generate-icons",
+    "gen:icons": "tsx ./scripts/generate-icons && eslint src/icons/index.ts src/icons/index.types.ts --fix --flag unstable_ts_config",
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "lucide-react": "0.446.0"
+    "lucide-react": "0.451.0"
   },
   "devDependencies": {
-    "@babel/parser": "^7.25.6",
-    "@babel/traverse": "^7.25.6",
+    "@babel/parser": "^7.25.7",
+    "@babel/traverse": "^7.25.7",
     "@lucide/lab": "^0.1.2",
     "@types/babel__traverse": "^7.20.6",
     "clean-package": "2.2.0",

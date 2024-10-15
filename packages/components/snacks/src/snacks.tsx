@@ -1,6 +1,8 @@
 import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
-import { ui, forwardRef, useTheme } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
+import type { RefObject } from "react"
+import type { Snack, UseSnacksOptions, UseSnacksReturn } from "./use-snacks"
+import { forwardRef, memo, ui, useTheme } from "@yamada-ui/core"
 import {
   AnimatePresence,
   motion,
@@ -8,30 +10,26 @@ import {
   useIsPresent,
 } from "@yamada-ui/motion"
 import { useTimeout } from "@yamada-ui/use-timeout"
-import { useToken } from "@yamada-ui/use-token"
-import { useValue } from "@yamada-ui/use-value"
 import { calc, cx, noop, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
-import type { RefObject } from "react"
-import { createRef, memo, useEffect, useMemo, useRef, useState } from "react"
-import type { Snack, UseSnacksOptions, UseSnacksReturn } from "./use-snacks"
+import { createRef, useEffect, useMemo, useRef, useState } from "react"
 
 const defaultContainerVariants: MotionVariants = {
-  initial: { padding: 0 },
   animate: ({ gutter }) => ({
     padding: `${gutter[0]} 0 ${gutter[1]}`,
     transition: { duration: 0.4 },
   }),
   exit: { padding: 0 },
+  initial: { padding: 0 },
 }
 
 const defaultListVariants: MotionVariants = {
-  initial: { opacity: 1, height: 0 },
   animate: ({ height }) => ({
-    opacity: 1,
     height,
+    opacity: 1,
     transition: { duration: 0.4 },
   }),
-  exit: { opacity: 0, height: 0 },
+  exit: { height: 0, opacity: 0 },
+  initial: { height: 0, opacity: 1 },
 }
 
 interface SnacksOptions {
@@ -62,16 +60,16 @@ export interface SnacksProps
     Pick<UseSnacksOptions, "direction" | "startIndex">,
     Pick<
       Required<ThemeConfig>["snacks"],
-      "variants" | "gutter" | "negateMargin"
+      "gutter" | "negateMargin" | "variants"
     > {}
 
 export const Snacks = motionForwardRef<SnacksProps, "div">(
   (
     {
       className,
-      snacks,
       containerVariants = defaultContainerVariants,
       listVariants = defaultListVariants,
+      snacks,
       listProps,
       ...props
     },
@@ -85,29 +83,42 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
     const [isExist, setIsExist] = useState<boolean>(!!count)
     const { theme } = useTheme()
     const {
-      variants,
       direction = "top",
-      startIndex = 0,
-      gutter = [0, 0],
       gap = "fallback(4, 1rem)",
+      gutter = [0, 0],
       negateMargin = true,
+      startIndex = 0,
+      variants,
       ...rest
     } = useMemo(
       () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
-    const _top = useValue(gutter[0])
-    const _bottom = useValue(gutter[1])
-    const top = useToken("spaces", _top) ?? 0
-    const bottom = useToken("spaces", _bottom) ?? 0
+
+    const top = "var(--ui-top)"
+    const bottom = "var(--ui-bottom)"
     const negatedTop = calc(top).negate().toString()
     const negatedBottom = calc(bottom).negate().toString()
     const isShow = !!count || isExist
 
     const css: CSSUIObject = {
-      w: "100%",
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
-      vars: [{ name: "space", token: "spaces", value: gap }],
+      vars: [
+        { name: "gap", token: "spaces", value: gap },
+        {
+          name: "top",
+          token: "spaces",
+          value: gutter[0] || "0px",
+          __prefix: "ui",
+        },
+        {
+          name: "bottom",
+          token: "spaces",
+          value: gutter[1] || "0px",
+          __prefix: "ui",
+        },
+      ],
+      w: "100%",
     }
 
     useEffect(() => {
@@ -140,21 +151,21 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
           <motion.div
             ref={ref}
             className={cx("ui-snacks", className)}
-            __css={css}
-            variants={containerVariants}
-            custom={{ gutter: [top, bottom] }}
-            initial="initial"
             animate="animate"
+            custom={{ gutter: [top, bottom] }}
             exit="exit"
+            initial="initial"
+            variants={containerVariants}
+            __css={css}
             {...rest}
           >
             <motion.ul
               className="ui-snacks__list"
-              variants={listVariants}
-              custom={{ height }}
-              initial="initial"
               animate="animate"
+              custom={{ height }}
               exit="exit"
+              initial="initial"
+              variants={listVariants}
               __css={{
                 position: "relative",
                 w: "100%",
@@ -175,11 +186,11 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
                     <SnackComponent
                       key={props.id}
                       ref={ref}
+                      direction={direction}
                       index={index}
                       lastIndex={count - index - 1}
                       startIndex={startIndex}
                       variants={variants}
-                      direction={direction}
                       {...props}
                     />
                   )
@@ -193,19 +204,18 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
   },
 )
 
+Snacks.displayName = "Snacks"
+Snacks.__ui__ = "Snacks"
+
 const defaultItemVariants: MotionVariants = {
-  initial: ({ index, direction }) => ({
-    opacity: 0,
-    ...(index ? { y: (direction === "top" ? -1 : 1) * 16 } : {}),
-  }),
   animate: ({ index }) => ({
     opacity: 1,
-    y: 0,
     transition: {
       delay: !index ? 0.4 : 0,
       duration: 0.4,
       ease: [0.4, 0, 0.2, 1],
     },
+    y: 0,
   }),
   exit: {
     opacity: 0,
@@ -214,6 +224,10 @@ const defaultItemVariants: MotionVariants = {
       ease: [0.4, 0, 1, 1],
     },
   },
+  initial: ({ direction, index }) => ({
+    opacity: 0,
+    ...(index ? { y: (direction === "top" ? -1 : 1) * 16 } : {}),
+  }),
 }
 
 interface SnackComponentOptions {
@@ -221,25 +235,28 @@ interface SnackComponentOptions {
   lastIndex: number
 }
 
-type SnackComponentProps = Snack &
+type SnackComponentProps = Pick<
+  Required<SnacksProps>,
+  "direction" | "startIndex"
+> &
   Pick<SnacksProps, "variants"> &
-  Pick<Required<SnacksProps>, "direction" | "startIndex"> &
+  Snack &
   SnackComponentOptions
 
 const SnackComponent = memo(
   forwardRef<SnackComponentProps, "li">(
     (
       {
+        style,
+        direction,
+        duration = null,
         index,
         lastIndex,
-        startIndex,
-        direction,
-        variants = defaultItemVariants,
-        duration = null,
         message,
+        startIndex,
+        variants = defaultItemVariants,
         onClose: onCloseProp,
         onCloseComplete,
-        style,
       },
       ref,
     ) => {
@@ -251,16 +268,16 @@ const SnackComponent = memo(
       const onMouseLeave = () => setDelay(duration)
 
       const zIndex = startIndex + index
-      const space = `calc($space * ${direction === "top" ? lastIndex : index})`
+      const gap = `calc($gap * ${direction === "top" ? lastIndex : index})`
 
       const css: CSSUIObject = {
-        position: "absolute",
-        top: space,
         left: 0,
-        right: 0,
-        zIndex,
-        w: "100%",
         maxW: "100%",
+        position: "absolute",
+        right: 0,
+        top: gap,
+        w: "100%",
+        zIndex,
         ...style,
       }
 
@@ -278,14 +295,14 @@ const SnackComponent = memo(
         <ui.li ref={ref} className="ui-snacks__item" __css={css}>
           <motion.div
             className="ui-snacks__item-inner"
+            animate="animate"
+            custom={{ direction, index, lastIndex }}
+            exit="exit"
+            initial="initial"
             layout
             variants={variants}
-            custom={{ index, lastIndex, direction }}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            onHoverStart={onMouseEnter}
             onHoverEnd={onMouseLeave}
+            onHoverStart={onMouseEnter}
           >
             {runIfFunc(message, { index, onClose })}
           </motion.div>
@@ -296,3 +313,4 @@ const SnackComponent = memo(
 )
 
 SnackComponent.displayName = "SnackComponent"
+SnackComponent.__ui__ = "SnackComponent"

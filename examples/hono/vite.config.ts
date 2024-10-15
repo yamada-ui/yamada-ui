@@ -20,22 +20,22 @@ export default defineConfig(({ mode }) => {
     }
   } else {
     return {
-      ssr: {
-        external: ["react", "react-dom"],
-      },
       plugins: [
         devServer({
-          exclude: ["/*", ...defaultOptions.exclude],
           entry: "src/index.tsx",
+          exclude: ["/*", ...defaultOptions.exclude],
         }),
       ],
-      server: {
-        port: 4448,
-      },
       resolve: {
         alias: {
           "@": "/src",
         },
+      },
+      server: {
+        port: 4448,
+      },
+      ssr: {
+        external: ["react", "react-dom"],
       },
     }
   }

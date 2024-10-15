@@ -4,27 +4,27 @@ import type {
   PropGetter,
   RequiredPropGetter,
 } from "@yamada-ui/core"
-import { getVar, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useId, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
-import { getComponentProps } from "./chart-utils"
 import type {
-  ChartCurveType,
-  AreaProps,
-  AreaChartType,
   AreaChartProps,
+  AreaChartType,
+  AreaProps,
+  ChartCurveType,
   ChartLayoutType,
   ReferenceLineProps,
 } from "./chart.types"
+import { getVar, useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import { useCallback, useId, useMemo, useState } from "react"
+import { getComponentProps } from "./chart-utils"
 import {
   areaChartProperties,
-  dotProperties,
   areaProperties,
+  dotProperties,
 } from "./rechart-properties"
 
 export interface UseAreaChartOptions {
@@ -37,46 +37,17 @@ export interface UseAreaChartOptions {
    */
   series: AreaProps[]
   /**
-   * Props for the areas.
-   */
-  areaProps?: Partial<AreaProps>
-  /**
    * Controls how chart areas are positioned relative to each other.
    *
    * @default `default`
    */
   type?: AreaChartType
   /**
-   * Props passed down to recharts `AreaChart` component.
-   */
-  chartProps?: AreaChartProps
-  /**
-   * If any two categorical charts have the same syncId,
-   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
-   */
-  syncId?: number | string
-  /**
-   * Chart orientation.
-   *
-   * @default 'horizontal'
-   */
-  layoutType?: ChartLayoutType
-  /**
-   * Determines whether the chart area should be represented with a gradient instead of the solid color.
-   */
-  withGradient?: boolean
-  /**
-   * Determines whether dots should be displayed.
+   * Determines whether points with `null` values should be connected.
    *
    * @default true
    */
-  withDots?: boolean
-  /**
-   * Determines whether activeDots should be displayed.
-   *
-   * @default true
-   */
-  withActiveDots?: boolean
+  connectNulls?: boolean
   /**
    * Type of the curve.
    *
@@ -84,17 +55,17 @@ export interface UseAreaChartOptions {
    */
   curveType?: ChartCurveType
   /**
-   * Stroke width for the chart areas.
+   * Controls fill opacity of all areas.
    *
-   * @default 2
+   * @default 0.4
    */
-  strokeWidth?: number
+  fillOpacity?: [number, number] | number
   /**
-   * Determines whether points with `null` values should be connected.
+   * Chart orientation.
    *
-   * @default true
+   * @default 'horizontal'
    */
-  connectNulls?: boolean
+  layoutType?: ChartLayoutType
   /**
    * A tuple of colors used when `type="split"` is set, ignored in all other cases.
    *
@@ -107,15 +78,32 @@ export interface UseAreaChartOptions {
    */
   splitOffset?: number
   /**
-   * Reference lines that should be displayed on the chart.
-   */
-  referenceLineProps?: ReferenceLineProps[]
-  /**
-   * Controls fill opacity of all areas.
+   * Stroke width for the chart areas.
    *
-   * @default 0.4
+   * @default 2
    */
-  fillOpacity?: number | [number, number]
+  strokeWidth?: number
+  /**
+   * If any two categorical charts have the same syncId,
+   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
+   */
+  syncId?: number | string
+  /**
+   * Determines whether activeDots should be displayed.
+   *
+   * @default true
+   */
+  withActiveDots?: boolean
+  /**
+   * Determines whether dots should be displayed.
+   *
+   * @default true
+   */
+  withDots?: boolean
+  /**
+   * Determines whether the chart area should be represented with a gradient instead of the solid color.
+   */
+  withGradient?: boolean
   /**
    * A label to display below the X axis.
    */
@@ -124,36 +112,48 @@ export interface UseAreaChartOptions {
    * A label to display below the Y axis.
    */
   yAxisLabel?: string
+  /**
+   * Props for the areas.
+   */
+  areaProps?: Partial<AreaProps>
+  /**
+   * Props passed down to recharts `AreaChart` component.
+   */
+  chartProps?: AreaChartProps
+  /**
+   * Reference lines that should be displayed on the chart.
+   */
+  referenceLineProps?: ReferenceLineProps[]
 }
 
 interface UseAreaChartProps extends UseAreaChartOptions {
-  styles: Dict<CSSUIObject>
+  styles: Dict<CSSUIObject | undefined>
 }
 
 export const useAreaChart = ({
-  data,
-  series,
   type,
-  layoutType = "horizontal",
-  withGradient: withGradientProp,
-  withDots = true,
-  withActiveDots = true,
-  curveType = "monotone",
-  strokeWidth = 2,
   connectNulls = true,
+  curveType = "monotone",
+  data,
   fillOpacity = 0.4,
+  layoutType = "horizontal",
+  series,
   splitColors = ["#ee6a5d", "#5fce7d"],
   splitOffset,
-  referenceLineProps,
+  strokeWidth = 2,
+  styles,
   syncId,
+  withActiveDots = true,
+  withDots = true,
+  withGradient: withGradientProp,
   xAxisLabel,
   yAxisLabel,
-  styles,
+  referenceLineProps,
   ...rest
 }: UseAreaChartProps) => {
   const uuid = useId()
   const { theme } = useTheme()
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const splitId = `${uuid}-split`
   const stacked = type === "stacked" || type === "percent"
   const withGradient =
@@ -162,10 +162,10 @@ export const useAreaChart = ({
       : type === "default"
   const shouldHighlight = highlightedArea !== null
   const {
-    dot = {},
     activeDot = {},
-    dimDot,
     dimArea,
+    dimDot,
+    dot = {},
     ...computedAreaProps
   } = rest.areaProps ?? {}
 
@@ -184,7 +184,7 @@ export const useAreaChart = ({
       splitColors.map((color, index) => ({
         name: `area-split-${index}`,
         token: "colors",
-        value: color ?? "transparent",
+        value: color || "transparent",
       })),
     [splitColors],
   )
@@ -272,15 +272,17 @@ export const useAreaChart = ({
 
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {
-      const dataKey = series[0].dataKey as string
+      const dataKey = series[0]?.dataKey as string
 
-      const dataMax = Math.max(...data.map((item) => item[dataKey]))
-      const dataMin = Math.min(...data.map((item) => item[dataKey]))
+      if (dataKey) {
+        const dataMax = Math.max(...data.map((item) => item[dataKey]))
+        const dataMin = Math.min(...data.map((item) => item[dataKey]))
 
-      if (dataMax <= 0) return 0
-      if (dataMin >= 0) return 1
+        if (dataMax <= 0) return 0
+        if (dataMin >= 0) return 1
 
-      return dataMax / (dataMax - dataMin)
+        return dataMax / (dataMax - dataMin)
+      }
     }
 
     return 0.5
@@ -290,11 +292,11 @@ export const useAreaChart = ({
     () =>
       series.map((props, index) => {
         const {
-          dataKey,
-          dot = {},
           activeDot = {},
-          dimDot = {},
+          dataKey,
           dimArea = {},
+          dimDot = {},
+          dot = {},
           strokeDasharray,
           ...computedProps
         } = props
@@ -314,7 +316,7 @@ export const useAreaChart = ({
           dimmed ? dimAreaClassName : undefined,
         )(theme, true)
 
-        let resolvedActiveDot: Recharts.DotProps | boolean
+        let resolvedActiveDot: boolean | Recharts.DotProps
 
         if (withActiveDots) {
           const computedActiveDot = { ...activeDotProps, ...activeDot }
@@ -326,15 +328,15 @@ export const useAreaChart = ({
 
           resolvedActiveDot = {
             className: cx("ui-area-chart__active-dot", className),
-            stroke: color,
             r: 4,
+            stroke: color,
             ...rest,
           } as Recharts.DotProps
         } else {
           resolvedActiveDot = false
         }
 
-        let resolvedDot: Recharts.DotProps | boolean
+        let resolvedDot: boolean | Recharts.DotProps
 
         if (withDots) {
           const computedDimDot = { ...dimDotProps, ...dimDot }
@@ -363,11 +365,11 @@ export const useAreaChart = ({
         return {
           ...rest,
           id,
-          color,
-          strokeDasharray,
-          dataKey,
           activeDot: resolvedActiveDot,
+          color,
+          dataKey,
           dot: resolvedDot,
+          strokeDasharray,
         }
       }),
     [
@@ -399,14 +401,14 @@ export const useAreaChart = ({
       ref,
       className: cx(className, areaChartClassName),
       data,
-      stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
-      syncId,
       margin: {
         bottom: xAxisLabel ? 30 : undefined,
         left: yAxisLabel ? 10 : undefined,
         right: yAxisLabel ? 5 : undefined,
       },
+      stackOffset: type === "percent" ? "expand" : undefined,
+      syncId,
       ...props,
       ...chartProps,
     }),
@@ -428,45 +430,45 @@ export const useAreaChart = ({
   > = useCallback(
     (props = {}) => ({
       id: splitId,
-      offset: splitOffset ?? defaultSplitOffset,
       fillOpacity: fillOpacityVar,
+      offset: splitOffset ?? defaultSplitOffset,
       ...props,
     }),
     [defaultSplitOffset, splitId, splitOffset, fillOpacityVar],
   )
 
   const getAreaProps: RequiredPropGetter<
-    Partial<Recharts.AreaProps> & { index: number },
+    { index: number } & Partial<Recharts.AreaProps>,
     Omit<Recharts.AreaProps, "ref">
   > = useCallback(
-    ({ index, className: classNameProp, ...props }, ref = null) => {
+    ({ className: classNameProp, index, ...props }, ref = null) => {
       const {
         id,
-        color,
         className,
-        dataKey,
-        strokeDasharray,
         activeDot,
+        color,
+        dataKey = "",
         dot,
+        strokeDasharray,
         ...rest
-      } = areaPropsList[index]
+      } = areaPropsList[index] ?? {}
 
       return {
-        ref,
-        className: cx(classNameProp, className),
         id,
-        activeDot,
-        dot,
-        name: dataKey as string,
+        ref,
         type: curveType,
-        dataKey,
-        fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
-        strokeWidth,
-        stroke: color,
-        isAnimationActive: false,
+        name: dataKey as string,
+        className: cx(classNameProp, className),
+        activeDot,
         connectNulls,
+        dataKey,
+        dot,
+        fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
+        isAnimationActive: false,
         stackId: stacked ? "stack" : undefined,
+        stroke: color,
         strokeDasharray,
+        strokeWidth,
         ...(props as Omit<Recharts.AreaProps, "dataKey">),
         ...rest,
       }
@@ -487,20 +489,20 @@ export const useAreaChart = ({
     AreaGradientProps
   > = useCallback(
     (props = {}) => ({
-      withGradient,
       fillOpacity: fillOpacityVar,
+      withGradient,
       ...props,
     }),
     [withGradient, fillOpacityVar],
   )
 
   return {
-    getAreaChartProps,
-    getAreaSplitProps,
-    getAreaProps,
-    getAreaGradientProps,
     areaVars,
     setHighlightedArea,
+    getAreaChartProps,
+    getAreaGradientProps,
+    getAreaProps,
+    getAreaSplitProps,
   }
 }
 

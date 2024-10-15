@@ -1,26 +1,23 @@
 import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
-import { createDescendant } from "@yamada-ui/use-descendant"
-import { createContext } from "@yamada-ui/utils"
 import type { Dispatch, SetStateAction } from "react"
 import type { AccordionOptions } from "./accordion"
 import type { AccordionItemOptions } from "./accordion-item"
+import { createDescendant } from "@yamada-ui/use-descendant"
+import { createContext } from "@yamada-ui/utils"
 
 export const {
   DescendantsContextProvider,
-  useDescendants,
   useDescendant: useAccordionDescendant,
+  useDescendants,
 } = createDescendant<HTMLButtonElement>()
 
-type AccordionContext = Pick<
-  AccordionOptions,
-  "isMultiple" | "isToggle" | "icon" | "iconHidden"
-> & {
-  index: number | number[]
-  setIndex: Dispatch<SetStateAction<number | number[]>>
+type AccordionContext = {
   focusedIndex: number
+  index: number | number[]
   setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject }
-}
+  setIndex: Dispatch<SetStateAction<number | number[]>>
+  styles: { [key: string]: CSSUIObject | undefined }
+} & Pick<AccordionOptions, "icon" | "iconHidden" | "isMultiple" | "isToggle">
 
 export const [AccordionProvider, useAccordionContext] =
   createContext<AccordionContext>({

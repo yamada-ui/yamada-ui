@@ -1,12 +1,12 @@
 import type { StyledTheme } from "../src"
 import {
-  transformTheme,
   animation,
-  gradient,
-  transforms,
-  mode,
-  keyframes,
   css,
+  gradient,
+  keyframes,
+  mode,
+  transforms,
+  transformTheme,
 } from "../src"
 import { generateCalc } from "../src/config/calc"
 import { colorMix } from "../src/config/color-mix"
@@ -14,10 +14,148 @@ import { pipe } from "../src/config/utils"
 
 const theme = transformTheme(
   {
+    animations: {
+      gradient1: {
+        duration: "10s",
+        iterationCount: "infinite",
+        keyframes: {
+          "0%": {
+            bg: "red.500",
+          },
+          "20%": {
+            bg: "green.500",
+          },
+          "40%": {
+            bg: "purple.500",
+          },
+          "60%": {
+            bg: "yellow.500",
+          },
+          "80%": {
+            bg: "blue.500",
+          },
+          "100%": {
+            bg: "red.500",
+          },
+        },
+        timingFunction: "linear",
+      },
+      gradient2: [
+        {
+          duration: "5s",
+          iterationCount: "infinite",
+          keyframes: {
+            "0%": {
+              bg: "red.500",
+            },
+            "50%": {
+              bg: "yellow.500",
+            },
+            "100%": {
+              bg: "red.500",
+            },
+          },
+          timingFunction: "linear",
+        },
+        {
+          duration: "slower",
+          fillMode: "forwards",
+          keyframes: {
+            "0%": {
+              transform: "translateX(400%)",
+            },
+            "100%": {
+              transform: "translateX(0%)",
+            },
+          },
+          timingFunction: "ease-in-out",
+        },
+      ],
+    },
+    colors: {
+      blackAlpha: {
+        50: "rgba(0, 0, 0, 0.04)",
+        100: "rgba(0, 0, 0, 0.06)",
+        200: "rgba(0, 0, 0, 0.08)",
+        300: "rgba(0, 0, 0, 0.16)",
+        400: "rgba(0, 0, 0, 0.24)",
+        500: "rgba(0, 0, 0, 0.36)",
+        600: "rgba(0, 0, 0, 0.48)",
+        700: "rgba(0, 0, 0, 0.64)",
+        800: "rgba(0, 0, 0, 0.80)",
+        900: "rgba(0, 0, 0, 0.92)",
+        950: "rgba(0, 0, 0, 0.96)",
+      },
+      blue: {
+        50: "#e2edfd",
+        100: "#cfe0fc",
+        200: "#adcbfa",
+        300: "#8bb5f8",
+        400: "#659cf6",
+        500: "#4387f4",
+        600: "#186bf2",
+        700: "#0c59d4",
+        800: "#0a47a9",
+        900: "#07357d",
+        950: "#062c6a",
+      },
+      gray: {
+        50: "#dedfe3",
+        100: "#d3d5da",
+        200: "#b7bbc3",
+        300: "#9ea3ae",
+        400: "#828997",
+        500: "#6b7280",
+        600: "#565c67",
+        700: "#434851",
+        800: "#2e3138",
+        900: "#1c1e21",
+        950: "#101113",
+      },
+      green: {
+        50: "#e0f5e6",
+        100: "#d0f1d9",
+        200: "#a9e5b9",
+        300: "#86da9c",
+        400: "#5fce7d",
+        500: "#3cc360",
+        600: "#31a04f",
+        700: "#28813f",
+        800: "#1d5e2e",
+        900: "#133e1f",
+        950: "#0d2b15",
+      },
+      red: {
+        50: "#fdeae8",
+        100: "#fbd9d5",
+        200: "#f6b2ac",
+        300: "#f28c82",
+        400: "#ee6a5d",
+        500: "#ea4334",
+        600: "#de2817",
+        700: "#b42013",
+        800: "#8a190f",
+        900: "#66120b",
+        950: "#530f09",
+      },
+      whiteAlpha: {
+        50: "rgba(255, 255, 255, 0.04)",
+        100: "rgba(255, 255, 255, 0.06)",
+        200: "rgba(255, 255, 255, 0.08)",
+        300: "rgba(255, 255, 255, 0.16)",
+        400: "rgba(255, 255, 255, 0.24)",
+        500: "rgba(255, 255, 255, 0.36)",
+        600: "rgba(255, 255, 255, 0.48)",
+        700: "rgba(255, 255, 255, 0.64)",
+        800: "rgba(255, 255, 255, 0.80)",
+        900: "rgba(255, 255, 255, 0.92)",
+        950: "rgba(255, 255, 255, 0.96)",
+      },
+    },
+    gradients: {
+      primary: "linear(to-r, #7928CA, #FF0080)",
+    },
     sizes: {
-      max: "max-content",
-      min: "min-content",
-      full: "100%",
       "9xs": "1rem",
       "8xs": "1.5rem",
       "7xs": "2rem",
@@ -39,9 +177,11 @@ const theme = transformTheme(
       "7xl": "72rem",
       "8xl": "80rem",
       "9xl": "90rem",
+      full: "100%",
+      max: "max-content",
+      min: "min-content",
     },
     spaces: {
-      px: "1px",
       0.5: "0.125rem",
       1: "0.25rem",
       1.5: "0.375rem",
@@ -74,164 +214,9 @@ const theme = transformTheme(
       72: "18rem",
       80: "20rem",
       96: "24rem",
-    },
-    colors: {
-      whiteAlpha: {
-        50: "rgba(255, 255, 255, 0.04)",
-        100: "rgba(255, 255, 255, 0.06)",
-        200: "rgba(255, 255, 255, 0.08)",
-        300: "rgba(255, 255, 255, 0.16)",
-        400: "rgba(255, 255, 255, 0.24)",
-        500: "rgba(255, 255, 255, 0.36)",
-        600: "rgba(255, 255, 255, 0.48)",
-        700: "rgba(255, 255, 255, 0.64)",
-        800: "rgba(255, 255, 255, 0.80)",
-        900: "rgba(255, 255, 255, 0.92)",
-        950: "rgba(255, 255, 255, 0.96)",
-      },
-      blackAlpha: {
-        50: "rgba(0, 0, 0, 0.04)",
-        100: "rgba(0, 0, 0, 0.06)",
-        200: "rgba(0, 0, 0, 0.08)",
-        300: "rgba(0, 0, 0, 0.16)",
-        400: "rgba(0, 0, 0, 0.24)",
-        500: "rgba(0, 0, 0, 0.36)",
-        600: "rgba(0, 0, 0, 0.48)",
-        700: "rgba(0, 0, 0, 0.64)",
-        800: "rgba(0, 0, 0, 0.80)",
-        900: "rgba(0, 0, 0, 0.92)",
-        950: "rgba(0, 0, 0, 0.96)",
-      },
-      gray: {
-        50: "#dedfe3",
-        100: "#d3d5da",
-        200: "#b7bbc3",
-        300: "#9ea3ae",
-        400: "#828997",
-        500: "#6b7280",
-        600: "#565c67",
-        700: "#434851",
-        800: "#2e3138",
-        900: "#1c1e21",
-        950: "#101113",
-      },
-      red: {
-        50: "#fdeae8",
-        100: "#fbd9d5",
-        200: "#f6b2ac",
-        300: "#f28c82",
-        400: "#ee6a5d",
-        500: "#ea4334",
-        600: "#de2817",
-        700: "#b42013",
-        800: "#8a190f",
-        900: "#66120b",
-        950: "#530f09",
-      },
-      blue: {
-        50: "#e2edfd",
-        100: "#cfe0fc",
-        200: "#adcbfa",
-        300: "#8bb5f8",
-        400: "#659cf6",
-        500: "#4387f4",
-        600: "#186bf2",
-        700: "#0c59d4",
-        800: "#0a47a9",
-        900: "#07357d",
-        950: "#062c6a",
-      },
-      green: {
-        50: "#e0f5e6",
-        100: "#d0f1d9",
-        200: "#a9e5b9",
-        300: "#86da9c",
-        400: "#5fce7d",
-        500: "#3cc360",
-        600: "#31a04f",
-        700: "#28813f",
-        800: "#1d5e2e",
-        900: "#133e1f",
-        950: "#0d2b15",
-      },
-    },
-    animations: {
-      gradient1: {
-        keyframes: {
-          "0%": {
-            bg: "red.500",
-          },
-          "20%": {
-            bg: "green.500",
-          },
-          "40%": {
-            bg: "purple.500",
-          },
-          "60%": {
-            bg: "yellow.500",
-          },
-          "80%": {
-            bg: "blue.500",
-          },
-          "100%": {
-            bg: "red.500",
-          },
-        },
-        duration: "10s",
-        iterationCount: "infinite",
-        timingFunction: "linear",
-      },
-      gradient2: [
-        {
-          keyframes: {
-            "0%": {
-              bg: "red.500",
-            },
-            "50%": {
-              bg: "yellow.500",
-            },
-            "100%": {
-              bg: "red.500",
-            },
-          },
-          duration: "5s",
-          iterationCount: "infinite",
-          timingFunction: "linear",
-        },
-        {
-          keyframes: {
-            "0%": {
-              transform: "translateX(400%)",
-            },
-            "100%": {
-              transform: "translateX(0%)",
-            },
-          },
-          duration: "slower",
-          fillMode: "forwards",
-          timingFunction: "ease-in-out",
-        },
-      ],
-    },
-    gradients: {
-      primary: "linear(to-r, #7928CA, #FF0080)",
+      px: "1px",
     },
     transitions: {
-      property: {
-        common:
-          "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
-        colors: "background-color, border-color, color, fill, stroke",
-        dimensions: "width, height",
-        position: "left, right, top, bottom",
-        background: "background-color, background-image, background-position",
-      },
-
-      easing: {
-        "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
-        "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
-        "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
-      },
-
       duration: {
         "ultra-fast": "50ms",
         faster: "100ms",
@@ -241,13 +226,28 @@ const theme = transformTheme(
         slower: "400ms",
         "ultra-slow": "500ms",
       },
+
+      easing: {
+        "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
+        "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
+      },
+
+      property: {
+        background: "background-color, background-image, background-position",
+        colors: "background-color, border-color, color, fill, stroke",
+        common:
+          "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
+        dimensions: "width, height",
+        position: "left, right, top, bottom",
+      },
     },
   },
   {
-    initialThemeScheme: "base",
-    initialColorMode: "light",
-    var: { prefix: "ui" },
     breakpoint: { direction: "down" },
+    initialColorMode: "light",
+    initialThemeScheme: "base",
+    var: { prefix: "ui" },
   },
 ) as StyledTheme
 
@@ -325,8 +325,8 @@ describe("transforms", () => {
     const result1 = transforms.bgClip("text")
     const result2 = transforms.bgClip("content-box")
     expect(result1).toStrictEqual({
-      color: "transparent",
       backgroundClip: "text",
+      color: "transparent",
     })
     expect(result2).toStrictEqual({
       backgroundClip: "content-box",
@@ -388,7 +388,7 @@ describe("transforms", () => {
       css,
     )
     const result2 = transforms.container(
-      [{ name: "xl", maxWidth: "xl", css: { maxWidth: "640px" } }],
+      [{ name: "xl", css: { maxWidth: "640px" }, maxWidth: "xl" }],
       theme,
       css,
     )
@@ -402,7 +402,7 @@ describe("transforms", () => {
 
   test("supports transform", () => {
     const result = transforms.supports(
-      [{ query: "(display: grid)", css: { display: "grid" } }],
+      [{ css: { display: "grid" }, query: "(display: grid)" }],
       theme,
       css,
     )
@@ -622,6 +622,8 @@ describe("animation", () => {
   test("returns animation CSS string for object notation", () => {
     const result = animation(
       {
+        duration: "slower",
+        fillMode: "forwards",
         keyframes: {
           "0%": {
             transform: "translateX(400%)",
@@ -630,8 +632,6 @@ describe("animation", () => {
             transform: "translateX(0%)",
           },
         },
-        duration: "slower",
-        fillMode: "forwards",
         timingFunction: "ease-in-out",
       },
       theme,

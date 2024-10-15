@@ -13,7 +13,7 @@ describe("<FileInput />", () => {
 
   test("should render FileInput with multiple inputs", () => {
     const { container } = render(
-      <FileInput data-testid="FileInput" placeholder="multiple" multiple />,
+      <FileInput data-testid="FileInput" multiple placeholder="multiple" />,
     )
     expect(container.getElementsByTagName("input")[0]).toHaveAttribute(
       "multiple",
@@ -22,7 +22,7 @@ describe("<FileInput />", () => {
 
   test("should accept only provided file types", () => {
     const { container } = render(
-      <FileInput placeholder="only png, jpeg" accept="image/png,image/jpeg" />,
+      <FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />,
     )
     expect(container.getElementsByTagName("input")[0]).toHaveAttribute(
       "accept",
@@ -47,9 +47,9 @@ describe("<FileInput />", () => {
     const { container } = render(
       <FileInput
         data-testid="FileInput"
-        placeholder="multiple"
+        format={({ name }) => name.substring(0, name.indexOf("."))}
         multiple
-        format={({ name }) => `${name.substring(0, name.indexOf("."))}`}
+        placeholder="multiple"
       />,
     )
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
@@ -137,7 +137,7 @@ describe("<FileInput />", () => {
     expect(resetRef).toBeTruthy()
     expect(typeof resetRef.current).toBe("function")
     act(() => {
-      resetRef.current && resetRef.current()
+      if (resetRef.current) resetRef.current()
     })
     expect(files).toBeFalsy()
     expect(setFiles).toHaveBeenCalledTimes(2)
@@ -192,8 +192,8 @@ describe("<FileInput />", () => {
     const { container } = render(
       <div>
         <FileInput
-          multiple
-          component={({ value, index }) => {
+          data-testid="FileInput"
+          component={({ index, value }) => {
             files.push(value)
             return (
               <div>
@@ -204,7 +204,7 @@ describe("<FileInput />", () => {
               </div>
             )
           }}
-          data-testid="FileInput"
+          multiple
         />
       </div>,
     )
@@ -230,12 +230,12 @@ describe("<FileInput />", () => {
     const { container } = render(
       <div>
         <FileInput
-          multiple
+          data-testid="FileInput"
           component={({ value }) => {
             files.push(value)
             return null
           }}
-          data-testid="FileInput"
+          multiple
         />
       </div>,
     )

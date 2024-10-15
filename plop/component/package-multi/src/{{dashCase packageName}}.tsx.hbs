@@ -1,14 +1,14 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
+  ui,
   useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
 interface {{upperCase packageName}}Context {
-  [key: string]: CSSUIObject
+  [key: string]: CSSUIObject | undefined
 }
 
 const [{{upperCase packageName}}Provider, use{{upperCase packageName}}] = createContext<{{upperCase packageName}}Context>({

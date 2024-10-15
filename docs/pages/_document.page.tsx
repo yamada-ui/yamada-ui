@@ -1,5 +1,5 @@
 import { ColorModeScript, ThemeSchemeScript } from "@yamada-ui/react"
-import { Html, Head, Main, NextScript } from "next/document"
+import { Head, Html, Main, NextScript } from "next/document"
 import { config } from "theme"
 
 const Document = () => {
@@ -10,13 +10,13 @@ const Document = () => {
       <body>
         <ColorModeScript
           type="cookie"
-          nonce="testing"
           initialColorMode={config.initialColorMode}
+          nonce="testing"
         />
         <ThemeSchemeScript
           type="cookie"
-          nonce="testing"
           initialThemeScheme={config.initialThemeScheme}
+          nonce="testing"
         />
         <Main />
         <NextScript />

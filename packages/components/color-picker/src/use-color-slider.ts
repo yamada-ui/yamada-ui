@@ -1,29 +1,37 @@
 import type { CSSUIProps, HTMLUIProps, PropGetter } from "@yamada-ui/core"
-import {
-  useFormControlProps,
-  formControlProperties,
-} from "@yamada-ui/form-control"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
+import {
+  formControlProperties,
+  useFormControlProps,
+} from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
 import {
+  clampNumber,
   dataAttr,
   handlerAll,
   mergeRefs,
-  valueToPercent,
-  clampNumber,
-  useCallbackRef,
-  roundNumberToStep,
-  useUpdateEffect,
   percentToValue,
+  roundNumberToStep,
   splitObject,
+  useCallbackRef,
+  useUpdateEffect,
+  valueToPercent,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
 interface UseColorSliderOptions {
+  /**
+   * The maximum allowed value of the slider. Cannot be less than min.
+   */
+  max: number
+  /**
+   * The minimum allowed value of the slider. Cannot be greater than max.
+   */
+  min: number
   /**
    * The base `id` to use for the slider.
    */
@@ -34,39 +42,9 @@ interface UseColorSliderOptions {
    */
   name?: string
   /**
-   * The value of the slider.
-   */
-  value?: number
-  /**
    * The initial value of the slider.
    */
   defaultValue?: number
-  /**
-   * The minimum allowed value of the slider. Cannot be greater than max.
-   */
-  min: number
-  /**
-   * The maximum allowed value of the slider. Cannot be less than min.
-   */
-  max: number
-  /**
-   * The step in which increments or decrements have to be made.
-   *
-   * @default 1
-   */
-  step?: number
-  /**
-   * Function called whenever the slider value changes.
-   */
-  onChange?: (value: number) => void
-  /**
-   * Function called when the user starts selecting a new value.
-   */
-  onChangeStart?: (value: number) => void
-  /**
-   * Function called when the user is done selecting a new value.
-   */
-  onChangeEnd?: (value: number) => void
   /**
    * If `false`, the slider handle will not capture focus when value changes.
    *
@@ -74,9 +52,31 @@ interface UseColorSliderOptions {
    */
   focusThumbOnChange?: boolean
   /**
+   * The step in which increments or decrements have to be made.
+   *
+   * @default 1
+   */
+  step?: number
+  /**
    * The CSS `background` property. Used in `background` of thumb element.
    */
   thumbColor?: CSSUIProps["bg"]
+  /**
+   * The value of the slider.
+   */
+  value?: number
+  /**
+   * Function called whenever the slider value changes.
+   */
+  onChange?: (value: number) => void
+  /**
+   * Function called when the user is done selecting a new value.
+   */
+  onChangeEnd?: (value: number) => void
+  /**
+   * Function called when the user starts selecting a new value.
+   */
+  onChangeStart?: (value: number) => void
 }
 
 export interface UseColorSliderProps
@@ -93,26 +93,26 @@ export const useColorSlider = ({
   const {
     id,
     name,
-    value: valueProp,
-    defaultValue,
-    min = 0,
-    max,
-    step = 1,
-    onChange: onChangeProp,
-    onChangeStart: onChangeStartProp,
-    onChangeEnd: onChangeEndProp,
-    thumbColor,
     style: styleProp,
+    defaultValue,
+    max,
+    min = 0,
+    step = 1,
+    thumbColor,
+    value: valueProp,
+    onChange: onChangeProp,
+    onChangeEnd: onChangeEndProp,
+    onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
   const [
     {
       "aria-readonly": ariaReadonly,
-      required,
       disabled,
       readOnly,
-      onFocus: onFocusProp,
+      required,
       onBlur: onBlurProp,
+      onFocus: onFocusProp,
       ...formControlProps
     },
     containerProps,
@@ -122,8 +122,8 @@ export const useColorSlider = ({
   const onChangeEnd = useCallbackRef(onChangeEndProp)
 
   const [computedValue, setValue] = useControllableState({
-    value: valueProp,
     defaultValue: defaultValue ?? min + (max - min) / 2,
+    value: valueProp,
     onChange: onChangeProp,
   })
   const value = clampNumber(computedValue, min, max)
@@ -138,13 +138,13 @@ export const useColorSlider = ({
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
   const latestRef = useLatestRef({
-    value,
-    min,
-    max,
-    step,
-    isInteractive,
-    eventSource: null as "pointer" | "keyboard" | null,
+    eventSource: null as "keyboard" | "pointer" | null,
     focusThumbOnChange,
+    isInteractive,
+    max,
+    min,
+    step,
+    value,
   })
 
   const thumbSize = useSize(thumbRef)
@@ -153,7 +153,7 @@ export const useColorSlider = ({
     (ev: any) => {
       if (!trackRef.current) return
 
-      const { min, max, step } = latestRef.current
+      const { max, min, step } = latestRef.current
 
       latestRef.current.eventSource = "pointer"
 
@@ -173,7 +173,7 @@ export const useColorSlider = ({
     [latestRef],
   )
 
-  const setValueFromPointer = (ev: MouseEvent | TouchEvent | PointerEvent) => {
+  const setValueFromPointer = (ev: MouseEvent | PointerEvent | TouchEvent) => {
     const { value } = latestRef.current
     const nextValue = getValueFromPointer(ev)
 
@@ -188,7 +188,7 @@ export const useColorSlider = ({
 
   const constrain = useCallback(
     (value: number) => {
-      const { isInteractive, min, max } = latestRef.current
+      const { isInteractive, max, min } = latestRef.current
 
       if (!isInteractive) return
 
@@ -212,17 +212,17 @@ export const useColorSlider = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
-      const { min, max } = latestRef.current
+      const { max, min } = latestRef.current
 
       const actions: { [key: string]: KeyboardEventHandler } = {
+        ArrowDown: () => stepDown(),
+        ArrowLeft: () => stepDown(),
         ArrowRight: () => stepUp(),
         ArrowUp: () => stepUp(),
-        ArrowLeft: () => stepDown(),
-        ArrowDown: () => stepDown(),
-        PageUp: () => stepUp(tenStep),
-        PageDown: () => stepDown(tenStep),
-        Home: () => constrain(min),
         End: () => constrain(max),
+        Home: () => constrain(min),
+        PageDown: () => stepDown(tenStep),
+        PageUp: () => stepUp(tenStep),
       }
 
       const action = actions[ev.key]
@@ -240,15 +240,12 @@ export const useColorSlider = ({
   )
 
   usePanEvent(containerRef, {
-    onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+    onMove: (ev) => {
+      const { isInteractive } = latestRef.current
 
       if (!isInteractive) return
 
-      setDragging(true)
-      focusThumb()
       setValueFromPointer(ev)
-      onChangeStart(value)
     },
     onSessionEnd: () => {
       const { isInteractive, value } = latestRef.current
@@ -258,12 +255,15 @@ export const useColorSlider = ({
       setDragging(false)
       onChangeEnd(value)
     },
-    onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+    onSessionStart: (ev) => {
+      const { isInteractive, value } = latestRef.current
 
       if (!isInteractive) return
 
+      setDragging(true)
+      focusThumb()
       setValueFromPointer(ev)
+      onChangeStart(value)
     },
   })
 
@@ -288,8 +288,8 @@ export const useColorSlider = ({
         ...formControlProps,
         ...containerProps,
         ref: mergeRefs(ref, containerRef),
-        tabIndex: -1,
         style,
+        tabIndex: -1,
       }
     },
     [containerProps, formControlProps, styleProp, thumbSize],
@@ -304,10 +304,10 @@ export const useColorSlider = ({
       ref,
       type: "hidden",
       name,
-      value,
-      required,
       disabled,
       readOnly,
+      required,
+      value,
     }),
     [
       ariaReadonly,
@@ -337,10 +337,10 @@ export const useColorSlider = ({
 
       const style: CSSProperties = {
         ...props.style,
-        position: "absolute",
-        userSelect: "none",
-        touchAction: "none",
         left: `calc(${n}% - ${w / 2}px)`,
+        position: "absolute",
+        touchAction: "none",
+        userSelect: "none",
       }
 
       return {
@@ -350,16 +350,16 @@ export const useColorSlider = ({
         "aria-readonly": ariaReadonly,
         ...props,
         ref: mergeRefs(ref, thumbRef),
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
-        role: "slider",
-        "aria-valuenow": value,
-        "aria-valuemin": min,
-        "aria-valuemax": max,
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, onFocusProp),
-        onBlur: handlerAll(props.onBlur, onBlurProp),
         style,
+        "aria-valuemax": max,
+        "aria-valuemin": min,
+        "aria-valuenow": value,
+        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        role: "slider",
+        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        onBlur: handlerAll(props.onBlur, onBlurProp),
+        onFocus: handlerAll(props.onFocus, onFocusProp),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }
     },
     [
@@ -383,9 +383,9 @@ export const useColorSlider = ({
   return {
     value,
     getContainerProps,
-    getTrackProps,
     getInputProps,
     getThumbProps,
+    getTrackProps,
   }
 }
 

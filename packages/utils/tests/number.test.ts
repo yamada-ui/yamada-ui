@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest"
 import {
+  clampNumber,
+  countDecimal,
+  percentToValue,
+  roundNumberToStep,
   toNumber,
   toPrecision,
-  countDecimal,
-  roundNumberToStep,
   valueToPercent,
-  percentToValue,
-  clampNumber,
 } from "../src"
 
 describe("Number", () => {

@@ -1,5 +1,16 @@
 # @yamada-ui/highlight
 
+## 1.0.39
+
+### Patch Changes
+
+- [#3031](https://github.com/yamada-ui/yamada-ui/pull/3031) [`a5e4b0f`](https://github.com/yamada-ui/yamada-ui/commit/a5e4b0ffa43557fddf21cc401b8c8f1106b77554) Thanks [@snakcsse](https://github.com/snakcsse)! - Set the `displayName` and `__ui__` for `@yamada-ui/highlight`
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/typography@1.0.39
+
 ## 1.0.38
 
 ### Patch Changes

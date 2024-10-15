@@ -1,8 +1,8 @@
-import type { HTMLUIProps, ThemeProps, CSSUIProps } from "@yamada-ui/core"
+import type { CSSUIProps, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
@@ -13,13 +13,13 @@ interface TextOptions {
    */
   align?: CSSUIProps["textAlign"]
   /**
-   * The CSS `text-decoration` property.
-   */
-  decoration?: CSSUIProps["textDecoration"]
-  /**
    * The CSS `text-transform` property.
    */
   casing?: CSSUIProps["textTransform"]
+  /**
+   * The CSS `text-decoration` property.
+   */
+  decoration?: CSSUIProps["textDecoration"]
 }
 
 export interface TextProps
@@ -37,8 +37,8 @@ export const Text = forwardRef<TextProps, "p">((props, ref) => {
   const {
     className,
     align: textAlign,
-    decoration: textDecoration,
     casing: textTransform,
+    decoration: textDecoration,
     ...rest
   } = omitThemeProps(mergedProps)
 

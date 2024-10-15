@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
+import { Box, Button, Center, useNotice, Wrap } from "@yamada-ui/react"
 import { useRef } from "react"
-import { useNotice, Button, Wrap, Center, Box } from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useNotice",
@@ -12,12 +12,12 @@ export const basic = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
+            title: "孫悟空",
           })
         }
       >
@@ -31,13 +31,13 @@ export const withDuration = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
             duration: 30000,
+            title: "孫悟空",
           })
         }
       >
@@ -51,14 +51,14 @@ export const keepStay = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
             duration: null,
             isClosable: true,
+            title: "孫悟空",
           })
         }
       >
@@ -72,14 +72,14 @@ export const withVariant = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "basic",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -89,9 +89,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "solid",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -101,9 +101,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -113,9 +113,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "top-accent",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -125,9 +125,9 @@ export const withVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
               variant: "left-accent",
+              description: "オッス！オラ悟空！",
+              title: "孫悟空",
             })
           }
         >
@@ -142,16 +142,16 @@ export const withLoadingVariant = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
               icon: { variant: "oval" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -161,11 +161,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "solid",
+              description: "オッス！オラ悟空！",
               icon: { variant: "grid" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -175,11 +175,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "subtle",
+              description: "オッス！オラ悟空！",
               icon: { variant: "puff" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -189,11 +189,11 @@ export const withLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              status: "loading",
               variant: "solid",
+              description: "オッス！オラ悟空！",
               icon: { variant: "dots" },
+              status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -208,14 +208,14 @@ export const withStatus = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "info",
+              title: "孫悟空",
             })
           }
         >
@@ -225,9 +225,9 @@ export const withStatus = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "success",
+              title: "孫悟空",
             })
           }
         >
@@ -237,9 +237,9 @@ export const withStatus = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "warning",
+              title: "孫悟空",
             })
           }
         >
@@ -249,9 +249,9 @@ export const withStatus = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "error",
+              title: "孫悟空",
             })
           }
         >
@@ -261,9 +261,9 @@ export const withStatus = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               status: "loading",
+              title: "孫悟空",
             })
           }
         >
@@ -278,15 +278,15 @@ export const withColorScheme = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
+              colorScheme: "green",
               description: "オッス！オラ悟空！",
               status: "info",
-              colorScheme: "green",
+              title: "孫悟空",
             })
           }
         >
@@ -296,10 +296,10 @@ export const withColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
+              colorScheme: "purple",
               description: "オッス！オラ悟空！",
               status: "success",
-              colorScheme: "purple",
+              title: "孫悟空",
             })
           }
         >
@@ -309,10 +309,10 @@ export const withColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
+              colorScheme: "gray",
               description: "オッス！オラ悟空！",
               status: "warning",
-              colorScheme: "gray",
+              title: "孫悟空",
             })
           }
         >
@@ -322,10 +322,10 @@ export const withColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
+              colorScheme: "pink",
               description: "オッス！オラ悟空！",
               status: "error",
-              colorScheme: "pink",
+              title: "孫悟空",
             })
           }
         >
@@ -341,10 +341,10 @@ export const withPlacement = () => {
 
   return (
     <Center
-      w="calc(100vw - 16px * 2)"
-      h="calc(100vh - 16px * 2)"
       flexDirection="column"
       gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
     >
       <Wrap gap="md">
         <Button
@@ -423,14 +423,14 @@ export const withIsClosable = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
             duration: 30000,
             isClosable: true,
+            title: "孫悟空",
           })
         }
       >
@@ -444,14 +444,14 @@ export const withCloseStrategy = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
+            closeStrategy: "element",
             description: "オッス！オラ悟空！",
             isClosable: true,
-            closeStrategy: "element",
+            title: "孫悟空",
           })
         }
       >
@@ -463,14 +463,14 @@ export const withCloseStrategy = () => {
 
 export const useClose = () => {
   const notice = useNotice()
-  const ref = useRef<string | number | undefined>(undefined)
+  const ref = useRef<number | string | undefined>(undefined)
 
   const onOpen = () => {
     ref.current = notice({
-      title: "孫悟空",
       description: "オッス！オラ悟空！",
       duration: 30000,
       isClosable: true,
+      title: "孫悟空",
     })
   }
 
@@ -483,7 +483,7 @@ export const useClose = () => {
   }
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={onOpen}>Show Notice</Button>
         <Button onClick={onClose}>Close last Notice</Button>
@@ -495,29 +495,29 @@ export const useClose = () => {
 
 export const useUpdate = () => {
   const notice = useNotice()
-  const ref = useRef<string | number | undefined>(undefined)
+  const ref = useRef<number | string | undefined>(undefined)
 
   const onOpen = () => {
     ref.current = notice({
-      title: "孫悟空",
-      description: "オッス！オラ悟空！",
       colorScheme: "orange",
+      description: "オッス！オラ悟空！",
       duration: 30000,
+      title: "孫悟空",
     })
   }
 
   const onUpdate = () => {
     if (ref.current)
       notice.update(ref.current, {
-        title: "ベジータ",
-        description: "よくも…よくも…オレの…ブルマを!!",
         colorScheme: "blue",
+        description: "よくも…よくも…オレの…ブルマを!!",
         duration: 30000,
+        title: "ベジータ",
       })
   }
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={onOpen}>Show Notice</Button>
         <Button onClick={onUpdate}>Update last Notice</Button>
@@ -530,12 +530,12 @@ export const useLimit = () => {
   const notice = useNotice({ limit: 3 })
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
-            title: "孫悟空",
             description: "オッス！オラ悟空！",
+            title: "孫悟空",
           })
         }
       >
@@ -549,12 +549,12 @@ export const customComponent = () => {
   const notice = useNotice()
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
             component: () => (
-              <Box color="white" py={3} px={4} bg="purple.500">
+              <Box bg="purple.500" color="white" px={4} py={3}>
                 ギャルのパンティーおくれーーーっ！！！！！
               </Box>
             ),
@@ -576,14 +576,14 @@ export const customStyle = () => {
   })
 
   return (
-    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
               description: "オッス！オラ悟空！",
               isClosable: true,
+              title: "孫悟空",
             })
           }
         >
@@ -593,12 +593,12 @@ export const customStyle = () => {
         <Button
           onClick={() =>
             notice({
-              title: "孫悟空",
-              description: "オッス！オラ悟空！",
-              isClosable: true,
               style: {
                 minW: "60%",
               },
+              description: "オッス！オラ悟空！",
+              isClosable: true,
+              title: "孫悟空",
             })
           }
         >

@@ -1,9 +1,14 @@
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { ReactNode } from "react"
+import type { StatHelperMessageProps } from "./stat-helper-message"
+import type { StatIconProps } from "./stat-icon"
+import type { StatLabelProps } from "./stat-label"
+import type { StatNumberProps } from "./stat-number"
 import {
-  ui,
   forwardRef,
-  useComponentMultiStyle,
   omitThemeProps,
+  ui,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import {
   cx,
@@ -12,56 +17,51 @@ import {
   isEmpty,
   omitChildren,
 } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
 import { StatProvider } from "./stat-context"
 import { StatHelperMessage } from "./stat-helper-message"
-import type { StatHelperMessageProps } from "./stat-helper-message"
 import { StatIcon } from "./stat-icon"
-import type { StatIconProps } from "./stat-icon"
 import { StatLabel } from "./stat-label"
-import type { StatLabelProps } from "./stat-label"
 import { StatNumber } from "./stat-number"
-import type { StatNumberProps } from "./stat-number"
 
 interface StatOptions {
-  /**
-   * The stat label to use.
-   */
-  label?: ReactNode
-  /**
-   * Props for stat label component.
-   */
-  labelProps?: StatLabelProps
-  /**
-   * The stat number to use.
-   */
-  number?: ReactNode
-  /**
-   * Props for stat number component.
-   */
-  numberProps?: StatNumberProps
-  /**
-   * The stat icon to use.
-   */
-  icon?: StatIconProps["type"]
-  /**
-   * Props for stat icon component.
-   */
-  iconProps?: Omit<StatIconProps, "type">
-  /**
-   * The stat helper message to use.
-   */
-  helperMessage?: ReactNode
-  /**
-   * Props for stat helper message component.
-   */
-  helperMessageProps?: StatHelperMessageProps
   /**
    * If `true`, container will center its children regardless of their width.
    *
    * @default false
    */
   centerContent?: boolean
+  /**
+   * The stat helper message to use.
+   */
+  helperMessage?: ReactNode
+  /**
+   * The stat icon to use.
+   */
+  icon?: StatIconProps["type"]
+  /**
+   * The stat label to use.
+   */
+  label?: ReactNode
+  /**
+   * The stat number to use.
+   */
+  number?: ReactNode
+  /**
+   * Props for stat helper message component.
+   */
+  helperMessageProps?: StatHelperMessageProps
+  /**
+   * Props for stat icon component.
+   */
+  iconProps?: Omit<StatIconProps, "type">
+  /**
+   * Props for stat label component.
+   */
+  labelProps?: StatLabelProps
+  /**
+   * Props for stat number component.
+   */
+  numberProps?: StatNumberProps
 }
 
 export interface StatProps
@@ -78,23 +78,23 @@ export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Stat", props)
   const {
     className,
-    label,
-    labelProps,
-    number,
-    numberProps,
-    icon,
-    iconProps,
-    helperMessage,
-    helperMessageProps,
     centerContent = false,
     children,
+    helperMessage,
+    icon,
+    label,
+    number,
+    helperMessageProps,
+    iconProps,
+    labelProps,
+    numberProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
+    alignItems: centerContent ? "center" : "flex-start",
     display: "flex",
     flexDirection: "column",
-    alignItems: centerContent ? "center" : "flex-start",
     ...styles.container,
   }
 

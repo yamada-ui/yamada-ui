@@ -1,46 +1,45 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { Dispatch, DOMAttributes, RefObject, SetStateAction } from "react"
+import type { UseAutocompleteProps } from "./use-autocomplete"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext } from "@yamada-ui/utils"
-import type { Dispatch, DOMAttributes, RefObject, SetStateAction } from "react"
-import type { ChangeOptions, UseAutocompleteProps } from "./use-autocomplete"
 
 export const {
   DescendantsContextProvider: AutocompleteDescendantsContextProvider,
-  useDescendantsContext: useAutocompleteDescendantsContext,
-  useDescendants: useAutocompleteDescendants,
   useDescendant: useAutocompleteDescendant,
+  useDescendants: useAutocompleteDescendants,
+  useDescendantsContext: useAutocompleteDescendantsContext,
 } = createDescendant()
 
 interface AutocompleteContext
   extends Omit<
     UseAutocompleteProps,
-    "value" | "defaultValue" | "onChange" | "onCreate"
+    "defaultValue" | "onChange" | "onCreate" | "value"
   > {
-  value: string | string[]
-  label: string | string[] | undefined
+  focusedIndex: number
+  inputRef: RefObject<HTMLInputElement>
   inputValue: string
-  isHit: boolean
-  isEmpty: boolean
   isAllSelected: boolean
-  onChange: (newValue: string, options?: ChangeOptions) => void
-  onChangeLabel: (newValue: string, options?: ChangeOptions) => void
+  isEmpty: boolean
+  isHit: boolean
+  isOpen: boolean
+  label: string | string[] | undefined
+  listRef: RefObject<HTMLUListElement>
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
+  setFocusedIndex: Dispatch<SetStateAction<number>>
+  styles: { [key: string]: CSSUIObject | undefined }
+  value: string | string[]
+  formControlProps: { [key: string]: any }
   inputProps: DOMAttributes<HTMLInputElement>
-  isOpen: boolean
-  onOpen: () => void
+  onChange: (newValue: string, runRebirth?: boolean) => void
   onClose: () => void
   onCreate: () => void
   onFocusFirst: () => void
   onFocusLast: () => void
   onFocusNext: (index?: number) => void
   onFocusPrev: (index?: number) => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  listRef: RefObject<HTMLUListElement>
-  inputRef: RefObject<HTMLInputElement>
-  formControlProps: { [key: string]: any }
-  styles: { [key: string]: CSSUIObject }
+  onOpen: () => void
 }
 
 export const [AutocompleteProvider, useAutocompleteContext] =

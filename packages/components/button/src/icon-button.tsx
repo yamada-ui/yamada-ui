@@ -1,7 +1,7 @@
-import { forwardRef } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import type { ButtonProps } from "./button"
+import { forwardRef } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { Button } from "./button"
 
 interface IconButtonOptions {
@@ -15,10 +15,10 @@ export interface IconButtonProps
   extends Omit<
       ButtonProps,
       | "leftIcon"
-      | "rightIcon"
       | "loadingIcon"
-      | "loadingText"
       | "loadingPlacement"
+      | "loadingText"
+      | "rightIcon"
     >,
     IconButtonOptions {}
 
@@ -28,11 +28,11 @@ export interface IconButtonProps
  * @see Docs https://yamada-ui.com/components/forms/icon-button
  */
 export const IconButton = forwardRef<IconButtonProps, "button">(
-  ({ icon, children, className, ...rest }, ref) => {
+  ({ className, children, icon, ...rest }, ref) => {
     return (
       <Button
-        className={cx("ui-icon-button", className)}
         ref={ref}
+        className={cx("ui-icon-button", className)}
         p={0}
         {...rest}
       >

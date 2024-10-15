@@ -1,6 +1,6 @@
-type Operator = "+" | "-" | "*" | "/"
+type Operator = "*" | "+" | "/" | "-"
 
-export type Operand = string | number
+export type Operand = number | string
 
 function toExpression(operator: Operator, ...args: Operand[]) {
   return args.join(` ${operator} `).replace(/calc/g, "")
@@ -23,7 +23,7 @@ function divide(...args: Operand[]) {
 }
 
 function negate(value: Operand) {
-  if (value != null && !isNaN(parseFloat(value.toString())))
+  if (!isNaN(parseFloat(value.toString())))
     return String(value).startsWith("-") ? String(value).slice(1) : `-${value}`
 
   return multiply(value, -1)
@@ -31,27 +31,27 @@ function negate(value: Operand) {
 
 interface Calc {
   add: (...args: Operand[]) => Calc
-  subtract: (...args: Operand[]) => Calc
-  multiply: (...args: Operand[]) => Calc
   divide: (...args: Operand[]) => Calc
+  multiply: (...args: Operand[]) => Calc
   negate: () => Calc
+  subtract: (...args: Operand[]) => Calc
   toString: () => string
 }
 
 export const calc = Object.assign(
   (x: Operand): Calc => ({
     add: (...args) => calc(add(x, ...args)),
-    subtract: (...args) => calc(subtract(x, ...args)),
-    multiply: (...args) => calc(multiply(x, ...args)),
     divide: (...args) => calc(divide(x, ...args)),
+    multiply: (...args) => calc(multiply(x, ...args)),
     negate: () => calc(negate(x)),
+    subtract: (...args) => calc(subtract(x, ...args)),
     toString: () => x.toString(),
   }),
   {
     add,
-    subtract,
-    multiply,
     divide,
+    multiply,
     negate,
+    subtract,
   },
 )

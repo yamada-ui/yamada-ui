@@ -1,8 +1,8 @@
-import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type { SkeletonProps } from "./skeleton"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import type { SkeletonProps } from "./skeleton"
 import { Skeleton } from "./skeleton"
 
 interface SkeletonTextOptions {
@@ -24,15 +24,15 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
   (
     {
       className,
-      lineClamp: _lineClamp = 3,
-      startColor,
+      children,
       endColor,
       fadeDuration,
-      speed,
-      isLoaded,
       gap = "fallback(2, 0.5rem)",
+      isLoaded,
+      lineClamp: _lineClamp = 3,
+      speed,
+      startColor,
       textHeight = "fallback(2, 0.5rem)",
-      children,
       ...rest
     },
     ref,
@@ -59,9 +59,9 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
 
             const props: SkeletonProps = !isLoaded
               ? {
+                  h: textHeight,
                   mb: !isLast ? gap : undefined,
                   w: lineClamp > 1 ? (!isLast ? "100%" : "80%") : "100%",
-                  h: textHeight,
                 }
               : {}
 
@@ -69,11 +69,11 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
               <Skeleton
                 key={index}
                 {...{
-                  startColor,
                   endColor,
                   fadeDuration,
-                  speed,
                   isLoaded,
+                  speed,
+                  startColor,
                   ...props,
                 }}
               >

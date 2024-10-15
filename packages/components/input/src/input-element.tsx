@@ -1,5 +1,5 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useInputGroup } from "./input-context"
 
@@ -33,23 +33,23 @@ const InputElement = forwardRef<InputElementProps, "div">(
     { className, isClick = false, isClickable, placement = "left", ...rest },
     ref,
   ) => {
-    const { styles, fieldHeight, fieldFontSize } = useInputGroup()
+    const { fieldFontSize, fieldHeight, styles } = useInputGroup()
 
     isClickable ??= isClick
 
     const css: CSSUIObject = {
+      alignItems: "center",
+      cursor: isClickable ? "pointer" : "auto",
+      display: "flex",
+      fontSize: fieldFontSize,
+      h: "100%",
+      justifyContent: "center",
+      [placement === "left" ? "insetStart" : "insetEnd"]: "0",
+      pointerEvents: isClickable ? "auto" : "none",
       position: "absolute",
       top: "0",
-      [placement === "left" ? "insetStart" : "insetEnd"]: "0",
-      zIndex: "fallback(kurillin, 9)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
       w: fieldHeight,
-      h: "100%",
-      fontSize: fieldFontSize,
-      pointerEvents: isClickable ? "auto" : "none",
-      cursor: isClickable ? "pointer" : "auto",
+      zIndex: "fallback(kurillin, 9)",
       ...styles.element,
     }
 

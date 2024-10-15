@@ -1,9 +1,9 @@
 import type { ButtonProps } from "@yamada-ui/button"
-import { Button } from "@yamada-ui/button"
 import type { FC, HTMLUIProps } from "@yamada-ui/core"
+import type { CalendarHeaderProps } from "./calendar-header"
+import { Button } from "@yamada-ui/button"
 import { ui } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
-import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
 import { useCalendarContext } from "./use-calendar"
 import { useMonthList } from "./use-month-list"
@@ -20,29 +20,29 @@ interface MonthListOptions {
   /**
    * Props for calendar month button element.
    */
-  monthProps?: ButtonProps & {
-    component?: FC<{ month: string; year: number; index: number }>
-  }
+  monthProps?: {
+    component?: FC<{ index: number; month: string; year: number }>
+  } & ButtonProps
 }
 
 export interface MonthListProps
   extends HTMLUIProps,
-    Omit<CalendarHeaderProps, "label" | "index">,
+    Omit<CalendarHeaderProps, "index" | "label">,
     MonthListOptions {}
 
 export const MonthList: FC<MonthListProps> = ({
   className,
+  controlProps,
   headerProps,
   labelProps,
-  controlProps,
-  prevProps,
-  nextProps,
-  monthProps,
   monthGridProps,
+  monthProps,
+  nextProps,
+  prevProps,
   ...rest
 }) => {
-  const { year, styles } = useCalendarContext()
-  const { label, rangeMonths, getGridProps, getButtonProps } = useMonthList()
+  const { styles, year } = useCalendarContext()
+  const { label, rangeMonths, getButtonProps, getGridProps } = useMonthList()
 
   const { component: customMonth, ...computedMonthProps } = monthProps ?? {}
 
@@ -59,27 +59,27 @@ export const MonthList: FC<MonthListProps> = ({
         {...{
           ...headerProps,
           label,
-          labelProps,
           controlProps,
-          prevProps,
+          labelProps,
           nextProps,
+          prevProps,
         }}
       />
 
       <ui.div
         className={cx("ui-calendar__month-list", className)}
         __css={{
-          w: styles.content?.w ?? styles.content?.width,
-          minW: styles.content?.minW ?? styles.content?.minWidth,
-          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
-          h: styles.content?.h ?? styles.content?.height,
-          minH: styles.content?.minH ?? styles.content?.minHeight,
-          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
           display: "grid",
+          h: styles.content?.h ?? styles.content?.height,
+          maxH: styles.content?.maxH ?? styles.content?.maxHeight,
+          maxW: styles.content?.maxW ?? styles.content?.maxWidth,
+          minH: styles.content?.minH ?? styles.content?.minHeight,
+          minW: styles.content?.minW ?? styles.content?.minWidth,
+          w: styles.content?.w ?? styles.content?.width,
           ...styles.month,
         }}
         {...getGridProps({
-          ...filterUndefined({ w, minW, maxW, h, minH, maxH }),
+          ...filterUndefined({ h, maxH, maxW, minH, minW, w }),
           ...monthGridProps,
         })}
       >
@@ -89,16 +89,16 @@ export const MonthList: FC<MonthListProps> = ({
             className="ui-calendar__month-list__button"
             variant="ghost"
             __css={{
-              minW: "auto",
-              h: "auto",
-              p: 0,
               fontSize: undefined,
               fontWeight: "normal",
+              h: "auto",
+              minW: "auto",
+              p: 0,
               ...styles.button,
             }}
             {...getButtonProps({ ...computedMonthProps, value: index })}
           >
-            {customMonth ? customMonth({ month, year, index }) : month}
+            {customMonth ? customMonth({ index, month, year }) : month}
           </Button>
         ))}
       </ui.div>

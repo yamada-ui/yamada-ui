@@ -4,51 +4,43 @@ import { shadeColor, tintColor } from "@yamada-ui/utils"
 export const Slider: ComponentMultiStyle<"Slider"> = {
   baseStyle: {
     container: ({ orientation: o }) => ({
+      cursor: "pointer",
       display: "inline-block",
       position: "relative",
-      cursor: "pointer",
-      _readOnly: { cursor: "auto" },
       _disabled: {
-        opacity: 0.6,
         cursor: "not-allowed",
+        opacity: 0.6,
       },
+      _readOnly: { cursor: "auto" },
       ...(o === "vertical" ? { h: "100%" } : { w: "100%" }),
     }),
-    track: {
-      overflow: "hidden",
-      rounded: "sm",
-      bg: "border",
-      _disabled: {
-        bg: ["blackAlpha.200", "whiteAlpha.400"],
-      },
-    },
     filledTrack: ({ colorScheme: c = "primary" }) => ({
-      w: "inherit",
-      h: "inherit",
       bg: [`${c}.500`, `${c}.400`],
+      h: "inherit",
+      w: "inherit",
     }),
     mark: {
       fontSize: "sm",
     },
-    thumb: ({ theme: t, colorMode: m, orientation: o }) => ({
-      position: "absolute",
-      zIndex: "yamcha",
-      display: "flex",
+    thumb: ({ colorMode: m, orientation: o, theme: t }) => ({
       alignItems: "center",
-      justifyContent: "center",
-      outline: 0,
-      rounded: "full",
       bg: "white",
-      boxShadow: "base",
       border: "1px solid",
       borderColor: "transparent",
-      transitionProperty: "transform",
+      boxShadow: "base",
+      display: "flex",
+      justifyContent: "center",
+      outline: 0,
+      position: "absolute",
+      rounded: "full",
       transitionDuration: "normal",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
+      transitionProperty: "transform",
+      zIndex: "yamcha",
       _disabled: {
         bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
+      },
+      _focusVisible: {
+        boxShadow: "outline",
       },
       ...(o === "vertical"
         ? {
@@ -66,28 +58,36 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
             },
           }),
     }),
+    track: {
+      bg: "border",
+      overflow: "hidden",
+      rounded: "sm",
+      _disabled: {
+        bg: ["blackAlpha.200", "whiteAlpha.400"],
+      },
+    },
   },
 
   sizes: {
     sm: ({ orientation: o }) => ({
-      track: o === "vertical" ? { w: "0.5" } : { h: "0.5" },
-      thumb: { boxSize: "2.5" },
       mark: o === "vertical" ? { ml: "2" } : { mt: "2" },
+      thumb: { boxSize: "2.5" },
+      track: o === "vertical" ? { w: "0.5" } : { h: "0.5" },
     }),
     md: ({ orientation: o }) => ({
-      track: o === "vertical" ? { w: "1" } : { h: "1" },
-      thumb: { boxSize: "3.5" },
       mark: o === "vertical" ? { ml: "3" } : { mt: "3" },
+      thumb: { boxSize: "3.5" },
+      track: o === "vertical" ? { w: "1" } : { h: "1" },
     }),
     lg: ({ orientation: o }) => ({
-      track: o === "vertical" ? { w: "1.5" } : { h: "1.5" },
-      thumb: { boxSize: "5" },
       mark: o === "vertical" ? { ml: "4" } : { mt: "4" },
+      thumb: { boxSize: "5" },
+      track: o === "vertical" ? { w: "1.5" } : { h: "1.5" },
     }),
   },
 
   defaultProps: {
-    size: "md",
     colorScheme: "primary",
+    size: "md",
   },
 }

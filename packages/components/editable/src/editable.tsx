@@ -1,18 +1,19 @@
 import type {
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
   ColorModeToken,
   CSS,
+  CSSUIObject,
+  HTMLUIProps,
   PropGetter,
-} from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useComponentMultiStyle,
-  omitThemeProps,
+  ThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
+import type { ChangeEvent, FocusEvent, KeyboardEvent, ReactNode } from "react"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentMultiStyle,
+} from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -22,35 +23,22 @@ import { useFocusOnPointerDown } from "@yamada-ui/use-focus"
 import {
   createContext,
   cx,
+  handlerAll,
+  isContains,
+  mergeRefs,
+  pickObject,
   runIfFunc,
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
-  isContains,
-  handlerAll,
-  mergeRefs,
-  pickObject,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, FocusEvent, ReactNode, KeyboardEvent } from "react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 export interface UseEditableProps extends FormControlOptions {
   /**
-   * The placeholder text when the value is empty.
-   */
-  placeholder?: string
-  /**
-   * The value of the Editable in both edit & preview mode.
-   */
-  value?: string
-  /**
    * The initial value of the Editable in both edit & preview mode.
    */
   defaultValue?: string
-  /**
-   * If `true`, the Editable will start with edit mode by default.
-   */
-  startWithEditView?: boolean
   /**
    * If `true`, the read only view, has a `tabIndex` set to `0`
    * so it can receive focus via the keyboard or click.
@@ -59,11 +47,9 @@ export interface UseEditableProps extends FormControlOptions {
    */
   isPreviewFocusable?: boolean
   /**
-   * If `true`, it'll update the value onBlur and turn off the edit mode.
-   *
-   * @default true
+   * The placeholder text when the value is empty.
    */
-  submitOnBlur?: boolean
+  placeholder?: string
   /**
    * If `true`, the input's text will be highlighted on focus.
    *
@@ -71,42 +57,56 @@ export interface UseEditableProps extends FormControlOptions {
    */
   selectAllOnFocus?: boolean
   /**
-   * A callback invoked when user changes input.
+   * If `true`, the Editable will start with edit mode by default.
    */
-  onChange?: (value: string) => void
+  startWithEditView?: boolean
+  /**
+   * If `true`, it'll update the value onBlur and turn off the edit mode.
+   *
+   * @default true
+   */
+  submitOnBlur?: boolean
+  /**
+   * The value of the Editable in both edit & preview mode.
+   */
+  value?: string
   /**
    * Callback invoked when user cancels input with the `Esc` key.
    * It provides the last confirmed value as argument.
    */
   onCancel?: (preValue: string) => void
   /**
-   * A callback invoked when user confirms value with `enter` key or by blurring input.
+   * A callback invoked when user changes input.
    */
-  onSubmit?: (value: string) => void
+  onChange?: (value: string) => void
   /**
    * A callback invoked once the user enters edit mode.
    */
   onEdit?: () => void
+  /**
+   * A callback invoked when user confirms value with `enter` key or by blurring input.
+   */
+  onSubmit?: (value: string) => void
 }
 
 export const useEditable = (props: UseEditableProps) => {
   const {
     id,
-    placeholder,
-    value: valueProp,
-    onChange: onChangeProp,
-    onCancel: onCancelProp,
-    onSubmit: onSubmitProp,
-    onEdit: onEditProp,
     defaultValue,
-    startWithEditView,
     isPreviewFocusable = true,
-    submitOnBlur = true,
+    placeholder,
     selectAllOnFocus = true,
+    startWithEditView,
+    submitOnBlur = true,
+    value: valueProp,
+    onCancel: onCancelProp,
+    onChange: onChangeProp,
+    onEdit: onEditProp,
+    onSubmit: onSubmitProp,
     ...rest
   } = useFormControlProps(props)
   const onEditRef = useCallbackRef(onEditProp)
-  const { required, disabled, readOnly, ...formControlProps } = pickObject(
+  const { disabled, readOnly, required, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
@@ -134,8 +134,8 @@ export const useEditable = (props: UseEditableProps) => {
 
   useFocusOnPointerDown({
     ref: inputRef,
-    enabled: isEditing,
     elements: [cancelRef, submitRef],
+    enabled: isEditing,
   })
 
   useSafeLayoutEffect(() => {
@@ -202,7 +202,7 @@ export const useEditable = (props: UseEditableProps) => {
       if (ev.key === "Escape") {
         onCancel()
       } else {
-        const { shiftKey, metaKey } = ev
+        const { metaKey, shiftKey } = ev
 
         if (!shiftKey && !metaKey) onSubmit()
       }
@@ -246,9 +246,9 @@ export const useEditable = (props: UseEditableProps) => {
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, previewRef),
+      children: isValueEmpty ? placeholder : value,
       hidden: isEditing,
       tabIndex: isInteractive && isPreviewFocusable ? 0 : undefined,
-      children: isValueEmpty ? placeholder : value,
       onFocus: handlerAll(props.onFocus, onEdit, onUpdatePrevValue),
     }),
     [
@@ -267,18 +267,18 @@ export const useEditable = (props: UseEditableProps) => {
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
-      ref: mergeRefs(ref, inputRef),
       id,
-      placeholder,
-      hidden: !isEditing,
-      value,
-      required,
+      ref: mergeRefs(ref, inputRef),
       disabled,
+      hidden: !isEditing,
+      placeholder,
       readOnly,
+      required,
+      value,
       onBlur: handlerAll(props.onBlur, onBlur),
       onChange: handlerAll(props.onChange, onChange),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       onFocus: handlerAll(props.onFocus, onUpdatePrevValue),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
     [
       disabled,
@@ -300,18 +300,18 @@ export const useEditable = (props: UseEditableProps) => {
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
-      ref: mergeRefs(ref, inputRef),
       id,
-      placeholder,
-      hidden: !isEditing,
-      value,
-      required,
+      ref: mergeRefs(ref, inputRef),
       disabled,
+      hidden: !isEditing,
+      placeholder,
       readOnly,
+      required,
+      value,
       onBlur: handlerAll(props.onBlur, onBlur),
       onChange: handlerAll(props.onChange, onChange),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDownWithoutSubmit),
       onFocus: handlerAll(props.onFocus, onUpdatePrevValue),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDownWithoutSubmit),
     }),
     [
       disabled,
@@ -371,36 +371,36 @@ export const useEditable = (props: UseEditableProps) => {
   return {
     isEditing,
     value,
-    onEdit,
-    onCancel,
-    onSubmit,
-    getPreviewProps,
-    getInputProps,
-    getTextareaProps,
-    getEditProps,
-    getSubmitProps,
     getCancelProps,
+    getEditProps,
+    getInputProps,
+    getPreviewProps,
+    getSubmitProps,
+    getTextareaProps,
+    onCancel,
+    onEdit,
+    onSubmit,
   }
 }
 
 export type UseEditableReturn = ReturnType<typeof useEditable>
 
 export const useEditableControl = () => {
-  const { isEditing, getEditProps, getCancelProps, getSubmitProps } =
+  const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
     useEditableContext()
 
-  return { isEditing, getEditProps, getCancelProps, getSubmitProps }
+  return { isEditing, getCancelProps, getEditProps, getSubmitProps }
 }
 
 interface EditableContext {
   isEditing: boolean
-  getPreviewProps: PropGetter<"span">
-  getInputProps: PropGetter<"input">
-  getTextareaProps: PropGetter<"textarea">
-  getEditProps: PropGetter<"button">
+  styles: { [key: string]: CSSUIObject | undefined }
   getCancelProps: PropGetter<"button">
+  getEditProps: PropGetter<"button">
+  getInputProps: PropGetter<"input">
+  getPreviewProps: PropGetter<"span">
   getSubmitProps: PropGetter<"button">
-  styles: { [key: string]: CSSUIObject }
+  getTextareaProps: PropGetter<"textarea">
 }
 
 const [EditableProvider, useEditableContext] = createContext<EditableContext>({
@@ -412,27 +412,27 @@ const [EditableProvider, useEditableContext] = createContext<EditableContext>({
 interface EditableElementProps
   extends Pick<
     UseEditableReturn,
-    "isEditing" | "onSubmit" | "onCancel" | "onEdit"
+    "isEditing" | "onCancel" | "onEdit" | "onSubmit"
   > {}
 
 type EditableElement = (props: EditableElementProps) => ReactNode
 
 interface EditableOptions {
-  /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  children?: EditableElement | ReactNode
   /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  children?: ReactNode | EditableElement
+  /**
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
 }
 
 export interface EditableProps
   extends Omit<
       HTMLUIProps,
-      "onChange" | "value" | "defaultValue" | "onSubmit" | "children"
+      "children" | "defaultValue" | "onChange" | "onSubmit" | "value"
     >,
     ThemeProps<"Editable">,
     UseEditableProps,
@@ -444,66 +444,66 @@ export interface EditableProps
  * @see Docs https://yamada-ui.com/components/forms/editable
  */
 export const Editable = forwardRef<EditableProps, "div">(
-  ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
+  ({ errorBorderColor, focusBorderColor, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Editable", {
-      focusBorderColor,
       errorBorderColor,
+      focusBorderColor,
       ...props,
     })
     const {
       className,
       children,
+      defaultValue,
+      isDisabled,
       isInvalid,
+      isPreviewFocusable,
       isReadOnly,
       isRequired,
-      isDisabled,
       placeholder,
-      value,
-      defaultValue,
-      startWithEditView,
-      isPreviewFocusable,
-      submitOnBlur,
       selectAllOnFocus,
-      onChange,
+      startWithEditView,
+      submitOnBlur,
+      value,
       onCancel: onCancelProp,
-      onSubmit: onSubmitProp,
+      onChange,
       onEdit: onEditProp,
+      onSubmit: onSubmitProp,
       ...rest
     } = omitThemeProps(mergedProps)
     const {
       isEditing,
-      getPreviewProps,
-      getInputProps,
-      getTextareaProps,
-      getEditProps,
       getCancelProps,
+      getEditProps,
+      getInputProps,
+      getPreviewProps,
       getSubmitProps,
-      onSubmit,
+      getTextareaProps,
       onCancel,
       onEdit,
+      onSubmit,
     } = useEditable({
+      defaultValue,
+      isDisabled,
       isInvalid,
+      isPreviewFocusable,
       isReadOnly,
       isRequired,
-      isDisabled,
       placeholder,
-      value,
-      defaultValue,
-      startWithEditView,
-      isPreviewFocusable,
-      submitOnBlur,
       selectAllOnFocus,
-      onChange,
+      startWithEditView,
+      submitOnBlur,
+      value,
       onCancel: onCancelProp,
-      onSubmit: onSubmitProp,
+      onChange,
       onEdit: onEditProp,
+      onSubmit: onSubmitProp,
     })
 
     const cloneChildren = runIfFunc(children, {
       isEditing,
-      onSubmit,
       onCancel,
       onEdit,
+      onSubmit,
     })
 
     const css: CSSUIObject = { ...styles.container }
@@ -512,13 +512,13 @@ export const Editable = forwardRef<EditableProps, "div">(
       <EditableProvider
         value={{
           isEditing,
-          getPreviewProps,
-          getInputProps,
-          getTextareaProps,
-          getEditProps,
-          getCancelProps,
-          getSubmitProps,
           styles,
+          getCancelProps,
+          getEditProps,
+          getInputProps,
+          getPreviewProps,
+          getSubmitProps,
+          getTextareaProps,
         }}
       >
         <ui.div
@@ -544,12 +544,12 @@ export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
     const { styles, getPreviewProps } = useEditableContext()
 
     const css: CSSUIObject = {
+      bg: "transparent",
       cursor: "text",
       display: "inline-block",
       fontSize: "inherit",
       fontWeight: "inherit",
       textAlign: "inherit",
-      bg: "transparent",
       ...styles.preview,
     }
 
@@ -573,11 +573,11 @@ export const EditableInput = forwardRef<EditableInputProps, "input">(
     const { styles, getInputProps } = useEditableContext()
 
     const css: CSSUIObject = {
-      outline: 0,
+      bg: "transparent",
       fontSize: "inherit",
       fontWeight: "inherit",
+      outline: 0,
       textAlign: "inherit",
-      bg: "transparent",
       ...styles.input,
     }
 
@@ -601,11 +601,11 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
     const { styles, getTextareaProps } = useEditableContext()
 
     const css: CSSUIObject = {
-      outline: 0,
+      bg: "transparent",
       fontSize: "inherit",
       fontWeight: "inherit",
+      outline: 0,
       textAlign: "inherit",
-      bg: "transparent",
       ...styles.textarea,
     }
 

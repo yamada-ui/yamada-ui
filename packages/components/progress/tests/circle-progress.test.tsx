@@ -8,19 +8,17 @@ describe("<CircleProgress />", () => {
 
   test("renders correctly without animation", () => {
     render(
-      <>
-        <CircleProgress
-          data-testid="circle-progress-a"
-          boxSize="8rem"
-          thickness="0.5rem"
-          color="green.500"
-          trackColor="gray.300"
-          value={75}
-          min={0}
-          max={100}
-          isRounded
-        />
-      </>,
+      <CircleProgress
+        data-testid="circle-progress-a"
+        boxSize="8rem"
+        color="green.500"
+        isRounded
+        max={100}
+        min={0}
+        thickness="0.5rem"
+        trackColor="gray.300"
+        value={75}
+      />,
     )
     expect(screen.getByTestId("circle-progress-a")).toBeInTheDocument()
   })
@@ -48,16 +46,16 @@ describe("<CircleProgress />", () => {
     render(
       <CircleProgress
         data-testid="circle-progress"
-        value={50}
         boxSize="120px"
+        value={50}
       />,
     )
 
     const circleProgressChild =
       screen.getByTestId("circle-progress").children[0]
     expect(circleProgressChild).toHaveStyle({
-      width: "120px",
       height: "120px",
+      width: "120px",
     })
   })
 

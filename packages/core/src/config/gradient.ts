@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
-import { isArray } from "@yamada-ui/utils"
 import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
+import { isArray, isUndefined } from "@yamada-ui/utils"
 import {
   getCSSFunction,
   globalValues,
@@ -10,14 +10,14 @@ import {
 } from "./utils"
 
 const directions: { [key: string]: string } = {
-  "to-t": "to top",
-  "to-tr": "to top right",
-  "to-r": "to right",
-  "to-br": "to bottom right",
   "to-b": "to bottom",
   "to-bl": "to bottom left",
+  "to-br": "to bottom right",
   "to-l": "to left",
+  "to-r": "to right",
+  "to-t": "to top",
   "to-tl": "to top left",
+  "to-tr": "to top right",
 }
 
 const directionValues = new Set(Object.values(directions))
@@ -45,11 +45,15 @@ export function gradient(
   if (!colors.length) return value
 
   const direction =
-    maybeDirection in directions ? directions[maybeDirection] : maybeDirection
+    maybeDirection && maybeDirection in directions
+      ? directions[maybeDirection]
+      : maybeDirection
 
-  colors.unshift(direction)
+  if (!isUndefined(direction)) colors.unshift(direction)
 
   const computedValues = colors.map((_color) => {
+    if (isUndefined(_color)) return _color
+
     if (directionValues.has(_color)) return _color
 
     const i = _color.indexOf(" ")
@@ -57,13 +61,13 @@ export function gradient(
     let [color, _ratio] =
       i !== -1 ? [_color.slice(0, i), _color.slice(i + 1)] : [_color]
 
-    const ratio = isCSSFunction(_ratio) ? _ratio : _ratio && _ratio.split(" ")
+    const ratio = isCSSFunction(_ratio) ? _ratio : _ratio?.split(" ")
 
     const token = `colors.${color}`
 
     color =
       theme.__cssMap && token in theme.__cssMap
-        ? theme.__cssMap[token].ref
+        ? (theme.__cssMap[token]?.ref ?? color)
         : color
 
     if (ratio) {

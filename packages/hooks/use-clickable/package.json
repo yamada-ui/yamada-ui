@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@yamada-ui/use-event-listener": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

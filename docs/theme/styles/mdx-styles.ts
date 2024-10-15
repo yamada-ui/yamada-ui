@@ -85,13 +85,15 @@ export const mdx: { [key: string]: CSSUIObject } = {
   "table-container": {
     my: "6",
     td: {
+      lineHeight: "1.5rem",
       verticalAlign: "middle",
-      whiteSpace: "normal",
+      whiteSpace: "6",
     },
     th: {
       fontFamily: "body",
       fontWeight: "semibold",
       letterSpacing: "normal",
+      lineHeight: "6",
       textTransform: "none",
     },
   },

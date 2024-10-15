@@ -1,88 +1,88 @@
 {
-  "SegmentedControl": {
-    "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "defaultValue": {
+  "SegmentedControlButton": {
+    "value": {
       "type": "string",
-      "required": false,
-      "description": "The initial value of the segmented control."
+      "description": "The value of the segmented control button.",
+      "required": true
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the segmented control will be disabled."
+      "description": "If `true`, the segmented control will be disabled.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the segmented control will be readonly."
+      "description": "If `true`, the segmented control will be readonly.",
+      "required": false
+    },
+    "motionProps": {
+      "type": "MotionProps",
+      "description": "Props for motion component.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
+    }
+  },
+  "SegmentedControl": {
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "The initial value of the segmented control.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be disabled.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be readonly.",
+      "required": false
     },
     "items": {
       "type": "SegmentedControlItem[]",
       "defaultValue": "'[]'",
-      "required": false,
-      "description": "If provided, generate segmented control buttons but based on items."
+      "description": "If provided, generate segmented control buttons but based on items.",
+      "required": false
     },
     "name": {
       "type": "string",
-      "required": false,
-      "description": "The HTML `name` attribute used for forms."
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
     },
     "onChange": {
       "type": "(value: string) => void",
-      "required": false,
-      "description": "The callback fired when any children radio is checked or unchecked."
+      "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the SegmentedControl."
+      "defaultValue": "\"md\"",
+      "description": "The size of the SegmentedControl.",
+      "required": false
     },
     "value": {
       "type": "string",
-      "required": false,
-      "description": "The value of the segmented control."
+      "description": "The value of the segmented control.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "basic",
       "type": "\"basic\" | \"rounded\"",
-      "required": false,
-      "description": "The variant of the SegmentedControl."
-    }
-  },
-  "SegmentedControlButton": {
-    "value": {
-      "type": "string",
-      "required": true,
-      "description": "The value of the segmented control button."
-    },
-    "isDisabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the segmented control will be disabled."
-    },
-    "isReadOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the segmented control will be readonly."
-    },
-    "motionProps": {
-      "type": "MotionProps",
-      "required": false,
-      "description": "Props for motion component."
-    },
-    "onChange": {
-      "type": "ChangeEventHandler<HTMLInputElement>",
-      "required": false,
-      "description": "The callback fired when any children radio is checked or unchecked."
+      "defaultValue": "\"basic\"",
+      "description": "The variant of the SegmentedControl.",
+      "required": false
     }
   }
 }

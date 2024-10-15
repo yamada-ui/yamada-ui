@@ -1,242 +1,242 @@
 {
   "Carousel": {
     "align": {
-      "type": "AlignmentOptionType | { [x: string & {}]: AlignmentOptionType | [AlignmentOptionType | undefined, AlignmentOptionType | undefined] | undefined; ... 5 more ...; base?: AlignmentOptionType | ... 1 more ... | undefined; } | [...]",
+      "type": "AlignmentOptionType | [AlignmentOptionType | { [x: string]: AlignmentOptionType | undefined; base?: AlignmentOptionType | undefined; ... 4 more ...; xl?: AlignmentOptionType | undefined; } | undefined, AlignmentOptionType | ... 1 more ... | undefined] | { ...; }",
       "defaultValue": "'center'",
-      "required": false,
-      "description": "The alignment of the carousel."
+      "description": "The alignment of the carousel.",
+      "required": false
     },
     "autoplay": {
       "type": "UIValue<boolean>",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the carousel will be autoplay."
+      "description": "If `true`, the carousel will be autoplay.",
+      "required": false
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "containScroll": {
-      "type": "ScrollContainOptionType | { [x: string & {}]: ScrollContainOptionType | [ScrollContainOptionType | undefined, ScrollContainOptionType | undefined] | undefined; ... 5 more ...; base?: ScrollContainOptionType | ... 1 more ... | undefined; } | [...]",
+      "type": "ScrollContainOptionType | [ScrollContainOptionType | { [x: string]: ScrollContainOptionType | undefined; ... 5 more ...; xl?: ScrollContainOptionType | undefined; } | undefined, ScrollContainOptionType | ... 1 more ... | undefined] | { ...; }",
       "defaultValue": "''",
-      "required": false,
-      "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
+      "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.",
+      "required": false
     },
     "controlNextProps": {
       "type": "CarouselControlProps",
-      "required": false,
-      "description": "Props for next of the carousel control element."
+      "description": "Props for next of the carousel control element.",
+      "required": false
     },
     "controlPrevProps": {
       "type": "CarouselControlProps",
-      "required": false,
-      "description": "Props for previous of the carousel control element."
+      "description": "Props for previous of the carousel control element.",
+      "required": false
     },
     "controlProps": {
       "type": "CarouselControlProps",
-      "required": false,
-      "description": "Props for carousel control element."
+      "description": "Props for carousel control element.",
+      "required": false
     },
     "controlRef": {
       "type": "RefObject<EmblaCarouselType | undefined>",
-      "required": false,
-      "description": "Ref of the resizable item callback."
+      "description": "Ref of the resizable item callback.",
+      "required": false
     },
     "defaultIndex": {
       "type": "number",
       "defaultValue": "0",
-      "required": false,
-      "description": "The initial index of the carousel slide."
+      "description": "The initial index of the carousel slide.",
+      "required": false
     },
     "delay": {
       "type": "UIValue<number>",
       "defaultValue": "4000",
-      "required": false,
-      "description": "The number for the autoplay interval of the carousel."
+      "description": "The number for the autoplay interval of the carousel.",
+      "required": false
     },
     "dragFree": {
       "type": "UIValue<boolean>",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, momentum scrolling will be enabled."
+      "description": "If `true`, momentum scrolling will be enabled.",
+      "required": false
     },
     "draggable": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, carousel can be scrolled with mouse and touch interactions."
+      "description": "If `true`, carousel can be scrolled with mouse and touch interactions.",
+      "required": false
     },
     "duration": {
       "type": "UIValue<number>",
       "defaultValue": "25",
-      "required": false,
-      "description": "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force."
+      "description": "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force.",
+      "required": false
     },
     "includeGapInSize": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, gap will be treated as part of the carousel slide size."
+      "description": "If `true`, gap will be treated as part of the carousel slide size.",
+      "required": false
     },
     "index": {
       "type": "number",
-      "required": false,
-      "description": "The index of the carousel slide."
+      "description": "The index of the carousel slide.",
+      "required": false
     },
     "indicatorsProps": {
       "type": "CarouselIndicatorsProps",
-      "required": false,
-      "description": "Props for carousel indicators element."
+      "description": "Props for carousel indicators element.",
+      "required": false
     },
     "innerProps": {
       "type": "HTMLUIProps",
-      "required": false,
-      "description": "Props for carousel inner element."
+      "description": "Props for carousel inner element.",
+      "required": false
     },
     "inViewThreshold": {
-      "type": "number | number[] | { [x: string & {}]: number | number[] | [number | number[] | undefined, number | number[] | undefined] | undefined; sm?: number | number[] | [number | number[] | undefined, number | ... 1 more ... | undefined] | undefined; ... 4 more ...; base?: number | ... 2 more ... | undefined; } | [...]",
+      "type": "number | number[] | [number | number[] | { [x: string]: number | number[] | undefined; base?: number | number[] | undefined; \"2xl\"?: number | number[] | undefined; lg?: number | number[] | undefined; md?: number | ... 1 more ... | undefined; sm?: number | ... 1 more ... | undefined; xl?: number | ... 1 more ... | un...",
       "defaultValue": "0",
-      "required": false,
-      "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
+      "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.",
+      "required": false
     },
     "loop": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop."
+      "description": "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop.",
+      "required": false
     },
     "onChange": {
       "type": "(index: number) => void",
-      "required": false,
-      "description": "The callback invoked when carousel slide selected."
+      "description": "The callback invoked when carousel slide selected.",
+      "required": false
     },
     "onScrollProgress": {
       "type": "(progress: number) => void",
-      "required": false,
-      "description": "A callback that return the current scroll amount when the carousel is scrolled."
+      "description": "A callback that return the current scroll amount when the carousel is scrolled.",
+      "required": false
     },
     "orientation": {
-      "type": "UIValue<\"vertical\" | \"horizontal\">",
+      "type": "UIValue<\"horizontal\" | \"vertical\">",
       "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the carousel."
+      "description": "The orientation of the carousel.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
-      "required": false,
-      "description": "The size of the Carousel."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Carousel.",
+      "required": false
     },
     "skipSnaps": {
       "type": "UIValue<boolean>",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true."
+      "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true.",
+      "required": false
     },
     "slideSize": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 71 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `width` property."
+      "type": "UIValue<number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 72 more ... | \"xs\">",
+      "description": "The CSS `width` property.",
+      "required": false
     },
     "slidesToScroll": {
       "type": "UIValue<number>",
       "defaultValue": "1",
-      "required": false,
-      "description": "The number of slides that should be scrolled with next or previous buttons."
+      "description": "The number of slides that should be scrolled with next or previous buttons.",
+      "required": false
     },
     "stopMouseEnterAutoplay": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, autoplay will pause when the mouse entries over."
+      "description": "If `true`, autoplay will pause when the mouse entries over.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Carousel."
+      "description": "The variant of the Carousel.",
+      "required": false
     },
     "watchDrag": {
       "type": "DragHandlerOptionType",
       "defaultValue": true,
-      "required": false,
-      "description": "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic."
+      "description": "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic.",
+      "required": false
     },
     "watchResize": {
       "type": "ResizeHandlerOptionType",
       "defaultValue": true,
-      "required": false,
-      "description": "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic."
+      "description": "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.",
+      "required": false
     },
     "watchSlides": {
       "type": "SlidesHandlerOptionType",
       "defaultValue": true,
-      "required": false,
-      "description": "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic."
+      "description": "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.",
+      "required": false
     },
     "withControls": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the carousel control buttons."
+      "description": "If `true`, display the carousel control buttons.",
+      "required": false
     },
     "withIndicators": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the carousel indicator buttons."
-    }
-  },
-  "CarouselSlide": {
-    "index": { "type": "number", "required": false },
-    "size": {
-      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)",
-      "required": false,
-      "description": "The CSS `width` property."
+      "description": "If `true`, display the carousel indicator buttons.",
+      "required": false
     }
   },
   "CarouselControl": {
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to be used in the button."
+      "description": "The icon to be used in the button.",
+      "required": false
     },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is represented as active."
+      "description": "If `true`, the button is represented as active.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is disabled."
+      "description": "If `true`, the button is disabled.",
+      "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the loading state of the button is represented."
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
     }
   },
   "CarouselIndicators": {
     "component": {
       "type": "FC<{ index: number; isSelected: boolean }>",
-      "required": false,
-      "description": "The custom carousel indicator to use."
+      "description": "The custom carousel indicator to use.",
+      "required": false
+    }
+  },
+  "CarouselSlide": {
+    "index": { "type": "number", "required": false },
+    "size": {
+      "type": "number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 77 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "description": "The CSS `width` property.",
+      "required": false
     }
   }
 }

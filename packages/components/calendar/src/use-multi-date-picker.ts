@@ -176,21 +176,21 @@ export const useMultiDatePicker = ({
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
-        ...(inputProps as { style?: CSSProperties }).style,
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
+        ...inputProps.style,
+        ...(formControlProps.disabled || !allowInput
+          ? { pointerEvents: "none" }
+          : {}),
       }
 
       return {
+        id,
         placeholder,
+        tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
         ...inputProps,
         ...props,
-        id,
         ref,
         style,
-        cursor: formControlProps.readOnly ? "default" : "text",
-        pointerEvents: formControlProps.disabled ? "none" : "auto",
-        tabIndex: !allowInput ? -1 : 0,
         value: inputValue,
         onChange: handlerAll(props.onChange, onChange),
         onCompositionEnd: handlerAll(props.onCompositionEnd, onCompositionEnd),

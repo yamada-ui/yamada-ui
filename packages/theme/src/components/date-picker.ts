@@ -20,6 +20,9 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
         _focus: {
           zIndex: "unset",
         },
+        _notAllowed: {
+          cursor: "pointer",
+        },
         _readOnly: {
           pointerEvents: "none",
         },

@@ -2,53 +2,53 @@
   "Highlight": {
     "query": {
       "type": "string | string[]",
-      "required": true,
-      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text."
+      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text.",
+      "required": true
     },
     "align": {
       "type": "UIValue<TextAlign>",
-      "required": false,
-      "description": "The CSS `text-align` property."
+      "description": "The CSS `text-align` property.",
+      "required": false
     },
     "casing": {
       "type": "UIValue<TextTransform>",
-      "required": false,
-      "description": "The CSS `text-transform` property."
+      "description": "The CSS `text-transform` property.",
+      "required": false
     },
     "decoration": {
       "type": "UIValue<TextDecoration<0 | (string & {})>>",
-      "required": false,
-      "description": "The CSS `text-decoration` property."
+      "description": "The CSS `text-decoration` property.",
+      "required": false
     },
     "isFragment": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, `Fragment` is used for rendering."
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
     },
     "markProps": {
       "type": "MarkProps",
-      "required": false,
-      "description": "Properties passed to the Mark component which is used to highlight the matched terms."
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
+      "required": false
     }
   },
   "Mark": {
     "colorScheme": {
-      "defaultValue": "secondary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"secondary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "size": {
       "type": "string",
-      "required": false,
-      "description": "The size of the Mark."
+      "description": "The size of the Mark.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "subtle",
-      "type": "\"solid\" | \"subtle\" | \"outline\" | \"text-accent\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Mark."
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"text-accent\" | \"unstyled\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the Mark.",
+      "required": false
     }
   }
 }

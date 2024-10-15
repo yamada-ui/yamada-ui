@@ -1,17 +1,22 @@
-import type { Dict } from "@yamada-ui/utils"
+import type { UIProps } from "@yamada-ui/core"
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
 import { useEventListeners } from "@yamada-ui/use-event-listener"
 import { dataAttr, isTouchDevice, mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 
+type Props<Y extends HTMLElement = HTMLElement> = Omit<
+  HTMLAttributes<Y>,
+  "ref" | "size" | keyof UIProps
+>
+
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
-  M extends HTMLAttributes<Y> = HTMLAttributes<Y>,
+  M extends Props<Y> = Props<Y>,
 > = {
   /**
    * The ref for the element.
    */
-  ref?: Ref<HTMLElement>
+  ref?: Ref<Y>
   /**
    * Whether or not trigger click on pressing `Enter`.
    *
@@ -61,7 +66,7 @@ const isValidElement = (
 
 export const useClickable = <
   Y extends HTMLElement = HTMLElement,
-  M extends HTMLAttributes<Y> = Dict,
+  M extends Props<Y> = Props<Y>,
 >(
   {
     ref,

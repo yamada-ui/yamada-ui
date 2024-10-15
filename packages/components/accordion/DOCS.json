@@ -1,148 +1,148 @@
 {
   "Accordion": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "defaultIndex": {
       "type": "number | number[]",
-      "required": false,
-      "description": "The initial index(es) of the accordion item to expand."
+      "description": "The initial index(es) of the accordion item to expand.",
+      "required": false
     },
     "icon": {
       "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
-      "required": false,
-      "description": "The accordion icon for all items to use."
+      "description": "The accordion icon for all items to use.",
+      "required": false
     },
     "iconHidden": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, hide the accordion icon for all items."
+      "description": "If `true`, hide the accordion icon for all items.",
+      "required": false
     },
     "index": {
       "type": "number | number[]",
-      "required": false,
-      "description": "The index(es) of the accordion item to expand."
+      "description": "The index(es) of the accordion item to expand.",
+      "required": false
     },
     "isMultiple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, multiple accordion items can be expanded at once."
+      "description": "If `true`, multiple accordion items can be expanded at once.",
+      "required": false
     },
     "isToggle": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, any expanded accordion item can be collapsed again."
+      "description": "If `true`, any expanded accordion item can be collapsed again.",
+      "required": false
     },
     "onChange": {
       "type": "(index: number | number[]) => void",
-      "required": false,
-      "description": "The callback invoked when accordion items are expanded or collapsed."
+      "description": "The callback invoked when accordion items are expanded or collapsed.",
+      "required": false
     },
     "size": {
       "type": "string",
-      "required": false,
-      "description": "The size of the Accordion."
+      "description": "The size of the Accordion.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "basic",
       "type": "\"basic\" | \"card\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Accordion."
+      "defaultValue": "\"basic\"",
+      "description": "The variant of the Accordion.",
+      "required": false
     }
   },
   "AccordionItem": {
     "icon": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
-      "required": false,
-      "description": "The accordion icon to use."
+      "type": "string | number | boolean | ((props: { isDisabled: boolean; isExpanded: boolean; }) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal",
+      "description": "The accordion icon to use.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the accordion item will be disabled."
+      "description": "If `true`, the accordion item will be disabled.",
+      "required": false
     },
     "label": {
       "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
-      "required": false,
-      "description": "The accordion label to use."
+      "description": "The accordion label to use.",
+      "required": false
+    }
+  },
+  "AccordionLabel": {
+    "containerProps": {
+      "type": "HTMLUIProps",
+      "description": "Props the container element.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
+      "description": "The accordion icon to use.",
+      "required": false
     }
   },
   "AccordionPanel": {
     "animationOpacity": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, the opacity of the content will be animated."
+      "description": "If `true`, the opacity of the content will be animated.",
+      "required": false
     },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
-      "required": false,
-      "description": "Custom `delay` definition for `enter` and `exit`."
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
-      "required": false,
-      "description": "Custom `duration` definition for `enter` and `exit`."
+      "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
     },
     "endingHeight": {
       "type": "string | number",
       "defaultValue": "auto",
-      "required": false,
-      "description": "The height you want the content in its expanded state."
+      "description": "The height you want the content in its expanded state.",
+      "required": false
     },
     "enter": {
       "type": "any",
-      "required": false,
-      "description": "Custom `enter`."
+      "description": "Custom `enter`.",
+      "required": false
     },
     "exit": {
       "type": "any",
-      "required": false,
-      "description": "Custom `exit`."
+      "description": "Custom `exit`.",
+      "required": false
     },
     "initial": {
       "type": "any",
-      "required": false,
-      "description": "Custom `initial`."
+      "description": "Custom `initial`.",
+      "required": false
     },
     "startingHeight": {
       "type": "string | number",
       "defaultValue": "0",
-      "required": false,
-      "description": "The height you want the content in its collapsed state."
+      "description": "The height you want the content in its collapsed state.",
+      "required": false
     },
     "transition": {
       "type": "MotionLifecycleProps<Transition$1>",
-      "required": false,
-      "description": "Custom `transition` definition for `enter` and `exit`."
+      "description": "Custom `transition` definition for `enter` and `exit`.",
+      "required": false
     },
     "transitionEnd": {
       "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
-      "required": false,
-      "description": "Custom `transitionEnd` definition for `enter` and `exit`."
+      "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
+      "required": false
     },
     "unmountOnExit": {
       "type": "boolean",
-      "required": false,
-      "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
-    }
-  },
-  "AccordionLabel": {
-    "containerProps": {
-      "type": "HTMLUIProps",
-      "required": false,
-      "description": "Props the container element."
-    },
-    "icon": {
-      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
-      "required": false,
-      "description": "The accordion icon to use."
+      "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done.",
+      "required": false
     }
   }
 }

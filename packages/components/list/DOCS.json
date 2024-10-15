@@ -1,24 +1,24 @@
 {
+  "ListIcon": {
+    "size": {
+      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | \"xxx-large\" | ... 17 more ... | \"xs\">",
+      "deprecated": "Use `fontSize` instead.",
+      "description": "The CSS `font-size` property.",
+      "required": false
+    }
+  },
+  "ListItem": {},
   "List": {
     "stylePosition": {
       "type": "UIValue<ListStylePosition>",
-      "required": false,
-      "description": "The CSS `list-style-position` property."
+      "description": "The CSS `list-style-position` property.",
+      "required": false
     },
     "styleType": {
       "type": "UIValue<ListStyleType>",
       "defaultValue": "'none'",
-      "required": false,
-      "description": "The CSS `list-style-type` property."
+      "description": "The CSS `list-style-type` property.",
+      "required": false
     }
-  },
-  "ListIcon": {
-    "size": {
-      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | ... 14 more ... | \"9xl\">",
-      "required": false,
-      "deprecated": "Use `fontSize` instead.",
-      "description": "The CSS `font-size` property."
-    }
-  },
-  "ListItem": {}
+  }
 }

@@ -1,90 +1,90 @@
 {
   "Input": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "errorBorderColor": {
-      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
-      "required": false,
-      "description": "The border color when the input is invalid."
+      "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
+      "description": "The border color when the input is invalid.",
+      "required": false
     },
     "focusBorderColor": {
-      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
-      "required": false,
-      "description": "The border color when the input is focused."
+      "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
+      "description": "The border color when the input is focused.",
+      "required": false
     },
     "htmlSize": {
       "type": "number",
-      "required": false,
-      "description": "The native HTML `size` attribute to be passed to the `input`."
+      "description": "The native HTML `size` attribute to be passed to the `input`.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Input."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Input.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "outline",
-      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Input."
+      "type": "\"filled\" | \"flushed\" | \"outline\" | \"unstyled\"",
+      "defaultValue": "\"outline\"",
+      "description": "The variant of the Input.",
+      "required": false
     }
   },
-  "InputGroup": {},
   "InputAddon": {
     "placement": {
       "type": "\"left\" | \"right\"",
       "defaultValue": "'left'",
-      "required": false,
-      "description": "The placement of the element."
+      "description": "The placement of the element.",
+      "required": false
     }
   },
   "InputElement": {
     "isClick": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
       "deprecated": "Use `isClickable` instead.",
-      "description": "If `true`, the element clickable."
+      "description": "If `true`, the element clickable.",
+      "required": false
     },
     "isClickable": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the element clickable."
+      "description": "If `true`, the element clickable.",
+      "required": false
     },
     "placement": {
       "type": "\"left\" | \"right\"",
       "defaultValue": "'left'",
-      "required": false,
-      "description": "The placement of the element."
+      "description": "The placement of the element.",
+      "required": false
     }
-  }
+  },
+  "InputGroup": {}
 }

@@ -24,7 +24,7 @@ tab: Props
 <PropsCard
   id="stat-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -51,7 +51,7 @@ tab: Props
 <PropsCard
   id="stat-icon"
   name="icon"
-  type='"increase" | "decrease"'
+  type='"decrease" | "increase"'
   description={"The stat icon to use."}
 />
 
@@ -116,10 +116,6 @@ tab: Props
   description={"The variant of the Stat."}
 />
 
-### StatLabelProps
-
-### StatNumberProps
-
 ### StatHelperMessageProps
 
 ### StatIconProps
@@ -127,7 +123,7 @@ tab: Props
 <PropsCard
   id="staticon-size"
   name="size"
-  type='UIValue<number | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "small" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 16 more ... | "9xl">'
+  type='UIValue<number | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "small" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 17 more ... | "xs">'
   description={"The CSS `font-size` property."}
   deprecated={"Use `fontSize` instead."}
 />
@@ -135,6 +131,10 @@ tab: Props
 <PropsCard
   id="staticon-type"
   name="type"
-  type='"increase" | "decrease"'
+  type='"decrease" | "increase"'
   defaultValue={"increase"}
 />
+
+### StatLabelProps
+
+### StatNumberProps

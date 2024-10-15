@@ -1,5 +1,16 @@
 # @yamada-ui/ripple
 
+## 1.0.40
+
+### Patch Changes
+
+- [#2985](https://github.com/yamada-ui/yamada-ui/pull/2985) [`7a32bb8`](https://github.com/yamada-ui/yamada-ui/commit/7a32bb8d0e715276a276b92a66bb78345251e978) Thanks [@hassan-xsf](https://github.com/hassan-xsf)! - Set `displayName` and `__ui__` to Ripple for react dev tools
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/motion@2.2.4
+
 ## 1.0.39
 
 ### Patch Changes

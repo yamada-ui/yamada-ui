@@ -1,5 +1,19 @@
 # @yamada-ui/snacks
 
+## 1.1.5
+
+### Patch Changes
+
+- [#3074](https://github.com/yamada-ui/yamada-ui/pull/3074) [`cd080da`](https://github.com/yamada-ui/yamada-ui/commit/cd080da6bab2c698a927c366678677631d1e7d27) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Set `displayName` and `__ui__` for `@yamada-ui/snacks`
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`b4985d2`](https://github.com/yamada-ui/yamada-ui/commit/b4985d2ae5b1dd7dc3b5367854aa5d6f61fc22bc)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/alert@1.0.42
+  - @yamada-ui/close-button@1.0.42
+  - @yamada-ui/motion@2.2.4
+  - @yamada-ui/use-timeout@1.0.22
+
 ## 1.1.4
 
 ### Patch Changes

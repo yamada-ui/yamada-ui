@@ -93,6 +93,12 @@ export const attributes = {
    */
   _nativeHidden: "&[hidden]",
   /**
+   * The CSS `[data-not-allowed]` attribute selector.
+   *
+   * - `[data-not-allowed]`
+   */
+  _notAllowed: "&[data-not-allowed]",
+  /**
    * The CSS `:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",
@@ -551,6 +557,10 @@ export const atRules = {
   _dark:
     ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
+   * The CSS `@media (orientation: landscape)` media query.
+   */
+  _landscape: "@media (orientation: landscape)",
+  /**
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _light:
@@ -567,6 +577,10 @@ export const atRules = {
    * The CSS `@media (prefers-reduced-motion: reduce)` media query.
    */
   _mediaReduceMotion: "@media (prefers-reduced-motion: reduce)",
+  /**
+   * The CSS `@media (orientation: portrait)` media query.
+   */
+  _portrait: "@media (orientation: portrait)",
   /**
    * The CSS `@media print` media query.
    */

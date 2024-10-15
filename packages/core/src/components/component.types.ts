@@ -2,7 +2,7 @@ import type { Merge } from "@yamada-ui/utils"
 import type * as React from "react"
 import type { CSSProps, CSSUIObject, CSSUIProps } from "../css"
 import type { StyledTheme } from "../theme.types"
-import type { DOMElements } from "./element.types"
+import type { DOMElement } from "./element.types"
 
 export type BaseStyle =
   | ((props: InterpolationProps) => CSSUIObject)
@@ -73,37 +73,37 @@ export interface FunctionComponent<Y = {}> extends ComponentArgs {
 export type As = React.ElementType
 
 export type HTMLUIComponents = {
-  [Y in DOMElements]: UIComponent<Y>
+  [Y in DOMElement]: UIComponent<Y>
 }
 
 export interface UIComponent<Y extends As = As, M extends object = {}>
   extends Component<Y, Merge<UIProps, M>> {}
 
-export type HTMLRef<Y extends DOMElements = "div"> =
+export type HTMLRef<Y extends DOMElement = "div"> =
   JSX.IntrinsicElements[Y]["ref"]
 
-export interface HTMLRefAttributes<Y extends DOMElements = "div"> {
+export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: HTMLRef<Y> | undefined
 }
 
-export type HTMLProps<Y extends DOMElements = "div"> = Omit<
+export type HTMLProps<Y extends DOMElement = "div"> = Omit<
   JSX.IntrinsicElements[Y],
   "ref" | "size" | keyof UIProps
 >
 
-export type HTMLUIProps<Y extends DOMElements = "div"> = Merge<
+export type HTMLUIProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,
   UIProps
 >
 
-export type HTMLUIPropsWithoutAs<Y extends DOMElements = "div"> = WithoutAs<
+export type HTMLUIPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
   HTMLUIProps<Y>
 >
 
-export type HTMLUIPropsWithRef<Y extends DOMElements = "div"> = HTMLUIProps<Y> &
+export type HTMLUIPropsWithRef<Y extends DOMElement = "div"> = HTMLUIProps<Y> &
   React.RefAttributes<any>
 
-type ConditionalProps<Y> = Y extends DOMElements ? HTMLProps<Y> : Y
+type ConditionalProps<Y> = Y extends DOMElement ? HTMLProps<Y> : Y
 
 type DefinedProps<Y, M> = M extends undefined ? Y : M
 

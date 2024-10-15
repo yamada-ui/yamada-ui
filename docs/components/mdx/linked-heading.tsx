@@ -35,7 +35,7 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({
           _focusVisible={{ boxShadow: "none" }}
           _hover={{ opacity: 1 }}
         >
-          <LinkIcon fontSize="0.875em" />
+          <LinkIcon fontSize="0.75em" />
         </Link>
       ) : null}
     </Text>

@@ -12,6 +12,7 @@ import type { MouseEvent, RefObject } from "react"
 import { layoutStyleProperties, mergeVars } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
+  ariaAttr,
   assignRef,
   createContext,
   dataAttr,
@@ -425,6 +426,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
     (props = {}) => ({
       ...props,
       role: "group",
+      id: `slide-${index}`,
       "aria-roledescription": "slide",
       "aria-label": `${index + 1} of ${totalSlides}`,
       "data-index": index,
@@ -504,6 +506,8 @@ export const useCarouselIndicators = () => {
 
       return {
         "aria-label": `Go to ${index + 1} slide`,
+        "aria-labelledby": `slide-${index + 1}`,
+        "aria-disabled": ariaAttr(isSelected),
         ...props,
         key: index,
         "data-index": index,

@@ -1,11 +1,16 @@
 import type {
-  AccessorColumnDef,
+  AccessorFn,
   Cell,
   CellContext,
   ColumnDef,
   ColumnDefTemplate,
+  ColumnFiltersColumnDef,
+  ColumnMeta,
+  ColumnPinningColumnDef,
+  ColumnSizingColumnDef,
   CoreOptions,
-  DisplayColumnDef,
+  GlobalFilterColumnDef,
+  GroupingColumnDef,
   Header,
   HeaderContext,
   OnChangeFn,
@@ -14,8 +19,10 @@ import type {
   Row,
   RowData,
   RowSelectionOptions,
+  SortingColumnDef,
   SortingOptions,
   SortingState,
+  VisibilityColumnDef,
 } from "@tanstack/react-table"
 import type { CheckboxProps } from "@yamada-ui/checkbox"
 import type {
@@ -26,6 +33,7 @@ import type {
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { TdProps, ThProps, TrProps } from "@yamada-ui/native-table"
+import type { StringLiteral } from "@yamada-ui/utils"
 import type {
   CSSProperties,
   KeyboardEvent,
@@ -60,7 +68,7 @@ export type {
 
 export type CellMap = Map<string, RefObject<HTMLTableCellElement>>
 
-export interface PropsColumnDef {
+interface PropsColumnDef {
   className?: string
   css?: CSSUIObject
   style?: CSSProperties
@@ -70,7 +78,7 @@ export interface PropsColumnDef {
   rowSpan?: number
 }
 
-export interface GroupColumnDef<Y extends RowData, M = any> {
+interface GroupColumnDef<Y extends RowData, M = any> {
   columns?: Column<Y, M>[]
 }
 
@@ -79,21 +87,67 @@ interface ColumnProps {
   tabIndex: number
 }
 
-interface ColumnBase<Y extends RowData, M = any> {
+interface ColumnDefExtensions<Y extends RowData, M = any>
+  extends VisibilityColumnDef,
+    ColumnPinningColumnDef,
+    ColumnFiltersColumnDef<Y>,
+    GlobalFilterColumnDef,
+    SortingColumnDef<Y>,
+    GroupingColumnDef<Y, M>,
+    ColumnSizingColumnDef {}
+
+interface ColumnDefBase<Y extends RowData, M = any>
+  extends ColumnDefExtensions<Y, M> {
   cell?: ColumnDefTemplate<CellContext<Y, M> & ColumnProps>
   footer?: ColumnDefTemplate<ColumnProps & HeaderContext<Y, M>>
+  getUniqueValues?: AccessorFn<Y, any[]>
+  meta?: ColumnMeta<Y, M>
+}
+
+interface StringHeaderIdentifier {
+  header: string
+  id?: string
+}
+
+interface IdIdentifier<Y extends RowData, M = any> {
+  id: string
   header?: ColumnDefTemplate<ColumnProps & HeaderContext<Y, M>>
 }
 
-export type Column<Y extends RowData, M = any> = (
-  | Omit<AccessorColumnDef<Y, M>, keyof ColumnBase<Y, M>>
-  | Omit<DisplayColumnDef<Y, M>, keyof ColumnBase<Y, M>>
-) &
-  ColumnBase<Y, M> &
-  GroupColumnDef<Y, M> &
-  PropsColumnDef
+type ColumnIdentifiers<Y extends RowData, M = any> =
+  | IdIdentifier<Y, M>
+  | StringHeaderIdentifier
 
-export type DefaultColumn<Y extends RowData, M = any> = (
+interface AccessorKeyColumnDefBase<Y extends RowData, M = any>
+  extends ColumnDefBase<Y, M> {
+  accessorKey: keyof Y | StringLiteral
+  id?: string
+}
+
+type AccessorKeyColumnDef<
+  Y extends RowData,
+  M = any,
+> = AccessorKeyColumnDefBase<Y, M> & Partial<ColumnIdentifiers<Y, M>>
+
+interface AccessorFnColumnDefBase<Y extends RowData, M = any>
+  extends ColumnDefBase<Y, M> {
+  accessorFn: AccessorFn<Y, M>
+}
+
+type AccessorFnColumnDef<Y extends RowData, M = any> = AccessorFnColumnDefBase<
+  Y,
+  M
+> &
+  ColumnIdentifiers<Y, M>
+
+type AccessorColumnDef<Y extends RowData, M = any> =
+  | AccessorFnColumnDef<Y, M>
+  | AccessorKeyColumnDef<Y, M>
+
+type DisplayColumnDef<Y extends RowData, M = any> = ColumnDefBase<Y, M> &
+  ColumnIdentifiers<Y, M>
+
+export type Column<Y extends RowData, M = any> = (
   | AccessorColumnDef<Y, M>
   | DisplayColumnDef<Y, M>
 ) &
@@ -136,16 +190,16 @@ interface TableProps
     ThemeProps<"Table"> {}
 
 type HeaderGroupProps<Y extends RowData> =
-  | ((headers: Header<Y, unknown>[]) => Omit<TrProps, "key"> | void)
+  | ((headers: Header<Y, any>[]) => Omit<TrProps, "key"> | void)
   | Omit<TrProps, "key">
 type HeaderProps<Y extends RowData> =
-  | ((header: Header<Y, unknown>) => Omit<ThProps, "key"> | void)
+  | ((header: Header<Y, any>) => Omit<ThProps, "key"> | void)
   | Omit<ThProps, "key">
 type RowProps<Y extends RowData> =
   | ((row: Row<Y>) => Omit<TrProps, "key"> | void)
   | Omit<TrProps, "key">
 type CellProps<Y extends RowData> =
-  | ((cell: Cell<Y, unknown>) => Omit<TdProps, "key"> | void)
+  | ((cell: Cell<Y, any>) => Omit<TdProps, "key"> | void)
   | Omit<TdProps, "key">
 
 export interface UseTableProps<Y extends RowData>
@@ -158,7 +212,7 @@ export interface UseTableProps<Y extends RowData>
   /**
    * Default column options to use for all column defs supplied to the table.
    */
-  defaultColumn?: Partial<DefaultColumn<Y>>
+  defaultColumn?: Partial<Column<Y>>
   /**
    * The initial page index of the paging table.
    *
@@ -459,7 +513,7 @@ export const useTable = <Y extends RowData>({
     debugHeaders,
     debugRows,
     debugTable,
-    defaultColumn,
+    defaultColumn: defaultColumn as Partial<ColumnDef<Y, any>>,
     enableMultiRemove,
     enableMultiSort,
     enableSorting,

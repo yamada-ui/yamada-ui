@@ -33,7 +33,7 @@ import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
 import { Users } from "./users"
 
-const uiComponents = { Box, Tag }
+const uiComponents = { Box }
 
 export const components: MDXComponents = {
   ...uiComponents,
@@ -77,6 +77,7 @@ export const components: MDXComponents = {
       <NativeTable apply="mdx.table" {...props} />
     </TableContainer>
   ),
+  Tag: (props) => <Tag colorScheme="gray" size="sm" {...props} />,
   td: (props) => <Td {...props} />,
   th: (props) => <Th {...props} />,
   ul: (props) => <DiscList apply="mdx.ul" {...props} />,

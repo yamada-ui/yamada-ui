@@ -7,17 +7,46 @@ with_description: true
 tab: アクセシビリティ
 ---
 
+`Toggle`にアイコンのみを使用する場合は、`Toggle`に`aria-label`を設定します。
+
+```tsx live=false
+<Wrap gap="md">
+  <Toggle icon={<Bold />} aria-label="Toggle bold" />
+</Wrap>
+```
+
+`ToggleGroup`に`aria-label`を設定してください。これにより、グループ全体の目的や機能をスクリーンリーダーユーザーに伝えることができます。
+
+```tsx live=false
+const [value, setValue] = useState<string | undefined>(undefined)
+
+return (
+  <ToggleGroup
+    value={value}
+    onChange={setValue}
+    aria-label="Text formatting options"
+  >
+    <Toggle value="bold" icon={<Bold />} aria-label="Toggle bold" />
+    <Toggle value="italic" icon={<Italic />} aria-label="Toggle italic" />
+    <Toggle
+      value="underline"
+      icon={<Underline />}
+      aria-label="Toggle underline"
+    />
+  </ToggleGroup>
+)
+```
+
 ## キーボード操作
 
-| キー    | 説明                                   | 状態 |
-| ------- | -------------------------------------- | ---- |
-| `Tab`   | トグルをフォーカスします。             | -    |
-| `Enter` | フォーカスされたトグルを切り替えます。 | -    |
-| `Space` | フォーカスされたトグルを切り替えます。 | -    |
+| キー             | 説明                                 | 状態 |
+| ---------------- | ------------------------------------ | ---- |
+| `Tab`            | 要素をフォーカスします。             | -    |
+| `Space`, `Enter` | フォーカスされた要素を切り替えます。 | -    |
 
 ## ARIAロールと属性
 
-| コンポーネント | ロールと属性   | 使い方                                                                |
-| -------------- | -------------- | --------------------------------------------------------------------- |
-| `ToggleGroup`  | `role="group"` | グループであることを示します。                                        |
-| `Toggle`       | `aria-pressed` | トグルがオンの場合は`true`を設定し、オフの場合は`false`を設定します。 |
+| コンポーネント | ロールと属性   | 使い方                                                                                |
+| -------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `ToggleGroup`  | `role="group"` | グループであることを示します。                                                        |
+| `Toggle`       | `aria-pressed` | 要素が押されているの場合は`true`を設定し、押されていないの場合は`false`を設定します。 |

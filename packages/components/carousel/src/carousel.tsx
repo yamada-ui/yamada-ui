@@ -20,7 +20,6 @@ import {
   ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
 import {
   cx,
@@ -205,10 +204,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const skipSnaps = useValue(props.skipSnaps)
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
-    const _gap = useValue(props.gap)
-    const gap = useToken("spaces", _gap) ?? _gap
-    const _slideSize = useValue(props.slideSize)
-    const slideSize = useToken("sizes", _slideSize) ?? _slideSize
 
     const [styles, mergedProps] = useComponentMultiStyle("Carousel", {
       ...props,
@@ -219,13 +214,11 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       dragFree,
       draggable,
       duration,
-      gap,
       includeGapInSize,
       inViewThreshold,
       loop,
       orientation,
       skipSnaps,
-      slideSize,
       slidesToScroll,
       stopMouseEnterAutoplay,
     })
@@ -276,6 +269,12 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       cloneElement(child, { index }),
     )
 
+    const css: CSSUIObject = {
+      h: "fit-content",
+      position: "relative",
+      ...styles.container,
+    }
+
     h ??= height
     minH ??= minHeight
 
@@ -283,11 +282,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       <CarouselProvider value={{ styles, ...rest }}>
         <ui.div
           className={cx("ui-carousel", className)}
-          __css={{
-            h: "fit-content",
-            position: "relative",
-            ...styles.container,
-          }}
+          __css={css}
           {...getContainerProps({}, ref)}
         >
           {customCarouselControlPrev ??
@@ -323,7 +318,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
 Carousel.displayName = "Carousel"
 Carousel.__ui__ = "Carousel"
 
-type CarouselSlidesProps = HTMLUIProps
+interface CarouselSlidesProps extends HTMLUIProps {}
 
 const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   ({ ...rest }, ref) => {
@@ -340,10 +335,10 @@ const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
 CarouselSlides.displayName = "CarouselSlides"
 CarouselSlides.__ui__ = "CarouselSlides"
 
-type CarouselSlidesInnerProps = HTMLUIProps
+interface CarouselSlidesInnerProps extends HTMLUIProps {}
 
 const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
-  const { gap, includeGapInSize, orientation, styles } = useCarouselContext()
+  const { includeGapInSize, orientation, styles } = useCarouselContext()
 
   const css: CSSUIObject = {
     display: "flex",
@@ -352,7 +347,6 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...(includeGapInSize
       ? {
           [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * -1)",
-          vars: [{ name: "gap", token: "spaces", value: gap }],
         }
       : {}),
   }

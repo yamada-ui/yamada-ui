@@ -13,48 +13,33 @@ tab: テーマ
 `LineChart`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
+`LineChart`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
 ```ts
 export const LineChart: ComponentMultiStyle<"LineChart"> = {
   baseStyle: {
-    container: {},
+    activeDot: {
+      fill: ["white", "black"],
+      strokeWidth: 2,
+    },
     chart: {},
-    referenceLine: {
-      fillOpacity: 1,
-      fontSize: "xs",
-    },
-    grid: {
-      stroke: ["blackAlpha.400", "whiteAlpha.400"],
-      strokeWidth: 1,
-    },
+    container: {},
     cursor: {
       fill: ["blackAlpha.50", "whiteAlpha.50"],
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,
     },
-    xAxis: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      fontSize: "xs",
-    },
-    yAxis: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      fontSize: "xs",
-    },
-    xAxisLabel: {
-      fontSize: 12,
-    },
-    yAxisLabel: {
-      fontSize: 12,
-    },
-    line: {},
     dot: {
       strokeWidth: 2,
     },
-    activeDot: {
-      strokeWidth: 2,
-      fill: ["white", "black"],
+    grid: {
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      strokeWidth: 1,
     },
     legend: {
       display: "flex",
@@ -62,13 +47,13 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       justifyContent: "flex-end",
     },
     legendItem: {
-      display: "flex",
       alignItems: "center",
-      rounded: "md",
-      gap: "sm",
-      transitionProperty: "common",
-      transitionDuration: "slower",
       color: ["blackAlpha.800", "whiteAlpha.700"],
+      display: "flex",
+      gap: "sm",
+      rounded: "md",
+      transitionDuration: "slower",
+      transitionProperty: "common",
       _hover: {
         bg: ["blackAlpha.50", "whiteAlpha.100"],
       },
@@ -77,122 +62,141 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       boxSize: "3",
       rounded: "full",
     },
+    line: {},
+    referenceLine: {
+      fillOpacity: 1,
+      fontSize: "xs",
+    },
     tooltip: {
-      display: "flex",
-      flexDirection: "column",
-      minW: "48",
-      gap: "sm",
-      rounded: "md",
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      p: "3",
-      fontWeight: "medium",
-      fontSize: "sm",
-      color: "inherit",
       boxShadow: ["md", "dark-md"],
+      color: "inherit",
+      display: "flex",
+      flexDirection: "column",
+      fontSize: "sm",
+      fontWeight: "medium",
+      gap: "sm",
       maxW: "xs",
+      minW: "48",
+      p: "3",
+      rounded: "md",
       zIndex: "dodoria",
     },
-    tooltipTitle: {
-      fontSize: "md",
+    tooltipItem: {
+      alignItems: "center",
+      display: "flex",
+      fontSize: "sm",
+      gap: "sm",
+    },
+    tooltipLabel: {
+      color: ["blackAlpha.800", "whiteAlpha.700"],
     },
     tooltipList: {
       display: "flex",
       flexDirection: "column",
       gap: "xs",
     },
-    tooltipItem: {
-      display: "flex",
-      alignItems: "center",
-      gap: "sm",
-      fontSize: "sm",
-    },
     tooltipSwatch: {
       boxSize: "3",
       rounded: "full",
     },
-    tooltipLabel: {
-      color: ["blackAlpha.800", "whiteAlpha.700"],
+    tooltipTitle: {
+      fontSize: "md",
     },
     tooltipValue: {
       flex: 1,
       textAlign: "end",
     },
+    xAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontSize: "xs",
+    },
+    xAxisLabel: {
+      fontSize: 12,
+    },
+    yAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontSize: "xs",
+    },
+    yAxisLabel: {
+      fontSize: 12,
+    },
   },
-
-  variants: {},
 
   sizes: {
     sm: ({ theme: t }) => ({
       container: {
-        w: "xl",
         h: "xs",
+        w: "xl",
       },
       legend: {
         gap: "xs",
         mb: "md",
       },
       legendItem: {
+        fontSize: "xs",
+        lineHeight: get(t, "sizes.6"),
         minH: "6",
         minW: "6",
-        fontSize: "xs",
         px: "2",
-        lineHeight: get(t, "sizes.6"),
       },
     }),
     md: ({ theme: t }) => ({
       container: {
-        w: "3xl",
         h: "sm",
+        w: "3xl",
       },
       legend: {
         gap: "xs",
         mb: "md",
       },
       legendItem: {
+        fontSize: "sm",
+        lineHeight: get(t, "sizes.7"),
         minH: "7",
         minW: "7",
-        fontSize: "sm",
         px: "3",
-        lineHeight: get(t, "sizes.7"),
       },
     }),
     lg: ({ theme: t }) => ({
       container: {
-        w: "5xl",
         h: "md",
+        w: "5xl",
       },
       legend: {
         gap: "sm",
         mb: "md",
       },
       legendItem: {
+        fontSize: "md",
+        lineHeight: get(t, "sizes.8"),
         minH: "8",
         minW: "8",
-        fontSize: "md",
         px: "3",
-        lineHeight: get(t, "sizes.8"),
       },
     }),
     full: ({ theme: t }) => ({
       container: {
-        w: "full",
         h: "md",
+        w: "full",
       },
       legend: {
         gap: "sm",
         mb: "md",
       },
       legendItem: {
+        fontSize: "md",
+        lineHeight: get(t, "sizes.8"),
         minH: "8",
         minW: "8",
-        fontSize: "md",
         px: "3",
-        lineHeight: get(t, "sizes.8"),
       },
     }),
   },
+
+  variants: {},
 
   defaultProps: {
     size: "full",

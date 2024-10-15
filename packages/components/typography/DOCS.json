@@ -1,37 +1,37 @@
 {
   "Heading": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "size": {
-      "defaultValue": "xl",
-      "type": "\"4xl\" | \"3xl\" | \"2xl\" | \"xl\" | \"lg\" | \"md\" | \"sm\" | \"xs\"",
-      "required": false,
-      "description": "The size of the Heading."
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\"",
+      "defaultValue": "\"xl\"",
+      "description": "The size of the Heading.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the Heading."
+      "description": "The variant of the Heading.",
+      "required": false
     }
   },
   "Text": {
     "align": {
       "type": "UIValue<TextAlign>",
-      "required": false,
-      "description": "The CSS `text-align` property."
+      "description": "The CSS `text-align` property.",
+      "required": false
     },
     "casing": {
       "type": "UIValue<TextTransform>",
-      "required": false,
-      "description": "The CSS `text-transform` property."
+      "description": "The CSS `text-transform` property.",
+      "required": false
     },
     "decoration": {
       "type": "UIValue<TextDecoration<0 | (string & {})>>",
-      "required": false,
-      "description": "The CSS `text-decoration` property."
+      "description": "The CSS `text-decoration` property.",
+      "required": false
     }
   }
 }

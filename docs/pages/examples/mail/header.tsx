@@ -3,9 +3,9 @@ import type { FC } from "react"
 import { HStack } from "@yamada-ui/react"
 import { memo } from "react"
 
-type HeaderProps = {
+interface HeaderProps extends StackProps {
   isCenter?: boolean
-} & StackProps
+}
 
 export const Header: FC<HeaderProps> = memo(({ children, ...rest }) => {
   return (

@@ -9,57 +9,14 @@ order: 1
 
 ## Props
 
-### BreadcrumbProps
+### BreadcrumbEllipsisProps
 
 <PropsCard
-  id="breadcrumb-ellipsis"
-  name="ellipsis"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
-  description={"The icon to be used in the ellipsis."}
-/>
-
-<PropsCard
-  id="breadcrumb-endboundaries"
-  name="endBoundaries"
-  type="UIValue<number>"
-  description={"Number of elements visible on the end(right) edges."}
-/>
-
-<PropsCard
-  id="breadcrumb-gap"
-  name="gap"
-  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 97 more ... | "-4xl">'
-  description={"The left and right margin applied to the separator."}
-  defaultValue={"'2'"}
-/>
-
-<PropsCard
-  id="breadcrumb-items"
-  name="items"
-  type="BreadcrumbGenerateItem[]"
-  description={"If provided, generate breadcrumb items based on items."}
-/>
-
-<PropsCard
-  id="breadcrumb-listprops"
-  name="listProps"
-  type='HTMLUIProps<"ol">'
-  description={"Props for ol element."}
-/>
-
-<PropsCard
-  id="breadcrumb-separator"
-  name="separator"
-  type="string | Element"
-  description={"The visual separator between each breadcrumb item."}
-  defaultValue={"'/'"}
-/>
-
-<PropsCard
-  id="breadcrumb-startboundaries"
-  name="startBoundaries"
-  type="UIValue<number>"
-  description={"Number of elements visible on the start(left) edges."}
+  id="breadcrumbellipsis-size"
+  name="size"
+  type='UIValue<number | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "small" | "x-large" | "x-small" | "xx-large" | "xx-small" | "xxx-large" | ... 17 more ... | "xs">'
+  description={"The CSS `font-size` property."}
+  deprecated={"Use `fontSize` instead."}
 />
 
 ### BreadcrumbItemProps
@@ -67,7 +24,7 @@ order: 1
 <PropsCard
   id="breadcrumbitem-gap"
   name="gap"
-  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 97 more ... | "-4xl">'
+  type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | ... 100 more ... | "normal">'
   description={"The left and right margin applied to the separator."}
   defaultValue={"'2'"}
 />
@@ -91,7 +48,9 @@ order: 1
 <PropsCard
   id="breadcrumbitem-separator"
   name="separator"
-  type="string | Element"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The visual separator between each breadcrumb item."}
   defaultValue={"'/'"}
 />
@@ -106,23 +65,68 @@ order: 1
   defaultValue={"false"}
 />
 
+### BreadcrumbProps
+
+<PropsCard
+  id="breadcrumb-ellipsis"
+  name="ellipsis"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The icon to be used in the ellipsis."}
+/>
+
+<PropsCard
+  id="breadcrumb-endboundaries"
+  name="endBoundaries"
+  type="UIValue<number>"
+  description={"Number of elements visible on the end(right) edges."}
+/>
+
+<PropsCard
+  id="breadcrumb-gap"
+  name="gap"
+  type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | ... 100 more ... | "normal">'
+  description={"The left and right margin applied to the separator."}
+  defaultValue={"'2'"}
+/>
+
+<PropsCard
+  id="breadcrumb-items"
+  name="items"
+  type="BreadcrumbGenerateItem[]"
+  description={"If provided, generate breadcrumb items based on items."}
+/>
+
+<PropsCard
+  id="breadcrumb-listprops"
+  name="listProps"
+  type='HTMLUIProps<"ol">'
+  description={"Props for ol element."}
+/>
+
+<PropsCard
+  id="breadcrumb-separator"
+  name="separator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The visual separator between each breadcrumb item."}
+  defaultValue={"'/'"}
+/>
+
+<PropsCard
+  id="breadcrumb-startboundaries"
+  name="startBoundaries"
+  type="UIValue<number>"
+  description={"Number of elements visible on the start(left) edges."}
+/>
+
 ### BreadcrumbSeparatorProps
 
 <PropsCard
   id="breadcrumbseparator-gap"
   name="gap"
-  type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "1" | "-1" | "2" | "-2" | ... 102 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | "xs" | ... 104 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={
     "The CSS `margin-inline-start`, and `margin-inline-end` property."
   }
-/>
-
-### BreadcrumbEllipsisProps
-
-<PropsCard
-  id="breadcrumbellipsis-size"
-  name="size"
-  type='UIValue<number | (string & {}) | "small" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "xs" | "3xl" | "4xl" | "large" | ... 13 more ... | "9xl">'
-  description={"The CSS `font-size` property."}
-  deprecated={"Use `fontSize` instead."}
 />

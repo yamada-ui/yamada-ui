@@ -3,8 +3,8 @@
     "isExternal": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the link will open in new tab."
+      "description": "If `true`, the link will open in new tab.",
+      "required": false
     }
   },
   "LinkBox": {},
@@ -12,8 +12,8 @@
     "isExternal": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the link will open in new tab."
+      "description": "If `true`, the link will open in new tab.",
+      "required": false
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Generate theme tokens for autocomplete",
   "keywords": [
     "theme",
@@ -52,7 +52,7 @@
     "node-eval": "^2.0.0",
     "prettier": "^3.3.3",
     "tar": "^7.4.3",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@types/update-notifier": "6.0.8",

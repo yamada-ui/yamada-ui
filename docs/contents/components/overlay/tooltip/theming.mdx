@@ -14,23 +14,27 @@ order: 2
 The `Tooltip` is a [single part component](/styled-system/theming/component-styles#single-part-components).
 
 :::note
+`Tooltip` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
 export const Tooltip: ComponentStyle<"Tooltip"> = {
   baseStyle: {
-    rounded: "md",
     bg: ["white", "black"],
     border: "1px solid",
     borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+    boxShadow: ["md", "dark-md"],
+    color: "inherit",
+    fontSize: "sm",
+    fontWeight: "medium",
+    maxW: "xs",
     px: "sm",
     py: "0.5",
-    fontWeight: "medium",
-    fontSize: "sm",
-    color: "inherit",
-    boxShadow: ["md", "dark-md"],
-    maxW: "xs",
+    rounded: "md",
     zIndex: "dodoria",
   },
 }

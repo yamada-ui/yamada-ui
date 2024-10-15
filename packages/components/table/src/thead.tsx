@@ -1,128 +1,47 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import type { FC } from "@yamada-ui/core"
-import type { IconProps } from "@yamada-ui/icon"
-import type {
-  TableHeadProps as NativeTableHeadProps,
-  ThProps,
-} from "@yamada-ui/native-table"
-import type { Column, SortDirection } from "./use-table"
-import { ChevronIcon, Icon } from "@yamada-ui/icon"
+import type { Header, RowData } from "@tanstack/react-table"
+import type { TableHeadProps as NativeTableHeadProps } from "@yamada-ui/native-table"
+import type { ThProps as NativeThProps } from "@yamada-ui/native-table"
+import type { Column } from "./use-table"
 import {
+  Th as NativeTh,
   Thead as NativeThead,
-  Th,
   Tr,
-  useTableStyles,
 } from "@yamada-ui/native-table"
+import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
-import { useMemo } from "react"
-import { render, useTableContext } from "./use-table"
+import { useTableContext } from "./table-context"
+import { TableSortIcon, TableSortTextButton } from "./table-sort-button"
+import { useCellProps } from "./table-utils"
+import { render } from "./use-table"
 
 export interface TableHeadProps extends NativeTableHeadProps {}
 
-export const Thead: FC = ({ ...rest }: TableHeadProps) => {
-  const { headerGroups, headerGroupProps, headerProps, sortIconProps } =
-    useTableContext()
-
-  const resolvedHeaderGroups = useMemo(
-    () =>
-      headerGroups.map((header) => {
-        const upperHeaderGroups = headerGroups.filter(
-          ({ depth }) => depth < header.depth,
-        )
-        const lowerHeaderGroups = headerGroups.filter(
-          ({ depth }) => depth > header.depth,
-        )
-
-        header.headers = header.headers.filter((header) => {
-          return upperHeaderGroups.every(({ headers }) =>
-            headers.every(({ column }) => column.id !== header.column.id),
-          )
-        })
-
-        header.headers = header.headers.map((header) => {
-          for (const { depth, headers } of [...lowerHeaderGroups].reverse()) {
-            const hasLower = !headers.every(
-              ({ column }) => column.id !== header.column.id,
-            )
-
-            if (hasLower) {
-              header.rowSpan = depth + 1
-
-              break
-            }
-          }
-
-          return header
-        })
-
-        return header
-      }),
-    [headerGroups],
-  )
+export const Thead = <Y extends RowData = unknown>({
+  ...rest
+}: TableHeadProps) => {
+  const { headerGroups, headerGroupProps, headerProps } = useTableContext<Y>()
 
   return (
     <NativeThead {...rest}>
-      {resolvedHeaderGroups.map(({ id, headers }) => {
+      {headerGroups.map(({ id, headers }, rowIndex) => {
         return (
           <Tr key={id} {...runIfFunc(headerGroupProps, headers)}>
-            {headers.map((header) => {
-              const { id, colSpan, column, getContext, rowSpan } = header
-              const {
-                columnDef,
-                getCanSort,
-                getIsSorted,
-                getToggleSortingHandler,
-              } = column
-              let {
-                className,
-                css,
-                style,
-                sx,
-                "aria-label": ariaLabel,
-                colSpan: customColSpan,
-                rowSpan: customRowSpan,
-              } = columnDef as Column<unknown>
-              const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
+            {headers.map((header, colIndex) => {
+              const { id, colSpan, isPlaceholder, rowSpan } = header
+              const props = runIfFunc(headerProps, header) ?? {}
 
-              const resolvedColSpan = (customColSpan ?? colSpan) || 1
-              const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
-
-              const isSorted = getIsSorted()
-
-              const props: ThProps = {
-                "aria-label": ariaLabel,
-                "aria-sort": isSorted
-                  ? isSorted === "asc"
-                    ? "ascending"
-                    : "descending"
-                  : "none",
-                ...computedHeaderProps,
-                colSpan: resolvedColSpan,
-                rowSpan: resolvedRowSpan,
-                onClick: handlerAll(
-                  computedHeaderProps.onClick,
-                  getToggleSortingHandler(),
-                ),
-              }
+              if (isPlaceholder) return null
 
               return (
                 <Th
                   key={id}
                   {...props}
-                  className={className}
-                  style={{ ...props.style, ...style }}
-                  sx={sx}
-                  __css={{
-                    position: "relative",
-                    userSelect: getCanSort() ? "none" : undefined,
-                    ...css,
-                  }}
-                >
-                  {render(columnDef.header, getContext())}
-                  {getCanSort() ? (
-                    <SortIcon {...{ isSorted, ...sortIconProps }} />
-                  ) : null}
-                </Th>
+                  colIndex={colIndex}
+                  colSpan={colSpan}
+                  header={header}
+                  rowIndex={rowIndex}
+                  rowSpan={rowSpan}
+                />
               )
             })}
           </Tr>
@@ -135,51 +54,77 @@ export const Thead: FC = ({ ...rest }: TableHeadProps) => {
 Thead.displayName = "Thead"
 Thead.__ui__ = "Thead"
 
-export interface SortIconProps extends IconProps {
-  isSorted: false | SortDirection
+interface ThProps<Y extends RowData = unknown> extends NativeThProps {
+  colIndex: number
+  header: Header<Y, unknown>
+  rowIndex: number
 }
 
-export const SortIcon: FC<SortIconProps> = ({
-  className,
-  isSorted,
+const Th = <Y extends RowData = unknown>({
+  colIndex,
+  colSpan,
+  header,
+  rowIndex,
+  rowSpan,
   ...rest
-}) => {
-  const styles = useTableStyles()
+}: ThProps<Y>) => {
+  const { sortIconProps } = useTableContext<Y>()
+  const { column, getContext } = header
+  const { columnDef, getCanSort, getIsSorted, getToggleSortingHandler } = column
+  const {
+    className,
+    css,
+    style,
+    sx,
+    "aria-label": ariaLabel,
+    colSpan: customColSpan,
+    rowSpan: customRowSpan,
+  } = columnDef as Column<Y>
 
-  const css: CSSUIObject = {
-    position: "absolute",
-    top: "50%",
-    transform:
-      isSorted === "desc"
-        ? "translateY(-50%) rotate(180deg)"
-        : "translateY(-50%)",
-    ...styles.sortIcon,
-  }
+  const canSort = getCanSort()
+  const isSorted = getIsSorted()
+  const toggleSortingHandler = getToggleSortingHandler()
 
-  if (!isSorted) {
-    return (
-      <Icon
-        className={cx("ui-table__sort-icon", className)}
-        aria-hidden
-        fill="none"
-        focusable="false"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        viewBox="0 0 24 24"
-        __css={css}
-        {...rest}
-      >
-        <path d="M8 9l4 -4l4 4" />
-        <path d="M16 15l-4 4l-4 -4" />
-      </Icon>
-    )
-  }
+  const [props, renderProps] = useCellProps<"th">(rowIndex, colIndex, {
+    colSpan: (customColSpan ?? colSpan) || 1,
+    rowSpan: (customRowSpan ?? rowSpan) || 1,
+    ...rest,
+    onClick: handlerAll(rest.onClick, toggleSortingHandler),
+  })
+  const { role: _role, ...computedProps } =
+    useClickable<HTMLTableCellElement>(props)
 
-  if (isSorted === "desc") {
-    return <ChevronIcon __css={css} {...rest} />
-  } else {
-    return <ChevronIcon __css={css} {...rest} />
-  }
+  return (
+    <NativeTh
+      aria-colindex={colIndex + 1}
+      aria-label={ariaLabel}
+      aria-sort={
+        isSorted ? (isSorted === "asc" ? "ascending" : "descending") : "none"
+      }
+      {...computedProps}
+      className={cx(rest.className, className)}
+      style={{ ...rest.style, ...style }}
+      sx={{ ...rest.sx, ...sx }}
+      __css={{
+        position: "relative",
+        userSelect: canSort ? "none" : undefined,
+        ...css,
+      }}
+    >
+      {canSort ? (
+        <>
+          <TableSortTextButton onClick={toggleSortingHandler}>
+            {render(columnDef.header, { ...renderProps, ...getContext() })}
+          </TableSortTextButton>
+
+          <TableSortIcon {...{ isSorted, ...sortIconProps }} />
+        </>
+      ) : (
+        render(columnDef.header, { ...renderProps, ...getContext() })
+      )}
+    </NativeTh>
+  )
 }
+
+Th.displayName = "Th"
+Th.__ui__ = "Th"

@@ -1,5 +1,18 @@
 # @yamada-ui/editable
 
+## 1.0.45
+
+### Patch Changes
+
+- [#2996](https://github.com/yamada-ui/yamada-ui/pull/2996) [`7387358`](https://github.com/yamada-ui/yamada-ui/commit/7387358799b6731bf8ebdac757c17f6ae436eb07) Thanks [@kaz-uen](https://github.com/kaz-uen)! - Set `displayName` and `__ui__` after each component definition
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/use-focus@1.0.23
+
 ## 1.0.44
 
 ### Patch Changes

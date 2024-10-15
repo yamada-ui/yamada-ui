@@ -18,19 +18,17 @@ export interface CarouselSlideProps
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   ({ className, size, ...rest }, ref) => {
-    const { gap, includeGapInSize, orientation, slideSize } =
-      useCarouselContext()
-
+    const { includeGapInSize, orientation } = useCarouselContext()
     const { getSlideProps } = useCarouselSlide(rest)
 
-    size ??= slideSize
+    size ??= "$slideSize"
 
     const css: CSSUIObject = {
       flex: `0 0 ${size}`,
       position: "relative",
       ...(includeGapInSize
-        ? { [orientation === "vertical" ? "pb" : "pr"]: gap }
-        : { [orientation === "vertical" ? "mb" : "mr"]: gap }),
+        ? { [orientation === "vertical" ? "pb" : "pr"]: "$gap" }
+        : { [orientation === "vertical" ? "mb" : "mr"]: "$gap" }),
     }
 
     return (
@@ -56,8 +54,7 @@ const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
       <ui.div
         ref={ref}
         className="ui-carousel__slide__inner"
-        h="100%"
-        w="100%"
+        boxSize="100%"
         {...rest}
       />
     )

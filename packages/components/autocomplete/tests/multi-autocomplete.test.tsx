@@ -484,7 +484,9 @@ describe("<MultiAutoComplete />", () => {
         </MultiAutocomplete>,
       )
 
-      expect(consoleWarnSpy).toHaveBeenCalledOnce()
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        expect.stringContaining("allowCreate"),
+      )
 
       consoleWarnSpy.mockRestore()
     })

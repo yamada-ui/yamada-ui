@@ -1,35 +1,35 @@
 {
+  "AlertDescription": {},
+  "AlertIcon": {
+    "variant": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | \"audio\"\n  | \"circles\"\n  | \"dots\"\n  | \"oval\"\n  | \"puff\"\n  | \"rings\"",
+      "required": false
+    }
+  },
   "Alert": {
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "size": {
       "type": "string",
-      "required": false,
-      "description": "The size of the Alert."
+      "description": "The size of the Alert.",
+      "required": false
     },
     "status": {
       "type": "\"info\" | \"success\" | \"warning\" | \"error\" | \"loading\"",
       "defaultValue": "'info'",
-      "required": false,
-      "description": "The status of the alert."
+      "description": "The status of the alert.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "basic",
-      "type": "\"basic\" | \"subtle\" | \"solid\" | \"island-accent\" | \"left-accent\" | \"top-accent\"",
-      "required": false,
-      "description": "The variant of the Alert."
-    }
-  },
-  "AlertIcon": {
-    "variant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | \"audio\"\n  | \"oval\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
+      "type": "\"basic\" | \"island-accent\" | \"left-accent\" | \"solid\" | \"subtle\" | \"top-accent\"",
+      "defaultValue": "\"basic\"",
+      "description": "The variant of the Alert.",
       "required": false
     }
   },
-  "AlertTitle": {},
-  "AlertDescription": {}
+  "AlertTitle": {}
 }

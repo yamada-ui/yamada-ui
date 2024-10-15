@@ -98,9 +98,9 @@
     "className": { "type": "string", "required": false },
     "color": { "type": "string", "required": false },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "content": { "type": "string", "required": false },
     "contentEditable": {
@@ -137,8 +137,8 @@
     "itemRef": { "type": "string", "required": false },
     "items": {
       "type": "ReorderGenerateItem<string>[]",
-      "required": false,
-      "description": "If provided, generate reorder items based on items."
+      "description": "If provided, generate reorder items based on items.",
+      "required": false
     },
     "itemScope": { "type": "boolean", "required": false },
     "itemType": { "type": "string", "required": false },
@@ -214,8 +214,8 @@
     },
     "onChange": {
       "type": "(values: Y[]) => void",
-      "required": false,
-      "description": "The callback invoked when reorder items are moved."
+      "description": "The callback invoked when reorder items are moved.",
+      "required": false
     },
     "onChangeCapture": {
       "type": "FormEventHandler<HTMLUListElement>",
@@ -231,8 +231,8 @@
     },
     "onCompleteChange": {
       "type": "(values: Y[]) => void",
-      "required": false,
-      "description": "The callback invoked when the movement of reorder items is completed."
+      "description": "The callback invoked when the movement of reorder items is completed.",
+      "required": false
     },
     "onCompositionEnd": {
       "type": "CompositionEventHandler<HTMLUListElement>",
@@ -777,8 +777,8 @@
     "orientation": {
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'vertical'",
-      "required": false,
-      "description": "The orientation of the reorder."
+      "description": "The orientation of the reorder.",
+      "required": false
     },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
@@ -790,10 +790,10 @@
     "role": { "type": "AriaRole", "required": false },
     "security": { "type": "string", "required": false },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"normal\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Reorder."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Reorder.",
+      "required": false
     },
     "slot": { "type": "string", "required": false },
     "spellCheck": { "type": "Booleanish", "required": false },
@@ -805,10 +805,10 @@
     "typeof": { "type": "string", "required": false },
     "unselectable": { "type": "\"off\" | \"on\"", "required": false },
     "variant": {
-      "defaultValue": "outline",
       "type": "\"elevated\" | \"outline\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Reorder."
+      "defaultValue": "\"outline\"",
+      "description": "The variant of the Reorder.",
+      "required": false
     },
     "vocab": { "type": "string", "required": false }
   },
@@ -947,8 +947,8 @@
     "itemType": { "type": "string", "required": false },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
-      "required": false,
-      "description": "The label of the reorder item."
+      "description": "The label of the reorder item.",
+      "required": false
     },
     "lang": { "type": "string", "required": false },
     "nonce": { "type": "string", "required": false },
@@ -1575,8 +1575,8 @@
     "unselectable": { "type": "\"off\" | \"on\"", "required": false },
     "value": {
       "type": "NonNullable<Y>",
-      "required": false,
-      "description": "The value of the reorder item."
+      "description": "The value of the reorder item.",
+      "required": false
     },
     "vocab": { "type": "string", "required": false }
   },

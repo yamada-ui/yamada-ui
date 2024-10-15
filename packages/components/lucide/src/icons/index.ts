@@ -445,7 +445,6 @@ export {
 } from "./bot-message-square"
 export { BotOff, BotOff as BotOffIcon } from "./bot-off"
 export { Box, Box as BoxIcon } from "./box"
-export { BoxSelect, BoxSelect as BoxSelectIcon } from "./box-select"
 export { Boxes, Boxes as BoxesIcon } from "./boxes"
 export { Braces, Braces as BracesIcon } from "./braces"
 export { Brackets, Brackets as BracketsIcon } from "./brackets"
@@ -1022,6 +1021,7 @@ export { Euro, Euro as EuroIcon } from "./euro"
 export { Expand, Expand as ExpandIcon } from "./expand"
 export { ExternalLink, ExternalLink as ExternalLinkIcon } from "./external-link"
 export { Eye, Eye as EyeIcon } from "./eye"
+export { EyeClosed, EyeClosed as EyeClosedIcon } from "./eye-closed"
 export { EyeOff, EyeOff as EyeOffIcon } from "./eye-off"
 export { Facebook, Facebook as FacebookIcon } from "./facebook"
 export { Factory, Factory as FactoryIcon } from "./factory"
@@ -2296,6 +2296,7 @@ export {
   SquareChevronUp as SquareChevronUpIcon,
 } from "./square-chevron-up"
 export { SquareCode, SquareCode as SquareCodeIcon } from "./square-code"
+export { SquareDashed, SquareDashed as SquareDashedIcon } from "./square-dashed"
 export {
   SquareDashedBottom,
   SquareDashedBottom as SquareDashedBottomIcon,
@@ -2637,6 +2638,7 @@ export { VideoOff, VideoOff as VideoOffIcon } from "./video-off"
 export { Videotape, Videotape as VideotapeIcon } from "./videotape"
 export { View, View as ViewIcon } from "./view"
 export { Voicemail, Voicemail as VoicemailIcon } from "./voicemail"
+export { Volleyball, Volleyball as VolleyballIcon } from "./volleyball"
 export { Volume, Volume as VolumeIcon } from "./volume"
 export { VolumeOff, VolumeOff as VolumeOffIcon } from "./volume-off"
 export { VolumeX, VolumeX as VolumeXIcon } from "./volume-x"

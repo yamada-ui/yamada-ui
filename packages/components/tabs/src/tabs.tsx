@@ -145,21 +145,14 @@ export const Tabs = forwardRef<TabsProps, "div">(
 
     const css: CSSUIObject = { w: "100%", ...styles.container }
 
-    const uuid = useId()
-
-    const tabPanelIds = cloneTabPanels.map(
-      (panel, index) => panel.props.id ?? `${uuid}-${index}`,
-    )
-
-    const tabIds = cloneTabs.map(
-      (tab, index) => tab.props.id ?? `${uuid}-${index}`,
-    )
+    const baseId = useId()
 
     return (
       <DescendantsContextProvider value={descendants}>
         <TabsProvider
           value={{
             align,
+            baseId,
             disableRipple,
             focusedIndex,
             isFitted,
@@ -171,8 +164,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
             setFocusedIndex,
             setSelectedIndex,
             styles,
-            tabIds,
-            tabPanelIds,
             tabListProps,
             tabPanelsProps,
           }}

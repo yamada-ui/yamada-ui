@@ -13,14 +13,13 @@ export const {
 
 interface TabsContext
   extends Omit<TabsOptions, "defaultIndex" | "index" | "onChange"> {
+  baseId: string
   disableRipple: boolean
   focusedIndex: number
   selectedIndex: number
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
-  tabIds: string[]
-  tabPanelIds: string[]
 }
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({

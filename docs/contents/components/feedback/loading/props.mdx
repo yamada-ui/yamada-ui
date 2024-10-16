@@ -16,9 +16,9 @@ tab: Props
 <PropsCard
   id="loading-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -43,7 +43,7 @@ tab: Props
 <PropsCard
   id="loading-secondarycolor"
   name="secondaryColor"
-  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
+  type='UIValue<"border" | ({} & string) | Color | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
   description={"The CSS `color` property."}
   defaultValue={"'primary'"}
 />
@@ -53,7 +53,7 @@ tab: Props
   name="size"
   type="string"
   description={"The size of the Loading."}
-  defaultValue={"1em"}
+  defaultValue={'"1em"'}
 />
 
 <PropsCard
@@ -61,5 +61,5 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Loading."}
-  defaultValue={"oval"}
+  defaultValue={'"oval"'}
 />

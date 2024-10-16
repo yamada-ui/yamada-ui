@@ -10,7 +10,6 @@ type ColorMode = "dark" | "light"
 export type ColorFormat = "hex" | "hexa" | "hsl" | "hsla" | "rgb" | "rgba"
 
 export const SEMANTIC_COLOR_SCHEMES = [
-  "mono",
   "primary",
   "secondary",
   "info",

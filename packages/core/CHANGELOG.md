@@ -1,5 +1,19 @@
 # @yamada-ui/core
 
+## 1.15.2
+
+### Patch Changes
+
+- [#3092](https://github.com/yamada-ui/yamada-ui/pull/3092) [`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_notAllowed` attribute selector.
+
+- [#3044](https://github.com/yamada-ui/yamada-ui/pull/3044) [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `memo` utility for components.
+
+- [#3004](https://github.com/yamada-ui/yamada-ui/pull/3004) [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated color scheme handling logic.
+
+- Updated dependencies [[`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`0604931`](https://github.com/yamada-ui/yamada-ui/commit/0604931287d4edee29c86609ae6cb76f6d8b730d)]:
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/portal@1.0.23
+
 ## 1.15.1
 
 ### Patch Changes

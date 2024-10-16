@@ -1,5 +1,21 @@
 # @yamada-ui/carousel
 
+## 2.0.7
+
+### Patch Changes
+
+- [#3067](https://github.com/yamada-ui/yamada-ui/pull/3067) [`b804cae`](https://github.com/yamada-ui/yamada-ui/commit/b804cae221bd26459d3fa60369903c892072cb2a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated package and code cleanup.
+
+- [#3024](https://github.com/yamada-ui/yamada-ui/pull/3024) [`aa5fb35`](https://github.com/yamada-ui/yamada-ui/commit/aa5fb35b44fc45458ff0b38a1c61f4cba67aa364) Thanks [@108yen](https://github.com/108yen)! - Fixed to transition to the slide specified by `index`
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b), [`5186075`](https://github.com/yamada-ui/yamada-ui/commit/5186075a55c30a9b051208d8bd88dcbbd210b980)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/button@1.0.44
+  - @yamada-ui/use-value@1.1.27
+
 ## 2.0.6
 
 ### Patch Changes

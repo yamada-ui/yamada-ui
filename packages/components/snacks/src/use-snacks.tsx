@@ -241,3 +241,6 @@ const Snack = forwardRef<SnackProps, "div">(
     )
   },
 )
+
+Snack.displayName = "Snack"
+Snack.__ui__ = "Snack"

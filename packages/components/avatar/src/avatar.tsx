@@ -148,8 +148,9 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
 Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
-type AvatarImageProps = ImageProps &
-  Pick<AvatarProps, "format" | "icon" | "ignoreFallback" | "name">
+interface AvatarImageProps
+  extends ImageProps,
+    Pick<AvatarProps, "format" | "icon" | "ignoreFallback" | "name"> {}
 
 const AvatarImage: FC<AvatarImageProps> = ({
   name,

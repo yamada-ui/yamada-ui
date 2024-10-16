@@ -12,46 +12,50 @@ order: 2
 `Popover`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
+`Popover`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
 ```ts
 export const Popover: ComponentMultiStyle<"Popover"> = {
   baseStyle: {
+    body: {
+      gap: "sm",
+      my: "sm",
+      px: "sm",
+    },
+    closeButton: {
+      right: "2",
+      top: "2",
+    },
     container: {
-      rounded: "md",
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      color: "inherit",
       boxShadow: ["lg", "dark-lg"],
+      color: "inherit",
+      rounded: "md",
       zIndex: "guldo",
       _focusVisible: {
-        outline: 0,
         boxShadow: "outline",
+        outline: 0,
       },
     },
-    closeButton: {
-      top: "2",
-      right: "2",
+    footer: {
+      borderColor: "inherit",
+      borderTop: "1px solid",
+      gap: "sm",
+      p: "sm",
     },
     header: {
-      p: "sm",
-      gap: "sm",
-      fontWeight: "semibold",
       borderBottom: "1px solid",
       borderColor: "inherit",
-    },
-    body: {
-      my: "sm",
-      px: "sm",
+      fontWeight: "semibold",
       gap: "sm",
-    },
-    footer: {
       p: "sm",
-      gap: "sm",
-      borderTop: "1px solid",
-      borderColor: "inherit",
     },
   },
 }

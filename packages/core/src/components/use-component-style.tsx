@@ -252,7 +252,7 @@ function getStyles<Y extends Dict = Dict, M extends boolean = false>(
 
     if (isMulti) {
       return Object.fromEntries(
-        Object.entries(styles as { [key: string]: UIStyle }).map(
+        Object.entries((styles ?? {}) as { [key: string]: UIStyle }).map(
           ([name, styleOrFunc]) => {
             const style = runIfFunc(styleOrFunc, props)
 

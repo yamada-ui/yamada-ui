@@ -4,11 +4,11 @@ import { ui } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
 import {
-  DotsIcon,
-  FirstIcon,
-  LastIcon,
-  NextIcon,
-  PrevIcon,
+  PaginationEllipsisIcon,
+  PaginationFirstIcon,
+  PaginationLastIcon,
+  PaginationNextIcon,
+  PaginationPrevIcon,
 } from "./pagination-icon"
 import { usePaginationContext } from "./use-pagination"
 
@@ -16,7 +16,7 @@ interface PaginationItemOptions {
   /**
    * The type of the page or item assigned to the pagination item.
    */
-  page: "dots" | "first" | "last" | "next" | "prev" | number
+  page: "ellipsis" | "first" | "last" | "next" | "prev" | number
   /**
    * If `true`, disable ripple effects when pressing a element.
    *
@@ -42,13 +42,13 @@ export interface PaginationItemProps
     PaginationItemOptions {}
 
 const iconMap: {
-  [key in "dots" | "first" | "last" | "next" | "prev" | number]: ReactNode
+  [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
-  dots: <DotsIcon />,
-  first: <FirstIcon />,
-  last: <LastIcon />,
-  next: <NextIcon />,
-  prev: <PrevIcon />,
+  ellipsis: <PaginationEllipsisIcon />,
+  first: <PaginationFirstIcon />,
+  last: <PaginationLastIcon />,
+  next: <PaginationNextIcon />,
+  prev: <PaginationPrevIcon />,
 }
 
 export const PaginationItem: FC<PaginationItemProps> = ({
@@ -86,7 +86,7 @@ export const PaginationItem: FC<PaginationItemProps> = ({
       data-disabled={dataAttr(isDisabled)}
       data-selected={dataAttr(isActive)}
       disabled={isDisabled}
-      tabIndex={page !== "dots" ? 0 : -1}
+      tabIndex={page !== "ellipsis" ? 0 : -1}
       __css={css}
       {...rest}
       onPointerDown={onPointerDown}

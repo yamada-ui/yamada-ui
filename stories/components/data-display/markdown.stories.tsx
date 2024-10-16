@@ -23,14 +23,15 @@ export const customComponent: Story = () => {
   return (
     <Markdown
       components={{
-        h2: (props) => (
+        h2: ({ children }) => (
           <Heading
             size="2xl"
             bgClip="text"
             bgGradient="linear(to-l, #f37bdf, #59a9e1)"
             isTruncated
-            {...props}
-          />
+          >
+            {children}
+          </Heading>
         ),
       }}
     >

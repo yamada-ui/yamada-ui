@@ -14,9 +14,9 @@ tab: Props
 <PropsCard
   id="button-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"gray"}
+  defaultValue={'"gray"'}
 />
 
 <PropsCard
@@ -74,12 +74,12 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | "grid"
   | ReactElement<any, string | JSXElementConstructor<any>>
-  | "oval"
   | "audio"
+  | "circles"
   | "dots"
+  | "oval"
   | "puff"
-  | "rings"
-  | "circles"'
+  | "rings"'
   description={"The icon to display when the button is loading."}
 />
 
@@ -112,15 +112,15 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the Button."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
   id="button-variant"
   name="variant"
-  type='"solid" | "outline" | "link" | "ghost" | "unstyled"'
+  type='"ghost" | "link" | "outline" | "solid" | "unstyled"'
   description={"The variant of the Button."}
-  defaultValue={"solid"}
+  defaultValue={'"solid"'}
 />
 
 ### ButtonGroupProps
@@ -128,7 +128,7 @@ tab: Props
 <PropsCard
   id="buttongroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
   description={"The CSS `flex-direction` property."}
 />
 

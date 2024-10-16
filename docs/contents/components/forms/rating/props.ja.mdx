@@ -14,16 +14,16 @@ order: 1
 <PropsCard
   id="rating-color"
   name="color"
-  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950"> | ((value: number) => UIValue<...> | undefined)'
+  type='((value: number) => UIValue<"border" | Color | ({} & string) | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | ... 320 more ... | "yellow.950"> | undefined) | UIValue<...>'
   description={"The color of the filled icons."}
 />
 
 <PropsCard
   id="rating-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"yellow"}
+  defaultValue={'"yellow"'}
 />
 
 <PropsCard
@@ -41,10 +41,10 @@ order: 1
   | string
   | number
   | boolean
+  | ((value: number) => ReactNode)
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
-  | ReactPortal
-  | ((value: number) => ReactNode)"
+  | ReactPortal"
   description={"The empty icon for the rating."}
 />
 
@@ -174,7 +174,7 @@ order: 1
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl"'
   description={"The size of the Rating."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard

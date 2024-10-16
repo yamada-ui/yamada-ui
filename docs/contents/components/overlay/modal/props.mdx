@@ -34,7 +34,7 @@ tab: Props
 <PropsCard
   id="modal-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
   description={"The animation of the tooltip."}
   defaultValue={"'scale'"}
 />
@@ -42,7 +42,7 @@ tab: Props
 <PropsCard
   id="modal-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "style" | "animate" | "section" | "a" | "abbr" | "address" | "area" | "article" | "aside" | ... 150 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "section" | "a" | "abbr" | "address" | "area" | "article" | "aside" | ... 150 more ... | "textPath"'
   description={"The HTML element to render."}
 />
 
@@ -75,7 +75,7 @@ tab: Props
 <PropsCard
   id="modal-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -154,7 +154,7 @@ tab: Props
 <PropsCard
   id="modal-outside"
   name="outside"
-  type='UIValue<number | "px" | "initial" | "inherit" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "1" | "-1" | "2" | "-2" | "3" | ... 96 more ... | "-4xl">'
+  type='UIValue<number | "px" | "initial" | "inherit" | (string & {}) | "-moz-initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-0.5" | "-1" | ... 99 more ... | "xs">'
   description={"The CSS `padding` property."}
 />
 
@@ -166,10 +166,10 @@ tab: Props
   | "right"
   | "top"
   | "center"
-  | "top-left"
-  | "top-right"
   | "bottom-left"
-  | "bottom-right">'
+  | "bottom-right"
+  | "top-left"
+  | "top-right">'
   description={"The placement of the modal."}
   defaultValue={"'center'"}
 />
@@ -206,7 +206,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full"'
   description={"The size of the Modal."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -243,7 +243,7 @@ tab: Props
 <PropsCard
   id="modaloverlay-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "style" | "animate" | "section" | "a" | "abbr" | "address" | "area" | "article" | "aside" | ... 150 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "section" | "a" | "abbr" | "address" | "area" | "article" | "aside" | ... 150 more ... | "textPath"'
   description={"The HTML element to render."}
 />
 

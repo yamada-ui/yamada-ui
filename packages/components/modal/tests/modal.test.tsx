@@ -22,7 +22,7 @@ describe("<Modal />", () => {
 
     return (
       <>
-        <button onClick={() => setIsOpen(true)}>Open Modal</button>
+        <button onClick={() => setIsOpen(true)}>Open</button>
 
         <Modal
           aria-labelledby={modalHeaderId}
@@ -35,7 +35,7 @@ describe("<Modal />", () => {
           <ModalBody>This is modal body</ModalBody>
 
           <ModalFooter>
-            <button onClick={() => setIsOpen(false)}>Close Modal</button>
+            <button onClick={() => setIsOpen(false)}>Close</button>
             <button>Wikipedia</button>
           </ModalFooter>
         </Modal>
@@ -49,7 +49,7 @@ describe("<Modal />", () => {
     return (
       <>
         <button data-testid="OpenModal" onClick={() => setIsOpen(true)}>
-          Open Modal
+          Open
         </button>
         <Modal
           data-testid="Modal"
@@ -86,7 +86,7 @@ describe("<Modal />", () => {
     const { user } = render(<ModalExample />)
 
     const openModalButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     await user.click(openModalButton)
 
@@ -100,7 +100,7 @@ describe("<Modal />", () => {
     expect(modalBody).toBeInTheDocument()
 
     const closeButton = await screen.findByRole("button", {
-      name: /close modal/i,
+      name: /^close$/i,
     })
     expect(closeButton).toBeInTheDocument()
   })
@@ -115,7 +115,7 @@ describe("<Modal />", () => {
 
       return (
         <>
-          <button onClick={() => setIsPrimaryOpen(true)}>Open Modal</button>
+          <button onClick={() => setIsPrimaryOpen(true)}>Open</button>
 
           <Modal
             aria-labelledby={primaryModalHeaderId}
@@ -159,7 +159,7 @@ describe("<Modal />", () => {
     const { user } = render(<NestedModal />)
 
     const primaryModalOpenButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     expect(primaryModalOpenButton).toBeVisible()
 
@@ -189,7 +189,7 @@ describe("<Modal />", () => {
       <ModalCloseExample />,
     )
 
-    const openButton = await findByRole("button", { name: "Open Modal" })
+    const openButton = await findByRole("button", { name: "Open" })
     await user.click(openButton)
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
     const closeButton = await findByTestId("ModalCloseButton")
@@ -203,7 +203,7 @@ describe("<Modal />", () => {
     const { findByRole, findByTestId, queryByTestId, user } = render(
       <ModalCloseExample />,
     )
-    const openButton = await findByRole("button", { name: "Open Modal" })
+    const openButton = await findByRole("button", { name: "Open" })
     await user.click(openButton)
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
     const ModalOverlay = await findByTestId("ModalOverlay")
@@ -216,7 +216,7 @@ describe("<Modal />", () => {
   test("Escape keyDown should work correctly", async () => {
     const { findByRole, findByTestId, getByTestId, queryByTestId, user } =
       render(<ModalCloseExample />)
-    const openButton = await findByRole("button", { name: "Open Modal" })
+    const openButton = await findByRole("button", { name: "Open" })
     await user.click(openButton)
     const modal = getByTestId("Modal")
     await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
@@ -230,7 +230,7 @@ describe("<Modal />", () => {
     const { user } = render(<ModalExample placement="left" />)
 
     const openModalButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     await user.click(openModalButton)
 
@@ -250,7 +250,7 @@ describe("<Modal />", () => {
     const { user } = render(<ModalExample placement="right" />)
 
     const openModalButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     await user.click(openModalButton)
 
@@ -270,7 +270,7 @@ describe("<Modal />", () => {
     const { user } = render(<ModalExample placement="top" />)
 
     const openModalButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     await user.click(openModalButton)
 
@@ -290,7 +290,7 @@ describe("<Modal />", () => {
     const { user } = render(<ModalExample placement="bottom" />)
 
     const openModalButton = await screen.findByRole("button", {
-      name: /open modal/i,
+      name: /open/i,
     })
     await user.click(openModalButton)
 

@@ -7,7 +7,7 @@ export interface ModalHeaderProps extends HTMLUIProps<"header"> {}
 
 export const ModalHeader = forwardRef<ModalHeaderProps, "header">(
   ({ className, __css, ...rest }, ref) => {
-    const { styles } = useModal()
+    const { labelledbyId, styles } = useModal()
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -18,6 +18,7 @@ export const ModalHeader = forwardRef<ModalHeaderProps, "header">(
 
     return (
       <ui.header
+        id={labelledbyId}
         ref={ref}
         className={cx("ui-modal__header", className)}
         __css={css}

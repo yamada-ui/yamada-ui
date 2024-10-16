@@ -17,6 +17,7 @@ export const DialogCloseButton = forwardRef<DialogCloseButtonProps, "button">(
       <ModalCloseButton
         ref={ref}
         className={cx("ui-dialog__close-button", className)}
+        aria-label="Close dialog"
         __css={css}
         {...rest}
       />

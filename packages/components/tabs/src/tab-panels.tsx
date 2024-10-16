@@ -17,7 +17,7 @@ export const TabPanels = forwardRef<TabPanelsProps, "div">(
 
       return createElement(
         TabPanelProvider,
-        { key: index, value: { isSelected, selectedIndex } },
+        { key: index, value: { index, isSelected, selectedIndex } },
         child,
       )
     })

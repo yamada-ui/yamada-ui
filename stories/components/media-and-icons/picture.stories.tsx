@@ -106,7 +106,7 @@ export const disableSorting: Story = () => {
         },
         {
           srcSet:
-            "https://dragon-ball-official.com/assets/img/intro/intro_.png",
+            "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
           media: "(max-width: 1280px)",
         },
       ]}

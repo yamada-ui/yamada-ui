@@ -16,13 +16,13 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useMemo, useRef } from "react"
 
-type ToggleGroupContext = {
+interface ToggleGroupContext extends ThemeProps<"Button"> {
   isControlled: boolean
   isDisabled?: boolean
   isReadOnly?: boolean
   value?: (number | string)[] | number | string
   onChange?: <M extends number | string = string>(value: M | undefined) => void
-} & ThemeProps<"Button">
+}
 
 const [ToggleGroupProvider, useToggleGroup] = createContext<ToggleGroupContext>(
   {

@@ -1,84 +1,84 @@
 {
+  "NativeOptionGroup": {},
+  "NativeOption": {},
   "NativeSelect": {
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps, \"children\">",
-      "required": false,
-      "description": "Props for container element."
+      "description": "Props for container element.",
+      "required": false
     },
     "errorBorderColor": {
       "type": "string",
-      "required": false,
-      "description": "The border color when the input is invalid."
+      "description": "The border color when the input is invalid.",
+      "required": false
     },
     "focusBorderColor": {
       "type": "string",
-      "required": false,
-      "description": "The border color when the input is focused."
+      "description": "The border color when the input is focused.",
+      "required": false
     },
     "iconProps": {
       "type": "HTMLUIProps",
-      "required": false,
-      "description": "Props for icon element."
+      "description": "Props for icon element.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "items": {
       "type": "NativeSelectItem[]",
       "defaultValue": "'[]'",
-      "required": false,
-      "description": "If provided, generate options based on items."
+      "description": "If provided, generate options based on items.",
+      "required": false
     },
     "placeholder": {
       "type": "string",
-      "required": false,
-      "description": "The placeholder for select."
+      "description": "The placeholder for select.",
+      "required": false
     },
     "placeholderInOptions": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, include placeholders in options."
+      "description": "If `true`, include placeholders in options.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the NativeSelect."
+      "defaultValue": "\"md\"",
+      "description": "The size of the NativeSelect.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "outline",
-      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the NativeSelect."
+      "type": "\"filled\" | \"flushed\" | \"outline\" | \"unstyled\"",
+      "defaultValue": "\"outline\"",
+      "description": "The variant of the NativeSelect.",
+      "required": false
     }
-  },
-  "NativeOptionGroup": {},
-  "NativeOption": {}
+  }
 }

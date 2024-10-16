@@ -14,43 +14,68 @@ order: 2
 The `SegmentedControl` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
 
 :::note
+`SegmentedControl` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
 ```ts
 export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   baseStyle: {
-    container: {
-      p: "1",
-      bg: ["blackAlpha.100", "whiteAlpha.50"],
-      _readOnly: { cursor: "default" },
-      _disabled: { cursor: "not-allowed" },
-    },
-    cursor: {
-      boxShadow: ["md", "dark-md"],
-    },
     button: {
-      transitionProperty: "common",
-      transitionDuration: "ultra-slow",
-      fontWeight: "medium",
-      whiteSpace: "nowrap",
       color: ["blackAlpha.800", "whiteAlpha.800"],
+      fontWeight: "medium",
+      transitionDuration: "ultra-slow",
+      transitionProperty: "common",
+      whiteSpace: "nowrap",
+      _disabled: { cursor: "not-allowed", opacity: 0.4 },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _hover: {
         opacity: 0.7,
         _checked: {
           opacity: 1,
         },
       },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _readOnly: { cursor: "default" },
-      _disabled: { opacity: 0.4, cursor: "not-allowed" },
+    },
+    container: {
+      bg: ["blackAlpha.100", "whiteAlpha.50"],
+      p: "1",
+      _disabled: { cursor: "not-allowed" },
+      _readOnly: { cursor: "default" },
+    },
+    cursor: {
+      boxShadow: ["md", "dark-md"],
+    },
+  },
+
+  sizes: {
+    sm: {
+      button: { fontSize: "sm", px: "2", py: "1" },
+      container: { minW: "xs" },
+    },
+    md: {
+      button: { fontSize: "md", px: "3", py: "1.5" },
+      container: { minW: "sm" },
+    },
+    lg: {
+      button: { px: "4", py: "2" },
+      container: { minW: "md" },
     },
   },
 
   variants: {
     basic: ({ colorScheme: c = "gray" }) => ({
+      button: {
+        rounded: "md",
+        _checked: {
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+        },
+      },
       container: {
         rounded: "lg",
       },
@@ -61,14 +86,14 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "md",
       },
+    }),
+    rounded: ({ colorScheme: c = "gray" }) => ({
       button: {
-        rounded: "md",
+        rounded: "full",
         _checked: {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
       },
-    }),
-    rounded: ({ colorScheme: c = "gray" }) => ({
       container: {
         rounded: "full",
       },
@@ -79,33 +104,12 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "full",
       },
-      button: {
-        rounded: "full",
-        _checked: {
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-        },
-      },
     }),
   },
 
-  sizes: {
-    sm: {
-      container: { minW: "xs" },
-      button: { py: "1", px: "2", fontSize: "sm" },
-    },
-    md: {
-      container: { minW: "sm" },
-      button: { py: "1.5", px: "3", fontSize: "md" },
-    },
-    lg: {
-      container: { minW: "md" },
-      button: { py: "2", px: "4" },
-    },
-  },
-
   defaultProps: {
-    variant: "basic",
     size: "md",
+    variant: "basic",
   },
 }
 ```

@@ -14,6 +14,10 @@ tab: Theming
 The `List` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
 
 :::note
+`List` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
@@ -21,12 +25,12 @@ If you want to change the style of the component, please check [here](/styled-sy
 export const List: ComponentMultiStyle<"List"> = {
   baseStyle: {
     container: {},
-    item: {},
     icon: {
-      me: "2",
       display: "inline-block",
+      me: "2",
       verticalAlign: "middle",
     },
+    item: {},
   },
 }
 ```

@@ -12,6 +12,10 @@ order: 2
 `ColorSwatch`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
+`ColorSwatch`は、のスタイルを継承しています。
+:::
+
+:::note
 コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
 :::
 
@@ -20,17 +24,6 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
   baseStyle: {
     container: {},
     overlay: { boxSize: "full" },
-  },
-
-  variants: {
-    basic: {
-      container: { rounded: "md" },
-      overlay: { rounded: "md" },
-    },
-    rounded: {
-      container: { rounded: "full" },
-      overlay: { rounded: "full" },
-    },
   },
 
   sizes: {
@@ -45,9 +38,20 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
     },
   },
 
+  variants: {
+    basic: {
+      container: { rounded: "md" },
+      overlay: { rounded: "md" },
+    },
+    rounded: {
+      container: { rounded: "full" },
+      overlay: { rounded: "full" },
+    },
+  },
+
   defaultProps: {
-    variant: "basic",
     size: "md",
+    variant: "basic",
   },
 }
 ```

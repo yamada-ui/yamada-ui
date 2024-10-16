@@ -360,6 +360,7 @@ export const useSaturationSlider = ({
 
       return {
         "aria-label": "Saturation and brightness thumb",
+        "aria-roledescription": "2D slider",
         bg: thumbColor ?? hsvTo([h, s, v])(),
         ...formControlProps,
         ...props,

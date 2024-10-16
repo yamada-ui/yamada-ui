@@ -9,21 +9,92 @@ order: 1
 
 ## Props
 
+### TabProps
+
+<PropsCard
+  id="tab-clickonenter"
+  name="clickOnEnter"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Enter`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-clickonspace"
+  name="clickOnSpace"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Space`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-disabletouchbehavior"
+  name="disableTouchBehavior"
+  type="boolean"
+  description={"Disable the touch device behavior."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-focusonclick"
+  name="focusOnClick"
+  type="boolean"
+  description={
+    "Whether or not to focus the element when it is clicked.\nIf `true`, the element will receive focus upon click."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={
+    "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tab-isfocusable"
+  name="isFocusable"
+  type="boolean"
+  description={
+    "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tab-ref"
+  name="ref"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: HTMLElement | null) => void)
+  | RefObject<HTMLElement>"
+  description={"The ref for the element."}
+/>
+
+### TabListProps
+
+### TabPanelProps
+
+### TabPanelsProps
+
 ### TabsProps
 
 <PropsCard
   id="tabs-align"
   name="align"
-  type='"start" | "end" | "center"'
+  type='"center" | "end" | "start"'
   description={"The alignment of the tabs."}
 />
 
 <PropsCard
   id="tabs-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
-  defaultValue={"primary"}
+  defaultValue={'"primary"'}
 />
 
 <PropsCard
@@ -96,7 +167,7 @@ order: 1
 <PropsCard
   id="tabs-orientation"
   name="orientation"
-  type='"vertical" | "horizontal"'
+  type='"horizontal" | "vertical"'
   description={"The orientation of the tab list."}
   defaultValue={"'horizontal'"}
 />
@@ -106,7 +177,7 @@ order: 1
   name="size"
   type='"sm" | "md" | "lg"'
   description={"The size of the Tabs."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -126,78 +197,7 @@ order: 1
 <PropsCard
   id="tabs-variant"
   name="variant"
-  type='"line" | "sticky" | "sticky-subtle" | "sticky-solid" | "rounded" | "rounded-subtle" | "rounded-solid" | "unstyled"'
+  type='"line" | "rounded" | "rounded-solid" | "rounded-subtle" | "sticky" | "sticky-solid" | "sticky-subtle" | "unstyled"'
   description={"The variant of the Tabs."}
-  defaultValue={"line"}
+  defaultValue={'"line"'}
 />
-
-### TabListProps
-
-### TabProps
-
-<PropsCard
-  id="tab-clickonenter"
-  name="clickOnEnter"
-  type="boolean"
-  description={"Whether or not trigger click on pressing `Enter`."}
-  defaultValue={"true"}
-/>
-
-<PropsCard
-  id="tab-clickonspace"
-  name="clickOnSpace"
-  type="boolean"
-  description={"Whether or not trigger click on pressing `Space`."}
-  defaultValue={"true"}
-/>
-
-<PropsCard
-  id="tab-disabletouchbehavior"
-  name="disableTouchBehavior"
-  type="boolean"
-  description={"Disable the touch device behavior."}
-  defaultValue={"true"}
-/>
-
-<PropsCard
-  id="tab-focusonclick"
-  name="focusOnClick"
-  type="boolean"
-  description={
-    "Whether or not to focus the element when it is clicked.\nIf `true`, the element will receive focus upon click."
-  }
-  defaultValue={"true"}
-/>
-
-<PropsCard
-  id="tab-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={
-    "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
-  }
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="tab-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={
-    "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
-  }
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="tab-ref"
-  name="ref"
-  type="type ONLY_FOR_FORMAT =
-  | ((instance: HTMLElement | null) => void)
-  | RefObject<HTMLElement>"
-  description={"The ref for the element."}
-/>
-
-### TabPanelsProps
-
-### TabPanelProps

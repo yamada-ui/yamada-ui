@@ -2,158 +2,158 @@
   "Pagination": {
     "total": {
       "type": "number",
-      "required": true,
-      "description": "The total number of pages in pagination."
+      "description": "The total number of pages in pagination.",
+      "required": true
     },
     "boundaries": {
       "type": "UIValue<number>",
       "defaultValue": "1",
-      "required": false,
-      "description": "Number of elements visible on the left/right edges."
+      "description": "Number of elements visible on the left/right edges.",
+      "required": false
     },
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "component": {
       "type": "FC<PaginationItemProps>",
-      "required": false,
-      "description": "The pagination button component to use."
+      "description": "The pagination button component to use.",
+      "required": false
     },
     "controlNextProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for next of the control button element."
+      "description": "Props for next of the control button element.",
+      "required": false
     },
     "controlPrevProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for previous of the control button element."
+      "description": "Props for previous of the control button element.",
+      "required": false
     },
     "controlProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for control button element."
+      "description": "Props for control button element.",
+      "required": false
     },
     "defaultPage": {
       "type": "number",
       "defaultValue": "1",
-      "required": false,
-      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`."
+      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`.",
+      "required": false
     },
     "edgeFirstProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for first of the edge button element."
+      "description": "Props for first of the edge button element.",
+      "required": false
     },
     "edgeLastProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for last of the edge button element."
+      "description": "Props for last of the edge button element.",
+      "required": false
     },
     "edgeProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for edge button element."
+      "description": "Props for edge button element.",
+      "required": false
     },
     "innerProps": {
       "type": "HTMLUIProps",
-      "required": false,
-      "description": "Props for inner element."
+      "description": "Props for inner element.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the pagination all item will be disabled."
+      "description": "If `true`, the pagination all item will be disabled.",
+      "required": false
     },
     "itemProps": {
       "type": "HTMLUIProps<\"button\">",
-      "required": false,
-      "description": "Props for button element."
+      "description": "Props for button element.",
+      "required": false
     },
     "onChange": {
       "type": "(page: number) => void",
-      "required": false,
-      "description": "The callback invoked when the page changes."
+      "description": "The callback invoked when the page changes.",
+      "required": false
     },
     "page": {
       "type": "number",
-      "required": false,
-      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`."
+      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`.",
+      "required": false
     },
     "siblings": {
       "type": "UIValue<number>",
       "defaultValue": "1",
-      "required": false,
-      "description": "Number of siblings displayed on the left/right side of selected page."
+      "description": "Number of siblings displayed on the left/right side of selected page.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-      "required": false,
-      "description": "The size of the Pagination."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Pagination.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "solid",
-      "type": "\"solid\" | \"outline\" | \"ghost\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Pagination."
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"unstyled\"",
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the Pagination.",
+      "required": false
     },
     "withControls": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
-      "required": false,
-      "description": "If `true`, display the control buttons."
+      "description": "If `true`, display the control buttons.",
+      "required": false
     },
     "withEdges": {
       "type": "UIValue<boolean>",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, display the edge buttons."
+      "description": "If `true`, display the edge buttons.",
+      "required": false
     }
   },
   "UsePagination": {
     "total": {
       "type": "number",
-      "required": true,
-      "description": "The total number of pages in pagination."
+      "description": "The total number of pages in pagination.",
+      "required": true
     },
     "boundaries": {
       "type": "UIValue<number>",
       "defaultValue": "1",
-      "required": false,
-      "description": "Number of elements visible on the left/right edges."
+      "description": "Number of elements visible on the left/right edges.",
+      "required": false
     },
     "defaultPage": {
       "type": "number",
       "defaultValue": "1",
-      "required": false,
-      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`."
+      "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the pagination all item will be disabled."
+      "description": "If `true`, the pagination all item will be disabled.",
+      "required": false
     },
     "onChange": {
       "type": "(page: number) => void",
-      "required": false,
-      "description": "The callback invoked when the page changes."
+      "description": "The callback invoked when the page changes.",
+      "required": false
     },
     "page": {
       "type": "number",
-      "required": false,
-      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`."
+      "description": "The page of the pagination.\nShould be less than `total` and greater than `1`.",
+      "required": false
     },
     "siblings": {
       "type": "UIValue<number>",
       "defaultValue": "1",
-      "required": false,
-      "description": "Number of siblings displayed on the left/right side of selected page."
+      "description": "Number of siblings displayed on the left/right side of selected page.",
+      "required": false
     }
   }
 }

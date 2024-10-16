@@ -123,8 +123,23 @@ export const peer = () => {
   )
 }
 
+export const orientation = () => {
+  return (
+    <Box
+      bg="primary"
+      color="white"
+      p="md"
+      rounded="lg"
+      _portrait={{ bg: "secondary" }}
+    >
+      Box
+    </Box>
+  )
+}
+
 export const other = () => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
   return (
     <Wrap gap="md">
       {numbers.map((number) => (

@@ -14,7 +14,7 @@ export const Input: ComponentMultiStyle<"Input"> = {
       outline: 0,
       position: "relative",
       transitionDuration: "normal",
-      transitionProperty: "common",
+      transitionProperty: "border-color, box-shadow, background-color, opacity",
       width: "100%",
       _disabled: {
         cursor: "not-allowed",

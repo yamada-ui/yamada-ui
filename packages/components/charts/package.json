@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/charts",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Yamada UI charts component",
   "keywords": [
     "yamada",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "recharts": "^2.12.7"
+    "recharts": "^2.13.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

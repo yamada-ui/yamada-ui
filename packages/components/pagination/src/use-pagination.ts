@@ -97,7 +97,7 @@ export const usePagination = ({
     [setCurrentPage],
   )
 
-  const range = useMemo((): ("dots" | number)[] => {
+  const range = useMemo((): ("ellipsis" | number)[] => {
     const minimumTotal = siblings * 2 + 3 + boundaries * 2
 
     if (minimumTotal >= total) return computedRange(1, total)
@@ -113,7 +113,7 @@ export const usePagination = ({
 
       return [
         ...computedRange(1, prevPages),
-        "dots",
+        "ellipsis",
         ...computedRange(total - (boundaries - 1), total),
       ]
     }
@@ -123,16 +123,16 @@ export const usePagination = ({
 
       return [
         ...computedRange(1, boundaries),
-        "dots",
+        "ellipsis",
         ...computedRange(total - nextPages, total),
       ]
     }
 
     return [
       ...computedRange(1, boundaries),
-      "dots",
+      "ellipsis",
       ...computedRange(prevSiblings, nextSiblings),
-      "dots",
+      "ellipsis",
       ...computedRange(total - boundaries + 1, total),
     ]
   }, [boundaries, siblings, currentPage, total])

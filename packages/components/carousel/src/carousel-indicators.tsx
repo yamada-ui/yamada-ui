@@ -19,7 +19,6 @@ export interface CarouselIndicatorsProps
 export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   ({ className, component, ...rest }, ref) => {
     const { orientation, selectedIndex, styles } = useCarouselContext()
-
     const { indexes, getIndicatorProps } = useCarouselIndicators()
 
     const css: CSSUIObject = {

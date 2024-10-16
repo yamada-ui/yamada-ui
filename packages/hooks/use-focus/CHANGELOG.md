@@ -1,5 +1,13 @@
 # @yamada-ui/use-focus
 
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655)]:
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-event-listener@1.0.22
+
 ## 1.0.22
 
 ### Patch Changes

@@ -9,7 +9,7 @@ import type {
 } from "@yamada-ui/core"
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel"
 import type { MouseEvent, RefObject } from "react"
-import { layoutStyleProperties } from "@yamada-ui/core"
+import { layoutStyleProperties, mergeVars } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   assignRef,
@@ -32,12 +32,10 @@ export type CarouselControl = EmblaCarouselType
 
 interface CarouselContext {
   carousel: CarouselControl | undefined
-  gap: CSSUIProps["gap"]
   includeGapInSize: boolean
   indexes: number[]
   orientation: "horizontal" | "vertical"
   selectedIndex: number
-  slideSize: number | string
   slidesToScroll: number
   styles: { [key: string]: CSSUIObject | undefined }
 }
@@ -152,7 +150,7 @@ export interface UseCarouselProps
    *
    * @default '100%'
    */
-  slideSize?: number | string
+  slideSize?: CSSUIProps["width"]
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -223,8 +221,10 @@ export const useCarousel = ({
   onScrollProgress,
   ...rest
 }: UseCarouselProps) => {
-  const [{ gap = "fallback(4, 1rem)", ...containerProps }, slidesProps] =
-    splitObject(rest, layoutStyleProperties)
+  const [
+    { gap = "fallback(4, 1rem)", ...containerProps },
+    { vars, ...slidesProps },
+  ] = splitObject(rest, layoutStyleProperties)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
     defaultValue: defaultIndex,
@@ -367,6 +367,10 @@ export const useCarousel = ({
       ...containerProps,
       ...props,
       ref,
+      vars: mergeVars(vars, [
+        { name: "gap", token: "spaces", value: gap },
+        { name: "slideSize", token: "sizes", value: slideSize },
+      ]),
       onMouseEnter: handlerAll(props.onMouseEnter, () => {
         setIsMouseEnter(true)
       }),
@@ -374,7 +378,7 @@ export const useCarousel = ({
         setIsMouseEnter(false)
       }),
     }),
-    [containerProps],
+    [containerProps, gap, slideSize, vars],
   )
 
   const getSlidesProps: PropGetter = useCallback(
@@ -389,12 +393,10 @@ export const useCarousel = ({
   return {
     carousel,
     children,
-    gap,
     includeGapInSize,
     indexes,
     orientation,
     selectedIndex,
-    slideSize,
     slidesToScroll,
     getContainerProps,
     getSlidesProps,

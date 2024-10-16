@@ -1,8 +1,8 @@
+import type { FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { FC } from "react"
 import { Icon } from "@yamada-ui/icon"
 
-export const DotsIcon: FC<IconProps> = (props) => {
+export const PaginationEllipsisIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -13,7 +13,10 @@ export const DotsIcon: FC<IconProps> = (props) => {
   )
 }
 
-export const FirstIcon: FC<IconProps> = (props) => {
+PaginationEllipsisIcon.displayName = "PaginationEllipsisIcon"
+PaginationEllipsisIcon.__ui__ = "PaginationEllipsisIcon"
+
+export const PaginationFirstIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -24,7 +27,10 @@ export const FirstIcon: FC<IconProps> = (props) => {
   )
 }
 
-export const LastIcon: FC<IconProps> = (props) => {
+PaginationFirstIcon.displayName = "PaginationFirstIcon"
+PaginationFirstIcon.__ui__ = "PaginationFirstIcon"
+
+export const PaginationLastIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -35,7 +41,10 @@ export const LastIcon: FC<IconProps> = (props) => {
   )
 }
 
-export const PrevIcon: FC<IconProps> = (props) => {
+PaginationLastIcon.displayName = "PaginationLastIcon"
+PaginationLastIcon.__ui__ = "PaginationLastIcon"
+
+export const PaginationPrevIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -46,7 +55,10 @@ export const PrevIcon: FC<IconProps> = (props) => {
   )
 }
 
-export const NextIcon: FC<IconProps> = (props) => {
+PaginationPrevIcon.displayName = "PaginationPrevIcon"
+PaginationPrevIcon.__ui__ = "PaginationPrevIcon"
+
+export const PaginationNextIcon: FC<IconProps> = (props) => {
   return (
     <Icon viewBox="0 0 16 16" {...props}>
       <path
@@ -56,3 +68,6 @@ export const NextIcon: FC<IconProps> = (props) => {
     </Icon>
   )
 }
+
+PaginationNextIcon.displayName = "PaginationNextIcon"
+PaginationNextIcon.__ui__ = "PaginationNextIcon"

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/snacks",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Yamada UI snacks component",
   "keywords": [
     "yamada",
@@ -50,8 +50,6 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
-    "@yamada-ui/use-token": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

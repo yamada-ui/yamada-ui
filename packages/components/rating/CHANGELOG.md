@@ -1,5 +1,22 @@
 # @yamada-ui/rating
 
+## 1.0.43
+
+### Patch Changes
+
+- [#2978](https://github.com/yamada-ui/yamada-ui/pull/2978) [`d11678b`](https://github.com/yamada-ui/yamada-ui/commit/d11678bacccb654715e2258b4358fd4cca58bad8) Thanks [@darkcat666](https://github.com/darkcat666)! - Set `displayName` to make debugging easier.
+
+- [#3047](https://github.com/yamada-ui/yamada-ui/pull/3047) [`c09aaf9`](https://github.com/yamada-ui/yamada-ui/commit/c09aaf94e74f91da7911d851aaecc526c82fa654) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated icon component names and references.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/motion@2.2.4
+  - @yamada-ui/use-focus-visible@1.1.9
+
 ## 1.0.42
 
 ### Patch Changes

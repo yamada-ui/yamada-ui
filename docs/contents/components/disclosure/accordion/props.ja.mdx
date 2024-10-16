@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="accordion-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
@@ -84,7 +84,7 @@ order: 1
   name="variant"
   type='"basic" | "card" | "unstyled"'
   description={"The variant of the Accordion."}
-  defaultValue={"basic"}
+  defaultValue={'"basic"'}
 />
 
 ### AccordionItemProps
@@ -92,7 +92,7 @@ order: 1
 <PropsCard
   id="accordionitem-icon"
   name="icon"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  type="string | number | boolean | ((props: { isDisabled: boolean; isExpanded: boolean; }) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal"
   description={"The accordion icon to use."}
 />
 
@@ -109,6 +109,22 @@ order: 1
   name="label"
   type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
   description={"The accordion label to use."}
+/>
+
+### AccordionLabelProps
+
+<PropsCard
+  id="accordionlabel-containerprops"
+  name="containerProps"
+  type="HTMLUIProps"
+  description={"Props the container element."}
+/>
+
+<PropsCard
+  id="accordionlabel-icon"
+  name="icon"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  description={"The accordion icon to use."}
 />
 
 ### AccordionPanelProps
@@ -193,20 +209,4 @@ order: 1
   description={
     "If `true`, the element will unmount when `isOpen={false}` and animation is done."
   }
-/>
-
-### AccordionLabelProps
-
-<PropsCard
-  id="accordionlabel-containerprops"
-  name="containerProps"
-  type="HTMLUIProps"
-  description={"Props the container element."}
-/>
-
-<PropsCard
-  id="accordionlabel-icon"
-  name="icon"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
-  description={"The accordion icon to use."}
 />

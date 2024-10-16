@@ -7,7 +7,7 @@ export interface ModalBodyProps extends HTMLUIProps {}
 
 export const ModalBody = forwardRef<ModalBodyProps, "div">(
   ({ className, __css, ...rest }, ref) => {
-    const { scrollBehavior, styles } = useModal()
+    const { describedbyId, scrollBehavior, styles } = useModal()
 
     const css: CSSUIObject = {
       alignItems: "flex-start",
@@ -19,6 +19,7 @@ export const ModalBody = forwardRef<ModalBodyProps, "div">(
 
     return (
       <ui.div
+        id={describedbyId}
         ref={ref}
         className={cx("ui-modal__body", className)}
         __css={css}

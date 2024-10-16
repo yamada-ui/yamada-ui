@@ -26,7 +26,7 @@ import {
   getValidChildren,
   handlerAll,
   mergeRefs,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useState } from "react"
 
@@ -164,11 +164,15 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       onComplete,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
-    const {
-      "aria-readonly": _ariaReadonly,
-      readOnly,
-      ...formControlProps
-    } = pickObject(rest, formControlProperties)
+    const [
+      {
+        "aria-readonly": _ariaReadonly,
+        disabled,
+        readOnly,
+        ...formControlProps
+      },
+      containerProps,
+    ] = splitObject(rest, formControlProperties)
     const uuid = useId()
 
     id ??= uuid
@@ -331,10 +335,12 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         ...filterUndefined(props),
         id: `${id}-${index}`,
         autoComplete: otp ? "one-time-code" : "off",
+        disabled,
         placeholder:
           focusedIndex === index && !readOnly && !props.readOnly
             ? ""
             : placeholder,
+        readOnly,
         value: values[index] || "",
         onBlur: handlerAll(props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),
@@ -353,6 +359,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         onBlur,
         otp,
         focusedIndex,
+        disabled,
         readOnly,
         placeholder,
       ],
@@ -377,8 +384,10 @@ export const PinInput = forwardRef<PinInputProps, "div">(
           <ui.div
             ref={ref}
             className={cx("ui-pin-input", className)}
+            role="group"
             __css={css}
-            {...rest}
+            {...formControlProps}
+            {...containerProps}
           >
             {cloneChildren}
           </ui.div>

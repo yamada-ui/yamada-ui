@@ -13,9 +13,9 @@ import {
   Tr,
 } from "../src"
 
-type TestTableProps = {
+interface TestTableProps extends NativeTableProps {
   withCaption?: boolean
-} & NativeTableProps
+}
 
 describe("<NativeTable />", () => {
   const Table: FC<TestTableProps> = (props) => {

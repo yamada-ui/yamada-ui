@@ -1,3 +1,4 @@
+import type { TSESLint } from "@typescript-eslint/utils"
 import type { Linter } from "eslint"
 import { fixupPluginRules } from "@eslint/compat"
 import nextPlugin from "@next/eslint-plugin-next"
@@ -73,18 +74,20 @@ const tsConfigPath = resolve(
 
 const languageOptionsConfig = languageOptionFactory(tsConfigPath)
 
-export default tseslint.config(
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ignoreConfig,
   languageOptionsConfig,
   baseConfig,
   noConsoleConfig,
   typescriptConfig,
   ...importConfigArray,
-  cspellConfig,
   perfectionistConfig,
+  cspellConfig,
   reactConfig,
   reactHooksConfig,
   nextConfig,
   jsxA11yConfig,
   prettierConfig,
 )
+
+export default config

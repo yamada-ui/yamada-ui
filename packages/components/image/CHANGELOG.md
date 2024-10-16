@@ -1,5 +1,19 @@
 # @yamada-ui/image
 
+## 1.3.0
+
+### Minor Changes
+
+- [#3059](https://github.com/yamada-ui/yamada-ui/pull/3059) [`4a488cb`](https://github.com/yamada-ui/yamada-ui/commit/4a488cbee990007cac42608b771a224a81bf860a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Picture` component.
+
+### Patch Changes
+
+- [#3006](https://github.com/yamada-ui/yamada-ui/pull/3006) [`f351710`](https://github.com/yamada-ui/yamada-ui/commit/f3517100506d4b570f5836b6a970bc45dc975601) Thanks [@sonitan0803](https://github.com/sonitan0803)! - Set `displayName` for easier debugging.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+
 ## 1.2.3
 
 ### Patch Changes

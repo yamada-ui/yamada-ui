@@ -1,111 +1,111 @@
 {
   "FileButton": {
     "colorScheme": {
-      "defaultValue": "gray",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"gray\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "errorBorderColor": {
-      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
-      "required": false,
-      "description": "The border color when the button is invalid."
+      "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
+      "description": "The border color when the button is invalid.",
+      "required": false
     },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is represented as active."
+      "description": "If `true`, the button is represented as active.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is disabled."
+      "description": "If `true`, the button is disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the loading state of the button is represented."
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to display at the left side of the button."
+      "description": "The icon to display at the left side of the button.",
+      "required": false
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
-      "required": false,
-      "description": "The icon to display when the button is loading."
+      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"audio\"\n  | \"circles\"\n  | \"dots\"\n  | \"oval\"\n  | \"puff\"\n  | \"rings\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
     },
     "loadingPlacement": {
       "type": "\"end\" | \"start\"",
       "defaultValue": "'start'",
-      "required": false,
-      "description": "The placement of the loading indicator. Accepts `start` or `end`."
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
     },
     "loadingText": {
       "type": "string",
-      "required": false,
-      "description": "The text to display when the button is loading."
+      "description": "The text to display when the button is loading.",
+      "required": false
     },
     "onChange": {
       "type": "(files: File[] | undefined) => void",
-      "required": false,
-      "description": "Function to be called when a file change event occurs."
+      "description": "Function to be called when a file change event occurs.",
+      "required": false
     },
     "resetRef": {
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void) | null) => void)\n  | MutableRefObject<(() => void) | null>",
-      "required": false,
-      "description": "Ref to a reset function."
+      "description": "Ref to a reset function.",
+      "required": false
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to display at the right side of the button."
+      "description": "The icon to display at the right side of the button.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the FileButton."
+      "defaultValue": "\"md\"",
+      "description": "The size of the FileButton.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "solid",
-      "type": "\"solid\" | \"outline\" | \"link\" | \"ghost\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the FileButton."
+      "type": "\"ghost\" | \"link\" | \"outline\" | \"solid\" | \"unstyled\"",
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the FileButton.",
+      "required": false
     }
   }
 }

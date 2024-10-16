@@ -310,14 +310,15 @@ MIT © [Hirotomo Yamada](https://github.com/yamada-ui)
 `
 
 const components = {
-  h2: (props) => (
+  h2: ({ children }) => (
     <Heading
       size="2xl"
       bgGradient="linear(to-l, #f37bdf, #59a9e1)"
       bgClip="text"
       isTruncated
-      {...props}
-    />
+    >
+      {children}
+    </Heading>
   ),
 }
 

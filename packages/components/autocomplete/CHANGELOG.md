@@ -1,5 +1,33 @@
 # @yamada-ui/autocomplete
 
+## 1.6.0
+
+### Minor Changes
+
+- [#3086](https://github.com/yamada-ui/yamada-ui/pull/3086) [`8b5b6b1`](https://github.com/yamada-ui/yamada-ui/commit/8b5b6b1a71b4b99f03784ee473b7558a0695f5bd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - When the option `value` is not set, the value of `children` is automatically set.
+
+### Patch Changes
+
+- [#3095](https://github.com/yamada-ui/yamada-ui/pull/3095) [`ef7d422`](https://github.com/yamada-ui/yamada-ui/commit/ef7d42276e67a43d04545d2eb335db2aa9c8b42c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `value` was not reset.
+
+- [#3018](https://github.com/yamada-ui/yamada-ui/pull/3018) [`fbb70d2`](https://github.com/yamada-ui/yamada-ui/commit/fbb70d242e1ae39dd58707d3fd0647e95f88ae0e) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Fix component name in `@yamada-ui/autocomplete`
+
+- [#3095](https://github.com/yamada-ui/yamada-ui/pull/3095) [`ef7d422`](https://github.com/yamada-ui/yamada-ui/commit/ef7d42276e67a43d04545d2eb335db2aa9c8b42c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the input value was not reset when `allowCreate` was `true`.
+
+- Updated dependencies [[`898ab83`](https://github.com/yamada-ui/yamada-ui/commit/898ab83eb677646ee293a336a0a5d254aeefa00f), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`28632a8`](https://github.com/yamada-ui/yamada-ui/commit/28632a8d904b581068e93a75e44323c9d37111b1), [`c22d335`](https://github.com/yamada-ui/yamada-ui/commit/c22d3355ab42d4f0f3e3413248bed949729fc8e3), [`2173466`](https://github.com/yamada-ui/yamada-ui/commit/2173466c144212522a61aec94e34cac375291655), [`0604931`](https://github.com/yamada-ui/yamada-ui/commit/0604931287d4edee29c86609ae6cb76f6d8b730d), [`4832b3d`](https://github.com/yamada-ui/yamada-ui/commit/4832b3d8d6184fb36c7f06fed2c8ef51e4d6542b)]:
+  - @yamada-ui/core@1.15.2
+  - @yamada-ui/utils@1.5.3
+  - @yamada-ui/use-controllable-state@1.0.22
+  - @yamada-ui/portal@1.0.23
+  - @yamada-ui/icon@1.1.8
+  - @yamada-ui/form-control@2.1.4
+  - @yamada-ui/motion@2.2.4
+  - @yamada-ui/popover@1.3.4
+  - @yamada-ui/use-clickable@1.2.10
+  - @yamada-ui/use-descendant@1.0.23
+  - @yamada-ui/use-disclosure@1.0.22
+  - @yamada-ui/use-outside-click@1.0.22
+
 ## 1.5.3
 
 ### Patch Changes

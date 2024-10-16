@@ -32,9 +32,7 @@ import {
   useTheme,
 } from '@yamada-ui/react'
 import Link from 'next/link'
-import { useRef } from 'react'
-import { useState } from 'react'
-import { memo } from 'react'
+import { memo, useRef, useState } from 'react'
 
 export interface HeaderProps extends CenterProps {}
 
@@ -94,6 +92,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
             _light={{ display: 'none' }}
           />
         </Box>
+
         <Spacer />
 
         <HStack>
@@ -105,9 +104,9 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = {
+interface ColorModeButtonProps extends IconButtonProps {
   menuProps?: MenuProps
-} & IconButtonProps
+}
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) => {
   const { changeColorMode, colorMode, internalColorMode } = useColorMode()
@@ -163,9 +162,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
 ColorModeButton.displayName = 'ColorModeButton'
 
-type ThemeSchemeButtonProps = {
+interface ThemeSchemeButtonProps extends IconButtonProps {
   popoverProps?: PopoverProps
-} & IconButtonProps
+}
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...rest }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()

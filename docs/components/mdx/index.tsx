@@ -11,6 +11,7 @@ import {
   ListItem,
   NativeTable,
   TableContainer,
+  Tag,
   Td,
   Text,
   Th,
@@ -76,6 +77,7 @@ export const components: MDXComponents = {
       <NativeTable apply="mdx.table" {...props} />
     </TableContainer>
   ),
+  Tag: (props) => <Tag colorScheme="gray" size="sm" {...props} />,
   td: (props) => <Td {...props} />,
   th: (props) => <Th {...props} />,
   ul: (props) => <DiscList apply="mdx.ul" {...props} />,

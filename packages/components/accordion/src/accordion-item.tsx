@@ -51,16 +51,9 @@ export interface AccordionItemProps
     AccordionItemOptions {}
 
 export const AccordionItem = forwardRef<AccordionItemProps, "div">(
-  (
-    { id, className, children, icon, isDisabled = false, label, ...rest },
-    ref,
-  ) => {
-    const uuid = useId()
-
-    id ??= uuid
-
-    const itemId = `${id}-item`
-    const panelId = `${id}-panel`
+  ({ className, children, icon, isDisabled = false, label, ...rest }, ref) => {
+    const itemId = useId()
+    const panelId = useId()
 
     const { index, isMultiple, isToggle, setFocusedIndex, setIndex, styles } =
       useAccordionContext()
@@ -204,7 +197,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
         value={{ icon, isDisabled, isOpen, getLabelProps, getPanelProps }}
       >
         <ui.div
-          id={id}
           ref={ref}
           className={cx("ui-accordion__item", className)}
           data-expanded={dataAttr(isOpen)}

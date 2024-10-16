@@ -1,344 +1,344 @@
 {
-  "Slider": {
-    "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
-    },
-    "defaultValue": {
-      "type": "number",
-      "required": false,
-      "description": "The initial value of the slider."
-    },
-    "filledTrackColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The CSS `color` property. Used in `color` of filled track element."
-    },
-    "filledTrackProps": {
-      "type": "SliderFilledTrackProps",
-      "required": false,
-      "description": "Props for slider filled track element."
-    },
-    "focusThumbOnChange": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "If `false`, the slider handle will not capture focus when value changes."
-    },
-    "id": {
-      "type": "string",
-      "required": false,
-      "description": "The base `id` to use for the slider."
-    },
-    "inputProps": {
-      "type": "HTMLUIProps<\"input\">",
-      "required": false,
-      "description": "Props for slider input element."
-    },
-    "isDisabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
-    },
-    "isInvalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
-    },
-    "isReadOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
-    },
-    "isRequired": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
-    },
-    "isReversed": {
-      "type": "boolean",
-      "required": false,
-      "description": "If `true`, the value will be incremented or decremented in reverse."
-    },
-    "max": {
-      "type": "number",
-      "defaultValue": "100",
-      "required": false,
-      "description": "The maximum allowed value of the slider. Cannot be less than min."
-    },
-    "min": {
-      "type": "number",
-      "defaultValue": "0",
-      "required": false,
-      "description": "The minimum allowed value of the slider. Cannot be greater than max."
-    },
-    "name": {
-      "type": "string",
-      "required": false,
-      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
-    },
-    "onChange": {
-      "type": "(value: number) => void",
-      "required": false,
-      "description": "Function called whenever the slider value changes."
-    },
-    "onChangeEnd": {
-      "type": "(value: number) => void",
-      "required": false,
-      "description": "Function called when the user is done selecting a new value."
-    },
-    "onChangeStart": {
-      "type": "(value: number) => void",
-      "required": false,
-      "description": "Function called when the user starts selecting a new value."
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the slider."
-    },
-    "size": {
-      "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Slider."
-    },
-    "step": {
-      "type": "number",
-      "defaultValue": "1",
-      "required": false,
-      "description": "The step in which increments or decrements have to be made."
-    },
-    "thumbColor": {
-      "type": "UIValue<\"border\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | \"whiteAlpha.700\" | ... 319 more ... | Background<...>>",
-      "required": false,
-      "description": "The CSS `background` property. Used in `background` of thumb element."
-    },
-    "thumbProps": {
-      "type": "SliderThumbProps",
-      "required": false,
-      "description": "Props for slider thumb element."
-    },
-    "thumbSize": {
-      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 74 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element."
-    },
-    "trackColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The CSS `color` property. Used in `color` of track element."
-    },
-    "trackProps": {
-      "type": "SliderTrackProps",
-      "required": false,
-      "description": "Props for slider track element."
-    },
-    "trackSize": {
-      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 70 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `height` property. Used in `height` of track element."
-    },
-    "value": {
-      "type": "number",
-      "required": false,
-      "description": "The value of the slider."
-    },
-    "variant": {
-      "type": "string",
-      "required": false,
-      "description": "The variant of the Slider."
-    }
-  },
-  "SliderTrack": {
-    "filledTrackProps": {
-      "type": "SliderFilledTrackProps",
-      "required": false,
-      "description": "Props for slider filled track element."
-    }
-  },
-  "SliderFilledTrack": {},
-  "SliderThumb": {},
-  "SliderMark": { "value": { "type": "number", "required": true } },
+  "RangeSliderFilledTrack": {},
+  "RangeSliderMark": { "value": { "type": "number", "required": true } },
   "RangeSlider": {
     "betweenThumbs": {
       "type": "number",
       "defaultValue": "0",
-      "required": false,
-      "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together."
+      "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together.",
+      "required": false
     },
     "colorScheme": {
-      "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "defaultValue": {
       "type": "[number, number]",
-      "required": false,
-      "description": "The initial value of the slider."
+      "description": "The initial value of the slider.",
+      "required": false
     },
     "filledTrackColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The CSS `color` property. Used in `color` of filled track element."
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The CSS `color` property. Used in `color` of filled track element.",
+      "required": false
     },
     "filledTrackProps": {
       "type": "RangeSliderFilledTrackProps",
-      "required": false,
-      "description": "Props for range slider filled track element."
+      "description": "Props for range slider filled track element.",
+      "required": false
     },
     "focusThumbOnChange": {
       "type": "boolean",
       "defaultValue": true,
-      "required": false,
-      "description": "If `false`, the slider handle will not capture focus when value changes."
+      "description": "If `false`, the slider handle will not capture focus when value changes.",
+      "required": false
     },
     "id": {
       "type": "string",
-      "required": false,
-      "description": "The base `id` to use for the slider."
+      "description": "The base `id` to use for the slider.",
+      "required": false
     },
     "inputProps": {
       "type": "HTMLUIProps<\"input\">",
-      "required": false,
-      "description": "Props for range slider input element."
+      "description": "Props for range slider input element.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be disabled."
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be invalid."
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be readonly."
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the form control will be required."
+      "description": "If `true`, the form control will be required.",
+      "required": false
     },
     "isReversed": {
       "type": "boolean",
-      "required": false,
-      "description": "If `true`, the value will be incremented or decremented in reverse."
+      "description": "If `true`, the value will be incremented or decremented in reverse.",
+      "required": false
     },
     "max": {
       "type": "number",
       "defaultValue": "100",
-      "required": false,
-      "description": "The maximum allowed value of the slider. Cannot be less than min."
+      "description": "The maximum allowed value of the slider. Cannot be less than min.",
+      "required": false
     },
     "min": {
       "type": "number",
       "defaultValue": "0",
-      "required": false,
-      "description": "The minimum allowed value of the slider. Cannot be greater than max."
+      "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+      "required": false
     },
     "name": {
       "type": "string | [string, string]",
-      "required": false,
-      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
     },
     "onChange": {
       "type": "(value: [number, number]) => void",
-      "required": false,
-      "description": "Function called whenever the slider value changes."
+      "description": "Function called whenever the slider value changes.",
+      "required": false
     },
     "onChangeEnd": {
       "type": "(value: [number, number]) => void",
-      "required": false,
-      "description": "Function called when the user is done selecting a new value."
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
     },
     "onChangeStart": {
       "type": "(value: [number, number]) => void",
-      "required": false,
-      "description": "Function called when the user starts selecting a new value."
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
     },
     "orientation": {
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
-      "required": false,
-      "description": "The orientation of the slider."
+      "description": "The orientation of the slider.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the RangeSlider."
+      "defaultValue": "\"md\"",
+      "description": "The size of the RangeSlider.",
+      "required": false
     },
     "step": {
       "type": "number",
       "defaultValue": "1",
-      "required": false,
-      "description": "The step in which increments or decrements have to be made."
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | \"whiteAlpha.700\" | ... 319 more ... | Background<...>>",
-      "required": false,
-      "description": "The CSS `background` property. Used in `background` of thumb element."
+      "type": "UIValue<\"border\" | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | ... 318 more ... | Background<...>>",
+      "description": "The CSS `background` property. Used in `background` of thumb element.",
+      "required": false
     },
     "thumbProps": {
       "type": "RangeSliderThumbProps",
-      "required": false,
-      "description": "Props for range slider thumb element."
+      "description": "Props for range slider thumb element.",
+      "required": false
     },
     "thumbSize": {
-      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 74 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element."
+      "type": "UIValue<number | \"px\" | \"max\" | \"min\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 75 more ... | \"xs\">",
+      "description": "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element.",
+      "required": false
     },
     "trackColor": {
-      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
-      "required": false,
-      "description": "The CSS `color` property. Used in `color` of track element."
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The CSS `color` property. Used in `color` of track element.",
+      "required": false
     },
     "trackProps": {
       "type": "RangeSliderTrackProps",
-      "required": false,
-      "description": "Props for range slider track element."
+      "description": "Props for range slider track element.",
+      "required": false
     },
     "trackSize": {
-      "type": "UIValue<number | \"px\" | \"min\" | \"max\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 70 more ... | \"9xl\">",
-      "required": false,
-      "description": "The CSS `height` property. Used in `height` of track element."
+      "type": "UIValue<number | \"px\" | \"max\" | \"min\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 71 more ... | \"xs\">",
+      "description": "The CSS `height` property. Used in `height` of track element.",
+      "required": false
     },
     "value": {
       "type": "[number, number]",
-      "required": false,
-      "description": "The value of the slider."
+      "description": "The value of the slider.",
+      "required": false
     },
     "variant": {
       "type": "string",
-      "required": false,
-      "description": "The variant of the RangeSlider."
+      "description": "The variant of the RangeSlider.",
+      "required": false
     }
   },
+  "RangeSliderThumb": {},
   "RangeSliderTrack": {
     "filledTrackProps": {
       "type": "RangeSliderFilledTrackProps",
-      "required": false,
-      "description": "Props for range slider filled track element."
+      "description": "Props for range slider filled track element.",
+      "required": false
     }
   },
-  "RangeSliderFilledTrack": {},
-  "RangeSliderThumb": {},
-  "RangeSliderMark": { "value": { "type": "number", "required": true } }
+  "SliderFilledTrack": {},
+  "SliderMark": { "value": { "type": "number", "required": true } },
+  "Slider": {
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "number",
+      "description": "The initial value of the slider.",
+      "required": false
+    },
+    "filledTrackColor": {
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The CSS `color` property. Used in `color` of filled track element.",
+      "required": false
+    },
+    "filledTrackProps": {
+      "type": "SliderFilledTrackProps",
+      "description": "Props for slider filled track element.",
+      "required": false
+    },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `false`, the slider handle will not capture focus when value changes.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "The base `id` to use for the slider.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "description": "Props for slider input element.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "isReversed": {
+      "type": "boolean",
+      "description": "If `true`, the value will be incremented or decremented in reverse.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The maximum allowed value of the slider. Cannot be less than min.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "description": "Function called whenever the slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "description": "The orientation of the slider.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the Slider.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbColor": {
+      "type": "UIValue<\"border\" | ({} & string) | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | ... 318 more ... | Background<...>>",
+      "description": "The CSS `background` property. Used in `background` of thumb element.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "SliderThumbProps",
+      "description": "Props for slider thumb element.",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "UIValue<number | \"px\" | \"max\" | \"min\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 75 more ... | \"xs\">",
+      "description": "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
+      "description": "The CSS `color` property. Used in `color` of track element.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "SliderTrackProps",
+      "description": "Props for slider track element.",
+      "required": false
+    },
+    "trackSize": {
+      "type": "UIValue<number | \"px\" | \"max\" | \"min\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 71 more ... | \"xs\">",
+      "description": "The CSS `height` property. Used in `height` of track element.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The value of the slider.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the Slider.",
+      "required": false
+    }
+  },
+  "SliderThumb": {},
+  "SliderTrack": {
+    "filledTrackProps": {
+      "type": "SliderFilledTrackProps",
+      "description": "Props for slider filled track element.",
+      "required": false
+    }
+  }
 }

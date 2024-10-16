@@ -12,6 +12,10 @@ order: 2
 The `ColorSwatch` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
 
 :::note
+`ColorSwatch` inherits the style from .
+:::
+
+:::note
 If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
 :::
 
@@ -20,17 +24,6 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
   baseStyle: {
     container: {},
     overlay: { boxSize: "full" },
-  },
-
-  variants: {
-    basic: {
-      container: { rounded: "md" },
-      overlay: { rounded: "md" },
-    },
-    rounded: {
-      container: { rounded: "full" },
-      overlay: { rounded: "full" },
-    },
   },
 
   sizes: {
@@ -45,9 +38,20 @@ export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
     },
   },
 
+  variants: {
+    basic: {
+      container: { rounded: "md" },
+      overlay: { rounded: "md" },
+    },
+    rounded: {
+      container: { rounded: "full" },
+      overlay: { rounded: "full" },
+    },
+  },
+
   defaultProps: {
-    variant: "basic",
     size: "md",
+    variant: "basic",
   },
 }
 ```

@@ -26,11 +26,11 @@ import { memo, useRef, useState } from "react"
 import { Header } from "./header"
 import { getDateDiff } from "./utils"
 
-type Props = {
+interface Props extends StackProps {
   defaultMail: MailItem
   mails: MailItem[]
   setMailRef: MutableRefObject<(mail: MailItem) => void>
-} & StackProps
+}
 
 export const Inbox: FC<Props> = memo(
   ({ defaultMail, mails, setMailRef, ...rest }) => {
@@ -111,11 +111,12 @@ export const Inbox: FC<Props> = memo(
 
 Inbox.displayName = "Inbox"
 
-type InboxItemProps = {
+interface InboxItemProps
+  extends MailItem,
+    Omit<CardProps, "content" | "id" | "title"> {
   resetMapRef: MutableRefObject<Map<number, () => void>>
   defaultIsSelected?: boolean
-} & MailItem &
-  Omit<CardProps, "id">
+}
 
 const InboxItem: FC<InboxItemProps> = memo(
   ({

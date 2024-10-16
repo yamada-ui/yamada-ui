@@ -39,7 +39,7 @@ tab: Props
 <PropsCard
   id="colorpicker-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -106,14 +106,14 @@ tab: Props
 <PropsCard
   id="colorpicker-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
+  type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="colorpicker-colorselectorcolorscheme"
   name="colorSelectorColorScheme"
-  type='"blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | (string & {}) | "primary" | "secondary" | ... 12 more ... | "sky"'
+  type="ThemeColorScheme"
   description={"ColorScheme for the color selector component."}
 />
 
@@ -127,14 +127,14 @@ tab: Props
 <PropsCard
   id="colorpicker-colorselectorsize"
   name="colorSelectorSize"
-  type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+  type='UIValue<"lg" | "md" | "sm" | ({} & string) | "full">'
   description={"Size for the color selector component."}
 />
 
 <PropsCard
   id="colorpicker-colorselectorvariant"
   name="colorSelectorVariant"
-  type="UIValue<string & {}>"
+  type="UIValue<{} & string>"
   description={"Variant for the color selector component."}
 />
 
@@ -185,7 +185,7 @@ tab: Props
   name="eventListeners"
   type="type ONLY_FOR_FORMAT =
   | boolean
-  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  | { resize?: boolean | undefined; scroll?: boolean | undefined }"
   description={
     "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
   }
@@ -204,6 +204,13 @@ tab: Props
   name="fallbackValue"
   type="string"
   description={"The fallback value returned when color determination fails."}
+/>
+
+<PropsCard
+  id="colorpicker-fieldprops"
+  name="fieldProps"
+  type='Omit<ColorPickerFieldProps, "children" | "inputProps">'
+  description={"Props for color picker field element."}
 />
 
 <PropsCard
@@ -268,7 +275,7 @@ tab: Props
   id="colorpicker-inputprops"
   name="inputProps"
   type='HTMLUIProps<"input">'
-  description={"Props for color picker element."}
+  description={"Props for color picker input element."}
 />
 
 <PropsCard
@@ -456,7 +463,7 @@ tab: Props
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
   description={"The size of the ColorPicker."}
-  defaultValue={"md"}
+  defaultValue={'"md"'}
 />
 
 <PropsCard
@@ -507,7 +514,7 @@ tab: Props
 <PropsCard
   id="colorpicker-swatchprops"
   name="swatchProps"
-  type="ColorSwatchProps"
+  type="ColorPickerSwatchProps"
   description={"Props for color swatch component."}
 />
 
@@ -521,9 +528,9 @@ tab: Props
 <PropsCard
   id="colorpicker-variant"
   name="variant"
-  type='"outline" | "filled" | "flushed" | "unstyled"'
+  type='"filled" | "flushed" | "outline" | "unstyled"'
   description={"The variant of the ColorPicker."}
-  defaultValue={"outline"}
+  defaultValue={'"outline"'}
 />
 
 <PropsCard

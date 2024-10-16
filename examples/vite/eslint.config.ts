@@ -1,3 +1,4 @@
+import type { TSESLint } from "@typescript-eslint/utils"
 import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -28,7 +29,7 @@ const tsConfigNodePath = resolve(
   "./tsconfig.node.json",
 )
 
-export default tseslint.config(
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ignoresConfig,
   languageOptionFactory(tsConfigPath, {
     files: ["src/**/*.ts", "src/**/*.tsx"],
@@ -42,12 +43,9 @@ export default tseslint.config(
     },
   }),
   languageOptionFactory(tsConfigNodePath, {
-    files: ["eslint.config.mjs", "vite.config.ts"],
+    files: ["eslint.config.ts", "vite.config.ts"],
     languageOptions: {
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
         ecmaVersion: "latest",
       },
     },
@@ -61,3 +59,5 @@ export default tseslint.config(
   jsxA11yConfig,
   prettierConfig,
 )
+
+export default config

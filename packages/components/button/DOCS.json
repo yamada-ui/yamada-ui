@@ -1,134 +1,134 @@
 {
   "Button": {
     "colorScheme": {
-      "defaultValue": "gray",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
-      "required": false,
-      "description": "The visual color appearance of the component."
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"gray\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
     },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is represented as active."
+      "description": "If `true`, the button is represented as active.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is disabled."
+      "description": "If `true`, the button is disabled.",
+      "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the loading state of the button is represented."
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to display at the left side of the button."
+      "description": "The icon to display at the left side of the button.",
+      "required": false
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
-      "required": false,
-      "description": "The icon to display when the button is loading."
+      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"audio\"\n  | \"circles\"\n  | \"dots\"\n  | \"oval\"\n  | \"puff\"\n  | \"rings\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
     },
     "loadingPlacement": {
       "type": "\"end\" | \"start\"",
       "defaultValue": "'start'",
-      "required": false,
-      "description": "The placement of the loading indicator. Accepts `start` or `end`."
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
     },
     "loadingText": {
       "type": "string",
-      "required": false,
-      "description": "The text to display when the button is loading."
+      "description": "The text to display when the button is loading.",
+      "required": false
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to display at the right side of the button."
+      "description": "The icon to display at the right side of the button.",
+      "required": false
     },
     "size": {
-      "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
-      "required": false,
-      "description": "The size of the Button."
+      "defaultValue": "\"md\"",
+      "description": "The size of the Button.",
+      "required": false
     },
     "variant": {
-      "defaultValue": "solid",
-      "type": "\"solid\" | \"outline\" | \"link\" | \"ghost\" | \"unstyled\"",
-      "required": false,
-      "description": "The variant of the Button."
+      "type": "\"ghost\" | \"link\" | \"outline\" | \"solid\" | \"unstyled\"",
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the Button.",
+      "required": false
     }
   },
   "ButtonGroup": {
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
-      "required": false,
-      "description": "The CSS `flex-direction` property."
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
     },
     "isAttached": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, all wrapped button will be disabled."
+      "description": "If `true`, all wrapped button will be disabled.",
+      "required": false
     }
   },
   "IconButton": {
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, disable ripple effects when pressing a element."
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "required": false,
-      "description": "The icon to be used in the button."
+      "description": "The icon to be used in the button.",
+      "required": false
     },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is represented as active."
+      "description": "If `true`, the button is represented as active.",
+      "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the button is disabled."
+      "description": "If `true`, the button is disabled.",
+      "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the loading state of the button is represented."
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "required": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
     }
   }
 }

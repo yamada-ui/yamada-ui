@@ -3,14 +3,14 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Flip: ComponentMultiStyle<"Flip"> = {
   baseStyle: {
     container: {
+      position: "relative",
+      userSelect: "none",
       _disabled: {
         cursor: "not-allowed",
       },
       _readOnly: {
         cursor: "default",
       },
-      position: "relative",
-      userSelect: "none",
     },
     flipIdent: {
       backfaceVisibility: "hidden",

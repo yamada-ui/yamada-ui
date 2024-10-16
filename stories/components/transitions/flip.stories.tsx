@@ -28,8 +28,8 @@ const BackOfCard = () => {
     <Center bg="black" borderRadius="lg" borderWidth="1px" h="2xs" w="3xs">
       <Avatar
         name="Hirotomo Yamada"
-        size="lg"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        size="lg"
       />
     </Center>
   )

@@ -2,6 +2,8 @@ import type { ComponentStyle } from "@yamada-ui/core"
 
 export const Airy: ComponentStyle<"Airy"> = {
   baseStyle: {
+    userSelect: "none",
+    width: "fit-content",
     _disabled: {
       cursor: "not-allowed",
       opacity: 0.4,
@@ -9,8 +11,6 @@ export const Airy: ComponentStyle<"Airy"> = {
     _readOnly: {
       cursor: "default",
     },
-    userSelect: "none",
-    width: "fit-content",
   },
 
   variants: {},

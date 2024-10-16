@@ -7,20 +7,21 @@ import { useState } from "react"
 import { Highlight } from "./code-block"
 
 type PackageMangerNames = "bun" | "npm" | "pnpm" | "yarn"
+type PackageMangerCommands = { [_key in PackageMangerNames]: string }
+type packageNameOrCommand = PackageMangerCommands | string | string[]
 
-const PACKAGE_MANAGER_COMMANDS: { [_key in PackageMangerNames]: string } = {
-  bun: "bun install",
-  npm: "npm install",
+const PACKAGE_MANAGER_COMMANDS: PackageMangerCommands = {
   pnpm: "pnpm add",
+  // eslint-disable-next-line perfectionist/sort-objects
+  npm: "npm install",
   yarn: "yarn add",
+  // eslint-disable-next-line perfectionist/sort-objects
+  bun: "bun install",
 }
 
 const getCode = (
   selectedPackageName: PackageMangerNames & StringLiteral,
-  packageNameOrCommand:
-    | { [_key in PackageMangerNames]: string }
-    | string
-    | string[],
+  packageNameOrCommand: packageNameOrCommand,
 ): string => {
   if (isObject(packageNameOrCommand) && !isArray(packageNameOrCommand)) {
     return packageNameOrCommand[selectedPackageName]
@@ -37,10 +38,7 @@ const getCode = (
 }
 
 export interface PackageManagersProps extends BoxProps {
-  packageNameOrCommand:
-    | { [_key in PackageMangerNames]: string }
-    | string
-    | string[]
+  packageNameOrCommand: packageNameOrCommand
 }
 
 export const PackageManagers: FC<PackageManagersProps> = ({

@@ -75,7 +75,7 @@ const OVERRIDE_PATHS: {
       parent: "fieldset",
     },
   ],
-  image: ["image", "native-image"],
+  image: ["image", "native-image", "picture"],
   layouts: [
     "aspect-ratio",
     "box",

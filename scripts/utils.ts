@@ -1,7 +1,7 @@
 import type { Options } from "prettier"
 import { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
-import { isArray } from "@yamada-ui/react"
+import { isArray, toCamelCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import path from "path"
 import { format, resolveConfig } from "prettier"
@@ -32,15 +32,6 @@ export const prettier = async (content: string, options?: Options) => {
     return content
   }
 }
-
-export const toCamelCase = (value: {} & string) =>
-  value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
-
-export const toKebabCase = (value: {} & string) =>
-  value
-    .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
-    .toLowerCase()
-    .replace(/^-/, "")
 
 export const wait = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))

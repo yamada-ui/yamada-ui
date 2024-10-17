@@ -179,11 +179,9 @@ describe("var", () => {
       const cssObj: CSSUIObject = {
         transform: "rotate-reverse",
       }
-      const [vars, variableProps] = createVars(
-        cssObj,
-        ["transform"],
-        (name, index) => `${name}-${index}`,
-      )(transformedTheme)
+      const [vars, variableProps] = createVars(cssObj, ["transform"], {
+        format: (name, index) => `${name}-${index}`,
+      })(transformedTheme)
       const result = css({ vars })(transformedTheme)
 
       expect(vars).toStrictEqual([

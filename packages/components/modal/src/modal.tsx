@@ -16,7 +16,7 @@ import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useValue } from "@yamada-ui/use-value"
 import { findChild, findChildren, getValidChildren } from "@yamada-ui/utils"
-import { cloneElement, useCallback } from "react"
+import { cloneElement, useCallback, useId } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { DialogOverlay } from "./dialog-overlay"
 import { DrawerContent } from "./drawer-content"
@@ -183,6 +183,8 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps)
+    const labelledbyId = useId()
+    const describedbyId = useId()
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
@@ -239,8 +241,10 @@ export const Modal = motionForwardRef<ModalProps, "section">(
         value={{
           animation,
           closeOnOverlay,
+          describedbyId,
           duration,
           isOpen,
+          labelledbyId,
           scrollBehavior,
           styles,
           withCloseButton,

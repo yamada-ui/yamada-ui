@@ -20,6 +20,7 @@ export const ModalCloseButton = forwardRef<ModalCloseButtonProps, "button">(
       <CloseButton
         ref={ref}
         className={cx("ui-modal__close-button")}
+        aria-label="Close modal"
         onClick={handlerAll(onClick, (ev) => {
           ev.stopPropagation()
           onClose?.()

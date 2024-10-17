@@ -24,6 +24,7 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import { useClickable } from "@yamada-ui/use-clickable"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   assignRef,
@@ -32,7 +33,7 @@ import {
   handlerAll,
   isNull,
   mergeRefs,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import { cloneElement, useCallback, useMemo, useRef } from "react"
 
@@ -115,14 +116,17 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       value,
       onChange: onChangeProp,
       onClick: onClickProp,
-      ...rest
+      ...computedProps
     } = useFormControlProps(omitThemeProps(mergedProps))
-    const { "aria-readonly": ariaReadonly, ...formControlProps } = pickObject(
+    const [
+      {
+        "aria-readonly": ariaReadonly,
+        disabled,
+        readOnly,
+        ...formControlProps
+      },
       rest,
-      formControlProperties,
-    )
-
-    const { disabled, readOnly } = formControlProps
+    ] = splitObject(computedProps, formControlProperties)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -201,6 +205,14 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       }
     }, [children, format, lineClamp, placeholder, separator, component, values])
 
+    const clickableProps = useClickable<HTMLDivElement>({
+      ref,
+      ...formControlProps,
+      ...rest,
+      isDisabled: disabled || readOnly,
+      onClick: handlerAll(onClickProp, onClick),
+    })
+
     const css: CSSUIObject = {
       alignItems: "center",
       cursor: !readOnly ? "pointer" : "auto",
@@ -230,21 +242,20 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           aria-hidden
           aria-readonly={ariaReadonly}
           accept={accept}
+          disabled={disabled}
           multiple={multiple}
+          readOnly={readOnly}
           tabIndex={-1}
           onChange={onChange}
           {...formControlProps}
         />
 
         <ui.div
-          ref={ref}
           className={cx("ui-file-input", className)}
-          py={values?.length && component ? "0.125rem" : undefined}
-          {...rest}
           data-placeholder={dataAttr(!values?.length)}
-          tabIndex={0}
-          onClick={handlerAll(onClickProp, onClick)}
+          py={values?.length && component ? "0.125rem" : undefined}
           __css={css}
+          {...clickableProps}
         >
           {cloneChildren}
         </ui.div>

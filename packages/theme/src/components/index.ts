@@ -32,6 +32,7 @@ import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
+import { Flip } from "./flip"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
@@ -128,6 +129,7 @@ export const components = {
   Fieldset,
   FileButton,
   FileInput,
+  Flip,
   FormControl,
   Heading,
   HueSlider,

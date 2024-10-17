@@ -17,6 +17,9 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
     } = useTabsContext()
     const { index, isSelected } = useTabPanelContext()
 
+    const tabpanelId = `${baseId}-${index}-tabpanel`
+    const tabId = `${baseId}-${index}-tab`
+
     const hasBeenSelected = useRef<boolean>(false)
 
     if (isSelected) hasBeenSelected.current = true
@@ -30,17 +33,15 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
 
     const css: CSSUIObject = { ...styles.tabPanel }
 
-    const id = `${baseId}-${index}`
-
     return (
       <ui.div
-        id={id}
+        id={tabpanelId}
         ref={ref}
         className={cx("ui-tabs__panel", className)}
         role="tabpanel"
         __css={css}
         {...rest}
-        aria-labelledby={id}
+        aria-labelledby={tabId}
         hidden={!isSelected}
       >
         {shouldRenderChildren ? children : null}

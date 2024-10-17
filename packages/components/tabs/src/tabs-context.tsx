@@ -13,6 +13,7 @@ export const {
 
 interface TabsContext
   extends Omit<TabsOptions, "defaultIndex" | "index" | "onChange"> {
+  baseId: string
   disableRipple: boolean
   focusedIndex: number
   selectedIndex: number
@@ -27,6 +28,7 @@ export const [TabsProvider, useTabsContext] = createContext<TabsContext>({
 })
 
 export const [TabPanelProvider, useTabPanelContext] = createContext<{
+  index: number
   isSelected: boolean
   selectedIndex: number
 }>({})

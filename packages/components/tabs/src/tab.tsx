@@ -24,6 +24,7 @@ export const Tab = forwardRef<TabProps, "button">(
     ref,
   ) => {
     const {
+      baseId,
       disableRipple,
       isManual,
       selectedIndex,
@@ -35,6 +36,9 @@ export const Tab = forwardRef<TabProps, "button">(
     const { index, register } = useTabsDescendant({
       disabled: isDisabled && !isFocusable,
     })
+
+    const tabId = `${baseId}-${index}-tab`
+    const tabpanelId = `${baseId}-${index}-tabpanel`
 
     const isSelected = index === selectedIndex
 
@@ -69,12 +73,14 @@ export const Tab = forwardRef<TabProps, "button">(
 
     return (
       <ui.button
+        id={tabId}
         className={cx("ui-tabs__tab", className)}
         role="tab"
         __css={css}
         {...props}
         {...rest}
         type="button"
+        aria-controls={tabpanelId}
         aria-selected={ariaAttr(isSelected)}
         tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}

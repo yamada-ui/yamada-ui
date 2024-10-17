@@ -1,5 +1,12 @@
 # @yamada-ui/use-infinite-scroll
 
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/utils@1.5.4
+
 ## 1.1.6
 
 ### Patch Changes

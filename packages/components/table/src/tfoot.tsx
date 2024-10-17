@@ -78,10 +78,12 @@ const Th = <Y extends RowData = unknown>({
     colSpan: customColSpan,
     rowSpan: customRowSpan,
   } = columnDef as InternalColumn<Y>
+  const computedColSpan = customColSpan ?? colSpan ?? 0
+  const computedRowSpan = customRowSpan ?? rowSpan ?? 0
 
   const [props, renderProps] = useCellProps<"th">(rowIndex, colIndex, {
-    colSpan: (customColSpan ?? colSpan) || 1,
-    rowSpan: (customRowSpan ?? rowSpan) || 1,
+    colSpan: computedColSpan > 1 ? computedColSpan : undefined,
+    rowSpan: computedRowSpan > 1 ? computedRowSpan : undefined,
     ...rest,
   })
 

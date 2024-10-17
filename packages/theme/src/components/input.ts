@@ -80,6 +80,20 @@ export const Input: ComponentMultiStyle<"Input"> = {
         rounded: "md",
       },
     },
+    xl: {
+      addon: {
+        fontSize: "xl",
+        minH: "14",
+        px: "4",
+        rounded: "lg",
+      },
+      field: {
+        fontSize: "xl",
+        minH: "14",
+        px: "4",
+        rounded: "lg",
+      },
+    },
   },
 
   variants: {

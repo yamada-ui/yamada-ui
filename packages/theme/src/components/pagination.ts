@@ -10,13 +10,10 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     },
     dots: { pointerEvents: "none" },
     first: {},
-    inner: {
-      flex: 1,
-    },
+    inner: {},
     item: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
       px: 1,
-      rounded: "md",
       transitionDuration: "slower",
       transitionProperty: "common",
       _disabled: {
@@ -54,6 +51,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         fontSize: "xs",
         minH: 6,
         minW: 6,
+        rounded: "sm",
       },
     },
     sm: {
@@ -65,8 +63,9 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       },
       item: {
         fontSize: "sm",
-        minH: 7,
-        minW: 7,
+        minH: 8,
+        minW: 8,
+        rounded: "md",
       },
     },
     md: {
@@ -78,8 +77,9 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       },
       item: {
         fontSize: "md",
-        minH: 8,
-        minW: 8,
+        minH: 10,
+        minW: 10,
+        rounded: "md",
       },
     },
     lg: {
@@ -91,8 +91,9 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       },
       item: {
         fontSize: "lg",
-        minH: 10,
-        minW: 10,
+        minH: 12,
+        minW: 12,
+        rounded: "md",
       },
     },
     xl: {
@@ -104,8 +105,9 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       },
       item: {
         fontSize: "xl",
-        minH: 12,
-        minW: 12,
+        minH: 14,
+        minW: 14,
+        rounded: "lg",
       },
     },
   },
@@ -204,7 +206,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
 
   defaultProps: {
     colorScheme: "primary",
-    size: "md",
+    size: "sm",
     variant: "solid",
   },
 }

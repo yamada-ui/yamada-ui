@@ -42,7 +42,7 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       container: { minW: "sm" },
     },
     lg: {
-      button: { px: "4", py: "2" },
+      button: { fontSize: "md", px: "4", py: "2" },
       container: { minW: "md" },
     },
   },

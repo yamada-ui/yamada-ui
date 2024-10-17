@@ -59,6 +59,49 @@ export function antonym(value: string): string {
   }
 }
 
+const sizeMap: StringLiteral[] = [
+  "9xs",
+  "8xs",
+  "7xs",
+  "6xs",
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "sm",
+  "md",
+  "normal",
+  "lg",
+  "xl",
+  "2xl",
+  "3xl",
+  "4xl",
+  "5xl",
+  "6xl",
+  "7xl",
+  "8xl",
+  "9xl",
+]
+
+export function transformSize(
+  token: string | undefined,
+  value: number,
+  omitTokens: null | string[] = ["normal"],
+): string | undefined {
+  if (!token) return undefined
+
+  let resolvedSizeMap = sizeMap
+
+  if (omitTokens)
+    resolvedSizeMap = sizeMap.filter((size) => !omitTokens.includes(size))
+
+  const index = resolvedSizeMap.indexOf(token)
+  const size = resolvedSizeMap[index + value]
+
+  return size ?? token
+}
+
 export function toCamelCase(value: StringLiteral): string {
   return value
     .toLowerCase()

@@ -1,3 +1,5 @@
+export { Airy } from "./airy"
+export type { AiryIdent, AiryProps } from "./airy"
 export { Collapse, collapseProps } from "./collapse"
 export type { CollapseProps } from "./collapse"
 export { Fade, fadeProps } from "./fade"

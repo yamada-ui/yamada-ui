@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-hover",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Yamada UI useHover custom hook",
   "keywords": [
     "use-hover"

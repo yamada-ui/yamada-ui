@@ -1,5 +1,17 @@
 # @yamada-ui/segmented-control
 
+## 1.0.43
+
+### Patch Changes
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59), [`b7e1e87`](https://github.com/yamada-ui/yamada-ui/commit/b7e1e87fb676e2be5c85181cc126a4a173090dd3)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/motion@2.2.5
+  - @yamada-ui/use-controllable-state@1.0.23
+  - @yamada-ui/use-descendant@1.0.24
+  - @yamada-ui/use-focus-visible@1.1.10
+
 ## 1.0.42
 
 ### Patch Changes

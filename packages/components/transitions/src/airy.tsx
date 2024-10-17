@@ -89,8 +89,8 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
   } = omitThemeProps(mergedProps)
   const [vars, { opacity }] = useCreateVars(
     { opacity: 1, ...styles, ...rest },
-    { transform: true },
     ["opacity"],
+    { transform: true },
   )
 
   const animate = useMotionAnimation()

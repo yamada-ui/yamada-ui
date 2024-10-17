@@ -1,4 +1,5 @@
 import { Accordion } from "./accordion"
+import { Airy } from "./airy"
 import { Alert } from "./alert"
 import { AlphaSlider } from "./alpha-slider"
 import { AreaChart } from "./area-chart"
@@ -93,6 +94,7 @@ import { YearPicker } from "./year-picker"
 
 export const components = {
   Accordion,
+  Airy,
   Alert,
   AlphaSlider,
   AreaChart,

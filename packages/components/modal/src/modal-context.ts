@@ -3,6 +3,8 @@ import type { ModalOptions } from "./modal"
 import { createContext } from "@yamada-ui/utils"
 
 interface ModalContext extends ModalOptions {
+  describedbyId: string
+  labelledbyId: string
   styles: { [key: string]: CSSUIObject | undefined }
 }
 

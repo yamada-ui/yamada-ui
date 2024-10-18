@@ -1,4 +1,11 @@
-import { antonym, escape, toCamelCase, toKebabCase, toTitleCase } from "../src"
+import {
+  antonym,
+  escape,
+  toCamelCase,
+  toKebabCase,
+  toPascalCase,
+  toTitleCase,
+} from "../src"
 
 describe("String", () => {
   describe("escape", () => {
@@ -41,8 +48,15 @@ describe("String", () => {
 
   describe("toCamelCase", () => {
     test("should convert string to CamelCase", () => {
-      expect(toCamelCase("hello-world")).toBe("HelloWorld")
-      expect(toCamelCase("another_example")).toBe("AnotherExample")
+      expect(toCamelCase("hello-world")).toBe("helloWorld")
+      expect(toCamelCase("another_example")).toBe("anotherExample")
+    })
+  })
+
+  describe("toPascalCase", () => {
+    test("should convert string to PascalCase", () => {
+      expect(toPascalCase("hello-world")).toBe("HelloWorld")
+      expect(toPascalCase("another_example")).toBe("AnotherExample")
     })
   })
 

@@ -1,5 +1,6 @@
 import type { Locale } from "utils/i18n"
 import * as p from "@clack/prompts"
+import { omitObject, toPascalCase } from "@yamada-ui/utils"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -7,8 +8,6 @@ import { readdir, readFile } from "fs/promises"
 import path from "path"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
 import { locales } from "utils/i18n"
-import { omitObject } from "utils/object"
-import { toCamelCase } from "utils/string"
 import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
@@ -75,7 +74,7 @@ const OVERRIDE_PATHS: {
       parent: "fieldset",
     },
   ],
-  image: ["image", "native-image"],
+  image: ["image", "native-image", "picture"],
   layouts: [
     "aspect-ratio",
     "box",
@@ -153,7 +152,7 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
 
           names?.forEach((name) => {
             if (typeof name === "string") {
-              const displayName = toCamelCase(name)
+              const displayName = toPascalCase(name)
               const nestedDoc = doc[displayName]
 
               if (nestedDoc) docs[name] = { [displayName]: nestedDoc }
@@ -162,13 +161,13 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
             } else {
               const { children, parent } = name
 
-              const displayName = toCamelCase(parent)
+              const displayName = toPascalCase(parent)
               const nestedDoc = doc[displayName]
 
               if (nestedDoc) docs[parent] = { [displayName]: nestedDoc }
 
               children.forEach((child) => {
-                const displayName = toCamelCase(child)
+                const displayName = toPascalCase(child)
                 const nestedDoc = doc[displayName]
 
                 if (nestedDoc)
@@ -292,7 +291,7 @@ const generateMDXFiles: p.RequiredRunner =
         const dirPath = paths[name]
 
         if (!dirPath) {
-          notPathsList = [...notPathsList, toCamelCase(name)]
+          notPathsList = [...notPathsList, toPascalCase(name)]
 
           return
         }
@@ -300,7 +299,7 @@ const generateMDXFiles: p.RequiredRunner =
         if (
           !Object.values(doc).some((content) => Object.keys(content).length)
         ) {
-          notPropsList = [...notPropsList, toCamelCase(name)]
+          notPropsList = [...notPropsList, toPascalCase(name)]
 
           return
         }
@@ -320,7 +319,7 @@ const generateMDXFiles: p.RequiredRunner =
 
             await writeMDXFile(outPath, data, content)
 
-            wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
+            wroteList = [...wroteList, `${toPascalCase(name)} ${outPath}`]
           }),
         )
       }),

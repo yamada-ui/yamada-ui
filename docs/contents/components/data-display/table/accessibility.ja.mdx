@@ -1,0 +1,29 @@
+---
+title: Table
+description: "`Table`は、列のソートや行の選択やクリックイベント機能を備えたテーブルのコンポーネントです。"
+package_name: "@yamada-ui/table"
+order: 3
+with_description: true
+tab: アクセシビリティ
+---
+
+`Table`は、アクセシビリティに関して[WAI-ARIA - Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/)に従います。
+
+`Table`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx live=false
+<Table columns={columns} data={data} aria-label="DRAGON BALL characters" />
+```
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性    | 使い方                                                                                                          |
+| -------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Table`        | `role="table"`  | テーブルであることを示します。                                                                                  |
+|                | `aria-sort`     | 表の項目が昇順の場合は`ascending`を設定し、降順の場合は`descending`を設定、指定がない場合は`none`を設定します。 |
+|                | `aria-selected` | 行が選択済みの場合は、`true`を設定し、未選択の場合は`false`を設定します。                                       |
+|                | `aria-rowindex` | 行がテーブルの何行目であるかを示します。                                                                        |
+|                | `aria-colindex` | 列がテーブルの何列目であるかを示します。                                                                        |
+|                | `aria-disabled` | `disabledRowIds`が設定されている場合は、`true`を設定します。                                                    |
+|                | `aria-rowcount` | テーブルの行数を示します。                                                                                      |
+|                | `aria-colcount` | テーブルの列数を示します。                                                                                      |

@@ -38,10 +38,10 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
         id={tabpanelId}
         ref={ref}
         className={cx("ui-tabs__panel", className)}
+        aria-labelledby={tabId}
         role="tabpanel"
         __css={css}
         {...rest}
-        aria-labelledby={tabId}
         hidden={!isSelected}
       >
         {shouldRenderChildren ? children : null}

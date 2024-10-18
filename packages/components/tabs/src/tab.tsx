@@ -75,12 +75,12 @@ export const Tab = forwardRef<TabProps, "button">(
       <ui.button
         id={tabId}
         className={cx("ui-tabs__tab", className)}
+        aria-controls={tabpanelId}
         role="tab"
         __css={css}
         {...props}
         {...rest}
         type="button"
-        aria-controls={tabpanelId}
         aria-selected={ariaAttr(isSelected)}
         tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}

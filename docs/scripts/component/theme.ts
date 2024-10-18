@@ -1,6 +1,7 @@
 import type { Data } from "scripts/utils"
 import type { Locale } from "utils/i18n"
 import * as p from "@clack/prompts"
+import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -8,7 +9,6 @@ import { readdir, readFile } from "fs/promises"
 import path from "path"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
 import { locales } from "utils/i18n"
-import { toCamelCase, toKebabCase } from "utils/string"
 import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
@@ -206,7 +206,7 @@ const generateMDXFiles: p.RequiredRunner =
         const dirPath = paths[name]
 
         if (!dirPath) {
-          notPathsList = [...notPathsList, toCamelCase(name)]
+          notPathsList = [...notPathsList, toPascalCase(name)]
 
           return
         }
@@ -234,7 +234,7 @@ const generateMDXFiles: p.RequiredRunner =
 
             await writeMDXFile(outPath, data, content)
 
-            wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
+            wroteList = [...wroteList, `${toPascalCase(name)} ${outPath}`]
           }),
         )
       }),

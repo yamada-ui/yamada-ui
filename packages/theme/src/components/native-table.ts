@@ -19,15 +19,15 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
       w: "100%",
     },
     td: {
-      textAlign: "start",
+      verticalAlign: "top",
     },
     th: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontFamily: "heading",
       fontWeight: "semibold",
       letterSpacing: "wider",
-      textAlign: "start",
       textTransform: "uppercase",
+      verticalAlign: "middle",
     },
     tr: {
       _disabled: {

@@ -231,6 +231,8 @@ export const useCellProps = <Y extends CellElement = "td">(
   return [
     {
       ref,
+      "aria-colspan": colSpan,
+      "aria-rowspan": rowSpan,
       "data-colindex": colIndex,
       "data-rowindex": rowIndex,
       colSpan,

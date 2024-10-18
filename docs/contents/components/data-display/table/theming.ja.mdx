@@ -26,6 +26,22 @@ export const Table: ComponentMultiStyle<"Table"> = mergeMultiStyle(
   {
     baseStyle: {
       sortIcon: {},
+      td: {
+        outline: "none",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        _focusVisible: {
+          boxShadow: "inline",
+        },
+      },
+      th: {
+        outline: "none",
+        transitionDuration: "normal",
+        transitionProperty: "common",
+        _focusVisible: {
+          boxShadow: "inline",
+        },
+      },
     },
 
     sizes: {

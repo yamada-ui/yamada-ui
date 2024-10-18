@@ -27,10 +27,10 @@ export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
     },
     container: ({ isFullHeight, placement }) => ({
       ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),
-      [`rounded${toCamelCase(placement)}`]: 0,
+      [`rounded${toPascalCase(placement)}`]: 0,
     }),
     dragBar: ({ placement }) => ({
-      [`margin${toCamelCase(antonym(placement))}`]: "md",
+      [`margin${toPascalCase(antonym(placement))}`]: "md",
       ...(placement === "top" || placement === "bottom"
         ? { minH: "2", mx: "auto", w: "3xs" }
         : { h: "3xs", minW: "2", my: "auto" }),

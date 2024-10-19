@@ -15,6 +15,19 @@ Setting an `aria-label` on the `Table` allows it to be read by screen readers.
 <Table columns={columns} data={data} aria-label="DRAGON BALL characters" />
 ```
 
+## Keyboard Navigation
+
+| Key             | Description                                                                                              | State |
+| --------------- | -------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`           | Focuses the first item when focus moves to the table. Focuses the next item if already within the table. | -     |
+| `Shift` + `Tab` | Focuses the previous item that is not disabled.                                                          | -     |
+| `ArrowLeft`     | Focuses the previous item that is not disabled.                                                          | -     |
+| `ArrowRight`    | Focuses the next item that is not disabled.                                                              | -     |
+| `ArrowUp`       | Focuses the previous item that is not disabled.                                                          | -     |
+| `ArrowDown`     | Focuses the next item that is not disabled.                                                              | -     |
+| `Home`          | Focuses the first item that is not disabled.                                                             | -     |
+| `End`           | Focuses the last item that is not disabled.                                                              | -     |
+
 ## ARIA Roles and Attributes
 
 | Component | Role and Attributes | Usage                                                                                                   |

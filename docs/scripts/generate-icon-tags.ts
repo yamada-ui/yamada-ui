@@ -1,10 +1,10 @@
+import { toPascalCase } from "@yamada-ui/utils"
 import { config } from "dotenv"
 import { execa } from "execa"
 import { readdir, readFile, writeFile } from "fs/promises"
 import { prettier } from "libs/prettier"
 import path from "path"
 import { rimraf } from "rimraf"
-import { toCamelCase } from "utils/string"
 
 const DIR_PATH = path.resolve(".lucide")
 
@@ -40,7 +40,7 @@ const main = async () => {
 
       const iconName = fileName.replace(".json", "")
 
-      tags[toCamelCase(iconName)] = await getTags(fileName)
+      tags[toPascalCase(iconName)] = await getTags(fileName)
     }),
   )
 

@@ -1,5 +1,5 @@
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import type { HTMLAttributes, MouseEventHandler, ReactElement } from "react"
+import type { MouseEventHandler, ReactElement } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -8,7 +8,7 @@ import {
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
-import { cx } from "@yamada-ui/utils"
+import { ariaAttr, cx, dataAttr } from "@yamada-ui/utils"
 import { useRef } from "react"
 
 interface TagOptions {
@@ -26,6 +26,10 @@ interface TagOptions {
    * Icon to be displayed to the right of the tag.
    */
   rightIcon?: ReactElement
+  /**
+   * Props for tag close button element.
+   */
+  closeButtonProps?: TagCloseButtonProps
   /**
    * Function to be executed when the close button is clicked.
    */
@@ -50,6 +54,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     isDisabled,
     leftIcon,
     rightIcon,
+    closeButtonProps,
     onClose,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -67,6 +72,8 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     <ui.span
       ref={ref}
       className={cx("ui-tag", className)}
+      aria-disabled={ariaAttr(isDisabled)}
+      data-disabled={dataAttr(isDisabled)}
       __css={css}
       {...rest}
     >
@@ -79,7 +86,11 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       {rightIcon}
 
       {onClose ? (
-        <TagCloseButton isDisabled={isDisabled} onClick={onClose}>
+        <TagCloseButton
+          isDisabled={isDisabled}
+          onClick={onClose}
+          {...closeButtonProps}
+        >
           <TagCloseIcon />
         </TagCloseButton>
       ) : null}
@@ -109,9 +120,8 @@ interface TagCloseButtonProps extends HTMLUIProps<"span"> {
 }
 
 const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {
-  const ref = useRef<HTMLSpanElement>(null)
-
   const [styles] = useComponentMultiStyle("Tag", props)
+  const ref = useRef<HTMLSpanElement>(null)
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -122,7 +132,7 @@ const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {
     ...styles.closeButton,
   }
 
-  const rest = useClickable({ ref, ...(props as HTMLAttributes<HTMLElement>) })
+  const rest = useClickable<HTMLSpanElement>({ ref, ...props })
 
   return (
     <ui.span aria-label="Close tag" __css={css} {...rest}>

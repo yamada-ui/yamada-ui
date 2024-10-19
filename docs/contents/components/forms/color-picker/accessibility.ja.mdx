@@ -1,0 +1,28 @@
+---
+title: ColorPicker
+description: "`ColorPicker`は、ユーザーが色を選択したり任意の色の値を入力するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/color-picker"
+order: 4
+with_description: true
+tab: アクセシビリティ
+---
+
+`ColorPicker`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx live=false
+<ColorPicker aria-label="Fill color" defaultValue="#4387f4ff" />
+```
+
+## キーボード操作
+
+| キー                   | 説明                                                           | 状態 |
+| ---------------------- | -------------------------------------------------------------- | ---- |
+| `Tab`, `Shift` + `Tab` | 無効ではない`ColorPicker`をフォーカスし`Popover`を展開します。 | -    |
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性    | 使い方                                                   |
+| -------------- | --------------- | -------------------------------------------------------- |
+| `ColorPicker`  | `aria-readonly` | `isReadOnly`が設定されている場合は`"true"`を設定します。 |
+|                | `aria-disabled` | `isDisabled`が設定されている場合は`"true"`を設定します。 |
+|                | `aria-invalid`  | `isInvalid`が設定されている場合は`"true"`を設定します。  |

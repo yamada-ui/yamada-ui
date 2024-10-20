@@ -367,12 +367,12 @@ export const useCarousel = ({
     (props = {}, ref = null) => ({
       ...containerProps,
       ...props,
+      id: "carousel-items",
       ref,
-      role: "region",
-      id: "Carousel items",
-      "aria-roledescription": "carousel",
       "aria-label": "Highlighted sections",
       "aria-live": autoplay ? "off" : "polite",
+      "aria-roledescription": "carousel",
+      role: "region",
       vars: mergeVars(vars, [
         { name: "gap", token: "spaces", value: gap },
         { name: "slideSize", token: "sizes", value: slideSize },
@@ -416,7 +416,7 @@ export interface UseCarouselSlideProps {
 }
 
 export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
-  const { selectedIndex, slidesToScroll, indexes } = useCarouselContext()
+  const { indexes, selectedIndex, slidesToScroll } = useCarouselContext()
 
   index = Math.floor((index ?? 0) / slidesToScroll)
 
@@ -426,12 +426,12 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
-      role: "group",
       id: `slide-${index}`,
-      "aria-roledescription": "slide",
       "aria-label": `${index + 1} of ${totalSlides}`,
+      "aria-roledescription": "slide",
       "data-index": index,
       "data-selected": dataAttr(isSelected),
+      role: "group",
     }),
     [index, isSelected, totalSlides],
   )
@@ -472,8 +472,8 @@ export const useCarouselControl = ({
     (props = {}, ref = null) => ({
       ...props,
       ref,
+      "aria-controls": "carousel-items",
       disabled,
-      "aria-controls": "Carousel items",
       onClick: handlerAll(props.onClick, onClick),
     }),
     [disabled, onClick],
@@ -506,9 +506,9 @@ export const useCarouselIndicators = () => {
       const isSelected = index === selectedIndex
 
       return {
+        "aria-disabled": ariaAttr(isSelected),
         "aria-label": `Go to ${index + 1} slide`,
         "aria-labelledby": `slide-${index + 1}`,
-        "aria-disabled": ariaAttr(isSelected),
         ...props,
         key: index,
         "data-index": index,

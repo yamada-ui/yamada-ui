@@ -7,13 +7,12 @@ export const PopoverTrigger: FC<PropsWithChildren<{}>> = ({ children }) => {
   const child = Children.only(children) as {
     ref: RefObject<any>
   } & ReactElement
-  const { isOpen, getTriggerProps } = usePopover()
+  const { getTriggerProps } = usePopover()
 
   const triggerProps = getTriggerProps(child.props, child.ref)
 
   const enhancedTriggerProps = {
     ...triggerProps,
-    "aria-expanded": isOpen,
     "aria-haspopup": "true",
   }
 

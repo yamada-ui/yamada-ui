@@ -150,7 +150,7 @@ const getBaseComponents = (theme: string, paths: { [key: string]: string }) => {
       .map((value) => value.replace(/pickStyle\(/, "").trim())
       .filter((value) => /^[A-Z]/.test(value)) ?? []
 
-  if (!componentNames.length) return []
+  if (!componentNames.length) return
 
   return componentNames.map((name) => {
     let path: string = paths[toKebabCase(name)] ?? ""

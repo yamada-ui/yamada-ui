@@ -1,0 +1,25 @@
+---
+title: Rating
+description: "`Rating`は、ユーザーがアイテムに対して評価を行うためのUI要素で、星やハートなどのアイコンで提供され、ユーザーが選択した評価を視覚的に表示するコンポーネントです。"
+package-name: "@yamada-ui/rating"
+order: 3
+with_description: true
+tab: アクセシビリティ
+---
+
+## キーボード操作
+
+| キー         | 説明                               | 状態 |
+| ------------ | ---------------------------------- | ---- |
+| `ArrowLeft`  | 前の`RatingItem`の選択を外します。 | -    |
+| `ArrowRight` | 次の`RatingItem`を選択します。 　  | -    |
+| `ArrowUp`    | 前の`RatingItem`の選択を外します。 | -    |
+| `ArrowDown`  | 次の`RatingItem`を選択します。     | -    |
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性          | 使い方                                                   |
+| :------------- | :-------------------- | :------------------------------------------------------- |
+| `Rating`       | `aria-readonly`       | `isReadOnly`が設定されている場合は`"true"`を設定します。 |
+| `RatingItem`   | `aria-label`          | `value`を設定します。                                    |
+|                | `"aria-hidden": true` | `RatingIcon`をアクセシビリティツリーから除外します。     |

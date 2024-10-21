@@ -53,7 +53,9 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
     const {
       animation,
+      describedbyId,
       duration,
+      labelledbyId,
       scrollBehavior,
       styles,
       withCloseButton,
@@ -85,6 +87,8 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
       <motion.section
         ref={ref}
         className={cx("ui-modal", className)}
+        aria-describedby={describedbyId}
+        aria-labelledby={labelledbyId}
         aria-modal="true"
         role="dialog"
         tabIndex={-1}

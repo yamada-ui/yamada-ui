@@ -53,7 +53,7 @@ export const Tbody = <Y extends RowData = unknown>({
             {...(rowsClickSelect && !isDisabled ? { cursor: "pointer" } : {})}
             {...props}
             aria-disabled={ariaAttr(isDisabled)}
-            aria-rowindex={row.index + 1}
+            aria-rowindex={row.index + headerCount + 1}
             aria-selected={ariaAttr(isSelected)}
             data-disabled={dataAttr(isDisabled)}
             data-selected={dataAttr(isSelected)}

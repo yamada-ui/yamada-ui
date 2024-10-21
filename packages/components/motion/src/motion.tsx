@@ -26,3 +26,6 @@ export const Motion = motionForwardRef<MotionProps, "div">(
     />
   ),
 )
+
+Motion.displayName = "Motion"
+Motion.__ui__ = "Motion"

@@ -132,6 +132,9 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
   },
 )
 
+InfiniteScrollArea.displayName = "InfiniteScrollArea"
+InfiniteScrollArea.__ui__ = "InfiniteScrollArea"
+
 interface InfiniteScrollTriggerProps extends HTMLUIProps {}
 
 const InfiniteScrollTrigger = forwardRef<InfiniteScrollTriggerProps, "div">(
@@ -159,3 +162,6 @@ const InfiniteScrollTrigger = forwardRef<InfiniteScrollTriggerProps, "div">(
     )
   },
 )
+
+InfiniteScrollTrigger.displayName = "InfiniteScrollTrigger"
+InfiniteScrollTrigger.__ui__ = "InfiniteScrollTrigger"

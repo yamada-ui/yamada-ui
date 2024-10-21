@@ -68,7 +68,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
             <NextLinkButton
               href="/getting-started"
               colorScheme="primary"
-              size="xl"
+              size="2xl"
               rightIcon={<ArrowRight />}
               w={{ base: "auto", md: "full" }}
             >
@@ -77,7 +77,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
 
             <NextLinkButton
               href="/examples/mail"
-              size="xl"
+              size="2xl"
               w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.examples")}

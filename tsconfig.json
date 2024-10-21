@@ -16,7 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "noUncheckedIndexedAccess": true,
     "downlevelIteration": true,
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "@vitest/browser/providers/playwright"],
     "allowJs": true
   },
   "include": [

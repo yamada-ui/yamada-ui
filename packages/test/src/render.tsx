@@ -11,8 +11,10 @@ import {
   renderHook as reactRenderHook,
 } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
+import { userEvent as browserUserEvent } from "@vitest/browser/context"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
+import { render as browserRender } from "vitest-browser-react"
 import "@testing-library/jest-dom/vitest"
 
 export type RenderOptions = {
@@ -22,6 +24,10 @@ export type RenderOptions = {
 export type RenderReturn = {
   user: ReturnType<typeof userEvent.setup>
 } & ReturnType<typeof reactRender>
+
+export type BrowserRenderReturn = {
+  user: ReturnType<typeof browserUserEvent.setup>
+} & ReturnType<typeof browserRender>
 
 export function render(
   ui: ReactElement,
@@ -33,6 +39,20 @@ export function render(
     rest.wrapper ??= (props: any) => <UIProvider {...props} theme={theme} />
 
   const result = reactRender(ui, rest)
+
+  return { user, ...result }
+}
+
+export function renderOnBrowser(
+  ui: ReactElement,
+  { withProvider = true, ...rest }: RenderOptions = {},
+): BrowserRenderReturn {
+  const user = browserUserEvent.setup()
+
+  if (withProvider)
+    rest.wrapper ??= (props: any) => <UIProvider {...props} theme={theme} />
+
+  const result = browserRender(ui, rest)
 
   return { user, ...result }
 }

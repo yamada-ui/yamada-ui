@@ -1,5 +1,12 @@
 # @yamada-ui/use-focus-visible
 
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/utils@1.5.4
+
 ## 1.1.9
 
 ### Patch Changes

@@ -94,6 +94,8 @@ interface FormControlContext {
   onBlur: () => void
   onFocus: () => void
   id?: string
+  errorMessageId?: string
+  helperMessageId?: string
   labelId?: string
 }
 
@@ -143,6 +145,8 @@ export const FormControl = forwardRef<FormControlProps, "div">(
 
     const uuid = useId()
     const labelId = useId()
+    const helperMessageId = useId()
+    const errorMessageId = useId()
 
     id ??= uuid
 
@@ -164,6 +168,8 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       <FormControlContextProvider
         value={{
           id,
+          errorMessageId,
+          helperMessageId,
           isDisabled,
           isFocused,
           isInvalid,
@@ -236,6 +242,8 @@ export const useFormControl = <Y extends Dict = Dict>({
 
   const id = idProp ?? control?.id
   const labelId = control?.labelId
+  const helperMessageId = control?.helperMessageId
+  const errorMessageId = control?.errorMessageId
   const isDisabled = disabled ?? isDisabledProp ?? control?.isDisabled
   const isReadOnly = readOnly ?? isReadOnlyProp ?? control?.isReadOnly
   const isRequired = required ?? isRequiredProp ?? control?.isRequired
@@ -243,6 +251,8 @@ export const useFormControl = <Y extends Dict = Dict>({
 
   return {
     id,
+    errorMessageId,
+    helperMessageId,
     isDisabled,
     isInvalid,
     isReadOnly,
@@ -256,6 +266,8 @@ export interface UseFormControlProps<Y extends HTMLElement>
   extends FormControlOptions {
   id?: string
   disabled?: boolean
+  errorMessage?: string
+  helperMessage?: string
   readOnly?: boolean
   required?: boolean
   onBlur?: FocusEventHandler<Y>
@@ -265,6 +277,8 @@ export interface UseFormControlProps<Y extends HTMLElement>
 export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   id,
   disabled,
+  errorMessage,
+  helperMessage,
   isDisabled,
   isInvalid,
   isReadOnly,
@@ -281,9 +295,16 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   required ??= isRequired ?? control?.isRequired
   readOnly ??= isReadOnly ?? control?.isReadOnly
   isInvalid ??= control?.isInvalid
+  errorMessage ??= control?.errorMessageId
+  helperMessage ??= control?.helperMessageId
 
   return {
     id: id ?? control?.id,
+    "aria-describedby": isInvalid
+      ? errorMessage
+      : helperMessage
+        ? helperMessage
+        : undefined,
     "aria-disabled": ariaAttr(disabled),
     "aria-invalid": ariaAttr(isInvalid),
     "aria-readonly": ariaAttr(readOnly),
@@ -313,6 +334,7 @@ export const formControlProperties = [
   "disabled",
   "required",
   "readOnly",
+  "aria-describedby",
   "aria-disabled",
   "aria-readonly",
   "aria-required",
@@ -453,7 +475,8 @@ export interface HelperMessageProps extends HTMLUIProps<"span"> {}
 
 export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   ({ className, ...rest }, ref) => {
-    const { id, isInvalid, isReplace } = useFormControlContext() ?? {}
+    const { helperMessageId, isInvalid, isReplace } =
+      useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
     if (isReplace && isInvalid) return null
@@ -462,9 +485,10 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
 
     return (
       <ui.span
+        id={helperMessageId}
         ref={ref}
         className={cx("ui-form__helper-message", className)}
-        aria-describedby={id}
+        aria-live="polite"
         __css={css}
         {...rest}
       />
@@ -479,7 +503,7 @@ export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
   ({ className, ...rest }, ref) => {
-    const { isInvalid } = useFormControlContext() ?? {}
+    const { errorMessageId, isInvalid } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
     if (!isInvalid) return null
@@ -488,9 +512,10 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
 
     return (
       <ui.span
+        id={errorMessageId}
         ref={ref}
         className={cx("ui-form__error-message", className)}
-        aria-live="polite"
+        aria-live="assertive"
         __css={css}
         {...rest}
       />

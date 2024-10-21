@@ -7,7 +7,7 @@ export interface PopoverHeaderProps extends HTMLUIProps<"header"> {}
 
 export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
   ({ className, ...rest }, ref) => {
-    const { styles } = usePopover()
+    const { labelledbyId, styles } = usePopover()
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -18,6 +18,7 @@ export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
 
     return (
       <ui.header
+        id={labelledbyId}
         ref={ref}
         className={cx("ui-popover__header", className)}
         __css={css}

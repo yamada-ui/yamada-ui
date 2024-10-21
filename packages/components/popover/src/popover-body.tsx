@@ -7,7 +7,7 @@ export interface PopoverBodyProps extends HTMLUIProps {}
 
 export const PopoverBody = forwardRef<PopoverBodyProps, "div">(
   ({ className, ...rest }, ref) => {
-    const { styles } = usePopover()
+    const { describedbyId, styles } = usePopover()
 
     const css: CSSUIObject = {
       alignItems: "flex-start",
@@ -18,6 +18,7 @@ export const PopoverBody = forwardRef<PopoverBodyProps, "div">(
 
     return (
       <ui.div
+        id={describedbyId}
         ref={ref}
         className={cx("ui-popover__body", className)}
         __css={css}

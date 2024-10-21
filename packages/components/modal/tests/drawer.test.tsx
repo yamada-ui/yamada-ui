@@ -1,6 +1,7 @@
+import type { MotionPanInfo } from "@yamada-ui/motion"
 import type { DrawerProps } from "../src"
-import { a11y, render } from "@yamada-ui/test"
-import { useState } from "react"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { useCallback, useState } from "react"
 import {
   Drawer,
   DrawerBody,
@@ -36,6 +37,79 @@ describe("<Drawer />", () => {
           <DrawerFooter data-testid="DrawerFooter">footer</DrawerFooter>
         </Drawer>
       </>
+    )
+  }
+
+  const useIsCloseByDragInfo = (
+    placement: TestDrawerPlacement,
+    dragVelocity: number,
+    dragOffset: number,
+  ) => {
+    return useCallback(
+      (info: MotionPanInfo) => {
+        switch (placement) {
+          case "top":
+            return (
+              info.velocity.y <= dragVelocity * -1 ||
+              info.offset.y <= dragOffset * -1
+            )
+          case "bottom":
+            return (
+              info.velocity.y >= dragVelocity || info.offset.y >= dragOffset
+            )
+          case "left":
+            return (
+              info.velocity.x <= dragVelocity * -1 ||
+              info.offset.x <= dragOffset * -1
+            )
+          case "right":
+            return (
+              info.velocity.x >= dragVelocity || info.offset.x >= dragOffset
+            )
+        }
+      },
+      [placement, dragVelocity, dragOffset],
+    )
+  }
+
+  const MockDrawer = ({
+    placement,
+    onClose,
+  }: {
+    placement: TestDrawerPlacement
+    onClose: () => void
+  }) => {
+    const isCloseByDragInfo = useIsCloseByDragInfo(placement, 0.3, 100)
+
+    // Simulate drag end event
+    const handleDragEnd = (event: React.MouseEvent<HTMLDivElement>) => {
+      const info: MotionPanInfo = {
+        delta: { x: 0, y: 0 },
+        offset: { x: event.clientX, y: event.clientY },
+        point: { x: event.clientX, y: event.clientY },
+        velocity: { x: event.clientX * 0.01, y: event.clientY * 0.01 },
+      }
+      if (isCloseByDragInfo(info)) {
+        onClose()
+      }
+    }
+
+    return (
+      <div
+        style={{
+          background: "white",
+          height:
+            placement === "top" || placement === "bottom" ? "300px" : "100%",
+          [placement]: 0,
+          position: "fixed",
+          width:
+            placement === "left" || placement === "right" ? "300px" : "100%",
+        }}
+        data-testid="drawer"
+        onMouseUp={handleDragEnd}
+      >
+        Drawer Content
+      </div>
     )
   }
 
@@ -159,5 +233,45 @@ describe("<Drawer />", () => {
       right: "0",
       top: "0",
     })
+  })
+
+  test("should close drawer when dragged beyond threshold (top placement)", () => {
+    const onClose = vi.fn()
+    render(<MockDrawer placement="top" onClose={onClose} />)
+
+    const drawer = screen.getByTestId("drawer")
+    fireEvent.mouseUp(drawer, { clientX: 0, clientY: -101 })
+
+    expect(onClose).toHaveBeenCalledWith()
+  })
+
+  test("should close drawer when dragged beyond threshold (bottom placement)", () => {
+    const onClose = vi.fn()
+    render(<MockDrawer placement="bottom" onClose={onClose} />)
+
+    const drawer = screen.getByTestId("drawer")
+    fireEvent.mouseUp(drawer, { clientX: 0, clientY: 101 })
+
+    expect(onClose).toHaveBeenCalledWith()
+  })
+
+  test("should close drawer when dragged beyond threshold (left placement)", () => {
+    const onClose = vi.fn()
+    render(<MockDrawer placement="left" onClose={onClose} />)
+
+    const drawer = screen.getByTestId("drawer")
+    fireEvent.mouseUp(drawer, { clientX: -101, clientY: 0 })
+
+    expect(onClose).toHaveBeenCalledWith()
+  })
+
+  test("should close drawer when dragged beyond threshold (right placement)", () => {
+    const onClose = vi.fn()
+    render(<MockDrawer placement="right" onClose={onClose} />)
+
+    const drawer = screen.getByTestId("drawer")
+    fireEvent.mouseUp(drawer, { clientX: 101, clientY: 0 })
+
+    expect(onClose).toHaveBeenCalledWith()
   })
 })

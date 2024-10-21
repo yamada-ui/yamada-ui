@@ -2,4 +2,4 @@
 "@yamada-ui/lucide": patch
 ---
 
-add displayname for lucide
+Added `displayName` for `Icon` component.

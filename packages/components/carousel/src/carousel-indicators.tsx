@@ -36,6 +36,8 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-carousel__indicators", className)}
+        aria-label="Choose display slide"
+        role="group"
         __css={css}
         {...rest}
       >

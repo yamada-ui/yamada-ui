@@ -12,6 +12,7 @@ import type { MouseEvent, RefObject } from "react"
 import { layoutStyleProperties, mergeVars } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
+  ariaAttr,
   assignRef,
   createContext,
   dataAttr,
@@ -366,7 +367,12 @@ export const useCarousel = ({
     (props = {}, ref = null) => ({
       ...containerProps,
       ...props,
+      id: "carousel-items",
       ref,
+      "aria-label": "Highlighted sections",
+      "aria-live": autoplay ? "off" : "polite",
+      "aria-roledescription": "carousel",
+      role: "region",
       vars: mergeVars(vars, [
         { name: "gap", token: "spaces", value: gap },
         { name: "slideSize", token: "sizes", value: slideSize },
@@ -378,7 +384,7 @@ export const useCarousel = ({
         setIsMouseEnter(false)
       }),
     }),
-    [containerProps, gap, slideSize, vars],
+    [autoplay, containerProps, gap, slideSize, vars],
   )
 
   const getSlidesProps: PropGetter = useCallback(
@@ -410,19 +416,24 @@ export interface UseCarouselSlideProps {
 }
 
 export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
-  const { selectedIndex, slidesToScroll } = useCarouselContext()
+  const { indexes, selectedIndex, slidesToScroll } = useCarouselContext()
 
   index = Math.floor((index ?? 0) / slidesToScroll)
 
+  const totalSlides = indexes.length
   const isSelected = index === selectedIndex
 
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
+      id: `slide-${index}`,
+      "aria-label": `${index + 1} of ${totalSlides}`,
+      "aria-roledescription": "slide",
       "data-index": index,
       "data-selected": dataAttr(isSelected),
+      role: "group",
     }),
-    [isSelected, index],
+    [index, isSelected, totalSlides],
   )
 
   return { getSlideProps }
@@ -461,6 +472,7 @@ export const useCarouselControl = ({
     (props = {}, ref = null) => ({
       ...props,
       ref,
+      "aria-controls": "carousel-items",
       disabled,
       onClick: handlerAll(props.onClick, onClick),
     }),
@@ -494,7 +506,9 @@ export const useCarouselIndicators = () => {
       const isSelected = index === selectedIndex
 
       return {
+        "aria-disabled": ariaAttr(isSelected),
         "aria-label": `Go to ${index + 1} slide`,
+        "aria-labelledby": `slide-${index + 1}`,
         ...props,
         key: index,
         "data-index": index,

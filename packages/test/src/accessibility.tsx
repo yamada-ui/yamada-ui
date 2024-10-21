@@ -4,7 +4,7 @@ import type { ReactElement } from "react"
 import { axe } from "@koralle/vitest-axe"
 import { isArray, isString } from "@yamada-ui/utils"
 import { isValidElement } from "react"
-import { render } from "./render"
+import { render, renderOnBrowser } from "./render"
 
 declare module "vitest" {
   export interface Assertion extends AxeMatchers {}
@@ -22,6 +22,18 @@ export async function a11y(
   { axeOptions, ...rest }: A11yProps = {},
 ): Promise<void> {
   const container = isValidElement(ui) ? render(ui, rest).container : ui
+  const results = await axe(container as HTMLElement, axeOptions)
+
+  expect(results).toHaveNoViolations()
+}
+
+export async function a11yOnBrowser(
+  ui: HTMLElement | ReactElement,
+  { axeOptions, ...rest }: A11yProps = {},
+): Promise<void> {
+  const container = isValidElement(ui)
+    ? renderOnBrowser(ui, rest).container
+    : ui
   const results = await axe(container as HTMLElement, axeOptions)
 
   expect(results).toHaveNoViolations()

@@ -2,4 +2,4 @@
 "@yamada-ui/infinite-scroll-area": patch
 ---
 
-set displayName for InfiniteScrollArea and InfiniteScrollTrigger
+Added `displayName` for `InfiniteScrollArea` and `InfiniteScrollTrigger` components.

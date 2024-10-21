@@ -148,11 +148,11 @@ export const Tabs = forwardRef<TabsProps, "div">(
     const uuid = useId()
 
     const tabPanelIds = cloneTabPanels.map(
-      (panel, index) => panel.props.id ?? `${uuid}-${index}`,
+      (panel, index) => panel.props.id ?? `${uuid}-${index}-tabpanel`,
     )
 
     const tabIds = cloneTabs.map(
-      (tab, index) => tab.props.id ?? `${uuid}-${index}`,
+      (tab, index) => tab.props.id ?? `${uuid}-${index}-tab`,
     )
 
     return (

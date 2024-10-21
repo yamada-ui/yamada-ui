@@ -1,0 +1,25 @@
+---
+title: Rating
+description: "Rating is a component that allows users to evaluate items, presented in the form of icons such as stars or hearts, and visually displays the rating selected by the user."
+package-name: "@yamada-ui/rating"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+## Keyboard Navigation
+
+| Key          | Description                     | State |
+| ------------ | ------------------------------- | ----- |
+| `ArrowLeft`  | Unselect previous `RatingItem`. | -     |
+| `ArrowRight` | Select next `RatingItem`. 　    | -     |
+| `ArrowUp`    | Unselect previous `RatingItem`. | -     |
+| `ArrowDown`  | Select next `RatingItem`.       | -     |
+
+## ARIA Roles and Attributes
+
+| Component    | Roles and Attributes | Usage                                             |
+| :----------- | :------------------- | :------------------------------------------------ |
+| `Rating`     | `aria-readonly`      | Set to `true` when `isReadOnly` is specified.     |
+| `RatingItem` | `aria-label`         | Set `value`.                                      |
+|              | `aria-hidden="true"` | Exclude `RatingIcon` from the accessibility tree. |

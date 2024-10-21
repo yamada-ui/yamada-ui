@@ -5,6 +5,7 @@ import {
   toKebabCase,
   toPascalCase,
   toTitleCase,
+  transformSize,
 } from "../src"
 
 describe("String", () => {
@@ -64,6 +65,18 @@ describe("String", () => {
     test("should convert string to kebab-case", () => {
       expect(toKebabCase("HelloWorld")).toBe("hello-world")
       expect(toKebabCase("AnotherExample")).toBe("another-example")
+    })
+  })
+
+  describe("transformSize", () => {
+    test("should convert size", () => {
+      expect(transformSize("9xs", -1)).toBe("9xs")
+      expect(transformSize("sm", -1)).toBe("xs")
+      expect(transformSize("md", 3)).toBe("2xl")
+      expect(transformSize("lg", 0)).toBe("lg")
+      expect(transformSize("9xl", 1)).toBe("9xl")
+      expect(transformSize("md", 1, null)).toBe("normal")
+      expect(transformSize("lg", -2, null)).toBe("md")
     })
   })
 })

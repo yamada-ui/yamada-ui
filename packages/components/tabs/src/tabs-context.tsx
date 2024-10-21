@@ -19,6 +19,8 @@ interface TabsContext
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
+  tabIds: string[]
+  tabPanelIds: string[]
 }
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({
@@ -27,6 +29,7 @@ export const [TabsProvider, useTabsContext] = createContext<TabsContext>({
 })
 
 export const [TabPanelProvider, useTabPanelContext] = createContext<{
+  index: number
   isSelected: boolean
   selectedIndex: number
 }>({})

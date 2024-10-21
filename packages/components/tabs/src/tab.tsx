@@ -30,11 +30,16 @@ export const Tab = forwardRef<TabProps, "button">(
       setFocusedIndex,
       setSelectedIndex,
       styles,
+      tabIds,
+      tabPanelIds,
     } = useTabsContext()
 
     const { index, register } = useTabsDescendant({
       disabled: isDisabled && !isFocusable,
     })
+
+    const panelId = tabPanelIds[index]
+    const tabId = tabIds[index]
 
     const isSelected = index === selectedIndex
 
@@ -69,12 +74,14 @@ export const Tab = forwardRef<TabProps, "button">(
 
     return (
       <ui.button
+        id={tabId}
         className={cx("ui-tabs__tab", className)}
         role="tab"
         __css={css}
         {...props}
         {...rest}
         type="button"
+        aria-controls={panelId}
         aria-selected={ariaAttr(isSelected)}
         tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}

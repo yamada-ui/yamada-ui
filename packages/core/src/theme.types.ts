@@ -65,6 +65,8 @@ export type LoadingVariant =
   | "puff"
   | "rings"
 
+export type LoadingComponent = "background" | "custom" | "page" | "screen"
+
 export type NoticePlacement =
   | "bottom"
   | "bottom-left"
@@ -402,6 +404,10 @@ export interface ThemeConfig {
      * The options of the custom loading.
      */
     custom?: LoadingConfigOptions
+    /**
+     * The default component to use for `useAsyncCallback` and similar hooks.
+     */
+    defaultComponent?: LoadingComponent
     /**
      * The options of the page loading.
      */

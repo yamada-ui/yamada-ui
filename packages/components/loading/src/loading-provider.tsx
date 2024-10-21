@@ -56,13 +56,13 @@ interface LoadingContextProps {
    *
    * If you specify a `message` etc. as an argument, the loading will change accordingly.
    */
-  start: (props?: Partial<LoadingProps>) => void
+  start: (options?: LoadingOptions) => void
   /**
    * Function to update loading.
    *
    * If you specify a `message` etc. as an argument, the loading will change accordingly.
    */
-  update: (props: Partial<LoadingProps>) => void
+  update: (options: LoadingOptions) => void
 }
 
 interface LoadingContext {
@@ -86,9 +86,9 @@ interface LoadingContext {
   screen: LoadingContextProps
 }
 
-interface LoadingProps {
-  duration: null | number
-  message: ReactNode | undefined
+export interface LoadingOptions {
+  duration?: null | number
+  message?: ReactNode | undefined
 }
 
 interface LoadingState {
@@ -499,5 +499,10 @@ BackgroundComponent.displayName = "BackgroundComponent"
 export const useLoading = (): LoadingContext => {
   const { background, custom, page, screen } = useContext(LoadingContext)
 
-  return { background, custom, page, screen }
+  const context = useMemo(
+    () => ({ background, custom, page, screen }),
+    [background, custom, page, screen],
+  )
+
+  return context
 }

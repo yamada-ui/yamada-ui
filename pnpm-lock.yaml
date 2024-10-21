@@ -3330,6 +3330,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/hooks/use-processing:
+    dependencies:
+      '@yamada-ui/use-boolean':
+        specifier: workspace:*
+        version: link:../use-boolean
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/hooks/use-resize-observer:
     dependencies:
       '@yamada-ui/utils':
@@ -3757,6 +3773,9 @@ importers:
       '@yamada-ui/use-previous':
         specifier: workspace:*
         version: link:../hooks/use-previous
+      '@yamada-ui/use-processing':
+        specifier: workspace:*
+        version: link:../hooks/use-processing
       '@yamada-ui/use-resize-observer':
         specifier: workspace:*
         version: link:../hooks/use-resize-observer

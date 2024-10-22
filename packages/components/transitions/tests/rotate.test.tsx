@@ -1,6 +1,5 @@
 import type { AiryIdent } from "../src"
-import { Apple, Cherry } from "@yamada-ui/lucide"
-import { a11y, render, waitFor } from "@yamada-ui/test"
+import { a11y, render, TestIcon, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import { Rotate } from "../src"
 
@@ -15,8 +14,8 @@ describe("<Rotate />", () => {
 
       return (
         <Rotate
-          from={<Apple />}
-          to={<Cherry />}
+          from={<TestIcon />}
+          to={<TestIcon />}
           value={value}
           onChange={onChange}
         />
@@ -37,7 +36,7 @@ describe("<Rotate />", () => {
 
   test("should be read only", () => {
     const { container, user } = render(
-      <Rotate from={<Apple />} isReadOnly to={<Cherry />} />,
+      <Rotate from={<TestIcon />} isReadOnly to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -49,7 +48,7 @@ describe("<Rotate />", () => {
 
   test("should be disabled", () => {
     const { container, user } = render(
-      <Rotate from={<Apple />} isDisabled to={<Cherry />} />,
+      <Rotate from={<TestIcon />} isDisabled to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement

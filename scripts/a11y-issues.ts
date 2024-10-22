@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest"
-import { toCamelCase, toKebabCase } from "@yamada-ui/react"
+import { toKebabCase, toPascalCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import { execa } from "execa"
 import { recursiveOctokit, wait } from "./utils"
@@ -203,7 +203,7 @@ const createIssues = async (
   for await (const [path, stories] of fails) {
     let [, name] = path.match(/\/([\w-]+)\.stories.(tsx|ts)/) ?? []
 
-    name = toCamelCase(name ?? "")
+    name = toPascalCase(name ?? "")
 
     const isExist = Object.keys(existStories).includes(path)
     const body = ISSUE_BODY(name, path, stories)

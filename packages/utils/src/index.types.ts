@@ -39,5 +39,3 @@ export type Union<Y> = StringLiteral | Y
 export type Length<T extends any[]> = T["length"]
 
 export type Merge<Y, M> = M & Omit<Y, keyof M>
-
-export type MergeIfDefined<Y, M> = M extends undefined ? Y : Merge<Y, M>

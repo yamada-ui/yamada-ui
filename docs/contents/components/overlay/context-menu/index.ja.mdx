@@ -152,7 +152,7 @@ import {
 メニューを開く際に、特定の項目にフォーカスする場合は、`initialFocusRef`に対象の`ref`を設定します。
 
 ```tsx functional=true
-const ref = useRef<HTMLButtonElement>(null)
+const ref = useRef<HTMLDivElement>(null)
 
 return (
   <ContextMenu initialFocusRef={ref}>

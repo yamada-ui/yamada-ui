@@ -2886,9 +2886,6 @@ importers:
         specifier: workspace:*
         version: link:../../utils
     devDependencies:
-      '@yamada-ui/lucide':
-        specifier: workspace:*
-        version: link:../lucide
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
@@ -8174,7 +8171,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   ansi-regex@5.0.1:
-    resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==, tarball: https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz}
+    resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
 
   ansi-regex@6.1.0:
@@ -14839,7 +14836,7 @@ packages:
     engines: {node: '>=4'}
 
   strip-ansi@6.0.1:
-    resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==, tarball: https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz}
+    resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
 
   strip-ansi@7.1.0:

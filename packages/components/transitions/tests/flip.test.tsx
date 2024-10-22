@@ -1,6 +1,5 @@
 import type { AiryIdent } from "../src"
-import { Apple, Cherry } from "@yamada-ui/lucide"
-import { a11y, render, waitFor } from "@yamada-ui/test"
+import { a11y, render, TestIcon, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import { Flip } from "../src"
 
@@ -15,8 +14,8 @@ describe("<Flip />", () => {
 
       return (
         <Flip
-          from={<Apple />}
-          to={<Cherry />}
+          from={<TestIcon />}
+          to={<TestIcon />}
           value={value}
           onChange={onChange}
         />
@@ -37,7 +36,7 @@ describe("<Flip />", () => {
 
   test("should be read only", () => {
     const { container, user } = render(
-      <Flip from={<Apple />} isReadOnly to={<Cherry />} />,
+      <Flip from={<TestIcon />} isReadOnly to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -49,7 +48,7 @@ describe("<Flip />", () => {
 
   test("should be disabled", () => {
     const { container, user } = render(
-      <Flip from={<Apple />} isDisabled to={<Cherry />} />,
+      <Flip from={<TestIcon />} isDisabled to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -64,10 +63,10 @@ describe("<Flip />", () => {
   test("should be render Flip with orientation", () => {
     const { container } = render(
       <Flip
-        from={<Apple />}
+        from={<TestIcon />}
         isDisabled
         orientation="vertical"
-        to={<Cherry />}
+        to={<TestIcon />}
       />,
     )
 

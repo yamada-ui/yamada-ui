@@ -18,10 +18,10 @@ interface AutocompleteEmptyOptions {
 }
 
 export interface AutocompleteEmptyProps
-  extends Omit<HTMLUIProps<"li">, "children">,
+  extends Omit<HTMLUIProps, "children">,
     AutocompleteEmptyOptions {}
 
-export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
+export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "div">(
   ({ className, children, icon, ...rest }, ref) => {
     const { emptyMessage, styles } = useAutocompleteContext()
     const { getEmptyProps } = useAutocompleteEmpty()
@@ -44,7 +44,7 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
     }
 
     return (
-      <ui.li
+      <ui.div
         className={cx("ui-autocomplete__item--empty", className)}
         __css={css}
         {...getEmptyProps(rest, ref)}
@@ -62,7 +62,7 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
         ) : (
           children
         )}
-      </ui.li>
+      </ui.div>
     )
   },
 )

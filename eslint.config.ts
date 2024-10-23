@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
 import {
   baseConfig,
+  cspellConfig,
   importConfigArray,
   languageOptionFactory,
   perfectionistConfig,
-  cspellConfig as sharedCspellConfig,
   reactConfig as sharedReactConfig,
   reactHooksConfig as sharedReactHooksConfig,
   testingLibraryConfig,
@@ -112,11 +112,6 @@ const vitestSetupTestsConfig: Linter.Config = {
   rules: {
     "vitest/prefer-spy-on": "off",
   },
-}
-
-const cspellConfig: Linter.Config = {
-  ...sharedCspellConfig,
-  ignores: ["packages/components/lucide/src/icons/**"],
 }
 
 const tsConfigPath = resolve(

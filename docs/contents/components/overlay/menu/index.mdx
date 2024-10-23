@@ -121,7 +121,7 @@ To display icons in items, set a `ReactElement` to `icon`.
 When opening the menu, if you want to focus on a specific item, set the target `ref` to `initialFocusRef`.
 
 ```tsx functional=true
-const ref = useRef<HTMLButtonElement>(null)
+const ref = useRef<HTMLDivElement>(null)
 
 return (
   <Menu initialFocusRef={ref}>

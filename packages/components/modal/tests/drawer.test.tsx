@@ -1,4 +1,5 @@
 import type { DrawerProps } from "../src"
+import { Button } from "@yamada-ui/button"
 import { a11y, render } from "@yamada-ui/test"
 import { useState } from "react"
 import {
@@ -9,7 +10,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "../src"
-import { Button } from "@yamada-ui/button"
 
 describe("<Drawer />", () => {
   const DrawerOpenExample = () => {
@@ -185,11 +185,17 @@ describe("<Drawer />", () => {
             backdropFilter="blur(10px)"
             bg="blackAlpha.300"
           />
-          {customDrawerCloseButton && (
-            <Button data-testid="CustomDrawerCloseButton" />
-          )}
-          {!customDrawerCloseButton && withCloseButton && (
-            <DrawerCloseButton data-testid="DefaultDrawerCloseButton" />
+          {customDrawerCloseButton ? (
+            <Button
+              data-testid="CustomDrawerCloseButton"
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </Button>
+          ) : (
+            withCloseButton && (
+              <DrawerCloseButton data-testid="DefaultDrawerCloseButton" />
+            )
           )}
           <DrawerHeader>Header</DrawerHeader>
           <DrawerBody>Body</DrawerBody>

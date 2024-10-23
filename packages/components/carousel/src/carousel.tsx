@@ -237,7 +237,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const computedWithControls = useValue(withControls)
     const computedWithIndicators = useValue(withIndicators)
 
-    const { children, getContainerProps, getSlidesProps, ...rest } =
+    const { carouselId, children, getContainerProps, getSlidesProps, ...rest } =
       useCarousel({
         ...computedProps,
       })
@@ -279,7 +279,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     minH ??= minHeight
 
     return (
-      <CarouselProvider value={{ styles, ...rest }}>
+      <CarouselProvider value={{ id: carouselId, styles, ...rest }}>
         <ui.div
           className={cx("ui-carousel", className)}
           __css={css}

@@ -70,6 +70,7 @@ export const Menu: FC<MenuProps> = (props) => {
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
 
   const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
   const requestAnimationFrameId = useRef<null | number>(null)
   const onCloseMapRef = useRef<Map<string, () => void>>(new Map())
@@ -167,6 +168,7 @@ export const Menu: FC<MenuProps> = (props) => {
       >
         <MenuProvider
           value={{
+            buttonRef,
             closeOnSelect,
             focusedIndex,
             isNested,

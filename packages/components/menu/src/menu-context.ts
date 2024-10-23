@@ -18,6 +18,7 @@ export const {
 } = createDescendant()
 
 interface MenuContext extends MenuOptions {
+  buttonRef: RefObject<HTMLButtonElement>
   focusedIndex: number
   isNested: boolean
   isOpen: boolean
@@ -62,7 +63,7 @@ export const [UpstreamMenuProvider, useUpstreamMenu] =
 interface UpstreamMenuItemContext {
   hasDownstreamRef: MutableRefObject<boolean>
   setDownstreamOpen: Dispatch<SetStateAction<boolean>>
-  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLLIElement>>
+  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLDivElement>>
   onUpstreamRestoreFocus: () => void
 }
 

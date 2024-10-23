@@ -82,7 +82,7 @@ const main = async () => {
   const existIssues = getExistIssues(issues)
   const packages = await findPackages("packages/components")
 
-  for await (const { dir, manifest } of packages) {
+  for (const { dir, manifest } of packages) {
     if (manifest.name && existIssues[manifest.name]) continue
 
     await recursiveOctokit(async () => {

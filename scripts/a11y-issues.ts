@@ -200,7 +200,7 @@ const createIssues = async (
   existStories: { [key: string]: Issue },
   fails: [string, Story[]][],
 ) => {
-  for await (const [path, stories] of fails) {
+  for (const [path, stories] of fails) {
     let [, name] = path.match(/\/([\w-]+)\.stories.(tsx|ts)/) ?? []
 
     name = toPascalCase(name ?? "")

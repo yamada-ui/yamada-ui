@@ -1,8 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import type { FC } from "react"
-import type { MockInstance } from "vitest"
 import type { StyledTheme } from "../src"
-import { render, screen } from "@yamada-ui/test"
+import { render } from "@yamada-ui/test"
 import { css, transformTheme, ui, useCSS } from "../src"
 
 const theme = transformTheme(
@@ -143,23 +142,6 @@ const theme = transformTheme(
 ) as StyledTheme
 
 describe("CSS", () => {
-  let getComputedStyleMock: MockInstance
-
-  beforeEach(() => {
-    getComputedStyleMock = vi
-      .spyOn(window, "getComputedStyle")
-      .mockImplementation(
-        () =>
-          ({
-            fontSize: "16px",
-          }) as CSSStyleDeclaration,
-      )
-  })
-
-  afterEach(() => {
-    getComputedStyleMock.mockRestore()
-  })
-
   test("returns system props styles", () => {
     const result = css({
       color: "gray.500",
@@ -347,7 +329,7 @@ describe("useCSS", () => {
       return <ui.div className={className} data-testid="component" />
     }
 
-    render(<Component />)
+    const screen = render(<Component />)
 
     expect(screen.getByTestId("component")).toHaveStyle({
       color: "var(--ui-colors-gray-500)",
@@ -367,7 +349,7 @@ describe("useCSS", () => {
       return <ui.div className={className} data-testid="component" />
     }
 
-    render(<Component />)
+    const screen = render(<Component />)
 
     expect(screen.getByTestId("component")).toHaveStyle({
       color: "#6b7280",

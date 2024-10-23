@@ -59,11 +59,15 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/.*/(src|tests|package.json|tsconfig.json),scripts/setup-test.ts,vitest.config.mts"
+          file_patterns: "packages/.*/(src|tests|package.json|tsconfig.json),scripts/setup-test.ts,vitest.config.mts,vitest.workspace.mts"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
+
+      - name: Install headless browser
+        if: steps.check-modified.outputs.changed == 'true'
+        uses: ./.github/composite-actions/install-headless-browser
 
       - name: Run tests
         if: steps.check-modified.outputs.changed == 'true'

@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.18.5
+
+### Patch Changes
+
+- [#3226](https://github.com/yamada-ui/yamada-ui/pull/3226) [`78b5d87`](https://github.com/yamada-ui/yamada-ui/commit/78b5d875b10b6ca8277498384221e5cbcebff3de) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the border color of `PopoverFooter` was incorrect.
+
 ## 1.18.4
 
 ### Patch Changes

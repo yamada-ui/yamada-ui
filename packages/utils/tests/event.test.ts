@@ -11,49 +11,6 @@ import {
 } from "../src"
 
 describe("Event", () => {
-  const defaultTouch = global.Touch
-  const defaultPointerEvent = global.PointerEvent
-
-  beforeAll(() => {
-    global.Touch = class Touch {
-      identifier: number
-      target: EventTarget
-      clientX: number
-      clientY: number
-
-      constructor({
-        target,
-        clientX,
-        clientY,
-        identifier,
-      }: {
-        target: EventTarget
-        clientX: number
-        clientY: number
-        identifier: number
-      }) {
-        this.identifier = identifier
-        this.target = target
-        this.clientX = clientX
-        this.clientY = clientY
-      }
-    } as typeof global.Touch
-
-    global.PointerEvent = class PointerEvent extends MouseEvent {
-      pointerType: string
-
-      constructor(type: string, params: PointerEventInit = {}) {
-        super(type, params)
-        this.pointerType = params.pointerType || ""
-      }
-    } as typeof global.PointerEvent
-  })
-
-  afterAll(() => {
-    global.Touch = defaultTouch
-    global.PointerEvent = defaultPointerEvent
-  })
-
   test("isMouseEvent identifies mouse events", () => {
     const mouseEvent = new MouseEvent("click")
     expect(isMouseEvent(mouseEvent)).toBeTruthy()

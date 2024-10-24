@@ -1,0 +1,43 @@
+name: "Install Browser"
+description: "Installs a browser to test with Vitest Browser Mode"
+
+inputs:
+  target_browser:
+    description: "The browser to install"
+    required: false
+    default: "chromium"
+
+runs:
+  using: composite
+  steps:
+    - name: Get Playwright version
+      id: get-playwright-version
+      run: |
+        echo "playwright-version=$(pnpm playwright --version | awk '{print $2}')" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Restore browser
+      id: restore-cache-playwright-browser
+      uses: actions/cache@v4
+      with:
+        path: /home/runner/.cache/ms-playwright
+        key: playwright-${TARGET_BROWSER}-v${{ steps.get-playwright-version.outputs.playwright-version }}
+      env:
+        TARGET_BROWSER: ${{ inputs.target_browser }}
+
+    - name: Install browser
+      run: |
+        pnpm exec playwright install --with-deps ${TARGET_BROWSER}
+      shell: bash
+      if: ${{ steps.restore-cache-playwright-browser.outputs.cache-hit != 'true' }}
+      env:
+        TARGET_BROWSER: ${{ inputs.target_browser }}
+
+    - name: Save cache of browser
+      id: save-cache-playwright-browser
+      uses: actions/cache@v4
+      with:
+        path: /home/runner/.cache/ms-playwright
+        key: playwright-${TARGET_BROWSER}-v${{ steps.get-playwright-version.outputs.playwright-version }}
+      env:
+        TARGET_BROWSER: ${{ inputs.target_browser }}

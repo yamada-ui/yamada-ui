@@ -1107,7 +1107,6 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       tabIndex: -1,
       ...props,
       ...formControlProps,
-      "aria-expanded": dataAttr(isOpen),
       "data-active": dataAttr(isOpen),
       placeholder,
       onFocus: handlerAll(props.onFocus, onFocusProp, onFocus),
@@ -1184,55 +1183,57 @@ export const useAutocompleteInput = () => {
     onCompositionStart,
     onSearch,
   } = useAutocompleteContext()
-
-  const { value } = useAutocompleteDescendantsContext()
+  const descendants = useAutocompleteDescendantsContext()
+  const activedescendantId = descendants.value(focusedIndex)?.node.id
+  const listId = listRef.current?.id
 
   useUpdateEffect(() => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
   }, [isAllSelected])
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}, ref = null) => ({
-      ref: mergeRefs(inputRef, ref),
-      ...formControlProps,
-      "aria-activedescendant": value(focusedIndex)?.node.id,
-      "aria-autocomplete": "list",
-      "aria-controls": listRef.current?.id,
-      "aria-expanded": isOpen,
-      "aria-haspopup": "listbox",
-      autoCapitalize: "none",
-      autoComplete: "off",
-      role: "combobox",
-      spellCheck: "false",
-      ...inputProps,
-      ...props,
-      id,
-      cursor: formControlProps.readOnly ? "default" : "text",
-      pointerEvents:
-        formControlProps.disabled || isAllSelected ? "none" : "auto",
-      tabIndex: isAllSelected ? -1 : 0,
-      onChange: handlerAll(props.onChange, onSearch),
-      onCompositionEnd: handlerAll(
-        props.onCompositionEnd,
-        inputProps.onCompositionEnd,
-        onCompositionEnd,
-      ),
-      onCompositionStart: handlerAll(
-        props.onCompositionStart,
-        inputProps.onCompositionStart,
-        onCompositionStart,
-      ),
-    }),
+    (props = {}, ref = null) => {
+      return {
+        ref: mergeRefs(inputRef, ref),
+        ...formControlProps,
+        "aria-activedescendant": activedescendantId,
+        "aria-autocomplete": "list",
+        "aria-controls": listId,
+        "aria-expanded": isOpen,
+        "aria-haspopup": "listbox",
+        autoCapitalize: "none",
+        autoComplete: "off",
+        role: "combobox",
+        spellCheck: "false",
+        tabIndex: isAllSelected ? -1 : 0,
+        ...inputProps,
+        ...props,
+        id,
+        cursor: formControlProps.readOnly ? "default" : "text",
+        pointerEvents:
+          formControlProps.disabled || isAllSelected ? "none" : "auto",
+        onChange: handlerAll(props.onChange, onSearch),
+        onCompositionEnd: handlerAll(
+          props.onCompositionEnd,
+          inputProps.onCompositionEnd,
+          onCompositionEnd,
+        ),
+        onCompositionStart: handlerAll(
+          props.onCompositionStart,
+          inputProps.onCompositionStart,
+          onCompositionStart,
+        ),
+      }
+    },
     [
-      listRef,
-      focusedIndex,
+      listId,
+      activedescendantId,
       isOpen,
       inputProps,
       inputRef,
       formControlProps,
       id,
       isAllSelected,
-      value,
       onSearch,
       onCompositionStart,
       onCompositionEnd,

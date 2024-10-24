@@ -1,5 +1,5 @@
 import type { PropGetter } from "@yamada-ui/core"
-import { mergeRefs, useUpdateEffect } from "@yamada-ui/utils"
+import { ariaAttr, isArray, mergeRefs, useUpdateEffect } from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useRef } from "react"
 import {
   useAutocompleteContext,
@@ -7,14 +7,13 @@ import {
 } from "./autocomplete-context"
 
 export const useAutocompleteList = () => {
-  const uuid = useId()
-  const { focusedIndex, isOpen, listRef, rebirthOptions } =
+  const { focusedIndex, isOpen, listRef, rebirthOptions, value } =
     useAutocompleteContext()
-
   const descendants = useAutocompleteDescendantsContext()
-
+  const uuid = useId()
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
+  const isMulti = isArray(value)
 
   const onAnimationComplete = useCallback(() => {
     if (!isOpen) rebirthOptions(false)
@@ -59,17 +58,17 @@ export const useAutocompleteList = () => {
     if (!isOpen) beforeFocusedIndex.current = -1
   }, [isOpen])
 
-  const getListProps: PropGetter<"ul"> = useCallback(
-    (props = {}, ref = null) => ({
-      id: props.id ?? uuid,
+  const getListProps: PropGetter = useCallback(
+    ({ id, ...props } = {}, ref = null) => ({
+      id: id ?? uuid,
       ref: mergeRefs(listRef, ref),
-      as: "ul",
+      "aria-multiselectable": ariaAttr(isMulti),
       position: "relative",
       role: "listbox",
       tabIndex: -1,
       ...props,
     }),
-    [listRef, uuid],
+    [listRef, uuid, isMulti],
   )
 
   return {

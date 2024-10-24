@@ -136,11 +136,11 @@ describe("<MultiAutoComplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      expect(optionElements).toHaveLength(3)
+      expect(optionElements).toHaveLength(1)
 
       await user.keyboard("{Escape}{ArrowDown}")
       await waitFor(() =>
-        expect(optionElements[2]).toHaveAttribute("data-focus"),
+        expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
     })
 
@@ -160,7 +160,7 @@ describe("<MultiAutoComplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      expect(optionElements).toHaveLength(3)
+      expect(optionElements).toHaveLength(2)
 
       await user.keyboard("{Escape}{ArrowDown}")
       await waitFor(() =>
@@ -201,11 +201,11 @@ describe("<MultiAutoComplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      expect(optionElements).toHaveLength(3)
+      expect(optionElements).toHaveLength(1)
 
       await user.keyboard("{Escape}{ArrowUp}")
       await waitFor(() =>
-        expect(optionElements[1]).toHaveAttribute("data-focus"),
+        expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
     })
 
@@ -225,11 +225,11 @@ describe("<MultiAutoComplete />", () => {
       await user.click(autocomplete!)
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
-      expect(optionElements).toHaveLength(3)
+      expect(optionElements).toHaveLength(2)
 
       await user.keyboard("{Escape}{ArrowUp}")
       await waitFor(() =>
-        expect(optionElements[2]).toHaveAttribute("data-focus"),
+        expect(optionElements[1]).toHaveAttribute("data-focus"),
       )
     })
   })
@@ -269,7 +269,7 @@ describe("<MultiAutoComplete />", () => {
       await user.click(optionElements[0]!)
 
       await waitFor(() =>
-        expect(optionElements[2]).toHaveAttribute("data-focus"),
+        expect(optionElements[1]).toHaveAttribute("data-focus"),
       )
     })
   })

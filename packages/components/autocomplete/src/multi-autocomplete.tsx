@@ -310,7 +310,6 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   ) => {
     const { inputRef, inputValue, isOpen, label, styles, value, onChange } =
       useAutocompleteContext()
-
     const { getInputProps } = useAutocompleteInput()
 
     const cloneChildren = useMemo(() => {
@@ -385,8 +384,6 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
 
           <ui.input
             className="ui-multi-autocomplete__field__input"
-            aria-label="Input value"
-            aria-multiselectable="true"
             display="inline-block"
             flex="1"
             marginBlockEnd="0.125rem"

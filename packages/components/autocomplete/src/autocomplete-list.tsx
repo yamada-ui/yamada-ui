@@ -7,13 +7,13 @@ import { cx, handlerAll } from "@yamada-ui/utils"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { useAutocompleteList } from "./use-autocomplete-list"
 
-export interface AutocompleteListProps extends HTMLUIProps<"ul"> {
+export interface AutocompleteListProps extends HTMLUIProps {
   footer?: ReactNode
   header?: ReactNode
   contentProps?: MotionPropsWithoutChildren
 }
 
-export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
+export const AutocompleteList = forwardRef<AutocompleteListProps, "div">(
   (
     {
       className,
@@ -45,7 +45,6 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
 
     return (
       <PopoverContent
-        as="div"
         className="ui-autocomplete__popover"
         maxWidth={maxWidth}
         minWidth={minWidth}
@@ -58,29 +57,29 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
         )}
       >
         {header ? (
-          <ui.div
+          <ui.header
             className="ui-autocomplete__header"
             __css={{ ...styles.header }}
           >
             {header}
-          </ui.div>
+          </ui.header>
         ) : null}
 
-        <ui.ul
+        <ui.div
           className={cx("ui-autocomplete__list", className)}
           __css={{ ...styles.list }}
           {...getListProps(rest, ref)}
         >
           {children}
-        </ui.ul>
+        </ui.div>
 
         {footer ? (
-          <ui.div
+          <ui.footer
             className="ui-autocomplete__footer"
             __css={{ ...styles.footer }}
           >
             {footer}
-          </ui.div>
+          </ui.footer>
         ) : null}
       </PopoverContent>
     )

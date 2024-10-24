@@ -1,11 +1,11 @@
 import type { HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import type { CSSProperties } from "react"
 import { layoutStyleProperties } from "@yamada-ui/core"
-import { isArray, splitObject } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { isArray, mergeRefs, splitObject } from "@yamada-ui/utils"
+import { useCallback, useId, useRef } from "react"
 import { useSelectContext, useSelectDescendantsContext } from "./use-select"
 
-export interface UseSelectOptionGroupProps extends HTMLUIProps<"ul"> {
+export interface UseSelectOptionGroupProps extends HTMLUIProps {
   /**
    * The label of the option group.
    */
@@ -17,12 +17,11 @@ export const useSelectOptionGroup = ({
   ...rest
 }: UseSelectOptionGroupProps) => {
   const { omitSelectedValues, value } = useSelectContext()
-
-  const isMulti = isArray(value)
-
   const descendants = useSelectDescendantsContext()
-
+  const labelRef = useRef<HTMLDivElement>(null)
+  const labelId = useId()
   const values = descendants.values()
+  const isMulti = isArray(value)
   const selectedValues =
     isMulti && omitSelectedValues
       ? descendants.values(({ node }) =>
@@ -35,12 +34,11 @@ export const useSelectOptionGroup = ({
       node.parentElement?.dataset.label === label &&
       !selectedIndexes.includes(index),
   )
-
   const isEmpty = !childValues.length
 
   const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
 
-  const getContainerProps: PropGetter<"li"> = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -56,6 +54,8 @@ export const useSelectOptionGroup = ({
 
       return {
         ref,
+        "aria-labelledby": labelRef.current?.id,
+        role: "group",
         ...props,
         ...containerProps,
         style: isEmpty ? style : undefined,
@@ -64,14 +64,22 @@ export const useSelectOptionGroup = ({
     [containerProps, isEmpty],
   )
 
-  const getGroupProps: PropGetter<"ul"> = useCallback(
-    ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
-      ariaLabel ??= label
+  const getLabelProps: PropGetter = useCallback(
+    ({ id, ...props } = {}, ref = null) => {
+      return {
+        id: id ?? labelId,
+        ref: mergeRefs(ref, labelRef),
+        role: "presentation",
+        ...props,
+      }
+    },
+    [labelId],
+  )
 
+  const getGroupProps: PropGetter = useCallback(
+    (props = {}, ref = null) => {
       return {
         ref,
-        "aria-label": ariaLabel,
-        role: "group",
         ...props,
         ...groupProps,
         "data-label": label,
@@ -84,6 +92,7 @@ export const useSelectOptionGroup = ({
     label,
     getContainerProps,
     getGroupProps,
+    getLabelProps,
   }
 }
 

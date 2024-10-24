@@ -21,7 +21,7 @@ const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
 export interface UseAutocompleteOptionProps
-  extends Omit<HTMLUIProps<"li">, "children" | "value"> {
+  extends Omit<HTMLUIProps, "children" | "value"> {
   /**
    * The label of the autocomplete option.
    */
@@ -63,9 +63,10 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     onClose,
     onFocusNext,
   } = useAutocompleteContext()
-  const id = useId()
-
+  const uuid = useId()
+  const itemRef = useRef<HTMLLIElement>(null)
   let {
+    id,
     children,
     closeOnSelect: customCloseOnSelect,
     icon: customIcon,
@@ -74,18 +75,25 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-
   const trulyDisabled = !!isDisabled && !isFocusable
-
-  const itemRef = useRef<HTMLLIElement>(null)
-
   const { descendants, index, register } = useAutocompleteDescendant({
     disabled: trulyDisabled,
   })
-
   const values = descendants.values()
   const frontValues = values.slice(0, index)
   const isMulti = isArray(value)
+  const isDuplicated = frontValues.some(
+    ({ node }) => node.dataset.value === (optionValue ?? ""),
+  )
+  const isSelected =
+    !isDuplicated &&
+    (!isMulti
+      ? (optionValue ?? "") === value
+      : value.includes(optionValue ?? ""))
+  const isTarget = "target" in (itemRef.current?.dataset ?? {})
+  const isFocused = index === focusedIndex
+
+  id ??= uuid
 
   if (isUndefined(optionValue)) {
     if (isString(children) || isNumber(children)) {
@@ -99,19 +107,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     }
   }
 
-  const isDuplicated = frontValues.some(
-    ({ node }) => node.dataset.value === (optionValue ?? ""),
-  )
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isTarget = "target" in (itemRef.current?.dataset ?? {})
-  const isFocused = index === focusedIndex
-
   const onClick = useCallback(
-    (ev: MouseEvent<HTMLLIElement>) => {
+    (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
       if (isDisabled || !isTargetOption(ev.currentTarget)) {
@@ -146,8 +143,10 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     ],
   )
 
-  const getOptionProps: PropGetter<"li"> = useCallback(
+  const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
+      const isHidden = !isTarget || (omitSelectedValues && isSelected)
+
       const style: CSSProperties = {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
@@ -161,15 +160,15 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       }
 
       return {
-        id,
         ref: mergeRefs(itemRef, ref, register),
         role: "option",
         ...computedProps,
         ...props,
-        style:
-          !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
-        "aria-checked": isSelected,
+        id,
+        style: isHidden ? style : undefined,
         "aria-disabled": ariaAttr(isDisabled),
+        "aria-hidden": ariaAttr(isHidden),
+        "aria-selected": isSelected,
         "data-disabled": dataAttr(isDisabled),
         "data-duplicated": dataAttr(isDuplicated),
         "data-focus": dataAttr(isFocused),
@@ -199,6 +198,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     customIcon,
     isFocused,
     isSelected,
+    isTarget,
+    omitSelectedValues,
     getOptionProps,
   }
 }
@@ -210,7 +211,7 @@ export type UseAutocompleteOptionReturn = ReturnType<
 export const useAutocompleteCreate = () => {
   const { isHit, onCreate } = useAutocompleteContext()
 
-  const getCreateProps: PropGetter<"li"> = useCallback(
+  const getCreateProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -226,8 +227,10 @@ export const useAutocompleteCreate = () => {
 
       return {
         ref,
+        role: "option",
         ...props,
         style: isHit ? style : undefined,
+        "aria-hidden": ariaAttr(isHit),
         "data-focus": dataAttr(!isHit),
         tabIndex: -1,
         onClick: handlerAll(props.onClick, onCreate),
@@ -246,8 +249,10 @@ export type UseAutocompleteCreateReturn = ReturnType<
 export const useAutocompleteEmpty = () => {
   const { isEmpty, isHit } = useAutocompleteContext()
 
-  const getEmptyProps: PropGetter<"li"> = useCallback(
+  const getEmptyProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
+      const isHidden = isHit && !isEmpty
+
       const style: CSSProperties = {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
@@ -262,8 +267,10 @@ export const useAutocompleteEmpty = () => {
 
       return {
         ref,
+        role: "presentation",
         ...props,
-        style: isHit && !isEmpty ? style : undefined,
+        style: isHidden ? style : undefined,
+        "aria-hidden": ariaAttr(isHidden),
         tabIndex: -1,
       }
     },

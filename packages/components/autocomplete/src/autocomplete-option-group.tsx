@@ -10,16 +10,16 @@ interface AutocompleteOptionGroupOptions
   /**
    * Props for autocomplete option group element.
    */
-  labelProps?: HTMLUIProps<"span">
+  labelProps?: HTMLUIProps<"header">
 }
 
 export interface AutocompleteOptionGroupProps
-  extends HTMLUIProps<"ul">,
+  extends HTMLUIProps,
     AutocompleteOptionGroupOptions {}
 
 export const AutocompleteOptionGroup = forwardRef<
   AutocompleteOptionGroupProps,
-  "ul"
+  "div"
 >(
   (
     {
@@ -36,14 +36,14 @@ export const AutocompleteOptionGroup = forwardRef<
     ref,
   ) => {
     const { styles } = useAutocompleteContext()
-    const { label, getContainerProps, getGroupProps } =
+    const { label, getContainerProps, getGroupProps, getLabelProps } =
       useAutocompleteOptionGroup(rest)
 
     h ??= height
     minH ??= minHeight
 
     return (
-      <ui.li
+      <ui.section
         className={cx(
           "ui-autocomplete__item",
           "ui-autocomplete__item--group",
@@ -52,23 +52,23 @@ export const AutocompleteOptionGroup = forwardRef<
         __css={{ color, h: "fit-content", w: "100%" }}
         {...getContainerProps()}
       >
-        <ui.span
+        <ui.header
           className="ui-autocomplete__item__group-label"
           lineClamp={1}
           __css={styles.groupLabel}
-          {...labelProps}
+          {...getLabelProps(labelProps)}
         >
           {label}
-        </ui.span>
+        </ui.header>
 
-        <ui.ul
+        <ui.div
           {...getGroupProps({}, ref)}
           className="ui-autocomplete__item__group"
           __css={{ h, minH, ...styles.group }}
         >
           {children}
-        </ui.ul>
-      </ui.li>
+        </ui.div>
+      </ui.section>
     )
   },
 )

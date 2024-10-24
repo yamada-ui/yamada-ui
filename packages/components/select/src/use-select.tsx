@@ -217,15 +217,15 @@ export const useSelect = <T extends MaybeValue = string>(
   const isFocused = focusedIndex > -1
   const isMulti = isArray(value)
   const isEmptyValue = (!isMulti ? !value : !value.length) && !hasPlaceholder
-
   const selectedValues = descendants.values(
     ({ node }) => isMulti && value.includes(node.dataset.value ?? ""),
   )
-
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const enabledValues = descendants.enabledValues(
     ({ index }) => !selectedIndexes.includes(index),
   )
+  const activedescendantId = descendants.value(focusedIndex)?.node.id
+  const listId = listRef.current?.id
 
   const validChildren = getValidChildren(children)
 
@@ -696,14 +696,15 @@ export const useSelect = <T extends MaybeValue = string>(
 
       return {
         ref: mergeRefs(fieldRef, ref),
+        "aria-activedescendant": activedescendantId,
+        "aria-controls": listId,
+        "aria-expanded": isOpen,
+        "aria-haspopup": "listbox",
         "aria-label": ariaLabel,
         role: "combobox",
         tabIndex: 0,
         ...fieldProps,
         ...props,
-        "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
-        "aria-controls": listRef.current?.id,
-        "aria-expanded": isOpen,
         "data-active": dataAttr(isOpen),
         "data-placeholder": dataAttr(
           !isMulti ? label === undefined : !label?.length,
@@ -713,9 +714,9 @@ export const useSelect = <T extends MaybeValue = string>(
       }
     },
     [
-      descendants,
+      activedescendantId,
+      listId,
       fieldProps,
-      focusedIndex,
       isOpen,
       isMulti,
       label,

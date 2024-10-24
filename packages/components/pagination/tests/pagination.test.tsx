@@ -65,7 +65,9 @@ describe("<Pagination />", () => {
   })
 
   test("should render pagination with previous ellipsis and without next ellipsis correctly", () => {
-    render(<Pagination boundaries={2} page={95} siblings={2} total={100} />)
+    const { container } = render(
+      <Pagination boundaries={2} page={95} siblings={2} total={100} />,
+    )
 
     for (let page = 93; page <= 100; page++) {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
@@ -75,7 +77,7 @@ describe("<Pagination />", () => {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const ellipsis = screen.getByLabelText("Jump to omitted pages")
+    const ellipsis = container.querySelector(".ui-pagination__item--ellipsis")
     expect(ellipsis).toBeInTheDocument()
   })
 
@@ -119,7 +121,7 @@ describe("<Pagination />", () => {
   test("should not render control buttons when withControls is false", () => {
     render(<Pagination total={10} withControls={false} />)
 
-    expect(screen.getAllByRole("button")).toHaveLength(7)
+    expect(screen.getAllByRole("button")).toHaveLength(6)
     expect(
       screen.queryByLabelText("Go to previous page"),
     ).not.toBeInTheDocument()

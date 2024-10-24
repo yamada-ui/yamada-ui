@@ -1,4 +1,12 @@
-import { antonym, escape, toCamelCase, toKebabCase, toTitleCase } from "../src"
+import {
+  antonym,
+  escape,
+  toCamelCase,
+  toKebabCase,
+  toPascalCase,
+  toTitleCase,
+  transformSize,
+} from "../src"
 
 describe("String", () => {
   describe("escape", () => {
@@ -41,8 +49,15 @@ describe("String", () => {
 
   describe("toCamelCase", () => {
     test("should convert string to CamelCase", () => {
-      expect(toCamelCase("hello-world")).toBe("HelloWorld")
-      expect(toCamelCase("another_example")).toBe("AnotherExample")
+      expect(toCamelCase("hello-world")).toBe("helloWorld")
+      expect(toCamelCase("another_example")).toBe("anotherExample")
+    })
+  })
+
+  describe("toPascalCase", () => {
+    test("should convert string to PascalCase", () => {
+      expect(toPascalCase("hello-world")).toBe("HelloWorld")
+      expect(toPascalCase("another_example")).toBe("AnotherExample")
     })
   })
 
@@ -50,6 +65,18 @@ describe("String", () => {
     test("should convert string to kebab-case", () => {
       expect(toKebabCase("HelloWorld")).toBe("hello-world")
       expect(toKebabCase("AnotherExample")).toBe("another-example")
+    })
+  })
+
+  describe("transformSize", () => {
+    test("should convert size", () => {
+      expect(transformSize("9xs", -1)).toBe("9xs")
+      expect(transformSize("sm", -1)).toBe("xs")
+      expect(transformSize("md", 3)).toBe("2xl")
+      expect(transformSize("lg", 0)).toBe("lg")
+      expect(transformSize("9xl", 1)).toBe("9xl")
+      expect(transformSize("md", 1, null)).toBe("normal")
+      expect(transformSize("lg", -2, null)).toBe("md")
     })
   })
 })

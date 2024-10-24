@@ -1,0 +1,39 @@
+---
+title: Select
+description: >-
+  `Select` is a component used for allowing a user to choose one option from a
+  list.
+package_name: "@yamada-ui/select"
+order: 4
+with_description: true
+tab: Accessibility
+---
+
+The `Select` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+
+## Keyboard Navigation
+
+| Key              | Description                                                                                                         | State |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`            | When the focus moves to the select box, it focuses on the first item.                                               | -     |
+| `ArrowUp`        | Focuses on the previous option that is not invalid. For the first item, focus on the last item that is not invalid. | -     |
+| `ArrowDown`      | Focuses on the next option that is not invalid. If last item, focus on the first item that is not invalid.          | -     |
+| `Space`, `Enter` | Activate the option in focus.                                                                                       | -     |
+| `Home`           | Focus and activate the first option that is not invalid.                                                            | -     |
+| `End`            | Focus and activate the last option that is not invalid.                                                             | -     |
+
+## ARIA Roles and Attributes
+
+| Component                         | Role and Attribute              | Usage                                                                                  |
+| --------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------- |
+| `Select`                          | `role="combobox"`               | Indicates that this is a combo box.                                                    |
+|                                   | `aria-label="Select an option"` | If `aria-label` is not set, `“Select an option”` will be set.                          |
+|                                   | `aria-activedescendant`         | If the list box option has focus, set the `id` of the currently selected option.       |
+|                                   | `aria-controls`                 | Sets the `id` of the associated listbox.                                               |
+|                                   | `aria-expanded`                 | Sets `“true”` if the panel of options is expanded, or `“false”` if it is collapsed.    |
+| `SelectList` <Tag>Internal</Tag>  | `role="listbox"`                | Indicates that this is a list box.                                                     |
+| `Option` <Tag>Internal</Tag>      | `role="option"`                 | Indicates that it is an option.                                                        |
+|                                   | `aria-checked`                  | Set to `“true”` if the option is selected, or `“false”` if the option is not selected. |
+|                                   | `aria-disabled`                 | Set to `“true”` if `isDisabled` is set.                                                |
+| `OptionGroup` <Tag>Internal</Tag> | `role="group"`                  | Indicates that the group is a group.                                                   |
+|                                   | `aria-label`                    | Sets the label displayed by the group.                                                 |

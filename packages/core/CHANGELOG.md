@@ -1,5 +1,19 @@
 # @yamada-ui/core
 
+## 1.15.3
+
+### Patch Changes
+
+- [#3141](https://github.com/yamada-ui/yamada-ui/pull/3141) [`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where an error occurred when setting `variant` or `size` that was not defined in `useComponentStyle`.
+
+- [#3202](https://github.com/yamada-ui/yamada-ui/pull/3202) [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated component prop types and refs.
+
+- [#3111](https://github.com/yamada-ui/yamada-ui/pull/3111) [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added detailed HTML and SVG element types.
+
+- Updated dependencies [[`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/portal@1.0.24
+
 ## 1.15.2
 
 ### Patch Changes

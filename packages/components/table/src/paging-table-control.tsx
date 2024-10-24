@@ -52,12 +52,14 @@ export const PagingTableControl = forwardRef<PagingTableControlProps, "div">(
         <Pagination
           colorScheme={colorScheme}
           size={size}
-          gridColumnEnd={3}
-          gridColumnStart={2}
           justifyContent="center"
           page={state.pagination.pageIndex + 1}
           total={totalPage}
           withEdges
+          containerProps={{
+            gridColumnEnd: 3,
+            gridColumnStart: 2,
+          }}
           onChange={(page) => setPageIndex(page - 1)}
           {...paginationProps}
         />

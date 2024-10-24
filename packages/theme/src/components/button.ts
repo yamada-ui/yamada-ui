@@ -78,6 +78,14 @@ export const Button: ComponentStyle<"Button"> = {
       px: 8,
       rounded: "lg",
     }),
+    "2xl": ({ theme: t }) => ({
+      fontSize: "xl",
+      h: 16,
+      lineHeight: get(t, "sizes.16"),
+      minW: 16,
+      px: 10,
+      rounded: "lg",
+    }),
   },
 
   variants: {

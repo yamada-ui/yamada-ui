@@ -8,7 +8,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         cursor: "not-allowed",
       },
     },
-    dots: { pointerEvents: "none" },
+    ellipsis: { pointerEvents: "none" },
     first: {},
     inner: {},
     item: {
@@ -39,79 +39,6 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     prev: {},
   },
 
-  sizes: {
-    xs: {
-      container: {
-        gap: "xs",
-      },
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        fontSize: "xs",
-        minH: 6,
-        minW: 6,
-        rounded: "sm",
-      },
-    },
-    sm: {
-      container: {
-        gap: "xs",
-      },
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        fontSize: "sm",
-        minH: 8,
-        minW: 8,
-        rounded: "md",
-      },
-    },
-    md: {
-      container: {
-        gap: "sm",
-      },
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        fontSize: "md",
-        minH: 10,
-        minW: 10,
-        rounded: "md",
-      },
-    },
-    lg: {
-      container: {
-        gap: "sm",
-      },
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        fontSize: "lg",
-        minH: 12,
-        minW: 12,
-        rounded: "md",
-      },
-    },
-    xl: {
-      container: {
-        gap: "md",
-      },
-      inner: {
-        gap: "md",
-      },
-      item: {
-        fontSize: "xl",
-        minH: 14,
-        minW: 14,
-        rounded: "lg",
-      },
-    },
-  },
-
   variants: {
     ghost: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       return {
@@ -136,7 +63,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     },
     outline: ({ colorScheme: c = "primary" }) => {
       return {
-        dots: {
+        ellipsis: {
           border: "0",
         },
         item: {
@@ -165,7 +92,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       }
     },
     solid: ({ colorScheme: c = "primary" }) => ({
-      dots: {
+      ellipsis: {
         border: "0",
       },
       item: {
@@ -197,10 +124,67 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       },
     }),
     unstyled: {
-      container: { gap: 0 },
       inner: { gap: 0 },
       item: { bg: "none", color: "inherit", minH: "auto", minW: "auto" },
       _ripple: { display: "none" },
+    },
+  },
+
+  sizes: {
+    xs: {
+      inner: {
+        gap: "xs",
+      },
+      item: {
+        fontSize: "xs",
+        minH: 6,
+        minW: 6,
+        rounded: "sm",
+      },
+    },
+    sm: {
+      inner: {
+        gap: "xs",
+      },
+      item: {
+        fontSize: "sm",
+        minH: 8,
+        minW: 8,
+        rounded: "md",
+      },
+    },
+    md: {
+      inner: {
+        gap: "sm",
+      },
+      item: {
+        fontSize: "md",
+        minH: 10,
+        minW: 10,
+        rounded: "md",
+      },
+    },
+    lg: {
+      inner: {
+        gap: "sm",
+      },
+      item: {
+        fontSize: "lg",
+        minH: 12,
+        minW: 12,
+        rounded: "md",
+      },
+    },
+    xl: {
+      inner: {
+        gap: "md",
+      },
+      item: {
+        fontSize: "xl",
+        minH: 14,
+        minW: 14,
+        rounded: "lg",
+      },
     },
   },
 

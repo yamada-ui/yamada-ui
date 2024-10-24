@@ -1,5 +1,11 @@
 import type { Meta } from "@storybook/react"
-import { Button, Dialog, Text, useDisclosure } from "@yamada-ui/react"
+import {
+  Button,
+  Dialog,
+  Text,
+  useDisclosure,
+  usePromiseDisclosure,
+} from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useDisclosure",
@@ -67,6 +73,48 @@ export const withChain = () => {
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
         このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
+      </Dialog>
+    </>
+  )
+}
+
+export const withPromise = () => {
+  const { isOpen, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+
+  const onClick = async () => {
+    try {
+      await onOpen()
+
+      console.log("あるじゃねえか、サタン!!!")
+      console.log("おめえはホントに世界の…")
+      console.log("救世主かもな!!!!")
+    } catch {
+      console.error("地球は滅亡しました")
+    }
+  }
+
+  return (
+    <>
+      <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
+      <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
+
+      <Button onClick={onClick}>わけない</Button>
+
+      <Dialog
+        size="2xl"
+        cancel="わけない"
+        header="ミスター・サタン"
+        isOpen={isOpen}
+        success="わける"
+        onCancel={onClose}
+        onClose={onClose}
+        onSuccess={onSuccess}
+      >
+        <Text>き、きさまらいいかげんにしろーーーっ!!!</Text>
+        <Text>さっさと協力しないかーーーっ!!!</Text>
+        <Text>
+          このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
+        </Text>
       </Dialog>
     </>
   )

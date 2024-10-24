@@ -3032,6 +3032,28 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/hooks/use-async-callback:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/loading':
+        specifier: workspace:*
+        version: link:../../components/loading
+      '@yamada-ui/use-processing':
+        specifier: workspace:*
+        version: link:../use-processing
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/hooks/use-boolean:
     devDependencies:
       clean-package:
@@ -3746,6 +3768,9 @@ importers:
       '@yamada-ui/use-animation':
         specifier: workspace:*
         version: link:../hooks/use-animation
+      '@yamada-ui/use-async-callback':
+        specifier: workspace:*
+        version: link:../hooks/use-async-callback
       '@yamada-ui/use-boolean':
         specifier: workspace:*
         version: link:../hooks/use-boolean
@@ -8788,7 +8813,7 @@ packages:
     engines: {node: '>= 10.0'}
 
   clean-package@2.2.0:
-    resolution: {integrity: sha512-vLv8kRqvh4smPDpqAYFPLEijTppAd/cfCz4yBcUGoVl/JKu6ZWKhlo+G/cAmwlSa29RudfBeuyiNEzas8bTwEQ==}
+    resolution: {integrity: sha512-vLv8kRqvh4smPDpqAYFPLEijTppAd/cfCz4yBcUGoVl/JKu6ZWKhlo+G/cAmwlSa29RudfBeuyiNEzas8bTwEQ==, tarball: https://registry.npmjs.org/clean-package/-/clean-package-2.2.0.tgz}
     hasBin: true
 
   clean-stack@2.2.0:
@@ -9597,15 +9622,15 @@ packages:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
 
   dot-prop@5.3.0:
-    resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
+    resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==, tarball: https://registry.npmjs.org/dot-prop/-/dot-prop-5.3.0.tgz}
     engines: {node: '>=8'}
 
   dot-prop@6.0.1:
-    resolution: {integrity: sha512-tE7ztYzXHIeyvc7N+hR3oi7FIbf/NIjVP9hmAt3yMXzrQ072/fpjGLx2GxNxGxUl5V73MEqYzioOMoVhGMJ5cA==}
+    resolution: {integrity: sha512-tE7ztYzXHIeyvc7N+hR3oi7FIbf/NIjVP9hmAt3yMXzrQ072/fpjGLx2GxNxGxUl5V73MEqYzioOMoVhGMJ5cA==, tarball: https://registry.npmjs.org/dot-prop/-/dot-prop-6.0.1.tgz}
     engines: {node: '>=10'}
 
   dot-prop@9.0.0:
-    resolution: {integrity: sha512-1gxPBJpI/pcjQhKgIU91II6Wkay+dLcN3M6rf2uwP8hRur3HtQXjVrdAK3sjC0piaEuxzMwjXChcETiJl47lAQ==}
+    resolution: {integrity: sha512-1gxPBJpI/pcjQhKgIU91II6Wkay+dLcN3M6rf2uwP8hRur3HtQXjVrdAK3sjC0piaEuxzMwjXChcETiJl47lAQ==, tarball: https://registry.npmjs.org/dot-prop/-/dot-prop-9.0.0.tgz}
     engines: {node: '>=18'}
 
   dotenv-expand@5.1.0:
@@ -11245,11 +11270,11 @@ packages:
     engines: {node: '>=0.12.0'}
 
   is-obj@1.0.1:
-    resolution: {integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==}
+    resolution: {integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==, tarball: https://registry.npmjs.org/is-obj/-/is-obj-1.0.1.tgz}
     engines: {node: '>=0.10.0'}
 
   is-obj@2.0.0:
-    resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
+    resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==, tarball: https://registry.npmjs.org/is-obj/-/is-obj-2.0.0.tgz}
     engines: {node: '>=8'}
 
   is-path-cwd@3.0.0:

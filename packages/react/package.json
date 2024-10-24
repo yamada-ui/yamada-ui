@@ -110,6 +110,7 @@
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/typography": "workspace:*",
     "@yamada-ui/use-animation": "workspace:*",
+    "@yamada-ui/use-async-callback": "workspace:*",
     "@yamada-ui/use-boolean": "workspace:*",
     "@yamada-ui/use-breakpoint": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",

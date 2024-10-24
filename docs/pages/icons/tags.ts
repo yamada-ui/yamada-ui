@@ -1904,6 +1904,17 @@ export const TAGS: { [key: string]: string[] } = {
   ],
   Calculator: ["count", "calculating machine"],
   Calendar: ["date", "month", "year", "event", "birthday", "birthdate"],
+  Calendar1: [
+    "date",
+    "month",
+    "year",
+    "event",
+    "single",
+    "singular",
+    "once",
+    "1",
+    "first",
+  ],
   CalendarArrowDown: [
     "date",
     "month",

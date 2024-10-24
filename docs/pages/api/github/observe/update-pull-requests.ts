@@ -329,7 +329,7 @@ export const updatePullRequests: APIHandler = async ({
 
   const pullRequests = await getPullRequests({ owner, repo })
 
-  for await (const pullRequest of pullRequests) {
+  for (const pullRequest of pullRequests) {
     const { draft, reviewers, user } = pullRequest
 
     if (isUndefined(user) || draft) continue

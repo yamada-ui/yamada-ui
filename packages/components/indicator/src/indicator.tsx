@@ -268,3 +268,6 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     </ui.div>
   )
 })
+
+Indicator.displayName = "Indicator"
+Indicator.__ui__ = "Indicator"

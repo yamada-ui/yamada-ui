@@ -6,6 +6,7 @@ import type { CSSUIObject, CSSUIProps } from "./css.types"
 import { ThemeContext } from "@emotion/react"
 import { flattenObject, isObject, merge } from "@yamada-ui/utils"
 import { useContext, useMemo } from "react"
+import { DEFAULT_VAR_PREFIX } from "../constant"
 import { styles } from "../styles"
 
 type Format<Y> = (name: Y, index: number) => string
@@ -16,21 +17,26 @@ const defaultFormat: Format<any> = (name, index) => `${name}-${index}`
 export const useCreateVars = <Y extends Dict, M extends keyof Y = keyof Y>(
   obj: Y,
   keys: M[] | readonly M[],
-  format: Format<M> = defaultFormat,
+  options?: CreateVarsOptions<M>,
 ) => {
   const theme = useContext(ThemeContext) as StyledTheme
 
   return useMemo(
-    () => createVars(obj, keys, format)(theme),
-    [obj, keys, format, theme],
+    () => createVars(obj, keys, options)(theme),
+    [obj, keys, options, theme],
   )
+}
+
+interface CreateVarsOptions<M> {
+  format?: Format<M>
+  transform?: boolean
 }
 
 export const createVars =
   <Y extends Dict, M extends keyof Y = keyof Y>(
     obj: Y,
     keys: M[] | readonly M[],
-    format: Format<M> = defaultFormat,
+    { format = defaultFormat, transform = false }: CreateVarsOptions<M> = {},
   ) =>
   (theme: StyledTheme): [Variable[], { [key in M]?: string }] => {
     const map = new Map<M, Variable>()
@@ -39,6 +45,7 @@ export const createVars =
     if (!theme.__breakpoints) return [[], result]
 
     const { isResponsive } = theme.__breakpoints
+    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
 
     const flattedObj = flattenObject(obj, {
       separator: "$$",
@@ -79,9 +86,18 @@ export const createVars =
 
         value = { base: undefined, ...additionalValue }
 
-        map.set(name, { name: formattedName, token, value })
+        map.set(name, {
+          name: formattedName,
+          token,
+          value,
+          __prefix: prefix,
+        })
 
-        result[name] = `$${formattedName}`
+        if (transform) {
+          result[name] = `var(--${prefix}-${formattedName})`
+        } else {
+          result[name] = `$${formattedName}`
+        }
       }
     })
 

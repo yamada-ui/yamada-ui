@@ -6,7 +6,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@yamada-ui/test"
-import { Tooltip } from "../src/tooltip"
+import { Tooltip } from "../src"
 
 describe("<Tooltip />", () => {
   test("should pass a11y test", async () => {

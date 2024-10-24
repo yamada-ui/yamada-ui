@@ -13,7 +13,7 @@ export const Button: ComponentStyle<"Button"> = {
   baseStyle: {
     cursor: "pointer",
     fontWeight: "semibold",
-    rounded: "md",
+
     transitionDuration: "slower",
     transitionProperty: "common",
     _disabled: {
@@ -44,6 +44,7 @@ export const Button: ComponentStyle<"Button"> = {
       lineHeight: get(t, "sizes.6"),
       minW: 6,
       px: 2,
+      rounded: "sm",
     }),
     sm: ({ theme: t }) => ({
       fontSize: "sm",
@@ -51,6 +52,7 @@ export const Button: ComponentStyle<"Button"> = {
       lineHeight: get(t, "sizes.8"),
       minW: 8,
       px: 3,
+      rounded: "md",
     }),
     md: ({ theme: t }) => ({
       fontSize: "md",
@@ -58,6 +60,7 @@ export const Button: ComponentStyle<"Button"> = {
       lineHeight: get(t, "sizes.10"),
       minW: 10,
       px: 4,
+      rounded: "md",
     }),
     lg: ({ theme: t }) => ({
       fontSize: "lg",
@@ -65,6 +68,23 @@ export const Button: ComponentStyle<"Button"> = {
       lineHeight: get(t, "sizes.12"),
       minW: 12,
       px: 6,
+      rounded: "md",
+    }),
+    xl: ({ theme: t }) => ({
+      fontSize: "xl",
+      h: 14,
+      lineHeight: get(t, "sizes.14"),
+      minW: 14,
+      px: 8,
+      rounded: "lg",
+    }),
+    "2xl": ({ theme: t }) => ({
+      fontSize: "xl",
+      h: 16,
+      lineHeight: get(t, "sizes.16"),
+      minW: 16,
+      px: 10,
+      rounded: "lg",
     }),
   },
 

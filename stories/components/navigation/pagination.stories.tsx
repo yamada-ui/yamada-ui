@@ -33,6 +33,8 @@ export const withVariant: Story = () => {
   return (
     <>
       <Pagination variant="solid" total={10} />
+      <Pagination variant="subtle" total={10} />
+      <Pagination variant="surface" total={10} />
       <Pagination variant="outline" total={10} />
       <Pagination variant="ghost" total={10} />
       <Pagination variant="unstyled" total={10} />

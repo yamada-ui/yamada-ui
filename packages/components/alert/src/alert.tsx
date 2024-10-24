@@ -13,16 +13,16 @@ import {
   useComponentMultiStyle,
   useTheme,
 } from "@yamada-ui/core"
-import { CheckIcon, InfoIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
+import { CircleCheckBig, Info, TriangleAlert } from "@yamada-ui/lucide"
 import { createContext, cx } from "@yamada-ui/utils"
 
 const defaultStatuses = {
-  error: { colorScheme: "danger", icon: WarningIcon },
-  info: { colorScheme: "info", icon: InfoIcon },
+  error: { colorScheme: "danger", icon: TriangleAlert },
+  info: { colorScheme: "info", icon: Info },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CheckIcon },
-  warning: { colorScheme: "warning", icon: WarningIcon },
+  success: { colorScheme: "success", icon: CircleCheckBig },
+  warning: { colorScheme: "warning", icon: TriangleAlert },
 } as const
 
 export type Status = keyof typeof defaultStatuses

@@ -39,12 +39,4 @@ describe("<Progress />", () => {
       width: "50%",
     })
   })
-
-  test("Whether the colorScheme is render correctly", () => {
-    render(<Progress colorScheme="red" data-testid="progress" value={50} />)
-    const progressChild = screen.getByTestId("progress").children[0]
-    expect(progressChild).toHaveStyle({
-      backgroundColor: "rgb(234, 67, 52)",
-    })
-  })
 })

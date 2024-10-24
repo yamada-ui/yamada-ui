@@ -31,7 +31,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useId, useRef } from "react"
 
 export type PopoverProperty = (typeof popoverProperties)[number]
 
@@ -182,7 +182,9 @@ interface PopoverContext
     PopoverOptions,
     "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
   > {
+  describedbyId: string
   forceUpdate: () => undefined | void
+  labelledbyId: string
   styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
@@ -223,6 +225,9 @@ export const Popover: FC<PopoverProps> = (props) => {
     trigger = "click",
     ...rest
   } = omitThemeProps(mergedProps)
+
+  const labelledbyId = useId()
+  const describedbyId = useId()
 
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
 
@@ -447,9 +452,11 @@ export const Popover: FC<PopoverProps> = (props) => {
       value={{
         animation,
         closeOnButton,
+        describedbyId,
         duration,
         forceUpdate,
         isOpen,
+        labelledbyId,
         styles,
         getAnchorProps,
         getPopoverProps,

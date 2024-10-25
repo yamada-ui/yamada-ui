@@ -15,3 +15,6 @@ export const Center = ui("div", {
     justifyContent: "center",
   },
 })
+
+Center.displayName = "Center"
+Center.__ui__ = "Center"

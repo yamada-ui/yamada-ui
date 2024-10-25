@@ -1,22 +1,40 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { FilterDescendant } from "@yamada-ui/use-descendant"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
-import { cx } from "@yamada-ui/utils"
-import { useRef } from "react"
-import { useTabPanelContext, useTabsContext } from "./tabs-context"
+import { cx, mergeRefs } from "@yamada-ui/utils"
+import { useId, useRef } from "react"
+import {
+  useTabPanelContext,
+  useTabsContext,
+  useTabsDescendant,
+  useTabsDescendantsContext,
+} from "./tabs-context"
 
 export interface TabPanelProps extends HTMLUIProps {}
 
 export const TabPanel = forwardRef<TabPanelProps, "div">(
-  ({ className, children, ...rest }, ref) => {
-    const {
-      isLazy: enabled,
-      lazyBehavior: mode,
-      styles,
-      tabIds,
-      tabPanelIds,
-    } = useTabsContext()
+  ({ id, className, children, ...rest }, ref) => {
+    const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
+
+    const uuid = useId()
+
+    id ??= uuid
+
     const { index, isSelected } = useTabPanelContext()
+
+    const descendants = useTabsDescendantsContext()
+
+    const { register } = useTabsDescendant({
+      disabled: !isSelected,
+    })
+
+    const filter: FilterDescendant<HTMLButtonElement | HTMLDivElement> = (
+      descendant,
+    ) => descendant.node.getAttribute("role") === "tab"
+    const tabDescendant = descendants.value(index, filter)
+
+    const tabId = tabDescendant?.node.id
 
     const hasBeenSelected = useRef<boolean>(false)
 
@@ -31,18 +49,15 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
 
     const css: CSSUIObject = { ...styles.tabPanel }
 
-    const panelId = tabPanelIds[index]
-    const tabId = tabIds[index]
-
     return (
       <ui.div
-        id={panelId}
-        ref={ref}
+        id={id}
+        ref={mergeRefs(register, ref)}
         className={cx("ui-tabs__panel", className)}
+        aria-labelledby={tabId}
         role="tabpanel"
         __css={css}
         {...rest}
-        aria-labelledby={tabId}
         hidden={!isSelected}
       >
         {shouldRenderChildren ? children : null}

@@ -9,7 +9,7 @@ export const {
   useDescendant: useTabsDescendant,
   useDescendants,
   useDescendantsContext: useTabsDescendantsContext,
-} = createDescendant<HTMLButtonElement>()
+} = createDescendant<HTMLButtonElement | HTMLDivElement>()
 
 interface TabsContext
   extends Omit<TabsOptions, "defaultIndex" | "index" | "onChange"> {
@@ -19,8 +19,6 @@ interface TabsContext
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setSelectedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
-  tabIds: string[]
-  tabPanelIds: string[]
 }
 
 export const [TabsProvider, useTabsContext] = createContext<TabsContext>({

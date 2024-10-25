@@ -1,11 +1,17 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { UseClickableProps } from "@yamada-ui/use-clickable"
+import type { FilterDescendant } from "@yamada-ui/use-descendant"
 import type { Merge } from "@yamada-ui/utils"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import { useTabsContext, useTabsDescendant } from "./tabs-context"
+import { useId } from "react"
+import {
+  useTabsContext,
+  useTabsDescendant,
+  useTabsDescendantsContext,
+} from "./tabs-context"
 
 export interface TabProps
   extends Merge<UseClickableProps<HTMLButtonElement>, HTMLUIProps<"button">> {}
@@ -13,6 +19,7 @@ export interface TabProps
 export const Tab = forwardRef<TabProps, "button">(
   (
     {
+      id,
       className,
       children,
       clickOnEnter,
@@ -23,6 +30,10 @@ export const Tab = forwardRef<TabProps, "button">(
     },
     ref,
   ) => {
+    const uuid = useId()
+
+    id ??= uuid
+
     const {
       disableRipple,
       isManual,
@@ -30,16 +41,20 @@ export const Tab = forwardRef<TabProps, "button">(
       setFocusedIndex,
       setSelectedIndex,
       styles,
-      tabIds,
-      tabPanelIds,
     } = useTabsContext()
 
     const { index, register } = useTabsDescendant({
       disabled: isDisabled && !isFocusable,
     })
 
-    const panelId = tabPanelIds[index]
-    const tabId = tabIds[index]
+    const descendants = useTabsDescendantsContext()
+
+    const filter: FilterDescendant<HTMLButtonElement | HTMLDivElement> = (
+      descendant,
+    ) => descendant.node.getAttribute("role") === "tabpanel"
+    const tabpanelDescendant = descendants.value(index, filter)
+
+    const tabpanelId = tabpanelDescendant?.node.id
 
     const isSelected = index === selectedIndex
 
@@ -74,14 +89,14 @@ export const Tab = forwardRef<TabProps, "button">(
 
     return (
       <ui.button
-        id={tabId}
+        id={id}
         className={cx("ui-tabs__tab", className)}
         role="tab"
         __css={css}
         {...props}
+        aria-controls={tabpanelId}
         {...rest}
         type="button"
-        aria-controls={panelId}
         aria-selected={ariaAttr(isSelected)}
         tabIndex={isSelected ? 0 : -1}
         onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}

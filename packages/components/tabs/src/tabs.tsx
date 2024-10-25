@@ -10,7 +10,7 @@ import {
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, findChild, getValidChildren, pickChildren } from "@yamada-ui/utils"
-import { useEffect, useId, useState } from "react"
+import { useEffect, useState } from "react"
 import { Tab } from "./tab"
 import { TabList } from "./tab-list"
 import { TabPanel } from "./tab-panel"
@@ -145,16 +145,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
 
     const css: CSSUIObject = { w: "100%", ...styles.container }
 
-    const uuid = useId()
-
-    const tabPanelIds = cloneTabPanels.map(
-      (panel, index) => panel.props.id ?? `${uuid}-${index}-tabpanel`,
-    )
-
-    const tabIds = cloneTabs.map(
-      (tab, index) => tab.props.id ?? `${uuid}-${index}-tab`,
-    )
-
     return (
       <DescendantsContextProvider value={descendants}>
         <TabsProvider
@@ -171,8 +161,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
             setFocusedIndex,
             setSelectedIndex,
             styles,
-            tabIds,
-            tabPanelIds,
             tabListProps,
             tabPanelsProps,
           }}

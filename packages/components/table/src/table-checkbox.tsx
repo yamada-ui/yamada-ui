@@ -75,13 +75,14 @@ export const TableTotalCheckbox = forwardRef(
       <Center>
         <Checkbox
           ref={isDisabled ? undefined : ref}
-          tabIndex={tabIndex}
-          inputProps={{ "aria-label": "Select all row" }}
-          {...{ gap: 0, ...rest }}
+          gap={0}
           isChecked={isAllChecked || isChecked}
           isDisabled={isDisabled}
+          tabIndex={tabIndex}
+          inputProps={{ "aria-label": "Select all row" }}
           {...(!isAllChecked ? { isIndeterminate } : {})}
           onChange={handlerAll(rest.onChange, onChange)}
+          {...rest}
         />
       </Center>
     )

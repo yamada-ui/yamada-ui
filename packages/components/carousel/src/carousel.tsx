@@ -233,17 +233,14 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       innerProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
-
     const computedWithControls = useValue(withControls)
     const computedWithIndicators = useValue(withIndicators)
-
-    const { carouselId, children, getContainerProps, getSlidesProps, ...rest } =
+    const { id, children, getContainerProps, getSlidesProps, ...rest } =
       useCarousel({
         ...computedProps,
       })
 
     const validChildren = getValidChildren(children)
-
     const customCarouselControlPrev = findChild(
       validChildren,
       CarouselControlPrev,
@@ -264,7 +261,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       CarouselIndicators,
       CarouselSlide,
     )
-
     const cloneSlideChildren = slideChildren.map((child, index) =>
       cloneElement(child, { index }),
     )
@@ -279,8 +275,8 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     minH ??= minHeight
 
     return (
-      <CarouselProvider value={{ id: carouselId, styles, ...rest }}>
-        <ui.div
+      <CarouselProvider value={{ id, styles, ...rest }}>
+        <ui.section
           className={cx("ui-carousel", className)}
           __css={css}
           {...getContainerProps({}, ref)}
@@ -309,7 +305,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
             ) : null)}
 
           {otherChildren}
-        </ui.div>
+        </ui.section>
       </CarouselProvider>
     )
   },

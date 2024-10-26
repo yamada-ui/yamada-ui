@@ -7,6 +7,8 @@ with_description: true
 tab: Accessibility
 ---
 
+The `ColorPicker` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+
 Setting an `aria-label` on the `ColorPicker` allows it to be read by screen readers.
 
 ```tsx live=false
@@ -15,9 +17,9 @@ Setting an `aria-label` on the `ColorPicker` allows it to be read by screen read
 
 ## Keyboard Navigation
 
-| Key                    | Description                                                       | State |
-| ---------------------- | ----------------------------------------------------------------- | ----- |
-| `Tab`, `Shift` + `Tab` | Focuses the non-disabled `ColorPicker` and expands the `Popover`. | -     |
+| Key                    | Description                              | State |
+| ---------------------- | ---------------------------------------- | ----- |
+| `Tab`, `Shift` + `Tab` | Focus on the element and open the popup. | -     |
 
 ## ARIA Roles and Attributes
 

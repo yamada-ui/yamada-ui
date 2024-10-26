@@ -2,4 +2,4 @@
 "@yamada-ui/layouts": patch
 ---
 
-Added displayName and **ui** to layout components
+Added `displayName` and `__ui__` to layout components.

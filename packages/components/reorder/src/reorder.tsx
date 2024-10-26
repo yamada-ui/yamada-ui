@@ -197,3 +197,4 @@ export const Reorder = forwardRef(
 } & ComponentArgs
 
 Reorder.displayName = "Reorder"
+Reorder.__ui__ = "Reorder"

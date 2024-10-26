@@ -6,6 +6,7 @@ import type {
 } from "@octokit/webhooks"
 import type { NextApiRequest } from "next"
 import { Octokit } from "@octokit/rest"
+import { toCamelCase } from "@yamada-ui/utils"
 import crypto from "crypto"
 import { wait } from "./async"
 
@@ -46,9 +47,6 @@ export const verifySignature = ({ body, headers }: NextApiRequest) => {
 
   if (signature !== digest) throw new Error("Invalid signature")
 }
-
-const toCamelCase = (value: {} & string) =>
-  value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
 export interface Constant {
   [key: string]: any

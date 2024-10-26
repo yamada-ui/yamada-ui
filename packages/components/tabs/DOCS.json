@@ -37,7 +37,7 @@
       "required": false
     },
     "ref": {
-      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLElement | null) => void)\n  | RefObject<HTMLElement>",
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLButtonElement | null) => void)\n  | RefObject<HTMLButtonElement>",
       "description": "The ref for the element.",
       "required": false
     }

@@ -1,9 +1,5 @@
 import { act } from "@testing-library/react"
 
-export async function queue() {
-  await act(async () => Promise.resolve())
-}
-
 export async function nextTick() {
   await act(
     async () =>

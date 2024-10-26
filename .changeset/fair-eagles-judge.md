@@ -2,4 +2,4 @@
 "@yamada-ui/carousel": minor
 ---
 
-add roles and descriptions
+Added roles and descriptions to Carousel components.

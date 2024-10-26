@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/table": major
+"@yamada-ui/table": patch
 ---
 
-Fix pagination layout in PagingTable
+Fixed pagination layout in `PagingTable`.

@@ -130,6 +130,9 @@ export const Stack = forwardRef<StackProps, "div">(
   },
 )
 
+Stack.displayName = "Stack"
+Stack.__ui__ = "Stack"
+
 /**
  * `HStack` is a component that groups elements and provides space between child elements.
  *
@@ -146,6 +149,9 @@ export const HStack = forwardRef<StackProps, "div">(
     />
   ),
 )
+
+HStack.displayName = "HStack"
+HStack.__ui__ = "HStack"
 
 /**
  * `VStack` is a component that groups elements and provides space between child elements.
@@ -164,6 +170,9 @@ export const VStack = forwardRef<StackProps, "div">(
     />
   ),
 )
+
+VStack.displayName = "VStack"
+VStack.__ui__ = "VStack"
 
 interface ZStackOptions {
   /**
@@ -364,3 +373,6 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     )
   },
 )
+
+ZStack.displayName = "ZStack"
+ZStack.__ui__ = "ZStack"

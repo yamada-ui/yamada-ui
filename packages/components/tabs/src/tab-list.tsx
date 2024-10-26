@@ -3,16 +3,14 @@ import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import { useCallback } from "react"
-import { useTabsContext, useTabsDescendantsContext } from "./tabs-context"
+import { useTabDescendantsContext, useTabsContext } from "./tabs-context"
 
 export interface TabListProps extends HTMLUIProps {}
 
 export const TabList = forwardRef<TabListProps, "div">(
   ({ className, ...rest }, ref) => {
     const { focusedIndex, orientation, styles, tabListProps } = useTabsContext()
-
-    const descendants = useTabsDescendantsContext()
-
+    const descendants = useTabDescendantsContext()
     const isVertical = orientation === "vertical"
 
     const onNext = useCallback(() => {

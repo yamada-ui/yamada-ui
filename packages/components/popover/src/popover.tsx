@@ -182,6 +182,7 @@ interface PopoverContext
     PopoverOptions,
     "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
   > {
+  id: string
   describedbyId: string
   forceUpdate: () => undefined | void
   labelledbyId: string
@@ -225,36 +226,28 @@ export const Popover: FC<PopoverProps> = (props) => {
     trigger = "click",
     ...rest
   } = omitThemeProps(mergedProps)
-
-  const popoverId = useId()
+  const id = useId()
   const labelledbyId = useId()
   const describedbyId = useId()
-
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
-
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
-
   const { present, onAnimationComplete } = useAnimationObserver({
     ref: popoverRef,
     isOpen,
   })
-
   const openTimeout = useRef<number | undefined>(undefined)
   const closeTimeout = useRef<number | undefined>(undefined)
-
   const isHoveringRef = useRef(false)
-
   const hasBeenOpened = useRef(false)
-
-  if (isOpen) hasBeenOpened.current = true
-
   const { forceUpdate, referenceRef, transformOrigin, getPopperProps } =
     usePopper({
       ...rest,
       enabled: isOpen,
     })
+
+  if (isOpen) hasBeenOpened.current = true
 
   useEffect(() => {
     return () => {
@@ -296,13 +289,17 @@ export const Popover: FC<PopoverProps> = (props) => {
   > = useCallback(
     (props = {}, ref = null) => {
       const popoverProps: MotionProps & RefAttributes<any> = {
+        id,
+        "aria-describedby": describedbyId,
+        "aria-hidden": !isOpen,
+        "aria-labelledby": labelledbyId,
+        role: "dialog",
         ...props,
         ref: mergeRefs(popoverRef, ref),
         style: {
           ...props.style,
           transformOrigin,
         },
-        "aria-controls": popoverId,
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
         onBlur: handlerAll(props.onBlur, (ev) => {
@@ -349,7 +346,9 @@ export const Popover: FC<PopoverProps> = (props) => {
       transformOrigin,
       trigger,
       relatedRef,
-      popoverId,
+      id,
+      labelledbyId,
+      describedbyId,
     ],
   )
 
@@ -363,9 +362,11 @@ export const Popover: FC<PopoverProps> = (props) => {
   const getTriggerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const triggerProps: HTMLUIPropsWithRef = {
+        "aria-controls": isOpen ? id : undefined,
+        "aria-expanded": isOpen,
+        role: "button",
         ...props,
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
-        "aria-controls": isOpen ? "true" : undefined,
       }
 
       if (trigger === "click") {
@@ -438,6 +439,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       onToggle,
       openDelay,
       trigger,
+      id,
     ],
   )
 
@@ -454,6 +456,7 @@ export const Popover: FC<PopoverProps> = (props) => {
   return (
     <PopoverProvider
       value={{
+        id,
         animation,
         closeOnButton,
         describedbyId,

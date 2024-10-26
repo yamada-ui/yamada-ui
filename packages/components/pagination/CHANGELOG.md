@@ -1,5 +1,21 @@
 # @yamada-ui/pagination
 
+## 1.1.0
+
+### Minor Changes
+
+- [#3193](https://github.com/yamada-ui/yamada-ui/pull/3193) [`e4f8212`](https://github.com/yamada-ui/yamada-ui/commit/e4f8212ecbb2702673c82696870d89dc01473cb4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated prop types and forwarding refs.
+
+### Patch Changes
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/icon@1.1.9
+  - @yamada-ui/ripple@1.0.41
+  - @yamada-ui/use-value@1.1.28
+  - @yamada-ui/use-controllable-state@1.0.23
+
 ## 1.0.42
 
 ### Patch Changes

@@ -27,7 +27,13 @@ export const useRatingItem = ({
     setValue,
     formControlProps,
   } = useRatingContext()
-  const { disabled, readOnly } = formControlProps
+  const {
+    "aria-disabled": ariaDisabled,
+    "aria-readonly": _ariaReadOnly,
+    disabled,
+    readOnly,
+    ...omittedFormControlProps
+  } = formControlProps
   const [isFocused, setFocused] = useState<boolean>(false)
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const isActive = value === resolvedValue
@@ -81,9 +87,10 @@ export const useRatingItem = ({
       return {
         ref,
         htmlFor: `${id}-${groupValue}-${value}`,
-        ...formControlProps,
+        ...omittedFormControlProps,
         ...props,
         "data-active": dataAttr(isActive),
+        "data-disabled": dataAttr(disabled),
         "data-filled": dataAttr(isFilled),
         "data-focus": dataAttr(isFocused),
         "data-focus-visible": dataAttr(isFocused && isFocusVisible),
@@ -93,7 +100,8 @@ export const useRatingItem = ({
       }
     },
     [
-      formControlProps,
+      disabled,
+      omittedFormControlProps,
       fractionValue,
       groupValue,
       id,
@@ -111,8 +119,11 @@ export const useRatingItem = ({
     (props = {}, ref = null) => {
       return {
         ref,
+        "aria-disabled": ariaDisabled,
         "aria-label": `${value}`,
-        ...formControlProps,
+        disabled,
+        readOnly,
+        ...omittedFormControlProps,
         ...props,
         id: `${id}-${groupValue}-${value}`,
         type: "radio",
@@ -142,8 +153,11 @@ export const useRatingItem = ({
       }
     },
     [
+      ariaDisabled,
+      disabled,
+      readOnly,
       value,
-      formControlProps,
+      omittedFormControlProps,
       id,
       groupValue,
       name,

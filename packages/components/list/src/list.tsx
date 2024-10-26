@@ -89,13 +89,22 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
   )
 })
 
+List.displayName = "List"
+List.__ui__ = "List"
+
 export const DiscList = forwardRef<ListProps, "ul">(({ ...rest }, ref) => {
   return <List ref={ref} as="ul" styleType="disc" {...rest} />
 })
 
+DiscList.displayName = "DiscList"
+DiscList.__ui__ = "DiscList"
+
 export const DecimalList = forwardRef<ListProps, "ol">(({ ...rest }, ref) => {
   return <List ref={ref} as="ol" ms="1.2em" styleType="decimal" {...rest} />
 })
+
+DecimalList.displayName = "DecimalList"
+DecimalList.__ui__ = "DecimalList"
 
 export interface ListItemProps extends HTMLUIProps<"li"> {}
 
@@ -116,6 +125,9 @@ export const ListItem = forwardRef<ListItemProps, "li">(
   },
 )
 
+ListItem.displayName = "ListItem"
+ListItem.__ui__ = "ListItem"
+
 export interface ListIconProps extends IconProps {}
 
 export const ListIcon = forwardRef<ListIconProps, "svg">(
@@ -135,3 +147,6 @@ export const ListIcon = forwardRef<ListIconProps, "svg">(
     )
   },
 )
+
+ListIcon.displayName = "ListIcon"
+ListIcon.__ui__ = "ListIcon"

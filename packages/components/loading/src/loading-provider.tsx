@@ -8,6 +8,7 @@ import type {
 import type { MotionVariants } from "@yamada-ui/motion"
 import type {
   FC,
+  ForwardedRef,
   MutableRefObject,
   PropsWithChildren,
   ReactElement,
@@ -27,6 +28,7 @@ import {
 import {
   createContext,
   createRef,
+  forwardRef,
   memo,
   useContext,
   useMemo,
@@ -163,14 +165,18 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
         controlRefs={screenRefs}
         {...screen}
         component={
-          screen?.component ?? ((props) => <ScreenComponent {...props} />)
+          screen?.component ??
+          ((props, ref) => <ScreenComponent ref={ref} {...props} />)
         }
       />
 
       <Controller
         controlRefs={pageRefs}
         {...page}
-        component={page?.component ?? ((props) => <PageComponent {...props} />)}
+        component={
+          page?.component ??
+          ((props, ref) => <PageComponent ref={ref} {...props} />)
+        }
       />
 
       <Controller
@@ -179,7 +185,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
         blockScrollOnMount={background?.blockScrollOnMount ?? false}
         component={
           background?.component ??
-          ((props) => <BackgroundComponent {...props} />)
+          ((props, ref) => <BackgroundComponent ref={ref} {...props} />)
         }
       />
 
@@ -303,16 +309,21 @@ const Controller: FC<ControllerProps> = ({
 }
 
 interface RenderProps extends LoadingComponentProps {
-  component?: (props: LoadingComponentProps) => ReactNode
+  component?: (
+    props: LoadingComponentProps,
+    ref: ForwardedRef<any>,
+  ) => ReactNode
 }
 
-const Render: FC<RenderProps> = ({ component, ...props }) => {
+const Render = forwardRef<any, RenderProps>(({ component, ...props }, ref) => {
   if (typeof component === "function") {
-    return component(props)
+    return component(props, ref)
   } else {
     return null
   }
-}
+})
+
+Render.displayName = "Render"
 
 interface MessageProps extends HTMLUIProps<"p"> {
   message: ReactNode
@@ -382,111 +393,120 @@ const getMotionProps = (
   variants: getVariants(type),
 })
 
-const ScreenComponent: FC<LoadingComponentProps> = memo(
-  ({ duration, icon, initialState, message, text, onFinish }) => {
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column",
-      gap: "fallback(2, 0.5rem)",
-      justifyContent: "center",
-      maxW: "24rem",
-    }
+const ScreenComponent = memo(
+  forwardRef<HTMLDivElement, LoadingComponentProps>(
+    ({ duration, icon, initialState, message, text, onFinish }, ref) => {
+      const css: CSSUIObject = {
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+        gap: "fallback(2, 0.5rem)",
+        justifyContent: "center",
+        maxW: "24rem",
+      }
 
-    useTimeout(onFinish, duration)
+      useTimeout(onFinish, duration)
 
-    return (
-      <motion.div
-        className="ui-loading-screen"
-        {...getMotionProps(initialState)}
-        __css={getOverlayStyle()}
-      >
-        <ui.div __css={css}>
-          <Loading fontSize="6xl" {...icon} />
-          <Message lineClamp={3} message={message} {...text} />
-        </ui.div>
-      </motion.div>
-    )
-  },
+      return (
+        <motion.div
+          ref={ref}
+          className="ui-loading-screen"
+          {...getMotionProps(initialState)}
+          __css={getOverlayStyle()}
+        >
+          <ui.div __css={css}>
+            <Loading fontSize="6xl" {...icon} />
+            <Message lineClamp={3} message={message} {...text} />
+          </ui.div>
+        </motion.div>
+      )
+    },
+  ),
 )
 
 ScreenComponent.displayName = "ScreenComponent"
 
-const PageComponent: FC<LoadingComponentProps> = memo(
-  ({ duration, icon, initialState, message, text, onFinish }) => {
-    const css: CSSUIObject = {
-      alignItems: "center",
-      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
-      boxShadow: [
-        "fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))",
-        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
-      ],
-      display: "flex",
-      flexDirection: "column",
-      gap: "fallback(2, 0.5rem)",
-      justifyContent: "center",
-      maxW: "24rem",
-      p: "fallback(4, 1rem)",
-      rounded: "fallback(md, 0.375rem)",
-    }
+const PageComponent = memo(
+  forwardRef<HTMLDivElement, LoadingComponentProps>(
+    ({ duration, icon, initialState, message, text, onFinish }, ref) => {
+      const css: CSSUIObject = {
+        alignItems: "center",
+        bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
+        boxShadow: [
+          "fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))",
+          "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
+        ],
+        display: "flex",
+        flexDirection: "column",
+        gap: "fallback(2, 0.5rem)",
+        justifyContent: "center",
+        maxW: "24rem",
+        p: "fallback(4, 1rem)",
+        rounded: "fallback(md, 0.375rem)",
+      }
 
-    useTimeout(onFinish, duration)
+      useTimeout(onFinish, duration)
 
-    return (
-      <motion.div
-        className="ui-loading-page"
-        {...getMotionProps(initialState)}
-        __css={getOverlayStyle("transparent")}
-      >
+      return (
         <motion.div
-          className="ui-loading-page__inner"
-          {...getMotionProps(initialState, "scaleFade")}
-          __css={css}
+          ref={ref}
+          className="ui-loading-page"
+          {...getMotionProps(initialState)}
+          __css={getOverlayStyle("transparent")}
         >
-          <Loading fontSize="6xl" {...icon} />
-          <Message lineClamp={3} message={message} {...text} />
+          <motion.div
+            className="ui-loading-page__inner"
+            {...getMotionProps(initialState, "scaleFade")}
+            __css={css}
+          >
+            <Loading fontSize="6xl" {...icon} />
+            <Message lineClamp={3} message={message} {...text} />
+          </motion.div>
         </motion.div>
-      </motion.div>
-    )
-  },
+      )
+    },
+  ),
 )
 
 PageComponent.displayName = "PageComponent"
 
-const BackgroundComponent: FC<LoadingComponentProps> = memo(
-  ({ duration, icon, initialState, message, text, onFinish }) => {
-    const css: CSSUIObject = {
-      alignItems: "center",
-      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
-      bottom: "fallback(4, 1rem)",
-      boxShadow: [
-        "fallback(3xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25))",
-        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
-      ],
-      display: "flex",
-      gap: "fallback(2, 0.5rem)",
-      justifyContent: "center",
-      maxW: "20rem",
-      p: "fallback(2, 0.5rem)",
-      position: "fixed",
-      right: "fallback(4, 1rem)",
-      rounded: "fallback(md, 0.375rem)",
-      zIndex: "fallback(beerus, 9999)",
-    }
+const BackgroundComponent = memo(
+  forwardRef<HTMLDivElement, LoadingComponentProps>(
+    ({ duration, icon, initialState, message, text, onFinish }, ref) => {
+      const css: CSSUIObject = {
+        alignItems: "center",
+        bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
+        bottom: "fallback(4, 1rem)",
+        boxShadow: [
+          "fallback(3xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25))",
+          "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
+        ],
+        display: "flex",
+        gap: "fallback(2, 0.5rem)",
+        justifyContent: "center",
+        maxW: "20rem",
+        p: "fallback(2, 0.5rem)",
+        position: "fixed",
+        right: "fallback(4, 1rem)",
+        rounded: "fallback(md, 0.375rem)",
+        zIndex: "fallback(beerus, 9999)",
+      }
 
-    useTimeout(onFinish, duration)
+      useTimeout(onFinish, duration)
 
-    return (
-      <motion.div
-        className="ui-loading-background"
-        {...getMotionProps(initialState, "scaleFade")}
-        __css={css}
-      >
-        <Loading fontSize="xl" {...icon} />
-        <Message fontSize="sm" lineClamp={1} message={message} {...text} />
-      </motion.div>
-    )
-  },
+      return (
+        <motion.div
+          ref={ref}
+          className="ui-loading-background"
+          {...getMotionProps(initialState, "scaleFade")}
+          __css={css}
+        >
+          <Loading fontSize="xl" {...icon} />
+          <Message fontSize="sm" lineClamp={1} message={message} {...text} />
+        </motion.div>
+      )
+    },
+  ),
 )
 
 BackgroundComponent.displayName = "BackgroundComponent"

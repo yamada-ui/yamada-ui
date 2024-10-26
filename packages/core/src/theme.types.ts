@@ -5,7 +5,7 @@ import type {
   MotionConfigProps,
   Variants,
 } from "framer-motion"
-import type { FC, ReactNode, RefObject } from "react"
+import type { FC, ForwardedRef, ReactNode, RefObject } from "react"
 import type { HTMLUIProps } from "./components"
 import type {
   AnalyzeBreakpointsReturn,
@@ -276,7 +276,10 @@ export interface LoadingConfigOptions {
   /**
    * The custom loading component to use.
    */
-  component?: (props: LoadingComponentProps) => ReactNode
+  component?: (
+    props: LoadingComponentProps,
+    ref: ForwardedRef<any>,
+  ) => ReactNode
   /**
    * The `ref` to the component where the portal will be attached to.
    */

@@ -20,8 +20,8 @@ import {
   dataAttr,
   handlerAll,
   mergeRefs,
-  pickObject,
   runIfFunc,
+  splitObject,
 } from "@yamada-ui/utils"
 import { useCallback, useId, useRef, useState } from "react"
 import { RatingGroup } from "./rating-group"
@@ -136,10 +136,14 @@ export const useRating = ({
   itemProps,
   onChange: onChangeProp,
   onHover,
+  onMouseEnter: onMouseEnterProp,
+  onMouseLeave: onMouseLeaveProp,
+  onMouseMove: onMouseMoveProp,
+  onTouchEnd: onTouchEndProp,
+  onTouchStart: onTouchStartProp,
   ...props
 }: UseRatingProps) => {
   let { id, ...rest } = useFormControlProps(props)
-  const { disabled, readOnly } = rest
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
@@ -154,10 +158,11 @@ export const useRating = ({
   id ??= uuid
   name ??= `rating-${id}`
 
-  const { "aria-readonly": _isReadOnly, ...formControlProps } = pickObject(
+  const [formControlProps, containerProps] = splitObject(
     rest,
     formControlProperties,
   )
+  const { disabled, readOnly, ...omittedFormControlProps } = formControlProps
 
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
@@ -231,35 +236,45 @@ export const useRating = ({
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
-      ...rest,
+      "aria-label": `${value} Stars`,
+      role: "radiogroup",
+      ...omittedFormControlProps,
+      ...containerProps,
       ...props,
       id,
       onMouseEnter: handlerAll(
         onMouseEnter,
         props.onMouseEnter,
-        rest.onMouseEnter,
+        onMouseEnterProp,
       ),
       onMouseLeave: handlerAll(
         onMouseLeave,
         props.onMouseLeave,
-        rest.onMouseLeave,
+        onMouseLeaveProp,
       ),
-      onMouseMove: handlerAll(onMouseMove, props.onMouseMove, rest.onMouseMove),
-      onTouchEnd: handlerAll(onTouchEnd, props.onTouchEnd, rest.onTouchEnd),
+      onMouseMove: handlerAll(onMouseMove, props.onMouseMove, onMouseMoveProp),
+      onTouchEnd: handlerAll(onTouchEnd, props.onTouchEnd, onTouchEndProp),
       onTouchStart: handlerAll(
         onTouchStart,
         props.onTouchStart,
-        rest.onTouchStart,
+        onTouchStartProp,
       ),
     }),
     [
-      onMouseEnter,
-      onMouseLeave,
-      onMouseMove,
-      onTouchEnd,
-      onTouchStart,
+      omittedFormControlProps,
+      containerProps,
       id,
-      rest,
+      value,
+      onMouseEnter,
+      onMouseEnterProp,
+      onMouseLeave,
+      onMouseLeaveProp,
+      onMouseMove,
+      onMouseMoveProp,
+      onTouchEnd,
+      onTouchEndProp,
+      onTouchStart,
+      onTouchStartProp,
     ],
   )
 

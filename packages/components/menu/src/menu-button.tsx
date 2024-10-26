@@ -4,18 +4,34 @@ import type { MenuIconProps } from "./menu-item"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
-import { assignRef, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
-import { useCallback, useMemo } from "react"
+import {
+  assignRef,
+  cx,
+  dataAttr,
+  funcAll,
+  handlerAll,
+  mergeRefs,
+} from "@yamada-ui/utils"
+import { useCallback, useId, useMemo } from "react"
 import { useMenu, useUpstreamMenuItem } from "./menu-context"
 import { MenuIcon } from "./menu-item"
 
 export interface MenuButtonProps extends HTMLUIProps<"button"> {}
 
 export const MenuButton = forwardRef<MenuButtonProps, "button">(
-  ({ as, className, children, ...rest }, ref) => {
+  ({ id, as, className, children, ...rest }, ref) => {
     const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
-    const { isOpen, onClose, onFocusFirstItem, onFocusLastItem, onOpen } =
-      useMenu()
+    const {
+      buttonRef,
+      isOpen,
+      onClose,
+      onFocusFirstItem,
+      onFocusLastItem,
+      onOpen,
+    } = useMenu()
+    const uuid = useId()
+
+    id ??= uuid
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
@@ -37,7 +53,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     )
 
     const onItemKeyDown = useCallback(
-      (ev: KeyboardEvent<HTMLLIElement>) => {
+      (ev: KeyboardEvent<HTMLDivElement>) => {
         const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isOpen
             ? funcAll(onUpstreamRestoreFocus, onClose)
@@ -63,7 +79,8 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     return (
       <PopoverTrigger>
         <Component
-          ref={ref}
+          id={id}
+          ref={mergeRefs(buttonRef, ref)}
           className={cx("ui-menu", className)}
           aria-expanded={isOpen}
           aria-haspopup="menu"

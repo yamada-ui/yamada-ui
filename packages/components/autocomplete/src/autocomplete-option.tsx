@@ -18,7 +18,7 @@ export interface AutocompleteOptionProps
   extends UseAutocompleteOptionProps,
     AutocompleteOptionOptions {}
 
-export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
+export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "div">(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
     const { children, customIcon, isSelected, getOptionProps } =
@@ -41,7 +41,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
     }
 
     return (
-      <ui.li
+      <ui.div
         className={cx("ui-autocomplete__item", className)}
         __css={css}
         {...getOptionProps({}, ref)}
@@ -55,7 +55,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
         <ui.span style={{ flex: 1 }} data-label>
           {children}
         </ui.span>
-      </ui.li>
+      </ui.div>
     )
   },
 )

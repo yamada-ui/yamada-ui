@@ -62,9 +62,9 @@ interface MenuItemOptions {
   isFocusable?: boolean
 }
 
-export interface MenuItemProps extends HTMLUIProps<"li">, MenuItemOptions {}
+export interface MenuItemProps extends HTMLUIProps, MenuItemOptions {}
 
-export const MenuItem = forwardRef<MenuItemProps, "li">(
+export const MenuItem = forwardRef<MenuItemProps, "div">(
   (
     {
       className,
@@ -94,9 +94,9 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
 
     const trulyDisabled = isDisabled && !isFocusable
 
-    const itemRef = useRef<HTMLLIElement>(null)
+    const itemRef = useRef<HTMLDivElement>(null)
     const hasDownstreamRef = useRef<boolean>(false)
-    const onKeyDownRef = useRef<KeyboardEventHandler<HTMLLIElement>>(
+    const onKeyDownRef = useRef<KeyboardEventHandler<HTMLDivElement>>(
       () => void 0,
     )
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
@@ -117,7 +117,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
     }, [setFocusedIndex, isDisabled])
 
     const onClick = useCallback(
-      (ev: MouseEvent<HTMLLIElement>) => {
+      (ev: MouseEvent<HTMLDivElement>) => {
         if (!isTargetMenuItem(ev.currentTarget)) return
 
         const hasDownstream = hasDownstreamRef.current
@@ -141,7 +141,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
     }, [setFocusedIndex, index])
 
     const onKeyDown = useCallback(
-      (ev: KeyboardEvent<HTMLLIElement>) => {
+      (ev: KeyboardEvent<HTMLDivElement>) => {
         const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isNested
             ? funcAll(onUpstreamRestoreFocus, onClose)
@@ -160,7 +160,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
       [onUpstreamRestoreFocus, onClose, isNested],
     )
 
-    const rest = useClickable<HTMLLIElement>({
+    const rest = useClickable<HTMLDivElement>({
       focusOnClick: false,
       ...props,
       ref: mergeRefs(register, itemRef, ref),
@@ -225,7 +225,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
           onUpstreamRestoreFocus: onRestoreFocus,
         }}
       >
-        <ui.li
+        <ui.div
           {...rest}
           {...(isDownstreamOpen ? { "data-active": "" } : {})}
           className={cx("ui-menu__item", className)}
@@ -236,7 +236,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
           {icon ? <MenuIcon>{icon}</MenuIcon> : null}
           {children}
           {command ? <MenuCommand>{command}</MenuCommand> : null}
-        </ui.li>
+        </ui.div>
       </UpstreamMenuItemProvider>
     )
   },
@@ -310,6 +310,7 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
       <ui.span
         ref={ref}
         className={cx("ui-menu__item__icon", className)}
+        aria-hidden
         __css={css}
         {...rest}
       />

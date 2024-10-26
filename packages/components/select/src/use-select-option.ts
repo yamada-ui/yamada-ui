@@ -11,13 +11,13 @@ import {
   isUndefined,
   mergeRefs,
 } from "@yamada-ui/utils"
-import { useCallback, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import { useSelectContext, useSelectDescendant } from "./use-select"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) && !!target.getAttribute("role")?.startsWith("option")
 
-export interface UseSelectOptionProps extends Omit<HTMLUIProps<"li">, "value"> {
+export interface UseSelectOptionProps extends Omit<HTMLUIProps, "value"> {
   /**
    * If `true`, the list element will be closed when selected.
    *
@@ -57,8 +57,10 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     onClose,
     onFocusNext,
   } = useSelectContext()
-
+  const uuid = useId()
+  const itemRef = useRef<HTMLLIElement>(null)
   let {
+    id,
     children,
     closeOnSelect: customCloseOnSelect,
     icon: customIcon,
@@ -67,20 +69,26 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-
   const trulyDisabled = !!isDisabled && !isFocusable
-
-  const itemRef = useRef<HTMLLIElement>(null)
-
   const { descendants, index, register } = useSelectDescendant({
     disabled: trulyDisabled,
   })
-
   const values = descendants.values()
   const frontValues = values.slice(0, index)
   const hasPlaceholder = !!placeholder && placeholderInOptions
   const isPlaceholder = hasPlaceholder && index === 0
   const isMulti = isArray(value)
+  const isDuplicated = !isMulti
+    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
+    : false
+  const isSelected =
+    !isDuplicated &&
+    (!isMulti
+      ? (optionValue ?? "") === value
+      : value.includes(optionValue ?? ""))
+  const isFocused = index === focusedIndex
+
+  id ??= uuid
 
   if (!isPlaceholder && isUndefined(optionValue)) {
     if (isString(children) || isNumber(children)) {
@@ -102,18 +110,8 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     )
   }
 
-  const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
-    : false
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isFocused = index === focusedIndex
-
   const onClick = useCallback(
-    (ev: MouseEvent<HTMLLIElement>) => {
+    (ev: MouseEvent<HTMLDivElement>) => {
       ev.preventDefault()
       ev.stopPropagation()
 
@@ -149,7 +147,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     ],
   )
 
-  const getOptionProps: PropGetter<"li"> = useCallback(
+  const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -168,9 +166,10 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
         role: "option",
         ...computedProps,
         ...props,
+        id,
         style: omitSelectedValues && isSelected ? style : undefined,
-        "aria-checked": ariaAttr(isSelected),
         "aria-disabled": ariaAttr(isDisabled),
+        "aria-selected": isSelected,
         "data-disabled": dataAttr(isDisabled),
         "data-duplicated": dataAttr(isDuplicated),
         "data-focus": dataAttr(isFocused),
@@ -180,6 +179,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       }
     },
     [
+      id,
       optionValue,
       computedProps,
       isDisabled,

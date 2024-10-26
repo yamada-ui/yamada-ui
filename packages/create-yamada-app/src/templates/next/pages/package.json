@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@yamada-ui/react": "^1.5.0",
-    "@yamada-ui/lucide": "^1.4.0",
+    "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "next": "^14.2.8",
     "react": "^18",
     "react-dom": "^18"

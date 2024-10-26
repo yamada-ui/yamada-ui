@@ -61,3 +61,6 @@ export const AspectRatio = forwardRef<AspectRatioProps, "div">(
     )
   },
 )
+
+AspectRatio.displayName = "AspectRatio"
+AspectRatio.__ui__ = "AspectRatio"

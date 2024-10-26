@@ -1,5 +1,13 @@
 # @yamada-ui/utils
 
+## 1.5.4
+
+### Patch Changes
+
+- [#3143](https://github.com/yamada-ui/yamada-ui/pull/3143) [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `transformSize` function.
+
+- [#3138](https://github.com/yamada-ui/yamada-ui/pull/3138) [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the value converted by `toCamelCase` was Pascal case instead of Camel case.
+
 ## 1.5.3
 
 ### Patch Changes

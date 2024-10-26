@@ -33,6 +33,7 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
       <motion.div
         ref={ref}
         className={cx("ui-modal__overlay", className)}
+        aria-hidden
         custom={{ duration }}
         onClick={handlerAll(onClick, onOverlayClick, (ev) => {
           ev.stopPropagation()

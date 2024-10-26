@@ -1,4 +1,5 @@
 import { Accordion } from "./accordion"
+import { Airy } from "./airy"
 import { Alert } from "./alert"
 import { AlphaSlider } from "./alpha-slider"
 import { AreaChart } from "./area-chart"
@@ -31,6 +32,7 @@ import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
+import { Flip } from "./flip"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
@@ -70,6 +72,7 @@ import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
 import { Resizable } from "./resizable"
+import { Rotate } from "./rotate"
 import { SaturationSlider } from "./saturation-slider"
 import { ScaleFade } from "./scale-fade"
 import { ScrollArea } from "./scroll-area"
@@ -93,6 +96,7 @@ import { YearPicker } from "./year-picker"
 
 export const components = {
   Accordion,
+  Airy,
   Alert,
   AlphaSlider,
   AreaChart,
@@ -125,6 +129,7 @@ export const components = {
   Fieldset,
   FileButton,
   FileInput,
+  Flip,
   FormControl,
   Heading,
   HueSlider,
@@ -164,6 +169,7 @@ export const components = {
   Rating,
   Reorder,
   Resizable,
+  Rotate,
   SaturationSlider,
   ScaleFade,
   ScrollArea,

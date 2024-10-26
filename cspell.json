@@ -24,6 +24,7 @@
     "compat",
     "Consolas",
     "contenteditable",
+    "roledescription",
     "contextmenu",
     "cqmax",
     "cqmin",
@@ -75,6 +76,7 @@
     "koralle",
     "kurillin",
     "labelledby",
+    "describedby",
     "lefthook",
     "lifecycles",
     "listbox",
@@ -172,8 +174,8 @@
     "docs/constant/members.ts",
     "docs/constant/contributors.ts",
     "docs/contents/changelog/**",
-    "props.mdx",
-    "props.ja.mdx",
+    "docs/contents/components/**/props.mdx",
+    "docs/contents/components/**/props.ja.mdx",
     "CHANGELOG.md"
   ]
 }

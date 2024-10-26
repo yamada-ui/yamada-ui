@@ -1,16 +1,15 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { UseClickableProps } from "@yamada-ui/use-clickable"
-import type { FilterDescendant } from "@yamada-ui/use-descendant"
 import type { Merge } from "@yamada-ui/utils"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { useClickable } from "@yamada-ui/use-clickable"
-import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
+import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import { useId } from "react"
 import {
+  useTabDescendant,
+  useTabPanelDescendant,
   useTabsContext,
-  useTabsDescendant,
-  useTabsDescendantsContext,
 } from "./tabs-context"
 
 export interface TabProps
@@ -26,14 +25,10 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnSpace,
       isDisabled,
       isFocusable,
-      ...props
+      ...rest
     },
     ref,
   ) => {
-    const uuid = useId()
-
-    id ??= uuid
-
     const {
       disableRipple,
       isManual,
@@ -42,21 +37,15 @@ export const Tab = forwardRef<TabProps, "button">(
       setSelectedIndex,
       styles,
     } = useTabsContext()
-
-    const { index, register } = useTabsDescendant({
+    const uuid = useId()
+    const { index, register } = useTabDescendant({
       disabled: isDisabled && !isFocusable,
     })
-
-    const descendants = useTabsDescendantsContext()
-
-    const filter: FilterDescendant<HTMLButtonElement | HTMLDivElement> = (
-      descendant,
-    ) => descendant.node.getAttribute("role") === "tabpanel"
-    const tabpanelDescendant = descendants.value(index, filter)
-
-    const tabpanelId = tabpanelDescendant?.node.id
-
+    const { descendants } = useTabPanelDescendant()
+    const tabpanelId = descendants.value(index)?.node.id
     const isSelected = index === selectedIndex
+
+    id ??= uuid
 
     const onFocus = () => {
       setFocusedIndex(index)
@@ -64,16 +53,22 @@ export const Tab = forwardRef<TabProps, "button">(
       if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
     }
 
-    const rest = useClickable<HTMLButtonElement>({
+    const clickableProps = useClickable<HTMLButtonElement>({
+      id,
+      "aria-controls": tabpanelId,
+      "aria-selected": isSelected,
+      role: "tab",
+      ...rest,
       ref: mergeRefs(register, ref),
       clickOnEnter,
       clickOnSpace,
       isDisabled,
       isFocusable,
-      onClick: handlerAll(props.onClick, () => setSelectedIndex(index)),
+      onClick: handlerAll(rest.onClick, () => setSelectedIndex(index)),
+      onFocus: isDisabled ? undefined : handlerAll(rest.onFocus, onFocus),
     })
     const { onPointerDown, ...rippleProps } = useRipple({
-      ...rest,
+      ...clickableProps,
       isDisabled: disableRipple || isDisabled,
     })
 
@@ -89,17 +84,11 @@ export const Tab = forwardRef<TabProps, "button">(
 
     return (
       <ui.button
-        id={id}
         className={cx("ui-tabs__tab", className)}
-        role="tab"
         __css={css}
-        {...props}
-        aria-controls={tabpanelId}
-        {...rest}
+        {...clickableProps}
         type="button"
-        aria-selected={ariaAttr(isSelected)}
         tabIndex={isSelected ? 0 : -1}
-        onFocus={isDisabled ? undefined : handlerAll(props.onFocus, onFocus)}
         onPointerDown={onPointerDown}
       >
         {children}

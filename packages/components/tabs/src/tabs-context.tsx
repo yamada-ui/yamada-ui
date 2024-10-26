@@ -5,11 +5,18 @@ import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext } from "@yamada-ui/utils"
 
 export const {
-  DescendantsContextProvider,
-  useDescendant: useTabsDescendant,
-  useDescendants,
-  useDescendantsContext: useTabsDescendantsContext,
-} = createDescendant<HTMLButtonElement | HTMLDivElement>()
+  DescendantsContextProvider: TabDescendantsContextProvider,
+  useDescendant: useTabDescendant,
+  useDescendants: useTabDescendants,
+  useDescendantsContext: useTabDescendantsContext,
+} = createDescendant<HTMLButtonElement>()
+
+export const {
+  DescendantsContextProvider: TabPanelDescendantsContextProvider,
+  useDescendant: useTabPanelDescendant,
+  useDescendants: useTabPanelDescendants,
+  useDescendantsContext: useTabPanelDescendantsContext,
+} = createDescendant<HTMLDivElement>()
 
 interface TabsContext
   extends Omit<TabsOptions, "defaultIndex" | "index" | "onChange"> {

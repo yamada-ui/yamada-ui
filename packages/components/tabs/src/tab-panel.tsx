@@ -1,14 +1,13 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import type { FilterDescendant } from "@yamada-ui/use-descendant"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import { cx, mergeRefs } from "@yamada-ui/utils"
 import { useId, useRef } from "react"
 import {
+  useTabDescendant,
   useTabPanelContext,
+  useTabPanelDescendant,
   useTabsContext,
-  useTabsDescendant,
-  useTabsDescendantsContext,
 } from "./tabs-context"
 
 export interface TabPanelProps extends HTMLUIProps {}
@@ -16,27 +15,12 @@ export interface TabPanelProps extends HTMLUIProps {}
 export const TabPanel = forwardRef<TabPanelProps, "div">(
   ({ id, className, children, ...rest }, ref) => {
     const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
-
     const uuid = useId()
-
-    id ??= uuid
-
     const { index, isSelected } = useTabPanelContext()
-
-    const descendants = useTabsDescendantsContext()
-
-    const { register } = useTabsDescendant({
-      disabled: !isSelected,
-    })
-
-    const filter: FilterDescendant<HTMLButtonElement | HTMLDivElement> = (
-      descendant,
-    ) => descendant.node.getAttribute("role") === "tab"
-    const tabDescendant = descendants.value(index, filter)
-
-    const tabId = tabDescendant?.node.id
-
+    const { register } = useTabPanelDescendant()
+    const { descendants } = useTabDescendant()
     const hasBeenSelected = useRef<boolean>(false)
+    const tabId = descendants.value(index)?.node.id
 
     if (isSelected) hasBeenSelected.current = true
 
@@ -46,6 +30,8 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
       mode,
       wasSelected: hasBeenSelected.current,
     })
+
+    id ??= uuid
 
     const css: CSSUIObject = { ...styles.tabPanel }
 

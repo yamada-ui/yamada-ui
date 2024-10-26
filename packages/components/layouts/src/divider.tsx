@@ -98,3 +98,6 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
     />
   )
 })
+
+Divider.displayName = "Divider"
+Divider.__ui__ = "Divider"

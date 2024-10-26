@@ -19,7 +19,8 @@ export interface CarouselIndicatorsProps
 export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   ({ className, component, ...rest }, ref) => {
     const { orientation, selectedIndex, styles } = useCarouselContext()
-    const { indexes, getIndicatorProps } = useCarouselIndicators()
+    const { indexes, getIndicatorProps, getIndicatorsProps } =
+      useCarouselIndicators()
 
     const css: CSSUIObject = {
       display: "flex",
@@ -34,8 +35,8 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
 
     return (
       <ui.div
-        ref={ref}
         className={cx("ui-carousel__indicators", className)}
+        {...getIndicatorsProps(rest, ref)}
         __css={css}
         {...rest}
       >
@@ -69,24 +70,23 @@ CarouselIndicators.__ui__ = "CarouselIndicators"
 
 interface CarouselIndicatorProps extends HTMLUIProps<"button"> {}
 
-const CarouselIndicator: FC<CarouselIndicatorProps> = ({
-  className,
-  ...rest
-}) => {
-  const { styles } = useCarouselContext()
+const CarouselIndicator = forwardRef<CarouselIndicatorProps, "button">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useCarouselContext()
 
-  const css: CSSUIObject = { ...styles.indicator }
+    const css: CSSUIObject = { ...styles.indicator }
 
-  return (
-    <ui.button
-      type="button"
-      className={cx("ui-carousel__indicators__indicator", className)}
-      tabIndex={-1}
-      __css={css}
-      {...rest}
-    />
-  )
-}
+    return (
+      <ui.button
+        ref={ref}
+        type="button"
+        className={cx("ui-carousel__indicators__indicator", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
 
 CarouselIndicator.displayName = "CarouselIndicator"
 CarouselIndicator.__ui__ = "CarouselIndicator"

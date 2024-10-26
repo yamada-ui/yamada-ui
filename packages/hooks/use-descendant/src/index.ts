@@ -1,4 +1,4 @@
-import type { Provider, RefCallback } from "react"
+import type { RefCallback } from "react"
 import {
   cast,
   createContext,
@@ -253,80 +253,65 @@ export type DescendantsManager<
   K extends { [key: string]: any } = {},
 > = ReturnType<typeof descendantsManager<T, K>>
 
-const useDescendants = <
+export const createDescendant = <
   T extends HTMLElement = HTMLElement,
   K extends { [key: string]: any } = {},
 >() => {
-  const descendants = useRef(descendantsManager<T, K>())
-
-  useSafeLayoutEffect(() => {
-    return () => descendants.current.destroy()
-  })
-
-  return descendants.current
-}
-
-type UseDescendantsReturn = ReturnType<typeof useDescendants>
-
-const [DescendantsContextProvider, useDescendantsContext] =
-  createContext<UseDescendantsReturn>({
+  const [DescendantsContextProvider, useDescendantsContext] = createContext<
+    DescendantsManager<T, K>
+  >({
     name: "DescendantsProvider",
     errorMessage:
       "useDescendantsContext must be used within DescendantsContextProvider",
   })
 
-const useDescendant = <
-  T extends HTMLElement = HTMLElement,
-  K extends { [key: string]: any } = {},
->(
-  options?: DescendantOptions<T, K>,
-) => {
-  const descendants = useDescendantsContext()
-  const [index, setIndex] = useState<number>(-1)
-  const ref = useRef<T>(null)
+  const useDescendants = () => {
+    const descendants = useRef(descendantsManager<T, K>())
 
-  useSafeLayoutEffect(() => {
-    return () => {
+    useSafeLayoutEffect(() => {
+      return () => descendants.current.destroy()
+    })
+
+    return descendants.current
+  }
+
+  const useDescendant = (options?: DescendantOptions<T, K>) => {
+    const descendants = useDescendantsContext()
+    const [index, setIndex] = useState<number>(-1)
+    const ref = useRef<T>(null)
+
+    useSafeLayoutEffect(() => {
+      return () => {
+        if (!ref.current) return
+
+        descendants.unregister(ref.current)
+      }
+    }, [])
+
+    useSafeLayoutEffect(() => {
       if (!ref.current) return
 
-      descendants.unregister(ref.current)
+      const dataIndex = Number(ref.current.dataset.index)
+
+      if (index != dataIndex && !Number.isNaN(dataIndex)) setIndex(dataIndex)
+    })
+
+    const refCallback = options
+      ? cast<RefCallback<T>>(descendants.register(options))
+      : cast<RefCallback<T>>(descendants.register)
+
+    return {
+      descendants,
+      enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter),
+      index,
+      register: mergeRefs(refCallback, ref),
     }
-  }, [])
-
-  useSafeLayoutEffect(() => {
-    if (!ref.current) return
-
-    const dataIndex = Number(ref.current.dataset.index)
-
-    if (index != dataIndex && !Number.isNaN(dataIndex)) setIndex(dataIndex)
-  })
-
-  const refCallback = options
-    ? cast<RefCallback<T>>(descendants.register(options))
-    : cast<RefCallback<T>>(descendants.register)
+  }
 
   return {
-    descendants,
-    enabledIndex: descendants.enabledIndexOf(
-      ref.current,
-      options?.filter as any,
-    ),
-    index,
-    register: mergeRefs(refCallback, ref),
+    DescendantsContextProvider,
+    useDescendant,
+    useDescendants,
+    useDescendantsContext,
   }
 }
-
-export const createDescendant = <
-  T extends HTMLElement = HTMLElement,
-  K extends { [key: string]: any } = {},
->() =>
-  ({
-    DescendantsContextProvider: cast<Provider<DescendantsManager<T, K>>>(
-      DescendantsContextProvider,
-    ),
-    useDescendant: (options?: DescendantOptions<T, K>) =>
-      useDescendant<T, K>(options),
-    useDescendants: () => useDescendants<T, K>(),
-    useDescendantsContext: () =>
-      cast<DescendantsManager<T, K>>(useDescendantsContext()),
-  }) as const

@@ -92,6 +92,9 @@ export const Grid = forwardRef<GridProps, "div">(
   },
 )
 
+Grid.displayName = "Grid"
+Grid.__ui__ = "Grid"
+
 const transformColumns =
   (columns: Token<number> | undefined, minWidth?: GridProps["minWidth"]) =>
   (theme: StyledTheme) => {
@@ -139,6 +142,9 @@ export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
     return <Grid ref={ref} templateColumns={templateColumns} {...rest} />
   },
 )
+
+SimpleGrid.displayName = "SimpleGrid"
+SimpleGrid.__ui__ = "SimpleGrid"
 
 interface GridItemOptions {
   /**
@@ -204,3 +210,6 @@ export const GridItem = forwardRef<GridItemProps, "div">(
     return <ui.div ref={ref} __css={css} {...rest} />
   },
 )
+
+GridItem.displayName = "GridItem"
+GridItem.__ui__ = "GridItem"

@@ -5,7 +5,8 @@ import { ui } from "@yamada-ui/core"
 import { useTableStyles } from "@yamada-ui/native-table"
 import { Pagination } from "@yamada-ui/pagination"
 import { Select } from "@yamada-ui/select"
-import { cx } from "@yamada-ui/utils"
+import { useValue } from "@yamada-ui/use-value"
+import { cx, transformSize } from "@yamada-ui/utils"
 import { useTableContext } from "./table-context"
 
 const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
@@ -26,7 +27,7 @@ export const PagingTableControl = forwardRef<PagingTableControlProps, "div">(
     {
       className,
       colorScheme,
-      size,
+      size: _size,
       formatPageSizeLabel = defaultFormatPageSizeLabel,
       paginationProps,
       selectProps,
@@ -37,16 +38,9 @@ export const PagingTableControl = forwardRef<PagingTableControlProps, "div">(
     const styles = useTableStyles()
     const { pageSizeList, setPageIndex, setPageSize, state, totalPage } =
       useTableContext()
+    let size = useValue(_size)
 
-    if (size === "xl") {
-      size = "lg"
-    } else if (size === "lg") {
-      size = "md"
-    } else if (size === "md") {
-      size = "sm"
-    } else {
-      size = "xs"
-    }
+    size = transformSize(size, -1)
 
     return (
       <ui.div
@@ -57,13 +51,15 @@ export const PagingTableControl = forwardRef<PagingTableControlProps, "div">(
       >
         <Pagination
           colorScheme={colorScheme}
-          size={size === "sm" ? "xs" : size}
-          gridColumnEnd={3}
-          gridColumnStart={2}
+          size={size}
           justifyContent="center"
           page={state.pagination.pageIndex + 1}
           total={totalPage}
           withEdges
+          containerProps={{
+            gridColumnEnd: 3,
+            gridColumnStart: 2,
+          }}
           onChange={(page) => setPageIndex(page - 1)}
           {...paginationProps}
         />

@@ -1,5 +1,15 @@
 # @yamada-ui/charts
 
+## 1.5.5
+
+### Patch Changes
+
+- [#3101](https://github.com/yamada-ui/yamada-ui/pull/3101) [`a63eea1`](https://github.com/yamada-ui/yamada-ui/commit/a63eea136e45ea11ff529866b95689d8c6b264c5) Thanks [@108yen](https://github.com/108yen)! - Updated `recharts` version for remove `defaultProps` warnings.
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+
 ## 1.5.4
 
 ### Patch Changes

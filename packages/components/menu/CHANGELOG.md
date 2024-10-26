@@ -1,5 +1,23 @@
 # @yamada-ui/menu
 
+## 1.3.16
+
+### Patch Changes
+
+- [#3189](https://github.com/yamada-ui/yamada-ui/pull/3189) [`5ed7493`](https://github.com/yamada-ui/yamada-ui/commit/5ed7493ccfc20d048b29e565d1586cd931631f78) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced accessibility and refactor components.
+
+- Updated dependencies [[`42688ec`](https://github.com/yamada-ui/yamada-ui/commit/42688eccc5c4282fc8706a01b4cb6fe4ba77774e), [`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59), [`b7e1e87`](https://github.com/yamada-ui/yamada-ui/commit/b7e1e87fb676e2be5c85181cc126a4a173090dd3), [`4a40e15`](https://github.com/yamada-ui/yamada-ui/commit/4a40e15ea42af003f966729a5b23810a0a73bec6)]:
+  - @yamada-ui/use-disclosure@1.1.0
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/motion@2.2.5
+  - @yamada-ui/use-clickable@1.2.11
+  - @yamada-ui/popover@1.3.5
+  - @yamada-ui/icon@1.1.9
+  - @yamada-ui/transitions@1.1.8
+  - @yamada-ui/use-controllable-state@1.0.23
+  - @yamada-ui/use-descendant@1.0.24
+
 ## 1.3.15
 
 ### Patch Changes

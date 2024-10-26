@@ -1,0 +1,117 @@
+import type { Meta, StoryFn } from "@storybook/react"
+import type { AiryIdent } from "@yamada-ui/react"
+import { Menu, X } from "@yamada-ui/lucide"
+import { Airy, Center, Text } from "@yamada-ui/react"
+import { useState } from "react"
+
+type Story = StoryFn<typeof Airy>
+
+const meta: Meta<typeof Airy> = {
+  component: Airy,
+  title: "Components / Transitions / Airy",
+}
+
+export default meta
+
+export const basic: Story = () => {
+  return (
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+
+      <Airy from={<Menu fontSize="2xl" />} to={<X fontSize="2xl" />} />
+    </Center>
+  )
+}
+
+export const withDuration: Story = () => {
+  return (
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Airy
+        duration={0.6}
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+
+      <Airy
+        duration={0.6}
+        from={<Menu fontSize="2xl" />}
+        to={<X fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const withDelay: Story = () => {
+  return (
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Airy
+        delay={1}
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+
+      <Airy
+        delay={1}
+        from={<Menu fontSize="2xl" />}
+        to={<X fontSize="2xl" />}
+      />
+    </Center>
+  )
+}
+
+export const isDisabled: Story = () => {
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        isDisabled
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+    </Center>
+  )
+}
+
+export const isReadonly: Story = () => {
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        isReadOnly
+        to={<Text fontSize="2xl">OFF</Text>}
+      />
+    </Center>
+  )
+}
+
+export const customControl: Story = () => {
+  const [value, onChange] = useState<AiryIdent>("to")
+
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Airy
+        from={<Text fontSize="2xl">ON</Text>}
+        to={<Text fontSize="2xl">OFF</Text>}
+        value={value}
+        onChange={onChange}
+      />
+    </Center>
+  )
+}

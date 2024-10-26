@@ -1,5 +1,16 @@
 # @yamada-ui/use-disclosure
 
+## 1.1.0
+
+### Minor Changes
+
+- [#3169](https://github.com/yamada-ui/yamada-ui/pull/3169) [`42688ec`](https://github.com/yamada-ui/yamada-ui/commit/42688eccc5c4282fc8706a01b4cb6fe4ba77774e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `usePromiseDisclosure` hook.
+
+### Patch Changes
+
+- Updated dependencies [[`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/utils@1.5.4
+
 ## 1.0.22
 
 ### Patch Changes

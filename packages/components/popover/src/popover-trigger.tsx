@@ -9,14 +9,7 @@ export const PopoverTrigger: FC<PropsWithChildren<{}>> = ({ children }) => {
   } & ReactElement
   const { getTriggerProps } = usePopover()
 
-  const triggerProps = getTriggerProps(child.props, child.ref)
-
-  const enhancedTriggerProps = {
-    ...triggerProps,
-    "aria-haspopup": "true",
-  }
-
-  return cloneElement(child, enhancedTriggerProps)
+  return cloneElement(child, getTriggerProps(child.props, child.ref))
 }
 
 PopoverTrigger.displayName = "PopoverTrigger"

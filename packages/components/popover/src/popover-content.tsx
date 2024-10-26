@@ -82,10 +82,8 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     const {
       animation,
       closeOnButton,
-      describedbyId,
       duration,
       isOpen,
-      labelledbyId,
       styles,
       getPopoverProps,
       getPopperProps,
@@ -140,13 +138,9 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             ? getPopoverContentProps(animation, duration)
             : {})}
           {...getPopoverProps(rest, ref)}
-          aria-describedby={describedbyId}
-          aria-hidden={!isOpen}
-          aria-labelledby={labelledbyId}
           animate={isOpen ? "enter" : "exit"}
           exit="exit"
           initial="exit"
-          role="dialog"
           onAnimationComplete={funcAll(
             onAnimationComplete,
             rest.onAnimationComplete,

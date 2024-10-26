@@ -226,6 +226,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
+  const popoverId = useId()
   const labelledbyId = useId()
   const describedbyId = useId()
 
@@ -301,6 +302,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           ...props.style,
           transformOrigin,
         },
+        "aria-controls": popoverId,
         children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
         onBlur: handlerAll(props.onBlur, (ev) => {
@@ -347,6 +349,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       transformOrigin,
       trigger,
       relatedRef,
+      popoverId,
     ],
   )
 
@@ -362,6 +365,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       const triggerProps: HTMLUIPropsWithRef = {
         ...props,
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
+        "aria-controls": isOpen ? "true" : undefined,
       }
 
       if (trigger === "click") {

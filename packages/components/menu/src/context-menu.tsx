@@ -1,5 +1,4 @@
-import type { ThemeProps } from "@yamada-ui/core"
-import type { FC } from "react"
+import type { FC, ThemeProps } from "@yamada-ui/core"
 import type { MenuProps } from "./menu"
 import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { Menu } from "./menu"
@@ -24,3 +23,6 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
     </ContextMenuProvider>
   )
 }
+
+ContextMenu.displayName = "ContextMenu"
+ContextMenu.__ui__ = "ContextMenu"

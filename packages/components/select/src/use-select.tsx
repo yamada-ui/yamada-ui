@@ -533,16 +533,24 @@ export const useSelect = <T extends MaybeValue = string>(
       if (formControlProps.disabled || formControlProps.readOnly) return
 
       const actions: { [key: string]: Function | undefined } = {
-        ArrowDown: isFocused
-          ? () => onFocusNext()
-          : !isOpen
+        ArrowDown: ev.altKey
+          ? !isOpen
             ? funcAll(onOpen, onFocusFirstOrSelected)
-            : undefined,
-        ArrowUp: isFocused
-          ? () => onFocusPrev()
-          : !isOpen
-            ? funcAll(onOpen, onFocusLastOrSelected)
-            : undefined,
+            : undefined
+          : isFocused
+            ? () => onFocusNext()
+            : !isOpen
+              ? funcAll(onOpen, onFocusFirstOrSelected)
+              : undefined,
+        ArrowUp: ev.altKey
+          ? isOpen
+            ? onClose
+            : undefined
+          : isFocused
+            ? () => onFocusPrev()
+            : !isOpen
+              ? funcAll(onOpen, onFocusLastOrSelected)
+              : undefined,
         End: isOpen ? onFocusLast : undefined,
         Enter: isFocused
           ? onSelect
@@ -696,15 +704,15 @@ export const useSelect = <T extends MaybeValue = string>(
 
       return {
         ref: mergeRefs(fieldRef, ref),
-        "aria-activedescendant": activedescendantId,
-        "aria-controls": listId,
-        "aria-expanded": isOpen,
-        "aria-haspopup": "listbox",
         "aria-label": ariaLabel,
         role: "combobox",
         tabIndex: 0,
         ...fieldProps,
         ...props,
+        "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
+        "aria-controls": listRef.current?.id,
+        "aria-expanded": isOpen,
+        "aria-haspopup": "listbox",
         "data-active": dataAttr(isOpen),
         "data-placeholder": dataAttr(
           !isMulti ? label === undefined : !label?.length,
@@ -714,9 +722,9 @@ export const useSelect = <T extends MaybeValue = string>(
       }
     },
     [
-      activedescendantId,
-      listId,
+      descendants,
       fieldProps,
+      focusedIndex,
       isOpen,
       isMulti,
       label,

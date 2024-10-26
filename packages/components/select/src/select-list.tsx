@@ -7,13 +7,13 @@ import { cx } from "@yamada-ui/utils"
 import { useSelectContext } from "./use-select"
 import { useSelectList } from "./use-select-list"
 
-export interface SelectListProps extends HTMLUIProps<"ul"> {
+export interface SelectListProps extends HTMLUIProps {
   footer?: ReactNode
   header?: ReactNode
   contentProps?: MotionPropsWithoutChildren
 }
 
-export const SelectList = forwardRef<SelectListProps, "ul">(
+export const SelectList = forwardRef<SelectListProps, "div">(
   (
     {
       className,
@@ -45,7 +45,6 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
 
     return (
       <PopoverContent
-        as="div"
         className="ui-select__content"
         maxWidth={maxWidth}
         minWidth={minWidth}
@@ -54,23 +53,23 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
         {...contentProps}
       >
         {header ? (
-          <ui.div className="ui-select__header" __css={{ ...styles.header }}>
+          <ui.header className="ui-select__header" __css={{ ...styles.header }}>
             {header}
-          </ui.div>
+          </ui.header>
         ) : null}
 
-        <ui.ul
+        <ui.div
           className={cx("ui-select__list", className)}
           __css={{ ...styles.list }}
           {...getListProps(rest, ref)}
         >
           {children}
-        </ui.ul>
+        </ui.div>
 
         {footer ? (
-          <ui.div className="ui-select__footer" __css={{ ...styles.footer }}>
+          <ui.footer className="ui-select__footer" __css={{ ...styles.footer }}>
             {footer}
-          </ui.div>
+          </ui.footer>
         ) : null}
       </PopoverContent>
     )

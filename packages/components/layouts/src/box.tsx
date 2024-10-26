@@ -9,3 +9,6 @@ export interface BoxProps extends HTMLUIProps {}
  * @see Docs https://yamada-ui.com/components/layouts/box
  */
 export const Box = ui("div")
+
+Box.displayName = "Box"
+Box.__ui__ = "Box"

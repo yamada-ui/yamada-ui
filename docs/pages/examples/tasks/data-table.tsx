@@ -14,6 +14,7 @@ import {
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
+  MenuOptionItem,
   TableContainer,
   Tag,
   Text,
@@ -57,13 +58,15 @@ const TITLE_COLUMN: Column<Data> = {
   header: "Title",
 }
 
-const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data, Status> = (
-  hasTitle,
-) => ({
+const STATUS_COLUMN: (
+  hasTitle?: boolean,
+) => Column<Data, Status | undefined> = (hasTitle) => ({
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
   accessorKey: "status",
   cell: ({ getValue }) => {
     const value = getValue()
+
+    if (!value) return null
 
     const Icon = STATUS[value].icon
 
@@ -79,13 +82,15 @@ const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data, Status> = (
   header: "Status",
 })
 
-const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data, Priority> = (
-  hasTitle,
-) => ({
+const PRIORITY_COLUMN: (
+  hasTitle?: boolean,
+) => Column<Data, Priority | undefined> = (hasTitle) => ({
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
   accessorKey: "priority",
   cell: ({ getValue }) => {
     const value = getValue()
+
+    if (!value) return null
 
     const Icon = PRIORITY[value].icon
 
@@ -107,8 +112,7 @@ const CONTROL_COLUMN: Column<Data> = {
   cell: ({ row }) => (row.original.id ? <ControlMenu /> : null),
 }
 
-export interface DataTableProps
-  extends Omit<PagingTableProps, "columns" | "data"> {
+export interface DataTableProps {
   priorityRef: MutableRefObject<(value: Priority[]) => void>
   statusRef: MutableRefObject<(value: Status[]) => void>
   titleRef: MutableRefObject<(value: string) => void>
@@ -116,7 +120,7 @@ export interface DataTableProps
 }
 
 export const DataTable: FC<DataTableProps> = memo(
-  ({ priorityRef, statusRef, titleRef, viewRef, ...rest }) => {
+  ({ priorityRef, statusRef, titleRef, viewRef }) => {
     const [inputtedTitle, setInputtedTitle] = useState<string>("")
     const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([])
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([])
@@ -168,7 +172,6 @@ export const DataTable: FC<DataTableProps> = memo(
 
           return isSelectedStatus && isSelectedPriority && isSelectedTitle
         }),
-
       [inputtedTitle, selectedPriorities, selectedStatuses],
     )
 
@@ -215,24 +218,10 @@ export const DataTable: FC<DataTableProps> = memo(
           rounded="md"
           rowId="id"
           rowsClickSelect={hasData}
-          // @ts-ignore
+          withPagingControl={hasData}
           cellProps={cellProps}
           checkboxProps={{ isDisabled: !hasData }}
-          // @ts-ignore
           headerProps={{ textTransform: "capitalize" }}
-          paginationProps={{
-            gridColumn: { base: undefined, sm: "1 / 2" },
-            isDisabled: !hasData,
-            innerProps: {
-              display: hasData ? "flex" : "none",
-              flex: { base: "inherit", sm: 1 },
-            },
-          }}
-          pagingControlProps={{
-            gridTemplateColumns: { base: undefined, sm: "1fr" },
-          }}
-          selectProps={{ gridColumn: { base: undefined, sm: "1 / 2" } }}
-          {...rest}
         />
       </TableContainer>
     )
@@ -273,9 +262,9 @@ const ControlMenu = memo(
               <MenuList>
                 <MenuOptionGroup type="radio">
                   {LABEL.map((value) => (
-                    <MenuItem key={value} value={value}>
+                    <MenuOptionItem key={value} value={value}>
                       {value}
-                    </MenuItem>
+                    </MenuOptionItem>
                   ))}
                 </MenuOptionGroup>
               </MenuList>

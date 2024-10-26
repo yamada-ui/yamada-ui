@@ -11,12 +11,11 @@ export interface CarouselControlProps extends IconButtonProps {}
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-    const { getControlProps } = useCarouselControl({ operation: "prev" })
 
     return (
       <CarouselControl
+        ref={ref}
         className={cx("ui-carousel__control--prev", className)}
-        aria-label="Go to previous slide"
         icon={
           <ChevronIcon
             __css={{
@@ -27,7 +26,7 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
           />
         }
         operation="prev"
-        {...getControlProps(rest, ref)}
+        {...rest}
       />
     )
   },
@@ -39,12 +38,11 @@ CarouselControlPrev.__ui__ = "CarouselControlPrev"
 export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
-    const { getControlProps } = useCarouselControl({ operation: "next" })
 
     return (
       <CarouselControl
+        ref={ref}
         className={cx("ui-carousel__control--next", className)}
-        aria-label="Go to next slide"
         icon={
           <ChevronIcon
             __css={{
@@ -55,7 +53,7 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
           />
         }
         operation="next"
-        {...getControlProps(rest, ref)}
+        {...rest}
       />
     )
   },
@@ -69,6 +67,7 @@ const CarouselControl = forwardRef<
   "button"
 >(({ className, operation, ...rest }, ref) => {
   const { styles } = useCarouselContext()
+  const { getControlProps } = useCarouselControl({ operation })
 
   const css: CSSUIObject = {
     position: "absolute",
@@ -79,12 +78,11 @@ const CarouselControl = forwardRef<
 
   return (
     <IconButton
-      ref={ref}
       className={cx("ui-carousel__control", className)}
       colorScheme={["whiteAlpha", "blackAlpha"]}
       isRounded
       __css={css}
-      {...rest}
+      {...getControlProps(rest, ref)}
     />
   )
 })

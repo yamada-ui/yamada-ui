@@ -63,7 +63,7 @@ export const drag =
   }: DragOptions) => {
     const timeline = [...Array(count).keys()]
 
-    for await (const i of timeline) {
+    for (const i of timeline) {
       const isStart = i === 0
       const keys = runIfFunc(_keys, i)
       const coords = runIfFunc(_coords, i)

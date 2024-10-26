@@ -1,18 +1,26 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
-import { cx } from "@yamada-ui/utils"
-import { useRef } from "react"
-import { useTabPanelContext, useTabsContext } from "./tabs-context"
+import { cx, mergeRefs } from "@yamada-ui/utils"
+import { useId, useRef } from "react"
+import {
+  useTabDescendant,
+  useTabPanelContext,
+  useTabPanelDescendant,
+  useTabsContext,
+} from "./tabs-context"
 
 export interface TabPanelProps extends HTMLUIProps {}
 
 export const TabPanel = forwardRef<TabPanelProps, "div">(
-  ({ className, children, ...rest }, ref) => {
+  ({ id, className, children, ...rest }, ref) => {
     const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
-    const { isSelected } = useTabPanelContext()
-
+    const uuid = useId()
+    const { index, isSelected } = useTabPanelContext()
+    const { register } = useTabPanelDescendant()
+    const { descendants } = useTabDescendant()
     const hasBeenSelected = useRef<boolean>(false)
+    const tabId = descendants.value(index)?.node.id
 
     if (isSelected) hasBeenSelected.current = true
 
@@ -23,12 +31,16 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
       wasSelected: hasBeenSelected.current,
     })
 
+    id ??= uuid
+
     const css: CSSUIObject = { ...styles.tabPanel }
 
     return (
       <ui.div
-        ref={ref}
+        id={id}
+        ref={mergeRefs(register, ref)}
         className={cx("ui-tabs__panel", className)}
+        aria-labelledby={tabId}
         role="tabpanel"
         __css={css}
         {...rest}

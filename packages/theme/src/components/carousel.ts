@@ -14,6 +14,9 @@ export const Carousel: ComponentMultiStyle<"Carousel"> = {
       _active: {
         bg: [`whiteAlpha.600`, `blackAlpha.600`],
       },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _hover: {
         bg: ["whiteAlpha.500", "blackAlpha.500"],
       },

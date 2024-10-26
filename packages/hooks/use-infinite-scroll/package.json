@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-infinite-scroll",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Yamada UI useInfiniteScroll custom hook",
   "keywords": [
     "use-infinite-scroll"

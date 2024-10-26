@@ -129,6 +129,7 @@
     "relayout",
     "remark",
     "Rendererable",
+    "roledescription",
     "rowindex",
     "segoe",
     "Segoe",
@@ -140,6 +141,8 @@
     "svmax",
     "svmin",
     "swipeable",
+    "tablist",
+    "tabpanel",
     "taroj",
     "tasukuwato",
     "testid",
@@ -174,8 +177,8 @@
     "docs/constant/members.ts",
     "docs/constant/contributors.ts",
     "docs/contents/changelog/**",
-    "props.mdx",
-    "props.ja.mdx",
+    "docs/contents/components/**/props.mdx",
+    "docs/contents/components/**/props.ja.mdx",
     "CHANGELOG.md"
   ]
 }

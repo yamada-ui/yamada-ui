@@ -136,7 +136,7 @@ const getComments =
 
     const perPage = 100
 
-    for await (const { name } of repositories) {
+    for (const { name } of repositories) {
       let page = 1
 
       const listCommentsForRepo = async () => {
@@ -254,7 +254,7 @@ const getCommits =
 
     const perPage = 100
 
-    for await (const { name } of repositories) {
+    for (const { name } of repositories) {
       let page = 1
 
       const listCommits = async () => {
@@ -294,7 +294,7 @@ const getInsights =
       ({ login }) => !constant.insights.excludeUsers.includes(login),
     )
 
-    for await (const { html_url, login } of omittedCollaborators) {
+    for (const { html_url, login } of omittedCollaborators) {
       const { issues, pullRequests } =
         await getIssuesAndPullRequests(options)(login)
       const { approved, reviews } = await getReviews(options)(login)
@@ -386,9 +386,7 @@ const sendDiscordChannel =
   async (reports: string[]) => {
     const url = process.env.DISCORD_INSIGHTS_WEBHOOK_URL
 
-    for await (const [index, contents] of Object.entries(
-      chunkArray(reports, 10),
-    )) {
+    for (const [index, contents] of Object.entries(chunkArray(reports, 10))) {
       const isFirst = index === "0"
       const chunks: string[] = []
 

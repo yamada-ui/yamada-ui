@@ -13,8 +13,14 @@ export interface MenuListProps extends HTMLUIProps<"ul"> {
 
 export const MenuList = forwardRef<MenuListProps, "ul">(
   ({ className, children, contentProps, ...rest }, ref) => {
-    const { focusedIndex, menuRef, setFocusedIndex, styles, onClose } =
-      useMenu()
+    const {
+      buttonRef,
+      focusedIndex,
+      menuRef,
+      setFocusedIndex,
+      styles,
+      onClose,
+    } = useMenu()
 
     const descendants = useMenuDescendantsContext()
 
@@ -71,16 +77,17 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
         {...contentProps}
         onKeyDown={handlerAll(contentProps?.onKeyDown, onKeyDown)}
       >
-        <ui.ul
+        <ui.div
           ref={mergeRefs(menuRef, ref)}
           className={cx("ui-menu__list", className)}
+          aria-labelledby={buttonRef.current?.id}
           role="menu"
           tabIndex={-1}
           __css={{ ...styles.list }}
           {...rest}
         >
           {children}
-        </ui.ul>
+        </ui.div>
       </PopoverContent>
     )
   },

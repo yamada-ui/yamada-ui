@@ -13,11 +13,18 @@ export const Popover: ComponentMultiStyle<"Popover"> = {
     },
     container: {
       bg: ["white", "black"],
-      border: "1px solid",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      borderColor: "$border",
+      borderWidth: "1px",
       boxShadow: ["lg", "dark-lg"],
       color: "inherit",
       rounded: "md",
+      vars: [
+        {
+          name: "border",
+          token: "colors",
+          value: ["blackAlpha.200", "whiteAlpha.100"],
+        },
+      ],
       zIndex: "guldo",
       _focusVisible: {
         boxShadow: "outline",
@@ -25,14 +32,14 @@ export const Popover: ComponentMultiStyle<"Popover"> = {
       },
     },
     footer: {
-      borderColor: "inherit",
-      borderTop: "1px solid",
+      borderColor: "$border",
+      borderTopWidth: "1px",
       gap: "sm",
       p: "sm",
     },
     header: {
-      borderBottom: "1px solid",
-      borderColor: "inherit",
+      borderBottomWidth: "1px",
+      borderColor: "$border",
       fontWeight: "semibold",
       gap: "sm",
       p: "sm",

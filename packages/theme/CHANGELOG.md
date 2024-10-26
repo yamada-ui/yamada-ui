@@ -1,5 +1,23 @@
 # @yamada-ui/theme
 
+## 1.18.4
+
+### Patch Changes
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enables keyboard operation.
+
+- [#3193](https://github.com/yamada-ui/yamada-ui/pull/3193) [`e4f8212`](https://github.com/yamada-ui/yamada-ui/commit/e4f8212ecbb2702673c82696870d89dc01473cb4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Rename dots to ellipsis, adjust sizes for `Pagination`.
+
+- [#3143](https://github.com/yamada-ui/yamada-ui/pull/3143) [`dcc3288`](https://github.com/yamada-ui/yamada-ui/commit/dcc32881aec32bc71ed920b402ff72b699209a22) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the styles of some components.
+
+- [#3145](https://github.com/yamada-ui/yamada-ui/pull/3145) [`b2dc435`](https://github.com/yamada-ui/yamada-ui/commit/b2dc435cf1d40487ae5c2fd99b288fdf64695373) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the style of `th` in `Table`.
+
+- [#3171](https://github.com/yamada-ui/yamada-ui/pull/3171) [`050d01f`](https://github.com/yamada-ui/yamada-ui/commit/050d01f7841294e810cccdb1482ba2ff0a8632b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added 2xl size to `Button` styles.
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+
 ## 1.18.3
 
 ### Patch Changes

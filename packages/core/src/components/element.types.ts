@@ -1,5 +1,3 @@
-export type DOMElement = keyof JSX.IntrinsicElements
-
 export interface HTMLElements {
   form: HTMLFormElement
   style: HTMLStyleElement
@@ -187,5 +185,7 @@ export interface SVGElements {
 }
 
 export type SVGElement = keyof SVGElements
+
+export type DOMElement = HTMLElement | SVGElement
 
 export interface DOMElements extends HTMLElements, SVGElements {}

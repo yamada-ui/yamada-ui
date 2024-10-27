@@ -1,6 +1,5 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import type { FC } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx, dataAttr, handlerAll, mergeRefs } from "@yamada-ui/utils"
@@ -40,6 +39,9 @@ export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
     )
   },
 )
+
+ReorderTrigger.displayName = "ReorderTrigger"
+ReorderTrigger.__ui__ = "ReorderTrigger"
 
 const ReorderTriggerIcon: FC<IconProps> = (rest) => {
   return (
@@ -91,3 +93,6 @@ const ReorderTriggerIcon: FC<IconProps> = (rest) => {
     </Icon>
   )
 }
+
+ReorderTriggerIcon.displayName = "ReorderTriggerIcon"
+ReorderTriggerIcon.__ui__ = "ReorderTriggerIcon"

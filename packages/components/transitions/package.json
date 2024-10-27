@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/transitions",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Yamada UI transitions components",
   "keywords": [
     "yamada",
@@ -54,7 +54,8 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/use-controllable-state": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

@@ -1,0 +1,32 @@
+---
+title: FileInput
+description: "`FileInput` is a component used for users to select files."
+package_name: "@yamada-ui/file-input"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+Setting `aria-label` on `FileInput` will make it readable by screen readers.
+
+```tsx live=false
+<FileInput placeholder="Select a file" aria-label="File upload" />
+```
+
+## Keyboard Interaction
+
+| Key              | Description                           | State |
+| ---------------- | ------------------------------------- | ----- |
+| `Tab`            | Focuses the element.                  | -     |
+| `Space`, `Enter` | When element has focus, activates it. | -     |
+
+## ARIA Roles and Attributes
+
+| Component                   | Roles and Attributes | Usage                                   |
+| --------------------------- | -------------------- | --------------------------------------- |
+| `FileInput`                 | `role="button"`      | Indicates that it is a button.          |
+|                             | `aria-disabled`      | Set to `"true"` if `isDisabled` is set. |
+|                             | `aria-invalid`       | Set to `"true"` if `isInvalid` is set.  |
+| `input` <Tag>Internal</Tag> | `aria-readonly`      | Set to `"true"` if `isReadOnly` is set. |
+|                             | `aria-disabled`      | Set to `"true"` if `isDisabled` is set. |
+|                             | `aria-invalid`       | Set to `"true"` if `isInvalid` is set.  |

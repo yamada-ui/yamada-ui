@@ -7,6 +7,7 @@ import type {
 } from "typescript"
 import type { Locale } from "utils/i18n"
 import * as p from "@clack/prompts"
+import { toKebabCase } from "@yamada-ui/utils"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -26,7 +27,6 @@ import {
   transpileModule,
 } from "typescript"
 import { locales } from "utils/i18n"
-import { toKebabCase } from "utils/string"
 import { getMDXFile, writeMDXFile } from "../utils"
 
 config({ path: CONSTANT.PATH.ENV })

@@ -9,7 +9,7 @@ export interface PopoverCloseButtonProps extends CloseButtonProps {}
 
 export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
   ({ onClick, ...rest }, ref) => {
-    const { styles, onClose } = usePopover()
+    const { id, styles, onClose } = usePopover()
 
     const css: CSSUIObject = {
       position: "absolute",
@@ -21,6 +21,8 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
         ref={ref}
         className={cx("ui-popover__close-button")}
         size="sm"
+        aria-controls={id}
+        aria-label="Close popover"
         onClick={handlerAll(onClick, (ev) => {
           ev.stopPropagation()
           onClose?.()

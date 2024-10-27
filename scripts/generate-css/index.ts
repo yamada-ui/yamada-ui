@@ -1,7 +1,7 @@
 import type * as CSS from "csstype"
 import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import * as p from "@clack/prompts"
-import { isUndefined } from "@yamada-ui/utils"
+import { isUndefined, toCamelCase } from "@yamada-ui/utils"
 import c from "chalk"
 import { writeFile } from "fs/promises"
 import { glob } from "glob"
@@ -12,7 +12,6 @@ import {
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
-import { toCamelCase } from "../utils"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 

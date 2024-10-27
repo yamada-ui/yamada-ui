@@ -32,8 +32,13 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
     sizes: {
       xs: {
         icon: {
-          fontSize: "md",
+          fontSize: "sm",
           pt: "2",
+        },
+      },
+      sm: {
+        icon: {
+          fontSize: "lg",
         },
       },
     },

@@ -61,7 +61,7 @@ interface PictureOptions {
 export interface PictureProps extends ImageProps, PictureOptions {}
 
 /**
- * `Picture` wraps the `<picture>` HTML element, which contains zero or more `<source>` elements and one `<img>` element to provide alternative versions of an image for different display or device scenarios.
+ * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/picture
  */

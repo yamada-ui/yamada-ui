@@ -184,7 +184,7 @@ const createIssues = async (
   existPackages: { [key: string]: Issue },
   packages: { [key: string]: { [key: string]: number[] } },
 ) => {
-  for await (const [packageName, files] of Object.entries(packages)) {
+  for (const [packageName, files] of Object.entries(packages)) {
     const isExist = Object.keys(existPackages).includes(packageName)
     const body = ISSUE_BODY(packageName, files)
 

@@ -76,6 +76,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
           __css={css}
         >
           {children}
+
           {!iconHidden ? (
             <AccordionIcon>
               {cloneCustomIcon ?? cloneSupplementIcon ?? cloneGeneralIcon}
@@ -110,6 +111,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
     return (
       <ui.span
         className={cx("ui-accordion__icon", className)}
+        aria-hidden
         __css={{
           alignItems: "center",
           display: "inline-flex",
@@ -124,6 +126,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   return (
     <ChevronIcon
       className={cx("ui-accordion__icon", className)}
+      aria-hidden
       __css={css}
       {...rest}
     />

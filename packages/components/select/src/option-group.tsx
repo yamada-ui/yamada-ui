@@ -7,16 +7,14 @@ import { useSelectOptionGroup } from "./use-select-option-group"
 
 interface OptionGroupOptions extends UseSelectOptionGroupProps {}
 
-export interface OptionGroupProps
-  extends HTMLUIProps<"ul">,
-    OptionGroupOptions {
+export interface OptionGroupProps extends HTMLUIProps, OptionGroupOptions {
   /**
    * Props for option group element.
    */
-  labelProps?: HTMLUIProps<"span">
+  labelProps?: HTMLUIProps<"header">
 }
 
-export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
+export const OptionGroup = forwardRef<OptionGroupProps, "div">(
   (
     {
       className,
@@ -32,35 +30,35 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
     ref,
   ) => {
     const { styles } = useSelectContext()
-    const { label, getContainerProps, getGroupProps } =
+    const { label, getContainerProps, getGroupProps, getLabelProps } =
       useSelectOptionGroup(rest)
 
     h ??= height
     minH ??= minHeight
 
     return (
-      <ui.li
+      <ui.section
         className={cx("ui-select__item", "ui-select__item--group", className)}
         __css={{ color, h: "fit-content", w: "100%" }}
         {...getContainerProps()}
       >
-        <ui.span
+        <ui.header
           className="ui-select__item__group-label"
           lineClamp={1}
           __css={styles.groupLabel}
-          {...labelProps}
+          {...getLabelProps(labelProps)}
         >
           {label}
-        </ui.span>
+        </ui.header>
 
-        <ui.ul
+        <ui.div
           {...getGroupProps({}, ref)}
           className="ui-select__item__group"
           __css={{ h, minH, ...styles.group }}
         >
           {children}
-        </ui.ul>
-      </ui.li>
+        </ui.div>
+      </ui.section>
     )
   },
 )

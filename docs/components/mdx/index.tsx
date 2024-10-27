@@ -40,12 +40,19 @@ export const components: MDXComponents = {
   a: (props) => <Link apply="mdx.a" {...props} />,
   Alert: (props) => <Alert apply="mdx.alert" {...props} />,
   CardContainer,
-  code: (props) => <Text as="code" apply="mdx.code" {...props} />,
+  code: (props) => (
+    <Text
+      as="code"
+      apply="mdx.code"
+      dangerouslySetInnerHTML={{ __html: props.children }}
+    />
+  ),
   ColorModeButton,
   ColorPaletter,
   ColorPaletterContainer,
   ColorPaletters,
   Contributors,
+  em: (props) => <Text as="em" apply="mdx.em" {...props} />,
   h1: (props) => <Text as="h1" apply="mdx.h1" {...props} />,
   h2: (props) => <LinkedHeading as="h2" apply="mdx.h2" {...props} />,
   h3: (props) => <LinkedHeading as="h3" apply="mdx.h3" {...props} />,

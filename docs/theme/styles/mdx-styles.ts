@@ -15,6 +15,9 @@ export const mdx: { [key: string]: CSSUIObject } = {
     color: ["violet.600", "purple.300"],
     fontFamily: "body",
   },
+  em: {
+    fontStyle: "italic",
+  },
   h1: {
     fontFamily: "heading",
     fontSize: "4xl",

@@ -18,10 +18,10 @@ interface AutocompleteCreateOptions {
 }
 
 export interface AutocompleteCreateProps
-  extends Omit<HTMLUIProps<"li">, "children">,
+  extends Omit<HTMLUIProps, "children">,
     AutocompleteCreateOptions {}
 
-export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
+export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "div">(
   ({ className, children, icon, ...rest }, ref) => {
     const { inputValue, styles } = useAutocompleteContext()
     const { getCreateProps } = useAutocompleteCreate()
@@ -43,7 +43,7 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
     }
 
     return (
-      <ui.li
+      <ui.div
         className={cx("ui-autocomplete__item--create", className)}
         __css={css}
         {...getCreateProps(rest, ref)}
@@ -60,7 +60,7 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
         ) : (
           runIfFunc(children, inputValue)
         )}
-      </ui.li>
+      </ui.div>
     )
   },
 )

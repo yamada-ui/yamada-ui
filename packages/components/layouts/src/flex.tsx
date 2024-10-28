@@ -70,6 +70,9 @@ export const Flex = forwardRef<FlexProps, "div">(
   },
 )
 
+Flex.displayName = "Flex"
+Flex.__ui__ = "Flex"
+
 /**
  * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.
  *
@@ -78,3 +81,6 @@ export const Flex = forwardRef<FlexProps, "div">(
 export const Wrap = forwardRef<FlexProps, "div">((props, ref) => (
   <Flex ref={ref} wrap="wrap" {...props} />
 ))
+
+Wrap.displayName = "Wrap"
+Wrap.__ui__ = "Wrap"

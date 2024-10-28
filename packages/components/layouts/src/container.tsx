@@ -48,3 +48,6 @@ export const Container = forwardRef<ContainerProps, "section">((props, ref) => {
     />
   )
 })
+
+Container.displayName = "Container"
+Container.__ui__ = "Container"

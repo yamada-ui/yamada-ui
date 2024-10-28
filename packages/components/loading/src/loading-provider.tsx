@@ -7,7 +7,6 @@ import type {
 } from "@yamada-ui/core"
 import type { MotionVariants } from "@yamada-ui/motion"
 import type {
-  FC,
   ForwardedRef,
   MutableRefObject,
   PropsWithChildren,
@@ -15,7 +14,7 @@ import type {
   ReactNode,
   RefObject,
 } from "react"
-import { ui } from "@yamada-ui/core"
+import { ui, FC, forwardRef, memo } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
@@ -28,8 +27,6 @@ import {
 import {
   createContext,
   createRef,
-  forwardRef,
-  memo,
   useContext,
   useMemo,
   useRef,
@@ -199,6 +196,9 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   )
 }
 
+LoadingProvider.displayName = "LoadingProvider"
+LoadingProvider.__ui__ = "LoadingProvider"
+
 interface ControllerProps extends LoadingConfigOptions {
   controlRefs: ControlRefs
   render?: (props: LoadingComponentProps) => ReactElement
@@ -308,6 +308,9 @@ const Controller: FC<ControllerProps> = ({
   )
 }
 
+Controller.displayName = "Controller"
+Controller.__ui__ = "LoadingController"
+
 interface RenderProps extends LoadingComponentProps {
   component?: (
     props: LoadingComponentProps,
@@ -315,15 +318,18 @@ interface RenderProps extends LoadingComponentProps {
   ) => ReactNode
 }
 
-const Render = forwardRef<any, RenderProps>(({ component, ...props }, ref) => {
-  if (typeof component === "function") {
-    return component(props, ref)
-  } else {
-    return null
-  }
-})
+const Render = forwardRef<RenderProps, "div">(
+  ({ component, ...props }, ref) => {
+    if (typeof component === "function") {
+      return component(props, ref)
+    } else {
+      return null
+    }
+  },
+)
 
 Render.displayName = "Render"
+Render.__ui__ = "Render"
 
 interface MessageProps extends HTMLUIProps<"p"> {
   message: ReactNode
@@ -394,7 +400,7 @@ const getMotionProps = (
 })
 
 const ScreenComponent = memo(
-  forwardRef<HTMLDivElement, LoadingComponentProps>(
+  forwardRef<LoadingComponentProps, "div">(
     ({ duration, icon, initialState, message, text, onFinish }, ref) => {
       const css: CSSUIObject = {
         alignItems: "center",
@@ -425,9 +431,9 @@ const ScreenComponent = memo(
 )
 
 ScreenComponent.displayName = "ScreenComponent"
-
+ScreenComponent.__ui__ = "ScreenComponent"
 const PageComponent = memo(
-  forwardRef<HTMLDivElement, LoadingComponentProps>(
+  forwardRef<LoadingComponentProps, "div">(
     ({ duration, icon, initialState, message, text, onFinish }, ref) => {
       const css: CSSUIObject = {
         alignItems: "center",
@@ -469,9 +475,10 @@ const PageComponent = memo(
 )
 
 PageComponent.displayName = "PageComponent"
+PageComponent.__ui__ = "PageComponent"
 
 const BackgroundComponent = memo(
-  forwardRef<HTMLDivElement, LoadingComponentProps>(
+  forwardRef<LoadingComponentProps, "div">(
     ({ duration, icon, initialState, message, text, onFinish }, ref) => {
       const css: CSSUIObject = {
         alignItems: "center",
@@ -510,6 +517,7 @@ const BackgroundComponent = memo(
 )
 
 BackgroundComponent.displayName = "BackgroundComponent"
+BackgroundComponent.__ui__ = "BackgroundComponent"
 
 /**
  * `useLoading` is a custom hook for controlling the loading of the application.

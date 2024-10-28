@@ -257,4 +257,18 @@ export const MEMBERS = [
     },
     x: { url: "https://x.com/_mei28_" },
   },
+  {
+    name: { en: "Nathan", ja: "Nathan" },
+    description: {
+      en: "Frontend developer based in Canada and a university student.",
+      ja: "カナダ在住のフロントエンド開発者、大学生。",
+    },
+    discord: { id: "538103948918259722" },
+    github: {
+      id: "nathanlao",
+      icon: "https://avatars.githubusercontent.com/u/75557717?v=4",
+      url: "https://github.com/nathanlao",
+    },
+    x: { url: "https://x.com/nnnnlololo" },
+  },
 ]

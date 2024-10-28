@@ -24,5 +24,4 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
   )
 }
 
-ContextMenu.displayName = "ContextMenu"
 ContextMenu.__ui__ = "ContextMenu"

@@ -205,5 +205,4 @@ export const Menu: FC<MenuProps> = (props) => {
   )
 }
 
-Menu.displayName = "Menu"
 Menu.__ui__ = "Menu"

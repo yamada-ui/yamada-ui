@@ -306,12 +306,10 @@ describe("<Modal />", () => {
     })
   })
 
-  interface AnimationProps {
-    animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
-    duration?: number
-  }
-
-  const ModalAnimationExample = ({ animation, duration }: AnimationProps) => {
+  const ModalAnimationExample = ({
+    animation,
+    duration,
+  }: Pick<ModalProps, "animation" | "duration">) => {
     const [isOpen, setIsOpen] = useState(false)
     const modalHeaderId = "modal-header-id"
 

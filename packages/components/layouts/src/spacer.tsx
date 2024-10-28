@@ -10,3 +10,6 @@ export const Spacer = ui("div", {
     justifySelf: "stretch",
   },
 })
+
+Spacer.displayName = "Spacer"
+Spacer.__ui__ = "Spacer"

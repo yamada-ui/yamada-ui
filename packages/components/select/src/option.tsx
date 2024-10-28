@@ -3,24 +3,24 @@ import type { FC, ReactElement } from "react"
 import type { UseSelectOptionProps } from "./use-select-option"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useId } from "react"
 import { useSelectContext } from "./use-select"
 import { useSelectOption } from "./use-select-option"
 
 interface OptionOptions {
+  /**
+   * The select option icon to use.
+   */
   icon?: null | ReactElement
 }
 
 export interface OptionProps extends UseSelectOptionProps, OptionOptions {}
 
-export const Option = forwardRef<OptionProps, "li">(
-  ({ id, className, icon, ...rest }, ref) => {
+export const Option = forwardRef<OptionProps, "div">(
+  ({ className, icon, ...rest }, ref) => {
     const { styles } = useSelectContext()
     const { children, customIcon, isSelected, getOptionProps } =
       useSelectOption(rest)
-    const uuid = useId()
 
-    id ??= uuid
     icon ??= customIcon
 
     const css: CSSUIObject = {
@@ -38,8 +38,7 @@ export const Option = forwardRef<OptionProps, "li">(
     }
 
     return (
-      <ui.li
-        id={id}
+      <ui.div
         className={cx("ui-select__item", className)}
         __css={css}
         {...getOptionProps({}, ref)}
@@ -53,7 +52,7 @@ export const Option = forwardRef<OptionProps, "li">(
         <ui.span style={{ flex: 1 }} data-label>
           {children}
         </ui.span>
-      </ui.li>
+      </ui.div>
     )
   },
 )

@@ -4,15 +4,16 @@ import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
 import type { TableHeadProps } from "./thead"
-import type { TableContext, UseTableProps } from "./use-table"
+import type { UseTableProps } from "./use-table"
 import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
 import { TableCaption, TableStyleProvider } from "@yamada-ui/native-table"
 import { cx, getValidChildren, pickChildren } from "@yamada-ui/utils"
 import { forwardRef } from "react"
+import { TableProvider } from "./table-context"
 import { Tbody } from "./tbody"
 import { Tfoot } from "./tfoot"
 import { Thead } from "./thead"
-import { TableProvider, useTable } from "./use-table"
+import { useTable } from "./use-table"
 
 interface TableOptions {
   /**
@@ -43,12 +44,7 @@ interface TableOptions {
    * @default false
    */
   withColumnBorders?: boolean
-  /**
-   * If `true`, display the table footer.
-   *
-   * @default false
-   */
-  withFooter?: boolean
+
   /**
    * Props for table tbody element.
    */
@@ -99,7 +95,6 @@ export const Table = forwardRef(
       className,
       children,
       layout,
-      withFooter = false,
       checkboxProps,
       tbodyProps,
       tfootProps,
@@ -112,7 +107,7 @@ export const Table = forwardRef(
       "withColumnBorders",
     ])
 
-    const { getTableProps, ...rest } = useTable<Y>({
+    const { withFooter, getTableProps, ...rest } = useTable<Y>({
       ...computedProps,
       checkboxProps: { colorScheme, ...checkboxProps },
     })
@@ -128,7 +123,7 @@ export const Table = forwardRef(
 
     return (
       <TableStyleProvider value={styles}>
-        <TableProvider value={{ ...rest } as TableContext}>
+        <TableProvider<Y> {...rest}>
           <ui.table
             className={cx("ui-table", className)}
             __css={css}

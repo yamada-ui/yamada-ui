@@ -1,3 +1,4 @@
+import type { Column } from "@yamada-ui/table"
 import { PagingTable, Table } from "@yamada-ui/table"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 
@@ -22,6 +23,320 @@ describe("<Table />", () => {
   test("whether it works correctly when enableRowSelection is false", () => {
     render(<Table columns={columns} data={data} enableRowSelection={false} />)
     expect(screen.queryAllByRole("checkbox")).toHaveLength(0)
+  })
+
+  describe("Keyboard Navigation", () => {
+    interface Data {
+      name: string
+      broadcastPeriod: string
+      episode: string
+    }
+
+    const columns: Column<Data>[] = [
+      {
+        accessorKey: "name",
+        header: "作品名",
+      },
+      {
+        accessorKey: "broadcastPeriod",
+        header: "放送期間",
+      },
+      {
+        accessorKey: "episode",
+        header: "話数",
+      },
+    ]
+
+    const data: Data[] = [
+      {
+        name: "ドラゴンボール",
+        broadcastPeriod: "1986年2月26日 - 1989年4月19日",
+        episode: "全153話",
+      },
+      {
+        name: "ドラゴンボールZ",
+        broadcastPeriod: "1989年4月26日 - 1996年1月31日",
+        episode: "全291話 + スペシャル2話",
+      },
+      {
+        name: "ドラゴンボールGT",
+        broadcastPeriod: "1996年2月7日 - 1997年11月19日",
+        episode: "全64話 + 番外編1話",
+      },
+      {
+        name: "ドラゴンボール改",
+        broadcastPeriod: "2009年4月5日 - 2015年6月28日",
+        episode: "全159話",
+      },
+      {
+        name: "ドラゴンボール超",
+        broadcastPeriod: "2015年7月5日 - 2018年3月25日",
+        episode: "全131話",
+      },
+    ]
+
+    test("if the `ArrowRight`/`ArrowLeft` keys are pressed, the focus should move to the next/previous column", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      const nameHeaderCell = await screen.findByRole("columnheader", {
+        name: /作品名/i,
+      })
+      expect(nameHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      const broadcastPeriodHeaderCell = await screen.findByRole(
+        "columnheader",
+        { name: /放送期間/i },
+      )
+      expect(broadcastPeriodHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      const episodeHeaderCell = await screen.findByRole("columnheader", {
+        name: /話数/i,
+      })
+      expect(episodeHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowLeft}")
+      expect(broadcastPeriodHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowLeft}")
+      expect(nameHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowLeft}")
+      const selectAllRowsCheckbox2 = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox2).toHaveFocus()
+    })
+
+    test("if the `ArrowDown`/`ArrowUp` keys are pressed, the focus should move to the next/previous row", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      const nameHeaderCell = await screen.findByRole("columnheader", {
+        name: /作品名/i,
+      })
+      expect(nameHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallCell = await screen.findByRole("cell", {
+        name: "ドラゴンボール",
+      })
+      expect(dragonBallCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallZCell = await screen.findByRole("cell", {
+        name: /ドラゴンボールZ/i,
+      })
+      expect(dragonBallZCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallGTCell = await screen.findByRole("cell", {
+        name: /ドラゴンボールGT/i,
+      })
+      expect(dragonBallGTCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallKaiCell = await screen.findByRole("cell", {
+        name: /ドラゴンボール改/i,
+      })
+      expect(dragonBallKaiCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallSuperCell = await screen.findByRole("cell", {
+        name: /ドラゴンボール超/i,
+      })
+      expect(dragonBallSuperCell).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(dragonBallKaiCell).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(dragonBallGTCell).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(dragonBallZCell).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(dragonBallCell).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(nameHeaderCell).toHaveFocus()
+    })
+
+    test("if the `End` key is pressed, the focus should move to the last column", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{End}")
+      const episodeHeaderCell = await screen.findByRole("columnheader", {
+        name: /話数/i,
+      })
+      expect(episodeHeaderCell).toHaveFocus()
+    })
+
+    test("if the `Home` key is pressed, the focus should move to the first column", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      await user.tab()
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{End}")
+      const episodeHeaderCell = await screen.findByRole("columnheader", {
+        name: /話数/i,
+      })
+      expect(episodeHeaderCell).toHaveFocus()
+
+      await user.keyboard("{Home}")
+      const selectAllRowsCheckbox2 = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox2).toHaveFocus()
+    })
+
+    test("if the `ArrowLeft` key is pressed on the first column, the focus should not move", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{ArrowLeft}")
+      expect(selectAllRowsCheckbox).toHaveFocus()
+    })
+
+    test("if the `ArrowRight` key is pressed on the last column, the focus should not move", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{End}")
+      const episodeHeaderCell = await screen.findByRole("columnheader", {
+        name: /話数/i,
+      })
+      expect(episodeHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      expect(episodeHeaderCell).toHaveFocus()
+    })
+
+    test("if the `ArrowUp` key is pressed on the first row, the focus should not move", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{ArrowUp}")
+      expect(selectAllRowsCheckbox).toHaveFocus()
+    })
+
+    test("if the `ArrowDown` key is pressed on the last row, the focus should not move", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("{ArrowRight}")
+      const nameHeaderCell = await screen.findByRole("columnheader", {
+        name: /作品名/i,
+      })
+      expect(nameHeaderCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallCell = await screen.findByRole("cell", {
+        name: "ドラゴンボール",
+      })
+      expect(dragonBallCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallZCell = await screen.findByRole("cell", {
+        name: /ドラゴンボールZ/i,
+      })
+      expect(dragonBallZCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallGTCell = await screen.findByRole("cell", {
+        name: /ドラゴンボールGT/i,
+      })
+      expect(dragonBallGTCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallKaiCell = await screen.findByRole("cell", {
+        name: /ドラゴンボール改/i,
+      })
+      expect(dragonBallKaiCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      const dragonBallSuperCell = await screen.findByRole("cell", {
+        name: /ドラゴンボール超/i,
+      })
+      expect(dragonBallSuperCell).toHaveFocus()
+
+      await user.keyboard("{ArrowDown}")
+      expect(dragonBallSuperCell).toHaveFocus()
+    })
+
+    test("if an unrelated key is pressed, focus should not move", async () => {
+      const { user } = render(<Table columns={columns} data={data} />)
+
+      const selectAllRowsCheckbox = await screen.findByRole("checkbox", {
+        name: /Select all row/i,
+      })
+      expect(selectAllRowsCheckbox).toBeInTheDocument()
+
+      await user.tab()
+      expect(selectAllRowsCheckbox).toHaveFocus()
+
+      await user.keyboard("b")
+      expect(selectAllRowsCheckbox).toHaveFocus()
+    })
   })
 })
 
@@ -63,6 +378,20 @@ describe("<Tfoot />", () => {
     const { container } = render(<Table columns={columns} data={data} />)
     const tfootElement = container.querySelector("tfoot")
     expect(tfootElement).toBeNull()
+  })
+
+  test("renders footer when withFooterSelect is provided", () => {
+    const { container } = render(
+      <Table columns={columns} data={data} withFooter withFooterSelect />,
+    )
+
+    const tfootElement = container.querySelector("tfoot")
+    expect(tfootElement).toBeInTheDocument()
+
+    const checkbox = tfootElement!.querySelector(
+      "input[type='checkbox'].ui-checkbox__input",
+    )
+    expect(checkbox).toBeInTheDocument()
   })
 })
 
@@ -351,11 +680,11 @@ describe("Sort", () => {
     const { user } = render(<Table columns={columns} data={data} />)
     const nameHeader = screen.getByText("Name")
     await waitFor(() => {
-      expect(nameHeader).toHaveAttribute("aria-sort", "none")
+      expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "none")
     })
     await user.click(nameHeader)
-    expect(nameHeader).toHaveAttribute("aria-sort", "ascending")
+    expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "ascending")
     await user.click(nameHeader)
-    expect(nameHeader).toHaveAttribute("aria-sort", "descending")
+    expect(nameHeader.parentElement).toHaveAttribute("aria-sort", "descending")
   })
 })

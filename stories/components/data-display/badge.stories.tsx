@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Badge, Wrap } from "@yamada-ui/react"
+import { Badge, toTitleCase, Wrap } from "@yamada-ui/react"
 import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Badge>
@@ -16,7 +16,19 @@ export const subtle: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Badge key={colorScheme} colorScheme={colorScheme}>
-          {colorScheme}
+          {toTitleCase(colorScheme)}
+        </Badge>
+      ))}
+    </Wrap>
+  )
+}
+
+export const surface: Story = () => {
+  return (
+    <Wrap gap="md">
+      {colorSchemes.map((colorScheme) => (
+        <Badge key={colorScheme} colorScheme={colorScheme} variant="surface">
+          {toTitleCase(colorScheme)}
         </Badge>
       ))}
     </Wrap>
@@ -28,7 +40,7 @@ export const solid: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Badge key={colorScheme} colorScheme={colorScheme} variant="solid">
-          {colorScheme}
+          {toTitleCase(colorScheme)}
         </Badge>
       ))}
     </Wrap>
@@ -40,7 +52,7 @@ export const outline: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Badge key={colorScheme} colorScheme={colorScheme} variant="outline">
-          {colorScheme}
+          {toTitleCase(colorScheme)}
         </Badge>
       ))}
     </Wrap>

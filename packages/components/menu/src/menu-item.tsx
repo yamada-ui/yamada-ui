@@ -356,6 +356,3 @@ const CheckIcon: FC = () => (
     />
   </svg>
 )
-
-CheckIcon.displayName = "CheckIcon"
-CheckIcon.__ui__ = "CheckIcon"

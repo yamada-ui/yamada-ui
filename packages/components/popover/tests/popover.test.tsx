@@ -42,7 +42,7 @@ describe("<Popover />", () => {
 
     await user.click(triggerButton)
 
-    const closeButton = await screen.findByLabelText("Close")
+    const closeButton = await screen.findByLabelText("Close popover")
     const header = await screen.findByText("Popover Header")
     const body = await screen.findByText("Popover Body")
     const footer = await screen.findByText("Popover Footer")
@@ -84,7 +84,7 @@ describe("<Popover />", () => {
 
     const header = await screen.findByText("Popover Header")
     const anchor = await screen.findByText("anchor text")
-    const closeButton = await screen.findByLabelText("Close")
+    const closeButton = await screen.findByLabelText("Close popover")
     const body = await screen.findByText("Popover Body")
     const footer = await screen.findByText("Popover Footer")
 
@@ -101,7 +101,7 @@ describe("<Popover />", () => {
     await user.tab()
 
     const header = await screen.findByText("Popover Header")
-    const closeButton = await screen.findByLabelText("Close")
+    const closeButton = await screen.findByLabelText("Close popover")
     const body = await screen.findByText("Popover Body")
     const footer = await screen.findByText("Popover Footer")
 
@@ -147,7 +147,7 @@ describe("<Popover />", () => {
 
     await user.click(triggerButton)
 
-    const closeButton = await screen.findByLabelText("Close")
+    const closeButton = await screen.findByLabelText("Close popover")
     const header = await screen.findByText("Popover Header")
     const body = await screen.findByText("Popover Body")
 

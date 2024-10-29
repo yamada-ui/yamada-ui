@@ -1,14 +1,14 @@
 import type { HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import type { CSSProperties } from "react"
 import { layoutStyleProperties } from "@yamada-ui/core"
-import { isArray, splitObject } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { isArray, mergeRefs, splitObject } from "@yamada-ui/utils"
+import { useCallback, useId, useRef } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendantsContext,
 } from "./autocomplete-context"
 
-export interface UseAutocompleteOptionGroupProps extends HTMLUIProps<"ul"> {
+export interface UseAutocompleteOptionGroupProps extends HTMLUIProps {
   /**
    * The label of the autocomplete option group.
    */
@@ -20,12 +20,11 @@ export const useAutocompleteOptionGroup = ({
   ...rest
 }: UseAutocompleteOptionGroupProps) => {
   const { omitSelectedValues, value } = useAutocompleteContext()
-
-  const isMulti = isArray(value)
-
   const descendants = useAutocompleteDescendantsContext()
-
+  const labelRef = useRef<HTMLDivElement>(null)
+  const labelId = useId()
   const values = descendants.values()
+  const isMulti = isArray(value)
   const selectedValues =
     isMulti && omitSelectedValues
       ? descendants.values(({ node }) =>
@@ -39,7 +38,6 @@ export const useAutocompleteOptionGroup = ({
       !selectedIndexes.includes(index) &&
       "target" in node.dataset,
   )
-
   const isEmpty = !childValues.length
 
   const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
@@ -60,23 +58,34 @@ export const useAutocompleteOptionGroup = ({
 
       return {
         ref,
+        "aria-labelledby": labelRef.current?.id,
+        role: "group",
         ...props,
         ...containerProps,
         style: isEmpty ? style : undefined,
-        "data-label": label,
-        role: "autocomplete-group-container",
       }
     },
-    [containerProps, isEmpty, label],
+    [containerProps, isEmpty],
   )
 
-  const getGroupProps: PropGetter<"ul"> = useCallback(
+  const getLabelProps: PropGetter = useCallback(
+    ({ id, ...props } = {}, ref = null) => {
+      return {
+        id: id ?? labelId,
+        ref: mergeRefs(ref, labelRef),
+        role: "presentation",
+        ...props,
+      }
+    },
+    [labelId],
+  )
+
+  const getGroupProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       ...props,
       ...groupProps,
       "data-label": label,
-      role: "autocomplete-group",
     }),
     [groupProps, label],
   )
@@ -85,6 +94,7 @@ export const useAutocompleteOptionGroup = ({
     label,
     getContainerProps,
     getGroupProps,
+    getLabelProps,
   }
 }
 

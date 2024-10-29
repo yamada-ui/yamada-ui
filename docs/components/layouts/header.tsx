@@ -119,6 +119,8 @@ export const Header = memo(
 
             <Tag
               colorScheme="gray"
+              bg="transparent"
+              borderWidth="1px"
               display={{ base: "inline-flex", md: "none" }}
               letterSpacing="1px"
               minW="auto"

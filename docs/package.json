@@ -92,7 +92,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-testing-library": "^6.4.0",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "execa": "^9.4.1",
+    "execa": "9.3.1",
     "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",
     "glob": "^11.0.0",
@@ -112,6 +112,7 @@
     "typescript-eslint": "^8.11.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
-    "vitest": "^2.1.3"
+    "vitest": "^2.1.3",
+    "tsx": "^4.19.1"
   }
 }

@@ -1,5 +1,6 @@
 import type {
   CSSUIObject,
+  FC,
   HTMLUIProps,
   LoadingComponentProps,
   LoadingConfigOptions,
@@ -14,7 +15,7 @@ import type {
   ReactNode,
   RefObject,
 } from "react"
-import { ui, FC, forwardRef, memo } from "@yamada-ui/core"
+import { forwardRef, memo, ui } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"

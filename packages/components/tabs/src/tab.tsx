@@ -32,6 +32,7 @@ export const Tab = forwardRef<TabProps, "button">(
     const {
       disableRipple,
       isManual,
+      orientation,
       selectedIndex,
       setFocusedIndex,
       setSelectedIndex,
@@ -57,6 +58,7 @@ export const Tab = forwardRef<TabProps, "button">(
       id,
       "aria-controls": tabpanelId,
       "aria-selected": isSelected,
+
       role: "tab",
       ...rest,
       ref: mergeRefs(register, ref),
@@ -88,6 +90,7 @@ export const Tab = forwardRef<TabProps, "button">(
         __css={css}
         {...clickableProps}
         type="button"
+        data-orientation={orientation}
         tabIndex={isSelected ? 0 : -1}
         onPointerDown={onPointerDown}
       >

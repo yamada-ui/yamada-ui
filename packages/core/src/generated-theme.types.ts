@@ -376,6 +376,7 @@ export interface GeneratedTheme extends UITheme {
       sizes: {} & string
       variants: "basic" | "card" | "unstyled" | ({} & string)
     }
+    Airy: { sizes: {} & string; variants: {} & string }
     Alert: {
       sizes: {} & string
       variants:
@@ -384,6 +385,7 @@ export interface GeneratedTheme extends UITheme {
         | "left-accent"
         | "solid"
         | "subtle"
+        | "surface"
         | "top-accent"
         | ({} & string)
     }
@@ -396,7 +398,7 @@ export interface GeneratedTheme extends UITheme {
       variants: {} & string
     }
     Autocomplete: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     Avatar: {
@@ -405,19 +407,25 @@ export interface GeneratedTheme extends UITheme {
     }
     Badge: {
       sizes: {} & string
-      variants: "outline" | "solid" | "subtle" | ({} & string)
+      variants: "outline" | "solid" | "subtle" | "surface" | ({} & string)
     }
     BarChart: {
       sizes: "full" | "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
     }
+    Blockquote: {
+      sizes: {} & string
+      variants: "plain" | "solid" | "subtle" | ({} & string)
+    }
     Button: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "2xl" | "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants:
         | "ghost"
         | "link"
         | "outline"
         | "solid"
+        | "subtle"
+        | "surface"
         | "unstyled"
         | ({} & string)
     }
@@ -447,8 +455,12 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
     }
-    ColorPicker: {
+    Code: {
       sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      variants: "outline" | "solid" | "subtle" | "surface" | ({} & string)
+    }
+    ColorPicker: {
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     ColorSelector: {
@@ -456,11 +468,11 @@ export interface GeneratedTheme extends UITheme {
       variants: {} & string
     }
     ColorSwatch: {
-      sizes: "lg" | "md" | "sm" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "basic" | "rounded" | ({} & string)
     }
     DatePicker: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     Dialog: {
@@ -496,19 +508,22 @@ export interface GeneratedTheme extends UITheme {
       variants: "dashed" | "solid" | "unstyled" | ({} & string)
     }
     FileButton: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "2xl" | "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants:
         | "ghost"
         | "link"
         | "outline"
         | "solid"
+        | "subtle"
+        | "surface"
         | "unstyled"
         | ({} & string)
     }
     FileInput: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
+    Flip: { sizes: {} & string; variants: {} & string }
     Heading: {
       sizes:
         | "2xl"
@@ -531,7 +546,7 @@ export interface GeneratedTheme extends UITheme {
       variants: "solid" | "subtle" | ({} & string)
     }
     Input: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     LineChart: {
@@ -565,23 +580,23 @@ export interface GeneratedTheme extends UITheme {
       variants: {} & string
     }
     MonthPicker: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     MultiAutocomplete: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     MultiDatePicker: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     MultiSelect: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     NativeSelect: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     NativeTable: {
@@ -589,12 +604,19 @@ export interface GeneratedTheme extends UITheme {
       variants: "simple" | "striped" | "unstyled" | ({} & string)
     }
     NumberInput: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     Pagination: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
-      variants: "ghost" | "outline" | "solid" | "unstyled" | ({} & string)
+      variants:
+        | "ghost"
+        | "outline"
+        | "solid"
+        | "subtle"
+        | "surface"
+        | "unstyled"
+        | ({} & string)
     }
     PagingTable: {
       sizes: "lg" | "md" | "sm" | "xl" | ({} & string)
@@ -622,7 +644,7 @@ export interface GeneratedTheme extends UITheme {
     }
     Radio: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
     RangeDatePicker: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     RangeSlider: {
@@ -641,6 +663,7 @@ export interface GeneratedTheme extends UITheme {
       sizes: {} & string
       variants: "border" | "spacer" | "unstyled" | ({} & string)
     }
+    Rotate: { sizes: {} & string; variants: {} & string }
     SaturationSlider: {
       sizes: "full" | "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
@@ -650,7 +673,7 @@ export interface GeneratedTheme extends UITheme {
       variants: "basic" | "rounded" | ({} & string)
     }
     Select: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     Slider: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
@@ -681,10 +704,10 @@ export interface GeneratedTheme extends UITheme {
     }
     Tag: {
       sizes: "lg" | "md" | "sm" | ({} & string)
-      variants: "outline" | "solid" | "subtle" | ({} & string)
+      variants: "outline" | "solid" | "subtle" | "surface" | ({} & string)
     }
     Textarea: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
     Toggle: {
@@ -692,7 +715,7 @@ export interface GeneratedTheme extends UITheme {
       variants: "outline" | "solid" | "subtle" | "unstyled" | ({} & string)
     }
     YearPicker: {
-      sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
   }

@@ -1,5 +1,30 @@
 # @yamada-ui/loading
 
+## 1.1.20
+
+### Patch Changes
+
+- [#3178](https://github.com/yamada-ui/yamada-ui/pull/3178) [`1d344ae`](https://github.com/yamada-ui/yamada-ui/commit/1d344ae725aeb5886859dc145c605409d8bc4a3e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported `LoadingOptions` type.
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/motion@2.2.6
+
+## 1.1.19
+
+### Patch Changes
+
+- [#3202](https://github.com/yamada-ui/yamada-ui/pull/3202) [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add forwardRef to loading components.
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59), [`b7e1e87`](https://github.com/yamada-ui/yamada-ui/commit/b7e1e87fb676e2be5c85181cc126a4a173090dd3)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/motion@2.2.5
+  - @yamada-ui/icon@1.1.9
+  - @yamada-ui/portal@1.0.24
+  - @yamada-ui/use-timeout@1.0.23
+
 ## 1.1.18
 
 ### Patch Changes

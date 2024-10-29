@@ -22,7 +22,6 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
       },
       icon: {
         color: ["blackAlpha.600", "whiteAlpha.700"],
-        fontSize: "xl",
         outline: 0,
         py: "2",
         rounded: "md",
@@ -38,22 +37,31 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
         icon: {
           fontSize: "lg",
           insetEnd: "1",
-          pt: "3",
+          pt: "2",
         },
       },
       sm: {
         icon: {
-          insetEnd: "2",
+          fontSize: "xl",
+          insetEnd: "1.5",
         },
       },
       md: {
         icon: {
+          fontSize: "xl",
           insetEnd: "2",
         },
       },
       lg: {
         icon: {
+          fontSize: "2xl",
           insetEnd: "2",
+        },
+      },
+      xl: {
+        icon: {
+          fontSize: "3xl",
+          insetEnd: "3",
         },
       },
     },

@@ -39,13 +39,13 @@ describe("<Rating />", () => {
   test("disabled Rating renders correctly", () => {
     render(<Rating data-testid="rating" isDisabled />)
 
-    expect(screen.getByTestId("rating")).toHaveAttribute("disabled")
+    expect(screen.getByTestId("rating")).toHaveAttribute("aria-disabled")
   })
 
   test("readonly Rating renders correctly", () => {
     render(<Rating data-testid="rating" isReadOnly />)
 
-    expect(screen.getByTestId("rating")).toHaveAttribute("readonly")
+    expect(screen.getByTestId("rating")).toHaveAttribute("aria-readonly")
   })
 
   test("should be filled to the point of hovering", async () => {

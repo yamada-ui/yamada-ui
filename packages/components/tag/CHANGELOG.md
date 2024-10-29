@@ -1,5 +1,28 @@
 # @yamada-ui/tag
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/use-clickable@1.2.12
+
+## 1.1.0
+
+### Minor Changes
+
+- [#3116](https://github.com/yamada-ui/yamada-ui/pull/3116) [`540e2d4`](https://github.com/yamada-ui/yamada-ui/commit/540e2d4a74ec2fba8dd5cd6f6a937aabf7a5db10) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `closeButtonProps` props.
+
+### Patch Changes
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59), [`4a40e15`](https://github.com/yamada-ui/yamada-ui/commit/4a40e15ea42af003f966729a5b23810a0a73bec6)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/use-clickable@1.2.11
+  - @yamada-ui/icon@1.1.9
+
 ## 1.0.42
 
 ### Patch Changes

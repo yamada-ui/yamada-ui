@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/lucide",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "Yamada UI lucide component",
   "keywords": [
     "yamada",
@@ -56,8 +56,8 @@
     "lucide-react": "0.451.0"
   },
   "devDependencies": {
-    "@babel/parser": "^7.25.7",
-    "@babel/traverse": "^7.25.7",
+    "@babel/parser": "^7.25.9",
+    "@babel/traverse": "^7.25.9",
     "@lucide/lab": "^0.1.2",
     "@types/babel__traverse": "^7.20.6",
     "clean-package": "2.2.0",

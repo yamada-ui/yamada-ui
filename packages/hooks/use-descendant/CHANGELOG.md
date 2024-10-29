@@ -1,5 +1,18 @@
 # @yamada-ui/use-descendant
 
+## 1.0.25
+
+### Patch Changes
+
+- [#3147](https://github.com/yamada-ui/yamada-ui/pull/3147) [`81fda67`](https://github.com/yamada-ui/yamada-ui/commit/81fda6792c1a5f5d8af7f33fb068afdfcecd1468) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Fixed a bug where `createDescendant` referred to the same instant.
+
+## 1.0.24
+
+### Patch Changes
+
+- Updated dependencies [[`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59)]:
+  - @yamada-ui/utils@1.5.4
+
 ## 1.0.23
 
 ### Patch Changes

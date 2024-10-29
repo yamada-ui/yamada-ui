@@ -5,7 +5,7 @@ import type {
   MotionConfigProps,
   Variants,
 } from "framer-motion"
-import type { FC, ReactNode, RefObject } from "react"
+import type { FC, ForwardedRef, ReactNode, RefObject } from "react"
 import type { HTMLUIProps } from "./components"
 import type {
   AnalyzeBreakpointsReturn,
@@ -64,6 +64,8 @@ export type LoadingVariant =
   | "oval"
   | "puff"
   | "rings"
+
+export type LoadingComponent = "background" | "custom" | "page" | "screen"
 
 export type NoticePlacement =
   | "bottom"
@@ -274,7 +276,10 @@ export interface LoadingConfigOptions {
   /**
    * The custom loading component to use.
    */
-  component?: (props: LoadingComponentProps) => ReactNode
+  component?: (
+    props: LoadingComponentProps,
+    ref: ForwardedRef<any>,
+  ) => ReactNode
   /**
    * The `ref` to the component where the portal will be attached to.
    */
@@ -402,6 +407,10 @@ export interface ThemeConfig {
      * The options of the custom loading.
      */
     custom?: LoadingConfigOptions
+    /**
+     * The default component to use for `useAsyncCallback` and similar hooks.
+     */
+    defaultComponent?: LoadingComponent
     /**
      * The options of the page loading.
      */

@@ -1,5 +1,57 @@
 # @yamada-ui/table
 
+## 1.3.1
+
+### Patch Changes
+
+- [#3233](https://github.com/yamada-ui/yamada-ui/pull/3233) [`9d1612c`](https://github.com/yamada-ui/yamada-ui/commit/9d1612c7132077a2b1982fb92111d274bbcec8dd) Thanks [@nathanlao](https://github.com/nathanlao)! - fix the table checkbox not disabling when no data presents
+
+- [#3231](https://github.com/yamada-ui/yamada-ui/pull/3231) [`655fbb2`](https://github.com/yamada-ui/yamada-ui/commit/655fbb2067a601d8c369e5120b4b8667ce8b0904) Thanks [@ChinoUkaegbu](https://github.com/ChinoUkaegbu)! - Fixed pagination layout in `PagingTable`.
+
+- Updated dependencies [[`aef0f69`](https://github.com/yamada-ui/yamada-ui/commit/aef0f6963259300feed05ca76ff26f982dcd8eed), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/select@1.7.2
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/checkbox@1.1.12
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/native-table@1.0.43
+  - @yamada-ui/pagination@1.1.1
+  - @yamada-ui/use-clickable@1.2.12
+  - @yamada-ui/use-value@1.1.29
+
+## 1.3.0
+
+### Minor Changes
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enables keyboard operation.
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `rowHeader` props.
+
+### Patch Changes
+
+- [#3143](https://github.com/yamada-ui/yamada-ui/pull/3143) [`44a680c`](https://github.com/yamada-ui/yamada-ui/commit/44a680cb153174bbc11575780f8e0bec9c49271f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed size handling for pagination.
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where all rows were displayed as selected when all rows were invalid.
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the footer was incorrectly displayed.
+
+- [#3145](https://github.com/yamada-ui/yamada-ui/pull/3145) [`8d9fb11`](https://github.com/yamada-ui/yamada-ui/commit/8d9fb1154c6829a25648a17162e19589256d5557) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the number of `aria-rowindex` was incorrect.
+
+- [#3112](https://github.com/yamada-ui/yamada-ui/pull/3112) [`85490c1`](https://github.com/yamada-ui/yamada-ui/commit/85490c1d1fc583d97e896564837e98d8f043a97f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary `aria-colindex`.
+
+- [#3117](https://github.com/yamada-ui/yamada-ui/pull/3117) [`ff3715d`](https://github.com/yamada-ui/yamada-ui/commit/ff3715d1976cebffeb3287b6b922a708ac1c639d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update type imports and interfaces.
+
+- Updated dependencies [[`80a6d0f`](https://github.com/yamada-ui/yamada-ui/commit/80a6d0fdf90c85880ede4d41c9d66dd106562edc), [`4f25558`](https://github.com/yamada-ui/yamada-ui/commit/4f2555883122b881d094af0d6067c23e0dec1880), [`d9153a9`](https://github.com/yamada-ui/yamada-ui/commit/d9153a9085ce62df0d4142f36c00a4a335cfee15), [`f131482`](https://github.com/yamada-ui/yamada-ui/commit/f13148215d7145ae1bd52f9a585fe4ff338f9f03), [`1ea1d52`](https://github.com/yamada-ui/yamada-ui/commit/1ea1d527d23b314ee5472a7364b459d325248f59), [`e4f8212`](https://github.com/yamada-ui/yamada-ui/commit/e4f8212ecbb2702673c82696870d89dc01473cb4), [`4a40e15`](https://github.com/yamada-ui/yamada-ui/commit/4a40e15ea42af003f966729a5b23810a0a73bec6)]:
+  - @yamada-ui/core@1.15.3
+  - @yamada-ui/utils@1.5.4
+  - @yamada-ui/pagination@1.1.0
+  - @yamada-ui/use-clickable@1.2.11
+  - @yamada-ui/select@1.7.1
+  - @yamada-ui/checkbox@1.1.11
+  - @yamada-ui/icon@1.1.9
+  - @yamada-ui/native-table@1.0.42
+  - @yamada-ui/use-value@1.1.28
+  - @yamada-ui/use-controllable-state@1.0.23
+
 ## 1.2.5
 
 ### Patch Changes

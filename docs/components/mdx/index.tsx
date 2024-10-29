@@ -10,7 +10,6 @@ import {
   Kbd,
   ListItem,
   NativeTable,
-  TableContainer,
   Tag,
   Td,
   Text,
@@ -40,12 +39,20 @@ export const components: MDXComponents = {
   a: (props) => <Link apply="mdx.a" {...props} />,
   Alert: (props) => <Alert apply="mdx.alert" {...props} />,
   CardContainer,
-  code: (props) => <Text as="code" apply="mdx.code" {...props} />,
+  code: ({ children, ...rest }) => (
+    <Text
+      as="code"
+      apply="mdx.code"
+      {...rest}
+      dangerouslySetInnerHTML={{ __html: children?.toString() ?? "" }}
+    />
+  ),
   ColorModeButton,
   ColorPaletter,
   ColorPaletterContainer,
   ColorPaletters,
   Contributors,
+  em: (props) => <Text as="em" apply="mdx.em" {...props} />,
   h1: (props) => <Text as="h1" apply="mdx.h1" {...props} />,
   h2: (props) => <LinkedHeading as="h2" apply="mdx.h2" {...props} />,
   h3: (props) => <LinkedHeading as="h3" apply="mdx.h3" {...props} />,
@@ -58,7 +65,7 @@ export const components: MDXComponents = {
   LinkCard,
   Note: ({ children, ...rest }) => (
     <Alert apply="mdx.alert" variant="note" alignItems="flex-start" {...rest}>
-      <AlertIcon mt="0.2em" />
+      <AlertIcon />
       <AlertDescription as="p" apply="mdx.p">
         {children}
       </AlertDescription>
@@ -72,11 +79,7 @@ export const components: MDXComponents = {
   SelectPackageManagers,
   Sponsors,
   strong: (props) => <Text as="strong" apply="mdx.strong" {...props} />,
-  table: (props) => (
-    <TableContainer apply="mdx.table-container">
-      <NativeTable apply="mdx.table" {...props} />
-    </TableContainer>
-  ),
+  table: (props) => <NativeTable apply="mdx.table" {...props} />,
   Tag: (props) => <Tag colorScheme="gray" size="sm" {...props} />,
   td: (props) => <Td {...props} />,
   th: (props) => <Th {...props} />,

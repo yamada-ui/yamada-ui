@@ -1,5 +1,16 @@
 # @yamada-ui/switch
 
+## 1.1.13
+
+### Patch Changes
+
+- [#3235](https://github.com/yamada-ui/yamada-ui/pull/3235) [`46c18b2`](https://github.com/yamada-ui/yamada-ui/commit/46c18b26a10334ef933cb22c38767c2ea6f875d5) Thanks [@108yen](https://github.com/108yen)! - Remove unnecessary layout animation.
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/checkbox@1.1.12
+  - @yamada-ui/motion@2.2.6
+
 ## 1.1.12
 
 ### Patch Changes

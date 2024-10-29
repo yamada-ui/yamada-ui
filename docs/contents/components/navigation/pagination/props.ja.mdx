@@ -5,6 +5,7 @@ package_name: "@yamada-ui/pagination"
 with_description: true
 tab: Props
 order: 1
+label: Updated
 ---
 
 ## Props
@@ -43,23 +44,30 @@ order: 1
 />
 
 <PropsCard
+  id="pagination-containerprops"
+  name="containerProps"
+  type='HTMLUIProps<"nav">'
+  description={"Props for container element."}
+/>
+
+<PropsCard
   id="pagination-controlnextprops"
   name="controlNextProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for next of the control button element."}
 />
 
 <PropsCard
   id="pagination-controlprevprops"
   name="controlPrevProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for previous of the control button element."}
 />
 
 <PropsCard
   id="pagination-controlprops"
   name="controlProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for control button element."}
 />
 
@@ -76,29 +84,22 @@ order: 1
 <PropsCard
   id="pagination-edgefirstprops"
   name="edgeFirstProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for first of the edge button element."}
 />
 
 <PropsCard
   id="pagination-edgelastprops"
   name="edgeLastProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for last of the edge button element."}
 />
 
 <PropsCard
   id="pagination-edgeprops"
   name="edgeProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for edge button element."}
-/>
-
-<PropsCard
-  id="pagination-innerprops"
-  name="innerProps"
-  type="HTMLUIProps"
-  description={"Props for inner element."}
 />
 
 <PropsCard
@@ -112,7 +113,7 @@ order: 1
 <PropsCard
   id="pagination-itemprops"
   name="itemProps"
-  type='HTMLUIProps<"button">'
+  type='Omit<PaginationItemProps, "page">'
   description={"Props for button element."}
 />
 
@@ -147,13 +148,13 @@ order: 1
   name="size"
   type='"xs" | "sm" | "md" | "lg" | "xl"'
   description={"The size of the Pagination."}
-  defaultValue={'"md"'}
+  defaultValue={'"sm"'}
 />
 
 <PropsCard
   id="pagination-variant"
   name="variant"
-  type='"ghost" | "outline" | "solid" | "unstyled"'
+  type='"ghost" | "outline" | "solid" | "subtle" | "surface" | "unstyled"'
   description={"The variant of the Pagination."}
   defaultValue={'"solid"'}
 />

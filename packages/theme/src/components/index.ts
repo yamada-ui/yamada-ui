@@ -7,6 +7,7 @@ import { Autocomplete } from "./autocomplete"
 import { Avatar } from "./avatar"
 import { Badge } from "./badge"
 import { BarChart } from "./bar-chart"
+import { Blockquote } from "./blockquote"
 import { Breadcrumb } from "./breadcrumb"
 import { Button } from "./button"
 import { Calendar } from "./calendar"
@@ -15,6 +16,7 @@ import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
 import { CircleProgress } from "./circle-progress"
 import { CloseButton } from "./close-button"
+import { Code } from "./code"
 import { Collapse } from "./collapse"
 import { ColorPicker } from "./color-picker"
 import { ColorSelector } from "./color-selector"
@@ -28,6 +30,7 @@ import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
+import { Em } from "./em"
 import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
@@ -104,6 +107,7 @@ export const components = {
   Avatar,
   Badge,
   BarChart,
+  Blockquote,
   Breadcrumb,
   Button,
   Calendar,
@@ -112,6 +116,7 @@ export const components = {
   Checkbox,
   CircleProgress,
   CloseButton,
+  Code,
   Collapse,
   ColorPicker,
   ColorSelector,
@@ -125,6 +130,7 @@ export const components = {
   Drawer,
   Dropzone,
   Editable,
+  Em,
   Fade,
   Fieldset,
   FileButton,

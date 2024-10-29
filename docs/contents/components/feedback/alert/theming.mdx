@@ -44,21 +44,17 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
   },
 
   variants: {
-    basic: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
+    basic: ({ colorScheme: c = "primary" }) => ({
       container: { bg: ["white", "black"], borderWidth: "1px" },
-      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
+      icon: { color: [`${c}.500`, `${c}.400`] },
     }),
-    "island-accent": ({
-      colorScheme: c = "primary",
-      colorMode: m,
-      theme: t,
-    }) => ({
+    "island-accent": ({ colorScheme: c = "primary" }) => ({
       container: {
         bg: ["white", "black"],
         borderWidth: "1px",
         pl: 7,
         _before: {
-          bg: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
+          bg: [`${c}.500`, `${c}.400`],
           content: '""',
           h: "calc(100% - 1.5rem)",
           left: 3,
@@ -69,7 +65,7 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
           w: 1,
         },
       },
-      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
+      icon: { color: [`${c}.500`, `${c}.400`] },
     }),
     "left-accent": ({
       colorScheme: c = "primary",
@@ -77,33 +73,43 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
       theme: t,
     }) => ({
       container: {
-        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
         borderLeft: "0.25rem solid",
-        borderLeftColor: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
+        borderLeftColor: [`${c}.500`, `${c}.400`],
+        color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         pl: 3,
         rounded: 4,
       },
-      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
-    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
+    solid: ({ colorScheme: c = "primary" }) => ({
       container: {
-        bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
+        bg: [`${c}.500`, `${c}.600`],
         color: "white",
       },
     }),
     subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
-      container: { bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)] },
-      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
+      container: {
+        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+      },
+    }),
+    surface: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
+      container: {
+        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        border: "1px solid",
+        borderColor: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+        color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+      },
     }),
     "top-accent": ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
-        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
         borderTop: "0.25rem solid",
-        borderTopColor: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`],
+        borderTopColor: [`${c}.500`, `${c}.400`],
+        color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         pt: 3,
         rounded: 4,
       },
-      icon: { color: [tintColor(`${c}.600`, 16)(t, m), `${c}.400`] },
     }),
   },
 

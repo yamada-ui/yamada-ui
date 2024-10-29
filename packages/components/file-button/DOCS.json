@@ -96,13 +96,13 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the FileButton.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"link\" | \"outline\" | \"solid\" | \"unstyled\"",
+      "type": "\"ghost\" | \"link\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | \"unstyled\"",
       "defaultValue": "\"solid\"",
       "description": "The variant of the FileButton.",
       "required": false

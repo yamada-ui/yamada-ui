@@ -22,18 +22,23 @@
       "description": "The pagination button component to use.",
       "required": false
     },
+    "containerProps": {
+      "type": "HTMLUIProps<\"nav\">",
+      "description": "Props for container element.",
+      "required": false
+    },
     "controlNextProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for next of the control button element.",
       "required": false
     },
     "controlPrevProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for previous of the control button element.",
       "required": false
     },
     "controlProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for control button element.",
       "required": false
     },
@@ -44,23 +49,18 @@
       "required": false
     },
     "edgeFirstProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for first of the edge button element.",
       "required": false
     },
     "edgeLastProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for last of the edge button element.",
       "required": false
     },
     "edgeProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for edge button element.",
-      "required": false
-    },
-    "innerProps": {
-      "type": "HTMLUIProps",
-      "description": "Props for inner element.",
       "required": false
     },
     "isDisabled": {
@@ -70,7 +70,7 @@
       "required": false
     },
     "itemProps": {
-      "type": "HTMLUIProps<\"button\">",
+      "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for button element.",
       "required": false
     },
@@ -92,12 +92,12 @@
     },
     "size": {
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-      "defaultValue": "\"md\"",
+      "defaultValue": "\"sm\"",
       "description": "The size of the Pagination.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"unstyled\"",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | \"unstyled\"",
       "defaultValue": "\"solid\"",
       "description": "The variant of the Pagination.",
       "required": false

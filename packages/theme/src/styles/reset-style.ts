@@ -186,6 +186,10 @@ export const resetStyle: UIStyle = {
     cursor: "pointer",
   },
 
+  cite: {
+    fontStyle: "inherit",
+  },
+
   legend: {
     color: "inherit",
     display: "table",

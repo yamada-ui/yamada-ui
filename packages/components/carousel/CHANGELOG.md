@@ -1,5 +1,19 @@
 # @yamada-ui/carousel
 
+## 2.1.0
+
+### Minor Changes
+
+- [#3036](https://github.com/yamada-ui/yamada-ui/pull/3036) [`16d5556`](https://github.com/yamada-ui/yamada-ui/commit/16d555628d7207c3f7794c1dd221accafa3872ba) Thanks [@uraaaa24](https://github.com/uraaaa24)! - Added roles and descriptions to Carousel components.
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/button@1.0.46
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/use-value@1.1.29
+
 ## 2.0.8
 
 ### Patch Changes

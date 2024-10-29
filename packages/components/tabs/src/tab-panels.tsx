@@ -9,15 +9,13 @@ export interface TabPanelsProps extends HTMLUIProps {}
 export const TabPanels = forwardRef<TabPanelsProps, "div">(
   ({ className, children, ...rest }, ref) => {
     const { selectedIndex, styles, tabPanelsProps } = useTabsContext()
-
     const validChildren = getValidChildren(children)
-
     const cloneChildren = validChildren.map((child, index) => {
       const isSelected = index === selectedIndex
 
       return createElement(
         TabPanelProvider,
-        { key: index, value: { isSelected, selectedIndex } },
+        { key: index, value: { index, isSelected, selectedIndex } },
         child,
       )
     })

@@ -5,9 +5,8 @@ import { useSelectContext, useSelectDescendantsContext } from "./use-select"
 
 export const useSelectList = () => {
   const { focusedIndex, listRef, value } = useSelectContext()
-
   const descendants = useSelectDescendantsContext()
-
+  const uuid = useId()
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
   const isMulti = isArray(value)
@@ -47,11 +46,9 @@ export const useSelectList = () => {
     beforeFocusedIndex.current = selectedValue.index
   }, [listRef, selectedValue])
 
-  const id = useId()
-
-  const getListProps: PropGetter<"ul"> = useCallback(
-    (props = {}, ref = null) => ({
-      id,
+  const getListProps: PropGetter = useCallback(
+    ({ id, ...props } = {}, ref = null) => ({
+      id: id ?? uuid,
       ref: mergeRefs(listRef, ref),
       "aria-multiselectable": ariaAttr(isMulti),
       position: "relative",
@@ -59,7 +56,7 @@ export const useSelectList = () => {
       tabIndex: -1,
       ...props,
     }),
-    [id, isMulti, listRef],
+    [uuid, isMulti, listRef],
   )
 
   return {

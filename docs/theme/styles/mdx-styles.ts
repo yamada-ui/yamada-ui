@@ -83,9 +83,6 @@ export const mdx: { [key: string]: CSSUIObject } = {
     fontWeight: "semibold",
   },
   table: {
-    w: "full",
-  },
-  "table-container": {
     my: "6",
     td: {
       lineHeight: "1.5rem",
@@ -98,7 +95,9 @@ export const mdx: { [key: string]: CSSUIObject } = {
       letterSpacing: "normal",
       lineHeight: "6",
       textTransform: "none",
+      whiteSpace: "nowrap",
     },
+    w: "full",
   },
   ul: {
     "& ul,ol": {

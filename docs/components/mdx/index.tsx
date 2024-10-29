@@ -10,7 +10,6 @@ import {
   Kbd,
   ListItem,
   NativeTable,
-  TableContainer,
   Tag,
   Td,
   Text,
@@ -40,11 +39,12 @@ export const components: MDXComponents = {
   a: (props) => <Link apply="mdx.a" {...props} />,
   Alert: (props) => <Alert apply="mdx.alert" {...props} />,
   CardContainer,
-  code: (props) => (
+  code: ({ children, ...rest }) => (
     <Text
       as="code"
       apply="mdx.code"
-      dangerouslySetInnerHTML={{ __html: props.children }}
+      {...rest}
+      dangerouslySetInnerHTML={{ __html: children?.toString() ?? "" }}
     />
   ),
   ColorModeButton,
@@ -79,11 +79,7 @@ export const components: MDXComponents = {
   SelectPackageManagers,
   Sponsors,
   strong: (props) => <Text as="strong" apply="mdx.strong" {...props} />,
-  table: (props) => (
-    <TableContainer apply="mdx.table-container">
-      <NativeTable apply="mdx.table" {...props} />
-    </TableContainer>
-  ),
+  table: (props) => <NativeTable apply="mdx.table" {...props} />,
   Tag: (props) => <Tag colorScheme="gray" size="sm" {...props} />,
   td: (props) => <Td {...props} />,
   th: (props) => <Th {...props} />,

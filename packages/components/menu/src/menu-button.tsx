@@ -95,6 +95,9 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
   },
 )
 
+MenuButton.displayName = "MenuButton"
+MenuButton.__ui__ = "MenuButton"
+
 const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   const { styles } = useMenu()
 
@@ -135,3 +138,6 @@ export const MenuItemButton = forwardRef<MenuItemButtonProps, "button">(
     )
   },
 )
+
+MenuItemButton.displayName = "MenuItemButton"
+MenuItemButton.__ui__ = "MenuItemButton"

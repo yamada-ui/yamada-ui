@@ -25,7 +25,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"basic\" | \"island-accent\" | \"left-accent\" | \"solid\" | \"subtle\" | \"top-accent\"",
+      "type": "\"basic\" | \"island-accent\" | \"left-accent\" | \"solid\" | \"subtle\" | \"surface\" | \"top-accent\"",
       "defaultValue": "\"basic\"",
       "description": "The variant of the Alert.",
       "required": false

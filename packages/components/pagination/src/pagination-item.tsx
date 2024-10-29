@@ -100,7 +100,7 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
       >
         {children}
 
-        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </Component>
     )
   },

@@ -385,6 +385,7 @@ export interface GeneratedTheme extends UITheme {
         | "left-accent"
         | "solid"
         | "subtle"
+        | "surface"
         | "top-accent"
         | ({} & string)
     }
@@ -406,7 +407,7 @@ export interface GeneratedTheme extends UITheme {
     }
     Badge: {
       sizes: {} & string
-      variants: "outline" | "solid" | "subtle" | ({} & string)
+      variants: "outline" | "solid" | "subtle" | "surface" | ({} & string)
     }
     BarChart: {
       sizes: "full" | "lg" | "md" | "sm" | ({} & string)
@@ -423,6 +424,8 @@ export interface GeneratedTheme extends UITheme {
         | "link"
         | "outline"
         | "solid"
+        | "subtle"
+        | "surface"
         | "unstyled"
         | ({} & string)
     }
@@ -511,6 +514,8 @@ export interface GeneratedTheme extends UITheme {
         | "link"
         | "outline"
         | "solid"
+        | "subtle"
+        | "surface"
         | "unstyled"
         | ({} & string)
     }
@@ -604,7 +609,14 @@ export interface GeneratedTheme extends UITheme {
     }
     Pagination: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
-      variants: "ghost" | "outline" | "solid" | "unstyled" | ({} & string)
+      variants:
+        | "ghost"
+        | "outline"
+        | "solid"
+        | "subtle"
+        | "surface"
+        | "unstyled"
+        | ({} & string)
     }
     PagingTable: {
       sizes: "lg" | "md" | "sm" | "xl" | ({} & string)
@@ -692,7 +704,7 @@ export interface GeneratedTheme extends UITheme {
     }
     Tag: {
       sizes: "lg" | "md" | "sm" | ({} & string)
-      variants: "outline" | "solid" | "subtle" | ({} & string)
+      variants: "outline" | "solid" | "subtle" | "surface" | ({} & string)
     }
     Textarea: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)

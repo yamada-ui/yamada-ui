@@ -9405,6 +9405,45 @@
   },
   {
     "type": "page",
+    "description": "`Picture` is a component that uses the `picture` element to provide alternative images for different display and device scenarios.",
+    "hierarchy": { "lv1": "Picture" },
+    "slug": "/components/media-and-icons/picture",
+    "title": "Picture"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Picture", "lv2": "Import" },
+    "slug": "/components/media-and-icons/picture#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Picture", "lv2": "Usage" },
+    "slug": "/components/media-and-icons/picture#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Picture",
+      "lv2": "Usage",
+      "lv3": "Using Custom Media"
+    },
+    "slug": "/components/media-and-icons/picture#using-custom-media",
+    "title": "Using Custom Media"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Picture",
+      "lv2": "Usage",
+      "lv3": "Disabling Sorting"
+    },
+    "slug": "/components/media-and-icons/picture#disabling-sorting",
+    "title": "Disabling Sorting"
+  },
+  {
+    "type": "page",
     "description": "`Breadcrumb` is a component that helps users understand the hierarchy of a website.",
     "hierarchy": { "lv1": "Breadcrumb" },
     "slug": "/components/navigation/breadcrumb",
@@ -14826,9 +14865,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoint" },
-    "slug": "/styled-system/theming/default-theme#breakpoint",
-    "title": "Breakpoint"
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Breakpoints" },
+    "slug": "/styled-system/theming/default-theme#breakpoints",
+    "title": "Breakpoints"
   },
   {
     "type": "page",

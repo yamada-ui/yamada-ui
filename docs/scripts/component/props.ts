@@ -85,6 +85,8 @@ const OVERRIDE_PATHS: {
     { children: ["grid-item"], parent: "grid" },
     "spacer",
     "stack",
+    "bleed",
+    "float",
   ],
   link: ["link", { children: ["link-overlay"], parent: "link-box" }],
   modal: [
@@ -124,7 +126,16 @@ const OVERRIDE_PATHS: {
   slider: ["slider", "range-slider"],
   table: ["table", "paging-table"],
   transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
-  typography: ["heading", "text"],
+  typography: [
+    "heading",
+    "text",
+    "code",
+    "em",
+    {
+      children: ["blockquote-content", "blockquote-caption", "blockquote-cite"],
+      parent: "blockquote",
+    },
+  ],
 }
 
 export const getDocs: p.RequiredRunner = () => async (p, s) => {

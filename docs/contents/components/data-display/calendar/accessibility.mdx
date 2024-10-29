@@ -1,0 +1,32 @@
+---
+title: Calendar
+description: "`Calendar` is a component for displaying or selecting dates in a calendar."
+package_name: "@yamada-ui/calendar"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+## Keyboard Navigation
+
+| Key              | Description                                                                                          | State |
+| ---------------- | ---------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`            | When focus moves to the calendar, it focuses the header.                                             | -     |
+| `ArrowLeft`      | Moves focus to the previous date. If focus is on the left-most date in the row, focus does not move. | -     |
+| `ArrowRight`     | Moves focus to the next date. If focus is on the right-most date in the row, focus does not move.    | -     |
+| `ArrowUp`        | Moves focus to the date above. If focus is on the top date in the column, focus does not move.       | -     |
+| `ArrowDown`      | Moves focus to the date below. If focus is on the bottom date in the column, focus does not move.    | -     |
+| `Space`, `Enter` | Activates the focused date.                                                                          | -     |
+| `Home`           | Focuses the first date of the month.                                                                 | -     |
+| `End`            | Focuses the last date of the month.                                                                  | -     |
+
+## ARIA Roles and Attributes
+
+| Component                       | Roles and Attributes | Usage                                                             |
+| ------------------------------- | -------------------- | ----------------------------------------------------------------- |
+| `Month` <Tag>Internal</Tag>     | `role="grid"`        | Indicates that it is a grid.                                      |
+|                                 | `aria-label`         | Sets the selected year and month. (Example: `October 2024`)       |
+| `MonthList` <Tag>Internal</Tag> | `role="grid"`        | Indicates that it is a grid.                                      |
+|                                 | `aria-label`         | Sets the selected year. (Example: `2024`)                         |
+| `YearList` <Tag>Internal</Tag>  | `role="grid"`        | Indicates that it is a grid.                                      |
+|                                 | `aria-label`         | Sets the range of years displayed. (Example: `From 2021 to 2032`) |

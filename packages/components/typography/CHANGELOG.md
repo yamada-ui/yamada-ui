@@ -1,5 +1,16 @@
 # @yamada-ui/typography
 
+## 1.1.0
+
+### Minor Changes
+
+- [#3243](https://github.com/yamada-ui/yamada-ui/pull/3243) [`d80d561`](https://github.com/yamada-ui/yamada-ui/commit/d80d561c2008877deae0aca79a5f310e371415af) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Addded `Blockquote`, `Code` and `Em` components.
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+
 ## 1.0.40
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # @yamada-ui/theme
 
+## 1.19.0
+
+### Minor Changes
+
+- [#3224](https://github.com/yamada-ui/yamada-ui/pull/3224) [`f4d0124`](https://github.com/yamada-ui/yamada-ui/commit/f4d0124a8fc678ccb4f7931be3b7a2e7492f11f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new variants `surface` and `subtle`.
+
+- [#3243](https://github.com/yamada-ui/yamada-ui/pull/3243) [`d80d561`](https://github.com/yamada-ui/yamada-ui/commit/d80d561c2008877deae0aca79a5f310e371415af) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Addded `Blockquote`, `Code` and `Em` components.
+
+### Patch Changes
+
+- [#3224](https://github.com/yamada-ui/yamada-ui/pull/3224) [`f4d0124`](https://github.com/yamada-ui/yamada-ui/commit/f4d0124a8fc678ccb4f7931be3b7a2e7492f11f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `green` color palette values.
+
+- [#3226](https://github.com/yamada-ui/yamada-ui/pull/3226) [`78b5d87`](https://github.com/yamada-ui/yamada-ui/commit/78b5d875b10b6ca8277498384221e5cbcebff3de) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the border color of `PopoverFooter` was incorrect.
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+
 ## 1.18.4
 
 ### Patch Changes

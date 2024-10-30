@@ -1,0 +1,31 @@
+---
+title: NativeSelect
+description: >-
+  `NativeSelect` is a component used for allowing users to select one option
+  from a list. It displays a native dropdown list provided by the browser (user
+  agent).
+package_name: "@yamada-ui/native-select"
+order: 4
+with_description: true
+tab: Accessibility
+---
+
+The `NativeSelect` follows the [WAI-ARIA - Combobox Pattern]("https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/") for accessibility.
+
+## Keyboard Navigation
+
+| Key              | Description                                                                                                         | State |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`            | When the focus moves to the select box, it focuses on the first item.                                               | -     |
+| `ArrowUp`        | Focuses on the previous option that is not invalid. For the first item, focus on the last item that is not invalid. | -     |
+| `ArrowDown`      | Focuses on the next option that is not invalid. If last item, focus on the first item that is not invalid.          | -     |
+| `Space`, `Enter` | Activate the option in focus.                                                                                       | -     |
+| `Home`           | Focus and activate the first option that is not invalid.                                                            | -     |
+| `End`            | Focus and activate the last option that is not invalid.                                                             | -     |
+
+## ARIA Roles and Attributes
+
+| Component                     | Role and Attribute   | Usage                                             |
+| ----------------------------- | -------------------- | ------------------------------------------------- |
+| `NativeSelect`                | `aria-hidden="true"` | Excludes the element from the accessibility tree. |
+| ` select` <Tag>Internal</Tag> | `aria-readonly`      | Set to `"true"` if `isReadOnly` is set.           |

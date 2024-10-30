@@ -1,0 +1,44 @@
+---
+title: Carousel
+description: "`Carousel` is a component that displays multiple elements like a slideshow."
+package_name: "@yamada-ui/carousel"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+The `Carousel` follows the [WAI-ARIA - Carousel (Slide Show or Image Rotator) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/) for accessibility.
+
+## キーボード操作
+
+| キー         | 説明                                                                                                               | 状態                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `Tab`        | When focus moves to the tab list, it focuses the active tab.                                                       | -                          |
+| `ArrowLeft`  | Focuses and activates the previous tab that is not invalid. If first tab, focus last tab.                          | `orientation="horizontal"` |
+| `ArrowRight` | Focuses and activates the next tab that is not invalid. Focuses and activates the first tab if it is the last tab. | `orientation="horizontal"` |
+| `ArrowUp`    | Focuses and activates the previous tab that is not invalid. If first tab, focus last tab.                          | `orientation="vertical"`   |
+| `ArrowDown`  | Focuses and activates the next tab that is not invalid. Focuses and activates the first tab if it is the last tab. | `orientation="vertical"`   |
+| `Home`       | Focuses and activates the first tab that is not invalid.                                                           | -                          |
+| `End`        | Focuses and activates the last tab that is not invalid.                                                            | -                          |
+
+## ARIAロールと属性
+
+| コンポーネント                          | ロールと属性                        | 使い方                                                                 |
+| --------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------- |
+| `Carousel`                              | `aria-roledescription="carousel"`   | Indicates that it is a carousel.                                       |
+| `CarouselSlides` <Tag>Internal</Tag>    | `aria-live`                         | If `autoplay` is `true`, set `“off”`; if `false`, set `“polite”`.      |
+| `CarouselControlNext`                   | `aria-controls`                     | Sets the `id` of the associated `role=“tabpanel”`.                     |
+|                                         | `aria-label="Go to next slide"`     | Set `Go to next slide`.                                                |
+| `CarouselControlPrev`                   | `aria-controls`                     | Sets the `id` of the associated `role=“tabpanel”`.                     |
+|                                         | `aria-label="Go to previous slide"` | Set `Go to previous slide`.                                            |
+| `CarouselIndicators`                    | `role="tablist"`                    | Indicates that this is a tab list.                                     |
+|                                         | `aria-label="Sliders"`              | `Set `Sliders`.                                                        |
+|                                         | `aria-orientation`                  | Set `“horizontal”` or `“vertical”` based on `orientation` value.       |
+| `CarouselIndicator` <Tag>Internal</Tag> | `role="tab"`                        | Indicates that this is a tab.                                          |
+|                                         | `aria-controls`                     | Sets the `id` of the associated `role=“tabpanel”`.                     |
+|                                         | `aria-label`                        | Sets the destination slide number (e.g., `Go to 1 slide`).             |
+|                                         | `aria-selected`                     | Set `true` if the tab is active, set `false` for all other tabs.       |
+| `CarouselSlide`                         | `role="tabpanel"`                   | Indicates that this is a tab panel.                                    |
+|                                         | `id`                                | The `id` to use to associate with `role=“tab”`.                        |
+|                                         | `aria-label`                        | Set the number of the current slide out of all slides. (e.g. `1 of 4`) |
+|                                         | `aria-roledescription="slide`       | Indicates that this is a slide.                                        |

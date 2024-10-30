@@ -1,0 +1,44 @@
+---
+title: Carousel
+description: "`Carousel`は、複数の要素をスライドショーのように表示するコンポーネントです。"
+package_name: "@yamada-ui/carousel"
+order: 3
+with_description: true
+tab: アクセシビリティ
+---
+
+`Carousel`は、アクセシビリティに関して[WAI-ARIA - Carousel (Slide Show or Image Rotator) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/)に従います。
+
+## キーボード操作
+
+| キー         | 説明                                                                                                     | 状態                       |
+| ------------ | -------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `Tab`        | フォーカスがタブリストに移動すると、アクティブなタブをフォーカスします。                                 | -                          |
+| `ArrowLeft`  | 無効ではない前のタブをフォーカスしてアクティブにします。最初のタブの場合は最後のタブをフォーカスします。 | `orientation="horizontal"` |
+| `ArrowRight` | 無効ではない次のタブをフォーカスしてアクティブにします。最後のタブの場合は最初のタブをフォーカスします。 | `orientation="horizontal"` |
+| `ArrowUp`    | 無効ではない前のタブをフォーカスしてアクティブにします。最初のタブの場合は最後のタブをフォーカスします。 | `orientation="vertical"`   |
+| `ArrowDown`  | 無効ではない次のタブをフォーカスしてアクティブにします。最後のタブの場合は最初のタブをフォーカスします。 | `orientation="vertical"`   |
+| `Home`       | 無効ではない最初のタブをフォーカスしてアクティブにします。                                               | -                          |
+| `End`        | 無効ではない最後のタブをフォーカスしてアクティブにします。                                               | -                          |
+
+## ARIAロールと属性
+
+| コンポーネント                      | ロールと属性                        | 使い方                                                                             |
+| ----------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------- |
+| `Carousel`                          | `aria-roledescription="carousel"`   | カルーセルであることを示します。                                                   |
+| `CarouselSlides` <Tag>内部</Tag>    | `aria-live`                         | `autoplay`が`true`の場合は`"off"`を設定し、`false`の場合は`"polite"`を設定します。 |
+| `CarouselControlNext`               | `aria-controls`                     | 関連した`role="tabpanel"`の`id`を設定します。                                      |
+|                                     | `aria-label="Go to next slide"`     | `Go to next slide`を設定します。                                                   |
+| `CarouselControlPrev`               | `aria-controls`                     | 関連した`role="tabpanel"`の`id`を設定します。                                      |
+|                                     | `aria-label="Go to previous slide"` | `Go to previous slide`を設定します。                                               |
+| `CarouselIndicators`                | `role="tablist"`                    | タブリストであることを示します。                                                   |
+|                                     | `aria-label="Sliders"`              | `Sliders`を設定します。                                                            |
+|                                     | `aria-orientation`                  | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。          |
+| `CarouselIndicator` <Tag>内部</Tag> | `role="tab"`                        | タブであることを示します。                                                         |
+|                                     | `aria-controls`                     | 関連した`role="tabpanel"`の`id`を設定します。                                      |
+|                                     | `aria-label`                        | 移動先のスライドの番号を設定します。（例：`Go to 1 slide`）                        |
+|                                     | `aria-selected`                     | タブがアクティブの場合は`true`を設定し、他のすべてのタブは`false`を設定します。    |
+| `CarouselSlide`                     | `role="tabpanel"`                   | タブパネルであることを示します。                                                   |
+|                                     | `id`                                | `role="tab"`と関連付けるために使用する`id`。                                       |
+|                                     | `aria-label`                        | 全スライドのうち、現在のスライドの番号を設定します。（例：`1 of 4`）               |
+|                                     | `aria-roledescription="slide`       | スライドであることを示します。                                                     |

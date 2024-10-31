@@ -8,7 +8,7 @@ import {
 } from "@yamada-ui/test"
 import { noop } from "@yamada-ui/utils"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
-import { useSlider } from "../src/slider"
+import { useSlider } from "../src/use-slider"
 
 describe("<Slider />", () => {
   test("should render correctly", async () => {

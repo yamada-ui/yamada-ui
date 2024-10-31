@@ -4,6 +4,7 @@ import type {
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
+import type { UseSliderProps } from "./use-slider"
 import {
   forwardRef,
   omitThemeProps,
@@ -18,12 +19,7 @@ import {
   isEmpty,
   omitChildren,
 } from "@yamada-ui/utils"
-import {
-  SliderProvider,
-  useSlider,
-  useSliderContext,
-  UseSliderProps,
-} from "./use-slider"
+import { SliderProvider, useSlider, useSliderContext } from "./use-slider"
 
 export const getThumbSize = (
   thumbSize: CSSUIProps["boxSize"] | undefined,

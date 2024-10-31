@@ -9,6 +9,7 @@ import type {
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { Merge } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
+import type { SliderOptions } from "./slider"
 import { mergeVars } from "@yamada-ui/core"
 import {
   formControlProperties,
@@ -33,7 +34,6 @@ import {
   valueToPercent,
 } from "@yamada-ui/utils"
 import { useCallback, useRef, useState } from "react"
-import { SliderOptions } from "./slider"
 
 interface SliderContext
   extends Pick<

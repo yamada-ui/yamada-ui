@@ -8,26 +8,26 @@ import {
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-interface DividerOptions {
+interface SeparatorOptions {
   /**
-   * The orientation of the divider.
+   * The orientation of the separator.
    *
    * @default 'horizontal'
    */
   orientation?: "horizontal" | "vertical"
 }
 
-export interface DividerProps
+export interface SeparatorProps
   extends HTMLUIProps<"hr">,
-    ThemeProps<"Divider">,
-    DividerOptions {}
+    ThemeProps<"Separator">,
+    SeparatorOptions {}
 
 /**
- * `Divider` is a component that represents a division between elements.
+ * `Separator` is a component that represents a division between elements.
  *
- * @see Docs https://yamada-ui.com/components/layouts/divider
+ * @see Docs https://yamada-ui.com/components/layouts/separator
  */
-export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
+export const Separator = forwardRef<SeparatorProps, "hr">((props, ref) => {
   const [
     {
       borderBottomWidth,
@@ -40,7 +40,7 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
       ...styles
     },
     mergedProps,
-  ] = useComponentStyle("Divider", props)
+  ] = useComponentStyle("Separator", props)
   const {
     className,
     orientation = "horizontal",
@@ -78,26 +78,26 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
     ],
   )
 
-  const dividerStyles = useMemo(
+  const separatorStyles = useMemo(
     () => customStyles[orientation],
     [customStyles, orientation],
   ) as CSSUIObject
 
   const css = {
     ...styles,
-    ...dividerStyles,
+    ...separatorStyles,
     ...__css,
   }
 
   return (
     <ui.hr
       ref={ref}
-      className={cx("ui-divider", className)}
+      className={cx("ui-separator", className)}
       __css={css}
       {...rest}
     />
   )
 })
 
-Divider.displayName = "Divider"
-Divider.__ui__ = "Divider"
+Separator.displayName = "Separator"
+Separator.__ui__ = "Separator"

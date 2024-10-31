@@ -25,7 +25,7 @@ import { Container } from "./container"
 import { ContextMenu } from "./context-menu"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
-import { Divider } from "./divider"
+import { Separator } from "./separator"
 import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
@@ -125,7 +125,7 @@ export const components = {
   ContextMenu,
   DatePicker,
   Dialog,
-  Divider,
+  Separator,
   DonutChart,
   Drawer,
   Dropzone,

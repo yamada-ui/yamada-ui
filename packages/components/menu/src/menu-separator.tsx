@@ -3,18 +3,18 @@ import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMenu } from "./menu-context"
 
-export interface MenuDividerProps extends HTMLUIProps<"hr"> {}
+export interface MenuSeparatorProps extends HTMLUIProps<"hr"> {}
 
-export const MenuDivider = forwardRef<MenuDividerProps, "hr">(
+export const MenuSeparator = forwardRef<MenuSeparatorProps, "hr">(
   ({ className, ...rest }, ref) => {
     const { styles } = useMenu()
 
-    const css: CSSUIObject = { ...styles.divider }
+    const css: CSSUIObject = { ...styles.separator }
 
     return (
       <ui.hr
         ref={ref}
-        className={cx("ui-menu__divider", className)}
+        className={cx("ui-menu__separator", className)}
         __css={css}
         {...rest}
       />
@@ -22,5 +22,5 @@ export const MenuDivider = forwardRef<MenuDividerProps, "hr">(
   },
 )
 
-MenuDivider.displayName = "MenuDivider"
-MenuDivider.__ui__ = "MenuDivider"
+MenuSeparator.displayName = "MenuSeparator"
+MenuSeparator.__ui__ = "MenuSeparator"

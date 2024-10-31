@@ -1,5 +1,15 @@
 # @yamada-ui/test
 
+## 1.5.5
+
+### Patch Changes
+
+- [#3178](https://github.com/yamada-ui/yamada-ui/pull/3178) [`85226cb`](https://github.com/yamada-ui/yamada-ui/commit/85226cb1756b76d6c319521ac5ad52c4075608f5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `providerProps` to `renderHook` options.
+
+- Updated dependencies [[`f4d0124`](https://github.com/yamada-ui/yamada-ui/commit/f4d0124a8fc678ccb4f7931be3b7a2e7492f11f4), [`f4d0124`](https://github.com/yamada-ui/yamada-ui/commit/f4d0124a8fc678ccb4f7931be3b7a2e7492f11f4), [`d80d561`](https://github.com/yamada-ui/yamada-ui/commit/d80d561c2008877deae0aca79a5f310e371415af), [`78b5d87`](https://github.com/yamada-ui/yamada-ui/commit/78b5d875b10b6ca8277498384221e5cbcebff3de)]:
+  - @yamada-ui/theme@1.19.0
+  - @yamada-ui/providers@1.2.11
+
 ## 1.5.4
 
 ### Patch Changes

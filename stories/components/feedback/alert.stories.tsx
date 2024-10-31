@@ -94,6 +94,44 @@ export const subtle: Story = () => {
   )
 }
 
+export const surface: Story = () => {
+  return (
+    <>
+      <Alert variant="surface" status="info">
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>
+          か…完全体に………完全体になれさえすれば………！！！
+        </AlertDescription>
+      </Alert>
+
+      <Alert variant="surface" status="success">
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>
+          か…完全体に………完全体になれさえすれば………！！！
+        </AlertDescription>
+      </Alert>
+
+      <Alert variant="surface" status="warning">
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>
+          か…完全体に………完全体になれさえすれば………！！！
+        </AlertDescription>
+      </Alert>
+
+      <Alert variant="surface" status="error">
+        <AlertIcon />
+        <AlertTitle>セル</AlertTitle>
+        <AlertDescription>
+          か…完全体に………完全体になれさえすれば………！！！
+        </AlertDescription>
+      </Alert>
+    </>
+  )
+}
+
 export const solid: Story = () => {
   return (
     <>

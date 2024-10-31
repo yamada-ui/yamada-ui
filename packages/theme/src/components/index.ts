@@ -23,7 +23,6 @@ import { Container } from "./container"
 import { ContextMenu } from "./context-menu"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
-import { Separator } from "./separator"
 import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
@@ -78,6 +77,7 @@ import { ScaleFade } from "./scale-fade"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
+import { Separator } from "./separator"
 import { Skeleton } from "./skeleton"
 import { Slide } from "./slide"
 import { SlideFade } from "./slide-fade"
@@ -120,7 +120,6 @@ export const components = {
   ContextMenu,
   DatePicker,
   Dialog,
-  Separator,
   DonutChart,
   Drawer,
   Dropzone,
@@ -175,6 +174,7 @@ export const components = {
   ScrollArea,
   SegmentedControl,
   Select,
+  Separator,
   Skeleton,
   Slide,
   SlideFade,

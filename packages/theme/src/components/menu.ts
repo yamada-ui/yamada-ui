@@ -19,11 +19,6 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       rounded: "md",
       zIndex: "guldo",
     },
-    separator: {
-      borderBottomWidth: "1px",
-      borderColor: "inherit",
-      my: "2",
-    },
     group: {},
     groupLabel: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
@@ -59,6 +54,11 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     list: {
       outline: "none",
       py: "2",
+    },
+    separator: {
+      borderBottomWidth: "1px",
+      borderColor: "inherit",
+      my: "2",
     },
   },
 }

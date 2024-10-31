@@ -28,13 +28,13 @@ interface StackOptions {
    */
   direction?: CSSUIObject["flexDirection"]
   /**
-   * If `true`, each stack item will show a separator.
-   */
-  separator?: ReactElement
-  /**
    * The CSS `justify-content` property.
    */
   justify?: CSSUIObject["justifyContent"]
+  /**
+   * If `true`, each stack item will show a separator.
+   */
+  separator?: ReactElement
   /**
    * The CSS `flex-wrap` property.
    */
@@ -57,9 +57,9 @@ export const Stack = forwardRef<StackProps, "div">(
       align: alignItems,
       children,
       direction: flexDirection = "column",
-      separator,
       gap = "fallback(md, 1rem)",
       justify: justifyContent,
+      separator,
       wrap: flexWrap,
       ...rest
     },

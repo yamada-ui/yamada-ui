@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Separator, Flex } from "@yamada-ui/react"
+import { Flex, Separator } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Separator>
 

@@ -4,13 +4,13 @@ import {
   ContextMenuTrigger,
   Menu,
   MenuButton,
-  MenuSeparator,
   MenuGroup,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
 } from "../src"
 
 describe("<Menu />", () => {

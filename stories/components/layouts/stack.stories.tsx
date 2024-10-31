@@ -2,8 +2,8 @@ import type { Meta, StoryFn } from "@storybook/react"
 import {
   Box,
   Center,
-  Separator,
   HStack,
+  Separator,
   Stack,
   VStack,
   ZStack,
@@ -105,7 +105,7 @@ export const withBorder: Story = () => {
         </Box>
       </VStack>
 
-      <HStack separator={<Separator />} h="2xs">
+      <HStack h="2xs" separator={<Separator />}>
         <Center bg="primary" color="white" h="full" p="md" rounded="4">
           Center
         </Center>

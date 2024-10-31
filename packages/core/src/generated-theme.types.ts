@@ -480,10 +480,6 @@ export interface GeneratedTheme extends UITheme {
         | ({} & string)
       variants: {} & string
     }
-    Separator: {
-      sizes: {} & string
-      variants: "dashed" | "dotted" | "solid" | ({} & string)
-    }
     DonutChart: {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
@@ -655,6 +651,10 @@ export interface GeneratedTheme extends UITheme {
     Select: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
+    }
+    Separator: {
+      sizes: {} & string
+      variants: "dashed" | "dotted" | "solid" | ({} & string)
     }
     Slider: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
     Stepper: {

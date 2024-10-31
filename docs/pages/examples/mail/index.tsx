@@ -1,6 +1,6 @@
 import type { MailItem } from "./data"
 import {
-  Divider,
+  Separator,
   noop,
   Resizable,
   ResizableItem,
@@ -61,7 +61,7 @@ export const Mail = memo(() => {
 
         <VStack
           display={{ base: "none", lg: "flex" }}
-          divider={<Divider />}
+          separator={<Separator />}
           gap="0"
           h="full"
         >

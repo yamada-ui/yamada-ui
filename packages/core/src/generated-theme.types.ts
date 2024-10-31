@@ -480,7 +480,7 @@ export interface GeneratedTheme extends UITheme {
         | ({} & string)
       variants: {} & string
     }
-    Divider: {
+    Separator: {
       sizes: {} & string
       variants: "dashed" | "dotted" | "solid" | ({} & string)
     }

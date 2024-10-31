@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { ReorderGenerateItem } from "@yamada-ui/react"
 import { Ghost } from "@yamada-ui/lucide"
 import {
-  Divider,
+  Separator,
   HStack,
   Reorder,
   ReorderItem,
@@ -58,7 +58,7 @@ export const withOrientation: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder orientation="horizontal">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -82,7 +82,7 @@ export const withSize: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder size="md">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -92,7 +92,7 @@ export const withSize: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder size="normal">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -102,7 +102,7 @@ export const withSize: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder size="lg">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -126,7 +126,7 @@ export const withVariant: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder variant="elevated">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -136,7 +136,7 @@ export const withVariant: Story = () => {
         <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
-      <Divider />
+      <Separator />
 
       <Reorder variant="unstyled">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>

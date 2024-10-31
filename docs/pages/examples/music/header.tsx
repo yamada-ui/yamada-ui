@@ -17,7 +17,7 @@ import {
   isUndefined,
   Menu,
   MenuButton,
-  MenuDivider,
+  MenuSeparator,
   MenuGroup,
   MenuItem,
   MenuItemButton,
@@ -249,7 +249,7 @@ const ControlMenu: FC<ControlMenuProps> = memo(
         <MenuList>
           {items.map(({ items, ...rest }, index) => (
             <Fragment key={index}>
-              {index ? <MenuDivider /> : null}
+              {index ? <MenuSeparator /> : null}
 
               <ControlMenuGroup
                 {...(rest as Merge<MenuGroupProps, MenuOptionGroupProps>)}

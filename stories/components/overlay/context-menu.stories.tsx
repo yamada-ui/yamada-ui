@@ -3,7 +3,7 @@ import {
   Center,
   ContextMenu,
   ContextMenuTrigger,
-  MenuDivider,
+  MenuSeparator,
   MenuItem,
   MenuList,
   Text,
@@ -36,7 +36,7 @@ export const basic: Story = () => {
       <MenuList>
         <MenuItem>Undo</MenuItem>
         <MenuItem>Redo</MenuItem>
-        <MenuDivider />
+        <MenuSeparator />
         <MenuItem isDisabled>Cut</MenuItem>
         <MenuItem>Copy</MenuItem>
         <MenuItem>Paste</MenuItem>

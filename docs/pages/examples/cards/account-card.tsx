@@ -5,7 +5,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   FormControl,
   Heading,
   HStack,
@@ -46,13 +46,13 @@ export const AccountCard = memo(() => {
         </ButtonGroup>
 
         <HStack w="full">
-          <Divider />
+          <Separator />
 
           <Text color="muted" fontSize="sm" whiteSpace="nowrap">
             OR CONTINUE WITH
           </Text>
 
-          <Divider />
+          <Separator />
         </HStack>
 
         <VStack w="full">

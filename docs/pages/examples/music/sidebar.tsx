@@ -19,7 +19,7 @@ import {
   Button,
   ButtonGroup,
   createContext,
-  Divider,
+  Separator,
   Heading,
   Icon,
   IconButton,
@@ -102,8 +102,8 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
     <SidebarProvider value={value}>
       <VStack
         as="nav"
-        divider={
-          <Divider
+        separator={
+          <Separator
             display={isCollapse ? "block" : { base: "none", lg: "block" }}
           />
         }

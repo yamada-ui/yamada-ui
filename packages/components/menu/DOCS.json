@@ -317,7 +317,7 @@
     "iconProps": { "type": "MenuIconProps", "required": false },
     "innerProps": { "type": "HTMLUIProps<\"span\">", "required": false }
   },
-  "MenuDivider": {},
+  "MenuSeparator": {},
   "MenuGroup": {
     "label": {
       "type": "string",

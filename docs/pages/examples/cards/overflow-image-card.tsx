@@ -3,7 +3,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
+  Separator,
   Heading,
   Image,
   Text,
@@ -36,12 +36,12 @@ export const OverflowImageCard = memo(() => {
         </Text>
       </CardBody>
 
-      <Divider />
+      <Separator />
 
       <CardFooter backdropFilter="blur(10px)" pt="md" roundedBottom="xl">
         <Text fontSize="sm">1.2k views</Text>
 
-        <Divider orientation="vertical" />
+        <Separator orientation="vertical" />
 
         <Text fontSize="sm">1 hour ago</Text>
       </CardFooter>

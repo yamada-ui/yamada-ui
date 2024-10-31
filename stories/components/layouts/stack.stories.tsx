@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import {
   Box,
   Center,
-  Divider,
+  Separator,
   HStack,
   Stack,
   VStack,
@@ -87,7 +87,7 @@ export const depth: Story = () => {
 export const withBorder: Story = () => {
   return (
     <>
-      <VStack divider={<Divider />}>
+      <VStack separator={<Separator />}>
         <Box bg="primary" color="white" p="md" rounded="4">
           Box
         </Box>
@@ -105,7 +105,7 @@ export const withBorder: Story = () => {
         </Box>
       </VStack>
 
-      <HStack divider={<Divider />} h="2xs">
+      <HStack separator={<Separator />} h="2xs">
         <Center bg="primary" color="white" h="full" p="md" rounded="4">
           Center
         </Center>

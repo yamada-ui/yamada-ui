@@ -17,7 +17,7 @@
       "required": false
     }
   },
-  "Divider": {
+  "Separator": {
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "description": "The visual color appearance of the component.",
@@ -26,18 +26,18 @@
     "orientation": {
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
-      "description": "The orientation of the divider.",
+      "description": "The orientation of the separator.",
       "required": false
     },
     "size": {
       "type": "string",
-      "description": "The size of the Divider.",
+      "description": "The size of the Separator.",
       "required": false
     },
     "variant": {
       "type": "\"dashed\" | \"dotted\" | \"solid\"",
       "defaultValue": "\"solid\"",
-      "description": "The variant of the Divider.",
+      "description": "The variant of the Separator.",
       "required": false
     }
   },
@@ -231,9 +231,9 @@
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
-    "divider": {
+    "separator": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "description": "If `true`, each stack item will show a divider.",
+      "description": "If `true`, each stack item will show a separator.",
       "required": false
     },
     "justify": {

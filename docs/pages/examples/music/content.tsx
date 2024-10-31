@@ -7,7 +7,7 @@ import {
   Box,
   Button,
   Center,
-  Divider,
+  Separator,
   FormControl,
   Heading,
   HStack,
@@ -211,7 +211,7 @@ const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
           </Text>
         ) : null}
 
-        <Divider />
+        <Separator />
       </VStack>
     )
   },

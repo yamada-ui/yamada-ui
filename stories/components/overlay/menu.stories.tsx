@@ -11,7 +11,7 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
+  MenuSeparator,
   MenuGroup,
   MenuItem,
   MenuItemButton,
@@ -190,7 +190,7 @@ export const withDuration: Story = () => {
   )
 }
 
-export const withDivider: Story = () => {
+export const withSeparator: Story = () => {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
@@ -202,7 +202,7 @@ export const withDivider: Story = () => {
         <MenuItem>Edit Profile</MenuItem>
         <MenuItem>Preferences</MenuItem>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuItem>Sign out</MenuItem>
       </MenuList>
@@ -224,7 +224,7 @@ export const withGroup: Story = () => {
           <MenuItem>Preferences</MenuItem>
         </MenuGroup>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuGroup label="action">
           <MenuItem>Sign out</MenuItem>
@@ -247,7 +247,7 @@ export const withOptionGroup: Story = () => {
           <MenuOptionItem value="desc">Descending</MenuOptionItem>
         </MenuOptionGroup>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuOptionGroup type="checkbox" label="display">
           <MenuOptionItem value="gender">gender</MenuOptionItem>

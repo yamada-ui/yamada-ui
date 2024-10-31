@@ -19,7 +19,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       rounded: "md",
       zIndex: "guldo",
     },
-    divider: {
+    separator: {
       borderBottomWidth: "1px",
       borderColor: "inherit",
       my: "2",

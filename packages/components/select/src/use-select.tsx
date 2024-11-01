@@ -538,11 +538,14 @@ export const useSelect = <T extends MaybeValue = string>(
           : !isOpen
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
-        ArrowUp: isFocused
-          ? () => onFocusPrev()
-          : !isOpen
-            ? funcAll(onOpen, onFocusLastOrSelected)
-            : undefined,
+        ArrowUp:
+          ev.altKey && isOpen
+            ? onClose
+            : isFocused
+              ? () => onFocusPrev()
+              : !isOpen
+                ? funcAll(onOpen, onFocusLastOrSelected)
+                : undefined,
         End: isOpen ? onFocusLast : undefined,
         Enter: isFocused
           ? onSelect

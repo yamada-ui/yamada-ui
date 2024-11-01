@@ -1,5 +1,11 @@
 # @yamada-ui/toggle
 
+## 1.0.26
+
+### Patch Changes
+
+- [#3282](https://github.com/yamada-ui/yamada-ui/pull/3282) [`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the animation would temporarily stop when the ripple animation was disabled.
+
 ## 1.0.25
 
 ### Patch Changes

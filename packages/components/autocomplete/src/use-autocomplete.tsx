@@ -710,26 +710,11 @@ export const useAutocomplete = <T extends MaybeValue = string>(
         return next
       })
 
-      const isHit =
-        descendants
-          .values()
-          .filter(({ node }) =>
-            format(node.textContent ?? "").includes(newValue),
-          ).length > 0
-
-      if (allowCreate || allowFree || isHit) setInputValue("")
+      setInputValue("")
 
       if (isMulti && runRebirth) rebirthOptions(false)
     },
-    [
-      allowFree,
-      allowCreate,
-      isMulti,
-      rebirthOptions,
-      setValue,
-      descendants,
-      format,
-    ],
+    [isMulti, rebirthOptions, setValue],
   )
 
   const onSelect = useCallback(() => {

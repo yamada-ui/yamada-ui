@@ -1,5 +1,15 @@
 # @yamada-ui/autocomplete
 
+## 1.6.3
+
+### Patch Changes
+
+- [#3310](https://github.com/yamada-ui/yamada-ui/pull/3310) [`461bfba`](https://github.com/yamada-ui/yamada-ui/commit/461bfba5f03751ceee65c1b755e30cff7bc3b1fd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where when an option's `label` and `value` were different and the `label` string was searched halfway and the option was selected, the searched string remained.
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/popover@1.4.1
+
 ## 1.6.2
 
 ### Patch Changes

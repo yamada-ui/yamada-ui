@@ -1,5 +1,13 @@
 # @yamada-ui/alert
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.21
+  - @yamada-ui/lucide@1.7.3
+
 ## 1.1.0
 
 ### Minor Changes

@@ -13,7 +13,6 @@ import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
 import {
   assignRef,
   Button,
-  Separator,
   Grid,
   HStack,
   Input,
@@ -23,6 +22,7 @@ import {
   MenuOptionGroup,
   MenuOptionItem,
   noop,
+  Separator,
   Text,
   useBoolean,
 } from "@yamada-ui/react"

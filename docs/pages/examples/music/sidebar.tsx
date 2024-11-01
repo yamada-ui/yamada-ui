@@ -19,10 +19,10 @@ import {
   Button,
   ButtonGroup,
   createContext,
-  Separator,
   Heading,
   Icon,
   IconButton,
+  Separator,
   Text,
   Tooltip,
   VStack,
@@ -102,14 +102,14 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
     <SidebarProvider value={value}>
       <VStack
         as="nav"
+        gap={!isCollapse ? { base: "lg", lg: "md" } : "md"}
+        px="sm"
+        py="lg"
         separator={
           <Separator
             display={isCollapse ? "block" : { base: "none", lg: "block" }}
           />
         }
-        gap={!isCollapse ? { base: "lg", lg: "md" } : "md"}
-        px="sm"
-        py="lg"
         {...rest}
       >
         <SidebarGroup items={DISCOVER_MENU_ITEMS} label="Discover" />

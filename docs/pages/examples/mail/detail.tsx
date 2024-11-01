@@ -19,10 +19,10 @@ import {
   assignRef,
   Avatar,
   Button,
-  Separator,
   Heading,
   HStack,
   IconButton,
+  Separator,
   Spacer,
   Switch,
   Text,
@@ -79,7 +79,7 @@ export const Detail: FC<DetailProps> = memo(
           </HStack>
         </Header>
 
-        <VStack separator={<Separator />} flex="1" gap="0">
+        <VStack flex="1" gap="0" separator={<Separator />}>
           <HStack align="start" p="md">
             <Avatar name={authorName} />
 

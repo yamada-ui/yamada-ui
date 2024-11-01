@@ -184,7 +184,7 @@ export const Toggle = forwardRef(
       >
         {children || icon}
 
-        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </ui.button>
     )
   },

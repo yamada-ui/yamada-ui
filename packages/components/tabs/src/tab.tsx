@@ -96,7 +96,7 @@ export const Tab = forwardRef<TabProps, "button">(
       >
         {children}
 
-        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </ui.button>
     )
   },

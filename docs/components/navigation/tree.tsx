@@ -195,9 +195,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             {title}
           </Text>
 
-          <Label variant={isSelected ? "outline" : "subtle"} ms="sm">
-            {label}
-          </Label>
+          <Label ms="sm">{label}</Label>
         </Text>
 
         {withToggleButton ? (

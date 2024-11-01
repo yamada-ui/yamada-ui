@@ -64,9 +64,9 @@ export const components: MDXComponents = {
   li: (props) => <ListItem apply="mdx.li" {...props} />,
   LinkCard,
   Note: ({ children, ...rest }) => (
-    <Alert apply="mdx.alert" variant="note" alignItems="flex-start" {...rest}>
+    <Alert apply="mdx.alert" variant="subtle" alignItems="flex-start" {...rest}>
       <AlertIcon />
-      <AlertDescription as="p" apply="mdx.p">
+      <AlertDescription as="p" apply="mdx.p" color={["black", "white"]}>
         {children}
       </AlertDescription>
     </Alert>

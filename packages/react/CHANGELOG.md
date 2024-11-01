@@ -1,5 +1,46 @@
 # @yamada-ui/react
 
+## 1.6.1
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39), [`461bfba`](https://github.com/yamada-ui/yamada-ui/commit/461bfba5f03751ceee65c1b755e30cff7bc3b1fd), [`4c78ab0`](https://github.com/yamada-ui/yamada-ui/commit/4c78ab0b80c7baeba9b85c047b297d32e60c6891), [`8d820d7`](https://github.com/yamada-ui/yamada-ui/commit/8d820d704a441c7fb4679ec44e5ae489a088c842), [`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13), [`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea), [`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13)]:
+  - @yamada-ui/close-button@1.0.45
+  - @yamada-ui/pagination@1.1.2
+  - @yamada-ui/button@1.0.47
+  - @yamada-ui/toggle@1.0.26
+  - @yamada-ui/tabs@1.0.44
+  - @yamada-ui/autocomplete@1.6.3
+  - @yamada-ui/segmented-control@1.1.0
+  - @yamada-ui/theme@1.19.1
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/modal@1.4.2
+  - @yamada-ui/notice@1.1.8
+  - @yamada-ui/popover@1.4.1
+  - @yamada-ui/snacks@1.1.8
+  - @yamada-ui/color-picker@1.4.7
+  - @yamada-ui/file-button@1.1.10
+  - @yamada-ui/providers@1.2.12
+  - @yamada-ui/theme-tools@1.1.8
+  - @yamada-ui/accordion@2.0.14
+  - @yamada-ui/avatar@1.2.13
+  - @yamada-ui/breadcrumb@1.3.16
+  - @yamada-ui/list@1.0.44
+  - @yamada-ui/loading@1.1.21
+  - @yamada-ui/menu@1.3.18
+  - @yamada-ui/native-select@1.0.49
+  - @yamada-ui/number-input@1.1.19
+  - @yamada-ui/rating@1.1.2
+  - @yamada-ui/reorder@2.0.15
+  - @yamada-ui/resizable@1.1.17
+  - @yamada-ui/select@1.7.3
+  - @yamada-ui/stat@1.0.42
+  - @yamada-ui/stepper@1.0.45
+  - @yamada-ui/tag@1.1.2
+  - @yamada-ui/use-media-query@1.0.52
+  - @yamada-ui/alert@1.1.1
+  - @yamada-ui/use-async-callback@1.0.2
+
 ## 1.6.0
 
 ### Minor Changes

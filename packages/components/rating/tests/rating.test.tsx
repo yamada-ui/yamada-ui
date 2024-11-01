@@ -144,19 +144,26 @@ describe("<Rating />", () => {
           return undefined
       }
     }
-    const { container } = render(<Rating color={getColor} />)
+    const { container } = render(<Rating color={getColor} defaultValue={5} />)
     const items = container.querySelectorAll(".ui-rating__item")
 
-    const expectedColors = [
-      "red.500",
-      "orange.500",
-      "yellow.500",
-      "green.500",
-      "blue.500",
-    ]
-    expectedColors.forEach((expectedColor, index) => {
-      const item = items[index]
-      expect(item).toHaveStyle(`color: ${expectedColor}`)
-    })
+    const styleElements = document.getElementsByTagName("style")
+    const cssText = Array.from(styleElements)
+      .map((style) => style.textContent)
+      .join("")
+
+    for (let i = 1; i < items.length; i++) {
+      expect(items[i]).toHaveAttribute("data-filled")
+
+      const emotionClass = Array.from(items[i]!.classList)[1]
+
+      const expectedColor = getColor(i)
+      const expectedVar = `var(--ui-colors-${expectedColor!.replace(".", "-")})`
+
+      const ruleExists =
+        cssText.includes(`${emotionClass}[data-filled]`) &&
+        cssText.includes(`color:${expectedVar}`)
+      expect(ruleExists).toBeTruthy()
+    }
   })
 })

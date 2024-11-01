@@ -19,11 +19,11 @@ Ratingは、アクセシビリティに関して[WAI-ARIA - Radio Group Pattern]
 
 ## ARIAロールと属性
 
-| コンポーネント | ロールと属性         | 使い方                                                   |
-| :------------- | :------------------- | :------------------------------------------------------- |
-| `Rating`       | `role="radiogroup"`  | ラジオグループであることを示します。                     |
-| `Rating`       | `aria-label`         | 選択されたアイテムの数を示します。                       |
-|                | `aria-readonly`      | `isReadOnly`が設定されている場合は`"true"`を設定します。 |
-|                | `aria-disabled`      | `isDisabled`が設定されている場合は`"true"`を設定します。 |
-| `RatingItem`   | `aria-label`         | `value`を設定します。                                    |
-| `RatingIcon`   | `aria-hidden="true"` | `RatingIcon`をアクセシビリティツリーから除外します。     |
+| コンポーネント               | ロールと属性         | 使い方                                                   |
+| :--------------------------- | :------------------- | :------------------------------------------------------- |
+| `Rating`                     | `role="radiogroup"`  | ラジオグループであることを示します。                     |
+|                              | `aria-label`         | 選択されたアイテムの数を示します。                       |
+|                              | `aria-readonly`      | `isReadOnly`が設定されている場合は`"true"`を設定します。 |
+|                              | `aria-disabled`      | `isDisabled`が設定されている場合は`"true"`を設定します。 |
+| `RatingItem`                 | `aria-label`         | `value`を設定します。                                    |
+| `RatingIcon` <Tag>内部</Tag> | `aria-hidden="true"` | `RatingIcon`をアクセシビリティツリーから除外します。     |

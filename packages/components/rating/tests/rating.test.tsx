@@ -126,4 +126,37 @@ describe("<Rating />", () => {
     await user.click(items[4]!)
     expect(items[3]).not.toHaveAttribute("data-focus")
   })
+
+  test("should use custom color correctly", () => {
+    const getColor = (value: number) => {
+      switch (value) {
+        case 1:
+          return "red.500"
+        case 2:
+          return "orange.500"
+        case 3:
+          return "yellow.500"
+        case 4:
+          return "green.500"
+        case 5:
+          return "blue.500"
+        default:
+          return undefined
+      }
+    }
+    const { container } = render(<Rating color={getColor} />)
+    const items = container.querySelectorAll(".ui-rating__item")
+
+    const expectedColors = [
+      "red.500",
+      "orange.500",
+      "yellow.500",
+      "green.500",
+      "blue.500",
+    ]
+    expectedColors.forEach((expectedColor, index) => {
+      const item = items[index]
+      expect(item).toHaveStyle(`color: ${expectedColor}`)
+    })
+  })
 })

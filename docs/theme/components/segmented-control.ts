@@ -3,7 +3,7 @@ import { isAccessible, isGray } from "@yamada-ui/react"
 
 export const SegmentedControl: ComponentMultiStyle = {
   variants: {
-    simple: ({ colorScheme: c = "gray" }) => ({
+    tabs: ({ colorScheme: c = "gray" }) => ({
       button: {
         color: "muted",
         fontWeight: "semibold",

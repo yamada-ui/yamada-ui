@@ -83,6 +83,7 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
         ref={ref}
         {...(!isEllipsis
           ? {
+              type: "button",
               "data-disabled": dataAttr(isDisabled),
               "data-selected": dataAttr(isActive),
               disabled: isDisabled,
@@ -100,7 +101,7 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
       >
         {children}
 
-        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </Component>
     )
   },

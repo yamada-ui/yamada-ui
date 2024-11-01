@@ -48,14 +48,14 @@ export const Code: ComponentStyle<"Code"> = {
     subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       bg: [
         isGray(c) ? tintColor(`${c}.50`, 36)(t, m) : `${c}.50`,
-        shadeColor(`${c}.500`, 68)(t, m),
+        shadeColor(`${c}.300`, 68)(t, m),
       ],
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
     }),
     surface: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       bg: [
         isGray(c) ? tintColor(`${c}.50`, 36)(t, m) : `${c}.50`,
-        shadeColor(`${c}.500`, 68)(t, m),
+        shadeColor(`${c}.300`, 68)(t, m),
       ],
       boxShadow: "inset 0 0 0px 1px $color",
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
@@ -63,7 +63,7 @@ export const Code: ComponentStyle<"Code"> = {
         {
           name: "color",
           token: "colors",
-          value: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+          value: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
         },
       ],
     }),

@@ -1767,6 +1767,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/format:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/highlight:
     dependencies:
       '@yamada-ui/core':
@@ -3697,6 +3713,9 @@ importers:
       '@yamada-ui/form-control':
         specifier: workspace:*
         version: link:../components/form-control
+      '@yamada-ui/format':
+        specifier: workspace:*
+        version: link:../components/format
       '@yamada-ui/highlight':
         specifier: workspace:*
         version: link:../components/highlight

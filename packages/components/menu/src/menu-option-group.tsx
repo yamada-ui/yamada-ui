@@ -105,3 +105,4 @@ export const MenuOptionGroup = forwardRef(
 } & ComponentArgs
 
 MenuOptionGroup.displayName = "MenuOptionGroup"
+MenuOptionGroup.__ui__ = "MenuOptionGroup"

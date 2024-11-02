@@ -5,6 +5,7 @@ package_name: "@yamada-ui/toggle"
 order: 2
 with_description: true
 tab: Theming
+label: Updated
 ---
 
 ## Theming
@@ -35,98 +36,58 @@ export const Toggle: ComponentStyle<"Toggle"> = {
     },
   },
 
-  sizes: {
-    xs: ({ theme: t }) => ({
-      fontSize: "xs",
-      lineHeight: get(t, "sizes.6"),
-      minBoxSize: 6,
-    }),
-    sm: ({ theme: t }) => ({
-      fontSize: "sm",
-      lineHeight: get(t, "sizes.8"),
-      minBoxSize: 8,
-    }),
-    md: ({ theme: t }) => ({
-      fontSize: "md",
-      lineHeight: get(t, "sizes.10"),
-      minBoxSize: 10,
-    }),
-    lg: ({ theme: t }) => ({
-      fontSize: "lg",
-      lineHeight: get(t, "sizes.12"),
-      minBoxSize: 12,
-    }),
-  },
-
   variants: {
-    outline: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
-      return {
-        border: "1px solid",
-        borderColor: "border",
-        _focusVisible: {
-          boxShadow: "outline",
-          _invalid: {
-            borderColor: "transparent",
-          },
-        },
-        _hover: {
-          bg: [
-            isGray(c) ? `blackAlpha.200` : `${c}.50`,
-            transparentizeColor(`${c}.500`, 0.12)(t, m),
-          ],
-        },
-        _selected: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 72)(t, m),
-          ],
-          borderColor: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 72)(t, m),
-          ],
-        },
-      }
-    },
-    solid: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
-      return {
-        _focusVisible: {
+    outline: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
+      border: "1px solid",
+      borderColor: isGray(c)
+        ? [`${c}.50`, `${c}.700`]
+        : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+      color: isGray(c)
+        ? ["blackAlpha.800", "whiteAlpha.700"]
+        : [`${c}.600`, `${c}.500`],
+      _focusVisible: {
+        boxShadow: "outline",
+        _invalid: {
           borderColor: "transparent",
-          boxShadow: "outline",
         },
-        _hover: {
-          bg: [
-            isGray(c) ? `blackAlpha.200` : `${c}.100`,
-            shadeColor(`${c}.300`, 72)(t, m),
-          ],
-        },
-        _selected: {
-          bg: isGray(c)
-            ? [`${c}.100`, `${c}.700`]
-            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-        },
-      }
-    },
-    subtle: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => {
-      return {
-        _focusVisible: {
-          borderColor: "transparent",
-          boxShadow: "outline",
-        },
-        _hover: {
-          bg: [
-            isGray(c) ? `blackAlpha.200` : `${c}.50`,
-            transparentizeColor(`${c}.500`, 0.12)(t, m),
-          ],
-        },
-        _selected: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 72)(t, m),
-          ],
-        },
-      }
-    },
+      },
+      _hover: {
+        bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
+      },
+      _selected: {
+        bg: isGray(c)
+          ? [`${c}.50`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+      },
+    }),
+    solid: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
+      _focusVisible: {
+        borderColor: "transparent",
+        boxShadow: "outline",
+      },
+      _hover: {
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
+      },
+      _selected: {
+        bg: isGray(c)
+          ? [`${c}.50`, `${c}.700`]
+          : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+        color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+      },
+    }),
+    subtle: ({ colorScheme: c = "gray", colorMode: m, theme: t }) => ({
+      _focusVisible: {
+        borderColor: "transparent",
+        boxShadow: "outline",
+      },
+      _hover: {
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
+      },
+      _selected: {
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
+      },
+    }),
     unstyled: {
       bg: "none",
       color: "inherit",
@@ -137,6 +98,29 @@ export const Toggle: ComponentStyle<"Toggle"> = {
       _ripple: {
         display: "none",
       },
+    },
+  },
+
+  sizes: {
+    xs: {
+      fontSize: "xs",
+      lineHeight: "$sizes.6",
+      minBoxSize: 6,
+    },
+    sm: {
+      fontSize: "sm",
+      lineHeight: "$sizes.8",
+      minBoxSize: 8,
+    },
+    md: {
+      fontSize: "md",
+      lineHeight: "$sizes.10",
+      minBoxSize: 10,
+    },
+    lg: {
+      fontSize: "lg",
+      lineHeight: "$sizes.12",
+      minBoxSize: 12,
     },
   },
 

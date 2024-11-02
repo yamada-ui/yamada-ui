@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 1.15.4
+
+### Patch Changes
+
+- [#3178](https://github.com/yamada-ui/yamada-ui/pull/3178) [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new types for loading components.
+
+- [#3243](https://github.com/yamada-ui/yamada-ui/pull/3243) [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added cite style with inherited fontStyle.
+
 ## 1.15.3
 
 ### Patch Changes

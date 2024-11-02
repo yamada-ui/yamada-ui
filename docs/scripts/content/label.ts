@@ -33,9 +33,9 @@ const updateFrontMatter =
 
         await Promise.all(contentPaths.map(updateFrontMatter(transform)))
       } else {
-        const content = await readFile(contentPath, "utf-8")
+        const file = await readFile(contentPath, "utf-8")
 
-        const { data } = matter(content)
+        const { content, data } = matter(file)
 
         const resolvedData = transform(data)
 
@@ -73,10 +73,10 @@ const addLabel =
 
 const removeLabel =
   (exclude: string[]): UpdateFrontMatterTransform =>
-  ({ data, label }) => {
-    if (exclude.includes(label)) return { label, ...data }
+  ({ label, ...rest }) => {
+    if (exclude.includes(label)) return { label, ...rest }
 
-    return { ...data }
+    return { ...rest }
   }
 
 interface AddOptions {

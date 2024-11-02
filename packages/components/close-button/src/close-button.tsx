@@ -84,7 +84,7 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       >
         {children || <CloseIcon height="1em" width="1em" />}
 
-        <Ripple isDisabled={disableRipple || isDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </ui.button>
     )
   },

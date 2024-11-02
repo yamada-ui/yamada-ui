@@ -128,7 +128,7 @@ describe("<Rating />", () => {
   })
 
   test("should use custom color correctly", () => {
-    const colors: Record<number, string> = {
+    const colors: { [key: number]: string } = {
       1: "red.500",
       2: "orange.500",
       3: "yellow.500",

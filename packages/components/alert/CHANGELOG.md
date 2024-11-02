@@ -1,5 +1,26 @@
 # @yamada-ui/alert
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.21
+  - @yamada-ui/lucide@1.7.3
+
+## 1.1.0
+
+### Minor Changes
+
+- [#3224](https://github.com/yamada-ui/yamada-ui/pull/3224) [`93cfd52`](https://github.com/yamada-ui/yamada-ui/commit/93cfd524ff2de69c6e481523ca4efac42f6abf0a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated icons.
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251), [`1d344ae`](https://github.com/yamada-ui/yamada-ui/commit/1d344ae725aeb5886859dc145c605409d8bc4a3e)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/loading@1.1.20
+  - @yamada-ui/lucide@1.7.2
+
 ## 1.0.43
 
 ### Patch Changes

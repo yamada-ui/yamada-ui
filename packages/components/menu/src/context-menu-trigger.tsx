@@ -48,3 +48,6 @@ export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
     )
   },
 )
+
+ContextMenuTrigger.displayName = "ContextMenuTrigger"
+ContextMenuTrigger.__ui__ = "ContextMenuTrigger"

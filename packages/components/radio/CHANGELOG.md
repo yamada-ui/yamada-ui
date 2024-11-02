@@ -1,5 +1,14 @@
 # @yamada-ui/radio
 
+## 1.2.12
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`602ed19`](https://github.com/yamada-ui/yamada-ui/commit/602ed190b990a939b4743cf6783f21fd7a80b67f), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251), [`778fb64`](https://github.com/yamada-ui/yamada-ui/commit/778fb64f3e789c7d95513705d1ce20364d0c2d8c)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/layouts@1.2.0
+  - @yamada-ui/form-control@2.1.6
+
 ## 1.2.11
 
 ### Patch Changes

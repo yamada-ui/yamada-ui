@@ -123,26 +123,28 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       />
 
       {cloneIcon ?? (
-        <ui.span
-          className={cx("ui-switch__track", className)}
-          __css={{
-            alignItems: "center",
-            boxSizing: "content-box",
-            display: "inline-flex",
-            flexShrink: 0,
-            justifyContent: "flex-start",
-            ...styles.track,
-          }}
-          {...getIconProps()}
-        >
-          <motion.span
-            className={cx("ui-switch__thumb", className)}
-            data-checked={dataAttr(isChecked)}
-            layout
-            transition={transition}
-            __css={{ ...styles.thumb }}
-          />
-        </ui.span>
+        <motion.div layout layoutRoot>
+          <ui.span
+            className={cx("ui-switch__track", className)}
+            __css={{
+              alignItems: "center",
+              boxSizing: "content-box",
+              display: "inline-flex",
+              flexShrink: 0,
+              justifyContent: "flex-start",
+              ...styles.track,
+            }}
+            {...getIconProps()}
+          >
+            <motion.span
+              className={cx("ui-switch__thumb", className)}
+              data-checked={dataAttr(isChecked)}
+              layout
+              transition={transition}
+              __css={{ ...styles.thumb }}
+            />
+          </ui.span>
+        </motion.div>
       )}
 
       {children ? (

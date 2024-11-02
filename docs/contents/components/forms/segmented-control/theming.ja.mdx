@@ -4,6 +4,7 @@ description: "`SegmentedControl`は、ユーザーが複数の選択肢の中か
 package_name: "@yamada-ui/segmented-control"
 with_description: true
 tab: テーマ
+label: Updated
 order: 2
 ---
 
@@ -37,28 +38,13 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       _readOnly: { cursor: "default" },
     },
     container: {
-      bg: ["blackAlpha.100", "whiteAlpha.50"],
+      bg: ["blackAlpha.100", "whiteAlpha.100"],
       p: "1",
       _disabled: { cursor: "not-allowed" },
       _readOnly: { cursor: "default" },
     },
     cursor: {
       boxShadow: ["md", "dark-md"],
-    },
-  },
-
-  sizes: {
-    sm: {
-      button: { fontSize: "sm", px: "2", py: "1" },
-      container: { minW: "xs" },
-    },
-    md: {
-      button: { fontSize: "md", px: "3", py: "1.5" },
-      container: { minW: "sm" },
-    },
-    lg: {
-      button: { px: "4", py: "2" },
-      container: { minW: "md" },
     },
   },
 
@@ -75,7 +61,7 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       },
       cursor: {
         bg: isGray(c)
-          ? [`whiteAlpha.800`, `${c}.700`]
+          ? [`white`, `black`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "md",
@@ -93,12 +79,27 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       },
       cursor: {
         bg: isGray(c)
-          ? [`whiteAlpha.800`, `${c}.700`]
+          ? [`white`, `black`]
           : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
         color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         rounded: "full",
       },
     }),
+  },
+
+  sizes: {
+    sm: {
+      button: { fontSize: "sm", px: "2", py: "0.5" },
+      container: { minW: "xs" },
+    },
+    md: {
+      button: { fontSize: "md", px: "3", py: "1" },
+      container: { minW: "sm" },
+    },
+    lg: {
+      button: { fontSize: "md", px: "4", py: "1.5" },
+      container: { minW: "md" },
+    },
   },
 
   defaultProps: {

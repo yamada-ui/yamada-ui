@@ -21,3 +21,6 @@ export const MenuDivider = forwardRef<MenuDividerProps, "hr">(
     )
   },
 )
+
+MenuDivider.displayName = "MenuDivider"
+MenuDivider.__ui__ = "MenuDivider"

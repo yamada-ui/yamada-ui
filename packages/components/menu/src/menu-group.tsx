@@ -49,3 +49,6 @@ export const MenuGroup = forwardRef<MenuGroupProps, "div">(
     )
   },
 )
+
+MenuGroup.displayName = "MenuGroup"
+MenuGroup.__ui__ = "MenuGroup"

@@ -7,6 +7,38 @@
       "required": false
     }
   },
+  "Bleed": {
+    "block": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\">",
+      "description": "The CSS `margin-block` property.",
+      "required": false
+    },
+    "blockEnd": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\">",
+      "description": "The CSS `margin-block-end` property.",
+      "required": false
+    },
+    "blockStart": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\">",
+      "description": "The CSS `margin-block-start` property.",
+      "required": false
+    },
+    "inline": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\"> | \"full\"",
+      "description": "The CSS `margin-inline` property.",
+      "required": false
+    },
+    "inlineEnd": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\"> | \"full\"",
+      "description": "The CSS `margin-inline-end` property.",
+      "required": false
+    },
+    "inlineStart": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\"> | \"full\"",
+      "description": "The CSS `margin-inline-start` property.",
+      "required": false
+    }
+  },
   "Box": {},
   "Center": {},
   "Container": {
@@ -48,7 +80,7 @@
       "required": false
     },
     "basis": {
-      "type": "UIValue<number | \"content\" | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | ... 69 more ... | \"fit-content\">",
+      "type": "UIValue<number | \"content\" | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | ... 69 more ... | \"fit-content\">",
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
@@ -78,14 +110,27 @@
       "required": false
     }
   },
+  "Float": {
+    "offset": {
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"-0.5\" | ... 100 more ... | \"xs\">",
+      "description": "Changes position offset, usually used when element has border-radius.",
+      "required": false
+    },
+    "placement": {
+      "type": "FloatPlacement",
+      "defaultValue": "start-end",
+      "description": "The placement of the float.",
+      "required": false
+    }
+  },
   "GridItem": {
     "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "colEnd": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumnEnd | { [x: string]: GridColumnEnd | undefined; ... 5 more ...; xl?: GridColumnEnd | undefined; }, GridColumnEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridColumnEnd | { [x: string]: GridColumnEnd | undefined; ... 5 more ...; xl?: GridColumnEnd | undefined; }, GridColumnEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIVa...",
       "description": "The CSS `grid-column-end` property.",
       "required": false
     },
@@ -95,12 +140,12 @@
       "required": false
     },
     "colStart": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumnStart | { [x: string]: GridColumnStart | undefined; ... 5 more ...; xl?: GridColumnStart | undefined; }, GridColumnStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme)...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridColumnStart | { [x: string]: GridColumnStart | undefined; ... 5 more ...; xl?: GridColumnStart | undefined; }, GridColumnStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme)...",
       "description": "The CSS `grid-column-start` property.",
       "required": false
     },
     "rowEnd": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRowEnd | { [x: string]: GridRowEnd | undefined; ... 5 more ...; xl?: GridRowEnd | undefined; }, GridRowEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridRowEnd | { [x: string]: GridRowEnd | undefined; ... 5 more ...; xl?: GridRowEnd | undefined; }, GridRowEnd | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-row-end` property.",
       "required": false
     },
@@ -110,19 +155,19 @@
       "required": false
     },
     "rowStart": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRowStart | { [x: string]: GridRowStart | undefined; ... 5 more ...; xl?: GridRowStart | undefined; }, GridRowStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridRowStart | { [x: string]: GridRowStart | undefined; ... 5 more ...; xl?: GridRowStart | undefined; }, GridRowStart | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...",
       "description": "The CSS `grid-row-start` property.",
       "required": false
     }
   },
   "Grid": {
     "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "autoColumns": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-auto-columns` property.",
       "required": false
     },
@@ -132,17 +177,17 @@
       "required": false
     },
     "autoRows": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-auto-rows` property.",
       "required": false
     },
     "column": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
     "row": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
@@ -152,24 +197,24 @@
       "required": false
     },
     "templateColumns": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-template-columns` property.",
       "required": false
     },
     "templateRows": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-template-rows` property.",
       "required": false
     }
   },
   "SimpleGrid": {
     "area": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridArea | { [x: string]: GridArea | undefined; ... 5 more ...; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "autoColumns": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-auto-columns` property.",
       "required": false
     },
@@ -179,12 +224,12 @@
       "required": false
     },
     "autoRows": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 68 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-auto-rows` property.",
       "required": false
     },
     "column": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridColumn | { [x: string]: GridColumn | undefined; ... 5 more ...; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
@@ -194,12 +239,12 @@
       "required": false
     },
     "minChildWidth": {
-      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 73 more ... | \"min-intrinsic\">",
+      "type": "UIValue<number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 73 more ... | \"min-intrinsic\">",
       "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length.",
       "required": false
     },
     "row": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | (number & {}) | [GridRow | { [x: string]: GridRow | undefined; ... 5 more ...; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
@@ -209,12 +254,12 @@
       "required": false
     },
     "templateColumns": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-template-columns` property.",
       "required": false
     },
     "templateRows": {
-      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"auto\" | \"max-content\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"px\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (string & {}) | \"0.5\" | ... 70 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `grid-template-rows` property.",
       "required": false
     }
@@ -222,7 +267,7 @@
   "Spacer": {},
   "Stack": {
     "align": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"self-end\" | \"self-start\" | \"start\" | \"baseline\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"normal\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"self-end\" | \"self-start\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `align-items` property.",
       "required": false
     },
@@ -237,7 +282,7 @@
       "required": false
     },
     "justify": {
-      "type": "\"left\" | \"right\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"stretch\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"left\" | \"right\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"normal\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `justify-content` property.",
       "required": false
     },

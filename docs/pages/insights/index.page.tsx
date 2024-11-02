@@ -28,7 +28,7 @@ export const getServerSideProps = async (
   const start =
     isString(query.start) && dayjs(query.start).isValid()
       ? query.start
-      : dayjs().tz().subtract(7, "d").format("YYYY-MM-DD")
+      : dayjs().tz().subtract(1, "d").startOf("M").format("YYYY-MM-DD")
   const end =
     isString(query.end) && dayjs(query.end).isValid()
       ? query.end

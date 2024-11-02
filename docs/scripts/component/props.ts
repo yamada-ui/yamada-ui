@@ -85,6 +85,8 @@ const OVERRIDE_PATHS: {
     { children: ["grid-item"], parent: "grid" },
     "spacer",
     "stack",
+    "bleed",
+    "float",
   ],
   link: ["link", { children: ["link-overlay"], parent: "link-box" }],
   modal: [

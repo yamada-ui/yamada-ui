@@ -1,5 +1,32 @@
 # @yamada-ui/table
 
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39), [`8d820d7`](https://github.com/yamada-ui/yamada-ui/commit/8d820d704a441c7fb4679ec44e5ae489a088c842), [`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/pagination@1.1.2
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/select@1.7.3
+
+## 1.3.1
+
+### Patch Changes
+
+- [#3233](https://github.com/yamada-ui/yamada-ui/pull/3233) [`9d1612c`](https://github.com/yamada-ui/yamada-ui/commit/9d1612c7132077a2b1982fb92111d274bbcec8dd) Thanks [@nathanlao](https://github.com/nathanlao)! - fix the table checkbox not disabling when no data presents
+
+- [#3231](https://github.com/yamada-ui/yamada-ui/pull/3231) [`655fbb2`](https://github.com/yamada-ui/yamada-ui/commit/655fbb2067a601d8c369e5120b4b8667ce8b0904) Thanks [@ChinoUkaegbu](https://github.com/ChinoUkaegbu)! - Fixed pagination layout in `PagingTable`.
+
+- Updated dependencies [[`aef0f69`](https://github.com/yamada-ui/yamada-ui/commit/aef0f6963259300feed05ca76ff26f982dcd8eed), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/select@1.7.2
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/checkbox@1.1.12
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/native-table@1.0.43
+  - @yamada-ui/pagination@1.1.1
+  - @yamada-ui/use-clickable@1.2.12
+  - @yamada-ui/use-value@1.1.29
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,0 +1,127 @@
+---
+title: Flip
+description: >-
+  `Flip`は、２つの要素をフリップさせながら切り替えるアニメーションを提供するコンポーネントです。
+package_name: "@yamada-ui/transitions"
+is_tabs: true
+with_description: true
+tab: 使い方
+label: New
+---
+
+## インポート
+
+```ts
+import { Flip } from "@yamada-ui/react"
+```
+
+## 使い方
+
+切り替える要素となるコンポーネントを`from`と`to`にそれぞれ渡します。
+
+```tsx functional=true
+return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+```
+
+### フリップさせる方向を変更する
+
+フリップさせる方向を変更する場合は、`orientation`を使用してください。デフォルトは`horizontal`です。
+
+```tsx functional=true
+return (
+  <Flip
+    orientation="vertical"
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### アニメーションにスプリングを加える
+
+フリップ時のアニメーションにスプリングを加えたい場合は、`transition`を使用してください。
+
+```tsx functional=true
+return (
+  <Flip
+    transition={{
+      type: "spring",
+      damping: 10,
+      stiffness: 120,
+    }}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx functional=true
+return (
+  <Flip
+    duration={1.4}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### アニメーションの発火を遅らせる
+
+アニメーションの発火を遅らせたい場合は、`delay`に数値(秒)を設定します。
+
+```tsx functional=true
+return (
+  <Flip
+    delay={1}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### 無効にする
+
+無効にする場合は、`isDisabled`を`true`にします。
+
+```tsx functional=true
+return (
+  <Flip
+    isDisabled
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+
+```tsx functional=true
+return (
+  <Flip
+    isReadOnly
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### 制御する
+
+```tsx functional=true
+const [value, onChange] = useState<FlipIdent>("from")
+
+return (
+  <Flip
+    value={value}
+    onChange={onChange}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```

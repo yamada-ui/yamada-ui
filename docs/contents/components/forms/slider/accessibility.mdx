@@ -1,0 +1,65 @@
+---
+title: Slider
+description: >-
+  `Slider` is a component used for allowing users to select a value from a
+  range.
+package_name: "@yamada-ui/slider"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+The `Slider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) for accessibility.
+
+If the value of `aria-valuenow` is not user-friendly, e.g., the day of the week is represented by a number, setting `aria-valuetext` to a string that makes the slider value understandable like `"Monday"` will be read by screen reader.
+
+```tsx live=false
+const weekday = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
+
+const [value, onChange] = useState<number>(0)
+
+return (
+  <Slider
+    aria-valuetext={weekday[value]}
+    max={6}
+    min={0}
+    value={value}
+    onChange={onChange}
+  />
+)
+```
+
+## Keyboard Navigation
+
+| Key          | Description                                       | State |
+| ------------ | ------------------------------------------------- | ----- |
+| `Tab`        | Focuses the thumb.                                | -     |
+| `ArrowRight` | Increases the value by one step.                  | -     |
+| `ArrowLeft`  | Decreases the value by one step.                  | -     |
+| `ArrowUp`    | Increases the value by one step.                  | -     |
+| `ArrowDown`  | Decreases the value by one step.                  | -     |
+| `Home`       | Sets to the first allowed value within the range. | -     |
+| `End`        | Sets to the last allowed value within the range.  | -     |
+| `PageUp`     | Increases the value by a larger step.             | -     |
+| `PageDown`   | Decreases the value by a larger step.             | -     |
+
+## ARIA Roles and Attributes
+
+| Component     | Roles and Attributes | Usage                                                                                            |
+| ------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| `SliderThumb` | `role="slider"`      | Indicates that this is a slider.                                                                 |
+|               | `aria-label`         | Sets `"Slider thumb"`.                                                                           |
+|               | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
+|               | `aria-valuemax`      | Sets the `max` value. Default is `100`.                                                          |
+|               | `aria-valuemin`      | Sets the `min` value. Default is `0`.                                                            |
+|               | `aria-valuenow`      | Sets the current value.                                                                          |
+|               | `aria-valuetext`     | Sets the current value.                                                                          |
+| `SliderMark`  | `aria-hidden`        | Sets `"true"`.                                                                                   |

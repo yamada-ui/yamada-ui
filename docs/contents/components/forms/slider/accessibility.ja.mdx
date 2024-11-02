@@ -1,0 +1,63 @@
+---
+title: Slider
+description: "`Slider`は、ユーザーが値の範囲から選択するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/slider"
+order: 3
+with_description: true
+tab: アクセシビリティ
+---
+
+`Slider`は、アクセシビリティに関して[WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/)に従います。
+
+例えば曜日が数値で表されているような、`aria-valuenow`の値がユーザーフレンドリーでない場合、`aria-valuetext`に`"Monday"`等の人間が理解可能な文字列を設定すると、スクリーンリーダーに読み上げられます。
+
+```tsx live=false
+const weekday = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
+
+const [value, onChange] = useState<number>(0)
+
+return (
+  <Slider
+    aria-valuetext={weekday[value]}
+    max={6}
+    min={0}
+    value={value}
+    onChange={onChange}
+  />
+)
+```
+
+## キーボード操作
+
+| キー         | 説明                                     | 状態 |
+| ------------ | ---------------------------------------- | ---- |
+| `Tab`        | つまみをフォーカスします。               | -    |
+| `ArrowRight` | 値を1ステップ増やします。 　             | -    |
+| `ArrowLeft`  | 値を1ステップ減らします。                | -    |
+| `ArrowUp`    | 値を1ステップ増やします。                | -    |
+| `ArrowDown`  | 値を1ステップ減らします。                | -    |
+| `Home`       | 範囲内で許可される最初の値に設定します。 | -    |
+| `End`        | 範囲内で許可される最後の値に設定します。 | -    |
+| `PageUp`     | 値を大きく増やします。                   | -    |
+| `PageDown`   | 値を大きく減らします。                   | -    |
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性       | 使い方                                                                                                    |
+| -------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
+| `SliderThumb`  | `role="slider"`    | スライダーであることを示します。                                                                          |
+|                | `aria-label`       | `"Slider thumb"`を設定します。                                                                            |
+|                | `aria-orientation` | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
+|                | `aria-valuemax`    | `max`の値を設定します。デフォルトは`100`です。                                                            |
+|                | `aria-valuemin`    | `min`の値を設定します。デフォルトは`0`です。                                                              |
+|                | `aria-valuenow`    | 現在の値を設定します。                                                                                    |
+|                | `aria-valuetext`   | 現在の値を設定します。                                                                                    |
+| `SliderMark`   | `aria-hidden`      | `"true"`を設定します。                                                                                    |

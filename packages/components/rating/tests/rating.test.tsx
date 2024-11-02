@@ -128,22 +128,16 @@ describe("<Rating />", () => {
   })
 
   test("should use custom color correctly", () => {
-    const getColor = (value: number) => {
-      switch (value) {
-        case 1:
-          return "red.500"
-        case 2:
-          return "orange.500"
-        case 3:
-          return "yellow.500"
-        case 4:
-          return "green.500"
-        case 5:
-          return "blue.500"
-        default:
-          return undefined
-      }
+    const colors: Record<number, string> = {
+      1: "red.500",
+      2: "orange.500",
+      3: "yellow.500",
+      4: "green.500",
+      5: "blue.500",
     }
+
+    const getColor = (value: number): string | undefined => colors[value]
+
     const { container } = render(<Rating color={getColor} defaultValue={5} />)
     const items = container.querySelectorAll(".ui-rating__item")
 

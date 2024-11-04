@@ -3,12 +3,7 @@ import type { ColorModeToken, CSS, ThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { ChangeEvent, ForwardedRef, ReactNode } from "react"
 import { Button } from "@yamada-ui/button"
-import {
-  forwardRef,
-  omitThemeProps,
-  ui,
-  useComponentStyle,
-} from "@yamada-ui/core"
+import { forwardRef, ui, useComponentStyle } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -64,7 +59,6 @@ export interface FileButtonProps
  */
 export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("FileButton", props)
-  const computedProps = omitThemeProps(mergedProps)
   let {
     id,
     as: As,
@@ -78,7 +72,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     onChange: onChangeProp,
     onClick: onClickProp,
     ...rest
-  } = useFormControlProps(computedProps)
+  } = useFormControlProps(mergedProps)
   const {
     onBlur: _onBlur,
     onFocus: _onFocus,

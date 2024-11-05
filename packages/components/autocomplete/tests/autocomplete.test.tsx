@@ -1005,4 +1005,38 @@ describe("<Autocomplete />", () => {
       })
     })
   })
+
+  describe("AutocompleteOption when value is not set", () => {
+    test("should set the value to the string child", () => {
+      render(
+        <Autocomplete defaultValue="option1">
+          <AutocompleteOption>option1</AutocompleteOption>
+        </Autocomplete>,
+      )
+      expect(screen.getByRole("combobox")).toHaveValue("option1")
+    })
+
+    test("should set the value to the number child as a string", () => {
+      render(
+        <Autocomplete defaultValue="1">
+          <AutocompleteOption>1</AutocompleteOption>
+        </Autocomplete>,
+      )
+      expect(screen.getByRole("combobox")).toHaveValue("1")
+    })
+
+    test("correct warnings should be issued when child is neither string nor number", () => {
+      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+      render(
+        <Autocomplete>
+          <AutocompleteOption>{(<div>option1</div>) as any}</AutocompleteOption>
+        </Autocomplete>,
+      )
+
+      expect(consoleWarnSpy).toHaveBeenCalledTimes(2)
+
+      consoleWarnSpy.mockRestore()
+    })
+  })
 })

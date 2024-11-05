@@ -1,5 +1,5 @@
 import type { PopoverProps } from "../src"
-import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import {
   Popover,
@@ -145,7 +145,7 @@ describe("<Popover />", () => {
     const body = await screen.findByText("Popover Body")
     const footer = await screen.findByText("Popover Footer")
 
-    await user.keyboard("{Escape}")
+    fireEvent.keyDown(document.body, { key: "Escape" })
 
     await waitFor(() => expect(header).not.toBeVisible())
     await waitFor(() => expect(closeButton).not.toBeVisible())

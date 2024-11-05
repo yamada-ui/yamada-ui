@@ -8,6 +8,7 @@
     "react",
     "emotion",
     "component",
+    "rating",
     "ui",
     "uikit",
     "styled",
@@ -67,6 +68,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

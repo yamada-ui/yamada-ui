@@ -1,6 +1,13 @@
 import type { Document } from "mdx"
 import type { FC, PropsWithChildren } from "react"
-import { Box, Center, Divider, Heading, HStack, VStack } from "@yamada-ui/react"
+import {
+  Box,
+  Center,
+  Separator,
+  Heading,
+  HStack,
+  VStack,
+} from "@yamada-ui/react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
 import { Seo } from "components/media-and-icons"
@@ -80,11 +87,11 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
 
               {with_children && documentChildrenTree?.length ? (
                 <>
-                  <Divider mt="xl" />
+                  <Separator mt="xl" />
 
                   <LinkCards with_description={with_children_description} />
 
-                  <Divider mt="xl" />
+                  <Separator mt="xl" />
                 </>
               ) : null}
 

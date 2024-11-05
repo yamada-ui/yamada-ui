@@ -13,7 +13,7 @@ import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
 import {
   assignRef,
   Button,
-  Divider,
+  Separator,
   Grid,
   HStack,
   Input,
@@ -205,7 +205,7 @@ const FilterControlButton = <T extends Priority | Status>({
 
         {value.length ? (
           <>
-            <Divider h="5" orientation="vertical" />
+            <Separator h="5" orientation="vertical" />
 
             <HStack gap="xs">
               {value.length >= 3 ? (

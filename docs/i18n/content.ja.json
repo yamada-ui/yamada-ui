@@ -9415,31 +9415,31 @@
   },
   {
     "type": "page",
-    "description": "`Divider`は、要素間において区切りを表すコンポーネントです。",
-    "hierarchy": { "lv1": "Divider" },
-    "slug": "/components/layouts/divider",
-    "title": "Divider"
+    "description": "`Separator`は、要素間において区切りを表すコンポーネントです。",
+    "hierarchy": { "lv1": "Separator" },
+    "slug": "/components/layouts/separator",
+    "title": "Separator"
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "Divider", "lv2": "インポート" },
-    "slug": "/components/layouts/divider#インポート",
+    "hierarchy": { "lv1": "Separator", "lv2": "インポート" },
+    "slug": "/components/layouts/separator#インポート",
     "title": "インポート"
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "Divider", "lv2": "使い方" },
-    "slug": "/components/layouts/divider#使い方",
+    "hierarchy": { "lv1": "Separator", "lv2": "使い方" },
+    "slug": "/components/layouts/separator#使い方",
     "title": "使い方"
   },
   {
     "type": "fragment",
     "hierarchy": {
-      "lv1": "Divider",
+      "lv1": "Separator",
       "lv2": "使い方",
       "lv3": "垂直に区切り線を引く"
     },
-    "slug": "/components/layouts/divider#垂直に区切り線を引く",
+    "slug": "/components/layouts/separator#垂直に区切り線を引く",
     "title": "垂直に区切り線を引く"
   },
   {

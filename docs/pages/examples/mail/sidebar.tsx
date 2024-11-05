@@ -14,7 +14,7 @@ import {
 } from "@yamada-ui/lucide"
 import {
   Button,
-  Divider,
+  Separator,
   Heading,
   HStack,
   IconButton,
@@ -63,7 +63,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
         ) : null}
       </Header>
 
-      <VStack as="nav" divider={<Divider />} gap="0">
+      <VStack as="nav" separator={<Separator />} gap="0">
         <VStack as="ul" gap="sm" p="sm">
           {MAIN_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem

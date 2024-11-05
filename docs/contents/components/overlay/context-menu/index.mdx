@@ -19,7 +19,7 @@ import {
   MenuGroup,
   MenuOptionItem,
   MenuOptionGroup,
-  MenuDivider,
+  MenuSeparator,
 } from "@yamada-ui/react"
 ```
 
@@ -30,7 +30,7 @@ import {
 - `MenuGroup`: A wrapper component that groups items in the menu.
 - `MenuOptionItem`: A component for selectable menu items (radio and checkbox).
 - `MenuOptionGroup`: A wrapper component that groups selectable menu items (radio and checkbox).
-- `MenuDivider`: A component that separates items in the menu.
+- `MenuSeparator`: A component that separates items in the menu.
 
 ## Usage
 
@@ -51,7 +51,7 @@ import {
   <MenuList>
     <MenuItem>Undo</MenuItem>
     <MenuItem>Redo</MenuItem>
-    <MenuDivider />
+    <MenuSeparator />
     <MenuItem>Cut</MenuItem>
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
@@ -305,9 +305,9 @@ To change the duration, set a number (seconds) to `duration`.
 </ContextMenu>
 ```
 
-### Adding Dividers Between Items
+### Adding Separators Between Items
 
-By setting `MenuDivider` between `MenuItem`s, you can add dividers.
+By setting `MenuSeparator` between `MenuItem`s, you can add separators.
 
 ```tsx
 <ContextMenu>
@@ -328,7 +328,7 @@ By setting `MenuDivider` between `MenuItem`s, you can add dividers.
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuItem>Delete</MenuItem>
   </MenuList>
@@ -360,7 +360,7 @@ To group items together, use `MenuGroup`.
       <MenuItem>Paste</MenuItem>
     </MenuGroup>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuGroup label="tool">
       <MenuItem>Shortcut</MenuItem>
@@ -393,7 +393,7 @@ You can set selectable items like radios or checkboxes using `MenuOptionGroup` a
       <MenuOptionItem value="desc">Descending</MenuOptionItem>
     </MenuOptionGroup>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuOptionGroup label="display" type="checkbox">
       <MenuOptionItem value="gender">gender</MenuOptionItem>
@@ -427,7 +427,7 @@ To construct nested menus, insert a nested `Menu` within `MenuItem`.
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuItem>
       <Menu>

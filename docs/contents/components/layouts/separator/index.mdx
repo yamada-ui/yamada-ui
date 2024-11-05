@@ -1,6 +1,6 @@
 ---
-title: Divider
-description: "`Divider` is a component that represents a division between elements."
+title: Separator
+description: "`Separator` is a component that represents a division between elements."
 package_name: "@yamada-ui/layouts"
 order: 10
 is_tabs: true
@@ -11,18 +11,18 @@ tab: Usage
 ## Import
 
 ```ts
-import { Divider } from "@yamada-ui/react"
+import { Separator } from "@yamada-ui/react"
 ```
 
 ## Usage
 
 ```tsx
 <Flex direction="column" gap="md">
-  <Divider variant="solid" />
+  <Separator variant="solid" />
 
-  <Divider variant="dashed" />
+  <Separator variant="dashed" />
 
-  <Divider variant="dotted" />
+  <Separator variant="dotted" />
 </Flex>
 ```
 
@@ -30,14 +30,14 @@ import { Divider } from "@yamada-ui/react"
 
 ```tsx
 <Flex h="sm" gap="md">
-  <Divider orientation="vertical" variant="solid" />
+  <Separator orientation="vertical" variant="solid" />
 
-  <Divider orientation="vertical" variant="dashed" />
+  <Separator orientation="vertical" variant="dashed" />
 
-  <Divider orientation="vertical" variant="dotted" />
+  <Separator orientation="vertical" variant="dotted" />
 </Flex>
 ```
 
 :::note status=warning
-When making the dividing line vertical, you need to set the height to the parent element or `Divider`.
+When making the dividing line vertical, you need to set the height to the parent element or `Separator`.
 :::

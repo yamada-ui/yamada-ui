@@ -63,3 +63,6 @@ export const Audio = forwardRef<AudioProps, "svg">(
     )
   },
 )
+
+Audio.displayName = "Audio"
+Audio.__ui__ = "Audio"

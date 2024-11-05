@@ -1,5 +1,12 @@
 # @yamada-ui/modal
 
+## 1.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
 ## 1.4.2
 
 ### Patch Changes

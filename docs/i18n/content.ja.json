@@ -11766,6 +11766,67 @@
   },
   {
     "type": "page",
+    "description": "`Airy`は、２つの要素をふわっと切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Airy" },
+    "slug": "/components/transitions/airy",
+    "title": "Airy"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "インポート" },
+    "slug": "/components/transitions/airy#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方" },
+    "slug": "/components/transitions/airy#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/airy#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/airy#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/airy#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/airy#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/airy#制御する",
+    "title": "制御する"
+  },
+  {
+    "type": "page",
     "description": "`Collapse`は、要素を展開または折りたたんで表示するコンポーネントです。",
     "hierarchy": { "lv1": "Collapse" },
     "slug": "/components/transitions/collapse",
@@ -11864,10 +11925,162 @@
   },
   {
     "type": "page",
+    "description": "`Flip`は、２つの要素をフリップさせながら切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Flip" },
+    "slug": "/components/transitions/flip",
+    "title": "Flip"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "インポート" },
+    "slug": "/components/transitions/flip#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方" },
+    "slug": "/components/transitions/flip#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "フリップさせる方向を変更する"
+    },
+    "slug": "/components/transitions/flip#フリップさせる方向を変更する",
+    "title": "フリップさせる方向を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "アニメーションにスプリングを加える"
+    },
+    "slug": "/components/transitions/flip#アニメーションにスプリングを加える",
+    "title": "アニメーションにスプリングを加える"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/flip#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/flip#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/flip#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/flip#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/flip#制御する",
+    "title": "制御する"
+  },
+  {
+    "type": "page",
     "description": "`Collapse`や`Fade`など、要素にアニメーションを提供して視覚的な遷移を演出するコンポーネントが用意されています。",
     "hierarchy": { "lv1": "トランジション" },
     "slug": "/components/transitions",
     "title": "トランジション"
+  },
+  {
+    "type": "page",
+    "description": "`Rotate`は、２つの要素を回転させながら切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Rotate" },
+    "slug": "/components/transitions/rotate",
+    "title": "Rotate"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "インポート" },
+    "slug": "/components/transitions/rotate#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方" },
+    "slug": "/components/transitions/rotate#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "回転させる角度を変更する"
+    },
+    "slug": "/components/transitions/rotate#回転させる角度を変更する",
+    "title": "回転させる角度を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/rotate#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/rotate#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/rotate#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/rotate#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/rotate#制御する",
+    "title": "制御する"
   },
   {
     "type": "page",

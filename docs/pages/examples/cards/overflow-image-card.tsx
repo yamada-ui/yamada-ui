@@ -3,9 +3,9 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Separator,
   Heading,
   Image,
+  Separator,
   Text,
 } from "@yamada-ui/react"
 import { memo } from "react"

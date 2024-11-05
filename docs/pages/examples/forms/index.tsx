@@ -1,5 +1,5 @@
 import type { FC, MutableRefObject } from "react"
-import { assignRef, Separator, HStack, noop, VStack } from "@yamada-ui/react"
+import { assignRef, HStack, noop, Separator, VStack } from "@yamada-ui/react"
 import { memo, useCallback, useRef, useState } from "react"
 import { Account } from "./account"
 import { Appearance } from "./appearance"
@@ -30,9 +30,9 @@ export const Forms = memo(() => {
     <VStack
       as="section"
       borderBottomWidth="1px"
-      separator={<Separator />}
       gap={{ base: "lg", sm: "md" }}
       p={{ base: "lg", sm: "md" }}
+      separator={<Separator />}
     >
       <Header />
 

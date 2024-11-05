@@ -3,9 +3,9 @@ import type { FC, PropsWithChildren } from "react"
 import {
   Box,
   Center,
-  Separator,
   Heading,
   HStack,
+  Separator,
   VStack,
 } from "@yamada-ui/react"
 import { StarBanner } from "components/feedback"

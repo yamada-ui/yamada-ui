@@ -22,7 +22,7 @@ import {
   Heading,
   HStack,
   IconButton,
-  Separator,
+  Divider,
   Spacer,
   Switch,
   Text,
@@ -52,7 +52,7 @@ export const Detail: FC<DetailProps> = memo(
           <HStack gap="xs">
             <ControlIcon icon={Archive} label="Archive" />
             <ControlIcon icon={Trash} label="Move to trash" />
-            <Separator
+            <Divider
               display={{ base: "block", sm: "none" }}
               h="6"
               orientation="vertical"
@@ -70,7 +70,7 @@ export const Detail: FC<DetailProps> = memo(
             <ControlIcon icon={Reply} label="Reply" />
             <ControlIcon icon={ReplyAll} label="Reply all" />
             <ControlIcon icon={Share} label="Forward" />
-            <Separator
+            <Divider
               display={{ base: "block", sm: "none" }}
               h="6"
               orientation="vertical"
@@ -79,7 +79,7 @@ export const Detail: FC<DetailProps> = memo(
           </HStack>
         </Header>
 
-        <VStack flex="1" gap="0" separator={<Separator />}>
+        <VStack flex="1" gap="0" divider={<Divider />}>
           <HStack align="start" p="md">
             <Avatar name={authorName} />
 

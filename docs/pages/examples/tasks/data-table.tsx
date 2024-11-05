@@ -14,7 +14,7 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
-  MenuSeparator,
+  MenuDivider,
   TableContainer,
   Tag,
   Text,
@@ -253,7 +253,7 @@ const ControlMenu = memo(
           <MenuItem>Make a copy</MenuItem>
           <MenuItem>Favorite</MenuItem>
 
-          <MenuSeparator />
+          <MenuDivider />
 
           <MenuItem>
             <Menu>
@@ -271,7 +271,7 @@ const ControlMenu = memo(
             </Menu>
           </MenuItem>
 
-          <MenuSeparator />
+          <MenuDivider />
 
           <MenuItem command="⌘⌫">Delete</MenuItem>
         </MenuList>

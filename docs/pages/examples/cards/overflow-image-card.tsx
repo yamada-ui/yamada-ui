@@ -5,7 +5,7 @@ import {
   CardHeader,
   Heading,
   Image,
-  Separator,
+  Divider,
   Text,
 } from "@yamada-ui/react"
 import { memo } from "react"
@@ -36,12 +36,12 @@ export const OverflowImageCard = memo(() => {
         </Text>
       </CardBody>
 
-      <Separator />
+      <Divider />
 
       <CardFooter backdropFilter="blur(10px)" pt="md" roundedBottom="xl">
         <Text fontSize="sm">1.2k views</Text>
 
-        <Separator orientation="vertical" />
+        <Divider orientation="vertical" />
 
         <Text fontSize="sm">1 hour ago</Text>
       </CardFooter>

@@ -1,5 +1,5 @@
 import type { FC, MutableRefObject } from "react"
-import { assignRef, HStack, noop, Separator, VStack } from "@yamada-ui/react"
+import { assignRef, HStack, noop, Divider, VStack } from "@yamada-ui/react"
 import { memo, useCallback, useRef, useState } from "react"
 import { Account } from "./account"
 import { Appearance } from "./appearance"
@@ -32,7 +32,7 @@ export const Forms = memo(() => {
       borderBottomWidth="1px"
       gap={{ base: "lg", sm: "md" }}
       p={{ base: "lg", sm: "md" }}
-      separator={<Separator />}
+      divider={<Divider />}
     >
       <Header />
 

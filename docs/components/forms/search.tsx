@@ -13,7 +13,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  Separator,
+  Divider,
   Text,
   ui,
   useDisclosure,
@@ -295,7 +295,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         {hits.length ? (
           <ModalBody ref={containerRef} my="0" pb="md">
-            <Separator />
+            <Divider />
 
             <VStack as="ul" gap="sm">
               {hits.map(({ type, hierarchy, slug, title }, index) => {

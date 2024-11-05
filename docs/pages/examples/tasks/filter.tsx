@@ -22,7 +22,7 @@ import {
   MenuOptionGroup,
   MenuOptionItem,
   noop,
-  Separator,
+  Divider,
   Text,
   useBoolean,
 } from "@yamada-ui/react"
@@ -205,7 +205,7 @@ const FilterControlButton = <T extends Priority | Status>({
 
         {value.length ? (
           <>
-            <Separator h="5" orientation="vertical" />
+            <Divider h="5" orientation="vertical" />
 
             <HStack gap="xs">
               {value.length >= 3 ? (

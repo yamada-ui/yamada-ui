@@ -25,7 +25,7 @@ order: 1
   id="breadcrumbitem-gap"
   name="gap"
   type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | ... 100 more ... | "normal">'
-  description={"The left and right margin applied to the separator."}
+  description={"The left and right margin applied to the divider."}
   defaultValue={"'2'"}
 />
 
@@ -41,17 +41,17 @@ order: 1
   id="breadcrumbitem-islastchild"
   name="isLastChild"
   type="boolean"
-  description={"If `true`, not show separator."}
+  description={"If `true`, not show divider."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="breadcrumbitem-separator"
-  name="separator"
+  id="breadcrumbitem-divider"
+  name="divider"
   type="type ONLY_FOR_FORMAT =
   | string
   | ReactElement<any, string | JSXElementConstructor<any>>"
-  description={"The visual separator between each breadcrumb item."}
+  description={"The visual divider between each breadcrumb item."}
   defaultValue={"'/'"}
 />
 
@@ -85,7 +85,7 @@ order: 1
   id="breadcrumb-gap"
   name="gap"
   type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | ... 100 more ... | "normal">'
-  description={"The left and right margin applied to the separator."}
+  description={"The left and right margin applied to the divider."}
   defaultValue={"'2'"}
 />
 
@@ -104,12 +104,12 @@ order: 1
 />
 
 <PropsCard
-  id="breadcrumb-separator"
-  name="separator"
+  id="breadcrumb-divider"
+  name="divider"
   type="type ONLY_FOR_FORMAT =
   | string
   | ReactElement<any, string | JSXElementConstructor<any>>"
-  description={"The visual separator between each breadcrumb item."}
+  description={"The visual divider between each breadcrumb item."}
   defaultValue={"'/'"}
 />
 
@@ -120,10 +120,10 @@ order: 1
   description={"Number of elements visible on the start(left) edges."}
 />
 
-### BreadcrumbSeparatorProps
+### BreadcrumbDividerProps
 
 <PropsCard
-  id="breadcrumbseparator-gap"
+  id="breadcrumbdivider-gap"
   name="gap"
   type='number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | "xs" | ... 104 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={

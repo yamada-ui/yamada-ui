@@ -50,7 +50,7 @@ return <Reorder items={items} />
 ### バリアントを変更する
 
 ```tsx
-<VStack separator={<Separator />}>
+<VStack divider={<Divider />}>
   <Reorder variant="outline">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>
@@ -80,7 +80,7 @@ return <Reorder items={items} />
 ### サイズを変更する
 
 ```tsx
-<VStack separator={<Separator />}>
+<VStack divider={<Divider />}>
   <Reorder size="sm">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>
@@ -120,7 +120,7 @@ return <Reorder items={items} />
 方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトでは、`vertical`が設定されています。
 
 ```tsx
-<VStack separator={<Separator />}>
+<VStack divider={<Divider />}>
   <Reorder orientation="vertical">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>

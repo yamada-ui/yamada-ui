@@ -15,7 +15,7 @@ import {
   Step,
   StepTitle,
   StepDescription,
-  StepSeparator,
+  StepDivider,
   StepStatus,
   useSteps,
 } from "@yamada-ui/react"
@@ -25,7 +25,7 @@ import {
 - `Step`: 1つのステップを表示するコンポーネントです。
 - `StepTitle`: ステップのタイトルを表示するコンポーネントです。
 - `StepDescription`: ステップの説明を表示するコンポーネントです。
-- `StepSeparator`: ステップ間の区切りを表示するコンポーネントです。
+- `StepDivider`: ステップ間の区切りを表示するコンポーネントです。
 - `StepStatus`: ステップのインジケーターを表示するコンポーネントです。
 - `useSteps`: 各ステップの状態とアクティブなインデックスを管理するカスタムフックです。
 
@@ -153,7 +153,7 @@ return (
             <StepDescription>{description}</StepDescription>
           </Box>
 
-          <StepSeparator />
+          <StepDivider />
         </Step>
       ))}
     </Stepper>
@@ -243,7 +243,7 @@ return (
             <StepDescription>{description}</StepDescription>
           </Box>
 
-          <StepSeparator />
+          <StepDivider />
         </Step>
       ))}
     </Stepper>

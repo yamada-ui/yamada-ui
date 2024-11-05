@@ -17,7 +17,7 @@ import {
   Heading,
   HStack,
   IconButton,
-  Separator,
+  Divider,
   Spacer,
   Text,
   Tooltip,
@@ -63,7 +63,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
         ) : null}
       </Header>
 
-      <VStack as="nav" gap="0" separator={<Separator />}>
+      <VStack as="nav" gap="0" divider={<Divider />}>
         <VStack as="ul" gap="sm" p="sm">
           {MAIN_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem

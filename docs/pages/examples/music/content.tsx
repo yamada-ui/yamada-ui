@@ -17,7 +17,7 @@ import {
   ModalHeader,
   SegmentedControl,
   SegmentedControlButton,
-  Separator,
+  Divider,
   Spacer,
   Text,
   useDisclosure,
@@ -211,7 +211,7 @@ const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
           </Text>
         ) : null}
 
-        <Separator />
+        <Divider />
       </VStack>
     )
   },

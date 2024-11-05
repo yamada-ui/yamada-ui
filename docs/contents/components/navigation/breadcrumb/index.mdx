@@ -54,10 +54,10 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
 return <Breadcrumb items={items} />
 ```
 
-### Customize the Separator
+### Customize the Divider
 
 ```tsx
-<Breadcrumb separator="-">
+<Breadcrumb divider="-">
   <BreadcrumbItem>
     <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
   </BreadcrumbItem>
@@ -73,10 +73,10 @@ return <Breadcrumb items={items} />
 </Breadcrumb>
 ```
 
-### Use an Icon as a Separator
+### Use an Icon as a Divider
 
 ```tsx
-<Breadcrumb separator={<ChevronRight color="gray.300" />}>
+<Breadcrumb divider={<ChevronRight color="gray.300" />}>
   <BreadcrumbItem>
     <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
   </BreadcrumbItem>

@@ -22,7 +22,7 @@ import {
   Heading,
   Icon,
   IconButton,
-  Separator,
+  Divider,
   Text,
   Tooltip,
   VStack,
@@ -105,8 +105,8 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse, ...rest }) => {
         gap={!isCollapse ? { base: "lg", lg: "md" } : "md"}
         px="sm"
         py="lg"
-        separator={
-          <Separator
+        divider={
+          <Divider
             display={isCollapse ? "block" : { base: "none", lg: "block" }}
           />
         }

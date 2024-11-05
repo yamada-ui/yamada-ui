@@ -25,7 +25,7 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       flexShrink: 0,
     },
     number: {},
-    separator: {
+    divider: {
       "&[data-status=complete]": {
         bg: [`${c}.500`, `${c}.400`],
       },
@@ -109,7 +109,7 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       number: {
         fontSize: "sm",
       },
-      separator: {
+      divider: {
         insetStart: `calc(${get(t, "sizes.6")} / 2 - 1px)`,
         maxHeight: `calc(100% - ${get(t, "sizes.6")} - 8px)`,
         top: `calc(${get(t, "sizes.6")} + 4px)`,
@@ -133,7 +133,7 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       number: {
         fontSize: "md",
       },
-      separator: {
+      divider: {
         insetStart: `calc(${get(t, "sizes.8")} / 2 - 1px)`,
         maxHeight: `calc(100% - ${get(t, "sizes.8")} - 8px)`,
         top: `calc(${get(t, "sizes.8")} + 4px)`,
@@ -157,7 +157,7 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       number: {
         fontSize: "lg",
       },
-      separator: {
+      divider: {
         insetStart: `calc(${get(t, "sizes.10")} / 2 - 1px)`,
         maxHeight: `calc(100% - ${get(t, "sizes.10")} - 8px)`,
         top: `calc(${get(t, "sizes.10")} + 4px)`,

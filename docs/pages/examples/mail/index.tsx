@@ -4,7 +4,7 @@ import {
   Resizable,
   ResizableItem,
   ResizableTrigger,
-  Separator,
+  Divider,
   useBoolean,
   VStack,
 } from "@yamada-ui/react"
@@ -63,7 +63,7 @@ export const Mail = memo(() => {
           display={{ base: "none", lg: "flex" }}
           gap="0"
           h="full"
-          separator={<Separator />}
+          divider={<Divider />}
         >
           <Inbox
             defaultMail={DEFAULT_MAIL}

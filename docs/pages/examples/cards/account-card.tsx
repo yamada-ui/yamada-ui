@@ -9,7 +9,7 @@ import {
   Heading,
   HStack,
   Input,
-  Separator,
+  Divider,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -46,13 +46,13 @@ export const AccountCard = memo(() => {
         </ButtonGroup>
 
         <HStack w="full">
-          <Separator />
+          <Divider />
 
           <Text color="muted" fontSize="sm" whiteSpace="nowrap">
             OR CONTINUE WITH
           </Text>
 
-          <Separator />
+          <Divider />
         </HStack>
 
         <VStack w="full">

@@ -80,7 +80,7 @@ const OVERRIDE_PATHS: {
     "box",
     "center",
     "container",
-    "separator",
+    "divider",
     "flex",
     { children: ["grid-item"], parent: "grid" },
     "spacer",

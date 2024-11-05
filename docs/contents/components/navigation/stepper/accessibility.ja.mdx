@@ -7,6 +7,16 @@ tab: アクセシビリティ
 order: 3
 ---
 
+`title`と`description`が設定されていない場合は、`Step`コンポーネントに`aria-label`を設定します。
+
+```ts
+const steps: Steps = [
+  { "aria-label": "シーズン1" },
+  { description: "ピッコロ大魔王編", "aria-label": "シーズン 2" },
+  { title: "サイヤ人編", "aria-label": "シーズン 3" },
+]
+```
+
 ## ARIAロールと属性
 
 | コンポーネント  | ロールと属性         | 使い方                                       |

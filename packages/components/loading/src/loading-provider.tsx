@@ -197,7 +197,6 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   )
 }
 
-LoadingProvider.displayName = "LoadingProvider"
 LoadingProvider.__ui__ = "LoadingProvider"
 
 interface ControllerProps extends LoadingConfigOptions {
@@ -309,7 +308,6 @@ const Controller: FC<ControllerProps> = ({
   )
 }
 
-Controller.displayName = "Controller"
 Controller.__ui__ = "LoadingController"
 
 interface RenderProps extends LoadingComponentProps {

@@ -24,7 +24,8 @@ The `NativeSelect` follows the [WAI-ARIA - Combobox Pattern]("https://www.w3.org
 
 ## ARIA Roles and Attributes
 
-| Component                     | Role and Attribute   | Usage                                             |
-| ----------------------------- | -------------------- | ------------------------------------------------- |
-| `NativeSelect`                | `aria-hidden="true"` | Excludes the element from the accessibility tree. |
-| ` select` <Tag>Internal</Tag> | `aria-readonly`      | Set to `"true"` if `isReadOnly` is set.           |
+| Component                    | Role and Attribute           | Usage                                                      |
+| ---------------------------- | ---------------------------- | ---------------------------------------------------------- |
+| `NativeSelect`               | `aria-label="Native Select"` | If `aria-label` is not set, `"Native Select"` will be set. |
+| `NativeSelectIcon`           | `aria-hidden="true"`         | Excludes the element from the accessibility tree.          |
+| `select` <Tag>Internal</Tag> | `aria-readonly`              | Set to `"true"` if `isReadOnly` is set.                    |

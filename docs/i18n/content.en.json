@@ -14802,20 +14802,20 @@
     "type": "fragment",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Setting Common props for the Entire Application"
+      "lv2": "Single part and multi part components",
+      "lv3": "Styling Multi part components"
     },
-    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
-    "title": "Setting Common props for the Entire Application"
+    "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
+    "title": "Styling Multi part components"
   },
   {
     "type": "fragment",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Setting Common props for the Entire Application",
-      "lv3": "Styling Multi part components"
+      "lv2": "Setting Common props for the Entire Application"
     },
-    "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
-    "title": "Styling Multi part components"
+    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
+    "title": "Setting Common props for the Entire Application"
   },
   {
     "type": "fragment",

@@ -31,9 +31,9 @@ order: 2
 
 ```ts title=./theme/index.ts
 import { extendTheme, UsageTheme } from "@yamada-ui/react"
-// import styles from './styles'
-// import components from './components'
-// import tokens from './tokens'
+// import { styles } from './styles'
+// import { components } from './components'
+// import { tokens } from './tokens'
 
 const customTheme: UsageTheme = {
   // styles,
@@ -520,8 +520,8 @@ export const theme = extendTheme(customTheme)({ pick: ["spaces"] })
 
 ```ts title=./theme/index.ts highlight={12}
 import { extendBaseTheme, UsageTheme } from "@yamada-ui/react"
-import styles from "./styles"
-import tokens from "./tokens"
+import { styles } from "./styles"
+import { tokens } from "./tokens"
 
 const customTheme: UsageTheme = {
   styles,

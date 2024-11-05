@@ -1,5 +1,12 @@
 import type { AutocompleteItem } from "../src"
-import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
+import {
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "@yamada-ui/test"
 import { noop } from "@yamada-ui/utils"
 import { useState } from "react"
 import {
@@ -882,6 +889,120 @@ describe("<Autocomplete />", () => {
 
       const footerElement = container.querySelector(".ui-autocomplete__footer")
       expect(footerElement).toBeNull()
+    })
+  })
+
+  describe("dropdown scroll behavior", () => {
+    const ITEMS: AutocompleteItem[] = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("should scroll to top when selected item fits within dropdown visible area", async () => {
+      const { container, user } = render(<Autocomplete items={ITEMS} />)
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const autocompleteList = container.querySelector(
+        ".ui-autocomplete__list",
+      ) as HTMLDivElement
+      expect(autocompleteList).toBeInTheDocument()
+
+      vi.spyOn(autocompleteList, "scrollTo").mockImplementation(() => {
+        autocompleteList.scrollTop = 0
+      })
+
+      act(() => {
+        fireEvent.scroll(autocompleteList!, { target: { scrollTop: 100 } })
+      })
+
+      await user.click(document.body)
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        expect(autocompleteList.scrollTop).toBe(0)
+      })
+    })
+
+    test("should scroll down to show selected item when selecting next option in dropdown", async () => {
+      const height = 240
+      const childTop = height * 4
+      const childBottom = childTop + height
+
+      Object.defineProperties(HTMLElement.prototype, {
+        clientHeight: { configurable: true, value: height },
+        offsetTop: { configurable: true, value: childTop },
+      })
+
+      const { container, user } = render(
+        <Autocomplete defaultValue="option3" items={ITEMS} />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      const autocompleteList = container.querySelector(
+        ".ui-autocomplete__list",
+      ) as HTMLDivElement
+      expect(autocompleteList).toBeInTheDocument()
+
+      vi.spyOn(autocompleteList, "scrollTo").mockImplementation(() => {
+        autocompleteList.scrollTop = childBottom - height
+      })
+
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        expect(autocompleteList.scrollTop).toBe(childBottom - height)
+      })
+    })
+
+    test("should scroll up to show selected item when selecting previous option in dropdown", async () => {
+      const height = 240
+      const childTop = height * 4
+
+      Object.defineProperties(HTMLElement.prototype, {
+        clientHeight: { configurable: true, value: height },
+        offsetTop: { configurable: true, value: childTop },
+      })
+
+      const { container, user } = render(
+        <Autocomplete defaultValue="option3" items={ITEMS} />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      const autocompleteList = container.querySelector(
+        ".ui-autocomplete__list",
+      ) as HTMLDivElement
+      expect(autocompleteList).toBeInTheDocument()
+
+      vi.spyOn(autocompleteList, "scrollTo").mockImplementation(() => {
+        autocompleteList.scrollTop = childTop + 1
+      })
+
+      await user.click(autocomplete!)
+
+      const prevElement = screen.getByText("option2")
+      await user.click(prevElement)
+
+      await waitFor(() => {
+        expect(autocompleteList.scrollTop).toBe(childTop + 1)
+      })
     })
   })
 })

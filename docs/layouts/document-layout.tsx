@@ -1,6 +1,6 @@
 import type { Document } from "mdx"
 import type { FC, PropsWithChildren } from "react"
-import { Box, Center, Heading, HStack, Divider, VStack } from "@yamada-ui/react"
+import { Box, Center, Divider, Heading, HStack, VStack } from "@yamada-ui/react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
 import { Seo } from "components/media-and-icons"

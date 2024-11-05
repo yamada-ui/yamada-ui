@@ -1,6 +1,6 @@
 import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import type { FC, ReactNode } from "react"
-import { Button, Heading, Divider, Text, VStack } from "@yamada-ui/react"
+import { Button, Divider, Heading, Text, VStack } from "@yamada-ui/react"
 import { memo } from "react"
 
 export interface FormProps extends Omit<StackProps, "title"> {
@@ -24,8 +24,8 @@ export const Form: FC<FormProps> = memo(
     return (
       <VStack
         as="section"
-        gap={{ base: "lg", sm: "md" }}
         divider={<Divider />}
+        gap={{ base: "lg", sm: "md" }}
         {...containerProps}
       >
         <VStack as="header" gap="xs">

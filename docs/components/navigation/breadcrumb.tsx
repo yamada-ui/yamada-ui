@@ -1,8 +1,8 @@
 import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
 import {
+  BreadcrumbDivider,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbDivider,
   ChevronIcon,
   forwardRef,
   Breadcrumb as UIBreadcrumb,
@@ -21,10 +21,10 @@ export const Breadcrumb = memo(
       <UIBreadcrumb
         ref={ref}
         color="muted"
+        divider={<ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />}
         fontSize="sm"
         gap="1"
         mb="sm"
-        divider={<ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />}
         listProps={{ h: 6 }}
         {...rest}
       >

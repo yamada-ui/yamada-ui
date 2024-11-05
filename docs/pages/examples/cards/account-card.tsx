@@ -5,11 +5,11 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Divider,
   FormControl,
   Heading,
   HStack,
   Input,
-  Divider,
   Text,
   VStack,
 } from "@yamada-ui/react"

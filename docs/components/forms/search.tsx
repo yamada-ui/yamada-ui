@@ -3,6 +3,7 @@ import type { FC, KeyboardEvent, RefObject } from "react"
 import { File, Hash, SearchIcon } from "@yamada-ui/lucide"
 import {
   dataAttr,
+  Divider,
   forwardRef,
   handlerAll,
   Highlight,
@@ -13,7 +14,6 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  Divider,
   Text,
   ui,
   useDisclosure,

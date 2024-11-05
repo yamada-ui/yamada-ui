@@ -7,10 +7,10 @@ import {
   HStack,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
-  MenuDivider,
   Text,
   VStack,
 } from "@yamada-ui/react"

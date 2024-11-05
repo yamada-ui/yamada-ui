@@ -7,12 +7,6 @@ with_description: true
 tab: Accessibility
 ---
 
-Setting an `aria-label` on the `HueSlider` allows it to be read by screen readers.
-
-```tsx live=false
-<HueSlider aria-label="Hue slider" />
-```
-
 ## Keyboard Navigation
 
 | Key          | Description                                                       | State |
@@ -28,11 +22,12 @@ Setting an `aria-label` on the `HueSlider` allows it to be read by screen reader
 
 ## ARIA Roles and Attributes
 
-| Component | Role and Attributes | Usage                                                                                  |
-| --------- | ------------------- | -------------------------------------------------------------------------------------- |
-| Slider    | `role="slider"`     | Indicates that the element is a slider.                                                |
-|           | `aria-valuemax`     | Sets the maximum value of the slider. If `max` is not set, defaults to `360`.          |
-|           | `aria-valuemin`     | Sets the minimum value of the slider. If `min` is not set, defaults to `0`.            |
-|           | `aria-valuenow`     | Sets the current value of the slider. If `defaultValue` is not set, defaults to `180`. |
-|           | `aria-disabled`     | Set to `"true"` when `isDisabled` is set on the `HueSlider`.                           |
-|           | `aria-readonly`     | Set to `"true"` when `isReadOnly` is set on the `HueSlider`.                           |
+| Component | Role and Attributes         | Usage                                                                                  |
+| --------- | --------------------------- | -------------------------------------------------------------------------------------- |
+| Slider    | `role="sliderThumb"`        | Indicates that the element is a slider.                                                |
+|           | `aria-label="Slider thumb"` | Sets the description for the slider's thumb.                                           |
+|           | `aria-valuemax`             | Sets the maximum value of the slider. If `max` is not set, defaults to `360`.          |
+|           | `aria-valuemin`             | Sets the minimum value of the slider. If `min` is not set, defaults to `0`.            |
+|           | `aria-valuenow`             | Sets the current value of the slider. If `defaultValue` is not set, defaults to `180`. |
+|           | `aria-disabled`             | Set to `"true"` when `isDisabled` is set on the `HueSlider`.                           |
+|           | `aria-readonly`             | Set to `"true"` when `isReadOnly` is set on the `HueSlider`.                           |

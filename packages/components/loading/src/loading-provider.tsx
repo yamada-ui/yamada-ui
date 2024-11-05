@@ -308,7 +308,7 @@ const Controller: FC<ControllerProps> = ({
   )
 }
 
-Controller.__ui__ = "LoadingController"
+Controller.__ui__ = "Controller"
 
 interface RenderProps extends LoadingComponentProps {
   component?: (

@@ -1,5 +1,26 @@
 # @yamada-ui/react
 
+## 1.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`3e9c43a`](https://github.com/yamada-ui/yamada-ui/commit/3e9c43a1ec4e8b5f0d714a583aa97f96e8189b27), [`416fc04`](https://github.com/yamada-ui/yamada-ui/commit/416fc04c37d6341f4611c3dd3c2b3c48926b750b), [`1e6140f`](https://github.com/yamada-ui/yamada-ui/commit/1e6140f67987960f61346fa85e3a43faf077b6e6), [`936905a`](https://github.com/yamada-ui/yamada-ui/commit/936905a4a336d670ea6d58a050de0636ec76113b)]:
+  - @yamada-ui/loading@1.1.22
+  - @yamada-ui/theme@1.19.2
+  - @yamada-ui/rating@1.1.3
+  - @yamada-ui/select@1.8.0
+  - @yamada-ui/alert@1.1.2
+  - @yamada-ui/button@1.0.48
+  - @yamada-ui/use-async-callback@1.0.3
+  - @yamada-ui/providers@1.2.13
+  - @yamada-ui/theme-tools@1.1.9
+  - @yamada-ui/notice@1.1.9
+  - @yamada-ui/snacks@1.1.9
+  - @yamada-ui/color-picker@1.4.8
+  - @yamada-ui/file-button@1.1.11
+  - @yamada-ui/modal@1.4.3
+  - @yamada-ui/use-media-query@1.0.53
+
 ## 1.6.1
 
 ### Patch Changes

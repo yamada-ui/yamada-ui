@@ -1,5 +1,12 @@
 # @yamada-ui/color-picker
 
+## 1.4.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
 ## 1.4.7
 
 ### Patch Changes

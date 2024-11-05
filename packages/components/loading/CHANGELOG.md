@@ -1,5 +1,11 @@
 # @yamada-ui/loading
 
+## 1.1.22
+
+### Patch Changes
+
+- [#3255](https://github.com/yamada-ui/yamada-ui/pull/3255) [`3e9c43a`](https://github.com/yamada-ui/yamada-ui/commit/3e9c43a1ec4e8b5f0d714a583aa97f96e8189b27) Thanks [@Shunii85](https://github.com/Shunii85)! - Add `displayName` and `__ui__`
+
 ## 1.1.21
 
 ### Patch Changes

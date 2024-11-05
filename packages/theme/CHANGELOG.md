@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.19.2
+
+### Patch Changes
+
+- [#3317](https://github.com/yamada-ui/yamada-ui/pull/3317) [`416fc04`](https://github.com/yamada-ui/yamada-ui/commit/416fc04c37d6341f4611c3dd3c2b3c48926b750b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the style was strange when `CloseButton` was focused.
+
 ## 1.19.1
 
 ### Patch Changes

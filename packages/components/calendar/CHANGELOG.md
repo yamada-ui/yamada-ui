@@ -1,5 +1,12 @@
 # @yamada-ui/calendar
 
+## 1.8.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
 ## 1.8.5
 
 ### Patch Changes

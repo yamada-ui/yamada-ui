@@ -1,5 +1,12 @@
 # @yamada-ui/table
 
+## 1.3.3
+
+### Patch Changes
+
+- Updated dependencies [[`936905a`](https://github.com/yamada-ui/yamada-ui/commit/936905a4a336d670ea6d58a050de0636ec76113b)]:
+  - @yamada-ui/select@1.8.0
+
 ## 1.3.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/select
 
+## 1.8.0
+
+### Minor Changes
+
+- [#3238](https://github.com/yamada-ui/yamada-ui/pull/3238) [`936905a`](https://github.com/yamada-ui/yamada-ui/commit/936905a4a336d670ea6d58a050de0636ec76113b) Thanks [@uraaaa24](https://github.com/uraaaa24)! - improve keyboard navigation and accessibility
+
 ## 1.7.3
 
 ### Patch Changes

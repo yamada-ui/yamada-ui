@@ -191,12 +191,13 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
     const getContainerProps: PropGetter = useCallback(
       (props = {}, ref = null) => ({
+        "aria-disabled": ariaAttr(isDisabled),
+        "data-readonly": dataAttr(isReadOnly),
+        role: "radiogroup",
         ...rest,
         ...props,
         id,
         ref: mergeRefs(containerRef, ref),
-        "aria-disabled": ariaAttr(isDisabled),
-        "data-readonly": dataAttr(isReadOnly),
         onBlur: handlerAll(props.onBlur, onBlur),
       }),
       [id, isDisabled, isReadOnly, onBlur, rest],

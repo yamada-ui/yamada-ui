@@ -5,6 +5,7 @@ package_name: "@yamada-ui/alert"
 order: 2
 with_description: true
 tab: Theming
+label: Updated
 ---
 
 ## Theming
@@ -73,7 +74,7 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
       theme: t,
     }) => ({
       container: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         borderLeft: "0.25rem solid",
         borderLeftColor: [`${c}.500`, `${c}.400`],
         color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
@@ -89,21 +90,21 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
     }),
     subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       },
     }),
     surface: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         border: "1px solid",
-        borderColor: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+        borderColor: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
         color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       },
     }),
     "top-accent": ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       container: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         borderTop: "0.25rem solid",
         borderTopColor: [`${c}.500`, `${c}.400`],
         color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],

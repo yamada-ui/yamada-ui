@@ -1,5 +1,11 @@
 # @yamada-ui/segmented-control
 
+## 1.1.0
+
+### Minor Changes
+
+- [#3298](https://github.com/yamada-ui/yamada-ui/pull/3298) [`4c78ab0`](https://github.com/yamada-ui/yamada-ui/commit/4c78ab0b80c7baeba9b85c047b297d32e60c6891) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `role="radiogroup"` to `SegmentedControl` component.
+
 ## 1.0.44
 
 ### Patch Changes

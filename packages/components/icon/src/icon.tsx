@@ -62,6 +62,8 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
       <ui.svg
         as={element}
         className={cx("ui-icon", className)}
+        aria-hidden
+        role="img"
         __css={css}
         {...rest}
       />
@@ -71,6 +73,8 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
     <ui.svg
       ref={ref}
       className={cx("ui-icon", className)}
+      aria-hidden
+      role="img"
       verticalAlign="middle"
       viewBox={viewBox}
       __css={css}

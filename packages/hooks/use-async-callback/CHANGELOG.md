@@ -1,5 +1,12 @@
 # @yamada-ui/use-async-callback
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.21
+
 ## 1.0.1
 
 ### Patch Changes

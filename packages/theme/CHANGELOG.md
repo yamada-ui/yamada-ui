@@ -1,5 +1,13 @@
 # @yamada-ui/theme
 
+## 1.19.1
+
+### Patch Changes
+
+- [#3304](https://github.com/yamada-ui/yamada-ui/pull/3304) [`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a style issue when hovering over the button in the `Calendar` component.
+
+- [#3304](https://github.com/yamada-ui/yamada-ui/pull/3304) [`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the `subtle` and `surface` colors.
+
 ## 1.19.0
 
 ### Minor Changes

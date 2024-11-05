@@ -60,22 +60,34 @@ export const CONTRIBUTORS = [
     url: "https://github.com/txxxxc",
   },
   {
-    id: 157810570,
-    name: "kaitobq",
-    icon: "https://avatars.githubusercontent.com/u/157810570?v=4",
-    url: "https://github.com/kaitobq",
-  },
-  {
     id: 93440667,
     name: "GensIto",
     icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
     url: "https://github.com/GensIto",
   },
   {
+    id: 157810570,
+    name: "kaitobq",
+    icon: "https://avatars.githubusercontent.com/u/157810570?v=4",
+    url: "https://github.com/kaitobq",
+  },
+  {
     id: 107479598,
     name: "taga3s",
     icon: "https://avatars.githubusercontent.com/u/107479598?v=4",
     url: "https://github.com/taga3s",
+  },
+  {
+    id: 123063767,
+    name: "5AIPAVAN",
+    icon: "https://avatars.githubusercontent.com/u/123063767?v=4",
+    url: "https://github.com/5AIPAVAN",
+  },
+  {
+    id: 99778758,
+    name: "umaidashi",
+    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
+    url: "https://github.com/umaidashi",
   },
   {
     id: 52590941,
@@ -90,34 +102,22 @@ export const CONTRIBUTORS = [
     url: "https://github.com/ChinoUkaegbu",
   },
   {
-    id: 99778758,
-    name: "umaidashi",
-    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
-    url: "https://github.com/umaidashi",
-  },
-  {
-    id: 123063767,
-    name: "5AIPAVAN",
-    icon: "https://avatars.githubusercontent.com/u/123063767?v=4",
-    url: "https://github.com/5AIPAVAN",
-  },
-  {
     id: 50972802,
     name: "nogu66",
     icon: "https://avatars.githubusercontent.com/u/50972802?v=4",
     url: "https://github.com/nogu66",
   },
   {
-    id: 57742720,
-    name: "apple-yagi",
-    icon: "https://avatars.githubusercontent.com/u/57742720?v=4",
-    url: "https://github.com/apple-yagi",
-  },
-  {
     id: 53590732,
     name: "Kei-Ta",
     icon: "https://avatars.githubusercontent.com/u/53590732?v=4",
     url: "https://github.com/Kei-Ta",
+  },
+  {
+    id: 57742720,
+    name: "apple-yagi",
+    icon: "https://avatars.githubusercontent.com/u/57742720?v=4",
+    url: "https://github.com/apple-yagi",
   },
   {
     id: 109917122,
@@ -132,12 +132,6 @@ export const CONTRIBUTORS = [
     url: "https://github.com/seferovich",
   },
   {
-    id: 103011756,
-    name: "piro-hiroki",
-    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
-    url: "https://github.com/piro-hiroki",
-  },
-  {
     id: 132537904,
     name: "syunsuke-I",
     icon: "https://avatars.githubusercontent.com/u/132537904?v=4",
@@ -150,10 +144,10 @@ export const CONTRIBUTORS = [
     url: "https://github.com/k-wakamatsu-tms",
   },
   {
-    id: 109452865,
-    name: "taku10101",
-    icon: "https://avatars.githubusercontent.com/u/109452865?v=4",
-    url: "https://github.com/taku10101",
+    id: 103011756,
+    name: "piro-hiroki",
+    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
+    url: "https://github.com/piro-hiroki",
   },
   {
     id: 149235649,
@@ -168,16 +162,28 @@ export const CONTRIBUTORS = [
     url: "https://github.com/tmasuyama1114",
   },
   {
-    id: 55518345,
-    name: "esh2n",
-    icon: "https://avatars.githubusercontent.com/u/55518345?v=4",
-    url: "https://github.com/esh2n",
+    id: 109452865,
+    name: "taku10101",
+    icon: "https://avatars.githubusercontent.com/u/109452865?v=4",
+    url: "https://github.com/taku10101",
   },
   {
     id: 29519029,
     name: "yasunogithub",
     icon: "https://avatars.githubusercontent.com/u/29519029?v=4",
     url: "https://github.com/yasunogithub",
+  },
+  {
+    id: 89678674,
+    name: "bearone236",
+    icon: "https://avatars.githubusercontent.com/u/89678674?v=4",
+    url: "https://github.com/bearone236",
+  },
+  {
+    id: 55518345,
+    name: "esh2n",
+    icon: "https://avatars.githubusercontent.com/u/55518345?v=4",
+    url: "https://github.com/esh2n",
   },
   {
     id: 85816730,
@@ -370,6 +376,12 @@ export const CONTRIBUTORS = [
     name: "minagishl",
     icon: "https://avatars.githubusercontent.com/u/114616680?v=4",
     url: "https://github.com/minagishl",
+  },
+  {
+    id: 52910491,
+    name: "aiirononeko",
+    icon: "https://avatars.githubusercontent.com/u/52910491?v=4",
+    url: "https://github.com/aiirononeko",
   },
   {
     id: 50891407,

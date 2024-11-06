@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/lucide": minor
+"@yamada-ui/lucide": patch
 ---
 
 Components that are not `*Icon` are set to `@deprecated`.

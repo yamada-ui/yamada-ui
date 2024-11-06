@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Shrub as ShrubIcon } from "lucide-react"
+import { Shrub as LucideShrubIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Shrub` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShrubIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Shrub = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ShrubIcon} {...props} />
+export const ShrubIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideShrubIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ShrubIcon` instead.
+ */
+export const Shrub = ShrubIcon

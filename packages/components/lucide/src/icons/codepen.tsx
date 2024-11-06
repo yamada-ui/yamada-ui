@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Codepen as CodepenIcon } from "lucide-react"
+import { Codepen as LucideCodepenIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Codepen` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CodepenIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Codepen = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CodepenIcon} {...props} />
+export const CodepenIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideCodepenIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `CodepenIcon` instead.
+ */
+export const Codepen = CodepenIcon

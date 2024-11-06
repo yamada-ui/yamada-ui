@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CalendarSearch as CalendarSearchIcon } from "lucide-react"
+import { CalendarSearch as LucideCalendarSearchIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `CalendarSearch` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CalendarSearchIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CalendarSearch = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={CalendarSearchIcon} {...props} />,
+export const CalendarSearchIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideCalendarSearchIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `CalendarSearchIcon` instead.
+ */
+export const CalendarSearch = CalendarSearchIcon

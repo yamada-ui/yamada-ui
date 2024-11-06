@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Infinity as InfinityIcon } from "lucide-react"
+import { Infinity as LucideInfinityIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Infinity` is [Lucide](https://lucide.dev) SVG icon component.
+ * `InfinityIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Infinity = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={InfinityIcon} {...props} />
+export const InfinityIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideInfinityIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `InfinityIcon` instead.
+ */
+export const Infinity = InfinityIcon

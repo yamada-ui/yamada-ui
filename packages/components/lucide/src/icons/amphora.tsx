@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Amphora as AmphoraIcon } from "lucide-react"
+import { Amphora as LucideAmphoraIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Amphora` is [Lucide](https://lucide.dev) SVG icon component.
+ * `AmphoraIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Amphora = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={AmphoraIcon} {...props} />
+export const AmphoraIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideAmphoraIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `AmphoraIcon` instead.
+ */
+export const Amphora = AmphoraIcon

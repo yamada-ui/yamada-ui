@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Armchair as ArmchairIcon } from "lucide-react"
+import { Armchair as LucideArmchairIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Armchair` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ArmchairIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Armchair = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ArmchairIcon} {...props} />
+export const ArmchairIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideArmchairIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ArmchairIcon` instead.
+ */
+export const Armchair = ArmchairIcon

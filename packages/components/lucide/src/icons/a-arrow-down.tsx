@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { AArrowDown as AArrowDownIcon } from "lucide-react"
+import { AArrowDown as LucideAArrowDownIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `AArrowDown` is [Lucide](https://lucide.dev) SVG icon component.
+ * `AArrowDownIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AArrowDown = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={AArrowDownIcon} {...props} />
-))
+export const AArrowDownIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideAArrowDownIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `AArrowDownIcon` instead.
+ */
+export const AArrowDown = AArrowDownIcon

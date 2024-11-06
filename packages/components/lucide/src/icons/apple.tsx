@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Apple as AppleIcon } from "lucide-react"
+import { Apple as LucideAppleIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Apple` is [Lucide](https://lucide.dev) SVG icon component.
+ * `AppleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Apple = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={AppleIcon} {...props} />
+export const AppleIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideAppleIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `AppleIcon` instead.
+ */
+export const Apple = AppleIcon

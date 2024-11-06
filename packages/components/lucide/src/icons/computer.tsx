@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Computer as ComputerIcon } from "lucide-react"
+import { Computer as LucideComputerIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Computer` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ComputerIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Computer = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ComputerIcon} {...props} />
+export const ComputerIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideComputerIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ComputerIcon` instead.
+ */
+export const Computer = ComputerIcon

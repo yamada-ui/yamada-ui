@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Brush as BrushIcon } from "lucide-react"
+import { Brush as LucideBrushIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Brush` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BrushIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Brush = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BrushIcon} {...props} />
+export const BrushIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideBrushIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `BrushIcon` instead.
+ */
+export const Brush = BrushIcon

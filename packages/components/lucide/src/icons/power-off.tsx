@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { PowerOff as PowerOffIcon } from "lucide-react"
+import { PowerOff as LucidePowerOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `PowerOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `PowerOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const PowerOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={PowerOffIcon} {...props} />
+export const PowerOffIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucidePowerOffIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `PowerOffIcon` instead.
+ */
+export const PowerOff = PowerOffIcon

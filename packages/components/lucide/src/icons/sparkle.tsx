@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Sparkle as SparkleIcon } from "lucide-react"
+import { Sparkle as LucideSparkleIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Sparkle` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SparkleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Sparkle = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={SparkleIcon} {...props} />
+export const SparkleIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideSparkleIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `SparkleIcon` instead.
+ */
+export const Sparkle = SparkleIcon

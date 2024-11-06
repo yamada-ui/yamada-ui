@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Candy as CandyIcon } from "lucide-react"
+import { Candy as LucideCandyIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Candy` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CandyIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Candy = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CandyIcon} {...props} />
+export const CandyIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideCandyIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `CandyIcon` instead.
+ */
+export const Candy = CandyIcon

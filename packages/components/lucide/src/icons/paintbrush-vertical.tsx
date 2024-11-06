@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { PaintbrushVertical as PaintbrushVerticalIcon } from "lucide-react"
+import { PaintbrushVertical as LucidePaintbrushVerticalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `PaintbrushVertical` is [Lucide](https://lucide.dev) SVG icon component.
+ * `PaintbrushVerticalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const PaintbrushVertical = forwardRef<LucideIconProps, "svg">(
+export const PaintbrushVerticalIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={PaintbrushVerticalIcon} {...props} />
+    <LucideIcon ref={ref} as={LucidePaintbrushVerticalIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `PaintbrushVerticalIcon` instead.
+ */
+export const PaintbrushVertical = PaintbrushVerticalIcon

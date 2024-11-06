@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SatelliteDish as SatelliteDishIcon } from "lucide-react"
+import { SatelliteDish as LucideSatelliteDishIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SatelliteDish` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SatelliteDishIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SatelliteDish = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={SatelliteDishIcon} {...props} />,
+export const SatelliteDishIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideSatelliteDishIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `SatelliteDishIcon` instead.
+ */
+export const SatelliteDish = SatelliteDishIcon

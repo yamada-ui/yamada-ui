@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ChevronLast as ChevronLastIcon } from "lucide-react"
+import { ChevronLast as LucideChevronLastIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ChevronLast` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ChevronLastIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChevronLast = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ChevronLastIcon} {...props} />
-))
+export const ChevronLastIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideChevronLastIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ChevronLastIcon` instead.
+ */
+export const ChevronLast = ChevronLastIcon

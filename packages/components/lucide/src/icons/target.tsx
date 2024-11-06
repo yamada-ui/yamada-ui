@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Target as TargetIcon } from "lucide-react"
+import { Target as LucideTargetIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Target` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TargetIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Target = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TargetIcon} {...props} />
+export const TargetIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideTargetIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `TargetIcon` instead.
+ */
+export const Target = TargetIcon

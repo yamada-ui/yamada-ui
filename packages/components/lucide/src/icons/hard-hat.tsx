@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { HardHat as HardHatIcon } from "lucide-react"
+import { HardHat as LucideHardHatIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `HardHat` is [Lucide](https://lucide.dev) SVG icon component.
+ * `HardHatIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const HardHat = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={HardHatIcon} {...props} />
+export const HardHatIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideHardHatIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `HardHatIcon` instead.
+ */
+export const HardHat = HardHatIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Languages as LanguagesIcon } from "lucide-react"
+import { Languages as LucideLanguagesIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Languages` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LanguagesIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Languages = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LanguagesIcon} {...props} />
-))
+export const LanguagesIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideLanguagesIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `LanguagesIcon` instead.
+ */
+export const Languages = LanguagesIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { WifiHigh as WifiHighIcon } from "lucide-react"
+import { WifiHigh as LucideWifiHighIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `WifiHigh` is [Lucide](https://lucide.dev) SVG icon component.
+ * `WifiHighIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const WifiHigh = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={WifiHighIcon} {...props} />
+export const WifiHighIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideWifiHighIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `WifiHighIcon` instead.
+ */
+export const WifiHigh = WifiHighIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Waves as WavesIcon } from "lucide-react"
+import { Waves as LucideWavesIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Waves` is [Lucide](https://lucide.dev) SVG icon component.
+ * `WavesIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Waves = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={WavesIcon} {...props} />
+export const WavesIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideWavesIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `WavesIcon` instead.
+ */
+export const Waves = WavesIcon

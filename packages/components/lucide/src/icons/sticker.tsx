@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Sticker as StickerIcon } from "lucide-react"
+import { Sticker as LucideStickerIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Sticker` is [Lucide](https://lucide.dev) SVG icon component.
+ * `StickerIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Sticker = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={StickerIcon} {...props} />
+export const StickerIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideStickerIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `StickerIcon` instead.
+ */
+export const Sticker = StickerIcon

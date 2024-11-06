@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ShieldHalf as ShieldHalfIcon } from "lucide-react"
+import { ShieldHalf as LucideShieldHalfIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ShieldHalf` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShieldHalfIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ShieldHalf = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ShieldHalfIcon} {...props} />
-))
+export const ShieldHalfIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideShieldHalfIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `ShieldHalfIcon` instead.
+ */
+export const ShieldHalf = ShieldHalfIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { WebhookOff as WebhookOffIcon } from "lucide-react"
+import { WebhookOff as LucideWebhookOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `WebhookOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `WebhookOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const WebhookOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={WebhookOffIcon} {...props} />
-))
+export const WebhookOffIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideWebhookOffIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `WebhookOffIcon` instead.
+ */
+export const WebhookOff = WebhookOffIcon

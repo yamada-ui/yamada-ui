@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { GitPullRequestClosed as GitPullRequestClosedIcon } from "lucide-react"
+import { GitPullRequestClosed as LucideGitPullRequestClosedIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `GitPullRequestClosed` is [Lucide](https://lucide.dev) SVG icon component.
+ * `GitPullRequestClosedIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const GitPullRequestClosed = forwardRef<LucideIconProps, "svg">(
+export const GitPullRequestClosedIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={GitPullRequestClosedIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideGitPullRequestClosedIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `GitPullRequestClosedIcon` instead.
+ */
+export const GitPullRequestClosed = GitPullRequestClosedIcon

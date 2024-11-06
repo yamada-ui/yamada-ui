@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { RouteOff as RouteOffIcon } from "lucide-react"
+import { RouteOff as LucideRouteOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `RouteOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `RouteOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RouteOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={RouteOffIcon} {...props} />
+export const RouteOffIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideRouteOffIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `RouteOffIcon` instead.
+ */
+export const RouteOff = RouteOffIcon

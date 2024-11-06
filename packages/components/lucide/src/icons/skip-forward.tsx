@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SkipForward as SkipForwardIcon } from "lucide-react"
+import { SkipForward as LucideSkipForwardIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SkipForward` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SkipForwardIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SkipForward = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={SkipForwardIcon} {...props} />
-))
+export const SkipForwardIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideSkipForwardIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `SkipForwardIcon` instead.
+ */
+export const SkipForward = SkipForwardIcon

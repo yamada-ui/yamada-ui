@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { TriangleAlert as TriangleAlertIcon } from "lucide-react"
+import { TriangleAlert as LucideTriangleAlertIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `TriangleAlert` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TriangleAlertIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TriangleAlert = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={TriangleAlertIcon} {...props} />,
+export const TriangleAlertIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideTriangleAlertIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `TriangleAlertIcon` instead.
+ */
+export const TriangleAlert = TriangleAlertIcon

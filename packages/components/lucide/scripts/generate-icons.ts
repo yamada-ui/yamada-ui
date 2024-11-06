@@ -63,17 +63,23 @@ const createIcons = async (iconNames: string[]) =>
       let data = [
         `import type { LucideIconProps } from "../lucide-icon"`,
         `import { forwardRef } from "@yamada-ui/core"`,
-        `import { ${iconName} as ${iconName}Icon } from "lucide-react"`,
+        `import { ${iconName} as Lucide${iconName}Icon } from "lucide-react"`,
         `import { LucideIcon } from "../lucide-icon"`,
         ``,
         `/**`,
-        ` * \`${iconName}\` is [Lucide](https://lucide.dev) SVG icon component.`,
+        ` * \`${iconName}Icon\` is [Lucide](https://lucide.dev) SVG icon component.`,
         ` *`,
         ` * @see Docs https://yamada-ui.com/components/media-and-icons/lucide`,
         ` */`,
-        `export const ${iconName} = forwardRef<LucideIconProps, "svg">((props, ref) => (`,
-        `  <LucideIcon ref={ref} as={${iconName}Icon} {...props} />`,
+        `export const ${iconName}Icon = forwardRef<LucideIconProps, "svg">((props, ref) => (`,
+        `  <LucideIcon ref={ref} as={Lucide${iconName}Icon} {...props} />`,
         `))`,
+        ``,
+        `/**`,
+        ` * @deprecated Use \`${iconName}Icon\` instead.`,
+        ` */`,
+        `export const ${iconName} = ${iconName}Icon`,
+        ``,
       ].join("\n")
 
       data = await prettier(data)
@@ -104,7 +110,7 @@ const main = async () => {
   let chunks = iconNames.map((iconName) => {
     const fileName = toKebabCase(iconName)
 
-    return `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`
+    return `export { ${iconName}, ${iconName}Icon } from "./${fileName}"`
   })
 
   let data = [`export type * from "./index.types"`, ...chunks].join("\n")

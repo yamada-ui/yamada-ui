@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BotOff as BotOffIcon } from "lucide-react"
+import { BotOff as LucideBotOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BotOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BotOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BotOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BotOffIcon} {...props} />
+export const BotOffIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideBotOffIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `BotOffIcon` instead.
+ */
+export const BotOff = BotOffIcon

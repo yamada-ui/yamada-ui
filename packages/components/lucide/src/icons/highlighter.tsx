@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Highlighter as HighlighterIcon } from "lucide-react"
+import { Highlighter as LucideHighlighterIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Highlighter` is [Lucide](https://lucide.dev) SVG icon component.
+ * `HighlighterIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Highlighter = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={HighlighterIcon} {...props} />
-))
+export const HighlighterIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideHighlighterIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `HighlighterIcon` instead.
+ */
+export const Highlighter = HighlighterIcon

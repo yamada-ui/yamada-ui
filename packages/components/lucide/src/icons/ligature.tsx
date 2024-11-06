@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Ligature as LigatureIcon } from "lucide-react"
+import { Ligature as LucideLigatureIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Ligature` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LigatureIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Ligature = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LigatureIcon} {...props} />
+export const LigatureIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideLigatureIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `LigatureIcon` instead.
+ */
+export const Ligature = LigatureIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { TextSelect as TextSelectIcon } from "lucide-react"
+import { TextSelect as LucideTextSelectIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `TextSelect` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TextSelectIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TextSelect = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TextSelectIcon} {...props} />
-))
+export const TextSelectIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideTextSelectIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `TextSelectIcon` instead.
+ */
+export const TextSelect = TextSelectIcon

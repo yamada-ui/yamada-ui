@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Leaf as LeafIcon } from "lucide-react"
+import { Leaf as LucideLeafIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Leaf` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LeafIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Leaf = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LeafIcon} {...props} />
+export const LeafIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideLeafIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `LeafIcon` instead.
+ */
+export const Leaf = LeafIcon

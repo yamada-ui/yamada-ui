@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Star as StarIcon } from "lucide-react"
+import { Star as LucideStarIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Star` is [Lucide](https://lucide.dev) SVG icon component.
+ * `StarIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Star = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={StarIcon} {...props} />
+export const StarIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideStarIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `StarIcon` instead.
+ */
+export const Star = StarIcon

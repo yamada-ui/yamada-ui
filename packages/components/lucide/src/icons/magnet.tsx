@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Magnet as MagnetIcon } from "lucide-react"
+import { Magnet as LucideMagnetIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Magnet` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MagnetIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Magnet = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MagnetIcon} {...props} />
+export const MagnetIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideMagnetIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `MagnetIcon` instead.
+ */
+export const Magnet = MagnetIcon

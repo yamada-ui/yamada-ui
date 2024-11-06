@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Touchpad as TouchpadIcon } from "lucide-react"
+import { Touchpad as LucideTouchpadIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Touchpad` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TouchpadIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Touchpad = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TouchpadIcon} {...props} />
+export const TouchpadIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideTouchpadIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `TouchpadIcon` instead.
+ */
+export const Touchpad = TouchpadIcon

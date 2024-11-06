@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Pencil as PencilIcon } from "lucide-react"
+import { Pencil as LucidePencilIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Pencil` is [Lucide](https://lucide.dev) SVG icon component.
+ * `PencilIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Pencil = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={PencilIcon} {...props} />
+export const PencilIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucidePencilIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `PencilIcon` instead.
+ */
+export const Pencil = PencilIcon

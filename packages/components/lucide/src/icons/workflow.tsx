@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Workflow as WorkflowIcon } from "lucide-react"
+import { Workflow as LucideWorkflowIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Workflow` is [Lucide](https://lucide.dev) SVG icon component.
+ * `WorkflowIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Workflow = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={WorkflowIcon} {...props} />
+export const WorkflowIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideWorkflowIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `WorkflowIcon` instead.
+ */
+export const Workflow = WorkflowIcon

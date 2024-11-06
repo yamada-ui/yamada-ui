@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BrickWall as BrickWallIcon } from "lucide-react"
+import { BrickWall as LucideBrickWallIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BrickWall` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BrickWallIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BrickWall = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BrickWallIcon} {...props} />
-))
+export const BrickWallIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideBrickWallIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `BrickWallIcon` instead.
+ */
+export const BrickWall = BrickWallIcon

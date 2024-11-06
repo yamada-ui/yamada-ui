@@ -126,4 +126,38 @@ describe("<Rating />", () => {
     await user.click(items[4]!)
     expect(items[3]).not.toHaveAttribute("data-focus")
   })
+
+  test("should use custom color correctly", () => {
+    const colors: { [key: number]: string } = {
+      1: "red.500",
+      2: "orange.500",
+      3: "yellow.500",
+      4: "green.500",
+      5: "blue.500",
+    }
+
+    const getColor = (value: number): string | undefined => colors[value]
+
+    const { container } = render(<Rating color={getColor} defaultValue={5} />)
+    const items = container.querySelectorAll(".ui-rating__item")
+
+    const styleElements = document.getElementsByTagName("style")
+    const cssText = Array.from(styleElements)
+      .map((style) => style.textContent)
+      .join("")
+
+    for (let i = 1; i < items.length; i++) {
+      expect(items[i]).toHaveAttribute("data-filled")
+
+      const emotionClass = Array.from(items[i]!.classList)[1]
+
+      const expectedColor = getColor(i)
+      const expectedVar = `var(--ui-colors-${expectedColor!.replace(".", "-")})`
+
+      const ruleExists =
+        cssText.includes(`${emotionClass}[data-filled]`) &&
+        cssText.includes(`color:${expectedVar}`)
+      expect(ruleExists).toBeTruthy()
+    }
+  })
 })

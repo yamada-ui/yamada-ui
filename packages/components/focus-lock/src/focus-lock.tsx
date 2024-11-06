@@ -1,9 +1,9 @@
 import type { FC } from "@yamada-ui/core"
 import type { FocusableElement } from "@yamada-ui/utils"
 import type { ReactNode, RefObject } from "react"
-import { getAllFocusable, interopDefault } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { interopDefault } from "@yamada-ui/utils"
 import ReactFocusLock from "react-focus-lock"
+import { useFocusLock } from "./use-focus-lock"
 
 const InternalFocusLock = interopDefault(ReactFocusLock)
 
@@ -72,24 +72,12 @@ export const FocusLock: FC<FocusLockProps> = ({
   persistentFocus,
   restoreFocus,
 }) => {
-  const onActivation = useCallback(() => {
-    if (initialFocusRef?.current) {
-      initialFocusRef.current.focus()
-    } else if (contentRef?.current) {
-      const focusables = getAllFocusable(contentRef.current)
-
-      if (focusables.length === 0)
-        requestAnimationFrame(() => {
-          contentRef.current?.focus()
-        })
-    }
-  }, [initialFocusRef, contentRef])
-
-  const onDeactivation = useCallback(() => {
-    finalFocusRef?.current?.focus()
-  }, [finalFocusRef])
-
-  const returnFocus = restoreFocus && !finalFocusRef
+  const { returnFocus, onActivation, onDeactivation } = useFocusLock({
+    contentRef,
+    finalFocusRef,
+    initialFocusRef,
+    restoreFocus,
+  })
 
   return (
     <InternalFocusLock

@@ -1,6 +1,7 @@
-export { NumberInput, useNumberInput } from "./number-input"
+export { NumberInput } from "./number-input"
+export type { NumberInputProps } from "./number-input"
+export { useNumberInput } from "./use-number-input"
 export type {
-  NumberInputProps,
   UseNumberInputProps,
   UseNumberInputReturn,
-} from "./number-input"
+} from "./use-number-input"

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Menu as MenuIcon } from "lucide-react"
+import { Menu as LucideMenuIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Menu` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MenuIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Menu = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MenuIcon} {...props} />
+export const MenuIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideMenuIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `MenuIcon` instead.
+ */
+export const Menu = MenuIcon

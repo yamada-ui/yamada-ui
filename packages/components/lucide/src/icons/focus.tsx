@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Focus as FocusIcon } from "lucide-react"
+import { Focus as LucideFocusIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Focus` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FocusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Focus = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FocusIcon} {...props} />
+export const FocusIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideFocusIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `FocusIcon` instead.
+ */
+export const Focus = FocusIcon

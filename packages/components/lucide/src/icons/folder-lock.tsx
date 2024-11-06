@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FolderLock as FolderLockIcon } from "lucide-react"
+import { FolderLock as LucideFolderLockIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FolderLock` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FolderLockIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FolderLock = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FolderLockIcon} {...props} />
-))
+export const FolderLockIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideFolderLockIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `FolderLockIcon` instead.
+ */
+export const FolderLock = FolderLockIcon

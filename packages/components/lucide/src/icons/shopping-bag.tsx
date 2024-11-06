@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ShoppingBag as ShoppingBagIcon } from "lucide-react"
+import { ShoppingBag as LucideShoppingBagIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ShoppingBag` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShoppingBagIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ShoppingBag = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ShoppingBagIcon} {...props} />
-))
+export const ShoppingBagIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideShoppingBagIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ShoppingBagIcon` instead.
+ */
+export const ShoppingBag = ShoppingBagIcon

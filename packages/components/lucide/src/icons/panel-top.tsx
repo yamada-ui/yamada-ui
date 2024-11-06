@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { PanelTop as PanelTopIcon } from "lucide-react"
+import { PanelTop as LucidePanelTopIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `PanelTop` is [Lucide](https://lucide.dev) SVG icon component.
+ * `PanelTopIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const PanelTop = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={PanelTopIcon} {...props} />
+export const PanelTopIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucidePanelTopIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `PanelTopIcon` instead.
+ */
+export const PanelTop = PanelTopIcon

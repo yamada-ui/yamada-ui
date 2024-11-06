@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Youtube as YoutubeIcon } from "lucide-react"
+import { Youtube as LucideYoutubeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Youtube` is [Lucide](https://lucide.dev) SVG icon component.
+ * `YoutubeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Youtube = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={YoutubeIcon} {...props} />
+export const YoutubeIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideYoutubeIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `YoutubeIcon` instead.
+ */
+export const Youtube = YoutubeIcon

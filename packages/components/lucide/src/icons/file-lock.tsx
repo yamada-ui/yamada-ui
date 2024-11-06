@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FileLock as FileLockIcon } from "lucide-react"
+import { FileLock as LucideFileLockIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FileLock` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FileLockIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FileLock = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FileLockIcon} {...props} />
+export const FileLockIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideFileLockIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `FileLockIcon` instead.
+ */
+export const FileLock = FileLockIcon

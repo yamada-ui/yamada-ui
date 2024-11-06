@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Bell as BellIcon } from "lucide-react"
+import { Bell as LucideBellIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Bell` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BellIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Bell = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BellIcon} {...props} />
+export const BellIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideBellIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `BellIcon` instead.
+ */
+export const Bell = BellIcon

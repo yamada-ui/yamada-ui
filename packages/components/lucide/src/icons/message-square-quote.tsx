@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MessageSquareQuote as MessageSquareQuoteIcon } from "lucide-react"
+import { MessageSquareQuote as LucideMessageSquareQuoteIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `MessageSquareQuote` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MessageSquareQuoteIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MessageSquareQuote = forwardRef<LucideIconProps, "svg">(
+export const MessageSquareQuoteIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={MessageSquareQuoteIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideMessageSquareQuoteIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `MessageSquareQuoteIcon` instead.
+ */
+export const MessageSquareQuote = MessageSquareQuoteIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { File as FileIcon } from "lucide-react"
+import { File as LucideFileIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `File` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FileIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const File = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FileIcon} {...props} />
+export const FileIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideFileIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `FileIcon` instead.
+ */
+export const File = FileIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Eclipse as EclipseIcon } from "lucide-react"
+import { Eclipse as LucideEclipseIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Eclipse` is [Lucide](https://lucide.dev) SVG icon component.
+ * `EclipseIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Eclipse = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={EclipseIcon} {...props} />
+export const EclipseIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideEclipseIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `EclipseIcon` instead.
+ */
+export const Eclipse = EclipseIcon

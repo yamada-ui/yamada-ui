@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { RectangleEllipsis as RectangleEllipsisIcon } from "lucide-react"
+import { RectangleEllipsis as LucideRectangleEllipsisIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `RectangleEllipsis` is [Lucide](https://lucide.dev) SVG icon component.
+ * `RectangleEllipsisIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RectangleEllipsis = forwardRef<LucideIconProps, "svg">(
+export const RectangleEllipsisIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={RectangleEllipsisIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideRectangleEllipsisIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `RectangleEllipsisIcon` instead.
+ */
+export const RectangleEllipsis = RectangleEllipsisIcon

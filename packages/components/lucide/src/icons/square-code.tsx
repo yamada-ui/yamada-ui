@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareCode as SquareCodeIcon } from "lucide-react"
+import { SquareCode as LucideSquareCodeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SquareCode` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SquareCodeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareCode = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={SquareCodeIcon} {...props} />
-))
+export const SquareCodeIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideSquareCodeIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `SquareCodeIcon` instead.
+ */
+export const SquareCode = SquareCodeIcon

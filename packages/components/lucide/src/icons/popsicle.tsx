@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Popsicle as PopsicleIcon } from "lucide-react"
+import { Popsicle as LucidePopsicleIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Popsicle` is [Lucide](https://lucide.dev) SVG icon component.
+ * `PopsicleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Popsicle = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={PopsicleIcon} {...props} />
+export const PopsicleIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucidePopsicleIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `PopsicleIcon` instead.
+ */
+export const Popsicle = PopsicleIcon

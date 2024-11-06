@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ToggleRight as ToggleRightIcon } from "lucide-react"
+import { ToggleRight as LucideToggleRightIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ToggleRight` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ToggleRightIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ToggleRight = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ToggleRightIcon} {...props} />
-))
+export const ToggleRightIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideToggleRightIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ToggleRightIcon` instead.
+ */
+export const ToggleRight = ToggleRightIcon

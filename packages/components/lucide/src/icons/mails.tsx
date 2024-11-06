@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Mails as MailsIcon } from "lucide-react"
+import { Mails as LucideMailsIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Mails` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MailsIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Mails = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MailsIcon} {...props} />
+export const MailsIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideMailsIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `MailsIcon` instead.
+ */
+export const Mails = MailsIcon

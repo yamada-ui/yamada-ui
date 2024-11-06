@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ReceiptText as ReceiptTextIcon } from "lucide-react"
+import { ReceiptText as LucideReceiptTextIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ReceiptText` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ReceiptTextIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ReceiptText = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ReceiptTextIcon} {...props} />
-))
+export const ReceiptTextIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideReceiptTextIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ReceiptTextIcon` instead.
+ */
+export const ReceiptText = ReceiptTextIcon

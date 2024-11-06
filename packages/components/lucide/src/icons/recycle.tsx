@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Recycle as RecycleIcon } from "lucide-react"
+import { Recycle as LucideRecycleIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Recycle` is [Lucide](https://lucide.dev) SVG icon component.
+ * `RecycleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Recycle = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={RecycleIcon} {...props} />
+export const RecycleIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideRecycleIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `RecycleIcon` instead.
+ */
+export const Recycle = RecycleIcon

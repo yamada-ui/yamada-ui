@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Shell as ShellIcon } from "lucide-react"
+import { Shell as LucideShellIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Shell` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShellIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Shell = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ShellIcon} {...props} />
+export const ShellIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideShellIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ShellIcon` instead.
+ */
+export const Shell = ShellIcon

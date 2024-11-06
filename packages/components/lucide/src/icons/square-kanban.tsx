@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareKanban as SquareKanbanIcon } from "lucide-react"
+import { SquareKanban as LucideSquareKanbanIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SquareKanban` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SquareKanbanIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareKanban = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={SquareKanbanIcon} {...props} />
-))
+export const SquareKanbanIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideSquareKanbanIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `SquareKanbanIcon` instead.
+ */
+export const SquareKanban = SquareKanbanIcon

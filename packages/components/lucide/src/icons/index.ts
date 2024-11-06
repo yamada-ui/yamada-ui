@@ -1,2689 +1,1840 @@
-export { AArrowDown, AArrowDown as AArrowDownIcon } from "./a-arrow-down"
-export { AArrowUp, AArrowUp as AArrowUpIcon } from "./a-arrow-up"
-export { ALargeSmall, ALargeSmall as ALargeSmallIcon } from "./a-large-small"
-export {
-  Accessibility,
-  Accessibility as AccessibilityIcon,
-} from "./accessibility"
-export { Activity, Activity as ActivityIcon } from "./activity"
-export { AirVent, AirVent as AirVentIcon } from "./air-vent"
-export { Airplay, Airplay as AirplayIcon } from "./airplay"
-export { AlarmClock, AlarmClock as AlarmClockIcon } from "./alarm-clock"
-export {
-  AlarmClockCheck,
-  AlarmClockCheck as AlarmClockCheckIcon,
-} from "./alarm-clock-check"
-export {
-  AlarmClockMinus,
-  AlarmClockMinus as AlarmClockMinusIcon,
-} from "./alarm-clock-minus"
-export {
-  AlarmClockOff,
-  AlarmClockOff as AlarmClockOffIcon,
-} from "./alarm-clock-off"
-export {
-  AlarmClockPlus,
-  AlarmClockPlus as AlarmClockPlusIcon,
-} from "./alarm-clock-plus"
-export { AlarmSmoke, AlarmSmoke as AlarmSmokeIcon } from "./alarm-smoke"
-export { Album, Album as AlbumIcon } from "./album"
-export { AlignCenter, AlignCenter as AlignCenterIcon } from "./align-center"
+export { AArrowDown, AArrowDownIcon } from "./a-arrow-down"
+export { AArrowUp, AArrowUpIcon } from "./a-arrow-up"
+export { ALargeSmall, ALargeSmallIcon } from "./a-large-small"
+export { Accessibility, AccessibilityIcon } from "./accessibility"
+export { Activity, ActivityIcon } from "./activity"
+export { AirVent, AirVentIcon } from "./air-vent"
+export { Airplay, AirplayIcon } from "./airplay"
+export { AlarmClock, AlarmClockIcon } from "./alarm-clock"
+export { AlarmClockCheck, AlarmClockCheckIcon } from "./alarm-clock-check"
+export { AlarmClockMinus, AlarmClockMinusIcon } from "./alarm-clock-minus"
+export { AlarmClockOff, AlarmClockOffIcon } from "./alarm-clock-off"
+export { AlarmClockPlus, AlarmClockPlusIcon } from "./alarm-clock-plus"
+export { AlarmSmoke, AlarmSmokeIcon } from "./alarm-smoke"
+export { Album, AlbumIcon } from "./album"
+export { AlignCenter, AlignCenterIcon } from "./align-center"
 export {
   AlignCenterHorizontal,
-  AlignCenterHorizontal as AlignCenterHorizontalIcon,
+  AlignCenterHorizontalIcon,
 } from "./align-center-horizontal"
 export {
   AlignCenterVertical,
-  AlignCenterVertical as AlignCenterVerticalIcon,
+  AlignCenterVerticalIcon,
 } from "./align-center-vertical"
 export {
   AlignEndHorizontal,
-  AlignEndHorizontal as AlignEndHorizontalIcon,
+  AlignEndHorizontalIcon,
 } from "./align-end-horizontal"
-export {
-  AlignEndVertical,
-  AlignEndVertical as AlignEndVerticalIcon,
-} from "./align-end-vertical"
+export { AlignEndVertical, AlignEndVerticalIcon } from "./align-end-vertical"
 export {
   AlignHorizontalDistributeCenter,
-  AlignHorizontalDistributeCenter as AlignHorizontalDistributeCenterIcon,
+  AlignHorizontalDistributeCenterIcon,
 } from "./align-horizontal-distribute-center"
 export {
   AlignHorizontalDistributeEnd,
-  AlignHorizontalDistributeEnd as AlignHorizontalDistributeEndIcon,
+  AlignHorizontalDistributeEndIcon,
 } from "./align-horizontal-distribute-end"
 export {
   AlignHorizontalDistributeStart,
-  AlignHorizontalDistributeStart as AlignHorizontalDistributeStartIcon,
+  AlignHorizontalDistributeStartIcon,
 } from "./align-horizontal-distribute-start"
 export {
   AlignHorizontalJustifyCenter,
-  AlignHorizontalJustifyCenter as AlignHorizontalJustifyCenterIcon,
+  AlignHorizontalJustifyCenterIcon,
 } from "./align-horizontal-justify-center"
 export {
   AlignHorizontalJustifyEnd,
-  AlignHorizontalJustifyEnd as AlignHorizontalJustifyEndIcon,
+  AlignHorizontalJustifyEndIcon,
 } from "./align-horizontal-justify-end"
 export {
   AlignHorizontalJustifyStart,
-  AlignHorizontalJustifyStart as AlignHorizontalJustifyStartIcon,
+  AlignHorizontalJustifyStartIcon,
 } from "./align-horizontal-justify-start"
 export {
   AlignHorizontalSpaceAround,
-  AlignHorizontalSpaceAround as AlignHorizontalSpaceAroundIcon,
+  AlignHorizontalSpaceAroundIcon,
 } from "./align-horizontal-space-around"
 export {
   AlignHorizontalSpaceBetween,
-  AlignHorizontalSpaceBetween as AlignHorizontalSpaceBetweenIcon,
+  AlignHorizontalSpaceBetweenIcon,
 } from "./align-horizontal-space-between"
-export { AlignJustify, AlignJustify as AlignJustifyIcon } from "./align-justify"
-export { AlignLeft, AlignLeft as AlignLeftIcon } from "./align-left"
-export { AlignRight, AlignRight as AlignRightIcon } from "./align-right"
+export { AlignJustify, AlignJustifyIcon } from "./align-justify"
+export { AlignLeft, AlignLeftIcon } from "./align-left"
+export { AlignRight, AlignRightIcon } from "./align-right"
 export {
   AlignStartHorizontal,
-  AlignStartHorizontal as AlignStartHorizontalIcon,
+  AlignStartHorizontalIcon,
 } from "./align-start-horizontal"
 export {
   AlignStartVertical,
-  AlignStartVertical as AlignStartVerticalIcon,
+  AlignStartVerticalIcon,
 } from "./align-start-vertical"
 export {
   AlignVerticalDistributeCenter,
-  AlignVerticalDistributeCenter as AlignVerticalDistributeCenterIcon,
+  AlignVerticalDistributeCenterIcon,
 } from "./align-vertical-distribute-center"
 export {
   AlignVerticalDistributeEnd,
-  AlignVerticalDistributeEnd as AlignVerticalDistributeEndIcon,
+  AlignVerticalDistributeEndIcon,
 } from "./align-vertical-distribute-end"
 export {
   AlignVerticalDistributeStart,
-  AlignVerticalDistributeStart as AlignVerticalDistributeStartIcon,
+  AlignVerticalDistributeStartIcon,
 } from "./align-vertical-distribute-start"
 export {
   AlignVerticalJustifyCenter,
-  AlignVerticalJustifyCenter as AlignVerticalJustifyCenterIcon,
+  AlignVerticalJustifyCenterIcon,
 } from "./align-vertical-justify-center"
 export {
   AlignVerticalJustifyEnd,
-  AlignVerticalJustifyEnd as AlignVerticalJustifyEndIcon,
+  AlignVerticalJustifyEndIcon,
 } from "./align-vertical-justify-end"
 export {
   AlignVerticalJustifyStart,
-  AlignVerticalJustifyStart as AlignVerticalJustifyStartIcon,
+  AlignVerticalJustifyStartIcon,
 } from "./align-vertical-justify-start"
 export {
   AlignVerticalSpaceAround,
-  AlignVerticalSpaceAround as AlignVerticalSpaceAroundIcon,
+  AlignVerticalSpaceAroundIcon,
 } from "./align-vertical-space-around"
 export {
   AlignVerticalSpaceBetween,
-  AlignVerticalSpaceBetween as AlignVerticalSpaceBetweenIcon,
+  AlignVerticalSpaceBetweenIcon,
 } from "./align-vertical-space-between"
-export { Ambulance, Ambulance as AmbulanceIcon } from "./ambulance"
-export { Ampersand, Ampersand as AmpersandIcon } from "./ampersand"
-export { Ampersands, Ampersands as AmpersandsIcon } from "./ampersands"
-export { Amphora, Amphora as AmphoraIcon } from "./amphora"
-export { Anchor, Anchor as AnchorIcon } from "./anchor"
-export { Angry, Angry as AngryIcon } from "./angry"
-export { Annoyed, Annoyed as AnnoyedIcon } from "./annoyed"
-export { Antenna, Antenna as AntennaIcon } from "./antenna"
-export { Anvil, Anvil as AnvilIcon } from "./anvil"
-export { Aperture, Aperture as ApertureIcon } from "./aperture"
-export { AppWindow, AppWindow as AppWindowIcon } from "./app-window"
-export {
-  AppWindowMac,
-  AppWindowMac as AppWindowMacIcon,
-} from "./app-window-mac"
-export { Apple, Apple as AppleIcon } from "./apple"
-export { Archive, Archive as ArchiveIcon } from "./archive"
-export {
-  ArchiveRestore,
-  ArchiveRestore as ArchiveRestoreIcon,
-} from "./archive-restore"
-export { ArchiveX, ArchiveX as ArchiveXIcon } from "./archive-x"
-export { Armchair, Armchair as ArmchairIcon } from "./armchair"
-export {
-  ArrowBigDown,
-  ArrowBigDown as ArrowBigDownIcon,
-} from "./arrow-big-down"
-export {
-  ArrowBigDownDash,
-  ArrowBigDownDash as ArrowBigDownDashIcon,
-} from "./arrow-big-down-dash"
-export {
-  ArrowBigLeft,
-  ArrowBigLeft as ArrowBigLeftIcon,
-} from "./arrow-big-left"
-export {
-  ArrowBigLeftDash,
-  ArrowBigLeftDash as ArrowBigLeftDashIcon,
-} from "./arrow-big-left-dash"
-export {
-  ArrowBigRight,
-  ArrowBigRight as ArrowBigRightIcon,
-} from "./arrow-big-right"
+export { Ambulance, AmbulanceIcon } from "./ambulance"
+export { Ampersand, AmpersandIcon } from "./ampersand"
+export { Ampersands, AmpersandsIcon } from "./ampersands"
+export { Amphora, AmphoraIcon } from "./amphora"
+export { Anchor, AnchorIcon } from "./anchor"
+export { Angry, AngryIcon } from "./angry"
+export { Annoyed, AnnoyedIcon } from "./annoyed"
+export { Antenna, AntennaIcon } from "./antenna"
+export { Anvil, AnvilIcon } from "./anvil"
+export { Aperture, ApertureIcon } from "./aperture"
+export { AppWindow, AppWindowIcon } from "./app-window"
+export { AppWindowMac, AppWindowMacIcon } from "./app-window-mac"
+export { Apple, AppleIcon } from "./apple"
+export { Archive, ArchiveIcon } from "./archive"
+export { ArchiveRestore, ArchiveRestoreIcon } from "./archive-restore"
+export { ArchiveX, ArchiveXIcon } from "./archive-x"
+export { Armchair, ArmchairIcon } from "./armchair"
+export { ArrowBigDown, ArrowBigDownIcon } from "./arrow-big-down"
+export { ArrowBigDownDash, ArrowBigDownDashIcon } from "./arrow-big-down-dash"
+export { ArrowBigLeft, ArrowBigLeftIcon } from "./arrow-big-left"
+export { ArrowBigLeftDash, ArrowBigLeftDashIcon } from "./arrow-big-left-dash"
+export { ArrowBigRight, ArrowBigRightIcon } from "./arrow-big-right"
 export {
   ArrowBigRightDash,
-  ArrowBigRightDash as ArrowBigRightDashIcon,
+  ArrowBigRightDashIcon,
 } from "./arrow-big-right-dash"
-export { ArrowBigUp, ArrowBigUp as ArrowBigUpIcon } from "./arrow-big-up"
-export {
-  ArrowBigUpDash,
-  ArrowBigUpDash as ArrowBigUpDashIcon,
-} from "./arrow-big-up-dash"
-export { ArrowDown, ArrowDown as ArrowDownIcon } from "./arrow-down"
-export { ArrowDownAZ, ArrowDownAZ as ArrowDownAZIcon } from "./arrow-down-a-z"
+export { ArrowBigUp, ArrowBigUpIcon } from "./arrow-big-up"
+export { ArrowBigUpDash, ArrowBigUpDashIcon } from "./arrow-big-up-dash"
+export { ArrowDown, ArrowDownIcon } from "./arrow-down"
+export { ArrowDownAZ, ArrowDownAZIcon } from "./arrow-down-a-z"
 export {
   ArrowDownFromLine,
-  ArrowDownFromLine as ArrowDownFromLineIcon,
+  ArrowDownFromLineIcon,
 } from "./arrow-down-from-line"
-export {
-  ArrowDownLeft,
-  ArrowDownLeft as ArrowDownLeftIcon,
-} from "./arrow-down-left"
+export { ArrowDownLeft, ArrowDownLeftIcon } from "./arrow-down-left"
 export {
   ArrowDownNarrowWide,
-  ArrowDownNarrowWide as ArrowDownNarrowWideIcon,
+  ArrowDownNarrowWideIcon,
 } from "./arrow-down-narrow-wide"
-export {
-  ArrowDownRight,
-  ArrowDownRight as ArrowDownRightIcon,
-} from "./arrow-down-right"
-export {
-  ArrowDownToDot,
-  ArrowDownToDot as ArrowDownToDotIcon,
-} from "./arrow-down-to-dot"
-export {
-  ArrowDownToLine,
-  ArrowDownToLine as ArrowDownToLineIcon,
-} from "./arrow-down-to-line"
-export { ArrowDownUp, ArrowDownUp as ArrowDownUpIcon } from "./arrow-down-up"
+export { ArrowDownRight, ArrowDownRightIcon } from "./arrow-down-right"
+export { ArrowDownToDot, ArrowDownToDotIcon } from "./arrow-down-to-dot"
+export { ArrowDownToLine, ArrowDownToLineIcon } from "./arrow-down-to-line"
+export { ArrowDownUp, ArrowDownUpIcon } from "./arrow-down-up"
 export {
   ArrowDownWideNarrow,
-  ArrowDownWideNarrow as ArrowDownWideNarrowIcon,
+  ArrowDownWideNarrowIcon,
 } from "./arrow-down-wide-narrow"
-export { ArrowDownZA, ArrowDownZA as ArrowDownZAIcon } from "./arrow-down-z-a"
-export { ArrowDown01, ArrowDown01 as ArrowDown01Icon } from "./arrow-down01"
-export { ArrowDown10, ArrowDown10 as ArrowDown10Icon } from "./arrow-down10"
-export { ArrowLeft, ArrowLeft as ArrowLeftIcon } from "./arrow-left"
+export { ArrowDownZA, ArrowDownZAIcon } from "./arrow-down-z-a"
+export { ArrowDown01, ArrowDown01Icon } from "./arrow-down01"
+export { ArrowDown10, ArrowDown10Icon } from "./arrow-down10"
+export { ArrowLeft, ArrowLeftIcon } from "./arrow-left"
 export {
   ArrowLeftFromLine,
-  ArrowLeftFromLine as ArrowLeftFromLineIcon,
+  ArrowLeftFromLineIcon,
 } from "./arrow-left-from-line"
-export {
-  ArrowLeftRight,
-  ArrowLeftRight as ArrowLeftRightIcon,
-} from "./arrow-left-right"
-export {
-  ArrowLeftToLine,
-  ArrowLeftToLine as ArrowLeftToLineIcon,
-} from "./arrow-left-to-line"
-export { ArrowRight, ArrowRight as ArrowRightIcon } from "./arrow-right"
+export { ArrowLeftRight, ArrowLeftRightIcon } from "./arrow-left-right"
+export { ArrowLeftToLine, ArrowLeftToLineIcon } from "./arrow-left-to-line"
+export { ArrowRight, ArrowRightIcon } from "./arrow-right"
 export {
   ArrowRightFromLine,
-  ArrowRightFromLine as ArrowRightFromLineIcon,
+  ArrowRightFromLineIcon,
 } from "./arrow-right-from-line"
-export {
-  ArrowRightLeft,
-  ArrowRightLeft as ArrowRightLeftIcon,
-} from "./arrow-right-left"
-export {
-  ArrowRightToLine,
-  ArrowRightToLine as ArrowRightToLineIcon,
-} from "./arrow-right-to-line"
-export { ArrowUp, ArrowUp as ArrowUpIcon } from "./arrow-up"
-export { ArrowUpAZ, ArrowUpAZ as ArrowUpAZIcon } from "./arrow-up-a-z"
-export { ArrowUpDown, ArrowUpDown as ArrowUpDownIcon } from "./arrow-up-down"
-export {
-  ArrowUpFromDot,
-  ArrowUpFromDot as ArrowUpFromDotIcon,
-} from "./arrow-up-from-dot"
-export {
-  ArrowUpFromLine,
-  ArrowUpFromLine as ArrowUpFromLineIcon,
-} from "./arrow-up-from-line"
-export { ArrowUpLeft, ArrowUpLeft as ArrowUpLeftIcon } from "./arrow-up-left"
+export { ArrowRightLeft, ArrowRightLeftIcon } from "./arrow-right-left"
+export { ArrowRightToLine, ArrowRightToLineIcon } from "./arrow-right-to-line"
+export { ArrowUp, ArrowUpIcon } from "./arrow-up"
+export { ArrowUpAZ, ArrowUpAZIcon } from "./arrow-up-a-z"
+export { ArrowUpDown, ArrowUpDownIcon } from "./arrow-up-down"
+export { ArrowUpFromDot, ArrowUpFromDotIcon } from "./arrow-up-from-dot"
+export { ArrowUpFromLine, ArrowUpFromLineIcon } from "./arrow-up-from-line"
+export { ArrowUpLeft, ArrowUpLeftIcon } from "./arrow-up-left"
 export {
   ArrowUpNarrowWide,
-  ArrowUpNarrowWide as ArrowUpNarrowWideIcon,
+  ArrowUpNarrowWideIcon,
 } from "./arrow-up-narrow-wide"
-export {
-  ArrowUpRight,
-  ArrowUpRight as ArrowUpRightIcon,
-} from "./arrow-up-right"
-export {
-  ArrowUpToLine,
-  ArrowUpToLine as ArrowUpToLineIcon,
-} from "./arrow-up-to-line"
+export { ArrowUpRight, ArrowUpRightIcon } from "./arrow-up-right"
+export { ArrowUpToLine, ArrowUpToLineIcon } from "./arrow-up-to-line"
 export {
   ArrowUpWideNarrow,
-  ArrowUpWideNarrow as ArrowUpWideNarrowIcon,
+  ArrowUpWideNarrowIcon,
 } from "./arrow-up-wide-narrow"
-export { ArrowUpZA, ArrowUpZA as ArrowUpZAIcon } from "./arrow-up-z-a"
-export { ArrowUp01, ArrowUp01 as ArrowUp01Icon } from "./arrow-up01"
-export { ArrowUp10, ArrowUp10 as ArrowUp10Icon } from "./arrow-up10"
-export {
-  ArrowsUpFromLine,
-  ArrowsUpFromLine as ArrowsUpFromLineIcon,
-} from "./arrows-up-from-line"
-export { Asterisk, Asterisk as AsteriskIcon } from "./asterisk"
-export { AtSign, AtSign as AtSignIcon } from "./at-sign"
-export { Atom, Atom as AtomIcon } from "./atom"
-export { AudioLines, AudioLines as AudioLinesIcon } from "./audio-lines"
-export {
-  AudioWaveform,
-  AudioWaveform as AudioWaveformIcon,
-} from "./audio-waveform"
-export { Award, Award as AwardIcon } from "./award"
-export { Axe, Axe as AxeIcon } from "./axe"
-export { Axis3d, Axis3d as Axis3dIcon } from "./axis3d"
-export { Baby, Baby as BabyIcon } from "./baby"
-export { Backpack, Backpack as BackpackIcon } from "./backpack"
-export { Badge, Badge as BadgeIcon } from "./badge"
-export { BadgeAlert, BadgeAlert as BadgeAlertIcon } from "./badge-alert"
-export { BadgeCent, BadgeCent as BadgeCentIcon } from "./badge-cent"
-export { BadgeCheck, BadgeCheck as BadgeCheckIcon } from "./badge-check"
-export {
-  BadgeDollarSign,
-  BadgeDollarSign as BadgeDollarSignIcon,
-} from "./badge-dollar-sign"
-export { BadgeEuro, BadgeEuro as BadgeEuroIcon } from "./badge-euro"
-export { BadgeHelp, BadgeHelp as BadgeHelpIcon } from "./badge-help"
-export {
-  BadgeIndianRupee,
-  BadgeIndianRupee as BadgeIndianRupeeIcon,
-} from "./badge-indian-rupee"
-export { BadgeInfo, BadgeInfo as BadgeInfoIcon } from "./badge-info"
-export {
-  BadgeJapaneseYen,
-  BadgeJapaneseYen as BadgeJapaneseYenIcon,
-} from "./badge-japanese-yen"
-export { BadgeMinus, BadgeMinus as BadgeMinusIcon } from "./badge-minus"
-export { BadgePercent, BadgePercent as BadgePercentIcon } from "./badge-percent"
-export { BadgePlus, BadgePlus as BadgePlusIcon } from "./badge-plus"
+export { ArrowUpZA, ArrowUpZAIcon } from "./arrow-up-z-a"
+export { ArrowUp01, ArrowUp01Icon } from "./arrow-up01"
+export { ArrowUp10, ArrowUp10Icon } from "./arrow-up10"
+export { ArrowsUpFromLine, ArrowsUpFromLineIcon } from "./arrows-up-from-line"
+export { Asterisk, AsteriskIcon } from "./asterisk"
+export { AtSign, AtSignIcon } from "./at-sign"
+export { Atom, AtomIcon } from "./atom"
+export { AudioLines, AudioLinesIcon } from "./audio-lines"
+export { AudioWaveform, AudioWaveformIcon } from "./audio-waveform"
+export { Award, AwardIcon } from "./award"
+export { Axe, AxeIcon } from "./axe"
+export { Axis3d, Axis3dIcon } from "./axis3d"
+export { Baby, BabyIcon } from "./baby"
+export { Backpack, BackpackIcon } from "./backpack"
+export { Badge, BadgeIcon } from "./badge"
+export { BadgeAlert, BadgeAlertIcon } from "./badge-alert"
+export { BadgeCent, BadgeCentIcon } from "./badge-cent"
+export { BadgeCheck, BadgeCheckIcon } from "./badge-check"
+export { BadgeDollarSign, BadgeDollarSignIcon } from "./badge-dollar-sign"
+export { BadgeEuro, BadgeEuroIcon } from "./badge-euro"
+export { BadgeHelp, BadgeHelpIcon } from "./badge-help"
+export { BadgeIndianRupee, BadgeIndianRupeeIcon } from "./badge-indian-rupee"
+export { BadgeInfo, BadgeInfoIcon } from "./badge-info"
+export { BadgeJapaneseYen, BadgeJapaneseYenIcon } from "./badge-japanese-yen"
+export { BadgeMinus, BadgeMinusIcon } from "./badge-minus"
+export { BadgePercent, BadgePercentIcon } from "./badge-percent"
+export { BadgePlus, BadgePlusIcon } from "./badge-plus"
 export {
   BadgePoundSterling,
-  BadgePoundSterling as BadgePoundSterlingIcon,
+  BadgePoundSterlingIcon,
 } from "./badge-pound-sterling"
-export {
-  BadgeRussianRuble,
-  BadgeRussianRuble as BadgeRussianRubleIcon,
-} from "./badge-russian-ruble"
-export {
-  BadgeSwissFranc,
-  BadgeSwissFranc as BadgeSwissFrancIcon,
-} from "./badge-swiss-franc"
-export { BadgeX, BadgeX as BadgeXIcon } from "./badge-x"
-export { BaggageClaim, BaggageClaim as BaggageClaimIcon } from "./baggage-claim"
-export { Ban, Ban as BanIcon } from "./ban"
-export { Banana, Banana as BananaIcon } from "./banana"
-export { Bandage, Bandage as BandageIcon } from "./bandage"
-export { Banknote, Banknote as BanknoteIcon } from "./banknote"
-export { Barcode, Barcode as BarcodeIcon } from "./barcode"
-export { Baseline, Baseline as BaselineIcon } from "./baseline"
-export { Bath, Bath as BathIcon } from "./bath"
-export { Battery, Battery as BatteryIcon } from "./battery"
-export {
-  BatteryCharging,
-  BatteryCharging as BatteryChargingIcon,
-} from "./battery-charging"
-export { BatteryFull, BatteryFull as BatteryFullIcon } from "./battery-full"
-export { BatteryLow, BatteryLow as BatteryLowIcon } from "./battery-low"
-export {
-  BatteryMedium,
-  BatteryMedium as BatteryMediumIcon,
-} from "./battery-medium"
-export {
-  BatteryWarning,
-  BatteryWarning as BatteryWarningIcon,
-} from "./battery-warning"
-export { Beaker, Beaker as BeakerIcon } from "./beaker"
-export { Bean, Bean as BeanIcon } from "./bean"
-export { BeanOff, BeanOff as BeanOffIcon } from "./bean-off"
-export { Bed, Bed as BedIcon } from "./bed"
-export { BedDouble, BedDouble as BedDoubleIcon } from "./bed-double"
-export { BedSingle, BedSingle as BedSingleIcon } from "./bed-single"
-export { Beef, Beef as BeefIcon } from "./beef"
-export { Beer, Beer as BeerIcon } from "./beer"
-export { BeerOff, BeerOff as BeerOffIcon } from "./beer-off"
-export { Bell, Bell as BellIcon } from "./bell"
-export { BellDot, BellDot as BellDotIcon } from "./bell-dot"
-export { BellElectric, BellElectric as BellElectricIcon } from "./bell-electric"
-export { BellMinus, BellMinus as BellMinusIcon } from "./bell-minus"
-export { BellOff, BellOff as BellOffIcon } from "./bell-off"
-export { BellPlus, BellPlus as BellPlusIcon } from "./bell-plus"
-export { BellRing, BellRing as BellRingIcon } from "./bell-ring"
+export { BadgeRussianRuble, BadgeRussianRubleIcon } from "./badge-russian-ruble"
+export { BadgeSwissFranc, BadgeSwissFrancIcon } from "./badge-swiss-franc"
+export { BadgeX, BadgeXIcon } from "./badge-x"
+export { BaggageClaim, BaggageClaimIcon } from "./baggage-claim"
+export { Ban, BanIcon } from "./ban"
+export { Banana, BananaIcon } from "./banana"
+export { Bandage, BandageIcon } from "./bandage"
+export { Banknote, BanknoteIcon } from "./banknote"
+export { Barcode, BarcodeIcon } from "./barcode"
+export { Baseline, BaselineIcon } from "./baseline"
+export { Bath, BathIcon } from "./bath"
+export { Battery, BatteryIcon } from "./battery"
+export { BatteryCharging, BatteryChargingIcon } from "./battery-charging"
+export { BatteryFull, BatteryFullIcon } from "./battery-full"
+export { BatteryLow, BatteryLowIcon } from "./battery-low"
+export { BatteryMedium, BatteryMediumIcon } from "./battery-medium"
+export { BatteryWarning, BatteryWarningIcon } from "./battery-warning"
+export { Beaker, BeakerIcon } from "./beaker"
+export { Bean, BeanIcon } from "./bean"
+export { BeanOff, BeanOffIcon } from "./bean-off"
+export { Bed, BedIcon } from "./bed"
+export { BedDouble, BedDoubleIcon } from "./bed-double"
+export { BedSingle, BedSingleIcon } from "./bed-single"
+export { Beef, BeefIcon } from "./beef"
+export { Beer, BeerIcon } from "./beer"
+export { BeerOff, BeerOffIcon } from "./beer-off"
+export { Bell, BellIcon } from "./bell"
+export { BellDot, BellDotIcon } from "./bell-dot"
+export { BellElectric, BellElectricIcon } from "./bell-electric"
+export { BellMinus, BellMinusIcon } from "./bell-minus"
+export { BellOff, BellOffIcon } from "./bell-off"
+export { BellPlus, BellPlusIcon } from "./bell-plus"
+export { BellRing, BellRingIcon } from "./bell-ring"
 export {
   BetweenHorizontalEnd,
-  BetweenHorizontalEnd as BetweenHorizontalEndIcon,
+  BetweenHorizontalEndIcon,
 } from "./between-horizontal-end"
 export {
   BetweenHorizontalStart,
-  BetweenHorizontalStart as BetweenHorizontalStartIcon,
+  BetweenHorizontalStartIcon,
 } from "./between-horizontal-start"
 export {
   BetweenVerticalEnd,
-  BetweenVerticalEnd as BetweenVerticalEndIcon,
+  BetweenVerticalEndIcon,
 } from "./between-vertical-end"
 export {
   BetweenVerticalStart,
-  BetweenVerticalStart as BetweenVerticalStartIcon,
+  BetweenVerticalStartIcon,
 } from "./between-vertical-start"
-export { BicepsFlexed, BicepsFlexed as BicepsFlexedIcon } from "./biceps-flexed"
-export { Bike, Bike as BikeIcon } from "./bike"
-export { Binary, Binary as BinaryIcon } from "./binary"
-export { Binoculars, Binoculars as BinocularsIcon } from "./binoculars"
-export { Biohazard, Biohazard as BiohazardIcon } from "./biohazard"
-export { Bird, Bird as BirdIcon } from "./bird"
-export { Bitcoin, Bitcoin as BitcoinIcon } from "./bitcoin"
-export { Blend, Blend as BlendIcon } from "./blend"
-export { Blinds, Blinds as BlindsIcon } from "./blinds"
-export { Blocks, Blocks as BlocksIcon } from "./blocks"
-export { Bluetooth, Bluetooth as BluetoothIcon } from "./bluetooth"
+export { BicepsFlexed, BicepsFlexedIcon } from "./biceps-flexed"
+export { Bike, BikeIcon } from "./bike"
+export { Binary, BinaryIcon } from "./binary"
+export { Binoculars, BinocularsIcon } from "./binoculars"
+export { Biohazard, BiohazardIcon } from "./biohazard"
+export { Bird, BirdIcon } from "./bird"
+export { Bitcoin, BitcoinIcon } from "./bitcoin"
+export { Blend, BlendIcon } from "./blend"
+export { Blinds, BlindsIcon } from "./blinds"
+export { Blocks, BlocksIcon } from "./blocks"
+export { Bluetooth, BluetoothIcon } from "./bluetooth"
 export {
   BluetoothConnected,
-  BluetoothConnected as BluetoothConnectedIcon,
+  BluetoothConnectedIcon,
 } from "./bluetooth-connected"
-export { BluetoothOff, BluetoothOff as BluetoothOffIcon } from "./bluetooth-off"
+export { BluetoothOff, BluetoothOffIcon } from "./bluetooth-off"
 export {
   BluetoothSearching,
-  BluetoothSearching as BluetoothSearchingIcon,
+  BluetoothSearchingIcon,
 } from "./bluetooth-searching"
-export { Bold, Bold as BoldIcon } from "./bold"
-export { Bolt, Bolt as BoltIcon } from "./bolt"
-export { Bomb, Bomb as BombIcon } from "./bomb"
-export { Bone, Bone as BoneIcon } from "./bone"
-export { Book, Book as BookIcon } from "./book"
-export { BookA, BookA as BookAIcon } from "./book-a"
-export { BookAudio, BookAudio as BookAudioIcon } from "./book-audio"
-export { BookCheck, BookCheck as BookCheckIcon } from "./book-check"
-export { BookCopy, BookCopy as BookCopyIcon } from "./book-copy"
-export { BookDashed, BookDashed as BookDashedIcon } from "./book-dashed"
-export { BookDown, BookDown as BookDownIcon } from "./book-down"
-export {
-  BookHeadphones,
-  BookHeadphones as BookHeadphonesIcon,
-} from "./book-headphones"
-export { BookHeart, BookHeart as BookHeartIcon } from "./book-heart"
-export { BookImage, BookImage as BookImageIcon } from "./book-image"
-export { BookKey, BookKey as BookKeyIcon } from "./book-key"
-export { BookLock, BookLock as BookLockIcon } from "./book-lock"
-export { BookMarked, BookMarked as BookMarkedIcon } from "./book-marked"
-export { BookMinus, BookMinus as BookMinusIcon } from "./book-minus"
-export { BookOpen, BookOpen as BookOpenIcon } from "./book-open"
-export {
-  BookOpenCheck,
-  BookOpenCheck as BookOpenCheckIcon,
-} from "./book-open-check"
-export {
-  BookOpenText,
-  BookOpenText as BookOpenTextIcon,
-} from "./book-open-text"
-export { BookPlus, BookPlus as BookPlusIcon } from "./book-plus"
-export { BookText, BookText as BookTextIcon } from "./book-text"
-export { BookType, BookType as BookTypeIcon } from "./book-type"
-export { BookUp, BookUp as BookUpIcon } from "./book-up"
-export { BookUp2, BookUp2 as BookUp2Icon } from "./book-up2"
-export { BookUser, BookUser as BookUserIcon } from "./book-user"
-export { BookX, BookX as BookXIcon } from "./book-x"
-export { Bookmark, Bookmark as BookmarkIcon } from "./bookmark"
-export {
-  BookmarkCheck,
-  BookmarkCheck as BookmarkCheckIcon,
-} from "./bookmark-check"
-export {
-  BookmarkMinus,
-  BookmarkMinus as BookmarkMinusIcon,
-} from "./bookmark-minus"
-export { BookmarkPlus, BookmarkPlus as BookmarkPlusIcon } from "./bookmark-plus"
-export { BookmarkX, BookmarkX as BookmarkXIcon } from "./bookmark-x"
-export { BoomBox, BoomBox as BoomBoxIcon } from "./boom-box"
-export { Bot, Bot as BotIcon } from "./bot"
-export {
-  BotMessageSquare,
-  BotMessageSquare as BotMessageSquareIcon,
-} from "./bot-message-square"
-export { BotOff, BotOff as BotOffIcon } from "./bot-off"
-export { Box, Box as BoxIcon } from "./box"
-export { Boxes, Boxes as BoxesIcon } from "./boxes"
-export { Braces, Braces as BracesIcon } from "./braces"
-export { Brackets, Brackets as BracketsIcon } from "./brackets"
-export { Brain, Brain as BrainIcon } from "./brain"
-export { BrainCircuit, BrainCircuit as BrainCircuitIcon } from "./brain-circuit"
-export { BrainCog, BrainCog as BrainCogIcon } from "./brain-cog"
-export { BrickWall, BrickWall as BrickWallIcon } from "./brick-wall"
-export { Briefcase, Briefcase as BriefcaseIcon } from "./briefcase"
-export {
-  BriefcaseBusiness,
-  BriefcaseBusiness as BriefcaseBusinessIcon,
-} from "./briefcase-business"
+export { Bold, BoldIcon } from "./bold"
+export { Bolt, BoltIcon } from "./bolt"
+export { Bomb, BombIcon } from "./bomb"
+export { Bone, BoneIcon } from "./bone"
+export { Book, BookIcon } from "./book"
+export { BookA, BookAIcon } from "./book-a"
+export { BookAudio, BookAudioIcon } from "./book-audio"
+export { BookCheck, BookCheckIcon } from "./book-check"
+export { BookCopy, BookCopyIcon } from "./book-copy"
+export { BookDashed, BookDashedIcon } from "./book-dashed"
+export { BookDown, BookDownIcon } from "./book-down"
+export { BookHeadphones, BookHeadphonesIcon } from "./book-headphones"
+export { BookHeart, BookHeartIcon } from "./book-heart"
+export { BookImage, BookImageIcon } from "./book-image"
+export { BookKey, BookKeyIcon } from "./book-key"
+export { BookLock, BookLockIcon } from "./book-lock"
+export { BookMarked, BookMarkedIcon } from "./book-marked"
+export { BookMinus, BookMinusIcon } from "./book-minus"
+export { BookOpen, BookOpenIcon } from "./book-open"
+export { BookOpenCheck, BookOpenCheckIcon } from "./book-open-check"
+export { BookOpenText, BookOpenTextIcon } from "./book-open-text"
+export { BookPlus, BookPlusIcon } from "./book-plus"
+export { BookText, BookTextIcon } from "./book-text"
+export { BookType, BookTypeIcon } from "./book-type"
+export { BookUp, BookUpIcon } from "./book-up"
+export { BookUp2, BookUp2Icon } from "./book-up2"
+export { BookUser, BookUserIcon } from "./book-user"
+export { BookX, BookXIcon } from "./book-x"
+export { Bookmark, BookmarkIcon } from "./bookmark"
+export { BookmarkCheck, BookmarkCheckIcon } from "./bookmark-check"
+export { BookmarkMinus, BookmarkMinusIcon } from "./bookmark-minus"
+export { BookmarkPlus, BookmarkPlusIcon } from "./bookmark-plus"
+export { BookmarkX, BookmarkXIcon } from "./bookmark-x"
+export { BoomBox, BoomBoxIcon } from "./boom-box"
+export { Bot, BotIcon } from "./bot"
+export { BotMessageSquare, BotMessageSquareIcon } from "./bot-message-square"
+export { BotOff, BotOffIcon } from "./bot-off"
+export { Box, BoxIcon } from "./box"
+export { Boxes, BoxesIcon } from "./boxes"
+export { Braces, BracesIcon } from "./braces"
+export { Brackets, BracketsIcon } from "./brackets"
+export { Brain, BrainIcon } from "./brain"
+export { BrainCircuit, BrainCircuitIcon } from "./brain-circuit"
+export { BrainCog, BrainCogIcon } from "./brain-cog"
+export { BrickWall, BrickWallIcon } from "./brick-wall"
+export { Briefcase, BriefcaseIcon } from "./briefcase"
+export { BriefcaseBusiness, BriefcaseBusinessIcon } from "./briefcase-business"
 export {
   BriefcaseConveyorBelt,
-  BriefcaseConveyorBelt as BriefcaseConveyorBeltIcon,
+  BriefcaseConveyorBeltIcon,
 } from "./briefcase-conveyor-belt"
-export {
-  BriefcaseMedical,
-  BriefcaseMedical as BriefcaseMedicalIcon,
-} from "./briefcase-medical"
-export {
-  BringToFront,
-  BringToFront as BringToFrontIcon,
-} from "./bring-to-front"
-export { Brush, Brush as BrushIcon } from "./brush"
-export { Bug, Bug as BugIcon } from "./bug"
-export { BugOff, BugOff as BugOffIcon } from "./bug-off"
-export { BugPlay, BugPlay as BugPlayIcon } from "./bug-play"
-export { Building, Building as BuildingIcon } from "./building"
-export { Building2, Building2 as Building2Icon } from "./building2"
-export { Bus, Bus as BusIcon } from "./bus"
-export { BusFront, BusFront as BusFrontIcon } from "./bus-front"
-export { Cable, Cable as CableIcon } from "./cable"
-export { CableCar, CableCar as CableCarIcon } from "./cable-car"
-export { Cake, Cake as CakeIcon } from "./cake"
-export { CakeSlice, CakeSlice as CakeSliceIcon } from "./cake-slice"
-export { Calculator, Calculator as CalculatorIcon } from "./calculator"
-export { Calendar, Calendar as CalendarIcon } from "./calendar"
-export {
-  CalendarArrowDown,
-  CalendarArrowDown as CalendarArrowDownIcon,
-} from "./calendar-arrow-down"
-export {
-  CalendarArrowUp,
-  CalendarArrowUp as CalendarArrowUpIcon,
-} from "./calendar-arrow-up"
-export {
-  CalendarCheck,
-  CalendarCheck as CalendarCheckIcon,
-} from "./calendar-check"
-export {
-  CalendarCheck2,
-  CalendarCheck2 as CalendarCheck2Icon,
-} from "./calendar-check2"
-export {
-  CalendarClock,
-  CalendarClock as CalendarClockIcon,
-} from "./calendar-clock"
-export { CalendarCog, CalendarCog as CalendarCogIcon } from "./calendar-cog"
-export { CalendarDays, CalendarDays as CalendarDaysIcon } from "./calendar-days"
-export { CalendarFold, CalendarFold as CalendarFoldIcon } from "./calendar-fold"
-export {
-  CalendarHeart,
-  CalendarHeart as CalendarHeartIcon,
-} from "./calendar-heart"
-export {
-  CalendarMinus,
-  CalendarMinus as CalendarMinusIcon,
-} from "./calendar-minus"
-export {
-  CalendarMinus2,
-  CalendarMinus2 as CalendarMinus2Icon,
-} from "./calendar-minus2"
-export { CalendarOff, CalendarOff as CalendarOffIcon } from "./calendar-off"
-export { CalendarPlus, CalendarPlus as CalendarPlusIcon } from "./calendar-plus"
-export {
-  CalendarPlus2,
-  CalendarPlus2 as CalendarPlus2Icon,
-} from "./calendar-plus2"
-export {
-  CalendarRange,
-  CalendarRange as CalendarRangeIcon,
-} from "./calendar-range"
-export {
-  CalendarSearch,
-  CalendarSearch as CalendarSearchIcon,
-} from "./calendar-search"
-export { CalendarX, CalendarX as CalendarXIcon } from "./calendar-x"
-export { CalendarX2, CalendarX2 as CalendarX2Icon } from "./calendar-x2"
-export { Camera, Camera as CameraIcon } from "./camera"
-export { CameraOff, CameraOff as CameraOffIcon } from "./camera-off"
-export { Candy, Candy as CandyIcon } from "./candy"
-export { CandyCane, CandyCane as CandyCaneIcon } from "./candy-cane"
-export { CandyOff, CandyOff as CandyOffIcon } from "./candy-off"
-export { Cannabis, Cannabis as CannabisIcon } from "./cannabis"
-export { Captions, Captions as CaptionsIcon } from "./captions"
-export { CaptionsOff, CaptionsOff as CaptionsOffIcon } from "./captions-off"
-export { Car, Car as CarIcon } from "./car"
-export { CarFront, CarFront as CarFrontIcon } from "./car-front"
-export {
-  CarTaxiFront,
-  CarTaxiFront as CarTaxiFrontIcon,
-} from "./car-taxi-front"
-export { Caravan, Caravan as CaravanIcon } from "./caravan"
-export { Carrot, Carrot as CarrotIcon } from "./carrot"
-export { CaseLower, CaseLower as CaseLowerIcon } from "./case-lower"
-export {
-  CaseSensitive,
-  CaseSensitive as CaseSensitiveIcon,
-} from "./case-sensitive"
-export { CaseUpper, CaseUpper as CaseUpperIcon } from "./case-upper"
-export { CassetteTape, CassetteTape as CassetteTapeIcon } from "./cassette-tape"
-export { Cast, Cast as CastIcon } from "./cast"
-export { Castle, Castle as CastleIcon } from "./castle"
-export { Cat, Cat as CatIcon } from "./cat"
-export { Cctv, Cctv as CctvIcon } from "./cctv"
-export { ChartArea, ChartArea as ChartAreaIcon } from "./chart-area"
-export { ChartBar, ChartBar as ChartBarIcon } from "./chart-bar"
-export { ChartBarBig, ChartBarBig as ChartBarBigIcon } from "./chart-bar-big"
+export { BriefcaseMedical, BriefcaseMedicalIcon } from "./briefcase-medical"
+export { BringToFront, BringToFrontIcon } from "./bring-to-front"
+export { Brush, BrushIcon } from "./brush"
+export { Bug, BugIcon } from "./bug"
+export { BugOff, BugOffIcon } from "./bug-off"
+export { BugPlay, BugPlayIcon } from "./bug-play"
+export { Building, BuildingIcon } from "./building"
+export { Building2, Building2Icon } from "./building2"
+export { Bus, BusIcon } from "./bus"
+export { BusFront, BusFrontIcon } from "./bus-front"
+export { Cable, CableIcon } from "./cable"
+export { CableCar, CableCarIcon } from "./cable-car"
+export { Cake, CakeIcon } from "./cake"
+export { CakeSlice, CakeSliceIcon } from "./cake-slice"
+export { Calculator, CalculatorIcon } from "./calculator"
+export { Calendar, CalendarIcon } from "./calendar"
+export { CalendarArrowDown, CalendarArrowDownIcon } from "./calendar-arrow-down"
+export { CalendarArrowUp, CalendarArrowUpIcon } from "./calendar-arrow-up"
+export { CalendarCheck, CalendarCheckIcon } from "./calendar-check"
+export { CalendarCheck2, CalendarCheck2Icon } from "./calendar-check2"
+export { CalendarClock, CalendarClockIcon } from "./calendar-clock"
+export { CalendarCog, CalendarCogIcon } from "./calendar-cog"
+export { CalendarDays, CalendarDaysIcon } from "./calendar-days"
+export { CalendarFold, CalendarFoldIcon } from "./calendar-fold"
+export { CalendarHeart, CalendarHeartIcon } from "./calendar-heart"
+export { CalendarMinus, CalendarMinusIcon } from "./calendar-minus"
+export { CalendarMinus2, CalendarMinus2Icon } from "./calendar-minus2"
+export { CalendarOff, CalendarOffIcon } from "./calendar-off"
+export { CalendarPlus, CalendarPlusIcon } from "./calendar-plus"
+export { CalendarPlus2, CalendarPlus2Icon } from "./calendar-plus2"
+export { CalendarRange, CalendarRangeIcon } from "./calendar-range"
+export { CalendarSearch, CalendarSearchIcon } from "./calendar-search"
+export { CalendarX, CalendarXIcon } from "./calendar-x"
+export { CalendarX2, CalendarX2Icon } from "./calendar-x2"
+export { Camera, CameraIcon } from "./camera"
+export { CameraOff, CameraOffIcon } from "./camera-off"
+export { Candy, CandyIcon } from "./candy"
+export { CandyCane, CandyCaneIcon } from "./candy-cane"
+export { CandyOff, CandyOffIcon } from "./candy-off"
+export { Cannabis, CannabisIcon } from "./cannabis"
+export { Captions, CaptionsIcon } from "./captions"
+export { CaptionsOff, CaptionsOffIcon } from "./captions-off"
+export { Car, CarIcon } from "./car"
+export { CarFront, CarFrontIcon } from "./car-front"
+export { CarTaxiFront, CarTaxiFrontIcon } from "./car-taxi-front"
+export { Caravan, CaravanIcon } from "./caravan"
+export { Carrot, CarrotIcon } from "./carrot"
+export { CaseLower, CaseLowerIcon } from "./case-lower"
+export { CaseSensitive, CaseSensitiveIcon } from "./case-sensitive"
+export { CaseUpper, CaseUpperIcon } from "./case-upper"
+export { CassetteTape, CassetteTapeIcon } from "./cassette-tape"
+export { Cast, CastIcon } from "./cast"
+export { Castle, CastleIcon } from "./castle"
+export { Cat, CatIcon } from "./cat"
+export { Cctv, CctvIcon } from "./cctv"
+export { ChartArea, ChartAreaIcon } from "./chart-area"
+export { ChartBar, ChartBarIcon } from "./chart-bar"
+export { ChartBarBig, ChartBarBigIcon } from "./chart-bar-big"
 export {
   ChartBarDecreasing,
-  ChartBarDecreasing as ChartBarDecreasingIcon,
+  ChartBarDecreasingIcon,
 } from "./chart-bar-decreasing"
 export {
   ChartBarIncreasing,
-  ChartBarIncreasing as ChartBarIncreasingIcon,
+  ChartBarIncreasingIcon,
 } from "./chart-bar-increasing"
-export {
-  ChartBarStacked,
-  ChartBarStacked as ChartBarStackedIcon,
-} from "./chart-bar-stacked"
-export {
-  ChartCandlestick,
-  ChartCandlestick as ChartCandlestickIcon,
-} from "./chart-candlestick"
-export { ChartColumn, ChartColumn as ChartColumnIcon } from "./chart-column"
-export {
-  ChartColumnBig,
-  ChartColumnBig as ChartColumnBigIcon,
-} from "./chart-column-big"
+export { ChartBarStacked, ChartBarStackedIcon } from "./chart-bar-stacked"
+export { ChartCandlestick, ChartCandlestickIcon } from "./chart-candlestick"
+export { ChartColumn, ChartColumnIcon } from "./chart-column"
+export { ChartColumnBig, ChartColumnBigIcon } from "./chart-column-big"
 export {
   ChartColumnDecreasing,
-  ChartColumnDecreasing as ChartColumnDecreasingIcon,
+  ChartColumnDecreasingIcon,
 } from "./chart-column-decreasing"
 export {
   ChartColumnIncreasing,
-  ChartColumnIncreasing as ChartColumnIncreasingIcon,
+  ChartColumnIncreasingIcon,
 } from "./chart-column-increasing"
 export {
   ChartColumnStacked,
-  ChartColumnStacked as ChartColumnStackedIcon,
+  ChartColumnStackedIcon,
 } from "./chart-column-stacked"
-export { ChartGantt, ChartGantt as ChartGanttIcon } from "./chart-gantt"
-export { ChartLine, ChartLine as ChartLineIcon } from "./chart-line"
-export { ChartNetwork, ChartNetwork as ChartNetworkIcon } from "./chart-network"
+export { ChartGantt, ChartGanttIcon } from "./chart-gantt"
+export { ChartLine, ChartLineIcon } from "./chart-line"
+export { ChartNetwork, ChartNetworkIcon } from "./chart-network"
 export {
   ChartNoAxesColumn,
-  ChartNoAxesColumn as ChartNoAxesColumnIcon,
+  ChartNoAxesColumnIcon,
 } from "./chart-no-axes-column"
 export {
   ChartNoAxesColumnDecreasing,
-  ChartNoAxesColumnDecreasing as ChartNoAxesColumnDecreasingIcon,
+  ChartNoAxesColumnDecreasingIcon,
 } from "./chart-no-axes-column-decreasing"
 export {
   ChartNoAxesColumnIncreasing,
-  ChartNoAxesColumnIncreasing as ChartNoAxesColumnIncreasingIcon,
+  ChartNoAxesColumnIncreasingIcon,
 } from "./chart-no-axes-column-increasing"
 export {
   ChartNoAxesCombined,
-  ChartNoAxesCombined as ChartNoAxesCombinedIcon,
+  ChartNoAxesCombinedIcon,
 } from "./chart-no-axes-combined"
-export {
-  ChartNoAxesGantt,
-  ChartNoAxesGantt as ChartNoAxesGanttIcon,
-} from "./chart-no-axes-gantt"
-export { ChartPie, ChartPie as ChartPieIcon } from "./chart-pie"
-export { ChartScatter, ChartScatter as ChartScatterIcon } from "./chart-scatter"
-export { ChartSpline, ChartSpline as ChartSplineIcon } from "./chart-spline"
-export { Check, Check as CheckIcon } from "./check"
-export { CheckCheck, CheckCheck as CheckCheckIcon } from "./check-check"
-export { ChefHat, ChefHat as ChefHatIcon } from "./chef-hat"
-export { Cherry, Cherry as CherryIcon } from "./cherry"
-export { ChevronDown, ChevronDown as ChevronDownIcon } from "./chevron-down"
-export { ChevronFirst, ChevronFirst as ChevronFirstIcon } from "./chevron-first"
-export { ChevronLast, ChevronLast as ChevronLastIcon } from "./chevron-last"
-export { ChevronLeft, ChevronLeft as ChevronLeftIcon } from "./chevron-left"
-export { ChevronRight, ChevronRight as ChevronRightIcon } from "./chevron-right"
-export { ChevronUp, ChevronUp as ChevronUpIcon } from "./chevron-up"
-export { ChevronsDown, ChevronsDown as ChevronsDownIcon } from "./chevrons-down"
-export {
-  ChevronsDownUp,
-  ChevronsDownUp as ChevronsDownUpIcon,
-} from "./chevrons-down-up"
-export { ChevronsLeft, ChevronsLeft as ChevronsLeftIcon } from "./chevrons-left"
-export {
-  ChevronsLeftRight,
-  ChevronsLeftRight as ChevronsLeftRightIcon,
-} from "./chevrons-left-right"
+export { ChartNoAxesGantt, ChartNoAxesGanttIcon } from "./chart-no-axes-gantt"
+export { ChartPie, ChartPieIcon } from "./chart-pie"
+export { ChartScatter, ChartScatterIcon } from "./chart-scatter"
+export { ChartSpline, ChartSplineIcon } from "./chart-spline"
+export { Check, CheckIcon } from "./check"
+export { CheckCheck, CheckCheckIcon } from "./check-check"
+export { ChefHat, ChefHatIcon } from "./chef-hat"
+export { Cherry, CherryIcon } from "./cherry"
+export { ChevronDown, ChevronDownIcon } from "./chevron-down"
+export { ChevronFirst, ChevronFirstIcon } from "./chevron-first"
+export { ChevronLast, ChevronLastIcon } from "./chevron-last"
+export { ChevronLeft, ChevronLeftIcon } from "./chevron-left"
+export { ChevronRight, ChevronRightIcon } from "./chevron-right"
+export { ChevronUp, ChevronUpIcon } from "./chevron-up"
+export { ChevronsDown, ChevronsDownIcon } from "./chevrons-down"
+export { ChevronsDownUp, ChevronsDownUpIcon } from "./chevrons-down-up"
+export { ChevronsLeft, ChevronsLeftIcon } from "./chevrons-left"
+export { ChevronsLeftRight, ChevronsLeftRightIcon } from "./chevrons-left-right"
 export {
   ChevronsLeftRightEllipsis,
-  ChevronsLeftRightEllipsis as ChevronsLeftRightEllipsisIcon,
+  ChevronsLeftRightEllipsisIcon,
 } from "./chevrons-left-right-ellipsis"
-export {
-  ChevronsRight,
-  ChevronsRight as ChevronsRightIcon,
-} from "./chevrons-right"
-export {
-  ChevronsRightLeft,
-  ChevronsRightLeft as ChevronsRightLeftIcon,
-} from "./chevrons-right-left"
-export { ChevronsUp, ChevronsUp as ChevronsUpIcon } from "./chevrons-up"
-export {
-  ChevronsUpDown,
-  ChevronsUpDown as ChevronsUpDownIcon,
-} from "./chevrons-up-down"
-export { Chrome, Chrome as ChromeIcon } from "./chrome"
-export { Church, Church as ChurchIcon } from "./church"
-export { Cigarette, Cigarette as CigaretteIcon } from "./cigarette"
-export { CigaretteOff, CigaretteOff as CigaretteOffIcon } from "./cigarette-off"
-export { Circle, Circle as CircleIcon } from "./circle"
-export { CircleAlert, CircleAlert as CircleAlertIcon } from "./circle-alert"
-export {
-  CircleArrowDown,
-  CircleArrowDown as CircleArrowDownIcon,
-} from "./circle-arrow-down"
-export {
-  CircleArrowLeft,
-  CircleArrowLeft as CircleArrowLeftIcon,
-} from "./circle-arrow-left"
+export { ChevronsRight, ChevronsRightIcon } from "./chevrons-right"
+export { ChevronsRightLeft, ChevronsRightLeftIcon } from "./chevrons-right-left"
+export { ChevronsUp, ChevronsUpIcon } from "./chevrons-up"
+export { ChevronsUpDown, ChevronsUpDownIcon } from "./chevrons-up-down"
+export { Chrome, ChromeIcon } from "./chrome"
+export { Church, ChurchIcon } from "./church"
+export { Cigarette, CigaretteIcon } from "./cigarette"
+export { CigaretteOff, CigaretteOffIcon } from "./cigarette-off"
+export { Circle, CircleIcon } from "./circle"
+export { CircleAlert, CircleAlertIcon } from "./circle-alert"
+export { CircleArrowDown, CircleArrowDownIcon } from "./circle-arrow-down"
+export { CircleArrowLeft, CircleArrowLeftIcon } from "./circle-arrow-left"
 export {
   CircleArrowOutDownLeft,
-  CircleArrowOutDownLeft as CircleArrowOutDownLeftIcon,
+  CircleArrowOutDownLeftIcon,
 } from "./circle-arrow-out-down-left"
 export {
   CircleArrowOutDownRight,
-  CircleArrowOutDownRight as CircleArrowOutDownRightIcon,
+  CircleArrowOutDownRightIcon,
 } from "./circle-arrow-out-down-right"
 export {
   CircleArrowOutUpLeft,
-  CircleArrowOutUpLeft as CircleArrowOutUpLeftIcon,
+  CircleArrowOutUpLeftIcon,
 } from "./circle-arrow-out-up-left"
 export {
   CircleArrowOutUpRight,
-  CircleArrowOutUpRight as CircleArrowOutUpRightIcon,
+  CircleArrowOutUpRightIcon,
 } from "./circle-arrow-out-up-right"
-export {
-  CircleArrowRight,
-  CircleArrowRight as CircleArrowRightIcon,
-} from "./circle-arrow-right"
-export {
-  CircleArrowUp,
-  CircleArrowUp as CircleArrowUpIcon,
-} from "./circle-arrow-up"
-export { CircleCheck, CircleCheck as CircleCheckIcon } from "./circle-check"
-export {
-  CircleCheckBig,
-  CircleCheckBig as CircleCheckBigIcon,
-} from "./circle-check-big"
-export {
-  CircleChevronDown,
-  CircleChevronDown as CircleChevronDownIcon,
-} from "./circle-chevron-down"
-export {
-  CircleChevronLeft,
-  CircleChevronLeft as CircleChevronLeftIcon,
-} from "./circle-chevron-left"
+export { CircleArrowRight, CircleArrowRightIcon } from "./circle-arrow-right"
+export { CircleArrowUp, CircleArrowUpIcon } from "./circle-arrow-up"
+export { CircleCheck, CircleCheckIcon } from "./circle-check"
+export { CircleCheckBig, CircleCheckBigIcon } from "./circle-check-big"
+export { CircleChevronDown, CircleChevronDownIcon } from "./circle-chevron-down"
+export { CircleChevronLeft, CircleChevronLeftIcon } from "./circle-chevron-left"
 export {
   CircleChevronRight,
-  CircleChevronRight as CircleChevronRightIcon,
+  CircleChevronRightIcon,
 } from "./circle-chevron-right"
-export {
-  CircleChevronUp,
-  CircleChevronUp as CircleChevronUpIcon,
-} from "./circle-chevron-up"
-export { CircleDashed, CircleDashed as CircleDashedIcon } from "./circle-dashed"
-export { CircleDivide, CircleDivide as CircleDivideIcon } from "./circle-divide"
-export {
-  CircleDollarSign,
-  CircleDollarSign as CircleDollarSignIcon,
-} from "./circle-dollar-sign"
-export { CircleDot, CircleDot as CircleDotIcon } from "./circle-dot"
-export {
-  CircleDotDashed,
-  CircleDotDashed as CircleDotDashedIcon,
-} from "./circle-dot-dashed"
-export {
-  CircleEllipsis,
-  CircleEllipsis as CircleEllipsisIcon,
-} from "./circle-ellipsis"
-export { CircleEqual, CircleEqual as CircleEqualIcon } from "./circle-equal"
+export { CircleChevronUp, CircleChevronUpIcon } from "./circle-chevron-up"
+export { CircleDashed, CircleDashedIcon } from "./circle-dashed"
+export { CircleDivide, CircleDivideIcon } from "./circle-divide"
+export { CircleDollarSign, CircleDollarSignIcon } from "./circle-dollar-sign"
+export { CircleDot, CircleDotIcon } from "./circle-dot"
+export { CircleDotDashed, CircleDotDashedIcon } from "./circle-dot-dashed"
+export { CircleEllipsis, CircleEllipsisIcon } from "./circle-ellipsis"
+export { CircleEqual, CircleEqualIcon } from "./circle-equal"
 export {
   CircleFadingArrowUp,
-  CircleFadingArrowUp as CircleFadingArrowUpIcon,
+  CircleFadingArrowUpIcon,
 } from "./circle-fading-arrow-up"
-export {
-  CircleFadingPlus,
-  CircleFadingPlus as CircleFadingPlusIcon,
-} from "./circle-fading-plus"
-export { CircleGauge, CircleGauge as CircleGaugeIcon } from "./circle-gauge"
-export { CircleHelp, CircleHelp as CircleHelpIcon } from "./circle-help"
-export { CircleMinus, CircleMinus as CircleMinusIcon } from "./circle-minus"
-export { CircleOff, CircleOff as CircleOffIcon } from "./circle-off"
-export {
-  CircleParking,
-  CircleParking as CircleParkingIcon,
-} from "./circle-parking"
-export {
-  CircleParkingOff,
-  CircleParkingOff as CircleParkingOffIcon,
-} from "./circle-parking-off"
-export { CirclePause, CirclePause as CirclePauseIcon } from "./circle-pause"
-export {
-  CirclePercent,
-  CirclePercent as CirclePercentIcon,
-} from "./circle-percent"
-export { CirclePlay, CirclePlay as CirclePlayIcon } from "./circle-play"
-export { CirclePlus, CirclePlus as CirclePlusIcon } from "./circle-plus"
-export { CirclePower, CirclePower as CirclePowerIcon } from "./circle-power"
-export { CircleSlash, CircleSlash as CircleSlashIcon } from "./circle-slash"
-export { CircleSlash2, CircleSlash2 as CircleSlash2Icon } from "./circle-slash2"
-export { CircleStop, CircleStop as CircleStopIcon } from "./circle-stop"
-export { CircleUser, CircleUser as CircleUserIcon } from "./circle-user"
-export {
-  CircleUserRound,
-  CircleUserRound as CircleUserRoundIcon,
-} from "./circle-user-round"
-export { CircleX, CircleX as CircleXIcon } from "./circle-x"
-export { CircuitBoard, CircuitBoard as CircuitBoardIcon } from "./circuit-board"
-export { Citrus, Citrus as CitrusIcon } from "./citrus"
-export { Clapperboard, Clapperboard as ClapperboardIcon } from "./clapperboard"
-export { Clipboard, Clipboard as ClipboardIcon } from "./clipboard"
-export {
-  ClipboardCheck,
-  ClipboardCheck as ClipboardCheckIcon,
-} from "./clipboard-check"
-export {
-  ClipboardCopy,
-  ClipboardCopy as ClipboardCopyIcon,
-} from "./clipboard-copy"
-export {
-  ClipboardList,
-  ClipboardList as ClipboardListIcon,
-} from "./clipboard-list"
-export {
-  ClipboardMinus,
-  ClipboardMinus as ClipboardMinusIcon,
-} from "./clipboard-minus"
-export {
-  ClipboardPaste,
-  ClipboardPaste as ClipboardPasteIcon,
-} from "./clipboard-paste"
-export { ClipboardPen, ClipboardPen as ClipboardPenIcon } from "./clipboard-pen"
-export {
-  ClipboardPenLine,
-  ClipboardPenLine as ClipboardPenLineIcon,
-} from "./clipboard-pen-line"
-export {
-  ClipboardPlus,
-  ClipboardPlus as ClipboardPlusIcon,
-} from "./clipboard-plus"
-export {
-  ClipboardType,
-  ClipboardType as ClipboardTypeIcon,
-} from "./clipboard-type"
-export { ClipboardX, ClipboardX as ClipboardXIcon } from "./clipboard-x"
-export { Clock, Clock as ClockIcon } from "./clock"
-export { ClockAlert, ClockAlert as ClockAlertIcon } from "./clock-alert"
-export {
-  ClockArrowDown,
-  ClockArrowDown as ClockArrowDownIcon,
-} from "./clock-arrow-down"
-export {
-  ClockArrowUp,
-  ClockArrowUp as ClockArrowUpIcon,
-} from "./clock-arrow-up"
-export { Clock1, Clock1 as Clock1Icon } from "./clock1"
-export { Clock2, Clock2 as Clock2Icon } from "./clock2"
-export { Clock3, Clock3 as Clock3Icon } from "./clock3"
-export { Clock4, Clock4 as Clock4Icon } from "./clock4"
-export { Clock5, Clock5 as Clock5Icon } from "./clock5"
-export { Clock6, Clock6 as Clock6Icon } from "./clock6"
-export { Clock7, Clock7 as Clock7Icon } from "./clock7"
-export { Clock8, Clock8 as Clock8Icon } from "./clock8"
-export { Clock9, Clock9 as Clock9Icon } from "./clock9"
-export { Clock10, Clock10 as Clock10Icon } from "./clock10"
-export { Clock11, Clock11 as Clock11Icon } from "./clock11"
-export { Clock12, Clock12 as Clock12Icon } from "./clock12"
-export { Cloud, Cloud as CloudIcon } from "./cloud"
-export { CloudCog, CloudCog as CloudCogIcon } from "./cloud-cog"
-export {
-  CloudDownload,
-  CloudDownload as CloudDownloadIcon,
-} from "./cloud-download"
-export { CloudDrizzle, CloudDrizzle as CloudDrizzleIcon } from "./cloud-drizzle"
-export { CloudFog, CloudFog as CloudFogIcon } from "./cloud-fog"
-export { CloudHail, CloudHail as CloudHailIcon } from "./cloud-hail"
-export {
-  CloudLightning,
-  CloudLightning as CloudLightningIcon,
-} from "./cloud-lightning"
-export { CloudMoon, CloudMoon as CloudMoonIcon } from "./cloud-moon"
-export {
-  CloudMoonRain,
-  CloudMoonRain as CloudMoonRainIcon,
-} from "./cloud-moon-rain"
-export { CloudOff, CloudOff as CloudOffIcon } from "./cloud-off"
-export { CloudRain, CloudRain as CloudRainIcon } from "./cloud-rain"
-export {
-  CloudRainWind,
-  CloudRainWind as CloudRainWindIcon,
-} from "./cloud-rain-wind"
-export { CloudSnow, CloudSnow as CloudSnowIcon } from "./cloud-snow"
-export { CloudSun, CloudSun as CloudSunIcon } from "./cloud-sun"
-export {
-  CloudSunRain,
-  CloudSunRain as CloudSunRainIcon,
-} from "./cloud-sun-rain"
-export { CloudUpload, CloudUpload as CloudUploadIcon } from "./cloud-upload"
-export { Cloudy, Cloudy as CloudyIcon } from "./cloudy"
-export { Clover, Clover as CloverIcon } from "./clover"
-export { Club, Club as ClubIcon } from "./club"
-export { Code, Code as CodeIcon } from "./code"
-export { CodeXml, CodeXml as CodeXmlIcon } from "./code-xml"
-export { Codepen, Codepen as CodepenIcon } from "./codepen"
-export { Codesandbox, Codesandbox as CodesandboxIcon } from "./codesandbox"
-export { Coffee, Coffee as CoffeeIcon } from "./coffee"
-export { Cog, Cog as CogIcon } from "./cog"
-export { Coins, Coins as CoinsIcon } from "./coins"
-export { Columns2, Columns2 as Columns2Icon } from "./columns2"
-export { Columns3, Columns3 as Columns3Icon } from "./columns3"
-export { Columns4, Columns4 as Columns4Icon } from "./columns4"
-export { Combine, Combine as CombineIcon } from "./combine"
-export { Command, Command as CommandIcon } from "./command"
-export { Compass, Compass as CompassIcon } from "./compass"
-export { Component, Component as ComponentIcon } from "./component"
-export { Computer, Computer as ComputerIcon } from "./computer"
-export {
-  ConciergeBell,
-  ConciergeBell as ConciergeBellIcon,
-} from "./concierge-bell"
-export { Cone, Cone as ConeIcon } from "./cone"
-export { Construction, Construction as ConstructionIcon } from "./construction"
-export { Contact, Contact as ContactIcon } from "./contact"
-export { ContactRound, ContactRound as ContactRoundIcon } from "./contact-round"
-export { Container, Container as ContainerIcon } from "./container"
-export { Contrast, Contrast as ContrastIcon } from "./contrast"
-export { Cookie, Cookie as CookieIcon } from "./cookie"
-export { CookingPot, CookingPot as CookingPotIcon } from "./cooking-pot"
-export { Copy, Copy as CopyIcon } from "./copy"
-export { CopyCheck, CopyCheck as CopyCheckIcon } from "./copy-check"
-export { CopyMinus, CopyMinus as CopyMinusIcon } from "./copy-minus"
-export { CopyPlus, CopyPlus as CopyPlusIcon } from "./copy-plus"
-export { CopySlash, CopySlash as CopySlashIcon } from "./copy-slash"
-export { CopyX, CopyX as CopyXIcon } from "./copy-x"
-export { Copyleft, Copyleft as CopyleftIcon } from "./copyleft"
-export { Copyright, Copyright as CopyrightIcon } from "./copyright"
-export {
-  CornerDownLeft,
-  CornerDownLeft as CornerDownLeftIcon,
-} from "./corner-down-left"
-export {
-  CornerDownRight,
-  CornerDownRight as CornerDownRightIcon,
-} from "./corner-down-right"
-export {
-  CornerLeftDown,
-  CornerLeftDown as CornerLeftDownIcon,
-} from "./corner-left-down"
-export {
-  CornerLeftUp,
-  CornerLeftUp as CornerLeftUpIcon,
-} from "./corner-left-up"
-export {
-  CornerRightDown,
-  CornerRightDown as CornerRightDownIcon,
-} from "./corner-right-down"
-export {
-  CornerRightUp,
-  CornerRightUp as CornerRightUpIcon,
-} from "./corner-right-up"
-export {
-  CornerUpLeft,
-  CornerUpLeft as CornerUpLeftIcon,
-} from "./corner-up-left"
-export {
-  CornerUpRight,
-  CornerUpRight as CornerUpRightIcon,
-} from "./corner-up-right"
-export { Cpu, Cpu as CpuIcon } from "./cpu"
-export {
-  CreativeCommons,
-  CreativeCommons as CreativeCommonsIcon,
-} from "./creative-commons"
-export { CreditCard, CreditCard as CreditCardIcon } from "./credit-card"
-export { Croissant, Croissant as CroissantIcon } from "./croissant"
-export { Crop, Crop as CropIcon } from "./crop"
-export { Cross, Cross as CrossIcon } from "./cross"
-export { Crosshair, Crosshair as CrosshairIcon } from "./crosshair"
-export { Crown, Crown as CrownIcon } from "./crown"
-export { Cuboid, Cuboid as CuboidIcon } from "./cuboid"
-export { CupSoda, CupSoda as CupSodaIcon } from "./cup-soda"
-export { Currency, Currency as CurrencyIcon } from "./currency"
-export { Cylinder, Cylinder as CylinderIcon } from "./cylinder"
-export { Dam, Dam as DamIcon } from "./dam"
-export { Database, Database as DatabaseIcon } from "./database"
-export {
-  DatabaseBackup,
-  DatabaseBackup as DatabaseBackupIcon,
-} from "./database-backup"
-export { DatabaseZap, DatabaseZap as DatabaseZapIcon } from "./database-zap"
-export { Delete, Delete as DeleteIcon } from "./delete"
-export { Dessert, Dessert as DessertIcon } from "./dessert"
-export { Diameter, Diameter as DiameterIcon } from "./diameter"
-export { Diamond, Diamond as DiamondIcon } from "./diamond"
-export { DiamondMinus, DiamondMinus as DiamondMinusIcon } from "./diamond-minus"
-export {
-  DiamondPercent,
-  DiamondPercent as DiamondPercentIcon,
-} from "./diamond-percent"
-export { DiamondPlus, DiamondPlus as DiamondPlusIcon } from "./diamond-plus"
-export { Dice1, Dice1 as Dice1Icon } from "./dice1"
-export { Dice2, Dice2 as Dice2Icon } from "./dice2"
-export { Dice3, Dice3 as Dice3Icon } from "./dice3"
-export { Dice4, Dice4 as Dice4Icon } from "./dice4"
-export { Dice5, Dice5 as Dice5Icon } from "./dice5"
-export { Dice6, Dice6 as Dice6Icon } from "./dice6"
-export { Dices, Dices as DicesIcon } from "./dices"
-export { Diff, Diff as DiffIcon } from "./diff"
-export { Disc, Disc as DiscIcon } from "./disc"
-export { DiscAlbum, DiscAlbum as DiscAlbumIcon } from "./disc-album"
-export { Disc2, Disc2 as Disc2Icon } from "./disc2"
-export { Disc3, Disc3 as Disc3Icon } from "./disc3"
-export { Divide, Divide as DivideIcon } from "./divide"
-export { Dna, Dna as DnaIcon } from "./dna"
-export { DnaOff, DnaOff as DnaOffIcon } from "./dna-off"
-export { Dock, Dock as DockIcon } from "./dock"
-export { Dog, Dog as DogIcon } from "./dog"
-export { DollarSign, DollarSign as DollarSignIcon } from "./dollar-sign"
-export { Donut, Donut as DonutIcon } from "./donut"
-export { DoorClosed, DoorClosed as DoorClosedIcon } from "./door-closed"
-export { DoorOpen, DoorOpen as DoorOpenIcon } from "./door-open"
-export { Dot, Dot as DotIcon } from "./dot"
-export { Download, Download as DownloadIcon } from "./download"
-export {
-  DraftingCompass,
-  DraftingCompass as DraftingCompassIcon,
-} from "./drafting-compass"
-export { Drama, Drama as DramaIcon } from "./drama"
-export { Dribbble, Dribbble as DribbbleIcon } from "./dribbble"
-export { Drill, Drill as DrillIcon } from "./drill"
-export { Droplet, Droplet as DropletIcon } from "./droplet"
-export { Droplets, Droplets as DropletsIcon } from "./droplets"
-export { Drum, Drum as DrumIcon } from "./drum"
-export { Drumstick, Drumstick as DrumstickIcon } from "./drumstick"
-export { Dumbbell, Dumbbell as DumbbellIcon } from "./dumbbell"
-export { Ear, Ear as EarIcon } from "./ear"
-export { EarOff, EarOff as EarOffIcon } from "./ear-off"
-export { Earth, Earth as EarthIcon } from "./earth"
-export { EarthLock, EarthLock as EarthLockIcon } from "./earth-lock"
-export { Eclipse, Eclipse as EclipseIcon } from "./eclipse"
-export { Egg, Egg as EggIcon } from "./egg"
-export { EggFried, EggFried as EggFriedIcon } from "./egg-fried"
-export { EggOff, EggOff as EggOffIcon } from "./egg-off"
-export { Ellipsis, Ellipsis as EllipsisIcon } from "./ellipsis"
-export {
-  EllipsisVertical,
-  EllipsisVertical as EllipsisVerticalIcon,
-} from "./ellipsis-vertical"
-export { Equal, Equal as EqualIcon } from "./equal"
-export { EqualNot, EqualNot as EqualNotIcon } from "./equal-not"
-export { Eraser, Eraser as EraserIcon } from "./eraser"
-export { EthernetPort, EthernetPort as EthernetPortIcon } from "./ethernet-port"
-export { Euro, Euro as EuroIcon } from "./euro"
-export { Expand, Expand as ExpandIcon } from "./expand"
-export { ExternalLink, ExternalLink as ExternalLinkIcon } from "./external-link"
-export { Eye, Eye as EyeIcon } from "./eye"
-export { EyeClosed, EyeClosed as EyeClosedIcon } from "./eye-closed"
-export { EyeOff, EyeOff as EyeOffIcon } from "./eye-off"
-export { Facebook, Facebook as FacebookIcon } from "./facebook"
-export { Factory, Factory as FactoryIcon } from "./factory"
-export { Fan, Fan as FanIcon } from "./fan"
-export { FastForward, FastForward as FastForwardIcon } from "./fast-forward"
-export { Feather, Feather as FeatherIcon } from "./feather"
-export { Fence, Fence as FenceIcon } from "./fence"
-export { FerrisWheel, FerrisWheel as FerrisWheelIcon } from "./ferris-wheel"
-export { Figma, Figma as FigmaIcon } from "./figma"
-export { File, File as FileIcon } from "./file"
-export { FileArchive, FileArchive as FileArchiveIcon } from "./file-archive"
-export { FileAudio, FileAudio as FileAudioIcon } from "./file-audio"
-export { FileAudio2, FileAudio2 as FileAudio2Icon } from "./file-audio2"
-export { FileAxis3d, FileAxis3d as FileAxis3dIcon } from "./file-axis3d"
-export { FileBadge, FileBadge as FileBadgeIcon } from "./file-badge"
-export { FileBadge2, FileBadge2 as FileBadge2Icon } from "./file-badge2"
-export { FileBox, FileBox as FileBoxIcon } from "./file-box"
-export {
-  FileChartColumn,
-  FileChartColumn as FileChartColumnIcon,
-} from "./file-chart-column"
+export { CircleFadingPlus, CircleFadingPlusIcon } from "./circle-fading-plus"
+export { CircleGauge, CircleGaugeIcon } from "./circle-gauge"
+export { CircleHelp, CircleHelpIcon } from "./circle-help"
+export { CircleMinus, CircleMinusIcon } from "./circle-minus"
+export { CircleOff, CircleOffIcon } from "./circle-off"
+export { CircleParking, CircleParkingIcon } from "./circle-parking"
+export { CircleParkingOff, CircleParkingOffIcon } from "./circle-parking-off"
+export { CirclePause, CirclePauseIcon } from "./circle-pause"
+export { CirclePercent, CirclePercentIcon } from "./circle-percent"
+export { CirclePlay, CirclePlayIcon } from "./circle-play"
+export { CirclePlus, CirclePlusIcon } from "./circle-plus"
+export { CirclePower, CirclePowerIcon } from "./circle-power"
+export { CircleSlash, CircleSlashIcon } from "./circle-slash"
+export { CircleSlash2, CircleSlash2Icon } from "./circle-slash2"
+export { CircleStop, CircleStopIcon } from "./circle-stop"
+export { CircleUser, CircleUserIcon } from "./circle-user"
+export { CircleUserRound, CircleUserRoundIcon } from "./circle-user-round"
+export { CircleX, CircleXIcon } from "./circle-x"
+export { CircuitBoard, CircuitBoardIcon } from "./circuit-board"
+export { Citrus, CitrusIcon } from "./citrus"
+export { Clapperboard, ClapperboardIcon } from "./clapperboard"
+export { Clipboard, ClipboardIcon } from "./clipboard"
+export { ClipboardCheck, ClipboardCheckIcon } from "./clipboard-check"
+export { ClipboardCopy, ClipboardCopyIcon } from "./clipboard-copy"
+export { ClipboardList, ClipboardListIcon } from "./clipboard-list"
+export { ClipboardMinus, ClipboardMinusIcon } from "./clipboard-minus"
+export { ClipboardPaste, ClipboardPasteIcon } from "./clipboard-paste"
+export { ClipboardPen, ClipboardPenIcon } from "./clipboard-pen"
+export { ClipboardPenLine, ClipboardPenLineIcon } from "./clipboard-pen-line"
+export { ClipboardPlus, ClipboardPlusIcon } from "./clipboard-plus"
+export { ClipboardType, ClipboardTypeIcon } from "./clipboard-type"
+export { ClipboardX, ClipboardXIcon } from "./clipboard-x"
+export { Clock, ClockIcon } from "./clock"
+export { ClockAlert, ClockAlertIcon } from "./clock-alert"
+export { ClockArrowDown, ClockArrowDownIcon } from "./clock-arrow-down"
+export { ClockArrowUp, ClockArrowUpIcon } from "./clock-arrow-up"
+export { Clock1, Clock1Icon } from "./clock1"
+export { Clock2, Clock2Icon } from "./clock2"
+export { Clock3, Clock3Icon } from "./clock3"
+export { Clock4, Clock4Icon } from "./clock4"
+export { Clock5, Clock5Icon } from "./clock5"
+export { Clock6, Clock6Icon } from "./clock6"
+export { Clock7, Clock7Icon } from "./clock7"
+export { Clock8, Clock8Icon } from "./clock8"
+export { Clock9, Clock9Icon } from "./clock9"
+export { Clock10, Clock10Icon } from "./clock10"
+export { Clock11, Clock11Icon } from "./clock11"
+export { Clock12, Clock12Icon } from "./clock12"
+export { Cloud, CloudIcon } from "./cloud"
+export { CloudCog, CloudCogIcon } from "./cloud-cog"
+export { CloudDownload, CloudDownloadIcon } from "./cloud-download"
+export { CloudDrizzle, CloudDrizzleIcon } from "./cloud-drizzle"
+export { CloudFog, CloudFogIcon } from "./cloud-fog"
+export { CloudHail, CloudHailIcon } from "./cloud-hail"
+export { CloudLightning, CloudLightningIcon } from "./cloud-lightning"
+export { CloudMoon, CloudMoonIcon } from "./cloud-moon"
+export { CloudMoonRain, CloudMoonRainIcon } from "./cloud-moon-rain"
+export { CloudOff, CloudOffIcon } from "./cloud-off"
+export { CloudRain, CloudRainIcon } from "./cloud-rain"
+export { CloudRainWind, CloudRainWindIcon } from "./cloud-rain-wind"
+export { CloudSnow, CloudSnowIcon } from "./cloud-snow"
+export { CloudSun, CloudSunIcon } from "./cloud-sun"
+export { CloudSunRain, CloudSunRainIcon } from "./cloud-sun-rain"
+export { CloudUpload, CloudUploadIcon } from "./cloud-upload"
+export { Cloudy, CloudyIcon } from "./cloudy"
+export { Clover, CloverIcon } from "./clover"
+export { Club, ClubIcon } from "./club"
+export { Code, CodeIcon } from "./code"
+export { CodeXml, CodeXmlIcon } from "./code-xml"
+export { Codepen, CodepenIcon } from "./codepen"
+export { Codesandbox, CodesandboxIcon } from "./codesandbox"
+export { Coffee, CoffeeIcon } from "./coffee"
+export { Cog, CogIcon } from "./cog"
+export { Coins, CoinsIcon } from "./coins"
+export { Columns2, Columns2Icon } from "./columns2"
+export { Columns3, Columns3Icon } from "./columns3"
+export { Columns4, Columns4Icon } from "./columns4"
+export { Combine, CombineIcon } from "./combine"
+export { Command, CommandIcon } from "./command"
+export { Compass, CompassIcon } from "./compass"
+export { Component, ComponentIcon } from "./component"
+export { Computer, ComputerIcon } from "./computer"
+export { ConciergeBell, ConciergeBellIcon } from "./concierge-bell"
+export { Cone, ConeIcon } from "./cone"
+export { Construction, ConstructionIcon } from "./construction"
+export { Contact, ContactIcon } from "./contact"
+export { ContactRound, ContactRoundIcon } from "./contact-round"
+export { Container, ContainerIcon } from "./container"
+export { Contrast, ContrastIcon } from "./contrast"
+export { Cookie, CookieIcon } from "./cookie"
+export { CookingPot, CookingPotIcon } from "./cooking-pot"
+export { Copy, CopyIcon } from "./copy"
+export { CopyCheck, CopyCheckIcon } from "./copy-check"
+export { CopyMinus, CopyMinusIcon } from "./copy-minus"
+export { CopyPlus, CopyPlusIcon } from "./copy-plus"
+export { CopySlash, CopySlashIcon } from "./copy-slash"
+export { CopyX, CopyXIcon } from "./copy-x"
+export { Copyleft, CopyleftIcon } from "./copyleft"
+export { Copyright, CopyrightIcon } from "./copyright"
+export { CornerDownLeft, CornerDownLeftIcon } from "./corner-down-left"
+export { CornerDownRight, CornerDownRightIcon } from "./corner-down-right"
+export { CornerLeftDown, CornerLeftDownIcon } from "./corner-left-down"
+export { CornerLeftUp, CornerLeftUpIcon } from "./corner-left-up"
+export { CornerRightDown, CornerRightDownIcon } from "./corner-right-down"
+export { CornerRightUp, CornerRightUpIcon } from "./corner-right-up"
+export { CornerUpLeft, CornerUpLeftIcon } from "./corner-up-left"
+export { CornerUpRight, CornerUpRightIcon } from "./corner-up-right"
+export { Cpu, CpuIcon } from "./cpu"
+export { CreativeCommons, CreativeCommonsIcon } from "./creative-commons"
+export { CreditCard, CreditCardIcon } from "./credit-card"
+export { Croissant, CroissantIcon } from "./croissant"
+export { Crop, CropIcon } from "./crop"
+export { Cross, CrossIcon } from "./cross"
+export { Crosshair, CrosshairIcon } from "./crosshair"
+export { Crown, CrownIcon } from "./crown"
+export { Cuboid, CuboidIcon } from "./cuboid"
+export { CupSoda, CupSodaIcon } from "./cup-soda"
+export { Currency, CurrencyIcon } from "./currency"
+export { Cylinder, CylinderIcon } from "./cylinder"
+export { Dam, DamIcon } from "./dam"
+export { Database, DatabaseIcon } from "./database"
+export { DatabaseBackup, DatabaseBackupIcon } from "./database-backup"
+export { DatabaseZap, DatabaseZapIcon } from "./database-zap"
+export { Delete, DeleteIcon } from "./delete"
+export { Dessert, DessertIcon } from "./dessert"
+export { Diameter, DiameterIcon } from "./diameter"
+export { Diamond, DiamondIcon } from "./diamond"
+export { DiamondMinus, DiamondMinusIcon } from "./diamond-minus"
+export { DiamondPercent, DiamondPercentIcon } from "./diamond-percent"
+export { DiamondPlus, DiamondPlusIcon } from "./diamond-plus"
+export { Dice1, Dice1Icon } from "./dice1"
+export { Dice2, Dice2Icon } from "./dice2"
+export { Dice3, Dice3Icon } from "./dice3"
+export { Dice4, Dice4Icon } from "./dice4"
+export { Dice5, Dice5Icon } from "./dice5"
+export { Dice6, Dice6Icon } from "./dice6"
+export { Dices, DicesIcon } from "./dices"
+export { Diff, DiffIcon } from "./diff"
+export { Disc, DiscIcon } from "./disc"
+export { DiscAlbum, DiscAlbumIcon } from "./disc-album"
+export { Disc2, Disc2Icon } from "./disc2"
+export { Disc3, Disc3Icon } from "./disc3"
+export { Divide, DivideIcon } from "./divide"
+export { Dna, DnaIcon } from "./dna"
+export { DnaOff, DnaOffIcon } from "./dna-off"
+export { Dock, DockIcon } from "./dock"
+export { Dog, DogIcon } from "./dog"
+export { DollarSign, DollarSignIcon } from "./dollar-sign"
+export { Donut, DonutIcon } from "./donut"
+export { DoorClosed, DoorClosedIcon } from "./door-closed"
+export { DoorOpen, DoorOpenIcon } from "./door-open"
+export { Dot, DotIcon } from "./dot"
+export { Download, DownloadIcon } from "./download"
+export { DraftingCompass, DraftingCompassIcon } from "./drafting-compass"
+export { Drama, DramaIcon } from "./drama"
+export { Dribbble, DribbbleIcon } from "./dribbble"
+export { Drill, DrillIcon } from "./drill"
+export { Droplet, DropletIcon } from "./droplet"
+export { Droplets, DropletsIcon } from "./droplets"
+export { Drum, DrumIcon } from "./drum"
+export { Drumstick, DrumstickIcon } from "./drumstick"
+export { Dumbbell, DumbbellIcon } from "./dumbbell"
+export { Ear, EarIcon } from "./ear"
+export { EarOff, EarOffIcon } from "./ear-off"
+export { Earth, EarthIcon } from "./earth"
+export { EarthLock, EarthLockIcon } from "./earth-lock"
+export { Eclipse, EclipseIcon } from "./eclipse"
+export { Egg, EggIcon } from "./egg"
+export { EggFried, EggFriedIcon } from "./egg-fried"
+export { EggOff, EggOffIcon } from "./egg-off"
+export { Ellipsis, EllipsisIcon } from "./ellipsis"
+export { EllipsisVertical, EllipsisVerticalIcon } from "./ellipsis-vertical"
+export { Equal, EqualIcon } from "./equal"
+export { EqualNot, EqualNotIcon } from "./equal-not"
+export { Eraser, EraserIcon } from "./eraser"
+export { EthernetPort, EthernetPortIcon } from "./ethernet-port"
+export { Euro, EuroIcon } from "./euro"
+export { Expand, ExpandIcon } from "./expand"
+export { ExternalLink, ExternalLinkIcon } from "./external-link"
+export { Eye, EyeIcon } from "./eye"
+export { EyeClosed, EyeClosedIcon } from "./eye-closed"
+export { EyeOff, EyeOffIcon } from "./eye-off"
+export { Facebook, FacebookIcon } from "./facebook"
+export { Factory, FactoryIcon } from "./factory"
+export { Fan, FanIcon } from "./fan"
+export { FastForward, FastForwardIcon } from "./fast-forward"
+export { Feather, FeatherIcon } from "./feather"
+export { Fence, FenceIcon } from "./fence"
+export { FerrisWheel, FerrisWheelIcon } from "./ferris-wheel"
+export { Figma, FigmaIcon } from "./figma"
+export { File, FileIcon } from "./file"
+export { FileArchive, FileArchiveIcon } from "./file-archive"
+export { FileAudio, FileAudioIcon } from "./file-audio"
+export { FileAudio2, FileAudio2Icon } from "./file-audio2"
+export { FileAxis3d, FileAxis3dIcon } from "./file-axis3d"
+export { FileBadge, FileBadgeIcon } from "./file-badge"
+export { FileBadge2, FileBadge2Icon } from "./file-badge2"
+export { FileBox, FileBoxIcon } from "./file-box"
+export { FileChartColumn, FileChartColumnIcon } from "./file-chart-column"
 export {
   FileChartColumnIncreasing,
-  FileChartColumnIncreasing as FileChartColumnIncreasingIcon,
+  FileChartColumnIncreasingIcon,
 } from "./file-chart-column-increasing"
-export {
-  FileChartLine,
-  FileChartLine as FileChartLineIcon,
-} from "./file-chart-line"
-export {
-  FileChartPie,
-  FileChartPie as FileChartPieIcon,
-} from "./file-chart-pie"
-export { FileCheck, FileCheck as FileCheckIcon } from "./file-check"
-export { FileCheck2, FileCheck2 as FileCheck2Icon } from "./file-check2"
-export { FileClock, FileClock as FileClockIcon } from "./file-clock"
-export { FileCode, FileCode as FileCodeIcon } from "./file-code"
-export { FileCode2, FileCode2 as FileCode2Icon } from "./file-code2"
-export { FileCog, FileCog as FileCogIcon } from "./file-cog"
-export { FileDiff, FileDiff as FileDiffIcon } from "./file-diff"
-export { FileDigit, FileDigit as FileDigitIcon } from "./file-digit"
-export { FileDown, FileDown as FileDownIcon } from "./file-down"
-export { FileHeart, FileHeart as FileHeartIcon } from "./file-heart"
-export { FileImage, FileImage as FileImageIcon } from "./file-image"
-export { FileInput, FileInput as FileInputIcon } from "./file-input"
-export { FileJson, FileJson as FileJsonIcon } from "./file-json"
-export { FileJson2, FileJson2 as FileJson2Icon } from "./file-json2"
-export { FileKey, FileKey as FileKeyIcon } from "./file-key"
-export { FileKey2, FileKey2 as FileKey2Icon } from "./file-key2"
-export { FileLock, FileLock as FileLockIcon } from "./file-lock"
-export { FileLock2, FileLock2 as FileLock2Icon } from "./file-lock2"
-export { FileMinus, FileMinus as FileMinusIcon } from "./file-minus"
-export { FileMinus2, FileMinus2 as FileMinus2Icon } from "./file-minus2"
-export { FileMusic, FileMusic as FileMusicIcon } from "./file-music"
-export { FileOutput, FileOutput as FileOutputIcon } from "./file-output"
-export { FilePen, FilePen as FilePenIcon } from "./file-pen"
-export { FilePenLine, FilePenLine as FilePenLineIcon } from "./file-pen-line"
-export { FilePlus, FilePlus as FilePlusIcon } from "./file-plus"
-export { FilePlus2, FilePlus2 as FilePlus2Icon } from "./file-plus2"
-export { FileQuestion, FileQuestion as FileQuestionIcon } from "./file-question"
-export { FileScan, FileScan as FileScanIcon } from "./file-scan"
-export { FileSearch, FileSearch as FileSearchIcon } from "./file-search"
-export { FileSearch2, FileSearch2 as FileSearch2Icon } from "./file-search2"
-export { FileSliders, FileSliders as FileSlidersIcon } from "./file-sliders"
-export {
-  FileSpreadsheet,
-  FileSpreadsheet as FileSpreadsheetIcon,
-} from "./file-spreadsheet"
-export { FileStack, FileStack as FileStackIcon } from "./file-stack"
-export { FileSymlink, FileSymlink as FileSymlinkIcon } from "./file-symlink"
-export { FileTerminal, FileTerminal as FileTerminalIcon } from "./file-terminal"
-export { FileText, FileText as FileTextIcon } from "./file-text"
-export { FileType, FileType as FileTypeIcon } from "./file-type"
-export { FileType2, FileType2 as FileType2Icon } from "./file-type2"
-export { FileUp, FileUp as FileUpIcon } from "./file-up"
-export { FileUser, FileUser as FileUserIcon } from "./file-user"
-export { FileVideo, FileVideo as FileVideoIcon } from "./file-video"
-export { FileVideo2, FileVideo2 as FileVideo2Icon } from "./file-video2"
-export { FileVolume, FileVolume as FileVolumeIcon } from "./file-volume"
-export { FileVolume2, FileVolume2 as FileVolume2Icon } from "./file-volume2"
-export { FileWarning, FileWarning as FileWarningIcon } from "./file-warning"
-export { FileX, FileX as FileXIcon } from "./file-x"
-export { FileX2, FileX2 as FileX2Icon } from "./file-x2"
-export { Files, Files as FilesIcon } from "./files"
-export { Film, Film as FilmIcon } from "./film"
-export { Filter, Filter as FilterIcon } from "./filter"
-export { FilterX, FilterX as FilterXIcon } from "./filter-x"
-export { Fingerprint, Fingerprint as FingerprintIcon } from "./fingerprint"
-export {
-  FireExtinguisher,
-  FireExtinguisher as FireExtinguisherIcon,
-} from "./fire-extinguisher"
-export { Fish, Fish as FishIcon } from "./fish"
-export { FishOff, FishOff as FishOffIcon } from "./fish-off"
-export { FishSymbol, FishSymbol as FishSymbolIcon } from "./fish-symbol"
-export { Flag, Flag as FlagIcon } from "./flag"
-export { FlagOff, FlagOff as FlagOffIcon } from "./flag-off"
-export {
-  FlagTriangleLeft,
-  FlagTriangleLeft as FlagTriangleLeftIcon,
-} from "./flag-triangle-left"
-export {
-  FlagTriangleRight,
-  FlagTriangleRight as FlagTriangleRightIcon,
-} from "./flag-triangle-right"
-export { Flame, Flame as FlameIcon } from "./flame"
-export {
-  FlameKindling,
-  FlameKindling as FlameKindlingIcon,
-} from "./flame-kindling"
-export { Flashlight, Flashlight as FlashlightIcon } from "./flashlight"
-export {
-  FlashlightOff,
-  FlashlightOff as FlashlightOffIcon,
-} from "./flashlight-off"
-export { FlaskConical, FlaskConical as FlaskConicalIcon } from "./flask-conical"
-export {
-  FlaskConicalOff,
-  FlaskConicalOff as FlaskConicalOffIcon,
-} from "./flask-conical-off"
-export { FlaskRound, FlaskRound as FlaskRoundIcon } from "./flask-round"
-export {
-  FlipHorizontal,
-  FlipHorizontal as FlipHorizontalIcon,
-} from "./flip-horizontal"
-export {
-  FlipHorizontal2,
-  FlipHorizontal2 as FlipHorizontal2Icon,
-} from "./flip-horizontal2"
-export { FlipVertical, FlipVertical as FlipVerticalIcon } from "./flip-vertical"
-export {
-  FlipVertical2,
-  FlipVertical2 as FlipVertical2Icon,
-} from "./flip-vertical2"
-export { Flower, Flower as FlowerIcon } from "./flower"
-export { Flower2, Flower2 as Flower2Icon } from "./flower2"
-export { Focus, Focus as FocusIcon } from "./focus"
-export {
-  FoldHorizontal,
-  FoldHorizontal as FoldHorizontalIcon,
-} from "./fold-horizontal"
-export { FoldVertical, FoldVertical as FoldVerticalIcon } from "./fold-vertical"
-export { Folder, Folder as FolderIcon } from "./folder"
-export {
-  FolderArchive,
-  FolderArchive as FolderArchiveIcon,
-} from "./folder-archive"
-export { FolderCheck, FolderCheck as FolderCheckIcon } from "./folder-check"
-export { FolderClock, FolderClock as FolderClockIcon } from "./folder-clock"
-export { FolderClosed, FolderClosed as FolderClosedIcon } from "./folder-closed"
-export { FolderCode, FolderCode as FolderCodeIcon } from "./folder-code"
-export { FolderCog, FolderCog as FolderCogIcon } from "./folder-cog"
-export { FolderDot, FolderDot as FolderDotIcon } from "./folder-dot"
-export { FolderDown, FolderDown as FolderDownIcon } from "./folder-down"
-export { FolderGit, FolderGit as FolderGitIcon } from "./folder-git"
-export { FolderGit2, FolderGit2 as FolderGit2Icon } from "./folder-git2"
-export { FolderHeart, FolderHeart as FolderHeartIcon } from "./folder-heart"
-export { FolderInput, FolderInput as FolderInputIcon } from "./folder-input"
-export { FolderKanban, FolderKanban as FolderKanbanIcon } from "./folder-kanban"
-export { FolderKey, FolderKey as FolderKeyIcon } from "./folder-key"
-export { FolderLock, FolderLock as FolderLockIcon } from "./folder-lock"
-export { FolderMinus, FolderMinus as FolderMinusIcon } from "./folder-minus"
-export { FolderOpen, FolderOpen as FolderOpenIcon } from "./folder-open"
-export {
-  FolderOpenDot,
-  FolderOpenDot as FolderOpenDotIcon,
-} from "./folder-open-dot"
-export { FolderOutput, FolderOutput as FolderOutputIcon } from "./folder-output"
-export { FolderPen, FolderPen as FolderPenIcon } from "./folder-pen"
-export { FolderPlus, FolderPlus as FolderPlusIcon } from "./folder-plus"
-export { FolderRoot, FolderRoot as FolderRootIcon } from "./folder-root"
-export { FolderSearch, FolderSearch as FolderSearchIcon } from "./folder-search"
-export {
-  FolderSearch2,
-  FolderSearch2 as FolderSearch2Icon,
-} from "./folder-search2"
-export {
-  FolderSymlink,
-  FolderSymlink as FolderSymlinkIcon,
-} from "./folder-symlink"
-export { FolderSync, FolderSync as FolderSyncIcon } from "./folder-sync"
-export { FolderTree, FolderTree as FolderTreeIcon } from "./folder-tree"
-export { FolderUp, FolderUp as FolderUpIcon } from "./folder-up"
-export { FolderX, FolderX as FolderXIcon } from "./folder-x"
-export { Folders, Folders as FoldersIcon } from "./folders"
-export { Footprints, Footprints as FootprintsIcon } from "./footprints"
-export { Forklift, Forklift as ForkliftIcon } from "./forklift"
-export { Forward, Forward as ForwardIcon } from "./forward"
-export { Frame, Frame as FrameIcon } from "./frame"
-export { Framer, Framer as FramerIcon } from "./framer"
-export { Frown, Frown as FrownIcon } from "./frown"
-export { Fuel, Fuel as FuelIcon } from "./fuel"
-export { Fullscreen, Fullscreen as FullscreenIcon } from "./fullscreen"
-export {
-  GalleryHorizontal,
-  GalleryHorizontal as GalleryHorizontalIcon,
-} from "./gallery-horizontal"
+export { FileChartLine, FileChartLineIcon } from "./file-chart-line"
+export { FileChartPie, FileChartPieIcon } from "./file-chart-pie"
+export { FileCheck, FileCheckIcon } from "./file-check"
+export { FileCheck2, FileCheck2Icon } from "./file-check2"
+export { FileClock, FileClockIcon } from "./file-clock"
+export { FileCode, FileCodeIcon } from "./file-code"
+export { FileCode2, FileCode2Icon } from "./file-code2"
+export { FileCog, FileCogIcon } from "./file-cog"
+export { FileDiff, FileDiffIcon } from "./file-diff"
+export { FileDigit, FileDigitIcon } from "./file-digit"
+export { FileDown, FileDownIcon } from "./file-down"
+export { FileHeart, FileHeartIcon } from "./file-heart"
+export { FileImage, FileImageIcon } from "./file-image"
+export { FileInput, FileInputIcon } from "./file-input"
+export { FileJson, FileJsonIcon } from "./file-json"
+export { FileJson2, FileJson2Icon } from "./file-json2"
+export { FileKey, FileKeyIcon } from "./file-key"
+export { FileKey2, FileKey2Icon } from "./file-key2"
+export { FileLock, FileLockIcon } from "./file-lock"
+export { FileLock2, FileLock2Icon } from "./file-lock2"
+export { FileMinus, FileMinusIcon } from "./file-minus"
+export { FileMinus2, FileMinus2Icon } from "./file-minus2"
+export { FileMusic, FileMusicIcon } from "./file-music"
+export { FileOutput, FileOutputIcon } from "./file-output"
+export { FilePen, FilePenIcon } from "./file-pen"
+export { FilePenLine, FilePenLineIcon } from "./file-pen-line"
+export { FilePlus, FilePlusIcon } from "./file-plus"
+export { FilePlus2, FilePlus2Icon } from "./file-plus2"
+export { FileQuestion, FileQuestionIcon } from "./file-question"
+export { FileScan, FileScanIcon } from "./file-scan"
+export { FileSearch, FileSearchIcon } from "./file-search"
+export { FileSearch2, FileSearch2Icon } from "./file-search2"
+export { FileSliders, FileSlidersIcon } from "./file-sliders"
+export { FileSpreadsheet, FileSpreadsheetIcon } from "./file-spreadsheet"
+export { FileStack, FileStackIcon } from "./file-stack"
+export { FileSymlink, FileSymlinkIcon } from "./file-symlink"
+export { FileTerminal, FileTerminalIcon } from "./file-terminal"
+export { FileText, FileTextIcon } from "./file-text"
+export { FileType, FileTypeIcon } from "./file-type"
+export { FileType2, FileType2Icon } from "./file-type2"
+export { FileUp, FileUpIcon } from "./file-up"
+export { FileUser, FileUserIcon } from "./file-user"
+export { FileVideo, FileVideoIcon } from "./file-video"
+export { FileVideo2, FileVideo2Icon } from "./file-video2"
+export { FileVolume, FileVolumeIcon } from "./file-volume"
+export { FileVolume2, FileVolume2Icon } from "./file-volume2"
+export { FileWarning, FileWarningIcon } from "./file-warning"
+export { FileX, FileXIcon } from "./file-x"
+export { FileX2, FileX2Icon } from "./file-x2"
+export { Files, FilesIcon } from "./files"
+export { Film, FilmIcon } from "./film"
+export { Filter, FilterIcon } from "./filter"
+export { FilterX, FilterXIcon } from "./filter-x"
+export { Fingerprint, FingerprintIcon } from "./fingerprint"
+export { FireExtinguisher, FireExtinguisherIcon } from "./fire-extinguisher"
+export { Fish, FishIcon } from "./fish"
+export { FishOff, FishOffIcon } from "./fish-off"
+export { FishSymbol, FishSymbolIcon } from "./fish-symbol"
+export { Flag, FlagIcon } from "./flag"
+export { FlagOff, FlagOffIcon } from "./flag-off"
+export { FlagTriangleLeft, FlagTriangleLeftIcon } from "./flag-triangle-left"
+export { FlagTriangleRight, FlagTriangleRightIcon } from "./flag-triangle-right"
+export { Flame, FlameIcon } from "./flame"
+export { FlameKindling, FlameKindlingIcon } from "./flame-kindling"
+export { Flashlight, FlashlightIcon } from "./flashlight"
+export { FlashlightOff, FlashlightOffIcon } from "./flashlight-off"
+export { FlaskConical, FlaskConicalIcon } from "./flask-conical"
+export { FlaskConicalOff, FlaskConicalOffIcon } from "./flask-conical-off"
+export { FlaskRound, FlaskRoundIcon } from "./flask-round"
+export { FlipHorizontal, FlipHorizontalIcon } from "./flip-horizontal"
+export { FlipHorizontal2, FlipHorizontal2Icon } from "./flip-horizontal2"
+export { FlipVertical, FlipVerticalIcon } from "./flip-vertical"
+export { FlipVertical2, FlipVertical2Icon } from "./flip-vertical2"
+export { Flower, FlowerIcon } from "./flower"
+export { Flower2, Flower2Icon } from "./flower2"
+export { Focus, FocusIcon } from "./focus"
+export { FoldHorizontal, FoldHorizontalIcon } from "./fold-horizontal"
+export { FoldVertical, FoldVerticalIcon } from "./fold-vertical"
+export { Folder, FolderIcon } from "./folder"
+export { FolderArchive, FolderArchiveIcon } from "./folder-archive"
+export { FolderCheck, FolderCheckIcon } from "./folder-check"
+export { FolderClock, FolderClockIcon } from "./folder-clock"
+export { FolderClosed, FolderClosedIcon } from "./folder-closed"
+export { FolderCode, FolderCodeIcon } from "./folder-code"
+export { FolderCog, FolderCogIcon } from "./folder-cog"
+export { FolderDot, FolderDotIcon } from "./folder-dot"
+export { FolderDown, FolderDownIcon } from "./folder-down"
+export { FolderGit, FolderGitIcon } from "./folder-git"
+export { FolderGit2, FolderGit2Icon } from "./folder-git2"
+export { FolderHeart, FolderHeartIcon } from "./folder-heart"
+export { FolderInput, FolderInputIcon } from "./folder-input"
+export { FolderKanban, FolderKanbanIcon } from "./folder-kanban"
+export { FolderKey, FolderKeyIcon } from "./folder-key"
+export { FolderLock, FolderLockIcon } from "./folder-lock"
+export { FolderMinus, FolderMinusIcon } from "./folder-minus"
+export { FolderOpen, FolderOpenIcon } from "./folder-open"
+export { FolderOpenDot, FolderOpenDotIcon } from "./folder-open-dot"
+export { FolderOutput, FolderOutputIcon } from "./folder-output"
+export { FolderPen, FolderPenIcon } from "./folder-pen"
+export { FolderPlus, FolderPlusIcon } from "./folder-plus"
+export { FolderRoot, FolderRootIcon } from "./folder-root"
+export { FolderSearch, FolderSearchIcon } from "./folder-search"
+export { FolderSearch2, FolderSearch2Icon } from "./folder-search2"
+export { FolderSymlink, FolderSymlinkIcon } from "./folder-symlink"
+export { FolderSync, FolderSyncIcon } from "./folder-sync"
+export { FolderTree, FolderTreeIcon } from "./folder-tree"
+export { FolderUp, FolderUpIcon } from "./folder-up"
+export { FolderX, FolderXIcon } from "./folder-x"
+export { Folders, FoldersIcon } from "./folders"
+export { Footprints, FootprintsIcon } from "./footprints"
+export { Forklift, ForkliftIcon } from "./forklift"
+export { Forward, ForwardIcon } from "./forward"
+export { Frame, FrameIcon } from "./frame"
+export { Framer, FramerIcon } from "./framer"
+export { Frown, FrownIcon } from "./frown"
+export { Fuel, FuelIcon } from "./fuel"
+export { Fullscreen, FullscreenIcon } from "./fullscreen"
+export { GalleryHorizontal, GalleryHorizontalIcon } from "./gallery-horizontal"
 export {
   GalleryHorizontalEnd,
-  GalleryHorizontalEnd as GalleryHorizontalEndIcon,
+  GalleryHorizontalEndIcon,
 } from "./gallery-horizontal-end"
-export {
-  GalleryThumbnails,
-  GalleryThumbnails as GalleryThumbnailsIcon,
-} from "./gallery-thumbnails"
-export {
-  GalleryVertical,
-  GalleryVertical as GalleryVerticalIcon,
-} from "./gallery-vertical"
+export { GalleryThumbnails, GalleryThumbnailsIcon } from "./gallery-thumbnails"
+export { GalleryVertical, GalleryVerticalIcon } from "./gallery-vertical"
 export {
   GalleryVerticalEnd,
-  GalleryVerticalEnd as GalleryVerticalEndIcon,
+  GalleryVerticalEndIcon,
 } from "./gallery-vertical-end"
-export { Gamepad, Gamepad as GamepadIcon } from "./gamepad"
-export { Gamepad2, Gamepad2 as Gamepad2Icon } from "./gamepad2"
-export { Gauge, Gauge as GaugeIcon } from "./gauge"
-export { Gavel, Gavel as GavelIcon } from "./gavel"
-export { Gem, Gem as GemIcon } from "./gem"
-export { Ghost, Ghost as GhostIcon } from "./ghost"
-export { Gift, Gift as GiftIcon } from "./gift"
-export { GitBranch, GitBranch as GitBranchIcon } from "./git-branch"
-export {
-  GitBranchPlus,
-  GitBranchPlus as GitBranchPlusIcon,
-} from "./git-branch-plus"
+export { Gamepad, GamepadIcon } from "./gamepad"
+export { Gamepad2, Gamepad2Icon } from "./gamepad2"
+export { Gauge, GaugeIcon } from "./gauge"
+export { Gavel, GavelIcon } from "./gavel"
+export { Gem, GemIcon } from "./gem"
+export { Ghost, GhostIcon } from "./ghost"
+export { Gift, GiftIcon } from "./gift"
+export { GitBranch, GitBranchIcon } from "./git-branch"
+export { GitBranchPlus, GitBranchPlusIcon } from "./git-branch-plus"
 export {
   GitCommitHorizontal,
-  GitCommitHorizontal as GitCommitHorizontalIcon,
+  GitCommitHorizontalIcon,
 } from "./git-commit-horizontal"
-export {
-  GitCommitVertical,
-  GitCommitVertical as GitCommitVerticalIcon,
-} from "./git-commit-vertical"
-export { GitCompare, GitCompare as GitCompareIcon } from "./git-compare"
-export {
-  GitCompareArrows,
-  GitCompareArrows as GitCompareArrowsIcon,
-} from "./git-compare-arrows"
-export { GitFork, GitFork as GitForkIcon } from "./git-fork"
-export { GitGraph, GitGraph as GitGraphIcon } from "./git-graph"
-export { GitMerge, GitMerge as GitMergeIcon } from "./git-merge"
-export {
-  GitPullRequest,
-  GitPullRequest as GitPullRequestIcon,
-} from "./git-pull-request"
+export { GitCommitVertical, GitCommitVerticalIcon } from "./git-commit-vertical"
+export { GitCompare, GitCompareIcon } from "./git-compare"
+export { GitCompareArrows, GitCompareArrowsIcon } from "./git-compare-arrows"
+export { GitFork, GitForkIcon } from "./git-fork"
+export { GitGraph, GitGraphIcon } from "./git-graph"
+export { GitMerge, GitMergeIcon } from "./git-merge"
+export { GitPullRequest, GitPullRequestIcon } from "./git-pull-request"
 export {
   GitPullRequestArrow,
-  GitPullRequestArrow as GitPullRequestArrowIcon,
+  GitPullRequestArrowIcon,
 } from "./git-pull-request-arrow"
 export {
   GitPullRequestClosed,
-  GitPullRequestClosed as GitPullRequestClosedIcon,
+  GitPullRequestClosedIcon,
 } from "./git-pull-request-closed"
 export {
   GitPullRequestCreate,
-  GitPullRequestCreate as GitPullRequestCreateIcon,
+  GitPullRequestCreateIcon,
 } from "./git-pull-request-create"
 export {
   GitPullRequestCreateArrow,
-  GitPullRequestCreateArrow as GitPullRequestCreateArrowIcon,
+  GitPullRequestCreateArrowIcon,
 } from "./git-pull-request-create-arrow"
 export {
   GitPullRequestDraft,
-  GitPullRequestDraft as GitPullRequestDraftIcon,
+  GitPullRequestDraftIcon,
 } from "./git-pull-request-draft"
-export { Github, Github as GithubIcon } from "./github"
-export { Gitlab, Gitlab as GitlabIcon } from "./gitlab"
-export { GlassWater, GlassWater as GlassWaterIcon } from "./glass-water"
-export { Glasses, Glasses as GlassesIcon } from "./glasses"
-export { Globe, Globe as GlobeIcon } from "./globe"
-export { GlobeLock, GlobeLock as GlobeLockIcon } from "./globe-lock"
-export { Goal, Goal as GoalIcon } from "./goal"
-export { Grab, Grab as GrabIcon } from "./grab"
-export {
-  GraduationCap,
-  GraduationCap as GraduationCapIcon,
-} from "./graduation-cap"
-export { Grape, Grape as GrapeIcon } from "./grape"
-export { Grid2x2, Grid2x2 as Grid2x2Icon } from "./grid2x2"
-export { Grid2x2Check, Grid2x2Check as Grid2x2CheckIcon } from "./grid2x2-check"
-export { Grid2x2Plus, Grid2x2Plus as Grid2x2PlusIcon } from "./grid2x2-plus"
-export { Grid2x2X, Grid2x2X as Grid2x2XIcon } from "./grid2x2-x"
-export { Grid3x3, Grid3x3 as Grid3x3Icon } from "./grid3x3"
-export { Grip, Grip as GripIcon } from "./grip"
-export {
-  GripHorizontal,
-  GripHorizontal as GripHorizontalIcon,
-} from "./grip-horizontal"
-export { GripVertical, GripVertical as GripVerticalIcon } from "./grip-vertical"
-export { Group, Group as GroupIcon } from "./group"
-export { Guitar, Guitar as GuitarIcon } from "./guitar"
-export { Ham, Ham as HamIcon } from "./ham"
-export { Hammer, Hammer as HammerIcon } from "./hammer"
-export { Hand, Hand as HandIcon } from "./hand"
-export { HandCoins, HandCoins as HandCoinsIcon } from "./hand-coins"
-export { HandHeart, HandHeart as HandHeartIcon } from "./hand-heart"
-export { HandHelping, HandHelping as HandHelpingIcon } from "./hand-helping"
-export { HandMetal, HandMetal as HandMetalIcon } from "./hand-metal"
-export { HandPlatter, HandPlatter as HandPlatterIcon } from "./hand-platter"
-export { Handshake, Handshake as HandshakeIcon } from "./handshake"
-export { HardDrive, HardDrive as HardDriveIcon } from "./hard-drive"
-export {
-  HardDriveDownload,
-  HardDriveDownload as HardDriveDownloadIcon,
-} from "./hard-drive-download"
-export {
-  HardDriveUpload,
-  HardDriveUpload as HardDriveUploadIcon,
-} from "./hard-drive-upload"
-export { HardHat, HardHat as HardHatIcon } from "./hard-hat"
-export { Hash, Hash as HashIcon } from "./hash"
-export { Haze, Haze as HazeIcon } from "./haze"
-export { HdmiPort, HdmiPort as HdmiPortIcon } from "./hdmi-port"
-export { Heading, Heading as HeadingIcon } from "./heading"
-export { Heading1, Heading1 as Heading1Icon } from "./heading1"
-export { Heading2, Heading2 as Heading2Icon } from "./heading2"
-export { Heading3, Heading3 as Heading3Icon } from "./heading3"
-export { Heading4, Heading4 as Heading4Icon } from "./heading4"
-export { Heading5, Heading5 as Heading5Icon } from "./heading5"
-export { Heading6, Heading6 as Heading6Icon } from "./heading6"
-export { HeadphoneOff, HeadphoneOff as HeadphoneOffIcon } from "./headphone-off"
-export { Headphones, Headphones as HeadphonesIcon } from "./headphones"
-export { Headset, Headset as HeadsetIcon } from "./headset"
-export { Heart, Heart as HeartIcon } from "./heart"
-export { HeartCrack, HeartCrack as HeartCrackIcon } from "./heart-crack"
-export {
-  HeartHandshake,
-  HeartHandshake as HeartHandshakeIcon,
-} from "./heart-handshake"
-export { HeartOff, HeartOff as HeartOffIcon } from "./heart-off"
-export { HeartPulse, HeartPulse as HeartPulseIcon } from "./heart-pulse"
-export { Heater, Heater as HeaterIcon } from "./heater"
-export { Hexagon, Hexagon as HexagonIcon } from "./hexagon"
-export { Highlighter, Highlighter as HighlighterIcon } from "./highlighter"
-export { History, History as HistoryIcon } from "./history"
-export { Hop, Hop as HopIcon } from "./hop"
-export { HopOff, HopOff as HopOffIcon } from "./hop-off"
-export { Hospital, Hospital as HospitalIcon } from "./hospital"
-export { Hotel, Hotel as HotelIcon } from "./hotel"
-export { Hourglass, Hourglass as HourglassIcon } from "./hourglass"
-export { House, House as HouseIcon } from "./house"
-export { HousePlug, HousePlug as HousePlugIcon } from "./house-plug"
-export { HousePlus, HousePlus as HousePlusIcon } from "./house-plus"
-export {
-  IceCreamBowl,
-  IceCreamBowl as IceCreamBowlIcon,
-} from "./ice-cream-bowl"
-export {
-  IceCreamCone,
-  IceCreamCone as IceCreamConeIcon,
-} from "./ice-cream-cone"
-export { IdCard, IdCard as IdCardIcon } from "./id-card"
-export { Image, Image as ImageIcon } from "./image"
-export { ImageDown, ImageDown as ImageDownIcon } from "./image-down"
-export { ImageMinus, ImageMinus as ImageMinusIcon } from "./image-minus"
-export { ImageOff, ImageOff as ImageOffIcon } from "./image-off"
-export { ImagePlay, ImagePlay as ImagePlayIcon } from "./image-play"
-export { ImagePlus, ImagePlus as ImagePlusIcon } from "./image-plus"
-export { ImageUp, ImageUp as ImageUpIcon } from "./image-up"
-export { Images, Images as ImagesIcon } from "./images"
-export { Import, Import as ImportIcon } from "./import"
-export { Inbox, Inbox as InboxIcon } from "./inbox"
-export {
-  IndentDecrease,
-  IndentDecrease as IndentDecreaseIcon,
-} from "./indent-decrease"
-export {
-  IndentIncrease,
-  IndentIncrease as IndentIncreaseIcon,
-} from "./indent-increase"
+export { Github, GithubIcon } from "./github"
+export { Gitlab, GitlabIcon } from "./gitlab"
+export { GlassWater, GlassWaterIcon } from "./glass-water"
+export { Glasses, GlassesIcon } from "./glasses"
+export { Globe, GlobeIcon } from "./globe"
+export { GlobeLock, GlobeLockIcon } from "./globe-lock"
+export { Goal, GoalIcon } from "./goal"
+export { Grab, GrabIcon } from "./grab"
+export { GraduationCap, GraduationCapIcon } from "./graduation-cap"
+export { Grape, GrapeIcon } from "./grape"
+export { Grid2x2, Grid2x2Icon } from "./grid2x2"
+export { Grid2x2Check, Grid2x2CheckIcon } from "./grid2x2-check"
+export { Grid2x2Plus, Grid2x2PlusIcon } from "./grid2x2-plus"
+export { Grid2x2X, Grid2x2XIcon } from "./grid2x2-x"
+export { Grid3x3, Grid3x3Icon } from "./grid3x3"
+export { Grip, GripIcon } from "./grip"
+export { GripHorizontal, GripHorizontalIcon } from "./grip-horizontal"
+export { GripVertical, GripVerticalIcon } from "./grip-vertical"
+export { Group, GroupIcon } from "./group"
+export { Guitar, GuitarIcon } from "./guitar"
+export { Ham, HamIcon } from "./ham"
+export { Hammer, HammerIcon } from "./hammer"
+export { Hand, HandIcon } from "./hand"
+export { HandCoins, HandCoinsIcon } from "./hand-coins"
+export { HandHeart, HandHeartIcon } from "./hand-heart"
+export { HandHelping, HandHelpingIcon } from "./hand-helping"
+export { HandMetal, HandMetalIcon } from "./hand-metal"
+export { HandPlatter, HandPlatterIcon } from "./hand-platter"
+export { Handshake, HandshakeIcon } from "./handshake"
+export { HardDrive, HardDriveIcon } from "./hard-drive"
+export { HardDriveDownload, HardDriveDownloadIcon } from "./hard-drive-download"
+export { HardDriveUpload, HardDriveUploadIcon } from "./hard-drive-upload"
+export { HardHat, HardHatIcon } from "./hard-hat"
+export { Hash, HashIcon } from "./hash"
+export { Haze, HazeIcon } from "./haze"
+export { HdmiPort, HdmiPortIcon } from "./hdmi-port"
+export { Heading, HeadingIcon } from "./heading"
+export { Heading1, Heading1Icon } from "./heading1"
+export { Heading2, Heading2Icon } from "./heading2"
+export { Heading3, Heading3Icon } from "./heading3"
+export { Heading4, Heading4Icon } from "./heading4"
+export { Heading5, Heading5Icon } from "./heading5"
+export { Heading6, Heading6Icon } from "./heading6"
+export { HeadphoneOff, HeadphoneOffIcon } from "./headphone-off"
+export { Headphones, HeadphonesIcon } from "./headphones"
+export { Headset, HeadsetIcon } from "./headset"
+export { Heart, HeartIcon } from "./heart"
+export { HeartCrack, HeartCrackIcon } from "./heart-crack"
+export { HeartHandshake, HeartHandshakeIcon } from "./heart-handshake"
+export { HeartOff, HeartOffIcon } from "./heart-off"
+export { HeartPulse, HeartPulseIcon } from "./heart-pulse"
+export { Heater, HeaterIcon } from "./heater"
+export { Hexagon, HexagonIcon } from "./hexagon"
+export { Highlighter, HighlighterIcon } from "./highlighter"
+export { History, HistoryIcon } from "./history"
+export { Hop, HopIcon } from "./hop"
+export { HopOff, HopOffIcon } from "./hop-off"
+export { Hospital, HospitalIcon } from "./hospital"
+export { Hotel, HotelIcon } from "./hotel"
+export { Hourglass, HourglassIcon } from "./hourglass"
+export { House, HouseIcon } from "./house"
+export { HousePlug, HousePlugIcon } from "./house-plug"
+export { HousePlus, HousePlusIcon } from "./house-plus"
+export { IceCreamBowl, IceCreamBowlIcon } from "./ice-cream-bowl"
+export { IceCreamCone, IceCreamConeIcon } from "./ice-cream-cone"
+export { IdCard, IdCardIcon } from "./id-card"
+export { Image, ImageIcon } from "./image"
+export { ImageDown, ImageDownIcon } from "./image-down"
+export { ImageMinus, ImageMinusIcon } from "./image-minus"
+export { ImageOff, ImageOffIcon } from "./image-off"
+export { ImagePlay, ImagePlayIcon } from "./image-play"
+export { ImagePlus, ImagePlusIcon } from "./image-plus"
+export { ImageUp, ImageUpIcon } from "./image-up"
+export { Images, ImagesIcon } from "./images"
+export { Import, ImportIcon } from "./import"
+export { Inbox, InboxIcon } from "./inbox"
+export { IndentDecrease, IndentDecreaseIcon } from "./indent-decrease"
+export { IndentIncrease, IndentIncreaseIcon } from "./indent-increase"
 export type * from "./index.types"
-export { IndianRupee, IndianRupee as IndianRupeeIcon } from "./indian-rupee"
-export { Infinity, Infinity as InfinityIcon } from "./infinity"
-export { Info, Info as InfoIcon } from "./info"
-export {
-  InspectionPanel,
-  InspectionPanel as InspectionPanelIcon,
-} from "./inspection-panel"
-export { Instagram, Instagram as InstagramIcon } from "./instagram"
-export { Italic, Italic as ItalicIcon } from "./italic"
-export { IterationCcw, IterationCcw as IterationCcwIcon } from "./iteration-ccw"
-export { IterationCw, IterationCw as IterationCwIcon } from "./iteration-cw"
-export { JapaneseYen, JapaneseYen as JapaneseYenIcon } from "./japanese-yen"
-export { Joystick, Joystick as JoystickIcon } from "./joystick"
-export { Kanban, Kanban as KanbanIcon } from "./kanban"
-export { Key, Key as KeyIcon } from "./key"
-export { KeyRound, KeyRound as KeyRoundIcon } from "./key-round"
-export { KeySquare, KeySquare as KeySquareIcon } from "./key-square"
-export { Keyboard, Keyboard as KeyboardIcon } from "./keyboard"
-export {
-  KeyboardMusic,
-  KeyboardMusic as KeyboardMusicIcon,
-} from "./keyboard-music"
-export { KeyboardOff, KeyboardOff as KeyboardOffIcon } from "./keyboard-off"
-export { Lamp, Lamp as LampIcon } from "./lamp"
-export { LampCeiling, LampCeiling as LampCeilingIcon } from "./lamp-ceiling"
-export { LampDesk, LampDesk as LampDeskIcon } from "./lamp-desk"
-export { LampFloor, LampFloor as LampFloorIcon } from "./lamp-floor"
-export {
-  LampWallDown,
-  LampWallDown as LampWallDownIcon,
-} from "./lamp-wall-down"
-export { LampWallUp, LampWallUp as LampWallUpIcon } from "./lamp-wall-up"
-export { LandPlot, LandPlot as LandPlotIcon } from "./land-plot"
-export { Landmark, Landmark as LandmarkIcon } from "./landmark"
-export { Languages, Languages as LanguagesIcon } from "./languages"
-export { Laptop, Laptop as LaptopIcon } from "./laptop"
-export {
-  LaptopMinimal,
-  LaptopMinimal as LaptopMinimalIcon,
-} from "./laptop-minimal"
-export { Lasso, Lasso as LassoIcon } from "./lasso"
-export { LassoSelect, LassoSelect as LassoSelectIcon } from "./lasso-select"
-export { Laugh, Laugh as LaughIcon } from "./laugh"
-export { Layers, Layers as LayersIcon } from "./layers"
-export { Layers2, Layers2 as Layers2Icon } from "./layers2"
-export { Layers3, Layers3 as Layers3Icon } from "./layers3"
-export {
-  LayoutDashboard,
-  LayoutDashboard as LayoutDashboardIcon,
-} from "./layout-dashboard"
-export { LayoutGrid, LayoutGrid as LayoutGridIcon } from "./layout-grid"
-export { LayoutList, LayoutList as LayoutListIcon } from "./layout-list"
-export {
-  LayoutPanelLeft,
-  LayoutPanelLeft as LayoutPanelLeftIcon,
-} from "./layout-panel-left"
-export {
-  LayoutPanelTop,
-  LayoutPanelTop as LayoutPanelTopIcon,
-} from "./layout-panel-top"
-export {
-  LayoutTemplate,
-  LayoutTemplate as LayoutTemplateIcon,
-} from "./layout-template"
-export { Leaf, Leaf as LeafIcon } from "./leaf"
-export { LeafyGreen, LeafyGreen as LeafyGreenIcon } from "./leafy-green"
-export { Lectern, Lectern as LecternIcon } from "./lectern"
-export { LetterText, LetterText as LetterTextIcon } from "./letter-text"
-export { Library, Library as LibraryIcon } from "./library"
-export { LibraryBig, LibraryBig as LibraryBigIcon } from "./library-big"
-export { LifeBuoy, LifeBuoy as LifeBuoyIcon } from "./life-buoy"
-export { Ligature, Ligature as LigatureIcon } from "./ligature"
-export { Lightbulb, Lightbulb as LightbulbIcon } from "./lightbulb"
-export { LightbulbOff, LightbulbOff as LightbulbOffIcon } from "./lightbulb-off"
-export { Link, Link as LinkIcon } from "./link"
-export { Link2, Link2 as Link2Icon } from "./link2"
-export { Link2Off, Link2Off as Link2OffIcon } from "./link2-off"
-export { Linkedin, Linkedin as LinkedinIcon } from "./linkedin"
-export { List, List as ListIcon } from "./list"
-export { ListCheck, ListCheck as ListCheckIcon } from "./list-check"
-export { ListChecks, ListChecks as ListChecksIcon } from "./list-checks"
-export { ListCollapse, ListCollapse as ListCollapseIcon } from "./list-collapse"
-export { ListEnd, ListEnd as ListEndIcon } from "./list-end"
-export { ListFilter, ListFilter as ListFilterIcon } from "./list-filter"
-export { ListMinus, ListMinus as ListMinusIcon } from "./list-minus"
-export { ListMusic, ListMusic as ListMusicIcon } from "./list-music"
-export { ListOrdered, ListOrdered as ListOrderedIcon } from "./list-ordered"
-export { ListPlus, ListPlus as ListPlusIcon } from "./list-plus"
-export { ListRestart, ListRestart as ListRestartIcon } from "./list-restart"
-export { ListStart, ListStart as ListStartIcon } from "./list-start"
-export { ListTodo, ListTodo as ListTodoIcon } from "./list-todo"
-export { ListTree, ListTree as ListTreeIcon } from "./list-tree"
-export { ListVideo, ListVideo as ListVideoIcon } from "./list-video"
-export { ListX, ListX as ListXIcon } from "./list-x"
-export { Loader, Loader as LoaderIcon } from "./loader"
-export { LoaderCircle, LoaderCircle as LoaderCircleIcon } from "./loader-circle"
-export {
-  LoaderPinwheel,
-  LoaderPinwheel as LoaderPinwheelIcon,
-} from "./loader-pinwheel"
-export { Locate, Locate as LocateIcon } from "./locate"
-export { LocateFixed, LocateFixed as LocateFixedIcon } from "./locate-fixed"
-export { LocateOff, LocateOff as LocateOffIcon } from "./locate-off"
-export { Lock, Lock as LockIcon } from "./lock"
-export { LockKeyhole, LockKeyhole as LockKeyholeIcon } from "./lock-keyhole"
-export {
-  LockKeyholeOpen,
-  LockKeyholeOpen as LockKeyholeOpenIcon,
-} from "./lock-keyhole-open"
-export { LockOpen, LockOpen as LockOpenIcon } from "./lock-open"
-export { LogIn, LogIn as LogInIcon } from "./log-in"
-export { LogOut, LogOut as LogOutIcon } from "./log-out"
-export { Logs, Logs as LogsIcon } from "./logs"
-export { Lollipop, Lollipop as LollipopIcon } from "./lollipop"
-export { Luggage, Luggage as LuggageIcon } from "./luggage"
-export { Magnet, Magnet as MagnetIcon } from "./magnet"
-export { Mail, Mail as MailIcon } from "./mail"
-export { MailCheck, MailCheck as MailCheckIcon } from "./mail-check"
-export { MailMinus, MailMinus as MailMinusIcon } from "./mail-minus"
-export { MailOpen, MailOpen as MailOpenIcon } from "./mail-open"
-export { MailPlus, MailPlus as MailPlusIcon } from "./mail-plus"
-export { MailQuestion, MailQuestion as MailQuestionIcon } from "./mail-question"
-export { MailSearch, MailSearch as MailSearchIcon } from "./mail-search"
-export { MailWarning, MailWarning as MailWarningIcon } from "./mail-warning"
-export { MailX, MailX as MailXIcon } from "./mail-x"
-export { Mailbox, Mailbox as MailboxIcon } from "./mailbox"
-export { Mails, Mails as MailsIcon } from "./mails"
-export { Map, Map as MapIcon } from "./map"
-export { MapPin, MapPin as MapPinIcon } from "./map-pin"
-export { MapPinCheck, MapPinCheck as MapPinCheckIcon } from "./map-pin-check"
+export { IndianRupee, IndianRupeeIcon } from "./indian-rupee"
+export { Infinity, InfinityIcon } from "./infinity"
+export { Info, InfoIcon } from "./info"
+export { InspectionPanel, InspectionPanelIcon } from "./inspection-panel"
+export { Instagram, InstagramIcon } from "./instagram"
+export { Italic, ItalicIcon } from "./italic"
+export { IterationCcw, IterationCcwIcon } from "./iteration-ccw"
+export { IterationCw, IterationCwIcon } from "./iteration-cw"
+export { JapaneseYen, JapaneseYenIcon } from "./japanese-yen"
+export { Joystick, JoystickIcon } from "./joystick"
+export { Kanban, KanbanIcon } from "./kanban"
+export { Key, KeyIcon } from "./key"
+export { KeyRound, KeyRoundIcon } from "./key-round"
+export { KeySquare, KeySquareIcon } from "./key-square"
+export { Keyboard, KeyboardIcon } from "./keyboard"
+export { KeyboardMusic, KeyboardMusicIcon } from "./keyboard-music"
+export { KeyboardOff, KeyboardOffIcon } from "./keyboard-off"
+export { Lamp, LampIcon } from "./lamp"
+export { LampCeiling, LampCeilingIcon } from "./lamp-ceiling"
+export { LampDesk, LampDeskIcon } from "./lamp-desk"
+export { LampFloor, LampFloorIcon } from "./lamp-floor"
+export { LampWallDown, LampWallDownIcon } from "./lamp-wall-down"
+export { LampWallUp, LampWallUpIcon } from "./lamp-wall-up"
+export { LandPlot, LandPlotIcon } from "./land-plot"
+export { Landmark, LandmarkIcon } from "./landmark"
+export { Languages, LanguagesIcon } from "./languages"
+export { Laptop, LaptopIcon } from "./laptop"
+export { LaptopMinimal, LaptopMinimalIcon } from "./laptop-minimal"
+export { Lasso, LassoIcon } from "./lasso"
+export { LassoSelect, LassoSelectIcon } from "./lasso-select"
+export { Laugh, LaughIcon } from "./laugh"
+export { Layers, LayersIcon } from "./layers"
+export { Layers2, Layers2Icon } from "./layers2"
+export { Layers3, Layers3Icon } from "./layers3"
+export { LayoutDashboard, LayoutDashboardIcon } from "./layout-dashboard"
+export { LayoutGrid, LayoutGridIcon } from "./layout-grid"
+export { LayoutList, LayoutListIcon } from "./layout-list"
+export { LayoutPanelLeft, LayoutPanelLeftIcon } from "./layout-panel-left"
+export { LayoutPanelTop, LayoutPanelTopIcon } from "./layout-panel-top"
+export { LayoutTemplate, LayoutTemplateIcon } from "./layout-template"
+export { Leaf, LeafIcon } from "./leaf"
+export { LeafyGreen, LeafyGreenIcon } from "./leafy-green"
+export { Lectern, LecternIcon } from "./lectern"
+export { LetterText, LetterTextIcon } from "./letter-text"
+export { Library, LibraryIcon } from "./library"
+export { LibraryBig, LibraryBigIcon } from "./library-big"
+export { LifeBuoy, LifeBuoyIcon } from "./life-buoy"
+export { Ligature, LigatureIcon } from "./ligature"
+export { Lightbulb, LightbulbIcon } from "./lightbulb"
+export { LightbulbOff, LightbulbOffIcon } from "./lightbulb-off"
+export { Link, LinkIcon } from "./link"
+export { Link2, Link2Icon } from "./link2"
+export { Link2Off, Link2OffIcon } from "./link2-off"
+export { Linkedin, LinkedinIcon } from "./linkedin"
+export { List, ListIcon } from "./list"
+export { ListCheck, ListCheckIcon } from "./list-check"
+export { ListChecks, ListChecksIcon } from "./list-checks"
+export { ListCollapse, ListCollapseIcon } from "./list-collapse"
+export { ListEnd, ListEndIcon } from "./list-end"
+export { ListFilter, ListFilterIcon } from "./list-filter"
+export { ListMinus, ListMinusIcon } from "./list-minus"
+export { ListMusic, ListMusicIcon } from "./list-music"
+export { ListOrdered, ListOrderedIcon } from "./list-ordered"
+export { ListPlus, ListPlusIcon } from "./list-plus"
+export { ListRestart, ListRestartIcon } from "./list-restart"
+export { ListStart, ListStartIcon } from "./list-start"
+export { ListTodo, ListTodoIcon } from "./list-todo"
+export { ListTree, ListTreeIcon } from "./list-tree"
+export { ListVideo, ListVideoIcon } from "./list-video"
+export { ListX, ListXIcon } from "./list-x"
+export { Loader, LoaderIcon } from "./loader"
+export { LoaderCircle, LoaderCircleIcon } from "./loader-circle"
+export { LoaderPinwheel, LoaderPinwheelIcon } from "./loader-pinwheel"
+export { Locate, LocateIcon } from "./locate"
+export { LocateFixed, LocateFixedIcon } from "./locate-fixed"
+export { LocateOff, LocateOffIcon } from "./locate-off"
+export { Lock, LockIcon } from "./lock"
+export { LockKeyhole, LockKeyholeIcon } from "./lock-keyhole"
+export { LockKeyholeOpen, LockKeyholeOpenIcon } from "./lock-keyhole-open"
+export { LockOpen, LockOpenIcon } from "./lock-open"
+export { LogIn, LogInIcon } from "./log-in"
+export { LogOut, LogOutIcon } from "./log-out"
+export { Logs, LogsIcon } from "./logs"
+export { Lollipop, LollipopIcon } from "./lollipop"
+export { Luggage, LuggageIcon } from "./luggage"
+export { Magnet, MagnetIcon } from "./magnet"
+export { Mail, MailIcon } from "./mail"
+export { MailCheck, MailCheckIcon } from "./mail-check"
+export { MailMinus, MailMinusIcon } from "./mail-minus"
+export { MailOpen, MailOpenIcon } from "./mail-open"
+export { MailPlus, MailPlusIcon } from "./mail-plus"
+export { MailQuestion, MailQuestionIcon } from "./mail-question"
+export { MailSearch, MailSearchIcon } from "./mail-search"
+export { MailWarning, MailWarningIcon } from "./mail-warning"
+export { MailX, MailXIcon } from "./mail-x"
+export { Mailbox, MailboxIcon } from "./mailbox"
+export { Mails, MailsIcon } from "./mails"
+export { Map, MapIcon } from "./map"
+export { MapPin, MapPinIcon } from "./map-pin"
+export { MapPinCheck, MapPinCheckIcon } from "./map-pin-check"
 export {
   MapPinCheckInside,
-  MapPinCheckInside as MapPinCheckInsideIcon,
+  MapPinCheckInsideIcon,
 } from "./map-pin-check-inside"
-export { MapPinHouse, MapPinHouse as MapPinHouseIcon } from "./map-pin-house"
-export { MapPinMinus, MapPinMinus as MapPinMinusIcon } from "./map-pin-minus"
+export { MapPinHouse, MapPinHouseIcon } from "./map-pin-house"
+export { MapPinMinus, MapPinMinusIcon } from "./map-pin-minus"
 export {
   MapPinMinusInside,
-  MapPinMinusInside as MapPinMinusInsideIcon,
+  MapPinMinusInsideIcon,
 } from "./map-pin-minus-inside"
-export { MapPinOff, MapPinOff as MapPinOffIcon } from "./map-pin-off"
-export { MapPinPlus, MapPinPlus as MapPinPlusIcon } from "./map-pin-plus"
-export {
-  MapPinPlusInside,
-  MapPinPlusInside as MapPinPlusInsideIcon,
-} from "./map-pin-plus-inside"
-export { MapPinX, MapPinX as MapPinXIcon } from "./map-pin-x"
-export {
-  MapPinXInside,
-  MapPinXInside as MapPinXInsideIcon,
-} from "./map-pin-x-inside"
-export { MapPinned, MapPinned as MapPinnedIcon } from "./map-pinned"
-export { Martini, Martini as MartiniIcon } from "./martini"
-export { Maximize, Maximize as MaximizeIcon } from "./maximize"
-export { Maximize2, Maximize2 as Maximize2Icon } from "./maximize2"
-export { Medal, Medal as MedalIcon } from "./medal"
-export { Megaphone, Megaphone as MegaphoneIcon } from "./megaphone"
-export { MegaphoneOff, MegaphoneOff as MegaphoneOffIcon } from "./megaphone-off"
-export { Meh, Meh as MehIcon } from "./meh"
-export { MemoryStick, MemoryStick as MemoryStickIcon } from "./memory-stick"
-export { Menu, Menu as MenuIcon } from "./menu"
-export { Merge, Merge as MergeIcon } from "./merge"
-export {
-  MessageCircle,
-  MessageCircle as MessageCircleIcon,
-} from "./message-circle"
-export {
-  MessageCircleCode,
-  MessageCircleCode as MessageCircleCodeIcon,
-} from "./message-circle-code"
+export { MapPinOff, MapPinOffIcon } from "./map-pin-off"
+export { MapPinPlus, MapPinPlusIcon } from "./map-pin-plus"
+export { MapPinPlusInside, MapPinPlusInsideIcon } from "./map-pin-plus-inside"
+export { MapPinX, MapPinXIcon } from "./map-pin-x"
+export { MapPinXInside, MapPinXInsideIcon } from "./map-pin-x-inside"
+export { MapPinned, MapPinnedIcon } from "./map-pinned"
+export { Martini, MartiniIcon } from "./martini"
+export { Maximize, MaximizeIcon } from "./maximize"
+export { Maximize2, Maximize2Icon } from "./maximize2"
+export { Medal, MedalIcon } from "./medal"
+export { Megaphone, MegaphoneIcon } from "./megaphone"
+export { MegaphoneOff, MegaphoneOffIcon } from "./megaphone-off"
+export { Meh, MehIcon } from "./meh"
+export { MemoryStick, MemoryStickIcon } from "./memory-stick"
+export { Menu, MenuIcon } from "./menu"
+export { Merge, MergeIcon } from "./merge"
+export { MessageCircle, MessageCircleIcon } from "./message-circle"
+export { MessageCircleCode, MessageCircleCodeIcon } from "./message-circle-code"
 export {
   MessageCircleDashed,
-  MessageCircleDashed as MessageCircleDashedIcon,
+  MessageCircleDashedIcon,
 } from "./message-circle-dashed"
 export {
   MessageCircleHeart,
-  MessageCircleHeart as MessageCircleHeartIcon,
+  MessageCircleHeartIcon,
 } from "./message-circle-heart"
-export {
-  MessageCircleMore,
-  MessageCircleMore as MessageCircleMoreIcon,
-} from "./message-circle-more"
-export {
-  MessageCircleOff,
-  MessageCircleOff as MessageCircleOffIcon,
-} from "./message-circle-off"
-export {
-  MessageCirclePlus,
-  MessageCirclePlus as MessageCirclePlusIcon,
-} from "./message-circle-plus"
+export { MessageCircleMore, MessageCircleMoreIcon } from "./message-circle-more"
+export { MessageCircleOff, MessageCircleOffIcon } from "./message-circle-off"
+export { MessageCirclePlus, MessageCirclePlusIcon } from "./message-circle-plus"
 export {
   MessageCircleQuestion,
-  MessageCircleQuestion as MessageCircleQuestionIcon,
+  MessageCircleQuestionIcon,
 } from "./message-circle-question"
 export {
   MessageCircleReply,
-  MessageCircleReply as MessageCircleReplyIcon,
+  MessageCircleReplyIcon,
 } from "./message-circle-reply"
 export {
   MessageCircleWarning,
-  MessageCircleWarning as MessageCircleWarningIcon,
+  MessageCircleWarningIcon,
 } from "./message-circle-warning"
-export {
-  MessageCircleX,
-  MessageCircleX as MessageCircleXIcon,
-} from "./message-circle-x"
-export {
-  MessageSquare,
-  MessageSquare as MessageSquareIcon,
-} from "./message-square"
-export {
-  MessageSquareCode,
-  MessageSquareCode as MessageSquareCodeIcon,
-} from "./message-square-code"
+export { MessageCircleX, MessageCircleXIcon } from "./message-circle-x"
+export { MessageSquare, MessageSquareIcon } from "./message-square"
+export { MessageSquareCode, MessageSquareCodeIcon } from "./message-square-code"
 export {
   MessageSquareDashed,
-  MessageSquareDashed as MessageSquareDashedIcon,
+  MessageSquareDashedIcon,
 } from "./message-square-dashed"
-export {
-  MessageSquareDiff,
-  MessageSquareDiff as MessageSquareDiffIcon,
-} from "./message-square-diff"
-export {
-  MessageSquareDot,
-  MessageSquareDot as MessageSquareDotIcon,
-} from "./message-square-dot"
+export { MessageSquareDiff, MessageSquareDiffIcon } from "./message-square-diff"
+export { MessageSquareDot, MessageSquareDotIcon } from "./message-square-dot"
 export {
   MessageSquareHeart,
-  MessageSquareHeart as MessageSquareHeartIcon,
+  MessageSquareHeartIcon,
 } from "./message-square-heart"
-export {
-  MessageSquareLock,
-  MessageSquareLock as MessageSquareLockIcon,
-} from "./message-square-lock"
-export {
-  MessageSquareMore,
-  MessageSquareMore as MessageSquareMoreIcon,
-} from "./message-square-more"
-export {
-  MessageSquareOff,
-  MessageSquareOff as MessageSquareOffIcon,
-} from "./message-square-off"
-export {
-  MessageSquarePlus,
-  MessageSquarePlus as MessageSquarePlusIcon,
-} from "./message-square-plus"
+export { MessageSquareLock, MessageSquareLockIcon } from "./message-square-lock"
+export { MessageSquareMore, MessageSquareMoreIcon } from "./message-square-more"
+export { MessageSquareOff, MessageSquareOffIcon } from "./message-square-off"
+export { MessageSquarePlus, MessageSquarePlusIcon } from "./message-square-plus"
 export {
   MessageSquareQuote,
-  MessageSquareQuote as MessageSquareQuoteIcon,
+  MessageSquareQuoteIcon,
 } from "./message-square-quote"
 export {
   MessageSquareReply,
-  MessageSquareReply as MessageSquareReplyIcon,
+  MessageSquareReplyIcon,
 } from "./message-square-reply"
 export {
   MessageSquareShare,
-  MessageSquareShare as MessageSquareShareIcon,
+  MessageSquareShareIcon,
 } from "./message-square-share"
-export {
-  MessageSquareText,
-  MessageSquareText as MessageSquareTextIcon,
-} from "./message-square-text"
+export { MessageSquareText, MessageSquareTextIcon } from "./message-square-text"
 export {
   MessageSquareWarning,
-  MessageSquareWarning as MessageSquareWarningIcon,
+  MessageSquareWarningIcon,
 } from "./message-square-warning"
-export {
-  MessageSquareX,
-  MessageSquareX as MessageSquareXIcon,
-} from "./message-square-x"
-export {
-  MessagesSquare,
-  MessagesSquare as MessagesSquareIcon,
-} from "./messages-square"
-export { Mic, Mic as MicIcon } from "./mic"
-export { MicOff, MicOff as MicOffIcon } from "./mic-off"
-export { MicVocal, MicVocal as MicVocalIcon } from "./mic-vocal"
-export { Microchip, Microchip as MicrochipIcon } from "./microchip"
-export { Microscope, Microscope as MicroscopeIcon } from "./microscope"
-export { Microwave, Microwave as MicrowaveIcon } from "./microwave"
-export { Milestone, Milestone as MilestoneIcon } from "./milestone"
-export { Milk, Milk as MilkIcon } from "./milk"
-export { MilkOff, MilkOff as MilkOffIcon } from "./milk-off"
-export { Minimize, Minimize as MinimizeIcon } from "./minimize"
-export { Minimize2, Minimize2 as Minimize2Icon } from "./minimize2"
-export { Minus, Minus as MinusIcon } from "./minus"
-export { Monitor, Monitor as MonitorIcon } from "./monitor"
-export { MonitorCheck, MonitorCheck as MonitorCheckIcon } from "./monitor-check"
-export { MonitorCog, MonitorCog as MonitorCogIcon } from "./monitor-cog"
-export { MonitorDot, MonitorDot as MonitorDotIcon } from "./monitor-dot"
-export { MonitorDown, MonitorDown as MonitorDownIcon } from "./monitor-down"
-export { MonitorOff, MonitorOff as MonitorOffIcon } from "./monitor-off"
-export { MonitorPause, MonitorPause as MonitorPauseIcon } from "./monitor-pause"
-export { MonitorPlay, MonitorPlay as MonitorPlayIcon } from "./monitor-play"
-export {
-  MonitorSmartphone,
-  MonitorSmartphone as MonitorSmartphoneIcon,
-} from "./monitor-smartphone"
-export {
-  MonitorSpeaker,
-  MonitorSpeaker as MonitorSpeakerIcon,
-} from "./monitor-speaker"
-export { MonitorStop, MonitorStop as MonitorStopIcon } from "./monitor-stop"
-export { MonitorUp, MonitorUp as MonitorUpIcon } from "./monitor-up"
-export { MonitorX, MonitorX as MonitorXIcon } from "./monitor-x"
-export { Moon, Moon as MoonIcon } from "./moon"
-export { MoonStar, MoonStar as MoonStarIcon } from "./moon-star"
-export { Mountain, Mountain as MountainIcon } from "./mountain"
-export { MountainSnow, MountainSnow as MountainSnowIcon } from "./mountain-snow"
-export { Mouse, Mouse as MouseIcon } from "./mouse"
-export { MouseOff, MouseOff as MouseOffIcon } from "./mouse-off"
-export { MousePointer, MousePointer as MousePointerIcon } from "./mouse-pointer"
-export {
-  MousePointerBan,
-  MousePointerBan as MousePointerBanIcon,
-} from "./mouse-pointer-ban"
-export {
-  MousePointerClick,
-  MousePointerClick as MousePointerClickIcon,
-} from "./mouse-pointer-click"
-export {
-  MousePointer2,
-  MousePointer2 as MousePointer2Icon,
-} from "./mouse-pointer2"
-export { Move, Move as MoveIcon } from "./move"
-export { MoveDiagonal, MoveDiagonal as MoveDiagonalIcon } from "./move-diagonal"
-export {
-  MoveDiagonal2,
-  MoveDiagonal2 as MoveDiagonal2Icon,
-} from "./move-diagonal2"
-export { MoveDown, MoveDown as MoveDownIcon } from "./move-down"
-export {
-  MoveDownLeft,
-  MoveDownLeft as MoveDownLeftIcon,
-} from "./move-down-left"
-export {
-  MoveDownRight,
-  MoveDownRight as MoveDownRightIcon,
-} from "./move-down-right"
-export {
-  MoveHorizontal,
-  MoveHorizontal as MoveHorizontalIcon,
-} from "./move-horizontal"
-export { MoveLeft, MoveLeft as MoveLeftIcon } from "./move-left"
-export { MoveRight, MoveRight as MoveRightIcon } from "./move-right"
-export { MoveUp, MoveUp as MoveUpIcon } from "./move-up"
-export { MoveUpLeft, MoveUpLeft as MoveUpLeftIcon } from "./move-up-left"
-export { MoveUpRight, MoveUpRight as MoveUpRightIcon } from "./move-up-right"
-export { MoveVertical, MoveVertical as MoveVerticalIcon } from "./move-vertical"
-export { Move3d, Move3d as Move3dIcon } from "./move3d"
-export { Music, Music as MusicIcon } from "./music"
-export { Music2, Music2 as Music2Icon } from "./music2"
-export { Music3, Music3 as Music3Icon } from "./music3"
-export { Music4, Music4 as Music4Icon } from "./music4"
-export { Navigation, Navigation as NavigationIcon } from "./navigation"
-export {
-  NavigationOff,
-  NavigationOff as NavigationOffIcon,
-} from "./navigation-off"
-export { Navigation2, Navigation2 as Navigation2Icon } from "./navigation2"
-export {
-  Navigation2Off,
-  Navigation2Off as Navigation2OffIcon,
-} from "./navigation2-off"
-export { Network, Network as NetworkIcon } from "./network"
-export { Newspaper, Newspaper as NewspaperIcon } from "./newspaper"
-export { Nfc, Nfc as NfcIcon } from "./nfc"
-export { Notebook, Notebook as NotebookIcon } from "./notebook"
-export { NotebookPen, NotebookPen as NotebookPenIcon } from "./notebook-pen"
-export { NotebookTabs, NotebookTabs as NotebookTabsIcon } from "./notebook-tabs"
-export { NotebookText, NotebookText as NotebookTextIcon } from "./notebook-text"
-export { NotepadText, NotepadText as NotepadTextIcon } from "./notepad-text"
-export {
-  NotepadTextDashed,
-  NotepadTextDashed as NotepadTextDashedIcon,
-} from "./notepad-text-dashed"
-export { Nut, Nut as NutIcon } from "./nut"
-export { NutOff, NutOff as NutOffIcon } from "./nut-off"
-export { Octagon, Octagon as OctagonIcon } from "./octagon"
-export { OctagonAlert, OctagonAlert as OctagonAlertIcon } from "./octagon-alert"
-export { OctagonMinus, OctagonMinus as OctagonMinusIcon } from "./octagon-minus"
-export { OctagonPause, OctagonPause as OctagonPauseIcon } from "./octagon-pause"
-export { OctagonX, OctagonX as OctagonXIcon } from "./octagon-x"
-export { Omega, Omega as OmegaIcon } from "./omega"
-export { Option, Option as OptionIcon } from "./option"
-export { Orbit, Orbit as OrbitIcon } from "./orbit"
-export { Origami, Origami as OrigamiIcon } from "./origami"
-export { Package, Package as PackageIcon } from "./package"
-export { PackageCheck, PackageCheck as PackageCheckIcon } from "./package-check"
-export { PackageMinus, PackageMinus as PackageMinusIcon } from "./package-minus"
-export { PackageOpen, PackageOpen as PackageOpenIcon } from "./package-open"
-export { PackagePlus, PackagePlus as PackagePlusIcon } from "./package-plus"
-export {
-  PackageSearch,
-  PackageSearch as PackageSearchIcon,
-} from "./package-search"
-export { PackageX, PackageX as PackageXIcon } from "./package-x"
-export { Package2, Package2 as Package2Icon } from "./package2"
-export { PaintBucket, PaintBucket as PaintBucketIcon } from "./paint-bucket"
-export { PaintRoller, PaintRoller as PaintRollerIcon } from "./paint-roller"
-export { Paintbrush, Paintbrush as PaintbrushIcon } from "./paintbrush"
+export { MessageSquareX, MessageSquareXIcon } from "./message-square-x"
+export { MessagesSquare, MessagesSquareIcon } from "./messages-square"
+export { Mic, MicIcon } from "./mic"
+export { MicOff, MicOffIcon } from "./mic-off"
+export { MicVocal, MicVocalIcon } from "./mic-vocal"
+export { Microchip, MicrochipIcon } from "./microchip"
+export { Microscope, MicroscopeIcon } from "./microscope"
+export { Microwave, MicrowaveIcon } from "./microwave"
+export { Milestone, MilestoneIcon } from "./milestone"
+export { Milk, MilkIcon } from "./milk"
+export { MilkOff, MilkOffIcon } from "./milk-off"
+export { Minimize, MinimizeIcon } from "./minimize"
+export { Minimize2, Minimize2Icon } from "./minimize2"
+export { Minus, MinusIcon } from "./minus"
+export { Monitor, MonitorIcon } from "./monitor"
+export { MonitorCheck, MonitorCheckIcon } from "./monitor-check"
+export { MonitorCog, MonitorCogIcon } from "./monitor-cog"
+export { MonitorDot, MonitorDotIcon } from "./monitor-dot"
+export { MonitorDown, MonitorDownIcon } from "./monitor-down"
+export { MonitorOff, MonitorOffIcon } from "./monitor-off"
+export { MonitorPause, MonitorPauseIcon } from "./monitor-pause"
+export { MonitorPlay, MonitorPlayIcon } from "./monitor-play"
+export { MonitorSmartphone, MonitorSmartphoneIcon } from "./monitor-smartphone"
+export { MonitorSpeaker, MonitorSpeakerIcon } from "./monitor-speaker"
+export { MonitorStop, MonitorStopIcon } from "./monitor-stop"
+export { MonitorUp, MonitorUpIcon } from "./monitor-up"
+export { MonitorX, MonitorXIcon } from "./monitor-x"
+export { Moon, MoonIcon } from "./moon"
+export { MoonStar, MoonStarIcon } from "./moon-star"
+export { Mountain, MountainIcon } from "./mountain"
+export { MountainSnow, MountainSnowIcon } from "./mountain-snow"
+export { Mouse, MouseIcon } from "./mouse"
+export { MouseOff, MouseOffIcon } from "./mouse-off"
+export { MousePointer, MousePointerIcon } from "./mouse-pointer"
+export { MousePointerBan, MousePointerBanIcon } from "./mouse-pointer-ban"
+export { MousePointerClick, MousePointerClickIcon } from "./mouse-pointer-click"
+export { MousePointer2, MousePointer2Icon } from "./mouse-pointer2"
+export { Move, MoveIcon } from "./move"
+export { MoveDiagonal, MoveDiagonalIcon } from "./move-diagonal"
+export { MoveDiagonal2, MoveDiagonal2Icon } from "./move-diagonal2"
+export { MoveDown, MoveDownIcon } from "./move-down"
+export { MoveDownLeft, MoveDownLeftIcon } from "./move-down-left"
+export { MoveDownRight, MoveDownRightIcon } from "./move-down-right"
+export { MoveHorizontal, MoveHorizontalIcon } from "./move-horizontal"
+export { MoveLeft, MoveLeftIcon } from "./move-left"
+export { MoveRight, MoveRightIcon } from "./move-right"
+export { MoveUp, MoveUpIcon } from "./move-up"
+export { MoveUpLeft, MoveUpLeftIcon } from "./move-up-left"
+export { MoveUpRight, MoveUpRightIcon } from "./move-up-right"
+export { MoveVertical, MoveVerticalIcon } from "./move-vertical"
+export { Move3d, Move3dIcon } from "./move3d"
+export { Music, MusicIcon } from "./music"
+export { Music2, Music2Icon } from "./music2"
+export { Music3, Music3Icon } from "./music3"
+export { Music4, Music4Icon } from "./music4"
+export { Navigation, NavigationIcon } from "./navigation"
+export { NavigationOff, NavigationOffIcon } from "./navigation-off"
+export { Navigation2, Navigation2Icon } from "./navigation2"
+export { Navigation2Off, Navigation2OffIcon } from "./navigation2-off"
+export { Network, NetworkIcon } from "./network"
+export { Newspaper, NewspaperIcon } from "./newspaper"
+export { Nfc, NfcIcon } from "./nfc"
+export { Notebook, NotebookIcon } from "./notebook"
+export { NotebookPen, NotebookPenIcon } from "./notebook-pen"
+export { NotebookTabs, NotebookTabsIcon } from "./notebook-tabs"
+export { NotebookText, NotebookTextIcon } from "./notebook-text"
+export { NotepadText, NotepadTextIcon } from "./notepad-text"
+export { NotepadTextDashed, NotepadTextDashedIcon } from "./notepad-text-dashed"
+export { Nut, NutIcon } from "./nut"
+export { NutOff, NutOffIcon } from "./nut-off"
+export { Octagon, OctagonIcon } from "./octagon"
+export { OctagonAlert, OctagonAlertIcon } from "./octagon-alert"
+export { OctagonMinus, OctagonMinusIcon } from "./octagon-minus"
+export { OctagonPause, OctagonPauseIcon } from "./octagon-pause"
+export { OctagonX, OctagonXIcon } from "./octagon-x"
+export { Omega, OmegaIcon } from "./omega"
+export { Option, OptionIcon } from "./option"
+export { Orbit, OrbitIcon } from "./orbit"
+export { Origami, OrigamiIcon } from "./origami"
+export { Package, PackageIcon } from "./package"
+export { PackageCheck, PackageCheckIcon } from "./package-check"
+export { PackageMinus, PackageMinusIcon } from "./package-minus"
+export { PackageOpen, PackageOpenIcon } from "./package-open"
+export { PackagePlus, PackagePlusIcon } from "./package-plus"
+export { PackageSearch, PackageSearchIcon } from "./package-search"
+export { PackageX, PackageXIcon } from "./package-x"
+export { Package2, Package2Icon } from "./package2"
+export { PaintBucket, PaintBucketIcon } from "./paint-bucket"
+export { PaintRoller, PaintRollerIcon } from "./paint-roller"
+export { Paintbrush, PaintbrushIcon } from "./paintbrush"
 export {
   PaintbrushVertical,
-  PaintbrushVertical as PaintbrushVerticalIcon,
+  PaintbrushVerticalIcon,
 } from "./paintbrush-vertical"
-export { Palette, Palette as PaletteIcon } from "./palette"
-export { PanelBottom, PanelBottom as PanelBottomIcon } from "./panel-bottom"
-export {
-  PanelBottomClose,
-  PanelBottomClose as PanelBottomCloseIcon,
-} from "./panel-bottom-close"
-export {
-  PanelBottomDashed,
-  PanelBottomDashed as PanelBottomDashedIcon,
-} from "./panel-bottom-dashed"
-export {
-  PanelBottomOpen,
-  PanelBottomOpen as PanelBottomOpenIcon,
-} from "./panel-bottom-open"
-export { PanelLeft, PanelLeft as PanelLeftIcon } from "./panel-left"
-export {
-  PanelLeftClose,
-  PanelLeftClose as PanelLeftCloseIcon,
-} from "./panel-left-close"
-export {
-  PanelLeftDashed,
-  PanelLeftDashed as PanelLeftDashedIcon,
-} from "./panel-left-dashed"
-export {
-  PanelLeftOpen,
-  PanelLeftOpen as PanelLeftOpenIcon,
-} from "./panel-left-open"
-export { PanelRight, PanelRight as PanelRightIcon } from "./panel-right"
-export {
-  PanelRightClose,
-  PanelRightClose as PanelRightCloseIcon,
-} from "./panel-right-close"
-export {
-  PanelRightDashed,
-  PanelRightDashed as PanelRightDashedIcon,
-} from "./panel-right-dashed"
-export {
-  PanelRightOpen,
-  PanelRightOpen as PanelRightOpenIcon,
-} from "./panel-right-open"
-export { PanelTop, PanelTop as PanelTopIcon } from "./panel-top"
-export {
-  PanelTopClose,
-  PanelTopClose as PanelTopCloseIcon,
-} from "./panel-top-close"
-export {
-  PanelTopDashed,
-  PanelTopDashed as PanelTopDashedIcon,
-} from "./panel-top-dashed"
-export {
-  PanelTopOpen,
-  PanelTopOpen as PanelTopOpenIcon,
-} from "./panel-top-open"
-export {
-  PanelsLeftBottom,
-  PanelsLeftBottom as PanelsLeftBottomIcon,
-} from "./panels-left-bottom"
-export {
-  PanelsRightBottom,
-  PanelsRightBottom as PanelsRightBottomIcon,
-} from "./panels-right-bottom"
-export {
-  PanelsTopLeft,
-  PanelsTopLeft as PanelsTopLeftIcon,
-} from "./panels-top-left"
-export { Paperclip, Paperclip as PaperclipIcon } from "./paperclip"
-export { Parentheses, Parentheses as ParenthesesIcon } from "./parentheses"
-export { ParkingMeter, ParkingMeter as ParkingMeterIcon } from "./parking-meter"
-export { PartyPopper, PartyPopper as PartyPopperIcon } from "./party-popper"
-export { Pause, Pause as PauseIcon } from "./pause"
-export { PawPrint, PawPrint as PawPrintIcon } from "./paw-print"
-export { PcCase, PcCase as PcCaseIcon } from "./pc-case"
-export { Pen, Pen as PenIcon } from "./pen"
-export { PenLine, PenLine as PenLineIcon } from "./pen-line"
-export { PenOff, PenOff as PenOffIcon } from "./pen-off"
-export { PenTool, PenTool as PenToolIcon } from "./pen-tool"
-export { Pencil, Pencil as PencilIcon } from "./pencil"
-export { PencilLine, PencilLine as PencilLineIcon } from "./pencil-line"
-export { PencilOff, PencilOff as PencilOffIcon } from "./pencil-off"
-export { PencilRuler, PencilRuler as PencilRulerIcon } from "./pencil-ruler"
-export { Pentagon, Pentagon as PentagonIcon } from "./pentagon"
-export { Percent, Percent as PercentIcon } from "./percent"
-export {
-  PersonStanding,
-  PersonStanding as PersonStandingIcon,
-} from "./person-standing"
-export {
-  PhilippinePeso,
-  PhilippinePeso as PhilippinePesoIcon,
-} from "./philippine-peso"
-export { Phone, Phone as PhoneIcon } from "./phone"
-export { PhoneCall, PhoneCall as PhoneCallIcon } from "./phone-call"
-export {
-  PhoneForwarded,
-  PhoneForwarded as PhoneForwardedIcon,
-} from "./phone-forwarded"
-export {
-  PhoneIncoming,
-  PhoneIncoming as PhoneIncomingIcon,
-} from "./phone-incoming"
-export { PhoneMissed, PhoneMissed as PhoneMissedIcon } from "./phone-missed"
-export { PhoneOff, PhoneOff as PhoneOffIcon } from "./phone-off"
-export {
-  PhoneOutgoing,
-  PhoneOutgoing as PhoneOutgoingIcon,
-} from "./phone-outgoing"
-export { Pi, Pi as PiIcon } from "./pi"
-export { Piano, Piano as PianoIcon } from "./piano"
-export { Pickaxe, Pickaxe as PickaxeIcon } from "./pickaxe"
-export {
-  PictureInPicture,
-  PictureInPicture as PictureInPictureIcon,
-} from "./picture-in-picture"
-export {
-  PictureInPicture2,
-  PictureInPicture2 as PictureInPicture2Icon,
-} from "./picture-in-picture2"
-export { PiggyBank, PiggyBank as PiggyBankIcon } from "./piggy-bank"
-export { Pilcrow, Pilcrow as PilcrowIcon } from "./pilcrow"
-export { PilcrowLeft, PilcrowLeft as PilcrowLeftIcon } from "./pilcrow-left"
-export { PilcrowRight, PilcrowRight as PilcrowRightIcon } from "./pilcrow-right"
-export { Pill, Pill as PillIcon } from "./pill"
-export { PillBottle, PillBottle as PillBottleIcon } from "./pill-bottle"
-export { Pin, Pin as PinIcon } from "./pin"
-export { PinOff, PinOff as PinOffIcon } from "./pin-off"
-export { Pipette, Pipette as PipetteIcon } from "./pipette"
-export { Pizza, Pizza as PizzaIcon } from "./pizza"
-export { Plane, Plane as PlaneIcon } from "./plane"
-export { PlaneLanding, PlaneLanding as PlaneLandingIcon } from "./plane-landing"
-export { PlaneTakeoff, PlaneTakeoff as PlaneTakeoffIcon } from "./plane-takeoff"
-export { Play, Play as PlayIcon } from "./play"
-export { Plug, Plug as PlugIcon } from "./plug"
-export { PlugZap, PlugZap as PlugZapIcon } from "./plug-zap"
-export { Plug2, Plug2 as Plug2Icon } from "./plug2"
-export { Plus, Plus as PlusIcon } from "./plus"
-export { Pocket, Pocket as PocketIcon } from "./pocket"
-export { PocketKnife, PocketKnife as PocketKnifeIcon } from "./pocket-knife"
-export { Podcast, Podcast as PodcastIcon } from "./podcast"
-export { Pointer, Pointer as PointerIcon } from "./pointer"
-export { PointerOff, PointerOff as PointerOffIcon } from "./pointer-off"
-export { Popcorn, Popcorn as PopcornIcon } from "./popcorn"
-export { Popsicle, Popsicle as PopsicleIcon } from "./popsicle"
-export {
-  PoundSterling,
-  PoundSterling as PoundSterlingIcon,
-} from "./pound-sterling"
-export { Power, Power as PowerIcon } from "./power"
-export { PowerOff, PowerOff as PowerOffIcon } from "./power-off"
-export { Presentation, Presentation as PresentationIcon } from "./presentation"
-export { Printer, Printer as PrinterIcon } from "./printer"
-export { PrinterCheck, PrinterCheck as PrinterCheckIcon } from "./printer-check"
-export { Projector, Projector as ProjectorIcon } from "./projector"
-export { Proportions, Proportions as ProportionsIcon } from "./proportions"
-export { Puzzle, Puzzle as PuzzleIcon } from "./puzzle"
-export { Pyramid, Pyramid as PyramidIcon } from "./pyramid"
-export { QrCode, QrCode as QrCodeIcon } from "./qr-code"
-export { Quote, Quote as QuoteIcon } from "./quote"
-export { Rabbit, Rabbit as RabbitIcon } from "./rabbit"
-export { Radar, Radar as RadarIcon } from "./radar"
-export { Radiation, Radiation as RadiationIcon } from "./radiation"
-export { Radical, Radical as RadicalIcon } from "./radical"
-export { Radio, Radio as RadioIcon } from "./radio"
-export {
-  RadioReceiver,
-  RadioReceiver as RadioReceiverIcon,
-} from "./radio-receiver"
-export { RadioTower, RadioTower as RadioTowerIcon } from "./radio-tower"
-export { Radius, Radius as RadiusIcon } from "./radius"
-export { RailSymbol, RailSymbol as RailSymbolIcon } from "./rail-symbol"
-export { Rainbow, Rainbow as RainbowIcon } from "./rainbow"
-export { Rat, Rat as RatIcon } from "./rat"
-export { Ratio, Ratio as RatioIcon } from "./ratio"
-export { Receipt, Receipt as ReceiptIcon } from "./receipt"
-export { ReceiptCent, ReceiptCent as ReceiptCentIcon } from "./receipt-cent"
-export { ReceiptEuro, ReceiptEuro as ReceiptEuroIcon } from "./receipt-euro"
+export { Palette, PaletteIcon } from "./palette"
+export { PanelBottom, PanelBottomIcon } from "./panel-bottom"
+export { PanelBottomClose, PanelBottomCloseIcon } from "./panel-bottom-close"
+export { PanelBottomDashed, PanelBottomDashedIcon } from "./panel-bottom-dashed"
+export { PanelBottomOpen, PanelBottomOpenIcon } from "./panel-bottom-open"
+export { PanelLeft, PanelLeftIcon } from "./panel-left"
+export { PanelLeftClose, PanelLeftCloseIcon } from "./panel-left-close"
+export { PanelLeftDashed, PanelLeftDashedIcon } from "./panel-left-dashed"
+export { PanelLeftOpen, PanelLeftOpenIcon } from "./panel-left-open"
+export { PanelRight, PanelRightIcon } from "./panel-right"
+export { PanelRightClose, PanelRightCloseIcon } from "./panel-right-close"
+export { PanelRightDashed, PanelRightDashedIcon } from "./panel-right-dashed"
+export { PanelRightOpen, PanelRightOpenIcon } from "./panel-right-open"
+export { PanelTop, PanelTopIcon } from "./panel-top"
+export { PanelTopClose, PanelTopCloseIcon } from "./panel-top-close"
+export { PanelTopDashed, PanelTopDashedIcon } from "./panel-top-dashed"
+export { PanelTopOpen, PanelTopOpenIcon } from "./panel-top-open"
+export { PanelsLeftBottom, PanelsLeftBottomIcon } from "./panels-left-bottom"
+export { PanelsRightBottom, PanelsRightBottomIcon } from "./panels-right-bottom"
+export { PanelsTopLeft, PanelsTopLeftIcon } from "./panels-top-left"
+export { Paperclip, PaperclipIcon } from "./paperclip"
+export { Parentheses, ParenthesesIcon } from "./parentheses"
+export { ParkingMeter, ParkingMeterIcon } from "./parking-meter"
+export { PartyPopper, PartyPopperIcon } from "./party-popper"
+export { Pause, PauseIcon } from "./pause"
+export { PawPrint, PawPrintIcon } from "./paw-print"
+export { PcCase, PcCaseIcon } from "./pc-case"
+export { Pen, PenIcon } from "./pen"
+export { PenLine, PenLineIcon } from "./pen-line"
+export { PenOff, PenOffIcon } from "./pen-off"
+export { PenTool, PenToolIcon } from "./pen-tool"
+export { Pencil, PencilIcon } from "./pencil"
+export { PencilLine, PencilLineIcon } from "./pencil-line"
+export { PencilOff, PencilOffIcon } from "./pencil-off"
+export { PencilRuler, PencilRulerIcon } from "./pencil-ruler"
+export { Pentagon, PentagonIcon } from "./pentagon"
+export { Percent, PercentIcon } from "./percent"
+export { PersonStanding, PersonStandingIcon } from "./person-standing"
+export { PhilippinePeso, PhilippinePesoIcon } from "./philippine-peso"
+export { Phone, PhoneIcon } from "./phone"
+export { PhoneCall, PhoneCallIcon } from "./phone-call"
+export { PhoneForwarded, PhoneForwardedIcon } from "./phone-forwarded"
+export { PhoneIncoming, PhoneIncomingIcon } from "./phone-incoming"
+export { PhoneMissed, PhoneMissedIcon } from "./phone-missed"
+export { PhoneOff, PhoneOffIcon } from "./phone-off"
+export { PhoneOutgoing, PhoneOutgoingIcon } from "./phone-outgoing"
+export { Pi, PiIcon } from "./pi"
+export { Piano, PianoIcon } from "./piano"
+export { Pickaxe, PickaxeIcon } from "./pickaxe"
+export { PictureInPicture, PictureInPictureIcon } from "./picture-in-picture"
+export { PictureInPicture2, PictureInPicture2Icon } from "./picture-in-picture2"
+export { PiggyBank, PiggyBankIcon } from "./piggy-bank"
+export { Pilcrow, PilcrowIcon } from "./pilcrow"
+export { PilcrowLeft, PilcrowLeftIcon } from "./pilcrow-left"
+export { PilcrowRight, PilcrowRightIcon } from "./pilcrow-right"
+export { Pill, PillIcon } from "./pill"
+export { PillBottle, PillBottleIcon } from "./pill-bottle"
+export { Pin, PinIcon } from "./pin"
+export { PinOff, PinOffIcon } from "./pin-off"
+export { Pipette, PipetteIcon } from "./pipette"
+export { Pizza, PizzaIcon } from "./pizza"
+export { Plane, PlaneIcon } from "./plane"
+export { PlaneLanding, PlaneLandingIcon } from "./plane-landing"
+export { PlaneTakeoff, PlaneTakeoffIcon } from "./plane-takeoff"
+export { Play, PlayIcon } from "./play"
+export { Plug, PlugIcon } from "./plug"
+export { PlugZap, PlugZapIcon } from "./plug-zap"
+export { Plug2, Plug2Icon } from "./plug2"
+export { Plus, PlusIcon } from "./plus"
+export { Pocket, PocketIcon } from "./pocket"
+export { PocketKnife, PocketKnifeIcon } from "./pocket-knife"
+export { Podcast, PodcastIcon } from "./podcast"
+export { Pointer, PointerIcon } from "./pointer"
+export { PointerOff, PointerOffIcon } from "./pointer-off"
+export { Popcorn, PopcornIcon } from "./popcorn"
+export { Popsicle, PopsicleIcon } from "./popsicle"
+export { PoundSterling, PoundSterlingIcon } from "./pound-sterling"
+export { Power, PowerIcon } from "./power"
+export { PowerOff, PowerOffIcon } from "./power-off"
+export { Presentation, PresentationIcon } from "./presentation"
+export { Printer, PrinterIcon } from "./printer"
+export { PrinterCheck, PrinterCheckIcon } from "./printer-check"
+export { Projector, ProjectorIcon } from "./projector"
+export { Proportions, ProportionsIcon } from "./proportions"
+export { Puzzle, PuzzleIcon } from "./puzzle"
+export { Pyramid, PyramidIcon } from "./pyramid"
+export { QrCode, QrCodeIcon } from "./qr-code"
+export { Quote, QuoteIcon } from "./quote"
+export { Rabbit, RabbitIcon } from "./rabbit"
+export { Radar, RadarIcon } from "./radar"
+export { Radiation, RadiationIcon } from "./radiation"
+export { Radical, RadicalIcon } from "./radical"
+export { Radio, RadioIcon } from "./radio"
+export { RadioReceiver, RadioReceiverIcon } from "./radio-receiver"
+export { RadioTower, RadioTowerIcon } from "./radio-tower"
+export { Radius, RadiusIcon } from "./radius"
+export { RailSymbol, RailSymbolIcon } from "./rail-symbol"
+export { Rainbow, RainbowIcon } from "./rainbow"
+export { Rat, RatIcon } from "./rat"
+export { Ratio, RatioIcon } from "./ratio"
+export { Receipt, ReceiptIcon } from "./receipt"
+export { ReceiptCent, ReceiptCentIcon } from "./receipt-cent"
+export { ReceiptEuro, ReceiptEuroIcon } from "./receipt-euro"
 export {
   ReceiptIndianRupee,
-  ReceiptIndianRupee as ReceiptIndianRupeeIcon,
+  ReceiptIndianRupeeIcon,
 } from "./receipt-indian-rupee"
 export {
   ReceiptJapaneseYen,
-  ReceiptJapaneseYen as ReceiptJapaneseYenIcon,
+  ReceiptJapaneseYenIcon,
 } from "./receipt-japanese-yen"
 export {
   ReceiptPoundSterling,
-  ReceiptPoundSterling as ReceiptPoundSterlingIcon,
+  ReceiptPoundSterlingIcon,
 } from "./receipt-pound-sterling"
 export {
   ReceiptRussianRuble,
-  ReceiptRussianRuble as ReceiptRussianRubleIcon,
+  ReceiptRussianRubleIcon,
 } from "./receipt-russian-ruble"
-export {
-  ReceiptSwissFranc,
-  ReceiptSwissFranc as ReceiptSwissFrancIcon,
-} from "./receipt-swiss-franc"
-export { ReceiptText, ReceiptText as ReceiptTextIcon } from "./receipt-text"
-export {
-  RectangleEllipsis,
-  RectangleEllipsis as RectangleEllipsisIcon,
-} from "./rectangle-ellipsis"
+export { ReceiptSwissFranc, ReceiptSwissFrancIcon } from "./receipt-swiss-franc"
+export { ReceiptText, ReceiptTextIcon } from "./receipt-text"
+export { RectangleEllipsis, RectangleEllipsisIcon } from "./rectangle-ellipsis"
 export {
   RectangleHorizontal,
-  RectangleHorizontal as RectangleHorizontalIcon,
+  RectangleHorizontalIcon,
 } from "./rectangle-horizontal"
-export {
-  RectangleVertical,
-  RectangleVertical as RectangleVerticalIcon,
-} from "./rectangle-vertical"
-export { Recycle, Recycle as RecycleIcon } from "./recycle"
-export { Redo, Redo as RedoIcon } from "./redo"
-export { RedoDot, RedoDot as RedoDotIcon } from "./redo-dot"
-export { Redo2, Redo2 as Redo2Icon } from "./redo2"
-export { RefreshCcw, RefreshCcw as RefreshCcwIcon } from "./refresh-ccw"
-export {
-  RefreshCcwDot,
-  RefreshCcwDot as RefreshCcwDotIcon,
-} from "./refresh-ccw-dot"
-export { RefreshCw, RefreshCw as RefreshCwIcon } from "./refresh-cw"
-export {
-  RefreshCwOff,
-  RefreshCwOff as RefreshCwOffIcon,
-} from "./refresh-cw-off"
-export { Refrigerator, Refrigerator as RefrigeratorIcon } from "./refrigerator"
-export { Regex, Regex as RegexIcon } from "./regex"
-export {
-  RemoveFormatting,
-  RemoveFormatting as RemoveFormattingIcon,
-} from "./remove-formatting"
-export { Repeat, Repeat as RepeatIcon } from "./repeat"
-export { Repeat1, Repeat1 as Repeat1Icon } from "./repeat1"
-export { Repeat2, Repeat2 as Repeat2Icon } from "./repeat2"
-export { Replace, Replace as ReplaceIcon } from "./replace"
-export { ReplaceAll, ReplaceAll as ReplaceAllIcon } from "./replace-all"
-export { Reply, Reply as ReplyIcon } from "./reply"
-export { ReplyAll, ReplyAll as ReplyAllIcon } from "./reply-all"
-export { Rewind, Rewind as RewindIcon } from "./rewind"
-export { Ribbon, Ribbon as RibbonIcon } from "./ribbon"
-export { Rocket, Rocket as RocketIcon } from "./rocket"
-export { RockingChair, RockingChair as RockingChairIcon } from "./rocking-chair"
-export {
-  RollerCoaster,
-  RollerCoaster as RollerCoasterIcon,
-} from "./roller-coaster"
-export { RotateCcw, RotateCcw as RotateCcwIcon } from "./rotate-ccw"
-export {
-  RotateCcwSquare,
-  RotateCcwSquare as RotateCcwSquareIcon,
-} from "./rotate-ccw-square"
-export { RotateCw, RotateCw as RotateCwIcon } from "./rotate-cw"
-export {
-  RotateCwSquare,
-  RotateCwSquare as RotateCwSquareIcon,
-} from "./rotate-cw-square"
-export { Rotate3d, Rotate3d as Rotate3dIcon } from "./rotate3d"
-export { Route, Route as RouteIcon } from "./route"
-export { RouteOff, RouteOff as RouteOffIcon } from "./route-off"
-export { Router, Router as RouterIcon } from "./router"
-export { Rows2, Rows2 as Rows2Icon } from "./rows2"
-export { Rows3, Rows3 as Rows3Icon } from "./rows3"
-export { Rows4, Rows4 as Rows4Icon } from "./rows4"
-export { Rss, Rss as RssIcon } from "./rss"
-export { Ruler, Ruler as RulerIcon } from "./ruler"
-export { RussianRuble, RussianRuble as RussianRubleIcon } from "./russian-ruble"
-export { Sailboat, Sailboat as SailboatIcon } from "./sailboat"
-export { Salad, Salad as SaladIcon } from "./salad"
-export { Sandwich, Sandwich as SandwichIcon } from "./sandwich"
-export { Satellite, Satellite as SatelliteIcon } from "./satellite"
-export {
-  SatelliteDish,
-  SatelliteDish as SatelliteDishIcon,
-} from "./satellite-dish"
-export { Save, Save as SaveIcon } from "./save"
-export { SaveAll, SaveAll as SaveAllIcon } from "./save-all"
-export { SaveOff, SaveOff as SaveOffIcon } from "./save-off"
-export { Scale, Scale as ScaleIcon } from "./scale"
-export { Scale3d, Scale3d as Scale3dIcon } from "./scale3d"
-export { Scaling, Scaling as ScalingIcon } from "./scaling"
-export { Scan, Scan as ScanIcon } from "./scan"
-export { ScanBarcode, ScanBarcode as ScanBarcodeIcon } from "./scan-barcode"
-export { ScanEye, ScanEye as ScanEyeIcon } from "./scan-eye"
-export { ScanFace, ScanFace as ScanFaceIcon } from "./scan-face"
-export { ScanLine, ScanLine as ScanLineIcon } from "./scan-line"
-export { ScanQrCode, ScanQrCode as ScanQrCodeIcon } from "./scan-qr-code"
-export { ScanSearch, ScanSearch as ScanSearchIcon } from "./scan-search"
-export { ScanText, ScanText as ScanTextIcon } from "./scan-text"
-export { School, School as SchoolIcon } from "./school"
-export { Scissors, Scissors as ScissorsIcon } from "./scissors"
+export { RectangleVertical, RectangleVerticalIcon } from "./rectangle-vertical"
+export { Recycle, RecycleIcon } from "./recycle"
+export { Redo, RedoIcon } from "./redo"
+export { RedoDot, RedoDotIcon } from "./redo-dot"
+export { Redo2, Redo2Icon } from "./redo2"
+export { RefreshCcw, RefreshCcwIcon } from "./refresh-ccw"
+export { RefreshCcwDot, RefreshCcwDotIcon } from "./refresh-ccw-dot"
+export { RefreshCw, RefreshCwIcon } from "./refresh-cw"
+export { RefreshCwOff, RefreshCwOffIcon } from "./refresh-cw-off"
+export { Refrigerator, RefrigeratorIcon } from "./refrigerator"
+export { Regex, RegexIcon } from "./regex"
+export { RemoveFormatting, RemoveFormattingIcon } from "./remove-formatting"
+export { Repeat, RepeatIcon } from "./repeat"
+export { Repeat1, Repeat1Icon } from "./repeat1"
+export { Repeat2, Repeat2Icon } from "./repeat2"
+export { Replace, ReplaceIcon } from "./replace"
+export { ReplaceAll, ReplaceAllIcon } from "./replace-all"
+export { Reply, ReplyIcon } from "./reply"
+export { ReplyAll, ReplyAllIcon } from "./reply-all"
+export { Rewind, RewindIcon } from "./rewind"
+export { Ribbon, RibbonIcon } from "./ribbon"
+export { Rocket, RocketIcon } from "./rocket"
+export { RockingChair, RockingChairIcon } from "./rocking-chair"
+export { RollerCoaster, RollerCoasterIcon } from "./roller-coaster"
+export { RotateCcw, RotateCcwIcon } from "./rotate-ccw"
+export { RotateCcwSquare, RotateCcwSquareIcon } from "./rotate-ccw-square"
+export { RotateCw, RotateCwIcon } from "./rotate-cw"
+export { RotateCwSquare, RotateCwSquareIcon } from "./rotate-cw-square"
+export { Rotate3d, Rotate3dIcon } from "./rotate3d"
+export { Route, RouteIcon } from "./route"
+export { RouteOff, RouteOffIcon } from "./route-off"
+export { Router, RouterIcon } from "./router"
+export { Rows2, Rows2Icon } from "./rows2"
+export { Rows3, Rows3Icon } from "./rows3"
+export { Rows4, Rows4Icon } from "./rows4"
+export { Rss, RssIcon } from "./rss"
+export { Ruler, RulerIcon } from "./ruler"
+export { RussianRuble, RussianRubleIcon } from "./russian-ruble"
+export { Sailboat, SailboatIcon } from "./sailboat"
+export { Salad, SaladIcon } from "./salad"
+export { Sandwich, SandwichIcon } from "./sandwich"
+export { Satellite, SatelliteIcon } from "./satellite"
+export { SatelliteDish, SatelliteDishIcon } from "./satellite-dish"
+export { Save, SaveIcon } from "./save"
+export { SaveAll, SaveAllIcon } from "./save-all"
+export { SaveOff, SaveOffIcon } from "./save-off"
+export { Scale, ScaleIcon } from "./scale"
+export { Scale3d, Scale3dIcon } from "./scale3d"
+export { Scaling, ScalingIcon } from "./scaling"
+export { Scan, ScanIcon } from "./scan"
+export { ScanBarcode, ScanBarcodeIcon } from "./scan-barcode"
+export { ScanEye, ScanEyeIcon } from "./scan-eye"
+export { ScanFace, ScanFaceIcon } from "./scan-face"
+export { ScanLine, ScanLineIcon } from "./scan-line"
+export { ScanQrCode, ScanQrCodeIcon } from "./scan-qr-code"
+export { ScanSearch, ScanSearchIcon } from "./scan-search"
+export { ScanText, ScanTextIcon } from "./scan-text"
+export { School, SchoolIcon } from "./school"
+export { Scissors, ScissorsIcon } from "./scissors"
 export {
   ScissorsLineDashed,
-  ScissorsLineDashed as ScissorsLineDashedIcon,
+  ScissorsLineDashedIcon,
 } from "./scissors-line-dashed"
-export { ScreenShare, ScreenShare as ScreenShareIcon } from "./screen-share"
-export {
-  ScreenShareOff,
-  ScreenShareOff as ScreenShareOffIcon,
-} from "./screen-share-off"
-export { Scroll, Scroll as ScrollIcon } from "./scroll"
-export { ScrollText, ScrollText as ScrollTextIcon } from "./scroll-text"
-export { Search, Search as SearchIcon } from "./search"
-export { SearchCheck, SearchCheck as SearchCheckIcon } from "./search-check"
-export { SearchCode, SearchCode as SearchCodeIcon } from "./search-code"
-export { SearchSlash, SearchSlash as SearchSlashIcon } from "./search-slash"
-export { SearchX, SearchX as SearchXIcon } from "./search-x"
-export { Section, Section as SectionIcon } from "./section"
-export { Send, Send as SendIcon } from "./send"
-export {
-  SendHorizontal,
-  SendHorizontal as SendHorizontalIcon,
-} from "./send-horizontal"
-export { SendToBack, SendToBack as SendToBackIcon } from "./send-to-back"
+export { ScreenShare, ScreenShareIcon } from "./screen-share"
+export { ScreenShareOff, ScreenShareOffIcon } from "./screen-share-off"
+export { Scroll, ScrollIcon } from "./scroll"
+export { ScrollText, ScrollTextIcon } from "./scroll-text"
+export { Search, SearchIcon } from "./search"
+export { SearchCheck, SearchCheckIcon } from "./search-check"
+export { SearchCode, SearchCodeIcon } from "./search-code"
+export { SearchSlash, SearchSlashIcon } from "./search-slash"
+export { SearchX, SearchXIcon } from "./search-x"
+export { Section, SectionIcon } from "./section"
+export { Send, SendIcon } from "./send"
+export { SendHorizontal, SendHorizontalIcon } from "./send-horizontal"
+export { SendToBack, SendToBackIcon } from "./send-to-back"
 export {
   SeparatorHorizontal,
-  SeparatorHorizontal as SeparatorHorizontalIcon,
+  SeparatorHorizontalIcon,
 } from "./separator-horizontal"
-export {
-  SeparatorVertical,
-  SeparatorVertical as SeparatorVerticalIcon,
-} from "./separator-vertical"
-export { Server, Server as ServerIcon } from "./server"
-export { ServerCog, ServerCog as ServerCogIcon } from "./server-cog"
-export { ServerCrash, ServerCrash as ServerCrashIcon } from "./server-crash"
-export { ServerOff, ServerOff as ServerOffIcon } from "./server-off"
-export { Settings, Settings as SettingsIcon } from "./settings"
-export { Settings2, Settings2 as Settings2Icon } from "./settings2"
-export { Shapes, Shapes as ShapesIcon } from "./shapes"
-export { Share, Share as ShareIcon } from "./share"
-export { Share2, Share2 as Share2Icon } from "./share2"
-export { Sheet, Sheet as SheetIcon } from "./sheet"
-export { Shell, Shell as ShellIcon } from "./shell"
-export { Shield, Shield as ShieldIcon } from "./shield"
-export { ShieldAlert, ShieldAlert as ShieldAlertIcon } from "./shield-alert"
-export { ShieldBan, ShieldBan as ShieldBanIcon } from "./shield-ban"
-export { ShieldCheck, ShieldCheck as ShieldCheckIcon } from "./shield-check"
-export {
-  ShieldEllipsis,
-  ShieldEllipsis as ShieldEllipsisIcon,
-} from "./shield-ellipsis"
-export { ShieldHalf, ShieldHalf as ShieldHalfIcon } from "./shield-half"
-export { ShieldMinus, ShieldMinus as ShieldMinusIcon } from "./shield-minus"
-export { ShieldOff, ShieldOff as ShieldOffIcon } from "./shield-off"
-export { ShieldPlus, ShieldPlus as ShieldPlusIcon } from "./shield-plus"
-export {
-  ShieldQuestion,
-  ShieldQuestion as ShieldQuestionIcon,
-} from "./shield-question"
-export { ShieldX, ShieldX as ShieldXIcon } from "./shield-x"
-export { Ship, Ship as ShipIcon } from "./ship"
-export { ShipWheel, ShipWheel as ShipWheelIcon } from "./ship-wheel"
-export { Shirt, Shirt as ShirtIcon } from "./shirt"
-export { ShoppingBag, ShoppingBag as ShoppingBagIcon } from "./shopping-bag"
-export {
-  ShoppingBasket,
-  ShoppingBasket as ShoppingBasketIcon,
-} from "./shopping-basket"
-export { ShoppingCart, ShoppingCart as ShoppingCartIcon } from "./shopping-cart"
-export { Shovel, Shovel as ShovelIcon } from "./shovel"
-export { ShowerHead, ShowerHead as ShowerHeadIcon } from "./shower-head"
-export { Shrink, Shrink as ShrinkIcon } from "./shrink"
-export { Shrub, Shrub as ShrubIcon } from "./shrub"
-export { Shuffle, Shuffle as ShuffleIcon } from "./shuffle"
-export { Sigma, Sigma as SigmaIcon } from "./sigma"
-export { Signal, Signal as SignalIcon } from "./signal"
-export { SignalHigh, SignalHigh as SignalHighIcon } from "./signal-high"
-export { SignalLow, SignalLow as SignalLowIcon } from "./signal-low"
-export { SignalMedium, SignalMedium as SignalMediumIcon } from "./signal-medium"
-export { SignalZero, SignalZero as SignalZeroIcon } from "./signal-zero"
-export { Signature, Signature as SignatureIcon } from "./signature"
-export { Signpost, Signpost as SignpostIcon } from "./signpost"
-export { SignpostBig, SignpostBig as SignpostBigIcon } from "./signpost-big"
-export { Siren, Siren as SirenIcon } from "./siren"
-export { SkipBack, SkipBack as SkipBackIcon } from "./skip-back"
-export { SkipForward, SkipForward as SkipForwardIcon } from "./skip-forward"
-export { Skull, Skull as SkullIcon } from "./skull"
-export { Slack, Slack as SlackIcon } from "./slack"
-export { Slash, Slash as SlashIcon } from "./slash"
-export { Slice, Slice as SliceIcon } from "./slice"
-export {
-  SlidersHorizontal,
-  SlidersHorizontal as SlidersHorizontalIcon,
-} from "./sliders-horizontal"
-export {
-  SlidersVertical,
-  SlidersVertical as SlidersVerticalIcon,
-} from "./sliders-vertical"
-export { Smartphone, Smartphone as SmartphoneIcon } from "./smartphone"
+export { SeparatorVertical, SeparatorVerticalIcon } from "./separator-vertical"
+export { Server, ServerIcon } from "./server"
+export { ServerCog, ServerCogIcon } from "./server-cog"
+export { ServerCrash, ServerCrashIcon } from "./server-crash"
+export { ServerOff, ServerOffIcon } from "./server-off"
+export { Settings, SettingsIcon } from "./settings"
+export { Settings2, Settings2Icon } from "./settings2"
+export { Shapes, ShapesIcon } from "./shapes"
+export { Share, ShareIcon } from "./share"
+export { Share2, Share2Icon } from "./share2"
+export { Sheet, SheetIcon } from "./sheet"
+export { Shell, ShellIcon } from "./shell"
+export { Shield, ShieldIcon } from "./shield"
+export { ShieldAlert, ShieldAlertIcon } from "./shield-alert"
+export { ShieldBan, ShieldBanIcon } from "./shield-ban"
+export { ShieldCheck, ShieldCheckIcon } from "./shield-check"
+export { ShieldEllipsis, ShieldEllipsisIcon } from "./shield-ellipsis"
+export { ShieldHalf, ShieldHalfIcon } from "./shield-half"
+export { ShieldMinus, ShieldMinusIcon } from "./shield-minus"
+export { ShieldOff, ShieldOffIcon } from "./shield-off"
+export { ShieldPlus, ShieldPlusIcon } from "./shield-plus"
+export { ShieldQuestion, ShieldQuestionIcon } from "./shield-question"
+export { ShieldX, ShieldXIcon } from "./shield-x"
+export { Ship, ShipIcon } from "./ship"
+export { ShipWheel, ShipWheelIcon } from "./ship-wheel"
+export { Shirt, ShirtIcon } from "./shirt"
+export { ShoppingBag, ShoppingBagIcon } from "./shopping-bag"
+export { ShoppingBasket, ShoppingBasketIcon } from "./shopping-basket"
+export { ShoppingCart, ShoppingCartIcon } from "./shopping-cart"
+export { Shovel, ShovelIcon } from "./shovel"
+export { ShowerHead, ShowerHeadIcon } from "./shower-head"
+export { Shrink, ShrinkIcon } from "./shrink"
+export { Shrub, ShrubIcon } from "./shrub"
+export { Shuffle, ShuffleIcon } from "./shuffle"
+export { Sigma, SigmaIcon } from "./sigma"
+export { Signal, SignalIcon } from "./signal"
+export { SignalHigh, SignalHighIcon } from "./signal-high"
+export { SignalLow, SignalLowIcon } from "./signal-low"
+export { SignalMedium, SignalMediumIcon } from "./signal-medium"
+export { SignalZero, SignalZeroIcon } from "./signal-zero"
+export { Signature, SignatureIcon } from "./signature"
+export { Signpost, SignpostIcon } from "./signpost"
+export { SignpostBig, SignpostBigIcon } from "./signpost-big"
+export { Siren, SirenIcon } from "./siren"
+export { SkipBack, SkipBackIcon } from "./skip-back"
+export { SkipForward, SkipForwardIcon } from "./skip-forward"
+export { Skull, SkullIcon } from "./skull"
+export { Slack, SlackIcon } from "./slack"
+export { Slash, SlashIcon } from "./slash"
+export { Slice, SliceIcon } from "./slice"
+export { SlidersHorizontal, SlidersHorizontalIcon } from "./sliders-horizontal"
+export { SlidersVertical, SlidersVerticalIcon } from "./sliders-vertical"
+export { Smartphone, SmartphoneIcon } from "./smartphone"
 export {
   SmartphoneCharging,
-  SmartphoneCharging as SmartphoneChargingIcon,
+  SmartphoneChargingIcon,
 } from "./smartphone-charging"
-export {
-  SmartphoneNfc,
-  SmartphoneNfc as SmartphoneNfcIcon,
-} from "./smartphone-nfc"
-export { Smile, Smile as SmileIcon } from "./smile"
-export { SmilePlus, SmilePlus as SmilePlusIcon } from "./smile-plus"
-export { Snail, Snail as SnailIcon } from "./snail"
-export { Snowflake, Snowflake as SnowflakeIcon } from "./snowflake"
-export { Sofa, Sofa as SofaIcon } from "./sofa"
-export { Soup, Soup as SoupIcon } from "./soup"
-export { Space, Space as SpaceIcon } from "./space"
-export { Spade, Spade as SpadeIcon } from "./spade"
-export { Sparkle, Sparkle as SparkleIcon } from "./sparkle"
-export { Sparkles, Sparkles as SparklesIcon } from "./sparkles"
-export { Speaker, Speaker as SpeakerIcon } from "./speaker"
-export { Speech, Speech as SpeechIcon } from "./speech"
-export { SpellCheck, SpellCheck as SpellCheckIcon } from "./spell-check"
-export { SpellCheck2, SpellCheck2 as SpellCheck2Icon } from "./spell-check2"
-export { Spline, Spline as SplineIcon } from "./spline"
-export { Split, Split as SplitIcon } from "./split"
-export { SprayCan, SprayCan as SprayCanIcon } from "./spray-can"
-export { Sprout, Sprout as SproutIcon } from "./sprout"
-export { Square, Square as SquareIcon } from "./square"
-export {
-  SquareActivity,
-  SquareActivity as SquareActivityIcon,
-} from "./square-activity"
-export {
-  SquareArrowDown,
-  SquareArrowDown as SquareArrowDownIcon,
-} from "./square-arrow-down"
+export { SmartphoneNfc, SmartphoneNfcIcon } from "./smartphone-nfc"
+export { Smile, SmileIcon } from "./smile"
+export { SmilePlus, SmilePlusIcon } from "./smile-plus"
+export { Snail, SnailIcon } from "./snail"
+export { Snowflake, SnowflakeIcon } from "./snowflake"
+export { Sofa, SofaIcon } from "./sofa"
+export { Soup, SoupIcon } from "./soup"
+export { Space, SpaceIcon } from "./space"
+export { Spade, SpadeIcon } from "./spade"
+export { Sparkle, SparkleIcon } from "./sparkle"
+export { Sparkles, SparklesIcon } from "./sparkles"
+export { Speaker, SpeakerIcon } from "./speaker"
+export { Speech, SpeechIcon } from "./speech"
+export { SpellCheck, SpellCheckIcon } from "./spell-check"
+export { SpellCheck2, SpellCheck2Icon } from "./spell-check2"
+export { Spline, SplineIcon } from "./spline"
+export { Split, SplitIcon } from "./split"
+export { SprayCan, SprayCanIcon } from "./spray-can"
+export { Sprout, SproutIcon } from "./sprout"
+export { Square, SquareIcon } from "./square"
+export { SquareActivity, SquareActivityIcon } from "./square-activity"
+export { SquareArrowDown, SquareArrowDownIcon } from "./square-arrow-down"
 export {
   SquareArrowDownLeft,
-  SquareArrowDownLeft as SquareArrowDownLeftIcon,
+  SquareArrowDownLeftIcon,
 } from "./square-arrow-down-left"
 export {
   SquareArrowDownRight,
-  SquareArrowDownRight as SquareArrowDownRightIcon,
+  SquareArrowDownRightIcon,
 } from "./square-arrow-down-right"
-export {
-  SquareArrowLeft,
-  SquareArrowLeft as SquareArrowLeftIcon,
-} from "./square-arrow-left"
+export { SquareArrowLeft, SquareArrowLeftIcon } from "./square-arrow-left"
 export {
   SquareArrowOutDownLeft,
-  SquareArrowOutDownLeft as SquareArrowOutDownLeftIcon,
+  SquareArrowOutDownLeftIcon,
 } from "./square-arrow-out-down-left"
 export {
   SquareArrowOutDownRight,
-  SquareArrowOutDownRight as SquareArrowOutDownRightIcon,
+  SquareArrowOutDownRightIcon,
 } from "./square-arrow-out-down-right"
 export {
   SquareArrowOutUpLeft,
-  SquareArrowOutUpLeft as SquareArrowOutUpLeftIcon,
+  SquareArrowOutUpLeftIcon,
 } from "./square-arrow-out-up-left"
 export {
   SquareArrowOutUpRight,
-  SquareArrowOutUpRight as SquareArrowOutUpRightIcon,
+  SquareArrowOutUpRightIcon,
 } from "./square-arrow-out-up-right"
-export {
-  SquareArrowRight,
-  SquareArrowRight as SquareArrowRightIcon,
-} from "./square-arrow-right"
-export {
-  SquareArrowUp,
-  SquareArrowUp as SquareArrowUpIcon,
-} from "./square-arrow-up"
+export { SquareArrowRight, SquareArrowRightIcon } from "./square-arrow-right"
+export { SquareArrowUp, SquareArrowUpIcon } from "./square-arrow-up"
 export {
   SquareArrowUpLeft,
-  SquareArrowUpLeft as SquareArrowUpLeftIcon,
+  SquareArrowUpLeftIcon,
 } from "./square-arrow-up-left"
 export {
   SquareArrowUpRight,
-  SquareArrowUpRight as SquareArrowUpRightIcon,
+  SquareArrowUpRightIcon,
 } from "./square-arrow-up-right"
-export {
-  SquareAsterisk,
-  SquareAsterisk as SquareAsteriskIcon,
-} from "./square-asterisk"
+export { SquareAsterisk, SquareAsteriskIcon } from "./square-asterisk"
 export {
   SquareBottomDashedScissors,
-  SquareBottomDashedScissors as SquareBottomDashedScissorsIcon,
+  SquareBottomDashedScissorsIcon,
 } from "./square-bottom-dashed-scissors"
-export {
-  SquareChartGantt,
-  SquareChartGantt as SquareChartGanttIcon,
-} from "./square-chart-gantt"
-export { SquareCheck, SquareCheck as SquareCheckIcon } from "./square-check"
-export {
-  SquareCheckBig,
-  SquareCheckBig as SquareCheckBigIcon,
-} from "./square-check-big"
-export {
-  SquareChevronDown,
-  SquareChevronDown as SquareChevronDownIcon,
-} from "./square-chevron-down"
-export {
-  SquareChevronLeft,
-  SquareChevronLeft as SquareChevronLeftIcon,
-} from "./square-chevron-left"
+export { SquareChartGantt, SquareChartGanttIcon } from "./square-chart-gantt"
+export { SquareCheck, SquareCheckIcon } from "./square-check"
+export { SquareCheckBig, SquareCheckBigIcon } from "./square-check-big"
+export { SquareChevronDown, SquareChevronDownIcon } from "./square-chevron-down"
+export { SquareChevronLeft, SquareChevronLeftIcon } from "./square-chevron-left"
 export {
   SquareChevronRight,
-  SquareChevronRight as SquareChevronRightIcon,
+  SquareChevronRightIcon,
 } from "./square-chevron-right"
-export {
-  SquareChevronUp,
-  SquareChevronUp as SquareChevronUpIcon,
-} from "./square-chevron-up"
-export { SquareCode, SquareCode as SquareCodeIcon } from "./square-code"
-export { SquareDashed, SquareDashed as SquareDashedIcon } from "./square-dashed"
+export { SquareChevronUp, SquareChevronUpIcon } from "./square-chevron-up"
+export { SquareCode, SquareCodeIcon } from "./square-code"
+export { SquareDashed, SquareDashedIcon } from "./square-dashed"
 export {
   SquareDashedBottom,
-  SquareDashedBottom as SquareDashedBottomIcon,
+  SquareDashedBottomIcon,
 } from "./square-dashed-bottom"
 export {
   SquareDashedBottomCode,
-  SquareDashedBottomCode as SquareDashedBottomCodeIcon,
+  SquareDashedBottomCodeIcon,
 } from "./square-dashed-bottom-code"
 export {
   SquareDashedKanban,
-  SquareDashedKanban as SquareDashedKanbanIcon,
+  SquareDashedKanbanIcon,
 } from "./square-dashed-kanban"
 export {
   SquareDashedMousePointer,
-  SquareDashedMousePointer as SquareDashedMousePointerIcon,
+  SquareDashedMousePointerIcon,
 } from "./square-dashed-mouse-pointer"
-export { SquareDivide, SquareDivide as SquareDivideIcon } from "./square-divide"
-export { SquareDot, SquareDot as SquareDotIcon } from "./square-dot"
-export { SquareEqual, SquareEqual as SquareEqualIcon } from "./square-equal"
-export {
-  SquareFunction,
-  SquareFunction as SquareFunctionIcon,
-} from "./square-function"
-export { SquareKanban, SquareKanban as SquareKanbanIcon } from "./square-kanban"
-export {
-  SquareLibrary,
-  SquareLibrary as SquareLibraryIcon,
-} from "./square-library"
-export { SquareM, SquareM as SquareMIcon } from "./square-m"
-export { SquareMenu, SquareMenu as SquareMenuIcon } from "./square-menu"
-export { SquareMinus, SquareMinus as SquareMinusIcon } from "./square-minus"
+export { SquareDivide, SquareDivideIcon } from "./square-divide"
+export { SquareDot, SquareDotIcon } from "./square-dot"
+export { SquareEqual, SquareEqualIcon } from "./square-equal"
+export { SquareFunction, SquareFunctionIcon } from "./square-function"
+export { SquareKanban, SquareKanbanIcon } from "./square-kanban"
+export { SquareLibrary, SquareLibraryIcon } from "./square-library"
+export { SquareM, SquareMIcon } from "./square-m"
+export { SquareMenu, SquareMenuIcon } from "./square-menu"
+export { SquareMinus, SquareMinusIcon } from "./square-minus"
 export {
   SquareMousePointer,
-  SquareMousePointer as SquareMousePointerIcon,
+  SquareMousePointerIcon,
 } from "./square-mouse-pointer"
-export {
-  SquareParking,
-  SquareParking as SquareParkingIcon,
-} from "./square-parking"
-export {
-  SquareParkingOff,
-  SquareParkingOff as SquareParkingOffIcon,
-} from "./square-parking-off"
-export { SquarePen, SquarePen as SquarePenIcon } from "./square-pen"
-export {
-  SquarePercent,
-  SquarePercent as SquarePercentIcon,
-} from "./square-percent"
-export { SquarePi, SquarePi as SquarePiIcon } from "./square-pi"
-export {
-  SquarePilcrow,
-  SquarePilcrow as SquarePilcrowIcon,
-} from "./square-pilcrow"
-export { SquarePlay, SquarePlay as SquarePlayIcon } from "./square-play"
-export { SquarePlus, SquarePlus as SquarePlusIcon } from "./square-plus"
-export { SquarePower, SquarePower as SquarePowerIcon } from "./square-power"
-export {
-  SquareRadical,
-  SquareRadical as SquareRadicalIcon,
-} from "./square-radical"
-export {
-  SquareScissors,
-  SquareScissors as SquareScissorsIcon,
-} from "./square-scissors"
-export { SquareSigma, SquareSigma as SquareSigmaIcon } from "./square-sigma"
-export { SquareSlash, SquareSlash as SquareSlashIcon } from "./square-slash"
+export { SquareParking, SquareParkingIcon } from "./square-parking"
+export { SquareParkingOff, SquareParkingOffIcon } from "./square-parking-off"
+export { SquarePen, SquarePenIcon } from "./square-pen"
+export { SquarePercent, SquarePercentIcon } from "./square-percent"
+export { SquarePi, SquarePiIcon } from "./square-pi"
+export { SquarePilcrow, SquarePilcrowIcon } from "./square-pilcrow"
+export { SquarePlay, SquarePlayIcon } from "./square-play"
+export { SquarePlus, SquarePlusIcon } from "./square-plus"
+export { SquarePower, SquarePowerIcon } from "./square-power"
+export { SquareRadical, SquareRadicalIcon } from "./square-radical"
+export { SquareScissors, SquareScissorsIcon } from "./square-scissors"
+export { SquareSigma, SquareSigmaIcon } from "./square-sigma"
+export { SquareSlash, SquareSlashIcon } from "./square-slash"
 export {
   SquareSplitHorizontal,
-  SquareSplitHorizontal as SquareSplitHorizontalIcon,
+  SquareSplitHorizontalIcon,
 } from "./square-split-horizontal"
 export {
   SquareSplitVertical,
-  SquareSplitVertical as SquareSplitVerticalIcon,
+  SquareSplitVerticalIcon,
 } from "./square-split-vertical"
-export { SquareSquare, SquareSquare as SquareSquareIcon } from "./square-square"
-export { SquareStack, SquareStack as SquareStackIcon } from "./square-stack"
-export {
-  SquareTerminal,
-  SquareTerminal as SquareTerminalIcon,
-} from "./square-terminal"
-export { SquareUser, SquareUser as SquareUserIcon } from "./square-user"
-export {
-  SquareUserRound,
-  SquareUserRound as SquareUserRoundIcon,
-} from "./square-user-round"
-export { SquareX, SquareX as SquareXIcon } from "./square-x"
-export { Squircle, Squircle as SquircleIcon } from "./squircle"
-export { Squirrel, Squirrel as SquirrelIcon } from "./squirrel"
-export { Stamp, Stamp as StampIcon } from "./stamp"
-export { Star, Star as StarIcon } from "./star"
-export { StarHalf, StarHalf as StarHalfIcon } from "./star-half"
-export { StarOff, StarOff as StarOffIcon } from "./star-off"
-export { StepBack, StepBack as StepBackIcon } from "./step-back"
-export { StepForward, StepForward as StepForwardIcon } from "./step-forward"
-export { Stethoscope, Stethoscope as StethoscopeIcon } from "./stethoscope"
-export { Sticker, Sticker as StickerIcon } from "./sticker"
-export { StickyNote, StickyNote as StickyNoteIcon } from "./sticky-note"
-export { Store, Store as StoreIcon } from "./store"
-export {
-  StretchHorizontal,
-  StretchHorizontal as StretchHorizontalIcon,
-} from "./stretch-horizontal"
-export {
-  StretchVertical,
-  StretchVertical as StretchVerticalIcon,
-} from "./stretch-vertical"
-export {
-  Strikethrough,
-  Strikethrough as StrikethroughIcon,
-} from "./strikethrough"
-export { Subscript, Subscript as SubscriptIcon } from "./subscript"
-export { Sun, Sun as SunIcon } from "./sun"
-export { SunDim, SunDim as SunDimIcon } from "./sun-dim"
-export { SunMedium, SunMedium as SunMediumIcon } from "./sun-medium"
-export { SunMoon, SunMoon as SunMoonIcon } from "./sun-moon"
-export { SunSnow, SunSnow as SunSnowIcon } from "./sun-snow"
-export { Sunrise, Sunrise as SunriseIcon } from "./sunrise"
-export { Sunset, Sunset as SunsetIcon } from "./sunset"
-export { Superscript, Superscript as SuperscriptIcon } from "./superscript"
-export { SwatchBook, SwatchBook as SwatchBookIcon } from "./swatch-book"
-export { SwissFranc, SwissFranc as SwissFrancIcon } from "./swiss-franc"
-export { SwitchCamera, SwitchCamera as SwitchCameraIcon } from "./switch-camera"
-export { Sword, Sword as SwordIcon } from "./sword"
-export { Swords, Swords as SwordsIcon } from "./swords"
-export { Syringe, Syringe as SyringeIcon } from "./syringe"
-export { Table, Table as TableIcon } from "./table"
-export {
-  TableCellsMerge,
-  TableCellsMerge as TableCellsMergeIcon,
-} from "./table-cells-merge"
-export {
-  TableCellsSplit,
-  TableCellsSplit as TableCellsSplitIcon,
-} from "./table-cells-split"
-export {
-  TableColumnsSplit,
-  TableColumnsSplit as TableColumnsSplitIcon,
-} from "./table-columns-split"
-export {
-  TableOfContents,
-  TableOfContents as TableOfContentsIcon,
-} from "./table-of-contents"
-export {
-  TableProperties,
-  TableProperties as TablePropertiesIcon,
-} from "./table-properties"
-export {
-  TableRowsSplit,
-  TableRowsSplit as TableRowsSplitIcon,
-} from "./table-rows-split"
-export { Table2, Table2 as Table2Icon } from "./table2"
-export { Tablet, Tablet as TabletIcon } from "./tablet"
-export {
-  TabletSmartphone,
-  TabletSmartphone as TabletSmartphoneIcon,
-} from "./tablet-smartphone"
-export { Tablets, Tablets as TabletsIcon } from "./tablets"
-export { Tag, Tag as TagIcon } from "./tag"
-export { Tags, Tags as TagsIcon } from "./tags"
-export { Tally1, Tally1 as Tally1Icon } from "./tally1"
-export { Tally2, Tally2 as Tally2Icon } from "./tally2"
-export { Tally3, Tally3 as Tally3Icon } from "./tally3"
-export { Tally4, Tally4 as Tally4Icon } from "./tally4"
-export { Tally5, Tally5 as Tally5Icon } from "./tally5"
-export { Tangent, Tangent as TangentIcon } from "./tangent"
-export { Target, Target as TargetIcon } from "./target"
-export { Telescope, Telescope as TelescopeIcon } from "./telescope"
-export { Tent, Tent as TentIcon } from "./tent"
-export { TentTree, TentTree as TentTreeIcon } from "./tent-tree"
-export { Terminal, Terminal as TerminalIcon } from "./terminal"
-export { TestTube, TestTube as TestTubeIcon } from "./test-tube"
-export {
-  TestTubeDiagonal,
-  TestTubeDiagonal as TestTubeDiagonalIcon,
-} from "./test-tube-diagonal"
-export { TestTubes, TestTubes as TestTubesIcon } from "./test-tubes"
-export { Text, Text as TextIcon } from "./text"
-export { TextCursor, TextCursor as TextCursorIcon } from "./text-cursor"
-export {
-  TextCursorInput,
-  TextCursorInput as TextCursorInputIcon,
-} from "./text-cursor-input"
-export { TextQuote, TextQuote as TextQuoteIcon } from "./text-quote"
-export { TextSearch, TextSearch as TextSearchIcon } from "./text-search"
-export { TextSelect, TextSelect as TextSelectIcon } from "./text-select"
-export { Theater, Theater as TheaterIcon } from "./theater"
-export { Thermometer, Thermometer as ThermometerIcon } from "./thermometer"
+export { SquareSquare, SquareSquareIcon } from "./square-square"
+export { SquareStack, SquareStackIcon } from "./square-stack"
+export { SquareTerminal, SquareTerminalIcon } from "./square-terminal"
+export { SquareUser, SquareUserIcon } from "./square-user"
+export { SquareUserRound, SquareUserRoundIcon } from "./square-user-round"
+export { SquareX, SquareXIcon } from "./square-x"
+export { Squircle, SquircleIcon } from "./squircle"
+export { Squirrel, SquirrelIcon } from "./squirrel"
+export { Stamp, StampIcon } from "./stamp"
+export { Star, StarIcon } from "./star"
+export { StarHalf, StarHalfIcon } from "./star-half"
+export { StarOff, StarOffIcon } from "./star-off"
+export { StepBack, StepBackIcon } from "./step-back"
+export { StepForward, StepForwardIcon } from "./step-forward"
+export { Stethoscope, StethoscopeIcon } from "./stethoscope"
+export { Sticker, StickerIcon } from "./sticker"
+export { StickyNote, StickyNoteIcon } from "./sticky-note"
+export { Store, StoreIcon } from "./store"
+export { StretchHorizontal, StretchHorizontalIcon } from "./stretch-horizontal"
+export { StretchVertical, StretchVerticalIcon } from "./stretch-vertical"
+export { Strikethrough, StrikethroughIcon } from "./strikethrough"
+export { Subscript, SubscriptIcon } from "./subscript"
+export { Sun, SunIcon } from "./sun"
+export { SunDim, SunDimIcon } from "./sun-dim"
+export { SunMedium, SunMediumIcon } from "./sun-medium"
+export { SunMoon, SunMoonIcon } from "./sun-moon"
+export { SunSnow, SunSnowIcon } from "./sun-snow"
+export { Sunrise, SunriseIcon } from "./sunrise"
+export { Sunset, SunsetIcon } from "./sunset"
+export { Superscript, SuperscriptIcon } from "./superscript"
+export { SwatchBook, SwatchBookIcon } from "./swatch-book"
+export { SwissFranc, SwissFrancIcon } from "./swiss-franc"
+export { SwitchCamera, SwitchCameraIcon } from "./switch-camera"
+export { Sword, SwordIcon } from "./sword"
+export { Swords, SwordsIcon } from "./swords"
+export { Syringe, SyringeIcon } from "./syringe"
+export { Table, TableIcon } from "./table"
+export { TableCellsMerge, TableCellsMergeIcon } from "./table-cells-merge"
+export { TableCellsSplit, TableCellsSplitIcon } from "./table-cells-split"
+export { TableColumnsSplit, TableColumnsSplitIcon } from "./table-columns-split"
+export { TableOfContents, TableOfContentsIcon } from "./table-of-contents"
+export { TableProperties, TablePropertiesIcon } from "./table-properties"
+export { TableRowsSplit, TableRowsSplitIcon } from "./table-rows-split"
+export { Table2, Table2Icon } from "./table2"
+export { Tablet, TabletIcon } from "./tablet"
+export { TabletSmartphone, TabletSmartphoneIcon } from "./tablet-smartphone"
+export { Tablets, TabletsIcon } from "./tablets"
+export { Tag, TagIcon } from "./tag"
+export { Tags, TagsIcon } from "./tags"
+export { Tally1, Tally1Icon } from "./tally1"
+export { Tally2, Tally2Icon } from "./tally2"
+export { Tally3, Tally3Icon } from "./tally3"
+export { Tally4, Tally4Icon } from "./tally4"
+export { Tally5, Tally5Icon } from "./tally5"
+export { Tangent, TangentIcon } from "./tangent"
+export { Target, TargetIcon } from "./target"
+export { Telescope, TelescopeIcon } from "./telescope"
+export { Tent, TentIcon } from "./tent"
+export { TentTree, TentTreeIcon } from "./tent-tree"
+export { Terminal, TerminalIcon } from "./terminal"
+export { TestTube, TestTubeIcon } from "./test-tube"
+export { TestTubeDiagonal, TestTubeDiagonalIcon } from "./test-tube-diagonal"
+export { TestTubes, TestTubesIcon } from "./test-tubes"
+export { Text, TextIcon } from "./text"
+export { TextCursor, TextCursorIcon } from "./text-cursor"
+export { TextCursorInput, TextCursorInputIcon } from "./text-cursor-input"
+export { TextQuote, TextQuoteIcon } from "./text-quote"
+export { TextSearch, TextSearchIcon } from "./text-search"
+export { TextSelect, TextSelectIcon } from "./text-select"
+export { Theater, TheaterIcon } from "./theater"
+export { Thermometer, ThermometerIcon } from "./thermometer"
 export {
   ThermometerSnowflake,
-  ThermometerSnowflake as ThermometerSnowflakeIcon,
+  ThermometerSnowflakeIcon,
 } from "./thermometer-snowflake"
-export {
-  ThermometerSun,
-  ThermometerSun as ThermometerSunIcon,
-} from "./thermometer-sun"
-export { ThumbsDown, ThumbsDown as ThumbsDownIcon } from "./thumbs-down"
-export { ThumbsUp, ThumbsUp as ThumbsUpIcon } from "./thumbs-up"
-export { Ticket, Ticket as TicketIcon } from "./ticket"
-export { TicketCheck, TicketCheck as TicketCheckIcon } from "./ticket-check"
-export { TicketMinus, TicketMinus as TicketMinusIcon } from "./ticket-minus"
-export {
-  TicketPercent,
-  TicketPercent as TicketPercentIcon,
-} from "./ticket-percent"
-export { TicketPlus, TicketPlus as TicketPlusIcon } from "./ticket-plus"
-export { TicketSlash, TicketSlash as TicketSlashIcon } from "./ticket-slash"
-export { TicketX, TicketX as TicketXIcon } from "./ticket-x"
-export { Tickets, Tickets as TicketsIcon } from "./tickets"
-export { TicketsPlane, TicketsPlane as TicketsPlaneIcon } from "./tickets-plane"
-export { Timer, Timer as TimerIcon } from "./timer"
-export { TimerOff, TimerOff as TimerOffIcon } from "./timer-off"
-export { TimerReset, TimerReset as TimerResetIcon } from "./timer-reset"
-export { ToggleLeft, ToggleLeft as ToggleLeftIcon } from "./toggle-left"
-export { ToggleRight, ToggleRight as ToggleRightIcon } from "./toggle-right"
-export { Tornado, Tornado as TornadoIcon } from "./tornado"
-export { Torus, Torus as TorusIcon } from "./torus"
-export { Touchpad, Touchpad as TouchpadIcon } from "./touchpad"
-export { TouchpadOff, TouchpadOff as TouchpadOffIcon } from "./touchpad-off"
-export { TowerControl, TowerControl as TowerControlIcon } from "./tower-control"
-export { ToyBrick, ToyBrick as ToyBrickIcon } from "./toy-brick"
-export { Tractor, Tractor as TractorIcon } from "./tractor"
-export { TrafficCone, TrafficCone as TrafficConeIcon } from "./traffic-cone"
-export { TrainFront, TrainFront as TrainFrontIcon } from "./train-front"
-export {
-  TrainFrontTunnel,
-  TrainFrontTunnel as TrainFrontTunnelIcon,
-} from "./train-front-tunnel"
-export { TrainTrack, TrainTrack as TrainTrackIcon } from "./train-track"
-export { TramFront, TramFront as TramFrontIcon } from "./tram-front"
-export { Trash, Trash as TrashIcon } from "./trash"
-export { Trash2, Trash2 as Trash2Icon } from "./trash2"
-export {
-  TreeDeciduous,
-  TreeDeciduous as TreeDeciduousIcon,
-} from "./tree-deciduous"
-export { TreePalm, TreePalm as TreePalmIcon } from "./tree-palm"
-export { TreePine, TreePine as TreePineIcon } from "./tree-pine"
-export { Trees, Trees as TreesIcon } from "./trees"
-export { Trello, Trello as TrelloIcon } from "./trello"
-export { TrendingDown, TrendingDown as TrendingDownIcon } from "./trending-down"
-export { TrendingUp, TrendingUp as TrendingUpIcon } from "./trending-up"
-export {
-  TrendingUpDown,
-  TrendingUpDown as TrendingUpDownIcon,
-} from "./trending-up-down"
-export { Triangle, Triangle as TriangleIcon } from "./triangle"
-export {
-  TriangleAlert,
-  TriangleAlert as TriangleAlertIcon,
-} from "./triangle-alert"
-export {
-  TriangleRight,
-  TriangleRight as TriangleRightIcon,
-} from "./triangle-right"
-export { Trophy, Trophy as TrophyIcon } from "./trophy"
-export { Truck, Truck as TruckIcon } from "./truck"
-export { Turtle, Turtle as TurtleIcon } from "./turtle"
-export { Tv, Tv as TvIcon } from "./tv"
-export { TvMinimal, TvMinimal as TvMinimalIcon } from "./tv-minimal"
-export {
-  TvMinimalPlay,
-  TvMinimalPlay as TvMinimalPlayIcon,
-} from "./tv-minimal-play"
-export { Twitch, Twitch as TwitchIcon } from "./twitch"
-export { Twitter, Twitter as TwitterIcon } from "./twitter"
-export { Type, Type as TypeIcon } from "./type"
-export { TypeOutline, TypeOutline as TypeOutlineIcon } from "./type-outline"
-export { Umbrella, Umbrella as UmbrellaIcon } from "./umbrella"
-export { UmbrellaOff, UmbrellaOff as UmbrellaOffIcon } from "./umbrella-off"
-export { Underline, Underline as UnderlineIcon } from "./underline"
-export { Undo, Undo as UndoIcon } from "./undo"
-export { UndoDot, UndoDot as UndoDotIcon } from "./undo-dot"
-export { Undo2, Undo2 as Undo2Icon } from "./undo2"
-export {
-  UnfoldHorizontal,
-  UnfoldHorizontal as UnfoldHorizontalIcon,
-} from "./unfold-horizontal"
-export {
-  UnfoldVertical,
-  UnfoldVertical as UnfoldVerticalIcon,
-} from "./unfold-vertical"
-export { Ungroup, Ungroup as UngroupIcon } from "./ungroup"
-export { University, University as UniversityIcon } from "./university"
-export { Unlink, Unlink as UnlinkIcon } from "./unlink"
-export { Unlink2, Unlink2 as Unlink2Icon } from "./unlink2"
-export { Unplug, Unplug as UnplugIcon } from "./unplug"
-export { Upload, Upload as UploadIcon } from "./upload"
-export { Usb, Usb as UsbIcon } from "./usb"
-export { User, User as UserIcon } from "./user"
-export { UserCheck, UserCheck as UserCheckIcon } from "./user-check"
-export { UserCog, UserCog as UserCogIcon } from "./user-cog"
-export { UserMinus, UserMinus as UserMinusIcon } from "./user-minus"
-export { UserPen, UserPen as UserPenIcon } from "./user-pen"
-export { UserPlus, UserPlus as UserPlusIcon } from "./user-plus"
-export { UserRound, UserRound as UserRoundIcon } from "./user-round"
-export {
-  UserRoundCheck,
-  UserRoundCheck as UserRoundCheckIcon,
-} from "./user-round-check"
-export {
-  UserRoundCog,
-  UserRoundCog as UserRoundCogIcon,
-} from "./user-round-cog"
-export {
-  UserRoundMinus,
-  UserRoundMinus as UserRoundMinusIcon,
-} from "./user-round-minus"
-export {
-  UserRoundPen,
-  UserRoundPen as UserRoundPenIcon,
-} from "./user-round-pen"
-export {
-  UserRoundPlus,
-  UserRoundPlus as UserRoundPlusIcon,
-} from "./user-round-plus"
-export {
-  UserRoundSearch,
-  UserRoundSearch as UserRoundSearchIcon,
-} from "./user-round-search"
-export { UserRoundX, UserRoundX as UserRoundXIcon } from "./user-round-x"
-export { UserSearch, UserSearch as UserSearchIcon } from "./user-search"
-export { UserX, UserX as UserXIcon } from "./user-x"
-export { Users, Users as UsersIcon } from "./users"
-export { UsersRound, UsersRound as UsersRoundIcon } from "./users-round"
-export { Utensils, Utensils as UtensilsIcon } from "./utensils"
-export {
-  UtensilsCrossed,
-  UtensilsCrossed as UtensilsCrossedIcon,
-} from "./utensils-crossed"
-export { UtilityPole, UtilityPole as UtilityPoleIcon } from "./utility-pole"
-export { Variable, Variable as VariableIcon } from "./variable"
-export { Vault, Vault as VaultIcon } from "./vault"
-export { Vegan, Vegan as VeganIcon } from "./vegan"
-export { VenetianMask, VenetianMask as VenetianMaskIcon } from "./venetian-mask"
-export { Vibrate, Vibrate as VibrateIcon } from "./vibrate"
-export { VibrateOff, VibrateOff as VibrateOffIcon } from "./vibrate-off"
-export { Video, Video as VideoIcon } from "./video"
-export { VideoOff, VideoOff as VideoOffIcon } from "./video-off"
-export { Videotape, Videotape as VideotapeIcon } from "./videotape"
-export { View, View as ViewIcon } from "./view"
-export { Voicemail, Voicemail as VoicemailIcon } from "./voicemail"
-export { Volleyball, Volleyball as VolleyballIcon } from "./volleyball"
-export { Volume, Volume as VolumeIcon } from "./volume"
-export { VolumeOff, VolumeOff as VolumeOffIcon } from "./volume-off"
-export { VolumeX, VolumeX as VolumeXIcon } from "./volume-x"
-export { Volume1, Volume1 as Volume1Icon } from "./volume1"
-export { Volume2, Volume2 as Volume2Icon } from "./volume2"
-export { Vote, Vote as VoteIcon } from "./vote"
-export { Wallet, Wallet as WalletIcon } from "./wallet"
-export { WalletCards, WalletCards as WalletCardsIcon } from "./wallet-cards"
-export {
-  WalletMinimal,
-  WalletMinimal as WalletMinimalIcon,
-} from "./wallet-minimal"
-export { Wallpaper, Wallpaper as WallpaperIcon } from "./wallpaper"
-export { Wand, Wand as WandIcon } from "./wand"
-export { WandSparkles, WandSparkles as WandSparklesIcon } from "./wand-sparkles"
-export { Warehouse, Warehouse as WarehouseIcon } from "./warehouse"
-export {
-  WashingMachine,
-  WashingMachine as WashingMachineIcon,
-} from "./washing-machine"
-export { Watch, Watch as WatchIcon } from "./watch"
-export { Waves, Waves as WavesIcon } from "./waves"
-export { Waypoints, Waypoints as WaypointsIcon } from "./waypoints"
-export { Webcam, Webcam as WebcamIcon } from "./webcam"
-export { Webhook, Webhook as WebhookIcon } from "./webhook"
-export { WebhookOff, WebhookOff as WebhookOffIcon } from "./webhook-off"
-export { Weight, Weight as WeightIcon } from "./weight"
-export { Wheat, Wheat as WheatIcon } from "./wheat"
-export { WheatOff, WheatOff as WheatOffIcon } from "./wheat-off"
-export { WholeWord, WholeWord as WholeWordIcon } from "./whole-word"
-export { Wifi, Wifi as WifiIcon } from "./wifi"
-export { WifiHigh, WifiHigh as WifiHighIcon } from "./wifi-high"
-export { WifiLow, WifiLow as WifiLowIcon } from "./wifi-low"
-export { WifiOff, WifiOff as WifiOffIcon } from "./wifi-off"
-export { WifiZero, WifiZero as WifiZeroIcon } from "./wifi-zero"
-export { Wind, Wind as WindIcon } from "./wind"
-export { Wine, Wine as WineIcon } from "./wine"
-export { WineOff, WineOff as WineOffIcon } from "./wine-off"
-export { Workflow, Workflow as WorkflowIcon } from "./workflow"
-export { Worm, Worm as WormIcon } from "./worm"
-export { WrapText, WrapText as WrapTextIcon } from "./wrap-text"
-export { Wrench, Wrench as WrenchIcon } from "./wrench"
-export { X, X as XIcon } from "./x"
-export { Youtube, Youtube as YoutubeIcon } from "./youtube"
-export { Zap, Zap as ZapIcon } from "./zap"
-export { ZapOff, ZapOff as ZapOffIcon } from "./zap-off"
-export { ZoomIn, ZoomIn as ZoomInIcon } from "./zoom-in"
-export { ZoomOut, ZoomOut as ZoomOutIcon } from "./zoom-out"
+export { ThermometerSun, ThermometerSunIcon } from "./thermometer-sun"
+export { ThumbsDown, ThumbsDownIcon } from "./thumbs-down"
+export { ThumbsUp, ThumbsUpIcon } from "./thumbs-up"
+export { Ticket, TicketIcon } from "./ticket"
+export { TicketCheck, TicketCheckIcon } from "./ticket-check"
+export { TicketMinus, TicketMinusIcon } from "./ticket-minus"
+export { TicketPercent, TicketPercentIcon } from "./ticket-percent"
+export { TicketPlus, TicketPlusIcon } from "./ticket-plus"
+export { TicketSlash, TicketSlashIcon } from "./ticket-slash"
+export { TicketX, TicketXIcon } from "./ticket-x"
+export { Tickets, TicketsIcon } from "./tickets"
+export { TicketsPlane, TicketsPlaneIcon } from "./tickets-plane"
+export { Timer, TimerIcon } from "./timer"
+export { TimerOff, TimerOffIcon } from "./timer-off"
+export { TimerReset, TimerResetIcon } from "./timer-reset"
+export { ToggleLeft, ToggleLeftIcon } from "./toggle-left"
+export { ToggleRight, ToggleRightIcon } from "./toggle-right"
+export { Tornado, TornadoIcon } from "./tornado"
+export { Torus, TorusIcon } from "./torus"
+export { Touchpad, TouchpadIcon } from "./touchpad"
+export { TouchpadOff, TouchpadOffIcon } from "./touchpad-off"
+export { TowerControl, TowerControlIcon } from "./tower-control"
+export { ToyBrick, ToyBrickIcon } from "./toy-brick"
+export { Tractor, TractorIcon } from "./tractor"
+export { TrafficCone, TrafficConeIcon } from "./traffic-cone"
+export { TrainFront, TrainFrontIcon } from "./train-front"
+export { TrainFrontTunnel, TrainFrontTunnelIcon } from "./train-front-tunnel"
+export { TrainTrack, TrainTrackIcon } from "./train-track"
+export { TramFront, TramFrontIcon } from "./tram-front"
+export { Trash, TrashIcon } from "./trash"
+export { Trash2, Trash2Icon } from "./trash2"
+export { TreeDeciduous, TreeDeciduousIcon } from "./tree-deciduous"
+export { TreePalm, TreePalmIcon } from "./tree-palm"
+export { TreePine, TreePineIcon } from "./tree-pine"
+export { Trees, TreesIcon } from "./trees"
+export { Trello, TrelloIcon } from "./trello"
+export { TrendingDown, TrendingDownIcon } from "./trending-down"
+export { TrendingUp, TrendingUpIcon } from "./trending-up"
+export { TrendingUpDown, TrendingUpDownIcon } from "./trending-up-down"
+export { Triangle, TriangleIcon } from "./triangle"
+export { TriangleAlert, TriangleAlertIcon } from "./triangle-alert"
+export { TriangleRight, TriangleRightIcon } from "./triangle-right"
+export { Trophy, TrophyIcon } from "./trophy"
+export { Truck, TruckIcon } from "./truck"
+export { Turtle, TurtleIcon } from "./turtle"
+export { Tv, TvIcon } from "./tv"
+export { TvMinimal, TvMinimalIcon } from "./tv-minimal"
+export { TvMinimalPlay, TvMinimalPlayIcon } from "./tv-minimal-play"
+export { Twitch, TwitchIcon } from "./twitch"
+export { Twitter, TwitterIcon } from "./twitter"
+export { Type, TypeIcon } from "./type"
+export { TypeOutline, TypeOutlineIcon } from "./type-outline"
+export { Umbrella, UmbrellaIcon } from "./umbrella"
+export { UmbrellaOff, UmbrellaOffIcon } from "./umbrella-off"
+export { Underline, UnderlineIcon } from "./underline"
+export { Undo, UndoIcon } from "./undo"
+export { UndoDot, UndoDotIcon } from "./undo-dot"
+export { Undo2, Undo2Icon } from "./undo2"
+export { UnfoldHorizontal, UnfoldHorizontalIcon } from "./unfold-horizontal"
+export { UnfoldVertical, UnfoldVerticalIcon } from "./unfold-vertical"
+export { Ungroup, UngroupIcon } from "./ungroup"
+export { University, UniversityIcon } from "./university"
+export { Unlink, UnlinkIcon } from "./unlink"
+export { Unlink2, Unlink2Icon } from "./unlink2"
+export { Unplug, UnplugIcon } from "./unplug"
+export { Upload, UploadIcon } from "./upload"
+export { Usb, UsbIcon } from "./usb"
+export { User, UserIcon } from "./user"
+export { UserCheck, UserCheckIcon } from "./user-check"
+export { UserCog, UserCogIcon } from "./user-cog"
+export { UserMinus, UserMinusIcon } from "./user-minus"
+export { UserPen, UserPenIcon } from "./user-pen"
+export { UserPlus, UserPlusIcon } from "./user-plus"
+export { UserRound, UserRoundIcon } from "./user-round"
+export { UserRoundCheck, UserRoundCheckIcon } from "./user-round-check"
+export { UserRoundCog, UserRoundCogIcon } from "./user-round-cog"
+export { UserRoundMinus, UserRoundMinusIcon } from "./user-round-minus"
+export { UserRoundPen, UserRoundPenIcon } from "./user-round-pen"
+export { UserRoundPlus, UserRoundPlusIcon } from "./user-round-plus"
+export { UserRoundSearch, UserRoundSearchIcon } from "./user-round-search"
+export { UserRoundX, UserRoundXIcon } from "./user-round-x"
+export { UserSearch, UserSearchIcon } from "./user-search"
+export { UserX, UserXIcon } from "./user-x"
+export { Users, UsersIcon } from "./users"
+export { UsersRound, UsersRoundIcon } from "./users-round"
+export { Utensils, UtensilsIcon } from "./utensils"
+export { UtensilsCrossed, UtensilsCrossedIcon } from "./utensils-crossed"
+export { UtilityPole, UtilityPoleIcon } from "./utility-pole"
+export { Variable, VariableIcon } from "./variable"
+export { Vault, VaultIcon } from "./vault"
+export { Vegan, VeganIcon } from "./vegan"
+export { VenetianMask, VenetianMaskIcon } from "./venetian-mask"
+export { Vibrate, VibrateIcon } from "./vibrate"
+export { VibrateOff, VibrateOffIcon } from "./vibrate-off"
+export { Video, VideoIcon } from "./video"
+export { VideoOff, VideoOffIcon } from "./video-off"
+export { Videotape, VideotapeIcon } from "./videotape"
+export { View, ViewIcon } from "./view"
+export { Voicemail, VoicemailIcon } from "./voicemail"
+export { Volleyball, VolleyballIcon } from "./volleyball"
+export { Volume, VolumeIcon } from "./volume"
+export { VolumeOff, VolumeOffIcon } from "./volume-off"
+export { VolumeX, VolumeXIcon } from "./volume-x"
+export { Volume1, Volume1Icon } from "./volume1"
+export { Volume2, Volume2Icon } from "./volume2"
+export { Vote, VoteIcon } from "./vote"
+export { Wallet, WalletIcon } from "./wallet"
+export { WalletCards, WalletCardsIcon } from "./wallet-cards"
+export { WalletMinimal, WalletMinimalIcon } from "./wallet-minimal"
+export { Wallpaper, WallpaperIcon } from "./wallpaper"
+export { Wand, WandIcon } from "./wand"
+export { WandSparkles, WandSparklesIcon } from "./wand-sparkles"
+export { Warehouse, WarehouseIcon } from "./warehouse"
+export { WashingMachine, WashingMachineIcon } from "./washing-machine"
+export { Watch, WatchIcon } from "./watch"
+export { Waves, WavesIcon } from "./waves"
+export { Waypoints, WaypointsIcon } from "./waypoints"
+export { Webcam, WebcamIcon } from "./webcam"
+export { Webhook, WebhookIcon } from "./webhook"
+export { WebhookOff, WebhookOffIcon } from "./webhook-off"
+export { Weight, WeightIcon } from "./weight"
+export { Wheat, WheatIcon } from "./wheat"
+export { WheatOff, WheatOffIcon } from "./wheat-off"
+export { WholeWord, WholeWordIcon } from "./whole-word"
+export { Wifi, WifiIcon } from "./wifi"
+export { WifiHigh, WifiHighIcon } from "./wifi-high"
+export { WifiLow, WifiLowIcon } from "./wifi-low"
+export { WifiOff, WifiOffIcon } from "./wifi-off"
+export { WifiZero, WifiZeroIcon } from "./wifi-zero"
+export { Wind, WindIcon } from "./wind"
+export { Wine, WineIcon } from "./wine"
+export { WineOff, WineOffIcon } from "./wine-off"
+export { Workflow, WorkflowIcon } from "./workflow"
+export { Worm, WormIcon } from "./worm"
+export { WrapText, WrapTextIcon } from "./wrap-text"
+export { Wrench, WrenchIcon } from "./wrench"
+export { X, XIcon } from "./x"
+export { Youtube, YoutubeIcon } from "./youtube"
+export { Zap, ZapIcon } from "./zap"
+export { ZapOff, ZapOffIcon } from "./zap-off"
+export { ZoomIn, ZoomInIcon } from "./zoom-in"
+export { ZoomOut, ZoomOutIcon } from "./zoom-out"

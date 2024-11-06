@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareArrowOutUpLeft as SquareArrowOutUpLeftIcon } from "lucide-react"
+import { SquareArrowOutUpLeft as LucideSquareArrowOutUpLeftIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SquareArrowOutUpLeft` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SquareArrowOutUpLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareArrowOutUpLeft = forwardRef<LucideIconProps, "svg">(
+export const SquareArrowOutUpLeftIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={SquareArrowOutUpLeftIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideSquareArrowOutUpLeftIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `SquareArrowOutUpLeftIcon` instead.
+ */
+export const SquareArrowOutUpLeft = SquareArrowOutUpLeftIcon

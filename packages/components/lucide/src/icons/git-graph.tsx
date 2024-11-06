@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { GitGraph as GitGraphIcon } from "lucide-react"
+import { GitGraph as LucideGitGraphIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `GitGraph` is [Lucide](https://lucide.dev) SVG icon component.
+ * `GitGraphIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const GitGraph = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={GitGraphIcon} {...props} />
+export const GitGraphIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideGitGraphIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `GitGraphIcon` instead.
+ */
+export const GitGraph = GitGraphIcon

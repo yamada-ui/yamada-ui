@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BadgeMinus as BadgeMinusIcon } from "lucide-react"
+import { BadgeMinus as LucideBadgeMinusIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BadgeMinus` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BadgeMinusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BadgeMinus = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BadgeMinusIcon} {...props} />
-))
+export const BadgeMinusIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideBadgeMinusIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `BadgeMinusIcon` instead.
+ */
+export const BadgeMinus = BadgeMinusIcon

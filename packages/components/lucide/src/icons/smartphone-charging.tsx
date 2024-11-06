@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SmartphoneCharging as SmartphoneChargingIcon } from "lucide-react"
+import { SmartphoneCharging as LucideSmartphoneChargingIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SmartphoneCharging` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SmartphoneChargingIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SmartphoneCharging = forwardRef<LucideIconProps, "svg">(
+export const SmartphoneChargingIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={SmartphoneChargingIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideSmartphoneChargingIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `SmartphoneChargingIcon` instead.
+ */
+export const SmartphoneCharging = SmartphoneChargingIcon

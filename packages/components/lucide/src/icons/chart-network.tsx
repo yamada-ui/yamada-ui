@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ChartNetwork as ChartNetworkIcon } from "lucide-react"
+import { ChartNetwork as LucideChartNetworkIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ChartNetwork` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ChartNetworkIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChartNetwork = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ChartNetworkIcon} {...props} />
-))
+export const ChartNetworkIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideChartNetworkIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ChartNetworkIcon` instead.
+ */
+export const ChartNetwork = ChartNetworkIcon

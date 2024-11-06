@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FlaskRound as FlaskRoundIcon } from "lucide-react"
+import { FlaskRound as LucideFlaskRoundIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FlaskRound` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FlaskRoundIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FlaskRound = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FlaskRoundIcon} {...props} />
-))
+export const FlaskRoundIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideFlaskRoundIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `FlaskRoundIcon` instead.
+ */
+export const FlaskRound = FlaskRoundIcon

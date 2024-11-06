@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { LockKeyhole as LockKeyholeIcon } from "lucide-react"
+import { LockKeyhole as LucideLockKeyholeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `LockKeyhole` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LockKeyholeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const LockKeyhole = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LockKeyholeIcon} {...props} />
-))
+export const LockKeyholeIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideLockKeyholeIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `LockKeyholeIcon` instead.
+ */
+export const LockKeyhole = LockKeyholeIcon

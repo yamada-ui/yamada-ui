@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Thermometer as ThermometerIcon } from "lucide-react"
+import { Thermometer as LucideThermometerIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Thermometer` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ThermometerIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Thermometer = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ThermometerIcon} {...props} />
-))
+export const ThermometerIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideThermometerIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `ThermometerIcon` instead.
+ */
+export const Thermometer = ThermometerIcon

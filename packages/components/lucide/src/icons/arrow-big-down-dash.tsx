@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ArrowBigDownDash as ArrowBigDownDashIcon } from "lucide-react"
+import { ArrowBigDownDash as LucideArrowBigDownDashIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ArrowBigDownDash` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ArrowBigDownDashIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ArrowBigDownDash = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={ArrowBigDownDashIcon} {...props} />,
+export const ArrowBigDownDashIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideArrowBigDownDashIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `ArrowBigDownDashIcon` instead.
+ */
+export const ArrowBigDownDash = ArrowBigDownDashIcon

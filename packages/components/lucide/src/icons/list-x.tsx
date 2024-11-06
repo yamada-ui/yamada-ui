@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ListX as ListXIcon } from "lucide-react"
+import { ListX as LucideListXIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ListX` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ListXIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ListX = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ListXIcon} {...props} />
+export const ListXIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideListXIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ListXIcon` instead.
+ */
+export const ListX = ListXIcon

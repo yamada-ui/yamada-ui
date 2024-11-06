@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Dumbbell as DumbbellIcon } from "lucide-react"
+import { Dumbbell as LucideDumbbellIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Dumbbell` is [Lucide](https://lucide.dev) SVG icon component.
+ * `DumbbellIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Dumbbell = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={DumbbellIcon} {...props} />
+export const DumbbellIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideDumbbellIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `DumbbellIcon` instead.
+ */
+export const Dumbbell = DumbbellIcon

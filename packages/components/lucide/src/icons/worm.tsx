@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Worm as WormIcon } from "lucide-react"
+import { Worm as LucideWormIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Worm` is [Lucide](https://lucide.dev) SVG icon component.
+ * `WormIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Worm = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={WormIcon} {...props} />
+export const WormIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideWormIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `WormIcon` instead.
+ */
+export const Worm = WormIcon

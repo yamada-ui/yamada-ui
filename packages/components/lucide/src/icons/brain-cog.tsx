@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BrainCog as BrainCogIcon } from "lucide-react"
+import { BrainCog as LucideBrainCogIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BrainCog` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BrainCogIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BrainCog = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BrainCogIcon} {...props} />
+export const BrainCogIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideBrainCogIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `BrainCogIcon` instead.
+ */
+export const BrainCog = BrainCogIcon

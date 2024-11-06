@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { TableProperties as TablePropertiesIcon } from "lucide-react"
+import { TableProperties as LucideTablePropertiesIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `TableProperties` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TablePropertiesIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TableProperties = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={TablePropertiesIcon} {...props} />,
+export const TablePropertiesIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideTablePropertiesIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `TablePropertiesIcon` instead.
+ */
+export const TableProperties = TablePropertiesIcon

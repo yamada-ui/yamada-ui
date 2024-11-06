@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FlagTriangleRight as FlagTriangleRightIcon } from "lucide-react"
+import { FlagTriangleRight as LucideFlagTriangleRightIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FlagTriangleRight` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FlagTriangleRightIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FlagTriangleRight = forwardRef<LucideIconProps, "svg">(
+export const FlagTriangleRightIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={FlagTriangleRightIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideFlagTriangleRightIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `FlagTriangleRightIcon` instead.
+ */
+export const FlagTriangleRight = FlagTriangleRightIcon

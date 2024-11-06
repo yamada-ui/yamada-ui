@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { HeartPulse as HeartPulseIcon } from "lucide-react"
+import { HeartPulse as LucideHeartPulseIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `HeartPulse` is [Lucide](https://lucide.dev) SVG icon component.
+ * `HeartPulseIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const HeartPulse = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={HeartPulseIcon} {...props} />
-))
+export const HeartPulseIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideHeartPulseIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `HeartPulseIcon` instead.
+ */
+export const HeartPulse = HeartPulseIcon

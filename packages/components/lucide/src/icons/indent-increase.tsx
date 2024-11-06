@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { IndentIncrease as IndentIncreaseIcon } from "lucide-react"
+import { IndentIncrease as LucideIndentIncreaseIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `IndentIncrease` is [Lucide](https://lucide.dev) SVG icon component.
+ * `IndentIncreaseIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const IndentIncrease = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={IndentIncreaseIcon} {...props} />,
+export const IndentIncreaseIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideIndentIncreaseIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `IndentIncreaseIcon` instead.
+ */
+export const IndentIncrease = IndentIncreaseIcon

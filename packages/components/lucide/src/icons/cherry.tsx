@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Cherry as CherryIcon } from "lucide-react"
+import { Cherry as LucideCherryIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Cherry` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CherryIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Cherry = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CherryIcon} {...props} />
+export const CherryIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideCherryIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `CherryIcon` instead.
+ */
+export const Cherry = CherryIcon

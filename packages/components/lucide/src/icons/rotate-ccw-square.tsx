@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { RotateCcwSquare as RotateCcwSquareIcon } from "lucide-react"
+import { RotateCcwSquare as LucideRotateCcwSquareIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `RotateCcwSquare` is [Lucide](https://lucide.dev) SVG icon component.
+ * `RotateCcwSquareIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RotateCcwSquare = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={RotateCcwSquareIcon} {...props} />,
+export const RotateCcwSquareIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideRotateCcwSquareIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `RotateCcwSquareIcon` instead.
+ */
+export const RotateCcwSquare = RotateCcwSquareIcon

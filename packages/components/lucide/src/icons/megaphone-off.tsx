@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MegaphoneOff as MegaphoneOffIcon } from "lucide-react"
+import { MegaphoneOff as LucideMegaphoneOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `MegaphoneOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MegaphoneOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MegaphoneOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MegaphoneOffIcon} {...props} />
-))
+export const MegaphoneOffIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideMegaphoneOffIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `MegaphoneOffIcon` instead.
+ */
+export const MegaphoneOff = MegaphoneOffIcon

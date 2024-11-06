@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Cone as ConeIcon } from "lucide-react"
+import { Cone as LucideConeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Cone` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ConeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Cone = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ConeIcon} {...props} />
+export const ConeIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideConeIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ConeIcon` instead.
+ */
+export const Cone = ConeIcon

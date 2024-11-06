@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { TvMinimal as TvMinimalIcon } from "lucide-react"
+import { TvMinimal as LucideTvMinimalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `TvMinimal` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TvMinimalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TvMinimal = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TvMinimalIcon} {...props} />
-))
+export const TvMinimalIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideTvMinimalIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `TvMinimalIcon` instead.
+ */
+export const TvMinimal = TvMinimalIcon

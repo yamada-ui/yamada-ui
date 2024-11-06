@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { QrCode as QrCodeIcon } from "lucide-react"
+import { QrCode as LucideQrCodeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `QrCode` is [Lucide](https://lucide.dev) SVG icon component.
+ * `QrCodeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const QrCode = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={QrCodeIcon} {...props} />
+export const QrCodeIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideQrCodeIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `QrCodeIcon` instead.
+ */
+export const QrCode = QrCodeIcon

@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MoveDiagonal as MoveDiagonalIcon } from "lucide-react"
+import { MoveDiagonal as LucideMoveDiagonalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `MoveDiagonal` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MoveDiagonalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MoveDiagonal = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MoveDiagonalIcon} {...props} />
-))
+export const MoveDiagonalIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideMoveDiagonalIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `MoveDiagonalIcon` instead.
+ */
+export const MoveDiagonal = MoveDiagonalIcon

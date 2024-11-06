@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { TimerReset as TimerResetIcon } from "lucide-react"
+import { TimerReset as LucideTimerResetIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `TimerReset` is [Lucide](https://lucide.dev) SVG icon component.
+ * `TimerResetIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TimerReset = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TimerResetIcon} {...props} />
-))
+export const TimerResetIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideTimerResetIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `TimerResetIcon` instead.
+ */
+export const TimerReset = TimerResetIcon

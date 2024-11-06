@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BellRing as BellRingIcon } from "lucide-react"
+import { BellRing as LucideBellRingIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BellRing` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BellRingIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BellRing = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={BellRingIcon} {...props} />
+export const BellRingIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideBellRingIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `BellRingIcon` instead.
+ */
+export const BellRing = BellRingIcon

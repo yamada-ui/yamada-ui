@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Videotape as VideotapeIcon } from "lucide-react"
+import { Videotape as LucideVideotapeIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Videotape` is [Lucide](https://lucide.dev) SVG icon component.
+ * `VideotapeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Videotape = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={VideotapeIcon} {...props} />
-))
+export const VideotapeIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideVideotapeIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `VideotapeIcon` instead.
+ */
+export const Videotape = VideotapeIcon

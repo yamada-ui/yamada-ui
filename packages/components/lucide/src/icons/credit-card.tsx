@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CreditCard as CreditCardIcon } from "lucide-react"
+import { CreditCard as LucideCreditCardIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `CreditCard` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CreditCardIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CreditCard = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CreditCardIcon} {...props} />
-))
+export const CreditCardIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideCreditCardIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `CreditCardIcon` instead.
+ */
+export const CreditCard = CreditCardIcon

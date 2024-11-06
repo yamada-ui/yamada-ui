@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { HousePlus as HousePlusIcon } from "lucide-react"
+import { HousePlus as LucideHousePlusIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `HousePlus` is [Lucide](https://lucide.dev) SVG icon component.
+ * `HousePlusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const HousePlus = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={HousePlusIcon} {...props} />
-))
+export const HousePlusIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideHousePlusIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `HousePlusIcon` instead.
+ */
+export const HousePlus = HousePlusIcon

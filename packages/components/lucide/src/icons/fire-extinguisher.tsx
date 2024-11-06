@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FireExtinguisher as FireExtinguisherIcon } from "lucide-react"
+import { FireExtinguisher as LucideFireExtinguisherIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FireExtinguisher` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FireExtinguisherIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FireExtinguisher = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={FireExtinguisherIcon} {...props} />,
+export const FireExtinguisherIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideFireExtinguisherIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `FireExtinguisherIcon` instead.
+ */
+export const FireExtinguisher = FireExtinguisherIcon

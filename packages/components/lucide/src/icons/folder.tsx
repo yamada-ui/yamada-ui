@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Folder as FolderIcon } from "lucide-react"
+import { Folder as LucideFolderIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Folder` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FolderIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Folder = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FolderIcon} {...props} />
+export const FolderIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideFolderIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `FolderIcon` instead.
+ */
+export const Folder = FolderIcon

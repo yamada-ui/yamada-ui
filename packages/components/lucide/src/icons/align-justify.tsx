@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { AlignJustify as AlignJustifyIcon } from "lucide-react"
+import { AlignJustify as LucideAlignJustifyIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `AlignJustify` is [Lucide](https://lucide.dev) SVG icon component.
+ * `AlignJustifyIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignJustify = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={AlignJustifyIcon} {...props} />
-))
+export const AlignJustifyIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideAlignJustifyIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `AlignJustifyIcon` instead.
+ */
+export const AlignJustify = AlignJustifyIcon

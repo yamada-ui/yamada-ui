@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Loader as LoaderIcon } from "lucide-react"
+import { Loader as LucideLoaderIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Loader` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LoaderIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Loader = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LoaderIcon} {...props} />
+export const LoaderIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideLoaderIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `LoaderIcon` instead.
+ */
+export const Loader = LoaderIcon

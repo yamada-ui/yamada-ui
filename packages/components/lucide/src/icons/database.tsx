@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Database as DatabaseIcon } from "lucide-react"
+import { Database as LucideDatabaseIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Database` is [Lucide](https://lucide.dev) SVG icon component.
+ * `DatabaseIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Database = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={DatabaseIcon} {...props} />
+export const DatabaseIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideDatabaseIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `DatabaseIcon` instead.
+ */
+export const Database = DatabaseIcon

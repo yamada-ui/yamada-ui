@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Copy as CopyIcon } from "lucide-react"
+import { Copy as LucideCopyIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Copy` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CopyIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Copy = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CopyIcon} {...props} />
+export const CopyIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideCopyIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `CopyIcon` instead.
+ */
+export const Copy = CopyIcon

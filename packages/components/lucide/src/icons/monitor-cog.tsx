@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MonitorCog as MonitorCogIcon } from "lucide-react"
+import { MonitorCog as LucideMonitorCogIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `MonitorCog` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MonitorCogIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MonitorCog = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MonitorCogIcon} {...props} />
-))
+export const MonitorCogIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => <LucideIcon ref={ref} as={LucideMonitorCogIcon} {...props} />,
+)
+
+/**
+ * @deprecated Use `MonitorCogIcon` instead.
+ */
+export const MonitorCog = MonitorCogIcon

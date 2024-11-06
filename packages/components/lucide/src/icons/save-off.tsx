@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SaveOff as SaveOffIcon } from "lucide-react"
+import { SaveOff as LucideSaveOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SaveOff` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SaveOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SaveOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={SaveOffIcon} {...props} />
+export const SaveOffIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideSaveOffIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `SaveOffIcon` instead.
+ */
+export const SaveOff = SaveOffIcon

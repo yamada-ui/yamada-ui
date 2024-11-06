@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ListTodo as ListTodoIcon } from "lucide-react"
+import { ListTodo as LucideListTodoIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ListTodo` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ListTodoIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ListTodo = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ListTodoIcon} {...props} />
+export const ListTodoIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideListTodoIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ListTodoIcon` instead.
+ */
+export const ListTodo = ListTodoIcon

@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Mouse as MouseIcon } from "lucide-react"
+import { Mouse as LucideMouseIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Mouse` is [Lucide](https://lucide.dev) SVG icon component.
+ * `MouseIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Mouse = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MouseIcon} {...props} />
+export const MouseIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideMouseIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `MouseIcon` instead.
+ */
+export const Mouse = MouseIcon

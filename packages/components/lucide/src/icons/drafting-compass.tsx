@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { DraftingCompass as DraftingCompassIcon } from "lucide-react"
+import { DraftingCompass as LucideDraftingCompassIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `DraftingCompass` is [Lucide](https://lucide.dev) SVG icon component.
+ * `DraftingCompassIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const DraftingCompass = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={DraftingCompassIcon} {...props} />,
+export const DraftingCompassIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideDraftingCompassIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `DraftingCompassIcon` instead.
+ */
+export const DraftingCompass = DraftingCompassIcon

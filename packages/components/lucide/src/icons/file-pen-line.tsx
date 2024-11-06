@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FilePenLine as FilePenLineIcon } from "lucide-react"
+import { FilePenLine as LucideFilePenLineIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `FilePenLine` is [Lucide](https://lucide.dev) SVG icon component.
+ * `FilePenLineIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FilePenLine = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FilePenLineIcon} {...props} />
-))
+export const FilePenLineIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideFilePenLineIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `FilePenLineIcon` instead.
+ */
+export const FilePenLine = FilePenLineIcon

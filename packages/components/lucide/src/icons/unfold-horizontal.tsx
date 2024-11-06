@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { UnfoldHorizontal as UnfoldHorizontalIcon } from "lucide-react"
+import { UnfoldHorizontal as LucideUnfoldHorizontalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `UnfoldHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
+ * `UnfoldHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const UnfoldHorizontal = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={UnfoldHorizontalIcon} {...props} />,
+export const UnfoldHorizontalIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideUnfoldHorizontalIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `UnfoldHorizontalIcon` instead.
+ */
+export const UnfoldHorizontal = UnfoldHorizontalIcon

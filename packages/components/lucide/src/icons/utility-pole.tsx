@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { UtilityPole as UtilityPoleIcon } from "lucide-react"
+import { UtilityPole as LucideUtilityPoleIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `UtilityPole` is [Lucide](https://lucide.dev) SVG icon component.
+ * `UtilityPoleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const UtilityPole = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={UtilityPoleIcon} {...props} />
-))
+export const UtilityPoleIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideUtilityPoleIcon} {...props} />
+  ),
+)
+
+/**
+ * @deprecated Use `UtilityPoleIcon` instead.
+ */
+export const UtilityPole = UtilityPoleIcon

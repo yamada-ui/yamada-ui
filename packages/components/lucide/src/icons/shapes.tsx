@@ -1,13 +1,18 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Shapes as ShapesIcon } from "lucide-react"
+import { Shapes as LucideShapesIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `Shapes` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShapesIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Shapes = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ShapesIcon} {...props} />
+export const ShapesIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={LucideShapesIcon} {...props} />
 ))
+
+/**
+ * @deprecated Use `ShapesIcon` instead.
+ */
+export const Shapes = ShapesIcon

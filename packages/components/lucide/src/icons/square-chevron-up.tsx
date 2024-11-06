@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareChevronUp as SquareChevronUpIcon } from "lucide-react"
+import { SquareChevronUp as LucideSquareChevronUpIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `SquareChevronUp` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SquareChevronUpIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareChevronUp = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={SquareChevronUpIcon} {...props} />,
+export const SquareChevronUpIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideSquareChevronUpIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `SquareChevronUpIcon` instead.
+ */
+export const SquareChevronUp = SquareChevronUpIcon

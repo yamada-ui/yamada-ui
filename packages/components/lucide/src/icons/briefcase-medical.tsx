@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BriefcaseMedical as BriefcaseMedicalIcon } from "lucide-react"
+import { BriefcaseMedical as LucideBriefcaseMedicalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `BriefcaseMedical` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BriefcaseMedicalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BriefcaseMedical = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={BriefcaseMedicalIcon} {...props} />,
+export const BriefcaseMedicalIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideBriefcaseMedicalIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `BriefcaseMedicalIcon` instead.
+ */
+export const BriefcaseMedical = BriefcaseMedicalIcon

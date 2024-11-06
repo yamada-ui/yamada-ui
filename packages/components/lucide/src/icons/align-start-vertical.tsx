@@ -1,15 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { AlignStartVertical as AlignStartVerticalIcon } from "lucide-react"
+import { AlignStartVertical as LucideAlignStartVerticalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `AlignStartVertical` is [Lucide](https://lucide.dev) SVG icon component.
+ * `AlignStartVerticalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignStartVertical = forwardRef<LucideIconProps, "svg">(
+export const AlignStartVerticalIcon = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={AlignStartVerticalIcon} {...props} />
+    <LucideIcon ref={ref} as={LucideAlignStartVerticalIcon} {...props} />
   ),
 )
+
+/**
+ * @deprecated Use `AlignStartVerticalIcon` instead.
+ */
+export const AlignStartVertical = AlignStartVerticalIcon

@@ -1,13 +1,20 @@
 import type { LucideIconProps } from "../lucide-icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ChartCandlestick as ChartCandlestickIcon } from "lucide-react"
+import { ChartCandlestick as LucideChartCandlestickIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 
 /**
- * `ChartCandlestick` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ChartCandlestickIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChartCandlestick = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={ChartCandlestickIcon} {...props} />,
+export const ChartCandlestickIcon = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={LucideChartCandlestickIcon} {...props} />
+  ),
 )
+
+/**
+ * @deprecated Use `ChartCandlestickIcon` instead.
+ */
+export const ChartCandlestick = ChartCandlestickIcon

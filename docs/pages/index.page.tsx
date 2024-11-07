@@ -69,7 +69,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
               href="/getting-started"
               colorScheme="primary"
               size="2xl"
-              rightIcon={<ArrowRight />}
+              endIcon={<ArrowRight />}
               w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.started")}

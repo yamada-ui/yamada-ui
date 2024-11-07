@@ -198,7 +198,7 @@ const FilterControlButton = <T extends Priority | Status>({
         borderColor={["border", "border"]}
         borderStyle="dashed"
         justifyContent="flex-start"
-        leftIcon={<Icon />}
+        startIcon={<Icon />}
         {...buttonProps}
       >
         {label}
@@ -305,7 +305,7 @@ const ResetButton: FC<ResetButtonProps> = ({
   })
 
   return isShow ? (
-    <Button variant="ghost" rightIcon={<X />} onClick={onReset} {...rest}>
+    <Button variant="ghost" endIcon={<X />} onClick={onReset} {...rest}>
       Reset
     </Button>
   ) : null
@@ -329,7 +329,7 @@ const ViewControlButton: FC<ViewControlButtonProps> = ({
         as={Button}
         variant="outline"
         borderColor={["border", "border"]}
-        leftIcon={<SlidersHorizontal />}
+        startIcon={<SlidersHorizontal />}
         {...buttonProps}
       >
         View

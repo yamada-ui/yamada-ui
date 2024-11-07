@@ -27,7 +27,7 @@ export const GitHubCard = memo(() => {
 
         <Spacer />
 
-        <Button leftIcon={<Star />}>Star</Button>
+        <Button startIcon={<Star />}>Star</Button>
       </CardHeader>
 
       <CardBody>

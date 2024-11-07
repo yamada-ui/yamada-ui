@@ -36,11 +36,11 @@ export const AccountCard = memo(() => {
 
       <CardBody>
         <ButtonGroup variant="outline" gap="sm" w="full">
-          <Button leftIcon={<Github boxSize="1.25rem" />} w="full">
+          <Button startIcon={<Github boxSize="1.25rem" />} w="full">
             GitHub
           </Button>
 
-          <Button leftIcon={<X boxSize="1.25rem" />} w="full">
+          <Button startIcon={<X boxSize="1.25rem" />} w="full">
             X
           </Button>
         </ButtonGroup>

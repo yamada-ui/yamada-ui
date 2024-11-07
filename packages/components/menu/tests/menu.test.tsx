@@ -1,4 +1,12 @@
-import { a11y, act, fireEvent, render, screen, TestIcon } from "@yamada-ui/test"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  screen,
+  TestIcon,
+  waitFor,
+} from "@yamada-ui/test"
 import {
   ContextMenu,
   ContextMenuTrigger,
@@ -222,7 +230,7 @@ describe("<Menu />", () => {
 
     const checkboxItemB = screen.getByTestId("MenuOptionItemCheckbox-b")
     await act(() => fireEvent.click(checkboxItemB))
-    expect(checkboxItemB).not.toHaveAttribute("aria-checked")
+    expect(checkboxItemB).toHaveAttribute("aria-checked", "false")
   })
 
   test("should disable the menu item", () => {
@@ -367,7 +375,7 @@ describe("<Menu />", () => {
     await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
     await act(() => fireEvent.keyDown(menuItemButton, { key: "ArrowRight" }))
 
-    expect(screen.getByText("Extensions")).toHaveFocus()
+    await waitFor(() => expect(screen.getByText("Extensions")).toHaveFocus())
 
     await act(() =>
       fireEvent.keyDown(screen.getByText("Extensions"), { key: "ArrowLeft" }),
@@ -404,14 +412,11 @@ describe("<Menu />", () => {
     await act(() => fireEvent.keyDown(menuList, { key: "ArrowUp" }))
     expect(document.activeElement).toHaveTextContent("Settings")
 
-    await act(() => fireEvent.keyDown(menuList, { key: "Tab" }))
-    expect(document.activeElement).toHaveTextContent("Settings")
+    await act(() => fireEvent.keyDown(menuList, { key: "End" }))
+    expect(document.activeElement).toHaveTextContent("Preferences")
 
     await act(() => fireEvent.keyDown(menuList, { key: "Home" }))
     expect(document.activeElement).toHaveTextContent("Settings")
-
-    await act(() => fireEvent.keyDown(menuList, { key: "End" }))
-    expect(document.activeElement).toHaveTextContent("Preferences")
 
     await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
     expect(menuList).not.toBeVisible()

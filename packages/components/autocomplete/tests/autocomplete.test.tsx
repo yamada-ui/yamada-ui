@@ -911,6 +911,23 @@ describe("<Autocomplete />", () => {
   })
 
   describe("dropdown scroll behavior", () => {
+    const height = 240
+    const childTop = height * 4
+
+    beforeAll(() => {
+      Object.defineProperties(HTMLElement.prototype, {
+        clientHeight: { configurable: true, value: height },
+        offsetTop: { configurable: true, value: childTop },
+      })
+    })
+
+    afterAll(() => {
+      Object.defineProperties(HTMLElement.prototype, {
+        clientHeight: { configurable: true, value: undefined },
+        offsetTop: { configurable: true, value: undefined },
+      })
+    })
+
     const ITEMS: AutocompleteItem[] = [
       {
         label: "option1",
@@ -956,14 +973,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("should scroll down to show selected item when selecting next option in dropdown", async () => {
-      const height = 240
-      const childTop = height * 4
       const childBottom = childTop + height
-
-      Object.defineProperties(HTMLElement.prototype, {
-        clientHeight: { configurable: true, value: height },
-        offsetTop: { configurable: true, value: childTop },
-      })
 
       const { container, user } = render(
         <Autocomplete defaultValue="option3" items={ITEMS} />,
@@ -989,14 +999,6 @@ describe("<Autocomplete />", () => {
     })
 
     test("should scroll up to show selected item when selecting previous option in dropdown", async () => {
-      const height = 240
-      const childTop = height * 4
-
-      Object.defineProperties(HTMLElement.prototype, {
-        clientHeight: { configurable: true, value: height },
-        offsetTop: { configurable: true, value: childTop },
-      })
-
       const { container, user } = render(
         <Autocomplete defaultValue="option3" items={ITEMS} />,
       )

@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/focus-lock": minor
+"@yamada-ui/focus-lock": patch
 ---
 
 separate logic and UI in component FocusLock

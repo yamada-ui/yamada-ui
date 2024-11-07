@@ -69,15 +69,15 @@ export const withSize: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" size="sm" leftIcon={<Plus />}>
+      <Tag colorScheme="primary" size="sm" startIcon={<Plus />}>
         Small
       </Tag>
 
-      <Tag colorScheme="secondary" size="md" rightIcon={<Plus />}>
+      <Tag colorScheme="secondary" size="md" endIcon={<Plus />}>
         Medium
       </Tag>
 
-      <Tag colorScheme="warning" size="lg" leftIcon={<Plus />}>
+      <Tag colorScheme="warning" size="lg" startIcon={<Plus />}>
         Large
       </Tag>
     </Wrap>

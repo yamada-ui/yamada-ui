@@ -1,3 +1,5 @@
+/* eslint-disable perfectionist/sort-objects */
+/* eslint-disable perfectionist/sort-interfaces */
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
 import type { ElementType, ReactElement } from "react"
@@ -51,7 +53,14 @@ interface ButtonOptions {
    */
   isRounded?: boolean
   /**
+   * The icon to display at the start side of the button.
+   */
+  startIcon?: ReactElement
+  /**
    * The icon to display at the left side of the button.
+   * If specified at the same time as `startIcon`, `startIcon` takes precedence.
+   *
+   * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
   /**
@@ -69,7 +78,14 @@ interface ButtonOptions {
    */
   loadingText?: string
   /**
+   * The icon to display at the end side of the button.
+   */
+  endIcon?: ReactElement
+  /**
    * The icon to display at the right side of the button.
+   * If specified at the same time as `endIcon`, `endIcon` takes precedence.
+   *
+   * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement
 }
@@ -104,10 +120,12 @@ export const Button = forwardRef<ButtonProps, "button">(
       isDisabled = group?.isDisabled,
       isLoading,
       isRounded,
+      startIcon,
       leftIcon,
       loadingIcon,
       loadingPlacement = "start",
       loadingText,
+      endIcon,
       rightIcon,
       __css,
       ...rest
@@ -148,7 +166,9 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const contentProps = {
       children,
+      startIcon,
       leftIcon,
+      endIcon,
       rightIcon,
     }
 
@@ -241,18 +261,25 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<ButtonProps, "children" | "leftIcon" | "rightIcon"> {}
+  extends Pick<
+    ButtonProps,
+    "children" | "endIcon" | "leftIcon" | "rightIcon" | "startIcon"
+  > {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
+  startIcon,
   leftIcon,
+  endIcon,
   rightIcon,
 }) => {
+  startIcon ??= leftIcon
+  endIcon ??= rightIcon
   return (
     <>
-      {leftIcon ? <ButtonIcon>{leftIcon}</ButtonIcon> : null}
+      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
       {children}
-      {rightIcon ? <ButtonIcon>{rightIcon}</ButtonIcon> : null}
+      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
     </>
   )
 }

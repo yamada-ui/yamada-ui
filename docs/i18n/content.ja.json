@@ -1205,6 +1205,13 @@
   },
   {
     "type": "page",
+    "description": "`DataList`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "DataList" },
+    "slug": "/components/data-display/data-list",
+    "title": "DataList"
+  },
+  {
+    "type": "page",
     "description": "`Dockable`は、現在作成を検討しています。",
     "hierarchy": { "lv1": "Dockable" },
     "slug": "/components/data-display/dockable",
@@ -4172,6 +4179,13 @@
     },
     "slug": "/components/forms/checkbox#react-hook-formを使う",
     "title": "React Hook Formを使う"
+  },
+  {
+    "type": "page",
+    "description": "`CheckboxCard`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "CheckboxCard" },
+    "slug": "/components/forms/checkbox-card",
+    "title": "CheckboxCard"
   },
   {
     "type": "page",
@@ -7219,6 +7233,13 @@
   },
   {
     "type": "page",
+    "description": "`PasswordInput`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "PasswordInput" },
+    "slug": "/components/forms/password-input",
+    "title": "PasswordInput"
+  },
+  {
+    "type": "page",
     "description": "`PhoneInput`は、現在作成を検討しています。",
     "hierarchy": { "lv1": "PhoneInput" },
     "slug": "/components/forms/phone-input",
@@ -7503,6 +7524,13 @@
     },
     "slug": "/components/forms/radio#react-hook-formを使う",
     "title": "React Hook Formを使う"
+  },
+  {
+    "type": "page",
+    "description": "`RadioCard`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "RadioCard" },
+    "slug": "/components/forms/radio-card",
+    "title": "RadioCard"
   },
   {
     "type": "page",
@@ -9342,6 +9370,31 @@
   },
   {
     "type": "page",
+    "description": "`Bleed`は、要素をコンテナの境界から外すために使用されるコンポーネントです。",
+    "hierarchy": { "lv1": "Bleed" },
+    "slug": "/components/layouts/bleed",
+    "title": "Bleed"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Bleed", "lv2": "インポート" },
+    "slug": "/components/layouts/bleed#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Bleed", "lv2": "使い方" },
+    "slug": "/components/layouts/bleed#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Bleed", "lv2": "使い方", "lv3": "画面幅に合わせる" },
+    "slug": "/components/layouts/bleed#画面幅に合わせる",
+    "title": "画面幅に合わせる"
+  },
+  {
+    "type": "page",
     "description": "`Box`は、他のすべてのコンポーネントがその上に構築される最も抽象的なコンポーネントです。デフォルトでは、`div`要素をレンダリングします。",
     "hierarchy": { "lv1": "Box" },
     "slug": "/components/layouts/box",
@@ -9466,6 +9519,45 @@
     "hierarchy": { "lv1": "Flex", "lv2": "使い方", "lv3": "Spacerを使う" },
     "slug": "/components/layouts/flex#spacerを使う",
     "title": "Spacerを使う"
+  },
+  {
+    "type": "page",
+    "description": "`Float`は、要素をコンテナの端に固定するために使用されるコンポーネントです。",
+    "hierarchy": { "lv1": "Float" },
+    "slug": "/components/layouts/float",
+    "title": "Float"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Float", "lv2": "インポート" },
+    "slug": "/components/layouts/float#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Float", "lv2": "使い方" },
+    "slug": "/components/layouts/float#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Float",
+      "lv2": "使い方",
+      "lv3": "表示位置を変更する"
+    },
+    "slug": "/components/layouts/float#表示位置を変更する",
+    "title": "表示位置を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Float",
+      "lv2": "使い方",
+      "lv3": "オフセットを変更する"
+    },
+    "slug": "/components/layouts/float#オフセットを変更する",
+    "title": "オフセットを変更する"
   },
   {
     "type": "page",
@@ -10031,6 +10123,45 @@
   },
   {
     "type": "page",
+    "description": "`Picture`は、`picture`要素を使用し、異なる表示やデバイスのシナリオに応じて代替の画像を提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Picture" },
+    "slug": "/components/media-and-icons/picture",
+    "title": "Picture"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Picture", "lv2": "インポート" },
+    "slug": "/components/media-and-icons/picture#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Picture", "lv2": "使い方" },
+    "slug": "/components/media-and-icons/picture#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Picture",
+      "lv2": "使い方",
+      "lv3": "任意のメディアを使用する"
+    },
+    "slug": "/components/media-and-icons/picture#任意のメディアを使用する",
+    "title": "任意のメディアを使用する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Picture",
+      "lv2": "使い方",
+      "lv3": "ソートを無効にする"
+    },
+    "slug": "/components/media-and-icons/picture#ソートを無効にする",
+    "title": "ソートを無効にする"
+  },
+  {
+    "type": "page",
     "description": "`Breadcrumb`は、ユーザーがウェブサイトの階層を理解するのに役立つコンポーネントです。",
     "hierarchy": { "lv1": "Breadcrumb" },
     "slug": "/components/navigation/breadcrumb",
@@ -10360,6 +10491,13 @@
   },
   {
     "type": "page",
+    "description": "`EmptyState`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "EmptyState" },
+    "slug": "/components/other/empty-state",
+    "title": "EmptyState"
+  },
+  {
+    "type": "page",
     "description": "`FocusLock`は、モーダルやダイアログなどの要素でフォーカスを制限し、フォーカスをその範囲内にロックすることで、アクセシビリティを向上させるコンポーネントです。",
     "hierarchy": { "lv1": "FocusLock" },
     "slug": "/components/other/focus-lock",
@@ -10376,6 +10514,27 @@
     "hierarchy": { "lv1": "FocusLock", "lv2": "使い方" },
     "slug": "/components/other/focus-lock#使い方",
     "title": "使い方"
+  },
+  {
+    "type": "page",
+    "description": "`For`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "For" },
+    "slug": "/components/other/for",
+    "title": "For"
+  },
+  {
+    "type": "page",
+    "description": "`FormatByte`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "FormatByte" },
+    "slug": "/components/other/format-byte",
+    "title": "FormatByte"
+  },
+  {
+    "type": "page",
+    "description": "`FormatNumber`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "FormatNumber" },
+    "slug": "/components/other/format-number",
+    "title": "FormatNumber"
   },
   {
     "type": "page",
@@ -10632,6 +10791,13 @@
     "hierarchy": { "lv1": "VisuallyHidden", "lv2": "使い方" },
     "slug": "/components/other/visually-hidden#使い方",
     "title": "使い方"
+  },
+  {
+    "type": "page",
+    "description": "`ActionBar`は、現在作成を検討しています。",
+    "hierarchy": { "lv1": "ActionBar" },
+    "slug": "/components/overlay/action-bar",
+    "title": "ActionBar"
   },
   {
     "type": "page",
@@ -11600,6 +11766,67 @@
   },
   {
     "type": "page",
+    "description": "`Airy`は、２つの要素をふわっと切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Airy" },
+    "slug": "/components/transitions/airy",
+    "title": "Airy"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "インポート" },
+    "slug": "/components/transitions/airy#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方" },
+    "slug": "/components/transitions/airy#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/airy#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/airy#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/airy#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/airy#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/airy#制御する",
+    "title": "制御する"
+  },
+  {
+    "type": "page",
     "description": "`Collapse`は、要素を展開または折りたたんで表示するコンポーネントです。",
     "hierarchy": { "lv1": "Collapse" },
     "slug": "/components/transitions/collapse",
@@ -11698,10 +11925,162 @@
   },
   {
     "type": "page",
+    "description": "`Flip`は、２つの要素をフリップさせながら切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Flip" },
+    "slug": "/components/transitions/flip",
+    "title": "Flip"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "インポート" },
+    "slug": "/components/transitions/flip#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方" },
+    "slug": "/components/transitions/flip#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "フリップさせる方向を変更する"
+    },
+    "slug": "/components/transitions/flip#フリップさせる方向を変更する",
+    "title": "フリップさせる方向を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "アニメーションにスプリングを加える"
+    },
+    "slug": "/components/transitions/flip#アニメーションにスプリングを加える",
+    "title": "アニメーションにスプリングを加える"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/flip#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/flip#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/flip#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Flip",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/flip#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/flip#制御する",
+    "title": "制御する"
+  },
+  {
+    "type": "page",
     "description": "`Collapse`や`Fade`など、要素にアニメーションを提供して視覚的な遷移を演出するコンポーネントが用意されています。",
     "hierarchy": { "lv1": "トランジション" },
     "slug": "/components/transitions",
     "title": "トランジション"
+  },
+  {
+    "type": "page",
+    "description": "`Rotate`は、２つの要素を回転させながら切り替えるアニメーションを提供するコンポーネントです。",
+    "hierarchy": { "lv1": "Rotate" },
+    "slug": "/components/transitions/rotate",
+    "title": "Rotate"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "インポート" },
+    "slug": "/components/transitions/rotate#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方" },
+    "slug": "/components/transitions/rotate#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "回転させる角度を変更する"
+    },
+    "slug": "/components/transitions/rotate#回転させる角度を変更する",
+    "title": "回転させる角度を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "所要時間を変更する"
+    },
+    "slug": "/components/transitions/rotate#所要時間を変更する",
+    "title": "所要時間を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "アニメーションの発火を遅らせる"
+    },
+    "slug": "/components/transitions/rotate#アニメーションの発火を遅らせる",
+    "title": "アニメーションの発火を遅らせる"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "無効にする" },
+    "slug": "/components/transitions/rotate#無効にする",
+    "title": "無効にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    },
+    "slug": "/components/transitions/rotate#読み取り専用にする",
+    "title": "読み取り専用にする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "制御する" },
+    "slug": "/components/transitions/rotate#制御する",
+    "title": "制御する"
   },
   {
     "type": "page",
@@ -11839,6 +12218,149 @@
     },
     "slug": "/components/transitions/slide-fade#非表示時にアンマウントする",
     "title": "非表示時にアンマウントする"
+  },
+  {
+    "type": "page",
+    "description": "`Blockquote` は引用を表すコンポーネントです。デフォルトでは `blockquote` 要素をレンダリングします。",
+    "hierarchy": { "lv1": "Blockquote" },
+    "slug": "/components/typography/blockquote",
+    "title": "Blockquote"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Blockquote", "lv2": "インポート" },
+    "slug": "/components/typography/blockquote#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Blockquote", "lv2": "使い方" },
+    "slug": "/components/typography/blockquote#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "バリアントを変更する"
+    },
+    "slug": "/components/typography/blockquote#バリアントを変更する",
+    "title": "バリアントを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "カラースキーマを変更する"
+    },
+    "slug": "/components/typography/blockquote#カラースキーマを変更する",
+    "title": "カラースキーマを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "引用元を表示する"
+    },
+    "slug": "/components/typography/blockquote#引用元を表示する",
+    "title": "引用元を表示する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "アイコンを表示する"
+    },
+    "slug": "/components/typography/blockquote#アイコンを表示する",
+    "title": "アイコンを表示する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "配置を変更する"
+    },
+    "slug": "/components/typography/blockquote#配置を変更する",
+    "title": "配置を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Blockquote",
+      "lv2": "使い方",
+      "lv3": "カスタマイズする"
+    },
+    "slug": "/components/typography/blockquote#カスタマイズする",
+    "title": "カスタマイズする"
+  },
+  {
+    "type": "page",
+    "description": "`Code` はコードブロックを表すコンポーネントです。デフォルトでは `code` 要素をレンダリングします。",
+    "hierarchy": { "lv1": "Code" },
+    "slug": "/components/typography/code",
+    "title": "Code"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Code", "lv2": "インポート" },
+    "slug": "/components/typography/code#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Code", "lv2": "使い方" },
+    "slug": "/components/typography/code#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Code",
+      "lv2": "使い方",
+      "lv3": "バリアントを変更する"
+    },
+    "slug": "/components/typography/code#バリアントを変更する",
+    "title": "バリアントを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Code", "lv2": "使い方", "lv3": "サイズを変更する" },
+    "slug": "/components/typography/code#サイズを変更する",
+    "title": "サイズを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Code",
+      "lv2": "使い方",
+      "lv3": "カラースキーマを変更する"
+    },
+    "slug": "/components/typography/code#カラースキーマを変更する",
+    "title": "カラースキーマを変更する"
+  },
+  {
+    "type": "page",
+    "description": "`Em`は強調されたテキストを表すコンポーネントです。デフォルトでは、`em`要素をレンダリングします。",
+    "hierarchy": { "lv1": "Em" },
+    "slug": "/components/typography/em",
+    "title": "Em"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Em", "lv2": "インポート" },
+    "slug": "/components/typography/em#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Em", "lv2": "使い方" },
+    "slug": "/components/typography/em#使い方",
+    "title": "使い方"
   },
   {
     "type": "page",
@@ -12724,6 +13246,45 @@
   },
   {
     "type": "page",
+    "description": "`useAsyncCallback`は、非同期コールバックを管理するためのカスタムフックです。",
+    "hierarchy": { "lv1": "useAsyncCallback" },
+    "slug": "/hooks/use-async-callback",
+    "title": "useAsyncCallback"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "useAsyncCallback", "lv2": "インポート" },
+    "slug": "/hooks/use-async-callback#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "useAsyncCallback", "lv2": "使い方" },
+    "slug": "/hooks/use-async-callback#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "useAsyncCallback",
+      "lv2": "使い方",
+      "lv3": "ローディングを併用する"
+    },
+    "slug": "/hooks/use-async-callback#ローディングを併用する",
+    "title": "ローディングを併用する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "useAsyncCallback",
+      "lv2": "使い方",
+      "lv3": "コンフィグからカスタマイズする"
+    },
+    "slug": "/hooks/use-async-callback#コンフィグからカスタマイズする",
+    "title": "コンフィグからカスタマイズする"
+  },
+  {
+    "type": "page",
     "description": "`useAsync`は、は非同期関数を実行し、その状態を追跡するカスタムフックです。",
     "hierarchy": { "lv1": "useAsync" },
     "slug": "/hooks/use-async",
@@ -13430,6 +13991,44 @@
     "type": "fragment",
     "hierarchy": { "lv1": "usePrevious", "lv2": "使い方" },
     "slug": "/hooks/use-previous#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "page",
+    "description": "`useProcessing` は処理状態を管理するためのカスタムフックです。",
+    "hierarchy": { "lv1": "useProcessing" },
+    "slug": "/hooks/use-processing",
+    "title": "useProcessing"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "useProcessing", "lv2": "インポート" },
+    "slug": "/hooks/use-processing#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "useProcessing", "lv2": "使い方" },
+    "slug": "/hooks/use-processing#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "page",
+    "description": "`usePromiseDisclosure`は、一般的な開閉や切り替えのシナリオを非同期処理するのに役立つカスタムフックです。`Modal`、`Dialog`、`Drawer`などのコンポーネントを制御するために使用できます。",
+    "hierarchy": { "lv1": "usePromiseDisclosure" },
+    "slug": "/hooks/use-promise-disclosure",
+    "title": "usePromiseDisclosure"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "usePromiseDisclosure", "lv2": "インポート" },
+    "slug": "/hooks/use-promise-disclosure#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "usePromiseDisclosure", "lv2": "使い方" },
+    "slug": "/hooks/use-promise-disclosure#使い方",
     "title": "使い方"
   },
   {
@@ -15621,9 +16220,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Breakpoint" },
-    "slug": "/styled-system/theming/default-theme#breakpoint",
-    "title": "Breakpoint"
+    "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Breakpoints" },
+    "slug": "/styled-system/theming/default-theme#breakpoints",
+    "title": "Breakpoints"
   },
   {
     "type": "page",

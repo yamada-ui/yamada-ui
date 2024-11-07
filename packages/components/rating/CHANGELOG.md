@@ -1,5 +1,28 @@
 # @yamada-ui/rating
 
+## 1.1.3
+
+### Patch Changes
+
+- [#3326](https://github.com/yamada-ui/yamada-ui/pull/3326) [`1e6140f`](https://github.com/yamada-ui/yamada-ui/commit/1e6140f67987960f61346fa85e3a43faf077b6e6) Thanks [@108yen](https://github.com/108yen)! - Added `"use client"` to rating.
+
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/form-control@2.1.6
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/motion@2.2.6
+
 ## 1.1.0
 
 ### Minor Changes

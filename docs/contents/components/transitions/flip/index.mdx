@@ -1,0 +1,127 @@
+---
+title: Flip
+description: >-
+  `Flip` is a component that provides an animation to switch between two elements while flipping.
+package_name: "@yamada-ui/transitions"
+is_tabs: true
+with_description: true
+tab: Usage
+label: New
+---
+
+## Import
+
+```ts
+import { Flip } from "@yamada-ui/react"
+```
+
+## Usage
+
+Pass the components to be switched as `from` and `to`.
+
+```tsx functional=true
+return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+```
+
+### Change the Flip Direction
+
+To change the flip direction, use `orientation`. The default is `horizontal`.
+
+```tsx functional=true
+return (
+  <Flip
+    orientation="vertical"
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### Change Spring to the Animation
+
+If you want to add a spring effect to the flip animation, use `transition`.
+
+```tsx functional=true
+return (
+  <Flip
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+    transition={{
+      type: "spring",
+      damping: 10,
+      stiffness: 120,
+    }}
+  />
+)
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx functional=true
+return (
+  <Flip
+    duration={1.4}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### Delay the Animation Trigger
+
+To delay the animation trigger, set a value (in seconds) for `delay`.
+
+```tsx functional=true
+return (
+  <Flip
+    delay={1}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### Disable
+
+To disable, set `isDisabled` to `true`.
+
+```tsx functional=true
+return (
+  <Flip
+    isdisabled
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### ReadOnly
+
+To readyOnly, set `isReadOnly` to `true`.
+
+```tsx functional=true
+return (
+  <Flip
+    isReadOnly
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### Control
+
+```tsx functional=true
+const [value, onChange] = useState<FlipIdent>("from")
+
+return (
+  <Flip
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```

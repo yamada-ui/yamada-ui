@@ -1,5 +1,10 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { isAccessible, isGray, transparentizeColor } from "@yamada-ui/utils"
+import {
+  isAccessible,
+  isGray,
+  shadeColor,
+  transparentizeColor,
+} from "@yamada-ui/utils"
 
 export const Pagination: ComponentMultiStyle<"Pagination"> = {
   baseStyle: {
@@ -8,7 +13,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         cursor: "not-allowed",
       },
     },
-    ellipsis: { pointerEvents: "none" },
+    ellipsis: { border: "0", pointerEvents: "none" },
     first: {},
     inner: {},
     item: {
@@ -16,6 +21,9 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       px: 1,
       transitionDuration: "slower",
       transitionProperty: "common",
+      _active: {
+        bg: ["blackAlpha.100", "whiteAlpha.100"],
+      },
       _disabled: {
         boxShadow: "none",
         cursor: "not-allowed",
@@ -28,6 +36,7 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
         boxShadow: "outline",
       },
       _hover: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
         _disabled: {
           bg: ["initial", "initial"],
         },
@@ -43,11 +52,6 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     ghost: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       return {
         item: {
-          _active: {
-            bg: isGray(c)
-              ? [`${c}.300`, `whiteAlpha.300`]
-              : [`${c}.200`, transparentizeColor(`${c}.200`, 0.24)(t, m)],
-          },
           _hover: {
             bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
           },
@@ -63,63 +67,55 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     },
     outline: ({ colorScheme: c = "primary" }) => {
       return {
-        ellipsis: {
-          border: "0",
-        },
         item: {
           border: "1px solid",
           borderColor: "border",
-          _active: {
-            bg: ["blackAlpha.100", "whiteAlpha.100"],
-          },
-          _hover: {
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
-            _disabled: {
-              bg: ["initial", "initial"],
-            },
-          },
           _selected: {
             bg: "transparent",
             borderColor: [`${c}.600`, `${c}.500`],
             color: isGray(c)
               ? ["blackAlpha.800", "whiteAlpha.700"]
               : [`${c}.600`, `${c}.500`],
-            _hover: {
-              bg: ["transparent", "transparent"],
-            },
           },
         },
       }
     },
     solid: ({ colorScheme: c = "primary" }) => ({
-      ellipsis: {
-        border: "0",
-      },
       item: {
         border: "1px solid",
         borderColor: "border",
-        _active: {
-          bg: ["blackAlpha.100", "whiteAlpha.100"],
-        },
-        _hover: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _disabled: {
-            bg: ["initial", "initial"],
+        vars: [
+          {
+            name: "bg",
+            token: "colors",
+            value: isGray(c)
+              ? [`${c}.50`, `${c}.700`]
+              : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           },
-        },
+        ],
         _selected: {
-          bg: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
-            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          borderColor: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
-            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          bg: "$bg",
+          borderColor: "$bg",
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-          _hover: {
-            bg: isGray(c)
-              ? [`${c}.100`, `${c}.800`]
-              : [isAccessible(c) ? `${c}.500` : `${c}.600`, `${c}.700`],
-          },
+        },
+      },
+    }),
+    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
+      item: {
+        _selected: {
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+        },
+      },
+    }),
+    surface: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
+      item: {
+        border: "1px solid",
+        borderColor: "border",
+        _selected: {
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
+          borderColor: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
     }),

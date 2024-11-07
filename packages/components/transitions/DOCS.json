@@ -1,4 +1,76 @@
 {
+  "Airy": {
+    "from": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"from\" is required.",
+      "required": true
+    },
+    "to": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"to\" is required.",
+      "required": true
+    },
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "AiryIdent",
+      "defaultValue": "'from'",
+      "description": "You can set the initial state.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "　The animation delay.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: AiryIdent) => void",
+      "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Airy.",
+      "required": false
+    },
+    "value": {
+      "type": "AiryIdent",
+      "description": "Use this when you want to control the animation from outside the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the Airy.",
+      "required": false
+    }
+  },
   "Collapse": {
     "animationOpacity": {
       "type": "boolean",
@@ -7,7 +79,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -86,7 +158,7 @@
   },
   "Fade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -136,9 +208,170 @@
       "required": false
     }
   },
+  "Flip": {
+    "from": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"from\" is required.",
+      "required": true
+    },
+    "to": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"to\" is required.",
+      "required": true
+    },
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "FlipIdent",
+      "defaultValue": "'from'",
+      "description": "You can set the initial state.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "　The animation delay.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "0.4",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: FlipIdent) => void",
+      "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "orientation": {
+      "type": "FlipOrientation",
+      "defaultValue": "'horizontal'",
+      "description": "The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Flip.",
+      "required": false
+    },
+    "transition": {
+      "type": "Transition$1",
+      "description": "The animation transition.",
+      "required": false
+    },
+    "value": {
+      "type": "FlipIdent",
+      "description": "Use this when you want to control the animation from outside the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the Flip.",
+      "required": false
+    }
+  },
+  "Rotate": {
+    "from": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"from\" is required.",
+      "required": true
+    },
+    "to": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "Passing React elements to \"to\" is required.",
+      "required": true
+    },
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "RotateIdent",
+      "defaultValue": "'from'",
+      "description": "You can set the initial state.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "　The animation delay.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "0.4",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: RotateIdent) => void",
+      "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "rotate": {
+      "type": "number",
+      "defaultValue": "45",
+      "description": "The animation rotation.",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Rotate.",
+      "required": false
+    },
+    "value": {
+      "type": "RotateIdent",
+      "description": "Use this when you want to control the animation from outside the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the Rotate.",
+      "required": false
+    }
+  },
   "ScaleFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -217,7 +450,7 @@
   },
   "Slide": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -290,7 +523,7 @@
   },
   "SlideFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"button\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
       "description": "The HTML element to render.",
       "required": false
     },

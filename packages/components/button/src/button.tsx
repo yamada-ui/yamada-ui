@@ -194,7 +194,7 @@ export const Button = forwardRef<ButtonProps, "button">(
           />
         ) : null}
 
-        <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </ui.button>
     )
   },

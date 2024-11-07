@@ -4,6 +4,7 @@ import type {
   RenderHookOptions as ReactRenderHookOptions,
   RenderOptions as ReactRenderOptions,
 } from "@testing-library/react"
+import type { UIProviderProps } from "@yamada-ui/providers"
 import type { ReactElement } from "react"
 import type * as ReactDOMClient from "react-dom/client"
 import {
@@ -49,6 +50,7 @@ export type RenderHookOptions<
   H extends HydrateableContainer | RendererableContainer = D,
 > = {
   withProvider?: boolean
+  providerProps?: Omit<UIProviderProps, "children">
 } & ReactRenderHookOptions<Y, M, D, H>
 
 export function renderHook<
@@ -59,10 +61,16 @@ export function renderHook<
   R extends HydrateableContainer | RendererableContainer = H,
 >(
   render: (props: M) => Y,
-  { withProvider = true, ...rest }: RenderHookOptions<M, D, H, R> = {},
+  {
+    withProvider = true,
+    providerProps,
+    ...rest
+  }: RenderHookOptions<M, D, H, R> = {},
 ) {
   if (withProvider)
-    rest.wrapper ??= (props: any) => <UIProvider {...props} theme={theme} />
+    rest.wrapper ??= (props: any) => (
+      <UIProvider {...props} theme={theme} {...providerProps} />
+    )
 
   return reactRenderHook<Y, M, D, H, R>(render, rest)
 }

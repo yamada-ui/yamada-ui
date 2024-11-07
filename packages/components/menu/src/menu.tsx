@@ -1,6 +1,5 @@
-import type { ThemeProps } from "@yamada-ui/core"
+import type { FC, ThemeProps } from "@yamada-ui/core"
 import type { PopoverProps } from "@yamada-ui/popover"
-import type { FC } from "react"
 import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { Popover } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
@@ -205,3 +204,5 @@ export const Menu: FC<MenuProps> = (props) => {
     </DescendantsContextProvider>
   )
 }
+
+Menu.__ui__ = "Menu"

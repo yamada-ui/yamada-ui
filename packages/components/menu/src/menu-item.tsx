@@ -1,6 +1,5 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type {
-  FC,
   KeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -242,6 +241,9 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
   },
 )
 
+MenuItem.displayName = "MenuItem"
+MenuItem.__ui__ = "MenuItem"
+
 interface MenuOptionItemOptions {
   /**
    * The type of the menu option item.
@@ -291,6 +293,9 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   },
 )
 
+MenuOptionItem.displayName = "MenuOptionItem"
+MenuOptionItem.__ui__ = "MenuOptionItem"
+
 export interface MenuIconProps extends HTMLUIProps<"span"> {}
 
 export const MenuIcon = forwardRef<MenuIconProps, "span">(
@@ -318,6 +323,9 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
   },
 )
 
+MenuIcon.displayName = "MenuIcon"
+MenuIcon.__ui__ = "MenuIcon"
+
 export interface MenuCommandProps extends HTMLUIProps<"span"> {}
 
 export const MenuCommand = forwardRef<MenuCommandProps, "span">(
@@ -336,6 +344,9 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
     )
   },
 )
+
+MenuCommand.displayName = "MenuCommand"
+MenuCommand.__ui__ = "MenuCommand"
 
 const CheckIcon: FC = () => (
   <svg height="1em" viewBox="0 0 14 14" width="1em">

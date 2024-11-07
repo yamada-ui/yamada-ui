@@ -1,5 +1,19 @@
 # @yamada-ui/icon
 
+## 1.1.11
+
+### Patch Changes
+
+- [#3287](https://github.com/yamada-ui/yamada-ui/pull/3287) [`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea) Thanks [@kurakke](https://github.com/kurakke)! - Enhanced a11y in the Icon component by setting role="img" and applying aria-hidden="true" as defaults.
+
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/use-token@1.1.29
+
 ## 1.1.9
 
 ### Patch Changes

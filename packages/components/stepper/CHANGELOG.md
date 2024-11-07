@@ -1,5 +1,21 @@
 # @yamada-ui/stepper
 
+## 1.0.45
+
+### Patch Changes
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+
+## 1.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`81fda67`](https://github.com/yamada-ui/yamada-ui/commit/81fda6792c1a5f5d8af7f33fb068afdfcecd1468), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/use-descendant@1.0.25
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/icon@1.1.10
+
 ## 1.0.43
 
 ### Patch Changes

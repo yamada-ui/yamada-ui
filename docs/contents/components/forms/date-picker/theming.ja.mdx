@@ -3,7 +3,6 @@ title: DatePicker
 description: "`DatePicker`は、ユーザーが日付を選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/calendar"
 order: 2
-label: Updated
 with_description: true
 tab: テーマ
 ---
@@ -50,8 +49,13 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
     sizes: {
       xs: {
         icon: {
-          fontSize: "md",
+          fontSize: "sm",
           pt: "2",
+        },
+      },
+      sm: {
+        icon: {
+          fontSize: "lg",
         },
       },
     },

@@ -65,3 +65,6 @@ export const Puff = forwardRef<PuffProps, "svg">(
     )
   },
 )
+
+Puff.displayName = "Puff"
+Puff.__ui__ = "Puff"

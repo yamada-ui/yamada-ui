@@ -1,0 +1,36 @@
+---
+title: AlphaSlider
+description: "`AlphaSlider` is a component used to allow the user to select a color hue."
+package_name: "@yamada-ui/color-picker"
+order: 3
+with_description: true
+tab: Accessibility
+---
+
+The `AlphaSlider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) for accessibility.
+
+## Keyboard Navigation
+
+| Key          | Description                                       | State |
+| ------------ | ------------------------------------------------- | ----- |
+| `Tab`        | Focuses the thumb.                                | -     |
+| `ArrowRight` | Increases the value by one step.                  | -     |
+| `ArrowLeft`  | Decreases the value by one step.                  | -     |
+| `ArrowUp`    | Increases the value by one step.                  | -     |
+| `ArrowDown`  | Decreases the value by one step.                  | -     |
+| `Home`       | Sets to the first allowed value within the range. | -     |
+| `End`        | Sets to the last allowed value within the range.  | -     |
+| `PageUp`     | Increases the value by a larger step.             | -     |
+| `PageDown`   | Decreases the value by a larger step.             | -     |
+
+## ARIA Roles and Attributes
+
+| Component   | Role and Attributes | Usage                                                          |
+| ----------- | ------------------- | -------------------------------------------------------------- |
+| SliderThumb | `role="slider"`     | Indicates that the element is a slider.                        |
+|             | `aria-label`        | Sets `"Slider thumb"`.                                         |
+|             | `aria-valuemax`     | Sets the `max` value. Default is `360`.                        |
+|             | `aria-valuemin`     | Sets the `min` value. Default is `0`.                          |
+|             | `aria-valuenow`     | Sets the current value.                                        |
+|             | `aria-disabled`     | Set to `"true"` when `isDisabled` is set on the `AlphaSlider`. |
+|             | `aria-readonly`     | Set to `"true"` when `isReadOnly` is set on the `AlphaSlider`. |

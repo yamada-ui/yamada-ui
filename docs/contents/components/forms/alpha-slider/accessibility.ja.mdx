@@ -1,0 +1,36 @@
+---
+title: AlphaSlider
+description: "`AlphaSlider`は、ユーザーが色相を選択するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/color-picker"
+order: 3
+with_description: true
+tab: アクセシビリティ
+---
+
+`AlphaSlider`は、アクセシビリティに関して[WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/)に従います。
+
+## キーボード操作
+
+| キー         | 説明                                     | 状態 |
+| ------------ | ---------------------------------------- | ---- |
+| `Tab`        | つまみをフォーカスします。               | -    |
+| `ArrowRight` | 値を1ステップ増やします                  | -    |
+| `ArrowLeft`  | 値を1ステップ減らします。                | -    |
+| `ArrowUp`    | 値を1ステップ増やします                  | -    |
+| `ArrowDown`  | 値を1ステップ減らします。                | -    |
+| `Home`       | 範囲内で許可される最初の値に設定します。 | -    |
+| `End`        | 範囲内で許可される最後の値に設定します。 | -    |
+| `PageUp`     | 値を大きく増やします。                   | -    |
+| `PageDown`   | 値を大きく減らします。                   | -    |
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性    | 使い方                                                                    |
+| -------------- | --------------- | ------------------------------------------------------------------------- |
+| SliderThumb    | `role="slider"` | スライダーであることを示します。                                          |
+|                | `aria-label`    | `"Slider thumb"`を設定します。                                            |
+|                | `aria-valuemax` | `max`の値を設定します。デフォルトは`360`です。                            |
+|                | `aria-valuemin` | `min`の値を設定します。デフォルトは`0`です。                              |
+|                | `aria-valuenow` | 現在の値を設定します。                                                    |
+|                | `aria-disabled` | `"AlphaSlider"`に`isDisabled`が設定されている場合は`"true"`を設定します。 |
+|                | `aria-readonly` | `"AlphaSlider"`に`isReadOnly`が設定されている場合は`"true"`を設定します。 |

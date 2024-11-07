@@ -305,6 +305,24 @@ describe("<Autocomplete />", () => {
         await waitFor(() => expect(o).toBeVisible())
       })
     })
+
+    test("should focus the input element on click an option with disabled", async () => {
+      const { user } = render(
+        <Autocomplete>
+          <AutocompleteOption isDisabled value="disabledOption">
+            disabledOption
+          </AutocompleteOption>
+        </Autocomplete>,
+      )
+
+      const disabledOptionElement = screen.getByText("disabledOption")
+      expect(disabledOptionElement).toBeInTheDocument()
+
+      await user.click(disabledOptionElement)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toHaveFocus()
+    })
   })
 
   describe("keyDown event", () => {

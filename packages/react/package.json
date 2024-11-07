@@ -82,6 +82,7 @@
     "@yamada-ui/notice": "workspace:*",
     "@yamada-ui/number-input": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
+    "@yamada-ui/password-input": "workspace:*",
     "@yamada-ui/pin-input": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/portal": "workspace:*",

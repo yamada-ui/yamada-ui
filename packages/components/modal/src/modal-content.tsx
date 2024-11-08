@@ -7,7 +7,7 @@ import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, getValidChildren } from "@yamada-ui/utils"
 import { DialogCloseButton } from "./dialog-close-button"
 import { ModalCloseButton } from "./modal-close-button"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 const getModalContentProps = (
   animation: ModalProps["animation"] = "scale",
@@ -60,7 +60,7 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
       styles,
       withCloseButton,
       onClose,
-    } = useModal()
+    } = useModalContext()
 
     const validChildren = getValidChildren(children)
 

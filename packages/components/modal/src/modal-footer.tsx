@@ -1,13 +1,13 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 export interface ModalFooterProps extends HTMLUIProps<"footer"> {}
 
 export const ModalFooter = forwardRef<ModalFooterProps, "footer">(
   ({ className, __css, ...rest }, ref) => {
-    const { styles } = useModal()
+    const { styles } = useModalContext()
 
     const css: CSSUIObject = {
       alignItems: "center",

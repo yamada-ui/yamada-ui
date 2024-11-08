@@ -16,7 +16,7 @@ import { Portal } from "@yamada-ui/portal"
 import { useId } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { ModalContent } from "./modal-content"
-import { ModalProvider } from "./modal-context"
+import { ModalContextProvider } from "./modal-context"
 import { ModalOverlay } from "./modal-overlay"
 import { useModal } from "./use-modal"
 
@@ -188,7 +188,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
     }
 
     return (
-      <ModalProvider
+      <ModalContextProvider
         value={{
           animation,
           closeOnOverlay,
@@ -240,7 +240,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
             </Portal>
           ) : null}
         </AnimatePresence>
-      </ModalProvider>
+      </ModalContextProvider>
     )
   },
 )

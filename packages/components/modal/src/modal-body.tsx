@@ -1,13 +1,13 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 export interface ModalBodyProps extends HTMLUIProps {}
 
 export const ModalBody = forwardRef<ModalBodyProps, "div">(
   ({ className, __css, ...rest }, ref) => {
-    const { describedbyId, scrollBehavior, styles } = useModal()
+    const { describedbyId, scrollBehavior, styles } = useModalContext()
 
     const css: CSSUIObject = {
       alignItems: "flex-start",

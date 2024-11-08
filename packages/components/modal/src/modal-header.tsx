@@ -1,13 +1,13 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 export interface ModalHeaderProps extends HTMLUIProps<"header"> {}
 
 export const ModalHeader = forwardRef<ModalHeaderProps, "header">(
   ({ className, __css, ...rest }, ref) => {
-    const { labelledbyId, styles } = useModal()
+    const { labelledbyId, styles } = useModalContext()
 
     const css: CSSUIObject = {
       alignItems: "center",

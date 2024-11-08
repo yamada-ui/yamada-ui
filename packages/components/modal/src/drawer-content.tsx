@@ -10,7 +10,7 @@ import { cx, findChildren, getValidChildren, isArray } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import { DrawerCloseButton } from "./drawer-close-button"
 import { DrawerDragBar } from "./drawer-drag-bar"
-import { useDrawer, useModal } from "./modal-context"
+import { useDrawer, useModalContext } from "./modal-context"
 
 export interface DrawerContentProps
   extends Merge<
@@ -47,7 +47,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     ref,
   ) => {
     const { describedbyId, duration, isOpen, labelledbyId, onClose } =
-      useModal()
+      useModalContext()
     const styles = useDrawer()
     const placement = useValue(_placement)
 

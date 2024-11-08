@@ -3,7 +3,7 @@ import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { fadeProps } from "@yamada-ui/transitions"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 export interface ModalOverlayProps extends MotionProps {}
 
@@ -16,7 +16,7 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
       styles,
       onClose,
       onOverlayClick,
-    } = useModal()
+    } = useModalContext()
 
     const css: CSSUIObject = {
       h: "100dvh",

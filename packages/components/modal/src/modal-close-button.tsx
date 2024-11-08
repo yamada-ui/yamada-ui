@@ -3,13 +3,13 @@ import type { CSSUIObject } from "@yamada-ui/core"
 import { CloseButton } from "@yamada-ui/close-button"
 import { forwardRef } from "@yamada-ui/core"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import { useModal } from "./modal-context"
+import { useModalContext } from "./modal-context"
 
 export interface ModalCloseButtonProps extends CloseButtonProps {}
 
 export const ModalCloseButton = forwardRef<ModalCloseButtonProps, "button">(
   ({ onClick, __css, ...rest }, ref) => {
-    const { styles, onClose } = useModal()
+    const { styles, onClose } = useModalContext()
 
     const css: CSSUIObject = {
       position: "absolute",

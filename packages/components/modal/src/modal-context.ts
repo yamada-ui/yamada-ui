@@ -9,10 +9,11 @@ interface ModalContext extends ModalOptions, Pick<UseModalProps, "onClose"> {
   styles: { [key: string]: CSSUIObject | undefined }
 }
 
-export const [ModalProvider, useModal] = createContext<ModalContext>({
-  name: `ModalContext`,
-  errorMessage: `useModal returned is 'undefined'. Seems you forgot to wrap the components in "<Modal />" `,
-})
+export const [ModalContextProvider, useModalContext] =
+  createContext<ModalContext>({
+    name: `ModalContext`,
+    errorMessage: `useModal returned is 'undefined'. Seems you forgot to wrap the components in "<Modal />" `,
+  })
 
 interface DialogContext {
   [key: string]: CSSUIObject | undefined

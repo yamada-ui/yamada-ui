@@ -165,8 +165,8 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
           </VStack>
         </Box>
       }
-      isOpen={isOpen}
       items={items}
+      open={isOpen}
       value={users}
       w={{ base: "64", md: "full" }}
       clearIconProps={{

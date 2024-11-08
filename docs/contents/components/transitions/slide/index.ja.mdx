@@ -15,7 +15,7 @@ import { Slide } from "@yamada-ui/react"
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`を設定します。
+表示または非表示を制御するために、`open`を設定します。
 
 ```tsx functional=true
 const { isOpen, onToggle } = useDisclosure()
@@ -24,7 +24,7 @@ return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom">
+    <Slide open={isOpen} placement="bottom">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -50,7 +50,7 @@ return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom" duration={0.7}>
+    <Slide open={isOpen} placement="bottom" duration={0.7}>
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -76,7 +76,7 @@ return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="left" zIndex="sonGoku">
+    <Slide open={isOpen} placement="left" zIndex="sonGoku">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！

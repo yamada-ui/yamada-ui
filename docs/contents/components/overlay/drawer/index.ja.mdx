@@ -34,7 +34,7 @@ import {
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
+表示または非表示を制御するために、`open`と`onClose`を設定します。
 
 :::note
 `Drawer`は、内部的に[Modal](/components/overlay/modal)を使用しています。
@@ -47,7 +47,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={isOpen} onClose={onClose}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -88,7 +88,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} size={size}>
+    <Drawer open={isOpen} onClose={onClose} size={size}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -131,7 +131,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer open={isOpen} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -160,7 +160,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} duration={0.7}>
+    <Drawer open={isOpen} onClose={onClose} duration={0.7}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -189,7 +189,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+    <Drawer open={isOpen} onClose={onClose} placement="bottom" isFullHeight>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -218,7 +218,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+    <Drawer open={isOpen} onClose={onClose} blockScrollOnMount={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -247,7 +247,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={isOpen} onClose={onClose}>
       <DrawerCloseButton color="red.500" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -282,7 +282,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen}>
+    <Drawer open={isOpen}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -325,7 +325,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer closeOnDrag isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer closeOnDrag open={isOpen} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -355,7 +355,7 @@ return (
     <Button onClick={onOpen}>Open Drawer</Button>
 
     <Drawer
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       closeOnDrag
       withDragBar={false}
@@ -389,7 +389,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={isOpen} onClose={onClose}>
       <DrawerOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -420,7 +420,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} withOverlay={false}>
+    <Drawer open={isOpen} onClose={onClose} withOverlay={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>

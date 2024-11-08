@@ -27,7 +27,7 @@ return (
       Open Modal
     </Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={isOpen} onClose={onClose}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -50,11 +50,11 @@ return (
 
 When the `Modal` opens, focus is trapped within it. That is, you cannot focus on elements outside the modal unless the modal is closed.
 
-| Key             | Description                                                                                                                                                    | State                                 |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `Tab`           | Focuses the next element within the modal that is not disabled. If it's the last element, focuses the first element within the modal that is not disabled.     | `isOpen={true}`                       |
-| `Shift` + `Tab` | Focuses the previous element within the modal that is not disabled. If it's the first element, focuses the last element within the modal that is not disabled. | `isOpen={true}`                       |
-| `Escape`        | Closes the modal.                                                                                                                                              | `isOpen={true}` + `closeOnEsc={true}` |
+| Key             | Description                                                                                                                                                    | State                               |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `Tab`           | Focuses the next element within the modal that is not disabled. If it's the last element, focuses the first element within the modal that is not disabled.     | `open={true}`                       |
+| `Shift` + `Tab` | Focuses the previous element within the modal that is not disabled. If it's the first element, focuses the last element within the modal that is not disabled. | `open={true}`                       |
+| `Escape`        | Closes the modal.                                                                                                                                              | `open={true}` + `closeOnEsc={true}` |
 
 ## ARIA Roles and Attributes
 

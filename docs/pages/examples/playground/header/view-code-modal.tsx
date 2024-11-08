@@ -32,7 +32,7 @@ response = openai.Completion.create(
 )`
 
 export interface ViewCodeModalProps
-  extends Omit<ModalProps, "isOpen" | "onClose"> {
+  extends Omit<ModalProps, "onClose" | "open"> {
   onOpenRef: MutableRefObject<() => void>
 }
 
@@ -43,7 +43,7 @@ export const ViewCodeModal: FC<ViewCodeModalProps> = memo(
     assignRef(onOpenRef, onOpen)
 
     return (
-      <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
+      <Modal size="xl" open={isOpen} onClose={onClose} {...rest}>
         <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
           <Text as="h3">Save preset</Text>
 

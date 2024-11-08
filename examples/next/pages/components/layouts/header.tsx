@@ -173,7 +173,6 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
     <Popover
       {...popoverProps}
       closeOnButton={false}
-      isOpen={isOpen}
       modifiers={[
         {
           name: 'preventOverflow',
@@ -187,6 +186,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
           },
         },
       ]}
+      open={isOpen}
       restoreFocus={false}
       onClose={onClose}
       onOpen={onOpen}

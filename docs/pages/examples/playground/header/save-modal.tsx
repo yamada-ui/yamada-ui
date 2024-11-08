@@ -14,7 +14,7 @@ import {
 } from "@yamada-ui/react"
 import { memo } from "react"
 
-export interface SaveModalProps extends Omit<ModalProps, "isOpen" | "onClose"> {
+export interface SaveModalProps extends Omit<ModalProps, "onClose" | "open"> {
   onOpenRef: MutableRefObject<() => void>
 }
 
@@ -24,7 +24,7 @@ export const SaveModal: FC<SaveModalProps> = memo(({ onOpenRef, ...rest }) => {
   assignRef(onOpenRef, onOpen)
 
   return (
-    <Modal size="xl" isOpen={isOpen} onClose={onClose} {...rest}>
+    <Modal size="xl" open={isOpen} onClose={onClose} {...rest}>
       <ModalHeader alignItems="flex-start" flexDirection="column" gap="sm">
         <Text as="h3">Save preset</Text>
 

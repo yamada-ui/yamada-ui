@@ -147,7 +147,7 @@ export const Header = memo(
           </HStack>
         </Center>
 
-        <MobileMenu isOpen={isOpen} onClose={onClose} />
+        <MobileMenu open={isOpen} onClose={onClose} />
       </>
     )
   }),
@@ -442,7 +442,7 @@ ColorButton.displayName = "ColorButton"
 
 interface MobileMenuProps extends DrawerProps {}
 
-const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
+const MobileMenu: FC<MobileMenuProps> = memo(({ open, onClose }) => {
   const { events } = useRouter()
   const breakpoint = useBreakpoint()
 
@@ -462,7 +462,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
     <Drawer
       closeOnDrag
       isFullHeight
-      isOpen={isOpen}
+      open={open}
       w="sm"
       withCloseButton={false}
       withDragBar={false}
@@ -474,7 +474,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
         justifyContent="flex-end"
         pt="sm"
       >
-        <ButtonGroup isMobile {...{ isOpen, onClose }} />
+        <ButtonGroup isMobile {...{ open, onClose }} />
       </DrawerHeader>
 
       <DrawerBody my="sm" position="relative">

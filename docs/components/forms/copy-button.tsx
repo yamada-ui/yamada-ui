@@ -17,8 +17,8 @@ export const CopyButton = memo(
         bg="success"
         display="inline-flex"
         h="8"
-        isOpen={hasCopied}
         label="Copied!"
+        open={hasCopied}
         placement="left"
         zIndex="auto"
       >

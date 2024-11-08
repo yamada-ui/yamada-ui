@@ -34,7 +34,7 @@ import {
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
+表示または非表示を制御するために、`open`と`onClose`を設定します。
 
 :::note
 `Dialog`は、内部的に[Modal](/components/overlay/modal)を使用しており、`Modal`を簡素化したコンポーネントです。
@@ -72,7 +72,7 @@ return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
-    <Dialog isOpen={isOpen} onClose={onClose}>
+    <Dialog open={isOpen} onClose={onClose}>
       <DialogHeader>孫悟空</DialogHeader>
 
       <DialogBody>
@@ -129,7 +129,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       size={size}
       header="孫悟空"
@@ -181,7 +181,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       placement={placement}
       header="孫悟空"
@@ -209,7 +209,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -255,7 +255,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       scrollBehavior={scrollBehavior}
       h="xl"
@@ -308,7 +308,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -336,7 +336,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -365,7 +365,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel={{
@@ -406,7 +406,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -441,7 +441,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       header="孫悟空"
       cancel="わけない"
       onCancel={onClose}
@@ -467,7 +467,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -498,7 +498,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       withOverlay={false}
       header="孫悟空"

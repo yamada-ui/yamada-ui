@@ -22,7 +22,7 @@ return (
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -56,7 +56,7 @@ return (
     <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={() => onClose("This is arg")}
       header="孫悟空"
       cancel="わけない"
@@ -93,7 +93,7 @@ return (
     <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={isOpen}
       onClose={() => onClose("This is arg")}
       header="孫悟空"
       cancel="わけない"

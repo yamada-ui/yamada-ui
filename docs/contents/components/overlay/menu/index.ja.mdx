@@ -435,7 +435,7 @@ return (
 const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
-  <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+  <Menu open={isOpen} onOpen={onOpen} onClose={onClose}>
     <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
       Menu
     </MenuButton>

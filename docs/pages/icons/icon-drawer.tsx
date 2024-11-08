@@ -32,7 +32,7 @@ export const IconDrawer: FC<IconDrawerProps> = memo(({ openRef }) => {
   })
 
   return (
-    <Slide boxShadow={["lg", "dark-lg"]} isOpen={isOpen} placement="bottom">
+    <Slide boxShadow={["lg", "dark-lg"]} open={isOpen} placement="bottom">
       <Grid
         alignItems="stretch"
         bg={["white", "black"]}

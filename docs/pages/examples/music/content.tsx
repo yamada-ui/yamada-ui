@@ -287,7 +287,7 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
         </Center>
       </ContentItem>
 
-      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
+      <Modal size="xl" open={isOpen} onClose={onClose}>
         <ModalHeader>Add Podcast</ModalHeader>
 
         <ModalBody

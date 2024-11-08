@@ -3,27 +3,22 @@ import type {
   CSSUIProps,
   HTMLUIProps,
   ThemeProps,
-  Token,
 } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import type { MotionTransitionProps } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
-import type { KeyboardEvent } from "react"
 import type { ModalContentProps } from "./modal-content"
+import type { UseModalProps } from "./use-modal"
 import { omitThemeProps, ui, useComponentMultiStyle } from "@yamada-ui/core"
 import { FocusLock } from "@yamada-ui/focus-lock"
 import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
-import { useValue } from "@yamada-ui/use-value"
-import { findChild, findChildren, getValidChildren } from "@yamada-ui/utils"
-import { cloneElement, useCallback, useId } from "react"
+import { useId } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { DialogOverlay } from "./dialog-overlay"
-import { DrawerContent } from "./drawer-content"
-import { DrawerOverlay } from "./drawer-overlay"
 import { ModalContent } from "./modal-content"
 import { ModalProvider } from "./modal-context"
 import { ModalOverlay } from "./modal-overlay"
+import { useModal } from "./use-modal"
 
 export interface ModalOptions
   extends Pick<
@@ -57,12 +52,6 @@ export interface ModalOptions
    */
   blockScrollOnMount?: boolean
   /**
-   * If `true`, the modal will close when the `Esc` key is pressed.
-   *
-   * @default true
-   */
-  closeOnEsc?: boolean
-  /**
    * If `true`, the modal will close when the overlay is clicked.
    *
    * @default true
@@ -76,22 +65,6 @@ export interface ModalOptions
    * The CSS `padding` property.
    */
   outside?: CSSUIProps["p"]
-  /**
-   * The placement of the modal.
-   *
-   * @default 'center'
-   */
-  placement?: Token<
-    | "bottom"
-    | "bottom-left"
-    | "bottom-right"
-    | "center"
-    | "left"
-    | "right"
-    | "top"
-    | "top-left"
-    | "top-right"
-  >
   /**
    * Where scroll behavior should originate.
    *
@@ -122,17 +95,9 @@ export interface ModalOptions
    */
   portalProps?: Omit<PortalProps, "children">
   /**
-   * Callback invoked to close the modal.
-   */
-  onClose?: () => void
-  /**
    * Callback function to run side effects after the modal has closed.
    */
   onCloseComplete?: () => void
-  /**
-   * Callback fired when the escape key is pressed and focus is within modal.
-   */
-  onEsc?(): void
   /**
    * Callback fired when the overlay is clicked.
    */
@@ -142,7 +107,8 @@ export interface ModalOptions
 export interface ModalProps
   extends ModalContentProps,
     ThemeProps<"Modal">,
-    ModalOptions {}
+    ModalOptions,
+    UseModalProps {}
 
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
@@ -162,7 +128,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       autoFocus,
       blockScrollOnMount = true,
       children,
-      closeOnEsc = true,
+      closeOnEsc,
       closeOnOverlay = true,
       duration,
       finalFocusRef,
@@ -170,7 +136,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       isOpen,
       lockFocusAcrossFrames = true,
       outside = "fallback(4, 1rem)",
-      placement: _placement = "center",
+      placement: _placement,
       restoreFocus,
       scrollBehavior = "inside",
       withCloseButton = true,
@@ -186,34 +152,19 @@ export const Modal = motionForwardRef<ModalProps, "section">(
     const labelledbyId = useId()
     const describedbyId = useId()
 
-    const onKeyDown = useCallback(
-      (ev: KeyboardEvent) => {
-        if (ev.key !== "Escape") return
-
-        ev.stopPropagation()
-
-        if (closeOnEsc) onClose?.()
-
-        onEsc?.()
-      },
-      [closeOnEsc, onClose, onEsc],
-    )
-
-    const validChildren = getValidChildren(children)
-
-    const [customModalOverlay, ...cloneChildren] = findChildren(
-      validChildren,
-      ModalOverlay,
-      DialogOverlay,
-      DrawerOverlay,
-    )
-
-    let drawerContent = findChild(validChildren, DrawerContent)
-
-    if (drawerContent)
-      drawerContent = cloneElement(drawerContent, { onKeyDown })
-
-    const placement = useValue(_placement)
+    const {
+      cloneChildren,
+      customModalOverlay,
+      drawerContent,
+      placement,
+      onKeyDown,
+    } = useModal({
+      children,
+      closeOnEsc,
+      placement: _placement,
+      onClose,
+      onEsc,
+    })
 
     const css: CSSUIObject = {
       alignItems: placement.includes("top")

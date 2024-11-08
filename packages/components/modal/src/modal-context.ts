@@ -1,8 +1,9 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { ModalOptions } from "./modal"
+import type { UseModalProps } from "./use-modal"
 import { createContext } from "@yamada-ui/utils"
 
-interface ModalContext extends ModalOptions {
+interface ModalContext extends ModalOptions, Pick<UseModalProps, "onClose"> {
   describedbyId: string
   labelledbyId: string
   styles: { [key: string]: CSSUIObject | undefined }

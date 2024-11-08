@@ -1,3 +1,6 @@
+/* eslint-disable perfectionist/sort-objects */
+/* eslint-disable perfectionist/sort-union-types */
+/* eslint-disable perfectionist/sort-interfaces */
 import type {
   CSSUIObject,
   FC,
@@ -37,7 +40,7 @@ export type PopoverProperty = (typeof popoverProperties)[number]
 
 export const popoverProperties = [
   ...popperProperties,
-  "isOpen",
+  "open",
   "defaultIsOpen",
   "onOpen",
   "onClose",
@@ -125,6 +128,13 @@ interface PopoverOptions {
   isLazy?: boolean
   /**
    * If `true`, the popover will be opened.
+   *
+   */
+  open?: boolean
+  /**
+   * If `true`, the popover will be opened.
+   *
+   * @deprecated Use `open` instead
    */
   isOpen?: boolean
   /**
@@ -180,7 +190,7 @@ export interface PopoverProps
 interface PopoverContext
   extends Pick<
     PopoverOptions,
-    "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
+    "animation" | "closeOnButton" | "duration" | "open" | "isOpen" | "onClose"
   > {
   id: string
   describedbyId: string
@@ -221,6 +231,8 @@ export const Popover: FC<PopoverProps> = (props) => {
     isLazy,
     lazyBehavior = "unmount",
     openDelay = 200,
+    open: openProp,
+    isOpen: isOpenProp,
     relatedRef,
     restoreFocus = true,
     trigger = "click",
@@ -229,7 +241,11 @@ export const Popover: FC<PopoverProps> = (props) => {
   const id = useId()
   const labelledbyId = useId()
   const describedbyId = useId()
-  const { isOpen, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
+  const controlledOpen = openProp ?? isOpenProp
+  const { isOpen, onClose, onOpen, onToggle } = useDisclosure({
+    ...mergedProps,
+    isOpen: controlledOpen,
+  })
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const popoverRef = useRef<HTMLElement>(null)

@@ -399,7 +399,7 @@ export const customControl: Story = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
-    <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
+    <Menu open={isOpen} onClose={onClose} onOpen={onOpen}>
       <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
         Menu
       </MenuButton>

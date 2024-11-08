@@ -36,7 +36,7 @@ export const basic: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -60,7 +60,7 @@ export const withDuration: Story = () => {
         cancel="わけない"
         duration={0.4}
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -80,7 +80,7 @@ export const customDialog: Story = () => {
     <>
       <Button onClick={onOpen}>Open Dialog</Button>
 
-      <Dialog isOpen={isOpen} onClose={onClose}>
+      <Dialog open={isOpen} onClose={onClose}>
         <DialogHeader>孫悟空</DialogHeader>
 
         <DialogBody>
@@ -111,7 +111,7 @@ export const customHeader: Story = () => {
       <Dialog
         cancel="わけない"
         header={<Text color="orange.500">孫悟空</Text>}
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -146,7 +146,7 @@ export const customFooter: Story = () => {
           </>
         }
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         onClose={onClose}
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
@@ -170,7 +170,7 @@ export const customButton: Story = () => {
           children: "わけない",
         }}
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         other={{
           colorScheme: "orange",
           variant: "outline",
@@ -203,7 +203,7 @@ export const useOtherButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         other="どちらでもよい"
         success="わける"
         onCancel={onClose}
@@ -275,7 +275,7 @@ export const withSize: Story = () => {
         size={size}
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -380,7 +380,7 @@ export const withPlacement: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         placement={placement}
         success="わける"
         onCancel={onClose}
@@ -451,7 +451,7 @@ export const withAnimation: Story = () => {
         animation={animation}
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -474,7 +474,7 @@ export const disabledCloseButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onSuccess={onClose}
@@ -496,7 +496,7 @@ export const customCloseButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -523,7 +523,7 @@ export const disabledOverlay: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         withOverlay={false}
         onCancel={onClose}
@@ -547,7 +547,7 @@ export const customOverlay: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -621,7 +621,7 @@ export const scrollOnMount: Story = () => {
         blockScrollOnMount={false}
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}

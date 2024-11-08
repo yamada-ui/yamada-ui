@@ -1,3 +1,5 @@
+/* eslint-disable perfectionist/sort-interfaces */
+/* eslint-disable perfectionist/sort-objects */
 import type {
   CSSUIObject,
   CSSUIProps,
@@ -92,6 +94,12 @@ interface TooltipOptions {
   /**
    * If `true`, the tooltip will be shown.
    */
+  open?: boolean
+  /**
+   * If `true`, the tooltip will be shown.
+   *
+   * @deprecated Use `open` instead.
+   */
   isOpen?: boolean
   /**
    * The label of the tooltip.
@@ -181,7 +189,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       "Tooltip",
       props,
     )
-    const {
+    let {
       className,
       animation,
       children,
@@ -195,6 +203,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       duration,
       gutter,
       isDisabled,
+      open: openProp,
       isOpen: isOpenProp,
       label,
       modifiers,
@@ -209,9 +218,10 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const id = useId()
+    const controlledOpenProp = openProp ?? isOpenProp
     const { isOpen, onClose, onOpen } = useDisclosure({
       defaultIsOpen: defaultIsOpenProp,
-      isOpen: isOpenProp,
+      isOpen: controlledOpenProp,
       onClose: onCloseProp,
       onOpen: onOpenProp,
     })

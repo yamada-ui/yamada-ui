@@ -105,7 +105,7 @@ export const controlPopover: Story = () => {
     <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button onClick={onToggle}>Open Popover</Button>
 
-      <Popover closeOnBlur={false} isOpen={isOpen} onClose={onClose}>
+      <Popover closeOnBlur={false} open={isOpen} onClose={onClose}>
         <PopoverTrigger>
           <Button colorScheme="primary">Target Popover</Button>
         </PopoverTrigger>

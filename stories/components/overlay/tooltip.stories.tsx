@@ -172,7 +172,7 @@ export const withDisabled: Story = () => {
 export const alwaysOpen: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
-      <Tooltip isOpen label="へっ！きたねぇ花火だ">
+      <Tooltip label="へっ！きたねぇ花火だ" open>
         <Text>Please Hover</Text>
       </Tooltip>
     </Center>

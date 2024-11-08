@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import type {
   CSSUIObject,
   HTMLUIProps,
@@ -149,6 +150,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     formatInput = defaultFormatInput,
     gutter,
     isLazy,
+    open: openProp,
     isOpen: isOpenProp,
     lazyBehavior,
     matchWidth = colorSelectorSize === "full",
@@ -200,13 +202,14 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
   const isInputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value || "")
+  const controlledOpenProp = openProp ?? isOpenProp
   const {
     isOpen,
     onClose: onInternalClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
     defaultIsOpen,
-    isOpen: isOpenProp,
+    isOpen: controlledOpenProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })

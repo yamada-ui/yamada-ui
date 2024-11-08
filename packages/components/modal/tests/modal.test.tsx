@@ -26,7 +26,7 @@ describe("<Modal />", () => {
 
         <Modal
           aria-labelledby={modalHeaderId}
-          isOpen={isOpen}
+          open={isOpen}
           placement={placement}
           onClose={() => setIsOpen(false)}
         >
@@ -53,7 +53,7 @@ describe("<Modal />", () => {
         </button>
         <Modal
           data-testid="Modal"
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <ModalCloseButton data-testid="ModalCloseButton" />
@@ -119,7 +119,7 @@ describe("<Modal />", () => {
 
           <Modal
             aria-labelledby={primaryModalHeaderId}
-            isOpen={isPrimaryOpen}
+            open={isPrimaryOpen}
             onClose={() => setIsPrimaryOpen(false)}
           >
             <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
@@ -138,7 +138,7 @@ describe("<Modal />", () => {
             <Modal
               size="sm"
               aria-labelledby={secondaryModalHeaderId}
-              isOpen={isSecondaryOpen}
+              open={isSecondaryOpen}
               onClose={() => setIsSecondaryOpen(false)}
             >
               <ModalHeader id={secondaryModalHeaderId}>
@@ -320,7 +320,7 @@ describe("<Modal />", () => {
           aria-labelledby={modalHeaderId}
           animation={animation}
           duration={duration}
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>

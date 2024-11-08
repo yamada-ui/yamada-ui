@@ -8,7 +8,7 @@ describe("<Slide />", () => {
   })
 
   test("applies default styles correctly", async () => {
-    render(<Slide isOpen>Slide</Slide>)
+    render(<Slide open>Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -19,7 +19,7 @@ describe("<Slide />", () => {
 
   test("applies styles correctly for top placement", async () => {
     render(
-      <Slide isOpen placement="top">
+      <Slide open placement="top">
         Slide
       </Slide>,
     )
@@ -33,7 +33,7 @@ describe("<Slide />", () => {
 
   test("applies styles correctly for left placement", async () => {
     render(
-      <Slide isOpen placement="left">
+      <Slide open placement="left">
         Slide
       </Slide>,
     )
@@ -47,7 +47,7 @@ describe("<Slide />", () => {
 
   test("applies styles correctly for right placement", async () => {
     render(
-      <Slide isOpen placement="right">
+      <Slide open placement="right">
         Slide
       </Slide>,
     )
@@ -61,7 +61,7 @@ describe("<Slide />", () => {
 
   test("applies styles correctly for bottom placement", async () => {
     render(
-      <Slide isOpen placement="bottom">
+      <Slide open placement="bottom">
         Slide
       </Slide>,
     )
@@ -78,7 +78,7 @@ describe("<Slide />", () => {
       return (
         <>
           <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Slide isOpen={isOpen} unmountOnExit>
+          <Slide open={isOpen} unmountOnExit>
             Slide
           </Slide>
         </>

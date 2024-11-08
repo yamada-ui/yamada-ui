@@ -189,7 +189,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       "Tooltip",
       props,
     )
-    let {
+    const {
       className,
       animation,
       children,

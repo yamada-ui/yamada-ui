@@ -48,7 +48,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     },
     ref,
   ) => {
-    let { describedbyId, duration, isOpen, labelledbyId, open, onClose } =
+    const { describedbyId, duration, isOpen, labelledbyId, open, onClose } =
       useModal()
     const styles = useDrawer()
     const placement = useValue(_placement)

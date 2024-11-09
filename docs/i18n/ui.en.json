@@ -75,6 +75,8 @@
       "members": "All members"
     },
     "period": {
+      "this-month": "This month",
+      "last-month": "Last month",
       "7d": "Last 7 days",
       "14d": "Last 14 days",
       "1M": "Last 1 month",

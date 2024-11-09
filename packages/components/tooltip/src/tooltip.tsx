@@ -1,131 +1,25 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  PropGetter,
-  ThemeProps,
-} from "@yamada-ui/core"
-import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import type { PortalProps } from "@yamada-ui/portal"
-import type { UsePopperProps } from "@yamada-ui/use-popper"
-import type { ReactElement, ReactNode, Ref } from "react"
+import type { CSSUIObject, CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
+import type { ReactElement } from "react"
+import type { TooltipOptions } from "./use-tooltip"
 import { omitThemeProps, ui, useComponentStyle } from "@yamada-ui/core"
 import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
-import { useDisclosure } from "@yamada-ui/use-disclosure"
-import { useEventListener } from "@yamada-ui/use-event-listener"
-import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import { usePopper } from "@yamada-ui/use-popper"
-import {
-  cx,
-  getOwnerDocument,
-  getOwnerWindow,
-  handlerAll,
-  mergeRefs,
-} from "@yamada-ui/utils"
-import {
-  Children,
-  cloneElement,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-} from "react"
-
-interface TooltipOptions {
-  /**
-   * The animation of the tooltip.
-   *
-   * @default 'scale'
-   */
-  animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
-  /**
-   * The delay before hiding the tooltip.
-   *
-   * @default 0
-   */
-  closeDelay?: number
-  /**
-   * If `true`, the tooltip will hide on click.
-   *
-   * @default false
-   */
-  closeOnClick?: boolean
-  /**
-   * If `true`, the tooltip will hide on pressing Esc key.
-   *
-   * @default true
-   */
-  closeOnEsc?: boolean
-  /**
-   * If `true`, the tooltip will hide while the mouse is down.
-   *
-   * @default false
-   */
-  closeOnMouseDown?: boolean
-  /**
-   * If `true`, the tooltip will hide while the pointer is down.
-   *
-   * @default false
-   */
-  closeOnPointerDown?: boolean
-  /**
-   * If `true`, the tooltip will hide on scroll.
-   *
-   * @default false
-   */
-  closeOnScroll?: boolean
-  /**
-   * If `true`, the tooltip will be initially shown.
-   */
-  defaultIsOpen?: boolean
-  /**
-   * The animation duration.
-   */
-  duration?: MotionTransitionProps["duration"]
-  /**
-   * If `true`, the tooltip will be disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the tooltip will be shown.
-   */
-  isOpen?: boolean
-  /**
-   * The label of the tooltip.
-   */
-  label?: ReactNode
-  /**
-   * The delay before showing the tooltip.
-   *
-   * @default 0
-   */
-  openDelay?: number
-  /**
-   * If `true`, the element will be transported to the end of document.body.
-   */
-  withPortal?: boolean
-  /**
-   * Props for portal component.
-   */
-  portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
-  /**
-   * Callback to run when the tooltip hides.
-   */
-  onClose?: () => void
-  /**
-   * Callback to run when the tooltip shows.
-   */
-  onOpen?: () => void
-}
+import { cx } from "@yamada-ui/utils"
+import { Children, cloneElement, isValidElement } from "react"
+import { useTooltip } from "./use-tooltip"
 
 export interface TooltipProps
   extends Omit<MotionProps, "animation" | "offset">,
     ThemeProps<"Tooltip">,
-    Pick<UsePopperProps, "gutter" | "modifiers" | "offset" | "placement">,
-    TooltipOptions {}
+    TooltipOptions {
+  children: ReactElement
+}
+
+interface ChildProps {
+  [key: string]: any
+}
 
 const getTooltipProps = (
   animation: TooltipProps["animation"] = "scale",
@@ -167,11 +61,6 @@ const getTooltipProps = (
   }
 }
 
-/**
- * `Tooltip` is a component that displays short information, such as supplementary details for an element.
- *
- * @see Docs https://yamada-ui.com/components/overlay/tooltip
- */
 export const Tooltip = motionForwardRef<TooltipProps, "div">(
   (
     { withPortal = true, z: zProp, zIndex: zIndexProp, portalProps, ...props },
@@ -185,165 +74,32 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       className,
       animation,
       children,
-      closeDelay = 0,
-      closeOnClick,
-      closeOnEsc = true,
-      closeOnMouseDown = false,
-      closeOnPointerDown = false,
-      closeOnScroll,
-      defaultIsOpen: defaultIsOpenProp,
       duration,
-      gutter,
-      isDisabled,
-      isOpen: isOpenProp,
-      label,
-      modifiers,
-      offset,
-      openDelay = 0,
-      placement,
-      onClose: onCloseProp,
-      onOpen: onOpenProp,
+      _label,
+      offset: _offset,
       ...rest
     } = omitThemeProps(mergedProps)
 
-    const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
+    const { id, isOpen, transformOrigin, getPopperProps, getTriggerProps } =
+      useTooltip({
+        ...rest,
+        _label,
+        withPortal,
+      })
 
-    const id = useId()
-    const { isOpen, onClose, onOpen } = useDisclosure({
-      defaultIsOpen: defaultIsOpenProp,
-      isOpen: isOpenProp,
-      onClose: onCloseProp,
-      onOpen: onOpenProp,
-    })
-    const triggerRef = useRef<HTMLElement>(null)
-    const openTimeout = useRef<NodeJS.Timeout>()
-    const closeTimeout = useRef<NodeJS.Timeout>()
-    const { referenceRef, transformOrigin, getPopperProps } = usePopper({
-      enabled: isOpen,
-      gutter,
-      modifiers,
-      offset,
-      placement,
-    })
+    if (!_label) return children
 
-    const closeNow = useCallback(() => {
-      if (closeTimeout.current) {
-        clearTimeout(closeTimeout.current)
-
-        closeTimeout.current = undefined
-      }
-
-      onClose()
-    }, [onClose])
-
-    const openWithDelay = useCallback(() => {
-      if (!isDisabled && !openTimeout.current) {
-        if (isOpen) closeNow()
-
-        const win = getOwnerWindow(triggerRef.current)
-
-        openTimeout.current = win.setTimeout(onOpen, openDelay)
-      }
-    }, [isDisabled, isOpen, openDelay, closeNow, onOpen])
-
-    const closeWithDelay = useCallback(() => {
-      if (openTimeout.current) {
-        clearTimeout(openTimeout.current)
-
-        openTimeout.current = undefined
-      }
-
-      const win = getOwnerWindow(triggerRef.current)
-
-      closeTimeout.current = win.setTimeout(closeNow, closeDelay)
-    }, [closeDelay, closeNow])
-
-    const onClick = useCallback(
-      () => (isOpen && closeOnClick ? closeWithDelay() : undefined),
-      [isOpen, closeOnClick, closeWithDelay],
-    )
-
-    const onPointerDown = useCallback(
-      () =>
-        isOpen && effectiveCloseOnPointerDown ? closeWithDelay() : undefined,
-      [isOpen, effectiveCloseOnPointerDown, closeWithDelay],
-    )
-
-    const onKeyDown = useCallback(
-      (ev: KeyboardEvent) =>
-        isOpen && ev.key === "Escape" ? closeWithDelay() : undefined,
-      [isOpen, closeWithDelay],
-    )
-
-    const getTriggerProps: PropGetter = useCallback(
-      (props = {}, ref = null) => ({
-        ...props,
-        ref: mergeRefs(triggerRef, ref, referenceRef),
-        onBlur: handlerAll(props.onBlur, closeWithDelay),
-        onClick: handlerAll(props.onClick, onClick),
-        onFocus: handlerAll(props.onFocus, openWithDelay),
-        onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
-        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
-      }),
-
-      [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
-    )
-
-    useEventListener(
-      () => getOwnerDocument(triggerRef.current),
-      "keydown",
-      (ev) => (closeOnEsc ? onKeyDown(ev) : undefined),
-    )
-
-    useEventListener(
-      () => getOwnerDocument(triggerRef.current),
-      "scroll",
-      () => (isOpen && closeOnScroll ? closeNow() : undefined),
-    )
-
-    useEventListener(
-      () => triggerRef.current,
-      "pointerleave",
-      (e) => {
-        if (e.pointerType !== "touch") closeWithDelay()
-      },
-    )
-
-    useEventListener(
-      () => triggerRef.current,
-      "touchstart",
-      () => {
-        if (isOpen) closeWithDelay()
-        else openWithDelay()
-      },
-      { passive: true },
-    )
-
-    useOutsideClick({
-      ref: triggerRef,
-      handler: () => {
-        closeWithDelay()
-      },
-    })
-
-    useEffect(
-      () => () => {
-        clearTimeout(openTimeout.current)
-        clearTimeout(closeTimeout.current)
-      },
-      [],
-    )
-
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    if (!label) return <>{children}</>
-
-    const child = Children.only(children) as {
-      ref?: Ref<HTMLElement>
-    } & ReactElement
+    const child = Children.only(children) as ReactElement<ChildProps>
+    if (!isValidElement(child)) {
+      throw new Error("Tooltip children must be a valid React element")
+    }
 
     const trigger = cloneElement(
       child,
-      getTriggerProps({ ...child.props, "aria-describedby": id }, child.ref),
+      getTriggerProps(
+        child.props as ChildProps,
+        (child as { ref?: any } & ReactElement).ref,
+      ),
     )
 
     const css: CSSUIObject = {
@@ -355,6 +111,9 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       zProp ??
       zIndex ??
       z) as CSSUIProps["zIndex"]
+
+    const motionProps =
+      animation !== "none" ? getTooltipProps(animation, duration) : {}
 
     return (
       <>
@@ -374,7 +133,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
             width: "1px",
           }}
         >
-          {label}
+          {_label}
         </ui.span>
 
         <AnimatePresence>
@@ -390,16 +149,13 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
                   className={cx("ui-tooltip", className)}
                   style={{ transformOrigin }}
                   role="tooltip"
-                  {...(animation !== "none"
-                    ? getTooltipProps(animation, duration)
-                    : {})}
+                  {...motionProps}
                   animate="enter"
                   exit="exit"
                   initial="exit"
                   __css={css}
-                  {...rest}
                 >
-                  {label}
+                  {_label}
                 </motion.div>
               </ui.div>
             </Portal>

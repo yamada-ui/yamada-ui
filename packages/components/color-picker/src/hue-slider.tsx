@@ -90,7 +90,7 @@ interface HueSliderOptions {
 
 export interface HueSliderProps
   extends ThemeProps<"HueSlider">,
-    Partial<UseColorSliderProps>,
+    Partial<Omit<UseColorSliderProps, "channel">>,
     HueSliderOptions {}
 
 /**
@@ -113,7 +113,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
   const { getContainerProps, getInputProps, getThumbProps, getTrackProps } =
-    useColorSlider({ max, min, step: 1, ...computedProps })
+    useColorSlider({ max, min, step: 1, ...computedProps, channel: "hue" })
 
   const css: CSSUIObject = {
     position: "relative",

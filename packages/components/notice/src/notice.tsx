@@ -1,12 +1,13 @@
 import type { AlertProps } from "@yamada-ui/alert"
 import type {
   CSSUIObject,
+  FC,
   NoticeComponentProps,
   NoticeConfigOptions,
   NoticePlacement,
   StyledTheme,
 } from "@yamada-ui/core"
-import type { FC, ReactNode } from "react"
+import type { ReactNode } from "react"
 import {
   Alert,
   AlertDescription,
@@ -394,3 +395,6 @@ const Notice: FC<NoticeProps> = ({
     </Alert>
   )
 }
+
+Notice.displayName = "Notice"
+Notice.__ui__ = "Notice"

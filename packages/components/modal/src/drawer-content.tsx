@@ -1,5 +1,4 @@
 /* eslint-disable perfectionist/sort-union-types */
-/* eslint-disable perfectionist/sort-jsx-props */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionPanInfo } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
@@ -196,8 +195,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
         dragMomentum={false}
         dragSnapToOrigin
         duration={duration}
-        open={open}
-        isOpen={isOpen}
+        isOpen={open}
         placement={placement}
         role="dialog"
         tabIndex={-1}

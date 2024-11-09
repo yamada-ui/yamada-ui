@@ -6,8 +6,19 @@ import {
   ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import { alphaToHex, convertColor, cx } from "@yamada-ui/utils"
+import { alphaToHex, convertColor, createContext, cx } from "@yamada-ui/utils"
 import { useColorSlider } from "./use-color-slider"
+
+interface AlphaSliderContext {
+  styles: { [key: string]: CSSUIObject | undefined }
+}
+
+const [AlphaSliderProvider, useAlphaSlider] = createContext<AlphaSliderContext>(
+  {
+    name: "SliderContext",
+    errorMessage: `useSliderContext returned is 'undefined'. Seems you forgot to wrap the components in "<AlphaSlider />" `,
+  },
+)
 
 const defaultOverlays = (
   color: string,
@@ -143,49 +154,104 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
     }
 
     return (
-      <ui.div
-        className={cx("ui-alpha-slider", className)}
-        __css={css}
-        {...getContainerProps()}
-      >
-        <ui.input {...getInputProps(inputProps, ref)} />
-
-        {overlays.map((props, index) => (
-          <ui.div
-            key={index}
-            className="ui-alpha-slider__overlay"
-            __css={{
-              bottom: 0,
-              left: 0,
-              position: "absolute",
-              right: 0,
-              top: 0,
-              ...styles.overlay,
-            }}
-            {...props}
-          />
-        ))}
-
+      <AlphaSliderProvider value={{ styles }}>
         <ui.div
-          className="ui-alpha-slider__track"
-          __css={{
-            h: "100%",
-            position: "relative",
-            w: "100%",
-            ...styles.track,
-          }}
-          {...getTrackProps(trackProps)}
+          className={cx("ui-alpha-slider", className)}
+          __css={css}
+          {...getContainerProps()}
         >
-          <ui.div
-            className="ui-alpha-slider__thumb"
-            __css={{ ...styles.thumb }}
-            {...getThumbProps(thumbProps)}
-          />
+          <ui.input {...getInputProps(inputProps, ref)} />
+
+          {overlays.map((props, index) => (
+            <AlphaSliderOverlay key={index} {...props} />
+          ))}
+
+          <AlphaSliderTrack {...getTrackProps(trackProps)}>
+            <AlphaSliderThumb {...getThumbProps(thumbProps)} />
+          </AlphaSliderTrack>
         </ui.div>
-      </ui.div>
+      </AlphaSliderProvider>
     )
   },
 )
 
 AlphaSlider.displayName = "AlphaSlider"
 AlphaSlider.__ui__ = "AlphaSlider"
+
+interface AlphaSliderOverlayProps extends HTMLUIProps {}
+
+const AlphaSliderOverlay = forwardRef<AlphaSliderOverlayProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useAlphaSlider()
+
+    const css: CSSUIObject = {
+      bottom: 0,
+      left: 0,
+      position: "absolute",
+      right: 0,
+      top: 0,
+      ...styles.overlay,
+    }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-alpha-slider__overlay", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+AlphaSliderOverlay.displayName = "AlphaSliderOverlay"
+AlphaSliderOverlay.__ui__ = "AlphaSliderOverlay"
+
+interface AlphaSliderTrackProps extends HTMLUIProps {}
+
+const AlphaSliderTrack = forwardRef<AlphaSliderTrackProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useAlphaSlider()
+
+    const css: CSSUIObject = {
+      h: "100%",
+      position: "relative",
+      w: "100%",
+      ...styles.track,
+    }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-alpha-slider__track", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+AlphaSliderTrack.displayName = "AlphaSliderTrack"
+AlphaSliderTrack.__ui__ = "AlphaSliderTrack"
+
+interface AlphaSliderThumbProps extends HTMLUIProps {}
+
+const AlphaSliderThumb = forwardRef<AlphaSliderThumbProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useAlphaSlider()
+
+    const css: CSSUIObject = { ...styles.thumb }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-alpha-slider__thumb", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+AlphaSliderThumb.displayName = "AlphaSliderThumb"
+AlphaSliderThumb.__ui__ = "AlphaSliderThumb"

@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { SlideProps } from "@yamada-ui/transitions"
 import type { ModalProps } from "./modal"
@@ -42,6 +43,12 @@ interface DrawerOptions {
   dragVelocity?: number
   /**
    * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
+   */
+  fullHeight?: boolean
+  /**
+   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
+   *
+   * @deprecated Use `fullHeight` instead.
    */
   isFullHeight?: boolean
   /**
@@ -89,7 +96,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       placement,
       ...props,
     })
-    const {
+    let {
       allowPinchZoom,
       autoFocus,
       blockScrollOnMount,
@@ -103,6 +110,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       duration = { enter: 0.4, exit: 0.3 },
       finalFocusRef,
       initialFocusRef,
+      open,
       isOpen,
       lockFocusAcrossFrames,
       restoreFocus,
@@ -118,6 +126,8 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps, ["isFullHeight"])
+
+    open ??= isOpen
 
     const validChildren = getValidChildren(children)
 
@@ -139,6 +149,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
             duration,
             finalFocusRef,
             initialFocusRef,
+            open,
             isOpen,
             lockFocusAcrossFrames,
             restoreFocus,

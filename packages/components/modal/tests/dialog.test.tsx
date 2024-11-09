@@ -17,7 +17,7 @@ describe("<Dialog />", () => {
           cancel={{
             children: "dialog-cancel",
           }}
-          isOpen={isOpen}
+          open={isOpen}
           other={{
             children: "dialog-other",
           }}
@@ -51,7 +51,7 @@ describe("<Dialog />", () => {
           cancel={{
             children: "dialog-cancel",
           }}
-          isOpen={isOpen}
+          open={isOpen}
           other={{
             children: "dialog-other",
           }}

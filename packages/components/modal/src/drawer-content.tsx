@@ -1,3 +1,5 @@
+/* eslint-disable perfectionist/sort-union-types */
+/* eslint-disable perfectionist/sort-jsx-props */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionPanInfo } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
@@ -14,7 +16,7 @@ import { useDrawer, useModal } from "./modal-context"
 
 export interface DrawerContentProps
   extends Merge<
-    Omit<DrawerProps, "isOpen" | "placement" | keyof ThemeProps>,
+    Omit<DrawerProps, "open" | "isOpen" | "placement" | keyof ThemeProps>,
     Required<
       Pick<
         DrawerProps,
@@ -46,8 +48,11 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     },
     ref,
   ) => {
-    const { describedbyId, duration, isOpen, labelledbyId, onClose } =
+    let { describedbyId, duration, isOpen, labelledbyId, open, onClose } =
       useModal()
+
+    open ??= isOpen
+
     const styles = useDrawer()
     const placement = useValue(_placement)
 
@@ -191,6 +196,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
         dragMomentum={false}
         dragSnapToOrigin
         duration={duration}
+        open={open}
         isOpen={isOpen}
         placement={placement}
         role="dialog"

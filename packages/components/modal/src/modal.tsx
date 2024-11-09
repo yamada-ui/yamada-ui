@@ -1,3 +1,5 @@
+/* eslint-disable perfectionist/sort-objects */
+/* eslint-disable perfectionist/sort-interfaces */
 import type {
   CSSUIObject,
   CSSUIProps,
@@ -37,7 +39,13 @@ export interface ModalOptions
   /**
    * If `true`, the open will be opened.
    */
-  isOpen: boolean
+  open?: boolean
+  /**
+   * If `true`, the open will be opened.
+   *
+   * @deprecated Use `open` instead.
+   */
+  isOpen?: boolean
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -155,7 +163,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       size,
       ...props,
     })
-    const {
+    let {
       className,
       allowPinchZoom = false,
       animation = "scale",
@@ -167,6 +175,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       duration,
       finalFocusRef,
       initialFocusRef,
+      open,
       isOpen,
       lockFocusAcrossFrames = true,
       outside = "fallback(4, 1rem)",
@@ -183,6 +192,9 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    open ??= isOpen
+
     const labelledbyId = useId()
     const describedbyId = useId()
 
@@ -243,6 +255,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
           closeOnOverlay,
           describedbyId,
           duration,
+          open,
           isOpen,
           labelledbyId,
           scrollBehavior,
@@ -253,7 +266,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
         }}
       >
         <AnimatePresence onExitComplete={onCloseComplete}>
-          {isOpen ? (
+          {open ? (
             <Portal {...portalProps}>
               <FocusLock
                 autoFocus={autoFocus}

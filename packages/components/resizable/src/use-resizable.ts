@@ -27,19 +27,20 @@ import {
   getResizeHandleElement,
 } from "react-resizable-panels"
 
-interface As {
-  as?: keyof HTMLElementTagNameMap
-}
+export type As = keyof HTMLElementTagNameMap
 
 interface ResizableGroupProps
-  extends Omit<Partial<PanelGroupProps>, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<Partial<PanelGroupProps>, "children" | "id" | "tagName"> {
+  as?: As
+}
 interface ResizableItemProps
-  extends Omit<PanelProps, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<PanelProps, "children" | "id" | "tagName"> {
+  as?: As
+}
 interface ResizableTriggerProps
-  extends Omit<PanelResizeHandleProps, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<PanelResizeHandleProps, "children" | "id" | "tagName"> {
+  as?: As
+}
 
 export interface ResizableStorage extends PanelGroupStorage {}
 export interface ResizableItemControl extends ImperativePanelHandle {}

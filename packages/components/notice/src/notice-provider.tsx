@@ -2,12 +2,12 @@ import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
 import type { MotionStyle, MotionVariants } from "@yamada-ui/motion"
 import type { FC } from "react"
 import type { NoticeOptions } from "./notice"
-import { ui } from "@yamada-ui/core"
+import { memo, ui } from "@yamada-ui/core"
 import { AnimatePresence, motion, useIsPresent } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { cx, runIfFunc, useUpdateEffect } from "@yamada-ui/utils"
-import { memo, useEffect, useState, useSyncExternalStore } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 import { noticeStore } from "./notice"
 
 export interface NoticeProviderProps
@@ -191,3 +191,4 @@ const NoticeComponent = memo(
 )
 
 NoticeComponent.displayName = "NoticeComponent"
+NoticeComponent.__ui__ = "NoticeComponent"

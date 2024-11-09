@@ -1,11 +1,13 @@
 import type {
+  ComponentArgs,
   CSSUIObject,
+  FC,
   HTMLUIProps,
   HTMLUIPropsWithoutAs,
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { Merge } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement, RefAttributes } from "react"
 import type { UseResizableTriggerProps } from "./use-resizable"
 import { ui } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
@@ -74,9 +76,12 @@ export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
       </ui.div>
     )
   },
-)
+) as {
+  (props: RefAttributes<HTMLElement> & ResizableTriggerProps): ReactElement
+} & ComponentArgs
 
 ResizableTrigger.displayName = "ResizableTrigger"
+ResizableTrigger.__ui__ = "ResizableTrigger"
 
 export type ResizableTriggerIconProps = IconProps
 
@@ -115,3 +120,5 @@ export const ResizableTriggerIcon: FC<ResizableTriggerIconProps> = (rest) => {
     </Icon>
   )
 }
+
+ResizableTriggerIcon.__ui__ = "ResizableTriggerIcon"

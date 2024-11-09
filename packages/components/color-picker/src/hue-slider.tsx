@@ -6,8 +6,17 @@ import {
   ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { createContext, cx } from "@yamada-ui/utils"
 import { useColorSlider } from "./use-color-slider"
+
+interface HueSliderContext {
+  styles: { [key: string]: CSSUIObject | undefined }
+}
+
+const [HueSliderProvider, useHueSlider] = createContext<HueSliderContext>({
+  name: "SliderContext",
+  errorMessage: `useSliderContext returned is 'undefined'. Seems you forgot to wrap the components in "<HueSlider />" `,
+})
 
 const defaultOverlays = (
   min: number,
@@ -81,7 +90,7 @@ interface HueSliderOptions {
 
 export interface HueSliderProps
   extends ThemeProps<"HueSlider">,
-    Partial<UseColorSliderProps>,
+    Partial<Omit<UseColorSliderProps, "channel">>,
     HueSliderOptions {}
 
 /**
@@ -104,7 +113,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
   const { getContainerProps, getInputProps, getThumbProps, getTrackProps } =
-    useColorSlider({ max, min, step: 1, ...computedProps })
+    useColorSlider({ max, min, step: 1, ...computedProps, channel: "hue" })
 
   const css: CSSUIObject = {
     position: "relative",
@@ -113,43 +122,103 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
   }
 
   return (
-    <ui.div
-      className={cx("ui-hue-slider", className)}
-      __css={css}
-      {...getContainerProps()}
-    >
-      <ui.input {...getInputProps(inputProps, ref)} />
-
-      {overlays.map((props, index) => (
-        <ui.div
-          key={index}
-          className="ui-hue-slider__overlay"
-          __css={{
-            bottom: 0,
-            left: 0,
-            position: "absolute",
-            right: 0,
-            top: 0,
-            ...styles.overlay,
-          }}
-          {...props}
-        />
-      ))}
-
+    <HueSliderProvider value={{ styles }}>
       <ui.div
-        className="ui-hue-slider__track"
-        __css={{ h: "100%", position: "relative", w: "100%", ...styles.track }}
-        {...getTrackProps(trackProps)}
+        className={cx("ui-hue-slider", className)}
+        __css={css}
+        {...getContainerProps()}
       >
-        <ui.div
-          className="ui-hue-slider__thumb"
-          __css={{ ...styles.thumb }}
-          {...getThumbProps(thumbProps)}
-        />
+        <ui.input {...getInputProps(inputProps, ref)} />
+
+        {overlays.map((props, index) => (
+          <HueSliderOverlay key={index} {...props} />
+        ))}
+
+        <HueSliderTrack {...getTrackProps(trackProps)}>
+          <HueSliderThumb {...getThumbProps(thumbProps)} />
+        </HueSliderTrack>
       </ui.div>
-    </ui.div>
+    </HueSliderProvider>
   )
 })
 
 HueSlider.displayName = "HueSlider"
 HueSlider.__ui__ = "HueSlider"
+
+interface HueSliderOverlayProps extends HTMLUIProps {}
+
+const HueSliderOverlay = forwardRef<HueSliderOverlayProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useHueSlider()
+
+    const css: CSSUIObject = {
+      bottom: 0,
+      left: 0,
+      position: "absolute",
+      right: 0,
+      top: 0,
+      ...styles.overlay,
+    }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-hue-slider__overlay", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+HueSliderOverlay.displayName = "HueSliderOverlay"
+HueSliderOverlay.__ui__ = "HueSliderOverlay"
+
+interface HueSliderTrackProps extends HTMLUIProps {}
+
+const HueSliderTrack = forwardRef<HueSliderTrackProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useHueSlider()
+
+    const css: CSSUIObject = {
+      h: "100%",
+      position: "relative",
+      w: "100%",
+      ...styles.track,
+    }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-hue-slider__track", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+HueSliderTrack.displayName = "HueSliderTrack"
+HueSliderTrack.__ui__ = "HueSliderTrack"
+
+interface HueSliderThumbProps extends HTMLUIProps {}
+
+const HueSliderThumb = forwardRef<HueSliderThumbProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useHueSlider()
+
+    const css: CSSUIObject = { ...styles.thumb }
+
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-hue-slider__thumb", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+HueSliderThumb.displayName = "HueSliderThumb"
+HueSliderThumb.__ui__ = "HueSliderThumb"

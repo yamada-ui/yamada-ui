@@ -33,10 +33,12 @@ The `Menu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/
 |                   | `aria-expanded`         | Sets `"true"` if the menu is displayed. Sets `"false"` if the menu is not displayed.                               |
 |                   | `aria-controls`         | Sets the `id` of the associated menu.                                                                              |
 | `MenuList`        | `role="menu"`           | Indicates that it is a menu.                                                                                       |
+|                   | `id`                    | The `id` used to associate with the menu item or button that controls the display.                                 |
 |                   | `tabindex`              | Sets `"-1"`.                                                                                                       |
 |                   | `aria-activedescendant` | Sets the `id` of the focused item.                                                                                 |
 |                   | `aria-labelledby`       | Sets the `id` of the menu item or button that controls the display.                                                |
-| `MenuItem`        | `tabindex`              | Sets `"0"` if focused, otherwise sets `"-1"`.                                                                      |
+| `MenuItem`        | `role="menuitem"`       | Indicates that it is a menu item.                                                                                  |
+|                   | `tabindex`              | Sets `"0"` if focused, otherwise sets `"-1"`.                                                                      |
 |                   | `id`                    | The `id` used to associate with the menu.                                                                          |
 |                   | `aria-disabled`         | Sets `"true"` if the item is disabled.                                                                             |
 | `MenuDivider`     | `role="separator"`      | Indicates that it is a separator.                                                                                  |
@@ -44,5 +46,5 @@ The `Menu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/
 | `MenuOptionGroup` | `role="group"`          | Indicates that it is a group.                                                                                      |
 | `MenuOptionItem`  | `role`                  | Sets `"menuitemradio"` if the `type` of `MenuOptionGroup` is `"radio"`, sets `"menuitemcheckbox"` if `"checkbox"`. |
 |                   | `tabindex`              | Sets `"0"` if focused, otherwise sets `"-1"`.                                                                      |
-|                   | `aria-checked`          | Sets `"true"` if checked, `"false"` if not checked.                                                                |
+|                   | `aria-checked`          | Sets `"true"` if checked.                                                                                          |
 |                   | `aria-disabled`         | Sets `"true"` if the item is disabled.                                                                             |

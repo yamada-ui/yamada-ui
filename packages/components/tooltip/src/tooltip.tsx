@@ -75,7 +75,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       animation,
       children,
       duration,
-      _label,
+      label,
       offset: _offset,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -83,11 +83,11 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const { id, isOpen, transformOrigin, getPopperProps, getTriggerProps } =
       useTooltip({
         ...rest,
-        _label,
+        label,
         withPortal,
       })
 
-    if (!_label) return children
+    if (!label) return children
 
     const child = Children.only(children) as ReactElement<ChildProps>
     if (!isValidElement(child)) {
@@ -133,7 +133,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
             width: "1px",
           }}
         >
-          {_label}
+          {label}
         </ui.span>
 
         <AnimatePresence>
@@ -155,7 +155,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
                   initial="exit"
                   __css={css}
                 >
-                  {_label}
+                  {label}
                 </motion.div>
               </ui.div>
             </Portal>

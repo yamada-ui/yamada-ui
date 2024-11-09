@@ -31,7 +31,7 @@ export interface TooltipOptions
   duration?: MotionTransitionProps["duration"]
   isDisabled?: boolean
   isOpen?: boolean
-  _label?: ReactNode
+  label?: ReactNode
   openDelay?: number
   withPortal?: boolean
   portalProps?: Pick<PortalProps, "appendToParentPortal" | "containerRef">
@@ -50,7 +50,6 @@ export const useTooltip = ({
   gutter,
   isDisabled,
   isOpen: isOpenProp,
-  _label,
   modifiers,
   offset,
   openDelay = 0,

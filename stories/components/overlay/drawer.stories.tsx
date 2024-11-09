@@ -33,7 +33,7 @@ export const basic: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose}>
+      <Drawer open={isOpen} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -59,7 +59,7 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer duration={0.7} isOpen={isOpen} onClose={onClose}>
+      <Drawer duration={0.7} open={isOpen} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer size={size} isOpen={isOpen} onClose={onClose}>
+      <Drawer size={size} open={isOpen} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -194,7 +194,7 @@ export const withPosition: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
+      <Drawer open={isOpen} placement={placement} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -220,7 +220,7 @@ export const withFullHeight: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isFullHeight isOpen={isOpen} placement="bottom" onClose={onClose}>
+      <Drawer isFullHeight open={isOpen} placement="bottom" onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -283,12 +283,7 @@ export const withCloseOnDrag: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer
-        closeOnDrag
-        isOpen={isOpen}
-        placement={placement}
-        onClose={onClose}
-      >
+      <Drawer closeOnDrag open={isOpen} placement={placement} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -316,7 +311,7 @@ export const hiddenDragBar: Story = () => {
 
       <Drawer
         closeOnDrag
-        isOpen={isOpen}
+        open={isOpen}
         placement="bottom"
         withCloseButton
         withDragBar={false}
@@ -347,7 +342,7 @@ export const disabledCloseButton: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen}>
+      <Drawer open={isOpen}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -373,7 +368,7 @@ export const customCloseButton: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose}>
+      <Drawer open={isOpen} onClose={onClose}>
         <DrawerCloseButton color="gray.400" />
 
         <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -401,7 +396,7 @@ export const disabledOverlay: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} withOverlay={false} onClose={onClose}>
+      <Drawer open={isOpen} withOverlay={false} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -427,7 +422,7 @@ export const customOverlay: Story = () => {
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose}>
+      <Drawer open={isOpen} onClose={onClose}>
         <DrawerOverlay backdropFilter="blur(10px)" bg="blackAlpha.300" />
 
         <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -501,7 +496,7 @@ export const scrollOnMount: Story = () => {
         </Text>
       </Container>
 
-      <Drawer blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Drawer blockScrollOnMount={false} open={isOpen} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>

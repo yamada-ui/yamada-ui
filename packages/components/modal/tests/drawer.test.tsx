@@ -23,7 +23,7 @@ describe("<Drawer />", () => {
 
         <Drawer
           data-testid="Drawer"
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <DrawerOverlay
@@ -75,7 +75,7 @@ describe("<Drawer />", () => {
         <Drawer
           data-testid="Drawer"
           closeOnDrag
-          isOpen={isOpen}
+          open={isOpen}
           placement={placement}
           onClose={() => setIsOpen(false)}
         >
@@ -106,7 +106,7 @@ describe("<Drawer />", () => {
     expectedStyle: ExpectedStyle,
   ) => {
     const { findByTestId, user } = render(
-      <DrawerPlacementExample isOpen={false} placement={placement} />,
+      <DrawerPlacementExample open={false} placement={placement} />,
     )
 
     const openDrawerButton = await findByTestId("OpenDrawer")
@@ -176,7 +176,7 @@ describe("<Drawer />", () => {
 
         <Drawer
           data-testid="Drawer"
-          isOpen={isOpen}
+          open={isOpen}
           withCloseButton={withCloseButton}
           onClose={() => setIsOpen(false)}
         >

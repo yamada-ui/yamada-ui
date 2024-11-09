@@ -43,6 +43,12 @@ interface DrawerOptions {
   /**
    * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
    */
+  fullHeight?: boolean
+  /**
+   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
+   *
+   * @deprecated Use `fullHeight` instead.
+   */
   isFullHeight?: boolean
   /**
    * The placement of the drawer.
@@ -89,7 +95,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       placement,
       ...props,
     })
-    const {
+    let {
       allowPinchZoom,
       autoFocus,
       blockScrollOnMount,
@@ -105,6 +111,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       initialFocusRef,
       isOpen,
       lockFocusAcrossFrames,
+      open,
       restoreFocus,
       withCloseButton = !closeOnDrag,
       withDragBar = true,
@@ -118,6 +125,8 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps, ["isFullHeight"])
+
+    open ??= isOpen
 
     const validChildren = getValidChildren(children)
 
@@ -141,6 +150,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
             initialFocusRef,
             isOpen,
             lockFocusAcrossFrames,
+            open,
             restoreFocus,
             withCloseButton: false,
             withOverlay: false,

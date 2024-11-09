@@ -534,6 +534,7 @@ export {
 } from "./calendar-search"
 export { CalendarX, CalendarX as CalendarXIcon } from "./calendar-x"
 export { CalendarX2, CalendarX2 as CalendarX2Icon } from "./calendar-x2"
+export { Calendar1, Calendar1 as Calendar1Icon } from "./calendar1"
 export { Camera, Camera as CameraIcon } from "./camera"
 export { CameraOff, CameraOff as CameraOffIcon } from "./camera-off"
 export { Candy, Candy as CandyIcon } from "./candy"
@@ -2675,6 +2676,10 @@ export { WifiLow, WifiLow as WifiLowIcon } from "./wifi-low"
 export { WifiOff, WifiOff as WifiOffIcon } from "./wifi-off"
 export { WifiZero, WifiZero as WifiZeroIcon } from "./wifi-zero"
 export { Wind, Wind as WindIcon } from "./wind"
+export {
+  WindArrowDown,
+  WindArrowDown as WindArrowDownIcon,
+} from "./wind-arrow-down"
 export { Wine, Wine as WineIcon } from "./wine"
 export { WineOff, WineOff as WineOffIcon } from "./wine-off"
 export { Workflow, Workflow as WorkflowIcon } from "./workflow"

@@ -3,7 +3,6 @@ export {
   EditableInput,
   EditablePreview,
   EditableTextarea,
-  useEditable,
   useEditableControl,
 } from "./editable"
 export type {
@@ -11,6 +10,6 @@ export type {
   EditablePreviewProps,
   EditableProps,
   EditableTextareaProps,
-  UseEditableProps,
-  UseEditableReturn,
 } from "./editable"
+export { useEditable } from "./use-editable"
+export type { UseEditableProps, UseEditableReturn } from "./use-editable"

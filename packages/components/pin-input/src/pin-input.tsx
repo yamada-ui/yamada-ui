@@ -335,12 +335,12 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         ...filterUndefined(props),
         id: `${id}-${index}`,
         autoComplete: otp ? "one-time-code" : "off",
-        disabled,
+        disabled: props.disabled || disabled,
         placeholder:
           focusedIndex === index && !readOnly && !props.readOnly
             ? ""
             : placeholder,
-        readOnly,
+        readOnly: props.readOnly || readOnly,
         value: values[index] || "",
         onBlur: handlerAll(props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),

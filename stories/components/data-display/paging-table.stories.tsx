@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Column } from "@yamada-ui/table"
 import { faker } from "@faker-js/faker"
-import { ChevronLeft, ChevronRight } from "@yamada-ui/lucide"
+import { ChevronLeftIcon, ChevronRightIcon } from "@yamada-ui/lucide"
 import {
   HStack,
   IconButton,
@@ -624,7 +624,7 @@ export const customPagination: Story = () => {
             <IconButton
               size="sm"
               aria-label="Go to previous page"
-              icon={<ChevronLeft fontSize="lg" />}
+              icon={<ChevronLeftIcon fontSize="lg" />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
             />
@@ -642,7 +642,7 @@ export const customPagination: Story = () => {
             <IconButton
               size="sm"
               aria-label="Go to next page"
-              icon={<ChevronRight fontSize="lg" />}
+              icon={<ChevronRightIcon fontSize="lg" />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
             />

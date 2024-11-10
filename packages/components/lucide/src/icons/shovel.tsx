@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Shovel as LucideShovelIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { Shovel as OriginalShovel } from "lucide-react"
 
 /**
  * `ShovelIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ShovelIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LucideShovelIcon} {...props} />
+export const ShovelIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalShovel} {...props} />
 ))
 
 /**
+ * `Shovel` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ShovelIcon` instead.
  */
 export const Shovel = ShovelIcon

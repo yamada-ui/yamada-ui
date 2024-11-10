@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CopyMinus as LucideCopyMinusIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CopyMinus as OriginalCopyMinus } from "lucide-react"
 
 /**
  * `CopyMinusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CopyMinusIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideCopyMinusIcon} {...props} />,
-)
+export const CopyMinusIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalCopyMinus} {...props} />
+))
 
 /**
+ * `CopyMinus` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CopyMinusIcon` instead.
  */
 export const CopyMinus = CopyMinusIcon

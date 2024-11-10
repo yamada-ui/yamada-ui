@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CodeXml as LucideCodeXmlIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CodeXml as OriginalCodeXml } from "lucide-react"
 
 /**
  * `CodeXmlIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CodeXmlIcon = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LucideCodeXmlIcon} {...props} />
+export const CodeXmlIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalCodeXml} {...props} />
 ))
 
 /**
+ * `CodeXml` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CodeXmlIcon` instead.
  */
 export const CodeXml = CodeXmlIcon

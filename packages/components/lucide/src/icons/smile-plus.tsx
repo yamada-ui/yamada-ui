@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SmilePlus as LucideSmilePlusIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { SmilePlus as OriginalSmilePlus } from "lucide-react"
 
 /**
  * `SmilePlusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SmilePlusIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideSmilePlusIcon} {...props} />,
-)
+export const SmilePlusIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalSmilePlus} {...props} />
+))
 
 /**
+ * `SmilePlus` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `SmilePlusIcon` instead.
  */
 export const SmilePlus = SmilePlusIcon

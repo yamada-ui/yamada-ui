@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { HandHeart as LucideHandHeartIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { HandHeart as OriginalHandHeart } from "lucide-react"
 
 /**
  * `HandHeartIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const HandHeartIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideHandHeartIcon} {...props} />,
-)
+export const HandHeartIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalHandHeart} {...props} />
+))
 
 /**
+ * `HandHeart` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `HandHeartIcon` instead.
  */
 export const HandHeart = HandHeartIcon

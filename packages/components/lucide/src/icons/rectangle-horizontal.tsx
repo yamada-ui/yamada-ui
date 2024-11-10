@@ -1,20 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { RectangleHorizontal as LucideRectangleHorizontalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { RectangleHorizontal as OriginalRectangleHorizontal } from "lucide-react"
 
 /**
  * `RectangleHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RectangleHorizontalIcon = forwardRef<LucideIconProps, "svg">(
+export const RectangleHorizontalIcon = forwardRef<IconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={LucideRectangleHorizontalIcon} {...props} />
+    <Icon ref={ref} as={OriginalRectangleHorizontal} {...props} />
   ),
 )
 
 /**
+ * `RectangleHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `RectangleHorizontalIcon` instead.
  */
 export const RectangleHorizontal = RectangleHorizontalIcon

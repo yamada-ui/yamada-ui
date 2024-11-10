@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { RemoveFormatting as LucideRemoveFormattingIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { RemoveFormatting as OriginalRemoveFormatting } from "lucide-react"
 
 /**
  * `RemoveFormattingIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RemoveFormattingIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideRemoveFormattingIcon} {...props} />
-  ),
+export const RemoveFormattingIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalRemoveFormatting} {...props} />,
 )
 
 /**
+ * `RemoveFormatting` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `RemoveFormattingIcon` instead.
  */
 export const RemoveFormatting = RemoveFormattingIcon

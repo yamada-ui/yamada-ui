@@ -1,20 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SeparatorHorizontal as LucideSeparatorHorizontalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { SeparatorHorizontal as OriginalSeparatorHorizontal } from "lucide-react"
 
 /**
  * `SeparatorHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SeparatorHorizontalIcon = forwardRef<LucideIconProps, "svg">(
+export const SeparatorHorizontalIcon = forwardRef<IconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={LucideSeparatorHorizontalIcon} {...props} />
+    <Icon ref={ref} as={OriginalSeparatorHorizontal} {...props} />
   ),
 )
 
 /**
+ * `SeparatorHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `SeparatorHorizontalIcon` instead.
  */
 export const SeparatorHorizontal = SeparatorHorizontalIcon

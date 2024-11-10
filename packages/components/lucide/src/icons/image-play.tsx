@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ImagePlay as LucideImagePlayIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ImagePlay as OriginalImagePlay } from "lucide-react"
 
 /**
  * `ImagePlayIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ImagePlayIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideImagePlayIcon} {...props} />,
-)
+export const ImagePlayIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalImagePlay} {...props} />
+))
 
 /**
+ * `ImagePlay` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ImagePlayIcon` instead.
  */
 export const ImagePlay = ImagePlayIcon

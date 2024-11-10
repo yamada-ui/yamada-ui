@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ShieldQuestion as LucideShieldQuestionIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ShieldQuestion as OriginalShieldQuestion } from "lucide-react"
 
 /**
  * `ShieldQuestionIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ShieldQuestionIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideShieldQuestionIcon} {...props} />
-  ),
-)
+export const ShieldQuestionIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalShieldQuestion} {...props} />
+))
 
 /**
+ * `ShieldQuestion` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ShieldQuestionIcon` instead.
  */
 export const ShieldQuestion = ShieldQuestionIcon

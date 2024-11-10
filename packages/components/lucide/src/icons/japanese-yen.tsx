@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { JapaneseYen as LucideJapaneseYenIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { JapaneseYen as OriginalJapaneseYen } from "lucide-react"
 
 /**
  * `JapaneseYenIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const JapaneseYenIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideJapaneseYenIcon} {...props} />
-  ),
-)
+export const JapaneseYenIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalJapaneseYen} {...props} />
+))
 
 /**
+ * `JapaneseYen` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `JapaneseYenIcon` instead.
  */
 export const JapaneseYen = JapaneseYenIcon

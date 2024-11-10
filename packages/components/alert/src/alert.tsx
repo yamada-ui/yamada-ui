@@ -14,15 +14,19 @@ import {
   useTheme,
 } from "@yamada-ui/core"
 import { Loading } from "@yamada-ui/loading"
-import { CircleCheckBig, Info, TriangleAlert } from "@yamada-ui/lucide"
+import {
+  CircleCheckBigIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+} from "@yamada-ui/lucide"
 import { createContext, cx } from "@yamada-ui/utils"
 
 const defaultStatuses = {
-  error: { colorScheme: "danger", icon: TriangleAlert },
-  info: { colorScheme: "info", icon: Info },
+  error: { colorScheme: "danger", icon: TriangleAlertIcon },
+  info: { colorScheme: "info", icon: InfoIcon },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CircleCheckBig },
-  warning: { colorScheme: "warning", icon: TriangleAlert },
+  success: { colorScheme: "success", icon: CircleCheckBigIcon },
+  warning: { colorScheme: "warning", icon: TriangleAlertIcon },
 } as const
 
 export type Status = keyof typeof defaultStatuses

@@ -1,20 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CircleArrowOutUpLeft as LucideCircleArrowOutUpLeftIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CircleArrowOutUpLeft as OriginalCircleArrowOutUpLeft } from "lucide-react"
 
 /**
  * `CircleArrowOutUpLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CircleArrowOutUpLeftIcon = forwardRef<LucideIconProps, "svg">(
+export const CircleArrowOutUpLeftIcon = forwardRef<IconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={LucideCircleArrowOutUpLeftIcon} {...props} />
+    <Icon ref={ref} as={OriginalCircleArrowOutUpLeft} {...props} />
   ),
 )
 
 /**
+ * `CircleArrowOutUpLeft` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CircleArrowOutUpLeftIcon` instead.
  */
 export const CircleArrowOutUpLeft = CircleArrowOutUpLeftIcon

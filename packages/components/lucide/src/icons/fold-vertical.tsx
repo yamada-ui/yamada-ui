@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FoldVertical as LucideFoldVerticalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { FoldVertical as OriginalFoldVertical } from "lucide-react"
 
 /**
  * `FoldVerticalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FoldVerticalIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideFoldVerticalIcon} {...props} />
-  ),
-)
+export const FoldVerticalIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalFoldVertical} {...props} />
+))
 
 /**
+ * `FoldVertical` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `FoldVerticalIcon` instead.
  */
 export const FoldVertical = FoldVerticalIcon

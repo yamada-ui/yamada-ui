@@ -1,20 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareSplitHorizontal as LucideSquareSplitHorizontalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { SquareSplitHorizontal as OriginalSquareSplitHorizontal } from "lucide-react"
 
 /**
  * `SquareSplitHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareSplitHorizontalIcon = forwardRef<LucideIconProps, "svg">(
+export const SquareSplitHorizontalIcon = forwardRef<IconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={LucideSquareSplitHorizontalIcon} {...props} />
+    <Icon ref={ref} as={OriginalSquareSplitHorizontal} {...props} />
   ),
 )
 
 /**
+ * `SquareSplitHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `SquareSplitHorizontalIcon` instead.
  */
 export const SquareSplitHorizontal = SquareSplitHorizontalIcon

@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SlidersHorizontal as LucideSlidersHorizontalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { SlidersHorizontal as OriginalSlidersHorizontal } from "lucide-react"
 
 /**
  * `SlidersHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SlidersHorizontalIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideSlidersHorizontalIcon} {...props} />
-  ),
+export const SlidersHorizontalIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalSlidersHorizontal} {...props} />,
 )
 
 /**
+ * `SlidersHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `SlidersHorizontalIcon` instead.
  */
 export const SlidersHorizontal = SlidersHorizontalIcon

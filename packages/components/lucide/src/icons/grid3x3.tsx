@@ -1,18 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Grid3x3 as LucideGrid3x3Icon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { Grid3x3 as OriginalGrid3x3 } from "lucide-react"
 
 /**
  * `Grid3x3Icon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Grid3x3Icon = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={LucideGrid3x3Icon} {...props} />
+export const Grid3x3Icon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalGrid3x3} {...props} />
 ))
 
 /**
+ * `Grid3x3` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `Grid3x3Icon` instead.
  */
 export const Grid3x3 = Grid3x3Icon

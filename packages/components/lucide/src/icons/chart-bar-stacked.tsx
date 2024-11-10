@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ChartBarStacked as LucideChartBarStackedIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ChartBarStacked as OriginalChartBarStacked } from "lucide-react"
 
 /**
  * `ChartBarStackedIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChartBarStackedIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideChartBarStackedIcon} {...props} />
-  ),
+export const ChartBarStackedIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalChartBarStacked} {...props} />,
 )
 
 /**
+ * `ChartBarStacked` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ChartBarStackedIcon` instead.
  */
 export const ChartBarStacked = ChartBarStackedIcon

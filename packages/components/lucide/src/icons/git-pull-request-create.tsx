@@ -1,20 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { GitPullRequestCreate as LucideGitPullRequestCreateIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { GitPullRequestCreate as OriginalGitPullRequestCreate } from "lucide-react"
 
 /**
  * `GitPullRequestCreateIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const GitPullRequestCreateIcon = forwardRef<LucideIconProps, "svg">(
+export const GitPullRequestCreateIcon = forwardRef<IconProps, "svg">(
   (props, ref) => (
-    <LucideIcon ref={ref} as={LucideGitPullRequestCreateIcon} {...props} />
+    <Icon ref={ref} as={OriginalGitPullRequestCreate} {...props} />
   ),
 )
 
 /**
+ * `GitPullRequestCreate` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `GitPullRequestCreateIcon` instead.
  */
 export const GitPullRequestCreate = GitPullRequestCreateIcon

@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CornerRightUp as LucideCornerRightUpIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CornerRightUp as OriginalCornerRightUp } from "lucide-react"
 
 /**
  * `CornerRightUpIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CornerRightUpIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideCornerRightUpIcon} {...props} />
-  ),
-)
+export const CornerRightUpIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalCornerRightUp} {...props} />
+))
 
 /**
+ * `CornerRightUp` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CornerRightUpIcon` instead.
  */
 export const CornerRightUp = CornerRightUpIcon

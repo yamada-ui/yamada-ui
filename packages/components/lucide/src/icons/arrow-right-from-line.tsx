@@ -1,20 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ArrowRightFromLine as LucideArrowRightFromLineIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ArrowRightFromLine as OriginalArrowRightFromLine } from "lucide-react"
 
 /**
  * `ArrowRightFromLineIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ArrowRightFromLineIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideArrowRightFromLineIcon} {...props} />
-  ),
+export const ArrowRightFromLineIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalArrowRightFromLine} {...props} />,
 )
 
 /**
+ * `ArrowRightFromLine` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ArrowRightFromLineIcon` instead.
  */
 export const ArrowRightFromLine = ArrowRightFromLineIcon

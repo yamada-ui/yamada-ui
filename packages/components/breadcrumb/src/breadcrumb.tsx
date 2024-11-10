@@ -23,12 +23,11 @@ import {
   runIfFunc,
 } from "@yamada-ui/utils"
 import { cloneElement, Fragment, useCallback, useMemo } from "react"
-
-const [BreadcrumbProvider, useBreadcrumb] = createContext<{
+const [BreadcrumbProvider, useBreadcrumbStyles] = createContext<{
   [key: string]: CSSUIObject | undefined
 }>({
   name: "BreadcrumbContext",
-  errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
+  errorMessage: `useBreadcrumbStyles returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
 
 export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
@@ -274,7 +273,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     },
     ref,
   ) => {
-    const styles = useBreadcrumb()
+    const styles = useBreadcrumbStyles()
 
     const validChildren = getValidChildren(children)
 
@@ -336,7 +335,7 @@ export interface BreadcrumbLinkProps
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
   ({ href, className, children, isCurrentPage, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const styles = useBreadcrumbStyles()
 
     return (
       <ui.a
@@ -369,7 +368,7 @@ export interface BreadcrumbSeparatorProps
 
 export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   ({ children, gap: mx, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const styles = useBreadcrumbStyles()
     const css: CSSUIObject = {
       mx,
       ...styles.separator,
@@ -399,7 +398,7 @@ export interface BreadcrumbEllipsisProps
 
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
   ({ className, children, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const styles = useBreadcrumbStyles()
 
     const css: CSSUIObject = {
       ...styles.ellipsis,

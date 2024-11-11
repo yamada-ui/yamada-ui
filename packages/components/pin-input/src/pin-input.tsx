@@ -330,17 +330,17 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         ref?: Ref<HTMLInputElement>
       } & PinInputFieldProps): PinInputFieldProps => ({
         type: mask ? "password" : type === "number" ? "tel" : "text",
+        disabled,
         inputMode: type === "number" ? "numeric" : "text",
+        readOnly,
         ...formControlProps,
         ...filterUndefined(props),
         id: `${id}-${index}`,
         autoComplete: otp ? "one-time-code" : "off",
-        disabled: props.disabled || disabled,
         placeholder:
           focusedIndex === index && !readOnly && !props.readOnly
             ? ""
             : placeholder,
-        readOnly: props.readOnly || readOnly,
         value: values[index] || "",
         onBlur: handlerAll(props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),

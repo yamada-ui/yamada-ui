@@ -1,5 +1,34 @@
 # @yamada-ui/select
 
+## 1.8.0
+
+### Minor Changes
+
+- [#3238](https://github.com/yamada-ui/yamada-ui/pull/3238) [`936905a`](https://github.com/yamada-ui/yamada-ui/commit/936905a4a336d670ea6d58a050de0636ec76113b) Thanks [@uraaaa24](https://github.com/uraaaa24)! - improve keyboard navigation and accessibility
+
+## 1.7.3
+
+### Patch Changes
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/popover@1.4.1
+
+## 1.7.2
+
+### Patch Changes
+
+- [#3190](https://github.com/yamada-ui/yamada-ui/pull/3190) [`aef0f69`](https://github.com/yamada-ui/yamada-ui/commit/aef0f6963259300feed05ca76ff26f982dcd8eed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced accessibility and refactor components.
+
+- Updated dependencies [[`81fda67`](https://github.com/yamada-ui/yamada-ui/commit/81fda6792c1a5f5d8af7f33fb068afdfcecd1468), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`77a7060`](https://github.com/yamada-ui/yamada-ui/commit/77a7060c82bb55e7ac27988de24395fa136db6ef), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/use-descendant@1.0.25
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/popover@1.4.0
+  - @yamada-ui/form-control@2.1.6
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/motion@2.2.6
+  - @yamada-ui/use-clickable@1.2.12
+
 ## 1.7.1
 
 ### Patch Changes

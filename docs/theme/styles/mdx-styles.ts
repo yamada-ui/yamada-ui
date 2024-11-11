@@ -15,6 +15,9 @@ export const mdx: { [key: string]: CSSUIObject } = {
     color: ["violet.600", "purple.300"],
     fontFamily: "body",
   },
+  em: {
+    fontStyle: "italic",
+  },
   h1: {
     fontFamily: "heading",
     fontSize: "4xl",
@@ -80,9 +83,6 @@ export const mdx: { [key: string]: CSSUIObject } = {
     fontWeight: "semibold",
   },
   table: {
-    w: "full",
-  },
-  "table-container": {
     my: "6",
     td: {
       lineHeight: "1.5rem",
@@ -95,7 +95,9 @@ export const mdx: { [key: string]: CSSUIObject } = {
       letterSpacing: "normal",
       lineHeight: "6",
       textTransform: "none",
+      whiteSpace: "nowrap",
     },
+    w: "full",
   },
   ul: {
     "& ul,ol": {

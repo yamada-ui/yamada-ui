@@ -1,5 +1,10 @@
 {
   "Tag": {
+    "closeButtonProps": {
+      "type": "TagCloseButtonProps",
+      "description": "Props for tag close button element.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"primary\"",
@@ -34,7 +39,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\"",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
       "defaultValue": "\"subtle\"",
       "description": "The variant of the Tag.",
       "required": false

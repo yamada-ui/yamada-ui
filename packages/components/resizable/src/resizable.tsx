@@ -57,3 +57,6 @@ export const Resizable = forwardRef<ResizableProps, "div">(
     )
   },
 )
+
+Resizable.displayName = "Resizable"
+Resizable.__ui__ = "Resizable"

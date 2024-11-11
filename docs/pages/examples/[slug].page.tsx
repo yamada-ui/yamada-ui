@@ -170,7 +170,7 @@ const Page: NextPage<PageProps> = ({
 
         <Section display="block" pb="0" pt="xl">
           <ScrollArea as={Center} type="never" m="0 auto" tabIndex={-1}>
-            <SegmentedControl as="nav" variant="simple" value={currentSlug}>
+            <SegmentedControl as="nav" variant="tabs" value={currentSlug}>
               {SLUGS.map((slug) => {
                 return (
                   <SegmentedControlButton

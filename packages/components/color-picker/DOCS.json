@@ -434,7 +434,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the ColorPicker.",
       "required": false
@@ -736,8 +736,8 @@
       "required": false
     },
     "size": {
-      "type": "\"sm\" | \"md\" | \"lg\"",
-      "defaultValue": "\"md\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"sm\"",
       "description": "The size of the ColorSwatch.",
       "required": false
     },

@@ -1,5 +1,28 @@
 # @yamada-ui/popover
 
+## 1.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39)]:
+  - @yamada-ui/close-button@1.0.45
+
+## 1.4.0
+
+### Minor Changes
+
+- [#3162](https://github.com/yamada-ui/yamada-ui/pull/3162) [`77a7060`](https://github.com/yamada-ui/yamada-ui/commit/77a7060c82bb55e7ac27988de24395fa136db6ef) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Added accessibility attributes.
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/close-button@1.0.44
+  - @yamada-ui/motion@2.2.6
+  - @yamada-ui/transitions@1.1.9
+  - @yamada-ui/use-animation@1.0.41
+  - @yamada-ui/use-popper@1.0.41
+
 ## 1.3.5
 
 ### Patch Changes

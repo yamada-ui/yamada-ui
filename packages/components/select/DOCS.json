@@ -265,7 +265,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the MultiSelect.",
       "required": false
@@ -297,6 +297,7 @@
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The select option icon to use.",
       "required": false
     },
     "isDisabled": {
@@ -324,7 +325,7 @@
       "required": true
     },
     "labelProps": {
-      "type": "HTMLUIProps<\"span\">",
+      "type": "HTMLUIProps<\"header\">",
       "description": "Props for option group element.",
       "required": false
     }
@@ -573,7 +574,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the Select.",
       "required": false

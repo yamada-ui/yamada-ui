@@ -8,7 +8,7 @@ describe("<Slide />", () => {
   })
 
   test("applies default styles correctly", async () => {
-    render(<Slide isOpen>Slide</Slide>)
+    render(<Slide>Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -18,11 +18,7 @@ describe("<Slide />", () => {
   })
 
   test("applies styles correctly for top placement", async () => {
-    render(
-      <Slide isOpen placement="top">
-        Slide
-      </Slide>,
-    )
+    render(<Slide placement="top">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -32,11 +28,7 @@ describe("<Slide />", () => {
   })
 
   test("applies styles correctly for left placement", async () => {
-    render(
-      <Slide isOpen placement="left">
-        Slide
-      </Slide>,
-    )
+    render(<Slide placement="left">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -46,11 +38,7 @@ describe("<Slide />", () => {
   })
 
   test("applies styles correctly for right placement", async () => {
-    render(
-      <Slide isOpen placement="right">
-        Slide
-      </Slide>,
-    )
+    render(<Slide placement="right">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -60,11 +48,7 @@ describe("<Slide />", () => {
   })
 
   test("applies styles correctly for bottom placement", async () => {
-    render(
-      <Slide isOpen placement="bottom">
-        Slide
-      </Slide>,
-    )
+    render(<Slide placement="bottom">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 

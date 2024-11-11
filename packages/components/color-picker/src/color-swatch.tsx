@@ -125,6 +125,8 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-color-swatch", className)}
+      aria-roledescription="color swatch"
+      role="img"
       {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
       __css={css}
       {...rest}

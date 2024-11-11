@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ArrowUpZA as ArrowUpZAIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ArrowUpZA as OriginalArrowUpZA } from "lucide-react"
+
+/**
+ * `ArrowUpZAIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const ArrowUpZAIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalArrowUpZA} {...props} />
+))
 
 /**
  * `ArrowUpZA` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `ArrowUpZAIcon` instead.
  */
-export const ArrowUpZA = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ArrowUpZAIcon} {...props} />
-))
+export const ArrowUpZA = ArrowUpZAIcon

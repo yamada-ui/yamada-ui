@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CloudDrizzle as CloudDrizzleIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CloudDrizzle as OriginalCloudDrizzle } from "lucide-react"
+
+/**
+ * `CloudDrizzleIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const CloudDrizzleIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalCloudDrizzle} {...props} />
+))
 
 /**
  * `CloudDrizzle` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `CloudDrizzleIcon` instead.
  */
-export const CloudDrizzle = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CloudDrizzleIcon} {...props} />
-))
+export const CloudDrizzle = CloudDrizzleIcon

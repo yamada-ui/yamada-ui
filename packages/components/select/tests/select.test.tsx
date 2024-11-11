@@ -335,6 +335,21 @@ describe("<Select />", () => {
       expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
     })
 
+    test("alt + ArrowUp should close the listbox", async () => {
+      const { user } = render(<Select items={ITEMS} />)
+
+      const input = await screen.findByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+
+      const listbox = await screen.findByRole("listbox")
+      expect(listbox).toBeInTheDocument()
+
+      await user.keyboard("{Alt>}{ArrowUp}")
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument()
+    })
+
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
       const { user } = render(<Select defaultValue="option2" items={ITEMS} />)
 

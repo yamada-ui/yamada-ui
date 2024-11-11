@@ -1,4 +1,5 @@
 import type { DrawerProps } from "../src"
+import { Button } from "@yamada-ui/button"
 import { a11y, render } from "@yamada-ui/test"
 import { useState } from "react"
 import {
@@ -159,5 +160,81 @@ describe("<Drawer />", () => {
       right: "0",
       top: "0",
     })
+  })
+
+  const DrawerCloseButtonExample = ({
+    customDrawerCloseButton = false,
+    withCloseButton = true,
+  }) => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    return (
+      <>
+        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
+          Open Drawer
+        </button>
+
+        <Drawer
+          data-testid="Drawer"
+          isOpen={isOpen}
+          withCloseButton={withCloseButton}
+          onClose={() => setIsOpen(false)}
+        >
+          <DrawerOverlay
+            data-testid="DrawerOverlay"
+            backdropFilter="blur(10px)"
+            bg="blackAlpha.300"
+          />
+          {customDrawerCloseButton ? (
+            <Button
+              data-testid="CustomDrawerCloseButton"
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </Button>
+          ) : (
+            withCloseButton && (
+              <DrawerCloseButton data-testid="DefaultDrawerCloseButton" />
+            )
+          )}
+          <DrawerHeader>Header</DrawerHeader>
+          <DrawerBody>Body</DrawerBody>
+        </Drawer>
+      </>
+    )
+  }
+
+  test("should render custom close button when provided", async () => {
+    const { findByTestId, user } = render(
+      <DrawerCloseButtonExample customDrawerCloseButton />,
+    )
+
+    const openButton = await findByTestId("OpenDrawer")
+    await user.click(openButton)
+
+    const customButton = await findByTestId("CustomDrawerCloseButton")
+    expect(customButton).toBeInTheDocument()
+  })
+
+  test("should render default close button when withCloseButton is true and no custom button provided", async () => {
+    const { findByTestId, user } = render(<DrawerCloseButtonExample />)
+
+    const openButton = await findByTestId("OpenDrawer")
+    await user.click(openButton)
+
+    const defaultButton = await findByTestId("DefaultDrawerCloseButton")
+    expect(defaultButton).toBeInTheDocument()
+  })
+
+  test("should not render any close button when withCloseButton is false", async () => {
+    const { findByTestId, queryByTestId, user } = render(
+      <DrawerCloseButtonExample withCloseButton={false} />,
+    )
+
+    const openButton = await findByTestId("OpenDrawer")
+    await user.click(openButton)
+
+    const customButton = queryByTestId("CustomDrawerCloseButton")
+    expect(customButton).not.toBeInTheDocument()
   })
 })

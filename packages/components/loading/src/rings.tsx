@@ -90,3 +90,6 @@ export const Rings = forwardRef<RingsProps, "svg">(
     )
   },
 )
+
+Rings.displayName = "Rings"
+Rings.__ui__ = "Rings"

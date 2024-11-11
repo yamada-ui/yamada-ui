@@ -7,11 +7,19 @@ package_name: "@yamada-ui/tag"
 order: 1
 with_description: true
 tab: Props
+label: Updated
 ---
 
 ## Props
 
 ### TagProps
+
+<PropsCard
+  id="tag-closebuttonprops"
+  name="closeButtonProps"
+  type="TagCloseButtonProps"
+  description={"Props for tag close button element."}
+/>
 
 <PropsCard
   id="tag-colorscheme"
@@ -61,7 +69,7 @@ tab: Props
 <PropsCard
   id="tag-variant"
   name="variant"
-  type='"outline" | "solid" | "subtle"'
+  type='"outline" | "solid" | "subtle" | "surface"'
   description={"The variant of the Tag."}
   defaultValue={'"subtle"'}
 />

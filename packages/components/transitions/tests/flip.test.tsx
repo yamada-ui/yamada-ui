@@ -1,5 +1,6 @@
 import type { AiryIdent } from "../src"
 import { a11y, render, TestIcon, waitFor } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import { useState } from "react"
 import { Flip } from "../src"
 
@@ -72,5 +73,45 @@ describe("<Flip />", () => {
 
     const button = container.querySelector("button") as HTMLButtonElement
     expect(button).toHaveClass("ui-flip__vertical")
+  })
+
+  test("should warn when dimensions of from element and to element don't match", () => {
+    const mockElementDimensions = (
+      height: { from: number; to: number },
+      width: { from: number; to: number },
+    ) => {
+      Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
+        configurable: true,
+        get() {
+          return this.className.includes("ui-flip__from")
+            ? height.from
+            : height.to
+        },
+      })
+
+      Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
+        configurable: true,
+        get() {
+          return this.className.includes("ui-flip__from")
+            ? width.from
+            : width.to
+        },
+      })
+    }
+
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+    mockElementDimensions({ from: 16, to: 32 }, { from: 16, to: 32 })
+
+    render(
+      <Flip
+        from={<TestIcon data-testid="test-icon" />}
+        to={<TestIcon data-testid="test-icon" />}
+      />,
+    )
+
+    expect(consoleWarnSpy).toHaveBeenCalledOnce()
+
+    consoleWarnSpy.mockRestore()
   })
 })

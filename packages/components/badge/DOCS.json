@@ -12,7 +12,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\"",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
       "defaultValue": "\"subtle\"",
       "description": "The variant of the Badge.",
       "required": false

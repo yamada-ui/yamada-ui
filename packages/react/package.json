@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/react",
-  "version": "1.5.5",
+  "version": "1.6.2",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -111,6 +111,7 @@
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/typography": "workspace:*",
     "@yamada-ui/use-animation": "workspace:*",
+    "@yamada-ui/use-async-callback": "workspace:*",
     "@yamada-ui/use-boolean": "workspace:*",
     "@yamada-ui/use-breakpoint": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
@@ -135,6 +136,7 @@
     "@yamada-ui/use-pan-event": "workspace:*",
     "@yamada-ui/use-popper": "workspace:*",
     "@yamada-ui/use-previous": "workspace:*",
+    "@yamada-ui/use-processing": "workspace:*",
     "@yamada-ui/use-resize-observer": "workspace:*",
     "@yamada-ui/use-size": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",

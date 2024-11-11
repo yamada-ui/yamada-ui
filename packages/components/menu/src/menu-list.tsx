@@ -92,3 +92,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
     )
   },
 )
+
+MenuList.displayName = "MenuList"
+MenuList.__ui__ = "MenuList"

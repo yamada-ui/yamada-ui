@@ -145,7 +145,8 @@ describe("<Popover />", () => {
     const body = await screen.findByText("Popover Body")
     const footer = await screen.findByText("Popover Footer")
 
-    fireEvent.keyDown(document.body, { key: "Escape" })
+    await user.tab()
+    await user.keyboard("{escape}")
 
     await waitFor(() => expect(header).not.toBeVisible())
     await waitFor(() => expect(closeButton).not.toBeVisible())

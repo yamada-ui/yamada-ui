@@ -85,3 +85,6 @@ export const Dots = forwardRef<DotsProps, "svg">(
     )
   },
 )
+
+Dots.displayName = "Dots"
+Dots.__ui__ = "Dots"

@@ -15,14 +15,16 @@ import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as ChartComponents from "@yamada-ui/charts"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
+import { FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Activity,
   Angry,
+  Apple,
   ArrowLeft,
   ArrowRight,
   Bold,
   Check,
+  Cherry,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -131,10 +133,12 @@ const fontAwesomeIcons = {
 const lucideIcons = {
   Activity,
   Angry,
+  Apple,
   ArrowLeft,
   ArrowRight,
   Bold,
   Check,
+  Cherry,
   ChevronDown,
   ChevronLeft,
   ChevronRight,

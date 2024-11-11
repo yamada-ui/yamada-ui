@@ -1,5 +1,11 @@
 # @yamada-ui/rating
 
+## 1.1.3
+
+### Patch Changes
+
+- [#3326](https://github.com/yamada-ui/yamada-ui/pull/3326) [`1e6140f`](https://github.com/yamada-ui/yamada-ui/commit/1e6140f67987960f61346fa85e3a43faf077b6e6) Thanks [@108yen](https://github.com/108yen)! - Added `"use client"` to rating.
+
 ## 1.1.2
 
 ### Patch Changes

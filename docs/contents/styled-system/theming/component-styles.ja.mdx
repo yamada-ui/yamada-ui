@@ -188,12 +188,12 @@ export const Button: ComponentStyle<"Button", ButtonProps> = {
 ```ts title=./theme/components/index.ts
 import { Button } from "./button"
 
-export default { Button }
+export const customComponents = { Button }
 ```
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
+import { customComponents } from "./components"
 
 const defaultComponents = defaultTheme.components
 
@@ -201,7 +201,7 @@ const customTheme: UsageTheme = {
   components: { ...defaultComponents, ...customComponents },
 }
 
-export default extendTheme(customTheme)({ omit: ["components"] })
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
 ```
 
 ### 複数パーツのコンポーネントのスタイリング
@@ -330,12 +330,12 @@ export const List: ComponentMultiStyle<"List", ListProps> = {
 ```ts title=./theme/components/index.ts
 import { List } from "./list"
 
-export default { List }
+export const customComponents = { List }
 ```
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
+import { customComponents } from "./components"
 
 const defaultComponents = defaultTheme.components
 
@@ -343,7 +343,7 @@ const customTheme: UsageTheme = {
   components: { ...defaultComponents, ...customComponents },
 }
 
-export default extendTheme(customTheme)({ omit: ["components"] })
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
 ```
 
 ## アプリケーション全体で共通の`props`を設定する
@@ -428,12 +428,12 @@ export const Banner: ComponentStyle = {
 ```ts title=./theme/components/index.ts
 import { Banner } from "./banner"
 
-export default { Banner }
+export const customComponents = { Banner }
 ```
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
+import { customComponents } from "./components"
 
 const defaultComponents = defaultTheme.components
 
@@ -441,7 +441,7 @@ const customTheme: UsageTheme = {
   components: { ...defaultComponents, ...customComponents },
 }
 
-export default extendTheme(customTheme)({ omit: ["components"] })
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
 ```
 
 :::note

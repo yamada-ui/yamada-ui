@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Heading6 as Heading6Icon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { Heading6 as OriginalHeading6 } from "lucide-react"
+
+/**
+ * `Heading6Icon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const Heading6Icon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalHeading6} {...props} />
+))
 
 /**
  * `Heading6` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `Heading6Icon` instead.
  */
-export const Heading6 = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={Heading6Icon} {...props} />
-))
+export const Heading6 = Heading6Icon

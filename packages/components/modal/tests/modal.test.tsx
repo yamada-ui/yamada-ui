@@ -305,4 +305,145 @@ describe("<Modal />", () => {
       "justify-content": "center",
     })
   })
+
+  const ModalAnimationExample = ({
+    animation,
+    duration,
+  }: Pick<ModalProps, "animation" | "duration">) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const modalHeaderId = "modal-header-id"
+
+    return (
+      <>
+        <button onClick={() => setIsOpen(true)}>Open</button>
+        <Modal
+          aria-labelledby={modalHeaderId}
+          animation={animation}
+          duration={duration}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
+          <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
+          <ModalBody>This is modal body</ModalBody>
+          <ModalFooter>
+            <button onClick={() => setIsOpen(false)}>Close</button>
+          </ModalFooter>
+        </Modal>
+      </>
+    )
+  }
+
+  test("should render modal with top animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="top" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    const styles = window.getComputedStyle(modalSection)
+    expect(styles.opacity).toBeTruthy()
+    expect(parseFloat(styles.opacity)).toBeLessThan(1)
+    expect(styles.transform).toBeTruthy()
+    expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
+    expect(styles.visibility).toBe("visible")
+  })
+
+  test("should render modal with right animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="right" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    const styles = window.getComputedStyle(modalSection)
+    expect(styles.opacity).toBeTruthy()
+    expect(parseFloat(styles.opacity)).toBeLessThan(1)
+    expect(styles.transform).toBeTruthy()
+    expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
+    expect(styles.visibility).toBe("visible")
+  })
+
+  test("should render modal with left animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="left" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    const styles = window.getComputedStyle(modalSection)
+    expect(styles.opacity).toBeTruthy()
+    expect(parseFloat(styles.opacity)).toBeLessThan(1)
+    expect(styles.transform).toBeTruthy()
+    expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
+    expect(styles.visibility).toBe("visible")
+  })
+
+  test("should render modal with bottom animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="bottom" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    const styles = window.getComputedStyle(modalSection)
+    expect(styles.opacity).toBeTruthy()
+    expect(parseFloat(styles.opacity)).toBeLessThan(1)
+    expect(styles.transform).toBeTruthy()
+    expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
+    expect(styles.visibility).toBe("visible")
+  })
+
+  test("should render modal with scale animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="scale" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    const styles = window.getComputedStyle(modalSection)
+    expect(styles.opacity).toBeTruthy()
+    expect(parseFloat(styles.opacity)).toBeLessThan(1)
+    expect(styles.transform).toBeTruthy()
+    expect(styles.transform).toMatch(/scale\(-?\d+\.?\d*\)/)
+    expect(styles.visibility).toBe("visible")
+  })
+
+  test("should render modal with no animation", async () => {
+    const { user } = render(<ModalAnimationExample animation="none" />)
+
+    const openButton = screen.getByRole("button", { name: /open/i })
+    await user.click(openButton)
+
+    const modalSection = await screen.findByRole("dialog")
+    await waitFor(() => {
+      expect(modalSection).toBeVisible()
+    })
+
+    expect(modalSection).not.toHaveStyle({})
+  })
 })

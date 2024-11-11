@@ -1,9 +1,9 @@
 import { faPoo } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
+import { FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import { a11y } from "@yamada-ui/test"
 
-describe("<Icon />", () => {
+describe("<FontAwesomeIcon />", () => {
   test("Font Awesome icon renders correctly.", async () => {
-    await a11y(<Icon icon={faPoo} />)
+    await a11y(<FontAwesomeIcon icon={faPoo} />)
   })
 })

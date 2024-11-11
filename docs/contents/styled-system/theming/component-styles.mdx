@@ -2,7 +2,6 @@
 title: Component Styles
 description: How to create and customize styles for components.
 order: 4
-label: Updated
 ---
 
 Maintaining flexible styles for components in a growing project can be a challenging task.
@@ -189,12 +188,12 @@ Set the style of the created component in the theme.
 ```ts title=./theme/components/index.ts
 import { Button } from "./button"
 
-export default { Button }
+export const customComponents = { Button }
 ```
 
 ```ts title=./theme/index.ts
 import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
-import customComponents from "./components"
+import { customComponents } from "./components"
 
 const defaultComponents = defaultTheme.components
 
@@ -202,44 +201,8 @@ const customTheme: UsageTheme = {
   components: { ...defaultComponents, ...customComponents },
 }
 
-export default extendTheme(customTheme)({ omit: ["components"] })
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
 ```
-
-## Setting Common `props` for the Entire Application
-
-If you want to set common `props` for components across the entire application, use `defaultProps`. `defaultProps` accepts all the `props` provided by the component.
-
-```ts highlight={3}
-export const Button: ComponentStyle<"Button", ButtonProps> = {
-  defaultProps: {
-    loadingText: "Loading…",
-  },
-}
-```
-
-With the above settings, the `loadingText` of the `Button` will be `"Loading…"` throughout the application.
-
-:::note
-Props set in the component will override `defaultProps`.
-:::
-
-If you want to calculate based on the props set in the component and override the component's props, use `overrideProps`.
-
-```tsx live=false highlight={4,5,6,7,8,9}
-export const FormControl: ComponentStyle<"FormControl", FormControlProps> = {
-  overrideProps: ({ label, ...rest }) => ({
-    ...rest,
-    label: (
-      <>
-        <PencilIcon me="1" />
-        {label}
-      </>
-    ),
-  }),
-}
-```
-
-With the above settings, the `label` of the `FormControl` is newly set based on the provided `label`.
 
 ### Styling Multi part components
 
@@ -367,8 +330,57 @@ Set the style of the created component in the theme.
 ```ts title=./theme/components/index.ts
 import { List } from "./list"
 
-export default { List }
+export const customComponents = { List }
 ```
+
+```ts title=./theme/index.ts
+import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
+import { customComponents } from "./components"
+
+const defaultComponents = defaultTheme.components
+
+const customTheme: UsageTheme = {
+  components: { ...defaultComponents, ...customComponents },
+}
+
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
+```
+
+## Setting Common `props` for the Entire Application
+
+If you want to set common `props` for components across the entire application, use `defaultProps`. `defaultProps` accepts all the `props` provided by the component.
+
+```ts highlight={3}
+export const Button: ComponentStyle<"Button", ButtonProps> = {
+  defaultProps: {
+    loadingText: "Loading…",
+  },
+}
+```
+
+With the above settings, the `loadingText` of the `Button` will be `"Loading…"` throughout the application.
+
+:::note
+Props set in the component will override `defaultProps`.
+:::
+
+If you want to calculate based on the props set in the component and override the component's props, use `overrideProps`.
+
+```tsx live=false highlight={4,5,6,7,8,9}
+export const FormControl: ComponentStyle<"FormControl", FormControlProps> = {
+  overrideProps: ({ label, ...rest }) => ({
+    ...rest,
+    label: (
+      <>
+        <PencilIcon me="1" />
+        {label}
+      </>
+    ),
+  }),
+}
+```
+
+With the above settings, the `label` of the `FormControl` is newly set based on the provided `label`.
 
 ## Creating Custom Components
 
@@ -416,7 +428,20 @@ export const Banner: ComponentStyle<"Banner", BannerProps> = {
 ```ts title=./theme/components/index.ts
 import { Banner } from "./banner"
 
-export default { Banner }
+export const customComponents = { Banner }
+```
+
+```ts title=./theme/index.ts
+import { extendTheme, defaultTheme, UsageTheme } from "@yamada-ui/react"
+import { customComponents } from "./components"
+
+const defaultComponents = defaultTheme.components
+
+const customTheme: UsageTheme = {
+  components: { ...defaultComponents, ...customComponents },
+}
+
+export const theme = extendTheme(customTheme)({ omit: ["components"] })
 ```
 
 :::note

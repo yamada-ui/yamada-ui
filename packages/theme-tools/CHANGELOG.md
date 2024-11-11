@@ -1,5 +1,19 @@
 # @yamada-ui/theme-tools
 
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`416fc04`](https://github.com/yamada-ui/yamada-ui/commit/416fc04c37d6341f4611c3dd3c2b3c48926b750b)]:
+  - @yamada-ui/theme@1.19.2
+
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13), [`76e736e`](https://github.com/yamada-ui/yamada-ui/commit/76e736ee44895f84e46328be6806b1a71ce59d13)]:
+  - @yamada-ui/theme@1.19.1
+
 ## 1.1.7
 
 ### Patch Changes

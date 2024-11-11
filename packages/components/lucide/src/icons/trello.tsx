@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Trello as TrelloIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { Trello as OriginalTrello } from "lucide-react"
+
+/**
+ * `TrelloIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const TrelloIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalTrello} {...props} />
+))
 
 /**
  * `Trello` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `TrelloIcon` instead.
  */
-export const Trello = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={TrelloIcon} {...props} />
-))
+export const Trello = TrelloIcon

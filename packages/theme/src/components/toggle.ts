@@ -56,7 +56,7 @@ export const Toggle: ComponentStyle<"Toggle"> = {
         boxShadow: "outline",
       },
       _hover: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       },
       _selected: {
         bg: isGray(c)
@@ -71,10 +71,10 @@ export const Toggle: ComponentStyle<"Toggle"> = {
         boxShadow: "outline",
       },
       _hover: {
-        bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       },
       _selected: {
-        bg: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
       },
     }),
     unstyled: {

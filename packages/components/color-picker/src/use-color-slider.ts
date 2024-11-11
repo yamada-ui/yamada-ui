@@ -23,6 +23,8 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useRef, useState } from "react"
 
+type ColorSliderChannel = "alpha" | "hue"
+
 interface UseColorSliderOptions {
   /**
    * The maximum allowed value of the slider. Cannot be less than min.
@@ -41,6 +43,10 @@ interface UseColorSliderOptions {
    * This is particularly useful in forms.
    */
   name?: string
+  /**
+   * The channel of the slider.
+   */
+  channel?: ColorSliderChannel
   /**
    * The initial value of the slider.
    */
@@ -94,6 +100,7 @@ export const useColorSlider = ({
     id,
     name,
     style: styleProp,
+    channel = "hue",
     defaultValue,
     max,
     min = 0,
@@ -354,6 +361,7 @@ export const useColorSlider = ({
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
+        "aria-valuetext": getAriaValueText(channel, value),
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         role: "slider",
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
@@ -369,14 +377,15 @@ export const useColorSlider = ({
       value,
       formControlProps,
       ariaReadonly,
-      isInteractive,
-      focusThumbOnChange,
-      min,
       max,
+      min,
+      channel,
       isDragging,
-      onKeyDown,
-      onFocusProp,
+      focusThumbOnChange,
+      isInteractive,
       onBlurProp,
+      onFocusProp,
+      onKeyDown,
     ],
   )
 
@@ -390,3 +399,23 @@ export const useColorSlider = ({
 }
 
 export type UseColorSliderReturn = ReturnType<typeof useColorSlider>
+
+export const getAriaValueText = (
+  channel: ColorSliderChannel,
+  value: number,
+) => {
+  if (channel === "hue") {
+    return `${value}°, ${getColorName(value)}`
+  } else {
+    return `${value * 100}%`
+  }
+}
+
+const getColorName = (hue: number): string => {
+  if (hue < 30 || hue >= 330) return "Red"
+  if (hue < 90) return "Yellow"
+  if (hue < 150) return "Green"
+  if (hue < 210) return "Cyan"
+  if (hue < 270) return "Blue"
+  return "Magenta"
+}

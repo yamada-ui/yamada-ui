@@ -7,6 +7,7 @@ package_name: "@yamada-ui/badge"
 order: 2
 with_description: true
 tab: Theming
+label: Updated
 ---
 
 ## Theming
@@ -46,18 +47,18 @@ export const Badge: ComponentStyle<"Badge"> = {
       color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
     }),
     subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
-      bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+      bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
     }),
     surface: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
-      bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+      bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       boxShadow: "inset 0 0 0px 1px $color",
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       vars: [
         {
           name: "color",
           token: "colors",
-          value: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+          value: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
         },
       ],
     }),

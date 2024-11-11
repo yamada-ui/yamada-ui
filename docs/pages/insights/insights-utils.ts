@@ -28,7 +28,11 @@ export const INSIGHT_MEMBERS_IDS = CONSTANT.MEMBERS.map(
   ({ github }) => github.id,
 )
 
-export const INSIGHT_PERIOD_SUGGEST = [
+export const INSIGHT_MONTH_PERIOD_SUGGEST = [
+  "this-month",
+  "last-month",
+] as const
+export const INSIGHT_RANGE_PERIOD_SUGGEST = [
   "7d",
   "14d",
   "1M",
@@ -37,6 +41,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
   "6M",
   "1y",
 ] as const
+
 export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
 export const INSIGHT_SCORE_COLORS: { [key: string]: UIProps["color"] } = {
@@ -46,7 +51,10 @@ export const INSIGHT_SCORE_COLORS: { [key: string]: UIProps["color"] } = {
   pullRequests: [`blue.500`, `blue.400`],
 }
 
-export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
+export type InsightMonthPeriodSuggest =
+  (typeof INSIGHT_MONTH_PERIOD_SUGGEST)[number]
+export type InsightRangePeriodSuggest =
+  (typeof INSIGHT_RANGE_PERIOD_SUGGEST)[number]
 export type InsightUserSuggest = (typeof INSIGHT_USER_SUGGEST)[number]
 
 export type InsightUser = (typeof INSIGHT_USERS)[number]

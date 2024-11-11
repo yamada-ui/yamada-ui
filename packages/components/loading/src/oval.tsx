@@ -45,3 +45,6 @@ export const Oval = forwardRef<OvalProps, "svg">(
     )
   },
 )
+
+Oval.displayName = "Oval"
+Oval.__ui__ = "Oval"

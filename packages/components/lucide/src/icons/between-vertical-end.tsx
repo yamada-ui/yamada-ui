@@ -1,15 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BetweenVerticalEnd as BetweenVerticalEndIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { BetweenVerticalEnd as OriginalBetweenVerticalEnd } from "lucide-react"
+
+/**
+ * `BetweenVerticalEndIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const BetweenVerticalEndIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalBetweenVerticalEnd} {...props} />,
+)
 
 /**
  * `BetweenVerticalEnd` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `BetweenVerticalEndIcon` instead.
  */
-export const BetweenVerticalEnd = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={BetweenVerticalEndIcon} {...props} />
-  ),
-)
+export const BetweenVerticalEnd = BetweenVerticalEndIcon

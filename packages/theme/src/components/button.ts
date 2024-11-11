@@ -164,7 +164,7 @@ export const Button: ComponentStyle<"Button"> = {
       errorBorderColor = ["danger.500", "danger.400"],
       theme: t,
     }) => ({
-      bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+      bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       vars: [
         {
@@ -178,9 +178,9 @@ export const Button: ComponentStyle<"Button"> = {
         boxShadow: "outline",
       },
       _hover: {
-        bg: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
         _disabled: {
-          bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         },
       },
       _invalid: {
@@ -195,9 +195,9 @@ export const Button: ComponentStyle<"Button"> = {
       errorBorderColor = ["danger.500", "danger.400"],
       theme: t,
     }) => ({
-      bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+      bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
       border: "1px solid",
-      borderColor: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+      borderColor: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       vars: [
         {
@@ -211,9 +211,9 @@ export const Button: ComponentStyle<"Button"> = {
         boxShadow: "outline",
       },
       _hover: {
-        bg: [`${c}.100`, shadeColor(`${c}.500`, 56)(t, m)],
+        bg: [`${c}.100`, shadeColor(`${c}.300`, 56)(t, m)],
         _disabled: {
-          bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         },
       },
       _invalid: {

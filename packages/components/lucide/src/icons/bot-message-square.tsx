@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BotMessageSquare as BotMessageSquareIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { BotMessageSquare as OriginalBotMessageSquare } from "lucide-react"
+
+/**
+ * `BotMessageSquareIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const BotMessageSquareIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalBotMessageSquare} {...props} />,
+)
 
 /**
  * `BotMessageSquare` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `BotMessageSquareIcon` instead.
  */
-export const BotMessageSquare = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={BotMessageSquareIcon} {...props} />,
-)
+export const BotMessageSquare = BotMessageSquareIcon

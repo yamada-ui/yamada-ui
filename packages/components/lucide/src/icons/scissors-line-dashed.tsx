@@ -1,15 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ScissorsLineDashed as ScissorsLineDashedIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ScissorsLineDashed as OriginalScissorsLineDashed } from "lucide-react"
+
+/**
+ * `ScissorsLineDashedIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const ScissorsLineDashedIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalScissorsLineDashed} {...props} />,
+)
 
 /**
  * `ScissorsLineDashed` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `ScissorsLineDashedIcon` instead.
  */
-export const ScissorsLineDashed = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={ScissorsLineDashedIcon} {...props} />
-  ),
-)
+export const ScissorsLineDashed = ScissorsLineDashedIcon

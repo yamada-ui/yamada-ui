@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { IceCreamCone as IceCreamConeIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { IceCreamCone as OriginalIceCreamCone } from "lucide-react"
+
+/**
+ * `IceCreamConeIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const IceCreamConeIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalIceCreamCone} {...props} />
+))
 
 /**
  * `IceCreamCone` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `IceCreamConeIcon` instead.
  */
-export const IceCreamCone = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={IceCreamConeIcon} {...props} />
-))
+export const IceCreamCone = IceCreamConeIcon

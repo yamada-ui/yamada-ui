@@ -1,6 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { RotateIdent } from "@yamada-ui/react"
-import { Apple, Cherry, Grab, HandMetal, Moon, Sun } from "@yamada-ui/lucide"
+import {
+  AppleIcon,
+  CherryIcon,
+  GrabIcon,
+  HandMetalIcon,
+  MoonIcon,
+  SunIcon,
+} from "@yamada-ui/lucide"
 import { Center, Rotate } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -21,9 +28,15 @@ export const basic: Story = () => {
       h="calc(100vh - 16px * 2)"
       w="calc(100vw - 16px * 2)"
     >
-      <Rotate from={<Sun fontSize="2xl" />} to={<Moon fontSize="2xl" />} />
+      <Rotate
+        from={<SunIcon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
+      />
 
-      <Rotate from={<Apple fontSize="2xl" />} to={<Cherry fontSize="2xl" />} />
+      <Rotate
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
+      />
     </Center>
   )
 }
@@ -37,15 +50,15 @@ export const withRotate: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Rotate
-        from={<Grab fontSize="2xl" />}
+        from={<GrabIcon fontSize="2xl" />}
         rotate={360}
-        to={<HandMetal fontSize="2xl" />}
+        to={<HandMetalIcon fontSize="2xl" />}
       />
 
       <Rotate
-        from={<Apple fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
         rotate={-360}
-        to={<Cherry fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -61,14 +74,14 @@ export const withDuration: Story = () => {
     >
       <Rotate
         duration={0.6}
-        from={<Sun fontSize="2xl" />}
-        to={<Moon fontSize="2xl" />}
+        from={<SunIcon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
       />
 
       <Rotate
         duration={0.6}
-        from={<Apple fontSize="2xl" />}
-        to={<Cherry fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -84,14 +97,14 @@ export const withDelay: Story = () => {
     >
       <Rotate
         delay={1}
-        from={<Sun fontSize="2xl" />}
-        to={<Moon fontSize="2xl" />}
+        from={<SunIcon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
       />
 
       <Rotate
         delay={1}
-        from={<Apple fontSize="2xl" />}
-        to={<Cherry fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -106,9 +119,9 @@ export const isDisabled: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Rotate
-        from={<Sun fontSize="2xl" />}
+        from={<SunIcon fontSize="2xl" />}
         isDisabled
-        to={<Moon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -123,9 +136,9 @@ export const isReadonly: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Rotate
-        from={<Sun fontSize="2xl" />}
+        from={<SunIcon fontSize="2xl" />}
         isReadOnly
-        to={<Moon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -142,8 +155,8 @@ export const customControl: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Rotate
-        from={<Sun fontSize="2xl" />}
-        to={<Moon fontSize="2xl" />}
+        from={<SunIcon fontSize="2xl" />}
+        to={<MoonIcon fontSize="2xl" />}
         value={value}
         onChange={onChange}
       />

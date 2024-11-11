@@ -36,6 +36,7 @@ import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { Flip } from "./flip"
+import { For } from "./for"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
@@ -136,6 +137,7 @@ export const components = {
   FileButton,
   FileInput,
   Flip,
+  For,
   FormControl,
   Heading,
   HueSlider,

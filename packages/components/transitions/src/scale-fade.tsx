@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { ThemeProps } from "@yamada-ui/core"
 import type {
   MotionProps,
@@ -80,6 +81,7 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       className,
       delay,
       duration,
+      open,
       isOpen,
       reverse,
       scale,
@@ -88,7 +90,9 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       unmountOnExit,
       ...rest
     } = omitThemeProps(mergedProps)
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+    const animate = open || unmountOnExit ? "enter" : "exit"
+
+    open ??= isOpen
 
     const custom = {
       delay,
@@ -99,11 +103,11 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       transitionEnd,
     }
 
-    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
+    open = unmountOnExit ? open && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>
-        {isOpen ? (
+        {open ? (
           <motion.div
             ref={ref}
             className={cx("ui-scale-fade", className)}

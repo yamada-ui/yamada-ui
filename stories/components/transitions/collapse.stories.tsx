@@ -17,7 +17,7 @@ export const basic: Story = () => {
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse isOpen={isOpen}>
+      <Collapse open={isOpen}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -33,7 +33,7 @@ export const withDuration: Story = () => {
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse duration={0.7} isOpen={isOpen}>
+      <Collapse duration={0.7} open={isOpen}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -49,7 +49,7 @@ export const exitUnmount: Story = () => {
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse isOpen={isOpen} unmountOnExit>
+      <Collapse open={isOpen} unmountOnExit>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -69,7 +69,7 @@ export const disabledOpacity: Story = () => {
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse animationOpacity={false} isOpen={isOpen}>
+      <Collapse animationOpacity={false} open={isOpen}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -89,7 +89,7 @@ export const startingHeight: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse isOpen={isOpen} startingHeight={20}>
+      <Collapse open={isOpen} startingHeight={20}>
         <Box color="purple.500">
           私の戦闘力は530000です。
           <br />

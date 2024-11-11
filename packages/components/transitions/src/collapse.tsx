@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type {
   MotionProps,
@@ -99,6 +100,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     delay,
     duration,
     endingHeight,
+    open,
     isOpen,
     startingHeight,
     transition: transitionProp,
@@ -115,9 +117,11 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     if (isBrowser) setMounted(true)
   }, [])
 
-  const animate = isOpen || unmountOnExit ? "enter" : "exit"
+  open ??= isOpen
 
-  isOpen = unmountOnExit ? isOpen : true
+  const animate = open || unmountOnExit ? "enter" : "exit"
+
+  open = unmountOnExit ? open : true
 
   const transition = useMemo(() => {
     if (!mounted) {
@@ -167,7 +171,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
 
   return (
     <AnimatePresence custom={custom} initial={false}>
-      {isOpen ? (
+      {open ? (
         <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}

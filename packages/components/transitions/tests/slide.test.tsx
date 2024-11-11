@@ -62,7 +62,7 @@ describe("<Slide />", () => {
       return (
         <>
           <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Slide isOpen={isOpen} unmountOnExit>
+          <Slide open={isOpen} unmountOnExit>
             Slide
           </Slide>
         </>

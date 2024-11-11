@@ -149,7 +149,7 @@ export const isDisabled: Story = () => {
       h="calc(100vh - 16px * 2)"
       w="calc(100vw - 16px * 2)"
     >
-      <Flip from={<BackOfCard />} isDisabled to={<FrontOfCard />} />
+      <Flip disabled from={<BackOfCard />} to={<FrontOfCard />} />
     </Center>
   )
 }
@@ -162,7 +162,7 @@ export const isReadOnly: Story = () => {
       h="calc(100vh - 16px * 2)"
       w="calc(100vw - 16px * 2)"
     >
-      <Flip from={<BackOfCard />} isReadOnly to={<FrontOfCard />} />
+      <Flip from={<BackOfCard />} readOnly to={<FrontOfCard />} />
     </Center>
   )
 }

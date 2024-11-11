@@ -119,8 +119,8 @@ export const isDisabled: Story = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Rotate
+        disabled
         from={<SunIcon fontSize="2xl" />}
-        isDisabled
         to={<MoonIcon fontSize="2xl" />}
       />
     </Center>
@@ -137,7 +137,7 @@ export const isReadonly: Story = () => {
     >
       <Rotate
         from={<SunIcon fontSize="2xl" />}
-        isReadOnly
+        readOnly
         to={<MoonIcon fontSize="2xl" />}
       />
     </Center>

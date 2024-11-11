@@ -1,5 +1,5 @@
 import type { PopoverProps } from "../src"
-import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import {
   Popover,

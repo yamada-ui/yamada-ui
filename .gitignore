@@ -19,6 +19,7 @@ build
 *.pem
 .vscode
 .idea
+.node-version
 
 # debug
 logs

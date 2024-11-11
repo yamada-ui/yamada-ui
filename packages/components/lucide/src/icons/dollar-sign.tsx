@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { DollarSign as DollarSignIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { DollarSign as OriginalDollarSign } from "lucide-react"
+
+/**
+ * `DollarSignIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const DollarSignIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalDollarSign} {...props} />
+))
 
 /**
  * `DollarSign` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `DollarSignIcon` instead.
  */
-export const DollarSign = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={DollarSignIcon} {...props} />
-))
+export const DollarSign = DollarSignIcon

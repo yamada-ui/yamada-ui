@@ -2,4 +2,4 @@
 "@yamada-ui/pin-input": patch
 ---
 
-Check disabled and readonly status for both PinInput and PinInputField
+Modified PinInput to be overridden by PinInputField's disabled and readonly props when they are set to true

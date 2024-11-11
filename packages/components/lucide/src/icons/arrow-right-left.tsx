@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ArrowRightLeft as ArrowRightLeftIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { ArrowRightLeft as OriginalArrowRightLeft } from "lucide-react"
+
+/**
+ * `ArrowRightLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const ArrowRightLeftIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalArrowRightLeft} {...props} />
+))
 
 /**
  * `ArrowRightLeft` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `ArrowRightLeftIcon` instead.
  */
-export const ArrowRightLeft = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={ArrowRightLeftIcon} {...props} />,
-)
+export const ArrowRightLeft = ArrowRightLeftIcon

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { ResizableItemControl, ResizableStorage } from "@yamada-ui/react"
-import { GripVertical, MoveHorizontal } from "@yamada-ui/lucide"
+import { GripVerticalIcon, MoveHorizontalIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
@@ -251,7 +251,7 @@ export const withIcon: Story = () => {
       <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<GripVertical />} />
+        <ResizableTrigger icon={<GripVerticalIcon />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
@@ -261,7 +261,7 @@ export const withIcon: Story = () => {
           One
         </ResizableItem>
 
-        <ResizableTrigger icon={<GripVertical />} />
+        <ResizableTrigger icon={<GripVerticalIcon />} />
 
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           Two
@@ -277,7 +277,7 @@ export const customIcon: Story = () => {
       <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<MoveHorizontal />} />
+        <ResizableTrigger icon={<MoveHorizontalIcon />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
@@ -285,7 +285,7 @@ export const customIcon: Story = () => {
       <Resizable borderWidth="1px" direction="vertical" h="md" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<MoveHorizontal />} />
+        <ResizableTrigger icon={<MoveHorizontalIcon />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>

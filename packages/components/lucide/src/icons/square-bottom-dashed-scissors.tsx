@@ -1,15 +1,24 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareBottomDashedScissors as SquareBottomDashedScissorsIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { SquareBottomDashedScissors as OriginalSquareBottomDashedScissors } from "lucide-react"
+
+/**
+ * `SquareBottomDashedScissorsIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const SquareBottomDashedScissorsIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => (
+    <Icon ref={ref} as={OriginalSquareBottomDashedScissors} {...props} />
+  ),
+)
 
 /**
  * `SquareBottomDashedScissors` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `SquareBottomDashedScissorsIcon` instead.
  */
-export const SquareBottomDashedScissors = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={SquareBottomDashedScissorsIcon} {...props} />
-  ),
-)
+export const SquareBottomDashedScissors = SquareBottomDashedScissorsIcon

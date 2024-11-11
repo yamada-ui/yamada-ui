@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { FerrisWheel as FerrisWheelIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { FerrisWheel as OriginalFerrisWheel } from "lucide-react"
+
+/**
+ * `FerrisWheelIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const FerrisWheelIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalFerrisWheel} {...props} />
+))
 
 /**
  * `FerrisWheel` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `FerrisWheelIcon` instead.
  */
-export const FerrisWheel = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={FerrisWheelIcon} {...props} />
-))
+export const FerrisWheel = FerrisWheelIcon

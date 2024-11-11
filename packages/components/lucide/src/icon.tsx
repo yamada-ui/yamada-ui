@@ -3,7 +3,7 @@ import type { IconNode } from "lucide-react"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import { Icon as LucideIcon } from "lucide-react"
+import { Icon as OriginalIcon } from "lucide-react"
 
 interface IconOptions {
   /**
@@ -12,19 +12,19 @@ interface IconOptions {
   icon: IconNode
 }
 
-export interface IconProps extends UIIconProps, IconOptions {}
+export interface LucideIconProps extends UIIconProps, IconOptions {}
 
 /**
- * `Icon` is a component for using [Lucide lab](https://github.com/lucide-icons/lucide-lab) icons.
+ * `LucideIcon` is a component for using [Lucide lab](https://github.com/lucide-icons/lucide-lab) icons.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Icon = forwardRef<IconProps, "svg">(
+export const LucideIcon = forwardRef<LucideIconProps, "svg">(
   ({ className, icon, ...rest }, ref) => {
     return (
       <UIIcon
         ref={ref}
-        as={LucideIcon}
+        as={OriginalIcon}
         className={cx("ui-lucide-icon", className)}
         iconNode={icon}
         {...rest}
@@ -33,5 +33,19 @@ export const Icon = forwardRef<IconProps, "svg">(
   },
 )
 
-Icon.displayName = "Icon"
-Icon.__ui__ = "Icon"
+LucideIcon.displayName = "LucideIcon"
+LucideIcon.__ui__ = "LucideIcon"
+
+/**
+ * @deprecated Use `LucideIconProps` instead.
+ */
+export type IconProps = LucideIconProps
+
+/**
+ * `Icon` is a component for using [Lucide lab](https://github.com/lucide-icons/lucide-lab) icons.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `LucideIcon` instead.
+ */
+export const Icon = LucideIcon

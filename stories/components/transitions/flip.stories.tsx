@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { FlipIdent } from "@yamada-ui/react"
-import { Apple, Cherry } from "@yamada-ui/lucide"
+import { AppleIcon, CherryIcon } from "@yamada-ui/lucide"
 import { Avatar, Center, Flip, Text } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -45,7 +45,10 @@ export const basic: Story = () => {
     >
       <Flip from={<BackOfCard />} to={<FrontOfCard />} />
 
-      <Flip from={<Apple fontSize="2xl" />} to={<Cherry fontSize="2xl" />} />
+      <Flip
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
+      />
     </Center>
   )
 }
@@ -61,9 +64,9 @@ export const flipVertical: Story = () => {
       <Flip from={<BackOfCard />} orientation="vertical" to={<FrontOfCard />} />
 
       <Flip
-        from={<Apple fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
         orientation="vertical"
-        to={<Cherry fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -81,8 +84,8 @@ export const withDuration: Story = () => {
 
       <Flip
         duration={1.4}
-        from={<Apple fontSize="2xl" />}
-        to={<Cherry fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -100,8 +103,8 @@ export const withDelay: Story = () => {
 
       <Flip
         delay={1}
-        from={<Apple fontSize="2xl" />}
-        to={<Cherry fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -126,8 +129,8 @@ export const useSpring: Story = () => {
       />
 
       <Flip
-        from={<Apple fontSize="2xl" />}
-        to={<Cherry fontSize="2xl" />}
+        from={<AppleIcon fontSize="2xl" />}
+        to={<CherryIcon fontSize="2xl" />}
         transition={{
           type: "spring",
           damping: 10,

@@ -114,7 +114,7 @@ interface AlphaSliderOptions {
 
 export interface AlphaSliderProps
   extends ThemeProps<"AlphaSlider">,
-    Partial<Omit<UseColorSliderProps, "color">>,
+    Partial<Omit<UseColorSliderProps, "channel" | "color">>,
     AlphaSliderOptions {}
 
 /**
@@ -145,6 +145,7 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
         step: 0.01,
         thumbColor: "transparent",
         ...computedProps,
+        channel: "alpha",
       })
 
     const css: CSSUIObject = {

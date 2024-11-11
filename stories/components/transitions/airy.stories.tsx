@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { AiryIdent } from "@yamada-ui/react"
-import { Menu, X } from "@yamada-ui/lucide"
+import { MenuIcon, XIcon } from "@yamada-ui/lucide"
 import { Airy, Center, Text } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -26,7 +26,7 @@ export const basic: Story = () => {
         to={<Text fontSize="2xl">OFF</Text>}
       />
 
-      <Airy from={<Menu fontSize="2xl" />} to={<X fontSize="2xl" />} />
+      <Airy from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />
     </Center>
   )
 }
@@ -47,8 +47,8 @@ export const withDuration: Story = () => {
 
       <Airy
         duration={0.6}
-        from={<Menu fontSize="2xl" />}
-        to={<X fontSize="2xl" />}
+        from={<MenuIcon fontSize="2xl" />}
+        to={<XIcon fontSize="2xl" />}
       />
     </Center>
   )
@@ -70,8 +70,8 @@ export const withDelay: Story = () => {
 
       <Airy
         delay={1}
-        from={<Menu fontSize="2xl" />}
-        to={<X fontSize="2xl" />}
+        from={<MenuIcon fontSize="2xl" />}
+        to={<XIcon fontSize="2xl" />}
       />
     </Center>
   )

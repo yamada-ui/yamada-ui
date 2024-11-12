@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MoveUpLeft as MoveUpLeftIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { MoveUpLeft as OriginalMoveUpLeft } from "lucide-react"
+
+/**
+ * `MoveUpLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const MoveUpLeftIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalMoveUpLeft} {...props} />
+))
 
 /**
  * `MoveUpLeft` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `MoveUpLeftIcon` instead.
  */
-export const MoveUpLeft = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={MoveUpLeftIcon} {...props} />
-))
+export const MoveUpLeft = MoveUpLeftIcon

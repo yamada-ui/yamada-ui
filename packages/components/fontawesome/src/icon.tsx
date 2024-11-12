@@ -3,13 +3,13 @@ import type {
   IconProp,
 } from "@fortawesome/fontawesome-svg-core"
 import type { IconProps as UIIconProps } from "@yamada-ui/icon"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon as OriginalFontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-interface IconOptions {
+interface FontAwesomeIconOptions {
   /**
    * The icon of the [Font Awesome](https://fontawesome.com).
    * Check the docs to see the icon of possible modifiers you can pass.
@@ -19,15 +19,17 @@ interface IconOptions {
   icon: IconDefinition | IconProp
 }
 
-export interface IconProps extends UIIconProps, IconOptions {}
+export interface FontAwesomeIconProps
+  extends UIIconProps,
+    FontAwesomeIconOptions {}
 
 /**
  * `Icon` is a useful component for using [Font Awesome](https://fontawesome.com).
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
  */
-export const Icon = forwardRef<IconProps, "svg">(
-  ({ className, size: fontSize, icon, __css, ...rest }, ref) => {
+export const FontAwesomeIcon = forwardRef<FontAwesomeIconProps, "svg">(
+  ({ className, fontSize, icon, __css, ...rest }, ref) => {
     const css = useMemo(
       () => ({
         color: "currentcolor",
@@ -42,7 +44,7 @@ export const Icon = forwardRef<IconProps, "svg">(
     return (
       <UIIcon
         ref={ref}
-        as={FontAwesomeIcon}
+        as={OriginalFontAwesomeIcon}
         className={cx("ui-fontawesome-icon", className)}
         icon={icon}
         __css={css}
@@ -52,5 +54,19 @@ export const Icon = forwardRef<IconProps, "svg">(
   },
 )
 
-Icon.displayName = "Icon"
-Icon.__ui__ = "Icon"
+FontAwesomeIcon.displayName = "FontAwesomeIcon"
+FontAwesomeIcon.__ui__ = "FontAwesomeIcon"
+
+/**
+ * @deprecated Use `FontAwesomeIconProps` instead.
+ */
+export interface IconProps extends FontAwesomeIconProps {}
+
+/**
+ * `Icon` is a useful component for using [Font Awesome](https://fontawesome.com).
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
+ *
+ * @deprecated  Use `FontAwesomeIcon` instead.
+ */
+export const Icon = FontAwesomeIcon

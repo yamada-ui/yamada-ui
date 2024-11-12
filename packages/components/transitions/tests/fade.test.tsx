@@ -7,14 +7,14 @@ describe("<Fade />", () => {
     await a11y(<Fade />)
   })
 
-  test("toggles visibility on isOpen change", async () => {
+  test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
           <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Fade isOpen={isOpen}>Fade</Fade>
+          <Fade open={isOpen}>Fade</Fade>
         </>
       )
     }
@@ -39,7 +39,7 @@ describe("<Fade />", () => {
       return (
         <>
           <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Fade isOpen={isOpen} unmountOnExit>
+          <Fade open={isOpen} unmountOnExit>
             Fade
           </Fade>
         </>

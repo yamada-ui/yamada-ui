@@ -36,7 +36,7 @@ describe("<Airy />", () => {
 
   test("should be read only", () => {
     const { container, user } = render(
-      <Airy from={<p>ON</p>} isReadOnly to={<p>OFF</p>} />,
+      <Airy from={<p>ON</p>} readOnly to={<p>OFF</p>} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -51,7 +51,7 @@ describe("<Airy />", () => {
 
   test("should be disabled", () => {
     const { container, user } = render(
-      <Airy from={<p>ON</p>} isDisabled to={<p>OFF</p>} />,
+      <Airy disabled from={<p>ON</p>} to={<p>OFF</p>} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement

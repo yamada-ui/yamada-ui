@@ -1,5 +1,17 @@
 # @yamada-ui/menu
 
+## 1.3.19
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/transitions@1.1.10
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/popover@1.4.2
+  - @yamada-ui/icon@1.1.12
+  - @yamada-ui/use-clickable@1.2.13
+
 ## 1.3.18
 
 ### Patch Changes

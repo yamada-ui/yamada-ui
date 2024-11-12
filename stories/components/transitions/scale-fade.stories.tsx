@@ -17,7 +17,7 @@ export const basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen}>
+      <ScaleFade open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -37,7 +37,7 @@ export const withScale: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} scale={0.75}>
+      <ScaleFade open={isOpen} scale={0.75}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -57,7 +57,7 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade duration={0.4} isOpen={isOpen}>
+      <ScaleFade duration={0.4} open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -77,7 +77,7 @@ export const exitUnmount: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade isOpen={isOpen} unmountOnExit>
+      <ScaleFade open={isOpen} unmountOnExit>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

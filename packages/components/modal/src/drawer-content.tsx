@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-union-types */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionPanInfo } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
@@ -15,7 +14,7 @@ import { useDrawer, useModal } from "./modal-context"
 
 export interface DrawerContentProps
   extends Merge<
-    Omit<DrawerProps, "open" | "isOpen" | "placement" | keyof ThemeProps>,
+    Omit<DrawerProps, "isOpen" | "open" | "placement" | keyof ThemeProps>,
     Required<
       Pick<
         DrawerProps,

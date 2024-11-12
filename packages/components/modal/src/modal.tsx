@@ -1,5 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
-/* eslint-disable perfectionist/sort-interfaces */
 import type {
   CSSUIObject,
   CSSUIProps,
@@ -37,21 +35,17 @@ export interface ModalOptions
     | "restoreFocus"
   > {
   /**
-   * If `true`, the open will be opened.
+   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
+   *
+   * @default false.
    */
-  open?: boolean
+  allowPinchZoom?: boolean
   /**
    * If `true`, the open will be opened.
    *
    * @deprecated Use `open` instead.
    */
   isOpen?: boolean
-  /**
-   * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
-   *
-   * @default false.
-   */
-  allowPinchZoom?: boolean
   /**
    * The animation of the tooltip.
    *
@@ -80,6 +74,10 @@ export interface ModalOptions
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the open will be opened.
+   */
+  open?: boolean
   /**
    * The CSS `padding` property.
    */
@@ -175,9 +173,9 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       duration,
       finalFocusRef,
       initialFocusRef,
-      open,
       isOpen,
       lockFocusAcrossFrames = true,
+      open,
       outside = "fallback(4, 1rem)",
       placement: _placement = "center",
       restoreFocus,
@@ -255,9 +253,9 @@ export const Modal = motionForwardRef<ModalProps, "section">(
           closeOnOverlay,
           describedbyId,
           duration,
-          open,
           isOpen,
           labelledbyId,
+          open,
           scrollBehavior,
           styles,
           withCloseButton,

@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { SlideProps } from "@yamada-ui/transitions"
 import type { ModalProps } from "./modal"
@@ -110,9 +109,9 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       duration = { enter: 0.4, exit: 0.3 },
       finalFocusRef,
       initialFocusRef,
-      open,
       isOpen,
       lockFocusAcrossFrames,
+      open,
       restoreFocus,
       withCloseButton = !closeOnDrag,
       withDragBar = true,
@@ -149,9 +148,9 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
             duration,
             finalFocusRef,
             initialFocusRef,
-            open,
             isOpen,
             lockFocusAcrossFrames,
+            open,
             restoreFocus,
             withCloseButton: false,
             withOverlay: false,

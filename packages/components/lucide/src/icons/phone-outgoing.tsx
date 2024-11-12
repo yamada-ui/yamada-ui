@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { PhoneOutgoing as PhoneOutgoingIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { PhoneOutgoing as OriginalPhoneOutgoing } from "lucide-react"
+
+/**
+ * `PhoneOutgoingIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const PhoneOutgoingIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalPhoneOutgoing} {...props} />
+))
 
 /**
  * `PhoneOutgoing` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `PhoneOutgoingIcon` instead.
  */
-export const PhoneOutgoing = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={PhoneOutgoingIcon} {...props} />,
-)
+export const PhoneOutgoing = PhoneOutgoingIcon

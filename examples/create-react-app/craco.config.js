@@ -4,6 +4,9 @@ const path = require("path")
 const absolutePath = path.join(__dirname, "../../packages/react")
 
 module.exports = {
+  eslint: {
+    enable: false,
+  },
   webpack: {
     configure: (webpackConfig) => {
       const { isFound, match } = getLoader(

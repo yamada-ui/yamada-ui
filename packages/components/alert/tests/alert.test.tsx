@@ -1,5 +1,9 @@
 import { Loading } from "@yamada-ui/loading"
-import { CircleCheckBig, Info, TriangleAlert } from "@yamada-ui/lucide"
+import {
+  CircleCheckBigIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+} from "@yamada-ui/lucide"
 import { a11y, render, screen } from "@yamada-ui/test"
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../src"
 import { getStatusColorScheme, getStatusIcon } from "../src/alert"
@@ -51,19 +55,19 @@ describe("<Alert />", () => {
 
   describe("getStatusIcon", () => {
     test("info", () => {
-      expect(getStatusIcon("info")).toBe(Info)
+      expect(getStatusIcon("info")).toBe(InfoIcon)
     })
 
     test("success", () => {
-      expect(getStatusIcon("success")).toBe(CircleCheckBig)
+      expect(getStatusIcon("success")).toBe(CircleCheckBigIcon)
     })
 
     test("warning", () => {
-      expect(getStatusIcon("warning")).toBe(TriangleAlert)
+      expect(getStatusIcon("warning")).toBe(TriangleAlertIcon)
     })
 
     test("error", () => {
-      expect(getStatusIcon("error")).toBe(TriangleAlert)
+      expect(getStatusIcon("error")).toBe(TriangleAlertIcon)
     })
 
     test("loading", () => {

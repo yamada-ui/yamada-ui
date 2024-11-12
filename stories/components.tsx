@@ -175,7 +175,7 @@ const PropControlItem = <K extends PropControlComponent>({
             onMouseLeave={onClose}
             {...(rest as SliderProps)}
           >
-            <Tooltip isOpen={isOpen} label={rest.value} placement="top">
+            <Tooltip label={rest.value} open={isOpen} placement="top">
               <SliderThumb />
             </Tooltip>
           </Slider>

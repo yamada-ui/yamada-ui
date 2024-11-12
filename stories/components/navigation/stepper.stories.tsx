@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Steps } from "@yamada-ui/react"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Button,
@@ -181,7 +181,7 @@ export const customStatus: Story = () => {
       <Stepper index={activeStep}>
         {steps.map(({ description, title }, index) => (
           <Step key={index}>
-            <StepStatus complete={<Ghost fontSize="xl" />} />
+            <StepStatus complete={<GhostIcon fontSize="xl" />} />
 
             <Box flexShrink="0">
               <StepTitle>{title}</StepTitle>

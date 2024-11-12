@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CircleDotDashed as CircleDotDashedIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { CircleDotDashed as OriginalCircleDotDashed } from "lucide-react"
+
+/**
+ * `CircleDotDashedIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const CircleDotDashedIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalCircleDotDashed} {...props} />,
+)
 
 /**
  * `CircleDotDashed` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `CircleDotDashedIcon` instead.
  */
-export const CircleDotDashed = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={CircleDotDashedIcon} {...props} />,
-)
+export const CircleDotDashed = CircleDotDashedIcon

@@ -1,5 +1,15 @@
 # @yamada-ui/rating
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/form-control@2.1.7
+  - @yamada-ui/icon@1.1.12
+
 ## 1.1.3
 
 ### Patch Changes

@@ -36,6 +36,12 @@ interface RotateOptions {
    */
   delay?: number
   /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * The animation duration.
    *
    * @default 0.4
@@ -45,14 +51,22 @@ interface RotateOptions {
    * If `true`, the component is disabled.
    *
    * @default false
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the component is readonly.
    *
    * @default false
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
   /**
    * The animation rotation.
    *
@@ -80,20 +94,26 @@ export interface RotateProps
  */
 export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Rotate", props)
-  const {
+  let {
     className,
     defaultValue = "from",
     delay = 0,
+    disabled,
     duration = 0.4,
     from,
     isDisabled,
     isReadOnly,
+    readOnly,
     rotate = 45,
     to,
     value: valueProp,
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  disabled ??= isDisabled
+  readOnly ??= isReadOnly
+
   const [vars, { opacity }] = useCreateVars(
     { opacity: 1, ...styles, ...rest },
     ["opacity"],
@@ -111,7 +131,7 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
   const isFrom = value === "from"
 
   const onClick = useCallback(async () => {
-    if (isReadOnly) return
+    if (readOnly) return
 
     await animate.start({
       opacity: 0,
@@ -126,7 +146,7 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
       rotate: "0deg",
       transition: { duration },
     })
-  }, [isReadOnly, animate, rotate, duration, delay, setValue, opacity])
+  }, [readOnly, animate, rotate, duration, delay, setValue, opacity])
 
   const css: CSSUIObject = {
     vars,
@@ -138,12 +158,12 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
       ref={ref}
       type="button"
       className={cx("ui-rotate", `ui-rotate--${value}`, className)}
-      data-disabled={dataAttr(isDisabled)}
-      data-readonly={dataAttr(isReadOnly)}
+      data-disabled={dataAttr(disabled)}
+      data-readonly={dataAttr(readOnly)}
       data-value={value}
       animate={animate}
       custom={rotate}
-      disabled={isDisabled}
+      disabled={disabled}
       initial={{ opacity, rotate: "0deg" }}
       onClick={onClick}
       __css={css}

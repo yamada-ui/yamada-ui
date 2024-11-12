@@ -1,5 +1,12 @@
 # @yamada-ui/use-breakpoint
 
+## 1.4.13
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+
 ## 1.4.12
 
 ### Patch Changes

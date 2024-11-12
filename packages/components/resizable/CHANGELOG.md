@@ -1,5 +1,17 @@
 # @yamada-ui/resizable
 
+## 1.1.18
+
+### Patch Changes
+
+- [#3240](https://github.com/yamada-ui/yamada-ui/pull/3240) [`1403e09`](https://github.com/yamada-ui/yamada-ui/commit/1403e09d34920c8584c165dc18c998a38bad6fc3) Thanks [@koralle](https://github.com/koralle)! - Add `displayName` to `Resizable`, `ResizableItem` components
+
+- [#3377](https://github.com/yamada-ui/yamada-ui/pull/3377) [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/icon@1.1.12
+
 ## 1.1.17
 
 ### Patch Changes

@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Plug2 as Plug2Icon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { Plug2 as OriginalPlug2 } from "lucide-react"
+
+/**
+ * `Plug2Icon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const Plug2Icon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalPlug2} {...props} />
+))
 
 /**
  * `Plug2` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `Plug2Icon` instead.
  */
-export const Plug2 = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={Plug2Icon} {...props} />
-))
+export const Plug2 = Plug2Icon

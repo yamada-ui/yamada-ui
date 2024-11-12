@@ -17,38 +17,20 @@ import { Flip } from "@yamada-ui/react"
 
 ## 使い方
 
-切り替える要素となるコンポーネントを`from`と`to`にそれぞれ渡します。
+切り替える要素を`from`と`to`に設定します。
 
 ```tsx functional=true
 return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
 ```
 
-### フリップさせる方向を変更する
+### 方向を変更する
 
-フリップさせる方向を変更する場合は、`orientation`を使用してください。デフォルトは`horizontal`です。
+方向を変更する場合は、`orientation`に`"vertical"`または`"horizontal"`を設定します。デフォルトは`"horizontal"`です。
 
 ```tsx functional=true
 return (
   <Flip
     orientation="vertical"
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
-  />
-)
-```
-
-### アニメーションにスプリングを加える
-
-フリップ時のアニメーションにスプリングを加えたい場合は、`transition`を使用してください。
-
-```tsx functional=true
-return (
-  <Flip
-    transition={{
-      type: "spring",
-      damping: 10,
-      stiffness: 120,
-    }}
     from={<Apple fontSize="6xl" />}
     to={<Cherry fontSize="6xl" />}
   />
@@ -69,9 +51,9 @@ return (
 )
 ```
 
-### アニメーションの発火を遅らせる
+### 遅延させる
 
-アニメーションの発火を遅らせたい場合は、`delay`に数値(秒)を設定します。
+切り替えを遅延させたい場合は、`delay`に数値(秒)を設定します。
 
 ```tsx functional=true
 return (
@@ -120,6 +102,22 @@ return (
   <Flip
     value={value}
     onChange={onChange}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### カスタマイズする
+
+```tsx functional=true
+return (
+  <Flip
+    transition={{
+      type: "spring",
+      damping: 10,
+      stiffness: 120,
+    }}
     from={<Apple fontSize="6xl" />}
     to={<Cherry fontSize="6xl" />}
   />

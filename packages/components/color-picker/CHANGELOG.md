@@ -1,5 +1,23 @@
 # @yamada-ui/color-picker
 
+## 1.4.9
+
+### Patch Changes
+
+- [#3272](https://github.com/yamada-ui/yamada-ui/pull/3272) [`d947f89`](https://github.com/yamada-ui/yamada-ui/commit/d947f8916fe266279e08726b0b2aaa302b19d5e4) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Added `role` and `aria-controls` to `ColorPicker` component
+
+- [#3019](https://github.com/yamada-ui/yamada-ui/pull/3019) [`c5be7da`](https://github.com/yamada-ui/yamada-ui/commit/c5be7da9d4031d5c985f099a5ddaa9c6abb59bc3) Thanks [@neginasu](https://github.com/neginasu)! - Added `aria-valuetext` to `AlphaSlider` and `HueSlider`.
+
+- [#3395](https://github.com/yamada-ui/yamada-ui/pull/3395) [`b96b544`](https://github.com/yamada-ui/yamada-ui/commit/b96b544dbcf186e73acfb9f477ca50ff27cdef7e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `role` and `aria-roledescription` to `ColorSwatch` component.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/popover@1.4.2
+  - @yamada-ui/button@1.0.49
+  - @yamada-ui/form-control@2.1.7
+  - @yamada-ui/icon@1.1.12
+  - @yamada-ui/input@1.0.47
+
 ## 1.4.8
 
 ### Patch Changes

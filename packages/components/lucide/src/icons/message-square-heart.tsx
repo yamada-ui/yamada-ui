@@ -1,15 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { MessageSquareHeart as MessageSquareHeartIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { MessageSquareHeart as OriginalMessageSquareHeart } from "lucide-react"
+
+/**
+ * `MessageSquareHeartIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const MessageSquareHeartIcon = forwardRef<IconProps, "svg">(
+  (props, ref) => <Icon ref={ref} as={OriginalMessageSquareHeart} {...props} />,
+)
 
 /**
  * `MessageSquareHeart` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `MessageSquareHeartIcon` instead.
  */
-export const MessageSquareHeart = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={MessageSquareHeartIcon} {...props} />
-  ),
-)
+export const MessageSquareHeart = MessageSquareHeartIcon

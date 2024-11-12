@@ -17,15 +17,15 @@ import { Rotate } from "@yamada-ui/react"
 
 ## 使い方
 
-切り替える要素となるコンポーネントを`from`と`to`にそれぞれ渡します。
+切り替える要素を`from`と`to`に設定します。
 
 ```tsx functional=true
 return <Rotate from={<Sun fontSize="6xl" />} to={<Moon fontSize="6xl" />} />
 ```
 
-### 回転させる角度を変更する
+### 角度を変更する
 
-回転させる角度を変更する場合は、`rotate`に数値(角度)を設定します。
+角度を変更する場合は、`rotate`に数値(角度)を設定します。
 
 ```tsx functional=true
 return (
@@ -51,9 +51,9 @@ return (
 )
 ```
 
-### アニメーションの発火を遅らせる
+### 遅延させる
 
-アニメーションの発火を遅らせたい場合は、`delay`に数値(秒)を設定します。
+切り替えを遅延させたい場合は、`delay`に数値(秒)を設定します。
 
 ```tsx functional=true
 return (

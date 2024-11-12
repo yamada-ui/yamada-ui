@@ -1,5 +1,15 @@
 # @yamada-ui/fontawesome
 
+## 1.0.46
+
+### Patch Changes
+
+- [#3423](https://github.com/yamada-ui/yamada-ui/pull/3423) [`0fc6f6a`](https://github.com/yamada-ui/yamada-ui/commit/0fc6f6ab6f24a3f301c822a0af3392b9eca62935) Thanks [@illionillion](https://github.com/illionillion)! - Change `Icon` in `@yamada-ui/fontawesome` to `FontawesomeIcon`.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/icon@1.1.12
+
 ## 1.0.45
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Pagination, VStack, Wrap } from "@yamada-ui/react"
 import { useState } from "react"
 import { colorSchemes } from "../../components"
@@ -125,9 +125,9 @@ export const customControl: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Pagination total={10} controlProps={{ children: <Ghost /> }} />
-      <Pagination total={10} controlPrevProps={{ children: <Ghost /> }} />
-      <Pagination total={10} controlNextProps={{ children: <Ghost /> }} />
+      <Pagination total={10} controlProps={{ children: <GhostIcon /> }} />
+      <Pagination total={10} controlPrevProps={{ children: <GhostIcon /> }} />
+      <Pagination total={10} controlNextProps={{ children: <GhostIcon /> }} />
     </>
   )
 }
@@ -135,16 +135,20 @@ export const customControlButton: Story = () => {
 export const customEdgeButton: Story = () => {
   return (
     <>
-      <Pagination total={10} withEdges edgeProps={{ children: <Ghost /> }} />
       <Pagination
         total={10}
         withEdges
-        edgeFirstProps={{ children: <Ghost /> }}
+        edgeProps={{ children: <GhostIcon /> }}
       />
       <Pagination
         total={10}
         withEdges
-        edgeLastProps={{ children: <Ghost /> }}
+        edgeFirstProps={{ children: <GhostIcon /> }}
+      />
+      <Pagination
+        total={10}
+        withEdges
+        edgeLastProps={{ children: <GhostIcon /> }}
       />
     </>
   )

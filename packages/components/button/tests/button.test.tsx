@@ -7,12 +7,10 @@ describe("<Button />", () => {
   })
 
   test("renders with icon", () => {
-    const { getByText, rerender } = render(
-      <Button rightIcon={<>right icon</>} />,
-    )
+    const { getByText, rerender } = render(<Button endIcon={<>end icon</>} />)
     expect(getByText("right icon")).toBeTruthy()
 
-    rerender(<Button leftIcon={<>left icon</>} />)
+    rerender(<Button startIcon={<>start icon</>} />)
     expect(getByText("left icon")).toBeTruthy()
   })
 

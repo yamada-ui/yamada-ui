@@ -1,13 +1,22 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { DiamondPercent as DiamondPercentIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { DiamondPercent as OriginalDiamondPercent } from "lucide-react"
+
+/**
+ * `DiamondPercentIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const DiamondPercentIcon = forwardRef<IconProps, "svg">((props, ref) => (
+  <Icon ref={ref} as={OriginalDiamondPercent} {...props} />
+))
 
 /**
  * `DiamondPercent` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `DiamondPercentIcon` instead.
  */
-export const DiamondPercent = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={DiamondPercentIcon} {...props} />,
-)
+export const DiamondPercent = DiamondPercentIcon

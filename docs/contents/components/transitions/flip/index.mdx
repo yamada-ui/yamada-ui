@@ -17,15 +17,15 @@ import { Flip } from "@yamada-ui/react"
 
 ## Usage
 
-Pass the components to be switched as `from` and `to`.
+Set the elements to switch between as `from` and `to`.
 
 ```tsx functional=true
 return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
 ```
 
-### Change the Flip Direction
+### Change Direction
 
-To change the flip direction, use `orientation`. The default is `horizontal`.
+To change the direction, set `orientation` to either `"vertical"` or `"horizontal"`. The default is `"horizontal"`.
 
 ```tsx functional=true
 return (
@@ -37,27 +37,9 @@ return (
 )
 ```
 
-### Change Spring to the Animation
+### Change Duration
 
-If you want to add a spring effect to the flip animation, use `transition`.
-
-```tsx functional=true
-return (
-  <Flip
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
-    transition={{
-      type: "spring",
-      damping: 10,
-      stiffness: 120,
-    }}
-  />
-)
-```
-
-### Change the Duration
-
-To change the duration, set a number (in seconds) to `duration`.
+To change the duration, set `duration` to a number (seconds).
 
 ```tsx functional=true
 return (
@@ -69,9 +51,9 @@ return (
 )
 ```
 
-### Delay the Animation Trigger
+### Add Delay
 
-To delay the animation trigger, set a value (in seconds) for `delay`.
+To delay the switch, set `delay` to a number (seconds).
 
 ```tsx functional=true
 return (
@@ -90,7 +72,7 @@ To disable, set `isDisabled` to `true`.
 ```tsx functional=true
 return (
   <Flip
-    isdisabled
+    isDisabled
     from={<Apple fontSize="6xl" />}
     to={<Cherry fontSize="6xl" />}
   />
@@ -118,10 +100,26 @@ const [value, onChange] = useState<FlipIdent>("from")
 
 return (
   <Flip
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
     value={value}
     onChange={onChange}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
+  />
+)
+```
+
+### Customize
+
+```tsx functional=true
+return (
+  <Flip
+    transition={{
+      type: "spring",
+      damping: 10,
+      stiffness: 120,
+    }}
+    from={<Apple fontSize="6xl" />}
+    to={<Cherry fontSize="6xl" />}
   />
 )
 ```

@@ -41,12 +41,6 @@ export interface ModalOptions
    */
   allowPinchZoom?: boolean
   /**
-   * If `true`, the open will be opened.
-   *
-   * @deprecated Use `open` instead.
-   */
-  isOpen?: boolean
-  /**
    * The animation of the tooltip.
    *
    * @default 'scale'
@@ -74,6 +68,12 @@ export interface ModalOptions
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the open will be opened.
+   *
+   * @deprecated Use `open` instead.
+   */
+  isOpen?: boolean
   /**
    * If `true`, the open will be opened.
    */

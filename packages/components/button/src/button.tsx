@@ -1,5 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
-/* eslint-disable perfectionist/sort-interfaces */
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
 import type { ElementType, ReactElement } from "react"
@@ -29,6 +27,10 @@ interface ButtonOptions {
    */
   disableRipple?: boolean
   /**
+   * The icon to display at the end side of the button.
+   */
+  endIcon?: ReactElement
+  /**
    * If `true`, the button is represented as active.
    *
    * @default false
@@ -53,10 +55,6 @@ interface ButtonOptions {
    */
   isRounded?: boolean
   /**
-   * The icon to display at the start side of the button.
-   */
-  startIcon?: ReactElement
-  /**
    * The icon to display at the left side of the button.
    * If specified at the same time as `startIcon`, `startIcon` takes precedence.
    *
@@ -78,16 +76,16 @@ interface ButtonOptions {
    */
   loadingText?: string
   /**
-   * The icon to display at the end side of the button.
-   */
-  endIcon?: ReactElement
-  /**
    * The icon to display at the right side of the button.
    * If specified at the same time as `endIcon`, `endIcon` takes precedence.
    *
    * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement
+  /**
+   * The icon to display at the start side of the button.
+   */
+  startIcon?: ReactElement
 }
 
 export interface ButtonProps
@@ -116,17 +114,17 @@ export const Button = forwardRef<ButtonProps, "button">(
       type,
       className,
       disableRipple,
+      endIcon,
       isActive,
       isDisabled = group?.isDisabled,
       isLoading,
       isRounded,
-      startIcon,
       leftIcon,
       loadingIcon,
       loadingPlacement = "start",
       loadingText,
-      endIcon,
       rightIcon,
+      startIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -166,10 +164,10 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const contentProps = {
       children,
-      startIcon,
-      leftIcon,
       endIcon,
+      leftIcon,
       rightIcon,
+      startIcon,
     }
 
     const loadingProps = {
@@ -268,10 +266,10 @@ interface ButtonContentProps
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
-  startIcon,
-  leftIcon,
   endIcon,
+  leftIcon,
   rightIcon,
+  startIcon,
 }) => {
   startIcon ??= leftIcon
   endIcon ??= rightIcon

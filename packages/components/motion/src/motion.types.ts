@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-object-types */
 import type {
   ComponentArgs,
   OmitProps,
@@ -275,14 +274,14 @@ export interface MotionTransitionProps {
 export type WithTransitionProps<Y extends object> = {
   /**
    * Show the component. triggers when enter or exit states.
-   */
-  open?: boolean
-  /**
-   * Show the component. triggers when enter or exit states.
    *
    * @deprecated Use `open` instead.
    */
   isOpen?: boolean
+  /**
+   * Show the component. triggers when enter or exit states.
+   */
+  open?: boolean
   /**
    * If `true`, the element will unmount when `isOpen={false}` and animation is done.
    */

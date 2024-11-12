@@ -1,5 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
-/* eslint-disable perfectionist/sort-interfaces */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
@@ -38,17 +36,17 @@ interface AiryOptions {
    */
   delay?: number
   /**
-   * The animation duration.
-   *
-   * @default 0.2
-   */
-  duration?: number
-  /**
    * If `true`, the component is disabled.
    *
    * @default false
    */
   disabled?: boolean
+  /**
+   * The animation duration.
+   *
+   * @default 0.2
+   */
+  duration?: number
   /**
    * If `true`, the component is disabled.
    *

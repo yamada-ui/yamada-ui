@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
 import type { ThemeProps, Token } from "@yamada-ui/core"
 import type {
   MotionProps,

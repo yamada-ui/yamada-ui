@@ -14,7 +14,7 @@ describe("<SlideFade />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade isOpen={isOpen}>SlideFade</SlideFade>
+          <SlideFade open={isOpen}>SlideFade</SlideFade>
         </>
       )
     }
@@ -39,7 +39,7 @@ describe("<SlideFade />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade initial="initial" isOpen={isOpen}>
+          <SlideFade initial="initial" open={isOpen}>
             SlideFade
           </SlideFade>
         </>
@@ -96,7 +96,7 @@ describe("<SlideFade />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade isOpen={isOpen} unmountOnExit>
+          <SlideFade open={isOpen} unmountOnExit>
             SlideFade
           </SlideFade>
         </>

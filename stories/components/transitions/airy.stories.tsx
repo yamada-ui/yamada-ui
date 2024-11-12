@@ -81,8 +81,8 @@ export const isDisabled: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Airy
+        disabled
         from={<Text fontSize="2xl">ON</Text>}
-        isDisabled
         to={<Text fontSize="2xl">OFF</Text>}
       />
     </Center>
@@ -94,7 +94,7 @@ export const isReadonly: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Airy
         from={<Text fontSize="2xl">ON</Text>}
-        isReadOnly
+        readOnly
         to={<Text fontSize="2xl">OFF</Text>}
       />
     </Center>

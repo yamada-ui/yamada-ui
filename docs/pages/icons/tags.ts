@@ -9247,6 +9247,7 @@ export const TAGS: { [key: string]: string[] } = {
   WifiOff: ["disabled"],
   WifiZero: ["connection", "signal", "wireless"],
   Wind: ["weather", "air", "blow"],
+  WindArrowDown: ["weather", "air", "pressure", "blow"],
   Wine: [
     "alcohol",
     "beverage",

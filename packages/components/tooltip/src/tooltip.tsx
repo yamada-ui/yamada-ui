@@ -1,5 +1,3 @@
-/* eslint-disable perfectionist/sort-interfaces */
-/* eslint-disable perfectionist/sort-objects */
 import type {
   CSSUIObject,
   CSSUIProps,
@@ -79,14 +77,20 @@ interface TooltipOptions {
   closeOnScroll?: boolean
   /**
    * If `true`, the tooltip will be initially shown.
-   */
-  defaultOpen?: boolean
-  /**
-   * If `true`, the tooltip will be initially shown.
    *
    * @deprecated Use `defaultOpen` instead.
    */
   defaultIsOpen?: boolean
+  /**
+   * If `true`, the tooltip will be initially shown.
+   */
+  defaultOpen?: boolean
+  /**
+   * If `true`, the tooltip will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * The animation duration.
    */
@@ -95,19 +99,9 @@ interface TooltipOptions {
    * If `true`, the tooltip will be disabled.
    *
    * @default false
-   */
-  disabled?: boolean
-  /**
-   * If `true`, the tooltip will be disabled.
-   *
-   * @default false
    * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
-  /**
-   * If `true`, the tooltip will be shown.
-   */
-  open?: boolean
   /**
    * If `true`, the tooltip will be shown.
    *
@@ -118,6 +112,10 @@ interface TooltipOptions {
    * The label of the tooltip.
    */
   label?: ReactNode
+  /**
+   * If `true`, the tooltip will be shown.
+   */
+  open?: boolean
   /**
    * The delay before showing the tooltip.
    *
@@ -212,17 +210,17 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       closeOnMouseDown = false,
       closeOnPointerDown = false,
       closeOnScroll,
-      defaultOpen: defaultOpenProp,
       defaultIsOpen: defaultIsOpenProp,
+      defaultOpen: defaultOpenProp,
+      disabled,
       duration,
       gutter,
-      disabled,
       isDisabled,
-      open: openProp,
       isOpen: isOpenProp,
       label,
       modifiers,
       offset,
+      open: openProp,
       openDelay = 0,
       placement,
       onClose: onCloseProp,

@@ -58,15 +58,15 @@ interface AiryOptions {
    * If `true`, the component is readonly.
    *
    * @default false
+   * @deprecated Use `readOnly` instead.
    */
-  readOnly?: boolean
+  isReadOnly?: boolean
   /**
    * If `true`, the component is readonly.
    *
    * @default false
-   * @deprecated Use `readOnly` instead.
    */
-  isReadOnly?: boolean
+  readOnly?: boolean
   /**
    * Use this when you want to control the animation from outside the component.
    */
@@ -92,12 +92,12 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
     className,
     defaultValue = "from",
     delay = 0,
+    disabled,
     duration = 0.2,
     from,
-    disabled,
     isDisabled,
-    readOnly,
     isReadOnly,
+    readOnly,
     to,
     value: valueProp,
     onChange: onChangeProp,

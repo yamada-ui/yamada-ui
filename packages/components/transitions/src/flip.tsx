@@ -50,6 +50,12 @@ export interface FlipOptions {
    */
   delay?: number
   /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * The animation duration.
    *
    * @default 0.4
@@ -59,21 +65,9 @@ export interface FlipOptions {
    * If `true`, the component is disabled.
    *
    * @default false
-   */
-  disabled?: boolean
-  /**
-   * If `true`, the component is disabled.
-   *
-   * @default false
    * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
-  /**
-   * If `true`, the component is readonly.
-   *
-   * @default false
-   */
-  readOnly?: boolean
   /**
    * If `true`, the component is readonly.
    *
@@ -87,6 +81,12 @@ export interface FlipOptions {
    * @default 'horizontal'
    */
   orientation?: FlipOrientation
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
   /**
    * The animation transition.
    */
@@ -129,13 +129,13 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     className,
     defaultValue = "from",
     delay = 0,
+    disabled,
     duration = 0.4,
     from,
-    disabled,
     isDisabled,
-    readOnly,
     isReadOnly,
     orientation = "horizontal",
+    readOnly,
     to,
     transition: transitionProp = {},
     value: valueProp,

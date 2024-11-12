@@ -36,17 +36,17 @@ interface RotateOptions {
    */
   delay?: number
   /**
-   * The animation duration.
-   *
-   * @default 0.4
-   */
-  duration?: number
-  /**
    * If `true`, the component is disabled.
    *
    * @default false
    */
   disabled?: boolean
+  /**
+   * The animation duration.
+   *
+   * @default 0.4
+   */
+  duration?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -58,15 +58,15 @@ interface RotateOptions {
    * If `true`, the component is readonly.
    *
    * @default false
+   * @deprecated Use `readOnly` instead.
    */
-  readOnly?: boolean
+  isReadOnly?: boolean
   /**
    * If `true`, the component is readonly.
    *
    * @default false
-   * @deprecated Use `readOnly` instead.
    */
-  isReadOnly?: boolean
+  readOnly?: boolean
   /**
    * The animation rotation.
    *
@@ -98,12 +98,12 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
     className,
     defaultValue = "from",
     delay = 0,
+    disabled,
     duration = 0.4,
     from,
-    disabled,
     isDisabled,
-    readOnly,
     isReadOnly,
+    readOnly,
     rotate = 45,
     to,
     value: valueProp,

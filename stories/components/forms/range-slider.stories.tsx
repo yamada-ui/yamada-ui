@@ -246,11 +246,11 @@ export const withTooltip: Story = () => {
         75%
       </RangeSliderMark>
 
-      <Tooltip isOpen={isOpen} label={`${value[0]}%`} placement="top">
+      <Tooltip label={`${value[0]}%`} open={isOpen} placement="top">
         <RangeSliderStartThumb />
       </Tooltip>
 
-      <Tooltip isOpen={isOpen} label={`${value[1]}%`} placement="top">
+      <Tooltip label={`${value[1]}%`} open={isOpen} placement="top">
         <RangeSliderEndThumb />
       </Tooltip>
     </RangeSlider>

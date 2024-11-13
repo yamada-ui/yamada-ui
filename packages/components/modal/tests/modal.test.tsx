@@ -26,7 +26,7 @@ describe("<Modal />", () => {
 
         <Modal
           aria-labelledby={modalHeaderId}
-          isOpen={isOpen}
+          open={isOpen}
           placement={placement}
           onClose={() => setIsOpen(false)}
         >
@@ -53,7 +53,7 @@ describe("<Modal />", () => {
         </button>
         <Modal
           data-testid="Modal"
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <ModalCloseButton data-testid="ModalCloseButton" />
@@ -119,7 +119,7 @@ describe("<Modal />", () => {
 
           <Modal
             aria-labelledby={primaryModalHeaderId}
-            isOpen={isPrimaryOpen}
+            open={isPrimaryOpen}
             onClose={() => setIsPrimaryOpen(false)}
           >
             <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
@@ -138,7 +138,7 @@ describe("<Modal />", () => {
             <Modal
               size="sm"
               aria-labelledby={secondaryModalHeaderId}
-              isOpen={isSecondaryOpen}
+              open={isSecondaryOpen}
               onClose={() => setIsSecondaryOpen(false)}
             >
               <ModalHeader id={secondaryModalHeaderId}>
@@ -320,7 +320,7 @@ describe("<Modal />", () => {
           aria-labelledby={modalHeaderId}
           animation={animation}
           duration={duration}
-          isOpen={isOpen}
+          open={isOpen}
           onClose={() => setIsOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
@@ -348,7 +348,6 @@ describe("<Modal />", () => {
     const styles = window.getComputedStyle(modalSection)
     expect(styles.opacity).toBeTruthy()
     expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.willChange).toBe("opacity, transform")
     expect(styles.transform).toBeTruthy()
     expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
     expect(styles.visibility).toBe("visible")
@@ -369,7 +368,6 @@ describe("<Modal />", () => {
     const styles = window.getComputedStyle(modalSection)
     expect(styles.opacity).toBeTruthy()
     expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.willChange).toBe("opacity, transform")
     expect(styles.transform).toBeTruthy()
     expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
     expect(styles.visibility).toBe("visible")
@@ -390,7 +388,6 @@ describe("<Modal />", () => {
     const styles = window.getComputedStyle(modalSection)
     expect(styles.opacity).toBeTruthy()
     expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.willChange).toBe("opacity, transform")
     expect(styles.transform).toBeTruthy()
     expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
     expect(styles.visibility).toBe("visible")
@@ -411,7 +408,6 @@ describe("<Modal />", () => {
     const styles = window.getComputedStyle(modalSection)
     expect(styles.opacity).toBeTruthy()
     expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.willChange).toBe("opacity, transform")
     expect(styles.transform).toBeTruthy()
     expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
     expect(styles.visibility).toBe("visible")
@@ -432,7 +428,6 @@ describe("<Modal />", () => {
     const styles = window.getComputedStyle(modalSection)
     expect(styles.opacity).toBeTruthy()
     expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.willChange).toBe("opacity, transform")
     expect(styles.transform).toBeTruthy()
     expect(styles.transform).toMatch(/scale\(-?\d+\.?\d*\)/)
     expect(styles.visibility).toBe("visible")

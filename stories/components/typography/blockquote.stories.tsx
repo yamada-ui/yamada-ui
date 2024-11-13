@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Quote } from "@yamada-ui/lucide"
+import { QuoteIcon } from "@yamada-ui/lucide"
 import {
   Blockquote,
   BlockquoteCaption,
@@ -110,7 +110,7 @@ export const withIcon: Story = () => {
       cite="Wikipedia"
       citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
       icon={
-        <Quote
+        <QuoteIcon
           color={["blackAlpha.600", "whiteAlpha.700"]}
           fontSize="xl"
           left="0"

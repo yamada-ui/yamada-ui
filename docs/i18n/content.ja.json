@@ -11795,13 +11795,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": {
-      "lv1": "Airy",
-      "lv2": "使い方",
-      "lv3": "アニメーションの発火を遅らせる"
-    },
-    "slug": "/components/transitions/airy#アニメーションの発火を遅らせる",
-    "title": "アニメーションの発火を遅らせる"
+    "hierarchy": { "lv1": "Airy", "lv2": "使い方", "lv3": "遅延させる" },
+    "slug": "/components/transitions/airy#遅延させる",
+    "title": "遅延させる"
   },
   {
     "type": "fragment",
@@ -11944,23 +11940,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": {
-      "lv1": "Flip",
-      "lv2": "使い方",
-      "lv3": "フリップさせる方向を変更する"
-    },
-    "slug": "/components/transitions/flip#フリップさせる方向を変更する",
-    "title": "フリップさせる方向を変更する"
-  },
-  {
-    "type": "fragment",
-    "hierarchy": {
-      "lv1": "Flip",
-      "lv2": "使い方",
-      "lv3": "アニメーションにスプリングを加える"
-    },
-    "slug": "/components/transitions/flip#アニメーションにスプリングを加える",
-    "title": "アニメーションにスプリングを加える"
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "方向を変更する" },
+    "slug": "/components/transitions/flip#方向を変更する",
+    "title": "方向を変更する"
   },
   {
     "type": "fragment",
@@ -11974,13 +11956,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": {
-      "lv1": "Flip",
-      "lv2": "使い方",
-      "lv3": "アニメーションの発火を遅らせる"
-    },
-    "slug": "/components/transitions/flip#アニメーションの発火を遅らせる",
-    "title": "アニメーションの発火を遅らせる"
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "遅延させる" },
+    "slug": "/components/transitions/flip#遅延させる",
+    "title": "遅延させる"
   },
   {
     "type": "fragment",
@@ -12003,6 +11981,12 @@
     "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "制御する" },
     "slug": "/components/transitions/flip#制御する",
     "title": "制御する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "使い方", "lv3": "カスタマイズする" },
+    "slug": "/components/transitions/flip#カスタマイズする",
+    "title": "カスタマイズする"
   },
   {
     "type": "page",
@@ -12032,13 +12016,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": {
-      "lv1": "Rotate",
-      "lv2": "使い方",
-      "lv3": "回転させる角度を変更する"
-    },
-    "slug": "/components/transitions/rotate#回転させる角度を変更する",
-    "title": "回転させる角度を変更する"
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "角度を変更する" },
+    "slug": "/components/transitions/rotate#角度を変更する",
+    "title": "角度を変更する"
   },
   {
     "type": "fragment",
@@ -12052,13 +12032,9 @@
   },
   {
     "type": "fragment",
-    "hierarchy": {
-      "lv1": "Rotate",
-      "lv2": "使い方",
-      "lv3": "アニメーションの発火を遅らせる"
-    },
-    "slug": "/components/transitions/rotate#アニメーションの発火を遅らせる",
-    "title": "アニメーションの発火を遅らせる"
+    "hierarchy": { "lv1": "Rotate", "lv2": "使い方", "lv3": "遅延させる" },
+    "slug": "/components/transitions/rotate#遅延させる",
+    "title": "遅延させる"
   },
   {
     "type": "fragment",

@@ -37,7 +37,6 @@ export type {
   Box as MotionBox,
   CreateVisualElement as MotionCreateVisualElement,
   CSSStyleDeclarationWithTransform,
-  CustomDomComponent as MotionCustomDomComponent,
   CustomValueType as MotionCustomValueType,
   Cycle as MotionCycle,
   CycleState as MotionCycleState,
@@ -95,7 +94,6 @@ export type {
   PanInfo as MotionPanInfo,
   PassiveEffect as MotionPassiveEffect,
   Point as MotionPoint,
-  RelayoutInfo as MotionRelayoutInfo,
   RenderComponent as MotionRenderComponent,
   Repeat as MotionRepeat,
   RepeatType as MotionRepeatType,
@@ -106,7 +104,6 @@ export type {
   ResolvedValues as MotionResolvedValues,
   ResolvedValueTarget as MotionResolvedValueTarget,
   ResolveKeyframes as MotionResolveKeyframes,
-  ResolveLayoutTransition as MotionResolveLayoutTransition,
   ScrapeMotionValuesFromProps,
   ScrollMotionValues,
   Segment as MotionSegment,
@@ -277,8 +274,14 @@ export interface MotionTransitionProps {
 export type WithTransitionProps<Y extends object> = {
   /**
    * Show the component. triggers when enter or exit states.
+   *
+   * @deprecated Use `open` instead.
    */
   isOpen?: boolean
+  /**
+   * Show the component. triggers when enter or exit states.
+   */
+  open?: boolean
   /**
    * If `true`, the element will unmount when `isOpen={false}` and animation is done.
    */

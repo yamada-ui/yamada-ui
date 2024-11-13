@@ -1,5 +1,14 @@
 # @yamada-ui/indicator
 
+## 1.1.42
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/use-animation@1.0.42
+  - @yamada-ui/use-value@1.1.30
+
 ## 1.1.41
 
 ### Patch Changes

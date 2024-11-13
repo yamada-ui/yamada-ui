@@ -155,7 +155,7 @@ To disable, set `isDisabled` to `true`.
 
   <FormControl
     isDisabled
-    label="volume (sound)"
+    label="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
@@ -173,7 +173,7 @@ To make read-only, set `isReadOnly` to `true`.
 
   <FormControl
     isReadOnly
-    label="volume (sound)"
+    label="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
@@ -194,7 +194,7 @@ return (
 
     <FormControl
       isInvalid={value < 20}
-      label="volume (sound)"
+      label="Sound volume"
       errorMessage="Volume should be set to 20 or higher."
     >
       <Slider value={value} onChange={onChange} />

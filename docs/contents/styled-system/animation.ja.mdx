@@ -444,18 +444,18 @@ export const animations: ThemeAnimationTokens = {
 ```ts title=./theme/tokens/index.ts
 import { animations } from "./animations"
 
-export default { animations }
+export const tokens = { animations }
 ```
 
 ```ts title=./theme/index.ts highlight={4,9}
 import { extendTheme, UsageTheme } from "@yamada-ui/react"
-import tokens from "./tokens"
+import { tokens } from "./tokens"
 
 const customTheme: UsageTheme = {
   ...tokens,
 }
 
-export default extendTheme(customTheme)()
+export const theme = extendTheme(customTheme)()
 ```
 
 :::note

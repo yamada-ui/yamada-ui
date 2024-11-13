@@ -1,5 +1,23 @@
 # @yamada-ui/file-button
 
+## 1.1.12
+
+### Patch Changes
+
+- [#3333](https://github.com/yamada-ui/yamada-ui/pull/3333) [`4526789`](https://github.com/yamada-ui/yamada-ui/commit/45267891c8b4bf8c5719eb4e602d26224e057685) Thanks [@illionillion](https://github.com/illionillion)! - Fixed so that `variant` is reflected even when `as={IconButton}`.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/button@1.0.49
+  - @yamada-ui/form-control@2.1.7
+
+## 1.1.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
 ## 1.1.10
 
 ### Patch Changes

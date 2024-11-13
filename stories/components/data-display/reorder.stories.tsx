@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { ReorderGenerateItem } from "@yamada-ui/react"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import {
   Divider,
   HStack,
@@ -162,7 +162,7 @@ export const withTrigger: Story = () => {
       <ReorderItem value="ベジータ">
         <HStack>
           <ReorderTrigger>
-            <Ghost />
+            <GhostIcon />
           </ReorderTrigger>
           <Text>ベジータ</Text>
         </HStack>

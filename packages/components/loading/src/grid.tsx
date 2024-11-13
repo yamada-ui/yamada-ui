@@ -109,3 +109,6 @@ export const Grid = forwardRef<GridProps, "svg">(
     )
   },
 )
+
+Grid.displayName = "Grid"
+Grid.__ui__ = "Grid"

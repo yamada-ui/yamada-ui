@@ -143,3 +143,6 @@ export const Circles = forwardRef<CirclesProps, "svg">(
     )
   },
 )
+
+Circles.displayName = "Circles"
+Circles.__ui__ = "Circles"

@@ -1,16 +1,10 @@
 import type { GetServerSidePropsContext, NextPage } from 'next'
-import { RangeSlider, Slider } from '@yamada-ui/react'
 import { Layout } from 'components/layouts'
 
 interface Props {}
 
 const Page: NextPage<Props> = () => {
-  return (
-    <Layout>
-      <RangeSlider />
-      <Slider />
-    </Layout>
-  )
+  return <Layout />
 }
 
 export default Page

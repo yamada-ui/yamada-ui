@@ -1,5 +1,23 @@
 # @yamada-ui/select
 
+## 1.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/popover@1.4.2
+  - @yamada-ui/form-control@2.1.7
+  - @yamada-ui/icon@1.1.12
+  - @yamada-ui/use-clickable@1.2.13
+
+## 1.8.0
+
+### Minor Changes
+
+- [#3238](https://github.com/yamada-ui/yamada-ui/pull/3238) [`936905a`](https://github.com/yamada-ui/yamada-ui/commit/936905a4a336d670ea6d58a050de0636ec76113b) Thanks [@uraaaa24](https://github.com/uraaaa24)! - improve keyboard navigation and accessibility
+
 ## 1.7.3
 
 ### Patch Changes

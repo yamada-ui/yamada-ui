@@ -125,7 +125,16 @@ const OVERRIDE_PATHS: {
   select: ["select", "multi-select"],
   slider: ["slider", "range-slider"],
   table: ["table", "paging-table"],
-  transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
+  transitions: [
+    "collapse",
+    "fade",
+    "scale-fade",
+    "slide-fade",
+    "slide",
+    "airy",
+    "rotate",
+    "flip",
+  ],
   typography: [
     "heading",
     "text",

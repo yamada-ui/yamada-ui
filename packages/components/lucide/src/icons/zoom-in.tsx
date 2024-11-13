@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ZoomIn as OriginalZoomIn } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { ZoomIn as OriginalZoomIn } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ZoomInIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalZoomIn} {...props} />
-))
+export const ZoomInIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalZoomIn}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `ZoomIn` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SeparatorVertical as OriginalSeparatorVertical } from "lucide-react"
 
 /**
@@ -9,7 +10,14 @@ import { SeparatorVertical as OriginalSeparatorVertical } from "lucide-react"
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const SeparatorVerticalIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => <Icon ref={ref} as={OriginalSeparatorVertical} {...props} />,
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSeparatorVertical}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**

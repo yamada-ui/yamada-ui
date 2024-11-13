@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SquareChartGantt as OriginalSquareChartGantt } from "lucide-react"
 
 /**
@@ -9,7 +10,14 @@ import { SquareChartGantt as OriginalSquareChartGantt } from "lucide-react"
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const SquareChartGanttIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => <Icon ref={ref} as={OriginalSquareChartGantt} {...props} />,
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSquareChartGantt}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**

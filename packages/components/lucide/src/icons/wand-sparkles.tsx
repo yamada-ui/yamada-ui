@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { WandSparkles as OriginalWandSparkles } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { WandSparkles as OriginalWandSparkles } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const WandSparklesIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalWandSparkles} {...props} />
-))
+export const WandSparklesIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalWandSparkles}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `WandSparkles` is [Lucide](https://lucide.dev) SVG icon component.

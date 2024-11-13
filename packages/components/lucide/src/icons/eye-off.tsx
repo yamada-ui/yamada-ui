@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { EyeOff as OriginalEyeOff } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { EyeOff as OriginalEyeOff } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const EyeOffIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalEyeOff} {...props} />
-))
+export const EyeOffIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalEyeOff}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `EyeOff` is [Lucide](https://lucide.dev) SVG icon component.

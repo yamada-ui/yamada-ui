@@ -5,14 +5,14 @@ import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { Icon as OriginalIcon } from "lucide-react"
 
-interface IconOptions {
+interface LucideIconOptions {
   /**
    * The icon of the [Lucide lab](https://github.com/lucide-icons/lucide-lab).
    */
   icon: IconNode
 }
 
-export interface LucideIconProps extends UIIconProps, IconOptions {}
+export interface LucideIconProps extends UIIconProps, LucideIconOptions {}
 
 /**
  * `LucideIcon` is a component for using [Lucide lab](https://github.com/lucide-icons/lucide-lab) icons.

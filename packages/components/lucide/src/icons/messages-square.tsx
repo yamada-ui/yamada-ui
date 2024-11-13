@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { MessagesSquare as OriginalMessagesSquare } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { MessagesSquare as OriginalMessagesSquare } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MessagesSquareIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalMessagesSquare} {...props} />
-))
+export const MessagesSquareIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalMessagesSquare}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `MessagesSquare` is [Lucide](https://lucide.dev) SVG icon component.

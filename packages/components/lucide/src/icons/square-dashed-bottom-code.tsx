@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SquareDashedBottomCode as OriginalSquareDashedBottomCode } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { SquareDashedBottomCode as OriginalSquareDashedBottomCode } from "lucide
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const SquareDashedBottomCodeIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalSquareDashedBottomCode} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSquareDashedBottomCode}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

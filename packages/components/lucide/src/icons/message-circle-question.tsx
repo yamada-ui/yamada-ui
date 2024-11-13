@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { MessageCircleQuestion as OriginalMessageCircleQuestion } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { MessageCircleQuestion as OriginalMessageCircleQuestion } from "lucide-r
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const MessageCircleQuestionIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalMessageCircleQuestion} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalMessageCircleQuestion}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

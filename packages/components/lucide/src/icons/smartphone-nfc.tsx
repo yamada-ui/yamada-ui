@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SmartphoneNfc as OriginalSmartphoneNfc } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { SmartphoneNfc as OriginalSmartphoneNfc } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SmartphoneNfcIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalSmartphoneNfc} {...props} />
-))
+export const SmartphoneNfcIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSmartphoneNfc}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `SmartphoneNfc` is [Lucide](https://lucide.dev) SVG icon component.

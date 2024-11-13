@@ -7,7 +7,7 @@ type Story = StoryFn<typeof FontAwesomeIcon>
 
 const meta: Meta<typeof FontAwesomeIcon> = {
   component: FontAwesomeIcon,
-  title: "Components / Media And Icons / FontAwesome",
+  title: "Components / Media And Icons / FontAwesome Icon",
 }
 
 export default meta

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ArrowUp10 as OriginalArrowUp10 } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { ArrowUp10 as OriginalArrowUp10 } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ArrowUp10Icon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalArrowUp10} {...props} />
-))
+export const ArrowUp10Icon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalArrowUp10}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `ArrowUp10` is [Lucide](https://lucide.dev) SVG icon component.

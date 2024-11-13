@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { LockKeyholeOpen as OriginalLockKeyholeOpen } from "lucide-react"
 
 /**
@@ -9,7 +10,14 @@ import { LockKeyholeOpen as OriginalLockKeyholeOpen } from "lucide-react"
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const LockKeyholeOpenIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => <Icon ref={ref} as={OriginalLockKeyholeOpen} {...props} />,
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalLockKeyholeOpen}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**

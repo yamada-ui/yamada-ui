@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ChevronsLeft as OriginalChevronsLeft } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { ChevronsLeft as OriginalChevronsLeft } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChevronsLeftIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalChevronsLeft} {...props} />
-))
+export const ChevronsLeftIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalChevronsLeft}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `ChevronsLeft` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ArrowLeftFromLine as OriginalArrowLeftFromLine } from "lucide-react"
 
 /**
@@ -9,7 +10,14 @@ import { ArrowLeftFromLine as OriginalArrowLeftFromLine } from "lucide-react"
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ArrowLeftFromLineIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => <Icon ref={ref} as={OriginalArrowLeftFromLine} {...props} />,
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalArrowLeftFromLine}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**

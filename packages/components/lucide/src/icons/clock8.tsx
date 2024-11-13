@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { Clock8 as OriginalClock8 } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { Clock8 as OriginalClock8 } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Clock8Icon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalClock8} {...props} />
-))
+export const Clock8Icon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalClock8}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `Clock8` is [Lucide](https://lucide.dev) SVG icon component.

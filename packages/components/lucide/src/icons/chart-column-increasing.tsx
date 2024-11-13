@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ChartColumnIncreasing as OriginalChartColumnIncreasing } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { ChartColumnIncreasing as OriginalChartColumnIncreasing } from "lucide-r
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ChartColumnIncreasingIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalChartColumnIncreasing} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalChartColumnIncreasing}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

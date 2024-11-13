@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { AlignHorizontalDistributeEnd as OriginalAlignHorizontalDistributeEnd } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { AlignHorizontalDistributeEnd as OriginalAlignHorizontalDistributeEnd } 
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const AlignHorizontalDistributeEndIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalAlignHorizontalDistributeEnd} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalAlignHorizontalDistributeEnd}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

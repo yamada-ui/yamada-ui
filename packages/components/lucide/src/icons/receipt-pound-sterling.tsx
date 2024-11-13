@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { ReceiptPoundSterling as OriginalReceiptPoundSterling } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { ReceiptPoundSterling as OriginalReceiptPoundSterling } from "lucide-rea
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ReceiptPoundSterlingIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalReceiptPoundSterling} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalReceiptPoundSterling}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

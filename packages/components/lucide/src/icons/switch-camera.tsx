@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SwitchCamera as OriginalSwitchCamera } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { SwitchCamera as OriginalSwitchCamera } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SwitchCameraIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalSwitchCamera} {...props} />
-))
+export const SwitchCameraIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSwitchCamera}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `SwitchCamera` is [Lucide](https://lucide.dev) SVG icon component.

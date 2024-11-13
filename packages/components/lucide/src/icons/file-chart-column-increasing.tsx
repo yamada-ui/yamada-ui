@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { FileChartColumnIncreasing as OriginalFileChartColumnIncreasing } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { FileChartColumnIncreasing as OriginalFileChartColumnIncreasing } from "
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const FileChartColumnIncreasingIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalFileChartColumnIncreasing} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalFileChartColumnIncreasing}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

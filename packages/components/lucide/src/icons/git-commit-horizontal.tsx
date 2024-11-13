@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { GitCommitHorizontal as OriginalGitCommitHorizontal } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { GitCommitHorizontal as OriginalGitCommitHorizontal } from "lucide-react
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const GitCommitHorizontalIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalGitCommitHorizontal} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalGitCommitHorizontal}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { BookHeadphones as OriginalBookHeadphones } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { BookHeadphones as OriginalBookHeadphones } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BookHeadphonesIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalBookHeadphones} {...props} />
-))
+export const BookHeadphonesIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalBookHeadphones}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `BookHeadphones` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { AlignHorizontalJustifyStart as OriginalAlignHorizontalJustifyStart } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { AlignHorizontalJustifyStart as OriginalAlignHorizontalJustifyStart } fr
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const AlignHorizontalJustifyStartIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalAlignHorizontalJustifyStart} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalAlignHorizontalJustifyStart}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

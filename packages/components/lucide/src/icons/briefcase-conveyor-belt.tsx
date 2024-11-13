@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { BriefcaseConveyorBelt as OriginalBriefcaseConveyorBelt } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { BriefcaseConveyorBelt as OriginalBriefcaseConveyorBelt } from "lucide-r
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const BriefcaseConveyorBeltIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalBriefcaseConveyorBelt} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalBriefcaseConveyorBelt}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

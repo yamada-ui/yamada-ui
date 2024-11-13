@@ -10,7 +10,7 @@ type Story = StoryFn<typeof GhostIcon>
 
 const meta: Meta<typeof GhostIcon> = {
   component: GhostIcon,
-  title: "Components / Media And Icons / Lucide",
+  title: "Components / Media And Icons / Lucide Icon",
 }
 
 export default meta

@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { BookOpenCheck as OriginalBookOpenCheck } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { BookOpenCheck as OriginalBookOpenCheck } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BookOpenCheckIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalBookOpenCheck} {...props} />
-))
+export const BookOpenCheckIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalBookOpenCheck}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `BookOpenCheck` is [Lucide](https://lucide.dev) SVG icon component.

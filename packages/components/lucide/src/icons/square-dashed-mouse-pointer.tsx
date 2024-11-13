@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { SquareDashedMousePointer as OriginalSquareDashedMousePointer } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { SquareDashedMousePointer as OriginalSquareDashedMousePointer } from "lu
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const SquareDashedMousePointerIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalSquareDashedMousePointer} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSquareDashedMousePointer}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

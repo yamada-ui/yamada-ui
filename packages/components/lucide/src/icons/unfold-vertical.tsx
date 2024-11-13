@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { UnfoldVertical as OriginalUnfoldVertical } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { UnfoldVertical as OriginalUnfoldVertical } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const UnfoldVerticalIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalUnfoldVertical} {...props} />
-))
+export const UnfoldVerticalIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalUnfoldVertical}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `UnfoldVertical` is [Lucide](https://lucide.dev) SVG icon component.

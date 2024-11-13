@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { GitPullRequestArrow as OriginalGitPullRequestArrow } from "lucide-react"
 
 /**
@@ -9,8 +10,13 @@ import { GitPullRequestArrow as OriginalGitPullRequestArrow } from "lucide-react
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const GitPullRequestArrowIcon = forwardRef<IconProps, "svg">(
-  (props, ref) => (
-    <Icon ref={ref} as={OriginalGitPullRequestArrow} {...props} />
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalGitPullRequestArrow}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 

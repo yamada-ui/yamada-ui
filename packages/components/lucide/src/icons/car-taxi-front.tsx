@@ -1,6 +1,7 @@
 import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
 import { CarTaxiFront as OriginalCarTaxiFront } from "lucide-react"
 
 /**
@@ -8,9 +9,16 @@ import { CarTaxiFront as OriginalCarTaxiFront } from "lucide-react"
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CarTaxiFrontIcon = forwardRef<IconProps, "svg">((props, ref) => (
-  <Icon ref={ref} as={OriginalCarTaxiFront} {...props} />
-))
+export const CarTaxiFrontIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalCarTaxiFront}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `CarTaxiFront` is [Lucide](https://lucide.dev) SVG icon component.

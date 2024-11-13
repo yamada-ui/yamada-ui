@@ -246,7 +246,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
           __css={css}
           {...rest}
           role={role}
-          tabIndex={isFocused ? 0 : -1}
+          tabIndex={!isDownstreamOpen && isFocused ? 0 : -1}
         >
           {icon ? <MenuIcon>{icon}</MenuIcon> : null}
           {children}

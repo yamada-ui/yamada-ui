@@ -375,11 +375,7 @@ describe("<Menu />", () => {
     await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
     await act(() => fireEvent.keyDown(menuItemButton, { key: "ArrowRight" }))
 
-    await waitFor(() => {
-      // eslint-disable-next-line no-console
-      console.log(document.activeElement)
-      expect(screen.getByText("Extensions")).toHaveFocus()
-    })
+    await waitFor(() => expect(screen.getByText("Extensions")).toHaveFocus())
 
     await act(() =>
       fireEvent.keyDown(screen.getByText("Extensions"), { key: "ArrowLeft" }),

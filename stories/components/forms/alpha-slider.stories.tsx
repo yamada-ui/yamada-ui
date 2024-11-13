@@ -4,7 +4,7 @@ import {
   AlphaSlider,
   Button,
   Center,
-  FormControl,
+  Fieldset,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -121,13 +121,13 @@ export const isDisabled: Story = () => {
     <>
       <AlphaSlider color="#4387f4" isDisabled />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isDisabled
-        label="Pick color"
+        legend="Pick color"
       >
         <AlphaSlider color="#4387f4" />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -137,13 +137,13 @@ export const isReadonly: Story = () => {
     <>
       <AlphaSlider color="#4387f4" isReadOnly />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isReadOnly
-        label="Pick color"
+        legend="Pick color"
       >
         <AlphaSlider color="#4387f4" />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -219,10 +219,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.alphaSlider?.message}
         isInvalid={!!errors.alphaSlider}
-        label="Pick color"
+        legend="Pick color"
       >
         <Controller
           name="alphaSlider"
@@ -230,7 +230,7 @@ export const reactHookForm: Story = () => {
           render={({ field }) => <AlphaSlider color="#4387f4" {...field} />}
           rules={{ max: { message: "The maximum value is 0.5.", value: 0.5 } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

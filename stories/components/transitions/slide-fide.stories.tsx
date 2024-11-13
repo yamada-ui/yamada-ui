@@ -17,7 +17,7 @@ export const basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade isOpen={isOpen}>
+      <SlideFade open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -37,7 +37,7 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade duration={0.4} isOpen={isOpen}>
+      <SlideFade duration={0.4} open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -57,7 +57,7 @@ export const withOffsetX: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade isOpen={isOpen} offsetX={20} offsetY={0}>
+      <SlideFade offsetX={20} offsetY={0} open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -77,7 +77,7 @@ export const withOffsetY: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade isOpen={isOpen} offsetY={-20}>
+      <SlideFade offsetY={-20} open={isOpen}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -97,7 +97,7 @@ export const exitUnmount: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade isOpen={isOpen} unmountOnExit>
+      <SlideFade open={isOpen} unmountOnExit>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

@@ -100,6 +100,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     duration,
     endingHeight,
     isOpen,
+    open,
     startingHeight,
     transition: transitionProp,
     transitionEnd,
@@ -115,9 +116,11 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     if (isBrowser) setMounted(true)
   }, [])
 
-  const animate = isOpen || unmountOnExit ? "enter" : "exit"
+  open ??= isOpen
 
-  isOpen = unmountOnExit ? isOpen : true
+  const animate = open || unmountOnExit ? "enter" : "exit"
+
+  open = unmountOnExit ? open : true
 
   const transition = useMemo(() => {
     if (!mounted) {
@@ -167,7 +170,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
 
   return (
     <AnimatePresence custom={custom} initial={false}>
-      {isOpen ? (
+      {open ? (
         <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}

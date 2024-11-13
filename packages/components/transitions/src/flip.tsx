@@ -50,6 +50,12 @@ export interface FlipOptions {
    */
   delay?: number
   /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * The animation duration.
    *
    * @default 0.4
@@ -59,12 +65,14 @@ export interface FlipOptions {
    * If `true`, the component is disabled.
    *
    * @default false
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the component is readonly.
    *
    * @default false
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
   /**
@@ -73,6 +81,12 @@ export interface FlipOptions {
    * @default 'horizontal'
    */
   orientation?: FlipOrientation
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
   /**
    * The animation transition.
    */
@@ -111,21 +125,26 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const toRef = useRef<HTMLDivElement | null>(null)
 
   const [styles, mergedProps] = useComponentMultiStyle("Flip", props)
-  const {
+  let {
     className,
     defaultValue = "from",
     delay = 0,
+    disabled,
     duration = 0.4,
     from,
-    isDisabled = false,
-    isReadOnly = false,
+    isDisabled,
+    isReadOnly,
     orientation = "horizontal",
+    readOnly,
     to,
     transition: transitionProp = {},
     value: valueProp,
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  disabled ??= isDisabled
+  readOnly ??= isReadOnly
 
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue,
@@ -136,7 +155,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const isVisible = value === "to"
 
   const onClick = () => {
-    if (isReadOnly) return
+    if (readOnly) return
 
     setValue((prev) => (prev === "from" ? "to" : "from"))
   }
@@ -181,10 +200,10 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       ref={ref}
       type="button"
       className={cx("ui-flip", `ui-flip__${orientation}`, className)}
-      data-disabled={dataAttr(isDisabled)}
-      data-readonly={dataAttr(isReadOnly)}
+      data-disabled={dataAttr(disabled)}
+      data-readonly={dataAttr(readOnly)}
       data-value={value}
-      disabled={isDisabled}
+      disabled={disabled}
       onClick={onClick}
       __css={css}
       {...rest}

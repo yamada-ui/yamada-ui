@@ -1,18 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { HardDrive as LucideHardDriveIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { HardDrive as OriginalHardDrive } from "lucide-react"
 
 /**
  * `HardDriveIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const HardDriveIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideHardDriveIcon} {...props} />,
+export const HardDriveIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalHardDrive}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**
+ * `HardDrive` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `HardDriveIcon` instead.
  */
 export const HardDrive = HardDriveIcon

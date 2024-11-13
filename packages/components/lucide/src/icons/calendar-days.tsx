@@ -1,20 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CalendarDays as LucideCalendarDaysIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { CalendarDays as OriginalCalendarDays } from "lucide-react"
 
 /**
  * `CalendarDaysIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CalendarDaysIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideCalendarDaysIcon} {...props} />
+export const CalendarDaysIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalCalendarDays}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 
 /**
+ * `CalendarDays` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CalendarDaysIcon` instead.
  */
 export const CalendarDays = CalendarDaysIcon

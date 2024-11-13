@@ -1,18 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { LayoutGrid as LucideLayoutGridIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { LayoutGrid as OriginalLayoutGrid } from "lucide-react"
 
 /**
  * `LayoutGridIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const LayoutGridIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideLayoutGridIcon} {...props} />,
+export const LayoutGridIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalLayoutGrid}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**
+ * `LayoutGrid` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `LayoutGridIcon` instead.
  */
 export const LayoutGrid = LayoutGridIcon

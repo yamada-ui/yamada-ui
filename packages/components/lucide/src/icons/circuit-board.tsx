@@ -1,20 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CircuitBoard as LucideCircuitBoardIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { CircuitBoard as OriginalCircuitBoard } from "lucide-react"
 
 /**
  * `CircuitBoardIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const CircuitBoardIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideCircuitBoardIcon} {...props} />
+export const CircuitBoardIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalCircuitBoard}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 
 /**
+ * `CircuitBoard` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `CircuitBoardIcon` instead.
  */
 export const CircuitBoard = CircuitBoardIcon

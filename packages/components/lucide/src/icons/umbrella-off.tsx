@@ -1,20 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { UmbrellaOff as LucideUmbrellaOffIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { UmbrellaOff as OriginalUmbrellaOff } from "lucide-react"
 
 /**
  * `UmbrellaOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const UmbrellaOffIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideUmbrellaOffIcon} {...props} />
+export const UmbrellaOffIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalUmbrellaOff}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 
 /**
+ * `UmbrellaOff` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `UmbrellaOffIcon` instead.
  */
 export const UmbrellaOff = UmbrellaOffIcon

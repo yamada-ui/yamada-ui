@@ -1,20 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { AlignEndVertical as LucideAlignEndVerticalIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { AlignEndVertical as OriginalAlignEndVertical } from "lucide-react"
 
 /**
  * `AlignEndVerticalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignEndVerticalIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideAlignEndVerticalIcon} {...props} />
+export const AlignEndVerticalIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalAlignEndVertical}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 
 /**
+ * `AlignEndVertical` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `AlignEndVerticalIcon` instead.
  */
 export const AlignEndVertical = AlignEndVerticalIcon

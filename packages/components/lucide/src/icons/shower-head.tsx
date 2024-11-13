@@ -1,18 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ShowerHead as LucideShowerHeadIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { ShowerHead as OriginalShowerHead } from "lucide-react"
 
 /**
  * `ShowerHeadIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ShowerHeadIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideShowerHeadIcon} {...props} />,
+export const ShowerHeadIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalShowerHead}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**
+ * `ShowerHead` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `ShowerHeadIcon` instead.
  */
 export const ShowerHead = ShowerHeadIcon

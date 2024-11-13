@@ -1,18 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { BookMarked as LucideBookMarkedIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { BookMarked as OriginalBookMarked } from "lucide-react"
 
 /**
  * `BookMarkedIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const BookMarkedIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={LucideBookMarkedIcon} {...props} />,
+export const BookMarkedIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalBookMarked}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
 )
 
 /**
+ * `BookMarked` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `BookMarkedIcon` instead.
  */
 export const BookMarked = BookMarkedIcon

@@ -1,20 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { AlignHorizontalJustifyEnd as LucideAlignHorizontalJustifyEndIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { AlignHorizontalJustifyEnd as OriginalAlignHorizontalJustifyEnd } from "lucide-react"
 
 /**
  * `AlignHorizontalJustifyEndIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignHorizontalJustifyEndIcon = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={LucideAlignHorizontalJustifyEndIcon} {...props} />
+export const AlignHorizontalJustifyEndIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalAlignHorizontalJustifyEnd}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
   ),
 )
 
 /**
+ * `AlignHorizontalJustifyEnd` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
  * @deprecated Use `AlignHorizontalJustifyEndIcon` instead.
  */
 export const AlignHorizontalJustifyEnd = AlignHorizontalJustifyEndIcon

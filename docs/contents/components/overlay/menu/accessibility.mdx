@@ -11,40 +11,46 @@ The `Menu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/
 
 ## Keyboard Navigation
 
-| Key          | Description                                                                                                                                                                                                                                                                                    | State |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| `Space`      | If the button has focus, opens the menu and focuses the first item. If a checkbox or radio button has focus, updates the state without closing the menu. If an item with a submenu has focus, the submenu opens and focuses its first item. Otherwise, activates the item and closes the menu. | -     |
-| `Enter`      | If the button has focus, opens the menu and focuses the first item. If an item with a submenu has focus, the submenu opens and focuses its first item. Otherwise, activates the item and closes the menu.                                                                                      | -     |
-| `ArrowRight` | If an item with a submenu has focus, the submenu opens and focuses its first item.                                                                                                                                                                                                             | -     |
-| `ArrowLeft`  | If a submenu has focus, closes the submenu and returns focus to the parent.                                                                                                                                                                                                                    | -     |
-| `ArrowUp`    | If the button has focus, opens the menu and focuses the last item. If focus is within the menu, moves focus to the previous item. If the first item has focus, moves focus to the last item.                                                                                                   | -     |
-| `ArrowDown`  | If the button has focus, opens the menu and focuses the first item. If focus is within the menu, moves focus to the next item. If the last item has focus, moves focus to the first item.                                                                                                      | -     |
-| `Home`       | Moves focus to the first item of the current menu.                                                                                                                                                                                                                                             | -     |
-| `End`        | Moves focus to the last item of the current menu.                                                                                                                                                                                                                                              | -     |
-| `Escape`     | Closes the menu containing focus and returns focus to the parent element.                                                                                                                                                                                                                      | -     |
+| Key          | Description                                                                                             | State            |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ---------------- |
+| `Space`      | Opens the menu and focuses on the first not disabled item.                                              | `MenuButton`     |
+|              | Opens the submenu and focuses on the first not disabled item.                                           | `MenuItemButton` |
+|              | Activates the focused item and closes all menus.                                                        | `MenuItem`       |
+|              | Checks the focused item.                                                                                | `MenuOptionItem` |
+| `Enter`      | Opens the menu and focuses on the first not disabled item.                                              | `MenuButton`     |
+|              | Opens the submenu and focuses on the first not disabled item.                                           | `MenuItemButton` |
+|              | Activates the focused item and closes all menus.                                                        | `MenuItem`       |
+| `ArrowRight` | Opens the submenu and focuses on the first not disabled item.                                           | `MenuItemButton` |
+| `ArrowLeft`  | For submenus, closes the submenu and focuses on the main menu.                                          | `MenuList`       |
+| `ArrowUp`    | Opens the menu and focuses on the last not disabled item.                                               | `MenuButton`     |
+|              | Focuses on the previous not disabled item. If on the first item, focuses on the last not disabled item. | `MenuList`       |
+| `ArrowDown`  | Opens the menu and focuses on the first not disabled item.                                              | `MenuButton`     |
+|              | Focuses on the next not disabled item. If on the last item, focuses on the first not disabled item.     | `MenuList`       |
+| `Home`       | Focuses on the first not disabled item.                                                                 | `MenuList`       |
+| `End`        | Focuses on the last not disabled item.                                                                  | `MenuList`       |
+| `Escape`     | Closes all menus.                                                                                       | -                |
 
 ## ARIA Roles and Attributes
 
-| Component         | Roles and Attributes    | Usage                                                                                                              |
-| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `MenuButton`      | `role="button"`         | Indicates that it is a button.                                                                                     |
-|                   | `id`                    | The `id` used to associate with the menu.                                                                          |
-|                   | `aria-haspopup`         | Sets `menu`.                                                                                                       |
-|                   | `aria-expanded`         | Sets `"true"` if the menu is displayed. Sets `"false"` if the menu is not displayed.                               |
-|                   | `aria-controls`         | Sets the `id` of the associated menu.                                                                              |
-| `MenuList`        | `role="menu"`           | Indicates that it is a menu.                                                                                       |
-|                   | `id`                    | The `id` used to associate with the menu item or button that controls the display.                                 |
-|                   | `tabindex`              | Sets `"-1"`.                                                                                                       |
-|                   | `aria-activedescendant` | Sets the `id` of the focused item.                                                                                 |
-|                   | `aria-labelledby`       | Sets the `id` of the menu item or button that controls the display.                                                |
-| `MenuItem`        | `role="menuitem"`       | Indicates that it is a menu item.                                                                                  |
-|                   | `tabindex`              | Sets `"0"` if focused, otherwise sets `"-1"`.                                                                      |
-|                   | `id`                    | The `id` used to associate with the menu.                                                                          |
-|                   | `aria-disabled`         | Sets `"true"` if the item is disabled.                                                                             |
-| `MenuDivider`     | `role="separator"`      | Indicates that it is a separator.                                                                                  |
-|                   | `aria-orientation`      | Sets `"horizontal"`.                                                                                               |
-| `MenuOptionGroup` | `role="group"`          | Indicates that it is a group.                                                                                      |
-| `MenuOptionItem`  | `role`                  | Sets `"menuitemradio"` if the `type` of `MenuOptionGroup` is `"radio"`, sets `"menuitemcheckbox"` if `"checkbox"`. |
-|                   | `tabindex`              | Sets `"0"` if focused, otherwise sets `"-1"`.                                                                      |
-|                   | `aria-checked`          | Sets `"true"` if checked.                                                                                          |
-|                   | `aria-disabled`         | Sets `"true"` if the item is disabled.                                                                             |
+| Component                      | Roles and Attributes    | Usage                                                                                                                   |
+| ------------------------------ | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `MenuButton`, `MenuItemButton` | `role="button"`         | Indicates that it is a button.                                                                                          |
+|                                | `id`                    | `id` used to associate with `MenuList`.                                                                                 |
+|                                | `aria-haspopup`         | Set to `menu`.                                                                                                          |
+|                                | `aria-expanded`         | Set to `"true"` when menu is open, `"false"` when closed.                                                               |
+|                                | `aria-controls`         | Set to the `id` of the related `MenuList` when menu is open, `undefined` when closed.                                   |
+| `MenuList`                     | `role="menu"`           | Indicates that it is a menu.                                                                                            |
+|                                | `id`                    | `id` used to associate with `MenuButton` or `MenuItemButton`.                                                           |
+|                                | `tabindex`              | Set to `"-1"`.                                                                                                          |
+|                                | `aria-activedescendant` | Set to the `id` of the focused item.                                                                                    |
+|                                | `aria-labelledby`       | Set to the `id` of the related `MenuButton` or `MenuItemButton`.                                                        |
+|                                | `aria-hidden`           | Set to "true" when menu is open, "false" when closed.                                                                   |
+| `MenuItem`                     | `role="menuitem"`       | Indicates that it is a menu item.                                                                                       |
+|                                | `id`                    | `id` used to associate with `MenuList`.                                                                                 |
+|                                | `tabindex`              | Set to `"0"` when focused, `"-1"` otherwise.                                                                            |
+|                                | `aria-disabled`         | Set to `"true"` when the item is disabled.                                                                              |
+| `MenuOptionGroup`              | `role="group"`          | Indicates that it is a group.                                                                                           |
+| `MenuOptionItem`               | `role`                  | Set to `menuitemradio` when `MenuOptionGroup` type is `"radio"`, set to `"menuitemcheckbox"` when type is `"checkbox"`. |
+|                                | `tabindex`              | Set to `"0"` when focused, `"-1"` otherwise.                                                                            |
+|                                | `aria-checked`          | Set to `"true"` when item is checked, `"false"` when unchecked.                                                         |
+|                                | `aria-disabled`         | Set to `"true"` when the item is disabled.                                                                              |

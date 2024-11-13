@@ -14,13 +14,11 @@ interface IconButtonOptions {
 export interface IconButtonProps
   extends Omit<
       ButtonProps,
-      | "endIcon"
       | "leftIcon"
       | "loadingIcon"
       | "loadingPlacement"
       | "loadingText"
       | "rightIcon"
-      | "startIcon"
     >,
     IconButtonOptions {}
 

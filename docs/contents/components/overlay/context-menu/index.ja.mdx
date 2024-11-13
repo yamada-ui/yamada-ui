@@ -19,7 +19,7 @@ import {
   MenuGroup,
   MenuOptionItem,
   MenuOptionGroup,
-  MenuSeparator,
+  MenuDivider,
 } from "@yamada-ui/react"
 ```
 
@@ -30,7 +30,7 @@ import {
 - `MenuGroup`: メニューの項目をグループ化するラッパーコンポーネントです。
 - `MenuOptionItem`: 選択(ラジオとチェックボックス)可能なメニューの項目のコンポーネントです。
 - `MenuOptionGroup`:　選択(ラジオとチェックボックス)可能なメニューの項目をグループ化するラッパーコンポーネントです。
-- `MenuSeparator`: メニューの項目を区切るコンポーネントです。
+- `MenuDivider`: メニューの項目を区切るコンポーネントです。
 
 ## 使い方
 
@@ -51,7 +51,7 @@ import {
   <MenuList>
     <MenuItem>Undo</MenuItem>
     <MenuItem>Redo</MenuItem>
-    <MenuSeparator />
+    <MenuDivider />
     <MenuItem>Cut</MenuItem>
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
@@ -307,7 +307,7 @@ return (
 
 ### 項目間に区切り線を追加する
 
-`MenuItem`の間に`MenuSeparator`を設定することで、区切り線を追加できます。
+`MenuItem`の間に`MenuDivider`を設定することで、区切り線を追加できます。
 
 ```tsx
 <ContextMenu>
@@ -328,7 +328,7 @@ return (
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuItem>Delete</MenuItem>
   </MenuList>
@@ -360,7 +360,7 @@ return (
       <MenuItem>Paste</MenuItem>
     </MenuGroup>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuGroup label="tool">
       <MenuItem>Shortcut</MenuItem>
@@ -393,7 +393,7 @@ return (
       <MenuOptionItem value="desc">Descending</MenuOptionItem>
     </MenuOptionGroup>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuOptionGroup label="display" type="checkbox">
       <MenuOptionItem value="gender">gender</MenuOptionItem>
@@ -427,7 +427,7 @@ return (
     <MenuItem>Copy</MenuItem>
     <MenuItem>Paste</MenuItem>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuItem>
       <Menu>

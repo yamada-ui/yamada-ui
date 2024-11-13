@@ -1,6 +1,6 @@
 ---
-title: Separator
-description: "`Separator`は、要素間において区切りを表すコンポーネントです。"
+title: Divider
+description: "`Divider`は、要素間において区切りを表すコンポーネントです。"
 package_name: "@yamada-ui/layouts"
 order: 10
 is_tabs: true
@@ -11,18 +11,18 @@ tab: 使い方
 ## インポート
 
 ```ts
-import { Separator } from "@yamada-ui/react"
+import { Divider } from "@yamada-ui/react"
 ```
 
 ## 使い方
 
 ```tsx
 <Flex direction="column" gap="md">
-  <Separator variant="solid" />
+  <Divider variant="solid" />
 
-  <Separator variant="dashed" />
+  <Divider variant="dashed" />
 
-  <Separator variant="dotted" />
+  <Divider variant="dotted" />
 </Flex>
 ```
 
@@ -30,14 +30,14 @@ import { Separator } from "@yamada-ui/react"
 
 ```tsx
 <Flex h="sm" gap="md">
-  <Separator orientation="vertical" variant="solid" />
+  <Divider orientation="vertical" variant="solid" />
 
-  <Separator orientation="vertical" variant="dashed" />
+  <Divider orientation="vertical" variant="dashed" />
 
-  <Separator orientation="vertical" variant="dotted" />
+  <Divider orientation="vertical" variant="dotted" />
 </Flex>
 ```
 
 :::note status=warning
-区切り線を垂直にする場合は、親要素または`Separator`に高さを設定する必要があります。
+区切り線を垂直にする場合は、親要素または`Divider`に高さを設定する必要があります。
 :::

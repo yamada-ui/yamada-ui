@@ -1689,10 +1689,10 @@
     "hierarchy": {
       "lv1": "NativeTable",
       "lv2": "Usage",
-      "lv3": "Add Column Separators"
+      "lv3": "Add Column Dividers"
     },
-    "slug": "/components/data-display/native-table#add-column-separators",
-    "title": "Add Column Separators"
+    "slug": "/components/data-display/native-table#add-column-dividers",
+    "title": "Add Column Dividers"
   },
   {
     "type": "fragment",
@@ -2546,10 +2546,10 @@
     "hierarchy": {
       "lv1": "Table",
       "lv2": "Usage",
-      "lv3": "Add Column Separators"
+      "lv3": "Add Column Dividers"
     },
-    "slug": "/components/data-display/table#add-column-separators",
-    "title": "Add Column Separators"
+    "slug": "/components/data-display/table#add-column-dividers",
+    "title": "Add Column Dividers"
   },
   {
     "type": "fragment",
@@ -8837,31 +8837,31 @@
   },
   {
     "type": "page",
-    "description": "`Separator` is a component that represents a division between elements.",
-    "hierarchy": { "lv1": "Separator" },
-    "slug": "/components/layouts/separator",
-    "title": "Separator"
+    "description": "`Divider` is a component that represents a division between elements.",
+    "hierarchy": { "lv1": "Divider" },
+    "slug": "/components/layouts/divider",
+    "title": "Divider"
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "Separator", "lv2": "Import" },
-    "slug": "/components/layouts/separator#import",
+    "hierarchy": { "lv1": "Divider", "lv2": "Import" },
+    "slug": "/components/layouts/divider#import",
     "title": "Import"
   },
   {
     "type": "fragment",
-    "hierarchy": { "lv1": "Separator", "lv2": "Usage" },
-    "slug": "/components/layouts/separator#usage",
+    "hierarchy": { "lv1": "Divider", "lv2": "Usage" },
+    "slug": "/components/layouts/divider#usage",
     "title": "Usage"
   },
   {
     "type": "fragment",
     "hierarchy": {
-      "lv1": "Separator",
+      "lv1": "Divider",
       "lv2": "Usage",
       "lv3": "Draw a vertical dividing line"
     },
-    "slug": "/components/layouts/separator#draw-a-vertical-dividing-line",
+    "slug": "/components/layouts/divider#draw-a-vertical-dividing-line",
     "title": "Draw a vertical dividing line"
   },
   {
@@ -9018,10 +9018,10 @@
       "lv1": "Stack",
       "lv2": "Usage",
       "lv3": "Stacking Vertically & Horizontally",
-      "lv4": "Adding Separators Between Child Elements"
+      "lv4": "Adding Dividers Between Child Elements"
     },
-    "slug": "/components/layouts/stack#adding-separators-between-child-elements",
-    "title": "Adding Separators Between Child Elements"
+    "slug": "/components/layouts/stack#adding-dividers-between-child-elements",
+    "title": "Adding Dividers Between Child Elements"
   },
   {
     "type": "fragment",
@@ -10091,10 +10091,10 @@
     "hierarchy": {
       "lv1": "ContextMenu",
       "lv2": "Usage",
-      "lv3": "Adding Separators Between Items"
+      "lv3": "Adding Dividers Between Items"
     },
-    "slug": "/components/overlay/context-menu#adding-separators-between-items",
-    "title": "Adding Separators Between Items"
+    "slug": "/components/overlay/context-menu#adding-dividers-between-items",
+    "title": "Adding Dividers Between Items"
   },
   {
     "type": "fragment",
@@ -10515,10 +10515,10 @@
     "hierarchy": {
       "lv1": "Menu",
       "lv2": "Usage",
-      "lv3": "Adding Separators Between Items"
+      "lv3": "Adding Dividers Between Items"
     },
-    "slug": "/components/overlay/menu#adding-separators-between-items",
-    "title": "Adding Separators Between Items"
+    "slug": "/components/overlay/menu#adding-dividers-between-items",
+    "title": "Adding Dividers Between Items"
   },
   {
     "type": "fragment",

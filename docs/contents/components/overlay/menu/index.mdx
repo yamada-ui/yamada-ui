@@ -19,7 +19,7 @@ import {
   MenuGroup,
   MenuOptionItem,
   MenuOptionGroup,
-  MenuSeparator,
+  MenuDivider,
 } from "@yamada-ui/react"
 ```
 
@@ -30,7 +30,7 @@ import {
 - `MenuGroup`: A wrapper component that groups items in the menu.
 - `MenuOptionItem`: A component for selectable menu items (radio and checkbox).
 - `MenuOptionGroup`: A wrapper component that groups selectable menu items (radio and checkbox).
-- `MenuSeparator`: A component that separates items in the menu.
+- `MenuDivider`: A component that separates items in the menu.
 
 ## Usage
 
@@ -226,9 +226,9 @@ To change the duration, set a numerical value (seconds) to `duration`.
 </Menu>
 ```
 
-### Adding Separators Between Items
+### Adding Dividers Between Items
 
-By setting `MenuSeparator` between `MenuItem`s, you can add separators.
+By setting `MenuDivider` between `MenuItem`s, you can add dividers.
 
 ```tsx
 <Menu>
@@ -241,7 +241,7 @@ By setting `MenuSeparator` between `MenuItem`s, you can add separators.
     <MenuItem>Edit Profile</MenuItem>
     <MenuItem>Preferences</MenuItem>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuItem>Sign out</MenuItem>
   </MenuList>
@@ -265,7 +265,7 @@ To group items together, use `MenuGroup`.
       <MenuItem>Preferences</MenuItem>
     </MenuGroup>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuGroup label="action">
       <MenuItem>Sign out</MenuItem>
@@ -290,7 +290,7 @@ You can set selectable items like radios or checkboxes by using `MenuOptionGroup
       <MenuOptionItem value="desc">Descending</MenuOptionItem>
     </MenuOptionGroup>
 
-    <MenuSeparator />
+    <MenuDivider />
 
     <MenuOptionGroup label="display" type="checkbox">
       <MenuOptionItem value="gender">gender</MenuOptionItem>

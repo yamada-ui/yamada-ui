@@ -27,10 +27,6 @@ interface ButtonOptions {
    */
   disableRipple?: boolean
   /**
-   * The icon to display at the end side of the button.
-   */
-  endIcon?: ReactElement
-  /**
    * If `true`, the button is represented as active.
    *
    * @default false
@@ -56,9 +52,6 @@ interface ButtonOptions {
   isRounded?: boolean
   /**
    * The icon to display at the left side of the button.
-   * If specified at the same time as `startIcon`, `startIcon` takes precedence.
-   *
-   * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
   /**
@@ -77,15 +70,8 @@ interface ButtonOptions {
   loadingText?: string
   /**
    * The icon to display at the right side of the button.
-   * If specified at the same time as `endIcon`, `endIcon` takes precedence.
-   *
-   * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement
-  /**
-   * The icon to display at the start side of the button.
-   */
-  startIcon?: ReactElement
 }
 
 export interface ButtonProps
@@ -114,7 +100,6 @@ export const Button = forwardRef<ButtonProps, "button">(
       type,
       className,
       disableRipple,
-      endIcon,
       isActive,
       isDisabled = group?.isDisabled,
       isLoading,
@@ -124,7 +109,6 @@ export const Button = forwardRef<ButtonProps, "button">(
       loadingPlacement = "start",
       loadingText,
       rightIcon,
-      startIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -164,10 +148,8 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const contentProps = {
       children,
-      endIcon,
       leftIcon,
       rightIcon,
-      startIcon,
     }
 
     const loadingProps = {
@@ -259,25 +241,18 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<
-    ButtonProps,
-    "children" | "endIcon" | "leftIcon" | "rightIcon" | "startIcon"
-  > {}
+  extends Pick<ButtonProps, "children" | "leftIcon" | "rightIcon"> {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
-  endIcon,
   leftIcon,
   rightIcon,
-  startIcon,
 }) => {
-  startIcon ??= leftIcon
-  endIcon ??= rightIcon
   return (
     <>
-      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
+      {leftIcon ? <ButtonIcon>{leftIcon}</ButtonIcon> : null}
       {children}
-      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
+      {rightIcon ? <ButtonIcon>{rightIcon}</ButtonIcon> : null}
     </>
   )
 }

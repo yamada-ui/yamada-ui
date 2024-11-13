@@ -162,23 +162,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" startIcon={<Plus />}>
+      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        endIcon={<ArrowRight />}
+        rightIcon={<ArrowRight />}
       >
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" startIcon={<Mail />}>
+      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="link" startIcon={<Check />}>
+      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
         Button
       </Button>
     </Wrap>

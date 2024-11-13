@@ -1,6 +1,6 @@
 import type { UseRadioGroupReturn } from "@yamada-ui/react"
 import type { FC, ReactNode } from "react"
-import { CreditCard } from "@yamada-ui/lucide"
+import { CreditCardIcon } from "@yamada-ui/lucide"
 import {
   Autocomplete,
   AutocompleteOption,
@@ -111,7 +111,7 @@ export const PaymentMethodCard = memo(() => {
         <HStack gap="sm" w="full" {...getContainerProps()}>
           <CustomRadio
             {...getRadioProps({ value: "Card" })}
-            icon={<CreditCard boxSize={{ base: "8", sm: "6" }} />}
+            icon={<CreditCardIcon boxSize={{ base: "8", sm: "6" }} />}
           />
           <CustomRadio
             {...getRadioProps({ value: "Paypal" })}

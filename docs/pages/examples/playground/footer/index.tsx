@@ -1,6 +1,6 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { History } from "@yamada-ui/lucide"
+import { HistoryIcon } from "@yamada-ui/lucide"
 import { Button, HStack, IconButton } from "@yamada-ui/react"
 import { memo } from "react"
 
@@ -20,7 +20,7 @@ export const Footer: FC<FooterProps> = memo(({ ...rest }) => {
       <IconButton
         size={{ base: "lg" }}
         variant="ghost"
-        icon={<History color="muted" fontSize="2xl" />}
+        icon={<HistoryIcon color="muted" fontSize="2xl" />}
       />
     </HStack>
   )

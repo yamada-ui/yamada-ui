@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Check, Mail, Phone } from "@yamada-ui/lucide"
+import { CheckIcon, MailIcon, PhoneIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -149,18 +149,18 @@ export const useElement: Story = () => {
     <>
       <InputGroup>
         <InputLeftElement>
-          <Phone />
+          <PhoneIcon />
         </InputLeftElement>
         <Input type="tel" placeholder="your phone number" />
       </InputGroup>
 
       <InputGroup>
         <InputLeftElement>
-          <Mail />
+          <MailIcon />
         </InputLeftElement>
         <Input type="email" placeholder="your email address" />
         <InputRightElement>
-          <Check color="green.500" />
+          <CheckIcon color="green.500" />
         </InputRightElement>
       </InputGroup>
 
@@ -264,7 +264,7 @@ export const reactHookForm: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <Mail />
+            <MailIcon />
           </InputLeftElement>
           <Input
             type="email"
@@ -346,7 +346,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <Mail />
+            <MailIcon />
           </InputLeftElement>
           <Input
             type="email"

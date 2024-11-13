@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { AccordionProps } from "@yamada-ui/react"
-import { Ghost, Minus, Plus } from "@yamada-ui/lucide"
+import { GhostIcon, MinusIcon, PlusIcon } from "@yamada-ui/lucide"
 import {
   Accordion,
   AccordionItem,
@@ -223,7 +223,7 @@ export const customPanel: Story = () => {
 export const customIcon: Story = () => {
   return (
     <>
-      <Accordion icon={<Ghost color="orange.700" />}>
+      <Accordion icon={<GhostIcon color="orange.700" />}>
         <AccordionItem label="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
         </AccordionItem>
@@ -240,9 +240,9 @@ export const customIcon: Story = () => {
       <Accordion
         icon={({ isExpanded }) =>
           isExpanded ? (
-            <Plus color={["blackAlpha.800", "whiteAlpha.700"]} />
+            <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
           ) : (
-            <Minus color={["blackAlpha.800", "whiteAlpha.700"]} />
+            <MinusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
           )
         }
       >
@@ -261,7 +261,7 @@ export const customIcon: Story = () => {
 
       <Accordion>
         <AccordionItem>
-          <AccordionLabel icon={<Ghost color="orange.700" />}>
+          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
             孫悟空少年編
           </AccordionLabel>
 
@@ -274,9 +274,9 @@ export const customIcon: Story = () => {
           <AccordionLabel
             icon={({ isExpanded }) =>
               isExpanded ? (
-                <Plus color={["blackAlpha.800", "whiteAlpha.700"]} />
+                <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
               ) : (
-                <Minus color={["blackAlpha.800", "whiteAlpha.700"]} />
+                <MinusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
               )
             }
           >
@@ -289,7 +289,7 @@ export const customIcon: Story = () => {
         </AccordionItem>
 
         <AccordionItem>
-          <AccordionLabel icon={<Ghost color="orange.700" />}>
+          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
             サイヤ人編
           </AccordionLabel>
 

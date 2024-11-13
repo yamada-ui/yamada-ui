@@ -2,7 +2,7 @@ import type { TdProps } from "@yamada-ui/react"
 import type { Cell, Column, PagingTableProps } from "@yamada-ui/table"
 import type { FC, MutableRefObject } from "react"
 import type { Data, Priority, Status, View } from "./data"
-import { Ellipsis } from "@yamada-ui/lucide"
+import { EllipsisIcon } from "@yamada-ui/lucide"
 import {
   assignRef,
   HStack,
@@ -238,7 +238,7 @@ const ControlMenu = memo(
           as={IconButton}
           size="sm"
           variant="ghost"
-          icon={<Ellipsis />}
+          icon={<EllipsisIcon />}
           onClick={(ev) => {
             ev.stopPropagation()
           }}

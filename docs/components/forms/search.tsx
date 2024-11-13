@@ -1,6 +1,6 @@
 import type { ButtonProps, ModalProps, StackProps } from "@yamada-ui/react"
 import type { FC, KeyboardEvent, RefObject } from "react"
-import { File, Hash, SearchIcon } from "@yamada-ui/lucide"
+import { FileIcon, HashIcon, SearchIcon } from "@yamada-ui/lucide"
 import {
   dataAttr,
   Divider,
@@ -332,12 +332,12 @@ const SearchModal: FC<SearchModalProps> = memo(
                     }}
                   >
                     {type === "page" ? (
-                      <File
+                      <FileIcon
                         color={["blackAlpha.700", "whiteAlpha.600"]}
                         fontSize="2xl"
                       />
                     ) : (
-                      <Hash
+                      <HashIcon
                         color={["blackAlpha.500", "whiteAlpha.400"]}
                         fontSize="2xl"
                       />

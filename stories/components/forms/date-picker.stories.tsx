@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { DatePickerProps } from "@yamada-ui/calendar"
 import type { SubmitHandler } from "react-hook-form"
 import { DatePicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
@@ -468,7 +468,7 @@ export const customIcon: Story = () => {
 
       <DatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Ghost /> }}
+        iconProps={{ children: <GhostIcon /> }}
       />
     </>
   )

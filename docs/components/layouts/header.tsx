@@ -9,7 +9,13 @@ import type {
   UseDisclosureReturn,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Languages, MenuIcon, Moon, Palette, Sun } from "@yamada-ui/lucide"
+import {
+  LanguagesIcon,
+  MenuIcon,
+  MoonIcon,
+  PaletteIcon,
+  SunIcon,
+} from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -259,7 +265,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
         variant="ghost"
         aria-label="Open language switching menu"
         color="muted"
-        icon={<Languages fontSize="2xl" />}
+        icon={<LanguagesIcon fontSize="2xl" />}
         _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         {...rest}
       />
@@ -318,9 +324,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           color="muted"
           icon={
             colorMode === "dark" ? (
-              <Sun fontSize="2xl" />
+              <SunIcon fontSize="2xl" />
             ) : (
-              <Moon fontSize="2xl" />
+              <MoonIcon fontSize="2xl" />
             )
           }
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
@@ -376,7 +382,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             variant="ghost"
             aria-label="Open color mode switching menu"
             color="muted"
-            icon={<Palette fontSize="2xl" />}
+            icon={<PaletteIcon fontSize="2xl" />}
             _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             {...rest}
           />

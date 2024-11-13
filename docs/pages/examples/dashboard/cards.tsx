@@ -6,7 +6,12 @@ import type {
   StatProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Activity, CreditCard, DollarSign, Users } from "@yamada-ui/lucide"
+import {
+  ActivityIcon,
+  CreditCardIcon,
+  DollarSignIcon,
+  UsersIcon,
+} from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -21,28 +26,28 @@ import { memo } from "react"
 const ITEMS: ItemProps[] = [
   {
     helperMessage: "20.1% from last month",
-    icon: DollarSign,
+    icon: DollarSignIcon,
     number: "$4,649.758",
     statIcon: "increase",
     title: "Total Revenue",
   },
   {
     helperMessage: "180.1% from last month",
-    icon: Users,
+    icon: UsersIcon,
     number: "+818",
     statIcon: "increase",
     title: "Subscriptions",
   },
   {
     helperMessage: "19% from last month",
-    icon: CreditCard,
+    icon: CreditCardIcon,
     number: "+1,993",
     statIcon: "increase",
     title: "Sales",
   },
   {
     helperMessage: "201 since last hour",
-    icon: Activity,
+    icon: ActivityIcon,
     number: "+4,545",
     statIcon: "increase",
     title: "Active Now",

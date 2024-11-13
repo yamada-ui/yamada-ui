@@ -7,13 +7,13 @@ import type {
 import type { FC, MutableRefObject } from "react"
 import type { MailItem } from "./data"
 import {
-  Archive,
-  Clock,
-  EllipsisVertical,
-  Reply,
-  ReplyAll,
-  Share,
-  Trash,
+  ArchiveIcon,
+  ClockIcon,
+  EllipsisVerticalIcon,
+  ReplyIcon,
+  ReplyAllIcon,
+  ShareIcon,
+  TrashIcon,
 } from "@yamada-ui/lucide"
 import {
   assignRef,
@@ -50,8 +50,8 @@ export const Detail: FC<DetailProps> = memo(
       <VStack gap={0} h="full" {...rest}>
         <Header px="sm">
           <HStack gap="xs">
-            <ControlIcon icon={Archive} label="Archive" />
-            <ControlIcon icon={Trash} label="Move to trash" />
+            <ControlIcon icon={ArchiveIcon} label="Archive" />
+            <ControlIcon icon={TrashIcon} label="Move to trash" />
             <Divider
               display={{ base: "block", sm: "none" }}
               h="6"
@@ -59,7 +59,7 @@ export const Detail: FC<DetailProps> = memo(
             />
             <ControlIcon
               display={{ base: "flex", sm: "none" }}
-              icon={Clock}
+              icon={ClockIcon}
               label="Snooze"
             />
           </HStack>
@@ -67,15 +67,15 @@ export const Detail: FC<DetailProps> = memo(
           <Spacer display={{ base: "block", sm: "none" }} />
 
           <HStack gap="xs">
-            <ControlIcon icon={Reply} label="Reply" />
-            <ControlIcon icon={ReplyAll} label="Reply all" />
-            <ControlIcon icon={Share} label="Forward" />
+            <ControlIcon icon={ReplyIcon} label="Reply" />
+            <ControlIcon icon={ReplyAllIcon} label="Reply all" />
+            <ControlIcon icon={ShareIcon} label="Forward" />
             <Divider
               display={{ base: "block", sm: "none" }}
               h="6"
               orientation="vertical"
             />
-            <ControlIcon icon={EllipsisVertical} />
+            <ControlIcon icon={EllipsisVerticalIcon} />
           </HStack>
         </Header>
 

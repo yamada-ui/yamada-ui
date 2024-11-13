@@ -3,13 +3,13 @@ import type { IconNames } from "@yamada-ui/lucide"
 import type { IconProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { burger } from "@lucide/lab"
-import { Ghost, Icon, icons } from "@yamada-ui/lucide"
+import { GhostIcon, Icon, icons } from "@yamada-ui/lucide"
 import { HStack } from "@yamada-ui/react"
 
-type Story = StoryFn<typeof Ghost>
+type Story = StoryFn<typeof GhostIcon>
 
-const meta: Meta<typeof Ghost> = {
-  component: Ghost,
+const meta: Meta<typeof GhostIcon> = {
+  component: GhostIcon,
   title: "Components / Media And Icons / Lucide",
 }
 
@@ -18,17 +18,17 @@ export default meta
 export const basic: Story = () => {
   return (
     <HStack alignItems="flex-end">
-      <Ghost fontSize="6xl" />
+      <GhostIcon fontSize="6xl" />
 
-      <Ghost fontSize="5xl" />
+      <GhostIcon fontSize="5xl" />
 
-      <Ghost fontSize="4xl" />
+      <GhostIcon fontSize="4xl" />
 
-      <Ghost fontSize="3xl" />
+      <GhostIcon fontSize="3xl" />
 
-      <Ghost fontSize="2xl" />
+      <GhostIcon fontSize="2xl" />
 
-      <Ghost fontSize="xl" />
+      <GhostIcon fontSize="xl" />
     </HStack>
   )
 }

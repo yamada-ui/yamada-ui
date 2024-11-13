@@ -1,33 +1,33 @@
 import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUp,
-  Circle,
-  CircleCheck,
-  CircleHelp,
-  CircleX,
-  Timer,
+  ArrowDownIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
+  CircleIcon,
+  CircleCheckIcon,
+  CircleHelpIcon,
+  CircleXIcon,
+  TimerIcon,
 } from "@yamada-ui/lucide"
 
 export const STATUS = {
   backlog: {
-    icon: CircleHelp,
+    icon: CircleHelpIcon,
     label: "Backlog",
   },
   canceled: {
-    icon: CircleX,
+    icon: CircleXIcon,
     label: "Canceled",
   },
   done: {
-    icon: CircleCheck,
+    icon: CircleCheckIcon,
     label: "Done",
   },
   "in-progress": {
-    icon: Timer,
+    icon: TimerIcon,
     label: "In Progress",
   },
   todo: {
-    icon: Circle,
+    icon: CircleIcon,
     label: "Todo",
   },
 }
@@ -36,15 +36,15 @@ export type Status = keyof typeof STATUS
 
 export const PRIORITY = {
   medium: {
-    icon: ArrowRight,
+    icon: ArrowRightIcon,
     label: "Medium",
   },
   high: {
-    icon: ArrowUp,
+    icon: ArrowUpIcon,
     label: "High",
   },
   low: {
-    icon: ArrowDown,
+    icon: ArrowDownIcon,
     label: "Low",
   },
 }

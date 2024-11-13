@@ -1,5 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from "next"
-import { ArrowRight } from "@yamada-ui/lucide"
+import { ArrowRightIcon } from "@yamada-ui/lucide"
 import {
   Center,
   Heading,
@@ -69,7 +69,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
               href="/getting-started"
               colorScheme="primary"
               size="2xl"
-              rightIcon={<ArrowRight />}
+              rightIcon={<ArrowRightIcon />}
               w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.started")}

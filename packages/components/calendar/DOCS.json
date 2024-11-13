@@ -657,7 +657,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the DatePicker.",
       "required": false
@@ -1055,7 +1055,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the MonthPicker.",
       "required": false
@@ -1506,7 +1506,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the MultiDatePicker.",
       "required": false
@@ -1970,7 +1970,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the RangeDatePicker.",
       "required": false
@@ -2344,7 +2344,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the YearPicker.",
       "required": false

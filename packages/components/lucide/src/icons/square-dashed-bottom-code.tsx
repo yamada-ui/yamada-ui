@@ -1,15 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { SquareDashedBottomCode as SquareDashedBottomCodeIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { SquareDashedBottomCode as OriginalSquareDashedBottomCode } from "lucide-react"
+
+/**
+ * `SquareDashedBottomCodeIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const SquareDashedBottomCodeIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalSquareDashedBottomCode}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `SquareDashedBottomCode` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `SquareDashedBottomCodeIcon` instead.
  */
-export const SquareDashedBottomCode = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={SquareDashedBottomCodeIcon} {...props} />
-  ),
-)
+export const SquareDashedBottomCode = SquareDashedBottomCodeIcon

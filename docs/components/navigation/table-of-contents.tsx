@@ -156,7 +156,7 @@ export const TableOfContents = memo(
                         },
                       }}
                       _selected={{
-                        bg: [`primary.300`, `primary.300`],
+                        bg: `primary.300`,
                         color: [`black`, "white"],
                       }}
                     >

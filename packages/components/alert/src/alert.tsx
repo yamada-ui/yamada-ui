@@ -1,4 +1,5 @@
 import type {
+  AlertStatus,
   AlertStatuses,
   CSSUIObject,
   FC,
@@ -6,6 +7,7 @@ import type {
   ThemeProps,
 } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
+import type { ComponentType } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -13,22 +15,24 @@ import {
   useComponentMultiStyle,
   useTheme,
 } from "@yamada-ui/core"
-import { CheckIcon, InfoIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
+import {
+  CircleCheckBigIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+} from "@yamada-ui/lucide"
 import { createContext, cx } from "@yamada-ui/utils"
 
 const defaultStatuses = {
-  error: { colorScheme: "danger", icon: WarningIcon },
+  error: { colorScheme: "danger", icon: TriangleAlertIcon },
   info: { colorScheme: "info", icon: InfoIcon },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CheckIcon },
-  warning: { colorScheme: "warning", icon: WarningIcon },
+  success: { colorScheme: "success", icon: CircleCheckBigIcon },
+  warning: { colorScheme: "warning", icon: TriangleAlertIcon },
 } as const
 
-export type Status = keyof typeof defaultStatuses
-
 interface AlertContext {
-  status: Status
+  status: AlertStatus
   styles: { [key: string]: CSSUIObject | undefined }
 }
 
@@ -38,11 +42,15 @@ const [AlertProvider, useAlert] = createContext<AlertContext>({
 })
 
 export const getStatusColorScheme = (
-  status: Status,
+  status: AlertStatus,
   statuses?: AlertStatuses,
-) => statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
+): string =>
+  statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
 
-export const getStatusIcon = (status: Status, statuses?: AlertStatuses) =>
+export const getStatusIcon = (
+  status: AlertStatus,
+  statuses?: AlertStatuses,
+): ComponentType<any> =>
   statuses?.[status]?.icon ?? defaultStatuses[status].icon
 
 interface AlertOptions {
@@ -51,7 +59,7 @@ interface AlertOptions {
    *
    * @default 'info'
    */
-  status?: Status
+  status?: AlertStatus
 }
 
 export interface AlertProps

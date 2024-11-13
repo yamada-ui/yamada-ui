@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/next",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Yamada UI Integrations for Next.js 14",
   "keywords": [
     "yamada",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "next": "^14.2.15",
+    "next": "^15.0.2",
     "react": "^18.3.1"
   },
   "peerDependencies": {

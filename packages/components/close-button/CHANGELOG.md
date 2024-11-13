@@ -1,5 +1,32 @@
 # @yamada-ui/close-button
 
+## 1.0.46
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/ripple@1.0.43
+  - @yamada-ui/icon@1.1.12
+
+## 1.0.45
+
+### Patch Changes
+
+- [#3282](https://github.com/yamada-ui/yamada-ui/pull/3282) [`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the animation would temporarily stop when the ripple animation was disabled.
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+
+## 1.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/icon@1.1.10
+  - @yamada-ui/ripple@1.0.42
+
 ## 1.0.43
 
 ### Patch Changes

@@ -186,7 +186,7 @@ export const withTooltip: Story = () => {
         75%
       </SliderMark>
 
-      <Tooltip isOpen={isOpen} label={`${value}%`} placement="top">
+      <Tooltip label={`${value}%`} open={isOpen} placement="top">
         <SliderThumb />
       </Tooltip>
     </Slider>

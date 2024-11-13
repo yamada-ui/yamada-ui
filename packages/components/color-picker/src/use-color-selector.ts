@@ -559,6 +559,7 @@ export const useColorSelector = ({
       "aria-label": `Select ${color} as the color`,
       disabled,
       readOnly,
+      role: "button",
       ...props,
       ref,
       color,

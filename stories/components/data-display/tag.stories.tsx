@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Plus } from "@yamada-ui/lucide"
-import { noop, Tag, Wrap } from "@yamada-ui/react"
+import { PlusIcon } from "@yamada-ui/lucide"
+import { noop, Tag, toTitleCase, Wrap } from "@yamada-ui/react"
 import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Tag>
@@ -17,7 +17,19 @@ export const subtle: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Tag key={colorScheme} colorScheme={colorScheme}>
-          {colorScheme}
+          {toTitleCase(colorScheme)}
+        </Tag>
+      ))}
+    </Wrap>
+  )
+}
+
+export const surface: Story = () => {
+  return (
+    <Wrap gap="md">
+      {colorSchemes.map((colorScheme) => (
+        <Tag key={colorScheme} colorScheme={colorScheme} variant="surface">
+          {toTitleCase(colorScheme)}
         </Tag>
       ))}
     </Wrap>
@@ -29,7 +41,7 @@ export const solid: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Tag key={colorScheme} colorScheme={colorScheme} variant="solid">
-          {colorScheme}
+          {toTitleCase(colorScheme)}
         </Tag>
       ))}
     </Wrap>
@@ -41,7 +53,7 @@ export const outline: Story = () => {
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
         <Tag key={colorScheme} colorScheme={colorScheme} variant="outline">
-          {colorScheme}
+          {toTitleCase(colorScheme)}
         </Tag>
       ))}
     </Wrap>
@@ -69,15 +81,15 @@ export const withSize: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" size="sm" startIcon={<Plus />}>
+      <Tag colorScheme="primary" size="sm" startIcon={<PlusIcon />}>
         Small
       </Tag>
 
-      <Tag colorScheme="secondary" size="md" endIcon={<Plus />}>
+      <Tag colorScheme="secondary" size="md" endIcon={<PlusIcon />}>
         Medium
       </Tag>
 
-      <Tag colorScheme="warning" size="lg" startIcon={<Plus />}>
+      <Tag colorScheme="warning" size="lg" startIcon={<PlusIcon />}>
         Large
       </Tag>
     </Wrap>

@@ -5,6 +5,7 @@ package_name: "@yamada-ui/alert"
 order: 1
 with_description: true
 tab: Props
+label: Updated
 ---
 
 ## Props
@@ -46,7 +47,7 @@ tab: Props
 <PropsCard
   id="alert-status"
   name="status"
-  type='"info" | "success" | "warning" | "error" | "loading"'
+  type="AlertStatus"
   description={"The status of the alert."}
   defaultValue={"'info'"}
 />
@@ -54,7 +55,7 @@ tab: Props
 <PropsCard
   id="alert-variant"
   name="variant"
-  type='"basic" | "island-accent" | "left-accent" | "solid" | "subtle" | "top-accent"'
+  type='"basic" | "island-accent" | "left-accent" | "solid" | "subtle" | "surface" | "top-accent"'
   description={"The variant of the Alert."}
   defaultValue={'"basic"'}
 />

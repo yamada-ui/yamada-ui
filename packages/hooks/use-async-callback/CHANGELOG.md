@@ -1,5 +1,23 @@
 # @yamada-ui/use-async-callback
 
+## 1.0.4
+
+### Patch Changes
+
+- [#3377](https://github.com/yamada-ui/yamada-ui/pull/3377) [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/use-processing@1.0.1
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/loading@1.1.23
+
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`3e9c43a`](https://github.com/yamada-ui/yamada-ui/commit/3e9c43a1ec4e8b5f0d714a583aa97f96e8189b27)]:
+  - @yamada-ui/loading@1.1.22
+
 ## 1.0.2
 
 ### Patch Changes

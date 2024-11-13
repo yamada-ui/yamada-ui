@@ -4,6 +4,7 @@ import { Button } from "./button"
 
 export const CloseButton: ComponentStyle<"CloseButton"> = mergeStyle(Button, {
   baseStyle: {
+    rounded: "md",
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
     },

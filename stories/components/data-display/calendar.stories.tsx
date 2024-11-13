@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { CalendarProps } from "@yamada-ui/calendar"
 import { Calendar } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
@@ -365,7 +365,7 @@ export const customLabelButton: Story = () => {
     <>
       <Calendar labelProps={{ color: "gray.500" }} />
 
-      <Calendar labelProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar labelProps={{ icon: <GhostIcon fontSize="sm" /> }} />
     </>
   )
 }
@@ -373,11 +373,11 @@ export const customLabelButton: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Calendar controlProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar controlProps={{ icon: <GhostIcon fontSize="sm" /> }} />
 
-      <Calendar prevProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar prevProps={{ icon: <GhostIcon fontSize="sm" /> }} />
 
-      <Calendar nextProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar nextProps={{ icon: <GhostIcon fontSize="sm" /> }} />
     </>
   )
 }
@@ -542,7 +542,7 @@ export const customDayButton: Story = () => {
         dateFormat="YYYY年 MMMM"
         locale="ja"
         dayProps={{
-          variant: "ghost",
+          variant: "ghostIcon",
           component: ({ date, isSelected }) => (
             <VStack alignItems="center">
               <Center

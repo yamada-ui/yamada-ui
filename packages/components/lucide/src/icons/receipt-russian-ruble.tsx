@@ -1,15 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { ReceiptRussianRuble as ReceiptRussianRubleIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { ReceiptRussianRuble as OriginalReceiptRussianRuble } from "lucide-react"
+
+/**
+ * `ReceiptRussianRubleIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const ReceiptRussianRubleIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalReceiptRussianRuble}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `ReceiptRussianRuble` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `ReceiptRussianRubleIcon` instead.
  */
-export const ReceiptRussianRuble = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={ReceiptRussianRubleIcon} {...props} />
-  ),
-)
+export const ReceiptRussianRuble = ReceiptRussianRubleIcon

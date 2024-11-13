@@ -11072,6 +11072,59 @@
   },
   {
     "type": "page",
+    "description": "`Airy` is a component that provides a smooth animation to switch between two elements.",
+    "hierarchy": { "lv1": "Airy" },
+    "slug": "/components/transitions/airy",
+    "title": "Airy"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Import" },
+    "slug": "/components/transitions/airy#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Usage" },
+    "slug": "/components/transitions/airy#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Airy",
+      "lv2": "Usage",
+      "lv3": "Change the Duration"
+    },
+    "slug": "/components/transitions/airy#change-the-duration",
+    "title": "Change the Duration"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Usage", "lv3": "Add a Delay" },
+    "slug": "/components/transitions/airy#add-a-delay",
+    "title": "Add a Delay"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Usage", "lv3": "Disable" },
+    "slug": "/components/transitions/airy#disable",
+    "title": "Disable"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Usage", "lv3": "ReadOnly" },
+    "slug": "/components/transitions/airy#readonly",
+    "title": "ReadOnly"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Airy", "lv2": "Usage", "lv3": "Control" },
+    "slug": "/components/transitions/airy#control",
+    "title": "Control"
+  },
+  {
+    "type": "page",
     "description": "`Collapse` is a component that allows you to expand or collapse an element for display.",
     "hierarchy": { "lv1": "Collapse" },
     "slug": "/components/transitions/collapse",
@@ -11166,10 +11219,130 @@
   },
   {
     "type": "page",
+    "description": "`Flip` is a component that provides an animation to switch between two elements while flipping.",
+    "hierarchy": { "lv1": "Flip" },
+    "slug": "/components/transitions/flip",
+    "title": "Flip"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Import" },
+    "slug": "/components/transitions/flip#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage" },
+    "slug": "/components/transitions/flip#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Change Direction" },
+    "slug": "/components/transitions/flip#change-direction",
+    "title": "Change Direction"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Change Duration" },
+    "slug": "/components/transitions/flip#change-duration",
+    "title": "Change Duration"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Add Delay" },
+    "slug": "/components/transitions/flip#add-delay",
+    "title": "Add Delay"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Disable" },
+    "slug": "/components/transitions/flip#disable",
+    "title": "Disable"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "ReadOnly" },
+    "slug": "/components/transitions/flip#readonly",
+    "title": "ReadOnly"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Control" },
+    "slug": "/components/transitions/flip#control",
+    "title": "Control"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Flip", "lv2": "Usage", "lv3": "Customize" },
+    "slug": "/components/transitions/flip#customize",
+    "title": "Customize"
+  },
+  {
+    "type": "page",
     "description": "Components such as `Collapse` and `Fade` are available to provide animations to elements, creating visual transitions.",
     "hierarchy": { "lv1": "Transitions" },
     "slug": "/components/transitions",
     "title": "Transitions"
+  },
+  {
+    "type": "page",
+    "description": "`Rotate` is a component that provides an animation to switch between two elements while rotating.",
+    "hierarchy": { "lv1": "Rotate" },
+    "slug": "/components/transitions/rotate",
+    "title": "Rotate"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Import" },
+    "slug": "/components/transitions/rotate#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage" },
+    "slug": "/components/transitions/rotate#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage", "lv3": "Change the Angle" },
+    "slug": "/components/transitions/rotate#change-the-angle",
+    "title": "Change the Angle"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "Rotate",
+      "lv2": "Usage",
+      "lv3": "Change the Duration"
+    },
+    "slug": "/components/transitions/rotate#change-the-duration",
+    "title": "Change the Duration"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage", "lv3": "Add a Delay" },
+    "slug": "/components/transitions/rotate#add-a-delay",
+    "title": "Add a Delay"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage", "lv3": "Disable" },
+    "slug": "/components/transitions/rotate#disable",
+    "title": "Disable"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage", "lv3": "ReadOnly" },
+    "slug": "/components/transitions/rotate#readonly",
+    "title": "ReadOnly"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "Rotate", "lv2": "Usage", "lv3": "Control" },
+    "slug": "/components/transitions/rotate#control",
+    "title": "Control"
   },
   {
     "type": "page",
@@ -14601,20 +14774,20 @@
     "type": "fragment",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Setting Common props for the Entire Application"
+      "lv2": "Single part and multi part components",
+      "lv3": "Styling Multi part components"
     },
-    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
-    "title": "Setting Common props for the Entire Application"
+    "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
+    "title": "Styling Multi part components"
   },
   {
     "type": "fragment",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Setting Common props for the Entire Application",
-      "lv3": "Styling Multi part components"
+      "lv2": "Setting Common props for the Entire Application"
     },
-    "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
-    "title": "Styling Multi part components"
+    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
+    "title": "Setting Common props for the Entire Application"
   },
   {
     "type": "fragment",

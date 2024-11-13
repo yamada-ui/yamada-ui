@@ -35,10 +35,6 @@ export interface ModalOptions
     | "restoreFocus"
   > {
   /**
-   * If `true`, the open will be opened.
-   */
-  isOpen: boolean
-  /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
    * @default false.
@@ -72,6 +68,16 @@ export interface ModalOptions
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the open will be opened.
+   *
+   * @deprecated Use `open` instead.
+   */
+  isOpen?: boolean
+  /**
+   * If `true`, the open will be opened.
+   */
+  open?: boolean
   /**
    * The CSS `padding` property.
    */
@@ -155,7 +161,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       size,
       ...props,
     })
-    const {
+    let {
       className,
       allowPinchZoom = false,
       animation = "scale",
@@ -169,6 +175,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       initialFocusRef,
       isOpen,
       lockFocusAcrossFrames = true,
+      open,
       outside = "fallback(4, 1rem)",
       placement: _placement = "center",
       restoreFocus,
@@ -183,6 +190,9 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    open ??= isOpen
+
     const labelledbyId = useId()
     const describedbyId = useId()
 
@@ -245,6 +255,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
           duration,
           isOpen,
           labelledbyId,
+          open,
           scrollBehavior,
           styles,
           withCloseButton,
@@ -253,7 +264,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
         }}
       >
         <AnimatePresence onExitComplete={onCloseComplete}>
-          {isOpen ? (
+          {open ? (
             <Portal {...portalProps}>
               <FocusLock
                 autoFocus={autoFocus}

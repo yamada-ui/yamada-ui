@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { BreadcrumbGenerateItem } from "@yamada-ui/react"
-import { ChevronsRight } from "@yamada-ui/lucide"
+import { ChevronsRightIcon } from "@yamada-ui/lucide"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -141,7 +141,7 @@ export const withSeparator: Story = () => {
 
 export const withCustomSeparator: Story = () => {
   return (
-    <Breadcrumb separator={<ChevronsRight color="gray.300" />}>
+    <Breadcrumb separator={<ChevronsRightIcon color="gray.300" />}>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
       </BreadcrumbItem>

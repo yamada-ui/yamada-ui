@@ -37,7 +37,7 @@ describe("<Flip />", () => {
 
   test("should be read only", () => {
     const { container, user } = render(
-      <Flip from={<TestIcon />} isReadOnly to={<TestIcon />} />,
+      <Flip from={<TestIcon />} readOnly to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -49,7 +49,7 @@ describe("<Flip />", () => {
 
   test("should be disabled", () => {
     const { container, user } = render(
-      <Flip from={<TestIcon />} isDisabled to={<TestIcon />} />,
+      <Flip disabled from={<TestIcon />} to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -64,8 +64,8 @@ describe("<Flip />", () => {
   test("should be render Flip with orientation", () => {
     const { container } = render(
       <Flip
+        disabled
         from={<TestIcon />}
-        isDisabled
         orientation="vertical"
         to={<TestIcon />}
       />,

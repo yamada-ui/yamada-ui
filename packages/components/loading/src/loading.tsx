@@ -128,3 +128,6 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       return <Oval ref={ref} {...computedProps} />
   }
 })
+
+Loading.displayName = "Loading"
+Loading.__ui__ = "Loading"

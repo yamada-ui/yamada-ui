@@ -102,13 +102,13 @@ return (
 <VStack>
   <HueSlider isDisabled />
 
-  <FormControl
+  <Feildset
     isDisabled
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <HueSlider />
-  </FormControl>
+  </Feildset>
 </VStack>
 ```
 
@@ -120,13 +120,13 @@ return (
 <VStack>
   <HueSlider isReadOnly />
 
-  <FormControl
+  <Feildset
     isReadOnly
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <HueSlider />
-  </FormControl>
+  </Feildset>
 </VStack>
 ```
 
@@ -177,9 +177,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Feildset
       isInvalid={!!errors.hueSlider}
-      label="Pick color"
+      legend="Pick color"
       errorMessage={errors.hueSlider ? errors.hueSlider.message : undefined}
     >
       <Controller
@@ -188,7 +188,7 @@ return (
         rules={{ max: { value: 180, message: "The maximum value is 180." } }}
         render={({ field }) => <HueSlider {...field} />}
       />
-    </FormControl>
+    </Feildset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

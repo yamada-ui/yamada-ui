@@ -11,26 +11,32 @@ The `HueSlider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/A
 
 ## Keyboard Navigation
 
-| Key          | Description                                       | State |
-| ------------ | ------------------------------------------------- | ----- |
-| `Tab`        | Focuses the thumb.                                | -     |
-| `ArrowRight` | Increases the value by one step.                  | -     |
-| `ArrowLeft`  | Decreases the value by one step.                  | -     |
-| `ArrowUp`    | Increases the value by one step.                  | -     |
-| `ArrowDown`  | Decreases the value by one step.                  | -     |
-| `Home`       | Sets to the first allowed value within the range. | -     |
-| `End`        | Sets to the last allowed value within the range.  | -     |
-| `PageUp`     | Increases the value by a larger step.             | -     |
-| `PageDown`   | Decreases the value by a larger step.             | -     |
+| Key          | Description                                              | State |
+| ------------ | -------------------------------------------------------- | ----- |
+| `ArrowRight` | Increases the value based on the `step` value.           | -     |
+| `ArrowLeft`  | Decreases the value based on the `step` value.           | -     |
+| `ArrowUp`    | Increases the value based on the `step` value.           | -     |
+| `ArrowDown`  | Decreases the value based on the `step` value.           | -     |
+| `Home`       | Sets the value to `min`.                                 | -     |
+| `End`        | Sets the value to `max`.                                 | -     |
+| `PageUp`     | Increases the value based on the `min` and `max` values. | -     |
+| `PageDown`   | Decreases the value based on the `min` and `max` values. | -     |
 
 ## ARIA Roles and Attributes
 
-| Component   | Role and Attributes         | Usage                                                        |
-| ----------- | --------------------------- | ------------------------------------------------------------ |
-| SliderThumb | `role`                      | Indicates that this is a slider.                             |
-|             | `aria-label="Slider thumb"` | Sets `"Slider thumb"`.                                       |
-|             | `aria-valuemax`             | Sets the `max` value. Default is `360`.                      |
-|             | `aria-valuemin`             | Sets the `min` value. Default is `0`.                        |
-|             | `aria-valuenow`             | Sets the current value.                                      |
-|             | `aria-disabled`             | Set to `"true"` when `isDisabled` is set on the `HueSlider`. |
-|             | `aria-readonly`             | Set to `"true"` when `isReadOnly` is set on the `HueSlider`. |
+| Component                   | Role and Attributes | Usage                                                                                            |
+| --------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| `HueSliderThumb`            | `role`              | Indicates that this is a slider.                                                                 |
+|                             | `aria-label`        | Sets `"Slider thumb"`.                                                                           |
+|                             | `aria-orientation`  | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
+|                             | `aria-valuemin`     | Sets the `min` value. Default is `0`.                                                            |
+|                             | `aria-valuemax`     | Sets the `max` value. Default is `100`.                                                          |
+|                             | `aria-valuenow`     | Sets the current value.                                                                          |
+|                             | `aria-valuetext`    | Sets the current value, such as `18°, Red`.                                                      |
+|                             | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set.                                                          |
+|                             | `aria-disabled`     | Set to `"true"` if `isDisabled` is set.                                                          |
+|                             | `aria-invalid`      | Set to `"true"` if `isInvalid` is set.                                                           |
+| `input` <Tag>Internal</Tag> | `type="hidden"`     | Excludes the element from the accessibility tree.                                                |
+|                             | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set.                                                          |
+|                             | `aria-disabled`     | Set to `"true"` if `isDisabled` is set.                                                          |
+|                             | `aria-invalid`      | Set to `"true"` if `isInvalid` is set.                                                           |

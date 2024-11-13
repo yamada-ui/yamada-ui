@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Check, Pencil, X } from "@yamada-ui/lucide"
+import { CheckIcon, PencilIcon, XIcon } from "@yamada-ui/lucide"
 import {
   Button,
   ButtonGroup,
@@ -189,15 +189,23 @@ export const customControl: Story = () => {
     return isEditing ? (
       <ButtonGroup size="sm" gap="sm">
         <IconButton
-          icon={<Check />}
+          icon={<CheckIcon />}
           {...getSubmitProps()}
           aria-label="Submit"
         />
-        <IconButton icon={<X />} {...getCancelProps()} aria-label="Cancel" />
+        <IconButton
+          icon={<XIcon />}
+          {...getCancelProps()}
+          aria-label="Cancel"
+        />
       </ButtonGroup>
     ) : (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton icon={<Pencil />} {...getEditProps()} aria-label="Edit" />
+        <IconButton
+          icon={<PencilIcon />}
+          {...getEditProps()}
+          aria-label="Edit"
+        />
       </ButtonGroup>
     )
   }

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SelectItem } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Check, ChevronsDown, Trash2 } from "@yamada-ui/lucide"
+import { CheckIcon, ChevronsDownIcon, Trash2Icon } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -419,7 +419,7 @@ export const customIcon: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown /> }}
+        iconProps={{ children: <ChevronsDownIcon /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -433,7 +433,7 @@ export const customClearIcon: Story = () => {
   return (
     <MultiSelect
       placeholder="キャラクターを選択"
-      clearIconProps={{ children: <Trash2 /> }}
+      clearIconProps={{ children: <Trash2Icon /> }}
     >
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
@@ -456,7 +456,7 @@ export const customOption: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check color="green.500" /> }}
+        optionProps={{ icon: <CheckIcon color="green.500" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>

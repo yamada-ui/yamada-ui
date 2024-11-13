@@ -29,8 +29,6 @@ export {
   color,
   complex,
   createBox,
-  createDomMotionComponent,
-  createMotionComponent,
   createScopedAnimate,
   cubicBezier,
   delay,

@@ -70,7 +70,7 @@ describe("<Tooltip />", () => {
 
   test("should always display", async () => {
     render(
-      <Tooltip isOpen label="Tooltip hover">
+      <Tooltip label="Tooltip hover" open>
         <span>Hover</span>
       </Tooltip>,
     )
@@ -84,7 +84,7 @@ describe("<Tooltip />", () => {
 
   test("should disable even if hover", async () => {
     const { user } = render(
-      <Tooltip isDisabled label="Tooltip hover">
+      <Tooltip disabled label="Tooltip hover">
         <span>Hover</span>
       </Tooltip>,
     )
@@ -118,9 +118,9 @@ describe("<Tooltip />", () => {
     expect(queryTooltip()).toBeNull()
   })
 
-  test("When `isOpen` is true, the tooltip should be displayed", async () => {
+  test("When `open` is true, the tooltip should be displayed", async () => {
     const { user } = render(
-      <Tooltip isOpen label="Tooltip hover">
+      <Tooltip label="Tooltip hover" open>
         <span>Hover</span>
       </Tooltip>,
     )

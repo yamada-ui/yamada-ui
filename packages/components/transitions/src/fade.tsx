@@ -53,21 +53,24 @@ export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
     delay,
     duration,
     isOpen,
+    open,
     transition,
     transitionEnd,
     unmountOnExit,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const animate = isOpen || unmountOnExit ? "enter" : "exit"
+  open ??= isOpen
+
+  const animate = open || unmountOnExit ? "enter" : "exit"
 
   const custom = { delay, duration, transition, transitionEnd }
 
-  isOpen = unmountOnExit ? isOpen && unmountOnExit : true
+  open = unmountOnExit ? open && unmountOnExit : true
 
   return (
     <AnimatePresence custom={custom}>
-      {isOpen ? (
+      {open ? (
         <motion.div
           ref={ref}
           className={cx("ui-fade", className)}

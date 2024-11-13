@@ -7,14 +7,14 @@ describe("<Collapse />", () => {
     await a11y(<Collapse />)
   })
 
-  test("toggles visibility on isOpen change", async () => {
+  test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse isOpen={isOpen}>Collapse</Collapse>
+          <Collapse open={isOpen}>Collapse</Collapse>
         </>
       )
     }
@@ -33,7 +33,7 @@ describe("<Collapse />", () => {
   })
 
   test("animationOpacity set to true by default", async () => {
-    render(<Collapse isOpen>Collapse</Collapse>)
+    render(<Collapse open>Collapse</Collapse>)
 
     const collapse = await screen.findByText("Collapse")
 
@@ -42,7 +42,7 @@ describe("<Collapse />", () => {
 
   test("no opacity when animationOpacity set to false", async () => {
     render(
-      <Collapse animationOpacity={false} isOpen>
+      <Collapse animationOpacity={false} open>
         Collapse
       </Collapse>,
     )
@@ -52,14 +52,14 @@ describe("<Collapse />", () => {
     await waitFor(() => expect(collapse).not.toHaveStyle({ opacity: "1" }))
   })
 
-  test("height changes correctly after isOpen set to true", async () => {
+  test("height changes correctly after open set to true", async () => {
     const TestComponent = () => {
       const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse endingHeight={200} isOpen={isOpen} startingHeight={50}>
+          <Collapse endingHeight={200} open={isOpen} startingHeight={50}>
             Collapse
           </Collapse>
         </>
@@ -83,7 +83,7 @@ describe("<Collapse />", () => {
       return (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse isOpen={isOpen} unmountOnExit>
+          <Collapse open={isOpen} unmountOnExit>
             Collapse
           </Collapse>
         </>

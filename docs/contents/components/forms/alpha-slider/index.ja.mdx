@@ -121,13 +121,13 @@ return (
 <VStack>
   <AlphaSlider color="#4387f4" isDisabled />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <AlphaSlider color="#4387f4" />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -139,13 +139,13 @@ return (
 <VStack>
   <AlphaSlider color="#4387f4" isReadOnly />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <AlphaSlider color="#4387f4" />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -197,9 +197,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.alphaSlider}
-      label="Pick color"
+      legend="Pick color"
       errorMessage={errors.alphaSlider ? errors.alphaSlider.message : undefined}
     >
       <Controller
@@ -208,7 +208,7 @@ return (
         rules={{ max: { value: 0.5, message: "The maximum value is 0.5." } }}
         render={({ field }) => <AlphaSlider {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

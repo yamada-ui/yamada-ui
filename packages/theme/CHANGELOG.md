@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 1.19.3
+
+### Patch Changes
+
+- [#3342](https://github.com/yamada-ui/yamada-ui/pull/3342) [`f2d1c9f`](https://github.com/yamada-ui/yamada-ui/commit/f2d1c9fad57459e75ef7447489ccb74c7db19ed9) Thanks [@108yen](https://github.com/108yen)! - Added `"use client"` to theme.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+
 ## 1.19.2
 
 ### Patch Changes

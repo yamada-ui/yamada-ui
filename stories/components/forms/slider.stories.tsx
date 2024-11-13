@@ -186,7 +186,7 @@ export const withTooltip: Story = () => {
         75%
       </SliderMark>
 
-      <Tooltip isOpen={isOpen} label={`${value}%`} placement="top">
+      <Tooltip label={`${value}%`} open={isOpen} placement="top">
         <SliderThumb />
       </Tooltip>
     </Slider>
@@ -201,7 +201,7 @@ export const isDisabled: Story = () => {
       <FormControl
         helperMessage="Please select your preferred volume."
         isDisabled
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider />
       </FormControl>
@@ -217,7 +217,7 @@ export const isReadonly: Story = () => {
       <FormControl
         helperMessage="Please select your preferred volume."
         isReadOnly
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider />
       </FormControl>
@@ -235,7 +235,7 @@ export const isInvalid: Story = () => {
       <FormControl
         errorMessage="Volume should be set to 20 or higher."
         isInvalid={value < 20}
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider value={value} onChange={onChange} />
       </FormControl>

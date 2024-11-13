@@ -36,7 +36,7 @@ describe("<Rotate />", () => {
 
   test("should be read only", () => {
     const { container, user } = render(
-      <Rotate from={<TestIcon />} isReadOnly to={<TestIcon />} />,
+      <Rotate from={<TestIcon />} readOnly to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
@@ -48,7 +48,7 @@ describe("<Rotate />", () => {
 
   test("should be disabled", () => {
     const { container, user } = render(
-      <Rotate from={<TestIcon />} isDisabled to={<TestIcon />} />,
+      <Rotate disabled from={<TestIcon />} to={<TestIcon />} />,
     )
 
     const button = container.querySelector("button") as HTMLButtonElement

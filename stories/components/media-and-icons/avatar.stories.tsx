@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Avatar, AvatarBadge, AvatarGroup, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Avatar>
@@ -52,7 +52,7 @@ export const withFallback: Story = () => {
     <Wrap gap="md">
       <Avatar src="https://not-found.com" bg="secondary" />
       <Avatar src="https://not-found.com" alt="alternative text" />
-      <Avatar src="https://not-found.com" icon={<Ghost fontSize="2xl" />} />
+      <Avatar src="https://not-found.com" icon={<GhostIcon fontSize="2xl" />} />
     </Wrap>
   )
 }

@@ -3,7 +3,7 @@ import type { SegmentedControlItem } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
 import {
   Button,
-  FormControl,
+  Fieldset,
   Grid,
   SegmentedControl,
   SegmentedControlButton,
@@ -236,10 +236,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.segmentedControl?.message}
         isInvalid={!!errors.segmentedControl}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="segmentedControl"
@@ -259,7 +259,7 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

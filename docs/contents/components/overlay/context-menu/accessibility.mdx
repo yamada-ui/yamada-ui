@@ -33,12 +33,12 @@ The `ContextMenu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.
 | Component            | Roles and Attributes    | Usage                                                                                                                   |
 | -------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `ContextMenuTrigger` | `id`                    | `id` used to associate with `MenuList`.                                                                                 |
-|                      | `aria-haspopup`         | Set to `menu`.                                                                                                          |
+|                      | `aria-haspopup`         | Set to `"menu"`.                                                                                                        |
 |                      | `aria-expanded`         | Set to `"true"` when menu is open, `"false"` when closed.                                                               |
 |                      | `aria-controls`         | Set to the `id` of the related `MenuList` when menu is open, `undefined` when closed.                                   |
 | `MenuItemButton`     | `role="button"`         | Indicates that it is a button.                                                                                          |
 |                      | `id`                    | `id` used to associate with `MenuList`.                                                                                 |
-|                      | `aria-haspopup`         | Set to `menu`.                                                                                                          |
+|                      | `aria-haspopup`         | Set to `"menu"`.                                                                                                        |
 |                      | `aria-expanded`         | Set to `"true"` when menu is open, `"false"` when closed.                                                               |
 |                      | `aria-controls`         | Set to the `id` of the related `MenuList` when menu is open, `undefined` when closed.                                   |
 | `MenuList`           | `role="menu"`           | Indicates that it is a menu.                                                                                            |

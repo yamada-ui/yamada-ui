@@ -3,7 +3,7 @@ import type { Hsv } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
 import {
   Button,
-  FormControl,
+  Fieldset,
   SaturationSlider,
   Text,
   VStack,
@@ -129,13 +129,13 @@ export const isDisabled: Story = () => {
     <>
       <SaturationSlider isDisabled />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isDisabled
-        label="Pick color"
+        legend="Pick color"
       >
         <SaturationSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -145,13 +145,13 @@ export const isReadonly: Story = () => {
     <>
       <SaturationSlider isReadOnly />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isReadOnly
-        label="Pick color"
+        legend="Pick color"
       >
         <SaturationSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -226,17 +226,17 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.saturationSlider?.message}
         isInvalid={!!errors.saturationSlider}
-        label="Pick color"
+        legend="Pick color"
       >
         <Controller
           name="saturationSlider"
           control={control}
           render={({ field }) => <SaturationSlider {...field} />}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

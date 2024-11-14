@@ -11,54 +11,23 @@ tab: Accessibility
 
 The `Checkbox` follows the[WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox) for accessibility.
 
-If not using `CheckboxGroup`, use `Fieldset` to group checkboxes.
+If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `CheckboxGroup`.
 
 ```tsx live=false
-const [values, setValues] = useState([false, false])
-
-const allChecked = values.every(Boolean)
-const isIndeterminate = values.some(Boolean) && !allChecked
-
-return (
-  <Fieldset legend="キャラクター">
-    <VStack gap="sm">
-      <Checkbox
-        isChecked={allChecked}
-        isIndeterminate={isIndeterminate}
-        onChange={(e) => setValues([e.target.checked, e.target.checked])}
-      >
-        地球人
-      </Checkbox>
-
-      <VStack pl="md" gap="sm">
-        <Checkbox
-          isChecked={values[0]}
-          onChange={(e) => setValues([e.target.checked, values[1]])}
-        >
-          孫悟空
-        </Checkbox>
-
-        <Checkbox
-          isChecked={values[1]}
-          onChange={(e) => setValues([values[0], e.target.checked])}
-        >
-          孫悟飯
-        </Checkbox>
-      </VStack>
-    </VStack>
-  </Fieldset>
-)
+<CheckboxGroup aria-label="キャラクター">
+  <Checkbox value="孫悟空">孫悟空</Checkbox>
+  <Checkbox value="ベジータ">ベジータ</Checkbox>
+  <Checkbox value="フリーザ">フリーザ</Checkbox>
+</CheckboxGroup>
 ```
-
-If not using `FormControl`, set `aria-labelledby` on the `CheckboxGroup`.
 
 ```tsx live=false
 <VStack gap="sm">
-  <Heading as="h3" id="group">
+  <Heading as="h3" id="label">
     キャラクター
   </Heading>
 
-  <CheckboxGroup aria-labelledby="group">
+  <CheckboxGroup aria-labelledby="label">
     <Checkbox value="孫悟空">孫悟空</Checkbox>
     <Checkbox value="ベジータ">ベジータ</Checkbox>
     <Checkbox value="フリーザ">フリーザ</Checkbox>

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Activity } from "@yamada-ui/lucide"
+import { ActivityIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
@@ -280,14 +280,14 @@ export const customThumb: Story = () => {
       <Slider
         thumbProps={{
           boxSize: "6",
-          children: <Activity />,
+          children: <ActivityIcon />,
           color: "blue.500",
         }}
       />
 
       <Slider>
         <SliderThumb boxSize="6" color="blue.500">
-          <Activity />
+          <ActivityIcon />
         </SliderThumb>
       </Slider>
     </>

@@ -285,7 +285,6 @@ export const useResizableItem = ({
         onCollapse,
         onExpand,
         onResize,
-        ...(collapsible ? { "aria-labelledby": id } : { "aria-label": id }),
         ...rest,
       }
     },

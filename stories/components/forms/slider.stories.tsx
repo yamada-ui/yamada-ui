@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Activity } from "@yamada-ui/lucide"
+import { ActivityIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
@@ -201,7 +201,7 @@ export const isDisabled: Story = () => {
       <FormControl
         helperMessage="Please select your preferred volume."
         isDisabled
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider />
       </FormControl>
@@ -217,7 +217,7 @@ export const isReadonly: Story = () => {
       <FormControl
         helperMessage="Please select your preferred volume."
         isReadOnly
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider />
       </FormControl>
@@ -235,7 +235,7 @@ export const isInvalid: Story = () => {
       <FormControl
         errorMessage="Volume should be set to 20 or higher."
         isInvalid={value < 20}
-        label="volume (sound)"
+        label="Sound volume"
       >
         <Slider value={value} onChange={onChange} />
       </FormControl>
@@ -280,14 +280,14 @@ export const customThumb: Story = () => {
       <Slider
         thumbProps={{
           boxSize: "6",
-          children: <Activity />,
+          children: <ActivityIcon />,
           color: "blue.500",
         }}
       />
 
       <Slider>
         <SliderThumb boxSize="6" color="blue.500">
-          <Activity />
+          <ActivityIcon />
         </SliderThumb>
       </Slider>
     </>

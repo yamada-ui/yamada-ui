@@ -9,7 +9,7 @@ with_description: true
 tab: Accessibility
 ---
 
-The `Autocomplete` follows the[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+The `Autocomplete` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
 
 If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Autocomplete`.
 
@@ -54,7 +54,7 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Au
 |                                                    | `aria-haspopup="listbox"`  | Indicates that a listbox exists.                                                      |
 |                                                    | `aria-autocomplete="list"` | Indicates that the component proposes a list of values related to the input value.    |
 |                                                    | `aria-activedescendant`    | Set to the `id` of the focused item.                                                  |
-|                                                    | `aria-expanded`            | Set to "true" when the listbox is open, "false" when closed.                          |
+|                                                    | `aria-expanded`            | Set to `"true"` when the listbox is open, `"false"` when closed.                      |
 |                                                    | `aria-controls`            | Set to the `id` of the related `AutocompleteList` when open, `undefined` when closed. |
 |                                                    | `aria-readonly`            | Set to `"true"` when `isReadOnly` is set.                                             |
 |                                                    | `aria-disabled`            | Set to `"true"` when `isDisabled` is set.                                             |
@@ -62,7 +62,7 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Au
 |                                                    | `aria-required`            | Set to `"true"` when `isRequired` is set.                                             |
 | `AutocompleteList` <Tag>Internal</Tag>             | `role="listbox"`           | Indicates that this is a listbox.                                                     |
 |                                                    | `id`                       | The `id` used to associate with `AutocompleteField`.                                  |
-|                                                    | `aria-hidden`              | Set to "true" when the listbox is open, "false" when closed.                          |
+|                                                    | `aria-hidden`              | Set to `"true"` when the listbox is open, `"false"` when closed.                      |
 | `AutocompleteOptionGroup`                          | `role="group"`             | Indicates that this is a group.                                                       |
 |                                                    | `aria-labelledby`          | Sets the `id` of the associated `AutocompleteOptionGroupLabel`.                       |
 | `AutocompleteOptionGroupLabel` <Tag>Internal</Tag> | `role="presentation"`      | Indicates that this is a presentation.                                                |

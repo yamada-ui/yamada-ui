@@ -7,13 +7,11 @@ describe("<Button />", () => {
   })
 
   test("renders with icon", () => {
-    const { getByText, rerender } = render(
-      <Button rightIcon={<>right icon</>} />,
-    )
-    expect(getByText("right icon")).toBeTruthy()
+    const { getByText, rerender } = render(<Button endIcon={<>end icon</>} />)
+    expect(getByText("end icon")).toBeTruthy()
 
-    rerender(<Button leftIcon={<>left icon</>} />)
-    expect(getByText("left icon")).toBeTruthy()
+    rerender(<Button startIcon={<>start icon</>} />)
+    expect(getByText("start icon")).toBeTruthy()
   })
 
   test("shows loading text if isLoading, loadingText and loadingIcon", () => {

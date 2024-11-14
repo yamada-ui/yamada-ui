@@ -274,9 +274,9 @@ const ButtonContent: FC<ButtonContentProps> = ({
 
   return (
     <>
-      {leftIcon ? <ButtonIcon>{leftIcon}</ButtonIcon> : null}
+      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
       {children}
-      {rightIcon ? <ButtonIcon>{rightIcon}</ButtonIcon> : null}
+      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
     </>
   )
 }

@@ -7,10 +7,20 @@ with_description: true
 tab: Accessibility
 ---
 
-Setting `aria-label` on `FileInput` will make it readable by screen readers.
+If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `FileInput`.
 
 ```tsx live=false
 <FileInput placeholder="Select a file" aria-label="File upload" />
+```
+
+```tsx live=false
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    File upload
+  </Heading>
+
+  <FileInput placeholder="Select a file" aria-labelledby="label" />
+</VStack>
 ```
 
 ## Keyboard Interaction

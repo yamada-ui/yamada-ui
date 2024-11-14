@@ -51,7 +51,7 @@ tab: アクセシビリティ
 | `MultiSelectField` <Tag>内部</Tag> | `role="combobox"`         | コンボボックスであることを示します。                                                                               |
 |                                    | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                           |
 |                                    | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                           |
-|                                    | `aria-expanded`           | リストボックスが開いている場合は"true"を設定し、閉じている場合は"false"を設定します。                              |
+|                                    | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                          |
 |                                    | `aria-controls`           | リストボックスが開いている場合は関連した`MultiSelectList`の`id`を設定し、閉じている場合は`undefined`を設定します。 |
 |                                    | `aria-readonly`           | `isReadOnly`が設定されている場合は`"true"`を設定します。                                                           |
 |                                    | `aria-disabled`           | `isDisabled`が設定されている場合は`"true"`を設定します。                                                           |
@@ -62,7 +62,7 @@ tab: アクセシビリティ
 | `MultiSelectList` <Tag>内部</Tag>  | `role="listbox"`          | リストボックスであることを示します。                                                                               |
 |                                    | `id`                      | `MultiSelectField`と関連付けるために使用する`id`。                                                                 |
 |                                    | `aria-multiselectable`    | 複数選択可能であることを示します。                                                                                 |
-|                                    | `aria-hidden`             | リストボックスが開いている場合は"true"を設定し、閉じている場合は"false"を設定します。                              |
+|                                    | `aria-hidden`             | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                          |
 | `OptionGroup`                      | `role="group"`            | グループであることを示します。                                                                                     |
 |                                    | `aria-labelledby`         | 関連した`OptionGroupLabel`の`id`を設定します。                                                                     |
 | `OptionGroupLabel` <Tag>内部</Tag> | `role="presentation"`     | プレゼンテーションであることを示します。                                                                           |

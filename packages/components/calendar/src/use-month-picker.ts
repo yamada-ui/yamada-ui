@@ -85,7 +85,6 @@ export const useMonthPicker = ({
   })
 
   const {
-    id,
     allowInput,
     dateToString,
     inputRef,
@@ -184,7 +183,6 @@ export const useMonthPicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -201,14 +199,12 @@ export const useMonthPicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
     ],
   )
 
   return {
-    id,
     value,
     getCalendarProps,
     getContainerProps,

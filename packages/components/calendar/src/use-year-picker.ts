@@ -59,7 +59,6 @@ export const useYearPicker = ({
   })
 
   const {
-    id,
     allowInput,
     dateToString,
     inputRef,
@@ -153,7 +152,6 @@ export const useYearPicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -170,14 +168,12 @@ export const useYearPicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
     ],
   )
 
   return {
-    id,
     value,
     getCalendarProps,
     getContainerProps,

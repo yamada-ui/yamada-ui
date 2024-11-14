@@ -40,7 +40,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendants,
-  useAutocompleteDescendantsContext,
 } from "./autocomplete-context"
 import { AutocompleteOption } from "./autocomplete-option"
 import { AutocompleteOptionGroup } from "./autocomplete-option-group"
@@ -331,23 +330,12 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     onSearch: onSearchProp,
     ...rest
   } = useFormControlProps(props)
-  const {
-    "aria-readonly": _ariaReadonly,
-    onFocus: onFocusProp,
-    ...formControlProps
-  } = pickObject(rest, formControlProperties)
-  const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
-  const { id } = rest
-
   const descendants = useAutocompleteDescendants()
-
   const containerRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
   const isComposition = useRef<boolean>(false)
   const prevValue = useRef<T | undefined>(undefined)
-
   const [resolvedItems, setResolvedItems] = useState<
     AutocompleteItem[] | undefined
   >(items ? JSON.parse(JSON.stringify(items)) : undefined)
@@ -371,6 +359,13 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
+  const {
+    "aria-readonly": _ariaReadonly,
+    onFocus: onFocusProp,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
+  const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
+
   const isFocused = focusedIndex > -1
   const isCreate = focusedIndex === -2 && allowCreate
   const isMulti = isArray(value)
@@ -400,7 +395,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     ({ index, node }) =>
       "target" in node.dataset && !selectedIndexes.includes(index),
   )
-
+  const activedescendantId = descendants.value(focusedIndex)?.node.id
   const validChildren = getValidChildren(children)
 
   const computedChildren = useMemo(
@@ -771,8 +766,6 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   }, [])
 
   const onCreate = useCallback(() => {
-    if (!listRef.current) return
-
     const newItem: AutocompleteItem = { label: inputValue, value: inputValue }
 
     let newItems: AutocompleteItem[] = []
@@ -1089,6 +1082,10 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
+      "aria-activedescendant": activedescendantId,
+      "aria-autocomplete": "list",
+      "aria-haspopup": "listbox",
+      role: "combobox",
       tabIndex: -1,
       ...props,
       ...formControlProps,
@@ -1098,6 +1095,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       onKeyDown: handlerAll(props.onKeyDown, onKeyDownProp, onKeyDown),
     }),
     [
+      activedescendantId,
       formControlProps,
       placeholder,
       isOpen,
@@ -1109,7 +1107,6 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   )
 
   return {
-    id,
     allowCreate,
     allowFree,
     children: children ?? computedChildren,
@@ -1124,7 +1121,6 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     isHit,
     isOpen,
     label,
-    listRef,
     omitSelectedValues,
     pickOptions,
     rebirthOptions,
@@ -1156,21 +1152,14 @@ export type UseAutocompleteReturn = ReturnType<typeof useAutocomplete>
 
 export const useAutocompleteInput = () => {
   const {
-    id,
-    focusedIndex,
     inputRef,
     isAllSelected,
-    isOpen,
-    listRef,
     formControlProps,
     inputProps,
     onCompositionEnd,
     onCompositionStart,
     onSearch,
   } = useAutocompleteContext()
-  const descendants = useAutocompleteDescendantsContext()
-  const activedescendantId = descendants.value(focusedIndex)?.node.id
-  const listId = listRef.current?.id
 
   useUpdateEffect(() => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
@@ -1181,19 +1170,12 @@ export const useAutocompleteInput = () => {
       return {
         ref: mergeRefs(inputRef, ref),
         ...formControlProps,
-        "aria-activedescendant": activedescendantId,
-        "aria-autocomplete": "list",
-        "aria-controls": listId,
-        "aria-expanded": isOpen,
-        "aria-haspopup": "listbox",
         autoCapitalize: "none",
         autoComplete: "off",
-        role: "combobox",
         spellCheck: "false",
         tabIndex: isAllSelected ? -1 : 0,
         ...inputProps,
         ...props,
-        id,
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents:
           formControlProps.disabled || isAllSelected ? "none" : "auto",
@@ -1211,13 +1193,9 @@ export const useAutocompleteInput = () => {
       }
     },
     [
-      listId,
-      activedescendantId,
-      isOpen,
       inputProps,
       inputRef,
       formControlProps,
-      id,
       isAllSelected,
       onSearch,
       onCompositionStart,

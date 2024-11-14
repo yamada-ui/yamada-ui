@@ -26,7 +26,7 @@ The `Resizable` follows the [WAI-ARIA - Window Splitter Pattern](https://www.w3.
 
 | Component          | Roles and Attributes | Usage                                                                                          |
 | ------------------ | -------------------- | ---------------------------------------------------------------------------------------------- |
-| `ResizableItem`    | `role="separator"`   | Used to associate with `ResizableTrigger`.                                                     |
+| `ResizableItem`    | `id`                 | Used to associate with `ResizableTrigger`.                                                     |
 | `ResizableTrigger` | `role="separator"`   | Indicates that this is a separator.                                                            |
 |                    | `aria-controls`      | Sets the `id` of the associated `ResizableItem`.                                               |
 |                    | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `direction` value. Default is `"horizontal"`. |

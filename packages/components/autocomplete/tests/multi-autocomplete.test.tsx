@@ -32,10 +32,9 @@ describe("<MultiAutoComplete />", () => {
         </MultiAutocomplete>,
       )
 
-      expect(screen.getByRole("combobox")).toHaveAttribute(
-        "placeholder",
-        "Select Option",
-      )
+      expect(
+        screen.getByRole("combobox").querySelector("input"),
+      ).toHaveAttribute("placeholder", "Select Option")
 
       const multiAutocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(multiAutocomplete).toBeInTheDocument()
@@ -463,8 +462,8 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, CREATE_OPTION_VALUE)
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -506,8 +505,8 @@ describe("<MultiAutoComplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -530,8 +529,8 @@ describe("<MultiAutoComplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -556,8 +555,8 @@ describe("<MultiAutoComplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -580,8 +579,8 @@ describe("<MultiAutoComplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -608,8 +607,8 @@ describe("<MultiAutoComplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         await waitFor(() => expect(consoleWarnSpy).toHaveBeenCalledOnce())
@@ -654,8 +653,8 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, CREATE_OPTION_VALUE)
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)

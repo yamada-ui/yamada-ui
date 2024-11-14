@@ -190,9 +190,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.segmentedControl}
-      label="Who is your favorite character?"
+      legend="Who is your favorite character?"
       errorMessage={
         errors.segmentedControl ? errors.segmentedControl.message : undefined
       }
@@ -215,7 +215,7 @@ return (
           </SegmentedControl>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

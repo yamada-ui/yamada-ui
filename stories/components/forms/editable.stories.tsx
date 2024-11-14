@@ -49,7 +49,7 @@ export const withStartWithEditView: Story = () => {
   return (
     <Editable defaultValue="オッス！オラ悟空！" startWithEditView>
       <EditablePreview />
-      <EditableInput aria-label="Input character serif" />
+      <EditableInput aria-legend="Input character serif" />
     </Editable>
   )
 }
@@ -191,8 +191,9 @@ export const customControl: Story = () => {
         <IconButton
           icon={<CheckIcon />}
           {...getSubmitProps()}
-          aria-label="Submit"
+          aria-legend="Submit"
         />
+
         <IconButton
           icon={<XIcon />}
           {...getCancelProps()}

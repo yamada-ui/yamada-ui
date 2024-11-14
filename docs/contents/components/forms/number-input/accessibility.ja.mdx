@@ -15,11 +15,11 @@ tab: アクセシビリティ
 
 ```tsx live=false
 <VStack gap="sm">
-  <Text as="h3" id="group">
+  <Text as="h3" id="label">
     Age
   </Text>
 
-  <NumberInput aria-labelledby="group" />
+  <NumberInput aria-labelledby="label" />
 </VStack>
 ```
 
@@ -36,15 +36,11 @@ const weekday = [
   "Saturday",
 ]
 
-const [value, onChange] = useState<string | number>(0)
-
 return (
   <NumberInput
     getAriaValueText={(value) => weekday[Number(value)]}
     max={6}
     min={0}
-    value={value}
-    onChange={onChange}
   />
 )
 ```
@@ -60,10 +56,13 @@ return (
 
 ## ARIAロールと属性
 
-| コンポーネント | ロールと属性        | 使い方                                                             |
-| -------------- | ------------------- | ------------------------------------------------------------------ |
-| `NumberInput`  | `role="spinbutton"` | スピンボタンであることを示します。                                 |
-|                | `aria-valuemin`     | `min`の値を設定します。デフォルトは`Number.MIN_SAFE_INTEGER`です。 |
-|                | `aria-valuemax`     | `max`の値を設定します。デフォルトは`Number.MAX_SAFE_INTEGER`です。 |
-|                | `aria-valuenow`     | 現在の値を設定します。                                             |
-|                | `aria-valuetext`    | 現在の値を設定します。                                             |
+| コンポーネント                           | ロールと属性        | 使い方                                                             |
+| ---------------------------------------- | ------------------- | ------------------------------------------------------------------ |
+| `NumberInput`                            | `role="group"`      | グループであることを示します。                                     |
+| `NumberInputField` <Tag>内部</Tag>       | `role="spinbutton"` | スピンボタンであることを示します。                                 |
+|                                          | `aria-valuemin`     | `min`の値を設定します。デフォルトは`Number.MIN_SAFE_INTEGER`です。 |
+|                                          | `aria-valuemax`     | `max`の値を設定します。デフォルトは`Number.MAX_SAFE_INTEGER`です。 |
+|                                          | `aria-valuenow`     | 現在の値を設定します。                                             |
+|                                          | `aria-valuetext`    | 現在の値を設定します。                                             |
+| `NumberIncrementStepper` <Tag>内部</Tag> | `aria-label`        | `"Increase"`を設定します。                                         |
+| `NumberDecrementStepper` <Tag>内部</Tag> | `aria-label`        | `"Decrease"`を設定します。                                         |

@@ -81,7 +81,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
         aria-activedescendant={activedescendantId}
         aria-labelledby={buttonRef.current?.id}
         role="menu"
-        tabIndex={-1}
         __css={{ ...styles.content }}
         {...contentProps}
         onKeyDown={handlerAll(contentProps?.onKeyDown, onKeyDown)}
@@ -89,6 +88,7 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
         <ui.div
           ref={mergeRefs(menuRef, ref)}
           className={cx("ui-menu__list", className)}
+          tabIndex={-1}
           __css={{ ...styles.list }}
           {...rest}
         >

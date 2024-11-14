@@ -152,6 +152,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
     const onKeyDown = useCallback(
       (ev: KeyboardEvent<HTMLDivElement>) => {
         if (ev.key === " ") ev.key = ev.code
+
         const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isNested
             ? funcAll(onUpstreamRestoreFocus, onClose)

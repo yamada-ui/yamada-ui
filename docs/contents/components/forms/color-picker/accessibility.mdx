@@ -9,7 +9,7 @@ with_description: true
 tab: Accessibility
 ---
 
-The `ColorPicker` follows the[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+The `ColorPicker` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
 
 If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `ColorPicker`.
 
@@ -38,7 +38,7 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Co
 | Component                                   | Roles and Attributes   | Usage                                                                              |
 | ------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
 | `ColorPickerField` <Tag>Internal</Tag>      | `role="combobox"`      | Indicates that this is a combobox.                                                 |
-|                                             | `aria-expanded`        | Set to "true" when the dialog is open, "false" when closed.                        |
+|                                             | `aria-expanded`        | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
 |                                             | `aria-controls`        | Set to the `id` of the related `ColorSelector` when open, `undefined` when closed. |
 |                                             | `aria-readonly`        | Set to `"true"` when `isReadOnly` is set.                                          |
 |                                             | `aria-disabled`        | Set to `"true"` when `isDisabled` is set.                                          |
@@ -51,14 +51,14 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Co
 |                                             | `aria-label`           | `"Pick a color"` is set.                                                           |
 | `ColorSelector` <Tag>Internal</Tag>         | `role="dialog"`        | Indicates that this is a dialog.                                                   |
 |                                             | `id`                   | The `id` used to associate with `ColorPickerField`.                                |
-|                                             | `aria-hidden`          | Set to "true" when the dialog is open, "false" when closed.                        |
+|                                             | `aria-hidden`          | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
 | `SaturationSliderThumb` <Tag>Internal</Tag> | `role="slider"`        | Indicates that the element is a slider.                                            |
 |                                             | `aria-roledescription` | `"2D slider"` is set.                                                              |
 |                                             | `aria-label`           | `"Saturation and brightness thumb"` is set.                                        |
 |                                             | `aria-valuemin`        | Sets the `0` value.                                                                |
 |                                             | `aria-valuemax`        | Sets the `100` value.                                                              |
 |                                             | `aria-valuenow`        | The current value is set.                                                          |
-|                                             | `aria-valuetext`       | Sets the current value, such as `saturation 0.72, brightness 0.96`.                |
+|                                             | `aria-valuetext`       | Sets the current value, such as `"saturation 0.72, brightness 0.96"`.              |
 | `HueSliderThumb` <Tag>Internal</Tag>        | `role="slider"`        | Indicates that this is a slider.                                                   |
 |                                             | `aria-label`           | Sets `"Slider thumb"`.                                                             |
 |                                             | `aria-valuemin`        | Sets the `0` value.                                                                |

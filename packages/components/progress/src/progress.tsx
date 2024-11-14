@@ -109,17 +109,23 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     ...styles.track,
   }
 
+  const ariaProps: HTMLUIProps = !isAnimation
+    ? {
+        "aria-valuemax": max,
+        "aria-valuemin": min,
+        "aria-valuenow": value,
+        role: "meter",
+      }
+    : {}
+
   return (
     <ProgressProvider value={styles}>
       <ui.div
         ref={ref}
         className={cx("ui-progress", className)}
-        aria-valuemax={max}
-        aria-valuemin={min}
-        aria-valuenow={value}
         borderRadius={borderRadius}
-        role="meter"
         __css={css}
+        {...ariaProps}
         {...rest}
       >
         <ProgressFilledTrack

@@ -157,15 +157,21 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           transitionTimingFunction: "ease",
         }
 
+    const ariaProps: HTMLUIProps = !isAnimation
+      ? {
+          "aria-valuemax": max,
+          "aria-valuemin": min,
+          "aria-valuenow": value,
+          role: "meter",
+        }
+      : {}
+
     return (
       <ui.div
         ref={ref}
         className={cx("ui-circle-progress", className)}
-        aria-valuemax={max}
-        aria-valuemin={min}
-        aria-valuenow={value}
-        role="meter"
         __css={css}
+        {...ariaProps}
         {...rest}
       >
         <CircleProgressShape

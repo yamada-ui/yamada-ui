@@ -161,6 +161,10 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-circle-progress", className)}
+        aria-valuemax={max}
+        aria-valuemin={min}
+        aria-valuenow={value}
+        role="meter"
         __css={css}
         {...rest}
       >
@@ -226,7 +230,7 @@ const CircleProgressShape: FC<CircleProgressShapeProps> = ({
     ...(isAnimation ? { animation } : {}),
   }
 
-  return <ui.svg viewBox="0 0 100 100" __css={css} {...rest} />
+  return <ui.svg aria-hidden viewBox="0 0 100 100" __css={css} {...rest} />
 }
 
 CircleProgressShape.displayName = "CircleProgressShape"

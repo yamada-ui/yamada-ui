@@ -7,24 +7,37 @@ with_description: true
 tab: Accessibility
 ---
 
-Setting `aria-label` on `Editable` will make it readable by screen readers.
+If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `Editable`.
 
 ```tsx live=false
-<Editable defaultValue="オッス！オラ悟空！" aria-label="My Editable">
+<Editable defaultValue="オッス！オラ悟空！" aria-label="Feedback">
   <EditablePreview />
   <EditableInput />
 </Editable>
 ```
 
+```tsx live=false
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Feedback
+  </Text>
+
+  <Editable defaultValue="オッス！オラ悟空！" aria-labelledby="label">
+    <EditablePreview />
+    <EditableInput />
+  </Editable>
+</VStack>
+```
+
 ## ARIA Roles and Attributes
 
-| Component          | Role and Attributes | Usage                                                   |
-| ------------------ | ------------------- | ------------------------------------------------------- |
-| `EditableInput`    | `aria-invalid`      | Set to `"true"` if `isInvalid` is set on `"Editable"`.  |
-|                    | `aria-disabled`     | Set to `"true"` if `isDisabled` is set on `"Editable"`. |
-|                    | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set on `"Editable"`. |
-|                    | `aria-required`     | Set to `"true"` if `isRequired` is set on `"Editable"`. |
-| `EditableTextarea` | `aria-invalid`      | Set to `"true"` if `isInvalid` is set on `"Editable"`.  |
-|                    | `aria-disabled`     | Set to `"true"` if `isDisabled` is set on `"Editable"`. |
-|                    | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set on `"Editable"`. |
-|                    | `aria-required`     | Set to `"true"` if `isRequired` is set on `"Editable"`. |
+| Component          | Role and Attributes | Usage                                   |
+| ------------------ | ------------------- | --------------------------------------- |
+| `EditableInput`    | `aria-invalid`      | Set to `"true"` if `isInvalid` is set.  |
+|                    | `aria-disabled`     | Set to `"true"` if `isDisabled` is set. |
+|                    | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set. |
+|                    | `aria-required`     | Set to `"true"` if `isRequired` is set. |
+| `EditableTextarea` | `aria-invalid`      | Set to `"true"` if `isInvalid` is set.  |
+|                    | `aria-disabled`     | Set to `"true"` if `isDisabled` is set. |
+|                    | `aria-readonly`     | Set to `"true"` if `isReadOnly` is set. |
+|                    | `aria-required`     | Set to `"true"` if `isRequired` is set. |

@@ -143,9 +143,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.input}
-      label="Name"
+      legend="Name"
       errorMessage={errors.input ? errors.input.message : undefined}
     >
       <Controller
@@ -159,11 +159,11 @@ return (
           </Editable>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.textarea}
-      label="Feedback"
+      legend="Feedback"
       errorMessage={errors.textarea ? errors.textarea.message : undefined}
     >
       <Controller
@@ -180,7 +180,7 @@ return (
           </Editable>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

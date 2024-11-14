@@ -37,6 +37,8 @@ export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
           <ui.div
             ref={ref}
             className={cx("ui-context-menu", className)}
+            aria-haspopup="menu"
+            role="application"
             __css={css}
             {...rest}
             onContextMenu={handlerAll(rest.onContextMenu, onContextMenu)}

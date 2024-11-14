@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { NativeSelectItem } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
-import { ChevronsDown } from "@yamada-ui/lucide"
+import { ChevronsDownIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -301,7 +301,7 @@ export const customIcon: Story = () => {
       <NativeSelect
         aria-label="Native Select"
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown /> }}
+        iconProps={{ children: <ChevronsDownIcon /> }}
       >
         <NativeOption value="孫悟空">孫悟空</NativeOption>
         <NativeOption value="ベジータ">ベジータ</NativeOption>

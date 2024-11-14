@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { YearPicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
@@ -273,7 +273,7 @@ export const customIcon: Story = () => {
     <>
       <YearPicker placeholder="YYYY" iconProps={{ color: "primary" }} />
 
-      <YearPicker placeholder="YYYY" iconProps={{ children: <Ghost /> }} />
+      <YearPicker placeholder="YYYY" iconProps={{ children: <GhostIcon /> }} />
     </>
   )
 }

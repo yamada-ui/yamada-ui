@@ -8,8 +8,8 @@ import type {
 import { forwardRef, ui } from "@yamada-ui/core"
 import { useClickable } from "@yamada-ui/use-clickable"
 import {
-  ariaAttr,
   cx,
+  dataAttr,
   funcAll,
   handlerAll,
   isActiveElement,
@@ -17,7 +17,7 @@ import {
   mergeRefs,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useId, useRef, useState } from "react"
 import {
   UpstreamMenuItemProvider,
   useMenu,
@@ -66,6 +66,7 @@ export interface MenuItemProps extends HTMLUIProps, MenuItemOptions {}
 export const MenuItem = forwardRef<MenuItemProps, "div">(
   (
     {
+      id,
       className,
       children,
       closeOnSelect: customCloseOnSelect,
@@ -90,16 +91,25 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       onUpstreamClose,
     } = useMenu()
     const { onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
-
-    const trulyDisabled = isDisabled && !isFocusable
-
+    const [isDownstreamOpen, setDownstreamOpen] = useState<boolean>(false)
+    const uuid = useId()
     const itemRef = useRef<HTMLDivElement>(null)
     const hasDownstreamRef = useRef<boolean>(false)
     const onKeyDownRef = useRef<KeyboardEventHandler<HTMLDivElement>>(
       () => void 0,
     )
+
+    id ??= uuid
+
+    const trulyDisabled = isDisabled && !isFocusable
+    const type = itemRef.current?.getAttribute("type")
+    const role = !!type
+      ? type === "checkbox"
+        ? "menuitemcheckbox"
+        : "menuitemradio"
+      : "menuitem"
+
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
-    const [isDownstreamOpen, setDownstreamOpen] = useState<boolean>(false)
 
     const isFocused = index === focusedIndex
 
@@ -141,9 +151,14 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent<HTMLDivElement>) => {
+        if (ev.key === " ") ev.key = ev.code
+
         const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isNested
             ? funcAll(onUpstreamRestoreFocus, onClose)
+            : undefined,
+          Space: !hasDownstreamRef.current
+            ? funcAll(onUpstreamClose, onClose)
             : undefined,
         }
 
@@ -156,10 +171,11 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
 
         action()
       },
-      [onUpstreamRestoreFocus, onClose, isNested],
+      [isNested, onUpstreamRestoreFocus, onClose, onUpstreamClose],
     )
 
     const rest = useClickable<HTMLDivElement>({
+      clickOnSpace: false,
       focusOnClick: false,
       ...props,
       ref: mergeRefs(register, itemRef, ref),
@@ -225,12 +241,13 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
         }}
       >
         <ui.div
-          {...rest}
-          {...(isDownstreamOpen ? { "data-active": "" } : {})}
+          id={id}
           className={cx("ui-menu__item", className)}
-          role="menuitem"
-          tabIndex={isFocused ? 0 : -1}
+          data-focus={dataAttr(isDownstreamOpen)}
           __css={css}
+          {...rest}
+          role={role}
+          tabIndex={!isDownstreamOpen && isFocused ? 0 : -1}
         >
           {icon ? <MenuIcon>{icon}</MenuIcon> : null}
           {children}
@@ -278,7 +295,7 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
       <MenuItem
         ref={ref}
         className={cx("ui-menu__item--option", className)}
-        aria-checked={ariaAttr(isChecked)}
+        aria-checked={isChecked}
         closeOnSelect={closeOnSelect}
         {...rest}
       >

@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Activity } from "@yamada-ui/lucide"
+import { ActivityIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
+  Fieldset,
   Flex,
-  FormControl,
   RangeSlider,
   RangeSliderEndThumb,
   RangeSliderFilledTrack,
@@ -262,13 +262,13 @@ export const isDisabled: Story = () => {
     <>
       <RangeSlider isDisabled />
 
-      <FormControl
-        helperMessage="Please select your preferred volume."
+      <Fieldset
+        helperMessage="Please select your preferred price range."
         isDisabled
-        label="volume (sound)"
+        legend="Hotel Price Range"
       >
         <RangeSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -278,13 +278,13 @@ export const isReadonly: Story = () => {
     <>
       <RangeSlider isReadOnly />
 
-      <FormControl
-        helperMessage="Please select your preferred volume."
+      <Fieldset
+        helperMessage="Please select your preferred price range."
         isReadOnly
-        label="volume (sound)"
+        legend="Hotel Price Range"
       >
         <RangeSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -300,13 +300,13 @@ export const isInvalid: Story = () => {
         onChange={onChange}
       />
 
-      <FormControl
-        errorMessage="Min volume should be set to 20 or higher."
+      <Fieldset
+        errorMessage="Minimum price should be set to 20 or higher."
         isInvalid={value[0] < 20}
-        label="volume (sound)"
+        legend="Hotel Price Range"
       >
         <RangeSlider value={value} onChange={onChange} />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -350,18 +350,18 @@ export const customThumb: Story = () => {
       <RangeSlider
         thumbProps={{
           boxSize: "6",
-          children: <Activity />,
+          children: <ActivityIcon />,
           color: "blue.500",
         }}
       />
 
       <RangeSlider>
         <RangeSliderStartThumb boxSize="6" color="blue.500">
-          <Activity />
+          <ActivityIcon />
         </RangeSliderStartThumb>
 
         <RangeSliderEndThumb boxSize="6" color="blue.500">
-          <Activity />
+          <ActivityIcon />
         </RangeSliderEndThumb>
       </RangeSlider>
     </>
@@ -483,17 +483,17 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.rangeSlider?.message}
         isInvalid={!!errors.rangeSlider}
-        label="Volume"
+        legend="Hotel Price Range"
       >
         <Controller
           name="rangeSlider"
           control={control}
           render={({ field }) => <RangeSlider {...field} />}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

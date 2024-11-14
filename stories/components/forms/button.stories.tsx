@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  ArrowRight,
-  Check,
-  Mail,
-  Minus,
-  Moon,
-  Plus,
-  Sun,
+  ArrowRightIcon,
+  CheckIcon,
+  MailIcon,
+  MinusIcon,
+  MoonIcon,
+  PlusIcon,
+  SunIcon,
 } from "@yamada-ui/lucide"
 import {
   Button,
@@ -162,23 +162,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
+      <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        rightIcon={<ArrowRight />}
+        endIcon={<ArrowRightIcon />}
       >
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
+      <Button colorScheme="warning" variant="ghost" startIcon={<MailIcon />}>
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
+      <Button colorScheme="danger" variant="link" startIcon={<CheckIcon />}>
         Button
       </Button>
     </Wrap>
@@ -191,27 +191,27 @@ export const iconButton: Story = () => {
       <IconButton
         colorScheme="primary"
         aria-label="Plus"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="secondary"
         aria-label="Minus"
-        icon={<Minus fontSize="2xl" />}
+        icon={<MinusIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="warning"
         size="lg"
         aria-label="Light"
-        icon={<Sun fontSize="2xl" />}
+        icon={<SunIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
         aria-label="Dark"
-        icon={<Moon fontSize="2xl" />}
+        icon={<MoonIcon fontSize="2xl" />}
       />
     </Wrap>
   )
@@ -271,7 +271,7 @@ export const buttonGroup: Story = () => {
     <>
       <ButtonGroup variant="outline" isAttached>
         <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<Plus />} />
+        <IconButton aria-label="Add" icon={<PlusIcon />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

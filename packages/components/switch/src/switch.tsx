@@ -87,7 +87,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     getIconProps,
     getInputProps,
     getLabelProps,
-  } = useCheckbox(computedProps)
+  } = useCheckbox({ selectOnEnter: true, ...computedProps })
 
   const cloneIcon = icon
     ? cloneElement(icon, {

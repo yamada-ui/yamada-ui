@@ -13,12 +13,6 @@ import { shouldShowFallbackImage, useImage } from "./use-image"
 
 interface ImageOptions {
   /**
-   * The CSS `box-size` property.
-   *
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
-  /**
    * Fallback image `src` or element to show if image is loading or image fails.
    */
   fallback?: ReactElement | string
@@ -47,7 +41,7 @@ export interface ImageProps
  * @see Docs https://yamada-ui.com/components/media-and-icons/image
  */
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
-  const [styles, { size, ...mergedProps }] = useComponentStyle("Image", props)
+  const [styles, mergedProps] = useComponentStyle("Image", props)
   let {
     src,
     srcSet,
@@ -65,7 +59,6 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  boxSize ??= size
   ignoreFallback = loading != null || ignoreFallback || !fallback
 
   const css = useMemo(

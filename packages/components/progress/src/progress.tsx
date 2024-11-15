@@ -91,8 +91,8 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     hasStripe,
     isAnimation,
     isStripeAnimation,
-    max,
-    min,
+    max = 100,
+    min = 0,
     rounded,
     speed,
     value,
@@ -109,6 +109,15 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     ...styles.track,
   }
 
+  const ariaProps: HTMLUIProps = !isAnimation
+    ? {
+        "aria-valuemax": max,
+        "aria-valuemin": min,
+        "aria-valuenow": value,
+        role: "meter",
+      }
+    : {}
+
   return (
     <ProgressProvider value={styles}>
       <ui.div
@@ -116,6 +125,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
         className={cx("ui-progress", className)}
         borderRadius={borderRadius}
         __css={css}
+        {...ariaProps}
         {...rest}
       >
         <ProgressFilledTrack
@@ -197,7 +207,7 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
     ...styles.filledTrack,
   }
 
-  return <ui.div css={css} __css={__css} {...rest} />
+  return <ui.div css={css} aria-hidden __css={__css} {...rest} />
 }
 
 ProgressFilledTrack.displayName = "ProgressFilledTrack"

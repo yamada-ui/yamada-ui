@@ -72,23 +72,17 @@ To disable the radio button, set `isDisabled` to `true`.
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isDisabled legend="Which notifications would you like to receive?">
     <Radio defaultIsChecked>All Notifications</Radio>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isDisabled legend="Which notifications would you like to receive?">
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
       <Radio value="service">Service Notifications</Radio>
     </RadioGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -111,23 +105,17 @@ To make the radio button read-only, set `isReadOnly` to `true`.
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
     <Radio defaultIsChecked>All Notifications</Radio>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
       <Radio value="service">Service Notifications</Radio>
     </RadioGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -150,17 +138,17 @@ To set the radio button as an invalid input, set `isInvalid` to `true`.
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <FormControl
+  <Fieldset
     isInvalid
-    label="Which notifications would you like to receive?"
+    legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
     <Radio>All Notifications</Radio>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
+  <Fieldset
     isInvalid
-    label="Which notifications would you like to receive?"
+    legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
     <RadioGroup defaultValue="all">
@@ -168,7 +156,7 @@ To set the radio button as an invalid input, set `isInvalid` to `true`.
       <Radio value="important">Important Notifications</Radio>
       <Radio value="service">Service Notifications</Radio>
     </RadioGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -280,9 +268,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.radio}
-      label="Who is your favorite character?"
+      legend="Who is your favorite character?"
       errorMessage={errors.radio ? errors.radio.message : undefined}
     >
       <Controller
@@ -297,7 +285,7 @@ return (
           </RadioGroup>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

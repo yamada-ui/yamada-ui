@@ -58,6 +58,7 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (
     <Button
       as={Link}
+      size="sm"
       variant="outline"
       alignItems="center"
       borderColor="border"
@@ -67,11 +68,7 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
       display="inline-flex"
       fontSize="sm"
       fontWeight="normal"
-      h="8"
       isExternal
-      lineHeight="1.2"
-      px="3"
-      rounded="md"
       textDecoration="inherit"
       transitionDuration="slower"
       transitionProperty="common"

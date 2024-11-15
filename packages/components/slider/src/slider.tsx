@@ -85,6 +85,13 @@ export interface UseSliderOptions {
    */
   focusThumbOnChange?: boolean
   /**
+   * This is used to format the value so that screen readers
+   * can speak out a more human-friendly value.
+   *
+   * It is used to set the `aria-valuetext` property of the input.
+   */
+  getAriaValueText?: (value: number) => string | undefined
+  /**
    * If `true`, the value will be incremented or decremented in reverse.
    */
   isReversed?: boolean
@@ -147,8 +154,11 @@ export const useSlider = ({
   let {
     id,
     name,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
     "aria-valuetext": ariaValueText,
     defaultValue,
+    getAriaValueText: getAriaValueTextProp,
     isReversed,
     max = 100,
     min = 0,
@@ -176,6 +186,7 @@ export const useSlider = ({
 
   const onChangeStart = useCallbackRef(onChangeStartProp)
   const onChangeEnd = useCallbackRef(onChangeEndProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
 
   const [computedValue, setValue] = useControllableState({
     defaultValue: defaultValue ?? min + (max - min) / 2,
@@ -533,7 +544,8 @@ export const useSlider = ({
       }
 
       return {
-        "aria-label": "Slider thumb",
+        "aria-label": ariaLabel ?? "Slider thumb",
+        "aria-labelledby": ariaLabelledBy,
         "aria-readonly": ariaReadonly,
         ...formControlProps,
         ...props,
@@ -543,7 +555,8 @@ export const useSlider = ({
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
-        "aria-valuetext": ariaValueText ?? value.toString(),
+        "aria-valuetext":
+          ariaValueText ?? getAriaValueText(value) ?? value.toString(),
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         role: "slider",
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
@@ -556,19 +569,22 @@ export const useSlider = ({
       thumbPercent,
       thumbSize,
       isVertical,
+      ariaLabel,
+      ariaLabelledBy,
       ariaReadonly,
       formControlProps,
-      isInteractive,
-      focusThumbOnChange,
-      min,
-      max,
-      value,
-      isDragging,
       orientation,
-      onKeyDown,
-      onFocus,
-      onBlur,
+      max,
+      min,
+      value,
       ariaValueText,
+      getAriaValueText,
+      isDragging,
+      focusThumbOnChange,
+      isInteractive,
+      onBlur,
+      onFocus,
+      onKeyDown,
     ],
   )
 

@@ -7,6 +7,12 @@ tab: Accessibility
 order: 3
 ---
 
+When using only icons in `FileButton`, set `aria-label` for the `FileButton`.
+
+```tsx live=false
+<FileButton as={IconButton} icon={<Plus />} aria-label="File upload" />
+```
+
 ## ARIA Roles and Attributes
 
 | Component    | Roles and Attributes | Usage                          |

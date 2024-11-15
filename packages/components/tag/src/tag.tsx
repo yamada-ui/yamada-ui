@@ -13,6 +13,10 @@ import { useRef } from "react"
 
 interface TagOptions {
   /**
+   * Icon to be displayed to the end of the tag.
+   */
+  endIcon?: ReactElement
+  /**
    * If `true`, the tag is disabled.
    *
    * @default false
@@ -20,12 +24,20 @@ interface TagOptions {
   isDisabled?: boolean
   /**
    * Icon to be displayed to the left of the tag.
+   *
+   * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
   /**
    * Icon to be displayed to the right of the tag.
+   *
+   * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement
+  /**
+   * Icon to be displayed to the start of the tag.
+   */
+  startIcon?: ReactElement
   /**
    * Props for tag close button element.
    */
@@ -51,9 +63,11 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const {
     className,
     children,
+    endIcon,
     isDisabled,
     leftIcon,
     rightIcon,
+    startIcon,
     closeButtonProps,
     onClose,
     ...rest
@@ -77,13 +91,13 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {leftIcon}
+      {startIcon ?? leftIcon}
 
       <ui.span lineClamp={1} __css={styles.label}>
         {children}
       </ui.span>
 
-      {rightIcon}
+      {endIcon ?? rightIcon}
 
       {onClose ? (
         <TagCloseButton

@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Skull } from "@yamada-ui/lucide"
+import { SkullIcon } from "@yamada-ui/lucide"
 import { Center } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Center>
@@ -22,7 +22,7 @@ export const basic: Story = () => {
 export const iconWithFrame: Story = () => {
   return (
     <Center bg="gray.500" color="white" minH="6xs" minW="6xs" rounded="full">
-      <Skull fontSize="3xl" />
+      <SkullIcon fontSize="3xl" />
     </Center>
   )
 }

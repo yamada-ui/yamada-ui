@@ -183,9 +183,9 @@ To disable, set `isDisabled` to `true`.
 <VStack>
   <Rating isDisabled defaultValue={3} />
 
-  <FormControl isDisabled label="How satisfied are you with Yamada UI?">
+  <Fieldset isDisabled legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -197,9 +197,9 @@ To make read-only, set `isReadOnly` to `true`.
 <VStack>
   <Rating isReadOnly defaultValue={3} />
 
-  <FormControl isReadOnly label="How satisfied are you with Yamada UI?">
+  <Fieldset isReadOnly legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -229,9 +229,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.rating}
-      label="How satisfied are you with Yamada UI?"
+      legend="How satisfied are you with Yamada UI?"
       errorMessage={errors.rating ? errors.rating.message : undefined}
     >
       <Controller
@@ -239,7 +239,7 @@ return (
         control={control}
         render={({ field }) => <Rating {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

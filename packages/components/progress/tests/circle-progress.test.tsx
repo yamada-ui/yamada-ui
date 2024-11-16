@@ -3,7 +3,7 @@ import { CircleProgress, CircleProgressLabel } from "../src"
 
 describe("<CircleProgress />", () => {
   test("CircleProgress renders correctly", async () => {
-    await a11y(<CircleProgress />)
+    await a11y(<CircleProgress aria-label="Storage space" />)
   })
 
   test("renders correctly without animation", () => {

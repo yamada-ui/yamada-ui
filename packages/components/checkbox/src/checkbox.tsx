@@ -79,6 +79,12 @@ export interface UseCheckboxProps<Y extends number | string = string>
    */
   isIndeterminate?: boolean
   /**
+   * If `true`, the checkbox will be selected when the Enter key is pressed.
+   *
+   * @default false
+   */
+  selectOnEnter?: boolean
+  /**
    * The tab-index property of the underlying input element.
    */
   tabIndex?: number
@@ -117,6 +123,7 @@ export const useCheckbox = <
     defaultIsChecked,
     isChecked: isCheckedProp,
     isIndeterminate,
+    selectOnEnter,
     tabIndex,
     value,
     onChange: onChangeProp,
@@ -169,8 +176,10 @@ export const useCheckbox = <
   const onKeyDown = useCallback(
     ({ key }: KeyboardEvent) => {
       if (key === " ") setActive(true)
+
+      if (selectOnEnter && key === "Enter") inputRef.current?.click()
     },
-    [setActive],
+    [setActive, selectOnEnter],
   )
 
   const onKeyUp = useCallback(

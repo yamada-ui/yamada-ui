@@ -158,7 +158,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
     )
     let {
       className,
-      clearable = true,
+      clearable,
       closeOnSelect = false,
       color,
       component,
@@ -184,7 +184,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       portalProps = { isDisabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
-    clearable = clearable && isClearable
+
     const {
       allowCreate,
       children,
@@ -207,6 +207,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
 
     h ??= height
     minH ??= minHeight
+    clearable ??= isClearable
 
     const css: CSSUIObject = {
       color,

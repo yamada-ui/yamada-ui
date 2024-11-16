@@ -19,7 +19,7 @@ import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
 ## Usage
 
 ```tsx
-<CircleProgress value={19} />
+<CircleProgress aria-label="Storage space" value={19} />
 ```
 
 ### Change Size
@@ -27,7 +27,7 @@ import { CircleProgress, CircleProgressLabel } from "@yamada-ui/react"
 To change the size, set a string or number to `boxSize`.
 
 ```tsx
-<CircleProgress value={18} boxSize={32} />
+<CircleProgress aria-label="Storage space" value={18} boxSize={32} />
 ```
 
 ### Change Thickness
@@ -35,13 +35,14 @@ To change the size, set a string or number to `boxSize`.
 To change the thickness of the progress bar, set a string or number to `thickness`.
 
 ```tsx
-<CircleProgress value={31} thickness={1} />
+<CircleProgress aria-label="Storage space" value={31} thickness={1} />
 ```
 
 ### Add Label
 
 ```tsx
 <CircleProgress
+  aria-label="Storage space"
   boxSize="120px"
   min={0}
   max={1000}
@@ -58,7 +59,7 @@ To change the thickness of the progress bar, set a string or number to `thicknes
 You can round the progress bar by setting `isRounded` to `true`.
 
 ```tsx
-<CircleProgress value={18} isRounded />
+<CircleProgress aria-label="Storage space" value={18} isRounded />
 ```
 
 ### Apply Animation

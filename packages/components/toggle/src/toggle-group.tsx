@@ -48,6 +48,8 @@ interface ToggleGroupOptions<
    * If `true`, all wrapped toggle button will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `orientation` instead.
    */
   isDisabled?: boolean
   /**
@@ -56,6 +58,10 @@ interface ToggleGroupOptions<
    * @default false
    */
   isReadOnly?: boolean
+  /**
+   * The CSS `flex-direction` property.
+   */
+  orientation?: CSSUIObject["flexDirection"]
   /**
    * The value of the toggle button group.
    */
@@ -73,7 +79,10 @@ interface ToggleGroupOptions<
  */
 export interface ToggleGroupProps<
   Y extends (number | string)[] | number | string = string,
-> extends Omit<HTMLUIProps, "defaultValue" | "direction" | "onChange">,
+> extends Omit<
+      HTMLUIProps,
+      "defaultValue" | "direction" | "onChange" | "orientation"
+    >,
     ThemeProps<"Toggle">,
     ToggleGroupOptions<Y> {}
 
@@ -84,9 +93,10 @@ export const ToggleGroup = forwardRef(
       size,
       variant,
       defaultValue,
-      direction: flexDirection,
+      direction,
       isDisabled,
       isReadOnly,
+      orientation: flexDirection = direction,
       value: valueProp,
       onChange: onChangeProp,
       ...rest

@@ -21,16 +21,20 @@ interface CardOptions {
   align?: CSSUIObject["alignItems"]
   /**
    * The CSS `flex-direction` property.
+   * This is deprecated and will be replaced by `orientation`.
+   * If specified at the same time as `orientation`, `orientation` takes precedence.
+   *
+   * @deprecated Use `orientation` instead.
    */
   direction?: CSSUIObject["flexDirection"]
   /**
-   * The CSS `justify-content` property.
+   * The CSS `flex-direction` property.
    */
-  justify?: CSSUIObject["justifyContent"]
+  orientation?: CSSUIObject["flexDirection"]
 }
 
 export interface CardProps
-  extends Omit<HTMLUIProps<"article">, "direction">,
+  extends Omit<HTMLUIProps<"article">, "orientation">,
     ThemeProps<"Card">,
     CardOptions {}
 
@@ -44,8 +48,9 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   const {
     className,
     align: alignItems,
-    direction: flexDirection = "column",
+    direction,
     justify: justifyContent,
+    orientation: flexDirection = direction ?? "column",
     ...rest
   } = omitThemeProps(mergedProps)
 

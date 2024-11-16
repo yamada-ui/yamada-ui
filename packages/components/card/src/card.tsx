@@ -38,7 +38,7 @@ interface CardOptions {
 }
 
 export interface CardProps
-  extends Omit<HTMLUIProps<"article">, "orientation">,
+  extends Omit<HTMLUIProps<"article">, "direction" | "orientation">,
     ThemeProps<"Card">,
     CardOptions {}
 

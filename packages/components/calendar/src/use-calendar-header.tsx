@@ -245,9 +245,10 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
   const getLabelProps: PropGetter<"button"> = useCallback(
     (props = {}) => {
       return {
+        as: type !== "year" ? "button" : "span",
         pointerEvents: type !== "year" ? "auto" : "none",
         ...props,
-        "aria-live": "polite",
+        "aria-live": type !== "year" ? "polite" : undefined,
         tabIndex: !!index ? -1 : 0,
         onClick: handlerAll(props.onClick, onChangeType),
       }

@@ -129,7 +129,7 @@ describe("<Checkbox />", () => {
     )
 
     expect(
-      screen.getByTestId("Checkbox1").getElementsByTagName("span")[0],
+      screen.getByTestId("Checkbox1").getElementsByTagName("div")[0],
     ).toHaveAttribute("data-indeterminate")
   })
 

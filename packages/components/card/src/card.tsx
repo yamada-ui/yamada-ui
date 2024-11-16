@@ -28,6 +28,10 @@ interface CardOptions {
    */
   direction?: CSSUIObject["flexDirection"]
   /**
+   * The CSS `justify-content` property.
+   */
+  justify?: CSSUIObject["justifyContent"]
+  /**
    * The CSS `flex-direction` property.
    */
   orientation?: CSSUIObject["flexDirection"]

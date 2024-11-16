@@ -286,13 +286,13 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup direction="column" gap="sm">
+      <ButtonGroup gap="sm" orientation="column">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" direction="column" isAttached>
+      <ButtonGroup variant="outline" isAttached orientation="column">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

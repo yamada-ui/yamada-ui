@@ -6,6 +6,8 @@ import { useMemo } from "react"
 interface ButtonGroupOptions {
   /**
    * The CSS `flex-direction` property.
+   *
+   * @deprecated Use `orientation` instead.
    */
   direction?: CSSUIObject["flexDirection"]
   /**
@@ -20,10 +22,14 @@ interface ButtonGroupOptions {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * The CSS `flex-direction` property.
+   */
+  orientation?: CSSUIObject["flexDirection"]
 }
 
 export interface ButtonGroupProps
-  extends Omit<HTMLUIProps, "direction">,
+  extends Omit<HTMLUIProps, "direction" | "orientation">,
     ThemeProps<"Button">,
     ButtonGroupOptions {}
 
@@ -47,10 +53,11 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
       size,
       variant,
       columnGap,
-      direction: flexDirection,
+      direction,
       gap,
       isAttached,
       isDisabled,
+      orientation: flexDirection = direction,
       rowGap,
       ...rest
     },

@@ -40,6 +40,14 @@ export interface UsePaginationProps {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the pagination all item will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * The page of the pagination.
@@ -60,6 +68,7 @@ export interface UsePaginationProps {
 export const usePagination = ({
   boundaries: _boundaries = 1,
   defaultPage = 1,
+  disabled,
   isDisabled = false,
   page,
   siblings: _siblings = 1,
@@ -68,6 +77,8 @@ export const usePagination = ({
 }: UsePaginationProps) => {
   const siblings = useValue(_siblings)
   const boundaries = useValue(_boundaries)
+
+  disabled ??= isDisabled
 
   const [currentPage, setCurrentPage] = useControllableState({
     defaultValue: defaultPage,
@@ -139,7 +150,7 @@ export const usePagination = ({
 
   return {
     currentPage,
-    isDisabled,
+    disabled,
     range,
     total,
     onChange,

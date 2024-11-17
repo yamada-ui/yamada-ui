@@ -3,7 +3,7 @@ import { Progress } from "../src"
 
 describe("<Progress />", () => {
   test("Progress renders correctly", async () => {
-    await a11y(<Progress value={100} />)
+    await a11y(<Progress aria-label="Storage space" value={100} />)
   })
 
   test("renders correctly with props", () => {

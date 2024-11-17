@@ -34,6 +34,8 @@ import {
   getResizeHandleElement,
 } from "react-resizable-panels"
 
+type ResizableDirection = "horizontal" | "vertical"
+
 export type As = keyof HTMLElementTagNameMap
 
 interface ResizableGroupProps
@@ -55,6 +57,7 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
   controlRef: RefObject<ResizableGroupControl>
+  direction: ResizableDirection
   isDisabled: boolean
   styles: { [key: string]: CSSUIObject | undefined }
 }
@@ -83,7 +86,7 @@ export interface UseResizableProps {
    *
    * @default "horizontal"
    */
-  direction?: "horizontal" | "vertical"
+  direction?: ResizableDirection
   /**
    * If `true`, the resizable trigger will be disabled.
    */
@@ -175,6 +178,7 @@ export const useResizable = ({
 
   return {
     controlRef,
+    direction,
     isDisabled,
     getContainerProps,
     getGroupProps,
@@ -365,7 +369,11 @@ export const useResizableTrigger = ({
 
   id ??= uuid
 
-  const { controlRef, isDisabled: isGroupDisabled } = useResizableContext()
+  const {
+    controlRef,
+    direction,
+    isDisabled: isGroupDisabled,
+  } = useResizableContext()
   const [isActive, setIsActive] = useState<boolean>(false)
 
   const trulyDisabled = disabled || isDisabled || isGroupDisabled
@@ -395,6 +403,7 @@ export const useResizableTrigger = ({
       ({
         ...props,
         id,
+        "aria-orientation": direction,
         disabled: trulyDisabled,
         tagName: as,
         ...rest,
@@ -412,7 +421,7 @@ export const useResizableTrigger = ({
           setIsActive(isActive),
         ),
       }) as PanelResizeHandleProps,
-    [id, as, trulyDisabled, rest, onDoubleClick, isActive],
+    [id, as, direction, trulyDisabled, rest, onDoubleClick, isActive],
   )
 
   const getIconProps: PropGetter = useCallback(

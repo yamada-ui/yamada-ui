@@ -183,9 +183,9 @@ interface PopoverContext
     "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose"
   > {
   id: string
-  describedbyId: string
+  bodyRef: RefObject<HTMLElement>
   forceUpdate: () => undefined | void
-  labelledbyId: string
+  headerRef: RefObject<HTMLElement>
   styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
@@ -227,11 +227,11 @@ export const Popover: FC<PopoverProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const id = useId()
-  const labelledbyId = useId()
-  const describedbyId = useId()
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLElement>(null)
+  const bodyRef = useRef<HTMLElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
   const { present, onAnimationComplete } = useAnimationObserver({
     ref: popoverRef,
@@ -290,9 +290,9 @@ export const Popover: FC<PopoverProps> = (props) => {
     (props = {}, ref = null) => {
       const popoverProps: MotionProps & RefAttributes<any> = {
         id,
-        "aria-describedby": describedbyId,
+        "aria-describedby": bodyRef.current?.id,
         "aria-hidden": !isOpen,
-        "aria-labelledby": labelledbyId,
+        "aria-labelledby": headerRef.current?.id,
         role: "dialog",
         ...props,
         ref: mergeRefs(popoverRef, ref),
@@ -347,8 +347,6 @@ export const Popover: FC<PopoverProps> = (props) => {
       trigger,
       relatedRef,
       id,
-      labelledbyId,
-      describedbyId,
     ],
   )
 
@@ -458,12 +456,12 @@ export const Popover: FC<PopoverProps> = (props) => {
       value={{
         id,
         animation,
+        bodyRef,
         closeOnButton,
-        describedbyId,
         duration,
         forceUpdate,
+        headerRef,
         isOpen,
-        labelledbyId,
         styles,
         getAnchorProps,
         getPopoverProps,

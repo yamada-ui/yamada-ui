@@ -18,7 +18,7 @@ interface CalendarHeaderOptions {
   /**
    * Props for calendar control button element.
    */
-  controlProps?: Omit<CalendarControlProps, "operation">
+  controlProps?: Omit<CalendarControlProps, "aria-label" | "operation">
   /**
    * Props for calendar label button element.
    */
@@ -26,11 +26,11 @@ interface CalendarHeaderOptions {
   /**
    * Props for calendar next control button element.
    */
-  nextProps?: Omit<CalendarControlProps, "operation">
+  nextProps?: Omit<CalendarControlProps, "aria-label" | "operation">
   /**
    * Props for calendar previous control button element.
    */
-  prevProps?: Omit<CalendarControlProps, "operation">
+  prevProps?: Omit<CalendarControlProps, "aria-label" | "operation">
 }
 
 export interface CalendarHeaderProps

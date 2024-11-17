@@ -158,6 +158,7 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
                           color={isSelected ? "white" : "muted"}
                         />
                       }
+                      label={label}
                       {...rest}
                     >
                       {label}
@@ -175,16 +176,17 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
 SidebarGroup.displayName = "SidebarGroup"
 
 interface SidebarButtonProps extends ButtonProps {
+  label: string
   icon?: ReactElement
 }
 
 const SidebarButton: FC<SidebarButtonProps> = memo(
-  ({ children, icon, ...rest }) => {
+  ({ children, icon, label, ...rest }) => {
     const { isCollapse } = useSidebar()
 
     return isCollapse ? (
       <Tooltip label={children} placement="right">
-        <IconButton icon={icon} {...rest} />
+        <IconButton aria-label={`Go to ${label}`} icon={icon} {...rest} />
       </Tooltip>
     ) : (
       <Button

@@ -104,7 +104,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-interface ColorModeButtonProps extends IconButtonProps {
+interface ColorModeButtonProps extends Omit<IconButtonProps, 'aria-label'> {
   menuProps?: MenuProps
 }
 
@@ -162,7 +162,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
 ColorModeButton.displayName = 'ColorModeButton'
 
-interface ThemeSchemeButtonProps extends IconButtonProps {
+interface ThemeSchemeButtonProps extends Omit<IconButtonProps, 'aria-label'> {
   popoverProps?: PopoverProps
 }
 

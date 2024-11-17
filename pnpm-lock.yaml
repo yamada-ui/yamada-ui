@@ -2705,6 +2705,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/status:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/stepper:
     dependencies:
       '@yamada-ui/core':
@@ -3751,6 +3767,9 @@ importers:
       '@yamada-ui/stat':
         specifier: workspace:*
         version: link:../components/stat
+      '@yamada-ui/status':
+        specifier: workspace:*
+        version: link:../components/status
       '@yamada-ui/stepper':
         specifier: workspace:*
         version: link:../components/stepper

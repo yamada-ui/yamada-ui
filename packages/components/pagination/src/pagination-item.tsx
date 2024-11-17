@@ -1,15 +1,15 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { ReactNode } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+  EllipsisIcon,
+} from "@yamada-ui/lucide"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import {
-  PaginationEllipsisIcon,
-  PaginationFirstIcon,
-  PaginationLastIcon,
-  PaginationNextIcon,
-  PaginationPrevIcon,
-} from "./pagination-icon"
 import { usePaginationContext } from "./use-pagination"
 
 interface PaginationItemOptions {
@@ -44,11 +44,11 @@ export interface PaginationItemProps
 const iconMap: {
   [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
-  ellipsis: <PaginationEllipsisIcon />,
-  first: <PaginationFirstIcon />,
-  last: <PaginationLastIcon />,
-  next: <PaginationNextIcon />,
-  prev: <PaginationPrevIcon />,
+  ellipsis: <EllipsisIcon viewBox="0 0 16 16" />,
+  first: <ChevronsLeftIcon viewBox="0 0 16 16" />,
+  last: <ChevronsRightIcon viewBox="0 0 16 16" />,
+  next: <ChevronRightIcon viewBox="0 0 16 16" />,
+  prev: <ChevronLeftIcon viewBox="0 0 16 16" />,
 }
 
 export const PaginationItem = forwardRef<PaginationItemProps, "button">(

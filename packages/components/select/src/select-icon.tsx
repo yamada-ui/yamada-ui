@@ -4,7 +4,7 @@ import type {
   HTMLUIProps,
 } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
-import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
+import { ChevronDownIcon, XIcon } from "@yamada-ui/lucide"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
 import { cloneElement, useRef } from "react"
@@ -50,7 +50,7 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
         __css={css}
         {...rest}
       >
-        {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+        {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
       </ui.div>
     )
   },
@@ -86,7 +86,7 @@ export const SelectClearIcon: FunctionComponent<SelectClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon h="0.5em" w="0.5em" />}
     </SelectIcon>
   )
 }

@@ -466,7 +466,7 @@ export const Checkbox = forwardRef(
           {...getInputProps(inputProps, ref)}
         />
 
-        <ui.span
+        <ui.div
           className="ui-checkbox__icon"
           __css={{
             display: "inline-block",
@@ -478,7 +478,7 @@ export const Checkbox = forwardRef(
           {...getIconProps(resolvedIconProps)}
         >
           {cloneIcon}
-        </ui.span>
+        </ui.div>
 
         <ui.span
           className="ui-checkbox__label"

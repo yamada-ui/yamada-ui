@@ -352,7 +352,7 @@ export const Radio = forwardRef(
           )}
         />
 
-        <ui.span
+        <ui.div
           className="ui-radio__icon"
           {...getIconProps(iconProps)}
           __css={{

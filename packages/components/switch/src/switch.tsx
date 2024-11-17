@@ -124,7 +124,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
 
       {cloneIcon ?? (
         <motion.div layout layoutRoot>
-          <ui.span
+          <ui.div
             className={cx("ui-switch__track", className)}
             __css={{
               alignItems: "center",
@@ -136,14 +136,14 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
             }}
             {...getIconProps()}
           >
-            <motion.span
+            <motion.div
               className={cx("ui-switch__thumb", className)}
               data-checked={dataAttr(isChecked)}
               layout
               transition={transition}
               __css={{ ...styles.thumb }}
             />
-          </ui.span>
+          </ui.div>
         </motion.div>
       )}
 

@@ -191,7 +191,7 @@ export const customControl: Story = () => {
         <IconButton
           icon={<CheckIcon />}
           {...getSubmitProps()}
-          aria-legend="Submit"
+          aria-label="Submit"
         />
 
         <IconButton

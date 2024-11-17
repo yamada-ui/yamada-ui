@@ -27,11 +27,11 @@ tab: アクセシビリティ
 | `CalendarControlPrev` <Tag>内部</Tag> | `aria-label`           | `type`が`"date"`の場合は`"Go to previous month"`を設定し、それ以外は`"Go to previous year"`を設定します。 |
 | `CalendarControlNext` <Tag>内部</Tag> | `aria-label`           | `type`が`"date"`の場合は`"Go to next month"`を設定し、それ以外は`"Go to next year"`を設定します。         |
 | `Month` <Tag>内部</Tag>               | `role="grid"`          | グリッドであることを示します。                                                                            |
-|                                       | `aria-label`           | `October 2024`のように、選択されている年月を設定します。                                                  |
-|                                       | `aria-multiselectable` | 複数選択が可能な場合、`"true"`を設定します。                                                              |
+|                                       | `aria-label`           | `"October 2024"`のように、選択されている年月を設定します。                                                |
+|                                       | `aria-multiselectable` | 複数選択が可能な場合は`"true"`を設定します。                                                              |
 | `MonthList` <Tag>内部</Tag>           | `role="grid"`          | グリッドであることを示します。                                                                            |
-|                                       | `aria-label`           | `2024`のように、選択されている年を設定します。                                                            |
+|                                       | `aria-label`           | `"2024"`のように、選択されている年を設定します。                                                          |
 | `YearList` <Tag>内部</Tag>            | `role="grid"`          | グリッドであることを示します。                                                                            |
-|                                       | `aria-label`           | `From 2021 to 2032`のように、年の範囲を設定します。                                                       |
-| `Button` <Tag>内部</Tag>              | `aria-selected`        | 選択されている場合、`"true"`を設定します。                                                                |
-|                                       | `aria-disabled`        | 無効に設定されている場合、`"true"`を設定します。                                                          |
+|                                       | `aria-label`           | `"From 2021 to 2032"`のように、年の範囲を設定します。                                                     |
+| `Button` <Tag>内部</Tag>              | `aria-selected`        | 項目が選択されている場合は`"true"`を設定し、未選択の場合は`"false"`を設定します。                         |
+|                                       | `aria-disabled`        | 項目が無効の場合は`"true"`を設定します。                                                                  |

@@ -8,7 +8,7 @@ import {
   SmileIcon,
   SmilePlusIcon,
 } from "@yamada-ui/lucide"
-import { Button, FormControl, Rating, VStack } from "@yamada-ui/react"
+import { Button, Fieldset, Rating, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
@@ -79,9 +79,9 @@ export const isDisabled: Story = () => {
     <>
       <Rating defaultValue={3} isDisabled />
 
-      <FormControl isDisabled label="How satisfied are you with Yamada UI?">
+      <Fieldset isDisabled legend="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -91,9 +91,9 @@ export const isReadonly: Story = () => {
     <>
       <Rating defaultValue={3} isReadOnly />
 
-      <FormControl isReadOnly label="How satisfied are you with Yamada UI?">
+      <Fieldset isReadOnly legend="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -232,17 +232,17 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.rating?.message}
         isInvalid={!!errors.rating}
-        label="How satisfied are you with Yamada UI?"
+        legend="How satisfied are you with Yamada UI?"
       >
         <Controller
           name="rating"
           control={control}
           render={({ field }) => <Rating {...field} />}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

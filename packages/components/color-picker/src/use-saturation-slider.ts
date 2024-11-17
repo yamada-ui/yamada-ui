@@ -117,7 +117,7 @@ export const useSaturationSlider = ({
 }: UseSaturationSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
+  const {
     id,
     name,
     defaultValue = [0, 0, 1],
@@ -368,8 +368,8 @@ export const useSaturationSlider = ({
         style,
         "aria-valuemax": 100,
         "aria-valuemin": 0,
-        "aria-valuenow": s,
-        "aria-valuetext": `saturation ${s}, brightness ${v}`,
+        "aria-valuenow": s * 100,
+        "aria-valuetext": `Saturation ${s * 100}%, Brightness ${v * 100}%`,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         role: "slider",
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,

@@ -8,9 +8,9 @@ import {
   useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { useImage } from "@yamada-ui/image"
+import { UserRoundIcon } from "@yamada-ui/lucide"
 import { createContext, cx, dataAttr, handlerAll } from "@yamada-ui/utils"
 import { cloneElement, useState } from "react"
-import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
 
 interface AvatarContext {
@@ -160,7 +160,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   borderRadius,
   crossOrigin,
   format,
-  icon = <AvatarIcon />,
+  icon = <UserRoundIcon boxSize="calc(100% / 1.5)" />,
   ignoreFallback,
   loading,
   referrerPolicy,

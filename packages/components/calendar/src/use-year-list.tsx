@@ -6,6 +6,7 @@ import {
   handlerAll,
   isArray,
   isDisabled,
+  isNumber,
   mergeRefs,
   useUnmountEffect,
   useUpdateEffect,
@@ -151,7 +152,7 @@ export const useYearList = () => {
   )
 
   useUpdateEffect(() => {
-    if (typeof beforeInternalYear.current !== "number") return
+    if (!isNumber(beforeInternalYear.current)) return
 
     onShouldFocus(
       yearRefs,
@@ -182,7 +183,7 @@ export const useYearList = () => {
     HTMLProps<"button">
   > = useCallback(
     ({ index, value, ...props }, ref = null) => {
-      const isControlled = typeof beforeInternalYear.current === "number"
+      const isControlled = isNumber(beforeInternalYear.current)
       const isSelected = getIsSelected(value)
       const isDisabled = value < minYear || value > maxYear
 

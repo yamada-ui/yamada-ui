@@ -107,6 +107,7 @@ const addHelpWanted = async ({
           "fixed",
           "help wanted",
           "question",
+          "triage",
           "wontfix",
         ].includes(label.name ?? ""),
     )

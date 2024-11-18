@@ -15,11 +15,11 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Nu
 
 ```tsx live=false
 <VStack gap="sm">
-  <Text as="h3" id="group">
+  <Text as="h3" id="label">
     Age
   </Text>
 
-  <NumberInput aria-labelledby="group" />
+  <NumberInput aria-labelledby="label" />
 </VStack>
 ```
 
@@ -36,15 +36,11 @@ const weekday = [
   "Saturday",
 ]
 
-const [value, onChange] = useState<string | number>(0)
-
 return (
   <NumberInput
     getAriaValueText={(value) => weekday[Number(value)]}
     max={6}
     min={0}
-    value={value}
-    onChange={onChange}
   />
 )
 ```
@@ -60,10 +56,13 @@ return (
 
 ## ARIA Roles and Attributes
 
-| Component     | Roles and Attributes | Usage                                                       |
-| ------------- | -------------------- | ----------------------------------------------------------- |
-| `NumberInput` | `role="spinbutton"`  | Indicates that it is a spin button.                         |
-|               | `aria-valuemin`      | Sets the `min` value. Default is `Number.MIN_SAFE_INTEGER`. |
-|               | `aria-valuemax`      | Sets the `max` value. Default is `Number.MAX_SAFE_INTEGER`. |
-|               | `aria-valuenow`      | Sets the current value.                                     |
-|               | `aria-valuetext`     | Sets the current value.                                     |
+| Component                                    | Roles and Attributes | Usage                                                       |
+| -------------------------------------------- | -------------------- | ----------------------------------------------------------- |
+| `NumberInput`                                | `role="group"`       | Indicates that it is a group.                               |
+| `NumberInputField` <Tag>Internal</Tag>       | `role="spinbutton"`  | Indicates that it is a spin button.                         |
+|                                              | `aria-valuemin`      | Sets the `min` value. Default is `Number.MIN_SAFE_INTEGER`. |
+|                                              | `aria-valuemax`      | Sets the `max` value. Default is `Number.MAX_SAFE_INTEGER`. |
+|                                              | `aria-valuenow`      | Sets the current value.                                     |
+|                                              | `aria-valuetext`     | Sets the current value.                                     |
+| `NumberIncrementStepper` <Tag>Internal</Tag> | `aria-label`         | Sets `"Increase"`.                                          |
+| `NumberDecrementStepper` <Tag>Internal</Tag> | `aria-label`         | Sets `"Decrease"`.                                          |

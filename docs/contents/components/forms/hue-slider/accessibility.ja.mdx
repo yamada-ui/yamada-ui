@@ -24,15 +24,17 @@ tab: アクセシビリティ
 
 ## ARIAロールと属性
 
-| コンポーネント   | ロールと属性       | 使い方                                                                                                    |
-| ---------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
-| `HueSliderThumb` | `role="slider"`    | スライダーであることを示します。                                                                          |
-|                  | `aria-label`       | `"Slider thumb"`を設定します。                                                                            |
-|                  | `aria-orientation` | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
-|                  | `aria-valuemin`    | `min`の値を設定します。デフォルトは`0`です。                                                              |
-|                  | `aria-valuemax`    | `max`の値を設定します。デフォルトは`100`です。                                                            |
-|                  | `aria-valuenow`    | 現在の値を設定します。                                                                                    |
-|                  | `aria-valuetext`   | `18°, Red`のように、現在の値を設定します。                                                                |
-|                  | `aria-readonly`    | `isReadOnly`が設定されている場合は`"true"`を設定します。                                                  |
-|                  | `aria-disabled`    | `isDisabled`が設定されている場合は`"true"`を設定します。                                                  |
-|                  | `aria-invalid`     | `isInvalid`が設定されている場合は`"true"`を設定します。                                                   |
+| コンポーネント                   | ロールと属性     | 使い方                                                   |
+| -------------------------------- | ---------------- | -------------------------------------------------------- |
+| `HueSliderThumb` <Tag>内部</Tag> | `role="slider"`  | スライダーであることを示します。                         |
+|                                  | `aria-label`     | `"Slider thumb"`を設定します。                           |
+|                                  | `aria-valuemin`  | `min`の値を設定します。デフォルトは`0`です。             |
+|                                  | `aria-valuemax`  | `max`の値を設定します。デフォルトは`360`です。           |
+|                                  | `aria-valuenow`  | 現在の値を設定します。                                   |
+|                                  | `aria-valuetext` | `"18°, Red"`のように、現在の値を設定します。             |
+|                                  | `aria-required`  | `isRequired`が設定されている場合は`"true"`を設定します。 |
+| `input` <Tag>Internal</Tag>      | `type="hidden"`  | 要素をアクセシビリティツリーから除外します。             |
+|                                  | `aria-readonly`  | `isReadOnly`が設定されている場合は`"true"`を設定します。 |
+|                                  | `aria-disabled`  | `isDisabled`が設定されている場合は`"true"`を設定します。 |
+|                                  | `aria-invalid`   | `isInvalid`が設定されている場合は`"true"`を設定します。  |
+|                                  | `aria-required`  | `isRequired`が設定されている場合は`"true"`を設定します。 |

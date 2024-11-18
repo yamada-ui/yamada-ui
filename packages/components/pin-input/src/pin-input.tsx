@@ -222,8 +222,10 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
         const valueLength = input.node.value.length
 
-        input.node.focus()
-        input.node.setSelectionRange(0, valueLength)
+        requestAnimationFrame(() => {
+          input.node.focus()
+          input.node.setSelectionRange(0, valueLength)
+        })
       },
       [descendants],
     )
@@ -331,7 +333,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
               if (!prevInput) return
 
               setValue("", index - 1, false)
-              focusInputField("prev", index)
+              prevInput.node.focus()
               setMoveFocus(true)
             } else {
               setMoveFocus(false)

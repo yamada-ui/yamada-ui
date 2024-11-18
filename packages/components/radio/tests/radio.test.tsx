@@ -15,7 +15,7 @@ describe("<Radio />", () => {
   })
 
   test("should be defaultChecked", async () => {
-    render(<Radio defaultIsChecked>Radio defaultChecked</Radio>)
+    render(<Radio defaultChecked>Radio defaultChecked</Radio>)
 
     const radio = await screen.findByRole("radio", {
       name: "Radio defaultChecked",
@@ -24,14 +24,14 @@ describe("<Radio />", () => {
   })
 
   test("should be readonly", async () => {
-    render(<Radio isReadOnly>Radio readonly</Radio>)
+    render(<Radio readOnly>Radio readonly</Radio>)
 
     const radio = await screen.findByRole("radio", { name: "Radio readonly" })
     expect(radio).toHaveAttribute("readonly")
   })
 
   test("should be contain invalid attribute", async () => {
-    render(<Radio isInvalid>Radio invalid</Radio>)
+    render(<Radio invalid>Radio invalid</Radio>)
 
     const radio = await screen.findByRole("radio", { name: "Radio invalid" })
     expect(radio).not.toBeValid()

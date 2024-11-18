@@ -45,15 +45,31 @@ export interface UseRadioProps<Y extends number | string = string>
    */
   name?: string
   /**
+   * If `true`, the radio will be checked.
+   *
+   * @default false
+   */
+  checked?: boolean
+  /**
    * If `true`, the radio will be initially checked.
    *
    * @default false
+   */
+  defaultChecked?: boolean
+  /**
+   * If `true`, the radio will be initially checked.
+   *
+   * @default false
+   *
+   * @deprecated Use `defaultChecked` instead.
    */
   defaultIsChecked?: boolean
   /**
    * If `true`, the radio will be checked.
    *
    * @default false
+   *
+   * @deprecated Use `checked` instead.
    */
   isChecked?: boolean
   /**
@@ -80,12 +96,18 @@ export const useRadio = <
   const {
     id: _id,
     name,
+    checked: checkedProp,
+    defaultChecked,
     defaultIsChecked,
     isChecked: isCheckedProp,
     value,
     onChange: onChangeProp,
     ...computedProps
   } = useFormControlProps({ id, ...props })
+
+  const checkedPropValue = checkedProp ?? isCheckedProp
+  const _defaultChecked = defaultChecked ?? defaultIsChecked
+
   const [
     {
       "aria-readonly": _ariaReadonly,
@@ -99,18 +121,18 @@ export const useRadio = <
     rest,
   ] = splitObject(computedProps, formControlProperties)
 
-  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
-  const [isFocused, setFocused] = useState<boolean>(false)
-  const [isHovered, setHovered] = useState<boolean>(false)
-  const [isActive, setActive] = useState<boolean>(false)
+  const [focusVisible, setFocusVisible] = useState<boolean>(false)
+  const [focused, setFocused] = useState<boolean>(false)
+  const [hovered, setHovered] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
 
-  const [isChecked, setIsChecked] = useState<boolean>(!!defaultIsChecked)
+  const [checkedState, setChecked] = useState<boolean>(!!_defaultChecked)
 
-  const isControlled = isCheckedProp !== undefined
-  const checked = isControlled ? (isCheckedProp as boolean) : isChecked
+  const controlled = checkedPropValue !== undefined
+  const checked = controlled ? (checkedPropValue as boolean) : checkedState
 
   useEffect(() => {
-    return trackFocusVisible(setIsFocusVisible)
+    return trackFocusVisible(setFocusVisible)
   }, [])
 
   const onChange = useCallbackRef(
@@ -121,11 +143,11 @@ export const useRadio = <
         return
       }
 
-      if (!isControlled) setIsChecked(ev.target.checked)
+      if (!controlled) setChecked(ev.target.checked)
 
       onChangeProp?.(ev)
     },
-    [readOnly, disabled, isControlled],
+    [readOnly, disabled, controlled],
   )
   const onFocus = useCallbackRef(onFocusProp)
   const onBlur = useCallbackRef(onBlurProp)
@@ -160,17 +182,17 @@ export const useRadio = <
       ...props,
       ref,
       "aria-hidden": true,
-      "data-active": dataAttr(isActive),
+      "data-active": dataAttr(active),
       "data-checked": dataAttr(checked),
-      "data-focus": dataAttr(isFocused),
-      "data-focus-visible": dataAttr(isFocused && isFocusVisible),
-      "data-hover": dataAttr(isHovered),
+      "data-focus": dataAttr(focused),
+      "data-focus-visible": dataAttr(focused && focusVisible),
+      "data-hover": dataAttr(hovered),
       onMouseDown: handlerAll(props.onMouseDown, () => setActive(true)),
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
       onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
     }),
-    [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
+    [checked, active, focused, focusVisible, hovered, formControlProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -240,11 +262,11 @@ export const useRadio = <
   )
 
   return {
-    isActive,
-    isChecked: checked,
-    isFocused,
-    isFocusVisible,
-    isHovered,
+    active,
+    checked,
+    focused,
+    focusVisible,
+    hovered,
     props: rest,
     getContainerProps,
     getIconProps,
@@ -287,21 +309,27 @@ export const Radio = forwardRef(
     const {
       className,
       children,
+      disabled = groupProps.isDisabled ?? control.disabled,
       gap = "0.5rem",
-      isDisabled = groupProps.isDisabled ?? control.isDisabled,
-      isInvalid = groupProps.isInvalid ?? control.isInvalid,
-      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
-      isRequired = groupProps.isRequired ?? control.isRequired,
+      invalid = groupProps.isInvalid ?? control.invalid,
+      isDisabled = groupProps.isDisabled ?? control.disabled,
+      isInvalid = groupProps.isInvalid ?? control.invalid,
+      isReadOnly = groupProps.isReadOnly ?? control.readOnly,
+      isRequired = groupProps.isRequired ?? control.required,
+      readOnly = groupProps.isReadOnly ?? control.readOnly,
+      required = groupProps.isRequired ?? control.required,
       iconProps,
       inputProps,
       labelProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const isCheckedProp =
+    computedProps.checked ??= computedProps.isChecked
+
+    const checkedProp =
       groupValue && computedProps.value
         ? groupValue === computedProps.value
-        : computedProps.isChecked
+        : computedProps.checked
 
     const onChange =
       groupProps.onChange && computedProps.value
@@ -309,7 +337,7 @@ export const Radio = forwardRef(
         : computedProps.onChange
 
     const {
-      isChecked,
+      checked,
       props: rest,
       getContainerProps,
       getIconProps,
@@ -317,15 +345,20 @@ export const Radio = forwardRef(
       getLabelProps,
     } = useRadio({
       ...computedProps,
-      isChecked: isCheckedProp,
+      checked: checkedProp,
+      disabled,
+      invalid,
+      isChecked: checkedProp,
       isDisabled,
       isInvalid,
       isReadOnly,
       isRequired,
+      readOnly,
+      required,
       onChange,
     })
 
-    const tabIndex = !groupValue ? 0 : isChecked ? 0 : -1
+    const tabIndex = !groupValue ? 0 : checked ? 0 : -1
 
     return (
       <ui.label

@@ -54,18 +54,18 @@ describe("<RadioGroup />", () => {
     expect(radio3).not.toBeChecked()
   })
 
-  test("should return checked attribute when isNative is true", () => {
+  test("should return checked attribute when native is true", () => {
     const { result } = renderHook(() =>
-      useRadioGroup({ defaultValue: "1", isNative: true }),
+      useRadioGroup({ defaultValue: "1", native: true }),
     )
     const props = result.current.getRadioProps({ value: "1" })
 
     expect(props).toHaveProperty("checked")
   })
 
-  test("should return checked attribute when isNative is false", () => {
+  test("should return checked attribute when native is false", () => {
     const { result } = renderHook(() =>
-      useRadioGroup({ isNative: false, value: undefined }),
+      useRadioGroup({ native: false, value: undefined }),
     )
     const props = result.current.getRadioProps()
 

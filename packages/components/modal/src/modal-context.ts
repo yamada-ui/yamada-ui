@@ -1,10 +1,11 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { RefObject } from "react"
 import type { ModalOptions } from "./modal"
 import { createContext } from "@yamada-ui/utils"
 
 interface ModalContext extends ModalOptions {
-  describedbyId: string
-  labelledbyId: string
+  bodyRef: RefObject<HTMLElement>
+  headerRef: RefObject<HTMLElement>
   styles: { [key: string]: CSSUIObject | undefined }
 }
 

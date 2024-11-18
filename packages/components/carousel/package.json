@@ -48,7 +48,7 @@
   "dependencies": {
     "@yamada-ui/button": "workspace:*",
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",

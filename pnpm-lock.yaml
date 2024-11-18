@@ -1406,9 +1406,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
-      '@yamada-ui/icon':
+      '@yamada-ui/lucide':
         specifier: workspace:*
-        version: link:../icon
+        version: link:../lucide
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
@@ -2463,9 +2463,6 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
-      '@yamada-ui/lucide':
-        specifier: workspace:*
-        version: link:../lucide
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

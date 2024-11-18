@@ -1,5 +1,4 @@
 import { a11y, render, screen } from "@yamada-ui/test"
-import { Text } from "../../lucide/src"
 import { For } from "../src"
 
 describe("<For />", () => {
@@ -13,8 +12,8 @@ describe("<For />", () => {
 
   test("For renders fallback when array is empty", () => {
     render(
-      <For each={[]} fallback={<Text>There are no items to show</Text>}>
-        {(item, index) => <Text key={index}>{item}</Text>}
+      <For each={[]} fallback={<p>There are no items to show</p>}>
+        {(item, index) => <p key={index}>{item}</p>}
       </For>,
     )
     expect(screen.getByText("There are no items to show")).toBeInTheDocument()
@@ -22,8 +21,8 @@ describe("<For />", () => {
 
   test("For renders fallback when array is undefined", () => {
     render(
-      <For each={undefined} fallback={<Text>There are no items to show</Text>}>
-        {(item, index) => <Text key={index}>Item</Text>}
+      <For each={undefined} fallback={<p>There are no items to show</p>}>
+        {(item, index) => <p key={index}>Item</p>}
       </For>,
     )
     expect(screen.getByText("There are no items to show")).toBeInTheDocument()

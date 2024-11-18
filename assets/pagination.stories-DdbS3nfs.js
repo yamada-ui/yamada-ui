@@ -1,0 +1,80 @@
+import{j as t}from"./jsx-runtime-CfatFE5O.js";import{r as lt}from"./index-ClcD9ViR.js";import{c as j}from"./components-CxTYaNXJ.js";import{P as o}from"./pagination-CnxlG2vu.js";import{W as mt}from"./flex-B9Z-GWmv.js";import{V as S}from"./stack-D7aiW26x.js";import{G as a}from"./ghost-B8tYvxfH.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-CZjm_Dlq.js";import"./factory-BPYpkDor.js";import"./index-DaKwFS8s.js";import"./index-oHEGJEIa.js";import"./ui-provider-DT4ZJWc8.js";import"./index-CCPRJsEV.js";import"./theme-provider-Bsm-0rKu.js";import"./proxy-DwHv-pG9.js";import"./loading-provider-BNFf8qfE.js";import"./index-C5Gv9kmK.js";import"./Combination-__ZWiWyr.js";import"./loading-Bd8HLEYZ.js";import"./icon-DT11Nal8.js";import"./use-component-style-CYL4T5vM.js";import"./use-var-DoLXLJEg.js";import"./forward-ref-D13m8o2p.js";import"./index-2WvfircW.js";import"./portal-Bwu6AgAB.js";import"./index-ZuzByk-F.js";import"./memo-CTsy6qLS.js";import"./factory-BiXCYStP.js";import"./notice-06IzLkX9.js";import"./alert-DuAaTs7C.js";import"./close-button-BMgTv_5f.js";import"./use-ripple-EznoQwCc.js";import"./container-C7BHOlHf.js";import"./box-b6fbDiUh.js";import"./text-Y1d9IDh4.js";import"./checkbox-BslYf1VK.js";import"./index-BawWMpfG.js";import"./form-control-BcwAaE7G.js";import"./index-5_K1p_ZM.js";import"./index-k5AD2Mr8.js";import"./event-C_48urmU.js";import"./number-CcP_arM8.js";import"./tooltip-JyxElFjD.js";import"./index-CUasfp9R.js";import"./index-B6_HQi_x.js";import"./index-BoVnf8IZ.js";import"./index-DLDmaCYR.js";import"./index-W-WXU9X0.js";import"./slide-fade-DWJKgb--.js";import"./utils-iiSVxag3.js";import"./forward-ref-2BKBy0Yi.js";import"./scale-fade-CUVSWOgb.js";import"./index-LBOEXu_2.js";import"./index-Ds3gfiOt.js";import"./select-DHuQSSGm.js";import"./select-list-siiT5znq.js";import"./index-B-CNuTHF.js";import"./popover-trigger-BK228ndd.js";import"./index-CctIhTei.js";import"./index-gGKStiao.js";import"./index-gbrMdviE.js";import"./createLucideIcon-Czt4prMK.js";const vo={component:o,title:"Components / Navigation / Pagination"},e=()=>t.jsx(o,{total:10}),s=()=>t.jsxs(t.Fragment,{children:[t.jsx(o,{size:"xs",total:10}),t.jsx(o,{size:"sm",total:10}),t.jsx(o,{size:"md",total:10}),t.jsx(o,{size:"lg",total:10}),t.jsx(o,{size:"xl",total:10})]}),n=()=>t.jsxs(t.Fragment,{children:[t.jsx(o,{variant:"solid",total:10}),t.jsx(o,{variant:"subtle",total:10}),t.jsx(o,{variant:"surface",total:10}),t.jsx(o,{variant:"outline",total:10}),t.jsx(o,{variant:"ghost",total:10}),t.jsx(o,{variant:"unstyled",total:10})]}),i=()=>t.jsxs(mt,{gap:"md",w:"full",children:[t.jsx(S,{w:"auto",children:j.map(r=>t.jsx(o,{colorScheme:r,variant:"solid",total:10},r))}),t.jsx(S,{w:"auto",children:j.map(r=>t.jsx(o,{colorScheme:r,variant:"outline",total:10},r))}),t.jsx(S,{w:"auto",children:j.map(r=>t.jsx(o,{colorScheme:r,variant:"ghost",total:10},r))})]}),c=()=>t.jsx(o,{defaultPage:3,total:10}),l=()=>t.jsx(o,{total:77}),m=()=>t.jsx(o,{total:10,withEdges:!0}),p=()=>t.jsx(o,{siblings:3,total:77}),u=()=>t.jsx(o,{boundaries:3,total:77}),d=()=>t.jsxs(t.Fragment,{children:[t.jsx(o,{variant:"solid",isDisabled:!0,total:10}),t.jsx(o,{variant:"outline",isDisabled:!0,total:10}),t.jsx(o,{variant:"ghost",isDisabled:!0,total:10}),t.jsx(o,{variant:"unstyled",isDisabled:!0,total:10})]}),g=()=>t.jsx(o,{total:10,withControls:!1}),h=()=>{const[r,ct]=lt.useState(1);return t.jsx(o,{page:r,total:10,onChange:ct})},x=()=>t.jsxs(t.Fragment,{children:[t.jsx(o,{total:10,controlProps:{children:t.jsx(a,{})}}),t.jsx(o,{total:10,controlPrevProps:{children:t.jsx(a,{})}}),t.jsx(o,{total:10,controlNextProps:{children:t.jsx(a,{})}})]}),P=()=>t.jsxs(t.Fragment,{children:[t.jsx(o,{total:10,withEdges:!0,edgeProps:{children:t.jsx(a,{})}}),t.jsx(o,{total:10,withEdges:!0,edgeFirstProps:{children:t.jsx(a,{})}}),t.jsx(o,{total:10,withEdges:!0,edgeLastProps:{children:t.jsx(a,{})}})]});var w,v,b;e.parameters={...e.parameters,docs:{...(w=e.parameters)==null?void 0:w.docs,source:{originalSource:`() => {
+  return <Pagination total={10} />;
+}`,...(b=(v=e.parameters)==null?void 0:v.docs)==null?void 0:b.source}}};var f,C,E;s.parameters={...s.parameters,docs:{...(f=s.parameters)==null?void 0:f.docs,source:{originalSource:`() => {
+  return <>
+      <Pagination size="xs" total={10} />
+      <Pagination size="sm" total={10} />
+      <Pagination size="md" total={10} />
+      <Pagination size="lg" total={10} />
+      <Pagination size="xl" total={10} />
+    </>;
+}`,...(E=(C=s.parameters)==null?void 0:C.docs)==null?void 0:E.source}}};var z,D,k;n.parameters={...n.parameters,docs:{...(z=n.parameters)==null?void 0:z.docs,source:{originalSource:`() => {
+  return <>
+      <Pagination variant="solid" total={10} />
+      <Pagination variant="subtle" total={10} />
+      <Pagination variant="surface" total={10} />
+      <Pagination variant="outline" total={10} />
+      <Pagination variant="ghost" total={10} />
+      <Pagination variant="unstyled" total={10} />
+    </>;
+}`,...(k=(D=n.parameters)==null?void 0:D.docs)==null?void 0:k.source}}};var V,B,G;i.parameters={...i.parameters,docs:{...(V=i.parameters)==null?void 0:V.docs,source:{originalSource:`() => {
+  return <Wrap gap="md" w="full">
+      <VStack w="auto">
+        {colorSchemes.map(colorScheme => <Pagination key={colorScheme} colorScheme={colorScheme} variant="solid" total={10} />)}
+      </VStack>
+
+      <VStack w="auto">
+        {colorSchemes.map(colorScheme => <Pagination key={colorScheme} colorScheme={colorScheme} variant="outline" total={10} />)}
+      </VStack>
+
+      <VStack w="auto">
+        {colorSchemes.map(colorScheme => <Pagination key={colorScheme} colorScheme={colorScheme} variant="ghost" total={10} />)}
+      </VStack>
+    </Wrap>;
+}`,...(G=(B=i.parameters)==null?void 0:B.docs)==null?void 0:G.source}}};var y,F,I;c.parameters={...c.parameters,docs:{...(y=c.parameters)==null?void 0:y.docs,source:{originalSource:`() => {
+  return <Pagination defaultPage={3} total={10} />;
+}`,...(I=(F=c.parameters)==null?void 0:F.docs)==null?void 0:I.source}}};var W,N,L;l.parameters={...l.parameters,docs:{...(W=l.parameters)==null?void 0:W.docs,source:{originalSource:`() => {
+  return <Pagination total={77} />;
+}`,...(L=(N=l.parameters)==null?void 0:N.docs)==null?void 0:L.source}}};var T,_,O;m.parameters={...m.parameters,docs:{...(T=m.parameters)==null?void 0:T.docs,source:{originalSource:`() => {
+  return <Pagination total={10} withEdges />;
+}`,...(O=(_=m.parameters)==null?void 0:_.docs)==null?void 0:O.source}}};var R,q,A;p.parameters={...p.parameters,docs:{...(R=p.parameters)==null?void 0:R.docs,source:{originalSource:`() => {
+  return <Pagination siblings={3} total={77} />;
+}`,...(A=(q=p.parameters)==null?void 0:q.docs)==null?void 0:A.source}}};var H,J,K;u.parameters={...u.parameters,docs:{...(H=u.parameters)==null?void 0:H.docs,source:{originalSource:`() => {
+  return <Pagination boundaries={3} total={77} />;
+}`,...(K=(J=u.parameters)==null?void 0:J.docs)==null?void 0:K.source}}};var M,Q,U;d.parameters={...d.parameters,docs:{...(M=d.parameters)==null?void 0:M.docs,source:{originalSource:`() => {
+  return <>
+      <Pagination variant="solid" isDisabled total={10} />
+      <Pagination variant="outline" isDisabled total={10} />
+      <Pagination variant="ghost" isDisabled total={10} />
+      <Pagination variant="unstyled" isDisabled total={10} />
+    </>;
+}`,...(U=(Q=d.parameters)==null?void 0:Q.docs)==null?void 0:U.source}}};var X,Y,Z;g.parameters={...g.parameters,docs:{...(X=g.parameters)==null?void 0:X.docs,source:{originalSource:`() => {
+  return <Pagination total={10} withControls={false} />;
+}`,...(Z=(Y=g.parameters)==null?void 0:Y.docs)==null?void 0:Z.source}}};var $,tt,ot;h.parameters={...h.parameters,docs:{...($=h.parameters)==null?void 0:$.docs,source:{originalSource:`() => {
+  const [page, onChange] = useState<number>(1);
+  return <Pagination page={page} total={10} onChange={onChange} />;
+}`,...(ot=(tt=h.parameters)==null?void 0:tt.docs)==null?void 0:ot.source}}};var rt,at,et;x.parameters={...x.parameters,docs:{...(rt=x.parameters)==null?void 0:rt.docs,source:{originalSource:`() => {
+  return <>
+      <Pagination total={10} controlProps={{
+      children: <GhostIcon />
+    }} />
+      <Pagination total={10} controlPrevProps={{
+      children: <GhostIcon />
+    }} />
+      <Pagination total={10} controlNextProps={{
+      children: <GhostIcon />
+    }} />
+    </>;
+}`,...(et=(at=x.parameters)==null?void 0:at.docs)==null?void 0:et.source}}};var st,nt,it;P.parameters={...P.parameters,docs:{...(st=P.parameters)==null?void 0:st.docs,source:{originalSource:`() => {
+  return <>
+      <Pagination total={10} withEdges edgeProps={{
+      children: <GhostIcon />
+    }} />
+      <Pagination total={10} withEdges edgeFirstProps={{
+      children: <GhostIcon />
+    }} />
+      <Pagination total={10} withEdges edgeLastProps={{
+      children: <GhostIcon />
+    }} />
+    </>;
+}`,...(it=(nt=P.parameters)==null?void 0:nt.docs)==null?void 0:it.source}}};const bo=["basic","withSize","withVariant","withColorScheme","withDefaultPage","withTotal","withEdge","withSiblings","withBoundaries","withDisabled","disabledControlButton","customControl","customControlButton","customEdgeButton"];export{bo as __namedExportsOrder,e as basic,h as customControl,x as customControlButton,P as customEdgeButton,vo as default,g as disabledControlButton,u as withBoundaries,i as withColorScheme,c as withDefaultPage,d as withDisabled,m as withEdge,p as withSiblings,s as withSize,l as withTotal,n as withVariant};

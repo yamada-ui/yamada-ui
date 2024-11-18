@@ -4,7 +4,7 @@ import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { useCallback, useId } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu-context"
 
 export interface MenuListProps extends HTMLUIProps<"ul"> {
@@ -12,7 +12,7 @@ export interface MenuListProps extends HTMLUIProps<"ul"> {
 }
 
 export const MenuList = forwardRef<MenuListProps, "ul">(
-  ({ className, children, contentProps, ...rest }, ref) => {
+  ({ id, className, children, contentProps, ...rest }, ref) => {
     const {
       buttonRef,
       focusedIndex,
@@ -21,8 +21,12 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
       styles,
       onClose,
     } = useMenu()
+    const uuid = useId()
+    id ??= uuid
 
     const descendants = useMenuDescendantsContext()
+
+    const activedescendantId = descendants.value(focusedIndex)?.node.id
 
     const onNext = useCallback(() => {
       const next = descendants.enabledNextValue(focusedIndex)
@@ -56,7 +60,7 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
           End: onLast,
           Escape: onClose,
           Home: onFirst,
-          Tab: (ev) => ev.preventDefault(),
+          Tab: onClose,
         }
 
         const action = actions[ev.key]
@@ -71,8 +75,12 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
 
     return (
       <PopoverContent
+        id={id}
         as="div"
         className="ui-menu__content"
+        aria-activedescendant={activedescendantId}
+        aria-labelledby={buttonRef.current?.id}
+        role="menu"
         __css={{ ...styles.content }}
         {...contentProps}
         onKeyDown={handlerAll(contentProps?.onKeyDown, onKeyDown)}
@@ -80,8 +88,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
         <ui.div
           ref={mergeRefs(menuRef, ref)}
           className={cx("ui-menu__list", className)}
-          aria-labelledby={buttonRef.current?.id}
-          role="menu"
           tabIndex={-1}
           __css={{ ...styles.list }}
           {...rest}

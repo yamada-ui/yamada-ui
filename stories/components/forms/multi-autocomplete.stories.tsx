@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { AutocompleteItem } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Check, ChevronsDown, Trash2 } from "@yamada-ui/lucide"
+import { CheckIcon, ChevronsDownIcon, Trash2Icon } from "@yamada-ui/lucide"
 import {
   AutocompleteOption,
   AutocompleteOptionGroup,
@@ -583,7 +583,7 @@ export const customIcon: Story = () => {
 
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown /> }}
+        iconProps={{ children: <ChevronsDownIcon /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -597,7 +597,7 @@ export const customClearIcon: Story = () => {
   return (
     <MultiAutocomplete
       placeholder="キャラクターを選択"
-      clearIconProps={{ children: <Trash2 /> }}
+      clearIconProps={{ children: <Trash2Icon /> }}
     >
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -620,7 +620,7 @@ export const customOption: Story = () => {
 
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check color="green.500" /> }}
+        optionProps={{ icon: <CheckIcon color="green.500" /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>

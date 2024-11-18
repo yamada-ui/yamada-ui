@@ -21,7 +21,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     },
     divider: {
       borderBottomWidth: "1px",
-      borderColor: "inherit",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       my: "2",
     },
     group: {},

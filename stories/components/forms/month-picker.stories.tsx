@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { MonthPickerProps } from "@yamada-ui/calendar"
 import type { SubmitHandler } from "react-hook-form"
 import { MonthPicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
@@ -306,7 +306,10 @@ export const customIcon: Story = () => {
     <>
       <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
 
-      <MonthPicker placeholder="YYYY/MM" iconProps={{ children: <Ghost /> }} />
+      <MonthPicker
+        placeholder="YYYY/MM"
+        iconProps={{ children: <GhostIcon /> }}
+      />
     </>
   )
 }

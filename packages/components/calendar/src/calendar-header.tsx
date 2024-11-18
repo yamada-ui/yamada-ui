@@ -59,7 +59,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
     w: "100%",
     ...styles.header,
   }
-  const { icon: iconElOrProps, ...computedLabelProps } = labelProps ?? {}
+  const { icon: iconOrProps, ...computedLabelProps } = labelProps ?? {}
 
   return withHeader ? (
     <ui.div
@@ -81,10 +81,10 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
         <CalendarLabel {...getLabelProps({ ...computedLabelProps })}>
           {label}
           {type !== "year" ? (
-            isValidElement(iconElOrProps) ? (
-              iconElOrProps
+            isValidElement(iconOrProps) ? (
+              iconOrProps
             ) : (
-              <CalendarLabelIcon {...iconElOrProps} />
+              <CalendarLabelIcon {...iconOrProps} />
             )
           ) : null}
         </CalendarLabel>

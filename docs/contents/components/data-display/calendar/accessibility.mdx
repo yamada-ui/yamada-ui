@@ -21,17 +21,17 @@ tab: Accessibility
 
 ## ARIA Roles and Attributes
 
-| Component                                 | Roles and Attributes   | Usage                                                                                    |
-| ----------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------- |
-| `CalendarLabel` <Tag>Internal</Tag>       | `aria-live="polite"`   | Indicates that it may be updated outside of focus.                                       |
-| `CalendarControlPrev` <Tag>Internal</Tag> | `aria-label`           | Sets "Go to previous month" if `type` is `"date"`, otherwise sets "Go to previous year". |
-| `CalendarControlNext` <Tag>Internal</Tag> | `aria-label`           | Sets "Go to next month" if `type` is `"date"`, otherwise sets "Go to next year".         |
-| `Month` <Tag>Internal</Tag>               | `role="grid"`          | Indicates that it is a grid.                                                             |
-|                                           | `aria-label`           | Sets the selected month and year, like `October 2024`.                                   |
-|                                           | `aria-multiselectable` | Sets `"true"` if multiple selection is enabled.                                          |
-| `MonthList` <Tag>Internal</Tag>           | `role="grid"`          | Indicates that it is a grid.                                                             |
-|                                           | `aria-label`           | Sets the selected year, like `2024`.                                                     |
-| `YearList` <Tag>Internal</Tag>            | `role="grid"`          | Indicates that it is a grid.                                                             |
-|                                           | `aria-label`           | Sets the year range, like `From 2021 to 2032`.                                           |
-| `Button` <Tag>Internal</Tag>              | `aria-selected`        | Sets `"true"` if selected.                                                               |
-|                                           | `aria-disabled`        | Sets `"true"` if disabled.                                                               |
+| Component                                 | Roles and Attributes   | Usage                                                                                        |
+| ----------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
+| `CalendarLabel` <Tag>Internal</Tag>       | `aria-live="polite"`   | Indicates that it may be updated outside of focus.                                           |
+| `CalendarControlPrev` <Tag>Internal</Tag> | `aria-label`           | Sets `"Go to previous month"` if `type` is `"date"`, otherwise sets `"Go to previous year"`. |
+| `CalendarControlNext` <Tag>Internal</Tag> | `aria-label`           | Sets `"Go to next month"` if `type` is `"date"`, otherwise sets `"Go to next year"`.         |
+| `Month` <Tag>Internal</Tag>               | `role="grid"`          | Indicates that it is a grid.                                                                 |
+|                                           | `aria-label`           | Sets the selected month and year, like `"October 2024"`.                                     |
+|                                           | `aria-multiselectable` | Sets `"true"` if multiple selection is enabled.                                              |
+| `MonthList` <Tag>Internal</Tag>           | `role="grid"`          | Indicates that it is a grid.                                                                 |
+|                                           | `aria-label`           | Sets the selected year, like `"2024"`.                                                       |
+| `YearList` <Tag>Internal</Tag>            | `role="grid"`          | Indicates that it is a grid.                                                                 |
+|                                           | `aria-label`           | Sets the year range, like `"From 2021 to 2032"`.                                             |
+| `Button` <Tag>Internal</Tag>              | `aria-selected`        | Set to `"true"` if the item is selected, `"false"` if not selected.                          |
+|                                           | `aria-disabled`        | Set to `"true"` if the item is disabled.                                                     |

@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { MultiDatePickerProps } from "@yamada-ui/calendar"
 import type { SubmitHandler } from "react-hook-form"
 import { MultiDatePicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -508,7 +508,7 @@ export const customIcon: Story = () => {
 
       <MultiDatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Ghost /> }}
+        iconProps={{ children: <GhostIcon /> }}
       />
     </>
   )

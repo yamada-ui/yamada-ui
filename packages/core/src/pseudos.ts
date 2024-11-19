@@ -327,12 +327,11 @@ export const pseudoClasses = {
   /**
    * The CSS `:horizontal` pseudo-class.
    *
-   * - `:horizontal`
    * - `[aria-orientation=horizontal]`
    * - `[data-orientation=horizontal]`
    */
   _horizontal:
-    "&:horizontal, &[data-orientation=horizontal], &[aria-orientation=horizontal]",
+    "&[data-orientation='horizontal'], &[aria-orientation='horizontal']",
   /**
    * The CSS `:hover` pseudo-class.
    *
@@ -526,12 +525,10 @@ export const pseudoClasses = {
   /**
    * The CSS `:vertical` pseudo-class.
    *
-   * - `:vertical`
    * - `[aria-orientation=vertical]`
    * - `[data-orientation=vertical]`
    */
-  _vertical:
-    "&:vertical, &[data-orientation=vertical], &[aria-orientation=vertical]",
+  _vertical: "&[data-orientation=vertical], &[aria-orientation=vertical]",
   /**
    * The CSS `:visited` pseudo-class.
    */

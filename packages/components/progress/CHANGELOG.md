@@ -1,5 +1,11 @@
 # @yamada-ui/progress
 
+## 1.2.0
+
+### Minor Changes
+
+- [#3467](https://github.com/yamada-ui/yamada-ui/pull/3467) [`ce6e0d5`](https://github.com/yamada-ui/yamada-ui/commit/ce6e0d5b253cf6d093db90f74d53943ef45cfb5b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added accessibility attributes to components.
+
 ## 1.1.7
 
 ### Patch Changes

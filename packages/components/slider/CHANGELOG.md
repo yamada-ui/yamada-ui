@@ -1,5 +1,11 @@
 # @yamada-ui/slider
 
+## 1.3.0
+
+### Minor Changes
+
+- [#3469](https://github.com/yamada-ui/yamada-ui/pull/3469) [`50d8e15`](https://github.com/yamada-ui/yamada-ui/commit/50d8e15181c09aa3a531ac2972c0873d9fc5372b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add screen reader friendly value text.
+
 ## 1.2.10
 
 ### Patch Changes

@@ -10,7 +10,7 @@ import {
   ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { cx, isString } from "@yamada-ui/utils"
 
 const defaultOverlays = (
   background: CSSUIProps["color"],
@@ -125,6 +125,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-color-swatch", className)}
+      aria-label={isString(color) ? color : undefined}
       aria-roledescription="color swatch"
       role="img"
       {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}

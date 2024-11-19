@@ -75,7 +75,6 @@ interface SelectContext
   focusedIndex: number
   isOpen: boolean
   label: MaybeValue | undefined
-  listRef: RefObject<HTMLUListElement>
   setFocusedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
   value: MaybeValue
@@ -203,7 +202,6 @@ export const useSelect = <T extends MaybeValue = string>(
 
   const containerRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const [value, setValue] = useControllableState({
@@ -225,7 +223,6 @@ export const useSelect = <T extends MaybeValue = string>(
     ({ index }) => !selectedIndexes.includes(index),
   )
   const activedescendantId = descendants.value(focusedIndex)?.node.id
-  const listId = listRef.current?.id
 
   const validChildren = getValidChildren(children)
 
@@ -700,8 +697,6 @@ export const useSelect = <T extends MaybeValue = string>(
       return {
         ref: mergeRefs(fieldRef, ref),
         "aria-activedescendant": activedescendantId,
-        "aria-controls": listId,
-        "aria-expanded": isOpen,
         "aria-haspopup": "listbox",
         "aria-label": ariaLabel,
         role: "combobox",
@@ -718,7 +713,6 @@ export const useSelect = <T extends MaybeValue = string>(
     },
     [
       activedescendantId,
-      listId,
       fieldProps,
       isOpen,
       isMulti,
@@ -740,7 +734,6 @@ export const useSelect = <T extends MaybeValue = string>(
     isEmpty,
     isOpen,
     label,
-    listRef,
     omitSelectedValues,
     placeholder,
     placeholderInOptions,

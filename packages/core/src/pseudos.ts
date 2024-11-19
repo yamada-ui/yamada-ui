@@ -330,8 +330,7 @@ export const pseudoClasses = {
    * - `[aria-orientation=horizontal]`
    * - `[data-orientation=horizontal]`
    */
-  _horizontal:
-    "&[data-orientation='horizontal'], &[aria-orientation='horizontal']",
+  _horizontal: "&[data-orientation=horizontal], &[aria-orientation=horizontal]",
   /**
    * The CSS `:hover` pseudo-class.
    *

@@ -76,6 +76,13 @@ export interface UseRangeSliderOptions {
    */
   focusThumbOnChange?: boolean
   /**
+   * This is used to format the value so that screen readers
+   * can speak out a more human-friendly value.
+   *
+   * It is used to set the `aria-valuetext` property of the input.
+   */
+  getAriaValueText?: (value: number) => string | undefined
+  /**
    * If `true`, the value will be incremented or decremented in reverse.
    */
   isReversed?: boolean
@@ -137,9 +144,12 @@ export const useRangeSlider = ({
   let {
     id,
     name,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
     "aria-valuetext": ariaValueText,
     betweenThumbs = 0,
     defaultValue,
+    getAriaValueText: getAriaValueTextProp,
     isReversed,
     max = 100,
     min = 0,
@@ -169,6 +179,7 @@ export const useRangeSlider = ({
 
   const onChangeStart = useCallbackRef(onChangeStartProp)
   const onChangeEnd = useCallbackRef(onChangeEndProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
 
   const [computedValues, setValues] = useControllableState({
     defaultValue,
@@ -626,7 +637,8 @@ export const useRangeSlider = ({
         )
 
       return {
-        "aria-label": "Slider thumb",
+        "aria-label": ariaLabel ?? "Slider thumb",
+        "aria-labelledby": ariaLabelledBy,
         "aria-readonly": ariaReadonly,
         ...formControlProps,
         ...props,
@@ -637,7 +649,8 @@ export const useRangeSlider = ({
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
-        "aria-valuetext": ariaValueText ?? value.toString(),
+        "aria-valuetext":
+          ariaValueText ?? getAriaValueText(value) ?? value.toString(),
         "data-active": dataAttr(
           isDragging && focusThumbOnChange && activeIndexRef.current === i,
         ),
@@ -661,19 +674,22 @@ export const useRangeSlider = ({
       thumbSizes,
       isVertical,
       values,
+      ariaLabel,
+      ariaLabelledBy,
       ariaReadonly,
       formControlProps,
       getThumbId,
-      isInteractive,
-      focusThumbOnChange,
-      min,
-      max,
-      isDragging,
       orientation,
+      max,
+      min,
       ariaValueText,
-      onKeyDown,
-      onFocus,
+      getAriaValueText,
+      isDragging,
+      focusThumbOnChange,
+      isInteractive,
       onBlur,
+      onFocus,
+      onKeyDown,
     ],
   )
 

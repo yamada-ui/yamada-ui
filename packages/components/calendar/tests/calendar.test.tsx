@@ -126,11 +126,6 @@ describe("<Calendar />", () => {
       })
       fireEvent.click(yearButton)
 
-      const yearRangeButton = screen.getByRole("button", {
-        name: "2018 - 2029",
-      })
-      fireEvent.click(yearRangeButton)
-
       const years = [
         "2018",
         "2019",

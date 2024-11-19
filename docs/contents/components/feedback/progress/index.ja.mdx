@@ -17,24 +17,39 @@ import { Progress } from "@yamada-ui/react"
 ## 使い方
 
 ```tsx
-<Progress value={18} />
+<Progress aria-label="Storage space" value={18} />
 ```
 
 ### サイズを変更する
 
 ```tsx
 <VStack>
-  <Progress colorScheme="green" value={19} size="xs" />
-  <Progress colorScheme="pink" value={93} size="sm" />
-  <Progress colorScheme="purple" value={8} size="md" />
-  <Progress colorScheme="red" value={18} size="lg" />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="green"
+    value={19}
+    size="xs"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="pink"
+    value={93}
+    size="sm"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="purple"
+    value={8}
+    size="md"
+  />
+  <Progress aria-label="Storage space" colorScheme="red" value={18} size="lg" />
 </VStack>
 ```
 
 ### カラースキーマを変更する
 
 ```tsx
-<Progress colorScheme="purple" value={18} />
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
 ```
 
 ### 色を変更する
@@ -42,7 +57,7 @@ import { Progress } from "@yamada-ui/react"
 カラースキーマを使わずに色を変更したい場合は、`filledTrackColor`に色を指定します。
 
 ```tsx
-<Progress filledTrackColor="green.500" value={18} />
+<Progress aria-label="Storage space" filledTrackColor="green.500" value={18} />
 ```
 
 ### スタイルをカスタマイズする
@@ -51,8 +66,18 @@ import { Progress } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Progress colorScheme="orange" value={10} borderRadius="sm" />
-  <Progress colorScheme="yellow" value={31} rounded="md" />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="orange"
+    value={10}
+    borderRadius="sm"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="yellow"
+    value={31}
+    rounded="md"
+  />
 </VStack>
 ```
 
@@ -61,7 +86,7 @@ import { Progress } from "@yamada-ui/react"
 `hasStripe`を`true`に設定することで、背景色にストライプを適応できます。
 
 ```tsx
-<Progress hasStripe value={19} />
+<Progress aria-label="Storage space" hasStripe value={19} />
 ```
 
 ### ストライプにアニメーションを適応する
@@ -69,7 +94,7 @@ import { Progress } from "@yamada-ui/react"
 背景色のストライプにアニメーションを追加したい場合は、`isStripeAnimation`を`true`に設定します。
 
 ```tsx
-<Progress hasStripe isStripeAnimation value={20} />
+<Progress aria-label="Storage space" hasStripe isStripeAnimation value={20} />
 ```
 
 ### アニメーションを適応する

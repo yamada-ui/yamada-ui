@@ -4,12 +4,8 @@ export { StepDescription } from "./step-description"
 export type { StepDescriptionProps } from "./step-description"
 export { StepSeparator } from "./step-separator"
 export type { StepSeparatorProps } from "./step-separator"
-export { StepIcon, StepNumber, StepStatus } from "./step-status"
-export type {
-  StepIconProps,
-  StepNumberProps,
-  StepStatusProps,
-} from "./step-status"
+export { StepNumber, StepStatus } from "./step-status"
+export type { StepNumberProps, StepStatusProps } from "./step-status"
 export { StepTitle } from "./step-title"
 export type { StepTitleProps } from "./step-title"
 export { Stepper } from "./stepper"

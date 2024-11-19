@@ -5,12 +5,10 @@ import type {
   HTMLUIProps,
   HTMLUIPropsWithoutAs,
 } from "@yamada-ui/core"
-import type { LucideIconProps } from "@yamada-ui/lucide"
 import type { Merge } from "@yamada-ui/utils"
 import type { ReactElement, RefAttributes } from "react"
 import type { UseResizableTriggerProps } from "./use-resizable"
 import { ui } from "@yamada-ui/core"
-import { GripVerticalIcon } from "@yamada-ui/lucide"
 import { cx } from "@yamada-ui/utils"
 import { forwardRef } from "react"
 import { PanelResizeHandle } from "react-resizable-panels"
@@ -82,11 +80,3 @@ export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
 
 ResizableTrigger.displayName = "ResizableTrigger"
 ResizableTrigger.__ui__ = "ResizableTrigger"
-
-export type ResizableTriggerIconProps = LucideIconProps
-
-export const ResizableTriggerIcon: FC<ResizableTriggerIconProps> = (rest) => {
-  return <GripVerticalIcon {...rest} />
-}
-
-ResizableTriggerIcon.__ui__ = "ResizableTriggerIcon"

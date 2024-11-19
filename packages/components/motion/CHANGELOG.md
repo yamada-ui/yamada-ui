@@ -1,5 +1,11 @@
 # @yamada-ui/motion
 
+## 2.2.8
+
+### Patch Changes
+
+- [`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c) Thanks [@nathanlao](https://github.com/nathanlao)! - Removed `is` prefix in props.
+
 ## 2.2.7
 
 ### Patch Changes

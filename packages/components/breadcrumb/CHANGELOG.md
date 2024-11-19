@@ -1,5 +1,12 @@
 # @yamada-ui/breadcrumb
 
+## 1.3.18
+
+### Patch Changes
+
+- Updated dependencies [[`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/icon@1.1.13
+
 ## 1.3.17
 
 ### Patch Changes

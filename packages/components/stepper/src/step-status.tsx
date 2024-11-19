@@ -1,11 +1,11 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 import type { StepContext } from "./step"
 import { forwardRef, ui } from "@yamada-ui/core"
+import { CheckIcon } from "@yamada-ui/lucide"
 import { cx, runIfFunc } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
-import { CheckIcon } from "@yamada-ui/lucide"
 
 export type StepStatusProps = {
   [key in "active" | "complete" | "incomplete"]?:

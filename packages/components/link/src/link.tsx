@@ -13,6 +13,14 @@ interface LinkOptions {
    *
    * @default false
    */
+  external?: boolean
+  /**
+   * If `true`, the link will open in new tab.
+   *
+   * @default false
+   *
+   * @deprecated Use `external` instead
+   */
   isExternal?: boolean
 }
 
@@ -28,14 +36,16 @@ export interface LinkProps
  */
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
-  const { className, isExternal, ...rest } = omitThemeProps(mergedProps)
+  let { className, external, isExternal, ...rest } = omitThemeProps(mergedProps)
+
+  external ??= isExternal
 
   return (
     <ui.a
       ref={ref}
-      target={isExternal ? "_blank" : undefined}
+      target={external ? "_blank" : undefined}
       className={cx("ui-link", className)}
-      rel={isExternal ? "noopener" : undefined}
+      rel={external ? "noopener" : undefined}
       __css={css}
       {...rest}
     />

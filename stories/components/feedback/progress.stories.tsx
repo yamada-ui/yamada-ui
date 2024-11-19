@@ -11,28 +11,54 @@ const meta: Meta<typeof Progress> = {
 export default meta
 
 export const basic: Story = () => {
-  return <Progress value={88} />
+  return <Progress aria-label="Storage space" value={88} />
 }
 
 export const withColorMode: Story = () => {
-  return <Progress colorScheme="purple" value={18} />
+  return <Progress colorScheme="purple" aria-label="Storage space" value={18} />
 }
 
 export const withFilledTrackColor: Story = () => {
-  return <Progress filledTrackColor="green.500" value={18} />
+  return (
+    <Progress
+      aria-label="Storage space"
+      filledTrackColor="green.500"
+      value={18}
+    />
+  )
 }
 
 export const withStripe: Story = () => {
-  return <Progress hasStripe value={19} />
+  return <Progress aria-label="Storage space" hasStripe value={19} />
 }
 
 export const withSize: Story = () => {
   return (
     <>
-      <Progress colorScheme="pink" size="xs" value={93} />
-      <Progress colorScheme="pink" size="sm" value={93} />
-      <Progress colorScheme="pink" size="md" value={93} />
-      <Progress colorScheme="pink" size="lg" value={93} />
+      <Progress
+        colorScheme="pink"
+        size="xs"
+        aria-label="Storage space"
+        value={93}
+      />
+      <Progress
+        colorScheme="pink"
+        size="sm"
+        aria-label="Storage space"
+        value={93}
+      />
+      <Progress
+        colorScheme="pink"
+        size="md"
+        aria-label="Storage space"
+        value={93}
+      />
+      <Progress
+        colorScheme="pink"
+        size="lg"
+        aria-label="Storage space"
+        value={93}
+      />
     </>
   )
 }
@@ -40,14 +66,31 @@ export const withSize: Story = () => {
 export const withBorderRadius: Story = () => {
   return (
     <>
-      <Progress colorScheme="orange" borderRadius="md" value={10} />
-      <Progress colorScheme="yellow" rounded="md" value={31} />
+      <Progress
+        colorScheme="orange"
+        aria-label="Storage space"
+        borderRadius="md"
+        value={10}
+      />
+      <Progress
+        colorScheme="yellow"
+        aria-label="Storage space"
+        rounded="md"
+        value={31}
+      />
     </>
   )
 }
 
 export const useStripeAnimation: Story = () => {
-  return <Progress hasStripe isStripeAnimation value={20} />
+  return (
+    <Progress
+      aria-label="Storage space"
+      hasStripe
+      isStripeAnimation
+      value={20}
+    />
+  )
 }
 export const useAnimation: Story = () => {
   return <Progress colorScheme="green" isAnimation />

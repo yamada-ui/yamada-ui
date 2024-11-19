@@ -9,15 +9,23 @@ tab: アクセシビリティ
 
 `Radio`は、アクセシビリティに関して[WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio)に従います。
 
-`FormControl`を使用しない場合は、`RadioGroup`に`aria-labelledby`を設定します。
+`Fieldset`を使用しない場合は、`RadioGroup`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx live=false
+<RadioGroup aria-label="キャラクター">
+  <Radio value="孫悟空">孫悟空</Radio>
+  <Radio value="ベジータ">ベジータ</Radio>
+  <Radio value="フリーザ">フリーザ</Radio>
+</RadioGroup>
+```
 
 ```tsx live=false
 <VStack gap="sm">
-  <Text as="h3" id="group">
+  <Text as="h3" id="label">
     キャラクター
   </Text>
 
-  <RadioGroup aria-labelledby="group">
+  <RadioGroup aria-labelledby="label">
     <Radio value="孫悟空">孫悟空</Radio>
     <Radio value="ベジータ">ベジータ</Radio>
     <Radio value="フリーザ">フリーザ</Radio>

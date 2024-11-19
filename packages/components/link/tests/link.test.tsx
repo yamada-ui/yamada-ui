@@ -13,7 +13,7 @@ describe("<Link />", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
-      <Link href={url} data-testid="Link" isExternal>
+      <Link href={url} data-testid="Link" external>
         Welcome page
       </Link>,
     )
@@ -41,12 +41,12 @@ describe("<LinkOverlay />", () => {
     expect(link).toHaveTextContent("Welcome page")
   })
 
-  test("opens link in a new tab when isExternal is true", () => {
+  test("opens link in a new tab when external is true", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
       <LinkBox>
-        <LinkOverlay href={url} isExternal>
+        <LinkOverlay href={url} external>
           Welcome page
         </LinkOverlay>
       </LinkBox>,

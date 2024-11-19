@@ -33,7 +33,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
     },
     ref,
   ) => {
-    const { isOpen, getPanelProps } = useAccordionItemContext()
+    const { open, getPanelProps } = useAccordionItemContext()
     const { styles } = useAccordionContext()
 
     const resolvedChildren =
@@ -48,7 +48,7 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
           delay,
           duration,
           endingHeight,
-          isOpen,
+          open,
           startingHeight,
           transition,
           transitionEnd,

@@ -11,20 +11,21 @@ const meta: Meta<typeof CircleProgress> = {
 export default meta
 
 export const basic: Story = () => {
-  return <CircleProgress value={19} />
+  return <CircleProgress aria-label="Storage space" value={19} />
 }
 
 export const withSize: Story = () => {
-  return <CircleProgress boxSize={32} value={18} />
+  return <CircleProgress aria-label="Storage space" boxSize={32} value={18} />
 }
 
 export const withThickness: Story = () => {
-  return <CircleProgress thickness={1} value={31} />
+  return <CircleProgress aria-label="Storage space" thickness={1} value={31} />
 }
 
 export const withLabel: Story = () => {
   return (
     <CircleProgress
+      aria-label="Storage space"
       boxSize="120px"
       color="purple.500"
       max={1000}
@@ -38,7 +39,7 @@ export const withLabel: Story = () => {
 }
 
 export const withRounded: Story = () => {
-  return <CircleProgress isRounded value={18} />
+  return <CircleProgress aria-label="Storage space" isRounded value={18} />
 }
 
 export const useAnimation: Story = () => {

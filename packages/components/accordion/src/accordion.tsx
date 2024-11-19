@@ -24,7 +24,18 @@ export interface AccordionOptions {
    * The accordion icon for all items to use.
    */
   icon?:
-    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
+    | ((props: {
+        /**
+         * @deprecated Use `disabled` instead.
+         */
+        isDisabled: boolean
+        /**
+         * @deprecated Use `expanded` instead.
+         */
+        isExpanded: boolean
+        disabled?: boolean
+        expanded?: boolean
+      }) => ReactNode)
     | ReactNode
   /**
    * If `true`, hide the accordion icon for all items.
@@ -40,14 +51,30 @@ export interface AccordionOptions {
    * If `true`, multiple accordion items can be expanded at once.
    *
    * @default false
+   *
+   * @deprecated Use `multiple` instead.
    */
   isMultiple?: boolean
   /**
    * If `true`, any expanded accordion item can be collapsed again.
    *
    * @default false
+   *
+   * @deprecated Use `toggle` instead.
    */
   isToggle?: boolean
+  /**
+   * If `true`, multiple accordion items can be expanded at once.
+   *
+   * @default false
+   */
+  multiple?: boolean
+  /**
+   * If `true`, any expanded accordion item can be collapsed again.
+   *
+   * @default false
+   */
+  toggle?: boolean
   /**
    * The callback invoked when accordion items are expanded or collapsed.
    */
@@ -66,7 +93,7 @@ export interface AccordionProps
  */
 export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Accordion", props)
-  const {
+  let {
     className,
     defaultIndex: defaultValue,
     icon,
@@ -74,23 +101,28 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
     index: value,
     isMultiple,
     isToggle,
+    multiple,
+    toggle,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
 
+  toggle ??= isToggle
+  multiple ??= isMultiple
+
   if (
     (value || defaultValue) != null &&
     !isArray(value || defaultValue) &&
-    isMultiple
+    multiple
   ) {
     console.warn(
-      `Accordion: If 'isMultiple' is passed, then 'index' or 'defaultIndex' must be an array.`,
+      `Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.`,
     )
   }
 
-  if (isMultiple && isToggle) {
+  if (multiple && toggle) {
     console.warn(
-      `Accordion: If 'isMultiple' is passed, 'isToggle' will be ignored. Either remove 'isToggle' or 'isMultiple' depending on whether you want isMultiple accordions visible or not`,
+      `Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not`,
     )
   }
 
@@ -100,7 +132,7 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
 
   const [index, setIndex] = useControllableState({
     defaultValue: () =>
-      isMultiple ? (defaultValue ?? []) : (defaultValue ?? -1),
+      multiple ? (defaultValue ?? []) : (defaultValue ?? -1),
     value,
     onChange,
   })
@@ -119,11 +151,11 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
           icon,
           iconHidden,
           index,
-          isMultiple,
-          isToggle,
+          multiple,
           setFocusedIndex,
           setIndex,
           styles,
+          toggle,
         }}
       >
         <ui.div

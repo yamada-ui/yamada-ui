@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import { Button, ColorPicker, FormControl, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -315,7 +315,7 @@ export const customEyeDropperIcon: Story = () => {
       <ColorPicker
         placeholder={defaultPlaceholder}
         eyeDropperProps={{
-          children: <Ghost fontSize="lg" />,
+          children: <GhostIcon fontSize="lg" />,
         }}
       />
     </>

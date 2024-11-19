@@ -1,5 +1,42 @@
 # @yamada-ui/notice
 
+## 1.1.10
+
+### Patch Changes
+
+- [#3376](https://github.com/yamada-ui/yamada-ui/pull/3376) [`b7e1375`](https://github.com/yamada-ui/yamada-ui/commit/b7e13752c6c30d162658fa0d41e5c185a409dc62) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Set `displayName` and `__ui__` for `@yamada-ui/notice`
+
+- Updated dependencies [[`2131d1f`](https://github.com/yamada-ui/yamada-ui/commit/2131d1f189f711b8c35af1359726eb9d3608ea37), [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/alert@1.1.3
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/close-button@1.0.46
+
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/alert@1.1.2
+
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39)]:
+  - @yamada-ui/close-button@1.0.45
+  - @yamada-ui/alert@1.1.1
+
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`93cfd52`](https://github.com/yamada-ui/yamada-ui/commit/93cfd524ff2de69c6e481523ca4efac42f6abf0a), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/alert@1.1.0
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/close-button@1.0.44
+  - @yamada-ui/motion@2.2.6
+
 ## 1.1.6
 
 ### Patch Changes

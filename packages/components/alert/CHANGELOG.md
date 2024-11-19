@@ -1,5 +1,44 @@
 # @yamada-ui/alert
 
+## 1.1.3
+
+### Patch Changes
+
+- [#3413](https://github.com/yamada-ui/yamada-ui/pull/3413) [`2131d1f`](https://github.com/yamada-ui/yamada-ui/commit/2131d1f189f711b8c35af1359726eb9d3608ea37) Thanks [@eraser5th](https://github.com/eraser5th)! - Fixed import of lucide icon in Alert.
+
+- Updated dependencies [[`6337298`](https://github.com/yamada-ui/yamada-ui/commit/6337298a7d1e2c653ab80b95220ce2112b15bd8b), [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4), [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/lucide@1.8.0
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/loading@1.1.23
+
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`3e9c43a`](https://github.com/yamada-ui/yamada-ui/commit/3e9c43a1ec4e8b5f0d714a583aa97f96e8189b27)]:
+  - @yamada-ui/loading@1.1.22
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.21
+  - @yamada-ui/lucide@1.7.3
+
+## 1.1.0
+
+### Minor Changes
+
+- [#3224](https://github.com/yamada-ui/yamada-ui/pull/3224) [`93cfd52`](https://github.com/yamada-ui/yamada-ui/commit/93cfd524ff2de69c6e481523ca4efac42f6abf0a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated icons.
+
+### Patch Changes
+
+- Updated dependencies [[`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251), [`1d344ae`](https://github.com/yamada-ui/yamada-ui/commit/1d344ae725aeb5886859dc145c605409d8bc4a3e)]:
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/loading@1.1.20
+  - @yamada-ui/lucide@1.7.2
+
 ## 1.0.43
 
 ### Patch Changes

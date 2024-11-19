@@ -17,7 +17,7 @@ export const basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement="bottom">
+      <Slide open={isOpen} placement="bottom">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -39,7 +39,7 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide duration={0.7} isOpen={isOpen} placement="bottom">
+      <Slide duration={0.7} open={isOpen} placement="bottom">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -61,7 +61,7 @@ export const withPlacement: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide isOpen={isOpen} placement="left">
+      <Slide open={isOpen} placement="left">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！

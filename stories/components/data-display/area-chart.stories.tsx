@@ -437,7 +437,7 @@ export const withSplit: Story = () => {
           onMouseEnter={on}
           onMouseLeave={off}
         >
-          <Tooltip isOpen={isOpen} label={splitOffset} placement="top">
+          <Tooltip label={splitOffset} open={isOpen} placement="top">
             <SliderThumb />
           </Tooltip>
         </Slider>

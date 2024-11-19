@@ -141,7 +141,7 @@
       "required": false
     },
     "size": {
-      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the NumberInput.",
       "required": false

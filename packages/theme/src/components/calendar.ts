@@ -82,114 +82,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     },
   },
 
-  sizes: {
-    sm: {
-      button: {
-        h: 8,
-      },
-      container: {
-        fontSize: "xs",
-      },
-      content: {
-        w: 56,
-      },
-      control: {
-        h: 8,
-        w: 8,
-      },
-      day: {
-        h: 8,
-        w: 8,
-      },
-      label: {
-        h: 8,
-      },
-      weekday: {
-        h: 8,
-        w: 8,
-      },
-    },
-    md: {
-      button: {
-        h: 10,
-      },
-      container: {
-        fontSize: "sm",
-      },
-      content: {
-        w: "17.5rem",
-      },
-      control: {
-        h: 10,
-        w: 10,
-      },
-      day: {
-        h: 10,
-        w: 10,
-      },
-      label: {
-        h: 10,
-      },
-      weekday: {
-        h: 10,
-        w: 10,
-      },
-    },
-    lg: {
-      button: {
-        h: 12,
-      },
-      container: {
-        fontSize: "md",
-      },
-      content: {
-        w: "21rem",
-      },
-      control: {
-        h: 12,
-        w: 12,
-      },
-      day: {
-        h: 12,
-        w: 12,
-      },
-      label: {
-        h: 12,
-      },
-      weekday: {
-        h: 12,
-        w: 12,
-      },
-    },
-    full: {
-      button: {
-        h: 12,
-      },
-      container: {
-        fontSize: "md",
-        w: "full",
-      },
-      content: {
-        w: "full",
-      },
-      control: {
-        h: 12,
-        w: 12,
-      },
-      day: {
-        h: 12,
-        w: "full",
-      },
-      label: {
-        h: 12,
-      },
-      weekday: {
-        h: 12,
-        w: "full",
-      },
-    },
-  },
-
   variants: {
     solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
       button: {
@@ -201,7 +93,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         },
         _selected: {
           bg: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
+            ? [`${c}.100`, `${c}.700`]
             : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
@@ -249,7 +141,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedRight: "0",
         },
         _today: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -265,10 +157,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           },
         },
         _selected: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 58)(t, m),
-          ],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
@@ -277,8 +166,8 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           bg: [
             isGray(c)
               ? transparentizeColor(`${c}.50`, 0.24)(t, m)
-              : transparentizeColor(`${c}.50`, 0.64)(t, m),
-            shadeColor(`${c}.300`, 76)(t, m),
+              : transparentizeColor(`${c}.50`, 0.48)(t, m),
+            transparentizeColor(`${c}.300`, 0.12)(t, m),
           ],
           _end: {
             roundedRight: "md",
@@ -301,17 +190,11 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
             bg: ["initial", "initial"],
           },
           _selected: {
-            bg: [
-              isGray(c) ? `${c}.50` : `${c}.100`,
-              shadeColor(`${c}.300`, 58)(t, m),
-            ],
+            bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           },
         },
         _selected: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 58)(t, m),
-          ],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           borderColor: ["transparent", "transparent"],
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
@@ -319,7 +202,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           roundedRight: "0",
         },
         _today: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
           _between: {
             bg: ["initial", "initial"],
           },
@@ -408,10 +291,107 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         color: "inherit",
       },
       weekday: {
+        boxSize: "auto",
         color: "inherit",
-        h: "auto",
         userSelect: "auto",
-        w: "auto",
+      },
+    },
+  },
+
+  sizes: {
+    sm: {
+      button: {
+        h: 8,
+      },
+      container: {
+        fontSize: "xs",
+      },
+      content: {
+        w: 56,
+      },
+      control: {
+        boxSize: 8,
+      },
+      day: {
+        boxSize: 8,
+      },
+      label: {
+        h: 8,
+      },
+      weekday: {
+        boxSize: 8,
+      },
+    },
+    md: {
+      button: {
+        h: 10,
+      },
+      container: {
+        fontSize: "sm",
+      },
+      content: {
+        w: "17.5rem",
+      },
+      control: {
+        boxSize: 10,
+      },
+      day: {
+        boxSize: 10,
+      },
+      label: {
+        h: 10,
+      },
+      weekday: {
+        boxSize: 10,
+      },
+    },
+    lg: {
+      button: {
+        h: 12,
+      },
+      container: {
+        fontSize: "md",
+      },
+      content: {
+        w: "21rem",
+      },
+      control: {
+        boxSize: 12,
+      },
+      day: {
+        boxSize: 12,
+      },
+      label: {
+        h: 12,
+      },
+      weekday: {
+        boxSize: 12,
+      },
+    },
+    full: {
+      button: {
+        h: 12,
+      },
+      container: {
+        fontSize: "md",
+        w: "full",
+      },
+      content: {
+        w: "full",
+      },
+      control: {
+        boxSize: 12,
+      },
+      day: {
+        h: 12,
+        w: "full",
+      },
+      label: {
+        h: 12,
+      },
+      weekday: {
+        h: 12,
+        w: "full",
       },
     },
   },

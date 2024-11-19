@@ -2,7 +2,7 @@
 title: Slider
 description: "`Slider`は、ユーザーが値の範囲から選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/slider"
-order: 29
+order: 32
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -151,13 +151,13 @@ return (
 <VStack>
   <Slider isDisabled />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="volume (sound)"
+    legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -169,13 +169,13 @@ return (
 <VStack>
   <Slider isReadOnly />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="volume (sound)"
+    legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -190,13 +190,13 @@ return (
   <VStack>
     <Slider isInvalid={value < 20} value={value} onChange={onChange} />
 
-    <FormControl
+    <Fieldset
       isInvalid={value < 20}
-      label="volume (sound)"
+      legend="Sound volume"
       errorMessage="Volume should be set to 20 or higher."
     >
       <Slider value={value} onChange={onChange} />
-    </FormControl>
+    </Fieldset>
   </>
 )
 ```
@@ -404,9 +404,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.slider}
-      label="Volume"
+      legend="Sound volume"
       errorMessage={errors.slider ? errors.slider.message : undefined}
     >
       <Controller
@@ -415,7 +415,7 @@ return (
         rules={{ max: { value: 50, message: "The maximum value is 50." } }}
         render={({ field }) => <Slider {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

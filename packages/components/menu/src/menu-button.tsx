@@ -35,10 +35,13 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
+        if (ev.key === " ") ev.key = ev.code
+
         const actions: { [key: string]: Function } = {
           ArrowDown: funcAll(onOpen, onFocusFirstItem),
           ArrowUp: funcAll(onOpen, onFocusLastItem),
           Enter: funcAll(onOpen, onFocusFirstItem),
+          Space: funcAll(onOpen, onFocusFirstItem),
         }
 
         const action = actions[ev.key]
@@ -54,11 +57,15 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     const onItemKeyDown = useCallback(
       (ev: KeyboardEvent<HTMLDivElement>) => {
+        if (ev.key === " ") ev.key = ev.code
+
         const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isOpen
             ? funcAll(onUpstreamRestoreFocus, onClose)
             : undefined,
           ArrowRight: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          Enter: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          Space: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
         }
 
         const action = actions[ev.key]
@@ -82,7 +89,6 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
           id={id}
           ref={mergeRefs(buttonRef, ref)}
           className={cx("ui-menu", className)}
-          aria-expanded={isOpen}
           aria-haspopup="menu"
           {...rest}
           data-active={dataAttr(isOpen)}
@@ -94,6 +100,9 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     )
   },
 )
+
+MenuButton.displayName = "MenuButton"
+MenuButton.__ui__ = "MenuButton"
 
 const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   const { styles } = useMenu()
@@ -135,3 +144,6 @@ export const MenuItemButton = forwardRef<MenuItemButtonProps, "button">(
     )
   },
 )
+
+MenuItemButton.displayName = "MenuItemButton"
+MenuItemButton.__ui__ = "MenuItemButton"

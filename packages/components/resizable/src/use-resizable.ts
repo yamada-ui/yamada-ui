@@ -5,8 +5,14 @@ import type {
   PropGetter,
 } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
-import type { ForwardedRef, RefObject } from "react"
 import type {
+  ForwardedRef,
+  MouseEvent,
+  MouseEventHandler,
+  RefObject,
+} from "react"
+import type {
+  ImperativePanelGroupHandle,
   ImperativePanelHandle,
   PanelGroupOnLayout,
   PanelGroupProps,
@@ -19,32 +25,39 @@ import {
   dataAttr,
   handlerAll,
   isRefObject,
+  mergeRefs,
 } from "@yamada-ui/utils"
-import { useCallback, useEffect, useId, useState } from "react"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 import {
   getPanelElement,
   getPanelGroupElement,
   getResizeHandleElement,
 } from "react-resizable-panels"
 
-interface As {
-  as?: keyof HTMLElementTagNameMap
-}
+type ResizableDirection = "horizontal" | "vertical"
+
+export type As = keyof HTMLElementTagNameMap
 
 interface ResizableGroupProps
-  extends Omit<Partial<PanelGroupProps>, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<Partial<PanelGroupProps>, "children" | "id" | "tagName"> {
+  as?: As
+}
 interface ResizableItemProps
-  extends Omit<PanelProps, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<PanelProps, "children" | "id" | "tagName"> {
+  as?: As
+}
 interface ResizableTriggerProps
-  extends Omit<PanelResizeHandleProps, "children" | "id" | "tagName">,
-    As {}
+  extends Omit<PanelResizeHandleProps, "children" | "id" | "tagName"> {
+  as?: As
+}
 
 export interface ResizableStorage extends PanelGroupStorage {}
+export interface ResizableGroupControl extends ImperativePanelGroupHandle {}
 export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
+  controlRef: RefObject<ResizableGroupControl>
+  direction: ResizableDirection
   isDisabled: boolean
   styles: { [key: string]: CSSUIObject | undefined }
 }
@@ -65,11 +78,15 @@ export interface UseResizableProps {
    */
   ref?: ForwardedRef<HTMLElement>
   /**
+   * Ref of the resizable item callback.
+   */
+  controlRef?: RefObject<ResizableGroupControl>
+  /**
    * The direction of the resizable.
    *
    * @default "horizontal"
    */
-  direction?: "horizontal" | "vertical"
+  direction?: ResizableDirection
   /**
    * If `true`, the resizable trigger will be disabled.
    */
@@ -102,6 +119,7 @@ export interface UseResizableProps {
 export const useResizable = ({
   id,
   ref,
+  controlRef: controlRefProp,
   direction = "horizontal",
   isDisabled = false,
   keyboardStep,
@@ -111,6 +129,7 @@ export const useResizable = ({
   onLayout,
   ...rest
 }: UseResizableProps) => {
+  const controlRef = useRef<ResizableGroupControl>(null)
   const uuid = useId()
 
   id ??= uuid
@@ -121,12 +140,13 @@ export const useResizable = ({
   )
 
   const getGroupProps = useCallback(
-    (props: Partial<PanelGroupProps> = {}): PanelGroupProps => {
+    (props: Partial<PanelGroupProps> = {}) => {
       const { as, ...rest } = groupProps ?? {}
 
       return {
         ...props,
         id,
+        ref: mergeRefs(controlRefProp, controlRef),
         autoSaveId: storageKey,
         direction,
         keyboardResizeBy: keyboardStep,
@@ -136,7 +156,16 @@ export const useResizable = ({
         ...rest,
       }
     },
-    [id, direction, groupProps, storageKey, keyboardStep, onLayout, storage],
+    [
+      id,
+      direction,
+      groupProps,
+      controlRefProp,
+      storageKey,
+      keyboardStep,
+      onLayout,
+      storage,
+    ],
   )
 
   useEffect(() => {
@@ -148,6 +177,8 @@ export const useResizable = ({
   }, [ref, id])
 
   return {
+    controlRef,
+    direction,
     isDisabled,
     getContainerProps,
     getGroupProps,
@@ -258,7 +289,6 @@ export const useResizableItem = ({
         onCollapse,
         onExpand,
         onResize,
-        ...(collapsible ? { "aria-labelledby": id } : { "aria-label": id }),
         ...rest,
       }
     },
@@ -333,17 +363,37 @@ export const useResizableTrigger = ({
   as,
   disabled,
   isDisabled,
-  onDragging,
   ...rest
 }: UseResizableTriggerProps) => {
   const uuid = useId()
 
   id ??= uuid
 
-  const { isDisabled: isGroupDisabled } = useResizableContext()
+  const {
+    controlRef,
+    direction,
+    isDisabled: isGroupDisabled,
+  } = useResizableContext()
   const [isActive, setIsActive] = useState<boolean>(false)
 
   const trulyDisabled = disabled || isDisabled || isGroupDisabled
+
+  const onDoubleClick = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.preventDefault()
+
+      const layout = controlRef.current?.getLayout()
+
+      if (!layout) return
+
+      const count = layout.length
+      const size = 100 / count
+      const nextLayout = layout.map(() => size)
+
+      controlRef.current?.setLayout(nextLayout)
+    },
+    [controlRef],
+  )
 
   const getTriggerProps: PropGetter<
     PanelResizeHandleProps,
@@ -353,9 +403,9 @@ export const useResizableTrigger = ({
       ({
         ...props,
         id,
+        "aria-orientation": direction,
         disabled: trulyDisabled,
         tagName: as,
-        onDragging: handlerAll(onDragging, (isActive) => setIsActive(isActive)),
         ...rest,
         style: {
           ...props.style,
@@ -363,8 +413,15 @@ export const useResizableTrigger = ({
           ...(trulyDisabled ? { cursor: "default" } : {}),
         },
         "data-active": dataAttr(isActive),
+        onDoubleClick: handlerAll(
+          rest.onDoubleClick as MouseEventHandler<keyof typeof as>,
+          onDoubleClick,
+        ),
+        onDragging: handlerAll(rest.onDragging, (isActive) =>
+          setIsActive(isActive),
+        ),
       }) as PanelResizeHandleProps,
-    [id, as, trulyDisabled, onDragging, rest, isActive],
+    [id, as, direction, trulyDisabled, rest, onDoubleClick, isActive],
   )
 
   const getIconProps: PropGetter = useCallback(

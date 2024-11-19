@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Activity } from "@yamada-ui/lucide"
+import { ActivityIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
-  FormControl,
+  Fieldset,
   Slider,
   SliderFilledTrack,
   SliderMark,
@@ -186,7 +186,7 @@ export const withTooltip: Story = () => {
         75%
       </SliderMark>
 
-      <Tooltip isOpen={isOpen} label={`${value}%`} placement="top">
+      <Tooltip label={`${value}%`} open={isOpen} placement="top">
         <SliderThumb />
       </Tooltip>
     </Slider>
@@ -198,13 +198,13 @@ export const isDisabled: Story = () => {
     <>
       <Slider isDisabled />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your preferred volume."
         isDisabled
-        label="volume (sound)"
+        legend="Sound volume"
       >
         <Slider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -214,13 +214,13 @@ export const isReadonly: Story = () => {
     <>
       <Slider isReadOnly />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your preferred volume."
         isReadOnly
-        label="volume (sound)"
+        legend="Sound volume"
       >
         <Slider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -232,13 +232,13 @@ export const isInvalid: Story = () => {
     <>
       <Slider isInvalid={value < 20} value={value} onChange={onChange} />
 
-      <FormControl
+      <Fieldset
         errorMessage="Volume should be set to 20 or higher."
         isInvalid={value < 20}
-        label="volume (sound)"
+        legend="Sound volume"
       >
         <Slider value={value} onChange={onChange} />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -280,14 +280,14 @@ export const customThumb: Story = () => {
       <Slider
         thumbProps={{
           boxSize: "6",
-          children: <Activity />,
+          children: <ActivityIcon />,
           color: "blue.500",
         }}
       />
 
       <Slider>
         <SliderThumb boxSize="6" color="blue.500">
-          <Activity />
+          <ActivityIcon />
         </SliderThumb>
       </Slider>
     </>
@@ -385,10 +385,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.slider?.message}
         isInvalid={!!errors.slider}
-        label="Volume"
+        legend="Sound volume"
       >
         <Controller
           name="slider"
@@ -396,7 +396,7 @@ export const reactHookForm: Story = () => {
           render={({ field }) => <Slider {...field} />}
           rules={{ max: { message: "The maximum value is 50.", value: 50 } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

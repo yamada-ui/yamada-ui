@@ -1,5 +1,28 @@
 # @yamada-ui/segmented-control
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+
+## 1.1.0
+
+### Minor Changes
+
+- [#3298](https://github.com/yamada-ui/yamada-ui/pull/3298) [`4c78ab0`](https://github.com/yamada-ui/yamada-ui/commit/4c78ab0b80c7baeba9b85c047b297d32e60c6891) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `role="radiogroup"` to `SegmentedControl` component.
+
+## 1.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`81fda67`](https://github.com/yamada-ui/yamada-ui/commit/81fda6792c1a5f5d8af7f33fb068afdfcecd1468), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/use-descendant@1.0.25
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/motion@2.2.6
+
 ## 1.0.43
 
 ### Patch Changes

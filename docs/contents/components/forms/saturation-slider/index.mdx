@@ -1,8 +1,10 @@
 ---
 title: SaturationSlider
-description: "`SaturationSlider` is a component used to allow the user to select a color saturation."
+description: >-
+  `SaturationSlider` is a component used to allow the user to select a color
+  saturation.
 package_name: "@yamada-ui/color-picker"
-order: 33
+order: 36
 is_tabs: true
 with_description: true
 tab: Usage
@@ -128,13 +130,13 @@ To disable, set `isDisabled` to `true`.
 <VStack>
   <SaturationSlider isDisabled />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <SaturationSlider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -146,13 +148,13 @@ To make read-only, set `isReadOnly` to `true`.
 <VStack>
   <SaturationSlider isReadOnly />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="Pick color"
+    legend="Pick color"
     helperMessage="Please select your favorite color"
   >
     <SaturationSlider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -204,9 +206,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.saturationSlider}
-      label="Pick color"
+      legend="Pick color"
       errorMessage={
         errors.saturationSlider ? errors.saturationSlider.message : undefined
       }
@@ -216,7 +218,7 @@ return (
         control={control}
         render={({ field }) => <SaturationSlider {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

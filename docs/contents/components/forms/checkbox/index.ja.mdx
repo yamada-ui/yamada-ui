@@ -2,7 +2,7 @@
 title: Checkbox
 description: "`Checkbox`は、ユーザーが複数の選択肢の中から複数の値を選択するための使用されるコンポーネントです。"
 package_name: "@yamada-ui/checkbox"
-order: 11
+order: 13
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -70,23 +70,17 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isDisabled legend="Which notifications would you like to receive?">
     <Checkbox defaultIsChecked>All Notifications</Checkbox>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isDisabled legend="Which notifications would you like to receive?">
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
       <Checkbox value="service">Service Notifications</Checkbox>
     </CheckboxGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -109,23 +103,17 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
     <Checkbox defaultIsChecked>All Notifications</Checkbox>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
       <Checkbox value="service">Service Notifications</Checkbox>
     </CheckboxGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -148,17 +136,17 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <FormControl
+  <Fieldset
     isInvalid
-    label="Which notifications would you like to receive?"
+    legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
     <Checkbox>All Notifications</Checkbox>
-  </FormControl>
+  </Fieldset>
 
-  <FormControl
+  <Fieldset
     isInvalid
-    label="Which notifications would you like to receive?"
+    legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
     <CheckboxGroup defaultValue={["all"]}>
@@ -166,7 +154,7 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
       <Checkbox value="important">Important Notifications</Checkbox>
       <Checkbox value="service">Service Notifications</Checkbox>
     </CheckboxGroup>
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -315,9 +303,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.checkbox}
-      label="Who is your favorite character?"
+      legend="Who is your favorite character?"
       errorMessage={errors.checkbox ? errors.checkbox.message : undefined}
     >
       <Controller
@@ -330,11 +318,11 @@ return (
           </Checkbox>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.checkboxGroup}
-      label="Who is your favorite character?"
+      legend="Who is your favorite character?"
       errorMessage={
         errors.checkboxGroup ? errors.checkboxGroup.message : undefined
       }
@@ -351,7 +339,7 @@ return (
           </CheckboxGroup>
         )}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

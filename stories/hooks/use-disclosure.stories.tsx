@@ -23,7 +23,7 @@ export const basic = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -65,7 +65,7 @@ export const withChain = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={() => onClose("This is arg")}
         onClose={() => onClose("This is arg")}
@@ -104,7 +104,7 @@ export const withPromise = () => {
         size="2xl"
         cancel="わけない"
         header="ミスター・サタン"
-        isOpen={isOpen}
+        open={isOpen}
         success="わける"
         onCancel={onClose}
         onClose={onClose}

@@ -3,7 +3,7 @@ import type { SubmitHandler } from "react-hook-form"
 import {
   Button,
   Center,
-  FormControl,
+  Fieldset,
   HueSlider,
   Text,
   VStack,
@@ -97,13 +97,13 @@ export const isDisabled: Story = () => {
     <>
       <HueSlider isDisabled />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isDisabled
-        label="Pick color"
+        legend="Pick color"
       >
         <HueSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -113,13 +113,13 @@ export const isReadonly: Story = () => {
     <>
       <HueSlider isReadOnly />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isReadOnly
-        label="Pick color"
+        legend="Pick color"
       >
         <HueSlider />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -189,10 +189,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.hueSlider?.message}
         isInvalid={!!errors.hueSlider}
-        label="Pick color"
+        legend="Pick color"
       >
         <Controller
           name="hueSlider"
@@ -200,7 +200,7 @@ export const reactHookForm: Story = () => {
           render={({ field }) => <HueSlider {...field} />}
           rules={{ max: { message: "The maximum value is 180.", value: 180 } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

@@ -1,5 +1,24 @@
 # @yamada-ui/pin-input
 
+## 1.1.2
+
+### Patch Changes
+
+- [#3416](https://github.com/yamada-ui/yamada-ui/pull/3416) [`a9130b8`](https://github.com/yamada-ui/yamada-ui/commit/a9130b8aae055bbb1f831b75115d4a4b77b28124) Thanks [@miyamyia](https://github.com/miyamyia)! - Modified PinInput to be overridden by PinInputField's disabled and readonly props when they are set to true
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/form-control@2.1.7
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`81fda67`](https://github.com/yamada-ui/yamada-ui/commit/81fda6792c1a5f5d8af7f33fb068afdfcecd1468), [`19d0ff8`](https://github.com/yamada-ui/yamada-ui/commit/19d0ff8bd487f00182b571e4cbe1dc3c70a96ca0), [`6986c1a`](https://github.com/yamada-ui/yamada-ui/commit/6986c1a2f8db2c3367b41955087dbb83307f7251)]:
+  - @yamada-ui/use-descendant@1.0.25
+  - @yamada-ui/core@1.15.4
+  - @yamada-ui/form-control@2.1.6
+
 ## 1.1.0
 
 ### Minor Changes

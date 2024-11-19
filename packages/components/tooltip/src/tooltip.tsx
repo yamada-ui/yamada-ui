@@ -77,8 +77,20 @@ interface TooltipOptions {
   closeOnScroll?: boolean
   /**
    * If `true`, the tooltip will be initially shown.
+   *
+   * @deprecated Use `defaultOpen` instead.
    */
   defaultIsOpen?: boolean
+  /**
+   * If `true`, the tooltip will be initially shown.
+   */
+  defaultOpen?: boolean
+  /**
+   * If `true`, the tooltip will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * The animation duration.
    */
@@ -87,16 +99,23 @@ interface TooltipOptions {
    * If `true`, the tooltip will be disabled.
    *
    * @default false
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the tooltip will be shown.
+   *
+   * @deprecated Use `open` instead.
    */
   isOpen?: boolean
   /**
    * The label of the tooltip.
    */
   label?: ReactNode
+  /**
+   * If `true`, the tooltip will be shown.
+   */
+  open?: boolean
   /**
    * The delay before showing the tooltip.
    *
@@ -181,7 +200,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       "Tooltip",
       props,
     )
-    const {
+    let {
       className,
       animation,
       children,
@@ -192,6 +211,8 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       closeOnPointerDown = false,
       closeOnScroll,
       defaultIsOpen: defaultIsOpenProp,
+      defaultOpen: defaultOpenProp,
+      disabled,
       duration,
       gutter,
       isDisabled,
@@ -199,6 +220,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       label,
       modifiers,
       offset,
+      open: openProp,
       openDelay = 0,
       placement,
       onClose: onCloseProp,
@@ -209,9 +231,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const id = useId()
+
+    openProp ??= isOpenProp
+    defaultOpenProp ??= defaultIsOpenProp
+    disabled ??= isDisabled
+
     const { isOpen, onClose, onOpen } = useDisclosure({
-      defaultIsOpen: defaultIsOpenProp,
-      isOpen: isOpenProp,
+      defaultIsOpen: defaultOpenProp,
+      isOpen: openProp,
       onClose: onCloseProp,
       onOpen: onOpenProp,
     })
@@ -237,14 +264,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     }, [onClose])
 
     const openWithDelay = useCallback(() => {
-      if (!isDisabled && !openTimeout.current) {
+      if (!disabled && !openTimeout.current) {
         if (isOpen) closeNow()
 
         const win = getOwnerWindow(triggerRef.current)
 
         openTimeout.current = win.setTimeout(onOpen, openDelay)
       }
-    }, [isDisabled, isOpen, openDelay, closeNow, onOpen])
+    }, [disabled, isOpen, openDelay, closeNow, onOpen])
 
     const closeWithDelay = useCallback(() => {
       if (openTimeout.current) {

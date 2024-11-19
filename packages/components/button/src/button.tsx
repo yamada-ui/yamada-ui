@@ -27,6 +27,10 @@ interface ButtonOptions {
    */
   disableRipple?: boolean
   /**
+   * The icon to display at the end side of the button.
+   */
+  endIcon?: ReactElement
+  /**
    * If `true`, the button is represented as active.
    *
    * @default false
@@ -52,6 +56,8 @@ interface ButtonOptions {
   isRounded?: boolean
   /**
    * The icon to display at the left side of the button.
+   *
+   * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
   /**
@@ -70,8 +76,14 @@ interface ButtonOptions {
   loadingText?: string
   /**
    * The icon to display at the right side of the button.
+   *
+   * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement
+  /**
+   * The icon to display at the start side of the button.
+   */
+  startIcon?: ReactElement
 }
 
 export interface ButtonProps
@@ -100,6 +112,7 @@ export const Button = forwardRef<ButtonProps, "button">(
       type,
       className,
       disableRipple,
+      endIcon,
       isActive,
       isDisabled = group?.isDisabled,
       isLoading,
@@ -109,6 +122,7 @@ export const Button = forwardRef<ButtonProps, "button">(
       loadingPlacement = "start",
       loadingText,
       rightIcon,
+      startIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -148,8 +162,10 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const contentProps = {
       children,
+      endIcon,
       leftIcon,
       rightIcon,
+      startIcon,
     }
 
     const loadingProps = {
@@ -194,7 +210,7 @@ export const Button = forwardRef<ButtonProps, "button">(
           />
         ) : null}
 
-        <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
+        <Ripple {...rippleProps} />
       </ui.button>
     )
   },
@@ -241,18 +257,26 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<ButtonProps, "children" | "leftIcon" | "rightIcon"> {}
+  extends Pick<
+    ButtonProps,
+    "children" | "endIcon" | "leftIcon" | "rightIcon" | "startIcon"
+  > {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
+  endIcon,
   leftIcon,
   rightIcon,
+  startIcon,
 }) => {
+  startIcon ??= leftIcon
+  endIcon ??= rightIcon
+
   return (
     <>
-      {leftIcon ? <ButtonIcon>{leftIcon}</ButtonIcon> : null}
+      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
       {children}
-      {rightIcon ? <ButtonIcon>{rightIcon}</ButtonIcon> : null}
+      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
     </>
   )
 }

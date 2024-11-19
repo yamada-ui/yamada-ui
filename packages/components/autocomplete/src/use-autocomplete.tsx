@@ -52,7 +52,10 @@ interface AutocompleteItemWithValue extends AutocompleteOptionProps {
 
 interface AutocompleteItemWithItems
   extends AutocompleteOptionGroupProps,
-    Pick<AutocompleteOptionProps, "isDisabled" | "isFocusable"> {
+    Pick<
+      AutocompleteOptionProps,
+      "disabled" | "focusable" | "isDisabled" | "isFocusable"
+    > {
   items?: AutocompleteItemWithValue[]
 }
 
@@ -179,8 +182,8 @@ const flattenItems = (
   ): (AutocompleteItemWithValue | AutocompleteItemWithValue[])[] =>
     items
       .map((item) => {
-        const { isDisabled, isFocusable } = item
-        const trulyDisabled = !!isDisabled && !isFocusable
+        const { disabled, focusable } = item
+        const trulyDisabled = !!disabled && !focusable
 
         if (trulyDisabled) return
 

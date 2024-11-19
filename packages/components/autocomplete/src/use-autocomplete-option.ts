@@ -37,11 +37,27 @@ export interface UseAutocompleteOptionProps
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the autocomplete option will be focusable.
+   *
+   * @default false
+   */
+  focusable?: boolean
+  /**
+   * If `true`, the autocomplete option will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * If `true`, the autocomplete option will be focusable.
    *
    * @default false
+   *
+   * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
   /**
@@ -69,13 +85,17 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     id,
     children,
     closeOnSelect: customCloseOnSelect,
+    disabled,
+    focusable,
     icon: customIcon,
     isDisabled,
     isFocusable,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-  const trulyDisabled = !!isDisabled && !isFocusable
+  disabled ??= isDisabled
+  focusable ??= isFocusable
+  const trulyDisabled = !!disabled && !focusable
   const { descendants, index, register } = useAutocompleteDescendant({
     disabled: trulyDisabled,
   })
@@ -111,7 +131,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
-      if (isDisabled || !isTargetOption(ev.currentTarget)) {
+      if (disabled || !isTargetOption(ev.currentTarget)) {
         if (inputRef.current) inputRef.current.focus()
 
         return
@@ -131,7 +151,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       isDuplicated,
       onFocusNext,
       omitSelectedValues,
-      isDisabled,
+      disabled,
       optionValue,
       setFocusedIndex,
       index,
@@ -166,10 +186,10 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         ...props,
         id,
         style: isHidden ? style : undefined,
-        "aria-disabled": ariaAttr(isDisabled),
+        "aria-disabled": ariaAttr(disabled),
         "aria-hidden": ariaAttr(isHidden),
         "aria-selected": isSelected,
-        "data-disabled": dataAttr(isDisabled),
+        "data-disabled": dataAttr(disabled),
         "data-duplicated": dataAttr(isDuplicated),
         "data-focus": dataAttr(isFocused),
         "data-target": dataAttr(true),
@@ -183,7 +203,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       isDuplicated,
       optionValue,
       computedProps,
-      isDisabled,
+      disabled,
       isFocused,
       isSelected,
       isTarget,

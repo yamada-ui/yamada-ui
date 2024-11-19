@@ -46,7 +46,6 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     src,
     srcSet,
     className,
-    boxSize,
     crossOrigin,
     fallback,
     fallbackStrategy = "beforeLoadOrError",
@@ -61,10 +60,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
 
   ignoreFallback = loading != null || ignoreFallback || !fallback
 
-  const css = useMemo(
-    () => ({ ...styles, boxSize, objectFit }),
-    [styles, boxSize, objectFit],
-  )
+  const css = useMemo(() => ({ ...styles, objectFit }), [styles, objectFit])
 
   const status = useImage({ ...props, ignoreFallback })
 

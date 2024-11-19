@@ -60,7 +60,7 @@ export interface FormControlOptions {
    *
    * @default false
    *
-   * @deprecated Use `readOnly` instead.
+   * @deprecated Use `required` instead.
    */
   isRequired?: boolean
   /**

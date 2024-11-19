@@ -1,5 +1,11 @@
 # @yamada-ui/icon
 
+## 1.1.13
+
+### Patch Changes
+
+- [#3540](https://github.com/yamada-ui/yamada-ui/pull/3540) [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update icon components, mark deprecated.
+
 ## 1.1.12
 
 ### Patch Changes

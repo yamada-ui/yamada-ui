@@ -469,6 +469,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMax)
 
       return {
+        "aria-label": "Increase",
         disabled: trulyDisabled,
         readOnly,
         required,
@@ -504,6 +505,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMin)
 
       return {
+        "aria-label": "Decrease",
         disabled: trulyDisabled,
         readOnly,
         required,
@@ -733,6 +735,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       >
         <ui.div
           className={cx("ui-number-input", className)}
+          role="group"
           __css={css}
           {...containerProps}
         >

@@ -123,7 +123,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("with disabled", () => {
-      render(<Autocomplete isDisabled items={ITEMS} />)
+      render(<Autocomplete disabled items={ITEMS} />)
 
       expect(screen.getByRole("combobox").querySelector("input")).toBeDisabled()
     })
@@ -316,7 +316,7 @@ describe("<Autocomplete />", () => {
     test("should focus the input element on click an option with disabled", async () => {
       const { user } = render(
         <Autocomplete>
-          <AutocompleteOption isDisabled value="disabledOption">
+          <AutocompleteOption disabled value="disabledOption">
             disabledOption
           </AutocompleteOption>
         </Autocomplete>,

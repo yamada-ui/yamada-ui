@@ -3,7 +3,7 @@ import type { SubmitHandler } from "react-hook-form"
 import {
   Button,
   ColorSelector,
-  FormControl,
+  Fieldset,
   Text,
   VStack,
   Wrap,
@@ -152,13 +152,13 @@ export const isDisabled: Story = () => {
         swatchesLabel="Saved Colors"
       />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isDisabled
-        label="Pick color"
+        legend="Pick color"
       >
         <ColorSelector />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -187,13 +187,13 @@ export const isReadonly: Story = () => {
         swatchesLabel="Saved Colors"
       />
 
-      <FormControl
+      <Fieldset
         helperMessage="Please select your favorite color"
         isReadOnly
-        label="Pick color"
+        legend="Pick color"
       >
         <ColorSelector />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -281,17 +281,17 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.colorPicker?.message}
         isInvalid={!!errors.colorPicker}
-        label="Pick color"
+        legend="Pick color"
       >
         <Controller
           name="colorPicker"
           control={control}
           render={({ field }) => <ColorSelector {...field} />}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

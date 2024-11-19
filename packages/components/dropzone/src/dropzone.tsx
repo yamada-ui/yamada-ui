@@ -129,10 +129,10 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 
   const disabled = isLoading || rest.disabled || rest.readOnly
 
-  const [formControlProps, containerProps] = splitObject(
-    rest,
-    formControlProperties,
-  )
+  const [
+    { "aria-readonly": ariaReadOnly, ...formControlProps },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
 
   const { isDragAccept, isDragReject, open, getInputProps, getRootProps } =
     useDropzone({
@@ -179,6 +179,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
       <ui.div
         className={cx("ui-dropzone", className)}
         __css={css}
+        {...formControlProps}
         {...containerProps}
         {...getRootProps({})}
         data-accept={dataAttr(isDragAccept)}
@@ -192,6 +193,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
           id={id}
           ref={ref}
           name={name}
+          aria-readonly={ariaReadOnly}
           {...formControlProps}
           {...getInputProps()}
         />

@@ -1,7 +1,6 @@
 import type {
   ComponentArgs,
   CSSUIObject,
-  FC,
   HTMLUIProps,
   HTMLUIPropsWithoutAs,
 } from "@yamada-ui/core"

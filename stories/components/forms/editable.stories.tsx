@@ -56,7 +56,7 @@ export const withStartWithEditView: Story = () => {
 
 export const withIsPreviewFocusable: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" isPreviewFocusable={false}>
+    <Editable defaultValue="オッス！オラ悟空！" previewFocusable={false}>
       <EditablePreview />
       <EditableInput />
     </Editable>
@@ -183,10 +183,10 @@ export const isInvalid: Story = () => {
 
 export const customControl: Story = () => {
   const CustomControls = () => {
-    const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
+    const { editing, getCancelProps, getEditProps, getSubmitProps } =
       useEditableControl()
 
-    return isEditing ? (
+    return editing ? (
       <ButtonGroup size="sm" gap="sm">
         <IconButton
           icon={<CheckIcon />}
@@ -216,7 +216,7 @@ export const customControl: Story = () => {
       defaultValue="オッス！オラ悟空！"
       display="flex"
       gap="sm"
-      isPreviewFocusable={false}
+      previewFocusable={false}
     >
       <EditablePreview w="full" />
       <EditableInput />

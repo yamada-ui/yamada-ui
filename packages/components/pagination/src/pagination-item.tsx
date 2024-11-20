@@ -18,6 +18,18 @@ interface PaginationItemOptions {
    */
   page: "ellipsis" | "first" | "last" | "next" | "prev" | number
   /**
+   * If `true`, the pagination item will be activated.
+   *
+   * @default false
+   */
+  active?: boolean
+  /**
+   * If `true`, the pagination item will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
@@ -27,12 +39,16 @@ interface PaginationItemOptions {
    * If `true`, the pagination item will be activated.
    *
    * @default false
+   *
+   * @deprecated Use `active` instead.
    */
   isActive?: boolean
   /**
    * If `true`, the pagination item will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
 }
@@ -53,7 +69,17 @@ const iconMap: {
 
 export const PaginationItem = forwardRef<PaginationItemProps, "button">(
   (
-    { className, children, disableRipple, isActive, isDisabled, page, ...rest },
+    {
+      className,
+      active,
+      children,
+      disabled,
+      disableRipple,
+      isActive,
+      isDisabled,
+      page,
+      ...rest
+    },
     ref,
   ) => {
     const styles = usePaginationContext()
@@ -64,6 +90,8 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
     })
 
     children ??= iconMap[page] ?? page
+    active ??= isActive
+    disabled ??= isDisabled
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -84,9 +112,9 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
         {...(!isEllipsis
           ? {
               type: "button",
-              "data-disabled": dataAttr(isDisabled),
-              "data-selected": dataAttr(isActive),
-              disabled: isDisabled,
+              "data-disabled": dataAttr(disabled),
+              "data-selected": dataAttr(active),
+              disabled,
             }
           : {})}
         className={cx(

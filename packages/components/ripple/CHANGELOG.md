@@ -1,5 +1,12 @@
 # @yamada-ui/ripple
 
+## 1.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c)]:
+  - @yamada-ui/motion@2.2.8
+
 ## 1.0.43
 
 ### Patch Changes

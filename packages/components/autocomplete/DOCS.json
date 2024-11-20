@@ -324,6 +324,18 @@
       "description": "If `true`, the list element will be closed when selected.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the autocomplete option will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the autocomplete option will be focusable.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "The autocomplete option icon to use.",
@@ -332,12 +344,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the autocomplete option will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the autocomplete option will be focusable.",
       "required": false
     },
@@ -381,6 +395,12 @@
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier.",
+      "required": false
+    },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the select clear icon.",
       "required": false
     },
     "clearIconProps": {
@@ -530,6 +550,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the select clear icon.",
       "required": false
     },

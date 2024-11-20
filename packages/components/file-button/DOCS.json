@@ -12,6 +12,11 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "endIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
     "errorBorderColor": {
       "type": "\"border\" | BorderColor | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 320 more ... | [...]",
       "description": "The border color when the button is invalid.",
@@ -61,6 +66,7 @@
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "deprecated": "Use `startIcon` instead.",
       "description": "The icon to display at the left side of the button.",
       "required": false
     },
@@ -92,6 +98,7 @@
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "deprecated": "Use `endIcon` instead.",
       "description": "The icon to display at the right side of the button.",
       "required": false
     },
@@ -99,6 +106,11 @@
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the FileButton.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to display at the start side of the button.",
       "required": false
     },
     "variant": {

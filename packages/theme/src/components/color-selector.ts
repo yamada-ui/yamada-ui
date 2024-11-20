@@ -6,7 +6,7 @@ export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
     body: {},
     channel: {},
     channelLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontWeight: "medium",
     },
     channels: {},
@@ -34,7 +34,7 @@ export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
     },
     swatches: {},
     swatchesLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontWeight: "medium",
     },
   },

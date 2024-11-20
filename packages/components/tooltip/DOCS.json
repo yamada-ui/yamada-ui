@@ -49,7 +49,19 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead.",
       "description": "If `true`, the tooltip will be initially shown.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the tooltip will be initially shown.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the tooltip will be disabled.",
       "required": false
     },
     "duration": {
@@ -66,11 +78,13 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the tooltip will be disabled.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead.",
       "description": "If `true`, the tooltip will be shown.",
       "required": false
     },
@@ -98,6 +112,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback to run when the tooltip shows.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the tooltip will be shown.",
       "required": false
     },
     "openDelay": {

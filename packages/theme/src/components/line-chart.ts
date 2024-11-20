@@ -90,14 +90,14 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       textAlign: "end",
     },
     xAxis: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "xs",
     },
     xAxisLabel: {
       fontSize: 12,
     },
     yAxis: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "xs",
     },
     yAxisLabel: {

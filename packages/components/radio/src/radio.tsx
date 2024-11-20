@@ -93,7 +93,7 @@ export const useRadio = <
 
   id ??= uuid
 
-  const {
+  let {
     id: _id,
     name,
     checked: checkedProp,
@@ -105,8 +105,8 @@ export const useRadio = <
     ...computedProps
   } = useFormControlProps({ id, ...props })
 
-  const checkedPropValue = checkedProp ?? isCheckedProp
-  const _defaultChecked = defaultChecked ?? defaultIsChecked
+  checkedProp ??= isCheckedProp
+  defaultChecked ??= defaultIsChecked
 
   const [
     {
@@ -126,10 +126,10 @@ export const useRadio = <
   const [hovered, setHovered] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
 
-  const [checkedState, setChecked] = useState<boolean>(!!_defaultChecked)
+  const [checkedState, setChecked] = useState<boolean>(!!defaultChecked)
 
-  const controlled = checkedPropValue !== undefined
-  const checked = controlled ? (checkedPropValue as boolean) : checkedState
+  const controlled = checkedProp !== undefined
+  const checked = controlled ? (checkedProp as boolean) : checkedState
 
   useEffect(() => {
     return trackFocusVisible(setFocusVisible)
@@ -309,15 +309,11 @@ export const Radio = forwardRef(
     const {
       className,
       children,
-      disabled = groupProps.isDisabled ?? control.disabled,
       gap = "0.5rem",
-      invalid = groupProps.isInvalid ?? control.invalid,
-      isDisabled = groupProps.isDisabled ?? control.disabled,
-      isInvalid = groupProps.isInvalid ?? control.invalid,
-      isReadOnly = groupProps.isReadOnly ?? control.readOnly,
-      isRequired = groupProps.isRequired ?? control.required,
-      readOnly = groupProps.isReadOnly ?? control.readOnly,
-      required = groupProps.isRequired ?? control.required,
+      isDisabled = groupProps.isDisabled ?? control.isDisabled,
+      isInvalid = groupProps.isInvalid ?? control.isInvalid,
+      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
+      isRequired = groupProps.isRequired ?? control.isRequired,
       iconProps,
       inputProps,
       labelProps,
@@ -346,15 +342,11 @@ export const Radio = forwardRef(
     } = useRadio({
       ...computedProps,
       checked: checkedProp,
-      disabled,
-      invalid,
       isChecked: checkedProp,
       isDisabled,
       isInvalid,
       isReadOnly,
       isRequired,
-      readOnly,
-      required,
       onChange,
     })
 

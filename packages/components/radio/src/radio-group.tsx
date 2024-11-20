@@ -145,22 +145,21 @@ export const useRadioGroup = <
     { value?: Y },
     {
       checked?: boolean
-      /** @deprecated Use `checked` instead */
       isChecked?: boolean
       value?: Y
     }
   > = useCallback(
     (props = {}, ref = null) => {
-      const isChecked = props.value === value
+      const checked = props.value === value
 
       return {
         ...props,
         ref,
         name,
-        "aria-checked": isChecked,
+        "aria-checked": checked,
         [native ? "checked" : "isChecked"]:
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-          value != null ? isChecked : undefined,
+          value != null ? checked : undefined,
         onChange,
       }
     },

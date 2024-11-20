@@ -24,57 +24,25 @@ export interface FormControlOptions {
    *
    * @default false
    */
-  disabled?: boolean
-  /**
-   * If `true`, the form control will be invalid.
-   *
-   * @default false
-   */
-  invalid?: boolean
-  /**
-   * If `true`, the form control will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
   isDisabled?: boolean
   /**
    * If `true`, the form control will be invalid.
    *
    * @default false
-   *
-   * @deprecated Use `invalid` instead.
    */
   isInvalid?: boolean
   /**
    * If `true`, the form control will be readonly.
    *
    * @default false
-   *
-   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
   /**
    * If `true`, the form control will be required.
    *
    * @default false
-   *
-   * @deprecated Use `required` instead.
    */
   isRequired?: boolean
-  /**
-   * If `true`, the form control will be readonly.
-   *
-   * @default false
-   */
-  readOnly?: boolean
-  /**
-   * If `true`, the form control will be required.
-   *
-   * @default false
-   */
-  required?: boolean
 }
 
 interface FormControlAdditionalOptions extends LabelOptions {
@@ -268,18 +236,18 @@ export const useFormControl = <Y extends Dict = Dict>({
 
   const id = idProp ?? control?.id
   const labelId = control?.labelId
-  const _disabled = disabled ?? isDisabledProp ?? control?.isDisabled
-  const _readOnly = readOnly ?? isReadOnlyProp ?? control?.isReadOnly
-  const _required = required ?? isRequiredProp ?? control?.isRequired
-  const invalid = isInvalidProp ?? control?.isInvalid
+  const isDisabled = disabled ?? isDisabledProp ?? control?.isDisabled
+  const isReadOnly = readOnly ?? isReadOnlyProp ?? control?.isReadOnly
+  const isRequired = required ?? isRequiredProp ?? control?.isRequired
+  const isInvalid = isInvalidProp ?? control?.isInvalid
 
   return {
     id,
-    disabled: _disabled,
-    invalid,
+    isDisabled,
+    isInvalid,
+    isReadOnly,
+    isRequired,
     labelId,
-    readOnly: _readOnly,
-    required: _required,
     ...rest,
   }
 }

@@ -34,7 +34,7 @@ export const basic: Story = () => {
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem currentPage>
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
@@ -47,7 +47,7 @@ export const withItems: Story = () => {
       { href: "/", name: "サイヤ人編" },
       { href: "/", name: "ナメック星編" },
       { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ],
     [],
   )
@@ -61,7 +61,7 @@ export const withBoundaries: Story = () => {
       { href: "/", name: "サイヤ人編" },
       { href: "/", name: "ナメック星編" },
       { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ],
     [],
   )
@@ -73,9 +73,9 @@ export const customBoundaries: Story = () => {
   const items = useMemo<BreadcrumbGenerateItem[]>(
     () => [
       { href: "/", name: "サイヤ人編" },
-      { href: "/", name: "ナメック星編", isEllipsisPage: true },
-      { href: "/", name: "人造人間編", isEllipsisPage: true },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "ナメック星編", ellipsisPage: true },
+      { href: "/", name: "人造人間編", ellipsisPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ],
     [],
   )
@@ -89,7 +89,7 @@ export const customEllipsis: Story = () => {
       { href: "/", name: "サイヤ人編" },
       { href: "/", name: "ナメック星編" },
       { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ],
     [],
   )
@@ -132,7 +132,7 @@ export const withSeparator: Story = () => {
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem currentPage>
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
@@ -151,7 +151,7 @@ export const withCustomSeparator: Story = () => {
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem currentPage>
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
@@ -170,7 +170,7 @@ export const withEllipsis: Story = () => {
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem currentPage>
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
@@ -205,7 +205,7 @@ export const withMenu: Story = () => {
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem currentPage>
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>

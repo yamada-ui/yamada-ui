@@ -51,18 +51,8 @@ export interface UseRadioGroupProps<Y extends number | string = string> {
    * This assumes, you're using native radio inputs.
    *
    * @default false
-   *
-   * @deprecated Use `native` instead.
    */
   isNative?: boolean
-  /**
-   * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
-   *
-   * This assumes, you're using native radio inputs.
-   *
-   * @default false
-   */
-  native?: boolean
   /**
    * The value of the radio group.
    */
@@ -81,7 +71,6 @@ export const useRadioGroup = <
   name,
   defaultValue,
   isNative,
-  native,
   value: valueProp,
   onChange: onChangeProp,
   ...props
@@ -90,7 +79,6 @@ export const useRadioGroup = <
 
   id ??= uuid
   name ??= `radio-${id}`
-  native ??= isNative
 
   const onChangeRef = useCallbackRef(onChangeProp)
 
@@ -157,13 +145,13 @@ export const useRadioGroup = <
         ref,
         name,
         "aria-checked": checked,
-        [native ? "checked" : "isChecked"]:
+        [isNative ? "checked" : "isChecked"]:
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           value != null ? checked : undefined,
         onChange,
       }
     },
-    [name, value, onChange, native],
+    [name, value, onChange, isNative],
   )
 
   return {

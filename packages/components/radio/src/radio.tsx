@@ -126,10 +126,10 @@ export const useRadio = <
   const [hovered, setHovered] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
 
-  const [checkedState, setChecked] = useState<boolean>(!!defaultChecked)
+  const [checked, setChecked] = useState<boolean>(!!defaultChecked)
 
   const controlled = checkedProp !== undefined
-  const checked = controlled ? (checkedProp as boolean) : checkedState
+  const resolvedChecked = controlled ? (checkedProp as boolean) : checked
 
   useEffect(() => {
     return trackFocusVisible(setFocusVisible)
@@ -171,9 +171,9 @@ export const useRadio = <
       ...formControlProps,
       ...props,
       ref,
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
     }),
-    [checked, formControlProps],
+    [resolvedChecked, formControlProps],
   )
 
   const getIconProps: PropGetter<"span"> = useCallback(
@@ -183,7 +183,7 @@ export const useRadio = <
       ref,
       "aria-hidden": true,
       "data-active": dataAttr(active),
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
       "data-focus": dataAttr(focused),
       "data-focus-visible": dataAttr(focused && focusVisible),
       "data-hover": dataAttr(hovered),
@@ -192,7 +192,7 @@ export const useRadio = <
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
       onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
     }),
-    [checked, active, focused, focusVisible, hovered, formControlProps],
+    [resolvedChecked, active, focused, focusVisible, hovered, formControlProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -214,8 +214,8 @@ export const useRadio = <
         whiteSpace: "nowrap",
         width: "1px",
       },
-      "aria-checked": checked,
-      checked,
+      "aria-checked": resolvedChecked,
+      checked: resolvedChecked,
       disabled,
       readOnly,
       required,
@@ -234,7 +234,7 @@ export const useRadio = <
       required,
       disabled,
       readOnly,
-      checked,
+      resolvedChecked,
       onChange,
       onBlur,
       onFocus,
@@ -248,7 +248,7 @@ export const useRadio = <
       ...formControlProps,
       ...props,
       ref,
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
@@ -258,12 +258,12 @@ export const useRadio = <
         ev.stopPropagation()
       }),
     }),
-    [checked, formControlProps],
+    [resolvedChecked, formControlProps],
   )
 
   return {
     active,
-    checked,
+    checked: resolvedChecked,
     focused,
     focusVisible,
     hovered,

@@ -9023,9 +9023,9 @@
   {
     "type": "page",
     "description": "Components for building the layout of the project, such as `Box` and `Stack`, are available.",
-    "hierarchy": { "lv1": "Layout" },
+    "hierarchy": { "lv1": "Layouts" },
     "slug": "/components/layouts",
-    "title": "Layout"
+    "title": "Layouts"
   },
   {
     "type": "page",

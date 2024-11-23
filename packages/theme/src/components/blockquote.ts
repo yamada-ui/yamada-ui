@@ -4,7 +4,7 @@ import { isGray, shadeColor } from "@yamada-ui/utils"
 export const Blockquote: ComponentMultiStyle<"Blockquote"> = {
   baseStyle: ({ justify = "start" }) => ({
     caption: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
     },
     cite: {},

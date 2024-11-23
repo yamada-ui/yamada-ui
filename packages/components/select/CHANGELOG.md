@@ -1,5 +1,16 @@
 # @yamada-ui/select
 
+## 1.8.2
+
+### Patch Changes
+
+- [#3475](https://github.com/yamada-ui/yamada-ui/pull/3475) [`47a2671`](https://github.com/yamada-ui/yamada-ui/commit/47a2671f9bd3eb3cecf78e6bb7bced1cf2e3bd74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a11y.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c), [`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c), [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/popover@1.4.3
+  - @yamada-ui/icon@1.1.13
+
 ## 1.8.1
 
 ### Patch Changes

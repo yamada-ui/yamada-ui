@@ -59,7 +59,6 @@ export const useDatePicker = ({
   })
 
   const {
-    id,
     allowInput,
     dateToString,
     inputRef,
@@ -144,7 +143,6 @@ export const useDatePicker = ({
       }
 
       return {
-        id,
         autoComplete: "off",
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
@@ -162,14 +160,12 @@ export const useDatePicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
     ],
   )
 
   return {
-    id,
     value,
     getCalendarProps,
     getContainerProps,

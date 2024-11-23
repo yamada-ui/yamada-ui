@@ -1,5 +1,16 @@
 # @yamada-ui/accordion
 
+## 2.0.16
+
+### Patch Changes
+
+- [#3442](https://github.com/yamada-ui/yamada-ui/pull/3442) [`ca7af4d`](https://github.com/yamada-ui/yamada-ui/commit/ca7af4dae0adb44dd42ed4a12712c668dd4c7ea7) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix in props
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c), [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/icon@1.1.13
+
 ## 2.0.15
 
 ### Patch Changes

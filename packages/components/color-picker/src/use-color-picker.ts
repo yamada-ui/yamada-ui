@@ -37,7 +37,7 @@ import {
   splitObject,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import { useCallback, useId, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 
 const defaultFormatInput = (value: string) => value
 
@@ -127,8 +127,7 @@ export interface UseColorPickerProps
     UseColorPickerOptions {}
 
 export const useColorPicker = (props: UseColorPickerProps) => {
-  let {
-    id,
+  const {
     allowInput = true,
     animation,
     boundary,
@@ -209,9 +208,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
-  const uuid = useId()
-
-  id ??= uuid
 
   const onOpen = useCallback(() => {
     if (disabled || readOnly) return
@@ -427,10 +423,11 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      "aria-expanded": dataAttr(isOpen),
+      "aria-haspopup": "dialog",
       "data-active": dataAttr(isOpen),
       "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
-      tabIndex: !allowInput ? -1 : 0,
+      role: "combobox",
+      tabIndex: -1,
       ...formControlProps,
       ...props,
       ref: mergeRefs(fieldRef, ref),
@@ -461,8 +458,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       }
 
       return {
-        "aria-controls": id,
-        role: "combobox",
+        autoComplete: "off",
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
         ...inputProps,
@@ -474,7 +470,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       }
     },
     [
-      id,
       inputProps,
       allowInput,
       disabled,
@@ -548,7 +543,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
 
   return {
-    id,
     allowInput,
     eyeDropperSupported,
     value,

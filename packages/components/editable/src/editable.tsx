@@ -44,12 +44,21 @@ export interface UseEditableProps extends FormControlOptions {
    * so it can receive focus via the keyboard or click.
    *
    * @default true
+   *
+   * @deprecated Use `previewFocusable` instead.
    */
   isPreviewFocusable?: boolean
   /**
    * The placeholder text when the value is empty.
    */
   placeholder?: string
+  /**
+   * If `true`, the read only view, has a `tabIndex` set to `0`
+   * so it can receive focus via the keyboard or click.
+   *
+   * @default true
+   */
+  previewFocusable?: boolean
   /**
    * If `true`, the input's text will be highlighted on focus.
    *
@@ -90,11 +99,12 @@ export interface UseEditableProps extends FormControlOptions {
 }
 
 export const useEditable = (props: UseEditableProps) => {
-  const {
+  let {
     id,
     defaultValue,
     isPreviewFocusable = true,
     placeholder,
+    previewFocusable,
     selectAllOnFocus = true,
     startWithEditView,
     submitOnBlur = true,
@@ -105,13 +115,16 @@ export const useEditable = (props: UseEditableProps) => {
     onSubmit: onSubmitProp,
     ...rest
   } = useFormControlProps(props)
+
+  previewFocusable ??= isPreviewFocusable
+
   const onEditRef = useCallbackRef(onEditProp)
   const { disabled, readOnly, required, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
 
-  const [isEditing, setIsEditing] = useState<boolean>(
+  const [editing, setEditing] = useState<boolean>(
     !!startWithEditView && !disabled,
   )
 
@@ -121,8 +134,8 @@ export const useEditable = (props: UseEditableProps) => {
     onChange: onChangeProp,
   })
 
-  const isInteractive = !isEditing && !disabled
-  const isValueEmpty = value.length === 0
+  const interactive = !editing && !disabled
+  const emptyValue = value.length === 0
 
   const [prevValue, setPrevValue] = useState(value)
 
@@ -135,11 +148,11 @@ export const useEditable = (props: UseEditableProps) => {
   useFocusOnPointerDown({
     ref: inputRef,
     elements: [cancelRef, submitRef],
-    enabled: isEditing,
+    enabled: editing,
   })
 
   useSafeLayoutEffect(() => {
-    if (!isEditing) return
+    if (!editing) return
 
     inputRef.current?.focus()
 
@@ -147,7 +160,7 @@ export const useEditable = (props: UseEditableProps) => {
   }, [])
 
   useUpdateEffect(() => {
-    if (!isEditing) {
+    if (!editing) {
       editRef.current?.focus()
 
       return
@@ -158,16 +171,16 @@ export const useEditable = (props: UseEditableProps) => {
     if (selectAllOnFocus) inputRef.current?.select()
 
     onEditRef()
-  }, [isEditing, onEditRef, selectAllOnFocus])
+  }, [editing, onEditRef, selectAllOnFocus])
 
   useEffect(() => {
-    if (isEditing) return
+    if (editing) return
 
     const el = inputRef.current
     const activeEl = el?.ownerDocument.activeElement
 
     if (activeEl === el) el?.blur()
-  }, [isEditing])
+  }, [editing])
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -178,17 +191,17 @@ export const useEditable = (props: UseEditableProps) => {
   const onUpdatePrevValue = useCallback(() => setPrevValue(value), [value])
 
   const onEdit = useCallback(() => {
-    if (isInteractive) setIsEditing(true)
-  }, [isInteractive])
+    if (interactive) setEditing(true)
+  }, [interactive])
 
   const onCancel = useCallback(() => {
-    setIsEditing(false)
+    setEditing(false)
     setValue(prevValue)
     onCancelProp?.(prevValue)
   }, [prevValue, onCancelProp, setValue])
 
   const onSubmit = useCallback(() => {
-    setIsEditing(false)
+    setEditing(false)
     setPrevValue(value)
     onSubmitProp?.(value)
   }, [onSubmitProp, value])
@@ -222,7 +235,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const onBlur = useCallback(
     (ev: FocusEvent) => {
-      if (!isEditing) return
+      if (!editing) return
 
       const ownerDocument = ev.currentTarget.ownerDocument
       const relatedTarget = (ev.relatedTarget ??
@@ -239,23 +252,23 @@ export const useEditable = (props: UseEditableProps) => {
         onCancel()
       }
     },
-    [isEditing, submitOnBlur, onSubmit, onCancel],
+    [editing, submitOnBlur, onSubmit, onCancel],
   )
 
   const getPreviewProps: PropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, previewRef),
-      children: isValueEmpty ? placeholder : value,
-      hidden: isEditing,
-      tabIndex: isInteractive && isPreviewFocusable ? 0 : undefined,
+      children: emptyValue ? placeholder : value,
+      hidden: editing,
+      tabIndex: interactive && previewFocusable ? 0 : undefined,
       onFocus: handlerAll(props.onFocus, onEdit, onUpdatePrevValue),
     }),
     [
-      isEditing,
-      isInteractive,
-      isPreviewFocusable,
-      isValueEmpty,
+      editing,
+      interactive,
+      previewFocusable,
+      emptyValue,
       onEdit,
       onUpdatePrevValue,
       placeholder,
@@ -270,7 +283,7 @@ export const useEditable = (props: UseEditableProps) => {
       id,
       ref: mergeRefs(ref, inputRef),
       disabled,
-      hidden: !isEditing,
+      hidden: !editing,
       placeholder,
       readOnly,
       required,
@@ -283,7 +296,7 @@ export const useEditable = (props: UseEditableProps) => {
     [
       disabled,
       id,
-      isEditing,
+      editing,
       onBlur,
       onChange,
       onKeyDown,
@@ -303,7 +316,7 @@ export const useEditable = (props: UseEditableProps) => {
       id,
       ref: mergeRefs(ref, inputRef),
       disabled,
-      hidden: !isEditing,
+      hidden: !editing,
       placeholder,
       readOnly,
       required,
@@ -316,7 +329,7 @@ export const useEditable = (props: UseEditableProps) => {
     [
       disabled,
       id,
-      isEditing,
+      editing,
       onBlur,
       onChange,
       onKeyDownWithoutSubmit,
@@ -369,7 +382,7 @@ export const useEditable = (props: UseEditableProps) => {
   )
 
   return {
-    isEditing,
+    editing,
     value,
     getCancelProps,
     getEditProps,
@@ -386,14 +399,23 @@ export const useEditable = (props: UseEditableProps) => {
 export type UseEditableReturn = ReturnType<typeof useEditable>
 
 export const useEditableControl = () => {
-  const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
+  const { editing, getCancelProps, getEditProps, getSubmitProps } =
     useEditableContext()
 
-  return { isEditing, getCancelProps, getEditProps, getSubmitProps }
+  return {
+    editing,
+    /**
+     * @deprecated Use `editing` instead.
+     */
+    isEditing: editing,
+    getCancelProps,
+    getEditProps,
+    getSubmitProps,
+  }
 }
 
 interface EditableContext {
-  isEditing: boolean
+  editing: boolean
   styles: { [key: string]: CSSUIObject | undefined }
   getCancelProps: PropGetter<"button">
   getEditProps: PropGetter<"button">
@@ -412,7 +434,7 @@ const [EditableProvider, useEditableContext] = createContext<EditableContext>({
 interface EditableElementProps
   extends Pick<
     UseEditableReturn,
-    "isEditing" | "onCancel" | "onEdit" | "onSubmit"
+    "editing" | "onCancel" | "onEdit" | "onSubmit"
   > {}
 
 type EditableElement = (props: EditableElementProps) => ReactNode
@@ -450,7 +472,7 @@ export const Editable = forwardRef<EditableProps, "div">(
       focusBorderColor,
       ...props,
     })
-    const {
+    let {
       className,
       children,
       defaultValue,
@@ -460,6 +482,7 @@ export const Editable = forwardRef<EditableProps, "div">(
       isReadOnly,
       isRequired,
       placeholder,
+      previewFocusable,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,
@@ -470,8 +493,11 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit: onSubmitProp,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    previewFocusable ??= isPreviewFocusable
+
     const {
-      isEditing,
+      editing,
       getCancelProps,
       getEditProps,
       getInputProps,
@@ -500,7 +526,7 @@ export const Editable = forwardRef<EditableProps, "div">(
     })
 
     const cloneChildren = runIfFunc(children, {
-      isEditing,
+      editing,
       onCancel,
       onEdit,
       onSubmit,
@@ -511,7 +537,7 @@ export const Editable = forwardRef<EditableProps, "div">(
     return (
       <EditableProvider
         value={{
-          isEditing,
+          editing,
           styles,
           getCancelProps,
           getEditProps,

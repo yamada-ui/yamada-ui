@@ -13,7 +13,7 @@ export const FormControl: ComponentMultiStyle<"FormControl"> = {
       mt: "2",
     },
     helperMessage: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       display: "block",
       fontSize: "sm",
       mt: "2",

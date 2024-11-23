@@ -1,0 +1,1 @@
+import{s as o}from"./factory-Db31n_eg.js";import{m as n}from"./proxy-Bq47Fk52.js";function m(){const r=new Map;return new Proxy(o,{apply:(a,t,[e,s])=>n(o(e,s)),get:(a,t)=>(r.has(t)||r.set(t,n(o(t))),r.get(t))})}const p=m();export{p as m};

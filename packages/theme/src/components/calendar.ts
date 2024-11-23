@@ -59,7 +59,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     },
     header: {},
     label: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
     },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
@@ -73,7 +73,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     row: {},
     weekday: {
       alignItems: "center",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       justifyContent: "center",
       userSelect: "none",
     },

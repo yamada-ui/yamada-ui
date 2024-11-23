@@ -1,10 +1,5 @@
 {
   "Dialog": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -80,6 +75,12 @@
       "description": "`ref` of the element to receive focus initially.",
       "required": false
     },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
+      "required": false
+    },
     "lockFocusAcrossFrames": {
       "type": "boolean",
       "defaultValue": false,
@@ -119,6 +120,11 @@
     "onSuccess": {
       "type": "(onClose: (() => void) | undefined) => void",
       "description": "The callback invoked when success button clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "other": {
@@ -214,11 +220,6 @@
     }
   },
   "Drawer": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -303,6 +304,11 @@
       "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
       "required": false
     },
+    "fullHeight": {
+      "type": "boolean",
+      "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).",
+      "required": false
+    },
     "initialFocusRef": {
       "type": "RefObject<FocusableElement>",
       "description": "`ref` of the element to receive focus initially.",
@@ -310,7 +316,14 @@
     },
     "isFullHeight": {
       "type": "boolean",
+      "deprecated": "Use `fullHeight` instead.",
       "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).",
+      "required": false
+    },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "lockFocusAcrossFrames": {
@@ -337,6 +350,11 @@
     "onOverlayClick": {
       "type": "() => void",
       "description": "Callback fired when the overlay is clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "placement": {
@@ -417,11 +435,6 @@
     }
   },
   "Modal": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -482,6 +495,12 @@
       "description": "`ref` of the element to receive focus initially.",
       "required": false
     },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
+      "required": false
+    },
     "lockFocusAcrossFrames": {
       "type": "boolean",
       "defaultValue": false,
@@ -506,6 +525,11 @@
     "onOverlayClick": {
       "type": "() => void",
       "description": "Callback fired when the overlay is clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "outside": {

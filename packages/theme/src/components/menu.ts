@@ -26,7 +26,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     },
     group: {},
     groupLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
       fontWeight: "semibold",
       px: "3",

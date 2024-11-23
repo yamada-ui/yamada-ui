@@ -137,7 +137,6 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     } = omitThemeProps(mergedProps)
 
     const {
-      id,
       dateToString,
       isOpen,
       setValue,
@@ -198,11 +197,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                id={id}
                 as="div"
                 className="ui-multi-date-picker__content"
-                aria-modal="true"
-                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >

@@ -1,5 +1,15 @@
 # @yamada-ui/dropzone
 
+## 1.0.52
+
+### Patch Changes
+
+- [#3463](https://github.com/yamada-ui/yamada-ui/pull/3463) [`0452bae`](https://github.com/yamada-ui/yamada-ui/commit/0452bae852b75736196585669381d3e5fcd71090) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved prop spreading for accessibility.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c)]:
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/loading@1.1.24
+
 ## 1.0.51
 
 ### Patch Changes

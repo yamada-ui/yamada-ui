@@ -1,5 +1,11 @@
 # @yamada-ui/radio
 
+## 1.2.14
+
+### Patch Changes
+
+- [#3489](https://github.com/yamada-ui/yamada-ui/pull/3489) [`6b11e2b`](https://github.com/yamada-ui/yamada-ui/commit/6b11e2b1e2ddbd42076f6d4b1bd5e8c5419caffc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `span` to `div` in ui elements.
+
 ## 1.2.13
 
 ### Patch Changes

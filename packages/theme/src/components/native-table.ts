@@ -4,7 +4,7 @@ import { isGray, tintColor, transparentizeColor } from "@yamada-ui/utils"
 export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
   baseStyle: {
     caption: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontFamily: "heading",
       fontWeight: "medium",
       textAlign: "center",
@@ -22,7 +22,7 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
       verticalAlign: "top",
     },
     th: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontFamily: "heading",
       fontWeight: "semibold",
       letterSpacing: "wider",

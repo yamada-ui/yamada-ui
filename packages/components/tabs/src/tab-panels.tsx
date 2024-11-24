@@ -11,11 +11,11 @@ export const TabPanels = forwardRef<TabPanelsProps, "div">(
     const { selectedIndex, styles, tabPanelsProps } = useTabsContext()
     const validChildren = getValidChildren(children)
     const cloneChildren = validChildren.map((child, index) => {
-      const isSelected = index === selectedIndex
+      const selected = index === selectedIndex
 
       return createElement(
         TabPanelProvider,
-        { key: index, value: { index, isSelected, selectedIndex } },
+        { key: index, value: { index, selected, selectedIndex } },
         child,
       )
     })

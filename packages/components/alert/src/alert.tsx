@@ -1,6 +1,6 @@
 import type {
-  AlertStatus,
   AlertStatuses,
+  AlertStatusValue,
   CSSUIObject,
   FC,
   HTMLUIProps,
@@ -28,23 +28,23 @@ const defaultStatuses = {
 } as const
 
 interface AlertContext {
-  status: AlertStatus
+  status: AlertStatusValue
   styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [AlertProvider, useAlert] = createContext<AlertContext>({
-  name: `AlertStylesContext`,
+  name: `AlertContext`,
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
 export const getStatusColorScheme = (
-  status: AlertStatus,
+  status: AlertStatusValue,
   statuses?: AlertStatuses,
 ): string =>
   statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
 
 export const getStatusIcon = (
-  status: AlertStatus,
+  status: AlertStatusValue,
   statuses?: AlertStatuses,
 ): ComponentType<any> =>
   statuses?.[status]?.icon ?? defaultStatuses[status].icon
@@ -55,7 +55,7 @@ interface AlertOptions {
    *
    * @default 'info'
    */
-  status?: AlertStatus
+  status?: AlertStatusValue
 }
 
 export interface AlertProps

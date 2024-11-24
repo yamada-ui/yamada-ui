@@ -392,7 +392,7 @@ export const withOrientation: Story = () => {
 export const withFitted: Story = () => {
   return (
     <>
-      <Tabs variant="line" isFitted>
+      <Tabs variant="line" fitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -410,7 +410,7 @@ export const withFitted: Story = () => {
         </TabPanel>
       </Tabs>
 
-      <Tabs variant="sticky" isFitted>
+      <Tabs variant="sticky" fitted>
         <Tab>孫悟空</Tab>
         <Tab>ベジータ</Tab>
         <Tab>フリーザ</Tab>
@@ -431,11 +431,11 @@ export const withFitted: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <Tabs>
       <Tab>孫悟空</Tab>
-      <Tab isDisabled>ベジータ</Tab>
+      <Tab disabled>ベジータ</Tab>
       <Tab>フリーザ</Tab>
 
       <TabPanel>
@@ -453,11 +453,11 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isFocusable: Story = () => {
+export const focusable: Story = () => {
   return (
     <Tabs>
       <Tab>孫悟空</Tab>
-      <Tab isFocusable>ベジータ</Tab>
+      <Tab focusable>ベジータ</Tab>
       <Tab>フリーザ</Tab>
 
       <TabPanel>
@@ -475,9 +475,9 @@ export const isFocusable: Story = () => {
   )
 }
 
-export const isManual: Story = () => {
+export const manual: Story = () => {
   return (
-    <Tabs isManual>
+    <Tabs manual>
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>
@@ -497,9 +497,9 @@ export const isManual: Story = () => {
   )
 }
 
-export const isLazy: Story = () => {
+export const lazy: Story = () => {
   return (
-    <Tabs isLazy lazyBehavior="unmount">
+    <Tabs lazy lazyBehavior="unmount">
       <Tab>孫悟空</Tab>
       <Tab>ベジータ</Tab>
       <Tab>フリーザ</Tab>

@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 describe("<Tabs />", () => {
@@ -81,7 +81,7 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <Tab>Home</Tab>
-        <Tab isDisabled>About</Tab>
+        <Tab disabled>About</Tab>
         <Tab>Contact</Tab>
 
         <TabPanel>

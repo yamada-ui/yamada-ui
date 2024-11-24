@@ -1,5 +1,15 @@
 # @yamada-ui/pagination
 
+## 1.1.4
+
+### Patch Changes
+
+- [#3514](https://github.com/yamada-ui/yamada-ui/pull/3514) [`d197d9c`](https://github.com/yamada-ui/yamada-ui/commit/d197d9c9e1f47fcc325950c53f78b73dd5365cad) Thanks [@kaehehehe](https://github.com/kaehehehe)! - feat: remove `is` prefix in props
+
+- Updated dependencies [[`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/icon@1.1.13
+  - @yamada-ui/ripple@1.0.44
+
 ## 1.1.3
 
 ### Patch Changes

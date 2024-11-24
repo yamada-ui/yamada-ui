@@ -11,8 +11,13 @@
       "description": "Ref for resizable container element.",
       "required": false
     },
+    "controlRef": {
+      "type": "RefObject<ResizableGroupControl>",
+      "description": "Ref of the resizable item callback.",
+      "required": false
+    },
     "direction": {
-      "type": "\"horizontal\" | \"vertical\"",
+      "type": "ResizableDirection",
       "defaultValue": "horizontal",
       "description": "The direction of the resizable.",
       "required": false

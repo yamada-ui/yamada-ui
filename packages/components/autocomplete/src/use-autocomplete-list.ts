@@ -1,16 +1,23 @@
 import type { PropGetter } from "@yamada-ui/core"
-import { ariaAttr, isArray, mergeRefs, useUpdateEffect } from "@yamada-ui/utils"
-import { useCallback, useEffect, useId, useRef } from "react"
+import type { MotionProps } from "@yamada-ui/motion"
+import {
+  ariaAttr,
+  handlerAll,
+  isArray,
+  mergeRefs,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
+import { useCallback, useEffect, useRef } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendantsContext,
 } from "./autocomplete-context"
 
 export const useAutocompleteList = () => {
-  const { focusedIndex, isOpen, listRef, rebirthOptions, value } =
+  const { focusedIndex, isOpen, rebirthOptions, value } =
     useAutocompleteContext()
   const descendants = useAutocompleteDescendantsContext()
-  const uuid = useId()
+  const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
   const isMulti = isArray(value)
@@ -58,21 +65,32 @@ export const useAutocompleteList = () => {
     if (!isOpen) beforeFocusedIndex.current = -1
   }, [isOpen])
 
-  const getListProps: PropGetter = useCallback(
-    ({ id, ...props } = {}, ref = null) => ({
-      id: id ?? uuid,
-      ref: mergeRefs(listRef, ref),
+  const getContainerProps: PropGetter<MotionProps, MotionProps> = useCallback(
+    (props = {}, ref = null) => ({
+      ref,
       "aria-multiselectable": ariaAttr(isMulti),
-      position: "relative",
       role: "listbox",
+      ...props,
+      onAnimationComplete: handlerAll(
+        props.onAnimationComplete,
+        onAnimationComplete,
+      ),
+    }),
+    [isMulti, onAnimationComplete],
+  )
+
+  const getListProps: PropGetter = useCallback(
+    (props = {}, ref = null) => ({
+      ref: mergeRefs(listRef, ref),
+      position: "relative",
       tabIndex: -1,
       ...props,
     }),
-    [listRef, uuid, isMulti],
+    [listRef],
   )
 
   return {
+    getContainerProps,
     getListProps,
-    onAnimationComplete,
   }
 }

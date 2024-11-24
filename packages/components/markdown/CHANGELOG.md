@@ -1,5 +1,12 @@
 # @yamada-ui/markdown
 
+## 1.0.51
+
+### Patch Changes
+
+- Updated dependencies [[`105818c`](https://github.com/yamada-ui/yamada-ui/commit/105818c6dfa0365322adc29f03caf469685fb805)]:
+  - @yamada-ui/alert@1.1.4
+
 ## 1.0.50
 
 ### Patch Changes

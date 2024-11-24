@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/link": patch
+"@yamada-ui/tabs": patch
 ---
 
 remove `is` prefix in props

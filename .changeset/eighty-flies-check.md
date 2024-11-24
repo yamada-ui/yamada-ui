@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/highlight": patch
+"@yamada-ui/indicator": patch
 ---
 
 remove `is` prefix in props

@@ -1,5 +1,18 @@
 # @yamada-ui/checkbox
 
+## 1.2.0
+
+### Minor Changes
+
+- [#3502](https://github.com/yamada-ui/yamada-ui/pull/3502) [`4c6609d`](https://github.com/yamada-ui/yamada-ui/commit/4c6609dceeb42f91855fb265314d9d52e8f66a33) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded the function so that it can be selected with the `Enter` key.
+
+### Patch Changes
+
+- [#3489](https://github.com/yamada-ui/yamada-ui/pull/3489) [`6b11e2b`](https://github.com/yamada-ui/yamada-ui/commit/6b11e2b1e2ddbd42076f6d4b1bd5e8c5419caffc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `span` to `div` in ui elements.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c)]:
+  - @yamada-ui/motion@2.2.8
+
 ## 1.1.13
 
 ### Patch Changes

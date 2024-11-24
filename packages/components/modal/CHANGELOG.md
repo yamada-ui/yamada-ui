@@ -1,5 +1,19 @@
 # @yamada-ui/modal
 
+## 1.4.5
+
+### Patch Changes
+
+- [`7433b53`](https://github.com/yamada-ui/yamada-ui/commit/7433b53e315fc8e5aa41553fce2190bcd02aa27f) Thanks [@nathanlao](https://github.com/nathanlao)! - Removed `is` prefix in props.
+
+- [#3487](https://github.com/yamada-ui/yamada-ui/pull/3487) [`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved control of `aria-labelledby` and `aria-describedby`.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c), [`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/button@1.0.50
+  - @yamada-ui/close-button@1.0.47
+
 ## 1.4.4
 
 ### Patch Changes

@@ -4,7 +4,7 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
   baseStyle: {
     container: {},
     helperMessage: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
     },
     icon: {
@@ -26,7 +26,7 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       w: "3.5",
     },
     label: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontWeight: "medium",
     },
     number: ({ colorScheme: c }) => ({

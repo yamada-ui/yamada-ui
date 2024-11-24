@@ -282,7 +282,7 @@ const SearchModal: FC<SearchModalProps> = memo(
             />
 
             <SearchIcon
-              color={["blackAlpha.700", "whiteAlpha.600"]}
+              color="muted"
               fontSize="2xl"
               left="0"
               pointerEvents="none"
@@ -332,10 +332,7 @@ const SearchModal: FC<SearchModalProps> = memo(
                     }}
                   >
                     {type === "page" ? (
-                      <File
-                        color={["blackAlpha.700", "whiteAlpha.600"]}
-                        fontSize="2xl"
-                      />
+                      <File color="muted" fontSize="2xl" />
                     ) : (
                       <Hash
                         color={["blackAlpha.500", "whiteAlpha.400"]}

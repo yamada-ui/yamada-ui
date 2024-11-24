@@ -94,6 +94,12 @@
       "description": "The callback invoked when the checkbox is focused.",
       "required": false
     },
+    "selectOnEnter": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be selected when the Enter key is pressed.",
+      "required": false
+    },
     "size": {
       "type": "\"sm\" | \"md\" | \"lg\"",
       "defaultValue": "\"md\"",

@@ -61,6 +61,14 @@ order: 1
 />
 
 <PropsCard
+  id="flip-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the component is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="flip-duration"
   name="duration"
   type="number"
@@ -73,6 +81,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the component is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -81,6 +90,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the component is readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -101,6 +111,14 @@ order: 1
     "The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically."
   }
   defaultValue={"'horizontal'"}
+/>
+
+<PropsCard
+  id="flip-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the component is readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

@@ -12,6 +12,11 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "endIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
@@ -38,6 +43,7 @@
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "deprecated": "Use `startIcon` instead.",
       "description": "The icon to display at the left side of the button.",
       "required": false
     },
@@ -59,6 +65,7 @@
     },
     "rightIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "deprecated": "Use `endIcon` instead.",
       "description": "The icon to display at the right side of the button.",
       "required": false
     },
@@ -66,6 +73,11 @@
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the Button.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to display at the start side of the button.",
       "required": false
     },
     "variant": {

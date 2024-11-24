@@ -1,5 +1,11 @@
 # @yamada-ui/highlight
 
+## 1.0.43
+
+### Patch Changes
+
+- [#3561](https://github.com/yamada-ui/yamada-ui/pull/3561) [`0ee8348`](https://github.com/yamada-ui/yamada-ui/commit/0ee8348117bb72f68c81120109756c177ec6ae1a) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix in props
+
 ## 1.0.42
 
 ### Patch Changes

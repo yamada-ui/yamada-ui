@@ -1,5 +1,12 @@
 # @yamada-ui/stat
 
+## 1.0.44
+
+### Patch Changes
+
+- Updated dependencies [[`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/icon@1.1.13
+
 ## 1.0.43
 
 ### Patch Changes

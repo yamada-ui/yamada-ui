@@ -112,13 +112,13 @@ import {
   <Input isDisabled variant="flushed" placeholder="flushed" />
   <Input isDisabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="Email address"
+    legend="Email address"
     helperMessage="We'll never share your email."
   >
     <Input type="email" placeholder="your email address" />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -133,13 +133,13 @@ import {
   <Input isReadOnly variant="flushed" placeholder="flushed" />
   <Input isReadOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="Email address"
+    legend="Email address"
     helperMessage="We'll never share your email."
   >
     <Input type="email" placeholder="your email address" />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -154,13 +154,9 @@ import {
   <Input isInvalid variant="flushed" placeholder="flushed" />
   <Input isInvalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isInvalid
-    label="Email address"
-    errorMessage="Email is required."
-  >
+  <Fieldset isInvalid legend="Email address" errorMessage="Email is required.">
     <Input type="email" placeholder="your email address" />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -265,9 +261,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.name}
-      label="Name"
+      legend="Name"
       errorMessage={errors.name ? errors.name.message : undefined}
     >
       <Input
@@ -276,11 +272,11 @@ return (
           required: { value: true, message: "This is required." },
         })}
       />
-    </FormControl>
+    </Fieldset>
 
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.cellphone}
-      label="Cellphone"
+      legend="Cellphone"
       errorMessage={errors.cellphone ? errors.cellphone.message : undefined}
     >
       <InputGroup>
@@ -293,11 +289,11 @@ return (
           })}
         />
       </InputGroup>
-    </FormControl>
+    </Fieldset>
 
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.email}
-      label="Email"
+      legend="Email"
       errorMessage={errors.email ? errors.email.message : undefined}
     >
       <InputGroup>
@@ -313,7 +309,7 @@ return (
           })}
         />
       </InputGroup>
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

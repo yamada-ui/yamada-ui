@@ -1,4 +1,4 @@
-import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 describe("<Tabs />", () => {

@@ -14,7 +14,7 @@ export interface TabPanelProps extends HTMLUIProps {}
 
 export const TabPanel = forwardRef<TabPanelProps, "div">(
   ({ id, className, children, ...rest }, ref) => {
-    const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
+    const { lazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
     const uuid = useId()
     const { index, selected } = useTabPanelContext()
     const { register } = useTabPanelDescendant()

@@ -67,6 +67,18 @@ export type LoadingVariant =
 
 export type LoadingComponent = "background" | "custom" | "page" | "screen"
 
+export type StatusValue = "error" | "info" | "success" | "warning"
+
+export type Statuses = {
+  [key in StatusValue]?: { colorScheme?: Theme["colorSchemes"] }
+}
+
+export type AlertStatusValue = "loading" | StatusValue
+
+export type AlertStatuses = {
+  [key in AlertStatusValue]?: { colorScheme?: Theme["colorSchemes"]; icon?: FC }
+}
+
 export type NoticePlacement =
   | "bottom"
   | "bottom-left"
@@ -74,12 +86,6 @@ export type NoticePlacement =
   | "top"
   | "top-left"
   | "top-right"
-
-export type AlertStatuses = {
-  [key in AlertStatus]?: { colorScheme?: Theme["colorSchemes"]; icon?: FC }
-}
-
-export type AlertStatus = "error" | "info" | "loading" | "success" | "warning"
 
 export interface NoticeComponentProps extends NoticeConfigOptions {
   onClose: () => void
@@ -145,7 +151,7 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatus
+  status?: AlertStatusValue
   /**
    * The title of the notice.
    */
@@ -233,7 +239,7 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatus
+  status?: AlertStatusValue
   /**
    * The title of the snack.
    */
@@ -509,6 +515,15 @@ export interface ThemeConfig {
      * @see Docs https://www.framer.com/motion/animation/#variants
      */
     variants?: Variants
+  }
+  /**
+   * The config of the status.
+   */
+  status?: {
+    /**
+     * The statuses of the status.
+     */
+    statuses?: Statuses
   }
   /**
    * The config of the theme.

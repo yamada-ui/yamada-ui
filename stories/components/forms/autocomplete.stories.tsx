@@ -381,10 +381,10 @@ export const withDuration: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <Autocomplete variant="outline" isDisabled placeholder="outline" />
-      <Autocomplete variant="filled" isDisabled placeholder="filled" />
-      <Autocomplete variant="flushed" isDisabled placeholder="flushed" />
-      <Autocomplete variant="unstyled" isDisabled placeholder="unstyled" />
+      <Autocomplete variant="outline" disabled placeholder="outline" />
+      <Autocomplete variant="filled" disabled placeholder="filled" />
+      <Autocomplete variant="flushed" disabled placeholder="flushed" />
+      <Autocomplete variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
         isDisabled
@@ -449,7 +449,7 @@ export const isOptionFocusable: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-      <AutocompleteOption isDisabled isFocusable value="ベジータ">
+      <AutocompleteOption disabled focusable value="ベジータ">
         ベジータ
       </AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>

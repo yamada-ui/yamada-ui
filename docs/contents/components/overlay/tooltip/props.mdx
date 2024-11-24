@@ -81,6 +81,22 @@ order: 1
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the tooltip will be initially shown."}
+  deprecated={"Use `defaultOpen` instead."}
+/>
+
+<PropsCard
+  id="tooltip-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the tooltip will be initially shown."}
+/>
+
+<PropsCard
+  id="tooltip-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the tooltip will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -105,6 +121,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tooltip will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -113,6 +130,7 @@ order: 1
   name="isOpen"
   type="boolean"
   description={"If `true`, the tooltip will be shown."}
+  deprecated={"Use `open` instead."}
 />
 
 <PropsCard
@@ -159,6 +177,13 @@ order: 1
   name="onOpen"
   type="() => void"
   description={"Callback to run when the tooltip shows."}
+/>
+
+<PropsCard
+  id="tooltip-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the tooltip will be shown."}
 />
 
 <PropsCard

@@ -63,11 +63,8 @@ export const useMultiDatePicker = ({
     onChange: onChangeProp,
   })
   const [inputValue, setInputValue] = useState<string>("")
-
   const resolvedValue = getResolvedValue([...value, draftValue.current])
-
   const {
-    id,
     allowInput,
     dateToString,
     isOpen,
@@ -183,7 +180,6 @@ export const useMultiDatePicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -205,7 +201,6 @@ export const useMultiDatePicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
       onCompositionStart,
@@ -214,7 +209,6 @@ export const useMultiDatePicker = ({
   )
 
   return {
-    id,
     dateToString,
     isOpen,
     setValue,

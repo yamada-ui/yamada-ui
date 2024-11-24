@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/accordion": patch
+"@yamada-ui/tabs": patch
 ---
 
 remove `is` prefix in props

@@ -1,3 +1,3 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const For: ComponentStyle = {}
+export const For: ComponentStyle<"For"> = {}

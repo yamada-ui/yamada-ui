@@ -23,6 +23,7 @@ import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
 import { ContextMenu } from "./context-menu"
+import { DataList } from "./data-list"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
 import { Divider } from "./divider"
@@ -124,6 +125,7 @@ export const components = {
   ColorSwatch,
   Container,
   ContextMenu,
+  DataList,
   DatePicker,
   Dialog,
   Divider,

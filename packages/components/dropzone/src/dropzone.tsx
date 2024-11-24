@@ -35,6 +35,7 @@ import {
   isArray,
   splitObject,
 } from "@yamada-ui/utils"
+import { useId } from "react"
 import { useDropzone } from "react-dropzone-esm"
 
 interface DropzoneContext {
@@ -135,6 +136,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     onFileDialogOpen,
     ...rest
   } = useFormControlProps(omitThemeProps(mergedProps))
+  const labelledbyId = useId()
 
   loading ??= isLoading
 
@@ -199,6 +201,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
       }}
     >
       <ui.div
+        id={labelledbyId}
         className={cx("ui-dropzone", className)}
         __css={css}
         {...formControlProps}
@@ -215,6 +218,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
           id={id}
           ref={ref}
           name={name}
+          aria-labelledby={labelledbyId}
           aria-readonly={ariaReadOnly}
           {...formControlProps}
           {...getInputProps()}

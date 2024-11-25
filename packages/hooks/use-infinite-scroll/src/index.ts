@@ -89,7 +89,7 @@ export interface UseInfiniteScrollProps
    * If `true`, the infinite scroll is disabled.
    *
    * @default false
-   * 
+   *
    * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
@@ -97,7 +97,7 @@ export interface UseInfiniteScrollProps
    *  If `true`, reverse direction.
    *
    * @default false
-   * 
+   *
    * @deprecated Use `reverse` instead.
    */
   isReverse?: boolean
@@ -173,7 +173,6 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   threshold,
   onLoad: onLoadProp,
 }: UseInfiniteScrollProps = {}) => {
-
   disabled ??= isDisabled
   reverse ??= isReverse
 

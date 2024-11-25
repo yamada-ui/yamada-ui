@@ -507,6 +507,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "full" | "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "dashed" | "solid" | "unstyled" | ({} & string)
     }
+    EmptyState: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: {} & string
+    }
     FileButton: {
       sizes: "2xl" | "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants:

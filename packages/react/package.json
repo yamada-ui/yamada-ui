@@ -58,6 +58,7 @@
     "@yamada-ui/color-picker": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
+    "@yamada-ui/empty-state": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",
     "@yamada-ui/file-input": "workspace:*",
     "@yamada-ui/focus-lock": "workspace:*",

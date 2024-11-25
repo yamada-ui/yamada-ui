@@ -3,6 +3,6 @@ import { PasswordInput } from "../src"
 
 describe("<PasswordInput />", () => {
   test("PasswordInput renders correctly", async () => {
-    await a11y(<PasswordInput />)
+    await a11y(<PasswordInput aria-label="your password" />)
   })
 })

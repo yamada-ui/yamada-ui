@@ -196,7 +196,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const formatRef = useRef<ColorFormat>(
     format ?? calcFormat(value || defaultColor || ""),
   )
-  const isInputFocused = useRef<boolean>(false)
+  const inputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value || "")
   const {
     isOpen,
@@ -242,7 +242,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [isOpen, onOpen])
 
   const onInputFocus = useCallback(() => {
-    isInputFocused.current = true
+    inputFocused.current = true
 
     if (isOpen) return
 
@@ -250,7 +250,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [isOpen, onOpen])
 
   const onInputBlur = useCallback(() => {
-    isInputFocused.current = false
+    inputFocused.current = false
   }, [])
 
   const onContainerBlur = useCallback(
@@ -304,7 +304,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       setValue(value)
 
       setTimeout(() => {
-        if (!isInputFocused.current) setInputValue(formatInput(value))
+        if (!inputFocused.current) setInputValue(formatInput(value))
       })
     },
     [setValue, formatInput],
@@ -347,7 +347,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [format])
 
   useUpdateEffect(() => {
-    if (isInputFocused.current || !valueProp) return
+    if (inputFocused.current || !valueProp) return
 
     setInputValue(formatInput(valueProp))
   }, [valueProp])

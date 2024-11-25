@@ -1,42 +1,40 @@
 import type { ComponentArgs, ThemeProps } from "@yamada-ui/core"
-import type { FormControlOptions } from "@yamada-ui/form-control"
-import type { FlexProps } from "@yamada-ui/layouts"
 import type { ForwardedRef, ReactElement, RefAttributes } from "react"
-import type { RadioProps } from "./radio"
-import type { RadioGroupContext } from "./radio-context"
-import type { UseRadioGroupProps } from "./use-radio-group"
+import type { RadioCardProps } from "./radio-card"
+import type { RadioCardGroupContext } from "./radio-context"
+import type { RadioGroupSharedProps } from "./radio-group"
 import { useFormControl } from "@yamada-ui/form-control"
 import { Flex } from "@yamada-ui/layouts"
 import { cx, getValidChildren } from "@yamada-ui/utils"
 import { forwardRef } from "react"
-import { Radio } from "./radio"
-import { RadioGroupProvider } from "./radio-context"
+import { RadioCard } from "./radio-card"
+import { RadioCardGroupProvider } from "./radio-context"
 import { useRadioGroup } from "./use-radio-group"
 
-export type RadioItem<Y extends number | string = string> = RadioProps<Y>
+export type RadioCardItem<Y extends number | string = string> =
+  RadioCardProps<Y>
 
-export interface RadioGroupSharedProps<Y extends number | string = string>
-  extends Omit<FlexProps, "defaultValue" | "onChange">,
-    UseRadioGroupProps<Y>,
-    FormControlOptions {}
-
-export interface RadioGroupProps<Y extends number | string = string>
+export interface RadioCardGroupProps<Y extends number | string = string>
   extends RadioGroupSharedProps<Y>,
-    ThemeProps<"Radio"> {
+    Pick<
+      RadioCardProps,
+      "addonProps" | "descriptionProps" | "labelProps" | "withIcon"
+    >,
+    ThemeProps<"RadioCard"> {
   /**
-   * If provided, generate radios based on items.
+   * If provided, generate radio cards based on items.
    *
    * @default '[]'
    */
-  items?: RadioItem<Y>[]
+  items?: RadioCardItem<Y>[]
 }
 
 /**
- * `RadioGroup` is a component that groups `Radio` components.
+ * `RadioCardGroup` is a component that groups `RadioCard` components.
  *
- * @see Docs https://yamada-ui.com/components/forms/radio
+ * @see Docs https://yamada-ui.com/components/forms/radio-card
  */
-export const RadioGroup = forwardRef(
+export const RadioCardGroup = forwardRef(
   <Y extends number | string = string>(
     {
       id: idProp,
@@ -45,11 +43,15 @@ export const RadioGroup = forwardRef(
       size,
       variant,
       children,
-      direction = "column",
-      gap,
+      direction = "row",
+      gap = "0.5rem",
       items = [],
+      withIcon = true,
+      addonProps,
+      descriptionProps,
+      labelProps,
       ...props
-    }: RadioGroupProps<Y>,
+    }: RadioCardGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const {
@@ -76,12 +78,12 @@ export const RadioGroup = forwardRef(
     let computedChildren: ReactElement[] = []
 
     if (!validChildren.length && items.length)
-      computedChildren = items.map((props, index) => (
-        <Radio key={index} {...props} />
+      computedChildren = items.map((props, i) => (
+        <RadioCard key={i} {...props} />
       ))
 
     return (
-      <RadioGroupProvider
+      <RadioCardGroupProvider
         value={
           {
             name,
@@ -93,14 +95,19 @@ export const RadioGroup = forwardRef(
             isReadOnly,
             isRequired,
             value,
+            withIcon,
+            addonProps,
+            descriptionProps,
+            labelProps,
             onChange,
-          } as RadioGroupContext
+          } as RadioCardGroupContext
         }
       >
         <Flex
           ref={ref}
-          className={cx("ui-radio-group", className)}
-          gap={gap ?? (direction === "row" ? "1rem" : undefined)}
+          className={cx("ui-radio-card-group", className)}
+          gap={gap}
+          w="100%"
           {...getContainerProps({
             id,
             "aria-labelledby": labelId,
@@ -110,14 +117,14 @@ export const RadioGroup = forwardRef(
         >
           {children ?? computedChildren}
         </Flex>
-      </RadioGroupProvider>
+      </RadioCardGroupProvider>
     )
   },
 ) as {
   <Y extends number | string = string>(
-    props: RadioGroupProps<Y> & RefAttributes<HTMLDivElement>,
+    props: RadioCardGroupProps<Y> & RefAttributes<HTMLDivElement>,
   ): ReactElement
 } & ComponentArgs
 
-RadioGroup.displayName = "RadioGroup"
-RadioGroup.__ui__ = "RadioGroup"
+RadioCardGroup.displayName = "RadioCardGroup"
+RadioCardGroup.__ui__ = "RadioCardGroup"

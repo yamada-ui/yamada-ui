@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
-const scrollable = (el: HTMLElement, vertical: boolean) => {
+const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)
 
   if (["auto", "overlay", "scroll"].includes(style.overflow)) return true
@@ -34,7 +34,7 @@ const onScroll = ({
 }) => {
   let options: ScrollToOptions
   const el =
-    isElement(root) && scrollable(root, vertical) ? root : document.body
+    isElement(root) && isScrollable(root, vertical) ? root : document.body
 
   if (vertical) {
     options = { behavior, top: position ?? (reverse ? el.scrollHeight : 0) }
@@ -54,7 +54,7 @@ const getScrollPosition = (
   vertical: boolean,
 ) => {
   const el =
-    isElement(root) && scrollable(root, vertical) ? root : document.body
+    isElement(root) && isScrollable(root, vertical) ? root : document.body
 
   if (vertical) {
     return el.scrollHeight - el.scrollTop

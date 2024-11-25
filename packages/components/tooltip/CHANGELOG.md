@@ -1,5 +1,17 @@
 # @yamada-ui/tooltip
 
+## 1.1.18
+
+### Patch Changes
+
+- [#3589](https://github.com/yamada-ui/yamada-ui/pull/3589) [`818f8f1`](https://github.com/yamada-ui/yamada-ui/commit/818f8f1e510262f9860eb307bbf1cc1d6aad3cec) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated props and `Popper` configuration.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/motion@2.2.9
+  - @yamada-ui/transitions@1.1.12
+  - @yamada-ui/use-popper@1.0.43
+
 ## 1.1.17
 
 ### Patch Changes

@@ -36,6 +36,12 @@ import { useAutocomplete, useAutocompleteInput } from "./use-autocomplete"
 
 interface MultiAutocompleteOptions {
   /**
+   * If `true`, display the select clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * If `true`, the list element will be closed when value is selected.
    *
    * @default false
@@ -70,6 +76,8 @@ interface MultiAutocompleteOptions {
    * If `true`, display the select clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -150,6 +158,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
     )
     let {
       className,
+      clearable,
       closeOnSelect = false,
       color,
       component,
@@ -198,6 +207,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
 
     h ??= height
     minH ??= minHeight
+    clearable ??= isClearable
 
     const css: CSSUIObject = {
       color,
@@ -240,7 +250,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                   {...getFieldProps(fieldProps, ref)}
                 />
 
-                {isClearable && value.length ? (
+                {clearable && value.length ? (
                   <AutocompleteClearIcon
                     {...clearIconProps}
                     onClick={handlerAll(clearIconProps?.onClick, onClear)}

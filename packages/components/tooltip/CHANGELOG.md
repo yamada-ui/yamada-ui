@@ -1,5 +1,15 @@
 # @yamada-ui/tooltip
 
+## 1.1.17
+
+### Patch Changes
+
+- [`169e4ed`](https://github.com/yamada-ui/yamada-ui/commit/169e4ed4d41c118a58931e8855b5b0955e992bf5) Thanks [@nathanlao](https://github.com/nathanlao)! - Removed `is` prefix in props.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+
 ## 1.1.16
 
 ### Patch Changes

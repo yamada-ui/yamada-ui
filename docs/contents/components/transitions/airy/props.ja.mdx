@@ -59,6 +59,14 @@ order: 1
 />
 
 <PropsCard
+  id="airy-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the component is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="airy-duration"
   name="duration"
   type="number"
@@ -71,6 +79,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the component is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -79,6 +88,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the component is readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -89,6 +99,14 @@ order: 1
   description={
     "This is a callback function that is called when the animation state changes."
   }
+/>
+
+<PropsCard
+  id="airy-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the component is readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

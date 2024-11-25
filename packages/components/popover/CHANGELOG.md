@@ -1,5 +1,16 @@
 # @yamada-ui/popover
 
+## 1.4.3
+
+### Patch Changes
+
+- [#3487](https://github.com/yamada-ui/yamada-ui/pull/3487) [`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved control of `aria-labelledby` and `aria-describedby`.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/close-button@1.0.47
+
 ## 1.4.2
 
 ### Patch Changes

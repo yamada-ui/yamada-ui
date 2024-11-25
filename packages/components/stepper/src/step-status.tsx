@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import type { StepContext } from "./step"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { CheckIcon } from "@yamada-ui/lucide"
-import { cx, runIfFunc } from "@yamada-ui/utils"
+import { cx, isNull, runIfFunc } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
@@ -18,7 +18,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
     {
       className,
       active = <StepNumber />,
-      complete = <CheckIcon />,
+      complete,
       incomplete = <StepNumber />,
       ...rest
     },
@@ -28,12 +28,22 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
     const { status, ...props } = useStepContext()
 
     const css: CSSUIObject = { ...styles.status }
+    const iconCss: CSSUIObject = { ...styles.icon }
 
     let component: null | ReactNode = null
 
     switch (status) {
       case "complete":
-        component = runIfFunc(complete, props)
+        component = runIfFunc(
+          !complete ? (
+            <ui.div className="ui-step__icon" __css={iconCss}>
+              <CheckIcon />
+            </ui.div>
+          ) : (
+            complete
+          ),
+          props,
+        )
 
         break
       case "incomplete":

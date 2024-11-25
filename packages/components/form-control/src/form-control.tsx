@@ -24,25 +24,57 @@ export interface FormControlOptions {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the form control will be invalid.
+   *
+   * @default false
+   */
+  invalid?: boolean
+  /**
+   * If `true`, the form control will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * If `true`, the form control will be invalid.
    *
    * @default false
+   *
+   * @deprecated Use `invalid` instead.
    */
   isInvalid?: boolean
   /**
    * If `true`, the form control will be readonly.
    *
    * @default false
+   *
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
   /**
    * If `true`, the form control will be required.
    *
    * @default false
+   *
+   * @deprecated Use `required` instead.
    */
   isRequired?: boolean
+  /**
+   * If `true`, the form control will be readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
+  /**
+   * If `true`, the form control will be required.
+   *
+   * @default false
+   */
+  required?: boolean
 }
 
 interface FormControlAdditionalOptions extends LabelOptions {
@@ -58,12 +90,20 @@ interface FormControlAdditionalOptions extends LabelOptions {
    * If `true`, switch between helper message and error message using isInvalid.
    *
    * @default true
+   *
+   * @deprecated Use `replace` instead.
    */
   isReplace?: boolean
   /**
    * The form control label to use.
    */
   label?: ReactNode
+  /**
+   * If `true`, switch between helper message and error message using isInvalid.
+   *
+   * @default true
+   */
+  replace?: boolean
   /**
    * Props the error message component.
    */
@@ -85,12 +125,12 @@ export interface FormControlProps
     FormControlAdditionalOptions {}
 
 interface FormControlContext {
-  isDisabled: boolean
-  isFocused: boolean
-  isInvalid: boolean
-  isReadOnly: boolean
-  isReplace: boolean
-  isRequired: boolean
+  disabled: boolean
+  focused: boolean
+  invalid: boolean
+  readOnly: boolean
+  replace: boolean
+  required: boolean
   onBlur: () => void
   onFocus: () => void
   id?: string
@@ -122,18 +162,23 @@ export const [FormControlStylesProvider, useFormControlStyles] = createContext<
 export const FormControl = forwardRef<FormControlProps, "div">(
   ({ id, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("FormControl", props)
-    const {
+    let {
       className,
       children,
+      disabled,
       errorMessage,
       helperMessage,
-      isDisabled = false,
-      isInvalid = false,
-      isReadOnly = false,
-      isReplace = true,
-      isRequired = false,
+      invalid,
+      isDisabled,
+      isInvalid,
+      isReadOnly,
+      isReplace,
+      isRequired,
       label,
       optionalIndicator,
+      readOnly,
+      replace,
+      required,
       requiredIndicator,
       errorMessageProps,
       helperMessageProps,
@@ -145,8 +190,13 @@ export const FormControl = forwardRef<FormControlProps, "div">(
     const labelId = useId()
 
     id ??= uuid
+    disabled ??= isDisabled ?? false
+    invalid ??= isInvalid ?? false
+    readOnly ??= isReadOnly ?? false
+    replace ??= isReplace ?? false
+    required ??= isRequired ?? false
 
-    const [isFocused, setFocused] = useState<boolean>(false)
+    const [focused, setFocused] = useState<boolean>(false)
 
     const validChildren = getValidChildren(children)
 
@@ -164,13 +214,13 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       <FormControlContextProvider
         value={{
           id,
-          isDisabled,
-          isFocused,
-          isInvalid,
-          isReadOnly,
-          isReplace,
-          isRequired,
+          disabled,
+          focused,
+          invalid,
           labelId,
+          readOnly,
+          replace,
+          required,
           onBlur: () => setFocused(false),
           onFocus: () => setFocused(true),
         }}
@@ -179,10 +229,10 @@ export const FormControl = forwardRef<FormControlProps, "div">(
           <ui.div
             ref={ref}
             className={cx("ui-form__control", className)}
-            data-disabled={dataAttr(isDisabled)}
-            data-focus={dataAttr(isFocused)}
-            data-invalid={dataAttr(isInvalid)}
-            data-readonly={dataAttr(isReadOnly)}
+            data-disabled={dataAttr(disabled)}
+            data-focus={dataAttr(focused)}
+            data-invalid={dataAttr(invalid)}
+            data-readonly={dataAttr(readOnly)}
             __css={css}
             {...rest}
           >
@@ -223,31 +273,32 @@ interface UseFormControlOptions extends FormControlOptions {
 
 export const useFormControl = <Y extends Dict = Dict>({
   id: idProp,
-  disabled,
+  disabled: disabledProp,
+  invalid: invalidProp,
   isDisabled: isDisabledProp,
   isInvalid: isInvalidProp,
   isReadOnly: isReadOnlyProp,
   isRequired: isRequiredProp,
-  readOnly,
-  required,
+  readOnly: readOnlyProp,
+  required: requiredProp,
   ...rest
 }: UseFormControlOptions & Y) => {
   const control = useFormControlContext()
 
   const id = idProp ?? control?.id
   const labelId = control?.labelId
-  const isDisabled = disabled ?? isDisabledProp ?? control?.isDisabled
-  const isReadOnly = readOnly ?? isReadOnlyProp ?? control?.isReadOnly
-  const isRequired = required ?? isRequiredProp ?? control?.isRequired
-  const isInvalid = isInvalidProp ?? control?.isInvalid
+  const disabled = disabledProp ?? control?.disabled ?? isDisabledProp
+  const readOnly = readOnlyProp ?? control?.readOnly ?? isReadOnlyProp
+  const required = requiredProp ?? control?.required ?? isRequiredProp
+  const invalid = invalidProp ?? control?.invalid ?? isInvalidProp
 
   return {
     id,
-    isDisabled,
-    isInvalid,
-    isReadOnly,
-    isRequired,
+    disabled,
+    invalid,
     labelId,
+    readOnly,
+    required,
     ...rest,
   }
 }
@@ -265,8 +316,8 @@ export interface UseFormControlProps<Y extends HTMLElement>
 export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   id,
   disabled,
+  invalid,
   isDisabled,
-  isInvalid,
   isReadOnly,
   isRequired,
   readOnly,
@@ -277,15 +328,15 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
 }: M & UseFormControlProps<Y>) => {
   const control = useFormControlContext()
 
-  disabled ??= isDisabled ?? control?.isDisabled
-  required ??= isRequired ?? control?.isRequired
-  readOnly ??= isReadOnly ?? control?.isReadOnly
-  isInvalid ??= control?.isInvalid
+  disabled ??= control?.disabled ?? isDisabled
+  required ??= control?.required ?? isReadOnly
+  readOnly ??= control?.readOnly ?? isRequired
+  invalid ??= control?.invalid
 
   return {
     id: id ?? control?.id,
     "aria-disabled": ariaAttr(disabled),
-    "aria-invalid": ariaAttr(isInvalid),
+    "aria-invalid": ariaAttr(invalid),
     "aria-readonly": ariaAttr(readOnly),
     "aria-required": ariaAttr(required),
     "data-readonly": dataAttr(readOnly),
@@ -371,21 +422,21 @@ export const Label = forwardRef<LabelProps, "label">(
   ) => {
     const {
       id: formControlId,
-      isDisabled,
-      isFocused,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      disabled,
+      focused,
+      invalid,
       labelId,
+      readOnly,
+      required,
     } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
     idProp ??= labelId
-    isRequiredProp ??= isRequired
+    isRequiredProp ??= required
 
     const css: CSSUIObject = {
       display: "block",
-      pointerEvents: isReadOnly ? "none" : undefined,
+      pointerEvents: readOnly ? "none" : undefined,
       ...styles.label,
     }
 
@@ -395,11 +446,11 @@ export const Label = forwardRef<LabelProps, "label">(
         ref={ref}
         htmlFor={htmlFor ?? formControlId}
         className={cx("ui-form__label", className)}
-        style={{ cursor: isDisabled ? "not-allowed" : undefined }}
-        data-disabled={dataAttr(isDisabled)}
-        data-focus={dataAttr(isFocused)}
-        data-invalid={dataAttr(isInvalid)}
-        data-readonly={dataAttr(isReadOnly)}
+        style={{ cursor: disabled ? "not-allowed" : undefined }}
+        data-disabled={dataAttr(disabled)}
+        data-focus={dataAttr(focused)}
+        data-invalid={dataAttr(invalid)}
+        data-readonly={dataAttr(readOnly)}
         __css={css}
         {...rest}
       >
@@ -453,10 +504,10 @@ export interface HelperMessageProps extends HTMLUIProps<"span"> {}
 
 export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   ({ className, ...rest }, ref) => {
-    const { id, isInvalid, isReplace } = useFormControlContext() ?? {}
+    const { id, invalid, replace } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
-    if (isReplace && isInvalid) return null
+    if (replace && invalid) return null
 
     const css: CSSUIObject = { ...styles.helperMessage }
 
@@ -479,10 +530,10 @@ export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
   ({ className, ...rest }, ref) => {
-    const { isInvalid } = useFormControlContext() ?? {}
+    const { invalid } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
-    if (!isInvalid) return null
+    if (!invalid) return null
 
     const css: CSSUIObject = { ...styles.errorMessage }
 

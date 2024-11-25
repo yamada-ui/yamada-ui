@@ -65,6 +65,7 @@
     "@yamada-ui/focus-lock": "workspace:*",
     "@yamada-ui/for": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/format": "workspace:*",
     "@yamada-ui/highlight": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/image": "workspace:*",

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { isNumber, isObject, isString } from "./assertion"
+import { noop } from "./function"
 
 export type MaybeRenderProp<Y> =
   | ((props: Y) => React.ReactNode)
@@ -103,6 +104,18 @@ export function useIsMounted({
 }
 
 export type UseIsMountedReturn = ReturnType<typeof useIsMounted>
+
+export function useIsSsr() {
+  if (typeof React.useSyncExternalStore === "function")
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return React.useSyncExternalStore(
+      () => noop,
+      () => false,
+      () => true,
+    )
+
+  return false
+}
 
 export function getValidChildren(
   children: React.ReactNode,

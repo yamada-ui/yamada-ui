@@ -40,6 +40,8 @@ import { FileInput } from "./file-input"
 import { Flip } from "./flip"
 import { For } from "./for"
 import { FormControl } from "./form-control"
+import { FormatByte } from "./format-byte"
+import { FormatNumber } from "./format-number"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
 import { Icon } from "./icon"
@@ -144,6 +146,8 @@ export const components = {
   FileInput,
   Flip,
   For,
+  FormatByte,
+  FormatNumber,
   FormControl,
   Heading,
   HueSlider,

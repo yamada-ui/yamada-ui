@@ -19,6 +19,8 @@ import type {
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
 
+export type TextDirection = "ltr" | "rtl"
+
 export type BreakpointDirection = "down" | "up"
 
 export interface BreakpointOptions {
@@ -377,9 +379,17 @@ export interface ThemeConfig {
      *
      * @see Docs https://day.js.org/docs/en/i18n/instance-locale
      * @default 'en'
+     *
+     * @deprecated Use `locale` instead.
      */
     locale?: string
   }
+  /**
+   * The text direction to apply to the application.
+   *
+   * @default 'ltr'
+   */
+  direction?: TextDirection
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -426,6 +436,12 @@ export interface ThemeConfig {
      */
     screen?: LoadingConfigOptions
   }
+  /**
+   * The locale to apply to the application.
+   *
+   * @default 'en-US'
+   */
+  locale?: string
   /**
    * The config of the `framer-motion`.
    */

@@ -471,6 +471,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "basic" | "rounded" | ({} & string)
     }
+    DataList: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: "bold" | "grid" | "subtle" | ({} & string)
+    }
     DatePicker: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)

@@ -48,6 +48,12 @@
       "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the pagination all item will be disabled.",
+      "required": false
+    },
     "edgeFirstProps": {
       "type": "Omit<PaginationItemProps, \"page\">",
       "description": "Props for first of the edge button element.",
@@ -66,6 +72,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the pagination all item will be disabled.",
       "required": false
     },
@@ -133,9 +140,16 @@
       "description": "The initial page of the pagination.\nShould be less than `total` and greater than `1`.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the pagination all item will be disabled.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the pagination all item will be disabled.",
       "required": false
     },

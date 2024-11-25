@@ -9,7 +9,7 @@ export const RadarChart: ComponentMultiStyle<"RadarChart"> = mergeMultiStyle(
       polarAngleAxis: {},
       polarAngleAxisTick: {
         "& > text": {
-          fill: ["blackAlpha.700", "whiteAlpha.600"],
+          fill: "muted",
           fontSize: "xs",
         },
       },
@@ -24,7 +24,7 @@ export const RadarChart: ComponentMultiStyle<"RadarChart"> = mergeMultiStyle(
       },
       polarRadiusAxisTick: {
         "& > text": {
-          fill: ["blackAlpha.700", "whiteAlpha.600"],
+          fill: "muted",
           fontSize: "xs",
         },
       },

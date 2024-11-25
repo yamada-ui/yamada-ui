@@ -4,7 +4,7 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Center,
+  EmptyState,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -56,11 +56,10 @@ export const withFallBack: Story = () => {
       <For
         each={[]}
         fallback={
-          <Center flexDirection="column" gap="md" pt="lg">
-            <BoxIcon fontSize="3xl" />
-
-            <Text color="muted">There are no items to show</Text>
-          </Center>
+          <EmptyState
+            description="There are no items to show"
+            indicator={<BoxIcon />}
+          />
         }
       >
         {(item, index) => <Text key={index}>{item}</Text>}

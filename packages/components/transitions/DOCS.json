@@ -32,6 +32,12 @@
       "description": "　The animation delay.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number",
       "defaultValue": "0.2",
@@ -41,18 +47,26 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the component is disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the component is readonly.",
       "required": false
     },
     "onChange": {
       "type": "(value: AiryIdent) => void",
       "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
       "required": false
     },
     "size": {
@@ -120,6 +134,12 @@
       "required": false
     },
     "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "open": {
       "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
@@ -189,6 +209,12 @@
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
@@ -241,6 +267,12 @@
       "description": "　The animation delay.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number",
       "defaultValue": "0.4",
@@ -250,12 +282,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the component is disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the component is readonly.",
       "required": false
     },
@@ -268,6 +302,12 @@
       "type": "FlipOrientation",
       "defaultValue": "'horizontal'",
       "description": "The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
       "required": false
     },
     "size": {
@@ -324,6 +364,12 @@
       "description": "　The animation delay.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number",
       "defaultValue": "0.4",
@@ -333,18 +379,26 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the component is disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the component is readonly.",
       "required": false
     },
     "onChange": {
       "type": "(value: RotateIdent) => void",
       "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the component is readonly.",
       "required": false
     },
     "rotate": {
@@ -406,6 +460,12 @@
       "required": false
     },
     "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "open": {
       "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
@@ -486,6 +546,12 @@
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
@@ -559,6 +625,7 @@
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead.",
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
@@ -572,6 +639,11 @@
       "type": "UIValue<string | number>",
       "defaultValue": "8",
       "description": "The offset on the vertical or `y` axis.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "reverse": {

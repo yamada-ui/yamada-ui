@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/react",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -57,7 +57,9 @@
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/color-picker": "workspace:*",
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/data-list": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
+    "@yamada-ui/empty-state": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",
     "@yamada-ui/file-input": "workspace:*",
     "@yamada-ui/focus-lock": "workspace:*",
@@ -100,6 +102,7 @@
     "@yamada-ui/slider": "workspace:*",
     "@yamada-ui/snacks": "workspace:*",
     "@yamada-ui/stat": "workspace:*",
+    "@yamada-ui/status": "workspace:*",
     "@yamada-ui/stepper": "workspace:*",
     "@yamada-ui/switch": "workspace:*",
     "@yamada-ui/tabs": "workspace:*",

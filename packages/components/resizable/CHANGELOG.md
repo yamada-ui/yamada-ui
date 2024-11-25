@@ -1,5 +1,18 @@
 # @yamada-ui/resizable
 
+## 1.2.0
+
+### Minor Changes
+
+- [#3471](https://github.com/yamada-ui/yamada-ui/pull/3471) [`66136cb`](https://github.com/yamada-ui/yamada-ui/commit/66136cb606416c60b786202918581dbc84abc5f6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced resizable with double-click handling.
+
+- [#3485](https://github.com/yamada-ui/yamada-ui/pull/3485) [`f74aa7c`](https://github.com/yamada-ui/yamada-ui/commit/f74aa7c9ad57dca02b3dba9359745b18de420ada) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `aria-orientation` to `ResizableTrigger` component.
+
+### Patch Changes
+
+- Updated dependencies [[`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/icon@1.1.13
+
 ## 1.1.18
 
 ### Patch Changes

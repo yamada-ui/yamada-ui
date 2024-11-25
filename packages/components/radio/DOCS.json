@@ -1,14 +1,27 @@
 {
   "Radio": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the radio will be checked.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"primary\"",
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the radio will be initially checked.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the radio will be initially checked.",
       "required": false
     },
@@ -25,6 +38,7 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the radio will be checked.",
       "required": false
     },
@@ -81,9 +95,22 @@
     }
   },
   "UseRadio": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the radio will be checked.",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the radio will be initially checked.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the radio will be initially checked.",
       "required": false
     },
@@ -95,6 +122,7 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the radio will be checked.",
       "required": false
     },

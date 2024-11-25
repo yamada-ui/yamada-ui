@@ -2335,6 +2335,31 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/password-input:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/pin-input:
     dependencies:
       '@yamada-ui/core':
@@ -3773,6 +3798,9 @@ importers:
       '@yamada-ui/pagination':
         specifier: workspace:*
         version: link:../components/pagination
+      '@yamada-ui/password-input':
+        specifier: workspace:*
+        version: link:../components/password-input
       '@yamada-ui/pin-input':
         specifier: workspace:*
         version: link:../components/pin-input

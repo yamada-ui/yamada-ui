@@ -24,15 +24,16 @@ interface ResizableOptions {
  * @see Docs https://yamada-ui.com/components/data-display/resizable
  */
 export interface ResizableProps
-  extends Omit<HTMLUIProps, "direction">,
+  extends Omit<HTMLUIProps, "direction" | "orientation">,
     ThemeProps<"Resizable">,
     Omit<UseResizableProps, "ref">,
     ResizableOptions {}
 
 export const Resizable = forwardRef<ResizableProps, "div">(
-  ({ direction = "horizontal", ...props }, ref) => {
+  ({ direction, orientation = "horizontal", ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Resizable", {
       direction,
+      orientation,
       ...props,
     })
     const { className, children, containerRef, ...computedProps } =

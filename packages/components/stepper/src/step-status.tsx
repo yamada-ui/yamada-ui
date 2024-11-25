@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import type { StepContext } from "./step"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { CheckIcon } from "@yamada-ui/lucide"
-import { cx, isNull, runIfFunc } from "@yamada-ui/utils"
+import { cx, runIfFunc } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 

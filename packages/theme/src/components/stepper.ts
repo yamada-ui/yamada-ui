@@ -7,8 +7,8 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       color: "muted",
     },
     icon: {
-      flexShrink: 0,
       display: "grid",
+      flexShrink: 0,
       placeContent: "center",
     },
     number: {},

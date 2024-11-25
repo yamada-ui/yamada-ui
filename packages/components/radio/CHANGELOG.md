@@ -1,5 +1,16 @@
 # @yamada-ui/radio
 
+## 1.2.15
+
+### Patch Changes
+
+- [#3548](https://github.com/yamada-ui/yamada-ui/pull/3548) [`90c0404`](https://github.com/yamada-ui/yamada-ui/commit/90c0404adbb8ef1f2249cd96198cd32c8629c5a2) Thanks [@chida09](https://github.com/chida09)! - feat: remove `is` prefix
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/form-control@2.1.8
+  - @yamada-ui/layouts@1.2.2
+
 ## 1.2.14
 
 ### Patch Changes

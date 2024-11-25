@@ -14,6 +14,14 @@ tab: Props
 ### RadioProps
 
 <PropsCard
+  id="radio-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the radio will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="radio-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -22,10 +30,19 @@ tab: Props
 />
 
 <PropsCard
+  id="radio-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the radio will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="radio-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the radio will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -49,6 +66,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the radio will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -125,10 +143,27 @@ tab: Props
 ### UseRadioProps
 
 <PropsCard
+  id="useradio-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the radio will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the radio will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="useradio-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the radio will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -144,6 +179,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the radio will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 

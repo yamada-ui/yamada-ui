@@ -11,6 +11,12 @@
       "description": "The `ref` of the wrapper for which the focus-lock wraps.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, focus trapping will be disabled.",
+      "required": false
+    },
     "finalFocusRef": {
       "type": "RefObject<FocusableElement>",
       "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
@@ -24,6 +30,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, focus trapping will be disabled.",
       "required": false
     },

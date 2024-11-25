@@ -32,6 +32,7 @@ import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
 import { Em } from "./em"
+import { EmptyState } from "./empty-state"
 import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
@@ -135,6 +136,7 @@ export const components = {
   Dropzone,
   Editable,
   Em,
+  EmptyState,
   Fade,
   Fieldset,
   FileButton,

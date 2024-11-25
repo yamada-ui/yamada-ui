@@ -1625,6 +1625,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/empty-state:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/file-button:
     dependencies:
       '@yamada-ui/button':
@@ -3663,6 +3679,9 @@ importers:
       '@yamada-ui/editable':
         specifier: workspace:*
         version: link:../components/editable
+      '@yamada-ui/empty-state':
+        specifier: workspace:*
+        version: link:../components/empty-state
       '@yamada-ui/file-button':
         specifier: workspace:*
         version: link:../components/file-button

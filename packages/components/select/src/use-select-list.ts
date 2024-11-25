@@ -1,12 +1,13 @@
 import type { PropGetter } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { ariaAttr, isArray, mergeRefs } from "@yamada-ui/utils"
-import { useCallback, useEffect, useId, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useSelectContext, useSelectDescendantsContext } from "./use-select"
 
 export const useSelectList = () => {
-  const { focusedIndex, listRef, value } = useSelectContext()
+  const { focusedIndex, value } = useSelectContext()
   const descendants = useSelectDescendantsContext()
-  const uuid = useId()
+  const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
   const isMulti = isArray(value)
@@ -46,20 +47,28 @@ export const useSelectList = () => {
     beforeFocusedIndex.current = selectedValue.index
   }, [listRef, selectedValue])
 
-  const getListProps: PropGetter = useCallback(
-    ({ id, ...props } = {}, ref = null) => ({
-      id: id ?? uuid,
-      ref: mergeRefs(listRef, ref),
+  const getContainerProps: PropGetter<MotionProps, MotionProps> = useCallback(
+    (props = {}, ref = null) => ({
+      ref,
       "aria-multiselectable": ariaAttr(isMulti),
-      position: "relative",
       role: "listbox",
+      ...props,
+    }),
+    [isMulti],
+  )
+
+  const getListProps: PropGetter = useCallback(
+    (props = {}, ref = null) => ({
+      ref: mergeRefs(listRef, ref),
+      position: "relative",
       tabIndex: -1,
       ...props,
     }),
-    [uuid, isMulti, listRef],
+    [listRef],
   )
 
   return {
+    getContainerProps,
     getListProps,
   }
 }

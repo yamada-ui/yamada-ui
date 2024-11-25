@@ -471,6 +471,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "basic" | "rounded" | ({} & string)
     }
+    DataList: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: "bold" | "grid" | "subtle" | ({} & string)
+    }
     DatePicker: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
@@ -506,6 +510,10 @@ export interface GeneratedTheme extends UITheme {
     Dropzone: {
       sizes: "full" | "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "dashed" | "solid" | "unstyled" | ({} & string)
+    }
+    EmptyState: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: {} & string
     }
     FileButton: {
       sizes: "2xl" | "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)

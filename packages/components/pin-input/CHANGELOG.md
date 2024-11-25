@@ -1,5 +1,11 @@
 # @yamada-ui/pin-input
 
+## 1.2.0
+
+### Minor Changes
+
+- [#3472](https://github.com/yamada-ui/yamada-ui/pull/3472) [`94ea215`](https://github.com/yamada-ui/yamada-ui/commit/94ea21571fc81e6e037f243e66cce6567d76831f) Thanks [@uraaaa24](https://github.com/uraaaa24)! - enhance keyboard interactions
+
 ## 1.1.2
 
 ### Patch Changes

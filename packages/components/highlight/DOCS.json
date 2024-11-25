@@ -20,9 +20,16 @@
       "description": "The CSS `text-decoration` property.",
       "required": false
     },
+    "fragment": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
+    },
     "isFragment": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fragment` instead.",
       "description": "If `true`, `Fragment` is used for rendering.",
       "required": false
     },

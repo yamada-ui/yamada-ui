@@ -59,10 +59,11 @@ export const useYearPicker = ({
   })
 
   const {
-    id,
     allowInput,
     dateToString,
+    inputFormat,
     inputRef,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -142,6 +143,12 @@ export const useYearPicker = ({
     setInputValue(inputValue)
   }, [value])
 
+  useUpdateEffect(() => {
+    const inputValue = dateToString(value)
+
+    setInputValue(inputValue)
+  }, [locale, inputFormat])
+
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
@@ -153,7 +160,6 @@ export const useYearPicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -170,14 +176,12 @@ export const useYearPicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
     ],
   )
 
   return {
-    id,
     value,
     getCalendarProps,
     getContainerProps,

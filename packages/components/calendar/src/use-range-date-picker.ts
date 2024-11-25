@@ -80,11 +80,12 @@ export const useRangeDatePicker = ({
       : undefined
 
   const {
-    id,
     allowInput,
     containerRef,
     dateToString,
+    inputFormat,
     isOpen,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -266,6 +267,11 @@ export const useRangeDatePicker = ({
     setEndInputValue(dateToString(endValue) ?? "")
   }, [value])
 
+  useUpdateEffect(() => {
+    setStartInputValue(dateToString(startValue) ?? "")
+    setEndInputValue(dateToString(endValue) ?? "")
+  }, [locale, inputFormat])
+
   const getStartInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref) => {
       const style: CSSProperties = {
@@ -277,7 +283,7 @@ export const useRangeDatePicker = ({
       }
 
       return {
-        id,
+        "aria-label": "Start Date",
         placeholder: startPlaceholder ?? placeholder,
         tabIndex: !allowInput ? -1 : 0,
         zIndex: !startInputValue ? 1 : undefined,
@@ -309,7 +315,6 @@ export const useRangeDatePicker = ({
       startPlaceholder,
       placeholder,
       formControlProps,
-      id,
       startInputValue,
       onStartChange,
       pattern,
@@ -325,11 +330,11 @@ export const useRangeDatePicker = ({
       }
 
       return {
+        "aria-label": "End Date",
         placeholder: endPlaceholder ?? placeholder,
         ...formControlProps,
         ...inputProps,
         ...props,
-        id,
         ref: mergeRefs(ref, endInputRef),
         style,
         cursor: formControlProps.readOnly ? "default" : "text",
@@ -359,7 +364,6 @@ export const useRangeDatePicker = ({
       endPlaceholder,
       placeholder,
       formControlProps,
-      id,
       endInputValue,
       onEndChange,
       pattern,
@@ -367,7 +371,6 @@ export const useRangeDatePicker = ({
   )
 
   return {
-    id,
     dateToString,
     inputValue: [startInputValue, endInputValue],
     value,

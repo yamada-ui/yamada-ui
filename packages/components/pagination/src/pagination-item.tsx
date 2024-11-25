@@ -60,11 +60,11 @@ export interface PaginationItemProps
 const iconMap: {
   [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
-  ellipsis: <EllipsisIcon viewBox="0 0 16 16" />,
-  first: <ChevronsLeftIcon viewBox="0 0 16 16" />,
-  last: <ChevronsRightIcon viewBox="0 0 16 16" />,
-  next: <ChevronRightIcon viewBox="0 0 16 16" />,
-  prev: <ChevronLeftIcon viewBox="0 0 16 16" />,
+  ellipsis: <EllipsisIcon />,
+  first: <ChevronsLeftIcon />,
+  last: <ChevronsRightIcon />,
+  next: <ChevronRightIcon />,
+  prev: <ChevronLeftIcon />,
 }
 
 export const PaginationItem = forwardRef<PaginationItemProps, "button">(

@@ -1,5 +1,15 @@
 # @yamada-ui/button
 
+## 1.0.50
+
+### Patch Changes
+
+- [`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87) Thanks [@nathanlao](https://github.com/nathanlao)! - Renamed props in components from `left` and `right` to `start` and `end`.
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.24
+  - @yamada-ui/ripple@1.0.44
+
 ## 1.0.49
 
 ### Patch Changes

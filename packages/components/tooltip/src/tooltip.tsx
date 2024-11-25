@@ -141,9 +141,9 @@ interface TooltipOptions {
 }
 
 export interface TooltipProps
-  extends Omit<MotionProps, "animation" | "offset">,
+  extends Omit<MotionProps, "animation" | "children" | "offset">,
     ThemeProps<"Tooltip">,
-    Pick<UsePopperProps, "gutter" | "modifiers" | "offset" | "placement">,
+    Omit<UsePopperProps, "enabled">,
     TooltipOptions {}
 
 const getTooltipProps = (
@@ -203,6 +203,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     let {
       className,
       animation,
+      boundary,
       children,
       closeDelay = 0,
       closeOnClick,
@@ -214,15 +215,20 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       defaultOpen: defaultOpenProp,
       disabled,
       duration,
+      eventListeners,
+      flip,
       gutter,
       isDisabled,
       isOpen: isOpenProp,
       label,
+      matchWidth,
       modifiers,
       offset,
       open: openProp,
       openDelay = 0,
       placement,
+      preventOverflow,
+      strategy,
       onClose: onCloseProp,
       onOpen: onOpenProp,
       ...rest
@@ -246,11 +252,17 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const openTimeout = useRef<NodeJS.Timeout>()
     const closeTimeout = useRef<NodeJS.Timeout>()
     const { referenceRef, transformOrigin, getPopperProps } = usePopper({
+      boundary,
       enabled: isOpen,
+      eventListeners,
+      flip,
       gutter,
+      matchWidth,
       modifiers,
       offset,
       placement,
+      preventOverflow,
+      strategy,
     })
 
     const closeNow = useCallback(() => {

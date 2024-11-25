@@ -103,7 +103,6 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const {
-    id,
     value,
     getCalendarProps,
     getContainerProps,
@@ -157,11 +156,8 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              id={id}
               as="div"
               className="ui-year-picker__content"
-              aria-modal="true"
-              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

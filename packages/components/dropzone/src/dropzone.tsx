@@ -35,14 +35,15 @@ import {
   isArray,
   splitObject,
 } from "@yamada-ui/utils"
+import { useId } from "react"
 import { useDropzone } from "react-dropzone-esm"
 
 interface DropzoneContext {
-  isDragAccept: boolean
-  isDragIdle: boolean
-  isDragReject: boolean
+  dragAccept: boolean
+  dragIdle: boolean
+  dragReject: boolean
   styles: { [key: string]: CSSUIObject | undefined }
-  isLoading?: boolean
+  loading?: boolean
 }
 
 const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
@@ -67,8 +68,16 @@ interface DropzoneOptions {
    * If `true`, display the dropzone loading icon.
    *
    * @default false
+   *
+   * @deprecated Use `loading` instead.
    */
   isLoading?: boolean
+  /**
+   * If `true`, display the dropzone loading icon.
+   *
+   * @default false
+   */
+  loading?: boolean
   /**
    * Ref to a open function.
    */
@@ -96,7 +105,7 @@ export interface DropzoneProps
  */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Dropzone", props)
-  const {
+  let {
     id,
     name,
     className,
@@ -104,6 +113,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     autoFocus,
     children,
     isLoading,
+    loading,
     maxFiles,
     maxSize,
     multiple,
@@ -126,43 +136,51 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     onFileDialogOpen,
     ...rest
   } = useFormControlProps(omitThemeProps(mergedProps))
+  const labelledbyId = useId()
 
-  const disabled = isLoading || rest.disabled || rest.readOnly
+  loading ??= isLoading
 
-  const [formControlProps, containerProps] = splitObject(
-    rest,
-    formControlProperties,
-  )
+  const disabled = loading || rest.disabled || rest.readOnly
 
-  const { isDragAccept, isDragReject, open, getInputProps, getRootProps } =
-    useDropzone({
-      accept: isArray(accept)
-        ? accept.reduce((prev, current) => ({ ...prev, [current]: [] }), {})
-        : accept,
-      autoFocus,
-      disabled,
-      maxFiles,
-      maxSize,
-      multiple,
-      noClick,
-      noDrag,
-      noDragEventsBubbling,
-      noKeyboard,
-      preventDropOnDocument,
-      useFsAccessApi,
-      onDragEnter,
-      onDragLeave,
-      onDragOver,
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      onFileDialogCancel,
-      onFileDialogOpen,
-    })
+  const [
+    { "aria-readonly": ariaReadOnly, ...formControlProps },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
+
+  const {
+    isDragAccept: dragAccept,
+    isDragReject: dragReject,
+    open,
+    getInputProps,
+    getRootProps,
+  } = useDropzone({
+    accept: isArray(accept)
+      ? accept.reduce((prev, current) => ({ ...prev, [current]: [] }), {})
+      : accept,
+    autoFocus,
+    disabled,
+    maxFiles,
+    maxSize,
+    multiple,
+    noClick,
+    noDrag,
+    noDragEventsBubbling,
+    noKeyboard,
+    preventDropOnDocument,
+    useFsAccessApi,
+    onDragEnter,
+    onDragLeave,
+    onDragOver,
+    onDrop,
+    onDropAccepted,
+    onDropRejected,
+    onFileDialogCancel,
+    onFileDialogOpen,
+  })
 
   assignRef(openRef, open)
 
-  const isDragIdle = !isDragAccept && !isDragReject
+  const dragIdle = !dragAccept && !dragReject
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -174,17 +192,25 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 
   return (
     <DropzoneProvider
-      value={{ isDragAccept, isDragIdle, isDragReject, isLoading, styles }}
+      value={{
+        dragAccept,
+        dragIdle,
+        dragReject,
+        loading,
+        styles,
+      }}
     >
       <ui.div
+        id={labelledbyId}
         className={cx("ui-dropzone", className)}
         __css={css}
+        {...formControlProps}
         {...containerProps}
         {...getRootProps({})}
-        data-accept={dataAttr(isDragAccept)}
-        data-idle={dataAttr(isDragIdle)}
-        data-loading={dataAttr(isLoading)}
-        data-reject={dataAttr(isDragReject)}
+        data-accept={dataAttr(dragAccept)}
+        data-idle={dataAttr(dragIdle)}
+        data-loading={dataAttr(loading)}
+        data-reject={dataAttr(dragReject)}
       >
         <DropzoneLoadingOverlay loadingProps={loadingProps} {...overlayProps} />
 
@@ -192,6 +218,8 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
           id={id}
           ref={ref}
           name={name}
+          aria-labelledby={labelledbyId}
+          aria-readonly={ariaReadOnly}
           {...formControlProps}
           {...getInputProps()}
         />
@@ -212,7 +240,7 @@ const DropzoneLoadingOverlay: FC<DropzoneLoadingOverlayProps> = ({
   loadingProps,
   ...rest
 }) => {
-  const { isLoading, styles } = useDropzoneContext()
+  const { loading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -229,7 +257,7 @@ const DropzoneLoadingOverlay: FC<DropzoneLoadingOverlayProps> = ({
   return (
     <Fade
       className="ui-dropzone__overlay"
-      isOpen={isLoading}
+      open={loading}
       unmountOnExit
       __css={css}
       {...rest}
@@ -247,27 +275,27 @@ DropzoneLoadingOverlay.displayName = "DropzoneLoadingOverlay"
 DropzoneLoadingOverlay.__ui__ = "DropzoneLoadingOverlay"
 
 export const DropzoneAccept: FC<PropsWithChildren> = ({ children }) => {
-  const { isDragAccept } = useDropzoneContext()
+  const { dragAccept } = useDropzoneContext()
 
-  return isDragAccept ? children : null
+  return dragAccept ? children : null
 }
 
 DropzoneAccept.displayName = "DropzoneAccept"
 DropzoneAccept.__ui__ = "DropzoneAccept"
 
 export const DropzoneReject: FC<PropsWithChildren> = ({ children }) => {
-  const { isDragReject } = useDropzoneContext()
+  const { dragReject } = useDropzoneContext()
 
-  return isDragReject ? children : null
+  return dragReject ? children : null
 }
 
 DropzoneReject.displayName = "DropzoneReject"
 DropzoneReject.__ui__ = "DropzoneReject"
 
 export const DropzoneIdle: FC<PropsWithChildren> = ({ children }) => {
-  const { isDragIdle } = useDropzoneContext()
+  const { dragIdle } = useDropzoneContext()
 
-  return isDragIdle ? children : null
+  return dragIdle ? children : null
 }
 
 DropzoneIdle.displayName = "DropzoneIdle"

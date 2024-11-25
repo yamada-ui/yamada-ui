@@ -83,11 +83,12 @@ export interface PaginationProps
  */
 export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Pagination", props)
-  const {
+  let {
     className,
     boundaries,
     component: Component = PaginationItem,
     defaultPage,
+    disabled,
     isDisabled,
     page,
     siblings,
@@ -109,11 +110,13 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
   const withControls = useValue(_withControls)
   const withEdges = useValue(_withEdges)
 
+  disabled ??= isDisabled
+
   const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
     usePagination({
       boundaries,
       defaultPage,
-      isDisabled,
+      disabled,
       page,
       siblings,
       total,
@@ -126,8 +129,8 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
         <ui.li key={key}>
           <Component
             aria-label={page !== "ellipsis" ? `Go to page ${page}` : undefined}
-            isActive={currentPage === page}
-            isDisabled={isDisabled}
+            active={currentPage === page}
+            disabled={disabled}
             {...itemProps}
             page={page}
             onClick={handlerAll(
@@ -137,7 +140,7 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
           />
         </ui.li>
       )),
-    [Component, currentPage, isDisabled, onChange, range, itemProps],
+    [Component, currentPage, disabled, onChange, range, itemProps],
   )
 
   const css: CSSUIObject = {
@@ -168,7 +171,7 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
               <Component
                 className="ui-pagination__item--first"
                 aria-label="Go to first page"
-                isDisabled={isDisabled || currentPage === 1}
+                disabled={disabled || currentPage === 1}
                 page="first"
                 {...edgeProps}
                 {...edgeFirstProps}
@@ -186,7 +189,7 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
               <Component
                 className="ui-pagination__item--prev"
                 aria-label="Go to previous page"
-                isDisabled={isDisabled || currentPage === 1}
+                disabled={disabled || currentPage === 1}
                 page="prev"
                 {...controlProps}
                 {...controlPrevProps}
@@ -206,7 +209,7 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
               <Component
                 className="ui-pagination__item--next"
                 aria-label="Go to next page"
-                isDisabled={isDisabled || currentPage === total}
+                disabled={disabled || currentPage === total}
                 page="next"
                 {...controlProps}
                 {...controlNextProps}
@@ -224,7 +227,7 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
               <Component
                 className="ui-pagination__item--last"
                 aria-label="Go to last page"
-                isDisabled={isDisabled || currentPage === total}
+                disabled={disabled || currentPage === total}
                 page="last"
                 {...edgeProps}
                 {...edgeLastProps}

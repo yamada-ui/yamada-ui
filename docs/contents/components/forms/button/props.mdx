@@ -31,6 +31,13 @@ label: Updated
 />
 
 <PropsCard
+  id="button-endicon"
+  name="endIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to display at the end side of the button."}
+/>
+
+<PropsCard
   id="button-isactive"
   name="isActive"
   type="boolean"
@@ -69,6 +76,7 @@ label: Updated
   name="leftIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the left side of the button."}
+  deprecated={"Use `startIcon` instead."}
 />
 
 <PropsCard
@@ -108,6 +116,7 @@ label: Updated
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the right side of the button."}
+  deprecated={"Use `endIcon` instead."}
 />
 
 <PropsCard
@@ -116,6 +125,13 @@ label: Updated
   type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl"'
   description={"The size of the Button."}
   defaultValue={'"md"'}
+/>
+
+<PropsCard
+  id="button-starticon"
+  name="startIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to display at the start side of the button."}
 />
 
 <PropsCard

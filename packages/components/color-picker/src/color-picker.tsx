@@ -134,7 +134,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
-      id,
       eyeDropperSupported,
       value,
       getContainerProps,
@@ -190,7 +189,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                id={id}
+                as="div"
                 className="ui-color-picker__content"
                 __css={{ ...styles.content }}
               >

@@ -1788,7 +1788,7 @@ export const customCell: Story = () => {
             <Link
               ref={referenceRef}
               href="https://dragon-ball-official.com/"
-              isExternal
+              external
               tabIndex={tabIndex}
             >
               {getValue()}

@@ -80,7 +80,6 @@ export const useRangeDatePicker = ({
       : undefined
 
   const {
-    id,
     allowInput,
     containerRef,
     dateToString,
@@ -277,7 +276,7 @@ export const useRangeDatePicker = ({
       }
 
       return {
-        id,
+        "aria-label": "Start Date",
         placeholder: startPlaceholder ?? placeholder,
         tabIndex: !allowInput ? -1 : 0,
         zIndex: !startInputValue ? 1 : undefined,
@@ -309,7 +308,6 @@ export const useRangeDatePicker = ({
       startPlaceholder,
       placeholder,
       formControlProps,
-      id,
       startInputValue,
       onStartChange,
       pattern,
@@ -325,11 +323,11 @@ export const useRangeDatePicker = ({
       }
 
       return {
+        "aria-label": "End Date",
         placeholder: endPlaceholder ?? placeholder,
         ...formControlProps,
         ...inputProps,
         ...props,
-        id,
         ref: mergeRefs(ref, endInputRef),
         style,
         cursor: formControlProps.readOnly ? "default" : "text",
@@ -359,7 +357,6 @@ export const useRangeDatePicker = ({
       endPlaceholder,
       placeholder,
       formControlProps,
-      id,
       endInputValue,
       onEndChange,
       pattern,
@@ -367,7 +364,6 @@ export const useRangeDatePicker = ({
   )
 
   return {
-    id,
     dateToString,
     inputValue: [startInputValue, endInputValue],
     value,

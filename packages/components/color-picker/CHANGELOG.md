@@ -1,5 +1,18 @@
 # @yamada-ui/color-picker
 
+## 1.4.10
+
+### Patch Changes
+
+- [#3495](https://github.com/yamada-ui/yamada-ui/pull/3495) [`b511132`](https://github.com/yamada-ui/yamada-ui/commit/b5111325ab9d459842e8a598ce6ab6edd0563944) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update variable declaration and aria values.
+
+- [#3475](https://github.com/yamada-ui/yamada-ui/pull/3475) [`47a2671`](https://github.com/yamada-ui/yamada-ui/commit/47a2671f9bd3eb3cecf78e6bb7bced1cf2e3bd74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a11y.
+
+- Updated dependencies [[`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c), [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c), [`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87)]:
+  - @yamada-ui/popover@1.4.3
+  - @yamada-ui/icon@1.1.13
+  - @yamada-ui/button@1.0.50
+
 ## 1.4.9
 
 ### Patch Changes

@@ -1253,6 +1253,9 @@ importers:
       '@yamada-ui/image':
         specifier: workspace:*
         version: link:../image
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../lucide
       '@yamada-ui/use-animation':
         specifier: workspace:*
         version: link:../../hooks/use-animation

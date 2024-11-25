@@ -1,5 +1,16 @@
 # @yamada-ui/number-input
 
+## 1.2.0
+
+### Minor Changes
+
+- [#3470](https://github.com/yamada-ui/yamada-ui/pull/3470) [`1deb09a`](https://github.com/yamada-ui/yamada-ui/commit/1deb09ab14bc9f340c1caa84879b2211921b8f6d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria labels and role for accessibility.
+
+### Patch Changes
+
+- Updated dependencies [[`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/icon@1.1.13
+
 ## 1.1.20
 
 ### Patch Changes

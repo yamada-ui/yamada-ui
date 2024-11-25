@@ -4,7 +4,7 @@ import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import { useCallback, useId } from "react"
+import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu-context"
 
 export interface MenuListProps extends HTMLUIProps<"ul"> {
@@ -12,7 +12,7 @@ export interface MenuListProps extends HTMLUIProps<"ul"> {
 }
 
 export const MenuList = forwardRef<MenuListProps, "ul">(
-  ({ id, className, children, contentProps, ...rest }, ref) => {
+  ({ className, children, contentProps, ...rest }, ref) => {
     const {
       buttonRef,
       focusedIndex,
@@ -21,8 +21,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
       styles,
       onClose,
     } = useMenu()
-    const uuid = useId()
-    id ??= uuid
 
     const descendants = useMenuDescendantsContext()
 
@@ -75,7 +73,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
 
     return (
       <PopoverContent
-        id={id}
         as="div"
         className="ui-menu__content"
         aria-activedescendant={activedescendantId}

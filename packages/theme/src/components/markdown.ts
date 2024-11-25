@@ -9,7 +9,7 @@ export const Markdown: ComponentStyle<"Markdown"> = {
     blockquote: {
       borderLeft: "0.25em solid",
       borderLeftColor: "border",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       px: "1em",
     },
     "blockquote>:last-child": { mb: 0 },

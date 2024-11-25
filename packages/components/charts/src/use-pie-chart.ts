@@ -44,6 +44,8 @@ export interface UsePieChartOptions {
    * Determines whether labels should be displayed as percentages.
    *
    * @default false
+   *
+   * @deprecated Use `percent` instead.
    */
   isPercent?: boolean
   /**
@@ -68,6 +70,12 @@ export interface UsePieChartOptions {
    * @default 0
    */
   paddingAngle?: number
+  /**
+   * Determines whether labels should be displayed as percentages.
+   *
+   * @default false
+   */
+  percent?: boolean
   /**
    * Controls angle at which chart starts.
    *
@@ -121,6 +129,7 @@ export const usePieChart = ({
   withLabels = false,
   outerRadius = withLabels ? "80%" : "100%",
   paddingAngle = 0,
+  percent = false,
   startAngle = 90,
   strokeWidth = 1,
   styles,
@@ -218,9 +227,10 @@ export const usePieChart = ({
         labelOffset,
         styles: styles.label,
         labelProps,
+        percentProps: percent,
         ...props,
       }),
-    [isPercent, labelOffset, labelProps, styles.label, labelFormatter],
+    [isPercent, labelOffset, labelProps, styles.label, percent, labelFormatter],
   )
 
   const labelLine = useCallback(

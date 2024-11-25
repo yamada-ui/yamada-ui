@@ -22,6 +22,7 @@ export interface PieChartLabelProps {
   percent?: number
   value?: number
   labelProps?: HTMLUIProps<"text">
+  percentProps?: boolean
 }
 
 export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
@@ -39,7 +40,10 @@ export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
   styles,
   value = 0,
   labelProps,
+  percentProps,
 }) => {
+  percentProps ??= isPercent
+
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
 
@@ -48,7 +52,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
 
   const textAnchor = x > cxProp ? "start" : x < cxProp ? "end" : "middle"
   const displayLabel = () => {
-    if (isPercent) {
+    if (percentProps) {
       return (
         parseFloat((percent * 100).toFixed(0)) > 0 &&
         `${(percent * 100).toFixed(0)}%`

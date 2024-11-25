@@ -342,7 +342,6 @@ export const Radio = forwardRef(
     } = useRadio({
       ...computedProps,
       checked: checkedProp,
-      isChecked: checkedProp,
       isDisabled,
       isInvalid,
       isReadOnly,

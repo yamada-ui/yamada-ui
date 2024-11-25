@@ -57,7 +57,8 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
     const {
       className,
       children,
-      finish,
+      disabled: disabledProp,
+      finish: finishProp,
       indexRef,
       initialLoad,
       isDisabled,
@@ -65,6 +66,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       loading,
       orientation,
       resetRef,
+      reverse: reverseProp,
       rootMargin,
       rootRef: rootRefProp,
       startIndex,
@@ -73,15 +75,24 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       onLoad,
       ...rest
     } = omitThemeProps(mergedProps)
-    const isVertical = orientation === "vertical"
+
+    let disabled = disabledProp
+    let reverse = reverseProp
+
+    disabled ??= isDisabled
+    reverse ??= isReverse
+
+    const vertical = orientation === "vertical"
     const rootRef = useRef<HTMLDivElement>(null)
-    const { ref: triggerRef, isFinish } = useInfiniteScroll({
+    const { ref: triggerRef, finish } = useInfiniteScroll({
+      disabled,
       indexRef,
       initialLoad,
       isDisabled,
       isReverse,
       orientation,
       resetRef,
+      reverse,
       rootMargin,
       rootRef: rootRefProp ?? rootRef,
       startIndex,
@@ -92,16 +103,16 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
     const css: CSSUIObject = useMemo(
       () => ({
         display: "flex",
-        flexDirection: isVertical ? "column" : "row",
+        flexDirection: vertical ? "column" : "row",
         gap: "1rem",
         w: "100%",
         ...styles.container,
       }),
-      [isVertical, styles],
+      [vertical, styles],
     )
 
-    const hasFinish = !!finish
-    const showTrigger = !isDisabled && (hasFinish || !isFinish)
+    const hasFinish = !!finishProp
+    const showTrigger = !disabled && (hasFinish || !finish)
 
     return (
       <InfiniteScrollAreaProvider value={styles}>
@@ -113,17 +124,17 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
           __css={css}
           {...rest}
         >
-          {isReverse && showTrigger ? (
+          {reverse && showTrigger ? (
             <InfiniteScrollTrigger ref={triggerRef} {...triggerProps}>
-              {isFinish ? finish : loading}
+              {finish ? finishProp : loading}
             </InfiniteScrollTrigger>
           ) : null}
 
           {children}
 
-          {!isReverse && showTrigger ? (
+          {!reverse && showTrigger ? (
             <InfiniteScrollTrigger ref={triggerRef} {...triggerProps}>
-              {isFinish ? finish : loading}
+              {finish ? finishProp : loading}
             </InfiniteScrollTrigger>
           ) : null}
         </ui.div>

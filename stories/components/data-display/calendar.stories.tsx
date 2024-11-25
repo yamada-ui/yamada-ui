@@ -460,20 +460,18 @@ export const customDayButton: Story = () => {
         <Calendar
           dayProps={{
             sx: { _outside: { pointerEvents: "none" } },
-            component: ({ date, isOutside }) =>
-              !isOutside ? <Text as="span">{date.getDate()}</Text> : null,
+            component: ({ date, outside }) =>
+              !outside ? <Text as="span">{date.getDate()}</Text> : null,
           }}
         />
 
         <Calendar
           dayProps={{
-            component: ({ col, date, isSelected, row }) => (
+            component: ({ col, date, row, selected }) => (
               <Text
                 as="span"
                 color={
-                  !isSelected && (col === 3 || row === 3)
-                    ? "blue.500"
-                    : undefined
+                  !selected && (col === 3 || row === 3) ? "blue.500" : undefined
                 }
               >
                 {date.getDate()}
@@ -543,11 +541,11 @@ export const customDayButton: Story = () => {
         locale="ja"
         dayProps={{
           variant: "ghostIcon",
-          component: ({ date, isSelected }) => (
+          component: ({ date, selected }) => (
             <VStack alignItems="center">
               <Center
-                bg={isSelected ? "primary" : undefined}
-                color={isSelected ? "white" : undefined}
+                bg={selected ? "primary" : undefined}
+                color={selected ? "white" : undefined}
                 lineHeight={8}
                 rounded="full"
                 transitionDuration="normal"

@@ -25,6 +25,12 @@ import { useMonthPicker } from "./use-month-picker"
 interface MonthPickerOptions {
   children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the month picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -36,6 +42,8 @@ interface MonthPickerOptions {
    * If `true`, display the month picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -86,6 +94,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   let {
     className,
     children,
+    clearable,
     color,
     h,
     height,
@@ -113,6 +122,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     onClose,
   } = useMonthPicker(computedProps)
 
+  clearable ??= isClearable
   h ??= height
   minH ??= minHeight
 
@@ -141,7 +151,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
               inputProps={getInputProps(inputProps)}
             />
 
-            {isClearable && value ? (
+            {clearable && value ? (
               <DatePickerClearIcon
                 className="ui-month-picker__icon--clear"
                 {...getIconProps({ clear: true, ...clearIconProps })}

@@ -14,6 +14,7 @@ import { Calendar } from "./calendar"
 import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
+import { CheckboxCard } from "./checkbox-card"
 import { CircleProgress } from "./circle-progress"
 import { CloseButton } from "./close-button"
 import { Code } from "./code"
@@ -76,6 +77,7 @@ import { Progress } from "./progress"
 import { RadarChart } from "./radar-chart"
 import { RadialChart } from "./radial-chart"
 import { Radio } from "./radio"
+import { RadioCard } from "./radio-card"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
@@ -121,6 +123,7 @@ export const components = {
   Card,
   Carousel,
   Checkbox,
+  CheckboxCard,
   CircleProgress,
   CloseButton,
   Code,
@@ -183,6 +186,7 @@ export const components = {
   RadarChart,
   RadialChart,
   Radio,
+  RadioCard,
   RangeDatePicker,
   RangeSlider,
   Rating,

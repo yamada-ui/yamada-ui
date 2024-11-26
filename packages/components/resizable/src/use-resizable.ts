@@ -150,6 +150,7 @@ export const useResizable = ({
   const uuid = useId()
 
   id ??= uuid
+  orientation = direction ?? orientation
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({ ...props, ref, ...rest }),

@@ -17,13 +17,13 @@ import type {
 import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import { useAnimationObserver } from "@yamada-ui/use-animation"
 import { useDisclosure, useLazyDisclosure } from "@yamada-ui/use-disclosure"
-import { useFloating } from "@yamada-ui/use-floating"
 import {
   useFocusOnHide,
   useFocusOnPointerDown,
   useFocusOnShow,
 } from "@yamada-ui/use-focus"
-import { popperProperties, usePopper } from "@yamada-ui/use-popper"
+import { usePopper } from "@yamada-ui/use-popper"
+import { popperProperties } from "@yamada-ui/use-popper"
 import {
   createContext,
   getEventRelatedTarget,
@@ -189,7 +189,6 @@ interface PopoverContext
   labelledbyId: string
   styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
-  getFloatingProps: PropGetter<ComponentProps<"div">>
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
   getPopperProps: PropGetter<ComponentProps<"div">>
   getTriggerProps: PropGetter
@@ -222,9 +221,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     initialFocusRef,
     isLazy,
     lazyBehavior = "unmount",
-    // modifiers,
     openDelay = 200,
-    // placement,
     relatedRef,
     restoreFocus = true,
     trigger = "click",
@@ -245,11 +242,7 @@ export const Popover: FC<PopoverProps> = (props) => {
   const closeTimeout = useRef<number | undefined>(undefined)
   const isHoveringRef = useRef(false)
   const hasBeenOpened = useRef(false)
-  const { referenceRef: testReferenceRef, getFloatingProps } = useFloating({
-    ...rest,
-    enabled: isOpen,
-  })
-  const { forceUpdate, /*referenceRef,*/ transformOrigin, getPopperProps } =
+  const { forceUpdate, referenceRef, transformOrigin, getPopperProps } =
     usePopper({
       ...rest,
       enabled: isOpen,
@@ -362,9 +355,9 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   const maybeReferenceRef = useCallback(
     (node: Element) => {
-      if (anchorRef.current == null) testReferenceRef(node)
+      if (anchorRef.current == null) referenceRef(node)
     },
-    [testReferenceRef],
+    [referenceRef],
   )
 
   const getTriggerProps: PropGetter = useCallback(
@@ -455,10 +448,10 @@ export const Popover: FC<PopoverProps> = (props) => {
     (props = {}, ref = null) => {
       return {
         ...props,
-        ref: mergeRefs(ref, anchorRef, testReferenceRef),
+        ref: mergeRefs(ref, anchorRef, referenceRef),
       }
     },
-    [anchorRef, testReferenceRef],
+    [anchorRef, referenceRef],
   )
 
   return (
@@ -474,7 +467,6 @@ export const Popover: FC<PopoverProps> = (props) => {
         labelledbyId,
         styles,
         getAnchorProps,
-        getFloatingProps,
         getPopoverProps,
         getPopperProps,
         getTriggerProps,

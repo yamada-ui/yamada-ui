@@ -54,8 +54,7 @@
     "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-focus": "workspace:*",
     "@yamada-ui/use-popper": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/use-floating": "workspace:*"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

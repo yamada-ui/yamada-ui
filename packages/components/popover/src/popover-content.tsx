@@ -85,9 +85,8 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       duration,
       isOpen,
       styles,
-      // getPopperProps,
-      getFloatingProps,
       getPopoverProps,
+      getPopperProps,
       onAnimationComplete,
     } = usePopover()
 
@@ -122,7 +121,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
 
     return (
       <ui.div
-        {...getFloatingProps({
+        {...getPopperProps({
           style: { visibility: isOpen ? "visible" : "hidden" },
         })}
         className="ui-popover"

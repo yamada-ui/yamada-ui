@@ -1,5 +1,12 @@
 # @yamada-ui/motion
 
+## 2.2.9
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+
 ## 2.2.8
 
 ### Patch Changes

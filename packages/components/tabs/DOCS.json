@@ -18,6 +18,12 @@
       "description": "Disable the touch device behavior.",
       "required": false
     },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.",
+      "required": false
+    },
     "focusOnClick": {
       "type": "boolean",
       "defaultValue": true,
@@ -27,12 +33,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the element will be disabled. It will set the `disabled` HTML attribute.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.",
       "required": false
     },
@@ -68,6 +76,12 @@
       "description": "If `true`, disable ripple effects when pressing the tab.",
       "required": false
     },
+    "fitted": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, tabs will stretch to width of the tablist.",
+      "required": false
+    },
     "index": {
       "type": "number",
       "description": "The index of the selected tab.",
@@ -76,25 +90,40 @@
     "isFitted": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fitted` instead.",
       "description": "If `true`, tabs will stretch to width of the tablist.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `lazy` instead.",
       "description": "If `true`, rendering of the tab panel's will be deferred until it is selected.",
       "required": false
     },
     "isManual": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `manual` instead.",
       "description": "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, rendering of the tab panel's will be deferred until it is selected.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
       "description": "The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.\n\n- `unmount`: The content of inactive tab panels are always unmounted.\n- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected.",
+      "required": false
+    },
+    "manual": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.",
       "required": false
     },
     "onChange": {

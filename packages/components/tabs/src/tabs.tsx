@@ -39,6 +39,12 @@ export interface TabsOptions {
    */
   disableRipple?: boolean
   /**
+   * If `true`, tabs will stretch to width of the tablist.
+   *
+   * @default false
+   */
+  fitted?: boolean
+  /**
    * The index of the selected tab.
    */
   index?: number
@@ -46,12 +52,16 @@ export interface TabsOptions {
    * If `true`, tabs will stretch to width of the tablist.
    *
    * @default false
+   *
+   * @deprecated Use `fitted` instead.
    */
   isFitted?: boolean
   /**
    * If `true`, rendering of the tab panel's will be deferred until it is selected.
    *
    * @default true
+   *
+   * @deprecated Use `lazy` instead.
    */
   isLazy?: boolean
   /**
@@ -60,8 +70,16 @@ export interface TabsOptions {
    * If `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.
    *
    * @default false
+   *
+   * @deprecated Use `manual` instead.
    */
   isManual?: boolean
+  /**
+   * If `true`, rendering of the tab panel's will be deferred until it is selected.
+   *
+   * @default true
+   */
+  lazy?: boolean
   /**
    * The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.
    *
@@ -71,6 +89,14 @@ export interface TabsOptions {
    * @default 'unmount'
    */
   lazyBehavior?: LazyMode
+  /**
+   * If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.
+   *
+   * If `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.
+   *
+   * @default false
+   */
+  manual?: boolean
   /**
    * The orientation of the tab list.
    *
@@ -107,22 +133,30 @@ export const Tabs = forwardRef<TabsProps, "div">(
       align,
       ...props,
     })
-    const {
+    let {
       className,
       children,
       defaultIndex = 0,
       disableRipple = false,
+      fitted,
       index,
       isFitted,
       isLazy = true,
       isManual,
+      lazy,
       lazyBehavior = "keepMounted",
+      manual,
       orientation = "horizontal",
       tabListProps,
       tabPanelsProps,
       onChange,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    fitted ??= isFitted
+    lazy ??= isLazy
+    manual ??= isManual
+
     const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
     const [selectedIndex, setSelectedIndex] = useControllableState({
       defaultValue: defaultIndex,
@@ -150,11 +184,11 @@ export const Tabs = forwardRef<TabsProps, "div">(
             value={{
               align,
               disableRipple,
+              fitted,
               focusedIndex,
-              isFitted,
-              isLazy,
-              isManual,
+              lazy,
               lazyBehavior,
+              manual,
               orientation,
               selectedIndex,
               setFocusedIndex,

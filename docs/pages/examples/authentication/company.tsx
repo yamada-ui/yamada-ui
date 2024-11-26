@@ -1,6 +1,6 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Mountain } from "@yamada-ui/lucide"
+import { MountainIcon } from "@yamada-ui/lucide"
 import { Heading, HStack, Spacer, Text, VStack } from "@yamada-ui/react"
 import { memo } from "react"
 
@@ -20,7 +20,7 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
       {...rest}
     >
       <HStack as="header" alignItems="flex-end" gap="sm">
-        <Mountain fontSize="3xl" />
+        <MountainIcon fontSize="3xl" />
 
         <Heading as="h2" size="md" fontWeight="normal" lineHeight={1.125}>
           Yamada Inc

@@ -1,5 +1,19 @@
 # @yamada-ui/calendar
 
+## 1.8.9
+
+### Patch Changes
+
+- [`2b6f336`](https://github.com/yamada-ui/yamada-ui/commit/2b6f3369f984839a3afd29dd5aeba1e952632d2a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extract `InputProps` interface for reuse.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/button@1.0.51
+  - @yamada-ui/form-control@2.1.8
+  - @yamada-ui/icon@1.1.14
+  - @yamada-ui/popover@1.4.4
+  - @yamada-ui/use-clickable@1.2.14
+
 ## 1.8.8
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/list
 
+## 1.0.47
+
+### Patch Changes
+
+- [#3588](https://github.com/yamada-ui/yamada-ui/pull/3588) [`171eeea`](https://github.com/yamada-ui/yamada-ui/commit/171eeeab66733eb142e1e989833c813f8d003e97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `props` was not reflected correctly.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/icon@1.1.14
+
 ## 1.0.46
 
 ### Patch Changes

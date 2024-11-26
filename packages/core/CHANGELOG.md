@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.15.6
+
+### Patch Changes
+
+- [#3560](https://github.com/yamada-ui/yamada-ui/pull/3560) [`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix horizontal and vertical selector not working in Firefox
+
 ## 1.15.5
 
 ### Patch Changes

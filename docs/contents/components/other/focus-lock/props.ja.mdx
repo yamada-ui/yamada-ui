@@ -30,6 +30,14 @@ tab: Props
 />
 
 <PropsCard
+  id="focuslock-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, focus trapping will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="focuslock-finalfocusref"
   name="finalFocusRef"
   type="RefObject<FocusableElement>"
@@ -50,6 +58,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, focus trapping will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

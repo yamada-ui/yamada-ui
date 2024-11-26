@@ -1,0 +1,160 @@
+---
+title: FormatNumber
+description: "`FormatNumber`は、Intl.NumberFormat APIを使用して、指定されたロケールとフォーマットオプションに従って数値をフォーマットするコンポーネントです。"
+package_name: "@yamada-ui/format"
+with_description: true
+is_tabs: true
+tab: 使い方
+label: New
+---
+
+## インポート
+
+```ts
+import { FormatNumber } from "@yamada-ui/react"
+```
+
+## 使い方
+
+`FormatNumber`コンポーネントは、指定されたロケールとオプションに従って数値をフォーマットします。
+
+:::note
+`FormatNumber`は内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)を使用しています。
+:::
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} />
+  <FormatNumber value={1234567.89} locale="ja-JP" />
+  <FormatNumber value={1234567.89} locale="de-DE" />
+</VStack>
+```
+
+### 国際化（i18n）
+
+`FormatNumber`コンポーネントは、`Intl.NumberFormat` APIを使用して、言語に応じた形式で数値をフォーマットします。デフォルトのロケールは`'en-US'`ですが、任意のロケールを指定できます。
+
+```tsx
+<VStack>
+  <HStack>
+    <Text w="6rem">英語:</Text>
+    <FormatNumber value={1234567.89} locale="en-US" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">日本語:</Text>
+    <FormatNumber value={1234567.89} locale="ja-JP" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">ドイツ語:</Text>
+    <FormatNumber value={1234567.89} locale="de-DE" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">フランス語:</Text>
+    <FormatNumber value={1234567.89} locale="fr-FR" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">中国語:</Text>
+    <FormatNumber value={1234567.89} locale="zh-CN" />
+  </HStack>
+</VStack>
+```
+
+### 数値スタイル
+
+#### 通貨フォーマット
+
+`style`と`currency`オプションを使用して、数値を通貨としてフォーマットします。また、`currencyDisplay`と`currencySign`を使用して通貨の表示をカスタマイズできます。
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} style="currency" currency="USD" />
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="EUR"
+    currencyDisplay="name"
+    locale="de-DE"
+  />
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="JPY"
+    currencySign="accounting"
+    locale="ja-JP"
+  />
+</VStack>
+```
+
+#### 単位フォーマット
+
+`style`と`unit`オプションを使用して、数値に単位を付けてフォーマットします。`unitDisplay`で単位の表示を制御できます。
+
+```tsx
+<VStack>
+  <FormatNumber value={100} style="unit" unit="kilogram" />
+  <FormatNumber value={100} style="unit" unit="celsius" unitDisplay="long" />
+  <FormatNumber
+    value={100}
+    style="unit"
+    unit="kilometer-per-hour"
+    unitDisplay="narrow"
+  />
+</VStack>
+```
+
+#### パーセントフォーマット
+
+`style`オプションを使用して、数値をパーセンテージとしてフォーマットします。
+
+```tsx
+<VStack>
+  <FormatNumber value={0.45} style="percent" />
+  <FormatNumber value={0.45} style="percent" minimumFractionDigits={2} />
+</VStack>
+```
+
+### 表記オプション
+
+`notation`オプションを使用して、数値の表示方法を制御します。
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} notation="standard" />
+  <FormatNumber value={1234567.89} notation="scientific" />
+  <FormatNumber value={1234567.89} notation="engineering" />
+  <FormatNumber value={1234567.89} notation="compact" />
+</VStack>
+```
+
+### 数値フォーマットオプション
+
+#### 小数点以下の桁数
+
+`minimumFractionDigits`と`maximumFractionDigits`を使用して、小数点以下の桁数を制御します。
+
+```tsx
+<VStack>
+  <FormatNumber
+    value={1234.5678}
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+  />
+  <FormatNumber
+    value={1234.5678}
+    minimumFractionDigits={1}
+    maximumFractionDigits={4}
+  />
+</VStack>
+```
+
+#### グループ化と符号の表示
+
+`useGrouping`と`signDisplay`を使用して、数値のグループ化と符号の表示をカスタマイズします。
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} useGrouping={false} />
+  <FormatNumber value={1234.5} signDisplay="always" />
+  <FormatNumber value={-1234.5} signDisplay="exceptZero" />
+</VStack>
+```

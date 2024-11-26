@@ -1,0 +1,160 @@
+---
+title: FormatNumber
+description: "`FormatNumber` is a component that formats numbers according to specified locale and formatting options using the Intl.NumberFormat API."
+package_name: "@yamada-ui/format"
+with_description: true
+is_tabs: true
+tab: Usage
+label: New
+---
+
+## Import
+
+```ts
+import { FormatNumber } from "@yamada-ui/react"
+```
+
+## Usage
+
+The `FormatNumber` component formats numbers according to the specified locale and options.
+
+:::note
+`FormatNumber` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+:::
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} />
+  <FormatNumber value={1234567.89} locale="ja-JP" />
+  <FormatNumber value={1234567.89} locale="de-DE" />
+</VStack>
+```
+
+### Internationalization (i18n)
+
+The `FormatNumber` component uses the `Intl.NumberFormat` API to format numbers according to language-sensitive conventions. The default locale is `'en-US'`, but you can specify any locale:
+
+```tsx
+<VStack>
+  <HStack>
+    <Text w="6rem">English:</Text>
+    <FormatNumber value={1234567.89} locale="en-US" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">Japanese:</Text>
+    <FormatNumber value={1234567.89} locale="ja-JP" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">German:</Text>
+    <FormatNumber value={1234567.89} locale="de-DE" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">French:</Text>
+    <FormatNumber value={1234567.89} locale="fr-FR" />
+  </HStack>
+  <HStack>
+    <Text w="6rem">Chinese:</Text>
+    <FormatNumber value={1234567.89} locale="zh-CN" />
+  </HStack>
+</VStack>
+```
+
+### Number Styles
+
+#### Currency Formatting
+
+Format numbers as currency using the `style` and `currency` options. You can also customize the currency display using `currencyDisplay` and `currencySign`.
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} style="currency" currency="USD" />
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="EUR"
+    currencyDisplay="name"
+    locale="de-DE"
+  />
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="JPY"
+    currencySign="accounting"
+    locale="ja-JP"
+  />
+</VStack>
+```
+
+#### Unit Formatting
+
+Format numbers with units using the `style` and `unit` options. Control the unit display with `unitDisplay`.
+
+```tsx
+<VStack>
+  <FormatNumber value={100} style="unit" unit="kilogram" />
+  <FormatNumber value={100} style="unit" unit="celsius" unitDisplay="long" />
+  <FormatNumber
+    value={100}
+    style="unit"
+    unit="kilometer-per-hour"
+    unitDisplay="narrow"
+  />
+</VStack>
+```
+
+#### Percent Formatting
+
+Format numbers as percentages using the `style` option.
+
+```tsx
+<VStack>
+  <FormatNumber value={0.45} style="percent" />
+  <FormatNumber value={0.45} style="percent" minimumFractionDigits={2} />
+</VStack>
+```
+
+### Notation Options
+
+Control how the number is displayed using the `notation` option.
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} notation="standard" />
+  <FormatNumber value={1234567.89} notation="scientific" />
+  <FormatNumber value={1234567.89} notation="engineering" />
+  <FormatNumber value={1234567.89} notation="compact" />
+</VStack>
+```
+
+### Number Formatting Options
+
+#### Fraction Digits
+
+Control the number of decimal places using `minimumFractionDigits` and `maximumFractionDigits`.
+
+```tsx
+<VStack>
+  <FormatNumber
+    value={1234.5678}
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+  />
+  <FormatNumber
+    value={1234.5678}
+    minimumFractionDigits={1}
+    maximumFractionDigits={4}
+  />
+</VStack>
+```
+
+#### Grouping and Sign Display
+
+Customize number grouping and sign display with `useGrouping` and `signDisplay`.
+
+```tsx
+<VStack>
+  <FormatNumber value={1234567.89} useGrouping={false} />
+  <FormatNumber value={1234.5} signDisplay="always" />
+  <FormatNumber value={-1234.5} signDisplay="exceptZero" />
+</VStack>
+```

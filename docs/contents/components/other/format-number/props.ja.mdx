@@ -1,0 +1,91 @@
+---
+title: FormatNumber
+description: "`FormatNumber`は、指定されたロケールとフォーマットオプションに従って数値をフォーマットするコンポーネントです。"
+package_name: "@yamada-ui/format"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### FormatNumberProps
+
+<PropsCard
+  id="formatnumber-value"
+  name="value"
+  required
+  type="number"
+  description="フォーマットする数値。"
+/>
+
+<PropsCard
+  id="formatnumber-locale"
+  name="locale"
+  type="string"
+  defaultValue="'en-US'"
+  description="フォーマットに使用するロケール。"
+/>
+
+<PropsCard
+  id="formatnumber-style"
+  name="style"
+  type='"decimal" | "currency" | "percent" | "unit"'
+  description="使用するフォーマットスタイル。"
+/>
+
+<PropsCard
+  id="formatnumber-currency"
+  name="currency"
+  type="string"
+  description="通貨フォーマットで使用する通貨。"
+/>
+
+<PropsCard
+  id="formatnumber-currencydisplay"
+  name="currencyDisplay"
+  type='"symbol" | "narrowSymbol" | "code" | "name"'
+  description="通貨の表示方法。"
+/>
+
+<PropsCard
+  id="formatnumber-unit"
+  name="unit"
+  type="string"
+  description="単位フォーマットで使用する単位。"
+/>
+
+<PropsCard
+  id="formatnumber-unitdisplay"
+  name="unitDisplay"
+  type='"short" | "long" | "narrow"'
+  description="単位の表示方法。"
+/>
+
+<PropsCard
+  id="formatnumber-notation"
+  name="notation"
+  type='"standard" | "scientific" | "engineering" | "compact"'
+  description="使用する表記方法。"
+/>
+
+<PropsCard
+  id="formatnumber-minimumfractiondigits"
+  name="minimumFractionDigits"
+  type="number"
+  description="使用する小数点以下の最小桁数。"
+/>
+
+<PropsCard
+  id="formatnumber-maximumfractiondigits"
+  name="maximumFractionDigits"
+  type="number"
+  description="使用する小数点以下の最大桁数。"
+/>
+
+<PropsCard
+  id="formatnumber-usegrouping"
+  name="useGrouping"
+  type="boolean"
+  defaultValue="true"
+  description="千の位区切りなどの桁区切り記号を使用するかどうか。"
+/>

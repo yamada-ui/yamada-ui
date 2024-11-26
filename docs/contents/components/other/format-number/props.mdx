@@ -1,0 +1,91 @@
+---
+title: FormatNumber
+description: "`FormatNumber` is a component that formats numbers according to specified locale and formatting options."
+package_name: "@yamada-ui/format"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### FormatNumberProps
+
+<PropsCard
+  id="formatnumber-value"
+  name="value"
+  required
+  type="number"
+  description="The numeric value to format."
+/>
+
+<PropsCard
+  id="formatnumber-locale"
+  name="locale"
+  type="string"
+  defaultValue="'en-US'"
+  description="The locale to use for formatting."
+/>
+
+<PropsCard
+  id="formatnumber-style"
+  name="style"
+  type='"decimal" | "currency" | "percent" | "unit"'
+  description="The formatting style to use."
+/>
+
+<PropsCard
+  id="formatnumber-currency"
+  name="currency"
+  type="string"
+  description="The currency to use in currency formatting."
+/>
+
+<PropsCard
+  id="formatnumber-currencydisplay"
+  name="currencyDisplay"
+  type='"symbol" | "narrowSymbol" | "code" | "name"'
+  description="How to display the currency."
+/>
+
+<PropsCard
+  id="formatnumber-unit"
+  name="unit"
+  type="string"
+  description="The unit to use in unit formatting."
+/>
+
+<PropsCard
+  id="formatnumber-unitdisplay"
+  name="unitDisplay"
+  type='"short" | "long" | "narrow"'
+  description="How to display the unit."
+/>
+
+<PropsCard
+  id="formatnumber-notation"
+  name="notation"
+  type='"standard" | "scientific" | "engineering" | "compact"'
+  description="The formatting notation to use."
+/>
+
+<PropsCard
+  id="formatnumber-minimumfractiondigits"
+  name="minimumFractionDigits"
+  type="number"
+  description="The minimum number of fraction digits to use."
+/>
+
+<PropsCard
+  id="formatnumber-maximumfractiondigits"
+  name="maximumFractionDigits"
+  type="number"
+  description="The maximum number of fraction digits to use."
+/>
+
+<PropsCard
+  id="formatnumber-usegrouping"
+  name="useGrouping"
+  type="boolean"
+  defaultValue="true"
+  description="Whether to use grouping separators, such as thousands separators or thousand/lakh/crore separators."
+/>

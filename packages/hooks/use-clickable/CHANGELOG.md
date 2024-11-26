@@ -1,5 +1,12 @@
 # @yamada-ui/use-clickable
 
+## 1.2.14
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+
 ## 1.2.13
 
 ### Patch Changes

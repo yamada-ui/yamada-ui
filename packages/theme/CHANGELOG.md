@@ -1,5 +1,16 @@
 # @yamada-ui/theme
 
+## 1.19.4
+
+### Patch Changes
+
+- [#3552](https://github.com/yamada-ui/yamada-ui/pull/3552) [`4945b65`](https://github.com/yamada-ui/yamada-ui/commit/4945b6574cde0972974d112b9184fd2e708e6cfd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize color to 'muted' across components.
+
+- [#3587](https://github.com/yamada-ui/yamada-ui/pull/3587) [`e1cd84c`](https://github.com/yamada-ui/yamada-ui/commit/e1cd84ca542f574299a50d34a727410153ad8482) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated type `CircleProgress` definition for clarity.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+
 ## 1.19.3
 
 ### Patch Changes

@@ -98,7 +98,7 @@ interface ColorSelectorContext {
   withAlpha: boolean
   getAlphaSliderProps: PropGetter<AlphaSliderProps>
   getChannelProps: RequiredPropGetter<{ space: Space } & InputProps, InputProps>
-  getEyeDropperProps: PropGetter<"button">
+  getEyeDropperProps: PropGetter<"button", { "aria-label": string }>
   getHueSliderProps: PropGetter<HueSliderProps>
   getSwatchProps: PropGetter<ColorSwatchProps>
   onChange: (value: Partial<Hsva> | string) => void
@@ -543,16 +543,17 @@ export const useColorSelector = ({
     [required, disabled, readOnly, isInvalid, onChannelChange],
   )
 
-  const getEyeDropperProps: PropGetter<"button"> = useCallback(
-    (props = {}, ref = null) => ({
-      "aria-label": "Pick a color",
-      disabled,
-      ...props,
-      ref,
-      onClick: handlerAll(props.onClick, onEyeDropperClick),
-    }),
-    [disabled, onEyeDropperClick],
-  )
+  const getEyeDropperProps: PropGetter<"button", { "aria-label": string }> =
+    useCallback(
+      (props = {}, ref = null) => ({
+        "aria-label": "Pick a color",
+        disabled,
+        ...props,
+        ref,
+        onClick: handlerAll(props.onClick, onEyeDropperClick),
+      }),
+      [disabled, onEyeDropperClick],
+    )
 
   const getSwatchProps: PropGetter<ColorSwatchProps> = useCallback(
     ({ color, ...props } = {}, ref = null) => ({

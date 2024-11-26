@@ -69,7 +69,11 @@ export const ShareButton: FC<ShareButtonProps> = memo(
           <PopoverBody flexDirection="row" gap="sm">
             <Input defaultValue="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003" />
 
-            <IconButton colorScheme="primary" icon={<Copy fontSize="xl" />} />
+            <IconButton
+              colorScheme="primary"
+              aria-label="Copy link to clipboard"
+              icon={<Copy fontSize="xl" />}
+            />
           </PopoverBody>
         </PopoverContent>
       </Popover>

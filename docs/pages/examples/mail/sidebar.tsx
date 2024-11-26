@@ -127,6 +127,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             <IconButton
               colorScheme={isSelected ? "primary" : "gray"}
               variant={isSelected ? "solid" : "ghost"}
+              aria-label={`Go to ${label}${showNum ? `, ${num} unread` : ""}`}
               icon={<Icon color={isSelected ? "white" : "muted"} />}
             />
           </Tooltip>

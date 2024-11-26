@@ -454,7 +454,8 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
-export interface UseCarouselControlProps extends IconButtonProps {
+export interface UseCarouselControlProps
+  extends Omit<IconButtonProps, "aria-label"> {
   operation: "next" | "prev"
 }
 
@@ -481,17 +482,18 @@ export const useCarouselControl = ({
     }
   }, [carousel, isPrev])
 
-  const getControlProps: PropGetter<"button"> = useCallback(
-    (props = {}, ref = null) => ({
-      "aria-controls": id,
-      "aria-label": `Go to ${isPrev ? "previous" : "next"} slide`,
-      ...props,
-      ref,
-      disabled,
-      onClick: handlerAll(props.onClick, onClick),
-    }),
-    [disabled, id, onClick, isPrev],
-  )
+  const getControlProps: PropGetter<"button", { "aria-label": string }> =
+    useCallback(
+      (props = {}, ref = null) => ({
+        "aria-controls": id,
+        "aria-label": `Go to ${isPrev ? "previous" : "next"} slide`,
+        ...props,
+        ref,
+        disabled,
+        onClick: handlerAll(props.onClick, onClick),
+      }),
+      [disabled, id, onClick, isPrev],
+    )
 
   return { getControlProps }
 }

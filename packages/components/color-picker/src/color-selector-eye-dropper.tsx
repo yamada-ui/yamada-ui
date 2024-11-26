@@ -7,7 +7,8 @@ import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useColorSelectorContext } from "./use-color-selector"
 
-export interface ColorSelectorEyeDropperProps extends IconButtonProps {}
+export interface ColorSelectorEyeDropperProps
+  extends Omit<IconButtonProps, "aria-label"> {}
 
 export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,

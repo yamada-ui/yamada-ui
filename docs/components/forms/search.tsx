@@ -131,6 +131,7 @@ export const SearchButton = memo(
           icon={<SearchIcon fontSize="2xl" />}
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
           {...rest}
+          aria-label="Search the documentation"
           onClick={handlerAll(rest.onClick, onOpen)}
         />
 

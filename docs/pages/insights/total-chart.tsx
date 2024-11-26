@@ -5,7 +5,7 @@ import {
   AreaChart as UIAreaChart,
   BarChart as UIBarChart,
 } from "@yamada-ui/charts"
-import { ChartColumn, ChartLine } from "@yamada-ui/lucide"
+import { ChartColumnIcon, ChartLineIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -144,9 +144,9 @@ export const TotalChart = memo(
               variant="ghost"
               icon={
                 isAreaChart ? (
-                  <ChartColumn fontSize="1.5em" />
+                  <ChartColumnIcon fontSize="1.5em" />
                 ) : (
-                  <ChartLine fontSize="1.5em" />
+                  <ChartLineIcon fontSize="1.5em" />
                 )
               }
               isDisabled={isEmpty || isInvalid || isSingle}

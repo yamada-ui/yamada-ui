@@ -1,6 +1,6 @@
 import type { CenterProps } from "@yamada-ui/react"
 import { Button, Center, forwardRef, HStack, Text } from "@yamada-ui/react"
-import { Star } from "components/media-and-icons"
+import { StarIcon } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 import { memo } from "react"
@@ -38,7 +38,7 @@ export const StarBanner = memo(
               bg: `whiteAlpha.300`,
             }}
           >
-            <Star />
+            <StarIcon />
             {tc("component.feedback.ad-banner.button")}
           </Button>
         </HStack>

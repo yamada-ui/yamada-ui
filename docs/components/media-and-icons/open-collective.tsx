@@ -2,7 +2,7 @@ import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
-export const OpenCollective = forwardRef<SVGSVGElement, IconProps>(
+export const OpenCollectiveIcon = forwardRef<SVGSVGElement, IconProps>(
   ({ boxSize = "1em", ...rest }, ref) => {
     return (
       <Icon
@@ -31,4 +31,4 @@ export const OpenCollective = forwardRef<SVGSVGElement, IconProps>(
   },
 )
 
-OpenCollective.displayName = "OpenCollective"
+OpenCollectiveIcon.displayName = "OpenCollectiveIcon"

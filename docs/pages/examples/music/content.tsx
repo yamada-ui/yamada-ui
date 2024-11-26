@@ -1,7 +1,7 @@
 import type { ImageProps } from "@yamada-ui/next"
 import type { StackProps } from "@yamada-ui/react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
-import { CirclePlus, Podcast } from "@yamada-ui/lucide"
+import { CirclePlusIcon, PodcastIcon } from "@yamada-ui/lucide"
 import { Image } from "@yamada-ui/next"
 import {
   Box,
@@ -163,7 +163,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
 
         <Spacer display={{ base: "block", sm: "none" }} />
 
-        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlus />}>
+        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlusIcon />}>
           Add Music
         </Button>
       </HStack>
@@ -268,7 +268,7 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
           rounded="md"
           w="full"
         >
-          <Podcast color={["gray.400", "gray.500"]} fontSize="5xl" />
+          <PodcastIcon color={["gray.400", "gray.500"]} fontSize="5xl" />
           <Heading as="h3" size={{ base: "md" }}>
             No episodes added
           </Heading>

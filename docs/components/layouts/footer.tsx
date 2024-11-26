@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { Github, X } from "components/media-and-icons"
+import { GithubIcon, XIcon } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 import { memo } from "react"
@@ -60,7 +60,7 @@ export const Footer = memo(
               aria-label="GitHub profile of Hirotomo Yamada"
               color="muted"
             >
-              <Github />
+              <GithubIcon />
             </Link>
 
             <Link
@@ -69,7 +69,7 @@ export const Footer = memo(
               aria-label="X Hirotomo Yamada"
               color="muted"
             >
-              <X />
+              <XIcon />
             </Link>
           </HStack>
         </VStack>

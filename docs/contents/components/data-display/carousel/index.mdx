@@ -451,7 +451,7 @@ To customize control buttons, set `props` to `controlProps` or `controlPrevProps
 
 ```tsx
 <VStack>
-  <Carousel controlProps={{ icon: <Ghost /> }}>
+  <Carousel controlProps={{ icon: <GhostIcon /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -466,7 +466,7 @@ To customize control buttons, set `props` to `controlProps` or `controlPrevProps
     </CarouselSlide>
   </Carousel>
 
-  <Carousel controlPrevProps={{ icon: <ArrowLeft /> }}>
+  <Carousel controlPrevProps={{ icon: <ArrowLeftIcon /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -481,7 +481,7 @@ To customize control buttons, set `props` to `controlProps` or `controlPrevProps
     </CarouselSlide>
   </Carousel>
 
-  <Carousel controlNextProps={{ icon: <ArrowRight /> }}>
+  <Carousel controlNextProps={{ icon: <ArrowRightIcon /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -497,8 +497,8 @@ To customize control buttons, set `props` to `controlProps` or `controlPrevProps
   </Carousel>
 
   <Carousel>
-    <CarouselControlPrev icon={<ArrowLeft />} />
-    <CarouselControlNext icon={<ArrowRight />} />
+    <CarouselControlPrev icon={<ArrowLeftIcon />} />
+    <CarouselControlNext icon={<ArrowRightIcon />} />
 
     <CarouselSlide as={Center} bg="primary">
       1
@@ -547,7 +547,7 @@ To customize indicators, set `props` to `indicatorsProps`, or use `CarouselIndic
     indicatorsProps={{
       bottom: "8",
       component: ({ isSelected }) => (
-        <Ghost
+        <GhostIcon
           color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
           cursor="pointer"
         />

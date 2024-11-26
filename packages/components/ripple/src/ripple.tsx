@@ -16,6 +16,14 @@ export interface RippleProps extends MotionProps<"span"> {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
 }
 
@@ -28,12 +36,15 @@ export const Ripple: FC<RippleProps> = ({
   className,
   style,
   color = "currentColor",
+  disabled,
   isDisabled,
   ripples,
   onAnimationComplete,
   onClear,
   ...rest
 }) => {
+  disabled ??= isDisabled
+
   if (isDisabled) return null
 
   const css: CSSUIObject = {

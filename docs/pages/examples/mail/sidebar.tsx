@@ -1,16 +1,16 @@
 import type { Component, IconProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import {
-  Archive,
-  CircleAlert,
-  Cloud,
-  File,
-  Inbox,
-  MessageSquare,
-  Send,
-  ShoppingCart,
-  Trash,
-  Users,
+  ArchiveIcon,
+  CircleAlertIcon,
+  CloudIcon,
+  FileIcon,
+  InboxIcon,
+  MessageSquareIcon,
+  SendIcon,
+  ShoppingCartIcon,
+  TrashIcon,
+  UsersIcon,
 } from "@yamada-ui/lucide"
 import {
   Button,
@@ -27,19 +27,19 @@ import { memo } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
-  { icon: Inbox, label: "Inbox", num: 53 },
-  { icon: File, label: "Drafts", num: 4 },
-  { icon: Send, label: "Sent" },
-  { icon: Trash, label: "Trash" },
-  { icon: Archive, label: "Archive" },
+  { icon: InboxIcon, label: "Inbox", num: 53 },
+  { icon: FileIcon, label: "Drafts", num: 4 },
+  { icon: SendIcon, label: "Sent" },
+  { icon: TrashIcon, label: "Trash" },
+  { icon: ArchiveIcon, label: "Archive" },
 ]
 
 export const SUB_MENU_ITEMS = [
-  { icon: Users, label: "Personal", num: 435 },
-  { icon: CircleAlert, label: "Updates", num: 342 },
-  { icon: MessageSquare, label: "Forum", num: 167 },
-  { icon: ShoppingCart, label: "Shopping", num: 8 },
-  { icon: Archive, label: "Promotions", num: 13 },
+  { icon: UsersIcon, label: "Personal", num: 435 },
+  { icon: CircleAlertIcon, label: "Updates", num: 342 },
+  { icon: MessageSquareIcon, label: "Forum", num: 167 },
+  { icon: ShoppingCartIcon, label: "Shopping", num: 8 },
+  { icon: ArchiveIcon, label: "Promotions", num: 13 },
 ]
 
 interface SidebarProps {
@@ -54,7 +54,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
           isCollapse ? "center" : { base: "flex-start", xl: "center" }
         }
       >
-        <Cloud fontSize="xl" />
+        <CloudIcon fontSize="xl" />
 
         {!isCollapse ? (
           <Heading as="h3" size="md" display={{ base: "inline", xl: "none" }}>

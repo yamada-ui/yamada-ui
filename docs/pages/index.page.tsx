@@ -1,5 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from "next"
-import { ArrowRight } from "@yamada-ui/lucide"
+import { ArrowRightIcon } from "@yamada-ui/lucide"
 import {
   Center,
   Heading,
@@ -11,7 +11,11 @@ import {
   Wrap,
 } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { OpenCollective, Patreon, Seo } from "components/media-and-icons"
+import {
+  OpenCollectiveIcon,
+  PatreonIcon,
+  Seo,
+} from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { PageProvider, useI18n } from "contexts"
@@ -69,7 +73,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
               href="/getting-started"
               colorScheme="primary"
               size="2xl"
-              rightIcon={<ArrowRight />}
+              rightIcon={<ArrowRightIcon />}
               w={{ base: "auto", md: "full" }}
             >
               {tc("home.hero.started")}
@@ -106,7 +110,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   w="full"
                 >
                   <HStack color="black">
-                    <OpenCollective boxSize="12" />
+                    <OpenCollectiveIcon boxSize="12" />
 
                     <VStack gap="0">
                       <Heading as="h2" fontSize="lg">
@@ -140,7 +144,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                   w="full"
                 >
                   <HStack color="black">
-                    <Patreon boxSize="12" />
+                    <PatreonIcon boxSize="12" />
 
                     <VStack gap="0">
                       <Heading as="h2" fontSize="lg">

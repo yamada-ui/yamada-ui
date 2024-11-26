@@ -103,6 +103,13 @@ export const attributes = {
    */
   _notAllowed: "&[data-not-allowed]",
   /**
+   * The CSS `:not(:selected)` attribute selector.
+   *
+   * - `:not([data-selected])`
+   * - `:not([aria-selected=true])`
+   */
+  _notSelected: "&:not([data-selected]):not([aria-selected=true])",
+  /**
    * The CSS `:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",
@@ -438,6 +445,14 @@ export const pseudoClasses = {
    * The CSS `:valid` pseudo-class.
    */
   _nativeValid: "&:valid",
+  /**
+   * The CSS `:checked` pseudo-class.
+   *
+   * - `:not(:checked)`
+   * - `:not([data-checked])`
+   * - `:not([aria-checked=true])`
+   */
+  _notChecked: "&:not(:checked):not([data-checked]):not([aria-checked=true])",
   /**
    * The CSS `:not(:first-of-type)` pseudo-class.
    */

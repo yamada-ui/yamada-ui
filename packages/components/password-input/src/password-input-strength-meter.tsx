@@ -27,6 +27,8 @@ interface PasswordInputStrengthMeterOptions {
   value: number
   /**
    * The maximum value of the password strength meter.
+   *
+   * @default 4
    */
   max?: number
   /**

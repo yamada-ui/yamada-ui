@@ -1,0 +1,1 @@
+import{r}from"./index-ClcD9ViR.js";import{k as l,C as p,E as V,F as C}from"./factory-CehSyZ2b.js";function x({value:u,...e}){e.onUpdate??(e.onUpdate=(t,a)=>t!==a);const s=l(e.onChange),c=l(e.onUpdate),[f,d]=r.useState(e.defaultValue),o=u!==void 0,n=o?u:f,i=l(t=>{const a=p(t,n);c(n,a)&&((!o||V(a)||C(a))&&d(a),s(a))},[o,n,s,c]);return[n,i]}export{x as u};

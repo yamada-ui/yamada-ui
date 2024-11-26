@@ -1,5 +1,16 @@
 # @yamada-ui/indicator
 
+## 1.1.43
+
+### Patch Changes
+
+- [#3558](https://github.com/yamada-ui/yamada-ui/pull/3558) [`605f083`](https://github.com/yamada-ui/yamada-ui/commit/605f083d6b81d6a88c661ccdd68004385679c39c) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix in props
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/use-animation@1.0.43
+  - @yamada-ui/use-value@1.1.31
+
 ## 1.1.42
 
 ### Patch Changes

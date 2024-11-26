@@ -54,10 +54,10 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       orientation: _orientation,
       ...props,
     })
-    const {
+    let {
       className,
       children,
-      disabled: disabledProp,
+      disabled,
       finish: finishProp,
       indexRef,
       initialLoad,
@@ -66,7 +66,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       loading,
       orientation,
       resetRef,
-      reverse: reverseProp,
+      reverse,
       rootMargin,
       rootRef: rootRefProp,
       startIndex,
@@ -75,9 +75,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       onLoad,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    let disabled = disabledProp
-    let reverse = reverseProp
 
     disabled ??= isDisabled
     reverse ??= isReverse

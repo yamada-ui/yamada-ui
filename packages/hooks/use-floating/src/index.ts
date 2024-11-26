@@ -22,11 +22,6 @@ import { useCallback, useEffect, useRef } from "react"
 
 export interface UseFloatingProps {
   /**
-   *
-   * @default false
-   */
-  arrow?: boolean
-  /**
    * The boundary area for the floating. Used within the `preventOverflow` modifier.
    *
    * @default 'clippingAncestors'

@@ -1,6 +1,6 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Pencil } from "@yamada-ui/lucide"
+import { PencilIcon } from "@yamada-ui/lucide"
 import { HStack, Text } from "@yamada-ui/react"
 import { useI18n } from "contexts"
 
@@ -28,7 +28,7 @@ export const EditPageLink: FC<EditPageLinkProps> = ({ href, ...rest }) => {
       _hover={{ color: ["black", "white"] }}
       {...rest}
     >
-      <Pencil />
+      <PencilIcon />
 
       <Text>{t("component.edit-page.label")}</Text>
     </HStack>

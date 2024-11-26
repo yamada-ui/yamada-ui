@@ -1,4 +1,4 @@
-import { Bookmark } from "@yamada-ui/lucide"
+import { BookmarkIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
@@ -31,7 +31,7 @@ export const BookmarkCard = memo(() => {
           <Text color="muted">Tokyo, Japan</Text>
         </VStack>
 
-        <IconButton variant="ghost" icon={<Bookmark fontSize="2xl" />} />
+        <IconButton variant="ghost" icon={<BookmarkIcon fontSize="2xl" />} />
       </CardHeader>
 
       <CardBody>

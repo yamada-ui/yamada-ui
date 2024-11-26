@@ -1,14 +1,8 @@
 import type { GridItemProps, GridProps } from "@yamada-ui/react"
 import type { DocumentNavigation } from "mdx"
 import type { FC } from "react"
-import {
-  Box,
-  ChevronIcon,
-  forwardRef,
-  Grid,
-  GridItem,
-  Text,
-} from "@yamada-ui/react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@yamada-ui/lucide"
+import { Box, forwardRef, Grid, GridItem, Text } from "@yamada-ui/react"
 import { useI18n, usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
@@ -92,17 +86,13 @@ const PaginationItem: FC<PaginationItemProps> = ({
           color: [`primary.600`, `primary.600`],
         }}
       >
-        {isPrev ? (
-          <ChevronIcon fontSize="1.3em" transform="rotate(90deg)" />
-        ) : null}
+        {isPrev ? <ChevronLeftIcon fontSize="1.3em" /> : null}
 
         <Text as="span" lineClamp={1}>
           {title}
         </Text>
 
-        {!isPrev ? (
-          <ChevronIcon fontSize="1.3em" transform="rotate(-90deg)" />
-        ) : null}
+        {!isPrev ? <ChevronRightIcon fontSize="1.3em" /> : null}
       </Text>
     </GridItem>
   )

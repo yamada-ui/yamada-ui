@@ -1,7 +1,7 @@
 import type { SegmentedControlItem, StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { RangeDatePicker } from "@yamada-ui/calendar"
-import { ChevronDown } from "@yamada-ui/lucide"
+import { ChevronDownIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Grid,
@@ -83,7 +83,7 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
               variant="ghost"
               display={{ base: "none", md: "flex" }}
             >
-              <ChevronDown fontSize="2xl" />
+              <ChevronDownIcon fontSize="2xl" />
             </MenuButton>
 
             <MenuList>

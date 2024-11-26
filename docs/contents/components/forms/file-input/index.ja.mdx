@@ -171,7 +171,7 @@ import { FileInput } from "@yamada-ui/react"
 ```tsx
 <InputGroup>
   <InputLeftAddon>
-    <File />
+    <FileIcon />
   </InputLeftAddon>
   <FileInput type="tel" placeholder="Please upload file" />
 </InputGroup>
@@ -184,7 +184,7 @@ import { FileInput } from "@yamada-ui/react"
 ```tsx
 <InputGroup>
   <InputLeftElement>
-    <File color="gray.500" />
+    <FileIcon color="gray.500" />
   </InputLeftElement>
   <FileInput type="email" placeholder="Please upload file" />
 </InputGroup>
@@ -218,7 +218,7 @@ return (
 
       {value && value.length ? (
         <InputRightElement isClickable onClick={onReset}>
-          <X color="gray.500" />
+          <XIcon color="gray.500" />
         </InputRightElement>
       ) : null}
     </InputGroup>
@@ -281,7 +281,7 @@ return (
 
             {field.value && field.value.length ? (
               <InputRightElement isClickable onClick={onReset}>
-                <X color="gray.500" />
+                <XIcon color="gray.500" />
               </InputRightElement>
             ) : null}
           </InputGroup>

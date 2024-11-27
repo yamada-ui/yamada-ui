@@ -39,11 +39,11 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
         <MenuList>
           <MenuGroup px="3">
-            <Box as="li">
+            <Box as="li" listStyleType="none">
               <Text lineClamp={1}>Hirotomo Yamada</Text>
             </Box>
 
-            <Box as="li">
+            <Box as="li" listStyleType="none">
               <Text color="muted" fontSize="sm" lineClamp={1}>
                 mail@example.com
               </Text>

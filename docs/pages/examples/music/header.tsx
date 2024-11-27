@@ -10,7 +10,7 @@ import type {
   StackProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Globe, Mic } from "@yamada-ui/lucide"
+import { GlobeIcon, MicIcon } from "@yamada-ui/lucide"
 import {
   Button,
   HStack,
@@ -155,12 +155,12 @@ const EDIT_MENU_ITEMS: MenuItem[] = [
     items: [
       {
         flexDirection: "row-reverse",
-        icon: <Mic fontSize="1.5em" />,
+        icon: <MicIcon fontSize="1.5em" />,
         label: "Smart Dictation…",
       },
       {
         flexDirection: "row-reverse",
-        icon: <Globe fontSize="1.5em" />,
+        icon: <GlobeIcon fontSize="1.5em" />,
         label: "Emoji & Symbols…",
       },
     ],

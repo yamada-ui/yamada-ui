@@ -1,5 +1,5 @@
 import type { ButtonProps } from "@yamada-ui/react"
-import { Check, Copy } from "@yamada-ui/lucide"
+import { CheckIcon, CopyIcon } from "@yamada-ui/lucide"
 import { forwardRef, IconButton, Tooltip, useClipboard } from "@yamada-ui/react"
 import { memo } from "react"
 
@@ -33,7 +33,9 @@ export const CopyButton = memo(
           borderColor={hasCopied ? "success" : "whiteAlpha.600"}
           color={hasCopied ? "success" : "whiteAlpha.600"}
           display="flex"
-          icon={hasCopied ? <Check fontSize="lg" /> : <Copy fontSize="md" />}
+          icon={
+            hasCopied ? <CheckIcon fontSize="lg" /> : <CopyIcon fontSize="md" />
+          }
           justifyContent="center"
           _hover={{
             borderColor: hasCopied ? "success" : "whiteAlpha.800",

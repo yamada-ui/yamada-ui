@@ -1,5 +1,21 @@
 # @yamada-ui/dropzone
 
+## 1.1.0
+
+### Minor Changes
+
+- [`dac78e7`](https://github.com/yamada-ui/yamada-ui/commit/dac78e7d8572662e1303f396727ecfbb4c02fafa) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `aria-labelledby` attribute.
+
+### Patch Changes
+
+- [#3567](https://github.com/yamada-ui/yamada-ui/pull/3567) [`a686425`](https://github.com/yamada-ui/yamada-ui/commit/a6864253a6ae8e89d14bcacdacfd58f491191369) Thanks [@kaehehehe](https://github.com/kaehehehe)! - feat: remove `is` prefix in props
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/form-control@2.1.8
+  - @yamada-ui/loading@1.1.25
+  - @yamada-ui/transitions@1.1.12
+
 ## 1.0.52
 
 ### Patch Changes

@@ -49,7 +49,7 @@ export const withIsDisabled: Story = () => {
     >
       <Text>Button</Text>
 
-      <Ripple {...rippleProps} isDisabled />
+      <Ripple {...rippleProps} disabled />
     </Box>
   )
 }

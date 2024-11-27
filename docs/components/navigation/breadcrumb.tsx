@@ -1,9 +1,9 @@
 import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
+import { ChevronRightIcon } from "@yamada-ui/lucide"
 import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
-  ChevronIcon,
   forwardRef,
   Breadcrumb as UIBreadcrumb,
 } from "@yamada-ui/react"
@@ -24,7 +24,7 @@ export const Breadcrumb = memo(
         fontSize="sm"
         gap="1"
         mb="sm"
-        separator={<ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />}
+        separator={<ChevronRightIcon fontSize="1rem" />}
         listProps={{ h: 6 }}
         {...rest}
       >
@@ -36,7 +36,7 @@ export const Breadcrumb = memo(
 
             {documentBreadcrumbs.length === index + 1 ? (
               <BreadcrumbSeparator ms="1">
-                <ChevronIcon fontSize="1rem" transform="rotate(-90deg)" />
+                <ChevronRightIcon fontSize="1rem" />
               </BreadcrumbSeparator>
             ) : null}
           </BreadcrumbItem>

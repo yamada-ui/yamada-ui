@@ -11,6 +11,12 @@
       "description": "The HTML element to render.",
       "required": false
     },
+    "boundary": {
+      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
+      "defaultValue": "'clippingParents'",
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier.",
+      "required": false
+    },
     "closeDelay": {
       "type": "number",
       "defaultValue": "0",
@@ -69,6 +75,18 @@
       "description": "The animation duration.",
       "required": false
     },
+    "eventListeners": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { resize?: boolean | undefined; scroll?: boolean | undefined }",
+      "defaultValue": true,
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.",
+      "required": false
+    },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+      "required": false
+    },
     "gutter": {
       "type": "UIValue<number>",
       "defaultValue": "8",
@@ -91,6 +109,12 @@
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "description": "The label of the tooltip.",
+      "required": false
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
       "required": false
     },
     "modifiers": {
@@ -134,6 +158,18 @@
     "portalProps": {
       "type": "Pick<\n  PortalProps,\n  \"appendToParentPortal\" | \"containerRef\"\n>",
       "description": "Props for portal component.",
+      "required": false
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "strategy": {
+      "type": "\"absolute\" | \"fixed\"",
+      "defaultValue": "'absolute'",
+      "description": "The CSS positioning strategy to use.",
       "required": false
     },
     "withPortal": {

@@ -35,6 +35,7 @@
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, display the dropzone loading icon.",
       "required": false
     },
@@ -48,6 +49,12 @@
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, display the dropzone loading icon.",
       "required": false
     },
     "loadingProps": {

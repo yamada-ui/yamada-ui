@@ -1,5 +1,15 @@
 # @yamada-ui/fontawesome
 
+## 1.0.48
+
+### Patch Changes
+
+- [#3553](https://github.com/yamada-ui/yamada-ui/pull/3553) [`cc4c64b`](https://github.com/yamada-ui/yamada-ui/commit/cc4c64b241ab6c7e0f3704b20d304a14b45e76fc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/icon@1.1.14
+
 ## 1.0.47
 
 ### Patch Changes

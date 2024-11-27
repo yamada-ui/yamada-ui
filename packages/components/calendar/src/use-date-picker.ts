@@ -61,7 +61,9 @@ export const useDatePicker = ({
   const {
     allowInput,
     dateToString,
+    inputFormat,
     inputRef,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -131,6 +133,12 @@ export const useDatePicker = ({
 
     setInputValue(inputValue)
   }, [value])
+
+  useUpdateEffect(() => {
+    const inputValue = dateToString(value)
+
+    setInputValue(inputValue)
+  }, [locale, inputFormat])
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {

@@ -7,7 +7,7 @@ import type {
   RefObject,
   SetStateAction,
 } from "react"
-import { useTheme } from "@yamada-ui/core"
+import { useI18n, useTheme } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   createContext,
@@ -164,7 +164,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * Check the docs to see the locale of possible modifiers you can pass.
    *
    * @see Docs https://day.js.org/docs/en/i18n/instance-locale
-   * @default 'en'
+   * @default 'en-US'
    */
   locale?: string
   /**
@@ -334,9 +334,10 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   __selectType = "date",
   ...rest
 }: UseCalendarProps<Y>) => {
+  const { locale: defaultLocale } = useI18n()
   const { theme } = useTheme()
 
-  locale ??= theme.__config?.date?.locale ?? "en"
+  locale ??= theme.__config?.date?.locale ?? defaultLocale
 
   const [type, onChangeType] = useControllableState({
     defaultValue: defaultType ?? "date",

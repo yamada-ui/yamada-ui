@@ -1,5 +1,14 @@
 # @yamada-ui/file-input
 
+## 1.0.48
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/form-control@2.1.8
+  - @yamada-ui/use-clickable@1.2.14
+
 ## 1.0.47
 
 ### Patch Changes

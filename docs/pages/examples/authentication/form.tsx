@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { Github } from "components/media-and-icons"
+import { GithubIcon } from "components/media-and-icons"
 import { memo } from "react"
 
 export interface FormProps extends BoxProps {}
@@ -78,7 +78,7 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
           variant="outline"
           borderColor="border"
           fontWeight="normal"
-          leftIcon={<Github fontSize="0.875em" />}
+          leftIcon={<GithubIcon fontSize="0.875em" />}
         >
           GitHub
         </Button>

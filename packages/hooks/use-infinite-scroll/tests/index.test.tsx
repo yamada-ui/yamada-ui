@@ -30,7 +30,7 @@ describe("useInfiniteScroll", () => {
     )
 
     expect(mockOnLoad).not.toHaveBeenCalled()
-    expect(result.current.isFinish).toBeFalsy()
+    expect(result.current.finish).toBeFalsy()
   })
 
   test("should be called onLoad when initial loaded", () => {
@@ -48,7 +48,7 @@ describe("useInfiniteScroll", () => {
       finish: expect.any(Function),
       index: 0,
     })
-    expect(result.current.isFinish).toBeTruthy()
+    expect(result.current.finish).toBeTruthy()
   })
 
   test("should be called onReset scroll to root", async () => {
@@ -58,7 +58,7 @@ describe("useInfiniteScroll", () => {
       })
       const rootRef = useRef<HTMLDivElement>(null)
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
+      const { ref, finish } = useInfiniteScroll({
         resetRef,
         rootRef,
         onLoad: mockOnLoad,
@@ -67,7 +67,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div ref={rootRef} style={{ overflowY: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -95,7 +95,7 @@ describe("useInfiniteScroll", () => {
         finish()
       })
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
+      const { ref, finish } = useInfiniteScroll({
         resetRef,
         onLoad: mockOnLoad,
       })
@@ -103,7 +103,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div style={{ overflowY: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -131,9 +131,9 @@ describe("useInfiniteScroll", () => {
       })
       const rootRef = useRef<HTMLDivElement>(null)
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
-        isReverse: true,
+      const { ref, finish } = useInfiniteScroll({
         resetRef,
+        reverse: true,
         rootRef,
         onLoad: mockOnLoad,
       })
@@ -141,7 +141,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div ref={rootRef} style={{ overflow: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -170,10 +170,10 @@ describe("useInfiniteScroll", () => {
       })
       const rootRef = useRef<HTMLDivElement>(null)
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
-        isReverse: true,
+      const { ref, finish } = useInfiniteScroll({
         orientation: "horizontal",
         resetRef,
+        reverse: true,
         rootRef,
         onLoad: mockOnLoad,
       })
@@ -181,7 +181,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div ref={rootRef} style={{ overflowX: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -209,7 +209,7 @@ describe("useInfiniteScroll", () => {
         finish()
       })
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
+      const { ref, finish } = useInfiniteScroll({
         orientation: "horizontal",
         resetRef,
         onLoad: mockOnLoad,
@@ -218,7 +218,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div style={{ overflowX: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -257,8 +257,8 @@ describe("useInfiniteScroll", () => {
       })
       const rootRef = useRef<HTMLDivElement>(null)
       const resetRef = useRef<() => void>(noop)
-      const { ref, isFinish } = useInfiniteScroll({
-        isDisabled: true,
+      const { ref, finish } = useInfiniteScroll({
+        disabled: true,
         resetRef,
         rootRef,
         onLoad: mockOnLoad,
@@ -267,7 +267,7 @@ describe("useInfiniteScroll", () => {
       return (
         <>
           <div ref={rootRef} style={{ overflowY: "auto" }}>
-            {!isFinish ? <div ref={ref} data-testid="trigger" /> : null}
+            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset

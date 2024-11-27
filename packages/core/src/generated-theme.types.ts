@@ -696,6 +696,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
+    Separator: {
+      sizes: {} & string
+      variants: "dashed" | "dotted" | "solid" | ({} & string)
+    }
     Slider: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
     Status: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
     Stepper: {

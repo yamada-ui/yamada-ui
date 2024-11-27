@@ -89,6 +89,7 @@ import { ScaleFade } from "./scale-fade"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
+import { Separator } from "./separator"
 import { Skeleton } from "./skeleton"
 import { Slide } from "./slide"
 import { SlideFade } from "./slide-fade"
@@ -198,6 +199,7 @@ export const components = {
   ScrollArea,
   SegmentedControl,
   Select,
+  Separator,
   Skeleton,
   Slide,
   SlideFade,

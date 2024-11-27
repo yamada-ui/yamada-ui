@@ -65,15 +65,15 @@ describe("<InfiniteScrollArea />", () => {
 
   test("InfiniteScrollArea renders with Reverse correctly", async () => {
     const MyComponent = ({
-      isReverse,
-    }: Pick<InfiniteScrollAreaProps, "isReverse">) => {
+      reverse,
+    }: Pick<InfiniteScrollAreaProps, "reverse">) => {
       const rootRef = useRef<HTMLDivElement>(null)
 
       return (
         <div ref={rootRef}>
           <InfiniteScrollArea
-            isReverse={isReverse}
             loading={<>Loading…</>}
+            reverse={reverse}
             rootRef={rootRef}
           >
             {Array(50)
@@ -86,7 +86,7 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { container } = render(<MyComponent isReverse />)
+    const { container } = render(<MyComponent reverse />)
     fireEvent.scroll(container, {
       target: {
         scrollTop: 1000,

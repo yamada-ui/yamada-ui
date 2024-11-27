@@ -1,8 +1,8 @@
-import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9C.js";import{r as d}from"./index-ClcD9ViR.js";import{C as c,a as u,b as f}from"./card-D9Y_Bh_Y.js";import{H as x}from"./heading-IeSrr5lO.js";import{T as m}from"./text-DxpipBZv.js";import{C as h}from"./center-De5p2Ael.js";import{L as p}from"./loading-J7FyZR17.js";import{B as Y}from"./factory-CehSyZ2b.js";import{C as q}from"./container-DGdSg1TX.js";import{B as J}from"./button-OnwWSCmB.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./forward-ref-D13m8o2p.js";import"./use-component-style-PhZ538dD.js";import"./theme-provider-BOnS9RWG.js";import"./icon-Tcjn8UpA.js";import"./use-var-C7Dt5UAR.js";import"./use-ripple-lPfPkpPL.js";import"./index-r0TXmcNt.js";import"./proxy-Bq47Fk52.js";import"./factory-C8sDf1Q7.js";const mn={title:"Hooks / useInfiniteScroll"},C=()=>{const[o,s]=d.useState(50),{ref:t,isFinish:a}=l({onLoad:({finish:r,index:e})=>{console.log("onLoad",e),s(i=>i+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},A=()=>{const o=d.useRef(null),s=d.useRef(Y),[t,a]=d.useState(50),{ref:r,isFinish:e}=l({resetRef:s,rootRef:o,onLoad:({finish:i,index:L})=>{console.log("onLoad",L),a(W=>W+50),L>=5&&i()}});return n.jsxs(n.Fragment,{children:[n.jsxs(q,{ref:o,borderWidth:"1px",maxH:"xl",overflowY:"auto",p:"md",rounded:"md",children:[Array(t).fill(0).map((i,L)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},L)),e?null:n.jsx(h,{ref:r,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]}),n.jsx(J,{onClick:()=>s.current(),children:"Reset"})]})},j=()=>{const[o,s]=d.useState(50),{ref:t,isFinish:a}=l({rootMargin:"300px 0px 0px 0px",onLoad:({finish:r,index:e})=>{console.log("onLoad",e),s(i=>i+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},g=()=>{const[o,s]=d.useState(50),{ref:t,isFinish:a}=l({threshold:1,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),s(i=>i+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},R=()=>{const[o,s]=d.useState(0),{ref:t,isFinish:a}=l({initialLoad:!0,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),s(i=>i+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},B=()=>{const[o,s]=d.useState(50),{ref:t,isFinish:a}=l({isReverse:!0,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),s(i=>i+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})}),Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(u,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(f,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e))]})};var S,y,H;C.parameters={...C.parameters,docs:{...(S=C.parameters)==null?void 0:S.docs,source:{originalSource:`() => {
+import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-ZkPaaI2k.js";import{r as d}from"./index-ClcD9ViR.js";import{C as c,a as f,b as u}from"./card-D9Y_Bh_Y.js";import{H as x}from"./heading-IeSrr5lO.js";import{T as m}from"./text-DxpipBZv.js";import{C as h}from"./center-De5p2Ael.js";import{L as p}from"./loading-J7FyZR17.js";import{B as Y}from"./factory-CehSyZ2b.js";import{C as q}from"./container-DGdSg1TX.js";import{B as J}from"./button-OnwWSCmB.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./forward-ref-D13m8o2p.js";import"./use-component-style-PhZ538dD.js";import"./theme-provider-BOnS9RWG.js";import"./icon-Tcjn8UpA.js";import"./use-var-C7Dt5UAR.js";import"./use-ripple-lPfPkpPL.js";import"./index-r0TXmcNt.js";import"./proxy-Bq47Fk52.js";import"./factory-C8sDf1Q7.js";const mn={title:"Hooks / useInfiniteScroll"},C=()=>{const[o,i]=d.useState(50),{ref:t,finish:a}=l({onLoad:({finish:r,index:e})=>{console.log("onLoad",e),i(s=>s+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},A=()=>{const o=d.useRef(null),i=d.useRef(Y),[t,a]=d.useState(50),{ref:r,finish:e}=l({resetRef:i,rootRef:o,onLoad:({finish:s,index:L})=>{console.log("onLoad",L),a(W=>W+50),L>=5&&s()}});return n.jsxs(n.Fragment,{children:[n.jsxs(q,{ref:o,borderWidth:"1px",maxH:"xl",overflowY:"auto",p:"md",rounded:"md",children:[Array(t).fill(0).map((s,L)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},L)),e?null:n.jsx(h,{ref:r,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]}),n.jsx(J,{onClick:()=>i.current(),children:"Reset"})]})},j=()=>{const[o,i]=d.useState(50),{ref:t,finish:a}=l({rootMargin:"300px 0px 0px 0px",onLoad:({finish:r,index:e})=>{console.log("onLoad",e),i(s=>s+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},g=()=>{const[o,i]=d.useState(50),{ref:t,finish:a}=l({threshold:1,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),i(s=>s+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},R=()=>{const[o,i]=d.useState(0),{ref:t,finish:a}=l({initialLoad:!0,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),i(s=>s+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e)),a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})})]})},B=()=>{const[o,i]=d.useState(50),{ref:t,finish:a}=l({isReverse:!0,onLoad:({finish:r,index:e})=>{console.log("onLoad",e),i(s=>s+50),e>=5&&r()}});return n.jsxs(n.Fragment,{children:[a?null:n.jsx(h,{ref:t,w:"full",children:n.jsx(p,{fontSize:"2xl"})}),Array(o).fill(0).map((r,e)=>n.jsxs(c,{children:[n.jsx(f,{children:n.jsx(x,{size:"md",children:"『ドラゴンボール』（DRAGON BALL）"})}),n.jsx(u,{children:n.jsx(m,{children:"『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"})})]},e))]})};var S,y,H;C.parameters={...C.parameters,docs:{...(S=C.parameters)==null?void 0:S.docs,source:{originalSource:`() => {
   const [count, setCount] = useState<number>(50);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     onLoad: ({
       finish,
@@ -27,7 +27,7 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
             </CardBody>
           </Card>)}
 
-      {!isFinish ? <Center ref={ref} w="full">
+      {!finish ? <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center> : null}
     </>;
@@ -37,7 +37,7 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
   const [count, setCount] = useState<number>(50);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     resetRef,
     rootRef,
@@ -65,18 +65,18 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
               </CardBody>
             </Card>)}
 
-        {!isFinish ? <Center ref={ref} w="full">
+        {!finish ? <Center ref={ref} w="full">
             <Loading fontSize="2xl" />
           </Center> : null}
       </Container>
 
       <Button onClick={() => resetRef.current()}>Reset</Button>
     </>;
-}`,...(z=(O=A.parameters)==null?void 0:O.docs)==null?void 0:z.source}}};var F,G,N;j.parameters={...j.parameters,docs:{...(F=j.parameters)==null?void 0:F.docs,source:{originalSource:`() => {
+}`,...(z=(O=A.parameters)==null?void 0:O.docs)==null?void 0:z.source}}};var G,N,w;j.parameters={...j.parameters,docs:{...(G=j.parameters)==null?void 0:G.docs,source:{originalSource:`() => {
   const [count, setCount] = useState<number>(50);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     rootMargin: "300px 0px 0px 0px",
     onLoad: ({
@@ -102,15 +102,15 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
             </CardBody>
           </Card>)}
 
-      {!isFinish ? <Center ref={ref} w="full">
+      {!finish ? <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center> : null}
     </>;
-}`,...(N=(G=j.parameters)==null?void 0:G.docs)==null?void 0:N.source}}};var w,v,T;g.parameters={...g.parameters,docs:{...(w=g.parameters)==null?void 0:w.docs,source:{originalSource:`() => {
+}`,...(w=(N=j.parameters)==null?void 0:N.docs)==null?void 0:w.source}}};var v,T,_;g.parameters={...g.parameters,docs:{...(v=g.parameters)==null?void 0:v.docs,source:{originalSource:`() => {
   const [count, setCount] = useState<number>(50);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     threshold: 1,
     onLoad: ({
@@ -136,15 +136,15 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
             </CardBody>
           </Card>)}
 
-      {!isFinish ? <Center ref={ref} w="full">
+      {!finish ? <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center> : null}
     </>;
-}`,...(T=(v=g.parameters)==null?void 0:v.docs)==null?void 0:T.source}}};var _,b,I;R.parameters={...R.parameters,docs:{...(_=R.parameters)==null?void 0:_.docs,source:{originalSource:`() => {
+}`,...(_=(T=g.parameters)==null?void 0:T.docs)==null?void 0:_.source}}};var b,I,k;R.parameters={...R.parameters,docs:{...(b=R.parameters)==null?void 0:b.docs,source:{originalSource:`() => {
   const [count, setCount] = useState<number>(0);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     initialLoad: true,
     onLoad: ({
@@ -170,15 +170,15 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
             </CardBody>
           </Card>)}
 
-      {!isFinish ? <Center ref={ref} w="full">
+      {!finish ? <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center> : null}
     </>;
-}`,...(I=(b=R.parameters)==null?void 0:b.docs)==null?void 0:I.source}}};var k,M,E;B.parameters={...B.parameters,docs:{...(k=B.parameters)==null?void 0:k.docs,source:{originalSource:`() => {
+}`,...(k=(I=R.parameters)==null?void 0:I.docs)==null?void 0:k.source}}};var F,M,E;B.parameters={...B.parameters,docs:{...(F=B.parameters)==null?void 0:F.docs,source:{originalSource:`() => {
   const [count, setCount] = useState<number>(50);
   const {
     ref,
-    isFinish
+    finish
   } = useInfiniteScroll({
     isReverse: true,
     onLoad: ({
@@ -191,7 +191,7 @@ import{j as n}from"./jsx-runtime-CfatFE5O.js";import{u as l}from"./index-BNfp6L9
     }
   });
   return <>
-      {!isFinish ? <Center ref={ref} w="full">
+      {!finish ? <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center> : null}
 

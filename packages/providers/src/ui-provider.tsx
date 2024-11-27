@@ -10,6 +10,7 @@ import {
   ColorModeProvider,
   EnvironmentProvider,
   GlobalStyle,
+  I18nProvider,
   ResetStyle,
   ThemeProvider,
 } from "@yamada-ui/core"
@@ -111,29 +112,31 @@ export const UIProvider: FC<UIProviderProps> = ({
       disabled={disableEnvironment}
       environment={environment}
     >
-      <ThemeProvider
-        config={config}
-        storageKey={themeSchemeStorageKey}
-        theme={theme}
-        themeSchemeManager={themeSchemeManager}
-      >
-        <ColorModeProvider
-          colorModeManager={colorModeManager}
+      <I18nProvider direction={config.direction} locale={config.locale}>
+        <ThemeProvider
           config={config}
-          storageKey={colorModeStorageKey}
+          storageKey={themeSchemeStorageKey}
+          theme={theme}
+          themeSchemeManager={themeSchemeManager}
         >
-          <MotionConfig {...config.motion?.config}>
-            <LoadingProvider {...config.loading}>
-              {!disableResetStyle ? <ResetStyle /> : null}
-              {!disableGlobalStyle ? <GlobalStyle /> : null}
+          <ColorModeProvider
+            colorModeManager={colorModeManager}
+            config={config}
+            storageKey={colorModeStorageKey}
+          >
+            <MotionConfig {...config.motion?.config}>
+              <LoadingProvider {...config.loading}>
+                {!disableResetStyle ? <ResetStyle /> : null}
+                {!disableGlobalStyle ? <GlobalStyle /> : null}
 
-              {children}
+                {children}
 
-              <NoticeProvider {...config.notice} />
-            </LoadingProvider>
-          </MotionConfig>
-        </ColorModeProvider>
-      </ThemeProvider>
+                <NoticeProvider {...config.notice} />
+              </LoadingProvider>
+            </MotionConfig>
+          </ColorModeProvider>
+        </ThemeProvider>
+      </I18nProvider>
     </EnvironmentProvider>
   )
 }

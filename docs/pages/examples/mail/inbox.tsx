@@ -1,7 +1,7 @@
 import type { CardProps, StackProps } from "@yamada-ui/react"
 import type { FC, MutableRefObject } from "react"
 import type { MailItem } from "./data"
-import { Search } from "@yamada-ui/lucide"
+import { SearchIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Card,
@@ -66,7 +66,7 @@ export const Inbox: FC<Props> = memo(
           <Box p="sm">
             <InputGroup>
               <InputLeftElement>
-                <Search />
+                <SearchIcon />
               </InputLeftElement>
 
               <Input placeholder="Search" />

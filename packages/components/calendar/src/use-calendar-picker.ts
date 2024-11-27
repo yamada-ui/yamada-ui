@@ -16,7 +16,7 @@ import type {
 } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import type { UseCalendarProps } from "./use-calendar"
-import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
+import { layoutStyleProperties, useI18n, useTheme } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -137,6 +137,7 @@ export type UseCalendarPickerProps<
 export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   props: UseCalendarPickerProps<T>,
 ) => {
+  const { locale: defaultLocale } = useI18n()
   const { theme } = useTheme()
   let {
     type,
@@ -230,7 +231,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const { disabled, readOnly } = formControlProps
 
-  locale ??= theme.__config?.date?.locale ?? "en"
+  locale ??= theme.__config?.date?.locale ?? defaultLocale
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -575,8 +576,10 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     allowInput,
     containerRef,
     dateToString,
+    inputFormat,
     inputRef,
     isOpen,
+    locale,
     pattern,
     stringToDate,
     formControlProps,

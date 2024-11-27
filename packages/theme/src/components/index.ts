@@ -14,6 +14,7 @@ import { Calendar } from "./calendar"
 import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
+import { CheckboxCard } from "./checkbox-card"
 import { CircleProgress } from "./circle-progress"
 import { CloseButton } from "./close-button"
 import { Code } from "./code"
@@ -23,6 +24,7 @@ import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
 import { ContextMenu } from "./context-menu"
+import { DataList } from "./data-list"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
 import { Divider } from "./divider"
@@ -31,12 +33,16 @@ import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
 import { Em } from "./em"
+import { EmptyState } from "./empty-state"
 import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
 import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { Flip } from "./flip"
+import { For } from "./for"
 import { FormControl } from "./form-control"
+import { FormatByte } from "./format-byte"
+import { FormatNumber } from "./format-number"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
 import { Icon } from "./icon"
@@ -63,6 +69,7 @@ import { NativeTable } from "./native-table"
 import { NumberInput } from "./number-input"
 import { Pagination } from "./pagination"
 import { PagingTable } from "./paging-table"
+import { PasswordInput } from "./password-input"
 import { PieChart } from "./pie-chart"
 import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
@@ -70,6 +77,7 @@ import { Progress } from "./progress"
 import { RadarChart } from "./radar-chart"
 import { RadialChart } from "./radial-chart"
 import { Radio } from "./radio"
+import { RadioCard } from "./radio-card"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
@@ -86,6 +94,7 @@ import { Slide } from "./slide"
 import { SlideFade } from "./slide-fade"
 import { Slider } from "./slider"
 import { Stat } from "./stat"
+import { Status } from "./status"
 import { Stepper } from "./stepper"
 import { Switch } from "./switch"
 import { Table } from "./table"
@@ -114,6 +123,7 @@ export const components = {
   Card,
   Carousel,
   Checkbox,
+  CheckboxCard,
   CircleProgress,
   CloseButton,
   Code,
@@ -123,6 +133,7 @@ export const components = {
   ColorSwatch,
   Container,
   ContextMenu,
+  DataList,
   DatePicker,
   Dialog,
   Divider,
@@ -131,11 +142,15 @@ export const components = {
   Dropzone,
   Editable,
   Em,
+  EmptyState,
   Fade,
   Fieldset,
   FileButton,
   FileInput,
   Flip,
+  For,
+  FormatByte,
+  FormatNumber,
   FormControl,
   Heading,
   HueSlider,
@@ -163,6 +178,7 @@ export const components = {
   NumberInput,
   Pagination,
   PagingTable,
+  PasswordInput,
   PieChart,
   PinInput,
   Popover,
@@ -170,6 +186,7 @@ export const components = {
   RadarChart,
   RadialChart,
   Radio,
+  RadioCard,
   RangeDatePicker,
   RangeSlider,
   Rating,
@@ -186,6 +203,7 @@ export const components = {
   SlideFade,
   Slider,
   Stat,
+  Status,
   Stepper,
   Switch,
   Table,

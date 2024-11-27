@@ -6,7 +6,7 @@ import type {
 } from "@yamada-ui/react"
 import type { FC } from "react"
 import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
-import { Github, X } from "components/media-and-icons"
+import { GithubIcon, XIcon } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 
@@ -46,7 +46,7 @@ export const User: FC<UserProps> = ({
                 color: [`primary.500`, `primary.300`],
               }}
             >
-              <Github />
+              <GithubIcon />
             </Link>
           ) : null}
 
@@ -63,7 +63,7 @@ export const User: FC<UserProps> = ({
                 color: [`primary.500`, `primary.300`],
               }}
             >
-              <X />
+              <XIcon />
             </Link>
           ) : null}
         </HStack>

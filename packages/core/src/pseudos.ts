@@ -63,6 +63,10 @@ export const attributes = {
    */
   _grabbed: "&[data-grabbed], &[aria-grabbed=true]",
   /**
+   * The CSS `[data-grid]` attribute selector.
+   */
+  _grid: "[role=grid], &[data-grid]",
+  /**
    * The CSS `[hidden]` attribute selector.
    *
    * - `[hidden]`
@@ -98,6 +102,13 @@ export const attributes = {
    * - `[data-not-allowed]`
    */
   _notAllowed: "&[data-not-allowed]",
+  /**
+   * The CSS `:not(:selected)` attribute selector.
+   *
+   * - `:not([data-selected])`
+   * - `:not([aria-selected=true])`
+   */
+  _notSelected: "&:not([data-selected]):not([aria-selected=true])",
   /**
    * The CSS `:where([data-outside])` attribute selector.
    */
@@ -271,6 +282,10 @@ export const pseudoClasses = {
    */
   _checked: "&:checked, &[data-checked], &[aria-checked=true]",
   /**
+   * The CSS `> *` child combinator selector.
+   */
+  _child: "& > *",
+  /**
    * The CSS `:default` pseudo-class.
    */
   _default: "&:default",
@@ -299,6 +314,10 @@ export const pseudoClasses = {
    * The CSS `:first-of-type` pseudo-class.
    */
   _first: "&:first-of-type",
+  /**
+   * The CSS `:first-child` pseudo-class.
+   */
+  _firstChild: "& > *:first-child",
   /**
    * The CSS `:focus` pseudo-class.
    *
@@ -366,6 +385,10 @@ export const pseudoClasses = {
    */
   _last: "&:last-of-type",
   /**
+   * The CSS `:last-child` pseudo-class.
+   */
+  _lastChild: "& > *:last-child",
+  /**
    * The CSS `:link` pseudo-class.
    *
    * - `:link`
@@ -423,13 +446,29 @@ export const pseudoClasses = {
    */
   _nativeValid: "&:valid",
   /**
+   * The CSS `:checked` pseudo-class.
+   *
+   * - `:not(:checked)`
+   * - `:not([data-checked])`
+   * - `:not([aria-checked=true])`
+   */
+  _notChecked: "&:not(:checked):not([data-checked]):not([aria-checked=true])",
+  /**
    * The CSS `:not(:first-of-type)` pseudo-class.
    */
   _notFirst: "&:not(:first-of-type)",
   /**
+   * The CSS `:not(:first-child)` pseudo-class.
+   */
+  _notFirstChild: "& > *:not(:first-child)",
+  /**
    * The CSS `:not(:last-of-type)` pseudo-class.
    */
   _notLast: "&:not(:last-of-type)",
+  /**
+   * The CSS `:not(:last-child)` pseudo-class.
+   */
+  _notLastChild: "& > *:not(:last-child)",
   /**
    * The CSS `:not(:target)` pseudo-class.
    */

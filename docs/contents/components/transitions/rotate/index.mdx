@@ -20,7 +20,9 @@ import { Rotate } from "@yamada-ui/react"
 Set the elements to switch between as `from` and `to`.
 
 ```tsx functional=true
-return <Rotate from={<Sun fontSize="6xl" />} to={<Moon fontSize="6xl" />} />
+return (
+  <Rotate from={<SunIcon fontSize="6xl" />} to={<MoonIcon fontSize="6xl" />} />
+)
 ```
 
 ### Change the Angle
@@ -31,8 +33,8 @@ To change the angle, set a number (degrees) to `rotate`.
 return (
   <Rotate
     rotate={360}
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```
@@ -45,8 +47,8 @@ To change the duration, set a number (seconds) to `duration`.
 return (
   <Rotate
     duration={0.6}
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```
@@ -59,8 +61,8 @@ To delay the switch, set a number (seconds) to `delay`.
 return (
   <Rotate
     delay={1}
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```
@@ -73,8 +75,8 @@ To disable, set `isDisabled` to `true`.
 return (
   <Rotate
     isDisabled
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```
@@ -87,8 +89,8 @@ To readyOnly, set `isReadOnly` to `true`.
 return (
   <Rotate
     isReadOnly
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```
@@ -102,8 +104,8 @@ return (
   <Rotate
     value={value}
     onChange={onChange}
-    from={<Sun fontSize="6xl" />}
-    to={<Moon fontSize="6xl" />}
+    from={<SunIcon fontSize="6xl" />}
+    to={<MoonIcon fontSize="6xl" />}
   />
 )
 ```

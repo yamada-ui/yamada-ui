@@ -29,6 +29,14 @@ order: 1
 />
 
 <PropsCard
+  id="indicator-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the indicator will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="indicator-inline"
   name="inline"
   type="UIValue<boolean>"
@@ -41,6 +49,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the indicator will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

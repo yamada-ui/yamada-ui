@@ -1,5 +1,16 @@
 # @yamada-ui/tabs
 
+## 1.0.47
+
+### Patch Changes
+
+- [#3527](https://github.com/yamada-ui/yamada-ui/pull/3527) [`5a3b4bf`](https://github.com/yamada-ui/yamada-ui/commit/5a3b4bf01b14fe2f4d9d40f61e51ac58b8bd0e8a) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` prefix in props
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/ripple@1.0.45
+  - @yamada-ui/use-clickable@1.2.14
+
 ## 1.0.46
 
 ### Patch Changes

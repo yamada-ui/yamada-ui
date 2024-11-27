@@ -1,5 +1,15 @@
 # @yamada-ui/editable
 
+## 1.0.49
+
+### Patch Changes
+
+- [#3568](https://github.com/yamada-ui/yamada-ui/pull/3568) [`713cc1e`](https://github.com/yamada-ui/yamada-ui/commit/713cc1edfe7952ef7491c440af4438a95154baab) Thanks [@kaehehehe](https://github.com/kaehehehe)! - feat: remove `is` prefix in props
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/form-control@2.1.8
+
 ## 1.0.48
 
 ### Patch Changes

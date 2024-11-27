@@ -83,7 +83,9 @@ export const useRangeDatePicker = ({
     allowInput,
     containerRef,
     dateToString,
+    inputFormat,
     isOpen,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -264,6 +266,11 @@ export const useRangeDatePicker = ({
 
     setEndInputValue(dateToString(endValue) ?? "")
   }, [value])
+
+  useUpdateEffect(() => {
+    setStartInputValue(dateToString(startValue) ?? "")
+    setEndInputValue(dateToString(endValue) ?? "")
+  }, [locale, inputFormat])
 
   const getStartInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref) => {

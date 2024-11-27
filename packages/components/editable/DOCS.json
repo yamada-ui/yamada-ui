@@ -32,6 +32,7 @@
     "isPreviewFocusable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `previewFocusable` instead.",
       "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
       "required": false
     },
@@ -70,6 +71,12 @@
     "placeholder": {
       "type": "string",
       "description": "The placeholder text when the value is empty.",
+      "required": false
+    },
+    "previewFocusable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
       "required": false
     },
     "selectAllOnFocus": {
@@ -117,6 +124,7 @@
     "isPreviewFocusable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `previewFocusable` instead.",
       "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
       "required": false
     },
@@ -155,6 +163,12 @@
     "placeholder": {
       "type": "string",
       "description": "The placeholder text when the value is empty.",
+      "required": false
+    },
+    "previewFocusable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
       "required": false
     },
     "selectAllOnFocus": {

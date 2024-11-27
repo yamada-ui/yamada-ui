@@ -2,7 +2,7 @@ import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
-export const Github = forwardRef<SVGSVGElement, IconProps>(
+export const GithubIcon = forwardRef<SVGSVGElement, IconProps>(
   ({ boxSize = "1.5em", ...rest }, ref) => {
     return (
       <Icon
@@ -22,4 +22,4 @@ export const Github = forwardRef<SVGSVGElement, IconProps>(
   },
 )
 
-Github.displayName = "Github"
+GithubIcon.displayName = "GithubIcon"

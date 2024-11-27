@@ -13,7 +13,7 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { Github, X } from "components/media-and-icons"
+import { GithubIcon, XIcon } from "components/media-and-icons"
 import { memo } from "react"
 
 export const AccountCard = memo(() => {
@@ -36,11 +36,11 @@ export const AccountCard = memo(() => {
 
       <CardBody>
         <ButtonGroup variant="outline" gap="sm" w="full">
-          <Button leftIcon={<Github boxSize="1.25rem" />} w="full">
+          <Button leftIcon={<GithubIcon boxSize="1.25rem" />} w="full">
             GitHub
           </Button>
 
-          <Button leftIcon={<X boxSize="1.25rem" />} w="full">
+          <Button leftIcon={<XIcon boxSize="1.25rem" />} w="full">
             X
           </Button>
         </ButtonGroup>

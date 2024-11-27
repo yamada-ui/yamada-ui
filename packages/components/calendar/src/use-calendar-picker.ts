@@ -38,6 +38,20 @@ import { isAfterDate, isBeforeDate } from "./calendar-utils"
 
 interface CalendarThemeProps extends ThemeProps<"Calendar"> {}
 
+interface InputProps
+  extends Omit<
+    HTMLUIProps<"input">,
+    | "children"
+    | "defaultValue"
+    | "disabled"
+    | "onChange"
+    | "readOnly"
+    | "required"
+    | "size"
+    | "type"
+    | keyof UseCalendarPickerBaseProps
+  > {}
+
 interface UseCalendarPickerOptions {
   /**
    * If `true`, allows input.
@@ -118,19 +132,7 @@ type UseCalendarPickerBaseProps<
 
 export type UseCalendarPickerProps<
   T extends UseCalendarProps<any> = UseCalendarProps<any>,
-> = Omit<
-  HTMLUIProps<"input">,
-  | "children"
-  | "defaultValue"
-  | "disabled"
-  | "onChange"
-  | "readOnly"
-  | "required"
-  | "size"
-  | "type"
-  | keyof UseCalendarPickerBaseProps
-> &
-  UseCalendarPickerBaseProps<T>
+> = InputProps & UseCalendarPickerBaseProps<T>
 
 export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   props: UseCalendarPickerProps<T>,
@@ -583,7 +585,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     getFieldProps,
     getIconProps,
     getPopoverProps,
-    inputProps,
+    inputProps: inputProps as InputProps,
     onClose,
     onOpen,
   }

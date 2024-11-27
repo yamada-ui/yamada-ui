@@ -1,7 +1,7 @@
 import type { IconButtonProps, MenuProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import type { ModalType } from "."
-import { Ellipsis } from "@yamada-ui/lucide"
+import { EllipsisIcon } from "@yamada-ui/lucide"
 import {
   IconButton,
   Menu,
@@ -22,7 +22,7 @@ export const ControlButton: FC<ControlButtonProps> = memo(
       <Menu {...menuProps}>
         <MenuButton
           as={IconButton}
-          icon={<Ellipsis fontSize="2xl" />}
+          icon={<EllipsisIcon fontSize="2xl" />}
           {...rest}
         />
 

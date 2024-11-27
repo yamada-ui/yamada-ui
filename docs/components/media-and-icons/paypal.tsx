@@ -2,7 +2,7 @@ import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
-export const Paypal = forwardRef<SVGSVGElement, IconProps>(
+export const PaypalIcon = forwardRef<SVGSVGElement, IconProps>(
   ({ boxSize = "1.5em", ...rest }, ref) => {
     return (
       <Icon
@@ -20,4 +20,4 @@ export const Paypal = forwardRef<SVGSVGElement, IconProps>(
   },
 )
 
-Paypal.displayName = "Paypal"
+PaypalIcon.displayName = "PaypalIcon"

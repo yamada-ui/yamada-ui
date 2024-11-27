@@ -56,7 +56,7 @@
       "required": false
     },
     "iconProps": {
-      "type": "{\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n} & Omit<HTMLUIProps<\"span\">, \"children\">",
+      "type": "{\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n} & Omit<HTMLUIProps, \"children\">",
       "description": "Props for icon component.",
       "required": false
     },
@@ -104,6 +104,11 @@
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "label": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "description": "The label of the checkbox.",
       "required": false
     },
     "labelProps": {
@@ -159,16 +164,52 @@
       "required": false
     }
   },
-  "UseCheckbox": {
+  "CheckboxCard": {
+    "addon": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "description": "The addon of the checkbox card.",
+      "required": false
+    },
+    "addonProps": {
+      "type": "CheckboxCardAddonProps",
+      "description": "Props for the footer of the checkbox card.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "defaultValue": "\"primary\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
+    "description": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "description": "The body of the checkbox card.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "CheckboxCardDescriptionProps",
+      "description": "Props for the description of the checkbox card.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "{\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n} & Omit<HTMLUIProps, \"children\">",
+      "description": "Props for the icon of the checkbox card.",
+      "required": false
+    },
     "id": {
       "type": "string",
       "description": "id assigned to input.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "InputHTMLAttributes<HTMLInputElement>",
+      "description": "Props for input element.",
       "required": false
     },
     "isChecked": {
@@ -207,6 +248,16 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "label": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "description": "The label of the checkbox card.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "CheckboxCardLabelProps",
+      "description": "Props for the label of the checkbox card.",
+      "required": false
+    },
     "name": {
       "type": "string",
       "description": "The HTML `name` attribute used for forms.",
@@ -233,6 +284,12 @@
       "description": "If `true`, the checkbox will be selected when the Enter key is pressed.",
       "required": false
     },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the CheckboxCard.",
+      "required": false
+    },
     "tabIndex": {
       "type": "number",
       "description": "The tab-index property of the underlying input element.",
@@ -241,6 +298,152 @@
     "value": {
       "type": "Y",
       "description": "The value to be used in the checkbox input.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"outline\"",
+      "description": "The variant of the CheckboxCard.",
+      "required": false
+    },
+    "withIcon": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the icon will be displayed.",
+      "required": false
+    }
+  },
+  "CheckboxCardAddon": {},
+  "CheckboxCardDescription": {},
+  "CheckboxCardGroup": {
+    "addonProps": {
+      "type": "CheckboxCardAddonProps",
+      "description": "Props for the footer of the checkbox card.",
+      "required": false
+    },
+    "align": {
+      "type": "UIValue<AlignItems>",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "basis": {
+      "type": "UIValue<number | \"content\" | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"auto\" | \"max\" | \"min\" | \"1\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | ... 68 more ... | \"xs\">",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "Y[]",
+      "description": "The initial value of the checkbox group.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "CheckboxCardDescriptionProps",
+      "description": "Props for the description of the checkbox card.",
+      "required": false
+    },
+    "direction": {
+      "type": "UIValue<FlexDirection>",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "grow": {
+      "type": "UIValue<FlexGrow>",
+      "description": "The CSS `flex-grow` property.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
+    "isNative": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "items": {
+      "type": "CheckboxCardItem<Y>[]",
+      "defaultValue": "'[]'",
+      "description": "If provided, generate checkbox cards based on items.",
+      "required": false
+    },
+    "justify": {
+      "type": "UIValue<JustifyContent>",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "CheckboxCardLabelProps",
+      "description": "Props for the label of the checkbox card.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: Y[]) => void",
+      "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
+    },
+    "shrink": {
+      "type": "UIValue<FlexShrink>",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "value": {
+      "type": "Y[]",
+      "description": "The value of the checkbox group.",
+      "required": false
+    },
+    "withIcon": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the icon will be displayed.",
+      "required": false
+    },
+    "wrap": {
+      "type": "UIValue<FlexWrap>",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "CheckboxCardLabel": {
+    "contentProps": {
+      "type": "HTMLUIProps<\"span\">",
+      "description": "The props for the label content.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon of the checkbox card.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "HTMLUIProps",
+      "description": "The props for the icon.",
+      "required": false
+    },
+    "withIcon": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, the icon will be displayed.",
       "required": false
     }
   },
@@ -329,6 +532,91 @@
     "wrap": {
       "type": "UIValue<FlexWrap>",
       "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "UseCheckbox": {
+    "defaultIsChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "id assigned to input.",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
+    "isIndeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
+    },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checkbox is blurred.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
+    },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "selectOnEnter": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be selected when the Enter key is pressed.",
+      "required": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value to be used in the checkbox input.",
       "required": false
     }
   },

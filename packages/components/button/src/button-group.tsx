@@ -5,19 +5,35 @@ import { useMemo } from "react"
 
 interface ButtonGroupOptions {
   /**
+   * If `true`, the borderRadius of button that are direct children will be altered to look flushed together.
+   *
+   * @default false
+   */
+  attached?: boolean
+  /**
    * The CSS `flex-direction` property.
    */
   direction?: CSSUIObject["flexDirection"]
   /**
+   * If `true`, all wrapped button will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, the borderRadius of button that are direct children will be altered to look flushed together.
    *
    * @default false
+   *
+   * @deprecated Use `attached` instead.
    */
   isAttached?: boolean
   /**
    * If `true`, all wrapped button will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
 }
@@ -28,7 +44,7 @@ export interface ButtonGroupProps
     ButtonGroupOptions {}
 
 interface ButtonGroupContext extends ThemeProps<"Button"> {
-  isDisabled?: boolean
+  disabled?: boolean
 }
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
@@ -46,8 +62,10 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
       className,
       size,
       variant,
+      attached,
       columnGap,
       direction: flexDirection,
+      disabled,
       gap,
       isAttached,
       isDisabled,
@@ -59,17 +77,20 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
     const isColumn =
       flexDirection === "column" || flexDirection === "column-reverse"
 
+    attached ??= isAttached
+    disabled ??= isDisabled
+
     const css: CSSUIObject = {
       display: "inline-flex",
       flexDirection,
     }
 
     const context: ButtonGroupContext = useMemo(
-      () => ({ size, variant, isDisabled }),
-      [size, variant, isDisabled],
+      () => ({ size, variant, disabled }),
+      [size, variant, disabled],
     )
 
-    if (isAttached) {
+    if (attached) {
       Object.assign(css, {
         "> *:first-of-type:not(:last-of-type)": isColumn
           ? { borderBottomRadius: 0 }
@@ -94,7 +115,7 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
         <ui.div
           ref={ref}
           className={cx("ui-button-group", className)}
-          data-attached={dataAttr(isAttached)}
+          data-attached={dataAttr(attached)}
           role="group"
           __css={css}
           {...rest}

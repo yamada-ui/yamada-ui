@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { For, HStack, Stack, Status } from "@yamada-ui/react"
+import { For, HStack, Status, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Status>
 
@@ -34,7 +34,7 @@ export const withLabel: Story = () => {
 
 export const withSize: Story = () => {
   return (
-    <Stack>
+    <VStack>
       <For each={["sm", "md", "lg"]}>
         {(size) => (
           <HStack>
@@ -56,6 +56,6 @@ export const withSize: Story = () => {
           </HStack>
         )}
       </For>
-    </Stack>
+    </VStack>
   )
 }

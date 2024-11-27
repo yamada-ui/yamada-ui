@@ -9849,10 +9849,34 @@
   },
   {
     "type": "page",
-    "description": "We are currently considering the development of `EmptyState`.",
+    "description": "`EmptyState` is a component used to display when a resource is empty or unavailable.",
     "hierarchy": { "lv1": "EmptyState" },
     "slug": "/components/other/empty-state",
     "title": "EmptyState"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "EmptyState", "lv2": "Import" },
+    "slug": "/components/other/empty-state#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "EmptyState", "lv2": "Usage" },
+    "slug": "/components/other/empty-state#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "EmptyState", "lv2": "Usage", "lv3": "Change Size" },
+    "slug": "/components/other/empty-state#change-size",
+    "title": "Change Size"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "EmptyState", "lv2": "Usage", "lv3": "Add Children" },
+    "slug": "/components/other/empty-state#add-children",
+    "title": "Add Children"
   },
   {
     "type": "page",
@@ -9875,24 +9899,28 @@
   },
   {
     "type": "page",
-    "description": "We are currently considering the development of `For`.",
+    "description": "`For` is a component used to loop over an array and render a component for each item.",
     "hierarchy": { "lv1": "For" },
     "slug": "/components/other/for",
     "title": "For"
   },
   {
-    "type": "page",
-    "description": "We are currently considering the development of `FormatByte`.",
-    "hierarchy": { "lv1": "FormatByte" },
-    "slug": "/components/other/format-byte",
-    "title": "FormatByte"
+    "type": "fragment",
+    "hierarchy": { "lv1": "For", "lv2": "Import" },
+    "slug": "/components/other/for#import",
+    "title": "Import"
   },
   {
-    "type": "page",
-    "description": "We are currently considering the development of `FormatNumber`.",
-    "hierarchy": { "lv1": "FormatNumber" },
-    "slug": "/components/other/format-number",
-    "title": "FormatNumber"
+    "type": "fragment",
+    "hierarchy": { "lv1": "For", "lv2": "Usage" },
+    "slug": "/components/other/for#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "For", "lv2": "Usage", "lv3": "Fallback" },
+    "slug": "/components/other/for#fallback",
+    "title": "Fallback"
   },
   {
     "type": "page",

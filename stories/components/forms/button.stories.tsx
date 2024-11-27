@@ -136,23 +136,23 @@ export const withVariant: Story = () => {
 export const withDisabled: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" isDisabled>
+      <Button colorScheme="primary" variant="solid" disabled>
         Solid
       </Button>
 
-      <Button colorScheme="secondary" variant="outline" isDisabled>
+      <Button colorScheme="secondary" variant="outline" disabled>
         Outline
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" isDisabled>
+      <Button colorScheme="warning" variant="ghost" disabled>
         Ghost
       </Button>
 
-      <Button colorScheme="danger" variant="link" isDisabled>
+      <Button colorScheme="danger" variant="link" disabled>
         Link
       </Button>
 
-      <Button variant="unstyled" isDisabled>
+      <Button variant="unstyled" disabled>
         Unstyle
       </Button>
     </Wrap>
@@ -232,30 +232,30 @@ export const closeButton: Story = () => {
 export const withLoading: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" isLoading>
+      <Button colorScheme="primary" loading>
         Button
       </Button>
 
-      <Button colorScheme="secondary" isLoading loadingIcon="dots">
+      <Button colorScheme="secondary" loading loadingIcon="dots">
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="outline" isLoading>
+      <Button colorScheme="warning" variant="outline" loading>
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="ghost" isLoading>
+      <Button colorScheme="danger" variant="ghost" loading>
         Button
       </Button>
 
-      <Button colorScheme="primary" isLoading loadingText="Loading...">
+      <Button colorScheme="primary" loading loadingText="Loading...">
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        isLoading
+        loading
         loadingIcon="grid"
         loadingPlacement="end"
         loadingText="Loading..."
@@ -269,7 +269,7 @@ export const withLoading: Story = () => {
 export const buttonGroup: Story = () => {
   return (
     <>
-      <ButtonGroup variant="outline" isAttached>
+      <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
         <IconButton aria-label="Add" icon={<PlusIcon />} />
       </ButtonGroup>
@@ -280,7 +280,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" isAttached isDisabled>
+      <ButtonGroup variant="outline" attached disabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -292,7 +292,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" direction="column" isAttached>
+      <ButtonGroup variant="outline" attached direction="column">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

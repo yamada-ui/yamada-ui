@@ -46,7 +46,12 @@ tab: Props
   defaultValue={"false"}
 />
 
-<PropsCard id="radio-iconprops" name="iconProps" type='HTMLUIProps<"span">' />
+<PropsCard
+  id="radio-iconprops"
+  name="iconProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for icon element."}
+/>
 
 <PropsCard
   id="radio-id"
@@ -59,6 +64,7 @@ tab: Props
   id="radio-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
+  description={"Props for input element."}
 />
 
 <PropsCard
@@ -102,7 +108,25 @@ tab: Props
   defaultValue={"false"}
 />
 
-<PropsCard id="radio-labelprops" name="labelProps" type='HTMLUIProps<"span">' />
+<PropsCard
+  id="radio-label"
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The label of the radio."}
+/>
+
+<PropsCard
+  id="radio-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for label element."}
+/>
 
 <PropsCard
   id="radio-name"
@@ -138,102 +162,6 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Radio."}
-/>
-
-### UseRadioProps
-
-<PropsCard
-  id="useradio-checked"
-  name="checked"
-  type="boolean"
-  description={"If `true`, the radio will be checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-defaultchecked"
-  name="defaultChecked"
-  type="boolean"
-  description={"If `true`, the radio will be initially checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the radio will be initially checked."}
-  deprecated={"Use `defaultChecked` instead."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-id"
-  name="id"
-  type="string"
-  description={"id assigned to input."}
-/>
-
-<PropsCard
-  id="useradio-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the radio will be checked."}
-  deprecated={"Use `checked` instead."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="useradio-name"
-  name="name"
-  type="string"
-  description={"The name of the input field in a radio."}
-/>
-
-<PropsCard
-  id="useradio-onchange"
-  name="onChange"
-  type="ChangeEventHandler<HTMLInputElement>"
-  description={"The callback invoked when the checked state changes."}
-/>
-
-<PropsCard
-  id="useradio-value"
-  name="value"
-  type="Y"
-  description={"The value to be used in the radio button."}
 />
 
 ### RadioGroupProps
@@ -365,6 +293,102 @@ tab: Props
   name="wrap"
   type="UIValue<FlexWrap>"
   description={"The CSS `flex-wrap` property."}
+/>
+
+### UseRadioProps
+
+<PropsCard
+  id="useradio-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the radio will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the radio will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-defaultischecked"
+  name="defaultIsChecked"
+  type="boolean"
+  description={"If `true`, the radio will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-id"
+  name="id"
+  type="string"
+  description={"id assigned to input."}
+/>
+
+<PropsCard
+  id="useradio-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the radio will be checked."}
+  deprecated={"Use `checked` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useradio-name"
+  name="name"
+  type="string"
+  description={"The name of the input field in a radio."}
+/>
+
+<PropsCard
+  id="useradio-onchange"
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description={"The callback invoked when the checked state changes."}
+/>
+
+<PropsCard
+  id="useradio-value"
+  name="value"
+  type="Y"
+  description={"The value to be used in the radio button."}
 />
 
 ### UseRadioGroupProps

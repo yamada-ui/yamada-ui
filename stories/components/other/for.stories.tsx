@@ -29,6 +29,7 @@ export const basic: Story = () => {
     ],
     [],
   )
+
   return (
     <VStack>
       <For each={items}>
@@ -52,18 +53,16 @@ export const basic: Story = () => {
 
 export const withFallBack: Story = () => {
   return (
-    <VStack>
-      <For
-        each={[]}
-        fallback={
-          <EmptyState
-            description="There are no items to show"
-            indicator={<BoxIcon />}
-          />
-        }
-      >
-        {(item, index) => <Text key={index}>{item}</Text>}
-      </For>
-    </VStack>
+    <For
+      each={[]}
+      fallback={
+        <EmptyState
+          description="There are no items to show"
+          indicator={<BoxIcon />}
+        />
+      }
+    >
+      {(item, index) => <Text key={index}>{item}</Text>}
+    </For>
   )
 }

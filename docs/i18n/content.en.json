@@ -1111,10 +1111,88 @@
   },
   {
     "type": "page",
-    "description": "We are currently considering the development of `DataList`.",
+    "description": "`DataList` is used to display a list of data items.",
     "hierarchy": { "lv1": "DataList" },
     "slug": "/components/data-display/data-list",
     "title": "DataList"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "DataList", "lv2": "Import" },
+    "slug": "/components/data-display/data-list#import",
+    "title": "Import"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "DataList", "lv2": "Usage" },
+    "slug": "/components/data-display/data-list#usage",
+    "title": "Usage"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Change Variants"
+    },
+    "slug": "/components/data-display/data-list#change-variants",
+    "title": "Change Variants"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "DataList", "lv2": "Usage", "lv3": "Change Size" },
+    "slug": "/components/data-display/data-list#change-size",
+    "title": "Change Size"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Change Orientation"
+    },
+    "slug": "/components/data-display/data-list#change-orientation",
+    "title": "Change Orientation"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Display Multiple Terms"
+    },
+    "slug": "/components/data-display/data-list#display-multiple-terms",
+    "title": "Display Multiple Terms"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Display Multiple Descriptions"
+    },
+    "slug": "/components/data-display/data-list#display-multiple-descriptions",
+    "title": "Display Multiple Descriptions"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Customize Terms"
+    },
+    "slug": "/components/data-display/data-list#customize-terms",
+    "title": "Customize Terms"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "Usage",
+      "lv3": "Customize Descriptions"
+    },
+    "slug": "/components/data-display/data-list#customize-descriptions",
+    "title": "Customize Descriptions"
   },
   {
     "type": "page",
@@ -9879,20 +9957,6 @@
     "hierarchy": { "lv1": "For" },
     "slug": "/components/other/for",
     "title": "For"
-  },
-  {
-    "type": "page",
-    "description": "We are currently considering the development of `FormatByte`.",
-    "hierarchy": { "lv1": "FormatByte" },
-    "slug": "/components/other/format-byte",
-    "title": "FormatByte"
-  },
-  {
-    "type": "page",
-    "description": "We are currently considering the development of `FormatNumber`.",
-    "hierarchy": { "lv1": "FormatNumber" },
-    "slug": "/components/other/format-number",
-    "title": "FormatNumber"
   },
   {
     "type": "page",

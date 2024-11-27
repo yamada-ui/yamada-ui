@@ -29,12 +29,18 @@ interface StackOptions {
   direction?: CSSUIObject["flexDirection"]
   /**
    * If `true`, each stack item will show a divider.
+   *
+   * @deprecated Use `separator` instead.
    */
   divider?: ReactElement
   /**
    * The CSS `justify-content` property.
    */
   justify?: CSSUIObject["justifyContent"]
+  /**
+   * If `true`, each stack item will show a separator.
+   */
+  separator?: ReactElement
   /**
    * The CSS `flex-wrap` property.
    */
@@ -60,15 +66,18 @@ export const Stack = forwardRef<StackProps, "div">(
       divider,
       gap = "fallback(md, 1rem)",
       justify: justifyContent,
+      separator,
       wrap: flexWrap,
       ...rest
     },
     ref,
   ) => {
+    separator ??= divider
+
     const isColumn = (value: any) =>
       value === "column" || value === "column-reverse"
 
-    const dividerCSS = useMemo(
+    const separatorCSS = useMemo(
       () => ({
         borderBottomWidth: replaceObject(flexDirection, (value) =>
           isColumn(value) ? "1px" : 0,
@@ -88,17 +97,17 @@ export const Stack = forwardRef<StackProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const cloneChildren = divider
+    const cloneChildren = separator
       ? validChildren.map((child, index) => {
           const key = typeof child.key !== "undefined" ? child.key : index
 
-          const cloneDivider = cloneElement(divider as ReactElement, {
-            __css: dividerCSS,
+          const cloneSeparator = cloneElement(separator, {
+            __css: separatorCSS,
           })
 
           return (
             <Fragment key={key}>
-              {!!index ? cloneDivider : null}
+              {!!index ? cloneSeparator : null}
               {child}
             </Fragment>
           )

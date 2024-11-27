@@ -72,14 +72,14 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
     if (isAttached) {
       Object.assign(css, {
         "> *:first-of-type:not(:last-of-type)": isColumn
-          ? { borderBottomRadius: 0, marginBlockEnd: "-1px" }
-          : { borderRightRadius: 0, marginInlineEnd: "-1px" },
+          ? { borderBottomRadius: 0 }
+          : { borderRightRadius: 0, borderRightWidth: "0px" },
         "> *:not(:first-of-type):last-of-type": isColumn
-          ? { borderTopRadius: 0, marginBlockStart: "-1px" }
+          ? { borderTopRadius: 0, borderTopWidth: "0px" }
           : { borderLeftRadius: 0 },
         "> *:not(:first-of-type):not(:last-of-type)": isColumn
-          ? { borderRadius: 0, marginBlockStart: "-1px" }
-          : { borderRadius: 0, marginInlineEnd: "-1px" },
+          ? { borderRadius: 0, borderTopWidth: "0px" }
+          : { borderRadius: 0, borderRightWidth: "0px" },
       })
     } else {
       Object.assign(css, {

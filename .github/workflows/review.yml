@@ -7,7 +7,7 @@ on:
     types: [created, edited]
 
 jobs:
-  pr_agent_job:
+  agent:
     if: ${{ github.event.sender.type != 'Bot' }}
     runs-on: ubuntu-latest
     permissions:
@@ -21,3 +21,6 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_action_config.auto_review: "true"
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_improve: "true"

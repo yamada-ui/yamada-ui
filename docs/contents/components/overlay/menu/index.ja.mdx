@@ -36,7 +36,7 @@ import {
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -56,7 +56,7 @@ import {
 <Menu>
   {({ isOpen }) => (
     <>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
         {isOpen ? "Close" : "Open"} Menu
       </MenuButton>
 
@@ -99,13 +99,13 @@ import {
   <MenuButton as={IconButton} icon={<MenuIcon />} variant="outline" />
 
   <MenuList>
-    <MenuItem icon={<Plus fontSize="lg" />} command="⌘T">
+    <MenuItem icon={<PlusIcon fontSize="lg" />} command="⌘T">
       New Tab
     </MenuItem>
-    <MenuItem icon={<ExternalLink fontSize="lg" />} command="⌘N">
+    <MenuItem icon={<ExternalLinkIcon fontSize="lg" />} command="⌘N">
       New Window
     </MenuItem>
-    <MenuItem icon={<FilePenLine fontSize="lg" />} command="⌘O">
+    <MenuItem icon={<FilePenLineIcon fontSize="lg" />} command="⌘O">
       Open File
     </MenuItem>
   </MenuList>
@@ -121,7 +121,7 @@ const ref = useRef<HTMLDivElement>(null)
 
 return (
   <Menu initialFocusRef={ref}>
-    <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+    <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>
 
@@ -140,7 +140,7 @@ return (
 
 ```tsx
 <Menu placement="top">
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -158,7 +158,7 @@ return (
 
 ```tsx
 <Menu animation="top">
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -179,7 +179,7 @@ return (
 ```tsx
 <Wrap gap="md">
   <Menu gutter={32}>
-    <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+    <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>
 
@@ -191,7 +191,7 @@ return (
   </Menu>
 
   <Menu offset={[16, 16]}>
-    <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+    <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>
 
@@ -210,7 +210,7 @@ return (
 
 ```tsx
 <Menu duration={0.4}>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -228,7 +228,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -250,7 +250,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -276,7 +276,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -303,7 +303,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -341,7 +341,7 @@ return (
 
 ```tsx
 <Menu closeOnSelect={false}>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -359,7 +359,7 @@ return (
 
 ```tsx
 <Menu closeOnBlur={false}>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -377,7 +377,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -395,7 +395,7 @@ return (
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -417,7 +417,7 @@ return (
 
 ```tsx
 <Menu isLazy>
-  <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+  <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
 
@@ -436,7 +436,7 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
   <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-    <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+    <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>
 

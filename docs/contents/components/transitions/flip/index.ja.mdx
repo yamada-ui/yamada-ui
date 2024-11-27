@@ -20,7 +20,12 @@ import { Flip } from "@yamada-ui/react"
 切り替える要素を`from`と`to`に設定します。
 
 ```tsx functional=true
-return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+return (
+  <Flip
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
+  />
+)
 ```
 
 ### 方向を変更する
@@ -31,8 +36,8 @@ return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
 return (
   <Flip
     orientation="vertical"
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -45,8 +50,8 @@ return (
 return (
   <Flip
     duration={1.4}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -59,8 +64,8 @@ return (
 return (
   <Flip
     delay={1}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -73,8 +78,8 @@ return (
 return (
   <Flip
     isDisabled
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -87,8 +92,8 @@ return (
 return (
   <Flip
     isReadOnly
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -102,8 +107,8 @@ return (
   <Flip
     value={value}
     onChange={onChange}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -118,8 +123,8 @@ return (
       damping: 10,
       stiffness: 120,
     }}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```

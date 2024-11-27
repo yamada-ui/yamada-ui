@@ -280,16 +280,20 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
+  <Button colorScheme="primary" variant="solid" leftIcon={<PlusIcon />}>
     Button
   </Button>
-  <Button colorScheme="secondary" variant="outline" rightIcon={<ArrowRight />}>
+  <Button
+    colorScheme="secondary"
+    variant="outline"
+    rightIcon={<ArrowRightIcon />}
+  >
     Button
   </Button>
-  <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
+  <Button colorScheme="warning" variant="ghost" leftIcon={<MailIcon />}>
     Button
   </Button>
-  <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
+  <Button colorScheme="danger" variant="link" leftIcon={<CheckIcon />}>
     Button
   </Button>
 </Wrap>
@@ -341,7 +345,7 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 <VStack>
   <ButtonGroup isAttached variant="outline">
     <Button>Button</Button>
-    <IconButton icon={<Plus />} />
+    <IconButton icon={<PlusIcon />} />
   </ButtonGroup>
 
   <Wrap gap="md">

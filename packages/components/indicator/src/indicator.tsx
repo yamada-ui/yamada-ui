@@ -20,6 +20,12 @@ import { useMemo } from "react"
 interface IndicatorOptions {
   children: ReactNode
   /**
+   * If `true`, the indicator will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, set the indicator as an inline element.
    *
    * @default false
@@ -29,6 +35,8 @@ interface IndicatorOptions {
    * If `true`, the indicator will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
@@ -168,6 +176,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   let {
     className,
     children,
+    disabled,
     inline = false,
     isDisabled,
     label,
@@ -196,16 +205,17 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
   })
 
-  const isNumeric = typeof label === "number"
+  disabled ??= isDisabled
+  const numeric = typeof label === "number"
 
-  if (isNumeric && !showZero && (label as number) <= 0) isDisabled ??= true
+  if (numeric && !showZero && (label as number) <= 0) disabled ??= true
 
   const computedInline = useValue(inline)
   const computedPlacement = useValue(placement)
   const computedOffset = useValue(offset)
 
   const renderLabel = useMemo(() => {
-    if (isNumeric) {
+    if (numeric) {
       if ((label as number) > overflowCount) {
         return (
           <>
@@ -219,12 +229,12 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     } else {
       return label
     }
-  }, [isNumeric, label, overflowCount])
+  }, [numeric, label, overflowCount])
 
   const css: CSSUIObject = {
     position: "absolute",
     ...getPlacementStyle(computedPlacement, computedOffset),
-    ...(isNumeric ? { fontWeight: "medium" } : {}),
+    ...(numeric ? { fontWeight: "medium" } : {}),
     ...styles,
   }
 
@@ -238,7 +248,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
       }}
       {...containerProps}
     >
-      {!isDisabled ? (
+      {!disabled ? (
         <ui.div
           ref={ref}
           className={cx("ui-indicator__icon", className)}

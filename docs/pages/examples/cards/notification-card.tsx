@@ -1,4 +1,4 @@
-import { Bell, EyeOff, User } from "@yamada-ui/lucide"
+import { BellIcon, EyeOffIcon, UserIcon } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -33,7 +33,7 @@ export const NotificationsCard = memo(() => {
             w="full"
             _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
-            <Bell fontSize="2xl" />
+            <BellIcon fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Everything</Text>
@@ -48,7 +48,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             w="full"
           >
-            <User fontSize="2xl" />
+            <UserIcon fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Available</Text>
@@ -63,7 +63,7 @@ export const NotificationsCard = memo(() => {
             w="full"
             _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
           >
-            <EyeOff fontSize="2xl" />
+            <EyeOffIcon fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Ignoring</Text>

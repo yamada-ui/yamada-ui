@@ -9,7 +9,7 @@ import type {
 } from "@yamada-ui/react"
 import type { FC, MutableRefObject, ReactNode } from "react"
 import type { Priority, Status, View } from "./data"
-import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
+import { CirclePlusIcon, SlidersHorizontalIcon, XIcon } from "@yamada-ui/lucide"
 import {
   assignRef,
   Button,
@@ -148,7 +148,7 @@ interface FilterControlButtonProps<T extends Priority | Status>
 }
 
 const FilterControlButton = <T extends Priority | Status>({
-  icon: Icon = CirclePlus,
+  icon: Icon = CirclePlusIcon,
   items,
   label,
   passHasRef,
@@ -305,7 +305,7 @@ const ResetButton: FC<ResetButtonProps> = ({
   })
 
   return isShow ? (
-    <Button variant="ghost" rightIcon={<X />} onClick={onReset} {...rest}>
+    <Button variant="ghost" rightIcon={<XIcon />} onClick={onReset} {...rest}>
       Reset
     </Button>
   ) : null
@@ -329,7 +329,7 @@ const ViewControlButton: FC<ViewControlButtonProps> = ({
         as={Button}
         variant="outline"
         borderColor={["border", "border"]}
-        leftIcon={<SlidersHorizontal />}
+        leftIcon={<SlidersHorizontalIcon />}
         {...buttonProps}
       >
         View

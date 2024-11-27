@@ -81,7 +81,7 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <Tab>Home</Tab>
-        <Tab isDisabled>About</Tab>
+        <Tab disabled>About</Tab>
         <Tab>Contact</Tab>
 
         <TabPanel>

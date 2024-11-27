@@ -6,13 +6,13 @@ import type {
 } from "@yamada-ui/react"
 import type { ElementType, FC, ReactElement } from "react"
 import {
-  CirclePlay,
-  Globe,
-  ListMusic,
-  MicVocal,
-  Music2,
-  Radio,
-  User,
+  CirclePlayIcon,
+  GlobeIcon,
+  ListMusicIcon,
+  MicVocalIcon,
+  Music2Icon,
+  RadioIcon,
+  UserIcon,
 } from "@yamada-ui/lucide"
 import {
   Box,
@@ -37,16 +37,16 @@ interface MenuItem extends Omit<ButtonProps, "children"> {
 
 const DISCOVER_MENU_ITEMS: MenuItem[] = [
   {
-    icon: CirclePlay,
+    icon: CirclePlayIcon,
     isSelected: true,
     label: "Listen Now",
   },
   {
-    icon: Globe,
+    icon: GlobeIcon,
     label: "Browse",
   },
   {
-    icon: Radio,
+    icon: RadioIcon,
     label: "Radio",
   },
 ]
@@ -56,19 +56,19 @@ const LIBRARY_MENU_ITEMS: MenuItem[] = [
     label: "Playlists",
   },
   {
-    icon: Music2,
+    icon: Music2Icon,
     label: "Songs",
   },
   {
-    icon: User,
+    icon: UserIcon,
     label: "Made for you",
   },
   {
-    icon: MicVocal,
+    icon: MicVocalIcon,
     label: "Artists",
   },
   {
-    icon: CirclePlay,
+    icon: CirclePlayIcon,
     label: "Albums",
   },
 ]
@@ -147,7 +147,10 @@ const SidebarGroup: FC<SidebarGroupProps> = memo(
         <ButtonGroup as="ul" direction="column" gap="xs" {...buttonGroupProps}>
           {items
             ? items.map(
-                ({ icon = ListMusic, isSelected, label, ...rest }, index) => (
+                (
+                  { icon = ListMusicIcon, isSelected, label, ...rest },
+                  index,
+                ) => (
                   <Box key={index} as="li">
                     <SidebarButton
                       colorScheme={isSelected ? "primary" : "gray"}

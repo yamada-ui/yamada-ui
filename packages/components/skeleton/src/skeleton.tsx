@@ -13,7 +13,7 @@ import {
 import { useAnimation } from "@yamada-ui/use-animation"
 import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
+import { cx, getValidChildren, useMounted } from "@yamada-ui/utils"
 
 interface SkeletonOptions {
   /**
@@ -73,7 +73,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     startColor: _startColor,
     ...rest
   } = omitThemeProps(mergedProps)
-  const [isMounted] = useIsMounted()
+  const [mounted] = useMounted()
   const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
   const startColor = useValue(_startColor)
@@ -129,7 +129,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   }
 
   if (isLoaded) {
-    const animation = !isMounted() || prevIsLoaded ? "none" : fadeIn
+    const animation = !mounted() || prevIsLoaded ? "none" : fadeIn
 
     return (
       <ui.div

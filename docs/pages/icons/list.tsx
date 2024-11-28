@@ -96,7 +96,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
               templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
             >
               {data.map(({ name, Icon }) => (
-                <Tooltip key={name} label={name}>
+                <Tooltip key={name} label={`${name}Icon`}>
                   <AspectRatio ratio={1 / 1}>
                     <Center
                       as="button"

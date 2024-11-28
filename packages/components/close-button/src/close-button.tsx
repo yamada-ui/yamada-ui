@@ -11,6 +11,12 @@ import { cx } from "@yamada-ui/utils"
 
 interface CloseButtonOptions {
   /**
+   * If `true`, the button is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
@@ -20,6 +26,8 @@ interface CloseButtonOptions {
    * If `true`, the button is disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
@@ -44,18 +52,22 @@ export interface CloseButtonProps
 export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
-    const {
+    let {
       className,
       children,
+      disabled,
       disableRipple,
       isDisabled,
       isRounded,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    disabled ??= isDisabled
+
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || isDisabled,
+      isDisabled: disableRipple || disabled,
     })
 
     const css: CSSUIObject = {
@@ -77,7 +89,7 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
         type="button"
         className={cx("ui-close-button", className)}
         aria-label="Close"
-        disabled={isDisabled}
+        disabled={disabled}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}

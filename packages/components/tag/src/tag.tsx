@@ -29,6 +29,14 @@ interface TagOptions {
    *
    * @deprecated Use `disabled` instead.
    */
+  disabled?: boolean
+  /**
+   * If `true`, the tag is disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * Icon to be displayed to the left of the tag.

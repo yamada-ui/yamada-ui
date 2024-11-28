@@ -4,6 +4,7 @@ export const DataList: ComponentMultiStyle<"DataList"> = {
   baseStyle: {
     container: {
       display: "grid",
+      w: "fit-content",
       _horizontal: {
         gridTemplateColumns: "repeat($col, auto)",
       },

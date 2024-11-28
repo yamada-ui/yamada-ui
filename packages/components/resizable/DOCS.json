@@ -17,9 +17,15 @@
       "required": false
     },
     "direction": {
-      "type": "ResizableDirection",
+      "type": "ResizableOrientation",
       "defaultValue": "horizontal",
       "description": "The direction of the resizable.",
+      "required": false
+    },
+    "orientation": {
+      "type": "ResizableOrientation",
+      "defaultValue": "horizontal",
+      "description": "The orientation of the resizable.",
       "required": false
     },
     "groupProps": {

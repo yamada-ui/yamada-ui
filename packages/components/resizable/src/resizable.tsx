@@ -30,9 +30,8 @@ export interface ResizableProps
     ResizableOptions {}
 
 export const Resizable = forwardRef<ResizableProps, "div">(
-  ({ direction, orientation = "horizontal", ...props }, ref) => {
+  ({ orientation = "horizontal", ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Resizable", {
-      direction,
       orientation,
       ...props,
     })

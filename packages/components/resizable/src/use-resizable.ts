@@ -34,7 +34,7 @@ import {
   getResizeHandleElement,
 } from "react-resizable-panels"
 
-type ResizableDirection = "horizontal" | "vertical"
+type ResizableOrientation = "horizontal" | "vertical"
 
 export type As = keyof HTMLElementTagNameMap
 
@@ -57,10 +57,10 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
   controlRef: RefObject<ResizableGroupControl>
-  orientation: ResizableDirection
+  orientation: ResizableOrientation
   disabled: boolean
   styles: { [key: string]: CSSUIObject | undefined }
-  direction?: ResizableDirection
+  direction?: ResizableOrientation
 }
 
 export const [ResizableProvider, useResizableContext] =
@@ -89,7 +89,7 @@ export interface UseResizableProps {
    *
    * @deprecated Use `orientation` instead.
    */
-  direction?: ResizableDirection
+  direction?: ResizableOrientation
   /**
    * If `true`, the resizable trigger will be disabled.
    */
@@ -111,7 +111,7 @@ export interface UseResizableProps {
    *
    * @default "horizontal"
    */
-  orientation?: ResizableDirection
+  orientation?: ResizableOrientation
   /**
    * A callback that gets and sets a value in custom storage.
    */

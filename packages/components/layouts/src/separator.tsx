@@ -1,4 +1,10 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeColorScheme,
+  ThemeSize,
+  ThemeVariant,
+} from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -8,7 +14,7 @@ import {
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-interface DividerOptions {
+interface SeparatorOptions {
   /**
    * The orientation of the divider.
    *
@@ -17,38 +23,53 @@ interface DividerOptions {
   orientation?: "horizontal" | "vertical"
 }
 
-export interface DividerProps
+interface MergeThemeProps {
+  /**
+   * The color scheme of the component.
+   */
+  colorScheme?: ThemeColorScheme
+  /**
+   * The size of the component.
+   */
+  size?: ThemeSize<"Divider"> | ThemeSize<"Separator">
+  /**
+   * The variant of the component.
+   */
+  variant?: ThemeVariant<"Divider"> | ThemeVariant<"Separator">
+}
+
+export interface SeparatorProps
   extends HTMLUIProps<"hr">,
-    ThemeProps<"Divider">,
-    DividerOptions {}
+    MergeThemeProps,
+    SeparatorOptions {}
 
 /**
- * `Divider` is a component that represents a division between elements.
+ * `Separator` is a component that represents a division between elements.
  *
- * @see Docs https://yamada-ui.com/components/layouts/divider
- *
- * @deprecated Use `Separator` instead.
+ * @see Docs https://yamada-ui.com/components/layouts/separator
  */
-export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
-  const [
-    {
-      borderBottomWidth,
-      borderColor,
-      borderLeftWidth,
-      borderRightWidth,
-      borderStyle,
-      borderTopWidth,
-      borderWidth,
-      ...styles
-    },
-    mergedProps,
-  ] = useComponentStyle("Divider", props)
+export const Separator = forwardRef<SeparatorProps, "hr">((props, ref) => {
+  const [dividerStyles, dividerProps] = useComponentStyle("Divider", props)
+  const [separatorStyles, separatorProps] = useComponentStyle(
+    "Separator",
+    props,
+  )
   const {
     className,
     orientation = "horizontal",
     __css,
     ...rest
-  } = omitThemeProps(mergedProps)
+  } = omitThemeProps({ ...dividerProps, ...separatorProps })
+  const {
+    borderBottomWidth,
+    borderColor,
+    borderLeftWidth,
+    borderRightWidth,
+    borderStyle,
+    borderTopWidth,
+    borderWidth,
+    ...styles
+  } = { ...dividerStyles, ...separatorStyles }
 
   const orientationStyles = useMemo(
     () => ({
@@ -94,12 +115,12 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
   return (
     <ui.hr
       ref={ref}
-      className={cx("ui-divider", className)}
+      className={cx("ui-separator", className)}
       __css={css}
       {...rest}
     />
   )
 })
 
-Divider.displayName = "Divider"
-Divider.__ui__ = "Divider"
+Separator.displayName = "Separator"
+Separator.__ui__ = "Separator"

@@ -11,17 +11,18 @@ export type ColorMode = "dark" | "light"
 export type ColorModeWithSystem = "system" | ColorMode
 export type Breakpoint = "base" | Theme["breakpoints"]
 
-type ThemeVariant<Y extends keyof Theme["components"] | unknown = unknown> =
-  Y extends keyof Theme["components"]
-    ? UIValue<Theme["components"][Y]["variants"]>
-    : UIValue<string>
+export type ThemeVariant<
+  Y extends keyof Theme["components"] | unknown = unknown,
+> = Y extends keyof Theme["components"]
+  ? UIValue<Theme["components"][Y]["variants"]>
+  : UIValue<string>
 
-type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
+export type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
   Y extends keyof Theme["components"]
     ? UIValue<Theme["components"][Y]["sizes"]>
     : UIValue<string>
 
-type ThemeColorScheme =
+export type ThemeColorScheme =
   | [Theme["colorSchemes"], Theme["colorSchemes"]]
   | Theme["colorSchemes"]
 

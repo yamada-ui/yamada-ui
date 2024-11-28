@@ -42,10 +42,6 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultIsChecked: Story = () => {
-  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
-}
-
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
@@ -56,6 +52,10 @@ export const withColorScheme: Story = () => {
       ))}
     </Wrap>
   )
+}
+
+export const withDefaultIsChecked: Story = () => {
+  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
 }
 
 export const isDisabled: Story = () => {

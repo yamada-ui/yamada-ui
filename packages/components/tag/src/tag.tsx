@@ -16,20 +16,14 @@ interface TagOptions {
    * If `true`, the tag is disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   disabled?: boolean
   /**
    * Icon to be displayed to the end of the tag.
    */
   endIcon?: ReactElement
-  /**
-   * If `true`, the tag is disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  disabled?: boolean
   /**
    * If `true`, the tag is disabled.
    *

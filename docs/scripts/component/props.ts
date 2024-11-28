@@ -24,8 +24,10 @@ interface Props {
   see?: string
 }
 
-const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, "packages", "components")
-const DIST_PATH = path.join("contents", "components")
+const SOURCE_PATH = path
+  .join(CONSTANT.PATH.ROOT, "packages", "components")
+  .replaceAll(/\\/g, "/")
+const DIST_PATH = path.join("contents", "components").replaceAll(/\\/g, "/")
 const LOCALE_TAB_MAP = {
   en: "Props",
   ja: "Props",

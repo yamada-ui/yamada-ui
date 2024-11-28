@@ -11,12 +11,17 @@ function factory() {
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [MotionAs, StyledOptions]) => {
-      return _motion(styled(el, options) as ForwardRefExoticComponent<any>)
+      const component = styled(el, options) as ForwardRefExoticComponent<any>
+
+      return _motion.create(component)
     },
 
     get: (_target, el: MotionAs) => {
-      if (!cache.has(el))
-        cache.set(el, _motion(styled(el) as ForwardRefExoticComponent<any>))
+      if (!cache.has(el)) {
+        const component = styled(el) as ForwardRefExoticComponent<any>
+
+        cache.set(el, _motion.create(component))
+      }
 
       return cache.get(el)
     },

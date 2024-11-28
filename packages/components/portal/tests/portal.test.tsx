@@ -80,13 +80,13 @@ describe("<Portal />", () => {
     expect(screen.getByText("order3")).toBeInTheDocument()
   })
 
-  test("Portal with isDisabled renders correctly", () => {
+  test("Portal with disabled renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
       return (
         <>
-          <Portal containerRef={ref} isDisabled>
+          <Portal containerRef={ref} disabled>
             order2
           </Portal>
           <div ref={ref}>order1</div>

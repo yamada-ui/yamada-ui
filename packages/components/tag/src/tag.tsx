@@ -21,6 +21,14 @@ interface TagOptions {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the tag is disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * Icon to be displayed to the left of the tag.
@@ -60,9 +68,10 @@ export interface TagProps
  */
 export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Tag", props)
-  const {
+  let {
     className,
     children,
+    disabled,
     endIcon,
     isDisabled,
     leftIcon,
@@ -72,6 +81,8 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     onClose,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  disabled ??= isDisabled
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -86,8 +97,8 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     <ui.span
       ref={ref}
       className={cx("ui-tag", className)}
-      aria-disabled={ariaAttr(isDisabled)}
-      data-disabled={dataAttr(isDisabled)}
+      aria-disabled={ariaAttr(disabled)}
+      data-disabled={dataAttr(disabled)}
       __css={css}
       {...rest}
     >
@@ -101,7 +112,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
 
       {onClose ? (
         <TagCloseButton
-          isDisabled={isDisabled}
+          disabled={disabled}
           onClick={onClose}
           {...closeButtonProps}
         >
@@ -130,7 +141,7 @@ TagCloseIcon.displayName = "TagCloseIcon"
 TagCloseIcon.__ui__ = "TagCloseIcon"
 
 interface TagCloseButtonProps extends HTMLUIProps<"span"> {
-  isDisabled?: boolean
+  disabled?: boolean
 }
 
 const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {

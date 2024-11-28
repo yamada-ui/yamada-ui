@@ -13,15 +13,15 @@ import { useRef } from "react"
 
 interface TagOptions {
   /**
-   * Icon to be displayed to the end of the tag.
-   */
-  endIcon?: ReactElement
-  /**
    * If `true`, the tag is disabled.
    *
    * @default false
    */
   disabled?: boolean
+  /**
+   * Icon to be displayed to the end of the tag.
+   */
+  endIcon?: ReactElement
   /**
    * If `true`, the tag is disabled.
    *

@@ -1205,10 +1205,92 @@
   },
   {
     "type": "page",
-    "description": "`DataList`は、現在作成を検討しています。",
+    "description": "`DataList`は、データ項目のリストを表示するために使用されます。",
     "hierarchy": { "lv1": "DataList" },
     "slug": "/components/data-display/data-list",
     "title": "DataList"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "DataList", "lv2": "インポート" },
+    "slug": "/components/data-display/data-list#インポート",
+    "title": "インポート"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": { "lv1": "DataList", "lv2": "使い方" },
+    "slug": "/components/data-display/data-list#使い方",
+    "title": "使い方"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "バリアントを変更する"
+    },
+    "slug": "/components/data-display/data-list#バリアントを変更する",
+    "title": "バリアントを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    },
+    "slug": "/components/data-display/data-list#サイズを変更する",
+    "title": "サイズを変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "方向を変更する"
+    },
+    "slug": "/components/data-display/data-list#方向を変更する",
+    "title": "方向を変更する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "複数の用語を表示する"
+    },
+    "slug": "/components/data-display/data-list#複数の用語を表示する",
+    "title": "複数の用語を表示する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "複数の説明を表示する"
+    },
+    "slug": "/components/data-display/data-list#複数の説明を表示する",
+    "title": "複数の説明を表示する"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "用語をカスタマイズする"
+    },
+    "slug": "/components/data-display/data-list#用語をカスタマイズする",
+    "title": "用語をカスタマイズする"
+  },
+  {
+    "type": "fragment",
+    "hierarchy": {
+      "lv1": "DataList",
+      "lv2": "使い方",
+      "lv3": "説明をカスタマイズする"
+    },
+    "slug": "/components/data-display/data-list#説明をカスタマイズする",
+    "title": "説明をカスタマイズする"
   },
   {
     "type": "page",

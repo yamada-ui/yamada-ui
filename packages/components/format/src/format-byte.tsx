@@ -35,7 +35,7 @@ export interface FormatByteProps
     FormatByteOptions {}
 
 /**
- * `FormatByte` is component.
+ * `FormatByte` is used to format bytes to a human-readable format.
  *
  * @see Docs https://yamada-ui.com/components/other/format-byte
  */

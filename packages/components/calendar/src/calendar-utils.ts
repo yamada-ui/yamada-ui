@@ -11,12 +11,11 @@ export const getFirstOfWeek = (
 ): Date => {
   const value = new Date(date)
   const day = value.getDay() || 7
-  const isSunday = firstDayOfWeek === "sunday"
+  const sunday = firstDayOfWeek === "sunday"
 
-  const clampToFirstDay = isSunday ? day : day - 1
+  const clampToFirstDay = sunday ? day : day - 1
 
-  if ((isSunday && day !== 0) || day !== 1)
-    value.setHours(-24 * clampToFirstDay)
+  if ((sunday && day !== 0) || day !== 1) value.setHours(-24 * clampToFirstDay)
 
   return value
 }
@@ -27,11 +26,11 @@ export const getLastOfWeek = (
 ): Date => {
   const value = new Date(date)
   const day = value.getDay()
-  const isSunday = firstDayOfWeek === "sunday"
+  const sunday = firstDayOfWeek === "sunday"
 
-  const clampToLastDay = 7 - (isSunday ? day + 1 : day)
+  const clampToLastDay = 7 - (sunday ? day + 1 : day)
 
-  if ((isSunday && day !== 6) || day !== 0)
+  if ((sunday && day !== 6) || day !== 0)
     value.setDate(value.getDate() + clampToLastDay)
 
   return value
@@ -250,9 +249,9 @@ export const onShouldFocus = <T = any>(
   let targetEl: HTMLButtonElement | null | undefined
 
   for (const value of refs.current.keys()) {
-    const isSelected = validateFunc(value)
+    const selected = validateFunc(value)
 
-    if (isSelected) targetValue = value
+    if (selected) targetValue = value
   }
 
   if (typeof targetValue === "number") {
@@ -277,9 +276,9 @@ export const getFocused = <T = any>(
   refs: MutableRefObject<Map<T, RefObject<HTMLButtonElement>>>,
 ): T | undefined => {
   for (const [value, ref] of refs.current.entries()) {
-    const isFocused = ref.current ? isActiveElement(ref.current) : false
+    const focused = ref.current ? isActiveElement(ref.current) : false
 
-    if (isFocused) return value
+    if (focused) return value
   }
 }
 
@@ -311,18 +310,18 @@ export const isDisabledDate = ({
   disableOutsideDays,
   endDate,
   excludeDate,
-  isOutside,
   maxDate,
   maxTrulySelectStartDate,
   maybeEndDate,
   maybeStartDate,
   minDate,
   minTrulySelectStartDate,
+  outside,
   startDate,
   value,
 }: {
   disableOutsideDays: boolean
-  isOutside: boolean
+  outside: boolean
   value: Date
   endDate?: Date
   excludeDate?: (date: Date) => boolean
@@ -343,4 +342,4 @@ export const isDisabledDate = ({
     isAfterDate(value, minTrulySelectStartDate) &&
     !startDate) ||
   !!excludeDate?.(value) ||
-  (!!disableOutsideDays && !!isOutside)
+  (!!disableOutsideDays && !!outside)

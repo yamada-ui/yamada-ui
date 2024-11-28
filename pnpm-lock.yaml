@@ -1556,6 +1556,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/data-list:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/dropzone:
     dependencies:
       '@yamada-ui/core':
@@ -1598,6 +1614,22 @@ importers:
       '@yamada-ui/use-focus':
         specifier: workspace:*
         version: link:../../hooks/use-focus
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
+  packages/components/empty-state:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -1700,6 +1732,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/for:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/form-control:
     dependencies:
       '@yamada-ui/core':
@@ -1711,6 +1759,22 @@ importers:
       '@yamada-ui/visually-hidden':
         specifier: workspace:*
         version: link:../visually-hidden
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
+  packages/components/format:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -2271,6 +2335,31 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/password-input:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/pin-input:
     dependencies:
       '@yamada-ui/core':
@@ -2678,6 +2767,22 @@ importers:
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
+  packages/components/status:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -3609,9 +3714,15 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@yamada-ui/data-list':
+        specifier: workspace:*
+        version: link:../components/data-list
       '@yamada-ui/editable':
         specifier: workspace:*
         version: link:../components/editable
+      '@yamada-ui/empty-state':
+        specifier: workspace:*
+        version: link:../components/empty-state
       '@yamada-ui/file-button':
         specifier: workspace:*
         version: link:../components/file-button
@@ -3621,9 +3732,15 @@ importers:
       '@yamada-ui/focus-lock':
         specifier: workspace:*
         version: link:../components/focus-lock
+      '@yamada-ui/for':
+        specifier: workspace:*
+        version: link:../components/for
       '@yamada-ui/form-control':
         specifier: workspace:*
         version: link:../components/form-control
+      '@yamada-ui/format':
+        specifier: workspace:*
+        version: link:../components/format
       '@yamada-ui/highlight':
         specifier: workspace:*
         version: link:../components/highlight
@@ -3681,6 +3798,9 @@ importers:
       '@yamada-ui/pagination':
         specifier: workspace:*
         version: link:../components/pagination
+      '@yamada-ui/password-input':
+        specifier: workspace:*
+        version: link:../components/password-input
       '@yamada-ui/pin-input':
         specifier: workspace:*
         version: link:../components/pin-input
@@ -3732,6 +3852,9 @@ importers:
       '@yamada-ui/stat':
         specifier: workspace:*
         version: link:../components/stat
+      '@yamada-ui/status':
+        specifier: workspace:*
+        version: link:../components/status
       '@yamada-ui/stepper':
         specifier: workspace:*
         version: link:../components/stepper
@@ -21567,7 +21690,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   /qs@6.13.0:

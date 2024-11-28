@@ -14,11 +14,11 @@ describe("<Button />", () => {
     expect(getByText("start icon")).toBeTruthy()
   })
 
-  test("shows loading text if isLoading, loadingText and loadingIcon", () => {
+  test("shows loading text if loading, loadingText and loadingIcon", () => {
     const { getByTestId, rerender } = render(
       <Button
         data-testid="btn"
-        isLoading
+        loading
         loadingIcon={<>loading start</>}
         loadingText="Submitting"
       >
@@ -40,7 +40,7 @@ describe("<Button />", () => {
 
     rerender(
       <Button
-        isLoading
+        loading
         loadingIcon={<>loading end</>}
         loadingPlacement="end"
         loadingText="Test if loading placement"
@@ -64,12 +64,12 @@ describe("<Button />", () => {
     expect(button).not.toHaveAttribute("data-loading", "")
     expect(button).not.toHaveAttribute("data-active", "")
 
-    // isLoading sets data-loading=""
-    rerender(<Button isLoading>Hello</Button>)
+    // loading sets data-loading=""
+    rerender(<Button loading>Hello</Button>)
     expect(button).toHaveAttribute("data-loading", "")
 
-    // isActive sets data-active=""
-    rerender(<Button isActive>Hello</Button>)
+    // active sets data-active=""
+    rerender(<Button active>Hello</Button>)
     expect(button).toHaveAttribute("data-active", "")
   })
 
@@ -105,7 +105,7 @@ describe("<Button />", () => {
 
   test("should be disabled", () => {
     const { getByRole, getByTestId, rerender } = render(
-      <Button data-testid="btn" isDisabled>
+      <Button data-testid="btn" disabled>
         Invalid Button
       </Button>,
     )
@@ -113,7 +113,7 @@ describe("<Button />", () => {
     expect(button).toBeDisabled()
 
     rerender(
-      <Button as="div" data-testid="btn" isDisabled>
+      <Button as="div" data-testid="btn" disabled>
         Invalid Button
       </Button>,
     )

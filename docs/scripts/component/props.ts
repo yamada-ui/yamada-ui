@@ -58,6 +58,26 @@ const OVERRIDE_PATHS: {
     { children: ["chart-label"], parent: "radial-chart" },
     "donut-chart",
   ],
+  checkbox: [
+    {
+      children: [
+        "checkbox-group",
+        "checkbox-icon",
+        "use-checkbox",
+        "use-checkbox-group",
+      ],
+      parent: "checkbox",
+    },
+    {
+      children: [
+        "checkbox-card-group",
+        "checkbox-card-label",
+        "checkbox-card-description",
+        "checkbox-card-addon",
+      ],
+      parent: "checkbox-card",
+    },
+  ],
   "color-picker": [
     "color-picker",
     "color-selector",
@@ -125,6 +145,21 @@ const OVERRIDE_PATHS: {
     },
   ],
   progress: ["progress", "circle-progress"],
+  radio: [
+    {
+      children: ["radio-group", "use-radio", "use-radio-group"],
+      parent: "radio",
+    },
+    {
+      children: [
+        "radio-card-group",
+        "radio-card-label",
+        "radio-card-description",
+        "radio-card-addon",
+      ],
+      parent: "radio-card",
+    },
+  ],
   select: ["select", "multi-select"],
   slider: ["slider", "range-slider"],
   table: ["table", "paging-table"],

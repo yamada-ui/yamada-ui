@@ -123,26 +123,22 @@ interface PopoverOptions {
    * If `true`, the PopoverContent rendering will be deferred until the popover is open.
    *
    * @default false
-   */
-  lazy?: boolean
-  /**
-   * If `true`, the PopoverContent rendering will be deferred until the popover is open.
-   *
-   * @default false
    * 
    * @deprecated Use `lazy` instead
    */
   isLazy?: boolean
   /**
    * If `true`, the popover will be opened.
-   */
-  open?: boolean
-  /**
-   * If `true`, the popover will be opened.
    * 
    * @deprecated Use `open` instead
    */
   isOpen?: boolean
+  /**
+   * If `true`, the PopoverContent rendering will be deferred until the popover is open.
+   *
+   * @default false
+   */
+  lazy?: boolean
   /**
    * The lazy behavior of popover's content when not visible. Only works when `lazy={true}`
    *
@@ -152,6 +148,10 @@ interface PopoverOptions {
    * @default 'unmount'
    */
   lazyBehavior?: LazyMode
+  /**
+   * If `true`, the popover will be opened.
+   */
+  open?: boolean
   /**
    * The number of delay time to open.
    *
@@ -196,7 +196,7 @@ export interface PopoverProps
 interface PopoverContext
   extends Pick<
     PopoverOptions,
-    "animation" | "closeOnButton" | "duration" | "open" | "isOpen" | "onClose"
+    "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose" | "open"
   > {
   id: string
   bodyRef: RefObject<HTMLElement>
@@ -234,8 +234,8 @@ export const Popover: FC<PopoverProps> = (props) => {
     closeOnEsc = true,
     duration,
     initialFocusRef,
-    lazy,
     isLazy,
+    lazy,
     lazyBehavior = "unmount",
     openDelay = 200,
     relatedRef,

@@ -110,6 +110,7 @@ const OVERRIDE_PATHS: {
     "stack",
     "bleed",
     "float",
+    "separator",
   ],
   link: ["link", { children: ["link-overlay"], parent: "link-box" }],
   modal: [

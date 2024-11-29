@@ -10,11 +10,11 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 import {
   Box,
   Center,
-  Divider,
   forwardRef,
   Heading,
   HStack,
   MultiAutocomplete,
+  Separator,
   Text,
   useDisclosure,
   VStack,
@@ -329,7 +329,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
           )
         })}
 
-        <Divider borderColor={["blackAlpha.200", "whiteAlpha.100"]} />
+        <Separator borderColor={["blackAlpha.200", "whiteAlpha.100"]} />
 
         {INSIGHT_RANGE_PERIOD_SUGGEST.map((value) => {
           return (

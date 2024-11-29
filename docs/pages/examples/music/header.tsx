@@ -17,13 +17,13 @@ import {
   isUndefined,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   transparentizeColor,
   useColorMode,
   useDisclosure,
@@ -249,7 +249,7 @@ const ControlMenu: FC<ControlMenuProps> = memo(
         <MenuList>
           {items.map(({ items, ...rest }, index) => (
             <Fragment key={index}>
-              {index ? <MenuDivider /> : null}
+              {index ? <MenuSeparator /> : null}
 
               <ControlMenuGroup
                 {...(rest as Merge<MenuGroupProps, MenuOptionGroupProps>)}

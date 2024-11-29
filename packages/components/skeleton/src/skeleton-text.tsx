@@ -30,6 +30,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
       gap = "fallback(2, 0.5rem)",
       isLoaded,
       lineClamp: _lineClamp = 3,
+      loaded,
       speed,
       startColor,
       textHeight = "fallback(2, 0.5rem)",
@@ -55,13 +56,13 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
           .map((_, index) => {
             if (isLoaded && index > 0) return null
 
-            const isLast = index + 1 === lineClamp
+            const last = index + 1 === lineClamp
 
             const props: SkeletonProps = !isLoaded
               ? {
                   h: textHeight,
-                  mb: !isLast ? gap : undefined,
-                  w: lineClamp > 1 ? (!isLast ? "100%" : "80%") : "100%",
+                  mb: !last ? gap : undefined,
+                  w: lineClamp > 1 ? (!last ? "100%" : "80%") : "100%",
                 }
               : {}
 
@@ -71,7 +72,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
                 {...{
                   endColor,
                   fadeDuration,
-                  isLoaded,
+                  loaded,
                   speed,
                   startColor,
                   ...props,

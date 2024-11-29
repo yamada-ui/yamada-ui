@@ -5,7 +5,7 @@ import {
   DataListDescription,
   DataListItem,
   DataListTerm,
-  Divider,
+  Separator,
 } from "@yamada-ui/react"
 import { useMemo } from "react"
 
@@ -36,7 +36,7 @@ export const basic: Story = () => {
     <>
       <DataList items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList col={2}>
         <DataListItem>
@@ -96,23 +96,23 @@ export const withSize: Story = () => {
     <>
       <DataList size="sm" items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList size="md" items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList size="lg" items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList size="sm" items={items} orientation="vertical" />
 
-      <Divider />
+      <Separator />
 
       <DataList size="md" items={items} orientation="vertical" />
 
-      <Divider />
+      <Separator />
 
       <DataList size="lg" items={items} orientation="vertical" />
     </>
@@ -137,11 +137,11 @@ export const withVariant: Story = () => {
     <>
       <DataList variant="subtle" items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList variant="bold" items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList variant="grid" items={items} />
     </>
@@ -166,7 +166,7 @@ export const withOrientation: Story = () => {
     <>
       <DataList items={items} orientation="horizontal" />
 
-      <Divider />
+      <Separator />
 
       <DataList items={items} orientation="vertical" />
     </>
@@ -194,7 +194,7 @@ export const useMultipleTerms: Story = () => {
     <>
       <DataList items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList orientation="vertical">
         <DataListItem>
@@ -276,7 +276,7 @@ export const useMultipleDescriptions: Story = () => {
     <>
       <DataList items={items} />
 
-      <Divider />
+      <Separator />
 
       <DataList orientation="vertical">
         <DataListItem>
@@ -349,7 +349,7 @@ export const customTerm: Story = () => {
     <>
       <DataList items={items} termProps={{ textDecoration: "line-through" }} />
 
-      <Divider />
+      <Separator />
 
       <DataList col={2}>
         <DataListItem>
@@ -416,7 +416,7 @@ export const customDescription: Story = () => {
         descriptionProps={{ textDecoration: "line-through" }}
       />
 
-      <Divider />
+      <Separator />
 
       <DataList col={2}>
         <DataListItem>

@@ -363,18 +363,17 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   const [hoveredValue, setHoveredValue] = useState<Date | undefined>(undefined)
 
-  const isMulti = isArray(value)
-  const isRange = enableRange && isMulti
-  const resolvedValue =
-    isMulti || isRange ? (value.filter(Boolean) as Date[]) : []
+  const multi = isArray(value)
+  const range = enableRange && multi
+  const resolvedValue = multi || range ? (value.filter(Boolean) as Date[]) : []
 
-  if (isRange) disableOutsideDays = false
+  if (range) disableOutsideDays = false
 
   const [month, setMonth] = useControllableState({
     defaultValue: () => {
-      if (!isMulti && value) {
+      if (!multi && value) {
         defaultMonth ??= new Date(new Date(value).setDate(1))
-      } else if ((isMulti || isRange) && resolvedValue.length) {
+      } else if ((multi || range) && resolvedValue.length) {
         defaultMonth ??= new Date(new Date(resolvedValue.at(-1)!).setDate(1))
       } else {
         defaultMonth ??= new Date(new Date().setDate(1))
@@ -403,14 +402,14 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   useUpdateEffect(() => {
     if (!defaultMonth) return
 
-    if (isRange && isArray(prevValueRef.current) && isArray(valueProp)) {
+    if (range && isArray(prevValueRef.current) && isArray(valueProp)) {
       const prevValue = prevValueRef.current.filter(Boolean)
       const nextValue = valueProp.filter(Boolean)
 
       if (prevValue.length === 1) {
-        const isReverse = !isSameDate(prevValue[0], nextValue[0])
+        const reverse = !isSameDate(prevValue[0], nextValue[0])
 
-        if (!isReverse) {
+        if (!reverse) {
           if (nextValue[1])
             defaultMonth = new Date(new Date(nextValue[1]).setDate(1))
         } else {
@@ -430,16 +429,16 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   useUpdateEffect(() => {
     if (!value || amountOfMonths > 1) return
 
-    if (isMulti || isRange) return
+    if (multi || range) return
 
     const year = value.getFullYear()
 
     if (type === "year") {
       setYear(year)
       setInternalYear((prev) => {
-        const isContain = rangeYears.includes(year)
+        const contain = rangeYears.includes(year)
 
-        if (isContain) {
+        if (contain) {
           return prev
         } else {
           return year
@@ -451,10 +450,10 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   }, [value, amountOfMonths])
 
   useUpdateEffect(() => {
-    if (!isRange) return
+    if (!range) return
 
     if (value.length !== 1) setHoveredValue(undefined)
-  }, [isRange, value])
+  }, [range, value])
 
   useUpdateEffect(() => {
     if (__selectType === "year") return
@@ -482,7 +481,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
         onShouldFocus(dayRefs, (key) => {
           const [, month, date] = key.split("-").map(Number)
 
-          if (!isMulti) {
+          if (!multi) {
             return value?.getMonth() === month && value?.getDate() === date
           } else {
             return value.some(

@@ -16,6 +16,8 @@ interface TagOptions {
    * If `true`, the tag is disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   disabled?: boolean
   /**

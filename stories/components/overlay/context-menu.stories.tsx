@@ -3,9 +3,9 @@ import {
   Center,
   ContextMenu,
   ContextMenuTrigger,
-  MenuDivider,
   MenuItem,
   MenuList,
+  MenuSeparator,
   Text,
 } from "@yamada-ui/react"
 
@@ -36,7 +36,7 @@ export const basic: Story = () => {
       <MenuList>
         <MenuItem>Undo</MenuItem>
         <MenuItem>Redo</MenuItem>
-        <MenuDivider />
+        <MenuSeparator />
         <MenuItem isDisabled>Cut</MenuItem>
         <MenuItem>Copy</MenuItem>
         <MenuItem>Paste</MenuItem>

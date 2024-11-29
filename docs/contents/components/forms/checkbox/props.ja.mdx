@@ -9,63 +9,6 @@ tab: Props
 
 ## Props
 
-### CheckboxIconProps
-
-<PropsCard
-  id="checkboxicon-as"
-  name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
-  description={"The HTML element to render."}
-/>
-
-<PropsCard
-  id="checkboxicon-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the icon will be checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the icon will be indeterminate."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
 ### CheckboxProps
 
 <PropsCard
@@ -89,7 +32,7 @@ tab: Props
   name="iconProps"
   type='{
   children: ReactElement<any, string | JSXElementConstructor<any>>
-} & Omit<HTMLUIProps<"span">, "children">'
+} & Omit<HTMLUIProps, "children">'
   description={"Props for icon component."}
 />
 
@@ -153,6 +96,19 @@ tab: Props
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-label"
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The label of the checkbox."}
 />
 
 <PropsCard
@@ -227,123 +183,6 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Checkbox."}
-/>
-
-### UseCheckboxProps
-
-<PropsCard
-  id="usecheckbox-defaultischecked"
-  name="defaultIsChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be initially checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-id"
-  name="id"
-  type="string"
-  description={"id assigned to input."}
-/>
-
-<PropsCard
-  id="usecheckbox-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the checkbox will be checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the checkbox will be indeterminate."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-name"
-  name="name"
-  type="string"
-  description={"The HTML `name` attribute used for forms."}
-/>
-
-<PropsCard
-  id="usecheckbox-onblur"
-  name="onBlur"
-  type="FocusEventHandler<HTMLInputElement>"
-  description={"The callback invoked when the checkbox is blurred."}
-/>
-
-<PropsCard
-  id="usecheckbox-onchange"
-  name="onChange"
-  type="ChangeEventHandler<HTMLInputElement>"
-  description={"The callback invoked when the checked state changes."}
-/>
-
-<PropsCard
-  id="usecheckbox-onfocus"
-  name="onFocus"
-  type="FocusEventHandler<HTMLInputElement>"
-  description={"The callback invoked when the checkbox is focused."}
-/>
-
-<PropsCard
-  id="usecheckbox-selectonenter"
-  name="selectOnEnter"
-  type="boolean"
-  description={
-    "If `true`, the checkbox will be selected when the Enter key is pressed."
-  }
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="usecheckbox-tabindex"
-  name="tabIndex"
-  type="number"
-  description={"The tab-index property of the underlying input element."}
-/>
-
-<PropsCard
-  id="usecheckbox-value"
-  name="value"
-  type="Y"
-  description={"The value to be used in the checkbox input."}
 />
 
 ### CheckboxGroupProps
@@ -468,6 +307,180 @@ tab: Props
   name="wrap"
   type="UIValue<FlexWrap>"
   description={"The CSS `flex-wrap` property."}
+/>
+
+### CheckboxIconProps
+
+<PropsCard
+  id="checkboxicon-as"
+  name="as"
+  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
+  description={"The HTML element to render."}
+/>
+
+<PropsCard
+  id="checkboxicon-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the icon will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the icon will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+### UseCheckboxProps
+
+<PropsCard
+  id="usecheckbox-defaultischecked"
+  name="defaultIsChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-id"
+  name="id"
+  type="string"
+  description={"id assigned to input."}
+/>
+
+<PropsCard
+  id="usecheckbox-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-name"
+  name="name"
+  type="string"
+  description={"The HTML `name` attribute used for forms."}
+/>
+
+<PropsCard
+  id="usecheckbox-onblur"
+  name="onBlur"
+  type="FocusEventHandler<HTMLInputElement>"
+  description={"The callback invoked when the checkbox is blurred."}
+/>
+
+<PropsCard
+  id="usecheckbox-onchange"
+  name="onChange"
+  type="ChangeEventHandler<HTMLInputElement>"
+  description={"The callback invoked when the checked state changes."}
+/>
+
+<PropsCard
+  id="usecheckbox-onfocus"
+  name="onFocus"
+  type="FocusEventHandler<HTMLInputElement>"
+  description={"The callback invoked when the checkbox is focused."}
+/>
+
+<PropsCard
+  id="usecheckbox-selectonenter"
+  name="selectOnEnter"
+  type="boolean"
+  description={
+    "If `true`, the checkbox will be selected when the Enter key is pressed."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-tabindex"
+  name="tabIndex"
+  type="number"
+  description={"The tab-index property of the underlying input element."}
+/>
+
+<PropsCard
+  id="usecheckbox-value"
+  name="value"
+  type="Y"
+  description={"The value to be used in the checkbox input."}
 />
 
 ### UseCheckboxGroupProps

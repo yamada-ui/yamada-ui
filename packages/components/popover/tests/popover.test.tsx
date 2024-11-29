@@ -117,9 +117,7 @@ describe("<Popover />", () => {
 
       return (
         <>
-          <button onClick={() => setOpen((prev) => !prev)}>
-            Open Popover
-          </button>
+          <button onClick={() => setOpen((prev) => !prev)}>Open Popover</button>
 
           <Popover
             closeOnBlur={false}

@@ -39,6 +39,7 @@ export const popoverProperties = [
   ...popperProperties,
   "open",
   "isOpen",
+  "defaultOpen",
   "defaultIsOpen",
   "onOpen",
   "onClose",
@@ -109,8 +110,14 @@ interface PopoverOptions {
   closeOnEsc?: boolean
   /**
    * If `true`, the popover will be initially opened.
+   *
+   * @deprecated Use `defaultOpen` instead
    */
   defaultIsOpen?: boolean
+  /**
+   * If `true`, the popover will be initially opened.
+   */
+  defaultOpen?: boolean
   /**
    * The animation duration.
    */
@@ -123,13 +130,13 @@ interface PopoverOptions {
    * If `true`, the PopoverContent rendering will be deferred until the popover is open.
    *
    * @default false
-   * 
+   *
    * @deprecated Use `lazy` instead
    */
   isLazy?: boolean
   /**
    * If `true`, the popover will be opened.
-   * 
+   *
    * @deprecated Use `open` instead
    */
   isOpen?: boolean
@@ -235,8 +242,10 @@ export const Popover: FC<PopoverProps> = (props) => {
     duration,
     initialFocusRef,
     isLazy,
+    isOpen: isOpenProp,
     lazy,
     lazyBehavior = "unmount",
+    open: openProp,
     openDelay = 200,
     relatedRef,
     restoreFocus = true,
@@ -245,9 +254,15 @@ export const Popover: FC<PopoverProps> = (props) => {
   } = omitThemeProps(mergedProps)
 
   lazy ??= isLazy
+  openProp ??= isOpenProp
 
   const id = useId()
-  const { isOpen: open, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
+  const {
+    isOpen: open,
+    onClose,
+    onOpen,
+    onToggle,
+  } = useDisclosure({ ...mergedProps, isOpen: openProp })
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLElement>(null)

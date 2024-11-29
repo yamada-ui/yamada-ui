@@ -26,7 +26,7 @@ export interface FormatNumberProps
     FormatNumberOptions {}
 
 /**
- * `FormatNumber` is component.
+ * `FormatNumber` is used to format numbers to a specific locale and options.
  *
  * @see Docs https://yamada-ui.com/components/other/format-number
  */

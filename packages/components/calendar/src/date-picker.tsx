@@ -32,6 +32,12 @@ import {
 interface DatePickerOptions {
   children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the date picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -43,6 +49,8 @@ interface DatePickerOptions {
    * If `true`, display the date picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -93,6 +101,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   let {
     className,
     children,
+    clearable,
     color,
     h,
     height,
@@ -120,6 +129,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     onClose,
   } = useDatePicker(computedProps)
 
+  clearable ??= isClearable
   h ??= height
   minH ??= minHeight
 
@@ -147,7 +157,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
               inputProps={getInputProps(inputProps)}
             />
 
-            {isClearable && value ? (
+            {clearable && value ? (
               <DatePickerClearIcon
                 {...getIconProps({ clear: true, ...clearIconProps })}
               />
@@ -312,11 +322,11 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
   const ref = useRef<HTMLDivElement>(null)
   const styles = useDatePickerContext()
 
-  const isDisabled = props.disabled
+  const disabled = props.disabled
 
   const rest = useClickable({
     ref,
-    isDisabled,
+    disabled,
     ...props,
   })
 

@@ -29,17 +29,21 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
       transitionDuration: "normal",
       transitionProperty: "box-shadow",
       _checked: {
-        bg: `${c}.500`,
-        borderColor: `${c}.500`,
+        bg: [`${c}.500`, `${c}.600`],
+        borderColor: [`${c}.500`, `${c}.600`],
         color: ["white", "black"],
         _hover: {
-          bg: `${c}.600`,
-          borderColor: `${c}.600`,
+          bg: [`${c}.600`, `${c}.700`],
+          borderColor: [`${c}.600`, `${c}.700`],
         },
         // eslint-disable-next-line perfectionist/sort-objects
         _disabled: {
           bg: ["blackAlpha.400", "whiteAlpha.300"],
           borderColor: ["transparent", "transparent"],
+        },
+        _readOnly: {
+          bg: [`${c}.500`, `${c}.600`],
+          borderColor: [`${c}.500`, `${c}.600`],
         },
       },
       _disabled: {
@@ -50,8 +54,8 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
         boxShadow: "outline",
       },
       _indeterminate: {
-        bg: `${c}.500`,
-        borderColor: `${c}.500`,
+        bg: [`${c}.500`, `${c}.600`],
+        borderColor: [`${c}.500`, `${c}.600`],
         color: ["white", "black"],
       },
       _invalid: {
@@ -59,7 +63,7 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
         _focusVisible: {
           borderColor: "inherit",
           _checked: {
-            borderColor: `${c}.500`,
+            borderColor: [`${c}.500`, `${c}.600`],
           },
         },
       },

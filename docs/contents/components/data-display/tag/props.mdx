@@ -29,6 +29,14 @@ tab: Props
 />
 
 <PropsCard
+  id="tag-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the tag is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tag-endicon"
   name="endIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
@@ -40,6 +48,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tag is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

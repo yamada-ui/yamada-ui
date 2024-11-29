@@ -113,18 +113,18 @@ describe("<Popover />", () => {
 
   test("can popover control", async () => {
     const ControlPopover = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>
+          <button onClick={() => setOpen((prev) => !prev)}>
             Open Popover
           </button>
 
           <Popover
             closeOnBlur={false}
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
+            open={open}
+            onClose={() => setOpen(false)}
           >
             <PopoverTrigger>
               <span>Popover Target</span>

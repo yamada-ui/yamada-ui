@@ -113,6 +113,7 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
     "command",
     "icon",
     "divider",
+    "separator",
     "group",
     "groupLabel",
   ],

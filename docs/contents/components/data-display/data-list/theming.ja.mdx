@@ -1,10 +1,8 @@
 ---
+label: Planned
 title: DataList
-description: "`DataList`は、データ項目のリストを表示するために使用されます。"
-package_name: "@yamada-ui/data-list"
-label: New
+description: "`DataList`は、現在作成を検討しています。"
 order: 2
-with_description: true
 tab: テーマ
 ---
 
@@ -21,6 +19,7 @@ export const DataList: ComponentMultiStyle<"DataList"> = {
   baseStyle: {
     container: {
       display: "grid",
+      w: "fit-content",
       _horizontal: {
         gridTemplateColumns: "repeat($col, auto)",
       },

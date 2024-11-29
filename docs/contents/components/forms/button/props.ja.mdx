@@ -12,6 +12,14 @@ tab: Props
 ### ButtonProps
 
 <PropsCard
+  id="button-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="button-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -35,10 +43,21 @@ tab: Props
 />
 
 <PropsCard
+  id="button-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="button-isactive"
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -47,6 +66,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -55,6 +75,7 @@ tab: Props
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
+  deprecated={"Use `loading` instead."}
   defaultValue={"false"}
 />
 
@@ -63,8 +84,9 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={
-    "If true, the button is full rounded. Else, it'll be slightly round."
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -74,6 +96,14 @@ tab: Props
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the left side of the button."}
   deprecated={"Use `startIcon` instead."}
+/>
+
+<PropsCard
+  id="button-loading"
+  name="loading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -142,10 +172,28 @@ tab: Props
 ### ButtonGroupProps
 
 <PropsCard
+  id="buttongroup-attached"
+  name="attached"
+  type="boolean"
+  description={
+    "If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="buttongroup-direction"
   name="direction"
   type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
   description={"The CSS `flex-direction` property."}
+/>
+
+<PropsCard
+  id="buttongroup-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, all wrapped button will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -155,6 +203,7 @@ tab: Props
   description={
     "If `true`, the borderRadius of button that are direct children will be altered to look flushed together."
   }
+  deprecated={"Use `attached` instead."}
   defaultValue={"false"}
 />
 
@@ -163,5 +212,6 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, all wrapped button will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />

@@ -56,7 +56,7 @@ export const useRangeDatePicker = ({
   onChange: onChangeProp,
   ...rest
 }: UseRangeDatePickerProps) => {
-  const isComposition = useRef<boolean>(false)
+  const composition = useRef<boolean>(false)
   const startInputRef = useRef<HTMLInputElement>(null)
   const endInputRef = useRef<HTMLInputElement>(null)
   const draftValue = useRef<[Date?, Date?] | undefined>(undefined)
@@ -84,8 +84,8 @@ export const useRangeDatePicker = ({
     containerRef,
     dateToString,
     inputFormat,
-    isOpen,
     locale,
+    open,
     pattern,
     stringToDate,
     formControlProps,
@@ -120,10 +120,10 @@ export const useRangeDatePicker = ({
 
       draftValue.current = undefined
 
-      if (allowInput && isOpen) startInputRef.current?.focus()
+      if (allowInput && open) startInputRef.current?.focus()
     },
     onClick: (ev) => {
-      if (isOpen) {
+      if (open) {
         if (!startValue) {
           startInputRef.current?.focus()
         } else {
@@ -165,15 +165,15 @@ export const useRangeDatePicker = ({
       startInputRef.current?.setSelectionRange(index, index)
     },
     onEnter: () => {
-      if (isComposition.current) return
+      if (composition.current) return
 
       if (!containerRef.current) return
 
       const activeEl = getActiveElement(containerRef.current)
 
-      const isStart = isContains(activeEl, startInputRef.current)
+      const start = isContains(activeEl, startInputRef.current)
 
-      if (isStart) {
+      if (start) {
         const value = dateToString(startValue)
 
         if (value) {
@@ -204,7 +204,7 @@ export const useRangeDatePicker = ({
     (ev: ChangeEvent<HTMLInputElement>) => {
       let inputValue = ev.target.value
 
-      if (!isComposition.current) inputValue = inputValue.replace(pattern, "")
+      if (!composition.current) inputValue = inputValue.replace(pattern, "")
 
       let startValue = stringToDate(inputValue)
 
@@ -229,7 +229,7 @@ export const useRangeDatePicker = ({
     (ev: ChangeEvent<HTMLInputElement>) => {
       let inputValue = ev.target.value
 
-      if (!isComposition.current) inputValue = inputValue.replace(pattern, "")
+      if (!composition.current) inputValue = inputValue.replace(pattern, "")
 
       let endValue = stringToDate(inputValue)
 
@@ -299,13 +299,13 @@ export const useRangeDatePicker = ({
           ev.stopPropagation()
         }),
         onCompositionEnd: handlerAll(props.onCompositionEnd, () => {
-          isComposition.current = false
+          composition.current = false
 
           setStartInputValue((prev) => prev.replace(pattern, ""))
         }),
         onCompositionStart: handlerAll(
           props.onCompositionStart,
-          () => (isComposition.current = true),
+          () => (composition.current = true),
         ),
       }
     },
@@ -347,13 +347,13 @@ export const useRangeDatePicker = ({
           ev.stopPropagation()
         }),
         onCompositionEnd: handlerAll(props.onCompositionEnd, () => {
-          isComposition.current = false
+          composition.current = false
 
           setEndInputValue((prev) => prev.replace(pattern, ""))
         }),
         onCompositionStart: handlerAll(
           props.onCompositionStart,
-          () => (isComposition.current = true),
+          () => (composition.current = true),
         ),
       }
     },

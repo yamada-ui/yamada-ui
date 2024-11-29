@@ -41,10 +41,6 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultChecked: Story = () => {
-  return <Radio defaultChecked>孫悟空</Radio>
-}
-
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
@@ -55,6 +51,10 @@ export const withColorScheme: Story = () => {
       ))}
     </Wrap>
   )
+}
+
+export const withDefaultChecked: Story = () => {
+  return <Radio defaultChecked>孫悟空</Radio>
 }
 
 export const isDisabled: Story = () => {
@@ -200,7 +200,7 @@ export const customControl: Story = () => {
   const [value, setValue] = useState<string>("孫悟空")
 
   return (
-    <RadioGroup value={value} onChange={(value) => setValue(value)}>
+    <RadioGroup value={value} onChange={setValue}>
       <Radio value="孫悟空">孫悟空</Radio>
       <Radio value="ベジータ">ベジータ</Radio>
       <Radio value="フリーザ">フリーザ</Radio>

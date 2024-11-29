@@ -58,7 +58,7 @@ export const IconDrawer: FC<IconDrawerProps> = memo(({ openRef }) => {
 
         <HStack alignItems="flex-start" minW="0" w="full">
           <Heading as="h3" flex="1" lineClamp={1}>
-            {name}
+            {name}Icon
           </Heading>
 
           <CloseButton onClick={onClose} />
@@ -66,14 +66,14 @@ export const IconDrawer: FC<IconDrawerProps> = memo(({ openRef }) => {
 
         <VStack minW="0">
           <CodeBlock
-            code={`import { ${name} } from "@yamada-ui/lucide"`}
+            code={`import { ${name}Icon } from "@yamada-ui/lucide"`}
             language="tsx"
             my="0"
             innerProps={{ h: "full", rounded: "xl" }}
           />
 
           <CodeBlock
-            code={`<${name} />`}
+            code={`<${name}Icon />`}
             language="tsx"
             my="0"
             innerProps={{ h: "full", rounded: "xl" }}

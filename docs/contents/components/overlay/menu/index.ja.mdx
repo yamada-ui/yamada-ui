@@ -19,7 +19,7 @@ import {
   MenuGroup,
   MenuOptionItem,
   MenuOptionGroup,
-  MenuDivider,
+  MenuSeparator,
 } from "@yamada-ui/react"
 ```
 
@@ -30,7 +30,7 @@ import {
 - `MenuGroup`: メニューの項目をグループ化するラッパーコンポーネントです。
 - `MenuOptionItem`: 選択(ラジオとチェックボックス)可能なメニューの項目のコンポーネントです。
 - `MenuOptionGroup`:　選択(ラジオとチェックボックス)可能なメニューの項目をグループ化するラッパーコンポーネントです。
-- `MenuDivider`: メニューの項目を区切るコンポーネントです。
+- `MenuSeparator`: メニューの項目を区切るコンポーネントです。
 
 ## 使い方
 
@@ -224,7 +224,7 @@ return (
 
 ### 項目間に区切り線を追加する
 
-`MenuItem`の間に`MenuDivider`を設定することで、区切り線を追加できます。
+`MenuItem`の間に`MenuSeparator`を設定することで、区切り線を追加できます。
 
 ```tsx
 <Menu>
@@ -237,7 +237,7 @@ return (
     <MenuItem>Edit Profile</MenuItem>
     <MenuItem>Preferences</MenuItem>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuItem>Sign out</MenuItem>
   </MenuList>
@@ -261,7 +261,7 @@ return (
       <MenuItem>Preferences</MenuItem>
     </MenuGroup>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuGroup label="action">
       <MenuItem>Sign out</MenuItem>
@@ -286,7 +286,7 @@ return (
       <MenuOptionItem value="desc">Descending</MenuOptionItem>
     </MenuOptionGroup>
 
-    <MenuDivider />
+    <MenuSeparator />
 
     <MenuOptionGroup label="display" type="checkbox">
       <MenuOptionItem value="gender">gender</MenuOptionItem>

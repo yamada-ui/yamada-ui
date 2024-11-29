@@ -9,12 +9,12 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   TableContainer,
   Tag,
   Text,
@@ -253,7 +253,7 @@ const ControlMenu = memo(
           <MenuItem>Make a copy</MenuItem>
           <MenuItem>Favorite</MenuItem>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuItem>
             <Menu>
@@ -271,7 +271,7 @@ const ControlMenu = memo(
             </Menu>
           </MenuItem>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuItem command="⌘⌫">Delete</MenuItem>
         </MenuList>

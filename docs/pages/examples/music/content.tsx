@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Center,
-  Divider,
   FormControl,
   Heading,
   HStack,
@@ -18,6 +17,7 @@ import {
   ModalHeader,
   SegmentedControl,
   SegmentedControlButton,
+  Separator,
   Spacer,
   Text,
   useDisclosure,
@@ -211,7 +211,7 @@ const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
           </Text>
         ) : null}
 
-        <Divider />
+        <Separator />
       </VStack>
     )
   },

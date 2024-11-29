@@ -335,10 +335,7 @@ export const isDisabled: Story = () => {
 
       <CheckboxCardGroup isDisabled items={items} />
 
-      <Fieldset
-        isDisabled
-        legend="Which notifications would you like to receive?"
-      >
+      <Fieldset isDisabled legend="Which characters would you like to select?">
         <CheckboxCardGroup items={items} />
       </Fieldset>
     </>
@@ -382,10 +379,7 @@ export const isReadOnly: Story = () => {
 
       <CheckboxCardGroup isReadOnly items={items} />
 
-      <Fieldset
-        isReadOnly
-        legend="Which notifications would you like to receive?"
-      >
+      <Fieldset isReadOnly legend="Which characters would you like to select?">
         <CheckboxCardGroup items={items} />
       </Fieldset>
     </>
@@ -432,7 +426,7 @@ export const isInvalid: Story = () => {
       <Fieldset
         errorMessage="This is required."
         isInvalid
-        legend="Which notifications would you like to receive?"
+        legend="Which characters would you like to select?"
       >
         <CheckboxCardGroup items={items} />
       </Fieldset>

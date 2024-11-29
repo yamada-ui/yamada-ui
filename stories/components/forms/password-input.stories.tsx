@@ -36,16 +36,6 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultVisible: Story = () => {
-  return (
-    <PasswordInput
-      defaultValue="password"
-      defaultVisible
-      placeholder="your password"
-    />
-  )
-}
-
 export const withVariants: Story = () => {
   return (
     <>
@@ -54,6 +44,16 @@ export const withVariants: Story = () => {
       <PasswordInput variant="flushed" placeholder="flushed" />
       <PasswordInput variant="unstyled" placeholder="unstyled" />
     </>
+  )
+}
+
+export const withDefaultVisible: Story = () => {
+  return (
+    <PasswordInput
+      defaultValue="password"
+      defaultVisible
+      placeholder="your password"
+    />
   )
 }
 

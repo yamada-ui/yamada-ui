@@ -1,10 +1,10 @@
 import type { MailItem } from "./data"
 import {
-  Divider,
   noop,
   Resizable,
   ResizableItem,
   ResizableTrigger,
+  Separator,
   useBoolean,
   VStack,
 } from "@yamada-ui/react"
@@ -61,9 +61,9 @@ export const Mail = memo(() => {
 
         <VStack
           display={{ base: "none", lg: "flex" }}
-          divider={<Divider />}
           gap="0"
           h="full"
+          separator={<Separator />}
         >
           <Inbox
             defaultMail={DEFAULT_MAIL}

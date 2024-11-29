@@ -1,5 +1,11 @@
 {
   "FileButton": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"gray\"",
@@ -22,15 +28,23 @@
       "description": "The border color when the button is invalid.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
@@ -43,6 +57,7 @@
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
@@ -61,13 +76,20 @@
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "deprecated": "Use `fullRounded` instead.",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "deprecated": "Use `startIcon` instead.",
       "description": "The icon to display at the left side of the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "loadingIcon": {

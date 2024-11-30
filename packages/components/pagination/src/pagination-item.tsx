@@ -1,15 +1,15 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { ReactNode } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+  EllipsisIcon,
+} from "@yamada-ui/lucide"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import {
-  PaginationEllipsisIcon,
-  PaginationFirstIcon,
-  PaginationLastIcon,
-  PaginationNextIcon,
-  PaginationPrevIcon,
-} from "./pagination-icon"
 import { usePaginationContext } from "./use-pagination"
 
 interface PaginationItemOptions {
@@ -17,6 +17,18 @@ interface PaginationItemOptions {
    * The type of the page or item assigned to the pagination item.
    */
   page: "ellipsis" | "first" | "last" | "next" | "prev" | number
+  /**
+   * If `true`, the pagination item will be activated.
+   *
+   * @default false
+   */
+  active?: boolean
+  /**
+   * If `true`, the pagination item will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * If `true`, disable ripple effects when pressing a element.
    *
@@ -27,12 +39,16 @@ interface PaginationItemOptions {
    * If `true`, the pagination item will be activated.
    *
    * @default false
+   *
+   * @deprecated Use `active` instead.
    */
   isActive?: boolean
   /**
    * If `true`, the pagination item will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
 }
@@ -44,16 +60,26 @@ export interface PaginationItemProps
 const iconMap: {
   [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
-  ellipsis: <PaginationEllipsisIcon />,
-  first: <PaginationFirstIcon />,
-  last: <PaginationLastIcon />,
-  next: <PaginationNextIcon />,
-  prev: <PaginationPrevIcon />,
+  ellipsis: <EllipsisIcon />,
+  first: <ChevronsLeftIcon />,
+  last: <ChevronsRightIcon />,
+  next: <ChevronRightIcon />,
+  prev: <ChevronLeftIcon />,
 }
 
 export const PaginationItem = forwardRef<PaginationItemProps, "button">(
   (
-    { className, children, disableRipple, isActive, isDisabled, page, ...rest },
+    {
+      className,
+      active,
+      children,
+      disabled,
+      disableRipple,
+      isActive,
+      isDisabled,
+      page,
+      ...rest
+    },
     ref,
   ) => {
     const styles = usePaginationContext()
@@ -64,6 +90,8 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
     })
 
     children ??= iconMap[page] ?? page
+    active ??= isActive
+    disabled ??= isDisabled
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -84,9 +112,9 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
         {...(!isEllipsis
           ? {
               type: "button",
-              "data-disabled": dataAttr(isDisabled),
-              "data-selected": dataAttr(isActive),
-              disabled: isDisabled,
+              "data-disabled": dataAttr(disabled),
+              "data-selected": dataAttr(active),
+              disabled,
             }
           : {})}
         className={cx(

@@ -46,8 +46,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     },
     ref,
   ) => {
-    let { describedbyId, duration, isOpen, labelledbyId, open, onClose } =
-      useModal()
+    let { bodyRef, duration, headerRef, isOpen, open, onClose } = useModal()
 
     open ??= isOpen
 
@@ -185,8 +184,8 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
       <Slide
         ref={ref}
         className={cx("ui-drawer", className)}
-        aria-describedby={describedbyId}
-        aria-labelledby={labelledbyId}
+        aria-describedby={bodyRef.current?.id}
+        aria-labelledby={headerRef.current?.id}
         aria-modal="true"
         drag={closeOnDrag ? getDragDirection() : false}
         dragConstraints={getDragDirectionRestriction(dragConstraints)}

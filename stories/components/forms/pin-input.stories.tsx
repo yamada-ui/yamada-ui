@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import {
   Button,
-  FormControl,
+  Fieldset,
   PinInput,
   PinInputField,
   useLoading,
@@ -152,14 +152,14 @@ export const isDisabled: Story = () => {
         <PinInputField isDisabled />
       </PinInput>
 
-      <FormControl
+      <Fieldset
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         isDisabled
-        label="Please one-time password"
+        legend="Please one-time password"
       >
         <PinInput />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -176,14 +176,14 @@ export const isReadonly: Story = () => {
         <PinInputField isReadOnly />
       </PinInput>
 
-      <FormControl
+      <Fieldset
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         isReadOnly
-        label="Please one-time password"
+        legend="Please one-time password"
       >
         <PinInput />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -200,14 +200,14 @@ export const isInvalid: Story = () => {
         <PinInputField isInvalid />
       </PinInput>
 
-      <FormControl
+      <Fieldset
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         isInvalid
-        label="Please one-time password"
+        legend="Please one-time password"
       >
         <PinInput />
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -230,10 +230,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.pinInput?.message}
         isInvalid={!!errors.pinInput}
-        label="Token"
+        legend="Token"
       >
         <Controller
           name="pinInput"
@@ -244,7 +244,7 @@ export const reactHookForm: Story = () => {
             required: { message: "This is required.", value: true },
           }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -275,10 +275,10 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.pinInput?.message}
         isInvalid={!!errors.pinInput}
-        label="Token"
+        legend="Token"
       >
         <Controller
           name="pinInput"
@@ -289,7 +289,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
             required: { message: "This is required.", value: true },
           }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

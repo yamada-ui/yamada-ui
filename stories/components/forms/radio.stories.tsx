@@ -5,7 +5,7 @@ import type { SubmitHandler } from "react-hook-form"
 import {
   Box,
   Button,
-  FormControl,
+  Fieldset,
   HStack,
   Radio,
   RadioGroup,
@@ -73,23 +73,23 @@ export const isDisabled: Story = () => {
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
-      <FormControl
+      <Fieldset
         isDisabled
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Radio defaultIsChecked>All Notifications</Radio>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         isDisabled
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <RadioGroup defaultValue="all">
           <Radio value="all">All Notifications</Radio>
           <Radio value="important">Important Notifications</Radio>
           <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -110,23 +110,23 @@ export const isReadonly: Story = () => {
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
-      <FormControl
+      <Fieldset
         isReadOnly
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Radio defaultIsChecked>All Notifications</Radio>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         isReadOnly
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <RadioGroup defaultValue="all">
           <Radio value="all">All Notifications</Radio>
           <Radio value="important">Important Notifications</Radio>
           <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -147,25 +147,25 @@ export const isInvalid: Story = () => {
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
-      <FormControl
+      <Fieldset
         errorMessage="This is required."
         isInvalid
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Radio>All Notifications</Radio>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         errorMessage="This is required."
         isInvalid
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <RadioGroup defaultValue="all">
           <Radio value="all">All Notifications</Radio>
           <Radio value="important">Important Notifications</Radio>
           <Radio value="service">Service Notifications</Radio>
         </RadioGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -269,10 +269,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.radio?.message}
         isInvalid={!!errors.radio}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="radio"
@@ -286,7 +286,7 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -317,10 +317,10 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.radio?.message}
         isInvalid={!!errors.radio}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="radio"
@@ -334,7 +334,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

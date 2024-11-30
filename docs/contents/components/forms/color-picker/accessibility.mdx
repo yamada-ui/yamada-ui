@@ -23,7 +23,7 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Co
     Pick Color
   </Heading>
 
-  <ColorPicker placeholder="Pick color" aria-labelledby="label" />
+  <ColorPicker placeholder="#4387f4" aria-labelledby="label" />
 </VStack>
 ```
 
@@ -35,39 +35,40 @@ If you are not using `FormControl`, set `aria-label` or `aria-labelledby` to `Co
 
 ## ARIA Roles and Attributes
 
-| Component                                   | Roles and Attributes   | Usage                                                                              |
-| ------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
-| `ColorPickerField` <Tag>Internal</Tag>      | `role="combobox"`      | Indicates that this is a combobox.                                                 |
-|                                             | `aria-expanded`        | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
-|                                             | `aria-controls`        | Set to the `id` of the related `ColorSelector` when open, `undefined` when closed. |
-|                                             | `aria-readonly`        | Set to `"true"` when `isReadOnly` is set.                                          |
-|                                             | `aria-disabled`        | Set to `"true"` when `isDisabled` is set.                                          |
-|                                             | `aria-invalid`         | Set to `"true"` when `isInvalid` is set.                                           |
-|                                             | `aria-required`        | Set to `"true"` when `isRequired` is set.                                          |
-| `ColorPickerSwatch` <Tag>Internal</Tag>     | `role="img"`           | Indicates that this is an image.                                                   |
-|                                             | `aria-roledescription` | Set to `"color swatch"`.                                                           |
-|                                             | `aria-label`           | Set to the current value, such as `"#141414"`.                                     |
-| `ColorPickerEyeDropper` <Tag>Internal</Tag> | `role="button"`        | Indicates that this is a button.                                                   |
-|                                             | `aria-label`           | `"Pick a color"` is set.                                                           |
-| `ColorSelector` <Tag>Internal</Tag>         | `role="dialog"`        | Indicates that this is a dialog.                                                   |
-|                                             | `id`                   | The `id` used to associate with `ColorPickerField`.                                |
-|                                             | `aria-hidden`          | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
-| `SaturationSliderThumb` <Tag>Internal</Tag> | `role="slider"`        | Indicates that the element is a slider.                                            |
-|                                             | `aria-roledescription` | `"2D slider"` is set.                                                              |
-|                                             | `aria-label`           | `"Saturation and brightness thumb"` is set.                                        |
-|                                             | `aria-valuemin`        | Sets the `0` value.                                                                |
-|                                             | `aria-valuemax`        | Sets the `100` value.                                                              |
-|                                             | `aria-valuenow`        | The current value is set.                                                          |
-|                                             | `aria-valuetext`       | Sets the current value, such as `"saturation 0.72, brightness 0.96"`.              |
-| `HueSliderThumb` <Tag>Internal</Tag>        | `role="slider"`        | Indicates that this is a slider.                                                   |
-|                                             | `aria-label`           | Sets `"Slider thumb"`.                                                             |
-|                                             | `aria-valuemin`        | Sets the `0` value.                                                                |
-|                                             | `aria-valuemax`        | Sets the `360` value.                                                              |
-|                                             | `aria-valuenow`        | Sets the current value.                                                            |
-|                                             | `aria-valuetext`       | Sets the current value, such as `18°, Red`.                                        |
-| `AlphaSliderThumb` <Tag>Internal</Tag>      | `role="slider"`        | Indicates that the element is a slider.                                            |
-|                                             | `aria-label`           | Sets `"Slider thumb"`.                                                             |
-|                                             | `aria-valuemin`        | Sets the `0` value.                                                                |
-|                                             | `aria-valuemax`        | Sets the `1` value.                                                                |
-|                                             | `aria-valuenow`        | Sets the current value.                                                            |
-|                                             | `aria-valuetext`       | Sets the current value, such as `18%`.                                             |
+| Component                                   | Roles and Attributes     | Usage                                                                              |
+| ------------------------------------------- | ------------------------ | ---------------------------------------------------------------------------------- |
+| `ColorPickerField` <Tag>Internal</Tag>      | `role="combobox"`        | Indicates that this is a combobox.                                                 |
+|                                             | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                                    |
+|                                             | `aria-expanded`          | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
+|                                             | `aria-controls`          | Set to the `id` of the related `ColorSelector` when open, `undefined` when closed. |
+|                                             | `aria-readonly`          | Set to `"true"` when `isReadOnly` is set.                                          |
+|                                             | `aria-disabled`          | Set to `"true"` when `isDisabled` is set.                                          |
+|                                             | `aria-invalid`           | Set to `"true"` when `isInvalid` is set.                                           |
+|                                             | `aria-required`          | Set to `"true"` when `isRequired` is set.                                          |
+| `ColorPickerSwatch` <Tag>Internal</Tag>     | `role="img"`             | Indicates that this is an image.                                                   |
+|                                             | `aria-roledescription`   | Set to `"color swatch"`.                                                           |
+|                                             | `aria-label`             | Set to the current value, such as `"#141414"`.                                     |
+| `ColorPickerEyeDropper` <Tag>Internal</Tag> | `role="button"`          | Indicates that this is a button.                                                   |
+|                                             | `aria-label`             | `"Pick a color"` is set.                                                           |
+| `ColorSelector` <Tag>Internal</Tag>         | `role="dialog"`          | Indicates that this is a dialog.                                                   |
+|                                             | `id`                     | The `id` used to associate with `ColorPickerField`.                                |
+|                                             | `aria-hidden`            | Set to `"true"` when the dialog is open, `"false"` when closed.                    |
+| `SaturationSliderThumb` <Tag>Internal</Tag> | `role="slider"`          | Indicates that the element is a slider.                                            |
+|                                             | `aria-roledescription`   | `"2D slider"` is set.                                                              |
+|                                             | `aria-label`             | `"Saturation and brightness thumb"` is set.                                        |
+|                                             | `aria-valuemin`          | Sets the `0` value.                                                                |
+|                                             | `aria-valuemax`          | Sets the `100` value.                                                              |
+|                                             | `aria-valuenow`          | The current value is set.                                                          |
+|                                             | `aria-valuetext`         | Sets the current value, such as `"saturation 0.72, brightness 0.96"`.              |
+| `HueSliderThumb` <Tag>Internal</Tag>        | `role="slider"`          | Indicates that this is a slider.                                                   |
+|                                             | `aria-label`             | Sets `"Slider thumb"`.                                                             |
+|                                             | `aria-valuemin`          | Sets the `0` value.                                                                |
+|                                             | `aria-valuemax`          | Sets the `360` value.                                                              |
+|                                             | `aria-valuenow`          | Sets the current value.                                                            |
+|                                             | `aria-valuetext`         | Sets the current value, such as `"18°, Red"`.                                      |
+| `AlphaSliderThumb` <Tag>Internal</Tag>      | `role="slider"`          | Indicates that the element is a slider.                                            |
+|                                             | `aria-label`             | Sets `"Slider thumb"`.                                                             |
+|                                             | `aria-valuemin`          | Sets the `0` value.                                                                |
+|                                             | `aria-valuemax`          | Sets the `1` value.                                                                |
+|                                             | `aria-valuenow`          | Sets the current value.                                                            |
+|                                             | `aria-valuetext`         | Sets the current value, such as `"18%"`.                                           |

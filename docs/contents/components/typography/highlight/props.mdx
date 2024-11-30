@@ -45,10 +45,19 @@ tab: Props
 />
 
 <PropsCard
+  id="highlight-fragment"
+  name="fragment"
+  type="boolean"
+  description={"If `true`, `Fragment` is used for rendering."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="highlight-isfragment"
   name="isFragment"
   type="boolean"
   description={"If `true`, `Fragment` is used for rendering."}
+  deprecated={"Use `fragment` instead."}
   defaultValue={"false"}
 />
 

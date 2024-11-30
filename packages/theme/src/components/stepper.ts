@@ -4,7 +4,7 @@ import { getMemoizedObject as get } from "@yamada-ui/utils"
 export const Stepper: ComponentMultiStyle<"Stepper"> = {
   baseStyle: ({ colorScheme: c = "primary" }) => ({
     description: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
     },
     icon: {
       flexShrink: 0,

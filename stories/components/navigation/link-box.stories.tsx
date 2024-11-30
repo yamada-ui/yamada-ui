@@ -26,7 +26,7 @@ export const basic: Story = () => {
       <Heading size="md" my="sm">
         <LinkOverlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
-          isExternal
+          external
         >
           ドラゴンボール
         </LinkOverlay>
@@ -56,7 +56,7 @@ export const withNestedLink: Story = () => {
       <Heading size="md" my="sm">
         <LinkOverlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
-          isExternal
+          external
         >
           ドラゴンボール
         </LinkOverlay>
@@ -67,11 +67,7 @@ export const withNestedLink: Story = () => {
         BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。略称は『DB』。
       </Text>
 
-      <Link
-        href="https://dragon-ball-official.com/"
-        fontWeight="bold"
-        isExternal
-      >
+      <Link href="https://dragon-ball-official.com/" external fontWeight="bold">
         オフィシャルサイト
       </Link>
     </LinkBox>

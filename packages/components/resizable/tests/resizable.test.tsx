@@ -1,10 +1,5 @@
 import { a11y, render } from "@yamada-ui/test"
-import {
-  Resizable,
-  ResizableItem,
-  ResizableTrigger,
-  ResizableTriggerIcon,
-} from "../src"
+import { Resizable, ResizableItem, ResizableTrigger } from "../src"
 import { assert } from "./utils"
 
 describe("<Resizable />", () => {
@@ -48,35 +43,5 @@ describe("<Resizable />", () => {
 
     expect(leftItem.getAttribute("data-panel-size")).toBe("30.0")
     expect(rightItem.getAttribute("data-panel-size")).toBe("70.0")
-  })
-})
-
-describe("<ResizableTriggerIcon />", () => {
-  test("applies styles `width` and `height` correctly", () => {
-    const { getByTestId } = render(
-      <ResizableTriggerIcon data-testid="resizable" />,
-    )
-
-    expect(getByTestId("resizable")).toHaveStyle("width: 0.5rem")
-    expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
-  })
-
-  test("icon renders correctly", () => {
-    const { getByTestId } = render(
-      <Resizable>
-        <ResizableItem defaultSize={50}>One</ResizableItem>
-
-        <ResizableTrigger
-          data-testid="resizable"
-          icon={<ResizableTriggerIcon />}
-        />
-
-        <ResizableItem defaultSize={50}>Two</ResizableItem>
-      </Resizable>,
-    )
-
-    expect(
-      getByTestId("resizable").querySelector(".ui-resizable__trigger__icon"),
-    ).toBeInTheDocument()
   })
 })

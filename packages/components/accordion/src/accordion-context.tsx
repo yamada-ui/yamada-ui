@@ -17,7 +17,7 @@ type AccordionContext = {
   setFocusedIndex: Dispatch<SetStateAction<number>>
   setIndex: Dispatch<SetStateAction<number | number[]>>
   styles: { [key: string]: CSSUIObject | undefined }
-} & Pick<AccordionOptions, "icon" | "iconHidden" | "isMultiple" | "isToggle">
+} & Pick<AccordionOptions, "icon" | "iconHidden" | "multiple" | "toggle">
 
 export const [AccordionProvider, useAccordionContext] =
   createContext<AccordionContext>({
@@ -26,7 +26,7 @@ export const [AccordionProvider, useAccordionContext] =
   })
 
 interface AccordionItemContext extends Omit<AccordionItemOptions, "children"> {
-  isOpen: boolean
+  open: boolean
   getLabelProps: PropGetter<"button">
   getPanelProps: PropGetter
 }

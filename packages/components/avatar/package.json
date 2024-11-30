@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/avatar",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "Yamada UI avatar component",
   "keywords": [
     "yamada",
@@ -50,7 +50,8 @@
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/image": "workspace:*",
     "@yamada-ui/use-animation": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

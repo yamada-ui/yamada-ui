@@ -33,10 +33,24 @@ import {
   splitObject,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useRef } from "react"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 
 interface CalendarThemeProps extends ThemeProps<"Calendar"> {}
+
+interface InputProps
+  extends Omit<
+    HTMLUIProps<"input">,
+    | "children"
+    | "defaultValue"
+    | "disabled"
+    | "onChange"
+    | "readOnly"
+    | "required"
+    | "size"
+    | "type"
+    | keyof UseCalendarPickerBaseProps
+  > {}
 
 interface UseCalendarPickerOptions {
   /**
@@ -118,27 +132,13 @@ type UseCalendarPickerBaseProps<
 
 export type UseCalendarPickerProps<
   T extends UseCalendarProps<any> = UseCalendarProps<any>,
-> = Omit<
-  HTMLUIProps<"input">,
-  | "children"
-  | "defaultValue"
-  | "disabled"
-  | "onChange"
-  | "readOnly"
-  | "required"
-  | "size"
-  | "type"
-  | keyof UseCalendarPickerBaseProps
-> &
-  UseCalendarPickerBaseProps<T>
+> = InputProps & UseCalendarPickerBaseProps<T>
 
 export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   props: UseCalendarPickerProps<T>,
 ) => {
   const { theme } = useTheme()
-
   let {
-    id,
     type,
     allowInput = true,
     allowInputBeyond = false,
@@ -210,19 +210,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     __selectType,
     ...rest
   } = useFormControlProps(props)
-
-  const uuid = useId()
-
-  id ??= uuid
-  locale ??= theme.__config?.date?.locale ?? "en"
-
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
-  const { disabled, readOnly } = formControlProps
-
   const {
     isOpen,
     onClose,
@@ -233,9 +225,12 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
-
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { disabled, readOnly } = formControlProps
+
+  locale ??= theme.__config?.date?.locale ?? "en"
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -452,13 +447,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       return {
-        "aria-controls": id,
-        "aria-expanded": isOpen,
         "aria-haspopup": "dialog",
         "data-active": dataAttr(isOpen),
         "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
         role: "combobox",
-        tabIndex: !allowInput ? 0 : -1,
+        tabIndex: -1,
         ...formControlProps,
         ...props,
         ref: mergeRefs(inputRef, ref),
@@ -471,7 +464,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       }
     },
     [
-      id,
       allowInput,
       disabled,
       readOnly,
@@ -580,7 +572,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
 
   return {
-    id,
     allowInput,
     containerRef,
     dateToString,
@@ -594,7 +585,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     getFieldProps,
     getIconProps,
     getPopoverProps,
-    inputProps,
+    inputProps: inputProps as InputProps,
     onClose,
     onOpen,
   }

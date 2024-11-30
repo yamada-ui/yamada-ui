@@ -110,7 +110,6 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const {
-    id,
     value,
     getCalendarProps,
     getContainerProps,
@@ -161,11 +160,8 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              id={id}
               as="div"
               className="ui-date-picker__content"
-              aria-modal="true"
-              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

@@ -86,13 +86,22 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
 Icon.displayName = "Icon"
 Icon.__ui__ = "Icon"
 
+/**
+ * @deprecated Use icons from `@yamada-ui/lucide` instead.
+ */
 export const CheckIcon: FC<IconProps> = (props) => {
   return (
-    <Icon viewBox="0 0 24 24" {...props}>
-      <path
-        d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
-        fill="currentColor"
-      />
+    <Icon
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+      <path d="m9 11 3 3L22 4" />
     </Icon>
   )
 }
@@ -100,13 +109,23 @@ export const CheckIcon: FC<IconProps> = (props) => {
 CheckIcon.displayName = "CheckIcon"
 CheckIcon.__ui__ = "CheckIcon"
 
+/**
+ * @deprecated Use icons from `@yamada-ui/lucide` instead.
+ */
 export const InfoIcon: FC<IconProps> = (props) => {
   return (
-    <Icon viewBox="0 0 24 24" {...props}>
-      <path
-        d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm.25,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12.25,5ZM14.5,18.5h-4a1,1,0,0,1,0-2h.75a.25.25,0,0,0,.25-.25v-4.5a.25.25,0,0,0-.25-.25H10.5a1,1,0,0,1,0-2h1a2,2,0,0,1,2,2v4.75a.25.25,0,0,0,.25.25h.75a1,1,0,1,1,0,2Z"
-        fill="currentColor"
-      />
+    <Icon
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
     </Icon>
   )
 }
@@ -114,13 +133,23 @@ export const InfoIcon: FC<IconProps> = (props) => {
 InfoIcon.displayName = "InfoIcon"
 InfoIcon.__ui__ = "InfoIcon"
 
+/**
+ * @deprecated Use icons from `@yamada-ui/lucide` instead.
+ */
 export const WarningIcon: FC<IconProps> = (props) => {
   return (
-    <Icon viewBox="0 0 24 24" {...props}>
-      <path
-        d="M11.983,0a12.206,12.206,0,0,0-8.51,3.653A11.8,11.8,0,0,0,0,12.207,11.779,11.779,0,0,0,11.8,24h.214A12.111,12.111,0,0,0,24,11.791h0A11.766,11.766,0,0,0,11.983,0ZM10.5,16.542a1.476,1.476,0,0,1,1.449-1.53h.027a1.527,1.527,0,0,1,1.523,1.47,1.475,1.475,0,0,1-1.449,1.53h-.027A1.529,1.529,0,0,1,10.5,16.542ZM11,12.5v-6a1,1,0,0,1,2,0v6a1,1,0,1,1-2,0Z"
-        fill="currentColor"
-      />
+    <Icon
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
     </Icon>
   )
 }
@@ -128,6 +157,9 @@ export const WarningIcon: FC<IconProps> = (props) => {
 WarningIcon.displayName = "WarningIcon"
 WarningIcon.__ui__ = "WarningIcon"
 
+/**
+ * @deprecated Use icons from `@yamada-ui/lucide` instead.
+ */
 export const CloseIcon: FC<IconProps> = (props) => {
   return (
     <Icon aria-hidden focusable="false" viewBox="0 0 24 24" {...props}>
@@ -142,6 +174,9 @@ export const CloseIcon: FC<IconProps> = (props) => {
 CloseIcon.displayName = "CloseIcon"
 CloseIcon.__ui__ = "CloseIcon"
 
+/**
+ * @deprecated Use icons from `@yamada-ui/lucide` instead.
+ */
 export const ChevronIcon: FC<IconProps> = (props) => {
   return (
     <Icon aria-hidden focusable="false" viewBox="0 0 24 24" {...props}>

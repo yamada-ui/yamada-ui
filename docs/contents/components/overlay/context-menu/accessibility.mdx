@@ -32,7 +32,7 @@ The `ContextMenu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.
 
 | Component            | Roles and Attributes    | Usage                                                                                                                   |
 | -------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `ContextMenuTrigger` | `id`                    | `id` used to associate with `MenuList`.                                                                                 |
+| `ContextMenuTrigger` | `role="application"`    | Indicates that it is a desktop application.                                                                             |
 |                      | `aria-haspopup`         | Set to `"menu"`.                                                                                                        |
 |                      | `aria-expanded`         | Set to `"true"` when menu is open, `"false"` when closed.                                                               |
 |                      | `aria-controls`         | Set to the `id` of the related `MenuList` when menu is open, `undefined` when closed.                                   |
@@ -42,10 +42,10 @@ The `ContextMenu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.
 |                      | `aria-expanded`         | Set to `"true"` when menu is open, `"false"` when closed.                                                               |
 |                      | `aria-controls`         | Set to the `id` of the related `MenuList` when menu is open, `undefined` when closed.                                   |
 | `MenuList`           | `role="menu"`           | Indicates that it is a menu.                                                                                            |
-|                      | `id`                    | `id` used to associate with `ContextMenuTrigger` or `MenuItemButton`.                                                   |
+|                      | `id`                    | `id` used to associate with `MenuItemButton`.                                                                           |
 |                      | `tabindex`              | Set to `"-1"`.                                                                                                          |
 |                      | `aria-activedescendant` | Set to the `id` of the focused item.                                                                                    |
-|                      | `aria-labelledby`       | Set to the `id` of the related `ContextMenuTrigger` or `MenuItemButton`.                                                |
+|                      | `aria-labelledby`       | Set to the `id` of the related `MenuItemButton`.                                                                        |
 |                      | `aria-hidden`           | Set to "true" when menu is open, "false" when closed.                                                                   |
 | `MenuItem`           | `role="menuitem"`       | Indicates that it is a menu item.                                                                                       |
 |                      | `id`                    | `id` used to associate with `MenuList`.                                                                                 |

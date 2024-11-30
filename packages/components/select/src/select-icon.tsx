@@ -71,11 +71,9 @@ export const SelectClearIcon: FunctionComponent<SelectClearIconProps> = ({
   const ref = useRef<HTMLDivElement>(null)
   const { styles } = useSelectContext()
 
-  const isDisabled = props.disabled
-
   const rest = useClickable({
     ref,
-    isDisabled,
+    disabled: props.disabled,
     ...props,
   })
 

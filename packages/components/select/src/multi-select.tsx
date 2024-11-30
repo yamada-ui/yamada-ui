@@ -31,6 +31,12 @@ import {
 
 interface MultiSelectOptions {
   /**
+   * If `true`, display the multi select clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The custom display value to use.
    */
   component?: FC<{
@@ -59,6 +65,8 @@ interface MultiSelectOptions {
    * If `true`, display the multi select clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -109,6 +117,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   let {
     className,
+    clearable = true,
     closeOnSelect = false,
     color,
     component,
@@ -133,7 +142,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const {
     children,
     descendants,
-    isEmpty,
+    isEmpty: empty,
     placeholder,
     value,
     formControlProps,
@@ -150,6 +159,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     placeholderInOptions: false,
   })
 
+  const clearableProps = clearable || isClearable
   h ??= height
   minH ??= minHeight
 
@@ -183,7 +193,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
                 />
               </PopoverTrigger>
 
-              {isClearable && value.length ? (
+              {clearableProps && value.length ? (
                 <SelectClearIcon
                   {...clearIconProps}
                   onClick={handlerAll(clearIconProps?.onClick, onClear)}
@@ -194,7 +204,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
               )}
             </ui.div>
 
-            {!isEmpty ? (
+            {!empty ? (
               <Portal {...portalProps}>
                 <SelectList
                   footer={runIfFunc(footer, { value, onClose })}

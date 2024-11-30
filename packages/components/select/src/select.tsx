@@ -107,7 +107,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const {
     children,
     descendants,
-    isEmpty,
+    isEmpty: empty,
     value,
     formControlProps,
     getContainerProps,
@@ -165,7 +165,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
               <SelectIcon {...iconProps} {...formControlProps} />
             </ui.div>
 
-            {!isEmpty ? (
+            {!empty ? (
               <Portal {...portalProps}>
                 <SelectList
                   footer={runIfFunc(footer, { value, onClose })}

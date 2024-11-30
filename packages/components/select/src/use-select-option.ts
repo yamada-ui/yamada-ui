@@ -29,11 +29,27 @@ export interface UseSelectOptionProps extends Omit<HTMLUIProps, "value"> {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the select option will be focusable.
+   *
+   * @default false
+   */
+  focusable?: boolean
+  /**
+   * If `true`, the select option will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * If `true`, the select option will be focusable.
    *
    * @default false
+   *
+   * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
   /**
@@ -48,7 +64,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     fieldRef,
     focusedIndex,
     omitSelectedValues,
-    placeholder,
+    placeholder: placeholderProps,
     placeholderInOptions,
     setFocusedIndex,
     value,
@@ -64,39 +80,37 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     children,
     closeOnSelect: customCloseOnSelect,
     icon: customIcon,
-    isDisabled,
-    isFocusable,
+    isDisabled: disabled,
+    isFocusable: focusable,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-  const trulyDisabled = !!isDisabled && !isFocusable
+  const trulyDisabled = !!disabled && !focusable
   const { descendants, index, register } = useSelectDescendant({
     disabled: trulyDisabled,
   })
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-  const hasPlaceholder = !!placeholder && placeholderInOptions
-  const isPlaceholder = hasPlaceholder && index === 0
-  const isMulti = isArray(value)
-  const isDuplicated = !isMulti
+  const hasPlaceholder = !!placeholderProps && placeholderInOptions
+  const placeholder = hasPlaceholder && index === 0
+  const multi = isArray(value)
+  const duplicated = !multi
     ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isFocused = index === focusedIndex
+  const selected =
+    !duplicated &&
+    (!multi ? (optionValue ?? "") === value : value.includes(optionValue ?? ""))
+  const focused = index === focusedIndex
 
   id ??= uuid
 
-  if (!isPlaceholder && isUndefined(optionValue)) {
+  if (!placeholder && isUndefined(optionValue)) {
     if (isString(children) || isNumber(children)) {
       optionValue = children.toString()
     } else {
       console.warn(
         `${
-          !isMulti ? "Select" : "MultiSelect"
+          !multi ? "Select" : "MultiSelect"
         }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
       )
     }
@@ -105,7 +119,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
   if (hasPlaceholder && index > 0 && !optionValue) {
     console.warn(
       `${
-        !isMulti ? "Select" : "MultiSelect"
+        !multi ? "Select" : "MultiSelect"
       }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
     )
   }
@@ -115,13 +129,13 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       ev.preventDefault()
       ev.stopPropagation()
 
-      if (isDisabled || !isTargetOption(ev.currentTarget)) {
+      if (disabled || !isTargetOption(ev.currentTarget)) {
         if (fieldRef.current) fieldRef.current.focus()
 
         return
       }
 
-      if (!isDuplicated) setFocusedIndex(index)
+      if (!duplicated) setFocusedIndex(index)
 
       onChange(optionValue ?? "")
 
@@ -132,8 +146,8 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       if (omitSelectedValues) onFocusNext()
     },
     [
-      isDisabled,
-      isDuplicated,
+      disabled,
+      duplicated,
       setFocusedIndex,
       index,
       onChange,
@@ -167,12 +181,12 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
         ...computedProps,
         ...props,
         id,
-        style: omitSelectedValues && isSelected ? style : undefined,
-        "aria-disabled": ariaAttr(isDisabled),
-        "aria-selected": isSelected,
-        "data-disabled": dataAttr(isDisabled),
-        "data-duplicated": dataAttr(isDuplicated),
-        "data-focus": dataAttr(isFocused),
+        style: omitSelectedValues && selected ? style : undefined,
+        "aria-disabled": ariaAttr(disabled),
+        "aria-selected": selected,
+        "data-disabled": dataAttr(disabled),
+        "data-duplicated": dataAttr(duplicated),
+        "data-focus": dataAttr(focused),
         "data-value": optionValue ?? "",
         tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
@@ -182,10 +196,10 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       id,
       optionValue,
       computedProps,
-      isDisabled,
-      isFocused,
-      isDuplicated,
-      isSelected,
+      disabled,
+      focused,
+      duplicated,
+      selected,
       omitSelectedValues,
       onClick,
       register,
@@ -195,8 +209,8 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
   return {
     children,
     customIcon,
-    isFocused,
-    isSelected,
+    isFocused: focused,
+    isSelected: selected,
     getOptionProps,
   }
 }

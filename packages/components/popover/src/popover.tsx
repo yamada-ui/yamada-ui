@@ -22,8 +22,7 @@ import {
   useFocusOnPointerDown,
   useFocusOnShow,
 } from "@yamada-ui/use-focus"
-import { usePopper } from "@yamada-ui/use-popper"
-import { popperProperties } from "@yamada-ui/use-popper"
+import { usePopper, popperProperties } from "@yamada-ui/use-popper"
 import {
   createContext,
   getEventRelatedTarget,

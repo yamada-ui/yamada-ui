@@ -27,6 +27,14 @@ tab: Props
 />
 
 <PropsCard
+  id="infinitescrollarea-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the infinite scroll is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="infinitescrollarea-finish"
   name="finish"
   type="type ONLY_FOR_FORMAT =
@@ -59,6 +67,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the infinite scroll is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -67,6 +76,7 @@ tab: Props
   name="isReverse"
   type="boolean"
   description={"If `true`, reverse direction."}
+  deprecated={"Use `reverse` instead."}
   defaultValue={"false"}
 />
 
@@ -111,6 +121,14 @@ tab: Props
   name="resetRef"
   type="RefObject<(index?: number | undefined, runScroll?: boolean | undefined) => void>"
   description={"Ref to a reset function."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-reverse"
+  name="reverse"
+  type="boolean"
+  description={"If `true`, reverse direction."}
+  defaultValue={"false"}
 />
 
 <PropsCard

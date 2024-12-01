@@ -724,9 +724,16 @@
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.",
+      "required": false
+    },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.",
       "required": false
     },

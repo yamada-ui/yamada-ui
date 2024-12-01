@@ -30,10 +30,19 @@ order: 1
 />
 
 <PropsCard
+  id="ripple-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="ripple-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -41,7 +50,12 @@ order: 1
 
 <PropsCard id="useripple-disabled" name="disabled" type="boolean" />
 
-<PropsCard id="useripple-isdisabled" name="isDisabled" type="boolean" />
+<PropsCard
+  id="useripple-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  deprecated={"Use `disabled` instead."}
+/>
 
 <PropsCard
   id="useripple-onpointerdown"

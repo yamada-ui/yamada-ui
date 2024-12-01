@@ -11,8 +11,14 @@
       "description": "The `ref` to the component where the portal will be attached to.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the forwarding will be disabled.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the forwarding will be disabled.",
       "required": false
     }

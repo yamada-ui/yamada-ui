@@ -331,7 +331,7 @@ export const nestedResizable: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
       <Resizable borderWidth="1px" disabled h="md" rounded="md">

@@ -438,5 +438,6 @@
       "description": "The value of the menu item group.",
       "required": false
     }
-  }
+  },
+  "MenuSeparator": {}
 }

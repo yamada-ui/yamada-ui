@@ -12,10 +12,28 @@ tab: Props
 ### IconButtonProps
 
 <PropsCard
+  id="iconbutton-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="iconbutton-disableripple"
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="iconbutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
+  }
   defaultValue={"false"}
 />
 
@@ -31,6 +49,7 @@ tab: Props
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -39,6 +58,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -47,6 +67,7 @@ tab: Props
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
+  deprecated={"Use `loading` instead."}
   defaultValue={"false"}
 />
 
@@ -55,7 +76,16 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={
-    "If true, the button is full rounded. Else, it'll be slightly round."
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="iconbutton-loading"
+  name="loading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
   defaultValue={"false"}
 />

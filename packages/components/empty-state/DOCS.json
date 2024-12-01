@@ -1,4 +1,7 @@
 {
+  "EmptyStateContent": {},
+  "EmptyStateDescription": {},
+  "EmptyStateIndicator": {},
   "EmptyState": {
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
@@ -52,8 +55,5 @@
       "required": false
     }
   },
-  "EmptyStateTitle": {},
-  "EmptyStateDescription": {},
-  "EmptyStateIndicator": {},
-  "EmptyStateContent": {}
+  "EmptyStateTitle": {}
 }

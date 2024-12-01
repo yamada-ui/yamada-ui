@@ -14,6 +14,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },

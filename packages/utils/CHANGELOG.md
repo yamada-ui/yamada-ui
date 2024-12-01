@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.6.0
+
+### Minor Changes
+
+- [#3321](https://github.com/yamada-ui/yamada-ui/pull/3321) [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484) Thanks [@taroj1205](https://github.com/taroj1205)! - Added `useIsSsr` hook.
+
 ## 1.5.4
 
 ### Patch Changes

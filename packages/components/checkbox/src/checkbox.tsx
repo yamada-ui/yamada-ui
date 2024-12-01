@@ -90,8 +90,8 @@ export const Checkbox = forwardRef(
         : computedProps.onChange
 
     const {
-      isChecked,
-      isIndeterminate,
+      checked,
+      indeterminate,
       props: rest,
       getContainerProps,
       getIconProps,
@@ -109,15 +109,15 @@ export const Checkbox = forwardRef(
 
     const { children: customIcon, ...resolvedIconProps } = { ...iconProps }
     const icon = cloneElement(customIcon ?? <CheckboxIcon />, {
-      isChecked,
+      checked,
+      indeterminate,
       isDisabled,
-      isIndeterminate,
       isInvalid,
       isReadOnly,
       isRequired,
       __css: {
-        opacity: isChecked || isIndeterminate ? 1 : 0,
-        transform: isChecked || isIndeterminate ? "scale(1)" : "scale(0.95)",
+        opacity: checked || indeterminate ? 1 : 0,
+        transform: checked || indeterminate ? "scale(1)" : "scale(0.95)",
         transitionDuration: "normal",
         transitionProperty: "transform",
       },
@@ -181,17 +181,35 @@ export type CheckboxIconProps = {
    *
    * @default false
    */
+  checked?: boolean
+  /**
+   * If `true`, the icon will be indeterminate.
+   *
+   * @default false
+   */
+  indeterminate?: boolean
+  /**
+   * If `true`, the icon will be checked.
+   *
+   * @default false
+   *
+   * @deprecated Use `checked` instead.
+   */
   isChecked?: boolean
   /**
    * If `true`, the icon will be indeterminate.
    *
    * @default false
+   *
+   * @deprecated Use `indeterminate` instead.
    */
   isIndeterminate?: boolean
 } & FormControlOptions &
   MotionProps<"svg">
 
 export const CheckboxIcon: FC<CheckboxIconProps> = ({
+  checked,
+  indeterminate,
   isChecked,
   isDisabled: _isDisabled,
   isIndeterminate,
@@ -200,9 +218,12 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   isRequired: _isRequired,
   ...rest
 }) => {
+  checked ??= isChecked
+  indeterminate ??= isIndeterminate
+
   return (
     <AnimatePresence initial={false}>
-      {isIndeterminate || isChecked ? (
+      {indeterminate || checked ? (
         <ui.div
           __css={{
             left: "50%",
@@ -227,7 +248,7 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
               unchecked: { scale: 0.5 },
             }}
           >
-            {isIndeterminate ? (
+            {indeterminate ? (
               <CheckboxIndeterminateIcon {...rest} />
             ) : (
               <CheckboxCheckIcon {...rest} />

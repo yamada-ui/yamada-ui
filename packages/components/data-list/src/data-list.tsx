@@ -68,7 +68,7 @@ export interface DataListProps
     DataListOptions {}
 
 /**
- * `DataList` is used to display a list of similar data items.
+ * `DataList` is used to display a list of data items.
  *
  * @see Docs https://yamada-ui.com/components/data-display/data-list
  */

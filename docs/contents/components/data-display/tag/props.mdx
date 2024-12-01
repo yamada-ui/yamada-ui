@@ -7,7 +7,6 @@ package_name: "@yamada-ui/tag"
 order: 1
 with_description: true
 tab: Props
-label: Updated
 ---
 
 ## Props
@@ -30,6 +29,14 @@ label: Updated
 />
 
 <PropsCard
+  id="tag-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the tag is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tag-endicon"
   name="endIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
@@ -41,6 +48,7 @@ label: Updated
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tag is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

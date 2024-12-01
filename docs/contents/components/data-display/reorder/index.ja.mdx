@@ -2,7 +2,7 @@
 title: Reorder
 description: "`Reorder`は、項目の順序をドラッグアンドドロップで変更できるコンポーネントです。"
 package_name: "@yamada-ui/reorder"
-order: 19
+order: 20
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -50,7 +50,7 @@ return <Reorder items={items} />
 ### バリアントを変更する
 
 ```tsx
-<VStack divider={<Divider />}>
+<VStack separator={<Separator />}>
   <Reorder variant="outline">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>
@@ -80,7 +80,7 @@ return <Reorder items={items} />
 ### サイズを変更する
 
 ```tsx
-<VStack divider={<Divider />}>
+<VStack separator={<Separator />}>
   <Reorder size="sm">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>
@@ -120,7 +120,7 @@ return <Reorder items={items} />
 方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトでは、`vertical`が設定されています。
 
 ```tsx
-<VStack divider={<Divider />}>
+<VStack separator={<Separator />}>
   <Reorder orientation="vertical">
     <ReorderItem value="ギニュー">ギニュー</ReorderItem>
     <ReorderItem value="リクーム">リクーム</ReorderItem>

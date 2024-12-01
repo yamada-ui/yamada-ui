@@ -264,6 +264,30 @@
       "required": false
     }
   },
+  "Separator": {
+    "colorScheme": {
+      "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
+      "description": "The visual color appearance of the component.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "'horizontal'",
+      "description": "The orientation of the divider.",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Separator.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"dashed\" | \"dotted\" | \"solid\"",
+      "defaultValue": "\"solid\"",
+      "description": "The variant of the Separator.",
+      "required": false
+    }
+  },
   "Spacer": {},
   "Stack": {
     "align": {
@@ -278,12 +302,18 @@
     },
     "divider": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "deprecated": "Use `separator` instead.",
       "description": "If `true`, each stack item will show a divider.",
       "required": false
     },
     "justify": {
       "type": "\"left\" | \"right\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"normal\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "separator": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "If `true`, each stack item will show a separator.",
       "required": false
     },
     "wrap": {

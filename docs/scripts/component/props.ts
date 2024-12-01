@@ -24,8 +24,10 @@ interface Props {
   see?: string
 }
 
-const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, "packages", "components")
-const DIST_PATH = path.join("contents", "components")
+const SOURCE_PATH = path
+  .join(CONSTANT.PATH.ROOT, "packages", "components")
+  .replaceAll(/\\/g, "/")
+const DIST_PATH = path.join("contents", "components").replaceAll(/\\/g, "/")
 const LOCALE_TAB_MAP = {
   en: "Props",
   ja: "Props",
@@ -56,6 +58,26 @@ const OVERRIDE_PATHS: {
     { children: ["chart-label"], parent: "radial-chart" },
     "donut-chart",
   ],
+  checkbox: [
+    {
+      children: [
+        "checkbox-group",
+        "checkbox-icon",
+        "use-checkbox",
+        "use-checkbox-group",
+      ],
+      parent: "checkbox",
+    },
+    {
+      children: [
+        "checkbox-card-group",
+        "checkbox-card-label",
+        "checkbox-card-description",
+        "checkbox-card-addon",
+      ],
+      parent: "checkbox-card",
+    },
+  ],
   "color-picker": [
     "color-picker",
     "color-selector",
@@ -74,6 +96,7 @@ const OVERRIDE_PATHS: {
       parent: "fieldset",
     },
   ],
+  format: ["format-number", "format-byte"],
   image: ["image", "native-image", "picture"],
   layouts: [
     "aspect-ratio",
@@ -87,6 +110,7 @@ const OVERRIDE_PATHS: {
     "stack",
     "bleed",
     "float",
+    "separator",
   ],
   link: ["link", { children: ["link-overlay"], parent: "link-box" }],
   modal: [
@@ -122,6 +146,21 @@ const OVERRIDE_PATHS: {
     },
   ],
   progress: ["progress", "circle-progress"],
+  radio: [
+    {
+      children: ["radio-group", "use-radio", "use-radio-group"],
+      parent: "radio",
+    },
+    {
+      children: [
+        "radio-card-group",
+        "radio-card-label",
+        "radio-card-description",
+        "radio-card-addon",
+      ],
+      parent: "radio-card",
+    },
+  ],
   select: ["select", "multi-select"],
   slider: ["slider", "range-slider"],
   table: ["table", "paging-table"],

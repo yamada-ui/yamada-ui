@@ -2,7 +2,7 @@ import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
-export const Star = forwardRef<SVGSVGElement, IconProps>(
+export const StarIcon = forwardRef<SVGSVGElement, IconProps>(
   ({ boxSize = "1em", color = "#e3b341", ...rest }, ref) => {
     return (
       <Icon
@@ -20,4 +20,4 @@ export const Star = forwardRef<SVGSVGElement, IconProps>(
   },
 )
 
-Star.displayName = "Star"
+StarIcon.displayName = "StarIcon"

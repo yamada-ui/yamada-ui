@@ -1,9 +1,8 @@
 import type { ButtonProps, ModalProps, StackProps } from "@yamada-ui/react"
 import type { FC, KeyboardEvent, RefObject } from "react"
-import { File, Hash, SearchIcon } from "@yamada-ui/lucide"
+import { FileIcon, HashIcon, SearchIcon } from "@yamada-ui/lucide"
 import {
   dataAttr,
-  Divider,
   forwardRef,
   handlerAll,
   Highlight,
@@ -14,6 +13,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
+  Separator,
   Text,
   ui,
   useDisclosure,
@@ -295,7 +295,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         {hits.length ? (
           <ModalBody ref={containerRef} my="0" pb="md">
-            <Divider />
+            <Separator />
 
             <VStack as="ul" gap="sm">
               {hits.map(({ type, hierarchy, slug, title }, index) => {
@@ -332,9 +332,9 @@ const SearchModal: FC<SearchModalProps> = memo(
                     }}
                   >
                     {type === "page" ? (
-                      <File color="muted" fontSize="2xl" />
+                      <FileIcon color="muted" fontSize="2xl" />
                     ) : (
-                      <Hash
+                      <HashIcon
                         color={["blackAlpha.500", "whiteAlpha.400"]}
                         fontSize="2xl"
                       />

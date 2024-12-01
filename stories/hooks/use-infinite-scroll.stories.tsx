@@ -22,7 +22,7 @@ export default meta
 
 export const basic = () => {
   const [count, setCount] = useState<number>(50)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 
@@ -51,7 +51,7 @@ export const basic = () => {
           </Card>
         ))}
 
-      {!isFinish ? (
+      {!finish ? (
         <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center>
@@ -64,7 +64,7 @@ export const withRoot = () => {
   const rootRef = useRef<HTMLDivElement>(null)
   const resetRef = useRef<() => void>(noop)
   const [count, setCount] = useState<number>(50)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     resetRef,
     rootRef,
     onLoad: ({ finish, index }) => {
@@ -103,7 +103,7 @@ export const withRoot = () => {
             </Card>
           ))}
 
-        {!isFinish ? (
+        {!finish ? (
           <Center ref={ref} w="full">
             <Loading fontSize="2xl" />
           </Center>
@@ -117,7 +117,7 @@ export const withRoot = () => {
 
 export const withRootMargin = () => {
   const [count, setCount] = useState<number>(50)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     rootMargin: "300px 0px 0px 0px",
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
@@ -147,7 +147,7 @@ export const withRootMargin = () => {
           </Card>
         ))}
 
-      {!isFinish ? (
+      {!finish ? (
         <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center>
@@ -158,7 +158,7 @@ export const withRootMargin = () => {
 
 export const withThreshold = () => {
   const [count, setCount] = useState<number>(50)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     threshold: 1,
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
@@ -188,7 +188,7 @@ export const withThreshold = () => {
           </Card>
         ))}
 
-      {!isFinish ? (
+      {!finish ? (
         <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center>
@@ -199,7 +199,7 @@ export const withThreshold = () => {
 
 export const withInitialLoad = () => {
   const [count, setCount] = useState<number>(0)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     initialLoad: true,
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
@@ -229,7 +229,7 @@ export const withInitialLoad = () => {
           </Card>
         ))}
 
-      {!isFinish ? (
+      {!finish ? (
         <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center>
@@ -240,7 +240,7 @@ export const withInitialLoad = () => {
 
 export const isReverse = () => {
   const [count, setCount] = useState<number>(50)
-  const { ref, isFinish } = useInfiniteScroll({
+  const { ref, finish } = useInfiniteScroll({
     isReverse: true,
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
@@ -253,7 +253,7 @@ export const isReverse = () => {
 
   return (
     <>
-      {!isFinish ? (
+      {!finish ? (
         <Center ref={ref} w="full">
           <Loading fontSize="2xl" />
         </Center>

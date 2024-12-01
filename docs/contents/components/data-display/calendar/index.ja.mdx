@@ -2,7 +2,7 @@
 title: Calendar
 description: "`Calendar`は、日付を表示または選択するカレンダーのコンポーネントです。"
 package_name: "@yamada-ui/calendar"
-order: 10
+order: 11
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -373,7 +373,7 @@ return <Calendar value={value} onChange={onChange} />
 ```tsx
 <VStack>
   <Calendar labelProps={{ color: "red.500" }} />
-  <Calendar labelProps={{ icon: <Ghost /> }} />
+  <Calendar labelProps={{ icon: <GhostIcon /> }} />
 </VStack>
 ```
 
@@ -383,9 +383,9 @@ return <Calendar value={value} onChange={onChange} />
 
 ```tsx
 <VStack>
-  <Calendar controlProps={{ icon: <Ghost /> }} />
-  <Calendar prevProps={{ icon: <Ghost /> }} />
-  <Calendar nextProps={{ icon: <Ghost /> }} />
+  <Calendar controlProps={{ icon: <GhostIcon /> }} />
+  <Calendar prevProps={{ icon: <GhostIcon /> }} />
+  <Calendar nextProps={{ icon: <GhostIcon /> }} />
 </VStack>
 ```
 

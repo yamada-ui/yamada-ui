@@ -135,8 +135,8 @@ export const useColorSlider = ({
   })
   const value = clampNumber(computedValue, min, max)
   const thumbPercent = valueToPercent(value, min, max)
-  const [isDragging, setDragging] = useState(false)
-  const isInteractive = !(disabled || readOnly)
+  const [dragging, setDragging] = useState(false)
+  const interactive = !(disabled || readOnly)
 
   const oneStep = step || (max - min) / 100
   const tenStep = (max - min) / 10
@@ -147,7 +147,7 @@ export const useColorSlider = ({
   const latestRef = useLatestRef({
     eventSource: null as "keyboard" | "pointer" | null,
     focusThumbOnChange,
-    isInteractive,
+    interactive,
     max,
     min,
     step,
@@ -195,9 +195,9 @@ export const useColorSlider = ({
 
   const constrain = useCallback(
     (value: number) => {
-      const { isInteractive, max, min } = latestRef.current
+      const { interactive, max, min } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       value = parseFloat(roundNumberToStep(value, min, oneStep))
       value = clampNumber(value, min, max)
@@ -248,24 +248,24 @@ export const useColorSlider = ({
 
   usePanEvent(containerRef, {
     onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+      const { interactive: interactive } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setValueFromPointer(ev)
     },
     onSessionEnd: () => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(false)
       onChangeEnd(value)
     },
     onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(true)
       focusThumb()
@@ -362,9 +362,9 @@ export const useColorSlider = ({
         "aria-valuemin": min,
         "aria-valuenow": value,
         "aria-valuetext": getAriaValueText(channel, value),
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        "data-active": dataAttr(dragging && focusThumbOnChange),
         role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        tabIndex: interactive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlurProp),
         onFocus: handlerAll(props.onFocus, onFocusProp),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -380,9 +380,9 @@ export const useColorSlider = ({
       max,
       min,
       channel,
-      isDragging,
+      dragging,
       focusThumbOnChange,
-      isInteractive,
+      interactive,
       onBlurProp,
       onFocusProp,
       onKeyDown,

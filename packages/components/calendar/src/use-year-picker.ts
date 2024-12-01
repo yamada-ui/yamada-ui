@@ -61,7 +61,9 @@ export const useYearPicker = ({
   const {
     allowInput,
     dateToString,
+    inputFormat,
     inputRef,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -140,6 +142,12 @@ export const useYearPicker = ({
 
     setInputValue(inputValue)
   }, [value])
+
+  useUpdateEffect(() => {
+    const inputValue = dateToString(value)
+
+    setInputValue(inputValue)
+  }, [locale, inputFormat])
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {

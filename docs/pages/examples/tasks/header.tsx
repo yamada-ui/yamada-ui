@@ -7,10 +7,10 @@ import {
   HStack,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
+  MenuSeparator,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -39,18 +39,18 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
         <MenuList>
           <MenuGroup px="3">
-            <Box as="li">
+            <Box as="li" listStyleType="none">
               <Text lineClamp={1}>Hirotomo Yamada</Text>
             </Box>
 
-            <Box as="li">
+            <Box as="li" listStyleType="none">
               <Text color="muted" fontSize="sm" lineClamp={1}>
                 mail@example.com
               </Text>
             </Box>
           </MenuGroup>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuGroup>
             <MenuItem command="⇧⌘P">Profile</MenuItem>
@@ -59,7 +59,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
             <MenuItem>New Team</MenuItem>
           </MenuGroup>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuGroup>
             <MenuItem command="⇧⌘Q">Logout</MenuItem>

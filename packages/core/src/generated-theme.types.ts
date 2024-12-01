@@ -451,6 +451,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
     }
+    CheckboxCard: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: "outline" | "subtle" | "surface" | ({} & string)
+    }
     CloseButton: {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
@@ -470,6 +474,10 @@ export interface GeneratedTheme extends UITheme {
     ColorSwatch: {
       sizes: "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "basic" | "rounded" | ({} & string)
+    }
+    DataList: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: "bold" | "grid" | "subtle" | ({} & string)
     }
     DatePicker: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
@@ -506,6 +514,10 @@ export interface GeneratedTheme extends UITheme {
     Dropzone: {
       sizes: "full" | "lg" | "md" | "sm" | "xs" | ({} & string)
       variants: "dashed" | "solid" | "unstyled" | ({} & string)
+    }
+    EmptyState: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: {} & string
     }
     FileButton: {
       sizes: "2xl" | "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
@@ -622,6 +634,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | "xl" | ({} & string)
       variants: "simple" | "striped" | "unstyled" | ({} & string)
     }
+    PasswordInput: {
+      sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
+      variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
+    }
     PieChart: {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string
@@ -643,6 +659,10 @@ export interface GeneratedTheme extends UITheme {
       variants: {} & string
     }
     Radio: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
+    RadioCard: {
+      sizes: "lg" | "md" | "sm" | ({} & string)
+      variants: "outline" | "subtle" | "surface" | ({} & string)
+    }
     RangeDatePicker: {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
@@ -676,7 +696,12 @@ export interface GeneratedTheme extends UITheme {
       sizes: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
       variants: "filled" | "flushed" | "outline" | "unstyled" | ({} & string)
     }
+    Separator: {
+      sizes: {} & string
+      variants: "dashed" | "dotted" | "solid" | ({} & string)
+    }
     Slider: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
+    Status: { sizes: "lg" | "md" | "sm" | ({} & string); variants: {} & string }
     Stepper: {
       sizes: "lg" | "md" | "sm" | ({} & string)
       variants: {} & string

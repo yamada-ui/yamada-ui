@@ -61,6 +61,14 @@ interface ColorSwatchOptions {
    *
    * @default false
    */
+  fullRounded?: boolean
+  /**
+   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
+   *
+   * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
+   */
   isRounded?: boolean
   /**
    * The overlay used for the swatch element.
@@ -86,15 +94,18 @@ export interface ColorSwatchProps
  */
 export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("ColorSwatch", props)
-  const {
+  let {
     className,
     color = "#ffffff00",
+    fullRounded,
     isRounded,
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  fullRounded ??= isRounded
 
   const css: CSSUIObject = {
     "& > *": {
@@ -128,11 +139,11 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
       aria-label={isString(color) ? color : undefined}
       aria-roledescription="color swatch"
       role="img"
-      {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
+      {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}
       __css={css}
       {...rest}
     >
-      <ui.div {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}>
+      <ui.div {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}>
         {overlays.map((props, index) => (
           <ui.div
             key={index}
@@ -144,7 +155,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
               top: 0,
               ...styles.overlay,
             }}
-            {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
+            {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}
             {...props}
           />
         ))}

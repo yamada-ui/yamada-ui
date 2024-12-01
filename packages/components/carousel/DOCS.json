@@ -188,10 +188,22 @@
     }
   },
   "CarouselControl": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -202,25 +214,35 @@
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "deprecated": "Use `fullRounded` instead.",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     }
   },

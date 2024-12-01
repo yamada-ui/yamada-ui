@@ -4,7 +4,7 @@ import type {
   PopoverProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Copy } from "@yamada-ui/lucide"
+import { CopyIcon } from "@yamada-ui/lucide"
 import {
   Button,
   IconButton,
@@ -69,7 +69,10 @@ export const ShareButton: FC<ShareButtonProps> = memo(
           <PopoverBody flexDirection="row" gap="sm">
             <Input defaultValue="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003" />
 
-            <IconButton colorScheme="primary" icon={<Copy fontSize="xl" />} />
+            <IconButton
+              colorScheme="primary"
+              icon={<CopyIcon fontSize="xl" />}
+            />
           </PopoverBody>
         </PopoverContent>
       </Popover>

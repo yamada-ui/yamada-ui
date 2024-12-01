@@ -20,7 +20,7 @@ export const Motion = motionForwardRef<MotionProps, "div">(
   ({ as = "div", className, ...rest }, ref) => (
     <Component
       ref={ref}
-      as={motion[as]}
+      as={motion.create(as)}
       className={cx("ui-motion", className)}
       {...rest}
     />

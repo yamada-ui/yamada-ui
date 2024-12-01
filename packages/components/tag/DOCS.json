@@ -11,6 +11,12 @@
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the tag is disabled.",
+      "required": false
+    },
     "endIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "Icon to be displayed to the end of the tag.",
@@ -19,6 +25,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the tag is disabled.",
       "required": false
     },

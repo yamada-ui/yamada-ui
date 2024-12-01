@@ -2,11 +2,10 @@
 title: PagingTable
 description: "`PagingTable`は、ページネーション機能を備えたテーブルのコンポーネントです。"
 package_name: "@yamada-ui/table"
-order: 8
+order: 9
 is_tabs: true
 with_description: true
 tab: 使い方
-label: Updated
 ---
 
 <PackageManagers packageNameOrCommand="@yamada-ui/table" />
@@ -694,7 +693,7 @@ return (
           <HStack>
             <IconButton
               size="sm"
-              icon={<ChevronLeft />}
+              icon={<ChevronLeftIcon fontSize="lg" />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
             />
@@ -710,7 +709,7 @@ return (
 
             <IconButton
               size="sm"
-              icon={<ChevronRight />}
+              icon={<ChevronRightIcon fontSize="lg" />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
             />

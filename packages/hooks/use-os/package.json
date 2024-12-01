@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-os",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Yamada UI useOS custom hook",
   "keywords": [
     "use-os"

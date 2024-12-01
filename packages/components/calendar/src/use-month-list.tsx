@@ -40,7 +40,7 @@ export const useMonthList = () => {
     __selectType,
   } = useCalendarContext()
 
-  const isMulti = isArray(selectedValue)
+  const multi = isArray(selectedValue)
   const beforeYear = useRef<null | number>(null)
   const rangeMonths = getRangeMonths(locale, monthFormat)
   const label = getFormattedLabel(year, locale, yearFormat)
@@ -134,27 +134,27 @@ export const useMonthList = () => {
     if (__selectType === "date") {
       return month.getFullYear() === year
     } else {
-      const selectedYear = !isMulti
+      const selectedYear = !multi
         ? selectedValue?.getFullYear()
         : selectedValue[0]?.getFullYear()
 
       return selectedYear === year
     }
-  }, [__selectType, isMulti, month, selectedValue, year])
+  }, [__selectType, multi, month, selectedValue, year])
 
   const getIsSelected = useCallback(
     (value: number) => {
       if (__selectType === "date") {
         return month.getMonth() === value
       } else {
-        const month = !isMulti
+        const month = !multi
           ? selectedValue?.getMonth()
           : selectedValue[0]?.getMonth()
 
         return month === value
       }
     },
-    [__selectType, isMulti, month, selectedValue],
+    [__selectType, multi, month, selectedValue],
   )
 
   useUpdateEffect(() => {
@@ -184,10 +184,10 @@ export const useMonthList = () => {
     HTMLProps<"button">
   > = useCallback(
     ({ value, ...props }, ref = null) => {
-      const isControlled = typeof beforeYear.current === "number"
-      const isSelectedYear = getIsSelectedYear()
-      const isSelected = isSelectedYear && getIsSelected(value)
-      const isDisabled = !isMonthInRange({
+      const controlled = typeof beforeYear.current === "number"
+      const selectedYear = getIsSelectedYear()
+      const selected = selectedYear && getIsSelected(value)
+      const disabled = !isMonthInRange({
         date: new Date(year, value),
         maxDate,
         minDate,
@@ -197,22 +197,22 @@ export const useMonthList = () => {
 
       let tabIndex = -1
 
-      if (isControlled) {
+      if (controlled) {
         tabIndex = -1
-      } else if (!isSelectedYear && value === 0) {
+      } else if (!selectedYear && value === 0) {
         tabIndex = 0
-      } else if (isSelected) {
+      } else if (selected) {
         tabIndex = 0
       }
 
       return {
         ref: mergeRefs(ref, monthRefs.current.get(value)),
-        disabled: isDisabled,
+        disabled,
         ...props,
-        "aria-disabled": ariaAttr(isDisabled),
-        "aria-selected": ariaAttr(isSelected),
-        "data-disabled": dataAttr(isDisabled),
-        "data-selected": dataAttr(isSelected),
+        "aria-disabled": ariaAttr(disabled),
+        "aria-selected": ariaAttr(selected),
+        "data-disabled": dataAttr(disabled),
+        "data-selected": dataAttr(selected),
         "data-value": value,
         tabIndex,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),

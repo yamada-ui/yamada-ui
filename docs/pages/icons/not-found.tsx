@@ -1,6 +1,12 @@
 import type { BoxProps } from "@yamada-ui/react"
 import type { FC, MutableRefObject } from "react"
-import { Bird, Fish, Rabbit, Snail, Squirrel } from "@yamada-ui/lucide"
+import {
+  BirdIcon,
+  FishIcon,
+  RabbitIcon,
+  SnailIcon,
+  SquirrelIcon,
+} from "@yamada-ui/lucide"
 import { Button, Center, Text } from "@yamada-ui/react"
 import { useI18n } from "contexts"
 import { memo } from "react"
@@ -13,7 +19,7 @@ export const NotFound: FC<NotFoundProps> = memo(
   ({ valueResetRef, ...rest }) => {
     const { t } = useI18n()
 
-    const Icon = [Rabbit, Snail, Squirrel, Bird, Fish][
+    const Icon = [RabbitIcon, SnailIcon, SquirrelIcon, BirdIcon, FishIcon][
       Math.floor(Math.random() * 5)
     ]!
 

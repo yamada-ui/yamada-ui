@@ -4,8 +4,8 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
   Heading,
+  Separator,
   Spacer,
   Tag,
   Text,
@@ -33,7 +33,7 @@ export const ImageCard = memo(() => {
         </Heading>
       </CardBody>
 
-      <Divider />
+      <Separator />
 
       <CardFooter backdropFilter="blur(10px)" pt={4} roundedBottom="xl">
         <Text color="whiteAlpha.700">Captured on 26 March 2024</Text>

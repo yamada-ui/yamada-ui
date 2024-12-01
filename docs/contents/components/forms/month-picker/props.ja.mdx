@@ -76,6 +76,14 @@ tab: Props
 />
 
 <PropsCard
+  id="monthpicker-clearable"
+  name="clearable"
+  type="boolean"
+  description={"If `true`, display the month picker clear icon."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="monthpicker-cleariconprops"
   name="clearIconProps"
   type="DatePickerIconProps"
@@ -261,6 +269,7 @@ tab: Props
   name="isClearable"
   type="boolean"
   description={"If `true`, display the month picker clear icon."}
+  deprecated={"Use `clearable` instead."}
   defaultValue={"true"}
 />
 
@@ -330,7 +339,7 @@ tab: Props
   description={
     "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass."
   }
-  defaultValue={"'en'"}
+  defaultValue={"'en-US'"}
   docs="https://day.js.org/docs/en/i18n/instance-locale"
 />
 

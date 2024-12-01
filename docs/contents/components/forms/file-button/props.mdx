@@ -12,6 +12,14 @@ tab: Props
 ### FileButtonProps
 
 <PropsCard
+  id="filebutton-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="filebutton-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -42,10 +50,21 @@ tab: Props
 />
 
 <PropsCard
+  id="filebutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="filebutton-isactive"
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -54,6 +73,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -70,6 +90,7 @@ tab: Props
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
+  deprecated={"Use `loading` instead."}
   defaultValue={"false"}
 />
 
@@ -94,8 +115,9 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={
-    "If true, the button is full rounded. Else, it'll be slightly round."
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -105,6 +127,14 @@ tab: Props
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the left side of the button."}
   deprecated={"Use `startIcon` instead."}
+/>
+
+<PropsCard
+  id="filebutton-loading"
+  name="loading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue={"false"}
 />
 
 <PropsCard

@@ -236,7 +236,7 @@ describe("<Carousel />", () => {
   test("should render function indicator correctly", () => {
     const indicatorComponent: FC<{
       index: number
-      isSelected: boolean
+      selected: boolean
     }> = ({ index }) => {
       return <Button>{`test indicator ${index}`}</Button>
     }

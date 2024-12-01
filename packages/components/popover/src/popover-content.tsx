@@ -79,16 +79,19 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     },
     ref,
   ) => {
-    const {
+    let {
       animation,
       closeOnButton,
       duration,
       isOpen,
+      open,
       styles,
       getPopoverProps,
       getPopperProps,
       onAnimationComplete,
     } = usePopover()
+
+    open ??= isOpen
 
     const validChildren = getValidChildren(children)
     const [customPopoverCloseButton, ...cloneChildren] = findChildren(
@@ -122,7 +125,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     return (
       <ui.div
         {...getPopperProps({
-          style: { visibility: isOpen ? "visible" : "hidden" },
+          style: { visibility: open ? "visible" : "hidden" },
         })}
         className="ui-popover"
         maxWidth={maxWidth}
@@ -138,7 +141,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             ? getPopoverContentProps(animation, duration)
             : {})}
           {...getPopoverProps(rest, ref)}
-          animate={isOpen ? "enter" : "exit"}
+          animate={open ? "enter" : "exit"}
           exit="exit"
           initial="exit"
           onAnimationComplete={funcAll(

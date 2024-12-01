@@ -1,5 +1,11 @@
 {
   "Button": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"gray\"",
@@ -17,34 +23,50 @@
       "description": "The icon to display at the end side of the button.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "deprecated": "Use `fullRounded` instead.",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "deprecated": "Use `startIcon` instead.",
       "description": "The icon to display at the left side of the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "loadingIcon": {
@@ -88,29 +110,55 @@
     }
   },
   "ButtonGroup": {
+    "attached": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+      "required": false
+    },
     "direction": {
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, all wrapped button will be disabled.",
+      "required": false
+    },
     "isAttached": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `attached` instead.",
       "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, all wrapped button will be disabled.",
       "required": false
     }
   },
   "IconButton": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -121,25 +169,35 @@
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "deprecated": "Use `fullRounded` instead.",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     }
   }

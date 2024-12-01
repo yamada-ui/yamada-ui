@@ -62,7 +62,7 @@ export const basic: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard
           description="パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。"
           label="ビアンカ"
@@ -80,7 +80,7 @@ export const basic: Story = () => {
         />
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
@@ -103,7 +103,7 @@ export const basic: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ" items={items} />
+      <RadioCardGroup defaultValue="フローラ" items={items} />
     </>
   )
 }
@@ -139,7 +139,7 @@ export const withSize: Story = () => {
         <RadioCardGroup
           key={size}
           size={size}
-          defaultValue="ビアンカ"
+          defaultValue="フローラ"
           items={items}
         />
       )}
@@ -178,7 +178,7 @@ export const withVariant: Story = () => {
         <RadioCardGroup
           key={variant}
           variant={variant}
-          defaultValue="ビアンカ"
+          defaultValue="フローラ"
           items={items}
         />
       )}
@@ -205,7 +205,7 @@ export const withColorScheme: Story = () => {
               key={colorScheme}
               colorScheme={colorScheme}
               variant={variant}
-              defaultValue="ビアンカ"
+              defaultValue="フローラ"
               items={items}
             />
           )}
@@ -245,7 +245,7 @@ export const withAddon: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard
           addon="ドラゴンクエストV 天空の花嫁（DQ5）"
           description="パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。"
@@ -266,7 +266,7 @@ export const withAddon: Story = () => {
         />
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
@@ -292,7 +292,7 @@ export const withAddon: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ" items={items} />
+      <RadioCardGroup defaultValue="フローラ" items={items} />
     </>
   )
 }
@@ -307,7 +307,7 @@ export const withDefaultValue: Story = () => {
     [],
   )
 
-  return <RadioCardGroup defaultValue="ビアンカ" items={items} />
+  return <RadioCardGroup defaultValue="フローラ" items={items} />
 }
 
 export const isDisabled: Story = () => {
@@ -322,7 +322,7 @@ export const isDisabled: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
@@ -347,10 +347,7 @@ export const isDisabled: Story = () => {
 
       <RadioCardGroup isDisabled items={items} />
 
-      <Fieldset
-        isDisabled
-        legend="Which notifications would you like to receive?"
-      >
+      <Fieldset isDisabled legend="Which characters would you like to select?">
         <RadioCardGroup items={items} />
       </Fieldset>
     </>
@@ -369,7 +366,7 @@ export const isReadOnly: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
@@ -394,10 +391,7 @@ export const isReadOnly: Story = () => {
 
       <RadioCardGroup isReadOnly items={items} />
 
-      <Fieldset
-        isReadOnly
-        legend="Which notifications would you like to receive?"
-      >
+      <Fieldset isReadOnly legend="Which characters would you like to select?">
         <RadioCardGroup items={items} />
       </Fieldset>
     </>
@@ -416,7 +410,7 @@ export const isInvalid: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard isInvalid value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
@@ -444,7 +438,7 @@ export const isInvalid: Story = () => {
       <Fieldset
         errorMessage="This is required."
         isInvalid
-        legend="Which notifications would you like to receive?"
+        legend="Which characters would you like to select?"
       >
         <RadioCardGroup items={items} />
       </Fieldset>
@@ -474,13 +468,13 @@ export const hiddenIcon: Story = () => {
 
   return (
     <>
-      <RadioCardGroup defaultValue="ビアンカ" withIcon={false}>
+      <RadioCardGroup defaultValue="フローラ" withIcon={false}>
         <RadioCard label="ビアンカ" value="ビアンカ" />
         <RadioCard label="フローラ" value="フローラ" />
         <RadioCard label="ルドマン" value="ルドマン" />
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ">
+      <RadioCardGroup defaultValue="フローラ">
         <RadioCard value="ビアンカ">
           <RadioCardLabel withIcon={false}>ビアンカ</RadioCardLabel>
         </RadioCard>
@@ -494,13 +488,13 @@ export const hiddenIcon: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup defaultValue="ビアンカ" items={items} />
+      <RadioCardGroup defaultValue="フローラ" items={items} />
     </>
   )
 }
 
 export const customControl: Story = () => {
-  const [value, setValue] = useState<string>("ビアンカ")
+  const [value, setValue] = useState<string>("フローラ")
 
   const items = useMemo<RadioCardItem[]>(
     () => [

@@ -1,5 +1,14 @@
 # @yamada-ui/portal
 
+## 1.0.25
+
+### Patch Changes
+
+- [#3657](https://github.com/yamada-ui/yamada-ui/pull/3657) [`4065286`](https://github.com/yamada-ui/yamada-ui/commit/4065286fe311de83fae4c203bf889de0789286f0) Thanks [@chida09](https://github.com/chida09)! - feat: remove `is` prefix
+
+- Updated dependencies [[`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484)]:
+  - @yamada-ui/utils@1.6.0
+
 ## 1.0.24
 
 ### Patch Changes

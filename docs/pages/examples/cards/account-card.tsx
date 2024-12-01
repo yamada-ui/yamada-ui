@@ -5,11 +5,11 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
   FormControl,
   Heading,
   HStack,
   Input,
+  Separator,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -46,13 +46,13 @@ export const AccountCard = memo(() => {
         </ButtonGroup>
 
         <HStack w="full">
-          <Divider />
+          <Separator />
 
           <Text color="muted" fontSize="sm" whiteSpace="nowrap">
             OR CONTINUE WITH
           </Text>
 
-          <Divider />
+          <Separator />
         </HStack>
 
         <VStack w="full">

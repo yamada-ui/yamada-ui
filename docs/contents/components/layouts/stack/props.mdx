@@ -32,6 +32,7 @@ tab: Props
   name="divider"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"If `true`, each stack item will show a divider."}
+  deprecated={"Use `separator` instead."}
 />
 
 <PropsCard
@@ -39,6 +40,13 @@ tab: Props
   name="justify"
   type='"left" | "right" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "normal" | "center" | "end" | "flex-end" | "flex-start" | "start" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
+/>
+
+<PropsCard
+  id="stack-separator"
+  name="separator"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"If `true`, each stack item will show a separator."}
 />
 
 <PropsCard

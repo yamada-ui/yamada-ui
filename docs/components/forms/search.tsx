@@ -3,7 +3,6 @@ import type { FC, KeyboardEvent, RefObject } from "react"
 import { FileIcon, HashIcon, SearchIcon } from "@yamada-ui/lucide"
 import {
   dataAttr,
-  Divider,
   forwardRef,
   handlerAll,
   Highlight,
@@ -14,6 +13,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
+  Separator,
   Text,
   ui,
   useDisclosure,
@@ -295,7 +295,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         {hits.length ? (
           <ModalBody ref={containerRef} my="0" pb="md">
-            <Divider />
+            <Separator />
 
             <VStack as="ul" gap="sm">
               {hits.map(({ type, hierarchy, slug, title }, index) => {

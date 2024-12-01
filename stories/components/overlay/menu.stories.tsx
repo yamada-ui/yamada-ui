@@ -348,7 +348,7 @@ export const disabledCloseBlur: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <Menu>
       <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
@@ -357,14 +357,14 @@ export const isDisabled: Story = () => {
 
       <MenuList>
         <MenuItem>Set status</MenuItem>
-        <MenuItem isDisabled>Edit Profile</MenuItem>
+        <MenuItem disabled>Edit Profile</MenuItem>
         <MenuItem>Preferences</MenuItem>
       </MenuList>
     </Menu>
   )
 }
 
-export const isFocusable: Story = () => {
+export const focusable: Story = () => {
   return (
     <Menu>
       <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
@@ -373,7 +373,7 @@ export const isFocusable: Story = () => {
 
       <MenuList>
         <MenuItem>Set status</MenuItem>
-        <MenuItem isDisabled isFocusable>
+        <MenuItem disabled focusable>
           Edit Profile
         </MenuItem>
         <MenuItem>Preferences</MenuItem>
@@ -384,7 +384,7 @@ export const isFocusable: Story = () => {
 
 export const useLazy: Story = () => {
   return (
-    <Menu isLazy>
+    <Menu lazy>
       <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
@@ -402,7 +402,7 @@ export const customControl: Story = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
-    <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
+    <Menu open={isOpen} onClose={onClose} onOpen={onOpen}>
       <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>

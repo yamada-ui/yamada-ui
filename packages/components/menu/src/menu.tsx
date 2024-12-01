@@ -54,9 +54,9 @@ export const Menu: FC<MenuProps> = (props) => {
   const { relatedRef, onDownstreamCloseMapRef, onUpstreamClose } =
     useUpstreamMenu() ?? {}
   const { hasDownstreamRef, setDownstreamOpen } = useUpstreamMenuItem() ?? {}
-  const isNested = !!relatedRef
+  const nested = !!relatedRef
 
-  if (isNested) {
+  if (nested) {
     placement ??= "right-start"
     offset ??= [-8, 8]
     closeOnBlur ??= false
@@ -107,8 +107,8 @@ export const Menu: FC<MenuProps> = (props) => {
   const onOpenInternal = useCallback(() => {
     onOpenProp?.()
 
-    if (!isNested) onFocusMenu()
-  }, [onOpenProp, isNested, onFocusMenu])
+    if (!nested) onFocusMenu()
+  }, [onOpenProp, nested, onFocusMenu])
 
   const onCloseInternal = useCallback(() => {
     onCloseProp?.()
@@ -119,7 +119,11 @@ export const Menu: FC<MenuProps> = (props) => {
   }, [onCloseProp])
 
   const id = useId()
-  const { isOpen, onClose, onOpen } = useDisclosure({
+  const {
+    isOpen: open,
+    onClose,
+    onOpen,
+  } = useDisclosure({
     ...props,
     onClose: onCloseInternal,
     onOpen: onOpenInternal,
@@ -136,8 +140,8 @@ export const Menu: FC<MenuProps> = (props) => {
   }, [id, onClose, onDownstreamCloseMapRef])
 
   useEffect(() => {
-    if (setDownstreamOpen) setDownstreamOpen(isOpen)
-  }, [setDownstreamOpen, isOpen])
+    if (setDownstreamOpen) setDownstreamOpen(open)
+  }, [setDownstreamOpen, open])
 
   useEffect(() => {
     if (hasDownstreamRef) hasDownstreamRef.current = true
@@ -148,8 +152,8 @@ export const Menu: FC<MenuProps> = (props) => {
   })
 
   useUpdateEffect(() => {
-    if (!isOpen) setFocusedIndex(-1)
-  }, [isOpen])
+    if (!open) setFocusedIndex(-1)
+  }, [open])
 
   useUnmountEffect(() => {
     timeoutIds.current.forEach((id) => clearTimeout(id))
@@ -170,8 +174,8 @@ export const Menu: FC<MenuProps> = (props) => {
             buttonRef,
             closeOnSelect,
             focusedIndex,
-            isNested,
-            isOpen,
+            isNested: nested,
+            isOpen: open,
             menuRef,
             requestAnimationFrameId,
             setFocusedIndex,
@@ -185,13 +189,13 @@ export const Menu: FC<MenuProps> = (props) => {
         >
           <Popover
             {...{
-              trigger: isNested ? "hover" : "click",
+              trigger: nested ? "hover" : "click",
               ...rest,
               closeOnBlur,
               closeOnButton: false,
               duration,
               initialFocusRef,
-              isOpen,
+              isOpen: open,
               offset,
               placement,
               relatedRef,

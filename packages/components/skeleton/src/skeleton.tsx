@@ -31,13 +31,29 @@ interface SkeletonOptions {
    *
    * @default false
    */
+  fitContent?: boolean
+  /**
+   * If `true`, the skeleton will take the width of it's children.
+   *
+   * @default false
+   *
+   * @deprecated Use `fitContent` instead.
+   */
   isFitContent?: boolean
   /**
    * If `true`, it'll render its children with a nice fade transition.
    *
    * @default false
+   *
+   * @deprecated Use `loaded` instead.
    */
   isLoaded?: boolean
+  /**
+   * If `true`, it'll render its children with a nice fade transition.
+   *
+   * @default false
+   */
+  loaded?: boolean
   /**
    * The animation speed in seconds.
    *
@@ -67,8 +83,10 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     children,
     endColor: _endColor,
     fadeDuration = 0.4,
+    fitContent,
     isFitContent,
     isLoaded,
+    loaded,
     speed = 0.8,
     startColor: _startColor,
     ...rest
@@ -80,7 +98,9 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const endColor = useValue(_endColor)
   const hasChildren = !!validChildren.length
 
-  isFitContent ??= hasChildren
+  fitContent ??= isFitContent
+  loaded ??= isLoaded
+  fitContent ??= hasChildren
 
   const fadeIn = useAnimation({
     duration:
@@ -120,15 +140,15 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     boxShadow: "none",
     color: "transparent",
     cursor: "default",
-    h: isFitContent ? "fit-content" : "fallback(4, 1rem)",
+    h: fitContent ? "fit-content" : "fallback(4, 1rem)",
     maxW: "100%",
     pointerEvents: "none",
     userSelect: "none",
-    w: isFitContent ? "fit-content" : "100%",
+    w: fitContent ? "fit-content" : "100%",
     ...styles,
   }
 
-  if (isLoaded) {
+  if (loaded) {
     const animation = !isMounted() || prevIsLoaded ? "none" : fadeIn
 
     return (

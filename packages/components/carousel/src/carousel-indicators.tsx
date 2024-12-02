@@ -9,7 +9,14 @@ interface CarouselIndicatorsOptions {
   /**
    * The custom carousel indicator to use.
    */
-  component?: FC<{ index: number; isSelected: boolean }>
+  component?: FC<{
+    index: number
+    selected: boolean
+    /**
+     * @deprecated Use `selected` instead.
+     */
+    isSelected?: boolean
+  }>
 }
 
 export interface CarouselIndicatorsProps
@@ -41,12 +48,12 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
         {...rest}
       >
         {indexes.map((index) => {
-          const isSelected = index === selectedIndex
+          const selected = index === selectedIndex
 
           if (typeof component === "function") {
             const child = component({
               index,
-              isSelected,
+              selected,
             }) as null | ReactElement
 
             if (!child) return null

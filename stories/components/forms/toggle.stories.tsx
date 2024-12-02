@@ -84,151 +84,151 @@ export const withColorScheme: Story = () => {
         <Toggle
           colorScheme="primary"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="secondary"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="success"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="warning"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="danger"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="link"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="gray"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="neutral"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="red"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="rose"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="pink"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="orange"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="amber"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="yellow"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="lime"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="green"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="emerald"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="teal"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="cyan"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="sky"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="blue"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="indigo"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="violet"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="purple"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="fuchsia"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
       </Wrap>
@@ -238,175 +238,175 @@ export const withColorScheme: Story = () => {
           colorScheme="primary"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="secondary"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="success"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="warning"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="danger"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="link"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="gray"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="neutral"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="red"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="rose"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="pink"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="orange"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="amber"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="yellow"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="lime"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="green"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="emerald"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="teal"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="cyan"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="sky"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="blue"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="indigo"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="violet"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="purple"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="fuchsia"
           variant="solid"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
       </Wrap>
@@ -416,175 +416,175 @@ export const withColorScheme: Story = () => {
           colorScheme="primary"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="secondary"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="success"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="warning"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="danger"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="link"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="gray"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="neutral"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="red"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="rose"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="pink"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="orange"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="amber"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="yellow"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="lime"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="green"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="emerald"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="teal"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="cyan"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="sky"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="blue"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="indigo"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="violet"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="purple"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
         <Toggle
           colorScheme="fuchsia"
           variant="outline"
           aria-label="Toggle bold"
-          defaultIsSelected
+          defaultSelected
           icon={<BoldIcon />}
         />
       </Wrap>
@@ -596,9 +596,9 @@ export const isRounded: Story = () => {
   return (
     <Toggle
       aria-label="Toggle bold"
-      defaultIsSelected
+      defaultSelected
+      fullRounded
       icon={<BoldIcon />}
-      isRounded
     />
   )
 }
@@ -610,24 +610,24 @@ export const isDisabled: Story = () => {
         colorScheme="primary"
         variant="subtle"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
+        disabled
         icon={<BoldIcon />}
-        isDisabled
       />
       <Toggle
         colorScheme="secondary"
         variant="solid"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
+        disabled
         icon={<BoldIcon />}
-        isDisabled
       />
       <Toggle
         variant="outline"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
+        disabled
         icon={<BoldIcon />}
-        isDisabled
       />
     </>
   )
@@ -640,24 +640,24 @@ export const isReadonly: Story = () => {
         colorScheme="primary"
         variant="subtle"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
         icon={<BoldIcon />}
-        isReadOnly
+        readOnly
       />
       <Toggle
         colorScheme="secondary"
         variant="solid"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
         icon={<BoldIcon />}
-        isReadOnly
+        readOnly
       />
       <Toggle
         variant="outline"
         aria-label="Toggle bold"
-        defaultIsSelected
+        defaultSelected
         icon={<BoldIcon />}
-        isReadOnly
+        readOnly
       />
     </>
   )
@@ -670,7 +670,7 @@ export const customControl: Story = () => {
     <Toggle
       aria-label="Toggle bold"
       icon={<BoldIcon />}
-      isSelected={isSelected}
+      selected={isSelected}
       onChange={setIsSelected}
     />
   )

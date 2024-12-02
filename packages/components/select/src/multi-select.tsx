@@ -117,7 +117,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   let {
     className,
-    clearable = true,
+    clearable,
     closeOnSelect = false,
     color,
     component,
@@ -159,7 +159,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     placeholderInOptions: false,
   })
 
-  const clearableProps = clearable || isClearable
+  clearable ??= isClearable
   h ??= height
   minH ??= minHeight
 
@@ -193,7 +193,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
                 />
               </PopoverTrigger>
 
-              {clearableProps && value.length ? (
+              {clearable && value.length ? (
                 <SelectClearIcon
                   {...clearIconProps}
                   onClick={handlerAll(clearIconProps?.onClick, onClear)}

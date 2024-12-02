@@ -27,7 +27,7 @@ export const basic: Story = () => {
 }
 
 export const withReverse: Story = () => {
-  return <Switch isReverse>basic</Switch>
+  return <Switch reverse>basic</Switch>
 }
 
 export const withSize: Story = () => {

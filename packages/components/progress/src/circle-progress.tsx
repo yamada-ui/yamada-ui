@@ -29,15 +29,25 @@ interface CircleProgressOptions {
    */
   color?: CSSUIProps["color"]
   /**
+   * If `true`, the cap of the progress indicator will be rounded.
+   *
+   * @default false
+   */
+  fullRounded?: boolean
+  /**
    * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
    *
    * @default false
+   *
+   * @deprecated It will be deprecated in version 2.0.
    */
   isAnimation?: boolean
   /**
    * If `true`, the cap of the progress indicator will be rounded.
    *
    * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
   /**
@@ -99,6 +109,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       boxSize = size,
       children,
       color = "primary",
+      fullRounded,
       isAnimation = false,
       isRounded,
       max = 100,
@@ -109,6 +120,8 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       value = 0,
       ...rest
     } = omitThemeProps(mergedProps)
+
+    fullRounded ??= isRounded
 
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
@@ -183,7 +196,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           <CircleProgressCircle
             opacity={isTransparent ? 0 : undefined}
             stroke={color}
-            strokeLinecap={isRounded ? "round" : undefined}
+            strokeLinecap={fullRounded ? "round" : undefined}
             strokeWidth="$thickness"
             {...circleProps}
           />

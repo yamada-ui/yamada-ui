@@ -153,13 +153,21 @@ export interface LabelProps
   extends Merge<CSSUIProps, Omit<Recharts.LabelProps, "fill">> {}
 export interface LabelListProps
   extends Merge<Recharts.LabelListProps<Dict>, Omit<CSSUIProps, "position">> {}
-export type ChartTooltipProps = Recharts.TooltipProps<
-  (number | string)[] | number | string,
-  number | string
->
-export type ChartTooltip =
-  | ((props: ChartTooltipProps) => ReactNode)
-  | ReactElement
+type ValueType = (number | string)[] | number | string
+type NameType = number | string
+type Payload<Y extends ValueType = ValueType, M extends NameType = NameType> = {
+  [key: string]: any
+} & Required<Recharts.TooltipProps<Y, M>>["payload"][number]
+export type ChartTooltipProps<
+  Y extends ValueType = ValueType,
+  M extends NameType = NameType,
+> = {
+  payload?: Payload<Y, M>[]
+} & Omit<Recharts.TooltipProps<Y, M>, "payload">
+export type ChartTooltip<
+  Y extends ValueType = ValueType,
+  M extends NameType = NameType,
+> = ((props: ChartTooltipProps<Y, M>) => ReactNode) | ReactElement
 export interface ChartLabelProps
   extends Omit<React.SVGProps<SVGTextElement>, "fill" | "offset" | "viewBox">,
     LabelProps {}

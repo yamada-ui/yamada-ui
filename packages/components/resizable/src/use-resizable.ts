@@ -57,8 +57,8 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableContext {
   controlRef: RefObject<ResizableGroupControl>
-  orientation: ResizableOrientation
   disabled: boolean
+  orientation: ResizableOrientation
   styles: { [key: string]: CSSUIObject | undefined }
   direction?: ResizableOrientation
 }

@@ -3,6 +3,7 @@ import type { SubmitHandler } from "react-hook-form"
 import { ActivityIcon } from "@yamada-ui/lucide"
 import {
   Button,
+  ButtonGroup,
   Center,
   Fieldset,
   Slider,
@@ -103,7 +104,7 @@ export const withFocusThumbOnChange: Story = () => {
       <Text>Value: {value}</Text>
       <Slider focusThumbOnChange={false} step={10} value={value} />
 
-      <Center gap="md" w="full">
+      <ButtonGroup as={Center} gap="md" w="full">
         <Button
           isDisabled={value === 0}
           onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
@@ -117,7 +118,7 @@ export const withFocusThumbOnChange: Story = () => {
         >
           +10
         </Button>
-      </Center>
+      </ButtonGroup>
     </>
   )
 }

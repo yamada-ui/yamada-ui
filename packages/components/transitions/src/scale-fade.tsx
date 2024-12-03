@@ -89,9 +89,9 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       unmountOnExit,
       ...rest
     } = omitThemeProps(mergedProps)
-    const animate = open || unmountOnExit ? "enter" : "exit"
-
     open ??= isOpen
+
+    const animate = open || unmountOnExit ? "enter" : "exit"
 
     const custom = {
       delay,

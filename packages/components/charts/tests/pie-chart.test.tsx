@@ -170,11 +170,11 @@ describe("<PieChart />", () => {
       )
     })
 
-    test("percent should work correctly", async () => {
+    test("isPercent should work correctly", async () => {
       render(
         <PieChart
           data={data}
-          percent
+          isPercent
           withLabels
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}

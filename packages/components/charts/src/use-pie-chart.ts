@@ -123,7 +123,6 @@ export const usePieChart = ({
   endAngle = -270,
   fillOpacity = 1,
   innerRadius = "0%",
-  isPercent = false,
   labelFormatter,
   labelOffset,
   withLabels = false,
@@ -222,15 +221,14 @@ export const usePieChart = ({
   const label: Recharts.PieLabel = useCallback(
     (props: any) =>
       pieChartLabel({
-        isPercent,
+        calcPercent: percent,
         labelFormatter,
         labelOffset,
         styles: styles.label,
         labelProps,
-        percentProps: percent,
         ...props,
       }),
-    [isPercent, labelOffset, labelProps, styles.label, percent, labelFormatter],
+    [labelOffset, labelProps, styles.label, percent, labelFormatter],
   )
 
   const labelLine = useCallback(

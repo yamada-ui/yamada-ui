@@ -102,7 +102,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       tab: {
         borderRadius: "full",
         _selected: {
-          bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
@@ -186,7 +186,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           _vertical: { borderBottom: "none" },
         },
         _selected: {
-          bg: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
         _vertical: {

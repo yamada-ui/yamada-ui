@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Check, Pencil, X } from "@yamada-ui/lucide"
+import { CheckIcon, PencilIcon, XIcon } from "@yamada-ui/lucide"
 import {
   Button,
   ButtonGroup,
@@ -8,7 +8,7 @@ import {
   EditableInput,
   EditablePreview,
   EditableTextarea,
-  FormControl,
+  Fieldset,
   IconButton,
   useEditableControl,
   VStack,
@@ -49,14 +49,14 @@ export const withStartWithEditView: Story = () => {
   return (
     <Editable defaultValue="オッス！オラ悟空！" startWithEditView>
       <EditablePreview />
-      <EditableInput aria-label="Input character serif" />
+      <EditableInput aria-legend="Input character serif" />
     </Editable>
   )
 }
 
 export const withIsPreviewFocusable: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" isPreviewFocusable={false}>
+    <Editable defaultValue="オッス！オラ悟空！" previewFocusable={false}>
       <EditablePreview />
       <EditableInput />
     </Editable>
@@ -123,16 +123,16 @@ export const isDisabled: Story = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl
+      <Fieldset
         helperMessage="We'll never share your email."
         isDisabled
-        label="Email address"
+        legend="Email address"
       >
         <Editable defaultValue="your email address">
           <EditablePreview />
           <EditableInput />
         </Editable>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -145,16 +145,16 @@ export const isReadonly: Story = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl
+      <Fieldset
         helperMessage="We'll never share your email."
         isReadOnly
-        label="Email address"
+        legend="Email address"
       >
         <Editable defaultValue="your email address">
           <EditablePreview />
           <EditableInput />
         </Editable>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -167,37 +167,46 @@ export const isInvalid: Story = () => {
         <EditableInput />
       </Editable>
 
-      <FormControl
+      <Fieldset
         errorMessage="Email is required."
         isInvalid
-        label="Email address"
+        legend="Email address"
       >
         <Editable defaultValue="your email address">
           <EditablePreview />
           <EditableInput />
         </Editable>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
 
 export const customControl: Story = () => {
   const CustomControls = () => {
-    const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
+    const { editing, getCancelProps, getEditProps, getSubmitProps } =
       useEditableControl()
 
-    return isEditing ? (
+    return editing ? (
       <ButtonGroup size="sm" gap="sm">
         <IconButton
-          icon={<Check />}
+          icon={<CheckIcon />}
           {...getSubmitProps()}
-          aria-label="Submit"
+          aria-legend="Submit"
         />
-        <IconButton icon={<X />} {...getCancelProps()} aria-label="Cancel" />
+
+        <IconButton
+          icon={<XIcon />}
+          {...getCancelProps()}
+          aria-label="Cancel"
+        />
       </ButtonGroup>
     ) : (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton icon={<Pencil />} {...getEditProps()} aria-label="Edit" />
+        <IconButton
+          icon={<PencilIcon />}
+          {...getEditProps()}
+          aria-label="Edit"
+        />
       </ButtonGroup>
     )
   }
@@ -207,7 +216,7 @@ export const customControl: Story = () => {
       defaultValue="オッス！オラ悟空！"
       display="flex"
       gap="sm"
-      isPreviewFocusable={false}
+      previewFocusable={false}
     >
       <EditablePreview w="full" />
       <EditableInput />
@@ -240,10 +249,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.input?.message}
         isInvalid={!!errors.input}
-        label="Name"
+        legend="Name"
       >
         <Controller
           name="input"
@@ -256,12 +265,12 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         errorMessage={errors.textarea?.message}
         isInvalid={!!errors.textarea}
-        label="Feedback"
+        legend="Feedback"
       >
         <Controller
           name="textarea"
@@ -274,7 +283,7 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

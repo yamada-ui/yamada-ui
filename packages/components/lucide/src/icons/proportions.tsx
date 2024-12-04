@@ -1,13 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { Proportions as ProportionsIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { Proportions as OriginalProportions } from "lucide-react"
+
+/**
+ * `ProportionsIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const ProportionsIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalProportions}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `Proportions` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `ProportionsIcon` instead.
  */
-export const Proportions = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={ProportionsIcon} {...props} />
-))
+export const Proportions = ProportionsIcon

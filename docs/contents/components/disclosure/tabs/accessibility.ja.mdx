@@ -5,7 +5,6 @@ package_name: "@yamada-ui/tabs"
 order: 3
 with_description: true
 tab: アクセシビリティ
-label: Updated
 ---
 
 `Tabs`は、アクセシビリティに関して[WAI-ARIA - Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs)に従います。
@@ -16,7 +15,7 @@ label: Updated
 <Tabs>
   <Tab>フリーザ</Tab>
   <Tab aria-label="Send an email to Freeza">
-    <Mail />
+    <MailIcon />
   </Tab>
 
   <TabPanel>
@@ -80,9 +79,9 @@ label: Updated
 | `TabList`      | `role="tablist"`   | タブリストであることを示します。                                                |
 |                | `aria-orientation` | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。       |
 | `Tab`          | `role="tab"`       | タブであることを示します。                                                      |
-|                | `id`               | `role="tabpanel"`と関連付けるために使用する`id`。                               |
-|                | `aria-controls`    | 関連した`role="tabpanel"`の`id`を設定します。                                   |
+|                | `id`               | `TabPanel`と関連付けるために使用する`id`。                                      |
+|                | `aria-controls`    | 関連した`TabPanel`の`id`を設定します。                                          |
 |                | `aria-selected`    | タブがアクティブの場合は`true`を設定し、他のすべてのタブは`false`を設定します。 |
 | `TabPanel`     | `role="tabpanel"`  | タブパネルであることを示します。                                                |
-|                | `id`               | `role="tab"`と関連付けるために使用する`id`。                                    |
-|                | `aria-labelledby`  | 関連した`role="tab"`の`id`を設定します。                                        |
+|                | `id`               | `Tab`と関連付けるために使用する`id`。                                           |
+|                | `aria-labelledby`  | 関連した`Tab`の`id`を設定します。                                               |

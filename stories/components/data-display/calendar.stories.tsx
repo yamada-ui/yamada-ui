@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { CalendarProps } from "@yamada-ui/calendar"
 import { Calendar } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Center,
@@ -365,7 +365,7 @@ export const customLabelButton: Story = () => {
     <>
       <Calendar labelProps={{ color: "gray.500" }} />
 
-      <Calendar labelProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar labelProps={{ icon: <GhostIcon fontSize="sm" /> }} />
     </>
   )
 }
@@ -373,11 +373,11 @@ export const customLabelButton: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Calendar controlProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar controlProps={{ icon: <GhostIcon fontSize="sm" /> }} />
 
-      <Calendar prevProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar prevProps={{ icon: <GhostIcon fontSize="sm" /> }} />
 
-      <Calendar nextProps={{ icon: <Ghost fontSize="sm" /> }} />
+      <Calendar nextProps={{ icon: <GhostIcon fontSize="sm" /> }} />
     </>
   )
 }
@@ -460,20 +460,18 @@ export const customDayButton: Story = () => {
         <Calendar
           dayProps={{
             sx: { _outside: { pointerEvents: "none" } },
-            component: ({ date, isOutside }) =>
-              !isOutside ? <Text as="span">{date.getDate()}</Text> : null,
+            component: ({ date, outside }) =>
+              !outside ? <Text as="span">{date.getDate()}</Text> : null,
           }}
         />
 
         <Calendar
           dayProps={{
-            component: ({ col, date, isSelected, row }) => (
+            component: ({ col, date, row, selected }) => (
               <Text
                 as="span"
                 color={
-                  !isSelected && (col === 3 || row === 3)
-                    ? "blue.500"
-                    : undefined
+                  !selected && (col === 3 || row === 3) ? "blue.500" : undefined
                 }
               >
                 {date.getDate()}
@@ -542,12 +540,12 @@ export const customDayButton: Story = () => {
         dateFormat="YYYY年 MMMM"
         locale="ja"
         dayProps={{
-          variant: "ghost",
-          component: ({ date, isSelected }) => (
+          variant: "ghostIcon",
+          component: ({ date, selected }) => (
             <VStack alignItems="center">
               <Center
-                bg={isSelected ? "primary" : undefined}
-                color={isSelected ? "white" : undefined}
+                bg={selected ? "primary" : undefined}
+                color={selected ? "white" : undefined}
                 lineHeight={8}
                 rounded="full"
                 transitionDuration="normal"

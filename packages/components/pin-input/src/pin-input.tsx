@@ -211,6 +211,25 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       [descendants, moveFocus, manageFocus],
     )
 
+    const focusInputField = useCallback(
+      (direction: "next" | "prev", index: number) => {
+        const input =
+          direction === "next"
+            ? descendants.nextValue(index, undefined, false)
+            : descendants.prevValue(index, undefined, false)
+
+        if (!input) return
+
+        const valueLength = input.node.value.length
+
+        requestAnimationFrame(() => {
+          input.node.focus()
+          input.node.setSelectionRange(0, valueLength)
+        })
+      },
+      [descendants],
+    )
+
     const setValue = useCallback(
       (value: string, index: number, isFocus = true) => {
         let nextValues = [...values]
@@ -295,23 +314,40 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const onKeyDown = useCallback(
-      (index: number) =>
-        ({ key, target }: KeyboardEvent<HTMLInputElement>) => {
-          if (key !== "Backspace" || !manageFocus) return
+      (index: number) => (ev: KeyboardEvent<HTMLInputElement>) => {
+        if (!manageFocus) return
 
-          if ((target as HTMLInputElement).value === "") {
-            const prevInput = descendants.prevValue(index, undefined, false)
+        const actions: { [key: string]: Function | undefined } = {
+          ArrowLeft: () => {
+            ev.preventDefault()
+            focusInputField("prev", index)
+          },
+          ArrowRight: () => {
+            ev.preventDefault()
+            focusInputField("next", index)
+          },
+          Backspace: () => {
+            if ((ev.target as HTMLInputElement).value === "") {
+              const prevInput = descendants.prevValue(index, undefined, false)
 
-            if (!prevInput) return
+              if (!prevInput) return
 
-            setValue("", index - 1, false)
-            prevInput.node.focus()
-            setMoveFocus(true)
-          } else {
-            setMoveFocus(false)
-          }
-        },
-      [descendants, manageFocus, setValue],
+              setValue("", index - 1, false)
+              prevInput.node.focus()
+              setMoveFocus(true)
+            } else {
+              setMoveFocus(false)
+            }
+          },
+        }
+
+        const action = actions[ev.key]
+
+        if (!action) return
+
+        action()
+      },
+      [descendants, focusInputField, manageFocus, setValue],
     )
 
     const onFocus = useCallback(
@@ -330,17 +366,17 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         ref?: Ref<HTMLInputElement>
       } & PinInputFieldProps): PinInputFieldProps => ({
         type: mask ? "password" : type === "number" ? "tel" : "text",
+        disabled,
         inputMode: type === "number" ? "numeric" : "text",
+        readOnly,
         ...formControlProps,
         ...filterUndefined(props),
         id: `${id}-${index}`,
         autoComplete: otp ? "one-time-code" : "off",
-        disabled,
         placeholder:
           focusedIndex === index && !readOnly && !props.readOnly
             ? ""
             : placeholder,
-        readOnly,
         value: values[index] || "",
         onBlur: handlerAll(props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),

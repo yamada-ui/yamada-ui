@@ -1,15 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { NotepadTextDashed as NotepadTextDashedIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { NotepadTextDashed as OriginalNotepadTextDashed } from "lucide-react"
+
+/**
+ * `NotepadTextDashedIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const NotepadTextDashedIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalNotepadTextDashed}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `NotepadTextDashed` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `NotepadTextDashedIcon` instead.
  */
-export const NotepadTextDashed = forwardRef<LucideIconProps, "svg">(
-  (props, ref) => (
-    <LucideIcon ref={ref} as={NotepadTextDashedIcon} {...props} />
-  ),
-)
+export const NotepadTextDashed = NotepadTextDashedIcon

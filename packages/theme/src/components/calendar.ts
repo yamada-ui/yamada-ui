@@ -59,7 +59,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     },
     header: {},
     label: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
     },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
@@ -73,7 +73,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     row: {},
     weekday: {
       alignItems: "center",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       justifyContent: "center",
       userSelect: "none",
     },
@@ -92,8 +92,10 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           },
         },
         _selected: {
-          bg: "$bg",
-          color: "$color",
+          bg: isGray(c)
+            ? [`${c}.100`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
       },
       cell: {
@@ -110,22 +112,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           },
         },
       },
-      container: {
-        vars: [
-          {
-            name: "bg",
-            token: "colors",
-            value: isGray(c)
-              ? [`${c}.100`, `${c}.700`]
-              : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          },
-          {
-            name: "color",
-            token: "colors",
-            value: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
-          },
-        ],
-      },
       day: {
         _end: {
           roundedLeft: "0",
@@ -139,13 +125,17 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
             bg: ["initial", "initial"],
           },
           _selected: {
-            bg: "$bg",
+            bg: isGray(c)
+              ? [`${c}.100`, `${c}.700`]
+              : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           },
         },
         _selected: {
-          bg: "$bg",
+          bg: isGray(c)
+            ? [`${c}.100`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           borderColor: ["transparent", "transparent"],
-          color: "$color",
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
         _start: {
           roundedRight: "0",
@@ -167,8 +157,8 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
           },
         },
         _selected: {
-          bg: "$bg",
-          color: "$color",
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
       cell: {
@@ -177,7 +167,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
             isGray(c)
               ? transparentizeColor(`${c}.50`, 0.24)(t, m)
               : transparentizeColor(`${c}.50`, 0.48)(t, m),
-            transparentizeColor(`${c}.600`, 0.12)(t, m),
+            transparentizeColor(`${c}.300`, 0.12)(t, m),
           ],
           _end: {
             roundedRight: "md",
@@ -186,20 +176,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
             roundedLeft: "md",
           },
         },
-      },
-      container: {
-        vars: [
-          {
-            name: "bg",
-            token: "colors",
-            value: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
-          },
-          {
-            name: "color",
-            token: "colors",
-            value: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
-          },
-        ],
       },
       day: {
         _end: {
@@ -214,13 +190,13 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
             bg: ["initial", "initial"],
           },
           _selected: {
-            bg: "$bg",
+            bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           },
         },
         _selected: {
-          bg: "$bg",
+          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           borderColor: ["transparent", "transparent"],
-          color: "$color",
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
         _start: {
           roundedRight: "0",
@@ -315,10 +291,9 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         color: "inherit",
       },
       weekday: {
+        boxSize: "auto",
         color: "inherit",
-        h: "auto",
         userSelect: "auto",
-        w: "auto",
       },
     },
   },
@@ -335,19 +310,16 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         w: 56,
       },
       control: {
-        h: 8,
-        w: 8,
+        boxSize: 8,
       },
       day: {
-        h: 8,
-        w: 8,
+        boxSize: 8,
       },
       label: {
         h: 8,
       },
       weekday: {
-        h: 8,
-        w: 8,
+        boxSize: 8,
       },
     },
     md: {
@@ -361,19 +333,16 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         w: "17.5rem",
       },
       control: {
-        h: 10,
-        w: 10,
+        boxSize: 10,
       },
       day: {
-        h: 10,
-        w: 10,
+        boxSize: 10,
       },
       label: {
         h: 10,
       },
       weekday: {
-        h: 10,
-        w: 10,
+        boxSize: 10,
       },
     },
     lg: {
@@ -387,19 +356,16 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         w: "21rem",
       },
       control: {
-        h: 12,
-        w: 12,
+        boxSize: 12,
       },
       day: {
-        h: 12,
-        w: 12,
+        boxSize: 12,
       },
       label: {
         h: 12,
       },
       weekday: {
-        h: 12,
-        w: 12,
+        boxSize: 12,
       },
     },
     full: {
@@ -414,8 +380,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         w: "full",
       },
       control: {
-        h: 12,
-        w: 12,
+        boxSize: 12,
       },
       day: {
         h: 12,

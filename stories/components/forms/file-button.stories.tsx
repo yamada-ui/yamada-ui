@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { Plus } from "@yamada-ui/lucide"
+import { PlusIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FileButton,
@@ -33,7 +33,7 @@ export const basic: Story = () => {
       <FileButton
         as={IconButton}
         aria-label="Upload file"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
       />
 
       <FileButton>
@@ -51,7 +51,7 @@ export const withMultiple: Story = () => {
       <FileButton
         as={IconButton}
         aria-label="Upload file"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
         multiple
       />
 
@@ -71,7 +71,7 @@ export const withAccept: Story = () => {
         as={IconButton}
         aria-label="Upload file"
         accept="image/png,image/jpeg"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
       />
 
       <FileButton accept="image/png,image/jpeg">
@@ -155,7 +155,7 @@ export const isDisabled: Story = () => {
       <FileButton
         as={IconButton}
         aria-label="Upload file"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
         isDisabled
       />
 
@@ -195,7 +195,7 @@ export const isReadonly: Story = () => {
       <FileButton
         as={IconButton}
         aria-label="Upload file"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
         isReadOnly
       />
 
@@ -234,7 +234,7 @@ export const isInvalid: Story = () => {
       <FileButton
         as={IconButton}
         aria-label="Upload file"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
         isInvalid
       />
 

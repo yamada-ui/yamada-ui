@@ -215,13 +215,13 @@ return (
 <VStack>
   <RangeSlider isDisabled />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="volume (sound)"
-    helperMessage="Please select your preferred volume."
+    legend="Hotel Price Range"
+    helperMessage="Please select your preferred price range."
   >
     <RangeSlider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -233,13 +233,13 @@ return (
 <VStack>
   <RangeSlider isReadOnly />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="volume (sound)"
-    helperMessage="Please select your preferred volume."
+    legend="Hotel Price Range"
+    helperMessage="Please select your preferred price range."
   >
     <RangeSlider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -254,13 +254,13 @@ return (
   <VStack>
     <RangeSlider isInvalid={value[0] < 20} value={value} onChange={onChange} />
 
-    <FormControl
+    <Fieldset
       isInvalid={value[0] < 20}
-      label="volume (sound)"
-      errorMessage="Min volume should be set to 20 or higher."
+      legend="Hotel Price Range"
+      errorMessage="Minimum price should be set to 20 or higher."
     >
       <RangeSlider value={value} onChange={onChange} />
-    </FormControl>
+    </Fieldset>
   </>
 )
 ```
@@ -384,17 +384,17 @@ return (
     thumbProps={{
       color: "blue.500",
       boxSize: "6",
-      children: <Activity />,
+      children: <ActivityIcon />,
     }}
   />
 
   <RangeSlider>
     <RangeSliderStartThumb color="blue.500" boxSize="6">
-      <Activity />
+      <ActivityIcon />
     </RangeSliderStartThumb>
 
     <RangeSliderEndThumb color="blue.500" boxSize="6">
-      <Activity />
+      <ActivityIcon />
     </RangeSliderEndThumb>
   </RangeSlider>
 </VStack>
@@ -497,9 +497,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.rangeSlider}
-      label="Volume"
+      legend="Hotel Price Range"
       errorMessage={errors.rangeSlider ? errors.rangeSlider.message : undefined}
     >
       <Controller
@@ -507,7 +507,7 @@ return (
         control={control}
         render={({ field }) => <RangeSlider {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

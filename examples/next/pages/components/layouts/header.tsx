@@ -6,7 +6,7 @@ import type {
   PopoverProps,
 } from '@yamada-ui/react'
 import type { FC } from 'react'
-import { Moon, Palette, Sun } from '@yamada-ui/lucide'
+import { MoonIcon, PaletteIcon, SunIcon } from '@yamada-ui/lucide'
 import {
   Box,
   Center,
@@ -133,7 +133,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
         variant='ghost'
         aria-label='Open color mode switching menu'
         color='muted'
-        icon={colorMode === 'dark' ? <Sun fontSize='2xl' /> : <Moon fontSize='2xl' />}
+        icon={colorMode === 'dark' ? <SunIcon fontSize='2xl' /> : <MoonIcon fontSize='2xl' />}
         {...rest}
       />
 
@@ -197,7 +197,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
           variant='ghost'
           aria-label='Open color mode switching menu'
           color='muted'
-          icon={<Palette fontSize='2xl' />}
+          icon={<PaletteIcon fontSize='2xl' />}
           {...rest}
         />
       </PopoverTrigger>

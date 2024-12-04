@@ -1,5 +1,76 @@
 # @yamada-ui/modal
 
+## 1.4.7
+
+### Patch Changes
+
+- Updated dependencies [[`2d46ecc`](https://github.com/yamada-ui/yamada-ui/commit/2d46eccbb0999f89f7ec6beda05fed66224f5a00), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`4065286`](https://github.com/yamada-ui/yamada-ui/commit/4065286fe311de83fae4c203bf889de0789286f0), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`3a74b00`](https://github.com/yamada-ui/yamada-ui/commit/3a74b003124a864d9882f541240cb9fccb9ef514), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`fcace07`](https://github.com/yamada-ui/yamada-ui/commit/fcace077aa6aac05e6c32d6592da956ab147d213), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`016d96d`](https://github.com/yamada-ui/yamada-ui/commit/016d96d4298941050765c3694ee64e3133aec5ec), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/close-button@1.0.49
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/portal@1.0.25
+  - @yamada-ui/button@1.0.52
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/motion@2.2.10
+  - @yamada-ui/transitions@1.1.13
+  - @yamada-ui/use-value@1.1.32
+  - @yamada-ui/focus-lock@1.0.26
+
+## 1.4.6
+
+### Patch Changes
+
+- Updated dependencies [[`7e816bc`](https://github.com/yamada-ui/yamada-ui/commit/7e816bc2da0cc9a4b7a02438840d44e4aa41eb28), [`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/focus-lock@1.0.25
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/button@1.0.51
+  - @yamada-ui/close-button@1.0.48
+  - @yamada-ui/motion@2.2.9
+  - @yamada-ui/transitions@1.1.12
+  - @yamada-ui/use-value@1.1.31
+
+## 1.4.5
+
+### Patch Changes
+
+- [`7433b53`](https://github.com/yamada-ui/yamada-ui/commit/7433b53e315fc8e5aa41553fce2190bcd02aa27f) Thanks [@nathanlao](https://github.com/nathanlao)! - Removed `is` prefix in props.
+
+- [#3487](https://github.com/yamada-ui/yamada-ui/pull/3487) [`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved control of `aria-labelledby` and `aria-describedby`.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c), [`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/button@1.0.50
+  - @yamada-ui/close-button@1.0.47
+
+## 1.4.4
+
+### Patch Changes
+
+- [#3377](https://github.com/yamada-ui/yamada-ui/pull/3377) [`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/transitions@1.1.10
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/button@1.0.49
+  - @yamada-ui/close-button@1.0.46
+  - @yamada-ui/use-value@1.1.30
+
+## 1.4.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39)]:
+  - @yamada-ui/close-button@1.0.45
+  - @yamada-ui/button@1.0.47
+
 ## 1.4.1
 
 ### Patch Changes

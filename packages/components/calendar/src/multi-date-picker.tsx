@@ -31,6 +31,12 @@ import { useMultiDatePicker } from "./use-multi-date-picker"
 interface MultiDatePickerOptions {
   children?: FC<{ value: Date[]; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the date picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The custom display value to use.
    */
   component?: FC<{
@@ -51,6 +57,8 @@ interface MultiDatePickerOptions {
    * If `true`, display the date picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -117,6 +125,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     let {
       className,
       children,
+      clearable,
       color,
       component,
       h,
@@ -137,9 +146,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     } = omitThemeProps(mergedProps)
 
     const {
-      id,
       dateToString,
-      isOpen,
+      open,
       setValue,
       value,
       getCalendarProps,
@@ -151,6 +159,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       onClose,
     } = useMultiDatePicker(computedProps)
 
+    clearable ??= isClearable
     h ??= height
     minH ??= minHeight
 
@@ -176,8 +185,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
               <MultiDatePickerField
                 component={component}
                 dateToString={dateToString}
-                isOpen={isOpen}
                 keepPlaceholder={keepPlaceholder}
+                open={open}
                 separator={separator}
                 setValue={setValue}
                 value={value}
@@ -185,7 +194,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 inputProps={getInputProps(inputProps)}
               />
 
-              {isClearable && !!value.length ? (
+              {clearable && !!value.length ? (
                 <DatePickerClearIcon
                   {...getIconProps({ clear: true, ...clearIconProps })}
                 />
@@ -198,11 +207,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                id={id}
                 as="div"
                 className="ui-multi-date-picker__content"
-                aria-modal="true"
-                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -226,7 +232,7 @@ MultiDatePicker.__ui__ = "MultiDatePicker"
 
 interface MultiDatePickerFieldOptions {
   dateToString: (value: Date | undefined) => string | undefined
-  isOpen: boolean
+  open: boolean
   setValue: Dispatch<SetStateAction<Date[]>>
   value: Date[]
 }
@@ -249,9 +255,9 @@ export const MultiDatePickerField = forwardRef<
       component,
       dateToString,
       h,
-      isOpen,
       keepPlaceholder,
       minH,
+      open,
       separator = ",",
       setValue,
       value = [],
@@ -299,17 +305,17 @@ export const MultiDatePickerField = forwardRef<
         })
       } else {
         return value.map((date, index) => {
-          const isLast = value.length === index + 1
+          const last = value.length === index + 1
 
           return (
             <ui.span key={index} display="inline-block" me="0.25rem">
               {dateToString(date)}
-              {!isLast || isOpen ? separator : null}
+              {!last || open ? separator : null}
             </ui.span>
           )
         })
       }
-    }, [component, setValue, dateToString, isOpen, separator, value])
+    }, [component, setValue, dateToString, open, separator, value])
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -340,7 +346,7 @@ export const MultiDatePickerField = forwardRef<
             marginBlockStart="0.125rem"
             overflow="hidden"
             placeholder={
-              !value.length || (keepPlaceholder && isOpen)
+              !value.length || (keepPlaceholder && open)
                 ? placeholder
                 : undefined
             }

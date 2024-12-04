@@ -363,13 +363,13 @@ export const withFinish: Story = () => {
   )
 }
 
-export const isReverse: Story = () => {
+export const reverse: Story = () => {
   const [count, setCount] = useState<number>(50)
 
   return (
     <InfiniteScrollArea
-      isReverse
       loading={<Loading fontSize="2xl" />}
+      reverse
       onLoad={({ finish, index }) => {
         console.log("load", index)
 
@@ -398,15 +398,15 @@ export const isReverse: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(false)
+export const disabled: Story = () => {
+  const [disabled, setDisabled] = useState<boolean>(false)
   const [count, setCount] = useState<number>(50)
 
   return (
     <>
       <InfiniteScrollArea
         borderWidth="1px"
-        isDisabled={isDisabled}
+        disabled={disabled}
         loading={<Loading fontSize="2xl" />}
         maxH="xl"
         overflowY="auto"
@@ -439,10 +439,10 @@ export const isDisabled: Story = () => {
       </InfiniteScrollArea>
 
       <Button
-        colorScheme={isDisabled ? "success" : "danger"}
-        onClick={() => setIsDisabled((prev) => !prev)}
+        colorScheme={disabled ? "success" : "danger"}
+        onClick={() => setDisabled((prev) => !prev)}
       >
-        {isDisabled ? "Enable" : "Disabled"}
+        {disabled ? "Enable" : "Disabled"}
       </Button>
     </>
   )

@@ -85,10 +85,11 @@ export const useMonthPicker = ({
   })
 
   const {
-    id,
     allowInput,
     dateToString,
+    inputFormat,
     inputRef,
+    locale,
     pattern,
     stringToDate,
     formControlProps,
@@ -173,6 +174,12 @@ export const useMonthPicker = ({
     setInputValue(inputValue)
   }, [value])
 
+  useUpdateEffect(() => {
+    const inputValue = dateToString(value)
+
+    setInputValue(inputValue)
+  }, [locale, inputFormat])
+
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
@@ -184,7 +191,6 @@ export const useMonthPicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -201,14 +207,12 @@ export const useMonthPicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
     ],
   )
 
   return {
-    id,
     value,
     getCalendarProps,
     getContainerProps,

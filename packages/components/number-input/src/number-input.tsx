@@ -120,6 +120,8 @@ export interface UseNumberInputProps
   /**
    * Whether the pressed key should be allowed in the input.
    * The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.
+   *
+   * @deprecated Use `validCharacter` instead.
    */
   isValidCharacter?: (value: string) => boolean
   /**
@@ -133,6 +135,11 @@ export interface UseNumberInputProps
    */
   pattern?: InputHTMLAttributes<any>["pattern"]
   /**
+   * Whether the pressed key should be allowed in the input.
+   * The default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/.
+   */
+  validCharacter?: (value: string) => boolean
+  /**
    * The callback invoked when invalid number is entered.
    */
   onInvalid?: (
@@ -143,7 +150,7 @@ export interface UseNumberInputProps
 }
 
 export const useNumberInput = (props: UseNumberInputProps = {}) => {
-  const {
+  let {
     id,
     name,
     allowMouseWheel,
@@ -161,6 +168,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     pattern = "[0-9]*(.[0-9]+)?",
     precision,
     step: stepProp,
+    validCharacter,
     value: valueProp,
     onChange: onChangeProp,
     onInvalid: onInvalidProp,
@@ -175,6 +183,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     onFocus: onFocusProp,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
+
+  validCharacter ??= isValidCharacterProp
 
   const isRequired = required
   const isReadOnly = readOnly
@@ -213,7 +223,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const onInvalid = useCallbackRef(onInvalidProp)
   const getAriaValueText = useCallbackRef(getAriaValueTextProp)
   const isValidCharacter = useCallbackRef(
-    isValidCharacterProp ?? isDefaultValidCharacter,
+    validCharacter ?? isDefaultValidCharacter,
   )
 
   const {
@@ -469,6 +479,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMax)
 
       return {
+        "aria-label": "Increase",
         disabled: trulyDisabled,
         readOnly,
         required,
@@ -504,6 +515,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && isMin)
 
       return {
+        "aria-label": "Decrease",
         disabled: trulyDisabled,
         readOnly,
         required,
@@ -645,8 +657,14 @@ interface NumberInputOptions {
   focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
    * If `true`, display the addon for the number input.
+   *
+   * @deprecated Use `stepper` instead.
    */
   isStepper?: boolean
+  /**
+   * If `true`, display the addon for the number input.
+   */
+  stepper?: boolean
   /**
    * Props for addon component.
    */
@@ -705,9 +723,10 @@ const [NumberInputContextProvider, useNumberInputContext] =
 export const NumberInput = forwardRef<NumberInputProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("NumberInput", props)
-    const {
+    let {
       className,
       isStepper = true,
+      stepper,
       addonProps,
       containerProps,
       decrementProps,
@@ -721,6 +740,8 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       getInputProps,
     } = useNumberInput(computedProps)
 
+    stepper ??= isStepper
+
     const css: CSSUIObject = {
       position: "relative",
       zIndex: 0,
@@ -733,6 +754,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       >
         <ui.div
           className={cx("ui-number-input", className)}
+          role="group"
           __css={css}
           {...containerProps}
         >

@@ -6,6 +6,7 @@ import {
   handlerAll,
   isArray,
   isDisabled,
+  isNumber,
   mergeRefs,
   useUnmountEffect,
   useUpdateEffect,
@@ -38,7 +39,7 @@ export const useYearList = () => {
     __selectType,
   } = useCalendarContext()
 
-  const isMulti = isArray(selectedValue)
+  const multi = isArray(selectedValue)
   const containerRef = useRef<HTMLDivElement>(null)
   const beforeInternalYear = useRef<null | number>(null)
   const minRangeYear = rangeYears[0] ?? minYear
@@ -140,18 +141,18 @@ export const useYearList = () => {
       if (__selectType === "date" || __selectType === "month") {
         return year === value
       } else {
-        const year = !isMulti
+        const year = !multi
           ? selectedValue?.getFullYear()
           : selectedValue[0]?.getFullYear()
 
         return year === value
       }
     },
-    [__selectType, isMulti, selectedValue, year],
+    [__selectType, multi, selectedValue, year],
   )
 
   useUpdateEffect(() => {
-    if (typeof beforeInternalYear.current !== "number") return
+    if (!isNumber(beforeInternalYear.current)) return
 
     onShouldFocus(
       yearRefs,
@@ -182,30 +183,30 @@ export const useYearList = () => {
     HTMLProps<"button">
   > = useCallback(
     ({ index, value, ...props }, ref = null) => {
-      const isControlled = typeof beforeInternalYear.current === "number"
-      const isSelected = getIsSelected(value)
-      const isDisabled = value < minYear || value > maxYear
+      const controlled = isNumber(beforeInternalYear.current)
+      const selected = getIsSelected(value)
+      const disabled = value < minYear || value > maxYear
 
       yearRefs.current.set(index, createRef<HTMLButtonElement>())
 
       let tabIndex = -1
 
-      if (isControlled) {
+      if (controlled) {
         tabIndex = -1
       } else if (!rangeYears.includes(year) && rangeYears[0] === value) {
         tabIndex = 0
-      } else if (isSelected) {
+      } else if (selected) {
         tabIndex = 0
       }
 
       return {
         ref: mergeRefs(ref, yearRefs.current.get(index)),
-        disabled: isDisabled,
+        disabled,
         ...props,
-        "aria-disabled": ariaAttr(isDisabled),
-        "aria-selected": ariaAttr(isSelected),
-        "data-disabled": dataAttr(isDisabled),
-        "data-selected": dataAttr(isSelected),
+        "aria-disabled": ariaAttr(disabled),
+        "aria-selected": ariaAttr(selected),
+        "data-disabled": dataAttr(disabled),
+        "data-selected": dataAttr(selected),
         "data-value": value,
         tabIndex,
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),

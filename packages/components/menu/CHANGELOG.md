@@ -1,5 +1,75 @@
 # @yamada-ui/menu
 
+## 1.5.0
+
+### Minor Changes
+
+- [#3660](https://github.com/yamada-ui/yamada-ui/pull/3660) [`f8fec6f`](https://github.com/yamada-ui/yamada-ui/commit/f8fec6f832d7a4afa33151282167b5aa5adbe832) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MenuSeparator` component.
+
+### Patch Changes
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`016d96d`](https://github.com/yamada-ui/yamada-ui/commit/016d96d4298941050765c3694ee64e3133aec5ec), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/motion@2.2.10
+  - @yamada-ui/popover@1.4.5
+  - @yamada-ui/icon@1.1.15
+  - @yamada-ui/transitions@1.1.13
+  - @yamada-ui/use-clickable@1.2.15
+  - @yamada-ui/use-controllable-state@1.0.24
+  - @yamada-ui/use-descendant@1.0.26
+  - @yamada-ui/use-disclosure@1.1.1
+
+## 1.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/icon@1.1.14
+  - @yamada-ui/motion@2.2.9
+  - @yamada-ui/popover@1.4.4
+  - @yamada-ui/transitions@1.1.12
+  - @yamada-ui/use-clickable@1.2.14
+
+## 1.4.0
+
+### Minor Changes
+
+- [#3490](https://github.com/yamada-ui/yamada-ui/pull/3490) [`057a75e`](https://github.com/yamada-ui/yamada-ui/commit/057a75e2e22ab4e7becc3e92db9ec263f0be9c10) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria and role attributes for accessibility.
+
+### Patch Changes
+
+- [#3378](https://github.com/yamada-ui/yamada-ui/pull/3378) [`89449d2`](https://github.com/yamada-ui/yamada-ui/commit/89449d2d3c22c0322eb54208889fefac2bfc61bd) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Update `@yamada-ui/menu` accessibility
+
+- [#3475](https://github.com/yamada-ui/yamada-ui/pull/3475) [`47a2671`](https://github.com/yamada-ui/yamada-ui/commit/47a2671f9bd3eb3cecf78e6bb7bced1cf2e3bd74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a11y.
+
+- Updated dependencies [[`08f10a6`](https://github.com/yamada-ui/yamada-ui/commit/08f10a66e9faa6983edb8f538412d598e36dc93c), [`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c), [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c)]:
+  - @yamada-ui/motion@2.2.8
+  - @yamada-ui/transitions@1.1.11
+  - @yamada-ui/popover@1.4.3
+  - @yamada-ui/icon@1.1.13
+
+## 1.3.19
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/transitions@1.1.10
+  - @yamada-ui/motion@2.2.7
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/popover@1.4.2
+  - @yamada-ui/icon@1.1.12
+  - @yamada-ui/use-clickable@1.2.13
+
+## 1.3.18
+
+### Patch Changes
+
+- Updated dependencies [[`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/popover@1.4.1
+
 ## 1.3.17
 
 ### Patch Changes

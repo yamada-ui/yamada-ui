@@ -1,5 +1,18 @@
 # @yamada-ui/focus-lock
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies [[`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484)]:
+  - @yamada-ui/utils@1.6.0
+
+## 1.0.25
+
+### Patch Changes
+
+- [#3566](https://github.com/yamada-ui/yamada-ui/pull/3566) [`7e816bc`](https://github.com/yamada-ui/yamada-ui/commit/7e816bc2da0cc9a4b7a02438840d44e4aa41eb28) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix in props
+
 ## 1.0.24
 
 ### Patch Changes

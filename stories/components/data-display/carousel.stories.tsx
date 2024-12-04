@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselSlide,
 } from "@yamada-ui/carousel"
-import { ArrowLeft, ArrowRight, Ghost } from "@yamada-ui/lucide"
+import { ArrowLeftIcon, ArrowRightIcon, GhostIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
@@ -664,7 +664,7 @@ export const customControl: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Carousel controlProps={{ icon: <Ghost /> }}>
+      <Carousel controlProps={{ icon: <GhostIcon /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -679,7 +679,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlPrevProps={{ icon: <ArrowLeft /> }}>
+      <Carousel controlPrevProps={{ icon: <ArrowLeftIcon /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -694,7 +694,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlNextProps={{ icon: <ArrowRight /> }}>
+      <Carousel controlNextProps={{ icon: <ArrowRightIcon /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -710,8 +710,8 @@ export const customControlButton: Story = () => {
       </Carousel>
 
       <Carousel>
-        <CarouselControlPrev icon={<ArrowLeft />} />
-        <CarouselControlNext icon={<ArrowRight />} />
+        <CarouselControlPrev icon={<ArrowLeftIcon />} />
+        <CarouselControlNext icon={<ArrowRightIcon />} />
 
         <CarouselSlide as={Center} bg="primary">
           1
@@ -736,9 +736,9 @@ export const customIndicators: Story = () => {
       <Carousel
         indicatorsProps={{
           bottom: "8",
-          component: ({ isSelected }) => (
-            <Ghost
-              color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
+          component: ({ selected }) => (
+            <GhostIcon
+              color={selected ? "whiteAlpha.700" : "whiteAlpha.400"}
               cursor="pointer"
               fontSize="2xl"
             />

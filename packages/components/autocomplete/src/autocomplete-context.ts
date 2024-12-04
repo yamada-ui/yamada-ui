@@ -24,7 +24,6 @@ interface AutocompleteContext
   isHit: boolean
   isOpen: boolean
   label: string | string[] | undefined
-  listRef: RefObject<HTMLUListElement>
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   setFocusedIndex: Dispatch<SetStateAction<number>>

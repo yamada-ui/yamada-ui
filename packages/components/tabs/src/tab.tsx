@@ -23,6 +23,8 @@ export const Tab = forwardRef<TabProps, "button">(
       children,
       clickOnEnter,
       clickOnSpace,
+      disabled,
+      focusable,
       isDisabled,
       isFocusable,
       ...rest
@@ -31,7 +33,7 @@ export const Tab = forwardRef<TabProps, "button">(
   ) => {
     const {
       disableRipple,
-      isManual,
+      manual,
       orientation,
       selectedIndex,
       setFocusedIndex,
@@ -39,8 +41,12 @@ export const Tab = forwardRef<TabProps, "button">(
       styles,
     } = useTabsContext()
     const uuid = useId()
+
+    disabled ??= isDisabled
+    focusable ??= isFocusable
+
     const { index, register } = useTabDescendant({
-      disabled: isDisabled && !isFocusable,
+      disabled: disabled && !focusable,
     })
     const { descendants } = useTabPanelDescendant()
     const tabpanelId = descendants.value(index)?.node.id
@@ -51,7 +57,7 @@ export const Tab = forwardRef<TabProps, "button">(
     const onFocus = () => {
       setFocusedIndex(index)
 
-      if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
+      if (!manual && !(disabled && focusable)) setSelectedIndex(index)
     }
 
     const clickableProps = useClickable<HTMLButtonElement>({
@@ -64,14 +70,14 @@ export const Tab = forwardRef<TabProps, "button">(
       ref: mergeRefs(register, ref),
       clickOnEnter,
       clickOnSpace,
-      isDisabled,
-      isFocusable,
+      disabled,
+      focusable,
       onClick: handlerAll(rest.onClick, () => setSelectedIndex(index)),
-      onFocus: isDisabled ? undefined : handlerAll(rest.onFocus, onFocus),
+      onFocus: disabled ? undefined : handlerAll(rest.onFocus, onFocus),
     })
     const { onPointerDown, ...rippleProps } = useRipple({
       ...clickableProps,
-      isDisabled: disableRipple || isDisabled,
+      disabled: disableRipple || disabled,
     })
 
     const css: CSSUIObject = {

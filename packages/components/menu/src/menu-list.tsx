@@ -24,6 +24,8 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
 
     const descendants = useMenuDescendantsContext()
 
+    const activedescendantId = descendants.value(focusedIndex)?.node.id
+
     const onNext = useCallback(() => {
       const next = descendants.enabledNextValue(focusedIndex)
 
@@ -56,7 +58,7 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
           End: onLast,
           Escape: onClose,
           Home: onFirst,
-          Tab: (ev) => ev.preventDefault(),
+          Tab: onClose,
         }
 
         const action = actions[ev.key]
@@ -73,6 +75,9 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
       <PopoverContent
         as="div"
         className="ui-menu__content"
+        aria-activedescendant={activedescendantId}
+        aria-labelledby={buttonRef.current?.id}
+        role="menu"
         __css={{ ...styles.content }}
         {...contentProps}
         onKeyDown={handlerAll(contentProps?.onKeyDown, onKeyDown)}
@@ -80,8 +85,6 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
         <ui.div
           ref={mergeRefs(menuRef, ref)}
           className={cx("ui-menu__list", className)}
-          aria-labelledby={buttonRef.current?.id}
-          role="menu"
           tabIndex={-1}
           __css={{ ...styles.list }}
           {...rest}

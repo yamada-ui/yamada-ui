@@ -14,7 +14,7 @@ import { useDrawer, useModal } from "./modal-context"
 
 export interface DrawerContentProps
   extends Merge<
-    Omit<DrawerProps, "isOpen" | "placement" | keyof ThemeProps>,
+    Omit<DrawerProps, "isOpen" | "open" | "placement" | keyof ThemeProps>,
     Required<
       Pick<
         DrawerProps,
@@ -46,8 +46,10 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     },
     ref,
   ) => {
-    const { describedbyId, duration, isOpen, labelledbyId, onClose } =
-      useModal()
+    let { bodyRef, duration, headerRef, isOpen, open, onClose } = useModal()
+
+    open ??= isOpen
+
     const styles = useDrawer()
     const placement = useValue(_placement)
 
@@ -182,8 +184,8 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
       <Slide
         ref={ref}
         className={cx("ui-drawer", className)}
-        aria-describedby={describedbyId}
-        aria-labelledby={labelledbyId}
+        aria-describedby={bodyRef.current?.id}
+        aria-labelledby={headerRef.current?.id}
         aria-modal="true"
         drag={closeOnDrag ? getDragDirection() : false}
         dragConstraints={getDragDirectionRestriction(dragConstraints)}
@@ -191,7 +193,7 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
         dragMomentum={false}
         dragSnapToOrigin
         duration={duration}
-        isOpen={isOpen}
+        isOpen={open}
         placement={placement}
         role="dialog"
         tabIndex={-1}

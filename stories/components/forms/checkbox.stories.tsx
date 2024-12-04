@@ -7,7 +7,7 @@ import {
   Button,
   Checkbox,
   CheckboxGroup,
-  FormControl,
+  Fieldset,
   HStack,
   useBoolean,
   useCheckbox,
@@ -42,10 +42,6 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultIsChecked: Story = () => {
-  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
-}
-
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
@@ -56,6 +52,10 @@ export const withColorScheme: Story = () => {
       ))}
     </Wrap>
   )
+}
+
+export const withDefaultIsChecked: Story = () => {
+  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
 }
 
 export const isDisabled: Story = () => {
@@ -74,23 +74,23 @@ export const isDisabled: Story = () => {
         <Checkbox value="service">Service Notifications</Checkbox>
       </CheckboxGroup>
 
-      <FormControl
+      <Fieldset
         isDisabled
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Checkbox defaultIsChecked>All Notifications</Checkbox>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         isDisabled
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <CheckboxGroup defaultValue={["all"]}>
           <Checkbox value="all">All Notifications</Checkbox>
           <Checkbox value="important">Important Notifications</Checkbox>
           <Checkbox value="service">Service Notifications</Checkbox>
         </CheckboxGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -111,23 +111,23 @@ export const isReadonly: Story = () => {
         <Checkbox value="service">Service Notifications</Checkbox>
       </CheckboxGroup>
 
-      <FormControl
+      <Fieldset
         isReadOnly
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Checkbox defaultIsChecked>All Notifications</Checkbox>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         isReadOnly
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <CheckboxGroup defaultValue={["all"]}>
           <Checkbox value="all">All Notifications</Checkbox>
           <Checkbox value="important">Important Notifications</Checkbox>
           <Checkbox value="service">Service Notifications</Checkbox>
         </CheckboxGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -148,25 +148,25 @@ export const isInvalid: Story = () => {
         <Checkbox value="service">Service Notifications</Checkbox>
       </CheckboxGroup>
 
-      <FormControl
+      <Fieldset
         errorMessage="This is required."
         isInvalid
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <Checkbox>All Notifications</Checkbox>
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         errorMessage="This is required."
         isInvalid
-        label="Which notifications would you like to receive?"
+        legend="Which notifications would you like to receive?"
       >
         <CheckboxGroup defaultValue={["all"]}>
           <Checkbox value="all">All Notifications</Checkbox>
           <Checkbox value="important">Important Notifications</Checkbox>
           <Checkbox value="service">Service Notifications</Checkbox>
         </CheckboxGroup>
-      </FormControl>
+      </Fieldset>
     </>
   )
 }
@@ -315,10 +315,10 @@ export const reactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.checkbox?.message}
         isInvalid={!!errors.checkbox}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="checkbox"
@@ -330,12 +330,12 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         errorMessage={errors.checkboxGroup?.message}
         isInvalid={!!errors.checkboxGroup}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="checkboxGroup"
@@ -349,7 +349,7 @@ export const reactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -382,10 +382,10 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Fieldset
         errorMessage={errors.checkbox?.message}
         isInvalid={!!errors.checkbox}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="checkbox"
@@ -397,12 +397,12 @@ export const reactHookFormWithDefaultValue: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
-      <FormControl
+      <Fieldset
         errorMessage={errors.checkboxGroup?.message}
         isInvalid={!!errors.checkboxGroup}
-        label="Who is your favorite character?"
+        legend="Who is your favorite character?"
       >
         <Controller
           name="checkboxGroup"
@@ -416,7 +416,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Fieldset>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

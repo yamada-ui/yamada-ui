@@ -4,7 +4,7 @@ import { isGray, shadeColor } from "@yamada-ui/utils"
 export const Blockquote: ComponentMultiStyle<"Blockquote"> = {
   baseStyle: ({ justify = "start" }) => ({
     caption: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
     },
     cite: {},
@@ -37,7 +37,7 @@ export const Blockquote: ComponentMultiStyle<"Blockquote"> = {
     }),
     subtle: ({ colorScheme: c, colorMode: m, theme: t }) => ({
       container: {
-        borderStartColor: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        borderStartColor: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         borderStartWidth: "4px",
         px: "md",
       },

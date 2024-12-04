@@ -16,7 +16,7 @@ import type {
 } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import type { UseCalendarProps } from "./use-calendar"
-import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
+import { layoutStyleProperties, useI18n, useTheme } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
@@ -33,10 +33,24 @@ import {
   splitObject,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useRef } from "react"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 
 interface CalendarThemeProps extends ThemeProps<"Calendar"> {}
+
+interface InputProps
+  extends Omit<
+    HTMLUIProps<"input">,
+    | "children"
+    | "defaultValue"
+    | "disabled"
+    | "onChange"
+    | "readOnly"
+    | "required"
+    | "size"
+    | "type"
+    | keyof UseCalendarPickerBaseProps
+  > {}
 
 interface UseCalendarPickerOptions {
   /**
@@ -118,27 +132,14 @@ type UseCalendarPickerBaseProps<
 
 export type UseCalendarPickerProps<
   T extends UseCalendarProps<any> = UseCalendarProps<any>,
-> = Omit<
-  HTMLUIProps<"input">,
-  | "children"
-  | "defaultValue"
-  | "disabled"
-  | "onChange"
-  | "readOnly"
-  | "required"
-  | "size"
-  | "type"
-  | keyof UseCalendarPickerBaseProps
-> &
-  UseCalendarPickerBaseProps<T>
+> = InputProps & UseCalendarPickerBaseProps<T>
 
 export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   props: UseCalendarPickerProps<T>,
 ) => {
+  const { locale: defaultLocale } = useI18n()
   const { theme } = useTheme()
-
   let {
-    id,
     type,
     allowInput = true,
     allowInputBeyond = false,
@@ -210,21 +211,13 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     __selectType,
     ...rest
   } = useFormControlProps(props)
-
-  const uuid = useId()
-
-  id ??= uuid
-  locale ??= theme.__config?.date?.locale ?? "en"
-
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
-  const { disabled, readOnly } = formControlProps
-
   const {
-    isOpen,
+    isOpen: open,
     onClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
@@ -233,9 +226,12 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
-
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { disabled, readOnly } = formControlProps
+
+  locale ??= theme.__config?.date?.locale ?? defaultLocale
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -289,16 +285,16 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   }, [autoFocus, allowInput, disabled, readOnly, onInternalOpen])
 
   const onClick = useCallback(() => {
-    if (isOpen) {
+    if (open) {
       if (autoFocus && allowInput) inputRef.current?.focus()
     } else {
       onOpen()
     }
-  }, [autoFocus, allowInput, isOpen, onOpen])
+  }, [autoFocus, allowInput, open, onOpen])
 
   const onFocus = useCallback(() => {
-    if (!isOpen) onOpen()
-  }, [isOpen, onOpen])
+    if (!open) onOpen()
+  }, [open, onOpen])
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLDivElement>) => {
@@ -308,9 +304,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       if (!closeOnBlur) return
 
-      if (isOpen) onClose()
+      if (open) onClose()
     },
-    [closeOnBlur, isOpen, onClose],
+    [closeOnBlur, open, onClose],
   )
 
   const onKeyDown = useCallback(
@@ -323,7 +319,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         [key: string]: KeyboardEventHandler<HTMLDivElement> | undefined
       } = {
         Backspace: onDelete,
-        Enter: !isOpen
+        Enter: !open
           ? (ev) => {
               ev.preventDefault()
               ev.stopPropagation()
@@ -339,7 +335,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
               onClose()
             }
           : undefined,
-        Space: !isOpen
+        Space: !open
           ? (ev) => {
               ev.preventDefault()
               ev.stopPropagation()
@@ -355,16 +351,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       action(ev)
     },
-    [
-      closeOnEsc,
-      disabled,
-      readOnly,
-      isOpen,
-      onClose,
-      onEnter,
-      onDelete,
-      onOpen,
-    ],
+    [closeOnEsc, disabled, readOnly, open, onClose, onEnter, onDelete, onOpen],
   )
 
   const onClear = useCallback(
@@ -373,14 +360,14 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       onClearProp?.()
 
-      if (autoFocus && allowInput && isOpen) inputRef.current?.focus()
+      if (autoFocus && allowInput && open) inputRef.current?.focus()
     },
-    [autoFocus, allowInput, isOpen, onClearProp],
+    [autoFocus, allowInput, open, onClearProp],
   )
 
   useOutsideClick({
     ref: containerRef,
-    enabled: isOpen && closeOnBlur,
+    enabled: open && closeOnBlur,
     handler: onClose,
   })
 
@@ -421,7 +408,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       ...props,
       closeOnBlur: false,
       closeOnButton: false,
-      isOpen,
+      isOpen: open,
       trigger: "never",
       onClose,
       onOpen,
@@ -435,7 +422,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       flip,
       gutter,
       isLazy,
-      isOpen,
+      open,
       lazyBehavior,
       matchWidth,
       modifiers,
@@ -452,13 +439,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       return {
-        "aria-controls": id,
-        "aria-expanded": isOpen,
         "aria-haspopup": "dialog",
-        "data-active": dataAttr(isOpen),
+        "data-active": dataAttr(open),
         "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
         role: "combobox",
-        tabIndex: !allowInput ? 0 : -1,
+        tabIndex: -1,
         ...formControlProps,
         ...props,
         ref: mergeRefs(inputRef, ref),
@@ -471,12 +456,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       }
     },
     [
-      id,
       allowInput,
       disabled,
       readOnly,
       formControlProps,
-      isOpen,
+      open,
       rest,
       onFocus,
       onKeyDown,
@@ -580,12 +564,13 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
 
   return {
-    id,
     allowInput,
     containerRef,
     dateToString,
+    inputFormat,
     inputRef,
-    isOpen,
+    locale,
+    open,
     pattern,
     stringToDate,
     formControlProps,
@@ -594,7 +579,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     getFieldProps,
     getIconProps,
     getPopoverProps,
-    inputProps,
+    inputProps: inputProps as InputProps,
     onClose,
     onOpen,
   }

@@ -6,7 +6,7 @@ import {
   DropzoneReject,
   IMAGE_ACCEPT_TYPE,
 } from "@yamada-ui/dropzone"
-import { Upload, Image as UploadImage, X } from "@yamada-ui/lucide"
+import { UploadIcon, ImageIcon as UploadImage, XIcon } from "@yamada-ui/lucide"
 import { Button, FormControl, HStack, Text, VStack } from "@yamada-ui/react"
 import { useRef } from "react"
 
@@ -120,11 +120,11 @@ export const withStatus: Story = () => {
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload color="success" fontSize="6xl" />
+          <UploadIcon color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X color="danger" fontSize="6xl" />
+          <XIcon color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -158,11 +158,11 @@ export const useOnDrop: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload color="success" fontSize="6xl" />
+          <UploadIcon color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X color="danger" fontSize="6xl" />
+          <XIcon color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -189,11 +189,11 @@ export const useOnDropAccepted: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload color="success" fontSize="6xl" />
+          <UploadIcon color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X color="danger" fontSize="6xl" />
+          <XIcon color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>
@@ -220,11 +220,11 @@ export const useOnDropRejected: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Upload color="success" fontSize="6xl" />
+          <UploadIcon color="success" fontSize="6xl" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <X color="danger" fontSize="6xl" />
+          <XIcon color="danger" fontSize="6xl" />
         </DropzoneReject>
 
         <DropzoneIdle>

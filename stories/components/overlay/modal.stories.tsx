@@ -33,7 +33,7 @@ export const basic: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal open={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -59,7 +59,7 @@ export const withDuration: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal duration={0.4} isOpen={isOpen} onClose={onClose}>
+      <Modal duration={0.4} open={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal size={size} isOpen={isOpen} onClose={onClose}>
+      <Modal size={size} open={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -239,7 +239,7 @@ export const withPlacement: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} placement={placement} onClose={onClose}>
+      <Modal open={isOpen} placement={placement} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -311,7 +311,7 @@ export const withAnimation: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal animation={animation} isOpen={isOpen} onClose={onClose}>
+      <Modal animation={animation} open={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -338,7 +338,7 @@ export const nestedModal: Story = () => {
     <>
       <Button onClick={firstControls.onOpen}>Open Modal</Button>
 
-      <Modal isOpen={firstControls.isOpen} onClose={firstControls.onClose}>
+      <Modal open={firstControls.isOpen} onClose={firstControls.onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -357,7 +357,7 @@ export const nestedModal: Story = () => {
 
         <Modal
           size="sm"
-          isOpen={secondControls.isOpen}
+          open={secondControls.isOpen}
           onClose={secondControls.onClose}
         >
           <ModalHeader>あらすじ</ModalHeader>
@@ -385,7 +385,7 @@ export const disabledCloseButton: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen}>
+      <Modal open={isOpen}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -411,7 +411,7 @@ export const customCloseButton: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal open={isOpen} onClose={onClose}>
         <ModalCloseButton color="gray.400" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
@@ -439,7 +439,7 @@ export const disabledOverlay: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} withOverlay={false} onClose={onClose}>
+      <Modal open={isOpen} withOverlay={false} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -465,7 +465,7 @@ export const customOverlay: Story = () => {
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal open={isOpen} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(10px)" bg="blackAlpha.300" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
@@ -513,7 +513,7 @@ export const scrollBehavior: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal isOpen={isOpen} scrollBehavior={scrollBehavior} onClose={onClose}>
+      <Modal open={isOpen} scrollBehavior={scrollBehavior} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -609,7 +609,7 @@ export const scrollOnMount: Story = () => {
         </Text>
       </Container>
 
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal blockScrollOnMount={false} open={isOpen} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>

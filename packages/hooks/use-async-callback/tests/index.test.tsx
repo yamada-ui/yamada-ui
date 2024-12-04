@@ -1,6 +1,6 @@
 import type { ThemeConfig } from "@yamada-ui/core"
 import type { FC } from "react"
-import { render, renderHook, screen } from "@yamada-ui/test"
+import { render, renderHook, screen, waitFor } from "@yamada-ui/test"
 import { vi } from "vitest"
 import { useAsyncCallback } from "../src"
 
@@ -111,7 +111,9 @@ describe("useAsyncCallback", () => {
     await wait(500)
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
-    expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    })
     expect(el).not.toBeDisabled()
     expect(mockCallback).toHaveBeenCalledWith()
   })
@@ -147,7 +149,9 @@ describe("useAsyncCallback", () => {
     await wait(500)
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
-    expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    })
     expect(el).not.toBeDisabled()
     expect(mockCallback).toHaveBeenCalledWith()
   })
@@ -188,9 +192,11 @@ describe("useAsyncCallback", () => {
     await wait(500)
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
-    expect(
-      document.querySelector(".ui-loading-background"),
-    ).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(
+        document.querySelector(".ui-loading-background"),
+      ).not.toBeInTheDocument()
+    })
     expect(el).not.toBeDisabled()
     expect(mockCallback).toHaveBeenCalledWith()
   })
@@ -229,7 +235,9 @@ describe("useAsyncCallback", () => {
     await wait(500)
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
-    expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(document.querySelector(".ui-loading-page")).not.toBeInTheDocument()
+    })
     expect(el).not.toBeDisabled()
     expect(mockCallback).toHaveBeenCalledWith()
   })

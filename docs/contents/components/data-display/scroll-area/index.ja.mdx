@@ -2,7 +2,7 @@
 title: ScrollArea
 description: "`ScrollArea`は、カスタムされたスクロールバーが表示されるコンポーネントです。"
 package_name: "@yamada-ui/scroll-area"
-order: 22
+order: 23
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -117,7 +117,7 @@ const Content: FC = () => {
 }
 
 return (
-  <VStack divider={<Divider />}>
+  <VStack separator={<Separator />}>
     {typeMap.map((type) => (
       <ScrollArea
         key={type}

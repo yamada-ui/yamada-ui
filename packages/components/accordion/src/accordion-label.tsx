@@ -14,7 +14,18 @@ interface AccordionLabelOptions {
    * The accordion icon to use.
    */
   icon?:
-    | ((props: { isDisabled: boolean; isExpanded: boolean }) => ReactNode)
+    | ((props: {
+        /**
+         * @deprecated Use `disabled` instead.
+         */
+        isDisabled: boolean
+        /**
+         * @deprecated Use `expanded` instead.
+         */
+        isExpanded: boolean
+        disabled?: boolean
+        expanded?: boolean
+      }) => ReactNode)
     | ReactNode
   /**
    * Props the container element.
@@ -28,13 +39,16 @@ export interface AccordionLabelProps
 
 export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
   ({ className, children, icon: customIcon, containerProps, ...rest }, ref) => {
-    const {
+    let {
+      disabled,
       icon: supplementIcon,
       isDisabled = false,
-      isOpen,
+      open,
       getLabelProps,
     } = useAccordionItemContext()
     const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
+
+    disabled ??= isDisabled
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -47,24 +61,30 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
     const cloneCustomIcon =
       typeof customIcon === "function"
         ? customIcon({
+            disabled,
+            expanded: open,
             isDisabled,
-            isExpanded: isOpen,
+            isExpanded: open,
           })
         : customIcon
 
     const cloneSupplementIcon =
       typeof supplementIcon === "function"
         ? supplementIcon({
+            disabled,
+            expanded: open,
             isDisabled,
-            isExpanded: isOpen,
+            isExpanded: open,
           })
         : supplementIcon
 
     const cloneGeneralIcon =
       typeof generalIcon === "function"
         ? generalIcon({
+            disabled,
+            expanded: open,
             isDisabled,
-            isExpanded: isOpen,
+            isExpanded: open,
           })
         : generalIcon
 
@@ -96,12 +116,14 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   children,
   ...rest
 }) => {
-  const { isDisabled, isOpen } = useAccordionItemContext()
+  let { disabled, isDisabled, open } = useAccordionItemContext()
   const { styles } = useAccordionContext()
 
+  disabled ??= isDisabled
+
   const css: CSSUIObject = {
-    opacity: isDisabled ? 0.4 : 1,
-    transform: isOpen ? "rotate(-180deg)" : undefined,
+    opacity: disabled ? 0.4 : 1,
+    transform: open ? "rotate(-180deg)" : undefined,
     transformOrigin: "center",
     transition: "transform 0.2s",
     ...styles.icon,

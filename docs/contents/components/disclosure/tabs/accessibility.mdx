@@ -5,7 +5,6 @@ package_name: "@yamada-ui/tabs"
 order: 3
 with_description: true
 tab: Accessibility
-label: Updated
 ---
 
 The `Tabs` follows the [WAI-ARIA - Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs) for accessibility.
@@ -16,7 +15,7 @@ When using only icons in `Tab`, set `aria-label` for the `Tab`.
 <Tabs>
   <Tab>フリーザ</Tab>
   <Tab aria-label="Send an email to Freeza">
-    <Mail />
+    <MailIcon />
   </Tab>
 
   <TabPanel>
@@ -80,9 +79,9 @@ Or,
 | `TabList`  | `role="tablist"`     | Indicates that it is a tab list.                                             |
 |            | `aria-orientation`   | Sets to `"horizontal"` or `"vertical"` based on the value of `orientation`.  |
 | `Tab`      | `role="tab"`         | Indicates that it is a tab.                                                  |
-|            | `id`                 | The `id` used to associate with `role="tabpanel"`.                           |
-|            | `aria-controls`      | Sets the `id` of the associated `role="tabpanel"`.                           |
+|            | `id`                 | The `id` used to associate with `TabPanel`.                                  |
+|            | `aria-controls`      | Sets the `id` of the associated `TabPanel`.                                  |
 |            | `aria-selected`      | Sets to `true` if the tab is active, and sets to `false` for all other tabs. |
 | `TabPanel` | `role="tabpanel"`    | Indicates that it is a tab panel.                                            |
-|            | `id`                 | The `id` used to associate with `role="tab"`.                                |
-|            | `aria-labelledby`    | Sets the `id` of the associated `role="tab"`.                                |
+|            | `id`                 | The `id` used to associate with `Tab`.                                       |
+|            | `aria-labelledby`    | Sets the `id` of the associated `Tab`.                                       |

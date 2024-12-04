@@ -139,7 +139,7 @@ export const resetStyle: UIStyle = {
   },
 
   dt: {
-    fontWeight: "bold",
+    fontWeight: "inherit",
   },
 
   "embed, object, iframe": {

@@ -7,7 +7,6 @@ package_name: "@yamada-ui/pagination"
 with_description: true
 tab: Props
 order: 1
-label: Updated
 ---
 
 ## Props
@@ -84,6 +83,14 @@ label: Updated
 />
 
 <PropsCard
+  id="pagination-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="pagination-edgefirstprops"
   name="edgeFirstProps"
   type='Omit<PaginationItemProps, "page">'
@@ -109,6 +116,7 @@ label: Updated
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -206,10 +214,19 @@ label: Updated
 />
 
 <PropsCard
+  id="usepagination-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="usepagination-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

@@ -5,7 +5,6 @@ package_name: "@yamada-ui/tabs"
 with_description: true
 tab: Props
 order: 1
-label: Updated
 ---
 
 ## Props
@@ -37,6 +36,16 @@ label: Updated
 />
 
 <PropsCard
+  id="tab-focusable"
+  name="focusable"
+  type="boolean"
+  description={
+    "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tab-focusonclick"
   name="focusOnClick"
   type="boolean"
@@ -53,6 +62,7 @@ label: Updated
   description={
     "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
   }
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -63,6 +73,7 @@ label: Updated
   description={
     "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
   }
+  deprecated={"Use `focusable` instead."}
   defaultValue={"false"}
 />
 
@@ -114,6 +125,14 @@ label: Updated
 />
 
 <PropsCard
+  id="tabs-fitted"
+  name="fitted"
+  type="boolean"
+  description={"If `true`, tabs will stretch to width of the tablist."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="tabs-index"
   name="index"
   type="number"
@@ -125,6 +144,7 @@ label: Updated
   name="isFitted"
   type="boolean"
   description={"If `true`, tabs will stretch to width of the tablist."}
+  deprecated={"Use `fitted` instead."}
   defaultValue={"false"}
 />
 
@@ -135,6 +155,7 @@ label: Updated
   description={
     "If `true`, rendering of the tab panel's will be deferred until it is selected."
   }
+  deprecated={"Use `lazy` instead."}
   defaultValue={"true"}
 />
 
@@ -145,7 +166,18 @@ label: Updated
   description={
     "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus."
   }
+  deprecated={"Use `manual` instead."}
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tabs-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, rendering of the tab panel's will be deferred until it is selected."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -156,6 +188,16 @@ label: Updated
     "The lazy behavior of tab panels' content when not active. Only works when `isLazy={true}`.\n\n- `unmount`: The content of inactive tab panels are always unmounted.\n- `keepMounted`: The content of inactive tab panels is initially unmounted, but stays mounted when selected."
   }
   defaultValue={"'unmount'"}
+/>
+
+<PropsCard
+  id="tabs-manual"
+  name="manual"
+  type="boolean"
+  description={
+    "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard

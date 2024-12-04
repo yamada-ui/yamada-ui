@@ -1,13 +1,30 @@
-import type { LucideIconProps } from "../lucide-icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
-import { CirclePause as CirclePauseIcon } from "lucide-react"
-import { LucideIcon } from "../lucide-icon"
+import { Icon } from "@yamada-ui/icon"
+import { cx } from "@yamada-ui/utils"
+import { CirclePause as OriginalCirclePause } from "lucide-react"
+
+/**
+ * `CirclePauseIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const CirclePauseIcon = forwardRef<IconProps, "svg">(
+  ({ className, ...rest }, ref) => (
+    <Icon
+      ref={ref}
+      as={OriginalCirclePause}
+      className={cx("ui-lucide-icon", className)}
+      {...rest}
+    />
+  ),
+)
 
 /**
  * `CirclePause` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ *
+ * @deprecated Use `CirclePauseIcon` instead.
  */
-export const CirclePause = forwardRef<LucideIconProps, "svg">((props, ref) => (
-  <LucideIcon ref={ref} as={CirclePauseIcon} {...props} />
-))
+export const CirclePause = CirclePauseIcon

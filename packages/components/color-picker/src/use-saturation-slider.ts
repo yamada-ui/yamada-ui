@@ -117,7 +117,7 @@ export const useSaturationSlider = ({
 }: UseSaturationSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
+  const {
     id,
     name,
     defaultValue = [0, 0, 1],
@@ -150,8 +150,8 @@ export const useSaturationSlider = ({
     value: valueProp,
     onChange: onChangeProp,
   })
-  const [isDragging, setDragging] = useState(false)
-  const isInteractive = !(disabled || readOnly)
+  const [dragging, setDragging] = useState(false)
+  const interactive = !(disabled || readOnly)
   let [h, s, v] = value
 
   s = clampNumber(s, 0, 1)
@@ -163,7 +163,7 @@ export const useSaturationSlider = ({
   const latestRef = useLatestRef({
     eventSource: null as "keyboard" | "pointer" | null,
     focusThumbOnChange,
-    isInteractive,
+    interactive,
     step,
     value,
   })
@@ -219,9 +219,9 @@ export const useSaturationSlider = ({
 
   const constrain = useCallback(
     ([s, v]: [number, number]) => {
-      const { isInteractive } = latestRef.current
+      const { interactive } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       s = clampNumber(s, 0, 1)
       v = clampNumber(v, 0, 1)
@@ -256,24 +256,24 @@ export const useSaturationSlider = ({
 
   usePanEvent(containerRef, {
     onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+      const { interactive } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setValueFromPointer(ev)
     },
     onSessionEnd: () => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(false)
       onChangeEnd(value)
     },
     onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(true)
       focusThumb()
@@ -368,11 +368,11 @@ export const useSaturationSlider = ({
         style,
         "aria-valuemax": 100,
         "aria-valuemin": 0,
-        "aria-valuenow": s,
-        "aria-valuetext": `saturation ${s}, brightness ${v}`,
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        "aria-valuenow": s * 100,
+        "aria-valuetext": `Saturation ${s * 100}%, Brightness ${v * 100}%`,
+        "data-active": dataAttr(dragging && focusThumbOnChange),
         role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        tabIndex: interactive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, rest.onBlur),
         onFocus: handlerAll(props.onFocus, rest.onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -385,9 +385,9 @@ export const useSaturationSlider = ({
       thumbColor,
       h,
       formControlProps,
-      isInteractive,
+      interactive,
       focusThumbOnChange,
-      isDragging,
+      dragging,
       onKeyDown,
       rest,
     ],

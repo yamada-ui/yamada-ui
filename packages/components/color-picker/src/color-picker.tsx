@@ -189,6 +189,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                as="div"
                 className="ui-color-picker__content"
                 __css={{ ...styles.content }}
               >

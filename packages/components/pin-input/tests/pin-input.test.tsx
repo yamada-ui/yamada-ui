@@ -185,23 +185,29 @@ describe("<PinInput />", () => {
     })
   })
 
-  test("does not move focus if current input is not empty", async () => {
+  test("focus move input on arrowRight or arrowLeft if manageFocus is true", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="1234" items={4} manageFocus />,
+      <PinInput defaultValue="1234" manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
-    const thirdInput = inputs[2]
+    const firstInput = inputs[0]
+    const secondInput = inputs[1]
 
     await act(async () => {
-      await user.click(thirdInput!)
-      await user.keyboard("[arrowleft][Backspace]")
+      await user.click(firstInput!)
+      await user.keyboard("[arrowRight]")
+    })
+    await waitFor(() => {
+      expect(document.activeElement).toStrictEqual(secondInput)
     })
 
-    await waitFor(() => {
-      expect(document.activeElement).toStrictEqual(thirdInput)
+    await act(async () => {
+      await user.keyboard("[arrowLeft]")
     })
-    expect(thirdInput).toHaveValue("3")
+    await waitFor(() => {
+      expect(document.activeElement).toStrictEqual(firstInput)
+    })
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {

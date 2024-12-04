@@ -7,7 +7,6 @@ package_name: "@yamada-ui/pagination"
 is_tabs: true
 with_description: true
 tab: Usage
-label: Updated
 ---
 
 ## Import
@@ -100,9 +99,9 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} controlProps={{ children: <Ghost /> }} />
-  <Pagination total={10} controlPrevProps={{ children: <Ghost /> }} />
-  <Pagination total={10} controlNextProps={{ children: <Ghost /> }} />
+  <Pagination total={10} controlProps={{ children: <GhostIcon /> }} />
+  <Pagination total={10} controlPrevProps={{ children: <GhostIcon /> }} />
+  <Pagination total={10} controlNextProps={{ children: <GhostIcon /> }} />
 </VStack>
 ```
 
@@ -114,9 +113,17 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} withEdges edgeProps={{ children: <Ghost /> }} />
-  <Pagination total={10} withEdges edgeFirstProps={{ children: <Ghost /> }} />
-  <Pagination total={10} withEdges edgeLastProps={{ children: <Ghost /> }} />
+  <Pagination total={10} withEdges edgeProps={{ children: <GhostIcon /> }} />
+  <Pagination
+    total={10}
+    withEdges
+    edgeFirstProps={{ children: <GhostIcon /> }}
+  />
+  <Pagination
+    total={10}
+    withEdges
+    edgeLastProps={{ children: <GhostIcon /> }}
+  />
 </VStack>
 ```
 

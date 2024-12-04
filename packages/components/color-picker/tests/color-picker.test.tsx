@@ -51,7 +51,7 @@ describe("<ColorPicker />", () => {
   test("ColorPicker renders as disabled", () => {
     render(<ColorPicker disabled />)
 
-    const colorPicker = screen.getByRole("textbox")
+    const colorPicker = screen.getByRole("combobox").querySelector("input")
 
     expect(colorPicker).toBeDisabled()
   })

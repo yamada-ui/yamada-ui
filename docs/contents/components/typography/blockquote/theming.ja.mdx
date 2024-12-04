@@ -3,7 +3,6 @@ title: Blockquote
 description: "`Blockquote` は引用を表すコンポーネントです。デフォルトでは `blockquote` 要素をレンダリングします。"
 package_name: "@yamada-ui/typography"
 order: 2
-label: New
 with_description: true
 tab: テーマ
 ---
@@ -20,7 +19,7 @@ tab: テーマ
 export const Blockquote: ComponentMultiStyle<"Blockquote"> = {
   baseStyle: ({ justify = "start" }) => ({
     caption: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
     },
     cite: {},
@@ -53,7 +52,7 @@ export const Blockquote: ComponentMultiStyle<"Blockquote"> = {
     }),
     subtle: ({ colorScheme: c, colorMode: m, theme: t }) => ({
       container: {
-        borderStartColor: [`${c}.50`, shadeColor(`${c}.500`, 68)(t, m)],
+        borderStartColor: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
         borderStartWidth: "4px",
         px: "md",
       },

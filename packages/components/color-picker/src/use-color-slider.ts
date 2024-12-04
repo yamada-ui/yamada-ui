@@ -23,6 +23,8 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useRef, useState } from "react"
 
+type ColorSliderChannel = "alpha" | "hue"
+
 interface UseColorSliderOptions {
   /**
    * The maximum allowed value of the slider. Cannot be less than min.
@@ -41,6 +43,10 @@ interface UseColorSliderOptions {
    * This is particularly useful in forms.
    */
   name?: string
+  /**
+   * The channel of the slider.
+   */
+  channel?: ColorSliderChannel
   /**
    * The initial value of the slider.
    */
@@ -94,6 +100,7 @@ export const useColorSlider = ({
     id,
     name,
     style: styleProp,
+    channel = "hue",
     defaultValue,
     max,
     min = 0,
@@ -128,8 +135,8 @@ export const useColorSlider = ({
   })
   const value = clampNumber(computedValue, min, max)
   const thumbPercent = valueToPercent(value, min, max)
-  const [isDragging, setDragging] = useState(false)
-  const isInteractive = !(disabled || readOnly)
+  const [dragging, setDragging] = useState(false)
+  const interactive = !(disabled || readOnly)
 
   const oneStep = step || (max - min) / 100
   const tenStep = (max - min) / 10
@@ -140,7 +147,7 @@ export const useColorSlider = ({
   const latestRef = useLatestRef({
     eventSource: null as "keyboard" | "pointer" | null,
     focusThumbOnChange,
-    isInteractive,
+    interactive,
     max,
     min,
     step,
@@ -188,9 +195,9 @@ export const useColorSlider = ({
 
   const constrain = useCallback(
     (value: number) => {
-      const { isInteractive, max, min } = latestRef.current
+      const { interactive, max, min } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       value = parseFloat(roundNumberToStep(value, min, oneStep))
       value = clampNumber(value, min, max)
@@ -241,24 +248,24 @@ export const useColorSlider = ({
 
   usePanEvent(containerRef, {
     onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+      const { interactive: interactive } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setValueFromPointer(ev)
     },
     onSessionEnd: () => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(false)
       onChangeEnd(value)
     },
     onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(true)
       focusThumb()
@@ -354,9 +361,10 @@ export const useColorSlider = ({
         "aria-valuemax": max,
         "aria-valuemin": min,
         "aria-valuenow": value,
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        "aria-valuetext": getAriaValueText(channel, value),
+        "data-active": dataAttr(dragging && focusThumbOnChange),
         role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        tabIndex: interactive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlurProp),
         onFocus: handlerAll(props.onFocus, onFocusProp),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -369,14 +377,15 @@ export const useColorSlider = ({
       value,
       formControlProps,
       ariaReadonly,
-      isInteractive,
-      focusThumbOnChange,
-      min,
       max,
-      isDragging,
-      onKeyDown,
-      onFocusProp,
+      min,
+      channel,
+      dragging,
+      focusThumbOnChange,
+      interactive,
       onBlurProp,
+      onFocusProp,
+      onKeyDown,
     ],
   )
 
@@ -390,3 +399,23 @@ export const useColorSlider = ({
 }
 
 export type UseColorSliderReturn = ReturnType<typeof useColorSlider>
+
+export const getAriaValueText = (
+  channel: ColorSliderChannel,
+  value: number,
+) => {
+  if (channel === "hue") {
+    return `${value}°, ${getColorName(value)}`
+  } else {
+    return `${value * 100}%`
+  }
+}
+
+const getColorName = (hue: number): string => {
+  if (hue < 30 || hue >= 330) return "Red"
+  if (hue < 90) return "Yellow"
+  if (hue < 150) return "Green"
+  if (hue < 210) return "Cyan"
+  if (hue < 270) return "Blue"
+  return "Magenta"
+}

@@ -1,11 +1,13 @@
 import type {
   AlertStatuses,
+  AlertStatusValue,
   CSSUIObject,
   FC,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
+import type { ComponentType } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -13,36 +15,38 @@ import {
   useComponentMultiStyle,
   useTheme,
 } from "@yamada-ui/core"
+import { CheckIcon, InfoIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
-import { CircleCheckBig, Info, TriangleAlert } from "@yamada-ui/lucide"
 import { createContext, cx } from "@yamada-ui/utils"
 
 const defaultStatuses = {
-  error: { colorScheme: "danger", icon: TriangleAlert },
-  info: { colorScheme: "info", icon: Info },
+  error: { colorScheme: "danger", icon: WarningIcon },
+  info: { colorScheme: "info", icon: InfoIcon },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CircleCheckBig },
-  warning: { colorScheme: "warning", icon: TriangleAlert },
+  success: { colorScheme: "success", icon: CheckIcon },
+  warning: { colorScheme: "warning", icon: WarningIcon },
 } as const
 
-export type Status = keyof typeof defaultStatuses
-
 interface AlertContext {
-  status: Status
+  status: AlertStatusValue
   styles: { [key: string]: CSSUIObject | undefined }
 }
 
 const [AlertProvider, useAlert] = createContext<AlertContext>({
-  name: `AlertStylesContext`,
+  name: `AlertContext`,
   errorMessage: `useAlert returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
 })
 
 export const getStatusColorScheme = (
-  status: Status,
+  status: AlertStatusValue,
   statuses?: AlertStatuses,
-) => statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
+): string =>
+  statuses?.[status]?.colorScheme ?? defaultStatuses[status].colorScheme
 
-export const getStatusIcon = (status: Status, statuses?: AlertStatuses) =>
+export const getStatusIcon = (
+  status: AlertStatusValue,
+  statuses?: AlertStatuses,
+): ComponentType<any> =>
   statuses?.[status]?.icon ?? defaultStatuses[status].icon
 
 interface AlertOptions {
@@ -51,7 +55,7 @@ interface AlertOptions {
    *
    * @default 'info'
    */
-  status?: Status
+  status?: AlertStatusValue
 }
 
 export interface AlertProps

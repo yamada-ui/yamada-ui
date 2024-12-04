@@ -27,6 +27,16 @@ order: 1
 />
 
 <PropsCard
+  id="tooltip-boundary"
+  name="boundary"
+  type='HTMLElement | "clippingParents" | "scrollParent"'
+  description={
+    "The boundary area for the popper. Used within the `preventOverflow` modifier."
+  }
+  defaultValue={"'clippingParents'"}
+/>
+
+<PropsCard
   id="tooltip-closedelay"
   name="closeDelay"
   type="number"
@@ -79,6 +89,22 @@ order: 1
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the tooltip will be initially shown."}
+  deprecated={"Use `defaultOpen` instead."}
+/>
+
+<PropsCard
+  id="tooltip-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the tooltip will be initially shown."}
+/>
+
+<PropsCard
+  id="tooltip-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the tooltip will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -86,6 +112,28 @@ order: 1
   name="duration"
   type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
+/>
+
+<PropsCard
+  id="tooltip-eventlisteners"
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { resize?: boolean | undefined; scroll?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tooltip-flip"
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -103,6 +151,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tooltip will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -111,6 +160,7 @@ order: 1
   name="isOpen"
   type="boolean"
   description={"If `true`, the tooltip will be shown."}
+  deprecated={"Use `open` instead."}
 />
 
 <PropsCard
@@ -124,6 +174,16 @@ order: 1
   | Iterable<ReactNode>
   | ReactPortal"
   description={"The label of the tooltip."}
+/>
+
+<PropsCard
+  id="tooltip-matchwidth"
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -160,6 +220,13 @@ order: 1
 />
 
 <PropsCard
+  id="tooltip-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the tooltip will be shown."}
+/>
+
+<PropsCard
   id="tooltip-opendelay"
   name="openDelay"
   type="number"
@@ -181,6 +248,24 @@ order: 1
   type='Pick<PortalProps,
   "appendToParentPortal" | "containerRef">'
   description={"Props for portal component."}
+/>
+
+<PropsCard
+  id="tooltip-preventoverflow"
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tooltip-strategy"
+  name="strategy"
+  type='"absolute" | "fixed"'
+  description={"The CSS positioning strategy to use."}
+  defaultValue={"'absolute'"}
 />
 
 <PropsCard

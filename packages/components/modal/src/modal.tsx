@@ -16,7 +16,7 @@ import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useValue } from "@yamada-ui/use-value"
 import { findChild, findChildren, getValidChildren } from "@yamada-ui/utils"
-import { cloneElement, useCallback, useId } from "react"
+import { cloneElement, useCallback, useRef } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { DialogOverlay } from "./dialog-overlay"
 import { DrawerContent } from "./drawer-content"
@@ -34,10 +34,6 @@ export interface ModalOptions
     | "lockFocusAcrossFrames"
     | "restoreFocus"
   > {
-  /**
-   * If `true`, the open will be opened.
-   */
-  isOpen: boolean
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -72,6 +68,16 @@ export interface ModalOptions
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the open will be opened.
+   *
+   * @deprecated Use `open` instead.
+   */
+  isOpen?: boolean
+  /**
+   * If `true`, the open will be opened.
+   */
+  open?: boolean
   /**
    * The CSS `padding` property.
    */
@@ -155,7 +161,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       size,
       ...props,
     })
-    const {
+    let {
       className,
       allowPinchZoom = false,
       animation = "scale",
@@ -169,6 +175,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       initialFocusRef,
       isOpen,
       lockFocusAcrossFrames = true,
+      open,
       outside = "fallback(4, 1rem)",
       placement: _placement = "center",
       restoreFocus,
@@ -183,8 +190,10 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps)
-    const labelledbyId = useId()
-    const describedbyId = useId()
+    const headerRef = useRef<HTMLElement>(null)
+    const bodyRef = useRef<HTMLElement>(null)
+
+    open ??= isOpen
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
@@ -240,11 +249,12 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       <ModalProvider
         value={{
           animation,
+          bodyRef,
           closeOnOverlay,
-          describedbyId,
           duration,
+          headerRef,
           isOpen,
-          labelledbyId,
+          open,
           scrollBehavior,
           styles,
           withCloseButton,
@@ -253,7 +263,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
         }}
       >
         <AnimatePresence onExitComplete={onCloseComplete}>
-          {isOpen ? (
+          {open ? (
             <Portal {...portalProps}>
               <FocusLock
                 autoFocus={autoFocus}

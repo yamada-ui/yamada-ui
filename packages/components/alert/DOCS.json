@@ -19,7 +19,7 @@
       "required": false
     },
     "status": {
-      "type": "\"info\" | \"success\" | \"warning\" | \"error\" | \"loading\"",
+      "type": "AlertStatusValue",
       "defaultValue": "'info'",
       "description": "The status of the alert.",
       "required": false

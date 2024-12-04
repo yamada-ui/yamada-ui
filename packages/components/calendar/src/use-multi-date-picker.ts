@@ -55,7 +55,7 @@ export const useMultiDatePicker = ({
   onChange: onChangeProp,
   ...rest
 }: UseMultiDatePickerProps) => {
-  const isComposition = useRef<boolean>(false)
+  const composition = useRef<boolean>(false)
   const draftValue = useRef<Date | undefined>(undefined)
   const [value, setValue] = useControllableState<Date[]>({
     defaultValue,
@@ -63,14 +63,11 @@ export const useMultiDatePicker = ({
     onChange: onChangeProp,
   })
   const [inputValue, setInputValue] = useState<string>("")
-
   const resolvedValue = getResolvedValue([...value, draftValue.current])
-
   const {
-    id,
     allowInput,
     dateToString,
-    isOpen,
+    open,
     pattern,
     stringToDate,
     formControlProps,
@@ -116,7 +113,7 @@ export const useMultiDatePicker = ({
       setValue((prev) => prev.slice(0, -1))
     },
     onEnter: () => {
-      if (isComposition.current) return
+      if (composition.current) return
 
       const value = stringToDate(inputValue)
 
@@ -151,7 +148,7 @@ export const useMultiDatePicker = ({
     (ev: ChangeEvent<HTMLInputElement>) => {
       let inputValue = ev.target.value
 
-      if (!isComposition.current) inputValue = inputValue.replace(pattern, "")
+      if (!composition.current) inputValue = inputValue.replace(pattern, "")
 
       setInputValue(inputValue)
 
@@ -163,11 +160,11 @@ export const useMultiDatePicker = ({
   )
 
   const onCompositionStart = useCallback(() => {
-    isComposition.current = true
+    composition.current = true
   }, [])
 
   const onCompositionEnd = useCallback(() => {
-    isComposition.current = false
+    composition.current = false
 
     setInputValue((prev) => prev.replace(pattern, ""))
   }, [pattern])
@@ -183,7 +180,6 @@ export const useMultiDatePicker = ({
       }
 
       return {
-        id,
         placeholder,
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
@@ -205,7 +201,6 @@ export const useMultiDatePicker = ({
       allowInput,
       placeholder,
       formControlProps,
-      id,
       inputValue,
       onChange,
       onCompositionStart,
@@ -214,9 +209,8 @@ export const useMultiDatePicker = ({
   )
 
   return {
-    id,
     dateToString,
-    isOpen,
+    open,
     setValue,
     value,
     getCalendarProps,

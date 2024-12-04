@@ -1,5 +1,56 @@
 # @yamada-ui/file-button
 
+## 1.1.15
+
+### Patch Changes
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`3a74b00`](https://github.com/yamada-ui/yamada-ui/commit/3a74b003124a864d9882f541240cb9fccb9ef514), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`fcace07`](https://github.com/yamada-ui/yamada-ui/commit/fcace077aa6aac05e6c32d6592da956ab147d213), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/button@1.0.52
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/form-control@2.1.9
+
+## 1.1.14
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/button@1.0.51
+  - @yamada-ui/form-control@2.1.8
+
+## 1.1.13
+
+### Patch Changes
+
+- Updated dependencies [[`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87)]:
+  - @yamada-ui/button@1.0.50
+
+## 1.1.12
+
+### Patch Changes
+
+- [#3333](https://github.com/yamada-ui/yamada-ui/pull/3333) [`4526789`](https://github.com/yamada-ui/yamada-ui/commit/45267891c8b4bf8c5719eb4e602d26224e057685) Thanks [@illionillion](https://github.com/illionillion)! - Fixed so that `variant` is reflected even when `as={IconButton}`.
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/button@1.0.49
+  - @yamada-ui/form-control@2.1.7
+
+## 1.1.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39)]:
+  - @yamada-ui/button@1.0.47
+
 ## 1.1.9
 
 ### Patch Changes

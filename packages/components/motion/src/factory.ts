@@ -1,5 +1,5 @@
 import type { StyledOptions } from "@yamada-ui/core"
-import type { ComponentType } from "react"
+import type { ForwardRefExoticComponent } from "react"
 import type { MotionAs, MotionComponents, MotionFactory } from "./motion.types"
 import { styled } from "@yamada-ui/core"
 import { motion as _motion } from "framer-motion"
@@ -7,15 +7,21 @@ import { motion as _motion } from "framer-motion"
 interface Factory extends MotionFactory, MotionComponents {}
 
 function factory() {
-  const cache = new Map<MotionAs, ComponentType>()
+  const cache = new Map<MotionAs, ForwardRefExoticComponent<any>>()
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [MotionAs, StyledOptions]) => {
-      return _motion(styled(el, options) as ComponentType)
+      const component = styled(el, options) as ForwardRefExoticComponent<any>
+
+      return _motion.create(component)
     },
 
     get: (_target, el: MotionAs) => {
-      if (!cache.has(el)) cache.set(el, _motion(styled(el) as ComponentType))
+      if (!cache.has(el)) {
+        const component = styled(el) as ForwardRefExoticComponent<any>
+
+        cache.set(el, _motion.create(component))
+      }
 
       return cache.get(el)
     },

@@ -1,23 +1,23 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  ChevronDown,
+  ChevronDownIcon,
   MenuIcon,
-  Plus,
-  SquareArrowOutUpRight,
-  SquarePen,
+  PlusIcon,
+  SquareArrowOutUpRightIcon,
+  SquarePenIcon,
 } from "@yamada-ui/lucide"
 import {
   Button,
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   Portal,
   useDisclosure,
 } from "@yamada-ui/react"
@@ -35,7 +35,7 @@ export default meta
 export const basic: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -78,13 +78,16 @@ export const withIcon: Story = () => {
       />
 
       <MenuList>
-        <MenuItem command="⌘T" icon={<Plus fontSize="lg" />}>
+        <MenuItem command="⌘T" icon={<PlusIcon fontSize="lg" />}>
           New Tab
         </MenuItem>
-        <MenuItem command="⌘N" icon={<SquareArrowOutUpRight fontSize="lg" />}>
+        <MenuItem
+          command="⌘N"
+          icon={<SquareArrowOutUpRightIcon fontSize="lg" />}
+        >
           New Window
         </MenuItem>
-        <MenuItem command="⌘O" icon={<SquarePen fontSize="lg" />}>
+        <MenuItem command="⌘O" icon={<SquarePenIcon fontSize="lg" />}>
           Open File
         </MenuItem>
       </MenuList>
@@ -97,7 +100,7 @@ export const withInitialFocusRef: Story = () => {
 
   return (
     <Menu initialFocusRef={ref}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -113,7 +116,7 @@ export const withInitialFocusRef: Story = () => {
 export const withPlacement: Story = () => {
   return (
     <Menu placement="right-start">
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -129,7 +132,7 @@ export const withPlacement: Story = () => {
 export const withAnimation: Story = () => {
   return (
     <Menu animation="top">
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -145,7 +148,7 @@ export const withAnimation: Story = () => {
 export const withOffset: Story = () => {
   return (
     <Menu offset={[16, 16]}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -161,7 +164,7 @@ export const withOffset: Story = () => {
 export const withGutter: Story = () => {
   return (
     <Menu gutter={32}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -177,7 +180,7 @@ export const withGutter: Story = () => {
 export const withDuration: Story = () => {
   return (
     <Menu duration={0.4}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -190,10 +193,10 @@ export const withDuration: Story = () => {
   )
 }
 
-export const withDivider: Story = () => {
+export const withSeparator: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -202,7 +205,7 @@ export const withDivider: Story = () => {
         <MenuItem>Edit Profile</MenuItem>
         <MenuItem>Preferences</MenuItem>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuItem>Sign out</MenuItem>
       </MenuList>
@@ -213,7 +216,7 @@ export const withDivider: Story = () => {
 export const withGroup: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -224,7 +227,7 @@ export const withGroup: Story = () => {
           <MenuItem>Preferences</MenuItem>
         </MenuGroup>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuGroup label="action">
           <MenuItem>Sign out</MenuItem>
@@ -237,7 +240,7 @@ export const withGroup: Story = () => {
 export const withOptionGroup: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -247,7 +250,7 @@ export const withOptionGroup: Story = () => {
           <MenuOptionItem value="desc">Descending</MenuOptionItem>
         </MenuOptionGroup>
 
-        <MenuDivider />
+        <MenuSeparator />
 
         <MenuOptionGroup type="checkbox" label="display">
           <MenuOptionItem value="gender">gender</MenuOptionItem>
@@ -262,7 +265,7 @@ export const withOptionGroup: Story = () => {
 export const withPortal: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -280,7 +283,7 @@ export const withPortal: Story = () => {
 export const nestedMenu: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -316,7 +319,7 @@ export const nestedMenu: Story = () => {
 export const disabledCloseOnSelect: Story = () => {
   return (
     <Menu closeOnSelect={false}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -332,7 +335,7 @@ export const disabledCloseOnSelect: Story = () => {
 export const disabledCloseBlur: Story = () => {
   return (
     <Menu closeOnBlur={false}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -348,7 +351,7 @@ export const disabledCloseBlur: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -364,7 +367,7 @@ export const isDisabled: Story = () => {
 export const isFocusable: Story = () => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -382,7 +385,7 @@ export const isFocusable: Story = () => {
 export const useLazy: Story = () => {
   return (
     <Menu isLazy>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 
@@ -400,7 +403,7 @@ export const customControl: Story = () => {
 
   return (
     <Menu isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
-      <MenuButton as={Button} rightIcon={<ChevronDown fontSize="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
         Menu
       </MenuButton>
 

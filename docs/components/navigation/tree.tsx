@@ -2,20 +2,20 @@ import type { IconProps, ListProps } from "@yamada-ui/react"
 import type { DocumentTree } from "mdx"
 import type { FC } from "react"
 import {
-  AppWindowMac,
-  Blocks,
-  Compass,
-  Figma,
-  Globe,
-  History,
-  Paintbrush,
-  Palette,
-  Parentheses,
-  Smile,
+  AppWindowMacIcon,
+  BlocksIcon,
+  ChevronDownIcon,
+  CompassIcon,
+  FigmaIcon,
+  GlobeIcon,
+  HistoryIcon,
+  PaintbrushIcon,
+  PaletteIcon,
+  ParenthesesIcon,
+  SmileIcon,
 } from "@yamada-ui/lucide"
 import {
   Center,
-  ChevronIcon,
   Collapse,
   dataAttr,
   forwardRef,
@@ -195,9 +195,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             {title}
           </Text>
 
-          <Label variant={isSelected ? "outline" : "subtle"} ms="sm">
-            {label}
-          </Label>
+          <Label ms="sm">{label}</Label>
         </Text>
 
         {withToggleButton ? (
@@ -214,7 +212,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
             _focusVisible={{ boxShadow: "inline" }}
             onClick={onToggle}
           >
-            <ChevronIcon
+            <ChevronDownIcon
               transform={isOpen ? undefined : "rotate(-90deg)"}
               transitionDuration="slow"
               transitionProperty="transform"
@@ -235,34 +233,34 @@ interface ListItemIconProps extends IconProps {
 const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
   switch (icon) {
     case "compass":
-      return <Compass fontSize="2xl" {...rest} />
+      return <CompassIcon fontSize="2xl" {...rest} />
 
     case "palette":
-      return <Palette fontSize="2xl" {...rest} />
+      return <PaletteIcon fontSize="2xl" {...rest} />
 
     case "blocks":
-      return <Blocks fontSize="2xl" {...rest} />
+      return <BlocksIcon fontSize="2xl" {...rest} />
 
     case "globe":
-      return <Globe fontSize="2xl" {...rest} />
+      return <GlobeIcon fontSize="2xl" {...rest} />
 
     case "parentheses":
-      return <Parentheses fontSize="2xl" {...rest} />
+      return <ParenthesesIcon fontSize="2xl" {...rest} />
 
     case "figma":
-      return <Figma fontSize="2xl" {...rest} />
+      return <FigmaIcon fontSize="2xl" {...rest} />
 
     case "history":
-      return <History fontSize="2xl" {...rest} />
+      return <HistoryIcon fontSize="2xl" {...rest} />
 
     case "paintbrush":
-      return <Paintbrush fontSize="2xl" {...rest} />
+      return <PaintbrushIcon fontSize="2xl" {...rest} />
 
     case "app-window-mac":
-      return <AppWindowMac fontSize="2xl" {...rest} />
+      return <AppWindowMacIcon fontSize="2xl" {...rest} />
 
     case "smile":
-      return <Smile fontSize="2xl" {...rest} />
+      return <SmileIcon fontSize="2xl" {...rest} />
 
     default:
       return null

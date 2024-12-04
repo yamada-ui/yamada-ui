@@ -1,7 +1,11 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { ManipulateType } from "dayjs"
 import type { FC } from "react"
-import type { InsightPeriodSuggest, InsightUserSuggest } from "./insights-utils"
+import type {
+  InsightMonthPeriodSuggest,
+  InsightRangePeriodSuggest,
+  InsightUserSuggest,
+} from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import {
   Box,
@@ -10,6 +14,7 @@ import {
   Heading,
   HStack,
   MultiAutocomplete,
+  Separator,
   Text,
   useDisclosure,
   VStack,
@@ -24,7 +29,8 @@ import {
   INSIGHT_MAX_DATE,
   INSIGHT_MEMBERS_IDS,
   INSIGHT_MIN_DATE,
-  INSIGHT_PERIOD_SUGGEST,
+  INSIGHT_MONTH_PERIOD_SUGGEST,
+  INSIGHT_RANGE_PERIOD_SUGGEST,
   INSIGHT_USER_IDS,
   INSIGHT_USER_SUGGEST,
 } from "./insights-utils"
@@ -192,6 +198,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   const { isOpen, onClose, onOpen } = useDisclosure({
     onClose: () => onChangeQuery(valueRef.current),
   })
+  const isFirstDayOfMonth = dayjs().tz().isSame(dayjs().tz().startOf("M"), "d")
 
   const onChangeQuery = useCallback(
     (value: [(Date | undefined)?, (Date | undefined)?]) => {
@@ -233,16 +240,30 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   )
 
   const onSuggestChange = useCallback(
-    (type: InsightPeriodSuggest) => {
-      const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
+    (type: InsightMonthPeriodSuggest | InsightRangePeriodSuggest) => {
+      let value: [Date, Date]
 
-      const value: [Date, Date] = [
-        dayjs()
-          .tz()
-          .subtract(parseInt(count ?? ""), unit as ManipulateType)
-          .toDate(),
-        dayjs().tz().subtract(1, "d").toDate(),
-      ]
+      if (type == "this-month") {
+        value = [
+          dayjs().tz().subtract(1, "d").startOf("M").toDate(),
+          dayjs().tz().subtract(1, "d").toDate(),
+        ]
+      } else if (type == "last-month") {
+        value = [
+          dayjs().tz().subtract(1, "M").startOf("M").toDate(),
+          dayjs().tz().subtract(1, "M").endOf("M").toDate(),
+        ]
+      } else {
+        const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
+
+        value = [
+          dayjs()
+            .tz()
+            .subtract(parseInt(count ?? ""), unit as ManipulateType)
+            .toDate(),
+          dayjs().tz().subtract(1, "d").toDate(),
+        ]
+      }
 
       if (dayjs(value[0]).isBefore(INSIGHT_MIN_DATE)) {
         value[0] = INSIGHT_MIN_DATE
@@ -281,7 +302,36 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
         gap="sm"
         pt="sm"
       >
-        {INSIGHT_PERIOD_SUGGEST.map((value) => {
+        {INSIGHT_MONTH_PERIOD_SUGGEST.map((value) => {
+          return (
+            <Center
+              key={value}
+              as="button"
+              type="button"
+              bg={["blackAlpha.100", "whiteAlpha.100"]}
+              disabled={value == "this-month" && isFirstDayOfMonth}
+              fontSize="sm"
+              h="8"
+              rounded="md"
+              transitionDuration="slower"
+              transitionProperty="background"
+              w="full"
+              _disabled={{
+                color: ["blackAlpha.500", "whiteAlpha.500"],
+              }}
+              _hover={{
+                bg: ["blackAlpha.200", "whiteAlpha.200"],
+              }}
+              onClick={() => onSuggestChange(value)}
+            >
+              {t(`insights.period.${value}`)}
+            </Center>
+          )
+        })}
+
+        <Separator borderColor={["blackAlpha.200", "whiteAlpha.100"]} />
+
+        {INSIGHT_RANGE_PERIOD_SUGGEST.map((value) => {
           return (
             <Center
               key={value}

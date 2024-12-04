@@ -1,6 +1,6 @@
 import type { NextLinkProps } from "components/navigation"
 import type { FC } from "react"
-import { ExternalLink } from "@yamada-ui/lucide"
+import { ExternalLinkIcon } from "@yamada-ui/lucide"
 import { Text } from "@yamada-ui/react"
 import { NextLink } from "components/navigation"
 
@@ -12,7 +12,7 @@ export const Link: FC<LinkProps> = ({ href, children, ...rest }) => {
   return (
     <NextLink href={href} isExternal={isExternal} {...rest}>
       <Text as="span">{children}</Text>
-      {isExternal ? <ExternalLink ms="0.25em" /> : null}
+      {isExternal ? <ExternalLinkIcon ms="0.25em" /> : null}
     </NextLink>
   )
 }

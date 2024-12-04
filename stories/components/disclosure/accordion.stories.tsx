@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { AccordionProps } from "@yamada-ui/react"
-import { Ghost, Minus, Plus } from "@yamada-ui/lucide"
+import { GhostIcon, MinusIcon, PlusIcon } from "@yamada-ui/lucide"
 import {
   Accordion,
   AccordionItem,
@@ -90,7 +90,7 @@ export const withDefaultIndex: Story = () => {
 
 export const withIsToggle: Story = () => {
   return (
-    <Accordion isToggle>
+    <Accordion toggle>
       <AccordionItem label="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
       </AccordionItem>
@@ -108,7 +108,7 @@ export const withIsToggle: Story = () => {
 
 export const withIsMultiple: Story = () => {
   return (
-    <Accordion defaultIndex={[1, 2]} isMultiple>
+    <Accordion defaultIndex={[1, 2]} multiple>
       <AccordionItem label="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
       </AccordionItem>
@@ -149,7 +149,7 @@ export const isDisabled: Story = () => {
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
       </AccordionItem>
 
-      <AccordionItem isDisabled label="ピッコロ大魔王編">
+      <AccordionItem disabled label="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
       </AccordionItem>
 
@@ -223,7 +223,7 @@ export const customPanel: Story = () => {
 export const customIcon: Story = () => {
   return (
     <>
-      <Accordion icon={<Ghost color="orange.700" />}>
+      <Accordion icon={<GhostIcon color="orange.700" />}>
         <AccordionItem label="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
         </AccordionItem>
@@ -238,11 +238,11 @@ export const customIcon: Story = () => {
       </Accordion>
 
       <Accordion
-        icon={({ isExpanded }) =>
-          isExpanded ? (
-            <Plus color={["blackAlpha.800", "whiteAlpha.700"]} />
+        icon={({ expanded }) =>
+          expanded ? (
+            <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
           ) : (
-            <Minus color={["blackAlpha.800", "whiteAlpha.700"]} />
+            <MinusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
           )
         }
       >
@@ -261,7 +261,7 @@ export const customIcon: Story = () => {
 
       <Accordion>
         <AccordionItem>
-          <AccordionLabel icon={<Ghost color="orange.700" />}>
+          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
             孫悟空少年編
           </AccordionLabel>
 
@@ -272,11 +272,11 @@ export const customIcon: Story = () => {
 
         <AccordionItem>
           <AccordionLabel
-            icon={({ isExpanded }) =>
-              isExpanded ? (
-                <Plus color={["blackAlpha.800", "whiteAlpha.700"]} />
+            icon={({ expanded }) =>
+              expanded ? (
+                <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
               ) : (
-                <Minus color={["blackAlpha.800", "whiteAlpha.700"]} />
+                <MinusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
               )
             }
           >
@@ -289,7 +289,7 @@ export const customIcon: Story = () => {
         </AccordionItem>
 
         <AccordionItem>
-          <AccordionLabel icon={<Ghost color="orange.700" />}>
+          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
             サイヤ人編
           </AccordionLabel>
 

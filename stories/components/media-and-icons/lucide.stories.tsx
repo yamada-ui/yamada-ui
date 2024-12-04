@@ -3,14 +3,14 @@ import type { IconNames } from "@yamada-ui/lucide"
 import type { IconProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { burger } from "@lucide/lab"
-import { Ghost, Icon, icons } from "@yamada-ui/lucide"
+import { GhostIcon, icons, LucideIcon } from "@yamada-ui/lucide"
 import { HStack } from "@yamada-ui/react"
 
-type Story = StoryFn<typeof Ghost>
+type Story = StoryFn<typeof GhostIcon>
 
-const meta: Meta<typeof Ghost> = {
-  component: Ghost,
-  title: "Components / Media And Icons / Lucide",
+const meta: Meta<typeof GhostIcon> = {
+  component: GhostIcon,
+  title: "Components / Media And Icons / Lucide Icon",
 }
 
 export default meta
@@ -18,31 +18,34 @@ export default meta
 export const basic: Story = () => {
   return (
     <HStack alignItems="flex-end">
-      <Ghost fontSize="6xl" />
+      <GhostIcon fontSize="6xl" />
 
-      <Ghost fontSize="5xl" />
+      <GhostIcon fontSize="5xl" />
 
-      <Ghost fontSize="4xl" />
+      <GhostIcon fontSize="4xl" />
 
-      <Ghost fontSize="3xl" />
+      <GhostIcon fontSize="3xl" />
 
-      <Ghost fontSize="2xl" />
+      <GhostIcon fontSize="2xl" />
 
-      <Ghost fontSize="xl" />
+      <GhostIcon fontSize="xl" />
     </HStack>
   )
 }
 
 export const customIcon: Story = () => {
-  return <Icon fontSize="4xl" icon={burger} />
+  return <LucideIcon fontSize="4xl" icon={burger} />
 }
 
 export const oneGenericIcon: Story = () => {
-  const Icon: FC<{ name: IconNames } & IconProps> = ({ name, ...rest }) => {
+  const LucideIcon: FC<{ name: IconNames } & IconProps> = ({
+    name,
+    ...rest
+  }) => {
     const Icon = icons[name]
 
     return <Icon {...rest} />
   }
 
-  return <Icon name="Ghost" fontSize="4xl" />
+  return <LucideIcon name="GhostIcon" fontSize="4xl" />
 }

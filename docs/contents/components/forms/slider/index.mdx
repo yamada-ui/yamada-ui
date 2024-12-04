@@ -126,7 +126,7 @@ return (
 
     <Slider value={value} step={10} focusThumbOnChange={false} />
 
-    <Center w="full" gap="md">
+    <ButtonGroup as={Center} gap="md" w="full">
       <Button
         isDisabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
@@ -140,7 +140,7 @@ return (
       >
         +10
       </Button>
-    </Center>
+    </ButtonGroup>
   </>
 )
 ```
@@ -153,13 +153,13 @@ To disable, set `isDisabled` to `true`.
 <VStack>
   <Slider isDisabled />
 
-  <FormControl
+  <Fieldset
     isDisabled
-    label="volume (sound)"
+    legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -171,13 +171,13 @@ To make read-only, set `isReadOnly` to `true`.
 <VStack>
   <Slider isReadOnly />
 
-  <FormControl
+  <Fieldset
     isReadOnly
-    label="volume (sound)"
+    legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
     <Slider />
-  </FormControl>
+  </Fieldset>
 </VStack>
 ```
 
@@ -192,13 +192,13 @@ return (
   <VStack>
     <Slider isInvalid={value < 20} value={value} onChange={onChange} />
 
-    <FormControl
+    <Fieldset
       isInvalid={value < 20}
-      label="volume (sound)"
+      legend="Sound volume"
       errorMessage="Volume should be set to 20 or higher."
     >
       <Slider value={value} onChange={onChange} />
-    </FormControl>
+    </Fieldset>
   </>
 )
 ```
@@ -317,13 +317,13 @@ return (
     thumbProps={{
       color: "blue.500",
       boxSize: "6",
-      children: <Activity />,
+      children: <ActivityIcon />,
     }}
   />
 
   <Slider>
     <SliderThumb color="blue.500" boxSize="6">
-      <Activity />
+      <ActivityIcon />
     </SliderThumb>
   </Slider>
 </VStack>
@@ -406,9 +406,9 @@ console.log("watch:", watch())
 
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <FormControl
+    <Fieldset
       isInvalid={!!errors.slider}
-      label="Volume"
+      legend="Sound volume"
       errorMessage={errors.slider ? errors.slider.message : undefined}
     >
       <Controller
@@ -417,7 +417,7 @@ return (
         rules={{ max: { value: 50, message: "The maximum value is 50." } }}
         render={({ field }) => <Slider {...field} />}
       />
-    </FormControl>
+    </Fieldset>
 
     <Button type="submit" alignSelf="flex-end">
       Submit

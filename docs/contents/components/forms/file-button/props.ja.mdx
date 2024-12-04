@@ -12,6 +12,14 @@ tab: Props
 ### FileButtonProps
 
 <PropsCard
+  id="filebutton-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="filebutton-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -28,6 +36,13 @@ tab: Props
 />
 
 <PropsCard
+  id="filebutton-endicon"
+  name="endIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to display at the end side of the button."}
+/>
+
+<PropsCard
   id="filebutton-errorbordercolor"
   name="errorBorderColor"
   type='"border" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 320 more ... | [...]'
@@ -35,10 +50,21 @@ tab: Props
 />
 
 <PropsCard
+  id="filebutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="filebutton-isactive"
   name="isActive"
   type="boolean"
   description={"If `true`, the button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -47,6 +73,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -63,6 +90,7 @@ tab: Props
   name="isLoading"
   type="boolean"
   description={"If `true`, the loading state of the button is represented."}
+  deprecated={"Use `loading` instead."}
   defaultValue={"false"}
 />
 
@@ -87,8 +115,9 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={
-    "If true, the button is full rounded. Else, it'll be slightly round."
+    "If `true`, the button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -97,6 +126,15 @@ tab: Props
   name="leftIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the left side of the button."}
+  deprecated={"Use `startIcon` instead."}
+/>
+
+<PropsCard
+  id="filebutton-loading"
+  name="loading"
+  type="boolean"
+  description={"If `true`, the loading state of the button is represented."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -152,6 +190,7 @@ tab: Props
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the right side of the button."}
+  deprecated={"Use `endIcon` instead."}
 />
 
 <PropsCard
@@ -160,6 +199,13 @@ tab: Props
   type='"xs" | "sm" | "md" | "lg" | "xl" | "2xl"'
   description={"The size of the FileButton."}
   defaultValue={'"md"'}
+/>
+
+<PropsCard
+  id="filebutton-starticon"
+  name="startIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to display at the start side of the button."}
 />
 
 <PropsCard

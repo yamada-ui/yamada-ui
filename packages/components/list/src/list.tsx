@@ -67,9 +67,9 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
     "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
     display: "flex",
     flexDirection: "column",
+    ...styles.container,
     gap,
     ms: listStyleType !== "none" ? "1.4em" : undefined,
-    ...styles.container,
   }
 
   return (

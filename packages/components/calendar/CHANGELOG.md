@@ -1,5 +1,81 @@
 # @yamada-ui/calendar
 
+## 1.8.10
+
+### Patch Changes
+
+- [#3321](https://github.com/yamada-ui/yamada-ui/pull/3321) [`c22f6b3`](https://github.com/yamada-ui/yamada-ui/commit/c22f6b384b749707fe15abfe91d5efe003186f78) Thanks [@taroj1205](https://github.com/taroj1205)! - Integrate i18n for locale handling.
+
+- [#3605](https://github.com/yamada-ui/yamada-ui/pull/3605) [`263ea1b`](https://github.com/yamada-ui/yamada-ui/commit/263ea1bff2ace7189c06f4777df4148198796f7c) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`4065286`](https://github.com/yamada-ui/yamada-ui/commit/4065286fe311de83fae4c203bf889de0789286f0), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`3a74b00`](https://github.com/yamada-ui/yamada-ui/commit/3a74b003124a864d9882f541240cb9fccb9ef514), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`fcace07`](https://github.com/yamada-ui/yamada-ui/commit/fcace077aa6aac05e6c32d6592da956ab147d213), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/portal@1.0.25
+  - @yamada-ui/button@1.0.52
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/popover@1.4.5
+  - @yamada-ui/form-control@2.1.9
+  - @yamada-ui/icon@1.1.15
+  - @yamada-ui/use-clickable@1.2.15
+  - @yamada-ui/use-controllable-state@1.0.24
+  - @yamada-ui/use-disclosure@1.1.1
+  - @yamada-ui/use-outside-click@1.0.24
+
+## 1.8.9
+
+### Patch Changes
+
+- [`2b6f336`](https://github.com/yamada-ui/yamada-ui/commit/2b6f3369f984839a3afd29dd5aeba1e952632d2a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extract `InputProps` interface for reuse.
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/button@1.0.51
+  - @yamada-ui/form-control@2.1.8
+  - @yamada-ui/icon@1.1.14
+  - @yamada-ui/popover@1.4.4
+  - @yamada-ui/use-clickable@1.2.14
+
+## 1.8.8
+
+### Patch Changes
+
+- [#3513](https://github.com/yamada-ui/yamada-ui/pull/3513) [`94c5ad2`](https://github.com/yamada-ui/yamada-ui/commit/94c5ad29a60379d944cc914552abe4a1a0067959) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary `aria-live` with `YearPicker`.
+
+- [#3475](https://github.com/yamada-ui/yamada-ui/pull/3475) [`47a2671`](https://github.com/yamada-ui/yamada-ui/commit/47a2671f9bd3eb3cecf78e6bb7bced1cf2e3bd74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a11y.
+
+- Updated dependencies [[`5c2acd8`](https://github.com/yamada-ui/yamada-ui/commit/5c2acd83ab21c0d5942d6f27871e517e9b95049c), [`34d441c`](https://github.com/yamada-ui/yamada-ui/commit/34d441c12d77cffe6e3c983cbdf7917b74c2e73c), [`805a14f`](https://github.com/yamada-ui/yamada-ui/commit/805a14f530586d0b0c45587ece7e400644c5eb87)]:
+  - @yamada-ui/popover@1.4.3
+  - @yamada-ui/icon@1.1.13
+  - @yamada-ui/button@1.0.50
+
+## 1.8.7
+
+### Patch Changes
+
+- Updated dependencies [[`7eb6b19`](https://github.com/yamada-ui/yamada-ui/commit/7eb6b19561830437a3da573a01b214b223f2b2b4)]:
+  - @yamada-ui/core@1.15.5
+  - @yamada-ui/popover@1.4.2
+  - @yamada-ui/button@1.0.49
+  - @yamada-ui/form-control@2.1.7
+  - @yamada-ui/icon@1.1.12
+  - @yamada-ui/use-clickable@1.2.13
+
+## 1.8.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.48
+
+## 1.8.5
+
+### Patch Changes
+
+- Updated dependencies [[`d9cf5b8`](https://github.com/yamada-ui/yamada-ui/commit/d9cf5b801fa5656185ac5562da60cfc809e9be39), [`2f10ba6`](https://github.com/yamada-ui/yamada-ui/commit/2f10ba678e7b6f1ee7435221ddaaefae2df650ea)]:
+  - @yamada-ui/button@1.0.47
+  - @yamada-ui/icon@1.1.11
+  - @yamada-ui/popover@1.4.1
+
 ## 1.8.4
 
 ### Patch Changes

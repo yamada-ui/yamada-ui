@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
-  ArrowRight,
-  Check,
-  Mail,
-  Minus,
-  Moon,
-  Plus,
-  Sun,
+  ArrowRightIcon,
+  CheckIcon,
+  MailIcon,
+  MinusIcon,
+  MoonIcon,
+  PlusIcon,
+  SunIcon,
 } from "@yamada-ui/lucide"
 import {
   Button,
@@ -136,23 +136,23 @@ export const withVariant: Story = () => {
 export const withDisabled: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" isDisabled>
+      <Button colorScheme="primary" variant="solid" disabled>
         Solid
       </Button>
 
-      <Button colorScheme="secondary" variant="outline" isDisabled>
+      <Button colorScheme="secondary" variant="outline" disabled>
         Outline
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" isDisabled>
+      <Button colorScheme="warning" variant="ghost" disabled>
         Ghost
       </Button>
 
-      <Button colorScheme="danger" variant="link" isDisabled>
+      <Button colorScheme="danger" variant="link" disabled>
         Link
       </Button>
 
-      <Button variant="unstyled" isDisabled>
+      <Button variant="unstyled" disabled>
         Unstyle
       </Button>
     </Wrap>
@@ -162,23 +162,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
+      <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        rightIcon={<ArrowRight />}
+        endIcon={<ArrowRightIcon />}
       >
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
+      <Button colorScheme="warning" variant="ghost" startIcon={<MailIcon />}>
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
+      <Button colorScheme="danger" variant="link" startIcon={<CheckIcon />}>
         Button
       </Button>
     </Wrap>
@@ -191,27 +191,27 @@ export const iconButton: Story = () => {
       <IconButton
         colorScheme="primary"
         aria-label="Plus"
-        icon={<Plus fontSize="2xl" />}
+        icon={<PlusIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="secondary"
         aria-label="Minus"
-        icon={<Minus fontSize="2xl" />}
+        icon={<MinusIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="warning"
         size="lg"
         aria-label="Light"
-        icon={<Sun fontSize="2xl" />}
+        icon={<SunIcon fontSize="2xl" />}
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
         aria-label="Dark"
-        icon={<Moon fontSize="2xl" />}
+        icon={<MoonIcon fontSize="2xl" />}
       />
     </Wrap>
   )
@@ -232,30 +232,30 @@ export const closeButton: Story = () => {
 export const withLoading: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" isLoading>
+      <Button colorScheme="primary" loading>
         Button
       </Button>
 
-      <Button colorScheme="secondary" isLoading loadingIcon="dots">
+      <Button colorScheme="secondary" loading loadingIcon="dots">
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="outline" isLoading>
+      <Button colorScheme="warning" variant="outline" loading>
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="ghost" isLoading>
+      <Button colorScheme="danger" variant="ghost" loading>
         Button
       </Button>
 
-      <Button colorScheme="primary" isLoading loadingText="Loading...">
+      <Button colorScheme="primary" loading loadingText="Loading...">
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        isLoading
+        loading
         loadingIcon="grid"
         loadingPlacement="end"
         loadingText="Loading..."
@@ -269,9 +269,9 @@ export const withLoading: Story = () => {
 export const buttonGroup: Story = () => {
   return (
     <>
-      <ButtonGroup variant="outline" isAttached>
+      <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<Plus />} />
+        <IconButton aria-label="Add" icon={<PlusIcon />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">
@@ -280,7 +280,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" isAttached isDisabled>
+      <ButtonGroup variant="outline" attached disabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -292,7 +292,7 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" direction="column" isAttached>
+      <ButtonGroup variant="outline" attached direction="column">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

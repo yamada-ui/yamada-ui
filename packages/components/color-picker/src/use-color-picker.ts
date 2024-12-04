@@ -184,10 +184,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   } = pickObject(rest, formControlProperties)
   const { disabled, readOnly } = formControlProps
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
-
   const containerRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLInputElement>(null)
-
   const { supported: eyeDropperSupported, onOpen: onEyeDropperOpen } =
     useEyeDropper()
   const [value, setValue] = useControllableState({
@@ -198,7 +196,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const formatRef = useRef<ColorFormat>(
     format ?? calcFormat(value || defaultColor || ""),
   )
-  const isInputFocused = useRef<boolean>(false)
+  const inputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value || "")
   const {
     isOpen,
@@ -244,7 +242,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [isOpen, onOpen])
 
   const onInputFocus = useCallback(() => {
-    isInputFocused.current = true
+    inputFocused.current = true
 
     if (isOpen) return
 
@@ -252,7 +250,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [isOpen, onOpen])
 
   const onInputBlur = useCallback(() => {
-    isInputFocused.current = false
+    inputFocused.current = false
   }, [])
 
   const onContainerBlur = useCallback(
@@ -306,7 +304,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       setValue(value)
 
       setTimeout(() => {
-        if (!isInputFocused.current) setInputValue(formatInput(value))
+        if (!inputFocused.current) setInputValue(formatInput(value))
       })
     },
     [setValue, formatInput],
@@ -349,7 +347,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [format])
 
   useUpdateEffect(() => {
-    if (isInputFocused.current || !valueProp) return
+    if (inputFocused.current || !valueProp) return
 
     setInputValue(formatInput(valueProp))
   }, [valueProp])
@@ -425,10 +423,11 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      "aria-expanded": dataAttr(isOpen),
+      "aria-haspopup": "dialog",
       "data-active": dataAttr(isOpen),
       "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
-      tabIndex: !allowInput ? -1 : 0,
+      role: "combobox",
+      tabIndex: -1,
       ...formControlProps,
       ...props,
       ref: mergeRefs(fieldRef, ref),
@@ -459,6 +458,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       }
 
       return {
+        autoComplete: "off",
         tabIndex: !allowInput ? -1 : 0,
         ...formControlProps,
         ...inputProps,

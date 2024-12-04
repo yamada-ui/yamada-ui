@@ -25,6 +25,12 @@ import { useYearPicker } from "./use-year-picker"
 interface YearPickerOptions {
   children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the year picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -36,6 +42,8 @@ interface YearPickerOptions {
    * If `true`, display the year picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -86,6 +94,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   let {
     className,
     children,
+    clearable,
     color,
     h,
     height,
@@ -103,7 +112,6 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const {
-    id,
     value,
     getCalendarProps,
     getContainerProps,
@@ -114,6 +122,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     onClose,
   } = useYearPicker(computedProps)
 
+  clearable ??= isClearable
   h ??= height
   minH ??= minHeight
 
@@ -142,7 +151,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
               inputProps={getInputProps(inputProps)}
             />
 
-            {isClearable && value ? (
+            {clearable && value ? (
               <DatePickerClearIcon
                 className="ui-year-picker__icon--clear"
                 {...getIconProps({ clear: true, ...clearIconProps })}
@@ -157,11 +166,8 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              id={id}
               as="div"
               className="ui-year-picker__content"
-              aria-modal="true"
-              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

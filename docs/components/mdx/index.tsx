@@ -6,10 +6,10 @@ import {
   Box,
   DecimalList,
   DiscList,
-  Divider,
   Kbd,
   ListItem,
   NativeTable,
+  Separator,
   Tag,
   Td,
   Text,
@@ -59,14 +59,14 @@ export const components: MDXComponents = {
   h4: (props) => <LinkedHeading as="h4" apply="mdx.h4" {...props} />,
   h5: (props) => <Text as="h5" apply="mdx.h5" {...props} />,
   h6: (props) => <Text as="h6" apply="mdx.h6" {...props} />,
-  hr: (props) => <Divider apply="mdx.hr" {...props} />,
+  hr: (props) => <Separator apply="mdx.hr" {...props} />,
   kbd: (props) => <Kbd apply="mdx.kbd" {...props} />,
   li: (props) => <ListItem apply="mdx.li" {...props} />,
   LinkCard,
   Note: ({ children, ...rest }) => (
-    <Alert apply="mdx.alert" variant="note" alignItems="flex-start" {...rest}>
+    <Alert apply="mdx.alert" variant="subtle" alignItems="flex-start" {...rest}>
       <AlertIcon />
-      <AlertDescription as="p" apply="mdx.p">
+      <AlertDescription as="p" apply="mdx.p" color={["black", "white"]}>
         {children}
       </AlertDescription>
     </Alert>

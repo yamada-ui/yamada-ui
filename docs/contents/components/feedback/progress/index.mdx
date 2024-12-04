@@ -2,7 +2,7 @@
 title: Progress
 description: "`Progress` is a component for visually indicating progress."
 package_name: "@yamada-ui/progress"
-order: 4
+order: 5
 is_tabs: true
 with_description: true
 tab: Usage
@@ -17,24 +17,39 @@ import { Progress } from "@yamada-ui/react"
 ## Usage
 
 ```tsx
-<Progress value={18} />
+<Progress aria-label="Storage space" value={18} />
 ```
 
 ### Change Size
 
 ```tsx
 <VStack>
-  <Progress colorScheme="green" value={19} size="xs" />
-  <Progress colorScheme="pink" value={93} size="sm" />
-  <Progress colorScheme="purple" value={8} size="md" />
-  <Progress colorScheme="red" value={18} size="lg" />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="green"
+    value={19}
+    size="xs"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="pink"
+    value={93}
+    size="sm"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="purple"
+    value={8}
+    size="md"
+  />
+  <Progress aria-label="Storage space" colorScheme="red" value={18} size="lg" />
 </VStack>
 ```
 
 ### Change Color Scheme
 
 ```tsx
-<Progress colorScheme="purple" value={18} />
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
 ```
 
 ### Change Color
@@ -42,7 +57,7 @@ import { Progress } from "@yamada-ui/react"
 If you want to change the color without using a color scheme, specify the color in `filledTrackColor`.
 
 ```tsx
-<Progress filledTrackColor="green.500" value={18} />
+<Progress aria-label="Storage space" filledTrackColor="green.500" value={18} />
 ```
 
 ### Customize Style
@@ -51,8 +66,18 @@ For example, here is how to round the corners of the bar.
 
 ```tsx
 <VStack>
-  <Progress colorScheme="orange" value={10} borderRadius="sm" />
-  <Progress colorScheme="yellow" value={31} rounded="md" />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="orange"
+    value={10}
+    borderRadius="sm"
+  />
+  <Progress
+    aria-label="Storage space"
+    colorScheme="yellow"
+    value={31}
+    rounded="md"
+  />
 </VStack>
 ```
 
@@ -61,7 +86,7 @@ For example, here is how to round the corners of the bar.
 By setting `hasStripe` to `true`, you can apply stripes to the background color.
 
 ```tsx
-<Progress hasStripe value={19} />
+<Progress aria-label="Storage space" hasStripe value={19} />
 ```
 
 ### Apply Animation to Stripes
@@ -69,7 +94,7 @@ By setting `hasStripe` to `true`, you can apply stripes to the background color.
 If you want to add animation to the background color stripes, set `isStripeAnimation` to `true`.
 
 ```tsx
-<Progress hasStripe isStripeAnimation value={20} />
+<Progress aria-label="Storage space" hasStripe isStripeAnimation value={20} />
 ```
 
 ### Apply Animation

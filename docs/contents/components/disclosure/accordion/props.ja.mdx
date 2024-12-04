@@ -52,6 +52,7 @@ order: 1
   name="isMultiple"
   type="boolean"
   description={"If `true`, multiple accordion items can be expanded at once."}
+  deprecated={"Use `multiple` instead."}
   defaultValue={"false"}
 />
 
@@ -60,6 +61,15 @@ order: 1
   name="isToggle"
   type="boolean"
   description={"If `true`, any expanded accordion item can be collapsed again."}
+  deprecated={"Use `toggle` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="accordion-multiple"
+  name="multiple"
+  type="boolean"
+  description={"If `true`, multiple accordion items can be expanded at once."}
   defaultValue={"false"}
 />
 
@@ -80,6 +90,14 @@ order: 1
 />
 
 <PropsCard
+  id="accordion-toggle"
+  name="toggle"
+  type="boolean"
+  description={"If `true`, any expanded accordion item can be collapsed again."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="accordion-variant"
   name="variant"
   type='"basic" | "card" | "unstyled"'
@@ -90,9 +108,17 @@ order: 1
 ### AccordionItemProps
 
 <PropsCard
+  id="accordionitem-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the accordion item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="accordionitem-icon"
   name="icon"
-  type="string | number | boolean | ((props: { isDisabled: boolean; isExpanded: boolean; }) => ReactNode) | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<...> | ReactPortal"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
   description={"The accordion icon to use."}
 />
 
@@ -101,6 +127,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the accordion item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -123,7 +150,7 @@ order: 1
 <PropsCard
   id="accordionlabel-icon"
   name="icon"
-  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)"
+  type="string | number | boolean | ((props: { isDisabled: boolean; isExpanded: boolean; disabled?: boolean | undefined; expanded?: boolean | undefined; }) => ReactNode) | ReactElement<any, string | JSXElementConstructor<...>> | Iterable<...> | ReactPortal"
   description={"The accordion icon to use."}
 />
 
@@ -178,6 +205,13 @@ order: 1
   name="initial"
   type="any"
   description={"Custom `initial`."}
+/>
+
+<PropsCard
+  id="accordionpanel-open"
+  name="open"
+  type="boolean"
+  description={"Show the component. triggers when enter or exit states."}
 />
 
 <PropsCard

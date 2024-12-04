@@ -122,7 +122,6 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
     } = omitThemeProps(mergedProps)
 
     const {
-      id,
       value,
       getCalendarProps,
       getContainerProps,
@@ -179,11 +178,8 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                id={id}
                 as="div"
                 className="ui-range-date-picker__content"
-                aria-modal="true"
-                role="dialog"
                 __css={{ ...styles.content }}
                 {...contentProps}
               >
@@ -323,6 +319,7 @@ const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
           left="0"
           position="absolute"
           value={value}
+          w="100%"
           {...inputProps}
         />
       </ui.div>

@@ -1,7 +1,7 @@
 import type { ButtonProps, FlexProps, LinkProps, Merge } from "@yamada-ui/react"
 import type { FC } from "react"
 import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
-import { Github, Npm } from "components/media-and-icons"
+import { GithubIcon, NpmIcon } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
 import { memo } from "react"
@@ -28,12 +28,7 @@ export const RelatedLinks = memo(
             href={`${CONSTANT.SNS.GITHUB.UI_EDIT_URL}/${
               isHook ? "hooks" : "components"
             }/${dirName}`}
-            leftIcon={
-              <Github
-                boxSize="1rem"
-                color={["blackAlpha.700", "whiteAlpha.600"]}
-              />
-            }
+            leftIcon={<GithubIcon boxSize="1rem" color="muted" />}
           >
             {t("component.doc-links.source")}
           </DocumentLink>
@@ -42,7 +37,7 @@ export const RelatedLinks = memo(
         {package_name ? (
           <DocumentLink
             href={`https://www.npmjs.com/package/${package_name}`}
-            leftIcon={<Npm boxSize="2rem" color="red.500" />}
+            leftIcon={<NpmIcon boxSize="2rem" color="red.500" />}
           >
             {package_name}
           </DocumentLink>
@@ -58,6 +53,7 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (
     <Button
       as={Link}
+      size="sm"
       variant="outline"
       alignItems="center"
       borderColor="border"
@@ -67,17 +63,13 @@ const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
       display="inline-flex"
       fontSize="sm"
       fontWeight="normal"
-      h="8"
       isExternal
-      lineHeight="1.2"
-      px="3"
-      rounded="md"
       textDecoration="inherit"
       transitionDuration="slower"
       transitionProperty="common"
       _hover={{
         bg: [`blackAlpha.50`, `whiteAlpha.50`],
-        color: ["blackAlpha.700", "whiteAlpha.600"],
+        color: "muted",
         textDecoration: "none",
       }}
       {...rest}

@@ -21,12 +21,12 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     },
     divider: {
       borderBottomWidth: "1px",
-      borderColor: "inherit",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       my: "2",
     },
     group: {},
     groupLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
       fontWeight: "semibold",
       px: "3",
@@ -59,6 +59,11 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     list: {
       outline: "none",
       py: "2",
+    },
+    separator: {
+      borderBottomWidth: "1px",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      my: "2",
     },
   },
 }

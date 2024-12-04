@@ -185,13 +185,13 @@ export const Month: FC<MonthProps> = ({
                       <ui.tr key={row} __css={{ ...styles.row }} {...trProps}>
                         {cells.map((date, col) => {
                           const {
-                            isBetween,
-                            isEnd,
-                            isHidden,
-                            isOutside,
-                            isSelected,
-                            isStart,
-                            isWeekend,
+                            between,
+                            end,
+                            hidden,
+                            outside,
+                            selected,
+                            start,
+                            weekend,
                             ...props
                           } = getButtonProps({
                             ...computedDayProps,
@@ -203,19 +203,19 @@ export const Month: FC<MonthProps> = ({
                           const day = customDay({
                             col,
                             date,
-                            isOutside,
-                            isSelected,
-                            isWeekend,
+                            outside,
                             row,
+                            selected,
                             weekday: weekdays[col]!,
+                            weekend,
                           })
 
-                          const isDisplayed =
+                          const displayed =
                             !isNull(day) && !isUndefined(day) && !isBoolean(day)
 
                           const css: CSSUIObject = {
                             display:
-                              isHidden || !isDisplayed ? "none" : "inline-flex",
+                              hidden || !displayed ? "none" : "inline-flex",
                             fontSize: undefined,
                             fontWeight: "normal",
                             h: "auto",
@@ -230,9 +230,9 @@ export const Month: FC<MonthProps> = ({
                           return (
                             <ui.td
                               key={col}
-                              data-between={dataAttr(isBetween)}
-                              data-end={dataAttr(isEnd)}
-                              data-start={dataAttr(isStart)}
+                              data-between={dataAttr(between)}
+                              data-end={dataAttr(end)}
+                              data-start={dataAttr(start)}
                               __css={{ ...styles.cell }}
                               {...tdProps}
                             >
@@ -279,11 +279,23 @@ Weekday.__ui__ = "Weekday"
 export interface DayProps {
   col: number
   date: Date
-  isOutside: boolean
-  isSelected: boolean
-  isWeekend: boolean
+  outside: boolean
   row: number
+  selected: boolean
   weekday: string
+  weekend: boolean
+  /**
+   * @deprecated Use `outside` instead.
+   */
+  isOutside?: boolean
+  /**
+   * @deprecated Use `selected` instead.
+   */
+  isSelected?: boolean
+  /**
+   * @deprecated Use `weekend` instead.
+   */
+  isWeekend?: boolean
 }
 
 export const Day: FC<DayProps> = ({ date }) => {

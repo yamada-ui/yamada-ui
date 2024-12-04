@@ -77,8 +77,20 @@ interface TooltipOptions {
   closeOnScroll?: boolean
   /**
    * If `true`, the tooltip will be initially shown.
+   *
+   * @deprecated Use `defaultOpen` instead.
    */
   defaultIsOpen?: boolean
+  /**
+   * If `true`, the tooltip will be initially shown.
+   */
+  defaultOpen?: boolean
+  /**
+   * If `true`, the tooltip will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * The animation duration.
    */
@@ -87,16 +99,23 @@ interface TooltipOptions {
    * If `true`, the tooltip will be disabled.
    *
    * @default false
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the tooltip will be shown.
+   *
+   * @deprecated Use `open` instead.
    */
   isOpen?: boolean
   /**
    * The label of the tooltip.
    */
   label?: ReactNode
+  /**
+   * If `true`, the tooltip will be shown.
+   */
+  open?: boolean
   /**
    * The delay before showing the tooltip.
    *
@@ -122,9 +141,9 @@ interface TooltipOptions {
 }
 
 export interface TooltipProps
-  extends Omit<MotionProps, "animation" | "offset">,
+  extends Omit<MotionProps, "animation" | "children" | "offset">,
     ThemeProps<"Tooltip">,
-    Pick<UsePopperProps, "gutter" | "modifiers" | "offset" | "placement">,
+    Omit<UsePopperProps, "enabled">,
     TooltipOptions {}
 
 const getTooltipProps = (
@@ -181,9 +200,10 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       "Tooltip",
       props,
     )
-    const {
+    let {
       className,
       animation,
+      boundary,
       children,
       closeDelay = 0,
       closeOnClick,
@@ -192,15 +212,23 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       closeOnPointerDown = false,
       closeOnScroll,
       defaultIsOpen: defaultIsOpenProp,
+      defaultOpen: defaultOpenProp,
+      disabled,
       duration,
+      eventListeners,
+      flip,
       gutter,
       isDisabled,
       isOpen: isOpenProp,
       label,
+      matchWidth,
       modifiers,
       offset,
+      open: openProp,
       openDelay = 0,
       placement,
+      preventOverflow,
+      strategy,
       onClose: onCloseProp,
       onOpen: onOpenProp,
       ...rest
@@ -209,9 +237,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const id = useId()
+
+    openProp ??= isOpenProp
+    defaultOpenProp ??= defaultIsOpenProp
+    disabled ??= isDisabled
+
     const { isOpen, onClose, onOpen } = useDisclosure({
-      defaultIsOpen: defaultIsOpenProp,
-      isOpen: isOpenProp,
+      defaultIsOpen: defaultOpenProp,
+      isOpen: openProp,
       onClose: onCloseProp,
       onOpen: onOpenProp,
     })
@@ -219,11 +252,17 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const openTimeout = useRef<NodeJS.Timeout>()
     const closeTimeout = useRef<NodeJS.Timeout>()
     const { referenceRef, transformOrigin, getPopperProps } = usePopper({
+      boundary,
       enabled: isOpen,
+      eventListeners,
+      flip,
       gutter,
+      matchWidth,
       modifiers,
       offset,
       placement,
+      preventOverflow,
+      strategy,
     })
 
     const closeNow = useCallback(() => {
@@ -237,14 +276,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     }, [onClose])
 
     const openWithDelay = useCallback(() => {
-      if (!isDisabled && !openTimeout.current) {
+      if (!disabled && !openTimeout.current) {
         if (isOpen) closeNow()
 
         const win = getOwnerWindow(triggerRef.current)
 
         openTimeout.current = win.setTimeout(onOpen, openDelay)
       }
-    }, [isDisabled, isOpen, openDelay, closeNow, onOpen])
+    }, [disabled, isOpen, openDelay, closeNow, onOpen])
 
     const closeWithDelay = useCallback(() => {
       if (openTimeout.current) {

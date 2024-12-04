@@ -1,7 +1,7 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { DocumentContent } from "mdx"
 import type { RefObject } from "react"
-import { List as ListIcon } from "@yamada-ui/lucide"
+import { ListIcon } from "@yamada-ui/lucide"
 import {
   Box,
   dataAttr,
@@ -156,7 +156,7 @@ export const TableOfContents = memo(
                         },
                       }}
                       _selected={{
-                        bg: [`primary.300`, `primary.300`],
+                        bg: `primary.300`,
                         color: [`black`, "white"],
                       }}
                     >

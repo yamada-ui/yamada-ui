@@ -12,14 +12,6 @@ tab: Props
 ### DialogProps
 
 <PropsCard
-  id="dialog-isopen"
-  name="isOpen"
-  required
-  type="boolean"
-  description={"If `true`, the open will be opened."}
-/>
-
-<PropsCard
   id="dialog-allowpinchzoom"
   name="allowPinchZoom"
   type="boolean"
@@ -148,6 +140,14 @@ tab: Props
 />
 
 <PropsCard
+  id="dialog-isopen"
+  name="isOpen"
+  type="boolean"
+  description={"If `true`, the open will be opened."}
+  deprecated={"Use `open` instead."}
+/>
+
+<PropsCard
   id="dialog-lockfocusacrossframes"
   name="lockFocusAcrossFrames"
   type="boolean"
@@ -208,6 +208,13 @@ tab: Props
   name="onSuccess"
   type="(onClose: (() => void) | undefined) => void"
   description={"The callback invoked when success button clicked."}
+/>
+
+<PropsCard
+  id="dialog-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the open will be opened."}
 />
 
 <PropsCard
@@ -349,6 +356,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the button is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

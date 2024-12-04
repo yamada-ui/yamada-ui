@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { File, X } from "@yamada-ui/lucide"
+import { FileIcon, XIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FileInput,
@@ -163,7 +163,7 @@ export const useAddon: Story = () => {
   return (
     <InputGroup>
       <InputLeftAddon>
-        <File />
+        <FileIcon />
       </InputLeftAddon>
       <FileInput type="tel" placeholder="Please upload file" />
     </InputGroup>
@@ -174,7 +174,7 @@ export const useElement: Story = () => {
   return (
     <InputGroup>
       <InputLeftElement>
-        <File color="gray.500" />
+        <FileIcon color="gray.500" />
       </InputLeftElement>
       <FileInput type="email" placeholder="Please upload file" />
     </InputGroup>
@@ -204,7 +204,7 @@ export const useReset: Story = () => {
 
         {value?.length ? (
           <InputRightElement isClickable onClick={onReset}>
-            <X color="gray.500" />
+            <XIcon color="gray.500" />
           </InputRightElement>
         ) : null}
       </InputGroup>
@@ -262,7 +262,7 @@ export const reactHookForm: Story = () => {
 
               {field.value?.length ? (
                 <InputRightElement isClickable onClick={onReset}>
-                  <X color="gray.500" />
+                  <XIcon color="gray.500" />
                 </InputRightElement>
               ) : null}
             </InputGroup>

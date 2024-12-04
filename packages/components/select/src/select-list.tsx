@@ -32,7 +32,7 @@ export const SelectList = forwardRef<SelectListProps, "div">(
     ref,
   ) => {
     const { styles } = useSelectContext()
-    const { getListProps } = useSelectList()
+    const { getContainerProps, getListProps } = useSelectList()
 
     width ??= w
     width ??= (styles.list?.width ?? styles.list?.w) as CSSUIProps["width"]
@@ -45,12 +45,13 @@ export const SelectList = forwardRef<SelectListProps, "div">(
 
     return (
       <PopoverContent
+        as="div"
         className="ui-select__content"
         maxWidth={maxWidth}
         minWidth={minWidth}
         width={width}
         __css={{ ...styles.content, maxWidth, minWidth, width }}
-        {...contentProps}
+        {...getContainerProps(contentProps)}
       >
         {header ? (
           <ui.header className="ui-select__header" __css={{ ...styles.header }}>

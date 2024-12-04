@@ -2,11 +2,10 @@
 title: Table
 description: "`Table`は、列のソートや行の選択やクリックイベント機能を備えたテーブルのコンポーネントです。"
 package_name: "@yamada-ui/table"
-order: 7
+order: 8
 is_tabs: true
 with_description: true
 tab: 使い方
-label: Updated
 ---
 
 ## インポート
@@ -1114,7 +1113,7 @@ return (
 
 ### 特定の行の選択を無効にする
 
-特定の行の選択を無効にする場合は、`defaultSelectedRowIds`に行のIDを配列で設定します。
+特定の行の選択を無効にする場合は、`disabledRowIds`に行のIDを配列で設定します。
 
 ```tsx functional=true
 const columns = useMemo<Column<Data>[]>(

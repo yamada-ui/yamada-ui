@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Plus } from "@yamada-ui/lucide"
+import { PlusIcon } from "@yamada-ui/lucide"
 import { noop, Tag, toTitleCase, Wrap } from "@yamada-ui/react"
 import { colorSchemes } from "../../components"
 
@@ -81,15 +81,15 @@ export const withSize: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" size="sm" leftIcon={<Plus />}>
+      <Tag colorScheme="primary" size="sm" startIcon={<PlusIcon />}>
         Small
       </Tag>
 
-      <Tag colorScheme="secondary" size="md" rightIcon={<Plus />}>
+      <Tag colorScheme="secondary" size="md" endIcon={<PlusIcon />}>
         Medium
       </Tag>
 
-      <Tag colorScheme="warning" size="lg" leftIcon={<Plus />}>
+      <Tag colorScheme="warning" size="lg" startIcon={<PlusIcon />}>
         Large
       </Tag>
     </Wrap>

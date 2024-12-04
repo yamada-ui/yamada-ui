@@ -25,6 +25,8 @@ export interface UseCheckboxGroupProps<Y extends number | string = string> {
    * This assumes, you're using native radio inputs.
    *
    * @default false
+   *
+   * @deprecated It will be deprecated in version 2.0.
    */
   isNative?: boolean
   /**

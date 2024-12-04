@@ -6,10 +6,22 @@ export const CONTRIBUTORS = [
     url: "https://github.com/hoshico",
   },
   {
+    id: 166319111,
+    name: "Haru-0001",
+    icon: "https://avatars.githubusercontent.com/u/166319111?v=4",
+    url: "https://github.com/Haru-0001",
+  },
+  {
     id: 53973174,
     name: "Dhoni77",
     icon: "https://avatars.githubusercontent.com/u/53973174?v=4",
     url: "https://github.com/Dhoni77",
+  },
+  {
+    id: 77782533,
+    name: "ChinoUkaegbu",
+    icon: "https://avatars.githubusercontent.com/u/77782533?v=4",
+    url: "https://github.com/ChinoUkaegbu",
   },
   {
     id: 69517378,
@@ -30,16 +42,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/KekmaTime",
   },
   {
+    id: 94577768,
+    name: "0xtkey256",
+    icon: "https://avatars.githubusercontent.com/u/94577768?v=4",
+    url: "https://github.com/0xtkey256",
+  },
+  {
     id: 117662771,
     name: "melodyclue",
     icon: "https://avatars.githubusercontent.com/u/117662771?v=4",
     url: "https://github.com/melodyclue",
-  },
-  {
-    id: 77782533,
-    name: "ChinoUkaegbu",
-    icon: "https://avatars.githubusercontent.com/u/77782533?v=4",
-    url: "https://github.com/ChinoUkaegbu",
   },
   {
     id: 37304826,
@@ -66,16 +78,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/mst-mkt",
   },
   {
-    id: 93440667,
-    name: "GensIto",
-    icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
-    url: "https://github.com/GensIto",
-  },
-  {
     id: 157810570,
     name: "kaitobq",
     icon: "https://avatars.githubusercontent.com/u/157810570?v=4",
     url: "https://github.com/kaitobq",
+  },
+  {
+    id: 93440667,
+    name: "GensIto",
+    icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
+    url: "https://github.com/GensIto",
   },
   {
     id: 107479598,
@@ -88,6 +100,12 @@ export const CONTRIBUTORS = [
     name: "5AIPAVAN",
     icon: "https://avatars.githubusercontent.com/u/123063767?v=4",
     url: "https://github.com/5AIPAVAN",
+  },
+  {
+    id: 82660649,
+    name: "hinataOhyama",
+    icon: "https://avatars.githubusercontent.com/u/82660649?v=4",
+    url: "https://github.com/hinataOhyama",
   },
   {
     id: 52590941,
@@ -162,10 +180,22 @@ export const CONTRIBUTORS = [
     url: "https://github.com/hassan-xsf",
   },
   {
+    id: 88890984,
+    name: "zonoryo17",
+    icon: "https://avatars.githubusercontent.com/u/88890984?v=4",
+    url: "https://github.com/zonoryo17",
+  },
+  {
     id: 68495563,
     name: "tmasuyama1114",
     icon: "https://avatars.githubusercontent.com/u/68495563?v=4",
     url: "https://github.com/tmasuyama1114",
+  },
+  {
+    id: 77735745,
+    name: "fffk10",
+    icon: "https://avatars.githubusercontent.com/u/77735745?v=4",
+    url: "https://github.com/fffk10",
   },
   {
     id: 29519029,
@@ -190,6 +220,12 @@ export const CONTRIBUTORS = [
     name: "KenyaMasuko",
     icon: "https://avatars.githubusercontent.com/u/85816730?v=4",
     url: "https://github.com/KenyaMasuko",
+  },
+  {
+    id: 129603409,
+    name: "neginasu",
+    icon: "https://avatars.githubusercontent.com/u/129603409?v=4",
+    url: "https://github.com/neginasu",
   },
   {
     id: 64961185,

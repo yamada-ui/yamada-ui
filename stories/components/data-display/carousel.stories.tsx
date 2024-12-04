@@ -736,9 +736,9 @@ export const customIndicators: Story = () => {
       <Carousel
         indicatorsProps={{
           bottom: "8",
-          component: ({ isSelected }) => (
+          component: ({ selected }) => (
             <GhostIcon
-              color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
+              color={selected ? "whiteAlpha.700" : "whiteAlpha.400"}
               cursor="pointer"
               fontSize="2xl"
             />

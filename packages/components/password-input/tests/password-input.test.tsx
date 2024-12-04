@@ -32,7 +32,7 @@ describe("<PasswordInput />", () => {
   })
 })
 
-describe("PassWordInputStrengthMeter", () => {
+describe("<PassWordInputStrengthMeter />", () => {
   const ExampleWithPassWordInputStrengthMeter = () => {
     const [value, setValue] = useState("")
 

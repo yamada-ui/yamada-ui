@@ -58,7 +58,7 @@ describe("<SegmentedControl />", () => {
 
   test("should disable segmented control", () => {
     render(
-      <SegmentedControl data-testid="SegmentedControl" disabled>
+      <SegmentedControl data-testid="SegmentedControl" isDisabled>
         <SegmentedControlButton value="one">One</SegmentedControlButton>
         <SegmentedControlButton value="two">Two</SegmentedControlButton>
         <SegmentedControlButton value="three">Three</SegmentedControlButton>
@@ -99,7 +99,7 @@ describe("<SegmentedControl />", () => {
 
   test("SegmentedControl with non-SegmentedControlButton children renders correctly", async () => {
     const { container } = render(
-      <SegmentedControl data-testid="SegmentedControl" disabled>
+      <SegmentedControl data-testid="SegmentedControl" isDisabled>
         <option>one</option>
         <option>two</option>
         <option>three</option>

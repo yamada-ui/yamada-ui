@@ -150,10 +150,10 @@ export const withColorScheme: Story = () => {
   )
 }
 
-export const disabled: Story = () => {
+export const isDisabled: Story = () => {
   return (
     <>
-      <SegmentedControl disabled>
+      <SegmentedControl isDisabled>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
         <SegmentedControlButton value="ベジータ">
           ベジータ
@@ -165,7 +165,7 @@ export const disabled: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton disabled value="ベジータ">
+        <SegmentedControlButton isDisabled value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">
@@ -176,10 +176,10 @@ export const disabled: Story = () => {
   )
 }
 
-export const readOnly: Story = () => {
+export const isReadOnly: Story = () => {
   return (
     <>
-      <SegmentedControl readOnly>
+      <SegmentedControl isReadOnly>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
         <SegmentedControlButton value="ベジータ">
           ベジータ
@@ -191,7 +191,7 @@ export const readOnly: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton readOnly value="ベジータ">
+        <SegmentedControlButton isReadOnly value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">

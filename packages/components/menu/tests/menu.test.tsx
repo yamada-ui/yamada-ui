@@ -239,7 +239,7 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Set status</MenuItem>
-          <MenuItem data-testid="MenuItem" disabled>
+          <MenuItem data-testid="MenuItem" isDisabled>
             Edit Profile
           </MenuItem>
           <MenuItem>Preferences</MenuItem>

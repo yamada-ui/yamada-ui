@@ -102,9 +102,9 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
     const {
       closeOnSelect,
       focusedIndex,
-      isNested: nested,
-      isOpen: open,
       menuRef,
+      nested,
+      open,
       requestAnimationFrameId,
       setFocusedIndex,
       styles,

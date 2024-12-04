@@ -23,7 +23,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
     const {
       buttonRef,
-      isOpen: open,
+      open,
       onClose,
       onFocusFirstItem,
       onFocusLastItem,

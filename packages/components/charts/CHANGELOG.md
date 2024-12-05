@@ -1,5 +1,15 @@
 # @yamada-ui/charts
 
+## 1.5.10
+
+### Patch Changes
+
+- [#3810](https://github.com/yamada-ui/yamada-ui/pull/3810) [`822dfc5`](https://github.com/yamada-ui/yamada-ui/commit/822dfc5b41ecb8f4d5c9b67ef1e07986baf958ff) Thanks [@108yen](https://github.com/108yen)! - Fixed wrong `ChartTooltip` type.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+
 ## 1.5.9
 
 ### Patch Changes

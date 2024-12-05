@@ -141,7 +141,14 @@ export const withSeparator: Story = () => {
 
 export const withCustomSeparator: Story = () => {
   return (
-    <Breadcrumb separator={<ChevronsRightIcon color="gray.300" />}>
+    <Breadcrumb
+      separator={<ChevronsRightIcon color="gray.300" />}
+      separatorProps={{
+        alignItems: "center",
+        display: "inline-flex",
+        justifyContent: "center",
+      }}
+    >
       <BreadcrumbItem>
         <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
       </BreadcrumbItem>

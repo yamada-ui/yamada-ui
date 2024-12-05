@@ -25,6 +25,8 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnSpace,
       disabled,
       focusable,
+      isDisabled,
+      isFocusable,
       ...rest
     },
     ref,
@@ -39,6 +41,10 @@ export const Tab = forwardRef<TabProps, "button">(
       styles,
     } = useTabsContext()
     const uuid = useId()
+
+    disabled ??= isDisabled
+    focusable ??= isFocusable
+
     const { index, register } = useTabDescendant({
       disabled: disabled && !focusable,
     })

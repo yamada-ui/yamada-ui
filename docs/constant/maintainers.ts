@@ -56,6 +56,19 @@ export const MAINTAINERS = [
     x: { url: "https://x.com/taroj1205" },
   },
   {
+    name: { en: "Kazuhiro Kumagai", ja: "Kazuhiro Kumagai" },
+    description: {
+      en: "Self-proclaimed front-end engineer.",
+      ja: "自称フロントエンドエンジニア。",
+    },
+    discord: { id: "831092312238719026" },
+    github: {
+      id: "cidkumagai",
+      icon: "https://avatars.githubusercontent.com/u/78473460?v=4",
+      url: "https://github.com/cidkumagai",
+    },
+  },
+  {
     name: { en: "koralle", ja: "koralle" },
     description: {
       en: "Front-end engineer, likes React and Neovim.",
@@ -68,18 +81,5 @@ export const MAINTAINERS = [
       url: "https://github.com/koralle",
     },
     x: { url: "https://x.com/koralle_tech" },
-  },
-  {
-    name: { en: "Kazuhiro Kumagai", ja: "Kazuhiro Kumagai" },
-    description: {
-      en: "Self-proclaimed front-end engineer.",
-      ja: "自称フロントエンドエンジニア。",
-    },
-    discord: { id: "831092312238719026" },
-    github: {
-      id: "cidkumagai",
-      icon: "https://avatars.githubusercontent.com/u/78473460?v=4",
-      url: "https://github.com/cidkumagai",
-    },
   },
 ]

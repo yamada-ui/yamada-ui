@@ -126,7 +126,7 @@ return (
 
     <Slider value={value} step={10} focusThumbOnChange={false} />
 
-    <Center w="full" gap="md">
+    <ButtonGroup as={Center} gap="md" w="full">
       <Button
         isDisabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
@@ -140,7 +140,7 @@ return (
       >
         +10
       </Button>
-    </Center>
+    </ButtonGroup>
   </>
 )
 ```

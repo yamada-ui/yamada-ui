@@ -58,7 +58,7 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 interface ResizableContext {
   controlRef: RefObject<ResizableGroupControl>
   direction: ResizableDirection
-  isDisabled: boolean
+  disabled: boolean
   styles: { [key: string]: CSSUIObject | undefined }
 }
 
@@ -89,6 +89,12 @@ export interface UseResizableProps {
   direction?: ResizableDirection
   /**
    * If `true`, the resizable trigger will be disabled.
+   */
+  disabled?: boolean
+  /**
+   * If `true`, the resizable trigger will be disabled.
+   *
+   * @deprecated Use `Disabled` instead.
    */
   isDisabled?: boolean
   /**
@@ -121,6 +127,7 @@ export const useResizable = ({
   ref,
   controlRef: controlRefProp,
   direction = "horizontal",
+  disabled = false,
   isDisabled = false,
   keyboardStep,
   storage,
@@ -179,7 +186,7 @@ export const useResizable = ({
   return {
     controlRef,
     direction,
-    isDisabled,
+    disabled: disabled || isDisabled,
     getContainerProps,
     getGroupProps,
   }
@@ -343,6 +350,14 @@ interface UseResizableTriggerOptions {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the resizable trigger will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * The callback invoked when resizable trigger are dragged.
@@ -372,11 +387,11 @@ export const useResizableTrigger = ({
   const {
     controlRef,
     direction,
-    isDisabled: isGroupDisabled,
+    disabled: groupDisabled,
   } = useResizableContext()
-  const [isActive, setIsActive] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
 
-  const trulyDisabled = disabled || isDisabled || isGroupDisabled
+  const trulyDisabled = disabled || isDisabled || groupDisabled
 
   const onDoubleClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
@@ -412,25 +427,23 @@ export const useResizableTrigger = ({
           ...rest.style,
           ...(trulyDisabled ? { cursor: "default" } : {}),
         },
-        "data-active": dataAttr(isActive),
+        "data-active": dataAttr(active),
         onDoubleClick: handlerAll(
           rest.onDoubleClick as MouseEventHandler<keyof typeof as>,
           onDoubleClick,
         ),
-        onDragging: handlerAll(rest.onDragging, (isActive) =>
-          setIsActive(isActive),
-        ),
+        onDragging: handlerAll(rest.onDragging, (active) => setActive(active)),
       }) as PanelResizeHandleProps,
-    [id, as, direction, trulyDisabled, rest, onDoubleClick, isActive],
+    [id, as, direction, trulyDisabled, rest, onDoubleClick, active],
   )
 
   const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref,
-      "data-active": dataAttr(isActive),
+      "data-active": dataAttr(active),
     }),
-    [isActive],
+    [active],
   )
 
   useEffect(() => {

@@ -38,12 +38,16 @@ interface ProgressOptions {
    * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
    *
    * @default false
+   *
+   * @deprecated It will be deprecated in version 2.0.
    */
   isAnimation?: boolean
   /**
    * If `true`, and hasStripe is `true`, the stripes will be animated.
    *
    * @default false
+   *
+   * @deprecated It will be deprecated in version 2.0.
    */
   isStripeAnimation?: boolean
   /**

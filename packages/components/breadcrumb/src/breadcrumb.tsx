@@ -24,9 +24,12 @@ import {
 } from "@yamada-ui/utils"
 import { cloneElement, Fragment, useCallback, useMemo } from "react"
 
-const [BreadcrumbProvider, useBreadcrumb] = createContext<{
-  [key: string]: CSSUIObject | undefined
-}>({
+interface BreadcrumbContext {
+  styles: { [key: string]: CSSUIObject | undefined }
+  separatorProps?: BreadcrumbSeparatorProps
+}
+
+const [BreadcrumbProvider, useBreadcrumb] = createContext<BreadcrumbContext>({
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
@@ -77,6 +80,10 @@ interface BreadcrumbOptions {
    * Props for ol element.
    */
   listProps?: HTMLUIProps<"ol">
+  /**
+   * Props for separator element.
+   */
+  separatorProps?: BreadcrumbSeparatorProps
 }
 
 export interface BreadcrumbProps
@@ -102,6 +109,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     separator = "/",
     startBoundaries: _startBoundaries,
     listProps,
+    separatorProps,
     ...rest
   } = omitThemeProps(mergedProps)
   let startBoundaries = useValue(_startBoundaries)
@@ -238,7 +246,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   ])
 
   return (
-    <BreadcrumbProvider value={styles}>
+    <BreadcrumbProvider value={{ styles, separatorProps }}>
       <ui.nav
         ref={ref}
         className={cx("ui-breadcrumb", className)}
@@ -258,7 +266,7 @@ Breadcrumb.displayName = "Breadcrumb"
 Breadcrumb.__ui__ = "Breadcrumb"
 
 interface BreadcrumbItemOptions
-  extends Pick<BreadcrumbProps, "gap" | "separator"> {
+  extends Pick<BreadcrumbProps, "gap" | "separator" | "separatorProps"> {
   /**
    * If `true`, change to span element.
    *
@@ -304,14 +312,15 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
       isLastChild,
       lastChild,
       separator,
+      separatorProps,
       ...rest
     },
     ref,
   ) => {
+    const { styles, separatorProps: groupSeparatorProps } = useBreadcrumb()
+
     currentPage ??= isCurrentPage
     lastChild ??= isLastChild
-
-    const styles = useBreadcrumb()
 
     const validChildren = getValidChildren(children)
 
@@ -326,6 +335,8 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
         return cloneElement(child, {
           children: child.props.children || separator,
           gap,
+          ...groupSeparatorProps,
+          ...separatorProps,
         })
       }
 
@@ -348,7 +359,13 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
         {cloneChildren}
 
         {!lastChild ? (
-          <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator>
+          <BreadcrumbSeparator
+            gap={gap}
+            {...groupSeparatorProps}
+            {...separatorProps}
+          >
+            {separator}
+          </BreadcrumbSeparator>
         ) : null}
       </ui.li>
     )
@@ -381,9 +398,9 @@ export interface BreadcrumbLinkProps
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
   ({ href, className, children, currentPage, isCurrentPage, ...rest }, ref) => {
-    currentPage ??= isCurrentPage
+    const { styles } = useBreadcrumb()
 
-    const styles = useBreadcrumb()
+    currentPage ??= isCurrentPage
 
     return (
       <ui.a
@@ -416,7 +433,8 @@ export interface BreadcrumbSeparatorProps
 
 export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   ({ children, gap: mx, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const { styles } = useBreadcrumb()
+
     const css: CSSUIObject = {
       mx,
       ...styles.separator,
@@ -446,7 +464,7 @@ export interface BreadcrumbEllipsisProps
 
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
   ({ className, children, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const { styles } = useBreadcrumb()
 
     const css: CSSUIObject = {
       ...styles.ellipsis,

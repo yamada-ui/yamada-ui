@@ -210,14 +210,6 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     children,
     customIcon,
     focused,
-    /*
-     * @deprecated Use `focused` instead.
-     */
-    isFocused: focused,
-    /*
-     * @deprecated Use `selected` instead.
-     */
-    isSelected: selected,
     selected,
     getOptionProps,
   }

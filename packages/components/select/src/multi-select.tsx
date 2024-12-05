@@ -105,7 +105,7 @@ interface MultiSelectOptions {
 
 export interface MultiSelectProps
   extends ThemeProps<"MultiSelect">,
-    Omit<UseSelectProps<string[]>, "isEmpty" | "placeholderInOptions">,
+    Omit<UseSelectProps<string[]>, "empty" | "placeholderInOptions">,
     MultiSelectOptions {}
 
 /**
@@ -142,7 +142,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const {
     children,
     descendants,
-    isEmpty: empty,
+    empty,
     placeholder,
     value,
     formControlProps,

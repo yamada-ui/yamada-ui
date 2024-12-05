@@ -73,8 +73,8 @@ interface SelectContext
   containerRef: RefObject<HTMLDivElement>
   fieldRef: RefObject<HTMLDivElement>
   focusedIndex: number
-  isOpen: boolean
   label: MaybeValue | undefined
+  open: boolean
   setFocusedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
   value: MaybeValue
@@ -724,8 +724,6 @@ export const useSelect = <T extends MaybeValue = string>(
     empty,
     fieldRef,
     focusedIndex,
-    isEmpty: empty,
-    isOpen: open,
     label,
     omitSelectedValues,
     open,

@@ -71,7 +71,7 @@ interface SelectOptions {
 
 export type SelectProps = Omit<
   UseSelectProps,
-  "isEmpty" | "maxSelectValues" | "omitSelectedValues"
+  "empty" | "maxSelectValues" | "omitSelectedValues"
 > &
   SelectOptions &
   ThemeProps<"Select">
@@ -107,7 +107,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const {
     children,
     descendants,
-    isEmpty: empty,
+    empty,
     value,
     formControlProps,
     getContainerProps,

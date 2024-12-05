@@ -278,7 +278,7 @@ export function convertColor(color: string, fallback?: string) {
         if (isAlpha) {
           if (hexa.length === 7) hexa += "ff"
         } else {
-          hexa = hexa.replace(/(#(?:[0-9a-fA-F]{6}))[0-9a-fA-F]{2}$/, "$1")
+          hexa = hexa.replace(/^#(?:[0-9a-fA-F]{6})[0-9a-fA-F]{2}$/, "$1")
         }
 
         return hexa

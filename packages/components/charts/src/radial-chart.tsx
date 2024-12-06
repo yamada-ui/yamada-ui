@@ -207,10 +207,8 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
                 content={({ payload }) => (
                   <ChartTooltip
                     className="ui-radial-chart__tooltip"
-                    isRadialChart={
-                      tooltipDataSource === "segment" ? true : false
-                    }
                     payload={tooltipDataSource === "segment" ? payload : data}
+                    radialChart={tooltipDataSource === "segment" ? true : false}
                     unit={unit}
                     valueFormatter={valueFormatter}
                     {...computedTooltipProps}

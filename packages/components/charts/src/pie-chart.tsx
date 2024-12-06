@@ -68,7 +68,7 @@ export interface PieChartProps
  */
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("PieChart", props)
-  const {
+  let {
     className,
     data,
     endAngle,
@@ -78,6 +78,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     labelOffset,
     outerRadius,
     paddingAngle,
+    percent,
     startAngle,
     strokeWidth,
     tooltipAnimationDuration,
@@ -97,6 +98,8 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
+  percent ??= isPercent
+
   const {
     pieVars,
     setHighlightedArea,
@@ -112,6 +115,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     labelOffset,
     outerRadius,
     paddingAngle,
+    percent,
     startAngle,
     strokeWidth,
     styles,

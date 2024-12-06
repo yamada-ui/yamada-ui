@@ -1,5 +1,14 @@
 # @yamada-ui/form-control
 
+## 2.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/visually-hidden@1.0.19
+  - @yamada-ui/core@1.16.1
+
 ## 2.1.9
 
 ### Patch Changes

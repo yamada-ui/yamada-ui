@@ -80,7 +80,7 @@ const CarouselControl = forwardRef<
     <IconButton
       className={cx("ui-carousel__control", className)}
       colorScheme={["whiteAlpha", "blackAlpha"]}
-      isRounded
+      fullRounded
       __css={css}
       {...getControlProps(rest, ref)}
     />

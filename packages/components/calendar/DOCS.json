@@ -96,7 +96,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -333,6 +333,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the date picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -490,6 +496,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
@@ -536,7 +543,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -780,6 +787,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the month picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for month picker clear icon element.",
@@ -904,6 +917,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the month picker clear icon.",
       "required": false
     },
@@ -950,7 +964,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -1159,6 +1173,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the date picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -1327,6 +1347,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
@@ -1379,7 +1400,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -1843,7 +1864,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -2103,6 +2124,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the year picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for year picker clear icon element.",
@@ -2215,6 +2242,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the year picker clear icon.",
       "required": false
     },
@@ -2261,7 +2289,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"

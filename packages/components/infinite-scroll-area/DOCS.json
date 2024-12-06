@@ -10,6 +10,12 @@
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the infinite scroll is disabled.",
+      "required": false
+    },
     "finish": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "description": "The infinite scroll area finish to use.",
@@ -29,12 +35,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the infinite scroll is disabled.",
       "required": false
     },
     "isReverse": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `reverse` instead.",
       "description": "If `true`, reverse direction.",
       "required": false
     },
@@ -57,6 +65,12 @@
     "resetRef": {
       "type": "RefObject<\n  (index?: number | undefined, runScroll?: boolean | undefined) => void\n>",
       "description": "Ref to a reset function.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, reverse direction.",
       "required": false
     },
     "rootMargin": {

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useInputGroup } from "./input-context"
@@ -37,27 +37,18 @@ const InputElement = forwardRef<InputElementProps, "div">(
 
     isClickable ??= isClick
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      cursor: isClickable ? "pointer" : "auto",
-      display: "flex",
-      fontSize: fieldFontSize,
-      h: "100%",
-      justifyContent: "center",
-      [placement === "left" ? "insetStart" : "insetEnd"]: "0",
-      pointerEvents: isClickable ? "auto" : "none",
-      position: "absolute",
-      top: "0",
-      w: fieldHeight,
-      zIndex: "fallback(kurillin, 9)",
-      ...styles.element,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-input__element", className)}
-        __css={css}
+        __css={{
+          cursor: isClickable ? "pointer" : "auto",
+          fontSize: fieldFontSize,
+          [placement === "left" ? "insetStart" : "insetEnd"]: "0",
+          pointerEvents: isClickable ? "auto" : "none",
+          w: fieldHeight,
+          ...styles.element,
+        }}
         {...rest}
       />
     )

@@ -111,6 +111,120 @@ describe("<Popover />", () => {
     await waitFor(() => expect(footer).toBeVisible())
   })
 
+  test("should contextmenu props work", async () => {
+    const { user } = render(<PopoverExample trigger="contextmenu" />)
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Open Popover",
+    })
+
+    await user.pointer({ target: triggerButton, keys: "[MouseRight]" })
+
+    const header = await screen.findByText("Popover Header")
+    const closeButton = await screen.findByLabelText("Close popover")
+    const body = await screen.findByText("Popover Body")
+    const footer = await screen.findByText("Popover Footer")
+
+    await waitFor(() => expect(header).toBeVisible())
+    await waitFor(() => expect(closeButton).toBeVisible())
+    await waitFor(() => expect(body).toBeVisible())
+    await waitFor(() => expect(footer).toBeVisible())
+  })
+
+  test("should close with escape key", async () => {
+    const { user } = render(<PopoverExample />)
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Open Popover",
+    })
+
+    await user.click(triggerButton)
+
+    const header = await screen.findByText("Popover Header")
+    const closeButton = await screen.findByLabelText("Close popover")
+    const body = await screen.findByText("Popover Body")
+    const footer = await screen.findByText("Popover Footer")
+
+    await user.tab()
+    await user.keyboard("{escape}")
+
+    await waitFor(() => expect(header).not.toBeVisible())
+    await waitFor(() => expect(closeButton).not.toBeVisible())
+    await waitFor(() => expect(body).not.toBeVisible())
+    await waitFor(() => expect(footer).not.toBeVisible())
+  })
+
+  test("can close on blur", async () => {
+    const { user } = render(<PopoverExample />)
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Open Popover",
+    })
+
+    await user.click(triggerButton)
+
+    const header = await screen.findByText("Popover Header")
+    const closeButton = await screen.findByLabelText("Close popover")
+    const body = await screen.findByText("Popover Body")
+    const footer = await screen.findByText("Popover Footer")
+
+    await user.click(document.body)
+
+    await waitFor(() => expect(header).not.toBeVisible())
+    await waitFor(() => expect(closeButton).not.toBeVisible())
+    await waitFor(() => expect(body).not.toBeVisible())
+    await waitFor(() => expect(footer).not.toBeVisible())
+  })
+
+  test("can close on blur with contextmenu props", async () => {
+    const { user } = render(<PopoverExample trigger="contextmenu" />)
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Open Popover",
+    })
+
+    await user.pointer({ target: triggerButton, keys: "[MouseRight]" })
+
+    const header = await screen.findByText("Popover Header")
+    const closeButton = await screen.findByLabelText("Close popover")
+    const body = await screen.findByText("Popover Body")
+    const footer = await screen.findByText("Popover Footer")
+
+    await waitFor(() => expect(header).toBeVisible())
+    await waitFor(() => expect(closeButton).toBeVisible())
+    await waitFor(() => expect(body).toBeVisible())
+    await waitFor(() => expect(footer).toBeVisible())
+
+    await user.click(document.body)
+
+    await waitFor(() => expect(header).not.toBeVisible())
+    await waitFor(() => expect(closeButton).not.toBeVisible())
+    await waitFor(() => expect(body).not.toBeVisible())
+    await waitFor(() => expect(footer).not.toBeVisible())
+  })
+
+  test("can close when unhover", async () => {
+    const { user } = render(<PopoverExample trigger="hover" />)
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Open Popover",
+    })
+
+    await user.hover(triggerButton)
+
+    const header = await screen.findByText("Popover Header")
+    const closeButton = await screen.findByLabelText("Close popover")
+    const body = await screen.findByText("Popover Body")
+    const footer = await screen.findByText("Popover Footer")
+
+    await user.unhover(triggerButton)
+
+    await waitFor(() => expect(header).not.toBeVisible())
+    await waitFor(() => expect(closeButton).not.toBeVisible())
+    await waitFor(() => expect(body).not.toBeVisible())
+    await waitFor(() => expect(footer).not.toBeVisible())
+  })
+
   test("can popover control", async () => {
     const ControlPopover = () => {
       const [open, setOpen] = useState(false)

@@ -16,10 +16,14 @@ import { CloseButton } from "@yamada-ui/react"
 
 ## 使い方
 
-```tsx
-<Wrap gap="md">
-  <CloseButton size="sm" />
-  <CloseButton size="md" />
-  <CloseButton size="lg" />
-</Wrap>
+```tsx functional=true
+const items = ["sm", "md", "lg"]
+
+return (
+  <Wrap gap="md">
+    <For each={items}>
+      {(item, index) => <CloseButton size={item} key={index} />}
+    </For>
+  </Wrap>
+)
 ```

@@ -60,7 +60,7 @@ describe("Object", () => {
   describe("filterObject", () => {
     test("should filter an object based on a predicate function", () => {
       const obj = { a: 1, b: 2, c: 3 }
-      const result = filterObject(obj, (key, value) => value > 1)
+      const result = filterObject(obj, (_, value) => value > 1)
       expect(result).toStrictEqual({ b: 2, c: 3 })
     })
   })

@@ -1,4 +1,4 @@
-import type { Transition } from "framer-motion"
+import type { Transition } from "motion/react"
 import type { MotionTransitionProps } from "./motion.types"
 import { isNumber } from "@yamada-ui/utils"
 

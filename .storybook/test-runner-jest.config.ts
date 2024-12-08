@@ -4,10 +4,10 @@ type TestRunnerJestConfig = ReturnType<typeof getJestConfig>
 
 const config: TestRunnerJestConfig = {
   ...getJestConfig(),
-  verbose: false,
   maxWorkers: 8,
   testMatch: ["**/components/**/*.stories.@(js|jsx|ts|tsx)"],
   testPathIgnorePatterns: ["components/motion"],
+  verbose: false,
 }
 
 export default config

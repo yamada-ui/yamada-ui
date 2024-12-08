@@ -27,7 +27,7 @@ export const basic: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
+        bg={["primary", "secondary"]}
         color="white"
         p="md"
         rounded="md"

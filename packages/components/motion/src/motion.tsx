@@ -2,7 +2,7 @@ import type { Dict } from "@yamada-ui/utils"
 import type { MotionProps } from "./motion.types"
 import { ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { motionForwardRef } from "./forward-ref"
 
 const disableStyleProps = ["transition"]

@@ -116,6 +116,5 @@ export {
   useWillChange,
   VisualElement,
   visualElementStore,
-  warning,
   wrap,
-} from "framer-motion"
+} from "motion/react"

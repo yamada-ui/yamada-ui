@@ -1,5 +1,5 @@
 import type { AlertStatusValue } from "@yamada-ui/core"
-import type { Parent as HastParent } from "hast"
+import type { ElementContent, Parent } from "hast"
 import type {
   Break,
   Paragraph,
@@ -8,7 +8,6 @@ import type {
   Strong,
   Text,
 } from "mdast"
-import type { ElementContent } from "react-markdown/lib"
 import type { Plugin } from "unified"
 import type { ShouldRemoved } from "./utils"
 import { isNull, isUndefined, noop } from "@yamada-ui/utils"
@@ -236,7 +235,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
 
 export const rehypePlugin: Plugin = () => {
   return (tree) => {
-    visit(tree, "break", (_, index, parent: HastParent) => {
+    visit(tree, "break", (_, index, parent: Parent) => {
       parent.children.splice(index!, 1, {
         type: "element",
         children: [],
@@ -245,7 +244,7 @@ export const rehypePlugin: Plugin = () => {
       })
     })
 
-    visit(tree, "strong", (node: Strong, index: number, parent: HastParent) => {
+    visit(tree, "strong", (node: Strong, index: number, parent: Parent) => {
       parent.children.splice(index!, 1, {
         type: "element",
         children: [...node.children] as ElementContent[],

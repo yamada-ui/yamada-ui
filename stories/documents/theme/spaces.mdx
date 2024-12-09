@@ -1,6 +1,5 @@
 import { Canvas, Meta } from "@storybook/blocks"
 import { Grid, Text, Box, defaultTheme } from "@yamada-ui/react"
-import { JSX } from "../../components"
 import { Fragment } from "react"
 
 <Meta title="Documents / Theme / Spaces" />
@@ -75,100 +74,49 @@ spaces: {
 
 ## Token
 
-<JSX>
-  <Grid templateColumns="5rem 5rem 5rem 1fr" my="md" gap="md">
-    <Text m="0">Name</Text>
-    <Text m="0">Rem</Text>
-    <Text m="0">Pixel</Text>
+<Grid templateColumns="5rem 5rem 5rem 1fr" my="md" gap="md">
+  <Text m="0">Name</Text>
+  <Text m="0">Rem</Text>
+  <Text m="0">Pixel</Text>
+  <Box />
+  {Object.entries(defaultTheme.semantics.spaces).map(([key, token]) => {
+    const value = defaultTheme.spaces[token]
 
-    <Box />
+    return (
+      <Fragment key={key}>
+        <Text m="0">{key}</Text>
+        <Text m="0">{value}</Text>
+        <Text m="0">{`${parseFloat(value) * 16}px`}</Text>
+        <Box maxW={value} h="8xs" bg="red.500"></Box>
+      </Fragment>
+    )
 
-    <Text m="0">xs</Text>
-    <Text m="0">0.25rem</Text>
-    <Text m="0">4px</Text>
+})}
 
-    <Box maxW="0.25rem" h="8xs" bg="red.500" />
-
-    <Text m="0">sm</Text>
-    <Text m="0">0.5rem</Text>
-    <Text m="0">8px</Text>
-
-    <Box maxW="0.5rem" h="8xs" bg="red.500" />
-
-    <Text m="0">md</Text>
-    <Text m="0">1rem</Text>
-    <Text m="0">16px</Text>
-
-    <Box maxW="1rem" h="8xs" bg="red.500" />
-
-    <Text m="0">normal</Text>
-    <Text m="0">1.5rem</Text>
-    <Text m="0">24px</Text>
-
-    <Box maxW="1.5rem" h="8xs" bg="red.500" />
-
-    <Text m="0">lg</Text>
-    <Text m="0">2rem</Text>
-    <Text m="0">32px</Text>
-
-    <Box maxW="2rem" h="8xs" bg="red.500" />
-
-    <Text m="0">xl</Text>
-    <Text m="0">3rem</Text>
-    <Text m="0">48px</Text>
-
-    <Box maxW="3rem" h="8xs" bg="red.500" />
-
-    <Text m="0">2xl</Text>
-    <Text m="0">4rem</Text>
-    <Text m="0">64px</Text>
-
-    <Box maxW="4rem" h="8xs" bg="red.500" />
-
-    <Text m="0">3xl</Text>
-    <Text m="0">6rem</Text>
-    <Text m="0">96px</Text>
-
-    <Box maxW="6rem" h="8xs" bg="red.500" />
-
-    <Text m="0">4xl</Text>
-    <Text m="0">8rem</Text>
-    <Text m="0">128px</Text>
-
-    <Box maxW="8rem" h="8xs" bg="red.500" />
-
-  </Grid>
-</JSX>
+</Grid>
 
 ## Default
 
-<JSX>
-  <Grid templateColumns="5rem 5rem 5rem 1fr" my="md" gap="md">
-    <Text m="0">Name</Text>
-    <Text m="0">Rem</Text>
-    <Text m="0">Pixel</Text>
-
-    <Box />
-
-    <Text m="0">px</Text>
-    <Text m="0">0.0625rem</Text>
-    <Text m="0">1px</Text>
-
-    <Box maxW="1px" h="8xs" bg="green.500" />
-
-    {Object.entries(defaultTheme.spaces)
-          .filter(([key]) => !isNaN(Number(key)))
-          .sort(([a], [b]) => a - b)
-          .map(([key, value]) => {
-            return (
-              <Fragment key={key}>
-                <Text m="0">{key}</Text>
-                <Text m="0">{value}</Text>
-                <Text m="0">{`${parseFloat(value) * 16}px`}</Text>
-                <Box maxW={value} h="8xs" bg="green.500"></Box>
-              </Fragment>
-            )
-          })}
-
-  </Grid>
-</JSX>
+<Grid templateColumns="5rem 5rem 5rem 1fr" my="md" gap="md">
+  <Text m="0">Name</Text>
+  <Text m="0">Rem</Text>
+  <Text m="0">Pixel</Text>
+  <Box />
+  <Text m="0">px</Text>
+  <Text m="0">0.0625rem</Text>
+  <Text m="0">1px</Text>
+  <Box maxW="1px" h="8xs" bg="green.500" />
+  {Object.entries(defaultTheme.spaces)
+    .filter(([key]) => !isNaN(Number(key)))
+    .sort(([a], [b]) => a - b)
+    .map(([key, value]) => {
+      return (
+        <Fragment key={key}>
+          <Text m="0">{key}</Text>
+          <Text m="0">{value}</Text>
+          <Text m="0">{`${parseFloat(value) * 16}px`}</Text>
+          <Box maxW={value} h="8xs" bg="green.500"></Box>
+        </Fragment>
+      )
+    })}
+</Grid>

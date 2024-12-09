@@ -30,18 +30,18 @@ const sharedFiles = [
 const ignoresConfig: Linter.Config = {
   name: "eslint/ignores",
   ignores: [
+    "!.storybook/**",
     "**/.next/**",
     "**/.turbo/**",
     "**/dist/**",
     "**/node_modules/**",
     "**/build/**",
+    "**/bin/**",
     "**/pnpm-lock.yaml",
     "docs/**",
     "examples/**",
     "coverage/**",
     "storybook-static/**",
-    ".storybook/**",
-    "packages/cli/bin/**",
   ],
 }
 
@@ -92,14 +92,7 @@ const reactConfig: Linter.Config = {
 
 const reactHooksConfig: Linter.Config = {
   ...sharedReactHooksConfig,
-  files: [
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "packages/**/*.d.ts",
-    "stories/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.d.ts",
-  ],
+  files: sharedFiles,
   ignores: ["packages/cli/**/*.ts"],
 }
 

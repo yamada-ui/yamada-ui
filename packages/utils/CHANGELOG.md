@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.6.1
+
+### Patch Changes
+
+- [#3832](https://github.com/yamada-ui/yamada-ui/pull/3832) [`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838) Thanks [@illionillion](https://github.com/illionillion)! - Refactor `convertColor` to replace lookbehind in regular expression.
+
 ## 1.6.0
 
 ### Minor Changes

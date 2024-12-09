@@ -6,7 +6,6 @@ import { ui } from "@yamada-ui/core"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
-import { useMemo } from "react"
 import { usePopover } from "./popover"
 import { PopoverCloseButton } from "./popover-close-button"
 
@@ -62,7 +61,6 @@ const getPopoverContentProps = (
 export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
   (
     {
-      as = "section",
       className,
       children,
       maxW,
@@ -99,8 +97,6 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       PopoverCloseButton,
     )
 
-    const Component = useMemo(() => motion(as), [as])
-
     const css = __css ?? styles.container ?? {}
 
     const computedCSS: CSSUIObject = {
@@ -135,7 +131,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
         zIndex={zIndex}
         {...containerProps}
       >
-        <Component
+        <motion.section
           className={cx("ui-popover__content", className)}
           {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
@@ -154,7 +150,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             (closeOnButton ? <PopoverCloseButton /> : null)}
 
           {cloneChildren}
-        </Component>
+        </motion.section>
       </ui.div>
     )
   },

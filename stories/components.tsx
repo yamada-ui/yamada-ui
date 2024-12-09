@@ -1,5 +1,4 @@
 import type {
-  ContainerProps,
   Dict,
   SegmentedControlProps,
   SelectProps,
@@ -8,11 +7,10 @@ import type {
   SwitchProps,
   ThemeProps,
 } from "@yamada-ui/react"
-import type { FC, ReactNode } from "react"
+import type { FC } from "react"
 import {
   Box,
   COLOR_SCHEMES,
-  Container,
   FormControl,
   HStack,
   isArray,
@@ -24,35 +22,12 @@ import {
   Switch,
   Text,
   Tooltip,
-  UIProvider,
   useColorMode,
   useDisclosure,
   VStack,
 } from "@yamada-ui/react"
-import { useEffect } from "react"
-import { useDarkMode } from "storybook-dark-mode"
 
 export const colorSchemes = [...SEMANTIC_COLOR_SCHEMES, ...COLOR_SCHEMES]
-
-export const JSX: FC<{ children: ReactNode }> = ({ children }) => {
-  return (
-    <UIProvider>
-      <App>{children}</App>
-    </UIProvider>
-  )
-}
-
-const App: FC<ContainerProps> = ({ children }) => {
-  const { changeColorMode } = useColorMode()
-
-  const colorMode = useDarkMode() ? "dark" : "light"
-
-  useEffect(() => {
-    changeColorMode(colorMode)
-  }, [colorMode, changeColorMode])
-
-  return <Container>{children}</Container>
-}
 
 interface ColorPalletsProps {
   name: string
@@ -72,7 +47,7 @@ interface ColorPalletProps {
 }
 
 export const ColorPallet: FC<ColorPalletProps> = ({ name, tone, value }) => {
-  const colorMode = useDarkMode() ? "dark" : "light"
+  const { colorMode } = useColorMode()
 
   return (
     <HStack key={tone}>

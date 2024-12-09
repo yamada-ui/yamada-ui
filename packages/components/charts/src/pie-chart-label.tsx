@@ -10,6 +10,7 @@ const DEFAULT_LABEL_OFFSET = 22
 export interface PieChartLabelProps {
   styles: Dict<CSSUIObject | undefined>
   className?: string
+  calcPercent?: boolean
   cx?: number
   cy?: number
   innerRadius?: number
@@ -26,6 +27,7 @@ export interface PieChartLabelProps {
 
 export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
   className: cellClassName,
+  calcPercent,
   cx: cxProp = 0,
   cy: cyProp = 0,
   innerRadius = 0,
@@ -40,6 +42,8 @@ export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
   value = 0,
   labelProps,
 }) => {
+  calcPercent ??= isPercent
+
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
 
@@ -48,7 +52,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => ReactNode = ({
 
   const textAnchor = x > cxProp ? "start" : x < cxProp ? "end" : "middle"
   const displayLabel = () => {
-    if (isPercent) {
+    if (calcPercent) {
       return (
         parseFloat((percent * 100).toFixed(0)) > 0 &&
         `${(percent * 100).toFixed(0)}%`

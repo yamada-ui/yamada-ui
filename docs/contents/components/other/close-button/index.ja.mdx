@@ -18,8 +18,8 @@ import { CloseButton } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <CloseButton size="sm" />
-  <CloseButton size="md" />
-  <CloseButton size="lg" />
+  <For each={["sm", "md", "lg"]}>
+    {(item, index) => <CloseButton size={item} key={index} />}
+  </For>
 </Wrap>
 ```

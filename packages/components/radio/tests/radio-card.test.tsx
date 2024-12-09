@@ -1,4 +1,4 @@
-import { a11y } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { RadioCard, RadioCardGroup } from "../src"
 
 describe("<RadioCard />", () => {
@@ -22,5 +22,18 @@ describe("<RadioCard />", () => {
         />
       </RadioCardGroup>,
     )
+  })
+
+  test("renders correctly with <RadioCardAddon>", async () => {
+    render(
+      <RadioCard
+        addon="ドラゴンクエストV 天空の花嫁（DQ5）"
+        description="大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。"
+        label="フローラ"
+        value="フローラ"
+      />,
+    )
+
+    await waitFor(() => screen.getByText("ドラゴンクエストV 天空の花嫁（DQ5）"))
   })
 })

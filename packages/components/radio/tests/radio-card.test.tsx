@@ -1,4 +1,4 @@
-import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { RadioCard, RadioCardGroup } from "../src"
 
 describe("<RadioCard />", () => {
@@ -34,6 +34,6 @@ describe("<RadioCard />", () => {
       />,
     )
 
-    await waitFor(() => screen.getByText("ドラゴンクエストV 天空の花嫁（DQ5）"))
+    await screen.findByText("ドラゴンクエストV 天空の花嫁（DQ5）")
   })
 })

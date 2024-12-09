@@ -1,5 +1,23 @@
 # @yamada-ui/providers
 
+## 1.4.0
+
+### Minor Changes
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `colorMode` to `UIProvider` props.
+
+### Patch Changes
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`2990027`](https://github.com/yamada-ui/yamada-ui/commit/2990027ce0054febcf0b1eb44e2386e231fff7a5), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/theme@1.20.1
+  - @yamada-ui/motion@2.2.11
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/loading@1.1.27
+  - @yamada-ui/notice@1.1.14
+
 ## 1.3.0
 
 ### Minor Changes

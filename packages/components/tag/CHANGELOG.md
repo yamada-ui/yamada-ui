@@ -1,5 +1,15 @@
 # @yamada-ui/tag
 
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/icon@1.1.16
+  - @yamada-ui/use-clickable@1.2.16
+
 ## 1.1.6
 
 ### Patch Changes

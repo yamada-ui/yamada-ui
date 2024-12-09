@@ -1,5 +1,16 @@
 # @yamada-ui/use-animation
 
+## 1.0.45
+
+### Patch Changes
+
+- [#3806](https://github.com/yamada-ui/yamada-ui/pull/3806) [`734d66e`](https://github.com/yamada-ui/yamada-ui/commit/734d66e11a1479ce14f9246d23bbc173b81be5bd) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/use-event-listener@1.0.25
+
 ## 1.0.44
 
 ### Patch Changes

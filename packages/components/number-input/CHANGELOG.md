@@ -1,5 +1,20 @@
 # @yamada-ui/number-input
 
+## 1.2.3
+
+### Patch Changes
+
+- [#3679](https://github.com/yamada-ui/yamada-ui/pull/3679) [`2ae7817`](https://github.com/yamada-ui/yamada-ui/commit/2ae7817587e690d7efc5b26fe1f4a5f842bef2dd) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/form-control@2.1.10
+  - @yamada-ui/icon@1.1.16
+  - @yamada-ui/use-counter@1.0.26
+  - @yamada-ui/use-event-listener@1.0.25
+  - @yamada-ui/use-interval@1.0.25
+
 ## 1.2.2
 
 ### Patch Changes

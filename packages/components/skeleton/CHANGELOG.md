@@ -1,5 +1,18 @@
 # @yamada-ui/skeleton
 
+## 1.1.13
+
+### Patch Changes
+
+- [#3674](https://github.com/yamada-ui/yamada-ui/pull/3674) [`509629f`](https://github.com/yamada-ui/yamada-ui/commit/509629fdbbf9062b5942452e302084e7302b23be) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a), [`734d66e`](https://github.com/yamada-ui/yamada-ui/commit/734d66e11a1479ce14f9246d23bbc173b81be5bd)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/use-animation@1.0.45
+  - @yamada-ui/use-previous@1.0.25
+  - @yamada-ui/use-value@1.1.33
+
 ## 1.1.12
 
 ### Patch Changes

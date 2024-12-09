@@ -1,5 +1,18 @@
 # @yamada-ui/input
 
+## 1.0.50
+
+### Patch Changes
+
+- [#3606](https://github.com/yamada-ui/yamada-ui/pull/3606) [`d11724d`](https://github.com/yamada-ui/yamada-ui/commit/d11724dff2bba83122176a88c86f20c4e353aba9) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/file-input@1.0.50
+  - @yamada-ui/form-control@2.1.10
+  - @yamada-ui/use-token@1.1.33
+
 ## 1.0.49
 
 ### Patch Changes

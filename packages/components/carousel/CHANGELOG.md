@@ -1,5 +1,21 @@
 # @yamada-ui/carousel
 
+## 2.1.7
+
+### Patch Changes
+
+- [#3684](https://github.com/yamada-ui/yamada-ui/pull/3684) [`dc152fb`](https://github.com/yamada-ui/yamada-ui/commit/dc152fb0341e0c086e2cf81143f04667aaee5916) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` prefix from props and variables
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/button@1.0.53
+  - @yamada-ui/icon@1.1.16
+  - @yamada-ui/use-controllable-state@1.0.25
+  - @yamada-ui/use-value@1.1.33
+
 ## 2.1.6
 
 ### Patch Changes

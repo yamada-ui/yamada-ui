@@ -1,5 +1,15 @@
 # @yamada-ui/native-table
 
+## 1.0.47
+
+### Patch Changes
+
+- [#3680](https://github.com/yamada-ui/yamada-ui/pull/3680) [`23a8988`](https://github.com/yamada-ui/yamada-ui/commit/23a898820105869522f5bb47d8cda10a80d718d7) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+
 ## 1.0.46
 
 ### Patch Changes

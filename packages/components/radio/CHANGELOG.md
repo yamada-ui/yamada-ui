@@ -1,5 +1,19 @@
 # @yamada-ui/radio
 
+## 1.3.1
+
+### Patch Changes
+
+- [#3799](https://github.com/yamada-ui/yamada-ui/pull/3799) [`4b80a2a`](https://github.com/yamada-ui/yamada-ui/commit/4b80a2a502788ae6a1b146f91f8c6c66b07cb02e) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Add `@deprecated` to the `isNative` prop.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/form-control@2.1.10
+  - @yamada-ui/layouts@1.3.1
+  - @yamada-ui/use-controllable-state@1.0.25
+  - @yamada-ui/use-focus-visible@1.1.12
+
 ## 1.3.0
 
 ### Minor Changes

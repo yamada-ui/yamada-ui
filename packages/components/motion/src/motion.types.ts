@@ -12,7 +12,7 @@ import type {
   Target,
   TargetAndTransition,
   Transition,
-} from "framer-motion"
+} from "motion/react"
 import type * as React from "react"
 
 export type {
@@ -26,7 +26,6 @@ export type {
   AnimationPlaybackLifecycles as MotionAnimationPlaybackLifecycles,
   AnimationPlaybackOptions as MotionAnimationPlaybackOptions,
   AnimationProps as MotionAnimationProps,
-  AnimationScope as MotionAnimationScope,
   AnimationSequence as MotionAnimationSequence,
   AnimationType as MotionAnimationType,
   At as MotionAt,
@@ -43,7 +42,6 @@ export type {
   DecayOptions as MotionDecayOptions,
   DelayedFunction as MotionDelayedFunction,
   Delta as MotionDelta,
-  DevMessage as MotionDevMessage,
   DOMKeyframesDefinition as MotionDOMKeyframesDefinition,
   DOMMotionComponents,
   DOMSegment as MotionDOMSegment,
@@ -58,7 +56,6 @@ export type {
   EasingDefinition as MotionEasingDefinition,
   EasingFunction as MotionEasingFunction,
   EasingModifier as MotionEasingModifier,
-  ElementOrSelector as MotionElementOrSelector,
   EventInfo as MotionEventInfo,
   FeatureBundle as MotionFeatureBundle,
   FeatureDefinition as MotionFeatureDefinition,
@@ -147,7 +144,7 @@ export type {
   Variants as MotionVariants,
   VelocityOptions as MotionVelocityOptions,
   VisualState as MotionVisualState,
-} from "framer-motion"
+} from "motion/react"
 
 export interface MotionFactory {
   <T extends MotionAs = MotionAs, M extends object = {}>(

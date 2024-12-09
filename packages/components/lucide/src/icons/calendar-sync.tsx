@@ -2,18 +2,18 @@ import type { IconProps } from "@yamada-ui/icon"
 import { forwardRef } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import { Layers3 as OriginalLayers3 } from "lucide-react"
+import { CalendarSync as OriginalCalendarSync } from "lucide-react"
 
 /**
- * `Layers3Icon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CalendarSyncIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Layers3Icon = forwardRef<IconProps, "svg">(
+export const CalendarSyncIcon = forwardRef<IconProps, "svg">(
   ({ className, ...rest }, ref) => (
     <Icon
       ref={ref}
-      as={OriginalLayers3}
+      as={OriginalCalendarSync}
       className={cx("ui-lucide-icon", className)}
       {...rest}
     />
@@ -21,10 +21,10 @@ export const Layers3Icon = forwardRef<IconProps, "svg">(
 )
 
 /**
- * `Layers3` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CalendarSync` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  *
- * @deprecated Use `Layers3Icon` instead.
+ * @deprecated Use `CalendarSyncIcon` instead.
  */
-export const Layers3 = Layers3Icon
+export const CalendarSync = CalendarSyncIcon

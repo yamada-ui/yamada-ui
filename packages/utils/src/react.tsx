@@ -66,6 +66,21 @@ export function useUnmountEffect(callback: () => void) {
   return React.useEffect(() => () => callback(), [])
 }
 
+/**
+ * @deprecated Use `UseMountedProps` instead.
+ */
+export type UseIsMountedProps = UseMountedProps
+
+/**
+ * @deprecated Use `useMounted` instead.
+ */
+export const useIsMounted = useMounted
+
+/**
+ * @deprecated Use `UseMountedReturn` instead.
+ */
+export type UseIsMountedReturn = UseMountedReturn
+
 export interface UseMountedProps {
   delay?: number
   rerender?: boolean

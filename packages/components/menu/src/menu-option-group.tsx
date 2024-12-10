@@ -45,9 +45,9 @@ export const MenuOptionGroup = forwardRef(
     }: MenuOptionGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const isRadio = type === "radio"
+    const radio = type === "radio"
 
-    defaultValue ??= (isRadio ? "" : []) as Y
+    defaultValue ??= (radio ? "" : []) as Y
 
     const [value, setValue] = useControllableState({
       defaultValue,
@@ -57,9 +57,9 @@ export const MenuOptionGroup = forwardRef(
 
     const onChange = useCallback(
       (selectedValue: string) => {
-        if (isRadio && typeof value === "string") setValue(selectedValue as Y)
+        if (radio && typeof value === "string") setValue(selectedValue as Y)
 
-        if (!isRadio && isArray(value)) {
+        if (!radio && isArray(value)) {
           const nextValue = value.includes(selectedValue)
             ? value.filter((item) => item !== selectedValue)
             : value.concat(selectedValue)
@@ -67,7 +67,7 @@ export const MenuOptionGroup = forwardRef(
           setValue(nextValue as Y)
         }
       },
-      [isRadio, value, setValue],
+      [radio, value, setValue],
     )
 
     const validChildren = getValidChildren(children)
@@ -80,12 +80,12 @@ export const MenuOptionGroup = forwardRef(
         child.props.onClick?.(ev)
       }
 
-      const isChecked =
-        !isRadio && isArray(value)
+      const checked =
+        !radio && isArray(value)
           ? value.includes(child.props.value)
           : child.props.value === value
 
-      return cloneElement(child, { type, isChecked, onClick })
+      return cloneElement(child, { type, checked, onClick })
     })
 
     return (

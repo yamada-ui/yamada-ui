@@ -8,7 +8,7 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       fontSize: "sm",
     },
     icon: {
-      h: "3.5",
+      h: "3",
       marginEnd: "1",
       vars: [
         {
@@ -23,7 +23,7 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
         },
       ],
       verticalAlign: "middle",
-      w: "3.5",
+      w: "3",
     },
     label: {
       color: "muted",

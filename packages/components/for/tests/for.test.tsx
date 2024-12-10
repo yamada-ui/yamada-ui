@@ -22,7 +22,7 @@ describe("<For />", () => {
   test("For renders fallback when array is undefined", () => {
     render(
       <For each={undefined} fallback={<p>There are no items to show</p>}>
-        {(item, index) => <p key={index}>Item</p>}
+        {(_, index) => <p key={index}>Item</p>}
       </For>,
     )
     expect(screen.getByText("There are no items to show")).toBeInTheDocument()

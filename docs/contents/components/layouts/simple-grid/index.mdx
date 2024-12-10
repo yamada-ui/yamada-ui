@@ -22,10 +22,11 @@ import { SimpleGrid, GridItem } from "@yamada-ui/react"
 
 ```tsx
 <SimpleGrid w="full" columns={{ base: 2, md: 1 }} gap="md">
-  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
-  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem key={index} w="full" h="4xs" rounded="md" bg={bg} />
+    )}
+  </For>
 </SimpleGrid>
 ```
 
@@ -37,9 +38,10 @@ For example, if you specify `120px`, the CSS property `gridTemplateColumns` will
 
 ```tsx
 <SimpleGrid w="full" minChildWidth={{ base: "3xs", lg: 100 }} gap="md">
-  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
-  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem key={index} w="full" h="4xs" rounded="md" bg={bg} />
+    )}
+  </For>
 </SimpleGrid>
 ```

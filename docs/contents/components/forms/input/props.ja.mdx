@@ -100,11 +100,19 @@ tab: Props
 ### InputElementProps
 
 <PropsCard
+  id="inputelement-clickable"
+  name="clickable"
+  type="boolean"
+  description={"If `true`, the element clickable."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="inputelement-isclick"
   name="isClick"
   type="boolean"
   description={"If `true`, the element clickable."}
-  deprecated={"Use `isClickable` instead."}
+  deprecated={"Use `clickable` instead."}
   defaultValue={"false"}
 />
 
@@ -113,6 +121,7 @@ tab: Props
   name="isClickable"
   type="boolean"
   description={"If `true`, the element clickable."}
+  deprecated={"Use `clickable` instead."}
   defaultValue={"false"}
 />
 

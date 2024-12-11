@@ -23,7 +23,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
     const {
       buttonRef,
-      isOpen,
+      open,
       onClose,
       onFocusFirstItem,
       onFocusLastItem,
@@ -60,12 +60,12 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
         if (ev.key === " ") ev.key = ev.code
 
         const actions: { [key: string]: Function | undefined } = {
-          ArrowLeft: isOpen
+          ArrowLeft: open
             ? funcAll(onUpstreamRestoreFocus, onClose)
             : undefined,
-          ArrowRight: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
-          Enter: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
-          Space: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          ArrowRight: !open ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          Enter: !open ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          Space: !open ? funcAll(onOpen, onFocusFirstItem) : undefined,
         }
 
         const action = actions[ev.key]
@@ -76,7 +76,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
         action()
       },
-      [isOpen, onOpen, onFocusFirstItem, onUpstreamRestoreFocus, onClose],
+      [open, onOpen, onFocusFirstItem, onUpstreamRestoreFocus, onClose],
     )
 
     assignRef(onKeyDownRef, onItemKeyDown)
@@ -91,7 +91,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
           className={cx("ui-menu", className)}
           aria-haspopup="menu"
           {...rest}
-          data-active={dataAttr(isOpen)}
+          data-active={dataAttr(open)}
           onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
         >
           {children}

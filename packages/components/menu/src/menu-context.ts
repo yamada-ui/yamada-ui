@@ -20,9 +20,9 @@ export const {
 interface MenuContext extends MenuOptions {
   buttonRef: RefObject<HTMLButtonElement>
   focusedIndex: number
-  isNested: boolean
-  isOpen: boolean
   menuRef: RefObject<HTMLDivElement>
+  nested: boolean
+  open: boolean
   requestAnimationFrameId: MutableRefObject<null | number>
   setFocusedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }

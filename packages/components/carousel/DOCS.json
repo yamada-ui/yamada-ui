@@ -248,7 +248,7 @@
   },
   "CarouselIndicators": {
     "component": {
-      "type": "FC<{ index: number; isSelected: boolean }>",
+      "type": "FC<{\n  index: number\n  selected: boolean\n  isSelected?: boolean | undefined\n}>",
       "description": "The custom carousel indicator to use.",
       "required": false
     }

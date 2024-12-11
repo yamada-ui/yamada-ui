@@ -93,6 +93,14 @@ tab: Props
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="select-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -206,6 +214,7 @@ tab: Props
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -214,6 +223,7 @@ tab: Props
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
 />
 
 <PropsCard
@@ -240,11 +250,21 @@ tab: Props
 />
 
 <PropsCard
+  id="select-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="select-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -311,6 +331,13 @@ tab: Props
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="select-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
 />
 
 <PropsCard

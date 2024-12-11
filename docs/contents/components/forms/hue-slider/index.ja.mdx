@@ -24,9 +24,26 @@ import { HueSlider } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <HueSlider size="sm" defaultValue={120} />
-  <HueSlider size="md" defaultValue={180} />
-  <HueSlider size="lg" defaultValue={240} />
+  <For
+    each={[
+      {
+        size: "sm",
+        defaultValue: 120,
+      },
+      {
+        size: "md",
+        defaultValue: 180,
+      },
+      {
+        size: "lg",
+        defaultValue: 240,
+      },
+    ]}
+  >
+    {({ size, defaultValue }, index) => (
+      <HueSlider key={index} size={size} defaultValue={defaultValue} />
+    )}
+  </For>
 </VStack>
 ```
 

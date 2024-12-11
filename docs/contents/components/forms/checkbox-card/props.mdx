@@ -43,10 +43,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -87,6 +96,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
@@ -98,6 +115,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -114,6 +132,7 @@ tab: Props
   name="isIndeterminate"
   type="boolean"
   description={"If `true`, the checkbox will be indeterminate."}
+  deprecated={"Use `indeterminate` instead."}
   defaultValue={"false"}
 />
 
@@ -311,6 +330,7 @@ tab: Props
   description={
     "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
   }
+  deprecated={"It will be deprecated in version 2.0."}
   defaultValue={"false"}
 />
 

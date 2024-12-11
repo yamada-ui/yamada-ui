@@ -46,17 +46,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone variant="dashed">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="solid">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="unstyled">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["dashed", "solid", "unstyled"]}>
+    {(variant, index) => (
+      <Dropzone key={index} variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -64,21 +60,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone size="xs">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="sm">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="md">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="lg">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Dropzone key={index} size={size}>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -128,10 +116,24 @@ import {
 ```tsx
 <Dropzone maxSize={3 * 1024 ** 2}>
   <VStack w="auto" gap="2xs">
-    <Text fontSize="xl">Drag file here or click to select file</Text>
-    <Text fontSize="sm">
-      Attach as many files as you like, each file should not exceed 3mb
-    </Text>
+    <For
+      each={[
+        {
+          fontsize: "xl",
+          text: "Drag file here or click to select file",
+        },
+        {
+          fontsize: "sm",
+          text: "Attach as many files as you like, each file should not exceed 3mb",
+        },
+      ]}
+    >
+      {({ fontsize, text }, index) => (
+        <Text key={index} fontSize={fontSize}>
+          {text}
+        </Text>
+      )}
+    </For>
   </VStack>
 </Dropzone>
 ```
@@ -143,10 +145,24 @@ import {
 ```tsx
 <Dropzone multiple maxFiles={3}>
   <VStack w="auto" gap="2xs">
-    <Text fontSize="xl">Drag file here or click to select file</Text>
-    <Text fontSize="sm">
-      Attach as many files as you like, can upload up to 3 files
-    </Text>
+    <For
+      each={[
+        {
+          fontsize: "xl",
+          text: "Drag file here or click to select file",
+        },
+        {
+          fontsize: "sm",
+          text: "Attach as many files as you like, each file should not exceed 3mb",
+        },
+      ]}
+    >
+      {({ fontsize, text }, index) => (
+        <Text key={index} fontSize={fontSize}>
+          {text}
+        </Text>
+      )}
+    </For>
   </VStack>
 </Dropzone>
 ```
@@ -175,10 +191,24 @@ import {
     </DropzoneIdle>
 
     <VStack gap="2xs">
-      <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">
-        Attach as many files as you like, each file should not exceed 3mb
-      </Text>
+      <For
+        each={[
+          {
+            fontsize: "xl",
+            text: "Drag file here or click to select file",
+          },
+          {
+            fontsize: "sm",
+            text: "Attach as many files as you like, each file should not exceed 3mb",
+          },
+        ]}
+      >
+        {({ fontsize, text }, index) => (
+          <Text key={index} fontSize={fontSize}>
+            {text}
+          </Text>
+        )}
+      </For>
     </VStack>
   </HStack>
 </Dropzone>
@@ -219,10 +249,24 @@ import {
     </DropzoneIdle>
 
     <VStack gap="2xs">
-      <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">
-        Attach as many files as you like, each file should not exceed 3mb
-      </Text>
+      <For
+        each={[
+          {
+            fontsize: "xl",
+            text: "Drag file here or click to select file",
+          },
+          {
+            fontsize: "sm",
+            text: "Attach as many files as you like, each file should not exceed 3mb",
+          },
+        ]}
+      >
+        {({ fontsize, text }, index) => (
+          <Text key={index} fontSize={fontSize}>
+            {text}
+          </Text>
+        )}
+      </For>
     </VStack>
   </HStack>
 </Dropzone>
@@ -252,10 +296,24 @@ import {
     </DropzoneIdle>
 
     <VStack gap="2xs">
-      <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">
-        Attach as many files as you like, each file should not exceed 3mb
-      </Text>
+      <For
+        each={[
+          {
+            fontsize: "xl",
+            text: "Drag file here or click to select file",
+          },
+          {
+            fontsize: "sm",
+            text: "Attach as many files as you like, each file should not exceed 3mb",
+          },
+        ]}
+      >
+        {({ fontsize, text }, index) => (
+          <Text key={index} fontSize={fontSize}>
+            {text}
+          </Text>
+        )}
+      </For>
     </VStack>
   </HStack>
 </Dropzone>
@@ -285,10 +343,24 @@ import {
     </DropzoneIdle>
 
     <VStack gap="2xs">
-      <Text fontSize="xl">Drag images here or click to select files</Text>
-      <Text fontSize="sm">
-        Attach as many files as you like, each file should not exceed 3mb
-      </Text>
+      <For
+        each={[
+          {
+            fontsize: "xl",
+            text: "Drag file here or click to select file",
+          },
+          {
+            fontsize: "sm",
+            text: "Attach as many files as you like, each file should not exceed 3mb",
+          },
+        ]}
+      >
+        {({ fontsize, text }, index) => (
+          <Text key={index} fontSize={fontSize}>
+            {text}
+          </Text>
+        )}
+      </For>
     </VStack>
   </HStack>
 </Dropzone>

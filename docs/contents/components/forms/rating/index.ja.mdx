@@ -23,11 +23,9 @@ import { Rating } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Rating size="xs" defaultValue={3} />
-  <Rating size="sm" defaultValue={3} />
-  <Rating size="md" defaultValue={3} />
-  <Rating size="lg" defaultValue={3} />
-  <Rating size="xl" defaultValue={3} />
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => <Rating key={index} size={size} defaultValue={3} />}
+  </For>
 </VStack>
 ```
 
@@ -35,8 +33,11 @@ import { Rating } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Rating colorScheme="purple" defaultValue={3} />
-  <Rating colorScheme="pink" defaultValue={3} />
+  <For each={["purple", "pink"]}>
+    {(colorScheme, index) => (
+      <Rating key={index} colorScheme={colorScheme} defaultValue={3} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -54,9 +55,9 @@ import { Rating } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Rating items={4} />
-  <Rating items={5} />
-  <Rating items={6} />
+  <For each={[4, 5, 6]}>
+    {(items, index) => <Rating key={index} items={items} />}
+  </For>
 </VStack>
 ```
 
@@ -68,9 +69,26 @@ import { Rating } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Rating fractions={2} defaultValue={1.5} />
-  <Rating fractions={3} defaultValue={2.33} />
-  <Rating fractions={4} defaultValue={3.75} />
+  <For
+    each={[
+      {
+        fractions: 2,
+        defaultValue: 1.5,
+      },
+      {
+        fractions: 3,
+        defaultValue: 2.33,
+      },
+      {
+        fractions: 4,
+        defaultValue: 3.75,
+      },
+    ]}
+  >
+    {({ fractions, defaultValue }, index) => (
+      <Rating key={index} fractions={fractions} defaultValue={defaultValue} />
+    )}
+  </For>
 </VStack>
 ```
 

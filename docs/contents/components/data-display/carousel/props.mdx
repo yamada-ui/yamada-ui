@@ -373,7 +373,11 @@ tab: Props
 <PropsCard
   id="carouselindicators-component"
   name="component"
-  type="FC<{ index: number; isSelected: boolean }>"
+  type="FC<{
+  index: number
+  selected: boolean
+  isSelected?: boolean | undefined
+}>"
   description={"The custom carousel indicator to use."}
 />
 

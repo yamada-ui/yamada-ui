@@ -1,29 +1,5 @@
 export const MEMBERS = [
   {
-    name: { en: "Haruki Maeda", ja: "Haruki Maeda" },
-    description: { en: "Engineer based in Tokyo.", ja: "東京のエンジニア。" },
-    discord: { id: "1244260714919497809" },
-    github: {
-      id: "Haru-0001",
-      icon: "https://avatars.githubusercontent.com/u/166319111?v=4",
-      url: "https://github.com/Haru-0001",
-    },
-  },
-  {
-    name: { en: "Ryota Nakazono", ja: "Ryota Nakazono" },
-    description: {
-      en: "Front-end engineer, developing web applications.",
-      ja: "フロントエンドエンジニア。Webアプリケーションの開発を行っている。",
-    },
-    discord: { id: "968897190783246416" },
-    github: {
-      id: "zonoryo17",
-      icon: "https://avatars.githubusercontent.com/u/88890984?v=4",
-      url: "https://github.com/zonoryo17",
-    },
-    x: { url: "https://x.com/zonoryo03" },
-  },
-  {
     name: { en: "Kae Okamura", ja: "Okamura Kae" },
     description: {
       en: "Japanese front-end engineer in South Korea.",
@@ -37,102 +13,18 @@ export const MEMBERS = [
     },
   },
   {
-    name: { en: "Keiju Fujiwara", ja: "Keiju Fujiwara" },
+    name: { en: "Nathan", ja: "Nathan" },
     description: {
-      en: "Back-end engineer currently studying front-end engineering.",
-      ja: "フロント勉強中の普段はバックエンドエンジニア。",
+      en: "Frontend developer based in Canada and a university student.",
+      ja: "カナダ在住のフロントエンド開発者、大学生。",
     },
-    discord: { id: "385445321263677440" },
+    discord: { id: "538103948918259722" },
     github: {
-      id: "fffk10",
-      icon: "https://avatars.githubusercontent.com/u/77735745?v=4",
-      url: "https://github.com/fffk10",
+      id: "nathanlao",
+      icon: "https://avatars.githubusercontent.com/u/75557717?v=4",
+      url: "https://github.com/nathanlao",
     },
-    x: { url: "https://x.com/w_q_r_q" },
-  },
-  {
-    name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
-    description: {
-      en: "A student engineer who enjoys front-end and back-end development.",
-      ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
-    },
-    discord: { id: "1009394043974856704" },
-    github: {
-      id: "kurakke",
-      icon: "https://avatars.githubusercontent.com/u/84614038?v=4",
-      url: "https://github.com/kurakke",
-    },
-    x: { url: "https://x.com/kurakke" },
-  },
-  {
-    name: { en: "Shuta Yanagawa", ja: "Shuta Yanagaawa" },
-    description: {
-      en: "Web front-end engineer. a NIT Student.",
-      ja: "Webフロントエンドエンジニア。高専生。",
-    },
-    discord: { id: "1098389261738328084" },
-    github: {
-      id: "Shunii85",
-      icon: "https://avatars.githubusercontent.com/u/137262383?v=4",
-      url: "https://github.com/Shunii85",
-    },
-    x: { url: "https://x.com/shunii_hack" },
-  },
-  {
-    name: { en: "Hiro Nakanishi", ja: "Hiro Nakanishi" },
-    description: {
-      en: "Security and machine learning engineer.",
-      ja: "セキュリティと機械学習エンジニア。",
-    },
-    discord: { id: "528930667094867978" },
-    github: {
-      id: "quantumshiro",
-      icon: "https://avatars.githubusercontent.com/u/75029815?v=4",
-      url: "https://github.com/quantumshiro",
-    },
-    x: { url: "https://x.com/Curiosi46542428" },
-  },
-  {
-    name: { en: "Hinata Ohyama", ja: "Hinata Ohyama" },
-    description: {
-      en: "Developer of Yamada UI. Front-end engineer.",
-      ja: "Yamada UIの開発者。フロントエンドエンジニア。",
-    },
-    discord: { id: "1110399456588869682" },
-    github: {
-      id: "hinataOhyama",
-      icon: "https://avatars.githubusercontent.com/u/82660649?v=4",
-      url: "https://github.com/hinataOhyama",
-    },
-    x: { url: "https://x.com/hinata_engin" },
-  },
-  {
-    name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
-    description: {
-      en: "Web engineer living in Tokyo.",
-      ja: "東京在住のWebエンジニア。",
-    },
-    discord: { id: "1006851963188686868" },
-    github: {
-      id: "uraaaa24",
-      icon: "https://avatars.githubusercontent.com/u/111425090?v=4",
-      url: "https://github.com/uraaaa24",
-    },
-    x: { url: "https://x.com/__ars____24" },
-  },
-  {
-    name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
-    description: {
-      en: "Former pharmacist turned front-end engineer.",
-      ja: "元薬剤師のフロントエンドエンジニア。",
-    },
-    discord: { id: "413329189635227650" },
-    github: {
-      id: "odendayoko",
-      icon: "https://avatars.githubusercontent.com/u/128268777?v=4",
-      url: "https://github.com/odendayoko",
-    },
-    x: { url: "https://x.com/odendayoko" },
+    x: { url: "https://x.com/nnnnlololo" },
   },
   {
     name: { en: "Takaaki Chida", ja: "Takaaki Chida" },
@@ -147,59 +39,6 @@ export const MEMBERS = [
       url: "https://github.com/chida09",
     },
     x: { url: "https://x.com/_c0909" },
-  },
-  {
-    name: { en: "Haru", ja: "Haru" },
-    description: {
-      en: "University student studying programming and design.",
-      ja: "プログラミングとデザインを学んでいる大学生。",
-    },
-    discord: { id: "1063410330153259078" },
-    github: {
-      id: "haru-036",
-      icon: "https://avatars.githubusercontent.com/u/105186692?v=4",
-      url: "https://github.com/haru-036",
-    },
-    x: { url: "https://x.com/haru_u_de" },
-  },
-  {
-    name: { en: "neginasu", ja: "neginasu" },
-    description: {
-      en: "Front-end engineer. Dream to be a cool front-end engineer sister.",
-      ja: "フロントエンドエンジニア。かっこいいフロントエンドエンジニアのお姉さんになることが夢です。",
-    },
-    discord: { id: "1100973371912638505" },
-    github: {
-      id: "neginasu",
-      icon: "https://avatars.githubusercontent.com/u/129603409?v=4",
-      url: "https://github.com/neginasu",
-    },
-    x: { url: "https://x.com/neginasu_grid" },
-  },
-  {
-    name: { en: "Taisei Miyazaki", ja: "Taisei Miyazaki" },
-    description: { en: "Web/Mobile Developer.", ja: "Web/Mobileエンジニア。" },
-    discord: { id: "1258340374062301288" },
-    github: {
-      id: "taiseiiiii",
-      icon: "https://avatars.githubusercontent.com/u/66340131?v=4",
-      url: "https://github.com/taiseiiiii",
-    },
-    x: { url: "https://x.com/zaki_ise" },
-  },
-  {
-    name: { en: "Taiki Nakamura", ja: "Nakamura Taiki" },
-    description: {
-      en: "Junior Blockchain & Frontend Engineer.",
-      ja: "ブロックチェーンとフロントエンドエンジニア初心者大学生。",
-    },
-    discord: { id: "554506041409142784" },
-    github: {
-      id: "0xtkey256",
-      icon: "https://avatars.githubusercontent.com/u/94577768?v=4",
-      url: "https://github.com/0xtkey256",
-    },
-    x: { url: "https://x.com/calcat256" },
   },
   {
     name: { en: "Mingzhe Yang", ja: "Mingzhe Yang" },
@@ -230,17 +69,98 @@ export const MEMBERS = [
     x: { url: "https://x.com/404_Bad_Gateway" },
   },
   {
-    name: { en: "Nathan", ja: "Nathan" },
-    description: {
-      en: "Frontend developer based in Canada and a university student.",
-      ja: "カナダ在住のフロントエンド開発者、大学生。",
-    },
-    discord: { id: "538103948918259722" },
+    name: { en: "Taisei Miyazaki", ja: "Taisei Miyazaki" },
+    description: { en: "Web/Mobile Developer.", ja: "Web/Mobileエンジニア。" },
+    discord: { id: "1258340374062301288" },
     github: {
-      id: "nathanlao",
-      icon: "https://avatars.githubusercontent.com/u/75557717?v=4",
-      url: "https://github.com/nathanlao",
+      id: "taiseiiiii",
+      icon: "https://avatars.githubusercontent.com/u/66340131?v=4",
+      url: "https://github.com/taiseiiiii",
     },
-    x: { url: "https://x.com/nnnnlololo" },
+    x: { url: "https://x.com/zaki_ise" },
+  },
+  {
+    name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
+    description: {
+      en: "Web engineer living in Tokyo.",
+      ja: "東京在住のWebエンジニア。",
+    },
+    discord: { id: "1006851963188686868" },
+    github: {
+      id: "uraaaa24",
+      icon: "https://avatars.githubusercontent.com/u/111425090?v=4",
+      url: "https://github.com/uraaaa24",
+    },
+    x: { url: "https://x.com/__ars____24" },
+  },
+  {
+    name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
+    description: {
+      en: "A student engineer who enjoys front-end and back-end development.",
+      ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
+    },
+    discord: { id: "1009394043974856704" },
+    github: {
+      id: "kurakke",
+      icon: "https://avatars.githubusercontent.com/u/84614038?v=4",
+      url: "https://github.com/kurakke",
+    },
+    x: { url: "https://x.com/kurakke" },
+  },
+  {
+    name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
+    description: {
+      en: "Former pharmacist turned front-end engineer.",
+      ja: "元薬剤師のフロントエンドエンジニア。",
+    },
+    discord: { id: "413329189635227650" },
+    github: {
+      id: "odendayoko",
+      icon: "https://avatars.githubusercontent.com/u/128268777?v=4",
+      url: "https://github.com/odendayoko",
+    },
+    x: { url: "https://x.com/odendayoko" },
+  },
+  {
+    name: { en: "Shuta Yanagawa", ja: "Shuta Yanagaawa" },
+    description: {
+      en: "Web front-end engineer. a NIT Student.",
+      ja: "Webフロントエンドエンジニア。高専生。",
+    },
+    discord: { id: "1098389261738328084" },
+    github: {
+      id: "Shunii85",
+      icon: "https://avatars.githubusercontent.com/u/137262383?v=4",
+      url: "https://github.com/Shunii85",
+    },
+    x: { url: "https://x.com/shunii_hack" },
+  },
+  {
+    name: { en: "Hiro Nakanishi", ja: "Hiro Nakanishi" },
+    description: {
+      en: "Security and machine learning engineer.",
+      ja: "セキュリティと機械学習エンジニア。",
+    },
+    discord: { id: "528930667094867978" },
+    github: {
+      id: "quantumshiro",
+      icon: "https://avatars.githubusercontent.com/u/75029815?v=4",
+      url: "https://github.com/quantumshiro",
+    },
+    x: { url: "https://x.com/Curiosi46542428" },
+  },
+  {
+    name: { en: "Haru", ja: "Haru" },
+    description: {
+      en: "University student studying programming and design.",
+      ja: "プログラミングとデザインを学んでいる大学生。",
+    },
+    discord: { id: "1063410330153259078" },
+    github: {
+      id: "haru-036",
+      icon: "https://avatars.githubusercontent.com/u/105186692?v=4",
+      url: "https://github.com/haru-036",
+    },
+    x: { url: "https://x.com/haru_u_de" },
   },
 ]

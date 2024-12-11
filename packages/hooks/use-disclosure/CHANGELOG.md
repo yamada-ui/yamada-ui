@@ -1,5 +1,14 @@
 # @yamada-ui/use-disclosure
 
+## 1.1.2
+
+### Patch Changes
+
+- [#3807](https://github.com/yamada-ui/yamada-ui/pull/3807) [`b834ef3`](https://github.com/yamada-ui/yamada-ui/commit/b834ef351db0c66ddf45436440b90466add00b52) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+
 ## 1.1.1
 
 ### Patch Changes

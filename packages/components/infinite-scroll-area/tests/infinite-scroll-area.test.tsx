@@ -1,7 +1,6 @@
 import type { InfiniteScrollAreaProps } from "../src"
 import { a11y, fireEvent, render, waitFor } from "@yamada-ui/test"
 import { useRef, useState } from "react"
-import { Fragment } from "react/jsx-runtime"
 import { InfiniteScrollArea } from "../src"
 
 describe("<InfiniteScrollArea />", () => {

@@ -331,10 +331,10 @@ export const nestedResizable: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Resizable borderWidth="1px" h="md" isDisabled rounded="md">
+      <Resizable borderWidth="1px" disabled h="md" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
         <ResizableTrigger />
@@ -349,7 +349,7 @@ export const isDisabled: Story = () => {
       <Resizable borderWidth="1px" h="md" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger isDisabled />
+        <ResizableTrigger disabled />
 
         <ResizableItem as={Center}>Two</ResizableItem>
 

@@ -56,6 +56,13 @@
     "isNumeric": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `numeric` instead.",
+      "description": "Aligns the cell content to the right.",
+      "required": false
+    },
+    "numeric": {
+      "type": "boolean",
+      "defaultValue": false,
       "description": "Aligns the cell content to the right.",
       "required": false
     }
@@ -63,6 +70,13 @@
   "TableFoot": {},
   "Th": {
     "isNumeric": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `numeric` instead.",
+      "description": "Aligns the cell content to the right.",
+      "required": false
+    },
+    "numeric": {
       "type": "boolean",
       "defaultValue": false,
       "description": "Aligns the cell content to the right.",

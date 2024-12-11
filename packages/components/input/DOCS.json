@@ -66,16 +66,23 @@
     }
   },
   "InputElement": {
+    "clickable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the element clickable.",
+      "required": false
+    },
     "isClick": {
       "type": "boolean",
       "defaultValue": false,
-      "deprecated": "Use `isClickable` instead.",
+      "deprecated": "Use `clickable` instead.",
       "description": "If `true`, the element clickable.",
       "required": false
     },
     "isClickable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `clickable` instead.",
       "description": "If `true`, the element clickable.",
       "required": false
     },

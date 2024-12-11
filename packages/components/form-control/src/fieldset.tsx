@@ -22,6 +22,12 @@ import {
 
 interface FieldsetOptions {
   /**
+   * If `true`, the fieldset will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * The fieldset error message to use.
    */
   errorMessage?: ReactNode
@@ -30,39 +36,73 @@ interface FieldsetOptions {
    */
   helperMessage?: ReactNode
   /**
+   * If `true`, the fieldset will be invalid.
+   *
+   * @default false
+   */
+  invalid?: boolean
+  /**
    * If `true`, the fieldset will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the fieldset will be invalid.
    *
    * @default false
+   *
+   * @deprecated Use `invalid` instead.
    */
   isInvalid?: boolean
   /**
    * If `true`, the fieldset will be readonly.
    *
    * @default false
+   *
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
   /**
    * If `true`, switch between helper message and error message using isInvalid.
    *
    * @default true
+   *
+   * @deprecated Use `replace` instead.
    */
   isReplace?: boolean
   /**
    * If `true`, the fieldset will be required.
    *
    * @default false
+   *
+   * @deprecated Use `required` instead.
    */
   isRequired?: boolean
   /**
    * The fieldset legend to use.
    */
   legend?: ReactNode
+  /**
+   * If `true`, the fieldset will be readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
+  /**
+   * If `true`, switch between helper message and error message using isInvalid.
+   *
+   * @default true
+   */
+  replace?: boolean
+  /**
+   * If `true`, the fieldset will be required.
+   *
+   * @default false
+   */
+  required?: boolean
   /**
    * Props the error message component.
    */
@@ -91,11 +131,13 @@ export interface FieldsetProps
 export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   ({ id, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Fieldset", props)
-    const {
+    let {
       className,
       children,
+      disabled,
       errorMessage,
       helperMessage,
+      invalid,
       isDisabled = false,
       isInvalid = false,
       isReadOnly = false,
@@ -103,6 +145,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
       isRequired = false,
       legend,
       optionalIndicator,
+      readOnly,
+      replace,
+      required,
       requiredIndicator,
       errorMessageProps,
       helperMessageProps,
@@ -114,7 +159,13 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
 
     id ??= uuid
 
-    const [isFocused, setFocused] = useState<boolean>(false)
+    disabled ??= isDisabled
+    invalid ??= isInvalid
+    readOnly ??= isReadOnly
+    replace ??= isReplace
+    required ??= isRequired
+
+    const [focused, setFocused] = useState<boolean>(false)
 
     const validChildren = getValidChildren(children)
 
@@ -131,12 +182,12 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
     return (
       <FormControlContextProvider
         value={{
-          isDisabled,
-          isFocused,
-          isInvalid,
-          isReadOnly,
-          isReplace,
-          isRequired,
+          disabled,
+          focused,
+          invalid,
+          readOnly,
+          replace,
+          required,
           onBlur: () => setFocused(false),
           onFocus: () => setFocused(true),
         }}
@@ -145,11 +196,11 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
           <ui.fieldset
             ref={ref}
             className={cx("ui-fieldset", className)}
-            data-disabled={dataAttr(isDisabled)}
-            data-focus={dataAttr(isFocused)}
-            data-invalid={dataAttr(isInvalid)}
-            data-readonly={dataAttr(isReadOnly)}
-            disabled={isDisabled}
+            data-disabled={dataAttr(disabled)}
+            data-focus={dataAttr(focused)}
+            data-invalid={dataAttr(invalid)}
+            data-readonly={dataAttr(readOnly)}
+            disabled={disabled}
             __css={css}
             {...rest}
           >
@@ -160,10 +211,10 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
                 {...legendProps}
               >
                 {legend}
-                {(!isReplace || !isInvalid) && helperMessage ? (
+                {(!replace || !invalid) && helperMessage ? (
                   <VisuallyHidden>{helperMessage}</VisuallyHidden>
                 ) : null}
-                {isInvalid && errorMessage ? (
+                {invalid && errorMessage ? (
                   <VisuallyHidden>{errorMessage}</VisuallyHidden>
                 ) : null}
               </Legend>
@@ -188,8 +239,12 @@ Fieldset.displayName = "Fieldset"
 Fieldset.__ui__ = "Fieldset"
 
 interface LegendOptions {
+  /**
+   * @deprecated Use `required` instead.
+   */
   isRequired?: boolean
   optionalIndicator?: ReactNode
+  required?: boolean
   requiredIndicator?: ReactNode
 }
 
@@ -202,32 +257,32 @@ export const Legend = forwardRef<LegendProps, "legend">(
       children,
       isRequired: isRequiredProp,
       optionalIndicator = null,
+      required: requiredProp,
       requiredIndicator = null,
       ...rest
     },
     ref,
   ) => {
-    const { isDisabled, isFocused, isInvalid, isReadOnly, isRequired } =
+    const { disabled, focused, invalid, readOnly, required } =
       useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
 
-    isRequiredProp ??= isRequired
-
+    requiredProp ??= isRequiredProp ?? required
     const css: CSSUIObject = { ...styles.legend }
 
     return (
       <ui.legend
         ref={ref}
         className={cx("ui-fieldset__legend", className)}
-        data-disabled={dataAttr(isDisabled)}
-        data-focus={dataAttr(isFocused)}
-        data-invalid={dataAttr(isInvalid)}
-        data-readonly={dataAttr(isReadOnly)}
+        data-disabled={dataAttr(disabled)}
+        data-focus={dataAttr(focused)}
+        data-invalid={dataAttr(invalid)}
+        data-readonly={dataAttr(readOnly)}
         __css={css}
         {...rest}
       >
         {children}
-        {isRequiredProp ? (
+        {requiredProp ? (
           requiredIndicator ? (
             <RequiredIndicator>{requiredIndicator}</RequiredIndicator>
           ) : (

@@ -297,6 +297,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },
@@ -419,6 +420,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },
@@ -557,6 +559,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },

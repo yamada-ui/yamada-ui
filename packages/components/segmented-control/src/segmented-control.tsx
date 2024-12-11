@@ -240,8 +240,8 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
         },
         ref = null,
       ) => {
-        const disabledState = props.disabled ?? isDisabledProp ?? disabled
-        const readOnlyState = props.readOnly ?? isReadOnlyProp ?? readOnly
+        const trulyDisabled = props.disabled ?? isDisabledProp ?? disabled
+        const trulyReadOnly = props.readOnly ?? isReadOnlyProp ?? readOnly
         const checked = props.value === value
 
         return {
@@ -261,15 +261,15 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             whiteSpace: "nowrap",
             width: "1px",
           },
-          "aria-disabled": ariaAttr(disabledState),
+          "aria-disabled": ariaAttr(trulyDisabled),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(index === focusedIndex),
-          "data-readonly": dataAttr(readOnlyState),
+          "data-readonly": dataAttr(trulyReadOnly),
           checked,
-          disabled: disabledState || readOnlyState,
-          readOnly: readOnlyState,
+          disabled: trulyDisabled || trulyReadOnly,
+          readOnly: trulyReadOnly,
           onChange: handlerAll(props.onChange, (ev) =>
-            !disabledState && !readOnlyState
+            !trulyDisabled && !trulyReadOnly
               ? onChange(ev as ChangeEvent<HTMLInputElement>)
               : {},
           ),
@@ -298,24 +298,24 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
         },
         ref = null,
       ) => {
-        const disabledState = props.disabled ?? isDisabledProp ?? disabled
-        const readOnlyState = props.readOnly ?? isReadOnlyProp ?? readOnly
+        const trulyDisabled = props.disabled ?? isDisabledProp ?? disabled
+        const trulyReadOnly = props.readOnly ?? isReadOnlyProp ?? readOnly
         const checked = props.value === value
         const focused = index === focusedIndex
 
         return {
           ...props,
           ref,
-          "aria-disabled": ariaAttr(disabledState),
+          "aria-disabled": ariaAttr(trulyDisabled),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(focused),
           "data-focus-visible": dataAttr(focused && focusVisible),
-          "data-readonly": dataAttr(readOnlyState),
+          "data-readonly": dataAttr(trulyReadOnly),
           onFocus: handlerAll(
             props.onFocus as unknown as FocusEventHandler<HTMLLabelElement>,
-            () => onFocus(index, disabledState || readOnlyState || false),
+            () => onFocus(index, trulyDisabled || trulyReadOnly || false),
           ),
-          ...(disabledState || readOnlyState
+          ...(trulyDisabled || trulyReadOnly
             ? {
                 _active: {},
                 _focus: {},

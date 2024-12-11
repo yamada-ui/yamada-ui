@@ -94,11 +94,13 @@
     },
     "isStepper": {
       "type": "boolean",
+      "deprecated": "Use `stepper` instead.",
       "description": "If `true`, display the addon for the number input.",
       "required": false
     },
     "isValidCharacter": {
       "type": "(value: string) => boolean",
+      "deprecated": "Use `validCharacter` instead.",
       "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
@@ -150,6 +152,16 @@
       "type": "number",
       "defaultValue": "1",
       "description": "The step used to increment or decrement the value.",
+      "required": false
+    },
+    "stepper": {
+      "type": "boolean",
+      "description": "If `true`, display the addon for the number input.",
+      "required": false
+    },
+    "validCharacter": {
+      "type": "(value: string) => boolean",
+      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
     "value": {
@@ -232,6 +244,7 @@
     },
     "isValidCharacter": {
       "type": "(value: string) => boolean",
+      "deprecated": "Use `validCharacter` instead.",
       "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
@@ -298,6 +311,11 @@
       "type": "number",
       "defaultValue": "1",
       "description": "The step used to increment or decrement the value.",
+      "required": false
+    },
+    "validCharacter": {
+      "type": "(value: string) => boolean",
+      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
     "value": {

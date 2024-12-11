@@ -11271,7 +11271,7 @@
   },
   {
     "type": "page",
-    "description": "`Motion`は、`framer-motion`にYamada UIのスタイルシステムを拡張した便利なコンポーネントです。",
+    "description": "`Motion`は、`motion`にYamada UIのスタイルシステムを拡張した便利なコンポーネントです。",
     "hierarchy": { "lv1": "Motion" },
     "slug": "/components/other/motion",
     "title": "Motion"

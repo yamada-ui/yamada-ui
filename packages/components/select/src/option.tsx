@@ -18,7 +18,7 @@ export interface OptionProps extends UseSelectOptionProps, OptionOptions {}
 export const Option = forwardRef<OptionProps, "div">(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useSelectContext()
-    const { children, customIcon, isSelected, getOptionProps } =
+    const { children, customIcon, selected, getOptionProps } =
       useSelectOption(rest)
 
     icon ??= customIcon
@@ -44,7 +44,7 @@ export const Option = forwardRef<OptionProps, "div">(
         {...getOptionProps({}, ref)}
       >
         {icon !== null ? (
-          <OptionIcon opacity={isSelected ? 1 : 0}>
+          <OptionIcon opacity={selected ? 1 : 0}>
             {icon || <CheckIcon />}
           </OptionIcon>
         ) : null}

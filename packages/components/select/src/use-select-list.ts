@@ -10,7 +10,7 @@ export const useSelectList = () => {
   const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
-  const isMulti = isArray(value)
+  const multi = isArray(value)
 
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
@@ -28,15 +28,15 @@ export const useSelectList = () => {
     const childTop = child.offsetTop
     const childBottom = childTop + childHeight
 
-    const isInView = viewTop <= childTop && childBottom <= viewBottom
+    const inView = viewTop <= childTop && childBottom <= viewBottom
 
-    const isScrollBottom = beforeFocusedIndex.current < selectedValue.index
+    const scrollBottom = beforeFocusedIndex.current < selectedValue.index
 
-    if (!isInView) {
+    if (!inView) {
       if (childBottom <= parentHeight) {
         listRef.current.scrollTo({ top: 0 })
       } else {
-        if (!isScrollBottom) {
+        if (!scrollBottom) {
           listRef.current.scrollTo({ top: childTop + 1 })
         } else {
           listRef.current.scrollTo({ top: childBottom - parentHeight })
@@ -50,11 +50,11 @@ export const useSelectList = () => {
   const getContainerProps: PropGetter<MotionProps, MotionProps> = useCallback(
     (props = {}, ref = null) => ({
       ref,
-      "aria-multiselectable": ariaAttr(isMulti),
+      "aria-multiselectable": ariaAttr(multi),
       role: "listbox",
       ...props,
     }),
-    [isMulti],
+    [multi],
   )
 
   const getListProps: PropGetter = useCallback(

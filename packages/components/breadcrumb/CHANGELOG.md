@@ -1,5 +1,19 @@
 # @yamada-ui/breadcrumb
 
+## 1.4.0
+
+### Minor Changes
+
+- [#3802](https://github.com/yamada-ui/yamada-ui/pull/3802) [`44c4913`](https://github.com/yamada-ui/yamada-ui/commit/44c491315b08589c50133f59f62a60254dd10cff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `separatorProps` to `Breadcrumb` and `BreadcrumbItem`.
+
+### Patch Changes
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/icon@1.1.16
+  - @yamada-ui/use-value@1.1.33
+
 ## 1.3.20
 
 ### Patch Changes

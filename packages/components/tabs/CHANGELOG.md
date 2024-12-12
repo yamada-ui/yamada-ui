@@ -1,5 +1,20 @@
 # @yamada-ui/tabs
 
+## 1.0.49
+
+### Patch Changes
+
+- [#3828](https://github.com/yamada-ui/yamada-ui/pull/3828) [`9880f3a`](https://github.com/yamada-ui/yamada-ui/commit/9880f3a4546b9c819b93d3c50f2532a24c81872a) Thanks [@Shunii85](https://github.com/Shunii85)! - Fixed `is`-prefix properties not being used
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`b834ef3`](https://github.com/yamada-ui/yamada-ui/commit/b834ef351db0c66ddf45436440b90466add00b52), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/use-disclosure@1.1.2
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/ripple@1.0.47
+  - @yamada-ui/use-clickable@1.2.16
+  - @yamada-ui/use-controllable-state@1.0.25
+  - @yamada-ui/use-descendant@1.0.27
+
 ## 1.0.48
 
 ### Patch Changes

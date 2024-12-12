@@ -1,5 +1,15 @@
 # @yamada-ui/theme
 
+## 1.20.1
+
+### Patch Changes
+
+- [#3661](https://github.com/yamada-ui/yamada-ui/pull/3661) [`2990027`](https://github.com/yamada-ui/yamada-ui/commit/2990027ce0054febcf0b1eb44e2386e231fff7a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Reformat `PaginationItem` properties structure.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+
 ## 1.20.0
 
 ### Minor Changes

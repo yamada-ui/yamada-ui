@@ -22,6 +22,11 @@
       "description": "The direction of the resizable.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the resizable trigger will be disabled.",
+      "required": false
+    },
     "groupProps": {
       "type": "ResizableGroupProps",
       "description": "Props for resizable component.",
@@ -29,6 +34,7 @@
     },
     "isDisabled": {
       "type": "boolean",
+      "deprecated": "Use `Disabled` instead.",
       "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     },
@@ -162,6 +168,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     }

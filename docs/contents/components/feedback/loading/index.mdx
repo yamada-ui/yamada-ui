@@ -26,13 +26,21 @@ import { Loading } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Loading variant="oval" fontSize="3xl" color="red.500" />
-  <Loading variant="grid" fontSize="3xl" color="orange.500" />
-  <Loading variant="audio" fontSize="3xl" color="yellow.500" />
-  <Loading variant="dots" fontSize="3xl" color="green.500" />
-  <Loading variant="puff" fontSize="3xl" color="teal.500" />
-  <Loading variant="rings" fontSize="3xl" color="blue.500" />
-  <Loading variant="circles" fontSize="3xl" color="cyan.500" />
+  <For
+    each={[
+      { variant: "oval", color: "red" },
+      { variant: "grid", color: "orange" },
+      { variant: "audio", color: "yellow" },
+      { variant: "dots", color: "green" },
+      { variant: "puff", color: "teal" },
+      { variant: "rings", color: "blue" },
+      { variant: "circles", color: "cyan" },
+    ]}
+  >
+    {({ variant, color }) => (
+      <Loading variant={variant} fontSize="3xl" color={`${color}.500`} />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -40,12 +48,20 @@ import { Loading } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Loading variant="oval" fontSize="lg" color="red.500" />
-  <Loading variant="grid" fontSize="xl" color="orange.500" />
-  <Loading variant="audio" fontSize="2xl" color="yellow.500" />
-  <Loading variant="dots" fontSize="3xl" color="green.500" />
-  <Loading variant="puff" fontSize="4xl" color="teal.500" />
-  <Loading variant="rings" fontSize="5xl" color="blue.500" />
-  <Loading variant="circles" fontSize="6xl" color="cyan.500" />
+  <For
+    each={[
+      { variant: "oval", fontSize: "lg", color: "red" },
+      { variant: "grid", fontSize: "xl", color: "orange" },
+      { variant: "audio", fontSize: "2xl", color: "yellow" },
+      { variant: "dots", fontSize: "3xl", color: "green" },
+      { variant: "puff", fontSize: "4xl", color: "teal" },
+      { variant: "rings", fontSize: "5xl", color: "blue" },
+      { variant: "circles", fontSize: "6xl", color: "cyan" },
+    ]}
+  >
+    {({ variant, fontSize, color }) => (
+      <Loading variant={variant} fontSize={fontSize} color={`${color}.500`} />
+    )}
+  </For>
 </Wrap>
 ```

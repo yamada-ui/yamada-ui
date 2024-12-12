@@ -1,5 +1,17 @@
 # @yamada-ui/toggle
 
+## 1.0.31
+
+### Patch Changes
+
+- [#3630](https://github.com/yamada-ui/yamada-ui/pull/3630) [`878d8a1`](https://github.com/yamada-ui/yamada-ui/commit/878d8a14bcac2b132bc683625962c35c4900d57d) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/ripple@1.0.47
+  - @yamada-ui/use-controllable-state@1.0.25
+
 ## 1.0.30
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-local-storage",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Yamada UI useLocalStorage custom hook",
   "keywords": [
     "use-local-storage"

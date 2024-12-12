@@ -2,7 +2,7 @@ import type { StyledOptions } from "@yamada-ui/core"
 import type { ForwardRefExoticComponent } from "react"
 import type { MotionAs, MotionComponents, MotionFactory } from "./motion.types"
 import { styled } from "@yamada-ui/core"
-import { motion as _motion } from "framer-motion"
+import { motion as _motion } from "motion/react"
 
 interface Factory extends MotionFactory, MotionComponents {}
 

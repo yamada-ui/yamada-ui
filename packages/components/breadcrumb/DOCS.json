@@ -45,6 +45,11 @@
       "defaultValue": "'/'",
       "description": "The visual separator between each breadcrumb item.",
       "required": false
+    },
+    "separatorProps": {
+      "type": "BreadcrumbSeparatorProps",
+      "description": "Props for separator element.",
+      "required": false
     }
   },
   "BreadcrumbLink": {
@@ -93,6 +98,11 @@
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<any, string | JSXElementConstructor<any>>",
       "defaultValue": "'/'",
       "description": "The visual separator between each breadcrumb item.",
+      "required": false
+    },
+    "separatorProps": {
+      "type": "BreadcrumbSeparatorProps",
+      "description": "Props for separator element.",
       "required": false
     },
     "startBoundaries": {

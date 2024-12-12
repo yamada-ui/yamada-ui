@@ -1,10 +1,6 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type {
-  HTMLMotionProps,
-  MotionConfigProps,
-  Variants,
-} from "framer-motion"
+import type { HTMLMotionProps, MotionConfigProps, Variants } from "motion/react"
 import type { FC, ForwardedRef, ReactNode, RefObject } from "react"
 import type { HTMLUIProps } from "./components"
 import type {
@@ -18,6 +14,8 @@ import type {
 } from "./css"
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
+
+export type TextDirection = "ltr" | "rtl"
 
 export type BreakpointDirection = "down" | "up"
 
@@ -67,6 +65,18 @@ export type LoadingVariant =
 
 export type LoadingComponent = "background" | "custom" | "page" | "screen"
 
+export type StatusValue = "error" | "info" | "success" | "warning"
+
+export type Statuses = {
+  [key in StatusValue]?: { colorScheme?: Theme["colorSchemes"] }
+}
+
+export type AlertStatusValue = "loading" | StatusValue
+
+export type AlertStatuses = {
+  [key in AlertStatusValue]?: { colorScheme?: Theme["colorSchemes"]; icon?: FC }
+}
+
 export type NoticePlacement =
   | "bottom"
   | "bottom-left"
@@ -74,12 +84,6 @@ export type NoticePlacement =
   | "top"
   | "top-left"
   | "top-right"
-
-export type AlertStatuses = {
-  [key in AlertStatus]?: { colorScheme?: Theme["colorSchemes"]; icon?: FC }
-}
-
-export type AlertStatus = "error" | "info" | "loading" | "success" | "warning"
 
 export interface NoticeComponentProps extends NoticeConfigOptions {
   onClose: () => void
@@ -145,7 +149,7 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatus
+  status?: AlertStatusValue
   /**
    * The title of the notice.
    */
@@ -233,7 +237,7 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatus
+  status?: AlertStatusValue
   /**
    * The title of the snack.
    */
@@ -371,9 +375,17 @@ export interface ThemeConfig {
      *
      * @see Docs https://day.js.org/docs/en/i18n/instance-locale
      * @default 'en'
+     *
+     * @deprecated Use `locale` instead.
      */
     locale?: string
   }
+  /**
+   * The text direction to apply to the application.
+   *
+   * @default 'ltr'
+   */
+  direction?: TextDirection
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -421,13 +433,19 @@ export interface ThemeConfig {
     screen?: LoadingConfigOptions
   }
   /**
-   * The config of the `framer-motion`.
+   * The locale to apply to the application.
+   *
+   * @default 'en-US'
+   */
+  locale?: string
+  /**
+   * The config of the `motion`.
    */
   motion?: {
     /**
-     * Set configuration options for `framer-motion`.
+     * Set configuration options for `motion`.
      *
-     * @see Docs https://www.framer.com/motion/motion-config/
+     * @see Docs https://motion.dev/docs/react-motion-config
      */
     config?: Omit<MotionConfigProps, "children">
   }
@@ -464,7 +482,7 @@ export interface ThemeConfig {
      * The variants of the notice.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Docs https://www.framer.com/motion/animation/#variants
+     * @see Docs https://motion.dev/docs/react-animation#variants
      */
     variants?: Variants
     /**
@@ -506,9 +524,18 @@ export interface ThemeConfig {
      * The variants of the snack.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Docs https://www.framer.com/motion/animation/#variants
+     * @see Docs https://motion.dev/docs/react-animation#variants
      */
     variants?: Variants
+  }
+  /**
+   * The config of the status.
+   */
+  status?: {
+    /**
+     * The statuses of the status.
+     */
+    statuses?: Statuses
   }
   /**
    * The config of the theme.

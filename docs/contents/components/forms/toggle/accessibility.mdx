@@ -5,13 +5,12 @@ package_name: "@yamada-ui/toggle"
 order: 3
 with_description: true
 tab: Accessibility
-label: Updated
 ---
 
 When using only icons in `Toggle`, set `aria-label` for the `Toggle`.
 
 ```tsx live=false
-<Toggle icon={<Bold />} aria-label="Toggle bold" />
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
 ```
 
 Setting `aria-label` on `ToggleGroup` will make it readable by screen readers.This allows you to convey the overall purpose or function of the group to screen reader users.
@@ -25,11 +24,11 @@ return (
     onChange={setValue}
     aria-label="Text formatting options"
   >
-    <Toggle value="bold" icon={<Bold />} aria-label="Toggle bold" />
-    <Toggle value="italic" icon={<Italic />} aria-label="Toggle italic" />
+    <Toggle value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+    <Toggle value="italic" icon={<ItalicIcon />} aria-label="Toggle italic" />
     <Toggle
       value="underline"
-      icon={<Underline />}
+      icon={<UnderlineIcon />}
       aria-label="Toggle underline"
     />
   </ToggleGroup>

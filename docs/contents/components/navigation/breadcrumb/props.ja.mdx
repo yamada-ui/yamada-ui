@@ -22,6 +22,14 @@ order: 1
 ### BreadcrumbItemProps
 
 <PropsCard
+  id="breadcrumbitem-currentpage"
+  name="currentPage"
+  type="boolean"
+  description={"If `true`, change to span element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="breadcrumbitem-gap"
   name="gap"
   type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "3xl" | "4xl" | ... 100 more ... | "normal">'
@@ -34,12 +42,22 @@ order: 1
   name="isCurrentPage"
   type="boolean"
   description={"If `true`, change to span element."}
+  deprecated={"Use `currentPage` instead."}
   defaultValue={"false"}
 />
 
 <PropsCard
   id="breadcrumbitem-islastchild"
   name="isLastChild"
+  type="boolean"
+  description={"If `true`, not show separator."}
+  deprecated={"Use `lastChild` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="breadcrumbitem-lastchild"
+  name="lastChild"
   type="boolean"
   description={"If `true`, not show separator."}
   defaultValue={"false"}
@@ -55,13 +73,29 @@ order: 1
   defaultValue={"'/'"}
 />
 
+<PropsCard
+  id="breadcrumbitem-separatorprops"
+  name="separatorProps"
+  type="BreadcrumbSeparatorProps"
+  description={"Props for separator element."}
+/>
+
 ### BreadcrumbLinkProps
+
+<PropsCard
+  id="breadcrumblink-currentpage"
+  name="currentPage"
+  type="boolean"
+  description={"If `true`, change to span element."}
+  defaultValue={"false"}
+/>
 
 <PropsCard
   id="breadcrumblink-iscurrentpage"
   name="isCurrentPage"
   type="boolean"
   description={"If `true`, change to span element."}
+  deprecated={"Use `currentPage` instead."}
   defaultValue={"false"}
 />
 
@@ -111,6 +145,13 @@ order: 1
   | ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The visual separator between each breadcrumb item."}
   defaultValue={"'/'"}
+/>
+
+<PropsCard
+  id="breadcrumb-separatorprops"
+  name="separatorProps"
+  type="BreadcrumbSeparatorProps"
+  description={"Props for separator element."}
 />
 
 <PropsCard

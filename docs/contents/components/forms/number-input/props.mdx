@@ -152,6 +152,7 @@ tab: Props
   name="isStepper"
   type="boolean"
   description={"If `true`, display the addon for the number input."}
+  deprecated={"Use `stepper` instead."}
 />
 
 <PropsCard
@@ -159,8 +160,9 @@ tab: Props
   name="isValidCharacter"
   type="(value: string) => boolean"
   description={
-    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+-.]$/."
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
   }
+  deprecated={"Use `validCharacter` instead."}
 />
 
 <PropsCard
@@ -237,6 +239,22 @@ tab: Props
   type="number"
   description={"The step used to increment or decrement the value."}
   defaultValue={"1"}
+/>
+
+<PropsCard
+  id="numberinput-stepper"
+  name="stepper"
+  type="boolean"
+  description={"If `true`, display the addon for the number input."}
+/>
+
+<PropsCard
+  id="numberinput-validcharacter"
+  name="validCharacter"
+  type="(value: string) => boolean"
+  description={
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
+  }
 />
 
 <PropsCard
@@ -372,8 +390,9 @@ tab: Props
   name="isValidCharacter"
   type="(value: string) => boolean"
   description={
-    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+-.]$/."
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
   }
+  deprecated={"Use `validCharacter` instead."}
 />
 
 <PropsCard
@@ -475,6 +494,15 @@ tab: Props
   type="number"
   description={"The step used to increment or decrement the value."}
   defaultValue={"1"}
+/>
+
+<PropsCard
+  id="usenumberinput-validcharacter"
+  name="validCharacter"
+  type="(value: string) => boolean"
+  description={
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
+  }
 />
 
 <PropsCard

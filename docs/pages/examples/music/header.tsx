@@ -10,20 +10,20 @@ import type {
   StackProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Globe, Mic } from "@yamada-ui/lucide"
+import { GlobeIcon, MicIcon } from "@yamada-ui/lucide"
 import {
   Button,
   HStack,
   isUndefined,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   transparentizeColor,
   useColorMode,
   useDisclosure,
@@ -155,12 +155,12 @@ const EDIT_MENU_ITEMS: MenuItem[] = [
     items: [
       {
         flexDirection: "row-reverse",
-        icon: <Mic fontSize="1.5em" />,
+        icon: <MicIcon fontSize="1.5em" />,
         label: "Smart Dictation…",
       },
       {
         flexDirection: "row-reverse",
-        icon: <Globe fontSize="1.5em" />,
+        icon: <GlobeIcon fontSize="1.5em" />,
         label: "Emoji & Symbols…",
       },
     ],
@@ -249,7 +249,7 @@ const ControlMenu: FC<ControlMenuProps> = memo(
         <MenuList>
           {items.map(({ items, ...rest }, index) => (
             <Fragment key={index}>
-              {index ? <MenuDivider /> : null}
+              {index ? <MenuSeparator /> : null}
 
               <ControlMenuGroup
                 {...(rest as Merge<MenuGroupProps, MenuOptionGroupProps>)}

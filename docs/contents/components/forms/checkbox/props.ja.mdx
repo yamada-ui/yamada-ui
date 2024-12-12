@@ -9,63 +9,6 @@ tab: Props
 
 ## Props
 
-### CheckboxIconProps
-
-<PropsCard
-  id="checkboxicon-as"
-  name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
-  description={"The HTML element to render."}
-/>
-
-<PropsCard
-  id="checkboxicon-ischecked"
-  name="isChecked"
-  type="boolean"
-  description={"If `true`, the icon will be checked."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isindeterminate"
-  name="isIndeterminate"
-  type="boolean"
-  description={"If `true`, the icon will be indeterminate."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxicon-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
 ### CheckboxProps
 
 <PropsCard
@@ -77,10 +20,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkbox-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkbox-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -89,7 +41,7 @@ tab: Props
   name="iconProps"
   type='{
   children: ReactElement<any, string | JSXElementConstructor<any>>
-} & Omit<HTMLUIProps<"span">, "children">'
+} & Omit<HTMLUIProps, "children">'
   description={"Props for icon component."}
 />
 
@@ -98,6 +50,14 @@ tab: Props
   name="id"
   type="string"
   description={"id assigned to input."}
+/>
+
+<PropsCard
+  id="checkbox-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -112,6 +72,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -128,6 +89,7 @@ tab: Props
   name="isIndeterminate"
   type="boolean"
   description={"If `true`, the checkbox will be indeterminate."}
+  deprecated={"Use `indeterminate` instead."}
   defaultValue={"false"}
 />
 
@@ -153,6 +115,19 @@ tab: Props
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-label"
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The label of the checkbox."}
 />
 
 <PropsCard
@@ -229,13 +204,230 @@ tab: Props
   description={"The variant of the Checkbox."}
 />
 
+### CheckboxGroupProps
+
+<PropsCard
+  id="checkboxgroup-align"
+  name="align"
+  type="UIValue<AlignItems>"
+  description={"The CSS `align-items` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-basis"
+  name="basis"
+  type='UIValue<number | "content" | "px" | "initial" | "inherit" | (string & {}) | "auto" | "max" | "min" | "1" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | ... 68 more ... | "xs">'
+  description={"The CSS `flex-basis` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-defaultvalue"
+  name="defaultValue"
+  type="Y[]"
+  description={"The initial value of the checkbox group."}
+/>
+
+<PropsCard
+  id="checkboxgroup-direction"
+  name="direction"
+  type="UIValue<FlexDirection>"
+  description={"The CSS `flex-direction` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-grow"
+  name="grow"
+  type="UIValue<FlexGrow>"
+  description={"The CSS `flex-grow` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isnative"
+  name="isNative"
+  type="boolean"
+  description={
+    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+  }
+  deprecated={"It will be deprecated in version 2.0."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-items"
+  name="items"
+  type="CheckboxItem<Y>[]"
+  description={"If provided, generate checkboxes based on items."}
+  defaultValue={"'[]'"}
+/>
+
+<PropsCard
+  id="checkboxgroup-justify"
+  name="justify"
+  type="UIValue<JustifyContent>"
+  description={"The CSS `justify-content` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-onchange"
+  name="onChange"
+  type="(value: Y[]) => void"
+  description={
+    "The callback fired when any children checkbox is checked or unchecked."
+  }
+/>
+
+<PropsCard
+  id="checkboxgroup-shrink"
+  name="shrink"
+  type="UIValue<FlexShrink>"
+  description={"The CSS `flex-shrink` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-value"
+  name="value"
+  type="Y[]"
+  description={"The value of the checkbox group."}
+/>
+
+<PropsCard
+  id="checkboxgroup-wrap"
+  name="wrap"
+  type="UIValue<FlexWrap>"
+  description={"The CSS `flex-wrap` property."}
+/>
+
+### CheckboxIconProps
+
+<PropsCard
+  id="checkboxicon-as"
+  name="as"
+  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
+  description={"The HTML element to render."}
+/>
+
+<PropsCard
+  id="checkboxicon-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the icon will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the icon will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-ischecked"
+  name="isChecked"
+  type="boolean"
+  description={"If `true`, the icon will be checked."}
+  deprecated={"Use `checked` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isindeterminate"
+  name="isIndeterminate"
+  type="boolean"
+  description={"If `true`, the icon will be indeterminate."}
+  deprecated={"Use `indeterminate` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
 ### UseCheckboxProps
+
+<PropsCard
+  id="usecheckbox-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
 
 <PropsCard
   id="usecheckbox-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -247,10 +439,19 @@ tab: Props
 />
 
 <PropsCard
+  id="usecheckbox-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="usecheckbox-ischecked"
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -267,6 +468,7 @@ tab: Props
   name="isIndeterminate"
   type="boolean"
   description={"If `true`, the checkbox will be indeterminate."}
+  deprecated={"Use `indeterminate` instead."}
   defaultValue={"false"}
 />
 
@@ -346,130 +548,6 @@ tab: Props
   description={"The value to be used in the checkbox input."}
 />
 
-### CheckboxGroupProps
-
-<PropsCard
-  id="checkboxgroup-align"
-  name="align"
-  type="UIValue<AlignItems>"
-  description={"The CSS `align-items` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-basis"
-  name="basis"
-  type='UIValue<number | "content" | "px" | "initial" | "inherit" | (string & {}) | "auto" | "max" | "min" | "1" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | ... 68 more ... | "xs">'
-  description={"The CSS `flex-basis` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-defaultvalue"
-  name="defaultValue"
-  type="Y[]"
-  description={"The initial value of the checkbox group."}
-/>
-
-<PropsCard
-  id="checkboxgroup-direction"
-  name="direction"
-  type="UIValue<FlexDirection>"
-  description={"The CSS `flex-direction` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-grow"
-  name="grow"
-  type="UIValue<FlexGrow>"
-  description={"The CSS `flex-grow` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxgroup-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxgroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxgroup-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxgroup-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="checkboxgroup-items"
-  name="items"
-  type="CheckboxItem<Y>[]"
-  description={"If provided, generate checkboxes based on items."}
-  defaultValue={"'[]'"}
-/>
-
-<PropsCard
-  id="checkboxgroup-justify"
-  name="justify"
-  type="UIValue<JustifyContent>"
-  description={"The CSS `justify-content` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-onchange"
-  name="onChange"
-  type="(value: Y[]) => void"
-  description={
-    "The callback fired when any children checkbox is checked or unchecked."
-  }
-/>
-
-<PropsCard
-  id="checkboxgroup-shrink"
-  name="shrink"
-  type="UIValue<FlexShrink>"
-  description={"The CSS `flex-shrink` property."}
-/>
-
-<PropsCard
-  id="checkboxgroup-value"
-  name="value"
-  type="Y[]"
-  description={"The value of the checkbox group."}
-/>
-
-<PropsCard
-  id="checkboxgroup-wrap"
-  name="wrap"
-  type="UIValue<FlexWrap>"
-  description={"The CSS `flex-wrap` property."}
-/>
-
 ### UseCheckboxGroupProps
 
 <PropsCard
@@ -486,6 +564,7 @@ tab: Props
   description={
     "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
   }
+  deprecated={"It will be deprecated in version 2.0."}
   defaultValue={"false"}
 />
 

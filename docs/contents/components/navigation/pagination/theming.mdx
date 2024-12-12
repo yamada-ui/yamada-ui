@@ -6,7 +6,6 @@ description: >-
 package_name: "@yamada-ui/pagination"
 with_description: true
 tab: Theming
-label: Updated
 order: 2
 ---
 
@@ -134,8 +133,13 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     }),
     unstyled: {
       inner: { gap: 0 },
-      item: { bg: "none", color: "inherit", minH: "auto", minW: "auto" },
-      _ripple: { display: "none" },
+      item: {
+        bg: "none",
+        color: "inherit",
+        minH: "auto",
+        minW: "auto",
+        _ripple: { display: "none" },
+      },
     },
   },
 

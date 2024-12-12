@@ -1,6 +1,6 @@
 import type { HeadingProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Link as LinkIcon } from "@yamada-ui/lucide"
+import { LinkIcon } from "@yamada-ui/lucide"
 import { Link, Text } from "@yamada-ui/react"
 
 export interface LinkedHeadingProps extends HeadingProps {}

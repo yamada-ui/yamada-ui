@@ -21,11 +21,11 @@ tab: 使い方
 ## 使い方
 
 ```ts
-import { Ghost } from "@yamada-ui/lucide"
+import { GhostIcon } from "@yamada-ui/lucide"
 ```
 
 ```tsx
-<Ghost />
+<GhostIcon />
 ```
 
 ### [Lucide lab](https://github.com/lucide-icons/lucide-lab)のアイコンを使用する
@@ -33,7 +33,7 @@ import { Ghost } from "@yamada-ui/lucide"
 [Lucide lab](https://github.com/lucide-icons/lucide-lab)のアイコンを使用する場合は、`Icon`を使用します。
 
 ```ts
-import { Icon as LucideIcon } from "@yamada-ui/lucide"
+import { LucideIcon } from "@yamada-ui/lucide"
 import { burger } from "@lucide/lab"
 ```
 
@@ -56,7 +56,7 @@ const LucideIcon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {
   return <Icon {...rest} />
 }
 
-return <LucideIcon name="Ghost" />
+return <LucideIcon name="GhostIcon" />
 ```
 
 :::note status=error

@@ -1,5 +1,43 @@
 # @yamada-ui/theme
 
+## 1.20.1
+
+### Patch Changes
+
+- [#3661](https://github.com/yamada-ui/yamada-ui/pull/3661) [`2990027`](https://github.com/yamada-ui/yamada-ui/commit/2990027ce0054febcf0b1eb44e2386e231fff7a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Reformat `PaginationItem` properties structure.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+
+## 1.20.0
+
+### Minor Changes
+
+- [#3659](https://github.com/yamada-ui/yamada-ui/pull/3659) [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Separator` component.
+
+- [#3660](https://github.com/yamada-ui/yamada-ui/pull/3660) [`f8fec6f`](https://github.com/yamada-ui/yamada-ui/commit/f8fec6f832d7a4afa33151282167b5aa5adbe832) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MenuSeparator` component.
+
+- [#3550](https://github.com/yamada-ui/yamada-ui/pull/3550) [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `EmptyState` component.
+
+- [#3301](https://github.com/yamada-ui/yamada-ui/pull/3301) [`0ae6ea5`](https://github.com/yamada-ui/yamada-ui/commit/0ae6ea5840ab1102bb7d7698be28aa2b25b48483) Thanks [@nathanlao](https://github.com/nathanlao)! - Added `For` component.
+
+- [#3551](https://github.com/yamada-ui/yamada-ui/pull/3551) [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `DataList` component.
+
+- [#3539](https://github.com/yamada-ui/yamada-ui/pull/3539) [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Added `Status` component
+
+- [#3608](https://github.com/yamada-ui/yamada-ui/pull/3608) [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26) Thanks [@kurakke](https://github.com/kurakke)! - Added `CheckboxCard` and `CheckboxCardGroup` components.
+
+- [#3608](https://github.com/yamada-ui/yamada-ui/pull/3608) [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26) Thanks [@kurakke](https://github.com/kurakke)! - Added `RadioCard` and `RadioCardGroup` components.
+
+### Patch Changes
+
+- [#3669](https://github.com/yamada-ui/yamada-ui/pull/3669) [`d1b2443`](https://github.com/yamada-ui/yamada-ui/commit/d1b2443a97217784c683b85b9388d5bcbabc5de5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `width` `fit-content` to `DataList`.
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/utils@1.6.0
+
 ## 1.19.4
 
 ### Patch Changes

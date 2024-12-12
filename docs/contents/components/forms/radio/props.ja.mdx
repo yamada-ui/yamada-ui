@@ -44,7 +44,12 @@ tab: Props
   defaultValue={"false"}
 />
 
-<PropsCard id="radio-iconprops" name="iconProps" type='HTMLUIProps<"span">' />
+<PropsCard
+  id="radio-iconprops"
+  name="iconProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for icon element."}
+/>
 
 <PropsCard
   id="radio-id"
@@ -57,6 +62,7 @@ tab: Props
   id="radio-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
+  description={"Props for input element."}
 />
 
 <PropsCard
@@ -100,7 +106,25 @@ tab: Props
   defaultValue={"false"}
 />
 
-<PropsCard id="radio-labelprops" name="labelProps" type='HTMLUIProps<"span">' />
+<PropsCard
+  id="radio-label"
+  name="label"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The label of the radio."}
+/>
+
+<PropsCard
+  id="radio-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for label element."}
+/>
 
 <PropsCard
   id="radio-name"
@@ -136,6 +160,138 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Radio."}
+/>
+
+### RadioGroupProps
+
+<PropsCard
+  id="radiogroup-align"
+  name="align"
+  type="UIValue<AlignItems>"
+  description={"The CSS `align-items` property."}
+/>
+
+<PropsCard
+  id="radiogroup-basis"
+  name="basis"
+  type='UIValue<number | "content" | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | (string & {}) | "-moz-fit-content" | ... 69 more ... | "xs">'
+  description={"The CSS `flex-basis` property."}
+/>
+
+<PropsCard
+  id="radiogroup-defaultvalue"
+  name="defaultValue"
+  type="Y"
+  description={"The initial value of the radio group."}
+/>
+
+<PropsCard
+  id="radiogroup-direction"
+  name="direction"
+  type="UIValue<FlexDirection>"
+  description={"The CSS `flex-direction` property."}
+/>
+
+<PropsCard
+  id="radiogroup-grow"
+  name="grow"
+  type="UIValue<FlexGrow>"
+  description={"The CSS `flex-grow` property."}
+/>
+
+<PropsCard
+  id="radiogroup-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radiogroup-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radiogroup-isnative"
+  name="isNative"
+  type="boolean"
+  description={
+    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
+  }
+  deprecated={"It will be deprecated in version 2.0."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radiogroup-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radiogroup-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radiogroup-items"
+  name="items"
+  type="RadioItem<Y>[]"
+  description={"If provided, generate radios based on items."}
+  defaultValue={"'[]'"}
+/>
+
+<PropsCard
+  id="radiogroup-justify"
+  name="justify"
+  type="UIValue<JustifyContent>"
+  description={"The CSS `justify-content` property."}
+/>
+
+<PropsCard
+  id="radiogroup-name"
+  name="name"
+  type="string"
+  description={"The HTML `name` attribute used for forms."}
+/>
+
+<PropsCard
+  id="radiogroup-onchange"
+  name="onChange"
+  type="(value: Y) => void"
+  description={
+    "The callback fired when any children radio is checked or unchecked."
+  }
+/>
+
+<PropsCard
+  id="radiogroup-shrink"
+  name="shrink"
+  type="UIValue<FlexShrink>"
+  description={"The CSS `flex-shrink` property."}
+/>
+
+<PropsCard
+  id="radiogroup-value"
+  name="value"
+  type="Y"
+  description={"The value of the radio group."}
+/>
+
+<PropsCard
+  id="radiogroup-wrap"
+  name="wrap"
+  type="UIValue<FlexWrap>"
+  description={"The CSS `flex-wrap` property."}
 />
 
 ### UseRadioProps
@@ -234,137 +390,6 @@ tab: Props
   description={"The value to be used in the radio button."}
 />
 
-### RadioGroupProps
-
-<PropsCard
-  id="radiogroup-align"
-  name="align"
-  type="UIValue<AlignItems>"
-  description={"The CSS `align-items` property."}
-/>
-
-<PropsCard
-  id="radiogroup-basis"
-  name="basis"
-  type='UIValue<number | "content" | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | (string & {}) | "-moz-fit-content" | ... 69 more ... | "xs">'
-  description={"The CSS `flex-basis` property."}
-/>
-
-<PropsCard
-  id="radiogroup-defaultvalue"
-  name="defaultValue"
-  type="Y"
-  description={"The initial value of the radio group."}
-/>
-
-<PropsCard
-  id="radiogroup-direction"
-  name="direction"
-  type="UIValue<FlexDirection>"
-  description={"The CSS `flex-direction` property."}
-/>
-
-<PropsCard
-  id="radiogroup-grow"
-  name="grow"
-  type="UIValue<FlexGrow>"
-  description={"The CSS `flex-grow` property."}
-/>
-
-<PropsCard
-  id="radiogroup-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the form control will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="radiogroup-isinvalid"
-  name="isInvalid"
-  type="boolean"
-  description={"If `true`, the form control will be invalid."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="radiogroup-isnative"
-  name="isNative"
-  type="boolean"
-  description={
-    "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
-  }
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="radiogroup-isreadonly"
-  name="isReadOnly"
-  type="boolean"
-  description={"If `true`, the form control will be readonly."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="radiogroup-isrequired"
-  name="isRequired"
-  type="boolean"
-  description={"If `true`, the form control will be required."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="radiogroup-items"
-  name="items"
-  type="RadioItem<Y>[]"
-  description={"If provided, generate radios based on items."}
-  defaultValue={"'[]'"}
-/>
-
-<PropsCard
-  id="radiogroup-justify"
-  name="justify"
-  type="UIValue<JustifyContent>"
-  description={"The CSS `justify-content` property."}
-/>
-
-<PropsCard
-  id="radiogroup-name"
-  name="name"
-  type="string"
-  description={"The HTML `name` attribute used for forms."}
-/>
-
-<PropsCard
-  id="radiogroup-onchange"
-  name="onChange"
-  type="(value: Y) => void"
-  description={
-    "The callback fired when any children radio is checked or unchecked."
-  }
-/>
-
-<PropsCard
-  id="radiogroup-shrink"
-  name="shrink"
-  type="UIValue<FlexShrink>"
-  description={"The CSS `flex-shrink` property."}
-/>
-
-<PropsCard
-  id="radiogroup-value"
-  name="value"
-  type="Y"
-  description={"The value of the radio group."}
-/>
-
-<PropsCard
-  id="radiogroup-wrap"
-  name="wrap"
-  type="UIValue<FlexWrap>"
-  description={"The CSS `flex-wrap` property."}
-/>
-
 ### UseRadioGroupProps
 
 <PropsCard
@@ -390,6 +415,7 @@ tab: Props
   description={
     "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
   }
+  deprecated={"It will be deprecated in version 2.0."}
   defaultValue={"false"}
 />
 

@@ -20,7 +20,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbLink href="/">3</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="/">4</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -33,7 +33,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbLink href="/">1</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="/">2</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -43,13 +43,13 @@ describe("<Breadcrumb />", () => {
     expect(separatorEle).toBeInTheDocument()
   })
 
-  test("isCurrentPage property is being passed accurately", () => {
+  test("currentPage property is being passed accurately", () => {
     render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">1</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="/">2</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -65,7 +65,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="#">Link 2</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -80,7 +80,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="#">Link 2</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -98,7 +98,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbEllipsis />
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem currentPage>
           <BreadcrumbLink href="#">Link 3</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>,
@@ -111,7 +111,7 @@ describe("<Breadcrumb />", () => {
       { href: "/", name: "サイヤ人編" },
       { href: "/", name: "ナメック星編" },
       { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ]
 
     render(<Breadcrumb items={items} />)
@@ -124,7 +124,7 @@ describe("<Breadcrumb />", () => {
       { href: "/1", name: "サイヤ人編" },
       { href: "/2", name: "ナメック星編" },
       { href: "/3", name: "人造人間編" },
-      { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/4", name: "魔人ブウ編", currentPage: true },
     ]
 
     render(<Breadcrumb endBoundaries={1} items={items} startBoundaries={1} />)
@@ -138,12 +138,12 @@ describe("<Breadcrumb />", () => {
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("correctly omitted using isEllipsisPage", () => {
+  test("correctly omitted using ellipsisPage", () => {
     const items: BreadcrumbGenerateItem[] = [
       { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編", isEllipsisPage: true },
-      { href: "/3", name: "人造人間編", isEllipsisPage: true },
-      { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/2", name: "ナメック星編", ellipsisPage: true },
+      { href: "/3", name: "人造人間編", ellipsisPage: true },
+      { href: "/4", name: "魔人ブウ編", currentPage: true },
     ]
 
     render(<Breadcrumb items={items} />)
@@ -157,16 +157,16 @@ describe("<Breadcrumb />", () => {
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("if the last element has an isEllipsisPage, the breadcrumbEllipsis is rendered correctly.", () => {
+  test("if the last element has an ellipsisPage, the breadcrumbEllipsis is rendered correctly.", () => {
     const items: BreadcrumbGenerateItem[] = [
       { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編", isEllipsisPage: true },
+      { href: "/2", name: "ナメック星編", ellipsisPage: true },
       { href: "/3", name: "人造人間編" },
       {
         href: "/4",
         name: "魔人ブウ編",
-        isCurrentPage: true,
-        isEllipsisPage: true,
+        currentPage: true,
+        ellipsisPage: true,
       },
     ]
 
@@ -186,7 +186,7 @@ describe("<Breadcrumb />", () => {
       { href: "/1", name: "サイヤ人編" },
       { href: "/2", name: "ナメック星編" },
       { href: "/3", name: "人造人間編" },
-      { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/4", name: "魔人ブウ編", currentPage: true },
     ]
 
     render(
@@ -228,7 +228,7 @@ describe("<Breadcrumb />", () => {
       { href: "/", name: "サイヤ人編" },
       { href: "/", name: "ナメック星編" },
       { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+      { href: "/", name: "魔人ブウ編", currentPage: true },
     ]
 
     render(

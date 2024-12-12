@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/lucide",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Yamada UI lucide component",
   "keywords": [
     "yamada",
@@ -53,7 +53,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "lucide-react": "0.460.0"
+    "lucide-react": "0.464.0"
   },
   "devDependencies": {
     "@babel/parser": "^7.26.2",
@@ -61,7 +61,7 @@
     "@lucide/lab": "^0.1.2",
     "@types/babel__traverse": "^7.20.6",
     "clean-package": "2.2.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "react": "^18.3.1",
     "tsx": "^4.19.2"
   },

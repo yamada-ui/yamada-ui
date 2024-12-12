@@ -8,7 +8,6 @@ order: 17
 is_tabs: true
 with_description: true
 tab: Usage
-label: Updated
 ---
 
 ## Import
@@ -351,7 +350,7 @@ To customize the icon, set `props` to `iconProps`.
 
   <Select
     placeholder="キャラクターを選択"
-    iconProps={{ children: <ChevronsDown /> }}
+    iconProps={{ children: <ChevronsDownIcon /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>
@@ -374,7 +373,7 @@ To customize an option, set `props` to `optionProps`.
 
   <Select
     placeholder="キャラクターを選択"
-    optionProps={{ icon: <Check color="green.500" /> }}
+    optionProps={{ icon: <CheckIcon color="green.500" /> }}
   >
     <Option value="孫悟空">孫悟空</Option>
     <Option value="ベジータ">ベジータ</Option>

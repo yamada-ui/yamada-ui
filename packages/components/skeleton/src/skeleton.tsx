@@ -13,7 +13,7 @@ import {
 import { useAnimation } from "@yamada-ui/use-animation"
 import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
+import { cx, getValidChildren, useMounted } from "@yamada-ui/utils"
 
 interface SkeletonOptions {
   /**
@@ -31,13 +31,29 @@ interface SkeletonOptions {
    *
    * @default false
    */
+  fitContent?: boolean
+  /**
+   * If `true`, the skeleton will take the width of it's children.
+   *
+   * @default false
+   *
+   * @deprecated Use `fitContent` instead.
+   */
   isFitContent?: boolean
   /**
    * If `true`, it'll render its children with a nice fade transition.
    *
    * @default false
+   *
+   * @deprecated Use `loaded` instead.
    */
   isLoaded?: boolean
+  /**
+   * If `true`, it'll render its children with a nice fade transition.
+   *
+   * @default false
+   */
+  loaded?: boolean
   /**
    * The animation speed in seconds.
    *
@@ -67,20 +83,24 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     children,
     endColor: _endColor,
     fadeDuration = 0.4,
+    fitContent,
     isFitContent,
     isLoaded,
+    loaded,
     speed = 0.8,
     startColor: _startColor,
     ...rest
   } = omitThemeProps(mergedProps)
-  const [isMounted] = useIsMounted()
+  const [mounted] = useMounted()
   const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
   const startColor = useValue(_startColor)
   const endColor = useValue(_endColor)
   const hasChildren = !!validChildren.length
 
-  isFitContent ??= hasChildren
+  fitContent ??= isFitContent
+  loaded ??= isLoaded
+  fitContent ??= hasChildren
 
   const fadeIn = useAnimation({
     duration:
@@ -120,16 +140,16 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     boxShadow: "none",
     color: "transparent",
     cursor: "default",
-    h: isFitContent ? "fit-content" : "fallback(4, 1rem)",
+    h: fitContent ? "fit-content" : "fallback(4, 1rem)",
     maxW: "100%",
     pointerEvents: "none",
     userSelect: "none",
-    w: isFitContent ? "fit-content" : "100%",
+    w: fitContent ? "fit-content" : "100%",
     ...styles,
   }
 
-  if (isLoaded) {
-    const animation = !isMounted() || prevIsLoaded ? "none" : fadeIn
+  if (loaded) {
+    const animation = !mounted() || prevIsLoaded ? "none" : fadeIn
 
     return (
       <ui.div

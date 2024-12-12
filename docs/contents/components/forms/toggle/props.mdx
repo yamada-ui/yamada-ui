@@ -5,12 +5,19 @@ package_name: "@yamada-ui/toggle"
 order: 1
 with_description: true
 tab: Props
-label: Updated
 ---
 
 ## Props
 
 ### ToggleProps
+
+<PropsCard
+  id="toggle-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the toggle button is represented as active."}
+  defaultValue={"false"}
+/>
 
 <PropsCard
   id="toggle-colorscheme"
@@ -25,6 +32,15 @@ label: Updated
   name="defaultIsSelected"
   type="boolean"
   description={"If `true`, the toggle button will be initially selected."}
+  deprecated={"Use `defaultSelected` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-defaultselected"
+  name="defaultSelected"
+  type="boolean"
+  description={"If `true`, the toggle button will be initially selected."}
   defaultValue={"false"}
 />
 
@@ -33,6 +49,16 @@ label: Updated
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If true, the toggle button is full rounded. Else, it'll be slightly round."
+  }
   defaultValue={"false"}
 />
 
@@ -48,6 +74,7 @@ label: Updated
   name="isActive"
   type="boolean"
   description={"If `true`, the toggle button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -56,6 +83,7 @@ label: Updated
   name="isDisabled"
   type="boolean"
   description={"If `true`, the toggle button will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -64,6 +92,7 @@ label: Updated
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the toggle button will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -74,6 +103,7 @@ label: Updated
   description={
     "If true, the toggle button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -82,6 +112,7 @@ label: Updated
   name="isSelected"
   type="boolean"
   description={"If `true`, the toggle button will be selected."}
+  deprecated={"Use `selected` instead."}
 />
 
 <PropsCard
@@ -89,6 +120,21 @@ label: Updated
   name="onChange"
   type="(isSelected: boolean) => void"
   description={"The callback invoked when selected state changes."}
+/>
+
+<PropsCard
+  id="toggle-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the toggle button will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-selected"
+  name="selected"
+  type="boolean"
+  description={"If `true`, the toggle button will be selected."}
 />
 
 <PropsCard
@@ -131,10 +177,19 @@ label: Updated
 />
 
 <PropsCard
+  id="togglegroup-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="togglegroup-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, all wrapped toggle button will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -143,6 +198,7 @@ label: Updated
   name="isReadOnly"
   type="boolean"
   description={"If `true`, all wrapped toggle button will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -153,6 +209,14 @@ label: Updated
   description={
     "The callback fired when any children toggle button is selected or unselected."
   }
+/>
+
+<PropsCard
+  id="togglegroup-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

@@ -1,12 +1,12 @@
 ---
 title: Flip
 description: >-
-  `Flip` is a component that provides an animation to switch between two elements while flipping.
+  `Flip` is a component that provides an animation to switch between two
+  elements while flipping.
 package_name: "@yamada-ui/transitions"
 is_tabs: true
 with_description: true
 tab: Usage
-label: New
 ---
 
 ## Import
@@ -20,7 +20,12 @@ import { Flip } from "@yamada-ui/react"
 Set the elements to switch between as `from` and `to`.
 
 ```tsx functional=true
-return <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
+return (
+  <Flip
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
+  />
+)
 ```
 
 ### Change Direction
@@ -31,8 +36,8 @@ To change the direction, set `orientation` to either `"vertical"` or `"horizonta
 return (
   <Flip
     orientation="vertical"
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -45,8 +50,8 @@ To change the duration, set `duration` to a number (seconds).
 return (
   <Flip
     duration={1.4}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -59,8 +64,8 @@ To delay the switch, set `delay` to a number (seconds).
 return (
   <Flip
     delay={1}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -73,8 +78,8 @@ To disable, set `isDisabled` to `true`.
 return (
   <Flip
     isDisabled
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -87,8 +92,8 @@ To readyOnly, set `isReadOnly` to `true`.
 return (
   <Flip
     isReadOnly
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -102,8 +107,8 @@ return (
   <Flip
     value={value}
     onChange={onChange}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```
@@ -118,8 +123,8 @@ return (
       damping: 10,
       stiffness: 120,
     }}
-    from={<Apple fontSize="6xl" />}
-    to={<Cherry fontSize="6xl" />}
+    from={<AppleIcon fontSize="6xl" />}
+    to={<CherryIcon fontSize="6xl" />}
   />
 )
 ```

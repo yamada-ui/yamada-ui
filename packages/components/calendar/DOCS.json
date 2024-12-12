@@ -96,7 +96,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -333,6 +333,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the date picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -386,6 +392,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -393,6 +400,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -490,6 +502,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
@@ -508,11 +521,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -528,15 +543,21 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -613,6 +634,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -780,6 +806,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the month picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for month picker clear icon element.",
@@ -826,6 +858,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -833,6 +866,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -904,6 +942,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the month picker clear icon.",
       "required": false
     },
@@ -922,11 +961,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -942,15 +983,21 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -1017,6 +1064,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -1159,6 +1211,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the date picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -1223,6 +1281,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -1230,6 +1289,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -1327,6 +1391,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
@@ -1345,11 +1410,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -1371,15 +1438,21 @@
       "description": "If `true`, keep the placeholder.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -1456,6 +1529,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -1688,6 +1766,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -1695,6 +1774,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -1815,11 +1899,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -1835,15 +1921,21 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -1920,6 +2012,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -2103,6 +2200,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the year picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for year picker clear icon element.",
@@ -2148,6 +2251,12 @@
       "required": false
     },
     "defaultIsOpen": {
+      "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
       "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
@@ -2215,6 +2324,7 @@
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the year picker clear icon.",
       "required": false
     },
@@ -2233,11 +2343,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -2253,15 +2365,21 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en'",
+      "defaultValue": "'en-US'",
       "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
       "required": false,
       "see": "https://day.js.org/docs/en/i18n/instance-locale"
@@ -2306,6 +2424,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {

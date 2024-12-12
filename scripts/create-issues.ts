@@ -12,7 +12,7 @@ const SCRIPT_CODE = "make-component-headless"
 const TARGET_KEY = "package"
 
 const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
-const ISSUE_BODY = (dir: string, manifest: Project["manifest"]) =>
+const ISSUE_BODY = (_dir: string, manifest: Project["manifest"]) =>
   [
     `script: ${SCRIPT_CODE}`,
     `${TARGET_KEY}: ${manifest.name}`,

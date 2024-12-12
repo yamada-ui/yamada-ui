@@ -24,17 +24,25 @@ import {
 } from "@yamada-ui/utils"
 import { cloneElement, Fragment, useCallback, useMemo } from "react"
 
-const [BreadcrumbProvider, useBreadcrumb] = createContext<{
-  [key: string]: CSSUIObject | undefined
-}>({
+interface BreadcrumbContext {
+  styles: { [key: string]: CSSUIObject | undefined }
+  separatorProps?: BreadcrumbSeparatorProps
+}
+
+const [BreadcrumbProvider, useBreadcrumb] = createContext<BreadcrumbContext>({
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
 
 export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
   name?: ReactNode
+  ellipsisPage?: boolean
+  /**
+   *
+   * @deprecated Use `ellipsisPage` instead.
+   */
   isEllipsisPage?: boolean
-  containerProps?: Omit<BreadcrumbItemProps, "isLastChild">
+  containerProps?: Omit<BreadcrumbItemProps, "isLastChild" | "lastChild">
 }
 
 interface BreadcrumbOptions {
@@ -72,6 +80,10 @@ interface BreadcrumbOptions {
    * Props for ol element.
    */
   listProps?: HTMLUIProps<"ol">
+  /**
+   * Props for separator element.
+   */
+  separatorProps?: BreadcrumbSeparatorProps
 }
 
 export interface BreadcrumbProps
@@ -97,6 +109,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     separator = "/",
     startBoundaries: _startBoundaries,
     listProps,
+    separatorProps,
     ...rest
   } = omitThemeProps(mergedProps)
   let startBoundaries = useValue(_startBoundaries)
@@ -109,7 +122,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   if (endBoundaries) startBoundaries ??= 1
 
   const hasBoundaries = isNumber(startBoundaries) && isNumber(endBoundaries)
-  const isExceed =
+  const exceed =
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
   const css: CSSUIObject = {
@@ -139,7 +152,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
       return validChildren.map((child, index) =>
         cloneElement(child, {
           gap,
-          isLastChild: validChildren.length === index + 1,
+          lastChild: validChildren.length === index + 1,
           separator,
         }),
       )
@@ -147,27 +160,38 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
       let hiddenEllipsis: BreadcrumbGenerateItem[] = []
 
       return items.map((item, index) => {
-        const { name, isCurrentPage, isEllipsisPage, containerProps, ...rest } =
-          item
-        const isLastChild = items.length === index + 1
-        const props: BreadcrumbItemProps = {
-          gap,
+        let {
+          name,
+          currentPage,
+          ellipsisPage,
           isCurrentPage,
+          isEllipsisPage,
+          containerProps,
+          ...rest
+        } = item
+        const lastChild = items.length === index + 1
+
+        currentPage ??= isCurrentPage
+        ellipsisPage ??= isEllipsisPage
+
+        const props: BreadcrumbItemProps = {
+          currentPage,
+          gap,
           separator,
           ...containerProps,
         }
 
-        if (!hasBoundaries && isEllipsisPage) {
+        if (!hasBoundaries && ellipsisPage) {
           hiddenEllipsis.push(item)
 
-          return isLastChild ? (
-            <BreadcrumbItem key={index} {...props} isLastChild>
+          return lastChild ? (
+            <BreadcrumbItem key={index} {...props} lastChild>
               {customEllipsis([item]) ?? <BreadcrumbEllipsis />}
             </BreadcrumbItem>
           ) : null
         }
 
-        if (hasBoundaries && isExceed) {
+        if (hasBoundaries && exceed) {
           const lastIndex = items.length - index - 1
 
           if (startBoundaries! <= index && endBoundaries! <= lastIndex) {
@@ -194,14 +218,14 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
             <Fragment key={index}>
               <BreadcrumbItem {...props}>{resolvedEllipsis}</BreadcrumbItem>
 
-              <BreadcrumbItem {...props} isLastChild={isLastChild}>
+              <BreadcrumbItem {...props} lastChild={lastChild}>
                 <BreadcrumbLink {...rest}>{name}</BreadcrumbLink>
               </BreadcrumbItem>
             </Fragment>
           )
         } else {
           return (
-            <BreadcrumbItem key={index} {...props} isLastChild={isLastChild}>
+            <BreadcrumbItem key={index} {...props} lastChild={lastChild}>
               <BreadcrumbLink {...rest}>{name}</BreadcrumbLink>
             </BreadcrumbItem>
           )
@@ -215,14 +239,14 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     gap,
     items,
     hasBoundaries,
-    isExceed,
+    exceed,
     startBoundaries,
     endBoundaries,
     customEllipsis,
   ])
 
   return (
-    <BreadcrumbProvider value={styles}>
+    <BreadcrumbProvider value={{ styles, separatorProps }}>
       <ui.nav
         ref={ref}
         className={cx("ui-breadcrumb", className)}
@@ -242,19 +266,35 @@ Breadcrumb.displayName = "Breadcrumb"
 Breadcrumb.__ui__ = "Breadcrumb"
 
 interface BreadcrumbItemOptions
-  extends Pick<BreadcrumbProps, "gap" | "separator"> {
+  extends Pick<BreadcrumbProps, "gap" | "separator" | "separatorProps"> {
   /**
    * If `true`, change to span element.
    *
    * @default false
+   */
+  currentPage?: boolean
+  /**
+   * If `true`, change to span element.
+   *
+   * @default false
+   *
+   * @deprecated Use `currentPage` instead.
    */
   isCurrentPage?: boolean
   /**
    * If `true`, not show separator.
    *
    * @default false
+   *
+   * @deprecated Use `lastChild` instead.
    */
   isLastChild?: boolean
+  /**
+   * If `true`, not show separator.
+   *
+   * @default false
+   */
+  lastChild?: boolean
 }
 
 export interface BreadcrumbItemProps
@@ -266,22 +306,28 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     {
       className,
       children,
+      currentPage,
       gap,
       isCurrentPage,
       isLastChild,
+      lastChild,
       separator,
+      separatorProps,
       ...rest
     },
     ref,
   ) => {
-    const styles = useBreadcrumb()
+    const { styles, separatorProps: groupSeparatorProps } = useBreadcrumb()
+
+    currentPage ??= isCurrentPage
+    lastChild ??= isLastChild
 
     const validChildren = getValidChildren(children)
 
     const cloneChildren = validChildren.map((child) => {
       if (child.type === BreadcrumbLink) {
         return cloneElement(child, {
-          isCurrentPage,
+          currentPage,
         })
       }
 
@@ -289,6 +335,8 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
         return cloneElement(child, {
           children: child.props.children || separator,
           gap,
+          ...groupSeparatorProps,
+          ...separatorProps,
         })
       }
 
@@ -310,8 +358,14 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
       >
         {cloneChildren}
 
-        {!isLastChild ? (
-          <BreadcrumbSeparator gap={gap}>{separator}</BreadcrumbSeparator>
+        {!lastChild ? (
+          <BreadcrumbSeparator
+            gap={gap}
+            {...groupSeparatorProps}
+            {...separatorProps}
+          >
+            {separator}
+          </BreadcrumbSeparator>
         ) : null}
       </ui.li>
     )
@@ -327,6 +381,14 @@ interface BreadcrumbLinkOptions {
    *
    * @default false
    */
+  currentPage?: boolean
+  /**
+   * If `true`, change to span element.
+   *
+   * @default false
+   *
+   * @deprecated Use `currentPage` instead.
+   */
   isCurrentPage?: boolean
 }
 
@@ -335,16 +397,18 @@ export interface BreadcrumbLinkProps
     BreadcrumbLinkOptions {}
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
-  ({ href, className, children, isCurrentPage, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+  ({ href, className, children, currentPage, isCurrentPage, ...rest }, ref) => {
+    const { styles } = useBreadcrumb()
+
+    currentPage ??= isCurrentPage
 
     return (
       <ui.a
         ref={ref}
-        as={!isCurrentPage ? "a" : "span"}
-        href={!isCurrentPage ? href : undefined}
+        as={!currentPage ? "a" : "span"}
+        href={!currentPage ? href : undefined}
         className={cx("ui-breadcrumb__link", className)}
-        aria-current={isCurrentPage ? "page" : undefined}
+        aria-current={currentPage ? "page" : undefined}
         __css={styles.link}
         {...rest}
       >
@@ -369,7 +433,8 @@ export interface BreadcrumbSeparatorProps
 
 export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   ({ children, gap: mx, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const { styles } = useBreadcrumb()
+
     const css: CSSUIObject = {
       mx,
       ...styles.separator,
@@ -399,7 +464,7 @@ export interface BreadcrumbEllipsisProps
 
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
   ({ className, children, ...rest }, ref) => {
-    const styles = useBreadcrumb()
+    const { styles } = useBreadcrumb()
 
     const css: CSSUIObject = {
       ...styles.ellipsis,

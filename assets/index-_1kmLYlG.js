@@ -1,1 +1,0 @@
-import{r}from"./index-ClcD9ViR.js";import{q as l,I as p,J as V,K as m}from"./factory-ZSnRp-09.js";function x({value:u,...e}){e.onUpdate??(e.onUpdate=(t,a)=>t!==a);const s=l(e.onChange),c=l(e.onUpdate),[f,d]=r.useState(e.defaultValue),o=u!==void 0,n=o?u:f,i=l(t=>{const a=p(t,n);c(n,a)&&((!o||V(a)||m(a))&&d(a),s(a))},[o,n,s,c]);return[n,i]}export{x as u};

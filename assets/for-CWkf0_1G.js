@@ -1,0 +1,1 @@
+import{u as n}from"./use-component-style-DXYrx7jC.js";import{P as a}from"./factory-Nur_zO5a.js";const m=o=>{const[,{children:t,each:r,fallback:e}]=n("For",o);return!r||!a(r)||!r.length?e||null:r.map(t)};export{m as F};

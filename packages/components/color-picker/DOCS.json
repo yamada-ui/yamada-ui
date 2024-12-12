@@ -229,6 +229,12 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -326,11 +332,13 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
@@ -346,10 +354,16 @@
       "description": "If `true`, the form control will be required.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "matchWidth": {
@@ -397,6 +411,11 @@
     "onSwatchClick": {
       "type": "(value: string) => void",
       "description": "Function called whenever the color swatch click.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {

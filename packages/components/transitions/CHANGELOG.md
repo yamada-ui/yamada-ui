@@ -1,5 +1,18 @@
 # @yamada-ui/transitions
 
+## 1.1.14
+
+### Patch Changes
+
+- [#3803](https://github.com/yamada-ui/yamada-ui/pull/3803) [`525b9b8`](https://github.com/yamada-ui/yamada-ui/commit/525b9b8538cecf47dca0c77cfd07ef4de63d65ec) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved animate declaration after `open` check.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/motion@2.2.11
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/use-controllable-state@1.0.25
+  - @yamada-ui/use-value@1.1.33
+
 ## 1.1.13
 
 ### Patch Changes

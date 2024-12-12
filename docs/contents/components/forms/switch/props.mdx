@@ -22,6 +22,14 @@ tab: Props
 ### SwitchProps
 
 <PropsCard
+  id="switch-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="switch-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -30,10 +38,19 @@ tab: Props
 />
 
 <PropsCard
+  id="switch-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="switch-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -53,6 +70,14 @@ tab: Props
 />
 
 <PropsCard
+  id="switch-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="switch-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
@@ -64,6 +89,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 

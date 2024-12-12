@@ -1,10 +1,6 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type {
-  HTMLMotionProps,
-  MotionConfigProps,
-  Variants,
-} from "framer-motion"
+import type { HTMLMotionProps, MotionConfigProps, Variants } from "motion/react"
 import type { FC, ForwardedRef, ReactNode, RefObject } from "react"
 import type { HTMLUIProps } from "./components"
 import type {
@@ -443,13 +439,13 @@ export interface ThemeConfig {
    */
   locale?: string
   /**
-   * The config of the `framer-motion`.
+   * The config of the `motion`.
    */
   motion?: {
     /**
-     * Set configuration options for `framer-motion`.
+     * Set configuration options for `motion`.
      *
-     * @see Docs https://www.framer.com/motion/motion-config/
+     * @see Docs https://motion.dev/docs/react-motion-config
      */
     config?: Omit<MotionConfigProps, "children">
   }
@@ -486,7 +482,7 @@ export interface ThemeConfig {
      * The variants of the notice.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Docs https://www.framer.com/motion/animation/#variants
+     * @see Docs https://motion.dev/docs/react-animation#variants
      */
     variants?: Variants
     /**
@@ -528,7 +524,7 @@ export interface ThemeConfig {
      * The variants of the snack.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Docs https://www.framer.com/motion/animation/#variants
+     * @see Docs https://motion.dev/docs/react-animation#variants
      */
     variants?: Variants
   }

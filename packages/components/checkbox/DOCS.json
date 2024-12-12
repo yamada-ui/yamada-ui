@@ -5,9 +5,22 @@
       "description": "The HTML element to render.",
       "required": false
     },
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the icon will be checked.",
+      "required": false
+    },
+    "indeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the icon will be indeterminate.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the icon will be checked.",
       "required": false
     },
@@ -20,6 +33,7 @@
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `indeterminate` instead.",
       "description": "If `true`, the icon will be indeterminate.",
       "required": false
     },
@@ -49,9 +63,16 @@
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
@@ -65,6 +86,12 @@
       "description": "id assigned to input.",
       "required": false
     },
+    "indeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
       "description": "Props for input element.",
@@ -73,6 +100,7 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox will be checked.",
       "required": false
     },
@@ -85,6 +113,7 @@
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `indeterminate` instead.",
       "description": "If `true`, the checkbox will be indeterminate.",
       "required": false
     },
@@ -181,9 +210,16 @@
       "description": "The visual color appearance of the component.",
       "required": false
     },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
@@ -207,6 +243,12 @@
       "description": "id assigned to input.",
       "required": false
     },
+    "indeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
       "description": "Props for input element.",
@@ -215,6 +257,7 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox will be checked.",
       "required": false
     },
@@ -227,6 +270,7 @@
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `indeterminate` instead.",
       "description": "If `true`, the checkbox will be indeterminate.",
       "required": false
     },
@@ -366,6 +410,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },
@@ -488,6 +533,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },
@@ -536,9 +582,22 @@
     }
   },
   "UseCheckbox": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
     "defaultIsChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
@@ -547,9 +606,16 @@
       "description": "id assigned to input.",
       "required": false
     },
+    "indeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox will be checked.",
       "required": false
     },
@@ -562,6 +628,7 @@
     "isIndeterminate": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `indeterminate` instead.",
       "description": "If `true`, the checkbox will be indeterminate.",
       "required": false
     },
@@ -629,6 +696,7 @@
     "isNative": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs.",
       "required": false
     },

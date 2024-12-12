@@ -36,16 +36,36 @@ tab: Props
 />
 
 <PropsCard
-  id="skeleton-isfitcontent"
-  name="isFitContent"
+  id="skeleton-fitcontent"
+  name="fitContent"
   type="boolean"
   description={"If `true`, the skeleton will take the width of it's children."}
   defaultValue={"false"}
 />
 
 <PropsCard
+  id="skeleton-isfitcontent"
+  name="isFitContent"
+  type="boolean"
+  description={"If `true`, the skeleton will take the width of it's children."}
+  deprecated={"Use `fitContent` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="skeleton-isloaded"
   name="isLoaded"
+  type="boolean"
+  description={
+    "If `true`, it'll render its children with a nice fade transition."
+  }
+  deprecated={"Use `loaded` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="skeleton-loaded"
+  name="loaded"
   type="boolean"
   description={
     "If `true`, it'll render its children with a nice fade transition."
@@ -102,16 +122,36 @@ tab: Props
 />
 
 <PropsCard
-  id="skeletoncircle-isfitcontent"
-  name="isFitContent"
+  id="skeletoncircle-fitcontent"
+  name="fitContent"
   type="boolean"
   description={"If `true`, the skeleton will take the width of it's children."}
   defaultValue={"false"}
 />
 
 <PropsCard
+  id="skeletoncircle-isfitcontent"
+  name="isFitContent"
+  type="boolean"
+  description={"If `true`, the skeleton will take the width of it's children."}
+  deprecated={"Use `fitContent` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="skeletoncircle-isloaded"
   name="isLoaded"
+  type="boolean"
+  description={
+    "If `true`, it'll render its children with a nice fade transition."
+  }
+  deprecated={"Use `loaded` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="skeletoncircle-loaded"
+  name="loaded"
   type="boolean"
   description={
     "If `true`, it'll render its children with a nice fade transition."
@@ -154,8 +194,27 @@ tab: Props
 />
 
 <PropsCard
+  id="skeletontext-fitcontent"
+  name="fitContent"
+  type="boolean"
+  description={"If `true`, the skeleton will take the width of it's children."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="skeletontext-isloaded"
   name="isLoaded"
+  type="boolean"
+  description={
+    "If `true`, it'll render its children with a nice fade transition."
+  }
+  deprecated={"Use `loaded` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="skeletontext-loaded"
+  name="loaded"
   type="boolean"
   description={
     "If `true`, it'll render its children with a nice fade transition."

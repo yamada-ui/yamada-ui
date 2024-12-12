@@ -7,7 +7,6 @@ import type {
 } from "@yamada-ui/core"
 import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
-  DOMMotionComponents,
   MotionProps as OriginMotionProps,
   Target,
   TargetAndTransition,
@@ -176,7 +175,7 @@ export interface MotionComponent<Y extends MotionAs, D extends object = {}>
   <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
-export type MotionAs = keyof DOMMotionComponents
+export type MotionAs = keyof React.ReactDOM
 
 export type MotionComponents = {
   [Y in MotionAs]: UIMotionComponent<Y>

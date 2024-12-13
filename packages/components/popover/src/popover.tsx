@@ -52,7 +52,7 @@ export const popoverProperties = [
   "trigger",
   "openDelay",
   "closeDelay",
-  "Lazy",
+  "lazy",
   "isLazy",
   "lazyBehavior",
   "animation",

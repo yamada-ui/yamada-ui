@@ -53,7 +53,15 @@ return (
           },
         ]}
       >
-        {(item, index) => <Button key={index} {...item} />}
+        {(item, index) => (
+          <Button
+            key={index}
+            colorScheme={item.colorScheme}
+            onClick={() => changeThemeScheme(item.changeThemeScheme)}
+          >
+            {item.children}
+          </Button>
+        )}
       </For>
     </Wrap>
   </>

@@ -35,19 +35,28 @@ return (
     <Text>The current scheme is "{themeScheme}"</Text>
 
     <Wrap mt="md" gap="md">
-      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
-
-      <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
-        Pink Theme
-      </Button>
-
-      <Button colorScheme="purple" onClick={() => changeThemeScheme("purple")}>
-        Purple Theme
-      </Button>
-
-      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
-        Green Theme
-      </Button>
+      <For
+        each={[
+          { changeThemeScheme: "base", children: "Base Theme" },
+          {
+            colorScheme: "pink",
+            changeThemeScheme: "pink",
+            children: <>Pink Theme</>,
+          },
+          {
+            colorScheme: "purple",
+            changeThemeScheme: "purple",
+            children: <>Purple Theme</>,
+          },
+          {
+            colorScheme: "green",
+            changeThemeScheme: "green",
+            children: <>Green Theme</>,
+          },
+        ]}
+      >
+        {(item, index) => <Button key={index} {...item} />}
+      </For>
     </Wrap>
   </>
 )

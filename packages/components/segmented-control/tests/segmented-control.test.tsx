@@ -1,5 +1,5 @@
 import type { SegmentedControlItem } from "../src"
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { SegmentedControl, SegmentedControlButton } from "../src"
 
 describe("<SegmentedControl />", () => {
@@ -125,6 +125,6 @@ describe("<SegmentedControl />", () => {
 
     fireEvent.focus(secondButton)
 
-    expect(thirdButton).toHaveAttribute("data-focus")
+    waitFor(() => expect(thirdButton).toHaveAttribute("data-focus"))
   })
 })

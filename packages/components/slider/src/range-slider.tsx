@@ -84,6 +84,8 @@ export interface UseRangeSliderOptions {
   getAriaValueText?: (value: number) => string | undefined
   /**
    * If `true`, the value will be incremented or decremented in reverse.
+   *
+   * @deprecated Use `reversed` instead.
    */
   isReversed?: boolean
   /**
@@ -104,6 +106,10 @@ export interface UseRangeSliderOptions {
    * @default 'horizontal'
    */
   orientation?: "horizontal" | "vertical"
+  /**
+   * If `true`, the value will be incremented or decremented in reverse.
+   */
+  reversed?: boolean
   /**
    * The step in which increments or decrements have to be made.
    *
@@ -154,6 +160,7 @@ export const useRangeSlider = ({
     max = 100,
     min = 0,
     orientation = "horizontal",
+    reversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -162,6 +169,7 @@ export const useRangeSlider = ({
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
+
   const {
     "aria-readonly": ariaReadonly,
     disabled,
@@ -173,6 +181,7 @@ export const useRangeSlider = ({
   } = pickObject(rest, formControlProperties)
 
   defaultValue = defaultValue ?? [min + (max - min) / 4, max - (max - min) / 4]
+  reversed ??= isReversed
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
@@ -188,9 +197,9 @@ export const useRangeSlider = ({
   })
 
   const uuid = useId()
-  const [isDragging, setDragging] = useState(false)
-  const [isFocused, setFocused] = useState(false)
-  const isInteractive = !(disabled || readOnly)
+  const [dragging, setDragging] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const interactive = !(disabled || readOnly)
 
   const tenStep = (max - min) / 10
   const oneStep = step || (max - min) / 100
@@ -204,7 +213,7 @@ export const useRangeSlider = ({
     number,
     number,
   ]
-  const thumbValues = isReversed ? reversedValues : values
+  const thumbValues = reversed ? reversedValues : values
   const thumbPercents = thumbValues.map((value) =>
     valueToPercent(value, min, max),
   ) as [number, number]
@@ -213,21 +222,21 @@ export const useRangeSlider = ({
     { max, min: startValue + spacing },
   ]
 
-  const isVertical = orientation === "vertical"
+  const vertical = orientation === "vertical"
 
   const latestRef = useLatestRef({
     betweenThumbs,
     disabled,
     focusThumbOnChange,
-    isInteractive,
-    isReversed,
-    isVertical,
+    interactive,
     max,
     min,
     orientation,
+    reversed,
     step,
     valueBounds,
     values,
+    vertical,
   })
 
   const activeIndexRef = useRef<number>(-1)
@@ -257,9 +266,9 @@ export const useRangeSlider = ({
   usePanEvent(containerRef, {
     onMove: (ev) => {
       const activeIndex = activeIndexRef.current
-      const { isInteractive } = latestRef.current
+      const { interactive } = latestRef.current
 
-      if (!isInteractive || activeIndex == -1) return
+      if (!interactive || activeIndex == -1) return
 
       const pointValue = getValueFromPointer(ev) || 0
 
@@ -268,17 +277,17 @@ export const useRangeSlider = ({
       focusThumb(activeIndex)
     },
     onSessionEnd: () => {
-      const { isInteractive, values } = latestRef.current
+      const { interactive, values } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(false)
       onChangeEnd(values)
     },
     onSessionStart: (ev) => {
-      const { isInteractive, values } = latestRef.current
+      const { interactive, values } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(true)
 
@@ -320,19 +329,19 @@ export const useRangeSlider = ({
         trackRef.current.getBoundingClientRect()
       const { clientX, clientY } = ev.touches?.[0] ?? ev
 
-      const diff = isVertical ? bottom - clientY : clientX - left
+      const diff = vertical ? bottom - clientY : clientX - left
 
-      const length = isVertical ? height : width
+      const length = vertical ? height : width
 
       let percent = diff / length
 
-      if (isReversed) percent = 1 - percent
+      if (reversed) percent = 1 - percent
 
       let nextValue = percentToValue(percent, min, max)
 
       return nextValue
     },
-    [latestRef, isVertical, isReversed],
+    [latestRef, vertical, reversed],
   )
 
   const focusThumb = useCallback(
@@ -350,9 +359,9 @@ export const useRangeSlider = ({
 
   const constrain = useCallback(
     (i: number, value: number) => {
-      const { isInteractive, valueBounds, values } = latestRef.current
+      const { interactive, valueBounds, values } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       const { max = 100, min = 0 } = valueBounds[i] ?? {}
 
@@ -374,9 +383,9 @@ export const useRangeSlider = ({
 
       const value = values[i]!
 
-      constrain(i, isReversed ? value - step : value + step)
+      constrain(i, reversed ? value - step : value + step)
     },
-    [constrain, isReversed, latestRef, oneStep],
+    [constrain, reversed, latestRef, oneStep],
   )
 
   const stepDown = useCallback(
@@ -385,9 +394,9 @@ export const useRangeSlider = ({
 
       const value = values[i]!
 
-      constrain(i, isReversed ? value + step : value - step)
+      constrain(i, reversed ? value + step : value - step)
     },
-    [constrain, isReversed, latestRef, oneStep],
+    [constrain, reversed, latestRef, oneStep],
   )
 
   const reset = useCallback(
@@ -438,7 +447,7 @@ export const useRangeSlider = ({
       let h: number | string = "var(--ui-thumb-size)"
 
       if (thumbSizes.length) {
-        const p = isVertical ? "height" : "width"
+        const p = vertical ? "height" : "width"
         const z = { height: 0, width: 0 }
         const { height, width } =
           thumbSizes.reduce((a = z, b = z) => (a[p] > b[p] ? a : b), z) ?? {}
@@ -447,7 +456,7 @@ export const useRangeSlider = ({
         if (height) h = `${height}px`
       }
 
-      const paddingStyle = isVertical
+      const paddingStyle = vertical
         ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
         : { paddingBottom: `calc(${h} / 2)`, paddingTop: `calc(${h} / 2)` }
 
@@ -478,7 +487,7 @@ export const useRangeSlider = ({
         ]),
       }
     },
-    [id, isVertical, rest, thumbSizeProp, thumbSizes],
+    [id, vertical, rest, thumbSizeProp, thumbSizes],
   )
 
   const getInputProps: RequiredPropGetter<
@@ -515,7 +524,7 @@ export const useRangeSlider = ({
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
-        ...(isVertical
+        ...(vertical
           ? {
               height: "100%",
               left: "50%",
@@ -536,29 +545,29 @@ export const useRangeSlider = ({
         style,
       }
     },
-    [id, isVertical, formControlProps],
+    [id, vertical, formControlProps],
   )
 
   const getFilledTrackProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = Math.abs(thumbPercents[1] - thumbPercents[0])
-      const s = isReversed ? 100 - thumbPercents[0] : thumbPercents[0]
+      const s = reversed ? 100 - thumbPercents[0] : thumbPercents[0]
 
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
-        ...(isVertical
+        ...(vertical
           ? {
               height: `${n}%`,
               left: "50%",
               transform: "translateX(-50%)",
-              ...(isReversed ? { top: `${s}%` } : { bottom: `${s}%` }),
+              ...(reversed ? { top: `${s}%` } : { bottom: `${s}%` }),
             }
           : {
               top: "50%",
               transform: "translateY(-50%)",
               width: `${n}%`,
-              ...(isReversed ? { right: `${s}%` } : { left: `${s}%` }),
+              ...(reversed ? { right: `${s}%` } : { left: `${s}%` }),
             }),
       }
 
@@ -570,7 +579,7 @@ export const useRangeSlider = ({
         style,
       }
     },
-    [id, isReversed, isVertical, formControlProps, thumbPercents],
+    [id, reversed, vertical, formControlProps, thumbPercents],
   )
 
   const getMarkProps: RequiredPropGetter<
@@ -579,13 +588,13 @@ export const useRangeSlider = ({
   > = useCallback(
     (props, ref = null) => {
       let n = valueToPercent(props.value, min, max)
-      n = isReversed ? 100 - n : n
+      n = reversed ? 100 - n : n
 
       const style: CSSProperties = {
         ...props.style,
         pointerEvents: "none",
         position: "absolute",
-        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
+        ...(vertical ? { bottom: `${n}%` } : { left: `${n}%` }),
       }
 
       return {
@@ -601,7 +610,7 @@ export const useRangeSlider = ({
         "data-invalid": dataAttr(props.value < min || max < props.value),
       }
     },
-    [getMarkerId, isReversed, isVertical, max, min, formControlProps, values],
+    [getMarkerId, reversed, vertical, max, min, formControlProps, values],
   )
 
   const getThumbProps: RequiredPropGetter<
@@ -626,7 +635,7 @@ export const useRangeSlider = ({
         position: "absolute",
         touchAction: "none",
         userSelect: "none",
-        ...(isVertical ? { bottom } : { left }),
+        ...(vertical ? { bottom } : { left }),
       }
 
       const value = values[i]
@@ -652,10 +661,10 @@ export const useRangeSlider = ({
         "aria-valuetext":
           ariaValueText ?? getAriaValueText(value) ?? value.toString(),
         "data-active": dataAttr(
-          isDragging && focusThumbOnChange && activeIndexRef.current === i,
+          dragging && focusThumbOnChange && activeIndexRef.current === i,
         ),
         role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        tabIndex: interactive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => {
           activeIndexRef.current = -1
 
@@ -672,7 +681,7 @@ export const useRangeSlider = ({
     [
       thumbPercents,
       thumbSizes,
-      isVertical,
+      vertical,
       values,
       ariaLabel,
       ariaLabelledBy,
@@ -684,9 +693,9 @@ export const useRangeSlider = ({
       min,
       ariaValueText,
       getAriaValueText,
-      isDragging,
+      dragging,
       focusThumbOnChange,
-      isInteractive,
+      interactive,
       onBlur,
       onFocus,
       onKeyDown,
@@ -694,16 +703,16 @@ export const useRangeSlider = ({
   )
 
   return {
+    dragging,
+    focused,
     getInputId,
     getMarkerId,
     getThumbId,
-    isDragging,
-    isFocused,
-    isVertical,
     reset,
     stepDown,
     stepUp,
     values,
+    vertical,
     getContainerProps,
     getFilledTrackProps,
     getInputProps,
@@ -723,7 +732,7 @@ interface RangeSliderContext
       | "getMarkProps"
       | "getThumbProps"
       | "getTrackProps"
-      | "isVertical"
+      | "vertical"
     >,
     RangeSliderOptions {
   styles: { [key: string]: CSSUIObject | undefined }
@@ -801,7 +810,7 @@ export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const {
-    isVertical,
+    vertical,
     getContainerProps,
     getFilledTrackProps,
     getInputProps,
@@ -846,12 +855,12 @@ export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
     <RangeSliderProvider
       value={{
         filledTrackColor,
-        isVertical,
         styles,
         thumbColor,
         thumbSize,
         trackColor,
         trackSize,
+        vertical,
         filledTrackProps,
         getFilledTrackProps,
         getInputProps,
@@ -891,10 +900,10 @@ export interface RangeSliderTrackProps
 export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, "div">(
   ({ className, children, filledTrackProps, ...rest }, ref) => {
     const {
-      isVertical,
       styles,
       trackColor,
       trackSize,
+      vertical,
       getTrackProps,
       trackProps,
     } = useRangeSliderContext()
@@ -909,7 +918,7 @@ export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, "div">(
           {
             ...(trackColor ? { bg: trackColor } : {}),
             ...(trackSize
-              ? isVertical
+              ? vertical
                 ? { w: trackSize }
                 : { h: trackSize }
               : {}),

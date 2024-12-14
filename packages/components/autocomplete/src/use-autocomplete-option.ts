@@ -11,7 +11,7 @@ import {
   isUndefined,
   mergeRefs,
 } from "@yamada-ui/utils"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useId, useMemo, useRef } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendant,
@@ -73,7 +73,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     inputRef,
     omitSelectedValues,
     setFocusedIndex,
-    value,
+    value: selectedValue,
     optionProps,
     onChange,
     onClose,
@@ -81,51 +81,52 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   } = useAutocompleteContext()
   const uuid = useId()
   const itemRef = useRef<HTMLLIElement>(null)
-  let {
-    id,
+  const {
+    id = uuid,
     children,
     closeOnSelect: customCloseOnSelect,
-    disabled,
-    focusable,
-    icon: customIcon,
     isDisabled,
+    disabled = isDisabled,
     isFocusable,
+    focusable = isFocusable,
+    icon: customIcon,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-  disabled ??= isDisabled
-  focusable ??= isFocusable
   const trulyDisabled = !!disabled && !focusable
   const { descendants, index, register } = useAutocompleteDescendant({
     disabled: trulyDisabled,
   })
   const values = descendants.values()
   const frontValues = values.slice(0, index)
-  const isMulti = isArray(value)
-  const isDuplicated = frontValues.some(
-    ({ node }) => node.dataset.value === (optionValue ?? ""),
-  )
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isTarget = "target" in (itemRef.current?.dataset ?? {})
-  const isFocused = index === focusedIndex
+  const multi = isArray(selectedValue)
+  const target = "target" in (itemRef.current?.dataset ?? {})
+  const focused = index === focusedIndex
 
-  id ??= uuid
+  const value = useMemo(() => {
+    let value = optionValue
 
-  if (isUndefined(optionValue)) {
-    if (isString(children) || isNumber(children)) {
-      optionValue = children.toString()
-    } else {
-      console.warn(
-        `${
-          !isMulti ? "Autocomplete" : "MultiAutocomplete"
-        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
-      )
+    if (isUndefined(optionValue)) {
+      if (isString(children) || isNumber(children)) {
+        value = children.toString()
+      } else {
+        console.warn(
+          `${
+            !multi ? "Autocomplete" : "MultiAutocomplete"
+          }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+        )
+      }
     }
-  }
+
+    return value ?? ""
+  }, [children, multi, optionValue])
+
+  const duplicated = frontValues.some(
+    ({ node }) => node.dataset.value === value,
+  )
+  const selected =
+    !duplicated &&
+    (!multi ? value === selectedValue : selectedValue.includes(value))
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
@@ -137,9 +138,9 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         return
       }
 
-      if (!isDuplicated) setFocusedIndex(index)
+      if (!duplicated) setFocusedIndex(index)
 
-      onChange(optionValue ?? "")
+      onChange(value)
 
       if (inputRef.current) inputRef.current.focus()
 
@@ -148,11 +149,11 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       if (omitSelectedValues) onFocusNext(index)
     },
     [
-      isDuplicated,
+      duplicated,
       onFocusNext,
       omitSelectedValues,
       disabled,
-      optionValue,
+      value,
       setFocusedIndex,
       index,
       onChange,
@@ -165,7 +166,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const isHidden = !isTarget || (omitSelectedValues && isSelected)
+      const isHidden = !target || (omitSelectedValues && selected)
 
       const style: CSSProperties = {
         border: "0px",
@@ -188,25 +189,25 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         style: isHidden ? style : undefined,
         "aria-disabled": ariaAttr(disabled),
         "aria-hidden": ariaAttr(isHidden),
-        "aria-selected": isSelected,
+        "aria-selected": selected,
         "data-disabled": dataAttr(disabled),
-        "data-duplicated": dataAttr(isDuplicated),
-        "data-focus": dataAttr(isFocused),
+        "data-duplicated": dataAttr(duplicated),
+        "data-focus": dataAttr(focused),
         "data-target": dataAttr(true),
-        "data-value": optionValue ?? "",
+        "data-value": value,
         tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
     [
       id,
-      isDuplicated,
-      optionValue,
+      duplicated,
+      value,
       computedProps,
       disabled,
-      isFocused,
-      isSelected,
-      isTarget,
+      focused,
+      selected,
+      target,
       omitSelectedValues,
       onClick,
       register,
@@ -214,12 +215,12 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   return {
+    target,
     children,
     customIcon,
-    isFocused,
-    isSelected,
-    isTarget,
+    focused,
     omitSelectedValues,
+    selected,
     getOptionProps,
   }
 }

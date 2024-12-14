@@ -35,31 +35,31 @@ return (
     <Wrap mt="md" gap="md">
       <For
         each={[
-          { changeThemeScheme: "base", children: "Base Theme" },
+          { changeScheme: "base", children: "Base Theme" },
           {
             colorScheme: "pink",
-            changeThemeScheme: "pink",
+            changeScheme: "pink",
             children: <>Pink Theme</>,
           },
           {
             colorScheme: "purple",
-            changeThemeScheme: "purple",
+            changeScheme: "purple",
             children: <>Purple Theme</>,
           },
           {
             colorScheme: "green",
-            changeThemeScheme: "green",
+            changeScheme: "green",
             children: <>Green Theme</>,
           },
         ]}
       >
-        {(item, index) => (
+        {({ colorScheme, changeScheme, children }, index) => (
           <Button
             key={index}
-            colorScheme={item.colorScheme}
-            onClick={() => changeThemeScheme(item.changeThemeScheme)}
+            colorScheme={colorScheme}
+            onClick={() => changeThemeScheme(changeScheme)}
           >
-            {item.children}
+            {children}
           </Button>
         )}
       </For>

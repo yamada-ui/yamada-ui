@@ -46,17 +46,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone variant="dashed">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="solid">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="unstyled">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["dashed", "solid", "unstyled"]}>
+    {(variant, index) => (
+      <Dropzone key={index} variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -64,21 +60,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone size="xs">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="sm">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="md">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="lg">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Dropzone key={index} size={size}>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 

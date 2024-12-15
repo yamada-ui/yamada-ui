@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/use-disclosure": patch
+"@yamada-ui/switch": patch
 ---
 
 remove `is` prefix from props

@@ -30,13 +30,9 @@ import { Avatar, AvatarBadge, AvatarGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Avatar size="2xs" name="Hirotomo Yamada" />
-  <Avatar size="xs" name="Hirotomo Yamada" />
-  <Avatar size="sm" name="Hirotomo Yamada" />
-  <Avatar size="md" name="Hirotomo Yamada" />
-  <Avatar size="lg" name="Hirotomo Yamada" />
-  <Avatar size="xl" name="Hirotomo Yamada" />
-  <Avatar size="2xl" name="Hirotomo Yamada" />
+  <For each={["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]}>
+    {(size, key) => <Avatar size={size} name="Hirotomo Yamada" key={key} />}
+  </For>
 </Wrap>
 ```
 
@@ -83,40 +79,25 @@ import { Avatar, AvatarBadge, AvatarGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Avatar
-    name="Hirotomo Yamada"
-    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  <For
+    each={[
+      { color: "primary" },
+      { color: "secondary", placement: "top-start" },
+      { color: "green", placement: "top-end" },
+      { color: "pink", placement: "bottom-start" },
+      { color: "red", placement: "bottom-end" },
+    ]}
   >
-    <AvatarBadge bg="primary" />
-  </Avatar>
-
-  <Avatar
-    name="Hirotomo Yamada"
-    src="https://avatars.githubusercontent.com/u/84060430?v=4"
-  >
-    <AvatarBadge bg="secondary" placement="top-start" />
-  </Avatar>
-
-  <Avatar
-    name="Hirotomo Yamada"
-    src="https://avatars.githubusercontent.com/u/84060430?v=4"
-  >
-    <AvatarBadge bg="green" placement="top-end" />
-  </Avatar>
-
-  <Avatar
-    name="Hirotomo Yamada"
-    src="https://avatars.githubusercontent.com/u/84060430?v=4"
-  >
-    <AvatarBadge bg="pink" placement="bottom-start" />
-  </Avatar>
-
-  <Avatar
-    name="Hirotomo Yamada"
-    src="https://avatars.githubusercontent.com/u/84060430?v=4"
-  >
-    <AvatarBadge bg="red" placement="bottom-end" />
-  </Avatar>
+    {({ color, placement }, key) => (
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+        key={key}
+      >
+        <AvatarBadge bg={color} placement={placement} />
+      </Avatar>
+    )}
+  </For>
 </Wrap>
 ```
 

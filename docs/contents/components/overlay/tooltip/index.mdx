@@ -51,7 +51,10 @@ To change the display position, set `placement` to values like `top` or `left-st
   >
     {(placement, index) => (
       <Tooltip key={index} label="へっ！きたねぇ花火だ" placement={placement}>
-        <Text w="fit-content">Open right end Tooltip</Text>
+        <Text w="fit-content">
+          Open {placement.split("-").reduce((prev, next) => prev + " " + next)}{" "}
+          Tooltip
+        </Text>
       </Tooltip>
     )}
   </For>
@@ -67,7 +70,10 @@ To change the show or hide animation, set `animation` to values like `top` or `l
   <For each={["scale", "top", "left", "bottom", "right"]}>
     {(animation, index) => (
       <Tooltip key={index} label="へっ！きたねぇ花火だ" animation={animation}>
-        <Text w="fit-content">Open right end Tooltip</Text>
+        <Text w="fit-content">
+          Open {animation.split("-").reduce((prev, next) => prev + " " + next)}{" "}
+          Tooltip
+        </Text>
       </Tooltip>
     )}
   </For>

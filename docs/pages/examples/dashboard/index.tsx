@@ -24,9 +24,9 @@ import { RecentSales } from "./recent-sales"
 
 const DASHBOARD_ITEMS: SegmentedControlItem[] = [
   { label: "Overview", value: "Overview" },
-  { isDisabled: true, label: "Analytics", value: "Analytics" },
-  { isDisabled: true, label: "Reports", value: "Reports" },
-  { isDisabled: true, label: "Notifications", value: "Notifications" },
+  { disabled: true, label: "Analytics", value: "Analytics" },
+  { disabled: true, label: "Reports", value: "Reports" },
+  { disabled: true, label: "Notifications", value: "Notifications" },
 ]
 
 export const Dashboard = memo(() => {

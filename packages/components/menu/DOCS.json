@@ -382,6 +382,18 @@
       "description": "Right-aligned label text content, useful for displaying hotkeys.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be focusable.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "The menu item icon to use.",
@@ -390,21 +402,41 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the menu item will be focusable.",
       "required": false
     }
   },
   "MenuOptionItem": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox or radio will be checked.",
+      "required": false
+    },
     "closeOnSelect": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the list element will be closed when selected.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be focusable.",
       "required": false
     },
     "icon": {
@@ -415,18 +447,21 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox or radio will be checked.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the menu item will be focusable.",
       "required": false
     },

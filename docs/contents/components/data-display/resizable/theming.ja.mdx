@@ -17,18 +17,18 @@ tab: テーマ
 
 ```ts
 export const Resizable: ComponentMultiStyle<"Resizable"> = {
-  baseStyle: ({ direction: d }) => ({
+  baseStyle: ({ orientation: o }) => ({
     container: {},
     icon: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
-      rotate: d === "vertical" ? "90deg" : "0deg",
+      rotate: o === "vertical" ? "90deg" : "0deg",
     },
     item: {},
     trigger: {},
   }),
 
   variants: {
-    border: ({ direction: d }) => ({
+    border: ({ orientation: o }) => ({
       icon: {
         bg: "border",
         p: "1",
@@ -36,14 +36,14 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
       },
       trigger: {
         bg: "border",
-        ...(d === "vertical" ? { h: "px" } : { w: "px" }),
+        ...(o === "vertical" ? { h: "px" } : { w: "px" }),
         _after: {
           content: "''",
           position: "absolute",
-          ...(d === "vertical"
+          ...(o === "vertical"
             ? { left: "0", right: "0", transform: "translateY(-50%)" }
             : { bottom: "0", top: "0", transform: "translateX(-50%)" }),
-          ...(d === "vertical" ? { h: "2" } : { w: "2" }),
+          ...(o === "vertical" ? { h: "2" } : { w: "2" }),
         },
         _focus: {
           outline: "none",
@@ -57,7 +57,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
     spacer: ({
       colorScheme: c = "gray",
       colorMode: m,
-      direction: d,
+      orientation: o,
       theme: t,
     }) => ({
       icon: {
@@ -68,7 +68,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
         },
       },
       trigger: {
-        ...(d === "vertical" ? { p: "1" } : { p: "1" }),
+        ...(o === "vertical" ? { p: "1" } : { p: "1" }),
         _active: {
           _after: {
             bg: isGray(c) ? "border" : `${c}.50`,
@@ -88,7 +88,7 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
           rounded: "full",
           transitionDuration: "slower",
           transitionProperty: "common",
-          ...(d === "vertical" ? { h: "2", w: "full" } : { h: "full", w: "2" }),
+          ...(o === "vertical" ? { h: "2", w: "full" } : { h: "full", w: "2" }),
         },
         _dark: {
           _after: {
@@ -113,15 +113,15 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
         },
       },
     }),
-    unstyled: ({ direction: d }) => ({
+    unstyled: ({ orientation: o }) => ({
       trigger: {
         _after: {
           content: "''",
           position: "absolute",
-          ...(d === "vertical"
+          ...(o === "vertical"
             ? { left: "0", right: "0", transform: "translateY(-50%)" }
             : { bottom: "0", top: "0", transform: "translateX(-50%)" }),
-          ...(d === "vertical" ? { h: "2" } : { w: "2" }),
+          ...(o === "vertical" ? { h: "2" } : { w: "2" }),
         },
       },
     }),

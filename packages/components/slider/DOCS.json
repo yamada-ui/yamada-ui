@@ -19,6 +19,12 @@
       "description": "The initial value of the slider.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "filledTrackColor": {
       "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
       "description": "The CSS `color` property. Used in `color` of filled track element.",
@@ -50,32 +56,43 @@
       "description": "Props for range slider input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "isReversed": {
       "type": "boolean",
+      "deprecated": "Use `reversed` instead.",
       "description": "If `true`, the value will be incremented or decremented in reverse.",
       "required": false
     },
@@ -115,6 +132,23 @@
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
       "description": "The orientation of the slider.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "reversed": {
+      "type": "boolean",
+      "description": "If `true`, the value will be incremented or decremented in reverse.",
       "required": false
     },
     "size": {
@@ -192,6 +226,12 @@
       "description": "The initial value of the slider.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "filledTrackColor": {
       "type": "UIValue<\"border\" | ({} & string) | Color | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | ... 318 more ... | \"yellow.950\">",
       "description": "The CSS `color` property. Used in `color` of filled track element.",
@@ -223,32 +263,43 @@
       "description": "Props for slider input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "isReversed": {
       "type": "boolean",
+      "deprecated": "Use `reversed` instead.",
       "description": "If `true`, the value will be incremented or decremented in reverse.",
       "required": false
     },
@@ -288,6 +339,23 @@
       "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "'horizontal'",
       "description": "The orientation of the slider.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "reversed": {
+      "type": "boolean",
+      "description": "If `true`, the value will be incremented or decremented in reverse.",
       "required": false
     },
     "size": {

@@ -166,7 +166,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const getOptionProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const isHidden = !target || (omitSelectedValues && selected)
+      const hidden = !target || (omitSelectedValues && selected)
 
       const style: CSSProperties = {
         border: "0px",
@@ -186,9 +186,9 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         ...computedProps,
         ...props,
         id,
-        style: isHidden ? style : undefined,
+        style: hidden ? style : undefined,
         "aria-disabled": ariaAttr(disabled),
-        "aria-hidden": ariaAttr(isHidden),
+        "aria-hidden": ariaAttr(hidden),
         "aria-selected": selected,
         "data-disabled": dataAttr(disabled),
         "data-duplicated": dataAttr(duplicated),
@@ -230,7 +230,7 @@ export type UseAutocompleteOptionReturn = ReturnType<
 >
 
 export const useAutocompleteCreate = () => {
-  const { isHit, onCreate } = useAutocompleteContext()
+  const { hit, onCreate } = useAutocompleteContext()
 
   const getCreateProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
@@ -250,14 +250,14 @@ export const useAutocompleteCreate = () => {
         ref,
         role: "option",
         ...props,
-        style: isHit ? style : undefined,
-        "aria-hidden": ariaAttr(isHit),
-        "data-focus": dataAttr(!isHit),
+        style: hit ? style : undefined,
+        "aria-hidden": ariaAttr(hit),
+        "data-focus": dataAttr(!hit),
         tabIndex: -1,
         onClick: handlerAll(props.onClick, onCreate),
       }
     },
-    [isHit, onCreate],
+    [hit, onCreate],
   )
 
   return { getCreateProps }
@@ -268,11 +268,11 @@ export type UseAutocompleteCreateReturn = ReturnType<
 >
 
 export const useAutocompleteEmpty = () => {
-  const { isEmpty, isHit } = useAutocompleteContext()
+  const { empty, hit } = useAutocompleteContext()
 
   const getEmptyProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const isHidden = isHit && !isEmpty
+      const hidden = hit && !empty
 
       const style: CSSProperties = {
         border: "0px",
@@ -290,12 +290,12 @@ export const useAutocompleteEmpty = () => {
         ref,
         role: "presentation",
         ...props,
-        style: isHidden ? style : undefined,
-        "aria-hidden": ariaAttr(isHidden),
+        style: hidden ? style : undefined,
+        "aria-hidden": ariaAttr(hidden),
         tabIndex: -1,
       }
     },
-    [isHit, isEmpty],
+    [hit, empty],
   )
 
   return { getEmptyProps }

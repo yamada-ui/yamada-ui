@@ -36,16 +36,14 @@ export const Ripple: FC<RippleProps> = ({
   className,
   style,
   color = "currentColor",
-  disabled,
   isDisabled,
+  disabled = isDisabled,
   ripples,
   onAnimationComplete,
   onClear,
   ...rest
 }) => {
-  disabled ??= isDisabled
-
-  if (isDisabled) return null
+  if (disabled) return null
 
   const css: CSSUIObject = {
     rounded: "fallback(full, 9999px)",

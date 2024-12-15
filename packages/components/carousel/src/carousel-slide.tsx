@@ -17,12 +17,9 @@ export interface CarouselSlideProps
     CarouselSlideOptions {}
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
-  ({ className, size, ...rest }, ref) => {
+  ({ className, size = "$slideSize", ...rest }, ref) => {
     const { includeGapInSize, orientation } = useCarouselContext()
     const { getSlideProps } = useCarouselSlide(rest)
-
-    size ??= "$slideSize"
-
     const css: CSSUIObject = {
       flex: `0 0 ${size}`,
       position: "relative",

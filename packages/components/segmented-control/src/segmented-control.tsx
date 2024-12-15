@@ -48,11 +48,7 @@ interface SegmentedControlContext {
   styles: { [key: string]: CSSUIObject | undefined }
   value: string
   getInputProps: RequiredPropGetter<
-    {
-      index: number
-      isDisabled?: boolean
-      isReadOnly?: boolean
-    } & HTMLProps<"input">,
+    { index: number } & HTMLProps<"input">,
     HTMLProps<"input">
   >
   getLabelProps: RequiredPropGetter<
@@ -60,8 +56,6 @@ interface SegmentedControlContext {
       index: number
       value: string
       disabled?: boolean
-      isDisabled?: boolean
-      isReadOnly?: boolean
       readOnly?: boolean
     } & HTMLProps<"label">,
     HTMLProps<"label">
@@ -143,36 +137,27 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       "SegmentedControl",
       props,
     )
-    let {
-      id,
-      name,
+    const uuid = useId()
+    const {
+      id = uuid,
+      name = `segmented-control-${uuid}`,
       className,
       children,
       defaultValue,
-      disabled,
       isDisabled,
+      disabled = isDisabled,
       isReadOnly,
       items = [],
-      readOnly,
+      readOnly = isReadOnly,
       value: valueProp,
       onChange: onChangeProp,
       ...rest
     } = omitThemeProps(mergedProps)
-    const uuid = useId()
-
-    id ??= uuid
-    name ??= `segmented-control-${uuid}`
-    disabled ??= isDisabled
-    readOnly ??= isReadOnly
-
-    const onChangeRef = useCallbackRef(onChangeProp)
-
+    const containerRef = useRef<HTMLDivElement>(null)
     const descendants = useDescendants()
-
     const [focusedIndex, setFocusedIndex] = useState<number>(-1)
     const [focusVisible, setFocusVisible] = useState<boolean>(false)
-    const containerRef = useRef<HTMLDivElement>(null)
-
+    const onChangeRef = useCallbackRef(onChangeProp)
     const [value, setValue] = useControllableState({
       defaultValue,
       value: valueProp,
@@ -224,24 +209,12 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     )
 
     const getInputProps: RequiredPropGetter<
-      {
-        index: number
-        isDisabled?: boolean
-        isReadOnly?: boolean
-      } & HTMLProps<"input">,
+      { index: number } & HTMLProps<"input">,
       HTMLUIProps<"input">
     > = useCallback(
-      (
-        {
-          index,
-          isDisabled: isDisabledProp,
-          isReadOnly: isReadOnlyProp,
-          ...props
-        },
-        ref = null,
-      ) => {
-        const trulyDisabled = props.disabled ?? isDisabledProp ?? disabled
-        const trulyReadOnly = props.readOnly ?? isReadOnlyProp ?? readOnly
+      ({ index, ...props }, ref = null) => {
+        const trulyDisabled = props.disabled ?? disabled
+        const trulyReadOnly = props.readOnly ?? readOnly
         const checked = props.value === value
 
         return {
@@ -283,23 +256,13 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
         index: number
         value: string
         disabled?: boolean
-        isDisabled?: boolean
-        isReadOnly?: boolean
         readOnly?: boolean
       } & HTMLProps<"label">,
       HTMLProps<"label">
     > = useCallback(
-      (
-        {
-          index,
-          isDisabled: isDisabledProp,
-          isReadOnly: isReadOnlyProp,
-          ...props
-        },
-        ref = null,
-      ) => {
-        const trulyDisabled = props.disabled ?? isDisabledProp ?? disabled
-        const trulyReadOnly = props.readOnly ?? isReadOnlyProp ?? readOnly
+      ({ index, ...props }, ref = null) => {
+        const trulyDisabled = props.disabled ?? disabled
+        const trulyReadOnly = props.readOnly ?? readOnly
         const checked = props.value === value
         const focused = index === focusedIndex
 
@@ -424,10 +387,10 @@ export const SegmentedControlButton = forwardRef<
     {
       className,
       children,
-      disabled,
       isDisabled,
+      disabled = isDisabled,
       isReadOnly,
-      readOnly,
+      readOnly = isReadOnly,
       value,
       motionProps,
       onChange,
@@ -435,9 +398,6 @@ export const SegmentedControlButton = forwardRef<
     },
     ref,
   ) => {
-    disabled ??= isDisabled
-    readOnly ??= isReadOnly
-
     const [, mounted] = useMounted({ rerender: true })
     const {
       styles,
@@ -445,20 +405,15 @@ export const SegmentedControlButton = forwardRef<
       getInputProps,
       getLabelProps,
     } = useSegmentedControl()
-
     const { index, register } = useDescendant({
       disabled: disabled || readOnly,
     })
-
     const props = {
       disabled,
       index,
-      isDisabled,
-      isReadOnly,
       readOnly,
       value,
     }
-
     const css: CSSUIObject = {
       alignItems: "center",
       cursor: "pointer",
@@ -468,7 +423,6 @@ export const SegmentedControlButton = forwardRef<
       position: "relative",
       ...styles.button,
     }
-
     const selected = value === selectedValue
 
     return (

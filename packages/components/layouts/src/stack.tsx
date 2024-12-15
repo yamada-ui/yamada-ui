@@ -66,14 +66,12 @@ export const Stack = forwardRef<StackProps, "div">(
       divider,
       gap = "fallback(md, 1rem)",
       justify: justifyContent,
-      separator,
+      separator = divider,
       wrap: flexWrap,
       ...rest
     },
     ref,
   ) => {
-    separator ??= divider
-
     const isColumn = (value: any) =>
       value === "column" || value === "column-reverse"
 

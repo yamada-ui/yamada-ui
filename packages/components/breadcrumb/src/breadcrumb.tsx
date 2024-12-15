@@ -424,7 +424,7 @@ interface BreadcrumbSeparatorOptions {
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
-  gap?: CSSUIObject["mx"]
+  gap?: CSSUIProps["mx"]
 }
 
 export interface BreadcrumbSeparatorProps

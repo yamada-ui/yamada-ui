@@ -19,10 +19,9 @@ import { Status } from "@yamada-ui/react"
 
 ```tsx
 <HStack>
-  <Status value="info" />
-  <Status value="success" />
-  <Status value="warning" />
-  <Status value="error" />
+  <For each={["info", "success", "warning", "error"]}>
+    {(value, index) => <Status key={index} value={value} />}
+  </For>
 </HStack>
 ```
 
@@ -31,23 +30,34 @@ import { Status } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <For each={["sm", "md", "lg"]}>
-    {(size) => (
-      <HStack>
-        <Status size={size} value="info">
-          Info
-        </Status>
-
-        <Status size={size} value="success">
-          Success
-        </Status>
-
-        <Status size={size} value="warning">
-          Warning
-        </Status>
-
-        <Status size={size} value="error">
-          Error
-        </Status>
+    {(size, index) => (
+      <HStack key={index}>
+        <For
+          each={[
+            {
+              value: "info",
+              text: "Info",
+            },
+            {
+              value: "success",
+              text: "Success",
+            },
+            {
+              value: "warning",
+              text: "Warning",
+            },
+            {
+              value: "error",
+              text: "Error",
+            },
+          ]}
+        >
+          {({ value, text }, index) => (
+            <Status key={index} size={size} value={value}>
+              {text}
+            </Status>
+          )}
+        </For>
       </HStack>
     )}
   </For>
@@ -58,9 +68,31 @@ import { Status } from "@yamada-ui/react"
 
 ```tsx
 <HStack>
-  <Status value="info">Info</Status>
-  <Status value="success">Success</Status>
-  <Status value="warning">Warning</Status>
-  <Status value="error">Error</Status>
+  <For
+    each={[
+      {
+        value: "info",
+        text: "Info",
+      },
+      {
+        value: "success",
+        text: "Success",
+      },
+      {
+        value: "warning",
+        text: "Warning",
+      },
+      {
+        value: "error",
+        text: "Error",
+      },
+    ]}
+  >
+    {({ value, text }, index) => (
+      <Status key={index} value={value}>
+        {text}
+      </Status>
+    )}
+  </For>
 </HStack>
 ```

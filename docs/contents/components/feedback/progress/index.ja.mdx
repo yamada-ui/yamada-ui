@@ -24,25 +24,40 @@ import { Progress } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Progress
-    aria-label="Storage space"
-    colorScheme="green"
-    value={19}
-    size="xs"
-  />
-  <Progress
-    aria-label="Storage space"
-    colorScheme="pink"
-    value={93}
-    size="sm"
-  />
-  <Progress
-    aria-label="Storage space"
-    colorScheme="purple"
-    value={8}
-    size="md"
-  />
-  <Progress aria-label="Storage space" colorScheme="red" value={18} size="lg" />
+  <For
+    each={[
+      {
+        colorScheme: "green",
+        value: 19,
+        size: "xs",
+      },
+      {
+        colorScheme: "pink",
+        value: 93,
+        size: "sm",
+      },
+      {
+        colorScheme: "purple",
+        value: 8,
+        size: "md",
+      },
+      {
+        colorScheme: "red",
+        value: 18,
+        size: "lg",
+      },
+    ]}
+  >
+    {({ colorScheme, value, size }, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme={colorScheme}
+        value={value}
+        size={size}
+      />
+    )}
+  </For>
 </VStack>
 ```
 

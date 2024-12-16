@@ -134,7 +134,7 @@ interface MultiAutocompleteOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -156,21 +156,21 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       "MultiAutocomplete",
       props,
     )
-    let {
+    const {
       className,
-      clearable,
+      isClearable = true,
+      clearable = isClearable,
       closeOnSelect = false,
       color,
       component,
       defaultValue = [],
       footer,
-      h,
-      header,
       height,
-      isClearable = true,
+      h = height,
+      header,
       keepPlaceholder = false,
-      minH,
       minHeight,
+      minH = minHeight,
       separator,
       clearIconProps,
       containerProps,
@@ -181,7 +181,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       iconProps,
       inputProps,
       listProps,
-      portalProps = { isDisabled: true },
+      portalProps = { disabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
 
@@ -189,8 +189,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       allowCreate,
       children,
       descendants,
+      empty,
       inputValue,
-      isEmpty,
       value,
       formControlProps,
       getContainerProps,
@@ -205,10 +205,6 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       defaultValue,
     })
 
-    h ??= height
-    minH ??= minHeight
-    clearable ??= isClearable
-
     const css: CSSUIObject = {
       color,
       h: "fit-content",
@@ -222,8 +218,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
           value={{
             ...rest,
             allowCreate,
+            empty,
             inputValue,
-            isEmpty,
             styles,
             value,
             formControlProps,
@@ -268,7 +264,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                   contentProps={contentProps}
                   {...listProps}
                 >
-                  {!isEmpty ? (
+                  {!empty ? (
                     <>
                       {allowCreate ? (
                         <AutocompleteCreate {...createProps} />
@@ -318,7 +314,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     },
     ref,
   ) => {
-    const { inputRef, inputValue, isOpen, label, styles, value, onChange } =
+    const { inputRef, inputValue, label, open, styles, value, onChange } =
       useAutocompleteContext()
     const { getInputProps } = useAutocompleteInput()
 
@@ -363,12 +359,12 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
           return (
             <ui.span key={index} display="inline-block" me="0.25rem">
               {value}
-              {!isLast || isOpen ? separator : null}
+              {!isLast || open ? separator : null}
             </ui.span>
           )
         })
       }
-    }, [label, component, value, onChange, isOpen, inputRef, separator])
+    }, [label, component, value, onChange, open, inputRef, separator])
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -401,7 +397,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
             minW="0px"
             overflow="hidden"
             placeholder={
-              !label?.length || (keepPlaceholder && isOpen)
+              !label?.length || (keepPlaceholder && open)
                 ? placeholder
                 : undefined
             }

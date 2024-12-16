@@ -83,7 +83,7 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
 
       counter += 1
 
-      let {
+      const {
         id = counter,
         style,
         boxShadow,

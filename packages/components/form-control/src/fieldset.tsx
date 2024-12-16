@@ -131,53 +131,41 @@ export interface FieldsetProps
 export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   ({ id, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Fieldset", props)
-    let {
+    const uuid = useId()
+    const {
       className,
       children,
-      disabled,
+      isDisabled = false,
+      disabled = isDisabled,
       errorMessage,
       helperMessage,
-      invalid,
-      isDisabled = false,
       isInvalid = false,
+      invalid = isInvalid,
       isReadOnly = false,
       isReplace = true,
       isRequired = false,
       legend,
       optionalIndicator,
-      readOnly,
-      replace,
-      required,
+      readOnly = isReadOnly,
+      replace = isReplace,
+      required = isRequired,
       requiredIndicator,
       errorMessageProps,
       helperMessageProps,
       legendProps,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    const uuid = useId()
-
-    id ??= uuid
-
-    disabled ??= isDisabled
-    invalid ??= isInvalid
-    readOnly ??= isReadOnly
-    replace ??= isReplace
-    required ??= isRequired
-
     const [focused, setFocused] = useState<boolean>(false)
-
     const validChildren = getValidChildren(children)
-
     const customLegend = findChild(validChildren, Legend)
     const customHelperMessage = findChild(validChildren, HelperMessage)
     const customErrorMessage = findChild(validChildren, ErrorMessage)
-
     const isCustomLegend = !!customLegend
     const isCustomHelperMessage = !!customHelperMessage
     const isCustomErrorMessage = !!customErrorMessage
-
     const css: CSSUIObject = { ...styles.container }
+
+    id ??= uuid
 
     return (
       <FormControlContextProvider
@@ -255,9 +243,9 @@ export const Legend = forwardRef<LegendProps, "legend">(
     {
       className,
       children,
-      isRequired: isRequiredProp,
+      isRequired,
       optionalIndicator = null,
-      required: requiredProp,
+      required: requiredProp = isRequired,
       requiredIndicator = null,
       ...rest
     },
@@ -266,9 +254,9 @@ export const Legend = forwardRef<LegendProps, "legend">(
     const { disabled, focused, invalid, readOnly, required } =
       useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
-
-    requiredProp ??= isRequiredProp ?? required
     const css: CSSUIObject = { ...styles.legend }
+
+    requiredProp ??= required
 
     return (
       <ui.legend

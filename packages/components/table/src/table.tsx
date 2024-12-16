@@ -1,5 +1,5 @@
 import type { RowData } from "@tanstack/react-table"
-import type { ComponentArgs, CSSUIObject } from "@yamada-ui/core"
+import type { ComponentArgs, CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
@@ -31,7 +31,7 @@ interface TableOptions {
   /**
    * The CSS `table-layout` property.
    */
-  layout?: CSSUIObject["tableLayout"]
+  layout?: CSSUIProps["tableLayout"]
   /**
    * If `true`, display the outer border of the table.
    *

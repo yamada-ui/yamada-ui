@@ -162,53 +162,42 @@ export const [FormControlStylesProvider, useFormControlStyles] = createContext<
 export const FormControl = forwardRef<FormControlProps, "div">(
   ({ id, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("FormControl", props)
-    let {
+    const uuid = useId()
+    const labelId = useId()
+    const {
       className,
       children,
-      disabled,
+      isDisabled = false,
+      disabled = isDisabled,
       errorMessage,
       helperMessage,
-      invalid,
-      isDisabled = false,
       isInvalid = false,
+      invalid = isInvalid,
       isReadOnly = false,
       isReplace = true,
       isRequired = false,
       label,
       optionalIndicator,
-      readOnly,
-      replace,
-      required,
+      readOnly = isReadOnly,
+      replace = isReplace,
+      required = isRequired,
       requiredIndicator,
       errorMessageProps,
       helperMessageProps,
       labelProps,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    const uuid = useId()
-    const labelId = useId()
-
-    id ??= uuid
-    disabled ??= isDisabled
-    invalid ??= isInvalid
-    readOnly ??= isReadOnly
-    replace ??= isReplace
-    required ??= isRequired
-
     const [focused, setFocused] = useState<boolean>(false)
-
     const validChildren = getValidChildren(children)
-
     const customLabel = findChild(validChildren, Label)
     const customHelperMessage = findChild(validChildren, HelperMessage)
     const customErrorMessage = findChild(validChildren, ErrorMessage)
-
     const isCustomLabel = !!customLabel
     const isCustomHelperMessage = !!customHelperMessage
     const isCustomErrorMessage = !!customErrorMessage
-
     const css: CSSUIObject = { ...styles.container }
+
+    id ??= uuid
 
     return (
       <FormControlContextProvider
@@ -416,8 +405,12 @@ export const getFormControlProperties = ({
 }
 
 interface LabelOptions {
+  /**
+   * @deprecated Use `required` instead.
+   */
   isRequired?: boolean
   optionalIndicator?: ReactNode
+  required?: boolean
   requiredIndicator?: ReactNode
 }
 
@@ -426,12 +419,13 @@ export interface LabelProps extends HTMLUIProps<"label">, LabelOptions {}
 export const Label = forwardRef<LabelProps, "label">(
   (
     {
-      id: idProp,
+      id,
       htmlFor,
       className,
       children,
-      isRequired: isRequiredProp,
+      isRequired,
       optionalIndicator = null,
+      required: requiredProp = isRequired,
       requiredIndicator = null,
       ...rest
     },
@@ -447,19 +441,18 @@ export const Label = forwardRef<LabelProps, "label">(
       required,
     } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
-
-    idProp ??= labelId
-    isRequiredProp ??= required
-
     const css: CSSUIObject = {
       display: "block",
       pointerEvents: readOnly ? "none" : undefined,
       ...styles.label,
     }
 
+    id ??= labelId
+    requiredProp ??= required
+
     return (
       <ui.label
-        id={idProp}
+        id={id}
         ref={ref}
         htmlFor={htmlFor ?? formControlId}
         className={cx("ui-form__label", className)}
@@ -472,7 +465,7 @@ export const Label = forwardRef<LabelProps, "label">(
         {...rest}
       >
         {children}
-        {isRequiredProp ? (
+        {requiredProp ? (
           requiredIndicator ? (
             <RequiredIndicator>{requiredIndicator}</RequiredIndicator>
           ) : (
@@ -494,7 +487,6 @@ export interface RequiredIndicatorProps extends HTMLUIProps<"span"> {}
 export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
   ({ className, children, ...rest }, ref) => {
     const styles = useFormControlStyles() ?? {}
-
     const css: CSSUIObject = { ...styles.requiredIndicator }
 
     return !isValidElement(children) ? (
@@ -523,10 +515,9 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   ({ className, ...rest }, ref) => {
     const { id, invalid, replace } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
+    const css: CSSUIObject = { ...styles.helperMessage }
 
     if (replace && invalid) return null
-
-    const css: CSSUIObject = { ...styles.helperMessage }
 
     return (
       <ui.span
@@ -549,10 +540,9 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
   ({ className, ...rest }, ref) => {
     const { invalid } = useFormControlContext() ?? {}
     const styles = useFormControlStyles() ?? {}
+    const css: CSSUIObject = { ...styles.errorMessage }
 
     if (!invalid) return null
-
-    const css: CSSUIObject = { ...styles.errorMessage }
 
     return (
       <ui.span

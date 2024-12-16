@@ -80,7 +80,7 @@ interface DatePickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -98,26 +98,25 @@ export interface DatePickerProps
  */
 export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("DatePicker", props)
-  let {
+  const {
     className,
     children,
-    clearable,
+    isClearable = true,
+    clearable = isClearable,
     color,
     h,
-    height,
-    isClearable = true,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
     iconProps,
     inputProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
     value,
     getCalendarProps,
@@ -128,11 +127,6 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useDatePicker(computedProps)
-
-  clearable ??= isClearable
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -153,7 +147,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
             __css={{ position: "relative", ...styles.inner }}
           >
             <DatePickerField
-              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
+              {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 
@@ -201,15 +195,13 @@ export interface DatePickerFieldProps
     DatePickerFieldOptions {}
 
 export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
-  ({ className, h, minH, inputProps, ...rest }, ref) => {
+  ({ className, inputProps, ...rest }, ref) => {
     const styles = useDatePickerContext()
     const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }

@@ -147,8 +147,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       focusBorderColor,
       ...props,
     })
-    let {
-      id,
+    const uuid = useId()
+    const {
+      id = uuid,
       type = "number",
       className,
       autoFocus,
@@ -173,30 +174,19 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       },
       containerProps,
     ] = splitObject(rest, formControlProperties)
-    const uuid = useId()
-
-    id ??= uuid
-
     const descendants = useDescendants()
-
     const [moveFocus, setMoveFocus] = useState<boolean>(true)
     const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-
-    useEffect(() => {
-      if (!autoFocus) return
-
-      const firstValue = descendants.firstValue()
-
-      if (!firstValue) return
-
-      requestAnimationFrame(() => firstValue.node.focus())
-    }, [autoFocus, descendants])
-
     const [values, setValues] = useControllableState<string[]>({
       defaultValue: toArray(defaultValue) || [],
       value: toArray(value),
       onChange: (values) => onChangeProp?.(values.join("")),
     })
+    const css: CSSUIObject = {
+      alignItems: "center",
+      display: "flex",
+      ...styles.container,
+    }
 
     const focusNext = useCallback(
       (index: number) => {
@@ -357,6 +347,16 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
     const onBlur = useCallback(() => setFocusedIndex(-1), [])
 
+    useEffect(() => {
+      if (!autoFocus) return
+
+      const firstValue = descendants.firstValue()
+
+      if (!firstValue) return
+
+      requestAnimationFrame(() => firstValue.node.focus())
+    }, [autoFocus, descendants])
+
     const getInputProps = useCallback(
       ({
         index,
@@ -401,12 +401,6 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       ],
     )
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      ...styles.container,
-    }
-
     let cloneChildren = getValidChildren(children)
 
     if (!cloneChildren.length)
@@ -444,10 +438,9 @@ export const PinInputField = forwardRef<PinInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {
     const { styles, getInputProps } = usePinInputContext()
     const { index, register } = useDescendant()
+    const css: CSSUIObject = { ...styles.field }
 
     rest = useFormControlProps(rest)
-
-    const css: CSSUIObject = { ...styles.field }
 
     return (
       <ui.input

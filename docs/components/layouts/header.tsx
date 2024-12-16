@@ -68,7 +68,7 @@ export const Header = memo(
     const headerRef = useRef<HTMLHeadingElement>()
     const { scrollY } = useScroll()
     const [y, setY] = useState<number>(0)
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { height = 0 } = headerRef.current?.getBoundingClientRect() ?? {}
 
     useMotionValueEvent(scrollY, "change", setY)
@@ -149,11 +149,11 @@ export const Header = memo(
               display={{ base: "flex", md: "none" }}
             />
 
-            <ButtonGroup {...{ isOpen, onOpen }} />
+            <ButtonGroup {...{ open, onOpen }} />
           </HStack>
         </Center>
 
-        <MobileMenu isOpen={isOpen} onClose={onClose} />
+        <MobileMenu open={open} onClose={onClose} />
       </>
     )
   }),
@@ -164,7 +164,7 @@ interface ButtonGroupProps extends Partial<UseDisclosureReturn> {
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = memo(
-  ({ isMobile, isOpen, onClose, onOpen }) => {
+  ({ isMobile, open, onClose, onOpen }) => {
     return (
       <HStack gap="sm">
         <SearchButton
@@ -206,7 +206,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
         <ColorModeButton />
 
-        {!isOpen ? (
+        {!open ? (
           <IconButton
             variant="ghost"
             aria-label="Open navigation menu"
@@ -363,7 +363,7 @@ interface ThemeSchemeButtonProps extends IconButtonProps {
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { changeThemeScheme, theme } = useTheme()
     const { colorSchemes = [] } = theme
 
@@ -371,7 +371,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       <Popover
         {...popoverProps}
         closeOnButton={false}
-        isOpen={isOpen}
+        open={open}
         placement="bottom"
         restoreFocus={false}
         onClose={onClose}
@@ -448,7 +448,7 @@ ColorButton.displayName = "ColorButton"
 
 interface MobileMenuProps extends DrawerProps {}
 
-const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
+const MobileMenu: FC<MobileMenuProps> = memo(({ open, onClose }) => {
   const { events } = useRouter()
   const breakpoint = useBreakpoint()
 
@@ -468,7 +468,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
     <Drawer
       closeOnDrag
       isFullHeight
-      isOpen={isOpen}
+      open={open}
       w="sm"
       withCloseButton={false}
       withDragBar={false}
@@ -480,7 +480,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
         justifyContent="flex-end"
         pt="sm"
       >
-        <ButtonGroup isMobile {...{ isOpen, onClose }} />
+        <ButtonGroup isMobile {...{ open, onClose }} />
       </DrawerHeader>
 
       <DrawerBody my="sm" position="relative">

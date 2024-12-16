@@ -68,27 +68,37 @@
       "description": "Props for increment component.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -100,7 +110,6 @@
     },
     "isValidCharacter": {
       "type": "(value: string) => boolean",
-      "deprecated": "Use `validCharacter` instead.",
       "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
@@ -159,11 +168,6 @@
       "description": "If `true`, display the addon for the number input.",
       "required": false
     },
-    "validCharacter": {
-      "type": "(value: string) => boolean",
-      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
-      "required": false
-    },
     "value": {
       "type": "string | number",
       "description": "The value of the counter.\nShould be less than `max` and greater than `min`.",
@@ -194,7 +198,11 @@
       "description": "The initial value of the counter.\nShould be less than `max` and greater than `min`.",
       "required": false
     },
-    "disabled": { "type": "boolean", "required": false },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "focusInputOnChange": {
       "type": "boolean",
       "defaultValue": true,
@@ -218,33 +226,42 @@
       "description": "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "isValidCharacter": {
       "type": "(value: string) => boolean",
-      "deprecated": "Use `validCharacter` instead.",
       "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
@@ -305,17 +322,20 @@
       "description": "The number of decimal points used to round the value.",
       "required": false
     },
-    "readOnly": { "type": "boolean", "required": false },
-    "required": { "type": "boolean", "required": false },
+    "readOnly": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
     "step": {
       "type": "number",
       "defaultValue": "1",
       "description": "The step used to increment or decrement the value.",
-      "required": false
-    },
-    "validCharacter": {
-      "type": "(value: string) => boolean",
-      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
       "required": false
     },
     "value": {

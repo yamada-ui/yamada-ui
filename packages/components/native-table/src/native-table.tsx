@@ -1,4 +1,9 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -27,7 +32,7 @@ interface NativeTableOptions {
   /**
    * The CSS `table-layout` property.
    */
-  layout?: CSSUIObject["tableLayout"]
+  layout?: CSSUIProps["tableLayout"]
   /**
    * If `true`, display the outer border of the table.
    *

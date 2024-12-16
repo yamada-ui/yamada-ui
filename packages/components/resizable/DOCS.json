@@ -17,8 +17,9 @@
       "required": false
     },
     "direction": {
-      "type": "ResizableDirection",
+      "type": "ResizableOrientation",
       "defaultValue": "horizontal",
+      "deprecated": "Use `orientation` instead.",
       "description": "The direction of the resizable.",
       "required": false
     },
@@ -47,6 +48,12 @@
     "onLayout": {
       "type": "PanelGroupOnLayout",
       "description": "The callback invoked when resizable items are resized.",
+      "required": false
+    },
+    "orientation": {
+      "type": "ResizableOrientation",
+      "defaultValue": "horizontal",
+      "description": "The orientation of the resizable.",
       "required": false
     },
     "size": {

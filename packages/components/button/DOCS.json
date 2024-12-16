@@ -117,7 +117,8 @@
       "required": false
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "type": "UIValue<FlexDirection>",
+      "deprecated": "Use `flexDirection` instead.",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },

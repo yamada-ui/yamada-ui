@@ -23,6 +23,14 @@ order: 1
 />
 
 <PropsCard
+  id="editable-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="editable-errorbordercolor"
   name="errorBorderColor"
   type='"border" | "link" | BorderColor | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 319 more ... | [...]'
@@ -37,10 +45,19 @@ order: 1
 />
 
 <PropsCard
+  id="editable-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="editable-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -49,6 +66,7 @@ order: 1
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -68,6 +86,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -76,6 +95,7 @@ order: 1
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -129,6 +149,22 @@ order: 1
 />
 
 <PropsCard
+  id="editable-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="editable-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="editable-selectallonfocus"
   name="selectAllOnFocus"
   type="boolean"
@@ -172,10 +208,27 @@ order: 1
 />
 
 <PropsCard
+  id="useeditable-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useeditable-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="useeditable-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -184,6 +237,7 @@ order: 1
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -203,6 +257,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -211,6 +266,7 @@ order: 1
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -261,6 +317,22 @@ order: 1
     "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click."
   }
   defaultValue={"true"}
+/>
+
+<PropsCard
+  id="useeditable-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useeditable-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

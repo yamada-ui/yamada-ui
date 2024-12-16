@@ -39,16 +39,14 @@ export interface AccordionLabelProps
 
 export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
   ({ className, children, icon: customIcon, containerProps, ...rest }, ref) => {
-    let {
-      disabled,
-      icon: supplementIcon,
+    const {
       isDisabled = false,
+      disabled = isDisabled,
+      icon: supplementIcon,
       open,
       getLabelProps,
     } = useAccordionItemContext()
     const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
-
-    disabled ??= isDisabled
 
     const css: CSSUIObject = {
       alignItems: "center",
@@ -63,7 +61,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         ? customIcon({
             disabled,
             expanded: open,
-            isDisabled,
+            isDisabled: disabled,
             isExpanded: open,
           })
         : customIcon
@@ -73,7 +71,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         ? supplementIcon({
             disabled,
             expanded: open,
-            isDisabled,
+            isDisabled: disabled,
             isExpanded: open,
           })
         : supplementIcon
@@ -83,7 +81,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         ? generalIcon({
             disabled,
             expanded: open,
-            isDisabled,
+            isDisabled: disabled,
             isExpanded: open,
           })
         : generalIcon
@@ -116,10 +114,8 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   children,
   ...rest
 }) => {
-  let { disabled, isDisabled, open } = useAccordionItemContext()
+  const { disabled, open } = useAccordionItemContext()
   const { styles } = useAccordionContext()
-
-  disabled ??= isDisabled
 
   const css: CSSUIObject = {
     opacity: disabled ? 0.4 : 1,

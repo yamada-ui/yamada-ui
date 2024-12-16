@@ -351,7 +351,7 @@
   },
   "PopoverContent": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"div\" | \"style\" | \"title\" | \"button\" | \"form\" | \"animate\" | \"a\" | \"abbr\" | \"address\" | \"area\" | ... 149 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },

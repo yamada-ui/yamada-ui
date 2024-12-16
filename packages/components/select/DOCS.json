@@ -12,6 +12,12 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the multi select clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "SelectIconProps",
       "description": "Props for multi select clear icon element.",
@@ -72,6 +78,12 @@
       "description": "The initial value of the select.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -125,21 +137,30 @@
       "description": "Props for multi select icon element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the multi select clear icon.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -159,12 +180,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -267,7 +290,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -275,6 +298,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {
@@ -314,6 +349,18 @@
       "description": "If `true`, the list element will be closed when selected.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the select option will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the select option will be focusable.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "The select option icon to use.",
@@ -322,12 +369,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the select option will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the select option will be focusable.",
       "required": false
     },
@@ -417,6 +466,12 @@
       "description": "The initial value of the select.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -470,15 +525,23 @@
       "description": "Props for select icon element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -498,12 +561,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -601,7 +666,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -609,6 +674,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {

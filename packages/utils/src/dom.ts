@@ -92,10 +92,9 @@ export function getPx(value: number | string | undefined): number {
 
   if (value.includes("px")) return parseFloat(value)
 
-  const isBrowser = createdDom()
   let fontSize = 16
 
-  if (isBrowser) {
+  if (createdDom()) {
     const style = window.getComputedStyle(document.documentElement)
 
     const computedFontSize = parseFloat(style.fontSize)

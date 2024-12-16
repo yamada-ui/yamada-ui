@@ -40,18 +40,15 @@ const InputElement = forwardRef<InputElementProps, "div">(
   (
     {
       className,
-      clickable,
       isClick = false,
-      isClickable,
+      isClickable = isClick,
+      clickable = isClickable,
       placement = "left",
       ...rest
     },
     ref,
   ) => {
     const { fieldFontSize, fieldHeight, styles } = useInputGroup()
-
-    isClickable ??= isClick
-    clickable ??= isClickable
 
     const css: CSSUIObject = {
       alignItems: "center",

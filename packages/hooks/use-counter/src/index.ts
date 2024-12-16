@@ -58,8 +58,8 @@ export interface UseCounterProps {
 
 export const useCounter = ({
   keepWithinRange = true,
-  max = Number.MAX_SAFE_INTEGER,
-  min = Number.MIN_SAFE_INTEGER,
+  max: maxValue = Number.MAX_SAFE_INTEGER,
+  min: minValue = Number.MIN_SAFE_INTEGER,
   ...props
 }: UseCounterProps = {}) => {
   const onChange = useCallbackRef(props.onChange)
@@ -92,11 +92,12 @@ export const useCounter = ({
     (value: number) => {
       let nextValue = value
 
-      if (keepWithinRange) nextValue = clampNumber(nextValue, min, max)
+      if (keepWithinRange)
+        nextValue = clampNumber(nextValue, minValue, maxValue)
 
       return toPrecision(nextValue, precision)
     },
-    [precision, keepWithinRange, max, min],
+    [precision, keepWithinRange, maxValue, minValue],
   )
 
   const increment = useCallback(
@@ -140,35 +141,48 @@ export const useCounter = ({
       next = ""
     } else {
       next =
-        casting(props.defaultValue, props.step ?? 1, props.precision) ?? min
+        casting(props.defaultValue, props.step ?? 1, props.precision) ??
+        minValue
     }
 
     update(next)
-  }, [props.defaultValue, props.precision, props.step, update, min])
+  }, [props.defaultValue, props.precision, props.step, update, minValue])
 
   const cast = useCallback(
     (value: number | string) => {
-      const nextValue = casting(value, props.step ?? 1, precision) ?? min
+      const nextValue = casting(value, props.step ?? 1, precision) ?? minValue
 
       update(nextValue)
     },
-    [precision, props.step, update, min],
+    [precision, props.step, update, minValue],
   )
 
   const valueAsNumber = parse(value)
 
-  const isOut = valueAsNumber < min || max < valueAsNumber
-  const isMax = valueAsNumber === max
-  const isMin = valueAsNumber === min
+  const out = valueAsNumber < minValue || maxValue < valueAsNumber
+  const max = valueAsNumber === maxValue
+  const min = valueAsNumber === minValue
 
   return {
     cast,
     clamp,
     decrement,
     increment,
-    isMax,
-    isMin,
-    isOut,
+    /**
+     * @deprecated Use `max` instead.
+     */
+    isMax: max,
+    /**
+     * @deprecated Use `min` instead.
+     */
+    isMin: min,
+    /**
+     * @deprecated Use `out` instead.
+     */
+    isOut: out,
+    max,
+    min,
+    out,
     precision,
     reset,
     setValue,

@@ -71,28 +71,23 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
   (
     {
       className,
-      active,
-      children,
-      disabled,
-      disableRipple,
       isActive,
-      isDisabled,
+      active = isActive,
       page,
+      children = iconMap[page] ?? page,
+      isDisabled,
+      disabled = isDisabled,
+      disableRipple,
       ...rest
     },
     ref,
   ) => {
     const styles = usePaginationContext()
-    const isEllipsis = page === "ellipsis"
+    const ellipsis = page === "ellipsis"
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || isDisabled || isEllipsis,
+      disabled: disableRipple || disabled || ellipsis,
     })
-
-    children ??= iconMap[page] ?? page
-    active ??= isActive
-    disabled ??= isDisabled
-
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
@@ -103,13 +98,12 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
       ...styles.item,
       ...styles[page],
     }
-
-    const Component = ui[isEllipsis ? "span" : "button"]
+    const Component = ui[ellipsis ? "span" : "button"]
 
     return (
       <Component
         ref={ref}
-        {...(!isEllipsis
+        {...(!ellipsis
           ? {
               type: "button",
               "data-disabled": dataAttr(disabled),
@@ -119,10 +113,10 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
           : {})}
         className={cx(
           "ui-pagination__item",
-          isEllipsis ? "ui-pagination__item--ellipsis" : undefined,
+          ellipsis ? "ui-pagination__item--ellipsis" : undefined,
           className,
         )}
-        tabIndex={!isEllipsis ? 0 : -1}
+        tabIndex={!ellipsis ? 0 : -1}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}

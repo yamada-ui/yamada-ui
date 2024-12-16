@@ -14,6 +14,14 @@ tab: Props
 ### CheckboxProps
 
 <PropsCard
+  id="checkbox-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkbox-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -35,6 +43,14 @@ tab: Props
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
   deprecated={"Use `defaultChecked` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
   defaultValue={"false"}
 />
 
@@ -70,6 +86,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkbox-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkbox-ischecked"
   name="isChecked"
   type="boolean"
@@ -83,6 +107,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -100,6 +125,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -108,6 +134,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -116,6 +143,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -165,6 +193,22 @@ tab: Props
   name="onFocus"
   type="FocusEventHandler<HTMLInputElement>"
   description={"The callback invoked when the checkbox is focused."}
+/>
+
+<PropsCard
+  id="checkbox-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkbox-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -237,6 +281,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxgroup-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxgroup-grow"
   name="grow"
   type="UIValue<FlexGrow>"
@@ -244,10 +296,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxgroup-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxgroup-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -256,6 +317,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -275,6 +337,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -283,6 +346,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -311,6 +375,22 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxgroup-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxgroup-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxgroup-shrink"
   name="shrink"
   type="UIValue<FlexShrink>"
@@ -336,7 +416,7 @@ tab: Props
 <PropsCard
   id="checkboxicon-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "view"'
+  type="keyof ReactDOM"
   description={"The HTML element to render."}
 />
 
@@ -349,10 +429,26 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxicon-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxicon-indeterminate"
   name="indeterminate"
   type="boolean"
   description={"If `true`, the icon will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
   defaultValue={"false"}
 />
 
@@ -370,6 +466,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -387,6 +484,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -395,12 +493,30 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
 <PropsCard
   id="checkboxicon-isrequired"
   name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxicon-required"
+  name="required"
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue={"false"}
@@ -434,6 +550,14 @@ tab: Props
 />
 
 <PropsCard
+  id="usecheckbox-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="usecheckbox-id"
   name="id"
   type="string"
@@ -445,6 +569,14 @@ tab: Props
   name="indeterminate"
   type="boolean"
   description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
   defaultValue={"false"}
 />
 
@@ -462,6 +594,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -479,6 +612,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -487,6 +621,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -495,6 +630,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -524,6 +660,22 @@ tab: Props
   name="onFocus"
   type="FocusEventHandler<HTMLInputElement>"
   description={"The callback invoked when the checkbox is focused."}
+/>
+
+<PropsCard
+  id="usecheckbox-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="usecheckbox-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

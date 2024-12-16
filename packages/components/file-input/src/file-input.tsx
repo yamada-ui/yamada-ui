@@ -209,7 +209,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       ref,
       ...formControlProps,
       ...rest,
-      isDisabled: disabled || readOnly,
+      disabled: disabled || readOnly,
       onClick: handlerAll(onClickProp, onClick),
     })
 

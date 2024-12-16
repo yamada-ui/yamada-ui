@@ -21,9 +21,9 @@ export const OptionGroup = forwardRef<OptionGroupProps, "div">(
       children,
       color,
       h,
-      height,
+      height = h,
       minH,
-      minHeight,
+      minHeight = minH,
       labelProps,
       ...rest
     },
@@ -32,9 +32,6 @@ export const OptionGroup = forwardRef<OptionGroupProps, "div">(
     const { styles } = useSelectContext()
     const { label, getContainerProps, getGroupProps, getLabelProps } =
       useSelectOptionGroup(rest)
-
-    h ??= height
-    minH ??= minHeight
 
     return (
       <ui.section
@@ -54,7 +51,9 @@ export const OptionGroup = forwardRef<OptionGroupProps, "div">(
         <ui.div
           {...getGroupProps({}, ref)}
           className="ui-select__item__group"
-          __css={{ h, minH, ...styles.group }}
+          height={height}
+          minHeight={minHeight}
+          __css={styles.group}
         >
           {children}
         </ui.div>

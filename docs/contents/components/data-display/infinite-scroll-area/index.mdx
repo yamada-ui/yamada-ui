@@ -34,9 +34,8 @@ return (
     }}
     loading={<Loading fontSize="2xl" />}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -52,7 +51,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -83,7 +83,7 @@ return (
       <InfiniteScrollArea
         rootRef={rootRef}
         resetRef={resetRef}
-        onLoad={ ({ index, finish }) => {
+        onLoad={({ index, finish }) => {
           console.log("load", index)
 
           setCount((prev) => prev + 50)
@@ -92,9 +92,8 @@ return (
         }}
         loading={<Loading fontSize="2xl" />}
       >
-        {Array(count)
-          .fill(0)
-          .map((_, index) => (
+        <For each={Array.from({ length: count })}>
+          {(_, index) => (
             <Card key={index}>
               <CardHeader>
                 <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -110,12 +109,13 @@ return (
                 </Text>
               </CardBody>
             </Card>
-          ))}
+          )}
+        </For>
       </InfiniteScrollArea>
     </Container>
 
     <Button onClick={() => resetRef.current()}>Reset</Button>
-  </>
+  </VStack>
 )
 ```
 
@@ -138,9 +138,8 @@ return (
     loading={<Loading fontSize="2xl" />}
     rootMargin="300px 0px 0px 0px"
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -156,7 +155,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -180,9 +180,8 @@ return (
     loading={<Loading fontSize="2xl" />}
     threshold={1}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -198,7 +197,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -227,9 +227,8 @@ return (
     }}
     loading={<Loading fontSize="2xl" />}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -245,7 +244,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -269,9 +269,8 @@ return (
     loading={<Loading fontSize="2xl" />}
     startIndex={3}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -287,7 +286,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -310,9 +310,8 @@ return (
     }}
     loading={<Loading fontSize="2xl" />}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index} minW="sm" h="full">
           <CardHeader>
             <Heading size="md">『天元突破グレンラガン』</Heading>
@@ -325,7 +324,8 @@ return (
             />
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -352,9 +352,8 @@ return (
       rootRef={rootRef}
       isReverse
     >
-      {Array(count)
-        .fill(0)
-        .map((_, index) => (
+      <For each={Array.from({ length: count })}>
+        {(_, index) => (
           <Card key={index}>
             <CardHeader>
               <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -370,7 +369,8 @@ return (
               </Text>
             </CardBody>
           </Card>
-        ))}
+        )}
+      </For>
     </InfiniteScrollArea>
   </Box>
 )
@@ -402,9 +402,8 @@ return (
       loading={<Loading fontSize="2xl" />}
       isDisabled={isDisabled}
     >
-      {Array(count)
-        .fill(0)
-        .map((_, index) => (
+      <For each={Array.from({ length: count })}>
+        {(_, index) => (
           <Card key={index}>
             <CardHeader>
               <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -420,7 +419,8 @@ return (
               </Text>
             </CardBody>
           </Card>
-        ))}
+        )}
+      </For>
     </InfiniteScrollArea>
 
     <Button
@@ -463,9 +463,8 @@ return (
       loading={<Loading fontSize="2xl" />}
       resetRef={resetRef}
     >
-      {Array(count)
-        .fill(0)
-        .map((_, index) => (
+      <For each={Array.from({ length: count })}>
+        {(_, index) => (
           <Card key={index}>
             <CardHeader>
               <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -481,7 +480,8 @@ return (
               </Text>
             </CardBody>
           </Card>
-        ))}
+        )}
+      </For>
     </InfiniteScrollArea>
 
     <Button onClick={() => resetRef.current()}>Reset</Button>
@@ -508,9 +508,8 @@ return (
     loading={<Loading fontSize="2xl" />}
     finish={<>Finished</>}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -526,7 +525,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -552,9 +552,8 @@ return (
     loading={<Loading fontSize="2xl" />}
     triggerProps={{ bg: "primary.50", p: "md", rounded: "md" }}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -570,7 +569,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```
@@ -595,9 +595,8 @@ return (
     }}
     loading={<>Loading…</>}
   >
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -613,7 +612,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </InfiniteScrollArea>
 )
 ```

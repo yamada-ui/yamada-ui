@@ -23,7 +23,7 @@ const defaultOverlays = (
   max: number,
   withShadow: boolean,
 ): HTMLUIProps[] => {
-  let overlays: HTMLUIProps[] = [
+  const overlays: HTMLUIProps[] = [
     {
       bgGradient: `linear(to-r, ${[...Array(7)]
         .map(
@@ -35,12 +35,9 @@ const defaultOverlays = (
   ]
 
   if (withShadow)
-    overlays = [
-      ...overlays,
-      {
-        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
-      },
-    ]
+    overlays.push({
+      boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+    })
 
   return overlays
 }

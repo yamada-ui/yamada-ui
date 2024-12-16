@@ -157,7 +157,7 @@ export const useSlider = ({
 }: UseSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
+  const {
     id,
     name,
     "aria-label": ariaLabel,
@@ -169,7 +169,7 @@ export const useSlider = ({
     max = 100,
     min = 0,
     orientation = "horizontal",
-    reversed,
+    reversed = isReversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -178,6 +178,9 @@ export const useSlider = ({
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
+
+  if (max < min)
+    throw new Error("Do not assign a number less than 'min' to 'max'")
 
   const {
     "aria-readonly": ariaReadonly,
@@ -188,36 +191,21 @@ export const useSlider = ({
     onFocus,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
-
-  reversed ??= isReversed
-
-  if (max < min)
-    throw new Error("Do not assign a number less than 'min' to 'max'")
-
-  const onChangeStart = useCallbackRef(onChangeStartProp)
-  const onChangeEnd = useCallbackRef(onChangeEndProp)
-  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
-
   const [computedValue, setValue] = useControllableState({
     defaultValue: defaultValue ?? min + (max - min) / 2,
     value: valueProp,
     onChange,
   })
-
   const [dragging, setDragging] = useState(false)
   const [focused, setFocused] = useState(false)
   const interactive = !(disabled || readOnly)
-
   const tenStep = (max - min) / 10
   const oneStep = step || (max - min) / 100
-
   const value = clampNumber(computedValue, min, max)
   const reversedValue = max - value + min
   const thumbValue = reversed ? reversedValue : value
   const thumbPercent = valueToPercent(thumbValue, min, max)
-
   const vertical = orientation === "vertical"
-
   const latestRef = useLatestRef({
     focusThumbOnChange,
     interactive,
@@ -226,13 +214,14 @@ export const useSlider = ({
     step,
     value,
   })
-
   const eventSourceRef = useRef<"keyboard" | "pointer" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
-
   const thumbSize = useSize(thumbRef)
+  const onChangeStart = useCallbackRef(onChangeStartProp)
+  const onChangeEnd = useCallbackRef(onChangeEndProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
 
   usePanEvent(containerRef, {
     onMove: (ev) => {

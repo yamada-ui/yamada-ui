@@ -73,26 +73,30 @@ export interface MarkdownProps
  */
 export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Markdown", props)
-  let {
+  const {
     className,
-    components,
-    rehypePlugins,
-    remarkPlugins,
+    components: _components,
+    rehypePlugins: _rehypePlugins,
+    remarkPlugins: _remarkPlugins,
     codeProps,
     noteProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  remarkPlugins = [
+  const remarkPlugins = [
     remarkGfm,
     remarkBreaks,
     remarkUIComponent,
-    ...filterEmpty(remarkPlugins ?? []),
+    ...filterEmpty(_remarkPlugins ?? []),
   ]
-  rehypePlugins = [rehypePlugin, rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
-  components = {
+  const rehypePlugins = [
+    rehypePlugin,
+    rehypeRaw,
+    ...filterEmpty(_rehypePlugins ?? []),
+  ]
+  const components = {
     ...uiComponents({ codeProps, noteProps }),
-    ...components,
+    ..._components,
   } as MarkdownComponents
 
   return (

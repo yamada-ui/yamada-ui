@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-async-callback",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Yamada UI useAsyncCallback custom hook",
   "keywords": [
     "use-async-callback"

@@ -1,9 +1,29 @@
 {
   "SwitchIcon": {
-    "isActive": { "type": "boolean", "required": false },
-    "isChecked": { "type": "boolean", "required": false },
-    "isFocused": { "type": "boolean", "required": false },
-    "isHovered": { "type": "boolean", "required": false }
+    "active": { "type": "boolean", "required": false },
+    "checked": { "type": "boolean", "required": false },
+    "focused": { "type": "boolean", "required": false },
+    "hovered": { "type": "boolean", "required": false },
+    "isActive": {
+      "type": "boolean",
+      "deprecated": "Use `active` instead.",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "deprecated": "Use `checked` instead.",
+      "required": false
+    },
+    "isFocused": {
+      "type": "boolean",
+      "deprecated": "Use `focused` instead.",
+      "required": false
+    },
+    "isHovered": {
+      "type": "boolean",
+      "deprecated": "Use `hovered` instead.",
+      "required": false
+    }
   },
   "Switch": {
     "checked": {
@@ -31,6 +51,12 @@
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<\n  SwitchIconProps,\n  string | JSXElementConstructor<any>\n>",
       "description": "The switch icon to use.",
@@ -52,6 +78,12 @@
       "description": "Props for switch input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -62,30 +94,35 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "isReverse": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `reverse` instead.",
       "description": "Change switch label from right to left.",
       "required": false
     },
@@ -112,6 +149,24 @@
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
       "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Change switch label from right to left.",
       "required": false
     },
     "selectOnEnter": {

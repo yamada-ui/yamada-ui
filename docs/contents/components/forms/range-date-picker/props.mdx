@@ -84,6 +84,14 @@ tab: Props
 />
 
 <PropsCard
+  id="rangedatepicker-clearable"
+  name="clearable"
+  type="boolean"
+  description={"If `true`, display the month picker clear icon."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="rangedatepicker-cleariconprops"
   name="clearIconProps"
   type="DatePickerIconProps"
@@ -193,6 +201,14 @@ tab: Props
   name="defaultValue"
   type="[(Date | undefined)?, (Date | undefined)?]"
   description={"The initial value of the calendar."}
+/>
+
+<PropsCard
+  id="rangedatepicker-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -327,10 +343,19 @@ tab: Props
 />
 
 <PropsCard
+  id="rangedatepicker-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="rangedatepicker-isclearable"
   name="isClearable"
   type="boolean"
   description={"If `true`, display the date picker clear icon."}
+  deprecated={"Use `clearable` instead."}
   defaultValue={"true"}
 />
 
@@ -339,6 +364,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -347,6 +373,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -374,6 +401,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -382,6 +410,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -583,7 +612,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue={"'{ isDisabled: true }'"}
+  defaultValue={"'{ disabled: true }'"}
 />
 
 <PropsCard
@@ -594,6 +623,22 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
+/>
+
+<PropsCard
+  id="rangedatepicker-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="rangedatepicker-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

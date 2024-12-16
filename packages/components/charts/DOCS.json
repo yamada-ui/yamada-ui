@@ -459,13 +459,13 @@
   "ChartLabel": {},
   "ChartTooltip": {
     "dataKey": { "type": "string", "required": false },
-    "isRadialChart": { "type": "boolean", "required": false },
     "label": { "type": "string", "required": false },
     "labelFormatter": {
       "type": "(label: string) => string",
       "required": false
     },
     "payload": { "type": "Dict<any>[]", "required": false },
+    "radialChart": { "type": "boolean", "required": false },
     "unit": { "type": "string", "required": false },
     "valueFormatter": { "type": "(value: any) => string", "required": false }
   },
@@ -537,6 +537,7 @@
     "isPercent": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `percent` instead.",
       "description": "Determines whether labels should be displayed as percentages.",
       "required": false
     },
@@ -570,6 +571,12 @@
       "type": "number",
       "defaultValue": "0",
       "description": "Controls padding between segments.",
+      "required": false
+    },
+    "percent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether labels should be displayed as percentages.",
       "required": false
     },
     "pieProps": {
@@ -923,6 +930,7 @@
     "isPercent": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `percent` instead.",
       "description": "Determines whether labels should be displayed as percentages.",
       "required": false
     },
@@ -951,6 +959,12 @@
       "type": "number",
       "defaultValue": "0",
       "description": "Controls padding between segments.",
+      "required": false
+    },
+    "percent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Determines whether labels should be displayed as percentages.",
       "required": false
     },
     "pieProps": {

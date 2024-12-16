@@ -147,20 +147,21 @@ export const useRangeSlider = ({
 }: UseRangeSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
-    id,
-    name,
+  const uuid = useId()
+  const {
+    id = uuid,
+    name = id,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     "aria-valuetext": ariaValueText,
     betweenThumbs = 0,
-    defaultValue,
-    getAriaValueText: getAriaValueTextProp,
-    isReversed,
     max = 100,
     min = 0,
+    defaultValue = [min + (max - min) / 4, max - (max - min) / 4],
+    getAriaValueText: getAriaValueTextProp,
+    isReversed,
     orientation = "horizontal",
-    reversed,
+    reversed = isReversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -169,6 +170,9 @@ export const useRangeSlider = ({
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
+
+  if (max < min)
+    throw new Error("Do not assign a number less than 'min' to 'max'")
 
   const {
     "aria-readonly": ariaReadonly,
@@ -179,32 +183,17 @@ export const useRangeSlider = ({
     onFocus,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
-
-  defaultValue = defaultValue ?? [min + (max - min) / 4, max - (max - min) / 4]
-  reversed ??= isReversed
-
-  if (max < min)
-    throw new Error("Do not assign a number less than 'min' to 'max'")
-
-  const onChangeStart = useCallbackRef(onChangeStartProp)
-  const onChangeEnd = useCallbackRef(onChangeEndProp)
-  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
-
   const [computedValues, setValues] = useControllableState({
     defaultValue,
     value: valueProp,
     onChange,
   })
-
-  const uuid = useId()
   const [dragging, setDragging] = useState(false)
   const [focused, setFocused] = useState(false)
   const interactive = !(disabled || readOnly)
-
   const tenStep = (max - min) / 10
   const oneStep = step || (max - min) / 100
   const spacing = betweenThumbs * step
-
   const values = computedValues.map((value) =>
     clampNumber(value, min, max),
   ) as [number, number]
@@ -221,9 +210,7 @@ export const useRangeSlider = ({
     { max: endValue - spacing, min },
     { max, min: startValue + spacing },
   ]
-
   const vertical = orientation === "vertical"
-
   const latestRef = useLatestRef({
     betweenThumbs,
     disabled,
@@ -238,12 +225,10 @@ export const useRangeSlider = ({
     values,
     vertical,
   })
-
   const activeIndexRef = useRef<number>(-1)
   const eventSourceRef = useRef<"keyboard" | "pointer" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
-
   const thumbSizes = useSizes({
     getNodes: () => {
       const nodes =
@@ -252,10 +237,9 @@ export const useRangeSlider = ({
       return nodes ? Array.from(nodes) : []
     },
   })
-
-  id ??= uuid
-  name ??= id
-
+  const onChangeStart = useCallbackRef(onChangeStartProp)
+  const onChangeEnd = useCallbackRef(onChangeEndProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
   const getThumbId = useCallback((i: number) => `slider-thumb-${id}-${i}`, [id])
   const getInputId = useCallback((i: number) => `slider-input-${id}-${i}`, [id])
   const getMarkerId = useCallback(

@@ -156,7 +156,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
           <SegmentedControlButton value="podcast">
             Podcast
           </SegmentedControlButton>
-          <SegmentedControlButton isDisabled value="live">
+          <SegmentedControlButton disabled value="live">
             Live
           </SegmentedControlButton>
         </SegmentedControl>

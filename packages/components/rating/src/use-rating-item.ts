@@ -20,7 +20,7 @@ export const useRatingItem = ({
     id,
     name,
     highlightSelectedOnly,
-    isOutside,
+    outside,
     resolvedValue,
     roundedValue,
     setHoveredValue,
@@ -34,19 +34,19 @@ export const useRatingItem = ({
     readOnly,
     ...omittedFormControlProps
   } = formControlProps
-  const [isFocused, setFocused] = useState<boolean>(false)
-  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
-  const isActive = value === resolvedValue
-  const isChecked = value === roundedValue
-  const isFilled = highlightSelectedOnly
+  const [focused, setFocused] = useState<boolean>(false)
+  const [focusVisible, setFocusVisible] = useState<boolean>(false)
+  const active = value === resolvedValue
+  const checked = value === roundedValue
+  const filled = highlightSelectedOnly
     ? value === resolvedValue
     : value <= resolvedValue
 
   const onBlur = useCallback(() => {
     setFocused(false)
 
-    if (isOutside) setHoveredValue(-1)
-  }, [isOutside, setHoveredValue])
+    if (outside) setHoveredValue(-1)
+  }, [outside, setHoveredValue])
 
   const onInputChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -82,18 +82,18 @@ export const useRatingItem = ({
 
   const getItemProps: PropGetter<"label"> = useCallback(
     (props = {}, ref = null) => {
-      const zIndex = isActive ? 1 : -1
+      const zIndex = active ? 1 : -1
 
       return {
         ref,
         htmlFor: `${id}-${groupValue}-${value}`,
         ...omittedFormControlProps,
         ...props,
-        "data-active": dataAttr(isActive),
+        "data-active": dataAttr(active),
         "data-disabled": dataAttr(disabled),
-        "data-filled": dataAttr(isFilled),
-        "data-focus": dataAttr(isFocused),
-        "data-focus-visible": dataAttr(isFocused && isFocusVisible),
+        "data-filled": dataAttr(filled),
+        "data-focus": dataAttr(focused),
+        "data-focus-visible": dataAttr(focused && focusVisible),
         zIndex: fractionValue !== 1 ? zIndex : undefined,
         onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
         onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
@@ -105,10 +105,10 @@ export const useRatingItem = ({
       fractionValue,
       groupValue,
       id,
-      isActive,
-      isFilled,
-      isFocusVisible,
-      isFocused,
+      active,
+      filled,
+      focusVisible,
+      focused,
       onMouseDown,
       onTouchStart,
       value,
@@ -139,9 +139,9 @@ export const useRatingItem = ({
           whiteSpace: "nowrap",
           width: "1px",
         },
-        "data-active": dataAttr(isActive),
-        "data-checked": dataAttr(isChecked),
-        checked: isChecked,
+        "data-active": dataAttr(active),
+        "data-checked": dataAttr(checked),
+        checked,
         value,
         onBlur: handlerAll(onBlur, props.onBlur),
         onChange: handlerAll(onInputChange, props.onChange),
@@ -161,22 +161,22 @@ export const useRatingItem = ({
       id,
       groupValue,
       name,
-      isChecked,
+      checked,
       onInputChange,
       onBlur,
-      isActive,
+      active,
       onChange,
     ],
   )
 
   useEffect(() => {
-    return trackFocusVisible(setIsFocusVisible)
+    return trackFocusVisible(setFocusVisible)
   }, [])
 
   return {
-    isActive,
-    isChecked,
-    isFilled,
+    active,
+    checked,
+    filled,
     getInputProps,
     getItemProps,
   }

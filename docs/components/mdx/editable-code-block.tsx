@@ -407,7 +407,7 @@ const Preview: FC<SkeletonProps> = ({ ...rest }) => {
 const Editor: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useI18n()
   const [isMax, { off, on }] = useBoolean()
-  const { isOpen, onClose, onToggle } = useDisclosure()
+  const { open, onClose, onToggle } = useDisclosure()
   const [ref, rect] = useResizeObserver<HTMLDivElement>()
 
   useUpdateEffect(() => {
@@ -427,7 +427,7 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
         ref={ref}
         sx={{ "& > div": { pb: isMax ? "10" : "6", pt: "0" } }}
         bg={["neutral.800", "neutral.900"]}
-        maxH={isOpen ? "full" : "sm"}
+        maxH={open ? "full" : "sm"}
         tabIndex={-1}
         _scrollbarThumb={{
           bg: "whiteAlpha.600",
@@ -454,7 +454,7 @@ const Editor: FC<PropsWithChildren> = ({ children }) => {
           onClick={onToggle}
         >
           {t(
-            isOpen
+            open
               ? "component.editable-code-block.control-button.close"
               : "component.editable-code-block.control-button.open",
           )}

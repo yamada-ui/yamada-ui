@@ -22,7 +22,7 @@ tab: Props
 <PropsCard
   id="card-align"
   name="align"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "center" | "end" | "flex-end" | "flex-start" | "self-end" | "self-start" | "start" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<AlignItems>"
   description={"The CSS `align-items` property."}
 />
 
@@ -37,14 +37,15 @@ tab: Props
 <PropsCard
   id="card-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
+  deprecated={"Use `flexDirection` instead."}
 />
 
 <PropsCard
   id="card-justify"
   name="justify"
-  type='"left" | "right" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "center" | "end" | "flex-end" | "flex-start" | "start" | "normal" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<JustifyContent>"
   description={"The CSS `justify-content` property."}
 />
 

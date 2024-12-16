@@ -643,7 +643,7 @@ export const useSelect = <T extends MaybeValue = string>(
       strategy,
       ...props,
       closeOnButton: false,
-      isOpen: open,
+      open,
       trigger: "never",
       onClose,
       onOpen,
@@ -686,10 +686,14 @@ export const useSelect = <T extends MaybeValue = string>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
-      ariaLabel ??=
-        placeholder ?? `Select ${multi ? "one or more options." : "an option."}`
-
+    (
+      {
+        "aria-label": ariaLabel = placeholder ??
+          `Select ${multi ? "one or more options." : "an option."}`,
+        ...props
+      } = {},
+      ref = null,
+    ) => {
       return {
         ref: mergeRefs(fieldRef, ref),
         "aria-activedescendant": activedescendantId,

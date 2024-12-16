@@ -59,10 +59,10 @@ export const CheckboxCardGroup = forwardRef(
       getContainerProps,
       onChange,
     } = useCheckboxGroup<Y>(props)
-    const { isDisabled, isInvalid, isReadOnly, isRequired, labelId, ...rest } =
+    const { disabled, invalid, labelId, readOnly, required, ...rest } =
       useFormControl(computedProps)
-
     const validChildren = getValidChildren(children)
+
     let computedChildren: ReactElement[] = []
 
     if (!validChildren.length && items.length)
@@ -77,10 +77,10 @@ export const CheckboxCardGroup = forwardRef(
             colorScheme,
             size,
             variant,
-            isDisabled,
-            isInvalid,
-            isReadOnly,
-            isRequired,
+            disabled,
+            invalid,
+            readOnly,
+            required,
             value,
             withIcon,
             addonProps,

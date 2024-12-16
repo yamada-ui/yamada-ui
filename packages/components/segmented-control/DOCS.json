@@ -5,15 +5,23 @@
       "description": "The value of the segmented control button.",
       "required": true
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be disabled.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the segmented control will be disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the segmented control will be readonly.",
       "required": false
     },
@@ -25,6 +33,12 @@
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",
       "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be readonly.",
       "required": false
     }
   },
@@ -39,15 +53,23 @@
       "description": "The initial value of the segmented control.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be disabled.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the segmented control will be disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the segmented control will be readonly.",
       "required": false
     },
@@ -65,6 +87,12 @@
     "onChange": {
       "type": "(value: string) => void",
       "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the segmented control will be readonly.",
       "required": false
     },
     "size": {

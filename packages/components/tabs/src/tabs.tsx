@@ -133,30 +133,25 @@ export const Tabs = forwardRef<TabsProps, "div">(
       align,
       ...props,
     })
-    let {
+    const {
       className,
       children,
       defaultIndex = 0,
       disableRipple = false,
-      fitted,
-      index,
       isFitted,
+      fitted = isFitted,
+      index,
       isLazy = true,
       isManual,
-      lazy,
+      lazy = isLazy,
       lazyBehavior = "keepMounted",
-      manual,
+      manual = isManual,
       orientation = "horizontal",
       tabListProps,
       tabPanelsProps,
       onChange,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    fitted ??= isFitted
-    lazy ??= isLazy
-    manual ??= isManual
-
     const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
     const [selectedIndex, setSelectedIndex] = useControllableState({
       defaultValue: defaultIndex,

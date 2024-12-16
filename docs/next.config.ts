@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next"
+
+const nextConfig: NextConfig = {
   experimental: {
     externalDir: true,
   },
@@ -15,13 +16,16 @@ const nextConfig = {
   pageExtensions: ["page.jsx", "page.tsx", "api.js", "api.ts"],
   productionBrowserSourceMaps: false,
   reactStrictMode: false,
-  redirects: () => [
-    {
-      destination: "/examples/mail",
-      permanent: true,
-      source: "/examples",
-    },
-  ],
+  redirects: async () =>
+    new Promise((resolve) =>
+      resolve([
+        {
+          destination: "/examples/mail",
+          permanent: true,
+          source: "/examples",
+        },
+      ]),
+    ),
 }
 
 module.exports = nextConfig

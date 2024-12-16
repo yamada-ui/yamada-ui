@@ -12,6 +12,14 @@ tab: Props
 ### FormControlProps
 
 <PropsCard
+  id="formcontrol-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="formcontrol-errormessage"
   name="errorMessage"
   type="type ONLY_FOR_FORMAT =
@@ -52,10 +60,19 @@ tab: Props
 />
 
 <PropsCard
+  id="formcontrol-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="formcontrol-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -64,6 +81,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -72,6 +90,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -82,6 +101,7 @@ tab: Props
   description={
     "If `true`, switch between helper message and error message using isInvalid."
   }
+  deprecated={"Use `replace` instead."}
   defaultValue={"true"}
 />
 
@@ -90,6 +110,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -126,6 +147,32 @@ tab: Props
 />
 
 <PropsCard
+  id="formcontrol-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="formcontrol-replace"
+  name="replace"
+  type="boolean"
+  description={
+    "If `true`, switch between helper message and error message using isInvalid."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="formcontrol-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="formcontrol-requiredindicator"
   name="requiredIndicator"
   type="type ONLY_FOR_FORMAT =
@@ -139,7 +186,12 @@ tab: Props
 
 ### LabelProps
 
-<PropsCard id="label-isrequired" name="isRequired" type="boolean" />
+<PropsCard
+  id="label-isrequired"
+  name="isRequired"
+  type="boolean"
+  deprecated={"Use `required` instead."}
+/>
 
 <PropsCard
   id="label-optionalindicator"
@@ -152,6 +204,8 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
 />
+
+<PropsCard id="label-required" name="required" type="boolean" />
 
 <PropsCard
   id="label-requiredindicator"

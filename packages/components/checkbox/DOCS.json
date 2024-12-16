@@ -1,7 +1,7 @@
 {
   "CheckboxIcon": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"svg\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"view\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -11,10 +11,22 @@
       "description": "If `true`, the icon will be checked.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "indeterminate": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the icon will be indeterminate.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isChecked": {
@@ -27,6 +39,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
@@ -40,16 +53,31 @@
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `required` instead.",
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the form control will be required.",
@@ -57,6 +85,12 @@
     }
   },
   "Checkbox": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"primary\"",
@@ -74,6 +108,12 @@
       "defaultValue": false,
       "deprecated": "Use `defaultChecked` instead.",
       "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "iconProps": {
@@ -97,6 +137,12 @@
       "description": "Props for input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -107,6 +153,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
@@ -120,18 +167,21 @@
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -163,6 +213,18 @@
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
       "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "selectOnEnter": {
@@ -204,6 +266,12 @@
       "description": "Props for the footer of the checkbox card.",
       "required": false
     },
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"primary\"",
@@ -233,6 +301,12 @@
       "description": "Props for the description of the checkbox card.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "iconProps": {
       "type": "{\n  children: ReactElement<any, string | JSXElementConstructor<any>>\n} & Omit<HTMLUIProps, \"children\">",
       "description": "Props for the icon of the checkbox card.",
@@ -254,6 +328,12 @@
       "description": "Props for input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -264,6 +344,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
@@ -277,18 +358,21 @@
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -320,6 +404,18 @@
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
       "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "selectOnEnter": {
@@ -390,20 +486,34 @@
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "grow": {
       "type": "UIValue<FlexGrow>",
       "description": "The CSS `flex-grow` property.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -417,12 +527,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -445,6 +557,18 @@
     "onChange": {
       "type": "(value: Y[]) => void",
       "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "shrink": {
@@ -513,20 +637,34 @@
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "grow": {
       "type": "UIValue<FlexGrow>",
       "description": "The CSS `flex-grow` property.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -540,12 +678,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -563,6 +703,18 @@
     "onChange": {
       "type": "(value: Y[]) => void",
       "description": "The callback fired when any children checkbox is checked or unchecked.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "shrink": {
@@ -601,6 +753,12 @@
       "description": "If `true`, the checkbox will be initially checked.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "id": {
       "type": "string",
       "description": "id assigned to input.",
@@ -610,6 +768,12 @@
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isChecked": {
@@ -622,6 +786,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
@@ -635,18 +800,21 @@
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -668,6 +836,18 @@
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
       "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "selectOnEnter": {

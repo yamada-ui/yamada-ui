@@ -147,12 +147,13 @@ export interface FlattenObjectOptions {
 
 export function flattenObject<Y extends Dict>(
   obj: any,
-  { maxDepth, omitKeys, separator, shouldProcess }: FlattenObjectOptions = {},
+  {
+    maxDepth = Infinity,
+    omitKeys = [],
+    separator = ".",
+    shouldProcess,
+  }: FlattenObjectOptions = {},
 ): Y {
-  maxDepth ??= Infinity
-  omitKeys ??= []
-  separator ??= "."
-
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce<any>((result, [key, value]) => {

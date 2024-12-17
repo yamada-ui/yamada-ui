@@ -20,7 +20,7 @@ import { Wrap } from "@yamada-ui/react"
 <Wrap gap="md">
   <For each={Array.from({ length: 20 })}>
     {(_, index) => (
-      <For each={["primary", "secondary", "warning", "danger"]}>
+      <For key={index} each={["primary", "secondary", "warning", "danger"]}>
         {(bg, nestedIndex) => (
           <Box
             key={`${index}-${nestedIndex}`}

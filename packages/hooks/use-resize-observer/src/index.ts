@@ -25,9 +25,7 @@ export const useResizeObserver = <T extends HTMLElement = any>() => {
   const [rect, setRect] = useState<ObserverRect>(defaultRect)
 
   const observer = useMemo(() => {
-    const isBrowser = createdDom()
-
-    if (!isBrowser) return null
+    if (!createdDom()) return null
 
     return new ResizeObserver(([entry]) => {
       if (!entry) return

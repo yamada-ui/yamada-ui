@@ -189,7 +189,7 @@ export interface CarouselProps
  * @see Docs https://yamada-ui.com/components/data-display/carousel
  */
 export const Carousel = forwardRef<CarouselProps, "div">(
-  ({ h, height, minH, minHeight, ...props }, ref) => {
+  ({ h, height = h, minH, minHeight = minH, ...props }, ref) => {
     const orientation = useValue(props.orientation)
     const align = useValue(props.align)
     const autoplay = useValue(props.autoplay)
@@ -204,7 +204,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const skipSnaps = useValue(props.skipSnaps)
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
-
     const [styles, mergedProps] = useComponentMultiStyle("Carousel", {
       ...props,
       align,
@@ -239,7 +238,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       useCarousel({
         ...computedProps,
       })
-
     const validChildren = getValidChildren(children)
     const customCarouselControlPrev = findChild(
       validChildren,
@@ -264,15 +262,11 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const cloneSlideChildren = slideChildren.map((child, index) =>
       cloneElement(child, { index }),
     )
-
     const css: CSSUIObject = {
       h: "fit-content",
       position: "relative",
       ...styles.container,
     }
-
-    h ??= height
-    minH ??= minHeight
 
     return (
       <CarouselProvider value={{ id, styles, ...rest }}>
@@ -292,7 +286,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
 
           <CarouselSlides
             {...getSlidesProps({
-              ...filterUndefined({ h, minH }),
+              ...filterUndefined({ height, minHeight }),
               ...innerProps,
             })}
           >

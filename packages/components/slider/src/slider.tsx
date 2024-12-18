@@ -93,6 +93,8 @@ export interface UseSliderOptions {
   getAriaValueText?: (value: number) => string | undefined
   /**
    * If `true`, the value will be incremented or decremented in reverse.
+   *
+   * @deprecated Use `reversed` instead.
    */
   isReversed?: boolean
   /**
@@ -113,6 +115,10 @@ export interface UseSliderOptions {
    * @default 'horizontal'
    */
   orientation?: "horizontal" | "vertical"
+  /**
+   * If `true`, the value will be incremented or decremented in reverse.
+   */
+  reversed?: boolean
   /**
    * The step in which increments or decrements have to be made.
    *
@@ -151,7 +157,7 @@ export const useSlider = ({
 }: UseSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
+  const {
     id,
     name,
     "aria-label": ariaLabel,
@@ -163,6 +169,7 @@ export const useSlider = ({
     max = 100,
     min = 0,
     orientation = "horizontal",
+    reversed = isReversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -171,6 +178,10 @@ export const useSlider = ({
     onChangeStart: onChangeStartProp,
     ...rest
   } = useFormControlProps(props)
+
+  if (max < min)
+    throw new Error("Do not assign a number less than 'min' to 'max'")
+
   const {
     "aria-readonly": ariaReadonly,
     disabled,
@@ -180,70 +191,58 @@ export const useSlider = ({
     onFocus,
     ...formControlProps
   } = pickObject(rest, formControlProperties)
-
-  if (max < min)
-    throw new Error("Do not assign a number less than 'min' to 'max'")
-
-  const onChangeStart = useCallbackRef(onChangeStartProp)
-  const onChangeEnd = useCallbackRef(onChangeEndProp)
-  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
-
   const [computedValue, setValue] = useControllableState({
     defaultValue: defaultValue ?? min + (max - min) / 2,
     value: valueProp,
     onChange,
   })
-
-  const [isDragging, setDragging] = useState(false)
-  const [isFocused, setFocused] = useState(false)
-  const isInteractive = !(disabled || readOnly)
-
+  const [dragging, setDragging] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const interactive = !(disabled || readOnly)
   const tenStep = (max - min) / 10
   const oneStep = step || (max - min) / 100
-
   const value = clampNumber(computedValue, min, max)
   const reversedValue = max - value + min
-  const thumbValue = isReversed ? reversedValue : value
+  const thumbValue = reversed ? reversedValue : value
   const thumbPercent = valueToPercent(thumbValue, min, max)
-
-  const isVertical = orientation === "vertical"
-
+  const vertical = orientation === "vertical"
   const latestRef = useLatestRef({
     focusThumbOnChange,
-    isInteractive,
+    interactive,
     max,
     min,
     step,
     value,
   })
-
   const eventSourceRef = useRef<"keyboard" | "pointer" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
-
   const thumbSize = useSize(thumbRef)
+  const onChangeStart = useCallbackRef(onChangeStartProp)
+  const onChangeEnd = useCallbackRef(onChangeEndProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
 
   usePanEvent(containerRef, {
     onMove: (ev) => {
-      const { isInteractive } = latestRef.current
+      const { interactive } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setValueFromPointer(ev)
     },
     onSessionEnd: () => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(false)
       onChangeEnd(value)
     },
     onSessionStart: (ev) => {
-      const { isInteractive, value } = latestRef.current
+      const { interactive, value } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       setDragging(true)
       focusThumb()
@@ -264,13 +263,13 @@ export const useSlider = ({
         trackRef.current.getBoundingClientRect()
       const { clientX, clientY } = ev.touches?.[0] ?? ev
 
-      const diff = isVertical ? bottom - clientY : clientX - left
+      const diff = vertical ? bottom - clientY : clientX - left
 
-      const length = isVertical ? height : width
+      const length = vertical ? height : width
 
       let percent = diff / length
 
-      if (isReversed) percent = 1 - percent
+      if (reversed) percent = 1 - percent
 
       let nextValue = percentToValue(percent, min, max)
 
@@ -280,7 +279,7 @@ export const useSlider = ({
 
       return nextValue
     },
-    [isVertical, isReversed, latestRef],
+    [vertical, reversed, latestRef],
   )
 
   const setValueFromPointer = (ev: MouseEvent | PointerEvent | TouchEvent) => {
@@ -298,9 +297,9 @@ export const useSlider = ({
 
   const constrain = useCallback(
     (value: number) => {
-      const { isInteractive, max, min } = latestRef.current
+      const { interactive, max, min } = latestRef.current
 
-      if (!isInteractive) return
+      if (!interactive) return
 
       value = parseFloat(roundNumberToStep(value, min, oneStep))
       value = clampNumber(value, min, max)
@@ -311,13 +310,13 @@ export const useSlider = ({
   )
 
   const stepUp = useCallback(
-    (step = oneStep) => constrain(isReversed ? value - step : value + step),
-    [constrain, isReversed, oneStep, value],
+    (step = oneStep) => constrain(reversed ? value - step : value + step),
+    [constrain, reversed, oneStep, value],
   )
 
   const stepDown = useCallback(
-    (step = oneStep) => constrain(isReversed ? value + step : value - step),
-    [constrain, isReversed, oneStep, value],
+    (step = oneStep) => constrain(reversed ? value + step : value - step),
+    [constrain, reversed, oneStep, value],
   )
 
   const reset = useCallback(
@@ -374,7 +373,7 @@ export const useSlider = ({
       if (isNumber(w)) w = `${w}px`
       if (isNumber(h)) h = `${h}px`
 
-      const paddingStyle = isVertical
+      const paddingStyle = vertical
         ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
         : { paddingBottom: `calc(${h} / 2)`, paddingTop: `calc(${h} / 2)` }
 
@@ -404,7 +403,7 @@ export const useSlider = ({
         ]),
       }
     },
-    [isVertical, rest, thumbSize, thumbSizeProp],
+    [vertical, rest, thumbSize, thumbSizeProp],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -438,7 +437,7 @@ export const useSlider = ({
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
-        ...(isVertical
+        ...(vertical
           ? {
               height: "100%",
               left: "50%",
@@ -458,28 +457,28 @@ export const useSlider = ({
         style,
       }
     },
-    [isVertical, formControlProps],
+    [vertical, formControlProps],
   )
 
   const getFilledTrackProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const n = Math.abs(isReversed ? 100 - thumbPercent : thumbPercent)
+      const n = Math.abs(reversed ? 100 - thumbPercent : thumbPercent)
 
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
-        ...(isVertical
+        ...(vertical
           ? {
               height: `${n}%`,
               left: "50%",
               transform: "translateX(-50%)",
-              ...(isReversed ? { top: "0%" } : { bottom: "0%" }),
+              ...(reversed ? { top: "0%" } : { bottom: "0%" }),
             }
           : {
               top: "50%",
               transform: "translateY(-50%)",
               width: `${n}%`,
-              ...(isReversed ? { right: "0%" } : { left: "0%" }),
+              ...(reversed ? { right: "0%" } : { left: "0%" }),
             }),
       }
 
@@ -490,7 +489,7 @@ export const useSlider = ({
         style,
       }
     },
-    [isReversed, isVertical, formControlProps, thumbPercent],
+    [reversed, vertical, formControlProps, thumbPercent],
   )
 
   const getMarkProps: RequiredPropGetter<
@@ -499,13 +498,13 @@ export const useSlider = ({
   > = useCallback(
     (props, ref = null) => {
       let n = valueToPercent(props.value, min, max)
-      n = isReversed ? 100 - n : n
+      n = reversed ? 100 - n : n
 
       const style: CSSProperties = {
         ...props.style,
         pointerEvents: "none",
         position: "absolute",
-        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
+        ...(vertical ? { bottom: `${n}%` } : { left: `${n}%` }),
       }
 
       return {
@@ -518,7 +517,7 @@ export const useSlider = ({
         "data-invalid": dataAttr(props.value < min || max < props.value),
       }
     },
-    [isReversed, isVertical, max, min, formControlProps, value],
+    [reversed, vertical, max, min, formControlProps, value],
   )
 
   const getThumbProps: PropGetter = useCallback(
@@ -540,7 +539,7 @@ export const useSlider = ({
         position: "absolute",
         touchAction: "none",
         userSelect: "none",
-        ...(isVertical ? { bottom } : { left }),
+        ...(vertical ? { bottom } : { left }),
       }
 
       return {
@@ -557,9 +556,9 @@ export const useSlider = ({
         "aria-valuenow": value,
         "aria-valuetext":
           ariaValueText ?? getAriaValueText(value) ?? value.toString(),
-        "data-active": dataAttr(isDragging && focusThumbOnChange),
+        "data-active": dataAttr(dragging && focusThumbOnChange),
         role: "slider",
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+        tabIndex: interactive && focusThumbOnChange ? 0 : undefined,
         onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
         onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -568,7 +567,7 @@ export const useSlider = ({
     [
       thumbPercent,
       thumbSize,
-      isVertical,
+      vertical,
       ariaLabel,
       ariaLabelledBy,
       ariaReadonly,
@@ -579,9 +578,9 @@ export const useSlider = ({
       value,
       ariaValueText,
       getAriaValueText,
-      isDragging,
+      dragging,
       focusThumbOnChange,
-      isInteractive,
+      interactive,
       onBlur,
       onFocus,
       onKeyDown,
@@ -589,14 +588,26 @@ export const useSlider = ({
   )
 
   return {
-    isDragging,
-    isFocused,
-    isVertical,
+    dragging,
+    focused,
+    /**
+     * @deprecated Use `dragging` instead.
+     */
+    isDragging: dragging,
+    /**
+     * @deprecated Use `focused` instead.
+     */
+    isFocused: focused,
+    /**
+     * @deprecated Use `vertical` instead.
+     */
+    isVertical: vertical,
     reset,
     stepDown,
     stepTo,
     stepUp,
     value,
+    vertical,
     getContainerProps,
     getFilledTrackProps,
     getInputProps,

@@ -14,8 +14,7 @@ import {
 } from "./autocomplete-context"
 
 export const useAutocompleteList = () => {
-  const { focusedIndex, isOpen, rebirthOptions, value } =
-    useAutocompleteContext()
+  const { focusedIndex, open, rebirthOptions, value } = useAutocompleteContext()
   const descendants = useAutocompleteDescendantsContext()
   const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
@@ -23,8 +22,8 @@ export const useAutocompleteList = () => {
   const isMulti = isArray(value)
 
   const onAnimationComplete = useCallback(() => {
-    if (!isOpen) rebirthOptions(false)
-  }, [isOpen, rebirthOptions])
+    if (!open) rebirthOptions(false)
+  }, [open, rebirthOptions])
 
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
@@ -62,8 +61,8 @@ export const useAutocompleteList = () => {
   }, [listRef, selectedValue])
 
   useUpdateEffect(() => {
-    if (!isOpen) beforeFocusedIndex.current = -1
-  }, [isOpen])
+    if (!open) beforeFocusedIndex.current = -1
+  }, [open])
 
   const getContainerProps: PropGetter<MotionProps, MotionProps> = useCallback(
     (props = {}, ref = null) => ({

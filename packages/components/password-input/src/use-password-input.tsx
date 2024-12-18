@@ -54,11 +54,11 @@ export interface UsePasswordInputProps
     UsePasswordInputOptions {}
 
 export const usePasswordInput = (props: UsePasswordInputProps) => {
-  let {
+  const {
     defaultIsVisible,
-    defaultVisible,
+    defaultVisible = defaultIsVisible,
     isVisible,
-    visible: visibleProp,
+    visible: visibleProp = isVisible,
     onVisibleChange,
     ...rest
   } = useFormControlProps(props)
@@ -68,10 +68,6 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
   )
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
   const { disabled } = formControlProps
-
-  visibleProp ??= isVisible
-  defaultVisible ??= defaultIsVisible
-
   const [visible, setVisible] = useControllableState({
     defaultValue: defaultVisible,
     value: visibleProp,

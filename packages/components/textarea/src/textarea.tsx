@@ -75,7 +75,8 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     { h, height, maxH, maxHeight, minH, minHeight, ...styles },
     mergedProps,
   ] = useComponentStyle("Textarea", props)
-  let {
+  const computedProps = omitThemeProps(mergedProps)
+  const {
     className,
     autosize,
     maxRows = Infinity,
@@ -85,10 +86,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     rows,
     onChange,
     ...rest
-  } = omitThemeProps(mergedProps)
-  rest = useFormControlProps(rest)
-
-  const isBrowser = createdDom()
+  } = useFormControlProps(computedProps)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const value = textareaRef.current?.value ?? ""
   const resizeTextarea = useAutosize(textareaRef, maxRows, minRows)
@@ -102,7 +100,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
   }
 
   useSafeLayoutEffect(() => {
-    if (!isBrowser || !autosize) return
+    if (!createdDom() || !autosize) return
 
     resizeTextarea()
 

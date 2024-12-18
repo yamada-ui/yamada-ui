@@ -17,9 +17,15 @@
       "required": false
     },
     "direction": {
-      "type": "ResizableDirection",
+      "type": "ResizableOrientation",
       "defaultValue": "horizontal",
+      "deprecated": "Use `orientation` instead.",
       "description": "The direction of the resizable.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     },
     "groupProps": {
@@ -29,6 +35,7 @@
     },
     "isDisabled": {
       "type": "boolean",
+      "deprecated": "Use `Disabled` instead.",
       "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     },
@@ -41,6 +48,12 @@
     "onLayout": {
       "type": "PanelGroupOnLayout",
       "description": "The callback invoked when resizable items are resized.",
+      "required": false
+    },
+    "orientation": {
+      "type": "ResizableOrientation",
+      "defaultValue": "horizontal",
+      "description": "The orientation of the resizable.",
       "required": false
     },
     "size": {
@@ -162,6 +175,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     }

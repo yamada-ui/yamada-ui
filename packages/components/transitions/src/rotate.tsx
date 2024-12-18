@@ -94,41 +94,37 @@ export interface RotateProps
  */
 export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Rotate", props)
-  let {
+  const {
     className,
     defaultValue = "from",
     delay = 0,
-    disabled,
+    isDisabled,
+    disabled = isDisabled,
     duration = 0.4,
     from,
-    isDisabled,
     isReadOnly,
-    readOnly,
+    readOnly = isReadOnly,
     rotate = 45,
     to,
     value: valueProp,
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  disabled ??= isDisabled
-  readOnly ??= isReadOnly
-
   const [vars, { opacity }] = useCreateVars(
     { opacity: 1, ...styles, ...rest },
     ["opacity"],
     { transform: true },
   )
-
   const animate = useMotionAnimation()
-
   const [value, setValue] = useControllableState<RotateIdent>({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
-
-  const isFrom = value === "from"
+  const css: CSSUIObject = {
+    vars,
+    ...styles,
+  }
 
   const onClick = useCallback(async () => {
     if (readOnly) return
@@ -148,11 +144,6 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
     })
   }, [readOnly, animate, rotate, duration, delay, setValue, opacity])
 
-  const css: CSSUIObject = {
-    vars,
-    ...styles,
-  }
-
   return (
     <motion.button
       ref={ref}
@@ -169,7 +160,7 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {isFrom ? from : to}
+      {value === "from" ? from : to}
     </motion.button>
   )
 })

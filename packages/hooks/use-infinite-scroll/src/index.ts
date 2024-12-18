@@ -159,23 +159,20 @@ export interface UseInfiniteScrollProps
  */
 export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   behavior,
-  disabled,
+  isDisabled = false,
+  disabled = isDisabled,
   indexRef: indexRefProp,
   initialLoad = false,
-  isDisabled = false,
   isReverse = false,
   orientation = "vertical",
   resetRef,
-  reverse,
+  reverse = isReverse,
   rootMargin,
   rootRef,
   startIndex = initialLoad ? 0 : 1,
   threshold,
   onLoad: onLoadProp,
 }: UseInfiniteScrollProps = {}) => {
-  disabled ??= isDisabled
-  reverse ??= isReverse
-
   const ref = useRef<T>(null)
   const indexRef = useRef<number>(startIndex)
   const processingRef = useRef<boolean>(false)

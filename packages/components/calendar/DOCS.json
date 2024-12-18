@@ -417,6 +417,12 @@
       "description": "The initial value of the calendar.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "disableOutsideDays": {
       "type": "boolean",
       "defaultValue": false,
@@ -499,6 +505,12 @@
       "description": "Props for date picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -509,12 +521,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -534,12 +548,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -672,7 +688,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -680,6 +696,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -884,6 +912,12 @@
       "description": "The initial value of the calendar.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -939,6 +973,12 @@
       "description": "Props for month picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -949,12 +989,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -974,12 +1016,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -1096,7 +1140,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -1104,6 +1148,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -1306,6 +1362,12 @@
       "description": "The initial value of the calendar.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "disableOutsideDays": {
       "type": "boolean",
       "defaultValue": false,
@@ -1388,6 +1450,12 @@
       "description": "Props for date picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -1398,12 +1466,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -1423,12 +1493,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -1567,7 +1639,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -1575,6 +1647,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {
@@ -1713,6 +1797,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the month picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -1789,6 +1879,12 @@
     "defaultValue": {
       "type": "[(Date | undefined)?, (Date | undefined)?]",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "disableOutsideDays": {
@@ -1878,21 +1974,30 @@
       "required": false,
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -1912,12 +2017,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -2050,7 +2157,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -2058,6 +2165,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {
@@ -2266,6 +2385,12 @@
       "description": "The initial value of the calendar.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -2321,6 +2446,12 @@
       "description": "Props for year picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -2331,12 +2462,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -2356,12 +2489,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -2456,7 +2591,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -2464,6 +2599,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {

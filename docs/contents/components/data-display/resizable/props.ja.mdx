@@ -38,8 +38,9 @@ tab: Props
 <PropsCard
   id="resizable-direction"
   name="direction"
-  type="ResizableDirection"
+  type="ResizableOrientation"
   description={"The direction of the resizable."}
+  deprecated={"Use `orientation` instead."}
   defaultValue={"horizontal"}
 />
 
@@ -78,6 +79,14 @@ tab: Props
   name="onLayout"
   type="PanelGroupOnLayout"
   description={"The callback invoked when resizable items are resized."}
+/>
+
+<PropsCard
+  id="resizable-orientation"
+  name="orientation"
+  type="ResizableOrientation"
+  description={"The orientation of the resizable."}
+  defaultValue={"horizontal"}
 />
 
 <PropsCard

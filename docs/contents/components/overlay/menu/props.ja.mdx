@@ -615,6 +615,22 @@ tab: Props
 />
 
 <PropsCard
+  id="menuitem-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the menu item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuitem-focusable"
+  name="focusable"
+  type="boolean"
+  description={"If `true`, the menu item will be focusable."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="menuitem-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
@@ -626,6 +642,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the menu item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -634,16 +651,41 @@ tab: Props
   name="isFocusable"
   type="boolean"
   description={"If `true`, the menu item will be focusable."}
+  deprecated={"Use `focusable` instead."}
   defaultValue={"false"}
 />
 
 ### MenuOptionItemProps
 
 <PropsCard
+  id="menuoptionitem-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox or radio will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="menuoptionitem-closeonselect"
   name="closeOnSelect"
   type="boolean"
   description={"If `true`, the list element will be closed when selected."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuoptionitem-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the menu item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuoptionitem-focusable"
+  name="focusable"
+  type="boolean"
+  description={"If `true`, the menu item will be focusable."}
   defaultValue={"false"}
 />
 
@@ -659,6 +701,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox or radio will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -667,6 +710,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the menu item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -675,6 +719,7 @@ tab: Props
   name="isFocusable"
   type="boolean"
   description={"If `true`, the menu item will be focusable."}
+  deprecated={"Use `focusable` instead."}
   defaultValue={"false"}
 />
 

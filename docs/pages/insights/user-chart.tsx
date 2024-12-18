@@ -34,14 +34,14 @@ import { ScoreLegend } from "./score-legend"
 export interface UserChartProps extends Omit<StackProps, "id"> {
   id: string
   currentScore: UserInsightScore
-  isLoading: boolean
+  loading: boolean
   prevScore: UserInsightScore
   timeline: undefined | UserInsights
 }
 
 export const UserChart = memo(
   forwardRef<UserChartProps, "div">(
-    ({ id, currentScore, isLoading, prevScore, timeline, ...rest }, ref) => {
+    ({ id, currentScore, loading, prevScore, timeline, ...rest }, ref) => {
       const { locale, t } = useI18n()
       const { period } = useInsights()
       const isEmpty = !period.start && !period.end
@@ -134,10 +134,10 @@ export const UserChart = memo(
             </HStack>
 
             <VStack alignItems="flex-end" gap="sm" w="auto">
-              <Skeleton isLoaded={!isLoading} rounded="md" textAlign="right">
+              <Skeleton isLoaded={!loading} rounded="md" textAlign="right">
                 <HStack gap="sm">
                   <CountUp
-                    count={!isLoading ? currentScore.total : null}
+                    count={!loading ? currentScore.total : null}
                     fontSize="3xl"
                     fontWeight="semibold"
                     lineHeight="1"
@@ -160,26 +160,26 @@ export const UserChart = memo(
               >
                 <ScoreLegend
                   color={INSIGHT_SCORE_COLORS.pullRequests}
-                  count={!isLoading ? currentScore.pullRequests : null}
-                  isLoaded={!isLoading}
+                  count={!loading ? currentScore.pullRequests : null}
+                  isLoaded={!loading}
                   label="Pull Requests"
                 />
                 <ScoreLegend
                   color={INSIGHT_SCORE_COLORS.issues}
-                  count={!isLoading ? currentScore.issues : null}
-                  isLoaded={!isLoading}
+                  count={!loading ? currentScore.issues : null}
+                  isLoaded={!loading}
                   label="Issues"
                 />
                 <ScoreLegend
                   color={INSIGHT_SCORE_COLORS.approved}
-                  count={!isLoading ? currentScore.approved : null}
-                  isLoaded={!isLoading}
+                  count={!loading ? currentScore.approved : null}
+                  isLoaded={!loading}
                   label="Approved"
                 />
                 <ScoreLegend
                   color={INSIGHT_SCORE_COLORS.comments}
-                  count={!isLoading ? currentScore.comments : null}
-                  isLoaded={!isLoading}
+                  count={!loading ? currentScore.comments : null}
+                  isLoaded={!loading}
                   label="Comments"
                 />
               </Grid>
@@ -194,7 +194,7 @@ export const UserChart = memo(
                 </Text>
               </Center>
             ) : (
-              <Skeleton h="md" isLoaded={!isLoading} rounded="md" w="full">
+              <Skeleton h="md" isLoaded={!loading} rounded="md" w="full">
                 <Box ms="-6">
                   <BarChart
                     data={data}

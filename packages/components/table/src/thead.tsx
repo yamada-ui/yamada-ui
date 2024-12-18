@@ -86,7 +86,7 @@ const Th = <Y extends RowData = unknown>({
   } = columnDef as Column<Y>
 
   const canSort = getCanSort()
-  const isSorted = getIsSorted()
+  const sorted = getIsSorted()
   const toggleSortingHandler = getToggleSortingHandler()
   const computedColSpan = customColSpan ?? colSpan ?? 0
   const computedRowSpan = customRowSpan ?? rowSpan ?? 0
@@ -105,7 +105,7 @@ const Th = <Y extends RowData = unknown>({
       aria-colindex={colIndex + 1}
       aria-label={ariaLabel}
       aria-sort={
-        isSorted ? (isSorted === "asc" ? "ascending" : "descending") : "none"
+        sorted ? (sorted === "asc" ? "ascending" : "descending") : "none"
       }
       {...computedProps}
       className={cx(rest.className, className)}
@@ -123,7 +123,7 @@ const Th = <Y extends RowData = unknown>({
             {render(columnDef.header, { ...renderProps, ...getContext() })}
           </TableSortTextButton>
 
-          <TableSortIcon {...{ isSorted, ...sortIconProps }} />
+          <TableSortIcon {...{ sorted, ...sortIconProps }} />
         </>
       ) : (
         render(columnDef.header, { ...renderProps, ...getContext() })

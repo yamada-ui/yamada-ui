@@ -52,17 +52,11 @@ export const RadioGroup = forwardRef(
     }: RadioGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const {
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
-      labelId,
-      ...computedProps
-    } = useFormControl({
-      id: idProp,
-      ...props,
-    })
+    const { disabled, invalid, labelId, readOnly, required, ...computedProps } =
+      useFormControl({
+        id: idProp,
+        ...props,
+      })
     const {
       id,
       name,
@@ -88,10 +82,10 @@ export const RadioGroup = forwardRef(
             colorScheme,
             size,
             variant,
-            isDisabled,
-            isInvalid,
-            isReadOnly,
-            isRequired,
+            disabled,
+            invalid,
+            readOnly,
+            required,
             value,
             onChange,
           } as RadioGroupContext

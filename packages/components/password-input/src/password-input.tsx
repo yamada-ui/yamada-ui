@@ -62,12 +62,12 @@ export interface PasswordInputProps
 export const PasswordInput = forwardRef<PasswordInputProps, "div">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("PasswordInput", props)
-    let {
+    const {
       className,
       h,
-      height,
+      height = h,
       minH,
-      minHeight,
+      minHeight = minH,
       visibilityIcon = { off: <EyeOffIcon />, on: <EyeIcon /> },
       containerProps,
       iconProps,
@@ -76,9 +76,6 @@ export const PasswordInput = forwardRef<PasswordInputProps, "div">(
     } = omitThemeProps(mergedProps)
     const { visible, getContainerProps, getIconProps, getInputProps } =
       usePasswordInput(rest)
-
-    h ??= height
-    minH ??= minHeight
 
     const css: CSSUIObject = { ...styles.container }
 
@@ -90,8 +87,8 @@ export const PasswordInput = forwardRef<PasswordInputProps, "div">(
           {...getContainerProps(containerProps)}
         >
           <PasswordInputField
-            h={h}
-            minH={minH}
+            height={height}
+            minHeight={minHeight}
             {...getInputProps(inputProps, ref)}
           />
 

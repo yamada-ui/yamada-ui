@@ -44,32 +44,32 @@ export const Tbody = <Y extends RowData = unknown>({
 
         const props = runIfFunc(rowProps, row) ?? {}
         const cells = getVisibleCells()
-        const isSelected = getIsSelected()
-        const isDisabled = enableRowSelection && !getCanSelect()
+        const selected = getIsSelected()
+        const disabled = enableRowSelection && !getCanSelect()
 
         return (
           <Tr
             key={id}
-            {...(rowsClickSelect && !isDisabled ? { cursor: "pointer" } : {})}
+            {...(rowsClickSelect && !disabled ? { cursor: "pointer" } : {})}
             {...props}
-            aria-disabled={ariaAttr(isDisabled)}
+            aria-disabled={ariaAttr(disabled)}
             aria-rowindex={row.index + headerCount + 1}
-            aria-selected={ariaAttr(isSelected)}
-            data-disabled={dataAttr(isDisabled)}
-            data-selected={dataAttr(isSelected)}
+            aria-selected={ariaAttr(selected)}
+            data-disabled={dataAttr(disabled)}
+            data-selected={dataAttr(selected)}
             onClick={handlerAll(
               props.onClick,
-              () => (!isDisabled ? onClickRow?.(row) : {}),
+              () => (!disabled ? onClickRow?.(row) : {}),
               (ev) => {
-                if (!rowsClickSelect || isDisabled) return
+                if (!rowsClickSelect || disabled) return
 
                 ev.preventDefault()
 
-                toggleSelected(!isSelected)
+                toggleSelected(!selected)
               },
             )}
             onDoubleClick={handlerAll(props.onDoubleClick, () =>
-              !isDisabled ? onDoubleClickRow?.(row) : void 0,
+              !disabled ? onDoubleClickRow?.(row) : void 0,
             )}
           >
             {cells.map((cell, colIndex) => {
@@ -108,16 +108,16 @@ const Td = <Y extends RowData = unknown>({
   rowIndex,
   ...rest
 }: TdProps<Y>) => {
-  const { isFocusable, rowHeader } = useTableContext<Y>()
+  const { focusable, rowHeader } = useTableContext<Y>()
   const { id: cellId, column, getContext, row } = cell
   const { id: colId, columnDef } = column
-  const isDisabled = !row.getCanSelect()
-  const trulyDisabled = isDisabled && !isFocusable
+  const disabled = !row.getCanSelect()
+  const trulyDisabled = disabled && !focusable
   const isRowHeader = rowHeader === colId
 
   const [props, renderProps] = useCellProps(rowIndex, colIndex, {
     ...rest,
-    isDisabled: trulyDisabled,
+    disabled: trulyDisabled,
     role: isRowHeader ? "rowheader" : undefined,
   })
 

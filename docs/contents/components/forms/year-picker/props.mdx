@@ -170,6 +170,14 @@ tab: Props
 />
 
 <PropsCard
+  id="yearpicker-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="yearpicker-duration"
   name="duration"
   type="number | MotionLifecycleProps<number>"
@@ -257,6 +265,14 @@ tab: Props
 />
 
 <PropsCard
+  id="yearpicker-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="yearpicker-isclearable"
   name="isClearable"
   type="boolean"
@@ -270,6 +286,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -278,6 +295,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -305,6 +323,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -313,6 +332,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -454,7 +474,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue={"'{ isDisabled: true }'"}
+  defaultValue={"'{ disabled: true }'"}
 />
 
 <PropsCard
@@ -465,6 +485,22 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
+/>
+
+<PropsCard
+  id="yearpicker-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="yearpicker-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

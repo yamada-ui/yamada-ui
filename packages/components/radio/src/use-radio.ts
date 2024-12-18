@@ -79,21 +79,17 @@ export const useRadio = <
 
   id ??= uuid
 
-  let {
+  const {
     id: _id,
     name,
-    checked: checkedProp,
-    defaultChecked,
+    isChecked,
+    checked: checkedProp = isChecked,
     defaultIsChecked,
-    isChecked: isCheckedProp,
+    defaultChecked = defaultIsChecked,
     value,
     onChange: onChangeProp,
     ...computedProps
   } = useFormControlProps({ id, ...props })
-
-  checkedProp ??= isCheckedProp
-  defaultChecked ??= defaultIsChecked
-
   const [
     {
       "aria-readonly": _ariaReadonly,
@@ -106,14 +102,11 @@ export const useRadio = <
     },
     rest,
   ] = splitObject(computedProps, formControlProperties)
-
   const [focusVisible, setFocusVisible] = useState<boolean>(false)
   const [focused, setFocused] = useState<boolean>(false)
   const [hovered, setHovered] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
-
   const [checked, setChecked] = useState<boolean>(!!defaultChecked)
-
   const controlled = checkedProp !== undefined
   const resolvedChecked = controlled ? (checkedProp as boolean) : checked
 
@@ -255,6 +248,26 @@ export const useRadio = <
     focused,
     focusVisible,
     hovered,
+    /**
+     * @deprecated Use `active` instead.
+     */
+    isActive: active,
+    /**
+     * @deprecated Use `checked` instead.
+     */
+    isChecked: resolvedChecked,
+    /**
+     * @deprecated Use `focused` instead.
+     */
+    isFocused: focused,
+    /**
+     * @deprecated Use `focusVisible` instead.
+     */
+    isFocusVisible: focusVisible,
+    /**
+     * @deprecated Use `hovered` instead.
+     */
+    isHovered: hovered,
     props: rest,
     getContainerProps,
     getIconProps,

@@ -95,7 +95,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       placement,
       ...props,
     })
-    let {
+    const {
       allowPinchZoom,
       autoFocus,
       blockScrollOnMount,
@@ -111,7 +111,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       initialFocusRef,
       isOpen,
       lockFocusAcrossFrames,
-      open,
+      open = isOpen,
       restoreFocus,
       withCloseButton = !closeOnDrag,
       withDragBar = true,
@@ -125,11 +125,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       onOverlayClick,
       ...rest
     } = omitThemeProps(mergedProps, ["isFullHeight"])
-
-    open ??= isOpen
-
     const validChildren = getValidChildren(children)
-
     const [customDrawerOverlay, ...cloneChildren] = findChildren(
       validChildren,
       DrawerOverlay,

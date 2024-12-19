@@ -1148,6 +1148,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
       '@yamada-ui/lucide':
         specifier: workspace:*
         version: link:../lucide

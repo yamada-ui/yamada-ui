@@ -13,7 +13,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -215,7 +215,7 @@
   "DialogHeader": {},
   "DialogOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }
@@ -228,7 +228,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -431,7 +431,7 @@
   "DrawerHeader": {},
   "DrawerOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }
@@ -450,7 +450,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -612,7 +612,7 @@
   "ModalHeader": {},
   "ModalOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }

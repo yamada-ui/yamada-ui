@@ -83,6 +83,12 @@
       "description": "The initial value of the autocomplete.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -163,15 +169,23 @@
       "description": "The position to be inserted when the autocomplete option is created.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -191,12 +205,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -288,7 +304,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -296,6 +312,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -492,6 +520,12 @@
       "description": "The initial value of the autocomplete.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
       "description": "The animation duration.",
@@ -572,6 +606,12 @@
       "description": "The position to be inserted when the autocomplete option is created.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -582,12 +622,14 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -607,12 +649,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -721,7 +765,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -729,6 +773,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {

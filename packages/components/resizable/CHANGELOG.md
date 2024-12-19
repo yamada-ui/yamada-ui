@@ -1,5 +1,18 @@
 # @yamada-ui/resizable
 
+## 1.3.0
+
+### Minor Changes
+
+- [#3633](https://github.com/yamada-ui/yamada-ui/pull/3633) [`1d1fe66`](https://github.com/yamada-ui/yamada-ui/commit/1d1fe66a6a1c3f1ba521ea55a7754cc1eb58f8a4) Thanks [@uraaaa24](https://github.com/uraaaa24)! - Rename `direction` to `orientation` in `yamada-ui/resizable`
+
+### Patch Changes
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46)]:
+  - @yamada-ui/icon@1.1.17
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+
 ## 1.2.3
 
 ### Patch Changes

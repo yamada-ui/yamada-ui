@@ -84,14 +84,14 @@ export interface SwitchProps
  */
 export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Switch", props)
-  let {
+  const {
     className,
     children,
     flexDirection,
     gap = "0.5rem",
     icon,
     isReverse,
-    reverse,
+    reverse = isReverse,
     transition = {
       type: "spring",
       damping: 40,
@@ -101,9 +101,6 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     labelProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
-
-  reverse ??= isReverse
-
   const {
     active,
     checked,
@@ -115,7 +112,6 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     getInputProps,
     getLabelProps,
   } = useCheckbox({ selectOnEnter: true, ...computedProps })
-
   const cloneIcon = icon
     ? cloneElement(icon, {
         active,

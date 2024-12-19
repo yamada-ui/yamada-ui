@@ -1,5 +1,12 @@
 # @yamada-ui/use-timeout
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840)]:
+  - @yamada-ui/utils@1.6.2
+
 ## 1.0.25
 
 ### Patch Changes

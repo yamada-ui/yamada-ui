@@ -21,7 +21,7 @@
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"page\"\n  | \"time\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"page\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"\n  | \"time\"",
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },
@@ -29,7 +29,7 @@
     "aria-details": { "type": "string", "required": false },
     "aria-disabled": { "type": "Booleanish", "required": false },
     "aria-dropeffect": {
-      "type": "\"link\" | \"none\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
+      "type": "\"none\" | \"link\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
       "required": false
     },
     "aria-errormessage": { "type": "string", "required": false },
@@ -37,7 +37,7 @@
     "aria-flowto": { "type": "string", "required": false },
     "aria-grabbed": { "type": "Booleanish", "required": false },
     "aria-haspopup": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"grid\"\n  | \"dialog\"\n  | \"menu\"\n  | \"true\"\n  | \"false\"\n  | \"listbox\"\n  | \"tree\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"grid\"\n  | \"true\"\n  | \"false\"\n  | \"dialog\"\n  | \"listbox\"\n  | \"menu\"\n  | \"tree\"",
       "required": false
     },
     "aria-hidden": { "type": "Booleanish", "required": false },
@@ -121,14 +121,14 @@
     "dir": { "type": "string", "required": false },
     "draggable": { "type": "Booleanish", "required": false },
     "enterKeyHint": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"search\"\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"send\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"search\"\n  | \"send\"",
       "required": false
     },
     "hidden": { "type": "boolean", "required": false },
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"none\"\n  | \"search\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
       "required": false
     },
     "is": { "type": "string", "required": false },
@@ -142,6 +142,7 @@
     },
     "itemScope": { "type": "boolean", "required": false },
     "itemType": { "type": "string", "required": false },
+    "key": { "type": "Key", "required": false },
     "lang": { "type": "string", "required": false },
     "nonce": { "type": "string", "required": false },
     "onAbort": {
@@ -783,6 +784,10 @@
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },
+    "ref": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ((instance: HTMLUListElement | null) => void)\n  | RefObject<HTMLUListElement>",
+      "required": false
+    },
     "rel": { "type": "string", "required": false },
     "resource": { "type": "string", "required": false },
     "results": { "type": "number", "required": false },
@@ -834,7 +839,7 @@
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"page\"\n  | \"time\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"page\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"\n  | \"time\"",
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },
@@ -842,7 +847,7 @@
     "aria-details": { "type": "string", "required": false },
     "aria-disabled": { "type": "Booleanish", "required": false },
     "aria-dropeffect": {
-      "type": "\"link\" | \"none\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
+      "type": "\"none\" | \"link\" | \"copy\" | \"execute\" | \"move\" | \"popup\"",
       "required": false
     },
     "aria-errormessage": { "type": "string", "required": false },
@@ -850,7 +855,7 @@
     "aria-flowto": { "type": "string", "required": false },
     "aria-grabbed": { "type": "Booleanish", "required": false },
     "aria-haspopup": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"grid\"\n  | \"dialog\"\n  | \"menu\"\n  | \"true\"\n  | \"false\"\n  | \"listbox\"\n  | \"tree\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"grid\"\n  | \"true\"\n  | \"false\"\n  | \"dialog\"\n  | \"listbox\"\n  | \"menu\"\n  | \"tree\"",
       "required": false
     },
     "aria-hidden": { "type": "Booleanish", "required": false },
@@ -929,14 +934,14 @@
     "dir": { "type": "string", "required": false },
     "draggable": { "type": "Booleanish", "required": false },
     "enterKeyHint": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"search\"\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"send\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"search\"\n  | \"send\"",
       "required": false
     },
     "hidden": { "type": "boolean", "required": false },
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"none\"\n  | \"search\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
       "required": false
     },
     "is": { "type": "string", "required": false },
@@ -945,6 +950,7 @@
     "itemRef": { "type": "string", "required": false },
     "itemScope": { "type": "boolean", "required": false },
     "itemType": { "type": "string", "required": false },
+    "key": { "type": "Key", "required": false },
     "label": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "description": "The label of the reorder item.",
@@ -1558,6 +1564,10 @@
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },
+    "ref": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ((instance: HTMLLIElement | null) => void)\n  | RefObject<HTMLLIElement>",
+      "required": false
+    },
     "rel": { "type": "string", "required": false },
     "resource": { "type": "string", "required": false },
     "results": { "type": "number", "required": false },

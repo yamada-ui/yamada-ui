@@ -115,26 +115,21 @@ export const useCheckbox = <
 
   id ??= uuid
 
-  let {
+  const {
     id: _id,
     name,
-    checked: checkedProp,
-    defaultChecked,
+    isChecked,
+    checked: checkedProp = isChecked,
     defaultIsChecked,
-    indeterminate,
-    isChecked: isCheckedProp,
+    defaultChecked = defaultIsChecked,
     isIndeterminate,
+    indeterminate = isIndeterminate,
     selectOnEnter,
     tabIndex,
     value,
     onChange: onChangeProp,
     ...computedProps
   } = useFormControlProps({ id, ...props })
-
-  checkedProp ??= isCheckedProp
-  indeterminate ??= isIndeterminate
-  defaultChecked ??= defaultIsChecked
-
   const [
     {
       "aria-readonly": _ariaReadonly,
@@ -147,19 +142,15 @@ export const useCheckbox = <
     },
     rest,
   ] = splitObject(computedProps, formControlProperties)
-
   const [focusVisible, setFocusVisible] = useState<boolean>(false)
   const [focused, setFocused] = useState<boolean>(false)
   const [hovered, setHovered] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
-
   const inputRef = useRef<HTMLInputElement>(null)
   const [label, setLabel] = useState<boolean>(true)
-
-  const [isChecked, setIsChecked] = useState<boolean>(!!defaultChecked)
-
+  const [checked, setIsChecked] = useState<boolean>(!!defaultChecked)
   const controlled = checkedProp !== undefined
-  const checked = controlled ? (checkedProp as boolean) : isChecked
+  const resolvedChecked = controlled ? (checkedProp as boolean) : checked
 
   const onChange = useCallbackRef(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -170,11 +161,13 @@ export const useCheckbox = <
       }
 
       if (!controlled)
-        setIsChecked(!checked || indeterminate ? true : ev.target.checked)
+        setIsChecked(
+          !resolvedChecked || indeterminate ? true : ev.target.checked,
+        )
 
       onChangeProp?.(ev)
     },
-    [readOnly, disabled, controlled, checked, indeterminate],
+    [readOnly, disabled, controlled, resolvedChecked, indeterminate],
   )
   const onFocus = useCallbackRef(onFocusProp)
   const onBlur = useCallbackRef(onBlurProp)
@@ -217,7 +210,7 @@ export const useCheckbox = <
   useSafeLayoutEffect(() => {
     if (!inputRef.current) return
 
-    if (inputRef.current.checked !== checked)
+    if (inputRef.current.checked !== resolvedChecked)
       setIsChecked(inputRef.current.checked)
   }, [inputRef.current])
 
@@ -228,7 +221,7 @@ export const useCheckbox = <
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setLabel(el.tagName === "LABEL")
       }),
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
       "data-focus": dataAttr(focused),
       "data-focus-visible": dataAttr(focused && focusVisible),
       onClick: handlerAll(props.onClick, () => {
@@ -239,7 +232,7 @@ export const useCheckbox = <
         requestAnimationFrame(() => inputRef.current?.focus())
       }),
     }),
-    [checked, label, focused, focusVisible, formControlProps],
+    [resolvedChecked, label, focused, focusVisible, formControlProps],
   )
 
   const getIconProps: PropGetter = useCallback(
@@ -249,7 +242,7 @@ export const useCheckbox = <
       ref,
       "aria-hidden": true,
       "data-active": dataAttr(active),
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
       "data-focus": dataAttr(focused),
       "data-focus-visible": dataAttr(focused && focusVisible),
       "data-hover": dataAttr(hovered),
@@ -265,7 +258,7 @@ export const useCheckbox = <
     }),
     [
       active,
-      checked,
+      resolvedChecked,
       focused,
       hovered,
       focusVisible,
@@ -293,8 +286,8 @@ export const useCheckbox = <
         whiteSpace: "nowrap",
         width: "1px",
       },
-      "aria-checked": indeterminate ? "mixed" : checked,
-      checked,
+      "aria-checked": indeterminate ? "mixed" : resolvedChecked,
+      checked: resolvedChecked,
       disabled,
       readOnly,
       required,
@@ -316,7 +309,7 @@ export const useCheckbox = <
       required,
       disabled,
       readOnly,
-      checked,
+      resolvedChecked,
       onChange,
       onBlur,
       onFocus,
@@ -330,7 +323,7 @@ export const useCheckbox = <
       ...formControlProps,
       ...props,
       ref,
-      "data-checked": dataAttr(checked),
+      "data-checked": dataAttr(resolvedChecked),
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
@@ -340,12 +333,12 @@ export const useCheckbox = <
         ev.stopPropagation()
       }),
     }),
-    [checked, formControlProps],
+    [resolvedChecked, formControlProps],
   )
 
   return {
     active,
-    checked,
+    checked: resolvedChecked,
     focused,
     focusVisible,
     hovered,
@@ -357,7 +350,7 @@ export const useCheckbox = <
     /**
      * @deprecated Use `checked` instead.
      */
-    isChecked: checked,
+    isChecked: resolvedChecked,
     /**
      * @deprecated Use `focused` instead.
      */

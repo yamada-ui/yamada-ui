@@ -1,16 +1,20 @@
 import type { PropGetter } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { ariaAttr, isArray, mergeRefs } from "@yamada-ui/utils"
+import { ariaAttr, handlerAll, isArray, mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 import { useSelectContext, useSelectDescendantsContext } from "./use-select"
 
 export const useSelectList = () => {
-  const { focusedIndex, value } = useSelectContext()
+  const { focusedIndex, open, value } = useSelectContext()
   const descendants = useSelectDescendantsContext()
   const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
   const multi = isArray(value)
+
+  const onAnimationComplete = useCallback(() => {
+    if (!open) listRef.current?.scrollTo({ top: 0 })
+  }, [open])
 
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
@@ -53,8 +57,12 @@ export const useSelectList = () => {
       "aria-multiselectable": ariaAttr(multi),
       role: "listbox",
       ...props,
+      onAnimationComplete: handlerAll(
+        props.onAnimationComplete,
+        onAnimationComplete,
+      ),
     }),
-    [multi],
+    [multi, onAnimationComplete],
   )
 
   const getListProps: PropGetter = useCallback(

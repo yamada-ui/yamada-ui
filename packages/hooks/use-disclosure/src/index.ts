@@ -6,7 +6,7 @@ export interface UseDisclosureProps<
   M extends (...args: any[]) => Promise<void> | void = () => void,
 > {
   /**
-   * @deprecated Use `open` instead.
+   * @deprecated Use `defaultOpen` instead.
    */
   defaultIsOpen?: boolean
   defaultOpen?: boolean
@@ -185,11 +185,9 @@ export const useLazyDisclosure = ({
   enabled,
   isSelected,
   mode = "unmount",
-  selected,
+  selected = isSelected,
   wasSelected,
 }: UseLazyDisclosureProps) => {
-  selected ??= isSelected
-
   if (!enabled) return true
 
   if (selected) return true

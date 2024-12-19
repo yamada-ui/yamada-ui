@@ -70,7 +70,7 @@ interface ColorPickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
   /**
@@ -107,16 +107,16 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       withSwatch,
       ...props,
     })
-    let {
+    const {
       className,
       alphaSliderRef,
       children,
       color,
       h,
-      height,
+      height = h,
       hueSliderRef,
       minH,
-      minHeight,
+      minHeight = minH,
       saturationSliderRef,
       withEyeDropper = true,
       alphaSliderProps,
@@ -127,7 +127,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       fieldProps,
       hueSliderProps,
       inputProps,
-      portalProps = { isDisabled: true },
+      portalProps = { disabled: true },
       saturationSliderProps,
       swatchesProps,
       swatchProps,
@@ -145,10 +145,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       onClose,
       ...rest
     } = useColorPicker(computedProps)
-
-    h ??= height
-    minH ??= minHeight
-
     const css: CSSUIObject = {
       color,
       h: "fit-content",
@@ -174,8 +170,8 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
               {withSwatch ? <ColorPickerSwatch {...swatchProps} /> : null}
 
               <ColorPickerField
-                h={h}
-                minH={minH}
+                height={height}
+                minHeight={minHeight}
                 {...getFieldProps(fieldProps, ref)}
                 inputProps={getInputProps(inputProps)}
               />
@@ -228,15 +224,13 @@ interface ColorPickerFieldOptions {
 interface ColorPickerFieldProps extends HTMLUIProps, ColorPickerFieldOptions {}
 
 const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
-  ({ className, h, minH, inputProps, ...rest }, ref) => {
+  ({ className, inputProps, ...rest }, ref) => {
     const { styles } = useColorPickerContext()
     const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ps: "2rem",
       ...styles.field,

@@ -37,15 +37,15 @@ export function useControllableState<Y>(
 ): [Y, Dispatch<SetStateAction<Y>>]
 
 export function useControllableState<Y>({
+  defaultValue: defaultValueProp,
   value,
-  ...rest
+  onChange: onChangeProp,
+  onUpdate: onUpdateProp = (prev, next) => prev !== next,
 }: UseControllableStateProps<Y>) {
-  rest.onUpdate ??= (prev, next) => prev !== next
+  const onChange = useCallbackRef(onChangeProp)
+  const onUpdate = useCallbackRef(onUpdateProp)
 
-  const onChange = useCallbackRef(rest.onChange)
-  const onUpdate = useCallbackRef(rest.onUpdate)
-
-  const [defaultValue, setDefaultValue] = useState(rest.defaultValue)
+  const [defaultValue, setDefaultValue] = useState(defaultValueProp)
   const controlled = value !== undefined
   const resolvedValue = controlled ? value : defaultValue
 

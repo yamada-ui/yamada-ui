@@ -31,53 +31,31 @@ import { Tooltip } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Tooltip label="へっ！きたねぇ花火だ" placement="top">
-    <Text w="fit-content">Open top Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="left">
-    <Text w="fit-content">Open left Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom">
-    <Text w="fit-content">Open bottom Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="right">
-    <Text w="fit-content">Open right Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="top-start">
-    <Text w="fit-content">Open top start Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="top-end">
-    <Text w="fit-content">Open top end Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="left-start">
-    <Text w="fit-content">Open left start Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="left-end">
-    <Text w="fit-content">Open left end Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-start">
-    <Text w="fit-content">Open bottom start Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="bottom-end">
-    <Text w="fit-content">Open bottom end Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="right-start">
-    <Text w="fit-content">Open right start Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" placement="right-end">
-    <Text w="fit-content">Open right end Tooltip</Text>
-  </Tooltip>
+  <For
+    each={[
+      "top",
+      "left",
+      "bottom",
+      "right",
+      "top-start",
+      "top-end",
+      "left-start",
+      "left-end",
+      "bottom-start",
+      "bottom-end",
+      "right-start",
+      "right-end",
+    ]}
+  >
+    {(placement, index) => (
+      <Tooltip key={index} label="へっ！きたねぇ花火だ" placement={placement}>
+        <Text w="fit-content">
+          Open {placement.split("-").reduce((prev, next) => prev + " " + next)}{" "}
+          Tooltip
+        </Text>
+      </Tooltip>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -87,25 +65,16 @@ import { Tooltip } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Tooltip label="へっ！きたねぇ花火だ" animation="scale">
-    <Text w="fit-content">Open scale Tooltip</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" animation="top">
-    <Text w="fit-content">Open top Hover</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" animation="left">
-    <Text w="fit-content">Open left Hover</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" animation="bottom">
-    <Text w="fit-content">Open bottom Hover</Text>
-  </Tooltip>
-
-  <Tooltip label="へっ！きたねぇ花火だ" animation="right">
-    <Text w="fit-content">Open right Hover</Text>
-  </Tooltip>
+  <For each={["scale", "top", "left", "bottom", "right"]}>
+    {(animation, index) => (
+      <Tooltip key={index} label="へっ！きたねぇ花火だ" animation={animation}>
+        <Text w="fit-content">
+          Open {animation.split("-").reduce((prev, next) => prev + " " + next)}{" "}
+          Tooltip
+        </Text>
+      </Tooltip>
+    )}
+  </For>
 </VStack>
 ```
 

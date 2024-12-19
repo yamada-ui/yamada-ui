@@ -2,7 +2,7 @@ import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { PropsWithChildren, ReactNode } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
-import { ChevronIcon } from "@yamada-ui/icon"
+import { ChevronDownIcon } from "@yamada-ui/lucide"
 import { cx } from "@yamada-ui/utils"
 import {
   useAccordionContext,
@@ -142,7 +142,7 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
     )
 
   return (
-    <ChevronIcon
+    <ChevronDownIcon
       className={cx("ui-accordion__icon", className)}
       aria-hidden
       __css={css}

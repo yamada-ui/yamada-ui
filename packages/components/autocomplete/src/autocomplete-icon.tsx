@@ -1,7 +1,7 @@
 import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import type { HTMLAttributes } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
-import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
+import { ChevronDownIcon, XIcon } from "@yamada-ui/lucide"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
 import { cloneElement, useRef } from "react"
@@ -47,7 +47,7 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
         __css={css}
         {...rest}
       >
-        {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+        {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
       </ui.div>
     )
   },
@@ -80,7 +80,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon h="0.5em" w="0.5em" />}
     </AutocompleteIcon>
   )
 }

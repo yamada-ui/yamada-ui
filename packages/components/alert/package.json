@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "@yamada-ui/loading": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },

@@ -40,7 +40,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendants,
-  useAutocompleteDescendantsContext,
 } from "./autocomplete-context"
 import { AutocompleteOption } from "./autocomplete-option"
 import { AutocompleteOptionGroup } from "./autocomplete-option-group"
@@ -52,7 +51,10 @@ interface AutocompleteItemWithValue extends AutocompleteOptionProps {
 
 interface AutocompleteItemWithItems
   extends AutocompleteOptionGroupProps,
-    Pick<AutocompleteOptionProps, "isDisabled" | "isFocusable"> {
+    Pick<
+      AutocompleteOptionProps,
+      "disabled" | "focusable" | "isDisabled" | "isFocusable"
+    > {
   items?: AutocompleteItemWithValue[]
 }
 
@@ -179,8 +181,8 @@ const flattenItems = (
   ): (AutocompleteItemWithValue | AutocompleteItemWithValue[])[] =>
     items
       .map((item) => {
-        const { isDisabled, isFocusable } = item
-        const trulyDisabled = !!isDisabled && !isFocusable
+        const { disabled, focusable } = item
+        const trulyDisabled = !!disabled && !focusable
 
         if (trulyDisabled) return
 
@@ -299,6 +301,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     closeOnEsc = true,
     closeOnSelect = true,
     defaultIsOpen,
+    defaultOpen,
     defaultValue,
     duration = 0.2,
     emptyMessage = "No results found",
@@ -308,14 +311,16 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     gutter,
     insertPositionItem = "first",
     isLazy,
-    isOpen: isOpenProp,
+    isOpen,
     items,
+    lazy,
     lazyBehavior,
     matchWidth = true,
     maxSelectValues,
     modifiers,
     offset,
     omitSelectedValues = false,
+    open: openProp,
     openDelay,
     placeholder,
     placement = "bottom-start",
@@ -331,23 +336,12 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     onSearch: onSearchProp,
     ...rest
   } = useFormControlProps(props)
-  const {
-    "aria-readonly": _ariaReadonly,
-    onFocus: onFocusProp,
-    ...formControlProps
-  } = pickObject(rest, formControlProperties)
-  const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
-  const { id } = rest
-
   const descendants = useAutocompleteDescendants()
-
   const containerRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
-  const isComposition = useRef<boolean>(false)
+  const compositionRef = useRef<boolean>(false)
   const prevValue = useRef<T | undefined>(undefined)
-
   const [resolvedItems, setResolvedItems] = useState<
     AutocompleteItem[] | undefined
   >(items ? JSON.parse(JSON.stringify(items)) : undefined)
@@ -359,22 +353,31 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   const [label, setLabel] = useState<T | undefined>(undefined)
   const [inputValue, setInputValue] = useState<string>("")
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-  const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
-  const [isHit, setIsHit] = useState<boolean>(true)
+  const [allSelected, setAllSelected] = useState<boolean>(false)
+  const [hit, setHit] = useState<boolean>(true)
   const {
-    isOpen,
+    open,
     onClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
     defaultIsOpen,
-    isOpen: isOpenProp,
+    defaultOpen,
+    isOpen,
+    open: openProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
-  const isFocused = focusedIndex > -1
-  const isCreate = focusedIndex === -2 && allowCreate
-  const isMulti = isArray(value)
-  const isEmptyValue = !isMulti ? !value : !value.length
+  const {
+    "aria-readonly": _ariaReadonly,
+    onFocus: onFocusProp,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
+  const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
+
+  const focused = focusedIndex > -1
+  const create = focusedIndex === -2 && allowCreate
+  const multi = isArray(value)
+  const emptyValue = !multi ? !value : !value.length
 
   const [firstInsertPositionItem, secondInsertPositionItem] = useMemo(() => {
     if (isArray(insertPositionItem)) {
@@ -386,21 +389,21 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
   if (allowCreate && !isUndefined(children)) {
     console.warn(
-      `${!isMulti ? "Autocomplete" : "MultiAutocomplete"}: ${
-        !isMulti ? "Autocomplete" : "MultiAutocomplete"
+      `${!multi ? "Autocomplete" : "MultiAutocomplete"}: ${
+        !multi ? "Autocomplete" : "MultiAutocomplete"
       } internally prefers 'children'. If 'allowCreate' is true, it will not be reflected correctly. If want to reflect, please set 'items' in props.`,
     )
   }
 
   const selectedValues = descendants.enabledValues(
-    ({ node }) => isMulti && value.includes(node.dataset.value ?? ""),
+    ({ node }) => multi && value.includes(node.dataset.value ?? ""),
   )
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const enabledValues = descendants.enabledValues(
     ({ index, node }) =>
       "target" in node.dataset && !selectedIndexes.includes(index),
   )
-
+  const activedescendantId = descendants.value(focusedIndex)?.node.id
   const validChildren = getValidChildren(children)
 
   const computedChildren = useMemo(
@@ -437,21 +440,21 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     [resolvedItems],
   )
 
-  const isEmpty = !validChildren.length && !computedChildren?.length
+  const empty = !validChildren.length && !computedChildren?.length
 
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
-    if (!allowCreate && (isEmpty || isAllSelected)) return
+    if (!allowCreate && (empty || allSelected)) return
 
     onInternalOpen()
 
     if (inputRef.current) inputRef.current.focus()
-  }, [allowCreate, formControlProps, isAllSelected, isEmpty, onInternalOpen])
+  }, [allowCreate, formControlProps, allSelected, empty, onInternalOpen])
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
-      if (isEmpty || isAllSelected) return
+      if (empty || allSelected) return
 
       const first = descendants.enabledFirstValue(
         ({ node }) => "target" in node.dataset,
@@ -459,7 +462,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       if (!first) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(first.index)
       } else {
         if (selectedIndexes.includes(first.index)) {
@@ -476,16 +479,16 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   }, [
     descendants,
     enabledValues,
-    isAllSelected,
-    isEmpty,
-    isMulti,
+    allSelected,
+    empty,
+    multi,
     omitSelectedValues,
     selectedIndexes,
   ])
 
   const onFocusLast = useCallback(() => {
     const id = setTimeout(() => {
-      if (isEmpty || isAllSelected) return
+      if (empty || allSelected) return
 
       const last = descendants.enabledLastValue(
         ({ node }) => "target" in node.dataset,
@@ -493,7 +496,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       if (!last) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(last.index)
       } else {
         if (selectedIndexes.includes(last.index)) {
@@ -510,9 +513,9 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   }, [
     descendants,
     enabledValues,
-    isAllSelected,
-    isEmpty,
-    isMulti,
+    allSelected,
+    empty,
+    multi,
     omitSelectedValues,
     selectedIndexes,
   ])
@@ -522,7 +525,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       const values = descendants.enabledValues()
 
       const selected = values.find(({ node }) =>
-        !isMulti
+        !multi
           ? node.dataset.value === value
           : value.includes(node.dataset.value ?? ""),
       )
@@ -531,7 +534,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, isMulti, value])
+  }, [descendants, multi, value])
 
   const onFocusNext = useCallback(
     (index: number = focusedIndex) => {
@@ -543,7 +546,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
         if (!next) return
 
-        if (!isMulti || !omitSelectedValues) {
+        if (!multi || !omitSelectedValues) {
           setFocusedIndex(next.index)
         } else {
           if (selectedIndexes.includes(next.index)) {
@@ -564,7 +567,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       descendants,
       enabledValues,
       focusedIndex,
-      isMulti,
+      multi,
       omitSelectedValues,
       selectedIndexes,
     ],
@@ -580,7 +583,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
         if (!prev) return
 
-        if (!isMulti || !omitSelectedValues) {
+        if (!multi || !omitSelectedValues) {
           setFocusedIndex(prev.index)
         } else {
           if (selectedIndexes.includes(prev.index)) {
@@ -601,34 +604,34 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       descendants,
       enabledValues,
       focusedIndex,
-      isMulti,
+      multi,
       omitSelectedValues,
       selectedIndexes,
     ],
   )
 
   const onFocusFirstOrSelected =
-    isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
+    emptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
   const onFocusLastOrSelected =
-    isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
+    emptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const pickOptions = useCallback(
     (value: string) => {
       const values = descendants.values()
 
-      let isHit = false
-      let isFocused = false
+      let hit = false
+      let focused = false
 
       values.forEach(({ index, node }) => {
         if (format(node.textContent ?? "").includes(value)) {
-          isHit = true
+          hit = true
 
-          const isDisabled = "disabled" in node.dataset
+          const disabled = "disabled" in node.dataset
 
           node.dataset.target = ""
 
-          if (!isFocused && !isDisabled) {
-            isFocused = true
+          if (!focused && !disabled) {
+            focused = true
 
             setFocusedIndex(index)
           }
@@ -637,7 +640,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
         }
       })
 
-      setIsHit(isHit)
+      setHit(hit)
     },
     [descendants, format],
   )
@@ -652,7 +655,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       if (runFocus) onFocusFirst()
 
-      setIsHit(true)
+      setHit(true)
     },
     [descendants, onFocusFirst],
   )
@@ -683,9 +686,9 @@ export const useAutocomplete = <T extends MaybeValue = string>(
         })
         .filter((label) => !isUndefined(label))
 
-      setLabel((!isMulti ? selectedLabel[0] : selectedLabel) as T)
+      setLabel((!multi ? selectedLabel[0] : selectedLabel) as T)
     },
-    [allowFree, descendants, isMulti],
+    [allowFree, descendants, multi],
   )
 
   const onChange = useCallback(
@@ -696,9 +699,9 @@ export const useAutocomplete = <T extends MaybeValue = string>(
         if (!isArray(prev)) {
           next = newValue as T
         } else {
-          const isSelected = prev.includes(newValue)
+          const selected = prev.includes(newValue)
 
-          if (!isSelected) {
+          if (!selected) {
             next = [...prev, newValue] as T
           } else {
             next = prev.filter((value) => value !== newValue) as T
@@ -712,9 +715,9 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       setInputValue("")
 
-      if (isMulti && runRebirth) rebirthOptions(false)
+      if (multi && runRebirth) rebirthOptions(false)
     },
-    [isMulti, rebirthOptions, setValue],
+    [multi, rebirthOptions, setValue],
   )
 
   const onSelect = useCallback(() => {
@@ -744,7 +747,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
   const onSearch = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      if (!isOpen) onOpen()
+      if (!open) onOpen()
 
       onSearchProp?.(ev)
 
@@ -759,20 +762,18 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       setInputValue(value)
     },
-    [isOpen, onOpen, format, onSearchProp, pickOptions, rebirthOptions],
+    [open, onOpen, format, onSearchProp, pickOptions, rebirthOptions],
   )
 
   const onCompositionStart = useCallback(() => {
-    isComposition.current = true
+    compositionRef.current = true
   }, [])
 
   const onCompositionEnd = useCallback(() => {
-    isComposition.current = false
+    compositionRef.current = false
   }, [])
 
   const onCreate = useCallback(() => {
-    if (!listRef.current) return
-
     const newItem: AutocompleteItem = { label: inputValue, value: inputValue }
 
     let newItems: AutocompleteItem[] = []
@@ -801,7 +802,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       } else {
         console.warn(
           `${
-            !isMulti ? "Autocomplete" : "MultiAutocomplete"
+            !multi ? "Autocomplete" : "MultiAutocomplete"
           }: '${firstInsertPositionItem}' specified in insertPositionItem does not exist in the option group.`,
         )
       }
@@ -826,26 +827,26 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     rebirthOptions,
     onCreateProp,
     secondInsertPositionItem,
-    isMulti,
+    multi,
   ])
 
   const onClick = useCallback(() => {
-    if (isOpen) {
+    if (open) {
       if (inputRef.current) inputRef.current.focus()
     } else {
       onOpen()
 
       onFocusFirstOrSelected()
     }
-  }, [isOpen, onFocusFirstOrSelected, onOpen])
+  }, [open, onFocusFirstOrSelected, onOpen])
 
   const onFocus = useCallback(() => {
-    if (isOpen) return
+    if (open) return
 
     onOpen()
 
     onFocusFirstOrSelected()
-  }, [isOpen, onFocusFirstOrSelected, onOpen])
+  }, [open, onFocusFirstOrSelected, onOpen])
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLDivElement>) => {
@@ -853,26 +854,26 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
       if (isContains(containerRef.current, relatedTarget)) return
 
-      if (!closeOnBlur && isHit) return
+      if (!closeOnBlur && hit) return
 
       if (allowFree && !!inputValue) onChange(inputValue, false)
 
       setInputValue("")
 
-      if (isOpen) onClose()
+      if (open) onClose()
     },
-    [closeOnBlur, isHit, isOpen, inputValue, allowFree, onClose, onChange],
+    [closeOnBlur, hit, open, inputValue, allowFree, onClose, onChange],
   )
 
   const onDelete = useCallback(() => {
-    if (!isMulti) {
+    if (!multi) {
       onChange("")
     } else {
       onChange(value[value.length - 1]!)
     }
 
-    if (!isOpen) onFocus()
-  }, [isMulti, isOpen, onChange, onFocus, value])
+    if (!open) onFocus()
+  }, [multi, open, onChange, onFocus, value])
 
   const onClear = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
@@ -884,9 +885,9 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       setInputValue("")
       rebirthOptions()
 
-      if (isOpen && inputRef.current) inputRef.current.focus()
+      if (open && inputRef.current) inputRef.current.focus()
     },
-    [isOpen, setLabel, setInputValue, setValue, rebirthOptions],
+    [open, setLabel, setInputValue, setValue, rebirthOptions],
   )
 
   const onKeyDown = useCallback(
@@ -894,30 +895,30 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       if (ev.key === " ") ev.key = ev.code
 
       if (formControlProps.disabled || formControlProps.readOnly) return
-      if (isComposition.current) return
+      if (compositionRef.current) return
 
       const enabledDelete = label === inputValue || !inputValue.length
 
       const actions: { [key: string]: Function | undefined } = {
-        ArrowDown: isFocused
+        ArrowDown: focused
           ? () => onFocusNext()
-          : !isOpen
+          : !open
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
-        ArrowUp: isFocused
+        ArrowUp: focused
           ? () => onFocusPrev()
-          : !isOpen
+          : !open
             ? funcAll(onOpen, onFocusLastOrSelected)
             : undefined,
-        Backspace: !isEmptyValue && enabledDelete ? onDelete : undefined,
-        End: isOpen ? onFocusLast : undefined,
-        Enter: isCreate
+        Backspace: !emptyValue && enabledDelete ? onDelete : undefined,
+        End: open ? onFocusLast : undefined,
+        Enter: create
           ? onCreate
-          : isFocused
+          : focused
             ? onSelect
-            : !isOpen
+            : !open
               ? funcAll(onOpen, onFocusFirstOrSelected)
-              : allowFree && isMulti
+              : allowFree && multi
                 ? () => {
                     if (inputValue) onChange(inputValue)
 
@@ -925,12 +926,12 @@ export const useAutocomplete = <T extends MaybeValue = string>(
                   }
                 : undefined,
         Escape: closeOnEsc ? onClose : undefined,
-        Home: isOpen ? onFocusFirst : undefined,
-        Space: isCreate
+        Home: open ? onFocusFirst : undefined,
+        Space: create
           ? onCreate
-          : isFocused
+          : focused
             ? onSelect
-            : !isOpen
+            : !open
               ? funcAll(onOpen, onFocusFirstOrSelected)
               : undefined,
       }
@@ -950,63 +951,56 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       label,
       inputValue,
       onOpen,
-      isFocused,
-      isMulti,
+      focused,
+      multi,
       onFocusFirstOrSelected,
       onFocusNext,
       onFocusLastOrSelected,
       onFocusPrev,
-      isCreate,
+      create,
       onCreate,
       onSelect,
-      isOpen,
+      open,
       onFocusFirst,
       onFocusLast,
       closeOnEsc,
       onClose,
-      isEmptyValue,
+      emptyValue,
       onDelete,
       onChange,
     ],
   )
 
   useEffect(() => {
-    if (!isMulti) return
+    if (!multi) return
 
     if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
-    const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectValues
+    const all = value.length > 0 && value.length === descendants.count()
+    const max = value.length === maxSelectValues
 
-    if (isAll || isMax) {
+    if (all || max) {
       onClose()
-      setIsAllSelected(true)
+      setAllSelected(true)
     } else {
-      setIsAllSelected(false)
+      setAllSelected(false)
     }
-  }, [
-    omitSelectedValues,
-    value,
-    descendants,
-    isMulti,
-    onClose,
-    maxSelectValues,
-  ])
+  }, [omitSelectedValues, value, descendants, multi, onClose, maxSelectValues])
 
   useSafeLayoutEffect(() => {
     onChangeLabel(value)
   }, [value])
 
   useUpdateEffect(() => {
-    if (isOpen || allowFree) return
+    if (open || allowFree) return
 
     setFocusedIndex(-1)
     setInputValue("")
-  }, [isOpen])
+  }, [open])
 
   useUpdateEffect(() => {
-    if (!isHit) setFocusedIndex(-2)
-  }, [isHit])
+    if (!hit) setFocusedIndex(-2)
+  }, [hit])
 
   useUpdateEffect(() => {
     setResolvedItems(items ? JSON.parse(JSON.stringify(items)) : undefined)
@@ -1019,7 +1013,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
 
   useOutsideClick({
     ref: containerRef,
-    enabled: isOpen && (closeOnBlur || !isHit),
+    enabled: open && (closeOnBlur || !hit),
     handler: onClose,
   })
 
@@ -1034,6 +1028,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       flip,
       gutter,
       isLazy,
+      lazy,
       lazyBehavior,
       matchWidth,
       modifiers,
@@ -1044,7 +1039,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       strategy,
       ...props,
       closeOnButton: false,
-      isOpen,
+      open,
       trigger: "never",
       onClose,
       onOpen,
@@ -1053,6 +1048,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       closeOnBlur,
       openDelay,
       closeDelay,
+      lazy,
       isLazy,
       lazyBehavior,
       animation,
@@ -1067,7 +1063,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
       strategy,
       placement,
       modifiers,
-      isOpen,
+      open,
       onOpen,
       onClose,
     ],
@@ -1089,18 +1085,23 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
+      "aria-activedescendant": activedescendantId,
+      "aria-autocomplete": "list",
+      "aria-haspopup": "listbox",
+      role: "combobox",
       tabIndex: -1,
       ...props,
       ...formControlProps,
-      "data-active": dataAttr(isOpen),
+      "data-active": dataAttr(open),
       placeholder,
       onFocus: handlerAll(props.onFocus, onFocusProp, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, onKeyDownProp, onKeyDown),
     }),
     [
+      activedescendantId,
       formControlProps,
       placeholder,
-      isOpen,
+      open,
       onFocusProp,
       onFocus,
       onKeyDownProp,
@@ -1109,23 +1110,21 @@ export const useAutocomplete = <T extends MaybeValue = string>(
   )
 
   return {
-    id,
     allowCreate,
     allowFree,
+    allSelected,
     children: children ?? computedChildren,
     closeOnSelect,
     descendants,
+    empty,
     emptyMessage,
     focusedIndex,
+    hit,
     inputRef,
     inputValue,
-    isAllSelected,
-    isEmpty,
-    isHit,
-    isOpen,
     label,
-    listRef,
     omitSelectedValues,
+    open,
     pickOptions,
     rebirthOptions,
     setFocusedIndex,
@@ -1156,47 +1155,33 @@ export type UseAutocompleteReturn = ReturnType<typeof useAutocomplete>
 
 export const useAutocompleteInput = () => {
   const {
-    id,
-    focusedIndex,
+    allSelected,
     inputRef,
-    isAllSelected,
-    isOpen,
-    listRef,
     formControlProps,
     inputProps,
     onCompositionEnd,
     onCompositionStart,
     onSearch,
   } = useAutocompleteContext()
-  const descendants = useAutocompleteDescendantsContext()
-  const activedescendantId = descendants.value(focusedIndex)?.node.id
-  const listId = listRef.current?.id
 
   useUpdateEffect(() => {
-    if (isAllSelected && inputRef.current) inputRef.current.blur()
-  }, [isAllSelected])
+    if (allSelected && inputRef.current) inputRef.current.blur()
+  }, [allSelected])
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       return {
         ref: mergeRefs(inputRef, ref),
         ...formControlProps,
-        "aria-activedescendant": activedescendantId,
-        "aria-autocomplete": "list",
-        "aria-controls": listId,
-        "aria-expanded": isOpen,
-        "aria-haspopup": "listbox",
         autoCapitalize: "none",
         autoComplete: "off",
-        role: "combobox",
         spellCheck: "false",
-        tabIndex: isAllSelected ? -1 : 0,
+        tabIndex: allSelected ? -1 : 0,
         ...inputProps,
         ...props,
-        id,
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents:
-          formControlProps.disabled || isAllSelected ? "none" : "auto",
+          formControlProps.disabled || allSelected ? "none" : "auto",
         onChange: handlerAll(props.onChange, onSearch),
         onCompositionEnd: handlerAll(
           props.onCompositionEnd,
@@ -1211,14 +1196,10 @@ export const useAutocompleteInput = () => {
       }
     },
     [
-      listId,
-      activedescendantId,
-      isOpen,
       inputProps,
       inputRef,
       formControlProps,
-      id,
-      isAllSelected,
+      allSelected,
       onSearch,
       onCompositionStart,
       onCompositionEnd,

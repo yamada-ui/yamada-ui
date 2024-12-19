@@ -41,15 +41,11 @@ export const withSize: Story = () => {
   )
 }
 
-export const withDefaultIsChecked: Story = () => {
-  return <Radio defaultIsChecked>孫悟空</Radio>
-}
-
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
-        <Radio key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+        <Radio key={colorScheme} colorScheme={colorScheme} defaultChecked>
           {colorScheme}
         </Radio>
       ))}
@@ -57,11 +53,15 @@ export const withColorScheme: Story = () => {
   )
 }
 
+export const withDefaultChecked: Story = () => {
+  return <Radio defaultChecked>孫悟空</Radio>
+}
+
 export const isDisabled: Story = () => {
   return (
     <>
       <Radio isDisabled>All Notifications</Radio>
-      <Radio defaultIsChecked isDisabled>
+      <Radio defaultChecked isDisabled>
         All Notifications
       </Radio>
 
@@ -77,7 +77,7 @@ export const isDisabled: Story = () => {
         isDisabled
         legend="Which notifications would you like to receive?"
       >
-        <Radio defaultIsChecked>All Notifications</Radio>
+        <Radio defaultChecked>All Notifications</Radio>
       </Fieldset>
 
       <Fieldset
@@ -98,7 +98,7 @@ export const isReadonly: Story = () => {
   return (
     <>
       <Radio isReadOnly>All Notifications</Radio>
-      <Radio defaultIsChecked isReadOnly>
+      <Radio defaultChecked isReadOnly>
         All Notifications
       </Radio>
 
@@ -114,7 +114,7 @@ export const isReadonly: Story = () => {
         isReadOnly
         legend="Which notifications would you like to receive?"
       >
-        <Radio defaultIsChecked>All Notifications</Radio>
+        <Radio defaultChecked>All Notifications</Radio>
       </Fieldset>
 
       <Fieldset
@@ -135,7 +135,7 @@ export const isInvalid: Story = () => {
   return (
     <>
       <Radio isInvalid>All Notifications</Radio>
-      <Radio defaultIsChecked isInvalid>
+      <Radio defaultChecked isInvalid>
         All Notifications
       </Radio>
 
@@ -200,7 +200,7 @@ export const customControl: Story = () => {
   const [value, setValue] = useState<string>("孫悟空")
 
   return (
-    <RadioGroup value={value} onChange={(value) => setValue(value)}>
+    <RadioGroup value={value} onChange={setValue}>
       <Radio value="孫悟空">孫悟空</Radio>
       <Radio value="ベジータ">ベジータ</Radio>
       <Radio value="フリーザ">フリーザ</Radio>

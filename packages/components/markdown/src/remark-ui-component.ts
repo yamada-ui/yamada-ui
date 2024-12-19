@@ -1,5 +1,5 @@
-import type { AlertStatus } from "@yamada-ui/core"
-import type { Parent as HastParent } from "hast"
+import type { AlertStatusValue } from "@yamada-ui/core"
+import type { ElementContent, Parent } from "hast"
 import type {
   Break,
   Paragraph,
@@ -8,7 +8,6 @@ import type {
   Strong,
   Text,
 } from "mdast"
-import type { ElementContent } from "react-markdown/lib"
 import type { Plugin } from "unified"
 import type { ShouldRemoved } from "./utils"
 import { isNull, isUndefined, noop } from "@yamada-ui/utils"
@@ -18,7 +17,7 @@ import { visit } from "unist-util-visit"
 import { getFragmentPattern } from "./patterns"
 import { shouldRemoved } from "./utils"
 
-const getStatus = (str: string | undefined): AlertStatus => {
+const getStatus = (str: string | undefined): AlertStatusValue => {
   return match(str)
     .with(undefined, () => {
       return "info" as const
@@ -46,7 +45,7 @@ const getStatus = (str: string | undefined): AlertStatus => {
 
 interface OneLineNote extends Text {
   readonly content: string
-  readonly status: AlertStatus
+  readonly status: AlertStatusValue
 }
 
 const oneLineNoteFactory = (textNode: Text): null | OneLineNote => {
@@ -79,7 +78,7 @@ const oneLineNoteFactory = (textNode: Text): null | OneLineNote => {
 }
 
 interface StartFragment extends Text {
-  readonly status: AlertStatus
+  readonly status: AlertStatusValue
 }
 
 const startFragmentFactory = (textNode: Text): null | StartFragment => {
@@ -113,7 +112,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
     let isMergingChildren = false
     let buf: PhrasingContent[] = []
     let paragraph: Paragraph | undefined
-    let status: AlertStatus = "info"
+    let status: AlertStatusValue = "info"
 
     visit(tree, "paragraph", (node, index) => {
       for (const phrasingContent of node.children) {
@@ -236,7 +235,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
 
 export const rehypePlugin: Plugin = () => {
   return (tree) => {
-    visit(tree, "break", (_, index, parent: HastParent) => {
+    visit(tree, "break", (_, index, parent: Parent) => {
       parent.children.splice(index!, 1, {
         type: "element",
         children: [],
@@ -245,7 +244,7 @@ export const rehypePlugin: Plugin = () => {
       })
     })
 
-    visit(tree, "strong", (node: Strong, index: number, parent: HastParent) => {
+    visit(tree, "strong", (node: Strong, index: number, parent: Parent) => {
       parent.children.splice(index!, 1, {
         type: "element",
         children: [...node.children] as ElementContent[],

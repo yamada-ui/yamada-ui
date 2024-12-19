@@ -164,7 +164,7 @@ interface CellPosition {
 }
 
 export const useCellRef = (
-  isDisabled = false,
+  disabled = false,
   { colIndex, colSpan = 1, rowIndex, rowSpan = 1 }: CellPosition,
 ) => {
   const { cellMapRef } = useTableContext()
@@ -172,7 +172,7 @@ export const useCellRef = (
   const referenceRef = useRef<HTMLTableCellElement>(null)
 
   useEffect(() => {
-    if (isDisabled) return
+    if (disabled) return
 
     const cellMap = cellMapRef.current
     let targetRef = ref
@@ -200,7 +200,7 @@ export const useCellRef = (
         cellMap.delete(`${rowIndex}-${colIndex + i}`)
       }
     }
-  }, [cellMapRef, colIndex, colSpan, rowIndex, rowSpan, isDisabled])
+  }, [cellMapRef, colIndex, colSpan, rowIndex, rowSpan, disabled])
 
   return { ref, referenceRef }
 }
@@ -208,15 +208,15 @@ export const useCellRef = (
 type CellElement = "td" | "th"
 
 type CellProps<Y extends CellElement = "td"> = {
-  isDisabled?: boolean
+  disabled?: boolean
 } & HTMLProps<Y>
 
 export const useCellProps = <Y extends CellElement = "td">(
   rowIndex: number,
   colIndex: number,
-  { colSpan, isDisabled, rowSpan, onKeyDown, ...rest }: CellProps<Y>,
+  { colSpan, disabled, rowSpan, onKeyDown, ...rest }: CellProps<Y>,
 ) => {
-  const { ref, referenceRef } = useCellRef(isDisabled, {
+  const { ref, referenceRef } = useCellRef(disabled, {
     colIndex,
     colSpan,
     rowIndex,

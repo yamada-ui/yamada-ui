@@ -25,8 +25,16 @@ order: 1
 <PropsCard
   id="ripple-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "span" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "textPath"'
+  type="keyof ReactDOM"
   description={"The HTML element to render."}
+/>
+
+<PropsCard
+  id="ripple-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -34,6 +42,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -41,7 +50,12 @@ order: 1
 
 <PropsCard id="useripple-disabled" name="disabled" type="boolean" />
 
-<PropsCard id="useripple-isdisabled" name="isDisabled" type="boolean" />
+<PropsCard
+  id="useripple-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  deprecated={"Use `disabled` instead."}
+/>
 
 <PropsCard
   id="useripple-onpointerdown"

@@ -1,23 +1,29 @@
 import type { PropGetter } from "@yamada-ui/core"
-import { ariaAttr, isArray, mergeRefs, useUpdateEffect } from "@yamada-ui/utils"
-import { useCallback, useEffect, useId, useRef } from "react"
+import type { MotionProps } from "@yamada-ui/motion"
+import {
+  ariaAttr,
+  handlerAll,
+  isArray,
+  mergeRefs,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
+import { useCallback, useEffect, useRef } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendantsContext,
 } from "./autocomplete-context"
 
 export const useAutocompleteList = () => {
-  const { focusedIndex, isOpen, listRef, rebirthOptions, value } =
-    useAutocompleteContext()
+  const { focusedIndex, open, rebirthOptions, value } = useAutocompleteContext()
   const descendants = useAutocompleteDescendantsContext()
-  const uuid = useId()
+  const listRef = useRef<HTMLDivElement>(null)
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
   const isMulti = isArray(value)
 
   const onAnimationComplete = useCallback(() => {
-    if (!isOpen) rebirthOptions(false)
-  }, [isOpen, rebirthOptions])
+    if (!open) rebirthOptions(false)
+  }, [open, rebirthOptions])
 
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
@@ -55,24 +61,35 @@ export const useAutocompleteList = () => {
   }, [listRef, selectedValue])
 
   useUpdateEffect(() => {
-    if (!isOpen) beforeFocusedIndex.current = -1
-  }, [isOpen])
+    if (!open) beforeFocusedIndex.current = -1
+  }, [open])
+
+  const getContainerProps: PropGetter<MotionProps, MotionProps> = useCallback(
+    (props = {}, ref = null) => ({
+      ref,
+      "aria-multiselectable": ariaAttr(isMulti),
+      role: "listbox",
+      ...props,
+      onAnimationComplete: handlerAll(
+        props.onAnimationComplete,
+        onAnimationComplete,
+      ),
+    }),
+    [isMulti, onAnimationComplete],
+  )
 
   const getListProps: PropGetter = useCallback(
-    ({ id, ...props } = {}, ref = null) => ({
-      id: id ?? uuid,
+    (props = {}, ref = null) => ({
       ref: mergeRefs(listRef, ref),
-      "aria-multiselectable": ariaAttr(isMulti),
       position: "relative",
-      role: "listbox",
       tabIndex: -1,
       ...props,
     }),
-    [listRef, uuid, isMulti],
+    [listRef],
   )
 
   return {
+    getContainerProps,
     getListProps,
-    onAnimationComplete,
   }
 }

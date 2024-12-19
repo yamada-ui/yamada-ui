@@ -58,6 +58,14 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
    *
    * @default false
    */
+  fragment?: boolean
+  /**
+   * If `true`, `Fragment` is used for rendering.
+   *
+   * @default false
+   *
+   * @deprecated Use `fragment` instead.
+   */
   isFragment?: boolean
   /**
    * Properties passed to the Mark component which is used to highlight the matched terms.
@@ -73,6 +81,7 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
 export const Highlight: FC<HighlightProps> = ({
   children: text,
   isFragment = false,
+  fragment = isFragment,
   lineHeight = "tall",
   query,
   markProps,
@@ -83,10 +92,10 @@ export const Highlight: FC<HighlightProps> = ({
 
   const chunks = useHighlight({ query, text })
 
-  const Component: FC = isFragment ? Fragment : Text
+  const Component: FC = fragment ? Fragment : Text
 
   return (
-    <Component {...(!isFragment ? { lineHeight } : {})} {...rest}>
+    <Component {...(!fragment ? { lineHeight } : {})} {...rest}>
       {chunks.map(({ match, text }, i) =>
         match ? (
           <Mark key={i} {...markProps}>

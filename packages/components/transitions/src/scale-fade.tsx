@@ -76,12 +76,12 @@ export interface ScaleFadeProps
 export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("ScaleFade", props)
-    let {
+    const {
       className,
       delay,
       duration,
       isOpen,
-      open,
+      open = isOpen,
       reverse,
       scale,
       transition,
@@ -90,9 +90,6 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
     const animate = open || unmountOnExit ? "enter" : "exit"
-
-    open ??= isOpen
-
     const custom = {
       delay,
       duration,
@@ -101,12 +98,11 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
       transition,
       transitionEnd,
     }
-
-    open = unmountOnExit ? open && unmountOnExit : true
+    const resolvedOpen = unmountOnExit ? open && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>
-        {open ? (
+        {resolvedOpen ? (
           <motion.div
             ref={ref}
             className={cx("ui-scale-fade", className)}

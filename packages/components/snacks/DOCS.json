@@ -5,7 +5,7 @@
       "required": true
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | ... 149 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -13,7 +13,7 @@
       "type": "Variants",
       "description": "The variants of the snacks container.\nCheck the docs to see the variants of possible modifiers you can pass.",
       "required": false,
-      "see": "https://www.framer.com/motion/animation/#variants"
+      "see": "https://motion.dev/docs/react-animation#variants"
     },
     "listProps": {
       "type": "MotionProps<\"ul\">",
@@ -24,7 +24,7 @@
       "type": "Variants",
       "description": "The variants of the snacks list.\nCheck the docs to see the variants of possible modifiers you can pass.",
       "required": false,
-      "see": "https://www.framer.com/motion/animation/#variants"
+      "see": "https://motion.dev/docs/react-animation#variants"
     }
   },
   "Snack": {

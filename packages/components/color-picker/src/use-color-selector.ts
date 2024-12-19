@@ -92,7 +92,7 @@ const convertHsva = (value: string, fallback?: string): Hsva => {
 interface ColorSelectorContext {
   channels: Channel[]
   eyeDropperSupported: boolean
-  isInteractive: boolean
+  interactive: boolean
   styles: { [key: string]: CSSUIObject | undefined }
   value: string
   withAlpha: boolean
@@ -209,19 +209,19 @@ export const useColorSelector = ({
   )
   const resolvedValue = convertColor(value, "#ffffff")(format) as string
   const timeoutId = useRef<any>(undefined)
-  const isDraggingRef = useRef<boolean>(false)
+  const draggingRef = useRef<boolean>(false)
   const [parsedValue, setParsedValue] = useState<Hsva>(
     convertHsva(resolvedValue, fallbackValue),
   )
   const { a, h, s, v } = parsedValue
   const withAlpha = format.endsWith("a")
-  const isInteractive = !(disabled || readOnly)
+  const interactive = !(disabled || readOnly)
 
   const channels: Channel[] = useMemo(() => {
     if (resolvedValue.startsWith("hsl")) {
       const { a, h, l, s } = convertHsla(resolvedValue, fallbackValue)
 
-      let channels: Channel[] = [
+      const channels: Channel[] = [
         { label: "H", max: 360, min: 0, space: "h", value: Math.round(h) },
         {
           label: "S(%)",
@@ -240,39 +240,33 @@ export const useColorSelector = ({
       ]
 
       if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            max: 100,
-            min: 0,
-            space: "a",
-            value: Math.round(a * 100),
-          },
-        ]
+        channels.push({
+          label: "A(%)",
+          max: 100,
+          min: 0,
+          space: "a",
+          value: Math.round(a * 100),
+        })
       }
 
       return channels
     } else {
       const { a, b, g, r } = convertRgba(resolvedValue, fallbackValue)
 
-      let channels: Channel[] = [
+      const channels: Channel[] = [
         { label: "R", max: 255, min: 0, space: "r", value: Math.round(r) },
         { label: "G", max: 255, min: 0, space: "g", value: Math.round(g) },
         { label: "B", max: 255, min: 0, space: "b", value: Math.round(b) },
       ]
 
       if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            max: 100,
-            min: 0,
-            space: "a",
-            value: Math.round(a * 100),
-          },
-        ]
+        channels.push({
+          label: "A(%)",
+          max: 100,
+          min: 0,
+          space: "a",
+          value: Math.round(a * 100),
+        })
       }
 
       return channels
@@ -294,7 +288,7 @@ export const useColorSelector = ({
     (value: Partial<Hsva>) => {
       window.clearTimeout(timeoutId.current)
 
-      isDraggingRef.current = true
+      draggingRef.current = true
 
       const { a, h, s, v } = { ...parsedValue, ...value }
 
@@ -310,7 +304,7 @@ export const useColorSelector = ({
       window.clearTimeout(timeoutId.current)
 
       timeoutId.current = window.setTimeout(() => {
-        isDraggingRef.current = false
+        draggingRef.current = false
       }, 200)
 
       let nextValue: string | undefined
@@ -380,7 +374,7 @@ export const useColorSelector = ({
   }, [h, s, v, a])
 
   useUpdateEffect(() => {
-    if (isDraggingRef.current) return
+    if (draggingRef.current) return
 
     if (valueProp) setParsedValue(convertHsva(valueProp, fallbackValue))
   }, [valueProp])
@@ -578,7 +572,7 @@ export const useColorSelector = ({
     channels,
     disabled,
     eyeDropperSupported,
-    isInteractive,
+    interactive,
     readOnly,
     value: resolvedValue,
     withAlpha,

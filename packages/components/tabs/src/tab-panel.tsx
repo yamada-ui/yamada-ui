@@ -14,26 +14,25 @@ export interface TabPanelProps extends HTMLUIProps {}
 
 export const TabPanel = forwardRef<TabPanelProps, "div">(
   ({ id, className, children, ...rest }, ref) => {
-    const { isLazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
     const uuid = useId()
-    const { index, isSelected } = useTabPanelContext()
+    const { lazy: enabled, lazyBehavior: mode, styles } = useTabsContext()
+    const { index, selected } = useTabPanelContext()
     const { register } = useTabPanelDescendant()
     const { descendants } = useTabDescendant()
     const hasBeenSelected = useRef<boolean>(false)
     const tabId = descendants.value(index)?.node.id
 
-    if (isSelected) hasBeenSelected.current = true
+    if (selected) hasBeenSelected.current = true
 
     const shouldRenderChildren = useLazyDisclosure({
       enabled,
-      isSelected,
+      isSelected: selected,
       mode,
       wasSelected: hasBeenSelected.current,
     })
+    const css: CSSUIObject = { ...styles.tabPanel }
 
     id ??= uuid
-
-    const css: CSSUIObject = { ...styles.tabPanel }
 
     return (
       <ui.div
@@ -44,7 +43,7 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
         role="tabpanel"
         __css={css}
         {...rest}
-        hidden={!isSelected}
+        hidden={!selected}
       >
         {shouldRenderChildren ? children : null}
       </ui.div>

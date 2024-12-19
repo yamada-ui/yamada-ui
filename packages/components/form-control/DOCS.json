@@ -20,31 +20,45 @@
       "description": "Props the helper message component.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the fieldset will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the fieldset will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the fieldset will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the fieldset will be readonly.",
       "required": false
     },
     "isReplace": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `replace` instead.",
       "description": "If `true`, switch between helper message and error message using isInvalid.",
       "required": false
     },
-    "isRequired": { "type": "boolean", "required": false },
+    "isRequired": {
+      "type": "boolean",
+      "deprecated": "Use `required` instead.",
+      "required": false
+    },
     "legend": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "description": "The fieldset legend to use.",
@@ -59,17 +73,35 @@
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the fieldset will be readonly.",
+      "required": false
+    },
+    "replace": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, switch between helper message and error message using isInvalid.",
+      "required": false
+    },
+    "required": { "type": "boolean", "required": false },
     "requiredIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     }
   },
   "Legend": {
-    "isRequired": { "type": "boolean", "required": false },
+    "isRequired": {
+      "type": "boolean",
+      "deprecated": "Use `required` instead.",
+      "required": false
+    },
     "optionalIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     },
+    "required": { "type": "boolean", "required": false },
     "requiredIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
@@ -77,6 +109,12 @@
   },
   "ErrorMessage": {},
   "FormControl": {
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "errorMessage": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "description": "The form control error message to use.",
@@ -97,33 +135,44 @@
       "description": "Props the label component.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isReplace": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `replace` instead.",
       "description": "If `true`, switch between helper message and error message using isInvalid.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -141,6 +190,24 @@
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "replace": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, switch between helper message and error message using isInvalid.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
     "requiredIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
@@ -148,46 +215,73 @@
   },
   "HelperMessage": {},
   "Label": {
-    "isRequired": { "type": "boolean", "required": false },
+    "isRequired": {
+      "type": "boolean",
+      "deprecated": "Use `required` instead.",
+      "required": false
+    },
     "optionalIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     },
+    "required": { "type": "boolean", "required": false },
     "requiredIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false
     }
   },
   "UseFormControl": {
-    "disabled": { "type": "boolean", "required": false },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "id": { "type": "string", "required": false },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "onBlur": { "type": "FocusEventHandler<Y>", "required": false },
     "onFocus": { "type": "FocusEventHandler<Y>", "required": false },
-    "readOnly": { "type": "boolean", "required": false },
-    "required": { "type": "boolean", "required": false }
+    "readOnly": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    }
   }
 }

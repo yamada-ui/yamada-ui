@@ -1,7 +1,6 @@
 export * from "./apple"
 export * from "./discord"
 export * from "./github"
-export * from "./logo"
 export * from "./npm"
 export * from "./open-collective"
 export * from "./patreon"

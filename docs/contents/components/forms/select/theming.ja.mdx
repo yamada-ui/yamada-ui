@@ -5,7 +5,6 @@ package_name: "@yamada-ui/select"
 order: 2
 with_description: true
 tab: テーマ
-label: Updated
 ---
 
 ## テーマ
@@ -40,6 +39,9 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
           bg: ["blackAlpha.100", "whiteAlpha.100"],
           _disabled: {
             bg: ["white", "black"],
+          },
+          _focus: {
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
           },
         },
       },

@@ -1,15 +1,14 @@
 import type {
-  ColorModeManager,
+  ColorModeProviderProps,
   Environment,
-  ThemeConfig,
-  ThemeSchemeManager,
+  ThemeProviderProps,
 } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
 import {
   ColorModeProvider,
   EnvironmentProvider,
   GlobalStyle,
+  I18nProvider,
   ResetStyle,
   ThemeProvider,
 } from "@yamada-ui/core"
@@ -18,31 +17,18 @@ import { MotionConfig } from "@yamada-ui/motion"
 import { NoticeProvider } from "@yamada-ui/notice"
 import { defaultConfig, defaultTheme } from "@yamada-ui/theme"
 
-export interface UIProviderProps {
+export interface UIProviderProps
+  extends Pick<ThemeProviderProps, "config" | "theme" | "themeSchemeManager">,
+    Pick<ColorModeProviderProps, "colorMode" | "colorModeManager"> {
   /**
    * Application content.
    */
   children: ReactNode
   /**
-   * Manager to persist a user's color mode preference.
-   *
-   * Omit if you don't render server-side.
-   * For SSR, choose `colorModeManager.ssr`.
-   *
-   * @default 'colorModeManager.localStorage'
-   */
-  colorModeManager?: ColorModeManager
-  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
   colorModeStorageKey?: string
-  /**
-   * The config of the yamada ui.
-   *
-   * If omitted, uses the default config provided by yamada ui.
-   */
-  config?: ThemeConfig
   /**
    * If `true`,  the use of automatic window and document detection will be disabled.
    *
@@ -69,21 +55,6 @@ export interface UIProviderProps {
    */
   environment?: Environment
   /**
-   * The theme of the yamada ui.
-   *
-   * If omitted, uses the default theme provided by yamada ui.
-   */
-  theme?: Dict
-  /**
-   * Manager to persist a user's theme scheme preference.
-   *
-   * Omit if you don't render server-side.
-   * For SSR, choose `themeSchemeManager.ssr`.
-   *
-   * @default 'themeSchemeManager.localStorage'
-   */
-  themeSchemeManager?: ThemeSchemeManager
-  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -95,6 +66,7 @@ export interface UIProviderProps {
  */
 export const UIProvider: FC<UIProviderProps> = ({
   children,
+  colorMode,
   colorModeManager,
   colorModeStorageKey,
   config = defaultConfig,
@@ -111,29 +83,32 @@ export const UIProvider: FC<UIProviderProps> = ({
       disabled={disableEnvironment}
       environment={environment}
     >
-      <ThemeProvider
-        config={config}
-        storageKey={themeSchemeStorageKey}
-        theme={theme}
-        themeSchemeManager={themeSchemeManager}
-      >
-        <ColorModeProvider
-          colorModeManager={colorModeManager}
+      <I18nProvider direction={config.direction} locale={config.locale}>
+        <ThemeProvider
           config={config}
-          storageKey={colorModeStorageKey}
+          storageKey={themeSchemeStorageKey}
+          theme={theme}
+          themeSchemeManager={themeSchemeManager}
         >
-          <MotionConfig {...config.motion?.config}>
-            <LoadingProvider {...config.loading}>
-              {!disableResetStyle ? <ResetStyle /> : null}
-              {!disableGlobalStyle ? <GlobalStyle /> : null}
+          <ColorModeProvider
+            colorMode={colorMode}
+            colorModeManager={colorModeManager}
+            config={config}
+            storageKey={colorModeStorageKey}
+          >
+            <MotionConfig {...config.motion?.config}>
+              <LoadingProvider {...config.loading}>
+                {!disableResetStyle ? <ResetStyle /> : null}
+                {!disableGlobalStyle ? <GlobalStyle /> : null}
 
-              {children}
+                {children}
 
-              <NoticeProvider {...config.notice} />
-            </LoadingProvider>
-          </MotionConfig>
-        </ColorModeProvider>
-      </ThemeProvider>
+                <NoticeProvider {...config.notice} />
+              </LoadingProvider>
+            </MotionConfig>
+          </ColorModeProvider>
+        </ThemeProvider>
+      </I18nProvider>
     </EnvironmentProvider>
   )
 }

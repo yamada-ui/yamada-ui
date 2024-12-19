@@ -1,5 +1,32 @@
 # @yamada-ui/use-disclosure
 
+## 1.1.3
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- [#3686](https://github.com/yamada-ui/yamada-ui/pull/3686) [`794b31e`](https://github.com/yamada-ui/yamada-ui/commit/794b31e75b6f49e11d41043c0a0ea20351bb26fe) Thanks [@chida09](https://github.com/chida09)! - Deprecated `defaultIsOpen`, added `defaultOpen`.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840)]:
+  - @yamada-ui/utils@1.6.2
+
+## 1.1.2
+
+### Patch Changes
+
+- [#3807](https://github.com/yamada-ui/yamada-ui/pull/3807) [`b834ef3`](https://github.com/yamada-ui/yamada-ui/commit/b834ef351db0c66ddf45436440b90466add00b52) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484)]:
+  - @yamada-ui/utils@1.6.0
+
 ## 1.1.0
 
 ### Minor Changes

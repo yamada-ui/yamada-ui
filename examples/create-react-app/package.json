@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.7.1",
+    "@fortawesome/free-regular-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/charts": "workspace:*",
@@ -21,16 +21,16 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "eslint": "^9.14.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.12.0",
-    "jiti": "^2.4.0",
-    "prettier": "^3.3.3",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.13.0"
+    "globals": "^15.13.0",
+    "jiti": "^2.4.1",
+    "prettier": "^3.4.1",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
   },
   "scripts": {
     "start": "craco start",

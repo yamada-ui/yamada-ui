@@ -1,5 +1,58 @@
 # @yamada-ui/progress
 
+## 1.2.4
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46)]:
+  - @yamada-ui/use-animation@1.0.46
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+  - @yamada-ui/use-value@1.1.34
+  - @yamada-ui/use-token@1.1.34
+
+## 1.2.3
+
+### Patch Changes
+
+- [#3800](https://github.com/yamada-ui/yamada-ui/pull/3800) [`25cdb42`](https://github.com/yamada-ui/yamada-ui/commit/25cdb4230581549f6309a54a94ca976ec2a67d51) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a), [`734d66e`](https://github.com/yamada-ui/yamada-ui/commit/734d66e11a1479ce14f9246d23bbc173b81be5bd)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/use-animation@1.0.45
+  - @yamada-ui/use-token@1.1.33
+  - @yamada-ui/use-value@1.1.33
+
+## 1.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/use-animation@1.0.44
+  - @yamada-ui/use-token@1.1.32
+  - @yamada-ui/use-value@1.1.32
+
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/use-animation@1.0.43
+  - @yamada-ui/use-token@1.1.31
+  - @yamada-ui/use-value@1.1.31
+
+## 1.2.0
+
+### Minor Changes
+
+- [#3467](https://github.com/yamada-ui/yamada-ui/pull/3467) [`ce6e0d5`](https://github.com/yamada-ui/yamada-ui/commit/ce6e0d5b253cf6d093db90f74d53943ef45cfb5b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added accessibility attributes to components.
+
 ## 1.1.7
 
 ### Patch Changes

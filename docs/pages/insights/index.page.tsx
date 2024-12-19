@@ -135,8 +135,8 @@ const Page: NextPage<PageProps> = ({
             <InsightsHeader />
 
             <VStack gap={{ base: "xl", md: "md" }}>
-              <TotalChart isLoading={isLoading} />
-              <UserCharts isLoading={isLoading} />
+              <TotalChart loading={isLoading} />
+              <UserCharts loading={isLoading} />
             </VStack>
           </VStack>
         </TopLayout>

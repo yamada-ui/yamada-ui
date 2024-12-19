@@ -16,13 +16,27 @@
       "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
       "required": false
     },
-    "isFitContent": {
+    "fitContent": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the skeleton will take the width of it's children.",
       "required": false
     },
+    "isFitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `fitContent` instead.",
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
     "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `loaded` instead.",
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "loaded": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, it'll render its children with a nice fade transition.",
@@ -62,13 +76,27 @@
       "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
       "required": false
     },
-    "isFitContent": {
+    "fitContent": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the skeleton will take the width of it's children.",
       "required": false
     },
+    "isFitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `fitContent` instead.",
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
     "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `loaded` instead.",
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "loaded": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, it'll render its children with a nice fade transition.",
@@ -98,7 +126,20 @@
       "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.",
       "required": false
     },
+    "fitContent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
     "isLoaded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `loaded` instead.",
+      "description": "If `true`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "loaded": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, it'll render its children with a nice fade transition.",

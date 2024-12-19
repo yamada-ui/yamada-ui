@@ -26,7 +26,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     },
     group: {},
     groupLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: "muted",
       fontSize: "sm",
       fontWeight: "semibold",
       px: "3",
@@ -47,6 +47,9 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
         _disabled: {
           bg: ["white", "black"],
         },
+        _focus: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+        },
       },
       _disabled: {
         cursor: "not-allowed",
@@ -59,6 +62,11 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
     list: {
       outline: "none",
       py: "2",
+    },
+    separator: {
+      borderBottomWidth: "1px",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      my: "2",
     },
   },
 }

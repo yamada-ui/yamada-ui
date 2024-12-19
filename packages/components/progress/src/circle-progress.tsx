@@ -29,15 +29,25 @@ interface CircleProgressOptions {
    */
   color?: CSSUIProps["color"]
   /**
+   * If `true`, the cap of the progress indicator will be rounded.
+   *
+   * @default false
+   */
+  fullRounded?: boolean
+  /**
    * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
    *
    * @default false
+   *
+   * @deprecated It will be deprecated in version 2.0.
    */
   isAnimation?: boolean
   /**
    * If `true`, the cap of the progress indicator will be rounded.
    *
    * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
   /**
@@ -94,13 +104,14 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       "CircleProgress",
       props,
     )
-    let {
+    const {
       className,
       boxSize = size,
       children,
       color = "primary",
-      isAnimation = false,
       isRounded,
+      fullRounded = isRounded,
+      isAnimation = false,
       max = 100,
       min = 0,
       speed = ["1.4s", "2s"],
@@ -109,12 +120,9 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       value = 0,
       ...rest
     } = omitThemeProps(mergedProps)
-
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
-
     const interval = !isAnimation ? percent * 2.64 : undefined
-
     const animation = useAnimation({
       duration: typeof speed[0] === "string" ? speed[0] : `${speed[0]}s`,
       iterationCount: "infinite",
@@ -134,7 +142,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       },
       timingFunction: "linear",
     })
-
     const css: CSSUIObject = {
       ...styles,
       fontSize: "$boxSize",
@@ -143,7 +150,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         { name: "thickness", token: "sizes", value: thickness },
       ],
     }
-
     const circleProps: CircleProgressCircleProps = isAnimation
       ? {
           animation,
@@ -156,7 +162,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           transitionProperty: "stroke-dasharray, stroke",
           transitionTimingFunction: "ease",
         }
-
     const ariaProps: HTMLUIProps = !isAnimation
       ? {
           "aria-valuemax": max,
@@ -183,7 +188,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           <CircleProgressCircle
             opacity={isTransparent ? 0 : undefined}
             stroke={color}
-            strokeLinecap={isRounded ? "round" : undefined}
+            strokeLinecap={fullRounded ? "round" : undefined}
             strokeWidth="$thickness"
             {...circleProps}
           />

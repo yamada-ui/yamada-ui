@@ -9,7 +9,13 @@ import type {
   UseDisclosureReturn,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Languages, MenuIcon, Moon, Palette, Sun } from "@yamada-ui/lucide"
+import {
+  LanguagesIcon,
+  MenuIcon,
+  MoonIcon,
+  PaletteIcon,
+  SunIcon,
+} from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -46,7 +52,7 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { Search, SearchButton } from "components/forms"
-import { Discord, Github } from "components/media-and-icons"
+import { DiscordIcon, GithubIcon } from "components/media-and-icons"
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
@@ -62,7 +68,7 @@ export const Header = memo(
     const headerRef = useRef<HTMLHeadingElement>()
     const { scrollY } = useScroll()
     const [y, setY] = useState<number>(0)
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { height = 0 } = headerRef.current?.getBoundingClientRect() ?? {}
 
     useMotionValueEvent(scrollY, "change", setY)
@@ -143,11 +149,11 @@ export const Header = memo(
               display={{ base: "flex", md: "none" }}
             />
 
-            <ButtonGroup {...{ isOpen, onOpen }} />
+            <ButtonGroup {...{ open, onOpen }} />
           </HStack>
         </Center>
 
-        <MobileMenu isOpen={isOpen} onClose={onClose} />
+        <MobileMenu open={open} onClose={onClose} />
       </>
     )
   }),
@@ -158,7 +164,7 @@ interface ButtonGroupProps extends Partial<UseDisclosureReturn> {
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = memo(
-  ({ isMobile, isOpen, onClose, onOpen }) => {
+  ({ isMobile, open, onClose, onOpen }) => {
     return (
       <HStack gap="sm">
         <SearchButton
@@ -171,7 +177,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
           aria-label="GitHub repository"
           color="muted"
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
-          icon={<Discord />}
+          icon={<DiscordIcon />}
           isExternal
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
@@ -182,7 +188,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
           aria-label="Discord server"
           color="muted"
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
-          icon={<Github />}
+          icon={<GithubIcon />}
           isExternal
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
@@ -200,7 +206,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
         <ColorModeButton />
 
-        {!isOpen ? (
+        {!open ? (
           <IconButton
             variant="ghost"
             aria-label="Open navigation menu"
@@ -259,7 +265,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
         variant="ghost"
         aria-label="Open language switching menu"
         color="muted"
-        icon={<Languages fontSize="2xl" />}
+        icon={<LanguagesIcon fontSize="2xl" />}
         _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         {...rest}
       />
@@ -318,9 +324,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           color="muted"
           icon={
             colorMode === "dark" ? (
-              <Sun fontSize="2xl" />
+              <SunIcon fontSize="2xl" />
             ) : (
-              <Moon fontSize="2xl" />
+              <MoonIcon fontSize="2xl" />
             )
           }
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
@@ -357,7 +363,7 @@ interface ThemeSchemeButtonProps extends IconButtonProps {
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { changeThemeScheme, theme } = useTheme()
     const { colorSchemes = [] } = theme
 
@@ -365,7 +371,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       <Popover
         {...popoverProps}
         closeOnButton={false}
-        isOpen={isOpen}
+        open={open}
         placement="bottom"
         restoreFocus={false}
         onClose={onClose}
@@ -376,7 +382,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             variant="ghost"
             aria-label="Open color mode switching menu"
             color="muted"
-            icon={<Palette fontSize="2xl" />}
+            icon={<PaletteIcon fontSize="2xl" />}
             _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             {...rest}
           />
@@ -442,7 +448,7 @@ ColorButton.displayName = "ColorButton"
 
 interface MobileMenuProps extends DrawerProps {}
 
-const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
+const MobileMenu: FC<MobileMenuProps> = memo(({ open, onClose }) => {
   const { events } = useRouter()
   const breakpoint = useBreakpoint()
 
@@ -462,7 +468,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
     <Drawer
       closeOnDrag
       isFullHeight
-      isOpen={isOpen}
+      open={open}
       w="sm"
       withCloseButton={false}
       withDragBar={false}
@@ -474,7 +480,7 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
         justifyContent="flex-end"
         pt="sm"
       >
-        <ButtonGroup isMobile {...{ isOpen, onClose }} />
+        <ButtonGroup isMobile {...{ open, onClose }} />
       </DrawerHeader>
 
       <DrawerBody my="sm" position="relative">

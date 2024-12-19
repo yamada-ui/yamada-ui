@@ -20,6 +20,12 @@ export interface FocusLockProps {
    */
   contentRef?: RefObject<HTMLElement>
   /**
+   * If `true`, focus trapping will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * `ref` of the element to return focus to when `FocusLock` unmounts.
    */
   finalFocusRef?: RefObject<FocusableElement>
@@ -31,6 +37,8 @@ export interface FocusLockProps {
    * If `true`, focus trapping will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
@@ -65,13 +73,16 @@ export const FocusLock: FC<FocusLockProps> = ({
   autoFocus,
   children,
   contentRef,
+  isDisabled,
+  disabled = isDisabled,
   finalFocusRef,
   initialFocusRef,
-  isDisabled,
   lockFocusAcrossFrames,
   persistentFocus,
   restoreFocus,
 }) => {
+  const returnFocus = restoreFocus && !finalFocusRef
+
   const onActivation = useCallback(() => {
     if (initialFocusRef?.current) {
       initialFocusRef.current.focus()
@@ -89,13 +100,11 @@ export const FocusLock: FC<FocusLockProps> = ({
     finalFocusRef?.current?.focus()
   }, [finalFocusRef])
 
-  const returnFocus = restoreFocus && !finalFocusRef
-
   return (
     <InternalFocusLock
       autoFocus={autoFocus}
       crossFrame={lockFocusAcrossFrames}
-      disabled={isDisabled}
+      disabled={disabled}
       persistentFocus={persistentFocus}
       returnFocus={returnFocus}
       onActivation={onActivation}

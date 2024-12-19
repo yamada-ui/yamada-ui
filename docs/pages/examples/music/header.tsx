@@ -10,20 +10,20 @@ import type {
   StackProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Globe, Mic } from "@yamada-ui/lucide"
+import { GlobeIcon, MicIcon } from "@yamada-ui/lucide"
 import {
   Button,
   HStack,
   isUndefined,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   transparentizeColor,
   useColorMode,
   useDisclosure,
@@ -69,12 +69,12 @@ const FILE_MENU_ITEMS: MenuItem[] = [
               { command: "⌘N", label: "Playlist" },
               {
                 command: "↑⌘N",
-                isDisabled: true,
+                disabled: true,
                 label: "Playlist from Selection",
               },
               { command: "⌥⌘N", label: "Smart Playlist" },
               { label: "Playlist Folder" },
-              { isDisabled: true, label: "Genius Playlist" },
+              { disabled: true, label: "Genius Playlist" },
             ],
           },
         ],
@@ -103,21 +103,21 @@ const FILE_MENU_ITEMS: MenuItem[] = [
           {
             items: [
               { label: "Import Playlist…" },
-              { isDisabled: true, label: "Export Playlist…" },
+              { disabled: true, label: "Export Playlist…" },
               { label: "Show Duplicate Items" },
             ],
           },
           {
             items: [
               { label: "Get Album Artwork" },
-              { isDisabled: true, label: "Get Track Names" },
+              { disabled: true, label: "Get Track Names" },
             ],
           },
         ],
         label: "Library",
       },
       { command: "⌘O", label: "Import" },
-      { isDisabled: true, label: "Burn Playlist to Disc…" },
+      { disabled: true, label: "Burn Playlist to Disc…" },
     ],
   },
   {
@@ -126,7 +126,7 @@ const FILE_MENU_ITEMS: MenuItem[] = [
   {
     items: [
       { label: "Page Setup…" },
-      { command: "⌘P", isDisabled: true, label: "Print" },
+      { command: "⌘P", disabled: true, label: "Print" },
     ],
   },
 ]
@@ -134,33 +134,33 @@ const FILE_MENU_ITEMS: MenuItem[] = [
 const EDIT_MENU_ITEMS: MenuItem[] = [
   {
     items: [
-      { command: "⌘Z", isDisabled: true, label: "Undo" },
-      { command: "↑⌘Z", isDisabled: true, label: "Redo" },
+      { command: "⌘Z", disabled: true, label: "Undo" },
+      { command: "↑⌘Z", disabled: true, label: "Redo" },
     ],
   },
   {
     items: [
-      { command: "⌘X", isDisabled: true, label: "Cut" },
-      { command: "⌘C", isDisabled: true, label: "Copy" },
-      { command: "⌘V", isDisabled: true, label: "Paste" },
+      { command: "⌘X", disabled: true, label: "Cut" },
+      { command: "⌘C", disabled: true, label: "Copy" },
+      { command: "⌘V", disabled: true, label: "Paste" },
     ],
   },
   {
     items: [
       { command: "⌘A", label: "Select All" },
-      { command: "↑⌘A", isDisabled: true, label: "Deselect All" },
+      { command: "↑⌘A", disabled: true, label: "Deselect All" },
     ],
   },
   {
     items: [
       {
         flexDirection: "row-reverse",
-        icon: <Mic fontSize="1.5em" />,
+        icon: <MicIcon fontSize="1.5em" />,
         label: "Smart Dictation…",
       },
       {
         flexDirection: "row-reverse",
-        icon: <Globe fontSize="1.5em" />,
+        icon: <GlobeIcon fontSize="1.5em" />,
         label: "Emoji & Symbols…",
       },
     ],
@@ -179,7 +179,7 @@ const VIEW_MENU_ITEMS: MenuItem[] = [
   {
     type: "checkbox",
     items: [
-      { isDisabled: true, label: "Show Status Bar", value: "Show Status Bar" },
+      { disabled: true, label: "Show Status Bar", value: "Show Status Bar" },
     ],
   },
   {
@@ -187,7 +187,7 @@ const VIEW_MENU_ITEMS: MenuItem[] = [
     items: [
       { label: "Hide Sidebar", value: "Hide Sidebar" },
       {
-        isDisabled: true,
+        disabled: true,
         label: "Enter Full Screen",
         value: "Enter Full Screen",
       },
@@ -249,7 +249,7 @@ const ControlMenu: FC<ControlMenuProps> = memo(
         <MenuList>
           {items.map(({ items, ...rest }, index) => (
             <Fragment key={index}>
-              {index ? <MenuDivider /> : null}
+              {index ? <MenuSeparator /> : null}
 
               <ControlMenuGroup
                 {...(rest as Merge<MenuGroupProps, MenuOptionGroupProps>)}

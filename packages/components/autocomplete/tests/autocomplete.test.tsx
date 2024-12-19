@@ -44,10 +44,9 @@ describe("<Autocomplete />", () => {
         </Autocomplete>,
       )
 
-      expect(screen.getByRole("combobox")).toHaveAttribute(
-        "placeholder",
-        "Select Option",
-      )
+      expect(
+        screen.getByRole("combobox").querySelector("input"),
+      ).toHaveAttribute("placeholder", "Select Option")
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
@@ -118,28 +117,31 @@ describe("<Autocomplete />", () => {
     test("with default value", () => {
       render(<Autocomplete defaultValue="option1" items={ITEMS} />)
 
-      expect(screen.getByRole("combobox")).toHaveValue("option1")
+      expect(screen.getByRole("combobox").querySelector("input")).toHaveValue(
+        "option1",
+      )
     })
 
     test("with disabled", () => {
-      render(<Autocomplete isDisabled items={ITEMS} />)
+      render(<Autocomplete disabled items={ITEMS} />)
 
-      expect(screen.getByRole("combobox")).toBeDisabled()
+      expect(screen.getByRole("combobox").querySelector("input")).toBeDisabled()
     })
 
     test("with readOnly", () => {
       render(<Autocomplete isReadOnly items={ITEMS} />)
 
-      expect(screen.getByRole("combobox")).toHaveAttribute("readonly")
+      expect(
+        screen.getByRole("combobox").querySelector("input"),
+      ).toHaveAttribute("readonly")
     })
 
     test("with invalid", () => {
       render(<Autocomplete isInvalid items={ITEMS} />)
 
-      expect(screen.getByRole("combobox")).toHaveAttribute(
-        "aria-invalid",
-        "true",
-      )
+      expect(
+        screen.getByRole("combobox").querySelector("input"),
+      ).toHaveAttribute("aria-invalid", "true")
     })
 
     test("with emptyProps icon", async () => {
@@ -215,7 +217,9 @@ describe("<Autocomplete />", () => {
       await user.click(optionElements[0]!)
 
       await waitFor(() =>
-        expect(screen.getByRole("combobox")).toHaveValue("option1"),
+        expect(screen.getByRole("combobox").querySelector("input")).toHaveValue(
+          "option1",
+        ),
       )
     })
 
@@ -227,8 +231,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, "option2")
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, "option2")
       await user.keyboard("{Enter}")
 
       expect(input).toHaveValue("option2")
@@ -242,8 +246,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, "ＯＰＴＩＯＮ２")
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, "ＯＰＴＩＯＮ２")
       await user.keyboard("{Enter}")
 
       expect(input).toHaveValue("option2")
@@ -261,7 +265,10 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       expect(screen.getByText(NO_RESULTS)).toHaveStyle("position: absolute")
 
-      await user.type(screen.getByRole("combobox"), "option4")
+      await user.type(
+        screen.getByRole("combobox").querySelector("input")!,
+        "option4",
+      )
       expect(screen.getByText(NO_RESULTS)).not.toHaveStyle("position: absolute")
     })
 
@@ -309,7 +316,7 @@ describe("<Autocomplete />", () => {
     test("should focus the input element on click an option with disabled", async () => {
       const { user } = render(
         <Autocomplete>
-          <AutocompleteOption isDisabled value="disabledOption">
+          <AutocompleteOption disabled value="disabledOption">
             disabledOption
           </AutocompleteOption>
         </Autocomplete>,
@@ -320,7 +327,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(disabledOptionElement)
 
-      const input = screen.getByRole("combobox")
+      const input = screen.getByRole("combobox").querySelector("input")
       expect(input).toHaveFocus()
     })
   })
@@ -441,7 +448,7 @@ describe("<Autocomplete />", () => {
 
       await user.keyboard("{Space}")
 
-      const input = screen.getByRole("combobox")
+      const input = screen.getByRole("combobox").querySelector("input")
       await waitFor(() => expect(input).toHaveValue("option1"))
     })
 
@@ -455,8 +462,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, "option4")
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, "option4")
       await user.keyboard("{Space}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -479,7 +486,7 @@ describe("<Autocomplete />", () => {
 
       await user.keyboard("{Enter}")
 
-      const input = screen.getByRole("combobox")
+      const input = screen.getByRole("combobox").querySelector("input")
       await waitFor(() => expect(input).toHaveValue("option1"))
     })
 
@@ -493,8 +500,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, "option4")
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, "option4")
       await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -568,7 +575,7 @@ describe("<Autocomplete />", () => {
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
-      const input = screen.getByRole("combobox")
+      const input = screen.getByRole("combobox").querySelector("input")
 
       await user.keyboard("{Enter}{Enter>}")
       await waitFor(() => expect(input).toHaveValue("option1"))
@@ -611,8 +618,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, CREATE_OPTION_VALUE)
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -646,8 +653,8 @@ describe("<Autocomplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -666,8 +673,8 @@ describe("<Autocomplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -692,8 +699,8 @@ describe("<Autocomplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -744,8 +751,8 @@ describe("<Autocomplete />", () => {
 
         await user.click(autocomplete!)
 
-        const input = screen.getByRole("combobox")
-        await user.type(input, CREATE_OPTION_VALUE)
+        const input = screen.getByRole("combobox").querySelector("input")
+        await user.type(input!, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
         await waitFor(() => expect(consoleWarnSpy).toHaveBeenCalledOnce())
@@ -790,8 +797,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, CREATE_OPTION_VALUE)
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(OPTION_ROLE)
@@ -818,8 +825,8 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const input = screen.getByRole("combobox")
-      await user.type(input, CREATE_OPTION_VALUE)
+      const input = screen.getByRole("combobox").querySelector("input")
+      await user.type(input!, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
       await waitFor(() => {
@@ -1033,7 +1040,9 @@ describe("<Autocomplete />", () => {
           <AutocompleteOption>option1</AutocompleteOption>
         </Autocomplete>,
       )
-      expect(screen.getByRole("combobox")).toHaveValue("option1")
+      expect(screen.getByRole("combobox").querySelector("input")).toHaveValue(
+        "option1",
+      )
     })
 
     test("should set the value to the number child as a string", () => {
@@ -1042,7 +1051,9 @@ describe("<Autocomplete />", () => {
           <AutocompleteOption>1</AutocompleteOption>
         </Autocomplete>,
       )
-      expect(screen.getByRole("combobox")).toHaveValue("1")
+      expect(screen.getByRole("combobox").querySelector("input")).toHaveValue(
+        "1",
+      )
     })
 
     test("correct warnings should be issued when child is neither string nor number", () => {
@@ -1054,7 +1065,7 @@ describe("<Autocomplete />", () => {
         </Autocomplete>,
       )
 
-      expect(consoleWarnSpy).toHaveBeenCalledTimes(2)
+      expect(consoleWarnSpy).toHaveBeenCalledTimes(1)
 
       consoleWarnSpy.mockRestore()
     })

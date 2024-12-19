@@ -1,5 +1,25 @@
 # @yamada-ui/utils
 
+## 1.6.2
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- [#3538](https://github.com/yamada-ui/yamada-ui/pull/3538) [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` from props, variables, hooks
+
+## 1.6.1
+
+### Patch Changes
+
+- [#3832](https://github.com/yamada-ui/yamada-ui/pull/3832) [`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838) Thanks [@illionillion](https://github.com/illionillion)! - Refactor `convertColor` to replace lookbehind in regular expression.
+
+## 1.6.0
+
+### Minor Changes
+
+- [#3321](https://github.com/yamada-ui/yamada-ui/pull/3321) [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484) Thanks [@taroj1205](https://github.com/taroj1205)! - Added `useIsSsr` hook.
+
 ## 1.5.4
 
 ### Patch Changes

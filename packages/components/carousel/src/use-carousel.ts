@@ -248,13 +248,13 @@ export const useCarousel = ({
     onChange,
   })
   const [indexes, setIndexes] = useState<number[]>([])
-  const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false)
+  const [mouseEnter, setMouseEnter] = useState<boolean>(false)
   const timeoutId = useRef<any>(undefined)
-  const isVertical = orientation === "vertical"
+  const vertical = orientation === "vertical"
   const [carouselRef, carousel] = useEmblaCarousel(
     {
       align,
-      axis: isVertical ? "y" : "x",
+      axis: vertical ? "y" : "x",
       containScroll,
       dragFree,
       duration,
@@ -292,10 +292,10 @@ export const useCarousel = ({
   }, [carousel, setSelectedIndex])
 
   useEffect(() => {
-    const isStop = isMouseEnter && stopMouseEnterAutoplay
-    const isLast = !carousel?.canScrollNext()
+    const stop = mouseEnter && stopMouseEnterAutoplay
+    const last = !carousel?.canScrollNext()
 
-    if (carousel && autoplay && !isStop && !isLast) {
+    if (carousel && autoplay && !stop && !last) {
       timeoutId.current = setInterval(() => {
         carousel.scrollNext()
       }, delay)
@@ -313,7 +313,7 @@ export const useCarousel = ({
     delay,
     stopMouseEnterAutoplay,
     carousel,
-    isMouseEnter,
+    mouseEnter,
     loop,
     selectedIndex,
   ])
@@ -388,10 +388,10 @@ export const useCarousel = ({
         { name: "slideSize", token: "sizes", value: slideSize },
       ]),
       onMouseEnter: handlerAll(props.onMouseEnter, () => {
-        setIsMouseEnter(true)
+        setMouseEnter(true)
       }),
       onMouseLeave: handlerAll(props.onMouseLeave, () => {
-        setIsMouseEnter(false)
+        setMouseEnter(false)
       }),
     }),
     [containerProps, gap, slideSize, vars],
@@ -434,7 +434,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   index = Math.floor((index ?? 0) / slidesToScroll)
 
   const totalSlides = indexes.length
-  const isSelected = index === selectedIndex
+  const selected = index === selectedIndex
 
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
@@ -442,11 +442,11 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
       "aria-label": `${index + 1} of ${totalSlides}`,
       "aria-roledescription": "slide",
       "data-index": index,
-      "data-selected": dataAttr(isSelected),
+      "data-selected": dataAttr(selected),
       role: "tabpanel",
       ...props,
     }),
-    [id, index, isSelected, totalSlides],
+    [id, index, selected, totalSlides],
   )
 
   return { getSlideProps }
@@ -459,38 +459,38 @@ export interface UseCarouselControlProps extends IconButtonProps {
 }
 
 export const useCarouselControl = ({
+  isDisabled,
+  disabled: disabledProp = isDisabled,
   operation,
-  ...rest
 }: UseCarouselControlProps) => {
   const { id, carousel } = useCarouselContext()
 
-  const isPrev = operation === "prev"
+  const prev = operation === "prev"
 
   const disabled =
-    rest.disabled ??
-    rest.isDisabled ??
-    (isPrev ? !carousel?.canScrollPrev() : !carousel?.canScrollNext())
+    disabledProp ??
+    (prev ? !carousel?.canScrollPrev() : !carousel?.canScrollNext())
 
   const onClick = useCallback(() => {
     if (!carousel) return
 
-    if (isPrev) {
+    if (prev) {
       carousel.scrollPrev()
     } else {
       carousel.scrollNext()
     }
-  }, [carousel, isPrev])
+  }, [carousel, prev])
 
   const getControlProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
       "aria-controls": id,
-      "aria-label": `Go to ${isPrev ? "previous" : "next"} slide`,
+      "aria-label": `Go to ${prev ? "previous" : "next"} slide`,
       ...props,
       ref,
       disabled,
       onClick: handlerAll(props.onClick, onClick),
     }),
-    [disabled, id, onClick, isPrev],
+    [disabled, id, onClick, prev],
   )
 
   return { getControlProps }
@@ -502,7 +502,7 @@ export const useCarouselIndicators = () => {
   const { id, carousel, indexes, orientation, selectedIndex } =
     useCarouselContext()
   const refMap = useRef<Map<number, RefObject<HTMLButtonElement>>>(new Map())
-  const isVertical = orientation === "vertical"
+  const vertical = orientation === "vertical"
 
   const onSelect = useCallback(
     (index: number) => {
@@ -529,7 +529,7 @@ export const useCarouselIndicators = () => {
 
       const actions: { [key: string]: KeyboardEventHandler } = {
         ArrowDown: () => {
-          if (!isVertical) return
+          if (!vertical) return
 
           if (index === lastIndex) {
             index = 0
@@ -540,7 +540,7 @@ export const useCarouselIndicators = () => {
           onSelect(index)
         },
         ArrowLeft: () => {
-          if (isVertical) return
+          if (vertical) return
 
           if (index === 0) {
             index = lastIndex
@@ -551,7 +551,7 @@ export const useCarouselIndicators = () => {
           onSelect(index)
         },
         ArrowRight: () => {
-          if (isVertical) return
+          if (vertical) return
 
           if (index === lastIndex) {
             index = 0
@@ -562,7 +562,7 @@ export const useCarouselIndicators = () => {
           onSelect(index)
         },
         ArrowUp: () => {
-          if (!isVertical) return
+          if (!vertical) return
 
           if (index === 0) {
             index = lastIndex
@@ -583,7 +583,7 @@ export const useCarouselIndicators = () => {
       ev.preventDefault()
       action(ev)
     },
-    [indexes, onSelect, isVertical],
+    [indexes, onSelect, vertical],
   )
 
   useUnmountEffect(() => {
@@ -606,7 +606,7 @@ export const useCarouselIndicators = () => {
     HTMLProps<"button">
   > = useCallback(
     ({ index, ...props }, ref) => {
-      const isSelected = index === selectedIndex
+      const selected = index === selectedIndex
       const internalRef = createRef<HTMLButtonElement>()
 
       refMap.current.set(index, internalRef)
@@ -615,11 +615,11 @@ export const useCarouselIndicators = () => {
         ref: mergeRefs(ref, internalRef),
         "aria-controls": `${id}-${index + 1}`,
         "aria-label": `Go to ${index + 1} slide`,
-        "aria-selected": isSelected,
+        "aria-selected": selected,
         "data-index": index,
-        "data-selected": dataAttr(isSelected),
+        "data-selected": dataAttr(selected),
         role: "tab",
-        tabIndex: isSelected ? 0 : -1,
+        tabIndex: selected ? 0 : -1,
         ...props,
         key: index,
         onClick: handlerAll(props.onClick, onClick(index)),

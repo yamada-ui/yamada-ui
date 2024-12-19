@@ -1,5 +1,10 @@
 import type { PaginationInstance, RowData } from "@tanstack/react-table"
-import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type {
+  ComponentArgs,
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+} from "@yamada-ui/core"
 import type { PaginationProps } from "@yamada-ui/pagination"
 import type { SelectProps } from "@yamada-ui/select"
 import type {
@@ -59,7 +64,7 @@ interface TableOptions<Y extends RowData> {
   /**
    * The CSS `table-layout` property.
    */
-  layout?: CSSUIObject["tableLayout"]
+  layout?: CSSUIProps["tableLayout"]
   /**
    * If `true`, display the outer border of the table.
    *

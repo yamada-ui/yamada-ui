@@ -30,11 +30,23 @@ export type UseClickableProps<
    */
   clickOnSpace?: boolean
   /**
+   * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * Disable the touch device behavior.
    *
    * @default true
    */
   disableTouchBehavior?: boolean
+  /**
+   * If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.
+   *
+   * @default false
+   */
+  focusable?: boolean
   /**
    * Whether or not to focus the element when it is clicked.
    * If `true`, the element will receive focus upon click.
@@ -46,12 +58,16 @@ export type UseClickableProps<
    * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.
    *
    * @default false
+   *
+   * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
 } & M
@@ -72,10 +88,12 @@ export const useClickable = <
     ref,
     clickOnEnter = true,
     clickOnSpace = true,
-    disableTouchBehavior = true,
-    focusOnClick = true,
     isDisabled,
+    disabled = isDisabled,
+    disableTouchBehavior = true,
     isFocusable,
+    focusable = isFocusable,
+    focusOnClick = true,
     tabIndex: _tabIndex,
     onClick,
     onKeyDown,
@@ -87,23 +105,23 @@ export const useClickable = <
     ...props
   }: UseClickableProps<Y, M> = {} as UseClickableProps<Y, M>,
 ) => {
-  const [isButton, setIsButton] = useState<boolean>(true)
-  const [isPressed, setIsPressed] = useState<boolean>(false)
+  const [button, setButton] = useState<boolean>(true)
+  const [pressed, setPressed] = useState<boolean>(false)
 
   const listeners = useEventListeners()
 
-  const tabIndex = isButton ? _tabIndex : _tabIndex || 0
-  const trulyDisabled = isDisabled && !isFocusable
+  const tabIndex = button ? _tabIndex : _tabIndex || 0
+  const trulyDisabled = disabled && !focusable
 
   const refCb = (node: any) => {
     if (!node) return
 
-    if (node.tagName !== "BUTTON") setIsButton(false)
+    if (node.tagName !== "BUTTON") setButton(false)
   }
 
   const handleClick = useCallback(
     (ev: MouseEvent<Y>) => {
-      if (isDisabled) {
+      if (disabled) {
         ev.stopPropagation()
         ev.preventDefault()
 
@@ -113,34 +131,34 @@ export const useClickable = <
       if (focusOnClick) ev.currentTarget.focus()
       onClick?.(ev)
     },
-    [isDisabled, focusOnClick, onClick],
+    [disabled, focusOnClick, onClick],
   )
 
   const onDocumentKeyUp = useCallback(
     (ev: KeyboardEvent<Y>) => {
-      if (isPressed && isValidElement(ev)) {
+      if (pressed && isValidElement(ev)) {
         ev.preventDefault()
         ev.stopPropagation()
 
-        setIsPressed(false)
+        setPressed(false)
 
         listeners.remove(document, "keyup", onDocumentKeyUp, false)
       }
     },
-    [isPressed, listeners],
+    [pressed, listeners],
   )
 
   const handleKeyDown = useCallback(
     (ev: KeyboardEvent<Y>) => {
       onKeyDown?.(ev)
 
-      if (isDisabled || ev.defaultPrevented || ev.metaKey) return
+      if (disabled || ev.defaultPrevented || ev.metaKey) return
 
-      if (!isValidElement(ev.nativeEvent) || isButton) return
+      if (!isValidElement(ev.nativeEvent) || button) return
 
       if (clickOnSpace && ev.key === " ") {
         ev.preventDefault()
-        setIsPressed(true)
+        setPressed(true)
       }
 
       if (clickOnEnter && ev.key === "Enter") {
@@ -151,8 +169,8 @@ export const useClickable = <
       listeners.add(document, "keyup", onDocumentKeyUp, false)
     },
     [
-      isDisabled,
-      isButton,
+      disabled,
+      button,
       onKeyDown,
       clickOnEnter,
       clickOnSpace,
@@ -165,25 +183,25 @@ export const useClickable = <
     (ev: KeyboardEvent<Y>) => {
       onKeyUp?.(ev)
 
-      if (isDisabled || ev.defaultPrevented || ev.metaKey) return
+      if (disabled || ev.defaultPrevented || ev.metaKey) return
 
-      if (!isValidElement(ev.nativeEvent) || isButton) return
+      if (!isValidElement(ev.nativeEvent) || button) return
 
       if (clickOnSpace && ev.key === " ") {
         ev.preventDefault()
-        setIsPressed(false)
+        setPressed(false)
 
         ev.currentTarget.click()
       }
     },
-    [clickOnSpace, isButton, isDisabled, onKeyUp],
+    [clickOnSpace, button, disabled, onKeyUp],
   )
 
   const onDocumentMouseUp = useCallback(
     (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
-      setIsPressed(false)
+      setPressed(false)
 
       listeners.remove(document, "mouseup", onDocumentMouseUp, false)
     },
@@ -194,14 +212,14 @@ export const useClickable = <
     (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
-      if (isDisabled) {
+      if (disabled) {
         ev.stopPropagation()
         ev.preventDefault()
 
         return
       }
 
-      if (!isButton) setIsPressed(true)
+      if (!button) setPressed(true)
 
       ev.currentTarget.focus({ preventScroll: true })
 
@@ -209,23 +227,23 @@ export const useClickable = <
 
       onMouseDown?.(ev)
     },
-    [isDisabled, isButton, onMouseDown, listeners, onDocumentMouseUp],
+    [disabled, button, onMouseDown, listeners, onDocumentMouseUp],
   )
 
   const handleMouseUp = useCallback(
     (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
-      if (!isButton) setIsPressed(false)
+      if (!button) setPressed(false)
 
       onMouseUp?.(ev)
     },
-    [onMouseUp, isButton],
+    [onMouseUp, button],
   )
 
   const handleMouseOver = useCallback(
     (ev: MouseEvent<Y>) => {
-      if (isDisabled) {
+      if (disabled) {
         ev.preventDefault()
 
         return
@@ -235,30 +253,30 @@ export const useClickable = <
 
       onMouseOver?.(ev)
     },
-    [isDisabled, onMouseOver, disableTouchBehavior],
+    [disabled, onMouseOver, disableTouchBehavior],
   )
 
   const handleMouseLeave = useCallback(
     (ev: MouseEvent<Y>) => {
-      if (isPressed) {
+      if (pressed) {
         ev.preventDefault()
 
-        setIsPressed(false)
+        setPressed(false)
       }
 
       if (disableTouchBehavior && isTouchDevice()) return
 
       onMouseLeave?.(ev)
     },
-    [isPressed, onMouseLeave, disableTouchBehavior],
+    [pressed, onMouseLeave, disableTouchBehavior],
   )
 
-  if (isButton) {
+  if (button) {
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
       type: "button",
-      "aria-disabled": trulyDisabled ? undefined : isDisabled,
+      "aria-disabled": trulyDisabled ? undefined : disabled,
       disabled: trulyDisabled,
       onClick: handleClick,
       onKeyDown,
@@ -272,8 +290,8 @@ export const useClickable = <
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
-      "aria-disabled": isDisabled ? ("true" as const) : undefined,
-      "data-active": dataAttr(isPressed),
+      "aria-disabled": disabled ? ("true" as const) : undefined,
+      "data-active": dataAttr(pressed),
       role: "button",
       tabIndex: trulyDisabled ? undefined : tabIndex,
       onClick: handleClick,

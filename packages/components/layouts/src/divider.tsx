@@ -26,6 +26,8 @@ export interface DividerProps
  * `Divider` is a component that represents a division between elements.
  *
  * @see Docs https://yamada-ui.com/components/layouts/divider
+ *
+ * @deprecated Use `Separator` instead.
  */
 export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
   const [
@@ -48,7 +50,7 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const customStyles = useMemo(
+  const orientationStyles = useMemo(
     () => ({
       horizontal: {
         border: "0",
@@ -78,14 +80,14 @@ export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
     ],
   )
 
-  const dividerStyles = useMemo(
-    () => customStyles[orientation],
-    [customStyles, orientation],
+  const additionalStyles = useMemo(
+    () => orientationStyles[orientation],
+    [orientationStyles, orientation],
   ) as CSSUIObject
 
   const css = {
     ...styles,
-    ...dividerStyles,
+    ...additionalStyles,
     ...__css,
   }
 

@@ -6,7 +6,6 @@ import { ui } from "@yamada-ui/core"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
-import { useMemo } from "react"
 import { usePopover } from "./popover"
 import { PopoverCloseButton } from "./popover-close-button"
 
@@ -62,17 +61,16 @@ const getPopoverContentProps = (
 export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
   (
     {
-      as = "section",
       className,
       children,
       maxW,
-      maxWidth,
+      maxWidth = maxW,
       minW,
-      minWidth,
+      minWidth = minW,
       w,
-      width,
+      width = w,
       z,
-      zIndex,
+      zIndex = z,
       containerProps,
       __css,
       ...rest
@@ -83,23 +81,22 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       animation,
       closeOnButton,
       duration,
-      isOpen,
+      open,
+      shouldRenderContent,
       styles,
       getPopoverProps,
       getPopperProps,
       onAnimationComplete,
     } = usePopover()
 
+    if (!shouldRenderContent) return null
+
     const validChildren = getValidChildren(children)
     const [customPopoverCloseButton, ...cloneChildren] = findChildren(
       validChildren,
       PopoverCloseButton,
     )
-
-    const Component = useMemo(() => motion(as), [as])
-
     const css = __css ?? styles.container ?? {}
-
     const computedCSS: CSSUIObject = {
       display: "flex",
       flexDirection: "column",
@@ -109,20 +106,15 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       ...css,
     }
 
-    width ??= w
     width ??= (css.width ?? css.w) as CSSUIProps["width"]
-    minWidth ??= minW
     minWidth ??= (css.minWidth ?? css.minW) as CSSUIProps["minWidth"]
-    maxWidth ??= maxW
     maxWidth ??= (css.maxWidth ?? css.maxW) as CSSUIProps["maxWidth"]
-
-    zIndex ??= z
     zIndex ??= (css.zIndex ?? css.z) as CSSUIProps["zIndex"]
 
     return (
       <ui.div
         {...getPopperProps({
-          style: { visibility: isOpen ? "visible" : "hidden" },
+          style: { visibility: open ? "visible" : "hidden" },
         })}
         className="ui-popover"
         maxWidth={maxWidth}
@@ -132,13 +124,13 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
         zIndex={zIndex}
         {...containerProps}
       >
-        <Component
+        <motion.section
           className={cx("ui-popover__content", className)}
           {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
             : {})}
           {...getPopoverProps(rest, ref)}
-          animate={isOpen ? "enter" : "exit"}
+          animate={open ? "enter" : "exit"}
           exit="exit"
           initial="exit"
           onAnimationComplete={funcAll(
@@ -151,7 +143,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             (closeOnButton ? <PopoverCloseButton /> : null)}
 
           {cloneChildren}
-        </Component>
+        </motion.section>
       </ui.div>
     )
   },

@@ -32,10 +32,11 @@ Or, you can customize using `children`. `children` provides an array of `File`.
 
 ```tsx
 <VStack>
-  <FileInput variant="outline" placeholder="outline" />
-  <FileInput variant="filled" placeholder="filled" />
-  <FileInput variant="flushed" placeholder="flushed" />
-  <FileInput variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <FileInput key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -43,10 +44,30 @@ Or, you can customize using `children`. `children` provides an array of `File`.
 
 ```tsx
 <VStack>
-  <FileInput placeholder="extra small size" size="xs" />
-  <FileInput placeholder="small size" size="sm" />
-  <FileInput placeholder="medium size" size="md" />
-  <FileInput placeholder="large size" size="lg" />
+  <For
+    each={[
+      {
+        placeholder: "extra small",
+        size: "xs",
+      },
+      {
+        placeholder: "small",
+        size: "sm",
+      },
+      {
+        placeholder: "medium",
+        size: "md",
+      },
+      {
+        placeholder: "medium",
+        size: "lg",
+      },
+    ]}
+  >
+    {({ placeholder, size }, index) => (
+      <FileInput key={index} placeholder={`${placeholder} size`} size={size} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -119,10 +140,16 @@ To disable, set `isDisabled` to `true`.
 
 ```tsx
 <VStack>
-  <FileInput isDisabled variant="outline" placeholder="outline" />
-  <FileInput isDisabled variant="filled" placeholder="filled" />
-  <FileInput isDisabled variant="flushed" placeholder="flushed" />
-  <FileInput isDisabled variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <FileInput
+        key={index}
+        isDisabled
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 
   <FormControl isDisabled label="Upload file">
     <FileInput type="email" placeholder="your file" />
@@ -136,10 +163,16 @@ To make read-only, set `isReadOnly` to `true`.
 
 ```tsx
 <VStack>
-  <FileInput isReadOnly variant="outline" placeholder="outline" />
-  <FileInput isReadOnly variant="filled" placeholder="filled" />
-  <FileInput isReadOnly variant="flushed" placeholder="flushed" />
-  <FileInput isReadOnly variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <FileInput
+        key={index}
+        isReadOnly
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 
   <FormControl isReadOnly label="Upload file">
     <FileInput type="email" placeholder="your file" />
@@ -153,10 +186,16 @@ To make the input invalid, set `isInvalid` to `true`.
 
 ```tsx
 <VStack>
-  <FileInput isInvalid variant="outline" placeholder="outline" />
-  <FileInput isInvalid variant="filled" placeholder="filled" />
-  <FileInput isInvalid variant="flushed" placeholder="flushed" />
-  <FileInput isInvalid variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <FileInput
+        key={index}
+        isInvalid
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 
   <FormControl isInvalid label="Upload file" errorMessage="File is required.">
     <FileInput type="email" placeholder="your file" />
@@ -171,7 +210,7 @@ To add an addon, wrap `Input` with `InputGroup` and use `InputLeftAddon` or `Inp
 ```tsx
 <InputGroup>
   <InputLeftAddon>
-    <File />
+    <FileIcon />
   </InputLeftAddon>
   <FileInput type="tel" placeholder="Please upload file" />
 </InputGroup>
@@ -184,7 +223,7 @@ To add an element, wrap `Input` with `InputGroup` and use `InputLeftElement` or 
 ```tsx
 <InputGroup>
   <InputLeftElement>
-    <File color="gray.500" />
+    <FileIcon color="gray.500" />
   </InputLeftElement>
   <FileInput type="email" placeholder="Please upload file" />
 </InputGroup>
@@ -218,7 +257,7 @@ return (
 
       {value && value.length ? (
         <InputRightElement isClickable onClick={onReset}>
-          <X color="gray.500" />
+          <XIcon color="gray.500" />
         </InputRightElement>
       ) : null}
     </InputGroup>
@@ -281,7 +320,7 @@ return (
 
             {field.value && field.value.length ? (
               <InputRightElement isClickable onClick={onReset}>
-                <X color="gray.500" />
+                <XIcon color="gray.500" />
               </InputRightElement>
             ) : null}
           </InputGroup>

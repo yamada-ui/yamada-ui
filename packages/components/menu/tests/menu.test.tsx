@@ -19,6 +19,7 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
 } from "../src"
 
 describe("<Menu />", () => {
@@ -488,5 +489,64 @@ describe("<Menu />", () => {
     expect(menuList).toBeVisible()
     await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
     expect(menuList).not.toBeVisible()
+  })
+
+  test("should render the menu separator in the context menu after right click", async () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
+          p="md"
+          rounded="md"
+          w="full"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+          <MenuSeparator data-testid="Menu_separator" />
+          <MenuItem>Cut</MenuItem>
+          <MenuItem>Copy</MenuItem>
+          <MenuItem>Paste</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    const contextMenuTrigger = screen.getByText("Right click here")
+    await act(() => fireEvent.contextMenu(contextMenuTrigger))
+    const separator = screen.getByTestId("Menu_separator")
+    expect(separator).toBeInTheDocument()
+  })
+
+  test("should render the menu separator in the context menu after pressing down arrow key", async () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
+          p="md"
+          rounded="md"
+          w="full"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+          <MenuSeparator data-testid="Menu_separator" />
+          <MenuItem>Cut</MenuItem>
+          <MenuItem>Copy</MenuItem>
+          <MenuItem>Paste</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    const contextMenuTrigger = screen.getByText("Right click here")
+    await act(() => fireEvent.focus(contextMenuTrigger))
+    await act(() => fireEvent.keyDown(contextMenuTrigger, { key: "ArrowDown" }))
+    const separator = screen.getByTestId("Menu_separator")
+    expect(separator).toBeInTheDocument()
   })
 })

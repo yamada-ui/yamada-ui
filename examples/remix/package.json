@@ -12,12 +12,12 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/free-regular-svg-icons": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@remix-run/node": "^2.14.0",
-    "@remix-run/react": "^2.14.0",
-    "@remix-run/serve": "^2.14.0",
+    "@fortawesome/free-brands-svg-icons": "^6.7.1",
+    "@fortawesome/free-regular-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@remix-run/node": "^2.15.0",
+    "@remix-run/react": "^2.15.0",
+    "@remix-run/serve": "^2.15.0",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/charts": "workspace:*",
@@ -33,16 +33,16 @@
     "remix-utils": "^7.7.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.14.0",
+    "@remix-run/dev": "^2.15.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "eslint": "^9.14.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.12.0",
-    "jiti": "^2.4.0",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.13.0",
-    "vite": "^5.4.10"
+    "globals": "^15.13.0",
+    "jiti": "^2.4.1",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0",
+    "vite": "^6.0.2"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -2,11 +2,16 @@
 title: Divider
 description: "`Divider`は、要素間において区切りを表すコンポーネントです。"
 package_name: "@yamada-ui/layouts"
-order: 12
+label: Deprecated
+order: 13
 is_tabs: true
 with_description: true
 tab: 使い方
 ---
+
+:::note status=error
+`Divider`は`v2.0`で削除される予定です。代わりに[Separator](/components/layouts/separator)を使用してください。
+:::
 
 ## インポート
 
@@ -18,11 +23,9 @@ import { Divider } from "@yamada-ui/react"
 
 ```tsx
 <Flex direction="column" gap="md">
-  <Divider variant="solid" />
-
-  <Divider variant="dashed" />
-
-  <Divider variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Divider key={index} variant={variant} />}
+  </For>
 </Flex>
 ```
 
@@ -30,11 +33,11 @@ import { Divider } from "@yamada-ui/react"
 
 ```tsx
 <Flex h="sm" gap="md">
-  <Divider orientation="vertical" variant="solid" />
-
-  <Divider orientation="vertical" variant="dashed" />
-
-  <Divider orientation="vertical" variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => (
+      <Divider key={index} orientation="vertical" variant={variant} />
+    )}
+  </For>
 </Flex>
 ```
 

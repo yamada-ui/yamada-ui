@@ -4,7 +4,6 @@ description: "`Pagination`は、コンテンツのページ分割とナビゲー
 package_name: "@yamada-ui/pagination"
 with_description: true
 tab: Props
-label: Updated
 order: 1
 ---
 
@@ -82,6 +81,14 @@ order: 1
 />
 
 <PropsCard
+  id="pagination-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="pagination-edgefirstprops"
   name="edgeFirstProps"
   type='Omit<PaginationItemProps, "page">'
@@ -107,6 +114,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -204,10 +212,19 @@ order: 1
 />
 
 <PropsCard
+  id="usepagination-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the pagination all item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="usepagination-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the pagination all item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 

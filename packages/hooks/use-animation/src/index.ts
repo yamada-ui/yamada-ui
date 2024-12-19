@@ -122,30 +122,35 @@ export const useDynamicAnimation = <
 
 export interface UseAnimationObserverProps {
   ref: React.RefObject<HTMLElement>
-  isOpen: boolean
+  /**
+   * @deprecated Use `open` instead
+   */
+  isOpen?: boolean
+  open?: boolean
 }
 
 export const useAnimationObserver = ({
   ref,
   isOpen,
+  open = isOpen,
 }: UseAnimationObserverProps) => {
-  const [mounted, setMounted] = useState(isOpen)
+  const [mounted, setMounted] = useState(open)
   const [flg, { on }] = useBoolean()
 
   useEffect(() => {
     if (flg) return
 
-    setMounted(isOpen)
+    setMounted(open)
     on()
-  }, [isOpen, flg, on])
+  }, [open, flg, on])
 
   useEventListener(
     () => ref.current,
     "animationend",
-    () => setMounted(isOpen),
+    () => setMounted(open),
   )
 
-  const hidden = isOpen ? false : !mounted
+  const hidden = open ? false : !mounted
 
   return {
     present: !hidden,

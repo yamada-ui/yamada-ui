@@ -10,13 +10,13 @@ import {
   ui,
   useComponentMultiStyle,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { cx, isString } from "@yamada-ui/utils"
 
 const defaultOverlays = (
   background: CSSUIProps["color"],
   withShadow: boolean,
 ): HTMLUIProps[] => {
-  let overlays: HTMLUIProps[] = [
+  const overlays: HTMLUIProps[] = [
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
@@ -39,12 +39,9 @@ const defaultOverlays = (
   ]
 
   if (withShadow)
-    overlays = [
-      ...overlays,
-      {
-        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
-      },
-    ]
+    overlays.push({
+      boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+    })
 
   return overlays
 }
@@ -60,6 +57,14 @@ interface ColorSwatchOptions {
    * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
    *
    * @default false
+   */
+  fullRounded?: boolean
+  /**
+   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
+   *
+   * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
   /**
@@ -90,12 +95,12 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     className,
     color = "#ffffff00",
     isRounded,
+    fullRounded = isRounded,
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
-
   const css: CSSUIObject = {
     "& > *": {
       alignItems: "center",
@@ -125,13 +130,14 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-color-swatch", className)}
+      aria-label={isString(color) ? color : undefined}
       aria-roledescription="color swatch"
       role="img"
-      {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
+      {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}
       __css={css}
       {...rest}
     >
-      <ui.div {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}>
+      <ui.div {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}>
         {overlays.map((props, index) => (
           <ui.div
             key={index}
@@ -143,7 +149,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
               top: 0,
               ...styles.overlay,
             }}
-            {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
+            {...(fullRounded ? { rounded: "fallback(full, 9999px)" } : {})}
             {...props}
           />
         ))}

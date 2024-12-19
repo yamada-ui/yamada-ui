@@ -21,6 +21,18 @@ interface ButtonOptions {
    */
   type?: "button" | "reset" | "submit"
   /**
+   * If `true`, the button is represented as active.
+   *
+   * @default false
+   */
+  active?: boolean
+  /**
+   * If `true`, the button is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
@@ -31,27 +43,41 @@ interface ButtonOptions {
    */
   endIcon?: ReactElement
   /**
+   * If `true`, the button is full rounded. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  fullRounded?: boolean
+  /**
    * If `true`, the button is represented as active.
    *
    * @default false
+   *
+   * @deprecated Use `active` instead.
    */
   isActive?: boolean
   /**
    * If `true`, the button is disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the loading state of the button is represented.
    *
    * @default false
+   *
+   * @deprecated Use `loading` instead.
    */
   isLoading?: boolean
   /**
-   * If true, the button is full rounded. Else, it'll be slightly round.
+   * If `true`, the button is full rounded. Else, it'll be slightly round.
    *
    * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
   /**
@@ -60,6 +86,12 @@ interface ButtonOptions {
    * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
+  /**
+   * If `true`, the loading state of the button is represented.
+   *
+   * @default false
+   */
+  loading?: boolean
   /**
    * The icon to display when the button is loading.
    */
@@ -111,30 +143,31 @@ export const Button = forwardRef<ButtonProps, "button">(
       as,
       type,
       className,
-      disableRipple,
-      endIcon,
       isActive,
-      isDisabled = group?.isDisabled,
-      isLoading,
+      active = isActive,
+      isDisabled = group?.disabled,
+      disabled = isDisabled,
+      disableRipple,
+      rightIcon,
+      endIcon = rightIcon,
       isRounded,
+      fullRounded = isRounded,
+      isLoading,
       leftIcon,
+      loading = isLoading,
       loadingIcon,
       loadingPlacement = "start",
       loadingText,
-      rightIcon,
-      startIcon,
+      startIcon = leftIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    const trulyDisabled = isDisabled || isLoading
-
+    const trulyDisabled = disabled || loading
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || trulyDisabled,
+      disabled: disableRipple || trulyDisabled,
     })
-
     const css: CSSUIObject = useMemo(() => {
       const _focus =
         "_focus" in styles
@@ -156,18 +189,14 @@ export const Button = forwardRef<ButtonProps, "button">(
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),
-        ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
+        ...(fullRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }
-    }, [styles, __css, group, isRounded])
-
+    }, [styles, __css, group, fullRounded])
     const contentProps = {
       children,
       endIcon,
-      leftIcon,
-      rightIcon,
       startIcon,
     }
-
     const loadingProps = {
       loadingIcon,
       loadingText,
@@ -179,21 +208,21 @@ export const Button = forwardRef<ButtonProps, "button">(
         as={as}
         type={type ?? defaultType}
         className={cx("ui-button", className)}
-        data-active={dataAttr(isActive)}
-        data-loading={dataAttr(isLoading)}
+        data-active={dataAttr(active)}
+        data-loading={dataAttr(loading)}
         disabled={trulyDisabled}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}
       >
-        {isLoading && loadingPlacement === "start" ? (
+        {loading && loadingPlacement === "start" ? (
           <ButtonLoading
             className="ui-button__loading--start"
             {...loadingProps}
           />
         ) : null}
 
-        {isLoading ? (
+        {loading ? (
           loadingText || (
             <ui.span opacity={0}>
               <ButtonContent {...contentProps} />
@@ -203,7 +232,7 @@ export const Button = forwardRef<ButtonProps, "button">(
           <ButtonContent {...contentProps} />
         )}
 
-        {isLoading && loadingPlacement === "end" ? (
+        {loading && loadingPlacement === "end" ? (
           <ButtonLoading
             className="ui-button__loading--end"
             {...loadingProps}
@@ -257,21 +286,13 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<
-    ButtonProps,
-    "children" | "endIcon" | "leftIcon" | "rightIcon" | "startIcon"
-  > {}
+  extends Pick<ButtonProps, "children" | "endIcon" | "startIcon"> {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
   endIcon,
-  leftIcon,
-  rightIcon,
   startIcon,
 }) => {
-  startIcon ??= leftIcon
-  endIcon ??= rightIcon
-
   return (
     <>
       {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
@@ -305,13 +326,13 @@ ButtonIcon.displayName = "ButtonIcon"
 ButtonIcon.__ui__ = "ButtonIcon"
 
 export const useButtonType = (value?: ElementType) => {
-  const isButton = useRef(!value)
+  const buttonRef = useRef(!value)
 
   const ref = useCallback((node: HTMLElement | null) => {
-    if (node) isButton.current = node.tagName === "BUTTON"
+    if (node) buttonRef.current = node.tagName === "BUTTON"
   }, [])
 
-  const type = isButton.current ? "button" : undefined
+  const type = buttonRef.current ? "button" : undefined
 
   return { ref, type } as const
 }

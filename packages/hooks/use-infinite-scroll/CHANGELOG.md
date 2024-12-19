@@ -1,5 +1,30 @@
 # @yamada-ui/use-infinite-scroll
 
+## 1.1.10
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840)]:
+  - @yamada-ui/utils@1.6.2
+
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+
+## 1.1.8
+
+### Patch Changes
+
+- [#3596](https://github.com/yamada-ui/yamada-ui/pull/3596) [`d79d98b`](https://github.com/yamada-ui/yamada-ui/commit/d79d98b00184faa00935feb1c34748d9f871f351) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` from props, variables, hooks
+
+- Updated dependencies [[`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484)]:
+  - @yamada-ui/utils@1.6.0
+
 ## 1.1.7
 
 ### Patch Changes

@@ -2,7 +2,7 @@ import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
-export const Npm = forwardRef<SVGSVGElement, IconProps>(
+export const NpmIcon = forwardRef<SVGSVGElement, IconProps>(
   ({ boxSize = "1.3em", ...rest }, ref) => {
     return (
       <Icon
@@ -22,4 +22,4 @@ export const Npm = forwardRef<SVGSVGElement, IconProps>(
   },
 )
 
-Npm.displayName = "Npm"
+NpmIcon.displayName = "NpmIcon"

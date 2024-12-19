@@ -20,34 +20,51 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, display the dropzone loading icon.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, display the dropzone loading icon.",
       "required": false
     },
     "loadingProps": {
@@ -63,6 +80,18 @@
     "overlayProps": {
       "type": "FadeProps",
       "description": "Props for dropzone overlay element.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {

@@ -20,6 +20,12 @@ import { useMemo } from "react"
 interface IndicatorOptions {
   children: ReactNode
   /**
+   * If `true`, the indicator will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
    * If `true`, set the indicator as an inline element.
    *
    * @default false
@@ -29,6 +35,8 @@ interface IndicatorOptions {
    * If `true`, the indicator will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
@@ -165,11 +173,12 @@ const getPlacementStyle = (
  */
 export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)
-  let {
+  const {
     className,
     children,
-    inline = false,
     isDisabled,
+    disabled = isDisabled,
+    inline = false,
     label,
     offset = 0,
     overflowCount = 99,
@@ -195,17 +204,16 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     },
     timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
   })
-
-  const isNumeric = typeof label === "number"
-
-  if (isNumeric && !showZero && (label as number) <= 0) isDisabled ??= true
+  const numeric = typeof label === "number"
+  const trulyDisabled =
+    disabled ?? (numeric && !showZero && (label as number) <= 0)
 
   const computedInline = useValue(inline)
   const computedPlacement = useValue(placement)
   const computedOffset = useValue(offset)
 
   const renderLabel = useMemo(() => {
-    if (isNumeric) {
+    if (numeric) {
       if ((label as number) > overflowCount) {
         return (
           <>
@@ -219,12 +227,12 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     } else {
       return label
     }
-  }, [isNumeric, label, overflowCount])
+  }, [numeric, label, overflowCount])
 
   const css: CSSUIObject = {
     position: "absolute",
     ...getPlacementStyle(computedPlacement, computedOffset),
-    ...(isNumeric ? { fontWeight: "medium" } : {}),
+    ...(numeric ? { fontWeight: "medium" } : {}),
     ...styles,
   }
 
@@ -238,7 +246,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
       }}
       {...containerProps}
     >
-      {!isDisabled ? (
+      {!trulyDisabled ? (
         <ui.div
           ref={ref}
           className={cx("ui-indicator__icon", className)}

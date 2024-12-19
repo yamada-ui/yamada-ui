@@ -7,7 +7,6 @@ package_name: "@yamada-ui/tag"
 order: 1
 with_description: true
 tab: Props
-label: Updated
 ---
 
 ## Props
@@ -30,10 +29,26 @@ label: Updated
 />
 
 <PropsCard
+  id="tag-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the tag is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tag-endicon"
+  name="endIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"Icon to be displayed to the end of the tag."}
+/>
+
+<PropsCard
   id="tag-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the tag is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -42,6 +57,7 @@ label: Updated
   name="leftIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"Icon to be displayed to the left of the tag."}
+  deprecated={"Use `startIcon` instead."}
 />
 
 <PropsCard
@@ -56,6 +72,7 @@ label: Updated
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"Icon to be displayed to the right of the tag."}
+  deprecated={"Use `endIcon` instead."}
 />
 
 <PropsCard
@@ -64,6 +81,13 @@ label: Updated
   type='"sm" | "md" | "lg"'
   description={"The size of the Tag."}
   defaultValue={'"md"'}
+/>
+
+<PropsCard
+  id="tag-starticon"
+  name="startIcon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"Icon to be displayed to the start of the tag."}
 />
 
 <PropsCard

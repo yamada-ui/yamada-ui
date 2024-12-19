@@ -5,8 +5,16 @@ export interface UseDisclosureProps<
   Y extends (...args: any[]) => Promise<void> | void = () => void,
   M extends (...args: any[]) => Promise<void> | void = () => void,
 > {
+  /**
+   * @deprecated Use `defaultOpen` instead.
+   */
   defaultIsOpen?: boolean
+  defaultOpen?: boolean
+  /**
+   * @deprecated Use `open` instead.
+   */
   isOpen?: boolean
+  open?: boolean
   timing?: "after" | "before"
   onClose?: M
   onOpen?: Y
@@ -21,51 +29,64 @@ export interface UseDisclosureProps<
 export const useDisclosure = <
   Y extends (...args: any[]) => Promise<void> | void = () => void,
   M extends (...args: any[]) => Promise<void> | void = () => void,
->(
-  props: UseDisclosureProps<Y, M> = {},
-) => {
-  const [defaultIsOpen, setIsOpen] = useState<boolean>(
-    props.defaultIsOpen ?? false,
-  )
+>({
+  defaultIsOpen = false,
+  defaultOpen = defaultIsOpen,
+  isOpen,
+  open: controlledOpen = isOpen,
+  timing,
+  onClose: onCloseProp,
+  onOpen: onOpenProp,
+}: UseDisclosureProps<Y, M> = {}) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState<boolean>(defaultOpen)
 
-  const timingRef = useRef(props.timing ?? "after")
-  const handleOpen = useCallbackRef(props.onOpen)
-  const handleClose = useCallbackRef(props.onClose)
+  const timingRef = useRef(timing ?? "after")
+  const handleOpen = useCallbackRef(onOpenProp)
+  const handleClose = useCallbackRef(onCloseProp)
 
-  const isControlled = props.isOpen !== undefined
-  const isOpen = props.isOpen !== undefined ? props.isOpen : defaultIsOpen
+  const controlled = controlledOpen !== undefined
+  const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen
 
   const onOpen = useCallback(
     async (...args: Parameters<Y>) => {
       if (timingRef.current === "before") await handleOpen(...args)
 
-      if (!isControlled) setIsOpen(true)
+      if (!controlled) setUncontrolledOpen(true)
 
       if (timingRef.current === "after") await handleOpen(...args)
     },
-    [isControlled, handleOpen, timingRef],
+    [controlled, handleOpen, timingRef],
   ) as Y
 
   const onClose = useCallback(
     async (...args: Parameters<M>) => {
       if (timingRef.current === "before") await handleClose(...args)
 
-      if (!isControlled) setIsOpen(false)
+      if (!controlled) setUncontrolledOpen(false)
 
       if (timingRef.current === "after") await handleClose(...args)
     },
-    [isControlled, handleClose, timingRef],
+    [controlled, handleClose, timingRef],
   ) as M
 
   const onToggle = useCallback(
     async (...args: Parameters<M> | Parameters<Y>) =>
-      !isOpen
+      !open
         ? onOpen(...(args as Parameters<Y>))
         : onClose(...(args as Parameters<M>)),
-    [isOpen, onOpen, onClose],
+    [open, onOpen, onClose],
   ) as M | Y
 
-  return { isOpen, onClose, onOpen, onToggle }
+  return {
+    /**
+     * @deprecated Use `open` instead.
+     */
+    isOpen: open,
+    open,
+    onClose,
+    onOpen,
+    onToggle,
+  }
 }
 
 export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
@@ -93,11 +114,12 @@ export const usePromiseDisclosure = <
   ...rest
 }: UsePromiseDisclosureProps<Y, M> = {}) => {
   const {
-    isOpen,
+    open,
     onClose: onInternalClose,
     onOpen: onInternalOpen,
     onToggle,
   } = useDisclosure<Y, M>(rest)
+
   const rejectRef = useRef<((reason?: any) => void) | undefined>(undefined)
   const resolveRef = useRef<M>(noop as M)
 
@@ -132,7 +154,11 @@ export const usePromiseDisclosure = <
   ) as M
 
   return {
-    isOpen,
+    /**
+     * @deprecated Use `open` instead.
+     */
+    isOpen: open,
+    open,
     onClose,
     onOpen,
     onSuccess: resolveRef.current,
@@ -146,8 +172,12 @@ export type LazyMode = "keepMounted" | "unmount"
 
 export interface UseLazyDisclosureProps {
   enabled?: boolean
+  /**
+   * @deprecated Use `selected` instead.
+   */
   isSelected?: boolean
   mode?: LazyMode
+  selected?: boolean
   wasSelected?: boolean
 }
 
@@ -155,11 +185,12 @@ export const useLazyDisclosure = ({
   enabled,
   isSelected,
   mode = "unmount",
+  selected = isSelected,
   wasSelected,
 }: UseLazyDisclosureProps) => {
   if (!enabled) return true
 
-  if (isSelected) return true
+  if (selected) return true
 
   if (mode === "keepMounted" && wasSelected) return true
 

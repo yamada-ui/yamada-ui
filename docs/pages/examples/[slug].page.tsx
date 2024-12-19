@@ -5,7 +5,7 @@ import type {
   NextPage,
 } from "next"
 import type { Slug } from "./data"
-import { ArrowRight, Blocks } from "@yamada-ui/lucide"
+import { ArrowRightIcon, BlocksIcon } from "@yamada-ui/lucide"
 import {
   Avatar,
   AvatarGroup,
@@ -151,7 +151,7 @@ const Page: NextPage<PageProps> = ({
               href="/getting-started"
               colorScheme="primary"
               size="xl"
-              rightIcon={<ArrowRight />}
+              rightIcon={<ArrowRightIcon />}
               w={{ base: "auto", md: "full" }}
             >
               {t("examples.hero.started")}
@@ -160,7 +160,7 @@ const Page: NextPage<PageProps> = ({
             <NextLinkButton
               href="/components"
               size="xl"
-              rightIcon={<Blocks />}
+              rightIcon={<BlocksIcon />}
               w={{ base: "auto", md: "full" }}
             >
               {t("examples.hero.components")}

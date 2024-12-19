@@ -10,6 +10,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  Separator,
   SimpleGrid,
   Stack,
   VStack,
@@ -86,19 +87,19 @@ describe("<Flex />", () => {
   })
 })
 
-describe("<Divider />", () => {
-  test("renders divider correctly", () => {
-    render(<Divider />)
+describe("<Separator />", () => {
+  test("renders separator correctly", () => {
+    render(<Separator />)
   })
 
   test("overrides the theming props", () => {
-    render(<Divider variant="dashed" />)
+    render(<Separator variant="dashed" />)
 
     expect(screen.getByRole("separator")).toHaveStyle({ borderStyle: "dashed" })
   })
 
   test("renders vertically correctly", () => {
-    render(<Divider orientation="vertical" />)
+    render(<Separator orientation="vertical" />)
 
     expect(screen.getByRole("separator")).toHaveStyle({
       borderLeftWidth: "1px",

@@ -7,12 +7,12 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
-const isScrollable = (el: HTMLElement, isVertical: boolean) => {
+const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)
 
   if (["auto", "overlay", "scroll"].includes(style.overflow)) return true
 
-  if (isVertical) {
+  if (vertical) {
     return ["auto", "overlay", "scroll"].includes(style.overflowY)
   } else {
     return ["auto", "overlay", "scroll"].includes(style.overflowX)
@@ -21,25 +21,25 @@ const isScrollable = (el: HTMLElement, isVertical: boolean) => {
 
 const onScroll = ({
   behavior,
-  isReverse,
-  isVertical,
   position,
+  reverse,
   root,
+  vertical,
 }: {
-  isVertical: boolean
   root: HTMLElement | null | undefined
+  vertical: boolean
   behavior?: ScrollBehavior
-  isReverse?: boolean
   position?: number
+  reverse?: boolean
 }) => {
   let options: ScrollToOptions
   const el =
-    isElement(root) && isScrollable(root, isVertical) ? root : document.body
+    isElement(root) && isScrollable(root, vertical) ? root : document.body
 
-  if (isVertical) {
-    options = { behavior, top: position ?? (isReverse ? el.scrollHeight : 0) }
+  if (vertical) {
+    options = { behavior, top: position ?? (reverse ? el.scrollHeight : 0) }
   } else {
-    options = { behavior, left: position ?? (isReverse ? el.scrollWidth : 0) }
+    options = { behavior, left: position ?? (reverse ? el.scrollWidth : 0) }
   }
 
   if (el === document.body) {
@@ -51,12 +51,12 @@ const onScroll = ({
 
 const getScrollPosition = (
   root: HTMLElement | null | undefined,
-  isVertical: boolean,
+  vertical: boolean,
 ) => {
   const el =
-    isElement(root) && isScrollable(root, isVertical) ? root : document.body
+    isElement(root) && isScrollable(root, vertical) ? root : document.body
 
-  if (isVertical) {
+  if (vertical) {
     return el.scrollHeight - el.scrollTop
   } else {
     return el.scrollWidth - el.scrollLeft
@@ -69,6 +69,12 @@ export interface UseInfiniteScrollProps
    * Determines whether scrolling is instant or animates smoothly.
    */
   behavior?: ScrollBehavior
+  /**
+   * If `true`, the infinite scroll is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * Ref to a reset index function.
    */
@@ -83,12 +89,16 @@ export interface UseInfiniteScrollProps
    * If `true`, the infinite scroll is disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    *  If `true`, reverse direction.
    *
    * @default false
+   *
+   * @deprecated Use `reverse` instead.
    */
   isReverse?: boolean
   /**
@@ -101,6 +111,12 @@ export interface UseInfiniteScrollProps
    * Ref to a reset function.
    */
   resetRef?: RefObject<(index?: number, runScroll?: boolean) => void>
+  /**
+   *  If `true`, reverse direction.
+   *
+   * @default false
+   */
+  reverse?: boolean
   /**
    * Margin around the root. Can have values similar to the CSS margin property,
    * e.g. "10px 20px 30px 40px" (top, right, bottom, left).
@@ -143,12 +159,14 @@ export interface UseInfiniteScrollProps
  */
 export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   behavior,
+  isDisabled = false,
+  disabled = isDisabled,
   indexRef: indexRefProp,
   initialLoad = false,
-  isDisabled = false,
   isReverse = false,
   orientation = "vertical",
   resetRef,
+  reverse = isReverse,
   rootMargin,
   rootRef,
   startIndex = initialLoad ? 0 : 1,
@@ -159,11 +177,11 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   const indexRef = useRef<number>(startIndex)
   const processingRef = useRef<boolean>(false)
   const observerRef = useRef<IntersectionObserver | undefined>(undefined)
-  const isMountedRef = useRef<boolean>(false)
+  const mountedRef = useRef<boolean>(false)
   const prevScrollPosition = useRef<number>(0)
-  const [isFinish, setIsFinish] = useState<boolean>(false)
+  const [finish, setFinish] = useState<boolean>(false)
   const onLoad = useCallbackRef(onLoadProp)
-  const isVertical = orientation === "vertical"
+  const vertical = orientation === "vertical"
   const options: IntersectionObserverInit = useMemo(() => {
     const root = rootRef?.current
 
@@ -174,15 +192,15 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
     (index = 1, runScroll = true) => {
       indexRef.current = index
 
-      setIsFinish(false)
+      setFinish(false)
 
       if (runScroll) {
         const root = rootRef?.current
 
-        onScroll({ behavior, isReverse, isVertical, root })
+        onScroll({ behavior, reverse, root, vertical })
       }
 
-      if (isDisabled) return
+      if (disabled) return
 
       setTimeout(() => {
         const observer = observerRef.current
@@ -191,7 +209,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
         if (el) observer?.observe(el)
       })
     },
-    [isDisabled, isReverse, rootRef, isVertical, behavior],
+    [disabled, reverse, rootRef, vertical, behavior],
   )
 
   const onFinish = useCallback(() => {
@@ -200,7 +218,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
 
     if (el) observer?.unobserve(el)
 
-    setIsFinish(true)
+    setFinish(true)
   }, [])
 
   const createObserver = useCallback(() => {
@@ -215,16 +233,16 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
 
       if (root) root.ariaBusy = "true"
 
-      if (isReverse) {
-        prevScrollPosition.current = getScrollPosition(root, isVertical)
+      if (reverse) {
+        prevScrollPosition.current = getScrollPosition(root, vertical)
       }
 
       await onLoad(props)
 
-      if (isReverse) {
+      if (reverse) {
         const position = prevScrollPosition.current
 
-        onScroll({ isVertical, position, root })
+        onScroll({ position, root, vertical })
       }
 
       indexRef.current += 1
@@ -233,16 +251,16 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
     }, options)
 
     return observer
-  }, [onFinish, onLoad, options, rootRef, isReverse, isVertical])
+  }, [onFinish, onLoad, options, rootRef, reverse, vertical])
 
   useEffect(() => {
     const setupObserver = async () => {
       const el = ref.current
-      const isMounted = isMountedRef.current
+      const mounted = mountedRef.current
       const index = indexRef.current
       const root = rootRef?.current
 
-      if (initialLoad && !isMounted) {
+      if (initialLoad && !mounted) {
         processingRef.current = true
         if (root) root.ariaBusy = "true"
 
@@ -253,18 +271,18 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
         if (root) root.ariaBusy = "false"
       }
 
-      if (isDisabled) return
+      if (disabled) return
 
       observerRef.current = createObserver()
 
       const observer = observerRef.current
 
-      if (isReverse && !isMounted) {
+      if (reverse && !mounted) {
         const root = rootRef?.current
 
-        onScroll({ isReverse, isVertical, root })
+        onScroll({ reverse, root, vertical })
 
-        isMountedRef.current = true
+        mountedRef.current = true
       }
 
       setTimeout(() => {
@@ -280,18 +298,18 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   }, [
     createObserver,
     initialLoad,
-    isDisabled,
-    isReverse,
-    isVertical,
+    disabled,
+    reverse,
+    vertical,
     onFinish,
     onLoad,
     rootRef,
   ])
 
-  useUnmountEffect(() => (isMountedRef.current = false))
+  useUnmountEffect(() => (mountedRef.current = false))
 
   assignRef(resetRef, onReset)
   assignRef(indexRefProp, (index) => (indexRef.current = index))
 
-  return { ref, isFinish }
+  return { ref, finish }
 }

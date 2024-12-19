@@ -24,34 +24,45 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnEnter,
       clickOnSpace,
       isDisabled,
+      disabled = isDisabled,
       isFocusable,
+      focusable = isFocusable,
       ...rest
     },
     ref,
   ) => {
+    const uuid = useId()
     const {
       disableRipple,
-      isManual,
+      manual,
       orientation,
       selectedIndex,
       setFocusedIndex,
       setSelectedIndex,
       styles,
     } = useTabsContext()
-    const uuid = useId()
     const { index, register } = useTabDescendant({
-      disabled: isDisabled && !isFocusable,
+      disabled: disabled && !focusable,
     })
     const { descendants } = useTabPanelDescendant()
     const tabpanelId = descendants.value(index)?.node.id
     const isSelected = index === selectedIndex
+    const css: CSSUIObject = {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "center",
+      outline: "0",
+      overflow: "hidden",
+      position: "relative",
+      ...styles.tab,
+    }
 
     id ??= uuid
 
     const onFocus = () => {
       setFocusedIndex(index)
 
-      if (!isManual && !(isDisabled && isFocusable)) setSelectedIndex(index)
+      if (!manual && !(disabled && focusable)) setSelectedIndex(index)
     }
 
     const clickableProps = useClickable<HTMLButtonElement>({
@@ -64,25 +75,15 @@ export const Tab = forwardRef<TabProps, "button">(
       ref: mergeRefs(register, ref),
       clickOnEnter,
       clickOnSpace,
-      isDisabled,
-      isFocusable,
+      disabled,
+      focusable,
       onClick: handlerAll(rest.onClick, () => setSelectedIndex(index)),
-      onFocus: isDisabled ? undefined : handlerAll(rest.onFocus, onFocus),
+      onFocus: disabled ? undefined : handlerAll(rest.onFocus, onFocus),
     })
     const { onPointerDown, ...rippleProps } = useRipple({
       ...clickableProps,
-      isDisabled: disableRipple || isDisabled,
+      disabled: disableRipple || disabled,
     })
-
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      outline: "0",
-      overflow: "hidden",
-      position: "relative",
-      ...styles.tab,
-    }
 
     return (
       <ui.button

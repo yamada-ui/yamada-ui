@@ -64,14 +64,14 @@ interface SelectOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
 }
 
 export type SelectProps = Omit<
   UseSelectProps,
-  "isEmpty" | "maxSelectValues" | "omitSelectedValues"
+  "maxSelectValues" | "omitSelectedValues"
 > &
   SelectOptions &
   ThemeProps<"Select">
@@ -83,16 +83,16 @@ export type SelectProps = Omit<
  */
 export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Select", props)
-  let {
+  const {
     className,
     color,
     defaultValue = "",
     footer,
     h,
     header,
-    height,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     placeholder,
     placeholderInOptions = true,
     containerProps,
@@ -100,14 +100,14 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     fieldProps,
     iconProps,
     listProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {
     children,
     descendants,
-    isEmpty,
+    empty,
     value,
     formControlProps,
     getContainerProps,
@@ -121,10 +121,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     placeholder,
     placeholderInOptions,
   })
-
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -156,8 +152,8 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
             >
               <PopoverTrigger>
                 <SelectField
-                  h={h}
-                  minH={minH}
+                  height={height}
+                  minHeight={minHeight}
                   {...getFieldProps(fieldProps, ref)}
                 />
               </PopoverTrigger>
@@ -165,7 +161,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
               <SelectIcon {...iconProps} {...formControlProps} />
             </ui.div>
 
-            {!isEmpty ? (
+            {!empty ? (
               <Portal {...portalProps}>
                 <SelectList
                   footer={runIfFunc(footer, { value, onClose })}
@@ -194,14 +190,12 @@ Select.__ui__ = "Select"
 interface SelectFieldProps extends HTMLUIProps {}
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
-  ({ className, h, isTruncated = true, lineClamp, minH, ...rest }, ref) => {
+  ({ className, isTruncated = true, lineClamp, ...rest }, ref) => {
     const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }

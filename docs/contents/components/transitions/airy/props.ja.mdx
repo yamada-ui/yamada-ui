@@ -4,7 +4,6 @@ description: "`Airy`は、２つの要素をふわっと切り替えるアニメ
 package_name: "@yamada-ui/transitions"
 with_description: true
 tab: Props
-label: New
 order: 1
 ---
 
@@ -31,7 +30,7 @@ order: 1
 <PropsCard
   id="airy-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "style" | "animate" | "button" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "textPath"'
+  type="keyof ReactDOM"
   description={"The HTML element to render."}
 />
 
@@ -59,6 +58,14 @@ order: 1
 />
 
 <PropsCard
+  id="airy-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the component is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="airy-duration"
   name="duration"
   type="number"
@@ -71,6 +78,7 @@ order: 1
   name="isDisabled"
   type="boolean"
   description={"If `true`, the component is disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -79,6 +87,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the component is readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -89,6 +98,14 @@ order: 1
   description={
     "This is a callback function that is called when the animation state changes."
   }
+/>
+
+<PropsCard
+  id="airy-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the component is readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

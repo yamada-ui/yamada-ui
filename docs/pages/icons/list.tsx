@@ -80,7 +80,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
         <Search valueResetRef={valueResetRef} onSearch={onSearch} />
 
         <InfiniteScrollArea
-          isDisabled={index === totalIndex}
+          disabled={index === totalIndex}
           loading={<Box h="px" w="full" />}
           resetRef={scrollResetRef}
           rootMargin="0px 0px 640px 0px"
@@ -96,7 +96,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
               templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
             >
               {data.map(({ name, Icon }) => (
-                <Tooltip key={name} label={name}>
+                <Tooltip key={name} label={`${name}Icon`}>
                   <AspectRatio ratio={1 / 1}>
                     <Center
                       as="button"
@@ -149,10 +149,7 @@ const Search: FC<SearchProps> = memo(
     return (
       <InputGroup {...containerProps}>
         <InputLeftElement>
-          <SearchIcon
-            color={["blackAlpha.700", "whiteAlpha.600"]}
-            fontSize="xl"
-          />
+          <SearchIcon color="muted" fontSize="xl" />
         </InputLeftElement>
 
         <Input

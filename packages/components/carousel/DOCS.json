@@ -135,7 +135,7 @@
       "required": false
     },
     "slideSize": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 72 more ... | \"xs\">",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 76 more ... | \"xs\">",
       "description": "The CSS `width` property.",
       "required": false
     },
@@ -188,10 +188,22 @@
     }
   },
   "CarouselControl": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
     "disableRipple": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -202,31 +214,41 @@
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
     "isLoading": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `loading` instead.",
       "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
-      "description": "If true, the button is full rounded. Else, it'll be slightly round.",
+      "deprecated": "Use `fullRounded` instead.",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     }
   },
   "CarouselIndicators": {
     "component": {
-      "type": "FC<{ index: number; isSelected: boolean }>",
+      "type": "FC<{\n  index: number\n  selected: boolean\n  isSelected?: boolean | undefined\n}>",
       "description": "The custom carousel indicator to use.",
       "required": false
     }
@@ -234,7 +256,7 @@
   "CarouselSlide": {
     "index": { "type": "number", "required": false },
     "size": {
-      "type": "number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 77 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 76 more ... | \"xs\">",
       "description": "The CSS `width` property.",
       "required": false
     }

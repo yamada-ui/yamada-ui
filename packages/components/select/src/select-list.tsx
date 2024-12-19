@@ -21,53 +21,51 @@ export const SelectList = forwardRef<SelectListProps, "div">(
       footer,
       header,
       maxW,
-      maxWidth,
+      maxWidth = maxW,
       minW,
-      minWidth,
+      minWidth = minW,
       w,
-      width,
+      width = w,
       contentProps,
       ...rest
     },
     ref,
   ) => {
     const { styles } = useSelectContext()
-    const { getListProps } = useSelectList()
+    const { getContainerProps, getListProps } = useSelectList()
 
-    width ??= w
     width ??= (styles.list?.width ?? styles.list?.w) as CSSUIProps["width"]
-    minWidth ??= minW
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
-    maxWidth ??= maxW
     maxWidth ??= (styles.list?.maxWidth ??
       styles.list?.maxW) as CSSUIProps["maxWidth"]
 
     return (
       <PopoverContent
+        as="div"
         className="ui-select__content"
         maxWidth={maxWidth}
         minWidth={minWidth}
         width={width}
-        __css={{ ...styles.content, maxWidth, minWidth, width }}
-        {...contentProps}
+        __css={styles.content}
+        {...getContainerProps(contentProps)}
       >
         {header ? (
-          <ui.header className="ui-select__header" __css={{ ...styles.header }}>
+          <ui.header className="ui-select__header" __css={styles.header}>
             {header}
           </ui.header>
         ) : null}
 
         <ui.div
           className={cx("ui-select__list", className)}
-          __css={{ ...styles.list }}
+          __css={styles.list}
           {...getListProps(rest, ref)}
         >
           {children}
         </ui.div>
 
         {footer ? (
-          <ui.footer className="ui-select__footer" __css={{ ...styles.footer }}>
+          <ui.footer className="ui-select__footer" __css={styles.footer}>
             {footer}
           </ui.footer>
         ) : null}

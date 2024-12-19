@@ -27,12 +27,23 @@ order: 1
 />
 
 <PropsCard
+  id="colorswatch-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="colorswatch-isrounded"
   name="isRounded"
   type="boolean"
   description={
     "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 

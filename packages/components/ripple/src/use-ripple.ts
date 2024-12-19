@@ -12,20 +12,23 @@ export interface RippleOptions {
 
 export interface UseRippleProps<T = HTMLElement> {
   disabled?: boolean
+  /**
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   onPointerDown?: PointerEventHandler<T>
 }
 
 export const useRipple = <T = HTMLElement>({
-  disabled,
   isDisabled,
+  disabled = isDisabled,
   ...rest
 }: UseRippleProps<T> = {}) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
   const onPointerDown: PointerEventHandler<T> = useCallback(
     (ev) => {
-      if (disabled || isDisabled) return setRipples([])
+      if (disabled) return setRipples([])
 
       const trigger = ev.currentTarget as unknown as Element
 
@@ -42,7 +45,7 @@ export const useRipple = <T = HTMLElement>({
         },
       ])
     },
-    [disabled, isDisabled],
+    [disabled],
   )
 
   const onClear = useCallback((key: Key) => {

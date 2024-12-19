@@ -6,7 +6,7 @@ import type {
   PopoverProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Moon, Palette, Sun } from "@yamada-ui/lucide"
+import { MoonIcon, PaletteIcon, SunIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -135,9 +135,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           color="muted"
           icon={
             colorMode === "dark" ? (
-              <Sun fontSize="2xl" />
+              <SunIcon fontSize="2xl" />
             ) : (
-              <Moon fontSize="2xl" />
+              <MoonIcon fontSize="2xl" />
             )
           }
           {...rest}
@@ -173,7 +173,7 @@ interface ThemeSchemeButtonProps extends IconButtonProps {
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { changeThemeScheme, theme } = useTheme()
     const { colorSchemes = [] } = theme
 
@@ -181,7 +181,6 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       <Popover
         {...popoverProps}
         closeOnButton={false}
-        isOpen={isOpen}
         modifiers={[
           {
             name: "preventOverflow",
@@ -195,6 +194,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             },
           },
         ]}
+        open={open}
         restoreFocus={false}
         onClose={onClose}
         onOpen={onOpen}
@@ -205,7 +205,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             variant="ghost"
             aria-label="Open color mode switching menu"
             color="muted"
-            icon={<Palette fontSize="2xl" />}
+            icon={<PaletteIcon fontSize="2xl" />}
             {...rest}
           />
         </PopoverTrigger>

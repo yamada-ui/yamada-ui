@@ -1,6 +1,7 @@
 import type {
   ComponentArgs,
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
@@ -17,9 +18,9 @@ import {
 import { useCallback, useMemo, useRef } from "react"
 
 interface ToggleGroupContext extends ThemeProps<"Button"> {
-  isControlled: boolean
-  isDisabled?: boolean
-  isReadOnly?: boolean
+  controlled: boolean
+  disabled?: boolean
+  readOnly?: boolean
   value?: (number | string)[] | number | string
   onChange?: <M extends number | string = string>(value: M | undefined) => void
 }
@@ -42,20 +43,38 @@ interface ToggleGroupOptions<
   defaultValue?: Y extends any[] ? Y : undefined | Y
   /**
    * The CSS `flex-direction` property.
+   *
+   * @deprecated Use `flexDirection` instead.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * If `true`, all wrapped toggle button will be disabled.
    *
    * @default false
+   */
+  disabled?: boolean
+  /**
+   * If `true`, all wrapped toggle button will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, all wrapped toggle button will be readonly.
    *
    * @default false
+   *
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
+  /**
+   * If `true`, all wrapped toggle button will be readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
   /**
    * The value of the toggle button group.
    */
@@ -84,9 +103,12 @@ export const ToggleGroup = forwardRef(
       size,
       variant,
       defaultValue,
-      direction: flexDirection,
+      direction,
       isDisabled,
+      disabled = isDisabled,
+      flexDirection = direction,
       isReadOnly,
+      readOnly = isReadOnly,
       value: valueProp,
       onChange: onChangeProp,
       ...rest
@@ -100,7 +122,7 @@ export const ToggleGroup = forwardRef(
       value: valueProp,
       onChange: onChangeProp,
     })
-    const isControlledRef = useRef<boolean>(!isUndefined(value))
+    const controlledRef = useRef<boolean>(!isUndefined(value))
 
     const onChange = useCallback(
       <M extends number | string = Y extends any[] ? Y[number] : Y>(
@@ -139,19 +161,19 @@ export const ToggleGroup = forwardRef(
       () => ({
         size,
         variant,
-        isControlled: isControlledRef.current,
-        isDisabled,
-        isReadOnly,
+        controlled: controlledRef.current,
+        disabled,
+        readOnly,
         value,
         onChange,
       }),
-      [value, size, variant, isDisabled, isReadOnly, onChange],
+      [value, size, variant, disabled, readOnly, onChange],
     )
 
     useUpdateEffect(() => {
       if (isUndefined(value)) return
 
-      isControlledRef.current = true
+      controlledRef.current = true
     }, [valueProp])
 
     return (

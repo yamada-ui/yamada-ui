@@ -17,18 +17,18 @@ import { IconButton } from "@yamada-ui/react"
 ## 使い方
 
 ```tsx
-<IconButton icon={<Plus />} />
+<IconButton icon={<PlusIcon />} />
 ```
 
 ### バリアントを変更する
 
 ```tsx
 <Wrap gap="md">
-  <IconButton colorScheme="primary" variant="primary" icon={<Plus />} />
-  <IconButton colorScheme="secondary" variant="outline" icon={<Minus />} />
-  <IconButton colorScheme="warning" variant="ghost" icon={<Sun />} />
-  <IconButton colorScheme="danger" variant="link" icon={<Moon />} />
-  <IconButton variant="unstyled" icon={<Check />} />
+  <IconButton colorScheme="primary" variant="primary" icon={<PlusIcon />} />
+  <IconButton colorScheme="secondary" variant="outline" icon={<MinusIcon />} />
+  <IconButton colorScheme="warning" variant="ghost" icon={<SunIcon />} />
+  <IconButton colorScheme="danger" variant="link" icon={<MoonIcon />} />
+  <IconButton variant="unstyled" icon={<CheckIcon />} />
 </Wrap>
 ```
 
@@ -36,10 +36,10 @@ import { IconButton } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <IconButton colorScheme="primary" size="xs" icon={<Plus />} />
-  <IconButton colorScheme="secondary" size="sm" icon={<Minus />} />
-  <IconButton colorScheme="warning" size="md" icon={<Sun />} />
-  <IconButton colorScheme="danger" size="lg" icon={<Moon />} />
+  <IconButton colorScheme="primary" size="xs" icon={<PlusIcon />} />
+  <IconButton colorScheme="secondary" size="sm" icon={<MinusIcon />} />
+  <IconButton colorScheme="warning" size="md" icon={<SunIcon />} />
+  <IconButton colorScheme="danger" size="lg" icon={<MoonIcon />} />
 </Wrap>
 ```
 
@@ -53,16 +53,26 @@ import { IconButton } from "@yamada-ui/react"
     isDisabled
     colorScheme="primary"
     variant="primary"
-    icon={<Plus />}
+    icon={<PlusIcon />}
   />
   <IconButton
     isDisabled
     colorScheme="secondary"
     variant="outline"
-    icon={<Minus />}
+    icon={<MinusIcon />}
   />
-  <IconButton isDisabled colorScheme="warning" variant="ghost" icon={<Sun />} />
-  <IconButton isDisabled colorScheme="danger" variant="link" icon={<Moon />} />
-  <IconButton isDisabled variant="unstyled" icon={<Check />} />
+  <IconButton
+    isDisabled
+    colorScheme="warning"
+    variant="ghost"
+    icon={<SunIcon />}
+  />
+  <IconButton
+    isDisabled
+    colorScheme="danger"
+    variant="link"
+    icon={<MoonIcon />}
+  />
+  <IconButton isDisabled variant="unstyled" icon={<CheckIcon />} />
 </Wrap>
 ```

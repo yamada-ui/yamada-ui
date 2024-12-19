@@ -25,17 +25,43 @@ import { useToggleGroup } from "./toggle-group"
 
 interface ToggleOptions<Y extends number | string = string> {
   /**
+   * If `true`, the toggle button is represented as active.
+   *
+   * @default false
+   */
+  active?: boolean
+  /**
     *If `true`, the toggle button will be initially selected.
    *
-   @default false
+  @default false
+
+  @deprecated Use `defaultSelected` instead.
    */
   defaultIsSelected?: boolean
+  /**
+    *If `true`, the toggle button will be initially selected.
+   *
+  @default false
+   */
+  defaultSelected?: boolean
+  /**
+   * If `true`, the toggle button will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * If `true`, disable ripple effects when pressing a element.
    *
    * @default false
    */
   disableRipple?: boolean
+  /**
+   * If true, the toggle button is full rounded. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  fullRounded?: boolean
   /**
    * The icon to be used in the button.
    */
@@ -44,30 +70,50 @@ interface ToggleOptions<Y extends number | string = string> {
    * If `true`, the toggle button is represented as active.
    *
    * @default false
+   *
+   * @deprecated Use `active` instead.
    */
   isActive?: boolean
   /**
    * If `true`, the toggle button will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the toggle button will be readonly.
    *
    * @default false
+   *
+   * @deprecated Use `readOnly` instead.
    */
   isReadOnly?: boolean
   /**
    * If true, the toggle button is full rounded. Else, it'll be slightly round.
    *
    * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
   /**
    * If `true`, the toggle button will be selected.
+   *
+   * @deprecated Use `selected` instead.
    */
   isSelected?: boolean
+  /**
+   * If `true`, the toggle button will be readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
+  /**
+   * If `true`, the toggle button will be selected.
+   */
+  selected?: boolean
   /**
    * The value of the toggle button.
    */
@@ -75,7 +121,7 @@ interface ToggleOptions<Y extends number | string = string> {
   /**
    * The callback invoked when selected state changes.
    */
-  onChange?: (isSelected: boolean) => void
+  onChange?: (selected: boolean) => void
 }
 
 export interface ToggleProps<Y extends number | string = string>
@@ -94,56 +140,62 @@ export const Toggle = forwardRef(
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const {
-      isControlled,
-      isDisabled: groupIsDisabled,
-      isReadOnly: groupIsReadOnly,
+      controlled: controlled,
+      disabled: groupDisabled,
+      readOnly: groupReadOnly,
       value: groupValue,
       onChange: onChangeGroup,
       ...group
     } = useToggleGroup() ?? {}
     const [styles, mergedProps] = useComponentMultiStyle("Toggle", {
       ...group,
-      isDisabled: groupIsDisabled,
-      isReadOnly: groupIsReadOnly,
+      isDisabled: groupDisabled,
+      isReadOnly: groupReadOnly,
       ...props,
     })
     const {
       className,
+      isActive,
+      active = isActive,
       children,
       defaultIsSelected = false,
+      defaultSelected = defaultIsSelected,
+      isDisabled = groupDisabled,
+      disabled = isDisabled,
       disableRipple,
-      icon,
-      isActive,
-      isDisabled = groupIsDisabled,
-      isReadOnly = groupIsReadOnly,
       isRounded,
-      isSelected: isSelectedProp,
+      fullRounded = isRounded,
+      icon,
+      isReadOnly = groupReadOnly,
+      isSelected,
+      readOnly = isReadOnly,
+      selected: selectedProp = isSelected,
       value,
       onChange,
       ...rest
     } = omitThemeProps(mergedProps)
-    const [isSelected, setIsSelected] = useControllableState({
-      defaultValue: defaultIsSelected,
-      value: isSelectedProp,
+    const [selected, setSelected] = useControllableState({
+      defaultValue: defaultSelected,
+      value: selectedProp,
       onChange,
     })
 
-    if (isControlled && isUndefined(value)) {
+    if (controlled && isUndefined(value)) {
       console.warn(`Toggle: value is required. Please set the value.`)
     }
 
-    const isMulti = isArray(groupValue)
-    const isIncluded = isMulti
+    const multi = isArray(groupValue)
+    const included = multi
       ? groupValue.includes(value ?? "")
       : value === groupValue
-    const trulySelected = isControlled ? isIncluded : isSelected
+    const trulySelected = controlled ? included : selected
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || isDisabled,
+      disabled: disableRipple || disabled,
     })
 
     const onClick = () => {
-      setIsSelected((prev) => !prev)
+      setSelected((prev) => !prev)
       onChangeGroup?.(value)
     }
 
@@ -156,14 +208,14 @@ export const Toggle = forwardRef(
         justifyContent: "center",
         outline: "none",
         overflow: "hidden",
-        pointerEvents: isReadOnly ? "none" : "auto",
+        pointerEvents: readOnly ? "none" : "auto",
         position: "relative",
         userSelect: "none",
         verticalAlign: "middle",
         ...styles,
-        ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
+        ...(fullRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }),
-      [isRounded, styles, isReadOnly],
+      [fullRounded, styles, readOnly],
     )
 
     return (
@@ -172,11 +224,11 @@ export const Toggle = forwardRef(
         type="button"
         className={cx("ui-toggle", className)}
         aria-pressed={trulySelected}
-        data-active={dataAttr(isActive)}
-        data-readonly={dataAttr(isReadOnly)}
+        data-active={dataAttr(active)}
+        data-readonly={dataAttr(readOnly)}
         data-selected={dataAttr(trulySelected)}
-        disabled={isDisabled}
-        tabIndex={isReadOnly ? -1 : 0}
+        disabled={disabled}
+        tabIndex={readOnly ? -1 : 0}
         __css={css}
         {...rest}
         onClick={handlerAll(rest.onClick, onClick)}

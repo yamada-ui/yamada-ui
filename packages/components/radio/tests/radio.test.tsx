@@ -15,7 +15,7 @@ describe("<Radio />", () => {
   })
 
   test("should be defaultChecked", async () => {
-    render(<Radio defaultIsChecked>Radio defaultChecked</Radio>)
+    render(<Radio defaultChecked>Radio defaultChecked</Radio>)
 
     const radio = await screen.findByRole("radio", {
       name: "Radio defaultChecked",

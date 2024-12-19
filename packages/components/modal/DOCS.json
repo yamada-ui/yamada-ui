@@ -1,10 +1,5 @@
 {
   "Dialog": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -18,7 +13,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -80,6 +75,12 @@
       "description": "`ref` of the element to receive focus initially.",
       "required": false
     },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
+      "required": false
+    },
     "lockFocusAcrossFrames": {
       "type": "boolean",
       "defaultValue": false,
@@ -119,6 +120,11 @@
     "onSuccess": {
       "type": "(onClose: (() => void) | undefined) => void",
       "description": "The callback invoked when success button clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "other": {
@@ -194,6 +200,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
@@ -208,17 +215,12 @@
   "DialogHeader": {},
   "DialogOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }
   },
   "Drawer": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -226,7 +228,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -303,6 +305,11 @@
       "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
       "required": false
     },
+    "fullHeight": {
+      "type": "boolean",
+      "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).",
+      "required": false
+    },
     "initialFocusRef": {
       "type": "RefObject<FocusableElement>",
       "description": "`ref` of the element to receive focus initially.",
@@ -310,7 +317,14 @@
     },
     "isFullHeight": {
       "type": "boolean",
+      "deprecated": "Use `fullHeight` instead.",
       "description": "If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).",
+      "required": false
+    },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "lockFocusAcrossFrames": {
@@ -337,6 +351,11 @@
     "onOverlayClick": {
       "type": "() => void",
       "description": "Callback fired when the overlay is clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "placement": {
@@ -397,6 +416,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
@@ -411,17 +431,12 @@
   "DrawerHeader": {},
   "DrawerOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }
   },
   "Modal": {
-    "isOpen": {
-      "type": "boolean",
-      "description": "If `true`, the open will be opened.",
-      "required": true
-    },
     "allowPinchZoom": {
       "type": "boolean",
       "defaultValue": "false.",
@@ -435,7 +450,7 @@
       "required": false
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -482,6 +497,12 @@
       "description": "`ref` of the element to receive focus initially.",
       "required": false
     },
+    "isOpen": {
+      "type": "boolean",
+      "deprecated": "Use `open` instead.",
+      "description": "If `true`, the open will be opened.",
+      "required": false
+    },
     "lockFocusAcrossFrames": {
       "type": "boolean",
       "defaultValue": false,
@@ -506,6 +527,11 @@
     "onOverlayClick": {
       "type": "() => void",
       "description": "Callback fired when the overlay is clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the open will be opened.",
       "required": false
     },
     "outside": {
@@ -571,6 +597,7 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
@@ -585,7 +612,7 @@
   "ModalHeader": {},
   "ModalOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"text\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "type": "keyof ReactDOM",
       "description": "The HTML element to render.",
       "required": false
     }

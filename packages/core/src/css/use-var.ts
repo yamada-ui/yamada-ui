@@ -106,9 +106,7 @@ export const createVars =
     return [variables, result]
   }
 
-export const mergeVars = (
-  ...vars: CSSUIObject["vars"][]
-): CSSUIObject["vars"] =>
+export const mergeVars = (...vars: CSSUIObject["vars"][]): CSSUIProps["vars"] =>
   vars
     .filter(Boolean)
-    .flatMap((vars) => vars as Variable[]) as CSSUIObject["vars"]
+    .flatMap((vars) => vars as Variable[]) as CSSUIProps["vars"]

@@ -1,5 +1,66 @@
 # @yamada-ui/tabs
 
+## 1.0.50
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46), [`794b31e`](https://github.com/yamada-ui/yamada-ui/commit/794b31e75b6f49e11d41043c0a0ea20351bb26fe)]:
+  - @yamada-ui/use-controllable-state@1.0.26
+  - @yamada-ui/use-disclosure@1.1.3
+  - @yamada-ui/use-clickable@1.2.17
+  - @yamada-ui/ripple@1.0.48
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+  - @yamada-ui/use-descendant@1.0.28
+
+## 1.0.49
+
+### Patch Changes
+
+- [#3828](https://github.com/yamada-ui/yamada-ui/pull/3828) [`9880f3a`](https://github.com/yamada-ui/yamada-ui/commit/9880f3a4546b9c819b93d3c50f2532a24c81872a) Thanks [@Shunii85](https://github.com/Shunii85)! - Fixed `is`-prefix properties not being used
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`b834ef3`](https://github.com/yamada-ui/yamada-ui/commit/b834ef351db0c66ddf45436440b90466add00b52), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/use-disclosure@1.1.2
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/ripple@1.0.47
+  - @yamada-ui/use-clickable@1.2.16
+  - @yamada-ui/use-controllable-state@1.0.25
+  - @yamada-ui/use-descendant@1.0.27
+
+## 1.0.48
+
+### Patch Changes
+
+- Updated dependencies [[`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18), [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df), [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189), [`f210d45`](https://github.com/yamada-ui/yamada-ui/commit/f210d45c8a8db15bb67962fb30ac638127a05f01), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484), [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2), [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824), [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26), [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26)]:
+  - @yamada-ui/core@1.16.0
+  - @yamada-ui/ripple@1.0.46
+  - @yamada-ui/utils@1.6.0
+  - @yamada-ui/use-clickable@1.2.15
+  - @yamada-ui/use-controllable-state@1.0.24
+  - @yamada-ui/use-descendant@1.0.26
+  - @yamada-ui/use-disclosure@1.1.1
+
+## 1.0.47
+
+### Patch Changes
+
+- [#3527](https://github.com/yamada-ui/yamada-ui/pull/3527) [`5a3b4bf`](https://github.com/yamada-ui/yamada-ui/commit/5a3b4bf01b14fe2f4d9d40f61e51ac58b8bd0e8a) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` prefix in props
+
+- Updated dependencies [[`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2)]:
+  - @yamada-ui/core@1.15.6
+  - @yamada-ui/ripple@1.0.45
+  - @yamada-ui/use-clickable@1.2.14
+
+## 1.0.46
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/ripple@1.0.44
+
 ## 1.0.45
 
 ### Patch Changes

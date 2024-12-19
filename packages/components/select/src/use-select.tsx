@@ -66,16 +66,12 @@ export type SelectItem = SelectItemWithItems | SelectItemWithValue
 export type MaybeValue = string | string[]
 
 interface SelectContext
-  extends Omit<
-    UseSelectProps,
-    "defaultValue" | "isEmpty" | "onChange" | "value"
-  > {
+  extends Omit<UseSelectProps, "defaultValue" | "onChange" | "value"> {
   containerRef: RefObject<HTMLDivElement>
   fieldRef: RefObject<HTMLDivElement>
   focusedIndex: number
-  isOpen: boolean
   label: MaybeValue | undefined
-  listRef: RefObject<HTMLUListElement>
+  open: boolean
   setFocusedIndex: Dispatch<SetStateAction<number>>
   styles: { [key: string]: CSSUIObject | undefined }
   value: MaybeValue
@@ -160,20 +156,23 @@ export const useSelect = <T extends MaybeValue = string>(
     closeOnEsc = true,
     closeOnSelect = true,
     defaultIsOpen,
+    defaultOpen,
     defaultValue,
     duration = 0.2,
     eventListeners,
     flip,
     gutter,
     isLazy,
-    isOpen: isOpenProp,
+    isOpen,
     items = [],
+    lazy,
     lazyBehavior,
     matchWidth = true,
     maxSelectValues,
     modifiers,
     offset,
     omitSelectedValues = false,
+    open: openProp,
     openDelay,
     placeholder,
     placeholderInOptions = true,
@@ -199,11 +198,10 @@ export const useSelect = <T extends MaybeValue = string>(
   const descendants = useSelectDescendants()
 
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-  const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
+  const [allSelected, setAllSelected] = useState<boolean>(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const [value, setValue] = useControllableState({
@@ -214,18 +212,17 @@ export const useSelect = <T extends MaybeValue = string>(
   const [label, setLabel] = useState<T | undefined>(undefined)
 
   const hasPlaceholder = !!placeholder && placeholderInOptions
-  const isFocused = focusedIndex > -1
-  const isMulti = isArray(value)
-  const isEmptyValue = (!isMulti ? !value : !value.length) && !hasPlaceholder
+  const focused = focusedIndex > -1
+  const multi = isArray(value)
+  const emptyValue = (!multi ? !value : !value.length) && !hasPlaceholder
   const selectedValues = descendants.values(
-    ({ node }) => isMulti && value.includes(node.dataset.value ?? ""),
+    ({ node }) => multi && value.includes(node.dataset.value ?? ""),
   )
   const selectedIndexes = selectedValues.map(({ index }) => index)
   const enabledValues = descendants.enabledValues(
     ({ index }) => !selectedIndexes.includes(index),
   )
   const activedescendantId = descendants.value(focusedIndex)?.node.id
-  const listId = listRef.current?.id
 
   const validChildren = getValidChildren(children)
 
@@ -261,10 +258,10 @@ export const useSelect = <T extends MaybeValue = string>(
     }
   }, [validChildren, items])
 
-  const isEmpty =
+  const empty =
     !validChildren.length &&
     !computedChildren.length &&
-    (!isMulti ? !hasPlaceholder : true)
+    (!multi ? !hasPlaceholder : true)
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
@@ -272,7 +269,7 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (!first) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(first.index)
       } else {
         if (selectedIndexes.includes(first.index)) {
@@ -286,7 +283,7 @@ export const useSelect = <T extends MaybeValue = string>(
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, enabledValues, isMulti, omitSelectedValues, selectedIndexes])
+  }, [descendants, enabledValues, multi, omitSelectedValues, selectedIndexes])
 
   const onFocusLast = useCallback(() => {
     const id = setTimeout(() => {
@@ -294,7 +291,7 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (!last) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(last.index)
       } else {
         if (selectedIndexes.includes(last.index)) {
@@ -308,14 +305,14 @@ export const useSelect = <T extends MaybeValue = string>(
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, enabledValues, isMulti, omitSelectedValues, selectedIndexes])
+  }, [descendants, enabledValues, multi, omitSelectedValues, selectedIndexes])
 
   const onFocusSelected = useCallback(() => {
     const id = setTimeout(() => {
       const values = descendants.enabledValues()
 
       const selected = values.find(({ node }) =>
-        !isMulti
+        !multi
           ? node.dataset.value === value
           : value.includes(node.dataset.value ?? ""),
       )
@@ -324,7 +321,7 @@ export const useSelect = <T extends MaybeValue = string>(
     })
 
     timeoutIds.current.add(id)
-  }, [descendants, isMulti, value])
+  }, [descendants, multi, value])
 
   const onFocusNext = useCallback(() => {
     const id = setTimeout(() => {
@@ -332,7 +329,7 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (!next) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(next.index)
       } else {
         if (selectedIndexes.includes(next.index)) {
@@ -352,7 +349,7 @@ export const useSelect = <T extends MaybeValue = string>(
     descendants,
     enabledValues,
     focusedIndex,
-    isMulti,
+    multi,
     omitSelectedValues,
     selectedIndexes,
     setFocusedIndex,
@@ -364,7 +361,7 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (!prev) return
 
-      if (!isMulti || !omitSelectedValues) {
+      if (!multi || !omitSelectedValues) {
         setFocusedIndex(prev.index)
       } else {
         if (selectedIndexes.includes(prev.index)) {
@@ -384,16 +381,16 @@ export const useSelect = <T extends MaybeValue = string>(
     descendants,
     enabledValues,
     focusedIndex,
-    isMulti,
+    multi,
     omitSelectedValues,
     selectedIndexes,
     setFocusedIndex,
   ])
 
   const onFocusFirstOrSelected =
-    isEmptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
+    emptyValue || omitSelectedValues ? onFocusFirst : onFocusSelected
   const onFocusLastOrSelected =
-    isEmptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
+    emptyValue || omitSelectedValues ? onFocusLast : onFocusSelected
 
   const onChangeLabel = useCallback(
     (newValue: MaybeValue) => {
@@ -419,9 +416,9 @@ export const useSelect = <T extends MaybeValue = string>(
         })
         .filter((label) => !isUndefined(label))
 
-      setLabel((!isMulti ? selectedLabel[0] : selectedLabel) as T)
+      setLabel((!multi ? selectedLabel[0] : selectedLabel) as T)
     },
-    [descendants, isMulti, hasPlaceholder],
+    [descendants, multi, hasPlaceholder],
   )
 
   const onChange = useCallback(
@@ -430,9 +427,9 @@ export const useSelect = <T extends MaybeValue = string>(
         if (!isArray(prev)) {
           return newValue as T
         } else {
-          const isSelected = prev.includes(newValue)
+          const selected = prev.includes(newValue)
 
-          if (!isSelected) {
+          if (!selected) {
             return [...prev, newValue] as T
           } else {
             return prev.filter((value) => value !== newValue) as T
@@ -454,12 +451,14 @@ export const useSelect = <T extends MaybeValue = string>(
   )
 
   const {
-    isOpen,
+    open,
     onClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
     defaultIsOpen,
-    isOpen: isOpenProp,
+    defaultOpen,
+    isOpen,
+    open: openProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
@@ -467,10 +466,10 @@ export const useSelect = <T extends MaybeValue = string>(
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
-    if (isEmpty || isAllSelected) return
+    if (empty || allSelected) return
 
     onInternalOpen()
-  }, [formControlProps, isEmpty, isAllSelected, onInternalOpen])
+  }, [formControlProps, empty, allSelected, onInternalOpen])
 
   const onSelect = useCallback(() => {
     let enabledValue = descendants.value(focusedIndex)
@@ -498,20 +497,20 @@ export const useSelect = <T extends MaybeValue = string>(
   ])
 
   const onClick = useCallback(() => {
-    if (isOpen) return
+    if (open) return
 
     onOpen()
 
     onFocusFirstOrSelected()
-  }, [isOpen, onFocusFirstOrSelected, onOpen])
+  }, [open, onFocusFirstOrSelected, onOpen])
 
   const onFocus = useCallback(() => {
-    if (isOpen) return
+    if (open) return
 
     onOpen()
 
     onFocusFirstOrSelected()
-  }, [isOpen, onFocusFirstOrSelected, onOpen])
+  }, [open, onFocusFirstOrSelected, onOpen])
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLDivElement>) => {
@@ -521,9 +520,9 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (!closeOnBlur) return
 
-      if (isOpen) onClose()
+      if (open) onClose()
     },
-    [closeOnBlur, isOpen, onClose],
+    [closeOnBlur, open, onClose],
   )
 
   const onKeyDown = useCallback(
@@ -533,30 +532,30 @@ export const useSelect = <T extends MaybeValue = string>(
       if (formControlProps.disabled || formControlProps.readOnly) return
 
       const actions: { [key: string]: Function | undefined } = {
-        ArrowDown: isFocused
+        ArrowDown: focused
           ? () => onFocusNext()
-          : !isOpen
+          : !open
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
         ArrowUp:
-          ev.altKey && isOpen
+          ev.altKey && open
             ? onClose
-            : isFocused
+            : focused
               ? () => onFocusPrev()
-              : !isOpen
+              : !open
                 ? funcAll(onOpen, onFocusLastOrSelected)
                 : undefined,
-        End: isOpen ? onFocusLast : undefined,
-        Enter: isFocused
+        End: open ? onFocusLast : undefined,
+        Enter: focused
           ? onSelect
-          : !isOpen
+          : !open
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
         Escape: closeOnEsc ? onClose : undefined,
-        Home: isOpen ? onFocusFirst : undefined,
-        Space: isFocused
+        Home: open ? onFocusFirst : undefined,
+        Space: focused
           ? onSelect
-          : !isOpen
+          : !open
             ? funcAll(onOpen, onFocusFirstOrSelected)
             : undefined,
       }
@@ -572,8 +571,8 @@ export const useSelect = <T extends MaybeValue = string>(
     [
       formControlProps.disabled,
       formControlProps.readOnly,
-      isFocused,
-      isOpen,
+      focused,
+      open,
       onOpen,
       onFocusFirstOrSelected,
       onFocusLastOrSelected,
@@ -589,40 +588,33 @@ export const useSelect = <T extends MaybeValue = string>(
 
   useOutsideClick({
     ref: containerRef,
-    enabled: isOpen && closeOnBlur,
+    enabled: open && closeOnBlur,
     handler: onClose,
   })
 
   useEffect(() => {
-    if (!isMulti) return
+    if (!multi) return
 
     if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
-    const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectValues
+    const all = value.length > 0 && value.length === descendants.count()
+    const max = value.length === maxSelectValues
 
-    if (isAll || isMax) {
+    if (all || max) {
       onClose()
-      setIsAllSelected(true)
+      setAllSelected(true)
     } else {
-      setIsAllSelected(false)
+      setAllSelected(false)
     }
-  }, [
-    omitSelectedValues,
-    value,
-    descendants,
-    isMulti,
-    onClose,
-    maxSelectValues,
-  ])
+  }, [omitSelectedValues, value, descendants, multi, onClose, maxSelectValues])
 
   useSafeLayoutEffect(() => {
     onChangeLabel(value)
   }, [value])
 
   useUpdateEffect(() => {
-    if (!isOpen) setFocusedIndex(-1)
-  }, [isOpen])
+    if (!open) setFocusedIndex(-1)
+  }, [open])
 
   useUnmountEffect(() => {
     timeoutIds.current.forEach((id) => clearTimeout(id))
@@ -640,6 +632,7 @@ export const useSelect = <T extends MaybeValue = string>(
       flip,
       gutter,
       isLazy,
+      lazy,
       lazyBehavior,
       matchWidth,
       modifiers,
@@ -650,7 +643,7 @@ export const useSelect = <T extends MaybeValue = string>(
       strategy,
       ...props,
       closeOnButton: false,
-      isOpen,
+      open,
       trigger: "never",
       onClose,
       onOpen,
@@ -659,6 +652,7 @@ export const useSelect = <T extends MaybeValue = string>(
       closeOnBlur,
       openDelay,
       closeDelay,
+      lazy,
       isLazy,
       lazyBehavior,
       animation,
@@ -673,7 +667,7 @@ export const useSelect = <T extends MaybeValue = string>(
       strategy,
       placement,
       modifiers,
-      isOpen,
+      open,
       onOpen,
       onClose,
     ],
@@ -692,25 +686,26 @@ export const useSelect = <T extends MaybeValue = string>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
-      ariaLabel ??=
-        placeholder ??
-        `Select ${isMulti ? "one or more options." : "an option."}`
-
+    (
+      {
+        "aria-label": ariaLabel = placeholder ??
+          `Select ${multi ? "one or more options." : "an option."}`,
+        ...props
+      } = {},
+      ref = null,
+    ) => {
       return {
         ref: mergeRefs(fieldRef, ref),
         "aria-activedescendant": activedescendantId,
-        "aria-controls": listId,
-        "aria-expanded": isOpen,
         "aria-haspopup": "listbox",
         "aria-label": ariaLabel,
         role: "combobox",
         tabIndex: 0,
         ...fieldProps,
         ...props,
-        "data-active": dataAttr(isOpen),
+        "data-active": dataAttr(open),
         "data-placeholder": dataAttr(
-          !isMulti ? label === undefined : !label?.length,
+          !multi ? label === undefined : !label?.length,
         ),
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
@@ -718,10 +713,9 @@ export const useSelect = <T extends MaybeValue = string>(
     },
     [
       activedescendantId,
-      listId,
       fieldProps,
-      isOpen,
-      isMulti,
+      open,
+      multi,
       label,
       placeholder,
       rest,
@@ -735,13 +729,12 @@ export const useSelect = <T extends MaybeValue = string>(
     closeOnSelect,
     containerRef,
     descendants,
+    empty,
     fieldRef,
     focusedIndex,
-    isEmpty,
-    isOpen,
     label,
-    listRef,
     omitSelectedValues,
+    open,
     placeholder,
     placeholderInOptions,
     setFocusedIndex,

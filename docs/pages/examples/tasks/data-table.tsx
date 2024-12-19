@@ -2,19 +2,19 @@ import type { TdProps } from "@yamada-ui/react"
 import type { Cell, Column, PagingTableProps } from "@yamada-ui/table"
 import type { FC, MutableRefObject } from "react"
 import type { Data, Priority, Status, View } from "./data"
-import { Ellipsis } from "@yamada-ui/lucide"
+import { EllipsisIcon } from "@yamada-ui/lucide"
 import {
   assignRef,
   HStack,
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuSeparator,
   TableContainer,
   Tag,
   Text,
@@ -220,7 +220,7 @@ export const DataTable: FC<DataTableProps> = memo(
           rowsClickSelect={hasData}
           withPagingControl={hasData}
           cellProps={cellProps}
-          checkboxProps={{ isDisabled: !hasData }}
+          checkboxProps={{ disabled: !hasData }}
           headerProps={{ textTransform: "capitalize" }}
         />
       </TableContainer>
@@ -233,12 +233,12 @@ DataTable.displayName = "DataTable"
 const ControlMenu = memo(
   () => {
     return (
-      <Menu isLazy>
+      <Menu lazy>
         <MenuButton
           as={IconButton}
           size="sm"
           variant="ghost"
-          icon={<Ellipsis />}
+          icon={<EllipsisIcon />}
           onClick={(ev) => {
             ev.stopPropagation()
           }}
@@ -253,7 +253,7 @@ const ControlMenu = memo(
           <MenuItem>Make a copy</MenuItem>
           <MenuItem>Favorite</MenuItem>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuItem>
             <Menu>
@@ -271,7 +271,7 @@ const ControlMenu = memo(
             </Menu>
           </MenuItem>
 
-          <MenuDivider />
+          <MenuSeparator />
 
           <MenuItem command="⌘⌫">Delete</MenuItem>
         </MenuList>

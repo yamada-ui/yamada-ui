@@ -25,6 +25,12 @@ import { useMonthPicker } from "./use-month-picker"
 interface MonthPickerOptions {
   children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the month picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -36,6 +42,8 @@ interface MonthPickerOptions {
    * If `true`, display the month picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -65,7 +73,7 @@ interface MonthPickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -83,27 +91,26 @@ export interface MonthPickerProps
  */
 export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MonthPicker", props)
-  let {
+  const {
     className,
     children,
+    isClearable = true,
+    clearable = isClearable,
     color,
     h,
-    height,
-    isClearable = true,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
     iconProps,
     inputProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
-    id,
     value,
     getCalendarProps,
     getContainerProps,
@@ -113,10 +120,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useMonthPicker(computedProps)
-
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -138,11 +141,11 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
           >
             <DatePickerField
               className="ui-month-picker__field"
-              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
+              {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 
-            {isClearable && value ? (
+            {clearable && value ? (
               <DatePickerClearIcon
                 className="ui-month-picker__icon--clear"
                 {...getIconProps({ clear: true, ...clearIconProps })}
@@ -157,11 +160,8 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              id={id}
               as="div"
               className="ui-month-picker__content"
-              aria-modal="true"
-              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >

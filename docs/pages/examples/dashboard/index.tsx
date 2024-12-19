@@ -1,7 +1,7 @@
 import type { SegmentedControlItem, StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { RangeDatePicker } from "@yamada-ui/calendar"
-import { ChevronDown } from "@yamada-ui/lucide"
+import { ChevronDownIcon } from "@yamada-ui/lucide"
 import {
   Button,
   Grid,
@@ -24,9 +24,9 @@ import { RecentSales } from "./recent-sales"
 
 const DASHBOARD_ITEMS: SegmentedControlItem[] = [
   { label: "Overview", value: "Overview" },
-  { isDisabled: true, label: "Analytics", value: "Analytics" },
-  { isDisabled: true, label: "Reports", value: "Reports" },
-  { isDisabled: true, label: "Notifications", value: "Notifications" },
+  { disabled: true, label: "Analytics", value: "Analytics" },
+  { disabled: true, label: "Reports", value: "Reports" },
+  { disabled: true, label: "Notifications", value: "Notifications" },
 ]
 
 export const Dashboard = memo(() => {
@@ -83,7 +83,7 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
               variant="ghost"
               display={{ base: "none", md: "flex" }}
             >
-              <ChevronDown fontSize="2xl" />
+              <ChevronDownIcon fontSize="2xl" />
             </MenuButton>
 
             <MenuList>

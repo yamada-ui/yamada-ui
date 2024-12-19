@@ -32,6 +32,12 @@ import {
 interface DatePickerOptions {
   children?: FC<{ value: Date | undefined; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the date picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -43,6 +49,8 @@ interface DatePickerOptions {
    * If `true`, display the date picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -72,7 +80,7 @@ interface DatePickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -90,27 +98,26 @@ export interface DatePickerProps
  */
 export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("DatePicker", props)
-  let {
+  const {
     className,
     children,
+    isClearable = true,
+    clearable = isClearable,
     color,
     h,
-    height,
-    isClearable = true,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
     iconProps,
     inputProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
-    id,
     value,
     getCalendarProps,
     getContainerProps,
@@ -120,10 +127,6 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useDatePicker(computedProps)
-
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -144,11 +147,11 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
             __css={{ position: "relative", ...styles.inner }}
           >
             <DatePickerField
-              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
+              {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 
-            {isClearable && value ? (
+            {clearable && value ? (
               <DatePickerClearIcon
                 {...getIconProps({ clear: true, ...clearIconProps })}
               />
@@ -161,11 +164,8 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              id={id}
               as="div"
               className="ui-date-picker__content"
-              aria-modal="true"
-              role="dialog"
               __css={{ ...styles.content }}
               {...contentProps}
             >
@@ -195,15 +195,13 @@ export interface DatePickerFieldProps
     DatePickerFieldOptions {}
 
 export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
-  ({ className, h, minH, inputProps, ...rest }, ref) => {
+  ({ className, inputProps, ...rest }, ref) => {
     const styles = useDatePickerContext()
     const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }
@@ -316,11 +314,11 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
   const ref = useRef<HTMLDivElement>(null)
   const styles = useDatePickerContext()
 
-  const isDisabled = props.disabled
+  const disabled = props.disabled
 
   const rest = useClickable({
     ref,
-    isDisabled,
+    disabled,
     ...props,
   })
 

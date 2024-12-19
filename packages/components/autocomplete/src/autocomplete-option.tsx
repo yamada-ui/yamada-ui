@@ -21,7 +21,7 @@ export interface AutocompleteOptionProps
 export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "div">(
   ({ className, icon, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
-    const { children, customIcon, isSelected, getOptionProps } =
+    const { children, customIcon, selected, getOptionProps } =
       useAutocompleteOption(rest)
 
     icon ??= customIcon
@@ -47,7 +47,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "div">(
         {...getOptionProps({}, ref)}
       >
         {icon !== null ? (
-          <AutocompleteItemIcon opacity={isSelected ? 1 : 0}>
+          <AutocompleteItemIcon opacity={selected ? 1 : 0}>
             {icon || <AutocompleteCheckIcon />}
           </AutocompleteItemIcon>
         ) : null}

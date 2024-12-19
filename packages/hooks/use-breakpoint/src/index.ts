@@ -52,9 +52,7 @@ export const useBreakpoint = () => {
   const hasQueries = !!queries.length
 
   const [breakpoint, setBreakpoint] = useState(() => {
-    const isBrowser = createdDom()
-
-    if (!isBrowser || hasContainer || !hasQueries) return "base"
+    if (!createdDom() || hasContainer || !hasQueries) return "base"
 
     for (const { breakpoint, query } of queries) {
       const mql = window.matchMedia(query)
@@ -81,9 +79,7 @@ export const useBreakpoint = () => {
   useEffect(() => {
     if (!hasContainer || !hasQueries) return
 
-    const isBrowser = createdDom()
-
-    if (!isBrowser) return
+    if (!createdDom()) return
 
     const observer = new ResizeObserver(([entry]) => {
       if (!entry) return

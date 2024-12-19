@@ -1,5 +1,61 @@
 # @yamada-ui/core
 
+## 1.16.2
+
+### Patch Changes
+
+- [#4074](https://github.com/yamada-ui/yamada-ui/pull/4074) [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated type definition.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840)]:
+  - @yamada-ui/portal@1.0.27
+  - @yamada-ui/utils@1.6.2
+
+## 1.16.1
+
+### Patch Changes
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/portal@1.0.26
+
+## 1.16.0
+
+### Minor Changes
+
+- [#3659](https://github.com/yamada-ui/yamada-ui/pull/3659) [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Separator` component.
+
+- [#3321](https://github.com/yamada-ui/yamada-ui/pull/3321) [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484) Thanks [@taroj1205](https://github.com/taroj1205)! - Added `I18nProvider`.
+
+- [#3550](https://github.com/yamada-ui/yamada-ui/pull/3550) [`696da80`](https://github.com/yamada-ui/yamada-ui/commit/696da80ccd8adb30480fe34b6547ac2c81842f18) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `EmptyState` component.
+
+- [#3551](https://github.com/yamada-ui/yamada-ui/pull/3551) [`bdb9cb3`](https://github.com/yamada-ui/yamada-ui/commit/bdb9cb3c4b0614405dced07ea333a4a698f5a189) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `DataList` component.
+
+- [#3608](https://github.com/yamada-ui/yamada-ui/pull/3608) [`be42c26`](https://github.com/yamada-ui/yamada-ui/commit/be42c26cf3499335045d9a85c219dae164e656b2) Thanks [@kurakke](https://github.com/kurakke)! - Added `_notSelected` and `_notChecked` selectors.
+
+- [#3551](https://github.com/yamada-ui/yamada-ui/pull/3551) [`c9e86f6`](https://github.com/yamada-ui/yamada-ui/commit/c9e86f6dd89bfef80a146d2b879321ec6923b824) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_child`, `_firstChild`, `_lastChild`, `_notFirstChild` and `_notLastChild` pseudo-classes.
+
+- [#3539](https://github.com/yamada-ui/yamada-ui/pull/3539) [`604208c`](https://github.com/yamada-ui/yamada-ui/commit/604208c13d90f0c665616c7bd8c0f097b3c1b498) Thanks [@taiseiiiii](https://github.com/taiseiiiii)! - Added `Status` component
+
+- [#3608](https://github.com/yamada-ui/yamada-ui/pull/3608) [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26) Thanks [@kurakke](https://github.com/kurakke)! - Added `CheckboxCard` and `CheckboxCardGroup` components.
+
+- [#3608](https://github.com/yamada-ui/yamada-ui/pull/3608) [`f86a6b2`](https://github.com/yamada-ui/yamada-ui/commit/f86a6b2fd3da6acde048e32e895f364bdb1d0f26) Thanks [@kurakke](https://github.com/kurakke)! - Added `RadioCard` and `RadioCardGroup` components.
+
+### Patch Changes
+
+- [#3659](https://github.com/yamada-ui/yamada-ui/pull/3659) [`37b9d86`](https://github.com/yamada-ui/yamada-ui/commit/37b9d869638fb13983f53fd1aef1c45a8aa8e4df) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Export theme-related types for reuse.
+
+- Updated dependencies [[`4065286`](https://github.com/yamada-ui/yamada-ui/commit/4065286fe311de83fae4c203bf889de0789286f0), [`323e9b5`](https://github.com/yamada-ui/yamada-ui/commit/323e9b57b0925803068d9aff5802f2ae7cac1484)]:
+  - @yamada-ui/portal@1.0.25
+  - @yamada-ui/utils@1.6.0
+
+## 1.15.6
+
+### Patch Changes
+
+- [#3560](https://github.com/yamada-ui/yamada-ui/pull/3560) [`cf0bafb`](https://github.com/yamada-ui/yamada-ui/commit/cf0bafb3c450dd1e4fd06af52066ec56a8a9d4f2) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix horizontal and vertical selector not working in Firefox
+
 ## 1.15.5
 
 ### Patch Changes

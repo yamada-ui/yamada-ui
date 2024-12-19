@@ -44,12 +44,21 @@ export interface UseEditableProps extends FormControlOptions {
    * so it can receive focus via the keyboard or click.
    *
    * @default true
+   *
+   * @deprecated Use `previewFocusable` instead.
    */
   isPreviewFocusable?: boolean
   /**
    * The placeholder text when the value is empty.
    */
   placeholder?: string
+  /**
+   * If `true`, the read only view, has a `tabIndex` set to `0`
+   * so it can receive focus via the keyboard or click.
+   *
+   * @default true
+   */
+  previewFocusable?: boolean
   /**
    * If `true`, the input's text will be highlighted on focus.
    *
@@ -95,6 +104,7 @@ export const useEditable = (props: UseEditableProps) => {
     defaultValue,
     isPreviewFocusable = true,
     placeholder,
+    previewFocusable = isPreviewFocusable,
     selectAllOnFocus = true,
     startWithEditView,
     submitOnBlur = true,
@@ -110,64 +120,22 @@ export const useEditable = (props: UseEditableProps) => {
     rest,
     formControlProperties,
   )
-
-  const [isEditing, setIsEditing] = useState<boolean>(
+  const [editing, setEditing] = useState<boolean>(
     !!startWithEditView && !disabled,
   )
-
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue || "",
     value: valueProp,
     onChange: onChangeProp,
   })
-
-  const isInteractive = !isEditing && !disabled
-  const isValueEmpty = value.length === 0
-
+  const interactive = !editing && !disabled
+  const emptyValue = value.length === 0
   const [prevValue, setPrevValue] = useState(value)
-
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const previewRef = useRef<HTMLElement>(null)
   const editRef = useRef<HTMLButtonElement>(null)
   const cancelRef = useRef<HTMLButtonElement>(null)
   const submitRef = useRef<HTMLButtonElement>(null)
-
-  useFocusOnPointerDown({
-    ref: inputRef,
-    elements: [cancelRef, submitRef],
-    enabled: isEditing,
-  })
-
-  useSafeLayoutEffect(() => {
-    if (!isEditing) return
-
-    inputRef.current?.focus()
-
-    if (selectAllOnFocus) inputRef.current?.select()
-  }, [])
-
-  useUpdateEffect(() => {
-    if (!isEditing) {
-      editRef.current?.focus()
-
-      return
-    }
-
-    inputRef.current?.focus()
-
-    if (selectAllOnFocus) inputRef.current?.select()
-
-    onEditRef()
-  }, [isEditing, onEditRef, selectAllOnFocus])
-
-  useEffect(() => {
-    if (isEditing) return
-
-    const el = inputRef.current
-    const activeEl = el?.ownerDocument.activeElement
-
-    if (activeEl === el) el?.blur()
-  }, [isEditing])
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -178,17 +146,17 @@ export const useEditable = (props: UseEditableProps) => {
   const onUpdatePrevValue = useCallback(() => setPrevValue(value), [value])
 
   const onEdit = useCallback(() => {
-    if (isInteractive) setIsEditing(true)
-  }, [isInteractive])
+    if (interactive) setEditing(true)
+  }, [interactive])
 
   const onCancel = useCallback(() => {
-    setIsEditing(false)
+    setEditing(false)
     setValue(prevValue)
     onCancelProp?.(prevValue)
   }, [prevValue, onCancelProp, setValue])
 
   const onSubmit = useCallback(() => {
-    setIsEditing(false)
+    setEditing(false)
     setPrevValue(value)
     onSubmitProp?.(value)
   }, [onSubmitProp, value])
@@ -222,7 +190,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const onBlur = useCallback(
     (ev: FocusEvent) => {
-      if (!isEditing) return
+      if (!editing) return
 
       const ownerDocument = ev.currentTarget.ownerDocument
       const relatedTarget = (ev.relatedTarget ??
@@ -239,23 +207,60 @@ export const useEditable = (props: UseEditableProps) => {
         onCancel()
       }
     },
-    [isEditing, submitOnBlur, onSubmit, onCancel],
+    [editing, submitOnBlur, onSubmit, onCancel],
   )
+
+  useFocusOnPointerDown({
+    ref: inputRef,
+    elements: [cancelRef, submitRef],
+    enabled: editing,
+  })
+
+  useSafeLayoutEffect(() => {
+    if (!editing) return
+
+    inputRef.current?.focus()
+
+    if (selectAllOnFocus) inputRef.current?.select()
+  }, [])
+
+  useUpdateEffect(() => {
+    if (!editing) {
+      editRef.current?.focus()
+
+      return
+    }
+
+    inputRef.current?.focus()
+
+    if (selectAllOnFocus) inputRef.current?.select()
+
+    onEditRef()
+  }, [editing, onEditRef, selectAllOnFocus])
+
+  useEffect(() => {
+    if (editing) return
+
+    const el = inputRef.current
+    const activeEl = el?.ownerDocument.activeElement
+
+    if (activeEl === el) el?.blur()
+  }, [editing])
 
   const getPreviewProps: PropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, previewRef),
-      children: isValueEmpty ? placeholder : value,
-      hidden: isEditing,
-      tabIndex: isInteractive && isPreviewFocusable ? 0 : undefined,
+      children: emptyValue ? placeholder : value,
+      hidden: editing,
+      tabIndex: interactive && previewFocusable ? 0 : undefined,
       onFocus: handlerAll(props.onFocus, onEdit, onUpdatePrevValue),
     }),
     [
-      isEditing,
-      isInteractive,
-      isPreviewFocusable,
-      isValueEmpty,
+      editing,
+      interactive,
+      previewFocusable,
+      emptyValue,
       onEdit,
       onUpdatePrevValue,
       placeholder,
@@ -270,7 +275,7 @@ export const useEditable = (props: UseEditableProps) => {
       id,
       ref: mergeRefs(ref, inputRef),
       disabled,
-      hidden: !isEditing,
+      hidden: !editing,
       placeholder,
       readOnly,
       required,
@@ -283,7 +288,7 @@ export const useEditable = (props: UseEditableProps) => {
     [
       disabled,
       id,
-      isEditing,
+      editing,
       onBlur,
       onChange,
       onKeyDown,
@@ -303,7 +308,7 @@ export const useEditable = (props: UseEditableProps) => {
       id,
       ref: mergeRefs(ref, inputRef),
       disabled,
-      hidden: !isEditing,
+      hidden: !editing,
       placeholder,
       readOnly,
       required,
@@ -316,7 +321,7 @@ export const useEditable = (props: UseEditableProps) => {
     [
       disabled,
       id,
-      isEditing,
+      editing,
       onBlur,
       onChange,
       onKeyDownWithoutSubmit,
@@ -369,7 +374,7 @@ export const useEditable = (props: UseEditableProps) => {
   )
 
   return {
-    isEditing,
+    editing,
     value,
     getCancelProps,
     getEditProps,
@@ -386,14 +391,23 @@ export const useEditable = (props: UseEditableProps) => {
 export type UseEditableReturn = ReturnType<typeof useEditable>
 
 export const useEditableControl = () => {
-  const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
+  const { editing, getCancelProps, getEditProps, getSubmitProps } =
     useEditableContext()
 
-  return { isEditing, getCancelProps, getEditProps, getSubmitProps }
+  return {
+    editing,
+    /**
+     * @deprecated Use `editing` instead.
+     */
+    isEditing: editing,
+    getCancelProps,
+    getEditProps,
+    getSubmitProps,
+  }
 }
 
 interface EditableContext {
-  isEditing: boolean
+  editing: boolean
   styles: { [key: string]: CSSUIObject | undefined }
   getCancelProps: PropGetter<"button">
   getEditProps: PropGetter<"button">
@@ -412,7 +426,7 @@ const [EditableProvider, useEditableContext] = createContext<EditableContext>({
 interface EditableElementProps
   extends Pick<
     UseEditableReturn,
-    "isEditing" | "onCancel" | "onEdit" | "onSubmit"
+    "editing" | "onCancel" | "onEdit" | "onSubmit"
   > {}
 
 type EditableElement = (props: EditableElementProps) => ReactNode
@@ -455,11 +469,16 @@ export const Editable = forwardRef<EditableProps, "div">(
       children,
       defaultValue,
       isDisabled,
+      disabled = isDisabled,
       isInvalid,
+      invalid = isInvalid,
       isPreviewFocusable,
       isReadOnly,
       isRequired,
       placeholder,
+      previewFocusable = isPreviewFocusable,
+      readOnly = isReadOnly,
+      required = isRequired,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,
@@ -471,7 +490,7 @@ export const Editable = forwardRef<EditableProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
     const {
-      isEditing,
+      editing,
       getCancelProps,
       getEditProps,
       getInputProps,
@@ -483,12 +502,12 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit,
     } = useEditable({
       defaultValue,
-      isDisabled,
-      isInvalid,
-      isPreviewFocusable,
-      isReadOnly,
-      isRequired,
+      disabled,
+      invalid,
       placeholder,
+      previewFocusable,
+      readOnly,
+      required,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,
@@ -500,7 +519,7 @@ export const Editable = forwardRef<EditableProps, "div">(
     })
 
     const cloneChildren = runIfFunc(children, {
-      isEditing,
+      editing,
       onCancel,
       onEdit,
       onSubmit,
@@ -511,7 +530,7 @@ export const Editable = forwardRef<EditableProps, "div">(
     return (
       <EditableProvider
         value={{
-          isEditing,
+          editing,
           styles,
           getCancelProps,
           getEditProps,

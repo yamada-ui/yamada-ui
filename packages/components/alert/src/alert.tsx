@@ -15,14 +15,13 @@ import {
   useComponentMultiStyle,
   useTheme,
 } from "@yamada-ui/core"
-import { CheckIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
-import { createContext, cx } from "@yamada-ui/utils"
 import {
+  CircleCheckBigIcon,
   InfoIcon,
   TriangleAlertIcon,
-  CircleCheckBigIcon,
 } from "@yamada-ui/lucide"
+import { createContext, cx } from "@yamada-ui/utils"
 
 const defaultStatuses = {
   error: { colorScheme: "danger", icon: TriangleAlertIcon },

@@ -16,7 +16,7 @@ import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 
 const SOURCE_URL = "https://developer.mozilla.org"
-export const OUT_PATH = "packages/core/src/styles.ts"
+export const OUT_PATH = "packages/react/src/core/styles.ts"
 
 export type CSSProperty = ReturnType<typeof getCSSProperties>[number]
 export type Properties = CSSProperties | UIProperties

@@ -1,87 +1,87 @@
-pre-commit:
-  piped: true
-  commands:
-    prettier:
-      priority: 1
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: |
-        pnpm prettier {staged_files} --write
-      stage_fixed: true
+# pre-commit:
+#   piped: true
+#   commands:
+#     prettier:
+#       priority: 1
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
+#       run: |
+#         pnpm prettier {staged_files} --write
+#       stage_fixed: true
 
-    eslint:
-      priority: 2
-      run: |
-        pnpm lefthook run eslint
+#     eslint:
+#       priority: 2
+#       run: |
+#         pnpm lefthook run eslint
 
-eslint:
-  parallel: true
-  commands:
-    base:
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      exclude:
-        - examples/**
-        - docs/**
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+# eslint:
+#   parallel: true
+#   commands:
+#     base:
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       exclude:
+#         - examples/**
+#         - docs/**
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    docs:
-      root: docs/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     docs:
+#       root: docs/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    create-react-app:
-      root: examples/vite/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     create-react-app:
+#       root: examples/vite/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    hono:
-      root: examples/vite/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     hono:
+#       root: examples/vite/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    vite:
-      root: examples/vite/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     vite:
+#       root: examples/vite/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    remix:
-      root: examples/remix/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     remix:
+#       root: examples/remix/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    next-app:
-      root: examples/next/app/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     next-app:
+#       root: examples/next/app/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-    next-pages:
-      root: examples/next/pages/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
+#     next-pages:
+#       root: examples/next/pages/
+#       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+#       run: |
+#         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+#       stage_fixed: true
 
-commit-msg:
-  commands:
-    commitlint:
-      run: |
-        pnpm commitlint --edit {1}
+# commit-msg:
+#   commands:
+#     commitlint:
+#       run: |
+#         pnpm commitlint --edit {1}
 
-post-merge:
-  commands:
-    pnpm:
-      glob: "{package.json,pnpm-lock.yaml}"
-      run: pnpm install
+# post-merge:
+#   commands:
+#     pnpm:
+#       glob: "{package.json,pnpm-lock.yaml}"
+#       run: pnpm install

@@ -1,5 +1,6 @@
 {
   "name": "@yamada-ui/test",
+  "type": "module",
   "version": "1.5.13",
   "description": "Yamada UI test",
   "keywords": [],
@@ -16,17 +17,14 @@
   "bugs": {
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
+  "scripts": {
+    "clean": "rimraf dist .turbo .eslintcache",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
+    "format": "prettier --check . --cache"
+  },
   "dependencies": {
-    "@testing-library/user-event": "^14.5.2",
-    "@yamada-ui/providers": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "vitest-matchmedia-mock": "^1.0.6"
-  },
-  "devDependencies": {
-    "react": "^18.3.1"
-  },
-  "peerDependencies": {
-    "react": ">=18"
   }
 }

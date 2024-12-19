@@ -1,4 +1,3 @@
-import type React from "react"
 import { isNumber, isUndefined } from "./assertion"
 
 export function createdDom(): boolean {
@@ -105,11 +104,6 @@ export function getPx(value: number | string | undefined): number {
   return parseFloat(value) * fontSize
 }
 
-export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
-  return (ev.relatedTarget ??
-    ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
-}
-
 type Booleanish = "false" | "true" | boolean
 
 export function dataAttr(condition: boolean | undefined) {
@@ -206,4 +200,10 @@ export function getActiveElement(el?: HTMLElement): HTMLElement | null {
 
 export function isActiveElement(el: HTMLElement): boolean {
   return getActiveElement(el) === el
+}
+
+let createIdCounter = 0
+
+export function createId(prefix: string) {
+  return `${prefix}-${++createIdCounter}-${new Date().getTime()}`
 }

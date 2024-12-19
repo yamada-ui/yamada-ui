@@ -20,14 +20,6 @@ body:
       label: どのパッケージに問題がありますか？
       options:
         - "@yamada-ui/react"
-        - "@yamada-ui/table"
-        - "@yamada-ui/calendar"
-        - "@yamada-ui/carousel"
-        - "@yamada-ui/dropzone"
-        - "@yamada-ui/charts"
-        - "@yamada-ui/markdown"
-        - "@yamada-ui/fontawesome"
-        - "@yamada-ui/next"
         - "@yamada-ui/cli"
     validations:
       required: true

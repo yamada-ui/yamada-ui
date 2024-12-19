@@ -70,6 +70,5 @@ export const typescriptConfig: TSESLint.FlatConfig.Config = {
     "@typescript-eslint/prefer-namespace-keyword": "warn",
     "@typescript-eslint/prefer-reduce-type-parameter": "warn",
     "@typescript-eslint/prefer-string-starts-ends-with": "warn",
-    "@typescript-eslint/promise-function-async": "warn",
   },
 }

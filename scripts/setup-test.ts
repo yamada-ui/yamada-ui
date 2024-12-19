@@ -37,6 +37,9 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   unobserve: vi.fn(),
 }))
 
+// @ts-ignore
+global.EyeDropper = vi.fn()
+
 vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
   () => null,
 )

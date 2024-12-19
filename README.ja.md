@@ -70,34 +70,6 @@ npm install @yamada-ui/react
 bun add @yamada-ui/react
 ```
 
-ただし、`@yamada-ui/table`や`@yamada-ui/calendar`などは、`@yamada-ui/react`には含まれていません。これらは別途インストールする必要があります。
-
-```sh
-# `@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。
-pnpm add @yamada-ui/table
-
-# 便利なカレンダーとデイトピッカーコンポーネントを提供します。
-pnpm add @yamada-ui/calendar
-
-# `embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。
-pnpm add @yamada-ui/carousel
-
-# `react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。
-pnpm add @yamada-ui/dropzone
-
-# `recharts`を使用した、便利なチャートコンポーネントを提供します。
-pnpm add @yamada-ui/charts
-
-# `react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。
-pnpm add @yamada-ui/markdown
-
-# `Lucide`を使用した、便利なアイコンコンポーネントを提供します。
-pnpm add @yamada-ui/lucide
-
-# `Font Awesome`を便利に使用するためのコンポーネントを提供します。
-pnpm add @yamada-ui/fontawesome
-```
-
 ## 使い方
 
 コンポーネントの使用するには、以下の手順に従ってください。

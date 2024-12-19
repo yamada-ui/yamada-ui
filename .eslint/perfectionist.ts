@@ -69,7 +69,7 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
   files: sharedFiles,
   plugins: { perfectionist: perfectionistPlugin },
   rules: {
-    "perfectionist/sort-exports": ["error", { type }],
+    "perfectionist/sort-exports": ["error", { type, partitionByNewLine: true }],
     "perfectionist/sort-imports": [
       "error",
       {

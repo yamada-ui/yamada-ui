@@ -190,7 +190,7 @@
     "node_modules",
     "dist",
     "pnpm-lock.yaml",
-    "packages/components/lucide/src/icons/**",
+    "packages/react/src/components/icon/icons/**",
     "docs/pages/icons/tags.ts",
     "docs/constant/maintainers.ts",
     "docs/constant/members.ts",

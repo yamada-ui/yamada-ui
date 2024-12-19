@@ -62,11 +62,15 @@ export interface Component<Y extends As, D extends object = {}>
   <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
-export type FC<Y = {}> = FunctionComponent<Y>
+export type FC<Y extends object = {}, M extends As = "div"> = FunctionComponent<
+  Y,
+  M
+>
 
-export interface FunctionComponent<Y = {}> extends ComponentArgs {
-  (props: Y): React.ReactNode
-}
+export type FunctionComponent<
+  Y extends object = {},
+  M extends As = "div",
+> = Component<M, Y>
 
 export type As = React.ElementType
 

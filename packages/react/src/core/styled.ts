@@ -48,10 +48,10 @@ export function toCSSObject({
   }
 }
 
-export function styled<T extends As, P extends object = {}>(
-  el: T,
+export function styled<Y extends As, M extends object = {}>(
+  el: Y,
   { baseStyle, disableStyleProp, ...styledOptions }: StyledOptions = {},
-): UIComponent<T, P> {
+): UIComponent<Y, M> {
   if (!styledOptions.shouldForwardProp)
     styledOptions.shouldForwardProp = shouldForwardProp(disableStyleProp)
 
@@ -62,5 +62,5 @@ export function styled<T extends As, P extends object = {}>(
     styledOptions,
   )(CSSObject)
 
-  return Component as unknown as UIComponent<T, P>
+  return Component as unknown as UIComponent<Y, M>
 }

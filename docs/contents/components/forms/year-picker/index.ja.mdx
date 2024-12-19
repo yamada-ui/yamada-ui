@@ -28,10 +28,11 @@ import { YearPicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <YearPicker variant="outline" placeholder="outline" />
-  <YearPicker variant="filled" placeholder="filled" />
-  <YearPicker variant="flushed" placeholder="flushed" />
-  <YearPicker variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <YearPicker key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -39,8 +40,11 @@ import { YearPicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <YearPicker placeholder="solid" calendarVariant="solid" />
-  <YearPicker placeholder="subtle" calendarVariant="subtle" />
+  <For each={["solid", "subtle"]}>
+    {(variant, index) => (
+      <YearPicker key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -48,10 +52,11 @@ import { YearPicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <YearPicker placeholder="extra small size" size="xs" />
-  <YearPicker placeholder="small size" size="sm" />
-  <YearPicker placeholder="medium size" size="md" />
-  <YearPicker placeholder="large size" size="lg" />
+  <For each={["solid", "subtle"]}>
+    {(variant, index) => (
+      <YearPicker key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -223,9 +228,16 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <YearPicker isDisabled variant="outline" placeholder="outline" />
-  <YearPicker isDisabled variant="filled" placeholder="filled" />
-  <YearPicker isDisabled variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <YearPicker
+        key={index}
+        isDisabled
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -235,9 +247,16 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <YearPicker isReadOnly variant="outline" placeholder="outline" />
-  <YearPicker isReadOnly variant="filled" placeholder="filled" />
-  <YearPicker isReadOnly variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <YearPicker
+        key={index}
+        isReadOnly
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -247,9 +266,16 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <YearPicker isInvalid variant="outline" placeholder="outline" />
-  <YearPicker isInvalid variant="filled" placeholder="filled" />
-  <YearPicker isInvalid variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <YearPicker
+        key={index}
+        isInvalid
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 </VStack>
 ```
 

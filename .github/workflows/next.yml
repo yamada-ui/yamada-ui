@@ -16,6 +16,7 @@ concurrency:
 jobs:
   release:
     name: Release
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

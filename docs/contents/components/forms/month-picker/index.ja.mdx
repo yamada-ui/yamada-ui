@@ -28,10 +28,11 @@ import { MonthPicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <MonthPicker variant="outline" placeholder="outline" />
-  <MonthPicker variant="filled" placeholder="filled" />
-  <MonthPicker variant="flushed" placeholder="flushed" />
-  <MonthPicker variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <MonthPicker key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 

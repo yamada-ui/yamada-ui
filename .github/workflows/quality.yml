@@ -88,7 +88,6 @@ jobs:
 
   eslint:
     name: ESLint
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -132,7 +131,6 @@ jobs:
 
   prettier:
     name: Prettier
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

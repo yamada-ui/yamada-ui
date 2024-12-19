@@ -46,7 +46,7 @@
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --check . --cache",
+    "format": "prettier --ignore-path ../../.prettierignore --check . --cache",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },

@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react"
 import type { FC } from "react"
 import { Button } from "../../components/button"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../utils"
+import { extendConfig } from "../../theme"
 import { useAsyncCallback } from "./"
 
 const meta: Meta = {

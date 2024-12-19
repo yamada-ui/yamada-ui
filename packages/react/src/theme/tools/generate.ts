@@ -1,6 +1,6 @@
-import type { ThemeTokens } from "../core"
+import type { ThemeTokens } from "../../core"
 import { hslaTo, isArray, isString, parseToHsla, TONES } from "@yamada-ui/utils"
-import { defaultTheme } from "../theme"
+import { defaultTheme } from "../"
 
 function analyzeValue(value: any) {
   const n = parseFloat(value.toString())

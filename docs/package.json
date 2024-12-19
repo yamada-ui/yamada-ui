@@ -1,8 +1,9 @@
 {
   "name": "yamada-docs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
+    "clean": "rimraf .mdx .next .eslintcache *.tsbuildinfo node_modules",
     "dev": "tsx server",
     "start": "next start",
     "prebuild": "pnpm gen:content",
@@ -15,7 +16,7 @@
     "gen:styled-system": "tsx scripts/content/styled-system",
     "gen:props": "tsx scripts/component/props",
     "gen:search": "tsx scripts/content/search",
-    "gen:icon-tags": "tsx scripts/generate-icon-tags && eslint pages/icons/tags.ts --fix --flag unstable_ts_config",
+    "gen:icons": "tsx scripts/generate-icon-tags && eslint pages/icons/tags.ts --fix --flag unstable_ts_config",
     "gen:contributors": "tsx scripts/content/contributors && eslint constant/maintainers.ts constant/members.ts constant/emeriti.ts --fix --flag unstable_ts_config",
     "gen:translate": "tsx scripts/content/translate",
     "gen:label": "tsx scripts/content/label",
@@ -23,9 +24,7 @@
     "format": "prettier --check --cache .",
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
     "test": "vitest",
-    "test:watch": "vitest --watch",
-    "test:ui": "vitest --watch --ui",
-    "clean": "rimraf .mdx .next .eslintcache *.tsbuildinfo node_modules"
+    "test:dev": "vitest --watch --ui"
   },
   "dependencies": {
     "@emotion/cache": "11.11.0",

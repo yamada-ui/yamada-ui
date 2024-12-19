@@ -21,7 +21,7 @@
     "clean": "rimraf dist .turbo .eslintcache",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --check . --cache"
+    "format": "prettier --ignore-path ../../.prettierignore --check . --cache"
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",

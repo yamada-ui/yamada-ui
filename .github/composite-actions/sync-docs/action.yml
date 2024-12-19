@@ -11,13 +11,13 @@ runs:
     - name: Sync docs
       run: |
         pnpm gen:docs
-        pnpm docs:theme
-        pnpm docs:props
-        pnpm docs:changelog
-        pnpm docs:styled-system
-        pnpm docs:contributors
-        pnpm docs:search
-        pnpm docs:icon-tags
+        pnpm --prefix docs get:theme
+        pnpm --prefix docs get:props
+        pnpm --prefix docs get:changelog
+        pnpm --prefix docs get:styled-system
+        pnpm --prefix docs get:contributors
+        pnpm --prefix docs get:search
+        pnpm --prefix docs get:icons
       shell: bash
 
     - name: Create PR

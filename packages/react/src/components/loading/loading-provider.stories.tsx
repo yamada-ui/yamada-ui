@@ -2,7 +2,8 @@ import type { FC } from "react"
 import { useCallback, useEffect } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig, isValidElement } from "../../utils"
+import { extendConfig } from "../../theme"
+import { isValidElement } from "../../utils"
 import { Button } from "../button"
 import { Center } from "../center"
 import { Wrap } from "../flex"
@@ -86,6 +87,7 @@ export const UseCustomLoading = () => {
     loading: {
       custom: {
         component: ({ duration, initialState, message, onFinish }) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           useTimeout(onFinish, duration)
 
           return (

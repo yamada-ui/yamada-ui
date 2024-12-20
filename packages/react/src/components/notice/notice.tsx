@@ -100,7 +100,7 @@ const createNotice = (
 const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
   const { component } = options
 
-  const Render: FC<NoticeComponentProps> = async (props) => {
+  const Render: FC<NoticeComponentProps> = (props) => {
     if (typeof component === "function") {
       return component({ ...props, ...options })
     } else {

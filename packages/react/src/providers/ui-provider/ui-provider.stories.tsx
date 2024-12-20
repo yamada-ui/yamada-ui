@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { Center } from "../../components/center"
 import { Image } from "../../components/image"
-import { extendConfig } from "../../theme"
+import { extendConfig } from "../../tools"
 import { UIProvider } from "./ui-provider"
 
 export default {

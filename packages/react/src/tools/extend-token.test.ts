@@ -1,4 +1,4 @@
-import defaultTheme from "../"
+import defaultTheme from "../theme"
 import { extendToken } from "./extend-token"
 
 describe("extendToken", () => {

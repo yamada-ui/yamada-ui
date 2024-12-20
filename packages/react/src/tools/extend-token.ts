@@ -1,9 +1,9 @@
-import type { ThemeToken, ThemeTokens } from "../../core"
+import type { ThemeToken, ThemeTokens } from "../core"
 import {
   getMemoizedObject as get,
   merge as mergeObject,
 } from "@yamada-ui/utils"
-import { defaultTheme } from "../"
+import { defaultTheme } from "../theme"
 
 /**
  * Create a new token by inheriting the default token.

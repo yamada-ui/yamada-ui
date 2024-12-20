@@ -7,7 +7,7 @@ import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
 import { useBreakpoint, useBreakpointValue } from "../../hooks/use-breakpoint"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../theme"
+import { extendConfig } from "../../tools"
 
 export default {
   title: "Styled System / Responsive",

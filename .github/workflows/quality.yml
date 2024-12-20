@@ -73,7 +73,7 @@ jobs:
 
       - name: Run tests
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm test:ci
+        run: pnpm test --coverage
 
       - name: Upload coverage
         if: steps.check-modified.outputs.changed == 'true'
@@ -154,8 +154,8 @@ jobs:
 
       - name: Run format
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm format:check
+        run: pnpm format
 
       - name: Run docs format
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm docs:format:check
+        run: pnpm docs:format

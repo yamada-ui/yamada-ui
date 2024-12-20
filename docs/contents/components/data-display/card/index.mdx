@@ -42,15 +42,8 @@ import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <For
-    each={[
-      { variant: "elevated" },
-      { variant: "outline" },
-      { variant: "subtle" },
-      { variant: "solid" },
-    ]}
-  >
-    {({ variant }, index) => (
+  <For each={["elevated", "outline", "subtle", "solid"]}>
+    {(variant, index) => (
       <Card key={index} variant={variant}>
         <CardHeader>
           <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
@@ -72,10 +65,8 @@ import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <For
-    each={[{ size: "sm" }, { size: "md" }, { size: "normal" }, { size: "lg" }]}
-  >
-    {({ size }, index) => (
+  <For each={["sm", "md", "normal", "lg"]}>
+    {(size, index) => (
       <Card key={index} size={size}>
         <CardHeader>
           <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>

@@ -40,11 +40,9 @@ export const Portal = ({
   appendToParentPortal = true,
   children,
   containerRef,
-  disabled,
   isDisabled,
+  disabled = isDisabled,
 }: PortalProps) => {
-  disabled ??= isDisabled
-
   if (disabled) return children
 
   return containerRef ? (

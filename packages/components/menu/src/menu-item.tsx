@@ -87,18 +87,15 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       children,
       closeOnSelect: customCloseOnSelect,
       command,
-      disabled,
-      focusable,
-      icon,
       isDisabled,
+      disabled = isDisabled,
       isFocusable,
+      focusable = isFocusable,
+      icon,
       ...props
     },
     ref,
   ) => {
-    disabled ??= isDisabled
-    focusable ??= isFocusable
-
     const {
       closeOnSelect,
       focusedIndex,
@@ -119,9 +116,6 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
     const onKeyDownRef = useRef<KeyboardEventHandler<HTMLDivElement>>(
       () => void 0,
     )
-
-    id ??= uuid
-
     const trulyDisabled = disabled && !focusable
     const type = itemRef.current?.getAttribute("type")
     const role = !!type
@@ -129,10 +123,23 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
         ? "menuitemcheckbox"
         : "menuitemradio"
       : "menuitem"
-
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
-
     const focused = index === focusedIndex
+    const css: CSSUIObject = {
+      alignItems: "center",
+      color: "inherit",
+      display: "flex",
+      flex: "0 0 auto",
+      gap: "0.75rem",
+      outline: 0,
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
+      ...styles.item,
+    }
+
+    id ??= uuid
 
     const onMouseOver = useCallback(() => {
       if (disabled) return
@@ -238,20 +245,6 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
         children
       )
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      color: "inherit",
-      display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      textAlign: "start",
-      textDecoration: "none",
-      userSelect: "none",
-      width: "100%",
-      ...styles.item,
-    }
-
     return (
       <UpstreamMenuItemProvider
         value={{
@@ -319,17 +312,15 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
     {
       className,
-      checked,
+      isChecked,
+      checked = isChecked,
       children,
       closeOnSelect = false,
       icon,
-      isChecked,
       ...rest
     },
     ref,
   ) => {
-    checked ??= isChecked
-
     return (
       <MenuItem
         ref={ref}

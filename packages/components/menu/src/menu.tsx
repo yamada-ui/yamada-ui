@@ -40,34 +40,23 @@ export const Menu: FC<MenuProps> = (props) => {
     isProcessSkip: !!contextMenuStyles,
     styles: contextMenuStyles,
   })
-  let {
-    closeOnBlur,
+  const { relatedRef, onDownstreamCloseMapRef, onUpstreamClose } =
+    useUpstreamMenu() ?? {}
+  const nested = !!relatedRef
+  const {
+    closeOnBlur = !nested,
     closeOnSelect = true,
     duration = 0.2,
     initialFocusRef,
-    offset,
-    placement,
+    offset = nested ? [-8, 8] : undefined,
+    placement = nested ? "right-start" : "bottom-start",
     onClose: onCloseProp,
     onOpen: onOpenProp,
     ...rest
   } = omitThemeProps(mergedProps)
-  const { relatedRef, onDownstreamCloseMapRef, onUpstreamClose } =
-    useUpstreamMenu() ?? {}
   const { hasDownstreamRef, setDownstreamOpen } = useUpstreamMenuItem() ?? {}
-  const nested = !!relatedRef
-
-  if (nested) {
-    placement ??= "right-start"
-    offset ??= [-8, 8]
-    closeOnBlur ??= false
-  } else {
-    placement ??= "bottom-start"
-  }
-
   const descendants = useDescendants()
-
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-
   const menuRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))

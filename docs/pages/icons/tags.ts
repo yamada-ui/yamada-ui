@@ -6578,6 +6578,11 @@ export const TAGS: { [key: string]: string[] } = {
     "refresh",
     "backup",
     "undo",
+    "replay",
+    "redo",
+    "retry",
+    "rewind",
+    "reverse",
   ],
   RotateCcwSquare: [
     "left",

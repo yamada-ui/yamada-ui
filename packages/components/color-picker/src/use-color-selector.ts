@@ -221,7 +221,7 @@ export const useColorSelector = ({
     if (resolvedValue.startsWith("hsl")) {
       const { a, h, l, s } = convertHsla(resolvedValue, fallbackValue)
 
-      let channels: Channel[] = [
+      const channels: Channel[] = [
         { label: "H", max: 360, min: 0, space: "h", value: Math.round(h) },
         {
           label: "S(%)",
@@ -240,39 +240,33 @@ export const useColorSelector = ({
       ]
 
       if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            max: 100,
-            min: 0,
-            space: "a",
-            value: Math.round(a * 100),
-          },
-        ]
+        channels.push({
+          label: "A(%)",
+          max: 100,
+          min: 0,
+          space: "a",
+          value: Math.round(a * 100),
+        })
       }
 
       return channels
     } else {
       const { a, b, g, r } = convertRgba(resolvedValue, fallbackValue)
 
-      let channels: Channel[] = [
+      const channels: Channel[] = [
         { label: "R", max: 255, min: 0, space: "r", value: Math.round(r) },
         { label: "G", max: 255, min: 0, space: "g", value: Math.round(g) },
         { label: "B", max: 255, min: 0, space: "b", value: Math.round(b) },
       ]
 
       if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            max: 100,
-            min: 0,
-            space: "a",
-            value: Math.round(a * 100),
-          },
-        ]
+        channels.push({
+          label: "A(%)",
+          max: 100,
+          min: 0,
+          space: "a",
+          value: Math.round(a * 100),
+        })
       }
 
       return channels

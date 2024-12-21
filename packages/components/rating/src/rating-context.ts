@@ -13,7 +13,7 @@ interface RatingContext {
   filledIcon: ((value: number) => ReactNode) | ReactNode | undefined
   highlightSelectedOnly: boolean
   hoveredValue: number
-  isOutside: boolean
+  outside: boolean
   resolvedValue: number
   roundedValue: number
   setHoveredValue: Dispatch<SetStateAction<number>>

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { ReactElement, RefObject } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import {
@@ -22,11 +22,11 @@ interface StackOptions {
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIObject["alignItems"]
+  align?: CSSUIProps["alignItems"]
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * If `true`, each stack item will show a divider.
    *
@@ -36,7 +36,7 @@ interface StackOptions {
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIObject["justifyContent"]
+  justify?: CSSUIProps["justifyContent"]
   /**
    * If `true`, each stack item will show a separator.
    */
@@ -44,7 +44,7 @@ interface StackOptions {
   /**
    * The CSS `flex-wrap` property.
    */
-  wrap?: CSSUIObject["flexWrap"]
+  wrap?: CSSUIProps["flexWrap"]
 }
 
 export interface StackProps
@@ -66,14 +66,12 @@ export const Stack = forwardRef<StackProps, "div">(
       divider,
       gap = "fallback(md, 1rem)",
       justify: justifyContent,
-      separator,
+      separator = divider,
       wrap: flexWrap,
       ...rest
     },
     ref,
   ) => {
-    separator ??= divider
-
     const isColumn = (value: any) =>
       value === "column" || value === "column-reverse"
 

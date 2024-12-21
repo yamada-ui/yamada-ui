@@ -118,7 +118,7 @@ tab: Props
 <PropsCard
   id="toggle-onchange"
   name="onChange"
-  type="(isSelected: boolean) => void"
+  type="(selected: boolean) => void"
   description={"The callback invoked when selected state changes."}
 />
 
@@ -172,8 +172,9 @@ tab: Props
 <PropsCard
   id="togglegroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
+  deprecated={"Use `flexDirection` instead."}
 />
 
 <PropsCard

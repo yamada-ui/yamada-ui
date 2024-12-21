@@ -16,14 +16,14 @@ interface AutocompleteContext
     UseAutocompleteProps,
     "defaultValue" | "onChange" | "onCreate" | "value"
   > {
+  allSelected: boolean
+  empty: boolean
   focusedIndex: number
+  hit: boolean
   inputRef: RefObject<HTMLInputElement>
   inputValue: string
-  isAllSelected: boolean
-  isEmpty: boolean
-  isHit: boolean
-  isOpen: boolean
   label: string | string[] | undefined
+  open: boolean
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   setFocusedIndex: Dispatch<SetStateAction<number>>

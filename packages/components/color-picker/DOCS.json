@@ -16,6 +16,12 @@
       "description": "The initial value of the slider.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "focusThumbOnChange": {
       "type": "boolean",
       "defaultValue": true,
@@ -27,27 +33,37 @@
       "description": "Props for slider input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -84,6 +100,18 @@
     "overlays": {
       "type": "HTMLUIProps[]",
       "description": "The overlay used for the slider.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -317,15 +345,23 @@
       "description": "Props for color picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
@@ -345,12 +381,14 @@
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -432,7 +470,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -569,6 +607,12 @@
       "description": "The initial value of the color selector.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "eyeDropperProps": {
       "type": "ColorSelectorEyeDropperProps",
       "description": "Props for the eye dropper component.",
@@ -605,27 +649,37 @@
       "description": "Props for the color selector input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -652,6 +706,18 @@
     "onSwatchClick": {
       "type": "(value: string) => void",
       "description": "Function called whenever the color swatch click.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "saturationSliderProps": {
@@ -791,6 +857,12 @@
       "description": "The initial value of the slider.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "focusThumbOnChange": {
       "type": "boolean",
       "defaultValue": true,
@@ -802,27 +874,37 @@
       "description": "Props for slider input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -859,6 +941,18 @@
     "overlays": {
       "type": "HTMLUIProps[]",
       "description": "The overlay used for the slider.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -917,6 +1011,12 @@
       "description": "The initial value of the saturation slider.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
+      "required": false
+    },
     "focusThumbOnChange": {
       "type": "boolean",
       "defaultValue": true,
@@ -933,27 +1033,37 @@
       "description": "Props for saturation slider input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -986,6 +1096,18 @@
       "type": "UIValue<number>",
       "defaultValue": "'16 / 9'",
       "description": "The aspect ratio of the saturation slider.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {

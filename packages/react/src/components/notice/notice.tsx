@@ -11,7 +11,7 @@ import type { AlertProps } from "../alert"
 import { useMemo } from "react"
 import { ui } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { cx, merge } from "../../utils"
+import { cx, isFunction, merge } from "../../utils"
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../alert"
 import { CloseButton } from "../close-button"
 
@@ -101,7 +101,7 @@ const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
   const { component } = options
 
   const Render: FC<NoticeComponentProps> = (props) => {
-    if (typeof component === "function") {
+    if (isFunction(component)) {
       return component({ ...props, ...options })
     } else {
       return <Notice {...props} {...options} />

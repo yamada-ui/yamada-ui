@@ -4,7 +4,7 @@ import { cloneElement, useRef } from "react"
 import { ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { cx, getValidChildren, isValidElement } from "../../utils"
-import { ChevronIcon, CloseIcon } from "../icon"
+import { ChevronDownIcon, XIcon } from "../icon/icons"
 import { useAutocompleteContext } from "./autocomplete-context"
 
 export interface AutocompleteIconProps extends HTMLUIProps {}
@@ -50,7 +50,7 @@ export const AutocompleteIcon: FC<AutocompleteIconProps> = ({
       __css={css}
       {...rest}
     >
-      {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+      {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
     </ui.div>
   )
 }
@@ -81,7 +81,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon boxSize="5.5" />}
     </AutocompleteIcon>
   )
 }

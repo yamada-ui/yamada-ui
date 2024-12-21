@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react"
 import type { FC } from "react"
 import { Button } from "../../components/button"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../theme"
+import { extendConfig } from "../../tools"
 import { useAsyncCallback } from "./"
 
 const meta: Meta = {
@@ -22,7 +22,7 @@ export const Basic = () => {
   }, [])
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={isLoading} onClick={onClick}>
       Click me
     </Button>
   )
@@ -38,7 +38,7 @@ export const WithLoading = () => {
   )
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={isLoading} onClick={onClick}>
       Click me
     </Button>
   )
@@ -64,7 +64,7 @@ const App: FC = () => {
   }, [])
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={isLoading} onClick={onClick}>
       Click me
     </Button>
   )

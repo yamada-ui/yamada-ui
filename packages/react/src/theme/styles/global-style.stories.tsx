@@ -3,7 +3,7 @@ import type { UIStyle } from "../../core"
 import { Center } from "../../components/center"
 import { Image } from "../../components/image"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendTheme } from "../tools"
+import { extendTheme } from "../../tools"
 
 export default {
   title: "Theme / Global Style",

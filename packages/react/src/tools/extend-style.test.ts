@@ -1,4 +1,4 @@
-import defaultTheme from "../"
+import defaultTheme from "../theme"
 import { extendStyle } from "./extend-style"
 
 describe("extendStyle", () => {

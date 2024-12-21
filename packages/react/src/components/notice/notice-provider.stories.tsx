@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../theme"
+import { extendConfig } from "../../tools"
 import { Button } from "../button"
 import { Center } from "../center"
 import { useNotice } from "./notice"

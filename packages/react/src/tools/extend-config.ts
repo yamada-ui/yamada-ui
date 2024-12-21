@@ -1,6 +1,6 @@
-import type { ThemeConfig } from "../../core"
+import type { ThemeConfig } from "../core"
 import { merge as mergeObject } from "@yamada-ui/utils"
-import { defaultConfig } from "../"
+import { defaultConfig } from "../theme"
 
 /**
  * Create a new config by inheriting the default config.

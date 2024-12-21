@@ -1,5 +1,5 @@
-import type { ThemeConfig } from "../../core"
-import { defaultConfig } from "../"
+import type { ThemeConfig } from "../core"
+import { defaultConfig } from "../theme"
 import { extendConfig } from "./extend-config"
 
 describe("extendConfig", () => {

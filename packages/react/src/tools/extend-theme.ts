@@ -1,5 +1,5 @@
 import type { Dict } from "@yamada-ui/utils"
-import type { UsageTheme } from "../../core"
+import type { UsageTheme } from "../core"
 import {
   isFunction,
   merge as mergeObject,
@@ -7,7 +7,7 @@ import {
   pickObject,
   runIfFunc,
 } from "@yamada-ui/utils"
-import { baseTheme, defaultTheme } from "../"
+import { baseTheme, defaultTheme } from "../theme"
 
 interface Options {
   merge?: boolean

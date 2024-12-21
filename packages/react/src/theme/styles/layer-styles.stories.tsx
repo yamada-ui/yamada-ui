@@ -1,7 +1,7 @@
 import type { LayerStyles } from "../../core"
 import { Center } from "../../components/center"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendTheme } from "../tools"
+import { extendTheme } from "../../tools"
 
 export default {
   title: "Theme / Layer Style",

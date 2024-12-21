@@ -1,6 +1,6 @@
 import { Heading } from "../../components/heading"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendTheme } from "../tools"
+import { extendTheme } from "../../tools"
 
 export default {
   title: "Theme / Other Style",

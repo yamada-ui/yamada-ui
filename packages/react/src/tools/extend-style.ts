@@ -1,11 +1,11 @@
-import type { UIStyle, UIStyleProps } from "../../core"
+import type { UIStyle, UIStyleProps } from "../core"
 import {
   getMemoizedObject as get,
   merge as mergeObject,
   noop,
   runIfFunc,
 } from "@yamada-ui/utils"
-import { defaultTheme } from "../"
+import { defaultTheme } from "../theme"
 
 /**
  * Create a new style by inheriting the default style.

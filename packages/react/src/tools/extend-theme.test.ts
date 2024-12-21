@@ -1,6 +1,6 @@
-import type { UsageTheme } from "../../core"
-import defaultTheme, { baseTheme } from "../"
-import { omitObject } from "../../utils"
+import type { UsageTheme } from "../core"
+import defaultTheme, { baseTheme } from "../theme"
+import { omitObject } from "../utils"
 import { extendBaseTheme, extendTheme } from "./extend-theme"
 
 describe("extendTheme", () => {

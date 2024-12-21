@@ -20,7 +20,7 @@ import {
   extendStyle,
   extendTheme,
   extendToken,
-} from "../../theme"
+} from "../../tools"
 import { useColorMode } from "../color-mode-provider"
 import { UIProvider } from "../ui-provider"
 import { useTheme } from "./theme-provider"

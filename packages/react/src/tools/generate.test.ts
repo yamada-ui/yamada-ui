@@ -160,7 +160,7 @@ describe("generate", () => {
 
       vi.resetModules()
 
-      const { generate } = await import("../../utils/theme")
+      const { generate } = await import("../utils/theme")
 
       const spaces = generate.spaces(2)
 

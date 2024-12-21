@@ -1,7 +1,6 @@
 import type {
   ColorModeToken,
   CSS,
-  CSSUIObject,
   FC,
   HTMLUIProps,
   ThemeProps,
@@ -46,13 +45,14 @@ export const Input: FC<InputProps> = (props) => {
   const { className, htmlSize, __css, ...rest } =
     useFormControlProps(computedProps)
 
-  const css: CSSUIObject = { ...styles.field, ...__css }
-
   return (
     <ui.input
       className={cx("ui-input", className)}
       size={htmlSize}
-      __css={css}
+      __css={{
+        ...styles.field,
+        ...__css,
+      }}
       {...rest}
     />
   )

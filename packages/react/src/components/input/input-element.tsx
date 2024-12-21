@@ -1,4 +1,4 @@
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import { ui } from "../../core"
 import { cx } from "../../utils"
 import { useInputGroup } from "./input-context"
@@ -46,26 +46,17 @@ const InputElement: FC<InputElementProps> = ({
 }) => {
   const { fieldFontSize, fieldHeight, styles } = useInputGroup()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    cursor: clickable ? "pointer" : "auto",
-    display: "flex",
-    fontSize: fieldFontSize,
-    h: "100%",
-    justifyContent: "center",
-    [placement === "left" ? "insetStart" : "insetEnd"]: "0",
-    pointerEvents: clickable ? "auto" : "none",
-    position: "absolute",
-    top: "0",
-    w: fieldHeight,
-    zIndex: "fallback(kurillin, 9)",
-    ...styles.element,
-  }
-
   return (
     <ui.div
       className={cx("ui-input__element", className)}
-      __css={css}
+      __css={{
+        cursor: clickable ? "pointer" : "auto",
+        fontSize: fieldFontSize,
+        [placement === "left" ? "insetStart" : "insetEnd"]: "0",
+        pointerEvents: clickable ? "auto" : "none",
+        w: fieldHeight,
+        ...styles.element,
+      }}
       {...rest}
     />
   )

@@ -4,9 +4,22 @@ import { getColor, isArray } from "../../utils"
 
 export const Input: ComponentMultiStyle<"Input"> = {
   baseStyle: {
-    container: {},
+    addon: {
+      alignItems: "center",
+      display: "flex",
+      flex: "0 0 auto",
+      w: "auto",
+      whiteSpace: "nowrap",
+    },
     element: {
+      alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      display: "flex",
+      h: "100%",
+      justifyContent: "center",
+      position: "absolute",
+      top: "0",
+      zIndex: "fallback(kurillin, 9)",
     },
     field: {
       appearance: "none",
@@ -20,6 +33,11 @@ export const Input: ComponentMultiStyle<"Input"> = {
         cursor: "not-allowed",
         opacity: 0.4,
       },
+    },
+    group: {
+      display: "flex",
+      position: "relative",
+      width: "100%",
     },
   },
 

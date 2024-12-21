@@ -1,4 +1,4 @@
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import { ui } from "../../core"
 import { cx } from "../../utils"
 import { useInputGroup } from "./input-context"
@@ -32,20 +32,13 @@ const InputAddon: FC<InputAddonProps> = ({
     },
   }
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    flex: "0 0 auto",
-    w: "auto",
-    whiteSpace: "nowrap",
-    ...styles.addon,
-    ...placementStyles[placement],
-  }
-
   return (
     <ui.div
       className={cx("ui-input__addon", className)}
-      __css={css}
+      __css={{
+        ...styles.addon,
+        ...placementStyles[placement],
+      }}
       {...rest}
     />
   )

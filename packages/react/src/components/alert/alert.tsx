@@ -8,15 +8,15 @@ import type {
 import type { LoadingProps } from "../loading"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx } from "../../utils"
-import { CheckIcon, InfoIcon, WarningIcon } from "../icon"
+import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { Loading } from "../loading"
 
 const statuses = {
-  error: { colorScheme: "danger", icon: WarningIcon },
+  error: { colorScheme: "danger", icon: TriangleAlertIcon },
   info: { colorScheme: "info", icon: InfoIcon },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CheckIcon },
-  warning: { colorScheme: "warning", icon: WarningIcon },
+  success: { colorScheme: "success", icon: CircleCheckBigIcon },
+  warning: { colorScheme: "warning", icon: TriangleAlertIcon },
 } as const
 
 interface AlertContext {

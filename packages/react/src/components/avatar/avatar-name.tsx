@@ -39,4 +39,5 @@ export const AvatarName: FC<AvatarNameProps> = ({
   )
 }
 
+AvatarName.displayName = "AvatarName"
 AvatarName.__ui__ = "AvatarName"

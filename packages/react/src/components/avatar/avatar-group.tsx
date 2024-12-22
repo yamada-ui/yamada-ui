@@ -90,4 +90,5 @@ export const AvatarGroup: FC<AvatarGroupProps> = (props) => {
   )
 }
 
+AvatarGroup.displayName = "AvatarGroup"
 AvatarGroup.__ui__ = "AvatarGroup"

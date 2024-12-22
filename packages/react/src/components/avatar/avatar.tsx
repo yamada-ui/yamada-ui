@@ -4,9 +4,9 @@ import type { ImageProps, UseImageProps } from "../image"
 import { cloneElement, useState } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx, dataAttr, handlerAll } from "../../utils"
+import { UserRoundIcon } from "../icon"
 import { useImage } from "../image"
 import { AvatarName } from "./avatar-name"
-import { UserRoundIcon } from "../icon"
 
 interface AvatarContext {
   [key: string]: CSSUIObject | undefined
@@ -139,6 +139,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   )
 }
 
+Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
 interface AvatarImageProps
@@ -195,4 +196,5 @@ const AvatarImage: FC<AvatarImageProps> = ({
   )
 }
 
+AvatarImage.displayName = "AvatarImage"
 AvatarImage.__ui__ = "AvatarImage"

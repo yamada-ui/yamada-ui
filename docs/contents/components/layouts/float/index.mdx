@@ -31,40 +31,42 @@ import { Float } from "@yamada-ui/react"
 To change the display position, specify `placement` such as `start-start` or `end-center`.
 
 ```tsx functional=true
-const placements = [
-  "start-start",
-  "start-center",
-  "start-end",
-  "center-start",
-  "center-center",
-  "center-end",
-  "end-start",
-  "end-center",
-  "end-end",
-] as const
-
 return (
-  <Grid w="fit-content" gap="md" p="md" templateColumns="repeat(3, 1fr)">
-    {placements.map((placement) => (
-      <GridItem
-        key={placement}
-        bg={["blackAlpha.50", "whiteAlpha.50"]}
-        boxSize="3xs"
-        position="relative"
-      >
-        <Float placement={placement}>
-          <Center
-            bg="primary"
-            color="white"
-            fontSize="sm"
-            px="1.5"
-            rounded="md"
-          >
-            New
-          </Center>
-        </Float>
-      </GridItem>
-    ))}
+  <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+    <For
+      each={[
+        "start-start",
+        "start-center",
+        "start-end",
+        "center-start",
+        "center-center",
+        "center-end",
+        "end-start",
+        "end-center",
+        "end-end",
+      ]}
+    >
+      {(placement, index) => (
+        <GridItem
+          key={index}
+          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          boxSize="3xs"
+          position="relative"
+        >
+          <Float placement={placement}>
+            <Center
+              bg="primary"
+              color="white"
+              fontSize="sm"
+              px="1.5"
+              rounded="md"
+            >
+              New
+            </Center>
+          </Float>
+        </GridItem>
+      )}
+    </For>
   </Grid>
 )
 ```
@@ -82,7 +84,7 @@ If the size of the element causes it to be positioned unexpectedly, adjust it us
       { placement: "end-end", offset: ["md", "0"] },
     ]}
   >
-    {(variant, index) => (
+    {({ placement, offset }, index) => (
       <GridItem
         bg={["blackAlpha.50", "whiteAlpha.50"]}
         boxSize="3xs"

@@ -2,6 +2,7 @@ import type { ReactElement } from "react"
 import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
 import { ui } from "../../core"
 import { cx } from "../../utils"
+import { MinusIcon } from "../icon"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import { useAutocompleteEmpty } from "./use-autocomplete-option"
@@ -56,7 +57,7 @@ export const AutocompleteEmpty: FC<AutocompleteEmptyProps> = ({
     >
       {icon !== null ? (
         <AutocompleteItemIcon>
-          {icon || <AutocompleteMinusIcon />}
+          {icon || <MinusIcon boxSize="5.5" />}
         </AutocompleteItemIcon>
       ) : null}
 
@@ -72,14 +73,3 @@ export const AutocompleteEmpty: FC<AutocompleteEmptyProps> = ({
 }
 
 AutocompleteEmpty.__ui__ = "AutocompleteEmpty"
-
-const AutocompleteMinusIcon: FC = () => (
-  <svg height="1em" viewBox="0 0 448 512" width="1em">
-    <path
-      d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"
-      fill="currentColor"
-    />
-  </svg>
-)
-
-AutocompleteMinusIcon.__ui__ = "AutocompleteMinusIcon"

@@ -5,8 +5,8 @@ import { cloneElement, useState } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx, dataAttr, handlerAll } from "../../utils"
 import { useImage } from "../image"
-import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
+import { UserRoundIcon } from "../icon"
 
 interface AvatarContext {
   [key: string]: CSSUIObject | undefined
@@ -153,7 +153,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   borderRadius,
   crossOrigin,
   format,
-  icon = <AvatarIcon />,
+  icon = <UserRoundIcon boxSize="calc(100% / 1.5)" />,
   ignoreFallback,
   loading,
   referrerPolicy,

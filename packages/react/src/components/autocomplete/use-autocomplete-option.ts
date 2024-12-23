@@ -45,22 +45,6 @@ export interface UseAutocompleteOptionProps
    */
   focusable?: boolean
   /**
-   * If `true`, the autocomplete option will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the autocomplete option will be focusable.
-   *
-   * @default false
-   *
-   * @deprecated Use `focusable` instead.
-   */
-  isFocusable?: boolean
-  /**
    * The value of the autocomplete option.
    */
   value?: string
@@ -85,10 +69,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     id = uuid,
     children,
     closeOnSelect: customCloseOnSelect,
-    isDisabled,
-    disabled = isDisabled,
-    isFocusable,
-    focusable = isFocusable,
+    disabled,
+    focusable,
     icon: customIcon,
     value: optionValue,
     ...computedProps

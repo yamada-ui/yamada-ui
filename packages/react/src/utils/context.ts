@@ -1,7 +1,7 @@
 import { use } from "react"
 import * as React from "react"
 
-export type MaybeRenderProp<Y> =
+export type ReactNodeOrFunction<Y> =
   | ((props: Y) => React.ReactNode)
   | React.ReactNode
 
@@ -39,7 +39,7 @@ export function createContext<Y = any>({
   name = "Context",
   defaultValue,
   errorMessage,
-  hookName = "useContext",
+  hookName = `use${name}`,
   strict = true,
 }: Options<Y> = {}) {
   const Context = React.createContext<undefined | Y>(defaultValue)

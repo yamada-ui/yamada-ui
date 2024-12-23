@@ -4,8 +4,8 @@ import type { ImageProps, UseImageProps } from "../image"
 import { cloneElement, useState } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx, dataAttr, handlerAll } from "../../utils"
+import { UserRoundIcon } from "../icon"
 import { useImage } from "../image"
-import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
 
 interface AvatarContext {
@@ -139,6 +139,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   )
 }
 
+Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
 interface AvatarImageProps
@@ -153,7 +154,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   borderRadius,
   crossOrigin,
   format,
-  icon = <AvatarIcon />,
+  icon = <UserRoundIcon boxSize="calc(100% / 1.5)" />,
   ignoreFallback,
   loading,
   referrerPolicy,
@@ -195,4 +196,5 @@ const AvatarImage: FC<AvatarImageProps> = ({
   )
 }
 
+AvatarImage.displayName = "AvatarImage"
 AvatarImage.__ui__ = "AvatarImage"

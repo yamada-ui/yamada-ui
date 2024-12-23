@@ -259,8 +259,8 @@ export function memoizeObject(func: typeof getObject) {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export function assignAfter(target: { [key: string]: any }, ...sources: any[]) {
-  const result: { [key: string]: unknown } = { ...target }
+export function assignAfter(target: Dict, ...sources: any[]) {
+  const result: Dict = { ...target }
 
   for (const nextSource of sources) {
     if (nextSource == null) continue

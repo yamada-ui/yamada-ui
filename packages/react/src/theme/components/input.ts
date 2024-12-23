@@ -11,6 +11,11 @@ export const Input: ComponentMultiStyle<"Input"> = {
       w: "auto",
       whiteSpace: "nowrap",
     },
+    container: {
+      display: "flex",
+      position: "relative",
+      width: "100%",
+    },
     element: {
       alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
@@ -33,11 +38,6 @@ export const Input: ComponentMultiStyle<"Input"> = {
         cursor: "not-allowed",
         opacity: 0.4,
       },
-    },
-    group: {
-      display: "flex",
-      position: "relative",
-      width: "100%",
     },
   },
 

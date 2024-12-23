@@ -74,7 +74,7 @@ export const InputGroup: FC<InputGroupProps> = (props) => {
         role="group"
         __css={{
           vars,
-          ...styles.group,
+          ...styles.container,
         }}
         {...rest}
       >

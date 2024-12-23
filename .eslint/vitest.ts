@@ -10,6 +10,7 @@ export const vitestConfig: Linter.Config = {
   rules: {
     ...vitestPlugin.configs.recommended.rules,
     "vitest/expect-expect": "off",
+    "vitest/no-commented-out-tests": "off",
 
     "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/no-alias-methods": "error",

@@ -54,14 +54,6 @@ interface MultiDatePickerOptions {
    */
   focusBorderColor?: string
   /**
-   * If `true`, display the date picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * If `true`, keep the placeholder.
    *
    * @default false
@@ -125,8 +117,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     const {
       className,
       children,
-      isClearable = true,
-      clearable = isClearable,
+      clearable = true,
       color,
       component,
       h,

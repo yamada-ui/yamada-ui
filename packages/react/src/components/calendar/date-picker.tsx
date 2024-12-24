@@ -46,14 +46,6 @@ interface DatePickerOptions {
    */
   focusBorderColor?: string
   /**
-   * If `true`, display the date picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * Props for date picker clear icon element.
    */
   clearIconProps?: DatePickerIconProps
@@ -101,8 +93,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const {
     className,
     children,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     color,
     h,
     height = h,

@@ -29,8 +29,9 @@ interface UIComponents {
 }
 
 export interface MarkdownComponents extends Components, UIComponents {}
-export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
-  JSX.IntrinsicElements[Y]
+export type MarkdownComponentProps<
+  Y extends keyof React.JSX.IntrinsicElements,
+> = React.JSX.IntrinsicElements[Y]
 
 const uiComponents = ({
   codeProps,

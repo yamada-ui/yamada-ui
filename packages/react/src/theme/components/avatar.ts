@@ -6,8 +6,12 @@ export const Avatar: ComponentMultiStyle<"Avatar"> = {
   baseStyle: {
     name: {},
     badge: {
+      alignItems: "center",
       borderColor: ["white", "black"],
       borderWidth: "0.2em",
+      display: "flex",
+      justifyContent: "center",
+      position: "absolute",
       rounded: "full",
     },
     container: ({ name: string, colorMode: m, theme: t }) => {
@@ -16,9 +20,17 @@ export const Avatar: ComponentMultiStyle<"Avatar"> = {
         : mode("gray.200", "gray.500")(m)
 
       return {
+        alignItems: "center",
         bg,
         borderColor: ["white", "black"],
         color: isDark(bg)(t, m) ? "white" : "black",
+        display: "inline-flex",
+        flexShrink: 0,
+        fontWeight: "medium",
+        justifyContent: "center",
+        position: "relative",
+        textAlign: "center",
+        textTransform: "uppercase",
         verticalAlign: "top",
         _loaded: { bg: "inherit" },
       }
@@ -27,7 +39,12 @@ export const Avatar: ComponentMultiStyle<"Avatar"> = {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
       borderColor: ["white", "black"],
     },
-    group: {},
+    group: {
+      alignItems: "center",
+      display: "flex",
+      flexDirection: "row-reverse",
+      justifyContent: "flex-end",
+    },
   },
 
   sizes: {

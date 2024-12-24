@@ -39,14 +39,6 @@ interface MonthPickerOptions {
    */
   focusBorderColor?: string
   /**
-   * If `true`, display the month picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * Props for month picker clear icon element.
    */
   clearIconProps?: DatePickerIconProps
@@ -94,8 +86,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   const {
     className,
     children,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     color,
     h,
     height = h,

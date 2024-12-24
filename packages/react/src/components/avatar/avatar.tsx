@@ -93,7 +93,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -111,7 +111,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     <AvatarContext value={styles}>
       <ui.span
         className={cx("ui-avatar", className)}
-        data-loaded={dataAttr(isLoaded)}
+        data-loaded={dataAttr(loaded)}
         borderRadius={borderRadius}
         rounded={rounded}
         __css={css}
@@ -131,7 +131,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
           referrerPolicy={referrerPolicy}
           rounded={rounded}
           onError={onError}
-          onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
+          onLoad={handlerAll(onLoad, () => setLoaded(true))}
         />
         {children}
       </ui.span>
@@ -164,11 +164,11 @@ const AvatarImage: FC<AvatarImageProps> = ({
 }) => {
   const status = useImage({ src, crossOrigin, ignoreFallback, onError, onLoad })
 
-  const isLoaded = status === "loaded"
+  const loaded = status === "loaded"
 
-  const isFallback = !src || !isLoaded
+  const fallback = !src || !loaded
 
-  if (isFallback)
+  if (fallback)
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (

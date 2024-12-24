@@ -1,5 +1,5 @@
 import type { StyledOptions } from "@yamada-ui/core"
-import type { ForwardRefExoticComponent } from "react"
+import type { ComponentType, ForwardRefExoticComponent } from "react"
 import type { MotionAs, MotionComponents, MotionFactory } from "./motion.types"
 import { styled } from "@yamada-ui/core"
 import { motion as _motion } from "motion/react"
@@ -7,7 +7,7 @@ import { motion as _motion } from "motion/react"
 interface Factory extends MotionFactory, MotionComponents {}
 
 function factory() {
-  const cache = new Map<MotionAs, ForwardRefExoticComponent<any>>()
+  const cache = new Map<MotionAs, ComponentType<any>>()
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [MotionAs, StyledOptions]) => {

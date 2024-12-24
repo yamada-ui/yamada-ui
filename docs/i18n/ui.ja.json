@@ -152,6 +152,9 @@
     },
     "footer": {
       "description": "このライブラリは、`Hirotomo Yamada`と`愉快な仲間たち`によって開発されました。"
+    },
+    "confetti": {
+      "button": "クリスマスを削除する"
     }
   }
 }

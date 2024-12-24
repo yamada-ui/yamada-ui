@@ -24,7 +24,7 @@ export const Input: ComponentMultiStyle<"Input"> = {
       justifyContent: "center",
       position: "absolute",
       top: "0",
-      zIndex: "fallback(kurillin, 9)",
+      zIndex: "kurillin",
     },
     field: {
       appearance: "none",

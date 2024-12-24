@@ -95,18 +95,6 @@ export const Avatar: FC<AvatarProps> = (props) => {
 
   const [loaded, setLoaded] = useState<boolean>(false)
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    flexShrink: 0,
-    fontWeight: "medium",
-    justifyContent: "center",
-    position: "relative",
-    textAlign: "center",
-    textTransform: "uppercase",
-    ...styles.container,
-  }
-
   return (
     <AvatarContext value={styles}>
       <ui.span
@@ -114,7 +102,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
         data-loaded={dataAttr(loaded)}
         borderRadius={borderRadius}
         rounded={rounded}
-        __css={css}
+        __css={styles.container}
         {...rest}
       >
         <AvatarImage
@@ -175,12 +163,6 @@ const AvatarImage: FC<AvatarImageProps> = ({
       cloneElement(icon, { "aria-label": alt ?? "Avatar Icon", role: "img" })
     )
 
-  const css: CSSUIObject = {
-    height: "100%",
-    objectFit: "cover",
-    width: "100%",
-  }
-
   return (
     <ui.img
       src={src}
@@ -191,7 +173,11 @@ const AvatarImage: FC<AvatarImageProps> = ({
       loading={loading}
       referrerPolicy={referrerPolicy}
       rounded={rounded}
-      __css={css}
+      __css={{
+        height: "100%",
+        objectFit: "cover",
+        width: "100%",
+      }}
     />
   )
 }

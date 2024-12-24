@@ -6,10 +6,14 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
       "&[aria-disabled=true]": {
         cursor: "default",
       },
+      alignItems: "center",
+      display: "inline-flex",
+      outline: 0,
       px: "4",
       py: "3",
       transitionDuration: "normal",
       transitionProperty: "common",
+      width: "100%",
       _focusVisible: {
         boxShadow: "outline",
       },
@@ -18,13 +22,19 @@ export const Accordion: ComponentMultiStyle<"Accordion"> = {
         opacity: 0.4,
       },
     },
-    container: {},
+    container: {
+      width: "100%",
+    },
     icon: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
       fontSize: "1.25em",
       ml: "auto",
+      transformOrigin: "center",
+      transition: "transform 0.2s",
     },
-    item: {},
+    item: {
+      overflowAnchor: "none",
+    },
     panel: {
       pb: "3",
       px: "4",

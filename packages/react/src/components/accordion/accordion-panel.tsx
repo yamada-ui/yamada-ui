@@ -1,4 +1,4 @@
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import type { WithTransitionProps } from "../motion"
 import type { CollapseProps } from "../transitions"
 import { ui } from "../../core"
@@ -36,8 +36,6 @@ export const AccordionPanel: FC<AccordionPanelProps> = ({
   const resolvedChildren =
     typeof children === "string" ? <p>{children}</p> : children
 
-  const css: CSSUIObject = { ...styles.panel }
-
   return (
     <Collapse
       {...{
@@ -55,7 +53,7 @@ export const AccordionPanel: FC<AccordionPanelProps> = ({
       <ui.div
         {...getPanelProps(rest, ref)}
         className={cx("ui-accordion__panel", className)}
-        __css={css}
+        __css={styles.panel}
       >
         {resolvedChildren}
       </ui.div>

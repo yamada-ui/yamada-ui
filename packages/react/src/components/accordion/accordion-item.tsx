@@ -1,5 +1,5 @@
 import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, PropGetter } from "../../core"
+import type { FC, HTMLUIProps, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
 import { ui } from "../../core"
 import {
@@ -216,8 +216,6 @@ export const AccordionItem: FC<AccordionItemProps> = ({
     [itemId, panelId],
   )
 
-  const css: CSSUIObject = { ...styles.item, overflowAnchor: "none" }
-
   const cloneLabel =
     typeof label === "function"
       ? label({
@@ -252,7 +250,7 @@ export const AccordionItem: FC<AccordionItemProps> = ({
       <ui.div
         className={cx("ui-accordion__item", className)}
         data-expanded={dataAttr(open)}
-        __css={css}
+        __css={styles.item}
         {...rest}
       >
         {customAccordionLabel ?? <AccordionLabel>{cloneLabel}</AccordionLabel>}

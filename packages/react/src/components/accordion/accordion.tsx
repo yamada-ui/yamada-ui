@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import { useEffect, useState } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -133,8 +133,6 @@ export const Accordion: FC<AccordionProps> = (props) => {
     return () => setFocusedIndex(-1)
   }, [])
 
-  const css: CSSUIObject = { w: "100%", ...styles.container }
-
   return (
     <DescendantsContextProvider value={descendants}>
       <AccordionProvider
@@ -152,7 +150,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
       >
         <ui.div
           className={cx("ui-accordion", className)}
-          __css={css}
+          __css={styles.container}
           {...rest}
         />
       </AccordionProvider>

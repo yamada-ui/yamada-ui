@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import type { IconProps } from "../icon"
 import { ui } from "../../core"
 import { cx } from "../../utils"
@@ -54,14 +54,6 @@ export const AccordionLabel: FC<AccordionLabelProps> = ({
   } = useAccordionItemContext()
   const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    outline: 0,
-    width: "100%",
-    ...styles.button,
-  }
-
   const cloneCustomIcon =
     typeof customIcon === "function"
       ? customIcon({
@@ -97,7 +89,7 @@ export const AccordionLabel: FC<AccordionLabelProps> = ({
       <ui.button
         {...getLabelProps(rest, ref)}
         className={cx("ui-accordion__label", className)}
-        __css={css}
+        __css={styles.button}
       >
         {children}
 
@@ -123,14 +115,6 @@ const AccordionIcon: FC<AccordionIconProps> = ({
   const { disabled, open } = useAccordionItemContext()
   const { styles } = useAccordionContext()
 
-  const css: CSSUIObject = {
-    opacity: disabled ? 0.4 : 1,
-    transform: open ? "rotate(-180deg)" : undefined,
-    transformOrigin: "center",
-    transition: "transform 0.2s",
-    ...styles.icon,
-  }
-
   if (children)
     return (
       <ui.span
@@ -151,7 +135,11 @@ const AccordionIcon: FC<AccordionIconProps> = ({
     <ChevronIcon
       className={cx("ui-accordion__icon", className)}
       aria-hidden
-      __css={css}
+      __css={{
+        opacity: disabled ? 0.4 : 1,
+        transform: open ? "rotate(-180deg)" : undefined,
+        ...styles.icon,
+      }}
       {...rest}
     />
   )

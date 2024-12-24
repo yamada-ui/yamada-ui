@@ -5,11 +5,15 @@ import { getColor, isArray, transparentizeColor } from "../../utils"
 export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
   baseStyle: ({ colorMode: m, theme: t }) => ({
     container: {
+      alignItems: "center",
       bg: ["blackAlpha.50", "whiteAlpha.50"],
       color: "muted",
+      display: "flex",
+      justifyContent: "center",
       outline: 0,
       overflow: "hidden",
       p: "md",
+      position: "relative",
       rounded: "md",
       transitionDuration: "normal",
       transitionProperty: "common",
@@ -36,7 +40,15 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
       },
     },
     overlay: {
+      alignItems: "center",
       bg: ["whiteAlpha.600", "blackAlpha.600"],
+      display: "flex",
+      h: "100%",
+      justifyContent: "center",
+      left: 0,
+      position: "absolute",
+      top: 0,
+      w: "100%",
       zIndex: "kurillin",
     },
   }),

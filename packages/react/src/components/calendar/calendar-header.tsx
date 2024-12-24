@@ -6,7 +6,7 @@ import type { UseCalendarHeaderProps } from "./use-calendar-header"
 import { ui } from "../../core"
 import { cx, isValidElement } from "../../utils"
 import { Button, IconButton } from "../button"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "../icon"
 import { useCalendarContext } from "./use-calendar"
 import { useCalendarHeader } from "./use-calendar-header"
 
@@ -146,7 +146,7 @@ const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
   }
 
   return (
-    <ChevronIcon
+    <ChevronDownIcon
       className={cx("ui-calendar__header__label__icon", className)}
       __css={css}
       {...rest}
@@ -167,7 +167,7 @@ const CalendarControlPrev: FC<CalendarControlSharedProps> = ({
   return (
     <CalendarControl
       className={cx("ui-calendar__header__control--prev", className)}
-      icon={<ChevronIcon __css={{ transform: "rotate(90deg)" }} />}
+      icon={<ChevronLeftIcon />}
       operation="prev"
       {...rest}
     />
@@ -184,7 +184,7 @@ const CalendarControlNext: FC<CalendarControlSharedProps> = ({
   return (
     <CalendarControl
       className={cx("ui-calendar__header__control--next", className)}
-      icon={<ChevronIcon __css={{ transform: "rotate(-90deg)" }} />}
+      icon={<ChevronRightIcon />}
       operation="next"
       {...rest}
     />

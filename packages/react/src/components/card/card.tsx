@@ -53,18 +53,18 @@ export const Card: FC<CardProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    alignItems,
-    display: "flex",
-    flexDirection,
-    justifyContent,
-    wordWrap: "break-word",
-    ...styles.container,
-  }
-
   return (
     <CardProvider value={styles}>
-      <ui.article className={cx("ui-card", className)} __css={css} {...rest} />
+      <ui.article
+        className={cx("ui-card", className)}
+        __css={{
+          alignItems,
+          flexDirection,
+          justifyContent,
+          ...styles.container,
+        }}
+        {...rest}
+      />
     </CardProvider>
   )
 }
@@ -76,17 +76,10 @@ export interface CardHeaderProps extends HTMLUIProps<"header"> {}
 export const CardHeader: FC<CardHeaderProps> = ({ className, ...rest }) => {
   const styles = useCardContext()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "flex-start",
-    ...styles.header,
-  }
-
   return (
     <ui.header
       className={cx("ui-card__header", className)}
-      __css={css}
+      __css={styles.header}
       {...rest}
     />
   )
@@ -99,15 +92,12 @@ export interface CardBodyProps extends HTMLUIProps {}
 export const CardBody: FC<CardBodyProps> = ({ className, ...rest }) => {
   const styles = useCardContext()
 
-  const css: CSSUIObject = {
-    alignItems: "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    ...styles.body,
-  }
-
   return (
-    <ui.div className={cx("ui-card__body", className)} __css={css} {...rest} />
+    <ui.div
+      className={cx("ui-card__body", className)}
+      __css={styles.body}
+      {...rest}
+    />
   )
 }
 
@@ -118,17 +108,10 @@ export interface CardFooterProps extends HTMLUIProps<"footer"> {}
 export const CardFooter: FC<CardBodyProps> = ({ className, ...rest }) => {
   const styles = useCardContext()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "flex-start",
-    ...styles.footer,
-  }
-
   return (
     <ui.footer
       className={cx("ui-card__footer", className)}
-      __css={css}
+      __css={styles.footer}
       {...rest}
     />
   )

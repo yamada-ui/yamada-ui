@@ -1,13 +1,13 @@
 import { FaMarkdown } from "react-icons/fa"
 import { a11y, render } from "../../../test"
+import { Icon } from "./icon"
 import {
   CheckIcon,
-  ChevronIcon,
-  CloseIcon,
-  Icon,
+  ChevronDownIcon,
   InfoIcon,
-  WarningIcon,
-} from "./icon"
+  TriangleAlertIcon,
+  XIcon,
+} from "./icons"
 
 describe("<Icon />", () => {
   test("passes a11y test", async () => {
@@ -21,9 +21,9 @@ describe("<Icon />", () => {
   const iconComponents = [
     { name: "Check", Component: CheckIcon },
     { name: "Info", Component: InfoIcon },
-    { name: "Warning", Component: WarningIcon },
-    { name: "Close", Component: CloseIcon },
-    { name: "Chevron", Component: ChevronIcon },
+    { name: "Warning", Component: TriangleAlertIcon },
+    { name: "Close", Component: XIcon },
+    { name: "Chevron", Component: ChevronDownIcon },
   ]
 
   test.each(iconComponents)(

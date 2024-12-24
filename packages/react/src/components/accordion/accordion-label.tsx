@@ -3,7 +3,7 @@ import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
 import type { IconProps } from "../icon"
 import { ui } from "../../core"
 import { cx } from "../../utils"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon } from "../icon"
 import {
   useAccordionContext,
   useAccordionItemContext,
@@ -148,7 +148,7 @@ const AccordionIcon: FC<AccordionIconProps> = ({
     )
 
   return (
-    <ChevronIcon
+    <ChevronDownIcon
       className={cx("ui-accordion__icon", className)}
       aria-hidden
       __css={css}

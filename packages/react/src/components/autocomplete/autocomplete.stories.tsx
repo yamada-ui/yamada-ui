@@ -435,7 +435,7 @@ export const IsOptionDisabled: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-      <AutocompleteOption isDisabled value="ベジータ">
+      <AutocompleteOption disabled value="ベジータ">
         ベジータ
       </AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>

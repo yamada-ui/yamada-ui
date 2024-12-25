@@ -33,12 +33,7 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<BreadcrumbContext>({
 export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
   name?: ReactNode
   ellipsisPage?: boolean
-  /**
-   *
-   * @deprecated Use `ellipsisPage` instead.
-   */
-  isEllipsisPage?: boolean
-  containerProps?: Omit<BreadcrumbItemProps, "isLastChild" | "lastChild">
+  containerProps?: Omit<BreadcrumbItemProps, "lastChild">
 }
 
 interface BreadcrumbOptions {
@@ -156,15 +151,8 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
       let hiddenEllipsis: BreadcrumbGenerateItem[] = []
 
       return items.map((item, index) => {
-        const {
-          name,
-          isCurrentPage,
-          currentPage = isCurrentPage,
-          isEllipsisPage,
-          ellipsisPage = isEllipsisPage,
-          containerProps,
-          ...rest
-        } = item
+        const { name, currentPage, ellipsisPage, containerProps, ...rest } =
+          item
         const lastChild = items.length === index + 1
         const props: BreadcrumbItemProps = {
           currentPage,
@@ -264,22 +252,6 @@ interface BreadcrumbItemOptions
    */
   currentPage?: boolean
   /**
-   * If `true`, change to span element.
-   *
-   * @default false
-   *
-   * @deprecated Use `currentPage` instead.
-   */
-  isCurrentPage?: boolean
-  /**
-   * If `true`, not show separator.
-   *
-   * @default false
-   *
-   * @deprecated Use `lastChild` instead.
-   */
-  isLastChild?: boolean
-  /**
    * If `true`, not show separator.
    *
    * @default false
@@ -294,11 +266,9 @@ export interface BreadcrumbItemProps
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
   className,
   children,
-  isCurrentPage,
-  currentPage = isCurrentPage,
+  currentPage,
   gap,
-  isLastChild,
-  lastChild = isLastChild,
+  lastChild,
   separator,
   separatorProps,
   ...rest
@@ -360,14 +330,6 @@ interface BreadcrumbLinkOptions {
    * @default false
    */
   currentPage?: boolean
-  /**
-   * If `true`, change to span element.
-   *
-   * @default false
-   *
-   * @deprecated Use `currentPage` instead.
-   */
-  isCurrentPage?: boolean
 }
 
 export interface BreadcrumbLinkProps
@@ -378,8 +340,7 @@ export const BreadcrumbLink: FC<BreadcrumbLinkProps> = ({
   href,
   className,
   children,
-  isCurrentPage,
-  currentPage = isCurrentPage,
+  currentPage,
   ...rest
 }) => {
   const { styles } = useBreadcrumb()

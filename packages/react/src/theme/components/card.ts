@@ -4,11 +4,25 @@ import { shadeColor, tintColor } from "../../utils"
 export const Card: ComponentMultiStyle<"Card"> = {
   baseStyle: {
     body: {
+      alignItems: "flex-start",
+      display: "flex",
       flex: "1",
+      flexDirection: "column",
     },
-    container: {},
-    footer: {},
-    header: {},
+    container: {
+      display: "flex",
+      wordWrap: "break-word",
+    },
+    footer: {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "flex-start",
+    },
+    header: {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "flex-start",
+    },
   },
 
   sizes: {

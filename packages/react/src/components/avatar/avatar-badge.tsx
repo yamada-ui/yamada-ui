@@ -132,4 +132,5 @@ export const AvatarBadge: FC<AvatarBadgeProps> = ({
   )
 }
 
+AvatarBadge.displayName = "AvatarBadge"
 AvatarBadge.__ui__ = "AvatarBadge"

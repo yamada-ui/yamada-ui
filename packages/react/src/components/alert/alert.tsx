@@ -8,15 +8,15 @@ import type {
 import type { LoadingProps } from "../loading"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx } from "../../utils"
-import { CheckIcon, InfoIcon, WarningIcon } from "../icon"
+import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { Loading } from "../loading"
 
 const statuses = {
-  error: { colorScheme: "danger", icon: WarningIcon },
+  error: { colorScheme: "danger", icon: TriangleAlertIcon },
   info: { colorScheme: "info", icon: InfoIcon },
   loading: { colorScheme: "primary", icon: Loading },
-  success: { colorScheme: "success", icon: CheckIcon },
-  warning: { colorScheme: "warning", icon: WarningIcon },
+  success: { colorScheme: "success", icon: CircleCheckBigIcon },
+  warning: { colorScheme: "warning", icon: TriangleAlertIcon },
 } as const
 
 interface AlertContext {
@@ -61,21 +61,14 @@ export const Alert: FC<AlertProps> = ({
   })
   const { className, children, ...rest } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    overflow: "hidden",
-    position: "relative",
-    w: "100%",
-    ...styles.container,
-  }
-
   return (
     <AlertContext value={{ status, styles }}>
       <ui.div
         className={cx("ui-alert", className)}
         role="alert"
-        __css={css}
+        __css={{
+          ...styles.container,
+        }}
         {...rest}
       >
         {children}
@@ -98,16 +91,15 @@ export const AlertIcon: FC<AlertIconProps> = ({
 }) => {
   const { status, styles } = useAlertContext()
   const Icon = statuses[status].icon
-  const css: CSSUIObject = {
-    ...styles.icon,
-    ...(status === "loading" ? styles.loading : {}),
-  }
 
   return (
     <ui.span
       className={cx("ui-alert__icon", className)}
       display="inherit"
-      __css={css}
+      __css={{
+        ...styles.icon,
+        ...(status === "loading" ? styles.loading : {}),
+      }}
       {...rest}
     >
       {children || (
@@ -127,13 +119,15 @@ export interface AlertTitleProps extends HTMLUIProps<"p"> {}
 
 export const AlertTitle: FC<AlertTitleProps> = ({ className, ...rest }) => {
   const { styles } = useAlertContext()
-  const css: CSSUIObject = {
-    display: "block",
-    ...styles.title,
-  }
 
   return (
-    <ui.p className={cx("ui-alert__title", className)} __css={css} {...rest} />
+    <ui.p
+      className={cx("ui-alert__title", className)}
+      __css={{
+        ...styles.title,
+      }}
+      {...rest}
+    />
   )
 }
 
@@ -146,14 +140,13 @@ export const AlertDescription: FC<AlertDescriptionProps> = ({
   ...rest
 }) => {
   const { styles } = useAlertContext()
-  const css: CSSUIObject = {
-    ...styles.description,
-  }
 
   return (
     <ui.span
       className={cx("ui-alert__desc", className)}
-      __css={css}
+      __css={{
+        ...styles.description,
+      }}
       {...rest}
     />
   )

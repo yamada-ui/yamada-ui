@@ -7,8 +7,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       display: "flex",
       flexDirection: orientation === "vertical" ? "row" : "column",
     }),
-    tab: ({ isFitted }) => ({
-      flex: isFitted ? 1 : undefined,
+    tab: ({ fitted }) => ({
+      flex: fitted ? 1 : undefined,
       transitionDuration: "normal",
       transitionProperty: "common",
       whiteSpace: "nowrap",

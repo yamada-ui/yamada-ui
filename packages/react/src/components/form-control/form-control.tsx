@@ -190,7 +190,6 @@ export const FormControl: FC<FormControlProps> = ({ id, ...props }) => {
   const isCustomLabel = !!customLabel
   const isCustomHelperMessage = !!customHelperMessage
   const isCustomErrorMessage = !!customErrorMessage
-  const css: CSSUIObject = { ...styles.container }
 
   id ??= uuid
 
@@ -216,7 +215,7 @@ export const FormControl: FC<FormControlProps> = ({ id, ...props }) => {
           data-focus={dataAttr(focused)}
           data-invalid={dataAttr(invalid)}
           data-readonly={dataAttr(readOnly)}
-          __css={css}
+          __css={styles.container}
           {...rest}
         >
           {!isCustomLabel && label ? (
@@ -429,11 +428,6 @@ export const Label: FC<LabelProps> = ({
     required,
   } = useFormControlContext() ?? {}
   const styles = useFormControlStyles() ?? {}
-  const css: CSSUIObject = {
-    display: "block",
-    pointerEvents: readOnly ? "none" : undefined,
-    ...styles.label,
-  }
 
   id ??= labelId
   requiredProp ??= required
@@ -448,7 +442,10 @@ export const Label: FC<LabelProps> = ({
       data-focus={dataAttr(focused)}
       data-invalid={dataAttr(invalid)}
       data-readonly={dataAttr(readOnly)}
-      __css={css}
+      __css={{
+        pointerEvents: readOnly ? "none" : undefined,
+        ...styles.label,
+      }}
       {...rest}
     >
       {children}
@@ -475,14 +472,13 @@ export const RequiredIndicator: FC<RequiredIndicatorProps> = ({
   ...rest
 }) => {
   const styles = useFormControlStyles() ?? {}
-  const css: CSSUIObject = { ...styles.requiredIndicator }
 
   return !isValidElement(children) ? (
     <ui.span
       className={cx("ui-form__required-indicator", className)}
       aria-hidden
       role="presentation"
-      __css={css}
+      __css={styles.requiredIndicator}
       {...rest}
     >
       {children ?? <>*</>}
@@ -502,7 +498,6 @@ export const HelperMessage: FC<HelperMessageProps> = ({
 }) => {
   const { id, invalid, replace } = useFormControlContext() ?? {}
   const styles = useFormControlStyles() ?? {}
-  const css: CSSUIObject = { ...styles.helperMessage }
 
   if (replace && invalid) return null
 
@@ -510,7 +505,7 @@ export const HelperMessage: FC<HelperMessageProps> = ({
     <ui.span
       className={cx("ui-form__helper-message", className)}
       aria-describedby={id}
-      __css={css}
+      __css={styles.helperMessage}
       {...rest}
     />
   )
@@ -523,7 +518,6 @@ export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 export const ErrorMessage: FC<ErrorMessageProps> = ({ className, ...rest }) => {
   const { invalid } = useFormControlContext() ?? {}
   const styles = useFormControlStyles() ?? {}
-  const css: CSSUIObject = { ...styles.errorMessage }
 
   if (!invalid) return null
 
@@ -531,7 +525,7 @@ export const ErrorMessage: FC<ErrorMessageProps> = ({ className, ...rest }) => {
     <ui.span
       className={cx("ui-form__error-message", className)}
       aria-live="polite"
-      __css={css}
+      __css={styles.errorMessage}
       {...rest}
     />
   )

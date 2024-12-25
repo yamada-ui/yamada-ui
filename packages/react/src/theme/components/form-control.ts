@@ -19,6 +19,7 @@ export const FormControl: ComponentMultiStyle<"FormControl"> = {
       mt: "2",
     },
     label: {
+      display: "block",
       fontSize: "md",
       fontWeight: "medium",
       mb: "2",

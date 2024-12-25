@@ -18,7 +18,7 @@ import {
   isNumber,
   runIfFunc,
 } from "../../utils"
-import { Icon } from "../icon"
+import { EllipsisIcon } from "../icon"
 
 interface BreadcrumbContext {
   styles: { [key: string]: CSSUIObject | undefined }
@@ -449,22 +449,12 @@ export const BreadcrumbEllipsis: FC<BreadcrumbEllipsisProps> = ({
 
   return (
     children ?? (
-      <Icon
+      <EllipsisIcon
         className={cx("ui-breadcrumb__item__ellipsis", className)}
         aria-label="ellipsis"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        viewBox="0 0 36 24"
-        xmlns="http://www.w3.org/2000/svg"
         __css={css}
         {...rest}
-      >
-        <circle cx="10" cy="12" fill="currentColor" r="2" />
-        <circle cx="20" cy="12" fill="currentColor" r="2" />
-        <circle cx="30" cy="12" fill="currentColor" r="2" />
-      </Icon>
+      />
     )
   )
 }

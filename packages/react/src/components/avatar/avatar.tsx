@@ -4,8 +4,8 @@ import type { ImageProps, UseImageProps } from "../image"
 import { cloneElement, useState } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { createContext, cx, dataAttr, handlerAll } from "../../utils"
+import { UserRoundIcon } from "../icon"
 import { useImage } from "../image"
-import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
 
 interface AvatarContext {
@@ -93,7 +93,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -111,7 +111,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     <AvatarContext value={styles}>
       <ui.span
         className={cx("ui-avatar", className)}
-        data-loaded={dataAttr(isLoaded)}
+        data-loaded={dataAttr(loaded)}
         borderRadius={borderRadius}
         rounded={rounded}
         __css={css}
@@ -131,7 +131,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
           referrerPolicy={referrerPolicy}
           rounded={rounded}
           onError={onError}
-          onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
+          onLoad={handlerAll(onLoad, () => setLoaded(true))}
         />
         {children}
       </ui.span>
@@ -139,6 +139,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
   )
 }
 
+Avatar.displayName = "Avatar"
 Avatar.__ui__ = "Avatar"
 
 interface AvatarImageProps
@@ -153,7 +154,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
   borderRadius,
   crossOrigin,
   format,
-  icon = <AvatarIcon />,
+  icon = <UserRoundIcon boxSize="calc(100% / 1.5)" />,
   ignoreFallback,
   loading,
   referrerPolicy,
@@ -163,11 +164,11 @@ const AvatarImage: FC<AvatarImageProps> = ({
 }) => {
   const status = useImage({ src, crossOrigin, ignoreFallback, onError, onLoad })
 
-  const isLoaded = status === "loaded"
+  const loaded = status === "loaded"
 
-  const isFallback = !src || !isLoaded
+  const fallback = !src || !loaded
 
-  if (isFallback)
+  if (fallback)
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (
@@ -195,4 +196,5 @@ const AvatarImage: FC<AvatarImageProps> = ({
   )
 }
 
+AvatarImage.displayName = "AvatarImage"
 AvatarImage.__ui__ = "AvatarImage"

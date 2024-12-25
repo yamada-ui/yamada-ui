@@ -58,7 +58,7 @@ export const WithFallback: Story = () => {
   )
 }
 
-export const WithBarge: Story = () => {
+export const WithBadge: Story = () => {
   return (
     <Avatar
       name="Hirotomo Yamada"

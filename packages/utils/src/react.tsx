@@ -235,6 +235,22 @@ export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
 }
 
+export function getRef<Y = HTMLElement>(
+  element: React.ReactElement<{ ref: React.Ref<Y> }>,
+): React.Ref<Y> | undefined {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get
+
+  if (getter && "isReactWarning" in getter && getter.isReactWarning)
+    return (element as unknown as { ref: React.Ref<Y> }).ref
+
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get
+
+  if (getter && "isReactWarning" in getter && getter.isReactWarning)
+    return element.props.ref
+
+  return element.props.ref || (element as unknown as { ref: React.Ref<Y> }).ref
+}
+
 export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
   if (ref == null) return
 

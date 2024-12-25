@@ -1,10 +1,5 @@
 import type { ForwardedRef, ReactElement, RefAttributes } from "react"
-import type {
-  ComponentArgs,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
+import type { ComponentArgs, HTMLUIProps, ThemeProps } from "../../core"
 import type { CalendarHeaderProps } from "./calendar-header"
 import type { MonthProps } from "./month"
 import type { MonthListProps } from "./month-list"
@@ -80,13 +75,6 @@ export const Calendar = forwardRef(
       ...computedProps,
     })
 
-    const css: CSSUIObject = {
-      alignItems: "flex-start",
-      display: "flex",
-      flexWrap: "wrap",
-      ...styles.container,
-    }
-
     const w = computedProps.w ?? computedProps.width
     const minW = computedProps.minW ?? computedProps.minWidth
     const maxW = computedProps.maxW ?? computedProps.maxWidth
@@ -100,7 +88,7 @@ export const Calendar = forwardRef(
       >
         <ui.div
           className={cx("ui-calendar", className)}
-          __css={css}
+          __css={styles.container}
           {...getContainerProps({}, ref)}
         >
           {type === "year" ? (

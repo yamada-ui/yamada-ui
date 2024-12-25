@@ -23,6 +23,9 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       transitionProperty: "common",
     },
     container: {
+      alignItems: "flex-start",
+      display: "flex",
+      flexWrap: "wrap",
       gap: "md",
     },
     content: {},

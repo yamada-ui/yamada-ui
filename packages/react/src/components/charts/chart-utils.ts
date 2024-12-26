@@ -17,12 +17,12 @@ export const getComponentProps =
     [obj, keys]: [T, K[]],
     ...props: (Dict | string | undefined)[]
   ) =>
-  <P extends boolean = false>(theme: StyledTheme, isContain?: P) => {
+  <P extends boolean = false>(theme: StyledTheme, contain?: P) => {
     const [pickedProps, omittedProps] = splitObject<T, K>(obj, keys)
     const className = getClassName(...props, omittedProps)(theme)
 
     return (
-      !isContain ? [pickedProps, className] : { ...pickedProps, className }
+      !contain ? [pickedProps, className] : { ...pickedProps, className }
     ) as P extends false
       ? [{ [P in K]: T[P] }, string]
       : { [P in K]: T[P] } & { className: string }

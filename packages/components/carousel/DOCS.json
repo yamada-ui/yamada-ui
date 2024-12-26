@@ -135,7 +135,7 @@
       "required": false
     },
     "slideSize": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 72 more ... | \"xs\">",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 76 more ... | \"xs\">",
       "description": "The CSS `width` property.",
       "required": false
     },
@@ -248,7 +248,7 @@
   },
   "CarouselIndicators": {
     "component": {
-      "type": "FC<{ index: number; isSelected: boolean }>",
+      "type": "FC<{\n  index: number\n  selected: boolean\n  isSelected?: boolean | undefined\n}>",
       "description": "The custom carousel indicator to use.",
       "required": false
     }
@@ -256,7 +256,7 @@
   "CarouselSlide": {
     "index": { "type": "number", "required": false },
     "size": {
-      "type": "number | \"px\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | ... 77 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-fit-content\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 76 more ... | \"xs\">",
       "description": "The CSS `width` property.",
       "required": false
     }

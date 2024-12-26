@@ -17,13 +17,11 @@ export interface FormatBytesOptions {
  */
 export const useFormatByte = (
   bytes: number,
-  { locale, unit, unitDisplay }: FormatBytesOptions = {},
+  { locale, unit = "byte", unitDisplay = "short" }: FormatBytesOptions = {},
 ) => {
   const { locale: defaultLocale } = useI18n()
 
   locale ??= defaultLocale
-  unit ??= "byte"
-  unitDisplay ??= "short"
 
   const sanitizedBytes = Number.isNaN(bytes) ? 0 : bytes
   const prefix = unit === "bit" ? bitPrefixes : bytePrefixes

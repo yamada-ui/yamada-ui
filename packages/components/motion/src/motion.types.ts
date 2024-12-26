@@ -7,12 +7,11 @@ import type {
 } from "@yamada-ui/core"
 import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
-  DOMMotionComponents,
   MotionProps as OriginMotionProps,
   Target,
   TargetAndTransition,
   Transition,
-} from "framer-motion"
+} from "motion/react"
 import type * as React from "react"
 
 export type {
@@ -26,7 +25,6 @@ export type {
   AnimationPlaybackLifecycles as MotionAnimationPlaybackLifecycles,
   AnimationPlaybackOptions as MotionAnimationPlaybackOptions,
   AnimationProps as MotionAnimationProps,
-  AnimationScope as MotionAnimationScope,
   AnimationSequence as MotionAnimationSequence,
   AnimationType as MotionAnimationType,
   At as MotionAt,
@@ -43,7 +41,6 @@ export type {
   DecayOptions as MotionDecayOptions,
   DelayedFunction as MotionDelayedFunction,
   Delta as MotionDelta,
-  DevMessage as MotionDevMessage,
   DOMKeyframesDefinition as MotionDOMKeyframesDefinition,
   DOMMotionComponents,
   DOMSegment as MotionDOMSegment,
@@ -58,7 +55,6 @@ export type {
   EasingDefinition as MotionEasingDefinition,
   EasingFunction as MotionEasingFunction,
   EasingModifier as MotionEasingModifier,
-  ElementOrSelector as MotionElementOrSelector,
   EventInfo as MotionEventInfo,
   FeatureBundle as MotionFeatureBundle,
   FeatureDefinition as MotionFeatureDefinition,
@@ -147,7 +143,7 @@ export type {
   Variants as MotionVariants,
   VelocityOptions as MotionVelocityOptions,
   VisualState as MotionVisualState,
-} from "framer-motion"
+} from "motion/react"
 
 export interface MotionFactory {
   <T extends MotionAs = MotionAs, M extends object = {}>(
@@ -179,7 +175,7 @@ export interface MotionComponent<Y extends MotionAs, D extends object = {}>
   <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
-export type MotionAs = keyof DOMMotionComponents
+export type MotionAs = keyof React.JSX.IntrinsicElements
 
 export type MotionComponents = {
   [Y in MotionAs]: UIMotionComponent<Y>
@@ -192,28 +188,8 @@ interface UIMotionProps extends Merge<UIProps, OriginMotionProps> {
   as?: MotionAs
 }
 
-type FactoryAttributes<Y> =
-  Y extends React.DetailedHTMLFactory<infer M, any>
-    ? M
-    : Y extends React.SVGFactory
-      ? React.SVGAttributes<SVGElement>
-      : never
-type FactoryElement<Y> =
-  Y extends React.DetailedHTMLFactory<any, infer M>
-    ? M
-    : Y extends React.SVGFactory
-      ? SVGElement
-      : never
-type DOMAttributes<
-  Y extends React.HTMLAttributes<M> | React.SVGAttributes<SVGElement>,
-  M extends HTMLElement | SVGElement,
-> = Y
-
 export type MotionProps<Y extends MotionAs = "div"> = Merge<
-  DOMAttributes<
-    FactoryAttributes<React.ReactDOM[Y]>,
-    FactoryElement<React.ReactDOM[Y]>
-  >,
+  React.ComponentPropsWithoutRef<Y>,
   UIMotionProps
 >
 

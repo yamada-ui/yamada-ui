@@ -152,6 +152,9 @@
     },
     "footer": {
       "description": "Built by `Hirotomo Yamada` and `these awesome people`"
+    },
+    "confetti": {
+      "button": "Delete Christmas"
     }
   }
 }

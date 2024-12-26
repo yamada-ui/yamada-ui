@@ -23,21 +23,13 @@ import { Stack, VStack, HStack, ZStack } from "@yamada-ui/react"
 
 ```tsx
 <Stack direction={{ base: "column", lg: "row" }}>
-  <Box p="md" rounded="4" bg="primary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="secondary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="warning" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="danger" color="white">
-    Box
-  </Box>
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
 </Stack>
 ```
 
@@ -45,41 +37,25 @@ import { Stack, VStack, HStack, ZStack } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Box p="md" rounded="4" bg="primary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="secondary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="warning" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="danger" color="white">
-    Box
-  </Box>
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
 </VStack>
 ```
 
 ```tsx
 <HStack>
-  <Box p="md" rounded="4" bg="primary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="secondary" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="warning" color="white">
-    Box
-  </Box>
-
-  <Box p="md" rounded="4" bg="danger" color="white">
-    Box
-  </Box>
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
 </HStack>
 ```
 

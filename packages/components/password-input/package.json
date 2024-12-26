@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/password-input",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Yamada UI password input component",
   "keywords": [
     "yamada",
@@ -46,14 +46,14 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/form-control": "workspace:*"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

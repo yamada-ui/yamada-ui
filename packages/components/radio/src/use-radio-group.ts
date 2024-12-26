@@ -59,15 +59,13 @@ export const useRadioGroup = <
   id ??= uuid
   name ??= `radio-${id}`
 
+  const containerRef = useRef<any>(null)
   const onChangeRef = useCallbackRef(onChangeProp)
-
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
     onChange: onChangeRef,
   })
-
-  const containerRef = useRef<any>(null)
 
   const onFocus = useCallback(() => {
     const container = containerRef.current

@@ -13,6 +13,7 @@ const handle = app.getRequestHandler()
 async function run() {
   await app.prepare()
 
+  // @ts-ignore
   chokidar.watch(["contents"], { usePolling: false }).on("all", watchMDX)
 
   const server = createServer(async (req, res) => {

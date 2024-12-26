@@ -1,5 +1,43 @@
 # @yamada-ui/popover
 
+## 1.4.7
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- [#3686](https://github.com/yamada-ui/yamada-ui/pull/3686) [`794b31e`](https://github.com/yamada-ui/yamada-ui/commit/794b31e75b6f49e11d41043c0a0ea20351bb26fe) Thanks [@chida09](https://github.com/chida09)! - Renamed `Lazy` to `lazy` in properties.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46), [`794b31e`](https://github.com/yamada-ui/yamada-ui/commit/794b31e75b6f49e11d41043c0a0ea20351bb26fe)]:
+  - @yamada-ui/close-button@1.0.51
+  - @yamada-ui/transitions@1.1.15
+  - @yamada-ui/use-disclosure@1.1.3
+  - @yamada-ui/use-animation@1.0.46
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+  - @yamada-ui/motion@2.2.12
+  - @yamada-ui/use-focus@1.0.27
+  - @yamada-ui/use-popper@1.0.46
+
+## 1.4.6
+
+### Patch Changes
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplified component rendering logic.
+
+- [#3681](https://github.com/yamada-ui/yamada-ui/pull/3681) [`c0383fc`](https://github.com/yamada-ui/yamada-ui/commit/c0383fcf7c6cc9ec2380c11eb8abc9001f7e259d) Thanks [@nathanlao](https://github.com/nathanlao)! - remove `is` prefix from props and variables
+
+- Updated dependencies [[`525b9b8`](https://github.com/yamada-ui/yamada-ui/commit/525b9b8538cecf47dca0c77cfd07ef4de63d65ec), [`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`b834ef3`](https://github.com/yamada-ui/yamada-ui/commit/b834ef351db0c66ddf45436440b90466add00b52), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a), [`734d66e`](https://github.com/yamada-ui/yamada-ui/commit/734d66e11a1479ce14f9246d23bbc173b81be5bd)]:
+  - @yamada-ui/transitions@1.1.14
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/use-disclosure@1.1.2
+  - @yamada-ui/motion@2.2.11
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/use-animation@1.0.45
+  - @yamada-ui/close-button@1.0.50
+  - @yamada-ui/use-focus@1.0.26
+  - @yamada-ui/use-popper@1.0.45
+
 ## 1.4.5
 
 ### Patch Changes

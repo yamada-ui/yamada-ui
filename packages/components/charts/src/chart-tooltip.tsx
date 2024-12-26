@@ -6,9 +6,9 @@ import { useTooltip } from "./use-chart"
 export interface ChartTooltipProps {
   payload: Dict[] | undefined
   dataKey?: string
-  isRadialChart?: boolean
   label?: string
   labelFormatter?: (label: string) => string
+  radialChart?: boolean
   unit?: string
   valueFormatter?: (value: any) => string
 }
@@ -18,10 +18,10 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     {
       className,
       dataKey = "value",
-      isRadialChart,
       label,
       labelFormatter,
       payload = [],
+      radialChart,
       unit,
       valueFormatter,
       ...rest
@@ -40,7 +40,7 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
         } = {},
         index,
       ) => {
-        const name = isRadialChart ? payload?.name : nameProp
+        const name = radialChart ? payload?.name : nameProp
         const color = colorProp ?? payload?.color
         let value: string
 

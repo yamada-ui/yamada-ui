@@ -69,12 +69,24 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultValue": {
       "type": "string",
       "description": "The initial value of the autocomplete.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "duration": {
@@ -157,38 +169,50 @@
       "description": "The position to be inserted when the autocomplete option is created.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -197,10 +221,16 @@
       "description": "If provided, generate options based on items.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "listProps": {
@@ -250,6 +280,11 @@
       "description": "The callback invoked when search input.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -269,7 +304,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -277,6 +312,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -459,12 +506,24 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultValue": {
       "type": "string[]",
       "description": "The initial value of the autocomplete.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "duration": {
@@ -547,6 +606,12 @@
       "description": "The position to be inserted when the autocomplete option is created.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -557,35 +622,41 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -600,10 +671,16 @@
       "description": "If `true`, keep the placeholder.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "listProps": {
@@ -664,6 +741,11 @@
       "description": "The callback invoked when search input.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -683,7 +765,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -691,6 +773,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {

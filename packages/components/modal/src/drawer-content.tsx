@@ -46,20 +46,14 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     },
     ref,
   ) => {
-    let { bodyRef, duration, headerRef, isOpen, open, onClose } = useModal()
-
-    open ??= isOpen
-
+    const { bodyRef, duration, headerRef, open, onClose } = useModal()
     const styles = useDrawer()
     const placement = useValue(_placement)
-
     const validChildren = getValidChildren(children)
-
     const [customDrawerCloseButton, ...cloneChildren] = findChildren(
       validChildren,
       DrawerCloseButton,
     )
-
     const blankForDragBg = useMemo(() => {
       const propBg =
         rest.backgroundColor ?? rest.bgColor ?? rest.background ?? rest.bg
@@ -72,7 +66,6 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
 
       return isArray(computedBg) ? computedBg : [computedBg]
     }, [rest, styles])
-
     const blankForDrag = useMemo<CSSUIObject>(() => {
       let position: CSSUIObject = {}
 
@@ -93,7 +86,6 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
           position = { bottom: 0, right: "calc(-100% + 1px)", top: 0 }
           break
       }
-
       const [lightBg, darkBg] = blankForDragBg
 
       return {
@@ -114,7 +106,6 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
         },
       }
     }, [placement, blankForDragBg, blankForDragProps])
-
     const css = useMemo<CSSUIObject>(
       () => ({
         display: "flex",

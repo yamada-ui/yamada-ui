@@ -12,6 +12,14 @@ tab: Props
 ### ToggleProps
 
 <PropsCard
+  id="toggle-active"
+  name="active"
+  type="boolean"
+  description={"If `true`, the toggle button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="toggle-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -24,6 +32,15 @@ tab: Props
   name="defaultIsSelected"
   type="boolean"
   description={"If `true`, the toggle button will be initially selected."}
+  deprecated={"Use `defaultSelected` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-defaultselected"
+  name="defaultSelected"
+  type="boolean"
+  description={"If `true`, the toggle button will be initially selected."}
   defaultValue={"false"}
 />
 
@@ -32,6 +49,16 @@ tab: Props
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={
+    "If true, the toggle button is full rounded. Else, it'll be slightly round."
+  }
   defaultValue={"false"}
 />
 
@@ -47,6 +74,7 @@ tab: Props
   name="isActive"
   type="boolean"
   description={"If `true`, the toggle button is represented as active."}
+  deprecated={"Use `active` instead."}
   defaultValue={"false"}
 />
 
@@ -55,6 +83,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the toggle button will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -63,6 +92,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the toggle button will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -73,6 +103,7 @@ tab: Props
   description={
     "If true, the toggle button is full rounded. Else, it'll be slightly round."
   }
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -81,13 +112,29 @@ tab: Props
   name="isSelected"
   type="boolean"
   description={"If `true`, the toggle button will be selected."}
+  deprecated={"Use `selected` instead."}
 />
 
 <PropsCard
   id="toggle-onchange"
   name="onChange"
-  type="(isSelected: boolean) => void"
+  type="(selected: boolean) => void"
   description={"The callback invoked when selected state changes."}
+/>
+
+<PropsCard
+  id="toggle-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the toggle button will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-selected"
+  name="selected"
+  type="boolean"
+  description={"If `true`, the toggle button will be selected."}
 />
 
 <PropsCard
@@ -125,8 +172,17 @@ tab: Props
 <PropsCard
   id="togglegroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
+  deprecated={"Use `flexDirection` instead."}
+/>
+
+<PropsCard
+  id="togglegroup-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -134,6 +190,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, all wrapped toggle button will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -142,6 +199,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, all wrapped toggle button will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -152,6 +210,14 @@ tab: Props
   description={
     "The callback fired when any children toggle button is selected or unselected."
   }
+/>
+
+<PropsCard
+  id="togglegroup-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

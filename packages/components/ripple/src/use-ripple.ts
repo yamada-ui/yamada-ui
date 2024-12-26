@@ -20,13 +20,11 @@ export interface UseRippleProps<T = HTMLElement> {
 }
 
 export const useRipple = <T = HTMLElement>({
-  disabled,
   isDisabled,
+  disabled = isDisabled,
   ...rest
 }: UseRippleProps<T> = {}) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
-
-  disabled ??= isDisabled
 
   const onPointerDown: PointerEventHandler<T> = useCallback(
     (ev) => {

@@ -52,22 +52,19 @@ export interface CloseButtonProps
 export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
-    let {
+    const {
       className,
       children,
-      disabled,
-      disableRipple,
       isDisabled,
+      disabled = isDisabled,
+      disableRipple,
       isRounded,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    disabled ??= isDisabled
-
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || disabled,
+      disabled: disableRipple || disabled,
     })
 
     const css: CSSUIObject = {

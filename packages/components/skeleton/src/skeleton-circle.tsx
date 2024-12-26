@@ -11,8 +11,8 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
       className,
       boxSize = "fallback(12, 3rem)",
       children,
-      fitContent,
       isFitContent,
+      fitContent = isFitContent,
       ...rest
     },
     ref,
@@ -20,7 +20,6 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
     const validChildren = getValidChildren(children)
     const hasChildren = !!validChildren.length
 
-    fitContent ??= isFitContent
     fitContent ??= hasChildren
 
     return (

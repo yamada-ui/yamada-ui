@@ -16,9 +16,7 @@ export interface RatingGroupProps extends MotionProps, RatingGroupOptions {}
 export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
   ({ className, color, items, value: groupValue, ...rest }, ref) => {
     const { decimal, styles, getGroupProps, groupProps } = useRatingContext()
-
     const computedGroupProps = runIfFunc(groupProps, groupValue)
-
     const css: CSSUIObject = { ...styles.group }
 
     return (

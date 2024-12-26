@@ -19,10 +19,9 @@ import { Status } from "@yamada-ui/react"
 
 ```tsx
 <HStack>
-  <Status value="info" />
-  <Status value="success" />
-  <Status value="warning" />
-  <Status value="error" />
+  <For each={["info", "success", "warning", "error"]}>
+    {(value, index) => <Status key={index} value={value} />}
+  </For>
 </HStack>
 ```
 

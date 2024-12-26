@@ -66,44 +66,59 @@ export function useUnmountEffect(callback: () => void) {
   return React.useEffect(() => () => callback(), [])
 }
 
-export interface UseIsMountedProps {
+/**
+ * @deprecated Use `UseMountedProps` instead.
+ */
+export type UseIsMountedProps = UseMountedProps
+
+/**
+ * @deprecated Use `useMounted` instead.
+ */
+export const useIsMounted = useMounted
+
+/**
+ * @deprecated Use `UseMountedReturn` instead.
+ */
+export type UseIsMountedReturn = UseMountedReturn
+
+export interface UseMountedProps {
   delay?: number
   rerender?: boolean
 }
 
-export function useIsMounted({
+export function useMounted({
   delay = 0,
   rerender = false,
-}: UseIsMountedProps = {}): [() => boolean, boolean] {
-  const isMountedRef = React.useRef(false)
-  const [isMounted, setIsMounted] = React.useState(false)
+}: UseMountedProps = {}): [() => boolean, boolean] {
+  const mountedRef = React.useRef(false)
+  const [mounted, setMounted] = React.useState(false)
 
   useSafeLayoutEffect(() => {
-    isMountedRef.current = true
+    mountedRef.current = true
 
     let timeoutId: any = null
 
     if (rerender) {
       if (delay > 0) {
-        timeoutId = setTimeout(() => setIsMounted(true), delay)
+        timeoutId = setTimeout(() => setMounted(true), delay)
       } else {
-        setIsMounted(true)
+        setMounted(true)
       }
     }
 
     return () => {
-      isMountedRef.current = false
+      mountedRef.current = false
 
-      if (rerender) setIsMounted(false)
+      if (rerender) setMounted(false)
 
       if (timeoutId) clearTimeout(timeoutId)
     }
   }, [delay, rerender])
 
-  return [React.useCallback(() => isMountedRef.current, []), isMounted]
+  return [React.useCallback(() => mountedRef.current, []), mounted]
 }
 
-export type UseIsMountedReturn = ReturnType<typeof useIsMounted>
+export type UseMountedReturn = ReturnType<typeof useMounted>
 
 export function useIsSsr() {
   if (typeof React.useSyncExternalStore === "function")
@@ -218,6 +233,22 @@ type ReactRef<T> = React.LegacyRef<T> | React.MutableRefObject<T> | React.Ref<T>
 
 export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
+}
+
+export function getRef<Y = HTMLElement>(
+  element: React.ReactElement<{ ref: React.Ref<Y> }>,
+): React.Ref<Y> | undefined {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get
+
+  if (getter && "isReactWarning" in getter && getter.isReactWarning)
+    return (element as unknown as { ref: React.Ref<Y> }).ref
+
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get
+
+  if (getter && "isReactWarning" in getter && getter.isReactWarning)
+    return element.props.ref
+
+  return element.props.ref || (element as unknown as { ref: React.Ref<Y> }).ref
 }
 
 export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
@@ -357,7 +388,7 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
   initialState: StateFromFunctionReturningPromise<T> = { loading: false },
 ): AsyncFnReturn<T> {
   const lastCallId = React.useRef(0)
-  const [isMounted] = useIsMounted()
+  const [mounted] = useMounted()
   const [state, setState] =
     React.useState<StateFromFunctionReturningPromise<T>>(initialState)
 
@@ -370,13 +401,13 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
 
       return func(...args).then(
         (value) => {
-          if (isMounted() && callId === lastCallId.current)
+          if (mounted() && callId === lastCallId.current)
             setState({ loading: false, value })
 
           return value
         },
         (error) => {
-          if (isMounted() && callId === lastCallId.current)
+          if (mounted() && callId === lastCallId.current)
             setState({ error, loading: false })
 
           return error

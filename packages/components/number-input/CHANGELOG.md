@@ -1,5 +1,35 @@
 # @yamada-ui/number-input
 
+## 1.2.4
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46), [`c4ec7cf`](https://github.com/yamada-ui/yamada-ui/commit/c4ec7cf1956de49385a28ae421fa437da2d30feb)]:
+  - @yamada-ui/form-control@2.1.11
+  - @yamada-ui/use-counter@1.0.27
+  - @yamada-ui/icon@1.1.17
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+  - @yamada-ui/use-event-listener@1.0.26
+  - @yamada-ui/use-interval@1.0.26
+
+## 1.2.3
+
+### Patch Changes
+
+- [#3679](https://github.com/yamada-ui/yamada-ui/pull/3679) [`2ae7817`](https://github.com/yamada-ui/yamada-ui/commit/2ae7817587e690d7efc5b26fe1f4a5f842bef2dd) Thanks [@kaehehehe](https://github.com/kaehehehe)! - remove `is` prefix from props
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+  - @yamada-ui/form-control@2.1.10
+  - @yamada-ui/icon@1.1.16
+  - @yamada-ui/use-counter@1.0.26
+  - @yamada-ui/use-event-listener@1.0.25
+  - @yamada-ui/use-interval@1.0.25
+
 ## 1.2.2
 
 ### Patch Changes

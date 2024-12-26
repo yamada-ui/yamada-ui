@@ -1,5 +1,27 @@
 # @yamada-ui/charts
 
+## 1.5.11
+
+### Patch Changes
+
+- [#3609](https://github.com/yamada-ui/yamada-ui/pull/3609) [`1f3d40a`](https://github.com/yamada-ui/yamada-ui/commit/1f3d40aa07e1a9d4f72abe72b10ef095f2b8b331) Thanks [@chida09](https://github.com/chida09)! - feat: remove `is` prefix
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46)]:
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+
+## 1.5.10
+
+### Patch Changes
+
+- [#3812](https://github.com/yamada-ui/yamada-ui/pull/3812) [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#3810](https://github.com/yamada-ui/yamada-ui/pull/3810) [`822dfc5`](https://github.com/yamada-ui/yamada-ui/commit/822dfc5b41ecb8f4d5c9b67ef1e07986baf958ff) Thanks [@108yen](https://github.com/108yen)! - Fixed wrong `ChartTooltip` type.
+
+- Updated dependencies [[`f7821c2`](https://github.com/yamada-ui/yamada-ui/commit/f7821c28ee73b36c18bd61ab260c9bcabd814838), [`6b6e3e4`](https://github.com/yamada-ui/yamada-ui/commit/6b6e3e4d73759d1facd9e9939790c530e2ff5c7a)]:
+  - @yamada-ui/utils@1.6.1
+  - @yamada-ui/core@1.16.1
+
 ## 1.5.9
 
 ### Patch Changes

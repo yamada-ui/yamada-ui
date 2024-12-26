@@ -44,6 +44,12 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -78,18 +84,26 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "matchWidth": {
@@ -117,6 +131,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -196,6 +215,12 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -230,18 +255,26 @@
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "matchWidth": {
@@ -269,6 +302,11 @@
     "onOpen": {
       "type": "() => void",
       "description": "Callback fired when the popover opens.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "openDelay": {
@@ -344,6 +382,18 @@
       "description": "Right-aligned label text content, useful for displaying hotkeys.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be focusable.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "The menu item icon to use.",
@@ -352,21 +402,41 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the menu item will be focusable.",
       "required": false
     }
   },
   "MenuOptionItem": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox or radio will be checked.",
+      "required": false
+    },
     "closeOnSelect": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the list element will be closed when selected.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be disabled.",
+      "required": false
+    },
+    "focusable": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the menu item will be focusable.",
       "required": false
     },
     "icon": {
@@ -377,18 +447,21 @@
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox or radio will be checked.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
     "isFocusable": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `focusable` instead.",
       "description": "If `true`, the menu item will be focusable.",
       "required": false
     },

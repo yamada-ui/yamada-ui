@@ -170,13 +170,6 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     onFileDialogOpen,
   })
   const dragIdle = !dragAccept && !dragReject
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    position: "relative",
-    ...styles.container,
-  }
 
   assignRef(openRef, open)
 
@@ -193,7 +186,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
       <ui.div
         id={labelledbyId}
         className={cx("ui-dropzone", className)}
-        __css={css}
+        __css={styles.container}
         {...formControlProps}
         {...containerProps}
         {...getRootProps({})}
@@ -232,24 +225,12 @@ const DropzoneLoadingOverlay: FC<DropzoneLoadingOverlayProps> = ({
 }) => {
   const { loading, styles } = useDropzoneContext()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    h: "100%",
-    justifyContent: "center",
-    left: 0,
-    position: "absolute",
-    top: 0,
-    w: "100%",
-    ...styles.overlay,
-  }
-
   return (
     <Fade
       className="ui-dropzone__overlay"
       open={loading}
       unmountOnExit
-      __css={css}
+      __css={styles.overlay}
       {...rest}
     >
       <Loading

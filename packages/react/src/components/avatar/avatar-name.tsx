@@ -1,4 +1,4 @@
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import type { AvatarProps } from "./avatar"
 import { ui } from "../../core"
 import { useAvatarContext } from "./avatar"
@@ -24,14 +24,12 @@ export const AvatarName: FC<AvatarNameProps> = ({
 }) => {
   const styles = useAvatarContext()
 
-  const css: CSSUIObject = { ...styles.name }
-
   return (
     <ui.div
       className="ui-avatar__name"
       aria-label={name}
       role="img"
-      __css={css}
+      __css={styles.name}
       {...rest}
     >
       {name ? format(name) : null}

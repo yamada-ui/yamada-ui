@@ -12,10 +12,6 @@ interface CarouselIndicatorsOptions {
   component?: FC<{
     index: number
     selected: boolean
-    /**
-     * @deprecated Use `selected` instead.
-     */
-    isSelected?: boolean
   }>
 }
 

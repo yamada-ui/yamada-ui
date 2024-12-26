@@ -44,35 +44,11 @@ export interface UseCheckboxProps<Y extends number | string = string>
    */
   defaultChecked?: boolean
   /**
-   * If `true`, the checkbox will be initially checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `defaultChecked` instead.
-   */
-  defaultIsChecked?: boolean
-  /**
    * If `true`, the checkbox will be indeterminate.
    *
    * @default false
    */
   indeterminate?: boolean
-  /**
-   * If `true`, the checkbox will be checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `checked` instead.
-   */
-  isChecked?: boolean
-  /**
-   * If `true`, the checkbox will be indeterminate.
-   *
-   * @default false
-   *
-   * @deprecated Use `indeterminate` instead.
-   */
-  isIndeterminate?: boolean
   /**
    * If `true`, the checkbox will be selected when the Enter key is pressed.
    *
@@ -115,12 +91,9 @@ export const useCheckbox = <
   const {
     id: _id,
     name,
-    isChecked,
-    checked: checkedProp = isChecked,
-    defaultIsChecked,
-    defaultChecked = defaultIsChecked,
-    isIndeterminate,
-    indeterminate = isIndeterminate,
+    checked: checkedProp,
+    defaultChecked,
+    indeterminate,
     selectOnEnter,
     tabIndex,
     value,
@@ -191,8 +164,8 @@ export const useCheckbox = <
 
   useSafeLayoutEffect(() => {
     if (inputRef.current)
-      inputRef.current.indeterminate = Boolean(isIndeterminate)
-  }, [isIndeterminate])
+      inputRef.current.indeterminate = Boolean(indeterminate)
+  }, [indeterminate])
 
   useUpdateEffect(() => {
     if (disabled) setFocused(false)
@@ -340,30 +313,6 @@ export const useCheckbox = <
     focusVisible,
     hovered,
     indeterminate,
-    /**
-     * @deprecated Use `active` instead.
-     */
-    isActive: active,
-    /**
-     * @deprecated Use `checked` instead.
-     */
-    isChecked: resolvedChecked,
-    /**
-     * @deprecated Use `focused` instead.
-     */
-    isFocused: focused,
-    /**
-     * @deprecated Use `focusVisible` instead.
-     */
-    isFocusVisible: focusVisible,
-    /**
-     * @deprecated Use `hovered` instead.
-     */
-    isHovered: hovered,
-    /**
-     * @deprecated Use `indeterminate` instead.
-     */
-    isIndeterminate,
     props: rest,
     getContainerProps,
     getIconProps,

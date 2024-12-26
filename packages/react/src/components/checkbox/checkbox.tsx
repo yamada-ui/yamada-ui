@@ -84,8 +84,6 @@ export const Checkbox = forwardRef(
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    computedProps.checked ??= computedProps.isChecked
-
     const checkedProp =
       groupValue && computedProps.value
         ? groupValue.includes(computedProps.value)
@@ -119,11 +117,6 @@ export const Checkbox = forwardRef(
       disabled,
       indeterminate,
       invalid,
-      isDisabled: disabled,
-      isIndeterminate: indeterminate,
-      isInvalid: invalid,
-      isReadOnly: readOnly,
-      isRequired: required,
       readOnly,
       required,
       __css: {
@@ -199,36 +192,14 @@ export type CheckboxIconProps = {
    * @default false
    */
   indeterminate?: boolean
-  /**
-   * If `true`, the icon will be checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `checked` instead.
-   */
-  isChecked?: boolean
-  /**
-   * If `true`, the icon will be indeterminate.
-   *
-   * @default false
-   *
-   * @deprecated Use `indeterminate` instead.
-   */
-  isIndeterminate?: boolean
 } & FormControlOptions &
   MotionProps<"svg">
 
 export const CheckboxIcon: FC<CheckboxIconProps> = ({
-  isChecked,
-  checked = isChecked,
+  checked,
   disabled: _disabled,
-  isIndeterminate,
-  indeterminate = isIndeterminate,
+  indeterminate,
   invalid: _invalid,
-  isDisabled: _isDisabled,
-  isInvalid: _isInvalid,
-  isReadOnly: _isReadOnly,
-  isRequired: _isRequired,
   readOnly: _readOnly,
   required: _required,
   ...rest

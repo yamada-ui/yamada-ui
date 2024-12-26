@@ -112,13 +112,6 @@ export const DataList: FC<DataListProps> = (props) => {
     [items],
   )
 
-  const css: CSSUIObject = {
-    ...styles.container,
-    vars: mergeVars(varsProp, styles.container?.vars, [
-      { name: "col", value: col },
-    ]),
-  }
-
   useUpdateEffect(() => {
     if (isNumber(colProp)) return
 
@@ -146,7 +139,12 @@ export const DataList: FC<DataListProps> = (props) => {
         className={cx("ui-data-list", className)}
         data-grid={dataAttr(grid)}
         data-orientation={orientation}
-        __css={css}
+        __css={{
+          ...styles.container,
+          vars: mergeVars(varsProp, styles.container?.vars, [
+            { name: "col", value: col },
+          ]),
+        }}
         {...rest}
       >
         {children ?? computedChildren}
@@ -195,14 +193,12 @@ export const DataListItem: FC<DataListItemProps> = ({
     ? omitChildren(validChildren, DataListTerm, DataListDescription)
     : children
 
-  const css: CSSUIObject = { ...styles.item }
-
   return (
     <ui.div
       className={cx("ui-data-list__item", className)}
       data-grid={dataAttr(grid)}
       data-orientation={orientation}
-      __css={css}
+      __css={styles.item}
       {...rest}
     >
       {!isEmpty(customTerms) ? (
@@ -247,14 +243,12 @@ export interface DataListTermProps extends HTMLUIProps<"dt"> {}
 export const DataListTerm: FC<DataListTermProps> = ({ className, ...rest }) => {
   const { grid, orientation, styles } = useDataListContext()
 
-  const css: CSSUIObject = { ...styles.term }
-
   return (
     <ui.dt
       className={cx("ui-data-list__term", className)}
       data-grid={dataAttr(grid)}
       data-orientation={orientation}
-      __css={css}
+      __css={styles.term}
       {...rest}
     />
   )
@@ -270,14 +264,12 @@ export const DataListDescription: FC<DataListDescriptionProps> = ({
 }) => {
   const { grid, orientation, styles } = useDataListContext()
 
-  const css: CSSUIObject = { ...styles.description }
-
   return (
     <ui.dd
       className={cx("ui-data-list__description", className)}
       data-grid={dataAttr(grid)}
       data-orientation={orientation}
-      __css={css}
+      __css={styles.description}
       {...rest}
     />
   )

@@ -3,7 +3,7 @@ import type { IconButtonProps } from "../button"
 import { forwardRef } from "../../core"
 import { cx } from "../../utils"
 import { IconButton } from "../button"
-import { ChevronIcon } from "../icon"
+import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
 import { useCarouselContext, useCarouselControl } from "./use-carousel"
 
 export interface CarouselControlProps extends IconButtonProps {}
@@ -17,11 +17,11 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
         ref={ref}
         className={cx("ui-carousel__control--prev", className)}
         icon={
-          <ChevronIcon
+          <ChevronLeftIcon
             __css={{
               fontSize: "1.5em",
               transform:
-                orientation === "vertical" ? "rotate(180deg)" : "rotate(90deg)",
+                orientation === "vertical" ? "rotate(90deg)" : "rotate(0deg)",
             }}
           />
         }
@@ -44,11 +44,11 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
         ref={ref}
         className={cx("ui-carousel__control--next", className)}
         icon={
-          <ChevronIcon
+          <ChevronRightIcon
             __css={{
               fontSize: "1.5em",
               transform:
-                orientation === "vertical" ? "rotate(0deg)" : "rotate(-90deg)",
+                orientation === "vertical" ? "rotate(90deg)" : "rotate(0deg)",
             }}
           />
         }

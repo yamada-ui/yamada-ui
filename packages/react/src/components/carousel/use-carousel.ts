@@ -459,8 +459,7 @@ export interface UseCarouselControlProps extends IconButtonProps {
 }
 
 export const useCarouselControl = ({
-  isDisabled,
-  disabled: disabledProp = isDisabled,
+  disabled: disabledProp,
   operation,
 }: UseCarouselControlProps) => {
   const { id, carousel } = useCarouselContext()

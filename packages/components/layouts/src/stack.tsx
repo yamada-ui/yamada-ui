@@ -3,6 +3,7 @@ import type { ReactElement, RefObject } from "react"
 import { forwardRef, ui } from "@yamada-ui/core"
 import {
   cx,
+  getRef,
   getValidChildren,
   mergeRefs,
   replaceObject,
@@ -284,9 +285,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     )
 
     const cloneChildren = useMemo(() => {
-      const validChildren = getValidChildren(children) as ({
-        ref: RefObject<any>
-      } & ReactElement)[]
+      const validChildren = getValidChildren(children) as ReactElement[]
 
       const clonedChildren = validChildren.map((child, index) => {
         const ref = createRef<HTMLDivElement>()
@@ -311,7 +310,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
 
         const props = {
           ...child.props,
-          ref: mergeRefs(child.ref, ref),
+          ref: mergeRefs(getRef(child), ref),
           __css: css,
         }
 

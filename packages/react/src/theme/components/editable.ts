@@ -21,8 +21,13 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        bg: "transparent",
+        fontSize: "inherit",
+        fontWeight: "inherit",
+        outline: 0,
         p: "1",
         rounded: "md",
+        textAlign: "inherit",
         transitionDuration: "normal",
         transitionProperty: "common",
         w: "full",
@@ -41,8 +46,14 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
       }
     },
     preview: {
+      bg: "transparent",
+      cursor: "text",
+      display: "inline-block",
+      fontSize: "inherit",
+      fontWeight: "inherit",
       p: "1",
       rounded: "md",
+      textAlign: "inherit",
       transitionDuration: "normal",
       transitionProperty: "common",
       whiteSpace: "pre-line",
@@ -61,10 +72,15 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         : getColor(ec, ec)(t, m)
 
       return {
+        bg: "transparent",
         boxSizing: "content-box",
+        fontSize: "inherit",
+        fontWeight: "inherit",
         h: "1lh",
+        outline: 0,
         p: "1",
         rounded: "md",
+        textAlign: "inherit",
         transitionDuration: "normal",
         transitionProperty: "common",
         w: "full",

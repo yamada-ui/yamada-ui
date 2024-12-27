@@ -42,14 +42,6 @@ export interface UsePieChartOptions {
    */
   innerRadius?: number | string
   /**
-   * Determines whether labels should be displayed as percentages.
-   *
-   * @default false
-   *
-   * @deprecated Use `percent` instead.
-   */
-  isPercent?: boolean
-  /**
    * A function to format labels.
    */
   labelFormatter?: (value: number) => string
@@ -124,13 +116,12 @@ export const usePieChart = ({
   endAngle = -270,
   fillOpacity = 1,
   innerRadius = "0%",
-  isPercent = false,
   labelFormatter,
   labelOffset,
   withLabels = false,
   outerRadius = withLabels ? "80%" : "100%",
   paddingAngle = 0,
-  percent = isPercent,
+  percent = false,
   startAngle = 90,
   strokeWidth = 1,
   styles,

@@ -125,7 +125,7 @@ export const WithSplit: Story = () => {
   )
 
   const [splitOffset, setSplitOffset] = useState<number | undefined>()
-  const [isOpen, { off, on }] = useBoolean()
+  const [open, { off, on }] = useBoolean()
 
   return (
     <VStack>
@@ -140,7 +140,7 @@ export const WithSplit: Story = () => {
           onMouseEnter={on}
           onMouseLeave={off}
         >
-          <Tooltip label={splitOffset} open={isOpen} placement="top">
+          <Tooltip label={splitOffset} open={open} placement="top">
             <SliderThumb />
           </Tooltip>
         </Slider>

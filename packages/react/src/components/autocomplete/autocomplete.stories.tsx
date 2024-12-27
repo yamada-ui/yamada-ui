@@ -297,7 +297,7 @@ export const WithBorderColor: Story = () => {
 
       <Autocomplete
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -376,7 +376,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
       <Autocomplete variant="outline" disabled placeholder="outline" />
@@ -385,7 +385,7 @@ export const IsDisabled: Story = () => {
       <Autocomplete variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
-        isDisabled
+        disabled
         label="Which notifications would you like to receive?"
       >
         <Autocomplete placeholder="Autocomplete notifications" />
@@ -394,17 +394,17 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Autocomplete variant="outline" isReadOnly placeholder="outline" />
-      <Autocomplete variant="filled" isReadOnly placeholder="filled" />
-      <Autocomplete variant="flushed" isReadOnly placeholder="flushed" />
-      <Autocomplete variant="unstyled" isReadOnly placeholder="unstyled" />
+      <Autocomplete variant="outline" placeholder="outline" readOnly />
+      <Autocomplete variant="filled" placeholder="filled" readOnly />
+      <Autocomplete variant="flushed" placeholder="flushed" readOnly />
+      <Autocomplete variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
-        isReadOnly
         label="Which notifications would you like to receive?"
+        readOnly
       >
         <Autocomplete placeholder="Autocomplete notifications" />
       </FormControl>
@@ -412,17 +412,17 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   return (
     <>
-      <Autocomplete variant="outline" isInvalid placeholder="outline" />
-      <Autocomplete variant="filled" isInvalid placeholder="filled" />
-      <Autocomplete variant="flushed" isInvalid placeholder="flushed" />
-      <Autocomplete variant="unstyled" isInvalid placeholder="unstyled" />
+      <Autocomplete variant="outline" invalid placeholder="outline" />
+      <Autocomplete variant="filled" invalid placeholder="filled" />
+      <Autocomplete variant="flushed" invalid placeholder="flushed" />
+      <Autocomplete variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="Which notifications would you like to receive?"
       >
         <Autocomplete placeholder="Autocomplete notifications" />
@@ -431,11 +431,11 @@ export const IsInvalid: Story = () => {
   )
 }
 
-export const IsOptionDisabled: Story = () => {
+export const OptionDisabled: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-      <AutocompleteOption isDisabled value="ベジータ">
+      <AutocompleteOption disabled value="ベジータ">
         ベジータ
       </AutocompleteOption>
       <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -443,7 +443,7 @@ export const IsOptionDisabled: Story = () => {
   )
 }
 
-export const IsOptionFocusable: Story = () => {
+export const OptionFocusable: Story = () => {
   return (
     <Autocomplete placeholder="キャラクターを選択">
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
@@ -564,7 +564,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.autocomplete1?.message}
-        isInvalid={!!errors.autocomplete1}
+        invalid={!!errors.autocomplete1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -583,7 +583,7 @@ export const ReactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.autocomplete2?.message}
-        isInvalid={!!errors.autocomplete2}
+        invalid={!!errors.autocomplete2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -621,7 +621,7 @@ export const ReactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.autocomplete3?.message}
-        isInvalid={!!errors.autocomplete3}
+        invalid={!!errors.autocomplete3}
         label="Who is your favorite character?"
       >
         <Controller
@@ -696,7 +696,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.autocomplete1?.message}
-        isInvalid={!!errors.autocomplete1}
+        invalid={!!errors.autocomplete1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -715,7 +715,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.autocomplete2?.message}
-        isInvalid={!!errors.autocomplete2}
+        invalid={!!errors.autocomplete2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -753,7 +753,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.autocomplete3?.message}
-        isInvalid={!!errors.autocomplete3}
+        invalid={!!errors.autocomplete3}
         label="Who is your favorite character?"
       >
         <Controller

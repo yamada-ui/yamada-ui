@@ -39,14 +39,6 @@ interface YearPickerOptions {
    */
   focusBorderColor?: string
   /**
-   * If `true`, display the year picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * Props for year picker clear icon element.
    */
   clearIconProps?: DatePickerIconProps
@@ -94,8 +86,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   const {
     className,
     children,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     color,
     h,
     height = h,

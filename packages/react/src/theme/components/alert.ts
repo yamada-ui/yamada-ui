@@ -4,9 +4,14 @@ import { isGray, shadeColor } from "../../utils"
 export const Alert: ComponentMultiStyle<"Alert"> = {
   baseStyle: {
     container: {
+      alignItems: "center",
+      display: "flex",
+      overflow: "hidden",
+      position: "relative",
       px: 4,
       py: 3,
       rounded: "md",
+      w: "100%",
     },
     description: {
       lineHeight: 5,
@@ -22,6 +27,7 @@ export const Alert: ComponentMultiStyle<"Alert"> = {
       marginEnd: 3,
     },
     title: {
+      display: "block",
       fontWeight: "bold",
       lineHeight: 5,
       marginEnd: 2,

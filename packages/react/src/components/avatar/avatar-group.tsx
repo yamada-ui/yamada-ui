@@ -54,13 +54,7 @@ export const AvatarGroup: FC<AvatarGroupProps> = (props) => {
     <ui.div
       className={cx("ui-avatar-group", className)}
       role="group"
-      __css={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "row-reverse",
-        justifyContent: "flex-end",
-        ...styles.group,
-      }}
+      __css={styles.group}
       {...rest}
     >
       {excess > 0 ? (
@@ -90,4 +84,5 @@ export const AvatarGroup: FC<AvatarGroupProps> = (props) => {
   )
 }
 
+AvatarGroup.displayName = "AvatarGroup"
 AvatarGroup.__ui__ = "AvatarGroup"

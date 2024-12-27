@@ -3,6 +3,7 @@ import type { CSSUIObject, FC } from "../../core"
 import type { UseAutocompleteOptionProps } from "./use-autocomplete-option"
 import { ui } from "../../core"
 import { cx } from "../../utils"
+import { CheckIcon } from "../icon/icons"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import { useAutocompleteOption } from "./use-autocomplete-option"
@@ -52,7 +53,7 @@ export const AutocompleteOption: FC<AutocompleteOptionProps> = ({
     >
       {icon !== null ? (
         <AutocompleteItemIcon opacity={selected ? 1 : 0}>
-          {icon || <AutocompleteCheckIcon />}
+          {icon || <CheckIcon boxSize="5" />}
         </AutocompleteItemIcon>
       ) : null}
 
@@ -64,14 +65,3 @@ export const AutocompleteOption: FC<AutocompleteOptionProps> = ({
 }
 
 AutocompleteOption.__ui__ = "AutocompleteOption"
-
-const AutocompleteCheckIcon: FC = () => (
-  <svg height="1em" viewBox="0 0 14 14" width="1em">
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-)
-
-AutocompleteCheckIcon.__ui__ = "AutocompleteCheckIcon"

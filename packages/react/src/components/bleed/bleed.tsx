@@ -54,15 +54,15 @@ export const Bleed: FC<BleedProps> = ({
   inlineEnd = inlineEnd ?? inline
 
   const css = useMemo<CSSUIObject>(() => {
-    const isInlineStartFull = inlineStart === "full"
-    const isInlineEndFull = inlineEnd === "full"
+    const inlineStartFull = inlineStart === "full"
+    const inlineEndFull = inlineEnd === "full"
 
     const marginBlockStart = calc.negate("$blockStart")
     const marginBlockEnd = calc.negate("$blockEnd")
-    const marginInlineStart = isInlineStartFull
+    const marginInlineStart = inlineStartFull
       ? "calc(50% - 50vw)"
       : calc.negate("$inlineStart")
-    const marginInlineEnd = isInlineEndFull
+    const marginInlineEnd = inlineEndFull
       ? "calc(50% - 50vw)"
       : calc.negate("$inlineEnd")
 

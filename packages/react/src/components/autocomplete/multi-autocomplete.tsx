@@ -67,14 +67,6 @@ interface MultiAutocompleteOptions {
    */
   header?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
   /**
-   * If `true`, display the select clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * If `true`, keep the placeholder.
    *
    * @default false
@@ -154,8 +146,7 @@ export const MultiAutocomplete: FC<MultiAutocompleteProps> = ({
   )
   const {
     className,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     closeOnSelect = false,
     color,
     component,
@@ -345,12 +336,12 @@ const MultiAutocompleteField: FC<MultiAutocompleteFieldProps> = ({
       })
     } else {
       return (label as string[]).map((value, index) => {
-        const isLast = label.length === index + 1
+        const last = label.length === index + 1
 
         return (
           <ui.span key={index} display="inline-block" me="0.25rem">
             {value}
-            {!isLast || open ? separator : null}
+            {!last || open ? separator : null}
           </ui.span>
         )
       })

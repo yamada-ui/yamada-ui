@@ -522,8 +522,6 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit,
     })
 
-    const css: CSSUIObject = { ...styles.container }
-
     return (
       <EditableProvider
         value={{
@@ -541,7 +539,7 @@ export const Editable = forwardRef<EditableProps, "div">(
           ref={ref}
           className={cx("ui-editable", className)}
           {...rest}
-          __css={css}
+          __css={styles.container}
         >
           {cloneChildren}
         </ui.div>
@@ -559,21 +557,11 @@ export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles, getPreviewProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      cursor: "text",
-      display: "inline-block",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      textAlign: "inherit",
-      ...styles.preview,
-    }
-
     return (
       <ui.span
         className={cx("ui-editable__preview", className)}
         {...getPreviewProps(rest, ref)}
-        __css={css}
+        __css={styles.preview}
       />
     )
   },
@@ -588,20 +576,11 @@ export const EditableInput = forwardRef<EditableInputProps, "input">(
   ({ className, ...rest }, ref) => {
     const { styles, getInputProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      outline: 0,
-      textAlign: "inherit",
-      ...styles.input,
-    }
-
     return (
       <ui.input
         className={cx("ui-editable__input", className)}
         {...getInputProps(rest, ref)}
-        __css={css}
+        __css={styles.input}
       />
     )
   },
@@ -616,20 +595,11 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
   ({ className, ...rest }, ref) => {
     const { styles, getTextareaProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      outline: 0,
-      textAlign: "inherit",
-      ...styles.textarea,
-    }
-
     return (
       <ui.textarea
         className={cx("ui-editable__textarea", className)}
         {...getTextareaProps(rest, ref)}
-        __css={css}
+        __css={styles.textarea}
       />
     )
   },

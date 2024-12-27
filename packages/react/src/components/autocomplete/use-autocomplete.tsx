@@ -48,10 +48,7 @@ interface AutocompleteItemWithValue extends AutocompleteOptionProps {
 
 interface AutocompleteItemWithItems
   extends AutocompleteOptionGroupProps,
-    Pick<
-      AutocompleteOptionProps,
-      "disabled" | "focusable" | "isDisabled" | "isFocusable"
-    > {
+    Pick<AutocompleteOptionProps, "disabled" | "focusable"> {
   items?: AutocompleteItemWithValue[]
 }
 

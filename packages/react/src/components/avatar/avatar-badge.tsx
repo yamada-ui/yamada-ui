@@ -96,20 +96,14 @@ export const AvatarBadge: FC<AvatarBadgeProps> = ({
     timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
   })
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    position: "absolute",
-    ...placementStyles[placement],
-    ...styles.badge,
-  }
-
   return (
     <ui.div
       className={cx("ui-avatar__badge", className)}
       boxSize={boxSize}
-      __css={css}
+      __css={{
+        ...placementStyles[placement],
+        ...styles.badge,
+      }}
       {...rest}
     >
       {children}
@@ -132,4 +126,5 @@ export const AvatarBadge: FC<AvatarBadgeProps> = ({
   )
 }
 
+AvatarBadge.displayName = "AvatarBadge"
 AvatarBadge.__ui__ = "AvatarBadge"

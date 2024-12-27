@@ -243,7 +243,7 @@ export const isBeforeDate = (value: MaybeDate, date: MaybeDate | undefined) =>
 export const onShouldFocus = <T = any>(
   refs: RefObject<Map<T, RefObject<HTMLButtonElement | null>>>,
   validateFunc: (value: T) => boolean,
-  isFirst = true,
+  first = true,
 ): void => {
   let targetValue: T | undefined
   let targetEl: HTMLButtonElement | null | undefined
@@ -263,7 +263,7 @@ export const onShouldFocus = <T = any>(
     const firstRef = values[0]
     const lastRef = values[values.length - 1]
 
-    targetEl = isFirst ? firstRef?.current : lastRef?.current
+    targetEl = first ? firstRef?.current : lastRef?.current
   }
 
   if (targetEl) {

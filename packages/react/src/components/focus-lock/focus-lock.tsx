@@ -34,14 +34,6 @@ export interface FocusLockProps {
    */
   initialFocusRef?: RefObject<FocusableElement | null>
   /**
-   * If `true`, focus trapping will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
    * Enables aggressive focus capturing within iframes.
    * - If `true`: keep focus in the lock, no matter where lock is active.
    * - If `false`:  allows focus to move outside of iframe.
@@ -73,8 +65,7 @@ export const FocusLock: FC<FocusLockProps> = ({
   autoFocus,
   children,
   contentRef,
-  isDisabled,
-  disabled = isDisabled,
+  disabled,
   finalFocusRef,
   initialFocusRef,
   lockFocusAcrossFrames,

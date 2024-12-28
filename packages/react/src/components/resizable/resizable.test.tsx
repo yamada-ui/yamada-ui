@@ -1,10 +1,6 @@
 import { a11y, render } from "../../../test"
-import {
-  Resizable,
-  ResizableItem,
-  ResizableTrigger,
-  ResizableTriggerIcon,
-} from "./"
+import { GripVerticalIcon } from "../icon"
+import { Resizable, ResizableItem, ResizableTrigger } from "./"
 
 export function assert(
   expectedCondition: any,
@@ -61,15 +57,6 @@ describe("<Resizable />", () => {
 })
 
 describe("<ResizableTriggerIcon />", () => {
-  test("applies styles `width` and `height` correctly", () => {
-    const { getByTestId } = render(
-      <ResizableTriggerIcon data-testid="resizable" />,
-    )
-
-    expect(getByTestId("resizable")).toHaveStyle("width: 0.5rem")
-    expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
-  })
-
   test("icon renders correctly", () => {
     const { getByTestId } = render(
       <Resizable>
@@ -77,15 +64,14 @@ describe("<ResizableTriggerIcon />", () => {
 
         <ResizableTrigger
           data-testid="resizable"
-          icon={<ResizableTriggerIcon />}
+          icon={<GripVerticalIcon data-testid="resizable-icon" />}
         />
 
         <ResizableItem defaultSize={50}>Two</ResizableItem>
       </Resizable>,
     )
 
-    expect(
-      getByTestId("resizable").querySelector(".ui-resizable__trigger__icon"),
-    ).toBeInTheDocument()
+    expect(getByTestId("resizable")).toBeInTheDocument()
+    expect(getByTestId("resizable-icon")).toBeInTheDocument()
   })
 })

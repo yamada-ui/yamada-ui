@@ -104,7 +104,7 @@ export const WithBorderColor: Story = () => {
       <Editable
         defaultValue="custom border color"
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
       >
         <EditablePreview />
         <EditableInput />
@@ -113,17 +113,17 @@ export const WithBorderColor: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" isDisabled>
+      <Editable defaultValue="your email address" disabled>
         <EditablePreview />
         <EditableInput />
       </Editable>
 
       <Fieldset
+        disabled
         helperMessage="We'll never share your email."
-        isDisabled
         legend="Email address"
       >
         <Editable defaultValue="your email address">
@@ -135,18 +135,18 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" isReadOnly>
+      <Editable defaultValue="your email address" readOnly>
         <EditablePreview />
         <EditableInput />
       </Editable>
 
       <Fieldset
         helperMessage="We'll never share your email."
-        isReadOnly
         legend="Email address"
+        readOnly
       >
         <Editable defaultValue="your email address">
           <EditablePreview />
@@ -157,17 +157,17 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" isInvalid>
+      <Editable defaultValue="your email address" invalid>
         <EditablePreview />
         <EditableInput />
       </Editable>
 
       <Fieldset
         errorMessage="Email is required."
-        isInvalid
+        invalid
         legend="Email address"
       >
         <Editable defaultValue="your email address">
@@ -249,7 +249,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.input?.message}
-        isInvalid={!!errors.input}
+        invalid={!!errors.input}
         legend="Name"
       >
         <Controller
@@ -267,7 +267,7 @@ export const ReactHookForm: Story = () => {
 
       <Fieldset
         errorMessage={errors.textarea?.message}
-        isInvalid={!!errors.textarea}
+        invalid={!!errors.textarea}
         legend="Feedback"
       >
         <Controller

@@ -37,15 +37,6 @@ export interface UseEditableProps extends FormControlOptions {
    */
   defaultValue?: string
   /**
-   * If `true`, the read only view, has a `tabIndex` set to `0`
-   * so it can receive focus via the keyboard or click.
-   *
-   * @default true
-   *
-   * @deprecated Use `previewFocusable` instead.
-   */
-  isPreviewFocusable?: boolean
-  /**
    * The placeholder text when the value is empty.
    */
   placeholder?: string
@@ -99,9 +90,8 @@ export const useEditable = (props: UseEditableProps) => {
   const {
     id,
     defaultValue,
-    isPreviewFocusable = true,
     placeholder,
-    previewFocusable = isPreviewFocusable,
+    previewFocusable = true,
     selectAllOnFocus = true,
     startWithEditView,
     submitOnBlur = true,
@@ -194,9 +184,9 @@ export const useEditable = (props: UseEditableProps) => {
         ownerDocument.activeElement) as HTMLElement
       const targetIsCancel = isContains(cancelRef.current, relatedTarget)
       const targetIsSubmit = isContains(submitRef.current, relatedTarget)
-      const isValidBlur = !targetIsCancel && !targetIsSubmit
+      const validBlur = !targetIsCancel && !targetIsSubmit
 
-      if (!isValidBlur) return
+      if (!validBlur) return
 
       if (submitOnBlur) {
         onSubmit()
@@ -393,10 +383,6 @@ export const useEditableControl = () => {
 
   return {
     editing,
-    /**
-     * @deprecated Use `editing` instead.
-     */
-    isEditing: editing,
     getCancelProps,
     getEditProps,
     getSubmitProps,
@@ -465,17 +451,12 @@ export const Editable = forwardRef<EditableProps, "div">(
       className,
       children,
       defaultValue,
-      isDisabled,
-      disabled = isDisabled,
-      isInvalid,
-      invalid = isInvalid,
-      isPreviewFocusable,
-      isReadOnly,
-      isRequired,
+      disabled,
+      invalid,
       placeholder,
-      previewFocusable = isPreviewFocusable,
-      readOnly = isReadOnly,
-      required = isRequired,
+      previewFocusable,
+      readOnly,
+      required,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,

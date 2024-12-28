@@ -215,17 +215,6 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
 }) => {
   const styles = useNativeSelect()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    justifyContent: "center",
-    pointerEvents: "none",
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    ...styles.icon,
-  }
-
   const validChildren = getValidChildren(children)
 
   const cloneChildren = validChildren.map((child) =>
@@ -241,7 +230,11 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   )
 
   return (
-    <ui.div className={cx("ui-select__icon", className)} __css={css} {...rest}>
+    <ui.div
+      className={cx("ui-select__icon", className)}
+      __css={styles.icon}
+      {...rest}
+    >
       {isValidElement(children) ? cloneChildren : <ChevronIcon />}
     </ui.div>
   )

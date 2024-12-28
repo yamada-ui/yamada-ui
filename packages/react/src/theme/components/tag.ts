@@ -4,7 +4,12 @@ import { isAccessible, isGray, shadeColor } from "../../utils"
 export const Tag: ComponentMultiStyle<"Tag"> = {
   baseStyle: {
     closeButton: {
+      alignItems: "center",
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "center",
       opacity: 0.5,
+      outline: "0",
       rounded: "full",
       transitionDuration: "normal",
       transitionProperty: "common",
@@ -27,9 +32,14 @@ export const Tag: ComponentMultiStyle<"Tag"> = {
       },
     },
     container: {
+      alignItems: "center",
+      display: "inline-flex",
       fontWeight: "medium",
+      gap: 1,
+      maxW: "100%",
       outline: 0,
       rounded: "md",
+      verticalAlign: "top",
       _focusVisible: {
         boxShadow: "outline",
       },

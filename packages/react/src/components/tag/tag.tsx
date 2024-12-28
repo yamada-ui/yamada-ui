@@ -1,5 +1,5 @@
 import type { MouseEventHandler, ReactElement } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import { useRef } from "react"
 import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
@@ -77,21 +77,12 @@ export const Tag: FC<TagProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    gap: "fallback(1, 0.25rem)",
-    maxW: "100%",
-    verticalAlign: "top",
-    ...styles.container,
-  }
-
   return (
     <ui.span
       className={cx("ui-tag", className)}
       aria-disabled={ariaAttr(disabled)}
       data-disabled={dataAttr(disabled)}
-      __css={css}
+      __css={styles.container}
       {...rest}
     >
       {startIcon}
@@ -139,19 +130,10 @@ const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {
   const [styles] = useComponentMultiStyle("Tag", props)
   const ref = useRef<HTMLSpanElement>(null)
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    cursor: "pointer",
-    display: "inline-flex",
-    justifyContent: "center",
-    outline: "0",
-    ...styles.closeButton,
-  }
-
   const rest = useClickable<HTMLSpanElement>({ ref, ...props })
 
   return (
-    <ui.span aria-label="Close tag" __css={css} {...rest}>
+    <ui.span aria-label="Close tag" __css={styles.closeButton} {...rest}>
       {children}
     </ui.span>
   )

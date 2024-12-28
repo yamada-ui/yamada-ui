@@ -180,12 +180,12 @@ export const FileInput: FC<FileInputProps> = ({ ref, children, ...props }) => {
       return (
         <ui.span lineClamp={lineClamp}>
           {values.map((value, index) => {
-            const isLast = values.length === index + 1
+            const last = values.length === index + 1
 
             return (
               <ui.span key={index} display="inline-block" me="0.25rem">
                 {format(value, index)}
-                {!isLast ? separator : null}
+                {!last ? separator : null}
               </ui.span>
             )
           })}

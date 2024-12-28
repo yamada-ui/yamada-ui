@@ -18,10 +18,10 @@ import {
   mergeRefs,
   runIfFunc,
 } from "../../utils"
+import { PipetteIcon } from "../icon"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Portal } from "../portal"
 import { ColorSelector } from "./color-selector"
-import { EyeDropperIcon } from "./color-selector-eye-dropper"
 import { ColorSwatch } from "./color-swatch"
 import {
   ColorPickerProvider,
@@ -330,7 +330,7 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
         {isValidElement(children) ? (
           cloneChildren
         ) : (
-          <EyeDropperIcon className="ui-color-picker__eye-dropper__icon" />
+          <PipetteIcon className="ui-color-picker__eye-dropper__icon" />
         )}
       </ui.button>
     )

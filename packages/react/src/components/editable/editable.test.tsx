@@ -36,7 +36,7 @@ describe("<Editable />", () => {
       <Editable
         data-testid="Editable"
         defaultValue="Some text"
-        isPreviewFocusable
+        previewFocusable
       >
         <EditablePreview data-testid="EditablePreview" />
         <EditableInput data-testid="EditableInput" />
@@ -70,7 +70,7 @@ describe("<Editable />", () => {
 
   test("should disable the input", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" isDisabled>
+      <Editable defaultValue="Some text" disabled>
         <EditablePreview />
         <EditableInput data-testid="EditableInput" />
       </Editable>,
@@ -80,7 +80,7 @@ describe("<Editable />", () => {
 
   test("should make the input readOnly", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" isReadOnly>
+      <Editable defaultValue="Some text" readOnly>
         <EditablePreview />
         <EditableInput data-testid="EditableInput" />
       </Editable>,
@@ -309,7 +309,7 @@ describe("useEditableControl", () => {
     }
     const { getByTestId } = render(
       <Editable
-        isPreviewFocusable={false}
+        previewFocusable={false}
         onCancel={onCancel}
         onSubmit={onSubmit}
       >
@@ -329,10 +329,10 @@ describe("useEditableControl", () => {
 
   test("switches to edit mode correctly", () => {
     const CustomControls = () => {
-      const { isEditing, getCancelProps, getEditProps, getSubmitProps } =
+      const { editing, getCancelProps, getEditProps, getSubmitProps } =
         useEditableControl()
 
-      return isEditing ? (
+      return editing ? (
         <>
           <ui.button data-testid="submit" {...getSubmitProps()}>
             Submit
@@ -348,7 +348,7 @@ describe("useEditableControl", () => {
       )
     }
     const { getByTestId } = render(
-      <Editable isPreviewFocusable={false}>
+      <Editable previewFocusable={false}>
         <EditablePreview />
         <EditableInput />
         <CustomControls />

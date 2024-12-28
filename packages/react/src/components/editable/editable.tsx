@@ -37,15 +37,6 @@ export interface UseEditableProps extends FormControlOptions {
    */
   defaultValue?: string
   /**
-   * If `true`, the read only view, has a `tabIndex` set to `0`
-   * so it can receive focus via the keyboard or click.
-   *
-   * @default true
-   *
-   * @deprecated Use `previewFocusable` instead.
-   */
-  isPreviewFocusable?: boolean
-  /**
    * The placeholder text when the value is empty.
    */
   placeholder?: string
@@ -99,9 +90,8 @@ export const useEditable = (props: UseEditableProps) => {
   const {
     id,
     defaultValue,
-    isPreviewFocusable = true,
     placeholder,
-    previewFocusable = isPreviewFocusable,
+    previewFocusable = true,
     selectAllOnFocus = true,
     startWithEditView,
     submitOnBlur = true,
@@ -194,9 +184,9 @@ export const useEditable = (props: UseEditableProps) => {
         ownerDocument.activeElement) as HTMLElement
       const targetIsCancel = isContains(cancelRef.current, relatedTarget)
       const targetIsSubmit = isContains(submitRef.current, relatedTarget)
-      const isValidBlur = !targetIsCancel && !targetIsSubmit
+      const validBlur = !targetIsCancel && !targetIsSubmit
 
-      if (!isValidBlur) return
+      if (!validBlur) return
 
       if (submitOnBlur) {
         onSubmit()
@@ -393,10 +383,6 @@ export const useEditableControl = () => {
 
   return {
     editing,
-    /**
-     * @deprecated Use `editing` instead.
-     */
-    isEditing: editing,
     getCancelProps,
     getEditProps,
     getSubmitProps,
@@ -465,17 +451,12 @@ export const Editable = forwardRef<EditableProps, "div">(
       className,
       children,
       defaultValue,
-      isDisabled,
-      disabled = isDisabled,
-      isInvalid,
-      invalid = isInvalid,
-      isPreviewFocusable,
-      isReadOnly,
-      isRequired,
+      disabled,
+      invalid,
       placeholder,
-      previewFocusable = isPreviewFocusable,
-      readOnly = isReadOnly,
-      required = isRequired,
+      previewFocusable,
+      readOnly,
+      required,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,
@@ -522,8 +503,6 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit,
     })
 
-    const css: CSSUIObject = { ...styles.container }
-
     return (
       <EditableProvider
         value={{
@@ -541,7 +520,7 @@ export const Editable = forwardRef<EditableProps, "div">(
           ref={ref}
           className={cx("ui-editable", className)}
           {...rest}
-          __css={css}
+          __css={styles.container}
         >
           {cloneChildren}
         </ui.div>
@@ -559,21 +538,11 @@ export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles, getPreviewProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      cursor: "text",
-      display: "inline-block",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      textAlign: "inherit",
-      ...styles.preview,
-    }
-
     return (
       <ui.span
         className={cx("ui-editable__preview", className)}
         {...getPreviewProps(rest, ref)}
-        __css={css}
+        __css={styles.preview}
       />
     )
   },
@@ -588,20 +557,11 @@ export const EditableInput = forwardRef<EditableInputProps, "input">(
   ({ className, ...rest }, ref) => {
     const { styles, getInputProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      outline: 0,
-      textAlign: "inherit",
-      ...styles.input,
-    }
-
     return (
       <ui.input
         className={cx("ui-editable__input", className)}
         {...getInputProps(rest, ref)}
-        __css={css}
+        __css={styles.input}
       />
     )
   },
@@ -616,20 +576,11 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
   ({ className, ...rest }, ref) => {
     const { styles, getTextareaProps } = useEditableContext()
 
-    const css: CSSUIObject = {
-      bg: "transparent",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      outline: 0,
-      textAlign: "inherit",
-      ...styles.textarea,
-    }
-
     return (
       <ui.textarea
         className={cx("ui-editable__textarea", className)}
         {...getTextareaProps(rest, ref)}
-        __css={css}
+        __css={styles.textarea}
       />
     )
   },

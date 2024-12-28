@@ -121,11 +121,11 @@ export const useMultiDatePicker = ({
         setValue((prev) => {
           if (prev.length === maxSelectValues) return prev
 
-          const isSelected = prev.some((prevValue) =>
+          const selected = prev.some((prevValue) =>
             isSameDate(prevValue, value),
           )
 
-          return !isSelected ? [...prev, value!] : prev
+          return !selected ? [...prev, value!] : prev
         })
       }
 

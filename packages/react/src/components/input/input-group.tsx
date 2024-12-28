@@ -1,10 +1,4 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  FC,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
+import type { CSSUIProps, FC, HTMLUIProps, ThemeProps } from "../../core"
 import { cloneElement } from "react"
 import {
   omitThemeProps,
@@ -34,14 +28,6 @@ export const InputGroup: FC<InputGroupProps> = (props) => {
   const height = variableProps.height ?? variableProps.h
   const fieldHeight = minHeight ?? height
   const fieldFontSize = variableProps.fontSize
-
-  const css: CSSUIObject = {
-    display: "flex",
-    position: "relative",
-    vars,
-    width: "100%",
-    ...styles.container,
-  }
 
   const groupProps: CSSUIProps = {}
 
@@ -86,7 +72,10 @@ export const InputGroup: FC<InputGroupProps> = (props) => {
       <ui.div
         className={cx("ui-input-group", className)}
         role="group"
-        __css={css}
+        __css={{
+          vars,
+          ...styles.container,
+        }}
         {...rest}
       >
         {cloneChildren}

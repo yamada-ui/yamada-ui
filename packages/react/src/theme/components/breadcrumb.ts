@@ -2,9 +2,15 @@ import type { ComponentMultiStyle } from "../../core"
 
 export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
   baseStyle: {
-    container: {},
+    container: {
+      alignItems: "center",
+      display: "flex",
+    },
     ellipsis: {},
-    item: {},
+    item: {
+      alignItems: "center",
+      display: "inline-flex",
+    },
     link: {
       "&:not([aria-current=page])": {
         cursor: "pointer",

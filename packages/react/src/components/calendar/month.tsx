@@ -284,18 +284,6 @@ export interface DayProps {
   selected: boolean
   weekday: string
   weekend: boolean
-  /**
-   * @deprecated Use `outside` instead.
-   */
-  isOutside?: boolean
-  /**
-   * @deprecated Use `selected` instead.
-   */
-  isSelected?: boolean
-  /**
-   * @deprecated Use `weekend` instead.
-   */
-  isWeekend?: boolean
 }
 
 export const Day: FC<DayProps> = ({ date }) => {

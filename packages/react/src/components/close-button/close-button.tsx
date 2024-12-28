@@ -18,14 +18,6 @@ interface CloseButtonOptions {
    */
   disableRipple?: boolean
   /**
-   * If `true`, the button is disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
    * If true, the button is full rounded.
    *
    * @default false
@@ -49,8 +41,7 @@ export const CloseButton: FC<CloseButtonProps> = (props) => {
   const {
     className,
     children,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     disableRipple,
     isRounded,
     __css,

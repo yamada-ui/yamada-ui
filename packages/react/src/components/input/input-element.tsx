@@ -11,22 +11,6 @@ interface InputElementOptions {
    */
   clickable?: boolean
   /**
-   * If `true`, the element clickable.
-   *
-   * @default false
-   *
-   * @deprecated Use `clickable` instead.
-   */
-  isClick?: boolean
-  /**
-   * If `true`, the element clickable.
-   *
-   * @default false
-   *
-   * @deprecated Use `clickable` instead.
-   */
-  isClickable?: boolean
-  /**
    * The placement of the element.
    *
    * @default 'left'
@@ -38,9 +22,7 @@ export interface InputElementProps extends HTMLUIProps, InputElementOptions {}
 
 const InputElement: FC<InputElementProps> = ({
   className,
-  isClick = false,
-  isClickable = isClick,
-  clickable = isClickable,
+  clickable = false,
   placement = "left",
   ...rest
 }) => {

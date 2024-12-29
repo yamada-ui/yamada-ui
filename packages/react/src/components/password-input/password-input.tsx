@@ -10,11 +10,12 @@ import type { UsePasswordInputProps } from "./use-password-input"
 import { ui } from "../../core"
 import { forwardRef, omitThemeProps, useComponentMultiStyle } from "../../core"
 import { cx } from "../../utils"
+import { EyeIcon, EyeOffIcon } from "../icon"
 import {
   PasswordInputProvider,
   usePasswordInputContext,
 } from "./password-input-context"
-import { EyeIcon, EyeOffIcon, PasswordInputIcon } from "./password-input-icon"
+import { PasswordInputIcon } from "./password-input-icon"
 import { usePasswordInput } from "./use-password-input"
 
 interface PasswordInputOptions {

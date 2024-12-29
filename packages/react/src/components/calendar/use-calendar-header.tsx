@@ -103,7 +103,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       const actions: { [key: string]: Function | undefined } = {
         ArrowDown: onChangeType,
         ArrowLeft: () => {
-          const isDisabled = (() => {
+          const disabled = (() => {
             switch (type) {
               case "year":
                 return minRangeYear <= minYear
@@ -116,10 +116,10 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
             }
           })()
 
-          if (!isDisabled) onPrev()
+          if (!disabled) onPrev()
         },
         ArrowRight: () => {
-          const isDisabled = (() => {
+          const disabled = (() => {
             switch (type) {
               case "year":
                 return maxYear <= maxRangeYear
@@ -132,7 +132,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
             }
           })()
 
-          if (!isDisabled) onNext()
+          if (!disabled) onNext()
         },
       }
 
@@ -175,23 +175,23 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     HTMLProps<"button">
   > = useCallback(
     ({ operation, ...props }) => {
-      const isPrev = operation === "prev"
+      const prev = operation === "prev"
 
-      const ariaLabel = `Go to ${isPrev ? "previous" : "next"} ${
+      const ariaLabel = `Go to ${prev ? "previous" : "next"} ${
         type === "date" ? "month" : "year"
       }`
 
-      const isHidden = (() => {
+      const hidden = (() => {
         switch (type) {
           case "year":
-            if (isPrev) {
+            if (prev) {
               return minRangeYear <= minYear
             } else {
               return maxYear <= maxRangeYear
             }
 
           case "month":
-            if (isPrev) {
+            if (prev) {
               return year <= minYear
             } else {
               return maxYear <= year
@@ -200,7 +200,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
           default:
             if (typeof index !== "number") return
 
-            if (isPrev) {
+            if (prev) {
               return (
                 index !== 0 ||
                 !isMonthInRange({ date: prevMonth, maxDate, minDate })
@@ -217,11 +217,11 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
       return {
         "aria-label": ariaLabel,
         ...props,
-        "aria-disabled": ariaAttr(isHidden),
-        "data-disabled": dataAttr(isHidden),
-        "data-hidden": dataAttr(isHidden),
+        "aria-disabled": ariaAttr(hidden),
+        "data-disabled": dataAttr(hidden),
+        "data-hidden": dataAttr(hidden),
         tabIndex: -1,
-        onClick: handlerAll(isPrev ? onPrev : onNext, props.onClick),
+        onClick: handlerAll(prev ? onPrev : onNext, props.onClick),
       }
     },
     [

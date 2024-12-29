@@ -118,9 +118,7 @@ export const CheckboxCard = forwardRef(
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    computedProps.checked ??= computedProps.isChecked
-
-    const isCheckedProp =
+    const checkedProp =
       groupValue && computedProps.value
         ? groupValue.includes(computedProps.value)
         : computedProps.checked
@@ -137,9 +135,9 @@ export const CheckboxCard = forwardRef(
       getInputProps,
     } = useCheckbox({
       ...computedProps,
+      checked: checkedProp,
       disabled,
       invalid,
-      isChecked: isCheckedProp,
       readOnly,
       required,
       onChange,
@@ -150,11 +148,6 @@ export const CheckboxCard = forwardRef(
       checked,
       disabled,
       invalid,
-      isChecked: checked,
-      isDisabled: disabled,
-      isInvalid: invalid,
-      isReadOnly: readOnly,
-      isRequired: required,
       readOnly,
       required,
       __css: {

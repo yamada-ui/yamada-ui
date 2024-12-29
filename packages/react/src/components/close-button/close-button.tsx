@@ -1,7 +1,7 @@
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
 import { omitThemeProps, ui, useComponentStyle } from "../../core"
 import { cx } from "../../utils"
-import { CloseIcon } from "../icon"
+import { XIcon } from "../icon"
 import { Ripple, useRipple } from "../ripple"
 
 interface CloseButtonOptions {
@@ -74,7 +74,7 @@ export const CloseButton: FC<CloseButtonProps> = (props) => {
       {...rest}
       onPointerDown={onPointerDown}
     >
-      {children || <CloseIcon height="1em" width="1em" />}
+      {children || <XIcon boxSize="2em" />}
 
       <Ripple {...rippleProps} />
     </ui.button>

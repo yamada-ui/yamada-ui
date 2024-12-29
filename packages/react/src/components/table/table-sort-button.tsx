@@ -45,8 +45,6 @@ export const TableSortIcon: FC<TableSortIconProps> = ({
   const styles = useTableStyles()
 
   const css: CSSUIObject = {
-    position: "absolute",
-    top: "50%",
     transform:
       sorted === "desc"
         ? "translateY(-50%) rotate(180deg)"

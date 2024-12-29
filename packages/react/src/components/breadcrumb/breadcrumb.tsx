@@ -33,12 +33,7 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<BreadcrumbContext>({
 export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
   name?: ReactNode
   ellipsisPage?: boolean
-  /**
-   *
-   * @deprecated Use `ellipsisPage` instead.
-   */
-  isEllipsisPage?: boolean
-  containerProps?: Omit<BreadcrumbItemProps, "isLastChild" | "lastChild">
+  containerProps?: Omit<BreadcrumbItemProps, "lastChild">
 }
 
 interface BreadcrumbOptions {
@@ -121,12 +116,6 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
   const exceed =
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    ...styles.container,
-  }
-
   const validChildren = getValidChildren(children)
   const hasChildren = validChildren.length
 
@@ -156,15 +145,8 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
       let hiddenEllipsis: BreadcrumbGenerateItem[] = []
 
       return items.map((item, index) => {
-        const {
-          name,
-          isCurrentPage,
-          currentPage = isCurrentPage,
-          isEllipsisPage,
-          ellipsisPage = isEllipsisPage,
-          containerProps,
-          ...rest
-        } = item
+        const { name, currentPage, ellipsisPage, containerProps, ...rest } =
+          item
         const lastChild = items.length === index + 1
         const props: BreadcrumbItemProps = {
           currentPage,
@@ -245,7 +227,11 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
         __css={styles.container}
         {...rest}
       >
-        <ui.ol className="ui-breadcrumb__list" {...listProps} __css={css}>
+        <ui.ol
+          className="ui-breadcrumb__list"
+          {...listProps}
+          __css={styles.container}
+        >
           {cloneChildren}
         </ui.ol>
       </ui.nav>
@@ -264,22 +250,6 @@ interface BreadcrumbItemOptions
    */
   currentPage?: boolean
   /**
-   * If `true`, change to span element.
-   *
-   * @default false
-   *
-   * @deprecated Use `currentPage` instead.
-   */
-  isCurrentPage?: boolean
-  /**
-   * If `true`, not show separator.
-   *
-   * @default false
-   *
-   * @deprecated Use `lastChild` instead.
-   */
-  isLastChild?: boolean
-  /**
    * If `true`, not show separator.
    *
    * @default false
@@ -294,11 +264,9 @@ export interface BreadcrumbItemProps
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
   className,
   children,
-  isCurrentPage,
-  currentPage = isCurrentPage,
+  currentPage,
   gap,
-  isLastChild,
-  lastChild = isLastChild,
+  lastChild,
   separator,
   separatorProps,
   ...rest
@@ -324,16 +292,10 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
     return child
   })
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    ...styles.item,
-  }
-
   return (
     <ui.li
       className={cx("ui-breadcrumb__item", className)}
-      __css={css}
+      __css={styles.item}
       {...rest}
     >
       {cloneChildren}
@@ -360,14 +322,6 @@ interface BreadcrumbLinkOptions {
    * @default false
    */
   currentPage?: boolean
-  /**
-   * If `true`, change to span element.
-   *
-   * @default false
-   *
-   * @deprecated Use `currentPage` instead.
-   */
-  isCurrentPage?: boolean
 }
 
 export interface BreadcrumbLinkProps
@@ -378,8 +332,7 @@ export const BreadcrumbLink: FC<BreadcrumbLinkProps> = ({
   href,
   className,
   children,
-  isCurrentPage,
-  currentPage = isCurrentPage,
+  currentPage,
   ...rest
 }) => {
   const { styles } = useBreadcrumb()
@@ -417,13 +370,13 @@ export const BreadcrumbSeparator: FC<BreadcrumbSeparatorProps> = ({
   ...rest
 }) => {
   const { styles } = useBreadcrumb()
-  const css: CSSUIObject = {
-    mx,
-    ...styles.separator,
-  }
 
   return (
-    <ui.span className="ui-breadcrumb__item__separator" __css={css} {...rest}>
+    <ui.span
+      className="ui-breadcrumb__item__separator"
+      __css={{ mx, ...styles.separator }}
+      {...rest}
+    >
       {children}
     </ui.span>
   )
@@ -443,16 +396,13 @@ export const BreadcrumbEllipsis: FC<BreadcrumbEllipsisProps> = ({
   ...rest
 }) => {
   const { styles } = useBreadcrumb()
-  const css: CSSUIObject = {
-    ...styles.ellipsis,
-  }
 
   return (
     children ?? (
       <EllipsisIcon
         className={cx("ui-breadcrumb__item__ellipsis", className)}
         aria-label="ellipsis"
-        __css={css}
+        __css={styles.ellipsis}
         {...rest}
       />
     )

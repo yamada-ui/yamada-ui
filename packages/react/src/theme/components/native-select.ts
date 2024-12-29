@@ -21,10 +21,17 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
         },
       },
       icon: {
+        alignItems: "center",
         color: ["blackAlpha.600", "whiteAlpha.700"],
+        display: "inline-flex",
+        justifyContent: "center",
         outline: 0,
+        pointerEvents: "none",
+        position: "absolute",
         py: "2",
         rounded: "md",
+        top: "50%",
+        transform: "translateY(-50%)",
         w: "6",
         _disabled: {
           opacity: 0.4,

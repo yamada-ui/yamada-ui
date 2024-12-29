@@ -19,7 +19,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "../../utils"
-import { CloseIcon, Icon } from "../icon"
+import { Icon, XIcon } from "../icon"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Portal } from "../portal"
 import { Calendar } from "./calendar"
@@ -45,14 +45,6 @@ interface DatePickerOptions {
    * The border color when the input is focused.
    */
   focusBorderColor?: string
-  /**
-   * If `true`, display the date picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
   /**
    * Props for date picker clear icon element.
    */
@@ -101,8 +93,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const {
     className,
     children,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     color,
     h,
     height = h,
@@ -329,7 +320,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon boxSize="4.5" />}
     </DatePickerIcon>
   )
 }

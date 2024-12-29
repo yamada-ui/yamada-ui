@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import type { MotionProps } from "../../components/motion"
 import type { PortalProps } from "../../components/portal"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { AutocompleteCreateProps } from "./autocomplete-create"
 import type { AutocompleteEmptyProps } from "./autocomplete-empty"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
@@ -126,12 +126,6 @@ export const Autocomplete: FC<AutocompleteProps> = ({ ref, ...props }) => {
     onClose,
     ...rest
   } = useAutocomplete({ ...computedProps, defaultValue })
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <AutocompleteDescendantsContextProvider value={descendants}>
@@ -150,13 +144,13 @@ export const Autocomplete: FC<AutocompleteProps> = ({ ref, ...props }) => {
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-autocomplete", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
-            <ui.div
-              className="ui-autocomplete__inner"
-              __css={{ position: "relative", ...styles.inner }}
-            >
+            <ui.div className="ui-autocomplete__inner" __css={styles.inner}>
               <AutocompleteField
                 height={height}
                 minHeight={minHeight}
@@ -216,21 +210,15 @@ const AutocompleteField: FC<AutocompleteFieldProps> = ({
   const { inputValue, label, styles } = useAutocompleteContext()
   const { getInputProps } = useAutocompleteInput()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    h,
-    minH,
-    pe: "2rem",
-    ...styles.field,
-    cursor: "text",
-  }
-
   return (
     <PopoverTrigger>
       <ui.div
         className={cx("ui-autocomplete__field", className)}
-        __css={css}
+        __css={{
+          h,
+          minH,
+          ...styles.field,
+        }}
         {...rest}
       >
         <ui.input

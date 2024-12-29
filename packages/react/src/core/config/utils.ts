@@ -5,6 +5,7 @@ import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { keyframes as emotionKeyframes } from "@emotion/react"
 import { isObject, isString, isUndefined } from "../../utils"
+import { getVar } from "../css"
 
 export type Transform = (
   value: any,
@@ -91,6 +92,12 @@ export function tokenToVar(token: ThemeToken, value: any) {
     const [, resolvedValue, fallbackValue] = match ?? []
 
     if (resolvedValue) value = resolvedValue
+
+    if (isString(value) && value.startsWith("colorScheme.")) {
+      const [, token] = value.split(".")
+
+      return getVar(`colorScheme-${token}`)(theme)
+    }
 
     const resolvedToken = `${token}.${value}`
 

@@ -2,13 +2,13 @@ import type { CSSObject } from "@emotion/react"
 import type * as CSS from "csstype"
 import type { Union } from "../../utils"
 import type { ThemeToken } from "../theme"
-import type { StyledTheme } from "../theme.types"
 import type { Transform } from "./utils"
 import { isNumber, isObject } from "../../utils"
 import { animation } from "./animation"
 import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
+import { colorScheme } from "./color-scheme"
 import { generateFilter } from "./filter"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
@@ -28,12 +28,9 @@ type CSSProperties = Union<
 >
 
 export interface StyleConfig {
-  isProcessResult?: boolean
-  isProcessSkip?: boolean
-  properties?:
-    | ((theme: StyledTheme) => CSSProperties)
-    | CSSProperties
-    | CSSProperties[]
+  processResult?: boolean
+  processSkip?: boolean
+  properties?: CSSProperties | CSSProperties[]
   static?: CSSObject
   token?: ThemeToken
   transform?: Transform
@@ -44,6 +41,7 @@ export interface StyleConfigs {
 }
 
 export const transforms = {
+  colorScheme,
   animation,
   bgClip: (value: any) => {
     if (value === "text") {

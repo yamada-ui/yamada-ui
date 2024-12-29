@@ -229,16 +229,6 @@ describe("css", () => {
     })
   })
 
-  test("supports functional values", () => {
-    const result = css({
-      color: (t: Dict) => t.colors?.gray?.[500],
-    })(theme)
-
-    expect(result).toStrictEqual({
-      color: "#6b7280",
-    })
-  })
-
   test("returns omitted style prop", () => {
     const result = css({
       color: "gray.500",

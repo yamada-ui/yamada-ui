@@ -1,124 +1,105 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES, noop, toTitleCase } from "../../utils"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES, noop } from "../../utils"
 import { Wrap } from "../flex"
+import { For } from "../for"
 import { PlusIcon } from "../icon"
 import { Tag } from "./"
 
-type Story = StoryFn<typeof Tag>
+type Story = StoryFn<typeof Tag.Root>
 
-const meta: Meta<typeof Tag> = {
-  component: Tag,
+const meta: Meta<typeof Tag.Root> = {
+  component: Tag.Root,
   title: "Components / Tag",
 }
 
 export default meta
 
-export const Subtle: Story = () => {
+export const Variants: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Tag key={colorScheme} colorScheme={colorScheme}>
-          {toTitleCase(colorScheme)}
-        </Tag>
-      ))}
-    </Wrap>
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Tag.Root key={key} colorScheme={row} variant={column}>
+            Tag
+          </Tag.Root>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const Surface: Story = () => {
+export const Sizes: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Tag key={colorScheme} colorScheme={colorScheme} variant="surface">
-          {toTitleCase(colorScheme)}
-        </Tag>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Solid: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Tag key={colorScheme} colorScheme={colorScheme} variant="solid">
-          {toTitleCase(colorScheme)}
-        </Tag>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Outline: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Tag key={colorScheme} colorScheme={colorScheme} variant="outline">
-          {toTitleCase(colorScheme)}
-        </Tag>
-      ))}
-    </Wrap>
-  )
-}
-
-export const WithSize: Story = () => {
-  return (
-    <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" size="sm">
-        Small
-      </Tag>
-
-      <Tag colorScheme="secondary" size="md">
-        Medium
-      </Tag>
-
-      <Tag colorScheme="warning" size="lg">
-        Large
-      </Tag>
-    </Wrap>
+    <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Tag.Root key={key} colorScheme={row} size={column}>
+            Tag
+          </Tag.Root>
+        )
+      }}
+    </PropsTable>
   )
 }
 
 export const WithIcon: Story = () => {
   return (
-    <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" size="sm" startIcon={<PlusIcon />}>
-        Small
-      </Tag>
+    <>
+      <PropsTable
+        columns={["solid", "subtle", "surface", "outline"]}
+        rows={COLOR_SCHEMES}
+      >
+        {(column, row, key) => {
+          return (
+            <Tag.Root
+              key={key}
+              colorScheme={row}
+              variant={column}
+              startIcon={<PlusIcon />}
+            >
+              Tag
+            </Tag.Root>
+          )
+        }}
+      </PropsTable>
 
-      <Tag colorScheme="secondary" size="md" endIcon={<PlusIcon />}>
-        Medium
-      </Tag>
-
-      <Tag colorScheme="warning" size="lg" startIcon={<PlusIcon />}>
-        Large
-      </Tag>
-    </Wrap>
+      <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+        {(column, row, key) => {
+          return (
+            <Tag.Root
+              key={key}
+              colorScheme={row}
+              size={column}
+              endIcon={<PlusIcon />}
+            >
+              Tag
+            </Tag.Root>
+          )
+        }}
+      </PropsTable>
+    </>
   )
 }
 
 export const WithCloseButton: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag colorScheme="primary" rounded="full" onClose={noop}>
-        Primary
-      </Tag>
-
-      <Tag colorScheme="secondary" rounded="full" onClose={noop}>
-        Secondary
-      </Tag>
-
-      <Tag colorScheme="success" rounded="full" onClose={noop}>
-        Success
-      </Tag>
-
-      <Tag colorScheme="warning" rounded="full" onClose={noop}>
-        Warning
-      </Tag>
-
-      <Tag colorScheme="danger" rounded="full" onClose={noop}>
-        Danger
-      </Tag>
+      <For each={["primary", "secondary", "success", "warning", "error"]}>
+        {(colorScheme, index) => (
+          <Tag.Root
+            key={index}
+            colorScheme={colorScheme}
+            rounded="full"
+            onClose={noop}
+          >
+            {colorScheme}
+          </Tag.Root>
+        )}
+      </For>
     </Wrap>
   )
 }
@@ -126,45 +107,19 @@ export const WithCloseButton: Story = () => {
 export const WithDisabled: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <Tag
-        colorScheme="primary"
-        variant="solid"
-        isDisabled
-        rounded="full"
-        onClose={noop}
-      >
-        Primary
-      </Tag>
-
-      <Tag
-        colorScheme="secondary"
-        variant="solid"
-        isDisabled
-        rounded="full"
-        onClose={noop}
-      >
-        Secondary
-      </Tag>
-
-      <Tag
-        colorScheme="warning"
-        variant="solid"
-        isDisabled
-        rounded="full"
-        onClose={noop}
-      >
-        Warning
-      </Tag>
-
-      <Tag
-        colorScheme="danger"
-        variant="solid"
-        isDisabled
-        rounded="full"
-        onClose={noop}
-      >
-        Danger
-      </Tag>
+      <For each={["primary", "secondary", "success", "warning", "error"]}>
+        {(colorScheme, index) => (
+          <Tag.Root
+            key={index}
+            colorScheme={colorScheme}
+            disabled
+            rounded="full"
+            onClose={noop}
+          >
+            {colorScheme}
+          </Tag.Root>
+        )}
+      </For>
     </Wrap>
   )
 }

@@ -1,29 +1,34 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
-import type { CSSProps, CSSUIObject, CSSUIProps } from "../css"
-import type { StyledTheme } from "../theme.types"
+import type { CSSModifierObject, CSSPropObject, CSSProps } from "../css"
+import type { ComponentStyle, StyledTheme } from "../theme.types"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
-export type BaseStyle =
-  | ((props: InterpolationProps) => CSSUIObject)
-  | CSSUIObject
+export type ShouldForwardProp = (prop: string) => boolean
 
-export interface StyledOptions {
-  baseStyle?: BaseStyle
-  disableStyleProp?: (prop: string) => boolean
+export interface StyledOptions<
+  Y extends CSSPropObject = CSSPropObject,
+  M extends CSSModifierObject = CSSModifierObject,
+  D extends CSSModifierObject = CSSModifierObject,
+  H extends number | string | symbol = string,
+> extends ComponentStyle<Y, M, D> {
+  name?: string
+  target?: string
   label?: string
-  shouldForwardProp?: (prop: string) => boolean
+  shouldForwardProp?: boolean | ShouldForwardProp
+  forwardProps?: string[]
+  transferProps?: H[]
 }
 
 export interface UIFactory {
   <Y extends As, M extends object = {}>(
-    el: Y,
+    el: React.FC<M> | Y,
     options?: StyledOptions,
   ): UIComponent<Y, M>
 }
 
-export interface UIProps extends CSSProps, CSSUIProps {
+export interface UIProps extends CSSProps {
   /**
    * The HTML element to render.
    */
@@ -34,8 +39,7 @@ export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type InterpolationProps = {
   theme: StyledTheme
-} & CSSProps &
-  CSSUIObject
+} & CSSProps
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = M &
   Omit<Y, "as" | keyof M>
@@ -59,7 +63,7 @@ export interface ComponentArgs
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
-  <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
+  <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactNode
 }
 
 export type FC<Y extends object = {}> = FunctionComponent<Y>
@@ -105,15 +109,9 @@ type ConditionalProps<Y> = Y extends DOMElement ? HTMLProps<Y> : Y
 type DefinedProps<Y, M> = M extends undefined ? Y : M
 
 export interface PropGetter<Y = "div", M = undefined> {
-  (
-    props?: ConditionalProps<Y>,
-    ref?: React.Ref<any>,
-  ): DefinedProps<ConditionalProps<Y>, M> & React.RefAttributes<any>
+  (props?: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
 }
 
 export interface RequiredPropGetter<Y = "div", M = undefined> {
-  (
-    props: ConditionalProps<Y>,
-    ref?: React.Ref<any>,
-  ): DefinedProps<ConditionalProps<Y>, M> & React.RefAttributes<any>
+  (props: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
 }

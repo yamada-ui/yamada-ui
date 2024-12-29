@@ -13,7 +13,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <SimpleGrid columns={{ base: 2, md: 1 }} gap="md" w="full">
+    <SimpleGrid columns={2} gap="md" w="full">
       <GridItem
         bg="primary"
         color="white"

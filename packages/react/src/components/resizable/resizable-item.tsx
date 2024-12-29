@@ -6,9 +6,9 @@ import { forwardRef, ui } from "../../core"
 import { cx } from "../../utils"
 import { useResizableContext, useResizableItem } from "./use-resizable"
 
-const panelProps = new Set(["order"])
+const forwardProps = ["order"]
 
-const UIPanel = ui(Panel, { disableStyleProp: (prop) => panelProps.has(prop) })
+const UIPanel = ui(Panel, { forwardProps })
 
 interface ResizableItemOptions {
   /**

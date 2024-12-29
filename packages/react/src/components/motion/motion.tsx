@@ -5,11 +5,9 @@ import { motion } from "motion/react"
 import { ui } from "../../core"
 import { cx } from "../../utils"
 
-const disableStyleProps = ["transition"]
+const forwardProps = ["transition"]
 
-const disableStyleProp = (prop: string) => disableStyleProps.includes(prop)
-
-const Component = ui<"div", Dict>("div", { disableStyleProp })
+const Component = ui<"div", Dict>("div", { forwardProps })
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.

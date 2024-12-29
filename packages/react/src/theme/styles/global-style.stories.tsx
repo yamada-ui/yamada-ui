@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { UIStyle } from "../../core"
+import type { CSSObject } from "../../core"
 import { Center } from "../../components/center"
 import { Image } from "../../components/image"
 import { UIProvider } from "../../providers/ui-provider"
@@ -10,7 +10,7 @@ export default {
 }
 
 export const Basic = () => {
-  const globalStyle: UIStyle = {
+  const globalStyle: CSSObject = {
     /**
      * Define the style you want to customize
      */

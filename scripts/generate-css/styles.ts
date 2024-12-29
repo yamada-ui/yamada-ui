@@ -1,7 +1,7 @@
 import type { ThemeToken, Transforms } from "@yamada-ui/react"
 import type { CSSProperty, Properties } from "."
 import type { TransformOptions } from "./transform-props"
-import type { UIOptions } from "./ui-props"
+import type { StyleConfig } from "./ui-props"
 import { pseudoSelectors, toKebabCase } from "@yamada-ui/react"
 import { prettier } from "../utils"
 import { checkProps } from "./check"
@@ -23,20 +23,20 @@ const addType = (result: string, value: string) =>
 
 const generateType = ({
   type,
-  isProcessSkip = false,
+  processSkip = false,
   prop,
   token,
   transforms,
 }: {
   type: string | string[]
-  isProcessSkip?: boolean
+  processSkip?: boolean
   prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !isProcessSkip ? "Token<>" : ""
+  let result = !processSkip ? "Token<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -184,15 +184,15 @@ export const generateStyles = async (
       {
         type,
         description,
-        isProcessResult,
-        isProcessSkip,
+        processResult,
+        processSkip,
         properties,
         static: css,
       },
-    ]: [string, UIOptions],
+    ]: [string, StyleConfig],
     targetStyles: string[],
   ) => {
-    if (isProcessSkip) processSkipProps.push(prop)
+    if (processSkip) processSkipProps.push(prop)
 
     const relatedStyles = styles.filter(({ prop }) =>
       typeof properties === "string"
@@ -208,15 +208,15 @@ export const generateStyles = async (
 
     type = generateType({
       type: type ?? types,
-      isProcessSkip,
+      processSkip,
       token,
       transforms,
     })
 
     const config = generateConfig({
       css,
-      isProcessResult,
-      isProcessSkip,
+      processResult,
+      processSkip,
       properties,
       token,
       transforms,
@@ -246,13 +246,13 @@ export const generateStyles = async (
     }
   }
 
-  Object.entries<UIOptions>(additionalProps).forEach((entry) =>
+  Object.entries<StyleConfig>(additionalProps).forEach((entry) =>
     addStyles(entry, standardStyles),
   )
-  Object.entries<UIOptions>(uiProps).forEach((entry) =>
+  Object.entries<StyleConfig>(uiProps).forEach((entry) =>
     addStyles(entry, uiStyles),
   )
-  Object.entries<UIOptions>(atRuleProps).forEach((entry) =>
+  Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
     addStyles(entry, atRuleStyles),
   )
 
@@ -277,9 +277,9 @@ export const generateStyles = async (
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
     import type { StyleConfigs } from "./config"
-    import type { CSSUIObject, Token } from "./css"
+    import type { CSSObject, Token } from "./css"
     import type { ThemeToken } from "./theme"
-    import type { Theme } from "./theme.types"
+    import type { ColorScheme, Theme } from "./theme.types"
     import { transforms } from "./config"
     import { pipe } from "./config/utils"
 

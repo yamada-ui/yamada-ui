@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { Github } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `GithubIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const GithubIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={Github} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const GithubIcon = component(Icon)({ as: Github })

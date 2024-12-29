@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { TestTubes } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `TestTubesIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TestTubesIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={TestTubes} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const TestTubesIcon = component(Icon)({ as: TestTubes })

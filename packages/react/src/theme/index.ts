@@ -1,18 +1,15 @@
-import { components } from "./components"
 import { config } from "./config"
 import { semantics } from "./semantics"
 import { globalStyle, layerStyles, resetStyle, textStyles } from "./styles"
 import { tokens } from "./tokens"
 
 export const defaultTheme = {
-  components,
   semantics,
   styles: { globalStyle, layerStyles, resetStyle, textStyles },
   ...tokens,
 }
 
 export const baseTheme = {
-  semantics,
   styles: { globalStyle, layerStyles, resetStyle, textStyles },
   ...tokens,
 }

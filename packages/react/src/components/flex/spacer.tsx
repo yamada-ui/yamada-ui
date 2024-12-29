@@ -4,7 +4,7 @@ import { ui } from "../../core"
 export interface SpacerProps extends HTMLUIProps {}
 
 export const Spacer = ui("div", {
-  baseStyle: {
+  base: {
     alignSelf: "stretch",
     flex: 1,
     justifySelf: "stretch",

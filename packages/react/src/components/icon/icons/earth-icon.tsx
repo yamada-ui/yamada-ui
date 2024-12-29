@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { Earth } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `EarthIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const EarthIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={Earth} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const EarthIcon = component(Icon)({ as: Earth })

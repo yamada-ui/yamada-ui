@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES, toTitleCase } from "../../utils"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
 import { Wrap } from "../flex"
 import { ArrowRightIcon, CheckIcon, MailIcon, PlusIcon } from "../icon"
 import { Button } from "./button"
@@ -13,109 +14,34 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-export const Solid: Story = () => {
+export const Variants: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Button key={colorScheme} colorScheme={colorScheme}>
-          {toTitleCase(colorScheme)}
-        </Button>
-      ))}
-    </Wrap>
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline", "ghost"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Button key={key} colorScheme={row} variant={column}>
+            Button
+          </Button>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const Subtle: Story = () => {
+export const Sizes: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Button key={colorScheme} colorScheme={colorScheme} variant="subtle">
-          {toTitleCase(colorScheme)}
-        </Button>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Surface: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Button key={colorScheme} colorScheme={colorScheme} variant="surface">
-          {toTitleCase(colorScheme)}
-        </Button>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Outline: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Button key={colorScheme} colorScheme={colorScheme} variant="outline">
-          {toTitleCase(colorScheme)}
-        </Button>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Ghost: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Button key={colorScheme} colorScheme={colorScheme} variant="ghost">
-          {toTitleCase(colorScheme)}
-        </Button>
-      ))}
-    </Wrap>
-  )
-}
-
-export const WithSize: Story = () => {
-  return (
-    <Wrap gap="md">
-      <Button colorScheme="primary" size="xs">
-        X Small
-      </Button>
-
-      <Button colorScheme="secondary" size="sm">
-        Small
-      </Button>
-
-      <Button colorScheme="warning" size="md">
-        Medium
-      </Button>
-
-      <Button colorScheme="danger" size="lg">
-        Large
-      </Button>
-    </Wrap>
-  )
-}
-
-export const WithVariant: Story = () => {
-  return (
-    <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid">
-        Solid
-      </Button>
-
-      <Button colorScheme="secondary" variant="outline">
-        Outline
-      </Button>
-
-      <Button colorScheme="warning" variant="ghost">
-        Ghost
-      </Button>
-
-      <Button colorScheme="danger" variant="link">
-        Link
-      </Button>
-
-      <Button variant="unstyled">Unstyle</Button>
-    </Wrap>
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Button key={key} colorScheme={row} size={column}>
+            Button
+          </Button>
+        )
+      }}
+    </PropsTable>
   )
 }
 
@@ -190,7 +116,7 @@ export const WithLoading: Story = () => {
         Button
       </Button>
 
-      <Button colorScheme="primary" loading loadingText="Loading...">
+      <Button colorScheme="primary" loading loadingMessage="Loading...">
         Button
       </Button>
 
@@ -199,8 +125,8 @@ export const WithLoading: Story = () => {
         variant="outline"
         loading
         loadingIcon="grid"
+        loadingMessage="Loading..."
         loadingPlacement="end"
-        loadingText="Loading..."
       >
         Button
       </Button>

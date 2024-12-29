@@ -1,9 +1,9 @@
 import type * as CSS from "csstype"
 import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
-import type { CSSUIObject, Token } from "./css"
+import type { CSSObject, Token } from "./css"
 import type { ThemeToken } from "./theme"
-import type { Theme } from "./theme.types"
+import type { ColorScheme, Theme } from "./theme.types"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 
@@ -1742,14 +1742,18 @@ export const pseudoStyles = {
 export type UIStyleProperty = keyof typeof uiStyles
 
 export const uiStyles = {
-  apply: { isProcessResult: true, transform: transforms.styles() },
+  apply: { processResult: true, transform: transforms.styles() },
   layerStyle: {
-    isProcessResult: true,
+    processResult: true,
     transform: transforms.styles("layerStyles"),
   },
   textStyle: {
-    isProcessResult: true,
+    processResult: true,
     transform: transforms.styles("textStyles"),
+  },
+  colorScheme: {
+    processResult: true,
+    transform: transforms.colorScheme,
   },
   isTruncated: { transform: transforms.isTruncated },
   lineClamp: {
@@ -1762,15 +1766,15 @@ export const uiStyles = {
       WebkitLineClamp: "var(--ui-line-clamp)",
     },
   },
-  vars: { isProcessSkip: true, transform: transforms.vars },
+  vars: { processSkip: true, transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
-  _container: { isProcessSkip: true, transform: transforms.container },
-  _media: { isProcessSkip: true, transform: transforms.media },
-  _supports: { isProcessSkip: true, transform: transforms.supports },
+  _container: { processSkip: true, transform: transforms.container },
+  _media: { processSkip: true, transform: transforms.media },
+  _supports: { processSkip: true, transform: transforms.supports },
 } as const satisfies StyleConfigs
 
 export type Styles = typeof styles
@@ -2245,6 +2249,10 @@ export interface StyleProps {
    * Apply text styles defined in `theme.textStyles`.
    */
   textStyle?: Token<StringLiteral, "textStyles">
+  /**
+   * Set color scheme variables.
+   */
+  colorScheme?: ColorScheme
   /**
    * The CSS `accent-color` property.
    *
@@ -5939,8 +5947,7 @@ export interface StyleProps {
   vars?: {
     name: string
     token?: ThemeToken
-    value?: Token<number | StringLiteral>
-    __prefix?: string
+    value?: Token<any>
   }[]
   /**
    * The CSS `vector-effect` property.
@@ -6078,7 +6085,7 @@ export interface StyleProps {
   _container?: {
     [key: string]: any
     name?: StringLiteral
-    css?: CSSUIObject
+    css?: CSSObject
     aspectRatio?: CSS.Property.AspectRatio
     blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
     h?: CSS.Property.Height | number | Theme["sizes"]
@@ -6119,7 +6126,7 @@ export interface StyleProps {
   _media?: {
     [key: string]: any
     type?: "all" | "print" | "screen" | "speech" | StringLiteral
-    css?: CSSUIObject
+    css?: CSSObject
     anyHover?: "hover" | "none" | StringLiteral
     anyPointer?: "coarse" | "fine" | "none" | StringLiteral
     aspectRatio?: CSS.Property.AspectRatio
@@ -6206,5 +6213,5 @@ export interface StyleProps {
    * </Box>
    * ```
    */
-  _supports?: { css?: CSSUIObject; query?: StringLiteral }[]
+  _supports?: { css?: CSSObject; query?: StringLiteral }[]
 }

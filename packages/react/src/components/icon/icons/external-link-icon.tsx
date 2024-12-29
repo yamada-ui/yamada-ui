@@ -1,18 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { ExternalLink } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `ExternalLinkIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ExternalLinkIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon
-    as={ExternalLink}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const ExternalLinkIcon = component(Icon)({ as: ExternalLink })

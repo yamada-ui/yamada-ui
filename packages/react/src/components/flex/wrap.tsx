@@ -1,14 +1,23 @@
-import type { FC } from "../../core"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { FlexProps } from "./flex"
+import type { WrapStyle } from "./wrap.style"
+import { createComponent } from "../../core"
 import { Flex } from "./flex"
+import { wrapStyle } from "./wrap.style"
 
-export interface WrapProps extends FlexProps {}
+export interface WrapProps
+  extends WithoutThemeProps<FlexProps>,
+    ThemeProps<WrapStyle> {}
+
+export const {
+  PropsContext: WrapPropsContext,
+  usePropsContext: useWrapPropsContext,
+  withContext,
+} = createComponent<WrapProps, WrapStyle>("wrap", wrapStyle)
 
 /**
  * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.
  *
  * @see Docs https://yamada-ui.com/components/layouts/wrap
  */
-export const Wrap: FC<WrapProps> = (props) => <Flex wrap="wrap" {...props} />
-
-Wrap.__ui__ = "Wrap"
+export const Wrap = withContext(Flex)()

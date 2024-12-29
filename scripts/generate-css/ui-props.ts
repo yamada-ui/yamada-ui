@@ -1,13 +1,13 @@
-import type { CSSObject, Union } from "@yamada-ui/react"
+import type { EmotionCSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
-export interface UIOptions {
+export interface StyleConfig {
   type?: string
   description?: string[]
-  isProcessResult?: boolean
-  isProcessSkip?: boolean
+  processResult?: boolean
+  processSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
-  static?: CSSObject
+  static?: EmotionCSSObject
 }
 
 export const additionalProps = {
@@ -207,7 +207,7 @@ export const additionalProps = {
     ],
     properties: "--ui-translate-y",
   },
-} as const satisfies { [key: string]: UIOptions }
+} as const satisfies { [key: string]: StyleConfig }
 
 export const uiProps = {
   apply: {
@@ -221,17 +221,22 @@ export const uiProps = {
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
-    isProcessResult: true,
+    processResult: true,
   },
   layerStyle: {
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
-    isProcessResult: true,
+    processResult: true,
   },
   textStyle: {
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
-    isProcessResult: true,
+    processResult: true,
+  },
+  colorScheme: {
+    type: `ColorScheme`,
+    description: ["Set color scheme variables."],
+    processResult: true,
   },
   isTruncated: {
     type: "boolean",
@@ -250,7 +255,7 @@ export const uiProps = {
     },
   },
   vars: {
-    type: "{ __prefix?: string; name: string; token?: ThemeToken, value?: Token<number | StringLiteral> }[]",
+    type: "{ name: string; token?: ThemeToken, value?: Token<any> }[]",
     description: [
       "Set CSS variables.",
       "@experimental",
@@ -265,9 +270,9 @@ export const uiProps = {
       "</Box>",
       "```",
     ],
-    isProcessSkip: true,
+    processSkip: true,
   },
-} as const satisfies { [key: string]: UIOptions }
+} as const satisfies { [key: string]: StyleConfig }
 
 export const atRuleProps = {
   _container: {
@@ -296,7 +301,7 @@ export const atRuleProps = {
       'minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]',
       'maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]',
       'orientation?: "portrait" | "landscape" | StringLiteral',
-      "css?: CSSUIObject",
+      "css?: CSSObject",
       "[key: string]: any",
     ].join(";")}}[]`,
     description: [
@@ -312,7 +317,7 @@ export const atRuleProps = {
       "</Box>",
       "```",
     ],
-    isProcessSkip: true,
+    processSkip: true,
   },
   _media: {
     type: `{ ${[
@@ -372,7 +377,7 @@ export const atRuleProps = {
       'scripting?: "none" | "initial-only" | "enabled" | StringLiteral',
       'update?: "none" | "slow" | "fast" | StringLiteral',
       'videoDynamicRange?: "standard" | "high" | StringLiteral',
-      "css?: CSSUIObject",
+      "css?: CSSObject",
       "[key: string]: any",
     ].join(";")} }[]`,
     description: [
@@ -388,10 +393,10 @@ export const atRuleProps = {
       "</Box>",
       "```",
     ],
-    isProcessSkip: true,
+    processSkip: true,
   },
   _supports: {
-    type: `{${["query?: StringLiteral", "css?: CSSUIObject"].join(";")}}[]`,
+    type: `{${["query?: StringLiteral", "css?: CSSObject"].join(";")}}[]`,
     description: [
       "The `@supports` of CSS at-rule.",
       "@experimental",
@@ -405,6 +410,6 @@ export const atRuleProps = {
       "</Box>",
       "```",
     ],
-    isProcessSkip: true,
+    processSkip: true,
   },
-} as const satisfies { [key: string]: UIOptions }
+} as const satisfies { [key: string]: StyleConfig }

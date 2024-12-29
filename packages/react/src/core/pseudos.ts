@@ -1,5 +1,5 @@
 import type { Length, Replace } from "../utils"
-import type { CSSUIObject } from "./css"
+import type { CSSObject } from "./css"
 
 type ReplaceSelectors<
   Y extends string[],
@@ -150,7 +150,7 @@ export type Attributes = typeof attributes
 export type AttributeProperty = keyof Attributes
 export type AttributeSelector = Attributes[AttributeProperty]
 export type AttributeProps = {
-  [K in AttributeProperty]?: CSSUIObject
+  [K in AttributeProperty]?: CSSObject
 }
 
 export const attributeProperties = Object.keys(
@@ -239,7 +239,7 @@ export type PseudoElements = typeof pseudoElements
 export type PseudoElementProperty = keyof PseudoElements
 export type PseudoElementSelector = PseudoElements[PseudoElementProperty]
 export type PseudoElementProps = {
-  [K in PseudoElementProperty]?: CSSUIObject
+  [K in PseudoElementProperty]?: CSSObject
 }
 
 export const pseudoElementProperties = Object.keys(
@@ -577,7 +577,7 @@ export type PseudoClasses = typeof pseudoClasses
 export type PseudoClassProperty = keyof PseudoClasses
 export type PseudoClassSelector = PseudoClasses[PseudoClassProperty]
 export type PseudoClassProps = {
-  [K in PseudoClassProperty]?: CSSUIObject
+  [K in PseudoClassProperty]?: CSSObject
 }
 
 export const pseudoClassProperties = Object.keys(
@@ -626,7 +626,7 @@ export type AtRules = typeof atRules
 export type AtRuleProperty = keyof AtRules
 export type AtRuleSelector = AtRules[AtRuleProperty]
 export type AtRuleProps = {
-  [K in keyof AtRules]?: CSSUIObject
+  [K in keyof AtRules]?: CSSObject
 }
 
 export const atRuleProperties = Object.keys(atRules) as AtRuleProperty[]
@@ -751,7 +751,7 @@ export type GroupAttributes = typeof groupAttributes
 export type GroupAttributeProperty = keyof GroupAttributes
 export type GroupAttributeSelector = GroupAttributes[GroupAttributeProperty]
 export type GroupAttributeProps = {
-  [K in GroupAttributeProperty]?: CSSUIObject
+  [K in GroupAttributeProperty]?: CSSObject
 }
 
 export const groupAttributeProperties = Object.keys(
@@ -878,7 +878,7 @@ export type PeerAttributes = typeof peerAttributes
 export type PeerAttributeProperty = keyof PeerAttributes
 export type PeerAttributeSelector = PeerAttributes[PeerAttributeProperty]
 export type PeerAttributeProps = {
-  [K in PeerAttributeProperty]?: CSSUIObject
+  [K in PeerAttributeProperty]?: CSSObject
 }
 
 export const peerAttributeProperties = Object.keys(
@@ -899,7 +899,7 @@ export type Pseudos = typeof pseudos
 export type PseudoProperty = keyof Pseudos
 export type PseudoSelector = Pseudos[PseudoProperty]
 export type PseudoProps = {
-  [K in keyof Pseudos]?: CSSUIObject
+  [K in keyof Pseudos]?: CSSObject
 }
 
 export const pseudoProperties = Object.keys(pseudos) as PseudoProperty[]

@@ -1,59 +1,13 @@
-import type { Interpolation } from "@emotion/react"
 import type * as CSS from "csstype"
-import type { Dict, ObjectLiteral, StringLiteral } from "../../utils"
+import type { ObjectLiteral, StringLiteral } from "../../utils"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { InternalTheme, StyledTheme, Theme } from "../theme.types"
+import type { Breakpoint, StyledTheme, Theme } from "../theme.types"
 
 export type { CSS }
 
 export type ColorMode = "dark" | "light"
 export type ColorModeWithSystem = "system" | ColorMode
-export type Breakpoint = "base" | Theme["breakpoints"]
-
-export type ThemeVariant<
-  Y extends keyof Theme["components"] | unknown = unknown,
-> = Y extends keyof Theme["components"]
-  ? UIValue<Theme["components"][Y]["variants"]>
-  : UIValue<string>
-
-export type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
-  Y extends keyof Theme["components"]
-    ? UIValue<Theme["components"][Y]["sizes"]>
-    : UIValue<string>
-
-export type ThemeColorScheme =
-  | [Theme["colorSchemes"], Theme["colorSchemes"]]
-  | Theme["colorSchemes"]
-
-export interface ThemeProps<
-  Y extends keyof Theme["components"] | unknown = unknown,
-> {
-  /**
-   * The color scheme of the component.
-   */
-  colorScheme?: ThemeColorScheme
-  /**
-   * The size of the component.
-   */
-  size?: ThemeSize<Y>
-  /**
-   * The variant of the component.
-   */
-  variant?: ThemeVariant<Y>
-  /**
-   * If `true`, skip component theming.
-   *
-   * @private
-   */
-  __isProcessSkip?: boolean
-  /**
-   * The styles used to override component styles when `__isProcessSkip` is true
-   *
-   * @private
-   */
-  __styles?: { [key: string]: CSSUIObject | undefined } | CSSUIObject
-}
 
 export type ColorModeArray<Y, M extends boolean = true> = M extends true
   ? [ResponsiveObject<Y, false> | Y, ResponsiveObject<Y, false> | Y]
@@ -79,70 +33,54 @@ export type Token<Y, M = unknown> = M extends keyof Theme
   ? UIValue<Theme[M] | Y>
   : UIValue<Y>
 
-export type StyledProps<Y> = ((theme: StyledTheme) => Y) | Y
-
-export interface StyleProperties
+export interface CSSProperties
   extends CSS.Properties,
     Omit<StyleProps, keyof CSS.Properties> {}
 
-type StyleValue<Y extends keyof StyleProperties> = StyledProps<
-  UIValue<StyleProperties[Y]>
->
+type StyleValue<Y extends keyof CSSProperties> = UIValue<CSSProperties[Y]>
 
-type UIStyleValue<Y extends keyof StyleProperties | keyof StyleProps> =
+type StyleUIValue<Y extends keyof CSSProperties | keyof StyleProps> =
   Y extends keyof StyleProps ? StyleProps[Y] | StyleValue<Y> : StyleValue<Y>
 
-export type UIStyles = {
-  [Y in keyof StyleProperties]?: UIStyleValue<Y>
+export type StyleObject = {
+  [Y in keyof CSSProperties]?: StyleUIValue<Y>
 }
 
-export type RecursiveStyles<Y> = {
+export type CSSRecursiveObject<Y> = {
   [K in keyof CSS.Pseudos | keyof PseudoProps | StringLiteral]?:
+    | (CSSRecursiveObject<Y> & Y)
     | ObjectLiteral
-    | (RecursiveStyles<Y> & Y)
 }
 
-export interface CSSUIObject extends UIStyles, RecursiveStyles<UIStyles> {}
+export interface CSSObject
+  extends StyleObject,
+    CSSRecursiveObject<StyleObject> {}
 
-export interface CSSProps {
-  /**
-   * The emotion's css object.
-   */
-  css?: Interpolation<{}>
-  /**
-   * The CSS object that depends on the theme.
-   */
-  sx?: CSSUIObject
-  /**
-   * Used for internal css management.
-   *
-   * @private
-   */
-  __css?: CSSUIObject
+export interface CSSPropObject<
+  Y extends CSSObject | CSSSlotObject = CSSObject,
+> {
+  [key: string]: { [key: string]: Y }
 }
 
-export interface CSSUIProps extends StyleProps, PseudoProps {}
+export type CSSSlotObject<Y extends number | string | symbol = string> = {
+  [key in Y]?: CSSObject
+}
 
-export type UIStyleProps<
-  Y extends Dict = Dict,
-  M extends InternalTheme = InternalTheme,
-> = {
-  theme: StyledTheme<M>
-  colorScheme?: Theme["colorSchemes"]
-  breakpoint?: Breakpoint
-  colorMode?: ColorMode
-  themeScheme?: Theme["themeSchemes"]
-} & Y
+export interface CSSModifierObject<
+  Y extends CSSObject | CSSSlotObject = CSSObject,
+> {
+  [key: string]: Y
+}
 
-export type UIStyle<Y extends Dict = Dict> =
-  | ((props: UIStyleProps<Y>) => CSSUIObject)
-  | CSSUIObject
-export type UIMultiStyle<Y extends Dict = Dict> =
-  | ((props: UIStyleProps<Y>) => { [key: string]: UIStyle<Y> })
-  | { [key: string]: UIStyle<Y> }
+export interface CSSProps extends StyleProps, PseudoProps {
+  /**
+   * The CSS object.
+   */
+  css?: CSSObject | CSSObject[]
+}
 
 export interface AnimationStyle {
-  keyframes: { [key: string]: UIStyles }
+  keyframes: { [key: string]: StyleObject }
   delay?: BaseToken<CSS.Property.AnimationDelay>
   direction?: BaseToken<CSS.Property.AnimationDirection>
   duration?: BaseToken<CSS.Property.AnimationDuration, "transitionDuration">
@@ -156,7 +94,7 @@ export interface AnimationStyle {
 }
 
 export interface FunctionCSSInterpolation {
-  (theme: StyledTheme): CSSUIProps
+  (theme: StyledTheme): CSSObject
 }
 
-export type CSSObjectOrFunc = CSSUIProps | FunctionCSSInterpolation
+export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation

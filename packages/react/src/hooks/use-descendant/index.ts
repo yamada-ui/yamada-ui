@@ -257,12 +257,10 @@ export const createDescendant = <
   T extends HTMLElement = HTMLElement,
   K extends { [key: string]: any } = {},
 >() => {
-  const [DescendantsContextProvider, useDescendantsContext] = createContext<
+  const [DescendantsContext, useDescendantsContext] = createContext<
     DescendantsManager<T, K>
   >({
-    name: "DescendantsProvider",
-    errorMessage:
-      "useDescendantsContext must be used within DescendantsContextProvider",
+    name: "DescendantsContext",
   })
 
   const useDescendants = () => {
@@ -309,7 +307,7 @@ export const createDescendant = <
   }
 
   return {
-    DescendantsContextProvider,
+    DescendantsContext,
     useDescendant,
     useDescendants,
     useDescendantsContext,

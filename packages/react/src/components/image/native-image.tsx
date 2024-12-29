@@ -12,5 +12,5 @@ export interface NativeImageProps
  * @see Docs https://yamada-ui.com/components/media-and-icons/native-image
  */
 export const NativeImage: FC<NativeImageProps> = ui("img", {
-  disableStyleProp: (prop) => ["height", "width"].includes(prop),
+  forwardProps: ["height", "width"],
 })

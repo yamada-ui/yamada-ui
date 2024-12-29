@@ -1,150 +1,52 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  FC,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
-import { mergeVars, omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { IconStyle } from "./icon.style"
+import { createComponent, insertVars } from "../../core"
+import { iconStyle } from "./icon.style"
 
-interface IconOptions {
-  /**
-   * The CSS `font-size` property.
-   *
-   * @deprecated Use `fontSize` instead.
-   */
-  size?: CSSUIProps["fontSize"]
-}
+export interface IconProps extends HTMLUIProps<"svg">, ThemeProps<IconStyle> {}
 
-export interface IconProps
-  extends HTMLUIProps<"svg">,
-    Omit<ThemeProps<"Icon">, "size">,
-    IconOptions {}
+export const {
+  component,
+  PropsContext: IconPropsContext,
+  usePropsContext: useIconPropsContext,
+  withContext,
+} = createComponent<IconProps, IconStyle>("icon", iconStyle)
 
 /**
  * `Icon` is a general icon component that can be used in your projects.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
-export const Icon: FC<IconProps> = (props) => {
-  const [styles, { size, ...mergedProps }] = useComponentStyle("Icon", props)
-  const {
-    as: element,
-    className,
-    fontSize = size,
-    viewBox,
-    __css,
-    ...rest
-  } = omitThemeProps(mergedProps)
-
-  const css: CSSUIObject = {
-    ...styles,
-    ...__css,
-    vars: mergeVars(styles.vars, __css?.vars),
-  }
-
-  if (fontSize) {
-    css.vars = mergeVars(css.vars, [
-      { name: "boxSize", token: "fontSizes", value: fontSize },
+export const Icon = withContext("svg")(
+  {
+    "aria-hidden": true,
+    role: "img",
+    verticalAlign: "middle",
+  },
+  ({ css, ...rest }) => {
+    css = insertVars(css, [
+      {
+        name: "boxSize",
+        property: "fontSize",
+        token: "fontSizes",
+      },
     ])
-    css.boxSize = "$boxSize"
-  }
 
-  if (element && typeof element !== "string")
-    return (
-      <ui.svg
-        as={element}
-        className={cx("ui-icon", className)}
-        aria-hidden
-        role="img"
-        __css={css}
-        {...rest}
-      />
-    )
+    rest = insertVars(rest, [
+      {
+        name: "boxSize",
+        property: "fontSize",
+        token: "fontSizes",
+      },
+    ])
 
-  return (
-    <ui.svg
-      className={cx("ui-icon", className)}
-      aria-hidden
-      role="img"
-      verticalAlign="middle"
-      viewBox={viewBox}
-      __css={css}
-      {...rest}
-    />
-  )
-}
-
-Icon.__ui__ = "Icon"
-
-/**
- * @deprecated Use icons from `@yamada-ui/lucide` instead.
- */
-export const CheckIcon: FC<IconProps> = (props) => {
-  return (
-    <Icon
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path d="M21.801 10A10 10 0 1 1 17 3.335" />
-      <path d="m9 11 3 3L22 4" />
-    </Icon>
-  )
-}
-
-CheckIcon.__ui__ = "CheckIcon"
-
-/**
- * @deprecated Use icons from `@yamada-ui/lucide` instead.
- */
-export const InfoIcon: FC<IconProps> = (props) => {
-  return (
-    <Icon
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 16v-4" />
-      <path d="M12 8h.01" />
-    </Icon>
-  )
-}
-
-InfoIcon.__ui__ = "InfoIcon"
-
-/**
- * @deprecated Use icons from `@yamada-ui/lucide` instead.
- */
-export const WarningIcon: FC<IconProps> = (props) => {
-  return (
-    <Icon
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
-      <path d="M12 9v4" />
-      <path d="M12 17h.01" />
-    </Icon>
-  )
-}
-
-WarningIcon.__ui__ = "WarningIcon"
+    return {
+      css,
+      boxSize: "$boxSize",
+      ...rest,
+    }
+  },
+)
 
 /**
  * @deprecated Use icons from `@yamada-ui/lucide` instead.

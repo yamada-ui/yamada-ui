@@ -1,4 +1,4 @@
-import type { LayerStyles } from "../../core"
+import type { CSSModifierObject } from "../../core"
 import { Center } from "../../components/center"
 import { UIProvider } from "../../providers/ui-provider"
 import { extendTheme } from "../../tools"
@@ -8,7 +8,7 @@ export default {
 }
 
 export const Basic = () => {
-  const layerStyles: LayerStyles = {
+  const layerStyles: CSSModifierObject = {
     masterRoshi: {
       bg: "#FFF",
       border: "6px solid #000",

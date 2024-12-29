@@ -1,22 +1,25 @@
-import type { FC } from "../../core"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
+import type { HStackStyle } from "./h-stack.style"
 import type { StackProps } from "./stack"
-import { cx } from "../../utils"
+import { createComponent } from "../../core"
+import { hStackStyle } from "./h-stack.style"
 import { Stack } from "./stack"
 
-export interface HStackProps extends StackProps {}
+export interface HStackProps
+  extends WithoutThemeProps<StackProps>,
+    ThemeProps<HStackStyle> {}
+
+export const {
+  PropsContext: HStackPropsContext,
+  usePropsContext: useHStackPropsContext,
+  withContext,
+} = createComponent<HStackProps, HStackStyle>("stack--horizontal", hStackStyle)
 
 /**
  * `HStack` is a component that groups elements and provides space between child elements.
  *
  * @see Docs https://yamada-ui.com/components/layouts/stack
  */
-export const HStack: FC<HStackProps> = ({ className, ...rest }) => (
-  <Stack
-    className={cx("ui-stack--horizontal", className)}
-    align="center"
-    direction="row"
-    {...rest}
-  />
-)
-
-HStack.__ui__ = "HStack"
+export const HStack = withContext(Stack)(undefined, {
+  direction: "row",
+})

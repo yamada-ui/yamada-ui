@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Input } from "../input"
 import { Tag } from "../tag"
-import { ErrorMessage, FormControl, HelperMessage, Label } from "./"
+import { FormControl } from "./"
 
-type Story = StoryFn<typeof FormControl>
+type Story = StoryFn<typeof FormControl.Root>
 
-const meta: Meta<typeof FormControl> = {
-  component: FormControl,
+const meta: Meta<typeof FormControl.Root> = {
+  component: FormControl.Root,
   title: "Components / FormControl",
 }
 
@@ -14,39 +14,39 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <FormControl label="Email address" replace>
-      <Input type="email" placeholder="your email address" />
-    </FormControl>
+    <FormControl.Root legend="Email address" replace>
+      {/* <Input type="email" placeholder="your email address" /> */}
+    </FormControl.Root>
   )
 }
 
 export const WithHelperMessage: Story = () => {
   return (
-    <FormControl
+    <FormControl.Root
       helperMessage="We'll never share your email."
       label="Email address"
     >
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
 export const WithErrorMessage: Story = () => {
   return (
-    <FormControl
+    <FormControl.Root
       errorMessage="Email is required."
       invalid
       label="Email address"
     >
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
 export const Replace: Story = () => {
   return (
     <>
-      <FormControl
+      <FormControl.Root
         errorMessage="Email is required."
         helperMessage="We'll never share your email."
         invalid
@@ -54,9 +54,9 @@ export const Replace: Story = () => {
         replace
       >
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
 
-      <FormControl
+      <FormControl.Root
         errorMessage="Email is required."
         helperMessage="We'll never share your email."
         invalid
@@ -64,106 +64,108 @@ export const Replace: Story = () => {
         replace={false}
       >
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
     </>
   )
 }
 
 export const Required: Story = () => {
   return (
-    <FormControl
+    <FormControl.Root
       errorMessage="Email is required."
       helperMessage="We'll never share your email."
       label="Email address"
       required
     >
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
 export const Disabled: Story = () => {
   return (
-    <FormControl
+    <FormControl.Root
       disabled
       errorMessage="Email is required."
       helperMessage="We'll never share your email."
       label="Email address"
     >
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
 export const Readonly: Story = () => {
   return (
-    <FormControl
+    <FormControl.Root
       errorMessage="Email is required."
       helperMessage="We'll never share your email."
       label="Email address"
       readOnly
     >
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
-export const CustomLabel: Story = () => {
+export const CustomFormControl: Story = () => {
   return (
-    <FormControl helperMessage="We'll never share your email.">
-      <Label color="primary">Email address</Label>
+    <FormControl.Root helperMessage="We'll never share your email.">
+      <FormControl.Label color="primary">Email address</FormControl.Label>
       <Input type="email" placeholder="your email address" />
-    </FormControl>
+    </FormControl.Root>
   )
 }
 
 export const CustomHelperMessage: Story = () => {
   return (
-    <FormControl label="Email address">
+    <FormControl.Root label="Email address">
       <Input type="email" placeholder="your email address" />
-      <HelperMessage color="gray.300">
+      <FormControl.HelperMessage color="gray.300">
         We'll never share your email.
-      </HelperMessage>
-    </FormControl>
+      </FormControl.HelperMessage>
+    </FormControl.Root>
   )
 }
 
 export const CustomErrorMessage: Story = () => {
   return (
-    <FormControl invalid label="Email address">
+    <FormControl.Root invalid label="Email address">
       <Input type="email" placeholder="your email address" />
-      <ErrorMessage color="gray.300">Email is required.</ErrorMessage>
-    </FormControl>
+      <FormControl.ErrorMessage color="gray.300">
+        Email is required.
+      </FormControl.ErrorMessage>
+    </FormControl.Root>
   )
 }
 
 export const CustomRequiredIndicator: Story = () => {
   return (
     <>
-      <FormControl
+      <FormControl.Root
         label="Email address"
         required
         requiredIndicator={
-          <Tag colorScheme="red" size="sm" ms={2}>
+          <Tag.Root colorScheme="red" size="sm" ms={2}>
             required
-          </Tag>
+          </Tag.Root>
         }
       >
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
 
-      <FormControl required>
-        <Label
+      <FormControl.Root required>
+        <FormControl.Label
           requiredIndicator={
-            <Tag colorScheme="red" size="sm" ms={2}>
+            <Tag.Root colorScheme="red" size="sm" ms={2}>
               required
-            </Tag>
+            </Tag.Root>
           }
         >
           Email address
-        </Label>
+        </FormControl.Label>
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
     </>
   )
 }
@@ -171,29 +173,29 @@ export const CustomRequiredIndicator: Story = () => {
 export const CustomOptionalIndicator: Story = () => {
   return (
     <>
-      <FormControl
+      <FormControl.Root
         label="Email address"
         optionalIndicator={
-          <Tag colorScheme="primary" size="sm" ms={2}>
+          <Tag.Root colorScheme="primary" size="sm" ms={2}>
             optional
-          </Tag>
+          </Tag.Root>
         }
       >
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
 
-      <FormControl>
-        <Label
+      <FormControl.Root>
+        <FormControl.Label
           optionalIndicator={
-            <Tag colorScheme="primary" size="sm" ms={2}>
+            <Tag.Root colorScheme="primary" size="sm" ms={2}>
               optional
-            </Tag>
+            </Tag.Root>
           }
         >
           Email address
-        </Label>
+        </FormControl.Label>
         <Input type="email" placeholder="your email address" />
-      </FormControl>
+      </FormControl.Root>
     </>
   )
 }

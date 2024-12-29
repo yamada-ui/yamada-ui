@@ -19,7 +19,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "../../utils"
-import { CloseIcon, Icon } from "../icon"
+import { Icon, XIcon } from "../icon"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Portal } from "../portal"
 import { Calendar } from "./calendar"
@@ -320,7 +320,7 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon boxSize="4.5" />}
     </DatePickerIcon>
   )
 }

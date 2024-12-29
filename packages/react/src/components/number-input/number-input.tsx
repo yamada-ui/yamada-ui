@@ -737,11 +737,6 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       getIncrementProps,
       getInputProps,
     } = useNumberInput(computedProps)
-    const css: CSSUIObject = {
-      position: "relative",
-      zIndex: 0,
-      ...styles.container,
-    }
 
     return (
       <NumberInputContextProvider
@@ -750,7 +745,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
         <ui.div
           className={cx("ui-number-input", className)}
           role="group"
-          __css={css}
+          __css={styles.container}
           {...containerProps}
         >
           <NumberInputField {...getInputProps(rest, ref)} />
@@ -776,16 +771,11 @@ const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {
     const { styles } = useNumberInputContext()
 
-    const css: CSSUIObject = {
-      width: "100%",
-      ...styles.field,
-    }
-
     return (
       <ui.input
         ref={ref}
         className={cx("ui-number-input__field", className)}
-        __css={css}
+        __css={styles.field}
         {...rest}
       />
     )
@@ -801,24 +791,12 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles } = useNumberInputContext()
 
-    const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      height: "calc(100% - 2px)",
-      insetEnd: "0px",
-      margin: "1px",
-      position: "absolute",
-      top: "0",
-      zIndex: "fallback(yamcha, 1)",
-      ...styles.addon,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-number-input__addon", className)}
         aria-hidden
-        __css={css}
+        __css={styles.addon}
         {...rest}
       />
     )

@@ -106,13 +106,6 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   const borderRadius =
     _borderRadius ?? rounded ?? (styles.track?.borderRadius as number | string)
 
-  const css: CSSUIObject = {
-    overflow: "hidden",
-    pos: "relative",
-    w: "100%",
-    ...styles.track,
-  }
-
   const ariaProps: HTMLUIProps = !isAnimation
     ? {
         "aria-valuemax": max,
@@ -128,7 +121,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-progress", className)}
         borderRadius={borderRadius}
-        __css={css}
+        __css={styles.track}
         {...ariaProps}
         {...rest}
       >

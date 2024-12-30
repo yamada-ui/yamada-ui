@@ -27,7 +27,9 @@ export const Input: ComponentMultiStyle<"Input"> = {
       zIndex: "kurillin",
     },
     field: {
+      alignItems: "center",
       appearance: "none",
+      display: "flex",
       minWidth: 0,
       outline: 0,
       position: "relative",

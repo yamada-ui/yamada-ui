@@ -32,6 +32,8 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
     control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
       fontSize: "1.5em",
+      h: "auto",
+      minW: "auto",
       _hidden: {
         opacity: 0,
         pointerEvents: "none",
@@ -60,9 +62,28 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         color: ["red.600", "red.400"],
       },
     },
-    header: {},
+    header: {
+      alignItems: "center",
+      display: "flex",
+      w: "100%",
+    },
+    icon: {
+      alignItems: "center",
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "center",
+      pointerEvents: "none",
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+    },
     label: {
       color: "muted",
+      flex: 1,
+      fontSize: undefined,
+      fontWeight: "normal",
+      gap: 1,
+      h: "auto",
     },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
@@ -233,6 +254,8 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       container: {
         fontSize: "inherit",
         gap: "inherit",
+        h: "fit-content",
+        w: "100%",
       },
       content: {
         w: "auto",
@@ -253,6 +276,11 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         },
       },
       day: {
+        field: {
+          alignItems: "center",
+          display: "flex",
+          pe: "2rem",
+        },
         h: "auto",
         w: "auto",
         _active: {

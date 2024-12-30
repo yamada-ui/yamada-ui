@@ -4,7 +4,7 @@ import type {
   MouseEvent,
   ReactElement,
 } from "react"
-import type { FC, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { useCallback, useId, useRef, useState } from "react"
 import { forwardRef, ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
@@ -18,6 +18,7 @@ import {
   mergeRefs,
   useUpdateEffect,
 } from "../../utils"
+import { CheckIcon } from "../icon"
 import {
   UpstreamMenuItemProvider,
   useMenu,
@@ -317,7 +318,9 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
         {...rest}
       >
         {icon !== null ? (
-          <MenuIcon opacity={checked ? 1 : 0}>{icon || <CheckIcon />}</MenuIcon>
+          <MenuIcon opacity={checked ? 1 : 0}>
+            {icon || <CheckIcon boxSize="4" />}
+          </MenuIcon>
         ) : null}
         {children}
       </MenuItem>
@@ -368,12 +371,3 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
 
 MenuCommand.displayName = "MenuCommand"
 MenuCommand.__ui__ = "MenuCommand"
-
-const CheckIcon: FC = () => (
-  <svg height="1em" viewBox="0 0 14 14" width="1em">
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-)

@@ -36,7 +36,7 @@ import {
   useUpdateEffect,
 } from "../../utils"
 import { formControlProperties, useFormControlProps } from "../form-control"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon, ChevronUpIcon } from "../icon"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
@@ -836,7 +836,7 @@ const NumberIncrementStepper = forwardRef<
       {...getIncrementProps(rest, ref)}
       __css={css}
     >
-      {children ?? <ChevronIcon __css={{ transform: "rotate(180deg)" }} />}
+      {children ?? <ChevronUpIcon fontSize="sm" />}
     </Stepper>
   )
 })
@@ -860,7 +860,7 @@ const NumberDecrementStepper = forwardRef<
       {...getDecrementProps(rest, ref)}
       __css={css}
     >
-      {children ?? <ChevronIcon />}
+      {children ?? <ChevronDownIcon fontSize="sm" />}
     </Stepper>
   )
 })

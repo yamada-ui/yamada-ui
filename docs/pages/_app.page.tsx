@@ -4,21 +4,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
-  Button,
   createColorModeManager,
   createThemeSchemeManager,
   UIProvider,
-  useBoolean,
-  useBreakpointEffect,
 } from "@yamada-ui/react"
-import confetti from "canvas-confetti"
-import { I18nProvider, useI18n } from "contexts"
+import { I18nProvider } from "contexts"
 import dayjs from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { Inter } from "next/font/google"
 import Head from "next/head"
-import { useRef } from "react"
 import { config, theme } from "theme"
 
 dayjs.extend(utc)
@@ -63,8 +58,6 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           themeSchemeManager={themeSchemeManager}
         >
           <I18nProvider>
-            <Confetti />
-
             <Component {...{ ...pageProps, inter }} />
           </I18nProvider>
         </UIProvider>
@@ -77,84 +70,3 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 }
 
 export default App
-
-const randomInRange = (min: number, max: number) =>
-  Math.random() * (max - min) + min
-
-const Confetti: FC = () => {
-  const { t } = useI18n()
-  const [hidden, { on }] = useBoolean()
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  useBreakpointEffect((breakpoint) => {
-    const isMobile = ["md", "sm"].includes(breakpoint)
-
-    const duration = isMobile ? 500 : 250
-    const startVelocity = isMobile ? 20 : 30
-
-    if (timeoutRef.current) clearInterval(timeoutRef.current)
-
-    const canvas = document.createElement("canvas")
-
-    canvas.style.position = "fixed"
-    canvas.style.width = "100%"
-    canvas.style.height = "100%"
-    canvas.style.inset = "0"
-    canvas.style.pointerEvents = "none"
-
-    document.body.appendChild(canvas)
-
-    const c = confetti.create(canvas, {
-      resize: true,
-      useWorker: true,
-    })
-
-    timeoutRef.current = setInterval(() => {
-      c({
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-        shapes: ["star", "circle"],
-        spread: 360,
-        startVelocity,
-        ticks: 120,
-        zIndex: 0,
-      })
-      setTimeout(() => {
-        c({
-          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-          shapes: ["star", "circle"],
-          spread: 360,
-          startVelocity,
-          ticks: 120,
-          zIndex: 0,
-        })
-      }, 100)
-    }, duration)
-
-    return () => {
-      if (timeoutRef.current) clearInterval(timeoutRef.current)
-
-      timeoutRef.current = null
-    }
-  }, [])
-
-  return !hidden ? (
-    <Button
-      size="lg"
-      bottom="md"
-      left="50%"
-      position="fixed"
-      rounded="full"
-      transform="translateX(-50%)"
-      zIndex="kurillin"
-      onClick={() => {
-        if (timeoutRef.current) clearInterval(timeoutRef.current)
-
-        timeoutRef.current = null
-
-        on()
-      }}
-    >
-      {t("component.confetti.button")}
-    </Button>
-  ) : null
-}

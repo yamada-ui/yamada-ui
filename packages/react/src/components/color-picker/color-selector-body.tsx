@@ -1,5 +1,5 @@
 import type { ForwardedRef } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import type { ColorSelectorEyeDropperProps } from "./color-selector-eye-dropper"
 import type { ColorSelectorSlidersProps } from "./color-selector-sliders"
 import { forwardRef, ui } from "../../core"
@@ -58,17 +58,11 @@ export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
   ) => {
     const { eyeDropperSupported, styles, value } = useColorSelectorContext()
 
-    const css: CSSUIObject = {
-      display: "flex",
-      w: "100%",
-      ...styles.body,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-color-selector__body", className)}
-        __css={css}
+        __css={styles.body}
         {...rest}
       >
         <ColorSelectorSliders

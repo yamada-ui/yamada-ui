@@ -1,6 +1,6 @@
 import type { RowData } from "@tanstack/react-table"
 import type { ForwardedRef, ReactElement, RefAttributes } from "react"
-import type { ComponentArgs, CSSUIObject, CSSUIProps } from "../../core"
+import type { ComponentArgs, CSSUIProps } from "../../core"
 import type { TableBodyProps } from "./tbody"
 import type { TableFootProps } from "./tfoot"
 import type { TableHeadProps } from "./thead"
@@ -112,12 +112,6 @@ export const Table = forwardRef(
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 
-    const css: CSSUIObject = {
-      tableLayout: layout,
-      w: "100%",
-      ...styles.table,
-    }
-
     const validChildren = getValidChildren(children)
     const tableCaptionChildren = pickChildren(validChildren, TableCaption)
 
@@ -126,7 +120,10 @@ export const Table = forwardRef(
         <TableProvider<Y> {...rest}>
           <ui.table
             className={cx("ui-table", className)}
-            __css={css}
+            __css={{
+              tableLayout: layout,
+              ...styles.table,
+            }}
             {...getTableProps({}, ref)}
           >
             <Thead {...theadProps} />

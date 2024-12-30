@@ -65,14 +65,6 @@ interface DropzoneOptions {
    * If `true`, display the dropzone loading icon.
    *
    * @default false
-   *
-   * @deprecated Use `loading` instead.
-   */
-  isLoading?: boolean
-  /**
-   * If `true`, display the dropzone loading icon.
-   *
-   * @default false
    */
   loading?: boolean
   /**
@@ -109,8 +101,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     accept,
     autoFocus,
     children,
-    isLoading,
-    loading = isLoading,
+    loading,
     maxFiles,
     maxSize,
     multiple,

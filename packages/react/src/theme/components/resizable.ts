@@ -3,13 +3,20 @@ import { isGray, transparentizeColor } from "../../utils"
 
 export const Resizable: ComponentMultiStyle<"Resizable"> = {
   baseStyle: ({ orientation: o }) => ({
-    container: {},
+    container: {
+      h: "100%",
+      w: "100%",
+    },
     icon: {
       color: ["blackAlpha.600", "whiteAlpha.700"],
       rotate: o === "vertical" ? "90deg" : "0deg",
     },
-    item: {},
-    trigger: {},
+    item: {
+      boxSize: "100%",
+    },
+    trigger: {
+      position: "relative",
+    },
   }),
 
   variants: {

@@ -956,17 +956,10 @@ export const RangeSliderMark = forwardRef<RangeSliderMarkProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles, getMarkProps } = useRangeSliderContext()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      justifyContent: "center",
-      ...styles.mark,
-    }
-
     return (
       <ui.div
         className={cx("ui-slider__mark", className)}
-        __css={css}
+        __css={styles.mark}
         {...getMarkProps(rest, ref)}
       />
     )

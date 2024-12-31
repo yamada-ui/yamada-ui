@@ -64,7 +64,7 @@ export const WithBorderColor: Story = () => {
       />
       <PasswordInput
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -98,17 +98,17 @@ export const WithStrengthMeter: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <PasswordInput variant="outline" isDisabled placeholder="outline" />
-      <PasswordInput variant="filled" isDisabled placeholder="filled" />
-      <PasswordInput variant="flushed" isDisabled placeholder="flushed" />
-      <PasswordInput variant="unstyled" isDisabled placeholder="unstyled" />
+      <PasswordInput variant="outline" disabled placeholder="outline" />
+      <PasswordInput variant="filled" disabled placeholder="filled" />
+      <PasswordInput variant="flushed" disabled placeholder="flushed" />
+      <PasswordInput variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
+        disabled
         helperMessage="We'll never share your password."
-        isDisabled
         label="Password"
       >
         <PasswordInput placeholder="your password" />
@@ -117,18 +117,18 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <PasswordInput variant="outline" isReadOnly placeholder="outline" />
-      <PasswordInput variant="filled" isReadOnly placeholder="filled" />
-      <PasswordInput variant="flushed" isReadOnly placeholder="flushed" />
-      <PasswordInput variant="unstyled" isReadOnly placeholder="unstyled" />
+      <PasswordInput variant="outline" placeholder="outline" readOnly />
+      <PasswordInput variant="filled" placeholder="filled" readOnly />
+      <PasswordInput variant="flushed" placeholder="flushed" readOnly />
+      <PasswordInput variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
         helperMessage="We'll never share your password."
-        isReadOnly
         label="Password"
+        readOnly
       >
         <PasswordInput placeholder="your password" />
       </FormControl>
@@ -136,15 +136,15 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   return (
     <>
-      <PasswordInput variant="outline" isInvalid placeholder="outline" />
-      <PasswordInput variant="filled" isInvalid placeholder="filled" />
-      <PasswordInput variant="flushed" isInvalid placeholder="flushed" />
-      <PasswordInput variant="unstyled" isInvalid placeholder="unstyled" />
+      <PasswordInput variant="outline" invalid placeholder="outline" />
+      <PasswordInput variant="filled" invalid placeholder="filled" />
+      <PasswordInput variant="flushed" invalid placeholder="flushed" />
+      <PasswordInput variant="unstyled" invalid placeholder="unstyled" />
 
-      <FormControl errorMessage="Email is required." isInvalid label="Password">
+      <FormControl errorMessage="Email is required." invalid label="Password">
         <PasswordInput placeholder="your password" />
       </FormControl>
     </>
@@ -193,7 +193,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.password?.message}
-        isInvalid={!!errors.password}
+        invalid={!!errors.password}
         label="Password"
       >
         <PasswordInput
@@ -229,7 +229,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.password?.message}
-        isInvalid={!!errors.password}
+        invalid={!!errors.password}
         label="Password"
       >
         <PasswordInput

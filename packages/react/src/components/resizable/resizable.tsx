@@ -1,5 +1,5 @@
 import type { ForwardedRef } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { UseResizableProps } from "./use-resizable"
 import { PanelGroup } from "react-resizable-panels"
 import {
@@ -43,13 +43,11 @@ export const Resizable = forwardRef<ResizableProps, "div">(
       ...computedProps,
     })
 
-    const css: CSSUIObject = { h: "100%", w: "100%", ...styles.container }
-
     return (
       <ResizableProvider value={{ styles, ...rest }}>
         <ui.div
           className={cx("ui-resizable", className)}
-          __css={css}
+          __css={styles.container}
           {...getContainerProps({}, containerRef)}
         >
           <PanelGroup {...getGroupProps()}>{children}</PanelGroup>

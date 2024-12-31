@@ -253,25 +253,25 @@ export const WithBorderColor: Story = () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone errorBorderColor="orange.500" isInvalid>
+      <Dropzone errorBorderColor="orange.500" invalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <Dropzone variant="dashed" isDisabled>
+      <Dropzone variant="dashed" disabled>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone variant="solid" isDisabled>
+      <Dropzone variant="solid" disabled>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl isDisabled label="Upload file">
+      <FormControl disabled label="Upload file">
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -280,18 +280,18 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Dropzone variant="dashed" isReadOnly>
+      <Dropzone variant="dashed" readOnly>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone variant="solid" isReadOnly>
+      <Dropzone variant="solid" readOnly>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl isReadOnly label="Upload file">
+      <FormControl label="Upload file" readOnly>
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -300,22 +300,18 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   return (
     <>
-      <Dropzone variant="dashed" isInvalid>
+      <Dropzone variant="dashed" invalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone variant="solid" isInvalid>
+      <Dropzone variant="solid" invalid>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <FormControl
-        errorMessage="File is required."
-        isInvalid
-        label="Upload file"
-      >
+      <FormControl errorMessage="File is required." invalid label="Upload file">
         <Dropzone>
           <Text>Drag file here or click to select file</Text>
         </Dropzone>
@@ -324,14 +320,14 @@ export const IsInvalid: Story = () => {
   )
 }
 
-export const IsLoading: Story = () => {
+export const Loading: Story = () => {
   return (
     <>
-      <Dropzone variant="dashed" isLoading>
+      <Dropzone variant="dashed" loading>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone variant="solid" isLoading>
+      <Dropzone variant="solid" loading>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>
@@ -341,11 +337,11 @@ export const IsLoading: Story = () => {
 export const CustomLoading: Story = () => {
   return (
     <>
-      <Dropzone isLoading loadingProps={{ variant: "grid" }}>
+      <Dropzone loading loadingProps={{ variant: "grid" }}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
 
-      <Dropzone isLoading loadingProps={{ color: "secondary" }}>
+      <Dropzone loading loadingProps={{ color: "secondary" }}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     </>

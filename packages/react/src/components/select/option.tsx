@@ -1,8 +1,9 @@
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import type { CSSUIObject, HTMLUIProps } from "../../core"
 import type { UseSelectOptionProps } from "./use-select-option"
 import { forwardRef, ui } from "../../core"
 import { cx } from "../../utils"
+import { CheckIcon } from "../icon"
 import { useSelectContext } from "./use-select"
 import { useSelectOption } from "./use-select-option"
 
@@ -45,7 +46,7 @@ export const Option = forwardRef<OptionProps, "div">(
       >
         {icon !== null ? (
           <OptionIcon opacity={selected ? 1 : 0}>
-            {icon || <CheckIcon />}
+            {icon || <CheckIcon boxSize="5" />}
           </OptionIcon>
         ) : null}
 
@@ -88,12 +89,3 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
 
 OptionIcon.displayName = "OptionIcon"
 OptionIcon.__ui__ = "OptionIcon"
-
-const CheckIcon: FC = () => (
-  <svg height="1em" viewBox="0 0 14 14" width="1em">
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-)

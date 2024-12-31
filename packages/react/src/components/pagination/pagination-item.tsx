@@ -2,14 +2,14 @@ import type { ReactNode } from "react"
 import type { CSSUIObject, HTMLUIProps } from "../../core"
 import { forwardRef, ui } from "../../core"
 import { cx, dataAttr } from "../../utils"
-import { Ripple, useRipple } from "../ripple"
 import {
-  PaginationEllipsisIcon,
-  PaginationFirstIcon,
-  PaginationLastIcon,
-  PaginationNextIcon,
-  PaginationPrevIcon,
-} from "./pagination-icon"
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+  EllipsisIcon,
+} from "../icon"
+import { Ripple, useRipple } from "../ripple"
 import { usePaginationContext } from "./use-pagination"
 
 interface PaginationItemOptions {
@@ -60,11 +60,11 @@ export interface PaginationItemProps
 const iconMap: {
   [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
 } = {
-  ellipsis: <PaginationEllipsisIcon />,
-  first: <PaginationFirstIcon />,
-  last: <PaginationLastIcon />,
-  next: <PaginationNextIcon />,
-  prev: <PaginationPrevIcon />,
+  ellipsis: <EllipsisIcon />,
+  first: <ChevronsLeftIcon />,
+  last: <ChevronsRightIcon />,
+  next: <ChevronRightIcon />,
+  prev: <ChevronLeftIcon />,
 }
 
 export const PaginationItem = forwardRef<PaginationItemProps, "button">(

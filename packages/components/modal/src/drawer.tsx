@@ -88,10 +88,21 @@ export interface DrawerProps
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = motionForwardRef<DrawerProps, "div">(
-  ({ size, closeOnDrag = false, placement = "right", ...props }, ref) => {
+  (
+    {
+      size,
+      closeOnDrag = false,
+      isFullHeight,
+      fullHeight = isFullHeight,
+      placement = "right",
+      ...props
+    },
+    ref,
+  ) => {
     const [styles, mergedProps] = useComponentMultiStyle("Drawer", {
       size,
       closeOnDrag,
+      fullHeight,
       placement,
       ...props,
     })
@@ -124,7 +135,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       onEsc,
       onOverlayClick,
       ...rest
-    } = omitThemeProps(mergedProps, ["isFullHeight"])
+    } = omitThemeProps(mergedProps, ["fullHeight"])
     const validChildren = getValidChildren(children)
     const [customDrawerOverlay, ...cloneChildren] = findChildren(
       validChildren,

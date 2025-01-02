@@ -1,5 +1,24 @@
 # @yamada-ui/popover
 
+## 1.5.0
+
+### Minor Changes
+
+- [#4200](https://github.com/yamada-ui/yamada-ui/pull/4200) [`5487665`](https://github.com/yamada-ui/yamada-ui/commit/548766549bd4fdb79839ad2d5120d9802e8f2d90) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Supported React 19.
+
+### Patch Changes
+
+- Updated dependencies [[`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`6a08c1d`](https://github.com/yamada-ui/yamada-ui/commit/6a08c1d37a9004ddec071d2e1f93193dca610827), [`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002), [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf)]:
+  - @yamada-ui/motion@2.3.0
+  - @yamada-ui/close-button@1.0.52
+  - @yamada-ui/core@1.17.0
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/transitions@1.1.16
+  - @yamada-ui/use-animation@1.0.47
+  - @yamada-ui/use-popper@1.0.47
+  - @yamada-ui/use-disclosure@1.1.4
+  - @yamada-ui/use-focus@1.0.28
+
 ## 1.4.7
 
 ### Patch Changes

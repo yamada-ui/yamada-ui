@@ -55,14 +55,6 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
    */
   fragment?: boolean
   /**
-   * If `true`, `Fragment` is used for rendering.
-   *
-   * @default false
-   *
-   * @deprecated Use `fragment` instead.
-   */
-  isFragment?: boolean
-  /**
    * Properties passed to the Mark component which is used to highlight the matched terms.
    */
   markProps?: MarkProps
@@ -75,8 +67,7 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
  */
 export const Highlight: FC<HighlightProps> = ({
   children: text,
-  isFragment = false,
-  fragment = isFragment,
+  fragment = false,
   lineHeight = "tall",
   query,
   markProps,

@@ -9,14 +9,6 @@ interface LinkOptions {
    * @default false
    */
   external?: boolean
-  /**
-   * If `true`, the link will open in new tab.
-   *
-   * @default false
-   *
-   * @deprecated Use `external` instead
-   */
-  isExternal?: boolean
 }
 
 export interface LinkProps
@@ -31,12 +23,7 @@ export interface LinkProps
  */
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
-  const {
-    className,
-    isExternal,
-    external = isExternal,
-    ...rest
-  } = omitThemeProps(mergedProps)
+  const { className, external, ...rest } = omitThemeProps(mergedProps)
 
   return (
     <ui.a

@@ -179,11 +179,6 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       value: toArray(value),
       onChange: (values) => onChangeProp?.(values.join("")),
     })
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      ...styles.container,
-    }
 
     const focusNext = useCallback(
       (index: number) => {
@@ -412,7 +407,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
             ref={ref}
             className={cx("ui-pin-input", className)}
             role="group"
-            __css={css}
+            __css={styles.container}
             {...formControlProps}
             {...containerProps}
           >

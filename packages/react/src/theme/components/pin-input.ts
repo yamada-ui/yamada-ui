@@ -7,6 +7,8 @@ export const PinInput: ComponentMultiStyle<"PinInput"> = mergeMultiStyle(
   {
     baseStyle: {
       container: {
+        alignItems: "center",
+        display: "flex",
         gap: "sm",
       },
       field: {

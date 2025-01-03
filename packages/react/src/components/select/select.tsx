@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { MotionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { SelectIconProps } from "./select-icon"
@@ -121,12 +121,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     placeholder,
     placeholderInOptions,
   })
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
@@ -143,7 +137,10 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-select", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
@@ -193,18 +190,11 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
   ({ className, isTruncated = true, lineClamp, ...rest }, ref) => {
     const { label, placeholder, styles } = useSelectContext()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-select__field", className)}
-        __css={css}
+        __css={styles.field}
         {...rest}
       >
         <ui.span

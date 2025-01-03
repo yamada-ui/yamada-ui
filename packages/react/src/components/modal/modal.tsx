@@ -71,12 +71,6 @@ export interface ModalOptions
   duration?: MotionTransitionProps["duration"]
   /**
    * If `true`, the open will be opened.
-   *
-   * @deprecated Use `open` instead.
-   */
-  isOpen?: boolean
-  /**
-   * If `true`, the open will be opened.
    */
   open?: boolean
   /**
@@ -173,9 +167,8 @@ export const Modal: FC<ModalProps> = ({ size, ...props }) => {
     duration,
     finalFocusRef,
     initialFocusRef,
-    isOpen,
     lockFocusAcrossFrames = true,
-    open = isOpen,
+    open,
     outside = "fallback(4, 1rem)",
     placement: _placement = "center",
     restoreFocus,

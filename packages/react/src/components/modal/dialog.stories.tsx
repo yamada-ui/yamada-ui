@@ -27,7 +27,7 @@ const meta: Meta<typeof Dialog> = {
 export default meta
 
 export const Basic: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -36,7 +36,7 @@ export const Basic: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -50,7 +50,7 @@ export const Basic: Story = () => {
 }
 
 export const WithDuration: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -60,7 +60,7 @@ export const WithDuration: Story = () => {
         cancel="わけない"
         duration={0.4}
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -74,13 +74,13 @@ export const WithDuration: Story = () => {
 }
 
 export const CustomDialog: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Dialog</Button>
 
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog open={open} onClose={onClose}>
         <DialogHeader>孫悟空</DialogHeader>
 
         <DialogBody>
@@ -102,7 +102,7 @@ export const CustomDialog: Story = () => {
 }
 
 export const CustomHeader: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -111,7 +111,7 @@ export const CustomHeader: Story = () => {
       <Dialog
         cancel="わけない"
         header={<Text color="orange.500">孫悟空</Text>}
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -125,7 +125,7 @@ export const CustomHeader: Story = () => {
 }
 
 export const CustomFooter: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -146,7 +146,7 @@ export const CustomFooter: Story = () => {
           </>
         }
         header="孫悟空"
-        open={isOpen}
+        open={open}
         onClose={onClose}
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
@@ -157,7 +157,7 @@ export const CustomFooter: Story = () => {
 }
 
 export const CustomButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -170,7 +170,7 @@ export const CustomButton: Story = () => {
           children: "わけない",
         }}
         header="孫悟空"
-        open={isOpen}
+        open={open}
         other={{
           colorScheme: "orange",
           variant: "outline",
@@ -194,7 +194,7 @@ export const CustomButton: Story = () => {
 }
 
 export const UseOtherButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -203,7 +203,7 @@ export const UseOtherButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         other="どちらでもよい"
         success="わける"
         onCancel={onClose}
@@ -220,7 +220,7 @@ export const UseOtherButton: Story = () => {
 
 export const WithSize: Story = () => {
   const [size, setSize] = useState<DialogProps["size"]>("md")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -275,7 +275,7 @@ export const WithSize: Story = () => {
         size={size}
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -290,7 +290,7 @@ export const WithSize: Story = () => {
 
 export const WithPlacement: Story = () => {
   const [placement, setPlacement] = useState<DialogProps["placement"]>("center")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -380,7 +380,7 @@ export const WithPlacement: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         placement={placement}
         success="わける"
         onCancel={onClose}
@@ -396,7 +396,7 @@ export const WithPlacement: Story = () => {
 
 export const WithAnimation: Story = () => {
   const [animation, setAnimation] = useState<DialogProps["animation"]>("scale")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -451,7 +451,7 @@ export const WithAnimation: Story = () => {
         animation={animation}
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -465,7 +465,7 @@ export const WithAnimation: Story = () => {
 }
 
 export const DisabledCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -474,7 +474,7 @@ export const DisabledCloseButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onSuccess={onClose}
@@ -487,7 +487,7 @@ export const DisabledCloseButton: Story = () => {
 }
 
 export const CustomCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -496,7 +496,7 @@ export const CustomCloseButton: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -514,7 +514,7 @@ export const CustomCloseButton: Story = () => {
 }
 
 export const DisabledOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -523,7 +523,7 @@ export const DisabledOverlay: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         withOverlay={false}
         onCancel={onClose}
@@ -538,7 +538,7 @@ export const DisabledOverlay: Story = () => {
 }
 
 export const CustomOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -547,7 +547,7 @@ export const CustomOverlay: Story = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -565,7 +565,7 @@ export const CustomOverlay: Story = () => {
 }
 
 export const ScrollOnMount: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -621,7 +621,7 @@ export const ScrollOnMount: Story = () => {
         blockScrollOnMount={false}
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}

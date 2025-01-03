@@ -27,13 +27,13 @@ const meta: Meta<typeof Drawer> = {
 export default meta
 
 export const Basic: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer open={isOpen} onClose={onClose}>
+      <Drawer open={open} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -53,13 +53,13 @@ export const Basic: Story = () => {
 }
 
 export const WithDuration: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer duration={0.7} open={isOpen} onClose={onClose}>
+      <Drawer duration={0.7} open={open} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -80,7 +80,7 @@ export const WithDuration: Story = () => {
 
 export const WithSize: Story = () => {
   const [size, setSize] = useState<DrawerProps["size"]>("md")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -131,7 +131,7 @@ export const WithSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer size={size} open={isOpen} onClose={onClose}>
+      <Drawer size={size} open={open} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -152,7 +152,7 @@ export const WithSize: Story = () => {
 
 export const WithPosition: Story = () => {
   const [placement, setPlacement] = useState<DrawerProps["placement"]>("right")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -194,7 +194,7 @@ export const WithPosition: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer open={isOpen} placement={placement} onClose={onClose}>
+      <Drawer open={open} placement={placement} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -214,13 +214,13 @@ export const WithPosition: Story = () => {
 }
 
 export const WithFullHeight: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isFullHeight open={isOpen} placement="bottom" onClose={onClose}>
+      <Drawer fullHeight open={open} placement="bottom" onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -241,7 +241,7 @@ export const WithFullHeight: Story = () => {
 
 export const WithCloseOnDrag: Story = () => {
   const [placement, setPlacement] = useState<DrawerProps["placement"]>("right")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -283,7 +283,7 @@ export const WithCloseOnDrag: Story = () => {
         </Button>
       </Wrap>
 
-      <Drawer closeOnDrag open={isOpen} placement={placement} onClose={onClose}>
+      <Drawer closeOnDrag open={open} placement={placement} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -303,7 +303,7 @@ export const WithCloseOnDrag: Story = () => {
 }
 
 export const HiddenDragBar: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -311,7 +311,7 @@ export const HiddenDragBar: Story = () => {
 
       <Drawer
         closeOnDrag
-        open={isOpen}
+        open={open}
         placement="bottom"
         withCloseButton
         withDragBar={false}
@@ -336,13 +336,13 @@ export const HiddenDragBar: Story = () => {
 }
 
 export const DisabledCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer open={isOpen}>
+      <Drawer open={open}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -362,13 +362,13 @@ export const DisabledCloseButton: Story = () => {
 }
 
 export const CustomCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer open={isOpen} onClose={onClose}>
+      <Drawer open={open} onClose={onClose}>
         <DrawerCloseButton color="gray.400" />
 
         <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -390,13 +390,13 @@ export const CustomCloseButton: Story = () => {
 }
 
 export const DisabledOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer open={isOpen} withOverlay={false} onClose={onClose}>
+      <Drawer open={open} withOverlay={false} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>
@@ -416,13 +416,13 @@ export const DisabledOverlay: Story = () => {
 }
 
 export const CustomOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer open={isOpen} onClose={onClose}>
+      <Drawer open={open} onClose={onClose}>
         <DrawerOverlay backdropFilter="blur(10px)" bg="blackAlpha.300" />
 
         <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -444,7 +444,7 @@ export const CustomOverlay: Story = () => {
 }
 
 export const ScrollOnMount: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -496,7 +496,7 @@ export const ScrollOnMount: Story = () => {
         </Text>
       </Container>
 
-      <Drawer blockScrollOnMount={false} open={isOpen} onClose={onClose}>
+      <Drawer blockScrollOnMount={false} open={open} onClose={onClose}>
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>

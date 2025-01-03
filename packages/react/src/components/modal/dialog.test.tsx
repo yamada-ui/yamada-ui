@@ -4,11 +4,11 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader } from "./"
 
 describe("<Dialog />", () => {
   const DialogOpenExample = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenDialog" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenDialog" onClick={() => setOpen(true)}>
           Open Dialog
         </button>
 
@@ -17,17 +17,17 @@ describe("<Dialog />", () => {
           cancel={{
             children: "dialog-cancel",
           }}
-          open={isOpen}
+          open={open}
           other={{
             children: "dialog-other",
           }}
           success={{
             children: "dialog-success",
           }}
-          onCancel={() => setIsOpen(false)}
-          onClose={() => setIsOpen(false)}
-          onOther={() => setIsOpen(false)}
-          onSuccess={() => setIsOpen(false)}
+          onCancel={() => setOpen(false)}
+          onClose={() => setOpen(false)}
+          onOther={() => setOpen(false)}
+          onSuccess={() => setOpen(false)}
         >
           <DialogHeader data-testid="DialogHeader">header</DialogHeader>
           <DialogBody data-testid="DialogBody">body</DialogBody>
@@ -38,11 +38,11 @@ describe("<Dialog />", () => {
   }
 
   const DialogCloseExample = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenDialog" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenDialog" onClick={() => setOpen(true)}>
           Open Dialog
         </button>
 
@@ -51,17 +51,17 @@ describe("<Dialog />", () => {
           cancel={{
             children: "dialog-cancel",
           }}
-          open={isOpen}
+          open={open}
           other={{
             children: "dialog-other",
           }}
           success={{
             children: "dialog-success",
           }}
-          onCancel={() => setIsOpen(false)}
-          onClose={() => setIsOpen(false)}
-          onOther={() => setIsOpen(false)}
-          onSuccess={() => setIsOpen(false)}
+          onCancel={() => setOpen(false)}
+          onClose={() => setOpen(false)}
+          onOther={() => setOpen(false)}
+          onSuccess={() => setOpen(false)}
         />
       </>
     )

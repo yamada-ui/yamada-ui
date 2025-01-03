@@ -60,14 +60,6 @@ interface ColorSwatchOptions {
    */
   fullRounded?: boolean
   /**
-   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
-   *
-   * @default false
-   *
-   * @deprecated Use `fullRounded` instead.
-   */
-  isRounded?: boolean
-  /**
    * The overlay used for the swatch element.
    */
   overlays?: HTMLUIProps[]
@@ -94,8 +86,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const {
     className,
     color = "#ffffff00",
-    isRounded,
-    fullRounded = isRounded,
+    fullRounded,
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
     __css,

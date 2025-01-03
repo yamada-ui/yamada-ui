@@ -6,7 +6,7 @@ import type {
   ReactNode,
   RefAttributes,
 } from "react"
-import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "../../core"
+import type { ComponentArgs, HTMLUIProps } from "../../core"
 import type { Merge } from "../../utils"
 import { Reorder, useDragControls, useMotionValue } from "motion/react"
 import { forwardRef, useCallback, useEffect, useState } from "react"
@@ -68,22 +68,6 @@ export const ReorderItem = forwardRef(
       }
     }, [orientation, x, y])
 
-    const css: CSSUIObject = {
-      _selected: {
-        cursor: "grabbing",
-      },
-      ...(!hasTrigger ? { cursor: "grab" } : { userSelect: "none" }),
-      ...styles.item,
-      ...(!hasTrigger
-        ? {
-            _selected: {
-              ...styles.item?._selected,
-              cursor: "grabbing",
-            },
-          }
-        : {}),
-    }
-
     return (
       <ReorderItemProvider value={{ dragControls, isDrag, register }}>
         <ui.li
@@ -91,7 +75,18 @@ export const ReorderItem = forwardRef(
           as={Reorder.Item}
           className={cx("ui-reorder__item", className)}
           value={value}
-          __css={css}
+          __css={{
+            ...(!hasTrigger ? { cursor: "grab" } : { userSelect: "none" }),
+            ...styles.item,
+            ...(!hasTrigger
+              ? {
+                  _selected: {
+                    ...styles.item?._selected,
+                    cursor: "grabbing",
+                  },
+                }
+              : {}),
+          }}
           {...rest}
           style={{ ...rest.style, x, y }}
           data-selected={dataAttr(isDrag)}

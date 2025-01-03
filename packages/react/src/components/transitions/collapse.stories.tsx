@@ -15,13 +15,13 @@ const meta: Meta<typeof Collapse> = {
 export default meta
 
 export const Basic: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse open={isOpen}>
+      <Collapse open={open}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -31,13 +31,13 @@ export const Basic: Story = () => {
 }
 
 export const WithDuration: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse duration={0.7} open={isOpen}>
+      <Collapse duration={0.7} open={open}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -47,13 +47,13 @@ export const WithDuration: Story = () => {
 }
 
 export const ExitUnmount: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse open={isOpen} unmountOnExit>
+      <Collapse open={open} unmountOnExit>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -67,13 +67,13 @@ export const ExitUnmount: Story = () => {
 }
 
 export const DisabledOpacity: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <VStack align="flex-start" gap={0}>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse animationOpacity={false} open={isOpen}>
+      <Collapse animationOpacity={false} open={open}>
         <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -87,13 +87,13 @@ export const DisabledOpacity: Story = () => {
 }
 
 export const StartingHeight: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Collapse open={isOpen} startingHeight={20}>
+      <Collapse open={open} startingHeight={20}>
         <Box color="purple.500">
           私の戦闘力は530000です。
           <br />

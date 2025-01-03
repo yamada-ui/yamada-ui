@@ -9,12 +9,12 @@ describe("<Fade />", () => {
 
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Fade open={isOpen}>Fade</Fade>
+          <button onClick={() => setOpen(!open)}>button</button>
+          <Fade open={open}>Fade</Fade>
         </>
       )
     }
@@ -34,12 +34,12 @@ describe("<Fade />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Fade open={isOpen} unmountOnExit>
+          <button onClick={() => setOpen(!open)}>button</button>
+          <Fade open={open} unmountOnExit>
             Fade
           </Fade>
         </>

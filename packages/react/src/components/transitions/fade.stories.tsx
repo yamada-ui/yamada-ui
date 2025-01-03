@@ -14,13 +14,13 @@ const meta: Meta<typeof Fade> = {
 export default meta
 
 export const Basic: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade open={isOpen}>
+      <Fade open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -34,13 +34,13 @@ export const Basic: Story = () => {
 }
 
 export const WithDuration: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade duration={0.4} open={isOpen}>
+      <Fade duration={0.4} open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -54,13 +54,13 @@ export const WithDuration: Story = () => {
 }
 
 export const ExitUnmount: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade open={isOpen} unmountOnExit>
+      <Fade open={open} unmountOnExit>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

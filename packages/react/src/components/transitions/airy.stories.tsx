@@ -79,7 +79,7 @@ export const WithDelay: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Airy
@@ -91,7 +91,7 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Airy

@@ -58,20 +58,6 @@ export interface FlipOptions {
    */
   duration?: number
   /**
-   * If `true`, the component is disabled.
-   *
-   * @default false
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the component is readonly.
-   *
-   * @default false
-   * @deprecated Use `readOnly` instead.
-   */
-  isReadOnly?: boolean
-  /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *
    * @default 'horizontal'
@@ -125,13 +111,11 @@ export const Flip: FC<FlipProps> = (props) => {
     className,
     defaultValue = "from",
     delay = 0,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     duration = 0.4,
     from,
-    isReadOnly,
     orientation = "horizontal",
-    readOnly = isReadOnly,
+    readOnly,
     to,
     transition: transitionProp = {},
     value: valueProp,

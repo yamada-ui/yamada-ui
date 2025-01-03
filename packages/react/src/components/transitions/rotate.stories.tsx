@@ -111,7 +111,7 @@ export const WithDelay: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <Center
       display="flex"
@@ -128,7 +128,7 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <Center
       display="flex"

@@ -14,13 +14,13 @@ const meta: Meta<typeof ScaleFade> = {
 export default meta
 
 export const Basic: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade open={isOpen}>
+      <ScaleFade open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -34,13 +34,13 @@ export const Basic: Story = () => {
 }
 
 export const WithScale: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade open={isOpen} scale={0.75}>
+      <ScaleFade open={open} scale={0.75}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -54,13 +54,13 @@ export const WithScale: Story = () => {
 }
 
 export const WithDuration: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade duration={0.4} open={isOpen}>
+      <ScaleFade duration={0.4} open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -74,13 +74,13 @@ export const WithDuration: Story = () => {
 }
 
 export const ExitUnmount: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <ScaleFade open={isOpen} unmountOnExit>
+      <ScaleFade open={open} unmountOnExit>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

@@ -45,20 +45,6 @@ interface RotateOptions {
    */
   duration?: number
   /**
-   * If `true`, the component is disabled.
-   *
-   * @default false
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the component is readonly.
-   *
-   * @default false
-   * @deprecated Use `readOnly` instead.
-   */
-  isReadOnly?: boolean
-  /**
    * If `true`, the component is readonly.
    *
    * @default false
@@ -95,12 +81,10 @@ export const Rotate: FC<RotateProps> = (props) => {
     className,
     defaultValue = "from",
     delay = 0,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     duration = 0.4,
     from,
-    isReadOnly,
-    readOnly = isReadOnly,
+    readOnly,
     rotate = 45,
     to,
     value: valueProp,

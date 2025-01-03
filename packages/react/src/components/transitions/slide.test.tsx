@@ -57,12 +57,12 @@ describe("<Slide />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen(!isOpen)}>button</button>
-          <Slide open={isOpen} unmountOnExit>
+          <button onClick={() => setOpen(!open)}>button</button>
+          <Slide open={open} unmountOnExit>
             Slide
           </Slide>
         </>

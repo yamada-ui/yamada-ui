@@ -213,7 +213,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const setValue = useCallback(
-      (value: string, index: number, isFocus = true) => {
+      (value: string, index: number, focus = true) => {
         let nextValues = [...values]
 
         nextValues[index] = value
@@ -222,13 +222,13 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
         nextValues = nextValues.filter(Boolean)
 
-        const isComplete =
+        const complete =
           value !== "" && nextValues.length === descendants.count()
 
-        if (isComplete) {
+        if (complete) {
           onComplete?.(nextValues.join(""))
           descendants.value(index)?.node.blur()
-        } else if (isFocus) {
+        } else if (focus) {
           focusNext(index)
         }
       },

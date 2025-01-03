@@ -5,7 +5,7 @@ import type { SortDirection } from "./use-table"
 import { ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { cx } from "../../utils"
-import { ChevronDownIcon, Icon } from "../icon"
+import { ChevronDownIcon, ChevronsUpDownIcon } from "../icon"
 import { useTableStyles } from "../native-table"
 
 export interface TableSortTextButtonProps
@@ -54,22 +54,12 @@ export const TableSortIcon: FC<TableSortIconProps> = ({
 
   if (!sorted) {
     return (
-      <Icon
+      <ChevronsUpDownIcon
         className={cx("ui-table__sort-icon", className)}
         aria-hidden
-        fill="none"
-        focusable="false"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        viewBox="0 0 24 24"
         __css={css}
         {...rest}
-      >
-        <path d="M8 9l4 -4l4 4" />
-        <path d="M16 15l-4 4l-4 -4" />
-      </Icon>
+      />
     )
   }
 

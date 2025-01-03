@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { a11y, render, screen, waitFor } from "../../../test"
+import { EyeIcon, EyeOffIcon } from "../icon"
 import { PasswordInput, PasswordInputStrengthMeter } from "./"
-import { EyeIcon, EyeOffIcon } from ".//password-input-icon"
 
 describe("<PasswordInput />", () => {
   test("PasswordInput renders correctly", async () => {

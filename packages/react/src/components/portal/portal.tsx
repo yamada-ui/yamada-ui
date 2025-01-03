@@ -24,12 +24,6 @@ export interface PortalProps {
    * If `true`, the forwarding will be disabled.
    */
   disabled?: boolean
-  /**
-   * If `true`, the forwarding will be disabled.
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
 }
 
 /**
@@ -41,8 +35,7 @@ export const Portal: FC<PortalProps> = ({
   appendToParentPortal = true,
   children,
   containerRef,
-  isDisabled,
-  disabled = isDisabled,
+  disabled,
 }) => {
   if (disabled) return children
 

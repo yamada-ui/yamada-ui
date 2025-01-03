@@ -3,6 +3,10 @@ import type { ComponentMultiStyle } from "../../core"
 export const Menu: ComponentMultiStyle<"Menu"> = {
   baseStyle: {
     button: {
+      alignItems: "center",
+      appearance: "none",
+      display: "inline-flex",
+      outline: 0,
       transitionDuration: "normal",
       transitionProperty: "common",
     },
@@ -33,15 +37,30 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       py: "1.5",
     },
     icon: {
+      alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      display: "inline-flex",
+      flexShrink: 0,
+      fontSize: "0.85em",
+      justifyContent: "center",
     },
     item: {
+      alignItems: "center",
+      color: "inherit",
       cursor: "pointer",
+      display: "flex",
+      flex: "0 0 auto",
+      gap: "0.75rem",
+      outline: 0,
       px: "3",
       py: "1.5",
+      textAlign: "start",
+      textDecoration: "none",
       transitionDuration: "ultra-fast",
       transitionProperty: "background",
       transitionTimingFunction: "ease-in",
+      userSelect: "none",
+      width: "100%",
       _active: {
         bg: ["blackAlpha.50", "whiteAlpha.50"],
         _disabled: {

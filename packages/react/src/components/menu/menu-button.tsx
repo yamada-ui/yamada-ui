@@ -1,5 +1,5 @@
 import type { KeyboardEvent, ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import type { MenuIconProps } from "./menu-item"
 import { useCallback, useId, useMemo } from "react"
 import { forwardRef, ui } from "../../core"
@@ -107,15 +107,7 @@ MenuButton.__ui__ = "MenuButton"
 const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   const { styles } = useMenu()
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    appearance: "none",
-    display: "inline-flex",
-    outline: 0,
-    ...styles.button,
-  }
-
-  return <ui.button ref={ref} __css={css} {...rest} />
+  return <ui.button ref={ref} __css={styles.button} {...rest} />
 })
 
 export interface MenuItemButtonProps extends MenuButtonProps {

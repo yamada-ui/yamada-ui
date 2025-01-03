@@ -5,12 +5,7 @@ import type {
   ReactNode,
   RefAttributes,
 } from "react"
-import type {
-  ComponentArgs,
-  CSSUIObject,
-  CSSUIProps,
-  HTMLUIProps,
-} from "../../core"
+import type { ComponentArgs, CSSUIProps, HTMLUIProps } from "../../core"
 import type { PaginationProps } from "../pagination"
 import type { SelectProps } from "../select"
 import type { TableBodyProps } from "./tbody"
@@ -193,12 +188,6 @@ export const PagingTable = forwardRef(
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 
-    const css: CSSUIObject = {
-      tableLayout: layout,
-      w: "100%",
-      ...styles.table,
-    }
-
     const hasChildren = children != null
 
     return (
@@ -219,7 +208,10 @@ export const PagingTable = forwardRef(
           >
             <ui.table
               className={cx("ui-paging-table", className)}
-              __css={css}
+              __css={{
+                tableLayout: layout,
+                ...styles.table,
+              }}
               {...getTableProps({}, ref)}
             >
               <Thead {...theadProps} />

@@ -297,12 +297,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       return trackFocusVisible(setFocusVisible)
     }, [])
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      ...styles.container,
-    }
-
     const validChildren = getValidChildren(children)
     let computedChildren: ReactElement<any>[] = []
 
@@ -343,7 +337,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
             <ui.div
               {...getContainerProps({}, ref)}
               className={cx("ui-segmented-control", className)}
-              __css={css}
+              __css={styles.container}
             >
               {computedChildren}
             </ui.div>
@@ -415,22 +409,14 @@ export const SegmentedControlButton = forwardRef<
       readOnly,
       value,
     }
-    const css: CSSUIObject = {
-      alignItems: "center",
-      cursor: "pointer",
-      display: "inline-flex",
-      flex: "1 1 0%",
-      justifyContent: "center",
-      position: "relative",
-      ...styles.button,
-    }
+
     const selected = value === selectedValue
 
     return (
       <ui.label
         {...getLabelProps(props)}
         className={cx("ui-segmented-control__button", className)}
-        __css={css}
+        __css={styles.button}
         {...rest}
       >
         <ui.input
@@ -459,13 +445,6 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
 }) => {
   const { styles } = useSegmentedControl()
 
-  const css: CSSUIObject = {
-    h: "100%",
-    position: "absolute",
-    w: "100%",
-    ...styles.cursor,
-  }
-
   return (
     <motion.div
       className={cx("ui-segmented-control__cursor", className)}
@@ -477,7 +456,7 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
         duration: 0.4,
         ...transition,
       }}
-      __css={css}
+      __css={styles.cursor}
       {...rest}
     />
   )

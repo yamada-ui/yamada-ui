@@ -52,6 +52,9 @@ export const Progress: ComponentMultiStyle<"Progress"> = {
     },
     track: {
       bg: "border",
+      overflow: "hidden",
+      pos: "relative",
+      w: "100%",
     },
   },
 

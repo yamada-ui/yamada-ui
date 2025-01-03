@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { MotionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
@@ -111,19 +111,16 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useMonthPicker(computedProps)
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <DatePickerProvider value={styles}>
       <Popover {...getPopoverProps()}>
         <ui.div
           className={cx("ui-month-picker", className)}
-          __css={css}
+          __css={{
+            color,
+            ...styles.container,
+          }}
           {...getContainerProps(containerProps)}
         >
           <ui.div

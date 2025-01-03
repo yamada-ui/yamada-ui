@@ -8,22 +8,37 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
   Menu,
   {
     baseStyle: {
-      container: {},
+      body: {
+        display: "flex",
+        w: "100%",
+      },
+      container: {
+        h: "fit-content",
+        position: "relative",
+        w: "100%",
+      },
       content: {
         minW: "auto",
         p: "2",
         w: "auto",
       },
       eyeDropper: {
+        alignItems: "center",
         color: ["blackAlpha.600", "whiteAlpha.700"],
+        display: "inline-flex",
         fontSize: "lg",
+        justifyContent: "center",
         outline: 0,
         pointerEvents: "auto",
+        position: "absolute",
         py: "1",
         rounded: "md",
+        top: "50%",
+        transform: "translateY(-50%)",
         transitionDuration: "normal",
         transitionProperty: "common",
         w: "6",
+        zIndex: 1,
         _disabled: {
           opacity: 0.4,
           pointerEvents: "none",
@@ -36,8 +51,12 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
         },
       },
       field: {
+        alignItems: "center",
+        display: "flex",
         pb: "px",
+        pe: "2rem",
         pr: "8",
+        ps: "2rem",
         _focus: {
           zIndex: "unset",
         },
@@ -48,8 +67,27 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
           pointerEvents: "none",
         },
       },
-      inner: {},
-      swatch: {},
+      inner: {
+        position: "relative",
+      },
+      overlay: {
+        bottom: 0,
+        left: 0,
+        position: "absolute",
+        right: 0,
+        top: 0,
+      },
+      swatch: {
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%)",
+        zIndex: 1,
+      },
+      track: {
+        h: "100%",
+        position: "relative",
+        w: "100%",
+      },
     },
 
     sizes: {

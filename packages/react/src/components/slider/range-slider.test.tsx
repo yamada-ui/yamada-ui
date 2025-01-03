@@ -80,7 +80,7 @@ describe("<RangeSlider />", () => {
   test("can be reversed", () => {
     const { max, min } = { max: 100, min: 0 }
     const { container } = render(
-      <RangeSlider defaultValue={[min, max]} isReversed max={max} min={min} />,
+      <RangeSlider defaultValue={[min, max]} max={max} min={min} reversed />,
     )
     const sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
     const filledTrack = container.querySelector(".ui-slider__track-filled")
@@ -92,7 +92,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be disabled", () => {
-    const { container } = render(<RangeSlider isDisabled />)
+    const { container } = render(<RangeSlider disabled />)
     const sliderInputs = container.getElementsByTagName("input")
     const sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
 
@@ -107,7 +107,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("can be readOnly", () => {
-    render(<RangeSlider data-testid="slider" isReadOnly />)
+    render(<RangeSlider data-testid="slider" readOnly />)
 
     const slider = screen.getByTestId("slider")
     const sliderInputs = slider.getElementsByTagName("input")
@@ -140,7 +140,7 @@ describe("<RangeSlider />", () => {
     consoleSpy.mockRestore()
   })
 
-  test("should set isReadOnly to true when focusThumbOnChange is false", () => {
+  test("should set readOnly to true when focusThumbOnChange is false", () => {
     render(<RangeSlider data-testid="slider" focusThumbOnChange={false} />)
 
     const slider = screen.getByTestId("slider")
@@ -272,10 +272,10 @@ describe("<RangeSlider />", () => {
         name: "test-slider",
         defaultValue: [25, 75],
         focusThumbOnChange: true,
-        isReversed: false,
         max: 100,
         min: 0,
         orientation: "horizontal",
+        reversed: false,
         step: 1,
         onChange,
         onChangeEnd,
@@ -314,10 +314,10 @@ describe("<RangeSlider />", () => {
         id="test-slider"
         name="test"
         defaultValue={[25, 75]}
-        isReversed={false}
         max={100}
         min={0}
         orientation="horizontal"
+        reversed={false}
         step={1}
         onChange={onChange}
         onChangeEnd={onChangeEnd}

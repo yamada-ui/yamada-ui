@@ -63,11 +63,11 @@ export const WithOrientation: Story = () => {
 export const WithReversed: Story = () => {
   return (
     <>
-      <Slider isReversed />
+      <Slider reversed />
       <Slider
         h="calc(100vh - 16px * 3 - 14px)"
-        isReversed
         orientation="vertical"
+        reversed
       />
     </>
   )
@@ -105,14 +105,14 @@ export const WithFocusThumbOnChange: Story = () => {
 
       <ButtonGroup as={Center} gap="md" w="full">
         <Button
-          isDisabled={value === 0}
+          disabled={value === 0}
           onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
         >
           -10
         </Button>
         <Button
           colorScheme="blue"
-          isDisabled={value === 100}
+          disabled={value === 100}
           onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
         >
           +10
@@ -166,7 +166,7 @@ export const WithMark: Story = () => {
 
 export const WithTooltip: Story = () => {
   const [value, onChange] = useState<number>(50)
-  const [isOpen, { off, on }] = useBoolean(false)
+  const [open, { off, on }] = useBoolean(false)
 
   return (
     <Slider
@@ -186,21 +186,21 @@ export const WithTooltip: Story = () => {
         75%
       </SliderMark>
 
-      <Tooltip label={`${value}%`} open={isOpen} placement="top">
+      <Tooltip label={`${value}%`} open={open} placement="top">
         <SliderThumb />
       </Tooltip>
     </Slider>
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <Slider isDisabled />
+      <Slider disabled />
 
       <Fieldset
+        disabled
         helperMessage="Please select your preferred volume."
-        isDisabled
         legend="Sound volume"
       >
         <Slider />
@@ -209,15 +209,15 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Slider isReadOnly />
+      <Slider readOnly />
 
       <Fieldset
         helperMessage="Please select your preferred volume."
-        isReadOnly
         legend="Sound volume"
+        readOnly
       >
         <Slider />
       </Fieldset>
@@ -225,16 +225,16 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   const [value, onChange] = useState<number>(15)
 
   return (
     <>
-      <Slider isInvalid={value < 20} value={value} onChange={onChange} />
+      <Slider invalid={value < 20} value={value} onChange={onChange} />
 
       <Fieldset
         errorMessage="Volume should be set to 20 or higher."
-        isInvalid={value < 20}
+        invalid={value < 20}
         legend="Sound volume"
       >
         <Slider value={value} onChange={onChange} />
@@ -387,7 +387,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.slider?.message}
-        isInvalid={!!errors.slider}
+        invalid={!!errors.slider}
         legend="Sound volume"
       >
         <Controller

@@ -80,12 +80,6 @@ export interface UseRangeSliderOptions {
    */
   getAriaValueText?: (value: number) => string | undefined
   /**
-   * If `true`, the value will be incremented or decremented in reverse.
-   *
-   * @deprecated Use `reversed` instead.
-   */
-  isReversed?: boolean
-  /**
    * The maximum allowed value of the slider. Cannot be less than min.
    *
    * @default 100
@@ -142,7 +136,7 @@ export const useRangeSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseRangeSliderProps) => {
-  if (!focusThumbOnChange) props.isReadOnly = true
+  if (!focusThumbOnChange) props.readOnly = true
 
   const uuid = useId()
   const {
@@ -156,9 +150,8 @@ export const useRangeSlider = ({
     min = 0,
     defaultValue = [min + (max - min) / 4, max - (max - min) / 4],
     getAriaValueText: getAriaValueTextProp,
-    isReversed,
     orientation = "horizontal",
-    reversed = isReversed,
+    reversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -284,9 +277,9 @@ export const useRangeSlider = ({
       const thumbsPosition = distances.filter(
         (distance) => distance === closest,
       )
-      const isThumbStacked = thumbsPosition.length > 1
+      const thumbStacked = thumbsPosition.length > 1
 
-      if (isThumbStacked && pointValue > values[i]!)
+      if (thumbStacked && pointValue > values[i]!)
         i = i + thumbsPosition.length - 1
 
       activeIndexRef.current = i

@@ -234,10 +234,10 @@ export const WithInitialLoad = () => {
   )
 }
 
-export const IsReverse = () => {
+export const Reverse = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, finish } = useInfiniteScroll({
-    isReverse: true,
+    reverse: true,
     onLoad: ({ finish, index }) => {
       console.log("onLoad", index)
 

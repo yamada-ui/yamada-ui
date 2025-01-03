@@ -86,22 +86,6 @@ export interface UseInfiniteScrollProps
    */
   initialLoad?: boolean
   /**
-   * If `true`, the infinite scroll is disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   *  If `true`, reverse direction.
-   *
-   * @default false
-   *
-   * @deprecated Use `reverse` instead.
-   */
-  isReverse?: boolean
-  /**
    * The orientation of the infinite scroll.
    *
    * @default 'vertical'
@@ -159,14 +143,12 @@ export interface UseInfiniteScrollProps
  */
 export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   behavior,
-  isDisabled = false,
-  disabled = isDisabled,
+  disabled = false,
   indexRef: indexRefProp,
   initialLoad = false,
-  isReverse = false,
   orientation = "vertical",
   resetRef,
-  reverse = isReverse,
+  reverse = false,
   rootMargin,
   rootRef,
   startIndex = initialLoad ? 0 : 1,

@@ -8,12 +8,24 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
   Menu,
   {
     baseStyle: {
+      container: {
+        h: "fit-content",
+        w: "100%",
+      },
       content: {
         w: "100%",
       },
+      field: {
+        alignItems: "center",
+        cursor: "text",
+        display: "flex",
+        pe: "2rem",
+      },
       footer: {},
       header: {},
-      inner: {},
+      inner: {
+        position: "relative",
+      },
       item: {
         _active: {
           bg: ["blackAlpha.200", "whiteAlpha.200"],

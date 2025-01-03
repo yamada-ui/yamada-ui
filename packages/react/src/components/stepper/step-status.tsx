@@ -1,10 +1,10 @@
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 import type { CSSUIObject, HTMLUIProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { StepContext } from "./step"
 import { forwardRef, ui } from "../../core"
 import { cx, runIfFunc } from "../../utils"
-import { Icon } from "../icon"
+import { CheckIcon, Icon } from "../icon"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
@@ -116,24 +116,3 @@ export const StepIcon = forwardRef<StepIconProps, "svg">(
 
 StepIcon.displayName = "StepIcon"
 StepIcon.__ui__ = "StepIcon"
-
-const CheckIcon = (props: ComponentProps<"svg">) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="currentColor"
-      height="1em"
-      stroke="currentColor"
-      strokeWidth="0"
-      viewBox="0 0 20 20"
-      width="1em"
-      {...props}
-    >
-      <path
-        clipRule="evenodd"
-        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-        fillRule="evenodd"
-      />
-    </svg>
-  )
-}

@@ -3,6 +3,8 @@ import type { ComponentMultiStyle } from "../../core"
 export const Carousel: ComponentMultiStyle<"Carousel"> = {
   baseStyle: {
     container: {
+      h: "fit-content",
+      position: "relative",
       w: "100%",
     },
     control: {},
@@ -44,7 +46,9 @@ export const Carousel: ComponentMultiStyle<"Carousel"> = {
             w: "100%",
           }),
     }),
-    inner: {},
+    inner: {
+      display: "flex",
+    },
     next: ({ orientation: o }) => ({
       ...(o === "vertical"
         ? { bottom: "4", left: "50%", transform: "translateX(-50%)" }

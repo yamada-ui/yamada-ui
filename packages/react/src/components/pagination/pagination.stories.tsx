@@ -106,10 +106,10 @@ export const WithBoundaries: Story = () => {
 export const WithDisabled: Story = () => {
   return (
     <>
-      <Pagination variant="solid" isDisabled total={10} />
-      <Pagination variant="outline" isDisabled total={10} />
-      <Pagination variant="ghost" isDisabled total={10} />
-      <Pagination variant="unstyled" isDisabled total={10} />
+      <Pagination variant="solid" disabled total={10} />
+      <Pagination variant="outline" disabled total={10} />
+      <Pagination variant="ghost" disabled total={10} />
+      <Pagination variant="unstyled" disabled total={10} />
     </>
   )
 }

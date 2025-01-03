@@ -35,22 +35,6 @@ interface PaginationItemOptions {
    * @default false
    */
   disableRipple?: boolean
-  /**
-   * If `true`, the pagination item will be activated.
-   *
-   * @default false
-   *
-   * @deprecated Use `active` instead.
-   */
-  isActive?: boolean
-  /**
-   * If `true`, the pagination item will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
 }
 
 export interface PaginationItemProps
@@ -71,12 +55,10 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
   (
     {
       className,
-      isActive,
-      active = isActive,
+      active,
       page,
       children = iconMap[page] ?? page,
-      isDisabled,
-      disabled = isDisabled,
+      disabled,
       disableRipple,
       ...rest
     },

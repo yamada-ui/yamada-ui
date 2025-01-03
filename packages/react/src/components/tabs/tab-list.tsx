@@ -1,5 +1,5 @@
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { useCallback } from "react"
 import { forwardRef, ui } from "../../core"
 import { cx, handlerAll } from "../../utils"
@@ -58,15 +58,13 @@ export const TabList = forwardRef<TabListProps, "div">(
       [onFirst, onLast, isVertical, onPrev, onNext],
     )
 
-    const css: CSSUIObject = { display: "flex", ...styles.tabList }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-tabs__list", className)}
         aria-orientation={orientation}
         role="tablist"
-        __css={css}
+        __css={styles.tabList}
         {...tabListProps}
         {...rest}
         onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}

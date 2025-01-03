@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { LazyMode } from "../../hooks/use-disclosure"
 import type { TabListProps } from "./tab-list"
 import type { TabPanelsProps } from "./tab-panels"
@@ -166,8 +166,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
     const cloneTabs = pickChildren(validChildren, Tab)
     const cloneTabPanels = pickChildren(validChildren, TabPanel)
 
-    const css: CSSUIObject = { w: "100%", ...styles.container }
-
     useEffect(() => {
       if (index != null) setFocusedIndex(index)
     }, [index])
@@ -196,7 +194,7 @@ export const Tabs = forwardRef<TabsProps, "div">(
             <ui.div
               ref={ref}
               className={cx("ui-tabs", className)}
-              __css={css}
+              __css={styles.container}
               {...rest}
             >
               {customTabList ?? <TabList>{cloneTabs}</TabList>}

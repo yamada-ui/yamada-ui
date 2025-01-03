@@ -145,7 +145,7 @@ export const WithBorderColor: Story = () => {
       <Select focusBorderColor="green.500" placeholder="custom border color" />
       <Select
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -226,16 +226,16 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <Select variant="outline" isDisabled placeholder="outline" />
-      <Select variant="filled" isDisabled placeholder="filled" />
-      <Select variant="flushed" isDisabled placeholder="flushed" />
-      <Select variant="unstyled" isDisabled placeholder="unstyled" />
+      <Select variant="outline" disabled placeholder="outline" />
+      <Select variant="filled" disabled placeholder="filled" />
+      <Select variant="flushed" disabled placeholder="flushed" />
+      <Select variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
-        isDisabled
+        disabled
         label="Which notifications would you like to receive?"
       >
         <Select placeholder="Select notifications" />
@@ -244,17 +244,17 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Select variant="outline" isReadOnly placeholder="outline" />
-      <Select variant="filled" isReadOnly placeholder="filled" />
-      <Select variant="flushed" isReadOnly placeholder="flushed" />
-      <Select variant="unstyled" isReadOnly placeholder="unstyled" />
+      <Select variant="outline" placeholder="outline" readOnly />
+      <Select variant="filled" placeholder="filled" readOnly />
+      <Select variant="flushed" placeholder="flushed" readOnly />
+      <Select variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
-        isReadOnly
         label="Which notifications would you like to receive?"
+        readOnly
       >
         <Select placeholder="Select notifications" />
       </FormControl>
@@ -262,17 +262,17 @@ export const IsReadonly: Story = () => {
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   return (
     <>
-      <Select variant="outline" isInvalid placeholder="outline" />
-      <Select variant="filled" isInvalid placeholder="filled" />
-      <Select variant="flushed" isInvalid placeholder="flushed" />
-      <Select variant="unstyled" isInvalid placeholder="unstyled" />
+      <Select variant="outline" invalid placeholder="outline" />
+      <Select variant="filled" invalid placeholder="filled" />
+      <Select variant="flushed" invalid placeholder="flushed" />
+      <Select variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="Which notifications would you like to receive?"
       >
         <Select placeholder="Select notifications" />
@@ -281,11 +281,11 @@ export const IsInvalid: Story = () => {
   )
 }
 
-export const IsOptionDisabled: Story = () => {
+export const OptionDisabled: Story = () => {
   return (
     <Select placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option isDisabled value="ベジータ">
+      <Option disabled value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -293,11 +293,11 @@ export const IsOptionDisabled: Story = () => {
   )
 }
 
-export const IsOptionFocusable: Story = () => {
+export const OptionFocusable: Story = () => {
   return (
     <Select placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option isDisabled isFocusable value="ベジータ">
+      <Option disabled focusable value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -407,7 +407,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select1?.message}
-        isInvalid={!!errors.select1}
+        invalid={!!errors.select1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -426,7 +426,7 @@ export const ReactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.select2?.message}
-        isInvalid={!!errors.select2}
+        invalid={!!errors.select2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -456,7 +456,7 @@ export const ReactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.select3?.message}
-        isInvalid={!!errors.select3}
+        invalid={!!errors.select3}
         label="Who is your favorite character?"
       >
         <Controller
@@ -527,7 +527,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select1?.message}
-        isInvalid={!!errors.select1}
+        invalid={!!errors.select1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -546,7 +546,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.select2?.message}
-        isInvalid={!!errors.select2}
+        invalid={!!errors.select2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -576,7 +576,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.select3?.message}
-        isInvalid={!!errors.select3}
+        invalid={!!errors.select3}
         label="Who is your favorite character?"
       >
         <Controller

@@ -180,7 +180,7 @@ describe("<Select />", () => {
   describe("disabled and readonly", () => {
     test("should be disable", async () => {
       render(
-        <Select isDisabled>
+        <Select disabled>
           <Option value="one">One</Option>
           <Option value="two">Two</Option>
         </Select>,
@@ -193,7 +193,7 @@ describe("<Select />", () => {
 
     test("should be readonly", async () => {
       render(
-        <Select isReadOnly placeholder="Numbers">
+        <Select placeholder="Numbers" readOnly>
           <Option value="one">One</Option>
           <Option value="two">Two</Option>
         </Select>,
@@ -207,7 +207,7 @@ describe("<Select />", () => {
     test("should be disable option", async () => {
       const { user } = render(
         <Select>
-          <Option isDisabled value="one">
+          <Option disabled value="one">
             One
           </Option>
           <Option value="two">Two</Option>

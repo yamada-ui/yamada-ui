@@ -8,7 +8,6 @@ import type {
 import type {
   ColorModeToken,
   CSS,
-  CSSUIObject,
   FC,
   HTMLUIProps,
   ThemeProps,
@@ -202,13 +201,6 @@ export const FileInput: FC<FileInputProps> = ({ ref, children, ...props }) => {
     onClick: handlerAll(onClickProp, onClick),
   })
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    cursor: !readOnly ? "pointer" : "auto",
-    display: "flex",
-    ...styles.field,
-  }
-
   return (
     <>
       <ui.input
@@ -243,7 +235,10 @@ export const FileInput: FC<FileInputProps> = ({ ref, children, ...props }) => {
         className={cx("ui-file-input", className)}
         data-placeholder={dataAttr(!values?.length)}
         py={values?.length && component ? "0.125rem" : undefined}
-        __css={css}
+        __css={{
+          cursor: !readOnly ? "pointer" : "auto",
+          ...styles.field,
+        }}
         {...clickableProps}
       >
         {cloneChildren}

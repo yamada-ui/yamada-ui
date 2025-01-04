@@ -89,12 +89,6 @@ export interface UseSliderOptions {
    */
   getAriaValueText?: (value: number) => string | undefined
   /**
-   * If `true`, the value will be incremented or decremented in reverse.
-   *
-   * @deprecated Use `reversed` instead.
-   */
-  isReversed?: boolean
-  /**
    * The maximum allowed value of the slider. Cannot be less than min.
    *
    * @default 100
@@ -152,7 +146,7 @@ export const useSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseSliderProps) => {
-  if (!focusThumbOnChange) props.isReadOnly = true
+  if (!focusThumbOnChange) props.readOnly = true
 
   const {
     id,
@@ -162,11 +156,10 @@ export const useSlider = ({
     "aria-valuetext": ariaValueText,
     defaultValue,
     getAriaValueText: getAriaValueTextProp,
-    isReversed,
     max = 100,
     min = 0,
     orientation = "horizontal",
-    reversed = isReversed,
+    reversed,
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
@@ -587,18 +580,6 @@ export const useSlider = ({
   return {
     dragging,
     focused,
-    /**
-     * @deprecated Use `dragging` instead.
-     */
-    isDragging: dragging,
-    /**
-     * @deprecated Use `focused` instead.
-     */
-    isFocused: focused,
-    /**
-     * @deprecated Use `vertical` instead.
-     */
-    isVertical: vertical,
     reset,
     stepDown,
     stepTo,
@@ -623,7 +604,7 @@ interface SliderContext
       | "getMarkProps"
       | "getThumbProps"
       | "getTrackProps"
-      | "isVertical"
+      | "vertical"
     >,
     Omit<SliderOptions, "input"> {
   styles: { [key: string]: CSSUIObject | undefined }
@@ -700,7 +681,7 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const {
-    isVertical,
+    vertical,
     getContainerProps,
     getFilledTrackProps,
     getInputProps,
@@ -726,12 +707,12 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
     <SliderProvider
       value={{
         filledTrackColor,
-        isVertical,
         styles,
         thumbColor,
         thumbSize,
         trackColor,
         trackSize,
+        vertical,
         filledTrackProps,
         getFilledTrackProps,
         getMarkProps,
@@ -768,10 +749,10 @@ export interface SliderTrackProps
 export const SliderTrack = forwardRef<SliderTrackProps, "div">(
   ({ className, children, filledTrackProps, ...rest }, ref) => {
     const {
-      isVertical,
       styles,
       trackColor,
       trackSize,
+      vertical,
       getTrackProps,
       trackProps,
     } = useSliderContext()
@@ -786,7 +767,7 @@ export const SliderTrack = forwardRef<SliderTrackProps, "div">(
           {
             ...(trackColor ? { bg: trackColor } : {}),
             ...(trackSize
-              ? isVertical
+              ? vertical
                 ? { w: trackSize }
                 : { h: trackSize }
               : {}),

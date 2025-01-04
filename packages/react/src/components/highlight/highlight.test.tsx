@@ -33,9 +33,9 @@ describe("<Highlight />", () => {
     consoleSpy.mockRestore()
   })
 
-  test("isFragment prop works correctly", () => {
+  test("fragment prop works correctly", () => {
     const { container } = render(
-      <Highlight isFragment query="">
+      <Highlight fragment query="">
         Highlight
       </Highlight>,
     )

@@ -276,13 +276,13 @@ export const useRating = ({
     MotionProps
   > = useCallback(
     ({ value, ...props }, ref = null) => {
-      const isActive = !readOnly && Math.ceil(hoveredValue) === value
+      const active = !readOnly && Math.ceil(hoveredValue) === value
 
       return {
         ref,
         whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
         ...props,
-        "data-active": dataAttr(isActive),
+        "data-active": dataAttr(active),
         tabIndex: -1,
       }
     },

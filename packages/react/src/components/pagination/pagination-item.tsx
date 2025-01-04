@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { forwardRef, ui } from "../../core"
 import { cx, dataAttr } from "../../utils"
 import { Ripple, useRipple } from "../ripple"
@@ -88,16 +88,7 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
       ...rest,
       disabled: disableRipple || disabled || ellipsis,
     })
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      overflow: "hidden",
-      position: "relative",
-      userSelect: "none",
-      ...styles.item,
-      ...styles[page],
-    }
+
     const Component = ui[ellipsis ? "span" : "button"]
 
     return (
@@ -117,7 +108,10 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
           className,
         )}
         tabIndex={!ellipsis ? 0 : -1}
-        __css={css}
+        __css={{
+          ...styles.item,
+          ...styles[page],
+        }}
         {...rest}
         onPointerDown={onPointerDown}
       >

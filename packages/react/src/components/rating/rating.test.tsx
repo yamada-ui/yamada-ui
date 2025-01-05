@@ -37,13 +37,13 @@ describe("<Rating />", () => {
   })
 
   test("disabled Rating renders correctly", () => {
-    render(<Rating data-testid="rating" isDisabled />)
+    render(<Rating data-testid="rating" disabled />)
 
     expect(screen.getByTestId("rating")).toHaveAttribute("aria-disabled")
   })
 
   test("readonly Rating renders correctly", () => {
-    render(<Rating data-testid="rating" isReadOnly />)
+    render(<Rating data-testid="rating" readOnly />)
 
     expect(screen.getByTestId("rating")).toHaveAttribute("aria-readonly")
   })

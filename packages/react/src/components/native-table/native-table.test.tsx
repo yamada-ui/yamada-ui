@@ -32,7 +32,7 @@ describe("<NativeTable />", () => {
             <Tr data-testid="Tr">
               <Th data-testid="Th">First Name</Th>
               <Th>Last Name</Th>
-              <Th isNumeric>Work</Th>
+              <Th numeric>Work</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -47,7 +47,7 @@ describe("<NativeTable />", () => {
             <Tr>
               <Th>First Name</Th>
               <Th>Last Name</Th>
-              <Th isNumeric>Work</Th>
+              <Th numeric>Work</Th>
             </Tr>
           </Tfoot>
         </NativeTable>

@@ -82,6 +82,6 @@ export const useAsyncCallback = <Y extends Callback>(
 
 export type UseAsyncCallbackReturn<Y extends Callback> = [
   isLoading: boolean,
-  callback: (...args: Parameters<Y>) => Promise<ReturnType<Y>>,
+  callback: (...args: Parameters<Y>) => Promise<Awaited<ReturnType<Y>>>,
   control: { finish: () => void; start: () => void },
 ]

@@ -263,8 +263,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       cloneElement<any>(child, { index }),
     )
     const css: CSSUIObject = {
-      h: "fit-content",
-      position: "relative",
       ...styles.container,
     }
 
@@ -331,7 +329,6 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
   const { includeGapInSize, orientation, styles } = useCarouselContext()
 
   const css: CSSUIObject = {
-    display: "flex",
     flexDirection: orientation === "vertical" ? "column" : "row",
     ...styles.inner,
     ...(includeGapInSize

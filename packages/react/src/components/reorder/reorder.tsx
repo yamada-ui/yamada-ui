@@ -5,12 +5,7 @@ import type {
   ReactElement,
   RefAttributes,
 } from "react"
-import type {
-  ComponentArgs,
-  CSSUIObject,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
+import type { ComponentArgs, HTMLUIProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { ReorderItemProps } from "./reorder-item"
 import { Reorder as OriginalReorder } from "motion/react"
@@ -159,13 +154,6 @@ export const Reorder = forwardRef(
       [values, hasChildren, validChildren, items],
     )
 
-    const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: orientation === "vertical" ? "column" : "row",
-      gap,
-      ...styles.container,
-    }
-
     return (
       <ReorderProvider value={{ orientation, styles }}>
         <ui.ul
@@ -175,7 +163,11 @@ export const Reorder = forwardRef(
           axis={axis}
           values={values}
           onReorder={onReorder}
-          __css={css}
+          __css={{
+            flexDirection: orientation === "vertical" ? "column" : "row",
+            gap,
+            ...styles.container,
+          }}
           {...rest}
           onMouseUp={handlerAll(rest.onMouseUp, onCompleteReorder)}
           onTouchEnd={handlerAll(rest.onTouchEnd, onCompleteReorder)}

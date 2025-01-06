@@ -13,19 +13,15 @@ import {
 
 describe("<Drawer />", () => {
   const DrawerOpenExample = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenDrawer" onClick={() => setOpen(true)}>
           Open Drawer
         </button>
 
-        <Drawer
-          data-testid="Drawer"
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-        >
+        <Drawer data-testid="Drawer" open={open} onClose={() => setOpen(false)}>
           <DrawerOverlay
             data-testid="DrawerOverlay"
             backdropFilter="blur(10px)"
@@ -64,20 +60,20 @@ describe("<Drawer />", () => {
   })
 
   const DrawerPlacementExample = ({ placement }: DrawerProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenDrawer" onClick={() => setOpen(true)}>
           Open Drawer
         </button>
 
         <Drawer
           data-testid="Drawer"
           closeOnDrag
-          open={isOpen}
+          open={open}
           placement={placement}
-          onClose={() => setIsOpen(false)}
+          onClose={() => setOpen(false)}
         >
           <DrawerOverlay
             data-testid="DrawerOverlay"
@@ -166,19 +162,19 @@ describe("<Drawer />", () => {
     customDrawerCloseButton = false,
     withCloseButton = true,
   }) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenDrawer" onClick={() => setOpen(true)}>
           Open Drawer
         </button>
 
         <Drawer
           data-testid="Drawer"
-          open={isOpen}
+          open={open}
           withCloseButton={withCloseButton}
-          onClose={() => setIsOpen(false)}
+          onClose={() => setOpen(false)}
         >
           <DrawerOverlay
             data-testid="DrawerOverlay"
@@ -188,7 +184,7 @@ describe("<Drawer />", () => {
           {customDrawerCloseButton ? (
             <Button
               data-testid="CustomDrawerCloseButton"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setOpen(false)}
             >
               Close
             </Button>

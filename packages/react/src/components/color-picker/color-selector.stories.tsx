@@ -126,11 +126,11 @@ export const DisabledResult: Story = () => {
   return <ColorSelector withResult={false} />
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
       <ColorSelector
-        isDisabled
+        disabled
         swatches={[
           "#2e2e2e",
           "#868e96",
@@ -151,8 +151,8 @@ export const IsDisabled: Story = () => {
       />
 
       <Fieldset
+        disabled
         helperMessage="Please select your favorite color"
-        isDisabled
         legend="Pick color"
       >
         <ColorSelector />
@@ -161,11 +161,11 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
       <ColorSelector
-        isReadOnly
+        readOnly
         swatches={[
           "#2e2e2e",
           "#868e96",
@@ -187,8 +187,8 @@ export const IsReadonly: Story = () => {
 
       <Fieldset
         helperMessage="Please select your favorite color"
-        isReadOnly
         legend="Pick color"
+        readOnly
       >
         <ColorSelector />
       </Fieldset>
@@ -281,7 +281,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.colorPicker?.message}
-        isInvalid={!!errors.colorPicker}
+        invalid={!!errors.colorPicker}
         legend="Pick color"
       >
         <Controller

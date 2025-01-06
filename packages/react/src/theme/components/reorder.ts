@@ -3,6 +3,7 @@ import type { ComponentMultiStyle } from "../../core"
 export const Reorder: ComponentMultiStyle<"Reorder"> = {
   baseStyle: {
     container: {
+      display: "flex",
       w: "100%",
     },
     item: {
@@ -10,10 +11,18 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       w: "100%",
       _selected: {
         boxShadow: ["md", "dark-md"],
+        cursor: "grabbing",
       },
     },
     trigger: {
+      alignItems: "center",
       color: ["blackAlpha.300", "whiteAlpha.300"],
+      cursor: "grab",
+      display: "flex",
+      justifyContent: "center",
+      _selected: {
+        cursor: "grabbing",
+      },
     },
   },
 

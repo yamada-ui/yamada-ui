@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { forwardRef, ui } from "../../core"
 import { cx, dataAttr } from "../../utils"
 import {
@@ -35,22 +35,6 @@ interface PaginationItemOptions {
    * @default false
    */
   disableRipple?: boolean
-  /**
-   * If `true`, the pagination item will be activated.
-   *
-   * @default false
-   *
-   * @deprecated Use `active` instead.
-   */
-  isActive?: boolean
-  /**
-   * If `true`, the pagination item will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
 }
 
 export interface PaginationItemProps
@@ -71,12 +55,10 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
   (
     {
       className,
-      isActive,
-      active = isActive,
+      active,
       page,
       children = iconMap[page] ?? page,
-      isDisabled,
-      disabled = isDisabled,
+      disabled,
       disableRipple,
       ...rest
     },
@@ -88,16 +70,7 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
       ...rest,
       disabled: disableRipple || disabled || ellipsis,
     })
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      overflow: "hidden",
-      position: "relative",
-      userSelect: "none",
-      ...styles.item,
-      ...styles[page],
-    }
+
     const Component = ui[ellipsis ? "span" : "button"]
 
     return (
@@ -117,7 +90,10 @@ export const PaginationItem = forwardRef<PaginationItemProps, "button">(
           className,
         )}
         tabIndex={!ellipsis ? 0 : -1}
-        __css={css}
+        __css={{
+          ...styles.item,
+          ...styles[page],
+        }}
         {...rest}
         onPointerDown={onPointerDown}
       >

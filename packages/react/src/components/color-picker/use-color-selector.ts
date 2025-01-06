@@ -165,7 +165,7 @@ export interface UseColorSelectorProps
     UseColorSelectorBaseProps {}
 
 export const useColorSelector = ({
-  isInvalid,
+  invalid,
   ...props
 }: UseColorSelectorProps) => {
   const {
@@ -180,7 +180,7 @@ export const useColorSelector = ({
     onChangeStart: onChangeStartProp,
     onSwatchClick,
     ...rest
-  } = useFormControlProps({ isInvalid, ...props })
+  } = useFormControlProps({ invalid, ...props })
   const [
     {
       "aria-readonly": ariaReadonly,
@@ -424,7 +424,7 @@ export const useColorSelector = ({
     useCallback(
       (props = {}, ref = null) => ({
         disabled,
-        isInvalid,
+        invalid,
         readOnly,
         required,
         ...props,
@@ -442,7 +442,7 @@ export const useColorSelector = ({
         required,
         disabled,
         readOnly,
-        isInvalid,
+        invalid,
         h,
         s,
         v,
@@ -455,7 +455,7 @@ export const useColorSelector = ({
   const getHueSliderProps: PropGetter<HueSliderProps> = useCallback(
     (props = {}, ref = null) => ({
       disabled,
-      isInvalid,
+      invalid,
       readOnly,
       required,
       ...props,
@@ -471,7 +471,7 @@ export const useColorSelector = ({
       required,
       disabled,
       readOnly,
-      isInvalid,
+      invalid,
       h,
       onChange,
       onChangeStart,
@@ -482,7 +482,7 @@ export const useColorSelector = ({
   const getAlphaSliderProps: PropGetter<AlphaSliderProps> = useCallback(
     (props = {}, ref = null) => ({
       disabled,
-      isInvalid,
+      invalid,
       readOnly,
       required,
       ...props,
@@ -500,7 +500,7 @@ export const useColorSelector = ({
       required,
       disabled,
       readOnly,
-      isInvalid,
+      invalid,
       format,
       h,
       s,
@@ -519,7 +519,7 @@ export const useColorSelector = ({
     ({ space, ...props }, ref = null) => {
       return {
         disabled,
-        isInvalid,
+        invalid,
         readOnly,
         required,
         ...props,
@@ -531,7 +531,7 @@ export const useColorSelector = ({
         ),
       } as Dict
     },
-    [required, disabled, readOnly, isInvalid, onChannelChange],
+    [required, disabled, readOnly, invalid, onChannelChange],
   )
 
   const getEyeDropperProps: PropGetter<"button"> = useCallback(

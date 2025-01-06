@@ -45,20 +45,6 @@ interface AiryOptions {
    */
   duration?: number
   /**
-   * If `true`, the component is disabled.
-   *
-   * @default false
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the component is readonly.
-   *
-   * @default false
-   * @deprecated Use `readOnly` instead.
-   */
-  isReadOnly?: boolean
-  /**
    * If `true`, the component is readonly.
    *
    * @default false
@@ -89,12 +75,10 @@ export const Airy: FC<AiryProps> = (props) => {
     className,
     defaultValue = "from",
     delay = 0,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     duration = 0.2,
     from,
-    isReadOnly,
-    readOnly = isReadOnly,
+    readOnly,
     to,
     value: valueProp,
     onChange: onChangeProp,

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { createElement } from "react"
 import { forwardRef, ui } from "../../core"
 import { cx, getValidChildren } from "../../utils"
@@ -20,16 +20,11 @@ export const TabPanels = forwardRef<TabPanelsProps, "div">(
       )
     })
 
-    const css: CSSUIObject = {
-      w: "100%",
-      ...styles.tabPanels,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-tabs__panels", className)}
-        __css={css}
+        __css={styles.tabPanels}
         {...tabPanelsProps}
         {...rest}
       >

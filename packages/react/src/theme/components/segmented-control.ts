@@ -4,8 +4,14 @@ import { isAccessible, isGray } from "../../utils"
 export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   baseStyle: {
     button: {
+      alignItems: "center",
       color: ["blackAlpha.800", "whiteAlpha.800"],
+      cursor: "pointer",
+      display: "inline-flex",
+      flex: "1 1 0%",
       fontWeight: "medium",
+      justifyContent: "center",
+      position: "relative",
       transitionDuration: "ultra-slow",
       transitionProperty: "common",
       whiteSpace: "nowrap",
@@ -22,13 +28,18 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       _readOnly: { cursor: "default" },
     },
     container: {
+      alignItems: "center",
       bg: ["blackAlpha.100", "whiteAlpha.100"],
+      display: "inline-flex",
       p: "1",
       _disabled: { cursor: "not-allowed" },
       _readOnly: { cursor: "default" },
     },
     cursor: {
       boxShadow: ["md", "dark-md"],
+      h: "100%",
+      position: "absolute",
+      w: "100%",
     },
   },
 

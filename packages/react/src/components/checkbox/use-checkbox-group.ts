@@ -20,16 +20,6 @@ export interface UseCheckboxGroupProps<Y extends number | string = string> {
    */
   defaultValue?: Y[]
   /**
-   * If `true`, input elements will receive `checked` attribute instead of `isChecked`.
-   *
-   * This assumes, you're using native radio inputs.
-   *
-   * @default false
-   *
-   * @deprecated It will be deprecated in version 2.0.
-   */
-  isNative?: boolean
-  /**
    * The value of the checkbox group.
    */
   value?: Y[]
@@ -44,7 +34,6 @@ export const useCheckboxGroup = <
   M extends Dict = Dict,
 >({
   defaultValue = [],
-  isNative,
   value: valueProp,
   onChange: onChangeProp,
   ...props
@@ -59,7 +48,7 @@ export const useCheckboxGroup = <
 
   const onChange = useCallback(
     (evOrValue: ChangeEvent<HTMLInputElement> | Y) => {
-      const isChecked = isEvent(evOrValue)
+      const checked = isEvent(evOrValue)
         ? evOrValue.target.checked
         : !value.includes(evOrValue)
 
@@ -67,7 +56,7 @@ export const useCheckboxGroup = <
         isEvent(evOrValue) ? evOrValue.target.value : evOrValue
       ) as Y
 
-      const nextValue = isChecked
+      const nextValue = checked
         ? [...value, selectedValue]
         : value.filter((v) => String(v) !== String(selectedValue))
 
@@ -87,17 +76,15 @@ export const useCheckboxGroup = <
 
   const getCheckboxProps: PropGetter<
     { value?: Y },
-    { checked?: boolean; isChecked?: boolean; value?: Y }
+    { checked?: boolean; value?: Y }
   > = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref,
-      [isNative ? "checked" : "isChecked"]: value.some(
-        (val) => String(props.value) === String(val),
-      ),
+      checked: value.some((val) => String(props.value) === String(val)),
       onChange,
     }),
-    [onChange, isNative, value],
+    [onChange, value],
   )
 
   return {

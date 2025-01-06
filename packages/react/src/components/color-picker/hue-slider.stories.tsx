@@ -68,7 +68,7 @@ export const WithFocusThumbOnChange: Story = () => {
 
       <Center gap="md" w="full">
         <Button
-          isDisabled={value === 0}
+          disabled={value === 0}
           onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
         >
           -10
@@ -76,7 +76,7 @@ export const WithFocusThumbOnChange: Story = () => {
 
         <Button
           colorScheme="blue"
-          isDisabled={value === 100}
+          disabled={value === 100}
           onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
         >
           +10
@@ -90,14 +90,14 @@ export const DisabledShadow: Story = () => {
   return <HueSlider withShadow={false} />
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <HueSlider isDisabled />
+      <HueSlider disabled />
 
       <Fieldset
+        disabled
         helperMessage="Please select your favorite color"
-        isDisabled
         legend="Pick color"
       >
         <HueSlider />
@@ -106,15 +106,15 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <HueSlider isReadOnly />
+      <HueSlider readOnly />
 
       <Fieldset
         helperMessage="Please select your favorite color"
-        isReadOnly
         legend="Pick color"
+        readOnly
       >
         <HueSlider />
       </Fieldset>
@@ -189,7 +189,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.hueSlider?.message}
-        isInvalid={!!errors.hueSlider}
+        invalid={!!errors.hueSlider}
         legend="Pick color"
       >
         <Controller

@@ -117,10 +117,10 @@ export const Reorder = forwardRef(
     )
 
     const onCompleteReorder = useCallback(() => {
-      const isEqual =
+      const equal =
         JSON.stringify(prevValues.current) === JSON.stringify(values)
 
-      if (isEqual) return
+      if (equal) return
 
       prevValues.current = values
 
@@ -128,11 +128,11 @@ export const Reorder = forwardRef(
     }, [onCompleteChange, values])
 
     useUpdateEffect(() => {
-      const isEqual =
+      const equal =
         JSON.stringify(defaultValues) ===
         JSON.stringify(prevDefaultValues.current)
 
-      if (isEqual) return
+      if (equal) return
 
       prevValues.current = defaultValues
       prevDefaultValues.current = defaultValues

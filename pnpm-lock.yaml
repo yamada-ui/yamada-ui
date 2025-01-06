@@ -402,9 +402,6 @@ importers:
       '@yamada-ui/table':
         specifier: workspace:*
         version: link:../packages/components/table
-      canvas-confetti:
-        specifier: ^1.9.3
-        version: 1.9.3
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -463,9 +460,6 @@ importers:
       '@octokit/webhooks':
         specifier: ^13.4.1
         version: 13.4.1
-      '@types/canvas-confetti':
-        specifier: ^1.9.0
-        version: 1.9.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -2203,7 +2197,7 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       motion:
-        specifier: ^11.13.1
+        specifier: ^11.15.0
         version: 11.15.0(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       clean-package:
@@ -3112,7 +3106,7 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       motion:
-        specifier: ^11.13.1
+        specifier: ^11.15.0
         version: 11.15.0(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
@@ -10052,10 +10046,6 @@ packages:
     dependencies:
       '@types/node': 22.10.2
 
-  /@types/canvas-confetti@1.9.0:
-    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==, tarball: https://registry.npmjs.org/@types/canvas-confetti/-/canvas-confetti-1.9.0.tgz}
-    dev: true
-
   /@types/configstore@6.0.2:
     resolution: {integrity: sha512-OS//b51j9uyR3zvwD04Kfs5kHpve2qalQ18JhY/ho3voGYUTPLEG90/ocfKPI48hyHH8T04f7KEEbK6Ue60oZQ==, tarball: https://registry.npmjs.org/@types/configstore/-/configstore-6.0.2.tgz}
     dev: true
@@ -12070,10 +12060,6 @@ packages:
 
   /caniuse-lite@1.0.30001690:
     resolution: {integrity: sha512-5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w==, tarball: https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001690.tgz}
-
-  /canvas-confetti@1.9.3:
-    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==, tarball: https://registry.npmjs.org/canvas-confetti/-/canvas-confetti-1.9.3.tgz}
-    dev: false
 
   /capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==, tarball: https://registry.npmjs.org/capital-case/-/capital-case-1.0.4.tgz}

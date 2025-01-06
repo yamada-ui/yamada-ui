@@ -80,14 +80,14 @@ export interface UIComponent<Y extends As = As, M extends object = {}>
   extends Component<Y, Merge<UIProps, M>> {}
 
 export type HTMLRef<Y extends DOMElement = "div"> =
-  JSX.IntrinsicElements[Y]["ref"]
+  React.JSX.IntrinsicElements[Y]["ref"]
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: HTMLRef<Y> | undefined
 }
 
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
-  JSX.IntrinsicElements[Y],
+  React.JSX.IntrinsicElements[Y],
   "ref" | "size" | keyof UIProps
 >
 

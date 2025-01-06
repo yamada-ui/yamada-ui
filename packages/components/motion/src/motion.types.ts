@@ -175,7 +175,7 @@ export interface MotionComponent<Y extends MotionAs, D extends object = {}>
   <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
-export type MotionAs = keyof React.ReactDOM
+export type MotionAs = keyof React.JSX.IntrinsicElements
 
 export type MotionComponents = {
   [Y in MotionAs]: UIMotionComponent<Y>
@@ -188,28 +188,8 @@ interface UIMotionProps extends Merge<UIProps, OriginMotionProps> {
   as?: MotionAs
 }
 
-type FactoryAttributes<Y> =
-  Y extends React.DetailedHTMLFactory<infer M, any>
-    ? M
-    : Y extends React.SVGFactory
-      ? React.SVGAttributes<SVGElement>
-      : never
-type FactoryElement<Y> =
-  Y extends React.DetailedHTMLFactory<any, infer M>
-    ? M
-    : Y extends React.SVGFactory
-      ? SVGElement
-      : never
-type DOMAttributes<
-  Y extends React.HTMLAttributes<M> | React.SVGAttributes<SVGElement>,
-  M extends HTMLElement | SVGElement,
-> = Y
-
 export type MotionProps<Y extends MotionAs = "div"> = Merge<
-  DOMAttributes<
-    FactoryAttributes<React.ReactDOM[Y]>,
-    FactoryElement<React.ReactDOM[Y]>
-  >,
+  React.ComponentPropsWithoutRef<Y>,
   UIMotionProps
 >
 

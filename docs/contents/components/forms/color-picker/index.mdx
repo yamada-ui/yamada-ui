@@ -30,10 +30,11 @@ To allow selection of transparency, you need to set an `alpha value` in `value` 
 
 ```tsx
 <VStack>
-  <ColorPicker variant="outline" placeholder="outline" />
-  <ColorPicker variant="filled" placeholder="filled" />
-  <ColorPicker variant="flushed" placeholder="flushed" />
-  <ColorPicker variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <ColorPicker key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -41,10 +42,30 @@ To allow selection of transparency, you need to set an `alpha value` in `value` 
 
 ```tsx
 <VStack>
-  <ColorPicker placeholder="extra small size" size="xs" />
-  <ColorPicker placeholder="small size" size="sm" />
-  <ColorPicker placeholder="medium size" size="md" />
-  <ColorPicker placeholder="large size" size="lg" />
+  <For
+    each={[
+      {
+        placeholder: "extra small size",
+        size: "xs",
+      },
+      {
+        placeholder: "small size",
+        size: "sm",
+      },
+      {
+        placeholder: "medium size",
+        size: "md",
+      },
+      {
+        placeholder: "large size",
+        size: "lg",
+      },
+    ]}
+  >
+    {({ placeholder, size }, index) => (
+      <ColorPicker key={index} placeholder={placeholder} size={size} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -52,10 +73,34 @@ To change the size of the selector, set `calendarSize`.
 
 ```tsx
 <VStack>
-  <ColorPicker placeholder="small size" colorSelectorSize="sm" />
-  <ColorPicker placeholder="medium size" colorSelectorSize="md" />
-  <ColorPicker placeholder="large size" colorSelectorSize="lg" />
-  <ColorPicker placeholder="full size" colorSelectorSize="full" />
+  <For
+    each={[
+      {
+        placeholder: "small size",
+        colorSelectorSize: "sm",
+      },
+      {
+        placeholder: "medium size",
+        colorSelectorSize: "md",
+      },
+      {
+        placeholder: "large size",
+        colorSelectorSize: "lg",
+      },
+      {
+        placeholder: "full size",
+        colorSelectorSize: "full",
+      },
+    ]}
+  >
+    {({ placeholder, colorSelectorSize }, index) => (
+      <ColorPicker
+        key={index}
+        placeholder={placeholder}
+        colorSelectorSize={colorSelectorSize}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -212,9 +257,16 @@ To disable, set `isDisabled` to `true`.
 
 ```tsx
 <VStack>
-  <ColorPicker isDisabled variant="outline" placeholder="outline" />
-  <ColorPicker isDisabled variant="filled" placeholder="filled" />
-  <ColorPicker isDisabled variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        isDisabled
+        key={index}
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -224,9 +276,16 @@ To make read-only, set `isReadOnly` to `true`.
 
 ```tsx
 <VStack>
-  <ColorPicker isReadOnly variant="outline" placeholder="outline" />
-  <ColorPicker isReadOnly variant="filled" placeholder="filled" />
-  <ColorPicker isReadOnly variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        isReadOnly
+        key={index}
+        variant={variant}
+        placeholder={variant}
+      />
+    )}
+  </For>
 </VStack>
 ```
 

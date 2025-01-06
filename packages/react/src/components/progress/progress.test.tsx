@@ -14,14 +14,12 @@ describe("<Progress />", () => {
           data-testid="progress-a"
           borderRadius="md"
           filledTrackColor="green.500"
-          isAnimation
           value={50}
         />
         <Progress
           colorScheme="purple"
           data-testid="progress-b"
           hasStripe
-          isStripeAnimation
           rounded="md"
           value={100}
         />

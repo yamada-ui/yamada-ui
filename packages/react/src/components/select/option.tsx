@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import type { UseSelectOptionProps } from "./use-select-option"
 import { forwardRef, ui } from "../../core"
 import { cx } from "../../utils"
@@ -24,24 +24,10 @@ export const Option = forwardRef<OptionProps, "div">(
 
     icon ??= customIcon
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      color: "inherit",
-      display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      textAlign: "start",
-      textDecoration: "none",
-      userSelect: "none",
-      width: "100%",
-      ...styles.item,
-    }
-
     return (
       <ui.div
         className={cx("ui-select__item", className)}
-        __css={css}
+        __css={styles.item}
         {...getOptionProps({}, ref)}
       >
         {icon !== null ? (
@@ -67,20 +53,11 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useSelectContext()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      flexShrink: 0,
-      fontSize: "0.85em",
-      justifyContent: "center",
-      ...styles.itemIcon,
-    }
-
     return (
       <ui.span
         ref={ref}
         className={cx("ui-select__item__icon", className)}
-        __css={css}
+        __css={styles.itemIcon}
         {...rest}
       />
     )

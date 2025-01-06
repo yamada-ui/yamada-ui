@@ -1,4 +1,4 @@
-import type { CSSUIObject, ThemeProps } from "../../core"
+import type { ThemeProps } from "../../core"
 import type { UseRatingProps } from "./use-rating"
 import {
   forwardRef,
@@ -21,13 +21,12 @@ export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Rating", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)
   const { children, getContainerProps, ...rest } = useRating(computedProps)
-  const css: CSSUIObject = { display: "flex", ...styles.container }
 
   return (
     <RatingProvider value={{ styles, ...rest }}>
       <ui.div
         className={cx("ui-rating", className)}
-        __css={css}
+        __css={styles.container}
         {...getContainerProps({}, ref)}
       >
         {children}

@@ -36,14 +36,6 @@ interface RangeDatePickerOptions {
    */
   focusBorderColor?: string
   /**
-   * If `true`, display the date picker clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * The visual separator between each value.
    *
    * @default '-'
@@ -105,8 +97,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
     const {
       className,
       children,
-      isClearable = true,
-      clearable = isClearable,
+      clearable = true,
       color,
       h,
       height = h,

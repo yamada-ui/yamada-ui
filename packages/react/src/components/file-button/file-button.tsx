@@ -135,10 +135,6 @@ export const FileButton: FC<FileButtonProps> = ({ ref, ...props }) => {
         children({
           disabled,
           invalid,
-          isDisabled: disabled,
-          isInvalid: invalid,
-          isReadOnly: readOnly,
-          isRequired: required,
           readOnly,
           required,
           onClick,

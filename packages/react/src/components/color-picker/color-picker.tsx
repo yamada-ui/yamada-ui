@@ -278,7 +278,7 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
         ref={ref}
         className={cx("ui-color-picker__swatch", className)}
         color={value}
-        isRounded
+        fullRounded
         __css={css}
         {...rest}
       />

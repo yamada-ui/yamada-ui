@@ -52,7 +52,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render disabled correctly", () => {
-    render(<Pagination isDisabled total={77} />)
+    render(<Pagination disabled total={77} />)
 
     expect(screen.getByRole("navigation")).toHaveAttribute("data-disabled")
 

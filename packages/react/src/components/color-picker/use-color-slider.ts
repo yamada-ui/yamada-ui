@@ -91,7 +91,7 @@ export const useColorSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseColorSliderProps) => {
-  if (!focusThumbOnChange) props.isReadOnly = true
+  if (!focusThumbOnChange) props.readOnly = true
 
   const {
     id,

@@ -112,7 +112,7 @@ export const useSaturationSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseSaturationSliderProps) => {
-  if (!focusThumbOnChange) props.isReadOnly = true
+  if (!focusThumbOnChange) props.readOnly = true
 
   const {
     id,

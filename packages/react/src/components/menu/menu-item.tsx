@@ -60,22 +60,6 @@ interface MenuItemOptions {
    * The menu item icon to use.
    */
   icon?: ReactElement
-  /**
-   * If `true`, the menu item will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the menu item will be focusable.
-   *
-   * @default false
-   *
-   * @deprecated Use `focusable` instead.
-   */
-  isFocusable?: boolean
 }
 
 export interface MenuItemProps extends HTMLUIProps, MenuItemOptions {}
@@ -88,10 +72,8 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       children,
       closeOnSelect: customCloseOnSelect,
       command,
-      isDisabled,
-      disabled = isDisabled,
-      isFocusable,
-      focusable = isFocusable,
+      disabled,
+      focusable,
       icon,
       ...props
     },
@@ -279,14 +261,6 @@ interface MenuOptionItemOptions {
    */
   icon?: null | ReactElement
   /**
-   * If `true`, the checkbox or radio will be checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `checked` instead.
-   */
-  isChecked?: boolean
-  /**
    * The value of the menu option item.
    */
   value?: string
@@ -298,15 +272,7 @@ export interface MenuOptionItemProps
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
-    {
-      className,
-      isChecked,
-      checked = isChecked,
-      children,
-      closeOnSelect = false,
-      icon,
-      ...rest
-    },
+    { className, checked, children, closeOnSelect = false, icon, ...rest },
     ref,
   ) => {
     return (

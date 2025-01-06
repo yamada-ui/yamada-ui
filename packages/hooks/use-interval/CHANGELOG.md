@@ -1,5 +1,12 @@
 # @yamada-ui/use-interval
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002)]:
+  - @yamada-ui/utils@1.7.0
+
 ## 1.0.26
 
 ### Patch Changes

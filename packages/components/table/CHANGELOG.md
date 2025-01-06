@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 1.3.10
+
+### Patch Changes
+
+- Updated dependencies [[`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`0162445`](https://github.com/yamada-ui/yamada-ui/commit/0162445e5700764b3be2b9f9c0a5ad0afbfd9578), [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002), [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf)]:
+  - @yamada-ui/core@1.17.0
+  - @yamada-ui/checkbox@1.3.3
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/select@1.8.7
+  - @yamada-ui/icon@1.1.18
+  - @yamada-ui/native-table@1.0.49
+  - @yamada-ui/pagination@1.1.9
+  - @yamada-ui/use-clickable@1.2.18
+  - @yamada-ui/use-value@1.1.35
+  - @yamada-ui/use-controllable-state@1.0.27
+
 ## 1.3.9
 
 ### Patch Changes

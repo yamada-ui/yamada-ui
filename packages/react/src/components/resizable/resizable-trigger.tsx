@@ -1,7 +1,6 @@
 import type { ReactElement, RefAttributes } from "react"
 import type {
   ComponentArgs,
-  CSSUIObject,
   FC,
   HTMLUIProps,
   HTMLUIPropsWithoutAs,
@@ -42,13 +41,11 @@ export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
       ...rest,
     })
 
-    const css: CSSUIObject = { position: "relative", ...styles.trigger }
-
     return (
       <ui.div
         as={PanelResizeHandle}
         className={cx("ui-resizable__trigger", className)}
-        __css={css}
+        __css={styles.trigger}
         {...getTriggerProps()}
       >
         {icon ? (

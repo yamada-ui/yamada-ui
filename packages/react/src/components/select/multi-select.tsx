@@ -62,14 +62,6 @@ interface MultiSelectOptions {
    */
   header?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
   /**
-   * If `true`, display the multi select clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * The visual separator between each value.
    *
    * @default ','
@@ -117,8 +109,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   const {
     className,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     closeOnSelect = false,
     color,
     component,
@@ -271,13 +262,13 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
         return (
           <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((value, index) => {
-              const isLast = label.length === index + 1
+              const last = label.length === index + 1
 
               return (
                 <ui.span
                   key={index}
                   dangerouslySetInnerHTML={{
-                    __html: `${value}${!isLast ? separator : ""}`,
+                    __html: `${value}${!last ? separator : ""}`,
                   }}
                   display="inline-block"
                   me="0.25rem"

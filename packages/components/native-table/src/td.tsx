@@ -23,9 +23,7 @@ interface TdOptions {
 export interface TdProps extends HTMLUIProps<"td">, TdOptions {}
 
 export const Td = forwardRef<TdProps, "td">(
-  ({ className, isNumeric, numeric, ...rest }, ref) => {
-    numeric ??= isNumeric
-
+  ({ className, isNumeric, numeric = isNumeric, ...rest }, ref) => {
     const styles = useTableStyles()
 
     const css: CSSUIObject = { ...styles.td }

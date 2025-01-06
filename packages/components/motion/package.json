@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/motion",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "Yamada UI motion components",
   "keywords": [
     "yamada",
@@ -48,7 +48,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "motion": "^11.13.1"
+    "motion": "^11.15.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

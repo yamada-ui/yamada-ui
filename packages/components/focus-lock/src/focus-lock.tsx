@@ -73,15 +73,15 @@ export const FocusLock: FC<FocusLockProps> = ({
   autoFocus,
   children,
   contentRef,
-  disabled,
+  isDisabled,
+  disabled = isDisabled,
   finalFocusRef,
   initialFocusRef,
-  isDisabled,
   lockFocusAcrossFrames,
   persistentFocus,
   restoreFocus,
 }) => {
-  disabled ??= isDisabled
+  const returnFocus = restoreFocus && !finalFocusRef
 
   const onActivation = useCallback(() => {
     if (initialFocusRef?.current) {
@@ -99,8 +99,6 @@ export const FocusLock: FC<FocusLockProps> = ({
   const onDeactivation = useCallback(() => {
     finalFocusRef?.current?.focus()
   }, [finalFocusRef])
-
-  const returnFocus = restoreFocus && !finalFocusRef
 
   return (
     <InternalFocusLock

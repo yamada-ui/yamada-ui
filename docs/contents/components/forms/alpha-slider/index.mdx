@@ -26,9 +26,34 @@ import { AlphaSlider } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <AlphaSlider color="#4387f4" size="sm" defaultValue={0.3} />
-  <AlphaSlider color="#895af6" size="md" defaultValue={0.6} />
-  <AlphaSlider color="#3cc360" size="lg" defaultValue={0.9} />
+  <For
+    each={[
+      {
+        color: "#4387f4",
+        size: "sm",
+        defaultValue: 0.3,
+      },
+      {
+        color: "#895af6",
+        size: "md",
+        defaultValue: 0.6,
+      },
+      {
+        color: "#3cc360",
+        size: "lg",
+        defaultValue: 0.9,
+      },
+    ]}
+  >
+    {({ color, size, defaultValue }, index) => (
+      <AlphaSlider
+        key={index}
+        color={color}
+        size={size}
+        defaultValue={defaultValue}
+      />
+    )}
+  </For>
 </VStack>
 ```
 

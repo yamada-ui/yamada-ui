@@ -166,8 +166,7 @@ export const useColorSlider = ({
 
       const { left, width } = trackRef.current.getBoundingClientRect()
       const { clientX } = ev.touches?.[0] ?? ev
-
-      let percent = (clientX - left) / width
+      const percent = (clientX - left) / width
 
       let nextValue = percentToValue(percent, min, max)
 

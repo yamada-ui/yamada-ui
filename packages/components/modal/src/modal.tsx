@@ -161,7 +161,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       size,
       ...props,
     })
-    let {
+    const {
       className,
       allowPinchZoom = false,
       animation = "scale",
@@ -175,7 +175,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       initialFocusRef,
       isOpen,
       lockFocusAcrossFrames = true,
-      open,
+      open = isOpen,
       outside = "fallback(4, 1rem)",
       placement: _placement = "center",
       restoreFocus,
@@ -192,38 +192,14 @@ export const Modal = motionForwardRef<ModalProps, "section">(
     } = omitThemeProps(mergedProps)
     const headerRef = useRef<HTMLElement>(null)
     const bodyRef = useRef<HTMLElement>(null)
-
-    open ??= isOpen
-
-    const onKeyDown = useCallback(
-      (ev: KeyboardEvent) => {
-        if (ev.key !== "Escape") return
-
-        ev.stopPropagation()
-
-        if (closeOnEsc) onClose?.()
-
-        onEsc?.()
-      },
-      [closeOnEsc, onClose, onEsc],
-    )
-
+    const placement = useValue(_placement)
     const validChildren = getValidChildren(children)
-
     const [customModalOverlay, ...cloneChildren] = findChildren(
       validChildren,
       ModalOverlay,
       DialogOverlay,
       DrawerOverlay,
     )
-
-    let drawerContent = findChild(validChildren, DrawerContent)
-
-    if (drawerContent)
-      drawerContent = cloneElement(drawerContent, { onKeyDown })
-
-    const placement = useValue(_placement)
-
     const css: CSSUIObject = {
       alignItems: placement.includes("top")
         ? "flex-start"
@@ -245,6 +221,24 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       zIndex: "fallback(jeice, 110)",
     }
 
+    const onKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        if (ev.key !== "Escape") return
+
+        ev.stopPropagation()
+
+        if (closeOnEsc) onClose?.()
+
+        onEsc?.()
+      },
+      [closeOnEsc, onClose, onEsc],
+    )
+
+    let drawerContent = findChild(validChildren, DrawerContent)
+
+    if (drawerContent)
+      drawerContent = cloneElement(drawerContent, { onKeyDown })
+
     return (
       <ModalProvider
         value={{
@@ -253,7 +247,6 @@ export const Modal = motionForwardRef<ModalProps, "section">(
           closeOnOverlay,
           duration,
           headerRef,
-          isOpen,
           open,
           scrollBehavior,
           styles,

@@ -1,4 +1,9 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -12,8 +17,10 @@ interface ButtonGroupOptions {
   attached?: boolean
   /**
    * The CSS `flex-direction` property.
+   *
+   * @deprecated Use `flexDirection` instead.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * If `true`, all wrapped button will be disabled.
    *
@@ -62,23 +69,21 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
       className,
       size,
       variant,
-      attached,
-      columnGap,
-      direction: flexDirection,
-      disabled,
-      gap,
       isAttached,
+      attached = isAttached,
+      columnGap,
+      direction,
       isDisabled,
+      disabled = isDisabled,
+      flexDirection = direction,
+      gap,
       rowGap,
       ...rest
     },
     ref,
   ) => {
-    const isColumn =
+    const column =
       flexDirection === "column" || flexDirection === "column-reverse"
-
-    attached ??= isAttached
-    disabled ??= isDisabled
 
     const css: CSSUIObject = {
       display: "inline-flex",
@@ -92,13 +97,13 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
 
     if (attached) {
       Object.assign(css, {
-        "> *:first-of-type:not(:last-of-type)": isColumn
+        "> *:first-of-type:not(:last-of-type)": column
           ? { borderBottomRadius: 0 }
           : { borderRightRadius: 0, borderRightWidth: "0px" },
-        "> *:not(:first-of-type):last-of-type": isColumn
+        "> *:not(:first-of-type):last-of-type": column
           ? { borderTopRadius: 0, borderTopWidth: "0px" }
           : { borderLeftRadius: 0 },
-        "> *:not(:first-of-type):not(:last-of-type)": isColumn
+        "> *:not(:first-of-type):not(:last-of-type)": column
           ? { borderRadius: 0, borderTopWidth: "0px" }
           : { borderRadius: 0, borderRightWidth: "0px" },
       })

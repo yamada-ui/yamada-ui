@@ -139,43 +139,35 @@ export const Button = forwardRef<ButtonProps, "button">(
       },
       { isProcessSkip: __isProcessSkip, styles: __styles },
     )
-    let {
+    const {
       as,
       type,
       className,
-      active,
-      disabled = group?.disabled,
-      disableRipple,
-      endIcon,
-      fullRounded,
       isActive,
+      active = isActive,
       isDisabled = group?.disabled,
-      isLoading,
+      disabled = isDisabled,
+      disableRipple,
+      rightIcon,
+      endIcon = rightIcon,
       isRounded,
+      fullRounded = isRounded,
+      isLoading,
       leftIcon,
-      loading,
+      loading = isLoading,
       loadingIcon,
       loadingPlacement = "start",
       loadingText,
-      rightIcon,
-      startIcon,
+      startIcon = leftIcon,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    active ??= isActive
-    disabled ??= isDisabled
-    loading ??= isLoading
-    fullRounded ??= isRounded
-
     const trulyDisabled = disabled || loading
-
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
       disabled: disableRipple || trulyDisabled,
     })
-
     const css: CSSUIObject = useMemo(() => {
       const _focus =
         "_focus" in styles
@@ -200,15 +192,11 @@ export const Button = forwardRef<ButtonProps, "button">(
         ...(fullRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }
     }, [styles, __css, group, fullRounded])
-
     const contentProps = {
       children,
       endIcon,
-      leftIcon,
-      rightIcon,
       startIcon,
     }
-
     const loadingProps = {
       loadingIcon,
       loadingText,
@@ -298,21 +286,13 @@ ButtonLoading.displayName = "ButtonLoading"
 ButtonLoading.__ui__ = "ButtonLoading"
 
 interface ButtonContentProps
-  extends Pick<
-    ButtonProps,
-    "children" | "endIcon" | "leftIcon" | "rightIcon" | "startIcon"
-  > {}
+  extends Pick<ButtonProps, "children" | "endIcon" | "startIcon"> {}
 
 const ButtonContent: FC<ButtonContentProps> = ({
   children,
   endIcon,
-  leftIcon,
-  rightIcon,
   startIcon,
 }) => {
-  startIcon ??= leftIcon
-  endIcon ??= rightIcon
-
   return (
     <>
       {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
@@ -346,13 +326,13 @@ ButtonIcon.displayName = "ButtonIcon"
 ButtonIcon.__ui__ = "ButtonIcon"
 
 export const useButtonType = (value?: ElementType) => {
-  const isButton = useRef(!value)
+  const buttonRef = useRef(!value)
 
   const ref = useCallback((node: HTMLElement | null) => {
-    if (node) isButton.current = node.tagName === "BUTTON"
+    if (node) buttonRef.current = node.tagName === "BUTTON"
   }, [])
 
-  const type = isButton.current ? "button" : undefined
+  const type = buttonRef.current ? "button" : undefined
 
   return { ref, type } as const
 }

@@ -33,6 +33,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-colorscheme"
   name="colorScheme"
   type='"blackAlpha" | "whiteAlpha" | "amber" | "blue" | "info" | "link" | "primary" | "cyan" | "emerald" | "flashy" | "fuchsia" | "gray" | "green" | "success" | "indigo" | "lime" | "neutral" | "orange" | "warning" | "pink" | "purple" | "red" | "danger" | "rose" | "sky" | "teal" | "violet" | "secondary" | "yellow"'
@@ -41,10 +49,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-defaultchecked"
+  name="defaultChecked"
+  type="boolean"
+  description={"If `true`, the checkbox will be initially checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-defaultischecked"
   name="defaultIsChecked"
   type="boolean"
   description={"If `true`, the checkbox will be initially checked."}
+  deprecated={"Use `defaultChecked` instead."}
   defaultValue={"false"}
 />
 
@@ -69,6 +86,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-iconprops"
   name="iconProps"
   type='{
@@ -85,6 +110,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-indeterminate"
+  name="indeterminate"
+  type="boolean"
+  description={"If `true`, the checkbox will be indeterminate."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-inputprops"
   name="inputProps"
   type="InputHTMLAttributes<HTMLInputElement>"
@@ -92,10 +125,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcard-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcard-ischecked"
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -104,6 +146,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -112,6 +155,7 @@ tab: Props
   name="isIndeterminate"
   type="boolean"
   description={"If `true`, the checkbox will be indeterminate."}
+  deprecated={"Use `indeterminate` instead."}
   defaultValue={"false"}
 />
 
@@ -120,6 +164,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -128,6 +173,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -136,6 +182,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -185,6 +232,22 @@ tab: Props
   name="onFocus"
   type="FocusEventHandler<HTMLInputElement>"
   description={"The callback invoked when the checkbox is focused."}
+/>
+
+<PropsCard
+  id="checkboxcard-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxcard-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -280,6 +343,14 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcardgroup-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcardgroup-grow"
   name="grow"
   type="UIValue<FlexGrow>"
@@ -287,10 +358,19 @@ tab: Props
 />
 
 <PropsCard
+  id="checkboxcardgroup-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="checkboxcardgroup-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -299,6 +379,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -309,6 +390,7 @@ tab: Props
   description={
     "If `true`, input elements will receive `checked` attribute instead of `isChecked`.\n\nThis assumes, you're using native radio inputs."
   }
+  deprecated={"It will be deprecated in version 2.0."}
   defaultValue={"false"}
 />
 
@@ -317,6 +399,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -325,6 +408,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -357,6 +441,22 @@ tab: Props
   description={
     "The callback fired when any children checkbox is checked or unchecked."
   }
+/>
+
+<PropsCard
+  id="checkboxcardgroup-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="checkboxcardgroup-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

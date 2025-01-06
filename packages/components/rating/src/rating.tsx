@@ -20,9 +20,7 @@ export interface RatingProps extends ThemeProps<"Rating">, UseRatingProps {}
 export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Rating", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)
-
   const { children, getContainerProps, ...rest } = useRating(computedProps)
-
   const css: CSSUIObject = { display: "flex", ...styles.container }
 
   return (

@@ -93,13 +93,19 @@ export interface AccordionItemProps
 
 export const AccordionItem = forwardRef<AccordionItemProps, "div">(
   (
-    { className, children, disabled, icon, isDisabled = false, label, ...rest },
+    {
+      className,
+      children,
+      isDisabled = false,
+      disabled = isDisabled,
+      icon,
+      label,
+      ...rest
+    },
     ref,
   ) => {
     const itemId = useId()
     const panelId = useId()
-
-    disabled ??= isDisabled
 
     const { index, multiple, setFocusedIndex, setIndex, styles, toggle } =
       useAccordionContext()
@@ -221,7 +227,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
         ? label({
             disabled,
             expanded: open,
-            isDisabled,
+            isDisabled: disabled,
             isExpanded: open,
           })
         : label
@@ -230,7 +236,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       children = children({
         disabled,
         expanded: open,
-        isDisabled,
+        isDisabled: disabled,
         isExpanded: open,
       })
 
@@ -245,7 +251,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
 
     return (
       <AccordionItemProvider
-        value={{ icon, isDisabled, open, getLabelProps, getPanelProps }}
+        value={{ disabled, icon, open, getLabelProps, getPanelProps }}
       >
         <ui.div
           ref={ref}

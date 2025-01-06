@@ -53,7 +53,7 @@ describe("<Switch />", () => {
     expect(icon).toBeInTheDocument()
   })
 
-  test("isChecked and isFocused works correctly when using the icon prop.", async () => {
+  test("checked and focused works correctly when using the icon prop.", async () => {
     const { user } = render(<Switch icon={<TestIcon />}>basic</Switch>)
 
     const switchElement = await screen.findByRole("switch", { name: /basic/i })

@@ -64,41 +64,39 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       className,
       children,
       maxW,
-      maxWidth,
+      maxWidth = maxW,
       minW,
-      minWidth,
+      minWidth = minW,
       w,
-      width,
+      width = w,
       z,
-      zIndex,
+      zIndex = z,
       containerProps,
       __css,
       ...rest
     },
     ref,
   ) => {
-    let {
+    const {
       animation,
       closeOnButton,
       duration,
-      isOpen,
       open,
+      shouldRenderContent,
       styles,
       getPopoverProps,
       getPopperProps,
       onAnimationComplete,
     } = usePopover()
 
-    open ??= isOpen
+    if (!shouldRenderContent) return null
 
     const validChildren = getValidChildren(children)
     const [customPopoverCloseButton, ...cloneChildren] = findChildren(
       validChildren,
       PopoverCloseButton,
     )
-
     const css = __css ?? styles.container ?? {}
-
     const computedCSS: CSSUIObject = {
       display: "flex",
       flexDirection: "column",
@@ -108,14 +106,9 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       ...css,
     }
 
-    width ??= w
     width ??= (css.width ?? css.w) as CSSUIProps["width"]
-    minWidth ??= minW
     minWidth ??= (css.minWidth ?? css.minW) as CSSUIProps["minWidth"]
-    maxWidth ??= maxW
     maxWidth ??= (css.maxWidth ?? css.maxW) as CSSUIProps["maxWidth"]
-
-    zIndex ??= z
     zIndex ??= (css.zIndex ?? css.z) as CSSUIProps["zIndex"]
 
     return (

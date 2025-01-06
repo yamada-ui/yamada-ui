@@ -48,29 +48,24 @@ export interface FadeProps
  */
 export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Fade", props)
-  let {
+  const {
     className,
     delay,
     duration,
     isOpen,
-    open,
+    open = isOpen,
     transition,
     transitionEnd,
     unmountOnExit,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  open ??= isOpen
-
   const animate = open || unmountOnExit ? "enter" : "exit"
-
   const custom = { delay, duration, transition, transitionEnd }
-
-  open = unmountOnExit ? open && unmountOnExit : true
+  const resolvedOpen = unmountOnExit ? open && unmountOnExit : true
 
   return (
     <AnimatePresence custom={custom}>
-      {open ? (
+      {resolvedOpen ? (
         <motion.div
           ref={ref}
           className={cx("ui-fade", className)}

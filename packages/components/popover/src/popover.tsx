@@ -52,7 +52,7 @@ export const popoverProperties = [
   "trigger",
   "openDelay",
   "closeDelay",
-  "Lazy",
+  "lazy",
   "isLazy",
   "lazyBehavior",
   "animation",
@@ -209,6 +209,7 @@ interface PopoverContext
   bodyRef: RefObject<HTMLElement>
   forceUpdate: () => undefined | void
   headerRef: RefObject<HTMLElement>
+  shouldRenderContent: boolean
   styles: { [key: string]: CSSUIObject | undefined }
   getAnchorProps: PropGetter
   getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
@@ -231,7 +232,7 @@ export { usePopover }
  */
 export const Popover: FC<PopoverProps> = (props) => {
   const [styles, mergedProps] = useComponentMultiStyle("Popover", props)
-  let {
+  const {
     animation = "scale",
     autoFocus = true,
     children,
@@ -242,27 +243,16 @@ export const Popover: FC<PopoverProps> = (props) => {
     duration,
     initialFocusRef,
     isLazy,
-    isOpen: isOpenProp,
-    lazy,
+    lazy = isLazy,
     lazyBehavior = "unmount",
-    open: openProp,
     openDelay = 200,
     relatedRef,
     restoreFocus = true,
     trigger = "click",
     ...rest
   } = omitThemeProps(mergedProps)
-
-  lazy ??= isLazy
-  openProp ??= isOpenProp
-
   const id = useId()
-  const {
-    isOpen: open,
-    onClose,
-    onOpen,
-    onToggle,
-  } = useDisclosure({ ...mergedProps, isOpen: openProp })
+  const { open, onClose, onOpen, onToggle } = useDisclosure(mergedProps)
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLElement>(null)
@@ -270,7 +260,7 @@ export const Popover: FC<PopoverProps> = (props) => {
   const popoverRef = useRef<HTMLElement>(null)
   const { present, onAnimationComplete } = useAnimationObserver({
     ref: popoverRef,
-    isOpen: open,
+    open,
   })
   const openTimeout = useRef<number | undefined>(undefined)
   const closeTimeout = useRef<number | undefined>(undefined)
@@ -311,7 +301,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     visible: open,
   })
 
-  const shouldRenderChildren = useLazyDisclosure({
+  const shouldRenderContent = useLazyDisclosure({
     enabled: lazy,
     isSelected: present,
     mode: lazyBehavior,
@@ -335,7 +325,6 @@ export const Popover: FC<PopoverProps> = (props) => {
           ...props.style,
           transformOrigin,
         },
-        children: shouldRenderChildren ? props.children : null,
         tabIndex: -1,
         onBlur: handlerAll(props.onBlur, (ev) => {
           const relatedTarget = getEventRelatedTarget(ev)
@@ -377,7 +366,6 @@ export const Popover: FC<PopoverProps> = (props) => {
       closeOnEsc,
       open,
       onClose,
-      shouldRenderChildren,
       transformOrigin,
       trigger,
       relatedRef,
@@ -497,6 +485,7 @@ export const Popover: FC<PopoverProps> = (props) => {
         forceUpdate,
         headerRef,
         open,
+        shouldRenderContent,
         styles,
         getAnchorProps,
         getPopoverProps,

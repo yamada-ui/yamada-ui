@@ -212,7 +212,7 @@ tab: Props
 <PropsCard
   id="carousel-slidesize"
   name="slideSize"
-  type='UIValue<number | "px" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | ... 72 more ... | "xs">'
+  type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 76 more ... | "xs">'
   description={"The CSS `width` property."}
 />
 
@@ -373,7 +373,11 @@ tab: Props
 <PropsCard
   id="carouselindicators-component"
   name="component"
-  type="FC<{ index: number; isSelected: boolean }>"
+  type="FC<{
+  index: number
+  selected: boolean
+  isSelected?: boolean | undefined
+}>"
   description={"The custom carousel indicator to use."}
 />
 
@@ -384,6 +388,6 @@ tab: Props
 <PropsCard
   id="carouselslide-size"
   name="size"
-  type='number | "px" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | ... 77 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='UIValue<number | "px" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 76 more ... | "xs">'
   description={"The CSS `width` property."}
 />

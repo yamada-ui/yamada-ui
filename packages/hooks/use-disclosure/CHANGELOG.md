@@ -1,5 +1,16 @@
 # @yamada-ui/use-disclosure
 
+## 1.1.3
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- [#3686](https://github.com/yamada-ui/yamada-ui/pull/3686) [`794b31e`](https://github.com/yamada-ui/yamada-ui/commit/794b31e75b6f49e11d41043c0a0ea20351bb26fe) Thanks [@chida09](https://github.com/chida09)! - Deprecated `defaultIsOpen`, added `defaultOpen`.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840)]:
+  - @yamada-ui/utils@1.6.2
+
 ## 1.1.2
 
 ### Patch Changes

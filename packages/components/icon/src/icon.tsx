@@ -35,7 +35,7 @@ export interface IconProps
  */
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   const [styles, { size, ...mergedProps }] = useComponentStyle("Icon", props)
-  let {
+  const {
     as: element,
     className,
     fontSize = size,

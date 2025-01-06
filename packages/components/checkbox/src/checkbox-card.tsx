@@ -72,7 +72,7 @@ interface CheckboxCardOptions {
 }
 
 export interface CheckboxCardProps<Y extends number | string = string>
-  extends Omit<Merge<HTMLUIProps<"label">, UseCheckboxProps<Y>>, "checked">,
+  extends Merge<HTMLUIProps<"label">, UseCheckboxProps<Y>>,
     ThemeProps<"CheckboxCard">,
     CheckboxCardOptions {}
 
@@ -98,11 +98,11 @@ export const CheckboxCard = forwardRef(
       addon,
       children,
       description,
-      isDisabled = groupProps.isDisabled ?? control.isDisabled,
-      isInvalid = groupProps.isInvalid ?? control.isInvalid,
-      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
-      isRequired = groupProps.isRequired ?? control.isRequired,
+      disabled = groupProps.disabled ?? control.disabled,
+      invalid = groupProps.invalid ?? control.invalid,
       label,
+      readOnly = groupProps.readOnly ?? control.readOnly,
+      required = groupProps.required ?? control.required,
       withIcon = true,
       addonProps,
       descriptionProps,
@@ -112,41 +112,48 @@ export const CheckboxCard = forwardRef(
       ...computedProps
     } = omitThemeProps(mergedProps)
 
+    computedProps.checked ??= computedProps.isChecked
+
     const isCheckedProp =
       groupValue && computedProps.value
         ? groupValue.includes(computedProps.value)
-        : computedProps.isChecked
+        : computedProps.checked
     const onChange =
       groupProps.onChange && computedProps.value
         ? funcAll(groupProps.onChange, computedProps.onChange)
         : computedProps.onChange
 
     const {
-      isChecked,
+      checked,
       props: rest,
       getContainerProps,
       getIconProps,
       getInputProps,
     } = useCheckbox({
       ...computedProps,
+      disabled,
+      invalid,
       isChecked: isCheckedProp,
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      readOnly,
+      required,
       onChange,
     })
 
     const { children: customIcon, ...resolvedIconProps } = { ...iconProps }
     const icon = cloneElement(customIcon ?? <CheckboxIcon />, {
-      isChecked,
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      checked,
+      disabled,
+      invalid,
+      isChecked: checked,
+      isDisabled: disabled,
+      isInvalid: invalid,
+      isReadOnly: readOnly,
+      isRequired: required,
+      readOnly,
+      required,
       __css: {
-        opacity: isChecked ? 1 : 0,
-        transform: isChecked ? "scale(1)" : "scale(0.95)",
+        opacity: checked ? 1 : 0,
+        transform: checked ? "scale(1)" : "scale(0.95)",
         transitionDuration: "normal",
         transitionProperty: "transform",
       },

@@ -121,7 +121,7 @@ interface ToggleOptions<Y extends number | string = string> {
   /**
    * The callback invoked when selected state changes.
    */
-  onChange?: (isSelected: boolean) => void
+  onChange?: (selected: boolean) => void
 }
 
 export interface ToggleProps<Y extends number | string = string>
@@ -153,38 +153,30 @@ export const Toggle = forwardRef(
       isReadOnly: groupReadOnly,
       ...props,
     })
-    let {
+    const {
       className,
-      active,
+      isActive,
+      active = isActive,
       children,
       defaultIsSelected = false,
-      defaultSelected,
-      disabled,
-      disableRipple,
-      fullRounded,
-      icon,
-      isActive,
+      defaultSelected = defaultIsSelected,
       isDisabled = groupDisabled,
-      isReadOnly = groupReadOnly,
+      disabled = isDisabled,
+      disableRipple,
       isRounded,
-      isSelected: isSelectedProp,
-      readOnly,
-      selected,
+      fullRounded = isRounded,
+      icon,
+      isReadOnly = groupReadOnly,
+      isSelected,
+      readOnly = isReadOnly,
+      selected: selectedProp = isSelected,
       value,
       onChange,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    disabled ??= isDisabled
-    readOnly ??= isReadOnly
-    active ??= isActive
-    selected ??= isSelectedProp
-    fullRounded ??= isRounded
-    defaultSelected ??= defaultIsSelected
-
-    const [isSelected, setIsSelected] = useControllableState({
+    const [selected, setSelected] = useControllableState({
       defaultValue: defaultSelected,
-      value: selected,
+      value: selectedProp,
       onChange,
     })
 
@@ -196,14 +188,14 @@ export const Toggle = forwardRef(
     const included = multi
       ? groupValue.includes(value ?? "")
       : value === groupValue
-    const trulySelected = controlled ? included : isSelected
+    const trulySelected = controlled ? included : selected
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
       disabled: disableRipple || disabled,
     })
 
     const onClick = () => {
-      setIsSelected((prev) => !prev)
+      setSelected((prev) => !prev)
       onChangeGroup?.(value)
     }
 

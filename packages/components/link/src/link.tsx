@@ -36,9 +36,12 @@ export interface LinkProps
  */
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
-  let { className, external, isExternal, ...rest } = omitThemeProps(mergedProps)
-
-  external ??= isExternal
+  const {
+    className,
+    isExternal,
+    external = isExternal,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   return (
     <ui.a

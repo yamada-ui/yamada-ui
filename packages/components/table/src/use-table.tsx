@@ -248,6 +248,14 @@ export interface UseTableProps<Y extends RowData>
    *
    * @default true
    */
+  focusable?: boolean
+  /**
+   * If `true`, the table cell will be focusable.
+   *
+   * @default true
+   *
+   * @deprecated use `focusable` instead
+   */
   isFocusable?: boolean
   /**
    * The page index of the paging table.
@@ -382,9 +390,10 @@ export const useTable = <Y extends RowData>({
   enableRowSelection = (row) => getEnableRowSelection(row, disabledRowIds),
   enableSorting,
   enableSortingRemoval,
+  isFocusable = true,
+  focusable = isFocusable,
   rowId,
   getRowId = generateRowId(rowId),
-  isFocusable = true,
   isMultiSortEvent,
   manualPagination,
   manualSorting,
@@ -662,13 +671,13 @@ export const useTable = <Y extends RowData>({
     cellMapRef,
     enableRowSelection,
     flatRows,
+    focusable,
     focusedCell,
     footerGroups,
     getCanNextPage,
     getCanPreviousPage,
     getOnKeyDown,
     headerGroups,
-    isFocusable,
     nextPage,
     pageSizeList: computedPageSizeList,
     previousPage,

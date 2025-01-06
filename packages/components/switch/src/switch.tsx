@@ -15,9 +15,25 @@ import { cx, dataAttr } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 
 export interface SwitchIconProps {
+  active?: boolean
+  checked?: boolean
+  focused?: boolean
+  hovered?: boolean
+  /**
+   * @deprecated Use `active` instead.
+   */
   isActive?: boolean
+  /**
+   * @deprecated Use `checked` instead.
+   */
   isChecked?: boolean
+  /**
+   * @deprecated Use `focused` instead.
+   */
   isFocused?: boolean
+  /**
+   * @deprecated Use `hovered` instead.
+   */
   isHovered?: boolean
 }
 
@@ -30,8 +46,16 @@ interface SwitchOptions {
    * Change switch label from right to left.
    *
    * @default false
+   *
+   * @deprecated Use `reverse` instead.
    */
   isReverse?: boolean
+  /**
+   * Change switch label from right to left.
+   *
+   * @default false
+   */
+  reverse?: boolean
   /**
    * Motion transition settings.
    */
@@ -67,6 +91,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     gap = "0.5rem",
     icon,
     isReverse,
+    reverse = isReverse,
     transition = {
       type: "spring",
       damping: 40,
@@ -76,25 +101,27 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     labelProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
-    isActive,
-    isChecked,
-    isFocused,
-    isHovered,
+    active,
+    checked,
+    focused,
+    hovered,
     props: rest,
     getContainerProps,
     getIconProps,
     getInputProps,
     getLabelProps,
   } = useCheckbox({ selectOnEnter: true, ...computedProps })
-
   const cloneIcon = icon
     ? cloneElement(icon, {
-        isActive,
-        isChecked,
-        isFocused,
-        isHovered,
+        active,
+        checked,
+        focused,
+        hovered,
+        isActive: active,
+        isChecked: checked,
+        isFocused: focused,
+        isHovered: hovered,
       })
     : null
 
@@ -106,7 +133,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         alignItems: "center",
         cursor: "pointer",
         display: "inline-flex",
-        flexDirection: flexDirection ?? (isReverse ? "row-reverse" : "row"),
+        flexDirection: flexDirection ?? (reverse ? "row-reverse" : "row"),
         gap,
         position: "relative",
         verticalAlign: "top",
@@ -117,7 +144,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     >
       <ui.input
         className={cx("ui-switch__input", className)}
-        aria-checked={isChecked}
+        aria-checked={checked}
         role="switch"
         {...getInputProps(inputProps, ref)}
       />
@@ -138,7 +165,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
           >
             <motion.div
               className={cx("ui-switch__thumb", className)}
-              data-checked={dataAttr(isChecked)}
+              data-checked={dataAttr(checked)}
               layout
               transition={transition}
               __css={{ ...styles.thumb }}

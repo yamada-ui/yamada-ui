@@ -1,4 +1,9 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -18,15 +23,17 @@ interface CardOptions {
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIObject["alignItems"]
+  align?: CSSUIProps["alignItems"]
   /**
    * The CSS `flex-direction` property.
+   *
+   * @deprecated Use `flexDirection` instead.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIObject["justifyContent"]
+  justify?: CSSUIProps["justifyContent"]
 }
 
 export interface CardProps
@@ -44,7 +51,8 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   const {
     className,
     align: alignItems,
-    direction: flexDirection = "column",
+    direction = "column",
+    flexDirection = direction,
     justify: justifyContent,
     ...rest
   } = omitThemeProps(mergedProps)

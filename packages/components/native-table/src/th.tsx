@@ -23,9 +23,7 @@ interface ThOptions {
 export interface ThProps extends HTMLUIProps<"th">, ThOptions {}
 
 export const Th = forwardRef<ThProps, "th">(
-  ({ className, isNumeric, numeric, __css, ...rest }, ref) => {
-    numeric ??= isNumeric
-
+  ({ className, isNumeric, numeric = isNumeric, __css, ...rest }, ref) => {
     const styles = useTableStyles()
 
     const css: CSSUIObject = { ...styles.th, ...__css }

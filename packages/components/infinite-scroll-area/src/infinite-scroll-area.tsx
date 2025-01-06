@@ -54,19 +54,19 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       orientation: _orientation,
       ...props,
     })
-    let {
+    const {
       className,
       children,
-      disabled,
+      isDisabled,
+      disabled = isDisabled,
       finish: finishProp,
       indexRef,
       initialLoad,
-      isDisabled,
       isReverse,
       loading,
       orientation,
       resetRef,
-      reverse,
+      reverse = isReverse,
       rootMargin,
       rootRef: rootRefProp,
       startIndex,
@@ -75,10 +75,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       onLoad,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    disabled ??= isDisabled
-    reverse ??= isReverse
-
     const vertical = orientation === "vertical"
     const rootRef = useRef<HTMLDivElement>(null)
     const { ref: triggerRef, finish } = useInfiniteScroll({
@@ -96,7 +92,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       threshold,
       onLoad,
     })
-
     const css: CSSUIObject = useMemo(
       () => ({
         display: "flex",
@@ -107,7 +102,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       }),
       [vertical, styles],
     )
-
     const hasFinish = !!finishProp
     const showTrigger = !disabled && (hasFinish || !finish)
 

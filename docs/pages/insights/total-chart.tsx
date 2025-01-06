@@ -38,17 +38,17 @@ import {
 import { ScoreLegend } from "./score-legend"
 
 export interface TotalChartProps extends StackProps {
-  isLoading: boolean
+  loading: boolean
 }
 
 export const TotalChart = memo(
-  forwardRef<TotalChartProps, "div">(({ isLoading, ...rest }, ref) => {
+  forwardRef<TotalChartProps, "div">(({ loading, ...rest }, ref) => {
     const { t } = useI18n()
     const { currentInsights, period, prevInsights, users } = useInsights()
-    const isEmpty = !isLoading && !Object.keys(currentInsights ?? {}).length
-    const isInvalid = !users.length || (!period.start && !period.end)
-    const isSingle = Object.keys(currentInsights ?? {}).length <= 1
-    const [isAreaChart, { off, toggle }] = useBoolean(true)
+    const empty = !loading && !Object.keys(currentInsights ?? {}).length
+    const invalid = !users.length || (!period.start && !period.end)
+    const single = Object.keys(currentInsights ?? {}).length <= 1
+    const [areaChart, { off, toggle }] = useBoolean(true)
 
     const currentScore = useMemo(
       () => getInsightTotalScore(currentInsights, users),
@@ -66,8 +66,8 @@ export const TotalChart = memo(
     )
 
     useEffect(() => {
-      if (!isLoading && isSingle) off()
-    }, [off, isLoading, isSingle])
+      if (!loading && single) off()
+    }, [off, loading, single])
 
     return (
       <VStack
@@ -87,10 +87,10 @@ export const TotalChart = memo(
           px="6"
           py="md"
         >
-          <Skeleton isLoaded={!isLoading} rounded="md">
+          <Skeleton isLoaded={!loading} rounded="md">
             <HStack>
               <CountUp
-                count={!isLoading ? currentScore.total : null}
+                count={!loading ? currentScore.total : null}
                 fontSize="4xl"
                 fontWeight="semibold"
                 lineHeight="1"
@@ -112,29 +112,29 @@ export const TotalChart = memo(
             >
               <ScoreLegend
                 color={INSIGHT_SCORE_COLORS.pullRequests}
-                count={!isLoading ? currentScore.pullRequests : null}
-                isLoaded={!isLoading}
+                count={!loading ? currentScore.pullRequests : null}
+                isLoaded={!loading}
                 label="Pull Requests"
                 containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
                 color={INSIGHT_SCORE_COLORS.issues}
-                count={!isLoading ? currentScore.issues : null}
-                isLoaded={!isLoading}
+                count={!loading ? currentScore.issues : null}
+                isLoaded={!loading}
                 label="Issues"
                 containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
                 color={INSIGHT_SCORE_COLORS.approved}
-                count={!isLoading ? currentScore.approved : null}
-                isLoaded={!isLoading}
+                count={!loading ? currentScore.approved : null}
+                isLoaded={!loading}
                 label="Approved"
                 containerProps={{ fontSize: "md", minW: "3ch" }}
               />
               <ScoreLegend
                 color={INSIGHT_SCORE_COLORS.comments}
-                count={!isLoading ? currentScore.comments : null}
-                isLoaded={!isLoading}
+                count={!loading ? currentScore.comments : null}
+                isLoaded={!loading}
                 label="Comments"
                 containerProps={{ fontSize: "md", minW: "3ch" }}
               />
@@ -142,29 +142,29 @@ export const TotalChart = memo(
 
             <IconButton
               variant="ghost"
+              disabled={empty || invalid || single}
               icon={
-                isAreaChart ? (
+                areaChart ? (
                   <ChartColumnIcon fontSize="1.5em" />
                 ) : (
                   <ChartLineIcon fontSize="1.5em" />
                 )
               }
-              isDisabled={isEmpty || isInvalid || isSingle}
               onClick={toggle}
             />
           </HStack>
         </HStack>
 
         <Center px="6" py={{ base: "lg" }}>
-          {isEmpty || isInvalid ? (
+          {empty || invalid ? (
             <Center h="md">
               <Text color="muted" fontSize="2xl">
                 {t("insights.notFound")}
               </Text>
             </Center>
           ) : (
-            <Skeleton h="md" isLoaded={!isLoading} rounded="md" w="full">
-              <Box ms="-6">{isAreaChart ? <AreaChart /> : <BarChart />}</Box>
+            <Skeleton h="md" loaded={!loading} rounded="md" w="full">
+              <Box ms="-6">{areaChart ? <AreaChart /> : <BarChart />}</Box>
             </Skeleton>
           )}
         </Center>

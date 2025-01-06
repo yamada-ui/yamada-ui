@@ -79,7 +79,7 @@ interface AutocompleteOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
 }
@@ -97,16 +97,16 @@ export interface AutocompleteProps
 export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Autocomplete", props)
-    let {
+    const {
       className,
       color,
       defaultValue = "",
       footer,
       h,
       header,
-      height,
+      height = h,
       minH,
-      minHeight,
+      minHeight = minH,
       containerProps,
       contentProps,
       createProps,
@@ -115,16 +115,15 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       iconProps,
       inputProps,
       listProps,
-      portalProps = { isDisabled: true },
+      portalProps = { disabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
-
     const {
       allowCreate,
       children,
       descendants,
+      empty,
       inputValue,
-      isEmpty,
       value,
       formControlProps,
       getContainerProps,
@@ -133,10 +132,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       onClose,
       ...rest
     } = useAutocomplete({ ...computedProps, defaultValue })
-
-    h ??= height
-    minH ??= minHeight
-
     const css: CSSUIObject = {
       color,
       h: "fit-content",
@@ -150,8 +145,8 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
           value={{
             ...rest,
             allowCreate,
+            empty,
             inputValue,
-            isEmpty,
             styles,
             value,
             formControlProps,
@@ -169,8 +164,8 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                 __css={{ position: "relative", ...styles.inner }}
               >
                 <AutocompleteField
-                  h={h}
-                  minH={minH}
+                  height={height}
+                  minHeight={minHeight}
                   inputProps={inputProps}
                   {...getFieldProps(fieldProps, ref)}
                 />
@@ -185,7 +180,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                   contentProps={contentProps}
                   {...listProps}
                 >
-                  {!isEmpty ? (
+                  {!empty ? (
                     <>
                       {allowCreate ? (
                         <AutocompleteCreate {...createProps} />

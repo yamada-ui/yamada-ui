@@ -89,12 +89,12 @@ export interface SlideProps
  */
 export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Slide", props)
-  let {
+  const {
     className,
     delay,
     duration = { enter: 0.4, exit: 0.3 },
     isOpen,
-    open,
+    open = isOpen,
     placement: _placement,
     transition,
     transitionEnd,
@@ -102,19 +102,11 @@ export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  open ??= isOpen
-
   const animate = open || unmountOnExit ? "enter" : "exit"
-
   const placement = useValue(_placement)
-
   const custom = { delay, duration, placement, transition, transitionEnd }
-
-  open = unmountOnExit ? open && unmountOnExit : true
-
   const { position } = getSlideProps(placement)
-
+  const resolvedOpen = unmountOnExit ? open && unmountOnExit : true
   const css: CSSUIObject = {
     ...style,
     ...__css,
@@ -123,7 +115,7 @@ export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
 
   return (
     <AnimatePresence custom={custom}>
-      {open ? (
+      {resolvedOpen ? (
         <motion.div
           ref={ref}
           className={cx("ui-slide", className)}

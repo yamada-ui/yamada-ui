@@ -21,15 +21,13 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
       inputProps,
       itemProps,
     } = useRatingContext()
-    const { isActive, isFilled, getInputProps, getItemProps } = useRatingItem({
+    const { active, filled, getInputProps, getItemProps } = useRatingItem({
       fractionValue,
       groupValue,
       value,
     })
-
     const computedItemProps = runIfFunc(itemProps, value)
     const computedInputProps = runIfFunc(inputProps, value)
-
     const customColor = color
       ? {
           _filled: {
@@ -37,7 +35,6 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
           },
         }
       : {}
-
     const css: CSSUIObject = {
       display: "block",
       lineHeight: "0",
@@ -57,11 +54,11 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
           <RatingIcon
             clipPath={
               fractionValue !== 1
-                ? `inset(0 ${isActive ? 100 - fractionValue * 100 : 100}% 0 0)`
+                ? `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)`
                 : undefined
             }
           >
-            {isFilled
+            {filled
               ? runIfFunc(filledIcon, groupValue)
               : runIfFunc(emptyIcon, groupValue)}
           </RatingIcon>
@@ -78,9 +75,7 @@ interface RatingIconProps extends HTMLUIProps {}
 
 const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   const { styles } = useRatingContext()
-
   const validChildren = getValidChildren(children)
-
   const cloneChildren = validChildren.map((child) =>
     cloneElement(child, {
       style: {
@@ -91,7 +86,6 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
       focusable: false,
     }),
   )
-
   const css: CSSUIObject = {
     alignItems: "center",
     display: "inline-flex",

@@ -1,5 +1,11 @@
 {
   "Toggle": {
+    "active": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the toggle button is represented as active.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"gray\"",
@@ -7,6 +13,13 @@
       "required": false
     },
     "defaultIsSelected": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `defaultSelected` instead.",
+      "description": "If `true`, the toggle button will be initially selected.",
+      "required": false
+    },
+    "defaultSelected": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the toggle button will be initially selected.",
@@ -18,6 +31,12 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "description": "The icon to be used in the button.",
@@ -26,35 +45,51 @@
     "isActive": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `active` instead.",
       "description": "If `true`, the toggle button is represented as active.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the toggle button will be disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the toggle button will be readonly.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "isSelected": {
       "type": "boolean",
+      "deprecated": "Use `selected` instead.",
       "description": "If `true`, the toggle button will be selected.",
       "required": false
     },
     "onChange": {
-      "type": "(isSelected: boolean) => void",
+      "type": "(selected: boolean) => void",
       "description": "The callback invoked when selected state changes.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the toggle button will be readonly.",
+      "required": false
+    },
+    "selected": {
+      "type": "boolean",
+      "description": "If `true`, the toggle button will be selected.",
       "required": false
     },
     "size": {
@@ -82,25 +117,40 @@
       "required": false
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "type": "UIValue<FlexDirection>",
+      "deprecated": "Use `flexDirection` instead.",
       "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, all wrapped toggle button will be disabled.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, all wrapped toggle button will be disabled.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, all wrapped toggle button will be readonly.",
       "required": false
     },
     "onChange": {
       "type": "(value: Y extends any[] ? Y : Y | undefined) => void",
       "description": "The callback fired when any children toggle button is selected or unselected.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, all wrapped toggle button will be readonly.",
       "required": false
     },
     "value": {

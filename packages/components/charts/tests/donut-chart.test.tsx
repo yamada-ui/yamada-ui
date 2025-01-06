@@ -176,11 +176,11 @@ describe("<DonutChart />", () => {
       )
     })
 
-    test("isPercent should work correctly", async () => {
+    test("percent should work correctly", async () => {
       render(
         <DonutChart
           data={data}
-          isPercent
+          percent
           withLabels
           withTooltip={false}
           containerProps={{ height: "80%", width: 400 }}

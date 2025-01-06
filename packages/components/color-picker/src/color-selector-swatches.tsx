@@ -58,7 +58,7 @@ export const ColorSelectorSwatches = forwardRef<
       display: "grid",
       gridTemplateColumns: replaceObject(swatchesColumns, (value) =>
         value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
-      ) as CSSUIObject["gridTemplateColumns"],
+      ),
       ...styles.swatches,
     }
 

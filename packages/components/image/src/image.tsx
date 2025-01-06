@@ -48,33 +48,28 @@ export interface ImageProps
  */
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
   const [styles, { size, ...mergedProps }] = useComponentStyle("Image", props)
-  let {
+  const {
     src,
     srcSet,
     className,
-    boxSize,
+    boxSize = size,
     crossOrigin,
     fallback,
     fallbackStrategy = "beforeLoadOrError",
     fit: objectFit,
-    ignoreFallback,
+    ignoreFallback: _ignoreFallback,
     loading,
     referrerPolicy,
     onError,
     onLoad,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  boxSize ??= size
-  ignoreFallback = loading != null || ignoreFallback || !fallback
-
+  const ignoreFallback = loading != null || _ignoreFallback || !fallback
   const css = useMemo(
     () => ({ ...styles, boxSize, objectFit }),
     [styles, boxSize, objectFit],
   )
-
   const status = useImage({ ...props, ignoreFallback })
-
   const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy)
 
   if (isFallbackImage) {

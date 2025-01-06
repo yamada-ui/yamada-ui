@@ -1,9 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
+import { MinusIcon, PlusIcon } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
   HStack,
+  IconButton,
   Input,
   NumberInput,
   useNumberInput,
@@ -198,9 +200,12 @@ export const customComponent: Story = () => {
 
   return (
     <HStack gap="sm" maxW="xs">
-      <Button {...getIncrementProps()}>+</Button>
+      <IconButton icon={<PlusIcon fontSize="2xl" />} {...getIncrementProps()} />
       <Input {...getInputProps()} aria-label="Number input" />
-      <Button {...getDecrementProps()}>-</Button>
+      <IconButton
+        icon={<MinusIcon fontSize="2xl" />}
+        {...getDecrementProps()}
+      />
     </HStack>
   )
 }

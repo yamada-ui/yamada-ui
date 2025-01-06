@@ -23,6 +23,12 @@ interface CloseButtonOptions {
    */
   disableRipple?: boolean
   /**
+   * If true, the button is full rounded.
+   *
+   * @default false
+   */
+  fullRounded?: boolean
+  /**
    * If `true`, the button is disabled.
    *
    * @default false
@@ -34,6 +40,8 @@ interface CloseButtonOptions {
    * If true, the button is full rounded.
    *
    * @default false
+   *
+   * @deprecated Use `fullRounded` instead.
    */
   isRounded?: boolean
 }
@@ -52,22 +60,20 @@ export interface CloseButtonProps
 export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
-    let {
+    const {
       className,
       children,
-      disabled,
-      disableRipple,
       isDisabled,
+      disabled = isDisabled,
+      disableRipple,
       isRounded,
+      fullRounded = isRounded,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    disabled ??= isDisabled
-
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
-      isDisabled: disableRipple || disabled,
+      disabled: disableRipple || disabled,
     })
 
     const css: CSSUIObject = {
@@ -80,7 +86,7 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       position: "relative",
       ...styles,
       ...__css,
-      ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
+      ...(fullRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
     }
 
     return (

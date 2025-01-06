@@ -83,13 +83,13 @@ export interface PaginationProps
  */
 export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Pagination", props)
-  let {
+  const {
     className,
     boundaries,
     component: Component = PaginationItem,
     defaultPage,
-    disabled,
     isDisabled,
+    disabled = isDisabled,
     page,
     siblings,
     total,
@@ -106,12 +106,8 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
-
   const withControls = useValue(_withControls)
   const withEdges = useValue(_withEdges)
-
-  disabled ??= isDisabled
-
   const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
     usePagination({
       boundaries,
@@ -122,7 +118,6 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
       total,
       onChange: onChangeProp,
     })
-
   const children = useMemo(
     () =>
       range.map((page, key) => (
@@ -142,7 +137,6 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
       )),
     [Component, currentPage, disabled, onChange, range, itemProps],
   )
-
   const css: CSSUIObject = {
     ...styles.container,
   }
@@ -152,13 +146,13 @@ export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
       <ui.nav
         ref={ref}
         className={cx("ui-pagination", className)}
-        data-disabled={dataAttr(isDisabled)}
+        data-disabled={dataAttr(disabled)}
         __css={css}
         {...containerProps}
       >
         <ui.ul
           className="ui-pagination-inner"
-          data-disabled={dataAttr(isDisabled)}
+          data-disabled={dataAttr(disabled)}
           __css={{
             alignItems: "center",
             display: "flex",

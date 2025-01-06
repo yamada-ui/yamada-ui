@@ -27,9 +27,9 @@ export const AutocompleteOptionGroup = forwardRef<
       children,
       color,
       h,
-      height,
+      height = h,
       minH,
-      minHeight,
+      minHeight = minH,
       labelProps,
       ...rest
     },
@@ -38,9 +38,6 @@ export const AutocompleteOptionGroup = forwardRef<
     const { styles } = useAutocompleteContext()
     const { label, getContainerProps, getGroupProps, getLabelProps } =
       useAutocompleteOptionGroup(rest)
-
-    h ??= height
-    minH ??= minHeight
 
     return (
       <ui.section
@@ -64,7 +61,9 @@ export const AutocompleteOptionGroup = forwardRef<
         <ui.div
           {...getGroupProps({}, ref)}
           className="ui-autocomplete__item__group"
-          __css={{ h, minH, ...styles.group }}
+          height={height}
+          minHeight={minHeight}
+          __css={styles.group}
         >
           {children}
         </ui.div>

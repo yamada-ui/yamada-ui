@@ -14,9 +14,9 @@ import { cx, dataAttr, useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useRef, useState } from "react"
 
 const variants: MotionVariants = {
-  enter: ({ ident, isVisible, orientation }) => ({
+  enter: ({ ident, orientation, visible }) => ({
     [orientation === "horizontal" ? "rotateY" : "rotateX"]:
-      ident === "from" ? (isVisible ? 180 : 0) : isVisible ? 0 : 180,
+      ident === "from" ? (visible ? 180 : 0) : visible ? 0 : 180,
   }),
   exit: ({ ident, orientation }) => ({
     [orientation === "horizontal" ? "rotateY" : "rotateX"]:
@@ -125,34 +125,39 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const toRef = useRef<HTMLDivElement | null>(null)
 
   const [styles, mergedProps] = useComponentMultiStyle("Flip", props)
-  let {
+  const {
     className,
     defaultValue = "from",
     delay = 0,
-    disabled,
+    isDisabled,
+    disabled = isDisabled,
     duration = 0.4,
     from,
-    isDisabled,
     isReadOnly,
     orientation = "horizontal",
-    readOnly,
+    readOnly = isReadOnly,
     to,
     transition: transitionProp = {},
     value: valueProp,
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  disabled ??= isDisabled
-  readOnly ??= isReadOnly
-
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
-
-  const isVisible = value === "to"
+  const visible = value === "to"
+  const css: CSSUIObject = {
+    h: dimensions.height ? `${dimensions.height}px` : "auto",
+    w: dimensions.width ? `${dimensions.width}px` : "auto",
+    ...styles.container,
+  }
+  const transition = {
+    delay,
+    duration,
+    ...transitionProp,
+  }
 
   const onClick = () => {
     if (readOnly) return
@@ -183,18 +188,6 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     setDimensions({ height: fromHeight, width: fromWidth })
   }, [fromRef, toRef])
 
-  const css: CSSUIObject = {
-    h: dimensions.height ? `${dimensions.height}px` : "auto",
-    w: dimensions.width ? `${dimensions.width}px` : "auto",
-    ...styles.container,
-  }
-
-  const transition = {
-    delay,
-    duration,
-    ...transitionProp,
-  }
-
   return (
     <motion.button
       ref={ref}
@@ -215,7 +208,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
           `ui-flip__from--${orientation}`,
           className,
         )}
-        custom={{ ident: "from", isVisible, orientation }}
+        custom={{ ident: "from", orientation, visible }}
         {...flipProps}
         transition={transition}
         __css={{
@@ -229,7 +222,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       <motion.span
         ref={toRef}
         className={cx("ui-flip__to", `ui-flip__to--${orientation}`, className)}
-        custom={{ ident: "to", isVisible, orientation }}
+        custom={{ ident: "to", orientation, visible }}
         {...flipProps}
         transition={transition}
         __css={{

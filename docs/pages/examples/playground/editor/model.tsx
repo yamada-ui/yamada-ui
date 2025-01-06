@@ -58,27 +58,27 @@ export interface ModelProps
 
 export const Model: FC<ModelProps> = memo(
   ({
+    disabled,
     errorMessage,
     helperMessage,
-    isDisabled,
-    isInvalid,
-    isReadOnly,
-    isReplace,
-    isRequired,
+    invalid,
     label = "Model",
+    readOnly,
+    replace,
+    required,
     ...rest
   }) => {
     return (
       <FormControl
         {...{
+          disabled,
           errorMessage,
           helperMessage,
-          isDisabled,
-          isInvalid,
-          isReadOnly,
-          isReplace,
-          isRequired,
+          invalid,
           label,
+          readOnly,
+          replace,
+          required,
         }}
       >
         <Autocomplete

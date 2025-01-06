@@ -21,9 +21,9 @@ export const useSelectOptionGroup = ({
   const labelRef = useRef<HTMLDivElement>(null)
   const labelId = useId()
   const values = descendants.values()
-  const isMulti = isArray(value)
+  const multi = isArray(value)
   const selectedValues =
-    isMulti && omitSelectedValues
+    multi && omitSelectedValues
       ? descendants.values(({ node }) =>
           value.includes(node.dataset.value ?? ""),
         )
@@ -34,7 +34,7 @@ export const useSelectOptionGroup = ({
       node.parentElement?.dataset.label === label &&
       !selectedIndexes.includes(index),
   )
-  const isEmpty = !childValues.length
+  const empty = !childValues.length
 
   const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
 
@@ -58,10 +58,10 @@ export const useSelectOptionGroup = ({
         role: "group",
         ...props,
         ...containerProps,
-        style: isEmpty ? style : undefined,
+        style: empty ? style : undefined,
       }
     },
-    [containerProps, isEmpty],
+    [containerProps, empty],
   )
 
   const getLabelProps: PropGetter = useCallback(

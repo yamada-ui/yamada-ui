@@ -43,12 +43,19 @@ export interface LinkOverlayProps
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
   (
-    { href, target, className, children, external, isExternal, rel, ...rest },
+    {
+      href,
+      target,
+      className,
+      children,
+      isExternal,
+      external = isExternal,
+      rel,
+      ...rest
+    },
     ref,
   ) => {
     const { styles, variableProps } = useLinkBox()
-
-    external ??= isExternal
 
     const css: CSSUIObject = {
       position: "static",

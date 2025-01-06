@@ -4,7 +4,7 @@
   "CardHeader": {},
   "Card": {
     "align": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"self-end\" | \"self-start\" | \"start\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "UIValue<AlignItems>",
       "description": "The CSS `align-items` property.",
       "required": false
     },
@@ -15,12 +15,13 @@
       "required": false
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...",
+      "type": "UIValue<FlexDirection>",
+      "deprecated": "Use `flexDirection` instead.",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
     "justify": {
-      "type": "\"left\" | \"right\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "UIValue<JustifyContent>",
       "description": "The CSS `justify-content` property.",
       "required": false
     },

@@ -1,5 +1,6 @@
 import type {
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   StyledTheme,
   Token,
@@ -11,39 +12,39 @@ interface GridOptions {
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIObject["gridArea"]
+  area?: CSSUIProps["gridArea"]
   /**
    * The CSS `grid-auto-columns` property.
    */
-  autoColumns?: CSSUIObject["gridAutoColumns"]
+  autoColumns?: CSSUIProps["gridAutoColumns"]
   /**
    * The CSS `grid-auto-flow` property.
    */
-  autoFlow?: CSSUIObject["gridAutoFlow"]
+  autoFlow?: CSSUIProps["gridAutoFlow"]
   /**
    * The CSS `grid-auto-rows` property.
    */
-  autoRows?: CSSUIObject["gridAutoRows"]
+  autoRows?: CSSUIProps["gridAutoRows"]
   /**
    * The CSS `grid-column` property.
    */
-  column?: CSSUIObject["gridColumn"]
+  column?: CSSUIProps["gridColumn"]
   /**
    * The CSS `grid-row` property.
    */
-  row?: CSSUIObject["gridRow"]
+  row?: CSSUIProps["gridRow"]
   /**
    * The CSS `grid-template-areas` property.
    */
-  templateAreas?: CSSUIObject["gridTemplateAreas"]
+  templateAreas?: CSSUIProps["gridTemplateAreas"]
   /**
    * The CSS `grid-template-columns` property.
    */
-  templateColumns?: CSSUIObject["gridTemplateColumns"]
+  templateColumns?: CSSUIProps["gridTemplateColumns"]
   /**
    * The CSS `grid-template-rows` property.
    */
-  templateRows?: CSSUIObject["gridTemplateRows"]
+  templateRows?: CSSUIProps["gridTemplateRows"]
 }
 
 export interface GridProps extends HTMLUIProps, GridOptions {}
@@ -105,11 +106,11 @@ const transformColumns =
         return value != null
           ? `repeat(auto-fit, minmax(${value}, 1fr))`
           : undefined
-      }) as CSSUIObject["gridTemplateColumns"]
+      }) as CSSUIProps["gridTemplateColumns"]
     } else {
       return replaceObject(columns, (value) =>
         value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
-      ) as CSSUIObject["gridTemplateColumns"]
+      ) as CSSUIProps["gridTemplateColumns"]
     }
   }
 
@@ -150,11 +151,11 @@ interface GridItemOptions {
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIObject["gridArea"]
+  area?: CSSUIProps["gridArea"]
   /**
    * The CSS `grid-column-end` property.
    */
-  colEnd?: CSSUIObject["gridColumnEnd"]
+  colEnd?: CSSUIProps["gridColumnEnd"]
   /**
    * The number of columns the grid item should `span`.
    */
@@ -162,11 +163,11 @@ interface GridItemOptions {
   /**
    * The CSS `grid-column-start` property.
    */
-  colStart?: CSSUIObject["gridColumnStart"]
+  colStart?: CSSUIProps["gridColumnStart"]
   /**
    * The CSS `grid-row-end` property.
    */
-  rowEnd?: CSSUIObject["gridRowEnd"]
+  rowEnd?: CSSUIProps["gridRowEnd"]
   /**
    * The number of rows the grid item should `span`.
    */
@@ -174,7 +175,7 @@ interface GridItemOptions {
   /**
    * The CSS `grid-row-start` property.
    */
-  rowStart?: CSSUIObject["gridRowStart"]
+  rowStart?: CSSUIProps["gridRowStart"]
 }
 
 export interface GridItemProps extends HTMLUIProps, GridItemOptions {}

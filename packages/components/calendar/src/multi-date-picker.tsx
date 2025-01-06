@@ -100,7 +100,7 @@ interface MultiDatePickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -122,18 +122,18 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       "MultiDatePicker",
       props,
     )
-    let {
+    const {
       className,
       children,
-      clearable,
+      isClearable = true,
+      clearable = isClearable,
       color,
       component,
       h,
-      height,
-      isClearable = true,
+      height = h,
       keepPlaceholder = false,
       minH,
-      minHeight,
+      minHeight = minH,
       separator,
       clearIconProps,
       containerProps,
@@ -141,10 +141,9 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       fieldProps,
       iconProps,
       inputProps,
-      portalProps = { isDisabled: true },
+      portalProps = { disabled: true },
       ...computedProps
     } = omitThemeProps(mergedProps)
-
     const {
       dateToString,
       open,
@@ -158,11 +157,6 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       getPopoverProps,
       onClose,
     } = useMultiDatePicker(computedProps)
-
-    clearable ??= isClearable
-    h ??= height
-    minH ??= minHeight
-
     const css: CSSUIObject = {
       color,
       h: "fit-content",
@@ -190,7 +184,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 separator={separator}
                 setValue={setValue}
                 value={value}
-                {...getFieldProps({ h, minH, ...fieldProps }, ref)}
+                {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
                 inputProps={getInputProps(inputProps)}
               />
 
@@ -254,9 +248,7 @@ export const MultiDatePickerField = forwardRef<
       className,
       component,
       dateToString,
-      h,
       keepPlaceholder,
-      minH,
       open,
       separator = ",",
       setValue,
@@ -321,8 +313,6 @@ export const MultiDatePickerField = forwardRef<
       alignItems: "center",
       display: "flex",
       flexWrap: "wrap",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }

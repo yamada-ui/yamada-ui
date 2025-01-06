@@ -23,6 +23,9 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
           _disabled: {
             bg: ["white", "black"],
           },
+          _focus: {
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
+          },
         },
       },
       itemIcon: {},

@@ -26,7 +26,7 @@ const defaultOverlays = (
   max: number,
   withShadow: boolean,
 ): HTMLUIProps[] => {
-  let overlays: HTMLUIProps[] = [
+  const overlays: HTMLUIProps[] = [
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
@@ -53,12 +53,9 @@ const defaultOverlays = (
   ]
 
   if (withShadow)
-    overlays = [
-      ...overlays,
-      {
-        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
-      },
-    ]
+    overlays.push({
+      boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+    })
 
   return overlays
 }

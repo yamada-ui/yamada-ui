@@ -28,6 +28,12 @@ import { useRangeDatePicker } from "./use-range-date-picker"
 interface RangeDatePickerOptions {
   children?: FC<{ value: [Date?, Date?]; onClose: () => void }> | ReactNode
   /**
+   * If `true`, display the month picker clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The border color when the input is invalid.
    */
   errorBorderColor?: string
@@ -39,6 +45,8 @@ interface RangeDatePickerOptions {
    * If `true`, display the date picker clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -74,7 +82,7 @@ interface RangeDatePickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -100,15 +108,16 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       "RangeDatePicker",
       props,
     )
-    let {
+    const {
       className,
       children,
+      isClearable = true,
+      clearable = isClearable,
       color,
       h,
-      height,
-      isClearable = true,
+      height = h,
       minH,
-      minHeight,
+      minHeight = minH,
       separator,
       clearIconProps,
       containerProps,
@@ -116,11 +125,10 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       endInputProps,
       fieldProps,
       iconProps,
-      portalProps = { isDisabled: true },
+      portalProps = { disabled: true },
       startInputProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
-
     const {
       value,
       getCalendarProps,
@@ -132,12 +140,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       getStartInputProps,
       onClose,
     } = useRangeDatePicker(computedProps)
-
     const [startValue, endValue] = value
-
-    h ??= height
-    minH ??= minHeight
-
     const css: CSSUIObject = {
       color,
       h: "fit-content",
@@ -160,12 +163,12 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
               <RangeDatePickerField
                 separator={separator}
                 value={value}
-                {...getFieldProps({ h, minH, ...fieldProps })}
+                {...getFieldProps({ height, minHeight, ...fieldProps })}
                 endInputProps={getEndInputProps(endInputProps)}
                 startInputProps={getStartInputProps(startInputProps, ref)}
               />
 
-              {isClearable && (!!startValue || !!endValue) ? (
+              {clearable && (!!startValue || !!endValue) ? (
                 <DatePickerClearIcon
                   {...getIconProps({ clear: true, ...clearIconProps })}
                 />
@@ -220,8 +223,6 @@ export const RangeDatePickerField = forwardRef<
   (
     {
       className,
-      h,
-      minH,
       separator = "-",
       value = [],
       endInputProps,
@@ -248,8 +249,6 @@ export const RangeDatePickerField = forwardRef<
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }

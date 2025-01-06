@@ -45,6 +45,11 @@
       "defaultValue": "'/'",
       "description": "The visual separator between each breadcrumb item.",
       "required": false
+    },
+    "separatorProps": {
+      "type": "BreadcrumbSeparatorProps",
+      "description": "Props for separator element.",
+      "required": false
     }
   },
   "BreadcrumbLink": {
@@ -95,6 +100,11 @@
       "description": "The visual separator between each breadcrumb item.",
       "required": false
     },
+    "separatorProps": {
+      "type": "BreadcrumbSeparatorProps",
+      "description": "Props for separator element.",
+      "required": false
+    },
     "startBoundaries": {
       "type": "UIValue<number>",
       "description": "Number of elements visible on the start(left) edges.",
@@ -103,7 +113,7 @@
   },
   "BreadcrumbSeparator": {
     "gap": {
-      "type": "number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"3xl\" | \"4xl\" | \"xs\" | ... 104 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"3xl\" | \"4xl\" | ... 100 more ... | \"normal\">",
       "description": "The CSS `margin-inline-start`, and `margin-inline-end` property.",
       "required": false
     }

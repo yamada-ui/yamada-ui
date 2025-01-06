@@ -68,11 +68,8 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
   const ref = useRef<HTMLDivElement>(null)
   const { styles } = useAutocompleteContext()
 
-  const isDisabled = props.disabled
-
   const rest = useClickable({
     ref,
-    isDisabled,
     ...(props as HTMLAttributes<HTMLElement>),
   })
 

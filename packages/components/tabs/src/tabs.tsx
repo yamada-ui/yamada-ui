@@ -128,35 +128,29 @@ export interface TabsProps
  * @see Docs https://yamada-ui.com/components/disclosure/tabs
  */
 export const Tabs = forwardRef<TabsProps, "div">(
-  ({ align = "start", ...props }, ref) => {
+  ({ align = "start", isFitted, fitted = isFitted, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Tabs", {
       align,
+      fitted,
       ...props,
     })
-    let {
+    const {
       className,
       children,
       defaultIndex = 0,
       disableRipple = false,
-      fitted,
       index,
-      isFitted,
       isLazy = true,
       isManual,
-      lazy,
+      lazy = isLazy,
       lazyBehavior = "keepMounted",
-      manual,
+      manual = isManual,
       orientation = "horizontal",
       tabListProps,
       tabPanelsProps,
       onChange,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    fitted ??= isFitted
-    lazy ??= isLazy
-    manual ??= isManual
-
     const [focusedIndex, setFocusedIndex] = useState<number>(defaultIndex)
     const [selectedIndex, setSelectedIndex] = useControllableState({
       defaultValue: defaultIndex,

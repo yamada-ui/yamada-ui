@@ -80,8 +80,8 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
  */
 export const Highlight: FC<HighlightProps> = ({
   children: text,
-  fragment,
   isFragment = false,
+  fragment = isFragment,
   lineHeight = "tall",
   query,
   markProps,
@@ -89,8 +89,6 @@ export const Highlight: FC<HighlightProps> = ({
 }) => {
   if (typeof text !== "string")
     throw new Error("The children prop of Highlight must be a string")
-
-  fragment ??= isFragment
 
   const chunks = useHighlight({ query, text })
 

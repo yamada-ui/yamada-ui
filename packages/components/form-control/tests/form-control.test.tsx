@@ -28,7 +28,7 @@ describe("<FormControl />", () => {
 
   test("should render invalid form control", () => {
     render(
-      <FormControl errorMessage="Email is required." isInvalid label="Email">
+      <FormControl errorMessage="Email is required." invalid label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -44,9 +44,9 @@ describe("<FormControl />", () => {
       <FormControl
         errorMessage="Email is required."
         helperMessage="Please enter your email"
-        isInvalid
-        isReplace
+        invalid
         label="Email"
+        replace
       >
         <Input type="email" />
       </FormControl>,
@@ -64,9 +64,9 @@ describe("<FormControl />", () => {
       <FormControl
         errorMessage="Email is required."
         helperMessage="Please enter your email"
-        isInvalid
-        isReplace={false}
+        invalid
         label="Email"
+        replace={false}
       >
         <Input type="email" />
       </FormControl>,
@@ -81,7 +81,7 @@ describe("<FormControl />", () => {
 
   test("should be required", () => {
     render(
-      <FormControl isRequired label="Email">
+      <FormControl label="Email" required>
         <Input type="email" />
       </FormControl>,
     )
@@ -90,7 +90,7 @@ describe("<FormControl />", () => {
 
   test("should be disabled", () => {
     render(
-      <FormControl isDisabled label="Email">
+      <FormControl disabled label="Email">
         <Input type="email" />
       </FormControl>,
     )
@@ -99,7 +99,7 @@ describe("<FormControl />", () => {
 
   test("should be readonly", () => {
     render(
-      <FormControl isReadOnly label="Email">
+      <FormControl label="Email" readOnly>
         <Input type="email" />
       </FormControl>,
     )
@@ -108,7 +108,7 @@ describe("<FormControl />", () => {
 
   test("should render custom indicator *", () => {
     render(
-      <FormControl isRequired label="Email">
+      <FormControl label="Email" required>
         <Input type="email" />
       </FormControl>,
     )
@@ -117,7 +117,7 @@ describe("<FormControl />", () => {
 
   test("should render custom indicator text", () => {
     render(
-      <FormControl isRequired label="Email" requiredIndicator="required">
+      <FormControl label="Email" required requiredIndicator="required">
         <Input type="email" />
       </FormControl>,
     )
@@ -127,8 +127,8 @@ describe("<FormControl />", () => {
   test("should render custom indicator jsx", () => {
     render(
       <FormControl
-        isRequired
         label="Email"
+        required
         requiredIndicator={<div data-testid="required">required</div>}
       >
         <Input type="email" />

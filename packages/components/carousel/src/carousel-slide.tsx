@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { UseCarouselSlideProps } from "./use-carousel"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -8,7 +8,7 @@ interface CarouselSlideOptions {
   /**
    * The CSS `width` property.
    */
-  size?: CSSUIObject["width"]
+  size?: CSSUIProps["width"]
 }
 
 export interface CarouselSlideProps
@@ -17,12 +17,9 @@ export interface CarouselSlideProps
     CarouselSlideOptions {}
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
-  ({ className, size, ...rest }, ref) => {
+  ({ className, size = "$slideSize", ...rest }, ref) => {
     const { includeGapInSize, orientation } = useCarouselContext()
     const { getSlideProps } = useCarouselSlide(rest)
-
-    size ??= "$slideSize"
-
     const css: CSSUIObject = {
       flex: `0 0 ${size}`,
       position: "relative",

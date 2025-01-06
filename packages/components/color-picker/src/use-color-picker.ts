@@ -140,6 +140,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     colorSelectorVariant,
     defaultColor,
     defaultIsOpen,
+    defaultOpen,
     defaultValue,
     duration = 0.2,
     eventListeners,
@@ -149,11 +150,12 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     formatInput = defaultFormatInput,
     gutter,
     isLazy,
-    isOpen: isOpenProp,
+    isOpen: isOpen,
     lazyBehavior,
     matchWidth = colorSelectorSize === "full",
     modifiers,
     offset,
+    open: openProp,
     openDelay,
     placement = "bottom-start",
     preventOverflow,
@@ -199,12 +201,14 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const inputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value || "")
   const {
-    isOpen,
+    open,
     onClose: onInternalClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
     defaultIsOpen,
-    isOpen: isOpenProp,
+    defaultOpen,
+    isOpen,
+    open: openProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
@@ -216,7 +220,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   }, [onInternalOpen, disabled, readOnly])
 
   const onClose = useCallback(() => {
-    if (!isOpen) return
+    if (!open) return
 
     const next = convertColor(value, fallbackValue)(formatRef.current)
 
@@ -226,7 +230,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     onInternalClose()
   }, [
     formatRef,
-    isOpen,
+    open,
     setValue,
     onInternalClose,
     value,
@@ -236,18 +240,18 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   ])
 
   const onContainerClick = useCallback(() => {
-    if (isOpen) return
+    if (open) return
 
     onOpen()
-  }, [isOpen, onOpen])
+  }, [open, onOpen])
 
   const onInputFocus = useCallback(() => {
     inputFocused.current = true
 
-    if (isOpen) return
+    if (open) return
 
     onOpen()
-  }, [isOpen, onOpen])
+  }, [open, onOpen])
 
   const onInputBlur = useCallback(() => {
     inputFocused.current = false
@@ -261,9 +265,9 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
       if (!closeOnBlur) return
 
-      if (isOpen) onClose()
+      if (open) onClose()
     },
-    [closeOnBlur, isOpen, onClose],
+    [closeOnBlur, open, onClose],
   )
 
   const onInputKeyDown = useCallback(
@@ -273,9 +277,9 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       if (disabled || readOnly) return
 
       const actions: { [key: string]: Function | undefined } = {
-        Enter: !isOpen ? onOpen : undefined,
+        Enter: !open ? onOpen : undefined,
         Escape: closeOnEsc ? onClose : undefined,
-        Space: !isOpen ? onOpen : undefined,
+        Space: !open ? onOpen : undefined,
       }
 
       const action = actions[ev.key]
@@ -286,7 +290,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ev.stopPropagation()
       action()
     },
-    [disabled, readOnly, isOpen, onOpen, closeOnEsc, onClose],
+    [disabled, readOnly, open, onOpen, closeOnEsc, onClose],
   )
 
   const onInputChange = useCallback(
@@ -329,7 +333,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
   useOutsideClick({
     ref: containerRef,
-    enabled: isOpen && closeOnBlur,
+    enabled: open && closeOnBlur,
     handler: onClose,
   })
 
@@ -373,7 +377,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       strategy,
       ...props,
       closeOnButton: false,
-      isOpen,
+      open,
       trigger: "never",
       onClose,
       onOpen,
@@ -396,7 +400,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       strategy,
       placement,
       modifiers,
-      isOpen,
+      open,
       onOpen,
       onClose,
     ],
@@ -424,7 +428,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       "aria-haspopup": "dialog",
-      "data-active": dataAttr(isOpen),
+      "data-active": dataAttr(open),
       "data-not-allowed": dataAttr(!readOnly && !disabled && !allowInput),
       role: "combobox",
       tabIndex: -1,
@@ -438,7 +442,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     [
       allowInput,
       formControlProps,
-      isOpen,
+      open,
       readOnly,
       disabled,
       onInputBlur,

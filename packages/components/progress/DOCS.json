@@ -6,15 +6,23 @@
       "description": "The CSS `color` property.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the cap of the progress indicator will be rounded.",
+      "required": false
+    },
     "isAnimation": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, the progress will be indeterminate and the `value` prop will be ignored.",
       "required": false
     },
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If `true`, the cap of the progress indicator will be rounded.",
       "required": false
     },
@@ -83,12 +91,14 @@
     "isAnimation": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, the progress will be indeterminate and the `value` prop will be ignored.",
       "required": false
     },
     "isStripeAnimation": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "It will be deprecated in version 2.0.",
       "description": "If `true`, and hasStripe is `true`, the stripes will be animated.",
       "required": false
     },

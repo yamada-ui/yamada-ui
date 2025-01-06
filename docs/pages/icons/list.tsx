@@ -80,7 +80,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
         <Search valueResetRef={valueResetRef} onSearch={onSearch} />
 
         <InfiniteScrollArea
-          isDisabled={index === totalIndex}
+          disabled={index === totalIndex}
           loading={<Box h="px" w="full" />}
           resetRef={scrollResetRef}
           rootMargin="0px 0px 640px 0px"

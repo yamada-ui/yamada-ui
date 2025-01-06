@@ -44,9 +44,26 @@ import {
 
 ```tsx
 <VStack>
-  <RangeSlider size="sm" defaultValue={[0, 25]} />
-  <RangeSlider size="md" defaultValue={[25, 50]} />
-  <RangeSlider size="lg" defaultValue={[50, 75]} />
+  <For
+    each={[
+      {
+        size: "sm",
+        defaultValue: [0, 25],
+      },
+      {
+        size: "md",
+        defaultValue: [25, 50],
+      },
+      {
+        size: "lg",
+        defaultValue: [50, 75],
+      },
+    ]}
+  >
+    {({ size, defaultValue }, index) => (
+      <RangeSlider key={index} size={size} defaultValue={defaultValue} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -54,8 +71,11 @@ import {
 
 ```tsx
 <VStack>
-  <RangeSlider colorScheme="secondary" />
-  <RangeSlider colorScheme="green" />
+  <For each={["secondary", "green"]}>
+    {(colorScheme, index) => (
+      <RangeSlider key={index} colorScheme={colorScheme} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -273,41 +293,19 @@ To display marks, use `RangeSliderMark`.
 
 ```tsx
 <VStack gap="lg" my="10">
-  <RangeSlider size="sm">
-    <RangeSliderMark value={25} w="10" ml="-5">
-      25%
-    </RangeSliderMark>
-    <RangeSliderMark value={50} w="10" ml="-5">
-      50%
-    </RangeSliderMark>
-    <RangeSliderMark value={75} w="10" ml="-5">
-      75%
-    </RangeSliderMark>
-  </RangeSlider>
-
-  <RangeSlider size="md">
-    <RangeSliderMark value={25} w="10" ml="-5">
-      25%
-    </RangeSliderMark>
-    <RangeSliderMark value={50} w="10" ml="-5">
-      50%
-    </RangeSliderMark>
-    <RangeSliderMark value={75} w="10" ml="-5">
-      75%
-    </RangeSliderMark>
-  </RangeSlider>
-
-  <RangeSlider size="lg">
-    <RangeSliderMark value={25} w="10" ml="-5">
-      25%
-    </RangeSliderMark>
-    <RangeSliderMark value={50} w="10" ml="-5">
-      50%
-    </RangeSliderMark>
-    <RangeSliderMark value={75} w="10" ml="-5">
-      75%
-    </RangeSliderMark>
-  </RangeSlider>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <RangeSlider key={index} size={size}>
+        <For each={[25, 50, 75]}>
+          {(value, index) => (
+            <RangeSliderMark key={index} value={value} w="10" ml="-5">
+              {value}%
+            </RangeSliderMark>
+          )}
+        </For>
+      </RangeSlider>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -327,16 +325,13 @@ return (
     onMouseEnter={on}
     onMouseLeave={off}
   >
-    {" "}
-    <RangeSliderMark value={25} w="10" ml="-5">
-      25%
-    </RangeSliderMark>
-    <RangeSliderMark value={50} w="10" ml="-5">
-      50%
-    </RangeSliderMark>
-    <RangeSliderMark value={75} w="10" ml="-5">
-      75%
-    </RangeSliderMark>
+    <For each={[25, 50, 75]}>
+      {(value, index) => (
+        <RangeSliderMark key={value} value={value} w="10" ml="-5">
+          {value}%
+        </RangeSliderMark>
+      )}
+    </For>
     <Tooltip placement="top" label={`${value[0]}%`} isOpen={isOpen}>
       <RangeSliderStartThumb />
     </Tooltip>
@@ -408,15 +403,14 @@ const [value, onChange] = useState<[number, number]>([25, 75])
 return (
   <VStack>
     <RangeSlider value={value} onChange={onChange} my="10">
-      <RangeSliderMark value={25} w="10" ml="-5">
-        25%
-      </RangeSliderMark>
-      <RangeSliderMark value={50} w="10" ml="-5">
-        50%
-      </RangeSliderMark>
-      <RangeSliderMark value={75} w="10" ml="-5">
-        75%
-      </RangeSliderMark>
+      <For each={[25, 50, 75]}>
+        {(value, index) => (
+          <RangeSliderMark key={index} value={value} w="10" ml="-5">
+            {value}%
+          </RangeSliderMark>
+        )}
+      </For>
+
       <RangeSliderMark
         value={value[0]}
         bg="blue.500"

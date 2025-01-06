@@ -49,7 +49,7 @@ describe("<Fieldset />", () => {
     render(
       <Fieldset
         errorMessage="Agreement is required."
-        isInvalid
+        invalid
         legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
@@ -69,9 +69,9 @@ describe("<Fieldset />", () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isInvalid
-        isReplace
+        invalid
         legend="Terms and Conditions"
+        replace
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -93,9 +93,9 @@ describe("<Fieldset />", () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isInvalid
-        isReplace={false}
+        invalid
         legend="Terms and Conditions"
+        replace={false}
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -117,8 +117,8 @@ describe("<Fieldset />", () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isRequired
         legend="Terms and Conditions"
+        required
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -129,9 +129,9 @@ describe("<Fieldset />", () => {
   test("should be disabled", () => {
     render(
       <Fieldset
+        disabled
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isDisabled
         legend="Terms and Conditions"
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
@@ -145,8 +145,8 @@ describe("<Fieldset />", () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isReadOnly
         legend="Terms and Conditions"
+        readOnly
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>,
@@ -157,8 +157,8 @@ describe("<Fieldset />", () => {
   test("should render custom indicator", () => {
     render(
       <Fieldset
-        isRequired
         legend="Terms and Conditions"
+        required
         requiredIndicator={<div>required</div>}
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>

@@ -3,6 +3,7 @@ import type { MotionProps } from "./motion.types"
 import { ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { motion } from "motion/react"
+import { useMemo } from "react"
 import { motionForwardRef } from "./forward-ref"
 
 const disableStyleProps = ["transition"]
@@ -17,14 +18,18 @@ const Component = ui<"div", Dict>("div", { disableStyleProp })
  * @see Docs https://yamada-ui.com/components/other/motion
  */
 export const Motion = motionForwardRef<MotionProps, "div">(
-  ({ as = "div", className, ...rest }, ref) => (
-    <Component
-      ref={ref}
-      as={motion.create(as)}
-      className={cx("ui-motion", className)}
-      {...rest}
-    />
-  ),
+  ({ as: asProp = "div", className, ...rest }, ref) => {
+    const as = useMemo(() => motion.create(asProp), [asProp])
+
+    return (
+      <Component
+        ref={ref}
+        as={as}
+        className={cx("ui-motion", className)}
+        {...rest}
+      />
+    )
+  },
 )
 
 Motion.displayName = "Motion"

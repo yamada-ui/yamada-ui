@@ -11,7 +11,7 @@ import {
   isUndefined,
   mergeRefs,
 } from "@yamada-ui/utils"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useId, useMemo, useRef } from "react"
 import { useSelectContext, useSelectDescendant } from "./use-select"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -29,11 +29,27 @@ export interface UseSelectOptionProps extends Omit<HTMLUIProps, "value"> {
    *
    * @default false
    */
+  disabled?: boolean
+  /**
+   * If `true`, the select option will be focusable.
+   *
+   * @default false
+   */
+  focusable?: boolean
+  /**
+   * If `true`, the select option will be disabled.
+   *
+   * @default false
+   *
+   * @deprecated Use `disabled` instead.
+   */
   isDisabled?: boolean
   /**
    * If `true`, the select option will be focusable.
    *
    * @default false
+   *
+   * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
   /**
@@ -51,7 +67,7 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     placeholder,
     placeholderInOptions,
     setFocusedIndex,
-    value,
+    value: selectedValue,
     optionProps,
     onChange,
     onClose,
@@ -59,71 +75,76 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
   } = useSelectContext()
   const uuid = useId()
   const itemRef = useRef<HTMLLIElement>(null)
-  let {
-    id,
+  const {
+    id = uuid,
     children,
     closeOnSelect: customCloseOnSelect,
-    icon: customIcon,
     isDisabled,
+    disabled = isDisabled,
     isFocusable,
+    focusable = isFocusable,
+    icon: customIcon,
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
-  const trulyDisabled = !!isDisabled && !isFocusable
+  const trulyDisabled = !!disabled && !focusable
   const { descendants, index, register } = useSelectDescendant({
     disabled: trulyDisabled,
   })
   const values = descendants.values()
   const frontValues = values.slice(0, index)
   const hasPlaceholder = !!placeholder && placeholderInOptions
-  const isPlaceholder = hasPlaceholder && index === 0
-  const isMulti = isArray(value)
-  const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
-    : false
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isFocused = index === focusedIndex
+  const optionPlaceholder = hasPlaceholder && index === 0
+  const multi = isArray(selectedValue)
+  const focused = index === focusedIndex
 
-  id ??= uuid
+  const value = useMemo(() => {
+    let value = optionValue
 
-  if (!isPlaceholder && isUndefined(optionValue)) {
-    if (isString(children) || isNumber(children)) {
-      optionValue = children.toString()
-    } else {
+    if (!optionPlaceholder && isUndefined(optionValue)) {
+      if (isString(children) || isNumber(children)) {
+        value = children.toString()
+      } else {
+        console.warn(
+          `${
+            !multi ? "Select" : "MultiSelect"
+          }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+        )
+      }
+    }
+
+    if (hasPlaceholder && index > 0 && !optionValue) {
       console.warn(
         `${
-          !isMulti ? "Select" : "MultiSelect"
-        }: Cannot infer the option value of complex children. Pass a \`value\` prop or use a plain string as children to <Option>.`,
+          !multi ? "Select" : "MultiSelect"
+        }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set \`placeholderInOptions\` to false.`,
       )
     }
-  }
 
-  if (hasPlaceholder && index > 0 && !optionValue) {
-    console.warn(
-      `${
-        !isMulti ? "Select" : "MultiSelect"
-      }: If placeholders are present, All options must be set value. If want to set an empty value, either don't set the placeholder or set 'placeholderInOptions' to false.`,
-    )
-  }
+    return value ?? ""
+  }, [children, hasPlaceholder, index, multi, optionPlaceholder, optionValue])
+
+  const duplicated = !multi
+    ? frontValues.some(({ node }) => node.dataset.selectedValue === value)
+    : false
+  const selected =
+    !duplicated &&
+    (!multi ? value === selectedValue : selectedValue.includes(value))
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.preventDefault()
       ev.stopPropagation()
 
-      if (isDisabled || !isTargetOption(ev.currentTarget)) {
+      if (disabled || !isTargetOption(ev.currentTarget)) {
         if (fieldRef.current) fieldRef.current.focus()
 
         return
       }
 
-      if (!isDuplicated) setFocusedIndex(index)
+      if (!duplicated) setFocusedIndex(index)
 
-      onChange(optionValue ?? "")
+      onChange(value)
 
       if (fieldRef.current) fieldRef.current.focus()
 
@@ -132,12 +153,12 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
       if (omitSelectedValues) onFocusNext()
     },
     [
-      isDisabled,
-      isDuplicated,
+      disabled,
+      duplicated,
       setFocusedIndex,
       index,
       onChange,
-      optionValue,
+      value,
       fieldRef,
       customCloseOnSelect,
       closeOnSelect,
@@ -167,25 +188,25 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
         ...computedProps,
         ...props,
         id,
-        style: omitSelectedValues && isSelected ? style : undefined,
-        "aria-disabled": ariaAttr(isDisabled),
-        "aria-selected": isSelected,
-        "data-disabled": dataAttr(isDisabled),
-        "data-duplicated": dataAttr(isDuplicated),
-        "data-focus": dataAttr(isFocused),
-        "data-value": optionValue ?? "",
+        style: omitSelectedValues && selected ? style : undefined,
+        "aria-disabled": ariaAttr(disabled),
+        "aria-selected": selected,
+        "data-disabled": dataAttr(disabled),
+        "data-duplicated": dataAttr(duplicated),
+        "data-focus": dataAttr(focused),
+        "data-value": value,
         tabIndex: -1,
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
     },
     [
       id,
-      optionValue,
+      value,
       computedProps,
-      isDisabled,
-      isFocused,
-      isDuplicated,
-      isSelected,
+      disabled,
+      focused,
+      duplicated,
+      selected,
       omitSelectedValues,
       onClick,
       register,
@@ -195,8 +216,8 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
   return {
     children,
     customIcon,
-    isFocused,
-    isSelected,
+    focused,
+    selected,
     getOptionProps,
   }
 }

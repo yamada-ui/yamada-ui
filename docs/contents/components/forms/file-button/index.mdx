@@ -40,23 +40,35 @@ You can also customize it using `children`. `children` provides `onClick`, `isDi
 
 ```tsx
 <Wrap gap="md">
-  <FileButton colorScheme="primary" variant="solid">
-    Solid
-  </FileButton>
-
-  <FileButton colorScheme="secondary" variant="outline">
-    Outline
-  </FileButton>
-
-  <FileButton colorScheme="warning" variant="ghost">
-    Ghost
-  </FileButton>
-
-  <FileButton colorScheme="danger" variant="link">
-    Link
-  </FileButton>
-
-  <FileButton variant="unstyled">Unstyle</FileButton>
+  <For
+    each={[
+      {
+        colorScheme: "primary",
+        variant: "solid",
+      },
+      {
+        colorScheme: "secondary",
+        variant: "outline",
+      },
+      {
+        colorScheme: "warning",
+        variant: "ghost",
+      },
+      {
+        colorScheme: "danger",
+        variant: "link",
+      },
+      {
+        variant: "unstyled",
+      },
+    ]}
+  >
+    {({ colorScheme, variant }, index) => (
+      <FileButton key={index} colorScheme={colorScheme} variant={variant}>
+        {toTitleCase(variant)}
+      </FileButton>
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -64,21 +76,36 @@ You can also customize it using `children`. `children` provides `onClick`, `isDi
 
 ```tsx
 <Wrap gap="md">
-  <FileButton colorScheme="primary" size="xs">
-    X Small
-  </FileButton>
-
-  <FileButton colorScheme="secondary" size="sm">
-    Small
-  </FileButton>
-
-  <FileButton colorScheme="warning" size="md">
-    Medium
-  </FileButton>
-
-  <FileButton colorScheme="danger" size="lg">
-    Large
-  </FileButton>
+  <For
+    each={[
+      {
+        colorScheme: "primary",
+        size: "xs",
+        name: "X Small",
+      },
+      {
+        colorScheme: "secondary",
+        size: "sm",
+        name: "Small",
+      },
+      {
+        colorScheme: "warning",
+        size: "md",
+        name: "Medium",
+      },
+      {
+        colorScheme: "danger",
+        size: "lg",
+        name: "Large",
+      },
+    ]}
+  >
+    {({ colorScheme, size, name }, index) => (
+      <FileButton key={index} colorScheme={colorScheme} size={size}>
+        {name}
+      </FileButton>
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -86,8 +113,13 @@ You can also customize it using `children`. `children` provides `onClick`, `isDi
 
 ```tsx
 <Wrap gap="md">
-  <FileButton colorScheme="secondary">Secondary</FileButton>
-  <FileButton colorScheme="green">Green</FileButton>
+  <For each={["secondary", "green"]}>
+    {(colorScheme, index) => (
+      <FileButton key={index} colorScheme={colorScheme}>
+        {toTitleCase(colorScheme)}
+      </FileButton>
+    )}
+  </For>
 </Wrap>
 ```
 

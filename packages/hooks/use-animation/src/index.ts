@@ -125,17 +125,15 @@ export interface UseAnimationObserverProps {
   /**
    * @deprecated Use `open` instead
    */
-  isOpen: boolean
+  isOpen?: boolean
   open?: boolean
 }
 
 export const useAnimationObserver = ({
   ref,
   isOpen,
-  open,
+  open = isOpen,
 }: UseAnimationObserverProps) => {
-  open ??= isOpen
-
   const [mounted, setMounted] = useState(open)
   const [flg, { on }] = useBoolean()
 

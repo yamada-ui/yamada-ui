@@ -31,6 +31,12 @@ import {
 
 interface MultiSelectOptions {
   /**
+   * If `true`, display the multi select clear icon.
+   *
+   * @default true
+   */
+  clearable?: boolean
+  /**
    * The custom display value to use.
    */
   component?: FC<{
@@ -59,6 +65,8 @@ interface MultiSelectOptions {
    * If `true`, display the multi select clear icon.
    *
    * @default true
+   *
+   * @deprecated Use `clearable` instead.
    */
   isClearable?: boolean
   /**
@@ -90,14 +98,14 @@ interface MultiSelectOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
 }
 
 export interface MultiSelectProps
   extends ThemeProps<"MultiSelect">,
-    Omit<UseSelectProps<string[]>, "isEmpty" | "placeholderInOptions">,
+    Omit<UseSelectProps<string[]>, "placeholderInOptions">,
     MultiSelectOptions {}
 
 /**
@@ -107,8 +115,10 @@ export interface MultiSelectProps
  */
 export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
-  let {
+  const {
     className,
+    isClearable = true,
+    clearable = isClearable,
     closeOnSelect = false,
     color,
     component,
@@ -116,24 +126,22 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     footer,
     h,
     header,
-    height,
-    isClearable = true,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     separator,
     clearIconProps,
     containerProps,
     fieldProps,
     iconProps,
     listProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
     children,
     descendants,
-    isEmpty,
+    empty,
     placeholder,
     value,
     formControlProps,
@@ -149,10 +157,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     defaultValue,
     placeholderInOptions: false,
   })
-
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -176,14 +180,14 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
               <PopoverTrigger>
                 <MultiSelectField
                   component={component}
-                  h={h}
-                  minH={minH}
+                  height={height}
+                  minHeight={minHeight}
                   separator={separator}
                   {...getFieldProps(fieldProps, ref)}
                 />
               </PopoverTrigger>
 
-              {isClearable && value.length ? (
+              {clearable && value.length ? (
                 <SelectClearIcon
                   {...clearIconProps}
                   onClick={handlerAll(clearIconProps?.onClick, onClear)}
@@ -194,7 +198,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
               )}
             </ui.div>
 
-            {!isEmpty ? (
+            {!empty ? (
               <Portal {...portalProps}>
                 <SelectList
                   footer={runIfFunc(footer, { value, onClose })}
@@ -224,10 +228,8 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     {
       className,
       component,
-      h,
       isTruncated,
       lineClamp = 1,
-      minH,
       separator = ",",
       ...rest
     },
@@ -302,8 +304,6 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     const css: CSSUIObject = {
       alignItems: "center",
       display: "flex",
-      h,
-      minH,
       pe: "2rem",
       ...styles.field,
     }

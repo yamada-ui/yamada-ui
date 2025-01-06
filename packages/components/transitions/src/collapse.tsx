@@ -93,14 +93,14 @@ export interface CollapseProps
  */
 export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Collapse", props)
-  let {
+  const {
     className,
     animationOpacity,
     delay,
     duration,
     endingHeight,
     isOpen,
-    open,
+    open = isOpen,
     startingHeight,
     transition: transitionProp,
     transitionEnd,
@@ -109,19 +109,8 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const isBrowser = createdDom()
-
-    if (isBrowser) setMounted(true)
-  }, [])
-
-  open ??= isOpen
-
   const animate = open || unmountOnExit ? "enter" : "exit"
-
-  open = unmountOnExit ? open : true
-
+  const resolvedOpen = unmountOnExit ? open : true
   const transition = useMemo(() => {
     if (!mounted) {
       return { enter: { duration: 0 } }
@@ -152,7 +141,6 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
       }
     }
   }, [mounted, duration, transitionProp])
-
   const custom = {
     animationOpacity,
     delay,
@@ -162,15 +150,18 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     transition,
     transitionEnd,
   }
-
   const css: CSSUIObject = {
     ...style,
     ...__css,
   }
 
+  useEffect(() => {
+    if (createdDom()) setMounted(true)
+  }, [])
+
   return (
     <AnimatePresence custom={custom} initial={false}>
-      {open ? (
+      {resolvedOpen ? (
         <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}

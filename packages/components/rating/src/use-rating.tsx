@@ -143,8 +143,8 @@ export const useRating = ({
   onTouchStart: onTouchStartProp,
   ...props
 }: UseRatingProps) => {
-  let { id, ...rest } = useFormControlProps(props)
-
+  const uuid = useId()
+  const { id = uuid, ...rest } = useFormControlProps(props)
   const containerRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
     defaultValue,
@@ -152,23 +152,19 @@ export const useRating = ({
     onChange: onChangeProp,
   })
   const [hoveredValue, setHoveredValue] = useState<number>(-1)
-  const [isOutside, setIsOutside] = useState(true)
-  const uuid = useId()
-
-  id ??= uuid
-  name ??= `rating-${id}`
-
+  const [outside, setOutside] = useState(true)
   const [formControlProps, containerProps] = splitObject(
     rest,
     formControlProperties,
   )
   const { disabled, readOnly, ...omittedFormControlProps } = formControlProps
-
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
   const decimal = 1 / resolvedFractions
   const roundedValue = getRoundedValue(value, decimal)
   const resolvedValue = hoveredValue !== -1 ? hoveredValue : roundedValue
+
+  name ??= `rating-${id}`
 
   const getHoveredValue = useCallback(
     (x: number) => {
@@ -189,14 +185,14 @@ export const useRating = ({
   )
 
   const onMouseEnter = useCallback(() => {
-    if (!disabled && !readOnly) setIsOutside(false)
+    if (!disabled && !readOnly) setOutside(false)
   }, [disabled, readOnly])
 
   const onMouseLeave = useCallback(() => {
     if (disabled || readOnly) return
 
     setHoveredValue(-1)
-    setIsOutside(true)
+    setOutside(true)
 
     if (hoveredValue !== -1) onHover?.(-1)
   }, [disabled, hoveredValue, onHover, readOnly, setHoveredValue])
@@ -320,7 +316,7 @@ export const useRating = ({
     filledIcon,
     highlightSelectedOnly,
     hoveredValue,
-    isOutside,
+    outside,
     resolvedValue,
     roundedValue,
     setHoveredValue,

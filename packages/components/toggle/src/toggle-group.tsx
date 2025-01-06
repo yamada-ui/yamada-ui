@@ -1,6 +1,7 @@
 import type {
   ComponentArgs,
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
@@ -42,8 +43,10 @@ interface ToggleGroupOptions<
   defaultValue?: Y extends any[] ? Y : undefined | Y
   /**
    * The CSS `flex-direction` property.
+   *
+   * @deprecated Use `flexDirection` instead.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * If `true`, all wrapped toggle button will be disabled.
    *
@@ -100,11 +103,12 @@ export const ToggleGroup = forwardRef(
       size,
       variant,
       defaultValue,
-      direction: flexDirection,
-      disabled,
+      direction,
       isDisabled,
+      disabled = isDisabled,
+      flexDirection = direction,
       isReadOnly,
-      readOnly,
+      readOnly = isReadOnly,
       value: valueProp,
       onChange: onChangeProp,
       ...rest
@@ -112,9 +116,6 @@ export const ToggleGroup = forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     type Value = Y extends any[] ? Y : undefined | Y
-
-    disabled ??= isDisabled
-    readOnly ??= isReadOnly
 
     const [value, setValue] = useControllableState<Value>({
       defaultValue,

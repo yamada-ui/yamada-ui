@@ -19,27 +19,27 @@ export interface SwitchModeProps
 
 export const SwitchMode: FC<SwitchModeProps> = memo(
   ({
+    disabled,
     errorMessage,
     helperMessage,
-    isDisabled,
-    isInvalid,
-    isReadOnly,
-    isReplace,
-    isRequired,
+    invalid,
     label = "Mode",
+    readOnly,
+    replace,
+    required,
     ...rest
   }) => {
     return (
       <FormControl
         {...{
+          disabled,
           errorMessage,
           helperMessage,
-          isDisabled,
-          isInvalid,
-          isReadOnly,
-          isReplace,
-          isRequired,
+          invalid,
           label,
+          readOnly,
+          replace,
+          required,
         }}
       >
         <SegmentedControl minW="auto" w="full" {...rest}>

@@ -21,9 +21,6 @@ import { useCallback, useRef } from "react"
 
 interface Props extends FormControlOptions {
   onClick: () => void
-  disabled?: boolean
-  readOnly?: boolean
-  required?: boolean
 }
 
 interface FileButtonOptions {
@@ -59,9 +56,9 @@ export interface FileButtonProps
  */
 export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("FileButton", props)
-  let {
+  const {
     id,
-    as: As,
+    as,
     form,
     name,
     className,
@@ -79,7 +76,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     ...formControlProps
   } = pickObject(rest, formControlProperties)
   const {
-    "aria-invalid": isInvalid,
+    "aria-invalid": invalid,
     disabled,
     readOnly,
     required,
@@ -106,22 +103,6 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
   const onReset = useCallback(() => {
     if (inputRef.current) inputRef.current.value = ""
   }, [])
-
-  if (!isFunction(children)) {
-    const Component = As || Button
-
-    children = (
-      <Component
-        className={cx("ui-file-button", className)}
-        __isProcessSkip={!As}
-        __styles={styles}
-        {...rest}
-        onClick={handlerAll(onClickProp, onClick)}
-      >
-        {children}
-      </Component>
-    )
-  }
 
   assignRef(resetRef, onReset)
 
@@ -152,18 +133,30 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
         {...formControlProps}
       />
 
-      {isFunction(children)
-        ? children({
-            disabled,
-            isDisabled: disabled,
-            isInvalid,
-            isReadOnly: readOnly,
-            isRequired: required,
-            readOnly,
-            required,
-            onClick,
-          })
-        : children}
+      {isFunction(children) ? (
+        children({
+          disabled,
+          invalid,
+          isDisabled: disabled,
+          isInvalid: invalid,
+          isReadOnly: readOnly,
+          isRequired: required,
+          readOnly,
+          required,
+          onClick,
+        })
+      ) : (
+        <ui.button
+          as={as || Button}
+          className={cx("ui-file-button", className)}
+          __isProcessSkip={!as}
+          __styles={styles}
+          {...rest}
+          onClick={handlerAll(onClickProp, onClick)}
+        >
+          {children}
+        </ui.button>
+      )}
     </>
   )
 })

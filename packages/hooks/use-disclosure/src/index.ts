@@ -5,7 +5,11 @@ export interface UseDisclosureProps<
   Y extends (...args: any[]) => Promise<void> | void = () => void,
   M extends (...args: any[]) => Promise<void> | void = () => void,
 > {
+  /**
+   * @deprecated Use `defaultOpen` instead.
+   */
   defaultIsOpen?: boolean
+  defaultOpen?: boolean
   /**
    * @deprecated Use `open` instead.
    */
@@ -25,27 +29,29 @@ export interface UseDisclosureProps<
 export const useDisclosure = <
   Y extends (...args: any[]) => Promise<void> | void = () => void,
   M extends (...args: any[]) => Promise<void> | void = () => void,
->(
-  props: UseDisclosureProps<Y, M> = {},
-) => {
-  const [defaultIsOpen, setIsOpen] = useState<boolean>(
-    props.defaultIsOpen ?? false,
-  )
+>({
+  defaultIsOpen = false,
+  defaultOpen = defaultIsOpen,
+  isOpen,
+  open: controlledOpen = isOpen,
+  timing,
+  onClose: onCloseProp,
+  onOpen: onOpenProp,
+}: UseDisclosureProps<Y, M> = {}) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState<boolean>(defaultOpen)
 
-  const openProps = props.open ?? props.isOpen
+  const timingRef = useRef(timing ?? "after")
+  const handleOpen = useCallbackRef(onOpenProp)
+  const handleClose = useCallbackRef(onCloseProp)
 
-  const timingRef = useRef(props.timing ?? "after")
-  const handleOpen = useCallbackRef(props.onOpen)
-  const handleClose = useCallbackRef(props.onClose)
-
-  const controlled = openProps !== undefined
-  const open = openProps !== undefined ? openProps : defaultIsOpen
+  const controlled = controlledOpen !== undefined
+  const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen
 
   const onOpen = useCallback(
     async (...args: Parameters<Y>) => {
       if (timingRef.current === "before") await handleOpen(...args)
 
-      if (!controlled) setIsOpen(true)
+      if (!controlled) setUncontrolledOpen(true)
 
       if (timingRef.current === "after") await handleOpen(...args)
     },
@@ -56,7 +62,7 @@ export const useDisclosure = <
     async (...args: Parameters<M>) => {
       if (timingRef.current === "before") await handleClose(...args)
 
-      if (!controlled) setIsOpen(false)
+      if (!controlled) setUncontrolledOpen(false)
 
       if (timingRef.current === "after") await handleClose(...args)
     },
@@ -107,15 +113,12 @@ export const usePromiseDisclosure = <
   error,
   ...rest
 }: UsePromiseDisclosureProps<Y, M> = {}) => {
-  let {
-    isOpen,
+  const {
     open,
     onClose: onInternalClose,
     onOpen: onInternalOpen,
     onToggle,
   } = useDisclosure<Y, M>(rest)
-
-  open = isOpen
 
   const rejectRef = useRef<((reason?: any) => void) | undefined>(undefined)
   const resolveRef = useRef<M>(noop as M)
@@ -182,11 +185,9 @@ export const useLazyDisclosure = ({
   enabled,
   isSelected,
   mode = "unmount",
-  selected,
+  selected = isSelected,
   wasSelected,
 }: UseLazyDisclosureProps) => {
-  selected ??= isSelected
-
   if (!enabled) return true
 
   if (selected) return true

@@ -68,8 +68,8 @@ export interface UsePaginationProps {
 export const usePagination = ({
   boundaries: _boundaries = 1,
   defaultPage = 1,
-  disabled,
   isDisabled = false,
+  disabled = isDisabled,
   page,
   siblings: _siblings = 1,
   total,
@@ -77,37 +77,11 @@ export const usePagination = ({
 }: UsePaginationProps) => {
   const siblings = useValue(_siblings)
   const boundaries = useValue(_boundaries)
-
-  disabled ??= isDisabled
-
   const [currentPage, setCurrentPage] = useControllableState({
     defaultValue: defaultPage,
     value: page,
     onChange: onChangeProp,
   })
-
-  const onFirst = useCallback(() => setCurrentPage(1), [setCurrentPage])
-
-  const onLast = useCallback(
-    () => setCurrentPage(total),
-    [setCurrentPage, total],
-  )
-
-  const onPrev = useCallback(
-    () => setCurrentPage((prev) => (prev === 1 ? prev : prev - 1)),
-    [setCurrentPage],
-  )
-
-  const onNext = useCallback(
-    () => setCurrentPage((prev) => (prev === total ? prev : prev + 1)),
-    [setCurrentPage, total],
-  )
-
-  const onChange = useCallback(
-    (page: number) => setCurrentPage(page),
-    [setCurrentPage],
-  )
-
   const range = useMemo((): ("ellipsis" | number)[] => {
     const minimumTotal = siblings * 2 + 3 + boundaries * 2
 
@@ -115,7 +89,6 @@ export const usePagination = ({
 
     const prevSiblings = Math.max(currentPage - siblings, boundaries)
     const nextSiblings = Math.min(currentPage + siblings, total - boundaries)
-
     const prevDots = prevSiblings > boundaries + 2
     const nextDots = nextSiblings < total - (boundaries + 1)
 
@@ -147,6 +120,28 @@ export const usePagination = ({
       ...computedRange(total - boundaries + 1, total),
     ]
   }, [boundaries, siblings, currentPage, total])
+
+  const onFirst = useCallback(() => setCurrentPage(1), [setCurrentPage])
+
+  const onLast = useCallback(
+    () => setCurrentPage(total),
+    [setCurrentPage, total],
+  )
+
+  const onPrev = useCallback(
+    () => setCurrentPage((prev) => (prev === 1 ? prev : prev - 1)),
+    [setCurrentPage],
+  )
+
+  const onNext = useCallback(
+    () => setCurrentPage((prev) => (prev === total ? prev : prev + 1)),
+    [setCurrentPage, total],
+  )
+
+  const onChange = useCallback(
+    (page: number) => setCurrentPage(page),
+    [setCurrentPage],
+  )
 
   return {
     currentPage,

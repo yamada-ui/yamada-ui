@@ -1,21 +1,60 @@
 {
   "SwitchIcon": {
-    "isActive": { "type": "boolean", "required": false },
-    "isChecked": { "type": "boolean", "required": false },
-    "isFocused": { "type": "boolean", "required": false },
-    "isHovered": { "type": "boolean", "required": false }
+    "active": { "type": "boolean", "required": false },
+    "checked": { "type": "boolean", "required": false },
+    "focused": { "type": "boolean", "required": false },
+    "hovered": { "type": "boolean", "required": false },
+    "isActive": {
+      "type": "boolean",
+      "deprecated": "Use `active` instead.",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "deprecated": "Use `checked` instead.",
+      "required": false
+    },
+    "isFocused": {
+      "type": "boolean",
+      "deprecated": "Use `focused` instead.",
+      "required": false
+    },
+    "isHovered": {
+      "type": "boolean",
+      "deprecated": "Use `hovered` instead.",
+      "required": false
+    }
   },
   "Switch": {
+    "checked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be checked.",
+      "required": false
+    },
     "colorScheme": {
       "type": "\"blackAlpha\" | \"whiteAlpha\" | \"amber\" | \"blue\" | \"info\" | \"link\" | \"primary\" | \"cyan\" | \"emerald\" | \"flashy\" | \"fuchsia\" | \"gray\" | \"green\" | \"success\" | \"indigo\" | \"lime\" | \"neutral\" | \"orange\" | \"warning\" | \"pink\" | \"purple\" | \"red\" | \"danger\" | \"rose\" | \"sky\" | \"teal\" | \"violet\" | \"secondary\" | \"yellow\"",
       "defaultValue": "\"primary\"",
       "description": "The visual color appearance of the component.",
       "required": false
     },
-    "defaultIsChecked": {
+    "defaultChecked": {
       "type": "boolean",
       "defaultValue": false,
       "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
+    "defaultIsChecked": {
+      "type": "boolean",
+      "defaultValue": false,
+      "deprecated": "Use `defaultChecked` instead.",
+      "description": "If `true`, the checkbox will be initially checked.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "icon": {
@@ -28,44 +67,62 @@
       "description": "id assigned to input.",
       "required": false
     },
+    "indeterminate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the checkbox will be indeterminate.",
+      "required": false
+    },
     "inputProps": {
       "type": "InputHTMLAttributes<HTMLInputElement>",
       "description": "Props for switch input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `checked` instead.",
       "description": "If `true`, the checkbox will be checked.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
     "isReverse": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `reverse` instead.",
       "description": "Change switch label from right to left.",
       "required": false
     },
@@ -92,6 +149,24 @@
     "onFocus": {
       "type": "FocusEventHandler<HTMLInputElement>",
       "description": "The callback invoked when the checkbox is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Change switch label from right to left.",
       "required": false
     },
     "selectOnEnter": {

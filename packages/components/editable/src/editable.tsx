@@ -99,12 +99,12 @@ export interface UseEditableProps extends FormControlOptions {
 }
 
 export const useEditable = (props: UseEditableProps) => {
-  let {
+  const {
     id,
     defaultValue,
     isPreviewFocusable = true,
     placeholder,
-    previewFocusable,
+    previewFocusable = isPreviewFocusable,
     selectAllOnFocus = true,
     startWithEditView,
     submitOnBlur = true,
@@ -115,72 +115,27 @@ export const useEditable = (props: UseEditableProps) => {
     onSubmit: onSubmitProp,
     ...rest
   } = useFormControlProps(props)
-
-  previewFocusable ??= isPreviewFocusable
-
   const onEditRef = useCallbackRef(onEditProp)
   const { disabled, readOnly, required, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
-
   const [editing, setEditing] = useState<boolean>(
     !!startWithEditView && !disabled,
   )
-
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue || "",
     value: valueProp,
     onChange: onChangeProp,
   })
-
   const interactive = !editing && !disabled
   const emptyValue = value.length === 0
-
   const [prevValue, setPrevValue] = useState(value)
-
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const previewRef = useRef<HTMLElement>(null)
   const editRef = useRef<HTMLButtonElement>(null)
   const cancelRef = useRef<HTMLButtonElement>(null)
   const submitRef = useRef<HTMLButtonElement>(null)
-
-  useFocusOnPointerDown({
-    ref: inputRef,
-    elements: [cancelRef, submitRef],
-    enabled: editing,
-  })
-
-  useSafeLayoutEffect(() => {
-    if (!editing) return
-
-    inputRef.current?.focus()
-
-    if (selectAllOnFocus) inputRef.current?.select()
-  }, [])
-
-  useUpdateEffect(() => {
-    if (!editing) {
-      editRef.current?.focus()
-
-      return
-    }
-
-    inputRef.current?.focus()
-
-    if (selectAllOnFocus) inputRef.current?.select()
-
-    onEditRef()
-  }, [editing, onEditRef, selectAllOnFocus])
-
-  useEffect(() => {
-    if (editing) return
-
-    const el = inputRef.current
-    const activeEl = el?.ownerDocument.activeElement
-
-    if (activeEl === el) el?.blur()
-  }, [editing])
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -254,6 +209,43 @@ export const useEditable = (props: UseEditableProps) => {
     },
     [editing, submitOnBlur, onSubmit, onCancel],
   )
+
+  useFocusOnPointerDown({
+    ref: inputRef,
+    elements: [cancelRef, submitRef],
+    enabled: editing,
+  })
+
+  useSafeLayoutEffect(() => {
+    if (!editing) return
+
+    inputRef.current?.focus()
+
+    if (selectAllOnFocus) inputRef.current?.select()
+  }, [])
+
+  useUpdateEffect(() => {
+    if (!editing) {
+      editRef.current?.focus()
+
+      return
+    }
+
+    inputRef.current?.focus()
+
+    if (selectAllOnFocus) inputRef.current?.select()
+
+    onEditRef()
+  }, [editing, onEditRef, selectAllOnFocus])
+
+  useEffect(() => {
+    if (editing) return
+
+    const el = inputRef.current
+    const activeEl = el?.ownerDocument.activeElement
+
+    if (activeEl === el) el?.blur()
+  }, [editing])
 
   const getPreviewProps: PropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
@@ -472,17 +464,21 @@ export const Editable = forwardRef<EditableProps, "div">(
       focusBorderColor,
       ...props,
     })
-    let {
+    const {
       className,
       children,
       defaultValue,
       isDisabled,
+      disabled = isDisabled,
       isInvalid,
+      invalid = isInvalid,
       isPreviewFocusable,
       isReadOnly,
       isRequired,
       placeholder,
-      previewFocusable,
+      previewFocusable = isPreviewFocusable,
+      readOnly = isReadOnly,
+      required = isRequired,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,
@@ -493,9 +489,6 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit: onSubmitProp,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    previewFocusable ??= isPreviewFocusable
-
     const {
       editing,
       getCancelProps,
@@ -509,12 +502,12 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit,
     } = useEditable({
       defaultValue,
-      isDisabled,
-      isInvalid,
-      isPreviewFocusable,
-      isReadOnly,
-      isRequired,
+      disabled,
+      invalid,
       placeholder,
+      previewFocusable,
+      readOnly,
+      required,
       selectAllOnFocus,
       startWithEditView,
       submitOnBlur,

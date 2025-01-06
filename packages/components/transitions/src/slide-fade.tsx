@@ -101,28 +101,23 @@ export interface SlideFadeProps
 export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("SlideFade", props)
-    let {
+    const {
       className,
       delay,
       duration,
       isOpen,
       offsetX: _offsetX,
       offsetY: _offsetY,
-      open,
+      open = isOpen,
       reverse,
       transition,
       transitionEnd,
       unmountOnExit,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    open ??= isOpen
-
     const animate = open || unmountOnExit ? "enter" : "exit"
-
     const offsetX = useValue(_offsetX)
     const offsetY = useValue(_offsetY)
-
     const custom = {
       delay,
       duration,
@@ -132,12 +127,11 @@ export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
       transition,
       transitionEnd,
     }
-
-    open = unmountOnExit ? open && unmountOnExit : true
+    const resolvedOpen = unmountOnExit ? open && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>
-        {open ? (
+        {resolvedOpen ? (
           <motion.div
             ref={ref}
             className={cx("ui-slide-fade", className)}

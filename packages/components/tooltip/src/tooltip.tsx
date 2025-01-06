@@ -7,7 +7,7 @@ import type {
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
-import type { ReactElement, ReactNode, Ref } from "react"
+import type { ReactElement, ReactNode } from "react"
 import { omitThemeProps, ui, useComponentStyle } from "@yamada-ui/core"
 import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
@@ -20,6 +20,7 @@ import {
   cx,
   getOwnerDocument,
   getOwnerWindow,
+  getRef,
   handlerAll,
   mergeRefs,
 } from "@yamada-ui/utils"
@@ -200,7 +201,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       "Tooltip",
       props,
     )
-    let {
+    const {
       className,
       animation,
       boundary,
@@ -211,20 +212,20 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       closeOnMouseDown = false,
       closeOnPointerDown = false,
       closeOnScroll,
-      defaultIsOpen: defaultIsOpenProp,
-      defaultOpen: defaultOpenProp,
-      disabled,
+      defaultIsOpen,
+      defaultOpen = defaultIsOpen,
+      isDisabled,
+      disabled = isDisabled,
       duration,
       eventListeners,
       flip,
       gutter,
-      isDisabled,
-      isOpen: isOpenProp,
+      isOpen,
       label,
       matchWidth,
       modifiers,
       offset,
-      open: openProp,
+      open: openProp = isOpen,
       openDelay = 0,
       placement,
       preventOverflow,
@@ -233,18 +234,10 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       onOpen: onOpenProp,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
-
     const id = useId()
-
-    openProp ??= isOpenProp
-    defaultOpenProp ??= defaultIsOpenProp
-    disabled ??= isDisabled
-
-    const { isOpen, onClose, onOpen } = useDisclosure({
-      defaultIsOpen: defaultOpenProp,
-      isOpen: openProp,
+    const { open, onClose, onOpen } = useDisclosure({
+      defaultOpen,
+      open: openProp,
       onClose: onCloseProp,
       onOpen: onOpenProp,
     })
@@ -253,7 +246,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     const closeTimeout = useRef<NodeJS.Timeout>()
     const { referenceRef, transformOrigin, getPopperProps } = usePopper({
       boundary,
-      enabled: isOpen,
+      enabled: open,
       eventListeners,
       flip,
       gutter,
@@ -264,6 +257,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       preventOverflow,
       strategy,
     })
+    const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const closeNow = useCallback(() => {
       if (closeTimeout.current) {
@@ -277,13 +271,13 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
 
     const openWithDelay = useCallback(() => {
       if (!disabled && !openTimeout.current) {
-        if (isOpen) closeNow()
+        if (open) closeNow()
 
         const win = getOwnerWindow(triggerRef.current)
 
         openTimeout.current = win.setTimeout(onOpen, openDelay)
       }
-    }, [disabled, isOpen, openDelay, closeNow, onOpen])
+    }, [disabled, open, openDelay, closeNow, onOpen])
 
     const closeWithDelay = useCallback(() => {
       if (openTimeout.current) {
@@ -298,20 +292,20 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     }, [closeDelay, closeNow])
 
     const onClick = useCallback(
-      () => (isOpen && closeOnClick ? closeWithDelay() : undefined),
-      [isOpen, closeOnClick, closeWithDelay],
+      () => (open && closeOnClick ? closeWithDelay() : undefined),
+      [open, closeOnClick, closeWithDelay],
     )
 
     const onPointerDown = useCallback(
       () =>
-        isOpen && effectiveCloseOnPointerDown ? closeWithDelay() : undefined,
-      [isOpen, effectiveCloseOnPointerDown, closeWithDelay],
+        open && effectiveCloseOnPointerDown ? closeWithDelay() : undefined,
+      [open, effectiveCloseOnPointerDown, closeWithDelay],
     )
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) =>
-        isOpen && ev.key === "Escape" ? closeWithDelay() : undefined,
-      [isOpen, closeWithDelay],
+        open && ev.key === "Escape" ? closeWithDelay() : undefined,
+      [open, closeWithDelay],
     )
 
     const getTriggerProps: PropGetter = useCallback(
@@ -337,7 +331,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     useEventListener(
       () => getOwnerDocument(triggerRef.current),
       "scroll",
-      () => (isOpen && closeOnScroll ? closeNow() : undefined),
+      () => (open && closeOnScroll ? closeNow() : undefined),
     )
 
     useEventListener(
@@ -352,7 +346,7 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
       () => triggerRef.current,
       "touchstart",
       () => {
-        if (isOpen) closeWithDelay()
+        if (open) closeWithDelay()
         else openWithDelay()
       },
       { passive: true },
@@ -376,13 +370,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     // eslint-disable-next-line react/jsx-no-useless-fragment
     if (!label) return <>{children}</>
 
-    const child = Children.only(children) as {
-      ref?: Ref<HTMLElement>
-    } & ReactElement
+    const child = Children.only(children) as ReactElement
 
     const trigger = cloneElement(
       child,
-      getTriggerProps({ ...child.props, "aria-describedby": id }, child.ref),
+      getTriggerProps(
+        { ...child.props, "aria-describedby": id },
+        getRef(child),
+      ),
     )
 
     const css: CSSUIObject = {
@@ -417,8 +412,8 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
         </ui.span>
 
         <AnimatePresence>
-          {isOpen ? (
-            <Portal isDisabled={!withPortal} {...portalProps}>
+          {open ? (
+            <Portal disabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
                 pointerEvents="none"

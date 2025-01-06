@@ -60,6 +60,14 @@ order: 1
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="combobox-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -108,6 +116,7 @@ order: 1
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -116,6 +125,17 @@ order: 1
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
+/>
+
+<PropsCard
+  id="combobox-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -123,7 +143,7 @@ order: 1
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -169,6 +189,13 @@ order: 1
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="combobox-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
 />
 
 <PropsCard
@@ -274,6 +301,14 @@ order: 1
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="popover-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -331,6 +366,7 @@ order: 1
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -339,6 +375,17 @@ order: 1
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
+/>
+
+<PropsCard
+  id="popover-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -346,7 +393,7 @@ order: 1
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -392,6 +439,13 @@ order: 1
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="popover-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
 />
 
 <PropsCard
@@ -491,7 +545,7 @@ order: 1
 <PropsCard
   id="popovercontent-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "g" | "marker" | "mask" | "p" | "text" | "div" | "style" | "title" | "button" | "form" | "animate" | "a" | "abbr" | "address" | "area" | ... 149 more ... | "textPath"'
+  type="keyof ReactDOM"
   description={"The HTML element to render."}
 />
 

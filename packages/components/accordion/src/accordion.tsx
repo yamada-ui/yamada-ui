@@ -93,26 +93,23 @@ export interface AccordionProps
  */
 export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Accordion", props)
-  let {
+  const {
     className,
-    defaultIndex: defaultValue,
+    defaultIndex: defaultIndexProp,
     icon,
     iconHidden,
-    index: value,
+    index: indexProp,
     isMultiple,
     isToggle,
-    multiple,
-    toggle,
+    multiple = isMultiple,
+    toggle = isToggle,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  toggle ??= isToggle
-  multiple ??= isMultiple
-
   if (
-    (value || defaultValue) != null &&
-    !isArray(value || defaultValue) &&
+    (indexProp || defaultIndexProp) != null &&
+    !isArray(indexProp || defaultIndexProp) &&
     multiple
   ) {
     console.warn(
@@ -132,8 +129,8 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
 
   const [index, setIndex] = useControllableState({
     defaultValue: () =>
-      multiple ? (defaultValue ?? []) : (defaultValue ?? -1),
-    value,
+      multiple ? (defaultIndexProp ?? []) : (defaultIndexProp ?? -1),
+    value: indexProp,
     onChange,
   })
 

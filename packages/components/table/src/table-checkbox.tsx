@@ -56,30 +56,30 @@ export const TableTotalCheckbox = forwardRef(
       (id) => !selectedRowIds.includes(id),
     )
 
-    const isDisabled = !enableRowIds.length
-    const isAllChecked = !isDisabled && !unselectedRowIds.length
+    const disabled = !enableRowIds.length
+    const allChecked = !disabled && !unselectedRowIds.length
 
-    const isChecked = !enablePagination
+    const checked = !enablePagination
       ? getIsAllRowsSelected()
       : getIsAllPageRowsSelected()
-    const isIndeterminate = !enablePagination
+    const indeterminate = !enablePagination
       ? getIsSomeRowsSelected()
       : getIsSomePageRowsSelected()
     const onChange = !enablePagination
       ? getToggleAllRowsSelectedHandler()
       : getToggleAllPageRowsSelectedHandler()
 
-    if (isDisabled) tabIndex = -1
+    if (disabled) tabIndex = -1
 
     return (
       <Center>
         <Checkbox
-          ref={isDisabled ? undefined : ref}
-          isChecked={isAllChecked || isChecked}
-          isDisabled={isDisabled}
+          ref={disabled ? undefined : ref}
+          checked={allChecked || checked}
+          disabled={disabled}
           tabIndex={tabIndex}
           inputProps={{ "aria-label": "Select all row" }}
-          {...(!isAllChecked ? { isIndeterminate } : {})}
+          {...(!allChecked ? { indeterminate } : {})}
           {...{ gap: 0, ...rest }}
           onChange={handlerAll(rest.onChange, onChange)}
         />
@@ -107,22 +107,22 @@ export const TableCheckbox = forwardRef(
   ) => {
     const uuid = useId()
     const { getCanSelect, getIsSelected, getToggleSelectedHandler, index } = row
-    const isChecked = getIsSelected()
-    const isDisabled = !getCanSelect()
+    const checked = getIsSelected()
+    const disabled = !getCanSelect()
 
     let ariaLabelledby = uuid
 
     if (rowHeader) ariaLabelledby += ` ${index}_${rowHeader.toString()}`
 
-    if (isDisabled) tabIndex = -1
+    if (disabled) tabIndex = -1
 
     return (
       <Center>
         <Checkbox
           id={uuid}
-          ref={isDisabled ? undefined : ref}
-          isChecked={isChecked}
-          isDisabled={isDisabled}
+          ref={disabled ? undefined : ref}
+          checked={checked}
+          disabled={disabled}
           tabIndex={tabIndex}
           inputProps={{
             "aria-label": "Select row",

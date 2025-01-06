@@ -6,20 +6,30 @@ import { addons } from "@storybook/preview-api"
 import { themes } from "@storybook/theming"
 import { UIProvider, useColorMode, VStack } from "@yamada-ui/react"
 import { useEffect, useState } from "react"
-import { DARK_MODE_EVENT_NAME, useDarkMode } from "storybook-dark-mode"
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
 import { A11Y_RULES } from "./constant"
 import { customThemes } from "./themes"
 
 const channel = addons.getChannel()
 
-const App: FC<PropsWithChildren> = ({ children }) => {
-  const { changeColorMode } = useColorMode()
-  const darkMode = useDarkMode()
-  const colorMode = darkMode ? "dark" : "light"
+const useDarkMode = (callback?: (darkMode: boolean) => void) => {
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    changeColorMode(colorMode)
-  }, [colorMode])
+    channel.on(DARK_MODE_EVENT_NAME, callback ?? setDarkMode)
+
+    return () => channel.off(DARK_MODE_EVENT_NAME, callback ?? setDarkMode)
+  }, [channel, setDarkMode])
+
+  return darkMode
+}
+
+const App: FC<PropsWithChildren> = ({ children }) => {
+  const { changeColorMode } = useColorMode()
+
+  useDarkMode((darkMode) => {
+    changeColorMode(darkMode ? "dark" : "light")
+  })
 
   return (
     <VStack align="start" p="md">
@@ -40,16 +50,10 @@ export const preview: Preview = {
         theme,
         ...rest
       }: PropsWithChildren<DocsContainerProps>) => {
-        const [darkMode, setDarkMode] = useState(false)
+        const darkMode = useDarkMode()
         const colorMode = darkMode ? "dark" : "light"
 
         theme = themes[colorMode]
-
-        useEffect(() => {
-          channel.on(DARK_MODE_EVENT_NAME, setDarkMode)
-
-          return () => channel.off(DARK_MODE_EVENT_NAME, setDarkMode)
-        }, [channel, setDarkMode])
 
         return (
           <DocsContainer theme={theme} {...rest}>

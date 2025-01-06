@@ -80,6 +80,14 @@ tab: Props
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="contextmenu-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -137,6 +145,7 @@ tab: Props
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -145,6 +154,17 @@ tab: Props
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
+/>
+
+<PropsCard
+  id="contextmenu-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -152,7 +172,7 @@ tab: Props
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -198,6 +218,13 @@ tab: Props
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="contextmenu-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
 />
 
 <PropsCard
@@ -317,6 +344,14 @@ tab: Props
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="menu-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -374,6 +409,7 @@ tab: Props
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -382,6 +418,17 @@ tab: Props
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
+/>
+
+<PropsCard
+  id="menu-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -389,7 +436,7 @@ tab: Props
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -435,6 +482,13 @@ tab: Props
   name="onOpen"
   type="() => void"
   description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="menu-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
 />
 
 <PropsCard
@@ -561,6 +615,22 @@ tab: Props
 />
 
 <PropsCard
+  id="menuitem-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the menu item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuitem-focusable"
+  name="focusable"
+  type="boolean"
+  description={"If `true`, the menu item will be focusable."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="menuitem-icon"
   name="icon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
@@ -572,6 +642,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the menu item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -580,16 +651,41 @@ tab: Props
   name="isFocusable"
   type="boolean"
   description={"If `true`, the menu item will be focusable."}
+  deprecated={"Use `focusable` instead."}
   defaultValue={"false"}
 />
 
 ### MenuOptionItemProps
 
 <PropsCard
+  id="menuoptionitem-checked"
+  name="checked"
+  type="boolean"
+  description={"If `true`, the checkbox or radio will be checked."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="menuoptionitem-closeonselect"
   name="closeOnSelect"
   type="boolean"
   description={"If `true`, the list element will be closed when selected."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuoptionitem-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the menu item will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="menuoptionitem-focusable"
+  name="focusable"
+  type="boolean"
+  description={"If `true`, the menu item will be focusable."}
   defaultValue={"false"}
 />
 
@@ -605,6 +701,7 @@ tab: Props
   name="isChecked"
   type="boolean"
   description={"If `true`, the checkbox or radio will be checked."}
+  deprecated={"Use `checked` instead."}
   defaultValue={"false"}
 />
 
@@ -613,6 +710,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the menu item will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -621,6 +719,7 @@ tab: Props
   name="isFocusable"
   type="boolean"
   description={"If `true`, the menu item will be focusable."}
+  deprecated={"Use `focusable` instead."}
   defaultValue={"false"}
 />
 

@@ -142,6 +142,8 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     polarGridProps,
   })
 
+  const radialChart = tooltipDataSource === "segment"
+
   const labelLists = useMemo(
     () =>
       labelListProps.map((_, index) => (
@@ -207,10 +209,8 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
                 content={({ payload }) => (
                   <ChartTooltip
                     className="ui-radial-chart__tooltip"
-                    isRadialChart={
-                      tooltipDataSource === "segment" ? true : false
-                    }
-                    payload={tooltipDataSource === "segment" ? payload : data}
+                    payload={radialChart ? payload : data}
+                    radialChart={radialChart}
                     unit={unit}
                     valueFormatter={valueFormatter}
                     {...computedTooltipProps}

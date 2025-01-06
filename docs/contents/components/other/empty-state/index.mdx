@@ -59,24 +59,17 @@ Alternatively, you can also omit child elements by using `title`, `indicator`, `
 
 ```tsx
 <VStack>
-  <EmptyState
-    size="sm"
-    description="Explore our products and add items to your cart"
-    indicator={<ShoppingCartIcon />}
-    title="Your cart is empty"
-  />
-  <EmptyState
-    size="md"
-    description="Explore our products and add items to your cart"
-    indicator={<ShoppingCartIcon />}
-    title="Your cart is empty"
-  />
-  <EmptyState
-    size="lg"
-    description="Explore our products and add items to your cart"
-    indicator={<ShoppingCartIcon />}
-    title="Your cart is empty"
-  />
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <EmptyState
+        key={index}
+        size={size}
+        description="Explore our products and add items to your cart"
+        indicator={<ShoppingCartIcon />}
+        title="Your cart is empty"
+      />
+    )}
+  </For>
 </VStack>
 ```
 

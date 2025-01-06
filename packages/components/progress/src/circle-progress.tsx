@@ -104,14 +104,14 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       "CircleProgress",
       props,
     )
-    let {
+    const {
       className,
       boxSize = size,
       children,
       color = "primary",
-      fullRounded,
-      isAnimation = false,
       isRounded,
+      fullRounded = isRounded,
+      isAnimation = false,
       max = 100,
       min = 0,
       speed = ["1.4s", "2s"],
@@ -120,14 +120,9 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       value = 0,
       ...rest
     } = omitThemeProps(mergedProps)
-
-    fullRounded ??= isRounded
-
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
-
     const interval = !isAnimation ? percent * 2.64 : undefined
-
     const animation = useAnimation({
       duration: typeof speed[0] === "string" ? speed[0] : `${speed[0]}s`,
       iterationCount: "infinite",
@@ -147,7 +142,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       },
       timingFunction: "linear",
     })
-
     const css: CSSUIObject = {
       ...styles,
       fontSize: "$boxSize",
@@ -156,7 +150,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         { name: "thickness", token: "sizes", value: thickness },
       ],
     }
-
     const circleProps: CircleProgressCircleProps = isAnimation
       ? {
           animation,
@@ -169,7 +162,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
           transitionProperty: "stroke-dasharray, stroke",
           transitionTimingFunction: "ease",
         }
-
     const ariaProps: HTMLUIProps = !isAnimation
       ? {
           "aria-valuemax": max,

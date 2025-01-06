@@ -44,6 +44,18 @@ interface MenuItemOptions {
    */
   command?: string
   /**
+   * If `true`, the menu item will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * If `true`, the menu item will be focusable.
+   *
+   * @default false
+   */
+  focusable?: boolean
+  /**
    * The menu item icon to use.
    */
   icon?: ReactElement
@@ -51,12 +63,16 @@ interface MenuItemOptions {
    * If `true`, the menu item will be disabled.
    *
    * @default false
+   *
+   * @deprecated Use `disabled` instead.
    */
   isDisabled?: boolean
   /**
    * If `true`, the menu item will be focusable.
    *
    * @default false
+   *
+   * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
 }
@@ -71,9 +87,11 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       children,
       closeOnSelect: customCloseOnSelect,
       command,
-      icon,
       isDisabled,
+      disabled = isDisabled,
       isFocusable,
+      focusable = isFocusable,
+      icon,
       ...props
     },
     ref,
@@ -81,9 +99,9 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
     const {
       closeOnSelect,
       focusedIndex,
-      isNested,
-      isOpen,
       menuRef,
+      nested,
+      open,
       requestAnimationFrameId,
       setFocusedIndex,
       styles,
@@ -91,39 +109,49 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       onUpstreamClose,
     } = useMenu()
     const { onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
-    const [isDownstreamOpen, setDownstreamOpen] = useState<boolean>(false)
+    const [downstreamOpen, setDownstreamOpen] = useState<boolean>(false)
     const uuid = useId()
     const itemRef = useRef<HTMLDivElement>(null)
     const hasDownstreamRef = useRef<boolean>(false)
     const onKeyDownRef = useRef<KeyboardEventHandler<HTMLDivElement>>(
       () => void 0,
     )
-
-    id ??= uuid
-
-    const trulyDisabled = isDisabled && !isFocusable
+    const trulyDisabled = disabled && !focusable
     const type = itemRef.current?.getAttribute("type")
     const role = !!type
       ? type === "checkbox"
         ? "menuitemcheckbox"
         : "menuitemradio"
       : "menuitem"
-
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
+    const focused = index === focusedIndex
+    const css: CSSUIObject = {
+      alignItems: "center",
+      color: "inherit",
+      display: "flex",
+      flex: "0 0 auto",
+      gap: "0.75rem",
+      outline: 0,
+      textAlign: "start",
+      textDecoration: "none",
+      userSelect: "none",
+      width: "100%",
+      ...styles.item,
+    }
 
-    const isFocused = index === focusedIndex
+    id ??= uuid
 
     const onMouseOver = useCallback(() => {
-      if (isDisabled) return
+      if (disabled) return
 
       setFocusedIndex(index)
-    }, [index, isDisabled, setFocusedIndex])
+    }, [index, disabled, setFocusedIndex])
 
     const onMouseLeave = useCallback(() => {
-      if (isDisabled) return
+      if (disabled) return
 
       setFocusedIndex(-1)
-    }, [setFocusedIndex, isDisabled])
+    }, [setFocusedIndex, disabled])
 
     const onClick = useCallback(
       (ev: MouseEvent<HTMLDivElement>) => {
@@ -154,7 +182,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
         if (ev.key === " ") ev.key = ev.code
 
         const actions: { [key: string]: Function | undefined } = {
-          ArrowLeft: isNested
+          ArrowLeft: nested
             ? funcAll(onUpstreamRestoreFocus, onClose)
             : undefined,
           Space: !hasDownstreamRef.current
@@ -171,7 +199,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
 
         action()
       },
-      [isNested, onUpstreamRestoreFocus, onClose, onUpstreamClose],
+      [nested, onUpstreamRestoreFocus, onClose, onUpstreamClose],
     )
 
     const rest = useClickable<HTMLDivElement>({
@@ -179,8 +207,8 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       focusOnClick: false,
       ...props,
       ref: mergeRefs(register, itemRef, ref),
-      isDisabled,
-      isFocusable,
+      disabled,
+      focusable,
       onClick: handlerAll(props.onClick, onClick),
       onFocus: handlerAll(props.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onKeyDownRef.current),
@@ -189,11 +217,11 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
     })
 
     useUpdateEffect(() => {
-      if (!isOpen) return
+      if (!open) return
 
       const id = requestAnimationFrameId.current
 
-      if (isFocused && !trulyDisabled && itemRef.current) {
+      if (focused && !trulyDisabled && itemRef.current) {
         if (id) cancelAnimationFrame(id)
 
         requestAnimationFrameId.current = requestAnimationFrame(() => {
@@ -208,7 +236,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       return () => {
         if (id) cancelAnimationFrame(id)
       }
-    }, [isFocused, trulyDisabled, menuRef, isOpen])
+    }, [focused, trulyDisabled, menuRef, open])
 
     children =
       icon || command ? (
@@ -216,20 +244,6 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       ) : (
         children
       )
-
-    const css: CSSUIObject = {
-      alignItems: "center",
-      color: "inherit",
-      display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      textAlign: "start",
-      textDecoration: "none",
-      userSelect: "none",
-      width: "100%",
-      ...styles.item,
-    }
 
     return (
       <UpstreamMenuItemProvider
@@ -243,11 +257,11 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
         <ui.div
           id={id}
           className={cx("ui-menu__item", className)}
-          data-focus={dataAttr(isDownstreamOpen)}
+          data-focus={dataAttr(downstreamOpen)}
           __css={css}
           {...rest}
           role={role}
-          tabIndex={!isDownstreamOpen && isFocused ? 0 : -1}
+          tabIndex={!downstreamOpen && focused ? 0 : -1}
         >
           {icon ? <MenuIcon>{icon}</MenuIcon> : null}
           {children}
@@ -267,6 +281,12 @@ interface MenuOptionItemOptions {
    */
   type?: "checkbox" | "radio"
   /**
+   * If `true`, the checkbox or radio will be checked.
+   *
+   * @default false
+   */
+  checked?: boolean
+  /**
    * The menu option item icon to use.
    */
   icon?: null | ReactElement
@@ -274,6 +294,8 @@ interface MenuOptionItemOptions {
    * If `true`, the checkbox or radio will be checked.
    *
    * @default false
+   *
+   * @deprecated Use `checked` instead.
    */
   isChecked?: boolean
   /**
@@ -288,21 +310,27 @@ export interface MenuOptionItemProps
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
-    { className, children, closeOnSelect = false, icon, isChecked, ...rest },
+    {
+      className,
+      isChecked,
+      checked = isChecked,
+      children,
+      closeOnSelect = false,
+      icon,
+      ...rest
+    },
     ref,
   ) => {
     return (
       <MenuItem
         ref={ref}
         className={cx("ui-menu__item--option", className)}
-        aria-checked={isChecked}
+        aria-checked={checked}
         closeOnSelect={closeOnSelect}
         {...rest}
       >
         {icon !== null ? (
-          <MenuIcon opacity={isChecked ? 1 : 0}>
-            {icon || <CheckIcon />}
-          </MenuIcon>
+          <MenuIcon opacity={checked ? 1 : 0}>{icon || <CheckIcon />}</MenuIcon>
         ) : null}
         {children}
       </MenuItem>

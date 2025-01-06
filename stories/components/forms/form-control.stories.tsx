@@ -19,7 +19,7 @@ export default meta
 
 export const basic: Story = () => {
   return (
-    <FormControl label="Email address">
+    <FormControl label="Email address" replace>
       <Input type="email" placeholder="your email address" />
     </FormControl>
   )
@@ -40,7 +40,7 @@ export const withErrorMessage: Story = () => {
   return (
     <FormControl
       errorMessage="Email is required."
-      isInvalid
+      invalid
       label="Email address"
     >
       <Input type="email" placeholder="your email address" />
@@ -48,15 +48,15 @@ export const withErrorMessage: Story = () => {
   )
 }
 
-export const isReplace: Story = () => {
+export const Replace: Story = () => {
   return (
     <>
       <FormControl
         errorMessage="Email is required."
         helperMessage="We'll never share your email."
-        isInvalid
-        isReplace
+        invalid
         label="Email address"
+        replace
       >
         <Input type="email" placeholder="your email address" />
       </FormControl>
@@ -64,9 +64,9 @@ export const isReplace: Story = () => {
       <FormControl
         errorMessage="Email is required."
         helperMessage="We'll never share your email."
-        isInvalid
-        isReplace={false}
+        invalid
         label="Email address"
+        replace={false}
       >
         <Input type="email" placeholder="your email address" />
       </FormControl>
@@ -74,12 +74,25 @@ export const isReplace: Story = () => {
   )
 }
 
-export const isRequired: Story = () => {
+export const Required: Story = () => {
   return (
     <FormControl
       errorMessage="Email is required."
       helperMessage="We'll never share your email."
-      isRequired
+      label="Email address"
+      required
+    >
+      <Input type="email" placeholder="your email address" />
+    </FormControl>
+  )
+}
+
+export const disabled: Story = () => {
+  return (
+    <FormControl
+      disabled
+      errorMessage="Email is required."
+      helperMessage="We'll never share your email."
       label="Email address"
     >
       <Input type="email" placeholder="your email address" />
@@ -87,26 +100,13 @@ export const isRequired: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const readonly: Story = () => {
   return (
     <FormControl
       errorMessage="Email is required."
       helperMessage="We'll never share your email."
-      isDisabled
       label="Email address"
-    >
-      <Input type="email" placeholder="your email address" />
-    </FormControl>
-  )
-}
-
-export const isReadonly: Story = () => {
-  return (
-    <FormControl
-      errorMessage="Email is required."
-      helperMessage="We'll never share your email."
-      isReadOnly
-      label="Email address"
+      readOnly
     >
       <Input type="email" placeholder="your email address" />
     </FormControl>
@@ -135,7 +135,7 @@ export const customHelperMessage: Story = () => {
 
 export const customErrorMessage: Story = () => {
   return (
-    <FormControl isInvalid label="Email address">
+    <FormControl invalid label="Email address">
       <Input type="email" placeholder="your email address" />
       <ErrorMessage color="gray.300">Email is required.</ErrorMessage>
     </FormControl>
@@ -146,8 +146,8 @@ export const customRequiredIndicator: Story = () => {
   return (
     <>
       <FormControl
-        isRequired
         label="Email address"
+        required
         requiredIndicator={
           <Tag colorScheme="red" size="sm" ms={2}>
             required
@@ -157,7 +157,7 @@ export const customRequiredIndicator: Story = () => {
         <Input type="email" placeholder="your email address" />
       </FormControl>
 
-      <FormControl isRequired>
+      <FormControl required>
         <Label
           requiredIndicator={
             <Tag colorScheme="red" size="sm" ms={2}>

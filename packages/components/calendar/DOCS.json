@@ -392,6 +392,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -399,6 +400,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -409,6 +415,12 @@
     "defaultValue": {
       "type": "Date",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "disableOutsideDays": {
@@ -493,6 +505,12 @@
       "description": "Props for date picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -503,42 +521,54 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
@@ -622,6 +652,11 @@
       "description": "Callback fired when the popover opens.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -653,7 +688,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -661,6 +696,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -839,6 +886,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -846,6 +894,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -857,6 +910,12 @@
     "defaultValue": {
       "type": "Date",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "duration": {
@@ -914,6 +973,12 @@
       "description": "Props for month picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -924,42 +989,54 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
@@ -1033,6 +1110,11 @@
       "description": "Callback fired when the popover opens.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -1058,7 +1140,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -1066,6 +1148,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {
@@ -1243,6 +1337,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -1250,6 +1345,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -1260,6 +1360,12 @@
     "defaultValue": {
       "type": "Date[]",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "disableOutsideDays": {
@@ -1344,6 +1450,12 @@
       "description": "Props for date picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -1354,35 +1466,41 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
       "required": false
     },
@@ -1392,10 +1510,16 @@
       "description": "If `true`, keep the placeholder.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
+      "required": false
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
@@ -1479,6 +1603,11 @@
       "description": "Callback fired when the popover opens.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -1510,7 +1639,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -1518,6 +1647,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {
@@ -1656,6 +1797,12 @@
       "description": "Variant for the calendar component.",
       "required": false
     },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "If `true`, display the month picker clear icon.",
+      "required": false
+    },
     "clearIconProps": {
       "type": "DatePickerIconProps",
       "description": "Props for date picker clear icon element.",
@@ -1709,6 +1856,7 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
@@ -1716,6 +1864,11 @@
       "type": "Date",
       "defaultValue": "'new Date()'",
       "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultType": {
@@ -1726,6 +1879,12 @@
     "defaultValue": {
       "type": "[(Date | undefined)?, (Date | undefined)?]",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "disableOutsideDays": {
@@ -1815,51 +1974,70 @@
       "required": false,
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
+      "deprecated": "Use `clearable` instead.",
       "description": "If `true`, display the date picker clear icon.",
       "required": false
     },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
@@ -1943,6 +2121,11 @@
       "description": "Callback fired when the popover opens.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -1974,7 +2157,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -1982,6 +2165,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "separator": {
@@ -2176,12 +2371,24 @@
     },
     "defaultIsOpen": {
       "type": "boolean",
+      "deprecated": "Use `defaultOpen` instead",
+      "description": "If `true`, the popover will be initially opened.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
       "description": "If `true`, the popover will be initially opened.",
       "required": false
     },
     "defaultValue": {
       "type": "Date",
       "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "duration": {
@@ -2239,6 +2446,12 @@
       "description": "Props for year picker input element.",
       "required": false
     },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be invalid.",
+      "required": false
+    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -2249,42 +2462,54 @@
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `disabled` instead.",
       "description": "If `true`, the form control will be disabled.",
       "required": false
     },
     "isInvalid": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `invalid` instead.",
       "description": "If `true`, the form control will be invalid.",
       "required": false
     },
     "isLazy": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `lazy` instead",
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "isOpen": {
       "type": "boolean",
+      "deprecated": "Use `open` instead",
       "description": "If `true`, the popover will be opened.",
       "required": false
     },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `readOnly` instead.",
       "description": "If `true`, the form control will be readonly.",
       "required": false
     },
     "isRequired": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `required` instead.",
       "description": "If `true`, the form control will be required.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open.",
       "required": false
     },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
-      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
+      "description": "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open.",
       "required": false
     },
     "locale": {
@@ -2336,6 +2561,11 @@
       "description": "Callback fired when the popover opens.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the popover will be opened.",
+      "required": false
+    },
     "openDelay": {
       "type": "number",
       "defaultValue": "200",
@@ -2361,7 +2591,7 @@
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
-      "defaultValue": "'{ isDisabled: true }'",
+      "defaultValue": "'{ disabled: true }'",
       "description": "Props to be forwarded to the portal component.",
       "required": false
     },
@@ -2369,6 +2599,18 @@
       "type": "boolean",
       "defaultValue": true,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, the form control will be required.",
       "required": false
     },
     "size": {

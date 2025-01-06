@@ -46,9 +46,9 @@ export interface InputProps
  */
 export const Input = forwardRef<InputProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Input", props)
-  let { className, htmlSize, __css, ...rest } = omitThemeProps(mergedProps)
-
-  rest = useFormControlProps(rest)
+  const computedProps = omitThemeProps(mergedProps)
+  const { className, htmlSize, __css, ...rest } =
+    useFormControlProps(computedProps)
 
   const css: CSSUIObject = { ...styles.field, ...__css }
 

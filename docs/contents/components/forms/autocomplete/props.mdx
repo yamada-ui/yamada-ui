@@ -115,6 +115,14 @@ tab: Props
   name="defaultIsOpen"
   type="boolean"
   description={"If `true`, the popover will be initially opened."}
+  deprecated={"Use `defaultOpen` instead"}
+/>
+
+<PropsCard
+  id="autocomplete-defaultopen"
+  name="defaultOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
 />
 
 <PropsCard
@@ -122,6 +130,14 @@ tab: Props
   name="defaultValue"
   type="string"
   description={"The initial value of the autocomplete."}
+/>
+
+<PropsCard
+  id="autocomplete-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -245,10 +261,19 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="autocomplete-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -257,6 +282,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -267,6 +293,7 @@ tab: Props
   description={
     "If `true`, the PopoverContent rendering will be deferred until the popover is open."
   }
+  deprecated={"Use `lazy` instead"}
   defaultValue={"false"}
 />
 
@@ -275,6 +302,7 @@ tab: Props
   name="isOpen"
   type="boolean"
   description={"If `true`, the popover will be opened."}
+  deprecated={"Use `open` instead"}
 />
 
 <PropsCard
@@ -282,6 +310,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -290,6 +319,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -301,11 +331,21 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-lazy"
+  name="lazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="autocomplete-lazybehavior"
   name="lazyBehavior"
   type="LazyMode"
   description={
-    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    "The lazy behavior of popover's content when not visible. Only works when `lazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
   }
   defaultValue={"'unmount'"}
 />
@@ -385,6 +425,13 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-open"
+  name="open"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
+/>
+
+<PropsCard
   id="autocomplete-opendelay"
   name="openDelay"
   type="number"
@@ -412,7 +459,7 @@ tab: Props
   name="portalProps"
   type='Omit<PortalProps, "children">'
   description={"Props to be forwarded to the portal component."}
-  defaultValue={"'{ isDisabled: true }'"}
+  defaultValue={"'{ disabled: true }'"}
 />
 
 <PropsCard
@@ -423,6 +470,22 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
+/>
+
+<PropsCard
+  id="autocomplete-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="autocomplete-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

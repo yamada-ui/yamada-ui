@@ -116,10 +116,19 @@ tab: Props
 />
 
 <PropsCard
+  id="numberinput-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="numberinput-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -128,6 +137,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -136,6 +146,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -144,6 +155,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -152,6 +164,7 @@ tab: Props
   name="isStepper"
   type="boolean"
   description={"If `true`, display the addon for the number input."}
+  deprecated={"Use `stepper` instead."}
 />
 
 <PropsCard
@@ -159,7 +172,7 @@ tab: Props
   name="isValidCharacter"
   type="(value: string) => boolean"
   description={
-    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+-.]$/."
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
   }
 />
 
@@ -240,6 +253,13 @@ tab: Props
 />
 
 <PropsCard
+  id="numberinput-stepper"
+  name="stepper"
+  type="boolean"
+  description={"If `true`, display the addon for the number input."}
+/>
+
+<PropsCard
   id="numberinput-value"
   name="value"
   type="string | number"
@@ -285,7 +305,12 @@ tab: Props
   }
 />
 
-<PropsCard id="usenumberinput-disabled" name="disabled" type="boolean" />
+<PropsCard
+  id="usenumberinput-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+/>
 
 <PropsCard
   id="usenumberinput-focusinputonchange"
@@ -336,10 +361,19 @@ tab: Props
 />
 
 <PropsCard
+  id="usenumberinput-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="usenumberinput-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -348,6 +382,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -356,6 +391,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -364,6 +400,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -372,7 +409,7 @@ tab: Props
   name="isValidCharacter"
   type="(value: string) => boolean"
   description={
-    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+-.]$/."
+    "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\-.]$/."
   }
 />
 
@@ -465,9 +502,19 @@ tab: Props
   description={"The number of decimal points used to round the value."}
 />
 
-<PropsCard id="usenumberinput-readonly" name="readOnly" type="boolean" />
+<PropsCard
+  id="usenumberinput-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+/>
 
-<PropsCard id="usenumberinput-required" name="required" type="boolean" />
+<PropsCard
+  id="usenumberinput-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+/>
 
 <PropsCard
   id="usenumberinput-step"

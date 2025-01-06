@@ -68,21 +68,19 @@ export interface TagProps
  */
 export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Tag", props)
-  let {
+  const {
     className,
     children,
-    disabled,
-    endIcon,
     isDisabled,
-    leftIcon,
+    disabled = isDisabled,
     rightIcon,
-    startIcon,
+    endIcon = rightIcon,
+    leftIcon,
+    startIcon = leftIcon,
     closeButtonProps,
     onClose,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  disabled ??= isDisabled
 
   const css: CSSUIObject = {
     alignItems: "center",
@@ -102,13 +100,13 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {startIcon ?? leftIcon}
+      {startIcon}
 
       <ui.span lineClamp={1} __css={styles.label}>
         {children}
       </ui.span>
 
-      {endIcon ?? rightIcon}
+      {endIcon}
 
       {onClose ? (
         <TagCloseButton

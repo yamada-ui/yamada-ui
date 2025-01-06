@@ -173,12 +173,12 @@ const getPlacementStyle = (
  */
 export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)
-  let {
+  const {
     className,
     children,
-    disabled,
-    inline = false,
     isDisabled,
+    disabled = isDisabled,
+    inline = false,
     label,
     offset = 0,
     overflowCount = 99,
@@ -204,11 +204,9 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     },
     timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
   })
-
-  disabled ??= isDisabled
   const numeric = typeof label === "number"
-
-  if (numeric && !showZero && (label as number) <= 0) disabled ??= true
+  const trulyDisabled =
+    disabled ?? (numeric && !showZero && (label as number) <= 0)
 
   const computedInline = useValue(inline)
   const computedPlacement = useValue(placement)
@@ -248,7 +246,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
       }}
       {...containerProps}
     >
-      {!disabled ? (
+      {!trulyDisabled ? (
         <ui.div
           ref={ref}
           className={cx("ui-indicator__icon", className)}

@@ -34,12 +34,12 @@ TableSortTextButton.displayName = "TableSortTextButton"
 TableSortTextButton.__ui__ = "TableSortTextButton"
 
 export interface TableSortIconProps extends IconProps {
-  isSorted: false | SortDirection
+  sorted: false | SortDirection
 }
 
 export const TableSortIcon: FC<TableSortIconProps> = ({
   className,
-  isSorted,
+  sorted,
   ...rest
 }) => {
   const styles = useTableStyles()
@@ -48,13 +48,13 @@ export const TableSortIcon: FC<TableSortIconProps> = ({
     position: "absolute",
     top: "50%",
     transform:
-      isSorted === "desc"
+      sorted === "desc"
         ? "translateY(-50%) rotate(180deg)"
         : "translateY(-50%)",
     ...styles.sortIcon,
   }
 
-  if (!isSorted) {
+  if (!sorted) {
     return (
       <Icon
         className={cx("ui-table__sort-icon", className)}

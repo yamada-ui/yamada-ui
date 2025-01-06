@@ -220,7 +220,7 @@ export const DataTable: FC<DataTableProps> = memo(
           rowsClickSelect={hasData}
           withPagingControl={hasData}
           cellProps={cellProps}
-          checkboxProps={{ isDisabled: !hasData }}
+          checkboxProps={{ disabled: !hasData }}
           headerProps={{ textTransform: "capitalize" }}
         />
       </TableContainer>
@@ -233,7 +233,7 @@ DataTable.displayName = "DataTable"
 const ControlMenu = memo(
   () => {
     return (
-      <Menu isLazy>
+      <Menu lazy>
         <MenuButton
           as={IconButton}
           size="sm"

@@ -59,12 +59,12 @@ export const Radio = forwardRef(
     const {
       className,
       children,
+      disabled = groupProps.disabled ?? control.disabled,
       gap = "0.5rem",
-      isDisabled = groupProps.isDisabled ?? control.isDisabled,
-      isInvalid = groupProps.isInvalid ?? control.isInvalid,
-      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
-      isRequired = groupProps.isRequired ?? control.isRequired,
+      invalid = groupProps.invalid ?? control.invalid,
       label,
+      readOnly = groupProps.readOnly ?? control.readOnly,
+      required = groupProps.required ?? control.required,
       iconProps,
       inputProps,
       labelProps,
@@ -93,10 +93,10 @@ export const Radio = forwardRef(
     } = useRadio({
       ...computedProps,
       checked: checkedProp,
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      disabled,
+      invalid,
+      readOnly,
+      required,
       onChange,
     })
 

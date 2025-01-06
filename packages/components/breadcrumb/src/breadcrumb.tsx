@@ -160,20 +160,16 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
       let hiddenEllipsis: BreadcrumbGenerateItem[] = []
 
       return items.map((item, index) => {
-        let {
+        const {
           name,
-          currentPage,
-          ellipsisPage,
           isCurrentPage,
+          currentPage = isCurrentPage,
           isEllipsisPage,
+          ellipsisPage = isEllipsisPage,
           containerProps,
           ...rest
         } = item
         const lastChild = items.length === index + 1
-
-        currentPage ??= isCurrentPage
-        ellipsisPage ??= isEllipsisPage
-
         const props: BreadcrumbItemProps = {
           currentPage,
           gap,
@@ -306,11 +302,11 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     {
       className,
       children,
-      currentPage,
-      gap,
       isCurrentPage,
+      currentPage = isCurrentPage,
+      gap,
       isLastChild,
-      lastChild,
+      lastChild = isLastChild,
       separator,
       separatorProps,
       ...rest
@@ -318,12 +314,7 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
     ref,
   ) => {
     const { styles, separatorProps: groupSeparatorProps } = useBreadcrumb()
-
-    currentPage ??= isCurrentPage
-    lastChild ??= isLastChild
-
     const validChildren = getValidChildren(children)
-
     const cloneChildren = validChildren.map((child) => {
       if (child.type === BreadcrumbLink) {
         return cloneElement(child, {
@@ -397,10 +388,18 @@ export interface BreadcrumbLinkProps
     BreadcrumbLinkOptions {}
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
-  ({ href, className, children, currentPage, isCurrentPage, ...rest }, ref) => {
+  (
+    {
+      href,
+      className,
+      children,
+      isCurrentPage,
+      currentPage = isCurrentPage,
+      ...rest
+    },
+    ref,
+  ) => {
     const { styles } = useBreadcrumb()
-
-    currentPage ??= isCurrentPage
 
     return (
       <ui.a
@@ -424,7 +423,7 @@ interface BreadcrumbSeparatorOptions {
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
-  gap?: CSSUIObject["mx"]
+  gap?: CSSUIProps["mx"]
 }
 
 export interface BreadcrumbSeparatorProps
@@ -434,7 +433,6 @@ export interface BreadcrumbSeparatorProps
 export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   ({ children, gap: mx, ...rest }, ref) => {
     const { styles } = useBreadcrumb()
-
     const css: CSSUIObject = {
       mx,
       ...styles.separator,
@@ -465,7 +463,6 @@ export interface BreadcrumbEllipsisProps
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
   ({ className, children, ...rest }, ref) => {
     const { styles } = useBreadcrumb()
-
     const css: CSSUIObject = {
       ...styles.ellipsis,
     }

@@ -1065,7 +1065,7 @@ describe("<Autocomplete />", () => {
         </Autocomplete>,
       )
 
-      expect(consoleWarnSpy).toHaveBeenCalledTimes(2)
+      expect(consoleWarnSpy).toHaveBeenCalledTimes(1)
 
       consoleWarnSpy.mockRestore()
     })

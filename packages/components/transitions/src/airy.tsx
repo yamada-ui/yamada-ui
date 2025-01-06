@@ -88,40 +88,36 @@ export interface AiryProps
  */
 export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Airy", props)
-  let {
+  const {
     className,
     defaultValue = "from",
     delay = 0,
-    disabled,
+    isDisabled,
+    disabled = isDisabled,
     duration = 0.2,
     from,
-    isDisabled,
     isReadOnly,
-    readOnly,
+    readOnly = isReadOnly,
     to,
     value: valueProp,
     onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  disabled ??= isDisabled
-  readOnly ??= isReadOnly
-
   const [vars, { opacity }] = useCreateVars(
     { opacity: 1, ...styles, ...rest },
     ["opacity"],
     { transform: true },
   )
-
   const animate = useMotionAnimation()
-
   const [value, setValue] = useControllableState<AiryIdent>({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
-
-  const isFrom = value === "from"
+  const css: CSSUIObject = {
+    vars,
+    ...styles,
+  }
 
   const onClick = useCallback(async () => {
     if (readOnly) return
@@ -132,11 +128,6 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
 
     await animate.start({ opacity, transition: { duration } })
   }, [animate, setValue, readOnly, opacity, duration, delay])
-
-  const css: CSSUIObject = {
-    vars,
-    ...styles,
-  }
 
   return (
     <motion.button
@@ -153,7 +144,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {isFrom ? from : to}
+      {value === "from" ? from : to}
     </motion.button>
   )
 })

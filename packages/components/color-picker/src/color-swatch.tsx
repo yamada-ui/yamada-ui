@@ -16,7 +16,7 @@ const defaultOverlays = (
   background: CSSUIProps["color"],
   withShadow: boolean,
 ): HTMLUIProps[] => {
-  let overlays: HTMLUIProps[] = [
+  const overlays: HTMLUIProps[] = [
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
@@ -39,12 +39,9 @@ const defaultOverlays = (
   ]
 
   if (withShadow)
-    overlays = [
-      ...overlays,
-      {
-        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
-      },
-    ]
+    overlays.push({
+      boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+    })
 
   return overlays
 }
@@ -94,19 +91,16 @@ export interface ColorSwatchProps
  */
 export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("ColorSwatch", props)
-  let {
+  const {
     className,
     color = "#ffffff00",
-    fullRounded,
     isRounded,
+    fullRounded = isRounded,
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  fullRounded ??= isRounded
-
   const css: CSSUIObject = {
     "& > *": {
       alignItems: "center",

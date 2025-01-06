@@ -13,7 +13,7 @@ import {
 import { useAnimation } from "@yamada-ui/use-animation"
 import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
+import { cx, getValidChildren, useMounted } from "@yamada-ui/utils"
 
 interface SkeletonOptions {
   /**
@@ -77,30 +77,28 @@ export interface SkeletonProps
  * @see Docs https://yamada-ui.com/components/feedback/skeleton
  */
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("Skeleton", props)
-  let {
+  const [styles, { children, ...mergedProps }] = useComponentStyle(
+    "Skeleton",
+    props,
+  )
+  const validChildren = getValidChildren(children)
+  const hasChildren = !!validChildren.length
+  const {
     className,
-    children,
     endColor: _endColor,
     fadeDuration = 0.4,
-    fitContent,
-    isFitContent,
+    isFitContent = hasChildren,
+    fitContent = isFitContent,
     isLoaded,
-    loaded,
+    loaded = isLoaded,
     speed = 0.8,
     startColor: _startColor,
     ...rest
   } = omitThemeProps(mergedProps)
-  const [isMounted] = useIsMounted()
-  const validChildren = getValidChildren(children)
+  const [mounted] = useMounted()
   const prevIsLoaded = usePrevious(isLoaded)
   const startColor = useValue(_startColor)
   const endColor = useValue(_endColor)
-  const hasChildren = !!validChildren.length
-
-  fitContent ??= isFitContent
-  loaded ??= isLoaded
-  fitContent ??= hasChildren
 
   const fadeIn = useAnimation({
     duration:
@@ -149,7 +147,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   }
 
   if (loaded) {
-    const animation = !isMounted() || prevIsLoaded ? "none" : fadeIn
+    const animation = !mounted() || prevIsLoaded ? "none" : fadeIn
 
     return (
       <ui.div

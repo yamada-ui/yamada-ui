@@ -23,14 +23,15 @@ export const Tab = forwardRef<TabProps, "button">(
       children,
       clickOnEnter,
       clickOnSpace,
-      disabled,
-      focusable,
       isDisabled,
+      disabled = isDisabled,
       isFocusable,
+      focusable = isFocusable,
       ...rest
     },
     ref,
   ) => {
+    const uuid = useId()
     const {
       disableRipple,
       manual,
@@ -40,17 +41,21 @@ export const Tab = forwardRef<TabProps, "button">(
       setSelectedIndex,
       styles,
     } = useTabsContext()
-    const uuid = useId()
-
-    disabled ??= isDisabled
-    focusable ??= isFocusable
-
     const { index, register } = useTabDescendant({
       disabled: disabled && !focusable,
     })
     const { descendants } = useTabPanelDescendant()
     const tabpanelId = descendants.value(index)?.node.id
     const isSelected = index === selectedIndex
+    const css: CSSUIObject = {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "center",
+      outline: "0",
+      overflow: "hidden",
+      position: "relative",
+      ...styles.tab,
+    }
 
     id ??= uuid
 
@@ -79,16 +84,6 @@ export const Tab = forwardRef<TabProps, "button">(
       ...clickableProps,
       disabled: disableRipple || disabled,
     })
-
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      outline: "0",
-      overflow: "hidden",
-      position: "relative",
-      ...styles.tab,
-    }
 
     return (
       <ui.button

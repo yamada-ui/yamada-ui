@@ -21,11 +21,11 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "div">(
       footer,
       header,
       maxW,
-      maxWidth,
+      maxWidth = maxW,
       minW,
-      minWidth,
+      minWidth = minW,
       w,
-      width,
+      width = w,
       contentProps,
       ...rest
     },
@@ -34,12 +34,9 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "div">(
     const { styles } = useAutocompleteContext()
     const { getContainerProps, getListProps } = useAutocompleteList()
 
-    width ??= w
     width ??= (styles.list?.width ?? styles.list?.w) as CSSUIProps["width"]
-    minWidth ??= minW
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
-    maxWidth ??= maxW
     maxWidth ??= (styles.list?.maxWidth ??
       styles.list?.maxW) as CSSUIProps["maxWidth"]
 
@@ -50,31 +47,25 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "div">(
         maxWidth={maxWidth}
         minWidth={minWidth}
         width={width}
-        __css={{ ...styles.content, maxWidth, minWidth, width }}
+        __css={styles.content}
         {...getContainerProps(contentProps)}
       >
         {header ? (
-          <ui.header
-            className="ui-autocomplete__header"
-            __css={{ ...styles.header }}
-          >
+          <ui.header className="ui-autocomplete__header" __css={styles.header}>
             {header}
           </ui.header>
         ) : null}
 
         <ui.div
           className={cx("ui-autocomplete__list", className)}
-          __css={{ ...styles.list }}
+          __css={styles.list}
           {...getListProps(rest, ref)}
         >
           {children}
         </ui.div>
 
         {footer ? (
-          <ui.footer
-            className="ui-autocomplete__footer"
-            __css={{ ...styles.footer }}
-          >
+          <ui.footer className="ui-autocomplete__footer" __css={styles.footer}>
             {footer}
           </ui.footer>
         ) : null}

@@ -44,7 +44,7 @@ interface CheckboxOptions {
 }
 
 export interface CheckboxProps<Y extends number | string = string>
-  extends Omit<Merge<HTMLUIProps<"label">, UseCheckboxProps<Y>>, "checked">,
+  extends Merge<HTMLUIProps<"label">, UseCheckboxProps<Y>>,
     ThemeProps<"Checkbox">,
     CheckboxOptions {}
 
@@ -68,22 +68,24 @@ export const Checkbox = forwardRef(
     const {
       className,
       children,
+      disabled = groupProps.disabled ?? control.disabled,
       gap = "0.5rem",
-      isDisabled = groupProps.isDisabled ?? control.isDisabled,
-      isInvalid = groupProps.isInvalid ?? control.isInvalid,
-      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
-      isRequired = groupProps.isRequired ?? control.isRequired,
+      invalid = groupProps.invalid ?? control.invalid,
       label,
+      readOnly = groupProps.readOnly ?? control.readOnly,
+      required = groupProps.required ?? control.required,
       iconProps,
       inputProps,
       labelProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const isCheckedProp =
+    computedProps.checked ??= computedProps.isChecked
+
+    const checkedProp =
       groupValue && computedProps.value
         ? groupValue.includes(computedProps.value)
-        : computedProps.isChecked
+        : computedProps.checked
     const onChange =
       groupProps.onChange && computedProps.value
         ? funcAll(groupProps.onChange, computedProps.onChange)
@@ -99,22 +101,27 @@ export const Checkbox = forwardRef(
       getLabelProps,
     } = useCheckbox({
       ...computedProps,
-      isChecked: isCheckedProp,
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      checked: checkedProp,
+      disabled,
+      invalid,
+      readOnly,
+      required,
       onChange,
     })
 
     const { children: customIcon, ...resolvedIconProps } = { ...iconProps }
     const icon = cloneElement(customIcon ?? <CheckboxIcon />, {
       checked,
+      disabled,
       indeterminate,
-      isDisabled,
-      isInvalid,
-      isReadOnly,
-      isRequired,
+      invalid,
+      isDisabled: disabled,
+      isIndeterminate: indeterminate,
+      isInvalid: invalid,
+      isReadOnly: readOnly,
+      isRequired: required,
+      readOnly,
+      required,
       __css: {
         opacity: checked || indeterminate ? 1 : 0,
         transform: checked || indeterminate ? "scale(1)" : "scale(0.95)",
@@ -208,19 +215,20 @@ export type CheckboxIconProps = {
   MotionProps<"svg">
 
 export const CheckboxIcon: FC<CheckboxIconProps> = ({
-  checked,
-  indeterminate,
   isChecked,
-  isDisabled: _isDisabled,
+  checked = isChecked,
+  disabled: _disabled,
   isIndeterminate,
+  indeterminate = isIndeterminate,
+  invalid: _invalid,
+  isDisabled: _isDisabled,
   isInvalid: _isInvalid,
   isReadOnly: _isReadOnly,
   isRequired: _isRequired,
+  readOnly: _readOnly,
+  required: _required,
   ...rest
 }) => {
-  checked ??= isChecked
-  indeterminate ??= isIndeterminate
-
   return (
     <AnimatePresence initial={false}>
       {indeterminate || checked ? (

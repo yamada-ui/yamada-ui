@@ -105,7 +105,7 @@ export interface DropzoneProps
  */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Dropzone", props)
-  let {
+  const {
     id,
     name,
     className,
@@ -113,7 +113,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     autoFocus,
     children,
     isLoading,
-    loading,
+    loading = isLoading,
     maxFiles,
     maxSize,
     multiple,
@@ -137,16 +137,11 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     ...rest
   } = useFormControlProps(omitThemeProps(mergedProps))
   const labelledbyId = useId()
-
-  loading ??= isLoading
-
   const disabled = loading || rest.disabled || rest.readOnly
-
   const [
     { "aria-readonly": ariaReadOnly, ...formControlProps },
     containerProps,
   ] = splitObject(rest, formControlProperties)
-
   const {
     isDragAccept: dragAccept,
     isDragReject: dragReject,
@@ -177,11 +172,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     onFileDialogCancel,
     onFileDialogOpen,
   })
-
-  assignRef(openRef, open)
-
   const dragIdle = !dragAccept && !dragReject
-
   const css: CSSUIObject = {
     alignItems: "center",
     display: "flex",
@@ -189,6 +180,8 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
     position: "relative",
     ...styles.container,
   }
+
+  assignRef(openRef, open)
 
   return (
     <DropzoneProvider

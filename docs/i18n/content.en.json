@@ -10577,7 +10577,7 @@
   },
   {
     "type": "page",
-    "description": "`Motion` is a convenient component that extends the Yamada UI style system to `framer-motion`.",
+    "description": "`Motion` is a convenient component that extends the Yamada UI style system to `motion`.",
     "hierarchy": { "lv1": "Motion" },
     "slug": "/components/other/motion",
     "title": "Motion"

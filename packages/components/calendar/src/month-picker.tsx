@@ -73,7 +73,7 @@ interface MonthPickerOptions {
   /**
    * Props to be forwarded to the portal component.
    *
-   * @default '{ isDisabled: true }'
+   * @default '{ disabled: true }'
    *
    */
   portalProps?: Omit<PortalProps, "children">
@@ -91,26 +91,25 @@ export interface MonthPickerProps
  */
 export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MonthPicker", props)
-  let {
+  const {
     className,
     children,
-    clearable,
+    isClearable = true,
+    clearable = isClearable,
     color,
     h,
-    height,
-    isClearable = true,
+    height = h,
     minH,
-    minHeight,
+    minHeight = minH,
     clearIconProps,
     containerProps,
     contentProps,
     fieldProps,
     iconProps,
     inputProps,
-    portalProps = { isDisabled: true },
+    portalProps = { disabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
-
   const {
     value,
     getCalendarProps,
@@ -121,11 +120,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useMonthPicker(computedProps)
-
-  clearable ??= isClearable
-  h ??= height
-  minH ??= minHeight
-
   const css: CSSUIObject = {
     color,
     h: "fit-content",
@@ -147,7 +141,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
           >
             <DatePickerField
               className="ui-month-picker__field"
-              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
+              {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 

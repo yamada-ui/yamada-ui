@@ -1,5 +1,18 @@
 # @yamada-ui/dropzone
 
+## 1.1.3
+
+### Patch Changes
+
+- [`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the source code.
+
+- Updated dependencies [[`42ac197`](https://github.com/yamada-ui/yamada-ui/commit/42ac1976beb55f68272e7f2e021e28955f6b8a71), [`e9a055c`](https://github.com/yamada-ui/yamada-ui/commit/e9a055ca92d1e883737c83e1dae01c37ecca3840), [`87c0cee`](https://github.com/yamada-ui/yamada-ui/commit/87c0ceeb800576f24add598cc225c4c3464cad46), [`c4ec7cf`](https://github.com/yamada-ui/yamada-ui/commit/c4ec7cf1956de49385a28ae421fa437da2d30feb)]:
+  - @yamada-ui/form-control@2.1.11
+  - @yamada-ui/transitions@1.1.15
+  - @yamada-ui/utils@1.6.2
+  - @yamada-ui/core@1.16.2
+  - @yamada-ui/loading@1.1.28
+
 ## 1.1.2
 
 ### Patch Changes

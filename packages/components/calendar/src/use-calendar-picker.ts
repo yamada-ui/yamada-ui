@@ -139,7 +139,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 ) => {
   const { locale: defaultLocale } = useI18n()
   const { theme } = useTheme()
-  let {
+  const themeLocale = theme.__config?.date?.locale
+  const {
     type,
     allowInput = true,
     allowInputBeyond = false,
@@ -156,6 +157,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     dateFormat,
     defaultIsOpen,
     defaultMonth,
+    defaultOpen,
     defaultType,
     defaultValue,
     disableOutsideDays,
@@ -171,9 +173,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     holidays,
     inputFormat = "YYYY/MM/DD",
     isLazy,
-    isOpen: isOpenProp,
+    isOpen,
     lazyBehavior,
-    locale,
+    locale = themeLocale ?? defaultLocale,
     matchWidth,
     maxDate,
     maxSelectValues,
@@ -183,6 +185,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     month,
     monthFormat,
     offset,
+    open: openProp,
     openDelay,
     paginateBy,
     parseDate,
@@ -217,21 +220,20 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
   const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
   const {
-    isOpen: open,
+    open,
     onClose,
     onOpen: onInternalOpen,
   } = useDisclosure({
     defaultIsOpen,
-    isOpen: isOpenProp,
+    defaultOpen,
+    isOpen,
+    open: openProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-
   const { disabled, readOnly } = formControlProps
-
-  locale ??= theme.__config?.date?.locale ?? defaultLocale
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {

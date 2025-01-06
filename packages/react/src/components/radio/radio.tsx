@@ -71,8 +71,6 @@ export const Radio = forwardRef(
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    computedProps.checked ??= computedProps.isChecked
-
     const checkedProp =
       groupValue && computedProps.value
         ? groupValue === computedProps.value

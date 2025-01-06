@@ -1,4 +1,3 @@
-import type { CSSUIObject } from "../../core"
 import type { CloseButtonProps } from "../close-button"
 import { forwardRef } from "../../core"
 import { cx, handlerAll } from "../../utils"
@@ -11,11 +10,6 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
   ({ onClick, ...rest }, ref) => {
     const { id, styles, onClose } = usePopover()
 
-    const css: CSSUIObject = {
-      position: "absolute",
-      ...styles.closeButton,
-    }
-
     return (
       <CloseButton
         ref={ref}
@@ -27,7 +21,7 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
           ev.stopPropagation()
           onClose?.()
         })}
-        __css={css}
+        __css={styles.closeButton}
         {...rest}
       />
     )

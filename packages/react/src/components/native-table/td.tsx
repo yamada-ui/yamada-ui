@@ -8,14 +8,6 @@ interface TdOptions {
    * Aligns the cell content to the right.
    *
    * @default false
-   *
-   * @deprecated Use `numeric` instead.
-   */
-  isNumeric?: boolean
-  /**
-   * Aligns the cell content to the right.
-   *
-   * @default false
    */
   numeric?: boolean
 }
@@ -23,7 +15,7 @@ interface TdOptions {
 export interface TdProps extends HTMLUIProps<"td">, TdOptions {}
 
 export const Td = forwardRef<TdProps, "td">(
-  ({ className, isNumeric, numeric = isNumeric, ...rest }, ref) => {
+  ({ className, numeric, ...rest }, ref) => {
     const styles = useTableStyles()
 
     const css: CSSUIObject = { ...styles.td }

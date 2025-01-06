@@ -37,7 +37,7 @@ export const Basic: Story = () => {
         <MenuItem>Undo</MenuItem>
         <MenuItem>Redo</MenuItem>
         <MenuSeparator />
-        <MenuItem isDisabled>Cut</MenuItem>
+        <MenuItem disabled>Cut</MenuItem>
         <MenuItem>Copy</MenuItem>
         <MenuItem>Paste</MenuItem>
       </MenuList>

@@ -5,11 +5,7 @@ import type {
   ReactElement,
   RefAttributes,
 } from "react"
-import type {
-  ComponentArgs,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
+import type { ComponentArgs, HTMLUIProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { ReorderItemProps } from "./reorder-item"
 import { Reorder as OriginalReorder } from "motion/react"

@@ -12,24 +12,8 @@ interface UsePasswordInputOptions {
    * Determines whether the password input is visible by default.
    *
    * @default false
-   *
-   * @deprecated Use `defaultVisible` instead.
-   */
-  defaultIsVisible?: boolean
-  /**
-   * Determines whether the password input is visible by default.
-   *
-   * @default false
    */
   defaultVisible?: boolean
-  /**
-   * Determines the visibility of the password input.
-   *
-   * @default false
-   *
-   * @deprecated Use `visible` instead.
-   */
-  isVisible?: boolean
   /**
    * Determines the visibility of the password input.
    *
@@ -52,10 +36,8 @@ export interface UsePasswordInputProps
 
 export const usePasswordInput = (props: UsePasswordInputProps) => {
   const {
-    defaultIsVisible,
-    defaultVisible = defaultIsVisible,
-    isVisible,
-    visible: visibleProp = isVisible,
+    defaultVisible,
+    visible: visibleProp,
     onVisibleChange,
     ...rest
   } = useFormControlProps(props)

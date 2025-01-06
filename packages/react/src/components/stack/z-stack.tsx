@@ -154,14 +154,14 @@ export const ZStack: FC<ZStackProps> = ({
   useEffect(() => {
     if (!fit) return
 
-    let isNegativeLeft = direction.includes("left")
-    let isNegativeTop = direction.includes("top")
+    let negativeLeft = direction.includes("left")
+    let negativeTop = direction.includes("top")
     let width = 0
     let height = 0
 
     if (reverse) {
-      isNegativeLeft = !isNegativeLeft
-      isNegativeTop = !isNegativeTop
+      negativeLeft = !negativeLeft
+      negativeTop = !negativeTop
     }
 
     for (const ref of refMap.current.values()) {
@@ -172,14 +172,14 @@ export const ZStack: FC<ZStackProps> = ({
 
       if (!offsetParent && process.env.NODE_ENV !== "test") continue
 
-      if (isNegativeLeft) {
+      if (negativeLeft) {
         const offsetParentWidth =
           (offsetParent as HTMLDivElement | null)?.offsetWidth ?? 0
 
         offsetLeft = offsetParentWidth - offsetLeft - offsetWidth
       }
 
-      if (isNegativeTop) {
+      if (negativeTop) {
         const offsetParentHeight =
           (offsetParent as HTMLDivElement | null)?.offsetHeight ?? 0
 

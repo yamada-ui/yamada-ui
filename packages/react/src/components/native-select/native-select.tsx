@@ -23,7 +23,7 @@ import {
   splitObject,
 } from "../../utils"
 import { formControlProperties, useFormControlProps } from "../form-control"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon } from "../icon"
 
 interface NativeSelectBaseItem
   extends Omit<
@@ -235,7 +235,7 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
       __css={styles.icon}
       {...rest}
     >
-      {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+      {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
     </ui.div>
   )
 }

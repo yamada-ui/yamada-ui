@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
 import type { UseInfiniteScrollProps } from "../../hooks/use-infinite-scroll"
-import { useMemo, useRef } from "react"
+import { useRef } from "react"
 import {
   forwardRef,
   omitThemeProps,
@@ -57,16 +57,14 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
     const {
       className,
       children,
-      isDisabled,
-      disabled = isDisabled,
+      disabled,
       finish: finishProp,
       indexRef,
       initialLoad,
-      isReverse,
       loading,
       orientation,
       resetRef,
-      reverse = isReverse,
+      reverse,
       rootMargin,
       rootRef: rootRefProp,
       startIndex,
@@ -81,8 +79,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       disabled,
       indexRef,
       initialLoad,
-      isDisabled,
-      isReverse,
       orientation,
       resetRef,
       reverse,
@@ -92,16 +88,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       threshold,
       onLoad,
     })
-    const css: CSSUIObject = useMemo(
-      () => ({
-        display: "flex",
-        flexDirection: vertical ? "column" : "row",
-        gap: "1rem",
-        w: "100%",
-        ...styles.container,
-      }),
-      [vertical, styles],
-    )
     const hasFinish = !!finishProp
     const showTrigger = !disabled && (hasFinish || !finish)
 
@@ -112,7 +98,10 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
           className={cx("ui-infinite-scroll-area", className)}
           aria-busy="false"
           role="feed"
-          __css={css}
+          __css={{
+            flexDirection: vertical ? "column" : "row",
+            ...styles.container,
+          }}
           {...rest}
         >
           {reverse && showTrigger ? (
@@ -142,23 +131,12 @@ interface InfiniteScrollTriggerProps extends HTMLUIProps {}
 const InfiniteScrollTrigger = forwardRef<InfiniteScrollTriggerProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useInfiniteScrollAreaContext()
-    const css: CSSUIObject = useMemo(
-      () => ({
-        alignItems: "center",
-        display: "flex",
-        flex: 1,
-        justifyContent: "center",
-        w: "100%",
-        ...styles.trigger,
-      }),
-      [styles],
-    )
 
     return (
       <ui.div
         ref={ref}
         className={cx("ui-infinite-scroll-area__trigger", className)}
-        __css={css}
+        __css={styles.trigger}
         {...rest}
       />
     )

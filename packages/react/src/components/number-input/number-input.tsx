@@ -36,7 +36,7 @@ import {
   useUpdateEffect,
 } from "../../utils"
 import { formControlProperties, useFormControlProps } from "../form-control"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon, ChevronUpIcon } from "../icon"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
@@ -45,10 +45,10 @@ const isValidNumericKeyboardEvent = (
   { key, altKey, ctrlKey, metaKey }: KeyboardEvent,
   isValid: (key: string) => boolean,
 ) => {
-  const isModifierKey = ctrlKey || altKey || metaKey
-  const isSingleCharacterKey = key.length === 1
+  const modifierKey = ctrlKey || altKey || metaKey
+  const singleCharacterKey = key.length === 1
 
-  if (!isSingleCharacterKey || isModifierKey) return true
+  if (!singleCharacterKey || modifierKey) return true
 
   return isValid(key)
 }
@@ -335,10 +335,10 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     ],
   )
 
-  const { down, isSpinning, stop, up } = useSpinner(increment, decrement)
+  const { down, spinning, stop, up } = useSpinner(increment, decrement)
 
-  useAttributeObserver(incrementRef, ["disabled"], isSpinning, stop)
-  useAttributeObserver(decrementRef, ["disabled"], isSpinning, stop)
+  useAttributeObserver(incrementRef, ["disabled"], spinning, stop)
+  useAttributeObserver(decrementRef, ["disabled"], spinning, stop)
 
   const focusInput = useCallback(() => {
     if (focusInputOnChange)
@@ -538,18 +538,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   return {
     disabled,
     focused,
-    /**
-     * @deprecated Use `disabled` instead.
-     */
-    isDisabled: disabled,
-    /**
-     * @deprecated Use `readOnly` instead.
-     */
-    isReadOnly: readOnly,
-    /**
-     * @deprecated Use `required` instead.
-     */
-    isRequired: required,
     props: rest,
     readOnly,
     required,
@@ -570,9 +558,9 @@ const DELAY = 300
 type Action = "decrement" | "increment"
 
 const useSpinner = (increment: Function, decrement: Function) => {
-  const [isSpinning, setIsSpinning] = useState(false)
+  const [spinning, setSpinning] = useState(false)
   const [action, setAction] = useState<Action | null>(null)
-  const [isOnce, setIsOnce] = useState(true)
+  const [once, setOnce] = useState(true)
   const timeoutRef = useRef<any>(null)
 
   const removeTimeout = () => clearTimeout(timeoutRef.current)
@@ -583,32 +571,32 @@ const useSpinner = (increment: Function, decrement: Function) => {
 
       if (action === "decrement") decrement()
     },
-    isSpinning ? INTERVAL : null,
+    spinning ? INTERVAL : null,
   )
 
   const up = useCallback(() => {
-    if (isOnce) increment()
+    if (once) increment()
 
     timeoutRef.current = setTimeout(() => {
-      setIsOnce(false)
-      setIsSpinning(true)
+      setOnce(false)
+      setSpinning(true)
       setAction("increment")
     }, DELAY)
-  }, [increment, isOnce])
+  }, [increment, once])
 
   const down = useCallback(() => {
-    if (isOnce) decrement()
+    if (once) decrement()
 
     timeoutRef.current = setTimeout(() => {
-      setIsOnce(false)
-      setIsSpinning(true)
+      setOnce(false)
+      setSpinning(true)
       setAction("decrement")
     }, DELAY)
-  }, [decrement, isOnce])
+  }, [decrement, once])
 
   const stop = useCallback(() => {
-    setIsOnce(true)
-    setIsSpinning(false)
+    setOnce(true)
+    setSpinning(false)
     removeTimeout()
   }, [])
 
@@ -616,7 +604,7 @@ const useSpinner = (increment: Function, decrement: Function) => {
     return () => removeTimeout()
   }, [])
 
-  return { down, isSpinning, stop, up }
+  return { down, spinning, stop, up }
 }
 
 const useAttributeObserver = (
@@ -656,12 +644,6 @@ interface NumberInputOptions {
    * The border color when the input is focused.
    */
   focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * If `true`, display the addon for the number input.
-   *
-   * @deprecated Use `stepper` instead.
-   */
-  isStepper?: boolean
   /**
    * If `true`, display the addon for the number input.
    */
@@ -723,8 +705,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
     const [styles, mergedProps] = useComponentMultiStyle("NumberInput", props)
     const {
       className,
-      isStepper = true,
-      stepper = isStepper,
+      stepper = true,
       addonProps,
       containerProps,
       decrementProps,
@@ -737,11 +718,6 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       getIncrementProps,
       getInputProps,
     } = useNumberInput(computedProps)
-    const css: CSSUIObject = {
-      position: "relative",
-      zIndex: 0,
-      ...styles.container,
-    }
 
     return (
       <NumberInputContextProvider
@@ -750,7 +726,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
         <ui.div
           className={cx("ui-number-input", className)}
           role="group"
-          __css={css}
+          __css={styles.container}
           {...containerProps}
         >
           <NumberInputField {...getInputProps(rest, ref)} />
@@ -776,16 +752,11 @@ const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {
     const { styles } = useNumberInputContext()
 
-    const css: CSSUIObject = {
-      width: "100%",
-      ...styles.field,
-    }
-
     return (
       <ui.input
         ref={ref}
         className={cx("ui-number-input__field", className)}
-        __css={css}
+        __css={styles.field}
         {...rest}
       />
     )
@@ -801,24 +772,12 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles } = useNumberInputContext()
 
-    const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      height: "calc(100% - 2px)",
-      insetEnd: "0px",
-      margin: "1px",
-      position: "absolute",
-      top: "0",
-      zIndex: "fallback(yamcha, 1)",
-      ...styles.addon,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-number-input__addon", className)}
         aria-hidden
-        __css={css}
+        __css={styles.addon}
         {...rest}
       />
     )
@@ -858,7 +817,7 @@ const NumberIncrementStepper = forwardRef<
       {...getIncrementProps(rest, ref)}
       __css={css}
     >
-      {children ?? <ChevronIcon __css={{ transform: "rotate(180deg)" }} />}
+      {children ?? <ChevronUpIcon fontSize="sm" />}
     </Stepper>
   )
 })
@@ -882,7 +841,7 @@ const NumberDecrementStepper = forwardRef<
       {...getDecrementProps(rest, ref)}
       __css={css}
     >
-      {children ?? <ChevronIcon />}
+      {children ?? <ChevronDownIcon fontSize="sm" />}
     </Stepper>
   )
 })

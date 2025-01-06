@@ -47,14 +47,14 @@ export const InputGroup: FC<InputGroupProps> = (props) => {
   })
 
   const cloneChildren = validChildren.map((child) => {
-    const isAddonElement = [
+    const addonElement = [
       InputLeftAddon,
       InputRightAddon,
       InputLeftElement,
       InputRightElement,
     ].some((type) => child.type === type)
 
-    if (isAddonElement) {
+    if (addonElement) {
       return child
     } else {
       const childProps = filterUndefined({

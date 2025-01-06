@@ -6,11 +6,28 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
   Input,
   {
     baseStyle: {
+      addon: {
+        display: "flex",
+        flexDirection: "column",
+        height: "calc(100% - 2px)",
+        insetEnd: "0px",
+        margin: "1px",
+        position: "absolute",
+        top: "0",
+        zIndex: "yamcha",
+      },
+      container: {
+        position: "relative",
+        zIndex: 0,
+      },
       stepper: {
         borderColor: "inherit",
         borderStartWidth: "1px",
         borderStyle: "solid",
         color: ["blackAlpha.600", "whiteAlpha.700"],
+        field: {
+          width: "100%",
+        },
         _active: {
           bg: ["blackAlpha.200", "whiteAlpha.200"],
         },

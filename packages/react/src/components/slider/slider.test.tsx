@@ -58,13 +58,13 @@ describe("<Slider />", () => {
   })
 
   test("can be reversed", () => {
-    const { container } = render(<Slider isReversed />)
+    const { container } = render(<Slider reversed />)
     const filledTrack = container.querySelector(".ui-slider__track-filled")
     expect(filledTrack).toHaveStyle("right: 0%")
   })
 
   test("can be disabled", () => {
-    render(<Slider data-testid="slider" isDisabled />)
+    render(<Slider data-testid="slider" disabled />)
 
     const slider = screen.getByTestId("slider")
     const sliderInput = slider.getElementsByTagName("input")[0]
@@ -76,7 +76,7 @@ describe("<Slider />", () => {
   })
 
   test("Slider readOnly tests", () => {
-    const { rerender } = render(<Slider data-testid="slider1" isReadOnly />)
+    const { rerender } = render(<Slider data-testid="slider1" readOnly />)
 
     let slider = screen.getByTestId("slider1")
     let sliderInput = slider.getElementsByTagName("input")[0]
@@ -224,10 +224,10 @@ describe("<Slider />", () => {
         name: "test-slider",
         defaultValue: 50,
         focusThumbOnChange: true,
-        isReversed: false,
         max: 100,
         min: 0,
         orientation: "horizontal",
+        reversed: false,
         step: 1,
         onChange,
         onChangeEnd,
@@ -272,10 +272,10 @@ describe("<Slider />", () => {
         id="test-slider"
         name="test"
         defaultValue={50}
-        isReversed={false}
         max={100}
         min={0}
         orientation="horizontal"
+        reversed={false}
         step={1}
         onChange={onChange}
         onChangeEnd={onChangeEnd}

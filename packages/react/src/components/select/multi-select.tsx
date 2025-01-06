@@ -5,7 +5,7 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { PortalProps } from "../portal"
 import type { SelectIconProps } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -62,14 +62,6 @@ interface MultiSelectOptions {
    */
   header?: FC<{ value: string[] | undefined; onClose: () => void }> | ReactNode
   /**
-   * If `true`, display the multi select clear icon.
-   *
-   * @default true
-   *
-   * @deprecated Use `clearable` instead.
-   */
-  isClearable?: boolean
-  /**
    * The visual separator between each value.
    *
    * @default ','
@@ -117,8 +109,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   const {
     className,
-    isClearable = true,
-    clearable = isClearable,
+    clearable = true,
     closeOnSelect = false,
     color,
     component,
@@ -157,12 +148,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     defaultValue,
     placeholderInOptions: false,
   })
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
@@ -170,7 +155,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-multi-select", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
@@ -274,13 +262,13 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
         return (
           <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((value, index) => {
-              const isLast = label.length === index + 1
+              const last = label.length === index + 1
 
               return (
                 <ui.span
                   key={index}
                   dangerouslySetInnerHTML={{
-                    __html: `${value}${!isLast ? separator : ""}`,
+                    __html: `${value}${!last ? separator : ""}`,
                   }}
                   display="inline-block"
                   me="0.25rem"
@@ -301,20 +289,13 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       value,
     ])
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     if (label?.length && component) css.py = "0.125rem"
 
     return (
       <ui.div
         ref={ref}
         className={cx("ui-multi-select__field", className)}
-        __css={css}
+        __css={styles.field}
         {...rest}
       >
         {cloneChildren}

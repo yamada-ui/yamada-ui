@@ -27,14 +27,6 @@ interface IndicatorOptions {
    * */
   inline?: Token<boolean>
   /**
-   * If `true`, the indicator will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
    * The indicator label to use.
    */
   label?: ReactNode
@@ -171,8 +163,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const {
     className,
     children,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     inline = false,
     label,
     offset = 0,

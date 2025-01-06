@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { forwardRef, ui } from "../../core"
 import { cx, mergeRefs } from "../../utils"
 import { usePopover } from "./popover"
@@ -9,18 +9,11 @@ export const PopoverBody = forwardRef<PopoverBodyProps, "div">(
   ({ className, ...rest }, ref) => {
     const { bodyRef, styles } = usePopover()
 
-    const css: CSSUIObject = {
-      alignItems: "flex-start",
-      display: "flex",
-      flexDirection: "column",
-      ...styles.body,
-    }
-
     return (
       <ui.div
         ref={mergeRefs(bodyRef, ref)}
         className={cx("ui-popover__body", className)}
-        __css={css}
+        __css={styles.body}
         {...rest}
       />
     )

@@ -9,12 +9,12 @@ describe("<Collapse />", () => {
 
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse open={isOpen}>Collapse</Collapse>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <Collapse open={open}>Collapse</Collapse>
         </>
       )
     }
@@ -54,12 +54,12 @@ describe("<Collapse />", () => {
 
   test("height changes correctly after open set to true", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse endingHeight={200} open={isOpen} startingHeight={50}>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <Collapse endingHeight={200} open={open} startingHeight={50}>
             Collapse
           </Collapse>
         </>
@@ -78,12 +78,12 @@ describe("<Collapse />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <Collapse open={isOpen} unmountOnExit>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <Collapse open={open} unmountOnExit>
             Collapse
           </Collapse>
         </>

@@ -2,7 +2,10 @@ import type { ComponentMultiStyle } from "../../core"
 
 export const Stat: ComponentMultiStyle<"Stat"> = {
   baseStyle: {
-    container: {},
+    container: {
+      display: "flex",
+      flexDirection: "column",
+    },
     helperMessage: {
       color: "muted",
       fontSize: "sm",

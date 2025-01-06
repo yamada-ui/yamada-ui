@@ -1,5 +1,4 @@
 import type { ForwardedRef } from "react"
-import type { CSSUIObject } from "../../core"
 import type { UseResizableItemProps } from "./use-resizable"
 import { Panel } from "react-resizable-panels"
 import { forwardRef, ui } from "../../core"
@@ -50,8 +49,6 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
       ...rest,
     })
 
-    const css: CSSUIObject = { boxSize: "100%", ...styles.item }
-
     return (
       <UIPanel
         {...getPanelProps({
@@ -72,7 +69,7 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
       >
         <ui.div
           className={cx("ui-resizable__item", className)}
-          __css={css}
+          __css={styles.item}
           {...getItemProps({}, innerRef)}
         >
           {children}

@@ -1,10 +1,4 @@
-export {
-  ChevronIcon,
-  CloseIcon,
-  Icon,
-  IconPropsContext,
-  useIconPropsContext,
-} from "./icon"
+export { Icon, IconPropsContext, useIconPropsContext } from "./icon"
 export type { IconProps } from "./icon"
 export { LucideIcon } from "./lucide-icon"
 export type { LucideIconProps } from "./lucide-icon"

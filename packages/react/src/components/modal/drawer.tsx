@@ -44,12 +44,6 @@ interface DrawerOptions {
    */
   fullHeight?: boolean
   /**
-   * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
-   *
-   * @deprecated Use `fullHeight` instead.
-   */
-  isFullHeight?: boolean
-  /**
    * The placement of the drawer.
    *
    * @default 'right'
@@ -113,9 +107,8 @@ export const Drawer: FC<DrawerProps> = ({
     duration = { enter: 0.4, exit: 0.3 },
     finalFocusRef,
     initialFocusRef,
-    isOpen,
     lockFocusAcrossFrames,
-    open = isOpen,
+    open,
     restoreFocus,
     withCloseButton = !closeOnDrag,
     withDragBar = true,
@@ -128,7 +121,7 @@ export const Drawer: FC<DrawerProps> = ({
     onEsc,
     onOverlayClick,
     ...rest
-  } = omitThemeProps(mergedProps, ["isFullHeight"])
+  } = omitThemeProps(mergedProps, ["fullHeight"])
   const validChildren = getValidChildren(children)
   const [customDrawerOverlay, ...cloneChildren] = findChildren(
     validChildren,
@@ -148,7 +141,6 @@ export const Drawer: FC<DrawerProps> = ({
           duration,
           finalFocusRef,
           initialFocusRef,
-          isOpen,
           lockFocusAcrossFrames,
           open,
           restoreFocus,

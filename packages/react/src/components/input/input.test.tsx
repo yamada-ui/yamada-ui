@@ -53,7 +53,7 @@ describe("<Input />", () => {
   })
 
   test("Invalid input renders correctly", async () => {
-    render(<Input isInvalid />)
+    render(<Input invalid />)
 
     const input = await screen.findByRole("textbox")
     expect(input).toBeInvalid()
@@ -61,14 +61,14 @@ describe("<Input />", () => {
   })
 
   test("Disabled input renders correctly", async () => {
-    render(<Input isDisabled />)
+    render(<Input disabled />)
 
     const input = await screen.findByRole("textbox")
     expect(input).toBeDisabled()
   })
 
   test("Readonly input renders correctly", async () => {
-    render(<Input isReadOnly />)
+    render(<Input readOnly />)
 
     const input = await screen.findByRole("textbox")
     expect(input).toHaveAttribute("aria-readonly", "true")

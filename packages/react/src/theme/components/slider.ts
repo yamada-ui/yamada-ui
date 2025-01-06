@@ -20,7 +20,10 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       w: "inherit",
     }),
     mark: {
+      alignItems: "center",
+      display: "inline-flex",
       fontSize: "sm",
+      justifyContent: "center",
     },
     thumb: ({ colorMode: m, orientation: o, theme: t }) => ({
       alignItems: "center",

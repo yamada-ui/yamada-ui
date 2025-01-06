@@ -9,12 +9,12 @@ describe("<SlideFade />", () => {
 
   test("fade-in and fade-out work correctly", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade open={isOpen}>SlideFade</SlideFade>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <SlideFade open={open}>SlideFade</SlideFade>
         </>
       )
     }
@@ -34,12 +34,12 @@ describe("<SlideFade />", () => {
 
   test("fade-in and fade-out work correctly when `initial` is passed to an `initial` property", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade initial="initial" open={isOpen}>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <SlideFade initial="initial" open={open}>
             SlideFade
           </SlideFade>
         </>
@@ -91,12 +91,12 @@ describe("<SlideFade />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const [isOpen, setIsOpen] = useState(false)
+      const [open, setOpen] = useState(false)
 
       return (
         <>
-          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
-          <SlideFade open={isOpen} unmountOnExit>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <SlideFade open={open} unmountOnExit>
             SlideFade
           </SlideFade>
         </>

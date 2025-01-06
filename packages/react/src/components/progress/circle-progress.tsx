@@ -10,13 +10,6 @@ import { cx, valueToPercent } from "../../utils"
 
 interface CircleProgressOptions {
   /**
-   * The CSS `box-size` property.
-   *
-   * @default '6rem'
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
-  /**
    * The CSS `color` property.
    *
    * @default 'primary'
@@ -68,7 +61,7 @@ interface CircleProgressOptions {
 
 export interface CircleProgressProps
   extends Omit<HTMLUIProps, "color">,
-    Omit<ThemeProps<"CircleProgress">, "size">,
+    ThemeProps<"CircleProgress">,
     CircleProgressOptions {}
 
 /**
@@ -78,13 +71,10 @@ export interface CircleProgressProps
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (props, ref) => {
-    const [styles, { size = "6rem", ...mergedProps }] = useComponentStyle(
-      "CircleProgress",
-      props,
-    )
+    const [styles, mergedProps] = useComponentStyle("CircleProgress", props)
     const {
       className,
-      boxSize = size,
+      boxSize = "6rem",
       children,
       color = "primary",
       fullRounded,

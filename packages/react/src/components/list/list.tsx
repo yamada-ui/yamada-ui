@@ -55,22 +55,13 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
   const {
     className,
     children,
-    gap = "fallback(2, 0.5rem)",
+    gap = 2,
     stylePosition: listStylePosition,
     styleType: listStyleType = "none",
     ...rest
   } = omitThemeProps(mergedProps)
 
   const validChildren = getValidChildren(children)
-
-  const css: CSSUIObject = {
-    "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
-    display: "flex",
-    flexDirection: "column",
-    ...styles.container,
-    gap,
-    ms: listStyleType !== "none" ? "1.4em" : undefined,
-  }
 
   return (
     <ListProvider value={styles}>
@@ -80,7 +71,12 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
         listStylePosition={listStylePosition}
         listStyleType={listStyleType}
         role="list"
-        __css={css}
+        __css={{
+          "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
+          ...styles.container,
+          gap,
+          ms: listStyleType !== "none" ? "1.4em" : undefined,
+        }}
         {...rest}
       >
         {validChildren}

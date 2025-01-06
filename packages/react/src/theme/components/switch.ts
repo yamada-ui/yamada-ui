@@ -4,6 +4,11 @@ import { isGray, shadeColor } from "../../utils"
 export const Switch: ComponentMultiStyle<"Switch"> = {
   baseStyle: {
     container: {
+      alignItems: "center",
+      cursor: "pointer",
+      display: "inline-flex",
+      position: "relative",
+      verticalAlign: "top",
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -18,7 +23,12 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
       rounded: "inherit",
     },
     track: {
+      alignItems: "center",
       bg: ["blackAlpha.400", "whiteAlpha.300"],
+      boxSizing: "content-box",
+      display: "inline-flex",
+      flexShrink: 0,
+      justifyContent: "flex-start",
       rounded: "full",
       transitionDuration: "fast",
       transitionProperty: "common",

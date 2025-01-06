@@ -11,7 +11,7 @@ import {
   handlerAll,
   mergeRefs,
 } from "../../utils"
-import { ChevronIcon } from "../icon"
+import { ChevronDownIcon } from "../icon"
 import { PopoverTrigger } from "../popover"
 import { useMenu, useUpstreamMenuItem } from "./menu-context"
 import { MenuIcon } from "./menu-item"
@@ -138,7 +138,7 @@ export const MenuItemButton = forwardRef<MenuItemButtonProps, "button">(
         </ui.span>
 
         <MenuIcon {...iconProps}>
-          {icon ?? <ChevronIcon fontSize="1.5em" transform="rotate(-90deg)" />}
+          {icon ?? <ChevronDownIcon fontSize="1.5em" />}
         </MenuIcon>
       </MenuButton>
     )

@@ -297,7 +297,7 @@ export const WithDefaultValue: Story = () => {
   return <CheckboxCardGroup defaultValue={["ドラえもん"]} items={items} />
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   const items = useMemo<CheckboxCardItem[]>(
     () => [
       { label: "ドラえもん", value: "ドラえもん" },
@@ -317,7 +317,7 @@ export const IsDisabled: Story = () => {
           </CheckboxCardDescription>
         </CheckboxCard>
 
-        <CheckboxCard isDisabled value="ドラミ">
+        <CheckboxCard disabled value="ドラミ">
           <CheckboxCardLabel>ドラミ</CheckboxCardLabel>
           <CheckboxCardDescription>
             ドラえもんの妹のロボット。
@@ -332,16 +332,16 @@ export const IsDisabled: Story = () => {
         </CheckboxCard>
       </CheckboxCardGroup>
 
-      <CheckboxCardGroup isDisabled items={items} />
+      <CheckboxCardGroup disabled items={items} />
 
-      <Fieldset isDisabled legend="Which characters would you like to select?">
+      <Fieldset disabled legend="Which characters would you like to select?">
         <CheckboxCardGroup items={items} />
       </Fieldset>
     </>
   )
 }
 
-export const IsReadOnly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<CheckboxCardItem[]>(
     () => [
       { label: "ドラえもん", value: "ドラえもん" },
@@ -361,7 +361,7 @@ export const IsReadOnly: Story = () => {
           </CheckboxCardDescription>
         </CheckboxCard>
 
-        <CheckboxCard isReadOnly value="ドラミ">
+        <CheckboxCard readOnly value="ドラミ">
           <CheckboxCardLabel>ドラミ</CheckboxCardLabel>
           <CheckboxCardDescription>
             ドラえもんの妹のロボット。
@@ -376,16 +376,16 @@ export const IsReadOnly: Story = () => {
         </CheckboxCard>
       </CheckboxCardGroup>
 
-      <CheckboxCardGroup isReadOnly items={items} />
+      <CheckboxCardGroup items={items} readOnly />
 
-      <Fieldset isReadOnly legend="Which characters would you like to select?">
+      <Fieldset legend="Which characters would you like to select?" readOnly>
         <CheckboxCardGroup items={items} />
       </Fieldset>
     </>
   )
 }
 
-export const IsInvalid: Story = () => {
+export const Invalid: Story = () => {
   const items = useMemo<CheckboxCardItem[]>(
     () => [
       { label: "ドラえもん", value: "ドラえもん" },
@@ -398,7 +398,7 @@ export const IsInvalid: Story = () => {
   return (
     <>
       <CheckboxCardGroup defaultValue={["ドラえもん"]}>
-        <CheckboxCard isInvalid value="ドラえもん">
+        <CheckboxCard invalid value="ドラえもん">
           <CheckboxCardLabel>ドラえもん</CheckboxCardLabel>
           <CheckboxCardDescription>
             22世紀の未来から来たネコ型ロボット。
@@ -420,11 +420,11 @@ export const IsInvalid: Story = () => {
         </CheckboxCard>
       </CheckboxCardGroup>
 
-      <CheckboxCardGroup isInvalid items={items} />
+      <CheckboxCardGroup invalid items={items} />
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which characters would you like to select?"
       >
         <CheckboxCardGroup items={items} />

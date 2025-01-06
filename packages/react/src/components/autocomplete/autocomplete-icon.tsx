@@ -4,7 +4,7 @@ import { cloneElement, useRef } from "react"
 import { ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { cx, getValidChildren, isValidElement } from "../../utils"
-import { ChevronDownIcon, XIcon } from "../icon/icons"
+import { ChevronDownIcon, XIcon } from "../icon"
 import { useAutocompleteContext } from "./autocomplete-context"
 
 export interface AutocompleteIconProps extends HTMLUIProps {}

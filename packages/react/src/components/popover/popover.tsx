@@ -39,9 +39,7 @@ export type PopoverProperty = (typeof popoverProperties)[number]
 export const popoverProperties = [
   ...popperProperties,
   "open",
-  "isOpen",
   "defaultOpen",
-  "defaultIsOpen",
   "onOpen",
   "onClose",
   "initialFocusRef",
@@ -54,7 +52,6 @@ export const popoverProperties = [
   "openDelay",
   "closeDelay",
   "lazy",
-  "isLazy",
   "lazyBehavior",
   "animation",
   "duration",
@@ -111,12 +108,6 @@ interface PopoverOptions {
   closeOnEsc?: boolean
   /**
    * If `true`, the popover will be initially opened.
-   *
-   * @deprecated Use `defaultOpen` instead
-   */
-  defaultIsOpen?: boolean
-  /**
-   * If `true`, the popover will be initially opened.
    */
   defaultOpen?: boolean
   /**
@@ -127,20 +118,6 @@ interface PopoverOptions {
    * The `ref` of the element that should receive focus when the popover opens.
    */
   initialFocusRef?: RefObject<FocusableElement | null>
-  /**
-   * If `true`, the PopoverContent rendering will be deferred until the popover is open.
-   *
-   * @default false
-   *
-   * @deprecated Use `lazy` instead
-   */
-  isLazy?: boolean
-  /**
-   * If `true`, the popover will be opened.
-   *
-   * @deprecated Use `open` instead
-   */
-  isOpen?: boolean
   /**
    * If `true`, the PopoverContent rendering will be deferred until the popover is open.
    *
@@ -204,7 +181,7 @@ export interface PopoverProps
 interface PopoverContext
   extends Pick<
     PopoverOptions,
-    "animation" | "closeOnButton" | "duration" | "isOpen" | "onClose" | "open"
+    "animation" | "closeOnButton" | "duration" | "onClose" | "open"
   > {
   id: string
   bodyRef: RefObject<HTMLElement | null>
@@ -243,8 +220,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     closeOnEsc = true,
     duration,
     initialFocusRef,
-    isLazy,
-    lazy = isLazy,
+    lazy,
     lazyBehavior = "unmount",
     openDelay = 200,
     relatedRef,
@@ -304,8 +280,8 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   const shouldRenderContent = useLazyDisclosure({
     enabled: lazy,
-    isSelected: present,
     mode: lazyBehavior,
+    selected: present,
     wasSelected: hasBeenOpened.current,
   })
 

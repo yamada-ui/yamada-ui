@@ -8,8 +8,8 @@ export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
     body: {
       overflow: "auto",
     },
-    container: ({ isFullHeight, placement }) => ({
-      ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),
+    container: ({ fullHeight, placement }) => ({
+      ...(fullHeight ? { height: "100dvh", rounded: 0 } : {}),
       [`rounded${toPascalCase(placement)}`]: 0,
     }),
     dragBar: ({ placement }) => ({

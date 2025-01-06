@@ -11,7 +11,7 @@ describe("<Checkbox />", () => {
 
   test("should be checked", () => {
     render(
-      <Checkbox data-testid="Checkbox" defaultIsChecked>
+      <Checkbox data-testid="Checkbox" defaultChecked>
         Yes
       </Checkbox>,
     )
@@ -20,7 +20,7 @@ describe("<Checkbox />", () => {
 
   test("should be disabled", () => {
     render(
-      <Checkbox data-testid="Checkbox" isDisabled>
+      <Checkbox data-testid="Checkbox" disabled>
         Yes
       </Checkbox>,
     )
@@ -44,7 +44,7 @@ describe("<Checkbox />", () => {
 
   test("should be read only", () => {
     render(
-      <Checkbox data-testid="Checkbox" isReadOnly>
+      <Checkbox data-testid="Checkbox" readOnly>
         Yes
       </Checkbox>,
     )
@@ -58,7 +58,7 @@ describe("<Checkbox />", () => {
 
   test("should be invalid", () => {
     render(
-      <Checkbox data-testid="Checkbox" isInvalid value="No">
+      <Checkbox data-testid="Checkbox" invalid value="No">
         No
       </Checkbox>,
     )
@@ -106,23 +106,23 @@ describe("<Checkbox />", () => {
     const values = [false, true]
 
     const allChecked = values.every(Boolean)
-    const isIndeterminate = values.some(Boolean) && !allChecked
+    const indeterminate = values.some(Boolean) && !allChecked
 
     render(
       <>
         <Checkbox
           data-testid="Checkbox1"
-          isChecked={allChecked}
-          isIndeterminate={isIndeterminate}
+          checked={allChecked}
+          indeterminate={indeterminate}
         >
           Decision Tree
         </Checkbox>
 
-        <Checkbox data-testid="Checkbox2" isChecked={values[0]}>
+        <Checkbox data-testid="Checkbox2" checked={values[0]}>
           Yes
         </Checkbox>
 
-        <Checkbox data-testid="Checkbox3" isChecked={values[1]}>
+        <Checkbox data-testid="Checkbox3" checked={values[1]}>
           No
         </Checkbox>
       </>,
@@ -198,21 +198,12 @@ describe("<Checkbox />", () => {
     expect(result.current.value).toStrictEqual([])
   })
 
-  test("should return checked attribute when isNative is true", () => {
+  test("should return checked attribute", () => {
     const { result } = renderHook(() =>
-      useCheckboxGroup({ defaultValue: ["Yes"], isNative: true }),
+      useCheckboxGroup({ defaultValue: ["Yes"] }),
     )
     const props = result.current.getCheckboxProps({ value: "Yes" })
 
     expect(props.checked).toBeTruthy()
-  })
-
-  test("should return isChecked attribute when isNative is false", () => {
-    const { result } = renderHook(() =>
-      useCheckboxGroup({ defaultValue: ["Yes"], isNative: false }),
-    )
-    const props = result.current.getCheckboxProps({ value: "Yes" })
-
-    expect(props.isChecked).toBeTruthy()
   })
 })

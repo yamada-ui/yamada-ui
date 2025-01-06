@@ -13,7 +13,7 @@ import { useDrawer, useModal } from "./modal-context"
 
 export interface DrawerContentProps
   extends Merge<
-    Omit<DrawerProps, "isOpen" | "open" | "placement" | keyof ThemeProps>,
+    Omit<DrawerProps, "open" | "placement" | keyof ThemeProps>,
     Required<
       Pick<
         DrawerProps,
@@ -174,7 +174,7 @@ export const DrawerContent: FC<DrawerContentProps> = ({
       dragMomentum={false}
       dragSnapToOrigin
       duration={duration}
-      isOpen={open}
+      open={open}
       placement={placement}
       role="dialog"
       tabIndex={-1}

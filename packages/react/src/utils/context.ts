@@ -5,10 +5,15 @@ export type MaybeRenderProp<Y> =
   | ((props: Y) => React.ReactNode)
   | React.ReactNode
 
+function getErrorMessage(hookName: string, ContextName: string) {
+  return `${hookName} returned \`undefined\`. Seems you forgot to wrap component within ${ContextName}`
+}
+
 interface Options<Y = any> {
   name?: string
   defaultValue?: Y
   errorMessage?: string
+  hookName?: string
   strict?: boolean
 }
 
@@ -18,6 +23,7 @@ export function createContext<Y = any>(options: {
   name?: string
   defaultValue?: Y
   errorMessage?: string
+  hookName?: string
   strict?: true
 }): CreateContextReturn<Y>
 
@@ -25,13 +31,15 @@ export function createContext<Y = any>(options: {
   name?: string
   defaultValue?: Y
   errorMessage?: string
+  hookName?: string
   strict?: false
 }): CreateContextReturn<undefined | Y>
 
 export function createContext<Y = any>({
-  name,
+  name = "Context",
   defaultValue,
-  errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
+  errorMessage,
+  hookName = "useContext",
   strict = true,
 }: Options<Y> = {}) {
   const Context = React.createContext<undefined | Y>(defaultValue)
@@ -42,7 +50,7 @@ export function createContext<Y = any>({
     const context = use(Context)
 
     if (!context && strict) {
-      const error = new Error(errorMessage)
+      const error = new Error(errorMessage ?? getErrorMessage(hookName, name))
       error.name = "ContextError"
       Error.captureStackTrace(error, useContext)
       throw error

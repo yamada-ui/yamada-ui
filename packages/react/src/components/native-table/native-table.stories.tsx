@@ -35,7 +35,7 @@ export const Basic: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Thead>
 
@@ -43,27 +43,27 @@ export const Basic: Story = () => {
           <Tr>
             <Td>ドラゴンボール</Td>
             <Td>1986年2月26日 - 1989年4月19日</Td>
-            <Td isNumeric>全153話</Td>
+            <Td numeric>全153話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールZ</Td>
             <Td>1989年4月26日 - 1996年1月31日</Td>
-            <Td isNumeric>全291話 + スペシャル2話</Td>
+            <Td numeric>全291話 + スペシャル2話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールGT</Td>
             <Td>1996年2月7日 - 1997年11月19日</Td>
-            <Td isNumeric>全64話 + 番外編1話</Td>
+            <Td numeric>全64話 + 番外編1話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール改</Td>
             <Td>2009年4月5日 - 2015年6月28日</Td>
-            <Td isNumeric>全159話</Td>
+            <Td numeric>全159話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール超</Td>
             <Td>2015年7月5日 - 2018年3月25日</Td>
-            <Td isNumeric>全131話</Td>
+            <Td numeric>全131話</Td>
           </Tr>
         </Tbody>
 
@@ -71,7 +71,7 @@ export const Basic: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Tfoot>
       </NativeTable>
@@ -88,7 +88,7 @@ export const WithSize: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Thead>
 
@@ -96,27 +96,27 @@ export const WithSize: Story = () => {
             <Tr>
               <Td>ドラゴンボール</Td>
               <Td>1986年2月26日 - 1989年4月19日</Td>
-              <Td isNumeric>全153話</Td>
+              <Td numeric>全153話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールZ</Td>
               <Td>1989年4月26日 - 1996年1月31日</Td>
-              <Td isNumeric>全291話 + スペシャル2話</Td>
+              <Td numeric>全291話 + スペシャル2話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールGT</Td>
               <Td>1996年2月7日 - 1997年11月19日</Td>
-              <Td isNumeric>全64話 + 番外編1話</Td>
+              <Td numeric>全64話 + 番外編1話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール改</Td>
               <Td>2009年4月5日 - 2015年6月28日</Td>
-              <Td isNumeric>全159話</Td>
+              <Td numeric>全159話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール超</Td>
               <Td>2015年7月5日 - 2018年3月25日</Td>
-              <Td isNumeric>全131話</Td>
+              <Td numeric>全131話</Td>
             </Tr>
           </Tbody>
 
@@ -124,7 +124,7 @@ export const WithSize: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Tfoot>
         </NativeTable>
@@ -151,7 +151,7 @@ export const WithVariant: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Thead>
 
@@ -159,27 +159,27 @@ export const WithVariant: Story = () => {
             <Tr>
               <Td>ドラゴンボール</Td>
               <Td>1986年2月26日 - 1989年4月19日</Td>
-              <Td isNumeric>全153話</Td>
+              <Td numeric>全153話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールZ</Td>
               <Td>1989年4月26日 - 1996年1月31日</Td>
-              <Td isNumeric>全291話 + スペシャル2話</Td>
+              <Td numeric>全291話 + スペシャル2話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールGT</Td>
               <Td>1996年2月7日 - 1997年11月19日</Td>
-              <Td isNumeric>全64話 + 番外編1話</Td>
+              <Td numeric>全64話 + 番外編1話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール改</Td>
               <Td>2009年4月5日 - 2015年6月28日</Td>
-              <Td isNumeric>全159話</Td>
+              <Td numeric>全159話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール超</Td>
               <Td>2015年7月5日 - 2018年3月25日</Td>
-              <Td isNumeric>全131話</Td>
+              <Td numeric>全131話</Td>
             </Tr>
           </Tbody>
 
@@ -187,7 +187,7 @@ export const WithVariant: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Tfoot>
         </NativeTable>
@@ -212,7 +212,7 @@ export const WithColorScheme: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Thead>
 
@@ -220,27 +220,27 @@ export const WithColorScheme: Story = () => {
             <Tr>
               <Td>ドラゴンボール</Td>
               <Td>1986年2月26日 - 1989年4月19日</Td>
-              <Td isNumeric>全153話</Td>
+              <Td numeric>全153話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールZ</Td>
               <Td>1989年4月26日 - 1996年1月31日</Td>
-              <Td isNumeric>全291話 + スペシャル2話</Td>
+              <Td numeric>全291話 + スペシャル2話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールGT</Td>
               <Td>1996年2月7日 - 1997年11月19日</Td>
-              <Td isNumeric>全64話 + 番外編1話</Td>
+              <Td numeric>全64話 + 番外編1話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール改</Td>
               <Td>2009年4月5日 - 2015年6月28日</Td>
-              <Td isNumeric>全159話</Td>
+              <Td numeric>全159話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール超</Td>
               <Td>2015年7月5日 - 2018年3月25日</Td>
-              <Td isNumeric>全131話</Td>
+              <Td numeric>全131話</Td>
             </Tr>
           </Tbody>
 
@@ -248,7 +248,7 @@ export const WithColorScheme: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Tfoot>
         </NativeTable>
@@ -273,7 +273,7 @@ export const WithColumnBorders: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Thead>
 
@@ -281,27 +281,27 @@ export const WithColumnBorders: Story = () => {
           <Tr>
             <Td>ドラゴンボール</Td>
             <Td>1986年2月26日 - 1989年4月19日</Td>
-            <Td isNumeric>全153話</Td>
+            <Td numeric>全153話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールZ</Td>
             <Td>1989年4月26日 - 1996年1月31日</Td>
-            <Td isNumeric>全291話 + スペシャル2話</Td>
+            <Td numeric>全291話 + スペシャル2話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールGT</Td>
             <Td>1996年2月7日 - 1997年11月19日</Td>
-            <Td isNumeric>全64話 + 番外編1話</Td>
+            <Td numeric>全64話 + 番外編1話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール改</Td>
             <Td>2009年4月5日 - 2015年6月28日</Td>
-            <Td isNumeric>全159話</Td>
+            <Td numeric>全159話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール超</Td>
             <Td>2015年7月5日 - 2018年3月25日</Td>
-            <Td isNumeric>全131話</Td>
+            <Td numeric>全131話</Td>
           </Tr>
         </Tbody>
 
@@ -309,7 +309,7 @@ export const WithColumnBorders: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Tfoot>
       </NativeTable>
@@ -325,7 +325,7 @@ export const WithBorder: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Thead>
 
@@ -333,27 +333,27 @@ export const WithBorder: Story = () => {
           <Tr>
             <Td>ドラゴンボール</Td>
             <Td>1986年2月26日 - 1989年4月19日</Td>
-            <Td isNumeric>全153話</Td>
+            <Td numeric>全153話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールZ</Td>
             <Td>1989年4月26日 - 1996年1月31日</Td>
-            <Td isNumeric>全291話 + スペシャル2話</Td>
+            <Td numeric>全291話 + スペシャル2話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールGT</Td>
             <Td>1996年2月7日 - 1997年11月19日</Td>
-            <Td isNumeric>全64話 + 番外編1話</Td>
+            <Td numeric>全64話 + 番外編1話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール改</Td>
             <Td>2009年4月5日 - 2015年6月28日</Td>
-            <Td isNumeric>全159話</Td>
+            <Td numeric>全159話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール超</Td>
             <Td>2015年7月5日 - 2018年3月25日</Td>
-            <Td isNumeric>全131話</Td>
+            <Td numeric>全131話</Td>
           </Tr>
         </Tbody>
 
@@ -361,7 +361,7 @@ export const WithBorder: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Tfoot>
       </NativeTable>
@@ -377,7 +377,7 @@ export const WithHighlightOnHover: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Thead>
 
@@ -385,27 +385,27 @@ export const WithHighlightOnHover: Story = () => {
           <Tr>
             <Td>ドラゴンボール</Td>
             <Td>1986年2月26日 - 1989年4月19日</Td>
-            <Td isNumeric>全153話</Td>
+            <Td numeric>全153話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールZ</Td>
             <Td>1989年4月26日 - 1996年1月31日</Td>
-            <Td isNumeric>全291話 + スペシャル2話</Td>
+            <Td numeric>全291話 + スペシャル2話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボールGT</Td>
             <Td>1996年2月7日 - 1997年11月19日</Td>
-            <Td isNumeric>全64話 + 番外編1話</Td>
+            <Td numeric>全64話 + 番外編1話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール改</Td>
             <Td>2009年4月5日 - 2015年6月28日</Td>
-            <Td isNumeric>全159話</Td>
+            <Td numeric>全159話</Td>
           </Tr>
           <Tr>
             <Td>ドラゴンボール超</Td>
             <Td>2015年7月5日 - 2018年3月25日</Td>
-            <Td isNumeric>全131話</Td>
+            <Td numeric>全131話</Td>
           </Tr>
         </Tbody>
 
@@ -413,7 +413,7 @@ export const WithHighlightOnHover: Story = () => {
           <Tr>
             <Th>作品名</Th>
             <Th>放送期間</Th>
-            <Th isNumeric>話数</Th>
+            <Th numeric>話数</Th>
           </Tr>
         </Tfoot>
       </NativeTable>
@@ -434,7 +434,7 @@ export const WithCaption: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Thead>
 
@@ -442,27 +442,27 @@ export const WithCaption: Story = () => {
             <Tr>
               <Td>ドラゴンボール</Td>
               <Td>1986年2月26日 - 1989年4月19日</Td>
-              <Td isNumeric>全153話</Td>
+              <Td numeric>全153話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールZ</Td>
               <Td>1989年4月26日 - 1996年1月31日</Td>
-              <Td isNumeric>全291話 + スペシャル2話</Td>
+              <Td numeric>全291話 + スペシャル2話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールGT</Td>
               <Td>1996年2月7日 - 1997年11月19日</Td>
-              <Td isNumeric>全64話 + 番外編1話</Td>
+              <Td numeric>全64話 + 番外編1話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール改</Td>
               <Td>2009年4月5日 - 2015年6月28日</Td>
-              <Td isNumeric>全159話</Td>
+              <Td numeric>全159話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール超</Td>
               <Td>2015年7月5日 - 2018年3月25日</Td>
-              <Td isNumeric>全131話</Td>
+              <Td numeric>全131話</Td>
             </Tr>
           </Tbody>
 
@@ -470,7 +470,7 @@ export const WithCaption: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Tfoot>
         </NativeTable>
@@ -485,7 +485,7 @@ export const WithCaption: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Thead>
 
@@ -493,27 +493,27 @@ export const WithCaption: Story = () => {
             <Tr>
               <Td>ドラゴンボール</Td>
               <Td>1986年2月26日 - 1989年4月19日</Td>
-              <Td isNumeric>全153話</Td>
+              <Td numeric>全153話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールZ</Td>
               <Td>1989年4月26日 - 1996年1月31日</Td>
-              <Td isNumeric>全291話 + スペシャル2話</Td>
+              <Td numeric>全291話 + スペシャル2話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボールGT</Td>
               <Td>1996年2月7日 - 1997年11月19日</Td>
-              <Td isNumeric>全64話 + 番外編1話</Td>
+              <Td numeric>全64話 + 番外編1話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール改</Td>
               <Td>2009年4月5日 - 2015年6月28日</Td>
-              <Td isNumeric>全159話</Td>
+              <Td numeric>全159話</Td>
             </Tr>
             <Tr>
               <Td>ドラゴンボール超</Td>
               <Td>2015年7月5日 - 2018年3月25日</Td>
-              <Td isNumeric>全131話</Td>
+              <Td numeric>全131話</Td>
             </Tr>
           </Tbody>
 
@@ -521,7 +521,7 @@ export const WithCaption: Story = () => {
             <Tr>
               <Th>作品名</Th>
               <Th>放送期間</Th>
-              <Th isNumeric>話数</Th>
+              <Th numeric>話数</Th>
             </Tr>
           </Tfoot>
         </NativeTable>
@@ -531,19 +531,19 @@ export const WithCaption: Story = () => {
 }
 
 export const WithStickyHeader: Story = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   return (
     <TableContainer w="full">
       <ScrollArea
         h="xs"
         w="full"
-        onScrollPositionChange={({ y }) => setIsScrolled(y !== 0)}
+        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <NativeTable>
           <Thead
             bg={["white", "black"]}
-            boxShadow={isScrolled ? "md" : undefined}
+            boxShadow={scrolled ? "md" : undefined}
             position="sticky"
             top={0}
             transitionDuration="slow"
@@ -551,8 +551,8 @@ export const WithStickyHeader: Story = () => {
           >
             <Tr>
               <Th>Name</Th>
-              <Th isNumeric>Rem</Th>
-              <Th isNumeric>Pixel</Th>
+              <Th numeric>Rem</Th>
+              <Th numeric>Pixel</Th>
               <Th>Progress</Th>
             </Tr>
           </Thead>
@@ -560,72 +560,72 @@ export const WithStickyHeader: Story = () => {
           <Tbody>
             <Tr>
               <Td>xs</Td>
-              <Td isNumeric>0.25rem</Td>
-              <Td isNumeric>4px</Td>
+              <Td numeric>0.25rem</Td>
+              <Td numeric>4px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="0.25rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>sm</Td>
-              <Td isNumeric>0.5rem</Td>
-              <Td isNumeric>8px</Td>
+              <Td numeric>0.5rem</Td>
+              <Td numeric>8px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="0.5rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>md</Td>
-              <Td isNumeric>1rem</Td>
-              <Td isNumeric>16px</Td>
+              <Td numeric>1rem</Td>
+              <Td numeric>16px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="1rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>normal</Td>
-              <Td isNumeric>1.5rem</Td>
-              <Td isNumeric>24px</Td>
+              <Td numeric>1.5rem</Td>
+              <Td numeric>24px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="1.5rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>lg</Td>
-              <Td isNumeric>2rem</Td>
-              <Td isNumeric>32px</Td>
+              <Td numeric>2rem</Td>
+              <Td numeric>32px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="2rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>xl</Td>
-              <Td isNumeric>3rem</Td>
-              <Td isNumeric>48px</Td>
+              <Td numeric>3rem</Td>
+              <Td numeric>48px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="3rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>2xl</Td>
-              <Td isNumeric>4.5rem</Td>
-              <Td isNumeric>72px</Td>
+              <Td numeric>4.5rem</Td>
+              <Td numeric>72px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="4.5rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>3xl</Td>
-              <Td isNumeric>6rem</Td>
-              <Td isNumeric>96px</Td>
+              <Td numeric>6rem</Td>
+              <Td numeric>96px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="6rem" />
               </Td>
             </Tr>
             <Tr>
               <Td>4xl</Td>
-              <Td isNumeric>10rem</Td>
-              <Td isNumeric>160px</Td>
+              <Td numeric>10rem</Td>
+              <Td numeric>160px</Td>
               <Td>
                 <Box bg="red.500" h="9xs" maxW="10rem" />
               </Td>
@@ -639,8 +639,8 @@ export const WithStickyHeader: Story = () => {
                 return (
                   <Tr key={key}>
                     <Td>{key}</Td>
-                    <Td isNumeric>{value}</Td>
-                    <Td isNumeric>{`${parseFloat(value) * 16}px`}</Td>
+                    <Td numeric>{value}</Td>
+                    <Td numeric>{`${parseFloat(value) * 16}px`}</Td>
                     <Td>
                       <Box bg="green.500" h="9xs" maxW={value} />
                     </Td>

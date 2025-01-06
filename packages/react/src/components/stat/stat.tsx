@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { StatHelperMessageProps } from "./stat-helper-message"
 import type { StatIconProps } from "./stat-icon"
 import type { StatLabelProps } from "./stat-label"
@@ -86,13 +86,6 @@ export const Stat: FC<StatProps> = (props) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    alignItems: centerContent ? "center" : "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    ...styles.container,
-  }
-
   const validChildren = getValidChildren(children)
 
   const customStatLabel = findChild(validChildren, StatLabel)
@@ -105,7 +98,14 @@ export const Stat: FC<StatProps> = (props) => {
 
   return (
     <StatContext value={styles}>
-      <ui.dl className={cx("ui-stat", className)} __css={css} {...rest}>
+      <ui.dl
+        className={cx("ui-stat", className)}
+        __css={{
+          alignItems: centerContent ? "center" : "flex-start",
+          ...styles.container,
+        }}
+        {...rest}
+      >
         {customStatLabel ?? <StatLabel {...labelProps}>{label}</StatLabel>}
         {customStatNumber ?? <StatNumber {...numberProps}>{number}</StatNumber>}
         {customStatHelperMessage ?? (

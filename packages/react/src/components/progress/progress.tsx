@@ -35,22 +35,6 @@ interface ProgressOptions {
    */
   hasStripe?: boolean
   /**
-   * If `true`, the progress will be indeterminate and the `value` prop will be ignored.
-   *
-   * @default false
-   *
-   * @deprecated It will be deprecated in version 2.0.
-   */
-  isAnimation?: boolean
-  /**
-   * If `true`, and hasStripe is `true`, the stripes will be animated.
-   *
-   * @default false
-   *
-   * @deprecated It will be deprecated in version 2.0.
-   */
-  isStripeAnimation?: boolean
-  /**
    * The maximum value of the progress.
    *
    * @default 100
@@ -93,8 +77,6 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     borderRadius: _borderRadius,
     children,
     hasStripe,
-    isAnimation,
-    isStripeAnimation,
     max = 100,
     min = 0,
     rounded,
@@ -106,21 +88,12 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   const borderRadius =
     _borderRadius ?? rounded ?? (styles.track?.borderRadius as number | string)
 
-  const css: CSSUIObject = {
-    overflow: "hidden",
-    pos: "relative",
-    w: "100%",
-    ...styles.track,
+  const ariaProps: HTMLUIProps = {
+    "aria-valuemax": max,
+    "aria-valuemin": min,
+    "aria-valuenow": value,
+    role: "meter",
   }
-
-  const ariaProps: HTMLUIProps = !isAnimation
-    ? {
-        "aria-valuemax": max,
-        "aria-valuemin": min,
-        "aria-valuenow": value,
-        role: "meter",
-      }
-    : {}
 
   return (
     <ProgressProvider value={styles}>
@@ -128,15 +101,13 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-progress", className)}
         borderRadius={borderRadius}
-        __css={css}
+        __css={styles.track}
         {...ariaProps}
         {...rest}
       >
         <ProgressFilledTrack
           borderRadius={borderRadius}
           hasStripe={hasStripe}
-          isAnimation={isAnimation}
-          isStripeAnimation={isStripeAnimation}
           max={max}
           min={min}
           speed={speed}
@@ -155,8 +126,6 @@ interface ProgressFilledTrackProps extends HTMLUIProps, ProgressProps {}
 
 const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   hasStripe,
-  isAnimation,
-  isStripeAnimation,
   max = 100,
   min = 0,
   speed = "1.4s",
@@ -177,30 +146,10 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
     timingFunction: "linear",
   })
 
-  const interpolationAnimation = useAnimation({
-    duration: typeof speed === "string" ? speed : `${speed}s`,
-    iterationCount: "infinite",
-    keyframes: {
-      "0%": { left: "-40%" },
-      "100%": { left: "100%" },
-    },
-    timingFunction: "ease",
-  })
-
-  isStripeAnimation = !isAnimation && hasStripe && isStripeAnimation
-
   const css: Interpolation<{}> = {
-    ...(isStripeAnimation
+    ...(hasStripe
       ? {
           animation: stripeAnimation,
-        }
-      : {}),
-    ...(isAnimation
-      ? {
-          animation: interpolationAnimation,
-          minWidth: "50%",
-          position: "absolute",
-          willChange: "left",
         }
       : {}),
   }

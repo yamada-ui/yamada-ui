@@ -6,7 +6,13 @@ export const Table: ComponentMultiStyle<"Table"> = mergeMultiStyle(
   NativeTable,
   {
     baseStyle: {
-      sortIcon: {},
+      sortIcon: {
+        position: "absolute",
+        top: "50%",
+      },
+      table: {
+        w: "100%",
+      },
       td: {
         outline: "none",
         transitionDuration: "normal",

@@ -1,9 +1,9 @@
-import type { CSSUIObject, FunctionComponent, HTMLUIProps } from "../../core"
+import type { FunctionComponent, HTMLUIProps } from "../../core"
 import { cloneElement, useRef } from "react"
 import { forwardRef, ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { cx, getValidChildren, isValidElement } from "../../utils"
-import { ChevronIcon, CloseIcon } from "../icon"
+import { ChevronDownIcon, XIcon } from "../icon"
 import { useSelectContext } from "./use-select"
 
 export interface SelectIconProps extends HTMLUIProps {}
@@ -11,19 +11,6 @@ export interface SelectIconProps extends HTMLUIProps {}
 export const SelectIcon = forwardRef<SelectIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {
     const { styles } = useSelectContext()
-
-    const css: CSSUIObject = {
-      alignItems: "center",
-      cursor: "pointer",
-      display: "inline-flex",
-      justifyContent: "center",
-      pointerEvents: "none",
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      ...styles.icon,
-      ...__css,
-    }
 
     const validChildren = getValidChildren(children)
 
@@ -43,10 +30,13 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-select__icon", className)}
-        __css={css}
+        __css={{
+          ...styles.icon,
+          ...__css,
+        }}
         {...rest}
       >
-        {isValidElement(children) ? cloneChildren : <ChevronIcon />}
+        {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
       </ui.div>
     )
   },
@@ -79,7 +69,7 @@ export const SelectClearIcon: FunctionComponent<SelectClearIconProps> = ({
       __css={styles.clearIcon}
       {...rest}
     >
-      {children ?? <CloseIcon h="0.5em" w="0.5em" />}
+      {children ?? <XIcon boxSize="4.5" />}
     </SelectIcon>
   )
 }

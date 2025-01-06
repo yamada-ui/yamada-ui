@@ -37,22 +37,6 @@ export interface UseSelectOptionProps extends Omit<HTMLUIProps, "value"> {
    */
   focusable?: boolean
   /**
-   * If `true`, the select option will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the select option will be focusable.
-   *
-   * @default false
-   *
-   * @deprecated Use `focusable` instead.
-   */
-  isFocusable?: boolean
-  /**
    * The value of the select option.
    */
   value?: string
@@ -79,10 +63,8 @@ export const useSelectOption = (props: UseSelectOptionProps) => {
     id = uuid,
     children,
     closeOnSelect: customCloseOnSelect,
-    isDisabled,
-    disabled = isDisabled,
-    isFocusable,
-    focusable = isFocusable,
+    disabled,
+    focusable,
     icon: customIcon,
     value: optionValue,
     ...computedProps

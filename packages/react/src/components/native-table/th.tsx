@@ -8,14 +8,6 @@ interface ThOptions {
    * Aligns the cell content to the right.
    *
    * @default false
-   *
-   * @deprecated Use `numeric` instead.
-   */
-  isNumeric?: boolean
-  /**
-   * Aligns the cell content to the right.
-   *
-   * @default false
    */
   numeric?: boolean
 }
@@ -23,7 +15,7 @@ interface ThOptions {
 export interface ThProps extends HTMLUIProps<"th">, ThOptions {}
 
 export const Th = forwardRef<ThProps, "th">(
-  ({ className, isNumeric, numeric = isNumeric, __css, ...rest }, ref) => {
+  ({ className, numeric, __css, ...rest }, ref) => {
     const styles = useTableStyles()
 
     const css: CSSUIObject = { ...styles.th, ...__css }

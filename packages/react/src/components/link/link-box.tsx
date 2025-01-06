@@ -27,14 +27,6 @@ interface LinkOverlayOptions {
    * @default false
    */
   external?: boolean
-  /**
-   * If `true`, the link will open in new tab.
-   *
-   * @default false
-   *
-   * @deprecated Use `external` instead
-   */
-  isExternal?: boolean
 }
 
 export interface LinkOverlayProps
@@ -42,19 +34,7 @@ export interface LinkOverlayProps
     LinkOverlayOptions {}
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
-  (
-    {
-      href,
-      target,
-      className,
-      children,
-      isExternal,
-      external = isExternal,
-      rel,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ href, target, className, children, external, rel, ...rest }, ref) => {
     const { styles, variableProps } = useLinkBox()
 
     const css: CSSUIObject = {

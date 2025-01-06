@@ -17,10 +17,16 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     first: {},
     inner: {},
     item: {
+      alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      display: "flex",
+      justifyContent: "center",
+      overflow: "hidden",
+      position: "relative",
       px: 1,
       transitionDuration: "slower",
       transitionProperty: "common",
+      userSelect: "none",
       _active: {
         bg: ["blackAlpha.100", "whiteAlpha.100"],
       },

@@ -251,7 +251,7 @@ export const WithBorderColor: Story = () => {
 
       <ColorPicker
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -274,14 +274,14 @@ export const WithDuration: Story = () => {
   return <ColorPicker duration={0.4} placeholder={defaultPlaceholder} />
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <ColorPicker isDisabled placeholder={defaultPlaceholder} />
+      <ColorPicker disabled placeholder={defaultPlaceholder} />
 
       <FormControl
+        disabled
         helperMessage="Please select your favorite color"
-        isDisabled
         label="Pick color"
       >
         <ColorPicker placeholder={defaultPlaceholder} />
@@ -290,15 +290,15 @@ export const IsDisabled: Story = () => {
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <ColorPicker isReadOnly placeholder={defaultPlaceholder} />
+      <ColorPicker placeholder={defaultPlaceholder} readOnly />
 
       <FormControl
         helperMessage="Please select your favorite color"
-        isReadOnly
         label="Pick color"
+        readOnly
       >
         <ColorPicker placeholder={defaultPlaceholder} />
       </FormControl>
@@ -361,7 +361,7 @@ export const ReactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.colorInput?.message}
-        isInvalid={!!errors.colorInput}
+        invalid={!!errors.colorInput}
         label="Pick color"
       >
         <Controller

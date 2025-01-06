@@ -35,22 +35,6 @@ export interface UseRadioProps<Y extends number | string = string>
    */
   defaultChecked?: boolean
   /**
-   * If `true`, the radio will be initially checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `defaultChecked` instead.
-   */
-  defaultIsChecked?: boolean
-  /**
-   * If `true`, the radio will be checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `checked` instead.
-   */
-  isChecked?: boolean
-  /**
    * The value to be used in the radio button.
    */
   value?: Y
@@ -74,10 +58,8 @@ export const useRadio = <
   const {
     id: _id,
     name,
-    isChecked,
-    checked: checkedProp = isChecked,
-    defaultIsChecked,
-    defaultChecked = defaultIsChecked,
+    checked: checkedProp,
+    defaultChecked,
     value,
     onChange: onChangeProp,
     ...computedProps
@@ -240,26 +222,6 @@ export const useRadio = <
     focused,
     focusVisible,
     hovered,
-    /**
-     * @deprecated Use `active` instead.
-     */
-    isActive: active,
-    /**
-     * @deprecated Use `checked` instead.
-     */
-    isChecked: resolvedChecked,
-    /**
-     * @deprecated Use `focused` instead.
-     */
-    isFocused: focused,
-    /**
-     * @deprecated Use `focusVisible` instead.
-     */
-    isFocusVisible: focusVisible,
-    /**
-     * @deprecated Use `hovered` instead.
-     */
-    isHovered: hovered,
     props: rest,
     getContainerProps,
     getIconProps,

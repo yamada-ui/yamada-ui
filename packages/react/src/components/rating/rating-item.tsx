@@ -1,4 +1,4 @@
-import type { CSSUIObject, FC, HTMLUIProps } from "../../core"
+import type { FC, HTMLUIProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { UseRatingItemProps } from "./use-rating-item"
 import { cloneElement } from "react"
@@ -35,12 +35,6 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
           },
         }
       : {}
-    const css: CSSUIObject = {
-      display: "block",
-      lineHeight: "0",
-      ...styles.item,
-      ...customColor,
-    }
 
     return (
       <>
@@ -48,7 +42,10 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
 
         <ui.label
           className={cx("ui-rating__item", className)}
-          __css={css}
+          __css={{
+            ...styles.item,
+            ...customColor,
+          }}
           {...getItemProps({ ...computedItemProps, ...rest })}
         >
           <RatingIcon
@@ -86,17 +83,11 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
       focusable: false,
     }),
   )
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    justifyContent: "center",
-    ...styles.icon,
-  }
 
   return (
     <ui.div
       className={cx("ui-rating__item__icon", className)}
-      __css={css}
+      __css={styles.icon}
       {...rest}
     >
       {cloneChildren}

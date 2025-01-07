@@ -66,7 +66,6 @@ export const badgeStyle = defineComponentStyle({
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "sm",
     variant: "outline",
   },

@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { Dict } from "../../utils"
+import type { Dict, Merge } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
 import type {
   ComponentSlotStyle,
@@ -302,7 +302,10 @@ export function createSlotComponent<
       withContext = true,
       transferProps,
     }: UseComponentPropsOptions<R> = {},
-  ) {
+  ): [
+    CSSSlotObject,
+    Merge<WithoutThemeProps<Y, M, R>, { css?: CSSObject | CSSObject[] }>,
+  ] {
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
     const { css, ...rest } = useComponentSlotStyle(mergedProps, {
@@ -312,11 +315,13 @@ export function createSlotComponent<
       transferProps,
     })
 
-    return {
-      ...rest,
-      css: mergeSlotCSS<SlotName<M>>(slot, css, mergedProps.css),
-      context: css,
-    }
+    return [
+      css,
+      {
+        ...rest,
+        css: mergeSlotCSS<SlotName<M>>(slot, css, mergedProps.css),
+      },
+    ]
   }
 
   function useSlotComponentProps<Y extends Dict = Dict>(
@@ -404,10 +409,14 @@ export function createSlotComponent<
           runIfFunc(initialProps, props) ?? {},
           props,
         )()
-        const { context, ...mergedProps } = useRootComponentProps(
+        const [context, mergedProps] = useRootComponentProps(
           computedProps,
           slot,
-          { className, withContext, transferProps },
+          {
+            className,
+            withContext,
+            transferProps,
+          },
         )
         const rest = chainProps<any>(...superProps)()(mergedProps)
 

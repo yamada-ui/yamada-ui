@@ -1,10 +1,9 @@
 import type { FC, HTMLUIProps } from "../../core"
-import type { IconProps } from "../icon"
 import type { UseRatingItemProps } from "./use-rating-item"
 import { cloneElement } from "react"
 import { forwardRef, ui } from "../../core"
 import { cx, getValidChildren, isString, runIfFunc } from "../../utils"
-import { Icon } from "../icon"
+import { StarIcon } from "../icon"
 import { useRatingContext } from "./rating-context"
 import { useRatingItem } from "./use-rating-item"
 
@@ -15,8 +14,8 @@ export interface RatingItemProps
 export const RatingItem = forwardRef<RatingItemProps, "input">(
   ({ className, color, fractionValue, groupValue, value, ...rest }, ref) => {
     const {
-      emptyIcon = <RatingStarIcon />,
-      filledIcon = <RatingStarIcon />,
+      emptyIcon = <StarIcon fill="currentColor" />,
+      filledIcon = <StarIcon fill="currentColor" />,
       styles,
       inputProps,
       itemProps,
@@ -97,21 +96,3 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 
 RatingIcon.displayName = "RatingIcon"
 RatingIcon.__ui__ = "RatingIcon"
-
-interface RatingStarIconProps extends IconProps {}
-
-const RatingStarIcon: FC<RatingStarIconProps> = ({ ...rest }) => {
-  return (
-    <Icon
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-      {...rest}
-    >
-      <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-    </Icon>
-  )
-}
-
-RatingStarIcon.displayName = "RatingStarIcon"
-RatingStarIcon.__ui__ = "RatingStarIcon"

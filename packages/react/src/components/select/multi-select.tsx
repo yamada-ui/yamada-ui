@@ -5,7 +5,7 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { PortalProps } from "../portal"
 import type { SelectIconProps } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -148,12 +148,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     defaultValue,
     placeholderInOptions: false,
   })
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
@@ -161,7 +155,10 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-multi-select", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
@@ -292,20 +289,13 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       value,
     ])
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     if (label?.length && component) css.py = "0.125rem"
 
     return (
       <ui.div
         ref={ref}
         className={cx("ui-multi-select__field", className)}
-        __css={css}
+        __css={styles.field}
         {...rest}
       >
         {cloneChildren}

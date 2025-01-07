@@ -1,8 +1,9 @@
-import type { FC, ReactElement } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { ReactElement } from "react"
+import type { HTMLUIProps } from "../../core"
 import type { UseSelectOptionProps } from "./use-select-option"
 import { forwardRef, ui } from "../../core"
 import { cx } from "../../utils"
+import { CheckIcon } from "../icon"
 import { useSelectContext } from "./use-select"
 import { useSelectOption } from "./use-select-option"
 
@@ -23,29 +24,15 @@ export const Option = forwardRef<OptionProps, "div">(
 
     icon ??= customIcon
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      color: "inherit",
-      display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      textAlign: "start",
-      textDecoration: "none",
-      userSelect: "none",
-      width: "100%",
-      ...styles.item,
-    }
-
     return (
       <ui.div
         className={cx("ui-select__item", className)}
-        __css={css}
+        __css={styles.item}
         {...getOptionProps({}, ref)}
       >
         {icon !== null ? (
           <OptionIcon opacity={selected ? 1 : 0}>
-            {icon || <CheckIcon />}
+            {icon || <CheckIcon boxSize="5" />}
           </OptionIcon>
         ) : null}
 
@@ -66,20 +53,11 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useSelectContext()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      flexShrink: 0,
-      fontSize: "0.85em",
-      justifyContent: "center",
-      ...styles.itemIcon,
-    }
-
     return (
       <ui.span
         ref={ref}
         className={cx("ui-select__item__icon", className)}
-        __css={css}
+        __css={styles.itemIcon}
         {...rest}
       />
     )
@@ -88,12 +66,3 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
 
 OptionIcon.displayName = "OptionIcon"
 OptionIcon.__ui__ = "OptionIcon"
-
-const CheckIcon: FC = () => (
-  <svg height="1em" viewBox="0 0 14 14" width="1em">
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-)

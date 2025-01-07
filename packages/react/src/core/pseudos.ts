@@ -52,6 +52,10 @@ export const attributes = {
    */
   _expanded: "&[data-expanded], &[aria-expanded=true]",
   /**
+   * The CSS `[data-fallback]` attribute selector.
+   */
+  _fallback: "&[data-fallback]",
+  /**
    * The CSS `[data-filled]` attribute selector.
    */
   _filled: "&[data-filled]",
@@ -102,6 +106,10 @@ export const attributes = {
    * - `[data-not-allowed]`
    */
   _notAllowed: "&[data-not-allowed]",
+  /**
+   * The CSS `:not([data-fallback])` attribute selector.
+   */
+  _notFallback: "&:not([data-fallback])",
   /**
    * The CSS `:not(:selected)` attribute selector.
    *
@@ -460,7 +468,7 @@ export const pseudoClasses = {
   /**
    * The CSS `:not(:first-child)` pseudo-class.
    */
-  _notFirstChild: "& > *:not(:first-child)",
+  _notFirstChild: "& > *:not(:first-of-type)",
   /**
    * The CSS `:not(:last-of-type)` pseudo-class.
    */
@@ -468,7 +476,7 @@ export const pseudoClasses = {
   /**
    * The CSS `:not(:last-child)` pseudo-class.
    */
-  _notLastChild: "& > *:not(:last-child)",
+  _notLastChild: "& > *:not(:last-of-type)",
   /**
    * The CSS `:not(:target)` pseudo-class.
    */

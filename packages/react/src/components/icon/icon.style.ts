@@ -2,10 +2,10 @@ import { defineComponentStyle } from "../../core"
 
 export const iconStyle = defineComponentStyle({
   base: {
-    boxSize: "1em",
     color: "currentColor",
     display: "inline-block",
     flexShrink: 0,
+    fontSize: "1em",
     lineHeight: "1em",
   },
 })

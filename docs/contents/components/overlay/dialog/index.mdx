@@ -115,17 +115,19 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 return (
   <>
     <Wrap gap="md">
-      {sizeMap.map((size) => (
-        <Button
-          key={size}
-          onClick={() => {
-            setSize(size)
-            onOpen()
-          }}
-        >
-          Open {size} Dialog
-        </Button>
-      ))}
+      <For each={sizeMap}>
+        {(size) => (
+          <Button
+            key={size}
+            onClick={() => {
+              setSize(size)
+              onOpen()
+            }}
+          >
+            Open {size} Dialog
+          </Button>
+        )}
+      </For>
     </Wrap>
 
     <Dialog
@@ -167,17 +169,19 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 return (
   <>
     <Wrap gap="md">
-      {placementMap.map((placement) => (
-        <Button
-          key={placement}
-          onClick={() => {
-            setPlacement(placement)
-            onOpen()
-          }}
-        >
-          Open {placement} Dialog
-        </Button>
-      ))}
+      <For each={placementMap}>
+        {(placement) => (
+          <Button
+            key={placement}
+            onClick={() => {
+              setPlacement(placement)
+              onOpen()
+            }}
+          >
+            Open {placement} Dialog
+          </Button>
+        )}
+      </For>
     </Wrap>
 
     <Dialog

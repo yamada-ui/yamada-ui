@@ -44,10 +44,11 @@ In addition to the shorthand, you can also pass verbose `props`.
 
 ```tsx
 <Grid templateColumns="repeat(4, 1fr)" gap="md">
-  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
-  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
-  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem key={index} w="full" h="4xs" rounded="md" bg={bg} />
+    )}
+  </For>
 </Grid>
 ```
 
@@ -62,14 +63,29 @@ In addition to the shorthand, you can also pass verbose `props`.
   `}
   gap="md"
 >
-  <GridItem area="one" w="full" minH="4xs" rounded="md" bg="primary" />
-  <GridItem area="two" w="full" minH="4xs" rounded="md" bg="secondary" />
-  <GridItem area="three" w="full" minH="4xs" rounded="md" bg="warning" />
-  <GridItem area="four" w="full" minH="4xs" rounded="md" bg="danger" />
-  <GridItem area="five" w="full" minH="4xs" rounded="md" bg="primary" />
-  <GridItem area="six" w="full" minH="4xs" rounded="md" bg="secondary" />
-  <GridItem area="seven" w="full" minH="4xs" rounded="md" bg="warning" />
-  <GridItem area="eight" w="full" minH="4xs" rounded="md" bg="danger" />
+  <For
+    each={[
+      { area: "one", bg: "primary" },
+      { area: "two", bg: "secondary" },
+      { area: "three", bg: "warning" },
+      { area: "four", bg: "danger" },
+      { area: "five", bg: "primary" },
+      { area: "six", bg: "secondary" },
+      { area: "seven", bg: "warning" },
+      { area: "eight", bg: "danger" },
+    ]}
+  >
+    {({ area, bg }, index) => (
+      <GridItem
+        key={index}
+        area={area}
+        w="full"
+        minH="4xs"
+        rounded="md"
+        bg={bg}
+      />
+    )}
+  </For>
 </Grid>
 ```
 

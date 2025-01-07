@@ -19,14 +19,14 @@ const meta: Meta<typeof Motion> = {
 export default meta
 
 export const ExitPresenceAnimation: Story = () => {
-  const [isVisible, { toggle }] = useBoolean()
+  const [visible, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please click</Button>
 
       <AnimatePresence>
-        {isVisible ? (
+        {visible ? (
           <Motion
             animate={{ opacity: 1 }}
             bg="primary"

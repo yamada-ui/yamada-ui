@@ -9,7 +9,7 @@ export interface ReorderTriggerProps extends HTMLUIProps {}
 export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
   ({ className, children = <GripIcon />, ...rest }, ref) => {
     const { styles } = useReorderContext()
-    const { dragControls, isDrag, register } = useReorderItemContext()
+    const { drag, dragControls, register } = useReorderItemContext()
 
     return (
       <ui.div
@@ -17,7 +17,7 @@ export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
         className={cx("ui-reorder__trigger", className)}
         __css={styles.trigger}
         {...rest}
-        data-selected={dataAttr(isDrag)}
+        data-selected={dataAttr(drag)}
         onPointerDown={handlerAll(rest.onPointerDown, (ev) =>
           dragControls.start(ev),
         )}

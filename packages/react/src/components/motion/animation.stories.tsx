@@ -92,14 +92,14 @@ export const WithInitial: Story = () => {
 }
 
 export const WithExit: Story = () => {
-  const [isVisible, { toggle }] = useBoolean()
+  const [visible, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please click</Button>
 
       <AnimatePresence>
-        {isVisible ? (
+        {visible ? (
           <Motion
             animate={{ opacity: 1 }}
             bg="primary"
@@ -205,7 +205,7 @@ export const WithLayout: Story = () => {
 
 export const UseLayoutGroup: Story = () => {
   const Accordion: FC = () => {
-    const [isOpen, { toggle }] = useBoolean(false)
+    const [open, { toggle }] = useBoolean(false)
 
     return (
       <Motion
@@ -217,7 +217,7 @@ export const UseLayoutGroup: Story = () => {
         p="md"
         placeContent="center"
         rounded="md"
-        w={isOpen ? "32" : "16"}
+        w={open ? "32" : "16"}
         onClick={toggle}
       />
     )

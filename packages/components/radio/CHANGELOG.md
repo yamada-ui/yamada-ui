@@ -1,5 +1,19 @@
 # @yamada-ui/radio
 
+## 1.3.3
+
+### Patch Changes
+
+- [#4292](https://github.com/yamada-ui/yamada-ui/pull/4292) [`0162445`](https://github.com/yamada-ui/yamada-ui/commit/0162445e5700764b3be2b9f9c0a5ad0afbfd9578) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where unnecessary attributes were set to elements.
+
+- Updated dependencies [[`5487665`](https://github.com/yamada-ui/yamada-ui/commit/548766549bd4fdb79839ad2d5120d9802e8f2d90), [`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002), [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf)]:
+  - @yamada-ui/layouts@1.4.0
+  - @yamada-ui/core@1.17.0
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/form-control@2.1.12
+  - @yamada-ui/use-controllable-state@1.0.27
+  - @yamada-ui/use-focus-visible@1.1.14
+
 ## 1.3.2
 
 ### Patch Changes

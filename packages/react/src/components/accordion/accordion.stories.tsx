@@ -30,7 +30,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
     <>
       <Accordion.Root variant="basic">
@@ -47,7 +47,7 @@ export const WithVariant: Story = () => {
         </Accordion.Item>
       </Accordion.Root>
 
-      <Accordion.Root variant="card">
+      <Accordion.Root variant="panel">
         <Accordion.Item button="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
         </Accordion.Item>
@@ -64,7 +64,7 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithDefaultIndex: Story = () => {
+export const DefaultIndex: Story = () => {
   return (
     <Accordion.Root defaultIndex={1}>
       <Accordion.Item button="孫悟空少年編">
@@ -82,7 +82,7 @@ export const WithDefaultIndex: Story = () => {
   )
 }
 
-export const WithIsToggle: Story = () => {
+export const Toggle: Story = () => {
   return (
     <Accordion.Root toggle>
       <Accordion.Item button="孫悟空少年編">
@@ -100,7 +100,7 @@ export const WithIsToggle: Story = () => {
   )
 }
 
-export const WithIsMultiple: Story = () => {
+export const Multiple: Story = () => {
   return (
     <Accordion.Root defaultIndex={[1, 2]} multiple>
       <Accordion.Item button="孫悟空少年編">
@@ -118,7 +118,7 @@ export const WithIsMultiple: Story = () => {
   )
 }
 
-export const WithIconHidden: Story = () => {
+export const IconHidden: Story = () => {
   return (
     <Accordion.Root iconHidden>
       <Accordion.Item button="孫悟空少年編">
@@ -136,7 +136,7 @@ export const WithIconHidden: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <Accordion.Root>
       <Accordion.Item button="孫悟空少年編">

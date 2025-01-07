@@ -1,7 +1,11 @@
-export { Card, CardBody, CardFooter, CardHeader } from "./card"
+export { CardBody, CardFooter, CardHeader, CardRoot } from "./card"
 export type {
   CardBodyProps,
   CardFooterProps,
   CardHeaderProps,
-  CardProps,
+  CardRootProps,
 } from "./card"
+
+export * from "./card.style"
+
+export * as Card from "./namespace"

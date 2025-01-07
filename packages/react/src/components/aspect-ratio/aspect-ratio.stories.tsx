@@ -22,7 +22,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithRatio: Story = () => {
+export const Ratio: Story = () => {
   return (
     <AspectRatio ratio={16 / 9} w="full">
       <iframe

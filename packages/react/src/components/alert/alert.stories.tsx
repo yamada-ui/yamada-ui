@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
 import { noop } from "../../utils"
 import { Box } from "../box"
 import { CloseButton } from "../close-button"
@@ -51,155 +52,29 @@ export const Basic: Story = () => {
   )
 }
 
-export const Subtle: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Alert.Root variant="subtle" status="info">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="subtle" status="success">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="subtle" status="warning">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="subtle" status="error">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-    </>
+    <PropsTable
+      variant="column"
+      columns={["basic", "solid", "subtle", "surface", "island"]}
+      rows={["info", "success", "warning", "error"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Alert.Root key={key} variant={column} status={row}>
+            {column !== "island" ? <Alert.Icon /> : null}
+            <Alert.Title>セル</Alert.Title>
+            <Alert.Description>
+              か…完全体に………完全体になれさえすれば………！！！
+            </Alert.Description>
+          </Alert.Root>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const Surface: Story = () => {
-  return (
-    <>
-      <Alert.Root variant="surface" status="info">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="surface" status="success">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="surface" status="warning">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="surface" status="error">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-    </>
-  )
-}
-
-export const Solid: Story = () => {
-  return (
-    <>
-      <Alert.Root variant="solid" status="info">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="solid" status="success">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="solid" status="warning">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="solid" status="error">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-    </>
-  )
-}
-
-export const IslandAccent: Story = () => {
-  return (
-    <>
-      <Alert.Root variant="island" status="info">
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="island" status="success">
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="island" status="warning">
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root variant="island" status="error">
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-    </>
-  )
-}
-
-export const WithColorMode: Story = () => {
+export const ColorScheme: Story = () => {
   return (
     <>
       <Alert.Root colorScheme="green" status="info">
@@ -237,40 +112,7 @@ export const WithColorMode: Story = () => {
   )
 }
 
-export const UseCustomLayout: Story = () => {
-  return (
-    <>
-      <Alert.Root
-        alignItems="center"
-        flexDirection="column"
-        h="2xs"
-        justifyContent="center"
-        status="success"
-        textAlign="center"
-      >
-        <Alert.Icon boxSize="40px" mr={0} />
-        <Alert.Title fontSize="lg" mb={1} mr={0} mt={4}>
-          セル
-        </Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root status="success">
-        <Box>
-          <Alert.Title>セル</Alert.Title>
-          <Alert.Description>
-            か…完全体に………完全体になれさえすれば………！！！
-          </Alert.Description>
-        </Box>
-        <CloseButton position="absolute" right={2} top={2} onClick={noop} />
-      </Alert.Root>
-    </>
-  )
-}
-
-export const WithLoading: Story = () => {
+export const Loading: Story = () => {
   return (
     <>
       <Alert.Root variant="basic" status="info">
@@ -303,6 +145,39 @@ export const WithLoading: Story = () => {
         <Alert.Description>
           か…完全体に………完全体になれさえすれば………！！！
         </Alert.Description>
+      </Alert.Root>
+    </>
+  )
+}
+
+export const CustomLayout: Story = () => {
+  return (
+    <>
+      <Alert.Root
+        alignItems="center"
+        flexDirection="column"
+        h="2xs"
+        justifyContent="center"
+        status="success"
+        textAlign="center"
+      >
+        <Alert.Icon boxSize="40px" mr={0} />
+        <Alert.Title fontSize="lg" mb={1} mr={0} mt={4}>
+          セル
+        </Alert.Title>
+        <Alert.Description>
+          か…完全体に………完全体になれさえすれば………！！！
+        </Alert.Description>
+      </Alert.Root>
+
+      <Alert.Root status="success">
+        <Box>
+          <Alert.Title>セル</Alert.Title>
+          <Alert.Description>
+            か…完全体に………完全体になれさえすれば………！！！
+          </Alert.Description>
+        </Box>
+        <CloseButton position="absolute" right={2} top={2} onClick={noop} />
       </Alert.Root>
     </>
   )

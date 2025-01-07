@@ -148,7 +148,6 @@ export const buttonStyle = defineComponentStyle({
   },
 
   defaultProps: {
-    colorScheme: "gray",
     size: "md",
     variant: "solid",
   },

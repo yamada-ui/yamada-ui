@@ -8,12 +8,12 @@ export const accordionStyle = defineComponentSlotStyle({
       },
       alignItems: "center",
       display: "inline-flex",
-      outline: 0,
+      outline: "none",
       px: "4",
       py: "3",
       transitionDuration: "normal",
       transitionProperty: "common",
-      width: "100%",
+      w: "100%",
       _focusVisible: {
         boxShadow: "outline",
       },
@@ -23,7 +23,7 @@ export const accordionStyle = defineComponentSlotStyle({
       },
     },
     icon: {
-      color: ["blackAlpha.600", "whiteAlpha.700"],
+      color: "fg.subtle",
       fontSize: "1.25em",
       ml: "auto",
       transformOrigin: "center",
@@ -47,37 +47,18 @@ export const accordionStyle = defineComponentSlotStyle({
 
   variants: {
     basic: {
-      button: {
-        "&:hover:not(:disabled):not([aria-disabled=true])": {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-        },
-      },
       item: {
-        borderColor: "inherit",
         borderTopWidth: "1px",
         _last: {
           borderBottomWidth: "1px",
         },
       },
     },
-    card: {
-      button: {
-        _hover: {
-          "&:hover:not(:disabled):not([aria-disabled=true])": {
-            bg: ["blackAlpha.50", "whiteAlpha.50"],
-          },
-          _expanded: {
-            bg: "none",
-          },
-        },
-      },
+    panel: {
       item: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
+        bg: "bg.panel",
         borderWidth: "1px",
         rounded: "md",
-        _expanded: {
-          bg: ["white", "black"],
-        },
         _notFirst: {
           mt: "md",
         },

@@ -42,7 +42,7 @@ export const Vertical: Story = () => {
   )
 }
 
-export const WithContext: Story = () => {
+export const Context: Story = () => {
   const value = useMemo<FlexProps>(() => ({ direction: "column" }), [])
 
   return (

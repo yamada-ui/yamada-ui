@@ -37,7 +37,6 @@ export {
   useAccordionItemContext as useItemContext,
   useAccordionPropsContext as usePropsContext,
 }
-
 export type {
   AccordionButtonProps as ButtonProps,
   AccordionItemProps as ItemProps,

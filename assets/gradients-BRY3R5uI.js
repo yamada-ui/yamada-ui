@@ -1,0 +1,4 @@
+import{j as e}from"./jsx-runtime-CfatFE5O.js";import{useMDXComponents as r}from"./index-DUy19JZU.js";import{ae as i}from"./index-B_t3APED.js";import"./index-ClcD9ViR.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./iframe-COb8dRQ2.js";import"../sb-preview/runtime.js";import"./index-DGFU5M_O.js";import"./index-CJyPbrN5.js";import"./index-DrFu-skq.js";function o(t){const n={code:"code",h1:"h1",pre:"pre",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(i,{title:"Documents / Theme / Gradients"}),`
+`,e.jsx(n.h1,{id:"gradients",children:"Gradients"}),`
+`,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-ts",children:`Not defined
+`})})]})}function l(t={}){const{wrapper:n}={...r(),...t.components};return n?e.jsx(n,{...t,children:e.jsx(o,{...t})}):o(t)}export{l as default};

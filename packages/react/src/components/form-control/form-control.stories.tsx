@@ -146,9 +146,9 @@ export const CustomRequiredIndicator: Story = () => {
         label="Email address"
         required
         requiredIndicator={
-          <Tag.Root colorScheme="red" size="sm" ms={2}>
+          <Tag colorScheme="red" size="sm" ms={2}>
             required
-          </Tag.Root>
+          </Tag>
         }
       >
         <Input type="email" placeholder="your email address" />
@@ -157,9 +157,9 @@ export const CustomRequiredIndicator: Story = () => {
       <FormControl.Root required>
         <FormControl.Label
           requiredIndicator={
-            <Tag.Root colorScheme="red" size="sm" ms={2}>
+            <Tag colorScheme="red" size="sm" ms={2}>
               required
-            </Tag.Root>
+            </Tag>
           }
         >
           Email address
@@ -176,9 +176,9 @@ export const CustomOptionalIndicator: Story = () => {
       <FormControl.Root
         label="Email address"
         optionalIndicator={
-          <Tag.Root colorScheme="primary" size="sm" ms={2}>
+          <Tag colorScheme="primary" size="sm" ms={2}>
             optional
-          </Tag.Root>
+          </Tag>
         }
       >
         <Input type="email" placeholder="your email address" />
@@ -187,9 +187,9 @@ export const CustomOptionalIndicator: Story = () => {
       <FormControl.Root>
         <FormControl.Label
           optionalIndicator={
-            <Tag.Root colorScheme="primary" size="sm" ms={2}>
+            <Tag colorScheme="primary" size="sm" ms={2}>
               optional
-            </Tag.Root>
+            </Tag>
           }
         >
           Email address

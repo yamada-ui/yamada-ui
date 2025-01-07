@@ -13,7 +13,7 @@
       "required": false
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -133,7 +133,7 @@
       "required": false
     },
     "outside": {
-      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-0.5\" | \"-1\" | ... 99 more ... | \"xs\">",
+      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-0.5\" | \"-1\" | ... 99 more ... | \"xs\">",
       "description": "The CSS `padding` property.",
       "required": false
     },
@@ -197,6 +197,12 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If true, the button is full rounded.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -207,6 +213,7 @@
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If true, the button is full rounded.",
       "required": false
     }
@@ -215,7 +222,7 @@
   "DialogHeader": {},
   "DialogOverlay": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     }
@@ -228,7 +235,7 @@
       "required": false
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -413,6 +420,12 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If true, the button is full rounded.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -423,6 +436,7 @@
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If true, the button is full rounded.",
       "required": false
     }
@@ -431,7 +445,7 @@
   "DrawerHeader": {},
   "DrawerOverlay": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     }
@@ -450,7 +464,7 @@
       "required": false
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -535,7 +549,7 @@
       "required": false
     },
     "outside": {
-      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-0.5\" | \"-1\" | ... 99 more ... | \"xs\">",
+      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | ({} & string) | \"-0.5\" | \"-1\" | ... 99 more ... | \"xs\">",
       "description": "The CSS `padding` property.",
       "required": false
     },
@@ -594,6 +608,12 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If true, the button is full rounded.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -604,6 +624,7 @@
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If true, the button is full rounded.",
       "required": false
     }
@@ -612,7 +633,7 @@
   "ModalHeader": {},
   "ModalOverlay": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     }

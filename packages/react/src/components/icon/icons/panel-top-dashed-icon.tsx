@@ -1,18 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { PanelTopDashed } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `PanelTopDashedIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const PanelTopDashedIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon
-    as={PanelTopDashed}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const PanelTopDashedIcon = component(Icon)({ as: PanelTopDashed })

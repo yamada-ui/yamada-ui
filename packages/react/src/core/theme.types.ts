@@ -1,23 +1,77 @@
 import type { HTMLMotionProps, MotionConfigProps, Variants } from "motion/react"
 import type { ReactNode, RefAttributes, RefObject } from "react"
 import type { PortalProps } from "../components/portal"
-import type { Dict, StringLiteral } from "../utils"
+import type { Dict, StringLiteral, Union } from "../utils"
 import type { HTMLUIProps } from "./components"
 import type {
-  AnalyzeBreakpointsReturn,
   AnimationStyle,
-  CSSUIObject,
-  CSSUIProps,
-  ThemeProps,
-  UIMultiStyle,
-  UIStyle,
+  CreateBreakpointsReturn,
+  CreateLayersReturn,
+  CSSModifierObject,
+  CSSObject,
+  CSSPropObject,
+  CSSProps,
+  CSSSlotObject,
+  UIValue,
 } from "./css"
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
 
+export type LayerScheme =
+  | "base"
+  | "global"
+  | "props"
+  | "reset"
+  | "size"
+  | "tokens"
+  | "variant"
+
+export type Layers = { [key in LayerScheme]: { name: string; order: number } }
+
 export type TextDirection = "ltr" | "rtl"
 
 export type BreakpointDirection = "down" | "up"
+
+export type Orientation = "horizontal" | "vertical"
+
+export type Placement =
+  | "center"
+  | "center-center"
+  | "center-end"
+  | "center-start"
+  | "end"
+  | "end-center"
+  | "end-end"
+  | "end-start"
+  | "start"
+  | "start-center"
+  | "start-end"
+  | "start-start"
+
+export type LoadingVariant =
+  | "audio"
+  | "circles"
+  | "dots"
+  | "grid"
+  | "oval"
+  | "puff"
+  | "rings"
+
+export type LoadingComponent = "background" | "custom" | "page" | "screen"
+
+export type StatusScheme = "error" | "info" | "success" | "warning"
+
+export type NoticePlacement = Extract<
+  Placement,
+  | "end"
+  | "end-center"
+  | "end-end"
+  | "end-start"
+  | "start"
+  | "start-center"
+  | "start-end"
+  | "start-start"
+>
 
 export interface BreakpointOptions {
   /**
@@ -54,38 +108,15 @@ export interface BreakpointOptions {
   identifier?: "@media screen" | `@container ${string}` | `@container`
 }
 
-export type LoadingVariant =
-  | "audio"
-  | "circles"
-  | "dots"
-  | "grid"
-  | "oval"
-  | "puff"
-  | "rings"
-
-export type LoadingComponent = "background" | "custom" | "page" | "screen"
-
-export type StatusValue = "error" | "info" | "success" | "warning"
-
-export type AlertStatusValue = "loading" | StatusValue
-
-export type NoticePlacement =
-  | "bottom"
-  | "bottom-left"
-  | "bottom-right"
-  | "top"
-  | "top-left"
-  | "top-right"
-
 export interface NoticeComponentProps extends NoticeConfigOptions {
   onClose: () => void
 }
 
-export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
+export interface NoticeConfigOptions {
   /**
    * The custom style to use.
    */
-  style?: CSSUIObject
+  style?: CSSObject
   /**
    * The strategy to remove the notice when `isClosable` is set to `true`
    *
@@ -118,7 +149,7 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps["color"]
+    color?: CSSProps["color"]
   }
   /**
    * If `true`, allows the notice to be removed.
@@ -141,7 +172,7 @@ export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatusValue
+  status?: "loading" | StatusScheme
   /**
    * The title of the notice.
    */
@@ -155,17 +186,17 @@ export interface SnackComponentProps extends SnackConfigOptions {
   onClose: () => void
 }
 
-export interface SnackConfigOptions extends ThemeProps<"Alert"> {
+export interface SnackConfigOptions {
   /**
    * The custom style to use.
    */
-  style?: CSSUIObject
+  style?: CSSObject
   /**
    * The CSS `box-shadow` property.
    *
    * @default '["base", "dark-sm"]'
    */
-  boxShadow?: CSSUIProps["boxShadow"]
+  boxShadow?: CSSProps["boxShadow"]
   /**
    * The strategy to remove the snack when `isClosable` is set to `true`
    *
@@ -204,7 +235,7 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps["color"]
+    color?: CSSProps["color"]
   }
   /**
    * If `true`, allows the snack to be removed.
@@ -229,7 +260,7 @@ export interface SnackConfigOptions extends ThemeProps<"Alert"> {
    *
    * @default 'info'
    */
-  status?: AlertStatusValue
+  status?: "loading" | StatusScheme
   /**
    * The title of the snack.
    */
@@ -292,16 +323,16 @@ export interface LoadingConfigOptions {
     /**
      * The CSS `box-size` property.
      */
-    size?: CSSUIProps["boxSize"]
+    size?: CSSProps["boxSize"]
     variant?: LoadingVariant
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps["color"]
+    color?: CSSProps["color"]
     /**
      * The CSS `color` property.
      */
-    secondaryColor?: CSSUIProps["color"]
+    secondaryColor?: CSSProps["color"]
   }
   /**
    * If `true`, loaded from the initial rendering.
@@ -316,50 +347,54 @@ export interface LoadingConfigOptions {
     /**
      * The CSS `color` property.
      */
-    color?: CSSUIProps["color"]
+    color?: CSSProps["color"]
     /**
      * The CSS `font-family` property.
      */
-    fontFamily?: CSSUIProps["fontFamily"]
+    fontFamily?: CSSProps["fontFamily"]
     /**
      * The CSS `font-size` property.
      */
-    fontSize?: CSSUIProps["fontSize"]
+    fontSize?: CSSProps["fontSize"]
     /**
      * The CSS `font-weight` property.
      */
-    fontWeight?: CSSUIProps["fontWeight"]
+    fontWeight?: CSSProps["fontWeight"]
     /**
      * The CSS `letter-spacing` property.
      */
-    letterSpacing?: CSSUIProps["letterSpacing"]
+    letterSpacing?: CSSProps["letterSpacing"]
     /**
      * The CSS `line-height` property.
      */
-    lineHeight?: CSSUIProps["letterSpacing"]
+    lineHeight?: CSSProps["letterSpacing"]
   }
 }
 
 export interface ThemeConfig {
   /**
+   * The config of CSS variables.
+   */
+  css?: {
+    /**
+     * The config for CSS `@layer` names.
+     * This allows you to define custom names for each layer type in your theme.
+     * Set to `false` to disable the use of CSS layers.
+     *
+     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     */
+    layers?: false | Layers
+    /**
+     * The prefix to attach to variable names when converting each token of the theme to CSS variable names.
+     *
+     * @default 'ui'
+     */
+    varPrefix?: StringLiteral
+  }
+  /**
    * The config of breakpoint.
    */
   breakpoint?: BreakpointOptions
-  /**
-   * The config of the calendar or date picker etc.
-   */
-  date?: {
-    /**
-     * The locale of the calendar or date picker etc.
-     * Check the docs to see the locale of possible modifiers you can pass.
-     *
-     * @see Docs https://day.js.org/docs/en/i18n/instance-locale
-     * @default 'en'
-     *
-     * @deprecated Use `locale` instead.
-     */
-    locale?: string
-  }
   /**
    * The text direction to apply to the application.
    *
@@ -453,7 +488,7 @@ export interface ThemeConfig {
      *
      * @default 'md'
      */
-    gap?: CSSUIProps["gap"]
+    gap?: CSSProps["gap"]
     /**
      * The options of the notice.
      */
@@ -483,13 +518,13 @@ export interface ThemeConfig {
      *
      * @default 'md'
      */
-    gap?: CSSUIProps["gap"]
+    gap?: CSSProps["gap"]
     /**
      * A property that provides spacing between the top and bottom.
      *
      * @default "[0, 0]"
      */
-    gutter?: [CSSUIProps["paddingTop"], CSSUIProps["paddingBottom"]]
+    gutter?: [CSSProps["paddingTop"], CSSProps["paddingBottom"]]
     /**
      * If `true`, apply gutter value to negative margin
      *
@@ -519,51 +554,100 @@ export interface ThemeConfig {
      */
     responsive?: boolean
   }
-  /**
-   * The config of CSS variables.
-   */
-  var?: {
-    /**
-     * The prefix to attach to variable names when converting each token of the theme to CSS variable names.
-     *
-     * @default 'ui'
-     */
-    prefix?: StringLiteral
-  }
 }
 
-export interface LayerStyles {
-  [key: string]: CSSUIObject
-}
-export interface TextStyles {
-  [key: string]: CSSUIObject
-}
+type ThemeComponentProps<Y extends Dict = Dict> =
+  string extends keyof Required<Y>["props"]
+    ? {}
+    : {
+        [K in keyof Required<Y>["props"]]?:
+          | (keyof Required<Y>["props"][K] extends "false" | "true"
+              ? boolean
+              : keyof Required<Y>["props"][K])
+          | StringLiteral
+      }
+
+export type ThemeProps<Y extends Dict = Dict> = {
+  /**
+   * The size of the component.
+   */
+  size?: UIValue<Union<keyof Required<Y>["sizes"] | number>>
+  /**
+   * The variant of the component.
+   */
+  variant?: UIValue<Union<keyof Required<Y>["variants"] | number>>
+} & ThemeComponentProps<Y>
+
+type ThemeProp = "size" | "variant"
+
+export type WithoutThemeProps<
+  Y extends Dict = Dict,
+  M extends Dict | keyof Y = Dict,
+  D extends keyof Y = keyof Y,
+> = M extends object
+  ? string extends keyof Required<M>["props"]
+    ? Omit<Y, keyof Y extends D ? ThemeProp : Exclude<ThemeProp, D>>
+    : Omit<
+        Y,
+        keyof Y extends D
+          ? keyof Required<M>["props"] | ThemeProp
+          : Exclude<keyof Required<M>["props"] | ThemeProp, D>
+      >
+  : M extends string
+    ? Omit<Y, keyof Y extends D ? M | ThemeProp : Exclude<M | ThemeProp, D>>
+    : never
+
 export type ThemeValue = number | string
+
 export interface ThemeTokens {
   [key: ThemeValue]:
     | [Dict<ThemeValue> | ThemeValue, Dict<ThemeValue> | ThemeValue]
     | ThemeTokens
     | ThemeValue
 }
+
 export interface ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
 > {
   [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
 }
+
 export interface ThemeTransitionTokens {
   duration?: ThemeTokens
   easing?: ThemeTokens
   property?: ThemeTokens
 }
+
 export interface ThemeBreakpointTokens {
   [key: ThemeValue]: ThemeValue
 }
 
+export type SemanticColorSchemeValue =
+  | [Theme["colorSchemes"], Theme["colorSchemes"]]
+  | Theme["colorSchemes"]
+
 export interface SemanticColorSchemes {
-  [key: string]:
-    | [Theme["colorSchemes"], Theme["colorSchemes"]]
-    | Theme["colorSchemes"]
-    | ThemeTokens
+  [key: string]: SemanticColorSchemeValue
+}
+
+export type SemanticColorValue =
+  | [Theme["colors"], Theme["colors"]]
+  | Theme["colors"]
+
+export interface SemanticColor {
+  [key: string]: any
+  contrast?: SemanticColorValue
+  default?: SemanticColorValue
+  emphasized?: SemanticColorValue
+  fg?: SemanticColorValue
+  muted?: SemanticColorValue
+  outline?: SemanticColorValue
+  solid?: SemanticColorValue
+  subtle?: SemanticColorValue
+}
+
+export interface SemanticColors {
+  [key: string]: Dict | SemanticColor | SemanticColorValue
 }
 
 export interface ThemeSemanticTokens
@@ -571,6 +655,7 @@ export interface ThemeSemanticTokens
     BaseTheme,
     | "animations"
     | "breakpoints"
+    | "colors"
     | "components"
     | "semantics"
     | "styles"
@@ -579,6 +664,7 @@ export interface ThemeSemanticTokens
 
 export interface ThemeSemantics extends ThemeSemanticTokens {
   animations?: ThemeAnimationTokens<AnimationStyle | string>
+  colors?: SemanticColors
   colorSchemes?: SemanticColorSchemes
 }
 
@@ -592,17 +678,12 @@ export interface ThemeSchemes {
   [key: string]: NestedTheme
 }
 
-export interface ThemeComponents {
-  [key: string]: ComponentMultiStyle | ComponentStyle
-}
-
 interface BaseTheme {
   animations?: ThemeAnimationTokens
   blurs?: ThemeTokens
   borders?: ThemeTokens
   breakpoints?: ThemeBreakpointTokens
   colors?: ThemeTokens
-  components?: ThemeComponents
   fonts?: ThemeTokens
   fontSizes?: ThemeTokens
   fontWeights?: ThemeTokens
@@ -616,10 +697,10 @@ interface BaseTheme {
   spaces?: ThemeTokens
   styles?: {
     [key: string]: any
-    globalStyle?: UIStyle
-    layerStyles?: LayerStyles
-    resetStyle?: UIStyle
-    textStyles?: TextStyles
+    globalStyle?: CSSObject
+    layerStyles?: CSSModifierObject
+    resetStyle?: CSSObject
+    textStyles?: CSSModifierObject
   }
   themeSchemes?: ThemeSchemes
   transitions?: ThemeTransitionTokens
@@ -630,84 +711,103 @@ export interface UsageTheme extends BaseTheme {
   [key: string]: any
 }
 
-export type ComponentBaseStyle<Y extends Dict = Dict> = UIStyle<Y>
-export interface ComponentVariants<Y extends Dict = Dict> {
-  [key: string]: UIStyle<Y>
+export type Breakpoint = "base" | Theme["breakpoints"]
+
+export type ColorScheme =
+  | [Theme["colorSchemes"], Theme["colorSchemes"]]
+  | Theme["colorSchemes"]
+
+export interface ComponentDefaultProps<
+  Y extends Dict = Dict,
+  M extends Dict = Dict,
+  D extends Dict = Dict,
+> {
+  /**
+   * The color scheme of the component.
+   */
+  colorScheme?: ColorScheme
+  /**
+   * The size of the component.
+   */
+  size?: UIValue<keyof M>
+  /**
+   * The variant of the component.
+   */
+  variant?: UIValue<keyof D>
+  /**
+   * The props of the component.
+   */
+  props?: {
+    [key in keyof Y]?: UIValue<
+      keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
+    >
+  }
 }
-export interface ComponentSizes<Y extends Dict = Dict> {
-  [key: string]: UIStyle<Y>
-}
-type ComponentProps<
-  Y extends keyof Theme["components"] | unknown = unknown,
-  M extends Dict = Dict,
-> = Partial<Omit<M, "colorScheme" | "size" | "variant">> & ThemeProps<Y>
-export type ComponentDefaultProps<
-  Y extends keyof Theme["components"] | unknown = unknown,
-  M extends Dict = Dict,
-> = ComponentProps<Y, M>
-export type ComponentOverrideProps<
-  Y extends keyof Theme["components"] | unknown = unknown,
-  M extends Dict = Dict,
-> =
-  | ((props: ComponentProps<Y, M>) => ComponentProps<Y, M>)
-  | ComponentProps<Y, M>
 
 interface ComponentSharedStyle<
-  Y extends keyof Theme["components"] | unknown = unknown,
+  Y extends Dict = Dict,
   M extends Dict = Dict,
+  D extends Dict = Dict,
 > {
+  /**
+   * The `className` of the component.
+   */
+  className?: string
   /**
    * The default props of the component.
    */
-  defaultProps?: ComponentDefaultProps<Y, M>
-  /**
-   * The override props of the component.
-   */
-  overrideProps?: ComponentOverrideProps<Y, M>
+  defaultProps?: ComponentDefaultProps<Y, M, D>
 }
 
 export interface ComponentStyle<
-  Y extends keyof Theme["components"] | unknown = unknown,
-  M extends Dict = Dict,
-> extends ComponentSharedStyle<Y, M> {
+  Y extends CSSPropObject = CSSPropObject,
+  M extends CSSModifierObject = CSSModifierObject,
+  D extends CSSModifierObject = CSSModifierObject,
+> extends ComponentSharedStyle<Y, M, D> {
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentBaseStyle<M>
+  base?: CSSObject
   /**
-   * The sizes of the component.
+   * The component styles based on props.
    */
-  sizes?: ComponentSizes<M>
+  props?: Y
   /**
-   * The variants of the component.
+   * The component styles based on sizes.
    */
-  variants?: ComponentVariants<M>
+  sizes?: M
+  /**
+   * The component styles based on variants.
+   */
+  variants?: D
 }
 
-export type ComponentMultiBaseStyle<Y extends Dict = Dict> = UIMultiStyle<Y>
-export interface ComponentMultiVariants<Y extends Dict = Dict> {
-  [key: string]: UIMultiStyle<Y>
-}
-export interface ComponentMultiSizes<Y extends Dict = Dict> {
-  [key: string]: UIMultiStyle<Y>
-}
-
-export interface ComponentMultiStyle<
-  Y extends keyof Theme["components"] | unknown = unknown,
-  M extends Dict = Dict,
-> extends ComponentSharedStyle<Y, M> {
+export interface ComponentSlotStyle<
+  Y extends string = string,
+  M extends CSSPropObject<CSSSlotObject<Y>> = CSSPropObject<CSSSlotObject<Y>>,
+  D extends CSSModifierObject<CSSSlotObject<Y>> = CSSModifierObject<
+    CSSSlotObject<Y>
+  >,
+  H extends CSSModifierObject<CSSSlotObject<Y>> = CSSModifierObject<
+    CSSSlotObject<Y>
+  >,
+> extends ComponentSharedStyle<M, D, H> {
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentMultiBaseStyle<M>
+  base?: CSSSlotObject<Y>
   /**
-   * The sizes of the component.
+   * The component styles based on props.
    */
-  sizes?: ComponentMultiSizes<M>
+  props?: M
   /**
-   * The variants of the component.
+   * The component styles based on sizes.
    */
-  variants?: ComponentMultiVariants<M>
+  sizes?: D
+  /**
+   * The component styles based on variants.
+   */
+  variants?: H
 }
 
 export interface CSSMap {
@@ -733,8 +833,9 @@ export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 export type StyledTheme<T extends InternalTheme = InternalTheme> = {
   changeThemeScheme: ChangeThemeScheme
   themeScheme: Theme["themeSchemes"]
-  __breakpoints?: AnalyzeBreakpointsReturn
+  __breakpoints?: CreateBreakpointsReturn
   __config?: ThemeConfig
   __cssMap?: CSSMap
   __cssVars?: Dict
+  __layers?: CreateLayersReturn
 } & T

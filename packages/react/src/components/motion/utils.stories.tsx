@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
 import { useBoolean } from "../../hooks/use-boolean"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../theme"
+import { extendConfig } from "../../tools"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Center } from "../center"
@@ -19,14 +19,14 @@ const meta: Meta<typeof Motion> = {
 export default meta
 
 export const ExitPresenceAnimation: Story = () => {
-  const [isVisible, { toggle }] = useBoolean()
+  const [visible, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please click</Button>
 
       <AnimatePresence>
-        {isVisible ? (
+        {visible ? (
           <Motion
             animate={{ opacity: 1 }}
             bg="primary"

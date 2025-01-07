@@ -4,11 +4,11 @@ import type { PseudoProperty } from "../pseudos"
 import type { ProcessSkipProperty, StyleProperty } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
-import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+import type { CSSObjectOrFunc } from "./css.types"
 import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
-import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { processSkipProperties, styles } from "../styles"
+import { getVar } from "./var"
 
 function isProcessSkip(key: string): boolean {
   return processSkipProperties.includes(key as ProcessSkipProperty)
@@ -155,41 +155,36 @@ function expandCSS(css: Dict) {
 }
 
 function valueToVar(value: any, theme: StyledTheme) {
-  if (isArray(value) || isObject(value)) {
-    return value
-  } else if (isString(value)) {
-    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
-
+  if (isString(value)) {
     return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
+      if (value.startsWith("colorScheme.")) {
+        const [, token] = value.split(".")
+
+        return getVar(`colorScheme-${token}`)(theme)
+      }
+
       if (isObject(theme.__cssMap) && value in theme.__cssMap) {
         if (theme.__cssMap[value]?.ref) return theme.__cssMap[value].ref
       }
 
-      return `var(--${prefix}-${value})`
+      return getVar(value)(theme)
     })
   } else {
     return value
   }
 }
 
-export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
-  return function (
-    theme: StyledTheme,
-    disableStyleProp?: (prop: string) => boolean,
-  ) {
-    function createCSS(
-      cssOrFunc: CSSObjectOrFunc | CSSUIObject,
-      isNested = false,
-    ): Dict {
+export function css(cssOrFunc: CSSObjectOrFunc) {
+  return function (theme: StyledTheme, forwardProps?: string[]) {
+    function createCSS(cssOrFunc: CSSObjectOrFunc, isNested = false): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        if (disableStyleProp?.(prop)) continue
+        if (forwardProps?.includes(prop)) continue
 
-        value = runIfFunc(value, theme)
         value = valueToVar(value, theme)
 
         if (value == null) continue
@@ -203,7 +198,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
         if (style === true) style = { properties: prop }
 
-        if (isObject(value) && !style?.isProcessSkip) {
+        if (isObject(value) && !style?.processSkip) {
           value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
 
           resolvedCSS[prop] = resolvedCSS[prop] ?? {}
@@ -214,20 +209,15 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
         value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
 
-        if (style?.isProcessResult || style?.isProcessSkip)
+        if (style?.processResult || style?.processSkip)
           value = createCSS(value, true)
 
-        if (!isNested && style?.static) {
-          const staticStyles = runIfFunc(style.static, theme)
+        if (!isNested && style?.static)
+          resolvedCSS = merge(resolvedCSS, style.static)
 
-          resolvedCSS = merge(resolvedCSS, staticStyles)
-        }
-
-        const properties = runIfFunc(style?.properties, theme)
-
-        if (properties) {
-          if (isArray(properties)) {
-            for (const property of properties) {
+        if (style?.properties) {
+          if (isArray(style.properties)) {
+            for (const property of style.properties) {
               resolvedCSS[property] = value
             }
 
@@ -237,7 +227,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
             continue
           } else {
-            resolvedCSS[properties] = value
+            resolvedCSS[style.properties] = value
 
             continue
           }

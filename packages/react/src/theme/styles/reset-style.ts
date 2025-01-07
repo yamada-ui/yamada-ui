@@ -1,6 +1,6 @@
-import type { UIStyle } from "../../core"
+import type { CSSObject } from "../../core"
 
-export const resetStyle: UIStyle = {
+export const resetStyle: CSSObject = {
   "*": {
     boxSizing: "border-box",
   },

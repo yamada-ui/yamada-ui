@@ -1,21 +1,16 @@
 import { pseudoProperties } from "../pseudos"
 import { styleProperties } from "../styles"
 
-const UIProps = new Set([
-  "__css",
-  "as",
-  "css",
-  "errorBorderColor",
-  "focusBorderColor",
-  "sx",
+export const uiProps = new Set(["as", "css"])
+export const styleProps = new Set<string>([
   ...pseudoProperties,
   ...styleProperties,
 ])
 
-export function shouldForwardProp(
-  disableStyleProp?: (prop: string) => boolean,
-) {
+export function createShouldForwardProp(forwardProps?: string[]) {
   return function (prop: string): boolean {
-    return (disableStyleProp?.(prop) ?? false) || !UIProps.has(prop)
+    if (forwardProps?.includes(prop)) return true
+
+    return !uiProps.has(prop) && !styleProps.has(prop)
   }
 }

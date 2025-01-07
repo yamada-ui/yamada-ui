@@ -30,12 +30,9 @@ import { FaRobot } from "react-icons/fa"
 
 ```tsx
 <Wrap gap="md">
-  <Icon as={FaRobot} fontSize="xl" />
-  <Icon as={FaRobot} fontSize="2xl" />
-  <Icon as={FaRobot} fontSize="3xl" />
-  <Icon as={FaRobot} fontSize="4xl" />
-  <Icon as={FaRobot} fontSize="5xl" />
-  <Icon as={FaRobot} fontSize="6xl" />
+  <For each={["xl", "2xl", "3xl", "4xl", "5xl", "6xl"]}>
+    {(fontSize, index) => <Icon key={index} as={FaRobot} fontSize={fontSize} />}
+  </For>
 </Wrap>
 ```
 

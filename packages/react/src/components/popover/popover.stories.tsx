@@ -99,13 +99,13 @@ export const WithDuration: Story = () => {
 }
 
 export const ControlPopover: Story = () => {
-  const { isOpen, onClose, onToggle } = useDisclosure()
+  const { open, onClose, onToggle } = useDisclosure()
 
   return (
     <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button onClick={onToggle}>Open Popover</Button>
 
-      <Popover closeOnBlur={false} open={isOpen} onClose={onClose}>
+      <Popover closeOnBlur={false} open={open} onClose={onClose}>
         <PopoverTrigger>
           <Button colorScheme="primary">Target Popover</Button>
         </PopoverTrigger>

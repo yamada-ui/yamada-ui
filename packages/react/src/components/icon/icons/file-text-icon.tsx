@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { FileText } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `FileTextIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FileTextIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={FileText} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const FileTextIcon = component(Icon)({ as: FileText })

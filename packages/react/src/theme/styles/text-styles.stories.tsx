@@ -1,4 +1,4 @@
-import type { TextStyles } from "../../core"
+import type { CSSModifierObject } from "../../core"
 import { Heading } from "../../components/heading"
 import { UIProvider } from "../../providers/ui-provider"
 import { extendTheme } from "../../tools"
@@ -8,7 +8,7 @@ export default {
 }
 
 export const Basic = () => {
-  const textStyles: TextStyles = {
+  const textStyles: CSSModifierObject = {
     gradient: {
       bgClip: "text",
       bgGradient: "linear(to-l, #7928CA, #FF0080)",

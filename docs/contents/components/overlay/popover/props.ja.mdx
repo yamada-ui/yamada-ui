@@ -524,6 +524,14 @@ order: 1
 />
 
 <PropsCard
+  id="popoverclosebutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={"If true, the button is full rounded."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="popoverclosebutton-isdisabled"
   name="isDisabled"
   type="boolean"
@@ -537,6 +545,7 @@ order: 1
   name="isRounded"
   type="boolean"
   description={"If true, the button is full rounded."}
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 
@@ -545,7 +554,7 @@ order: 1
 <PropsCard
   id="popovercontent-as"
   name="as"
-  type="keyof ReactDOM"
+  type="keyof IntrinsicElements"
   description={"The HTML element to render."}
 />
 

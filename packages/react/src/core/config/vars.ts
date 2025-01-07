@@ -3,8 +3,17 @@ import type { CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { flattenObject, isArray, isObject, isUndefined } from "../../utils"
-import { DEFAULT_VAR_PREFIX } from "../constant"
+import { getVarName } from "../css"
+import { colorMix } from "./color-mix"
 import { tokenToVar } from "./utils"
+
+function transformValue(token: ThemeToken, value: Dict) {
+  return function (theme: StyledTheme) {
+    if (token === "colors") value = colorMix(value, theme)
+
+    return tokenToVar(token, value)(theme)
+  }
+}
 
 function insertObject(obj: Dict, segments: string[], value: any): any {
   if (segments.length === 0) return value
@@ -24,9 +33,9 @@ function valueToToken(token: ThemeToken, value: Dict) {
       const segments = path.split(".")
 
       if (isArray(value)) {
-        value = value.map((value) => tokenToVar(token, value)(theme))
+        value = value.map((value) => transformValue(token, value)(theme))
       } else {
-        value = tokenToVar(token, value)(theme)
+        value = transformValue(token, value)(theme)
       }
 
       insertObject(prev, segments, value)
@@ -49,11 +58,11 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
             if (isObject(value)) {
               return valueToToken(token, value)(theme)
             } else {
-              return tokenToVar(token, value)(theme)
+              return transformValue(token, value)(theme)
             }
           })
         } else {
-          prev[key] = tokenToVar(token, value)(theme)
+          prev[key] = transformValue(token, value)(theme)
         }
 
         return prev
@@ -63,11 +72,11 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
         if (isObject(value)) {
           return valueToToken(token, value)(theme)
         } else {
-          return tokenToVar(token, value)(theme)
+          return transformValue(token, value)(theme)
         }
       })
     } else {
-      value = tokenToVar(token, value)(theme)
+      value = transformValue(token, value)(theme)
     }
 
     return value
@@ -83,9 +92,7 @@ export function vars(
   if (!isArray(values)) return values
 
   return values.reduce<Dict>((prev, { name, token, value, __prefix }) => {
-    const prefix = __prefix ?? theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
-
-    name = `--${prefix}-${name}`
+    name = getVarName(name, __prefix)(theme)
 
     prev[name] = replaceValue(token, value)(theme)
 

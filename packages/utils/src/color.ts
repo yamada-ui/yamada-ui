@@ -10,12 +10,13 @@ type ColorMode = "dark" | "light"
 export type ColorFormat = "hex" | "hexa" | "hsl" | "hsla" | "rgb" | "rgba"
 
 export const SEMANTIC_COLOR_SCHEMES = [
+  "mono",
   "primary",
   "secondary",
   "info",
   "success",
   "warning",
-  "danger",
+  "error",
   "link",
 ] as const
 
@@ -46,14 +47,6 @@ export const COLOR_SCHEMES = [
   ...SEMANTIC_COLOR_SCHEMES,
   ...DEFAULT_COLOR_SCHEMES,
 ]
-
-export type SemanticColorScheme =
-  | (typeof SEMANTIC_COLOR_SCHEMES)[number]
-  | StringLiteral
-export type DefaultColorScheme =
-  | (typeof DEFAULT_COLOR_SCHEMES)[number]
-  | StringLiteral
-export type ColorScheme = DefaultColorScheme | SemanticColorScheme
 
 export const TONES = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,

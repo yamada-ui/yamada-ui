@@ -31,28 +31,70 @@ import { Float } from "@yamada-ui/react"
 To change the display position, specify `placement` such as `start-start` or `end-center`.
 
 ```tsx functional=true
-const placements = [
-  "start-start",
-  "start-center",
-  "start-end",
-  "center-start",
-  "center-center",
-  "center-end",
-  "end-start",
-  "end-center",
-  "end-end",
-] as const
-
 return (
-  <Grid w="fit-content" gap="md" p="md" templateColumns="repeat(3, 1fr)">
-    {placements.map((placement) => (
+  <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+    <For
+      each={[
+        "start-start",
+        "start-center",
+        "start-end",
+        "center-start",
+        "center-center",
+        "center-end",
+        "end-start",
+        "end-center",
+        "end-end",
+      ]}
+    >
+      {(placement, index) => (
+        <GridItem
+          key={index}
+          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          boxSize="3xs"
+          position="relative"
+        >
+          <Float placement={placement}>
+            <Center
+              bg="primary"
+              color="white"
+              fontSize="sm"
+              px="1.5"
+              rounded="md"
+            >
+              New
+            </Center>
+          </Float>
+        </GridItem>
+      )}
+    </For>
+  </Grid>
+)
+```
+
+### Change the Offset
+
+If the size of the element causes it to be positioned unexpectedly, adjust it using `offset`.
+
+```tsx
+<Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+  <For
+    each={[
+      { placement: "start-start", offset: "md" },
+      { placement: "center-start", offset: ["0", "md"] },
+      { placement: "end-end", offset: ["md", "0"] },
+    ]}
+  >
+    {({ placement, offset }, index) => (
       <GridItem
-        key={placement}
         bg={["blackAlpha.50", "whiteAlpha.50"]}
         boxSize="3xs"
         position="relative"
       >
-        <Float placement={placement}>
+        <Float
+          key={index}
+          offset={variant.offset}
+          placement={variant.placement}
+        >
           <Center
             bg="primary"
             color="white"
@@ -64,51 +106,7 @@ return (
           </Center>
         </Float>
       </GridItem>
-    ))}
-  </Grid>
-)
-```
-
-### Change the Offset
-
-If the size of the element causes it to be positioned unexpectedly, adjust it using `offset`.
-
-```tsx
-<Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
-  <GridItem
-    bg={["blackAlpha.50", "whiteAlpha.50"]}
-    boxSize="3xs"
-    position="relative"
-  >
-    <Float offset="md" placement="start-start">
-      <Center bg="primary" color="white" fontSize="sm" px="1.5" rounded="md">
-        New
-      </Center>
-    </Float>
-  </GridItem>
-
-  <GridItem
-    bg={["blackAlpha.50", "whiteAlpha.50"]}
-    boxSize="3xs"
-    position="relative"
-  >
-    <Float offset={["0", "md"]} placement="center-start">
-      <Center bg="primary" color="white" fontSize="sm" px="1.5" rounded="md">
-        New
-      </Center>
-    </Float>
-  </GridItem>
-
-  <GridItem
-    bg={["blackAlpha.50", "whiteAlpha.50"]}
-    boxSize="3xs"
-    position="relative"
-  >
-    <Float offset={["md", "0"]} placement="end-end">
-      <Center bg="primary" color="white" fontSize="sm" px="1.5" rounded="md">
-        New
-      </Center>
-    </Float>
-  </GridItem>
+    )}
+  </For>
 </Grid>
 ```

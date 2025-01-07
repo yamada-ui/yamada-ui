@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { RedoDot } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `RedoDotIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const RedoDotIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={RedoDot} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const RedoDotIcon = component(Icon)({ as: RedoDot })

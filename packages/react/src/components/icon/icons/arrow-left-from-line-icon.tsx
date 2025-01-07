@@ -1,21 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { ArrowLeftFromLine } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `ArrowLeftFromLineIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ArrowLeftFromLineIcon: FC<IconProps> = ({
-  className,
-  ...rest
-}) => (
-  <Icon
-    as={ArrowLeftFromLine}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const ArrowLeftFromLineIcon = component(Icon)({ as: ArrowLeftFromLine })

@@ -1,18 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { ContactRound } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `ContactRoundIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ContactRoundIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon
-    as={ContactRound}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const ContactRoundIcon = component(Icon)({ as: ContactRound })

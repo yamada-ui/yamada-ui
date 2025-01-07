@@ -1,18 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { AppWindowMac } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { Icon, component } from "../icon"
 
 /**
  * `AppWindowMacIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AppWindowMacIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon
-    as={AppWindowMac}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const AppWindowMacIcon = component(Icon)({ as: AppWindowMac })

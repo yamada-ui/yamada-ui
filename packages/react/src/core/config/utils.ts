@@ -5,6 +5,7 @@ import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { keyframes as emotionKeyframes } from "@emotion/react"
 import { isObject, isString, isUndefined } from "../../utils"
+import { getVar } from "../css"
 
 export type Transform = (
   value: any,
@@ -84,20 +85,46 @@ export function analyzeCSSValue(value: any) {
 
 export function tokenToVar(token: ThemeToken, value: any) {
   return function (theme: StyledTheme) {
-    const match = isString(value)
-      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
-      : null
+    if (value == null) return value
 
-    const [, resolvedValue, fallbackValue] = match ?? []
+    if (isString(value)) {
+      const important = value.match(/\s*!important\s*/g)
 
-    if (resolvedValue) value = resolvedValue
+      value = value.replace(/\s*!important\s*/g, "")
 
-    const resolvedToken = `${token}.${value}`
+      const match = value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
+      const [, pickedValue, fallbackValue] = match ?? []
 
-    if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-      return theme.__cssMap[resolvedToken]?.ref
+      if (pickedValue) value = pickedValue
+
+      if (value.startsWith("colorScheme.")) {
+        const [, token] = value.split(".")
+        const resolvedValue = getVar(`colorScheme-${token}`)(theme)
+
+        return `${resolvedValue}${important ? " !important" : ""}`
+      }
+
+      const resolvedToken = `${token}.${value}`
+
+      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
+        const value = theme.__cssMap[resolvedToken]?.ref
+
+        return `${value}${important ? " !important" : ""}`
+      } else {
+        const resolvedValue = fallbackValue ?? value
+
+        return resolvedValue
+          ? `${resolvedValue}${important ? " !important" : ""}`
+          : resolvedValue
+      }
     } else {
-      return fallbackValue ?? value
+      const resolvedToken = `${token}.${value}`
+
+      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
+        return theme.__cssMap[resolvedToken]?.ref
+      } else {
+        return value
+      }
     }
   }
 }

@@ -1,45 +1,41 @@
-import type { ReactElement } from "react"
-import type { FC } from "../../core"
+import type { ReactNode } from "react"
 import type { ButtonProps } from "./button"
-import { cx } from "../../utils"
+import { createComponent } from "../../core"
 import { Button } from "./button"
-
-interface IconButtonOptions {
-  /**
-   * The icon to be used in the button.
-   */
-  icon?: ReactElement
-}
 
 export interface IconButtonProps
   extends Omit<
-      ButtonProps,
-      | "endIcon"
-      | "leftIcon"
-      | "loadingIcon"
-      | "loadingPlacement"
-      | "loadingText"
-      | "rightIcon"
-      | "startIcon"
-    >,
-    IconButtonOptions {}
+    ButtonProps,
+    | "endIcon"
+    | "iconProps"
+    | "loadingIcon"
+    | "loadingMessage"
+    | "loadingPlacement"
+    | "loadingProps"
+    | "startIcon"
+  > {
+  /**
+   * The icon to be used in the button.
+   */
+  icon?: ReactNode
+}
+
+export const {
+  PropsContext: IconButtonPropsContext,
+  usePropsContext: useIconButtonPropsContext,
+  withContext,
+} = createComponent<IconButtonProps>("icon-button")
 
 /**
  * `IconButton` is a component that displays an icon within a button.
  *
  * @see Docs https://yamada-ui.com/components/forms/icon-button
  */
-export const IconButton: FC<IconButtonProps> = ({
-  className,
-  children,
-  icon,
-  ...rest
-}) => {
-  return (
-    <Button className={cx("ui-icon-button", className)} p={0} {...rest}>
-      {icon || children}
-    </Button>
-  )
-}
-
-IconButton.__ui__ = "IconButton"
+export const IconButton = withContext(Button)(
+  undefined,
+  ({ children, icon, ...rest }) => ({
+    children: children || icon,
+    p: "0",
+    ...rest,
+  }),
+)

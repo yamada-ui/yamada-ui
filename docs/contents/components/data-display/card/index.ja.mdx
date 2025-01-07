@@ -40,57 +40,22 @@ import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Card variant="elevated">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
+  <For each={["elevated", "outline", "subtle", "solid"]}>
+    {(variant, index) => (
+      <Card key={index} variant={variant}>
+        <CardHeader>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </CardHeader>
 
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card variant="outline">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card variant="subtle">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card variant="solid">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
+        <CardBody>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </CardBody>
+      </Card>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -98,57 +63,22 @@ import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Card size="sm">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
+  <For each={["sm", "md", "normal", "lg"]}>
+    {(size, index) => (
+      <Card key={index} size={size}>
+        <CardHeader>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </CardHeader>
 
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card size="md">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card size="normal">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card size="lg">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
+        <CardBody>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </CardBody>
+      </Card>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -156,31 +86,27 @@ import { Card, CardHeader, CardBody, CardFooter } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Card variant="subtle" colorScheme="green">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
+  <For
+    each={[
+      { variant: "subtle", colorScheme: "green" },
+      { variant: "solid", colorScheme: "pink" },
+    ]}
+  >
+    {({ variant, colorScheme }, index) => (
+      <Card key={index} variant={variant} colorScheme={colorScheme}>
+        <CardHeader>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </CardHeader>
 
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
-
-  <Card variant="solid" colorScheme="pink">
-    <CardHeader>
-      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-    </CardHeader>
-
-    <CardBody>
-      <Text>
-        『SLAM
-        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-      </Text>
-    </CardBody>
-  </Card>
+        <CardBody>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </CardBody>
+      </Card>
+    )}
+  </For>
 </VStack>
 ```
 

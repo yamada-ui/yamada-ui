@@ -10,4 +10,8 @@ export * from "./styles"
 export * from "./theme"
 export type * from "./theme.types"
 export type * from "./ui-theme.types"
-export type { CSSObject, Interpolation, Keyframes } from "@emotion/react"
+export type {
+  CSSObject as EmotionCSSObject,
+  Interpolation,
+  Keyframes,
+} from "@emotion/react"

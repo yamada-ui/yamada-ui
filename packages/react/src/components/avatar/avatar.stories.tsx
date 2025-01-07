@@ -1,7 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { AvatarProps } from "./"
+import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import { PropsTable } from "../../../storybook/components/props-table"
 import { Wrap } from "../flex"
+import { For } from "../for"
 import { GhostIcon } from "../icon"
-import { Avatar, AvatarBadge, AvatarGroup } from "./"
+import { Avatar, AvatarGroup } from "./"
 
 type Story = StoryFn<typeof Avatar>
 
@@ -21,16 +25,51 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Variants: Story = () => {
+  return (
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Avatar
+            key={key}
+            name="Hirotomo Yamada"
+            colorScheme={row}
+            variant={column}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Sizes: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Avatar
+            key={key}
+            name="Hirotomo Yamada"
+            colorScheme={row}
+            size={column}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const WithShape: Story = () => {
   return (
     <Wrap gap="md">
-      <Avatar name="Hirotomo Yamada" size="2xs" />
-      <Avatar name="Hirotomo Yamada" size="xs" />
-      <Avatar name="Hirotomo Yamada" size="sm" />
-      <Avatar name="Hirotomo Yamada" size="md" />
-      <Avatar name="Hirotomo Yamada" size="lg" />
-      <Avatar name="Hirotomo Yamada" size="xl" />
-      <Avatar name="Hirotomo Yamada" size="2xl" />
+      <For<AvatarProps["shape"]> each={["circle", "square", "rounded"]}>
+        {(shape, index) => (
+          <Avatar key={index} name="Hirotomo Yamada" shape={shape} />
+        )}
+      </For>
     </Wrap>
   )
 }
@@ -51,85 +90,115 @@ export const WithImage: Story = () => {
 export const WithFallback: Story = () => {
   return (
     <Wrap gap="md">
-      <Avatar src="https://not-found.com" bg="secondary" />
+      <Avatar src="https://not-found.com" />
       <Avatar src="https://not-found.com" alt="alternative text" />
       <Avatar src="https://not-found.com" icon={<GhostIcon fontSize="2xl" />} />
     </Wrap>
   )
 }
 
-export const WithBadge: Story = () => {
-  return (
-    <Avatar
-      name="Hirotomo Yamada"
-      src="https://avatars.githubusercontent.com/u/84060430?v=4"
-    >
-      <AvatarBadge bg="primary" />
-    </Avatar>
-  )
-}
+export const UseRandomColor: Story = () => {
+  const randomColorScheme = (name: string) => {
+    const index = name.charCodeAt(0) % COLOR_SCHEMES.length
 
-export const WithPing: Story = () => {
+    return COLOR_SCHEMES[index]
+  }
+
   return (
-    <Avatar
-      name="Hirotomo Yamada"
-      src="https://avatars.githubusercontent.com/u/84060430?v=4"
-    >
-      <AvatarBadge bg="primary" ping pingColor="primary.400" />
-    </Avatar>
+    <Wrap gap="md">
+      <For each={["Hirotomo Yamada", "Koiso Kenji", "Shinohara Natsuki"]}>
+        {(name, index) => (
+          <Avatar
+            key={index}
+            name={name}
+            colorScheme={randomColorScheme(name)}
+          />
+        )}
+      </For>
+    </Wrap>
   )
 }
 
 export const UseGroup: Story = () => {
   return (
-    <AvatarGroup>
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-    </AvatarGroup>
+    <>
+      <For each={["solid", "subtle", "surface", "outline"]}>
+        {(variant, index) => (
+          <AvatarGroup key={index} variant={variant}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+
+      <For each={["xs", "sm", "md", "lg", "xl"]}>
+        {(size, index) => (
+          <AvatarGroup key={index} size={size}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+
+      <For each={["circle", "square", "rounded"]}>
+        {(shape, index) => (
+          <AvatarGroup key={index} shape={shape}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+    </>
   )
 }
 
 export const WithGroupMax: Story = () => {
   return (
-    <AvatarGroup max={3}>
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      />
-    </AvatarGroup>
+    <>
+      <For each={["solid", "subtle", "surface", "outline"]}>
+        {(variant, index) => (
+          <AvatarGroup key={index} variant={variant} max={3}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+
+      <For each={["xs", "sm", "md", "lg", "xl"]}>
+        {(size, index) => (
+          <AvatarGroup key={index} size={size} max={3}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+
+      <For each={["circle", "square", "rounded"]}>
+        {(shape, index) => (
+          <AvatarGroup key={index} max={3} shape={shape}>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <Avatar key={index} name="Hirotomo Yamada" />
+              ))}
+          </AvatarGroup>
+        )}
+      </For>
+    </>
   )
 }

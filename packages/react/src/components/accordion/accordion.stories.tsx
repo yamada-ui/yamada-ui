@@ -1,16 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { AccordionProps } from "./accordion"
 import { useState } from "react"
 import { GhostIcon, MinusIcon, PlusIcon } from "../icon"
-import { Accordion } from "./accordion"
-import { AccordionItem } from "./accordion-item"
-import { AccordionLabel } from "./accordion-label"
-import { AccordionPanel } from "./accordion-panel"
+import { Accordion } from "./"
 
-type Story = StoryFn<typeof Accordion>
+type Story = StoryFn<typeof Accordion.Root>
 
-const meta: Meta<typeof Accordion> = {
-  component: Accordion,
+const meta: Meta<typeof Accordion.Root> = {
+  component: Accordion.Root,
   title: "Components / Accordion",
 }
 
@@ -18,224 +14,224 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Accordion>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const WithVariant: Story = () => {
   return (
     <>
-      <Accordion variant="basic">
-        <AccordionItem label="孫悟空少年編">
+      <Accordion.Root variant="basic">
+        <Accordion.Item button="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="ピッコロ大魔王編">
+        <Accordion.Item button="ピッコロ大魔王編">
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="サイヤ人編">
+        <Accordion.Item button="サイヤ人編">
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionItem>
-      </Accordion>
+        </Accordion.Item>
+      </Accordion.Root>
 
-      <Accordion variant="card">
-        <AccordionItem label="孫悟空少年編">
+      <Accordion.Root variant="card">
+        <Accordion.Item button="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="ピッコロ大魔王編">
+        <Accordion.Item button="ピッコロ大魔王編">
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="サイヤ人編">
+        <Accordion.Item button="サイヤ人編">
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionItem>
-      </Accordion>
+        </Accordion.Item>
+      </Accordion.Root>
     </>
   )
 }
 
 export const WithDefaultIndex: Story = () => {
   return (
-    <Accordion defaultIndex={1}>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root defaultIndex={1}>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const WithIsToggle: Story = () => {
   return (
-    <Accordion toggle>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root toggle>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const WithIsMultiple: Story = () => {
   return (
-    <Accordion defaultIndex={[1, 2]} multiple>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root defaultIndex={[1, 2]} multiple>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const WithIconHidden: Story = () => {
   return (
-    <Accordion iconHidden>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root iconHidden>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const IsDisabled: Story = () => {
   return (
-    <Accordion>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem disabled label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編" disabled>
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const CustomLabel: Story = () => {
   return (
-    <Accordion>
-      <AccordionItem>
-        <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>
+    <Accordion.Root>
+      <Accordion.Item>
+        <Accordion.Button _expanded={{ bg: "orange.500", color: "white" }}>
           孫悟空少年編
-        </AccordionLabel>
+        </Accordion.Button>
 
-        <AccordionPanel pt={3}>
+        <Accordion.Panel pt={3}>
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionPanel>
-      </AccordionItem>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem>
-        <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>
+      <Accordion.Item>
+        <Accordion.Button _expanded={{ bg: "orange.500", color: "white" }}>
           ピッコロ大魔王編
-        </AccordionLabel>
+        </Accordion.Button>
 
-        <AccordionPanel pt={3}>
+        <Accordion.Panel pt={3}>
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionPanel>
-      </AccordionItem>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem>
-        <AccordionLabel _expanded={{ bg: "orange.500", color: "white" }}>
+      <Accordion.Item>
+        <Accordion.Button _expanded={{ bg: "orange.500", color: "white" }}>
           サイヤ人編
-        </AccordionLabel>
+        </Accordion.Button>
 
-        <AccordionPanel pt={3}>
+        <Accordion.Panel pt={3}>
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const CustomPanel: Story = () => {
   return (
-    <Accordion>
-      <AccordionItem label="孫悟空少年編">
-        <AccordionPanel bg={["orange.50", "orange.400"]} pt={3}>
+    <Accordion.Root>
+      <Accordion.Item button="孫悟空少年編">
+        <Accordion.Panel bg={["orange.50", "orange.400"]} pt={3}>
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionPanel>
-      </AccordionItem>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
-        <AccordionPanel bg={["orange.50", "orange.400"]} pt={3}>
+      <Accordion.Item button="ピッコロ大魔王編">
+        <Accordion.Panel bg={["orange.50", "orange.400"]} pt={3}>
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionPanel>
-      </AccordionItem>
+        </Accordion.Panel>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
-        <AccordionPanel bg={["orange.50", "orange.400"]} pt={3}>
+      <Accordion.Item button="サイヤ人編">
+        <Accordion.Panel bg={["orange.50", "orange.400"]} pt={3}>
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }
 
 export const CustomIcon: Story = () => {
   return (
     <>
-      <Accordion icon={<GhostIcon color="orange.700" />}>
-        <AccordionItem label="孫悟空少年編">
+      <Accordion.Root icon={<GhostIcon color="orange.700" />}>
+        <Accordion.Item button="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="ピッコロ大魔王編">
+        <Accordion.Item button="ピッコロ大魔王編">
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="サイヤ人編">
+        <Accordion.Item button="サイヤ人編">
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionItem>
-      </Accordion>
+        </Accordion.Item>
+      </Accordion.Root>
 
-      <Accordion
+      <Accordion.Root
         icon={({ expanded }) =>
           expanded ? (
             <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
@@ -244,32 +240,32 @@ export const CustomIcon: Story = () => {
           )
         }
       >
-        <AccordionItem label="孫悟空少年編">
+        <Accordion.Item button="孫悟空少年編">
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="ピッコロ大魔王編">
+        <Accordion.Item button="ピッコロ大魔王編">
           天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-        </AccordionItem>
+        </Accordion.Item>
 
-        <AccordionItem label="サイヤ人編">
+        <Accordion.Item button="サイヤ人編">
           ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-        </AccordionItem>
-      </Accordion>
+        </Accordion.Item>
+      </Accordion.Root>
 
-      <Accordion>
-        <AccordionItem>
-          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
+      <Accordion.Root>
+        <Accordion.Item>
+          <Accordion.Button icon={<GhostIcon color="orange.700" />}>
             孫悟空少年編
-          </AccordionLabel>
+          </Accordion.Button>
 
-          <AccordionPanel>
+          <Accordion.Panel>
             地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-          </AccordionPanel>
-        </AccordionItem>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-        <AccordionItem>
-          <AccordionLabel
+        <Accordion.Item>
+          <Accordion.Button
             icon={({ expanded }) =>
               expanded ? (
                 <PlusIcon color={["blackAlpha.800", "whiteAlpha.700"]} />
@@ -279,45 +275,45 @@ export const CustomIcon: Story = () => {
             }
           >
             ピッコロ大魔王編
-          </AccordionLabel>
+          </Accordion.Button>
 
-          <AccordionPanel>
+          <Accordion.Panel>
             天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-          </AccordionPanel>
-        </AccordionItem>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-        <AccordionItem>
-          <AccordionLabel icon={<GhostIcon color="orange.700" />}>
+        <Accordion.Item>
+          <Accordion.Button icon={<GhostIcon color="orange.700" />}>
             サイヤ人編
-          </AccordionLabel>
+          </Accordion.Button>
 
-          <AccordionPanel>
+          <Accordion.Panel>
             ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>
     </>
   )
 }
 
 export const CustomControl: Story = () => {
-  const [index, onChange] = useState<AccordionProps["index"] | undefined>(
+  const [index, onChange] = useState<Accordion.RootProps["index"] | undefined>(
     undefined,
   )
 
   return (
-    <Accordion index={index} onChange={onChange}>
-      <AccordionItem label="孫悟空少年編">
+    <Accordion.Root index={index} onChange={onChange}>
+      <Accordion.Item button="孫悟空少年編">
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="ピッコロ大魔王編">
+      <Accordion.Item button="ピッコロ大魔王編">
         天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-      </AccordionItem>
+      </Accordion.Item>
 
-      <AccordionItem label="サイヤ人編">
+      <Accordion.Item button="サイヤ人編">
         ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
+    </Accordion.Root>
   )
 }

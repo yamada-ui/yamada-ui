@@ -1,8 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { toTitleCase } from "../../utils"
+import type { BadgeProps } from "./badge"
+import { useMemo } from "react"
+import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Wrap } from "../flex"
-import { Badge } from "./badge"
+import { For } from "../for"
+import { Badge, BadgePropsContext } from "./badge"
 
 type Story = StoryFn<typeof Badge>
 
@@ -13,50 +16,51 @@ const meta: Meta<typeof Badge> = {
 
 export default meta
 
-export const Subtle: Story = () => {
+export const Variants: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Badge key={colorScheme} colorScheme={colorScheme}>
-          {toTitleCase(colorScheme)}
-        </Badge>
-      ))}
-    </Wrap>
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Badge key={key} colorScheme={row} variant={column}>
+            Badge
+          </Badge>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const Surface: Story = () => {
+export const Sizes: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Badge key={colorScheme} colorScheme={colorScheme} variant="surface">
-          {toTitleCase(colorScheme)}
-        </Badge>
-      ))}
-    </Wrap>
+    <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Badge key={key} colorScheme={row} size={column}>
+            Badge
+          </Badge>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const Solid: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Badge key={colorScheme} colorScheme={colorScheme} variant="solid">
-          {toTitleCase(colorScheme)}
-        </Badge>
-      ))}
-    </Wrap>
-  )
-}
+export const WithContext: Story = () => {
+  const value = useMemo<BadgeProps>(() => ({ variant: "solid" }), [])
 
-export const Outline: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Badge key={colorScheme} colorScheme={colorScheme} variant="outline">
-          {toTitleCase(colorScheme)}
-        </Badge>
-      ))}
-    </Wrap>
+    <BadgePropsContext value={value}>
+      <Wrap gap="md">
+        <For each={COLOR_SCHEMES}>
+          {(colorScheme, index) => (
+            <Badge key={index} colorScheme={colorScheme}>
+              Badge
+            </Badge>
+          )}
+        </For>
+      </Wrap>
+    </BadgePropsContext>
   )
 }

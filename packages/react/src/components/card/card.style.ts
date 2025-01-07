@@ -1,90 +1,105 @@
-import type { ComponentMultiStyle } from "../../core"
-import { shadeColor, tintColor } from "../../utils"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Card: ComponentMultiStyle<"Card"> = {
-  baseStyle: {
+export const cardStyle = defineComponentSlotStyle({
+  base: {
     body: {
-      alignItems: "flex-start",
+      alignItems: "start",
       display: "flex",
       flex: "1",
       flexDirection: "column",
     },
-    container: {
-      display: "flex",
-      wordWrap: "break-word",
-    },
     footer: {
       alignItems: "center",
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "start",
     },
     header: {
       alignItems: "center",
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "start",
+    },
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      w: "full",
+      wordWrap: "break-word",
     },
   },
 
   sizes: {
     sm: {
       body: { gap: "sm", px: "sm", py: "sm" },
-      container: { rounded: "base" },
       footer: { gap: "sm", pb: "sm", px: "sm" },
       header: { gap: "sm", pt: "sm", px: "sm" },
+      root: { rounded: "base" },
     },
     md: {
       body: { gap: "md", px: "md", py: "md" },
-      container: { rounded: "md" },
       footer: { gap: "md", pb: "md", px: "md" },
       header: { gap: "md", pt: "md", px: "md" },
+      root: { rounded: "md" },
     },
     normal: {
       body: { gap: "normal", px: "normal", py: "normal" },
-      container: { rounded: "lg" },
       footer: { gap: "normal", pb: "normal", px: "normal" },
       header: { gap: "normal", pt: "normal", px: "normal" },
+      root: { rounded: "lg" },
     },
     lg: {
       body: { gap: "lg", px: "lg", py: "lg" },
-      container: { rounded: "xl" },
       footer: { gap: "lg", pb: "lg", px: "lg" },
       header: { gap: "lg", pt: "lg", px: "lg" },
+      root: { rounded: "xl" },
     },
   },
 
   variants: {
     elevated: {
-      container: {
+      root: {
         boxShadow: ["md", "dark-md"],
       },
     },
     outline: {
-      container: {
+      root: {
         borderWidth: "1px",
       },
     },
-    solid: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
-      container: {
-        bg: [tintColor(`${c}.600`, 16)(t, m), shadeColor(`${c}.600`, 16)(t, m)],
-        color: "white",
+    panel: {
+      root: {
+        bg: "bg.panel",
       },
-    }),
-    subtle: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => ({
-      container: {
-        bg: [`${c}.100`, shadeColor(`${c}.300`, 58)(t, m)],
+    },
+    solid: {
+      root: {
+        bg: "colorScheme.solid",
+        color: "colorScheme.contrast",
       },
-    }),
+    },
+    subtle: {
+      root: {
+        bg: "colorScheme.subtle",
+      },
+    },
+    surface: {
+      root: {
+        bg: "colorScheme.subtle",
+        borderColor: "colorScheme.muted",
+        borderWidth: "1px",
+        color: "colorScheme.fg",
+      },
+    },
     unstyled: {
       body: { p: 0 },
-      container: { rounded: 0 },
       footer: { p: 0 },
       header: { p: 0 },
+      root: { rounded: 0 },
     },
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "md",
-    variant: "elevated",
+    variant: "panel",
   },
-}
+})
+
+export type CardStyle = typeof cardStyle

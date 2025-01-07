@@ -1,17 +1,18 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
-import { Grid } from "../grid"
+import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { VStack } from "../stack"
 import { Text } from "../text"
-import { Card, CardBody, CardFooter, CardHeader } from "./card"
+import { Card } from "./"
 
-type Story = StoryFn<typeof Card>
+type Story = StoryFn<typeof Card.Root>
 
-const meta: Meta<typeof Card> = {
-  component: Card,
+const meta: Meta<typeof Card.Root> = {
+  component: Card.Root,
   title: "Components / Card",
 }
 
@@ -19,219 +20,116 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Card>
-      <CardHeader>
+    <Card.Root>
+      <Card.Header>
         <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-      </CardHeader>
+      </Card.Header>
 
-      <CardBody>
+      <Card.Body>
         <Text>
           『SLAM
           DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
         </Text>
-      </CardBody>
-    </Card>
+      </Card.Body>
+    </Card.Root>
   )
 }
 
-export const WithSize: Story = () => {
+export const Variants: Story = () => {
   return (
-    <>
-      <Card size="sm">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
+    <For each={["panel", "outline", "elevated", "solid", "subtle", "surface"]}>
+      {(variant, index) => (
+        <Card.Root key={index} variant={variant}>
+          <Card.Header>
+            <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+          </Card.Header>
 
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card size="md">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card size="normal">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card size="lg">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-    </>
+          <Card.Body>
+            <Text>
+              『SLAM
+              DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Sizes: Story = () => {
   return (
-    <>
-      <Card variant="elevated">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
+    <For each={["sm", "md", "normal", "lg"]}>
+      {(size, index) => (
+        <Card.Root key={index} size={size}>
+          <Card.Header>
+            <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+          </Card.Header>
 
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card variant="outline">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card variant="subtle">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card variant="solid">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-
-      <Card variant="unstyled">
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-      </Card>
-    </>
+          <Card.Body>
+            <Text>
+              『SLAM
+              DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
   )
 }
 
 export const WithColorScheme: Story = () => {
   return (
-    <>
-      <Heading size="xl">Subtle</Heading>
+    <PropsTable columns={["solid", "subtle", "surface"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Card.Root key={key} colorScheme={row} variant={column}>
+            <Card.Header>
+              <Heading size="md">Card</Heading>
+            </Card.Header>
 
-      <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Card key={colorScheme} colorScheme={colorScheme} variant="subtle">
-            <CardHeader>
-              <Heading size="md">{colorScheme}</Heading>
-            </CardHeader>
-            <CardBody>
-              <Text>ColorScheme is {colorScheme}</Text>
-            </CardBody>
-          </Card>
-        ))}
-      </Grid>
-
-      <Heading size="xl">Solid</Heading>
-
-      <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Card key={colorScheme} colorScheme={colorScheme} variant="solid">
-            <CardHeader>
-              <Heading size="md">{colorScheme}</Heading>
-            </CardHeader>
-            <CardBody>
-              <Text>ColorScheme is {colorScheme}</Text>
-            </CardBody>
-          </Card>
-        ))}
-      </Grid>
-    </>
+            <Card.Body>
+              <Text>ColorScheme is {row}</Text>
+            </Card.Body>
+          </Card.Root>
+        )
+      }}
+    </PropsTable>
   )
 }
 
 export const WithImage: Story = () => {
   return (
-    <Card maxW="md">
-      <CardHeader justifyContent="center">
+    <Card.Root maxW="md">
+      <Card.Header justifyContent="center">
         <Image
           src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
           alt="SLAM DUNK"
           rounded="md"
           w="full"
         />
-      </CardHeader>
+      </Card.Header>
 
-      <CardBody>
+      <Card.Body>
         <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
 
         <Text>
           『SLAM
           DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
         </Text>
-      </CardBody>
+      </Card.Body>
 
-      <CardFooter>
+      <Card.Footer>
         <Button colorScheme="primary">Wikipedia</Button>
-      </CardFooter>
-    </Card>
+      </Card.Footer>
+    </Card.Root>
   )
 }
 
 export const HorizontalCard: Story = () => {
   return (
-    <Card
+    <Card.Root
       variant="outline"
-      direction={{ base: "row", md: "column" }}
+      flexDirection={{ base: "row", md: "column" }}
       overflow="hidden"
     >
       <Image
@@ -242,78 +140,21 @@ export const HorizontalCard: Story = () => {
       />
 
       <VStack gap="0">
-        <CardHeader>
+        <Card.Header>
           <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
+        </Card.Header>
 
-        <CardBody>
+        <Card.Body>
           <Text>
             『SLAM
             DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
-        </CardBody>
+        </Card.Body>
 
-        <CardFooter>
+        <Card.Footer>
           <Button colorScheme="primary">Wikipedia</Button>
-        </CardFooter>
+        </Card.Footer>
       </VStack>
-    </Card>
-  )
-}
-
-export const MultiCards: Story = () => {
-  return (
-    <Grid gap="md" templateColumns="repeat(auto-fill, minmax(320px, 1fr))">
-      <Card>
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-
-        <CardFooter>
-          <Button colorScheme="primary">Wikipedia</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-
-        <CardFooter>
-          <Button colorScheme="primary">Wikipedia</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Text>
-            『SLAM
-            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-          </Text>
-        </CardBody>
-
-        <CardFooter>
-          <Button colorScheme="primary">Wikipedia</Button>
-        </CardFooter>
-      </Card>
-    </Grid>
+    </Card.Root>
   )
 }

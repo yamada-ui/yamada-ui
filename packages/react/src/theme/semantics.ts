@@ -92,7 +92,7 @@ export const semantics: ThemeSemantics = {
     },
     border: {
       contrast: ["black", "white"],
-      default: ["black.200", "white.300"],
+      default: ["black.200", "white.200"],
       emphasized: ["black.300", "white.300"],
       error: ["error.500", "error.500"],
       info: ["info.500", "info.500"],

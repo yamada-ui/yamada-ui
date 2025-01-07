@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import type { UseClickableProps } from "../../hooks/use-clickable"
 import type { Merge } from "../../utils"
 import { useId } from "react"
@@ -47,15 +47,6 @@ export const Tab = forwardRef<TabProps, "button">(
     const { descendants } = useTabPanelDescendant()
     const tabpanelId = descendants.value(index)?.node.id
     const isSelected = index === selectedIndex
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      outline: "0",
-      overflow: "hidden",
-      position: "relative",
-      ...styles.tab,
-    }
 
     id ??= uuid
 
@@ -88,7 +79,7 @@ export const Tab = forwardRef<TabProps, "button">(
     return (
       <ui.button
         className={cx("ui-tabs__tab", className)}
-        __css={css}
+        __css={styles.tab}
         {...clickableProps}
         type="button"
         data-orientation={orientation}

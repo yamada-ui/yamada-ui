@@ -4,7 +4,7 @@ import type {
   MouseEvent,
   ReactElement,
 } from "react"
-import type { CSSUIObject, HTMLUIProps } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { useCallback, useId, useRef, useState } from "react"
 import { forwardRef, ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
@@ -60,22 +60,6 @@ interface MenuItemOptions {
    * The menu item icon to use.
    */
   icon?: ReactElement
-  /**
-   * If `true`, the menu item will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the menu item will be focusable.
-   *
-   * @default false
-   *
-   * @deprecated Use `focusable` instead.
-   */
-  isFocusable?: boolean
 }
 
 export interface MenuItemProps extends HTMLUIProps, MenuItemOptions {}
@@ -88,10 +72,8 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       children,
       closeOnSelect: customCloseOnSelect,
       command,
-      isDisabled,
-      disabled = isDisabled,
-      isFocusable,
-      focusable = isFocusable,
+      disabled,
+      focusable,
       icon,
       ...props
     },
@@ -126,19 +108,6 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
       : "menuitem"
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
     const focused = index === focusedIndex
-    const css: CSSUIObject = {
-      alignItems: "center",
-      color: "inherit",
-      display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      textAlign: "start",
-      textDecoration: "none",
-      userSelect: "none",
-      width: "100%",
-      ...styles.item,
-    }
 
     id ??= uuid
 
@@ -259,7 +228,7 @@ export const MenuItem = forwardRef<MenuItemProps, "div">(
           id={id}
           className={cx("ui-menu__item", className)}
           data-focus={dataAttr(downstreamOpen)}
-          __css={css}
+          __css={styles.item}
           {...rest}
           role={role}
           tabIndex={!downstreamOpen && focused ? 0 : -1}
@@ -292,14 +261,6 @@ interface MenuOptionItemOptions {
    */
   icon?: null | ReactElement
   /**
-   * If `true`, the checkbox or radio will be checked.
-   *
-   * @default false
-   *
-   * @deprecated Use `checked` instead.
-   */
-  isChecked?: boolean
-  /**
    * The value of the menu option item.
    */
   value?: string
@@ -311,15 +272,7 @@ export interface MenuOptionItemProps
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
-    {
-      className,
-      isChecked,
-      checked = isChecked,
-      children,
-      closeOnSelect = false,
-      icon,
-      ...rest
-    },
+    { className, checked, children, closeOnSelect = false, icon, ...rest },
     ref,
   ) => {
     return (
@@ -350,21 +303,12 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useMenu()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      flexShrink: 0,
-      fontSize: "0.85em",
-      justifyContent: "center",
-      ...styles.icon,
-    }
-
     return (
       <ui.span
         ref={ref}
         className={cx("ui-menu__item__icon", className)}
         aria-hidden
-        __css={css}
+        __css={styles.icon}
         {...rest}
       />
     )
@@ -380,13 +324,11 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
   ({ className, ...rest }, ref) => {
     const { styles } = useMenu()
 
-    const css: CSSUIObject = { ...styles.command }
-
     return (
       <ui.span
         ref={ref}
         className={cx("ui-menu__item__command", className)}
-        __css={css}
+        __css={styles.command}
         {...rest}
       />
     )

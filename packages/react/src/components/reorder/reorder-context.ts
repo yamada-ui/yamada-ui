@@ -14,8 +14,8 @@ export const [ReorderProvider, useReorderContext] =
   })
 
 interface ReorderItemContext {
+  drag: boolean
   dragControls: DragControls
-  isDrag: boolean
   register: (node: HTMLElement | null) => void
 }
 

@@ -1,7 +1,9 @@
-import type { CSSUIObject, FC, HTMLUIProps, Token } from "../../core"
+import type { FC, HTMLUIProps, Token } from "../../core"
+import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
-import { ui } from "../../core"
-import { cx, replaceObject } from "../../utils"
+import { createComponent } from "../../core"
+import { replaceObject } from "../../utils"
+import { aspectRatioStyle } from "./aspect-ratio.style"
 
 interface AspectRatioOptions {
   /**
@@ -14,50 +16,33 @@ interface AspectRatioOptions {
 
 export interface AspectRatioProps extends AspectRatioOptions, HTMLUIProps {}
 
+export const {
+  PropsContext: AspectRatioPropsContext,
+  usePropsContext: useAspectRatioPropsContext,
+  withContext,
+} = createComponent<AspectRatioProps, AspectRatioStyle>(
+  "aspect-ratio",
+  aspectRatioStyle,
+)
+
 /**
  * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.
  *
  * @see Docs https://yamada-ui.com/components/layouts/aspect-ratio
  */
-export const AspectRatio: FC<AspectRatioProps> = ({
-  className,
-  children,
-  ratio = 4 / 3,
-  ...rest
-}) => {
-  const child = Children.only(children)
+export const AspectRatio: FC<AspectRatioProps> = withContext("div")(
+  undefined,
+  ({ children, ratio = 4 / 3, ...rest }) => {
+    const child = Children.only(children)
 
-  const css: CSSUIObject = {
-    "& > *:not(style)": {
-      alignItems: "center",
-      bottom: "0",
-      display: "flex",
-      h: "100%",
-      justifyContent: "center",
-      left: "0",
-      overflow: "hidden",
-      position: "absolute",
-      right: "0",
-      top: "0",
-      w: "100%",
-    },
-    "& > img, & > video": {
-      objectFit: "cover",
-    },
-    position: "relative",
-    _before: {
-      content: `""`,
-      display: "block",
-      h: 0,
-      pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),
-    },
-  }
-
-  return (
-    <ui.div className={cx("ui-aspect-ratio", className)} __css={css} {...rest}>
-      {child}
-    </ui.div>
-  )
-}
-
-AspectRatio.__ui__ = "AspectRatio"
+    return {
+      ...rest,
+      children: child,
+      _before: {
+        display: "block",
+        h: 0,
+        pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),
+      },
+    }
+  },
+)

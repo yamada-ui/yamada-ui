@@ -11,7 +11,7 @@
       "required": true
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -93,7 +93,7 @@
       "required": false
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -178,7 +178,7 @@
   },
   "Fade": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -246,7 +246,7 @@
       "required": true
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -343,7 +343,7 @@
       "required": true
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -425,7 +425,7 @@
   },
   "ScaleFade": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -510,7 +510,7 @@
   },
   "Slide": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -589,7 +589,7 @@
   },
   "SlideFade": {
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },

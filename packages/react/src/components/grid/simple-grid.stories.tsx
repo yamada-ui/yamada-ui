@@ -51,7 +51,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithGap: Story = () => {
+export const Gap: Story = () => {
   return (
     <SimpleGrid columnGap="lg" columns={2} rowGap="md" w="full">
       <GridItem
@@ -91,7 +91,7 @@ export const WithGap: Story = () => {
   )
 }
 
-export const WithMinChildWidth: Story = () => {
+export const MinChildWidth: Story = () => {
   return (
     <SimpleGrid gap="md" minChildWidth={{ base: "3xs", lg: 100 }} w="full">
       <GridItem

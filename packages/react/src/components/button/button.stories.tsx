@@ -14,7 +14,7 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <PropsTable
       columns={["solid", "subtle", "surface", "outline", "ghost"]}
@@ -31,7 +31,7 @@ export const Variants: Story = () => {
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   return (
     <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
@@ -45,7 +45,7 @@ export const Sizes: Story = () => {
   )
 }
 
-export const WithDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <Wrap gap="md">
       <Button colorScheme="primary" variant="solid" disabled>
@@ -71,7 +71,7 @@ export const WithDisabled: Story = () => {
   )
 }
 
-export const WithIcon: Story = () => {
+export const Icon: Story = () => {
   return (
     <Wrap gap="md">
       <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
@@ -97,7 +97,7 @@ export const WithIcon: Story = () => {
   )
 }
 
-export const WithLoading: Story = () => {
+export const Loading: Story = () => {
   return (
     <Wrap gap="md">
       <Button colorScheme="primary" loading>

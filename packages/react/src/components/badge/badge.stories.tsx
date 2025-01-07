@@ -16,7 +16,7 @@ const meta: Meta<typeof Badge> = {
 
 export default meta
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <PropsTable
       columns={["solid", "subtle", "surface", "outline"]}
@@ -33,7 +33,7 @@ export const Variants: Story = () => {
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   return (
     <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
@@ -47,7 +47,7 @@ export const Sizes: Story = () => {
   )
 }
 
-export const WithContext: Story = () => {
+export const Context: Story = () => {
   const value = useMemo<BadgeProps>(() => ({ variant: "solid" }), [])
 
   return (

@@ -25,7 +25,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <PropsTable
       columns={["solid", "subtle", "surface", "outline"]}
@@ -45,7 +45,7 @@ export const Variants: Story = () => {
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   return (
     <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
@@ -62,7 +62,7 @@ export const Sizes: Story = () => {
   )
 }
 
-export const WithShape: Story = () => {
+export const Shape: Story = () => {
   return (
     <Wrap gap="md">
       <For<AvatarProps["shape"]> each={["circle", "square", "rounded"]}>
@@ -74,11 +74,11 @@ export const WithShape: Story = () => {
   )
 }
 
-export const WithName: Story = () => {
+export const Name: Story = () => {
   return <Avatar name="Hirotomo Yamada" />
 }
 
-export const WithImage: Story = () => {
+export const Image: Story = () => {
   return (
     <Avatar
       src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -87,7 +87,7 @@ export const WithImage: Story = () => {
   )
 }
 
-export const WithFallback: Story = () => {
+export const Fallback: Story = () => {
   return (
     <Wrap gap="md">
       <Avatar src="https://not-found.com" />
@@ -97,7 +97,7 @@ export const WithFallback: Story = () => {
   )
 }
 
-export const UseRandomColor: Story = () => {
+export const RandomColor: Story = () => {
   const randomColorScheme = (name: string) => {
     const index = name.charCodeAt(0) % COLOR_SCHEMES.length
 
@@ -119,7 +119,7 @@ export const UseRandomColor: Story = () => {
   )
 }
 
-export const UseGroup: Story = () => {
+export const Group: Story = () => {
   return (
     <>
       <For each={["solid", "subtle", "surface", "outline"]}>
@@ -161,7 +161,7 @@ export const UseGroup: Story = () => {
   )
 }
 
-export const WithGroupMax: Story = () => {
+export const GroupMax: Story = () => {
   return (
     <>
       <For each={["solid", "subtle", "surface", "outline"]}>

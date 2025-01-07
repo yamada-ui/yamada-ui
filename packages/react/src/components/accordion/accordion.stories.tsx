@@ -30,7 +30,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <>
       <Accordion.Root variant="basic">

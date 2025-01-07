@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { useMemo } from "react"
-import { Card, CardBody, CardHeader } from "../card"
+import { Card } from "../card"
 import { EmptyState } from "../empty-state"
 import { BoxIcon } from "../icon"
 import { VStack } from "../stack"
@@ -30,24 +30,24 @@ export const Basic: Story = () => {
     <VStack>
       <For each={items}>
         {({ name, powers }, index) => (
-          <Card key={index} size="md" variant="outline">
-            <CardHeader>
+          <Card.Root key={index} size="md" variant="outline">
+            <Card.Header>
               <Text as="h1" fontSize="lg">
                 {name}
               </Text>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody pt="sm">
+            <Card.Body pt="sm">
               <Text color="muted">Powers: {powers.join(", ")}</Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         )}
       </For>
     </VStack>
   )
 }
 
-export const WithFallBack: Story = () => {
+export const FallBack: Story = () => {
   return (
     <For
       each={[]}

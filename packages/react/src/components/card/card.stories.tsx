@@ -35,7 +35,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <For each={["panel", "outline", "elevated", "solid", "subtle", "surface"]}>
       {(variant, index) => (
@@ -56,7 +56,7 @@ export const Variants: Story = () => {
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   return (
     <For each={["sm", "md", "normal", "lg"]}>
       {(size, index) => (
@@ -77,7 +77,7 @@ export const Sizes: Story = () => {
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const ColorScheme: Story = () => {
   return (
     <PropsTable columns={["solid", "subtle", "surface"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
@@ -97,35 +97,7 @@ export const WithColorScheme: Story = () => {
   )
 }
 
-export const WithImage: Story = () => {
-  return (
-    <Card.Root maxW="md">
-      <Card.Header justifyContent="center">
-        <Image
-          src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
-          alt="SLAM DUNK"
-          rounded="md"
-          w="full"
-        />
-      </Card.Header>
-
-      <Card.Body>
-        <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
-
-        <Text>
-          『SLAM
-          DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
-        </Text>
-      </Card.Body>
-
-      <Card.Footer>
-        <Button colorScheme="primary">Wikipedia</Button>
-      </Card.Footer>
-    </Card.Root>
-  )
-}
-
-export const HorizontalCard: Story = () => {
+export const Horizontal: Story = () => {
   return (
     <Card.Root
       variant="outline"

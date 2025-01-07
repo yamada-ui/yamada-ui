@@ -20,9 +20,4 @@ export const globalStyle: CSSObject = {
     transitionDuration: "normal",
     transitionProperty: "background-color",
   },
-  _dark: {
-    "*::placeholder, *[data-placeholder]": {
-      color: "whiteAlpha.400",
-    },
-  },
 }

@@ -5,12 +5,12 @@ import { Tag } from "./"
 
 describe("<Tag />", () => {
   test("renders tag correctly", async () => {
-    await a11y(<Tag.Root>Tag</Tag.Root>)
+    await a11y(<Tag>Tag</Tag>)
   })
 
   test("Tag with icon renders correctly", () => {
     const { getByTestId } = render(
-      <Tag.Root startIcon={<CheckIcon data-testid="icon" />}>Tag</Tag.Root>,
+      <Tag startIcon={<CheckIcon data-testid="icon" />}>Tag</Tag>,
     )
 
     expect(getByTestId("icon")).toBeInTheDocument()
@@ -18,9 +18,9 @@ describe("<Tag />", () => {
 
   test("Tag with close button renders correctly", () => {
     const { getByTestId } = render(
-      <Tag.Root data-testid="tag" onClose={noop}>
+      <Tag data-testid="tag" onClose={noop}>
         Tag
-      </Tag.Root>,
+      </Tag>,
     )
 
     expect(getByTestId("tag").lastChild).toBeInTheDocument()

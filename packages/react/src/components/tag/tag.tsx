@@ -4,22 +4,13 @@ import type { TagStyle } from "./tag.style"
 import { useMemo, useRef } from "react"
 import { createSlotComponent, ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
-import {
-  dataAttr,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-} from "../../utils"
+import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
 import { tagStyle } from "./tag.style"
 
-export interface TagContext
-  extends Pick<TagRootProps, "disabled" | "endIcon" | "startIcon"> {}
+export interface TagContext extends Pick<TagProps, "disabled"> {}
 
-export interface TagRootProps
-  extends HTMLUIProps<"span">,
-    ThemeProps<TagStyle> {
+export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
   /**
    * If `true`, the tag is disabled.
    *
@@ -39,6 +30,14 @@ export interface TagRootProps
    */
   closeButtonProps?: TagCloseButtonProps
   /**
+   * Props for content element.
+   */
+  contentProps?: TagContentProps
+  /**
+   * Props for icon element.
+   */
+  iconProps?: HTMLUIProps<"span">
+  /**
    * Function to be executed when the close button is clicked.
    */
   onClose?: MouseEventHandler<HTMLElement>
@@ -51,66 +50,47 @@ export const {
   usePropsContext: useTagPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<TagRootProps, TagStyle, TagContext>("tag", tagStyle)
+} = createSlotComponent<TagProps, TagStyle, TagContext>("tag", tagStyle)
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
  * @see Docs https://yamada-ui.com/components/data-display/tag
  */
-export const TagRoot = withProvider<"span", TagRootProps>(
+export const Tag = withProvider<"span", TagProps>(
   ({
     children,
     disabled,
     endIcon,
     startIcon,
     closeButtonProps,
+    contentProps,
+    iconProps,
     onClose,
     ...rest
   }) => {
-    const validChildren = getValidChildren(children)
-
-    const customTagLabel = findChild(validChildren, TagLabel)
-    const customTagStartElement = findChild(validChildren, TagStartElement)
-    const customTagEndElement = findChild(validChildren, TagEndElement)
-    const customTagCloseButton = findChild(validChildren, TagCloseButton)
-
-    const cloneChildren = !isEmpty(validChildren)
-      ? omitChildren(
-          validChildren,
-          TagLabel,
-          TagStartElement,
-          TagEndElement,
-          TagCloseButton,
-        )
-      : children
-
-    const context = useMemo(
-      () => ({
-        disabled,
-        endIcon,
-        startIcon,
-      }),
-      [disabled, endIcon, startIcon],
-    )
+    const context = useMemo(() => ({ disabled }), [disabled])
 
     return (
       <TagContext value={context}>
         <ui.span data-disabled={dataAttr(disabled)} {...rest}>
-          {customTagStartElement ?? <TagStartElement />}
+          {startIcon ? (
+            <TagStartIcon {...iconProps}>{startIcon}</TagStartIcon>
+          ) : null}
 
-          {customTagLabel ?? <TagLabel>{cloneChildren}</TagLabel>}
+          {children ? (
+            <TagContent {...contentProps}>{children}</TagContent>
+          ) : null}
 
-          {customTagEndElement ?? <TagEndElement />}
+          {endIcon ? <TagEndIcon {...iconProps}>{endIcon}</TagEndIcon> : null}
 
-          {customTagCloseButton ??
-            (onClose ? (
-              <TagCloseButton
-                disabled={disabled}
-                onClick={onClose}
-                {...closeButtonProps}
-              />
-            ) : null)}
+          {onClose ? (
+            <TagCloseButton
+              disabled={disabled}
+              onClick={onClose}
+              {...closeButtonProps}
+            />
+          ) : null}
         </ui.span>
       </TagContext>
     )
@@ -118,61 +98,45 @@ export const TagRoot = withProvider<"span", TagRootProps>(
   "root",
 )()
 
-export interface TagLabelProps extends HTMLUIProps<"span"> {}
+export interface TagContentProps extends HTMLUIProps<"span"> {}
 
-export const TagLabel = withContext<"span", TagLabelProps>("span", "label")(
-  undefined,
-  (props) => {
-    const { disabled } = useTagContext()
+export const TagContent = withContext<"span", TagContentProps>(
+  "span",
+  "content",
+)(undefined, (props) => {
+  const { disabled } = useTagContext()
 
-    return { "data-disabled": dataAttr(disabled), ...props }
-  },
-)
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
 
-export interface TagStartElementProps extends HTMLUIProps<"span"> {}
+export interface TagStartIconProps extends HTMLUIProps<"span"> {}
 
-export const TagStartElement = withContext<"span", TagStartElementProps>(
-  ({ children, ...rest }) => {
-    const { disabled, startIcon } = useTagContext()
+export const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
+  "icon",
+  "startIcon",
+])(undefined, (props) => {
+  const { disabled } = useTagContext()
 
-    children ||= startIcon
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
 
-    if (!children) return null
+export interface TagEndIconProps extends HTMLUIProps<"span"> {}
 
-    return (
-      <ui.span data-disabled={dataAttr(disabled)} {...rest}>
-        {children}
-      </ui.span>
-    )
-  },
-  ["element", "startElement"],
-)()
+export const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
+  "icon",
+  "endIcon",
+])(undefined, (props) => {
+  const { disabled } = useTagContext()
 
-export interface TagEndElementProps extends HTMLUIProps<"span"> {}
-
-export const TagEndElement = withContext<"span", TagEndElementProps>(
-  ({ children, ...rest }) => {
-    const { disabled, endIcon } = useTagContext()
-
-    children ||= endIcon
-
-    if (!children) return null
-
-    return (
-      <ui.span data-disabled={dataAttr(disabled)} {...rest}>
-        {children}
-      </ui.span>
-    )
-  },
-  ["element", "endElement"],
-)()
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
 
 export interface TagCloseButtonProps extends HTMLUIProps<"span"> {
   disabled?: boolean
 }
 
 export const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
-  "element",
+  "icon",
   "closeButton",
 ])(undefined, ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)

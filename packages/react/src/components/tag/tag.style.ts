@@ -31,15 +31,15 @@ export const tagStyle = defineComponentSlotStyle({
         },
       },
     },
-    element: {
+    content: {
+      lineClamp: 1,
+    },
+    endIcon: {},
+    icon: {
       alignItems: "center",
       display: "inline-flex",
       flexShrink: 0,
       justifyContent: "center",
-    },
-    endElement: {},
-    label: {
-      lineClamp: 1,
     },
     root: {
       alignItems: "center",
@@ -54,7 +54,7 @@ export const tagStyle = defineComponentSlotStyle({
         boxShadow: "outline",
       },
     },
-    startElement: {},
+    startIcon: {},
   },
 
   variants: {

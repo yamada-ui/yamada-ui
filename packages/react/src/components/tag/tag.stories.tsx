@@ -6,10 +6,10 @@ import { For } from "../for"
 import { PlusIcon } from "../icon"
 import { Tag } from "./"
 
-type Story = StoryFn<typeof Tag.Root>
+type Story = StoryFn<typeof Tag>
 
-const meta: Meta<typeof Tag.Root> = {
-  component: Tag.Root,
+const meta: Meta<typeof Tag> = {
+  component: Tag,
   title: "Components / Tag",
 }
 
@@ -23,9 +23,9 @@ export const Variants: Story = () => {
     >
       {(column, row, key) => {
         return (
-          <Tag.Root key={key} colorScheme={row} variant={column}>
+          <Tag key={key} colorScheme={row} variant={column}>
             Tag
-          </Tag.Root>
+          </Tag>
         )
       }}
     </PropsTable>
@@ -37,9 +37,9 @@ export const Sizes: Story = () => {
     <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
         return (
-          <Tag.Root key={key} colorScheme={row} size={column}>
+          <Tag key={key} colorScheme={row} size={column}>
             Tag
-          </Tag.Root>
+          </Tag>
         )
       }}
     </PropsTable>
@@ -55,14 +55,14 @@ export const WithIcon: Story = () => {
       >
         {(column, row, key) => {
           return (
-            <Tag.Root
+            <Tag
               key={key}
               colorScheme={row}
               variant={column}
               startIcon={<PlusIcon />}
             >
               Tag
-            </Tag.Root>
+            </Tag>
           )
         }}
       </PropsTable>
@@ -70,14 +70,14 @@ export const WithIcon: Story = () => {
       <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
         {(column, row, key) => {
           return (
-            <Tag.Root
+            <Tag
               key={key}
               colorScheme={row}
               size={column}
               endIcon={<PlusIcon />}
             >
               Tag
-            </Tag.Root>
+            </Tag>
           )
         }}
       </PropsTable>
@@ -90,14 +90,14 @@ export const WithCloseButton: Story = () => {
     <Wrap alignItems="flex-start" gap="md">
       <For each={["primary", "secondary", "success", "warning", "error"]}>
         {(colorScheme, index) => (
-          <Tag.Root
+          <Tag
             key={index}
             colorScheme={colorScheme}
             rounded="full"
             onClose={noop}
           >
             {colorScheme}
-          </Tag.Root>
+          </Tag>
         )}
       </For>
     </Wrap>
@@ -109,7 +109,7 @@ export const WithDisabled: Story = () => {
     <Wrap alignItems="flex-start" gap="md">
       <For each={["primary", "secondary", "success", "warning", "error"]}>
         {(colorScheme, index) => (
-          <Tag.Root
+          <Tag
             key={index}
             colorScheme={colorScheme}
             disabled
@@ -117,7 +117,7 @@ export const WithDisabled: Story = () => {
             onClose={noop}
           >
             {colorScheme}
-          </Tag.Root>
+          </Tag>
         )}
       </For>
     </Wrap>

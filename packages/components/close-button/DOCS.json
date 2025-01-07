@@ -11,6 +11,12 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If true, the button is full rounded.",
+      "required": false
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -21,6 +27,7 @@
     "isRounded": {
       "type": "boolean",
       "defaultValue": false,
+      "deprecated": "Use `fullRounded` instead.",
       "description": "If true, the button is full rounded.",
       "required": false
     },

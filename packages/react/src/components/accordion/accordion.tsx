@@ -119,7 +119,9 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
   "root",
 )()
 
-export interface AccordionItemOptions {
+export interface AccordionItemProps
+  extends Omit<HTMLUIProps, "children">,
+    Omit<UseAccordionItemProps, "children"> {
   /**
    * The accordion button to use.
    */
@@ -130,11 +132,6 @@ export interface AccordionItemOptions {
    */
   icon?: ReactNodeOrFunction<AccordionCallBackProps>
 }
-
-export interface AccordionItemProps
-  extends Omit<HTMLUIProps, "children">,
-    Omit<UseAccordionItemProps, "children">,
-    AccordionItemOptions {}
 
 export const AccordionItem = withContext<"div", AccordionItemProps>(
   ({ button, children, icon, ...rest }) => {

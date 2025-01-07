@@ -67,6 +67,9 @@ export function getCreateThemeVars(
         value: ParsedValue = "",
       ): [ParsedValue, Exclude<ParsedValue, undefined>] {
         const relatedToken = [token.split(".")[0], value].join(".")
+
+        if (token === relatedToken) return [, value]
+
         const targetToken = tokens[relatedToken] ?? prevTokens?.[relatedToken]
 
         if (!targetToken) return [, value]

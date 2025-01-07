@@ -81,17 +81,3 @@ export const WithBorderRadius: Story = () => {
     </>
   )
 }
-
-export const UseStripeAnimation: Story = () => {
-  return (
-    <Progress
-      aria-label="Storage space"
-      hasStripe
-      isStripeAnimation
-      value={20}
-    />
-  )
-}
-export const UseAnimation: Story = () => {
-  return <Progress colorScheme="green" isAnimation />
-}

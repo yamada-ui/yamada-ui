@@ -32,7 +32,7 @@ tab: Props
 <PropsCard
   id="dialog-as"
   name="as"
-  type="keyof ReactDOM"
+  type="keyof IntrinsicElements"
   description={"The HTML element to render."}
 />
 
@@ -234,7 +234,7 @@ tab: Props
 <PropsCard
   id="dialog-outside"
   name="outside"
-  type='UIValue<number | "px" | "initial" | "inherit" | (string & {}) | "-moz-initial" | "revert" | "revert-layer" | "unset" | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-0.5" | "-1" | ... 99 more ... | "xs">'
+  type='UIValue<number | "px" | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string) | "-0.5" | "-1" | ... 99 more ... | "xs">'
   description={"The CSS `padding` property."}
 />
 
@@ -337,7 +337,7 @@ tab: Props
 <PropsCard
   id="dialogoverlay-as"
   name="as"
-  type="keyof ReactDOM"
+  type="keyof IntrinsicElements"
   description={"The HTML element to render."}
 />
 
@@ -348,6 +348,14 @@ tab: Props
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="dialogclosebutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={"If true, the button is full rounded."}
   defaultValue={"false"}
 />
 
@@ -365,5 +373,6 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={"If true, the button is full rounded."}
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />

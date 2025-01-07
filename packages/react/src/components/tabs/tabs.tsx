@@ -128,9 +128,10 @@ export interface TabsProps
  * @see Docs https://yamada-ui.com/components/disclosure/tabs
  */
 export const Tabs = forwardRef<TabsProps, "div">(
-  ({ align = "start", ...props }, ref) => {
+  ({ align = "start", isFitted, fitted = isFitted, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Tabs", {
       align,
+      fitted,
       ...props,
     })
     const {
@@ -138,8 +139,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
       children,
       defaultIndex = 0,
       disableRipple = false,
-      isFitted,
-      fitted = isFitted,
       index,
       isLazy = true,
       isManual,

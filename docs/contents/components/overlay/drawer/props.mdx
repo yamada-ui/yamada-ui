@@ -24,7 +24,7 @@ tab: Props
 <PropsCard
   id="drawer-as"
   name="as"
-  type="keyof ReactDOM"
+  type="keyof IntrinsicElements"
   description={"The HTML element to render."}
 />
 
@@ -291,7 +291,7 @@ tab: Props
 <PropsCard
   id="draweroverlay-as"
   name="as"
-  type="keyof ReactDOM"
+  type="keyof IntrinsicElements"
   description={"The HTML element to render."}
 />
 
@@ -302,6 +302,14 @@ tab: Props
   name="disableRipple"
   type="boolean"
   description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="drawerclosebutton-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={"If true, the button is full rounded."}
   defaultValue={"false"}
 />
 
@@ -319,5 +327,6 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={"If true, the button is full rounded."}
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />

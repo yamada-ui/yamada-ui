@@ -16,7 +16,7 @@ import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../alert"
 import { CloseButton } from "../close-button"
 
 export interface UseNoticeOptions extends NoticeConfigOptions {
-  closeStrategy?: "button" | "element" | "both"
+  closeStrategy?: "both" | "button" | "element"
   isClosable?: boolean
 }
 
@@ -28,7 +28,7 @@ export interface NoticeOptions {
   status: UseNoticeOptions["status"]
   onDelete: () => void
   style?: CSSUIObject
-  closeStrategy?: "button" | "element" | "both"
+  closeStrategy?: "both" | "button" | "element"
   isClosable?: boolean
   isDelete?: boolean
   onCloseComplete?: () => void

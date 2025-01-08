@@ -31,7 +31,7 @@ export const PropsTable = <Y extends string, M extends string>({
 }: PropsTableProps<Y, M>) => {
   if (variant === "grid") {
     return (
-      <Grid templateColumns={`repeat(${columns.length + 1}, 1fr)`} w="full">
+      <Grid templateColumns={`auto repeat(${columns.length}, 1fr)`} w="full">
         <GridItem />
 
         {columns.map((column, colIndex) => (

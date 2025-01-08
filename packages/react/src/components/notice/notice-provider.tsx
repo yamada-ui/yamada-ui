@@ -1,4 +1,4 @@
-import type { MotionStyle, Variants } from "motion/react"
+import type { MotionStyle, PanInfo, Variants } from "motion/react"
 import type { FC } from "react"
 import type { CSSUIObject, ThemeConfig } from "../../core"
 import type { NoticeOptions } from "./notice"
@@ -98,13 +98,34 @@ const defaultVariants: Variants = {
     x: 0,
     y: 0,
   },
-  exit: {
-    opacity: 0,
-    scale: 0.95,
-    transition: {
-      duration: 0.2,
-      ease: [0.4, 0, 1, 1],
-    },
+  exit: ({ placement }) => {
+    const distance = 200
+    if (placement.includes("left")) {
+      return {
+        opacity: 0,
+        transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+        x: -distance,
+      }
+    }
+    if (placement.includes("right")) {
+      return {
+        opacity: 0,
+        transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+        x: distance,
+      }
+    }
+    if (placement.includes("top")) {
+      return {
+        opacity: 0,
+        transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+        y: -distance,
+      }
+    }
+    return {
+      opacity: 0,
+      transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+      y: distance,
+    }
   },
   initial: ({ placement }) => ({
     [["bottom", "top"].includes(placement) ? "y" : "x"]:
@@ -120,7 +141,9 @@ interface NoticeComponentProps
 const NoticeComponent = memo(
   ({
     style,
+    closeStrategy,
     duration = 5000,
+    isClosable,
     isDelete = false,
     message,
     placement,
@@ -153,6 +176,40 @@ const NoticeComponent = memo(
 
     useTimeout(onClose, delay)
 
+    const getDragDirection = (placement: string) => {
+      if (placement.includes("left") || placement.includes("right")) return "x"
+      return "y"
+    }
+
+    const getDragConstraints = (placement: string) => {
+      if (placement.includes("left")) return { right: 0 }
+      if (placement.includes("right")) return { left: 0 }
+      if (placement.includes("top")) return { bottom: 0 }
+      return { top: 0 }
+    }
+
+    const isCloseByDragInfo = (info: PanInfo, placement: string) => {
+      const dragVelocity = 100
+      const dragOffset = 80
+
+      if (placement.includes("left")) {
+        return (
+          info.velocity.x <= dragVelocity * -1 ||
+          info.offset.x <= dragOffset * -1
+        )
+      }
+      if (placement.includes("right")) {
+        return info.velocity.x >= dragVelocity || info.offset.x >= dragOffset
+      }
+      if (placement.includes("top")) {
+        return (
+          info.velocity.y <= dragVelocity * -1 ||
+          info.offset.y <= dragOffset * -1
+        )
+      }
+      return info.velocity.y >= dragVelocity || info.offset.y >= dragOffset
+    }
+
     const css: CSSUIObject = {
       maxW: "36rem",
       minW: "20rem",
@@ -175,16 +232,28 @@ const NoticeComponent = memo(
         }
         animate="animate"
         custom={{ placement }}
+        drag={
+          isClosable && closeStrategy === "element"
+            ? getDragDirection(placement)
+            : null
+        }
+        dragConstraints={getDragConstraints(placement)}
+        dragElastic={0.1}
+        dragMomentum={false}
+        dragSnapToOrigin
         exit="exit"
         initial="initial"
         layout
         variants={variants}
+        onDragEnd={(_, info) => {
+          if (isCloseByDragInfo(info, placement)) onClose()
+        }}
         onHoverEnd={onMouseLeave}
         onHoverStart={onMouseEnter}
         {...itemProps}
       >
         <ui.div className="ui-notice__list__item__inner" __css={css}>
-          {runIfFunc(message, { onClose })}
+          {runIfFunc(message, { closeStrategy, isClosable, onClose })}
         </ui.div>
       </motion.li>
     )

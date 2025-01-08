@@ -15,7 +15,10 @@ import { cx, isFunction, merge } from "../../utils"
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../alert"
 import { CloseButton } from "../close-button"
 
-export interface UseNoticeOptions extends NoticeConfigOptions {}
+export interface UseNoticeOptions extends NoticeConfigOptions {
+  closeStrategy?: "button" | "element" | "both"
+  isClosable?: boolean
+}
 
 export interface NoticeOptions {
   id: number | string
@@ -25,6 +28,8 @@ export interface NoticeOptions {
   status: UseNoticeOptions["status"]
   onDelete: () => void
   style?: CSSUIObject
+  closeStrategy?: "button" | "element" | "both"
+  isClosable?: boolean
   isDelete?: boolean
   onCloseComplete?: () => void
 }
@@ -63,7 +68,14 @@ interface CreateNoticeOptions
   extends Partial<
     Pick<
       NoticeOptions,
-      "duration" | "id" | "onCloseComplete" | "placement" | "status" | "style"
+      | "closeStrategy"
+      | "duration"
+      | "id"
+      | "isClosable"
+      | "onCloseComplete"
+      | "placement"
+      | "status"
+      | "style"
     >
   > {}
 
@@ -74,7 +86,9 @@ const createNotice = (
   {
     id,
     style,
+    closeStrategy,
     duration,
+    isClosable,
     placement = "top",
     status,
     onCloseComplete,
@@ -87,7 +101,9 @@ const createNotice = (
   return {
     id,
     style,
+    closeStrategy,
     duration,
+    isClosable,
     isDelete: false,
     message,
     placement,

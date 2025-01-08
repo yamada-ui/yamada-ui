@@ -465,6 +465,86 @@ export const WithCloseStrategy = () => {
   )
 }
 
+export const WithCloseStrategyPlacements = () => {
+  const notice = useNotice({
+    closeStrategy: "element",
+    description: "オッス！オラ悟空！",
+    isClosable: true,
+  })
+  return (
+    <Center
+      flexDirection="column"
+      gap="md"
+      h="calc(100vh - 16px * 2)"
+      w="calc(100vw - 16px * 2)"
+    >
+      <Wrap gap="md">
+        <Button
+          onClick={() =>
+            notice({
+              placement: "top-left",
+            })
+          }
+        >
+          Show top left Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              placement: "top",
+            })
+          }
+        >
+          Show top Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              placement: "top-right",
+            })
+          }
+        >
+          Show top right Notice
+        </Button>
+      </Wrap>
+
+      <Wrap gap="md">
+        <Button
+          onClick={() =>
+            notice({
+              placement: "bottom-left",
+            })
+          }
+        >
+          Show bottom left Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              placement: "bottom",
+            })
+          }
+        >
+          Show bottom Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              placement: "bottom-right",
+            })
+          }
+        >
+          Show bottom right Notice
+        </Button>
+      </Wrap>
+    </Center>
+  )
+}
+
 export const UseClose = () => {
   const notice = useNotice()
   const ref = useRef<number | string | undefined>(undefined)

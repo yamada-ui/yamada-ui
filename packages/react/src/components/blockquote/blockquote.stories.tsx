@@ -1,17 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
-import { QuoteIcon } from "../icon"
-import {
-  Blockquote,
-  BlockquoteCaption,
-  BlockquoteCite,
-  BlockquoteContent,
-} from "./blockquote"
+import { For } from "../for"
+import { Blockquote } from "./"
 
-type Story = StoryFn<typeof Blockquote>
+type Story = StoryFn<typeof Blockquote.Root>
 
-const meta: Meta<typeof Blockquote> = {
-  component: Blockquote,
+const meta: Meta<typeof Blockquote.Root> = {
+  component: Blockquote.Root,
   title: "Components / Blockquote",
 }
 
@@ -19,162 +15,105 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Blockquote citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
+    <Blockquote.Root citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
       地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-    </Blockquote>
+    </Blockquote.Root>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Blockquote
-        variant="solid"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-
-      <Blockquote
-        variant="subtle"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-
-      <Blockquote
-        variant="plain"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-    </>
+    <PropsTable columns={["solid", "subtle", "plain"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Blockquote.Root
+            key={key}
+            colorScheme={row}
+            variant={column}
+            citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
+            icon={column === "plain" ? <Blockquote.Icon /> : null}
+          >
+            地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
+          </Blockquote.Root>
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const Cite: Story = () => {
   return (
-    <>
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Blockquote
-          key={colorScheme}
-          colorScheme={colorScheme}
-          variant="solid"
-          citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        >
-          地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </Blockquote>
-      ))}
-
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Blockquote
-          key={colorScheme}
-          colorScheme={colorScheme}
-          variant="subtle"
-          citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        >
-          地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </Blockquote>
-      ))}
-    </>
-  )
-}
-
-export const WithCite: Story = () => {
-  return (
-    <Blockquote
+    <Blockquote.Root
       cite="Wikipedia"
       citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
     >
       地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-    </Blockquote>
+    </Blockquote.Root>
   )
 }
 
-export const WithShowDash: Story = () => {
+export const Dash: Story = () => {
   return (
-    <Blockquote
+    <Blockquote.Root
       cite="Wikipedia"
       citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
       withDash
     >
       地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-    </Blockquote>
+    </Blockquote.Root>
   )
 }
 
-export const WithIcon: Story = () => {
+export const Icon: Story = () => {
   return (
-    <Blockquote
+    <Blockquote.Root
       variant="plain"
       cite="Wikipedia"
       citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-      icon={
-        <QuoteIcon
-          color={["blackAlpha.600", "whiteAlpha.700"]}
-          fontSize="xl"
-          left="0"
-          position="absolute"
-          top="0"
-        />
-      }
-      px="8"
+      icon={<Blockquote.Icon />}
     >
       地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-    </Blockquote>
+    </Blockquote.Root>
   )
 }
 
-export const WithJustify: Story = () => {
+export const Justify: Story = () => {
   return (
-    <>
-      <Blockquote
-        cite="Wikipedia"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        justify="start"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-
-      <Blockquote
-        cite="Wikipedia"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        justify="center"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-
-      <Blockquote
-        cite="Wikipedia"
-        citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        justify="end"
-      >
-        地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
-    </>
+    <For each={["start", "center", "end"]}>
+      {(justify, index) => (
+        <Blockquote.Root
+          key={index}
+          cite="Wikipedia"
+          citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
+          justify={justify}
+        >
+          地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
+        </Blockquote.Root>
+      )}
+    </For>
   )
 }
 
 export const CustomCaption: Story = () => {
   return (
     <>
-      <Blockquote
+      <Blockquote.Root
         cite="Wikipedia"
         citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
         captionProps={{ alignSelf: "center" }}
       >
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
+      </Blockquote.Root>
 
-      <Blockquote citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
-        <BlockquoteContent>
+      <Blockquote.Root citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
+        <Blockquote.Content>
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </BlockquoteContent>
+        </Blockquote.Content>
 
-        <BlockquoteCaption alignSelf="end">
-          <BlockquoteCite>Wikipedia</BlockquoteCite>
-        </BlockquoteCaption>
-      </Blockquote>
+        <Blockquote.Caption alignSelf="end">
+          <Blockquote.Cite>Wikipedia</Blockquote.Cite>
+        </Blockquote.Caption>
+      </Blockquote.Root>
     </>
   )
 }
@@ -182,23 +121,23 @@ export const CustomCaption: Story = () => {
 export const CustomCite: Story = () => {
   return (
     <>
-      <Blockquote
+      <Blockquote.Root
         cite="Wikipedia"
         citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
         citeProps={{ color: "primary" }}
       >
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-      </Blockquote>
+      </Blockquote.Root>
 
-      <Blockquote citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
-        <BlockquoteContent>
+      <Blockquote.Root citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
+        <Blockquote.Content>
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-        </BlockquoteContent>
+        </Blockquote.Content>
 
-        <BlockquoteCaption>
-          <BlockquoteCite color="secondary">Wikipedia</BlockquoteCite>
-        </BlockquoteCaption>
-      </Blockquote>
+        <Blockquote.Caption>
+          <Blockquote.Cite color="secondary">Wikipedia</Blockquote.Cite>
+        </Blockquote.Caption>
+      </Blockquote.Root>
     </>
   )
 }

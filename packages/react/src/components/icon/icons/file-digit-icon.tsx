@@ -1,5 +1,5 @@
 import { FileDigit } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileDigitIcon` is [Lucide](https://lucide.dev) SVG icon component.

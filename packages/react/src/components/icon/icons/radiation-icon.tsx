@@ -1,5 +1,5 @@
 import { Radiation } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RadiationIcon` is [Lucide](https://lucide.dev) SVG icon component.

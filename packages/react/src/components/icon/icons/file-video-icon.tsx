@@ -1,5 +1,5 @@
 import { FileVideo } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileVideoIcon` is [Lucide](https://lucide.dev) SVG icon component.

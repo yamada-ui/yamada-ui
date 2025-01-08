@@ -1,5 +1,5 @@
 import { CalendarX } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CalendarXIcon` is [Lucide](https://lucide.dev) SVG icon component.

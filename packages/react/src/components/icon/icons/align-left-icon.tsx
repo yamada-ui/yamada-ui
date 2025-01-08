@@ -1,5 +1,5 @@
 import { AlignLeft } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AlignLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.

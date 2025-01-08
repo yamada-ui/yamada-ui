@@ -1,5 +1,5 @@
 import { ThermometerSun } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ThermometerSunIcon` is [Lucide](https://lucide.dev) SVG icon component.

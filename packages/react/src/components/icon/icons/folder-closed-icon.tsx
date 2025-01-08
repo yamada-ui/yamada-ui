@@ -1,5 +1,5 @@
 import { FolderClosed } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FolderClosedIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { BetweenHorizontalStart } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BetweenHorizontalStartIcon` is [Lucide](https://lucide.dev) SVG icon component.

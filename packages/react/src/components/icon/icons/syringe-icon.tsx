@@ -1,5 +1,5 @@
 import { Syringe } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SyringeIcon` is [Lucide](https://lucide.dev) SVG icon component.

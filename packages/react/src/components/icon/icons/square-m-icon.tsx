@@ -1,5 +1,5 @@
 import { SquareM } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SquareMIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { Layers2 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Layers2Icon` is [Lucide](https://lucide.dev) SVG icon component.

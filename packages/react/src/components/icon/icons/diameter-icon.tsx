@@ -1,5 +1,5 @@
 import { Diameter } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DiameterIcon` is [Lucide](https://lucide.dev) SVG icon component.

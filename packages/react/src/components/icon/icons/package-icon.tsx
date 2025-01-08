@@ -1,5 +1,5 @@
 import { Package } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PackageIcon` is [Lucide](https://lucide.dev) SVG icon component.

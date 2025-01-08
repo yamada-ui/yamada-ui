@@ -1,5 +1,5 @@
 import { Tablet } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TabletIcon` is [Lucide](https://lucide.dev) SVG icon component.

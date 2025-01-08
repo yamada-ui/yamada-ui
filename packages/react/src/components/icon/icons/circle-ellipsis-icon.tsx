@@ -1,5 +1,5 @@
 import { CircleEllipsis } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CircleEllipsisIcon` is [Lucide](https://lucide.dev) SVG icon component.

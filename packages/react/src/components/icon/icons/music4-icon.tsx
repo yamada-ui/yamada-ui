@@ -1,5 +1,5 @@
 import { Music4 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Music4Icon` is [Lucide](https://lucide.dev) SVG icon component.

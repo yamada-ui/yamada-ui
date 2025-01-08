@@ -1,5 +1,5 @@
 import { ArchiveX } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ArchiveXIcon` is [Lucide](https://lucide.dev) SVG icon component.

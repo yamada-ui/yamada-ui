@@ -1,5 +1,5 @@
 import { Clock5 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Clock5Icon` is [Lucide](https://lucide.dev) SVG icon component.

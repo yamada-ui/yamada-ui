@@ -1,5 +1,5 @@
 import { CircleCheck } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CircleCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.

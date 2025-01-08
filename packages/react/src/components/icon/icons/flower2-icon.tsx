@@ -1,5 +1,5 @@
 import { Flower2 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Flower2Icon` is [Lucide](https://lucide.dev) SVG icon component.

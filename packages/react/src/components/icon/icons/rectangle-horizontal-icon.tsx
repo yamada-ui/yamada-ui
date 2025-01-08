@@ -1,5 +1,5 @@
 import { RectangleHorizontal } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RectangleHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.

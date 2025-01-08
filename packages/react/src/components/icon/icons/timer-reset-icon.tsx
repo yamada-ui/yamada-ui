@@ -1,5 +1,5 @@
 import { TimerReset } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TimerResetIcon` is [Lucide](https://lucide.dev) SVG icon component.

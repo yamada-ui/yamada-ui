@@ -1,5 +1,5 @@
 import { CirclePower } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CirclePowerIcon` is [Lucide](https://lucide.dev) SVG icon component.

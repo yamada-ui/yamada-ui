@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `HeartIcon` is [Lucide](https://lucide.dev) SVG icon component.

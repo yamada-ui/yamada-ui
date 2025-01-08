@@ -1,5 +1,5 @@
 import { ToyBrick } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ToyBrickIcon` is [Lucide](https://lucide.dev) SVG icon component.

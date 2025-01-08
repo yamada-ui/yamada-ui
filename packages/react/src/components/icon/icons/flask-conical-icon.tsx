@@ -1,5 +1,5 @@
 import { FlaskConical } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FlaskConicalIcon` is [Lucide](https://lucide.dev) SVG icon component.

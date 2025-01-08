@@ -1,5 +1,5 @@
 import { ReceiptCent } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ReceiptCentIcon` is [Lucide](https://lucide.dev) SVG icon component.

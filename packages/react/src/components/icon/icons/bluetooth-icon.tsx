@@ -1,5 +1,5 @@
 import { Bluetooth } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BluetoothIcon` is [Lucide](https://lucide.dev) SVG icon component.

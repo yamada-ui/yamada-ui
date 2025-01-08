@@ -1,5 +1,5 @@
 import { CarFront } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CarFrontIcon` is [Lucide](https://lucide.dev) SVG icon component.

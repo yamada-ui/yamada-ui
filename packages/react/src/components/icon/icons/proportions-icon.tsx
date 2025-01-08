@@ -1,5 +1,5 @@
 import { Proportions } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ProportionsIcon` is [Lucide](https://lucide.dev) SVG icon component.

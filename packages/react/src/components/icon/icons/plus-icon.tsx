@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PlusIcon` is [Lucide](https://lucide.dev) SVG icon component.

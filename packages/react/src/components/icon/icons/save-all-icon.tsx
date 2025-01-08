@@ -1,5 +1,5 @@
 import { SaveAll } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SaveAllIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { ListPlus } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ListPlusIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { Heater } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `HeaterIcon` is [Lucide](https://lucide.dev) SVG icon component.

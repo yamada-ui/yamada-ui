@@ -1,5 +1,5 @@
 import { FolderKey } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FolderKeyIcon` is [Lucide](https://lucide.dev) SVG icon component.

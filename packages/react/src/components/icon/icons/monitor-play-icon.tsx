@@ -1,5 +1,5 @@
 import { MonitorPlay } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MonitorPlayIcon` is [Lucide](https://lucide.dev) SVG icon component.

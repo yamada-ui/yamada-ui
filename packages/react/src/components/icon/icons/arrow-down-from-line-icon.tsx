@@ -1,5 +1,5 @@
 import { ArrowDownFromLine } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ArrowDownFromLineIcon` is [Lucide](https://lucide.dev) SVG icon component.

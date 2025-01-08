@@ -1,5 +1,5 @@
 import { AudioWaveform } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AudioWaveformIcon` is [Lucide](https://lucide.dev) SVG icon component.

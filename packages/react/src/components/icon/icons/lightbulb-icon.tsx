@@ -1,5 +1,5 @@
 import { Lightbulb } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `LightbulbIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { MapPinOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MapPinOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

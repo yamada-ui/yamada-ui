@@ -1,5 +1,5 @@
 import { Warehouse } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `WarehouseIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { ArrowDown01 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ArrowDown01Icon` is [Lucide](https://lucide.dev) SVG icon component.

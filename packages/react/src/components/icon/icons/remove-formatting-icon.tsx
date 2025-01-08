@@ -1,5 +1,5 @@
 import { RemoveFormatting } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RemoveFormattingIcon` is [Lucide](https://lucide.dev) SVG icon component.

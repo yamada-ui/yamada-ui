@@ -1,5 +1,5 @@
 import { Flashlight } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FlashlightIcon` is [Lucide](https://lucide.dev) SVG icon component.

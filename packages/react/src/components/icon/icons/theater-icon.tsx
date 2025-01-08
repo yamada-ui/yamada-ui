@@ -1,5 +1,5 @@
 import { Theater } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TheaterIcon` is [Lucide](https://lucide.dev) SVG icon component.

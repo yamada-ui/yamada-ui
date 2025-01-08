@@ -1,5 +1,5 @@
 import { Angry } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AngryIcon` is [Lucide](https://lucide.dev) SVG icon component.

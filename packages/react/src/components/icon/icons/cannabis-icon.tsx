@@ -1,5 +1,5 @@
 import { Cannabis } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CannabisIcon` is [Lucide](https://lucide.dev) SVG icon component.

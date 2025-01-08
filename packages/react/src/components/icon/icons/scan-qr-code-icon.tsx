@@ -1,5 +1,5 @@
 import { ScanQrCode } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ScanQrCodeIcon` is [Lucide](https://lucide.dev) SVG icon component.

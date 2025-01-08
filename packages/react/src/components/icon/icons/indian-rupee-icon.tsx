@@ -1,5 +1,5 @@
 import { IndianRupee } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `IndianRupeeIcon` is [Lucide](https://lucide.dev) SVG icon component.

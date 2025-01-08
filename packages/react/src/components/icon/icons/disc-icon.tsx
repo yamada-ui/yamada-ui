@@ -1,5 +1,5 @@
 import { Disc } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DiscIcon` is [Lucide](https://lucide.dev) SVG icon component.

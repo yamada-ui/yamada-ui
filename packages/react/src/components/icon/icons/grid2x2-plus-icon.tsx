@@ -1,5 +1,5 @@
 import { Grid2x2Plus } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Grid2x2PlusIcon` is [Lucide](https://lucide.dev) SVG icon component.

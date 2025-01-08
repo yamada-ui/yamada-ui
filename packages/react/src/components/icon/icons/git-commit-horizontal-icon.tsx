@@ -1,5 +1,5 @@
 import { GitCommitHorizontal } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `GitCommitHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.

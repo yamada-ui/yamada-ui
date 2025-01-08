@@ -1,5 +1,5 @@
 import { Droplet } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DropletIcon` is [Lucide](https://lucide.dev) SVG icon component.

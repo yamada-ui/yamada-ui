@@ -1,5 +1,5 @@
 import { Church } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ChurchIcon` is [Lucide](https://lucide.dev) SVG icon component.

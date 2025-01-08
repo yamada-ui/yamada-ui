@@ -1,5 +1,5 @@
 import { CloudDrizzle } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CloudDrizzleIcon` is [Lucide](https://lucide.dev) SVG icon component.

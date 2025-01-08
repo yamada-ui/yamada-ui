@@ -1,5 +1,5 @@
 import { Database } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DatabaseIcon` is [Lucide](https://lucide.dev) SVG icon component.

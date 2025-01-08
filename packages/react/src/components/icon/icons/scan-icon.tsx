@@ -1,5 +1,5 @@
 import { Scan } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ScanIcon` is [Lucide](https://lucide.dev) SVG icon component.

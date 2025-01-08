@@ -1,5 +1,5 @@
 import { Laugh } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `LaughIcon` is [Lucide](https://lucide.dev) SVG icon component.

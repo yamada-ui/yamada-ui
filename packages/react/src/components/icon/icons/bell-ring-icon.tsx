@@ -1,5 +1,5 @@
 import { BellRing } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BellRingIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -14,6 +14,10 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
+export const Basic: Story = () => {
+  return <Button>Button</Button>
+}
+
 export const Variant: Story = () => {
   return (
     <PropsTable

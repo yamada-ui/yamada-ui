@@ -235,7 +235,7 @@ const NoticeComponent = memo(
         drag={
           isClosable && closeStrategy === "element"
             ? getDragDirection(placement)
-            : null
+            : undefined
         }
         dragConstraints={getDragConstraints(placement)}
         dragElastic={0.1}

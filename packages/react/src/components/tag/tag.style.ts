@@ -1,5 +1,4 @@
 import { defineComponentSlotStyle } from "../../core"
-import { badgeStyle } from "../badge"
 
 export const tagStyle = defineComponentSlotStyle({
   base: {
@@ -59,16 +58,24 @@ export const tagStyle = defineComponentSlotStyle({
 
   variants: {
     outline: {
-      root: badgeStyle.variants?.outline,
+      root: {
+        layerStyle: "outline",
+      },
     },
     solid: {
-      root: badgeStyle.variants?.solid,
+      root: {
+        layerStyle: "solid",
+      },
     },
     subtle: {
-      root: badgeStyle.variants?.subtle,
+      root: {
+        layerStyle: "subtle",
+      },
     },
     surface: {
-      root: badgeStyle.variants?.surface,
+      root: {
+        layerStyle: "surface",
+      },
     },
   },
 

@@ -52,40 +52,33 @@ export const buttonStyle = defineComponentStyle({
 
   variants: {
     ghost: {
-      bg: "transparent",
-      color: "colorScheme.fg",
+      layerStyle: "ghost",
       _hover: {
-        bg: "colorScheme.subtle",
+        layerStyle: "ghost.hover",
       },
     },
     outline: {
-      bg: "transparent",
-      border: "1px solid $colorScheme.outline",
-      color: "colorScheme.outline",
+      layerStyle: "outline",
       _hover: {
-        bg: "colorScheme.subtle",
+        layerStyle: "outline.hover",
       },
     },
     solid: {
-      bg: "colorScheme.solid",
-      color: "colorScheme.contrast",
+      layerStyle: "solid",
       _hover: {
-        bg: "colorScheme.solid/80",
+        layerStyle: "solid.hover",
       },
     },
     subtle: {
-      bg: "colorScheme.subtle",
-      color: "colorScheme.fg",
+      layerStyle: "subtle",
       _hover: {
-        bg: "colorScheme.muted",
+        layerStyle: "subtle.hover",
       },
     },
     surface: {
-      bg: "colorScheme.subtle",
-      border: "1px solid $colorScheme.muted",
-      color: "colorScheme.fg",
+      layerStyle: "surface",
       _hover: {
-        bg: "colorScheme.muted",
+        layerStyle: "surface.hover",
       },
     },
   },

@@ -26,6 +26,45 @@ export const cardStyle = defineComponentSlotStyle({
     },
   },
 
+  variants: {
+    elevated: {
+      root: {
+        boxShadow: ["md", "dark-md"],
+      },
+    },
+    outline: {
+      root: {
+        borderWidth: "1px",
+      },
+    },
+    panel: {
+      root: {
+        bg: "bg.panel",
+      },
+    },
+    solid: {
+      root: {
+        layerStyle: "solid",
+      },
+    },
+    subtle: {
+      root: {
+        layerStyle: "subtle",
+      },
+    },
+    surface: {
+      root: {
+        layerStyle: "surface",
+      },
+    },
+    unstyled: {
+      body: { p: 0 },
+      footer: { p: 0 },
+      header: { p: 0 },
+      root: { rounded: 0 },
+    },
+  },
+
   sizes: {
     sm: {
       body: { gap: "sm", px: "sm", py: "sm" },
@@ -50,49 +89,6 @@ export const cardStyle = defineComponentSlotStyle({
       footer: { gap: "lg", pb: "lg", px: "lg" },
       header: { gap: "lg", pt: "lg", px: "lg" },
       root: { rounded: "xl" },
-    },
-  },
-
-  variants: {
-    elevated: {
-      root: {
-        boxShadow: ["md", "dark-md"],
-      },
-    },
-    outline: {
-      root: {
-        borderWidth: "1px",
-      },
-    },
-    panel: {
-      root: {
-        bg: "bg.panel",
-      },
-    },
-    solid: {
-      root: {
-        bg: "colorScheme.solid",
-        color: "colorScheme.contrast",
-      },
-    },
-    subtle: {
-      root: {
-        bg: "colorScheme.subtle",
-      },
-    },
-    surface: {
-      root: {
-        bg: "colorScheme.subtle",
-        borderColor: "colorScheme.muted",
-        borderWidth: "1px",
-        color: "colorScheme.fg",
-      },
-    },
-    unstyled: {
-      body: { p: 0 },
-      footer: { p: 0 },
-      header: { p: 0 },
-      root: { rounded: 0 },
     },
   },
 

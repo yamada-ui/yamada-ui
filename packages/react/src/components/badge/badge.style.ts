@@ -26,21 +26,16 @@ export const badgeStyle = defineComponentStyle({
 
   variants: {
     outline: {
-      boxShadow: "inset 0 0 0px 1px $colorScheme.outline",
-      color: "colorScheme.outline",
+      layerStyle: "outline",
     },
     solid: {
-      bg: "colorScheme.solid",
-      color: "colorScheme.contrast",
+      layerStyle: "solid",
     },
     subtle: {
-      bg: "colorScheme.subtle",
-      color: "colorScheme.fg",
+      layerStyle: "subtle",
     },
     surface: {
-      bg: "colorScheme.subtle",
-      boxShadow: "inset 0 0 0px 1px $colorScheme.muted",
-      color: "colorScheme.fg",
+      layerStyle: "surface",
     },
   },
 

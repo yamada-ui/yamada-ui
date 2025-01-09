@@ -41,6 +41,10 @@ export const attributes = {
    */
   _between: "&[data-between]",
   /**
+   * The CSS `[aria-current]:not([aria-current='false'])` attribute selector.
+   */
+  _current: "&[aria-current]:not([aria-current='false'])",
+  /**
    * The CSS `[data-end]` attribute selector.
    */
   _end: "&[data-end]",
@@ -106,6 +110,10 @@ export const attributes = {
    * - `[data-not-allowed]`
    */
   _notAllowed: "&[data-not-allowed]",
+  /**
+   * The CSS `[aria-current='false']` attribute selector.
+   */
+  _notCurrent: "&:not([aria-current]), &[aria-current='false']",
   /**
    * The CSS `:not([data-fallback])` attribute selector.
    */

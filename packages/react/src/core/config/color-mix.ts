@@ -1,6 +1,6 @@
-import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
+import { isArray } from "@yamada-ui/utils"
 import {
   getCSSFunction,
   globalValues,
@@ -45,12 +45,34 @@ function getColor(value: string | undefined, theme: StyledTheme) {
   return !percent ? color : `${color} ${percent}`
 }
 
-export function colorMix(
-  value: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
+function createVariable(
+  value: string,
+  fallbackValue?: string,
+  properties?: string | string[],
 ) {
+  if (!properties) return value
+
+  const key =
+    "--mix-" + (isArray(properties) ? properties.join("-") : properties)
+
+  const result = { [key]: value }
+
+  if (isArray(properties)) {
+    properties.forEach((property) => {
+      result[property] = fallbackValue
+        ? `var(${key}, ${fallbackValue})`
+        : `var(${key})`
+    })
+  } else {
+    result[properties] = fallbackValue
+      ? `var(${key}, ${fallbackValue})`
+      : `var(${key})`
+  }
+
+  return result
+}
+
+export function colorMix(value: any, { properties, theme }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)
@@ -75,11 +97,13 @@ export function colorMix(
       color1 = getColor(color1, theme)
       color2 = getColor(color2, theme)
 
-      return (
+      return createVariable(
         `color-mix(${method}` +
-        (color1 ? `, ${color1}` : "") +
-        (color2 ? `, ${color2}` : "") +
-        ")"
+          (color1 ? `, ${color1}` : "") +
+          (color2 ? `, ${color2}` : "") +
+          ")",
+        color1,
+        properties,
       )
     }
 
@@ -96,7 +120,11 @@ export function colorMix(
             ? "#fff"
             : "#000"
 
-      return `color-mix(${DEFAULT_METHOD}, ${color1}, ${color2})`
+      return createVariable(
+        `color-mix(${DEFAULT_METHOD}, ${color1}, ${color2})`,
+        color1,
+        properties,
+      )
     }
 
     case "tone": {
@@ -109,24 +137,29 @@ export function colorMix(
       let ratio = parseInt(tone) || 500
 
       if (ratio < 50 && 950 < ratio) ratio = 500
-
       if (ratio === 500) return color1
 
       const color2 = ratio < 500 ? "#fff" : "#000"
-
       const percent = `${100 - (Math.abs(ratio - 500) * 2) / 10}%`
 
-      return `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`
+      return createVariable(
+        `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`,
+        color1,
+        properties,
+      )
     }
 
     default: {
       if (!values.includes("/")) return value
 
       const [color, percent] = values.split("/")
-
       const color1 = getColor(`${color} ${percent}`, theme)
 
-      return `color-mix(${DEFAULT_METHOD}, ${color1}, transparent)`
+      return createVariable(
+        `color-mix(${DEFAULT_METHOD}, ${color1}, transparent)`,
+        color1,
+        properties,
+      )
     }
   }
 }

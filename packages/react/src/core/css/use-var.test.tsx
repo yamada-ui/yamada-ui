@@ -88,10 +88,10 @@ const theme: UsageTheme = {
 }
 
 const config: ThemeConfig = {
+  css: { varPrefix: "ui" },
   breakpoint: { direction: "down" },
   initialColorMode: "light",
   initialThemeScheme: "base",
-  var: { prefix: "ui" },
 }
 
 const transformedTheme = transformTheme(theme, config) as StyledTheme

@@ -5,7 +5,7 @@ import { tokenToVar } from "./utils"
 
 export const generateAtRule =
   (identifier: string): Transform =>
-  (values, theme) => {
+  (values, { theme }) => {
     if (!isArray(values)) return values
 
     return values.reduce<Dict>(

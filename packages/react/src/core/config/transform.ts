@@ -1,6 +1,4 @@
-import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
-import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 
 const transformValues = [
   "rotate(var(--ui-rotate, 0))",
@@ -10,12 +8,7 @@ const transformValues = [
   "skewY(var(--ui-skew-y, 0))",
 ]
 
-export function transform(
-  value: any,
-  _theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
-) {
+export function transform(value: any, _options: TransformOptions) {
   if (value === "auto")
     return [
       "translateX(var(--ui-translate-x, 0))",

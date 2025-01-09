@@ -114,20 +114,22 @@ export function getCreateThemeVars(
 
       function createAnimationVar(value: VariableValue) {
         if (isArray(value)) {
-          return value.map((value) => animation(value, theme, css)).join(",")
+          return value
+            .map((value) => animation(value, { css, theme }))
+            .join(",")
         } else {
-          return animation(value, theme, css)
+          return animation(value, { css, theme })
         }
       }
 
       function createGradientVar(token: string, value: ThemeValue) {
         return function (semantic: boolean) {
           if (!semantic) {
-            return gradient(value, theme, css)
+            return gradient(value, { css, theme })
           } else {
             const [variable, reference] = getRelatedReference(token, value)
 
-            return variable ? reference : gradient(value, theme, css)
+            return variable ? reference : gradient(value, { css, theme })
           }
         }
       }

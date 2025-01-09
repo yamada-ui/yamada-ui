@@ -1,6 +1,5 @@
-import type { Dict } from "@yamada-ui/utils"
-import type { CSSFunction } from "../css"
 import type { ColorScheme, StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 import { isArray, TONES } from "../../utils"
 import { getVarName } from "../css"
 import { pseudos } from "../pseudos"
@@ -33,12 +32,7 @@ function createColorSchemeVariables(value: ColorScheme) {
   }
 }
 
-export function colorScheme(
-  value: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
-) {
+export function colorScheme(value: any, { theme }: TransformOptions) {
   if (isArray(value)) {
     const [lightValue, darkValue] = value
 

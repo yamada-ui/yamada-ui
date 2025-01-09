@@ -1,15 +1,14 @@
 import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
-import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 import { flattenObject, isArray, isObject, isUndefined } from "../../utils"
 import { getVarName } from "../css"
 import { colorMix } from "./color-mix"
 import { tokenToVar } from "./utils"
 
 function transformValue(token: ThemeToken, value: Dict) {
-  return function (theme: StyledTheme) {
-    if (token === "colors") value = colorMix(value, theme)
+  return function ({ theme, ...rest }: TransformOptions) {
+    if (token === "colors") value = colorMix(value, { theme, ...rest })
 
     return tokenToVar(token, value)(theme)
   }
@@ -26,16 +25,16 @@ function insertObject(obj: Dict, segments: string[], value: any): any {
 }
 
 function valueToToken(token: ThemeToken, value: Dict) {
-  return function (theme: StyledTheme) {
+  return function (options: TransformOptions) {
     const flattedObj = flattenObject(value)
 
     return Object.entries(flattedObj).reduce<Dict>((prev, [path, value]) => {
       const segments = path.split(".")
 
       if (isArray(value)) {
-        value = value.map((value) => transformValue(token, value)(theme))
+        value = value.map((value) => transformValue(token, value)(options))
       } else {
-        value = transformValue(token, value)(theme)
+        value = transformValue(token, value)(options)
       }
 
       insertObject(prev, segments, value)
@@ -46,23 +45,23 @@ function valueToToken(token: ThemeToken, value: Dict) {
 }
 
 function replaceValue(token: ThemeToken | undefined, value: any) {
-  return function (theme: StyledTheme) {
+  return function (options: TransformOptions) {
     if (!token) return value
 
     if (isObject(value)) {
       value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
         if (isObject(value)) {
-          prev[key] = valueToToken(token, value)(theme)
+          prev[key] = valueToToken(token, value)(options)
         } else if (isArray(value)) {
           prev[key] = value.map((value) => {
             if (isObject(value)) {
-              return valueToToken(token, value)(theme)
+              return valueToToken(token, value)(options)
             } else {
-              return transformValue(token, value)(theme)
+              return transformValue(token, value)(options)
             }
           })
         } else {
-          prev[key] = transformValue(token, value)(theme)
+          prev[key] = transformValue(token, value)(options)
         }
 
         return prev
@@ -70,31 +69,26 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
     } else if (isArray(value)) {
       value = value.map((value) => {
         if (isObject(value)) {
-          return valueToToken(token, value)(theme)
+          return valueToToken(token, value)(options)
         } else {
-          return transformValue(token, value)(theme)
+          return transformValue(token, value)(options)
         }
       })
     } else {
-      value = transformValue(token, value)(theme)
+      value = transformValue(token, value)(options)
     }
 
     return value
   }
 }
 
-export function vars(
-  values: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
-) {
+export function vars(values: any, { theme, ...rest }: TransformOptions) {
   if (!isArray(values)) return values
 
   return values.reduce<Dict>((prev, { name, token, value, __prefix }) => {
     name = getVarName(name, __prefix)(theme)
 
-    prev[name] = replaceValue(token, value)(theme)
+    prev[name] = replaceValue(token, value)({ theme, ...rest })
 
     return prev
   }, {})

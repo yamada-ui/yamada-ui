@@ -7,12 +7,16 @@ import { keyframes as emotionKeyframes } from "@emotion/react"
 import { isObject, isString, isUndefined } from "../../utils"
 import { getVar } from "../css"
 
-export type Transform = (
-  value: any,
-  theme: StyledTheme,
-  css: CSSFunction,
-  prev?: Dict,
-) => any
+export interface TransformOptions {
+  theme: StyledTheme
+  css?: CSSFunction
+  prev?: Dict
+  properties?: string | string[]
+}
+
+export interface Transform {
+  (value: any, options: TransformOptions): any
+}
 
 export const globalValues = new Set([
   "-moz-initial",

@@ -134,10 +134,10 @@ const theme = transformTheme(
     },
   },
   {
+    css: { varPrefix: "ui" },
     breakpoint: { direction: "down" },
     initialColorMode: "light",
     initialThemeScheme: "base",
-    var: { prefix: "ui" },
   },
 ) as StyledTheme
 
@@ -233,7 +233,7 @@ describe("css", () => {
     const result = css({
       color: "gray.500",
       fontSize: "md",
-    })(theme, (prop) => prop === "color")
+    })(theme, ["color"])
 
     expect(result).toStrictEqual({
       fontSize: "var(--ui-fontSizes-md)",

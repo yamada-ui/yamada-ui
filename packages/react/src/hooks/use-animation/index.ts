@@ -20,9 +20,9 @@ export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
 
   if (isArray(styles)) {
-    return styles.map((style) => animation(style, theme, css)).join(", ")
+    return styles.map((style) => animation(style, { css, theme })).join(", ")
   } else {
-    return animation(styles, theme, css)
+    return animation(styles, { css, theme })
   }
 }
 
@@ -65,10 +65,10 @@ export const useDynamicAnimation = <
       if (isArray(styles)) {
         cache.current.set(
           key,
-          styles.map((style) => animation(style, theme, css)).join(", "),
+          styles.map((style) => animation(style, { css, theme })).join(", "),
         )
       } else {
-        cache.current.set(key, animation(styles, theme, css))
+        cache.current.set(key, animation(styles, { css, theme }))
       }
     }
 

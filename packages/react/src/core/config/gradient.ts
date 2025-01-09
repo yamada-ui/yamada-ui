@@ -1,6 +1,4 @@
-import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
-import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 import { isArray, isUndefined } from "../../utils"
 import {
   getCSSFunction,
@@ -22,12 +20,7 @@ const directions: { [key: string]: string } = {
 
 const directionValues = new Set(Object.values(directions))
 
-export function gradient(
-  value: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
-) {
+export function gradient(value: any, { theme }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)

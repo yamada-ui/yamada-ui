@@ -3,7 +3,7 @@ import type { Transform } from "./utils"
 import { getMemoizedObject as get } from "../../utils"
 
 export function generateStyles(prefix?: string): Transform {
-  return function (value, theme, _css, prev = {}) {
+  return function (value, { prev = {}, theme }) {
     const resolvedCSS: Dict = {}
 
     const style = get<Dict>(

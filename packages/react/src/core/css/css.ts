@@ -199,7 +199,13 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
         if (style === true) style = { properties: prop }
 
         if (isObject(value) && !style?.processSkip) {
-          value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+          value =
+            style?.transform?.(value, {
+              css,
+              prev: resolvedCSS,
+              properties: style.properties,
+              theme,
+            }) ?? value
 
           resolvedCSS[prop] = resolvedCSS[prop] ?? {}
           resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
@@ -207,7 +213,13 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
           continue
         }
 
-        value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+        value =
+          style?.transform?.(value, {
+            css,
+            prev: resolvedCSS,
+            properties: style.properties,
+            theme,
+          }) ?? value
 
         if (style?.processResult || style?.processSkip)
           value = createCSS(value, true)

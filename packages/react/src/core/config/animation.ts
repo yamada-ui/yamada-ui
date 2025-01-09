@@ -1,6 +1,5 @@
 import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
-import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 import { keyframes as emotionKeyframes } from "@emotion/react"
 import { StyleSheet } from "@emotion/sheet"
 import { createdDom, isObject } from "../../utils"
@@ -24,12 +23,7 @@ function transformAnimationValue(value: Dict) {
   }, {})
 }
 
-export function animation(
-  value: any,
-  theme: StyledTheme,
-  css: CSSFunction,
-  _prev?: Dict,
-) {
+export function animation(value: any, { css, theme }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
   if (isObject(value)) {
@@ -42,7 +36,7 @@ export function animation(
       iterationCount = "1",
       keyframes,
       playState = "running",
-    } = css(transformAnimationValue(value))(theme)
+    } = css?.(transformAnimationValue(value))(theme) ?? {}
     const { name, styles } = emotionKeyframes(keyframes)
 
     styleSheet?.insert(styles)

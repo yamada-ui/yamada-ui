@@ -268,6 +268,7 @@ export const useAccordionItem = ({
       "aria-disabled": dataAttr(disabled),
       "aria-expanded": open,
       "aria-hidden": true,
+      role: "presentation",
       ...props,
     }),
     [open, disabled],

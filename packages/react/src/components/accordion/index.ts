@@ -26,6 +26,11 @@ export {
   useAccordionItem,
   useAccordionItemContext,
 } from "./use-accordion"
-export type { UseAccordionItemProps, UseAccordionProps } from "./use-accordion"
+export type {
+  UseAccordionItemProps,
+  UseAccordionItemReturn,
+  UseAccordionProps,
+  UseAccordionReturn,
+} from "./use-accordion"
 
 export * as Accordion from "./namespace"

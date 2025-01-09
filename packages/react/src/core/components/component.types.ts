@@ -108,12 +108,18 @@ export type HTMLUIPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
 
 type ConditionalProps<Y> = Y extends DOMElement ? HTMLProps<Y> : Y
 
+type MergedProps<Y, M> = M extends undefined ? Y : Merge<Y, M>
+
 type DefinedProps<Y, M> = M extends undefined ? Y : M
 
-export interface PropGetter<Y = "div", M = undefined> {
-  (props?: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
+export interface PropGetter<Y = "div", M = undefined, D = undefined> {
+  (
+    props?: MergedProps<ConditionalProps<Y>, M>,
+  ): DefinedProps<ConditionalProps<Y>, D>
 }
 
-export interface RequiredPropGetter<Y = "div", M = undefined> {
-  (props: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
+export interface RequiredPropGetter<Y = "div", M = undefined, D = undefined> {
+  (
+    props: MergedProps<ConditionalProps<Y>, M>,
+  ): DefinedProps<ConditionalProps<Y>, D>
 }

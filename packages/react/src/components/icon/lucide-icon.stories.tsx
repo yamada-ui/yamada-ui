@@ -1,9 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { FC } from "react"
-import type { IconNames, IconProps } from "./"
 import { burger } from "@lucide/lab"
 import { HStack } from "../stack"
-import { GhostIcon, icons, LucideIcon } from "./"
+import { GhostIcon, LucideIcon } from "./"
 
 type Story = StoryFn<typeof GhostIcon>
 
@@ -34,17 +32,4 @@ export const Basic: Story = () => {
 
 export const CustomIcon: Story = () => {
   return <LucideIcon fontSize="4xl" icon={burger} />
-}
-
-export const OneGenericIcon: Story = () => {
-  const LucideIcon: FC<{ name: IconNames } & IconProps> = ({
-    name,
-    ...rest
-  }) => {
-    const Icon = icons[name]
-
-    return <Icon {...rest} />
-  }
-
-  return <LucideIcon name="GhostIcon" fontSize="4xl" />
 }

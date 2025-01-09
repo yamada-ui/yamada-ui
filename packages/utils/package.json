@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Yamada UI utils",
   "keywords": [
     "utils",

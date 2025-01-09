@@ -1,3 +1,3 @@
-import type { TextStyles } from "../../core"
+import type { CSSObject } from "../../core"
 
-export const textStyles: TextStyles = {}
+export const textStyles: CSSObject = {}

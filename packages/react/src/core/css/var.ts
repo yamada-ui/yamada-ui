@@ -15,11 +15,19 @@ interface Variable {
   variable: string
 }
 
-export function getVar(token: string) {
+export function getVar(token: string, prefix?: string) {
   return function (theme: StyledTheme) {
-    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
+    prefix ??= theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `var(--${prefix}-${token})`
+  }
+}
+
+export function getVarName(token: string, prefix?: string) {
+  return function (theme: StyledTheme) {
+    prefix ??= theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
+
+    return `--${prefix}-${token}`
   }
 }
 
@@ -59,6 +67,9 @@ export function getCreateThemeVars(
         value: ParsedValue = "",
       ): [ParsedValue, Exclude<ParsedValue, undefined>] {
         const relatedToken = [token.split(".")[0], value].join(".")
+
+        if (token === relatedToken) return [, value]
+
         const targetToken = tokens[relatedToken] ?? prevTokens?.[relatedToken]
 
         if (!targetToken) return [, value]
@@ -110,8 +121,8 @@ export function getCreateThemeVars(
       }
 
       function createGradientVar(token: string, value: ThemeValue) {
-        return function (isSemantic: boolean) {
-          if (!isSemantic) {
+        return function (semantic: boolean) {
+          if (!semantic) {
             return gradient(value, theme, css)
           } else {
             const [variable, reference] = getRelatedReference(token, value)
@@ -126,41 +137,34 @@ export function getCreateThemeVars(
         value: VariableValue,
         variable: string,
       ) {
-        return function (isSemantic: boolean, queries: string[] = []) {
+        return function (semantic: boolean, queries: string[] = []) {
           if (isArray(value)) {
             const [lightValue, darkValue] = value
 
-            createVar(token, lightValue, variable)(isSemantic, queries)
+            createVar(token, lightValue, variable)(semantic, queries)
             createVar(
               token,
               darkValue,
               variable,
-            )(isSemantic, [...queries, pseudos._dark])
+            )(semantic, [...queries, pseudos._dark])
           } else if (isObject(value)) {
             Object.entries(value).forEach(([key, value]) => {
               if (key === "base") {
-                createVar(token, value, variable)(isSemantic, queries)
+                createVar(token, value, variable)(semantic, queries)
               } else {
                 const query = getQuery(key)
 
                 if (!query) return
 
-                createVar(
-                  token,
-                  value,
-                  variable,
-                )(isSemantic, [...queries, query])
+                createVar(token, value, variable)(semantic, [...queries, query])
               }
             })
           } else {
             let computedValue = valueToVar(value)
 
             if (isGradient(token)) {
-              computedValue = createGradientVar(
-                token,
-                computedValue,
-              )(isSemantic)
-            } else if (isSemantic) {
+              computedValue = createGradientVar(token, computedValue)(semantic)
+            } else if (semantic) {
               const [, reference] = getRelatedReference(token, computedValue)
 
               computedValue = reference
@@ -176,12 +180,12 @@ export function getCreateThemeVars(
         }
       }
 
-      for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
+      for (let [token, { semantic, value }] of Object.entries(tokens)) {
         const { reference, variable } = tokenToVar(token)
 
         if (isAnimation(token)) value = createAnimationVar(value)
 
-        createVar(token, value, variable)(isSemantic)
+        createVar(token, value, variable)(semantic)
 
         if (isSpace(token)) {
           const { negativeReference, negativeToken } = createNegativeVar(

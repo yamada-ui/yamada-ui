@@ -36,7 +36,9 @@ function getColor(value: string | undefined, theme: StyledTheme) {
   color =
     theme.__cssMap && token in theme.__cssMap
       ? theme.__cssMap[token]?.ref
-      : color
+      : color?.startsWith(`--`)
+        ? `var(${color})`
+        : color
 
   if (percent && !percent.endsWith("%")) percent = `${percent}%`
 
@@ -117,7 +119,14 @@ export function colorMix(
       return `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`
     }
 
-    default:
-      return value
+    default: {
+      if (!values.includes("/")) return value
+
+      const [color, percent] = values.split("/")
+
+      const color1 = getColor(`${color} ${percent}`, theme)
+
+      return `color-mix(${DEFAULT_METHOD}, ${color1}, transparent)`
+    }
   }
 }

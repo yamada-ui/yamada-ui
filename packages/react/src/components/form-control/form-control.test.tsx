@@ -10,14 +10,14 @@ const Input: FC<ComponentProps<"input">> = (props) => {
 
 describe("<FormControl />", () => {
   test("FormControl renders correctly", async () => {
-    await a11y(<FormControl />)
+    await a11y(<FormControl.Root />)
   })
 
   test("should render form control", () => {
     render(
-      <FormControl helperMessage="Please enter your email" label="Email">
+      <FormControl.Root helperMessage="Please enter your email" label="Email">
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByText("Email")).toBeInTheDocument()
     expect(
@@ -28,9 +28,9 @@ describe("<FormControl />", () => {
 
   test("should render invalid form control", () => {
     render(
-      <FormControl errorMessage="Email is required." invalid label="Email">
+      <FormControl.Root errorMessage="Email is required." invalid label="Email">
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByText("Email")).toHaveAttribute("data-invalid")
     expect(screen.getByRole("textbox")).toBeInvalid()
@@ -41,7 +41,7 @@ describe("<FormControl />", () => {
 
   test("should be hidden helperMessage", () => {
     render(
-      <FormControl
+      <FormControl.Root
         errorMessage="Email is required."
         helperMessage="Please enter your email"
         invalid
@@ -49,7 +49,7 @@ describe("<FormControl />", () => {
         replace
       >
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Email is required.")),
@@ -61,7 +61,7 @@ describe("<FormControl />", () => {
 
   test("should be appeared helperMessage", () => {
     render(
-      <FormControl
+      <FormControl.Root
         errorMessage="Email is required."
         helperMessage="Please enter your email"
         invalid
@@ -69,7 +69,7 @@ describe("<FormControl />", () => {
         replace={false}
       >
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(
       screen.getByText(filterVisuallyHidden("Email is required.")),
@@ -81,67 +81,67 @@ describe("<FormControl />", () => {
 
   test("should be required", () => {
     render(
-      <FormControl label="Email" required>
+      <FormControl.Root label="Email" required>
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByRole("textbox")).toBeRequired()
   })
 
   test("should be disabled", () => {
     render(
-      <FormControl disabled label="Email">
+      <FormControl.Root disabled label="Email">
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
   test("should be readonly", () => {
     render(
-      <FormControl label="Email" readOnly>
+      <FormControl.Root label="Email" readOnly>
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
   test("should render custom indicator *", () => {
     render(
-      <FormControl label="Email" required>
+      <FormControl.Root label="Email" required>
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByText("*")).toBeInTheDocument()
   })
 
   test("should render custom indicator text", () => {
     render(
-      <FormControl label="Email" required requiredIndicator="required">
+      <FormControl.Root label="Email" required requiredIndicator="required">
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByText("required")).toBeInTheDocument()
   })
 
   test("should render custom indicator jsx", () => {
     render(
-      <FormControl
+      <FormControl.Root
         label="Email"
         required
         requiredIndicator={<div data-testid="required">required</div>}
       >
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByTestId("required")).toHaveTextContent("required")
   })
 
   test("should render custom optional indicator", () => {
     render(
-      <FormControl label="Email" optionalIndicator={<div>optional</div>}>
+      <FormControl.Root label="Email" optionalIndicator={<div>optional</div>}>
         <Input type="email" />
-      </FormControl>,
+      </FormControl.Root>,
     )
     expect(screen.getByText("optional")).toBeInTheDocument()
   })

@@ -1,20 +1,33 @@
-export { Fieldset, Legend } from "./fieldset"
-export type { FieldsetProps, LegendProps } from "./fieldset"
 export {
   ErrorMessage,
-  FormControl,
-  formControlProperties,
-  getFormControlProperties,
+  FormControlPropsContext,
+  FormControlRoot,
   HelperMessage,
   Label,
-  useFormControl,
-  useFormControlProps,
+  Legend,
+  useFormControlContext,
+  useFormControlPropsContext,
 } from "./form-control"
 export type {
   ErrorMessageProps,
-  FormControlOptions,
-  FormControlProps,
+  FormControlRootProps,
   HelperMessageProps,
   LabelProps,
-  UseFormControlProps,
+  LegendProps,
 } from "./form-control"
+
+export * from "./form-control.style"
+
+export * from "./use-form-control-props"
+
+export * as FormControl from "./namespace"
+
+/**
+ * @deprecated
+ */
+export const formControlProperties = []
+
+/**
+ * @deprecated
+ */
+export const useFormControl = () => ({})

@@ -6,9 +6,16 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
     container: ({ orientation }) => ({
       display: "flex",
       flexDirection: orientation === "vertical" ? "row" : "column",
+      w: "100%",
     }),
-    tab: ({ isFitted }) => ({
-      flex: isFitted ? 1 : undefined,
+    tab: ({ fitted }) => ({
+      alignItems: "center",
+      display: "flex",
+      flex: fitted ? 1 : undefined,
+      justifyContent: "center",
+      outline: "0",
+      overflow: "hidden",
+      position: "relative",
       transitionDuration: "normal",
       transitionProperty: "common",
       whiteSpace: "nowrap",
@@ -24,13 +31,16 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       _selected: { _hover: { opacity: 1 } },
     }),
     tabList: ({ align, orientation }) => ({
+      display: "flex",
       flexDirection: orientation === "vertical" ? "column" : "row",
       justifyContent: align === "center" ? align : `flex-${align}`,
     }),
     tabPanel: {
       p: "md",
     },
-    tabPanels: {},
+    tabPanels: {
+      w: "100%",
+    },
   },
 
   variants: {

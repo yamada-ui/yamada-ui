@@ -1,6 +1,6 @@
-import type { UIStyle } from "../../core"
+import type { CSSObject } from "../../core"
 
-export const globalStyle: UIStyle = {
+export const globalStyle: CSSObject = {
   "*, *::before, *::after": {
     borderColor: "border",
     borderStyle: "solid",
@@ -8,20 +8,16 @@ export const globalStyle: UIStyle = {
     wordWrap: "break-word",
   },
   "*::placeholder, *[data-placeholder]": {
-    color: "blackAlpha.600",
+    color: "fg.subtle",
   },
   body: {
-    bg: ["white", "black"],
-    color: ["black", "white"],
+    colorScheme: "mono",
+    bg: "bg",
+    color: "fg",
     fontFamily: "body",
     lineHeight: "base",
     overflowX: "hidden",
     transitionDuration: "normal",
     transitionProperty: "background-color",
-  },
-  _dark: {
-    "*::placeholder, *[data-placeholder]": {
-      color: "whiteAlpha.400",
-    },
   },
 }

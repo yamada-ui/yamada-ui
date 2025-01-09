@@ -1,5 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { DEFAULT_COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
+import { For } from "../for"
 import { Wrap } from "./"
 
 type Story = StoryFn<typeof Wrap>
@@ -14,78 +16,19 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Wrap gap="md">
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="primary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="secondary" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="warning" color="white" p="md" rounded="4">
-        Box
-      </Box>
-      <Box bg="danger" color="white" p="md" rounded="4">
-        Box
-      </Box>
+      <For each={DEFAULT_COLOR_SCHEMES}>
+        {(colorScheme, index) => (
+          <Box
+            key={index}
+            bg={`${colorScheme}.500`}
+            color="white"
+            p="md"
+            rounded="md"
+          >
+            Box
+          </Box>
+        )}
+      </For>
     </Wrap>
   )
 }

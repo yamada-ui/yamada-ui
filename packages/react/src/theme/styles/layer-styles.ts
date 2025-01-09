@@ -1,3 +1,3 @@
-import type { LayerStyles } from "../../core"
+import type { CSSModifierObject } from "../../core"
 
-export const layerStyles: LayerStyles = {}
+export const layerStyles: CSSModifierObject = {}

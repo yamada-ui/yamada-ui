@@ -1,12 +1,16 @@
-import type { MouseEventHandler, ReactElement } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { useRef } from "react"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
+import type { MouseEventHandler, ReactNode } from "react"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { TagStyle } from "./tag.style"
+import { useMemo, useRef } from "react"
+import { createSlotComponent, ui } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
-import { ariaAttr, cx, dataAttr } from "../../utils"
-import { Icon } from "../icon"
+import { dataAttr } from "../../utils"
+import { XIcon } from "../icon"
+import { tagStyle } from "./tag.style"
 
-interface TagOptions {
+export interface TagContext extends Pick<TagProps, "disabled"> {}
+
+export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
   /**
    * If `true`, the tag is disabled.
    *
@@ -16,146 +20,127 @@ interface TagOptions {
   /**
    * Icon to be displayed to the end of the tag.
    */
-  endIcon?: ReactElement
-  /**
-   * If `true`, the tag is disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * Icon to be displayed to the left of the tag.
-   *
-   * @deprecated Use `startIcon` instead.
-   */
-  leftIcon?: ReactElement
-  /**
-   * Icon to be displayed to the right of the tag.
-   *
-   * @deprecated Use `endIcon` instead.
-   */
-  rightIcon?: ReactElement
+  endIcon?: ReactNode
   /**
    * Icon to be displayed to the start of the tag.
    */
-  startIcon?: ReactElement
+  startIcon?: ReactNode
   /**
    * Props for tag close button element.
    */
   closeButtonProps?: TagCloseButtonProps
+  /**
+   * Props for content element.
+   */
+  contentProps?: TagContentProps
+  /**
+   * Props for icon element.
+   */
+  iconProps?: HTMLUIProps<"span">
   /**
    * Function to be executed when the close button is clicked.
    */
   onClose?: MouseEventHandler<HTMLElement>
 }
 
-export interface TagProps
-  extends HTMLUIProps<"span">,
-    ThemeProps<"Tag">,
-    TagOptions {}
+export const {
+  ComponentContext: TagContext,
+  PropsContext: TagPropsContext,
+  useComponentContext: useTagContext,
+  usePropsContext: useTagPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<TagProps, TagStyle, TagContext>("tag", tagStyle)
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
  * @see Docs https://yamada-ui.com/components/data-display/tag
  */
-export const Tag: FC<TagProps> = (props) => {
-  const [styles, mergedProps] = useComponentMultiStyle("Tag", props)
-  const {
-    className,
+export const Tag = withProvider<"span", TagProps>(
+  ({
     children,
-    isDisabled,
-    disabled = isDisabled,
-    rightIcon,
-    endIcon = rightIcon,
-    leftIcon,
-    startIcon = leftIcon,
+    disabled,
+    endIcon,
+    startIcon,
     closeButtonProps,
+    contentProps,
+    iconProps,
     onClose,
     ...rest
-  } = omitThemeProps(mergedProps)
+  }) => {
+    const context = useMemo(() => ({ disabled }), [disabled])
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "inline-flex",
-    gap: "fallback(1, 0.25rem)",
-    maxW: "100%",
-    verticalAlign: "top",
-    ...styles.container,
-  }
+    return (
+      <TagContext value={context}>
+        <ui.span data-disabled={dataAttr(disabled)} {...rest}>
+          {startIcon ? (
+            <TagStartIcon {...iconProps}>{startIcon}</TagStartIcon>
+          ) : null}
 
-  return (
-    <ui.span
-      className={cx("ui-tag", className)}
-      aria-disabled={ariaAttr(disabled)}
-      data-disabled={dataAttr(disabled)}
-      __css={css}
-      {...rest}
-    >
-      {startIcon}
+          {children ? (
+            <TagContent {...contentProps}>{children}</TagContent>
+          ) : null}
 
-      <ui.span lineClamp={1} __css={styles.label}>
-        {children}
-      </ui.span>
+          {endIcon ? <TagEndIcon {...iconProps}>{endIcon}</TagEndIcon> : null}
 
-      {endIcon}
+          {onClose ? (
+            <TagCloseButton
+              disabled={disabled}
+              onClick={onClose}
+              {...closeButtonProps}
+            />
+          ) : null}
+        </ui.span>
+      </TagContext>
+    )
+  },
+  "root",
+)()
 
-      {onClose ? (
-        <TagCloseButton
-          disabled={disabled}
-          onClick={onClose}
-          {...closeButtonProps}
-        >
-          <TagCloseIcon />
-        </TagCloseButton>
-      ) : null}
-    </ui.span>
-  )
-}
+export interface TagContentProps extends HTMLUIProps<"span"> {}
 
-Tag.__ui__ = "Tag"
+export const TagContent = withContext<"span", TagContentProps>(
+  "span",
+  "content",
+)(undefined, (props) => {
+  const { disabled } = useTagContext()
 
-const TagCloseIcon: FC = () => {
-  return (
-    <Icon fontSize="1.125rem" verticalAlign="inherit" viewBox="0 0 512 512">
-      <path
-        d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
-        fill="currentColor"
-      />
-    </Icon>
-  )
-}
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
 
-TagCloseIcon.displayName = "TagCloseIcon"
-TagCloseIcon.__ui__ = "TagCloseIcon"
+export interface TagStartIconProps extends HTMLUIProps<"span"> {}
 
-interface TagCloseButtonProps extends HTMLUIProps<"span"> {
+export const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
+  "icon",
+  "startIcon",
+])(undefined, (props) => {
+  const { disabled } = useTagContext()
+
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
+
+export interface TagEndIconProps extends HTMLUIProps<"span"> {}
+
+export const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
+  "icon",
+  "endIcon",
+])(undefined, (props) => {
+  const { disabled } = useTagContext()
+
+  return { "data-disabled": dataAttr(disabled), ...props }
+})
+
+export interface TagCloseButtonProps extends HTMLUIProps<"span"> {
   disabled?: boolean
 }
 
-const TagCloseButton: FC<TagCloseButtonProps> = ({ children, ...props }) => {
-  const [styles] = useComponentMultiStyle("Tag", props)
+export const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
+  "icon",
+  "closeButton",
+])(undefined, ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
-
-  const css: CSSUIObject = {
-    alignItems: "center",
-    cursor: "pointer",
-    display: "inline-flex",
-    justifyContent: "center",
-    outline: "0",
-    ...styles.closeButton,
-  }
-
   const rest = useClickable<HTMLSpanElement>({ ref, ...props })
 
-  return (
-    <ui.span aria-label="Close tag" __css={css} {...rest}>
-      {children}
-    </ui.span>
-  )
-}
-
-TagCloseButton.displayName = "TagCloseButton"
-TagCloseButton.__ui__ = "TagCloseButton"
+  return { "aria-label": "Close tag", children: children || <XIcon />, ...rest }
+})

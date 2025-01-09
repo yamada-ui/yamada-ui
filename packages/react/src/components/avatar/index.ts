@@ -1,6 +1,7 @@
-export { Avatar } from "./avatar"
-export type { AvatarProps } from "./avatar"
-export { AvatarBadge } from "./avatar-badge"
-export type { AvatarBadgeProps } from "./avatar-badge"
-export { AvatarGroup } from "./avatar-group"
-export type { AvatarGroupProps } from "./avatar-group"
+export {
+  Avatar,
+  AvatarGroup,
+  AvatarPropsContext,
+  useAvatarPropsContext,
+} from "./avatar"
+export type { AvatarGroupProps, AvatarProps } from "./avatar"

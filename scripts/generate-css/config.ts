@@ -1,4 +1,4 @@
-import type { CSSObject, ThemeToken, Union } from "@yamada-ui/react"
+import type { EmotionCSSObject, ThemeToken, Union } from "@yamada-ui/react"
 import type { CSSProperties, UIProperties } from "."
 import type { TransformOptions } from "./transform-props"
 
@@ -19,9 +19,9 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 }
 
 interface GetConfigOptions {
-  css?: CSSObject
-  isProcessResult?: boolean
-  isProcessSkip?: boolean
+  css?: EmotionCSSObject
+  processResult?: boolean
+  processSkip?: boolean
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]
@@ -32,8 +32,8 @@ interface GetConfigOptions {
 export const generateConfig =
   ({
     css,
-    isProcessResult,
-    isProcessSkip,
+    processResult,
+    processSkip,
     properties,
     token,
     transforms,
@@ -56,8 +56,8 @@ export const generateConfig =
     }
 
     if (token) config.push(`token: "${token}"`)
-    if (isProcessResult) config.push(`isProcessResult: true`)
-    if (isProcessSkip) config.push(`isProcessSkip: true`)
+    if (processResult) config.push(`processResult: true`)
+    if (processSkip) config.push(`processSkip: true`)
     if (css) config.push(`static: ${JSON.stringify(css)}`)
 
     if (transforms || token) {

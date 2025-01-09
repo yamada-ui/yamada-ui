@@ -1,12 +1,30 @@
-import type { ElementType, ReactElement } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import type { LoadingProps } from "../loading"
-import { useCallback, useMemo, useRef } from "react"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx, dataAttr, merge, mergeRefs } from "../../utils"
-import { Loading as LoadingIcon } from "../loading"
+import type { ElementType, ReactNode } from "react"
+import type { CSSObject, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { Loading } from "../loading"
+import type { ButtonStyle } from "./button.style"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react"
+import { createComponent, mergeCSS, ui } from "../../core"
+import { createContext, dataAttr, mergeRefs } from "../../utils"
+import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
-import { useButtonGroupContext } from "./button-group"
+import { buttonStyle } from "./button.style"
+
+interface ButtonContext
+  extends Pick<
+    ButtonProps,
+    "endIcon" | "iconProps" | "loadingIcon" | "loadingMessage" | "startIcon"
+  > {}
+
+const [ButtonContext, useButtonContext] = createContext<ButtonContext>({
+  name: "ButtonContext",
+})
 
 const useButtonType = (value?: ElementType) => {
   const buttonRef = useRef(!value)
@@ -20,13 +38,15 @@ const useButtonType = (value?: ElementType) => {
   return { ref, type } as const
 }
 
-interface ButtonOptions {
+export interface ButtonProps
+  extends HTMLUIProps<"button">,
+    ThemeProps<ButtonStyle> {
   /**
    * The type of button. Accepts `button`, `reset`, or `submit`.
    *
    * @default 'button'
    */
-  type?: "button" | "reset" | "submit"
+  type?: HTMLProps<"button">["type"]
   /**
    * If `true`, the button is represented as active.
    *
@@ -48,51 +68,7 @@ interface ButtonOptions {
   /**
    * The icon to display at the end side of the button.
    */
-  endIcon?: ReactElement
-  /**
-   * If `true`, the button is full rounded. Else, it'll be slightly round.
-   *
-   * @default false
-   */
-  fullRounded?: boolean
-  /**
-   * If `true`, the button is represented as active.
-   *
-   * @default false
-   *
-   * @deprecated Use `active` instead.
-   */
-  isActive?: boolean
-  /**
-   * If `true`, the button is disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the loading state of the button is represented.
-   *
-   * @default false
-   *
-   * @deprecated Use `loading` instead.
-   */
-  isLoading?: boolean
-  /**
-   * If `true`, the button is full rounded. Else, it'll be slightly round.
-   *
-   * @default false
-   *
-   * @deprecated Use `fullRounded` instead.
-   */
-  isRounded?: boolean
-  /**
-   * The icon to display at the left side of the button.
-   *
-   * @deprecated Use `startIcon` instead.
-   */
-  leftIcon?: ReactElement
+  endIcon?: ReactNode
   /**
    * If `true`, the loading state of the button is represented.
    *
@@ -101,8 +77,14 @@ interface ButtonOptions {
   loading?: boolean
   /**
    * The icon to display when the button is loading.
+   *
+   * @default 'oval'
    */
-  loadingIcon?: LoadingProps["variant"] | ReactElement
+  loadingIcon?: Loading.Scheme | ReactNode
+  /**
+   * The message to display when the button is loading.
+   */
+  loadingMessage?: ReactNode
   /**
    * The placement of the loading indicator. Accepts `start` or `end`.
    *
@@ -110,221 +92,178 @@ interface ButtonOptions {
    */
   loadingPlacement?: "end" | "start"
   /**
-   * The text to display when the button is loading.
-   */
-  loadingText?: string
-  /**
-   * The icon to display at the right side of the button.
-   *
-   * @deprecated Use `endIcon` instead.
-   */
-  rightIcon?: ReactElement
-  /**
    * The icon to display at the start side of the button.
    */
-  startIcon?: ReactElement
+  startIcon?: ReactNode
+  /**
+   * The props of the icon element.
+   */
+  iconProps?: ButtonIconProps
+  /**
+   * The props of the loading icon element.
+   */
+  loadingProps?: ButtonLoadingProps
 }
 
-export interface ButtonProps
-  extends HTMLUIProps<"button">,
-    ThemeProps<"Button">,
-    ButtonOptions {}
+export const {
+  component,
+  PropsContext: ButtonPropsContext,
+  usePropsContext: useButtonPropsContext,
+  withContext,
+} = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
 
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
  * @see Docs https://yamada-ui.com/components/forms/button
  */
-export const Button: FC<ButtonProps> = ({
-  ref,
-  children,
-  __isProcessSkip,
-  __styles,
-  ...props
-}) => {
-  const group = useButtonGroupContext()
-  const [styles, mergedProps] = useComponentStyle(
-    "Button",
-    {
-      ...group,
-      ...props,
-    },
-    { isProcessSkip: __isProcessSkip, styles: __styles },
-  )
-  const {
+export const Button = withContext(
+  ({
+    ref,
     as,
-    type,
-    className,
-    isActive,
-    active = isActive,
-    isDisabled = group?.disabled,
-    disabled = isDisabled,
-    disableRipple,
-    rightIcon,
-    endIcon = rightIcon,
-    isRounded,
-    fullRounded = isRounded,
-    isLoading,
-    leftIcon,
-    loading = isLoading,
-    loadingIcon,
-    loadingPlacement = "start",
-    loadingText,
-    startIcon = leftIcon,
-    __css,
-    ...rest
-  } = omitThemeProps(mergedProps)
-  const trulyDisabled = disabled || loading
-  const { ref: buttonRef, type: defaultType } = useButtonType(as)
-  const { onPointerDown, ...rippleProps } = useRipple({
-    ...rest,
-    disabled: disableRipple || trulyDisabled,
-  })
-  const css: CSSUIObject = useMemo(() => {
-    const _focus =
-      "_focus" in styles
-        ? merge(styles._focus ?? {}, { zIndex: "fallback(yamcha, 1)" })
-        : {}
-
-    return {
-      alignItems: "center",
-      appearance: "none",
-      display: "inline-flex",
-      gap: "fallback(2, 0.5rem)",
-      justifyContent: "center",
-      outline: "none",
-      overflow: "hidden",
-      position: "relative",
-      userSelect: "none",
-      verticalAlign: "middle",
-      whiteSpace: "nowrap",
-      ...styles,
-      ...__css,
-      ...(!!group ? { _focus } : {}),
-      ...(fullRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
-    }
-  }, [styles, __css, group, fullRounded])
-  const contentProps = {
+    active,
     children,
-    endIcon,
-    startIcon,
-  }
-  const loadingProps = {
-    loadingIcon,
-    loadingText,
-  }
+    disabled,
+    disableRipple,
+    endIcon = null,
+    loading,
+    loadingIcon = "oval",
+    loadingMessage,
+    loadingPlacement = "start",
+    startIcon = null,
+    iconProps,
+    loadingProps,
+    ...rest
+  }) => {
+    const trulyDisabled = disabled || loading
+    const { ref: buttonRef, type } = useButtonType(as)
+    const { onClick, ...rippleProps } = useRipple({
+      ...rest,
+      disabled: disableRipple || trulyDisabled,
+    })
+    const startLoading = loading && loadingPlacement === "start"
+    const endLoading = loading && loadingPlacement === "end"
 
-  return (
-    <ui.button
-      ref={mergeRefs(ref, buttonRef)}
-      as={as}
-      type={type ?? defaultType}
-      className={cx("ui-button", className)}
-      data-active={dataAttr(active)}
-      data-loading={dataAttr(loading)}
-      disabled={trulyDisabled}
-      __css={css}
-      {...rest}
-      onPointerDown={onPointerDown}
-    >
-      {loading && loadingPlacement === "start" ? (
-        <ButtonLoading
-          className="ui-button__loading--start"
-          {...loadingProps}
+    const context = useMemo(
+      () => ({ endIcon, loadingIcon, loadingMessage, startIcon, iconProps }),
+      [loadingIcon, loadingMessage, startIcon, endIcon, iconProps],
+    )
+
+    return (
+      <ButtonContext.Provider value={context}>
+        <ui.button
+          ref={mergeRefs(ref, buttonRef)}
+          as={as}
+          type={type}
+          data-active={dataAttr(active)}
+          data-loading={dataAttr(loading)}
+          disabled={trulyDisabled}
+          {...rest}
+          onClick={onClick}
+        >
+          {startLoading ? <ButtonStartLoading {...loadingProps} /> : null}
+
+          {loading ? (
+            loadingMessage || (
+              <ui.span opacity={0}>
+                <ButtonContent>{children}</ButtonContent>
+              </ui.span>
+            )
+          ) : (
+            <ButtonContent>{children}</ButtonContent>
+          )}
+
+          {endLoading ? <ButtonEndLoading {...loadingProps} /> : null}
+
+          <Ripple {...rippleProps} />
+        </ui.button>
+      </ButtonContext.Provider>
+    )
+  },
+)()
+
+const ButtonContent = component(
+  ({ children }) => {
+    const { endIcon, startIcon, iconProps } = useButtonContext()
+
+    return (
+      <>
+        {startIcon ? (
+          <ButtonStartIcon {...iconProps}>{startIcon}</ButtonStartIcon>
+        ) : null}
+        {children}
+        {endIcon ? (
+          <ButtonEndIcon {...iconProps}>{endIcon}</ButtonEndIcon>
+        ) : null}
+      </>
+    )
+  },
+  { name: "button__content" },
+)()
+
+interface ButtonLoadingProps extends HTMLUIProps<"svg"> {}
+
+const ButtonLoading = component<"svg", ButtonLoadingProps>(
+  (props) => {
+    const { loadingIcon, loadingMessage } = useButtonContext()
+
+    const css = useMemo<CSSObject>(
+      () => ({
+        position: loadingMessage ? "relative" : "absolute",
+      }),
+      [loadingMessage],
+    )
+
+    if (isLoadingScheme(loadingIcon)) {
+      const Component = getLoadingComponent(loadingIcon)
+
+      return (
+        <Component
+          color="currentColor"
+          {...props}
+          css={mergeCSS(css, props.css)}
         />
-      ) : null}
-
-      {loading ? (
-        loadingText || (
-          <ui.span opacity={0}>
-            <ButtonContent {...contentProps} />
-          </ui.span>
-        )
-      ) : (
-        <ButtonContent {...contentProps} />
-      )}
-
-      {loading && loadingPlacement === "end" ? (
-        <ButtonLoading className="ui-button__loading--end" {...loadingProps} />
-      ) : null}
-
-      <Ripple {...rippleProps} />
-    </ui.button>
-  )
-}
-
-Button.__ui__ = "Button"
-
-interface ButtonLoadingProps
-  extends Pick<ButtonProps, "className" | "loadingIcon" | "loadingText"> {}
-
-const ButtonLoading: FC<ButtonLoadingProps> = ({
-  className,
-  loadingIcon,
-  loadingText,
-}) => {
-  const css = useMemo(
-    (): CSSUIObject => ({
-      alignItems: "center",
-      display: "flex",
-      fontSize: "1em",
-      lineHeight: "normal",
-      position: loadingText ? "relative" : "absolute",
-    }),
-    [loadingText],
-  )
-
-  const element = useMemo(() => {
-    if (typeof loadingIcon === "string") {
-      return <LoadingIcon variant={loadingIcon} color="current" />
-    } else {
-      return loadingIcon || <LoadingIcon color="current" />
+      )
     }
-  }, [loadingIcon])
 
-  return (
-    <ui.div className={cx("ui-button__loading", className)} __css={css}>
-      {element}
-    </ui.div>
-  )
-}
+    return (
+      <ui.div {...props} css={mergeCSS(css, props.css)}>
+        {loadingIcon}
+      </ui.div>
+    )
+  },
+  { name: "button__loading" },
+)()
 
-ButtonLoading.__ui__ = "ButtonLoading"
+const ButtonStartLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
+  name: "button__loading--start",
+})()
 
-interface ButtonContentProps
-  extends Pick<ButtonProps, "children" | "endIcon" | "startIcon"> {}
+const ButtonEndLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
+  name: "button__loading--end",
+})()
 
-const ButtonContent: FC<ButtonContentProps> = ({
-  children,
-  endIcon,
-  startIcon,
-}) => {
-  return (
-    <>
-      {startIcon ? <ButtonIcon>{startIcon}</ButtonIcon> : null}
-      {children}
-      {endIcon ? <ButtonIcon>{endIcon}</ButtonIcon> : null}
-    </>
-  )
-}
+interface ButtonIconProps extends HTMLUIProps<"svg"> {}
 
-ButtonContent.__ui__ = "ButtonContent"
+const ButtonIcon = component<"svg", ButtonIconProps>(
+  ({ children, ...rest }) => {
+    if (isValidElement<HTMLProps<"svg">>(children))
+      return cloneElement(children, {
+        "aria-hidden": true,
+        role: "img",
+        ...rest,
+        ...children.props,
+      })
 
-interface ButtonIconProps extends HTMLUIProps<"span"> {}
+    return Children.count(children) > 1 ? Children.only(null) : null
+  },
+  { name: "button__icon" },
+)()
 
-const ButtonIcon: FC<ButtonIconProps> = ({ className, children, ...rest }) => {
-  return (
-    <ui.span
-      className={cx("ui-button__icon", className)}
-      aria-hidden
-      alignSelf="center"
-      display="inline-flex"
-      flexShrink={0}
-      {...rest}
-    >
-      {children}
-    </ui.span>
-  )
-}
+const ButtonStartIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
+  name: "button__icon--start",
+})()
 
-ButtonIcon.__ui__ = "ButtonIcon"
+const ButtonEndIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
+  name: "button__icon--end",
+})()

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { LazyMode } from "../../hooks/use-disclosure"
 import type { TabListProps } from "./tab-list"
 import type { TabPanelsProps } from "./tab-panels"
@@ -128,9 +128,10 @@ export interface TabsProps
  * @see Docs https://yamada-ui.com/components/disclosure/tabs
  */
 export const Tabs = forwardRef<TabsProps, "div">(
-  ({ align = "start", ...props }, ref) => {
+  ({ align = "start", isFitted, fitted = isFitted, ...props }, ref) => {
     const [styles, mergedProps] = useComponentMultiStyle("Tabs", {
       align,
+      fitted,
       ...props,
     })
     const {
@@ -138,8 +139,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
       children,
       defaultIndex = 0,
       disableRipple = false,
-      isFitted,
-      fitted = isFitted,
       index,
       isLazy = true,
       isManual,
@@ -165,8 +164,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
     const customTabPanels = findChild(validChildren, TabPanels)
     const cloneTabs = pickChildren(validChildren, Tab)
     const cloneTabPanels = pickChildren(validChildren, TabPanel)
-
-    const css: CSSUIObject = { w: "100%", ...styles.container }
 
     useEffect(() => {
       if (index != null) setFocusedIndex(index)
@@ -196,7 +193,7 @@ export const Tabs = forwardRef<TabsProps, "div">(
             <ui.div
               ref={ref}
               className={cx("ui-tabs", className)}
-              __css={css}
+              __css={styles.container}
               {...rest}
             >
               {customTabList ?? <TabList>{cloneTabs}</TabList>}

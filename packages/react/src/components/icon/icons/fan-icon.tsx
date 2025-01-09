@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { Fan } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FanIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const FanIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={Fan} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const FanIcon = component(Icon)({ as: Fan })

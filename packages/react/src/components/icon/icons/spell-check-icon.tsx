@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { SpellCheck } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SpellCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SpellCheckIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={SpellCheck} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const SpellCheckIcon = component(Icon)({ as: SpellCheck })

@@ -1,7 +1,8 @@
-import type { CSSUIObject, CSSUIProps, FC, HTMLUIProps } from "../../core"
-import { useMemo } from "react"
-import { mergeVars, ui } from "../../core"
-import { calc, cx } from "../../utils"
+import type { CSSProps, HTMLUIProps } from "../../core"
+import type { BleedStyle } from "./bleed.style"
+import { createComponent, mergeVars } from "../../core"
+import { calc } from "../../utils"
+import { bleedStyle } from "./bleed.style"
 
 interface BleedOptions {}
 
@@ -9,51 +10,57 @@ export interface BleedProps extends HTMLUIProps, BleedOptions {
   /**
    * The CSS `margin-block` property.
    */
-  block?: CSSUIProps["marginBlock"]
+  block?: CSSProps["marginBlock"]
   /**
    * The CSS `margin-block-end` property.
    */
-  blockEnd?: CSSUIProps["marginBlockEnd"]
+  blockEnd?: CSSProps["marginBlockEnd"]
   /**
    * The CSS `margin-block-start` property.
    */
-  blockStart?: CSSUIProps["marginBlockStart"]
+  blockStart?: CSSProps["marginBlockStart"]
   /**
    * The CSS `margin-inline` property.
    */
-  inline?: "full" | CSSUIProps["marginInline"]
+  inline?: "full" | CSSProps["marginInline"]
   /**
    * The CSS `margin-inline-end` property.
    */
-  inlineEnd?: "full" | CSSUIProps["marginInlineEnd"]
+  inlineEnd?: "full" | CSSProps["marginInlineEnd"]
   /**
    * The CSS `margin-inline-start` property.
    */
-  inlineStart?: "full" | CSSUIProps["marginInlineStart"]
+  inlineStart?: "full" | CSSProps["marginInlineStart"]
 }
+
+export const {
+  PropsContext: BleedPropsContext,
+  usePropsContext: useBleedPropsContext,
+  withContext,
+} = createComponent<BleedProps, BleedStyle>("bleed", bleedStyle)
 
 /**
  * `Bleed` is a component used to break an element from the boundaries of its container.
  *
  * @see Docs https://yamada-ui.com/components/layouts/bleed
  */
-export const Bleed: FC<BleedProps> = ({
-  className,
-  block,
-  blockEnd,
-  blockStart,
-  inline,
-  inlineEnd,
-  inlineStart,
-  vars,
-  ...rest
-}) => {
-  blockStart = blockStart ?? block
-  blockEnd = blockEnd ?? block
-  inlineStart = inlineStart ?? inline
-  inlineEnd = inlineEnd ?? inline
+export const Bleed = withContext("div")(
+  undefined,
+  ({
+    block,
+    blockEnd,
+    blockStart,
+    inline,
+    inlineEnd,
+    inlineStart,
+    vars,
+    ...rest
+  }) => {
+    blockStart ??= block
+    blockEnd ??= block
+    inlineStart ??= inline
+    inlineEnd ??= inline
 
-  const css = useMemo<CSSUIObject>(() => {
     const inlineStartFull = inlineStart === "full"
     const inlineEndFull = inlineEnd === "full"
 
@@ -67,6 +74,7 @@ export const Bleed: FC<BleedProps> = ({
       : calc.negate("$inlineEnd")
 
     return {
+      ...rest,
       marginBlockEnd,
       marginBlockStart,
       marginInlineEnd,
@@ -82,9 +90,5 @@ export const Bleed: FC<BleedProps> = ({
         { name: "blockEnd", token: "spaces", value: blockEnd ?? block },
       ]),
     }
-  }, [block, blockEnd, blockStart, inline, inlineEnd, inlineStart, vars])
-
-  return <ui.div className={cx("ui-bleed", className)} __css={css} {...rest} />
-}
-
-Bleed.__ui__ = "Bleed"
+  },
+)

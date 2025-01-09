@@ -99,7 +99,7 @@ function transformBreakpoints(
   )
 }
 
-export function analyzeBreakpoints(
+export function createBreakpoints(
   breakpoints: ThemeBreakpointTokens | undefined,
   options: BreakpointOptions = {},
 ): Breakpoints | undefined {
@@ -133,7 +133,7 @@ export function analyzeBreakpoints(
   }
 }
 
-export type AnalyzeBreakpointsReturn = ReturnType<typeof analyzeBreakpoints>
+export type CreateBreakpointsReturn = ReturnType<typeof createBreakpoints>
 
 export function getMinMaxQuery(
   queries: BreakpointQueries,

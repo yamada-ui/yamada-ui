@@ -1,9 +1,7 @@
-import type { UIStyle, UIStyleProps } from "../core"
+import type { CSSObject } from "../core"
 import {
   getMemoizedObject as get,
   merge as mergeObject,
-  noop,
-  runIfFunc,
 } from "@yamada-ui/utils"
 import { defaultTheme } from "../theme"
 
@@ -14,21 +12,7 @@ import { defaultTheme } from "../theme"
  */
 export function extendStyle(
   name: "globalStyle" | "resetStyle",
-  style: UIStyle,
-): UIStyle {
-  const props: UIStyleProps = {
-    theme: {
-      changeThemeScheme: noop,
-      themeScheme: "base",
-      __breakpoints: undefined,
-      __config: {},
-      __cssMap: {},
-      __cssVars: {},
-    },
-  }
-
-  return mergeObject(
-    runIfFunc(get<UIStyle>(defaultTheme, `styles.${name}`, {}), props),
-    runIfFunc(style, props),
-  )
+  style: CSSObject,
+): CSSObject {
+  return mergeObject(get<CSSObject>(defaultTheme, `styles.${name}`, {}), style)
 }

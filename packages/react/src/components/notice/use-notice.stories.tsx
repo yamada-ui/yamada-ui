@@ -278,6 +278,68 @@ export const WithStatus = () => {
   )
 }
 
+export const WithColorScheme = () => {
+  const notice = useNotice()
+
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Wrap gap="md">
+        <Button
+          onClick={() =>
+            notice({
+              style: { colorScheme: "green" },
+              description: "オッス！オラ悟空！",
+              status: "info",
+              title: "孫悟空",
+            })
+          }
+        >
+          Show green Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              style: { colorScheme: "purple" },
+              description: "オッス！オラ悟空！",
+              status: "success",
+              title: "孫悟空",
+            })
+          }
+        >
+          Show purple Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              style: { colorScheme: "gray" },
+              description: "オッス！オラ悟空！",
+              status: "warning",
+              title: "孫悟空",
+            })
+          }
+        >
+          Show gray Notice
+        </Button>
+
+        <Button
+          onClick={() =>
+            notice({
+              style: { colorScheme: "pink" },
+              description: "オッス！オラ悟空！",
+              status: "error",
+              title: "孫悟空",
+            })
+          }
+        >
+          Show pink Notice
+        </Button>
+      </Wrap>
+    </Center>
+  )
+}
+
 export const WithPlacement = () => {
   const notice = useNotice()
 
@@ -441,6 +503,9 @@ export const UseUpdate = () => {
 
   const onOpen = () => {
     ref.current = notice({
+      style: {
+        colorScheme: "orange",
+      },
       description: "オッス！オラ悟空！",
       duration: 30000,
       title: "孫悟空",
@@ -450,6 +515,9 @@ export const UseUpdate = () => {
   const onUpdate = () => {
     if (ref.current)
       notice.update(ref.current, {
+        style: {
+          colorScheme: "blue",
+        },
         description: "よくも…よくも…オレの…ブルマを!!",
         duration: 30000,
         title: "ベジータ",

@@ -185,13 +185,13 @@ interface Store {
 
 const initialState = {
   end: [],
-  "end-start": [],
-  "end-end": [],
   "end-center": [],
+  "end-end": [],
+  "end-start": [],
   start: [],
-  "start-start": [],
-  "start-end": [],
   "start-center": [],
+  "start-end": [],
+  "start-start": [],
 } as {
   [K in NoticePlacement]: []
 }

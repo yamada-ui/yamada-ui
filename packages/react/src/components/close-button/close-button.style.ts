@@ -2,6 +2,13 @@ import { defineComponentStyle } from "../../core"
 
 export const closeButtonStyle = defineComponentStyle({
   base: {
+    alignItems: "center",
+    display: "flex",
+    flexShrink: 0,
+    justifyContent: "center",
+    outline: 0,
+    overflow: "hidden",
+    position: "relative",
     rounded: "md",
     _active: {
       bg: ["blackAlpha.200", "whiteAlpha.200"],
@@ -12,13 +19,6 @@ export const closeButtonStyle = defineComponentStyle({
     _hover: {
       bg: ["blackAlpha.100", "whiteAlpha.100"],
     },
-    alignItems: "center",
-    display: "flex",
-    flexShrink: 0,
-    justifyContent: "center",
-    outline: 0,
-    overflow: "hidden",
-    position: "relative",
   },
 
   props: {

@@ -1,10 +1,11 @@
-import { ElementType, useCallback, useMemo, useRef } from "react"
+import type { ElementType } from "react"
 import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { CloseButtonStyle } from "./close-button.style"
+import { useCallback, useMemo, useRef } from "react"
 import { createComponent, ui } from "../../core"
 import { createContext, cx, mergeRefs } from "../../utils"
 import { XIcon } from "../icon"
 import { Ripple, useRipple } from "../ripple"
-import type { CloseButtonStyle } from "./close-button.style"
 import { closeButtonStyle } from "./close-button.style"
 
 interface CloseButtonContext extends Pick<CloseButtonOptions, "isRounded"> {}

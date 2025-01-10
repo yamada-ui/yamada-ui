@@ -1,8 +1,29 @@
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import { ElementType, useCallback, useMemo, useRef } from "react"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import { createComponent, ui } from "../../core"
+import { createContext, cx, mergeRefs } from "../../utils"
 import { XIcon } from "../icon"
 import { Ripple, useRipple } from "../ripple"
+import type { CloseButtonStyle } from "./close-button.style"
+import { closeButtonStyle } from "./close-button.style"
+
+interface CloseButtonContext extends Pick<CloseButtonOptions, "isRounded"> {}
+
+const [CloseButtonContext] = createContext<CloseButtonContext>({
+  name: "CloseButtonContext",
+})
+
+const useCloseButtonType = (value?: ElementType) => {
+  const buttonRef = useRef(!value)
+
+  const ref = useCallback((node: HTMLElement | null) => {
+    if (node) buttonRef.current = node.tagName === "BUTTON"
+  }, [])
+
+  const type = buttonRef.current ? "button" : undefined
+
+  return { ref, type } as const
+}
 
 interface CloseButtonOptions {
   /**
@@ -27,8 +48,18 @@ interface CloseButtonOptions {
 
 export interface CloseButtonProps
   extends HTMLUIProps<"button">,
-    ThemeProps<"CloseButton">,
+    ThemeProps<CloseButtonStyle>,
     CloseButtonOptions {}
+
+export const {
+  component,
+  PropsContext: CloseButtonPropsContext,
+  usePropsContext: useCloseButtonPropsContext,
+  withContext,
+} = createComponent<CloseButtonProps, CloseButtonStyle>(
+  "close-button",
+  closeButtonStyle,
+)
 
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.
@@ -36,49 +67,44 @@ export interface CloseButtonProps
  * @see Docs https://yamada-ui.com/components/other/close-button
  */
 
-export const CloseButton: FC<CloseButtonProps> = (props) => {
-  const [styles, mergedProps] = useComponentStyle("CloseButton", props)
-  const {
+export const CloseButton = withContext(
+  ({
+    ref,
+    as,
     className,
     children,
     disabled,
     disableRipple,
     isRounded,
-    __css,
     ...rest
-  } = omitThemeProps(mergedProps)
-  const { onPointerDown, ...rippleProps } = useRipple({
-    ...rest,
-    disabled: disableRipple || disabled,
-  })
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    flexShrink: 0,
-    justifyContent: "center",
-    outline: 0,
-    overflow: "hidden",
-    position: "relative",
-    ...styles,
-    ...__css,
-    ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
-  }
+  }) => {
+    const { ref: closeButtonRef, type } = useCloseButtonType(as)
+    const { onClick, ...rippleProps } = useRipple({
+      ...rest,
+      disabled: disableRipple || disabled,
+    })
 
-  return (
-    <ui.button
-      type="button"
-      className={cx("ui-close-button", className)}
-      aria-label="Close"
-      disabled={disabled}
-      __css={css}
-      {...rest}
-      onPointerDown={onPointerDown}
-    >
-      {children || <XIcon boxSize="2em" />}
+    const context = useMemo(() => ({ isRounded }), [isRounded])
 
-      <Ripple {...rippleProps} />
-    </ui.button>
-  )
-}
+    return (
+      <CloseButtonContext.Provider value={context}>
+        <ui.button
+          ref={mergeRefs(ref, closeButtonRef)}
+          as={as}
+          type={type}
+          className={cx("ui-close-button", className)}
+          aria-label="Close"
+          disabled={disabled}
+          {...rest}
+          onClick={onClick}
+        >
+          {children || <XIcon boxSize="2em" />}
+
+          <Ripple {...rippleProps} />
+        </ui.button>
+      </CloseButtonContext.Provider>
+    )
+  },
+)()
 
 CloseButton.__ui__ = "CloseButton"

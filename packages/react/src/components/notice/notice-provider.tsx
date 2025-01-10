@@ -1,6 +1,6 @@
 import type { MotionStyle, Variants } from "motion/react"
 import type { FC } from "react"
-import type { CSSUIObject, ThemeConfig } from "../../core"
+import type { CSSObject, ThemeConfig } from "../../core"
 import type { NoticeOptions } from "./notice"
 import { AnimatePresence, useIsPresent } from "motion/react"
 import { useEffect, useState, useSyncExternalStore } from "react"
@@ -29,20 +29,22 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   )
 
   const components = Object.entries(state).map(([placement, notices]) => {
-    const top = placement.includes("top")
-      ? "env(safe-area-inset-top, 0px)"
-      : undefined
-    const bottom = placement.includes("bottom")
-      ? "env(safe-area-inset-bottom, 0px)"
-      : undefined
-    const right = !placement.includes("left")
+    const top =
+      placement.includes("start-") || placement === "start"
+        ? "env(safe-area-inset-top, 0px)"
+        : undefined
+    const bottom =
+      placement.includes("end-") || placement === "end"
+        ? "env(safe-area-inset-bottom, 0px)"
+        : undefined
+    const right = !placement.includes("-start")
       ? "env(safe-area-inset-right, 0px)"
       : undefined
-    const left = !placement.includes("right")
+    const left = !placement.includes("-end")
       ? "env(safe-area-inset-left, 0px)"
       : undefined
 
-    const css: CSSUIObject = {
+    const css: CSSObject = {
       bottom,
       display: "flex",
       flexDirection: "column",
@@ -60,7 +62,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
       <ui.ul
         key={placement}
         className={cx("ui-notice__list", `ui-notice__list--${placement}`)}
-        __css={css}
+        css={css}
         {...listProps}
       >
         <AnimatePresence initial={false}>
@@ -153,7 +155,7 @@ const NoticeComponent = memo(
 
     useTimeout(onClose, delay)
 
-    const css: CSSUIObject = {
+    const css: CSSObject = {
       maxW: "36rem",
       minW: "20rem",
       pointerEvents: "auto",
@@ -166,11 +168,13 @@ const NoticeComponent = memo(
         style={
           {
             display: "flex",
-            justifyContent: placement.includes("left")
-              ? "flex-start"
-              : placement.includes("right")
-                ? "flex-end"
-                : "center",
+            justifyContent: placement.includes("center")
+              ? "center"
+              : placement.includes("start")
+                ? "flex-start"
+                : placement.includes("end")
+                  ? "flex-end"
+                  : "center",
           } as MotionStyle
         }
         animate="animate"
@@ -183,7 +187,7 @@ const NoticeComponent = memo(
         onHoverStart={onMouseEnter}
         {...itemProps}
       >
-        <ui.div className="ui-notice__list__item__inner" __css={css}>
+        <ui.div className="ui-notice__list__item__inner" css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>

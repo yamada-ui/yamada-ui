@@ -1,21 +1,24 @@
 import type { ReactNode } from "react"
 import type {
-  CSSUIObject,
+  CSSObject,
   FC,
   NoticeComponentProps,
   NoticeConfigOptions,
   NoticePlacement,
   StyledTheme,
+  ThemeProps,
 } from "../../core"
-import type { AlertProps } from "../alert"
+import type { AlertRootProps, AlertStyle } from "../alert"
 import { useMemo } from "react"
 import { ui } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import { cx, isFunction, merge } from "../../utils"
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../alert"
+import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 
-export interface UseNoticeOptions extends NoticeConfigOptions {}
+export interface UseNoticeOptions
+  extends ThemeProps<AlertStyle>,
+    NoticeConfigOptions {}
 
 export interface NoticeOptions {
   id: number | string
@@ -24,7 +27,7 @@ export interface NoticeOptions {
   placement: NoticePlacement
   status: UseNoticeOptions["status"]
   onDelete: () => void
-  style?: CSSUIObject
+  style?: CSSObject
   isDelete?: boolean
   onCloseComplete?: () => void
 }
@@ -75,7 +78,7 @@ const createNotice = (
     id,
     style,
     duration,
-    placement = "top",
+    placement = "start",
     status,
     onCloseComplete,
   }: CreateNoticeOptions,
@@ -181,12 +184,16 @@ interface Store {
 }
 
 const initialState = {
-  bottom: [],
-  "bottom-left": [],
-  "bottom-right": [],
-  top: [],
-  "top-left": [],
-  "top-right": [],
+  end: [],
+  "end-start": [],
+  "end-end": [],
+  "end-center": [],
+  start: [],
+  "start-start": [],
+  "start-end": [],
+  "start-center": [],
+} as {
+  [K in NoticePlacement]: []
 }
 
 const createNoticeStore = (initialState: State): Store => {
@@ -217,12 +224,12 @@ const createNoticeStore = (initialState: State): Store => {
     closeAll: ({ placement } = {}) => {
       setState((prev) => {
         let placements: NoticePlacement[] = [
-          "bottom",
-          "bottom-right",
-          "bottom-left",
-          "top",
-          "top-left",
-          "top-right",
+          "end",
+          "end-end",
+          "end-start",
+          "start",
+          "start-start",
+          "start-end",
         ]
 
         if (placement) placements = placement
@@ -320,7 +327,7 @@ const createNoticeStore = (initialState: State): Store => {
 export const noticeStore = createNoticeStore(initialState)
 
 export interface NoticeProps
-  extends Omit<AlertProps, keyof UseNoticeOptions>,
+  extends Omit<AlertRootProps, keyof UseNoticeOptions>,
     UseNoticeOptions {
   onClose?: () => void
 }
@@ -343,34 +350,38 @@ const Notice: FC<NoticeProps> = ({
     isClosable && (closeStrategy === "element" || closeStrategy === "both")
 
   return (
-    <Alert
+    <Alert.Root
       className={cx("ui-notice", className)}
       colorScheme={colorScheme}
       variant={variant}
       alignItems="start"
       boxShadow="fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))"
       pe={isButtonClosable ? 8 : undefined}
-      status={status}
+      status={status === "loading" ? undefined : status}
       onClick={isElementClosable ? onClose : undefined}
     >
-      <AlertIcon
-        className="ui-notice__icon"
-        variant={icon?.variant}
-        {...(icon?.color ? { color: icon.color } : {})}
-      >
-        {icon?.children}
-      </AlertIcon>
+      {status === "loading" ? (
+        <Alert.Loading className="ui-notice__loading" loadingScheme="puff" />
+      ) : (
+        <Alert.Icon
+          className="ui-notice__icon"
+          variant={icon?.variant}
+          {...(icon?.color ? { color: icon.color } : {})}
+        >
+          {icon?.children}
+        </Alert.Icon>
+      )}
 
       <ui.div flex="1">
         {title ? (
-          <AlertTitle className="ui-notice__title" lineClamp={1}>
+          <Alert.Title className="ui-notice__title" lineClamp={1}>
             {title}
-          </AlertTitle>
+          </Alert.Title>
         ) : null}
         {description ? (
-          <AlertDescription className="ui-notice__desc" lineClamp={3}>
+          <Alert.Description className="ui-notice__desc" lineClamp={3}>
             {description}
-          </AlertDescription>
+          </Alert.Description>
         ) : null}
       </ui.div>
 
@@ -388,7 +399,7 @@ const Notice: FC<NoticeProps> = ({
           }}
         />
       ) : null}
-    </Alert>
+    </Alert.Root>
   )
 }
 

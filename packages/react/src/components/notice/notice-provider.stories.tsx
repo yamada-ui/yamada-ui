@@ -14,7 +14,7 @@ export const Basic = () => {
     notice: {
       options: {
         limit: 3,
-        placement: "bottom-right",
+        placement: "end-end",
       },
     },
   })

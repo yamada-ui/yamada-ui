@@ -225,11 +225,13 @@ const createNoticeStore = (initialState: State): Store => {
       setState((prev) => {
         let placements: NoticePlacement[] = [
           "end",
+          "end-center",
           "end-end",
           "end-start",
           "start",
-          "start-start",
+          "start-center",
           "start-end",
+          "start-start",
         ]
 
         if (placement) placements = placement

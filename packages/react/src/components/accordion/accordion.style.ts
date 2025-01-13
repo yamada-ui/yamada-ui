@@ -14,12 +14,8 @@ export const accordionStyle = defineComponentSlotStyle({
       transitionDuration: "normal",
       transitionProperty: "common",
       w: "100%",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _nativeDisabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     icon: {
@@ -29,7 +25,7 @@ export const accordionStyle = defineComponentSlotStyle({
       transformOrigin: "center",
       transition: "transform 0.2s",
       _disabled: {
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
       _expanded: {
         transform: "rotate(-180deg)",
@@ -55,6 +51,9 @@ export const accordionStyle = defineComponentSlotStyle({
       },
     },
     panel: {
+      button: {
+        rounded: "md",
+      },
       item: {
         bg: "bg.panel",
         borderWidth: "1px",

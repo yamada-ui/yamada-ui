@@ -8,32 +8,18 @@ export const buttonStyle = defineComponentStyle({
     display: "inline-flex",
     fontWeight: "medium",
     justifyContent: "center",
-    outline: "none",
     overflow: "hidden",
     position: "relative",
-    transitionDuration: "slower",
+    transitionDuration: "normal",
     transitionProperty: "common",
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",
     _disabled: {
-      boxShadow: "none",
-      cursor: "not-allowed",
-      opacity: 0.4,
-    },
-    _focus: {
-      outline: "none",
-    },
-    _hover: {
-      _disabled: {
-        bg: ["initial", "initial"],
-      },
+      layerStyle: "disabled",
     },
     _readOnly: {
-      cursor: "default",
-      _ripple: {
-        display: "none",
-      },
+      layerStyle: "readOnly",
     },
   },
 

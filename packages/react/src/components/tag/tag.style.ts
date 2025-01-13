@@ -13,21 +13,10 @@ export const tagStyle = defineComponentSlotStyle({
       transitionDuration: "normal",
       transitionProperty: "common",
       _active: {
-        opacity: 1,
-      },
-      _disabled: {
-        opacity: 0.4,
-      },
-      _focusVisible: {
-        bg: "rgba(0, 0, 0, 0.14)",
-        boxShadow: "outline",
+        layerStyle: "active",
       },
       _hover: {
-        opacity: 0.8,
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.4,
-        },
+        layerStyle: "hover",
       },
     },
     content: {
@@ -49,11 +38,23 @@ export const tagStyle = defineComponentSlotStyle({
       rounded: "md",
       userSelect: "none",
       verticalAlign: "top",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
     },
     startIcon: {},
+  },
+
+  props: {
+    /**
+     * If `true`, the tag is disabled.
+     *
+     * @default false
+     */
+    disabled: {
+      true: {
+        closeButton: {
+          layerStyle: "disabled",
+        },
+      },
+    },
   },
 
   variants: {

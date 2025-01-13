@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { COLOR_SCHEMES } from "../../utils"
+import { COLOR_SCHEMES, transformSize } from "../../utils"
 import { Button } from "../button"
 import { For } from "../for"
 import { Heading } from "../heading"
@@ -58,15 +58,17 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <For each={["sm", "md", "normal", "lg"]}>
+    <For each={["sm", "md", "lg"]}>
       {(size, index) => (
         <Card.Root key={index} size={size}>
           <Card.Header>
-            <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+            <Heading size={transformSize(size, 1)}>
+              『SLAM DUNK』（スラムダンク）
+            </Heading>
           </Card.Header>
 
           <Card.Body>
-            <Text>
+            <Text color="fg.muted">
               『SLAM
               DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
             </Text>

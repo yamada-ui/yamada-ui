@@ -388,7 +388,6 @@ export const useSlider = ({
             name: "thumb-size",
             token: "sizes",
             value: thumbSizeProp,
-            __prefix: "ui",
           },
         ]),
       }

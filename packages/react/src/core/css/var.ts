@@ -4,6 +4,7 @@ import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import { calc, escape, isArray, isObject, isString, merge } from "../../utils"
 import { animation, gradient } from "../config"
+import { colorMix } from "../config/color-mix"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { css } from "./css"
@@ -15,17 +16,17 @@ interface Variable {
   variable: string
 }
 
-export function getVar(token: string, prefix?: string) {
+export function getVar(token: string) {
   return function (theme: StyledTheme) {
-    prefix ??= theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
+    const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `var(--${prefix}-${token})`
   }
 }
 
-export function getVarName(token: string, prefix?: string) {
+export function getVarName(token: string) {
   return function (theme: StyledTheme) {
-    prefix ??= theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
+    const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `--${prefix}-${token}`
   }
@@ -34,6 +35,7 @@ export function getVarName(token: string, prefix?: string) {
 const isGradient = (token: string) => token.startsWith("gradients.")
 const isAnimation = (token: string) => token.startsWith("animations.")
 const isSpace = (token: string) => token.startsWith("spaces.")
+const isColor = (token: string) => token.startsWith("colors.")
 
 interface CreateThemeVarsOptions {
   cssMap?: CSSMap
@@ -134,6 +136,22 @@ export function getCreateThemeVars(
         }
       }
 
+      function createColorVar(
+        token: string,
+        properties: string,
+        value: ThemeValue,
+      ) {
+        return function (semantic: boolean) {
+          if (!semantic) {
+            return colorMix(value, { properties, theme })
+          } else {
+            const [variable, reference] = getRelatedReference(token, value)
+
+            return variable ? reference : colorMix(value, { properties, theme })
+          }
+        }
+      }
+
       function createVar(
         token: string,
         value: VariableValue,
@@ -162,21 +180,31 @@ export function getCreateThemeVars(
               }
             })
           } else {
-            let computedValue = valueToVar(value)
+            let computedValue: Dict | ThemeValue = valueToVar(value)
 
             if (isGradient(token)) {
               computedValue = createGradientVar(token, computedValue)(semantic)
+            } else if (isColor(token)) {
+              computedValue = createColorVar(
+                token,
+                variable,
+                computedValue,
+              )(semantic)
             } else if (semantic) {
               const [, reference] = getRelatedReference(token, computedValue)
 
               computedValue = reference
             }
 
+            if (!isObject(computedValue))
+              computedValue = { [variable]: computedValue }
+
             cssVars = merge(
               cssVars,
-              queries.reduceRight<Dict>((prev, key) => ({ [key]: prev }), {
-                [variable]: computedValue,
-              }),
+              queries.reduceRight<Dict>(
+                (prev, key) => ({ [key]: prev }),
+                computedValue,
+              ),
             )
           }
         }

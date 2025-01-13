@@ -10,6 +10,9 @@ export const globalStyle: CSSObject = {
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",
   },
+  "*:focus-visible, *[data-focus-visible]": {
+    outline: "outside",
+  },
   body: {
     colorScheme: "mono",
     bg: "bg",

@@ -232,6 +232,7 @@ export const Basic = () => {
                   "",
                   "contrast",
                   "fg",
+                  "ghost",
                   "subtle",
                   "muted",
                   "emphasized",

@@ -46,6 +46,10 @@ export const transformProps: TransformProps = {
 
   isTruncated: ["isTruncated"],
 
+  colorScheme: ["colorScheme"],
+
+  outline: ["outline"],
+
   media: ["_media"],
 
   container: ["_container"],

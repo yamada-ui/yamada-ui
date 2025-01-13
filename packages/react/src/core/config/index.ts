@@ -13,6 +13,7 @@ import { generateFilter } from "./filter"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
+import { outline } from "./outline"
 import { generateStyles } from "./styles"
 import { generateToken } from "./token"
 import { transform } from "./transform"
@@ -86,6 +87,7 @@ export const transforms = {
     }
   },
   media: generateAtRule("media"),
+  outline,
   px: (value: any) => {
     if (value == null) return value
 

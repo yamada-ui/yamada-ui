@@ -21,6 +21,7 @@ function createColorSchemeVariables(value: ColorScheme) {
           "subtle",
           "muted",
           "emphasized",
+          "ghost",
           "solid",
           "outline",
         ].map((token) => [

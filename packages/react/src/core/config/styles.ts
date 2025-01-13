@@ -1,23 +1,26 @@
 import type { Dict } from "../../utils"
+import type { CSSObject } from "../css"
 import type { Transform } from "./utils"
 import { getMemoizedObject as get } from "../../utils"
 
 export function generateStyles(prefix?: string): Transform {
   return function (value, { prev = {}, theme }) {
-    const resolvedCSS: Dict = {}
+    const computedStyle: CSSObject = {}
 
-    const style = get<Dict>(
+    let style = get<Dict>(
       theme,
       prefix ? `styles.${prefix}.${value}` : `styles.${value}`,
       {},
     )
 
+    if ("base" in style) style = style.base
+
     for (const prop in style) {
       const done = prop in prev && prev[prop] != null
 
-      if (!done) resolvedCSS[prop] = style[prop]
+      if (!done) computedStyle[prop] = style[prop]
     }
 
-    return resolvedCSS
+    return computedStyle
   }
 }

@@ -66,6 +66,7 @@ export interface GeneratedTheme extends UITheme {
     | "colorScheme.contrast"
     | "colorScheme.emphasized"
     | "colorScheme.fg"
+    | "colorScheme.ghost"
     | "colorScheme.muted"
     | "colorScheme.outline"
     | "colorScheme.solid"

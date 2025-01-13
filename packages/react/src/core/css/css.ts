@@ -176,7 +176,7 @@ function valueToVar(value: any, theme: StyledTheme) {
 
 export function css(cssOrFunc: CSSObjectOrFunc) {
   return function (theme: StyledTheme, forwardProps?: string[]) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc, isNested = false): Dict {
+    function createCSS(cssOrFunc: CSSObjectOrFunc, nested = false): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
 
@@ -213,6 +213,14 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
           continue
         }
 
+        let important = false
+
+        if (isString(value)) {
+          important = /\s*!important\s*/g.test(value)
+
+          value = value.replace(/\s*!important\s*/g, "")
+        }
+
         value =
           style?.transform?.(value, {
             css,
@@ -221,10 +229,26 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
             theme,
           }) ?? value
 
+        if (important) {
+          if (isString(value)) {
+            value += " !important"
+          } else if (isObject(value)) {
+            if (style?.properties) {
+              if (isArray(style.properties)) {
+                for (const property of style.properties) {
+                  value[property] += " !important"
+                }
+              } else {
+                value[style.properties] += " !important"
+              }
+            }
+          }
+        }
+
         if (style?.processResult || style?.processSkip)
           value = createCSS(value, true)
 
-        if (!isNested && style?.static)
+        if (!nested && style?.static)
           resolvedCSS = merge(resolvedCSS, style.static)
 
         if (style?.properties) {

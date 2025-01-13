@@ -560,11 +560,11 @@ type ThemeComponentProps<Y extends Dict = Dict> =
   string extends keyof Required<Y>["props"]
     ? {}
     : {
-        [K in keyof Required<Y>["props"]]?:
-          | (keyof Required<Y>["props"][K] extends "false" | "true"
-              ? boolean
-              : keyof Required<Y>["props"][K])
-          | StringLiteral
+        [K in keyof Required<Y>["props"]]?: keyof Required<Y>["props"][K] extends
+          | "false"
+          | "true"
+          ? boolean
+          : keyof Required<Y>["props"][K] | StringLiteral
       }
 
 export type ThemeProps<Y extends Dict = Dict> = {
@@ -640,6 +640,7 @@ export interface SemanticColor {
   default?: SemanticColorValue
   emphasized?: SemanticColorValue
   fg?: SemanticColorValue
+  ghost?: SemanticColorValue
   muted?: SemanticColorValue
   outline?: SemanticColorValue
   solid?: SemanticColorValue

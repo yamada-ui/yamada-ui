@@ -13,27 +13,27 @@ export interface StyleConfig {
 export const additionalProps = {
   backdropBlur: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-blur`.",
     ],
-    properties: "--ui-backdrop-blur",
+    properties: "--backdrop-blur",
   },
   backdropBrightness: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-brightness`.",
     ],
-    properties: "--ui-backdrop-brightness",
+    properties: "--backdrop-brightness",
   },
   backdropContrast: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-contrast`.",
     ],
-    properties: "--ui-backdrop-contrast",
+    properties: "--backdrop-contrast",
   },
   backdropDropShadow: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-drop-shadow`.",
     ],
-    properties: "--ui-backdrop-drop-shadow",
+    properties: "--backdrop-drop-shadow",
   },
   backdropFilter: {
     type: `CSS.Property.BackdropFilter | "auto"`,
@@ -45,37 +45,37 @@ export const additionalProps = {
   },
   backdropGrayscale: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-grayscale`.",
     ],
-    properties: "--ui-backdrop-grayscale",
+    properties: "--backdrop-grayscale",
   },
   backdropHueRotate: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-hue-rotate`.",
     ],
-    properties: "--ui-backdrop-hue-rotate",
+    properties: "--backdrop-hue-rotate",
   },
   backdropInvert: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-invert`.",
     ],
-    properties: "--ui-backdrop-invert",
+    properties: "--backdrop-invert",
   },
   backdropSaturate: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-saturate`.",
     ],
-    properties: "--ui-backdrop-saturate",
+    properties: "--backdrop-saturate",
   },
   backdropSepia: {
     description: [
-      "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
+      "If `backdropBlur=auto`, sets the value of `--backdrop-sepia`.",
     ],
-    properties: "--ui-backdrop-sepia",
+    properties: "--backdrop-sepia",
   },
   blur: {
-    description: ["If `filter=auto`, sets the value of `--ui-blur`."],
-    properties: "--ui-blur",
+    description: ["If `filter=auto`, sets the value of `--blur`."],
+    properties: "--blur",
   },
   borderBottomRadius: {
     properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
@@ -99,8 +99,8 @@ export const additionalProps = {
   borderY: { properties: ["borderTop", "borderBottom"] },
   boxSize: { properties: ["width", "height"] },
   brightness: {
-    description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
-    properties: "--ui-brightness",
+    description: ["If `filter=auto`, sets the value of `--brightness`."],
+    properties: "--brightness",
   },
   colorMode: {
     type: "CSS.Property.ColorScheme",
@@ -112,12 +112,12 @@ export const additionalProps = {
     properties: "colorScheme",
   },
   contrast: {
-    description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
-    properties: "--ui-contrast",
+    description: ["If `filter=auto`, sets the value of `--contrast`."],
+    properties: "--contrast",
   },
   dropShadow: {
-    description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
-    properties: "--ui-drop-shadow",
+    description: ["If `filter=auto`, sets the value of `--drop-shadow`."],
+    properties: "--drop-shadow",
   },
   filter: {
     type: `CSS.Property.Filter | "auto"`,
@@ -128,84 +128,93 @@ export const additionalProps = {
     ],
   },
   grayscale: {
-    description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
-    properties: "--ui-grayscale",
+    description: ["If `filter=auto`, sets the value of `--grayscale`."],
+    properties: "--grayscale",
   },
   hueRotate: {
-    description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
-    properties: "--ui-hue-rotate",
+    description: ["If `filter=auto`, sets the value of `--hue-rotate`."],
+    properties: "--hue-rotate",
   },
   insetX: { properties: ["left", "right"] },
   insetY: { properties: ["top", "bottom"] },
   invert: {
-    description: ["If `filter=auto`, sets the value of `--ui-invert`."],
-    properties: "--ui-invert",
+    description: ["If `filter=auto`, sets the value of `--invert`."],
+    properties: "--invert",
   },
   marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
   marginY: { properties: ["marginTop", "marginBottom"] },
   maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   minBoxSize: { properties: ["minWidth", "minHeight"] },
+  outline: {
+    type: "CSS.Property.Filter | 'outside'| 'inside' | 'mixed'",
+    description: [
+      "The CSS `outline` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline",
+    ],
+    processResult: true,
+  },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
   rotate: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--rotate`.",
     ],
-    properties: "--ui-rotate",
+    properties: "--rotate",
   },
   saturate: {
-    description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
-    properties: "--ui-saturate",
+    description: ["If `filter=auto`, sets the value of `--saturate`."],
+    properties: "--saturate",
   },
   scale: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x` and `--scale-y`.",
     ],
-    properties: ["--ui-scale-x", "--ui-scale-y"],
+    properties: ["--scale-x", "--scale-y"],
   },
   scaleX: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x`.",
     ],
-    properties: "--ui-scale-x",
+    properties: "--scale-x",
   },
   scaleY: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-y`.",
     ],
-    properties: "--ui-scale-y",
+    properties: "--scale-y",
   },
   scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
   scrollMarginY: { properties: ["scrollMarginTop", "scrollMarginBottom"] },
   scrollPaddingX: { properties: ["scrollPaddingLeft", "scrollPaddingRight"] },
   scrollPaddingY: { properties: ["scrollPaddingTop", "scrollPaddingBottom"] },
   sepia: {
-    description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
-    properties: "--ui-sepia",
+    description: ["If `filter=auto`, sets the value of `--sepia`."],
+    properties: "--sepia",
   },
   skewX: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-x`.",
     ],
-    properties: "--ui-skew-x",
+    properties: "--skew-x",
   },
   skewY: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-y`.",
     ],
-    properties: "--ui-skew-y",
+    properties: "--skew-y",
   },
   translateX: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-x`.",
     ],
-    properties: "--ui-translate-x",
+    properties: "--translate-x",
   },
   translateY: {
     description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.",
+      "If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-y`.",
     ],
-    properties: "--ui-translate-y",
+    properties: "--translate-y",
   },
 } as const satisfies { [key: string]: StyleConfig }
 
@@ -236,7 +245,6 @@ export const uiProps = {
   colorScheme: {
     type: `ColorScheme`,
     description: ["Set color scheme variables."],
-    processResult: true,
   },
   isTruncated: {
     type: "boolean",
@@ -245,13 +253,13 @@ export const uiProps = {
   lineClamp: {
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
-    properties: "--ui-line-clamp",
+    properties: "--line-clamp",
     static: {
       display: "-webkit-box",
       overflow: "hidden",
       textOverflow: "ellipsis",
       WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
+      WebkitLineClamp: "var(--line-clamp)",
     },
   },
   vars: {

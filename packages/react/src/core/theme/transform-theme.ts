@@ -218,7 +218,7 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
                   value,
                 }
 
-                if (token === "default") {
+                if (token === "base") {
                   prev.push([`colors.${semanticToken}`, enhancedToken])
                 } else {
                   prev.push([`colors.${semanticToken}.${token}`, enhancedToken])
@@ -236,7 +236,7 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
                 value,
               }
 
-              if (token === "default") {
+              if (token === "base") {
                 prev.push([`colors.${semanticToken}`, enhancedToken])
               } else {
                 prev.push([`colors.${semanticToken}.${token}`, enhancedToken])
@@ -246,7 +246,7 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
         }
       } else {
         if (token.startsWith("colors."))
-          if (token.endsWith(".default")) token = token.replace(".default", "")
+          if (token.endsWith(".base")) token = token.replace(".base", "")
 
         const enhancedToken: VariableToken = { semantic: true, value }
 

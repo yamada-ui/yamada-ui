@@ -1,45 +1,70 @@
 import type { CSSModifierObject } from "../../core"
 
 export const layerStyles: CSSModifierObject = {
+  active: {
+    opacity: 1,
+  },
   disabled: {
     cursor: "not-allowed",
     opacity: 0.4,
+    _ripple: {
+      display: "none",
+    },
   },
   ghost: {
-    bg: "transparent",
-    color: "colorScheme.fg",
+    base: {
+      bg: "transparent",
+      color: "colorScheme.fg",
+    },
+    hover: {
+      bg: "colorScheme.ghost",
+    },
   },
-  "ghost.hover": {
-    bg: "colorScheme.subtle",
+  hover: {
+    opacity: 0.8,
   },
   outline: {
-    bg: "transparent",
-    border: "1px solid $colorScheme.outline",
-    color: "colorScheme.outline",
+    base: {
+      bg: "transparent",
+      border: "1px solid $colorScheme.outline",
+      color: "colorScheme.outline",
+    },
+    hover: {
+      bg: "colorScheme.ghost",
+    },
   },
-  "outline.hover": {
-    bg: "colorScheme.subtle",
+  readOnly: {
+    cursor: "default",
+    _ripple: {
+      display: "none",
+    },
   },
   solid: {
-    bg: "colorScheme.solid",
-    color: "colorScheme.contrast",
-  },
-  "solid.hover": {
-    bg: "colorScheme.solid/80",
+    base: {
+      bg: "colorScheme.solid",
+      color: "colorScheme.contrast",
+    },
+    hover: {
+      bg: "colorScheme.solid/80",
+    },
   },
   subtle: {
-    bg: "colorScheme.subtle",
-    color: "colorScheme.fg",
-  },
-  "subtle.hover": {
-    bg: "colorScheme.muted",
+    base: {
+      bg: "colorScheme.subtle",
+      color: "colorScheme.fg",
+    },
+    hover: {
+      bg: "colorScheme.muted",
+    },
   },
   surface: {
-    bg: "colorScheme.subtle",
-    border: "1px solid $colorScheme.muted",
-    color: "colorScheme.fg",
-  },
-  "surface.hover": {
-    bg: "colorScheme.muted",
+    base: {
+      bg: "colorScheme.subtle",
+      border: "1px solid $colorScheme.muted",
+      color: "colorScheme.fg",
+    },
+    hover: {
+      bg: "colorScheme.muted",
+    },
   },
 }

@@ -456,7 +456,6 @@ export const useRangeSlider = ({
             name: "thumb-size",
             token: "sizes",
             value: thumbSizeProp,
-            __prefix: "ui",
           },
         ]),
       }

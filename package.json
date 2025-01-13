@@ -55,7 +55,7 @@
     "test:issue": "tsx scripts/coverage-issues",
     "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
-    "gen:css": "tsx scripts/generate-css && eslint packages/core/src/styles.ts --fix --flag unstable_ts_config",
+    "gen:styles": "tsx scripts/generate-styles && eslint packages/react/src/core/styles.ts --fix --flag unstable_ts_config",
     "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts && eslint packages/core/src/generated-theme.types.ts --fix --flag unstable_ts_config",
     "gen:icons": "tsx scripts/generate-icons && eslint packages/react/src/components/icon/icons/index.ts packages/react/src/components/icon/icons/index.types.ts --fix --flag unstable_ts_config",
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",

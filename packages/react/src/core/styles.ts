@@ -1,5 +1,5 @@
+import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
 import type { CSSObject, Token } from "./css"
 import type { ThemeToken } from "./theme"
@@ -50,20 +50,20 @@ export const standardStyles = {
   aspectRatio: true,
   azimuth: true,
   backdropBlur: {
-    properties: "--ui-backdrop-blur",
+    properties: "--backdrop-blur",
     token: "blurs",
     transform: pipe(transforms.token("blurs"), transforms.function("blur")),
   },
   backdropBrightness: {
-    properties: "--ui-backdrop-brightness",
+    properties: "--backdrop-brightness",
     transform: transforms.function("brightness"),
   },
   backdropContrast: {
-    properties: "--ui-backdrop-contrast",
+    properties: "--backdrop-contrast",
     transform: transforms.function("contrast"),
   },
   backdropDropShadow: {
-    properties: "--ui-backdrop-drop-shadow",
+    properties: "--backdrop-drop-shadow",
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -72,23 +72,23 @@ export const standardStyles = {
   },
   backdropFilter: { transform: transforms.filter("backdrop") },
   backdropGrayscale: {
-    properties: "--ui-backdrop-grayscale",
+    properties: "--backdrop-grayscale",
     transform: transforms.function("grayscale"),
   },
   backdropHueRotate: {
-    properties: "--ui-backdrop-hue-rotate",
+    properties: "--backdrop-hue-rotate",
     transform: pipe(transforms.deg, transforms.function("hue-rotate")),
   },
   backdropInvert: {
-    properties: "--ui-backdrop-invert",
+    properties: "--backdrop-invert",
     transform: transforms.function("invert"),
   },
   backdropSaturate: {
-    properties: "--ui-backdrop-saturate",
+    properties: "--backdrop-saturate",
     transform: transforms.function("saturate"),
   },
   backdropSepia: {
-    properties: "--ui-backdrop-sepia",
+    properties: "--backdrop-sepia",
     transform: transforms.function("sepia"),
   },
   backfaceVisibility: {
@@ -140,7 +140,7 @@ export const standardStyles = {
     ),
   },
   blur: {
-    properties: "--ui-blur",
+    properties: "--blur",
     token: "blurs",
     transform: pipe(transforms.token("blurs"), transforms.function("blur")),
   },
@@ -502,7 +502,7 @@ export const standardStyles = {
   breakBefore: true,
   breakInside: true,
   brightness: {
-    properties: "--ui-brightness",
+    properties: "--brightness",
     transform: transforms.function("brightness"),
   },
   captionSide: true,
@@ -574,7 +574,7 @@ export const standardStyles = {
   content: true,
   contentVisibility: true,
   contrast: {
-    properties: "--ui-contrast",
+    properties: "--contrast",
     transform: transforms.function("contrast"),
   },
   counterIncrement: true,
@@ -585,7 +585,7 @@ export const standardStyles = {
   display: true,
   dominantBaseline: true,
   dropShadow: {
-    properties: "--ui-drop-shadow",
+    properties: "--drop-shadow",
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -679,7 +679,7 @@ export const standardStyles = {
   },
   glyphOrientationVertical: true,
   grayscale: {
-    properties: "--ui-grayscale",
+    properties: "--grayscale",
     transform: transforms.function("grayscale"),
   },
   grid: true,
@@ -745,7 +745,7 @@ export const standardStyles = {
     ),
   },
   hueRotate: {
-    properties: "--ui-hue-rotate",
+    properties: "--hue-rotate",
     transform: pipe(transforms.deg, transforms.function("hue-rotate")),
   },
   hyphenateCharacter: true,
@@ -846,10 +846,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  invert: {
-    properties: "--ui-invert",
-    transform: transforms.function("invert"),
-  },
+  invert: { properties: "--invert", transform: transforms.function("invert") },
   isolation: true,
   justifyContent: true,
   justifyItems: true,
@@ -1031,7 +1028,6 @@ export const standardStyles = {
   maskRepeat: true,
   maskSize: true,
   maskType: true,
-  masonryAutoFlow: true,
   mathDepth: true,
   mathShift: true,
   mathStyle: true,
@@ -1147,7 +1143,7 @@ export const standardStyles = {
   opacity: true,
   order: true,
   orphans: true,
-  outline: true,
+  outline: { processResult: true, transform: transforms.outline },
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
@@ -1311,7 +1307,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  rotate: { properties: "--ui-rotate", transform: transforms.deg },
+  rotate: { properties: "--rotate", transform: transforms.deg },
   rowGap: {
     properties: "rowGap",
     token: "spaces",
@@ -1324,12 +1320,12 @@ export const standardStyles = {
   rubyAlign: true,
   rubyPosition: true,
   saturate: {
-    properties: "--ui-saturate",
+    properties: "--saturate",
     transform: transforms.function("saturate"),
   },
-  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
-  scaleX: { properties: "--ui-scale-x" },
-  scaleY: { properties: "--ui-scale-y" },
+  scale: { properties: ["--scale-x", "--scale-y"] },
+  scaleX: { properties: "--scale-x" },
+  scaleY: { properties: "--scale-y" },
   scrollbarColor: {
     properties: "scrollbarColor",
     token: "colors",
@@ -1482,13 +1478,13 @@ export const standardStyles = {
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
+  sepia: { properties: "--sepia", transform: transforms.function("sepia") },
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
   shapeRendering: true,
-  skewX: { properties: "--ui-skew-x", transform: transforms.deg },
-  skewY: { properties: "--ui-skew-y", transform: transforms.deg },
+  skewX: { properties: "--skew-x", transform: transforms.deg },
+  skewY: { properties: "--skew-y", transform: transforms.deg },
   stopColor: true,
   stopOpacity: true,
   stroke: {
@@ -1578,7 +1574,7 @@ export const standardStyles = {
   },
   translate: true,
   translateX: {
-    properties: "--ui-translate-x",
+    properties: "--translate-x",
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1587,7 +1583,7 @@ export const standardStyles = {
     ),
   },
   translateY: {
-    properties: "--ui-translate-y",
+    properties: "--translate-y",
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1751,19 +1747,16 @@ export const uiStyles = {
     processResult: true,
     transform: transforms.styles("textStyles"),
   },
-  colorScheme: {
-    processResult: true,
-    transform: transforms.colorScheme,
-  },
+  colorScheme: { transform: transforms.colorScheme },
   isTruncated: { transform: transforms.isTruncated },
   lineClamp: {
-    properties: "--ui-line-clamp",
+    properties: "--line-clamp",
     static: {
       display: "-webkit-box",
       overflow: "hidden",
       textOverflow: "ellipsis",
       WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
+      WebkitLineClamp: "var(--line-clamp)",
     },
   },
   vars: { processSkip: true, transform: transforms.vars },
@@ -1795,9 +1788,43 @@ export type ProcessSkipProperty = (typeof processSkipProperties)[number]
 
 export const processSkipProperties = [
   "vars",
-  "_media",
   "_container",
+  "_media",
   "_supports",
+] as const
+
+export type SizeProperty = (typeof sizeProperties)[number]
+
+export const sizeProperties = [
+  "backfaceVisibility",
+  "blockSize",
+  "columnWidth",
+  "containIntrinsicWidth",
+  "flexBasis",
+  "gridAutoColumns",
+  "gridAutoRows",
+  "gridTemplateColumns",
+  "gridTemplateRows",
+  "height",
+  "h",
+  "inlineSize",
+  "maxBlockSize",
+  "maxHeight",
+  "maxH",
+  "maxInlineSize",
+  "maxWidth",
+  "maxW",
+  "minBlockSize",
+  "minHeight",
+  "minH",
+  "minInlineSize",
+  "minWidth",
+  "minW",
+  "width",
+  "w",
+  "boxSize",
+  "maxBoxSize",
+  "minBoxSize",
 ] as const
 
 export type AnimationProperty = (typeof animationProperties)[number]
@@ -1806,7 +1833,7 @@ export const animationProperties = ["animation"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
-export const blurProperties = ["blur", "backdropBlur"] as const
+export const blurProperties = ["backdropBlur", "blur"] as const
 
 export type BorderProperty = (typeof borderProperties)[number]
 
@@ -1825,8 +1852,8 @@ export const borderProperties = [
   "borderLeft",
   "borderRight",
   "borderTop",
-  "borderY",
   "borderX",
+  "borderY",
 ] as const
 
 export type ColorProperty = (typeof colorProperties)[number]
@@ -1857,13 +1884,13 @@ export const colorProperties = [
   "textColor",
   "columnRuleColor",
   "fill",
+  "floodColor",
+  "lightingColor",
   "outlineColor",
   "scrollbarColor",
   "stroke",
   "textDecorationColor",
   "textEmphasisColor",
-  "floodColor",
-  "lightingColor",
 ] as const
 
 export type FontProperty = (typeof fontProperties)[number]
@@ -1917,20 +1944,20 @@ export const radiusProperties = [
   "roundedTopLeft",
   "borderTopRightRadius",
   "roundedTopRight",
-  "borderTopRadius",
-  "roundedTop",
   "borderBottomRadius",
   "roundedBottom",
-  "borderRightRadius",
-  "roundedRight",
-  "borderLeftRadius",
-  "roundedLeft",
-  "borderInlineStartRadius",
-  "borderStartRadius",
-  "roundedStart",
   "borderInlineEndRadius",
   "borderEndRadius",
   "roundedEnd",
+  "borderInlineStartRadius",
+  "borderStartRadius",
+  "roundedStart",
+  "borderLeftRadius",
+  "roundedLeft",
+  "borderRightRadius",
+  "roundedRight",
+  "borderTopRadius",
+  "roundedTop",
 ] as const
 
 export type ShadowProperty = (typeof shadowProperties)[number]
@@ -1939,42 +1966,8 @@ export const shadowProperties = [
   "boxShadow",
   "shadow",
   "textShadow",
-  "dropShadow",
   "backdropDropShadow",
-] as const
-
-export type SizeProperty = (typeof sizeProperties)[number]
-
-export const sizeProperties = [
-  "backfaceVisibility",
-  "blockSize",
-  "columnWidth",
-  "containIntrinsicWidth",
-  "flexBasis",
-  "gridAutoColumns",
-  "gridAutoRows",
-  "gridTemplateColumns",
-  "gridTemplateRows",
-  "height",
-  "h",
-  "inlineSize",
-  "maxBlockSize",
-  "maxHeight",
-  "maxH",
-  "maxInlineSize",
-  "maxWidth",
-  "maxW",
-  "minBlockSize",
-  "minHeight",
-  "minH",
-  "minInlineSize",
-  "minWidth",
-  "minW",
-  "width",
-  "w",
-  "boxSize",
-  "minBoxSize",
-  "maxBoxSize",
+  "dropShadow",
 ] as const
 
 export type SpaceProperty = (typeof spaceProperties)[number]
@@ -2051,6 +2044,8 @@ export const spaceProperties = [
   "scrollPaddingRight",
   "scrollPaddingTop",
   "top",
+  "insetX",
+  "insetY",
   "marginX",
   "mx",
   "marginY",
@@ -2063,8 +2058,6 @@ export const spaceProperties = [
   "scrollMarginY",
   "scrollPaddingX",
   "scrollPaddingY",
-  "insetX",
-  "insetY",
   "translateX",
   "translateY",
 ] as const
@@ -2252,7 +2245,7 @@ export interface StyleProps {
   /**
    * Set color scheme variables.
    */
-  colorScheme?: ColorScheme
+  colorScheme?: Token<ColorScheme>
   /**
    * The CSS `accent-color` property.
    *
@@ -2280,7 +2273,7 @@ export interface StyleProps {
   /**
    * The CSS `alignment-baseline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/alignment-baseline
    */
   alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
   /**
@@ -2406,19 +2399,19 @@ export interface StyleProps {
    */
   azimuth?: Token<CSS.Property.Azimuth>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-blur`.
    */
   backdropBlur?: Token<StringLiteral, "blurs">
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-brightness`.
    */
   backdropBrightness?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-contrast`.
    */
   backdropContrast?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-drop-shadow`.
    */
   backdropDropShadow?: Token<StringLiteral, "shadows">
   /**
@@ -2428,23 +2421,23 @@ export interface StyleProps {
    */
   backdropFilter?: Token<"auto" | CSS.Property.BackdropFilter>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-grayscale`.
    */
   backdropGrayscale?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-hue-rotate`.
    */
   backdropHueRotate?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-invert`.
    */
   backdropInvert?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-saturate`.
    */
   backdropSaturate?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.
+   * If `backdropBlur=auto`, sets the value of `--backdrop-sepia`.
    */
   backdropSepia?: Token<StringLiteral>
   /**
@@ -2640,7 +2633,7 @@ export interface StyleProps {
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
-   * If `filter=auto`, sets the value of `--ui-blur`.
+   * If `filter=auto`, sets the value of `--blur`.
    */
   blur?: Token<StringLiteral, "blurs">
   /**
@@ -3344,7 +3337,7 @@ export interface StyleProps {
    */
   breakInside?: Token<CSS.Property.BreakInside>
   /**
-   * If `filter=auto`, sets the value of `--ui-brightness`.
+   * If `filter=auto`, sets the value of `--brightness`.
    */
   brightness?: Token<StringLiteral>
   /**
@@ -3537,7 +3530,7 @@ export interface StyleProps {
    */
   contentVisibility?: Token<CSS.Property.ContentVisibility>
   /**
-   * If `filter=auto`, sets the value of `--ui-contrast`.
+   * If `filter=auto`, sets the value of `--contrast`.
    */
   contrast?: Token<StringLiteral>
   /**
@@ -3583,7 +3576,7 @@ export interface StyleProps {
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
-   * If `filter=auto`, sets the value of `--ui-drop-shadow`.
+   * If `filter=auto`, sets the value of `--drop-shadow`.
    */
   dropShadow?: Token<StringLiteral, "shadows">
   /**
@@ -3673,13 +3666,13 @@ export interface StyleProps {
   /**
    * The CSS `flood-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flood-color
    */
   floodColor?: Token<CSS.Property.FloodColor, "colors">
   /**
    * The CSS `flood-opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flood-opacity
    */
   floodOpacity?: Token<CSS.Property.FloodOpacity>
   /**
@@ -3881,7 +3874,7 @@ export interface StyleProps {
    */
   glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
   /**
-   * If `filter=auto`, sets the value of `--ui-grayscale`.
+   * If `filter=auto`, sets the value of `--grayscale`.
    */
   grayscale?: Token<StringLiteral>
   /**
@@ -4008,7 +4001,7 @@ export interface StyleProps {
    */
   height?: Token<CSS.Property.Height | number, "sizes">
   /**
-   * If `filter=auto`, sets the value of `--ui-hue-rotate`.
+   * If `filter=auto`, sets the value of `--hue-rotate`.
    */
   hueRotate?: Token<StringLiteral>
   /**
@@ -4128,7 +4121,7 @@ export interface StyleProps {
    */
   insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
   /**
-   * If `filter=auto`, sets the value of `--ui-invert`.
+   * If `filter=auto`, sets the value of `--invert`.
    */
   invert?: Token<StringLiteral>
   /**
@@ -4180,7 +4173,7 @@ export interface StyleProps {
   /**
    * The CSS `lighting-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/lighting-color
    */
   lightingColor?: Token<CSS.Property.LightingColor, "colors">
   /**
@@ -4478,12 +4471,6 @@ export interface StyleProps {
    */
   maskType?: Token<CSS.Property.MaskType>
   /**
-   * The CSS `masonry-auto-flow` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/masonry-auto-flow
-   */
-  masonryAutoFlow?: Token<CSS.Property.MasonryAutoFlow>
-  /**
    * The CSS `math-depth` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-depth
@@ -4726,7 +4713,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline
    */
-  outline?: Token<CSS.Property.Outline>
+  outline?: Token<"inside" | "mixed" | "outside" | CSS.Property.Filter>
   /**
    * The CSS `outline-color` property.
    *
@@ -5116,7 +5103,7 @@ export interface StyleProps {
    */
   right?: Token<CSS.Property.Right | number, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--rotate`.
    */
   rotate?: Token<StringLiteral>
   /**
@@ -5273,19 +5260,19 @@ export interface StyleProps {
    */
   rubyPosition?: Token<CSS.Property.RubyPosition>
   /**
-   * If `filter=auto`, sets the value of `--ui-saturate`.
+   * If `filter=auto`, sets the value of `--saturate`.
    */
   saturate?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x` and `--scale-y`.
    */
   scale?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x`.
    */
   scaleX?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-y`.
    */
   scaleY?: Token<StringLiteral>
   /**
@@ -5524,7 +5511,7 @@ export interface StyleProps {
    */
   scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
   /**
-   * If `filter=auto`, sets the value of `--ui-sepia`.
+   * If `filter=auto`, sets the value of `--sepia`.
    */
   sepia?: Token<StringLiteral>
   /**
@@ -5558,11 +5545,11 @@ export interface StyleProps {
    */
   shapeRendering?: Token<CSS.Property.ShapeRendering>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-x`.
    */
   skewX?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-y`.
    */
   skewY?: Token<StringLiteral>
   /**
@@ -5911,11 +5898,11 @@ export interface StyleProps {
    */
   translate?: Token<"no" | "yes" | CSS.Property.Translate>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-x`.
    */
   translateX?: Token<number | StringLiteral, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
+   * If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-y`.
    */
   translateY?: Token<number | StringLiteral, "spaces">
   /**
@@ -5944,11 +5931,7 @@ export interface StyleProps {
    * </Box>
    * ```
    */
-  vars?: {
-    name: string
-    token?: ThemeToken
-    value?: Token<any>
-  }[]
+  vars?: { name: string; token?: ThemeToken; value?: Token<any> }[]
   /**
    * The CSS `vector-effect` property.
    *

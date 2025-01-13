@@ -89,46 +89,27 @@ export function analyzeCSSValue(value: any) {
 
 export function tokenToVar(token: ThemeToken, value: any) {
   return function (theme: StyledTheme) {
-    if (value == null) return value
+    const match = isString(value)
+      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
+      : null
 
-    if (isString(value)) {
-      const important = value.match(/\s*!important\s*/g)
+    const [, pickedValue, fallbackValue] = match ?? []
 
-      value = value.replace(/\s*!important\s*/g, "")
+    if (pickedValue) value = pickedValue
 
-      const match = value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
-      const [, pickedValue, fallbackValue] = match ?? []
+    if (isString(value) && value.startsWith("colorScheme.")) {
+      const [, token] = value.split(".")
+      const [resolvedToken, percent] = token?.split("/") ?? []
 
-      if (pickedValue) value = pickedValue
+      return `${getVar(`colorScheme-${resolvedToken}`)(theme)}${percent ? `/${percent}` : ""}`
+    }
 
-      if (value.startsWith("colorScheme.")) {
-        const [, token] = value.split(".")
-        const resolvedValue = getVar(`colorScheme-${token}`)(theme)
+    const resolvedToken = `${token}.${value}`
 
-        return `${resolvedValue}${important ? " !important" : ""}`
-      }
-
-      const resolvedToken = `${token}.${value}`
-
-      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-        const value = theme.__cssMap[resolvedToken]?.ref
-
-        return `${value}${important ? " !important" : ""}`
-      } else {
-        const resolvedValue = fallbackValue ?? value
-
-        return resolvedValue
-          ? `${resolvedValue}${important ? " !important" : ""}`
-          : resolvedValue
-      }
+    if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
+      return theme.__cssMap[resolvedToken]?.ref
     } else {
-      const resolvedToken = `${token}.${value}`
-
-      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-        return theme.__cssMap[resolvedToken]?.ref
-      } else {
-        return value
-      }
+      return fallbackValue ?? value
     }
   }
 }

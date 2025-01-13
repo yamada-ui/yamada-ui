@@ -117,7 +117,6 @@ describe("useCreateVars", () => {
         value: {
           base: "primary",
         },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -141,7 +140,6 @@ describe("createVars", () => {
         name: "color-0",
         token: "colors",
         value: { base: "primary" },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -166,7 +164,6 @@ describe("createVars", () => {
         name: "textAlign-0",
         token: undefined,
         value: { base: "center" },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -191,7 +188,6 @@ describe("createVars", () => {
         name: "transform-0",
         token: undefined,
         value: { base: "rotate-reverse" },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -217,7 +213,6 @@ describe("createVars", () => {
         name: "color-1",
         token: "colors",
         value: { base: "primary" },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -243,7 +238,6 @@ describe("createVars", () => {
         name: "color-0",
         token: "colors",
         value: { base: ["primary", "secondary"] },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -270,7 +264,6 @@ describe("createVars", () => {
         name: "color-0",
         token: "colors",
         value: { base: "primary", md: "secondary" },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -301,7 +294,6 @@ describe("createVars", () => {
         name: "color-0",
         token: "colors",
         value: { base: "primary", _dark: { base: "secondary" } },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -335,7 +327,6 @@ describe("createVars", () => {
           base: ["primary", "secondary"],
           _focus: { base: ["warning", "danger"] },
         },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({
@@ -377,7 +368,6 @@ describe("createVars", () => {
           md: "secondary",
           _focus: { base: "warning", md: "danger" },
         },
-        __prefix: "ui",
       },
     ])
     expect(variableProps).toStrictEqual({

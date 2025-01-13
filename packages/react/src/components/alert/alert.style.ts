@@ -8,6 +8,7 @@ export const alertStyle = defineComponentSlotStyle({
     icon: {
       boxSize: "5",
       flexShrink: 0,
+      fontSize: "xl",
       marginEnd: "3",
     },
     loading: {

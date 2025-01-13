@@ -20,10 +20,11 @@ export const accordionStyle = defineComponentSlotStyle({
     },
     icon: {
       color: "fg.subtle",
-      fontSize: "1.25em",
+      fontSize: "xl",
       ml: "auto",
       transformOrigin: "center",
-      transition: "transform 0.2s",
+      transitionDuration: "normal",
+      transitionProperty: "transform",
       _disabled: {
         layerStyle: "disabled",
       },

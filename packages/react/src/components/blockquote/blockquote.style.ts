@@ -9,10 +9,10 @@ export const blockquoteStyle = defineComponentSlotStyle({
     cite: {},
     content: {},
     icon: {
-      fontSize: "2xl",
+      fontSize: "xl",
       left: "0",
       position: "absolute",
-      top: "0",
+      top: "0.5",
     },
     root: {
       display: "flex",

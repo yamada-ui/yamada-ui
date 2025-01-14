@@ -64,14 +64,14 @@ export const Bleed = withContext("div")(
     const inlineStartFull = inlineStart === "full"
     const inlineEndFull = inlineEnd === "full"
 
-    const marginBlockStart = calc.negate("$blockStart")
-    const marginBlockEnd = calc.negate("$blockEnd")
+    const marginBlockStart = calc.negate("{blockStart}")
+    const marginBlockEnd = calc.negate("{blockEnd}")
     const marginInlineStart = inlineStartFull
       ? "calc(50% - 50vw)"
-      : calc.negate("$inlineStart")
+      : calc.negate("{inlineStart}")
     const marginInlineEnd = inlineEndFull
       ? "calc(50% - 50vw)"
-      : calc.negate("$inlineEnd")
+      : calc.negate("{inlineEnd}")
 
     return {
       ...rest,

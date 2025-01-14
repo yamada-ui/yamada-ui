@@ -120,7 +120,7 @@ describe("useCreateVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
   })
 })
@@ -143,7 +143,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "--ui-color-0": "var(--ui-colors-primary)",
@@ -167,7 +167,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      textAlign: "$textAlign-0",
+      textAlign: "{textAlign-0}",
     })
     expect(result).toStrictEqual({
       "--ui-textAlign-0": "center",
@@ -191,7 +191,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      transform: "$transform-0",
+      transform: "{transform-0}",
     })
     expect(result).toStrictEqual({
       "--ui-transform-0": "rotate-reverse",
@@ -216,7 +216,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-1",
+      color: "{color-1}",
     })
     expect(result).toStrictEqual({
       "--ui-color-1": "var(--ui-colors-primary)",
@@ -241,7 +241,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "--ui-color-0": "var(--ui-colors-primary)",
@@ -267,7 +267,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "@media screen and (max-width: 768px)": {
@@ -297,7 +297,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "--ui-color-0": "var(--ui-colors-primary)",
@@ -330,7 +330,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "&:focus, &[data-focus]": {
@@ -371,7 +371,7 @@ describe("createVars", () => {
       },
     ])
     expect(variableProps).toStrictEqual({
-      color: "$color-0",
+      color: "{color-0}",
     })
     expect(result).toStrictEqual({
       "&:focus, &[data-focus]": {

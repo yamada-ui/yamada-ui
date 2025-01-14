@@ -127,7 +127,7 @@ describe("transformTheme", () => {
         "linear(to-r, green.200, green.500)",
         "linear(to-r, green.100, green.300)",
       ],
-      orange: "linear(to-r, $colors.orange.200, $yamada)",
+      orange: "linear(to-r, {colors.orange.200}, {yamada})",
       red: [
         {
           base: "linear(to-r, red.200, red.500)",
@@ -230,7 +230,7 @@ describe("transformTheme", () => {
       },
       red: {
         colors: {
-          border: ["$colors.red.500", "pink"],
+          border: ["{colors.red.500}", "pink"],
         },
       },
     },

@@ -1,9 +1,9 @@
 import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { ContainerStyle } from "./container.style"
-import { createComponent } from "../../core"
+import { createSlotComponent } from "../../core"
 import { containerStyle } from "./container.style"
 
-export interface ContainerProps
+export interface ContainerRootProps
   extends HTMLUIProps<"section">,
     ThemeProps<ContainerStyle> {}
 
@@ -11,11 +11,27 @@ export const {
   PropsContext: ContainerPropsContext,
   usePropsContext: useContainerPropsContext,
   withContext,
-} = createComponent<ContainerProps, ContainerStyle>("container", containerStyle)
+  withProvider,
+} = createSlotComponent<ContainerRootProps, ContainerStyle>(
+  "container",
+  containerStyle,
+)
 
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.
  *
  * @see Docs https://yamada-ui.com/components/layouts/container
  */
-export const Container = withContext("section")()
+export const ContainerRoot = withProvider("section", "root")()
+
+export interface ContainerHeaderProps extends HTMLUIProps<"header"> {}
+
+export const ContainerHeader = withContext("header", "header")()
+
+export interface ContainerBodyProps extends HTMLUIProps {}
+
+export const ContainerBody = withContext("div", "body")()
+
+export interface ContainerFooterProps extends HTMLUIProps<"footer"> {}
+
+export const ContainerFooter = withContext("footer", "footer")()

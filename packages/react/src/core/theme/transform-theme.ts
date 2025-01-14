@@ -49,13 +49,12 @@ const primaryTokens = [
   "letterSpacings",
   "lineHeights",
   "radii",
-  "shadows",
   "sizes",
   "spaces",
   "zIndices",
 ] as const
 
-const secondaryTokens = ["gradients"] as const
+const secondaryTokens = ["shadows", "gradients"] as const
 
 export type ThemeToken =
   | "animations"

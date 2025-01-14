@@ -26,7 +26,7 @@ export const layerStyles: CSSModifierObject = {
   outline: {
     base: {
       bg: "transparent",
-      border: "1px solid $colorScheme.outline",
+      border: "1px solid {colorScheme.outline}",
       color: "colorScheme.outline",
     },
     hover: {
@@ -60,7 +60,7 @@ export const layerStyles: CSSModifierObject = {
   surface: {
     base: {
       bg: "colorScheme.subtle",
-      border: "1px solid $colorScheme.muted",
+      border: "1px solid {colorScheme.muted}",
       color: "colorScheme.fg",
     },
     hover: {

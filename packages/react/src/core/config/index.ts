@@ -20,7 +20,7 @@ import { transform } from "./transform"
 import { analyzeCSSValue, isCSSVar, keyframes, mode } from "./utils"
 import { vars } from "./vars"
 
-export { animation, gradient, keyframes, mode }
+export { animation, colorMix, gradient, keyframes, mode }
 
 type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties
@@ -91,9 +91,9 @@ export const transforms = {
   px: (value: any) => {
     if (value == null) return value
 
-    const { isUnitless } = analyzeCSSValue(value)
+    const { unitless } = analyzeCSSValue(value)
 
-    return isUnitless || isNumber(value) ? `${value}px` : value
+    return unitless || isNumber(value) ? `${value}px` : value
   },
   styles: generateStyles,
   supports: generateAtRule("supports"),

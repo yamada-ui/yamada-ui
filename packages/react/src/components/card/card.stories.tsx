@@ -20,12 +20,12 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Card.Root>
+    <Card.Root variant="outline">
       <Card.Header>
         <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
       </Card.Header>
 
-      <Card.Body>
+      <Card.Body color="fg.muted">
         <Text>
           『SLAM
           DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
@@ -37,7 +37,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <For each={["panel", "outline", "elevated", "solid", "subtle", "surface"]}>
+    <For each={["panel", "elevated", "solid", "subtle", "surface", "outline"]}>
       {(variant, index) => (
         <Card.Root key={index} variant={variant}>
           <Card.Header>
@@ -81,7 +81,10 @@ export const Size: Story = () => {
 
 export const ColorScheme: Story = () => {
   return (
-    <PropsTable columns={["solid", "subtle", "surface"]} rows={COLOR_SCHEMES}>
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline"]}
+      rows={COLOR_SCHEMES}
+    >
       {(column, row, key) => {
         return (
           <Card.Root key={key} colorScheme={row} variant={column}>
@@ -118,7 +121,7 @@ export const Horizontal: Story = () => {
           <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </Card.Header>
 
-        <Card.Body>
+        <Card.Body color="fg.muted">
           <Text>
             『SLAM
             DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。

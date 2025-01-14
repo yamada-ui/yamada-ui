@@ -3,8 +3,7 @@ import type { VariableTokens, VariableValue } from "../theme"
 import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import { calc, escape, isArray, isObject, isString, merge } from "../../utils"
-import { animation, gradient } from "../config"
-import { colorMix } from "../config/color-mix"
+import { animation, colorMix, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { css } from "./css"
@@ -14,6 +13,17 @@ type ParsedValue = number | string | undefined
 interface Variable {
   reference: string
   variable: string
+}
+
+export function transformInterpolation(
+  value: any,
+  callback: (value: string) => string,
+) {
+  if (isString(value)) {
+    return value.replace(/\{(.*?)\}/g, (_, value) => callback(value))
+  } else {
+    return value
+  }
 }
 
 export function getVar(token: string) {
@@ -32,10 +42,22 @@ export function getVarName(token: string) {
   }
 }
 
+export function getColorSchemeVar(value: any) {
+  return function (theme: StyledTheme) {
+    if (!isString(value)) return value
+
+    const [, token] = value.split(".")
+
+    return getVar(`colorScheme-${token}`)(theme)
+  }
+}
+
 const isGradient = (token: string) => token.startsWith("gradients.")
 const isAnimation = (token: string) => token.startsWith("animations.")
 const isSpace = (token: string) => token.startsWith("spaces.")
 const isColor = (token: string) => token.startsWith("colors.")
+export const isColorScheme = (token: any) =>
+  isString(token) && token.startsWith("colorScheme.") && !token.includes("/")
 
 interface CreateThemeVarsOptions {
   cssMap?: CSSMap
@@ -86,8 +108,12 @@ export function getCreateThemeVars(
       }
 
       function valueToVar<Y extends ParsedValue>(value: Y) {
-        if (isString(value)) {
-          return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
+        return transformInterpolation(value, (value) => {
+          if (value.includes("colors.") || value.includes("colorScheme.")) {
+            if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
+
+            return colorMix(value, { theme })
+          } else {
             const token = tokens[value] ?? prevTokens?.[value]
 
             if (token) {
@@ -97,10 +123,8 @@ export function getCreateThemeVars(
             } else {
               return `var(--${prefix}-${value})`
             }
-          })
-        } else {
-          return value
-        }
+          }
+        })
       }
 
       function createNegativeVar(token: string, reference: string) {
@@ -180,12 +204,14 @@ export function getCreateThemeVars(
               }
             })
           } else {
-            let computedValue: Dict | ThemeValue = valueToVar(value)
+            const computedValue: ThemeValue = valueToVar(value)
+
+            let resolvedValue: Dict | ThemeValue = computedValue
 
             if (isGradient(token)) {
-              computedValue = createGradientVar(token, computedValue)(semantic)
+              resolvedValue = createGradientVar(token, computedValue)(semantic)
             } else if (isColor(token)) {
-              computedValue = createColorVar(
+              resolvedValue = createColorVar(
                 token,
                 variable,
                 computedValue,
@@ -193,17 +219,17 @@ export function getCreateThemeVars(
             } else if (semantic) {
               const [, reference] = getRelatedReference(token, computedValue)
 
-              computedValue = reference
+              resolvedValue = reference
             }
 
-            if (!isObject(computedValue))
-              computedValue = { [variable]: computedValue }
+            if (!isObject(resolvedValue))
+              resolvedValue = { [variable]: resolvedValue }
 
             cssVars = merge(
               cssVars,
               queries.reduceRight<Dict>(
                 (prev, key) => ({ [key]: prev }),
-                computedValue,
+                resolvedValue,
               ),
             )
           }

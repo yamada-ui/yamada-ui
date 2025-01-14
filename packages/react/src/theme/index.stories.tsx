@@ -25,245 +25,269 @@ export const Basic = () => {
     <>
       <Heading>Colors</Heading>
 
-      <Heading size="2xl">Tokens</Heading>
+      <Container.Root>
+        <Container.Header>
+          <Heading size="2xl">Tokens</Heading>
+        </Container.Header>
 
-      <Container gap="sm">
-        <For each={DEFAULT_COLOR_SCHEMES}>
-          {(colorScheme, index) => (
-            <Grid
-              key={index}
-              gap="sm"
-              templateColumns={`repeat(${TONES.length}, 1fr)`}
-              w="full"
+        <Container.Body gap="sm">
+          <For each={DEFAULT_COLOR_SCHEMES}>
+            {(colorScheme, index) => (
+              <Grid
+                key={index}
+                gap="sm"
+                templateColumns={`repeat(${TONES.length}, 1fr)`}
+                w="full"
+              >
+                <For each={TONES}>
+                  {(tone, index) => (
+                    <Grid key={index} gap="xs">
+                      <Box
+                        bg={`${colorScheme}.${tone}`}
+                        h="12"
+                        rounded="md"
+                        w="full"
+                      />
+                      <Text
+                        color="muted"
+                        fontSize="xs"
+                        lineClamp={1}
+                        textAlign="center"
+                      >{`${colorScheme}.${tone}`}</Text>
+                    </Grid>
+                  )}
+                </For>
+              </Grid>
+            )}
+          </For>
+        </Container.Body>
+      </Container.Root>
+
+      <Container.Root>
+        <Container.Header>
+          <Heading size="2xl">Semantic Tokens</Heading>
+        </Container.Header>
+
+        <Container.Body gap="sm">
+          <For each={SEMANTIC_COLOR_SCHEMES}>
+            {(colorScheme, index) => (
+              <Grid
+                key={index}
+                gap="sm"
+                templateColumns={`repeat(${TONES.length}, 1fr)`}
+                w="full"
+              >
+                <For each={TONES}>
+                  {(tone, index) => (
+                    <Grid key={index} gap="xs">
+                      <Box
+                        bg={`${colorScheme}.${tone}`}
+                        h="12"
+                        rounded="md"
+                        w="full"
+                      />
+                      <Text
+                        color="muted"
+                        fontSize="xs"
+                        lineClamp={1}
+                        textAlign="center"
+                      >{`${colorScheme}.${tone}`}</Text>
+                    </Grid>
+                  )}
+                </For>
+              </Grid>
+            )}
+          </For>
+        </Container.Body>
+      </Container.Root>
+
+      <Container.Root>
+        <Container.Header>
+          <Heading size="xl">Background</Heading>
+        </Container.Header>
+
+        <Container.Body gap="sm">
+          <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
+            <For
+              each={[
+                "",
+                "subtle",
+                "muted",
+                "emphasized",
+                "contrast",
+                "panel",
+                "info",
+                "success",
+                "warning",
+                "error",
+              ]}
             >
-              <For each={TONES}>
-                {(tone, index) => (
-                  <Grid key={index} gap="xs">
-                    <Box
-                      bg={`${colorScheme}.${tone}`}
-                      h="12"
-                      rounded="md"
-                      w="full"
-                    />
-                    <Text
-                      color="muted"
-                      fontSize="xs"
-                      lineClamp={1}
-                      textAlign="center"
-                    >{`${colorScheme}.${tone}`}</Text>
-                  </Grid>
-                )}
-              </For>
-            </Grid>
-          )}
-        </For>
-      </Container>
+              {(value, index) => (
+                <Grid key={index} gap="xs">
+                  <Box
+                    bg={value ? `bg.${value}` : "bg"}
+                    borderColor="border.muted"
+                    borderWidth="1px"
+                    h="24"
+                    rounded="md"
+                    w="full"
+                  />
 
-      <Heading size="2xl">Semantic Tokens</Heading>
+                  <Text
+                    color="muted"
+                    fontSize="xs"
+                    lineClamp={1}
+                    textAlign="center"
+                  >
+                    {value ? `bg.${value}` : "bg"}
+                  </Text>
+                </Grid>
+              )}
+            </For>
+          </Grid>
+        </Container.Body>
+      </Container.Root>
 
-      <Container gap="sm">
-        <For each={SEMANTIC_COLOR_SCHEMES}>
-          {(colorScheme, index) => (
-            <Grid
-              key={index}
-              gap="sm"
-              templateColumns={`repeat(${TONES.length}, 1fr)`}
-              w="full"
+      <Container.Root>
+        <Container.Header>
+          <Heading size="xl">Foreground</Heading>
+        </Container.Header>
+
+        <Container.Body gap="sm">
+          <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
+            <For
+              each={[
+                "",
+                "subtle",
+                "muted",
+                "emphasized",
+                "contrast",
+                "info",
+                "success",
+                "warning",
+                "error",
+              ]}
             >
-              <For each={TONES}>
-                {(tone, index) => (
-                  <Grid key={index} gap="xs">
-                    <Box
-                      bg={`${colorScheme}.${tone}`}
-                      h="12"
-                      rounded="md"
-                      w="full"
-                    />
-                    <Text
-                      color="muted"
-                      fontSize="xs"
-                      lineClamp={1}
-                      textAlign="center"
-                    >{`${colorScheme}.${tone}`}</Text>
-                  </Grid>
-                )}
-              </For>
-            </Grid>
-          )}
-        </For>
-      </Container>
+              {(value, index) => (
+                <Grid key={index} gap="xs">
+                  <Center
+                    bg={value === "contrast" ? "bg.contrast" : undefined}
+                    borderColor="border.muted"
+                    borderWidth="1px"
+                    h="24"
+                    rounded="md"
+                    w="full"
+                  >
+                    <Text color={value ? `fg.${value}` : "fg"}>Ag</Text>
+                  </Center>
 
-      <Container gap="md">
-        <Heading size="xl">Background</Heading>
+                  <Text
+                    color="muted"
+                    fontSize="xs"
+                    lineClamp={1}
+                    textAlign="center"
+                  >
+                    {value ? `fg.${value}` : "fg"}
+                  </Text>
+                </Grid>
+              )}
+            </For>
+          </Grid>
+        </Container.Body>
+      </Container.Root>
 
-        <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
-          <For
-            each={[
-              "",
-              "subtle",
-              "muted",
-              "emphasized",
-              "contrast",
-              "panel",
-              "info",
-              "success",
-              "warning",
-              "error",
-            ]}
-          >
-            {(value, index) => (
-              <Grid key={index} gap="xs">
-                <Box
-                  bg={value ? `bg.${value}` : "bg"}
-                  borderColor="border.muted"
-                  borderWidth="1px"
-                  h="24"
-                  rounded="md"
-                  w="full"
-                />
+      <Container.Root>
+        <Container.Header>
+          <Heading size="xl">Border</Heading>
+        </Container.Header>
 
-                <Text
-                  color="muted"
-                  fontSize="xs"
-                  lineClamp={1}
-                  textAlign="center"
-                >
-                  {value ? `bg.${value}` : "bg"}
-                </Text>
-              </Grid>
-            )}
-          </For>
-        </Grid>
-      </Container>
+        <Container.Body gap="sm">
+          <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
+            <For
+              each={[
+                "",
+                "subtle",
+                "muted",
+                "emphasized",
+                "contrast",
+                "info",
+                "success",
+                "warning",
+                "error",
+              ]}
+            >
+              {(value, index) => (
+                <Grid key={index} gap="xs">
+                  <Box
+                    borderColor={value ? `border.${value}` : "border"}
+                    borderWidth="3px"
+                    h="24"
+                    rounded="md"
+                    w="full"
+                  />
 
-      <Container gap="md">
-        <Heading size="xl">Foreground</Heading>
-
-        <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
-          <For
-            each={[
-              "",
-              "subtle",
-              "muted",
-              "emphasized",
-              "contrast",
-              "info",
-              "success",
-              "warning",
-              "error",
-            ]}
-          >
-            {(value, index) => (
-              <Grid key={index} gap="xs">
-                <Center
-                  bg={value === "contrast" ? "bg.contrast" : undefined}
-                  borderColor="border.muted"
-                  borderWidth="1px"
-                  h="24"
-                  rounded="md"
-                  w="full"
-                >
-                  <Text color={value ? `fg.${value}` : "fg"}>Ag</Text>
-                </Center>
-
-                <Text
-                  color="muted"
-                  fontSize="xs"
-                  lineClamp={1}
-                  textAlign="center"
-                >
-                  {value ? `fg.${value}` : "fg"}
-                </Text>
-              </Grid>
-            )}
-          </For>
-        </Grid>
-      </Container>
-
-      <Container gap="md">
-        <Heading size="xl">Border</Heading>
-
-        <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
-          <For
-            each={[
-              "",
-              "subtle",
-              "muted",
-              "emphasized",
-              "contrast",
-              "info",
-              "success",
-              "warning",
-              "error",
-            ]}
-          >
-            {(value, index) => (
-              <Grid key={index} gap="xs">
-                <Box
-                  borderColor={value ? `border.${value}` : "border"}
-                  borderWidth="3px"
-                  h="24"
-                  rounded="md"
-                  w="full"
-                />
-
-                <Text
-                  color="muted"
-                  fontSize="xs"
-                  lineClamp={1}
-                  textAlign="center"
-                >
-                  {value ? `border.${value}` : "border"}
-                </Text>
-              </Grid>
-            )}
-          </For>
-        </Grid>
-      </Container>
+                  <Text
+                    color="muted"
+                    fontSize="xs"
+                    lineClamp={1}
+                    textAlign="center"
+                  >
+                    {value ? `border.${value}` : "border"}
+                  </Text>
+                </Grid>
+              )}
+            </For>
+          </Grid>
+        </Container.Body>
+      </Container.Root>
 
       <For each={COLOR_SCHEMES}>
         {(colorScheme, index) => (
-          <Container key={index} gap="md">
-            <Heading size="xl">{toTitleCase(colorScheme)}</Heading>
+          <Container.Root key={index}>
+            <Container.Header>
+              <Heading size="xl">{toTitleCase(colorScheme)}</Heading>
+            </Container.Header>
 
-            <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
-              <For
-                each={[
-                  "",
-                  "contrast",
-                  "fg",
-                  "ghost",
-                  "subtle",
-                  "muted",
-                  "emphasized",
-                  "solid",
-                  "outline",
-                ]}
-              >
-                {(value, index) => (
-                  <Grid key={index} gap="xs">
-                    <Box
-                      bg={value ? `${colorScheme}.${value}` : colorScheme}
-                      borderColor="border.muted"
-                      borderWidth="1px"
-                      h="24"
-                      rounded="md"
-                      w="full"
-                    />
+            <Container.Body gap="sm">
+              <Grid gap="sm" templateColumns="repeat(6, 1fr)" w="full">
+                <For
+                  each={[
+                    "",
+                    "contrast",
+                    "fg",
+                    "ghost",
+                    "subtle",
+                    "muted",
+                    "emphasized",
+                    "solid",
+                    "outline",
+                  ]}
+                >
+                  {(value, index) => (
+                    <Grid key={index} gap="xs">
+                      <Box
+                        bg={value ? `${colorScheme}.${value}` : colorScheme}
+                        borderColor="border.muted"
+                        borderWidth="1px"
+                        h="24"
+                        rounded="md"
+                        w="full"
+                      />
 
-                    <Text
-                      color="muted"
-                      fontSize="xs"
-                      lineClamp={1}
-                      textAlign="center"
-                    >
-                      {value ? `${colorScheme}.${value}` : colorScheme}
-                    </Text>
-                  </Grid>
-                )}
-              </For>
-            </Grid>
-          </Container>
+                      <Text
+                        color="muted"
+                        fontSize="xs"
+                        lineClamp={1}
+                        textAlign="center"
+                      >
+                        {value ? `${colorScheme}.${value}` : colorScheme}
+                      </Text>
+                    </Grid>
+                  )}
+                </For>
+              </Grid>
+            </Container.Body>
+          </Container.Root>
         )}
       </For>
     </>

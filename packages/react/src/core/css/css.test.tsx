@@ -312,8 +312,8 @@ describe("css", () => {
 
   test("returns interpolation", () => {
     const result = css({
-      m: "$yamada",
-      p: "$spaces.4 $spaces.4",
+      m: "{yamada}",
+      p: "{spaces.4} {spaces.4}",
     })(theme)
 
     expect(result).toStrictEqual({

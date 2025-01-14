@@ -5925,7 +5925,7 @@ export interface StyleProps {
    * ```jsx
    * <Box
    *   vars={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc($space * 2)"
+   *   m="calc({space} * 2)"
    * >
    *   Box
    * </Box>

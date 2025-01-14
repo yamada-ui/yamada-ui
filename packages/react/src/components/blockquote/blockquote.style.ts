@@ -66,7 +66,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
         color: "colorScheme.solid",
       },
       root: {
-        borderStart: "4px solid $colorScheme.solid",
+        borderStart: "4px solid {colorScheme.solid}",
         px: "md",
       },
     },
@@ -75,7 +75,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
         color: "colorScheme.fg",
       },
       root: {
-        borderStart: "4px solid $colorScheme.muted",
+        borderStart: "4px solid {colorScheme.muted}",
         px: "md",
       },
     },

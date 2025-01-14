@@ -29,12 +29,13 @@ export const cardStyle = defineComponentSlotStyle({
   variants: {
     elevated: {
       root: {
-        boxShadow: ["md", "dark-md"],
+        bg: "bg.panel",
+        boxShadow: "md",
       },
     },
     outline: {
       root: {
-        borderWidth: "1px",
+        layerStyle: "outline",
       },
     },
     panel: {
@@ -60,9 +61,9 @@ export const cardStyle = defineComponentSlotStyle({
       },
     },
     unstyled: {
-      body: { p: 0 },
-      footer: { p: 0 },
-      header: { p: 0 },
+      body: { gap: 0, p: 0 },
+      footer: { gap: 0, p: 0 },
+      header: { fontSize: "inherit", gap: 0, p: 0 },
       root: { rounded: 0 },
     },
   },
@@ -72,7 +73,7 @@ export const cardStyle = defineComponentSlotStyle({
       body: { gap: "3", px: "3", py: "3" },
       footer: { gap: "3", pb: "3", px: "3" },
       header: { fontSize: "lg", gap: "3", pt: "3", px: "3" },
-      root: { rounded: "base" },
+      root: { rounded: "md" },
     },
     md: {
       body: { gap: "4", px: "4", py: "4" },
@@ -85,6 +86,12 @@ export const cardStyle = defineComponentSlotStyle({
       footer: { gap: "6", pb: "6", px: "6" },
       header: { fontSize: "2xl", gap: "6", pt: "6", px: "6" },
       root: { rounded: "xl" },
+    },
+    xl: {
+      body: { gap: "8", px: "8", py: "8" },
+      footer: { gap: "8", pb: "8", px: "8" },
+      header: { fontSize: "2xl", gap: "8", pt: "8", px: "8" },
+      root: { rounded: "2xl" },
     },
   },
 

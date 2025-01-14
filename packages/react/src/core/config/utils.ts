@@ -5,7 +5,7 @@ import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { keyframes as emotionKeyframes } from "@emotion/react"
 import { isObject, isString, isUndefined } from "../../utils"
-import { getVar } from "../css"
+import { getColorSchemeVar, isColorScheme } from "../css"
 
 export interface TransformOptions {
   theme: StyledTheme
@@ -84,32 +84,19 @@ export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
-  return { isUnitless: !unit, unit, value }
+  return { unit, unitless: !unit, value }
 }
 
 export function tokenToVar(token: ThemeToken, value: any) {
   return function (theme: StyledTheme) {
-    const match = isString(value)
-      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
-      : null
-
-    const [, pickedValue, fallbackValue] = match ?? []
-
-    if (pickedValue) value = pickedValue
-
-    if (isString(value) && value.startsWith("colorScheme.")) {
-      const [, token] = value.split(".")
-      const [resolvedToken, percent] = token?.split("/") ?? []
-
-      return `${getVar(`colorScheme-${resolvedToken}`)(theme)}${percent ? `/${percent}` : ""}`
-    }
+    if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
       return theme.__cssMap[resolvedToken]?.ref
     } else {
-      return fallbackValue ?? value
+      return value
     }
   }
 }

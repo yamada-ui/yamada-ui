@@ -87,7 +87,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "xs",
-        lineHeight: "$sizes.6",
+        lineHeight: "{sizes.6}",
         minH: "6",
         minW: "6",
         px: "2",
@@ -99,7 +99,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "sm",
-        lineHeight: "$sizes.7",
+        lineHeight: "{sizes.7}",
         minH: "7",
         minW: "7",
         px: "2",
@@ -111,7 +111,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "md",
-        lineHeight: "$sizes.8",
+        lineHeight: "{sizes.8}",
         minH: "8",
         minW: "8",
         px: "3",

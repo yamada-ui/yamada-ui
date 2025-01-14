@@ -5,7 +5,7 @@ function getStyle(value: any): CSSObject {
   switch (value) {
     case "outside":
       return {
-        outlineColor: "$colorScheme.outline",
+        outlineColor: "colorScheme.outline",
         outlineOffset: "2px",
         outlineStyle: "solid",
         outlineWidth: "2px",
@@ -13,8 +13,8 @@ function getStyle(value: any): CSSObject {
 
     case "inside":
       return {
-        borderColor: "$colorScheme.outline",
-        outlineColor: "$colorScheme.outline",
+        borderColor: "colorScheme.outline",
+        outlineColor: "colorScheme.outline",
         outlineOffset: "-2px",
         outlineStyle: "solid",
         outlineWidth: "2px",
@@ -22,8 +22,8 @@ function getStyle(value: any): CSSObject {
 
     case "mixed":
       return {
-        borderColor: "$colorScheme.outline",
-        outlineColor: "$colorScheme.outline/60",
+        borderColor: "colorScheme.outline",
+        outlineColor: "colorScheme.outline/60",
         outlineStyle: "solid",
         outlineWidth: "2px",
       }

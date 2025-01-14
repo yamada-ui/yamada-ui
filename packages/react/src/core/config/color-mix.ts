@@ -1,6 +1,7 @@
 import type { StyledTheme } from "../theme.types"
 import type { TransformOptions } from "./utils"
 import { isArray } from "@yamada-ui/utils"
+import { getColorSchemeVar, isColorScheme } from "../css"
 import { getCSSFunction, globalValues, splitValues, tokenToVar } from "./utils"
 
 const DEFAULT_METHOD = "in srgb"
@@ -26,7 +27,13 @@ function getColor(value: string | undefined, theme: StyledTheme) {
 
   if (rest.length) return value
 
-  color = tokenToVar("colors", color)(theme)
+  if (color?.startsWith("colors.")) color = color.replace("colors.", "")
+
+  if (isColorScheme(color)) {
+    color = getColorSchemeVar(color)(theme)
+  } else {
+    color = tokenToVar("colors", color)(theme)
+  }
 
   if (percent && !percent.endsWith("%")) percent = `${percent}%`
 

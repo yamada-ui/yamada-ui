@@ -6,12 +6,44 @@ import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc } from "./css.types"
 import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
+import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
 import { processSkipProperties, styles } from "../styles"
-import { getVar } from "./var"
+import {
+  getColorSchemeVar,
+  getVar,
+  isColorScheme,
+  transformInterpolation,
+} from "./var"
 
 function isProcessSkip(key: string): boolean {
   return processSkipProperties.includes(key as ProcessSkipProperty)
+}
+
+function isImportant(value: any): boolean {
+  return isString(value) && /\s*!important\s*/g.test(value)
+}
+
+function omitImportant(value: any): string {
+  return isString(value) ? value.replace(/\s*!important\s*/g, "") : value
+}
+
+function insertImportant(value: any, style?: StyleConfig): any {
+  if (isString(value)) {
+    return value + " !important"
+  } else if (isObject(value)) {
+    if (!style?.properties) return value
+
+    if (isArray(style.properties)) {
+      for (const property of style.properties) {
+        value[property] += " !important"
+      }
+    } else {
+      value[style.properties] += " !important"
+    }
+  }
+
+  return value
 }
 
 function isAdditionalObject(obj: Dict) {
@@ -155,23 +187,22 @@ function expandCSS(css: Dict) {
 }
 
 function valueToVar(value: any, theme: StyledTheme) {
-  if (isString(value)) {
-    return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
-      if (value.startsWith("colorScheme.")) {
-        const [, token] = value.split(".")
+  return transformInterpolation(value, (value) => {
+    if (value.includes("colors.") || value.includes("colorScheme.")) {
+      if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
-        return getVar(`colorScheme-${token}`)(theme)
-      }
-
-      if (isObject(theme.__cssMap) && value in theme.__cssMap) {
-        if (theme.__cssMap[value]?.ref) return theme.__cssMap[value].ref
-      }
+      return colorMix(value, { theme })
+    } else {
+      if (
+        isObject(theme.__cssMap) &&
+        value in theme.__cssMap &&
+        theme.__cssMap[value]?.ref
+      )
+        return theme.__cssMap[value].ref
 
       return getVar(value)(theme)
-    })
-  } else {
-    return value
-  }
+    }
+  })
 }
 
 export function css(cssOrFunc: CSSObjectOrFunc) {
@@ -213,13 +244,9 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
           continue
         }
 
-        let important = false
+        const important = isImportant(value)
 
-        if (isString(value)) {
-          important = /\s*!important\s*/g.test(value)
-
-          value = value.replace(/\s*!important\s*/g, "")
-        }
+        value = omitImportant(value)
 
         value =
           style?.transform?.(value, {
@@ -230,19 +257,7 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
           }) ?? value
 
         if (important) {
-          if (isString(value)) {
-            value += " !important"
-          } else if (isObject(value)) {
-            if (style?.properties) {
-              if (isArray(style.properties)) {
-                for (const property of style.properties) {
-                  value[property] += " !important"
-                }
-              } else {
-                value[style.properties] += " !important"
-              }
-            }
-          }
+          value = insertImportant(value, style)
         }
 
         if (style?.processResult || style?.processSkip)

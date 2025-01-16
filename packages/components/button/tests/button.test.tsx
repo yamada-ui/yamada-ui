@@ -27,6 +27,8 @@ describe("<Button />", () => {
     )
     expect(getByTestId("btn")).toHaveAttribute("data-loading", "")
 
+    expect(getByTestId("btn")).toHaveAttribute("aria-busy", "true")
+
     // children text is hidden
     expect(screen.queryByText("Submit")).toBeNull()
 

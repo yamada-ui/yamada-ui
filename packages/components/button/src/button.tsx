@@ -9,7 +9,7 @@ import {
 } from "@yamada-ui/core"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
-import { cx, dataAttr, merge, mergeRefs } from "@yamada-ui/utils"
+import { ariaAttr, cx, dataAttr, merge, mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
@@ -208,6 +208,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         as={as}
         type={type ?? defaultType}
         className={cx("ui-button", className)}
+        aria-busy={ariaAttr(loading)}
         data-active={dataAttr(active)}
         data-loading={dataAttr(loading)}
         disabled={trulyDisabled}

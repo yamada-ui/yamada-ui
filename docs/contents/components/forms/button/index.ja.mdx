@@ -275,24 +275,24 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ### アイコンを追加する
 
-アイコンを追加する場合は、`leftIcon`または`rightIcon`に`ReactElement`を設定します。
+アイコンを追加する場合は、`startIcon`または`endIcon`に`ReactElement`を設定します。
 
 ```tsx
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" leftIcon={<PlusIcon />}>
+  <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
     Button
   </Button>
   <Button
     colorScheme="secondary"
     variant="outline"
-    rightIcon={<ArrowRightIcon />}
+    endIcon={<ArrowRightIcon />}
   >
     Button
   </Button>
-  <Button colorScheme="warning" variant="ghost" leftIcon={<MailIcon />}>
+  <Button colorScheme="warning" variant="ghost" startIcon={<MailIcon />}>
     Button
   </Button>
-  <Button colorScheme="danger" variant="link" leftIcon={<CheckIcon />}>
+  <Button colorScheme="danger" variant="link" startIcon={<CheckIcon />}>
     Button
   </Button>
 </Wrap>

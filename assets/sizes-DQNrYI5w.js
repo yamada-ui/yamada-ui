@@ -1,4 +1,4 @@
-import{j as n}from"./jsx-runtime-CfatFE5O.js";import{useMDXComponents as t}from"./index-DUy19JZU.js";import{ae as s}from"./index-B_t3APED.js";import"./index-ClcD9ViR.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./iframe-COb8dRQ2.js";import"../sb-preview/runtime.js";import"./index-DGFU5M_O.js";import"./index-CJyPbrN5.js";import"./index-DrFu-skq.js";function r(e){const m={code:"code",h1:"h1",pre:"pre",...t(),...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(s,{title:"Documents / Theme / Sizes"}),`
+import{j as n}from"./jsx-runtime-CfatFE5O.js";import{useMDXComponents as t}from"./index-DUy19JZU.js";import{ae as s}from"./index-BWY80LI_.js";import"./index-ClcD9ViR.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./iframe-Ca3QTsdk.js";import"../sb-preview/runtime.js";import"./index-DGFU5M_O.js";import"./index-CJyPbrN5.js";import"./index-DrFu-skq.js";function r(e){const m={code:"code",h1:"h1",pre:"pre",...t(),...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(s,{title:"Documents / Theme / Sizes"}),`
 `,n.jsx(m.h1,{id:"sizes",children:"Sizes"}),`
 `,n.jsx(m.pre,{children:n.jsx(m.code,{className:"language-ts",children:`const sizes = {
   ...spaces,

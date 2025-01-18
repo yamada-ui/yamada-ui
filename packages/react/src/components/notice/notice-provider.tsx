@@ -109,8 +109,9 @@ const defaultVariants: Variants = {
     },
   },
   initial: ({ placement }) => ({
-    [["bottom", "top"].includes(placement) ? "y" : "x"]:
-      (placement === "bottom" ? 1 : placement.includes("right") ? 1 : -1) * 24,
+    [["end-center", "start-center"].includes(placement) ? "y" : "x"]:
+      (placement === "end-center" ? 1 : placement.includes("-end") ? 1 : -1) *
+      24,
     opacity: 0,
   }),
 }

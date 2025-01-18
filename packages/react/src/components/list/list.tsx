@@ -1,139 +1,87 @@
 import type { ReactElement } from "react"
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
+import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { ListStyle } from "./list.style"
 import { cloneElement } from "react"
-import {
-  forwardRef,
-  omitThemeProps,
-  ui,
-  useComponentMultiStyle,
-} from "../../core"
-import { createContext, cx, getValidChildren } from "../../utils"
+import { createSlotComponent, ui } from "../../core"
+import { cx, getValidChildren } from "../../utils"
+import { listStyle } from "./list.style"
 
-const [ListProvider, useList] = createContext<{
-  [key: string]: CSSUIObject | undefined
-}>({
-  name: `ListContext`,
-  errorMessage: `useList returned is 'undefined'. Seems you forgot to wrap the components in "<List />" `,
-})
-
-interface ListOptions {
-  /**
-   * The CSS `gap` property.
-   *
-   * @default '2'
-   */
-  gap?: CSSUIProps["gap"]
+export interface ListProps extends HTMLUIProps<"ul">, ThemeProps<ListStyle> {
   /**
    * The CSS `list-style-position` property.
    */
-  stylePosition?: CSSUIProps["listStylePosition"]
-  /**
-   * The CSS `list-style-type` property.
-   *
-   * @default 'none'
-   */
-  styleType?: CSSUIProps["listStyleType"]
+  stylePosition?: CSSProps["listStylePosition"]
 }
 
-export interface ListProps
-  extends HTMLUIProps<"ul">,
-    ThemeProps<"List">,
-    ListOptions {}
+export const {
+  component,
+  PropsContext: ListPropsContext,
+  usePropsContext: useListPropsContext,
+  useStyleContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<ListProps, ListStyle>("list", listStyle)
 
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
  * @see Docs https://yamada-ui.com/components/data-display/list
  */
-export const List = forwardRef<ListProps, "ul">((props, ref) => {
-  const [styles, mergedProps] = useComponentMultiStyle("List", props)
-  const {
-    className,
+export const List = withProvider(
+  ({
     children,
-    gap = 2,
     stylePosition: listStylePosition,
     styleType: listStyleType = "none",
     ...rest
-  } = omitThemeProps(mergedProps)
+  }) => {
+    const validChildren = getValidChildren(children)
 
-  const validChildren = getValidChildren(children)
-
-  return (
-    <ListProvider value={styles}>
+    return (
       <ui.ul
-        ref={ref}
-        className={cx("ui-list", className)}
         listStylePosition={listStylePosition}
         listStyleType={listStyleType}
         role="list"
-        __css={{
-          "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },
-          ...styles.container,
-          gap,
-          ms: listStyleType !== "none" ? "1.4em" : undefined,
-        }}
         {...rest}
       >
         {validChildren}
       </ui.ul>
-    </ListProvider>
-  )
-})
+    )
+  },
+  "root",
+  { transferProps: ["styleType"] },
+)()
 
-List.displayName = "List"
-List.__ui__ = "List"
+export const DiscList = (props: ListProps) => {
+  return <List as="ul" styleType="disc" {...props} />
+}
 
-export const DiscList = forwardRef<ListProps, "ul">(({ ...rest }, ref) => {
-  return <List ref={ref} as="ul" styleType="disc" {...rest} />
-})
-
-DiscList.displayName = "DiscList"
-DiscList.__ui__ = "DiscList"
-
-export const DecimalList = forwardRef<ListProps, "ol">(({ ...rest }, ref) => {
-  return <List ref={ref} as="ol" ms="1.2em" styleType="decimal" {...rest} />
-})
-
-DecimalList.displayName = "DecimalList"
-DecimalList.__ui__ = "DecimalList"
+export const DecimalList = (props: ListProps) => {
+  return <List as="ol" ms="1.2em" styleType="decimal" {...props} />
+}
 
 export interface ListItemProps extends HTMLUIProps<"li"> {
   icon?: ReactElement<any>
 }
 
-export const ListItem = forwardRef<ListItemProps, "li">(
-  ({ className, children, icon, ...rest }, ref) => {
-    const styles = useList()
-
-    const css = { ...styles.item }
+export const ListItem = withContext<"li", ListItemProps>(
+  ({ children, icon, ...rest }) => {
+    const styles = useStyleContext()
 
     const iconElement = icon
       ? cloneElement<any>(icon, {
           ...icon.props,
           className: cx("ui-list-item__icon", icon.props.className),
+          style: styles.icon,
           role: "presentation",
-          __css: styles.icon,
         })
       : null
 
     return (
-      <ui.li
-        ref={ref}
-        className={cx("ui-list-item", className)}
-        __css={css}
-        {...rest}
-      >
+      <ui.li {...rest}>
         {iconElement}
         {children}
       </ui.li>
     )
   },
-)
-
-ListItem.displayName = "ListItem"
-ListItem.__ui__ = "ListItem"
+  "item",
+)()

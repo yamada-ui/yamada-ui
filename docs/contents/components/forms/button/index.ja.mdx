@@ -251,23 +251,23 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ### 無効にする
 
-無効にする場合は、`isDisabled`を`true`にします。
+無効にする場合は、`disabled`を`true`にします。
 
 ```tsx
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" isDisabled>
+  <Button colorScheme="primary" variant="solid" disabled>
     Solid
   </Button>
-  <Button colorScheme="secondary" variant="outline" isDisabled>
+  <Button colorScheme="secondary" variant="outline" disabled>
     Outline
   </Button>
-  <Button colorScheme="warning" variant="ghost" isDisabled>
+  <Button colorScheme="warning" variant="ghost" disabled>
     Ghost
   </Button>
-  <Button colorScheme="danger" variant="link" isDisabled>
+  <Button colorScheme="danger" variant="link" disabled>
     Link
   </Button>
-  <Button variant="unstyled" isDisabled>
+  <Button variant="unstyled" disabled>
     Unstyle
   </Button>
 </Wrap>
@@ -300,27 +300,27 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ### ローディングアニメーションを使う
 
-ローディングアニメーションを使う場合は、`isLoading`を`true`にします。また、ローディング中にテキストを変更したい場合は、`loadingText`を使用します。
+ローディングアニメーションを使う場合は、`loading`を`true`にします。また、ローディング中にテキストを変更したい場合は、`loadingText`を使用します。
 
 ```tsx
 <Wrap gap="md">
-  <Button isLoading colorScheme="primary">
+  <Button loading colorScheme="primary">
     Button
   </Button>
-  <Button isLoading colorScheme="secondary" loadingIcon="dots">
+  <Button loading colorScheme="secondary" loadingIcon="dots">
     Button
   </Button>
-  <Button isLoading colorScheme="warning" variant="outline">
+  <Button loading colorScheme="warning" variant="outline">
     Button
   </Button>
-  <Button isLoading colorScheme="danger" variant="ghost">
+  <Button loading colorScheme="danger" variant="ghost">
     Button
   </Button>
-  <Button isLoading loadingText="Loading..." colorScheme="primary">
+  <Button loading loadingText="Loading..." colorScheme="primary">
     Button
   </Button>
   <Button
-    isLoading
+    loading
     loadingText="Loading..."
     loadingPlacement="end"
     loadingIcon="grid"
@@ -338,7 +338,7 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ### グループ化する
 
-ボタンをグループ化する場合は、`ButtonGroup`を使用します。`ButtonGroup`は、子要素(`Button`)の`variant`, `size`, `colorScheme`, `isDisabled`を一括で設定できます。
+ボタンをグループ化する場合は、`ButtonGroup`を使用します。`ButtonGroup`は、子要素(`Button`)の`variant`, `size`, `colorScheme`, `disabled`を一括で設定できます。
 
 ```tsx
 <VStack>
@@ -354,7 +354,7 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
       <Button>Button</Button>
     </ButtonGroup>
 
-    <ButtonGroup isAttached isDisabled variant="outline">
+    <ButtonGroup isAttached disabled variant="outline">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>

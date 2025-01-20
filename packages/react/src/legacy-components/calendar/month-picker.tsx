@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import type { MotionProps } from "../../components/motion"
 import type { PortalProps } from "../../components/portal"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
 import type { UseMonthPickerProps } from "./use-month-picker"
 import { Popover, PopoverContent } from "../../components/popover"
@@ -111,24 +111,21 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useMonthPicker(computedProps)
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <DatePickerProvider value={styles}>
       <Popover {...getPopoverProps()}>
         <ui.div
           className={cx("ui-month-picker", className)}
-          __css={css}
+          __css={{
+            color,
+            ...styles.container,
+          }}
           {...getContainerProps(containerProps)}
         >
           <ui.div
             className="ui-month-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
+            __css={{ ...styles.inner }}
           >
             <DatePickerField
               className="ui-month-picker__field"

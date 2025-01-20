@@ -16,7 +16,6 @@ export const SEMANTIC_COLOR_SCHEMES = [
 
 export const DEFAULT_COLOR_SCHEMES = [
   "gray",
-  "neutral",
   "red",
   "rose",
   "pink",

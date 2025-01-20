@@ -57,18 +57,12 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   const { getContainerProps, getControlProps, getLabelProps } =
     useCalendarHeader({ index })
 
-  const css: CSSUIObject = {
-    alignItems: "center",
-    display: "flex",
-    w: "100%",
-    ...styles.header,
-  }
   const { icon: iconOrProps, ...computedLabelProps } = labelProps ?? {}
 
   return withHeader ? (
     <ui.div
       className={cx("ui-calendar__header", className)}
-      __css={css}
+      __css={styles.header}
       {...getContainerProps(rest)}
     >
       {withControls ? (
@@ -115,20 +109,11 @@ export interface CalendarLabelProps extends ButtonProps {}
 const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
   const { styles } = useCalendarContext()
 
-  const css: CSSUIObject = {
-    flex: 1,
-    fontSize: undefined,
-    fontWeight: "normal",
-    gap: 1,
-    h: "auto",
-    ...styles.label,
-  }
-
   return (
     <Button
       className={cx("ui-calendar__header__label", className)}
       variant="ghost"
-      __css={css}
+      __css={styles.label}
       {...rest}
     />
   )
@@ -209,18 +194,14 @@ const CalendarControl: FC<CalendarControlProps> = ({
 }) => {
   const { styles } = useCalendarContext()
 
-  const css: CSSUIObject = {
-    h: "auto",
-    minW: "auto",
-    ...styles.control,
-    ...styles[operation],
-  }
-
   return (
     <IconButton
       className={cx("ui-calendar__header__control", className)}
       variant="ghost"
-      __css={css}
+      __css={{
+        ...styles.control,
+        ...styles[operation],
+      }}
       {...rest}
     />
   )

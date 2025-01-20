@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { useMemo } from "react"
-import { Card } from "../card"
+import { For } from "."
+import { Card } from "../../components/card"
+import { BoxIcon } from "../../components/icon"
+import { VStack } from "../../components/stack"
+import { Text } from "../../components/text"
 import { EmptyState } from "../empty-state"
-import { BoxIcon } from "../icon"
-import { VStack } from "../stack"
-import { Text } from "../text"
-import { For } from "./"
 
 type Story = StoryFn<typeof For>
 

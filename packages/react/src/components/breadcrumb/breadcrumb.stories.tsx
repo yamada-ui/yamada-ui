@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { BreadcrumbItem } from "./"
 import { useMemo } from "react"
-import { For } from "../for"
+import { For } from "../../components/for"
 import { ChevronsRightIcon } from "../icon"
 import { Menu, MenuButton, MenuItem, MenuList } from "../menu"
 import { Breadcrumb } from "./"

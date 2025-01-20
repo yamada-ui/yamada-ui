@@ -2,9 +2,9 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { BadgeProps } from "./badge"
 import { useMemo } from "react"
 import { PropsTable } from "../../../storybook/components"
+import { For } from "../../components/for"
 import { COLOR_SCHEMES } from "../../utils"
 import { Wrap } from "../flex"
-import { For } from "../for"
 import { Badge, BadgePropsContext } from "./badge"
 
 type Story = StoryFn<typeof Badge>

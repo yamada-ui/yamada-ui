@@ -1,7 +1,7 @@
 import type { ReactNode, RefAttributes } from "react"
 import type { MotionProps } from "../../components/motion"
 import type { PortalProps } from "../../components/portal"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { UseDatePickerProps } from "./use-date-picker"
 import { cloneElement, useRef } from "react"
 import { CalendarIcon, XIcon } from "../../components/icon"
@@ -121,25 +121,19 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useDatePicker(computedProps)
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <DatePickerProvider value={styles}>
       <Popover {...getPopoverProps()}>
         <ui.div
           className={cx("ui-date-picker", className)}
-          __css={css}
+          __css={{
+            color,
+            ...styles.container,
+          }}
           {...getContainerProps(containerProps)}
         >
-          <ui.div
-            className="ui-date-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
-          >
+          <ui.div className="ui-date-picker__inner" __css={styles.inner}>
             <DatePickerField
               {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
@@ -193,18 +187,11 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
     const styles = useDatePickerContext()
     const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     return (
       <PopoverTrigger>
         <ui.div
           className={cx("ui-date-picker__field", className)}
-          __css={css}
+          __css={styles.field}
           {...rest}
         >
           <ui.input
@@ -230,19 +217,6 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {
     const styles = useDatePickerContext()
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      cursor: "pointer",
-      display: "inline-flex",
-      justifyContent: "center",
-      pointerEvents: "none",
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      ...styles.icon,
-      ...__css,
-    }
-
     const validChildren = getValidChildren(children)
 
     const cloneChildren = validChildren.map((child) =>
@@ -261,7 +235,10 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-date-picker__icon", className)}
-        __css={css}
+        __css={{
+          ...styles.icon,
+          ...__css,
+        }}
         {...rest}
       >
         {isValidElement(children) ? cloneChildren : <CalendarIcon />}

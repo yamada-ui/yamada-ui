@@ -342,7 +342,7 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <ButtonGroup isAttached variant="outline">
+  <ButtonGroup attached variant="outline">
     <Button>Button</Button>
     <IconButton icon={<PlusIcon />} />
   </ButtonGroup>
@@ -354,7 +354,7 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
       <Button>Button</Button>
     </ButtonGroup>
 
-    <ButtonGroup isAttached disabled variant="outline">
+    <ButtonGroup attached disabled variant="outline">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>
@@ -362,13 +362,13 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
   </Wrap>
 
   <Wrap gap="md">
-    <ButtonGroup direction="column" gap="sm">
+    <ButtonGroup flexDirection="column" gap="sm">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>
     </ButtonGroup>
 
-    <ButtonGroup direction="column" isAttached variant="outline">
+    <ButtonGroup flexDirection="column" attached variant="outline">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>

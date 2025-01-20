@@ -1,5 +1,6 @@
 {
   "name": "yamada-ui",
+  "type": "module",
   "version": "2.0.0",
   "private": true,
   "engines": {
@@ -56,7 +57,7 @@
     "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "gen:styles": "tsx scripts/generate-styles && eslint packages/react/src/core/styles.ts --fix --flag unstable_ts_config",
-    "gen:tokens": "yamada-cli tokens packages/theme/src/index.ts --out packages/core/src/generated-theme.types.ts && eslint packages/core/src/generated-theme.types.ts --fix --flag unstable_ts_config",
+    "gen:tokens": "yamada-cli tokens packages/react/src/theme/index.ts --internal --out packages/react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix --flag unstable_ts_config",
     "gen:icons": "tsx scripts/generate-icons && eslint packages/react/src/components/icon/icons/index.ts packages/react/src/components/icon/icons/index.types.ts --fix --flag unstable_ts_config",
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog",

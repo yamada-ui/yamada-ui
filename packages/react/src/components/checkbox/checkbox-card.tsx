@@ -153,7 +153,7 @@ export const CheckboxCard = forwardRef(
       __css: {
         opacity: checked ? 1 : 0,
         transform: checked ? "scale(1)" : "scale(0.95)",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "transform",
       },
     })

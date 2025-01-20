@@ -122,7 +122,7 @@ export const Checkbox = forwardRef(
       __css: {
         opacity: checked || indeterminate ? 1 : 0,
         transform: checked || indeterminate ? "scale(1)" : "scale(0.95)",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "transform",
       },
     })

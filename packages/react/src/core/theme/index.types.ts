@@ -1,8 +1,9 @@
 import type { HTMLMotionProps, MotionConfigProps, Variants } from "motion/react"
 import type { ReactNode, RefAttributes, RefObject } from "react"
-import type { PortalProps } from "../components/portal"
-import type { Dict, StringLiteral, Union } from "../utils"
-import type { HTMLUIProps } from "./components"
+import type { PortalProps } from "../../components/portal"
+import type { DefaultTheme } from "../../theme"
+import type { Dict, StringLiteral, Union } from "../../utils"
+import type { HTMLUIProps } from "../components"
 import type {
   AnimationStyle,
   CreateBreakpointsReturn,
@@ -13,9 +14,8 @@ import type {
   CSSProps,
   CSSSlotObject,
   UIValue,
-} from "./css"
-import type { GeneratedTheme } from "./generated-theme.types"
-import type { UITheme } from "./ui-theme.types"
+} from "../css"
+import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
 
 export type LayerScheme =
   | "base"
@@ -421,7 +421,7 @@ export interface ThemeConfig {
    *
    * @default 'base'
    */
-  initialThemeScheme?: Theme["themeSchemes"]
+  initialThemeScheme?: ThemeTokens["themeSchemes"]
   /**
    * The config of the loading.
    */
@@ -597,105 +597,112 @@ export type WithoutThemeProps<
     ? Omit<Y, keyof Y extends D ? M | ThemeProp : Exclude<M | ThemeProp, D>>
     : never
 
-export type ThemeValue = number | string
+export type DefineThemeValue = number | string
 
-export interface ThemeTokens {
-  [key: ThemeValue]:
-    | [Dict<ThemeValue> | ThemeValue, Dict<ThemeValue> | ThemeValue]
-    | ThemeTokens
-    | ThemeValue
+export interface DefineThemeTokens {
+  [key: DefineThemeValue]:
+    | [
+        DefineThemeValue | Dict<DefineThemeValue>,
+        DefineThemeValue | Dict<DefineThemeValue>,
+      ]
+    | DefineThemeTokens
+    | DefineThemeValue
 }
 
-export interface ThemeAnimationTokens<
+export interface DefineThemeKeyframeTokens {
+  [key: DefineThemeValue]:
+    | [
+        CSSModifierObject | Dict<CSSModifierObject>,
+        CSSModifierObject | Dict<CSSModifierObject>,
+      ]
+    | CSSModifierObject
+    | Dict<CSSModifierObject>
+}
+
+export interface DefineThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
 > {
-  [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
+  [key: DefineThemeValue]: DefineThemeAnimationTokens<T> | T | T[]
 }
 
-export interface ThemeTransitionTokens {
-  duration?: ThemeTokens
-  easing?: ThemeTokens
-  property?: ThemeTokens
+export interface DefineThemeBreakpointTokens {
+  [key: DefineThemeValue]: DefineThemeValue
 }
 
-export interface ThemeBreakpointTokens {
-  [key: ThemeValue]: ThemeValue
+export type DefineThemeColorSchemeValue =
+  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | Dict
+  | ThemeTokens["colorSchemes"]
+
+export interface DefineThemeColorSchemeSemanticTokens {
+  [key: string]: DefineThemeColorSchemeValue
 }
 
-export type SemanticColorSchemeValue =
-  | [Theme["colorSchemes"], Theme["colorSchemes"]]
-  | Theme["colorSchemes"]
+export type DefineThemeColorSemanticValue =
+  | [ThemeTokens["colors"], ThemeTokens["colors"]]
+  | ThemeTokens["colors"]
 
-export interface SemanticColorSchemes {
-  [key: string]: SemanticColorSchemeValue
-}
-
-export type SemanticColorValue =
-  | [Theme["colors"], Theme["colors"]]
-  | Theme["colors"]
-
-export interface SemanticColor {
+export interface DefineThemeColorSemanticToken {
   [key: string]: any
-  contrast?: SemanticColorValue
-  default?: SemanticColorValue
-  emphasized?: SemanticColorValue
-  fg?: SemanticColorValue
-  ghost?: SemanticColorValue
-  muted?: SemanticColorValue
-  outline?: SemanticColorValue
-  solid?: SemanticColorValue
-  subtle?: SemanticColorValue
+  base?: DefineThemeColorSemanticValue
+  contrast?: DefineThemeColorSemanticValue
+  default?: DefineThemeColorSemanticValue
+  emphasized?: DefineThemeColorSemanticValue
+  fg?: DefineThemeColorSemanticValue
+  ghost?: DefineThemeColorSemanticValue
+  muted?: DefineThemeColorSemanticValue
+  outline?: DefineThemeColorSemanticValue
+  solid?: DefineThemeColorSemanticValue
+  subtle?: DefineThemeColorSemanticValue
 }
 
-export interface SemanticColors {
-  [key: string]: Dict | SemanticColor | SemanticColorValue
+export interface DefineThemeColorSemanticTokens {
+  [key: string]:
+    | DefineThemeColorSemanticToken
+    | DefineThemeColorSemanticValue
+    | Dict
 }
 
-export interface ThemeSemanticTokens
+export interface DefineThemeSemanticTokens
   extends Omit<
-    BaseTheme,
+    DefineTheme,
     | "animations"
     | "breakpoints"
     | "colors"
-    | "components"
-    | "semantics"
+    | "semanticTokens"
     | "styles"
     | "themeSchemes"
-  > {}
-
-export interface ThemeSemantics extends ThemeSemanticTokens {
-  animations?: ThemeAnimationTokens<AnimationStyle | string>
-  colors?: SemanticColors
-  colorSchemes?: SemanticColorSchemes
+  > {
+  animations?: DefineThemeAnimationTokens<AnimationStyle | string>
+  colors?: DefineThemeColorSemanticTokens
+  colorSchemes?: DefineThemeColorSchemeSemanticTokens
 }
 
-export interface NestedTheme
-  extends Omit<
-    BaseTheme,
-    "breakpoints" | "components" | "styles" | "themeSchemes"
-  > {}
-
-export interface ThemeSchemes {
-  [key: string]: NestedTheme
+export interface DefineThemeSchemeTokens {
+  [key: string]: Omit<DefineTheme, "themeSchemes">
 }
 
-interface BaseTheme {
-  animations?: ThemeAnimationTokens
-  blurs?: ThemeTokens
-  borders?: ThemeTokens
-  breakpoints?: ThemeBreakpointTokens
-  colors?: ThemeTokens
-  fonts?: ThemeTokens
-  fontSizes?: ThemeTokens
-  fontWeights?: ThemeTokens
-  gradients?: ThemeTokens
-  letterSpacings?: ThemeTokens
-  lineHeights?: ThemeTokens
-  radii?: ThemeTokens
-  semantics?: ThemeSemantics
-  shadows?: ThemeTokens
-  sizes?: ThemeTokens
-  spaces?: ThemeTokens
+interface DefineTheme {
+  animations?: DefineThemeAnimationTokens
+  aspectRatios?: DefineThemeTokens
+  blurs?: DefineThemeTokens
+  borders?: DefineThemeTokens
+  breakpoints?: DefineThemeBreakpointTokens
+  colors?: DefineThemeTokens
+  durations?: DefineThemeTokens
+  easings?: DefineThemeTokens
+  fonts?: DefineThemeTokens
+  fontSizes?: DefineThemeTokens
+  fontWeights?: DefineThemeTokens
+  gradients?: DefineThemeTokens
+  keyframes?: DefineThemeKeyframeTokens
+  letterSpacings?: DefineThemeTokens
+  lineHeights?: DefineThemeTokens
+  radii?: DefineThemeTokens
+  semanticTokens?: DefineThemeSemanticTokens
+  shadows?: DefineThemeTokens
+  sizes?: DefineThemeTokens
+  spaces?: DefineThemeTokens
   styles?: {
     [key: string]: any
     globalStyle?: CSSObject
@@ -703,20 +710,46 @@ interface BaseTheme {
     resetStyle?: CSSObject
     textStyles?: CSSModifierObject
   }
-  themeSchemes?: ThemeSchemes
-  transitions?: ThemeTransitionTokens
-  zIndices?: ThemeTokens
+  themeSchemes?: DefineThemeSchemeTokens
+  zIndices?: DefineThemeTokens
 }
 
-export interface UsageTheme extends BaseTheme {
+export interface UsageTheme extends DefineTheme {
   [key: string]: any
 }
 
-export type Breakpoint = "base" | Theme["breakpoints"]
+export interface UsageThemeTokens {
+  animations: string
+  aspectRatios: string
+  blurs: string
+  borders: string
+  breakpoints: string
+  colors: string
+  colorSchemes: string
+  durations: string
+  easings: string
+  fonts: string
+  fontSizes: string
+  fontWeights: string
+  gradients: string
+  keyframes: string
+  layerStyles: string
+  letterSpacings: string
+  lineHeights: string
+  radii: string
+  shadows: string
+  sizes: string
+  spaces: string
+  textStyles: string
+  themeSchemes: string
+  zIndices: string
+}
+
+export type Breakpoint = "base" | ThemeTokens["breakpoints"]
 
 export type ColorScheme =
-  | [Theme["colorSchemes"], Theme["colorSchemes"]]
-  | Theme["colorSchemes"]
+  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | ThemeTokens["colorSchemes"]
 
 export interface ComponentDefaultProps<
   Y extends Dict = Dict,
@@ -820,23 +853,25 @@ export interface CSSMap {
 
 export interface CustomTheme {}
 
-export interface CustomInternalTheme {}
+export interface CustomThemeTokens {}
 
-export type InternalTheme =
-  CustomInternalTheme extends Required<UsageTheme>
-    ? CustomInternalTheme
-    : UsageTheme
+export type Theme =
+  CustomTheme extends Required<UsageTheme> ? CustomTheme : DefaultTheme
 
-export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
+export type ThemeTokens = CustomThemeTokens extends UsageThemeTokens
+  ? CustomThemeTokens
+  : GeneratedThemeTokens
 
-export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
+export type ChangeThemeScheme = (
+  themeScheme: ThemeTokens["themeSchemes"],
+) => void
 
-export type StyledTheme<T extends InternalTheme = InternalTheme> = {
+export type StyledTheme<Y extends UsageTheme = Theme> = {
   changeThemeScheme: ChangeThemeScheme
-  themeScheme: Theme["themeSchemes"]
+  themeScheme: ThemeTokens["themeSchemes"]
   __breakpoints?: CreateBreakpointsReturn
   __config?: ThemeConfig
   __cssMap?: CSSMap
   __cssVars?: Dict
   __layers?: CreateLayersReturn
-} & T
+} & Y

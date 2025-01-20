@@ -36,7 +36,7 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       outline: 0,
       position: "absolute",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "transform",
       zIndex: "yamcha",
       _disabled: {

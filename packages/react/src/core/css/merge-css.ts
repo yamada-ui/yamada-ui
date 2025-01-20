@@ -1,4 +1,4 @@
-import type { CSSObject } from "./css.types"
+import type { CSSObject } from "./index.types"
 import { toArray } from "@yamada-ui/utils"
 
 export const mergeCSS = (

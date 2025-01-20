@@ -1,14 +1,11 @@
-import type { CSSObject, Keyframes } from "@emotion/react"
 import type { Dict } from "../../utils"
 import type { ColorMode, CSSFunction } from "../css"
-import type { ThemeToken } from "../theme"
-import type { StyledTheme } from "../theme.types"
-import { keyframes as emotionKeyframes } from "@emotion/react"
+import type { StyledTheme, ThemeToken, UsageTheme } from "../theme"
 import { isObject, isString, isUndefined } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../css"
 
 export interface TransformOptions {
-  theme: StyledTheme
+  theme: StyledTheme<UsageTheme>
   css?: CSSFunction
   prev?: Dict
   properties?: string | string[]
@@ -88,7 +85,7 @@ export function analyzeCSSValue(value: any) {
 }
 
 export function tokenToVar(token: ThemeToken, value: any) {
-  return function (theme: StyledTheme) {
+  return function (theme: StyledTheme<UsageTheme>) {
     if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
     const resolvedToken = `${token}.${value}`
@@ -105,10 +102,6 @@ export function mode<L, D>(light: L, dark: D) {
   return function (colorMode: ColorMode | undefined = "light"): D | L {
     return colorMode === "light" ? light : dark
   }
-}
-
-export function keyframes(...arg: CSSObject[]): Keyframes {
-  return emotionKeyframes(...arg)
 }
 
 function combineFunctions(a: Transform, b: Transform): Transform {

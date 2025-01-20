@@ -1,6 +1,6 @@
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const spaces: ThemeTokens = {
+export const spaces = defineTokens.spaces({
   0.5: "0.125rem",
   1: "0.25rem",
   1.5: "0.375rem",
@@ -46,4 +46,4 @@ export const spaces: ThemeTokens = {
   92: "23rem",
   96: "24rem",
   px: "1px",
-}
+})

@@ -25,14 +25,9 @@ export const transformProps: TransformProps = {
 
   animation: tokens.animations,
 
+  keyframes: ["keyframes"],
+
   bgClip: ["backgroundClip"],
-
-  transform: ["transform"],
-
-  filter: [
-    { args: [], properties: "filter" },
-    { args: ["backdrop"], properties: "backdropFilter" },
-  ],
 
   content: ["&::before", "&::after"],
 
@@ -44,7 +39,7 @@ export const transformProps: TransformProps = {
 
   vars: ["vars"],
 
-  isTruncated: ["isTruncated"],
+  truncated: ["truncated"],
 
   colorScheme: ["colorScheme"],
 
@@ -84,7 +79,16 @@ export const transformProps: TransformProps = {
     "strokeWidth",
   ],
 
-  deg: ["rotate", "skewX", "skewY", "hueRotate", "backdropHueRotate"],
+  deg: [
+    "rotate",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "skewX",
+    "skewY",
+    "hueRotate",
+    "backdropHueRotate",
+  ],
 
   function: [
     { args: ["blur"], properties: "blur" },
@@ -105,6 +109,17 @@ export const transformProps: TransformProps = {
     { args: ["invert"], properties: "backdropInvert" },
     { args: ["saturate"], properties: "backdropSaturate" },
     { args: ["sepia"], properties: "backdropSepia" },
+    { args: ["skewX"], properties: "skewX" },
+    { args: ["skewY"], properties: "skewY" },
+    { args: ["rotateX"], properties: "rotateX" },
+    { args: ["rotateY"], properties: "rotateY" },
+    { args: ["rotateZ"], properties: "rotateZ" },
+    { args: ["scaleX"], properties: "scaleX" },
+    { args: ["scaleY"], properties: "scaleY" },
+    { args: ["scaleZ"], properties: "scaleZ" },
+    { args: ["translateX"], properties: "translateX" },
+    { args: ["translateY"], properties: "translateY" },
+    { args: ["translateZ"], properties: "translateZ" },
   ],
 
   grid: [
@@ -136,6 +151,46 @@ export const transformProps: TransformProps = {
       args: ["fontSizes"],
       properties,
     })) ?? []),
+  ],
+
+  transform: [
+    "skewX",
+    "skewY",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "scaleX",
+    "scaleY",
+    "scaleZ",
+    "translateX",
+    "translateY",
+    "translateZ",
+  ],
+
+  filter: [
+    { args: [], properties: "blur" },
+    { args: [], properties: "brightness" },
+    { args: [], properties: "contrast" },
+    { args: [], properties: "dropShadow" },
+    { args: [], properties: "grayscale" },
+    { args: [], properties: "hueRotate" },
+    { args: [], properties: "invert" },
+    { args: [], properties: "saturate" },
+    { args: [], properties: "sepia" },
+    { args: ["backdropFilter"], properties: "backdropBlur" },
+    { args: ["backdropFilter"], properties: "backdropBrightness" },
+    { args: ["backdropFilter"], properties: "backdropContrast" },
+    { args: ["backdropFilter"], properties: "backdropDropShadow" },
+    { args: ["backdropFilter"], properties: "backdropGrayscale" },
+    { args: ["backdropFilter"], properties: "backdropHueRotate" },
+    { args: ["backdropFilter"], properties: "backdropInvert" },
+    { args: ["backdropFilter"], properties: "backdropSaturate" },
+    { args: ["backdropFilter"], properties: "backdropSepia" },
+  ],
+
+  transition: [
+    { args: [], properties: "transition" },
+    { args: ["property"], properties: "transitionProperty" },
   ],
 }
 

@@ -1,6 +1,5 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
-import { useComponentStyle } from "../../core"
+import type { HTMLUIProps } from "../../core"
 import { isArray } from "../../utils"
 
 interface ForOptions<T> {
@@ -20,7 +19,6 @@ interface ForOptions<T> {
 
 export interface ForProps<T>
   extends Omit<HTMLUIProps, "children">,
-    ThemeProps<"For">,
     ForOptions<T> {}
 
 /**
@@ -29,9 +27,11 @@ export interface ForProps<T>
  * @see Docs https://yamada-ui.com/components/other/for
  */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
-export const For = <T extends unknown>(props: ForProps<T>): ReactNode => {
-  const [, { children, each, fallback }] = useComponentStyle("For", props)
-
+export const For = <T extends unknown>({
+  children,
+  each,
+  fallback,
+}: ForProps<T>): ReactNode => {
   if (!each || !isArray(each) || !each.length) return fallback || null
 
   return each.map(children)

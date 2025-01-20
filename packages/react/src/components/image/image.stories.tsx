@@ -19,14 +19,3 @@ export const Basic: Story = () => {
     />
   )
 }
-
-export const WithFallback: Story = () => {
-  return (
-    <Image
-      src="https://not-found.com/not-found.png"
-      alt="Not found"
-      boxSize="xl"
-      fallback="https://via.placeholder.com/512"
-    />
-  )
-}

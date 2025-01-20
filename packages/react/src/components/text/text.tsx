@@ -1,56 +1,50 @@
-import type { CSSUIProps, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx, filterUndefined } from "../../utils"
+import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { TextStyle } from "./text.style"
+import { createComponent } from "../../core"
+import { textStyle } from "./text.style"
 
 interface TextOptions {
   /**
    * The CSS `text-align` property.
    */
-  align?: CSSUIProps["textAlign"]
+  align?: CSSProps["textAlign"]
   /**
    * The CSS `text-transform` property.
    */
-  casing?: CSSUIProps["textTransform"]
+  casing?: CSSProps["textTransform"]
   /**
    * The CSS `text-decoration` property.
    */
-  decoration?: CSSUIProps["textDecoration"]
+  decoration?: CSSProps["textDecoration"]
 }
 
 export interface TextProps
   extends HTMLUIProps<"p">,
-    ThemeProps<"Text">,
+    ThemeProps<TextStyle>,
     TextOptions {}
+
+export const {
+  PropsContext: TextPropsContext,
+  usePropsContext: useTextPropsContext,
+  withContext,
+} = createComponent<TextProps, TextStyle>("text", textStyle)
 
 /**
  * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.
  *
  * @see Docs https://yamada-ui.com/components/typography/text
  */
-export const Text: FC<TextProps> = (props) => {
-  const [css, mergedProps] = useComponentStyle("Text", props)
-  const {
-    className,
+export const Text = withContext("p")(
+  undefined,
+  ({
     align: textAlign,
     casing: textTransform,
     decoration: textDecoration,
     ...rest
-  } = omitThemeProps(mergedProps)
-
-  const textProps = filterUndefined({
+  }) => ({
     textAlign,
     textDecoration,
     textTransform,
-  })
-
-  return (
-    <ui.p
-      className={cx("ui-text", className)}
-      __css={css}
-      {...textProps}
-      {...rest}
-    />
-  )
-}
-
-Text.__ui__ = "Text"
+    ...rest,
+  }),
+)

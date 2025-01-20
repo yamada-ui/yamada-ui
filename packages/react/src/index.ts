@@ -3,7 +3,6 @@
  */
 export * from "./core"
 export * from "./theme"
-export * from "./tools"
 export * from "./utils"
 
 /**
@@ -28,6 +27,7 @@ export * from "./components/charts"
 export * from "./components/checkbox"
 export * from "./components/close-button"
 export * from "./components/code"
+export * from "./components/collapse"
 export * from "./components/color-picker"
 export * from "./components/container"
 export * from "./components/data-list"

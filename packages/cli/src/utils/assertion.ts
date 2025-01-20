@@ -2,31 +2,70 @@ export interface Dict<T = any> {
   [key: string]: T
 }
 
-export const isNumber = (value: any): value is number =>
-  typeof value === "number"
+export function is(x: any, y: any) {
+  return (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
+}
 
-export const isNotNumber = (value: any): boolean =>
-  typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
+export function isNumber(value: any): value is number {
+  return typeof value === "number"
+}
 
-export const isNumeric = (value: any): boolean =>
-  value != null &&
-  parseFloat(value.toString()) - parseFloat(value.toString()) + 1 >= 0
+export function isNotNumber(value: any): boolean {
+  return (
+    typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
+  )
+}
 
-export const isString = (value: any): value is string =>
-  Object.prototype.toString.call(value) === "[object String]"
+export function isNumeric(value: any): boolean {
+  return (
+    !isNaN(parseFloat(String(value))) &&
+    isFinite(Number(value)) &&
+    /^-?\d*\.?\d+$/.test(String(value))
+  )
+}
 
-export const isUndefined = (value: any): value is undefined =>
-  typeof value === "undefined"
+export function isString(value: any): value is string {
+  return Object.prototype.toString.call(value) === "[object String]"
+}
 
-export const isNull = (value: any): value is null => value === null
+export function isBooleanish(value: any): value is boolean {
+  return isBoolean(value) || value === "true" || value === "false"
+}
 
-export const isObject = <T extends Dict>(obj: any): obj is T =>
-  obj !== null &&
-  (typeof obj === "object" || typeof obj === "function") &&
-  !isArray(obj)
+export function isBoolean(value: any): value is boolean {
+  return typeof value === "boolean"
+}
 
-export const isArray = <T>(value: any): value is T[] => Array.isArray(value)
+export function isUndefined(value: any): value is undefined {
+  return typeof value === "undefined"
+}
 
-export const isFunction = <T extends Function = Function>(
+export function isNull(value: any): value is null {
+  return value === null
+}
+
+export function isObject<T extends Dict>(value: any): value is T {
+  return (
+    value !== null &&
+    (typeof value === "object" || typeof value === "function") &&
+    !isArray(value)
+  )
+}
+
+export function isArray<T extends any[]>(value: any): value is T {
+  return Array.isArray(value)
+}
+
+export function isEmpty(value: any): boolean {
+  return !isArray(value) || !value.length || value.every((v) => v == null)
+}
+
+export function isEmptyObject(value: any): boolean {
+  return isObject(value) && !Object.keys(value).length
+}
+
+export function isFunction<T extends Function = Function>(
   value: any,
-): value is T => typeof value === "function"
+): value is T {
+  return typeof value === "function"
+}

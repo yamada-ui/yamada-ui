@@ -1,8 +1,11 @@
-import type { FC, Token } from "../../core"
+import type { ThemeProps, Token, WithoutThemeProps } from "../../core"
 import type { GridProps } from "./grid"
+import type { SimpleGridStyle } from "./simple-grid.style"
 import { useMemo } from "react"
+import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 import { Grid } from "./grid"
+import { simpleGridStyle } from "./simple-grid.style"
 
 interface SimpleGridOptions {
   /**
@@ -17,34 +20,41 @@ interface SimpleGridOptions {
 }
 
 export interface SimpleGridProps
-  extends Omit<GridProps, "columns">,
+  extends WithoutThemeProps<GridProps, "columns">,
+    ThemeProps<SimpleGridStyle>,
     SimpleGridOptions {}
+
+export const {
+  PropsContext: SimpleGridPropsContext,
+  usePropsContext: useSimpleGridPropsContext,
+  withContext,
+} = createComponent<SimpleGridProps, SimpleGridStyle>(
+  "simple-grid",
+  simpleGridStyle,
+)
 
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
  *
  * @see Docs https://yamada-ui.com/components/layouts/simple-grid
  */
-export const SimpleGrid: FC<SimpleGridProps> = ({
-  columns,
-  minChildWidth,
-  ...rest
-}) => {
-  const templateColumns = useMemo(() => {
-    if (minChildWidth) {
-      return replaceObject(minChildWidth, (value) => {
-        return value != null
-          ? `repeat(auto-fit, minmax($sizes.${value}, 1fr))`
-          : undefined
-      })
-    } else {
-      return replaceObject(columns, (value) =>
-        value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
-      )
-    }
-  }, [minChildWidth, columns])
+export const SimpleGrid = withContext(Grid)(
+  undefined,
+  ({ columns, minChildWidth, ...rest }) => {
+    const templateColumns = useMemo(() => {
+      if (minChildWidth) {
+        return replaceObject(minChildWidth, (value) => {
+          return value != null
+            ? `repeat(auto-fit, minmax({sizes.${value}}, 1fr))`
+            : undefined
+        })
+      } else {
+        return replaceObject(columns, (value) =>
+          value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
+        )
+      }
+    }, [minChildWidth, columns])
 
-  return <Grid templateColumns={templateColumns} {...rest} />
-}
-
-SimpleGrid.__ui__ = "SimpleGrid"
+    return { templateColumns, ...rest }
+  },
+)

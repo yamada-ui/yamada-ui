@@ -1,46 +1,37 @@
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { useMemo } from "react"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { ContainerStyle } from "./container.style"
+import { createSlotComponent } from "../../core"
+import { containerStyle } from "./container.style"
 
-interface ContainerOptions {
-  /**
-   * If `true`, container will center its children regardless of their width.
-   *
-   * @default false
-   */
-  centerContent?: boolean
-}
-
-export interface ContainerProps
+export interface ContainerRootProps
   extends HTMLUIProps<"section">,
-    ThemeProps<"Container">,
-    ContainerOptions {}
+    ThemeProps<ContainerStyle> {}
+
+export const {
+  PropsContext: ContainerPropsContext,
+  usePropsContext: useContainerPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<ContainerRootProps, ContainerStyle>(
+  "container",
+  containerStyle,
+)
 
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.
  *
  * @see Docs https://yamada-ui.com/components/layouts/container
  */
-export const Container: FC<ContainerProps> = (props) => {
-  const [styles, mergedProps] = useComponentStyle("Container", props)
-  const { className, centerContent, ...rest } = omitThemeProps(mergedProps)
+export const ContainerRoot = withProvider("section", "root")()
 
-  const css: CSSUIObject = useMemo(
-    () => ({
-      alignItems: centerContent ? "center" : undefined,
-      ...styles,
-    }),
-    [centerContent, styles],
-  )
+export interface ContainerHeaderProps extends HTMLUIProps<"header"> {}
 
-  return (
-    <ui.section
-      className={cx("ui-container", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-}
+export const ContainerHeader = withContext("header", "header")()
 
-Container.__ui__ = "Container"
+export interface ContainerBodyProps extends HTMLUIProps {}
+
+export const ContainerBody = withContext("div", "body")()
+
+export interface ContainerFooterProps extends HTMLUIProps<"footer"> {}
+
+export const ContainerFooter = withContext("footer", "footer")()

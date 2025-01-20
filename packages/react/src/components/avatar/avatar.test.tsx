@@ -1,6 +1,6 @@
 import { image } from "@yamada-ui/test"
-import { act, render, screen } from "../../../test"
-import { Avatar, AvatarBadge } from "./"
+import { a11y, act, render, screen } from "../../../test"
+import { Avatar, AvatarGroup } from "./"
 
 describe("<Avatar />", () => {
   beforeEach(() => {
@@ -63,134 +63,64 @@ describe("<Avatar />", () => {
   })
 })
 
-describe("<AvatarBadge />", () => {
-  test("renders at specified placement top-start", async () => {
-    render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          aria-label="This is the avatar badge of Hirotomo Yamada."
-          bg="primary"
-          placement="top-start"
-        />
-      </Avatar>,
+describe("<AvatarGroup />", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <AvatarGroup>
+        <Avatar />
+      </AvatarGroup>,
+      {
+        axeOptions: {
+          rules: {
+            "svg-img-alt": { enabled: false },
+          },
+        },
+      },
     )
-
-    const avatarBadge = await screen.findByLabelText(
-      /This is the avatar badge of Hirotomo Yamada\./i,
-    )
-    expect(avatarBadge).toHaveStyle({
-      "inset-inline-start": "0px",
-      top: "0px",
-      transform: "translate(-25%, -25%)",
-    })
   })
 
-  test("renders at specified placement top-end", async () => {
+  test("renders a number avatar showing count of truncated avatars", () => {
     render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          aria-label="This is the avatar badge of Hirotomo Yamada."
-          bg="primary"
-          placement="top-end"
-        />
-      </Avatar>,
+      <AvatarGroup max={2}>
+        <Avatar />
+        <Avatar />
+        <Avatar />
+        <Avatar />
+        <Avatar />
+      </AvatarGroup>,
     )
-
-    const avatarBadge = await screen.findByLabelText(
-      /This is the avatar badge of Hirotomo Yamada\./i,
-    )
-    expect(avatarBadge).toHaveStyle({
-      "inset-inline-end": "0px",
-      top: "0px",
-      transform: "translate(25%, -25%)",
-    })
+    const moreLabel = screen.getByText("+3")
+    expect(moreLabel).toBeInTheDocument()
   })
 
-  test("renders at specified placement bottom-start", async () => {
-    render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          aria-label="This is the avatar badge of Hirotomo Yamada."
-          bg="primary"
-          placement="bottom-start"
-        />
-      </Avatar>,
+  test("does not render a number avatar showing count of truncated avatars if max is equal to avatars given", () => {
+    const { container } = render(
+      <AvatarGroup max={4}>
+        <Avatar />
+        <Avatar />
+        <Avatar />
+        <Avatar />
+      </AvatarGroup>,
     )
-    const avatarBadge = await screen.findByLabelText(
-      /This is the avatar badge of Hirotomo Yamada\./i,
-    )
-
-    expect(avatarBadge).toHaveStyle({
-      bottom: "0px",
-      "inset-inline-start": "0px",
-      transform: "translate(-25%, 25%)",
-    })
+    const moreLabel = container.querySelector(".ui-avatar__excess")
+    expect(moreLabel).not.toBeInTheDocument()
   })
 
-  test("renders at specified placement bottom-end", async () => {
-    render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          aria-label="This is the avatar badge of Hirotomo Yamada."
-          bg="primary"
-          placement="bottom-end"
-        />
-      </Avatar>,
+  test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", () => {
+    const { container } = render(
+      <AvatarGroup max={6}>
+        <Avatar />
+        <Avatar />
+        <Avatar />
+        <Avatar />
+      </AvatarGroup>,
     )
-    const avatarBadge = await screen.findByLabelText(
-      /This is the avatar badge of Hirotomo Yamada\./i,
-    )
-    expect(avatarBadge).toHaveStyle({
-      bottom: "0px",
-      "inset-inline-end": "0px",
-      transform: "translate(25%, 25%)",
-    })
-  })
-
-  test("renders with ping animation", async () => {
-    render(
-      <Avatar
-        name="Hirotomo Yamada"
-        src="https://avatars.githubusercontent.com/u/84060430?v=4"
-      >
-        <AvatarBadge
-          aria-label="This is the avatar badge of Hirotomo Yamada."
-          bg="primary"
-          ping
-          pingColor="rgb(255, 0, 0)"
-        />
-      </Avatar>,
-    )
-
-    const badge = await screen.findByLabelText(
-      /This is the avatar badge of Hirotomo Yamada\./i,
-    )
-
-    const pingEl = badge.querySelector(".ui-avatar__badge__ping")
-    expect(pingEl).toBeInTheDocument()
-
-    expect(pingEl).toHaveStyle({ background: "rgb(255, 0, 0)" })
-
-    const style = window.getComputedStyle(pingEl!)
-    expect(style.animation).toMatch(
-      /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
-    )
+    const moreLabel = container.querySelector(".ui-avatar__excess")
+    expect(moreLabel).not.toBeInTheDocument()
   })
 
   test("should have the correct displayName and __ui__", () => {
-    expect(Avatar.displayName).toBe("Avatar")
-    expect(Avatar.__ui__).toBe("Avatar")
+    expect(AvatarGroup.displayName).toBe("AvatarGroup")
+    expect(AvatarGroup.__ui__).toBe("AvatarGroup")
   })
 })

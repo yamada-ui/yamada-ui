@@ -1,6 +1,6 @@
 import type { MockInstance } from "vitest"
 import type { Dict } from "../../utils"
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme } from "../theme"
 import { transformTheme } from "../theme"
 import { css } from "./css"
 
@@ -134,10 +134,10 @@ const theme = transformTheme(
     },
   },
   {
+    css: { varPrefix: "ui" },
     breakpoint: { direction: "down" },
     initialColorMode: "light",
     initialThemeScheme: "base",
-    var: { prefix: "ui" },
   },
 ) as StyledTheme
 
@@ -229,21 +229,11 @@ describe("css", () => {
     })
   })
 
-  test("supports functional values", () => {
-    const result = css({
-      color: (t: Dict) => t.colors?.gray?.[500],
-    })(theme)
-
-    expect(result).toStrictEqual({
-      color: "#6b7280",
-    })
-  })
-
   test("returns omitted style prop", () => {
     const result = css({
       color: "gray.500",
       fontSize: "md",
-    })(theme, (prop) => prop === "color")
+    })(theme, ["color"])
 
     expect(result).toStrictEqual({
       fontSize: "var(--ui-fontSizes-md)",
@@ -322,8 +312,8 @@ describe("css", () => {
 
   test("returns interpolation", () => {
     const result = css({
-      m: "$yamada",
-      p: "$spaces.4 $spaces.4",
+      m: "{yamada}",
+      p: "{spaces.4} {spaces.4}",
     })(theme)
 
     expect(result).toStrictEqual({

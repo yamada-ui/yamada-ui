@@ -1,17 +1,49 @@
 import type { Dict } from "../../utils"
 import type { StyleConfig } from "../config"
 import type { PseudoProperty } from "../pseudos"
-import type { ProcessSkipProperty, StyleProperty } from "../styles"
-import type { StyledTheme } from "../theme.types"
-import type { BreakpointQueries } from "./breakpoint"
-import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+import type { StyleProperty, VariableLengthProperty } from "../styles"
+import type { StyledTheme, UsageTheme } from "../theme"
+import type { Breakpoints } from "./breakpoint"
+import type { CSSObjectOrFunc } from "./index.types"
 import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
-import { DEFAULT_VAR_PREFIX } from "../constant"
+import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
-import { processSkipProperties, styles } from "../styles"
+import { styles, variableLengthProperties } from "../styles"
+import {
+  getColorSchemeVar,
+  getVar,
+  isColorScheme,
+  transformInterpolation,
+} from "./var"
 
-function isProcessSkip(key: string): boolean {
-  return processSkipProperties.includes(key as ProcessSkipProperty)
+function isVariableLength(key: string): boolean {
+  return variableLengthProperties.includes(key as VariableLengthProperty)
+}
+
+function isImportant(value: any): boolean {
+  return isString(value) && /\s*!important\s*/g.test(value)
+}
+
+function omitImportant(value: any): string {
+  return isString(value) ? value.replace(/\s*!important\s*/g, "") : value
+}
+
+function insertImportant(value: any, style?: StyleConfig): any {
+  if (isString(value)) {
+    return value + " !important"
+  } else if (isObject(value)) {
+    if (!style?.properties) return value
+
+    if (isArray(style.properties)) {
+      for (const property of style.properties) {
+        value[property] += " !important"
+      }
+    } else {
+      value[style.properties] += " !important"
+    }
+  }
+
+  return value
 }
 
 function isAdditionalObject(obj: Dict) {
@@ -35,12 +67,12 @@ function isAdditionalObject(obj: Dict) {
 function expandColorModeArray(
   key: string,
   value: any[],
-  queries: BreakpointQueries,
+  breakpoints: Breakpoints,
 ): Dict {
   let computedCSS: Dict = {}
 
-  if (isObject(value[0])) {
-    computedCSS = expandResponsiveObject(key, value[0], queries)
+  if (breakpoints.isResponsive(value[0])) {
+    computedCSS = expandResponsiveObject(key, value[0], breakpoints)
   } else {
     computedCSS[key] = value[0]
   }
@@ -53,15 +85,18 @@ function expandColorModeArray(
 function expandResponsiveObject(
   key: string,
   value: Dict,
-  queries: BreakpointQueries,
+  breakpoints: Breakpoints,
 ): Dict {
-  return queries.reduce<Dict>((prev, { breakpoint, query }) => {
+  return breakpoints.queries.reduce<Dict>((prev, { breakpoint, query }) => {
     const breakpointValue = value[breakpoint]
 
     if (query) {
       if (breakpointValue) prev[query] = { [key]: breakpointValue }
     } else if (isArray(breakpointValue)) {
-      prev = merge(prev, expandColorModeArray(key, breakpointValue, queries))
+      prev = merge(
+        prev,
+        expandColorModeArray(key, breakpointValue, breakpoints),
+      )
     } else {
       prev[key] = breakpointValue
     }
@@ -73,26 +108,27 @@ function expandResponsiveObject(
 function expandAdditionalObject(
   key: string,
   value: Dict,
-  queries: BreakpointQueries,
+  breakpoints: Breakpoints,
 ) {
   return Object.entries(value).reduce<Dict>((prev, [query, value]) => {
     if (query === "base") {
       if (isArray(value)) {
-        prev = merge(prev, expandColorModeArray(key, value, queries))
+        prev = merge(prev, expandColorModeArray(key, value, breakpoints))
       } else {
         prev[key] = value
       }
     } else {
       query =
-        queries.find(({ breakpoint }) => breakpoint === query)?.query ?? query
+        breakpoints.queries.find(({ breakpoint }) => breakpoint === query)
+          ?.query ?? query
 
       if (isObject(value)) {
         prev = merge(prev, {
-          [query]: expandResponsiveObject(key, value, queries),
+          [query]: expandResponsiveObject(key, value, breakpoints),
         })
       } else if (isArray(value)) {
         prev = merge(prev, {
-          [query]: expandColorModeArray(key, value, queries),
+          [query]: expandColorModeArray(key, value, breakpoints),
         })
       } else {
         prev[query] = { [key]: value }
@@ -104,10 +140,10 @@ function expandAdditionalObject(
 }
 
 function expandCSS(css: Dict) {
-  return function (theme: StyledTheme): Dict {
+  return function (theme: StyledTheme<UsageTheme>): Dict {
     if (!theme.__breakpoints) return css
 
-    const { isResponsive, keys, queries } = theme.__breakpoints
+    const { isResponsive, keys } = theme.__breakpoints
 
     let computedCSS: Dict = {}
 
@@ -116,32 +152,32 @@ function expandCSS(css: Dict) {
 
       if (value == null) continue
 
-      if (isArray(value) && !isProcessSkip(key)) {
+      if (!isVariableLength(key) && isArray(value)) {
         computedCSS = merge(
           computedCSS,
-          expandColorModeArray(key, value, queries),
+          expandColorModeArray(key, value, theme.__breakpoints),
         )
 
         continue
       }
 
-      if (isObject(value) && isResponsive(value) && !isProcessSkip(key)) {
+      if (!isVariableLength(key) && isObject(value) && isResponsive(value)) {
         computedCSS = merge(
           computedCSS,
-          expandResponsiveObject(key, value, queries),
+          expandResponsiveObject(key, value, theme.__breakpoints),
         )
 
         continue
       }
 
       if (
+        !isVariableLength(key) &&
         isObject(value) &&
-        isAdditionalObject(value)(keys) &&
-        !isProcessSkip(key)
+        isAdditionalObject(value)(keys)
       ) {
         computedCSS = merge(
           computedCSS,
-          expandAdditionalObject(key, value, queries),
+          expandAdditionalObject(key, value, theme.__breakpoints),
         )
 
         continue
@@ -154,42 +190,38 @@ function expandCSS(css: Dict) {
   }
 }
 
-function valueToVar(value: any, theme: StyledTheme) {
-  if (isArray(value) || isObject(value)) {
-    return value
-  } else if (isString(value)) {
-    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
+function valueToVar(value: any, theme: StyledTheme<UsageTheme>) {
+  return transformInterpolation(value, (value) => {
+    if (value.includes("colors.") || value.includes("colorScheme.")) {
+      if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
-    return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
-      if (isObject(theme.__cssMap) && value in theme.__cssMap) {
-        if (theme.__cssMap[value]?.ref) return theme.__cssMap[value].ref
-      }
+      return colorMix(value, { theme })
+    } else {
+      if (
+        isObject(theme.__cssMap) &&
+        value in theme.__cssMap &&
+        theme.__cssMap[value]?.ref
+      )
+        return theme.__cssMap[value].ref
 
-      return `var(--${prefix}-${value})`
-    })
-  } else {
-    return value
-  }
+      return getVar(value)(theme)
+    }
+  })
 }
 
-export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
-  return function (
-    theme: StyledTheme,
-    disableStyleProp?: (prop: string) => boolean,
-  ) {
-    function createCSS(
-      cssOrFunc: CSSObjectOrFunc | CSSUIObject,
-      isNested = false,
-    ): Dict {
+export function css(cssOrFunc: CSSObjectOrFunc) {
+  return function (theme: StyledTheme<UsageTheme>, forwardProps?: string[]) {
+    function createCSS(cssOrFunc: CSSObjectOrFunc, nested = false): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
 
-      for (let [prop, value] of Object.entries(computedCSS)) {
-        if (disableStyleProp?.(prop)) continue
+      // console.log(computedCSS)
 
-        value = runIfFunc(value, theme)
+      for (let [prop, value] of Object.entries(computedCSS)) {
+        if (forwardProps?.includes(prop)) continue
+
         value = valueToVar(value, theme)
 
         if (value == null) continue
@@ -203,8 +235,14 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
         if (style === true) style = { properties: prop }
 
-        if (isObject(value) && !style?.isProcessSkip) {
-          value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+        if (isObject(value) && !style?.processSkip) {
+          value =
+            style?.transform?.(value, {
+              css,
+              prev: resolvedCSS,
+              properties: style.properties,
+              theme,
+            }) ?? value
 
           resolvedCSS[prop] = resolvedCSS[prop] ?? {}
           resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
@@ -212,22 +250,29 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
           continue
         }
 
-        value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+        const important = isImportant(value)
 
-        if (style?.isProcessResult || style?.isProcessSkip)
+        value = omitImportant(value)
+
+        value =
+          style?.transform?.(value, {
+            css,
+            prev: resolvedCSS,
+            properties: style.properties,
+            theme,
+          }) ?? value
+
+        if (important) value = insertImportant(value, style)
+
+        if (style?.processResult || style?.processSkip)
           value = createCSS(value, true)
 
-        if (!isNested && style?.static) {
-          const staticStyles = runIfFunc(style.static, theme)
+        if (!nested && style?.static)
+          resolvedCSS = merge(resolvedCSS, style.static)
 
-          resolvedCSS = merge(resolvedCSS, staticStyles)
-        }
-
-        const properties = runIfFunc(style?.properties, theme)
-
-        if (properties) {
-          if (isArray(properties)) {
-            for (const property of properties) {
+        if (style?.properties) {
+          if (isArray(style.properties)) {
+            for (const property of style.properties) {
               resolvedCSS[property] = value
             }
 
@@ -237,7 +282,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
 
             continue
           } else {
-            resolvedCSS[properties] = value
+            resolvedCSS[style.properties] = value
 
             continue
           }

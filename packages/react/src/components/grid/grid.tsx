@@ -1,84 +1,85 @@
-import type { CSSUIObject, CSSUIProps, FC, HTMLUIProps } from "../../core"
-import { ui } from "../../core"
+import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { GridStyle } from "./grid.style"
+import { createComponent } from "../../core"
+import { gridStyle } from "./grid.style"
 
 interface GridOptions {
   /**
    * The CSS `grid-area` property.
    */
-  area?: CSSUIProps["gridArea"]
+  area?: CSSProps["gridArea"]
   /**
    * The CSS `grid-auto-columns` property.
    */
-  autoColumns?: CSSUIProps["gridAutoColumns"]
+  autoColumns?: CSSProps["gridAutoColumns"]
   /**
    * The CSS `grid-auto-flow` property.
    */
-  autoFlow?: CSSUIProps["gridAutoFlow"]
+  autoFlow?: CSSProps["gridAutoFlow"]
   /**
    * The CSS `grid-auto-rows` property.
    */
-  autoRows?: CSSUIProps["gridAutoRows"]
+  autoRows?: CSSProps["gridAutoRows"]
   /**
    * The CSS `grid-column` property.
    */
-  column?: CSSUIProps["gridColumn"]
+  column?: CSSProps["gridColumn"]
   /**
    * The CSS `grid-row` property.
    */
-  row?: CSSUIProps["gridRow"]
+  row?: CSSProps["gridRow"]
   /**
    * The CSS `grid-template-areas` property.
    */
-  templateAreas?: CSSUIProps["gridTemplateAreas"]
+  templateAreas?: CSSProps["gridTemplateAreas"]
   /**
    * The CSS `grid-template-columns` property.
    */
-  templateColumns?: CSSUIProps["gridTemplateColumns"]
+  templateColumns?: CSSProps["gridTemplateColumns"]
   /**
    * The CSS `grid-template-rows` property.
    */
-  templateRows?: CSSUIProps["gridTemplateRows"]
+  templateRows?: CSSProps["gridTemplateRows"]
 }
 
-export interface GridProps extends HTMLUIProps, GridOptions {}
+export interface GridProps
+  extends HTMLUIProps,
+    ThemeProps<GridStyle>,
+    GridOptions {}
+
+export const {
+  PropsContext: GridPropsContext,
+  usePropsContext: useGridPropsContext,
+  withContext,
+} = createComponent<GridProps, GridStyle>("grid", gridStyle)
 
 /**
  * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.
  *
  * @see Docs https://yamada-ui.com/components/layouts/grid
  */
-export const Grid: FC<GridProps> = ({
-  area: gridArea,
-  autoColumns: gridAutoColumns,
-  autoFlow: gridAutoFlow,
-  autoRows: gridAutoRows,
-  column: gridColumn,
-  columnGap,
-  gap,
-  row: gridRow,
-  rowGap,
-  templateAreas: gridTemplateAreas,
-  templateColumns: gridTemplateColumns,
-  templateRows: gridTemplateRows,
-  ...rest
-}) => {
-  const css: CSSUIObject = {
-    columnGap,
+export const Grid = withContext("div")(
+  undefined,
+  ({
+    area: gridArea,
+    autoColumns: gridAutoColumns,
+    autoFlow: gridAutoFlow,
+    autoRows: gridAutoRows,
+    column: gridColumn,
+    templateAreas: gridTemplateAreas,
+    templateColumns: gridTemplateColumns,
+    templateRows: gridTemplateRows,
+    ...rest
+  }) => ({
     display: "grid",
-    gap,
     gridArea,
     gridAutoColumns,
     gridAutoFlow,
     gridAutoRows,
     gridColumn,
-    gridRow,
     gridTemplateAreas,
     gridTemplateColumns,
     gridTemplateRows,
-    rowGap,
-  }
-
-  return <ui.div __css={css} {...rest} />
-}
-
-Grid.__ui__ = "Grid"
+    ...rest,
+  }),
+)

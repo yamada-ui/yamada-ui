@@ -115,7 +115,7 @@ export interface MotionTransitionProps {
   transitionEnd?: MotionLifecycleProps<Target>
 }
 
-export type WithTransitionProps<Y extends object> = {
+export type WithTransitionProps<Y extends object = {}> = {
   /**
    * Show the component. triggers when enter or exit states.
    */

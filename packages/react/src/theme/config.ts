@@ -1,8 +1,14 @@
-import type { ThemeConfig } from "../core"
+import { defineConfig } from "../core"
 
-export const config: ThemeConfig = {
+/**
+ * The default config of Yamada UI.
+ *
+ * @see Docs https://yamada-ui.com/styled-system/configure/default-config
+ */
+export const config = defineConfig({
+  css: { varPrefix: "ui" },
   breakpoint: { direction: "down", identifier: "@media screen" },
   initialColorMode: "light",
   initialThemeScheme: "base",
-  var: { prefix: "ui" },
-}
+  theme: { responsive: true },
+})

@@ -1,15 +1,20 @@
 import type { Key } from "react"
-import type { CSSUIObject, FC } from "../../core"
+import type { FC, ThemeProps } from "../../core"
 import type { MotionProps } from "../motion"
+import type { RippleStyle } from "./ripple.style"
 import type { RippleOptions } from "./use-ripple"
 import { AnimatePresence } from "motion/react"
-import { cx, handlerAll } from "../../utils"
+import { createComponent } from "../../core"
+import { handlerAll } from "../../utils"
 import { motion } from "../motion"
+import { rippleStyle } from "./ripple.style"
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
-export interface RippleProps extends MotionProps<"span"> {
+export interface RippleProps
+  extends MotionProps<"span">,
+    ThemeProps<RippleStyle> {
   ripples: RippleOptions[]
   onClear: (key: Key) => void
   /**
@@ -18,74 +23,63 @@ export interface RippleProps extends MotionProps<"span"> {
    * @default false
    */
   disabled?: boolean
-  /**
-   * If `true`, disable ripple effects when pressing a element.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
 }
+
+export const {
+  PropsContext: RipplePropsContext,
+  usePropsContext: useRipplePropsContext,
+  withContext,
+} = createComponent<RippleProps, RippleStyle>("ripple", rippleStyle)
 
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.
  *
  * @see Docs https://yamada-ui.com/components/other/ripple
  */
-export const Ripple: FC<RippleProps> = ({
-  className,
-  style,
-  color = "currentColor",
-  isDisabled,
-  disabled = isDisabled,
-  ripples,
-  onAnimationComplete,
-  onClear,
-  ...rest
-}) => {
-  if (disabled) return null
+export const Ripple: FC<RippleProps> = withContext(
+  ({
+    style,
+    color = "currentColor",
+    disabled,
+    ripples,
+    onAnimationComplete,
+    onClear,
+    ...rest
+  }) => {
+    if (disabled) return null
 
-  const css: CSSUIObject = {
-    rounded: "fallback(full, 9999px)",
-    zIndex: "fallback(kurillin, 9)",
-  }
+    return (
+      <>
+        {ripples.map(({ key, size, x, y }) => {
+          const duration = clamp(0.01 * size, 0.2, size > 100 ? 0.75 : 0.5)
 
-  return (
-    <>
-      {ripples.map(({ key, size, x, y }) => {
-        const duration = clamp(0.01 * size, 0.2, size > 100 ? 0.75 : 0.5)
-
-        return (
-          <AnimatePresence key={key} mode="popLayout">
-            <motion.span
-              className={cx("ui-ripple", className)}
-              style={{
-                height: `${size}px`,
-                left: x,
-                pointerEvents: "none",
-                position: "absolute",
-                top: y,
-                transformOrigin: "center",
-                width: `${size}px`,
-                ...style,
-              }}
-              animate={{ opacity: 0, transform: "scale(2)" }}
-              bgColor={color}
-              exit={{ opacity: 0 }}
-              initial={{ opacity: 0.35, transform: "scale(0)" }}
-              transition={{ duration }}
-              __css={css}
-              {...rest}
-              onAnimationComplete={handlerAll(onAnimationComplete, () =>
-                onClear(key),
-              )}
-            />
-          </AnimatePresence>
-        )
-      })}
-    </>
-  )
-}
-
-Ripple.__ui__ = "Ripple"
+          return (
+            <AnimatePresence key={key} mode="popLayout">
+              <motion.span
+                style={{
+                  height: `${size}px`,
+                  left: x,
+                  pointerEvents: "none",
+                  position: "absolute",
+                  top: y,
+                  transformOrigin: "center",
+                  width: `${size}px`,
+                  ...style,
+                }}
+                animate={{ opacity: 0, transform: "scale(2)" }}
+                bgColor={color}
+                exit={{ opacity: 0 }}
+                initial={{ opacity: 0.35, transform: "scale(0)" }}
+                transition={{ duration }}
+                {...rest}
+                onAnimationComplete={handlerAll(onAnimationComplete, () =>
+                  onClear(key),
+                )}
+              />
+            </AnimatePresence>
+          )
+        })}
+      </>
+    )
+  },
+)()

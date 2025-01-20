@@ -1,10 +1,15 @@
-import type { ColorMode, StyledTheme, Theme } from "../../core"
+import type {
+  ColorMode,
+  StyledTheme,
+  ThemeTokens,
+  UsageTheme,
+} from "../../core"
 import { useMemo } from "react"
 import { useColorMode } from "../../providers/color-mode-provider"
 import { useTheme } from "../../providers/theme-provider"
 import { getMemoizedObject as get, isArray, isUndefined } from "../../utils"
 
-type OmittedTheme = Omit<Theme, "colorSchemes" | "components" | "themeSchemes">
+type OmittedTheme = Omit<ThemeTokens, "colorSchemes" | "themeSchemes">
 
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
@@ -16,7 +21,7 @@ export const useToken = <
   M extends keyof OmittedTheme = keyof OmittedTheme,
 >(
   name: M,
-  path: number | Theme[M] | undefined,
+  path: number | ThemeTokens[M] | undefined,
 ) => {
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
@@ -33,18 +38,11 @@ export const getToken =
     M extends keyof OmittedTheme = keyof OmittedTheme,
   >(
     name: M,
-    path: number | Theme[M] | undefined,
+    path: number | ThemeTokens[M] | undefined,
   ) =>
-  (theme: StyledTheme, colorMode: ColorMode) => {
+  (theme: StyledTheme<UsageTheme>, colorMode: ColorMode) => {
     if (name === "layerStyles") name = "styles.layerStyles" as M
-
     if (name === "textStyles") name = "styles.textStyles" as M
-
-    if (name === "transitionProperty") name = "transitions.property" as M
-
-    if (name === "transitionDuration") name = "transitions.duration" as M
-
-    if (name === "transitionEasing") name = "transitions.easing" as M
 
     let value = get<[Y, Y] | undefined | Y>(theme, `${name}.${path}`)
 

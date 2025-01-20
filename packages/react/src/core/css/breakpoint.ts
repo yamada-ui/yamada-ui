@@ -2,9 +2,9 @@ import type { Dict } from "../../utils"
 import type {
   BreakpointDirection,
   BreakpointOptions,
-  ThemeBreakpointTokens,
-} from "../theme.types"
-import { getPx } from "../../utils"
+  DefineThemeBreakpointTokens,
+} from "../theme"
+import { getPx, isObject } from "../../utils"
 
 interface BreakpointQuery {
   breakpoint: string
@@ -19,7 +19,8 @@ interface BreakpointQuery {
 export type BreakpointQueries = BreakpointQuery[]
 
 export interface Breakpoints {
-  isResponsive: (obj: Dict, strict?: boolean) => boolean
+  getQuery: (key: string) => string | undefined
+  isResponsive: (obj: any, strict?: boolean) => boolean
   keys: string[]
   queries: BreakpointQueries
 }
@@ -99,8 +100,8 @@ function transformBreakpoints(
   )
 }
 
-export function analyzeBreakpoints(
-  breakpoints: ThemeBreakpointTokens | undefined,
+export function createBreakpoints(
+  breakpoints: DefineThemeBreakpointTokens | undefined,
   options: BreakpointOptions = {},
 ): Breakpoints | undefined {
   if (!breakpoints) return
@@ -116,7 +117,9 @@ export function analyzeBreakpoints(
 
   const queries = createQueries(breakpoints, options)
 
-  const isResponsive = (obj: Dict, strict = false) => {
+  function isResponsive(obj: any, strict = false) {
+    if (!isObject(obj)) return false
+
     const providedKeys = Object.keys(obj)
 
     if (!providedKeys.length) return false
@@ -126,14 +129,19 @@ export function analyzeBreakpoints(
     return providedKeys.every((key) => keys.includes(key))
   }
 
+  function getQuery(key: string) {
+    return queries.find(({ breakpoint }) => breakpoint === key)?.query
+  }
+
   return {
+    getQuery,
     isResponsive,
     keys,
     queries,
   }
 }
 
-export type AnalyzeBreakpointsReturn = ReturnType<typeof analyzeBreakpoints>
+export type CreateBreakpointsReturn = ReturnType<typeof createBreakpoints>
 
 export function getMinMaxQuery(
   queries: BreakpointQueries,

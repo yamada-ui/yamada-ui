@@ -1,17 +1,19 @@
-import type { CSSObject, Keyframes } from "@emotion/react"
 import type { Dict } from "../../utils"
 import type { ColorMode, CSSFunction } from "../css"
-import type { ThemeToken } from "../theme"
-import type { StyledTheme } from "../theme.types"
-import { keyframes as emotionKeyframes } from "@emotion/react"
+import type { StyledTheme, ThemeToken, UsageTheme } from "../theme"
 import { isObject, isString, isUndefined } from "../../utils"
+import { getColorSchemeVar, isColorScheme } from "../css"
 
-export type Transform = (
-  value: any,
-  theme: StyledTheme,
-  css: CSSFunction,
-  prev?: Dict,
-) => any
+export interface TransformOptions {
+  theme: StyledTheme<UsageTheme>
+  css?: CSSFunction
+  prev?: Dict
+  properties?: string | string[]
+}
+
+export interface Transform {
+  (value: any, options: TransformOptions): any
+}
 
 export const globalValues = new Set([
   "-moz-initial",
@@ -79,25 +81,19 @@ export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
-  return { isUnitless: !unit, unit, value }
+  return { unit, unitless: !unit, value }
 }
 
 export function tokenToVar(token: ThemeToken, value: any) {
-  return function (theme: StyledTheme) {
-    const match = isString(value)
-      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
-      : null
-
-    const [, resolvedValue, fallbackValue] = match ?? []
-
-    if (resolvedValue) value = resolvedValue
+  return function (theme: StyledTheme<UsageTheme>) {
+    if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
       return theme.__cssMap[resolvedToken]?.ref
     } else {
-      return fallbackValue ?? value
+      return value
     }
   }
 }
@@ -106,10 +102,6 @@ export function mode<L, D>(light: L, dark: D) {
   return function (colorMode: ColorMode | undefined = "light"): D | L {
     return colorMode === "light" ? light : dark
   }
-}
-
-export function keyframes(...arg: CSSObject[]): Keyframes {
-  return emotionKeyframes(...arg)
 }
 
 function combineFunctions(a: Transform, b: Transform): Transform {

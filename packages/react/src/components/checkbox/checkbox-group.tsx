@@ -60,8 +60,18 @@ export const CheckboxGroup = forwardRef(
       getContainerProps,
       onChange,
     } = useCheckboxGroup<Y>(props)
-    const { disabled, invalid, labelId, readOnly, required, ...rest } =
-      useFormControl(computedProps)
+    const {
+      disabled,
+      invalid,
+      isDisabled: _isDisabled,
+      isInvalid: _isInvalid,
+      isReadOnly: _isReadOnly,
+      isRequired: _isRequired,
+      labelId,
+      readOnly,
+      required,
+      ...rest
+    } = useFormControl(computedProps)
 
     const validChildren = getValidChildren(children)
     let computedChildren: ReactElement[] = []

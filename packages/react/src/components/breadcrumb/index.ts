@@ -1,15 +1,21 @@
 export {
-  Breadcrumb,
   BreadcrumbEllipsis,
-  BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
+  BreadcrumbRoot,
 } from "./breadcrumb"
 export type {
   BreadcrumbEllipsisProps,
-  BreadcrumbGenerateItem,
-  BreadcrumbItemProps,
   BreadcrumbLinkProps,
-  BreadcrumbProps,
-  BreadcrumbSeparatorProps,
+  BreadcrumbRootProps,
 } from "./breadcrumb"
+
+export * from "./breadcrumb.style"
+
+export { useBreadcrumb } from "./use-breadcrumb"
+export type {
+  BreadcrumbItem,
+  UseBreadcrumbProps,
+  UseBreadcrumbReturn,
+} from "./use-breadcrumb"
+
+export * as Breadcrumb from "./namespace"

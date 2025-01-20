@@ -13,7 +13,7 @@ const meta: Meta<typeof Box> = {
 export default meta
 
 export const Basic: Story = () => {
-  const { onPointerDown, ...rippleProps } = useRipple()
+  const { onClick, ...rippleProps } = useRipple()
 
   return (
     <Box
@@ -25,7 +25,7 @@ export const Basic: Story = () => {
       p="md"
       position="relative"
       rounded="md"
-      onPointerDown={onPointerDown}
+      onClick={onClick}
     >
       <Text>Button</Text>
 
@@ -34,8 +34,8 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithIsDisabled: Story = () => {
-  const { onPointerDown, ...rippleProps } = useRipple()
+export const Disabled: Story = () => {
+  const { onClick, ...rippleProps } = useRipple()
 
   return (
     <Box
@@ -47,7 +47,7 @@ export const WithIsDisabled: Story = () => {
       p="md"
       position="relative"
       rounded="md"
-      onPointerDown={onPointerDown}
+      onClick={onClick}
     >
       <Text>Button</Text>
 

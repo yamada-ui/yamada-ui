@@ -1,12 +1,8 @@
-import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
-import type { StyledTheme } from "../theme.types"
-import {
-  getCSSFunction,
-  globalValues,
-  isCSSFunction,
-  splitValues,
-} from "./utils"
+import type { StyledTheme, UsageTheme } from "../theme"
+import type { TransformOptions } from "./utils"
+import { isArray } from "@yamada-ui/utils"
+import { getColorSchemeVar, isColorScheme } from "../css"
+import { getCSSFunction, globalValues, splitValues, tokenToVar } from "./utils"
 
 const DEFAULT_METHOD = "in srgb"
 
@@ -24,36 +20,67 @@ const methods: { [key: string]: string } = {
   "xyz-d65": "in xyz-d65",
 }
 
-function getColor(value: string | undefined, theme: StyledTheme) {
+function getColor(value: string | undefined, theme: StyledTheme<UsageTheme>) {
   if (!value) return ""
 
   let [color, percent, ...rest] = value.split(" ").filter(Boolean)
 
   if (rest.length) return value
 
-  const token = `colors.${color}`
+  if (color?.startsWith("colors.")) color = color.replace("colors.", "")
 
-  color =
-    theme.__cssMap && token in theme.__cssMap
-      ? theme.__cssMap[token]?.ref
-      : color
+  if (isColorScheme(color)) {
+    color = getColorSchemeVar(color)(theme)
+  } else {
+    color = tokenToVar("colors", color)(theme)
+  }
 
   if (percent && !percent.endsWith("%")) percent = `${percent}%`
 
   return !percent ? color : `${color} ${percent}`
 }
 
-export function colorMix(
-  value: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
+function omitPercent(value?: string) {
+  if (value?.endsWith("%")) return value.split(" ")[0]
+
+  return value
+}
+
+function createVariable(
+  value: string,
+  fallbackValue?: string,
+  properties?: string | string[],
 ) {
+  if (!properties) return value
+
+  const key =
+    "--mix-" + (isArray(properties) ? properties.join("-") : properties)
+
+  const result = { [key]: value }
+
+  if (isArray(properties)) {
+    properties.forEach((property) => {
+      result[property] = fallbackValue
+        ? `var(${key}, ${fallbackValue})`
+        : `var(${key})`
+    })
+  } else {
+    result[properties] = fallbackValue
+      ? `var(${key}, ${fallbackValue})`
+      : `var(${key})`
+  }
+
+  return result
+}
+
+export function colorMix(value: any, { properties, theme }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
-  const prevent = isCSSFunction(value)
+  if (value.includes("/")) {
+    const [color, percent] = value.split("/")
 
-  if (!prevent) return value
+    value = `transparentize(${color}, ${percent})`
+  }
 
   const { type, values } = getCSSFunction(value)
 
@@ -73,11 +100,13 @@ export function colorMix(
       color1 = getColor(color1, theme)
       color2 = getColor(color2, theme)
 
-      return (
+      return createVariable(
         `color-mix(${method}` +
-        (color1 ? `, ${color1}` : "") +
-        (color2 ? `, ${color2}` : "") +
-        ")"
+          (color1 ? `, ${color1}` : "") +
+          (color2 ? `, ${color2}` : "") +
+          ")",
+        omitPercent(color1),
+        properties,
       )
     }
 
@@ -94,7 +123,11 @@ export function colorMix(
             ? "#fff"
             : "#000"
 
-      return `color-mix(${DEFAULT_METHOD}, ${color1}, ${color2})`
+      return createVariable(
+        `color-mix(${DEFAULT_METHOD}, ${color1}, ${color2})`,
+        omitPercent(color1),
+        properties,
+      )
     }
 
     case "tone": {
@@ -107,17 +140,20 @@ export function colorMix(
       let ratio = parseInt(tone) || 500
 
       if (ratio < 50 && 950 < ratio) ratio = 500
-
       if (ratio === 500) return color1
 
       const color2 = ratio < 500 ? "#fff" : "#000"
-
       const percent = `${100 - (Math.abs(ratio - 500) * 2) / 10}%`
 
-      return `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`
+      return createVariable(
+        `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`,
+        omitPercent(color1),
+        properties,
+      )
     }
 
-    default:
+    default: {
       return value
+    }
   }
 }

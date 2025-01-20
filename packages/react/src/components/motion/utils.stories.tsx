@@ -2,7 +2,8 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
 import { useBoolean } from "../../hooks/use-boolean"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../theme"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Center } from "../center"
@@ -45,7 +46,7 @@ export const ExitPresenceAnimation: Story = () => {
 }
 
 export const MotionConfig: Story = () => {
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     motion: { config: { transition: { duration: 2 } } },
   })
 

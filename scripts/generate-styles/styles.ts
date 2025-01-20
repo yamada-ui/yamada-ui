@@ -1,7 +1,7 @@
 import type { ThemeToken, Transforms } from "@yamada-ui/react"
 import type { CSSProperty, Properties } from "."
 import type { TransformOptions } from "./transform-props"
-import type { AtRuleConfig, StyleConfig } from "./ui-props"
+import type { StyleConfig } from "./ui-props"
 import {
   isArray,
   isString,
@@ -190,11 +190,11 @@ export const generateBaseline = (
 }
 
 export const generateFeaturesInfo = (
-  type: AtRuleConfig["type"],
+  type: StyleConfig["type"],
   features: CSSProperty["features"],
   prop: string,
 ) => {
-  if (!type || type.length === 0) return undefined
+  if (!type || !isArray(type)) return undefined
   if (!features) return undefined
   const result: string[] = []
 
@@ -324,7 +324,7 @@ export const generateStyles = async (
         static: css,
         variableLength,
       },
-    ]: [string, AtRuleConfig | StyleConfig],
+    ]: [string, StyleConfig],
     targetStyles: string[],
   ) => {
     if (variableLength) variableLengthProps.push(prop)
@@ -403,7 +403,7 @@ export const generateStyles = async (
   Object.entries<StyleConfig>(uiProps).forEach((entry) =>
     addStyles(entry, uiStyles),
   )
-  Object.entries<AtRuleConfig>(atRuleProps).forEach((entry) =>
+  Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
     addStyles(entry, atRuleStyles),
   )
 

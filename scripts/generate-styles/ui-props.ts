@@ -2,17 +2,13 @@ import type { EmotionCSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
-  type?: string
+  type?: string | string[]
   description?: string[]
   processResult?: boolean
   processSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
   static?: EmotionCSSObject
   variableLength?: boolean
-}
-
-export interface AtRuleConfig extends Omit<StyleConfig, "type"> {
-  type?: string[]
 }
 
 export const additionalProps = {
@@ -416,4 +412,4 @@ export const atRuleProps = {
     processSkip: true,
     variableLength: true,
   },
-} as const satisfies { [key: string]: AtRuleConfig }
+} as const satisfies { [key: string]: StyleConfig }

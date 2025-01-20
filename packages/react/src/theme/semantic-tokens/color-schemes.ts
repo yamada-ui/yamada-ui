@@ -5,7 +5,7 @@ export const colorSchemes = defineSemanticTokens.colorSchemes({
   info: "blue",
   link: "blue",
   mono: ["black", "white"],
-  primary: "mono",
+  primary: ["black", "white"],
   secondary: "gray",
   success: "green",
   warning: "orange",

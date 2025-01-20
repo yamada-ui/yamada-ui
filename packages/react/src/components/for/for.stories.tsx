@@ -5,7 +5,7 @@ import { Card } from "../../components/card"
 import { BoxIcon } from "../../components/icon"
 import { VStack } from "../../components/stack"
 import { Text } from "../../components/text"
-import { EmptyState } from "../empty-state"
+// import { EmptyState } from "../empty-state"
 
 type Story = StoryFn<typeof For>
 
@@ -47,18 +47,18 @@ export const Basic: Story = () => {
   )
 }
 
-export const FallBack: Story = () => {
-  return (
-    <For
-      each={[]}
-      fallback={
-        <EmptyState
-          description="There are no items to show"
-          indicator={<BoxIcon />}
-        />
-      }
-    >
-      {(item, index) => <Text key={index}>{item}</Text>}
-    </For>
-  )
-}
+// export const FallBack: Story = () => {
+//   return (
+//     <For
+//       each={[]}
+//       fallback={
+//         <EmptyState
+//           description="There are no items to show"
+//           indicator={<BoxIcon />}
+//         />
+//       }
+//     >
+//       {(item, index) => <Text key={index}>{item}</Text>}
+//     </For>
+//   )
+// }

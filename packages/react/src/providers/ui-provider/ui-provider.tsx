@@ -4,7 +4,7 @@ import type { Environment } from "../environment-provider"
 import type { ThemeProviderProps } from "../theme-provider"
 import { MotionConfig } from "motion/react"
 import { LoadingProvider } from "../../components/loading"
-import { NoticeProvider } from "../../components/notice"
+// import { NoticeProvider } from "../../components/notice"
 import { defaultTheme } from "../../theme"
 import { defaultConfig } from "../../theme"
 import { ColorModeProvider } from "../color-mode-provider"
@@ -85,7 +85,7 @@ export const UIProvider: FC<UIProviderProps> = ({
               <LoadingProvider {...config.loading}>
                 {children}
 
-                <NoticeProvider {...config.notice} />
+                {/* <NoticeProvider {...config.notice} /> */}
               </LoadingProvider>
             </MotionConfig>
           </ColorModeProvider>

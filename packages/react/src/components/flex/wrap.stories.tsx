@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { For } from "../../legacy-components/for"
+import { For } from "../../components/for"
 import { DEFAULT_COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
 import { Wrap } from "./"

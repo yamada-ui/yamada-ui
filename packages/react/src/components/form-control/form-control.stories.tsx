@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Input } from "../input"
+// import { Input } from "../input"
 import { Tag } from "../tag"
 import { FormControl } from "./"
 
@@ -26,7 +26,7 @@ export const WithHelperMessage: Story = () => {
       helperMessage="We'll never share your email."
       label="Email address"
     >
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -38,7 +38,7 @@ export const WithErrorMessage: Story = () => {
       invalid
       label="Email address"
     >
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -53,7 +53,7 @@ export const Replace: Story = () => {
         label="Email address"
         replace
       >
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
 
       <FormControl.Root
@@ -63,7 +63,7 @@ export const Replace: Story = () => {
         label="Email address"
         replace={false}
       >
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
     </>
   )
@@ -77,7 +77,7 @@ export const Required: Story = () => {
       label="Email address"
       required
     >
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -90,7 +90,7 @@ export const Disabled: Story = () => {
       helperMessage="We'll never share your email."
       label="Email address"
     >
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -103,7 +103,7 @@ export const Readonly: Story = () => {
       label="Email address"
       readOnly
     >
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -112,7 +112,7 @@ export const CustomFormControl: Story = () => {
   return (
     <FormControl.Root helperMessage="We'll never share your email.">
       <FormControl.Label color="primary">Email address</FormControl.Label>
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
     </FormControl.Root>
   )
 }
@@ -120,7 +120,7 @@ export const CustomFormControl: Story = () => {
 export const CustomHelperMessage: Story = () => {
   return (
     <FormControl.Root label="Email address">
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
       <FormControl.HelperMessage color="gray.300">
         We'll never share your email.
       </FormControl.HelperMessage>
@@ -131,7 +131,7 @@ export const CustomHelperMessage: Story = () => {
 export const CustomErrorMessage: Story = () => {
   return (
     <FormControl.Root invalid label="Email address">
-      <Input type="email" placeholder="your email address" />
+      {/* <Input type="email" placeholder="your email address" /> */}
       <FormControl.ErrorMessage color="gray.300">
         Email is required.
       </FormControl.ErrorMessage>
@@ -151,7 +151,7 @@ export const CustomRequiredIndicator: Story = () => {
           </Tag>
         }
       >
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
 
       <FormControl.Root required>
@@ -164,7 +164,7 @@ export const CustomRequiredIndicator: Story = () => {
         >
           Email address
         </FormControl.Label>
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
     </>
   )
@@ -181,7 +181,7 @@ export const CustomOptionalIndicator: Story = () => {
           </Tag>
         }
       >
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
 
       <FormControl.Root>
@@ -194,7 +194,7 @@ export const CustomOptionalIndicator: Story = () => {
         >
           Email address
         </FormControl.Label>
-        <Input type="email" placeholder="your email address" />
+        {/* <Input type="email" placeholder="your email address" /> */}
       </FormControl.Root>
     </>
   )

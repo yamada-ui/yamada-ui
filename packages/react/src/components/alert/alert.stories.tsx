@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { noop } from "../../utils"
 import { Box } from "../box"
 // import { CloseButton } from "../close-button"
 import { Alert } from "./"

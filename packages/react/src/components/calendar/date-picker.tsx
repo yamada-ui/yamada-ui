@@ -1,6 +1,5 @@
 import type { ReactNode, RefAttributes } from "react"
 import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import type { IconProps } from "../icon"
 import type { MotionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { UseDatePickerProps } from "./use-date-picker"
@@ -19,7 +18,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "../../utils"
-import { Icon, XIcon } from "../icon"
+import { CalendarIcon, XIcon } from "../icon"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover"
 import { Portal } from "../portal"
 import { Calendar } from "./calendar"
@@ -261,7 +260,7 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
         __css={css}
         {...rest}
       >
-        {isValidElement(children) ? cloneChildren : <DatePickerCalendarIcon />}
+        {isValidElement(children) ? cloneChildren : <CalendarIcon />}
       </ui.div>
     )
   },
@@ -269,29 +268,6 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
 
 DatePickerIcon.displayName = "DatePickerIcon"
 DatePickerIcon.__ui__ = "DatePickerIcon"
-
-export interface DatePickerCalendarIconProps extends IconProps {}
-
-export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
-  className,
-  ...rest
-}) => {
-  return (
-    <Icon
-      className={cx("ui-date-picker__icon__calendar", className)}
-      viewBox="0 0 24 24"
-      {...rest}
-    >
-      <path
-        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
-        fill="currentColor"
-      />
-    </Icon>
-  )
-}
-
-DatePickerCalendarIcon.displayName = "DatePickerCalendarIcon"
-DatePickerCalendarIcon.__ui__ = "DatePickerCalendarIcon"
 
 export interface DatePickerClearIconProps extends DatePickerIconProps {
   disabled?: boolean

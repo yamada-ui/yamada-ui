@@ -1,8 +1,36 @@
-export { Accordion } from "./accordion"
-export type { AccordionProps } from "./accordion"
-export { AccordionItem } from "./accordion-item"
-export type { AccordionItemProps } from "./accordion-item"
-export { AccordionLabel } from "./accordion-label"
-export type { AccordionLabelProps } from "./accordion-label"
-export { AccordionPanel } from "./accordion-panel"
-export type { AccordionPanelProps } from "./accordion-panel"
+export type {
+  AccordionButtonProps,
+  AccordionItemProps,
+  AccordionPanelProps,
+  AccordionRootProps,
+} from "./accordion"
+export {
+  AccordionButton,
+  AccordionContext,
+  AccordionItem,
+  AccordionPanel,
+  AccordionPropsContext,
+  AccordionRoot,
+  useAccordionContext,
+  useAccordionPropsContext,
+} from "./accordion"
+
+export * from "./accordion.style"
+
+export {
+  AccordionDescendantsContext,
+  AccordionItemContext,
+  useAccordion,
+  useAccordionDescendant,
+  useAccordionDescendants,
+  useAccordionItem,
+  useAccordionItemContext,
+} from "./use-accordion"
+export type {
+  UseAccordionItemProps,
+  UseAccordionItemReturn,
+  UseAccordionProps,
+  UseAccordionReturn,
+} from "./use-accordion"
+
+export * as Accordion from "./namespace"

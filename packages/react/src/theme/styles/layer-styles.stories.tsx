@@ -1,14 +1,15 @@
-import type { LayerStyles } from "../../core"
+import type { CSSModifierObject } from "../../core"
+import { defaultTheme } from ".."
 import { Center } from "../../components/center"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendTheme } from "../../tools"
+import { merge } from "../../utils"
 
 export default {
   title: "Theme / Layer Style",
 }
 
 export const Basic = () => {
-  const layerStyles: LayerStyles = {
+  const layerStyles: CSSModifierObject = {
     masterRoshi: {
       bg: "#FFF",
       border: "6px solid #000",
@@ -23,7 +24,6 @@ export const Basic = () => {
       _after: {
         bg: "#FF7F0B",
         boxSize: "3xs",
-        content: '""',
         left: "50%",
         position: "absolute",
         rounded: "md",
@@ -34,9 +34,7 @@ export const Basic = () => {
     },
   }
 
-  const theme = extendTheme({
-    styles: { layerStyles },
-  })()
+  const theme = merge(defaultTheme, { styles: { layerStyles } })
 
   return (
     <UIProvider theme={theme}>

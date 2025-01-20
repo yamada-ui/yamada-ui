@@ -1,18 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { SquareEqual } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SquareEqualIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const SquareEqualIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon
-    as={SquareEqual}
-    className={cx("ui-lucide-icon", className)}
-    {...rest}
-  />
-)
+export const SquareEqualIcon = component(Icon)({ as: SquareEqual })

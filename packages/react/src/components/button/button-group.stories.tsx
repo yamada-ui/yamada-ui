@@ -17,7 +17,7 @@ export const Basic: Story = () => {
     <>
       <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<PlusIcon />} />
+        <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">
@@ -32,13 +32,13 @@ export const Basic: Story = () => {
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup direction="column" gap="sm">
+      <ButtonGroup flexDirection="column" gap="sm">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" attached direction="column">
+      <ButtonGroup variant="outline" attached flexDirection="column">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

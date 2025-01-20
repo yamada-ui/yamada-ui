@@ -20,7 +20,7 @@ export const Basic = () => {
       color={color}
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"

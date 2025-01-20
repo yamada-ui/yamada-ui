@@ -1,12 +1,12 @@
-export { Image } from "./image"
-export { Image as Img } from "./image"
+export { Image, ImagePropsContext, useImagePropsContext } from "./image"
+export {
+  Image as Img,
+  ImagePropsContext as ImgPropsContext,
+  useImagePropsContext as useImgPropsContext,
+} from "./image"
 export type { ImageProps } from "./image"
 export type { ImageProps as ImgProps } from "./image"
-export { NativeImage } from "./native-image"
-export { NativeImage as NativeImg } from "./native-image"
-export type { NativeImageProps } from "./native-image"
-export type { NativeImageProps as NativeImgProps } from "./native-image"
 export { Picture, Source } from "./picture"
 export type { PictureProps, PictureSource, SourceProps } from "./picture"
-export { useImage } from "./use-image"
-export type { UseImageProps, UseImageReturn } from "./use-image"
+
+export * from "./image.style"

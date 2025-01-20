@@ -8,15 +8,15 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       flexDirection: orientation === "vertical" ? "row" : "column",
       w: "100%",
     }),
-    tab: ({ isFitted }) => ({
+    tab: ({ fitted }) => ({
       alignItems: "center",
       display: "flex",
-      flex: isFitted ? 1 : undefined,
+      flex: fitted ? 1 : undefined,
       justifyContent: "center",
       outline: "0",
       overflow: "hidden",
       position: "relative",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       whiteSpace: "nowrap",
       _disabled: {

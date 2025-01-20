@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Key, PointerEventHandler } from "react"
+import type { Key, MouseEventHandler } from "react"
 import { useCallback, useState } from "react"
 import { createId, handlerAll } from "../../utils"
 
@@ -12,23 +12,18 @@ export interface RippleOptions {
 
 export interface UseRippleProps<T = HTMLElement> {
   disabled?: boolean
-  /**
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  onPointerDown?: PointerEventHandler<T>
+  onClick?: MouseEventHandler<T>
 }
 
 export const useRipple = <T = HTMLElement>({
-  isDisabled,
-  disabled = isDisabled,
+  disabled,
   ...rest
 }: UseRippleProps<T> = {}) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
-  const onPointerDown: PointerEventHandler<T> = useCallback(
+  const onClick: MouseEventHandler<T> = useCallback(
     (ev) => {
-      if (disabled) return setRipples([])
+      if (disabled) return
 
       const trigger = ev.currentTarget as unknown as Element
 
@@ -55,7 +50,7 @@ export const useRipple = <T = HTMLElement>({
   return {
     ripples,
     onClear,
-    onPointerDown: handlerAll(onPointerDown, rest.onPointerDown),
+    onClick: handlerAll(onClick, rest.onClick),
   }
 }
 

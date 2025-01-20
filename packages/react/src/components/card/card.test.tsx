@@ -1,39 +1,24 @@
 import { a11y, render, screen } from "../../../test"
-import { Card, CardBody, CardFooter, CardHeader } from "./card"
+import { Card } from "./"
 
 describe("<Card />", () => {
   test("renders card correctly", async () => {
-    await a11y(<Card>Card</Card>)
+    await a11y(<Card.Root>Card</Card.Root>)
   })
 
-  test("renders all the allowed shorthand style props", async () => {
-    render(
-      <Card align="start" direction="row" justify="start">
-        Flex
-      </Card>,
-    )
-
-    const card = await screen.findByRole("article")
-    expect(card).toHaveStyle({
-      alignItems: "start",
-      flexDirection: "row",
-      justifyContent: "start",
-    })
-  })
-
-  test("<Card /> renders <ui.article /> component", async () => {
-    render(<Card>Card</Card>)
+  test("<Card.Root /> renders <ui.article /> component", async () => {
+    render(<Card.Root>Card</Card.Root>)
 
     const article = await screen.findByRole("article")
     expect(article).toBeInTheDocument()
     expect(article).toHaveTextContent("Card")
   })
 
-  test("<CardHeader /> renders correctly", async () => {
+  test("<Card.Header /> renders correctly", async () => {
     render(
-      <Card>
-        <CardHeader>Card Header</CardHeader>
-      </Card>,
+      <Card.Root>
+        <Card.Header>Card Header</Card.Header>
+      </Card.Root>,
     )
 
     const header = await screen.findByRole("banner")
@@ -41,22 +26,22 @@ describe("<Card />", () => {
     expect(header).toHaveTextContent("Card Header")
   })
 
-  test("<CardHeader /> applies custom className", async () => {
+  test("<Card.Header /> applies custom className", async () => {
     render(
-      <Card>
-        <CardHeader className="custom-class">Card Header</CardHeader>
-      </Card>,
+      <Card.Root>
+        <Card.Header className="custom-class">Card Header</Card.Header>
+      </Card.Root>,
     )
 
     const header = await screen.findByRole("banner")
     expect(header).toHaveClass("custom-class")
   })
 
-  test("<CardHeader /> applies styles correctly", async () => {
+  test("<Card.Header /> applies styles correctly", async () => {
     render(
-      <Card>
-        <CardHeader>Card Header</CardHeader>
-      </Card>,
+      <Card.Root>
+        <Card.Header>Card Header</Card.Header>
+      </Card.Root>,
     )
 
     const header = await screen.findByRole("banner")
@@ -67,22 +52,22 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardHeader /> renders <ui.header /> component", async () => {
+  test("<Card.Header /> renders <ui.header /> component", async () => {
     render(
-      <Card>
-        <CardHeader>CardHeader</CardHeader>
-      </Card>,
+      <Card.Root>
+        <Card.Header>CardHeader</Card.Header>
+      </Card.Root>,
     )
 
     const header = await screen.findByRole("banner")
     expect(header).toBeInTheDocument()
   })
 
-  test("<CardBody /> renders correctly", () => {
+  test("<Card.Body /> renders correctly", () => {
     render(
-      <Card>
-        <CardBody>Card Body</CardBody>
-      </Card>,
+      <Card.Root>
+        <Card.Body>Card Body</Card.Body>
+      </Card.Root>,
     )
 
     const body = screen.getByText("Card Body")
@@ -90,22 +75,22 @@ describe("<Card />", () => {
     expect(body).toHaveTextContent("Card Body")
   })
 
-  test("<CardBody /> applies custom className", () => {
+  test("<Card.Body /> applies custom className", () => {
     render(
-      <Card>
-        <CardBody className="custom-class">Card Body</CardBody>
-      </Card>,
+      <Card.Root>
+        <Card.Body className="custom-class">Card Body</Card.Body>
+      </Card.Root>,
     )
 
     const body = screen.getByText("Card Body")
     expect(body).toHaveClass("custom-class")
   })
 
-  test("<CardBody /> applies styles correctly", () => {
+  test("<Card.Body /> applies styles correctly", () => {
     render(
-      <Card>
-        <CardBody>Card Body</CardBody>
-      </Card>,
+      <Card.Root>
+        <Card.Body>Card Body</Card.Body>
+      </Card.Root>,
     )
 
     const body = screen.getByText("Card Body")
@@ -116,11 +101,11 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardFooter /> renders correctly", async () => {
+  test("<Card.Footer /> renders correctly", async () => {
     render(
-      <Card>
-        <CardFooter>Card Footer</CardFooter>
-      </Card>,
+      <Card.Root>
+        <Card.Footer>Card Footer</Card.Footer>
+      </Card.Root>,
     )
 
     const footer = await screen.findByRole("contentinfo")
@@ -128,22 +113,22 @@ describe("<Card />", () => {
     expect(footer).toHaveTextContent("Card Footer")
   })
 
-  test("<CardFooter /> applies custom className", async () => {
+  test("<Card.Footer /> applies custom className", async () => {
     render(
-      <Card>
-        <CardFooter className="custom-class">Card Footer</CardFooter>
-      </Card>,
+      <Card.Root>
+        <Card.Footer className="custom-class">Card Footer</Card.Footer>
+      </Card.Root>,
     )
 
     const footer = await screen.findByRole("contentinfo")
     expect(footer).toHaveClass("custom-class")
   })
 
-  test("<CardFooter /> applies styles correctly", async () => {
+  test("<Card.Footer /> applies styles correctly", async () => {
     render(
-      <Card>
-        <CardFooter>Card Footer</CardFooter>
-      </Card>,
+      <Card.Root>
+        <Card.Footer>Card Footer</Card.Footer>
+      </Card.Root>,
     )
 
     const footer = await screen.findByRole("contentinfo")
@@ -154,11 +139,11 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardFooter /> renders <ui.footer /> component", async () => {
+  test("<Card.Footer /> renders <ui.footer /> component", async () => {
     render(
-      <Card>
-        <CardFooter>CardFooter</CardFooter>
-      </Card>,
+      <Card.Root>
+        <Card.Footer>CardFooter</Card.Footer>
+      </Card.Root>,
     )
 
     const footer = await screen.findByRole("contentinfo")

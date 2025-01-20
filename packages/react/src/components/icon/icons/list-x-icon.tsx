@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { ListX } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ListXIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ListXIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={ListX} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const ListXIcon = component(Icon)({ as: ListX })

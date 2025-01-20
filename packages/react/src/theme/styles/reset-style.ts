@@ -1,6 +1,6 @@
-import type { UIStyle } from "../../core"
+import { defineStyles } from "../../core"
 
-export const resetStyle: UIStyle = {
+export const resetStyle = defineStyles.resetStyle({
   "*": {
     boxSizing: "border-box",
   },
@@ -274,4 +274,4 @@ export const resetStyle: UIStyle = {
     margin: 0,
     padding: 0,
   },
-}
+})

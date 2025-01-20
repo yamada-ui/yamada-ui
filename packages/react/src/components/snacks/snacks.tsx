@@ -103,13 +103,11 @@ export const Snacks: FC<SnacksProps> = ({
         name: "top",
         token: "spaces",
         value: gutter[0] || "0px",
-        __prefix: "ui",
       },
       {
         name: "bottom",
         token: "spaces",
         value: gutter[1] || "0px",
-        __prefix: "ui",
       },
     ],
     w: "100%",

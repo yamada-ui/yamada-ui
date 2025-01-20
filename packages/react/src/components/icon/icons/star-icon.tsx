@@ -1,14 +1,9 @@
-import type { FC } from "../../../core"
-import type { IconProps } from "../icon"
 import { Star } from "lucide-react"
-import { cx } from "../../../utils"
-import { Icon } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `StarIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const StarIcon: FC<IconProps> = ({ className, ...rest }) => (
-  <Icon as={Star} className={cx("ui-lucide-icon", className)} {...rest} />
-)
+export const StarIcon = component(Icon)({ as: Star })

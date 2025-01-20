@@ -44,7 +44,7 @@ export const ReorderItem = forwardRef(
     const dragControls = useDragControls()
 
     const [hasTrigger, setHasTrigger] = useState<boolean>(false)
-    const [isDrag, setIsDrag] = useState<boolean>(false)
+    const [drag, setDrag] = useState<boolean>(false)
 
     const x = useMotionValue(0)
     const y = useMotionValue(0)
@@ -56,10 +56,10 @@ export const ReorderItem = forwardRef(
 
     useEffect(() => {
       const unsubscribeX = x.on("change", (x) => {
-        if (orientation === "horizontal") setIsDrag(x !== 0)
+        if (orientation === "horizontal") setDrag(x !== 0)
       })
       const unsubscribeY = y.on("change", (y) => {
-        if (orientation === "vertical") setIsDrag(y !== 0)
+        if (orientation === "vertical") setDrag(y !== 0)
       })
 
       return () => {
@@ -69,7 +69,7 @@ export const ReorderItem = forwardRef(
     }, [orientation, x, y])
 
     return (
-      <ReorderItemProvider value={{ dragControls, isDrag, register }}>
+      <ReorderItemProvider value={{ drag, dragControls, register }}>
         <ui.li
           ref={ref}
           as={Reorder.Item}
@@ -89,7 +89,7 @@ export const ReorderItem = forwardRef(
           }}
           {...rest}
           style={{ ...rest.style, x, y }}
-          data-selected={dataAttr(isDrag)}
+          data-selected={dataAttr(drag)}
           dragControls={dragControls}
           dragListener={!hasTrigger}
         >

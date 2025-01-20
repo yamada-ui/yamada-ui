@@ -2,14 +2,13 @@ import type { FC } from "../../core"
 import type { Dict } from "../../utils"
 import type { MotionProps } from "./motion.types"
 import { motion } from "motion/react"
+import { useMemo } from "react"
 import { ui } from "../../core"
 import { cx } from "../../utils"
 
-const disableStyleProps = ["transition"]
+const forwardProps = ["transition"]
 
-const disableStyleProp = (prop: string) => disableStyleProps.includes(prop)
-
-const Component = ui<"div", Dict>("div", { disableStyleProp })
+const Component = ui<"div", Dict>("div", { forwardProps })
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
@@ -18,16 +17,20 @@ const Component = ui<"div", Dict>("div", { disableStyleProp })
  */
 export const Motion: FC<MotionProps> = ({
   ref,
-  as = "div",
+  as: asProp = "div",
   className,
   ...rest
-}) => (
-  <Component
-    ref={ref}
-    as={motion.create(as)}
-    className={cx("ui-motion", className)}
-    {...rest}
-  />
-)
+}) => {
+  const as = useMemo(() => motion.create(asProp), [asProp])
+
+  return (
+    <Component
+      ref={ref}
+      as={as}
+      className={cx("ui-motion", className)}
+      {...rest}
+    />
+  )
+}
 
 Motion.__ui__ = "Motion"

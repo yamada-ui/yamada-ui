@@ -1,6 +1,4 @@
-import type { Dict } from "../../utils"
-import type { CSSFunction } from "../css"
-import type { StyledTheme } from "../theme.types"
+import type { TransformOptions } from "./utils"
 import { generateCalc } from "./calc"
 import {
   getCSSFunction,
@@ -14,12 +12,7 @@ const repeats: { [key: string]: string } = {
   fit: "auto-fit",
 }
 
-export function grid(
-  value: any,
-  theme: StyledTheme,
-  css: CSSFunction,
-  prev?: Dict,
-) {
+export function grid(value: any, { theme, ...rest }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
   const values = splitValues(value, (current) => current === " ")
@@ -45,11 +38,11 @@ export function grid(
       let [repeat, tracks] = splitValues(values)
 
       repeat = repeat && repeat in repeats ? repeats[repeat] : repeat
-      tracks = grid(tracks, theme, css, prev)
+      tracks = grid(tracks, { theme, ...rest })
 
       return `repeat(${repeat}, ${tracks})`
     } else {
-      return generateCalc("sizes")(value, theme, css, prev)
+      return generateCalc("sizes")(value, { theme, ...rest })
     }
   })
 

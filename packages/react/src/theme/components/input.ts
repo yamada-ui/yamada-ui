@@ -31,7 +31,7 @@ export const Input: ComponentMultiStyle<"Input"> = {
       minWidth: 0,
       outline: 0,
       position: "relative",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "border-color, box-shadow, background-color, opacity",
       width: "100%",
       _disabled: {

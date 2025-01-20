@@ -17,7 +17,7 @@ export const Basic = () => {
       color={["whiteAlpha.800", "blackAlpha.800"]}
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"

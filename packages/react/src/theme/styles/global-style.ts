@@ -1,6 +1,6 @@
-import type { UIStyle } from "../../core"
+import { defineStyles } from "../../core"
 
-export const globalStyle: UIStyle = {
+export const globalStyle = defineStyles.globalStyle({
   "*, *::before, *::after": {
     borderColor: "border",
     borderStyle: "solid",
@@ -8,20 +8,19 @@ export const globalStyle: UIStyle = {
     wordWrap: "break-word",
   },
   "*::placeholder, *[data-placeholder]": {
-    color: "blackAlpha.600",
+    color: "fg.subtle",
+  },
+  "*:focus-visible, *[data-focus-visible]": {
+    outline: "outside",
   },
   body: {
-    bg: ["white", "black"],
-    color: ["black", "white"],
+    colorScheme: "mono",
+    bg: "bg",
+    color: "fg",
     fontFamily: "body",
-    lineHeight: "base",
+    lineHeight: "moderate",
     overflowX: "hidden",
-    transitionDuration: "normal",
+    transitionDuration: "moderate",
     transitionProperty: "background-color",
   },
-  _dark: {
-    "*::placeholder, *[data-placeholder]": {
-      color: "whiteAlpha.400",
-    },
-  },
-}
+})

@@ -1,155 +1,107 @@
-import type {
-  AlertStatusValue,
-  CSSUIObject,
-  FC,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
-import type { LoadingProps } from "../loading"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import { createContext, cx } from "../../utils"
+import type { HTMLUIProps, StatusScheme, ThemeProps } from "../../core"
+import type { IconProps } from "../icon"
+import type { Loading } from "../loading"
+import type { AlertStyle } from "./alert.style"
+import { useMemo } from "react"
+import { createSlotComponent, ui } from "../../core"
 import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
-import { Loading } from "../loading"
+import { useLoadingComponent } from "../loading"
+import { alertStyle } from "./alert.style"
 
 const statuses = {
-  error: { colorScheme: "danger", icon: TriangleAlertIcon },
+  error: { colorScheme: "error", icon: TriangleAlertIcon },
   info: { colorScheme: "info", icon: InfoIcon },
-  loading: { colorScheme: "primary", icon: Loading },
   success: { colorScheme: "success", icon: CircleCheckBigIcon },
   warning: { colorScheme: "warning", icon: TriangleAlertIcon },
 } as const
 
 interface AlertContext {
-  status: AlertStatusValue
-  styles: { [key: string]: CSSUIObject | undefined }
+  status: StatusScheme
 }
 
-const [AlertContext, useAlertContext] = createContext<AlertContext>({
-  name: `AlertContext`,
-  errorMessage: `useAlertContext returned is 'undefined'. Seems you forgot to wrap the components in "<Alert />" `,
-})
-
-interface AlertOptions {
+interface AlertRootOptions {
   /**
    * The status of the alert.
    *
    * @default 'info'
    */
-  status?: AlertStatusValue
+  status?: StatusScheme
 }
 
-export interface AlertProps
+export interface AlertRootProps
   extends HTMLUIProps,
-    ThemeProps<"Alert">,
-    AlertOptions {}
+    ThemeProps<AlertStyle>,
+    AlertRootOptions {}
+
+export const {
+  ComponentContext: AlertContext,
+  PropsContext: AlertPropsContext,
+  useClassNames,
+  useComponentContext: useAlertContext,
+  usePropsContext: useAlertPropsContext,
+  useStyleContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<AlertRootProps, AlertStyle, AlertContext>(
+  "alert",
+  alertStyle,
+)
 
 /**
  * `Alert` is a component that conveys information to the user.
  *
  * @see Docs https://yamada-ui.com/components/feedback/alert
  */
-export const Alert: FC<AlertProps> = ({
-  colorScheme,
-  status = "info",
-  ...props
-}) => {
-  colorScheme ??= statuses[status].colorScheme
+export const AlertRoot = withProvider<"div", AlertRootProps>(
+  ({ status, ...props }) => {
+    const context = useMemo(() => ({ status: status! }), [status])
 
-  const [styles, mergedProps] = useComponentMultiStyle("Alert", {
-    ...props,
-    colorScheme,
-  })
-  const { className, children, ...rest } = omitThemeProps(mergedProps)
+    return (
+      <AlertContext value={context}>
+        <ui.div role="alert" {...props} />
+      </AlertContext>
+    )
+  },
+  "root",
+)(({ colorScheme, status = "info" }) => ({
+  colorScheme: colorScheme ?? statuses[status].colorScheme,
+  status,
+}))
 
-  return (
-    <AlertContext value={{ status, styles }}>
-      <ui.div
-        className={cx("ui-alert", className)}
-        role="alert"
-        __css={{
-          ...styles.container,
-        }}
-        {...rest}
-      >
-        {children}
-      </ui.div>
-    </AlertContext>
-  )
-}
+export interface AlertIconProps extends IconProps {}
 
-Alert.__ui__ = "Alert"
-
-export interface AlertIconProps extends HTMLUIProps<"span"> {
-  variant?: LoadingProps["variant"]
-}
-
-export const AlertIcon: FC<AlertIconProps> = ({
-  className,
-  variant = "oval",
-  children,
-  ...rest
-}) => {
-  const { status, styles } = useAlertContext()
+export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
+  const { status } = useAlertContext()
   const Icon = statuses[status].icon
 
-  return (
-    <ui.span
-      className={cx("ui-alert__icon", className)}
-      display="inherit"
-      __css={{
-        ...styles.icon,
-        ...(status === "loading" ? styles.loading : {}),
-      }}
-      {...rest}
-    >
-      {children || (
-        <Icon
-          {...(status === "loading"
-            ? { variant, color: "currentcolor" }
-            : { boxSize: "100%" })}
-        />
-      )}
-    </ui.span>
-  )
+  return <Icon {...props} />
+}, "icon")()
+
+export interface AlertLoadingProps extends Loading.Props {
+  /**
+   * The loading scheme.
+   *
+   * @default 'oval'
+   */
+  loadingScheme?: Loading.Scheme
 }
 
-AlertIcon.__ui__ = "AlertIcon"
+export const AlertLoading = withContext<"svg", AlertLoadingProps>(
+  ({ loadingScheme = "oval", ...props }) => {
+    const Component = useLoadingComponent(loadingScheme)
+
+    return <Component {...props} />
+  },
+  ["icon", "loading"],
+)()
 
 export interface AlertTitleProps extends HTMLUIProps<"p"> {}
 
-export const AlertTitle: FC<AlertTitleProps> = ({ className, ...rest }) => {
-  const { styles } = useAlertContext()
-
-  return (
-    <ui.p
-      className={cx("ui-alert__title", className)}
-      __css={{
-        ...styles.title,
-      }}
-      {...rest}
-    />
-  )
-}
-
-AlertTitle.__ui__ = "AlertTitle"
+export const AlertTitle = withContext<"p", AlertTitleProps>("p", "title")()
 
 export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
 
-export const AlertDescription: FC<AlertDescriptionProps> = ({
-  className,
-  ...rest
-}) => {
-  const { styles } = useAlertContext()
-
-  return (
-    <ui.span
-      className={cx("ui-alert__desc", className)}
-      __css={{
-        ...styles.description,
-      }}
-      {...rest}
-    />
-  )
-}
-
-AlertDescription.__ui__ = "AlertDescription"
+export const AlertDescription = withContext<"span", AlertDescriptionProps>(
+  "span",
+  "description",
+)()

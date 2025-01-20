@@ -1,42 +1,29 @@
-import type { BreadcrumbGenerateItem } from "./"
+import type { BreadcrumbItem } from "./"
 import { a11y, render, screen } from "../../../test"
-import {
-  Breadcrumb,
-  BreadcrumbEllipsis,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "./"
+import { Breadcrumb } from "./"
 
 describe("<Breadcrumb />", () => {
   test("renders breadcrumb correctly", async () => {
     await a11y(
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">2</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">3</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="/">4</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="/">1</Breadcrumb.Link>
+        <Breadcrumb.Link href="/">2</Breadcrumb.Link>
+        <Breadcrumb.Link href="/">3</Breadcrumb.Link>
+        <Breadcrumb.Link href="/" currentPage>
+          4
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
   })
 
   test("separator property is being passed accurately", () => {
     render(
-      <Breadcrumb separator="-">
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="/">2</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root separator="-">
+        <Breadcrumb.Link href="/">1</Breadcrumb.Link>
+        <Breadcrumb.Link href="/" currentPage>
+          2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
 
     const separatorEle = screen.getByText("-")
@@ -45,14 +32,12 @@ describe("<Breadcrumb />", () => {
 
   test("currentPage property is being passed accurately", () => {
     render(
-      <Breadcrumb separator="-">
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="/">2</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root separator="-">
+        <Breadcrumb.Link href="/">1</Breadcrumb.Link>
+        <Breadcrumb.Link href="/" currentPage>
+          2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
     const spanElement = screen.getByText("2")
     expect(spanElement).toBeInTheDocument()
@@ -61,14 +46,12 @@ describe("<Breadcrumb />", () => {
 
   test("breadcrumb link has its href attribute correctly set", () => {
     render(
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="#">Link 2</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Link href="#" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
     const breadcrumbLink = screen.getByRole("link", { name: /Link 1/i })
     expect(breadcrumbLink).toHaveAttribute("href", "#")
@@ -76,14 +59,12 @@ describe("<Breadcrumb />", () => {
 
   test("current page link doesn't have href attribute set", () => {
     render(
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="#">Link 2</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Link href="#" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
     const currentPageLink = screen.getByText("Link 2")
     expect(currentPageLink).not.toHaveAttribute("href")
@@ -91,43 +72,41 @@ describe("<Breadcrumb />", () => {
 
   test("renders breadcrumbEllipsis correctly", () => {
     render(
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbEllipsis />
-        </BreadcrumbItem>
-        <BreadcrumbItem currentPage>
-          <BreadcrumbLink href="#">Link 3</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>,
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis />
+        <Breadcrumb.Link href="#" currentPage>
+          Link 3
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
     )
     expect(screen.getByLabelText("ellipsis")).toBeInTheDocument()
   })
 
   test("renders breadcrumb correctly with items", () => {
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/", name: "サイヤ人編" },
-      { href: "/", name: "ナメック星編" },
-      { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", currentPage: true },
+    const items: BreadcrumbItem[] = [
+      { href: "/", label: "サイヤ人編" },
+      { href: "/", label: "ナメック星編" },
+      { href: "/", label: "人造人間編" },
+      { href: "/", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(<Breadcrumb items={items} />)
+    render(<Breadcrumb.Root items={items} />)
 
     expect(screen.getAllByRole("listitem")).toHaveLength(4)
   })
 
   test("is correctly truncated", () => {
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編" },
-      { href: "/3", name: "人造人間編" },
-      { href: "/4", name: "魔人ブウ編", currentPage: true },
+    const items: BreadcrumbItem[] = [
+      { href: "/1", label: "サイヤ人編" },
+      { href: "/2", label: "ナメック星編" },
+      { href: "/3", label: "人造人間編" },
+      { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(<Breadcrumb endBoundaries={1} items={items} startBoundaries={1} />)
+    render(
+      <Breadcrumb.Root endBoundaries={1} items={items} startBoundaries={1} />,
+    )
 
     const listItems = screen.getAllByRole("listitem")
 
@@ -139,14 +118,14 @@ describe("<Breadcrumb />", () => {
   })
 
   test("correctly omitted using ellipsisPage", () => {
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編", ellipsisPage: true },
-      { href: "/3", name: "人造人間編", ellipsisPage: true },
-      { href: "/4", name: "魔人ブウ編", currentPage: true },
+    const items: BreadcrumbItem[] = [
+      { href: "/1", label: "サイヤ人編" },
+      { href: "/2", ellipsisPage: true, label: "ナメック星編" },
+      { href: "/3", ellipsisPage: true, label: "人造人間編" },
+      { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(<Breadcrumb items={items} />)
+    render(<Breadcrumb.Root items={items} />)
 
     const listItems = screen.getAllByRole("listitem")
 
@@ -158,19 +137,19 @@ describe("<Breadcrumb />", () => {
   })
 
   test("if the last element has an ellipsisPage, the breadcrumbEllipsis is rendered correctly.", () => {
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編", ellipsisPage: true },
-      { href: "/3", name: "人造人間編" },
+    const items: BreadcrumbItem[] = [
+      { href: "/1", label: "サイヤ人編" },
+      { href: "/2", ellipsisPage: true, label: "ナメック星編" },
+      { href: "/3", label: "人造人間編" },
       {
         href: "/4",
-        name: "魔人ブウ編",
         currentPage: true,
         ellipsisPage: true,
+        label: "魔人ブウ編",
       },
     ]
 
-    render(<Breadcrumb items={items} />)
+    render(<Breadcrumb.Root items={items} />)
 
     const listItems = screen.getAllByRole("listitem")
 
@@ -182,15 +161,15 @@ describe("<Breadcrumb />", () => {
   })
 
   test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/1", name: "サイヤ人編" },
-      { href: "/2", name: "ナメック星編" },
-      { href: "/3", name: "人造人間編" },
-      { href: "/4", name: "魔人ブウ編", currentPage: true },
+    const items: BreadcrumbItem[] = [
+      { href: "/1", label: "サイヤ人編" },
+      { href: "/2", label: "ナメック星編" },
+      { href: "/3", label: "人造人間編" },
+      { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
     render(
-      <Breadcrumb
+      <Breadcrumb.Root
         data-testid="breadCrumb1"
         items={items}
         startBoundaries={1}
@@ -198,11 +177,15 @@ describe("<Breadcrumb />", () => {
     )
 
     render(
-      <Breadcrumb data-testid="breadCrumb2" endBoundaries={1} items={items} />,
+      <Breadcrumb.Root
+        data-testid="breadCrumb2"
+        endBoundaries={1}
+        items={items}
+      />,
     )
 
     render(
-      <Breadcrumb
+      <Breadcrumb.Root
         data-testid="breadCrumb3"
         endBoundaries={0}
         items={items}
@@ -224,15 +207,15 @@ describe("<Breadcrumb />", () => {
   test("retrieve omitted items correctly", () => {
     const ellipsis = vi.fn()
 
-    const items: BreadcrumbGenerateItem[] = [
-      { href: "/", name: "サイヤ人編" },
-      { href: "/", name: "ナメック星編" },
-      { href: "/", name: "人造人間編" },
-      { href: "/", name: "魔人ブウ編", currentPage: true },
+    const items: BreadcrumbItem[] = [
+      { href: "/", label: "サイヤ人編" },
+      { href: "/", label: "ナメック星編" },
+      { href: "/", label: "人造人間編" },
+      { href: "/", currentPage: true, label: "魔人ブウ編" },
     ]
 
     render(
-      <Breadcrumb
+      <Breadcrumb.Root
         ellipsis={ellipsis}
         endBoundaries={1}
         items={items}
@@ -242,8 +225,8 @@ describe("<Breadcrumb />", () => {
 
     expect(ellipsis).toHaveBeenCalledWith({
       items: [
-        { href: "/", name: "ナメック星編" },
-        { href: "/", name: "人造人間編" },
+        { href: "/", label: "ナメック星編" },
+        { href: "/", label: "人造人間編" },
       ],
     })
   })

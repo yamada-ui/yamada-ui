@@ -29,15 +29,15 @@ export function isSomeElement(child: any, type: any): boolean {
   return false
 }
 
-export function findChild(
+export function findChild<Y = any>(
   children: React.ReactElement[],
   ...types: (React.JSXElementConstructor<any> | string)[]
-): React.ReactElement | undefined {
+): React.ReactElement<Y> | undefined {
   const child = children.find((child) =>
     types.some((type) => isSomeElement(child, type)),
   )
 
-  return child
+  return child as React.ReactElement<Y> | undefined
 }
 
 export function findChildren(

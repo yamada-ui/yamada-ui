@@ -1,14 +1,15 @@
-import type { TextStyles } from "../../core"
+import type { CSSModifierObject } from "../../core"
+import { defaultTheme } from ".."
 import { Heading } from "../../components/heading"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendTheme } from "../../tools"
+import { merge } from "../../utils"
 
 export default {
   title: "Theme / Text Style",
 }
 
 export const Basic = () => {
-  const textStyles: TextStyles = {
+  const textStyles: CSSModifierObject = {
     gradient: {
       bgClip: "text",
       bgGradient: "linear(to-l, #7928CA, #FF0080)",
@@ -17,9 +18,7 @@ export const Basic = () => {
     },
   }
 
-  const theme = extendTheme({
-    styles: { textStyles },
-  })()
+  const theme = merge(defaultTheme, { styles: { textStyles } })
 
   return (
     <UIProvider theme={theme}>

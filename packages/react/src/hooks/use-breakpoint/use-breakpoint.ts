@@ -1,4 +1,4 @@
-import type { Theme } from "../../core"
+import type { ThemeTokens } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTheme } from "../../providers/theme-provider"
 import { createdDom } from "../../utils"
@@ -128,5 +128,5 @@ export const useBreakpoint = () => {
     }
   }, [queries, hasQueries, hasContainer])
 
-  return breakpoint as Theme["breakpoints"]
+  return breakpoint as ThemeTokens["breakpoints"]
 }

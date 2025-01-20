@@ -1,9 +1,7 @@
 import type { IconNode } from "lucide-react"
-import type { FC } from "../../core"
 import type { IconProps } from "./icon"
 import { Icon as OriginalIcon } from "lucide-react"
-import { cx } from "../../utils"
-import { Icon } from "./icon"
+import { Icon, withContext } from "./icon"
 
 interface LucideIconOptions {
   /**
@@ -19,19 +17,6 @@ export interface LucideIconProps extends IconProps, LucideIconOptions {}
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const LucideIcon: FC<LucideIconProps> = ({
-  className,
-  icon,
-  ...rest
-}) => {
-  return (
-    <Icon
-      as={OriginalIcon}
-      className={cx("ui-lucide-icon", className)}
-      iconNode={icon}
-      {...rest}
-    />
-  )
-}
-
-LucideIcon.__ui__ = "LucideIcon"
+export const LucideIcon = withContext<"svg", LucideIconProps>((props) => (
+  <Icon as={OriginalIcon} {...props} />
+))()

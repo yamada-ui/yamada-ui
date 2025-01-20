@@ -40,9 +40,9 @@ export const UseNumericToken = () => {
       color="white"
       p="calc(md + md)"
       rounded="md"
-      w="calc(100% / $spaces.2)"
+      w="calc(100% / {spaces.2})"
     >
-      Use "$"
+      Use interpolated token
     </Center>
   )
 }

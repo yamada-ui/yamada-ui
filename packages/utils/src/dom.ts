@@ -106,11 +106,11 @@ export function getPx(value: number | string | undefined): number {
 
 type Booleanish = "false" | "true" | boolean
 
-export function dataAttr(condition: boolean | undefined) {
+export function dataAttr(condition: any) {
   return (condition ? "" : undefined) as Booleanish
 }
 
-export function ariaAttr(condition: boolean | undefined): boolean | undefined {
+export function ariaAttr(condition: any): boolean | undefined {
   return condition ? true : undefined
 }
 

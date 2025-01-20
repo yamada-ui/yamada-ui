@@ -6,7 +6,6 @@ import type {
   RefObject,
 } from "react"
 import type {
-  CSSUIObject,
   FC,
   HTMLUIProps,
   LoadingComponentProps,
@@ -27,7 +26,7 @@ import {
 } from "../../utils"
 import { motion } from "../motion"
 import { Portal } from "../portal"
-import { Loading } from "./loading"
+import { Loading } from "./"
 
 interface LoadingContextProps {
   /**

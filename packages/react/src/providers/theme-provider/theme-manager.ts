@@ -1,4 +1,4 @@
-import type { Theme } from "../../core"
+import type { ThemeTokens } from "../../core"
 import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
 const hasSupport = !!(globalThis.document as Document | undefined)
@@ -6,9 +6,11 @@ const hasSupport = !!(globalThis.document as Document | undefined)
 export interface ThemeSchemeManager {
   type: "cookie" | "localStorage"
   get: (
-    initialThemeScheme?: Theme["themeSchemes"],
-  ) => (storageKey?: string) => Theme["themeSchemes"]
-  set: (themeScheme: Theme["themeSchemes"]) => (storageKey?: string) => void
+    initialThemeScheme?: ThemeTokens["themeSchemes"],
+  ) => (storageKey?: string) => ThemeTokens["themeSchemes"]
+  set: (
+    themeScheme: ThemeTokens["themeSchemes"],
+  ) => (storageKey?: string) => void
   ssr?: boolean
 }
 
@@ -22,7 +24,7 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
       try {
         const themeScheme = localStorage.getItem(storageKey) as
           | null
-          | Theme["themeSchemes"]
+          | ThemeTokens["themeSchemes"]
 
         return themeScheme || initThemeScheme
       } catch {
@@ -43,10 +45,10 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
 const parseCookie = (
   cookie: string,
   key: string,
-): Theme["themeSchemes"] | undefined => {
+): ThemeTokens["themeSchemes"] | undefined => {
   const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
-  return match?.[2] as Theme["themeSchemes"] | undefined
+  return match?.[2] as ThemeTokens["themeSchemes"] | undefined
 }
 
 const createCookieStorage = (

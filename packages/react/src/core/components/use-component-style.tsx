@@ -2,90 +2,123 @@ import type { Dict } from "../../utils"
 import type {
   BreakpointQueries,
   ColorModeArray,
-  CSSUIObject,
+  CreateLayersReturn,
+  CSSModifierObject,
+  CSSObject,
+  CSSSlotObject,
   ResponsiveObject,
-  UIStyle,
-  UIStyleProps,
   UIValue,
 } from "../css"
 import type {
-  ComponentDefaultProps,
-  ComponentMultiSizes,
-  ComponentMultiVariants,
-  ComponentOverrideProps,
-  ComponentSizes,
+  BreakpointDirection,
+  ComponentSlotStyle,
   ComponentStyle,
-  ComponentVariants,
-} from "../theme.types"
+  LayerScheme,
+  ThemeProps,
+  WithoutThemeProps,
+} from "../theme"
+import type { HTMLUIProps } from "./component.types"
+import type { Slot, SlotName } from "./create-component"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
-import {
-  getColorModeValue,
-  useColorMode,
-} from "../../providers/color-mode-provider"
 import { useTheme } from "../../providers/theme-provider"
 import {
+  cx,
   filterUndefined,
-  getMemoizedObject as get,
   isArray,
+  isBooleanish,
+  isEmptyObject,
   isObject,
   keysFormObject,
   merge,
   omitObject,
-  runIfFunc,
+  toKebabCase,
 } from "../../utils"
 import { createQuery } from "../css"
 import { pseudos } from "../pseudos"
+import { useColorSchemeContext } from "../styled"
 
-type Styles<Y extends boolean = false> = Y extends false
-  ? CSSUIObject
-  : { [key: string]: CSSUIObject | undefined }
+type Style<Y extends boolean = false> = Y extends false
+  ? CSSObject
+  : CSSSlotObject
 
-type ModifierStyles =
-  | ComponentMultiSizes
-  | ComponentMultiVariants
-  | ComponentSizes
-  | ComponentVariants
+type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
-interface GetStylesOptions {
-  isMulti?: boolean
+interface GetStyleOptions<
+  Y extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+> {
+  direction: BreakpointDirection
+  queries: BreakpointQueries
+  hasSlot?: boolean
+  identifier?: string
   selectors?: (string | undefined)[]
+  slot?: Slot<SlotName<Y>>
+  wrap?: CreateLayersReturn["wrap"]
 }
 
-interface UseStylesOptions<Y extends boolean = false> {
-  isMulti?: Y
-  isProcessSkip?: boolean
-  styles?: Styles<Y>
-}
-
-function getColorModeStyles<Y extends Dict = Dict, M extends boolean = false>(
-  value: ColorModeArray<string>,
-  modifierStyles: ModifierStyles,
-  props: UIStyleProps<Y>,
+function getSelectorStyle<Y extends Dict = Dict>(
+  selectors: (string | undefined)[],
+  style: Y,
 ) {
-  return function ({ isMulti = false, selectors = [] }: GetStylesOptions) {
+  return selectors.reduceRight<Dict>(
+    (prev, key) => (key ? { [key]: prev } : prev),
+    style,
+  ) as Y
+}
+
+function getStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(style: CSSObject | CSSSlotObject | undefined) {
+  return function ({
+    hasSlot = false,
+    selectors = [],
+  }: GetStyleOptions<M>): Style<Y> | undefined {
+    if (!style || isEmptyObject(style)) return
+
+    if (hasSlot) {
+      return Object.fromEntries(
+        Object.entries(style as CSSSlotObject).map(([name, style]) => {
+          if (selectors.length) {
+            return [name, getSelectorStyle(selectors, style ?? {})]
+          } else {
+            return [name, style]
+          }
+        }),
+      )
+    } else if (selectors.length) {
+      return getSelectorStyle(selectors, style) as Style<Y>
+    } else {
+      return style as Style<Y>
+    }
+  }
+}
+
+function getColorModeStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(value: ColorModeArray<number | string>, mergedStyle: MergedStyle) {
+  return function ({ selectors = [], ...rest }: GetStyleOptions<M>) {
     const [lightValue, darkValue] = value
 
-    const lightStyles = getModifierStyles<Y, M>(
+    const lightStyle = getModifierStyle<Y, M>(
       lightValue,
-      modifierStyles,
-      props,
-    )({ isMulti, selectors: [...selectors, pseudos._light] })
+      mergedStyle,
+    )({ ...rest, selectors: [...selectors, pseudos._light] })
 
-    const darkStyles = getModifierStyles<Y, M>(
+    const darkStyle = getModifierStyle<Y, M>(
       darkValue,
-      modifierStyles,
-      props,
-    )({ isMulti, selectors: [...selectors, pseudos._dark] })
+      mergedStyle,
+    )({ ...rest, selectors: [...selectors, pseudos._dark] })
 
-    return merge(lightStyles, darkStyles)
+    return merge(lightStyle, darkStyle)
   }
 }
 
 function getResponsiveFinalQuery(
   queries: BreakpointQueries,
   breakpoints: string[],
-  isDown: boolean,
+  down: boolean,
 ) {
   const filteredQueries = queries.filter(
     ({ breakpoint }) =>
@@ -93,14 +126,14 @@ function getResponsiveFinalQuery(
   )
 
   const finalQuery = filteredQueries.sort((a, b) =>
-    isDown ? (a.maxW ?? 0) - (b.maxW ?? 0) : (b.minW ?? 0) - (a.minW ?? 0),
+    down ? (a.maxW ?? 0) - (b.maxW ?? 0) : (b.minW ?? 0) - (a.minW ?? 0),
   )[0]
 
   return finalQuery
 }
 
 function getResponsiveNextQuery(
-  value: ResponsiveObject<string>,
+  value: ResponsiveObject<number | string>,
   queries: BreakpointQueries,
   index: number,
 ) {
@@ -124,71 +157,61 @@ function getResponsiveNextQuery(
   return nextQuery
 }
 
-function getResponsiveStyles<Y extends Dict = Dict, M extends boolean = false>(
-  value: ResponsiveObject<string>,
-  modifierStyles: ModifierStyles,
-  props: UIStyleProps<Y>,
-) {
-  return function ({ isMulti = false, selectors = [] }: GetStylesOptions) {
+function getResponsiveStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(value: ResponsiveObject<number | string>, mergedStyle: MergedStyle) {
+  return function (options: GetStyleOptions<M>) {
+    const { direction, identifier, queries, selectors = [] } = options
     const breakpoints = keysFormObject(value)
 
     if (breakpoints.length === 1 && "base" in value) {
-      return getStyles<Y, M>(
-        modifierStyles[value.base as string],
-        props,
-      )({ isMulti })
+      return getModifierStyle<Y, M>(value.base, mergedStyle)(options)
     } else {
-      const { queries = [] } = props.theme.__breakpoints ?? {}
-      const { direction = "down", identifier } =
-        props.theme.__config?.breakpoint ?? {}
-      const isDown = direction !== "up"
+      const down = direction !== "up"
 
-      const finalQuery = getResponsiveFinalQuery(queries, breakpoints, isDown)
+      const finalQuery = getResponsiveFinalQuery(queries, breakpoints, down)
 
-      let hasBaseStyles = false
+      let hasBase = false
 
-      return queries.reduce<Styles<M>>(
+      return queries.reduce<Style<Y>>(
         (prev, { breakpoint, maxW, maxWQuery, minW, minWQuery }, index) => {
-          const modifier = value[breakpoint]
-          const isFinal = breakpoint === finalQuery?.breakpoint
+          const final = breakpoint === finalQuery?.breakpoint
 
           if (breakpoint === "base") return prev
-          if (!modifier) return prev
+          if (!value[breakpoint]) return prev
 
-          if (!hasBaseStyles) {
-            const baseModifier = value.base
+          if (!hasBase) {
             const prevQuery = queries[index - 1]
-            const query = prevQuery?.[isDown ? "minWQuery" : "maxWQuery"]
+            const query = prevQuery?.[down ? "minWQuery" : "maxWQuery"]
 
-            const styles = getModifierStyles<Y, M>(
-              baseModifier,
-              modifierStyles,
-              props,
-            )({ isMulti, selectors: [...selectors, query] })
+            const style = getModifierStyle<Y, M>(
+              value.base,
+              mergedStyle,
+            )({ ...options, selectors: [...selectors, query] })
 
-            prev = merge(prev, styles)
+            prev = merge(prev, style)
 
-            hasBaseStyles = true
+            hasBase = true
           }
 
-          let query = isDown ? maxWQuery : minWQuery
+          let query = down ? maxWQuery : minWQuery
 
-          if (!isFinal) {
+          if (!final) {
             const nextQuery = getResponsiveNextQuery(value, queries, index)
 
-            minW = isDown ? nextQuery?.minW : minW
-            maxW = isDown ? maxW : nextQuery?.maxW
+            minW = down ? nextQuery?.minW : minW
+            maxW = down ? maxW : nextQuery?.maxW
 
             query = createQuery(minW, maxW, identifier)
           }
 
-          const styles = getModifierStyles<Y, M>(
-            modifier,
-            modifierStyles,
-            props,
-          )({ isMulti, selectors: [...selectors, query] })
+          const style = getModifierStyle<Y, M>(
+            value[breakpoint],
+            mergedStyle,
+          )({ ...options, selectors: [...selectors, query] })
 
-          prev = merge(prev, styles)
+          prev = merge(prev, style)
 
           return prev
         },
@@ -198,191 +221,265 @@ function getResponsiveStyles<Y extends Dict = Dict, M extends boolean = false>(
   }
 }
 
-function getModifierStyles<Y extends Dict = Dict, M extends boolean = false>(
-  value: UIValue<string> | undefined,
-  modifierStyles: ModifierStyles,
-  props: UIStyleProps<Y>,
+function getPropStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(
+  props: Dict,
+  propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
+  style: Style<Y> | undefined = {},
 ) {
-  return function ({
-    isMulti = false,
-    selectors = [],
-  }: GetStylesOptions): Styles<M> {
-    let styles: Styles<M> = {}
+  return function (options: GetStyleOptions<M>) {
+    const variants = Object.entries(propVariants)
 
-    if (!value) return styles
+    if (!variants.length) return
+
+    variants.forEach(([name, variants]) => {
+      const prop = props[name as keyof typeof props]
+
+      if (prop) {
+        const propStyle = getModifierStyle<Y, M>(prop, variants)(options)
+
+        style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+      } else {
+        const boolean = Object.keys(variants).every((key) => isBooleanish(key))
+
+        if (boolean) {
+          const propStyle = getModifierStyle<Y, M>("false", variants)(options)
+
+          style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+        }
+      }
+    })
+
+    return style
+  }
+}
+
+function getModifierStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(value: UIValue<number | string> | undefined, mergedStyle: MergedStyle) {
+  return function (options: GetStyleOptions<M>): Style<Y> | undefined {
+    let style: Style<Y> | undefined = undefined
+
+    if (!value) return style
 
     if (isArray(value)) {
-      styles = getColorModeStyles<Y, M>(
-        value,
-        modifierStyles,
-        props,
-      )({ isMulti, selectors })
+      style = getColorModeStyle<Y, M>(value, mergedStyle)(options)
     } else if (isObject(value)) {
-      styles = getResponsiveStyles<Y, M>(
-        value,
-        modifierStyles,
-        props,
-      )({ isMulti, selectors })
+      style = getResponsiveStyle<Y, M>(value, mergedStyle)(options)
     } else {
-      styles = getStyles<Y, M>(
-        modifierStyles[value],
-        props,
-      )({ isMulti, selectors })
+      style = getStyle<Y, M>(mergedStyle[value])(options)
     }
 
-    return styles as Styles<M>
+    return style
   }
 }
 
-function getSelectorStyles<Y extends Dict = Dict>(
-  selectors: (string | undefined)[],
-  style: Y,
+export function getSlotClassName<Y extends number | string | symbol>(
+  className?: string,
+  slot?: Slot<Y>,
 ) {
-  return selectors.reduceRight<Dict>(
-    (prev, key) => (key ? { [key]: prev } : prev),
-    style,
-  ) as Y
+  if (!className || !slot) return className
+
+  if (isArray(slot)) {
+    return `${className}__${toKebabCase(slot[0] as string)} ${className}__${slot.map((value) => toKebabCase(value as string)).join("--")}`
+  } else if (isObject(slot)) {
+    return `${className}__${toKebabCase(slot.name)}`
+  } else {
+    return `${className}__${toKebabCase(slot as string)}`
+  }
 }
 
-function getStyles<Y extends Dict = Dict, M extends boolean = false>(
-  stylesOrFunc: { [key: string]: UIStyle<Y> } | UIStyle<Y> | undefined,
-  props: UIStyleProps<Y>,
-) {
-  return function ({
-    isMulti = false,
-    selectors = [],
-  }: GetStylesOptions): Styles<M> {
-    const styles = runIfFunc(stylesOrFunc, props)
+function omitThemeProps<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+>(props: Y, keys: string[] = [], transferProps?: D[]) {
+  let omitKeys = ["size", "variant", ...keys] as (keyof Y)[]
 
-    if (isMulti) {
+  if (transferProps)
+    omitKeys = omitKeys.filter((key) => !transferProps.includes(key as D))
+
+  return omitObject(props, omitKeys) as unknown as WithoutThemeProps<Y, M, D>
+}
+
+function wrapStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(layer: LayerScheme, style?: Style<Y>) {
+  return function ({ hasSlot, wrap }: GetStyleOptions<M>) {
+    if (hasSlot) {
+      if (!style) return undefined
+
       return Object.fromEntries(
-        Object.entries((styles ?? {}) as { [key: string]: UIStyle }).map(
-          ([name, styleOrFunc]) => {
-            const style = runIfFunc(styleOrFunc, props)
-
-            if (selectors.length) {
-              return [name, getSelectorStyles(selectors, style)]
-            } else {
-              return [name, style]
-            }
-          },
-        ),
-      ) as Styles<M>
-    } else if (selectors.length) {
-      return getSelectorStyles(selectors, styles as Styles<M>)
+        Object.entries(style).map(([slot, style]) => [
+          slot,
+          wrap?.(layer, style) ?? style,
+        ]),
+      )
     } else {
-      return styles as Styles<M>
+      return wrap?.(layer, style) ?? style
     }
   }
 }
 
-function mergeProps<Y extends Dict = Dict>(
-  props: Y,
-  defaultProps: ComponentDefaultProps | undefined,
-  overrideProps: ComponentOverrideProps | undefined,
-): Y {
-  if (defaultProps) props = merge(defaultProps, props)
-
-  if (overrideProps) props = runIfFunc(overrideProps, props) as Y
-
-  return props
+interface UseStyleOptions<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+  H extends boolean = false,
+> {
+  className?: string
+  style?: M
+  hasSlot?: H
+  slot?: Slot<SlotName<M>>
+  transferProps?: D[]
 }
 
-function useStyles<Y extends Dict = Dict, M extends boolean = false>(
-  name: string,
+function useStyle<
+  Y extends HTMLUIProps & ThemeProps = Dict,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+  H extends boolean = false,
+>(
   props: Y,
-  { isMulti, isProcessSkip, styles = {} }: UseStylesOptions<M> = {},
-): [styles: Styles<M>, props: Y] {
-  const { theme, themeScheme } = useTheme()
-  const { colorMode } = useColorMode()
+  {
+    className,
+    style: componentStyle,
+    hasSlot,
+    slot,
+    transferProps,
+  }: UseStyleOptions<Y, M, D, H> = {},
+) {
+  const { theme } = useTheme()
+  const { wrap } = theme.__layers ?? {}
+  const rootColorScheme = useColorSchemeContext()
+  const { queries = [] } = theme.__breakpoints ?? {}
+  const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
+  const options = { direction, hasSlot, identifier, queries, slot, wrap }
 
-  const propsRef = useRef<Y>({} as Y)
-  const stylesRef = useRef<Styles<M>>(isProcessSkip ? styles : {})
+  const propsRef = useRef({} as WithoutThemeProps<Y, M, D>)
+  const styleRef = useRef<Style<H>>({})
 
-  if (!isProcessSkip) {
-    const componentStyle = get<ComponentStyle | undefined>(
-      theme,
-      `components.${name}`,
+  props = filterUndefined(props)
+
+  if (componentStyle) {
+    const {
+      className: customClassName,
+      base,
+      props: propVariants,
+      sizes,
+      variants,
+      defaultProps: {
+        colorScheme: defaultColorScheme,
+        props: additionalProps,
+        ...otherProps
+      } = {},
+    } = componentStyle
+
+    const { size, variant, ...rest } = {
+      ...otherProps,
+      ...additionalProps,
+      ...props,
+    }
+
+    props.colorScheme ??= rootColorScheme ?? defaultColorScheme
+
+    const computedProps = omitThemeProps(
+      props,
+      Object.keys(propVariants ?? {}),
+      transferProps,
+    ) as Y
+
+    computedProps.className = cx(
+      getSlotClassName(className ?? customClassName, slot),
+      computedProps.className,
     )
 
-    props = filterUndefined(props)
+    let style: Style<H> | undefined = {}
 
-    if (componentStyle) {
-      const { baseStyle, sizes, variants, defaultProps, overrideProps } =
-        componentStyle
+    if (base) {
+      const baseStyle = getStyle<H, M>(base)(options)
 
-      props = mergeProps<Y>(props, defaultProps, overrideProps)
-
-      const { colorScheme: _colorScheme, size, variant } = props
-      const colorScheme = isArray(_colorScheme)
-        ? getColorModeValue(_colorScheme[0], _colorScheme[1])(colorMode)
-        : _colorScheme
-      const computedProps = { ...props, colorScheme }
-      const resolvedProps = omitObject(computedProps, ["children"]) as Y
-
-      let styles: Styles<M> = {}
-
-      if (baseStyle) {
-        styles = getStyles<Y, M>(baseStyle, {
-          colorMode,
-          theme,
-          themeScheme,
-          ...resolvedProps,
-        })({ isMulti })
-      }
-
-      if (sizes) {
-        const sizeStyles = getModifierStyles<Y, M>(size, sizes, {
-          colorMode,
-          theme,
-          themeScheme,
-          ...resolvedProps,
-        })({ isMulti })
-
-        styles = merge(styles, sizeStyles)
-      }
-
-      if (variants) {
-        const variantStyles = getModifierStyles<Y, M>(variant, variants, {
-          colorMode,
-          theme,
-          themeScheme,
-          ...resolvedProps,
-        })({ isMulti })
-
-        styles = merge(styles, variantStyles)
-      }
-
-      const isStylesEqual = isEqual(stylesRef.current, styles)
-
-      if (!isStylesEqual) stylesRef.current = styles
+      style = merge(style, wrapStyle<H, M>("base", baseStyle)(options))
     }
+
+    if (sizes) {
+      const sizeStyle = getModifierStyle<H, M>(size, sizes)(options)
+
+      style = merge(style, wrapStyle<H, M>("size", sizeStyle)(options))
+    }
+
+    if (variants) {
+      const variantStyle = getModifierStyle<H, M>(variant, variants)(options)
+
+      style = merge(style, wrapStyle<H, M>("variant", variantStyle)(options))
+    }
+
+    if (propVariants) {
+      style = getPropStyle<H, M>(rest, propVariants, style)(options)
+    }
+
+    const styleEqual = isEqual(styleRef.current, style)
+
+    if (!styleEqual) styleRef.current = style ?? {}
+
+    const propsEqual = isEqual(propsRef.current, computedProps)
+
+    if (!propsEqual)
+      propsRef.current = computedProps as unknown as WithoutThemeProps<Y, M, D>
+  } else {
+    props.className = cx(getSlotClassName(className, slot), props.className)
+
+    const propsEqual = isEqual(propsRef.current, props)
+
+    if (!propsEqual)
+      propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  const isPropsEqual = isEqual(propsRef.current, props)
-
-  if (!isPropsEqual) propsRef.current = props
-
-  return [stylesRef.current, propsRef.current]
+  return {
+    ...propsRef.current,
+    css: styleRef.current,
+  }
 }
 
-export type UseComponentStyleOptions<Y extends boolean = false> = Omit<
-  UseStylesOptions<Y>,
-  "isMulti"
->
+export interface UseComponentStyleOptions<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+> extends Omit<UseStyleOptions<Y, M, D>, "hasSlot" | "slot"> {}
 
-export function useComponentStyle<Y extends Dict = Dict>(
-  name: string,
-  props: Y,
-  options?: UseComponentStyleOptions,
-) {
-  return useStyles<Y>(name, props, options)
+export function useComponentStyle<
+  Y extends Dict = Dict,
+  M extends ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+>(props: Y, options: UseComponentStyleOptions<Y, M, D> = {}) {
+  return useStyle<Y, M, D>(props, options)
 }
 
-export function useComponentMultiStyle<Y extends Dict = Dict>(
-  name: string,
-  props: Y,
-  options?: UseComponentStyleOptions<true>,
-) {
-  return useStyles<Y, true>(name, props, { isMulti: true, ...options })
+export interface UseComponentSlotStyleOptions<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  D extends keyof Y = keyof Y,
+> extends Omit<UseStyleOptions<Y, M, D, true>, "hasSlot"> {}
+
+export function useComponentSlotStyle<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle = ComponentSlotStyle,
+  D extends keyof Y = keyof Y,
+>(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
+  return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
+}
+
+/**
+ * @deprecated
+ */
+export function useComponentMultiStyle<
+  Y extends Dict = Dict,
+  M extends ComponentSlotStyle = ComponentSlotStyle,
+  D extends keyof Y = keyof Y,
+>(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
+  return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
 }

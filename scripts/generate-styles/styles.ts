@@ -8,7 +8,7 @@ import {
   pseudoSelectors,
   toKebabCase,
 } from "@yamada-ui/react"
-import { baseline } from "compute-baseline"
+import { computeBaseline } from "compute-baseline"
 import { prettier } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
@@ -21,7 +21,7 @@ import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
 export type BaselineData = {
   baseline: string
-} & Omit<ReturnType<typeof baseline.computeBaseline>, "baseline">
+} & Omit<ReturnType<typeof computeBaseline>, "baseline">
 
 const hasTransform = (
   targetTransform: Transforms,
@@ -168,7 +168,7 @@ const generateCompatKeys = (properties: CSSProperty[], atRuleProp?: string) => {
 }
 
 const formatBaseline = (
-  data: ReturnType<typeof baseline.computeBaseline>,
+  data: ReturnType<typeof computeBaseline>,
 ): BaselineData => {
   switch (data.baseline) {
     case "high":
@@ -191,7 +191,7 @@ export const generateBaseline = (
     isString,
   )
   const data = firstKey
-    ? baseline.computeBaseline({
+    ? computeBaseline({
         compatKeys: [firstKey, ...restKeys],
       })
     : null
@@ -334,7 +334,7 @@ export const generateStyles = async (
         properties,
         static: css,
       },
-    ]: [string, StyleConfig | AtRuleConfig],
+    ]: [string, AtRuleConfig | StyleConfig],
     targetStyles: string[],
   ) => {
     if (processSkip) processSkipProps.push(prop)

@@ -1,5 +1,5 @@
 import { DiscAlbum } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DiscAlbumIcon` is [Lucide](https://lucide.dev) SVG icon component.

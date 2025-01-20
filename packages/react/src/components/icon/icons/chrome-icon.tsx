@@ -1,5 +1,5 @@
 import { Chrome } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ChromeIcon` is [Lucide](https://lucide.dev) SVG icon component.

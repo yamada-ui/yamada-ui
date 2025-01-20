@@ -1,5 +1,5 @@
 import { SquareChevronLeft } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SquareChevronLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.

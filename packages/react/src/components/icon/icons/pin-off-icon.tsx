@@ -1,5 +1,5 @@
 import { PinOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PinOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { AlignCenterVertical } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AlignCenterVerticalIcon` is [Lucide](https://lucide.dev) SVG icon component.

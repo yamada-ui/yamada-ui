@@ -14,6 +14,10 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
+export const Basic: Story = () => {
+  return <Button>Button</Button>
+}
+
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -74,23 +78,35 @@ export const Disabled: Story = () => {
 export const Icon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
+      <Button
+        colorScheme="primary"
+        variant="solid"
+        startIcon={<PlusIcon fontSize="xl" />}
+      >
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        endIcon={<ArrowRightIcon />}
+        endIcon={<ArrowRightIcon fontSize="xl" />}
       >
         Button
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" startIcon={<MailIcon />}>
+      <Button
+        colorScheme="warning"
+        variant="ghost"
+        startIcon={<MailIcon fontSize="xl" />}
+      >
         Button
       </Button>
 
-      <Button colorScheme="danger" variant="link" startIcon={<CheckIcon />}>
+      <Button
+        colorScheme="danger"
+        variant="link"
+        startIcon={<CheckIcon fontSize="xl" />}
+      >
         Button
       </Button>
     </Wrap>

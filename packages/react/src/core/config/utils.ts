@@ -1,18 +1,19 @@
-import type { CSSObject, Keyframes } from "@emotion/react"
 import type { Dict } from "../../utils"
 import type { ColorMode, CSSFunction } from "../css"
-import type { ThemeToken } from "../theme"
-import type { StyledTheme } from "../theme.types"
-import { keyframes as emotionKeyframes } from "@emotion/react"
+import type { StyledTheme, ThemeToken, UsageTheme } from "../theme"
 import { isObject, isString, isUndefined } from "../../utils"
-import { getVar } from "../css"
+import { getColorSchemeVar, isColorScheme } from "../css"
 
-export type Transform = (
-  value: any,
-  theme: StyledTheme,
-  css: CSSFunction,
-  prev?: Dict,
-) => any
+export interface TransformOptions {
+  theme: StyledTheme<UsageTheme>
+  css?: CSSFunction
+  prev?: Dict
+  properties?: string | string[]
+}
+
+export interface Transform {
+  (value: any, options: TransformOptions): any
+}
 
 export const globalValues = new Set([
   "-moz-initial",
@@ -80,51 +81,19 @@ export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
-  return { isUnitless: !unit, unit, value }
+  return { unit, unitless: !unit, value }
 }
 
 export function tokenToVar(token: ThemeToken, value: any) {
-  return function (theme: StyledTheme) {
-    if (value == null) return value
+  return function (theme: StyledTheme<UsageTheme>) {
+    if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
 
-    if (isString(value)) {
-      const important = value.match(/\s*!important\s*/g)
+    const resolvedToken = `${token}.${value}`
 
-      value = value.replace(/\s*!important\s*/g, "")
-
-      const match = value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
-      const [, pickedValue, fallbackValue] = match ?? []
-
-      if (pickedValue) value = pickedValue
-
-      if (value.startsWith("colorScheme.")) {
-        const [, token] = value.split(".")
-        const resolvedValue = getVar(`colorScheme-${token}`)(theme)
-
-        return `${resolvedValue}${important ? " !important" : ""}`
-      }
-
-      const resolvedToken = `${token}.${value}`
-
-      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-        const value = theme.__cssMap[resolvedToken]?.ref
-
-        return `${value}${important ? " !important" : ""}`
-      } else {
-        const resolvedValue = fallbackValue ?? value
-
-        return resolvedValue
-          ? `${resolvedValue}${important ? " !important" : ""}`
-          : resolvedValue
-      }
+    if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
+      return theme.__cssMap[resolvedToken]?.ref
     } else {
-      const resolvedToken = `${token}.${value}`
-
-      if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-        return theme.__cssMap[resolvedToken]?.ref
-      } else {
-        return value
-      }
+      return value
     }
   }
 }
@@ -133,10 +102,6 @@ export function mode<L, D>(light: L, dark: D) {
   return function (colorMode: ColorMode | undefined = "light"): D | L {
     return colorMode === "light" ? light : dark
   }
-}
-
-export function keyframes(...arg: CSSObject[]): Keyframes {
-  return emotionKeyframes(...arg)
 }
 
 function combineFunctions(a: Transform, b: Transform): Transform {

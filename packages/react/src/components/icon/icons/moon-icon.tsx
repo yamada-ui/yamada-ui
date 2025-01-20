@@ -1,5 +1,5 @@
 import { Moon } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MoonIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { Table } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TableIcon` is [Lucide](https://lucide.dev) SVG icon component.

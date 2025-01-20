@@ -1,5 +1,5 @@
 import { FileChartLine } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileChartLineIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { FilterX } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FilterXIcon` is [Lucide](https://lucide.dev) SVG icon component.

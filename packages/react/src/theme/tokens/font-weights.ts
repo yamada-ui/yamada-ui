@@ -1,6 +1,6 @@
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const fontWeights: ThemeTokens = {
+export const fontWeights = defineTokens.fontWeights({
   hairline: 100,
   thin: 200,
   light: 300,
@@ -10,4 +10,4 @@ export const fontWeights: ThemeTokens = {
   bold: 700,
   extrabold: 800,
   black: 900,
-}
+})

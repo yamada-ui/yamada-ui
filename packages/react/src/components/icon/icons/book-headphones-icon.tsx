@@ -1,5 +1,5 @@
 import { BookHeadphones } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BookHeadphonesIcon` is [Lucide](https://lucide.dev) SVG icon component.

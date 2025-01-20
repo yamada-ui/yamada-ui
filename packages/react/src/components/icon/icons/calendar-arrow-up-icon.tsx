@@ -1,5 +1,5 @@
 import { CalendarArrowUp } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CalendarArrowUpIcon` is [Lucide](https://lucide.dev) SVG icon component.

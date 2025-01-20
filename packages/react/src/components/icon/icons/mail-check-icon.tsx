@@ -1,5 +1,5 @@
 import { MailCheck } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MailCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.

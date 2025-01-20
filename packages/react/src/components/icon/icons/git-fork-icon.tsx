@@ -1,5 +1,5 @@
 import { GitFork } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `GitForkIcon` is [Lucide](https://lucide.dev) SVG icon component.

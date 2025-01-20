@@ -1,5 +1,5 @@
 import { RefreshCwOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RefreshCwOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

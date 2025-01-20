@@ -1,7 +1,7 @@
 /* eslint-disable perfectionist/sort-objects */
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const zIndices: ThemeTokens = {
+export const zIndices = defineTokens.zIndices({
   yamcha: 1,
   kurillin: 9,
   nappa: 99,
@@ -18,4 +18,4 @@ export const zIndices: ThemeTokens = {
   vegeta: 9997,
   sonGoku: 9998,
   beerus: 9999,
-}
+})

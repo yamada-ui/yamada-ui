@@ -137,7 +137,7 @@ export const Button = withContext(
   }) => {
     const trulyDisabled = disabled || loading
     const { ref: buttonRef, type } = useButtonType(as)
-    const { onPointerDown, ...rippleProps } = useRipple({
+    const { onClick, ...rippleProps } = useRipple({
       ...rest,
       disabled: disableRipple || trulyDisabled,
     })
@@ -159,7 +159,7 @@ export const Button = withContext(
           data-loading={dataAttr(loading)}
           disabled={trulyDisabled}
           {...rest}
-          onPointerDown={onPointerDown}
+          onClick={onClick}
         >
           {startLoading ? <ButtonStartLoading {...loadingProps} /> : null}
 

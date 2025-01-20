@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BellIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { ShieldCheck } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ShieldCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.

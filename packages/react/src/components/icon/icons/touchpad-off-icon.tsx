@@ -1,5 +1,5 @@
 import { TouchpadOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TouchpadOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

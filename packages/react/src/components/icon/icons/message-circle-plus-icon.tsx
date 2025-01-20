@@ -1,5 +1,5 @@
 import { MessageCirclePlus } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MessageCirclePlusIcon` is [Lucide](https://lucide.dev) SVG icon component.

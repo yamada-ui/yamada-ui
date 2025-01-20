@@ -31,13 +31,12 @@ export const PropsTable = <Y extends string, M extends string>({
 }: PropsTableProps<Y, M>) => {
   if (variant === "grid") {
     return (
-      <Grid templateColumns={`repeat(${columns.length + 1}, 1fr)`} w="full">
+      <Grid templateColumns={`auto repeat(${columns.length}, 1fr)`} w="full">
         <GridItem />
 
         {columns.map((column, colIndex) => (
           <GridItem
             key={colIndex}
-            color="muted"
             fontWeight="semibold"
             p="md"
             textAlign="center"
@@ -49,7 +48,12 @@ export const PropsTable = <Y extends string, M extends string>({
         <For each={rows}>
           {(row, rowIndex) => (
             <Fragment key={rowIndex}>
-              <Flex align="center" color="muted" fontWeight="semibold" p="md">
+              <Flex
+                align="center"
+                color="fg.muted"
+                fontWeight="semibold"
+                p="md"
+              >
                 {toTitleCase(row)}
               </Flex>
 
@@ -76,15 +80,20 @@ export const PropsTable = <Y extends string, M extends string>({
       <For each={columns}>
         {(column, colIndex) => (
           <Fragment key={colIndex}>
-            <Heading as="h2" size="lg">
+            <Heading as="h2" size="md">
               {toTitleCase(column)}
             </Heading>
 
-            <Grid gap="md" templateColumns="auto 1fr" w="full">
+            <Grid gapX="lg" gapY="md" templateColumns="auto 1fr" w="full">
               <For each={rows}>
                 {(row, rowIndex) => (
                   <Fragment key={rowIndex}>
-                    <GridItem color="muted" fontWeight="semibold" p="md">
+                    <GridItem
+                      alignItems="center"
+                      color="fg.muted"
+                      display="flex"
+                      fontWeight="semibold"
+                    >
                       {toTitleCase(row)}
                     </GridItem>
 

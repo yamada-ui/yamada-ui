@@ -1,5 +1,5 @@
 import { Section } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SectionIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { SquareDashed } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SquareDashedIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { SwissFranc } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SwissFrancIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -26,40 +26,35 @@ export const badgeStyle = defineComponentStyle({
 
   variants: {
     outline: {
-      boxShadow: "inset 0 0 0px 1px $colorScheme.outline",
-      color: "colorScheme.outline",
+      layerStyle: "outline",
     },
     solid: {
-      bg: "colorScheme.solid",
-      color: "colorScheme.contrast",
+      layerStyle: "solid",
     },
     subtle: {
-      bg: "colorScheme.subtle",
-      color: "colorScheme.fg",
+      layerStyle: "subtle",
     },
     surface: {
-      bg: "colorScheme.subtle",
-      boxShadow: "inset 0 0 0px 1px $colorScheme.muted",
-      color: "colorScheme.fg",
+      layerStyle: "surface",
     },
   },
 
   sizes: {
     sm: {
       fontSize: "xs",
-      lineHeight: "$sizes.5",
+      lineHeight: "{sizes.5}",
       minH: "5",
       px: "1.5",
     },
     md: {
       fontSize: "sm",
-      lineHeight: "$sizes.6",
+      lineHeight: "{sizes.6}",
       minH: "6",
       px: "2",
     },
     lg: {
       fontSize: "md",
-      lineHeight: "$sizes.7",
+      lineHeight: "{sizes.7}",
       minH: "7",
       px: "2.5",
     },

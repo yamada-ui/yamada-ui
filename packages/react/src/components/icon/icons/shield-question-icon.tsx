@@ -1,5 +1,5 @@
 import { ShieldQuestion } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ShieldQuestionIcon` is [Lucide](https://lucide.dev) SVG icon component.

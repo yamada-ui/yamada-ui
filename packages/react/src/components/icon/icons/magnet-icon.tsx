@@ -1,5 +1,5 @@
 import { Magnet } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MagnetIcon` is [Lucide](https://lucide.dev) SVG icon component.

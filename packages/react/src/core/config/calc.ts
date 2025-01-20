@@ -11,13 +11,13 @@ import {
 const OPERATORS = ["+", "-", "*", "/"]
 
 function getValue(value: string | undefined, fallbackValue = ""): Transform {
-  return function (token, theme, ...rest) {
+  return function (token, { theme, ...rest }) {
     if (!value) return fallbackValue
 
     const prevent = isCSSFunction(value)
 
     if (prevent) {
-      return generateCalc(token)(value, theme, ...rest)
+      return generateCalc(token)(value, { theme, ...rest })
     } else {
       if (isNumeric(value)) return value
 
@@ -35,7 +35,7 @@ function isOperator(value: string) {
 }
 
 export function generateCalc(token: ThemeToken): Transform {
-  return function (value, theme, ...rest) {
+  return function (value, options) {
     if (value == null || globalValues.has(value)) return value
 
     const prevent = isCSSFunction(value)
@@ -55,7 +55,7 @@ export function generateCalc(token: ThemeToken): Transform {
         ).map((value) => {
           if (value && OPERATORS.includes(value)) return value
 
-          return getValue(value)(token, theme, ...rest)
+          return getValue(value)(token, options)
         })
 
         return `calc(${computedValues.join(" ")})`
@@ -65,10 +65,10 @@ export function generateCalc(token: ThemeToken): Transform {
       case "max": {
         let [firstValue, secondValue, ...otherValues] = splitValues(values)
 
-        firstValue = getValue(firstValue, "100%")(token, theme, ...rest)
-        secondValue = getValue(secondValue, "100%")(token, theme, ...rest)
+        firstValue = getValue(firstValue, "100%")(token, options)
+        secondValue = getValue(secondValue, "100%")(token, options)
         otherValues = otherValues.map((value) =>
-          getValue(value)(token, theme, ...rest),
+          getValue(value)(token, options),
         )
 
         return (
@@ -87,9 +87,9 @@ export function generateCalc(token: ThemeToken): Transform {
           preferred = ""
         }
 
-        min = getValue(min)(token, theme, ...rest)
-        preferred = getValue(preferred, "100%")(token, theme, ...rest)
-        max = getValue(max)(token, theme, ...rest)
+        min = getValue(min)(token, options)
+        preferred = getValue(preferred, "100%")(token, options)
+        max = getValue(max)(token, options)
 
         return `clamp(${min}, ${preferred}, ${max})`
       }
@@ -97,8 +97,8 @@ export function generateCalc(token: ThemeToken): Transform {
       case "minmax": {
         let [min, max] = splitValues(values)
 
-        min = getValue(min)(token, theme, ...rest)
-        max = getValue(max)(token, theme, ...rest)
+        min = getValue(min)(token, options)
+        max = getValue(max)(token, options)
 
         return `minmax(${min}, ${max})`
       }
@@ -106,7 +106,7 @@ export function generateCalc(token: ThemeToken): Transform {
       case "fit-content": {
         let [value] = splitValues(values)
 
-        value = getValue(value)(token, theme, ...rest)
+        value = getValue(value)(token, options)
 
         return `fit-content(${value})`
       }

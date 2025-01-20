@@ -1,5 +1,5 @@
 import { SquareUserRound } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SquareUserRoundIcon` is [Lucide](https://lucide.dev) SVG icon component.

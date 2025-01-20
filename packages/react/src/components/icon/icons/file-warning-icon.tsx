@@ -1,5 +1,5 @@
 import { FileWarning } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileWarningIcon` is [Lucide](https://lucide.dev) SVG icon component.

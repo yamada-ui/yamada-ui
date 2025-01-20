@@ -1,5 +1,5 @@
 import { SkipBack } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SkipBackIcon` is [Lucide](https://lucide.dev) SVG icon component.

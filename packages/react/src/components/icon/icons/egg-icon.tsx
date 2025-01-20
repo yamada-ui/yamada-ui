@@ -1,5 +1,5 @@
 import { Egg } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `EggIcon` is [Lucide](https://lucide.dev) SVG icon component.

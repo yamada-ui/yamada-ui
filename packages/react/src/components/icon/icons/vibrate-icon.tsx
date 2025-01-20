@@ -1,5 +1,5 @@
 import { Vibrate } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `VibrateIcon` is [Lucide](https://lucide.dev) SVG icon component.

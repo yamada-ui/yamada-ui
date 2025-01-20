@@ -1,5 +1,5 @@
 import { Pocket } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PocketIcon` is [Lucide](https://lucide.dev) SVG icon component.

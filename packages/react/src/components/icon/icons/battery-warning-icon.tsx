@@ -1,5 +1,5 @@
 import { BatteryWarning } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BatteryWarningIcon` is [Lucide](https://lucide.dev) SVG icon component.

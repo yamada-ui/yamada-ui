@@ -1,5 +1,5 @@
 import { Grid2x2Check } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Grid2x2CheckIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { Sigma } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SigmaIcon` is [Lucide](https://lucide.dev) SVG icon component.

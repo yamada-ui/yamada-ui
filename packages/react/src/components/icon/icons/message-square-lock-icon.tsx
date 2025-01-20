@@ -1,5 +1,5 @@
 import { MessageSquareLock } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MessageSquareLockIcon` is [Lucide](https://lucide.dev) SVG icon component.

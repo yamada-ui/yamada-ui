@@ -1,5 +1,5 @@
 import { Monitor } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `MonitorIcon` is [Lucide](https://lucide.dev) SVG icon component.

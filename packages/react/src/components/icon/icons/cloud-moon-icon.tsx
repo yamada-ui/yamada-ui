@@ -1,5 +1,5 @@
 import { CloudMoon } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CloudMoonIcon` is [Lucide](https://lucide.dev) SVG icon component.

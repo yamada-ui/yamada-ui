@@ -1,5 +1,5 @@
 import { CornerUpLeft } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CornerUpLeftIcon` is [Lucide](https://lucide.dev) SVG icon component.

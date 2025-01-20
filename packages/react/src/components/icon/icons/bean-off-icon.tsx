@@ -1,5 +1,5 @@
 import { BeanOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BeanOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

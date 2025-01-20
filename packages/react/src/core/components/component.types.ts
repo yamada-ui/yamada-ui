@@ -1,7 +1,7 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
 import type { CSSModifierObject, CSSPropObject, CSSProps } from "../css"
-import type { ComponentStyle, StyledTheme } from "../theme.types"
+import type { ComponentStyle, StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
@@ -38,7 +38,7 @@ export interface UIProps extends CSSProps {
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type InterpolationProps = {
-  theme: StyledTheme
+  theme: StyledTheme<UsageTheme>
 } & CSSProps
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = M &
@@ -85,10 +85,12 @@ export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.ComponentRef<Y>
 }
 
-export type HTMLProps<Y extends DOMElement = "div"> = Omit<
-  React.JSX.IntrinsicElements[Y],
-  "size" | keyof UIProps
->
+export interface HTMLDataAttributes {
+  [key: `data-${string}`]: boolean | string
+}
+
+export type HTMLProps<Y extends DOMElement = "div"> = HTMLDataAttributes &
+  Omit<React.JSX.IntrinsicElements[Y], "size" | keyof UIProps>
 
 export type HTMLUIProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,
@@ -106,12 +108,18 @@ export type HTMLUIPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
 
 type ConditionalProps<Y> = Y extends DOMElement ? HTMLProps<Y> : Y
 
+type MergedProps<Y, M> = M extends undefined ? Y : Merge<Y, M>
+
 type DefinedProps<Y, M> = M extends undefined ? Y : M
 
-export interface PropGetter<Y = "div", M = undefined> {
-  (props?: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
+export interface PropGetter<Y = "div", M = undefined, D = undefined> {
+  (
+    props?: MergedProps<ConditionalProps<Y>, M>,
+  ): DefinedProps<ConditionalProps<Y>, D>
 }
 
-export interface RequiredPropGetter<Y = "div", M = undefined> {
-  (props: ConditionalProps<Y>): DefinedProps<ConditionalProps<Y>, M>
+export interface RequiredPropGetter<Y = "div", M = undefined, D = undefined> {
+  (
+    props: MergedProps<ConditionalProps<Y>, M>,
+  ): DefinedProps<ConditionalProps<Y>, D>
 }

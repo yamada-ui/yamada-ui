@@ -1,5 +1,5 @@
 import { RefreshCcw } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RefreshCcwIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { Tangent } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TangentIcon` is [Lucide](https://lucide.dev) SVG icon component.

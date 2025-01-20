@@ -1,13 +1,12 @@
-import type { Dict } from "@yamada-ui/utils"
-import type { CSSFunction } from "../css"
-import type { ColorScheme, StyledTheme } from "../theme.types"
+import type { ColorScheme } from "../theme"
+import type { TransformOptions } from "./utils"
 import { isArray, TONES } from "../../utils"
 import { getVarName } from "../css"
 import { pseudos } from "../pseudos"
 import { tokenToVar } from "./utils"
 
 function createColorSchemeVariables(value: ColorScheme) {
-  return function (theme: StyledTheme) {
+  return function ({ theme }: TransformOptions) {
     return {
       ...Object.fromEntries(
         TONES.map((tone) => [
@@ -22,6 +21,7 @@ function createColorSchemeVariables(value: ColorScheme) {
           "subtle",
           "muted",
           "emphasized",
+          "ghost",
           "solid",
           "outline",
         ].map((token) => [
@@ -33,20 +33,15 @@ function createColorSchemeVariables(value: ColorScheme) {
   }
 }
 
-export function colorScheme(
-  value: any,
-  theme: StyledTheme,
-  _css?: CSSFunction,
-  _prev?: Dict,
-) {
+export function colorScheme(value: any, options: TransformOptions) {
   if (isArray(value)) {
     const [lightValue, darkValue] = value
 
     return {
-      ...createColorSchemeVariables(lightValue)(theme),
-      [pseudos._dark]: createColorSchemeVariables(darkValue)(theme),
+      ...createColorSchemeVariables(lightValue)(options),
+      [pseudos._dark]: createColorSchemeVariables(darkValue)(options),
     }
   } else {
-    return createColorSchemeVariables(value)(theme)
+    return createColorSchemeVariables(value)(options)
   }
 }

@@ -1,5 +1,5 @@
 import { ClipboardCheck } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ClipboardCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.

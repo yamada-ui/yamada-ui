@@ -1,5 +1,5 @@
 import { LassoSelect } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `LassoSelectIcon` is [Lucide](https://lucide.dev) SVG icon component.

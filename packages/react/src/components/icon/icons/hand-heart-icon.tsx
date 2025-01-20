@@ -1,5 +1,5 @@
 import { HandHeart } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `HandHeartIcon` is [Lucide](https://lucide.dev) SVG icon component.

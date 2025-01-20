@@ -2,7 +2,7 @@ import type * as CSS from "csstype"
 import type { ObjectLiteral, StringLiteral } from "../../utils"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { Breakpoint, StyledTheme, Theme } from "../theme.types"
+import type { Breakpoint, StyledTheme, ThemeTokens, UsageTheme } from "../theme"
 
 export type { CSS }
 
@@ -19,18 +19,20 @@ export type ResponsiveObject<Y, M extends boolean = true> = M extends true
 
 export type UIValue<Y> = ColorModeArray<Y> | ResponsiveObject<Y> | Y
 
-export type BaseToken<Y, M = unknown> = M extends keyof Theme ? Theme[M] | Y : Y
+export type BaseToken<Y, M = unknown> = M extends keyof ThemeTokens
+  ? ThemeTokens[M] | Y
+  : Y
 
-export type ColorModeToken<Y, M = unknown> = M extends keyof Theme
-  ? ColorModeArray<Theme[M] | Y> | Theme[M] | Y
+export type ColorModeToken<Y, M = unknown> = M extends keyof ThemeTokens
+  ? ColorModeArray<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
   : ColorModeArray<Y> | Y
 
-export type ResponsiveToken<Y, M = unknown> = M extends keyof Theme
-  ? ResponsiveObject<Theme[M] | Y> | Theme[M] | Y
+export type ResponsiveToken<Y, M = unknown> = M extends keyof ThemeTokens
+  ? ResponsiveObject<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
   : ResponsiveObject<Y> | Y
 
-export type Token<Y, M = unknown> = M extends keyof Theme
-  ? UIValue<Theme[M] | Y>
+export type Token<Y, M = unknown> = M extends keyof ThemeTokens
+  ? UIValue<ThemeTokens[M] | Y>
   : UIValue<Y>
 
 export interface CSSProperties
@@ -80,21 +82,18 @@ export interface CSSProps extends StyleProps, PseudoProps {
 }
 
 export interface AnimationStyle {
-  keyframes: { [key: string]: StyleObject }
+  keyframes: { [key: string]: StyleObject } | ThemeTokens["keyframes"]
   delay?: BaseToken<CSS.Property.AnimationDelay>
   direction?: BaseToken<CSS.Property.AnimationDirection>
-  duration?: BaseToken<CSS.Property.AnimationDuration, "transitionDuration">
+  duration?: BaseToken<CSS.Property.AnimationDuration, "durations">
   fillMode?: BaseToken<CSS.Property.AnimationFillMode>
   iterationCount?: BaseToken<CSS.Property.AnimationIterationCount>
   playState?: BaseToken<CSS.Property.AnimationPlayState>
-  timingFunction?: BaseToken<
-    CSS.Property.AnimationTimingFunction,
-    "transitionEasing"
-  >
+  timingFunction?: BaseToken<CSS.Property.AnimationTimingFunction, "easings">
 }
 
 export interface FunctionCSSInterpolation {
-  (theme: StyledTheme): CSSObject
+  (theme: StyledTheme<UsageTheme>): CSSObject
 }
 
 export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation

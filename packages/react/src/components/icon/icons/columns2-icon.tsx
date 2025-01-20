@@ -1,5 +1,5 @@
 import { Columns2 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Columns2Icon` is [Lucide](https://lucide.dev) SVG icon component.

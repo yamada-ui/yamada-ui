@@ -1,5 +1,5 @@
 import { WifiOff } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `WifiOffIcon` is [Lucide](https://lucide.dev) SVG icon component.

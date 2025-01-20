@@ -1,5 +1,5 @@
 import { Airplay } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AirplayIcon` is [Lucide](https://lucide.dev) SVG icon component.

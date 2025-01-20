@@ -1,5 +1,5 @@
 import { FlipHorizontal } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FlipHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.

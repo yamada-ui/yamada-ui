@@ -1,5 +1,5 @@
 import { Grape } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `GrapeIcon` is [Lucide](https://lucide.dev) SVG icon component.

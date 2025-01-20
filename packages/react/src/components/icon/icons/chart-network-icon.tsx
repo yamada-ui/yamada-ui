@@ -1,5 +1,5 @@
 import { ChartNetwork } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ChartNetworkIcon` is [Lucide](https://lucide.dev) SVG icon component.

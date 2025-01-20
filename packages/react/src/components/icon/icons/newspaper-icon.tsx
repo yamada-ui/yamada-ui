@@ -1,5 +1,5 @@
 import { Newspaper } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `NewspaperIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -107,15 +107,15 @@ export function chainProps<Y extends Dict = Dict>(
     if (props.length === 1)
       return function (b: Y) {
         const a = props[0] ?? {}
-        const c = isFunction(a) ? a(b) : mergeProps(b, a)(options)
+        const c = isFunction(a) ? a(b) : mergeProps(a, b)(options)
 
         return c
       } as CallbackProps<Y>
 
     return props.reduce(function (a, b) {
       return function (c: Y = {} as Y) {
-        const d = isFunction(a) ? a(c) : mergeProps(c, a)(options)
-        const f = isFunction(b) ? b(d) : mergeProps(d, b)(options)
+        const d = isFunction(a) ? a(c) : mergeProps(a, c)(options)
+        const f = isFunction(b) ? b(d) : mergeProps(b, d)(options)
 
         return f
       }

@@ -1,5 +1,5 @@
 import { Heading1 } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Heading1Icon` is [Lucide](https://lucide.dev) SVG icon component.

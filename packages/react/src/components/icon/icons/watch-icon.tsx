@@ -1,5 +1,5 @@
 import { Watch } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `WatchIcon` is [Lucide](https://lucide.dev) SVG icon component.

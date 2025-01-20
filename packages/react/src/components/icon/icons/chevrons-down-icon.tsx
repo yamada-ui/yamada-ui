@@ -1,5 +1,5 @@
 import { ChevronsDown } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ChevronsDownIcon` is [Lucide](https://lucide.dev) SVG icon component.

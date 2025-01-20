@@ -1,5 +1,5 @@
 import { FolderRoot } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FolderRootIcon` is [Lucide](https://lucide.dev) SVG icon component.

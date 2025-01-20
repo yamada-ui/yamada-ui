@@ -1,5 +1,5 @@
 import { Wine } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `WineIcon` is [Lucide](https://lucide.dev) SVG icon component.

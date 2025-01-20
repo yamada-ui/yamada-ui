@@ -11,28 +11,25 @@ export const accordionStyle = defineComponentSlotStyle({
       outline: "none",
       px: "4",
       py: "3",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       w: "100%",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _nativeDisabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     icon: {
       color: "fg.subtle",
-      fontSize: "1.25em",
+      fontSize: "xl",
       ml: "auto",
       transformOrigin: "center",
-      transition: "transform 0.2s",
+      transitionDuration: "moderate",
+      transitionProperty: "transform",
       _disabled: {
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
       _expanded: {
-        transform: "rotate(-180deg)",
+        transform: "rotate(180deg)",
       },
     },
     item: {
@@ -55,6 +52,9 @@ export const accordionStyle = defineComponentSlotStyle({
       },
     },
     panel: {
+      button: {
+        rounded: "md",
+      },
       item: {
         bg: "bg.panel",
         borderWidth: "1px",

@@ -1,5 +1,5 @@
 import { Apple } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AppleIcon` is [Lucide](https://lucide.dev) SVG icon component.

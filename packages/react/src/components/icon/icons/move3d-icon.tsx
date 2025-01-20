@@ -1,5 +1,5 @@
 import { Move3d } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `Move3dIcon` is [Lucide](https://lucide.dev) SVG icon component.

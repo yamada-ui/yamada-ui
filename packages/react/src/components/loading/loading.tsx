@@ -578,7 +578,7 @@ export const LoadingOval = withContext<"svg", LoadingOvalProps>(
           <g strokeWidth="2" transform="translate(1 1)">
             <ui.circle
               {...(secondaryColor
-                ? { stroke: "$secondaryColor" }
+                ? { stroke: "{secondaryColor}" }
                 : { strokeOpacity: ".5" })}
               cx="18"
               cy="18"

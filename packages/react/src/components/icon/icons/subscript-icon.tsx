@@ -1,5 +1,5 @@
 import { Subscript } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `SubscriptIcon` is [Lucide](https://lucide.dev) SVG icon component.

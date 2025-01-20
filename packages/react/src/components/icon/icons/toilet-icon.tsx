@@ -1,5 +1,5 @@
 import { Toilet } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ToiletIcon` is [Lucide](https://lucide.dev) SVG icon component.

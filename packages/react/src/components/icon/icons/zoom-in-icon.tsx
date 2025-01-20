@@ -1,5 +1,5 @@
 import { ZoomIn } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ZoomInIcon` is [Lucide](https://lucide.dev) SVG icon component.

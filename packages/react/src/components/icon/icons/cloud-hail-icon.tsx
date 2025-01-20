@@ -1,5 +1,5 @@
 import { CloudHail } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CloudHailIcon` is [Lucide](https://lucide.dev) SVG icon component.

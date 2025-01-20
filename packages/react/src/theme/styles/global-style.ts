@@ -1,6 +1,6 @@
-import type { CSSObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const globalStyle: CSSObject = {
+export const globalStyle = defineStyles.globalStyle({
   "*, *::before, *::after": {
     borderColor: "border",
     borderStyle: "solid",
@@ -10,14 +10,17 @@ export const globalStyle: CSSObject = {
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",
   },
+  "*:focus-visible, *[data-focus-visible]": {
+    outline: "outside",
+  },
   body: {
     colorScheme: "mono",
     bg: "bg",
     color: "fg",
     fontFamily: "body",
-    lineHeight: "base",
+    lineHeight: "moderate",
     overflowX: "hidden",
-    transitionDuration: "normal",
+    transitionDuration: "moderate",
     transitionProperty: "background-color",
   },
-}
+})

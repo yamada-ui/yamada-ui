@@ -1,5 +1,5 @@
 import { ChartCandlestick } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ChartCandlestickIcon` is [Lucide](https://lucide.dev) SVG icon component.

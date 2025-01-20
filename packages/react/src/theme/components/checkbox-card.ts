@@ -12,7 +12,7 @@ export const CheckboxCard: ComponentMultiStyle<"CheckboxCard"> =
         color: ["white", "black"],
         display: "inline-block",
         position: "relative",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "box-shadow",
         userSelect: "none",
         _checked: {

@@ -236,8 +236,6 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
       return cloneElement(
         children,
         getIconProps({
-          "aria-hidden": true,
-          role: "img",
           ...rest,
           ...children.props,
         }),

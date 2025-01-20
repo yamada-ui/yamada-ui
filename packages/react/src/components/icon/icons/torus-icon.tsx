@@ -1,5 +1,5 @@
 import { Torus } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `TorusIcon` is [Lucide](https://lucide.dev) SVG icon component.

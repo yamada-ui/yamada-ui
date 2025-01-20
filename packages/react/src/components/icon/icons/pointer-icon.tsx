@@ -1,5 +1,5 @@
 import { Pointer } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PointerIcon` is [Lucide](https://lucide.dev) SVG icon component.

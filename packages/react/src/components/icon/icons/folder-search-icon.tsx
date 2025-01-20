@@ -1,5 +1,5 @@
 import { FolderSearch } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FolderSearchIcon` is [Lucide](https://lucide.dev) SVG icon component.

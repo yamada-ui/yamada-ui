@@ -1,5 +1,5 @@
 import { BluetoothSearching } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BluetoothSearchingIcon` is [Lucide](https://lucide.dev) SVG icon component.

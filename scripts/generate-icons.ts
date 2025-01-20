@@ -67,7 +67,7 @@ const createIcons = async (iconNames: string[]) =>
       const fileName = toKebabCase(iconName)
       let data = [
         `import { ${iconName} } from "lucide-react"`,
-        `import { Icon, component } from "../icon"`,
+        `import { component, Icon } from "../icon"`,
         ``,
         `/**`,
         ` * \`${iconName}Icon\` is [Lucide](https://lucide.dev) SVG icon component.`,

@@ -1,5 +1,5 @@
 import { PcCase } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PcCaseIcon` is [Lucide](https://lucide.dev) SVG icon component.

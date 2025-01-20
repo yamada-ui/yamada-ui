@@ -118,7 +118,7 @@ export const ZStack = withContext(
         const key = child.key ?? index
 
         const zIndex = startIndex + index
-        const space = `calc($space * ${index})`
+        const space = `calc({space} * ${index})`
 
         const css: CSSObject = {
           position: "absolute",

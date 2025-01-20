@@ -1,5 +1,5 @@
 import { Pilcrow } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PilcrowIcon` is [Lucide](https://lucide.dev) SVG icon component.

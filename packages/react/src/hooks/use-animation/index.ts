@@ -1,4 +1,4 @@
-import type { AnimationStyle, Theme } from "../../core"
+import type { AnimationStyle, ThemeTokens } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { animation, css } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
@@ -7,9 +7,9 @@ import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
 
 type Styles =
-  | (AnimationStyle | Theme["animations"])[]
+  | (AnimationStyle | ThemeTokens["animations"])[]
   | AnimationStyle
-  | Theme["animations"]
+  | ThemeTokens["animations"]
 
 /**
  * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
@@ -20,9 +20,9 @@ export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
 
   if (isArray(styles)) {
-    return styles.map((style) => animation(style, theme, css)).join(", ")
+    return styles.map((style) => animation(style, { css, theme })).join(", ")
   } else {
-    return animation(styles, theme, css)
+    return animation(styles, { css, theme })
   }
 }
 
@@ -33,7 +33,7 @@ export const useAnimation = (styles: Styles): string => {
  */
 export const useDynamicAnimation = <
   T extends
-    | (AnimationStyle | Theme["animations"])[]
+    | (AnimationStyle | ThemeTokens["animations"])[]
     | { [key: string]: Styles },
 >(
   arrayOrObj: T,
@@ -65,10 +65,10 @@ export const useDynamicAnimation = <
       if (isArray(styles)) {
         cache.current.set(
           key,
-          styles.map((style) => animation(style, theme, css)).join(", "),
+          styles.map((style) => animation(style, { css, theme })).join(", "),
         )
       } else {
-        cache.current.set(key, animation(styles, theme, css))
+        cache.current.set(key, animation(styles, { css, theme }))
       }
     }
 

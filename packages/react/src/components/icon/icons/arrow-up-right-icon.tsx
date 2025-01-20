@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ArrowUpRightIcon` is [Lucide](https://lucide.dev) SVG icon component.

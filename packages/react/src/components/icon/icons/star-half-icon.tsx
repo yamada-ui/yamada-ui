@@ -1,5 +1,5 @@
 import { StarHalf } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `StarHalfIcon` is [Lucide](https://lucide.dev) SVG icon component.

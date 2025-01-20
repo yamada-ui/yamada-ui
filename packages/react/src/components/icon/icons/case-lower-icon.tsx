@@ -1,5 +1,5 @@
 import { CaseLower } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `CaseLowerIcon` is [Lucide](https://lucide.dev) SVG icon component.

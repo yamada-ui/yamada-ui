@@ -1,3 +1,3 @@
-import type { ThemeAnimationTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const animations: ThemeAnimationTokens = {}
+export const animations = defineTokens.animations({})

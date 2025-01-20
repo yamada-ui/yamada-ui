@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Button } from "../button"
-import { Card, CardBody, CardFooter } from "../card"
-import { CardHeader } from "../card"
+import { Card } from "../card"
 import { Center } from "../center"
 import { Heading } from "../heading"
 import { Image } from "../image"
@@ -20,12 +19,12 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Card variant="outline" maxW="xl">
-      <CardHeader>
+    <Card.Root variant="outline" maxW="xl">
+      <Card.Header>
         <Heading size="md">北斗の拳</Heading>
-      </CardHeader>
+      </Card.Header>
 
-      <CardBody>
+      <Card.Body>
         <Bleed inline="md">
           <Image
             src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -53,16 +52,16 @@ export const Basic: Story = () => {
         <Text>
           北斗神拳の宿命に導かれるまま乱世に覇をとなえる強敵たちと戦い、弱き者を救い続けるケンシロウ。北斗神拳と対を成す南斗の使い手との戦いや、ケンシロウを見守る兄トキとの出会い、そしてトキとケンシロウが目指した北斗の長兄であり最強の男ラオウとの戦いを通じ、ケンシロウは乱世を救う真の救世主へと成長していく。
         </Text>
-      </CardBody>
+      </Card.Body>
 
-      <CardFooter>
-        <Button colorScheme="primary">Wikipedia</Button>
-      </CardFooter>
-    </Card>
+      <Card.Footer>
+        <Button>Wikipedia</Button>
+      </Card.Footer>
+    </Card.Root>
   )
 }
 
-export const WithFull: Story = () => {
+export const Full: Story = () => {
   return (
     <Center w="full">
       <VStack gap="lg" maxW="xl">

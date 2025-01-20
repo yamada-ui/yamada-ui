@@ -62,10 +62,7 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        bg: "bg",
-        borderColor: "colorScheme.muted",
-        borderWidth: "1px",
-        color: "colorScheme.fg",
+        layerStyle: "outline",
         _loaded: {
           bg: "transparent",
           borderColor: "transparent",
@@ -80,8 +77,7 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        bg: "colorScheme.solid",
-        color: "colorScheme.contrast",
+        layerStyle: "solid",
         _loaded: {
           bg: "transparent",
         },
@@ -95,8 +91,7 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        bg: "colorScheme.muted",
-        color: "colorScheme.fg",
+        layerStyle: "subtle",
         _loaded: {
           bg: "transparent",
         },
@@ -112,10 +107,7 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        bg: "colorScheme.subtle",
-        borderColor: "colorScheme.muted",
-        borderWidth: "1px",
-        color: "colorScheme.fg",
+        layerStyle: "surface",
         _loaded: {
           bg: "transparent",
           borderColor: "transparent",
@@ -128,7 +120,7 @@ export const avatarStyle = defineComponentSlotStyle({
     xs: {
       fallback: {
         fontSize: "xs",
-        lineHeight: "$sizes.8",
+        lineHeight: "{sizes.8}",
       },
       root: {
         boxSize: "8",
@@ -137,7 +129,7 @@ export const avatarStyle = defineComponentSlotStyle({
     sm: {
       fallback: {
         fontSize: "sm",
-        lineHeight: "$sizes.9",
+        lineHeight: "{sizes.9}",
       },
       root: {
         boxSize: "9",
@@ -146,7 +138,7 @@ export const avatarStyle = defineComponentSlotStyle({
     md: {
       fallback: {
         fontSize: "md",
-        lineHeight: "$sizes.10",
+        lineHeight: "{sizes.10}",
       },
       root: {
         boxSize: "10",
@@ -155,7 +147,7 @@ export const avatarStyle = defineComponentSlotStyle({
     lg: {
       fallback: {
         fontSize: "md",
-        lineHeight: "$sizes.11",
+        lineHeight: "{sizes.11}",
       },
       root: {
         boxSize: "11",
@@ -164,7 +156,7 @@ export const avatarStyle = defineComponentSlotStyle({
     xl: {
       fallback: {
         fontSize: "lg",
-        lineHeight: "$sizes.12",
+        lineHeight: "{sizes.12}",
       },
       root: {
         boxSize: "12",

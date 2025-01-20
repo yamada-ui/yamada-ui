@@ -8,6 +8,7 @@ export const alertStyle = defineComponentSlotStyle({
     icon: {
       boxSize: "5",
       flexShrink: 0,
+      fontSize: "xl",
       marginEnd: "3",
     },
     loading: {
@@ -51,7 +52,7 @@ export const alertStyle = defineComponentSlotStyle({
         pl: 7,
         _before: {
           bg: "colorScheme.solid",
-          h: "calc(100% - $sizes.5)",
+          h: "calc(100% - {sizes.5})",
           left: "3",
           position: "absolute",
           rounded: "full",
@@ -63,30 +64,26 @@ export const alertStyle = defineComponentSlotStyle({
     },
     solid: {
       icon: {
-        color: "colorScheme.contrast",
+        textStyle: "solid",
       },
       root: {
-        bg: "colorScheme.solid",
-        color: "colorScheme.contrast",
+        layerStyle: "solid",
       },
     },
     subtle: {
       icon: {
-        color: "colorScheme.fg",
+        textStyle: "subtle",
       },
       root: {
-        bg: "colorScheme.subtle",
-        color: "colorScheme.fg",
+        layerStyle: "subtle",
       },
     },
     surface: {
       icon: {
-        color: "colorScheme.fg",
+        textStyle: "surface",
       },
       root: {
-        bg: "colorScheme.subtle",
-        boxShadow: "inset 0 0 0px 1px $colorScheme.muted",
-        color: "colorScheme.fg",
+        layerStyle: "surface",
       },
     },
   },

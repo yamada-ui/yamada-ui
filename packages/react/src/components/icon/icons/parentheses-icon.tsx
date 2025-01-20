@@ -1,5 +1,5 @@
 import { Parentheses } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ParenthesesIcon` is [Lucide](https://lucide.dev) SVG icon component.

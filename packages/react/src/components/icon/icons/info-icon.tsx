@@ -1,5 +1,5 @@
 import { Info } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `InfoIcon` is [Lucide](https://lucide.dev) SVG icon component.

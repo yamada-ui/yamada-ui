@@ -1,5 +1,5 @@
 import { ServerCog } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `ServerCogIcon` is [Lucide](https://lucide.dev) SVG icon component.

@@ -1,5 +1,5 @@
 import { PanelRightOpen } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `PanelRightOpenIcon` is [Lucide](https://lucide.dev) SVG icon component.

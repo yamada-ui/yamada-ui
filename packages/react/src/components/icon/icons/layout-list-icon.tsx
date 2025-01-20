@@ -1,5 +1,5 @@
 import { LayoutList } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `LayoutListIcon` is [Lucide](https://lucide.dev) SVG icon component.

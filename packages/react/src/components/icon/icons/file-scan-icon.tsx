@@ -1,5 +1,5 @@
 import { FileScan } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileScanIcon` is [Lucide](https://lucide.dev) SVG icon component.

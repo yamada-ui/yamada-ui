@@ -1,5 +1,5 @@
 import { AlignHorizontalDistributeEnd } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `AlignHorizontalDistributeEndIcon` is [Lucide](https://lucide.dev) SVG icon component.

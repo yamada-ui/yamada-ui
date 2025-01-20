@@ -1,5 +1,5 @@
 import { BookText } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `BookTextIcon` is [Lucide](https://lucide.dev) SVG icon component.

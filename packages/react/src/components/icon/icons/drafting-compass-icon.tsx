@@ -1,5 +1,5 @@
 import { DraftingCompass } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `DraftingCompassIcon` is [Lucide](https://lucide.dev) SVG icon component.

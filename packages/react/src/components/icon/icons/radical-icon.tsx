@@ -1,5 +1,5 @@
 import { Radical } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `RadicalIcon` is [Lucide](https://lucide.dev) SVG icon component.

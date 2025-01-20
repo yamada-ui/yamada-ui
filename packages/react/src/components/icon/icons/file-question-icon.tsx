@@ -1,5 +1,5 @@
 import { FileQuestion } from "lucide-react"
-import { Icon, component } from "../icon"
+import { component, Icon } from "../icon"
 
 /**
  * `FileQuestionIcon` is [Lucide](https://lucide.dev) SVG icon component.

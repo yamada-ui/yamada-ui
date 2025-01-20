@@ -19,7 +19,7 @@ export const Basic = () => {
       color="fg.contrast"
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"
@@ -38,7 +38,7 @@ export const UseHook = () => {
       color={color}
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"

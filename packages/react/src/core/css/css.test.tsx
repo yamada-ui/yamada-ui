@@ -1,6 +1,6 @@
 import type { MockInstance } from "vitest"
 import type { Dict } from "../../utils"
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme } from "../theme"
 import { transformTheme } from "../theme"
 import { css } from "./css"
 

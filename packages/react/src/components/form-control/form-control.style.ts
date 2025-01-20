@@ -21,7 +21,7 @@ export const formControlStyle = defineComponentSlotStyle({
       mb: "2",
       me: "3",
       opacity: 1,
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       _disabled: {
         cursor: "not-allowed",

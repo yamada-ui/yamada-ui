@@ -1,6 +1,6 @@
 import type { CSSModifierObject, CSSSlotObject } from "../css"
-import type { ComponentSlotStyle } from "../theme.types"
-import type { ComponentStyle } from "../theme.types"
+import type { ComponentSlotStyle } from "./index.types"
+import type { ComponentStyle } from "./index.types"
 
 export function pickStyle(
   target: ComponentSlotStyle,

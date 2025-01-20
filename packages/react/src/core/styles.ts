@@ -2,8 +2,7 @@ import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { StyleConfigs } from "./config"
 import type { CSSObject, Token } from "./css"
-import type { ThemeToken } from "./theme"
-import type { ColorScheme, Theme } from "./theme.types"
+import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 
@@ -30,12 +29,16 @@ export const standardStyles = {
   animationDirection: true,
   animationDuration: {
     properties: "animationDuration",
-    token: "transitions.duration",
-    transform: transforms.token("transitions.duration"),
+    token: "durations",
+    transform: transforms.token("durations"),
   },
   animationFillMode: true,
   animationIterationCount: true,
-  animationName: true,
+  animationName: {
+    properties: "animationName",
+    token: "keyframes",
+    transform: transforms.token("keyframes"),
+  },
   animationPlayState: true,
   animationRange: true,
   animationRangeEnd: true,
@@ -43,8 +46,8 @@ export const standardStyles = {
   animationTimeline: true,
   animationTimingFunction: {
     properties: "animationTimingFunction",
-    token: "transitions.easing",
-    transform: transforms.token("transitions.easing"),
+    token: "easings",
+    transform: transforms.token("easings"),
   },
   appearance: true,
   aspectRatio: true,
@@ -52,15 +55,25 @@ export const standardStyles = {
   backdropBlur: {
     properties: "--backdrop-blur",
     token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
+    transform: pipe(
+      transforms.token("blurs"),
+      transforms.function("blur"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropBrightness: {
     properties: "--backdrop-brightness",
-    transform: transforms.function("brightness"),
+    transform: pipe(
+      transforms.function("brightness"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropContrast: {
     properties: "--backdrop-contrast",
-    transform: transforms.function("contrast"),
+    transform: pipe(
+      transforms.function("contrast"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropDropShadow: {
     properties: "--backdrop-drop-shadow",
@@ -68,28 +81,45 @@ export const standardStyles = {
     transform: pipe(
       transforms.token("shadows"),
       transforms.function("drop-shadow"),
+      transforms.filter("backdropFilter"),
     ),
   },
-  backdropFilter: { transform: transforms.filter("backdrop") },
+  backdropFilter: true,
   backdropGrayscale: {
     properties: "--backdrop-grayscale",
-    transform: transforms.function("grayscale"),
+    transform: pipe(
+      transforms.function("grayscale"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropHueRotate: {
     properties: "--backdrop-hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
+    transform: pipe(
+      transforms.deg,
+      transforms.function("hue-rotate"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropInvert: {
     properties: "--backdrop-invert",
-    transform: transforms.function("invert"),
+    transform: pipe(
+      transforms.function("invert"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropSaturate: {
     properties: "--backdrop-saturate",
-    transform: transforms.function("saturate"),
+    transform: pipe(
+      transforms.function("saturate"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropSepia: {
     properties: "--backdrop-sepia",
-    transform: transforms.function("sepia"),
+    transform: pipe(
+      transforms.function("sepia"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backfaceVisibility: {
     properties: "backfaceVisibility",
@@ -142,7 +172,11 @@ export const standardStyles = {
   blur: {
     properties: "--blur",
     token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
+    transform: pipe(
+      transforms.token("blurs"),
+      transforms.function("blur"),
+      transforms.filter(),
+    ),
   },
   border: {
     properties: "border",
@@ -503,7 +537,7 @@ export const standardStyles = {
   breakInside: true,
   brightness: {
     properties: "--brightness",
-    transform: transforms.function("brightness"),
+    transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
   caretColor: {
@@ -575,7 +609,7 @@ export const standardStyles = {
   contentVisibility: true,
   contrast: {
     properties: "--contrast",
-    transform: transforms.function("contrast"),
+    transform: pipe(transforms.function("contrast"), transforms.filter()),
   },
   counterIncrement: true,
   counterReset: true,
@@ -590,6 +624,7 @@ export const standardStyles = {
     transform: pipe(
       transforms.token("shadows"),
       transforms.function("drop-shadow"),
+      transforms.filter(),
     ),
   },
   emptyCells: true,
@@ -600,7 +635,7 @@ export const standardStyles = {
   },
   fillOpacity: true,
   fillRule: true,
-  filter: { transform: transforms.filter() },
+  filter: true,
   flex: true,
   flexBasis: {
     properties: "flexBasis",
@@ -680,7 +715,7 @@ export const standardStyles = {
   glyphOrientationVertical: true,
   grayscale: {
     properties: "--grayscale",
-    transform: transforms.function("grayscale"),
+    transform: pipe(transforms.function("grayscale"), transforms.filter()),
   },
   grid: true,
   gridArea: true,
@@ -746,7 +781,11 @@ export const standardStyles = {
   },
   hueRotate: {
     properties: "--hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
+    transform: pipe(
+      transforms.deg,
+      transforms.function("hue-rotate"),
+      transforms.filter(),
+    ),
   },
   hyphenateCharacter: true,
   hyphenateLimitChars: true,
@@ -846,7 +885,10 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  invert: { properties: "--invert", transform: transforms.function("invert") },
+  invert: {
+    properties: "--invert",
+    transform: pipe(transforms.function("invert"), transforms.filter()),
+  },
   isolation: true,
   justifyContent: true,
   justifyItems: true,
@@ -1307,7 +1349,31 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  rotate: { properties: "--rotate", transform: transforms.deg },
+  rotate: { properties: "rotate", transform: transforms.deg },
+  rotateX: {
+    properties: "--rotate-x",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateX"),
+      transforms.transform,
+    ),
+  },
+  rotateY: {
+    properties: "--rotate-y",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateY"),
+      transforms.transform,
+    ),
+  },
+  rotateZ: {
+    properties: "--rotate-z",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateZ"),
+      transforms.transform,
+    ),
+  },
   rowGap: {
     properties: "rowGap",
     token: "spaces",
@@ -1321,11 +1387,21 @@ export const standardStyles = {
   rubyPosition: true,
   saturate: {
     properties: "--saturate",
-    transform: transforms.function("saturate"),
+    transform: pipe(transforms.function("saturate"), transforms.filter()),
   },
-  scale: { properties: ["--scale-x", "--scale-y"] },
-  scaleX: { properties: "--scale-x" },
-  scaleY: { properties: "--scale-y" },
+  scale: true,
+  scaleX: {
+    properties: "--scale-x",
+    transform: pipe(transforms.function("scaleX"), transforms.transform),
+  },
+  scaleY: {
+    properties: "--scale-y",
+    transform: pipe(transforms.function("scaleY"), transforms.transform),
+  },
+  scaleZ: {
+    properties: "--scale-z",
+    transform: pipe(transforms.function("scaleZ"), transforms.transform),
+  },
   scrollbarColor: {
     properties: "scrollbarColor",
     token: "colors",
@@ -1478,13 +1554,30 @@ export const standardStyles = {
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  sepia: { properties: "--sepia", transform: transforms.function("sepia") },
+  sepia: {
+    properties: "--sepia",
+    transform: pipe(transforms.function("sepia"), transforms.filter()),
+  },
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
   shapeRendering: true,
-  skewX: { properties: "--skew-x", transform: transforms.deg },
-  skewY: { properties: "--skew-y", transform: transforms.deg },
+  skewX: {
+    properties: "--skew-x",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("skewX"),
+      transforms.transform,
+    ),
+  },
+  skewY: {
+    properties: "--skew-y",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("skewY"),
+      transforms.transform,
+    ),
+  },
   stopColor: true,
   stopOpacity: true,
   stroke: {
@@ -1550,27 +1643,23 @@ export const standardStyles = {
     ),
   },
   touchAction: true,
-  transform: { properties: "transform", transform: transforms.transform },
+  transform: true,
   transformBox: true,
   transformOrigin: true,
   transformStyle: true,
-  transition: true,
+  transition: { transform: transforms.transition() },
   transitionBehavior: true,
   transitionDelay: true,
   transitionDuration: {
     properties: "transitionDuration",
-    token: "transitions.duration",
-    transform: transforms.token("transitions.duration"),
+    token: "durations",
+    transform: transforms.token("durations"),
   },
-  transitionProperty: {
-    properties: "transitionProperty",
-    token: "transitions.property",
-    transform: transforms.token("transitions.property"),
-  },
+  transitionProperty: { transform: transforms.transition("property") },
   transitionTimingFunction: {
     properties: "transitionTimingFunction",
-    token: "transitions.easing",
-    transform: transforms.token("transitions.easing"),
+    token: "easings",
+    transform: transforms.token("easings"),
   },
   translate: true,
   translateX: {
@@ -1579,7 +1668,9 @@ export const standardStyles = {
     transform: pipe(
       transforms.token("spaces"),
       transforms.px,
+      transforms.function("translateX"),
       transforms.calc("spaces"),
+      transforms.transform,
     ),
   },
   translateY: {
@@ -1588,8 +1679,14 @@ export const standardStyles = {
     transform: pipe(
       transforms.token("spaces"),
       transforms.px,
+      transforms.function("translateY"),
       transforms.calc("spaces"),
+      transforms.transform,
     ),
+  },
+  translateZ: {
+    properties: "--translate-z",
+    transform: pipe(transforms.function("translateZ"), transforms.transform),
   },
   unicodeBidi: true,
   userSelect: true,
@@ -1748,7 +1845,6 @@ export const uiStyles = {
     transform: transforms.styles("textStyles"),
   },
   colorScheme: { transform: transforms.colorScheme },
-  isTruncated: { transform: transforms.isTruncated },
   lineClamp: {
     properties: "--line-clamp",
     static: {
@@ -1759,12 +1855,18 @@ export const uiStyles = {
       WebkitLineClamp: "var(--line-clamp)",
     },
   },
+  truncated: { transform: transforms.truncated },
   vars: { processSkip: true, transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
+  keyframes: {
+    processSkip: true,
+    token: "keyframes",
+    transform: pipe(transforms.token("keyframes"), transforms.keyframes),
+  },
   _container: { processSkip: true, transform: transforms.container },
   _media: { processSkip: true, transform: transforms.media },
   _supports: { processSkip: true, transform: transforms.supports },
@@ -1784,9 +1886,9 @@ export type StyleProperty = keyof typeof styles
 
 export const styleProperties = Object.keys(styles) as StyleProperty[]
 
-export type ProcessSkipProperty = (typeof processSkipProperties)[number]
+export type VariableLengthProperty = (typeof variableLengthProperties)[number]
 
-export const processSkipProperties = [
+export const variableLengthProperties = [
   "vars",
   "_container",
   "_media",
@@ -1831,9 +1933,13 @@ export type AnimationProperty = (typeof animationProperties)[number]
 
 export const animationProperties = ["animation"] as const
 
+export type AspectRatioProperty = (typeof aspectRatioProperties)[number]
+
+export const aspectRatioProperties = [] as const
+
 export type BlurProperty = (typeof blurProperties)[number]
 
-export const blurProperties = ["backdropBlur", "blur"] as const
+export const blurProperties = ["blur", "backdropBlur"] as const
 
 export type BorderProperty = (typeof borderProperties)[number]
 
@@ -1893,6 +1999,20 @@ export const colorProperties = [
   "textEmphasisColor",
 ] as const
 
+export type DurationProperty = (typeof durationProperties)[number]
+
+export const durationProperties = [
+  "animationDuration",
+  "transitionDuration",
+] as const
+
+export type EasingProperty = (typeof easingProperties)[number]
+
+export const easingProperties = [
+  "animationTimingFunction",
+  "transitionTimingFunction",
+] as const
+
 export type FontProperty = (typeof fontProperties)[number]
 
 export const fontProperties = [
@@ -1918,6 +2038,10 @@ export const gradientProperties = [
   "listStyleImg",
   "maskImage",
 ] as const
+
+export type KeyframeProperty = (typeof keyframeProperties)[number]
+
+export const keyframeProperties = ["animationName", "keyframes"] as const
 
 export type RadiusProperty = (typeof radiusProperties)[number]
 
@@ -1966,8 +2090,8 @@ export const shadowProperties = [
   "boxShadow",
   "shadow",
   "textShadow",
-  "backdropDropShadow",
   "dropShadow",
+  "backdropDropShadow",
 ] as const
 
 export type SpaceProperty = (typeof spaceProperties)[number]
@@ -2060,16 +2184,6 @@ export const spaceProperties = [
   "scrollPaddingY",
   "translateX",
   "translateY",
-] as const
-
-export type TransitionProperty = (typeof transitionProperties)[number]
-
-export const transitionProperties = [
-  "transitionProperty",
-  "animationTimingFunction",
-  "transitionTimingFunction",
-  "animationDuration",
-  "transitionDuration",
 ] as const
 
 export type ZIndexProperty = (typeof zIndexProperties)[number]
@@ -2233,7 +2347,7 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: Token<StringLiteral>
+  apply?: Token<StringLiteral, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
@@ -2317,10 +2431,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
    */
-  animationDuration?: Token<
-    CSS.Property.AnimationDuration,
-    "transitionDuration"
-  >
+  animationDuration?: Token<CSS.Property.AnimationDuration, "durations">
   /**
    * The CSS `animation-fill-mode` property.
    *
@@ -2338,7 +2449,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
    */
-  animationName?: Token<CSS.Property.AnimationName>
+  animationName?: Token<CSS.Property.AnimationName, "keyframes">
   /**
    * The CSS `animation-play-state` property.
    *
@@ -2376,7 +2487,7 @@ export interface StyleProps {
    */
   animationTimingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
-    "transitionEasing"
+    "easings"
   >
   /**
    * The CSS `appearance` property.
@@ -2399,19 +2510,19 @@ export interface StyleProps {
    */
   azimuth?: Token<CSS.Property.Azimuth>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-blur`.
+   * Sets the value of `--backdrop-blur`.
    */
   backdropBlur?: Token<StringLiteral, "blurs">
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-brightness`.
+   * Sets the value of `--backdrop-brightness`.
    */
   backdropBrightness?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-contrast`.
+   * Sets the value of `--backdrop-contrast`.
    */
   backdropContrast?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-drop-shadow`.
+   * Sets the value of `--backdrop-drop-shadow`.
    */
   backdropDropShadow?: Token<StringLiteral, "shadows">
   /**
@@ -2419,25 +2530,25 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
    */
-  backdropFilter?: Token<"auto" | CSS.Property.BackdropFilter>
+  backdropFilter?: Token<CSS.Property.BackdropFilter>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-grayscale`.
+   * Sets the value of `--backdrop-grayscale`.
    */
   backdropGrayscale?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-hue-rotate`.
+   * Sets the value of `--backdrop-hue-rotate`.
    */
   backdropHueRotate?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-invert`.
+   * Sets the value of `--backdrop-invert`.
    */
   backdropInvert?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-saturate`.
+   * Sets the value of `--backdrop-saturate`.
    */
   backdropSaturate?: Token<StringLiteral>
   /**
-   * If `backdropBlur=auto`, sets the value of `--backdrop-sepia`.
+   * Sets the value of `--backdrop-sepia`.
    */
   backdropSepia?: Token<StringLiteral>
   /**
@@ -2633,7 +2744,7 @@ export interface StyleProps {
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
-   * If `filter=auto`, sets the value of `--blur`.
+   * Sets the value of `--blur`.
    */
   blur?: Token<StringLiteral, "blurs">
   /**
@@ -3337,7 +3448,7 @@ export interface StyleProps {
    */
   breakInside?: Token<CSS.Property.BreakInside>
   /**
-   * If `filter=auto`, sets the value of `--brightness`.
+   * Sets the value of `--brightness`.
    */
   brightness?: Token<StringLiteral>
   /**
@@ -3530,7 +3641,7 @@ export interface StyleProps {
    */
   contentVisibility?: Token<CSS.Property.ContentVisibility>
   /**
-   * If `filter=auto`, sets the value of `--contrast`.
+   * Sets the value of `--contrast`.
    */
   contrast?: Token<StringLiteral>
   /**
@@ -3576,7 +3687,7 @@ export interface StyleProps {
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
-   * If `filter=auto`, sets the value of `--drop-shadow`.
+   * Sets the value of `--drop-shadow`.
    */
   dropShadow?: Token<StringLiteral, "shadows">
   /**
@@ -3608,7 +3719,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
    */
-  filter?: Token<"auto" | CSS.Property.Filter>
+  filter?: Token<CSS.Property.Filter>
   /**
    * The CSS `flex` property.
    *
@@ -3874,7 +3985,7 @@ export interface StyleProps {
    */
   glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
   /**
-   * If `filter=auto`, sets the value of `--grayscale`.
+   * Sets the value of `--grayscale`.
    */
   grayscale?: Token<StringLiteral>
   /**
@@ -4001,7 +4112,7 @@ export interface StyleProps {
    */
   height?: Token<CSS.Property.Height | number, "sizes">
   /**
-   * If `filter=auto`, sets the value of `--hue-rotate`.
+   * Sets the value of `--hue-rotate`.
    */
   hueRotate?: Token<StringLiteral>
   /**
@@ -4121,7 +4232,7 @@ export interface StyleProps {
    */
   insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
   /**
-   * If `filter=auto`, sets the value of `--invert`.
+   * Sets the value of `--invert`.
    */
   invert?: Token<StringLiteral>
   /**
@@ -4130,10 +4241,6 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
    */
   isolation?: Token<CSS.Property.Isolation>
-  /**
-   * If `true`, it clamps truncate a text after one line.
-   */
-  isTruncated?: Token<boolean>
   /**
    * The CSS `justify-content` property.
    *
@@ -4152,6 +4259,12 @@ export interface StyleProps {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
+  /**
+   * The `@keyframes` of CSS at-rule.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+   */
+  keyframes?: Token<CSSObject | StringLiteral, "keyframes">
   /**
    * The CSS `line-height` property.
    *
@@ -4713,7 +4826,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline
    */
-  outline?: Token<"inside" | "mixed" | "outside" | CSS.Property.Filter>
+  outline?: Token<"inside" | "mixed" | "outside" | CSS.Property.Outline>
   /**
    * The CSS `outline-color` property.
    *
@@ -5103,9 +5216,23 @@ export interface StyleProps {
    */
   right?: Token<CSS.Property.Right | number, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--rotate`.
+   * The CSS `rotate` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/rotate
    */
-  rotate?: Token<StringLiteral>
+  rotate?: Token<CSS.Property.Rotate>
+  /**
+   * Sets the value of `--rotate-x`.
+   */
+  rotateX?: Token<StringLiteral>
+  /**
+   * Sets the value of `--rotate-y`.
+   */
+  rotateY?: Token<StringLiteral>
+  /**
+   * Sets the value of `--rotate-z`.
+   */
+  rotateZ?: Token<StringLiteral>
   /**
    * The CSS `border-radius` property.
    *
@@ -5260,21 +5387,27 @@ export interface StyleProps {
    */
   rubyPosition?: Token<CSS.Property.RubyPosition>
   /**
-   * If `filter=auto`, sets the value of `--saturate`.
+   * Sets the value of `--saturate`.
    */
   saturate?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x` and `--scale-y`.
+   * The CSS `scale` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scale
    */
-  scale?: Token<StringLiteral>
+  scale?: Token<CSS.Property.Scale>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x`.
+   * Sets the value of `--scale-x`.
    */
   scaleX?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-y`.
+   * Sets the value of `--scale-y`.
    */
   scaleY?: Token<StringLiteral>
+  /**
+   * Sets the value of `--scale-z`.
+   */
+  scaleZ?: Token<StringLiteral>
   /**
    * The CSS `scrollbar-color` property.
    *
@@ -5511,7 +5644,7 @@ export interface StyleProps {
    */
   scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
   /**
-   * If `filter=auto`, sets the value of `--sepia`.
+   * Sets the value of `--sepia`.
    */
   sepia?: Token<StringLiteral>
   /**
@@ -5545,11 +5678,11 @@ export interface StyleProps {
    */
   shapeRendering?: Token<CSS.Property.ShapeRendering>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-x`.
+   * Sets the value of `--skew-x`.
    */
   skewX?: Token<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-y`.
+   * Sets the value of `--skew-y`.
    */
   skewY?: Token<StringLiteral>
   /**
@@ -5851,7 +5984,17 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition
    */
-  transition?: Token<CSS.Property.Transition>
+  transition?: Token<
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.Transition
+  >
   /**
    * The CSS `transition-behavior` property.
    *
@@ -5869,18 +6012,22 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration
    */
-  transitionDuration?: Token<
-    CSS.Property.TransitionDuration,
-    "transitionDuration"
-  >
+  transitionDuration?: Token<CSS.Property.TransitionDuration, "durations">
   /**
    * The CSS `transition-property` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
    */
   transitionProperty?: Token<
-    CSS.Property.TransitionProperty,
-    "transitionProperty"
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.TransitionProperty
   >
   /**
    * The CSS `transition-timing-function` property.
@@ -5889,7 +6036,7 @@ export interface StyleProps {
    */
   transitionTimingFunction?: Token<
     CSS.Property.TransitionTimingFunction,
-    "transitionEasing"
+    "easings"
   >
   /**
    * The CSS `translate` property.
@@ -5898,13 +6045,21 @@ export interface StyleProps {
    */
   translate?: Token<"no" | "yes" | CSS.Property.Translate>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-x`.
+   * Sets the value of `--translate-x`.
    */
   translateX?: Token<number | StringLiteral, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-y`.
+   * Sets the value of `--translate-y`.
    */
   translateY?: Token<number | StringLiteral, "spaces">
+  /**
+   * Sets the value of `--translate-z`.
+   */
+  translateZ?: Token<StringLiteral>
+  /**
+   * If `true`, it clamps truncate a text after one line.
+   */
+  truncated?: Token<boolean>
   /**
    * The CSS `unicode-bidi` property.
    *
@@ -5919,7 +6074,6 @@ export interface StyleProps {
   userSelect?: Token<CSS.Property.UserSelect>
   /**
    * Set CSS variables.
-   * @experimental
    *
    * @example
    * ```jsx
@@ -6054,7 +6208,6 @@ export interface StyleProps {
   zoom?: Token<CSS.Property.Zoom>
   /**
    * The `@container` of CSS at-rule.
-   * @experimental
    *
    * @example
    * ```jsx
@@ -6070,32 +6223,31 @@ export interface StyleProps {
     name?: StringLiteral
     css?: CSSObject
     aspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
+    blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
     maxAspectRatio?: CSS.Property.AspectRatio
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     minAspectRatio?: CSS.Property.AspectRatio
-    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     orientation?: "landscape" | "portrait" | StringLiteral
     query?: StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
   /**
    * The `@media` of CSS at-rule.
-   * @experimental
    *
    * @example
    * ```jsx
@@ -6117,8 +6269,8 @@ export interface StyleProps {
     colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
     colorIndex?: number | StringLiteral
     deviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
-    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     displayMode?:
       | "browser"
       | "fullscreen"
@@ -6130,32 +6282,32 @@ export interface StyleProps {
     dynamicRange?: "high" | "standard" | StringLiteral
     forcedColors?: "active" | "none" | StringLiteral
     grid?: "StringLiteral" | 0 | 1
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
     hover?: "hover" | "none" | StringLiteral
     invertedColors?: "inverted" | "none" | StringLiteral
     maxColor?: number | StringLiteral
     maxColorIndex?: number | StringLiteral
     maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxMonochrome?: number | StringLiteral
     maxResolution?: StringLiteral
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     minColor?: number | StringLiteral
     minColorIndex?: number | StringLiteral
     minDeviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minMonochrome?: number | StringLiteral
     minResolution?: StringLiteral
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     monochrome?: number | StringLiteral
     orientation?: "landscape" | "portrait" | StringLiteral
     overflowBlock?:
@@ -6166,7 +6318,7 @@ export interface StyleProps {
       | StringLiteral
     overflowInline?: "none" | "scroll" | StringLiteral
     pointer?: "coarse" | "fine" | "none" | StringLiteral
-    prefersColorScheme?: "dark" | "light" | StringLiteral
+    prefersColorMode?: "dark" | "light" | StringLiteral
     prefersContrast?:
       | "custom"
       | "high"
@@ -6180,12 +6332,11 @@ export interface StyleProps {
     scripting?: "enabled" | "initial-only" | "none" | StringLiteral
     update?: "fast" | "none" | "slow" | StringLiteral
     videoDynamicRange?: "high" | "standard" | StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
   /**
    * The `@supports` of CSS at-rule.
-   * @experimental
    *
    * @example
    * ```jsx

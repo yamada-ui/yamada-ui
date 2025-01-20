@@ -24,7 +24,7 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
       boxShadow: ["md", "dark-md"],
       outline: 0,
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "transform",
       _active: {
         transform: `scale(1.15)`,

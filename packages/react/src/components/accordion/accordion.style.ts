@@ -11,7 +11,7 @@ export const accordionStyle = defineComponentSlotStyle({
       outline: "none",
       px: "4",
       py: "3",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       w: "100%",
       _nativeDisabled: {
@@ -23,7 +23,7 @@ export const accordionStyle = defineComponentSlotStyle({
       fontSize: "xl",
       ml: "auto",
       transformOrigin: "center",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "transform",
       _disabled: {
         layerStyle: "disabled",

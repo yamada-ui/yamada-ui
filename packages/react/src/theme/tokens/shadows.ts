@@ -1,6 +1,6 @@
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const shadows: ThemeTokens = {
+export const shadows = defineTokens.shadows({
   xs: [
     "0 1px 2px {colors.black/20}, 0px 0px 1px {colors.black/20}",
     "0px 1px 1px {colors.black/80}",
@@ -30,4 +30,4 @@ export const shadows: ThemeTokens = {
     "inset 0 0 0 1px {colors.black/5}",
     "inset 0 0 0 1px {colors.white/5}",
   ],
-}
+})

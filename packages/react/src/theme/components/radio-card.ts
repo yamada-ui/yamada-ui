@@ -14,7 +14,7 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
         flex: "1",
         flexDirection: "column",
         position: "relative",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         _checked: {
           zIndex: "yamcha",

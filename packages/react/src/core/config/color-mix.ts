@@ -1,4 +1,4 @@
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme, UsageTheme } from "../theme"
 import type { TransformOptions } from "./utils"
 import { isArray } from "@yamada-ui/utils"
 import { getColorSchemeVar, isColorScheme } from "../css"
@@ -20,7 +20,7 @@ const methods: { [key: string]: string } = {
   "xyz-d65": "in xyz-d65",
 }
 
-function getColor(value: string | undefined, theme: StyledTheme) {
+function getColor(value: string | undefined, theme: StyledTheme<UsageTheme>) {
   if (!value) return ""
 
   let [color, percent, ...rest] = value.split(" ").filter(Boolean)

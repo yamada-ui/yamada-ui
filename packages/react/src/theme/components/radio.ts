@@ -14,7 +14,7 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
       display: "inline-flex",
       justifyContent: "center",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "box-shadow",
       _checked: {
         _before: {

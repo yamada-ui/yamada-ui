@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../tools"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 import { Button } from "../button"
 import { Center } from "../center"
 import { useNotice } from "./notice"
@@ -10,7 +11,7 @@ export default {
 }
 
 export const Basic = () => {
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     notice: {
       options: {
         limit: 3,

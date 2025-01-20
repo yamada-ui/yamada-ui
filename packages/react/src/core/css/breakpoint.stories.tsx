@@ -7,7 +7,8 @@ import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
 import { useBreakpoint, useBreakpointValue } from "../../hooks/use-breakpoint"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../tools"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 
 export default {
   title: "Styled System / Responsive",
@@ -66,7 +67,7 @@ export const WithContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const breakpoint = useBreakpoint()
 
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     breakpoint: {
       containerRef,
       identifier: "@container",

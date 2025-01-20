@@ -1,9 +1,9 @@
 import type { Dict } from "../../utils"
-import type { VariableTokens, VariableValue } from "../theme"
-import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
-import type { BreakpointQueries } from "./breakpoint"
+import type { UsageTheme, VariableTokens, VariableValue } from "../theme"
+import type { CSSMap, DefineThemeValue, StyledTheme } from "../theme"
+import type { Breakpoints } from "./breakpoint"
 import { calc, escape, isArray, isObject, isString, merge } from "../../utils"
-import { animation, colorMix, gradient } from "../config"
+import { animation, colorMix, gradient, insertKeyframes } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { css } from "./css"
@@ -27,7 +27,7 @@ export function transformInterpolation(
 }
 
 export function getVar(token: string) {
-  return function (theme: StyledTheme) {
+  return function (theme: StyledTheme<UsageTheme>) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `var(--${prefix}-${token})`
@@ -35,7 +35,7 @@ export function getVar(token: string) {
 }
 
 export function getVarName(token: string) {
-  return function (theme: StyledTheme) {
+  return function (theme: StyledTheme<UsageTheme>) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `--${prefix}-${token}`
@@ -43,7 +43,7 @@ export function getVarName(token: string) {
 }
 
 export function getColorSchemeVar(value: any) {
-  return function (theme: StyledTheme) {
+  return function (theme: StyledTheme<UsageTheme>) {
     if (!isString(value)) return value
 
     const [, token] = value.split(".")
@@ -53,6 +53,7 @@ export function getColorSchemeVar(value: any) {
 }
 
 const isGradient = (token: string) => token.startsWith("gradients.")
+const isKeyframes = (token: string) => token.startsWith("keyframes.")
 const isAnimation = (token: string) => token.startsWith("animations.")
 const isSpace = (token: string) => token.startsWith("spaces.")
 const isColor = (token: string) => token.startsWith("colors.")
@@ -67,8 +68,10 @@ interface CreateThemeVarsOptions {
 
 export function getCreateThemeVars(
   prefix: string = DEFAULT_VAR_PREFIX,
-  queries: BreakpointQueries,
+  breakpoints: Breakpoints | undefined,
 ) {
+  const { getQuery, isResponsive } = breakpoints ?? {}
+
   function tokenToVar(token: string): Variable {
     token = token.replace(/\./g, "-")
 
@@ -103,11 +106,7 @@ export function getCreateThemeVars(
         return [variable, reference]
       }
 
-      function getQuery(key: string) {
-        return queries.find(({ breakpoint }) => breakpoint === key)?.query
-      }
-
-      function valueToVar<Y extends ParsedValue>(value: Y) {
+      function valueToVar(value: any) {
         return transformInterpolation(value, (value) => {
           if (value.includes("colors.") || value.includes("colorScheme.")) {
             if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
@@ -148,7 +147,7 @@ export function getCreateThemeVars(
         }
       }
 
-      function createGradientVar(token: string, value: ThemeValue) {
+      function createGradientVar(token: string, value: DefineThemeValue) {
         return function (semantic: boolean) {
           if (!semantic) {
             return gradient(value, { css, theme })
@@ -160,10 +159,22 @@ export function getCreateThemeVars(
         }
       }
 
+      function createKeyframesVar(token: string, value: any) {
+        return function (semantic: boolean) {
+          if (!semantic) {
+            return insertKeyframes(css(value)(theme))
+          } else {
+            const [variable, reference] = getRelatedReference(token, value)
+
+            return variable ? reference : insertKeyframes(css(value)(theme))
+          }
+        }
+      }
+
       function createColorVar(
         token: string,
         properties: string,
-        value: ThemeValue,
+        value: DefineThemeValue,
       ) {
         return function (semantic: boolean) {
           if (!semantic) {
@@ -182,6 +193,8 @@ export function getCreateThemeVars(
         variable: string,
       ) {
         return function (semantic: boolean, queries: string[] = []) {
+          if (isAnimation(token)) value = createAnimationVar(value)
+
           if (isArray(value)) {
             const [lightValue, darkValue] = value
 
@@ -191,12 +204,12 @@ export function getCreateThemeVars(
               darkValue,
               variable,
             )(semantic, [...queries, pseudos._dark])
-          } else if (isObject(value)) {
+          } else if (isResponsive?.(value, true)) {
             Object.entries(value).forEach(([key, value]) => {
               if (key === "base") {
                 createVar(token, value, variable)(semantic, queries)
               } else {
-                const query = getQuery(key)
+                const query = getQuery?.(key)
 
                 if (!query) return
 
@@ -204,11 +217,13 @@ export function getCreateThemeVars(
               }
             })
           } else {
-            const computedValue: ThemeValue = valueToVar(value)
+            const computedValue: DefineThemeValue = valueToVar(value)
 
-            let resolvedValue: Dict | ThemeValue = computedValue
+            let resolvedValue: DefineThemeValue | Dict = computedValue
 
-            if (isGradient(token)) {
+            if (isKeyframes(token)) {
+              resolvedValue = createKeyframesVar(token, computedValue)(semantic)
+            } else if (isGradient(token)) {
               resolvedValue = createGradientVar(token, computedValue)(semantic)
             } else if (isColor(token)) {
               resolvedValue = createColorVar(
@@ -225,21 +240,18 @@ export function getCreateThemeVars(
             if (!isObject(resolvedValue))
               resolvedValue = { [variable]: resolvedValue }
 
-            cssVars = merge(
-              cssVars,
-              queries.reduceRight<Dict>(
-                (prev, key) => ({ [key]: prev }),
-                resolvedValue,
-              ),
+            const resolvedCssVars = queries.reduceRight<Dict>(
+              (prev, key) => ({ [key]: prev }),
+              resolvedValue,
             )
+
+            cssVars = merge(cssVars, resolvedCssVars)
           }
         }
       }
 
       for (let [token, { semantic, value }] of Object.entries(tokens)) {
         const { reference, variable } = tokenToVar(token)
-
-        if (isAnimation(token)) value = createAnimationVar(value)
 
         createVar(token, value, variable)(semantic)
 

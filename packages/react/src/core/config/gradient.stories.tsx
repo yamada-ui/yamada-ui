@@ -22,7 +22,7 @@ export const WithColorCode = () => {
       size="2xl"
       bgClip="text"
       bgGradient="linear(to-l, #7928CA, #FF0080)"
-      isTruncated
+      truncated
       w="full"
     >
       クリリンのことか……クリリンのことかーーーっ！！！！！

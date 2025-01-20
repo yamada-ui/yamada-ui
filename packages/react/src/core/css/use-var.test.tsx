@@ -1,5 +1,5 @@
-import type { StyledTheme, ThemeConfig, UsageTheme } from "../theme.types"
-import type { CSSObject } from "./css.types"
+import type { StyledTheme, ThemeConfig, UsageTheme } from "../theme"
+import type { CSSObject } from "./index.types"
 import { renderHook } from "../../../test"
 import { ThemeProvider } from "../../providers/theme-provider"
 import { pseudos } from "../pseudos"

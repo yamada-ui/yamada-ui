@@ -547,7 +547,7 @@ export const CustomDayButton: Story = () => {
                 color={selected ? "white" : undefined}
                 lineHeight={8}
                 rounded="full"
-                transitionDuration="normal"
+                transitionDuration="moderate"
                 transitionProperty="background"
                 w={8}
               >

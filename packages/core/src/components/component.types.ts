@@ -52,10 +52,7 @@ type ComponentProps<Y extends As, M extends As, D extends object = {}> = {
 } & ComponentConditionalProps<Y, M, D>
 
 export interface ComponentArgs
-  extends Pick<
-    React.FunctionComponent,
-    "contextTypes" | "defaultProps" | "displayName" | "propTypes"
-  > {
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
   __ui__?: string
 }
 

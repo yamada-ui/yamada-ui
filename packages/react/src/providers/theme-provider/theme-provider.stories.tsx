@@ -7,6 +7,7 @@ import { For } from "../../components/for"
 import { Heading } from "../../components/heading"
 import { HStack, VStack } from "../../components/stack"
 import { Tag } from "../../components/tag"
+import { Text } from "../../components/text"
 import { defaultConfig, defaultTheme } from "../../theme"
 import { merge, toTitleCase } from "../../utils"
 import { UIProvider } from "../ui-provider"
@@ -20,7 +21,7 @@ export const SwitchTheming = () => {
   const theme = merge(defaultTheme, {
     themeSchemes: {
       green: {
-        semantics: {
+        semanticTokens: {
           colorSchemes: {
             primary: "green",
             secondary: "cyan",
@@ -28,7 +29,7 @@ export const SwitchTheming = () => {
         },
       },
       pink: {
-        semantics: {
+        semanticTokens: {
           colorSchemes: {
             primary: "pink",
             secondary: "violet",
@@ -36,7 +37,7 @@ export const SwitchTheming = () => {
         },
       },
       purple: {
-        semantics: {
+        semanticTokens: {
           colorSchemes: {
             primary: "purple",
             secondary: "teal",
@@ -79,6 +80,8 @@ export const SwitchTheming = () => {
           </Container.Header>
 
           <Container.Body gap="md">
+            <Text color="primary.500">Primary</Text>
+
             <Wrap gap="md">
               <For each={["primary", "secondary", "warning", "error"]}>
                 {(colorScheme) => (

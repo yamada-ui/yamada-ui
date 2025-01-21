@@ -51,7 +51,6 @@ export const standardStyles = {
   },
   appearance: true,
   aspectRatio: true,
-  azimuth: true,
   backdropBlur: {
     properties: "--backdrop-blur",
     token: "blurs",
@@ -554,6 +553,7 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  colorAdjust: true,
   colorInterpolation: true,
   colorMode: { properties: "colorScheme" },
   columnCount: true,
@@ -792,7 +792,7 @@ export const standardStyles = {
   hyphens: true,
   imageOrientation: true,
   imageRendering: true,
-  imageResolution: true,
+  imeMode: true,
   initialLetter: true,
   inlineSize: {
     properties: "inlineSize",
@@ -1051,7 +1051,6 @@ export const standardStyles = {
   markerStart: true,
   mask: true,
   maskBorder: true,
-  maskBorderMode: true,
   maskBorderOutset: true,
   maskBorderRepeat: true,
   maskBorderSlice: true,
@@ -2363,127 +2362,378 @@ export interface StyleProps {
   /**
    * The CSS `accent-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/accent-color
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 93
+   * - chrome_android : 93
+   * - edge : 93
+   * - firefox : 92
+   * - firefox_android : 92
    */
   accent?: Token<CSS.Property.AccentColor, "colors">
   /**
    * The CSS `accent-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/accent-color
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 93
+   * - chrome_android : 93
+   * - edge : 93
+   * - firefox : 92
+   * - firefox_android : 92
    */
   accentColor?: Token<CSS.Property.AccentColor, "colors">
   /**
    * The CSS `align-content` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/align-content
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   alignContent?: Token<CSS.Property.AlignContent>
   /**
    * The CSS `align-items` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/align-items
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   alignItems?: Token<CSS.Property.AlignItems>
   /**
    * The CSS `alignment-baseline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/alignment-baseline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : ≤80
+   * - chrome_android : ≤80
+   * - edge : ≤80
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
   /**
    * The CSS `align-self` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/align-self
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   alignSelf?: Token<CSS.Property.AlignSelf>
   /**
    * The CSS `all` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/all
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/all
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 37
+   * - chrome_android : 37
+   * - edge : 79
+   * - firefox : 27
+   * - firefox_android : 27
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   all?: Token<CSS.Globals>
   /**
    * The CSS `animation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animation?: Token<CSS.Property.Animation, "animations">
   /**
    * The CSS `animation-composition` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-composition
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-composition
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-07-04`
+   * @support_browsers
+   * - chrome : 112
+   * - chrome_android : 112
+   * - edge : 112
+   * - firefox : 115
+   * - firefox_android : 115
+   * - safari : 16
+   * - safari_ios : 16
    */
   animationComposition?: Token<CSS.Property.AnimationComposition>
   /**
    * The CSS `animation-delay` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-delay
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationDelay?: Token<CSS.Property.AnimationDelay>
   /**
    * The CSS `animation-direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-direction
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationDirection?: Token<CSS.Property.AnimationDirection>
   /**
    * The CSS `animation-duration` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-duration
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationDuration?: Token<CSS.Property.AnimationDuration, "durations">
   /**
    * The CSS `animation-fill-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationFillMode?: Token<CSS.Property.AnimationFillMode>
   /**
    * The CSS `animation-iteration-count` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationIterationCount?: Token<CSS.Property.AnimationIterationCount>
   /**
    * The CSS `animation-name` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-name
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationName?: Token<CSS.Property.AnimationName, "keyframes">
   /**
    * The CSS `animation-play-state` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-play-state
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationPlayState?: Token<CSS.Property.AnimationPlayState>
   /**
    * The CSS `animation-range` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-range
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   animationRange?: Token<CSS.Property.AnimationRange>
   /**
    * The CSS `animation-range-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-range-end
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   animationRangeEnd?: Token<CSS.Property.AnimationRangeEnd>
   /**
    * The CSS `animation-range-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-range-start
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   animationRangeStart?: Token<CSS.Property.AnimationRangeStart>
   /**
    * The CSS `animation-timeline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-timeline
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   animationTimeline?: Token<CSS.Property.AnimationTimeline>
   /**
    * The CSS `animation-timing-function` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 43
+   * - chrome_android : 43
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   animationTimingFunction?: Token<
     CSS.Property.AnimationTimingFunction,
@@ -2492,23 +2742,41 @@ export interface StyleProps {
   /**
    * The CSS `appearance` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/appearance
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 84
+   * - chrome_android : 84
+   * - edge : 84
+   * - firefox : 80
+   * - firefox_android : 80
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   appearance?: Token<CSS.Property.Appearance>
   /**
    * The CSS `aspect-ratio` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 88
+   * - chrome_android : 88
+   * - edge : 88
+   * - firefox : 89
+   * - firefox_android : 89
+   * - safari : 15
+   * - safari_ios : 15
    */
   aspectRatio?: Token<CSS.Property.AspectRatio>
-  /**
-   * The CSS `azimuth` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/azimuth
-   *
-   * @deprecated
-   */
-  azimuth?: Token<CSS.Property.Azimuth>
   /**
    * Sets the value of `--backdrop-blur`.
    */
@@ -2528,7 +2796,20 @@ export interface StyleProps {
   /**
    * The CSS `backdrop-filter` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-09-16`
+   * @support_browsers
+   * - chrome : 76
+   * - chrome_android : 76
+   * - edge : 79
+   * - firefox : 103
+   * - firefox_android : 103
+   * - safari : 18
+   * - safari_ios : 18
    */
   backdropFilter?: Token<CSS.Property.BackdropFilter>
   /**
@@ -2554,193 +2835,607 @@ export interface StyleProps {
   /**
    * The CSS `backface-visibility` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/backface-visibility
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   backfaceVisibility?: Token<CSS.Property.BackfaceVisibility | number, "sizes">
   /**
    * The CSS `background` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   background?: Token<CSS.Property.Background, "colors">
   /**
    * The CSS `background-attachment` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-attachment
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 25
+   * - firefox_android : 25
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   backgroundAttachment?: Token<CSS.Property.BackgroundAttachment>
   /**
    * The CSS `background-blend-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 35
+   * - chrome_android : 59
+   * - edge : 79
+   * - firefox : 30
+   * - firefox_android : 54
+   * - safari : 8
+   * - safari_ios : 8
    */
   backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
   /**
    * The CSS `background-clip` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-clip
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 22
+   * - firefox_android : 22
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   backgroundClip?: Token<CSS.Property.BackgroundClip>
   /**
    * The CSS `background-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   backgroundColor?: Token<CSS.Property.BackgroundColor, "colors">
   /**
    * The CSS `background-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
    * The CSS `background-origin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-origin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 22
+   * - firefox_android : 22
+   * - safari : 5.1
+   * - safari_ios : 4
    */
   backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
   /**
    * The CSS `background-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   backgroundPosition?: Token<CSS.Property.BackgroundPosition>
   /**
    * The CSS `background-position-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   backgroundPositionX?: Token<CSS.Property.BackgroundPositionX>
   /**
    * The CSS `background-position-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   backgroundPositionY?: Token<CSS.Property.BackgroundPositionY>
   /**
    * The CSS `background-repeat` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-repeat
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-03-20`
+   * @newly_available_date `2016-09-20`
+   * @support_browsers
+   * - chrome : 30
+   * - chrome_android : 30
+   * - edge : 12
+   * - firefox : 49
+   * - firefox_android : 49
+   * - safari : 8
+   * - safari_ios : 8
    */
   backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
   /**
    * The CSS `background-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 9
+   * - firefox_android : 18
+   * - safari : 5.1
+   * - safari_ios : 4.2
    */
   backgroundSize?: Token<CSS.Property.BackgroundSize>
   /**
    * The CSS `baseline-shift` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
+   * @see Docs https://drafts.csswg.org/css-inline/#baseline-shift-property
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : ≤80
+   * - chrome_android : ≤80
+   * - edge : ≤80
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   baselineShift?: Token<CSS.Property.BaselineShift>
   /**
    * The CSS `background` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   bg?: Token<CSS.Property.Background, "colors">
   /**
    * The CSS `background-attachment` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-attachment
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 25
+   * - firefox_android : 25
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   bgAttachment?: Token<CSS.Property.BackgroundAttachment>
   /**
    * The CSS `background-blend-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 35
+   * - chrome_android : 59
+   * - edge : 79
+   * - firefox : 30
+   * - firefox_android : 54
+   * - safari : 8
+   * - safari_ios : 8
    */
   bgBlendMode?: Token<CSS.Property.BackgroundBlendMode>
   /**
    * The CSS `background-clip` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-clip
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 22
+   * - firefox_android : 22
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   bgClip?: Token<CSS.Property.BackgroundClip>
   /**
    * The CSS `background-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   bgColor?: Token<CSS.Property.BackgroundColor, "colors">
   /**
    * The CSS `background-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
    * The CSS `background-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   bgImage?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
    * The CSS `background-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   bgImg?: Token<CSS.Property.BackgroundImage, "gradients">
   /**
    * The CSS `background-origin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-origin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 22
+   * - firefox_android : 22
+   * - safari : 5.1
+   * - safari_ios : 4
    */
   bgOrigin?: Token<CSS.Property.BackgroundOrigin>
   /**
    * The CSS `background-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   bgPosition?: Token<CSS.Property.BackgroundPosition>
   /**
    * The CSS `background-position-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   bgPositionX?: Token<CSS.Property.BackgroundPositionX>
   /**
    * The CSS `background-position-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   bgPositionY?: Token<CSS.Property.BackgroundPositionY>
   /**
    * The CSS `background-position-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   bgPosX?: Token<CSS.Property.BackgroundPositionX>
   /**
    * The CSS `background-position-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 13
+   * - firefox_android : 14
+   * - safari : 7
+   * - safari_ios : 7
    */
   bgPosY?: Token<CSS.Property.BackgroundPositionY>
   /**
    * The CSS `background-repeat` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-repeat
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-03-20`
+   * @newly_available_date `2016-09-20`
+   * @support_browsers
+   * - chrome : 30
+   * - chrome_android : 30
+   * - edge : 12
+   * - firefox : 49
+   * - firefox_android : 49
+   * - safari : 8
+   * - safari_ios : 8
    */
   bgRepeat?: Token<CSS.Property.BackgroundRepeat>
   /**
    * The CSS `background-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/background-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 21
+   * - chrome_android : 25
+   * - edge : 12
+   * - firefox : 9
+   * - firefox_android : 18
+   * - safari : 5.1
+   * - safari_ios : 4.2
    */
   bgSize?: Token<CSS.Property.BackgroundSize>
   /**
    * The CSS `mix-blend-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 41
+   * - chrome_android : 41
+   * - edge : 79
+   * - firefox : 32
+   * - firefox_android : 32
+   * - safari : 8
+   * - safari_ios : 8
    */
   blendMode?: Token<CSS.Property.MixBlendMode>
   /**
    * The CSS `block-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/block-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/block-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
   /**
@@ -2750,97 +3445,305 @@ export interface StyleProps {
   /**
    * The CSS `border` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   border?: Token<CSS.Property.Border | number, "borders">
   /**
    * The CSS `border-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlock?: Token<CSS.Property.BorderBlock | number, "borders">
   /**
    * The CSS `border-block-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockColor?: Token<CSS.Property.BorderBlockColor, "colors">
   /**
    * The CSS `border-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockEnd?: Token<CSS.Property.BorderBlockEnd | number, "borders">
   /**
    * The CSS `border-block-end-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockEndColor?: Token<CSS.Property.BorderBlockEndColor, "colors">
   /**
    * The CSS `border-block-end-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle>
   /**
    * The CSS `border-block-end-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
   /**
    * The CSS `border-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockStart?: Token<CSS.Property.BorderBlockStart | number, "borders">
   /**
    * The CSS `border-block-start-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockStartColor?: Token<CSS.Property.BorderBlockStartColor, "colors">
   /**
    * The CSS `border-block-start-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle>
   /**
    * The CSS `border-block-start-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockStartWidth?: Token<CSS.Property.BorderBlockStartWidth | number>
   /**
    * The CSS `border-block-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockStyle?: Token<CSS.Property.BorderBlockStyle>
   /**
    * The CSS `border-block-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-block-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBlockWidth?: Token<CSS.Property.BorderBlockWidth | number>
   /**
    * The CSS `border-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderBottom?: Token<CSS.Property.BorderBottom | number, "borders">
   /**
    * The CSS `border-bottom-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
   /**
    * The CSS `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBottomEndRadius?: Token<
     CSS.Property.BorderEndEndRadius | number,
@@ -2849,7 +3752,20 @@ export interface StyleProps {
   /**
    * The CSS `border-bottom-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderBottomLeftRadius?: Token<
     CSS.Property.BorderBottomLeftRadius | number,
@@ -2858,8 +3774,21 @@ export interface StyleProps {
   /**
    * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderBottomRadius?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -2870,7 +3799,20 @@ export interface StyleProps {
   /**
    * The CSS `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderBottomRightRadius?: Token<
     CSS.Property.BorderBottomRightRadius | number,
@@ -2879,7 +3821,20 @@ export interface StyleProps {
   /**
    * The CSS `border-end-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderBottomStartRadius?: Token<
     CSS.Property.BorderEndStartRadius | number,
@@ -2888,50 +3843,154 @@ export interface StyleProps {
   /**
    * The CSS `border-bottom-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
   /**
    * The CSS `border-bottom-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderBottomWidth?: Token<CSS.Property.BorderBottomWidth | number>
   /**
    * The CSS `border-collapse` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-collapse
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   borderCollapse?: Token<CSS.Property.BorderCollapse>
   /**
    * The CSS `border-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderColor?: Token<CSS.Property.BorderColor, "colors">
   /**
    * The CSS `border-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
   /**
    * The CSS `border-inline-end-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
   /**
    * The CSS `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndRadius?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -2942,7 +4001,20 @@ export interface StyleProps {
   /**
    * The CSS `border-end-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndStartRadius?: Token<
     CSS.Property.BorderEndStartRadius | number,
@@ -2951,80 +4023,249 @@ export interface StyleProps {
   /**
    * The CSS `border-inline-end-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
    * The CSS `border-inline-end-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
    * The CSS `border-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImage?: Token<CSS.Property.BorderImage | number, "borders">
   /**
    * The CSS `border-image-outset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image-outset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImageOutset?: Token<CSS.Property.BorderImageOutset>
   /**
    * The CSS `border-image-repeat` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImageRepeat?: Token<CSS.Property.BorderImageRepeat>
   /**
    * The CSS `border-image-slice` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image-slice
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImageSlice?: Token<CSS.Property.BorderImageSlice>
   /**
    * The CSS `border-image-source` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image-source
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImageSource?: Token<CSS.Property.BorderImageSource, "gradients">
   /**
    * The CSS `border-image-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-image-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-08-01`
+   * @newly_available_date `2017-02-01`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 12
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   borderImageWidth?: Token<CSS.Property.BorderImageWidth | number>
   /**
    * The CSS `border-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInline?: Token<CSS.Property.BorderInline | number, "borders">
   /**
    * The CSS `border-inline-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineColor?: Token<CSS.Property.BorderInlineColor, "colors">
   /**
    * The CSS `border-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
   /**
    * The CSS `border-inline-end-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineEndRadius?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -3035,32 +4276,97 @@ export interface StyleProps {
   /**
    * The CSS `border-inline-end-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
   /**
    * The CSS `border-inline-end-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
   /**
    * The CSS `border-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
   /**
    * The CSS `border-inline-start-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStartRadius?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -3071,44 +4377,135 @@ export interface StyleProps {
   /**
    * The CSS `border-inline-start-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
   /**
    * The CSS `border-inline-start-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
   /**
    * The CSS `border-inline-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineStyle?: Token<CSS.Property.BorderInlineStyle>
   /**
    * The CSS `border-inline-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderInlineWidth?: Token<CSS.Property.BorderInlineWidth | number>
   /**
    * The CSS `border-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderLeft?: Token<CSS.Property.BorderLeft | number, "borders">
   /**
    * The CSS `border-left-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-left-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors">
   /**
    * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderLeftRadius?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -3119,38 +4516,116 @@ export interface StyleProps {
   /**
    * The CSS `border-left-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-left-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderLeftStyle?: Token<CSS.Property.BorderLeftStyle>
   /**
    * The CSS `border-left-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-left-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderLeftWidth?: Token<CSS.Property.BorderLeftWidth | number>
   /**
    * The CSS `border-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderRadius?: Token<CSS.Property.BorderRadius | number, "radii">
   /**
    * The CSS `border-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderRight?: Token<CSS.Property.BorderRight | number, "borders">
   /**
    * The CSS `border-right-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-right-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderRightColor?: Token<CSS.Property.BorderRightColor, "colors">
   /**
    * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderRightRadius?: Token<
     | CSS.Property.BorderBottomRightRadius
@@ -3161,37 +4636,115 @@ export interface StyleProps {
   /**
    * The CSS `border-right-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-right-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderRightStyle?: Token<CSS.Property.BorderRightStyle>
   /**
    * The CSS `border-right-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-right-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderRightWidth?: Token<CSS.Property.BorderRightWidth | number>
   /**
    * The CSS `border-spacing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-spacing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   borderSpacing?: Token<CSS.Property.BorderSpacing>
   /**
    * The CSS `border-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
   /**
    * The CSS `border-inline-start-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
   /**
    * The CSS `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartEndRadius?: Token<
     CSS.Property.BorderStartEndRadius | number,
@@ -3200,8 +4753,21 @@ export interface StyleProps {
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartRadius?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -3212,7 +4778,20 @@ export interface StyleProps {
   /**
    * The CSS `border-start-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartStartRadius?: Token<
     CSS.Property.BorderStartStartRadius | number,
@@ -3221,37 +4800,115 @@ export interface StyleProps {
   /**
    * The CSS `border-inline-start-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
   /**
    * The CSS `border-inline-start-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
   /**
    * The CSS `border-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderStyle?: Token<CSS.Property.BorderStyle>
   /**
    * The CSS `border-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderTop?: Token<CSS.Property.BorderTop | number, "borders">
   /**
    * The CSS `border-top-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
   /**
    * The CSS `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderTopEndRadius?: Token<
     CSS.Property.BorderStartEndRadius | number,
@@ -3260,7 +4917,20 @@ export interface StyleProps {
   /**
    * The CSS `border-top-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderTopLeftRadius?: Token<
     CSS.Property.BorderTopLeftRadius | number,
@@ -3269,8 +4939,21 @@ export interface StyleProps {
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderTopRadius?: Token<
     | CSS.Property.BorderTopLeftRadius
@@ -3281,7 +4964,20 @@ export interface StyleProps {
   /**
    * The CSS `border-top-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   borderTopRightRadius?: Token<
     CSS.Property.BorderTopRightRadius | number,
@@ -3290,7 +4986,20 @@ export interface StyleProps {
   /**
    * The CSS `border-start-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   borderTopStartRadius?: Token<
     CSS.Property.BorderStartStartRadius | number,
@@ -3299,26 +5008,78 @@ export interface StyleProps {
   /**
    * The CSS `border-top-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderTopStyle?: Token<CSS.Property.BorderTopStyle>
   /**
    * The CSS `border-top-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderTopWidth?: Token<CSS.Property.BorderTopWidth | number>
   /**
    * The CSS `border-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderWidth?: Token<CSS.Property.BorderWidth | number>
   /**
    * The CSS `border-left` and `border-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderX?: Token<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
@@ -3327,8 +5088,21 @@ export interface StyleProps {
   /**
    * The CSS `border-top` and `border-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 14
+   * - safari : 1
+   * - safari_ios : 3
    */
   borderY?: Token<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
@@ -3337,13 +5111,26 @@ export interface StyleProps {
   /**
    * The CSS `bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   bottom?: Token<CSS.Property.Bottom | number, "spaces">
   /**
    * The CSS `box-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-align
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-align
    *
    * @deprecated
    */
@@ -3351,13 +5138,24 @@ export interface StyleProps {
   /**
    * The CSS `box-decoration-break` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 130
+   * - chrome_android : 130
+   * - edge : 130
+   * - firefox : 32
+   * - firefox_android : 32
    */
   boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak>
   /**
    * The CSS `box-direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-direction
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-direction
    *
    * @deprecated
    */
@@ -3365,7 +5163,7 @@ export interface StyleProps {
   /**
    * The CSS `box-flex` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-flex
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-flex
    *
    * @deprecated
    */
@@ -3373,7 +5171,7 @@ export interface StyleProps {
   /**
    * The CSS `box-flex-group` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-flex-group
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-flex-group
    *
    * @deprecated
    */
@@ -3381,7 +5179,7 @@ export interface StyleProps {
   /**
    * The CSS `box-lines` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-lines
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-lines
    *
    * @deprecated
    */
@@ -3389,7 +5187,7 @@ export interface StyleProps {
   /**
    * The CSS `box-ordinal-group` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-ordinal-group
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-ordinal-group
    *
    * @deprecated
    */
@@ -3397,7 +5195,7 @@ export interface StyleProps {
   /**
    * The CSS `box-orient` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-orient
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-orient
    *
    * @deprecated
    */
@@ -3405,7 +5203,7 @@ export interface StyleProps {
   /**
    * The CSS `box-pack` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-pack
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-pack
    *
    * @deprecated
    */
@@ -3413,38 +5211,104 @@ export interface StyleProps {
   /**
    * The CSS `box-shadow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-shadow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 10
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   boxShadow?: Token<CSS.Property.BoxShadow, "shadows">
   /**
    * The CSS `width` and `height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
   /**
    * The CSS `box-sizing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-sizing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 10
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 29
+   * - firefox_android : 29
+   * - safari : 5.1
+   * - safari_ios : 6
    */
   boxSizing?: Token<CSS.Property.BoxSizing>
   /**
    * The CSS `break-after` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-after
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/break-after
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   breakAfter?: Token<CSS.Property.BreakAfter>
   /**
    * The CSS `break-before` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/break-before
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   breakBefore?: Token<CSS.Property.BreakBefore>
   /**
    * The CSS `break-inside` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/break-inside
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   breakInside?: Token<CSS.Property.BreakInside>
   /**
@@ -3454,55 +5318,165 @@ export interface StyleProps {
   /**
    * The CSS `caption-side` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/caption-side
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   captionSide?: Token<CSS.Property.CaptionSide>
   /**
    * The CSS `caret-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/caret-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 79
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 11.1
+   * - safari_ios : 11.3
    */
   caret?: Token<CSS.Property.CaretColor, "colors">
   /**
    * The CSS `caret-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/caret-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 79
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 11.1
+   * - safari_ios : 11.3
    */
   caretColor?: Token<CSS.Property.CaretColor, "colors">
   /**
    * The CSS `clear` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clear
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/clear
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   clear?: Token<CSS.Property.Clear>
   /**
    * The CSS `clip` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/clip
    */
   clip?: Token<CSS.Property.Clip>
   /**
    * The CSS `clip-path` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/clip-path
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-07-21`
+   * @newly_available_date `2021-01-21`
+   * @support_browsers
+   * - chrome : 88
+   * - chrome_android : 88
+   * - edge : 88
+   * - firefox : 71
+   * - firefox_android : 79
+   * - safari : 13.1
+   * - safari_ios : 13
    */
   clipPath?: Token<CSS.Property.ClipPath>
   /**
    * The CSS `clip-rule` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-rule
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/clip-rule
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   clipRule?: Token<CSS.Property.ClipRule>
   /**
    * The CSS `color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   color?: Token<CSS.Property.Color, "colors">
   /**
+   * The CSS `color-adjust` property.
+   *
+   * @see Docs https://drafts.csswg.org/css-color-adjust-1/#color-adjust
+   */
+  colorAdjust?: Token<CSS.Property.PrintColorAdjust>
+  /**
    * The CSS `color-interpolation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/color-interpolation
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   colorInterpolation?: Token<CSS.Property.ColorInterpolation>
   /**
@@ -3514,115 +5488,362 @@ export interface StyleProps {
   /**
    * The CSS `column-count` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-count
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnCount?: Token<CSS.Property.ColumnCount>
   /**
    * The CSS `column-fill` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-fill
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnFill?: Token<CSS.Property.ColumnFill>
   /**
    * The CSS `column-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `column-rule` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-rule
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnRule?: Token<CSS.Property.ColumnRule | number>
   /**
    * The CSS `column-rule-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-rule-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnRuleColor?: Token<CSS.Property.ColumnRuleColor, "colors">
   /**
    * The CSS `column-rule-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-rule-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnRuleStyle?: Token<CSS.Property.ColumnRuleStyle>
   /**
    * The CSS `column-rule-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-rule-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnRuleWidth?: Token<CSS.Property.ColumnRuleWidth | number>
   /**
    * The CSS `columns` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/columns
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/columns
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columns?: Token<CSS.Property.Columns>
   /**
    * The CSS `column-span` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-span
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-01-28`
+   * @newly_available_date `2020-07-28`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 71
+   * - firefox_android : 79
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnSpan?: Token<CSS.Property.ColumnSpan>
   /**
    * The CSS `column-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   columnWidth?: Token<CSS.Property.ColumnWidth | number, "sizes">
   /**
    * The CSS `contain` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 52
+   * - chrome_android : 52
+   * - edge : 79
+   * - firefox : 69
+   * - firefox_android : 79
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   contain?: Token<CSS.Property.Contain>
   /**
    * The CSS `container` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/container
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-02-14`
+   * @support_browsers
+   * - chrome : 105
+   * - chrome_android : 105
+   * - edge : 105
+   * - firefox : 110
+   * - firefox_android : 110
+   * - safari : 16
+   * - safari_ios : 16
    */
   container?: Token<CSS.Property.Container>
   /**
    * The CSS `container-name` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/container-name
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-02-14`
+   * @support_browsers
+   * - chrome : 105
+   * - chrome_android : 105
+   * - edge : 105
+   * - firefox : 110
+   * - firefox_android : 110
+   * - safari : 16
+   * - safari_ios : 16
    */
   containerName?: Token<CSS.Property.ContainerName>
   /**
    * The CSS `container-type` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/container-type
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-02-14`
+   * @support_browsers
+   * - chrome : 105
+   * - chrome_android : 105
+   * - edge : 105
+   * - firefox : 110
+   * - firefox_android : 110
+   * - safari : 16
+   * - safari_ios : 16
    */
   containerType?: Token<CSS.Property.ContainerType>
   /**
    * The CSS `contain-intrinsic-block-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-block-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 17
+   * - safari_ios : 17
    */
   containIntrinsicBlockSize?: Token<CSS.Property.ContainIntrinsicBlockSize>
   /**
    * The CSS `contain-intrinsic-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 17
+   * - safari_ios : 17
    */
   containIntrinsicHeight?: Token<CSS.Property.ContainIntrinsicHeight>
   /**
    * The CSS `contain-intrinsic-inline-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-inline-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 17
+   * - safari_ios : 17
    */
   containIntrinsicInlineSize?: Token<CSS.Property.ContainIntrinsicInlineSize>
   /**
    * The CSS `contain-intrinsic-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 17
+   * - safari_ios : 17
    */
   containIntrinsicSize?: Token<CSS.Property.ContainIntrinsicSize>
   /**
    * The CSS `contain-intrinsic-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 17
+   * - safari_ios : 17
    */
   containIntrinsicWidth?: Token<
     CSS.Property.ContainIntrinsicWidth | number,
@@ -3631,13 +5852,39 @@ export interface StyleProps {
   /**
    * The CSS `content` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/content
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   content?: Token<CSS.Property.Content>
   /**
    * The CSS `content-visibility` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/content-visibility
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-09-16`
+   * @support_browsers
+   * - chrome : 108
+   * - chrome_android : 108
+   * - edge : 108
+   * - firefox : 130
+   * - firefox_android : 130
+   * - safari : 18
+   * - safari_ios : 18
    */
   contentVisibility?: Token<CSS.Property.ContentVisibility>
   /**
@@ -3647,43 +5894,133 @@ export interface StyleProps {
   /**
    * The CSS `counter-increment` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/counter-increment
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 2
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 25
+   * - safari : 3
+   * - safari_ios : 1
    */
   counterIncrement?: Token<CSS.Property.CounterIncrement>
   /**
    * The CSS `counter-reset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/counter-reset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 2
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 25
+   * - safari : 3
+   * - safari_ios : 1
    */
   counterReset?: Token<CSS.Property.CounterReset>
   /**
    * The CSS `counter-set` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-set
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/counter-set
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-11`
+   * @support_browsers
+   * - chrome : 85
+   * - chrome_android : 85
+   * - edge : 85
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 17.2
+   * - safari_ios : 17.2
    */
   counterSet?: Token<CSS.Property.CounterSet>
   /**
    * The CSS `cursor` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/cursor
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 68
+   * - chrome_android : 68
+   * - edge : 79
+   * - firefox : 27
+   * - firefox_android : 95
+   * - safari : 11
    */
   cursor?: Token<CSS.Property.Cursor>
   /**
    * The CSS `direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/direction
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/direction
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 79
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 11
+   * - safari_ios : 11
    */
   direction?: Token<CSS.Property.Direction>
   /**
    * The CSS `display` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/display
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/display
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   display?: Token<CSS.Property.Display>
   /**
    * The CSS `dominant-baseline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/dominant-baseline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `≤2022-09-24`
+   * @newly_available_date `≤2020-03-24`
+   * @support_browsers
+   * - chrome : ≤80
+   * - chrome_android : ≤80
+   * - edge : ≤80
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
@@ -3693,295 +6030,888 @@ export interface StyleProps {
   /**
    * The CSS `empty-cells` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/empty-cells
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   emptyCells?: Token<CSS.Property.EmptyCells>
   /**
    * The CSS `fill` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/fill
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   fill?: Token<CSS.Property.Fill, "colors">
   /**
    * The CSS `fill-opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-opacity
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/fill-opacity
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `≤2022-09-24`
+   * @newly_available_date `≤2020-03-24`
+   * @support_browsers
+   * - chrome : ≤80
+   * - chrome_android : ≤80
+   * - edge : ≤80
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   fillOpacity?: Token<CSS.Property.FillOpacity>
   /**
    * The CSS `fill-rule` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-rule
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/fill-rule
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   fillRule?: Token<CSS.Property.FillRule>
   /**
    * The CSS `filter` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/filter
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-03-07`
+   * @newly_available_date `2016-09-07`
+   * @support_browsers
+   * - chrome : 53
+   * - chrome_android : 53
+   * - edge : 12
+   * - firefox : 35
+   * - firefox_android : 35
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   filter?: Token<CSS.Property.Filter>
   /**
    * The CSS `flex` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flex?: Token<CSS.Property.Flex>
   /**
    * The CSS `flex-basis` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-basis
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexBasis?: Token<CSS.Property.FlexBasis | number, "sizes">
   /**
    * The CSS `flex-direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexDir?: Token<CSS.Property.FlexDirection>
   /**
    * The CSS `flex-direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexDirection?: Token<CSS.Property.FlexDirection>
   /**
    * The CSS `flex-flow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-flow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexFlow?: Token<CSS.Property.FlexFlow>
   /**
    * The CSS `flex-grow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-grow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexGrow?: Token<CSS.Property.FlexGrow>
   /**
    * The CSS `flex-shrink` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-shrink
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexShrink?: Token<CSS.Property.FlexShrink>
   /**
    * The CSS `flex-wrap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flex-wrap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   flexWrap?: Token<CSS.Property.FlexWrap>
   /**
    * The CSS `float` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/float
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/float
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   float?: Token<CSS.Property.Float>
   /**
    * The CSS `flood-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flood-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flood-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 5
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 6
+   * - safari_ios : 6
    */
   floodColor?: Token<CSS.Property.FloodColor, "colors">
   /**
    * The CSS `flood-opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flood-opacity
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/flood-opacity
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 5
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 6
+   * - safari_ios : 6
    */
   floodOpacity?: Token<CSS.Property.FloodOpacity>
   /**
    * The CSS `font` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   font?: Token<CSS.Property.Font>
   /**
    * The CSS `font-family` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-family
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   fontFamily?: Token<CSS.Property.FontFamily, "fonts">
   /**
    * The CSS `font-feature-settings` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-10-05`
+   * @newly_available_date `2017-04-05`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 15
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontFeatureSettings?: Token<CSS.Property.FontFeatureSettings>
   /**
    * The CSS `font-kerning` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-kerning
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 33
+   * - chrome_android : 33
+   * - edge : 79
+   * - firefox : 32
+   * - firefox_android : 32
+   * - safari : 9
+   * - safari_ios : 9
    */
   fontKerning?: Token<CSS.Property.FontKerning>
   /**
    * The CSS `font-language-override` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-language-override
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - firefox : 34
+   * - firefox_android : 34
    */
   fontLanguageOverride?: Token<CSS.Property.FontLanguageOverride>
   /**
    * The CSS `font-optical-sizing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-optical-sizing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-09-24`
+   * @newly_available_date `2020-03-24`
+   * @support_browsers
+   * - chrome : 79
+   * - chrome_android : 79
+   * - edge : 17
+   * - firefox : 62
+   * - firefox_android : 62
+   * - safari : 13.1
+   * - safari_ios : 13.4
    */
   fontOpticalSizing?: Token<CSS.Property.FontOpticalSizing>
   /**
    * The CSS `font-palette` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-palette
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-11-15`
+   * @support_browsers
+   * - chrome : 101
+   * - chrome_android : 101
+   * - edge : 101
+   * - firefox : 107
+   * - firefox_android : 107
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   fontPalette?: Token<CSS.Property.FontPalette>
   /**
    * The CSS `font-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
    * The CSS `font-size-adjust` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size-adjust
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-07-25`
+   * @support_browsers
+   * - chrome : 127
+   * - chrome_android : 127
+   * - edge : 127
+   * - firefox : 118
+   * - firefox_android : 118
+   * - safari : 17
+   * - safari_ios : 17
    */
   fontSizeAdjust?: Token<CSS.Property.FontSizeAdjust>
   /**
    * The CSS `font-smooth` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-smooth
    */
   fontSmooth?: Token<CSS.Property.FontSmooth>
   /**
    * The CSS `font-stretch` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-stretch
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-03-19`
+   * @newly_available_date `2017-09-19`
+   * @support_browsers
+   * - chrome : 60
+   * - chrome_android : 60
+   * - edge : 12
+   * - firefox : 9
+   * - firefox_android : 9
+   * - safari : 11
+   * - safari_ios : 11
    */
   fontStretch?: Token<CSS.Property.FontStretch>
   /**
    * The CSS `font-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   fontStyle?: Token<CSS.Property.FontStyle>
   /**
    * The CSS `font-synthesis` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-synthesis
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-07-06`
+   * @newly_available_date `2022-01-06`
+   * @support_browsers
+   * - chrome : 97
+   * - chrome_android : 97
+   * - edge : 97
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9
+   * - safari_ios : 9
    */
   fontSynthesis?: Token<CSS.Property.FontSynthesis>
   /**
    * The CSS `font-synthesis-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-synthesis-position
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - firefox : 118
+   * - firefox_android : 118
    */
   fontSynthesisPosition?: Token<CSS.Property.FontSynthesisPosition>
   /**
    * The CSS `font-synthesis-small-caps` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-03-27`
+   * @support_browsers
+   * - chrome : 97
+   * - chrome_android : 97
+   * - edge : 97
+   * - firefox : 111
+   * - firefox_android : 111
+   * - safari : 16.4
+   * - safari_ios : 16.4
    */
   fontSynthesisSmallCaps?: Token<CSS.Property.FontSynthesisSmallCaps>
   /**
    * The CSS `font-synthesis-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-03-27`
+   * @support_browsers
+   * - chrome : 97
+   * - chrome_android : 97
+   * - edge : 97
+   * - firefox : 111
+   * - firefox_android : 111
+   * - safari : 16.4
+   * - safari_ios : 16.4
    */
   fontSynthesisStyle?: Token<CSS.Property.FontSynthesisStyle>
   /**
    * The CSS `font-synthesis-weight` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-weight
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-03-27`
+   * @support_browsers
+   * - chrome : 97
+   * - chrome_android : 97
+   * - edge : 97
+   * - firefox : 111
+   * - firefox_android : 111
+   * - safari : 16.4
+   * - safari_ios : 16.4
    */
   fontSynthesisWeight?: Token<CSS.Property.FontSynthesisWeight>
   /**
    * The CSS `font-variant` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   fontVariant?: Token<CSS.Property.FontVariant>
   /**
    * The CSS `font-variant-alternates` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-alternates
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-03-13`
+   * @support_browsers
+   * - chrome : 111
+   * - chrome_android : 111
+   * - edge : 111
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontVariantAlternates?: Token<CSS.Property.FontVariantAlternates>
   /**
    * The CSS `font-variant-caps` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 52
+   * - chrome_android : 52
+   * - edge : 79
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontVariantCaps?: Token<CSS.Property.FontVariantCaps>
   /**
    * The CSS `font-variant-east-asian` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 79
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontVariantEastAsian?: Token<CSS.Property.FontVariantEastAsian>
   /**
    * The CSS `font-variant-emoji` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-emoji
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 131
+   * - edge : 131
    */
   fontVariantEmoji?: Token<CSS.Property.FontVariantEmoji>
   /**
    * The CSS `font-variant-ligatures` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-ligatures
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 34
+   * - chrome_android : 34
+   * - edge : 79
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontVariantLigatures?: Token<CSS.Property.FontVariantLigatures>
   /**
    * The CSS `font-variant-numeric` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 52
+   * - chrome_android : 52
+   * - edge : 79
+   * - firefox : 34
+   * - firefox_android : 34
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   fontVariantNumeric?: Token<CSS.Property.FontVariantNumeric>
   /**
    * The CSS `font-variant-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variant-position
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - firefox : ≤72
+   * - firefox_android : ≤79
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   fontVariantPosition?: Token<CSS.Property.FontVariantPosition>
   /**
    * The CSS `font-variation-settings` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2021-03-05`
+   * @newly_available_date `2018-09-05`
+   * @support_browsers
+   * - chrome : 62
+   * - chrome_android : 62
+   * - edge : 17
+   * - firefox : 62
+   * - firefox_android : 62
+   * - safari : 11
+   * - safari_ios : 11
    */
   fontVariationSettings?: Token<CSS.Property.FontVariationSettings>
   /**
    * The CSS `font-weight` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-weight
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 2
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   fontWeight?: Token<CSS.Property.FontWeight, "fontWeights">
   /**
    * The CSS `forced-color-adjust` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/forced-color-adjust
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 79
+   * - firefox : 89
+   * - firefox_android : 89
+   * - safari : 16
+   * - safari_ios : 16
    */
   forcedColorAdjust?: Token<CSS.Property.ForcedColorAdjust>
   /**
    * The CSS `gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   g?: Token<CSS.Property.Gap | number, "spaces">
   /**
    * The CSS `gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gap?: Token<CSS.Property.Gap | number, "spaces">
   /**
    * The CSS `column-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `row-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/row-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gapY?: Token<CSS.Property.RowGap | number, "spaces">
   /**
    * The CSS `glyph-orientation-vertical` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/glyph-orientation-vertical
+   * @see Docs https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation
    */
   glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
   /**
@@ -3991,85 +6921,267 @@ export interface StyleProps {
   /**
    * The CSS `grid` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   grid?: Token<CSS.Property.Grid>
   /**
    * The CSS `grid-area` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-area
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridArea?: Token<CSS.Property.GridArea>
   /**
    * The CSS `grid-auto-columns` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridAutoColumns?: Token<CSS.Property.GridAutoColumns | number, "sizes">
   /**
    * The CSS `grid-auto-flow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridAutoFlow?: Token<CSS.Property.GridAutoFlow>
   /**
    * The CSS `grid-auto-rows` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridAutoRows?: Token<CSS.Property.GridAutoRows | number, "sizes">
   /**
    * The CSS `grid-column` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-column
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridColumn?: Token<CSS.Property.GridColumn>
   /**
    * The CSS `grid-column-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-column-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridColumnEnd?: Token<CSS.Property.GridColumnEnd>
   /**
    * The CSS `grid-column-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-column-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridColumnStart?: Token<CSS.Property.GridColumnStart>
   /**
    * The CSS `grid-row` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-row
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridRow?: Token<CSS.Property.GridRow>
   /**
    * The CSS `grid-row-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-row-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridRowEnd?: Token<CSS.Property.GridRowEnd>
   /**
    * The CSS `grid-row-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-row-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridRowStart?: Token<CSS.Property.GridRowStart>
   /**
    * The CSS `grid-template` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-template
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridTemplate?: Token<CSS.Property.GridTemplate>
   /**
    * The CSS `grid-template-areas` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridTemplateAreas?: Token<CSS.Property.GridTemplateAreas>
   /**
    * The CSS `grid-template-columns` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridTemplateColumns?: Token<
     CSS.Property.GridTemplateColumns | number,
@@ -4078,37 +7190,108 @@ export interface StyleProps {
   /**
    * The CSS `grid-template-rows` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gridTemplateRows?: Token<CSS.Property.GridTemplateRows | number, "sizes">
   /**
    * The CSS `column-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/column-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-07`
+   * @newly_available_date `2017-03-07`
+   * @support_browsers
+   * - chrome : 50
+   * - chrome_android : 50
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 9
+   * - safari_ios : 9
    */
   gx?: Token<CSS.Property.ColumnGap | number, "spaces">
   /**
    * The CSS `row-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/row-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   gy?: Token<CSS.Property.RowGap | number, "spaces">
   /**
    * The CSS `height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   h?: Token<CSS.Property.Height | number, "sizes">
   /**
    * The CSS `hanging-punctuation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
    */
   hangingPunctuation?: Token<CSS.Property.HangingPunctuation>
   /**
    * The CSS `height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   height?: Token<CSS.Property.Height | number, "sizes">
   /**
@@ -4118,117 +7301,345 @@ export interface StyleProps {
   /**
    * The CSS `hyphenate-character` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-character
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 106
+   * - chrome_android : 106
+   * - edge : 106
+   * - firefox : 98
+   * - firefox_android : 98
+   * - safari : 17
+   * - safari_ios : 17
    */
   hyphenateCharacter?: Token<CSS.Property.HyphenateCharacter>
   /**
    * The CSS `hyphenate-limit-chars` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 109
+   * - chrome_android : 109
+   * - edge : 109
    */
   hyphenateLimitChars?: Token<CSS.Property.HyphenateLimitChars>
   /**
    * The CSS `hyphens` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/hyphens
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-09-18`
+   * @support_browsers
+   * - chrome : 88
+   * - chrome_android : 55
+   * - edge : 88
+   * - firefox : 43
+   * - firefox_android : 43
+   * - safari : 17
+   * - safari_ios : 17
    */
   hyphens?: Token<CSS.Property.Hyphens>
   /**
    * The CSS `image-orientation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-orientation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/image-orientation
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-10-13`
+   * @newly_available_date `2020-04-13`
+   * @support_browsers
+   * - chrome : 81
+   * - chrome_android : 81
+   * - edge : 81
+   * - firefox : 26
+   * - firefox_android : 26
+   * - safari : 13.1
+   * - safari_ios : 13.4
    */
   imageOrientation?: Token<CSS.Property.ImageOrientation>
   /**
    * The CSS `image-rendering` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/image-rendering
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-04-05`
+   * @newly_available_date `2021-10-05`
+   * @support_browsers
+   * - chrome : 41
+   * - chrome_android : 41
+   * - edge : 79
+   * - firefox : 93
+   * - firefox_android : 93
+   * - safari : 10
+   * - safari_ios : 10
    */
   imageRendering?: Token<CSS.Property.ImageRendering>
   /**
-   * The CSS `image-resolution` property.
+   * The CSS `ime-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-resolution
+   * @see Docs https://drafts.csswg.org/css-ui/#input-method-editor
+   *
+   * @deprecated
    */
-  imageResolution?: Token<CSS.Property.ImageResolution>
+  imeMode?: Token<CSS.Property.ImeMode>
   /**
    * The CSS `initial-letter` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/initial-letter
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/initial-letter
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 110
+   * - chrome_android : 110
+   * - edge : 110
    */
   initialLetter?: Token<CSS.Property.InitialLetter>
   /**
    * The CSS `inline-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inline-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inline-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   inlineSize?: Token<CSS.Property.InlineSize | number, "sizes">
   /**
    * The CSS `inset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   inset?: Token<CSS.Property.Inset | number, "spaces">
   /**
    * The CSS `inset-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetBlock?: Token<CSS.Property.InsetBlock | number, "spaces">
   /**
    * The CSS `inset-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, "spaces">
   /**
    * The CSS `inset-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, "spaces">
   /**
    * The CSS `inset-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
    * The CSS `inset-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetInline?: Token<CSS.Property.InsetInline | number, "spaces">
   /**
    * The CSS `inset-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
    * The CSS `inset-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
   /**
    * The CSS `inset-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   insetStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
   /**
    * The CSS `left` and `right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
   /**
    * The CSS `top` and `bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
   /**
@@ -4238,25 +7649,77 @@ export interface StyleProps {
   /**
    * The CSS `isolation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/isolation
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 41
+   * - chrome_android : 41
+   * - edge : 79
+   * - firefox : 36
+   * - firefox_android : 36
+   * - safari : 8
+   * - safari_ios : 8
    */
   isolation?: Token<CSS.Property.Isolation>
   /**
    * The CSS `justify-content` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/justify-content
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   justifyContent?: Token<CSS.Property.JustifyContent>
   /**
    * The CSS `justify-items` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/justify-items
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   justifyItems?: Token<CSS.Property.JustifyItems>
   /**
    * The CSS `justify-self` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/justify-self
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
   /**
@@ -4268,31 +7731,96 @@ export interface StyleProps {
   /**
    * The CSS `line-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/line-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   leading?: Token<CSS.Property.LineHeight, "lineHeights">
   /**
    * The CSS `left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   left?: Token<CSS.Property.Left | number, "spaces">
   /**
    * The CSS `letter-spacing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/letter-spacing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   letterSpacing?: Token<CSS.Property.LetterSpacing, "letterSpacings">
   /**
    * The CSS `lighting-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/lighting-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/lighting-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 5
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 6
+   * - safari_ios : 6
    */
   lightingColor?: Token<CSS.Property.LightingColor, "colors">
   /**
    * The CSS `line-break` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/line-break
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-01-28`
+   * @newly_available_date `2020-07-28`
+   * @support_browsers
+   * - chrome : 83
+   * - chrome_android : 83
+   * - edge : 83
+   * - firefox : 69
+   * - firefox_android : 79
+   * - safari : 13
+   * - safari_ios : 13
    */
   lineBreak?: Token<CSS.Property.LineBreak>
   /**
@@ -4302,146 +7830,446 @@ export interface StyleProps {
   /**
    * The CSS `line-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/line-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
   /**
    * The CSS `line-height-step` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height-step
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/line-height-step
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
    */
   lineHeightStep?: Token<CSS.Property.LineHeightStep>
   /**
    * The CSS `list-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStyle?: Token<CSS.Property.ListStyle>
   /**
    * The CSS `list-style-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStyleImage?: Token<CSS.Property.ListStyleImage, "gradients">
   /**
    * The CSS `list-style-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStyleImg?: Token<CSS.Property.ListStyleImage, "gradients">
   /**
    * The CSS `list-style-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStylePos?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStylePosition?: Token<CSS.Property.ListStylePosition>
   /**
    * The CSS `list-style-type` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/list-style-type
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   listStyleType?: Token<CSS.Property.ListStyleType>
   /**
    * The CSS `margin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   m?: Token<CSS.Property.Margin | number, "spaces">
   /**
    * The CSS `margin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   margin?: Token<CSS.Property.Margin | number, "spaces">
   /**
    * The CSS `margin-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginBlock?: Token<CSS.Property.MarginBlock | number, "spaces">
   /**
    * The CSS `margin-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, "spaces">
   /**
    * The CSS `margin-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, "spaces">
   /**
    * The CSS `margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   marginBottom?: Token<CSS.Property.MarginBottom | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * The CSS `margin-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginInline?: Token<CSS.Property.MarginInline | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * The CSS `margin-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   marginLeft?: Token<CSS.Property.MarginLeft | number, "spaces">
   /**
    * The CSS `margin-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   marginRight?: Token<CSS.Property.MarginRight | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * The CSS `margin-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   marginTop?: Token<CSS.Property.MarginTop | number, "spaces">
   /**
    * The CSS `margin-trim` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-trim
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-trim
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 16.4
+   * - safari_ios : 16.4
    */
   marginTrim?: Token<CSS.Property.MarginTrim>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   marginX?: Token<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -4450,8 +8278,21 @@ export interface StyleProps {
   /**
    * The CSS `margin-top` and `margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   marginY?: Token<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -4460,158 +8301,441 @@ export interface StyleProps {
   /**
    * The CSS `marker` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/marker
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   marker?: Token<CSS.Property.Marker>
   /**
    * The CSS `marker-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/marker-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   markerEnd?: Token<CSS.Property.MarkerEnd>
   /**
    * The CSS `marker-mid` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-mid
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/marker-mid
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   markerMid?: Token<CSS.Property.MarkerMid>
   /**
    * The CSS `marker-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/marker-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   markerStart?: Token<CSS.Property.MarkerStart>
   /**
    * The CSS `mask` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   mask?: Token<CSS.Property.Mask>
   /**
    * The CSS `mask-border` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorder?: Token<CSS.Property.MaskBorder>
   /**
-   * The CSS `mask-border-mode` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-mode
-   */
-  maskBorderMode?: Token<CSS.Property.MaskBorderMode>
-  /**
    * The CSS `mask-border-outset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-outset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorderOutset?: Token<CSS.Property.MaskBorderOutset>
   /**
    * The CSS `mask-border-repeat` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-repeat
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorderRepeat?: Token<CSS.Property.MaskBorderRepeat>
   /**
    * The CSS `mask-border-slice` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-slice
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorderSlice?: Token<CSS.Property.MaskBorderSlice>
   /**
    * The CSS `mask-border-source` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-source
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border-source
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorderSource?: Token<CSS.Property.MaskBorderSource>
   /**
    * The CSS `mask-border-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-border-width
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - safari : 17.2
    */
   maskBorderWidth?: Token<CSS.Property.MaskBorderWidth | number>
   /**
    * The CSS `mask-clip` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-clip
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskClip?: Token<CSS.Property.MaskClip>
   /**
    * The CSS `mask-composite` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-composite
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskComposite?: Token<CSS.Property.MaskComposite>
   /**
    * The CSS `mask-image` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-image
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskImage?: Token<CSS.Property.MaskImage, "gradients">
   /**
    * The CSS `mask-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-mode
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskMode?: Token<CSS.Property.MaskMode>
   /**
    * The CSS `mask-origin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-origin
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskOrigin?: Token<CSS.Property.MaskOrigin>
   /**
    * The CSS `mask-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-position
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskPosition?: Token<CSS.Property.MaskPosition>
   /**
    * The CSS `mask-repeat` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-repeat
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskRepeat?: Token<CSS.Property.MaskRepeat>
   /**
    * The CSS `mask-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-size
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-12-07`
+   * @support_browsers
+   * - chrome : 120
+   * - chrome_android : 120
+   * - edge : 120
+   * - firefox : 53
+   * - firefox_android : 53
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   maskSize?: Token<CSS.Property.MaskSize>
   /**
    * The CSS `mask-type` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mask-type
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 24
+   * - chrome_android : 25
+   * - edge : 79
+   * - firefox : 35
+   * - firefox_android : 35
+   * - safari : 7
+   * - safari_ios : 7
    */
   maskType?: Token<CSS.Property.MaskType>
   /**
    * The CSS `math-depth` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-depth
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/math-depth
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-01-12`
+   * @support_browsers
+   * - chrome : 109
+   * - chrome_android : 109
+   * - edge : 109
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   mathDepth?: Token<CSS.Property.MathDepth>
   /**
    * The CSS `math-shift` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-shift
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/math-shift
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-01-12`
+   * @support_browsers
+   * - chrome : 109
+   * - chrome_android : 109
+   * - edge : 109
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   mathShift?: Token<CSS.Property.MathShift>
   /**
    * The CSS `math-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/math-style
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-01-12`
+   * @support_browsers
+   * - chrome : 109
+   * - chrome_android : 109
+   * - edge : 109
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   mathStyle?: Token<CSS.Property.MathStyle>
   /**
    * The CSS `max-block-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-block-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-block-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, "sizes">
   /**
    * The CSS `max-width` and `max-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   maxBoxSize?: Token<
     CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
@@ -4620,56 +8744,173 @@ export interface StyleProps {
   /**
    * The CSS `max-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   maxH?: Token<CSS.Property.MaxHeight | number, "sizes">
   /**
    * The CSS `max-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
   /**
    * The CSS `max-inline-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-inline-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-inline-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, "sizes">
   /**
    * The CSS `max-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
   /**
    * The CSS `max-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/max-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
   /**
    * The CSS `margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   mb?: Token<CSS.Property.MarginBottom | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   me?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * The CSS `min-block-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-block-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-block-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   minBlockSize?: Token<CSS.Property.MinBlockSize | number, "sizes">
   /**
    * The CSS `min-width` and `min-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   minBoxSize?: Token<
     CSS.Property.MinHeight | CSS.Property.MinWidth | number,
@@ -4678,68 +8919,211 @@ export interface StyleProps {
   /**
    * The CSS `min-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   minH?: Token<CSS.Property.MinHeight | number, "sizes">
   /**
    * The CSS `min-height` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-height
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
   /**
    * The CSS `min-inline-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-inline-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-inline-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   minInlineSize?: Token<CSS.Property.MinInlineSize | number, "sizes">
   /**
    * The CSS `min-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   minW?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `min-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/min-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 18
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
   /**
    * The CSS `mix-blend-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 41
+   * - chrome_android : 41
+   * - edge : 79
+   * - firefox : 32
+   * - firefox_android : 32
+   * - safari : 8
+   * - safari_ios : 8
    */
   mixBlendMode?: Token<CSS.Property.MixBlendMode>
   /**
    * The CSS `margin-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   ml?: Token<CSS.Property.MarginLeft | number, "spaces">
   /**
    * The CSS `margin-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   mr?: Token<CSS.Property.MarginRight | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   ms?: Token<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * The CSS `margin-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   mt?: Token<CSS.Property.MarginTop | number, "spaces">
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   mx?: Token<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -4748,8 +9132,21 @@ export interface StyleProps {
   /**
    * The CSS `margin-top` and `margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   my?: Token<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -4758,67 +9155,208 @@ export interface StyleProps {
   /**
    * The CSS `object-fit` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/object-fit
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 32
+   * - chrome_android : 32
+   * - edge : 79
+   * - firefox : 36
+   * - firefox_android : 36
+   * - safari : 10
+   * - safari_ios : 10
    */
   objectFit?: Token<CSS.Property.ObjectFit>
   /**
    * The CSS `object-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/object-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 32
+   * - chrome_android : 32
+   * - edge : 79
+   * - firefox : 36
+   * - firefox_android : 36
+   * - safari : 10
+   * - safari_ios : 10
    */
   objectPosition?: Token<CSS.Property.ObjectPosition>
   /**
    * The CSS `offset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offset?: Token<CSS.Property.Offset>
   /**
    * The CSS `offset-anchor` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-anchor
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset-anchor
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offsetAnchor?: Token<CSS.Property.OffsetAnchor>
   /**
    * The CSS `offset-distance` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-distance
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset-distance
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offsetDistance?: Token<CSS.Property.OffsetDistance>
   /**
    * The CSS `offset-path` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-path
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset-path
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offsetPath?: Token<CSS.Property.OffsetPath>
   /**
    * The CSS `offset-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset-position
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offsetPosition?: Token<CSS.Property.OffsetPosition>
   /**
    * The CSS `offset-rotate` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-rotate
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/offset-rotate
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 55
+   * - chrome_android : 55
+   * - edge : 79
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 16
+   * - safari_ios : 16
    */
   offsetRotate?: Token<CSS.Property.OffsetRotate>
   /**
    * The CSS `opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/opacity
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 2
+   * - safari_ios : 1
    */
   opacity?: Token<CSS.Property.Opacity>
   /**
    * The CSS `order` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/order
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/order
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   order?: Token<CSS.Property.Order>
   /**
    * The CSS `orphans` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/orphans
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   orphans?: Token<CSS.Property.Orphans>
   /**
@@ -4830,218 +9368,673 @@ export interface StyleProps {
   /**
    * The CSS `outline-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/outline-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-10-05`
+   * @newly_available_date `2017-04-05`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 15
+   * - firefox : 1.5
+   * - firefox_android : 4
+   * - safari : 1.2
+   * - safari_ios : 1
    */
   outlineColor?: Token<CSS.Property.OutlineColor, "colors">
   /**
    * The CSS `outline-offset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/outline-offset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-10-05`
+   * @newly_available_date `2017-04-05`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 15
+   * - firefox : 1.5
+   * - firefox_android : 4
+   * - safari : 1.2
+   * - safari_ios : 1
    */
   outlineOffset?: Token<CSS.Property.OutlineOffset>
   /**
    * The CSS `outline-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/outline-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-10-05`
+   * @newly_available_date `2017-04-05`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 15
+   * - firefox : 1.5
+   * - firefox_android : 4
+   * - safari : 1.2
+   * - safari_ios : 1
    */
   outlineStyle?: Token<CSS.Property.OutlineStyle>
   /**
    * The CSS `outline-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/outline-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-10-05`
+   * @newly_available_date `2017-04-05`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 15
+   * - firefox : 1.5
+   * - firefox_android : 4
+   * - safari : 1.2
+   * - safari_ios : 1
    */
   outlineWidth?: Token<CSS.Property.OutlineWidth | number>
   /**
    * The CSS `overflow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 90
+   * - chrome_android : 90
+   * - edge : 90
+   * - firefox : 81
+   * - firefox_android : 81
+   * - safari : 16
+   * - safari_ios : 16
    */
   overflow?: Token<CSS.Property.Overflow>
   /**
    * The CSS `overflow-anchor` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 56
+   * - chrome_android : 56
+   * - edge : 79
+   * - firefox : 66
+   * - firefox_android : 66
    */
   overflowAnchor?: Token<CSS.Property.OverflowAnchor>
   /**
    * The CSS `overflow-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   overflowBlock?: Token<CSS.Property.OverflowBlock>
   /**
    * The CSS `overflow-clip-margin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-clip-margin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
    */
   overflowClipMargin?: Token<CSS.Property.OverflowClipMargin>
   /**
    * The CSS `overflow-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   overflowInline?: Token<CSS.Property.OverflowInline>
   /**
    * The CSS `overflow-wrap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2021-04-02`
+   * @newly_available_date `2018-10-02`
+   * @support_browsers
+   * - chrome : 23
+   * - chrome_android : 25
+   * - edge : 18
+   * - firefox : 49
+   * - firefox_android : 49
+   * - safari : 7
+   * - safari_ios : 7
    */
   overflowWrap?: Token<CSS.Property.OverflowWrap>
   /**
    * The CSS `overflow-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-x
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 90
+   * - chrome_android : 90
+   * - edge : 90
+   * - firefox : 81
+   * - firefox_android : 81
+   * - safari : 16
+   * - safari_ios : 16
    */
   overflowX?: Token<CSS.Property.OverflowX>
   /**
    * The CSS `overflow-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overflow-y
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 90
+   * - chrome_android : 90
+   * - edge : 90
+   * - firefox : 81
+   * - firefox_android : 81
+   * - safari : 16
+   * - safari_ios : 16
    */
   overflowY?: Token<CSS.Property.OverflowY>
   /**
    * The CSS `overlay` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overlay
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overlay
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 117
+   * - chrome_android : 117
+   * - edge : 117
    */
   overlay?: Token<CSS.Property.Overlay>
   /**
    * The CSS `overscroll-behavior` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscroll?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
   /**
    * The CSS `overscroll-behavior-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollBehaviorBlock?: Token<CSS.Property.OverscrollBehaviorBlock>
   /**
    * The CSS `overscroll-behavior-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollBehaviorInline?: Token<CSS.Property.OverscrollBehaviorInline>
   /**
    * The CSS `overscroll-behavior-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
    * The CSS `overscroll-behavior-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY>
   /**
    * The CSS `overscroll-behavior-x` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
   /**
    * The CSS `overscroll-behavior-y` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 63
+   * - chrome_android : 63
+   * - edge : 18
+   * - firefox : 59
+   * - firefox_android : 59
+   * - safari : 16
+   * - safari_ios : 16
    */
   overscrollY?: Token<CSS.Property.OverscrollBehaviorY>
   /**
    * The CSS `padding` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   p?: Token<CSS.Property.Padding | number, "spaces">
   /**
    * The CSS `padding` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   padding?: Token<CSS.Property.Padding | number, "spaces">
   /**
    * The CSS `padding-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingBlock?: Token<CSS.Property.PaddingBlock | number, "spaces">
   /**
    * The CSS `padding-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, "spaces">
   /**
    * The CSS `padding-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, "spaces">
   /**
    * The CSS `padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   paddingBottom?: Token<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * The CSS `padding-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingInline?: Token<CSS.Property.PaddingInline | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * The CSS `padding-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * The CSS `padding-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   paddingLeft?: Token<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * The CSS `padding-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   paddingRight?: Token<CSS.Property.PaddingRight | number, "spaces">
   /**
    * The CSS `padding-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * The CSS `padding-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   paddingTop?: Token<CSS.Property.PaddingTop | number, "spaces">
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   paddingX?: Token<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -5050,8 +10043,21 @@ export interface StyleProps {
   /**
    * The CSS `padding-top` and `padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   paddingY?: Token<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -5060,128 +10066,383 @@ export interface StyleProps {
   /**
    * The CSS `page` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/page
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 85
+   * - chrome_android : 85
+   * - edge : 85
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   page?: Token<CSS.Property.Page>
   /**
    * The CSS `page-break-after` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/page-break-after
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   pageBreakAfter?: Token<CSS.Property.PageBreakAfter>
   /**
    * The CSS `page-break-before` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-before
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/page-break-before
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   pageBreakBefore?: Token<CSS.Property.PageBreakBefore>
   /**
    * The CSS `page-break-inside` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-inside
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/page-break-inside
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
    */
   pageBreakInside?: Token<CSS.Property.PageBreakInside>
   /**
    * The CSS `paint-order` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/paint-order
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 123
+   * - chrome_android : 123
+   * - edge : 123
+   * - firefox : ≤66
+   * - firefox_android : ≤66
+   * - safari : ≤12
    */
   paintOrder?: Token<CSS.Property.PaintOrder>
   /**
    * The CSS `padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   pb?: Token<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   pe?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * The CSS `perspective` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/perspective
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   perspective?: Token<CSS.Property.Perspective>
   /**
    * The CSS `perspective-origin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/perspective-origin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   perspectiveOrigin?: Token<CSS.Property.PerspectiveOrigin>
   /**
    * The CSS `padding-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   pl?: Token<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * The CSS `place-content` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-content
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/place-content
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   placeContent?: Token<CSS.Property.PlaceContent>
   /**
    * The CSS `place-items` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-items
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/place-items
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   placeItems?: Token<CSS.Property.PlaceItems>
   /**
    * The CSS `place-self` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-self
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/place-self
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 29
+   * - chrome_android : 29
+   * - edge : 12
+   * - firefox : 20
+   * - firefox_android : 20
+   * - safari : 9
+   * - safari_ios : 9
    */
   placeSelf?: Token<CSS.Property.PlaceSelf>
   /**
    * The CSS `pointer-events` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/pointer-events
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 2
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.6
+   * - firefox_android : 4
+   * - safari : 4
+   * - safari_ios : 3.2
    */
   pointerEvents?: Token<CSS.Property.PointerEvents>
   /**
    * The CSS `position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   pos?: Token<CSS.Property.Position>
   /**
    * The CSS `position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   position?: Token<CSS.Property.Position>
   /**
    * The CSS `padding-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   pr?: Token<CSS.Property.PaddingRight | number, "spaces">
   /**
    * The CSS `print-color-adjust` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - firefox : 97
+   * - firefox_android : 97
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   printColorAdjust?: Token<CSS.Property.PrintColorAdjust>
   /**
    * The CSS `padding-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   ps?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * The CSS `padding-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   pt?: Token<CSS.Property.PaddingTop | number, "spaces">
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   px?: Token<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -5190,8 +10451,21 @@ export interface StyleProps {
   /**
    * The CSS `padding-top` and `padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   py?: Token<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -5200,25 +10474,76 @@ export interface StyleProps {
   /**
    * The CSS `quotes` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/quotes
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-10-26`
+   * @newly_available_date `2021-04-26`
+   * @support_browsers
+   * - chrome : 87
+   * - chrome_android : 87
+   * - edge : 87
+   * - firefox : 70
+   * - firefox_android : 79
+   * - safari : 14.1
+   * - safari_ios : 14.5
    */
   quotes?: Token<CSS.Property.Quotes>
   /**
    * The CSS `resize` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/resize
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 5
+   * - firefox_android : 5
+   * - safari : 4
    */
   resize?: Token<CSS.Property.Resize>
   /**
    * The CSS `right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   right?: Token<CSS.Property.Right | number, "spaces">
   /**
    * The CSS `rotate` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/rotate
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/rotate
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-08-05`
+   * @support_browsers
+   * - chrome : 104
+   * - chrome_android : 104
+   * - edge : 104
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 14.1
+   * - safari_ios : 14.5
    */
   rotate?: Token<CSS.Property.Rotate>
   /**
@@ -5236,14 +10561,40 @@ export interface StyleProps {
   /**
    * The CSS `border-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   rounded?: Token<CSS.Property.BorderRadius | number, "radii">
   /**
    * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedBottom?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -5254,13 +10605,39 @@ export interface StyleProps {
   /**
    * The CSS `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
   /**
    * The CSS `border-bottom-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedBottomLeft?: Token<
     CSS.Property.BorderBottomLeftRadius | number,
@@ -5269,7 +10646,20 @@ export interface StyleProps {
   /**
    * The CSS `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedBottomRight?: Token<
     CSS.Property.BorderBottomRightRadius | number,
@@ -5278,7 +10668,20 @@ export interface StyleProps {
   /**
    * The CSS `border-end-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedBottomStart?: Token<
     CSS.Property.BorderEndStartRadius | number,
@@ -5287,8 +10690,21 @@ export interface StyleProps {
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedEnd?: Token<
     | CSS.Property.BorderEndEndRadius
@@ -5299,8 +10715,21 @@ export interface StyleProps {
   /**
    * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedLeft?: Token<
     | CSS.Property.BorderBottomLeftRadius
@@ -5311,8 +10740,21 @@ export interface StyleProps {
   /**
    * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedRight?: Token<
     | CSS.Property.BorderBottomRightRadius
@@ -5323,8 +10765,21 @@ export interface StyleProps {
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedStart?: Token<
     | CSS.Property.BorderStartEndRadius
@@ -5335,8 +10790,21 @@ export interface StyleProps {
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedTop?: Token<
     | CSS.Property.BorderTopLeftRadius
@@ -5347,43 +10815,134 @@ export interface StyleProps {
   /**
    * The CSS `border-start-end-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedTopEnd?: Token<CSS.Property.BorderStartEndRadius | number, "radii">
   /**
    * The CSS `border-top-left-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedTopLeft?: Token<CSS.Property.BorderTopLeftRadius | number, "radii">
   /**
    * The CSS `border-top-right-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 4
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5
+   * - safari_ios : 4.2
    */
   roundedTopRight?: Token<CSS.Property.BorderTopRightRadius | number, "radii">
   /**
    * The CSS `border-start-start-radius` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-03-20`
+   * @newly_available_date `2021-09-20`
+   * @support_browsers
+   * - chrome : 89
+   * - chrome_android : 89
+   * - edge : 89
+   * - firefox : 66
+   * - firefox_android : 66
+   * - safari : 15
+   * - safari_ios : 15
    */
   roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, "radii">
   /**
    * The CSS `row-gap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/row-gap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2020-04-17`
+   * @newly_available_date `2017-10-17`
+   * @support_browsers
+   * - chrome : 57
+   * - chrome_android : 57
+   * - edge : 16
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   rowGap?: Token<CSS.Property.RowGap | number, "spaces">
   /**
    * The CSS `ruby-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-align
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/ruby-align
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-12-11`
+   * @support_browsers
+   * - chrome : 128
+   * - chrome_android : 128
+   * - edge : 128
+   * - firefox : 38
+   * - firefox_android : 38
+   * - safari : 18.2
+   * - safari_ios : 18.2
    */
   rubyAlign?: Token<CSS.Property.RubyAlign>
   /**
    * The CSS `ruby-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/ruby-position
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-12-11`
+   * @support_browsers
+   * - chrome : 84
+   * - chrome_android : 84
+   * - edge : 84
+   * - firefox : 38
+   * - firefox_android : 38
+   * - safari : 18.2
+   * - safari_ios : 18.2
    */
   rubyPosition?: Token<CSS.Property.RubyPosition>
   /**
@@ -5393,7 +10952,20 @@ export interface StyleProps {
   /**
    * The CSS `scale` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scale
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scale
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-08-05`
+   * @support_browsers
+   * - chrome : 104
+   * - chrome_android : 104
+   * - edge : 104
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 14.1
+   * - safari_ios : 14.5
    */
   scale?: Token<CSS.Property.Scale>
   /**
@@ -5411,98 +10983,304 @@ export interface StyleProps {
   /**
    * The CSS `scrollbar-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 121
+   * - chrome_android : 121
+   * - edge : 121
+   * - firefox : 64
+   * - firefox_android : 64
    */
   scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
   /**
    * The CSS `scrollbar-gutter` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-12-11`
+   * @support_browsers
+   * - chrome : 94
+   * - chrome_android : 94
+   * - edge : 94
+   * - firefox : 97
+   * - firefox_android : 97
+   * - safari : 18.2
+   * - safari_ios : 18.2
    */
   scrollbarGutter?: Token<CSS.Property.ScrollbarGutter>
   /**
    * The CSS `scrollbar-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-12-11`
+   * @support_browsers
+   * - chrome : 121
+   * - chrome_android : 121
+   * - edge : 121
+   * - firefox : 64
+   * - firefox_android : 64
+   * - safari : 18.2
+   * - safari_ios : 18.2
    */
   scrollbarWidth?: Token<CSS.Property.ScrollbarWidth | number>
   /**
    * The CSS `scroll-behavior` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 61
+   * - chrome_android : 61
+   * - edge : 79
+   * - firefox : 36
+   * - firefox_android : 36
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   scrollBehavior?: Token<CSS.Property.ScrollBehavior>
   /**
    * The CSS `scroll-margin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMargin?: Token<CSS.Property.ScrollMargin | number, "spaces">
   /**
    * The CSS `scroll-margin-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginBlock?: Token<CSS.Property.ScrollMarginBlock>
   /**
    * The CSS `scroll-margin-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginBlockEnd?: Token<CSS.Property.ScrollMarginBlockEnd>
   /**
    * The CSS `scroll-margin-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginBlockStart?: Token<CSS.Property.ScrollMarginBlockStart>
   /**
    * The CSS `scroll-margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginBottom?: Token<CSS.Property.ScrollMarginBottom | number, "spaces">
   /**
    * The CSS `scroll-margin-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginInline?: Token<CSS.Property.ScrollMarginInline>
   /**
    * The CSS `scroll-margin-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginInlineEnd?: Token<CSS.Property.ScrollMarginInlineEnd>
   /**
    * The CSS `scroll-margin-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginInlineStart?: Token<CSS.Property.ScrollMarginInlineStart>
   /**
    * The CSS `scroll-margin-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginLeft?: Token<CSS.Property.ScrollMarginLeft | number, "spaces">
   /**
    * The CSS `scroll-margin-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginRight?: Token<CSS.Property.ScrollMarginRight | number, "spaces">
   /**
    * The CSS `scroll-margin-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginTop?: Token<CSS.Property.ScrollMarginTop | number, "spaces">
   /**
    * The CSS `scroll-margin-left` and `scroll-margin-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginX?: Token<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
@@ -5511,8 +11289,21 @@ export interface StyleProps {
   /**
    * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollMarginY?: Token<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
@@ -5521,31 +11312,96 @@ export interface StyleProps {
   /**
    * The CSS `scroll-padding` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPadding?: Token<CSS.Property.ScrollPadding | number, "spaces">
   /**
    * The CSS `scroll-padding-block` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingBlock?: Token<CSS.Property.ScrollPaddingBlock>
   /**
    * The CSS `scroll-padding-block-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingBlockEnd?: Token<CSS.Property.ScrollPaddingBlockEnd>
   /**
    * The CSS `scroll-padding-block-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingBlockStart?: Token<CSS.Property.ScrollPaddingBlockStart>
   /**
    * The CSS `scroll-padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingBottom?: Token<
     CSS.Property.ScrollPaddingBottom | number,
@@ -5554,44 +11410,135 @@ export interface StyleProps {
   /**
    * The CSS `scroll-padding-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingInline?: Token<CSS.Property.ScrollPaddingInline>
   /**
    * The CSS `scroll-padding-inline-end` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-end
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingInlineEnd?: Token<CSS.Property.ScrollPaddingInlineEnd>
   /**
    * The CSS `scroll-padding-inline-start` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-start
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingInlineStart?: Token<CSS.Property.ScrollPaddingInlineStart>
   /**
    * The CSS `scroll-padding-left` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingLeft?: Token<CSS.Property.ScrollPaddingLeft | number, "spaces">
   /**
    * The CSS `scroll-padding-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingRight?: Token<CSS.Property.ScrollPaddingRight | number, "spaces">
   /**
    * The CSS `scroll-padding-top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, "spaces">
   /**
    * The CSS `scroll-padding-left` and `scroll-padding-right` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingX?: Token<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
@@ -5600,8 +11547,21 @@ export interface StyleProps {
   /**
    * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollPaddingY?: Token<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
@@ -5610,37 +11570,103 @@ export interface StyleProps {
   /**
    * The CSS `scroll-snap-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign>
   /**
    * The CSS `scroll-snap-stop` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollSnapStop?: Token<CSS.Property.ScrollSnapStop>
   /**
    * The CSS `scroll-snap-type` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 69
+   * - chrome_android : 69
+   * - edge : 79
+   * - firefox : 68
+   * - firefox_android : 68
+   * - safari : 11
+   * - safari_ios : 11
    */
   scrollSnapType?: Token<CSS.Property.ScrollSnapType>
   /**
    * The CSS `scroll-timeline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-timeline
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   scrollTimeline?: Token<CSS.Property.ScrollTimeline>
   /**
    * The CSS `scroll-timeline-axis` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-axis
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-axis
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   scrollTimelineAxis?: Token<CSS.Property.ScrollTimelineAxis>
   /**
    * The CSS `scroll-timeline-name` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-name
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
   /**
@@ -5650,31 +11676,96 @@ export interface StyleProps {
   /**
    * The CSS `box-shadow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/box-shadow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 10
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 4
+   * - firefox_android : 4
+   * - safari : 5.1
+   * - safari_ios : 5
    */
   shadow?: Token<CSS.Property.BoxShadow, "shadows">
   /**
    * The CSS `shape-image-threshold` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-image-threshold
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 37
+   * - chrome_android : 37
+   * - edge : 79
+   * - firefox : 62
+   * - firefox_android : 62
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   shapeImageThreshold?: Token<CSS.Property.ShapeImageThreshold>
   /**
    * The CSS `shape-margin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-margin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/shape-margin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 37
+   * - chrome_android : 37
+   * - edge : 79
+   * - firefox : 62
+   * - firefox_android : 62
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   shapeMargin?: Token<CSS.Property.ShapeMargin>
   /**
    * The CSS `shape-outside` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-outside
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/shape-outside
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 37
+   * - chrome_android : 37
+   * - edge : 79
+   * - firefox : 62
+   * - firefox_android : 62
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   shapeOutside?: Token<CSS.Property.ShapeOutside>
   /**
    * The CSS `shape-rendering` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-rendering
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/shape-rendering
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   shapeRendering?: Token<CSS.Property.ShapeRendering>
   /**
@@ -5688,295 +11779,919 @@ export interface StyleProps {
   /**
    * The CSS `stop-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stop-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   stopColor?: Token<CSS.Property.StopColor>
   /**
    * The CSS `stop-opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-opacity
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stop-opacity
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   stopOpacity?: Token<CSS.Property.StopOpacity>
   /**
    * The CSS `stroke` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   stroke?: Token<CSS.Property.Stroke, "colors">
   /**
    * The CSS `stroke-dasharray` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dasharray
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeDasharray?: Token<CSS.Property.StrokeDasharray>
   /**
    * The CSS `stroke-dashoffset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dashoffset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeDashoffset?: Token<CSS.Property.StrokeDashoffset | number>
   /**
    * The CSS `stroke-linecap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linecap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeLinecap?: Token<CSS.Property.StrokeLinecap>
   /**
    * The CSS `stroke-linejoin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linejoin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeLinejoin?: Token<CSS.Property.StrokeLinejoin>
   /**
    * The CSS `stroke-miterlimit` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-miterlimit
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeMiterlimit?: Token<CSS.Property.StrokeMiterlimit>
   /**
    * The CSS `stroke-opacity` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-opacity
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `≤2022-09-24`
+   * @newly_available_date `≤2020-03-24`
+   * @support_browsers
+   * - chrome : ≤80
+   * - chrome_android : ≤80
+   * - edge : ≤80
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : ≤13.1
+   * - safari_ios : ≤13.4
    */
   strokeOpacity?: Token<CSS.Property.StrokeOpacity>
   /**
    * The CSS `stroke-width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/stroke-width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   strokeWidth?: Token<CSS.Property.StrokeWidth | number>
   /**
    * The CSS `table-layout` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/table-layout
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   tableLayout?: Token<CSS.Property.TableLayout>
   /**
    * The CSS `tab-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/tab-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-02-10`
+   * @newly_available_date `2021-08-10`
+   * @support_browsers
+   * - chrome : 42
+   * - chrome_android : 42
+   * - edge : 79
+   * - firefox : 91
+   * - firefox_android : 91
+   * - safari : 13.1
+   * - safari_ios : 13.4
    */
   tabSize?: Token<CSS.Property.TabSize>
   /**
    * The CSS `font-size` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/font-size
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   text?: Token<CSS.Property.FontSize | number, "fontSizes">
   /**
    * The CSS `text-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-align
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textAlign?: Token<CSS.Property.TextAlign>
   /**
    * The CSS `text-align-last` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-align-last
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-09-12`
+   * @support_browsers
+   * - chrome : 47
+   * - chrome_android : 47
+   * - edge : 12
+   * - firefox : 49
+   * - firefox_android : 49
+   * - safari : 16
+   * - safari_ios : 16
    */
   textAlignLast?: Token<CSS.Property.TextAlignLast>
   /**
    * The CSS `text-anchor` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-anchor
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-anchor
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   textAnchor?: Token<CSS.Property.TextAnchor>
   /**
    * The CSS `color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textColor?: Token<CSS.Property.Color, "colors">
   /**
    * The CSS `text-combine-upright` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-combine-upright
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 79
+   * - firefox : 48
+   * - firefox_android : 48
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   textCombineUpright?: Token<CSS.Property.TextCombineUpright>
   /**
    * The CSS `text-decoration` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecor?: Token<CSS.Property.TextDecoration>
   /**
    * The CSS `text-decoration` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecoration?: Token<CSS.Property.TextDecoration>
   /**
    * The CSS `text-decoration-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationColor?: Token<CSS.Property.TextDecorationColor, "colors">
   /**
    * The CSS `text-decoration-line` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationLine?: Token<CSS.Property.TextDecorationLine>
   /**
    * The CSS `text-decoration-skip` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationSkip?: Token<CSS.Property.TextDecorationSkip>
   /**
    * The CSS `text-decoration-skip-ink` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationSkipInk?: Token<CSS.Property.TextDecorationSkipInk>
   /**
    * The CSS `text-decoration-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationStyle?: Token<CSS.Property.TextDecorationStyle>
   /**
    * The CSS `text-decoration-thickness` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textDecorationThickness?: Token<CSS.Property.TextDecorationThickness>
   /**
    * The CSS `text-emphasis` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-emphasis
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-03`
+   * @newly_available_date `2022-03-03`
+   * @support_browsers
+   * - chrome : 99
+   * - chrome_android : 99
+   * - edge : 99
+   * - firefox : 46
+   * - firefox_android : 46
+   * - safari : 7
+   * - safari_ios : 7
    */
   textEmphasis?: Token<CSS.Property.TextEmphasis>
   /**
    * The CSS `text-emphasis-color` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-03`
+   * @newly_available_date `2022-03-03`
+   * @support_browsers
+   * - chrome : 99
+   * - chrome_android : 99
+   * - edge : 99
+   * - firefox : 46
+   * - firefox_android : 46
+   * - safari : 7
+   * - safari_ios : 7
    */
   textEmphasisColor?: Token<CSS.Property.TextEmphasisColor, "colors">
   /**
    * The CSS `text-emphasis-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-03`
+   * @newly_available_date `2022-03-03`
+   * @support_browsers
+   * - chrome : 99
+   * - chrome_android : 99
+   * - edge : 99
+   * - firefox : 46
+   * - firefox_android : 46
+   * - safari : 7
+   * - safari_ios : 7
    */
   textEmphasisPosition?: Token<CSS.Property.TextEmphasisPosition>
   /**
    * The CSS `text-emphasis-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-03`
+   * @newly_available_date `2022-03-03`
+   * @support_browsers
+   * - chrome : 99
+   * - chrome_android : 99
+   * - edge : 99
+   * - firefox : 46
+   * - firefox_android : 46
+   * - safari : 7
+   * - safari_ios : 7
    */
   textEmphasisStyle?: Token<CSS.Property.TextEmphasisStyle>
   /**
    * The CSS `text-indent` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-indent
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textIndent?: Token<CSS.Property.TextIndent>
   /**
    * The CSS `text-justify` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-justify
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - firefox : 55
+   * - firefox_android : 55
    */
   textJustify?: Token<CSS.Property.TextJustify>
   /**
    * The CSS `text-orientation` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-orientation
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-03-16`
+   * @newly_available_date `2020-09-16`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 79
+   * - firefox : 41
+   * - firefox_android : 41
+   * - safari : 14
+   * - safari_ios : 14
    */
   textOrientation?: Token<CSS.Property.TextOrientation>
   /**
    * The CSS `text-overflow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-overflow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 7
+   * - firefox_android : 7
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   textOverflow?: Token<CSS.Property.TextOverflow>
   /**
    * The CSS `text-rendering` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-rendering
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   textRendering?: Token<CSS.Property.TextRendering>
   /**
    * The CSS `text-shadow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-shadow
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 2
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3.5
+   * - firefox_android : 4
+   * - safari : 1.1
+   * - safari_ios : 1
    */
   textShadow?: Token<CSS.Property.TextShadow, "shadows">
   /**
    * The CSS `text-size-adjust` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-size-adjust
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 54
+   * - chrome_android : 54
+   * - edge : 79
    */
   textSizeAdjust?: Token<CSS.Property.TextSizeAdjust>
   /**
    * The CSS `text-transform` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-transform
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   textTransform?: Token<CSS.Property.TextTransform>
   /**
    * The CSS `text-underline-offset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-05-19`
+   * @newly_available_date `2020-11-19`
+   * @support_browsers
+   * - chrome : 87
+   * - chrome_android : 87
+   * - edge : 87
+   * - firefox : 70
+   * - firefox_android : 79
+   * - safari : 12.1
+   * - safari_ios : 12.2
    */
   textUnderlineOffset?: Token<CSS.Property.TextUnderlineOffset>
   /**
    * The CSS `text-underline-position` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-underline-position
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2023-05-19`
+   * @newly_available_date `2020-11-19`
+   * @support_browsers
+   * - chrome : 87
+   * - chrome_android : 87
+   * - edge : 87
+   * - firefox : 70
+   * - firefox_android : 79
+   * - safari : 12.1
+   * - safari_ios : 12.2
    */
   textUnderlinePosition?: Token<CSS.Property.TextUnderlinePosition>
   /**
    * The CSS `text-wrap` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/text-wrap
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-03-19`
+   * @support_browsers
+   * - chrome : 114
+   * - chrome_android : 114
+   * - edge : 114
+   * - firefox : 124
+   * - firefox_android : 124
+   * - safari : 17.4
+   * - safari_ios : 17.4
    */
   textWrap?: Token<CSS.Property.TextWrap>
   /**
    * The CSS `timeline-scope` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/timeline-scope
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/timeline-scope
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   timelineScope?: Token<CSS.Property.TimelineScope>
   /**
    * The CSS `top` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/top
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   top?: Token<CSS.Property.Top | number, "spaces">
   /**
    * The CSS `touch-action` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/touch-action
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-03-19`
+   * @newly_available_date `2019-09-19`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 52
+   * - firefox_android : 52
+   * - safari : 13
+   * - safari_ios : 9.3
    */
   touchAction?: Token<CSS.Property.TouchAction>
   /**
    * The CSS `letter-spacing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/letter-spacing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
   /**
    * The CSS `transform` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transform
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   transform?: Token<CSS.Property.Transform>
   /**
    * The CSS `transform-box` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-box
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transform-box
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-04-16`
+   * @support_browsers
+   * - chrome : 118
+   * - chrome_android : 118
+   * - edge : 118
+   * - firefox : 125
+   * - firefox_android : 125
+   * - safari : 13.1
+   * - safari_ios : 13.4
    */
   transformBox?: Token<CSS.Property.TransformBox>
   /**
    * The CSS `transform-origin` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transform-origin
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   transformOrigin?: Token<CSS.Property.TransformOrigin>
   /**
    * The CSS `transform-style` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transform-style
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2024-09-14`
+   * @newly_available_date `2022-03-14`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 15.4
+   * - safari_ios : 15.4
    */
   transformStyle?: Token<CSS.Property.TransformStyle>
   /**
@@ -5998,19 +12713,58 @@ export interface StyleProps {
   /**
    * The CSS `transition-behavior` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transition-behavior
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-08-06`
+   * @support_browsers
+   * - chrome : 117
+   * - chrome_android : 117
+   * - edge : 117
+   * - firefox : 129
+   * - firefox_android : 129
+   * - safari : 17.4
+   * - safari_ios : 17.4
    */
   transitionBehavior?: Token<CSS.Property.TransitionBehavior>
   /**
    * The CSS `transition-delay` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transition-delay
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 26
+   * - chrome_android : 26
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   transitionDelay?: Token<CSS.Property.TransitionDelay>
   /**
    * The CSS `transition-duration` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transition-duration
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 26
+   * - chrome_android : 26
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   transitionDuration?: Token<CSS.Property.TransitionDuration, "durations">
   /**
@@ -6032,7 +12786,20 @@ export interface StyleProps {
   /**
    * The CSS `transition-timing-function` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 26
+   * - chrome_android : 26
+   * - edge : 12
+   * - firefox : 16
+   * - firefox_android : 16
+   * - safari : 9
+   * - safari_ios : 9
    */
   transitionTimingFunction?: Token<
     CSS.Property.TransitionTimingFunction,
@@ -6041,7 +12808,20 @@ export interface StyleProps {
   /**
    * The CSS `translate` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/translate
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/translate
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2022-08-05`
+   * @support_browsers
+   * - chrome : 104
+   * - chrome_android : 104
+   * - edge : 104
+   * - firefox : 72
+   * - firefox_android : 79
+   * - safari : 14.1
+   * - safari_ios : 14.5
    */
   translate?: Token<"no" | "yes" | CSS.Property.Translate>
   /**
@@ -6063,13 +12843,37 @@ export interface StyleProps {
   /**
    * The CSS `unicode-bidi` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/unicode-bidi
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 79
+   * - firefox : 50
+   * - firefox_android : 50
+   * - safari : 11
+   * - safari_ios : 11
    */
   unicodeBidi?: Token<CSS.Property.UnicodeBidi>
   /**
    * The CSS `user-select` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/user-select
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 54
+   * - chrome_android : 54
+   * - edge : 79
+   * - firefox : 69
+   * - firefox_android : 79
    */
   userSelect?: Token<CSS.Property.UserSelect>
   /**
@@ -6089,121 +12893,361 @@ export interface StyleProps {
   /**
    * The CSS `vector-effect` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vector-effect
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/vector-effect
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 79
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 2
    */
   vectorEffect?: Token<CSS.Property.VectorEffect>
   /**
    * The CSS `vertical-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/vertical-align
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   verticalAlign?: Token<CSS.Property.VerticalAlign>
   /**
    * The CSS `view-timeline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/view-timeline
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   viewTimeline?: Token<CSS.Property.ViewTimeline>
   /**
    * The CSS `view-timeline-axis` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-axis
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/view-timeline-axis
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   viewTimelineAxis?: Token<CSS.Property.ViewTimelineAxis>
   /**
    * The CSS `view-timeline-inset` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-inset
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/view-timeline-inset
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   viewTimelineInset?: Token<CSS.Property.ViewTimelineInset>
   /**
    * The CSS `view-timeline-name` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-name
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/view-timeline-name
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 115
+   * - chrome_android : 115
+   * - edge : 115
    */
   viewTimelineName?: Token<CSS.Property.ViewTimelineName>
   /**
    * The CSS `view-transition-name` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-name
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/view-transition-name
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 111
+   * - chrome_android : 111
+   * - edge : 111
+   * - safari : 18
+   * - safari_ios : 18
    */
   viewTransitionName?: Token<CSS.Property.ViewTransitionName>
   /**
    * The CSS `visibility` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/visibility
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   visibility?: Token<CSS.Property.Visibility>
   /**
    * The CSS `width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   w?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `white-space` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/white-space
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   whiteSpace?: Token<CSS.Property.WhiteSpace>
   /**
    * The CSS `white-space-collapse` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space-collapse
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-03-19`
+   * @support_browsers
+   * - chrome : 114
+   * - chrome_android : 114
+   * - edge : 114
+   * - firefox : 124
+   * - firefox_android : 124
+   * - safari : 17.4
+   * - safari_ios : 17.4
    */
   whiteSpaceCollapse?: Token<CSS.Property.WhiteSpaceCollapse>
   /**
    * The CSS `widows` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/widows
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/widows
+   *
+   * @Baseline
+   * @scope `Limited available`
+   * @widely_available_date `-`
+   * @newly_available_date `-`
+   * @support_browsers
+   * - chrome : 25
+   * - chrome_android : 25
+   * - edge : 12
+   * - safari : 1.3
+   * - safari_ios : 1
    */
   widows?: Token<CSS.Property.Widows>
   /**
    * The CSS `width` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/width
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   width?: Token<CSS.Property.Width | number, "sizes">
   /**
    * The CSS `will-change` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/will-change
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2022-07-15`
+   * @newly_available_date `2020-01-15`
+   * @support_browsers
+   * - chrome : 36
+   * - chrome_android : 36
+   * - edge : 79
+   * - firefox : 36
+   * - firefox_android : 36
+   * - safari : 9.1
+   * - safari_ios : 9.3
    */
   willChange?: Token<CSS.Property.WillChange>
   /**
    * The CSS `word-break` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/word-break
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 44
+   * - chrome_android : 44
+   * - edge : 12
+   * - firefox : 15
+   * - firefox_android : 15
+   * - safari : 9
+   * - safari_ios : 9
    */
   wordBreak?: Token<CSS.Property.WordBreak>
   /**
    * The CSS `word-spacing` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/word-spacing
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   wordSpacing?: Token<CSS.Property.WordSpacing>
   /**
    * The CSS `writing-mode` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/writing-mode
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2019-09-27`
+   * @newly_available_date `2017-03-27`
+   * @support_browsers
+   * - chrome : 48
+   * - chrome_android : 48
+   * - edge : 12
+   * - firefox : 41
+   * - firefox_android : 41
+   * - safari : 10.1
+   * - safari_ios : 10.3
    */
   writingMode?: Token<CSS.Property.WritingMode>
   /**
    * The CSS `z-index` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/z-index
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   z?: Token<CSS.Property.ZIndex, "zIndices">
   /**
    * The CSS `z-index` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/z-index
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 3
+   * - firefox_android : 4
+   * - safari : 1
+   * - safari_ios : 1
    */
   zIndex?: Token<CSS.Property.ZIndex, "zIndices">
   /**
    * The CSS `zoom` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
+   * @see Docs https://developer.mozilla.org/docs/Web/CSS/zoom
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2024-05-14`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 126
+   * - firefox_android : 126
+   * - safari : 3.1
+   * - safari_ios : 3
    */
   zoom?: Token<CSS.Property.Zoom>
   /**
@@ -6217,6 +13261,19 @@ export interface StyleProps {
    *   </Text>
    * </Box>
    * ```
+   *
+   * @Baseline
+   * @scope `Newly available`
+   * @widely_available_date `-`
+   * @newly_available_date `2023-02-14`
+   * @support_browsers
+   * - chrome : 105
+   * - chrome_android : 105
+   * - edge : 105
+   * - firefox : 110
+   * - firefox_android : 110
+   * - safari : 16
+   * - safari_ios : 16
    */
   _container?: {
     [key: string]: any
@@ -6257,20 +13314,155 @@ export interface StyleProps {
    *   Box
    * </Box>
    * ```
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-01-29`
+   * @newly_available_date `2015-07-29`
+   * @support_browsers
+   * - chrome : 1
+   * - chrome_android : 18
+   * - edge : 12
+   * - firefox : 1
+   * - firefox_android : 4
+   * - safari : 3
+   * - safari_ios : 1
    */
   _media?: {
     [key: string]: any
     type?: "all" | "print" | "screen" | "speech" | StringLiteral
     css?: CSSObject
+    /**
+     * The feature anyHover of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2021-06-11`
+     * @newly_available_date `2018-12-11`
+     * @support_browsers
+     * - chrome : 41
+     * - chrome_android : 41
+     * - edge : 12
+     * - firefox : 64
+     * - firefox_android : 64
+     * - safari : 9
+     * - safari_ios : 9
+     */
     anyHover?: "hover" | "none" | StringLiteral
+    /**
+     * The feature anyPointer of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2021-06-11`
+     * @newly_available_date `2018-12-11`
+     * @support_browsers
+     * - chrome : 41
+     * - chrome_android : 41
+     * - edge : 12
+     * - firefox : 64
+     * - firefox_android : 64
+     * - safari : 9
+     * - safari_ios : 9
+     */
     anyPointer?: "coarse" | "fine" | "none" | StringLiteral
+    /**
+     * The feature aspectRatio of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     aspectRatio?: CSS.Property.AspectRatio
+    /**
+     * The feature color of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     color?: number | StringLiteral
+    /**
+     * The feature colorGamut of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2023-02-14`
+     * @support_browsers
+     * - chrome : 58
+     * - chrome_android : 58
+     * - edge : 79
+     * - firefox : 110
+     * - firefox_android : 110
+     * - safari : 10
+     * - safari_ios : 10
+     */
     colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
+    /**
+     * The feature colorIndex of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     colorIndex?: number | StringLiteral
+    /**
+     * The feature deviceAspectRatio of media.
+     *
+     * @deprecated
+     */
     deviceAspectRatio?: CSS.Property.AspectRatio
+    /**
+     * The feature deviceHeight of media.
+     *
+     * @deprecated
+     */
     deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    /**
+     * The feature deviceWidth of media.
+     *
+     * @deprecated
+     */
     deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    /**
+     * The feature displayMode of media.
+     *
+     * @Baseline
+     * @scope `Limited available`
+     * @widely_available_date `-`
+     * @newly_available_date `-`
+     * @support_browsers
+     * - chrome : 123
+     * - edge : 123
+     */
     displayMode?:
       | "browser"
       | "fullscreen"
@@ -6279,12 +13471,103 @@ export interface StyleProps {
       | "standalone"
       | "window-controls-overlay"
       | StringLiteral
+    /**
+     * The feature dynamicRange of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2024-11-03`
+     * @newly_available_date `2022-05-03`
+     * @support_browsers
+     * - chrome : 98
+     * - chrome_android : 98
+     * - edge : 98
+     * - firefox : 100
+     * - firefox_android : 100
+     * - safari : 13.1
+     * - safari_ios : 13.4
+     */
     dynamicRange?: "high" | "standard" | StringLiteral
+    /**
+     * The feature forcedColors of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2022-09-12`
+     * @support_browsers
+     * - chrome : 89
+     * - chrome_android : 89
+     * - edge : 79
+     * - firefox : 89
+     * - firefox_android : 89
+     * - safari : 16
+     * - safari_ios : 16
+     */
     forcedColors?: "active" | "none" | StringLiteral
+    /**
+     * The feature grid of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     grid?: "StringLiteral" | 0 | 1
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    /**
+     * The feature height of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    /**
+     * The feature hover of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2021-06-11`
+     * @newly_available_date `2018-12-11`
+     * @support_browsers
+     * - chrome : 41
+     * - chrome_android : 41
+     * - edge : 12
+     * - firefox : 64
+     * - firefox_android : 64
+     * - safari : 9
+     * - safari_ios : 9
+     */
     hover?: "hover" | "none" | StringLiteral
+    /**
+     * The feature invertedColors of media.
+     *
+     * @Baseline
+     * @scope `Limited available`
+     * @widely_available_date `-`
+     * @newly_available_date `-`
+     * @support_browsers
+     * - safari : 9.1
+     * - safari_ios : 10
+     */
     invertedColors?: "inverted" | "none" | StringLiteral
     maxColor?: number | StringLiteral
     maxColorIndex?: number | StringLiteral
@@ -6308,31 +13591,218 @@ export interface StyleProps {
     minResolution?: StringLiteral
     minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    /**
+     * The feature monochrome of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     monochrome?: number | StringLiteral
+    /**
+     * The feature orientation of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     orientation?: "landscape" | "portrait" | StringLiteral
+    /**
+     * The feature overflowBlock of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2023-09-18`
+     * @support_browsers
+     * - chrome : 113
+     * - chrome_android : 113
+     * - edge : 113
+     * - firefox : 66
+     * - firefox_android : 66
+     * - safari : 17
+     * - safari_ios : 17
+     */
     overflowBlock?:
       | "none"
       | "optional-paged"
       | "paged"
       | "scroll"
       | StringLiteral
+    /**
+     * The feature overflowInline of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2023-09-18`
+     * @support_browsers
+     * - chrome : 113
+     * - chrome_android : 113
+     * - edge : 113
+     * - firefox : 66
+     * - firefox_android : 66
+     * - safari : 17
+     * - safari_ios : 17
+     */
     overflowInline?: "none" | "scroll" | StringLiteral
+    /**
+     * The feature pointer of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2021-06-11`
+     * @newly_available_date `2018-12-11`
+     * @support_browsers
+     * - chrome : 41
+     * - chrome_android : 41
+     * - edge : 12
+     * - firefox : 64
+     * - firefox_android : 64
+     * - safari : 9
+     * - safari_ios : 9
+     */
     pointer?: "coarse" | "fine" | "none" | StringLiteral
     prefersColorMode?: "dark" | "light" | StringLiteral
+    /**
+     * The feature prefersContrast of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2024-11-30`
+     * @newly_available_date `2022-05-31`
+     * @support_browsers
+     * - chrome : 96
+     * - chrome_android : 96
+     * - edge : 96
+     * - firefox : 101
+     * - firefox_android : 101
+     * - safari : 14.1
+     * - safari_ios : 14.5
+     */
     prefersContrast?:
       | "custom"
       | "high"
       | "low"
       | "no-preference"
       | StringLiteral
+    /**
+     * The feature prefersReducedMotion of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2022-07-15`
+     * @newly_available_date `2020-01-15`
+     * @support_browsers
+     * - chrome : 74
+     * - chrome_android : 74
+     * - edge : 79
+     * - firefox : 63
+     * - firefox_android : 64
+     * - safari : 10.1
+     * - safari_ios : 10.3
+     */
     prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
     query?: StringLiteral
+    /**
+     * The feature resolution of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2022-09-12`
+     * @support_browsers
+     * - chrome : 68
+     * - chrome_android : 68
+     * - edge : 79
+     * - firefox : 62
+     * - firefox_android : 62
+     * - safari : 16
+     * - safari_ios : 16
+     */
     resolution?: StringLiteral
     scan?: "interlace" | "progressive" | StringLiteral
+    /**
+     * The feature scripting of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2023-12-07`
+     * @support_browsers
+     * - chrome : 120
+     * - chrome_android : 120
+     * - edge : 120
+     * - firefox : 113
+     * - firefox_android : 113
+     * - safari : 17
+     * - safari_ios : 17
+     */
     scripting?: "enabled" | "initial-only" | "none" | StringLiteral
+    /**
+     * The feature update of media.
+     *
+     * @Baseline
+     * @scope `Newly available`
+     * @widely_available_date `-`
+     * @newly_available_date `2023-09-18`
+     * @support_browsers
+     * - chrome : 113
+     * - chrome_android : 113
+     * - edge : 113
+     * - firefox : 102
+     * - firefox_android : 102
+     * - safari : 17
+     * - safari_ios : 17
+     */
     update?: "fast" | "none" | "slow" | StringLiteral
+    /**
+     * The feature videoDynamicRange of media.
+     *
+     * @Baseline
+     * @scope `Limited available`
+     * @widely_available_date `-`
+     * @newly_available_date `-`
+     * @support_browsers
+     * - firefox : 100
+     * - firefox_android : 100
+     */
     videoDynamicRange?: "high" | "standard" | StringLiteral
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    /**
+     * The feature width of media.
+     *
+     * @Baseline
+     * @scope `Widely available`
+     * @widely_available_date `2018-01-29`
+     * @newly_available_date `2015-07-29`
+     * @support_browsers
+     * - chrome : 1
+     * - chrome_android : 18
+     * - edge : 12
+     * - firefox : 1
+     * - firefox_android : 4
+     * - safari : 3
+     * - safari_ios : 1
+     */
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
   /**
@@ -6346,6 +13816,19 @@ export interface StyleProps {
    *   </Text>
    * </Box>
    * ```
+   *
+   * @Baseline
+   * @scope `Widely available`
+   * @widely_available_date `2018-03-30`
+   * @newly_available_date `2015-09-30`
+   * @support_browsers
+   * - chrome : 28
+   * - chrome_android : 28
+   * - edge : 12
+   * - firefox : 22
+   * - firefox_android : 22
+   * - safari : 9
+   * - safari_ios : 9
    */
   _supports?: { css?: CSSObject; query?: StringLiteral }[]
 }

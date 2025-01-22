@@ -145,17 +145,14 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
         channel: "alpha",
       })
 
-    const css: CSSUIObject = {
-      position: "relative",
-      ...styles.container,
-      ...__css,
-    }
-
     return (
       <AlphaSliderProvider value={{ styles }}>
         <ui.div
           className={cx("ui-alpha-slider", className)}
-          __css={css}
+          __css={{
+            ...styles.container,
+            ...__css,
+          }}
           {...getContainerProps()}
         >
           <ui.input {...getInputProps(inputProps, ref)} />
@@ -182,20 +179,11 @@ const AlphaSliderOverlay = forwardRef<AlphaSliderOverlayProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles } = useAlphaSlider()
 
-    const css: CSSUIObject = {
-      bottom: 0,
-      left: 0,
-      position: "absolute",
-      right: 0,
-      top: 0,
-      ...styles.overlay,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-alpha-slider__overlay", className)}
-        __css={css}
+        __css={styles.overlay}
         {...rest}
       />
     )
@@ -211,18 +199,11 @@ const AlphaSliderTrack = forwardRef<AlphaSliderTrackProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles } = useAlphaSlider()
 
-    const css: CSSUIObject = {
-      h: "100%",
-      position: "relative",
-      w: "100%",
-      ...styles.track,
-    }
-
     return (
       <ui.div
         ref={ref}
         className={cx("ui-alpha-slider__track", className)}
-        __css={css}
+        __css={styles.track}
         {...rest}
       />
     )

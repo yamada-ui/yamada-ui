@@ -10,7 +10,11 @@ export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
       fontWeight: "medium",
     },
     channels: {},
-    container: { w: "full" },
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      w: "full",
+    },
     eyeDropper: {
       borderColor: "border",
       color: ["blackAlpha.600", "whiteAlpha.700"],

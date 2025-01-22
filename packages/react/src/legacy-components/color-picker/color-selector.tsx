@@ -1,5 +1,5 @@
 import type { FC, ForwardedRef, ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { ColorSelectorBodyProps } from "./color-selector-body"
 import type { ColorSelectorChannelsProps } from "./color-selector-channels"
 import type { ColorSelectorSwatchesProps } from "./color-selector-swatches"
@@ -119,18 +119,12 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
       ...rest
     } = useColorSelector(computedProps)
 
-    const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      ...styles.container,
-    }
-
     return (
       <ColorSelectorProvider value={{ size, styles, value, ...rest }}>
         <ui.div
           ref={ref}
           className={cx("ui-color-selector", className)}
-          __css={css}
+          __css={styles.container}
           {...getContainerProps()}
         >
           <ui.input {...getInputProps(inputProps, ref)} />

@@ -163,7 +163,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
           >
             <ui.div
               className="ui-multi-select__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={{ ...styles.inner }}
             >
               <PopoverTrigger>
                 <MultiSelectField

@@ -1,6 +1,7 @@
+import type { IconButtonProps } from "../button"
 import { createComponent } from "../../core"
+import { IconButton } from "../button"
 import { XIcon } from "../icon"
-import { IconButton, type IconButtonProps } from "../button"
 
 export const {
   PropsContext: IconButtonPropsContext,
@@ -17,9 +18,9 @@ export const {
 export const CloseButton = withContext(IconButton)(
   undefined,
   ({ children, icon, ...rest }) => ({
-    children: children || icon || <XIcon />,
-    variant: "ghost",
     colorScheme: "gray",
+    variant: "ghost",
+    children: children || icon || <XIcon />,
     ...rest,
   }),
 )

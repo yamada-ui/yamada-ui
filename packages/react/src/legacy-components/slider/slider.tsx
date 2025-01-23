@@ -351,8 +351,6 @@ export const useSlider = ({
   useUpdateEffect(() => {
     const { value } = latestRef.current
 
-    focusThumb()
-
     if (eventSourceRef.current === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 

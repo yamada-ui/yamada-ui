@@ -63,6 +63,41 @@ export function antonym(value: string): string {
   }
 }
 
+type Direction =
+  | "top"
+  | "bottom"
+  | "left"
+  | "right"
+  | "top-center"
+  | "bottom-center"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right"
+
+export function transformDirection(value: string): Direction {
+  switch (value) {
+    case "start":
+      return "top"
+    case "end":
+      return "bottom"
+    case "start-center":
+      return "top-center"
+    case "end-center":
+      return "bottom-center"
+    case "start-start":
+      return "top-left"
+    case "start-end":
+      return "top-right"
+    case "end-start":
+      return "bottom-left"
+    case "end-end":
+      return "bottom-right"
+    default:
+      return "top"
+  }
+}
+
 const sizeMap: StringLiteral[] = [
   "9xs",
   "8xs",

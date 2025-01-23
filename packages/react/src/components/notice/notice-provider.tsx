@@ -6,7 +6,7 @@ import { AnimatePresence, useIsPresent } from "motion/react"
 import { useEffect, useState, useSyncExternalStore } from "react"
 import { memo, ui } from "../../core"
 import { useTimeout } from "../../hooks/use-timeout"
-import { cx, runIfFunc, useUpdateEffect } from "../../utils"
+import { cx, transformDirection, runIfFunc, useUpdateEffect } from "../../utils"
 import { motion } from "../motion"
 import { Portal } from "../portal"
 import { noticeStore } from "./notice"
@@ -29,18 +29,16 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   )
 
   const components = Object.entries(state).map(([placement, notices]) => {
-    const top =
-      placement.includes("start-") || placement === "start"
-        ? "env(safe-area-inset-top, 0px)"
-        : undefined
-    const bottom =
-      placement.includes("end-") || placement === "end"
-        ? "env(safe-area-inset-bottom, 0px)"
-        : undefined
-    const right = !placement.includes("-start")
+    const top = transformDirection(placement).includes("top")
+      ? "env(safe-area-inset-top, 0px)"
+      : undefined
+    const bottom = transformDirection(placement).includes("bottom")
+      ? "env(safe-area-inset-bottom, 0px)"
+      : undefined
+    const right = !transformDirection(placement).includes("left")
       ? "env(safe-area-inset-right, 0px)"
       : undefined
-    const left = !placement.includes("-end")
+    const left = !transformDirection(placement).includes("right")
       ? "env(safe-area-inset-left, 0px)"
       : undefined
 
@@ -109,9 +107,12 @@ const defaultVariants: Variants = {
     },
   },
   initial: ({ placement }) => ({
-    [["end-center", "start-center"].includes(placement) ? "y" : "x"]:
-      (placement === "end-center" ? 1 : placement.includes("-end") ? 1 : -1) *
-      24,
+    [["bottom", "top"].includes(transformDirection(placement)) ? "y" : "x"]:
+      (transformDirection(placement) === "bottom"
+        ? 1
+        : transformDirection(placement).includes("right")
+          ? 1
+          : -1) * 24,
     opacity: 0,
   }),
 }
@@ -169,13 +170,11 @@ const NoticeComponent = memo(
         style={
           {
             display: "flex",
-            justifyContent: placement.includes("center")
-              ? "center"
-              : placement.includes("start")
-                ? "flex-start"
-                : placement.includes("end")
-                  ? "flex-end"
-                  : "center",
+            justifyContent: transformDirection(placement).includes("left")
+              ? "flex-start"
+              : transformDirection(placement).includes("right")
+                ? "flex-end"
+                : "center",
           } as MotionStyle
         }
         animate="animate"

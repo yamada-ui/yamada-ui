@@ -64,16 +64,14 @@ export function antonym(value: string): string {
 }
 
 type Direction =
-  | "top"
   | "bottom"
-  | "left"
-  | "right"
-  | "top-center"
   | "bottom-center"
-  | "top-left"
-  | "top-right"
   | "bottom-left"
   | "bottom-right"
+  | "top"
+  | "top-center"
+  | "top-left"
+  | "top-right"
 
 export function transformDirection(value: string): Direction {
   switch (value) {

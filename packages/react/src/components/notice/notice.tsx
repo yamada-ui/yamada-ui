@@ -390,12 +390,12 @@ const Notice: FC<NoticeProps> = ({
       {isButtonClosable ? (
         <CloseButton
           className="ui-notice__close-button"
-          position="absolute"
           size="sm"
-          right={2}
-          top={2}
           boxSize={6}
           minW="unset"
+          position="absolute"
+          right={2}
+          top={2}
           onClick={(ev) => {
             ev.stopPropagation()
 

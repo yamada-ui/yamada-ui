@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { BreadcrumbItem } from "./"
 import { useMemo } from "react"
-import { For } from "../for"
+import { For } from "../../components/for"
 import { ChevronsRightIcon } from "../icon"
-import { Menu, MenuButton, MenuItem, MenuList } from "../menu"
+// import { Menu, MenuButton, MenuItem, MenuList } from "../menu"
 import { Breadcrumb } from "./"
 
 type Story = StoryFn<typeof Breadcrumb.Root>
@@ -133,66 +133,66 @@ export const Separator: Story = () => {
   )
 }
 
-export const CustomEllipsis: Story = () => {
-  const items = useMemo<BreadcrumbItem[]>(
-    () => [
-      { href: "/", label: "サイヤ人編" },
-      { href: "/", label: "ナメック星編" },
-      { href: "/", label: "人造人間編" },
-      { href: "/", currentPage: true, label: "魔人ブウ編" },
-    ],
-    [],
-  )
+// export const CustomEllipsis: Story = () => {
+//   const items = useMemo<BreadcrumbItem[]>(
+//     () => [
+//       { href: "/", label: "サイヤ人編" },
+//       { href: "/", label: "ナメック星編" },
+//       { href: "/", label: "人造人間編" },
+//       { href: "/", currentPage: true, label: "魔人ブウ編" },
+//     ],
+//     [],
+//   )
 
-  return (
-    <>
-      <Breadcrumb.Root
-        ellipsis={({ items }) => {
-          return (
-            <Menu>
-              <MenuButton>
-                <Breadcrumb.Ellipsis />
-              </MenuButton>
+//   return (
+//     <>
+//       <Breadcrumb.Root
+//         ellipsis={({ items }) => {
+//           return (
+//             <Menu>
+//               <MenuButton>
+//                 <Breadcrumb.Ellipsis />
+//               </MenuButton>
 
-              <MenuList>
-                {items.map(({ href, label }, index) => (
-                  <MenuItem key={index} as="a" href={href}>
-                    {label}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-          )
-        }}
-        endBoundaries={1}
-        items={items}
-        startBoundaries={1}
-      />
+//               <MenuList>
+//                 {items.map(({ href, label }, index) => (
+//                   <MenuItem key={index} as="a" href={href}>
+//                     {label}
+//                   </MenuItem>
+//                 ))}
+//               </MenuList>
+//             </Menu>
+//           )
+//         }}
+//         endBoundaries={1}
+//         items={items}
+//         startBoundaries={1}
+//       />
 
-      <Breadcrumb.Root>
-        <Breadcrumb.Link href="/">孫悟空少年編</Breadcrumb.Link>
-        <Menu>
-          <MenuButton>
-            <Breadcrumb.Ellipsis />
-          </MenuButton>
+//       <Breadcrumb.Root>
+//         <Breadcrumb.Link href="/">孫悟空少年編</Breadcrumb.Link>
+//         <Menu>
+//           <MenuButton>
+//             <Breadcrumb.Ellipsis />
+//           </MenuButton>
 
-          <MenuList>
-            <MenuItem as="a" href="/">
-              ピッコロ大魔王編
-            </MenuItem>
-            <MenuItem as="a" href="/">
-              サイヤ人編
-            </MenuItem>
-            <MenuItem as="a" href="/">
-              フリーザ編
-            </MenuItem>
-          </MenuList>
-        </Menu>
-        <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
-        <Breadcrumb.Link href="/" currentPage>
-          魔人ブウ編
-        </Breadcrumb.Link>
-      </Breadcrumb.Root>
-    </>
-  )
-}
+//           <MenuList>
+//             <MenuItem as="a" href="/">
+//               ピッコロ大魔王編
+//             </MenuItem>
+//             <MenuItem as="a" href="/">
+//               サイヤ人編
+//             </MenuItem>
+//             <MenuItem as="a" href="/">
+//               フリーザ編
+//             </MenuItem>
+//           </MenuList>
+//         </Menu>
+//         <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
+//         <Breadcrumb.Link href="/" currentPage>
+//           魔人ブウ編
+//         </Breadcrumb.Link>
+//       </Breadcrumb.Root>
+//     </>
+//   )
+// }

@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
+import type { Dict, Path, StringLiteral } from "../../utils"
 import {
   createContext,
   useCallback,
@@ -9,7 +10,14 @@ import {
   useState,
 } from "react"
 import { DEFAULT_DIRECTION, DEFAULT_LOCALE } from "../../core"
-import { createdDom, isEmptyObject, useSsr } from "../../utils"
+import {
+  createdDom,
+  getMemoizedObject as get,
+  isEmptyObject,
+  isObject,
+  isUndefined,
+  useSsr,
+} from "../../utils"
 
 export interface Language {
   direction: TextDirection
@@ -71,9 +79,19 @@ export function getLanguage(): Language {
   return { direction, locale }
 }
 
-interface I18nContext extends Language {}
+interface I18nContext extends Language {
+  t: (
+    messages: Dict,
+    path: Path<Dict> | StringLiteral,
+    replaceValue?: { [key: string]: number | string } | number | string,
+    pattern?: string,
+  ) => string
+}
 
-export const I18nContext = createContext<I18nContext>({ ...DEFAULT_LANGUAGE })
+export const I18nContext = createContext<I18nContext>({
+  ...DEFAULT_LANGUAGE,
+  t: () => "",
+})
 
 export interface I18nProviderProps {
   children?: ReactNode
@@ -103,15 +121,47 @@ export const I18nProvider: FC<I18nProviderProps> = ({
     setLanguage(getLanguage())
   }, [])
 
-  const value = useMemo(() => {
-    if (ssr) return DEFAULT_LANGUAGE
+  const t = useCallback(
+    (
+      messages: any,
+      path: Path<any> | StringLiteral,
+      replaceValue?: { [key: string]: number | string } | number | string,
+      pattern = "label",
+    ) => {
+      const translations = locale
+        ? (messages[locale] ?? messages["en-US"])
+        : messages["en-US"]
+      let value = get<string>(translations, path, "")
 
-    if (!locale) return language
+      if (isUndefined(replaceValue)) return value
+
+      if (!isObject(replaceValue)) {
+        value = value.replace(
+          new RegExp(`{${pattern}}`, "g"),
+          `${replaceValue}`,
+        )
+      } else {
+        value = Object.entries(replaceValue).reduce(
+          (prev, [pattern, value]) =>
+            prev.replace(new RegExp(`{${pattern}}`, "g"), `${value}`),
+          value,
+        )
+      }
+
+      return value
+    },
+    [locale],
+  )
+
+  const value = useMemo(() => {
+    if (ssr) return { ...DEFAULT_LANGUAGE, t }
+
+    if (!locale) return { ...language, t }
 
     const direction = directionProp ?? (isRtl(locale) ? "rtl" : "ltr")
 
-    return { direction, locale }
-  }, [locale, ssr, language, directionProp])
+    return { direction, locale, t }
+  }, [locale, ssr, language, directionProp, t])
 
   useEffect(() => {
     window.addEventListener("languagechange", onChangeLanguage)
@@ -127,7 +177,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
 export function useI18n() {
   const context = useContext(I18nContext)
 
-  if (isEmptyObject(context)) return DEFAULT_LANGUAGE
+  if (isEmptyObject(context)) return { ...DEFAULT_LANGUAGE, t: () => "" }
 
   return context
 }

@@ -1,9 +1,9 @@
+import type { CloseButtonStyle } from "./close-button.style"
 import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
-import { IconButton } from "./icon-button"
 import { XIcon } from "../icon"
-import type { CloseButtonStyle } from "./close-button.style"
 import { closeButtonStyle } from "./close-button.style"
+import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps extends IconButtonProps {}
 

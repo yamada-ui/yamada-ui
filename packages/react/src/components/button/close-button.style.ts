@@ -3,19 +3,19 @@ import { defineComponentStyle } from "../../core"
 export const closeButtonStyle = defineComponentStyle({
   sizes: {
     sm: {
+      fontSize: "md",
       h: 6,
       minW: 6,
-      fontSize: "md",
     },
     md: {
+      fontSize: "xl",
       h: 8,
       minW: 8,
-      fontSize: "xl",
     },
     lg: {
+      fontSize: "2xl",
       h: 10,
       minW: 10,
-      fontSize: "2xl",
     },
   },
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { CloseButton } from "./close-button"
 import { Wrap } from "../flex"
+import { CloseButton } from "./close-button"
 
 type Story = StoryFn<typeof CloseButton>
 

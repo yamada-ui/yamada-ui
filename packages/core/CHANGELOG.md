@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.17.1
+
+### Patch Changes
+
+- [#4326](https://github.com/yamada-ui/yamada-ui/pull/4326) [`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unused `ComponentArgs` properties.
+
 ## 1.17.0
 
 ### Minor Changes

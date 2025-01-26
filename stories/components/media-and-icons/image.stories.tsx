@@ -26,7 +26,7 @@ export const withFallback: Story = () => {
       src="https://not-found.com/not-found.png"
       alt="Not found"
       boxSize="xl"
-      fallback="https://via.placeholder.com/512"
+      fallback="https://placehold.co/512"
     />
   )
 }

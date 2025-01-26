@@ -127,7 +127,7 @@ import { FileInput } from "@yamada-ui/react"
 <VStack>
   <FileInput focusBorderColor="green.500" placeholder="custom border color" />
   <FileInput
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -136,7 +136,7 @@ import { FileInput } from "@yamada-ui/react"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
@@ -144,14 +144,14 @@ import { FileInput } from "@yamada-ui/react"
     {(variant, index) => (
       <FileInput
         key={index}
-        isDisabled
+        disabled
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isDisabled label="Upload file">
+  <FormControl disabled label="Upload file">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -159,7 +159,7 @@ import { FileInput } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
@@ -167,14 +167,14 @@ import { FileInput } from "@yamada-ui/react"
     {(variant, index) => (
       <FileInput
         key={index}
-        isReadOnly
+        readOnly
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isReadOnly label="Upload file">
+  <FormControl readOnly label="Upload file">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -182,7 +182,7 @@ import { FileInput } from "@yamada-ui/react"
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
@@ -190,14 +190,14 @@ import { FileInput } from "@yamada-ui/react"
     {(variant, index) => (
       <FileInput
         key={index}
-        isInvalid
+        invalid
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isInvalid label="Upload file" errorMessage="File is required.">
+  <FormControl invalid label="Upload file" errorMessage="File is required.">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -306,7 +306,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.fileInput}
+      invalid={!!errors.fileInput}
       label="Files"
       errorMessage={errors.fileInput ? errors.fileInput.message : undefined}
     >

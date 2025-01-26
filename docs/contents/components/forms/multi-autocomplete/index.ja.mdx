@@ -279,7 +279,7 @@ return (
   </MultiAutocomplete>
 
   <MultiAutocomplete
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   >
@@ -450,17 +450,17 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <>
-  <MultiAutocomplete isDisabled variant="outline" placeholder="outline" />
-  <MultiAutocomplete isDisabled variant="filled" placeholder="filled" />
-  <MultiAutocomplete isDisabled variant="flushed" placeholder="flushed" />
-  <MultiAutocomplete isDisabled variant="unstyled" placeholder="unstyled" />
+  <MultiAutocomplete disabled variant="outline" placeholder="outline" />
+  <MultiAutocomplete disabled variant="filled" placeholder="filled" />
+  <MultiAutocomplete disabled variant="flushed" placeholder="flushed" />
+  <MultiAutocomplete disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Which notifications would you like to receive?"
   >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
@@ -468,12 +468,12 @@ return (
 </>
 ```
 
-オプションを無効にする場合は、`AutocompleteOption`に`isDisabled`を`true`に設定します。
+オプションを無効にする場合は、`AutocompleteOption`に`disabled`を`true`に設定します。
 
 ```tsx
 <MultiAutocomplete placeholder="キャラクターを選択">
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-  <AutocompleteOption value="ベジータ" isDisabled>
+  <AutocompleteOption value="ベジータ" disabled>
     ベジータ
   </AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -482,17 +482,17 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <>
-  <MultiAutocomplete isReadOnly variant="outline" placeholder="outline" />
-  <MultiAutocomplete isReadOnly variant="filled" placeholder="filled" />
-  <MultiAutocomplete isReadOnly variant="flushed" placeholder="flushed" />
-  <MultiAutocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
+  <MultiAutocomplete readOnly variant="outline" placeholder="outline" />
+  <MultiAutocomplete readOnly variant="filled" placeholder="filled" />
+  <MultiAutocomplete readOnly variant="flushed" placeholder="flushed" />
+  <MultiAutocomplete readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Which notifications would you like to receive?"
   >
     <MultiAutocomplete placeholder="Autocomplete notifications" />
@@ -502,17 +502,17 @@ return (
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <>
-  <MultiAutocomplete isInvalid variant="outline" placeholder="outline" />
-  <MultiAutocomplete isInvalid variant="filled" placeholder="filled" />
-  <MultiAutocomplete isInvalid variant="flushed" placeholder="flushed" />
-  <MultiAutocomplete isInvalid variant="unstyled" placeholder="unstyled" />
+  <MultiAutocomplete invalid variant="outline" placeholder="outline" />
+  <MultiAutocomplete invalid variant="filled" placeholder="filled" />
+  <MultiAutocomplete invalid variant="flushed" placeholder="flushed" />
+  <MultiAutocomplete invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -617,7 +617,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.autocomplete}
+      invalid={!!errors.autocomplete}
       label="Who is your favorite character?"
       errorMessage={
         errors.autocomplete ? errors.autocomplete.message : undefined

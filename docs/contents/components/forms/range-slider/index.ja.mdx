@@ -95,10 +95,10 @@ import {
 
 ### 逆方向にする
 
-逆方向にする場合は、`isReversed`を`true`に設定します。
+逆方向にする場合は、`reversed`を`true`に設定します。
 
 ```tsx
-<RangeSlider isReversed />
+<RangeSlider reversed />
 ```
 
 ### 最小値と最大値を設定する
@@ -166,7 +166,7 @@ return (
 
         <Center gap="md">
           <Button
-            isDisabled={value[0] === 0}
+            disabled={value[0] === 0}
             onClick={() =>
               setValue((prev) =>
                 prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev,
@@ -177,7 +177,7 @@ return (
           </Button>
 
           <Button
-            isDisabled={value[0] === 100 || value[0] === value[1]}
+            disabled={value[0] === 100 || value[0] === value[1]}
             colorScheme="blue"
             onClick={() =>
               setValue((prev) =>
@@ -197,7 +197,7 @@ return (
 
         <Center gap="md">
           <Button
-            isDisabled={value[1] === 0 || value[0] === value[1]}
+            disabled={value[1] === 0 || value[0] === value[1]}
             onClick={() =>
               setValue((prev) =>
                 prev[1] !== 0 && value[0] !== value[1]
@@ -210,7 +210,7 @@ return (
           </Button>
 
           <Button
-            isDisabled={value[1] === 100}
+            disabled={value[1] === 100}
             colorScheme="blue"
             onClick={() =>
               setValue((prev) =>
@@ -229,14 +229,14 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <RangeSlider isDisabled />
+  <RangeSlider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Hotel Price Range"
     helperMessage="Please select your preferred price range."
   >
@@ -247,14 +247,14 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <RangeSlider isReadOnly />
+  <RangeSlider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Hotel Price Range"
     helperMessage="Please select your preferred price range."
   >

@@ -127,7 +127,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
 <VStack>
   <FileInput focusBorderColor="green.500" placeholder="custom border color" />
   <FileInput
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -136,7 +136,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
@@ -144,14 +144,14 @@ To disable, set `isDisabled` to `true`.
     {(variant, index) => (
       <FileInput
         key={index}
-        isDisabled
+        disabled
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isDisabled label="Upload file">
+  <FormControl disabled label="Upload file">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -159,7 +159,7 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
@@ -167,14 +167,14 @@ To make read-only, set `isReadOnly` to `true`.
     {(variant, index) => (
       <FileInput
         key={index}
-        isReadOnly
+        readOnly
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isReadOnly label="Upload file">
+  <FormControl readOnly label="Upload file">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -182,7 +182,7 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
@@ -190,14 +190,14 @@ To make the input invalid, set `isInvalid` to `true`.
     {(variant, index) => (
       <FileInput
         key={index}
-        isInvalid
+        invalid
         variant={variant}
         placeholder={variant}
       />
     )}
   </For>
 
-  <FormControl isInvalid label="Upload file" errorMessage="File is required.">
+  <FormControl invalid label="Upload file" errorMessage="File is required.">
     <FileInput type="email" placeholder="your file" />
   </FormControl>
 </VStack>
@@ -306,7 +306,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.fileInput}
+      invalid={!!errors.fileInput}
       label="Files"
       errorMessage={errors.fileInput ? errors.fileInput.message : undefined}
     >

@@ -332,7 +332,7 @@ return (
 
 ### Reverse
 
-To reverse, set `isReverse` to `true`. The default is `false`.
+To reverse, set `reverse` to `true`. The default is `false`.
 
 ```tsx functional=true iframe=true
 const rootRef = useRef<HTMLDivElement>(null)
@@ -350,7 +350,7 @@ return (
       }}
       loading={<Loading fontSize="2xl" />}
       rootRef={rootRef}
-      isReverse
+      reverse
     >
       <For each={Array.from({ length: count })}>
         {(_, index) => (
@@ -378,10 +378,10 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`. This is useful when you do not want to execute `onLoad` in response to scrolling under certain conditions.
+To disable, set `disabled` to `true`. This is useful when you do not want to execute `onLoad` in response to scrolling under certain conditions.
 
 ```tsx functional=true iframe=true
-const [isDisabled, setIsDisabled] = useState<boolean>(false)
+const [disabled, setIsDisabled] = useState<boolean>(false)
 const [count, setCount] = useState<number>(50)
 
 return (
@@ -400,7 +400,7 @@ return (
         if (index >= 5) finish()
       }}
       loading={<Loading fontSize="2xl" />}
-      isDisabled={isDisabled}
+      disabled={disabled}
     >
       <For each={Array.from({ length: count })}>
         {(_, index) => (
@@ -424,10 +424,10 @@ return (
     </InfiniteScrollArea>
 
     <Button
-      colorScheme={isDisabled ? "success" : "danger"}
+      colorScheme={disabled ? "success" : "danger"}
       onClick={() => setIsDisabled((prev) => !prev)}
     >
-      {isDisabled ? "Enable" : "Disabled"}
+      {disabled ? "Enable" : "Disabled"}
     </Button>
   </VStack>
 )

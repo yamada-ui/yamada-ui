@@ -91,10 +91,10 @@ You can change the duration of the animation by setting `speed` as a string or n
 
 ### Display Content
 
-By setting `isLoaded` to `true`, the placeholder will fade out and display the content.
+By setting `loaded` to `true`, the placeholder will fade out and display the content.
 
 ```tsx functional=true
-const [isLoaded, { toggle }] = useBoolean()
+const [loaded, { toggle }] = useBoolean()
 
 return (
   <VStack>
@@ -102,15 +102,15 @@ return (
       Toggle
     </Button>
 
-    <SkeletonCircle isLoaded={isLoaded}>
+    <SkeletonCircle loaded={loaded}>
       <Avatar name="Hirotomo Yamada" />
     </SkeletonCircle>
 
-    <Skeleton isLoaded={isLoaded}>
+    <Skeleton loaded={loaded}>
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} lineClamp={1} textHeight={6}>
+    <SkeletonText loaded={loaded} lineClamp={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -124,7 +124,7 @@ return (
 To change the duration of the placeholder fade out, set `fadeDuration` as a number (seconds). By default, `0.4` is set.
 
 ```tsx functional=true
-const [isLoaded, { toggle }] = useBoolean()
+const [loaded, { toggle }] = useBoolean()
 
 return (
   <VStack>
@@ -132,16 +132,16 @@ return (
       Toggle
     </Button>
 
-    <SkeletonCircle isLoaded={isLoaded} fadeDuration={2}>
+    <SkeletonCircle loaded={loaded} fadeDuration={2}>
       <Avatar name="Hirotomo Yamada" />
     </SkeletonCircle>
 
-    <Skeleton isLoaded={isLoaded} fadeDuration={4}>
+    <Skeleton loaded={loaded} fadeDuration={4}>
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
     <SkeletonText
-      isLoaded={isLoaded}
+      loaded={loaded}
       fadeDuration={6}
       lineClamp={1}
       textHeight={6}

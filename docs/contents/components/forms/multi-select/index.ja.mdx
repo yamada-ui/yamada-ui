@@ -168,7 +168,7 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 <VStack>
   <MultiSelect focusBorderColor="green.500" placeholder="custom border color" />
   <MultiSelect
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -273,10 +273,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ### クリアを無効化する
 
-クリアを無効化する場合は、`isClearable`を`false`に設定します。
+クリアを無効化する場合は、`clearable`を`false`に設定します。
 
 ```tsx
-<MultiSelect placeholder="キャラクターを選択" isClearable={false}>
+<MultiSelect placeholder="キャラクターを選択" clearable={false}>
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -335,17 +335,17 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiSelect isDisabled variant="outline" placeholder="outline" />
-  <MultiSelect isDisabled variant="filled" placeholder="filled" />
-  <MultiSelect isDisabled variant="flushed" placeholder="flushed" />
-  <MultiSelect isDisabled variant="unstyled" placeholder="unstyled" />
+  <MultiSelect disabled variant="outline" placeholder="outline" />
+  <MultiSelect disabled variant="filled" placeholder="filled" />
+  <MultiSelect disabled variant="flushed" placeholder="flushed" />
+  <MultiSelect disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Which notifications would you like to receive?"
   >
     <MultiSelect placeholder="Select notifications" />
@@ -353,12 +353,12 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 </VStack>
 ```
 
-オプションを無効にする場合は、`Option`に`isDisabled`を`true`に設定します。
+オプションを無効にする場合は、`Option`に`disabled`を`true`に設定します。
 
 ```tsx
 <MultiSelect placeholder="キャラクターを選択">
   <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ" isDisabled>
+  <Option value="ベジータ" disabled>
     ベジータ
   </Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -367,17 +367,17 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiSelect isReadOnly variant="outline" placeholder="outline" />
-  <MultiSelect isReadOnly variant="filled" placeholder="filled" />
-  <MultiSelect isReadOnly variant="flushed" placeholder="flushed" />
-  <MultiSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+  <MultiSelect readOnly variant="outline" placeholder="outline" />
+  <MultiSelect readOnly variant="filled" placeholder="filled" />
+  <MultiSelect readOnly variant="flushed" placeholder="flushed" />
+  <MultiSelect readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Which notifications would you like to receive?"
   >
     <MultiSelect placeholder="Select notifications" />
@@ -387,17 +387,17 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiSelect isInvalid variant="outline" placeholder="outline" />
-  <MultiSelect isInvalid variant="filled" placeholder="filled" />
-  <MultiSelect isInvalid variant="flushed" placeholder="flushed" />
-  <MultiSelect isInvalid variant="unstyled" placeholder="unstyled" />
+  <MultiSelect invalid variant="outline" placeholder="outline" />
+  <MultiSelect invalid variant="filled" placeholder="filled" />
+  <MultiSelect invalid variant="flushed" placeholder="flushed" />
+  <MultiSelect invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -527,7 +527,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

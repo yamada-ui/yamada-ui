@@ -98,14 +98,14 @@ return (
 
         <Wrap gap="md">
           <Button
-            isDisabled={s === 0}
+            disabled={s === 0}
             onClick={() => onChange("s", "decrement")}
           >
             -0.1
           </Button>
 
           <Button
-            isDisabled={s === 1}
+            disabled={s === 1}
             colorScheme="blue"
             onClick={() => onChange("s", "increment")}
           >
@@ -119,14 +119,14 @@ return (
 
         <Wrap gap="md">
           <Button
-            isDisabled={v === 0}
+            disabled={v === 0}
             onClick={() => onChange("v", "decrement")}
           >
             -0.1
           </Button>
 
           <Button
-            isDisabled={v === 1}
+            disabled={v === 1}
             colorScheme="blue"
             onClick={() => onChange("v", "increment")}
           >
@@ -141,14 +141,14 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <SaturationSlider isDisabled />
+  <SaturationSlider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -159,14 +159,14 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <SaturationSlider isReadOnly />
+  <SaturationSlider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -224,7 +224,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.saturationSlider}
+      invalid={!!errors.saturationSlider}
       legend="Pick color"
       errorMessage={
         errors.saturationSlider ? errors.saturationSlider.message : undefined

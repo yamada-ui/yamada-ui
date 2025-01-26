@@ -329,7 +329,7 @@ return (
 
 ### 反転させる
 
-反転させる場合は、`isReverse`を`true`に設定します。デフォルトは、`false`です。
+反転させる場合は、`reverse`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx functional=true iframe=true
 const rootRef = useRef<HTMLDivElement>(null)
@@ -347,7 +347,7 @@ return (
       }}
       loading={<Loading fontSize="2xl" />}
       rootRef={rootRef}
-      isReverse
+      reverse
     >
       <For each={Array.from({ length: count })}>
         {(_, index) => (
@@ -375,10 +375,10 @@ return (
 
 ### 無効にする
 
-無効にする場合は、`isDisabled`を`true`に設定します。これは、特定の条件下でスクロールに合わせて`onLoad`を実行したくない場合に有効です。
+無効にする場合は、`disabled`を`true`に設定します。これは、特定の条件下でスクロールに合わせて`onLoad`を実行したくない場合に有効です。
 
 ```tsx functional=true iframe=true
-const [isDisabled, setIsDisabled] = useState<boolean>(false)
+const [disabled, setIsDisabled] = useState<boolean>(false)
 const [count, setCount] = useState<number>(50)
 
 return (
@@ -397,7 +397,7 @@ return (
         if (index >= 5) finish()
       }}
       loading={<Loading fontSize="2xl" />}
-      isDisabled={isDisabled}
+      disabled={disabled}
     >
       <For each={Array.from({ length: count })}>
         {(_, index) => (
@@ -421,10 +421,10 @@ return (
     </InfiniteScrollArea>
 
     <Button
-      colorScheme={isDisabled ? "success" : "danger"}
+      colorScheme={disabled ? "success" : "danger"}
       onClick={() => setIsDisabled((prev) => !prev)}
     >
-      {isDisabled ? "Enable" : "Disabled"}
+      {disabled ? "Enable" : "Disabled"}
     </Button>
   </VStack>
 )

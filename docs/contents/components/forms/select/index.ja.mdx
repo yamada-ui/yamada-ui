@@ -180,7 +180,7 @@ return <Select placeholder="キャラクターを選択" items={items} />
 <VStack>
   <Select focusBorderColor="green.500" placeholder="custom border color" />
   <Select
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -263,17 +263,17 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Select isDisabled variant="outline" placeholder="outline" />
-  <Select isDisabled variant="filled" placeholder="filled" />
-  <Select isDisabled variant="flushed" placeholder="flushed" />
-  <Select isDisabled variant="unstyled" placeholder="unstyled" />
+  <Select disabled variant="outline" placeholder="outline" />
+  <Select disabled variant="filled" placeholder="filled" />
+  <Select disabled variant="flushed" placeholder="flushed" />
+  <Select disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Which notifications would you like to receive?"
   >
     <Select placeholder="Select notifications" />
@@ -281,12 +281,12 @@ return <Select placeholder="キャラクターを選択" items={items} />
 </VStack>
 ```
 
-オプションを無効にする場合は、`Option`に`isDisabled`を`true`に設定します。
+オプションを無効にする場合は、`Option`に`disabled`を`true`に設定します。
 
 ```tsx
 <Select placeholder="キャラクターを選択">
   <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ" isDisabled>
+  <Option value="ベジータ" disabled>
     ベジータ
   </Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -295,17 +295,17 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Select isReadOnly variant="outline" placeholder="outline" />
-  <Select isReadOnly variant="filled" placeholder="filled" />
-  <Select isReadOnly variant="flushed" placeholder="flushed" />
-  <Select isReadOnly variant="unstyled" placeholder="unstyled" />
+  <Select readOnly variant="outline" placeholder="outline" />
+  <Select readOnly variant="filled" placeholder="filled" />
+  <Select readOnly variant="flushed" placeholder="flushed" />
+  <Select readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Which notifications would you like to receive?"
   >
     <Select placeholder="Select notifications" />
@@ -315,17 +315,17 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Select isInvalid variant="outline" placeholder="outline" />
-  <Select isInvalid variant="filled" placeholder="filled" />
-  <Select isInvalid variant="flushed" placeholder="flushed" />
-  <Select isInvalid variant="unstyled" placeholder="unstyled" />
+  <Select invalid variant="outline" placeholder="outline" />
+  <Select invalid variant="filled" placeholder="filled" />
+  <Select invalid variant="flushed" placeholder="flushed" />
+  <Select invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -436,7 +436,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

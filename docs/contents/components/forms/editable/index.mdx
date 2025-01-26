@@ -56,10 +56,10 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
-<Editable isDisabled defaultValue="your email address">
+<Editable disabled defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -67,10 +67,10 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
-<Editable isReadOnly defaultValue="your email address">
+<Editable readOnly defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -78,10 +78,10 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
-<Editable isInvalid defaultValue="your email address">
+<Editable invalid defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -110,7 +110,7 @@ return (
   <Editable
     display="flex"
     gap="sm"
-    isPreviewFocusable={false}
+    previewFocusable={false}
     defaultValue="オッス！オラ悟空！"
   >
     <EditablePreview w="full" />
@@ -144,7 +144,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.input}
+      invalid={!!errors.input}
       legend="Name"
       errorMessage={errors.input ? errors.input.message : undefined}
     >
@@ -162,7 +162,7 @@ return (
     </Fieldset>
 
     <Fieldset
-      isInvalid={!!errors.textarea}
+      invalid={!!errors.textarea}
       legend="Feedback"
       errorMessage={errors.textarea ? errors.textarea.message : undefined}
     >

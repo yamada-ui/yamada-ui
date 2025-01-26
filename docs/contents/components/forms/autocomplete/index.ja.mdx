@@ -325,7 +325,7 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
   </Autocomplete>
 
   <Autocomplete
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   >
@@ -400,17 +400,17 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Autocomplete isDisabled variant="outline" placeholder="outline" />
-  <Autocomplete isDisabled variant="filled" placeholder="filled" />
-  <Autocomplete isDisabled variant="flushed" placeholder="flushed" />
-  <Autocomplete isDisabled variant="unstyled" placeholder="unstyled" />
+  <Autocomplete disabled variant="outline" placeholder="outline" />
+  <Autocomplete disabled variant="filled" placeholder="filled" />
+  <Autocomplete disabled variant="flushed" placeholder="flushed" />
+  <Autocomplete disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Which notifications would you like to receive?"
   >
     <Autocomplete placeholder="Autocomplete notifications" />
@@ -418,12 +418,12 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 </VStack>
 ```
 
-オプションを無効にする場合は、`AutocompleteOption`に`isDisabled`を`true`に設定します。
+オプションを無効にする場合は、`AutocompleteOption`に`disabled`を`true`に設定します。
 
 ```tsx
 <Autocomplete placeholder="キャラクターを選択">
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
-  <AutocompleteOption value="ベジータ" isDisabled>
+  <AutocompleteOption value="ベジータ" disabled>
     ベジータ
   </AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
@@ -432,17 +432,17 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Autocomplete isReadOnly variant="outline" placeholder="outline" />
-  <Autocomplete isReadOnly variant="filled" placeholder="filled" />
-  <Autocomplete isReadOnly variant="flushed" placeholder="flushed" />
-  <Autocomplete isReadOnly variant="unstyled" placeholder="unstyled" />
+  <Autocomplete readOnly variant="outline" placeholder="outline" />
+  <Autocomplete readOnly variant="filled" placeholder="filled" />
+  <Autocomplete readOnly variant="flushed" placeholder="flushed" />
+  <Autocomplete readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Which notifications would you like to receive?"
   >
     <Autocomplete placeholder="Autocomplete notifications" />
@@ -452,17 +452,17 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} all
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Autocomplete isInvalid variant="outline" placeholder="outline" />
-  <Autocomplete isInvalid variant="filled" placeholder="filled" />
-  <Autocomplete isInvalid variant="flushed" placeholder="flushed" />
-  <Autocomplete isInvalid variant="unstyled" placeholder="unstyled" />
+  <Autocomplete invalid variant="outline" placeholder="outline" />
+  <Autocomplete invalid variant="filled" placeholder="filled" />
+  <Autocomplete invalid variant="flushed" placeholder="flushed" />
+  <Autocomplete invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -585,7 +585,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.autocomplete}
+      invalid={!!errors.autocomplete}
       label="Who is your favorite character?"
       errorMessage={
         errors.autocomplete ? errors.autocomplete.message : undefined

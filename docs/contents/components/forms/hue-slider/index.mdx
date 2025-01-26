@@ -93,14 +93,14 @@ return (
 
     <Center w="full" gap="md">
       <Button
-        isDisabled={value === 0}
+        disabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
       >
         -10
       </Button>
 
       <Button
-        isDisabled={value === 360}
+        disabled={value === 360}
         colorScheme="blue"
         onClick={() => setValue((prev) => (prev !== 360 ? prev + 10 : prev))}
       >
@@ -113,14 +113,14 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <HueSlider isDisabled />
+  <HueSlider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -131,14 +131,14 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <HueSlider isReadOnly />
+  <HueSlider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -195,7 +195,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.hueSlider}
+      invalid={!!errors.hueSlider}
       legend="Pick color"
       errorMessage={errors.hueSlider ? errors.hueSlider.message : undefined}
     >

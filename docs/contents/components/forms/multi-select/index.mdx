@@ -170,7 +170,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 <VStack>
   <MultiSelect focusBorderColor="green.500" placeholder="custom border color" />
   <MultiSelect
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -275,10 +275,10 @@ To close the dropdown list on selection, set `closeOnSelect` to `true`.
 
 ### Disable Clearing
 
-To disable clearing, set `isClearable` to `false`.
+To disable clearing, set `clearable` to `false`.
 
 ```tsx
-<MultiSelect placeholder="キャラクターを選択" isClearable={false}>
+<MultiSelect placeholder="キャラクターを選択" clearable={false}>
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -337,17 +337,17 @@ Depending on the size of the element or the situation, you may want to adjust th
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <MultiSelect isDisabled variant="outline" placeholder="outline" />
-  <MultiSelect isDisabled variant="filled" placeholder="filled" />
-  <MultiSelect isDisabled variant="flushed" placeholder="flushed" />
-  <MultiSelect isDisabled variant="unstyled" placeholder="unstyled" />
+  <MultiSelect disabled variant="outline" placeholder="outline" />
+  <MultiSelect disabled variant="filled" placeholder="filled" />
+  <MultiSelect disabled variant="flushed" placeholder="flushed" />
+  <MultiSelect disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Which notifications would you like to receive?"
   >
     <MultiSelect placeholder="Select notifications" />
@@ -355,12 +355,12 @@ To disable, set `isDisabled` to `true`.
 </VStack>
 ```
 
-To disable an option, set `isDisabled` to `true` on `Option`.
+To disable an option, set `disabled` to `true` on `Option`.
 
 ```tsx
 <MultiSelect placeholder="キャラクターを選択">
   <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ" isDisabled>
+  <Option value="ベジータ" disabled>
     ベジータ
   </Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -369,17 +369,17 @@ To disable an option, set `isDisabled` to `true` on `Option`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <MultiSelect isReadOnly variant="outline" placeholder="outline" />
-  <MultiSelect isReadOnly variant="filled" placeholder="filled" />
-  <MultiSelect isReadOnly variant="flushed" placeholder="flushed" />
-  <MultiSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+  <MultiSelect readOnly variant="outline" placeholder="outline" />
+  <MultiSelect readOnly variant="filled" placeholder="filled" />
+  <MultiSelect readOnly variant="flushed" placeholder="flushed" />
+  <MultiSelect readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Which notifications would you like to receive?"
   >
     <MultiSelect placeholder="Select notifications" />
@@ -389,17 +389,17 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <MultiSelect isInvalid variant="outline" placeholder="outline" />
-  <MultiSelect isInvalid variant="filled" placeholder="filled" />
-  <MultiSelect isInvalid variant="flushed" placeholder="flushed" />
-  <MultiSelect isInvalid variant="unstyled" placeholder="unstyled" />
+  <MultiSelect invalid variant="outline" placeholder="outline" />
+  <MultiSelect invalid variant="filled" placeholder="filled" />
+  <MultiSelect invalid variant="flushed" placeholder="flushed" />
+  <MultiSelect invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -529,7 +529,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

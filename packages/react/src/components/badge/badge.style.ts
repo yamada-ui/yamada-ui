@@ -4,7 +4,7 @@ export const badgeStyle = defineComponentStyle({
   base: {
     alignItems: "center",
     display: "inline-flex",
-    fontWeight: "semibold",
+    fontWeight: "medium",
     rounded: "sm",
     textTransform: "uppercase",
     verticalAlign: "middle",

@@ -25,15 +25,6 @@ export interface ObjectLiteral {}
 
 export type StringLiteral = {} & string
 
-export type Replace<
-  Y extends string,
-  M extends string,
-  D extends string,
-  H extends string = "",
-> = Y extends `${infer T}${M}${infer R}`
-  ? Replace<R, M, D, `${H}${T}${D}`>
-  : `${H}${Y}`
-
 export type Union<Y> = StringLiteral | Y
 
 export type Length<T extends any[]> = T["length"]

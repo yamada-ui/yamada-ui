@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { DecimalList, DiscList, List, ListItem } from "."
 import { CheckIcon, CircleCheckIcon } from "../icon"
-import { DecimalList, DiscList, List, ListItem } from "./"
 
 type Story = StoryFn<typeof List>
 

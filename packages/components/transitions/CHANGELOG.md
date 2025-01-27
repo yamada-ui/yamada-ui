@@ -1,5 +1,14 @@
 # @yamada-ui/transitions
 
+## 1.1.17
+
+### Patch Changes
+
+- Updated dependencies [[`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e)]:
+  - @yamada-ui/core@1.17.1
+  - @yamada-ui/motion@2.3.1
+  - @yamada-ui/use-value@1.1.36
+
 ## 1.1.16
 
 ### Patch Changes

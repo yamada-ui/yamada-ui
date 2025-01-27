@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 1.3.11
+
+### Patch Changes
+
+- [#4321](https://github.com/yamada-ui/yamada-ui/pull/4321) [`fa1971f`](https://github.com/yamada-ui/yamada-ui/commit/fa1971fb46f9b7d15b4fe342c2da42615cd7742b) Thanks [@bmthd](https://github.com/bmthd)! - added HeaderContext and TableMeta types to export
+
+- Updated dependencies [[`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e)]:
+  - @yamada-ui/core@1.17.1
+  - @yamada-ui/checkbox@1.3.4
+  - @yamada-ui/icon@1.1.19
+  - @yamada-ui/native-table@1.0.50
+  - @yamada-ui/pagination@1.1.10
+  - @yamada-ui/select@1.8.8
+  - @yamada-ui/use-clickable@1.2.19
+  - @yamada-ui/use-value@1.1.36
+
 ## 1.3.10
 
 ### Patch Changes

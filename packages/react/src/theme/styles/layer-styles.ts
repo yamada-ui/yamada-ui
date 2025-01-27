@@ -13,7 +13,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   ghost: {
     bg: "transparent",
-    color: "colorScheme.fg",
+    color: "colorScheme.outline",
   },
   "ghost.hover": {
     bg: "colorScheme.ghost",

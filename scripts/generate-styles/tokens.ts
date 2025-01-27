@@ -49,6 +49,8 @@ export const tokens: Tokens = {
     "borderBlockEndColor",
     "columnRuleColor",
   ],
+  durations: ["animationDuration", "transitionDuration"],
+  easings: ["transitionTimingFunction", "animationTimingFunction"],
   fonts: ["fontFamily"],
   fontSizes: ["fontSize"],
   fontWeights: ["fontWeight"],
@@ -58,6 +60,7 @@ export const tokens: Tokens = {
     "listStyleImage",
     "maskImage",
   ],
+  keyframes: ["animationName", "keyframes"],
   letterSpacings: ["letterSpacing"],
   lineHeights: ["lineHeight"],
   radii: [
@@ -163,9 +166,6 @@ export const tokens: Tokens = {
     "translateX",
     "translateY",
   ],
-  "transitions.duration": ["animationDuration", "transitionDuration"],
-  "transitions.easing": ["transitionTimingFunction", "animationTimingFunction"],
-  "transitions.property": ["transitionProperty"],
   zIndices: ["zIndex"],
 }
 
@@ -182,18 +182,17 @@ export const tokenMap = Object.entries(tokens).reduce<{
 export const tokenPropertyMap: { [key: string]: ThemeToken[] } = {
   size: ["sizes"],
   animation: ["animations"],
+  aspectRatio: ["aspectRatios"],
   blur: ["blurs"],
   border: ["borders"],
   color: ["colors"],
+  duration: ["durations"],
+  easing: ["easings"],
   font: ["fonts", "fontSizes", "fontWeights", "lineHeights", "letterSpacings"],
   gradient: ["gradients"],
+  keyframe: ["keyframes"],
   radius: ["radii"],
   shadow: ["shadows"],
   space: ["spaces"],
-  transition: [
-    "transitions.property",
-    "transitions.easing",
-    "transitions.duration",
-  ],
   zIndex: ["zIndices"],
 }

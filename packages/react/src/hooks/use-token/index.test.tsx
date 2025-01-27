@@ -54,12 +54,12 @@ const theme = {
   },
   transitions: {
     duration: {
-      "ultra-fast": "50ms",
       faster: "100ms",
       fast: "150ms",
       normal: "200ms",
       slow: "300ms",
       slower: "400ms",
+      "ultra-fast": "50ms",
       "ultra-slow": "500ms",
     },
 
@@ -148,39 +148,6 @@ describe("useToken", () => {
       fontSize: "5xl",
       w: "full",
     })
-  })
-
-  test("correctly retrieves the value for transitions", () => {
-    const { result: result1 } = renderHook(
-      () => useToken("transitionProperty", "common"),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        ),
-      },
-    )
-    const { result: result2 } = renderHook(
-      () => useToken("transitionDuration", "faster"),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        ),
-      },
-    )
-    const { result: result3 } = renderHook(
-      () => useToken("transitionEasing", "ease-in"),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        ),
-      },
-    )
-
-    expect(result1.current).toBe(
-      "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
-    )
-    expect(result2.current).toBe("100ms")
-    expect(result3.current).toBe("cubic-bezier(0.4, 0, 1, 1)")
   })
 
   test("correctly retrieves the value for semantics", () => {

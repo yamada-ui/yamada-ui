@@ -10,7 +10,7 @@ export const tagStyle = defineComponentSlotStyle({
       justifyContent: "center",
       outline: "0",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       _active: {
         layerStyle: "active",

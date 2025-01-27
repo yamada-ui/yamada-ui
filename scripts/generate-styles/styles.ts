@@ -23,20 +23,20 @@ const addType = (result: string, value: string) =>
 
 const generateType = ({
   type,
-  processSkip = false,
   prop,
   token,
   transforms,
+  variableLength = false,
 }: {
   type: string | string[]
-  processSkip?: boolean
   prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
+  variableLength?: boolean
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !processSkip ? "Token<>" : ""
+  let result = !variableLength ? "Token<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -58,18 +58,7 @@ const generateType = ({
     if (isNumber) result = addType(result, ` | number`)
   }
 
-  if (token) {
-    let resolvedToken: string = token
-
-    if (resolvedToken === "transitions.property")
-      resolvedToken = "transitionProperty"
-    if (resolvedToken === "transitions.duration")
-      resolvedToken = "transitionDuration"
-    if (resolvedToken === "transitions.easing")
-      resolvedToken = "transitionEasing"
-
-    result = addType(result, `, "${resolvedToken}"`)
-  }
+  if (token) result = addType(result, `, "${token}"`)
 
   return result
 }
@@ -120,7 +109,7 @@ export const generateStyles = async (
   const uiStyles: string[] = []
   const atRuleStyles: string[] = []
   const styleProps: string[] = []
-  const processSkipProps: string[] = []
+  const variableLengthProps: string[] = []
   const tokenProps: { [key in ThemeToken]?: string[] } = {}
   const pickedStyles: ({ type: string } & CSSProperty)[] = []
 
@@ -188,11 +177,12 @@ export const generateStyles = async (
         processSkip,
         properties,
         static: css,
+        variableLength,
       },
     ]: [string, StyleConfig],
     targetStyles: string[],
   ) => {
-    if (processSkip) processSkipProps.push(prop)
+    if (variableLength) variableLengthProps.push(prop)
 
     const relatedStyles = styles.filter(({ prop }) =>
       typeof properties === "string"
@@ -208,9 +198,9 @@ export const generateStyles = async (
 
     type = generateType({
       type: type ?? types,
-      processSkip,
       token,
       transforms,
+      variableLength,
     })
 
     const config = generateConfig({
@@ -256,7 +246,7 @@ export const generateStyles = async (
     addStyles(entry, atRuleStyles),
   )
 
-  const processSkipProperties = processSkipProps.map(
+  const variableLengthProperties = variableLengthProps.map(
     (property) => `"${property}"`,
   )
   const tokenProperties = Object.entries(tokenPropertyMap).map(
@@ -278,8 +268,7 @@ export const generateStyles = async (
     import type * as CSS from "csstype"
     import type { StyleConfigs } from "./config"
     import type { CSSObject, Token } from "./css"
-    import type { ThemeToken } from "./theme"
-    import type { ColorScheme, Theme } from "./theme.types"
+    import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
     import { transforms } from "./config"
     import { pipe } from "./config/utils"
 
@@ -321,9 +310,9 @@ export const generateStyles = async (
 
     export const styleProperties = Object.keys(styles) as StyleProperty[]
 
-    export type ProcessSkipProperty = typeof processSkipProperties[number]
+    export type VariableLengthProperty = typeof variableLengthProperties[number]
 
-    export const processSkipProperties = [${processSkipProperties.join(", ")}] as const
+    export const variableLengthProperties = [${variableLengthProperties.join(", ")}] as const
 
     ${tokenProperties.join("\n\n")}
 

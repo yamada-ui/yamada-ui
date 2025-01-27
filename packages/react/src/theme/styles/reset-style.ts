@@ -1,6 +1,6 @@
-import type { CSSObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const resetStyle: CSSObject = {
+export const resetStyle = defineStyles.resetStyle({
   "*": {
     boxSizing: "border-box",
   },
@@ -274,4 +274,4 @@ export const resetStyle: CSSObject = {
     margin: 0,
     padding: 0,
   },
-}
+})

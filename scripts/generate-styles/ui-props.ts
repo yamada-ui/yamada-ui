@@ -8,75 +8,10 @@ export interface StyleConfig {
   processSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
   static?: EmotionCSSObject
+  variableLength?: boolean
 }
 
 export const additionalProps = {
-  backdropBlur: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-blur`.",
-    ],
-    properties: "--backdrop-blur",
-  },
-  backdropBrightness: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-brightness`.",
-    ],
-    properties: "--backdrop-brightness",
-  },
-  backdropContrast: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-contrast`.",
-    ],
-    properties: "--backdrop-contrast",
-  },
-  backdropDropShadow: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-drop-shadow`.",
-    ],
-    properties: "--backdrop-drop-shadow",
-  },
-  backdropFilter: {
-    type: `CSS.Property.BackdropFilter | "auto"`,
-    description: [
-      "The CSS `backdrop-filter` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter",
-    ],
-  },
-  backdropGrayscale: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-grayscale`.",
-    ],
-    properties: "--backdrop-grayscale",
-  },
-  backdropHueRotate: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-hue-rotate`.",
-    ],
-    properties: "--backdrop-hue-rotate",
-  },
-  backdropInvert: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-invert`.",
-    ],
-    properties: "--backdrop-invert",
-  },
-  backdropSaturate: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-saturate`.",
-    ],
-    properties: "--backdrop-saturate",
-  },
-  backdropSepia: {
-    description: [
-      "If `backdropBlur=auto`, sets the value of `--backdrop-sepia`.",
-    ],
-    properties: "--backdrop-sepia",
-  },
-  blur: {
-    description: ["If `filter=auto`, sets the value of `--blur`."],
-    properties: "--blur",
-  },
   borderBottomRadius: {
     properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
   },
@@ -98,10 +33,6 @@ export const additionalProps = {
   borderX: { properties: ["borderLeft", "borderRight"] },
   borderY: { properties: ["borderTop", "borderBottom"] },
   boxSize: { properties: ["width", "height"] },
-  brightness: {
-    description: ["If `filter=auto`, sets the value of `--brightness`."],
-    properties: "--brightness",
-  },
   colorMode: {
     type: "CSS.Property.ColorScheme",
     description: [
@@ -111,42 +42,14 @@ export const additionalProps = {
     ],
     properties: "colorScheme",
   },
-  contrast: {
-    description: ["If `filter=auto`, sets the value of `--contrast`."],
-    properties: "--contrast",
-  },
-  dropShadow: {
-    description: ["If `filter=auto`, sets the value of `--drop-shadow`."],
-    properties: "--drop-shadow",
-  },
-  filter: {
-    type: `CSS.Property.Filter | "auto"`,
-    description: [
-      "The CSS `filter` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
-    ],
-  },
-  grayscale: {
-    description: ["If `filter=auto`, sets the value of `--grayscale`."],
-    properties: "--grayscale",
-  },
-  hueRotate: {
-    description: ["If `filter=auto`, sets the value of `--hue-rotate`."],
-    properties: "--hue-rotate",
-  },
   insetX: { properties: ["left", "right"] },
   insetY: { properties: ["top", "bottom"] },
-  invert: {
-    description: ["If `filter=auto`, sets the value of `--invert`."],
-    properties: "--invert",
-  },
   marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
   marginY: { properties: ["marginTop", "marginBottom"] },
   maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   minBoxSize: { properties: ["minWidth", "minHeight"] },
   outline: {
-    type: "CSS.Property.Filter | 'outside'| 'inside' | 'mixed'",
+    type: "CSS.Property.Outline | 'outside' | 'inside' | 'mixed'",
     description: [
       "The CSS `outline` property.",
       "",
@@ -156,70 +59,150 @@ export const additionalProps = {
   },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
-  rotate: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--rotate`.",
-    ],
-    properties: "--rotate",
-  },
-  saturate: {
-    description: ["If `filter=auto`, sets the value of `--saturate`."],
-    properties: "--saturate",
-  },
-  scale: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x` and `--scale-y`.",
-    ],
-    properties: ["--scale-x", "--scale-y"],
-  },
-  scaleX: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-x`.",
-    ],
-    properties: "--scale-x",
-  },
-  scaleY: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--scale-y`.",
-    ],
-    properties: "--scale-y",
-  },
   scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
   scrollMarginY: { properties: ["scrollMarginTop", "scrollMarginBottom"] },
   scrollPaddingX: { properties: ["scrollPaddingLeft", "scrollPaddingRight"] },
   scrollPaddingY: { properties: ["scrollPaddingTop", "scrollPaddingBottom"] },
+  transition: {
+    type: "CSS.Property.Transition | 'all' | 'common' | 'colors' | 'size' | 'position' | 'backgrounds' | 'opacity' | 'shadow'",
+    description: [
+      "The CSS `transition` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition",
+    ],
+  },
+  transitionProperty: {
+    type: "CSS.Property.TransitionProperty | 'all' | 'common' | 'colors' | 'size' | 'position' | 'backgrounds' | 'opacity' | 'shadow'",
+    description: [
+      "The CSS `transition-property` property.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property",
+    ],
+  },
+
+  blur: {
+    description: ["Sets the value of `--blur`."],
+    properties: "--blur",
+  },
+  brightness: {
+    description: ["Sets the value of `--brightness`."],
+    properties: "--brightness",
+  },
+  contrast: {
+    description: ["Sets the value of `--contrast`."],
+    properties: "--contrast",
+  },
+  dropShadow: {
+    description: ["Sets the value of `--drop-shadow`."],
+    properties: "--drop-shadow",
+  },
+  grayscale: {
+    description: ["Sets the value of `--grayscale`."],
+    properties: "--grayscale",
+  },
+  hueRotate: {
+    description: ["Sets the value of `--hue-rotate`."],
+    properties: "--hue-rotate",
+  },
+  invert: {
+    description: ["Sets the value of `--invert`."],
+    properties: "--invert",
+  },
+  saturate: {
+    description: ["Sets the value of `--saturate`."],
+    properties: "--saturate",
+  },
   sepia: {
-    description: ["If `filter=auto`, sets the value of `--sepia`."],
+    description: ["Sets the value of `--sepia`."],
     properties: "--sepia",
   },
+
+  backdropBlur: {
+    description: ["Sets the value of `--backdrop-blur`."],
+    properties: "--backdrop-blur",
+  },
+  backdropBrightness: {
+    description: ["Sets the value of `--backdrop-brightness`."],
+    properties: "--backdrop-brightness",
+  },
+  backdropContrast: {
+    description: ["Sets the value of `--backdrop-contrast`."],
+    properties: "--backdrop-contrast",
+  },
+  backdropDropShadow: {
+    description: ["Sets the value of `--backdrop-drop-shadow`."],
+    properties: "--backdrop-drop-shadow",
+  },
+  backdropGrayscale: {
+    description: ["Sets the value of `--backdrop-grayscale`."],
+    properties: "--backdrop-grayscale",
+  },
+  backdropHueRotate: {
+    description: ["Sets the value of `--backdrop-hue-rotate`."],
+    properties: "--backdrop-hue-rotate",
+  },
+  backdropInvert: {
+    description: ["Sets the value of `--backdrop-invert`."],
+    properties: "--backdrop-invert",
+  },
+  backdropSaturate: {
+    description: ["Sets the value of `--backdrop-saturate`."],
+    properties: "--backdrop-saturate",
+  },
+  backdropSepia: {
+    description: ["Sets the value of `--backdrop-sepia`."],
+    properties: "--backdrop-sepia",
+  },
+
+  rotateX: {
+    description: ["Sets the value of `--rotate-x`."],
+    properties: "--rotate-x",
+  },
+  rotateY: {
+    description: ["Sets the value of `--rotate-y`."],
+    properties: "--rotate-y",
+  },
+  rotateZ: {
+    description: ["Sets the value of `--rotate-z`."],
+    properties: "--rotate-z",
+  },
+  scaleX: {
+    description: ["Sets the value of `--scale-x`."],
+    properties: "--scale-x",
+  },
+  scaleY: {
+    description: ["Sets the value of `--scale-y`."],
+    properties: "--scale-y",
+  },
+  scaleZ: {
+    description: ["Sets the value of `--scale-z`."],
+    properties: "--scale-z",
+  },
   skewX: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-x`.",
-    ],
+    description: ["Sets the value of `--skew-x`."],
     properties: "--skew-x",
   },
   skewY: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--skew-y`.",
-    ],
+    description: ["Sets the value of `--skew-y`."],
     properties: "--skew-y",
   },
   translateX: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-x`.",
-    ],
+    description: ["Sets the value of `--translate-x`."],
     properties: "--translate-x",
   },
   translateY: {
-    description: [
-      "If `transform=auto` or `transform=auto-3d`, sets the value of `--translate-y`.",
-    ],
+    description: ["Sets the value of `--translate-y`."],
     properties: "--translate-y",
+  },
+  translateZ: {
+    description: ["Sets the value of `--translate-z`."],
+    properties: "--translate-z",
   },
 } as const satisfies { [key: string]: StyleConfig }
 
 export const uiProps = {
   apply: {
+    type: `StringLiteral, "apply"`,
     description: [
       "Apply other styles defined in `theme.styles`.",
       "",
@@ -246,10 +229,6 @@ export const uiProps = {
     type: `ColorScheme`,
     description: ["Set color scheme variables."],
   },
-  isTruncated: {
-    type: "boolean",
-    description: ["If `true`, it clamps truncate a text after one line."],
-  },
   lineClamp: {
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
@@ -262,11 +241,14 @@ export const uiProps = {
       WebkitLineClamp: "var(--line-clamp)",
     },
   },
+  truncated: {
+    type: "boolean",
+    description: ["If `true`, it clamps truncate a text after one line."],
+  },
   vars: {
     type: "{ name: string; token?: ThemeToken, value?: Token<any> }[]",
     description: [
       "Set CSS variables.",
-      "@experimental",
       "",
       "@example",
       "```jsx",
@@ -279,42 +261,51 @@ export const uiProps = {
       "```",
     ],
     processSkip: true,
+    variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }
 
 export const atRuleProps = {
+  keyframes: {
+    type: "StringLiteral | CSSObject",
+    description: [
+      "The `@keyframes` of CSS at-rule.",
+      "",
+      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes",
+    ],
+    processSkip: true,
+  },
   _container: {
     type: `{ ${[
       "name?: StringLiteral",
       "query?: StringLiteral",
-      'w?: CSS.Property.Width | number | Theme["sizes"]',
-      'width?: CSS.Property.Width | number | Theme["sizes"]',
-      'minW?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'h?: CSS.Property.Height | number | Theme["sizes"]',
-      'height?: CSS.Property.Height | number | Theme["sizes"]',
-      'minH?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]',
-      'maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]',
+      'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'width?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
+      'minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
+      'maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]',
+      'maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]',
+      'h?: CSS.Property.Height | number | ThemeTokens["sizes"]',
+      'height?: CSS.Property.Height | number | ThemeTokens["sizes"]',
+      'minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
+      'minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
+      'maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
+      'maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
       "aspectRatio?: CSS.Property.AspectRatio",
       "minAspectRatio?: CSS.Property.AspectRatio",
       "maxAspectRatio?: CSS.Property.AspectRatio",
-      'blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]',
-      'minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]',
-      'maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]',
-      'inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]',
-      'minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]',
-      'maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]',
+      'blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]',
+      'minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]',
+      'maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]',
+      'inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]',
+      'minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]',
+      'maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]',
       'orientation?: "portrait" | "landscape" | StringLiteral',
       "css?: CSSObject",
       "[key: string]: any",
     ].join(";")}}[]`,
     description: [
       "The `@container` of CSS at-rule.",
-      "@experimental",
       "",
       "@example",
       "```jsx",
@@ -326,23 +317,24 @@ export const atRuleProps = {
       "```",
     ],
     processSkip: true,
+    variableLength: true,
   },
   _media: {
     type: `{ ${[
       'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
       "query?: StringLiteral",
-      'w?: CSS.Property.Width | number | Theme["sizes"]',
-      'width?: CSS.Property.Width | number | Theme["sizes"]',
-      'minW?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]',
-      'maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]',
-      'h?: CSS.Property.Height | number | Theme["sizes"]',
-      'height?: CSS.Property.Height | number | Theme["sizes"]',
-      'minH?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]',
-      'maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]',
+      'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'width?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
+      'minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
+      'maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]',
+      'maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]',
+      'h?: CSS.Property.Height | number | ThemeTokens["sizes"]',
+      'height?: CSS.Property.Height | number | ThemeTokens["sizes"]',
+      'minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
+      'minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
+      'maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
+      'maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
       'anyHover?: "none" | "hover" | StringLiteral',
       'anyPointer?: "none" | "coarse" | "fine" | StringLiteral',
       "aspectRatio?: CSS.Property.AspectRatio",
@@ -356,12 +348,12 @@ export const atRuleProps = {
       "deviceAspectRatio?: CSS.Property.AspectRatio",
       "minDeviceAspectRatio?: CSS.Property.AspectRatio",
       "maxDeviceAspectRatio?: CSS.Property.AspectRatio",
-      'deviceHeight?: CSS.Property.Height | number | Theme["sizes"]',
-      'minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]',
-      'maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]',
-      'deviceWidth?: CSS.Property.Width | number | Theme["sizes"]',
-      'minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]',
-      'mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]',
+      'deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]',
+      'minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
+      'maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
+      'deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
+      'mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'displayMode?: "browser" | "fullscreen" | "minimal-ui" | "picture-in-picture" | "standalone" | "window-controls-overlay" | StringLiteral',
       'dynamicRange?: "standard" | "high" | StringLiteral',
       'forcedColors?: "none" | "active" | StringLiteral',
@@ -375,7 +367,7 @@ export const atRuleProps = {
       'overflowBlock?: "none" | "scroll" | "paged" | "optional-paged" | StringLiteral',
       'overflowInline?: "none" | "scroll" | StringLiteral',
       'pointer?: "none" | "coarse" | "fine" | StringLiteral',
-      'prefersColorScheme?: "light" | "dark" | StringLiteral',
+      'prefersColorMode?: "light" | "dark" | StringLiteral',
       'prefersContrast?: "no-preference" | "high" | "low" | "custom" | StringLiteral',
       'prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral',
       "resolution?: StringLiteral",
@@ -390,7 +382,6 @@ export const atRuleProps = {
     ].join(";")} }[]`,
     description: [
       "The `@media` of CSS at-rule.",
-      "@experimental",
       "",
       "@example",
       "```jsx",
@@ -402,12 +393,12 @@ export const atRuleProps = {
       "```",
     ],
     processSkip: true,
+    variableLength: true,
   },
   _supports: {
     type: `{${["query?: StringLiteral", "css?: CSSObject"].join(";")}}[]`,
     description: [
       "The `@supports` of CSS at-rule.",
-      "@experimental",
       "",
       "@example",
       "```jsx",
@@ -419,5 +410,6 @@ export const atRuleProps = {
       "```",
     ],
     processSkip: true,
+    variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }

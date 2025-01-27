@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
+import { For } from "../../components/for"
 import { COLOR_SCHEMES, transformSize } from "../../utils"
-import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { Text } from "../text"

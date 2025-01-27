@@ -9,7 +9,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       mb: "2",
       me: "3",
       opacity: 1,
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       _disabled: {
         opacity: 0.4,

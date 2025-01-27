@@ -16,7 +16,7 @@ import type {
   LayerScheme,
   ThemeProps,
   WithoutThemeProps,
-} from "../theme.types"
+} from "../theme"
 import type { HTMLUIProps } from "./component.types"
 import type { Slot, SlotName } from "./create-component"
 import { useRef } from "react"

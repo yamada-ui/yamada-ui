@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import type { Layers, LayerScheme } from "../theme.types"
+import type { Layers, LayerScheme } from "../theme"
 import { runIfFunc } from "../../utils"
 import { DEFAULT_LAYERS } from "../constant"
 

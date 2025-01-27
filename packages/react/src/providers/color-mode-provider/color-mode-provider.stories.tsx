@@ -1,8 +1,8 @@
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
-import { Calendar } from "../../components/calendar"
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
+import { Calendar } from "../../legacy-components/calendar"
 import { useColorMode } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 
@@ -19,7 +19,7 @@ export const Basic = () => {
       color="fg.contrast"
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"
@@ -38,7 +38,7 @@ export const UseHook = () => {
       color={color}
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"

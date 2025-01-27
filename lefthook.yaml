@@ -22,7 +22,7 @@ eslint:
         - examples/**
         - docs/**
       run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
+        pnpm eslint {staged_files} --no-warn-ignored --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
     docs:

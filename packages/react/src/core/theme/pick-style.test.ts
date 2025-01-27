@@ -1,4 +1,4 @@
-import type { ComponentSlotStyle, ComponentStyle } from "../theme.types"
+import type { ComponentSlotStyle, ComponentStyle } from "./index.types"
 import { pickStyle } from "."
 
 describe("pickStyle", () => {

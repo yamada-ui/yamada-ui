@@ -1,6 +1,6 @@
-import type { CSSObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const textStyles: CSSObject = {
+export const textStyles = defineStyles.textStyle({
   outline: {
     color: "colorScheme.outline",
   },
@@ -13,4 +13,4 @@ export const textStyles: CSSObject = {
   surface: {
     color: "colorScheme.fg",
   },
-}
+})

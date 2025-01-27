@@ -5,7 +5,7 @@ import type {
   ComponentSlotStyle,
   ComponentStyle,
   WithoutThemeProps,
-} from "../theme.types"
+} from "../theme"
 import type {
   As,
   Component,

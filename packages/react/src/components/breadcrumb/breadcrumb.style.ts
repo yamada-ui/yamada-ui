@@ -13,7 +13,7 @@ export const breadcrumbStyle = defineComponentSlotStyle({
       outline: "none",
       rounded: "sm",
       textDecoration: "none",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
     },
     list: {

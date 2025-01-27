@@ -27,7 +27,7 @@ import {
   visitEachChild,
   visitNode,
 } from "typescript"
-import { isWriteable, prettier } from "../../utils"
+import { isWriteable, prettier } from "../../utils/index.js"
 
 const ORG_NAME = "yamada-ui"
 const REPO_NAME = "yamada-ui"

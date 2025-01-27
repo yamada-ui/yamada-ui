@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { For } from "../../components/for"
 import { DEFAULT_COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
-import { For } from "../for"
 import { Wrap } from "./"
 
 type Story = StoryFn<typeof Wrap>

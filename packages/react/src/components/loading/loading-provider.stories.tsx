@@ -1,16 +1,11 @@
 import type { FC } from "react"
 import { useCallback, useEffect } from "react"
-import { useTimeout } from "../../hooks/use-timeout"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../tools"
-import { isValidElement } from "../../utils"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 import { Button } from "../button"
 import { Center } from "../center"
 import { Wrap } from "../flex"
-import { Motion } from "../motion"
-import { VStack } from "../stack"
-import { Text } from "../text"
-import { Loading } from "./loading"
 import { useLoading } from "./loading-provider"
 
 export default {
@@ -23,7 +18,7 @@ const wait = async (ms: number) =>
   })
 
 export const Basic = () => {
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     loading: {
       background: {
         duration: 5000,
@@ -54,7 +49,7 @@ export const Basic = () => {
 }
 
 export const UseInitialState = () => {
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     loading: {
       background: {
         icon: {
@@ -78,124 +73,6 @@ export const UseInitialState = () => {
   return (
     <UIProvider config={config}>
       <AsyncApp />
-    </UIProvider>
-  )
-}
-
-export const UseCustomLoading = () => {
-  const config = extendConfig({
-    loading: {
-      custom: {
-        component: ({ duration, initialState, message, onFinish }) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          useTimeout(onFinish, duration)
-
-          return (
-            <Motion
-              sx={{
-                alignItems: "center",
-                bg: "blackAlpha.600",
-                bottom: 0,
-                display: "flex",
-                h: "100vh",
-                justifyContent: "center",
-                left: 0,
-                p: "md",
-                position: "fixed",
-                right: 0,
-                top: 0,
-                w: "100vw",
-                zIndex: 9999,
-              }}
-              animate="animate"
-              exit="exit"
-              initial={!initialState ? "initial" : false}
-              variants={{
-                animate: {
-                  opacity: 1,
-                  transition: {
-                    duration: 0.4,
-                    ease: [0.4, 0, 0.2, 1],
-                  },
-                },
-                exit: {
-                  opacity: 0,
-                  transition: {
-                    duration: 0.4,
-                    ease: [0.4, 0, 1, 1],
-                  },
-                },
-                initial: {
-                  opacity: 0,
-                },
-              }}
-            >
-              <Motion
-                sx={{
-                  alignItems: "center",
-                  bg: ["white", "black"],
-                  boxShadow: ["lg", "dark-lg"],
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "sm",
-                  justifyContent: "center",
-                  maxW: "md",
-                  p: "md",
-                  rounded: "md",
-                }}
-                animate="animate"
-                exit="exit"
-                initial={!initialState ? "initial" : false}
-                variants={{
-                  animate: {
-                    opacity: 1,
-                    scale: 1,
-                    transition: {
-                      duration: 0.4,
-                      ease: [0.4, 0, 0.2, 1],
-                    },
-                  },
-                  exit: {
-                    opacity: 0,
-                    scale: 0.95,
-                    transition: {
-                      duration: 0.4,
-                      ease: [0.4, 0, 1, 1],
-                    },
-                  },
-                  initial: {
-                    opacity: 0,
-                    scale: 0.95,
-                  },
-                }}
-              >
-                <Loading variant="dots" fontSize="6xl" />
-
-                <VStack align="center" gap="sm" mb="md">
-                  <Text>Downloading files…</Text>
-                  {message ? (
-                    isValidElement(message) ? (
-                      message
-                    ) : (
-                      <Text lineClamp={3}>{message}</Text>
-                    )
-                  ) : null}
-                </VStack>
-
-                <Button size="sm" onClick={onFinish}>
-                  Play to background
-                </Button>
-              </Motion>
-            </Motion>
-          )
-        },
-      },
-    },
-  })
-
-  return (
-    <UIProvider config={config}>
-      <CustomApp />
     </UIProvider>
   )
 }
@@ -236,20 +113,6 @@ const AsyncApp: FC = () => {
         <Button onClick={() => page.start()}>Start page loading</Button>
         <Button onClick={() => background.start()}>
           Start background loading
-        </Button>
-      </Wrap>
-    </Center>
-  )
-}
-
-const CustomApp: FC = () => {
-  const { custom } = useLoading()
-
-  return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
-      <Wrap gap="md">
-        <Button onClick={() => custom.start({ duration: 10000 })}>
-          Start custom loading
         </Button>
       </Wrap>
     </Center>

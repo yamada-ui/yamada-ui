@@ -1,6 +1,6 @@
-import type { CSSModifierObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const layerStyles: CSSModifierObject = {
+export const layerStyles = defineStyles.layerStyle({
   active: {
     opacity: 1,
   },
@@ -12,26 +12,22 @@ export const layerStyles: CSSModifierObject = {
     },
   },
   ghost: {
-    base: {
-      bg: "transparent",
-      color: "colorScheme.fg",
-    },
-    hover: {
-      bg: "colorScheme.ghost",
-    },
+    bg: "transparent",
+    color: "colorScheme.fg",
+  },
+  "ghost.hover": {
+    bg: "colorScheme.ghost",
   },
   hover: {
     opacity: 0.8,
   },
   outline: {
-    base: {
-      bg: "transparent",
-      border: "1px solid {colorScheme.outline}",
-      color: "colorScheme.outline",
-    },
-    hover: {
-      bg: "colorScheme.ghost",
-    },
+    bg: "transparent",
+    border: "1px solid {colorScheme.outline}",
+    color: "colorScheme.outline",
+  },
+  "outline.hover": {
+    bg: "colorScheme.ghost",
   },
   readOnly: {
     cursor: "default",
@@ -40,31 +36,25 @@ export const layerStyles: CSSModifierObject = {
     },
   },
   solid: {
-    base: {
-      bg: "colorScheme.solid",
-      color: "colorScheme.contrast",
-    },
-    hover: {
-      bg: "colorScheme.solid/80",
-    },
+    bg: "colorScheme.solid",
+    color: "colorScheme.contrast",
+  },
+  "solid.hover": {
+    bg: "colorScheme.solid/80",
   },
   subtle: {
-    base: {
-      bg: "colorScheme.subtle",
-      color: "colorScheme.fg",
-    },
-    hover: {
-      bg: "colorScheme.muted",
-    },
+    bg: "colorScheme.subtle",
+    color: "colorScheme.fg",
+  },
+  "subtle.hover": {
+    bg: "colorScheme.muted",
   },
   surface: {
-    base: {
-      bg: "colorScheme.subtle",
-      border: "1px solid {colorScheme.muted}",
-      color: "colorScheme.fg",
-    },
-    hover: {
-      bg: "colorScheme.muted",
-    },
+    bg: "colorScheme.subtle",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.fg",
   },
-}
+  "surface.hover": {
+    bg: "colorScheme.muted",
+  },
+})

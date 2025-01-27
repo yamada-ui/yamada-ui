@@ -6,7 +6,9 @@ import { createSlotComponent, ui } from "../../core"
 import { getValidChildren } from "../../utils"
 import { listStyle } from "./list.style"
 
-export interface ListProps extends HTMLUIProps<"ul">, ThemeProps<ListStyle> {
+export interface ListRootProps
+  extends HTMLUIProps<"ul">,
+    ThemeProps<ListStyle> {
   /**
    * The CSS `list-style-position` property.
    */
@@ -17,27 +19,30 @@ export const {
   component,
   PropsContext: ListPropsContext,
   usePropsContext: useListPropsContext,
-  useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<ListProps, ListStyle>("list", listStyle)
+} = createSlotComponent<ListRootProps, ListStyle>("list", listStyle)
 
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
  * @see Docs https://yamada-ui.com/components/data-display/list
  */
-export const List = withProvider(
+export const ListRoot = withProvider(
   ({
+    as: asProp,
     children,
     stylePosition: listStylePosition,
     styleType: listStyleType = "none",
     ...rest
   }) => {
+    const as = asProp ?? (listStyleType == "decimal" ? "ol" : undefined)
+
     const validChildren = getValidChildren(children)
 
     return (
       <ui.ul
+        as={as}
         listStylePosition={listStylePosition}
         listStyleType={listStyleType}
         role="list"
@@ -50,14 +55,6 @@ export const List = withProvider(
   "root",
   { transferProps: ["styleType"] },
 )()
-
-export const DiscList = (props: ListProps) => {
-  return <List as="ul" styleType="disc" {...props} />
-}
-
-export const DecimalList = (props: ListProps) => {
-  return <List as="ol" ms="1.2em" styleType="decimal" {...props} />
-}
 
 export interface ListItemProps extends HTMLUIProps<"li"> {
   icon?: ReactElement<any>

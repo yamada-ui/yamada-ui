@@ -25,7 +25,7 @@ export const listStyle = defineComponentSlotStyle({
       circle: { root: { ms: "1.4em" } },
       decimal: {
         item: { ps: "0.3em" },
-        root: { ms: "1.4em" },
+        root: { ms: "1.2em" },
       },
       disc: { root: { ms: "1.4em" } },
       square: { root: { ms: "1.4em" } },

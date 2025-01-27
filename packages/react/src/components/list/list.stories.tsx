@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { DecimalList, DiscList, List, ListItem } from "."
 import { CheckIcon, CircleCheckIcon } from "../icon"
+import { List } from "./"
 
-type Story = StoryFn<typeof List>
+type Story = StoryFn<typeof List.Root>
 
-const meta: Meta<typeof List> = {
-  component: List,
+const meta: Meta<typeof List.Root> = {
+  component: List.Root,
   title: "Components / List",
 }
 
@@ -13,148 +13,154 @@ export default meta
 
 export const Unstyled: Story = () => {
   return (
-    <List>
-      <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-      <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-      <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-      <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-      <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-    </List>
+    <List.Root>
+      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
+      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+    </List.Root>
   )
 }
 
 export const Unordered: Story = () => {
   return (
-    <DiscList>
-      <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-      <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-      <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-      <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-      <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-    </DiscList>
+    <List.Root styleType="disc">
+      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
+      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+    </List.Root>
   )
 }
 
 export const Ordered: Story = () => {
   return (
-    <DecimalList>
-      <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-      <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-      <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-      <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-      <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-    </DecimalList>
+    <List.Root styleType="decimal">
+      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
+      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+    </List.Root>
   )
 }
 
 export const WithGap: Story = () => {
   return (
-    <List gap="lg">
-      <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-      <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-      <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-      <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-      <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-    </List>
+    <List.Root gap="lg">
+      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
+      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+    </List.Root>
   )
 }
 
 export const WithIcon: Story = () => {
   return (
-    <List>
-      <ListItem icon={<CircleCheckIcon color="green.500" />}>
+    <List.Root>
+      <List.Item icon={<CircleCheckIcon color="green.500" />}>
         よろしければわたしが喜びのダンスを踊りましょうか！
-      </ListItem>
-      <ListItem icon={<CircleCheckIcon color="green.500" />}>
+      </List.Item>
+      <List.Item icon={<CircleCheckIcon color="green.500" />}>
         お命頂だい!!!　とうっ!!!
-      </ListItem>
-      <ListItem icon={<CircleCheckIcon color="green.500" />}>
+      </List.Item>
+      <List.Item icon={<CircleCheckIcon color="green.500" />}>
         う…宇宙一のスピードを誇るオ…オレさまのうしろに……
-      </ListItem>
-      <ListItem icon={<CircleCheckIcon color="green.500" />}>
+      </List.Item>
+      <List.Item icon={<CircleCheckIcon color="green.500" />}>
         オ…オレたちが勝てるわけはなかったはずだ………
-      </ListItem>
-      <ListItem icon={<CheckIcon color="green.500" />}>
+      </List.Item>
+      <List.Item icon={<CheckIcon color="green.500" />}>
         オレは試合場のゴミ拾いみたいなもんかよ…
-      </ListItem>
-    </List>
+      </List.Item>
+    </List.Root>
   )
 }
 
 export const WithMarker: Story = () => {
   return (
-    <List>
-      <ListItem
+    <List.Root>
+      <List.Item
         _marker={{
           content: "'+ '",
         }}
       >
         よろしければわたしが喜びのダンスを踊りましょうか！
-      </ListItem>
-      <ListItem
+      </List.Item>
+      <List.Item
         _marker={{
           content: "'- '",
         }}
       >
         お命頂だい!!!　とうっ!!!
-      </ListItem>
-      <ListItem
+      </List.Item>
+      <List.Item
         _marker={{
           content: "'* '",
         }}
       >
         う…宇宙一のスピードを誇るオ…オレさまのうしろに……
-      </ListItem>
-      <ListItem
+      </List.Item>
+      <List.Item
         _marker={{
           content: "'/ '",
         }}
       >
         オ…オレたちが勝てるわけはなかったはずだ………
-      </ListItem>
-      <ListItem
+      </List.Item>
+      <List.Item
         _marker={{
           content: "'^ '",
         }}
       >
         オレは試合場のゴミ拾いみたいなもんかよ…
-      </ListItem>
-    </List>
+      </List.Item>
+    </List.Root>
   )
 }
 
 export const Others: Story = () => {
   return (
     <>
-      <List styleType="square">
-        <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-        <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-        <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-        <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-        <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-      </List>
-
-      <List styleType="circle">
-        <ListItem>よろしければわたしが喜びのダンスを踊りましょうか！</ListItem>
-        <ListItem>お命頂だい!!!　とうっ!!!</ListItem>
-        <ListItem>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</ListItem>
-        <ListItem>オ…オレたちが勝てるわけはなかったはずだ………</ListItem>
-        <ListItem>オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-      </List>
-
-      <List ms="1.2em" styleType="lower-alpha">
-        <ListItem ps="0.2em">
+      <List.Root styleType="square">
+        <List.Item>
           よろしければわたしが喜びのダンスを踊りましょうか！
-        </ListItem>
-        <ListItem ps="0.2em">お命頂だい!!!　とうっ!!!</ListItem>
-        <ListItem ps="0.2em">
+        </List.Item>
+        <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+        <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+        <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+        <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+      </List.Root>
+
+      <List.Root styleType="circle">
+        <List.Item>
+          よろしければわたしが喜びのダンスを踊りましょうか！
+        </List.Item>
+        <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+        <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
+        <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
+        <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
+      </List.Root>
+
+      <List.Root ms="1.2em" styleType="lower-alpha">
+        <List.Item ps="0.2em">
+          よろしければわたしが喜びのダンスを踊りましょうか！
+        </List.Item>
+        <List.Item ps="0.2em">お命頂だい!!!　とうっ!!!</List.Item>
+        <List.Item ps="0.2em">
           う…宇宙一のスピードを誇るオ…オレさまのうしろに……
-        </ListItem>
-        <ListItem ps="0.2em">
+        </List.Item>
+        <List.Item ps="0.2em">
           オ…オレたちが勝てるわけはなかったはずだ………
-        </ListItem>
-        <ListItem ps="0.2em">オレは試合場のゴミ拾いみたいなもんかよ…</ListItem>
-      </List>
+        </List.Item>
+        <List.Item ps="0.2em">
+          オレは試合場のゴミ拾いみたいなもんかよ…
+        </List.Item>
+      </List.Root>
     </>
   )
 }

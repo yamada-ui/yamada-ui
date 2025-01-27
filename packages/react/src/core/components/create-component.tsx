@@ -44,6 +44,7 @@ export type Slot<Y extends number | string | symbol> =
   | { name: string; slot: [Y, Y] | Y }
   | Y
 
+export type InitialProps<Y extends Dict = Dict> = SuperProps<Y>
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<
@@ -228,7 +229,7 @@ export function createComponent<
     const ProxyComponent = createProxyComponent(el, options)
 
     return function (
-      initialProps?: SuperProps<H>,
+      initialProps?: InitialProps<H>,
       ...superProps: SuperWithoutThemeProps<H, M, R>[]
     ) {
       const Component = (props: H) => {
@@ -401,7 +402,7 @@ export function createSlotComponent<
     if (className) classNameMap.set(slotKey, className)
 
     return function (
-      initialProps?: SuperProps<R>,
+      initialProps?: InitialProps<R>,
       ...superProps: SuperWithoutThemeProps<R, M, T>[]
     ) {
       const Component = (props: R) => {
@@ -455,7 +456,7 @@ export function createSlotComponent<
     if (className) classNameMap.set(slotKey, className)
 
     return function (
-      initialProps?: SuperProps<R>,
+      initialProps?: InitialProps<R>,
       ...superProps: SuperProps<R>[]
     ) {
       const Component = (props: R) => {

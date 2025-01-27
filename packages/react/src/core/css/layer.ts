@@ -18,14 +18,19 @@ export function createLayers(layers: false | Layers = DEFAULT_LAYERS) {
     .map((layer) => layer.name)
   const atRule = `@layer ${names.join(", ")};`
 
+  const getAtRule = (name: LayerScheme) => `@layer ${layers[name].name}`
+
+  const wrap = (name: LayerScheme, style?: (() => Dict) | Dict) => {
+    const atRule = getAtRule(name)
+
+    return { [atRule]: runIfFunc(style) }
+  }
+
   return {
     atRule,
+    getAtRule,
     names,
-    wrap: function (name: LayerScheme, style?: (() => Dict) | Dict) {
-      const atRule = `@layer ${layers[name].name}`
-
-      return { [atRule]: runIfFunc(style) }
-    },
+    wrap,
   }
 }
 

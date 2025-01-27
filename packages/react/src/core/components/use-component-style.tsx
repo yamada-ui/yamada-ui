@@ -32,6 +32,7 @@ import {
   keysFormObject,
   merge,
   omitObject,
+  toArray,
   toKebabCase,
 } from "../../utils"
 import { createQuery } from "../css"
@@ -296,9 +297,7 @@ function omitThemeProps<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
   D extends keyof Y = keyof Y,
->(props: Y, keys: string[] = [], transferProps?: D[]) {
-  let omitKeys = ["size", "variant", ...keys] as (keyof Y)[]
-
+>(props: Y, omitKeys: string[] = [], transferProps?: D[]) {
   if (transferProps)
     omitKeys = omitKeys.filter((key) => !transferProps.includes(key as D))
 
@@ -325,6 +324,29 @@ function wrapStyle<
   }
 }
 
+function getHasAtRuleStyle(css?: CSSObject | CSSObject[]) {
+  return (getAtRule?: CreateLayersReturn["getAtRule"]) => {
+    let hasVariant = false
+    let hasSize = false
+
+    if (!css || !getAtRule) return { hasSize, hasVariant }
+
+    const variantAtRule = getAtRule("variant")
+    const sizeAtRule = getAtRule("size")
+
+    css = toArray(css)
+
+    css.forEach((css) => {
+      const keys = Object.keys(css)
+
+      if (keys.includes(variantAtRule)) hasVariant = true
+      if (keys.includes(sizeAtRule)) hasSize = true
+    })
+
+    return { hasSize, hasVariant }
+  }
+}
+
 interface UseStyleOptions<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
@@ -339,7 +361,7 @@ interface UseStyleOptions<
 }
 
 function useStyle<
-  Y extends HTMLUIProps & ThemeProps = Dict,
+  Y extends HTMLUIProps & ThemeProps<{}> = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
   D extends keyof Y = keyof Y,
   H extends boolean = false,
@@ -354,7 +376,7 @@ function useStyle<
   }: UseStyleOptions<Y, M, D, H> = {},
 ) {
   const { theme } = useTheme()
-  const { wrap } = theme.__layers ?? {}
+  const { getAtRule, wrap } = theme.__layers ?? {}
   const rootColorScheme = useColorSchemeContext()
   const { queries = [] } = theme.__breakpoints ?? {}
   const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
@@ -365,7 +387,10 @@ function useStyle<
 
   props = filterUndefined(props)
 
-  if (componentStyle) {
+  const hasComponentStyle =
+    componentStyle && !!Object.keys(componentStyle).length
+
+  if (hasComponentStyle) {
     const {
       className: customClassName,
       base,
@@ -385,13 +410,17 @@ function useStyle<
       ...props,
     }
 
+    props.variant ??= variant
+    props.size ??= size
     props.colorScheme ??= rootColorScheme ?? defaultColorScheme
 
-    const computedProps = omitThemeProps(
-      props,
-      Object.keys(propVariants ?? {}),
-      transferProps,
-    ) as Y
+    const omitProps = Object.keys(propVariants ?? {})
+    const { hasSize, hasVariant } = getHasAtRuleStyle(props.css)(getAtRule)
+
+    if (variants) omitProps.push("variant")
+    if (sizes) omitProps.push("size")
+
+    const computedProps = omitThemeProps(props, omitProps, transferProps) as Y
 
     computedProps.className = cx(
       getSlotClassName(className ?? customClassName, slot),
@@ -406,13 +435,13 @@ function useStyle<
       style = merge(style, wrapStyle<H, M>("base", baseStyle)(options))
     }
 
-    if (sizes) {
+    if (sizes && !hasSize) {
       const sizeStyle = getModifierStyle<H, M>(size, sizes)(options)
 
       style = merge(style, wrapStyle<H, M>("size", sizeStyle)(options))
     }
 
-    if (variants) {
+    if (variants && !hasVariant) {
       const variantStyle = getModifierStyle<H, M>(variant, variants)(options)
 
       style = merge(style, wrapStyle<H, M>("variant", variantStyle)(options))

@@ -1,6 +1,7 @@
 import { defineSemanticTokens } from "../../core"
 
 export const colorSchemes = defineSemanticTokens.colorSchemes({
+  danger: "red",
   error: "red",
   info: "blue",
   link: "blue",

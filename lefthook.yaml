@@ -12,6 +12,7 @@ pre-commit:
       priority: 2
       run: |
         pnpm lefthook run eslint
+      stage_fixed: true
 
 eslint:
   parallel: true

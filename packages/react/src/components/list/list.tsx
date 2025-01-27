@@ -1,9 +1,9 @@
 import type { ReactElement } from "react"
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { ListStyle } from "./list.style"
-import { cloneElement } from "react"
+import { cloneElement, isValidElement } from "react"
 import { createSlotComponent, ui } from "../../core"
-import { cx, getValidChildren } from "../../utils"
+import { getValidChildren } from "../../utils"
 import { listStyle } from "./list.style"
 
 export interface ListProps extends HTMLUIProps<"ul">, ThemeProps<ListStyle> {
@@ -64,24 +64,29 @@ export interface ListItemProps extends HTMLUIProps<"li"> {
 }
 
 export const ListItem = withContext<"li", ListItemProps>(
-  ({ children, icon, ...rest }) => {
-    const styles = useStyleContext()
+  ({ children, icon, ...rest }) => (
+    <ui.li {...rest}>
+      <ListIcon>{icon}</ListIcon>
 
-    const iconElement = icon
-      ? cloneElement<any>(icon, {
-          ...icon.props,
-          className: cx("ui-list-item__icon", icon.props.className),
-          style: styles.icon,
-          role: "presentation",
-        })
-      : null
-
-    return (
-      <ui.li {...rest}>
-        {iconElement}
-        {children}
-      </ui.li>
-    )
-  },
+      {children}
+    </ui.li>
+  ),
   "item",
+)()
+
+export interface ListIconProps extends HTMLUIProps<"svg"> {}
+
+export const ListIcon = withContext<"svg", ListIconProps>(
+  ({ children, ...rest }) => {
+    if (isValidElement<HTMLProps<"svg">>(children)) {
+      return cloneElement(children, {
+        ...children.props,
+        ...rest,
+        role: "presentation",
+      })
+    } else {
+      return null
+    }
+  },
+  "icon",
 )()

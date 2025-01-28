@@ -12,3 +12,5 @@ export type {
   DataListRootProps as RootProps,
   DataListTermProps as TermProps,
 } from "./data-list"
+export { useDataList } from "./use-data-list"
+export type { UseDataListProps, UseDataListReturn } from "./use-data-list"

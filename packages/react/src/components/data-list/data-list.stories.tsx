@@ -72,7 +72,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
@@ -113,7 +113,7 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
@@ -142,7 +142,7 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithOrientation: Story = () => {
+export const Orientation: Story = () => {
   const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
@@ -167,7 +167,7 @@ export const WithOrientation: Story = () => {
   )
 }
 
-export const UseMultipleTerms: Story = () => {
+export const MultipleTerms: Story = () => {
   const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: ["白石うらら", "清集院桃子"] },
@@ -237,7 +237,7 @@ export const UseMultipleTerms: Story = () => {
   )
 }
 
-export const UseMultipleDescriptions: Story = () => {
+export const MultipleDescriptions: Story = () => {
   const items = useMemo<DataList.RootProps["items"]>(
     () => [
       {

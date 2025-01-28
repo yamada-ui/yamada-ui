@@ -10,24 +10,13 @@ export const tagStyle = defineComponentSlotStyle({
       justifyContent: "center",
       outline: "0",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       _active: {
-        opacity: 1,
-      },
-      _disabled: {
-        opacity: 0.4,
-      },
-      _focusVisible: {
-        bg: "rgba(0, 0, 0, 0.14)",
-        boxShadow: "outline",
+        layerStyle: "active",
       },
       _hover: {
-        opacity: 0.8,
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.4,
-        },
+        layerStyle: "hover",
       },
     },
     content: {
@@ -49,11 +38,23 @@ export const tagStyle = defineComponentSlotStyle({
       rounded: "md",
       userSelect: "none",
       verticalAlign: "top",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
     },
     startIcon: {},
+  },
+
+  props: {
+    /**
+     * If `true`, the tag is disabled.
+     *
+     * @default false
+     */
+    disabled: {
+      true: {
+        closeButton: {
+          layerStyle: "disabled",
+        },
+      },
+    },
   },
 
   variants: {
@@ -86,7 +87,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "xs",
-        lineHeight: "$sizes.6",
+        lineHeight: "{sizes.6}",
         minH: "6",
         minW: "6",
         px: "2",
@@ -98,7 +99,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "sm",
-        lineHeight: "$sizes.7",
+        lineHeight: "{sizes.7}",
         minH: "7",
         minW: "7",
         px: "2",
@@ -110,7 +111,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "md",
-        lineHeight: "$sizes.8",
+        lineHeight: "{sizes.8}",
         minH: "8",
         minW: "8",
         px: "3",
@@ -119,7 +120,6 @@ export const tagStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "md",
     variant: "subtle",
   },

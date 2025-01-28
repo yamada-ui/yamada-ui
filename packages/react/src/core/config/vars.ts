@@ -85,8 +85,8 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
 export function vars(values: any, { theme, ...rest }: TransformOptions) {
   if (!isArray(values)) return values
 
-  return values.reduce<Dict>((prev, { name, token, value, __prefix }) => {
-    name = getVarName(name, __prefix)(theme)
+  return values.reduce<Dict>((prev, { name, token, value }) => {
+    name = getVarName(name)(theme)
 
     prev[name] = replaceValue(token, value)({ theme, ...rest })
 

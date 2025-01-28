@@ -140,7 +140,6 @@ export function merge<Y extends Dict>(
 
 export interface FlattenObjectOptions {
   maxDepth?: number
-  omitKeys?: string[]
   separator?: string
   shouldProcess?: (obj: any) => boolean
 }
@@ -149,23 +148,17 @@ export function flattenObject<Y extends Dict>(
   obj: any,
   {
     maxDepth = Infinity,
-    omitKeys = [],
     separator = ".",
-    shouldProcess,
+    shouldProcess = () => true,
   }: FlattenObjectOptions = {},
 ): Y {
-  if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
+  if (!isObject(obj) && !isArray(obj)) return obj
 
   return Object.entries(obj).reduce<any>((result, [key, value]) => {
-    if (
-      isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys.includes(key)) &&
-      (!shouldProcess || shouldProcess(value))
-    ) {
+    if (isObject(value) && shouldProcess(value) && maxDepth > 1) {
       Object.entries(
         flattenObject(value, {
           maxDepth: maxDepth - 1,
-          omitKeys,
           separator,
           shouldProcess,
         }),

@@ -25,6 +25,7 @@ export const generateAtRule =
           minHeight,
           minW,
           minWidth,
+          prefersColorMode,
           query,
           w,
           width,
@@ -45,6 +46,7 @@ export const generateAtRule =
             maxWidth,
             minHeight,
             minWidth,
+            prefersColorScheme: prefersColorMode,
             width,
             ...rest,
           })

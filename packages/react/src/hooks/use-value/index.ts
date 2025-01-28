@@ -3,7 +3,7 @@ import type {
   ColorModeArray,
   ResponsiveObject,
   StyledTheme,
-  Theme,
+  ThemeTokens,
 } from "../../core"
 import { useMemo } from "react"
 import {
@@ -36,7 +36,7 @@ export const getValue =
   (
     theme: StyledTheme,
     colorMode: ColorMode,
-    breakpoint: Theme["breakpoints"],
+    breakpoint: ThemeTokens["breakpoints"],
   ): T => {
     if (isObject<ResponsiveObject<T>>(value)) {
       const computedValue = getBreakpointValue(value)(theme, breakpoint)

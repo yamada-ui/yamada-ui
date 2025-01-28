@@ -42,7 +42,7 @@ export const Icon = withContext("svg")(
 
     return {
       css,
-      boxSize: "$boxSize",
+      boxSize: "{boxSize}",
       ...rest,
     }
   },

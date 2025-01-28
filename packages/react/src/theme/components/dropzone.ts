@@ -15,7 +15,7 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
       p: "md",
       position: "relative",
       rounded: "md",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       w: "100%",
       _accept: {

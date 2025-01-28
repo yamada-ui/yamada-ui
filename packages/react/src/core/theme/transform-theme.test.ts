@@ -1,4 +1,4 @@
-import type { ThemeConfig, UsageTheme } from "../theme.types"
+import type { ThemeConfig, UsageTheme } from "./index.types"
 import { transformTheme } from "."
 import { TONES } from "../../utils"
 import { pseudos } from "../pseudos"
@@ -127,7 +127,7 @@ describe("transformTheme", () => {
         "linear(to-r, green.200, green.500)",
         "linear(to-r, green.100, green.300)",
       ],
-      orange: "linear(to-r, $colors.orange.200, $yamada)",
+      orange: "linear(to-r, {colors.orange.200}, {yamada})",
       red: [
         {
           base: "linear(to-r, red.200, red.500)",
@@ -230,7 +230,7 @@ describe("transformTheme", () => {
       },
       red: {
         colors: {
-          border: ["$colors.red.500", "pink"],
+          border: ["{colors.red.500}", "pink"],
         },
       },
     },
@@ -252,7 +252,7 @@ describe("transformTheme", () => {
   }
 
   test("applies responsive theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["spaces.1"]).toStrictEqual({
       ref: "var(--ui-spaces-1)",
       var: "--ui-spaces-1",
@@ -305,7 +305,7 @@ describe("transformTheme", () => {
   })
 
   test("applies color mode theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["colors.border"]).toStrictEqual({
       ref: "var(--ui-colors-border)",
       var: "--ui-colors-border",
@@ -315,7 +315,7 @@ describe("transformTheme", () => {
   })
 
   test("applies responsive and color mode theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["borders.md"]).toStrictEqual({
       ref: "var(--ui-borders-md)",
       var: "--ui-borders-md",
@@ -339,7 +339,7 @@ describe("transformTheme", () => {
   })
 
   test("applies semantic theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["spaces.sm"]).toStrictEqual({
       ref: "var(--ui-spaces-sm)",
       var: "--ui-spaces-sm",
@@ -413,7 +413,7 @@ describe("transformTheme", () => {
   })
 
   test("applies gradient theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["gradients.blue"]).toStrictEqual({
       ref: "var(--ui-gradients-blue)",
       var: "--ui-gradients-blue",
@@ -476,7 +476,7 @@ describe("transformTheme", () => {
   })
 
   test("applies interpolation theme token", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["gradients.orange"]).toStrictEqual({
       ref: "var(--ui-gradients-orange)",
       var: "--ui-gradients-orange",
@@ -487,7 +487,7 @@ describe("transformTheme", () => {
   })
 
   test("applies animation theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
     expect(__cssMap["animations.gradient"]).toStrictEqual({
       ref: "var(--ui-animations-gradient)",
       var: "--ui-animations-gradient",
@@ -525,7 +525,7 @@ describe("transformTheme", () => {
   })
 
   test("applies nested theme schemes correctly", () => {
-    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    const { __cssMap = {}, __cssVars = {} } = transformTheme(theme, config)
 
     expect(__cssVars).toHaveProperty(themeQueries.red)
     expect(__cssVars).toHaveProperty(themeQueries.blue)

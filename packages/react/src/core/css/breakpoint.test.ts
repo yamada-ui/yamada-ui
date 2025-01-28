@@ -1,4 +1,4 @@
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme } from "../theme"
 import { transformTheme } from "../theme"
 import { getMinMaxQuery } from "./breakpoint"
 

@@ -42,12 +42,10 @@ export const SimpleGrid = withContext(Grid)(
   undefined,
   ({ columns, minChildWidth, ...rest }) => {
     const templateColumns = useMemo(() => {
-      console.log("run")
-
       if (minChildWidth) {
         return replaceObject(minChildWidth, (value) => {
           return value != null
-            ? `repeat(auto-fit, minmax($sizes.${value}, 1fr))`
+            ? `repeat(auto-fit, minmax({sizes.${value}}, 1fr))`
             : undefined
         })
       } else {

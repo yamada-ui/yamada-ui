@@ -138,6 +138,17 @@ export const Transparentize = () => {
   return (
     <>
       <Center
+        bg="blue.500/50"
+        color="white"
+        height="2xs"
+        p="md"
+        rounded="md"
+        w="full"
+      >
+        Transparentize color
+      </Center>
+
+      <Center
         bg="transparentize(red.500, 50%)"
         color="white"
         height="2xs"

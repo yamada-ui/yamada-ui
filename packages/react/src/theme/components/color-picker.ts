@@ -21,7 +21,7 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
         pointerEvents: "auto",
         py: "1",
         rounded: "md",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         w: "6",
         _disabled: {

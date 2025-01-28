@@ -1,6 +1,6 @@
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const fontSizes: ThemeTokens = {
+export const fontSizes = defineTokens.fontSizes({
   "2xs": "0.625rem",
   xs: "0.75rem",
   sm: "0.875rem",
@@ -15,4 +15,4 @@ export const fontSizes: ThemeTokens = {
   "7xl": "3.75rem",
   "8xl": "4.5rem",
   "9xl": "6rem",
-}
+})

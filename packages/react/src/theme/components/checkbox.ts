@@ -10,7 +10,7 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
       border: "2px solid",
       borderColor: "inherit",
       color: ["white", "black"],
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "box-shadow",
       _checked: {
         bg: [`${c}.500`, `${c}.600`],

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
+import { For } from "../../components/for"
 import { COLOR_SCHEMES } from "../../utils"
-import { For } from "../for"
 import { Blockquote } from "./"
 
 type Story = StoryFn<typeof Blockquote.Root>

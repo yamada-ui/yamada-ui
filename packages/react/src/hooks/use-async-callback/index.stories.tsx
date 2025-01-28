@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react"
 import type { FC } from "react"
 import { Button } from "../../components/button"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../tools"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 import { useAsyncCallback } from "./"
 
 const meta: Meta = {
@@ -45,7 +46,7 @@ export const WithLoading = () => {
 }
 
 export const WithConfig = () => {
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     loading: {
       defaultComponent: "page",
     },

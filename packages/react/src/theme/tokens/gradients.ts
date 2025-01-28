@@ -1,3 +1,3 @@
-import type { ThemeTokens } from "../../core"
+import { defineTokens } from "../../core"
 
-export const gradients: ThemeTokens = {}
+export const gradients = defineTokens.gradients({})

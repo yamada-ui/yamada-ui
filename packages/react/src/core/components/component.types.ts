@@ -1,7 +1,7 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
 import type { CSSModifierObject, CSSPropObject, CSSProps } from "../css"
-import type { ComponentStyle, StyledTheme } from "../theme.types"
+import type { ComponentStyle, StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
@@ -38,7 +38,7 @@ export interface UIProps extends CSSProps {
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type InterpolationProps = {
-  theme: StyledTheme
+  theme: StyledTheme<UsageTheme>
 } & CSSProps
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = M &

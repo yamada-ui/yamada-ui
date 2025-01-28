@@ -1,8 +1,8 @@
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
-import { Calendar } from "../../components/calendar"
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
+import { Calendar } from "../../legacy-components/calendar"
 import { useColorMode } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 
@@ -15,11 +15,11 @@ export const Basic = () => {
 
   return (
     <Box
-      bg={["blackAlpha.800", "whiteAlpha.800"]}
-      color={["whiteAlpha.800", "blackAlpha.800"]}
+      bg="bg.contrast"
+      color="fg.contrast"
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"
@@ -29,8 +29,8 @@ export const Basic = () => {
 
 export const UseHook = () => {
   const { colorMode } = useColorMode()
-  const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
-  const color = useColorModeValue("whiteAlpha.800", "blackAlpha.800")
+  const bg = useColorModeValue("black", "white")
+  const color = useColorModeValue("white", "black")
 
   return (
     <Box
@@ -38,7 +38,7 @@ export const UseHook = () => {
       color={color}
       p="md"
       rounded="md"
-      transitionDuration="normal"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current colorMode is "{colorMode}"

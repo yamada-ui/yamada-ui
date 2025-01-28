@@ -1,5 +1,5 @@
-import type { StyledTheme } from "../theme.types"
-import type { CSSObject, CSSObjectOrFunc } from "./css.types"
+import type { StyledTheme } from "../theme"
+import type { CSSObject, CSSObjectOrFunc } from "./index.types"
 import { css as emotionCSS } from "@emotion/css"
 import { useMemo } from "react"
 import { useTheme } from "../../providers/theme-provider"

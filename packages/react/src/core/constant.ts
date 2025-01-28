@@ -1,4 +1,4 @@
-import type { Layers } from "./theme.types"
+import type { Layers } from "./theme"
 
 export const DEFAULT_VAR_PREFIX = "ui"
 export const DEFAULT_LOCALE = "en-US"

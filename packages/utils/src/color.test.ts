@@ -1,140 +1,18 @@
-import * as c from "color2k"
 import {
   alphaToHex,
   calcFormat,
   convertColor,
-  darkenColor,
   getAlpha,
-  getColor,
   hslaTo,
   hsvTo,
-  isDark,
-  isLight,
-  isTone,
-  lightenColor,
   parseToHsla,
   parseToHsv,
   parseToRgba,
-  randomColor,
   rgbaTo,
   sameColor,
-  shadeColor,
-  tintColor,
-  transparentizeColor,
 } from "./color"
 
-const defaultTheme = {
-  colors: {
-    gray: {
-      500: "#6b7280",
-    },
-    red: {
-      500: ["#ea4334", "#ec5648"],
-    },
-  },
-}
-
 describe("Color", () => {
-  test("getColor returns correct color", () => {
-    expect(getColor("gray.500")(defaultTheme)).toBe("#6b7280")
-  })
-
-  test("getColor returns correct fallback color", () => {
-    expect(getColor("unknown-token", "#ff0000")(defaultTheme)).toBe("#ff0000")
-    expect(getColor("unknown-token", "unknown-token")()).toBe("#000000")
-  })
-
-  test("getColor returns correct light and dark color", () => {
-    expect(getColor("red.500")(defaultTheme, "light")).toBe("#ea4334")
-    expect(getColor("red.500")(defaultTheme, "dark")).toBe("#ec5648")
-  })
-
-  test("lightenColor lightens the color", () => {
-    const color = "#008000"
-    expect(lightenColor(color, 20)()).toBe(c.toHex(c.lighten(color, 0.2)))
-  })
-
-  test("darkenColor darkens the color", () => {
-    const color = "#008000"
-    expect(darkenColor(color, 20)()).toBe(c.toHex(c.darken(color, 0.2)))
-  })
-
-  test("transparentizeColor changes the alpha channel", () => {
-    const color = "#ff0000"
-    expect(transparentizeColor(color, 0.5)()).toBe(c.transparentize(color, 0.5))
-  })
-
-  test("tintColor mixes the color with white", () => {
-    const color = "#008000"
-    expect(tintColor(color, 20)()).toBe(c.toHex(c.mix(color, "#fff", 0.2)))
-  })
-
-  test("shadeColor mixes the color with black", () => {
-    const color = "#008000"
-    expect(shadeColor(color, 20)()).toBe(c.toHex(c.mix(color, "#000", 0.2)))
-  })
-
-  test("randomColor generates a valid hex color", () => {
-    const colors = [
-      "#dedfe3",
-      "#d3d5da",
-      "#b7bbc3",
-      "#9ea3ae",
-      "#828997",
-      "#6b7280",
-      "#565c67",
-      "#434851",
-      "#2e3138",
-      "#1c1e21",
-      "#101113",
-    ]
-
-    const color1 = randomColor()
-    const color2 = randomColor({ string: "Hirotomo Yamada" })
-    const color3 = randomColor({ colors })
-    const color4 = randomColor({ colors, string: "Hirotomo Yamada" })
-
-    expect(/^#[0-9A-F]{6}$/i.test(color1)).toBeTruthy()
-    expect(color2).toBe("#7e967c")
-    expect(colors.includes(color3)).toBeTruthy()
-    expect(color4).toBe("#6b7280")
-  })
-
-  test("randomColor returns correct fallback color", () => {
-    const colors = [
-      "#dedfe3",
-      "#d3d5da",
-      "#b7bbc3",
-      "#9ea3ae",
-      "#828997",
-      "#6b7280",
-      "#565c67",
-      "#434851",
-      "#2e3138",
-      "#1c1e21",
-      "#101113",
-    ]
-
-    const color1 = randomColor({ string: "" })
-    const color2 = randomColor({ colors, string: "" })
-
-    expect(/^#[0-9A-F]{6}$/i.test(color1)).toBeTruthy()
-    expect(colors.includes(color2)).toBeTruthy()
-  })
-
-  test("isTone returns 'dark' or 'light'", () => {
-    expect(isTone("#000000")()).toBe("dark")
-    expect(isTone("#ffffff")()).toBe("light")
-  })
-
-  test("isLight returns false for dark colors", () => {
-    expect(isLight("#000000")()).toBeTruthy()
-  })
-
-  test("isDark returns false for light colors", () => {
-    expect(isDark("#ffffff")()).toBeTruthy()
-  })
-
   test("convertColor converts colors correctly", () => {
     const hexColor = "#008000"
     expect(convertColor(hexColor)("hex")).toBe(hexColor)

@@ -1,5 +1,6 @@
 import type {
   CSSProps,
+  InitialProps,
   SuperWithoutThemeProps,
   ThemeProps,
   WithoutThemeProps,
@@ -19,6 +20,10 @@ export type LoadingScheme =
   | "oval"
   | "puff"
   | "rings"
+
+const initialProps: InitialProps<LoadingProps> = {
+  "data-loading": "",
+}
 
 const superProps: SuperWithoutThemeProps<LoadingProps, LoadingStyle> = ({
   css,
@@ -158,7 +163,7 @@ export const LoadingGrid = withContext<"svg", LoadingGridProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingAudioProps extends LoadingProps {}
 
@@ -213,7 +218,7 @@ export const LoadingAudio = withContext<"svg", LoadingAudioProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingDotsProps extends LoadingProps {}
 
@@ -290,7 +295,7 @@ export const LoadingDots = withContext<"svg", LoadingDotsProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingPuffProps extends LoadingProps {}
 
@@ -347,7 +352,7 @@ export const LoadingPuff = withContext<"svg", LoadingPuffProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingRingsProps extends LoadingProps {}
 
@@ -429,7 +434,7 @@ export const LoadingRings = withContext<"svg", LoadingRingsProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingCirclesProps extends LoadingProps {}
 
@@ -566,7 +571,7 @@ export const LoadingCircles = withContext<"svg", LoadingCirclesProps>(
       </Icon>
     )
   },
-)(undefined, superProps)
+)(initialProps, superProps)
 
 export interface LoadingOvalProps extends LoadingProps {}
 
@@ -578,7 +583,7 @@ export const LoadingOval = withContext<"svg", LoadingOvalProps>(
           <g strokeWidth="2" transform="translate(1 1)">
             <ui.circle
               {...(secondaryColor
-                ? { stroke: "$secondaryColor" }
+                ? { stroke: "{secondaryColor}" }
                 : { strokeOpacity: ".5" })}
               cx="18"
               cy="18"
@@ -599,7 +604,7 @@ export const LoadingOval = withContext<"svg", LoadingOvalProps>(
       </Icon>
     )
   },
-)(undefined, ({ secondaryColor, ...props }) => {
+)(initialProps, ({ secondaryColor, ...props }) => {
   const { vars = [], ...rest } = superProps(props)
 
   if (secondaryColor)

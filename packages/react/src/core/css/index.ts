@@ -1,6 +1,6 @@
 export * from "./breakpoint"
 export * from "./css"
-export type * from "./css.types"
+export type * from "./index.types"
 export * from "./layer"
 export * from "./merge-css"
 export * from "./use-css"

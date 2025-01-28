@@ -1,6 +1,6 @@
 import type { MockInstance } from "vitest"
 import type { Dict } from "../../utils"
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme } from "../theme"
 import { transformTheme } from "../theme"
 import { css } from "./css"
 
@@ -312,8 +312,8 @@ describe("css", () => {
 
   test("returns interpolation", () => {
     const result = css({
-      m: "$yamada",
-      p: "$spaces.4 $spaces.4",
+      m: "{yamada}",
+      p: "{spaces.4} {spaces.4}",
     })(theme)
 
     expect(result).toStrictEqual({

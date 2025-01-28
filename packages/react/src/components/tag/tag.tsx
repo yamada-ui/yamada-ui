@@ -12,12 +12,6 @@ export interface TagContext extends Pick<TagProps, "disabled"> {}
 
 export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
   /**
-   * If `true`, the tag is disabled.
-   *
-   * @default false
-   */
-  disabled?: boolean
-  /**
    * Icon to be displayed to the end of the tag.
    */
   endIcon?: ReactNode
@@ -57,7 +51,7 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/data-display/tag
  */
-export const Tag = withProvider<"span", TagProps>(
+export const Tag = withProvider(
   ({
     children,
     disabled,
@@ -96,6 +90,7 @@ export const Tag = withProvider<"span", TagProps>(
     )
   },
   "root",
+  { transferProps: ["disabled"] },
 )()
 
 export interface TagContentProps extends HTMLUIProps<"span"> {}

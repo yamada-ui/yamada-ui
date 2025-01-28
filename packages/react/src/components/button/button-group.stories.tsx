@@ -3,6 +3,7 @@ import { PlusIcon } from "../icon"
 import { Button } from "./button"
 import { ButtonGroup } from "./button-group"
 import { IconButton } from "./icon-button"
+
 type Story = StoryFn<typeof ButtonGroup>
 
 const meta: Meta<typeof ButtonGroup> = {
@@ -17,7 +18,7 @@ export const Basic: Story = () => {
     <>
       <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<PlusIcon />} />
+        <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

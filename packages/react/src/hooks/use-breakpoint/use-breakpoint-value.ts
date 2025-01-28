@@ -1,4 +1,4 @@
-import type { Theme } from "../../core"
+import type { ThemeTokens, UsageTheme } from "../../core"
 import type { StyledTheme } from "../../core"
 import type { ResponsiveObject } from "../../core"
 import { useMemo } from "react"
@@ -23,7 +23,10 @@ export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
 
 export const getBreakpointValue =
   <T>(values: ResponsiveObject<T> = {}) =>
-  (theme: StyledTheme | undefined, breakpoint: Theme["breakpoints"]): T => {
+  (
+    theme: StyledTheme<UsageTheme> | undefined,
+    breakpoint: ThemeTokens["breakpoints"],
+  ): T => {
     if (!theme) {
       console.warn("getBreakpointValue: `theme` is undefined.")
     }

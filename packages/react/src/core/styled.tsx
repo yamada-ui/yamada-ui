@@ -15,7 +15,7 @@ import type {
   CSSPropObject,
   CSSProps,
 } from "./css"
-import type { ColorScheme } from "./theme.types"
+import type { ColorScheme } from "./theme"
 import createStyled from "@emotion/styled"
 import {
   createContext,

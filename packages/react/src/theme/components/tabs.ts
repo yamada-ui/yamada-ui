@@ -16,7 +16,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       outline: "0",
       overflow: "hidden",
       position: "relative",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       whiteSpace: "nowrap",
       _disabled: {

@@ -28,7 +28,7 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         p: "1",
         rounded: "md",
         textAlign: "inherit",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         w: "full",
         _focus: {
@@ -54,7 +54,7 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
       p: "1",
       rounded: "md",
       textAlign: "inherit",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       whiteSpace: "pre-line",
     },
@@ -81,7 +81,7 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         p: "1",
         rounded: "md",
         textAlign: "inherit",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         w: "full",
         _focus: {

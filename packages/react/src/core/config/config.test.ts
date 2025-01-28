@@ -1,4 +1,4 @@
-import type { StyledTheme } from "../theme.types"
+import type { StyledTheme } from "../theme"
 import { css } from "../css"
 import { transformTheme } from "../theme"
 import { animation } from "./animation"
@@ -6,7 +6,7 @@ import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { gradient } from "./gradient"
 import { transforms } from "./index"
-import { keyframes, mode, pipe } from "./utils"
+import { pipe } from "./utils"
 
 const theme = transformTheme(
   {
@@ -214,12 +214,12 @@ const theme = transformTheme(
     },
     transitions: {
       duration: {
-        "ultra-fast": "50ms",
         faster: "100ms",
         fast: "150ms",
         normal: "200ms",
         slow: "300ms",
         slower: "400ms",
+        "ultra-fast": "50ms",
         "ultra-slow": "500ms",
       },
 
@@ -308,8 +308,8 @@ describe("transforms", () => {
     expect(result).toBe("50%")
   })
 
-  test("isTruncated transform", () => {
-    const result = transforms.isTruncated(true)
+  test("truncated transform", () => {
+    const result = transforms.truncated(true)
     expect(result).toStrictEqual({
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -353,9 +353,9 @@ describe("transforms", () => {
   })
 
   test("filter transform", () => {
-    const result1 = transforms.filter("filter")("blur(5px)", { css, theme })
-    const result2 = transforms.filter("filter")("auto", { css, theme })
-    const result3 = transforms.filter("backdrop")("auto", { css, theme })
+    const result1 = transforms.filter()("blur(5px)", { css, theme })
+    const result2 = transforms.filter()("auto", { css, theme })
+    const result3 = transforms.filter("backdropFilter")("auto", { css, theme })
     expect(result1).toBe("blur(5px)")
     expect(result2).toBe(
       "var(--ui-blur, /*!*/ /*!*/) var(--ui-brightness, /*!*/ /*!*/) var(--ui-contrast, /*!*/ /*!*/) var(--ui-drop-shadow, /*!*/ /*!*/) var(--ui-grayscale, /*!*/ /*!*/) var(--ui-hue-rotate, /*!*/ /*!*/) var(--ui-invert, /*!*/ /*!*/) var(--ui-opacity, /*!*/ /*!*/) var(--ui-saturate, /*!*/ /*!*/) var(--ui-sepia, /*!*/ /*!*/)",
@@ -400,30 +400,6 @@ describe("transforms", () => {
     expect(result).toStrictEqual({
       "@supports  (display: grid)": { display: "grid" },
     })
-  })
-})
-
-describe("utils", () => {
-  test("mode", () => {
-    const result1 = mode("lightValue", "darkValue")("light")
-    const result2 = mode("lightValue", "darkValue")("dark")
-    expect(result1).toBe("lightValue")
-    expect(result2).toBe("darkValue")
-  })
-
-  test("keyframes", () => {
-    const { name, styles } = keyframes({
-      "0%": {
-        transform: "translateX(400%)",
-      },
-      "100%": {
-        transform: "translateX(0%)",
-      },
-    })
-    expect(name).toMatch(/animation-.*/)
-    expect(styles).toMatch(
-      /@keyframes animation-.*\{0%\{transform:translateX\(400%\);\}100%\{transform:translateX\(0%\);\}\}/,
-    )
   })
 })
 

@@ -21,7 +21,7 @@ export const PasswordInput: ComponentMultiStyle<"PasswordInput"> =
         rounded: "md",
         top: "50%",
         transform: "translateY(-50%)",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         zIndex: "yamcha",
         _disabled: {
@@ -61,7 +61,7 @@ export const PasswordInput: ComponentMultiStyle<"PasswordInput"> =
       strengthMeterIndicators: {
         display: "flex",
         gap: "sm",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         w: "full",
       },

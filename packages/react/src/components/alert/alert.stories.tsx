@@ -1,8 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { noop } from "../../utils"
 import { Box } from "../box"
-import { CloseButton } from "../close-button"
+// import { CloseButton } from "../close-button"
 import { Alert } from "./"
 
 type Story = StoryFn<typeof Alert.Root>
@@ -177,7 +176,7 @@ export const CustomLayout: Story = () => {
             か…完全体に………完全体になれさえすれば………！！！
           </Alert.Description>
         </Box>
-        <CloseButton position="absolute" right={2} top={2} onClick={noop} />
+        {/* <CloseButton position="absolute" right={2} top={2} onClick={noop} /> */}
       </Alert.Root>
     </>
   )

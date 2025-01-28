@@ -1,13 +1,13 @@
 import { render, screen } from "../../../test"
-import { Container } from "./container"
+import { Container } from "./"
 
 describe("<Container />", () => {
   test("renders container correctly", () => {
-    render(<Container>Container</Container>)
+    render(<Container.Root>Container</Container.Root>)
   })
 
   test("centerContent - prop works correctly", () => {
-    render(<Container centerContent>Container</Container>)
+    render(<Container.Root centerContent>Container</Container.Root>)
 
     expect(screen.getByText("Container")).toHaveStyle({ alignItems: "center" })
   })

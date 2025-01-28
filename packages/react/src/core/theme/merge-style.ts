@@ -1,5 +1,5 @@
 import type { Union } from "../../utils"
-import type { ComponentSlotStyle, ComponentStyle } from "../theme.types"
+import type { ComponentSlotStyle, ComponentStyle } from "./index.types"
 import { isObject, merge, omitObject, pickObject } from "../../utils"
 
 type MergeStyleOptions = Omit<Partial<FilterStyleOptions>, "slot">

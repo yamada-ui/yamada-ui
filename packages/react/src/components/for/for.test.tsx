@@ -1,5 +1,5 @@
+import { For } from "."
 import { a11y, render, screen } from "../../../test"
-import { For } from "./"
 
 describe("<For />", () => {
   test("For renders correctly", async () => {

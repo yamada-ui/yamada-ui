@@ -7,7 +7,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       appearance: "none",
       display: "inline-flex",
       outline: 0,
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
     },
     command: {

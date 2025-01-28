@@ -1,8 +1,8 @@
 import type { Dict } from "../../utils"
 import type { StyleConfig } from "../config"
 import type { StyleProperty } from "../styles"
-import type { StyledTheme } from "../theme.types"
-import type { CSSObject, CSSProps } from "./css.types"
+import type { StyledTheme, UsageTheme } from "../theme"
+import type { CSSObject, CSSProps } from "./index.types"
 import { useMemo } from "react"
 import { useTheme } from "../../providers/theme-provider"
 import {
@@ -45,7 +45,7 @@ export const createVars =
     keys: M[] | readonly M[],
     { format = defaultFormat, transform = false }: CreateVarsOptions<M> = {},
   ) =>
-  (theme: StyledTheme): [Variable[], { [key in M]?: string }] => {
+  (theme: StyledTheme<UsageTheme>): [Variable[], { [key in M]?: string }] => {
     const map = new Map<M, Variable>()
     const result: { [key in M]?: string } = {}
 

@@ -23,25 +23,30 @@ function transformAnimationValue(value: Dict) {
   }, {})
 }
 
+export function insertKeyframes(value: any) {
+  const { name, styles } = emotionKeyframes(value)
+
+  styleSheet?.insert(styles)
+
+  return name
+}
+
 export function animation(value: any, { css, theme }: TransformOptions) {
   if (value == null || globalValues.has(value)) return value
 
   if (isObject(value)) {
     const {
       animationDuration = "0s",
+      animationName,
       animationTimingFunction = "ease",
       delay = "0s",
       direction = "normal",
       fillMode = "none",
       iterationCount = "1",
-      keyframes,
       playState = "running",
     } = css?.(transformAnimationValue(value))(theme) ?? {}
-    const { name, styles } = emotionKeyframes(keyframes)
 
-    styleSheet?.insert(styles)
-
-    return `${name} ${animationDuration} ${animationTimingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
+    return `${animationName} ${animationDuration} ${animationTimingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   } else if (value.includes(",")) {
     value = value
       .split(",")
@@ -59,5 +64,19 @@ export function animation(value: any, { css, theme }: TransformOptions) {
     value = tokenToVar("animations", value)(theme)
 
     return value
+  }
+}
+
+export function keyframes(value: any, { css, theme }: TransformOptions) {
+  if (value == null) return value
+
+  if (isObject(value)) {
+    value = css?.(value)(theme)
+
+    const name = insertKeyframes(value)
+
+    return { animationName: name }
+  } else {
+    return { animationName: value }
   }
 }

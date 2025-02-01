@@ -1,6 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import { PropsTable } from "../../../storybook/components"
 import { Wrap } from "../flex"
-import { MinusIcon, MoonIcon, PlusIcon, SunIcon } from "../icon"
+import { BoldIcon, MinusIcon, MoonIcon, PlusIcon, SunIcon } from "../icon"
 import { IconButton } from "./icon-button"
 
 type Story = StoryFn<typeof IconButton>
@@ -13,32 +15,125 @@ const meta: Meta<typeof IconButton> = {
 export default meta
 
 export const Basic: Story = () => {
+  return <IconButton aria-label="Plus" icon={<PlusIcon />} />
+}
+
+export const Variant: Story = () => {
+  return (
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline", "ghost"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <IconButton
+            key={key}
+            colorScheme={row}
+            variant={column}
+            aria-label="Plus"
+            icon={<PlusIcon />}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <IconButton
+            key={key}
+            colorScheme={row}
+            size={column}
+            aria-label="Plus"
+            icon={<PlusIcon />}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const FullRounded: Story = () => {
   return (
     <Wrap gap="md">
       <IconButton
-        colorScheme="primary"
+        variant="solid"
         aria-label="Plus"
-        icon={<PlusIcon fontSize="2xl" />}
+        fullRounded
+        icon={<PlusIcon />}
       />
 
       <IconButton
-        colorScheme="secondary"
+        variant="subtle"
         aria-label="Minus"
-        icon={<MinusIcon fontSize="2xl" />}
+        fullRounded
+        icon={<MinusIcon />}
       />
 
       <IconButton
-        colorScheme="warning"
-        size="lg"
+        variant="surface"
+        aria-label="Bold"
+        fullRounded
+        icon={<BoldIcon />}
+      />
+
+      <IconButton
+        variant="outline"
         aria-label="Light"
-        icon={<SunIcon fontSize="2xl" />}
+        fullRounded
+        icon={<SunIcon />}
       />
 
       <IconButton
-        colorScheme="danger"
-        size="lg"
+        variant="ghost"
         aria-label="Dark"
-        icon={<MoonIcon fontSize="2xl" />}
+        fullRounded
+        icon={<MoonIcon />}
+      />
+    </Wrap>
+  )
+}
+
+export const Disabled: Story = () => {
+  return (
+    <Wrap gap="md">
+      <IconButton
+        variant="solid"
+        aria-label="Plus"
+        disabled
+        icon={<PlusIcon />}
+      />
+
+      <IconButton
+        variant="subtle"
+        aria-label="Minus"
+        disabled
+        icon={<MinusIcon />}
+      />
+
+      <IconButton
+        variant="surface"
+        aria-label="Bold"
+        disabled
+        icon={<BoldIcon />}
+      />
+
+      <IconButton
+        variant="outline"
+        aria-label="Light"
+        disabled
+        icon={<SunIcon />}
+      />
+
+      <IconButton
+        variant="ghost"
+        aria-label="Dark"
+        disabled
+        icon={<MoonIcon />}
       />
     </Wrap>
   )

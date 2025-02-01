@@ -15,7 +15,7 @@ const properties: { [key: string]: string[] } = {
     "stroke",
     "background-color",
     "border-color",
-    "outline-color",
+    // "outline-color",
     "text-decoration-color",
   ],
   common: [
@@ -24,7 +24,7 @@ const properties: { [key: string]: string[] } = {
     "stroke",
     "background-color",
     "border-color",
-    "outline-color",
+    // "outline-color",
     "text-decoration-color",
     "opacity",
     "box-shadow",

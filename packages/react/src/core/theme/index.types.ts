@@ -556,6 +556,26 @@ export interface ThemeConfig {
   }
 }
 
+type ThemeVariantProps<Y extends Dict = Dict> =
+  string extends keyof Required<Y>["variants"]
+    ? {}
+    : {
+        /**
+         * The variant of the component.
+         */
+        variant?: UIValue<Union<keyof Required<Y>["variants"] | number>>
+      }
+
+type ThemeSizeProps<Y extends Dict = Dict> =
+  string extends keyof Required<Y>["sizes"]
+    ? {}
+    : {
+        /**
+         * The size of the component.
+         */
+        size?: UIValue<Union<keyof Required<Y>["sizes"] | number>>
+      }
+
 type ThemeComponentProps<Y extends Dict = Dict> =
   string extends keyof Required<Y>["props"]
     ? {}
@@ -567,16 +587,9 @@ type ThemeComponentProps<Y extends Dict = Dict> =
           : keyof Required<Y>["props"][K] | StringLiteral
       }
 
-export type ThemeProps<Y extends Dict = Dict> = {
-  /**
-   * The size of the component.
-   */
-  size?: UIValue<Union<keyof Required<Y>["sizes"] | number>>
-  /**
-   * The variant of the component.
-   */
-  variant?: UIValue<Union<keyof Required<Y>["variants"] | number>>
-} & ThemeComponentProps<Y>
+export type ThemeProps<Y extends Dict = Dict> = ThemeComponentProps<Y> &
+  ThemeSizeProps<Y> &
+  ThemeVariantProps<Y>
 
 type ThemeProp = "size" | "variant"
 

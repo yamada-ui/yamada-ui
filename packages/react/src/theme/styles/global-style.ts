@@ -10,7 +10,7 @@ export const globalStyle = defineStyles.globalStyle({
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",
   },
-  "*:focus-visible, *[data-focus-visible]": {
+  "*:is(:focus-visible, [data-focus-visible])": {
     outline: "outside",
   },
   body: {

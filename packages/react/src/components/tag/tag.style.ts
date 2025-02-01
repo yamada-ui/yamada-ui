@@ -120,7 +120,6 @@ export const tagStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "md",
     variant: "subtle",
   },

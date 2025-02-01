@@ -2,7 +2,8 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Wrap } from "../flex"
-import { ArrowRightIcon, CheckIcon, MailIcon, PlusIcon } from "../icon"
+import { ArrowRightIcon, CheckIcon, MailIcon, PlusIcon, XIcon } from "../icon"
+import { Loading } from "../loading"
 import { Button } from "./button"
 
 type Story = StoryFn<typeof Button>
@@ -49,6 +50,32 @@ export const Size: Story = () => {
   )
 }
 
+export const FullRounded: Story = () => {
+  return (
+    <Wrap gap="md">
+      <Button colorScheme="primary" variant="solid" fullRounded>
+        Solid
+      </Button>
+
+      <Button colorScheme="secondary" variant="subtle" fullRounded>
+        Subtle
+      </Button>
+
+      <Button colorScheme="info" variant="surface" fullRounded>
+        Surface
+      </Button>
+
+      <Button colorScheme="warning" variant="outline" fullRounded>
+        Outline
+      </Button>
+
+      <Button colorScheme="danger" variant="ghost" fullRounded>
+        Ghost
+      </Button>
+    </Wrap>
+  )
+}
+
 export const Disabled: Story = () => {
   return (
     <Wrap gap="md">
@@ -56,20 +83,20 @@ export const Disabled: Story = () => {
         Solid
       </Button>
 
-      <Button colorScheme="secondary" variant="outline" disabled>
+      <Button colorScheme="secondary" variant="subtle" disabled>
+        Subtle
+      </Button>
+
+      <Button colorScheme="info" variant="surface" disabled>
+        Surface
+      </Button>
+
+      <Button colorScheme="warning" variant="outline" disabled>
         Outline
       </Button>
 
-      <Button colorScheme="warning" variant="ghost" disabled>
+      <Button colorScheme="danger" variant="ghost" disabled>
         Ghost
-      </Button>
-
-      <Button colorScheme="danger" variant="link" disabled>
-        Link
-      </Button>
-
-      <Button variant="unstyled" disabled>
-        Unstyle
       </Button>
     </Wrap>
   )
@@ -80,32 +107,45 @@ export const Icon: Story = () => {
     <Wrap gap="md">
       <Button
         colorScheme="primary"
+        size="xs"
         variant="solid"
-        startIcon={<PlusIcon fontSize="xl" />}
+        startIcon={<PlusIcon />}
       >
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
-        variant="outline"
-        endIcon={<ArrowRightIcon fontSize="xl" />}
+        size="sm"
+        variant="subtle"
+        endIcon={<ArrowRightIcon />}
+      >
+        Button
+      </Button>
+
+      <Button
+        colorScheme="info"
+        size="md"
+        variant="surface"
+        startIcon={<MailIcon />}
       >
         Button
       </Button>
 
       <Button
         colorScheme="warning"
-        variant="ghost"
-        startIcon={<MailIcon fontSize="xl" />}
+        size="lg"
+        variant="outline"
+        startIcon={<CheckIcon />}
       >
         Button
       </Button>
 
       <Button
         colorScheme="danger"
-        variant="link"
-        startIcon={<CheckIcon fontSize="xl" />}
+        size="xl"
+        variant="ghost"
+        startIcon={<XIcon />}
       >
         Button
       </Button>
@@ -113,32 +153,43 @@ export const Icon: Story = () => {
   )
 }
 
-export const Loading: Story = () => {
+export const LoadingIcon: Story = () => {
   return (
     <Wrap gap="md">
       <Button colorScheme="primary" loading>
         Button
       </Button>
 
-      <Button colorScheme="secondary" loading loadingIcon="dots">
-        Button
-      </Button>
-
-      <Button colorScheme="warning" variant="outline" loading>
-        Button
-      </Button>
-
-      <Button colorScheme="danger" variant="ghost" loading>
-        Button
-      </Button>
-
-      <Button colorScheme="primary" loading loadingMessage="Loading...">
+      <Button
+        colorScheme="secondary"
+        variant="subtle"
+        loading
+        loadingIcon="dots"
+      >
         Button
       </Button>
 
       <Button
-        colorScheme="secondary"
+        colorScheme="info"
+        variant="surface"
+        loading
+        loadingIcon={<Loading.Puff />}
+      >
+        Button
+      </Button>
+
+      <Button
+        colorScheme="warning"
         variant="outline"
+        loading
+        loadingMessage="Loading..."
+      >
+        Button
+      </Button>
+
+      <Button
+        colorScheme="danger"
+        variant="ghost"
         loading
         loadingIcon="grid"
         loadingMessage="Loading..."

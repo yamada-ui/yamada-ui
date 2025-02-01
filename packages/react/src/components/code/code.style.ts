@@ -1,27 +1,11 @@
 import { defineComponentStyle } from "../../core"
 
-export const badgeStyle = defineComponentStyle({
+export const codeStyle = defineComponentStyle({
   base: {
     alignItems: "center",
     display: "inline-flex",
-    fontWeight: "medium",
-    rounded: "sm",
-    textTransform: "uppercase",
-    verticalAlign: "middle",
-    whiteSpace: "nowrap",
-  },
-
-  props: {
-    /**
-     * If `true`, the button is full rounded. Else, it'll be slightly round.
-     *
-     * @default false
-     */
-    fullRounded: {
-      true: {
-        rounded: "full",
-      },
-    },
+    fontFamily: "mono",
+    rounded: "md",
   },
 
   variants: {
@@ -40,6 +24,12 @@ export const badgeStyle = defineComponentStyle({
   },
 
   sizes: {
+    xs: {
+      fontSize: "2xs",
+      lineHeight: "{sizes.4}",
+      minH: "4",
+      px: "1",
+    },
     sm: {
       fontSize: "xs",
       lineHeight: "{sizes.5}",
@@ -53,7 +43,7 @@ export const badgeStyle = defineComponentStyle({
       px: "2",
     },
     lg: {
-      fontSize: "md",
+      fontSize: "sm",
       lineHeight: "{sizes.7}",
       minH: "7",
       px: "2.5",
@@ -61,9 +51,10 @@ export const badgeStyle = defineComponentStyle({
   },
 
   defaultProps: {
+    colorScheme: "gray",
     size: "sm",
-    variant: "outline",
+    variant: "subtle",
   },
 })
 
-export type BadgeStyle = typeof badgeStyle
+export type CodeStyle = typeof codeStyle

@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
-import { Wrap } from "../flex"
-import { VStack } from "../stack"
 import { Code } from "./code"
 
 type Story = StoryFn<typeof Code>
@@ -63,38 +62,17 @@ export const WithVariant: Story = () => {
 
 export const WithColorScheme: Story = () => {
   return (
-    <Wrap gap="md" w="full">
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Code key={colorScheme} colorScheme={colorScheme} variant="solid">
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Code key={key} colorScheme={row} variant={column}>
             console.log("Hello, Yamada!")
           </Code>
-        ))}
-      </VStack>
-
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Code key={colorScheme} colorScheme={colorScheme} variant="outline">
-            console.log("Hello, Yamada!")
-          </Code>
-        ))}
-      </VStack>
-
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Code key={colorScheme} colorScheme={colorScheme} variant="subtle">
-            console.log("Hello, Yamada!")
-          </Code>
-        ))}
-      </VStack>
-
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Code key={colorScheme} colorScheme={colorScheme} variant="surface">
-            console.log("Hello, Yamada!")
-          </Code>
-        ))}
-      </VStack>
-    </Wrap>
+        )
+      }}
+    </PropsTable>
   )
 }

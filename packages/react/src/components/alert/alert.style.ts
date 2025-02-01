@@ -3,7 +3,7 @@ import { defineComponentSlotStyle } from "../../core"
 export const alertStyle = defineComponentSlotStyle({
   base: {
     description: {
-      lineHeight: "5",
+      lineHeight: "shorter",
     },
     icon: {
       boxSize: "5",
@@ -17,7 +17,7 @@ export const alertStyle = defineComponentSlotStyle({
       marginEnd: "3",
     },
     root: {
-      alignItems: "center",
+      alignItems: "start",
       display: "flex",
       overflow: "hidden",
       position: "relative",
@@ -28,14 +28,16 @@ export const alertStyle = defineComponentSlotStyle({
     },
     title: {
       display: "block",
-      fontWeight: "bold",
-      lineHeight: "5",
+      lineHeight: "shorter",
       marginEnd: "2",
     },
   },
 
   variants: {
     basic: {
+      description: {
+        color: "fg.muted",
+      },
       icon: {
         color: "colorScheme.solid",
       },
@@ -45,6 +47,9 @@ export const alertStyle = defineComponentSlotStyle({
       },
     },
     island: {
+      description: {
+        color: "fg.muted",
+      },
       icon: { color: "colorScheme.solid" },
       root: {
         bg: "bg",

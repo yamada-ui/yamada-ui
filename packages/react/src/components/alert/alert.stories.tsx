@@ -1,7 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { Box } from "../box"
-// import { CloseButton } from "../close-button"
+import { COLOR_SCHEMES, noop } from "../../utils"
+import { CloseButton } from "../button"
+import { VStack } from "../stack"
 import { Alert } from "./"
 
 type Story = StoryFn<typeof Alert.Root>
@@ -15,39 +16,13 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <>
-      <Alert.Root status="info">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root status="success">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root status="warning">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-
-      <Alert.Root status="error">
-        <Alert.Icon />
-        <Alert.Title>セル</Alert.Title>
-        <Alert.Description>
-          か…完全体に………完全体になれさえすれば………！！！
-        </Alert.Description>
-      </Alert.Root>
-    </>
+    <Alert.Root>
+      <Alert.Icon />
+      <Alert.Title>セル</Alert.Title>
+      <Alert.Description>
+        か…完全体に………完全体になれさえすれば………！！！
+      </Alert.Description>
+    </Alert.Root>
   )
 }
 
@@ -75,8 +50,30 @@ export const Variant: Story = () => {
 
 export const ColorScheme: Story = () => {
   return (
+    <PropsTable
+      variant="column"
+      columns={["basic", "solid", "subtle", "surface", "island"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Alert.Root key={key} colorScheme={row} variant={column}>
+            {column !== "island" ? <Alert.Icon /> : null}
+            <Alert.Title>セル</Alert.Title>
+            <Alert.Description>
+              か…完全体に………完全体になれさえすれば………！！！
+            </Alert.Description>
+          </Alert.Root>
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Status: Story = () => {
+  return (
     <>
-      <Alert.Root colorScheme="green" status="info">
+      <Alert.Root status="info">
         <Alert.Icon />
         <Alert.Title>セル</Alert.Title>
         <Alert.Description>
@@ -84,7 +81,7 @@ export const ColorScheme: Story = () => {
         </Alert.Description>
       </Alert.Root>
 
-      <Alert.Root colorScheme="purple" status="success">
+      <Alert.Root status="success">
         <Alert.Icon />
         <Alert.Title>セル</Alert.Title>
         <Alert.Description>
@@ -92,7 +89,7 @@ export const ColorScheme: Story = () => {
         </Alert.Description>
       </Alert.Root>
 
-      <Alert.Root colorScheme="gray" status="warning">
+      <Alert.Root status="warning">
         <Alert.Icon />
         <Alert.Title>セル</Alert.Title>
         <Alert.Description>
@@ -100,7 +97,7 @@ export const ColorScheme: Story = () => {
         </Alert.Description>
       </Alert.Root>
 
-      <Alert.Root colorScheme="pink" status="error">
+      <Alert.Root status="error">
         <Alert.Icon />
         <Alert.Title>セル</Alert.Title>
         <Alert.Description>
@@ -170,13 +167,22 @@ export const CustomLayout: Story = () => {
       </Alert.Root>
 
       <Alert.Root status="success">
-        <Box>
+        <Alert.Icon />
+
+        <VStack gap="xs">
           <Alert.Title>セル</Alert.Title>
           <Alert.Description>
             か…完全体に………完全体になれさえすれば………！！！
           </Alert.Description>
-        </Box>
-        {/* <CloseButton position="absolute" right={2} top={2} onClick={noop} /> */}
+        </VStack>
+
+        <CloseButton
+          colorScheme="mono"
+          position="absolute"
+          right={2}
+          top={2}
+          onClick={noop}
+        />
       </Alert.Root>
     </>
   )

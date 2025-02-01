@@ -10,6 +10,7 @@ export {
 } from "./form-control"
 export type {
   ErrorMessageProps,
+  FormControlProps,
   FormControlRootProps,
   HelperMessageProps,
   LabelProps,

@@ -1,8 +1,7 @@
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
-import type { FormControlOptions } from "../../components/form-control"
 import type {
-  CSSUIObject,
-  CSSUIProps,
+  CSSObject,
+  CSSProps,
   HTMLProps,
   HTMLUIProps,
   PropGetter,
@@ -10,25 +9,20 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { Merge } from "../../utils"
+import type { FormControlProps } from "../form-control"
+import type { SliderStyle } from "./slider.style"
 import { useCallback, useRef, useState } from "react"
 import {
   formControlProperties,
   useFormControlProps,
 } from "../../components/form-control"
-import {
-  forwardRef,
-  mergeVars,
-  omitThemeProps,
-  ui,
-  useComponentMultiStyle,
-} from "../../core"
+import { mergeVars, ui, createSlotComponent } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useLatestRef } from "../../hooks/use-latest-ref"
 import { usePanEvent } from "../../hooks/use-pan-event"
 import { useSize } from "../../hooks/use-size"
 import {
   clampNumber,
-  createContext,
   cx,
   dataAttr,
   findChild,
@@ -46,10 +40,11 @@ import {
   useUpdateEffect,
   valueToPercent,
 } from "../../utils"
+import { sliderStyle } from "./slider.style"
 
 export const getThumbSize = (
-  thumbSize: CSSUIProps["boxSize"] | undefined,
-  styles: { [key: string]: CSSUIObject | undefined },
+  thumbSize: CSSProps["boxSize"] | undefined,
+  styles: { [key: string]: CSSObject | undefined },
 ) =>
   (thumbSize ??
     styles.thumb?.boxSize ??
@@ -62,7 +57,7 @@ export const getThumbSize = (
     styles.thumb?.h ??
     styles.thumb?.minHeight ??
     styles.thumb?.minH ??
-    "3.5") as CSSUIProps["boxSize"] | undefined
+    "3.5") as CSSProps["boxSize"] | undefined
 
 export interface UseSliderOptions {
   /**
@@ -123,7 +118,7 @@ export interface UseSliderOptions {
    * The CSS `box-size` property.
    * Used for calculating the width, height, and percentage of the container element.
    */
-  thumbSize?: CSSUIProps["boxSize"]
+  thumbSize?: CSSProps["boxSize"]
   /**
    * The value of the slider.
    */
@@ -143,7 +138,7 @@ export interface UseSliderOptions {
 }
 
 export interface UseSliderProps
-  extends Merge<HTMLUIProps, FormControlOptions & UseSliderOptions> {}
+  extends Merge<HTMLUIProps, FormControlProps & UseSliderOptions> {}
 
 export const useSlider = ({
   focusThumbOnChange = true,
@@ -151,8 +146,10 @@ export const useSlider = ({
 }: UseSliderProps) => {
   if (!focusThumbOnChange) props.readOnly = true
 
+  const rest = useFormControlProps(props)
+  const { context, props: formProps, ariaProps, eventProps } = rest
+
   const {
-    id,
     name,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
@@ -166,24 +163,21 @@ export const useSlider = ({
     step = 1,
     thumbSize: thumbSizeProp,
     value: valueProp,
+    vars,
     onChange,
     onChangeEnd: onChangeEndProp,
     onChangeStart: onChangeStartProp,
-    ...rest
-  } = useFormControlProps(props)
+  } = formProps
+
+  const { id, disabled, readOnly, required } = context
+
+  const { onBlur, onFocus } = eventProps
+
+  const { ...formControlProps } = pickObject(rest, formControlProperties)
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
 
-  const {
-    "aria-readonly": ariaReadonly,
-    disabled,
-    readOnly,
-    required,
-    onBlur,
-    onFocus,
-    ...formControlProps
-  } = pickObject(rest, formControlProperties)
   const [computedValue, setValue] = useControllableState({
     defaultValue: defaultValue ?? min + (max - min) / 2,
     value: valueProp,
@@ -384,7 +378,7 @@ export const useSlider = ({
         ref: mergeRefs(ref, containerRef),
         style,
         tabIndex: -1,
-        vars: mergeVars(rest.vars, [
+        vars: mergeVars(vars, [
           {
             name: "thumb-size",
             token: "sizes",
@@ -393,12 +387,12 @@ export const useSlider = ({
         ]),
       }
     },
-    [vertical, rest, thumbSize, thumbSizeProp],
+    [thumbSize, vertical, rest, vars, thumbSizeProp],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      "aria-readonly": ariaReadonly,
+      "aria-readonly": ariaProps["aria-readonly"],
       ...formControlProps,
       ...props,
       id,
@@ -411,7 +405,7 @@ export const useSlider = ({
       value,
     }),
     [
-      ariaReadonly,
+      ariaProps,
       disabled,
       formControlProps,
       id,
@@ -535,7 +529,7 @@ export const useSlider = ({
       return {
         "aria-label": ariaLabel ?? "Slider thumb",
         "aria-labelledby": ariaLabelledBy,
-        "aria-readonly": ariaReadonly,
+        "aria-readonly": ariaProps["aria-readonly"],
         ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
@@ -560,7 +554,7 @@ export const useSlider = ({
       vertical,
       ariaLabel,
       ariaLabelledBy,
-      ariaReadonly,
+      ariaProps,
       formControlProps,
       orientation,
       max,
@@ -607,35 +601,30 @@ interface SliderContext
       | "vertical"
     >,
     Omit<SliderOptions, "input"> {
-  styles: { [key: string]: CSSUIObject | undefined }
+  styles: { [key: string]: CSSObject | undefined }
 }
-
-const [SliderProvider, useSliderContext] = createContext<SliderContext>({
-  name: "SliderContext",
-  errorMessage: `useSliderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Slider />" `,
-})
 
 interface SliderOptions {
   /**
    * The CSS `color` property. Used in `color` of filled track element.
    */
-  filledTrackColor?: CSSUIProps["color"]
+  filledTrackColor?: CSSProps["color"]
   /**
    * The CSS `background` property. Used in `background` of thumb element.
    */
-  thumbColor?: CSSUIProps["bg"]
+  thumbColor?: CSSProps["bg"]
   /**
    * The CSS `box-size` property. Used in `box-size` of thumb element.
    */
-  thumbSize?: CSSUIProps["boxSize"]
+  thumbSize?: CSSProps["boxSize"]
   /**
    * The CSS `color` property. Used in `color` of track element.
    */
-  trackColor?: CSSUIProps["color"]
+  trackColor?: CSSProps["color"]
   /**
    * The CSS `height` property. Used in `height` of track element.
    */
-  trackSize?: CSSUIProps["h"]
+  trackSize?: CSSProps["h"]
   /**
    * Props for slider filled track element.
    */
@@ -659,14 +648,22 @@ export interface SliderProps
     UseSliderProps,
     SliderOptions {}
 
+export const {
+  ComponentContext: SliderContext,
+  PropsContext: SliderPropsContext,
+  useComponentContext: useSliderContext,
+  usePropsContext: useSliderPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<SliderProps, SliderStyle>("slider", sliderStyle)
+
 /**
  * `Slider` is a component used for allowing users to select a value from a range.
  *
  * @see Docs https://yamada-ui.com/components/forms/slider
  */
-export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useComponentMultiStyle("Slider", props)
-  const {
+export const Slider = withProvider<"input", SliderProps>(
+  ({
     className,
     children,
     filledTrackColor,
@@ -679,189 +676,150 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
     thumbProps,
     trackProps,
     ...rest
-  } = omitThemeProps(mergedProps)
-  const {
-    vertical,
-    getContainerProps,
-    getFilledTrackProps,
-    getInputProps,
-    getMarkProps,
-    getThumbProps,
-    getTrackProps,
-  } = useSlider({ ...rest, thumbSize: getThumbSize(thumbSize, styles) })
+  }) => {
+    const styles = {}
+    const {
+      vertical,
+      getContainerProps,
+      getFilledTrackProps,
+      getInputProps,
+      getMarkProps,
+      getThumbProps,
+      getTrackProps,
+    } = useSlider({ ...rest, thumbSize: getThumbSize(thumbSize, styles) })
 
-  const css: CSSUIObject = { ...styles.container }
+    const validChildren = getValidChildren(children)
 
-  const validChildren = getValidChildren(children)
+    const customSliderTrack = findChild(validChildren, SliderTrack)
+    const customSliderThumb = findChild(validChildren, SliderThumb)
 
-  const customSliderTrack = findChild(validChildren, SliderTrack)
-  const customSliderThumb = findChild(validChildren, SliderThumb)
+    const hasSliderThumb = includesChildren(validChildren, SliderThumb)
 
-  const hasSliderThumb = includesChildren(validChildren, SliderThumb)
+    const cloneChildren = !isEmpty(validChildren)
+      ? omitChildren(validChildren, SliderTrack, SliderThumb)
+      : children
 
-  const cloneChildren = !isEmpty(validChildren)
-    ? omitChildren(validChildren, SliderTrack, SliderThumb)
-    : children
-
-  return (
-    <SliderProvider
-      value={{
-        filledTrackColor,
-        styles,
-        thumbColor,
-        thumbSize,
-        trackColor,
-        trackSize,
-        vertical,
-        filledTrackProps,
-        getFilledTrackProps,
-        getMarkProps,
-        getThumbProps,
-        getTrackProps,
-        thumbProps,
-        trackProps,
-      }}
-    >
-      <ui.div
-        className={cx("ui-slider", className)}
-        __css={css}
-        {...getContainerProps()}
+    return (
+      <SliderContext.Provider
+        value={{
+          filledTrackColor,
+          thumbColor,
+          thumbSize,
+          trackColor,
+          trackSize,
+          vertical,
+          filledTrackProps,
+          getFilledTrackProps,
+          getMarkProps,
+          getThumbProps,
+          getTrackProps,
+          thumbProps,
+          trackProps,
+        }}
       >
-        <ui.input {...getInputProps(inputProps, ref)} />
+        <ui.div className={cx("ui-slider", className)} {...getContainerProps()}>
+          <ui.input {...getInputProps(inputProps)} />
 
-        {customSliderTrack ?? <SliderTrack />}
+          {customSliderTrack ?? <SliderTrack />}
 
-        {cloneChildren}
+          {cloneChildren}
 
-        {customSliderThumb ?? (!hasSliderThumb ? <SliderThumb /> : null)}
-      </ui.div>
-    </SliderProvider>
-  )
-})
-
-Slider.displayName = "Slider"
-Slider.__ui__ = "Slider"
+          {customSliderThumb ?? (!hasSliderThumb ? <SliderThumb /> : null)}
+        </ui.div>
+      </SliderContext.Provider>
+    )
+  },
+  "container",
+)()
 
 export interface SliderTrackProps
   extends HTMLUIProps,
     Pick<SliderOptions, "filledTrackProps"> {}
 
-export const SliderTrack = forwardRef<SliderTrackProps, "div">(
-  ({ className, children, filledTrackProps, ...rest }, ref) => {
-    const {
-      styles,
-      trackColor,
-      trackSize,
-      vertical,
-      getTrackProps,
-      trackProps,
-    } = useSliderContext()
-
-    const css: CSSUIObject = { ...styles.track }
+export const SliderTrack = withContext<"div", SliderTrackProps>(
+  ({ className, children, filledTrackProps, ...rest }) => {
+    const { trackColor, trackSize, vertical, getTrackProps, trackProps } =
+      useSliderContext()
 
     return (
       <ui.div
         className={cx("ui-slider__track", className)}
-        __css={css}
-        {...getTrackProps(
-          {
-            ...(trackColor ? { bg: trackColor } : {}),
-            ...(trackSize
-              ? vertical
-                ? { w: trackSize }
-                : { h: trackSize }
-              : {}),
-            ...trackProps,
-            ...rest,
-          },
-          ref,
-        )}
+        {...getTrackProps({
+          ...(trackColor ? { bg: trackColor } : {}),
+          ...(trackSize
+            ? vertical
+              ? { w: trackSize }
+              : { h: trackSize }
+            : {}),
+          ...trackProps,
+          ...rest,
+        })}
       >
         {children ?? <SliderFilledTrack {...filledTrackProps} />}
       </ui.div>
     )
   },
-)
-
-SliderTrack.displayName = "SliderTrack"
-SliderTrack.__ui__ = "SliderTrack"
+  "track",
+)()
 
 export interface SliderFilledTrackProps extends HTMLUIProps {}
 
-export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
-  ({ className, ...rest }, ref) => {
-    const { filledTrackColor, styles, filledTrackProps, getFilledTrackProps } =
+export const SliderFilledTrack = withProvider<"div", SliderFilledTrackProps>(
+  ({ ...rest }) => {
+    const { filledTrackColor, filledTrackProps, getFilledTrackProps } =
       useSliderContext()
-
-    const css: CSSUIObject = { ...styles.filledTrack }
 
     return (
       <ui.div
-        className={cx("ui-slider__track-filled", className)}
-        __css={css}
-        {...getFilledTrackProps(
-          {
-            ...(filledTrackColor ? { bg: filledTrackColor } : {}),
-            ...filledTrackProps,
-            ...rest,
-          },
-          ref,
-        )}
+        className={cx("ui-slider__track-filled")}
+        {...getFilledTrackProps({
+          ...(filledTrackColor ? { bg: filledTrackColor } : {}),
+          ...filledTrackProps,
+          ...rest,
+        })}
       />
     )
   },
-)
-
-SliderFilledTrack.displayName = "SliderFilledTrack"
-SliderFilledTrack.__ui__ = "SliderFilledTrack"
+  "filledTrack",
+)()
 
 export interface SliderMarkProps extends HTMLUIProps {
   value: number
 }
 
-export const SliderMark = forwardRef<SliderMarkProps, "div">(
-  ({ className, ...rest }, ref) => {
+export const SliderMark = withContext<"div", SliderMarkProps>(
+  ({ className, ...rest }) => {
     const { styles, getMarkProps } = useSliderContext()
 
     return (
       <ui.div
         className={cx("ui-slider__mark", className)}
         __css={styles.mark}
-        {...getMarkProps(rest, ref)}
+        {...getMarkProps(rest)}
       />
     )
   },
-)
-
-SliderMark.displayName = "SliderMark"
-SliderMark.__ui__ = "SliderMark"
+  "mark",
+)()
 
 export interface SliderThumbProps extends HTMLUIProps {}
 
-export const SliderThumb = forwardRef<SliderThumbProps, "div">(
-  ({ className, ...rest }, ref) => {
-    const { styles, thumbColor, thumbSize, getThumbProps, thumbProps } =
+export const SliderThumb = withContext<"div", SliderThumbProps>(
+  ({ className, ...rest }) => {
+    const { thumbColor, thumbSize, getThumbProps, thumbProps } =
       useSliderContext()
-
-    const css: CSSUIObject = { ...styles.thumb }
 
     return (
       <ui.div
         className={cx("ui-slider__thumb", className)}
-        __css={css}
-        {...getThumbProps(
-          {
-            ...(thumbColor ? { bg: thumbColor } : {}),
-            ...(thumbSize ? { boxSize: thumbSize } : {}),
-            ...thumbProps,
-            ...rest,
-          },
-          ref,
-        )}
+        {...getThumbProps({
+          ...(thumbColor ? { bg: thumbColor } : {}),
+          ...(thumbSize ? { boxSize: thumbSize } : {}),
+          ...thumbProps,
+          ...rest,
+        })}
       />
     )
   },
-)
-
-SliderThumb.displayName = "SliderThumb"
-SliderThumb.__ui__ = "SliderThumb"
+  "thumb",
+)()

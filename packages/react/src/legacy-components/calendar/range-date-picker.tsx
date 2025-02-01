@@ -130,24 +130,21 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       onClose,
     } = useRangeDatePicker(computedProps)
     const [startValue, endValue] = value
-    const css: CSSUIObject = {
-      color,
-      h: "fit-content",
-      w: "100%",
-      ...styles.container,
-    }
 
     return (
       <DatePickerProvider value={styles}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-range-date-picker", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
               className="ui-range-date-picker__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={styles.inner}
             >
               <RangeDatePickerField
                 separator={separator}
@@ -235,18 +232,11 @@ export const RangeDatePickerField = forwardRef<
     const hasValue = !!startValue || !!endValue
     const hasSeparator = hasPlaceholder || hasValue
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     return (
       <PopoverTrigger>
         <ui.div
           className={cx("ui-range-date-picker__field", className)}
-          __css={css}
+          __css={styles.field}
           {...rest}
         >
           <AutosizingInput

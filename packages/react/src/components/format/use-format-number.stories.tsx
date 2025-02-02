@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
 import { useFormatNumber } from "."
-import { Text } from "../../components/text"
+import { Text } from "../text"
 
 const meta: Meta = {
   title: "Hooks / useFormatNumber",

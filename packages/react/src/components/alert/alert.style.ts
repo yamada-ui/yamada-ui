@@ -34,18 +34,6 @@ export const alertStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    basic: {
-      description: {
-        color: "fg.muted",
-      },
-      icon: {
-        color: "colorScheme.solid",
-      },
-      root: {
-        bg: "bg",
-        borderWidth: "1px",
-      },
-    },
     island: {
       description: {
         color: "fg.muted",
@@ -65,6 +53,18 @@ export const alertStyle = defineComponentSlotStyle({
           transform: "translateY(-50%)",
           w: 1,
         },
+      },
+    },
+    plain: {
+      description: {
+        color: "fg.muted",
+      },
+      icon: {
+        color: "colorScheme.solid",
+      },
+      root: {
+        bg: "bg",
+        borderWidth: "1px",
       },
     },
     solid: {
@@ -94,7 +94,7 @@ export const alertStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    variant: "basic",
+    variant: "plain",
   },
 })
 

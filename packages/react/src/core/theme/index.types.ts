@@ -765,14 +765,6 @@ export type ColorScheme =
   | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
   | ThemeTokens["colorSchemes"]
 
-type ComponentProps<Y extends CSSPropObject> = string extends keyof Y
-  ? {}
-  : {
-      [key in keyof Y]?: UIValue<
-        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
-      >
-    }
-
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
   M extends Dict = Dict,
@@ -790,7 +782,13 @@ export type ComponentDefaultProps<
    * The variant of the component.
    */
   variant?: UIValue<keyof D>
-} & ComponentProps<Y>
+} & (string extends keyof Y
+  ? {}
+  : {
+      [key in keyof Y]?: UIValue<
+        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
+      >
+    })
 
 interface ComponentSharedStyle<
   Y extends Dict = Dict,
@@ -815,8 +813,22 @@ export type ComponentCompound<
 > = {
   css: Y
   size?: UIValue<keyof D>
-  variant?: UIValue<keyof H>
-} & ComponentProps<M>
+  variant?: UIValue<keyof H> | UIValue<keyof H>[]
+} & (string extends keyof M
+  ? {}
+  : {
+      [key in keyof M]?:
+        | UIValue<
+            keyof M[key] extends "false" | "true"
+              ? boolean
+              : boolean | keyof M[key]
+          >
+        | UIValue<
+            keyof M[key] extends "false" | "true"
+              ? boolean
+              : boolean | keyof M[key]
+          >[]
+    })
 
 export interface ComponentStyle<
   Y extends CSSPropObject = CSSPropObject,

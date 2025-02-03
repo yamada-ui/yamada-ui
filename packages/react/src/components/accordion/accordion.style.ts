@@ -43,14 +43,6 @@ export const accordionStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    basic: {
-      item: {
-        borderTopWidth: "1px",
-        _last: {
-          borderBottomWidth: "1px",
-        },
-      },
-    },
     panel: {
       button: {
         rounded: "md",
@@ -64,11 +56,19 @@ export const accordionStyle = defineComponentSlotStyle({
         },
       },
     },
+    plain: {
+      item: {
+        borderTopWidth: "1px",
+        _last: {
+          borderBottomWidth: "1px",
+        },
+      },
+    },
     unstyled: {},
   },
 
   defaultProps: {
-    variant: "basic",
+    variant: "plain",
   },
 })
 

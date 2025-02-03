@@ -276,7 +276,9 @@ function getCompoundStyle<
 
       if (!conditions.length) return
 
-      const apply = conditions.every(([key, value]) => props[key] === value)
+      const apply = conditions.every(([key, value]) =>
+        isArray(value) ? value.includes(props[key]) : props[key] === value,
+      )
 
       if (!apply) return
 

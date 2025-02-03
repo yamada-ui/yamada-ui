@@ -1,8 +1,9 @@
+import { isEmptyObject } from "./assertion"
+
 export function filterEmpty<Y>(array: Y[]): Exclude<Y, null | undefined>[] {
-  return array.filter((value) => value != null) as Exclude<
-    Y,
-    null | undefined
-  >[]
+  return array.filter(
+    (value) => value != null && !isEmptyObject(value),
+  ) as Exclude<Y, null | undefined>[]
 }
 
 export function toArray<Y>(mixedArray: Y) {

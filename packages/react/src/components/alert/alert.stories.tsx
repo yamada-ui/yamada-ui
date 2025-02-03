@@ -30,7 +30,7 @@ export const Variant: Story = () => {
   return (
     <PropsTable
       variant="column"
-      columns={["basic", "solid", "subtle", "surface", "island"]}
+      columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={["info", "success", "warning", "error"]}
     >
       {(column, row, key) => {

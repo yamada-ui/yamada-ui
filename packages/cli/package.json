@@ -52,6 +52,7 @@
     "commander": "^12.1.0",
     "cosmiconfig": "^9.0.0",
     "esbuild": "^0.24.0",
+    "fs-extra": "^11.3.0",
     "glob": "^11.0.0",
     "node-eval": "^2.0.0",
     "prettier": "^3.4.2",
@@ -61,6 +62,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/update-notifier": "6.0.8",
     "chalk": "^5.4.0",
     "update-notifier": "^7.3.1"

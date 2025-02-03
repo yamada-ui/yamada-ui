@@ -1,11 +1,11 @@
 import type * as CSS from "csstype"
 import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import * as p from "@clack/prompts"
-import { isUndefined, toCamelCase } from "@yamada-ui/utils"
+import bcd from "@mdn/browser-compat-data"
+import { isArray, isUndefined, toCamelCase } from "@yamada-ui/utils"
 import c from "chalk"
 import { writeFile } from "fs/promises"
 import { glob } from "glob"
-import { JSDOM } from "jsdom"
 import ListIt from "list-it"
 import {
   createProgram,
@@ -15,10 +15,19 @@ import {
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 
-const SOURCE_URL = "https://developer.mozilla.org"
 export const OUT_PATH = "packages/react/src/core/styles.ts"
 
-export type CSSProperty = ReturnType<typeof getCSSProperties>[number]
+export interface CSSProperty {
+  name: string
+  prop: CSSProperties
+  property_type: string
+  url: string
+  features?: ({
+    deprecated: boolean
+  } & Omit<CSSProperty, "features" | "isSkip">)[]
+  isSkip?: boolean
+}
+
 export type Properties = CSSProperties | UIProperties
 export type CSSProperties =
   | keyof CSS.ObsoleteProperties
@@ -44,44 +53,79 @@ const duplicatedList = new ListIt({
   headerUnderline: true,
 })
 
-const getDoc = async (type: "CSS" | "SVG") => {
-  const res = await fetch(SOURCE_URL + `/docs/Web/${type}`)
-  const data = await res.text()
+const getCSSProperties = (): CSSProperty[] => {
+  const { css, svg } = bcd
+  const cssProperties = Object.keys(css.properties as object)
+  const atRuleProperties = Object.keys(css["at-rules"] as object)
+  const svgAttributes = Object.keys(svg.global_attributes as object)
 
-  const dom = new JSDOM(data)
-
-  return dom.window.document
-}
-
-const getCSSProperties = (doc: Document) => {
-  const list = doc.querySelectorAll(".sidebar-body details")
-
-  const item = Array.from(list).find((item) => {
-    const summary = item.querySelector("summary")
-    const title = summary?.textContent?.trim()
-
-    return title === "Properties" || title === "Attributes"
-  })
-
-  const els = item?.querySelectorAll("li a") as HTMLAnchorElement[] | undefined
-
-  if (!els) return []
-
-  return Array.from(els)
-    .filter(
-      ({ textContent }) => textContent && !/^(-moz|-webkit)/.test(textContent),
-    )
-    .map(({ href, textContent }) => {
-      const prop = textContent?.includes("-")
-        ? toCamelCase(textContent)
-        : (textContent ?? "")
+  const cssData = cssProperties
+    .filter((property) => !/^(-moz|-webkit)/.test(property))
+    .map((property) => {
+      const prop = property.includes("-") ? toCamelCase(property) : property
+      const { mdn_url, spec_url } = css.properties?.[property]?.__compat ?? {}
+      const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
 
       return {
-        name: textContent ?? "",
+        name: property,
         prop: prop as CSSProperties,
-        url: SOURCE_URL + href,
+        property_type: "css",
+        url,
       }
     })
+
+  const svgData = svgAttributes.map((attribute) => {
+    const prop = attribute.includes("-") ? toCamelCase(attribute) : attribute
+    const { mdn_url, spec_url } =
+      svg.global_attributes?.[attribute]?.__compat ?? {}
+    const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+
+    return {
+      name: attribute,
+      prop: prop as CSSProperties,
+      property_type: "svg",
+      url,
+    }
+  })
+
+  const atRuleData = atRuleProperties.map((atRule) => {
+    const prop = atRule.includes("-") ? toCamelCase(atRule) : atRule
+    const { mdn_url, spec_url } = css["at-rules"]?.[atRule]?.__compat ?? {}
+    const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+
+    const features = Object.keys(css["at-rules"]?.[atRule] as object).map(
+      (key) => {
+        const prop = key.includes("-") ? toCamelCase(key) : key
+        const { mdn_url, spec_url, status } =
+          css["at-rules"]?.[atRule]?.[key]?.__compat ?? {}
+        const url =
+          mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+
+        return {
+          name: key,
+          deprecated: status?.deprecated ?? false,
+          prop,
+          property_type: "feature",
+          url,
+        }
+      },
+    )
+
+    return {
+      name: atRule,
+      features,
+      isSkip: true,
+      prop: ("_" + prop) as CSSProperties,
+      property_type: "at-rule",
+      url,
+    }
+  })
+
+  return [
+    ...cssData,
+    ...svgData.filter((attr) => !cssProperties.includes(attr.name)),
+    ...atRuleData,
+  ]
 }
 
 const getCSSTypes = async () => {
@@ -145,9 +189,10 @@ const omitProperties = (
   const omittedProperties = cssProperties.filter((property) => {
     const hasType = typeProperties.includes(property.prop)
 
-    if (!hasType) pickedProperties = [...pickedProperties, property]
+    if (!hasType && !property.isSkip)
+      pickedProperties = [...pickedProperties, property]
 
-    return hasType
+    return hasType || property.isSkip
   })
 
   if (pickedProperties.length) {
@@ -208,24 +253,11 @@ const main = async () => {
 
     s.stop(`Got the "csstype" module`)
 
-    s.start(`Getting the "MDN Web Docs" document`)
-
-    const cssDoc = await getDoc("CSS")
-    const svgDoc = await getDoc("SVG")
-
-    s.stop(`Got the "MDN Web Docs" document`)
-
-    const cssProperties = getCSSProperties(cssDoc)
-    const svgProperties = getCSSProperties(svgDoc)
-    const exitsProperties = cssProperties.map(({ name }) => name)
-    const resolvedProperties = [
-      ...cssProperties,
-      ...svgProperties.filter(({ name }) => !exitsProperties.includes(name)),
-    ]
+    const properties = getCSSProperties()
 
     const typeProperties = Object.keys(cssTypes)
     const omittedProperties = omitProperties(
-      resolvedProperties,
+      properties,
       typeProperties,
       (message) => {
         p.note(message, `Omitted properties that are not present in "csstype"`)
@@ -241,11 +273,13 @@ const main = async () => {
 
     const styles = excludedProperties
       .map((property) => {
+        const isAtRule = property.property_type === "at-rule"
         const { type, deprecated = false } = cssTypes[property.prop] ?? {}
 
-        if (!type) return
+        if (!type && !isAtRule) return
+        if (isAtRule) return { ...property, type: "", deprecated }
 
-        return { ...property, type, deprecated }
+        return { ...property, type: type as string, deprecated }
       })
       .filter((style) => !isUndefined(style))
 

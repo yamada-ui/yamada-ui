@@ -2,7 +2,7 @@ import type { EmotionCSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
-  type?: string
+  type?: string | string[]
   description?: string[]
   processResult?: boolean
   processSkip?: boolean
@@ -298,7 +298,7 @@ export const atRuleProps = {
     processSkip: true,
   },
   _container: {
-    type: `{ ${[
+    type: [
       "name?: StringLiteral",
       "query?: StringLiteral",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
@@ -325,7 +325,7 @@ export const atRuleProps = {
       'orientation?: "portrait" | "landscape" | StringLiteral',
       "css?: CSSObject",
       "[key: string]: any",
-    ].join(";")}}[]`,
+    ],
     description: [
       "The `@container` of CSS at-rule.",
       "",
@@ -342,7 +342,7 @@ export const atRuleProps = {
     variableLength: true,
   },
   _media: {
-    type: `{ ${[
+    type: [
       'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
       "query?: StringLiteral",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
@@ -401,7 +401,7 @@ export const atRuleProps = {
       'videoDynamicRange?: "standard" | "high" | StringLiteral',
       "css?: CSSObject",
       "[key: string]: any",
-    ].join(";")} }[]`,
+    ],
     description: [
       "The `@media` of CSS at-rule.",
       "",
@@ -418,7 +418,7 @@ export const atRuleProps = {
     variableLength: true,
   },
   _supports: {
-    type: `{${["query?: StringLiteral", "css?: CSSObject"].join(";")}}[]`,
+    type: ["query?: StringLiteral", "css?: CSSObject"],
     description: [
       "The `@supports` of CSS at-rule.",
       "",

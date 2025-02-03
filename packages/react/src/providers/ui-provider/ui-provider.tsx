@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react"
 import type { ColorModeProviderProps } from "../color-mode-provider"
 import type { Environment } from "../environment-provider"
+import type { IntlMessage } from "../i18n-provider"
 import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
 // import { NoticeProvider } from "../../components/notice"
@@ -8,7 +9,7 @@ import { defaultTheme } from "../../theme"
 import { defaultConfig } from "../../theme"
 import { ColorModeProvider } from "../color-mode-provider"
 import { EnvironmentProvider } from "../environment-provider"
-import { I18nProvider } from "../i18n-provider"
+import { defaultIntlMessage, I18nProvider } from "../i18n-provider"
 import { ThemeProvider } from "../theme-provider"
 
 export interface UIProviderProps
@@ -37,6 +38,12 @@ export interface UIProviderProps
    */
   environment?: Environment
   /**
+   * The internationalization messages to apply to the application.
+   *
+   * This prop expects a dictionary object where the keys are locale strings (e.g., "en-US").
+   */
+  intl?: IntlMessage
+  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -56,6 +63,7 @@ export const UIProvider: FC<UIProviderProps> = ({
   disableGlobalStyle,
   disableResetStyle,
   environment,
+  intl = defaultIntlMessage,
   theme = defaultTheme,
   themeSchemeManager,
   themeSchemeStorageKey,
@@ -65,7 +73,11 @@ export const UIProvider: FC<UIProviderProps> = ({
       disabled={disableEnvironment}
       environment={environment}
     >
-      <I18nProvider direction={config.direction} locale={config.locale}>
+      <I18nProvider
+        direction={config.direction}
+        intl={intl}
+        locale={config.locale}
+      >
         <ThemeProvider
           config={config}
           disableGlobalStyle={disableGlobalStyle}

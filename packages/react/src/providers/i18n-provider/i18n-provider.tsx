@@ -18,6 +18,13 @@ import {
   isUndefined,
   useSsr,
 } from "../../utils"
+import INTL_MESSAGE from "./data.json"
+
+export interface IntlMessage {
+  [key: string]: Dict
+}
+
+export const defaultIntlMessage: IntlMessage = INTL_MESSAGE
 
 export interface Language {
   direction: TextDirection
@@ -81,7 +88,6 @@ export function getLanguage(): Language {
 
 interface I18nContext extends Language {
   t: (
-    messages: Dict,
     path: Path<Dict> | StringLiteral,
     replaceValue?: { [key: string]: number | string } | number | string,
     pattern?: string,
@@ -102,6 +108,13 @@ export interface I18nProviderProps {
    */
   direction?: TextDirection
   /**
+   * The internationalization messages to apply to the application.
+   *
+   * This prop expects a dictionary object where the keys are locale strings (e.g., "en-US").
+   *
+   */
+  intl?: IntlMessage
+  /**
    * The locale to apply to the application.
    *
    * @default 'en-US'
@@ -112,6 +125,7 @@ export interface I18nProviderProps {
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
   direction: directionProp,
+  intl,
   locale,
 }) => {
   const ssr = useSsr()
@@ -123,15 +137,14 @@ export const I18nProvider: FC<I18nProviderProps> = ({
 
   const t = useCallback(
     (
-      messages: any,
       path: Path<any> | StringLiteral,
       replaceValue?: { [key: string]: number | string } | number | string,
       pattern = "label",
     ) => {
-      const translations = locale
-        ? (messages[locale] ?? messages["en-US"])
-        : messages["en-US"]
-      let value = get<string>(translations, path, "")
+      const messages: IntlMessage = intl ?? defaultIntlMessage
+      const currentLocale = locale ?? DEFAULT_LOCALE
+      const translations = messages[currentLocale] ?? messages["en-US"]
+      let value = get<string>(translations!, path, "")
 
       if (isUndefined(replaceValue)) return value
 
@@ -150,7 +163,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
 
       return value
     },
-    [locale],
+    [locale, intl],
   )
 
   const value = useMemo(() => {

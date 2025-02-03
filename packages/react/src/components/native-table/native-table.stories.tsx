@@ -1,11 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { FC } from "react"
 import type { NativeTableProps } from "./"
-import { useState } from "react"
-import defaultTheme from "../../theme"
-import { COLOR_SCHEMES, isString } from "../../utils"
-import { Box } from "../box"
-import { ScrollArea } from "../scroll-area"
+// import defaultTheme from "../../theme"
+import { COLOR_SCHEMES } from "../../utils"
+// import { ScrollArea } from "../scroll-area"
 import {
   NativeTable,
   TableCaption,
@@ -79,7 +77,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -142,7 +140,7 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -203,7 +201,7 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const ColorScheme: Story = () => {
   const Table: FC<NativeTableProps> = (props) => {
     return (
       <TableContainer>
@@ -265,7 +263,7 @@ export const WithColorScheme: Story = () => {
   )
 }
 
-export const WithColumnBorders: Story = () => {
+export const ColumnBorders: Story = () => {
   return (
     <TableContainer>
       <NativeTable withColumnBorders>
@@ -317,7 +315,7 @@ export const WithColumnBorders: Story = () => {
   )
 }
 
-export const WithBorder: Story = () => {
+export const Border: Story = () => {
   return (
     <TableContainer>
       <NativeTable withBorder>
@@ -369,7 +367,7 @@ export const WithBorder: Story = () => {
   )
 }
 
-export const WithHighlightOnHover: Story = () => {
+export const HighlightOnHover: Story = () => {
   return (
     <TableContainer>
       <NativeTable highlightOnHover>
@@ -421,7 +419,7 @@ export const WithHighlightOnHover: Story = () => {
   )
 }
 
-export const WithCaption: Story = () => {
+export const Caption: Story = () => {
   return (
     <>
       <TableContainer>
@@ -530,126 +528,126 @@ export const WithCaption: Story = () => {
   )
 }
 
-export const WithStickyHeader: Story = () => {
-  const [scrolled, setScrolled] = useState(false)
+// export const WithStickyHeader: Story = () => {
+//   const [scrolled, setScrolled] = useState(false)
 
-  return (
-    <TableContainer w="full">
-      <ScrollArea
-        h="xs"
-        w="full"
-        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-      >
-        <NativeTable>
-          <Thead
-            bg={["white", "black"]}
-            boxShadow={scrolled ? "md" : undefined}
-            position="sticky"
-            top={0}
-            transitionDuration="slow"
-            transitionProperty="box-shadow"
-          >
-            <Tr>
-              <Th>Name</Th>
-              <Th numeric>Rem</Th>
-              <Th numeric>Pixel</Th>
-              <Th>Progress</Th>
-            </Tr>
-          </Thead>
+//   return (
+//     <TableContainer w="full">
+//       <ScrollArea
+//         h="xs"
+//         w="full"
+//         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+//       >
+//         <NativeTable>
+//           <Thead
+//             bg={["white", "black"]}
+//             boxShadow={scrolled ? "md" : undefined}
+//             position="sticky"
+//             top={0}
+//             transitionDuration="slow"
+//             transitionProperty="box-shadow"
+//           >
+//             <Tr>
+//               <Th>Name</Th>
+//               <Th numeric>Rem</Th>
+//               <Th numeric>Pixel</Th>
+//               <Th>Progress</Th>
+//             </Tr>
+//           </Thead>
 
-          <Tbody>
-            <Tr>
-              <Td>xs</Td>
-              <Td numeric>0.25rem</Td>
-              <Td numeric>4px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="0.25rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>sm</Td>
-              <Td numeric>0.5rem</Td>
-              <Td numeric>8px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="0.5rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>md</Td>
-              <Td numeric>1rem</Td>
-              <Td numeric>16px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="1rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>normal</Td>
-              <Td numeric>1.5rem</Td>
-              <Td numeric>24px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="1.5rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>lg</Td>
-              <Td numeric>2rem</Td>
-              <Td numeric>32px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="2rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>xl</Td>
-              <Td numeric>3rem</Td>
-              <Td numeric>48px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="3rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>2xl</Td>
-              <Td numeric>4.5rem</Td>
-              <Td numeric>72px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="4.5rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>3xl</Td>
-              <Td numeric>6rem</Td>
-              <Td numeric>96px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="6rem" />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>4xl</Td>
-              <Td numeric>10rem</Td>
-              <Td numeric>160px</Td>
-              <Td>
-                <Box bg="red.500" h="9xs" maxW="10rem" />
-              </Td>
-            </Tr>
-            {Object.entries(defaultTheme.spaces)
-              .filter(([key]) => !isNaN(Number(key)))
-              .sort(([a], [b]) => Number(a) - Number(b))
-              .map(([key, value]) => {
-                if (!isString(value)) return null
+//           <Tbody>
+//             <Tr>
+//               <Td>xs</Td>
+//               <Td numeric>0.25rem</Td>
+//               <Td numeric>4px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="0.25rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>sm</Td>
+//               <Td numeric>0.5rem</Td>
+//               <Td numeric>8px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="0.5rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>md</Td>
+//               <Td numeric>1rem</Td>
+//               <Td numeric>16px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="1rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>normal</Td>
+//               <Td numeric>1.5rem</Td>
+//               <Td numeric>24px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="1.5rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>lg</Td>
+//               <Td numeric>2rem</Td>
+//               <Td numeric>32px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="2rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>xl</Td>
+//               <Td numeric>3rem</Td>
+//               <Td numeric>48px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="3rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>2xl</Td>
+//               <Td numeric>4.5rem</Td>
+//               <Td numeric>72px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="4.5rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>3xl</Td>
+//               <Td numeric>6rem</Td>
+//               <Td numeric>96px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="6rem" />
+//               </Td>
+//             </Tr>
+//             <Tr>
+//               <Td>4xl</Td>
+//               <Td numeric>10rem</Td>
+//               <Td numeric>160px</Td>
+//               <Td>
+//                 <Box bg="red.500" h="9xs" maxW="10rem" />
+//               </Td>
+//             </Tr>
+//             {Object.entries(defaultTheme.spaces)
+//               .filter(([key]) => !isNaN(Number(key)))
+//               .sort(([a], [b]) => Number(a) - Number(b))
+//               .map(([key, value]) => {
+//                 if (!isString(value)) return null
 
-                return (
-                  <Tr key={key}>
-                    <Td>{key}</Td>
-                    <Td numeric>{value}</Td>
-                    <Td numeric>{`${parseFloat(value) * 16}px`}</Td>
-                    <Td>
-                      <Box bg="green.500" h="9xs" maxW={value} />
-                    </Td>
-                  </Tr>
-                )
-              })}
-          </Tbody>
-        </NativeTable>
-      </ScrollArea>
-    </TableContainer>
-  )
-}
+//                 return (
+//                   <Tr key={key}>
+//                     <Td>{key}</Td>
+//                     <Td numeric>{value}</Td>
+//                     <Td numeric>{`${parseFloat(value) * 16}px`}</Td>
+//                     <Td>
+//                       <Box bg="green.500" h="9xs" maxW={value} />
+//                     </Td>
+//                   </Tr>
+//                 )
+//               })}
+//           </Tbody>
+//         </NativeTable>
+//       </ScrollArea>
+//     </TableContainer>
+//   )
+// }

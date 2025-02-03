@@ -15,7 +15,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <ButtonGroup gap="sm">
+    <ButtonGroup>
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>
@@ -26,7 +26,7 @@ export const Basic: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <ButtonGroup disabled gap="sm">
+      <ButtonGroup disabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -44,13 +44,13 @@ export const Disabled: Story = () => {
 export const Orientation: Story = () => {
   return (
     <>
-      <ButtonGroup gap="sm">
+      <ButtonGroup>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup flexDirection="column" gap="sm">
+      <ButtonGroup orientation="vertical">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -67,7 +67,7 @@ export const Attached: Story = () => {
         <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" attached flexDirection="column">
+      <ButtonGroup variant="outline" attached orientation="vertical">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

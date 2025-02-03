@@ -9,7 +9,7 @@ import type {
 } from "react"
 import type { MotionProps } from "../../components/motion"
 import type { PortalProps } from "../../components/portal"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { DatePickerIconProps } from "./date-picker"
 import type { UseMultiDatePickerProps } from "./use-multi-date-picker"
 import { cloneElement, useMemo, useRef } from "react"
@@ -152,24 +152,21 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       getPopoverProps,
       onClose,
     } = useMultiDatePicker(computedProps)
-    const css: CSSUIObject = {
-      color,
-      h: "fit-content",
-      w: "100%",
-      ...styles.container,
-    }
 
     return (
       <DatePickerProvider value={styles}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-multi-date-picker", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
               className="ui-multi-date-picker__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={styles.inner}
             >
               <MultiDatePickerField
                 component={component}
@@ -304,19 +301,11 @@ export const MultiDatePickerField = forwardRef<
       }
     }, [component, setValue, dateToString, open, separator, value])
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      flexWrap: "wrap",
-      pe: "2rem",
-      ...styles.field,
-    }
-
     return (
       <PopoverTrigger>
         <ui.div
           className={cx("ui-multi-date-picker__field", className)}
-          __css={css}
+          __css={styles.field}
           {...rest}
         >
           {cloneChildren}

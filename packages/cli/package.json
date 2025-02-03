@@ -52,6 +52,7 @@
     "commander": "^12.1.0",
     "cosmiconfig": "^9.0.0",
     "esbuild": "^0.24.0",
+    "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.0",
     "node-eval": "^2.0.0",

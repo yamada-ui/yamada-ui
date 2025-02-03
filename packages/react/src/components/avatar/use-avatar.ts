@@ -7,7 +7,6 @@ import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
 import { dataAttr, handlerAll } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 import { useI18n } from "../../providers/i18n-provider"
-import intlMessages from "./intl/messages.json"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")
@@ -119,7 +118,7 @@ export const useAvatar = ({
     (props) => ({
       ...props,
       "aria-label": !fallbackMessage
-        ? name || alt || t(intlMessages, "avatar.icon")
+        ? name || alt || t("avatar.avatarIcon")
         : undefined,
       children: fallbackMessage || name || icon,
       hidden: !fallback,

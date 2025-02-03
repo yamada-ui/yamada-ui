@@ -24,13 +24,13 @@ export const Basic = () => {
   )
 }
 
-export const WithBits = () => {
+export const Bits = () => {
   const formattedBits = useFormatByte(1450, { unit: "bit" })
 
   return <Text>{formattedBits}</Text>
 }
 
-export const WithLocale = () => {
+export const Locale = () => {
   const formattedBytesDE = useFormatByte(1450, { locale: "de-DE" })
   const formattedBytesCN = useFormatByte(1450, { locale: "zh-CN" })
 
@@ -42,7 +42,7 @@ export const WithLocale = () => {
   )
 }
 
-export const WithUnitDisplay = () => {
+export const UnitDisplay = () => {
   const formattedBytesShort = useFormatByte(50300, {
     unitDisplay: "short",
   })

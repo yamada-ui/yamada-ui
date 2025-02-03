@@ -17,7 +17,7 @@ export const Basic = () => {
   return <Text>{formattedNumber}</Text>
 }
 
-export const WithLocale = () => {
+export const Locale = () => {
   const formattedNumberEn = useFormatNumber(1234567.89, {
     style: "currency",
     currency: "USD",
@@ -37,7 +37,7 @@ export const WithLocale = () => {
   )
 }
 
-export const WithOptions = () => {
+export const Options = () => {
   const formattedNumber = useFormatNumber(1234567.89, {
     style: "decimal",
     maximumFractionDigits: 2,
@@ -47,7 +47,7 @@ export const WithOptions = () => {
   return <Text>{formattedNumber}</Text>
 }
 
-export const WithPercentage = () => {
+export const Percentage = () => {
   const formattedNumber = useFormatNumber(0.145, {
     style: "percent",
   })
@@ -55,7 +55,7 @@ export const WithPercentage = () => {
   return <Text>{formattedNumber}</Text>
 }
 
-export const WithUnit = () => {
+export const Unit = () => {
   const formattedNumber = useFormatNumber(384.4, {
     style: "unit",
     unit: "kilometer",
@@ -64,7 +64,7 @@ export const WithUnit = () => {
   return <Text>{formattedNumber}</Text>
 }
 
-export const WithNotation = () => {
+export const Notation = () => {
   const formattedNumber = useFormatNumber(1500000, {
     notation: "compact",
   })

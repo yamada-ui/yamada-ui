@@ -24,7 +24,7 @@ export const {
   usePropsContext: useFormatNumberPropsContext,
   withContext,
 } = createComponent<FormatNumberProps, FormatNumberStyle>(
-  "formatNumber",
+  "format-number",
   formatNumberStyle,
 )
 

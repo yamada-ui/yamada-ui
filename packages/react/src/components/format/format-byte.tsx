@@ -32,7 +32,7 @@ export const {
   usePropsContext: useFormatBytePropsContext,
   withContext,
 } = createComponent<FormatByteProps, FormatByteStyle>(
-  "formatByte",
+  "format-byte",
   formatByteStyle,
 )
 

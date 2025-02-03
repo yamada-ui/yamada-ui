@@ -16,7 +16,6 @@ export interface Transform {
 }
 
 export const globalValues = new Set([
-  "-moz-initial",
   "inherit",
   "initial",
   "none",

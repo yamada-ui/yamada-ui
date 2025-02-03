@@ -8,7 +8,7 @@ export const accordionStyle = defineComponentSlotStyle({
       },
       alignItems: "center",
       display: "inline-flex",
-      outline: "none",
+      focusVisibleRing: "inside",
       px: "4",
       py: "3",
       transitionDuration: "moderate",

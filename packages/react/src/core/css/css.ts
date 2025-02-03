@@ -9,12 +9,7 @@ import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
 import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
 import { styles, variableLengthProperties } from "../styles"
-import {
-  getColorSchemeVar,
-  getVar,
-  isColorScheme,
-  transformInterpolation,
-} from "./var"
+import { getColorSchemeVar, getVar, transformInterpolation } from "./var"
 
 function isVariableLength(key: string): boolean {
   return variableLengthProperties.includes(key as VariableLengthProperty)
@@ -192,9 +187,9 @@ function expandCSS(css: Dict) {
 
 function valueToVar(value: any, theme: StyledTheme<UsageTheme>) {
   return transformInterpolation(value, (value) => {
-    if (value.includes("colors.") || value.includes("colorScheme.")) {
-      if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
-
+    if (value.includes("colorScheme.")) {
+      return getColorSchemeVar(value)(theme)
+    } else if (value.includes("colors.")) {
       return colorMix(value, { theme })
     } else {
       if (
@@ -216,8 +211,6 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
       const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
-
-      // console.log(computedCSS)
 
       for (let [prop, value] of Object.entries(computedCSS)) {
         if (forwardProps?.includes(prop)) continue
@@ -264,7 +257,7 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
 
         if (important) value = insertImportant(value, style)
 
-        if (style?.processResult || style?.processSkip)
+        if (isObject(value) && (style?.processResult || style?.processSkip))
           value = createCSS(value, true)
 
         if (!nested && style?.static)

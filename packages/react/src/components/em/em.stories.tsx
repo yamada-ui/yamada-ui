@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Text } from "../../components/text"
+import { Text } from "../text"
 import { Em } from "./em"
 
 type Story = StoryFn<typeof Em>

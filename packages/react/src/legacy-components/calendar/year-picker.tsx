@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import type { MotionProps } from "../../components/motion"
 import type { PortalProps } from "../../components/portal"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
 import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
 import type { UseYearPickerProps } from "./use-year-picker"
 import { Popover, PopoverContent } from "../../components/popover"
@@ -111,25 +111,19 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     getPopoverProps,
     onClose,
   } = useYearPicker(computedProps)
-  const css: CSSUIObject = {
-    color,
-    h: "fit-content",
-    w: "100%",
-    ...styles.container,
-  }
 
   return (
     <DatePickerProvider value={styles}>
       <Popover {...getPopoverProps()}>
         <ui.div
           className={cx("ui-year-picker", className)}
-          __css={css}
+          __css={{
+            color,
+            ...styles.container,
+          }}
           {...getContainerProps(containerProps)}
         >
-          <ui.div
-            className="ui-year-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
-          >
+          <ui.div className="ui-year-picker__inner" __css={styles.inner}>
             <DatePickerField
               className="ui-year-picker__field"
               {...getFieldProps({ height, minHeight, ...fieldProps }, ref)}

@@ -47,7 +47,7 @@ export const Ordered: Story = () => {
   )
 }
 
-export const WithGap: Story = () => {
+export const Gap: Story = () => {
   return (
     <List.Root gap="lg">
       <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
@@ -59,7 +59,7 @@ export const WithGap: Story = () => {
   )
 }
 
-export const WithIcon: Story = () => {
+export const Icon: Story = () => {
   return (
     <List.Root>
       <List.Item icon={<CircleCheckIcon color="green.500" />}>
@@ -81,7 +81,7 @@ export const WithIcon: Story = () => {
   )
 }
 
-export const WithMarker: Story = () => {
+export const Marker: Story = () => {
   return (
     <List.Root>
       <List.Item

@@ -79,7 +79,7 @@ export const Icon: Story = () => {
 
 export const Justify: Story = () => {
   return (
-    <For each={["start", "center", "end"]}>
+    <For each={["start", "center", "end"] as const}>
       {(justify, index) => (
         <Blockquote.Root
           key={index}

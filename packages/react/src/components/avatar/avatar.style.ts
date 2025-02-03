@@ -167,9 +167,7 @@ export const avatarStyle = defineComponentSlotStyle({
   defaultProps: {
     size: "md",
     variant: "solid",
-    props: {
-      shape: "circle",
-    },
+    shape: "circle",
   },
 })
 

@@ -11,6 +11,7 @@ import type {
 } from "../css"
 import type {
   BreakpointDirection,
+  ComponentCompound,
   ComponentSlotStyle,
   ComponentStyle,
   LayerScheme,
@@ -230,10 +231,10 @@ function getPropStyle<
   propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
   style: Style<Y> | undefined = {},
 ) {
-  return function (options: GetStyleOptions<M>) {
-    const variants = Object.entries(propVariants)
+  const variants = Object.entries(propVariants)
 
-    if (!variants.length) return
+  return function (options: GetStyleOptions<M>) {
+    if (!variants.length) return style
 
     variants.forEach(([name, variants]) => {
       const prop = props[name as keyof typeof props]
@@ -241,16 +242,50 @@ function getPropStyle<
       if (prop) {
         const propStyle = getModifierStyle<Y, M>(prop, variants)(options)
 
-        style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+        if (propStyle)
+          style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
       } else {
         const boolean = Object.keys(variants).every((key) => isBooleanish(key))
 
         if (boolean) {
           const propStyle = getModifierStyle<Y, M>("false", variants)(options)
 
-          style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+          if (propStyle)
+            style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
         }
       }
+    })
+
+    return style
+  }
+}
+
+function getCompoundStyle<
+  Y extends boolean = false,
+  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+>(
+  props: Dict,
+  compounds: ComponentCompound<CSSSlotObject>[] | ComponentCompound[],
+  style: Style<Y> | undefined = {},
+) {
+  return function (options: GetStyleOptions<M>) {
+    if (!compounds.length) return style
+
+    compounds.forEach(({ css, ...rest }) => {
+      const conditions = Object.entries(rest)
+
+      if (!conditions.length) return
+
+      const apply = conditions.every(([key, value]) =>
+        isArray(value) ? value.includes(props[key]) : props[key] === value,
+      )
+
+      if (!apply) return
+
+      style = merge(
+        style,
+        wrapStyle<Y, M>("compounds", css as Style<Y>)(options),
+      )
     })
 
     return style
@@ -394,24 +429,17 @@ function useStyle<
     const {
       className: customClassName,
       base,
+      compounds,
       props: propVariants,
       sizes,
       variants,
-      defaultProps: {
-        colorScheme: defaultColorScheme,
-        props: additionalProps,
-        ...otherProps
-      } = {},
+      defaultProps: { colorScheme: defaultColorScheme, ...defaultProps } = {},
     } = componentStyle
 
-    const { size, variant, ...rest } = {
-      ...otherProps,
-      ...additionalProps,
-      ...props,
-    }
+    const mergedProps = { ...defaultProps, ...props }
 
-    props.variant ??= variant
-    props.size ??= size
+    props.variant ??= mergedProps.variant
+    props.size ??= mergedProps.size
     props.colorScheme ??= rootColorScheme ?? defaultColorScheme
 
     const omitProps = Object.keys(propVariants ?? {})
@@ -427,7 +455,7 @@ function useStyle<
       computedProps.className,
     )
 
-    let style: Style<H> | undefined = {}
+    let style: Style<H> = {}
 
     if (base) {
       const baseStyle = getStyle<H, M>(base)(options)
@@ -436,24 +464,31 @@ function useStyle<
     }
 
     if (sizes && !hasSize) {
-      const sizeStyle = getModifierStyle<H, M>(size, sizes)(options)
+      const sizeStyle = getModifierStyle<H, M>(mergedProps.size, sizes)(options)
 
       style = merge(style, wrapStyle<H, M>("size", sizeStyle)(options))
     }
 
     if (variants && !hasVariant) {
-      const variantStyle = getModifierStyle<H, M>(variant, variants)(options)
+      const variantStyle = getModifierStyle<H, M>(
+        mergedProps.variant,
+        variants,
+      )(options)
 
       style = merge(style, wrapStyle<H, M>("variant", variantStyle)(options))
     }
 
     if (propVariants) {
-      style = getPropStyle<H, M>(rest, propVariants, style)(options)
+      style = getPropStyle<H, M>(mergedProps, propVariants, style)(options)
+    }
+
+    if (compounds) {
+      style = getCompoundStyle<H, M>(mergedProps, compounds, style)(options)
     }
 
     const styleEqual = isEqual(styleRef.current, style)
 
-    if (!styleEqual) styleRef.current = style ?? {}
+    if (!styleEqual) styleRef.current = style
 
     const propsEqual = isEqual(propsRef.current, computedProps)
 

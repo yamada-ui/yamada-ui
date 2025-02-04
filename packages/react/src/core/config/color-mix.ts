@@ -84,7 +84,7 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
 
   const { type, values } = getCSSFunction(value)
 
-  if (!values) return value
+  if (!values) return getColor(value, theme)
 
   switch (type) {
     case "mix":

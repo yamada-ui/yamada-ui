@@ -54,7 +54,7 @@ export const Variants: Story = () => {
   )
 
   return (
-    <For each={["plain", "underline"]}>
+    <For each={["plain", "underline"] as const}>
       {(variant, index) => (
         <Breadcrumb.Root key={index} variant={variant} items={items} />
       )}
@@ -74,7 +74,7 @@ export const Sizes: Story = () => {
   )
 
   return (
-    <For each={["sm", "md", "lg"]}>
+    <For each={["sm", "md", "lg"] as const}>
       {(size, index) => (
         <Breadcrumb.Root key={index} size={size} items={items} />
       )}

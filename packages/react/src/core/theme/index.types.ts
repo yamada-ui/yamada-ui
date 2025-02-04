@@ -19,6 +19,7 @@ import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
 
 export type LayerScheme =
   | "base"
+  | "compounds"
   | "global"
   | "props"
   | "reset"
@@ -563,7 +564,7 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: UIValue<Union<keyof Required<Y>["variants"] | number>>
+        variant?: UIValue<Union<keyof Required<Y>["variants"]>>
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -573,18 +574,18 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: UIValue<Union<keyof Required<Y>["sizes"] | number>>
+        size?: UIValue<Union<keyof Required<Y>["sizes"]>>
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =
   string extends keyof Required<Y>["props"]
     ? {}
     : {
-        [K in keyof Required<Y>["props"]]?: keyof Required<Y>["props"][K] extends
-          | "false"
-          | "true"
-          ? boolean
-          : keyof Required<Y>["props"][K] | StringLiteral
+        [K in keyof Required<Y>["props"]]?: UIValue<
+          keyof Required<Y>["props"][K] extends "false" | "true"
+            ? boolean
+            : keyof Required<Y>["props"][K]
+        >
       }
 
 export type ThemeProps<Y extends Dict = Dict> = ThemeComponentProps<Y> &
@@ -764,11 +765,11 @@ export type ColorScheme =
   | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
   | ThemeTokens["colorSchemes"]
 
-export interface ComponentDefaultProps<
+export type ComponentDefaultProps<
   Y extends Dict = Dict,
   M extends Dict = Dict,
   D extends Dict = Dict,
-> {
+> = {
   /**
    * The color scheme of the component.
    */
@@ -781,15 +782,13 @@ export interface ComponentDefaultProps<
    * The variant of the component.
    */
   variant?: UIValue<keyof D>
-  /**
-   * The props of the component.
-   */
-  props?: {
-    [key in keyof Y]?: UIValue<
-      keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
-    >
-  }
-}
+} & (string extends keyof Y
+  ? {}
+  : {
+      [key in keyof Y]?: UIValue<
+        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
+      >
+    })
 
 interface ComponentSharedStyle<
   Y extends Dict = Dict,
@@ -806,6 +805,31 @@ interface ComponentSharedStyle<
   defaultProps?: ComponentDefaultProps<Y, M, D>
 }
 
+export type ComponentCompound<
+  Y extends CSSObject = CSSObject,
+  M extends CSSPropObject = CSSPropObject,
+  D extends CSSModifierObject = CSSModifierObject,
+  H extends CSSModifierObject = CSSModifierObject,
+> = {
+  css: Y
+  size?: UIValue<keyof D>
+  variant?: UIValue<keyof H> | UIValue<keyof H>[]
+} & (string extends keyof M
+  ? {}
+  : {
+      [key in keyof M]?:
+        | UIValue<
+            keyof M[key] extends "false" | "true"
+              ? boolean
+              : boolean | keyof M[key]
+          >
+        | UIValue<
+            keyof M[key] extends "false" | "true"
+              ? boolean
+              : boolean | keyof M[key]
+          >[]
+    })
+
 export interface ComponentStyle<
   Y extends CSSPropObject = CSSPropObject,
   M extends CSSModifierObject = CSSModifierObject,
@@ -815,6 +839,10 @@ export interface ComponentStyle<
    * The base style of the component.
    */
   base?: CSSObject
+  /**
+   * The different combinations of variants for the component.
+   */
+  compounds?: ComponentCompound<CSSObject, Y, M, D>[]
   /**
    * The component styles based on props.
    */
@@ -843,6 +871,10 @@ export interface ComponentSlotStyle<
    * The base style of the component.
    */
   base?: CSSSlotObject<Y>
+  /**
+   * The different combinations of variants for the component.
+   */
+  compounds?: ComponentCompound<CSSSlotObject<Y>, M, D, H>[]
   /**
    * The component styles based on props.
    */

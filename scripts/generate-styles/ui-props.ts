@@ -48,15 +48,6 @@ export const additionalProps = {
   marginY: { properties: ["marginTop", "marginBottom"] },
   maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   minBoxSize: { properties: ["minWidth", "minHeight"] },
-  outline: {
-    type: "CSS.Property.Outline | 'outside' | 'inside' | 'mixed'",
-    description: [
-      "The CSS `outline` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline",
-    ],
-    processResult: true,
-  },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
   scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
@@ -78,6 +69,37 @@ export const additionalProps = {
       "",
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property",
     ],
+  },
+
+  focusRing: {
+    type: "'outside' | 'inside' | 'mixed' | 'none'",
+    description: [
+      "The focus ring is used to identify the currently focused element.",
+    ],
+    processResult: true,
+  },
+  focusRingColor: {
+    description: ["Sets the value of `--focus-ring-color`."],
+    properties: "--focus-ring-color",
+  },
+  focusRingOffset: {
+    description: ["Sets the value of `--focus-ring-offset`."],
+    properties: "--focus-ring-offset",
+  },
+  focusRingStyle: {
+    description: ["Sets the value of `--focus-ring-style`."],
+    properties: "--focus-ring-style",
+  },
+  focusRingWidth: {
+    description: ["Sets the value of `--focus-ring-width`."],
+    properties: "--focus-ring-width",
+  },
+  focusVisibleRing: {
+    type: "'outside' | 'inside' | 'mixed' | 'none'",
+    description: [
+      "The focus ring is used to identify the currently focused element.",
+    ],
+    processResult: true,
   },
 
   blur: {

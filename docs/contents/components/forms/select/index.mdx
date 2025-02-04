@@ -182,7 +182,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 <VStack>
   <Select focusBorderColor="green.500" placeholder="custom border color" />
   <Select
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -265,30 +265,27 @@ Depending on the size of the element or the situation, you may want to adjust th
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Select isDisabled variant="outline" placeholder="outline" />
-  <Select isDisabled variant="filled" placeholder="filled" />
-  <Select isDisabled variant="flushed" placeholder="flushed" />
-  <Select isDisabled variant="unstyled" placeholder="unstyled" />
+  <Select disabled variant="outline" placeholder="outline" />
+  <Select disabled variant="filled" placeholder="filled" />
+  <Select disabled variant="flushed" placeholder="flushed" />
+  <Select disabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl disabled label="Which notifications would you like to receive?">
     <Select placeholder="Select notifications" />
   </FormControl>
 </VStack>
 ```
 
-To disable an option, set `isDisabled` to `true` on `Option`.
+To disable an option, set `disabled` to `true` on `Option`.
 
 ```tsx
 <Select placeholder="キャラクターを選択">
   <Option value="孫悟空">孫悟空</Option>
-  <Option value="ベジータ" isDisabled>
+  <Option value="ベジータ" disabled>
     ベジータ
   </Option>
   <Option value="フリーザ">フリーザ</Option>
@@ -297,19 +294,16 @@ To disable an option, set `isDisabled` to `true` on `Option`.
 
 ### Make Read-Only
 
-To make it read-only, set `isReadOnly` to `true`.
+To make it read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Select isReadOnly variant="outline" placeholder="outline" />
-  <Select isReadOnly variant="filled" placeholder="filled" />
-  <Select isReadOnly variant="flushed" placeholder="flushed" />
-  <Select isReadOnly variant="unstyled" placeholder="unstyled" />
+  <Select readOnly variant="outline" placeholder="outline" />
+  <Select readOnly variant="filled" placeholder="filled" />
+  <Select readOnly variant="flushed" placeholder="flushed" />
+  <Select readOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl readOnly label="Which notifications would you like to receive?">
     <Select placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -317,17 +311,17 @@ To make it read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <Select isInvalid variant="outline" placeholder="outline" />
-  <Select isInvalid variant="filled" placeholder="filled" />
-  <Select isInvalid variant="flushed" placeholder="flushed" />
-  <Select isInvalid variant="unstyled" placeholder="unstyled" />
+  <Select invalid variant="outline" placeholder="outline" />
+  <Select invalid variant="filled" placeholder="filled" />
+  <Select invalid variant="flushed" placeholder="flushed" />
+  <Select invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -438,7 +432,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

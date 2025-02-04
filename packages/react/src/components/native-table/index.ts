@@ -1,5 +1,17 @@
+export type {
+  NativeTableRootProps,
+  TableBodyProps,
+  TableCaptionProps,
+  TableContainerProps,
+  TableFootProps,
+  TableHeadProps,
+  TdProps,
+  ThProps,
+  TrProps,
+} from "./native-table"
 export {
-  NativeTableRoot as NativeTable,
+  NativeTablePropsContext,
+  NativeTableRoot,
   TableCaption,
   TableContainer,
   Tbody,
@@ -8,5 +20,9 @@ export {
   Th,
   Thead,
   Tr,
+  useNativeTablePropsContext,
 } from "./native-table"
-export type { NativeTableRootProps as NativeTableProps } from "./native-table"
+
+export * from "./native-table.style"
+
+export * as NativeTable from "./namespace"

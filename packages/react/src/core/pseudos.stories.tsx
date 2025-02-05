@@ -81,13 +81,12 @@ export const Group = () => {
   return (
     <VStack
       borderWidth="1px"
-      outline="0"
+      focusVisibleRing="outline"
       p="md"
       role="group"
       rounded="md"
       tabIndex={0}
       w="auto"
-      _focusVisible={{ boxShadow: "outline" }}
     >
       <Text textAlign="center">Focus me!</Text>
 
@@ -110,18 +109,33 @@ export const Peer = () => {
   return (
     <HStack>
       <Center
+        bg="primary"
+        color="white"
+        p="md"
+        rounded="md"
+        _peerFocus={{ bg: "secondary" }}
+      >
+        Focus the peer
+      </Center>
+
+      <Center
         data-peer
         borderWidth="1px"
-        outline="0"
+        focusVisibleRing="outline"
         p="md"
         rounded="md"
         tabIndex={0}
-        _focusVisible={{ boxShadow: "outline" }}
       >
         Focus me!
       </Center>
 
-      <Center bg="primary" p="md" rounded="md" _peerFocus={{ bg: "secondary" }}>
+      <Center
+        bg="primary"
+        color="white"
+        p="md"
+        rounded="md"
+        _peerFocus={{ bg: "secondary" }}
+      >
         Focus the peer
       </Center>
     </HStack>

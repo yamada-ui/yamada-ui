@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { Fieldset } from "."
 import { Field } from "../field"
 import { For } from "../for"
 import { Input } from "../input"
-import { Fieldset } from "."
 
 type Story = StoryFn<typeof Fieldset.Root>
 

@@ -2,8 +2,10 @@ import type { ThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { GroupStyle } from "./group.style"
 import { dataAttr } from "@yamada-ui/utils"
+import { cloneElement, useMemo } from "react"
 import { createComponent } from "../../core"
 import { useValue } from "../../hooks/use-value"
+import { getValidChildren } from "../../utils"
 import { Flex } from "../flex"
 import { groupStyle } from "./group.style"
 
@@ -31,6 +33,26 @@ export const Group = withContext(
   }) => {
     const orientation = useValue(orientationProp)
     const attached = useValue(attachedProp)
+    const validChildren = getValidChildren(children)
+    const count = validChildren.length
+    const cloneChildren = useMemo(
+      () =>
+        validChildren.map((child, index) =>
+          cloneElement(child, {
+            ...child.props,
+            style: {
+              "--group-count": count,
+              "--group-index": index,
+              ...(child.props?.style ?? {}),
+            },
+            "data-between": dataAttr(index > 0 && index < count - 1),
+            "data-first": dataAttr(index === 0),
+            "data-last": dataAttr(index === count - 1),
+            "data-peer": "",
+          }),
+        ),
+      [validChildren, count],
+    )
 
     return (
       <Flex
@@ -40,7 +62,7 @@ export const Group = withContext(
         role="group"
         {...rest}
       >
-        {children}
+        {cloneChildren}
       </Flex>
     )
   },

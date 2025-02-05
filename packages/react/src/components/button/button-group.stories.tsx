@@ -23,6 +23,36 @@ export const Basic: Story = () => {
   )
 }
 
+export const Variant: Story = () => {
+  return (
+    <ButtonGroup variant="surface">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <ButtonGroup size="sm">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
+export const ColorScheme: Story = () => {
+  return (
+    <ButtonGroup colorScheme="blue">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
 export const Disabled: Story = () => {
   return (
     <>
@@ -65,6 +95,12 @@ export const Attached: Story = () => {
       <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
         <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
+      </ButtonGroup>
+
+      <ButtonGroup size="sm" variant="outline" attached>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
       </ButtonGroup>
 
       <ButtonGroup variant="outline" attached orientation="vertical">

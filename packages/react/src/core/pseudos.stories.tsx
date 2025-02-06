@@ -12,8 +12,8 @@ export default {
 export const After = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       m="lg"
       p="lg"
       pos="relative"
@@ -37,14 +37,14 @@ export const After = () => {
 export const Before = () => {
   return (
     <Box
-      bg="warning"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       m="lg"
       p="lg"
       pos="relative"
       rounded="lg"
       _before={{
-        bg: "danger",
+        bg: "secondary",
         color: "white",
         content: "'before'",
         left: "-lg",
@@ -62,8 +62,8 @@ export const Before = () => {
 export const Hover = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       cursor="pointer"
       p="md"
       rounded="md"
@@ -109,8 +109,8 @@ export const Peer = () => {
   return (
     <HStack>
       <Center
-        bg="primary"
-        color="white"
+        bg="bg.contrast"
+        color="fg.contrast"
         p="md"
         rounded="md"
         _peerFocus={{ bg: "secondary" }}
@@ -130,8 +130,8 @@ export const Peer = () => {
       </Center>
 
       <Center
-        bg="primary"
-        color="white"
+        bg="bg.contrast"
+        color="fg.contrast"
         p="md"
         rounded="md"
         _peerFocus={{ bg: "secondary" }}
@@ -145,8 +145,8 @@ export const Peer = () => {
 export const Orientation = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       p="md"
       rounded="lg"
       _portrait={{ bg: "secondary" }}

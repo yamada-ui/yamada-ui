@@ -1,7 +1,7 @@
-import type { ComponentStyle } from "../../core"
+import { defineComponentStyle } from "../../core"
 
-export const Airy: ComponentStyle<"Airy"> = {
-  baseStyle: {
+export const airyStyle = defineComponentStyle({
+  base: {
     userSelect: "none",
     width: "fit-content",
     _disabled: {
@@ -18,4 +18,6 @@ export const Airy: ComponentStyle<"Airy"> = {
   sizes: {},
 
   defaultProps: {},
-}
+})
+
+export type AiryStyle = typeof airyStyle

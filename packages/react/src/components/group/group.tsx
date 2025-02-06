@@ -1,10 +1,10 @@
 import type { ThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { GroupStyle } from "./group.style"
-import { dataAttr } from "@yamada-ui/utils"
 import { cloneElement, useMemo } from "react"
 import { createComponent } from "../../core"
 import { useValue } from "../../hooks/use-value"
+import { dataAttr, isNull, isUndefined } from "../../utils"
 import { getValidChildren } from "../../utils"
 import { Flex } from "../flex"
 import { groupStyle } from "./group.style"
@@ -34,11 +34,21 @@ export const Group = withContext(
     const orientation = useValue(orientationProp)
     const attached = useValue(attachedProp)
     const validChildren = getValidChildren(children)
-    const count = validChildren.length
+    const omittedChildren = validChildren.filter((child) => {
+      const ungrouped = child.props["data-ungrouped"]
+
+      return isUndefined(ungrouped) || isNull(ungrouped)
+    })
+    const count = omittedChildren.length
     const cloneChildren = useMemo(
       () =>
-        validChildren.map((child, index) =>
-          cloneElement(child, {
+        validChildren.map((child) => {
+          const index = omittedChildren.indexOf(child)
+          const ungrouped = index === -1
+
+          if (ungrouped) return child
+
+          return cloneElement(child, {
             ...child.props,
             style: {
               "--group-count": count,
@@ -49,9 +59,9 @@ export const Group = withContext(
             "data-first": dataAttr(index === 0),
             "data-last": dataAttr(index === count - 1),
             "data-peer": "",
-          }),
-        ),
-      [validChildren, count],
+          })
+        }),
+      [validChildren, omittedChildren, count],
     )
 
     return (

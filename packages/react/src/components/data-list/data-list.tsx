@@ -66,6 +66,23 @@ export const DataListRoot = withProvider(
         vars,
       })
 
+    const context = useMemo(
+      () => ({
+        descriptionProps,
+        getDescriptionProps,
+        getItemProps,
+        getTermProps,
+        termProps,
+      }),
+      [
+        getDescriptionProps,
+        getItemProps,
+        getTermProps,
+        descriptionProps,
+        termProps,
+      ],
+    )
+
     const computedChildren = useMemo(
       () =>
         items.map((props, index) => <DataListItem key={index} {...props} />),
@@ -73,15 +90,7 @@ export const DataListRoot = withProvider(
     )
 
     return (
-      <DataListContext
-        value={{
-          descriptionProps,
-          getDescriptionProps,
-          getItemProps,
-          getTermProps,
-          termProps,
-        }}
-      >
+      <DataListContext value={context}>
         <ui.dl {...getRootProps(rest)}>{children ?? computedChildren}</ui.dl>
       </DataListContext>
     )

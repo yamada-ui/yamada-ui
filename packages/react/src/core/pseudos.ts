@@ -395,17 +395,17 @@ export const pseudoClasses = {
    */
   _notFirst: "&:not(:first-of-type)",
   /**
-   * The CSS `& > *:not(:first-of-type)` pseudo-class.
+   * The CSS `& > *:not(:first-child)` pseudo-class.
    */
-  _notFirstChild: "& > *:not(:first-of-type)",
+  _notFirstChild: "& > *:not(:first-child)",
   /**
    * The CSS `&:not(:last-of-type)` pseudo-class.
    */
   _notLast: "&:not(:last-of-type)",
   /**
-   * The CSS `& > *:not(:last-of-type)` pseudo-class.
+   * The CSS `& > *:not(:last-child)` pseudo-class.
    */
-  _notLastChild: "& > *:not(:last-of-type)",
+  _notLastChild: "& > *:not(:last-child)",
   /**
    * The CSS `&:not(:target)` pseudo-class.
    */

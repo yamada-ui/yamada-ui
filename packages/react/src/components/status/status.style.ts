@@ -11,7 +11,7 @@ export const statusStyle = defineComponentSlotStyle({
     label: {},
     root: {
       alignItems: "center",
-      display: "flex",
+      display: "inline-flex",
       gap: "sm",
     },
   },

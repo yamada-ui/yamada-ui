@@ -3,13 +3,6 @@ import type { StatusStyle } from "./status.style"
 import { createSlotComponent, ui } from "../../core"
 import { statusStyle } from "./status.style"
 
-const statuses = {
-  error: { colorScheme: "danger" },
-  info: { colorScheme: "info" },
-  success: { colorScheme: "success" },
-  warning: { colorScheme: "warning" },
-} as const
-
 export interface StatusProps extends HTMLUIProps, ThemeProps<StatusStyle> {
   /**
    * The type of the status
@@ -51,7 +44,7 @@ export const Status = withProvider<"div", StatusProps>(
   },
   "root",
 )(({ colorScheme, value = "info" }) => ({
-  colorScheme: colorScheme ?? statuses[value].colorScheme,
+  colorScheme: colorScheme ?? value,
   value,
 }))
 

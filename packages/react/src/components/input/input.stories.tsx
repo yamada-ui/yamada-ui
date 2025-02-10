@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form"
 import { withMask } from "use-mask-input"
 import { PropsTable } from "../../../storybook/components/props-table"
 import { Button } from "../button"
+import { Center } from "../center"
 import { Field } from "../field"
 import { For } from "../for"
-import { MailIcon, PhoneIcon } from "../icon"
+import { MailIcon, SearchIcon } from "../icon"
 import { VStack } from "../stack"
 import { Input, InputGroup } from "./"
 
@@ -229,17 +230,24 @@ export const Addon: Story = () => {
 export const Element: Story = () => {
   return (
     <>
-      <InputGroup.Root size="lg">
-        <InputGroup.Element>
-          <PhoneIcon />
-        </InputGroup.Element>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
-
       <InputGroup.Root>
         <InputGroup.Element w="auto">https://</InputGroup.Element>
         <Input placeholder="Search contacts" ps="4.75rem" />
         <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
+
+      <InputGroup.Root
+        as="form"
+        onSubmit={(ev) => {
+          ev.preventDefault()
+        }}
+      >
+        <Input type="search" name="q" placeholder="Search user names" />
+        <InputGroup.Element clickable px="2">
+          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+            <SearchIcon fontSize="xl" />
+          </Center>
+        </InputGroup.Element>
       </InputGroup.Root>
     </>
   )

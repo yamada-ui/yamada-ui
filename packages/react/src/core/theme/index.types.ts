@@ -812,8 +812,9 @@ export type ComponentCompound<
   H extends CSSModifierObject = CSSModifierObject,
 > = {
   css: Y
-  size?: UIValue<keyof D>
-  variant?: UIValue<keyof H> | UIValue<keyof H>[]
+  colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+  size?: (keyof D)[] | keyof D
+  variant?: (keyof H)[] | keyof H
 } & (string extends keyof M
   ? {}
   : {

@@ -26,11 +26,11 @@ export const Basic: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
         initial="hidden"
-        rounded="3xl"
+        rounded="l2"
         variants={variants}
         w="2xs"
       />
@@ -59,7 +59,7 @@ export const UsePropagation: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -67,14 +67,38 @@ export const UsePropagation: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
       </Motion>
     </Center>
   )
@@ -107,7 +131,7 @@ export const UseOrchestration: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -115,14 +139,38 @@ export const UseOrchestration: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
       </Motion>
     </Center>
   )
@@ -153,7 +201,7 @@ export const UseDynamicVariants: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -161,39 +209,39 @@ export const UseDynamicVariants: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={1}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={2}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={3}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={4}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />

@@ -1,14 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const EmptyState: ComponentMultiStyle<"EmptyState"> = {
-  baseStyle: {
-    container: {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      w: "full",
-    },
+export const emptyState = defineComponentSlotStyle({
+  base: {
     content: {
       alignItems: "center",
       display: "flex",
@@ -16,14 +9,21 @@ export const EmptyState: ComponentMultiStyle<"EmptyState"> = {
       justifyContent: "center",
     },
     description: {
-      color: "muted",
+      color: "fg.muted",
       fontSize: "sm",
     },
     indicator: {
       alignItems: "center",
-      color: "muted",
+      color: "fg.muted",
       display: "flex",
       justifyContent: "center",
+    },
+    root: {
+      alignItems: "center",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      w: "full",
     },
     title: {
       fontWeight: "semibold",
@@ -32,45 +32,45 @@ export const EmptyState: ComponentMultiStyle<"EmptyState"> = {
 
   sizes: {
     sm: {
-      container: {
-        gap: "sm",
-        py: "sm",
-      },
       content: {
         gap: "xs",
       },
       indicator: {
         fontSize: "4xl",
       },
+      root: {
+        gap: "sm",
+        py: "sm",
+      },
       title: {
         fontSize: "md",
       },
     },
     md: {
-      container: {
-        gap: "md",
-        py: "md",
-      },
       content: {
         gap: "sm",
       },
       indicator: {
         fontSize: "5xl",
       },
+      root: {
+        gap: "md",
+        py: "md",
+      },
       title: {
         fontSize: "lg",
       },
     },
     lg: {
-      container: {
-        gap: "lg",
-        py: "lg",
-      },
       content: {
         gap: "md",
       },
       indicator: {
         fontSize: "6xl",
+      },
+      root: {
+        gap: "lg",
+        py: "lg",
       },
       title: {
         fontSize: "xl",
@@ -81,4 +81,6 @@ export const EmptyState: ComponentMultiStyle<"EmptyState"> = {
   defaultProps: {
     size: "md",
   },
-}
+})
+
+export type EmptyState = typeof emptyState

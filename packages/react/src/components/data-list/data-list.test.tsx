@@ -1,6 +1,6 @@
-import type { DataListItemProps } from "./"
+import type { DataListItemProps } from "."
+import { DataList } from "."
 import { a11y } from "../../../test"
-import { DataList } from "./"
 
 describe("<DataList />", () => {
   test("DataList renders correctly", async () => {

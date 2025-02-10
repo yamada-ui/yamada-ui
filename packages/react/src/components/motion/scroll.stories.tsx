@@ -23,12 +23,12 @@ export const Basic: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         whileInView={{ opacity: 1 }}
         onViewportEnter={(entry) => console.log("Element entries", entry)}
       >
@@ -44,12 +44,12 @@ export const WithTransition: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 1 }}
         whileInView={{ opacity: 1 }}
         onViewportEnter={(entry) => console.log("Element entries", entry)}
@@ -66,12 +66,12 @@ export const WithOnce: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         whileInView={{ opacity: 1 }}
@@ -94,16 +94,16 @@ export const UseViewport: Story = () => {
         h="xs"
         overflow="scroll"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         <Motion
-          bg="primary"
-          color="white"
+          bg="mono"
+          color="mono.contrast"
           initial={{ opacity: 0 }}
           mt="96"
           p="md"
-          rounded="md"
+          rounded="l2"
           transition={{ duration: 2 }}
           viewport={{ margin: "50px 0px 0px 0px", root: scrollRef }}
           whileInView={{ opacity: 1 }}
@@ -131,15 +131,15 @@ export const UseHook: Story = () => {
       >
         <Motion
           style={{ scale }}
-          bg={["blackAlpha.200", "whiteAlpha.200"]}
+          bg="mono.subtle"
           h="full"
           overflow="hidden"
-          rounded="3xl"
+          rounded="l3"
           w="full"
         >
           <Motion
             style={{ scaleY: scrollYProgress }}
-            bg="primary"
+            bg="mono"
             h="inherit"
             transformOrigin="50% 100%"
             w="inherit"
@@ -162,7 +162,7 @@ export const CustomScrollBar: Story = () => {
     <>
       <Motion
         style={{ scaleX }}
-        bg="primary"
+        bg="mono"
         h="3"
         left="0"
         position="fixed"
@@ -354,7 +354,7 @@ export const WithVariants: Story = () => {
             h="430px"
             placeContent="center"
             placeItems="center"
-            rounded="20px"
+            rounded="3xl"
             transformOrigin="10% 60%"
             variants={card}
             w="300px"

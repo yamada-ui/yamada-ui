@@ -433,14 +433,15 @@ function useStyle<
       props: propVariants,
       sizes,
       variants,
-      defaultProps: { colorScheme: defaultColorScheme, ...defaultProps } = {},
+      defaultProps = {},
     } = componentStyle
+
+    props.colorScheme ??= rootColorScheme ?? defaultProps.colorScheme
 
     const mergedProps = { ...defaultProps, ...props }
 
     props.variant ??= mergedProps.variant
     props.size ??= mergedProps.size
-    props.colorScheme ??= rootColorScheme ?? defaultColorScheme
 
     const omitProps = Object.keys(propVariants ?? {})
     const { hasSize, hasVariant } = getHasAtRuleStyle(props.css)(getAtRule)

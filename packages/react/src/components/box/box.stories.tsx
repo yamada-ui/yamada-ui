@@ -12,7 +12,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Box bg="bg.contrast" color="fg.contrast" p="md" rounded="md">
+    <Box bg="mono" color="mono.contrast" p="md" rounded="l2">
       Box
     </Box>
   )

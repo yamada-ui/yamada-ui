@@ -20,7 +20,10 @@ const toGroup = <Y extends string>(selector: Y) =>
 
 const toPeer = <Y extends string>(selector: Y) =>
   ["[data-peer]", ".peer"]
-    .map((prefix) => `${prefix}${selector.slice(1)} ~ &`)
+    .flatMap((prefix) => [
+      `&:has(~ ${prefix}${selector.slice(1)})`,
+      `${prefix}${selector.slice(1)} ~ &`,
+    ])
     .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
 
 export const attributes = {
@@ -392,17 +395,17 @@ export const pseudoClasses = {
    */
   _notFirst: "&:not(:first-of-type)",
   /**
-   * The CSS `& > *:not(:first-of-type)` pseudo-class.
+   * The CSS `& > *:not(:first-child)` pseudo-class.
    */
-  _notFirstChild: "& > *:not(:first-of-type)",
+  _notFirstChild: "& > *:not(:first-child)",
   /**
    * The CSS `&:not(:last-of-type)` pseudo-class.
    */
   _notLast: "&:not(:last-of-type)",
   /**
-   * The CSS `& > *:not(:last-of-type)` pseudo-class.
+   * The CSS `& > *:not(:last-child)` pseudo-class.
    */
-  _notLastChild: "& > *:not(:last-of-type)",
+  _notLastChild: "& > *:not(:last-child)",
   /**
    * The CSS `&:not(:target)` pseudo-class.
    */

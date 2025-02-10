@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Button, IconButton } from "../button"
 import { PlusIcon } from "../icon"
+import { Input } from "../input"
 import { Tag } from "../tag"
 import { Group } from "./group"
 
@@ -55,10 +56,11 @@ export const Attached: Story = () => {
   return (
     <>
       <Group attached>
-        <Button variant="outline">Button</Button>
+        <Input />
         <IconButton
-          variant="outline"
+          variant="surface"
           aria-label="Add"
+          focusVisibleRing="inside"
           icon={<PlusIcon fontSize="xl" />}
         />
       </Group>
@@ -73,9 +75,15 @@ export const Attached: Story = () => {
       </Group>
 
       <Group attached orientation="vertical">
-        <Button variant="outline">Button</Button>
-        <Button variant="outline">Button</Button>
-        <Button variant="outline">Button</Button>
+        <Button variant="outline" focusVisibleRing="inside">
+          Button
+        </Button>
+        <Button variant="outline" focusVisibleRing="inside">
+          Button
+        </Button>
+        <Button variant="outline" focusVisibleRing="inside">
+          Button
+        </Button>
       </Group>
     </>
   )

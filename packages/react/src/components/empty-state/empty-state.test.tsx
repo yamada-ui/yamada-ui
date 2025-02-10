@@ -5,7 +5,7 @@ import { EmptyState } from "./"
 describe("<EmptyState />", () => {
   test("EmptyState renders correctly", async () => {
     await a11y(
-      <EmptyState
+      <EmptyState.Root
         description="Explore our products and add items to your cart"
         title="Your cart is empty"
       />,
@@ -16,7 +16,7 @@ describe("<EmptyState />", () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"
     render(
-      <EmptyState
+      <EmptyState.Root
         data-testid="empty-state"
         description={description}
         title={title}
@@ -37,7 +37,7 @@ describe("<EmptyState />", () => {
     const description = "Please add items to the cart"
 
     render(
-      <EmptyState
+      <EmptyState.Root
         data-testid="empty-state"
         description={description}
         title={title}
@@ -62,7 +62,7 @@ describe("<EmptyState />", () => {
     const description = "Please add items to the cart"
     const SvgIcon = <ShoppingCartIcon />
     render(
-      <EmptyState
+      <EmptyState.Root
         data-testid="empty-state"
         description={description}
         indicator={SvgIcon}
@@ -92,14 +92,14 @@ describe("<EmptyState />", () => {
     const description = "Please add items to the cart"
     const buttonCaption = "Back to home"
     render(
-      <EmptyState
+      <EmptyState.Root
         data-testid="empty-state"
         description={description}
         indicator={<ShoppingCartIcon />}
         title={title}
       >
         <button>{buttonCaption}</button>
-      </EmptyState>,
+      </EmptyState.Root>,
     )
 
     const EmptyStateComponent = await screen.findByTestId("empty-state")

@@ -1,18 +1,18 @@
 import type { FocusEventHandler } from "react"
 import type { Dict } from "../../utils"
-import type { FormControlProps } from "./form-control"
+import type { FieldProps } from "./field"
 import { useMemo } from "react"
 import { ariaAttr, dataAttr, handlerAll } from "../../utils"
-import { useFormControlContext } from "./form-control"
+import { useFieldsetContext } from "../fieldset"
+import { useFieldContext } from "./field"
 
-export interface UseFormControlProps<Y extends HTMLElement>
-  extends FormControlProps {
+export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
   id?: string
   onBlur?: FocusEventHandler<Y>
   onFocus?: FocusEventHandler<Y>
 }
 
-export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
+export const useFieldProps = <Y extends HTMLElement, M extends Dict>({
   id,
   disabled,
   invalid,
@@ -21,14 +21,15 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   onBlur,
   onFocus,
   ...rest
-}: M & UseFormControlProps<Y>) => {
-  const context = useFormControlContext()
+}: M & UseFieldProps<Y>) => {
+  const fieldsetContext = useFieldsetContext()
+  const fieldContext = useFieldContext()
 
-  id ??= context.id
-  disabled ??= context.disabled
-  required ??= context.required
-  readOnly ??= context.readOnly
-  invalid ??= context.invalid
+  id ??= fieldContext?.id
+  disabled ??= fieldContext?.disabled ?? fieldsetContext?.disabled
+  required ??= fieldContext?.required
+  readOnly ??= fieldContext?.readOnly
+  invalid ??= fieldContext?.invalid ?? fieldsetContext?.invalid
 
   const props = useMemo(
     () => ({
@@ -60,14 +61,14 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   )
   const eventProps = useMemo(
     () => ({
-      onBlur: handlerAll(context.onBlur, onBlur),
-      onFocus: handlerAll(context.onFocus, onFocus),
+      onBlur: handlerAll(fieldContext?.onBlur, onBlur),
+      onFocus: handlerAll(fieldContext?.onFocus, onFocus),
     }),
-    [context.onBlur, context.onFocus, onBlur, onFocus],
+    [fieldContext?.onBlur, fieldContext?.onFocus, onBlur, onFocus],
   )
 
   return {
-    context,
+    context: fieldContext,
     props,
     ariaProps,
     dataProps,

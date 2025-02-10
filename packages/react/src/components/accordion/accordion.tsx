@@ -146,10 +146,8 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
     children = runIfFunc(children, { disabled, expanded: open })
 
     const validChildren = getValidChildren(children)
-
     const customAccordionButton = findChild(validChildren, AccordionButton)
     const customAccordionPanel = findChild(validChildren, AccordionPanel)
-
     const cloneChildren = !isEmpty(validChildren)
       ? omitChildren(validChildren, AccordionButton, AccordionPanel)
       : children

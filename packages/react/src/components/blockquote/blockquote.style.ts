@@ -83,9 +83,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
 
   defaultProps: {
     variant: "subtle",
-    props: {
-      justify: "start",
-    },
+    justify: "start",
   },
 })
 

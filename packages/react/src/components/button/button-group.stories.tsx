@@ -15,13 +15,48 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <>
-      <ButtonGroup variant="outline" attached>
-        <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
-      </ButtonGroup>
+    <ButtonGroup>
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
 
-      <ButtonGroup gap="sm">
+export const Variant: Story = () => {
+  return (
+    <ButtonGroup variant="surface">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <ButtonGroup size="sm">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
+export const ColorScheme: Story = () => {
+  return (
+    <ButtonGroup colorScheme="blue">
+      <Button>Button</Button>
+      <Button>Button</Button>
+      <Button>Button</Button>
+    </ButtonGroup>
+  )
+}
+
+export const Disabled: Story = () => {
+  return (
+    <>
+      <ButtonGroup disabled>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
@@ -32,14 +67,43 @@ export const Basic: Story = () => {
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
+    </>
+  )
+}
 
-      <ButtonGroup flexDirection="column" gap="sm">
+export const Orientation: Story = () => {
+  return (
+    <>
+      <ButtonGroup>
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
 
-      <ButtonGroup variant="outline" attached flexDirection="column">
+      <ButtonGroup orientation="vertical">
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>
+    </>
+  )
+}
+
+export const Attached: Story = () => {
+  return (
+    <>
+      <ButtonGroup variant="outline" attached>
+        <Button>Button</Button>
+        <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
+      </ButtonGroup>
+
+      <ButtonGroup size="sm" variant="outline" attached>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>
+
+      <ButtonGroup variant="outline" attached orientation="vertical">
         <Button>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>

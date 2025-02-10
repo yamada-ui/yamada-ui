@@ -1,10 +1,10 @@
 export {
-  DataListContext as Context,
   DataListDescription as Description,
   DataListItem as Item,
+  DataListPropsContext as PropsContext,
   DataListRoot as Root,
   DataListTerm as Term,
-  useDataListContext as useContext,
+  useDataListPropsContext as usePropsContext,
 } from "./data-list"
 export type {
   DataListDescriptionProps as DescriptionProps,
@@ -12,5 +12,3 @@ export type {
   DataListRootProps as RootProps,
   DataListTermProps as TermProps,
 } from "./data-list"
-export { useDataList } from "./use-data-list"
-export type { UseDataListProps, UseDataListReturn } from "./use-data-list"

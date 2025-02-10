@@ -1,20 +1,48 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { DataListStyle } from "./data-list.style"
-import type { UseDataListProps, UseDataListReturn } from "./use-data-list"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { createSlotComponent, ui } from "../../core"
 import {
   getValidChildren,
   isArray,
   isEmpty,
+  isNumber,
   omitChildren,
   pickChildren,
+  useUpdateEffect,
 } from "../../utils"
 import { dataListStyle } from "./data-list.style"
-import { useDataList } from "./use-data-list"
 
-export interface DataListRootProps extends UseDataListProps {
+const getComputeCol = (items: DataListItemProps[]) => {
+  let col = 0
+
+  items.forEach(({ description, term }) => {
+    const termCount = !term ? 0 : isArray(term) ? term.length : 1
+    const descriptionCount = !description
+      ? 0
+      : isArray(description)
+        ? description.length
+        : 1
+
+    col = Math.max(col, termCount + descriptionCount)
+  })
+
+  return col
+}
+
+export interface DataListRootProps
+  extends HTMLUIProps<"dl">,
+    ThemeProps<DataListStyle> {
+  /**
+   * The number of columns.
+   * If `orientation` is `"horizontal"` and `items` is not set, please set this.
+   */
+  col?: number
+  /**
+   * If provided, generate elements based on items.
+   */
+  items?: DataListItemProps[]
   /**
    * The props for the data list description component.
    */
@@ -25,14 +53,14 @@ export interface DataListRootProps extends UseDataListProps {
   termProps?: DataListTermProps
 }
 
-interface DataListContext extends Omit<UseDataListReturn, "getRootProps"> {
-  descriptionProps?: DataListDescriptionProps
-  termProps?: DataListTermProps
-}
+interface DataListContext
+  extends Pick<DataListRootProps, "descriptionProps" | "termProps"> {}
 
 export const {
   ComponentContext: DataListContext,
+  PropsContext: DataListPropsContext,
   useComponentContext: useDataListContext,
+  usePropsContext: useDataListPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<DataListRootProps, DataListStyle, DataListContext>(
@@ -47,56 +75,51 @@ export const {
  */
 export const DataListRoot = withProvider(
   ({
-    variant,
+    style,
     children,
-    col,
+    col: colProp,
     items = [],
-    orientation = "horizontal",
-    vars,
     descriptionProps,
     termProps,
     ...rest
   }) => {
-    const { getDescriptionProps, getItemProps, getRootProps, getTermProps } =
-      useDataList({
-        variant,
-        col,
-        items,
-        orientation,
-        vars,
-      })
+    const [col, setCol] = useState(() => {
+      if (isNumber(colProp)) return colProp
 
-    const context = useMemo(
-      () => ({
-        descriptionProps,
-        getDescriptionProps,
-        getItemProps,
-        getTermProps,
-        termProps,
-      }),
-      [
-        getDescriptionProps,
-        getItemProps,
-        getTermProps,
-        descriptionProps,
-        termProps,
-      ],
-    )
-
+      return getComputeCol(items)
+    })
     const computedChildren = useMemo(
       () =>
         items.map((props, index) => <DataListItem key={index} {...props} />),
       [items],
     )
+    const context = useMemo(
+      () => ({
+        descriptionProps,
+        termProps,
+      }),
+      [descriptionProps, termProps],
+    )
+
+    useUpdateEffect(() => {
+      if (isNumber(colProp)) {
+        setCol(colProp)
+
+        return
+      }
+
+      setCol(getComputeCol(items))
+    }, [items, colProp])
 
     return (
       <DataListContext value={context}>
-        <ui.dl {...getRootProps(rest)}>{children ?? computedChildren}</ui.dl>
+        <ui.dl style={{ "--col": col, ...style }} {...rest}>
+          {children ?? computedChildren}
+        </ui.dl>
       </DataListContext>
     )
   },
   "root",
-  { transferProps: ["variant"] },
 )()
 
 export interface DataListItemProps extends HTMLUIProps {
@@ -127,7 +150,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
     termProps: customTermProps,
     ...rest
   }) => {
-    const { descriptionProps, getItemProps, termProps } = useDataListContext()
+    const { descriptionProps, termProps } = useDataListContext()
 
     const validChildren = getValidChildren(children)
     const customTerms = pickChildren(validChildren, DataListTerm)
@@ -137,7 +160,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
       : children
 
     return (
-      <ui.div {...getItemProps(rest)}>
+      <ui.div {...rest}>
         {!isEmpty(customTerms) ? (
           customTerms
         ) : isArray(term) ? (
@@ -182,19 +205,11 @@ export const DataListItem = withContext<"div", DataListItemProps>(
 
 export interface DataListTermProps extends HTMLUIProps<"dt"> {}
 
-export const DataListTerm = withContext<"dt", DataListTermProps>((props) => {
-  const { getTermProps } = useDataListContext()
-
-  return <ui.dt {...getTermProps(props)} />
-}, "term")()
+export const DataListTerm = withContext<"dt", DataListTermProps>("dt", "term")()
 
 export interface DataListDescriptionProps extends HTMLUIProps<"dd"> {}
 
 export const DataListDescription = withContext<"dd", DataListDescriptionProps>(
-  (props) => {
-    const { getDescriptionProps } = useDataListContext()
-
-    return <ui.dd {...getDescriptionProps(props)} />
-  },
+  "dd",
   "description",
 )()

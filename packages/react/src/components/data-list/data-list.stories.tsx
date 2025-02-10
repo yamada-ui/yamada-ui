@@ -1,6 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { useMemo } from "react"
+import { PropsTable } from "../../../storybook/components"
 import { Separator } from "../separator"
+import { VStack } from "../stack"
 import { DataList } from "./"
 
 type Story = StoryFn<typeof DataList.Root>
@@ -26,90 +28,47 @@ export const Basic: Story = () => {
     [],
   )
 
-  return (
-    <>
-      <DataList.Root items={items} />
-
-      <Separator />
-
-      <DataList.Root col={2}>
-        <DataList.Item>
-          <DataList.Term>白石うらら</DataList.Term>
-          <DataList.Description>入れ替わりの魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>小田切寧々</DataList.Term>
-          <DataList.Description>虜の魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>大塚芽子</DataList.Term>
-          <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>猿島マリア</DataList.Term>
-          <DataList.Description>未来視の魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>滝川ノア</DataList.Term>
-          <DataList.Description>過去視の魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>飛鳥美琴</DataList.Term>
-          <DataList.Description>透明の魔女</DataList.Description>
-        </DataList.Item>
-
-        <DataList.Item>
-          <DataList.Term>西園寺リカ</DataList.Term>
-          <DataList.Description>記憶操作の魔女</DataList.Description>
-        </DataList.Item>
-      </DataList.Root>
-    </>
-  )
+  return <DataList.Root items={items} />
 }
 
-export const Size: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
-    () => [
-      { description: "入れ替わりの魔女", term: "白石うらら" },
-      { description: "虜の魔女", term: "小田切寧々" },
-      { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
-      { description: "未来視の魔女", term: "猿島マリア" },
-      { description: "過去視の魔女", term: "滝川ノア" },
-      { description: "透明の魔女", term: "飛鳥美琴" },
-      { description: "記憶操作の魔女", term: "西園寺リカ" },
-    ],
-    [],
-  )
-
+export const Children: Story = () => {
   return (
-    <>
-      <DataList.Root size="sm" items={items} />
+    <DataList.Root col={2}>
+      <DataList.Item>
+        <DataList.Term>白石うらら</DataList.Term>
+        <DataList.Description>入れ替わりの魔女</DataList.Description>
+      </DataList.Item>
 
-      <Separator />
+      <DataList.Item>
+        <DataList.Term>小田切寧々</DataList.Term>
+        <DataList.Description>虜の魔女</DataList.Description>
+      </DataList.Item>
 
-      <DataList.Root size="md" items={items} />
+      <DataList.Item>
+        <DataList.Term>大塚芽子</DataList.Term>
+        <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+      </DataList.Item>
 
-      <Separator />
+      <DataList.Item>
+        <DataList.Term>猿島マリア</DataList.Term>
+        <DataList.Description>未来視の魔女</DataList.Description>
+      </DataList.Item>
 
-      <DataList.Root size="lg" items={items} />
+      <DataList.Item>
+        <DataList.Term>滝川ノア</DataList.Term>
+        <DataList.Description>過去視の魔女</DataList.Description>
+      </DataList.Item>
 
-      <Separator />
+      <DataList.Item>
+        <DataList.Term>飛鳥美琴</DataList.Term>
+        <DataList.Description>透明の魔女</DataList.Description>
+      </DataList.Item>
 
-      <DataList.Root size="sm" items={items} orientation="vertical" />
-
-      <Separator />
-
-      <DataList.Root size="md" items={items} orientation="vertical" />
-
-      <Separator />
-
-      <DataList.Root size="lg" items={items} orientation="vertical" />
-    </>
+      <DataList.Item>
+        <DataList.Term>西園寺リカ</DataList.Term>
+        <DataList.Description>記憶操作の魔女</DataList.Description>
+      </DataList.Item>
+    </DataList.Root>
   )
 }
 
@@ -128,17 +87,56 @@ export const Variant: Story = () => {
   )
 
   return (
-    <>
-      <DataList.Root variant="subtle" items={items} />
+    <PropsTable
+      variant="column"
+      columns={["subtle", "bold", "grid"]}
+      rows={["horizontal", "vertical"]}
+    >
+      {(column, row, key) => {
+        return (
+          <DataList.Root
+            key={key}
+            variant={column}
+            items={items}
+            orientation={row}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
 
-      <Separator />
+export const Size: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
+    () => [
+      { description: "入れ替わりの魔女", term: "白石うらら" },
+      { description: "虜の魔女", term: "小田切寧々" },
+      { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
+      { description: "未来視の魔女", term: "猿島マリア" },
+      { description: "過去視の魔女", term: "滝川ノア" },
+      { description: "透明の魔女", term: "飛鳥美琴" },
+      { description: "記憶操作の魔女", term: "西園寺リカ" },
+    ],
+    [],
+  )
 
-      <DataList.Root variant="bold" items={items} />
-
-      <Separator />
-
-      <DataList.Root variant="grid" items={items} />
-    </>
+  return (
+    <PropsTable
+      variant="column"
+      columns={["sm", "md", "lg"]}
+      rows={["horizontal", "vertical"]}
+    >
+      {(column, row, key) => {
+        return (
+          <DataList.Root
+            key={key}
+            size={column}
+            items={items}
+            orientation={row}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
@@ -157,13 +155,10 @@ export const Orientation: Story = () => {
   )
 
   return (
-    <>
+    <VStack separator={<Separator />}>
       <DataList.Root items={items} orientation="horizontal" />
-
-      <Separator />
-
       <DataList.Root items={items} orientation="vertical" />
-    </>
+    </VStack>
   )
 }
 
@@ -185,10 +180,8 @@ export const MultipleTerms: Story = () => {
   )
 
   return (
-    <>
+    <VStack separator={<Separator />}>
       <DataList.Root items={items} />
-
-      <Separator />
 
       <DataList.Root orientation="vertical">
         <DataList.Item>
@@ -233,7 +226,7 @@ export const MultipleTerms: Story = () => {
           <DataList.Description>記憶操作の魔女</DataList.Description>
         </DataList.Item>
       </DataList.Root>
-    </>
+    </VStack>
   )
 }
 
@@ -267,10 +260,8 @@ export const MultipleDescriptions: Story = () => {
   )
 
   return (
-    <>
+    <VStack separator={<Separator />}>
       <DataList.Root items={items} />
-
-      <Separator />
 
       <DataList.Root orientation="vertical">
         <DataList.Item>
@@ -319,7 +310,7 @@ export const MultipleDescriptions: Story = () => {
           </DataList.Description>
         </DataList.Item>
       </DataList.Root>
-    </>
+    </VStack>
   )
 }
 
@@ -342,13 +333,11 @@ export const CustomTerm: Story = () => {
   )
 
   return (
-    <>
+    <VStack separator={<Separator />}>
       <DataList.Root
         items={items}
         termProps={{ textDecoration: "line-through" }}
       />
-
-      <Separator />
 
       <DataList.Root col={2}>
         <DataList.Item>
@@ -386,7 +375,7 @@ export const CustomTerm: Story = () => {
           <DataList.Description>記憶操作の魔女</DataList.Description>
         </DataList.Item>
       </DataList.Root>
-    </>
+    </VStack>
   )
 }
 
@@ -409,13 +398,11 @@ export const CustomDescription: Story = () => {
   )
 
   return (
-    <>
+    <VStack separator={<Separator />}>
       <DataList.Root
         items={items}
         descriptionProps={{ textDecoration: "line-through" }}
       />
-
-      <Separator />
 
       <DataList.Root col={2}>
         <DataList.Item>
@@ -455,6 +442,6 @@ export const CustomDescription: Story = () => {
           <DataList.Description>記憶操作の魔女</DataList.Description>
         </DataList.Item>
       </DataList.Root>
-    </>
+    </VStack>
   )
 }

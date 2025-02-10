@@ -3,16 +3,23 @@ import type { CSSProps, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { ListStyle } from "./list.style"
 import { cloneElement, isValidElement } from "react"
 import { createSlotComponent, ui } from "../../core"
-import { getValidChildren } from "../../utils"
 import { listStyle } from "./list.style"
 
 export interface ListRootProps
   extends HTMLUIProps<"ul">,
-    ThemeProps<ListStyle> {
+    Omit<ThemeProps<ListStyle>, "styleType"> {
+  /**
+   * If provided, generate elements based on items.
+   */
+  items?: ListItemProps[]
   /**
    * The CSS `list-style-position` property.
    */
   stylePosition?: CSSProps["listStylePosition"]
+  /**
+   * The CSS `list-style-position` property.
+   */
+  styleType?: CSSProps["listStyleType"]
 }
 
 export const {
@@ -32,13 +39,12 @@ export const ListRoot = withProvider(
   ({
     as: asProp,
     children,
+    items,
     stylePosition: listStylePosition,
     styleType: listStyleType = "none",
     ...rest
   }) => {
     const as = asProp ?? (listStyleType == "decimal" ? "ol" : undefined)
-
-    const validChildren = getValidChildren(children)
 
     return (
       <ui.ul
@@ -48,7 +54,8 @@ export const ListRoot = withProvider(
         role="list"
         {...rest}
       >
-        {validChildren}
+        {children ??
+          items?.map((props, index) => <ListItem key={index} {...props} />)}
       </ui.ul>
     )
   },
@@ -86,4 +93,4 @@ export const ListIcon = withContext<"svg", ListIconProps>(
     }
   },
   "icon",
-)()
+)({ "data-list-icon": "" })

@@ -1,5 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { CheckIcon, CircleCheckIcon } from "../icon"
+import { useMemo } from "react"
+import { CircleCheckIcon, LoaderIcon } from "../icon"
+import { Separator } from "../separator"
+import { VStack } from "../stack"
 import { List } from "./"
 
 type Story = StoryFn<typeof List.Root>
@@ -11,7 +14,22 @@ const meta: Meta<typeof List.Root> = {
 
 export default meta
 
-export const Unstyled: Story = () => {
+export const Basic: Story = () => {
+  const items = useMemo<List.RootProps["items"]>(
+    () => [
+      { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
+      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
+      { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
+      { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
+    ],
+    [],
+  )
+
+  return <List.Root items={items} />
+}
+
+export const Children: Story = () => {
   return (
     <List.Root>
       <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
@@ -23,144 +41,92 @@ export const Unstyled: Story = () => {
   )
 }
 
-export const Unordered: Story = () => {
-  return (
-    <List.Root styleType="disc">
-      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
-      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
-      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
-      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
-      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
-    </List.Root>
+export const StyleType: Story = () => {
+  const items = useMemo<List.RootProps["items"]>(
+    () => [
+      { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
+      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
+      { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
+      { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
+    ],
+    [],
   )
-}
 
-export const Ordered: Story = () => {
   return (
-    <List.Root styleType="decimal">
-      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
-      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
-      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
-      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
-      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
-    </List.Root>
+    <VStack separator={<Separator />}>
+      <List.Root items={items} styleType="disc" />
+      <List.Root items={items} styleType="decimal" />
+      <List.Root items={items} styleType="square" />
+      <List.Root items={items} styleType="circle" />
+      <List.Root items={items} styleType="lower-alpha" />
+    </VStack>
   )
 }
 
 export const Gap: Story = () => {
-  return (
-    <List.Root gap="lg">
-      <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
-      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
-      <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
-      <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
-      <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
-    </List.Root>
+  const items = useMemo<List.RootProps["items"]>(
+    () => [
+      { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
+      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
+      { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
+      { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
+    ],
+    [],
   )
+
+  return <List.Root gap="lg" items={items} />
 }
 
 export const Icon: Story = () => {
-  return (
-    <List.Root>
-      <List.Item icon={<CircleCheckIcon color="green.500" />}>
-        よろしければわたしが喜びのダンスを踊りましょうか！
-      </List.Item>
-      <List.Item icon={<CircleCheckIcon color="green.500" />}>
-        お命頂だい!!!　とうっ!!!
-      </List.Item>
-      <List.Item icon={<CircleCheckIcon color="green.500" />}>
-        う…宇宙一のスピードを誇るオ…オレさまのうしろに……
-      </List.Item>
-      <List.Item icon={<CircleCheckIcon color="green.500" />}>
-        オ…オレたちが勝てるわけはなかったはずだ………
-      </List.Item>
-      <List.Item icon={<CheckIcon color="green.500" />}>
-        オレは試合場のゴミ拾いみたいなもんかよ…
-      </List.Item>
-    </List.Root>
+  const items = useMemo<List.RootProps["items"]>(
+    () => [
+      {
+        children: "よろしければわたしが喜びのダンスを踊りましょうか！",
+        icon: <CircleCheckIcon color="success" />,
+      },
+      {
+        children: "お命頂だい!!!　とうっ!!!",
+        icon: <CircleCheckIcon color="success" />,
+      },
+      {
+        children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……",
+        icon: <CircleCheckIcon color="success" />,
+      },
+      {
+        children: "オ…オレたちが勝てるわけはなかったはずだ………",
+        icon: <CircleCheckIcon color="success" />,
+      },
+      {
+        children: "オレは試合場のゴミ拾いみたいなもんかよ…",
+        icon: <LoaderIcon color="fg.subtle" />,
+      },
+    ],
+    [],
   )
-}
 
-export const Marker: Story = () => {
   return (
-    <List.Root>
-      <List.Item
-        _marker={{
-          content: "'+ '",
-        }}
-      >
-        よろしければわたしが喜びのダンスを踊りましょうか！
-      </List.Item>
-      <List.Item
-        _marker={{
-          content: "'- '",
-        }}
-      >
-        お命頂だい!!!　とうっ!!!
-      </List.Item>
-      <List.Item
-        _marker={{
-          content: "'* '",
-        }}
-      >
-        う…宇宙一のスピードを誇るオ…オレさまのうしろに……
-      </List.Item>
-      <List.Item
-        _marker={{
-          content: "'/ '",
-        }}
-      >
-        オ…オレたちが勝てるわけはなかったはずだ………
-      </List.Item>
-      <List.Item
-        _marker={{
-          content: "'^ '",
-        }}
-      >
-        オレは試合場のゴミ拾いみたいなもんかよ…
-      </List.Item>
-    </List.Root>
-  )
-}
+    <VStack separator={<Separator />}>
+      <List.Root items={items} />
 
-export const Others: Story = () => {
-  return (
-    <>
-      <List.Root styleType="square">
-        <List.Item>
+      <List.Root>
+        <List.Item icon={<CircleCheckIcon color="success" />}>
           よろしければわたしが喜びのダンスを踊りましょうか！
         </List.Item>
-        <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
-        <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
-        <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
-        <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
-      </List.Root>
-
-      <List.Root styleType="circle">
-        <List.Item>
-          よろしければわたしが喜びのダンスを踊りましょうか！
+        <List.Item icon={<CircleCheckIcon color="success" />}>
+          お命頂だい!!!　とうっ!!!
         </List.Item>
-        <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
-        <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
-        <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
-        <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
-      </List.Root>
-
-      <List.Root ms="1.2em" styleType="lower-alpha">
-        <List.Item ps="0.2em">
-          よろしければわたしが喜びのダンスを踊りましょうか！
-        </List.Item>
-        <List.Item ps="0.2em">お命頂だい!!!　とうっ!!!</List.Item>
-        <List.Item ps="0.2em">
+        <List.Item icon={<CircleCheckIcon color="success" />}>
           う…宇宙一のスピードを誇るオ…オレさまのうしろに……
         </List.Item>
-        <List.Item ps="0.2em">
+        <List.Item icon={<CircleCheckIcon color="success" />}>
           オ…オレたちが勝てるわけはなかったはずだ………
         </List.Item>
-        <List.Item ps="0.2em">
+        <List.Item icon={<LoaderIcon color="fg.subtle" />}>
           オレは試合場のゴミ拾いみたいなもんかよ…
         </List.Item>
       </List.Root>
-    </>
+    </VStack>
   )
 }

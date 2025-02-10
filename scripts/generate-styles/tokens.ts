@@ -48,6 +48,7 @@ export const tokens: Tokens = {
     "borderBlockStartColor",
     "borderBlockEndColor",
     "columnRuleColor",
+    "focusRingColor",
   ],
   durations: ["animationDuration", "transitionDuration"],
   easings: ["transitionTimingFunction", "animationTimingFunction"],
@@ -165,6 +166,7 @@ export const tokens: Tokens = {
     "insetInlineEnd",
     "translateX",
     "translateY",
+    "focusRingOffset",
   ],
   zIndices: ["zIndex"],
 }

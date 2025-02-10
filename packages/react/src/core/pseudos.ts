@@ -20,7 +20,10 @@ const toGroup = <Y extends string>(selector: Y) =>
 
 const toPeer = <Y extends string>(selector: Y) =>
   ["[data-peer]", ".peer"]
-    .map((prefix) => `${prefix}${selector.slice(1)} ~ &`)
+    .flatMap((prefix) => [
+      `&:has(~ ${prefix}${selector.slice(1)})`,
+      `${prefix}${selector.slice(1)} ~ &`,
+    ])
     .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
 
 export const attributes = {

@@ -1,19 +1,20 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Status: ComponentMultiStyle<"Status"> = {
-  baseStyle: ({ colorScheme: bg = "info" }) => ({
-    container: {
-      alignItems: "center",
-      display: "flex",
-      gap: "sm",
-    },
+export const statusStyle = defineComponentSlotStyle({
+  base: {
     indicator: {
-      bg,
+      bg: "colorScheme.solid",
       flexShrink: 0,
       forcedColorAdjust: "none",
       rounded: "full",
     },
-  }),
+    label: {},
+    root: {
+      alignItems: "center",
+      display: "flex",
+      gap: "sm",
+    },
+  },
 
   sizes: {
     sm: {
@@ -34,4 +35,6 @@ export const Status: ComponentMultiStyle<"Status"> = {
     colorScheme: "info",
     size: "md",
   },
-}
+})
+
+export type StatusStyle = typeof statusStyle

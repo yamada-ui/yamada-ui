@@ -3,33 +3,33 @@ import { defineComponentStyle } from "../../core"
 export const iconButtonStyle = defineComponentStyle({
   sizes: {
     xs: {
-      boxSize: "8",
       fontSize: "lg",
+      minBoxSize: "8",
       rounded: "md",
     },
     sm: {
-      boxSize: "9",
       fontSize: "xl",
+      minBoxSize: "9",
       rounded: "md",
     },
     md: {
-      boxSize: "10",
       fontSize: "2xl",
+      minBoxSize: "10",
       rounded: "md",
     },
     lg: {
-      boxSize: "11",
       fontSize: "3xl",
+      minBoxSize: "11",
       rounded: "md",
     },
     xl: {
-      boxSize: "12",
       fontSize: "4xl",
+      minBoxSize: "12",
       rounded: "lg",
     },
     "2xl": {
-      boxSize: "14",
       fontSize: "4xl",
+      minBoxSize: "14",
       rounded: "lg",
     },
   },

@@ -20,7 +20,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Card.Root variant="outline">
+    <Card.Root>
       <Card.Header>
         <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
       </Card.Header>

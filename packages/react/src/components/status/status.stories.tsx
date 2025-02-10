@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Status } from "."
-import { For } from "../../components/for"
-import { HStack, VStack } from "../../components/stack"
+import { For } from "../for"
+import { HStack, VStack } from "../stack"
+import { Status } from "./"
 
 type Story = StoryFn<typeof Status>
 
@@ -23,7 +23,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithLabel: Story = () => {
+export const Label: Story = () => {
   return (
     <HStack>
       <Status value="info">Info</Status>
@@ -34,7 +34,7 @@ export const WithLabel: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <VStack>
       <For each={["sm", "md", "lg"]}>

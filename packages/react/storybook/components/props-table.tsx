@@ -37,7 +37,7 @@ export const PropsTable = <Y extends string, M extends string>({
         {columns.map((column, colIndex) => (
           <GridItem
             key={colIndex}
-            fontWeight="semibold"
+            fontWeight="medium"
             p="md"
             textAlign="center"
           >
@@ -48,12 +48,7 @@ export const PropsTable = <Y extends string, M extends string>({
         <For each={rows}>
           {(row, rowIndex) => (
             <Fragment key={rowIndex}>
-              <Flex
-                align="center"
-                color="fg.muted"
-                fontWeight="semibold"
-                p="md"
-              >
+              <Flex align="center" color="fg.muted" fontWeight="medium" p="md">
                 {toTitleCase(row)}
               </Flex>
 
@@ -92,7 +87,7 @@ export const PropsTable = <Y extends string, M extends string>({
                       alignItems="center"
                       color="fg.muted"
                       display="flex"
-                      fontWeight="semibold"
+                      fontWeight="medium"
                     >
                       {toTitleCase(row)}
                     </GridItem>

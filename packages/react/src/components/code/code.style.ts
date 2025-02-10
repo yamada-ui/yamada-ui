@@ -51,7 +51,6 @@ export const codeStyle = defineComponentStyle({
   },
 
   defaultProps: {
-    colorScheme: "gray",
     size: "sm",
     variant: "subtle",
   },

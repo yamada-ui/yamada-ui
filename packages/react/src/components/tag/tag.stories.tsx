@@ -15,6 +15,10 @@ const meta: Meta<typeof Tag> = {
 
 export default meta
 
+export const Basic: Story = () => {
+  return <Tag>Tag</Tag>
+}
+
 export const Variant: Story = () => {
   return (
     <PropsTable

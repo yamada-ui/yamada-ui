@@ -23,7 +23,7 @@ export const Basic: Story = () => {
             bg={`${colorScheme}.500`}
             color="white"
             p="md"
-            rounded="md"
+            rounded="l2"
           >
             Box
           </Box>

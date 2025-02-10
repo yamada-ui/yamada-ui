@@ -17,9 +17,9 @@ export default meta
 export const Horizontal: Story = () => {
   return (
     <Flex gap="md">
-      <For each={["primary", "secondary", "warning", "danger"]}>
+      <For each={["info", "success", "warning", "danger"]}>
         {(bg, index) => (
-          <Box key={index} bg={bg} color="white" p="md" rounded="4">
+          <Box key={index} bg={bg} color="white" p="md" rounded="l2">
             Box
           </Box>
         )}
@@ -31,9 +31,9 @@ export const Horizontal: Story = () => {
 export const Vertical: Story = () => {
   return (
     <Flex direction="column" gap="md">
-      <For each={["primary", "secondary", "warning", "danger"]}>
+      <For each={["info", "success", "warning", "danger"]}>
         {(bg, index) => (
-          <Box key={index} bg={bg} color="white" p="md" rounded="4">
+          <Box key={index} bg={bg} color="white" p="md" rounded="l2">
             Box
           </Box>
         )}
@@ -48,9 +48,9 @@ export const Context: Story = () => {
   return (
     <FlexPropsContext value={value}>
       <Flex gap="md">
-        <For each={["primary", "secondary", "warning", "danger"]}>
+        <For each={["info", "success", "warning", "danger"]}>
           {(bg, index) => (
-            <Box key={index} bg={bg} color="white" p="md" rounded="4">
+            <Box key={index} bg={bg} color="white" p="md" rounded="l2">
               Box
             </Box>
           )}
@@ -58,9 +58,9 @@ export const Context: Story = () => {
       </Flex>
 
       <Flex gap="md">
-        <For each={["primary", "secondary", "warning", "danger"]}>
+        <For each={["info", "success", "warning", "danger"]}>
           {(bg, index) => (
-            <Box key={index} bg={bg} color="white" p="md" rounded="4">
+            <Box key={index} bg={bg} color="white" p="md" rounded="l2">
               Box
             </Box>
           )}

@@ -33,7 +33,7 @@ export const tagStyle = defineComponentSlotStyle({
       display: "inline-flex",
       gap: "1",
       maxW: "full",
-      rounded: "md",
+      rounded: "l2",
       userSelect: "none",
       verticalAlign: "top",
     },

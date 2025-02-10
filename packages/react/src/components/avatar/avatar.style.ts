@@ -43,7 +43,7 @@ export const avatarStyle = defineComponentSlotStyle({
         root: { rounded: "full" },
       },
       rounded: {
-        root: { rounded: "lg" },
+        root: { rounded: "l2" },
       },
       square: {
         root: { rounded: "none" },

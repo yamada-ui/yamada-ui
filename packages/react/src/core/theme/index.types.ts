@@ -813,8 +813,8 @@ export type ComponentCompound<
 > = {
   css: Y
   colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
-  size?: keyof D | keyof D[]
-  variant?: keyof H | keyof H[]
+  size?: (keyof D)[] | keyof D
+  variant?: (keyof H)[] | keyof H
 } & (string extends keyof M
   ? {}
   : {

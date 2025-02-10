@@ -18,10 +18,10 @@ export const Basic: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ delay: 1, duration: 2, ease: "easeOut" }}
       >
         Motion
@@ -35,10 +35,10 @@ export const WithType: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ type: "spring", stiffness: 100 }}
       >
         Motion
@@ -52,11 +52,11 @@ export const UseValueSpecific: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ opacity: 1, x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{
           delay: 1,
           ease: "easeOut",
@@ -91,7 +91,7 @@ export const WithDelayChildren: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -99,39 +99,39 @@ export const WithDelayChildren: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l3"
         variants={list}
         w="2xs"
       >
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={1}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={2}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={3}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
         <Motion
-          bg="white"
+          bg="mono.contrast"
           custom={4}
           h="4"
-          rounded="md"
+          rounded="l2"
           variants={item}
           w="full"
         />
@@ -161,7 +161,7 @@ export const WithStaggerChildren: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -169,14 +169,38 @@ export const WithStaggerChildren: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
       </Motion>
     </Center>
   )
@@ -206,7 +230,7 @@ export const WithStaggerDirection: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="visible"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
@@ -214,14 +238,38 @@ export const WithStaggerDirection: Story = () => {
         initial="hidden"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
       </Motion>
     </Center>
   )
@@ -246,21 +294,45 @@ export const WithAfterChildren: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate="hidden"
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         flexDirection="column"
         gap="md"
         overflow="hidden"
         p="md"
-        rounded="3xl"
+        rounded="l2"
         variants={list}
         w="2xs"
       >
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
-        <Motion bg="white" h="4" rounded="md" variants={item} w="full" />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
+        <Motion
+          bg="mono.contrast"
+          h="4"
+          rounded="l2"
+          variants={item}
+          w="full"
+        />
       </Motion>
     </Center>
   )
@@ -271,10 +343,10 @@ export const WithRepeat: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ rotate: 360 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 2, repeat: Infinity }}
       >
         Motion
@@ -288,10 +360,10 @@ export const WithRepeatType: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ rotate: 360 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
       >
         Motion
@@ -305,10 +377,10 @@ export const WithRepeatDelay: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ rotate: 360 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
       >
         Motion
@@ -322,10 +394,10 @@ export const WithEasing: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
       >
         Motion

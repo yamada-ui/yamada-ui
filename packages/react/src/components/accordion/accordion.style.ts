@@ -45,12 +45,11 @@ export const accordionStyle = defineComponentSlotStyle({
   variants: {
     panel: {
       button: {
-        rounded: "md",
+        rounded: "l2",
       },
       item: {
-        bg: "bg.panel",
-        borderWidth: "1px",
-        rounded: "md",
+        layerStyle: "panel",
+        rounded: "l2",
         _notFirst: {
           mt: "md",
         },
@@ -64,7 +63,6 @@ export const accordionStyle = defineComponentSlotStyle({
         },
       },
     },
-    unstyled: {},
   },
 
   defaultProps: {

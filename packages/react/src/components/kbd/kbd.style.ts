@@ -6,7 +6,7 @@ export const kbdStyle = defineComponentStyle({
     display: "inline-flex",
     fontFamily: "mono",
     fontWeight: "medium",
-    rounded: "sm",
+    rounded: "l1",
     whiteSpace: "nowrap",
   },
 

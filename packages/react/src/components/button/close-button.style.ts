@@ -2,7 +2,7 @@ import { defineComponentStyle } from "../../core"
 
 export const closeButtonStyle = defineComponentStyle({
   defaultProps: {
-    size: "sm",
+    size: "xs",
     variant: "ghost",
   },
 })

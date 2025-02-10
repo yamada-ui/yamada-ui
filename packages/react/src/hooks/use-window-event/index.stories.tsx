@@ -2,8 +2,8 @@ import type { Meta } from "@storybook/react"
 import { useRef } from "react"
 import { useWindowEvent } from "."
 import { Input } from "../../components/input"
+import { Kbd } from "../../components/kbd"
 import { Text } from "../../components/text"
-import { Kbd } from "../../legacy-components/kbd"
 import { useOS } from "../use-os"
 
 const meta: Meta = {

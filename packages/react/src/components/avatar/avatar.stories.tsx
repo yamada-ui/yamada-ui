@@ -146,7 +146,7 @@ export const Group: Story = () => {
         )}
       </For>
 
-      <For each={["circle", "square", "rounded"]}>
+      <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
           <AvatarGroup key={index} shape={shape}>
             {Array(5)
@@ -188,7 +188,7 @@ export const GroupMax: Story = () => {
         )}
       </For>
 
-      <For each={["circle", "square", "rounded"]}>
+      <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
           <AvatarGroup key={index} max={3} shape={shape}>
             {Array(5)

@@ -32,7 +32,6 @@ export const statusStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    colorScheme: "info",
     size: "md",
   },
 })

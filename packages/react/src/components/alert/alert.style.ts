@@ -91,6 +91,18 @@ export const alertStyle = defineComponentSlotStyle({
     },
   },
 
+  compounds: [
+    {
+      css: {
+        icon: {
+          color: ["colorScheme.600", "colorScheme.400"],
+        },
+      },
+      colorScheme: ["secondary", "gray"],
+      variant: "plain",
+    },
+  ],
+
   defaultProps: {
     variant: "plain",
   },

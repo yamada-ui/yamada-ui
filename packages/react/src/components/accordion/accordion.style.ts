@@ -8,7 +8,7 @@ export const accordionStyle = defineComponentSlotStyle({
       },
       alignItems: "center",
       display: "inline-flex",
-      outline: "none",
+      focusVisibleRing: "inside",
       px: "4",
       py: "3",
       transitionDuration: "moderate",
@@ -43,7 +43,19 @@ export const accordionStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    basic: {
+    panel: {
+      button: {
+        rounded: "l2",
+      },
+      item: {
+        layerStyle: "panel",
+        rounded: "l2",
+        _notFirst: {
+          mt: "md",
+        },
+      },
+    },
+    plain: {
       item: {
         borderTopWidth: "1px",
         _last: {
@@ -51,24 +63,10 @@ export const accordionStyle = defineComponentSlotStyle({
         },
       },
     },
-    panel: {
-      button: {
-        rounded: "md",
-      },
-      item: {
-        bg: "bg.panel",
-        borderWidth: "1px",
-        rounded: "md",
-        _notFirst: {
-          mt: "md",
-        },
-      },
-    },
-    unstyled: {},
   },
 
   defaultProps: {
-    variant: "basic",
+    variant: "plain",
   },
 })
 

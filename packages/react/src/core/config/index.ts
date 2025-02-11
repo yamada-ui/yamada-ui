@@ -10,10 +10,10 @@ import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { colorScheme } from "./color-scheme"
 import { generateFilter } from "./filter"
+import { generateFocusRing } from "./focus-ring"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
-import { outline } from "./outline"
 import { generateStyles } from "./styles"
 import { generateToken } from "./token"
 import { transform } from "./transform"
@@ -70,6 +70,7 @@ export const transforms = {
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
   filter: generateFilter,
+  focusRing: generateFocusRing,
   fraction: (value: any) => {
     if (isNumber(value) && value <= 1) value = `${value * 100}%`
 
@@ -80,7 +81,6 @@ export const transforms = {
   grid,
   keyframes,
   media: generateAtRule("media"),
-  outline,
   px: (value: any) => {
     if (value == null) return value
 

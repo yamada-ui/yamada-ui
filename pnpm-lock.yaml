@@ -890,6 +890,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      use-mask-input:
+        specifier: ^3.4.2
+        version: 3.4.2(react-dom@19.0.0)(react@19.0.0)
 
   packages/test:
     dependencies:
@@ -16965,6 +16968,17 @@ packages:
     dependencies:
       react: 19.0.0
     dev: false
+
+  /use-mask-input@3.4.2(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-d+lYFl/6rsmdya3bZfMoMqZYC5uSKDPtWp/BD+FQ6KRsAKaPfRO1Z/jvagrytKCpvIrpER3i/WKC/4baIzlr+A==, tarball: https://registry.npmjs.org/use-mask-input/-/use-mask-input-3.4.2.tgz}
+    engines: {node: '>=16', npm: '>=7'}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
+    dependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+    dev: true
 
   /use-sidecar@1.1.3(@types/react@19.0.2)(react@19.0.0):
     resolution: {integrity: sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==, tarball: https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.3.tgz}

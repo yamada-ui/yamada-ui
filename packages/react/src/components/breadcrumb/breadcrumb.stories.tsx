@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { BreadcrumbItem } from "./"
 import { useMemo } from "react"
 import { For } from "../../components/for"
 import { ChevronsRightIcon } from "../icon"
@@ -29,7 +28,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<BreadcrumbItem[]>(
+  const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -43,7 +42,7 @@ export const Items: Story = () => {
 }
 
 export const Variants: Story = () => {
-  const items = useMemo<BreadcrumbItem[]>(
+  const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -54,7 +53,7 @@ export const Variants: Story = () => {
   )
 
   return (
-    <For each={["plain", "underline"]}>
+    <For each={["plain", "underline"] as const}>
       {(variant, index) => (
         <Breadcrumb.Root key={index} variant={variant} items={items} />
       )}
@@ -63,7 +62,7 @@ export const Variants: Story = () => {
 }
 
 export const Sizes: Story = () => {
-  const items = useMemo<BreadcrumbItem[]>(
+  const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -74,7 +73,7 @@ export const Sizes: Story = () => {
   )
 
   return (
-    <For each={["sm", "md", "lg"]}>
+    <For each={["sm", "md", "lg"] as const}>
       {(size, index) => (
         <Breadcrumb.Root key={index} size={size} items={items} />
       )}
@@ -83,7 +82,7 @@ export const Sizes: Story = () => {
 }
 
 export const Boundaries: Story = () => {
-  const items = useMemo<BreadcrumbItem[]>(
+  const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -134,7 +133,7 @@ export const Separator: Story = () => {
 }
 
 // export const CustomEllipsis: Story = () => {
-//   const items = useMemo<BreadcrumbItem[]>(
+//   const items = useMemo<Breadcrumb.RootProps["items"]>(
 //     () => [
 //       { href: "/", label: "サイヤ人編" },
 //       { href: "/", label: "ナメック星編" },

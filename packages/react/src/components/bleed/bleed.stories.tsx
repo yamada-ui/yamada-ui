@@ -19,9 +19,9 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Card.Root variant="outline" maxW="xl">
+    <Card.Root maxW="xl">
       <Card.Header>
-        <Heading size="md">北斗の拳</Heading>
+        <Heading size="lg">北斗の拳</Heading>
       </Card.Header>
 
       <Card.Body>

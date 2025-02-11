@@ -12,8 +12,8 @@ export default {
 export const After = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       m="lg"
       p="lg"
       pos="relative"
@@ -37,14 +37,14 @@ export const After = () => {
 export const Before = () => {
   return (
     <Box
-      bg="warning"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       m="lg"
       p="lg"
       pos="relative"
       rounded="lg"
       _before={{
-        bg: "danger",
+        bg: "secondary",
         color: "white",
         content: "'before'",
         left: "-lg",
@@ -62,8 +62,8 @@ export const Before = () => {
 export const Hover = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       cursor="pointer"
       p="md"
       rounded="md"
@@ -81,13 +81,12 @@ export const Group = () => {
   return (
     <VStack
       borderWidth="1px"
-      outline="0"
+      focusVisibleRing="outline"
       p="md"
       role="group"
       rounded="md"
       tabIndex={0}
       w="auto"
-      _focusVisible={{ boxShadow: "outline" }}
     >
       <Text textAlign="center">Focus me!</Text>
 
@@ -110,18 +109,33 @@ export const Peer = () => {
   return (
     <HStack>
       <Center
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        rounded="md"
+        _peerFocus={{ bg: "secondary" }}
+      >
+        Focus the peer
+      </Center>
+
+      <Center
         data-peer
         borderWidth="1px"
-        outline="0"
+        focusVisibleRing="outline"
         p="md"
         rounded="md"
         tabIndex={0}
-        _focusVisible={{ boxShadow: "outline" }}
       >
         Focus me!
       </Center>
 
-      <Center bg="primary" p="md" rounded="md" _peerFocus={{ bg: "secondary" }}>
+      <Center
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        rounded="md"
+        _peerFocus={{ bg: "secondary" }}
+      >
         Focus the peer
       </Center>
     </HStack>
@@ -131,8 +145,8 @@ export const Peer = () => {
 export const Orientation = () => {
   return (
     <Box
-      bg="primary"
-      color="white"
+      bg="bg.contrast"
+      color="fg.contrast"
       p="md"
       rounded="lg"
       _portrait={{ bg: "secondary" }}

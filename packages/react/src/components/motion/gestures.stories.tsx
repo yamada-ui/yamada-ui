@@ -17,10 +17,10 @@ export const Basic: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         w="2xs"
         whileFocus={{ scale: 1.2 }}
         whileHover={{ scale: 1.2 }}
@@ -38,10 +38,10 @@ export const WithTransition: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         w="2xs"
         whileHover={{ scale: 1.2, transition: { duration: 1 } }}
         whileTap={{ scale: 0.9 }}
@@ -62,10 +62,10 @@ export const WithVariants: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         variants={variants}
         w="2xs"
         whileHover="enlarge"
@@ -87,22 +87,22 @@ export const UseStopPropagation: Story = () => {
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         h="2xs"
         placeContent="center"
         placeItems="center"
-        rounded="3xl"
+        rounded="l3"
         variants={variants}
         w="2xs"
         whileHover="enlarge"
         whileTap="reduce"
       >
         <Motion
-          bg="white"
+          bg="mono.contrast"
           h="4xs"
-          rounded="2xl"
+          rounded="l3"
           w="4xs"
           onPointerDownCapture={(ev) => ev.stopPropagation()}
         />

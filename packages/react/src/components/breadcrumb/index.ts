@@ -1,7 +1,9 @@
 export {
   BreadcrumbEllipsis,
   BreadcrumbLink,
+  BreadcrumbPropsContext,
   BreadcrumbRoot,
+  useBreadcrumbPropsContext,
 } from "./breadcrumb"
 export type {
   BreadcrumbEllipsisProps,
@@ -12,10 +14,6 @@ export type {
 export * from "./breadcrumb.style"
 
 export { useBreadcrumb } from "./use-breadcrumb"
-export type {
-  BreadcrumbItem,
-  UseBreadcrumbProps,
-  UseBreadcrumbReturn,
-} from "./use-breadcrumb"
+export type { UseBreadcrumbProps, UseBreadcrumbReturn } from "./use-breadcrumb"
 
 export * as Breadcrumb from "./namespace"

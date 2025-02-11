@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { Grid } from "../grid"
-import { Stat, StatHelperMessage, StatIcon, StatLabel, StatNumber } from "./"
+import { Stat } from "./"
 
-type Story = StoryFn<typeof Stat>
+type Story = StoryFn<typeof Stat.Root>
 
-const meta: Meta<typeof Stat> = {
-  component: Stat,
+const meta: Meta<typeof Stat.Root> = {
+  component: Stat.Root,
   title: "Components / Stat",
 }
 
@@ -15,26 +15,26 @@ export default meta
 export const Basic: Story = () => {
   return (
     <>
-      <Stat
+      <Stat.Root
         helperMessage="21% more than last month"
         icon="increase"
         label="Total Page Views"
         number="1,993,818"
       />
 
-      <Stat>
-        <StatLabel>Total Page Views</StatLabel>
-        <StatNumber>1,993,818</StatNumber>
-        <StatHelperMessage>
-          <StatIcon type="increase" />
+      <Stat.Root>
+        <Stat.Label>Total Page Views</Stat.Label>
+        <Stat.Number>1,993,818</Stat.Number>
+        <Stat.HelperMessage>
+          <Stat.Icon type="increase" />
           21% more than last month
-        </StatHelperMessage>
-      </Stat>
+        </Stat.HelperMessage>
+      </Stat.Root>
     </>
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const ColorScheme: Story = () => {
   return (
     <Grid
       gap="md"
@@ -47,7 +47,7 @@ export const WithColorScheme: Story = () => {
       w="full"
     >
       {COLOR_SCHEMES.map((colorScheme) => (
-        <Stat
+        <Stat.Root
           key={colorScheme}
           colorScheme={colorScheme}
           helperMessage="21% more than last month"
@@ -59,9 +59,9 @@ export const WithColorScheme: Story = () => {
   )
 }
 
-export const WithCenterContent: Story = () => {
+export const CenterContent: Story = () => {
   return (
-    <Stat
+    <Stat.Root
       centerContent
       helperMessage="From August 1 to August 18"
       icon="increase"
@@ -71,24 +71,24 @@ export const WithCenterContent: Story = () => {
   )
 }
 
-export const WithDecrease: Story = () => {
+export const Decrease: Story = () => {
   return (
     <>
-      <Stat
+      <Stat.Root
         helperMessage="21% more than last month"
         icon="decrease"
         label="Total Page Views"
         number="1,993,818"
       />
 
-      <Stat>
-        <StatLabel>Total Page Views</StatLabel>
-        <StatNumber>1,993,818</StatNumber>
-        <StatHelperMessage>
-          <StatIcon type="decrease" />
+      <Stat.Root>
+        <Stat.Label>Total Page Views</Stat.Label>
+        <Stat.Number>1,993,818</Stat.Number>
+        <Stat.HelperMessage>
+          <Stat.Icon type="decrease" />
           21% more than last month
-        </StatHelperMessage>
-      </Stat>
+        </Stat.HelperMessage>
+      </Stat.Root>
     </>
   )
 }

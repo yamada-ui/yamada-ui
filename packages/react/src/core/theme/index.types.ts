@@ -659,6 +659,7 @@ export type DefineThemeColorSemanticValue =
 export interface DefineThemeColorSemanticToken {
   [key: string]: any
   base?: DefineThemeColorSemanticValue
+  bg?: DefineThemeColorSemanticValue
   contrast?: DefineThemeColorSemanticValue
   default?: DefineThemeColorSemanticValue
   emphasized?: DefineThemeColorSemanticValue
@@ -815,6 +816,7 @@ export type ComponentCompound<
   colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
   size?: (keyof D)[] | keyof D
   variant?: (keyof H)[] | keyof H
+  layer?: LayerScheme
 } & (string extends keyof M
   ? {}
   : {

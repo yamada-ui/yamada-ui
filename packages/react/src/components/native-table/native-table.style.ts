@@ -3,37 +3,52 @@ import { defineComponentSlotStyle } from "../../core"
 export const nativeTableStyle = defineComponentSlotStyle({
   base: {
     caption: {
+      "&[data-placement='bottom']": {
+        mt: "sm",
+      },
+      "&[data-placement='top']": {
+        mb: "sm",
+      },
       color: "fg.muted",
-      fontFamily: "heading",
+      fontSize: "xs",
       fontWeight: "medium",
       textAlign: "center",
     },
-    container: {
-      display: "block",
-      maxW: "100%",
-      overflowY: "hidden",
-      w: "100%",
-      WebkitOverflowScrolling: "touch",
-      whiteSpace: "nowrap",
-    },
+    col: {},
+    colgroup: {},
     root: {
       borderCollapse: "collapse",
       fontVariantNumeric: "lining-nums tabular-nums",
-      h: "100%",
-      w: "100%",
+      h: "full",
+      w: "full",
+    },
+    scrollArea: {
+      "&:has([data-variant='outline'])": {
+        "& > table": {
+          borderWidth: "0 !important",
+        },
+        borderWidth: "1px",
+      },
+      display: "block",
+      maxW: "full",
+      overflow: "auto",
+      WebkitOverflowScrolling: "touch",
+      whiteSpace: "nowrap",
     },
     tbody: {},
     td: {
       verticalAlign: "top",
+      _numeric: {
+        textAlign: "end",
+      },
     },
     tfoot: {},
     th: {
-      color: "fg.muted",
-      fontFamily: "heading",
-      fontWeight: "semibold",
-      letterSpacing: "wider",
-      textTransform: "uppercase",
+      fontWeight: "medium",
       verticalAlign: "middle",
+      _numeric: {
+        textAlign: "end",
+      },
     },
     thead: {},
     tr: {
@@ -52,12 +67,12 @@ export const nativeTableStyle = defineComponentSlotStyle({
     highlightOnHover: {
       true: {
         tbody: {
-          tr: {
+          "& tr": {
             cursor: "pointer",
             transitionDuration: "slow",
             transitionProperty: "common",
             _hover: {
-              layerStyle: "ghost.hover",
+              bg: "colorScheme.bg",
             },
           },
         },
@@ -71,13 +86,59 @@ export const nativeTableStyle = defineComponentSlotStyle({
     highlightOnSelected: {
       true: {
         tbody: {
-          tr: {
+          "& tr": {
             _selected: {
-              bg: "colorScheme.ghost",
+              bg: "colorScheme.bg",
             },
           },
         },
       },
+    },
+    /**
+     * If `true`, display the sticky footer.
+     *
+     * @default false
+     */
+    stickyFooter: {
+      true: {
+        root: {
+          borderCollapse: "separate",
+        },
+        tfoot: {
+          "& tr": {
+            bottom: "0",
+            position: "sticky",
+            zIndex: "yamcha",
+          },
+        },
+      },
+    },
+    /**
+     * If `true`, display the sticky header.
+     *
+     * @default false
+     */
+    stickyHeader: {
+      true: {
+        root: {
+          borderCollapse: "separate",
+        },
+        thead: {
+          "& tr": {
+            position: "sticky",
+            top: "0",
+            zIndex: "yamcha",
+          },
+        },
+      },
+    },
+    /**
+     * If `true`, display striped rows.
+     *
+     * @default false
+     */
+    striped: {
+      true: {},
     },
     /**
      * If `true`, display the outer border of the table.
@@ -96,11 +157,73 @@ export const nativeTableStyle = defineComponentSlotStyle({
      */
     withColumnBorders: {
       true: {
-        td: {
-          _notLast: { borderRightWidth: "1px" },
+        tr: {
+          _notLastChild: { borderRightWidth: "1px" },
         },
-        th: {
-          _notLast: { borderRightWidth: "1px" },
+      },
+    },
+  },
+
+  variants: {
+    line: {
+      tbody: {
+        "& tr": {
+          _last: {
+            "& th, td": {
+              borderBottomWidth: 0,
+            },
+          },
+        },
+      },
+      td: {
+        borderBottomWidth: "1px",
+      },
+      tfoot: {
+        "& tr": {
+          "& th": {
+            borderBottomWidth: 0,
+            borderTopWidth: "1px",
+          },
+        },
+      },
+      th: {
+        borderBottomWidth: "1px",
+      },
+      tr: {
+        bg: "bg",
+      },
+    },
+    outline: {
+      root: {
+        borderWidth: "1px",
+      },
+      tbody: {
+        "& tr": {
+          _last: {
+            "& th, td": {
+              borderBottomWidth: 0,
+            },
+          },
+        },
+      },
+      td: {
+        borderBottomWidth: "1px",
+      },
+      tfoot: {
+        "& tr": {
+          "& th": {
+            borderBottomWidth: 0,
+            borderTopWidth: "1px",
+          },
+          bg: "colorScheme.bg",
+        },
+      },
+      th: {
+        borderBottomWidth: "1px",
+      },
+      thead: {
+        "& tr": {
+          bg: "colorScheme.bg",
         },
       },
     },
@@ -108,153 +231,80 @@ export const nativeTableStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      caption: {
-        fontSize: "xs",
-        mt: 1,
-        px: 2,
-        py: 1,
-      },
       root: {
-        gap: 2,
+        fontSize: "xs",
       },
       td: {
-        fontSize: "xs",
-        lineHeight: "short",
-        px: 2,
-        py: 1,
+        px: "2",
+        py: "1",
       },
       th: {
-        fontSize: "xs",
-        lineHeight: "short",
-        px: 2,
-        py: 1,
+        px: "2",
+        py: "1",
       },
     },
     md: {
-      caption: {
-        fontSize: "sm",
-        mt: 2,
-        px: 3,
-        py: 2,
-      },
       root: {
-        gap: 4,
+        fontSize: "sm",
       },
       td: {
-        fontSize: "sm",
-        lineHeight: "short",
-        px: 3,
-        py: 2,
+        px: "3",
+        py: "2",
       },
       th: {
-        fontSize: "sm",
-        lineHeight: "short",
-        px: 3,
-        py: 2,
+        px: "3",
+        py: "2",
       },
     },
     lg: {
-      caption: {
-        mt: 3,
-        px: 4,
-        py: 3,
-      },
       root: {
-        gap: 6,
+        fontSize: "md",
       },
       td: {
-        lineHeight: "tall",
-        px: 4,
-        py: 3,
+        px: "4",
+        py: "3",
       },
       th: {
-        lineHeight: "tall",
-        px: 4,
-        py: 3,
-      },
-    },
-    xl: {
-      caption: {
-        fontSize: "lg",
-        mt: 4,
-        px: 6,
-        py: 4,
-      },
-      root: {
-        gap: 8,
-      },
-      td: {
-        fontSize: "lg",
-        lineHeight: "tall",
-        px: 6,
-        py: 4,
-      },
-      th: {
-        fontSize: "lg",
-        lineHeight: "tall",
-        px: 6,
-        py: 4,
+        px: "4",
+        py: "3",
       },
     },
   },
 
-  variants: {
-    simple: {
-      td: {
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        borderBottomWidth: "1px",
-      },
-      tfoot: {
-        tr: {
-          _last: {
-            th: { borderBottomWidth: 0 },
+  compounds: [
+    {
+      css: {
+        tbody: {
+          "& tr": {
+            _odd: {
+              bg: "colorScheme.bg",
+            },
           },
         },
       },
-      th: {
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        borderBottomWidth: "1px",
-      },
+      variant: "line",
+      layer: "props",
+      striped: true,
     },
-    striped: {
-      tbody: {
-        tr: {
-          _odd: {
-            layerStyle: "ghost.hover",
+    {
+      css: {
+        tbody: {
+          "& tr": {
+            _even: {
+              bg: "colorScheme.bg",
+            },
           },
         },
       },
-      td: {
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        borderBottomWidth: "1px",
-      },
-      tfoot: {
-        tr: {
-          _last: {
-            th: { borderBottomWidth: 0 },
-          },
-        },
-      },
-      th: {
-        "&[data-is-numeric=true]": {
-          textAlign: "end",
-        },
-        borderBottomWidth: "1px",
-      },
+      variant: "outline",
+      layer: "props",
+      striped: true,
     },
-    unstyled: {},
-  },
+  ],
 
   defaultProps: {
-    colorScheme: "gray",
     size: "md",
-    variant: "simple",
+    variant: "line",
   },
 })
 

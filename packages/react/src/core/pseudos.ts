@@ -104,6 +104,10 @@ export const attributes = {
    */
   _notSelected: "&:not([data-selected]):not([aria-selected=true])",
   /**
+   * The CSS `&[data-numeric]` attribute selector.
+   */
+  _numeric: "&[data-numeric]",
+  /**
    * The CSS `&:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",

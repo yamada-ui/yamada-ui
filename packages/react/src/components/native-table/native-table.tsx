@@ -1,5 +1,6 @@
 import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { NativeTableStyle } from "./native-table.style"
+import { ui } from "../../core"
 import { createSlotComponent } from "../../core"
 import { nativeTableStyle } from "./native-table.style"
 
@@ -19,8 +20,9 @@ export const {
   withContext,
   withProvider,
   useRootComponentProps,
+  useSlotComponentProps,
 } = createSlotComponent<NativeTableRootProps, NativeTableStyle>(
-  "nativeTable",
+  "native-table",
   nativeTableStyle,
 )
 
@@ -34,19 +36,20 @@ export const NativeTableRoot = withProvider("table", "root")(
   ({ layout: tableLayout, ...rest }) => ({ tableLayout, ...rest }),
 )
 
-export interface TableContainerProps
+export interface TableScrollAreaProps
   extends HTMLUIProps,
     ThemeProps<NativeTableStyle> {}
 
-export const TableContainer = component<"div", TableContainerProps>(
-  "div",
-  "container",
-)(({ overflow, overflowX, ...rest }) => ({
-  overflowX: overflow ?? overflowX ?? "auto",
-  ...rest,
-}))
+export const TableScrollArea = component<"div", TableScrollAreaProps>(
+  (props) => {
+    const [, rest] = useRootComponentProps(props, "scrollArea")
 
-export interface TableCaptionProps extends HTMLUIProps<"caption"> {
+    return <ui.div {...rest} />
+  },
+  "scrollArea",
+)()
+
+export interface CaptionProps extends HTMLUIProps<"caption"> {
   /**
    * The placement of the table caption.
    *
@@ -55,25 +58,37 @@ export interface TableCaptionProps extends HTMLUIProps<"caption"> {
   placement?: "bottom" | "top"
 }
 
-export const TableCaption = withContext<"caption", TableCaptionProps>(
+export const Caption = withContext<"caption", CaptionProps>(
   "caption",
   "caption",
-)(undefined, ({ placement: captionSide, ...rest }) => ({
+)(undefined, ({ placement: captionSide = "bottom", ...rest }) => ({
+  "data-placement": captionSide,
   captionSide,
   ...rest,
 }))
 
-export interface TableHeadProps extends HTMLUIProps<"thead"> {}
+export interface TheadProps extends HTMLUIProps<"thead"> {}
 
-export const Thead = withContext<"thead", TableHeadProps>("thead", "thead")()
+export const Thead = withContext<"thead", TheadProps>("thead", "thead")()
 
-export interface TableBodyProps extends HTMLUIProps<"tbody"> {}
+export interface TbodyProps extends HTMLUIProps<"tbody"> {}
 
-export const Tbody = withContext<"tbody", TableBodyProps>("tbody", "tbody")()
+export const Tbody = withContext<"tbody", TbodyProps>("tbody", "tbody")()
 
-export interface TableFootProps extends HTMLUIProps<"tfoot"> {}
+export interface TfootProps extends HTMLUIProps<"tfoot"> {}
 
-export const Tfoot = withContext<"tfoot", TableFootProps>("tfoot", "tfoot")()
+export const Tfoot = withContext<"tfoot", TfootProps>("tfoot", "tfoot")()
+
+export interface ColgroupProps extends HTMLUIProps<"colgroup"> {}
+
+export const Colgroup = withContext<"colgroup", ColgroupProps>(
+  "colgroup",
+  "colgroup",
+)()
+
+export interface ColProps extends HTMLUIProps<"col"> {}
+
+export const Col = withContext<"col", ColProps>("col", "col")()
 
 export interface ThProps extends HTMLUIProps<"th"> {
   /**
@@ -87,7 +102,7 @@ export interface ThProps extends HTMLUIProps<"th"> {
 export const Th = withContext<"th", ThProps>("th", "th")(
   undefined,
   ({ numeric, ...rest }) => ({
-    "data-is-numeric": numeric,
+    "data-numeric": numeric,
     ...rest,
   }),
 )
@@ -108,7 +123,7 @@ export interface TdProps extends HTMLUIProps<"td"> {
 export const Td = withContext<"td", TdProps>("td", "td")(
   undefined,
   ({ numeric, ...rest }) => ({
-    "data-is-numeric": numeric,
+    "data-numeric": numeric,
     ...rest,
   }),
 )

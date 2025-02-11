@@ -1,8 +1,10 @@
 export {
+  Caption,
+  Col,
+  Colgroup,
   NativeTablePropsContext as PropsContext,
   NativeTableRoot as Root,
-  TableCaption as Caption,
-  TableContainer as Container,
+  TableScrollArea as ScrollArea,
   Tbody,
   Td,
   Tfoot,
@@ -12,13 +14,15 @@ export {
   useNativeTablePropsContext as usePropsContext,
 } from "./native-table"
 export type {
+  CaptionProps,
+  ColgroupProps,
+  ColProps,
   NativeTableRootProps as RootProps,
-  TableBodyProps,
-  TableCaptionProps as CaptionProps,
-  TableContainerProps as ContainerProps,
-  TableFootProps,
-  TableHeadProps,
+  TableScrollAreaProps as ScrollAreaProps,
+  TbodyProps,
   TdProps,
+  TfootProps,
+  TheadProps,
   ThProps,
   TrProps,
 } from "./native-table"

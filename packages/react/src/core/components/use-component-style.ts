@@ -271,7 +271,7 @@ function getCompoundStyle<
   return function (options: GetStyleOptions<M>) {
     if (!compounds.length) return style
 
-    compounds.forEach(({ css, ...rest }) => {
+    compounds.forEach(({ css, layer, ...rest }) => {
       const conditions = Object.entries(rest)
 
       if (!conditions.length) return
@@ -284,7 +284,7 @@ function getCompoundStyle<
 
       style = merge(
         style,
-        wrapStyle<Y, M>("compounds", css as Style<Y>)(options),
+        wrapStyle<Y, M>(layer ?? "compounds", css as Style<Y>)(options),
       )
     })
 
@@ -448,6 +448,10 @@ function useStyle<
 
     if (variants) omitProps.push("variant")
     if (sizes) omitProps.push("size")
+
+    if (props.variant)
+      props = Object.assign(props, { "data-variant": props.variant })
+    if (props.size) props = Object.assign(props, { "data-size": props.size })
 
     const computedProps = omitThemeProps(props, omitProps, transferProps) as Y
 

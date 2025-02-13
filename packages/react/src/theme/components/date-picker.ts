@@ -8,15 +8,21 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
   MultiSelect,
   {
     baseStyle: {
-      container: {},
+      container: {
+        h: "fit-content",
+        w: "100%",
+      },
       content: {
         minW: "auto",
         p: "2",
         w: "auto",
       },
       field: {
+        alignItems: "center",
         cursor: "text",
+        display: "flex",
         pb: "px",
+        pe: "2rem",
         _focus: {
           zIndex: "unset",
         },
@@ -26,6 +32,19 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
         _readOnly: {
           pointerEvents: "none",
         },
+      },
+      icon: {
+        alignItems: "center",
+        cursor: "pointer",
+        display: "inline-flex",
+        justifyContent: "center",
+        pointerEvents: "none",
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%)",
+      },
+      inner: {
+        position: "relative",
       },
     },
 

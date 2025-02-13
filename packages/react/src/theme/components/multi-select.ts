@@ -24,6 +24,9 @@ export const MultiSelect: ComponentMultiStyle<"MultiSelect"> = mergeMultiStyle(
           pointerEvents: "none",
         },
       },
+      inner: {
+        position: "relative",
+      },
     },
   },
 )()

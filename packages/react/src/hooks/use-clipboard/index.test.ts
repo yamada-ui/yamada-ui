@@ -47,59 +47,59 @@ describe("useClipboard", () => {
     })
   })
 
-  test("hasCopied is false initially", () => {
+  test("copied is false initially", () => {
     const { result } = renderHook(() => useClipboard())
-    expect(result.current.hasCopied).toBeFalsy()
+    expect(result.current.copied).toBeFalsy()
   })
 
-  test("hasCopied becomes true when text is copied", () => {
+  test("copied becomes true when text is copied", () => {
     const { result } = renderHook(() => useClipboard())
     act(() => {
       result.current.onCopy("Test Text")
     })
-    expect(result.current.hasCopied).toBeTruthy()
+    expect(result.current.copied).toBeTruthy()
   })
 
-  test("hasCopied returns to false after the default timeout", () => {
+  test("copied returns to false after the default timeout", () => {
     const { result } = renderHook(() => useClipboard(""))
     act(() => {
       result.current.onCopy("Test Text")
     })
-    expect(result.current.hasCopied).toBeTruthy()
+    expect(result.current.copied).toBeTruthy()
 
     waitFor(
       () => {
-        expect(result.current.hasCopied).toBeFalsy()
+        expect(result.current.copied).toBeFalsy()
       },
       { timeout: 1500 },
     )
   })
 
-  test("hasCopied returns to false after the specified timeout", () => {
+  test("copied returns to false after the specified timeout", () => {
     const { result } = renderHook(() => useClipboard("", { timeout: 2000 }))
     act(() => {
       result.current.onCopy("Test Text")
     })
-    expect(result.current.hasCopied).toBeTruthy()
+    expect(result.current.copied).toBeTruthy()
 
     waitFor(
       () => {
-        expect(result.current.hasCopied).toBeFalsy()
+        expect(result.current.copied).toBeFalsy()
       },
       { timeout: 2000 },
     )
   })
 
-  test("hasCopied returns to false after the specified timeout with number", () => {
+  test("copied returns to false after the specified timeout with number", () => {
     const { result } = renderHook(() => useClipboard("", 2000))
     act(() => {
       result.current.onCopy("Test Text")
     })
-    expect(result.current.hasCopied).toBeTruthy()
+    expect(result.current.copied).toBeTruthy()
 
     waitFor(
       () => {
-        expect(result.current.hasCopied).toBeFalsy()
+        expect(result.current.copied).toBeFalsy()
       },
       { timeout: 2000 },
     )

@@ -102,7 +102,7 @@ export const createVars =
         if (transform) {
           result[name] = getVar(formattedName)(theme)
         } else {
-          result[name] = `$${formattedName}`
+          result[name] = `{${formattedName}}`
         }
       }
     })

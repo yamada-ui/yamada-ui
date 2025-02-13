@@ -60,6 +60,7 @@ export const Page: FC<PageProps> = memo(
 
     return (
       <Motion
+        data-loading
         alignItems="center"
         animate="animate"
         bg="bg.overlay"

@@ -37,6 +37,7 @@ export const Screen: FC<ScreenProps> = memo(
 
     return (
       <Motion
+        data-loading
         alignItems="center"
         animate="animate"
         bg="bg"

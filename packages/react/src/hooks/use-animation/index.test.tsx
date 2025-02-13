@@ -1,38 +1,6 @@
 import type { AnimationStyle } from "../../core"
 import { useAnimation, useAnimationObserver, useDynamicAnimation } from "."
 import { act, renderHook, waitFor } from "../../../test"
-import { ColorModeProvider } from "../../providers/color-mode-provider"
-import { ThemeProvider } from "../../providers/theme-provider"
-
-const theme = {
-  animations: {},
-  transitions: {
-    duration: {
-      faster: "100ms",
-      fast: "150ms",
-      normal: "200ms",
-      slow: "300ms",
-      slower: "400ms",
-      "ultra-fast": "50ms",
-      "ultra-slow": "500ms",
-    },
-
-    easing: {
-      "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
-      "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
-      "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
-    },
-
-    property: {
-      background: "background-color, background-image, background-position",
-      colors: "background-color, border-color, color, fill, stroke",
-      common:
-        "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
-      dimensions: "width, height",
-      position: "left, right, top, bottom",
-    },
-  },
-}
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
@@ -62,13 +30,7 @@ describe("useAnimation", () => {
       timingFunction: "linear",
     }
 
-    const { result } = renderHook(() => useAnimation(style), {
-      wrapper: ({ children }) => (
-        <ThemeProvider theme={theme}>
-          <ColorModeProvider>{children}</ColorModeProvider>
-        </ThemeProvider>
-      ),
-    })
+    const { result } = renderHook(() => useAnimation(style))
 
     expect(result.current).toMatch(
       /animation-.* 10s linear 0s infinite normal none running/,
@@ -136,13 +98,7 @@ describe("useAnimation", () => {
       },
     ]
 
-    const { result } = renderHook(() => useAnimation(style), {
-      wrapper: ({ children }) => (
-        <ThemeProvider theme={theme}>
-          <ColorModeProvider>{children}</ColorModeProvider>
-        </ThemeProvider>
-      ),
-    })
+    const { result } = renderHook(() => useAnimation(style))
 
     expect(result.current).toMatch(
       /animation-.* 10s linear 0s infinite normal none running, animation-.* 10s linear 0s infinite normal none running, animation-.* 10s linear 0s infinite normal none running/,
@@ -181,19 +137,10 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { result } = renderHook(
-      () => useDynamicAnimation(style, "moveLeft"),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>
-            <ColorModeProvider>{children}</ColorModeProvider>
-          </ThemeProvider>
-        ),
-      },
-    )
+    const { result } = renderHook(() => useDynamicAnimation(style, "moveLeft"))
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running/,
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
     await waitFor(() => {
@@ -201,7 +148,7 @@ describe("useDynamicAnimation", () => {
     })
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slow\) var\(--ui-transitions-easing-ease-out\) 0s 1 normal forwards running/,
+      /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
     )
   })
 
@@ -265,19 +212,10 @@ describe("useDynamicAnimation", () => {
       ],
     }
 
-    const { result } = renderHook(
-      () => useDynamicAnimation(style, "moveLeft"),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>
-            <ColorModeProvider>{children}</ColorModeProvider>
-          </ThemeProvider>
-        ),
-      },
-    )
+    const { result } = renderHook(() => useDynamicAnimation(style, "moveLeft"))
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running/,
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
     await waitFor(() => {
@@ -285,7 +223,7 @@ describe("useDynamicAnimation", () => {
     })
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running/,
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
   })
 
@@ -344,19 +282,12 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { result } = renderHook(
-      () => useDynamicAnimation(style, ["moveLeft", "gradients"]),
-      {
-        wrapper: ({ children }) => (
-          <ThemeProvider theme={theme}>
-            <ColorModeProvider>{children}</ColorModeProvider>
-          </ThemeProvider>
-        ),
-      },
+    const { result } = renderHook(() =>
+      useDynamicAnimation(style, ["moveLeft", "gradients"]),
     )
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
     )
 
     await waitFor(() => {
@@ -364,7 +295,7 @@ describe("useDynamicAnimation", () => {
     })
 
     expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
     )
   })
 
@@ -378,13 +309,7 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { result } = renderHook(() => useDynamicAnimation(style), {
-      wrapper: ({ children }) => (
-        <ThemeProvider theme={theme}>
-          <ColorModeProvider>{children}</ColorModeProvider>
-        </ThemeProvider>
-      ),
-    })
+    const { result } = renderHook(() => useDynamicAnimation(style))
 
     expect(result.current[0]).toBeUndefined()
   })

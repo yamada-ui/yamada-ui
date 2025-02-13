@@ -39,6 +39,7 @@ export const Background: FC<BackgroundProps> = memo(
 
     return (
       <Motion
+        data-loading
         alignItems="center"
         animate="animate"
         bg="panel"

@@ -1,25 +1,17 @@
 import type { UIEvent } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSObject, HTMLUIProps, PropGetter } from "../../core"
+import { dataAttr, handlerAll, isMac, vendor } from "@yamada-ui/utils"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { forwardRef, omitThemeProps, ui, useComponentStyle } from "../../core"
-import {
-  cx,
-  dataAttr,
-  handlerAll,
-  isMac,
-  merge,
-  mergeRefs,
-  useSafeLayoutEffect,
-  vendor,
-} from "../../utils"
+import { mergeCSS } from "../../core"
+import { mergeRefs, useSafeLayoutEffect } from "../../utils"
 
-const neverStyles: CSSUIObject = {
+const neverStyles: CSSObject = {
   "&::-webkit-scrollbar": { display: "none" },
   scrollbarWidth: "none",
   _scrollbar: { display: "none" },
 }
 
-const hiddenStyles: CSSUIObject = {
+const hiddenStyles: CSSObject = {
   "&::-webkit-scrollbar-thumb": { bg: "transparent" },
   "&::-webkit-scrollbar-track": { bg: "transparent" },
   "@-moz-document url-prefix()": {
@@ -47,7 +39,7 @@ const hiddenStyles: CSSUIObject = {
   _scrollbarTrack: { bg: "transparent" },
 }
 
-interface ScrollAreaOptions {
+export interface UseScrollAreaProps extends HTMLUIProps {
   /**
    * Scrollbar visibility type.
    *
@@ -61,39 +53,26 @@ interface ScrollAreaOptions {
    */
   scrollHideDelay?: number
   /**
-   * Props for inner element.
-   */
-  innerProps?: HTMLUIProps
-  /**
    * Callback function for when the scroll position changes.
    */
   onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
 }
 
-export interface ScrollAreaProps
-  extends HTMLUIProps,
-    ThemeProps<"ScrollArea">,
-    ScrollAreaOptions {}
-
-/**
- * `ScrollArea` is a component that displays a customized scrollbar.
- *
- * @see Docs https://yamada-ui.com/components/data-display/scroll-area
- */
-export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("ScrollArea", props)
-  const {
-    type = "hover",
-    overflow = "overlay",
-    scrollHideDelay = 1000,
-    onScrollPositionChange,
-    ...rest
-  } = omitThemeProps(mergedProps)
+export const useScrollArea = ({
+  ref,
+  type = "hover",
+  css: cssProp,
+  overflow = "overlay",
+  scrollHideDelay = 1000,
+  onScrollPositionChange,
+  ...rest
+}: UseScrollAreaProps) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"
   const isNever = type === "never"
   const isSafari = isMac() && vendor(/apple/i)
+  const componentKey = `${isHovered}-${isScrolling}`
 
   const hoverTimeout = useRef<any>(undefined)
   const scrollTimeout = useRef<any>(undefined)
@@ -156,79 +135,59 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     }
   }, [])
 
-  const css: CSSUIObject = useMemo(() => {
-    const baseStyle = { overflow, ...styles }
+  const css = useMemo(() => {
+    const baseStyle = { overflow, ...cssProp }
 
     if (isNever) {
-      return merge(baseStyle, neverStyles)
+      return mergeCSS(baseStyle, neverStyles)
     } else {
-      return merge(
+      return mergeCSS(
         baseStyle,
         !isAlways && !isHovered && !isScrolling ? hiddenStyles : {},
       )
     }
-  }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
+  }, [isAlways, isHovered, isNever, isScrolling, overflow, cssProp])
 
-  const computedProps = useMemo(
+  const safariProps = useMemo(
     () => ({
-      __css: css,
+      key: componentKey,
+      ref: mergeRefs(ref, scrollAreaRef),
+      "data-key": componentKey,
+    }),
+    [componentKey, ref, scrollAreaRef],
+  )
+
+  const getRootProps: PropGetter = useCallback(
+    (props) => ({
+      ...props,
+      ref,
+      "data-hovered": dataAttr(isHovered),
+      "data-scrolling": dataAttr(isScrolling),
+      tabIndex: 0,
+      ...(isSafari ? safariProps : {}),
+      css,
       ...rest,
       onMouseEnter: handlerAll(rest.onMouseEnter, onMouseEnter),
       onMouseLeave: handlerAll(rest.onMouseLeave, onMouseLeave),
       onScroll: handlerAll(rest.onScroll, onScroll),
     }),
-    [css, onMouseEnter, onMouseLeave, onScroll, rest],
+    [
+      onMouseEnter,
+      onMouseLeave,
+      onScroll,
+      rest,
+      css,
+      isHovered,
+      isScrolling,
+      safariProps,
+      isSafari,
+      ref,
+    ],
   )
 
-  if (isSafari) {
-    const componentKey = `${isHovered}-${isScrolling}`
-
-    return (
-      <InternalScrollArea
-        key={componentKey}
-        ref={mergeRefs(ref, scrollAreaRef)}
-        data-hovered={dataAttr(isHovered)}
-        data-key={componentKey}
-        data-scrolling={dataAttr(isScrolling)}
-        {...computedProps}
-      />
-    )
-  } else {
-    return (
-      <InternalScrollArea
-        ref={ref}
-        data-hovered={dataAttr(isHovered)}
-        data-scrolling={dataAttr(isScrolling)}
-        {...computedProps}
-      />
-    )
+  return {
+    getRootProps,
   }
-})
-ScrollArea.displayName = "ScrollArea"
-ScrollArea.__ui__ = "ScrollArea"
+}
 
-type InternalScrollAreaProps = HTMLUIProps & Pick<ScrollAreaProps, "innerProps">
-
-const InternalScrollArea = forwardRef<InternalScrollAreaProps, "div">(
-  ({ className, children, innerProps, ...rest }, ref) => {
-    return (
-      <ui.div
-        ref={ref}
-        className={cx("ui-scroll-area", className)}
-        tabIndex={0}
-        {...rest}
-      >
-        {innerProps ? (
-          <ui.div className="ui-scroll-area__inner" {...innerProps}>
-            {children}
-          </ui.div>
-        ) : (
-          children
-        )}
-      </ui.div>
-    )
-  },
-)
-
-InternalScrollArea.displayName = "InternalScrollArea"
-InternalScrollArea.__ui__ = "InternalScrollArea"
+export type UseScrollAreaReturn = ReturnType<typeof useScrollArea>

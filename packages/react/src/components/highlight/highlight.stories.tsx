@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Highlight, Mark, useHighlight } from "."
-import { Heading } from "../../components/heading"
-import { Text } from "../../components/text"
+import { Heading } from "../heading"
+import { Text } from "../text"
+import { Highlight, Mark, useHighlight } from "./"
 
 type Story = StoryFn<typeof Highlight>
 
@@ -21,7 +21,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithMultiQuery: Story = () => {
+export const MultiQuery: Story = () => {
   return (
     <Highlight query={["ドラゴンボール", "鳥山明"]}>
       『ドラゴンボール』（DRAGON
@@ -30,7 +30,7 @@ export const WithMultiQuery: Story = () => {
   )
 }
 
-export const WithIsFragment: Story = () => {
+export const IsFragment: Story = () => {
   return (
     <Heading lineHeight="tall">
       <Highlight fragment query={["ドラゴンボール", "鳥山明"]}>
@@ -41,7 +41,7 @@ export const WithIsFragment: Story = () => {
   )
 }
 
-export const WithMarkVariant: Story = () => {
+export const MarkVariant: Story = () => {
   return (
     <>
       <Highlight query="ドラゴンボール" markProps={{ variant: "outline" }}>
@@ -62,7 +62,7 @@ export const WithMarkVariant: Story = () => {
   )
 }
 
-export const WithMarkColorScheme: Story = () => {
+export const MarkColorScheme: Story = () => {
   return (
     <Highlight query="ドラゴンボール" markProps={{ colorScheme: "red" }}>
       『ドラゴンボール』（DRAGON
@@ -71,7 +71,7 @@ export const WithMarkColorScheme: Story = () => {
   )
 }
 
-export const WithMarkProps: Story = () => {
+export const MarkProps: Story = () => {
   return (
     <Highlight query="ドラゴンボール" markProps={{ rounded: "full" }}>
       『ドラゴンボール』（DRAGON

@@ -1,5 +1,5 @@
 import type { FC, ReactNode, RefAttributes } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { PortalProps } from "../portal"
 import type { ColorSelectorProps } from "./color-selector"
 import type { ColorSwatchProps } from "./color-swatch"
@@ -145,25 +145,21 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       onClose,
       ...rest
     } = useColorPicker(computedProps)
-    const css: CSSUIObject = {
-      color,
-      h: "fit-content",
-      w: "100%",
-      ...styles.container,
-    }
 
     return (
       <ColorPickerProvider value={{ styles, value, ...rest }}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-color-picker", className)}
-            __css={css}
+            __css={{
+              color,
+              ...styles.container,
+            }}
             {...getContainerProps(containerProps)}
           >
             <ui.div
               className="ui-color-picker__inner"
               __css={{
-                position: "relative",
                 ...styles.inner,
               }}
             >
@@ -228,19 +224,11 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
     const { styles } = useColorPickerContext()
     const { ref: inputRef, ...computedInputProps } = inputProps ?? {}
 
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "flex",
-      pe: "2rem",
-      ps: "2rem",
-      ...styles.field,
-    }
-
     return (
       <PopoverTrigger>
         <ui.div
           className={cx("ui-color-picker__field", className)}
-          __css={css}
+          __css={styles.field}
           {...rest}
         >
           <ui.input
@@ -265,21 +253,13 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles, value } = useColorPickerContext()
 
-    const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      zIndex: 1,
-      ...styles.swatch,
-    }
-
     return (
       <ColorSwatch
         ref={ref}
         className={cx("ui-color-picker__swatch", className)}
         color={value}
         fullRounded
-        __css={css}
+        __css={styles.swatch}
         {...rest}
       />
     )
@@ -294,17 +274,6 @@ interface ColorPickerEyeDropperProps extends HTMLUIProps<"button"> {}
 const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
   ({ className, children, ...rest }, ref) => {
     const { styles } = useColorPickerContext()
-
-    const css: CSSUIObject = {
-      alignItems: "center",
-      display: "inline-flex",
-      justifyContent: "center",
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      zIndex: 1,
-      ...styles.eyeDropper,
-    }
 
     const validChildren = getValidChildren(children)
 
@@ -324,7 +293,7 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
       <ui.button
         ref={ref}
         className={cx("ui-color-picker__eye-dropper", className)}
-        __css={css}
+        __css={styles.eyeDropper}
         {...rest}
       >
         {isValidElement(children) ? (

@@ -61,16 +61,16 @@ export const inputStyle = defineComponentStyle({
       borderBottomWidth: "1px",
       borderRadius: "0",
       px: "0",
-      _focusVisible: {
-        borderColor: "{focusBorderColor}",
-        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
-        outline: "none",
-      },
       _invalid: {
         borderColor: "{errorBorderColor}",
         _focusVisible: {
           boxShadow: "0px 1px 0px 0px {errorBorderColor}",
         },
+      },
+      _focusVisible: {
+        borderColor: "{focusBorderColor}",
+        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
+        outline: "none",
       },
     },
     outline: {

@@ -18,8 +18,8 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../theme"
-import type { HTMLUIProps } from "./component.types"
 import type { Slot } from "./create-component"
+import type { HTMLUIProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"

@@ -33,7 +33,7 @@ export const Basic = () => {
   )
 }
 
-export const UseToggle = () => {
+export const Toggle = () => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -45,7 +45,7 @@ export const UseToggle = () => {
   )
 }
 
-export const WithChain = () => {
+export const Chain = () => {
   const { isOpen, onClose, onOpen } = useDisclosure({
     onClose: (...args: string[]) => {
       console.log("Args:", args)

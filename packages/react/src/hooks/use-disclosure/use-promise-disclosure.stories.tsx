@@ -11,7 +11,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { isOpen, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+  const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
 
   const onClick = async () => {
     try {
@@ -36,7 +36,7 @@ export const Basic = () => {
         size="2xl"
         cancel="わけない"
         header="ミスター・サタン"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}

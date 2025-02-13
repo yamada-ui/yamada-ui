@@ -70,7 +70,7 @@ export interface ListItemProps extends HTMLUIProps<"li"> {
 export const ListItem = withContext<"li", ListItemProps>(
   ({ children, icon, ...rest }) => (
     <ui.li {...rest}>
-      <ListIcon>{icon}</ListIcon>
+      <ListItemIcon>{icon}</ListItemIcon>
 
       {children}
     </ui.li>
@@ -80,7 +80,7 @@ export const ListItem = withContext<"li", ListItemProps>(
 
 export interface ListIconProps extends HTMLUIProps<"svg"> {}
 
-export const ListIcon = withContext<"svg", ListIconProps>(
+export const ListItemIcon = withContext<"svg", ListIconProps>(
   ({ children, ...rest }) => {
     if (isValidElement<HTMLProps<"svg">>(children)) {
       return cloneElement(children, {

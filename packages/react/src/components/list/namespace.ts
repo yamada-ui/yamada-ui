@@ -1,5 +1,5 @@
 export {
-  ListIcon as Icon,
+  ListItemIcon as Icon,
   ListItem as Item,
   ListPropsContext as PropsContext,
   ListRoot as Root,

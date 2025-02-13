@@ -7,8 +7,8 @@ export type { InputElementProps } from "./input-element"
 export { InputGroupRoot } from "./input-group"
 export type { InputGroupRootProps } from "./input-group"
 
-export * from "./input.style"
 export * from "./input-addon.style"
 export * from "./input-element.style"
+export * from "./input.style"
 
 export * as InputGroup from "./namespace"

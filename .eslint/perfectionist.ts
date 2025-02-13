@@ -47,7 +47,7 @@ const sortObjectGroups = {
     data: "^data-.+",
     internal: "^__.+",
     primary: ["^key$", "^ref$", "^id$", "^lang$"],
-    props: ".+(Props|Style)$",
+    props: ".+Props$",
     pseudos: `^_(?!.*(${otherPseudos})$).*$`,
     ...Object.fromEntries(
       sortPseudos.map((pseudos, index) => [`pseudos${index + 1}`, pseudos]),
@@ -55,7 +55,7 @@ const sortObjectGroups = {
     quaternary: ["^className$", "^alt$"],
     quinary: ["^css$", "^sx$", "^style$"],
     secondary: ["^as$", "^form$", "^type$", "^htmlFor$"],
-    senary: ["^layerStyle$", "^textStyle$", "^baseStyle$", "^apply$"],
+    senary: ["^layerStyle$", "^textStyle$", "^apply$"],
     septenary: ["^variant$", "^size$", "^colorScheme$"],
     tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$"],
     ...semanticSizes,

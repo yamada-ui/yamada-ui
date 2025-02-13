@@ -270,10 +270,10 @@ describe("createVars", () => {
       color: "{color-0}",
     })
     expect(result).toStrictEqual({
+      "--ui-color-0": "var(--ui-colors-primary)",
       "@media screen and (max-width: 768px)": {
         "--ui-color-0": "var(--ui-colors-secondary)",
       },
-      "--ui-color-0": "var(--ui-colors-primary)",
     })
   })
 
@@ -375,15 +375,15 @@ describe("createVars", () => {
     })
     expect(result).toStrictEqual({
       "&:focus, &[data-focus]": {
+        "--ui-color-0": "var(--ui-colors-warning)",
         "@media screen and (max-width: 768px)": {
           "--ui-color-0": "var(--ui-colors-danger)",
         },
-        "--ui-color-0": "var(--ui-colors-warning)",
       },
+      "--ui-color-0": "var(--ui-colors-primary)",
       "@media screen and (max-width: 768px)": {
         "--ui-color-0": "var(--ui-colors-secondary)",
       },
-      "--ui-color-0": "var(--ui-colors-primary)",
     })
   })
 })

@@ -13,7 +13,7 @@ export default meta
 
 export const Basic: Story = () => {
   const Button: FC<
-    { asChild?: boolean } & HTMLAttributes<HTMLButtonElement>
+    HTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
   > = ({ asChild, ...props }) => {
     const Component = asChild ? Slot : "button"
 
@@ -37,11 +37,11 @@ export const Basic: Story = () => {
 
 export const WithSlottable: Story = () => {
   const Button: FC<
-    {
+    HTMLAttributes<HTMLButtonElement> & {
       asChild?: boolean
       endIcon?: ReactNode
       startIcon?: ReactNode
-    } & HTMLAttributes<HTMLButtonElement>
+    }
   > = ({ asChild, children, endIcon, startIcon, ...props }) => {
     const Component = asChild ? Slot : "button"
 

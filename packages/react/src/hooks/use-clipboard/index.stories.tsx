@@ -16,7 +16,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { hasCopied, setValue, value, onCopy } = useClipboard()
+  const { copied, setValue, value, onCopy } = useClipboard()
 
   return (
     <>
@@ -26,7 +26,7 @@ export const Basic = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+        <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
       <Editable placeholder="Paste here">
@@ -37,8 +37,8 @@ export const Basic = () => {
   )
 }
 
-export const WithTimeout = () => {
-  const { hasCopied, setValue, value, onCopy } = useClipboard("", 5000)
+export const Timeout = () => {
+  const { copied, setValue, value, onCopy } = useClipboard("", 5000)
 
   return (
     <>
@@ -48,7 +48,7 @@ export const WithTimeout = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+        <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
       <Editable placeholder="Paste here">
@@ -60,15 +60,15 @@ export const WithTimeout = () => {
 }
 
 export const DirectCopy = () => {
-  const { hasCopied, onCopy } = useClipboard()
+  const { copied, onCopy } = useClipboard()
 
   const value = "孫悟空"
 
   return (
     <HStack gap="md">
-      <Input isReadOnly value={value} />
+      <Input readOnly value={value} />
       <Button onClick={() => onCopy(value)}>
-        {hasCopied ? "Copied!" : "Copy"}
+        {copied ? "Copied!" : "Copy"}
       </Button>
     </HStack>
   )

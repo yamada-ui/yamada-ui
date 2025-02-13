@@ -11,6 +11,7 @@ export const colors = defineSemanticTokens.colors({
     error: ["error.50", "error.950"],
     info: ["info.50", "info.950"],
     muted: ["black.200", "white.200"],
+    overlay: "blackAlpha.600",
     panel: ["#ffffff", "#121212"],
     subtle: ["black.100", "white.100"],
     success: ["success.50", "success.950"],

@@ -8,12 +8,12 @@ const theme = {
   animations: {},
   transitions: {
     duration: {
-      "ultra-fast": "50ms",
       faster: "100ms",
       fast: "150ms",
       normal: "200ms",
       slow: "300ms",
       slower: "400ms",
+      "ultra-fast": "50ms",
       "ultra-slow": "500ms",
     },
 

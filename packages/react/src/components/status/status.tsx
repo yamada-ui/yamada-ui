@@ -1,7 +1,9 @@
-import type { HTMLUIProps, StatusScheme, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { StatusStyle } from "./status.style"
 import { createSlotComponent, ui } from "../../core"
 import { statusStyle } from "./status.style"
+
+export type StatusScheme = "error" | "info" | "success" | "warning"
 
 export interface StatusProps extends HTMLUIProps, ThemeProps<StatusStyle> {
   /**

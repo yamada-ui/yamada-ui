@@ -37,9 +37,9 @@ export interface UIProps extends CSSProps {
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
-export type InterpolationProps = {
+export type InterpolationProps = CSSProps & {
   theme: StyledTheme<UsageTheme>
-} & CSSProps
+}
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = M &
   Omit<Y, "as" | keyof M>
@@ -52,9 +52,13 @@ type ComponentConditionalProps<
   | OmitProps<React.ComponentProps<M>, D>
   | OmitProps<React.ComponentProps<Y>, D>
 
-type ComponentProps<Y extends As, M extends As, D extends object = {}> = {
+type ComponentProps<
+  Y extends As,
+  M extends As,
+  D extends object = {},
+> = ComponentConditionalProps<Y, M, D> & {
   as?: M
-} & ComponentConditionalProps<Y, M, D>
+}
 
 export interface ComponentArgs
   extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {

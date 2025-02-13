@@ -12,7 +12,7 @@ import type {
   DOMElement,
   HTMLUIProps,
   StyledOptions,
-} from "./component.types"
+} from "./index.types"
 import {
   createContext,
   cx,

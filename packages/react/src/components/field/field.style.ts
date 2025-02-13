@@ -22,11 +22,11 @@ export const fieldStyle = defineComponentSlotStyle({
       fontSize: "sm",
       fontWeight: "medium",
       gap: "1",
-      _disabled: {
-        layerStyle: "disabled",
-      },
       _readOnly: {
         pointerEvents: "none",
+      },
+      _disabled: {
+        layerStyle: "disabled",
       },
     },
     requiredIndicator: {

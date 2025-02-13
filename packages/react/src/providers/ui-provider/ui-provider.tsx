@@ -2,7 +2,6 @@ import type { FC, ReactNode } from "react"
 import type { ColorModeProviderProps } from "../color-mode-provider"
 import type { Environment } from "../environment-provider"
 import type { ThemeProviderProps } from "../theme-provider"
-import { MotionConfig } from "motion/react"
 import { LoadingProvider } from "../../components/loading"
 // import { NoticeProvider } from "../../components/notice"
 import { defaultTheme } from "../../theme"
@@ -81,13 +80,11 @@ export const UIProvider: FC<UIProviderProps> = ({
             config={config}
             storageKey={colorModeStorageKey}
           >
-            <MotionConfig {...config.motion?.config}>
-              <LoadingProvider {...config.loading}>
-                {children}
+            <LoadingProvider {...config.loading}>
+              {children}
 
-                {/* <NoticeProvider {...config.notice} /> */}
-              </LoadingProvider>
-            </MotionConfig>
+              {/* <NoticeProvider {...config.notice} /> */}
+            </LoadingProvider>
           </ColorModeProvider>
         </ThemeProvider>
       </I18nProvider>

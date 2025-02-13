@@ -1,6 +1,5 @@
-export type * from "./component.types"
 export * from "./create-component"
-export * from "./forward-ref"
+export type * from "./index.types"
 export * from "./memo"
 export * from "./merge-props"
 export * from "./should-forward-prop"

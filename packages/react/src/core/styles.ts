@@ -6337,7 +6337,7 @@ export interface StyleProps {
       | StringLiteral
     dynamicRange?: "high" | "standard" | StringLiteral
     forcedColors?: "active" | "none" | StringLiteral
-    grid?: "StringLiteral" | 0 | 1
+    grid?: 0 | 1 | "StringLiteral"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
     hover?: "hover" | "none" | StringLiteral

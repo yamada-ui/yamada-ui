@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
+// import { ScrollArea } from "../scroll-area"
+import { PropsTable } from "../../../storybook/components"
 // import defaultTheme from "../../theme"
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
-// import { ScrollArea } from "../scroll-area"
-import { PropsTable } from "../../../storybook/components"
 import { NativeTable } from "./"
 
 type Story = StoryFn<typeof NativeTable.Root>

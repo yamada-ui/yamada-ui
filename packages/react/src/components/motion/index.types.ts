@@ -19,7 +19,7 @@ export interface MotionFactory {
   <T extends DOMElement = DOMElement, M extends object = {}>(
     el: T,
     options?: StyledOptions,
-  ): UIMotionComponent<T, M>
+  ): MotionUIComponent<T, M>
 }
 
 type ComponentConditionalProps<
@@ -36,9 +36,9 @@ type ComponentProps<
   Y extends DOMElement,
   M extends DOMElement,
   D extends object = {},
-> = {
+> = ComponentConditionalProps<Y, M, D> & {
   as?: M
-} & ComponentConditionalProps<Y, M, D>
+}
 
 export interface MotionComponent<Y extends DOMElement, D extends object = {}>
   extends ComponentArgs {
@@ -46,19 +46,19 @@ export interface MotionComponent<Y extends DOMElement, D extends object = {}>
 }
 
 export type MotionComponents = {
-  [Y in DOMElement]: UIMotionComponent<Y>
+  [Y in DOMElement]: MotionUIComponent<Y>
 }
 
-export interface UIMotionComponent<Y extends DOMElement, M extends object = {}>
-  extends MotionComponent<Y, Merge<UIMotionProps, M>> {}
+export interface MotionUIComponent<Y extends DOMElement, M extends object = {}>
+  extends MotionComponent<Y, Merge<MotionUIProps, M>> {}
 
-interface UIMotionProps extends Merge<UIProps, OriginMotionProps> {
+interface MotionUIProps extends Merge<UIProps, OriginMotionProps> {
   as?: DOMElement
 }
 
 export type MotionProps<Y extends DOMElement = "div"> = Merge<
   React.ComponentProps<Y>,
-  UIMotionProps
+  MotionUIProps
 >
 
 export type MotionPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
@@ -115,14 +115,14 @@ export interface MotionTransitionProps {
   transitionEnd?: MotionLifecycleProps<Target>
 }
 
-export type WithTransitionProps<Y extends object = {}> = {
-  /**
-   * Show the component. triggers when enter or exit states.
-   */
-  open?: boolean
-  /**
-   * If `true`, the element will unmount when `open={false}` and animation is done.
-   */
-  unmountOnExit?: boolean
-} & MotionTransitionProps &
-  Omit<Y, "transition" | "variants">
+export type WithTransitionProps<Y extends object = {}> = MotionTransitionProps &
+  Omit<Y, "transition" | "variants"> & {
+    /**
+     * Show the component. triggers when enter or exit states.
+     */
+    open?: boolean
+    /**
+     * If `true`, the element will unmount when `open={false}` and animation is done.
+     */
+    unmountOnExit?: boolean
+  }

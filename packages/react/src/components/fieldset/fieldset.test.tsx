@@ -1,10 +1,10 @@
 import { a11y } from "../../../test"
-import { Fieldset } from "../field"
+import { Fieldset } from "./"
 
 describe("<Fieldset />", () => {
   test("Fieldset renders correctly", async () => {
     await a11y(
-      <Fieldset
+      <Fieldset.Root
         helperMessage="Please review the terms carefully before agreeing."
         legend="Terms and Conditions"
       />,

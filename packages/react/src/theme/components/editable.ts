@@ -31,6 +31,10 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         transitionDuration: "moderate",
         transitionProperty: "common",
         w: "full",
+        _invalid: {
+          boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
+        },
+        _placeholder: { opacity: 0.6 },
         _focus: {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
@@ -39,10 +43,6 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
         },
-        _invalid: {
-          boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
-        },
-        _placeholder: { opacity: 0.6 },
       }
     },
     preview: {
@@ -84,6 +84,10 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
         transitionDuration: "moderate",
         transitionProperty: "common",
         w: "full",
+        _invalid: {
+          boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
+        },
+        _placeholder: { opacity: 0.6 },
         _focus: {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
@@ -92,10 +96,6 @@ export const Editable: ComponentMultiStyle<"Editable"> = {
           boxShadow: `0px 0px 0px 1px ${focusBorderColor}`,
           zIndex: "yamcha",
         },
-        _invalid: {
-          boxShadow: `0px 0px 0px 1px ${errorBorderColor}`,
-        },
-        _placeholder: { opacity: 0.6 },
       }
     },
   },

@@ -41,8 +41,8 @@ describe("ThemeProvider", () => {
       ),
     })
 
-    expect(result.current.theme.colors?.primary).toBe("#0070f3")
-    expect(result.current.theme.fontSizes?.md).toBe("1rem")
+    expect(result.current.theme.colors.primary).toBe("#0070f3")
+    expect(result.current.theme.fontSizes.md).toBe("1rem")
   })
 
   test("allows theme updates through changeThemeScheme", () => {

@@ -6,10 +6,13 @@ export default defineConfig({
   test: {
     coverage: {
       exclude: [
+        // TODO: Remove legacy-components
+        "**/legacy-components",
         "**/dist",
         "**/bin",
         "**/@types",
         "**/*.types.ts",
+        "**/*.stories.{ts,tsx}",
         "**/*.test.{ts,tsx}",
       ],
       include: ["src"],

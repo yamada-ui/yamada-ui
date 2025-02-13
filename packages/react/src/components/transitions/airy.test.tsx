@@ -1,7 +1,7 @@
-import type { AiryIdent } from "."
+import type { AiryIdent } from "./"
 import { useState } from "react"
-import { Airy } from "."
 import { a11y, render, screen, waitFor } from "../../../test"
+import { Airy } from "./"
 
 describe("<Airy />", () => {
   test("passes a11y test", async () => {

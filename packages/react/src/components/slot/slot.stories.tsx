@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { FC, HTMLAttributes, ReactNode } from "react"
-import { Slot, Slottable } from "."
+import { Slot, Slottable } from "./"
 
 type Story = StoryFn<typeof Slot>
 
@@ -35,7 +35,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSlottable: Story = () => {
+export const MultipleChildren: Story = () => {
   const Button: FC<
     HTMLAttributes<HTMLButtonElement> & {
       asChild?: boolean

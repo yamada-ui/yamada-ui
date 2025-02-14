@@ -35,6 +35,10 @@ interface AccordionCallBackProps {
   expanded?: boolean
 }
 
+interface AccordionContext
+  extends Omit<UseAccordionReturn, "descendants" | "getRootProps">,
+    Pick<AccordionRootProps, "icon" | "iconHidden"> {}
+
 export interface AccordionRootProps
   extends Omit<HTMLUIProps, "onChange">,
     ThemeProps<AccordionStyle>,
@@ -50,10 +54,6 @@ export interface AccordionRootProps
    */
   iconHidden?: boolean
 }
-
-interface AccordionContext
-  extends Omit<UseAccordionReturn, "descendants" | "getRootProps">,
-    Pick<AccordionRootProps, "icon" | "iconHidden"> {}
 
 export const {
   ComponentContext: AccordionContext,

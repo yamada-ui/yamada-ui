@@ -1,12 +1,12 @@
-import { a11y, act, fireEvent, render } from "../../../test"
-import { ui } from "../../core"
 import {
   Editable,
   EditableInput,
   EditablePreview,
   EditableTextarea,
   useEditableControl,
-} from "./"
+} from "."
+import { a11y, act, fireEvent, render } from "../../../test"
+import { ui } from "../../core"
 
 describe("<Editable />", () => {
   test("Editable renders correctly", async () => {

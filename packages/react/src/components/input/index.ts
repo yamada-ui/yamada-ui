@@ -11,4 +11,6 @@ export * from "./input-addon.style"
 export * from "./input-element.style"
 export * from "./input.style"
 
+export * from "./use-input-border"
+
 export * as InputGroup from "./namespace"

@@ -109,7 +109,6 @@ jobs:
 
   type_script:
     name: TypeScript
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

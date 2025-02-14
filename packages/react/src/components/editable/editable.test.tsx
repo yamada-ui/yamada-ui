@@ -1,30 +1,23 @@
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-  EditableTextarea,
-  useEditableControl,
-} from "."
 import { a11y, act, fireEvent, render } from "../../../test"
-import { ui } from "../../core"
+import { Editable } from "./"
 
 describe("<Editable />", () => {
   test("Editable renders correctly", async () => {
     const { container } = render(
-      <Editable defaultValue="Some text">
-        <EditablePreview />
-        <EditableInput />
-      </Editable>,
+      <Editable.Root defaultValue="Some text">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>,
     )
     await a11y(container)
   })
 
   test("should render editable component", () => {
     const { getByTestId } = render(
-      <Editable data-testid="Editable" defaultValue="Some text">
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root data-testid="Editable" defaultValue="Some text">
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     expect(getByTestId("Editable")).toBeInTheDocument()
     expect(getByTestId("EditablePreview")).toBeInTheDocument()
@@ -33,14 +26,14 @@ describe("<Editable />", () => {
 
   test("should render with preview focusable", () => {
     const { getByTestId } = render(
-      <Editable
+      <Editable.Root
         data-testid="Editable"
         defaultValue="Some text"
         previewFocusable
       >
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.click(getByTestId("Editable"))
     fireEvent.input(getByTestId("EditableInput"), {
@@ -57,10 +50,10 @@ describe("<Editable />", () => {
 
   test("should render with placeholder", () => {
     const { getByTestId } = render(
-      <Editable placeholder="Enter some text">
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root placeholder="Enter some text">
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     expect(getByTestId("EditableInput")).toHaveAttribute(
       "placeholder",
@@ -70,20 +63,20 @@ describe("<Editable />", () => {
 
   test("should disable the input", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" disabled>
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" disabled>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     expect(getByTestId("EditableInput")).toBeDisabled()
   })
 
   test("should make the input readOnly", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" readOnly>
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" readOnly>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     expect(getByTestId("EditableInput")).toHaveAttribute("readonly")
   })
@@ -91,10 +84,10 @@ describe("<Editable />", () => {
   test("calls onCancel when Escape is pressed", () => {
     const onCancel = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onCancel={onCancel}>
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onCancel={onCancel}>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Escape" })
     expect(onCancel).toHaveBeenCalledWith("Some text")
@@ -103,10 +96,10 @@ describe("<Editable />", () => {
   test("calls onSubmit when Enter is pressed", () => {
     const onSubmit = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onSubmit={onSubmit}>
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onSubmit={onSubmit}>
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
@@ -116,10 +109,10 @@ describe("<Editable />", () => {
   test("does not call onSubmit when Enter is pressed with Shift or Meta", () => {
     const onSubmit = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onSubmit={onSubmit}>
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onSubmit={onSubmit}>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.keyDown(getByTestId("EditableInput"), {
       key: "Enter",
@@ -135,10 +128,10 @@ describe("<Editable />", () => {
   test("calls onChange when input value changes", () => {
     const onChange = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onChange={onChange}>
-        <EditablePreview />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onChange={onChange}>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.change(getByTestId("EditableInput"), {
       target: { value: "New text" },
@@ -148,10 +141,10 @@ describe("<Editable />", () => {
 
   test("focuses out of the input when editing ends", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" selectAllOnFocus>
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" selectAllOnFocus>
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     const inputElement = getByTestId("EditableInput")
     fireEvent.focus(getByTestId("EditablePreview"))
@@ -162,10 +155,10 @@ describe("<Editable />", () => {
   test("calls onEdit when editing starts", () => {
     const onEdit = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onEdit={onEdit}>
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onEdit={onEdit}>
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input />
+      </Editable.Root>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     expect(onEdit).toHaveBeenCalledWith()
@@ -174,10 +167,10 @@ describe("<Editable />", () => {
   test("focus and calls onCancel when Escape is pressed", () => {
     const onCancel = vi.fn()
     const { getByTestId } = render(
-      <Editable defaultValue="Some text" onCancel={onCancel}>
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text" onCancel={onCancel}>
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Escape" })
@@ -188,15 +181,15 @@ describe("<Editable />", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
-      <Editable
+      <Editable.Root
         defaultValue="Some text"
         submitOnBlur
         onCancel={onCancel}
         onSubmit={onSubmit}
       >
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
@@ -208,15 +201,15 @@ describe("<Editable />", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
-      <Editable
+      <Editable.Root
         defaultValue="Some text"
         submitOnBlur
         onCancel={onCancel}
         onSubmit={onSubmit}
       >
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     act(() => fireEvent.focus(getByTestId("EditablePreview")))
     act(() => fireEvent.blur(getByTestId("EditableInput")))
@@ -228,15 +221,15 @@ describe("<Editable />", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
-      <Editable
+      <Editable.Root
         defaultValue="Some text"
         submitOnBlur={false}
         onCancel={onCancel}
         onSubmit={onSubmit}
       >
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     act(() => fireEvent.focus(getByTestId("EditablePreview")))
     act(() => fireEvent.blur(getByTestId("EditableInput")))
@@ -246,14 +239,14 @@ describe("<Editable />", () => {
 
   test("initially in correct edit mode", () => {
     const { getByTestId } = render(
-      <Editable
+      <Editable.Root
         data-testid="Editable"
         defaultValue="Some text"
         startWithEditView
       >
-        <EditablePreview data-testid="EditablePreview" />
-        <EditableInput data-testid="EditableInput" />
-      </Editable>,
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+      </Editable.Root>,
     )
     expect(getByTestId("EditableInput")).not.toHaveAttribute("hidden")
   })
@@ -262,9 +255,9 @@ describe("<Editable />", () => {
 describe("<EditableTextarea />", () => {
   test("renders correctly", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text">
-        <EditableTextarea data-testid="EditableTextarea" />
-      </Editable>,
+      <Editable.Root defaultValue="Some text">
+        <Editable.Textarea data-testid="EditableTextarea" />
+      </Editable.Root>,
     )
     const textarea = getByTestId("EditableTextarea")
     expect(textarea).toBeInTheDocument()
@@ -273,90 +266,14 @@ describe("<EditableTextarea />", () => {
 
   test("applies custom className", () => {
     const { getByTestId } = render(
-      <Editable defaultValue="Some text">
-        <EditableTextarea
+      <Editable.Root defaultValue="Some text">
+        <Editable.Textarea
           className="custom-class"
           data-testid="EditableTextarea"
         />
-      </Editable>,
+      </Editable.Root>,
     )
     const textarea = getByTestId("EditableTextarea")
     expect(textarea).toHaveClass("custom-class")
-  })
-})
-
-describe("useEditableControl", () => {
-  test("props are applied correctly", () => {
-    const onCancel = vi.fn()
-    const onSubmit = vi.fn()
-    const CustomControls = () => {
-      const { getCancelProps, getEditProps, getSubmitProps } =
-        useEditableControl()
-
-      return (
-        <>
-          <ui.button data-testid="edit" {...getEditProps()}>
-            Edit
-          </ui.button>
-          <ui.button data-testid="submit" {...getSubmitProps()}>
-            Submit
-          </ui.button>
-          <ui.button data-testid="cancel" {...getCancelProps()}>
-            Cancel
-          </ui.button>
-        </>
-      )
-    }
-    const { getByTestId } = render(
-      <Editable
-        previewFocusable={false}
-        onCancel={onCancel}
-        onSubmit={onSubmit}
-      >
-        <EditablePreview />
-        <EditableInput />
-        <CustomControls />
-      </Editable>,
-    )
-    expect(getByTestId("edit")).toHaveAttribute("type", "button")
-    expect(getByTestId("submit")).toHaveAttribute("type", "button")
-    expect(getByTestId("cancel")).toHaveAttribute("type", "button")
-    act(() => fireEvent.click(getByTestId("submit")))
-    act(() => fireEvent.click(getByTestId("cancel")))
-    expect(onSubmit).toHaveBeenCalledWith("")
-    expect(onCancel).toHaveBeenCalledWith("")
-  })
-
-  test("switches to edit mode correctly", () => {
-    const CustomControls = () => {
-      const { editing, getCancelProps, getEditProps, getSubmitProps } =
-        useEditableControl()
-
-      return editing ? (
-        <>
-          <ui.button data-testid="submit" {...getSubmitProps()}>
-            Submit
-          </ui.button>
-          <ui.button data-testid="cancel" {...getCancelProps()}>
-            Cancel
-          </ui.button>
-        </>
-      ) : (
-        <ui.button data-testid="edit" {...getEditProps()}>
-          Edit
-        </ui.button>
-      )
-    }
-    const { getByTestId } = render(
-      <Editable previewFocusable={false}>
-        <EditablePreview />
-        <EditableInput />
-        <CustomControls />
-      </Editable>,
-    )
-    expect(getByTestId("edit")).toBeInTheDocument()
-    act(() => fireEvent.click(getByTestId("edit")))
-    expect(getByTestId("submit")).toBeInTheDocument()
-    expect(getByTestId("cancel")).toBeInTheDocument()
   })
 })

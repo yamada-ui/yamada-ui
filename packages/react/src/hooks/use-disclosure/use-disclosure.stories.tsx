@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
 import { Button } from "../../components/button"
-import { Dialog } from "../../components/modal"
+// import { Dialog } from "../../components/modal"
 import { Text } from "../../components/text"
 import { useDisclosure } from "./use-disclosure"
 
@@ -11,16 +11,21 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const {
+    // open,
+    // onClose,
+    onOpen,
+  } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Dialog</Button>
 
-      <Dialog
+      {/* TODO: Fix this */}
+      {/* <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -28,25 +33,29 @@ export const Basic = () => {
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
         このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
-      </Dialog>
+      </Dialog> */}
     </>
   )
 }
 
 export const Toggle = () => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { open, onToggle } = useDisclosure()
 
   return (
     <>
       <Button onClick={onToggle}>Please Click</Button>
 
-      {isOpen ? <Text>Hey!</Text> : null}
+      {open ? <Text>Hey!</Text> : null}
     </>
   )
 }
 
 export const Chain = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure({
+  const {
+    // open,
+    //  onClose,
+    onOpen,
+  } = useDisclosure({
     onClose: (...args: string[]) => {
       console.log("Args:", args)
     },
@@ -59,10 +68,11 @@ export const Chain = () => {
     <>
       <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
-      <Dialog
+      {/* TODO: Fix this */}
+      {/* <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={() => onClose("This is arg")}
         onClose={() => onClose("This is arg")}
@@ -70,7 +80,7 @@ export const Chain = () => {
       >
         だ…大地よ海よ　そして生きているすべての　みんな…
         このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
-      </Dialog>
+      </Dialog> */}
     </>
   )
 }

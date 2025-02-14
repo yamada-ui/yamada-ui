@@ -1,11 +1,7 @@
 import type { Meta } from "@storybook/react"
 import { useClipboard } from "."
 import { Button } from "../../components/button"
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-} from "../../components/editable"
+import { Editable } from "../../components/editable"
 import { Input } from "../../components/input"
 import { HStack } from "../../components/stack"
 
@@ -29,10 +25,10 @@ export const Basic = () => {
         <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder="Paste here">
-        <EditablePreview width="full" />
-        <EditableInput />
-      </Editable>
+      <Editable.Root placeholder="Paste here">
+        <Editable.Preview width="full" />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }
@@ -51,10 +47,10 @@ export const Timeout = () => {
         <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder="Paste here">
-        <EditablePreview width="full" />
-        <EditableInput />
-      </Editable>
+      <Editable.Root placeholder="Paste here">
+        <Editable.Preview width="full" />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }

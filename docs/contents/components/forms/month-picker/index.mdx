@@ -204,10 +204,10 @@ By default, the calendar closes automatically on blur. To prevent the calendar f
 
 ### Disable Clearing
 
-To disable clearing, set `isClearable` to `false`.
+To disable clearing, set `clearable` to `false`.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" isClearable={false} />
+<MonthPicker placeholder="YYYY/MM" clearable={false} />
 ```
 
 ### Disallow Input
@@ -247,7 +247,7 @@ To change the color of the border, set a color to `focusBorderColor` or `errorBo
 <VStack>
   <MonthPicker focusBorderColor="green.500" placeholder="custom border color" />
   <MonthPicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -256,37 +256,37 @@ To change the color of the border, set a color to `focusBorderColor` or `errorBo
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <MonthPicker isDisabled variant="outline" placeholder="outline" />
-  <MonthPicker isDisabled variant="filled" placeholder="filled" />
-  <MonthPicker isDisabled variant="flushed" placeholder="flushed" />
+  <MonthPicker disabled variant="outline" placeholder="outline" />
+  <MonthPicker disabled variant="filled" placeholder="filled" />
+  <MonthPicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <MonthPicker isReadOnly variant="outline" placeholder="outline" />
-  <MonthPicker isReadOnly variant="filled" placeholder="filled" />
-  <MonthPicker isReadOnly variant="flushed" placeholder="flushed" />
+  <MonthPicker readOnly variant="outline" placeholder="outline" />
+  <MonthPicker readOnly variant="filled" placeholder="filled" />
+  <MonthPicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <MonthPicker isInvalid variant="outline" placeholder="outline" />
-  <MonthPicker isInvalid variant="filled" placeholder="filled" />
-  <MonthPicker isInvalid variant="flushed" placeholder="flushed" />
+  <MonthPicker invalid variant="outline" placeholder="outline" />
+  <MonthPicker invalid variant="filled" placeholder="filled" />
+  <MonthPicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -317,7 +317,7 @@ The `children` are provided with `value` and `onClose` methods, which can be use
   <MonthPicker placeholder="MMM YYYY" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit
           {value
             ? ` ${
@@ -380,7 +380,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.monthPicker}
+      invalid={!!errors.monthPicker}
       label="Birthday"
       errorMessage={errors.monthPicker ? errors.monthPicker.message : undefined}
     >
